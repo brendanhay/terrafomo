@@ -246,10 +246,9 @@ import GHC.Base (($))
 
 import Terrafomo.OpenStack.Settings
 
-import qualified Data.Hashable                as P
-import qualified Data.HashMap.Strict          as P
-import qualified Data.HashMap.Strict          as Map
 import qualified Data.List.NonEmpty           as P
+import qualified Data.Map.Strict              as P
+import qualified Data.Map.Strict              as Map
 import qualified Data.Maybe                   as P
 import qualified Data.Monoid                  as P
 import qualified Data.Text                    as P
@@ -306,14 +305,14 @@ data BlockstorageVolumeAttachV2Resource s = BlockstorageVolumeAttachV2Resource'
     , _wwpn       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @wwpn@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 blockstorageVolumeAttachV2Resource
     :: TF.Attr s P.Text -- ^ @host_name@ - 'P.hostName'
     -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
     -> P.Resource (BlockstorageVolumeAttachV2Resource s)
 blockstorageVolumeAttachV2Resource _hostName _volumeId =
-    TF.newResource "openstack_blockstorage_volume_attach_v2" TF.validator $
+    TF.unsafeResource "openstack_blockstorage_volume_attach_v2" P.defaultProvider TF.validator $
         BlockstorageVolumeAttachV2Resource'
             { _attachMode = TF.Nil
             , _device = TF.Nil
@@ -408,7 +407,7 @@ instance P.HasWwpn (BlockstorageVolumeAttachV2Resource s) (TF.Attr s [TF.Attr s 
         P.lens (_wwpn :: BlockstorageVolumeAttachV2Resource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _wwpn = a } :: BlockstorageVolumeAttachV2Resource s)
 
-instance s ~ s' => P.HasComputedData (TF.Ref s' (BlockstorageVolumeAttachV2Resource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedData (TF.Ref s' (BlockstorageVolumeAttachV2Resource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedData x = TF.compute (TF.refKey x) "data"
 
 instance s ~ s' => P.HasComputedDriverVolumeType (TF.Ref s' (BlockstorageVolumeAttachV2Resource s)) (TF.Attr s P.Text) where
@@ -458,14 +457,14 @@ data BlockstorageVolumeAttachV3Resource s = BlockstorageVolumeAttachV3Resource'
     , _wwpn       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @wwpn@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 blockstorageVolumeAttachV3Resource
     :: TF.Attr s P.Text -- ^ @host_name@ - 'P.hostName'
     -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
     -> P.Resource (BlockstorageVolumeAttachV3Resource s)
 blockstorageVolumeAttachV3Resource _hostName _volumeId =
-    TF.newResource "openstack_blockstorage_volume_attach_v3" TF.validator $
+    TF.unsafeResource "openstack_blockstorage_volume_attach_v3" P.defaultProvider TF.validator $
         BlockstorageVolumeAttachV3Resource'
             { _attachMode = TF.Nil
             , _device = TF.Nil
@@ -553,7 +552,7 @@ instance P.HasWwpn (BlockstorageVolumeAttachV3Resource s) (TF.Attr s [TF.Attr s 
         P.lens (_wwpn :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _wwpn = a } :: BlockstorageVolumeAttachV3Resource s)
 
-instance s ~ s' => P.HasComputedData (TF.Ref s' (BlockstorageVolumeAttachV3Resource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedData (TF.Ref s' (BlockstorageVolumeAttachV3Resource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedData x = TF.compute (TF.refKey x) "data"
 
 instance s ~ s' => P.HasComputedDriverVolumeType (TF.Ref s' (BlockstorageVolumeAttachV3Resource s)) (TF.Attr s P.Text) where
@@ -579,7 +578,7 @@ data BlockstorageVolumeV1Resource s = BlockstorageVolumeV1Resource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _size        :: TF.Attr s P.Integer
+    , _size        :: TF.Attr s P.Int
     -- ^ @size@ - (Required, Forces New)
     --
     , _snapshotId  :: TF.Attr s P.Text
@@ -588,13 +587,13 @@ data BlockstorageVolumeV1Resource s = BlockstorageVolumeV1Resource'
     , _sourceVolId :: TF.Attr s P.Text
     -- ^ @source_vol_id@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 blockstorageVolumeV1Resource
-    :: TF.Attr s P.Integer -- ^ @size@ - 'P.size'
+    :: TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (BlockstorageVolumeV1Resource s)
 blockstorageVolumeV1Resource _size =
-    TF.newResource "openstack_blockstorage_volume_v1" TF.validator $
+    TF.unsafeResource "openstack_blockstorage_volume_v1" P.defaultProvider TF.validator $
         BlockstorageVolumeV1Resource'
             { _description = TF.Nil
             , _imageId = TF.Nil
@@ -632,9 +631,9 @@ instance P.HasName (BlockstorageVolumeV1Resource s) (TF.Attr s P.Text) where
         P.lens (_name :: BlockstorageVolumeV1Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: BlockstorageVolumeV1Resource s)
 
-instance P.HasSize (BlockstorageVolumeV1Resource s) (TF.Attr s P.Integer) where
+instance P.HasSize (BlockstorageVolumeV1Resource s) (TF.Attr s P.Int) where
     size =
-        P.lens (_size :: BlockstorageVolumeV1Resource s -> TF.Attr s P.Integer)
+        P.lens (_size :: BlockstorageVolumeV1Resource s -> TF.Attr s P.Int)
                (\s a -> s { _size = a } :: BlockstorageVolumeV1Resource s)
 
 instance P.HasSnapshotId (BlockstorageVolumeV1Resource s) (TF.Attr s P.Text) where
@@ -647,13 +646,13 @@ instance P.HasSourceVolId (BlockstorageVolumeV1Resource s) (TF.Attr s P.Text) wh
         P.lens (_sourceVolId :: BlockstorageVolumeV1Resource s -> TF.Attr s P.Text)
                (\s a -> s { _sourceVolId = a } :: BlockstorageVolumeV1Resource s)
 
-instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (BlockstorageVolumeV1Resource s)) (TF.Attr s [TF.Attr s (BlockstorageVolumeV1Attachment s)]) where
+instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (BlockstorageVolumeV1Resource s)) (TF.Attr s [TF.Attr s (AttachmentSetting s)]) where
     computedAttachment x = TF.compute (TF.refKey x) "attachment"
 
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (BlockstorageVolumeV1Resource s)) (TF.Attr s P.Text) where
     computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (BlockstorageVolumeV1Resource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (BlockstorageVolumeV1Resource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedMetadata x = TF.compute (TF.refKey x) "metadata"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (BlockstorageVolumeV1Resource s)) (TF.Attr s P.Text) where
@@ -679,7 +678,7 @@ data BlockstorageVolumeV2Resource s = BlockstorageVolumeV2Resource'
     , _name               :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _size               :: TF.Attr s P.Integer
+    , _size               :: TF.Attr s P.Int
     -- ^ @size@ - (Required, Forces New)
     --
     , _snapshotId         :: TF.Attr s P.Text
@@ -691,13 +690,13 @@ data BlockstorageVolumeV2Resource s = BlockstorageVolumeV2Resource'
     , _sourceVolId        :: TF.Attr s P.Text
     -- ^ @source_vol_id@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 blockstorageVolumeV2Resource
-    :: TF.Attr s P.Integer -- ^ @size@ - 'P.size'
+    :: TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (BlockstorageVolumeV2Resource s)
 blockstorageVolumeV2Resource _size =
-    TF.newResource "openstack_blockstorage_volume_v2" TF.validator $
+    TF.unsafeResource "openstack_blockstorage_volume_v2" P.defaultProvider TF.validator $
         BlockstorageVolumeV2Resource'
             { _consistencyGroupId = TF.Nil
             , _description = TF.Nil
@@ -744,9 +743,9 @@ instance P.HasName (BlockstorageVolumeV2Resource s) (TF.Attr s P.Text) where
         P.lens (_name :: BlockstorageVolumeV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: BlockstorageVolumeV2Resource s)
 
-instance P.HasSize (BlockstorageVolumeV2Resource s) (TF.Attr s P.Integer) where
+instance P.HasSize (BlockstorageVolumeV2Resource s) (TF.Attr s P.Int) where
     size =
-        P.lens (_size :: BlockstorageVolumeV2Resource s -> TF.Attr s P.Integer)
+        P.lens (_size :: BlockstorageVolumeV2Resource s -> TF.Attr s P.Int)
                (\s a -> s { _size = a } :: BlockstorageVolumeV2Resource s)
 
 instance P.HasSnapshotId (BlockstorageVolumeV2Resource s) (TF.Attr s P.Text) where
@@ -764,13 +763,13 @@ instance P.HasSourceVolId (BlockstorageVolumeV2Resource s) (TF.Attr s P.Text) wh
         P.lens (_sourceVolId :: BlockstorageVolumeV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _sourceVolId = a } :: BlockstorageVolumeV2Resource s)
 
-instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (BlockstorageVolumeV2Resource s)) (TF.Attr s [TF.Attr s (BlockstorageVolumeV2Attachment s)]) where
+instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (BlockstorageVolumeV2Resource s)) (TF.Attr s [TF.Attr s (AttachmentSetting s)]) where
     computedAttachment x = TF.compute (TF.refKey x) "attachment"
 
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (BlockstorageVolumeV2Resource s)) (TF.Attr s P.Text) where
     computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (BlockstorageVolumeV2Resource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (BlockstorageVolumeV2Resource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedMetadata x = TF.compute (TF.refKey x) "metadata"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (BlockstorageVolumeV2Resource s)) (TF.Attr s P.Text) where
@@ -799,7 +798,7 @@ data BlockstorageVolumeV3Resource s = BlockstorageVolumeV3Resource'
     , _name               :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _size               :: TF.Attr s P.Integer
+    , _size               :: TF.Attr s P.Int
     -- ^ @size@ - (Required)
     --
     , _snapshotId         :: TF.Attr s P.Text
@@ -811,13 +810,13 @@ data BlockstorageVolumeV3Resource s = BlockstorageVolumeV3Resource'
     , _sourceVolId        :: TF.Attr s P.Text
     -- ^ @source_vol_id@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 blockstorageVolumeV3Resource
-    :: TF.Attr s P.Integer -- ^ @size@ - 'P.size'
+    :: TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (BlockstorageVolumeV3Resource s)
 blockstorageVolumeV3Resource _size =
-    TF.newResource "openstack_blockstorage_volume_v3" TF.validator $
+    TF.unsafeResource "openstack_blockstorage_volume_v3" P.defaultProvider TF.validator $
         BlockstorageVolumeV3Resource'
             { _consistencyGroupId = TF.Nil
             , _description = TF.Nil
@@ -871,9 +870,9 @@ instance P.HasName (BlockstorageVolumeV3Resource s) (TF.Attr s P.Text) where
         P.lens (_name :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: BlockstorageVolumeV3Resource s)
 
-instance P.HasSize (BlockstorageVolumeV3Resource s) (TF.Attr s P.Integer) where
+instance P.HasSize (BlockstorageVolumeV3Resource s) (TF.Attr s P.Int) where
     size =
-        P.lens (_size :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Integer)
+        P.lens (_size :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Int)
                (\s a -> s { _size = a } :: BlockstorageVolumeV3Resource s)
 
 instance P.HasSnapshotId (BlockstorageVolumeV3Resource s) (TF.Attr s P.Text) where
@@ -891,13 +890,13 @@ instance P.HasSourceVolId (BlockstorageVolumeV3Resource s) (TF.Attr s P.Text) wh
         P.lens (_sourceVolId :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Text)
                (\s a -> s { _sourceVolId = a } :: BlockstorageVolumeV3Resource s)
 
-instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s [TF.Attr s (BlockstorageVolumeV3Attachment s)]) where
+instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s [TF.Attr s (AttachmentSetting s)]) where
     computedAttachment x = TF.compute (TF.refKey x) "attachment"
 
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s P.Text) where
     computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedMetadata x = TF.compute (TF.refKey x) "metadata"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s P.Text) where
@@ -911,10 +910,10 @@ instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (BlockstorageVolumeV3Resou
 -- See the <https://www.terraform.io/docs/providers/openstack/r/compute_flavor_v2.html terraform documentation>
 -- for more information.
 data ComputeFlavorV2Resource s = ComputeFlavorV2Resource'
-    { _disk       :: TF.Attr s P.Integer
+    { _disk       :: TF.Attr s P.Int
     -- ^ @disk@ - (Required, Forces New)
     --
-    , _ephemeral  :: TF.Attr s P.Integer
+    , _ephemeral  :: TF.Attr s P.Int
     -- ^ @ephemeral@ - (Optional, Forces New)
     --
     , _isPublic   :: TF.Attr s P.Bool
@@ -923,28 +922,28 @@ data ComputeFlavorV2Resource s = ComputeFlavorV2Resource'
     , _name       :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _ram        :: TF.Attr s P.Integer
+    , _ram        :: TF.Attr s P.Int
     -- ^ @ram@ - (Required, Forces New)
     --
     , _rxTxFactor :: TF.Attr s P.Double
     -- ^ @rx_tx_factor@ - (Optional, Forces New)
     --
-    , _swap       :: TF.Attr s P.Integer
+    , _swap       :: TF.Attr s P.Int
     -- ^ @swap@ - (Optional, Forces New)
     --
-    , _vcpus      :: TF.Attr s P.Integer
+    , _vcpus      :: TF.Attr s P.Int
     -- ^ @vcpus@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeFlavorV2Resource
-    :: TF.Attr s P.Integer -- ^ @disk@ - 'P.disk'
+    :: TF.Attr s P.Int -- ^ @disk@ - 'P.disk'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Integer -- ^ @ram@ - 'P.ram'
-    -> TF.Attr s P.Integer -- ^ @vcpus@ - 'P.vcpus'
+    -> TF.Attr s P.Int -- ^ @ram@ - 'P.ram'
+    -> TF.Attr s P.Int -- ^ @vcpus@ - 'P.vcpus'
     -> P.Resource (ComputeFlavorV2Resource s)
 computeFlavorV2Resource _disk _name _ram _vcpus =
-    TF.newResource "openstack_compute_flavor_v2" TF.validator $
+    TF.unsafeResource "openstack_compute_flavor_v2" P.defaultProvider TF.validator $
         ComputeFlavorV2Resource'
             { _disk = _disk
             , _ephemeral = TF.Nil
@@ -971,14 +970,14 @@ instance TF.IsObject (ComputeFlavorV2Resource s) where
 instance TF.IsValid (ComputeFlavorV2Resource s) where
     validator = P.mempty
 
-instance P.HasDisk (ComputeFlavorV2Resource s) (TF.Attr s P.Integer) where
+instance P.HasDisk (ComputeFlavorV2Resource s) (TF.Attr s P.Int) where
     disk =
-        P.lens (_disk :: ComputeFlavorV2Resource s -> TF.Attr s P.Integer)
+        P.lens (_disk :: ComputeFlavorV2Resource s -> TF.Attr s P.Int)
                (\s a -> s { _disk = a } :: ComputeFlavorV2Resource s)
 
-instance P.HasEphemeral (ComputeFlavorV2Resource s) (TF.Attr s P.Integer) where
+instance P.HasEphemeral (ComputeFlavorV2Resource s) (TF.Attr s P.Int) where
     ephemeral =
-        P.lens (_ephemeral :: ComputeFlavorV2Resource s -> TF.Attr s P.Integer)
+        P.lens (_ephemeral :: ComputeFlavorV2Resource s -> TF.Attr s P.Int)
                (\s a -> s { _ephemeral = a } :: ComputeFlavorV2Resource s)
 
 instance P.HasIsPublic (ComputeFlavorV2Resource s) (TF.Attr s P.Bool) where
@@ -991,9 +990,9 @@ instance P.HasName (ComputeFlavorV2Resource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeFlavorV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeFlavorV2Resource s)
 
-instance P.HasRam (ComputeFlavorV2Resource s) (TF.Attr s P.Integer) where
+instance P.HasRam (ComputeFlavorV2Resource s) (TF.Attr s P.Int) where
     ram =
-        P.lens (_ram :: ComputeFlavorV2Resource s -> TF.Attr s P.Integer)
+        P.lens (_ram :: ComputeFlavorV2Resource s -> TF.Attr s P.Int)
                (\s a -> s { _ram = a } :: ComputeFlavorV2Resource s)
 
 instance P.HasRxTxFactor (ComputeFlavorV2Resource s) (TF.Attr s P.Double) where
@@ -1001,17 +1000,17 @@ instance P.HasRxTxFactor (ComputeFlavorV2Resource s) (TF.Attr s P.Double) where
         P.lens (_rxTxFactor :: ComputeFlavorV2Resource s -> TF.Attr s P.Double)
                (\s a -> s { _rxTxFactor = a } :: ComputeFlavorV2Resource s)
 
-instance P.HasSwap (ComputeFlavorV2Resource s) (TF.Attr s P.Integer) where
+instance P.HasSwap (ComputeFlavorV2Resource s) (TF.Attr s P.Int) where
     swap =
-        P.lens (_swap :: ComputeFlavorV2Resource s -> TF.Attr s P.Integer)
+        P.lens (_swap :: ComputeFlavorV2Resource s -> TF.Attr s P.Int)
                (\s a -> s { _swap = a } :: ComputeFlavorV2Resource s)
 
-instance P.HasVcpus (ComputeFlavorV2Resource s) (TF.Attr s P.Integer) where
+instance P.HasVcpus (ComputeFlavorV2Resource s) (TF.Attr s P.Int) where
     vcpus =
-        P.lens (_vcpus :: ComputeFlavorV2Resource s -> TF.Attr s P.Integer)
+        P.lens (_vcpus :: ComputeFlavorV2Resource s -> TF.Attr s P.Int)
                (\s a -> s { _vcpus = a } :: ComputeFlavorV2Resource s)
 
-instance s ~ s' => P.HasComputedExtraSpecs (TF.Ref s' (ComputeFlavorV2Resource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedExtraSpecs (TF.Ref s' (ComputeFlavorV2Resource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedExtraSpecs x = TF.compute (TF.refKey x) "extra_specs"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeFlavorV2Resource s)) (TF.Attr s P.Text) where
@@ -1034,14 +1033,14 @@ data ComputeFloatingipAssociateV2Resource s = ComputeFloatingipAssociateV2Resour
     , _waitUntilAssociated :: TF.Attr s P.Bool
     -- ^ @wait_until_associated@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeFloatingipAssociateV2Resource
     :: TF.Attr s P.Text -- ^ @floating_ip@ - 'P.floatingIp'
     -> TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> P.Resource (ComputeFloatingipAssociateV2Resource s)
 computeFloatingipAssociateV2Resource _floatingIp _instanceId =
-    TF.newResource "openstack_compute_floatingip_associate_v2" TF.validator $
+    TF.unsafeResource "openstack_compute_floatingip_associate_v2" P.defaultProvider TF.validator $
         ComputeFloatingipAssociateV2Resource'
             { _fixedIp = TF.Nil
             , _floatingIp = _floatingIp
@@ -1091,13 +1090,13 @@ data ComputeFloatingipV2Resource s = ComputeFloatingipV2Resource'
     { _pool :: TF.Attr s P.Text
     -- ^ @pool@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeFloatingipV2Resource
     :: TF.Attr s P.Text -- ^ @pool@ - 'P.pool'
     -> P.Resource (ComputeFloatingipV2Resource s)
 computeFloatingipV2Resource _pool =
-    TF.newResource "openstack_compute_floatingip_v2" TF.validator $
+    TF.unsafeResource "openstack_compute_floatingip_v2" P.defaultProvider TF.validator $
         ComputeFloatingipV2Resource'
             { _pool = _pool
             }
@@ -1132,55 +1131,55 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeFloatingipV2Resource s
 -- See the <https://www.terraform.io/docs/providers/openstack/r/compute_instance_v2.html terraform documentation>
 -- for more information.
 data ComputeInstanceV2Resource s = ComputeInstanceV2Resource'
-    { _adminPass :: TF.Attr s P.Text
+    { _adminPass         :: TF.Attr s P.Text
     -- ^ @admin_pass@ - (Optional)
     --
-    , _blockDevice :: TF.Attr s [TF.Attr s (ComputeInstanceV2BlockDevice s)]
+    , _blockDevice       :: TF.Attr s [TF.Attr s (BlockDeviceSetting s)]
     -- ^ @block_device@ - (Optional)
     --
-    , _configDrive :: TF.Attr s P.Bool
+    , _configDrive       :: TF.Attr s P.Bool
     -- ^ @config_drive@ - (Optional, Forces New)
     --
-    , _floatingIp :: TF.Attr s P.Text
+    , _floatingIp        :: TF.Attr s P.Text
     -- ^ @floating_ip@ - (Optional)
     --
-    , _forceDelete :: TF.Attr s P.Bool
+    , _forceDelete       :: TF.Attr s P.Bool
     -- ^ @force_delete@ - (Optional)
     --
-    , _keyPair :: TF.Attr s P.Text
+    , _keyPair           :: TF.Attr s P.Text
     -- ^ @key_pair@ - (Optional, Forces New)
     --
-    , _metadata :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _metadata          :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @metadata@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _personality :: TF.Attr s [TF.Attr s (ComputeInstanceV2Personality s)]
+    , _personality       :: TF.Attr s [TF.Attr s (PersonalitySetting s)]
     -- ^ @personality@ - (Optional, Forces New)
     --
-    , _powerState :: TF.Attr s P.Text
+    , _powerState        :: TF.Attr s P.Text
     -- ^ @power_state@ - (Optional)
     --
-    , _schedulerHints :: TF.Attr s [TF.Attr s (ComputeInstanceV2SchedulerHints s)]
+    , _schedulerHints    :: TF.Attr s [TF.Attr s (SchedulerHintsSetting s)]
     -- ^ @scheduler_hints@ - (Optional)
     --
     , _stopBeforeDestroy :: TF.Attr s P.Bool
     -- ^ @stop_before_destroy@ - (Optional)
     --
-    , _userData :: TF.Attr s P.Text
+    , _userData          :: TF.Attr s P.Text
     -- ^ @user_data@ - (Optional, Forces New)
     --
-    , _volume :: TF.Attr s [TF.Attr s (ComputeInstanceV2Volume s)]
+    , _volume            :: TF.Attr s [TF.Attr s (VolumeSetting s)]
     -- ^ @volume@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeInstanceV2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeInstanceV2Resource s)
 computeInstanceV2Resource _name =
-    TF.newResource "openstack_compute_instance_v2" TF.validator $
+    TF.unsafeResource "openstack_compute_instance_v2" P.defaultProvider TF.validator $
         ComputeInstanceV2Resource'
             { _adminPass = TF.Nil
             , _blockDevice = TF.Nil
@@ -1218,31 +1217,15 @@ instance TF.IsObject (ComputeInstanceV2Resource s) where
 
 instance TF.IsValid (ComputeInstanceV2Resource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_blockDevice"
-                  (_blockDevice
-                      :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (ComputeInstanceV2BlockDevice s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_personality"
-                  (_personality
-                      :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (ComputeInstanceV2Personality s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_schedulerHints"
-                  (_schedulerHints
-                      :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (ComputeInstanceV2SchedulerHints s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_volume"
-                  (_volume
-                      :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (ComputeInstanceV2Volume s)])
-                  TF.validator
 
 instance P.HasAdminPass (ComputeInstanceV2Resource s) (TF.Attr s P.Text) where
     adminPass =
         P.lens (_adminPass :: ComputeInstanceV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _adminPass = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasBlockDevice (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s (ComputeInstanceV2BlockDevice s)]) where
+instance P.HasBlockDevice (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s (BlockDeviceSetting s)]) where
     blockDevice =
-        P.lens (_blockDevice :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (ComputeInstanceV2BlockDevice s)])
+        P.lens (_blockDevice :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (BlockDeviceSetting s)])
                (\s a -> s { _blockDevice = a } :: ComputeInstanceV2Resource s)
 
 instance P.HasConfigDrive (ComputeInstanceV2Resource s) (TF.Attr s P.Bool) where
@@ -1265,9 +1248,9 @@ instance P.HasKeyPair (ComputeInstanceV2Resource s) (TF.Attr s P.Text) where
         P.lens (_keyPair :: ComputeInstanceV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _keyPair = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasMetadata (ComputeInstanceV2Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasMetadata (ComputeInstanceV2Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     metadata =
-        P.lens (_metadata :: ComputeInstanceV2Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_metadata :: ComputeInstanceV2Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _metadata = a } :: ComputeInstanceV2Resource s)
 
 instance P.HasName (ComputeInstanceV2Resource s) (TF.Attr s P.Text) where
@@ -1275,9 +1258,9 @@ instance P.HasName (ComputeInstanceV2Resource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeInstanceV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasPersonality (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s (ComputeInstanceV2Personality s)]) where
+instance P.HasPersonality (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s (PersonalitySetting s)]) where
     personality =
-        P.lens (_personality :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (ComputeInstanceV2Personality s)])
+        P.lens (_personality :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (PersonalitySetting s)])
                (\s a -> s { _personality = a } :: ComputeInstanceV2Resource s)
 
 instance P.HasPowerState (ComputeInstanceV2Resource s) (TF.Attr s P.Text) where
@@ -1285,9 +1268,9 @@ instance P.HasPowerState (ComputeInstanceV2Resource s) (TF.Attr s P.Text) where
         P.lens (_powerState :: ComputeInstanceV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _powerState = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasSchedulerHints (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s (ComputeInstanceV2SchedulerHints s)]) where
+instance P.HasSchedulerHints (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s (SchedulerHintsSetting s)]) where
     schedulerHints =
-        P.lens (_schedulerHints :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (ComputeInstanceV2SchedulerHints s)])
+        P.lens (_schedulerHints :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (SchedulerHintsSetting s)])
                (\s a -> s { _schedulerHints = a } :: ComputeInstanceV2Resource s)
 
 instance P.HasStopBeforeDestroy (ComputeInstanceV2Resource s) (TF.Attr s P.Bool) where
@@ -1300,9 +1283,9 @@ instance P.HasUserData (ComputeInstanceV2Resource s) (TF.Attr s P.Text) where
         P.lens (_userData :: ComputeInstanceV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _userData = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasVolume (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s (ComputeInstanceV2Volume s)]) where
+instance P.HasVolume (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s (VolumeSetting s)]) where
     volume =
-        P.lens (_volume :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (ComputeInstanceV2Volume s)])
+        P.lens (_volume :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (VolumeSetting s)])
                (\s a -> s { _volume = a } :: ComputeInstanceV2Resource s)
 
 instance s ~ s' => P.HasComputedAccessIpV4 (TF.Ref s' (ComputeInstanceV2Resource s)) (TF.Attr s P.Text) where
@@ -1311,7 +1294,7 @@ instance s ~ s' => P.HasComputedAccessIpV4 (TF.Ref s' (ComputeInstanceV2Resource
 instance s ~ s' => P.HasComputedAccessIpV6 (TF.Ref s' (ComputeInstanceV2Resource s)) (TF.Attr s P.Text) where
     computedAccessIpV6 x = TF.compute (TF.refKey x) "access_ip_v6"
 
-instance s ~ s' => P.HasComputedAllMetadata (TF.Ref s' (ComputeInstanceV2Resource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedAllMetadata (TF.Ref s' (ComputeInstanceV2Resource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedAllMetadata x = TF.compute (TF.refKey x) "all_metadata"
 
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (ComputeInstanceV2Resource s)) (TF.Attr s P.Text) where
@@ -1329,7 +1312,7 @@ instance s ~ s' => P.HasComputedImageId (TF.Ref s' (ComputeInstanceV2Resource s)
 instance s ~ s' => P.HasComputedImageName (TF.Ref s' (ComputeInstanceV2Resource s)) (TF.Attr s P.Text) where
     computedImageName x = TF.compute (TF.refKey x) "image_name"
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeInstanceV2Resource s)) (TF.Attr s [TF.Attr s (ComputeInstanceV2Network s)]) where
+instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeInstanceV2Resource s)) (TF.Attr s [TF.Attr s (NetworkSetting s)]) where
     computedNetwork x = TF.compute (TF.refKey x) "network"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeInstanceV2Resource s)) (TF.Attr s P.Text) where
@@ -1346,16 +1329,16 @@ data ComputeKeypairV2Resource s = ComputeKeypairV2Resource'
     { _name       :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _valueSpecs :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _valueSpecs :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeKeypairV2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeKeypairV2Resource s)
 computeKeypairV2Resource _name =
-    TF.newResource "openstack_compute_keypair_v2" TF.validator $
+    TF.unsafeResource "openstack_compute_keypair_v2" P.defaultProvider TF.validator $
         ComputeKeypairV2Resource'
             { _name = _name
             , _valueSpecs = TF.Nil
@@ -1375,9 +1358,9 @@ instance P.HasName (ComputeKeypairV2Resource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeKeypairV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeKeypairV2Resource s)
 
-instance P.HasValueSpecs (ComputeKeypairV2Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasValueSpecs (ComputeKeypairV2Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     valueSpecs =
-        P.lens (_valueSpecs :: ComputeKeypairV2Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_valueSpecs :: ComputeKeypairV2Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: ComputeKeypairV2Resource s)
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeKeypairV2Resource s)) (TF.Attr s P.Text) where
@@ -1403,14 +1386,14 @@ data ComputeSecgroupV2Resource s = ComputeSecgroupV2Resource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSecgroupV2Resource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSecgroupV2Resource s)
 computeSecgroupV2Resource _description _name =
-    TF.newResource "openstack_compute_secgroup_v2" TF.validator $
+    TF.unsafeResource "openstack_compute_secgroup_v2" P.defaultProvider TF.validator $
         ComputeSecgroupV2Resource'
             { _description = _description
             , _name = _name
@@ -1438,7 +1421,7 @@ instance P.HasName (ComputeSecgroupV2Resource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeSecgroupV2Resource s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedRule (TF.Ref s' (ComputeSecgroupV2Resource s)) (TF.Attr s [TF.Attr s (ComputeSecgroupV2Rule s)]) where
+instance s ~ s' => P.HasComputedRule (TF.Ref s' (ComputeSecgroupV2Resource s)) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
     computedRule x = TF.compute (TF.refKey x) "rule"
 
 -- | @openstack_compute_servergroup_v2@ Resource.
@@ -1452,16 +1435,16 @@ data ComputeServergroupV2Resource s = ComputeServergroupV2Resource'
     , _policies   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @policies@ - (Optional, Forces New)
     --
-    , _valueSpecs :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _valueSpecs :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeServergroupV2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeServergroupV2Resource s)
 computeServergroupV2Resource _name =
-    TF.newResource "openstack_compute_servergroup_v2" TF.validator $
+    TF.unsafeResource "openstack_compute_servergroup_v2" P.defaultProvider TF.validator $
         ComputeServergroupV2Resource'
             { _name = _name
             , _policies = TF.Nil
@@ -1488,9 +1471,9 @@ instance P.HasPolicies (ComputeServergroupV2Resource s) (TF.Attr s [TF.Attr s P.
         P.lens (_policies :: ComputeServergroupV2Resource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _policies = a } :: ComputeServergroupV2Resource s)
 
-instance P.HasValueSpecs (ComputeServergroupV2Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasValueSpecs (ComputeServergroupV2Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     valueSpecs =
-        P.lens (_valueSpecs :: ComputeServergroupV2Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_valueSpecs :: ComputeServergroupV2Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: ComputeServergroupV2Resource s)
 
 instance s ~ s' => P.HasComputedMembers (TF.Ref s' (ComputeServergroupV2Resource s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -1510,14 +1493,14 @@ data ComputeVolumeAttachV2Resource s = ComputeVolumeAttachV2Resource'
     , _volumeId   :: TF.Attr s P.Text
     -- ^ @volume_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeVolumeAttachV2Resource
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
     -> P.Resource (ComputeVolumeAttachV2Resource s)
 computeVolumeAttachV2Resource _instanceId _volumeId =
-    TF.newResource "openstack_compute_volume_attach_v2" TF.validator $
+    TF.unsafeResource "openstack_compute_volume_attach_v2" P.defaultProvider TF.validator $
         ComputeVolumeAttachV2Resource'
             { _instanceId = _instanceId
             , _volumeId = _volumeId
@@ -1553,10 +1536,10 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeVolumeAttachV2Resource
 -- See the <https://www.terraform.io/docs/providers/openstack/r/db_configuration_v1.html terraform documentation>
 -- for more information.
 data DbConfigurationV1Resource s = DbConfigurationV1Resource'
-    { _configuration :: TF.Attr s [TF.Attr s (DbConfigurationV1Configuration s)]
+    { _configuration :: TF.Attr s [TF.Attr s (ConfigurationSetting s)]
     -- ^ @configuration@ - (Optional, Forces New)
     --
-    , _datastore     :: TF.Attr s (DbConfigurationV1Datastore s)
+    , _datastore     :: TF.Attr s (DatastoreSetting s)
     -- ^ @datastore@ - (Required, Forces New)
     --
     , _description   :: TF.Attr s P.Text
@@ -1568,16 +1551,16 @@ data DbConfigurationV1Resource s = DbConfigurationV1Resource'
     , _region        :: TF.Attr s P.Text
     -- ^ @region@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dbConfigurationV1Resource
-    :: TF.Attr s (DbConfigurationV1Datastore s) -- ^ @datastore@ - 'P.datastore'
+    :: TF.Attr s (DatastoreSetting s) -- ^ @datastore@ - 'P.datastore'
     -> TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> P.Resource (DbConfigurationV1Resource s)
 dbConfigurationV1Resource _datastore _description _name _region =
-    TF.newResource "openstack_db_configuration_v1" TF.validator $
+    TF.unsafeResource "openstack_db_configuration_v1" P.defaultProvider TF.validator $
         DbConfigurationV1Resource'
             { _configuration = TF.Nil
             , _datastore = _datastore
@@ -1597,23 +1580,19 @@ instance TF.IsObject (DbConfigurationV1Resource s) where
 
 instance TF.IsValid (DbConfigurationV1Resource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_configuration"
-                  (_configuration
-                      :: DbConfigurationV1Resource s -> TF.Attr s [TF.Attr s (DbConfigurationV1Configuration s)])
-                  TF.validator
            P.<> TF.settingsValidator "_datastore"
                   (_datastore
-                      :: DbConfigurationV1Resource s -> TF.Attr s (DbConfigurationV1Datastore s))
+                      :: DbConfigurationV1Resource s -> TF.Attr s (DatastoreSetting s))
                   TF.validator
 
-instance P.HasConfiguration (DbConfigurationV1Resource s) (TF.Attr s [TF.Attr s (DbConfigurationV1Configuration s)]) where
+instance P.HasConfiguration (DbConfigurationV1Resource s) (TF.Attr s [TF.Attr s (ConfigurationSetting s)]) where
     configuration =
-        P.lens (_configuration :: DbConfigurationV1Resource s -> TF.Attr s [TF.Attr s (DbConfigurationV1Configuration s)])
+        P.lens (_configuration :: DbConfigurationV1Resource s -> TF.Attr s [TF.Attr s (ConfigurationSetting s)])
                (\s a -> s { _configuration = a } :: DbConfigurationV1Resource s)
 
-instance P.HasDatastore (DbConfigurationV1Resource s) (TF.Attr s (DbConfigurationV1Datastore s)) where
+instance P.HasDatastore (DbConfigurationV1Resource s) (TF.Attr s (DatastoreSetting s)) where
     datastore =
-        P.lens (_datastore :: DbConfigurationV1Resource s -> TF.Attr s (DbConfigurationV1Datastore s))
+        P.lens (_datastore :: DbConfigurationV1Resource s -> TF.Attr s (DatastoreSetting s))
                (\s a -> s { _datastore = a } :: DbConfigurationV1Resource s)
 
 instance P.HasDescription (DbConfigurationV1Resource s) (TF.Attr s P.Text) where
@@ -1645,14 +1624,14 @@ data DbDatabaseV1Resource s = DbDatabaseV1Resource'
     , _region     :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dbDatabaseV1Resource
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DbDatabaseV1Resource s)
 dbDatabaseV1Resource _instanceId _name =
-    TF.newResource "openstack_db_database_v1" TF.validator $
+    TF.unsafeResource "openstack_db_database_v1" P.defaultProvider TF.validator $
         DbDatabaseV1Resource'
             { _instanceId = _instanceId
             , _name = _name
@@ -1692,37 +1671,37 @@ data DbInstanceV1Resource s = DbInstanceV1Resource'
     { _configurationId :: TF.Attr s P.Text
     -- ^ @configuration_id@ - (Optional)
     --
-    , _database        :: TF.Attr s [TF.Attr s (DbInstanceV1Database s)]
+    , _database        :: TF.Attr s [TF.Attr s (DatabaseSetting s)]
     -- ^ @database@ - (Optional, Forces New)
     --
-    , _datastore       :: TF.Attr s (DbInstanceV1Datastore s)
+    , _datastore       :: TF.Attr s (DatastoreSetting s)
     -- ^ @datastore@ - (Required, Forces New)
     --
     , _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _network         :: TF.Attr s [TF.Attr s (DbInstanceV1Network s)]
+    , _network         :: TF.Attr s [TF.Attr s (NetworkSetting s)]
     -- ^ @network@ - (Optional, Forces New)
     --
     , _region          :: TF.Attr s P.Text
     -- ^ @region@ - (Required, Forces New)
     --
-    , _size            :: TF.Attr s P.Integer
+    , _size            :: TF.Attr s P.Int
     -- ^ @size@ - (Required, Forces New)
     --
-    , _user            :: TF.Attr s [TF.Attr s (DbInstanceV1User s)]
+    , _user            :: TF.Attr s [TF.Attr s (UserSetting s)]
     -- ^ @user@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dbInstanceV1Resource
-    :: TF.Attr s (DbInstanceV1Datastore s) -- ^ @datastore@ - 'P.datastore'
+    :: TF.Attr s (DatastoreSetting s) -- ^ @datastore@ - 'P.datastore'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> TF.Attr s P.Integer -- ^ @size@ - 'P.size'
+    -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (DbInstanceV1Resource s)
 dbInstanceV1Resource _datastore _name _region _size =
-    TF.newResource "openstack_db_instance_v1" TF.validator $
+    TF.unsafeResource "openstack_db_instance_v1" P.defaultProvider TF.validator $
         DbInstanceV1Resource'
             { _configurationId = TF.Nil
             , _database = TF.Nil
@@ -1748,21 +1727,9 @@ instance TF.IsObject (DbInstanceV1Resource s) where
 
 instance TF.IsValid (DbInstanceV1Resource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_database"
-                  (_database
-                      :: DbInstanceV1Resource s -> TF.Attr s [TF.Attr s (DbInstanceV1Database s)])
-                  TF.validator
            P.<> TF.settingsValidator "_datastore"
                   (_datastore
-                      :: DbInstanceV1Resource s -> TF.Attr s (DbInstanceV1Datastore s))
-                  TF.validator
-           P.<> TF.settingsValidator "_network"
-                  (_network
-                      :: DbInstanceV1Resource s -> TF.Attr s [TF.Attr s (DbInstanceV1Network s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_user"
-                  (_user
-                      :: DbInstanceV1Resource s -> TF.Attr s [TF.Attr s (DbInstanceV1User s)])
+                      :: DbInstanceV1Resource s -> TF.Attr s (DatastoreSetting s))
                   TF.validator
 
 instance P.HasConfigurationId (DbInstanceV1Resource s) (TF.Attr s P.Text) where
@@ -1770,14 +1737,14 @@ instance P.HasConfigurationId (DbInstanceV1Resource s) (TF.Attr s P.Text) where
         P.lens (_configurationId :: DbInstanceV1Resource s -> TF.Attr s P.Text)
                (\s a -> s { _configurationId = a } :: DbInstanceV1Resource s)
 
-instance P.HasDatabase (DbInstanceV1Resource s) (TF.Attr s [TF.Attr s (DbInstanceV1Database s)]) where
+instance P.HasDatabase (DbInstanceV1Resource s) (TF.Attr s [TF.Attr s (DatabaseSetting s)]) where
     database =
-        P.lens (_database :: DbInstanceV1Resource s -> TF.Attr s [TF.Attr s (DbInstanceV1Database s)])
+        P.lens (_database :: DbInstanceV1Resource s -> TF.Attr s [TF.Attr s (DatabaseSetting s)])
                (\s a -> s { _database = a } :: DbInstanceV1Resource s)
 
-instance P.HasDatastore (DbInstanceV1Resource s) (TF.Attr s (DbInstanceV1Datastore s)) where
+instance P.HasDatastore (DbInstanceV1Resource s) (TF.Attr s (DatastoreSetting s)) where
     datastore =
-        P.lens (_datastore :: DbInstanceV1Resource s -> TF.Attr s (DbInstanceV1Datastore s))
+        P.lens (_datastore :: DbInstanceV1Resource s -> TF.Attr s (DatastoreSetting s))
                (\s a -> s { _datastore = a } :: DbInstanceV1Resource s)
 
 instance P.HasName (DbInstanceV1Resource s) (TF.Attr s P.Text) where
@@ -1785,9 +1752,9 @@ instance P.HasName (DbInstanceV1Resource s) (TF.Attr s P.Text) where
         P.lens (_name :: DbInstanceV1Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DbInstanceV1Resource s)
 
-instance P.HasNetwork (DbInstanceV1Resource s) (TF.Attr s [TF.Attr s (DbInstanceV1Network s)]) where
+instance P.HasNetwork (DbInstanceV1Resource s) (TF.Attr s [TF.Attr s (NetworkSetting s)]) where
     network =
-        P.lens (_network :: DbInstanceV1Resource s -> TF.Attr s [TF.Attr s (DbInstanceV1Network s)])
+        P.lens (_network :: DbInstanceV1Resource s -> TF.Attr s [TF.Attr s (NetworkSetting s)])
                (\s a -> s { _network = a } :: DbInstanceV1Resource s)
 
 instance P.HasRegion (DbInstanceV1Resource s) (TF.Attr s P.Text) where
@@ -1795,14 +1762,14 @@ instance P.HasRegion (DbInstanceV1Resource s) (TF.Attr s P.Text) where
         P.lens (_region :: DbInstanceV1Resource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: DbInstanceV1Resource s)
 
-instance P.HasSize (DbInstanceV1Resource s) (TF.Attr s P.Integer) where
+instance P.HasSize (DbInstanceV1Resource s) (TF.Attr s P.Int) where
     size =
-        P.lens (_size :: DbInstanceV1Resource s -> TF.Attr s P.Integer)
+        P.lens (_size :: DbInstanceV1Resource s -> TF.Attr s P.Int)
                (\s a -> s { _size = a } :: DbInstanceV1Resource s)
 
-instance P.HasUser (DbInstanceV1Resource s) (TF.Attr s [TF.Attr s (DbInstanceV1User s)]) where
+instance P.HasUser (DbInstanceV1Resource s) (TF.Attr s [TF.Attr s (UserSetting s)]) where
     user =
-        P.lens (_user :: DbInstanceV1Resource s -> TF.Attr s [TF.Attr s (DbInstanceV1User s)])
+        P.lens (_user :: DbInstanceV1Resource s -> TF.Attr s [TF.Attr s (UserSetting s)])
                (\s a -> s { _user = a } :: DbInstanceV1Resource s)
 
 instance s ~ s' => P.HasComputedFlavorId (TF.Ref s' (DbInstanceV1Resource s)) (TF.Attr s P.Text) where
@@ -1828,7 +1795,7 @@ data DbUserV1Resource s = DbUserV1Resource'
     , _region     :: TF.Attr s P.Text
     -- ^ @region@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dbUserV1Resource
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
@@ -1837,7 +1804,7 @@ dbUserV1Resource
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> P.Resource (DbUserV1Resource s)
 dbUserV1Resource _instanceId _name _password _region =
-    TF.newResource "openstack_db_user_v1" TF.validator $
+    TF.unsafeResource "openstack_db_user_v1" P.defaultProvider TF.validator $
         DbUserV1Resource'
             { _host = TF.Nil
             , _instanceId = _instanceId
@@ -1900,20 +1867,20 @@ data DnsRecordsetV2Resource s = DnsRecordsetV2Resource'
     , _records     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @records@ - (Optional)
     --
-    , _valueSpecs  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _valueSpecs  :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
     , _zoneId      :: TF.Attr s P.Text
     -- ^ @zone_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dnsRecordsetV2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
     -> P.Resource (DnsRecordsetV2Resource s)
 dnsRecordsetV2Resource _name _zoneId =
-    TF.newResource "openstack_dns_recordset_v2" TF.validator $
+    TF.unsafeResource "openstack_dns_recordset_v2" P.defaultProvider TF.validator $
         DnsRecordsetV2Resource'
             { _description = TF.Nil
             , _name = _name
@@ -1949,9 +1916,9 @@ instance P.HasRecords (DnsRecordsetV2Resource s) (TF.Attr s [TF.Attr s P.Text]) 
         P.lens (_records :: DnsRecordsetV2Resource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _records = a } :: DnsRecordsetV2Resource s)
 
-instance P.HasValueSpecs (DnsRecordsetV2Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasValueSpecs (DnsRecordsetV2Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     valueSpecs =
-        P.lens (_valueSpecs :: DnsRecordsetV2Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_valueSpecs :: DnsRecordsetV2Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: DnsRecordsetV2Resource s)
 
 instance P.HasZoneId (DnsRecordsetV2Resource s) (TF.Attr s P.Text) where
@@ -1962,7 +1929,7 @@ instance P.HasZoneId (DnsRecordsetV2Resource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DnsRecordsetV2Resource s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DnsRecordsetV2Resource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DnsRecordsetV2Resource s)) (TF.Attr s P.Int) where
     computedTtl x = TF.compute (TF.refKey x) "ttl"
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (DnsRecordsetV2Resource s)) (TF.Attr s P.Text) where
@@ -1973,7 +1940,7 @@ instance s ~ s' => P.HasComputedType (TF.Ref s' (DnsRecordsetV2Resource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/openstack/r/dns_zone_v2.html terraform documentation>
 -- for more information.
 data DnsZoneV2Resource s = DnsZoneV2Resource'
-    { _attributes  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _attributes  :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @attributes@ - (Optional, Forces New)
     --
     , _description :: TF.Attr s P.Text
@@ -1988,16 +1955,16 @@ data DnsZoneV2Resource s = DnsZoneV2Resource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _valueSpecs  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _valueSpecs  :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dnsZoneV2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DnsZoneV2Resource s)
 dnsZoneV2Resource _name =
-    TF.newResource "openstack_dns_zone_v2" TF.validator $
+    TF.unsafeResource "openstack_dns_zone_v2" P.defaultProvider TF.validator $
         DnsZoneV2Resource'
             { _attributes = TF.Nil
             , _description = TF.Nil
@@ -2020,9 +1987,9 @@ instance TF.IsObject (DnsZoneV2Resource s) where
 instance TF.IsValid (DnsZoneV2Resource s) where
     validator = P.mempty
 
-instance P.HasAttributes (DnsZoneV2Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasAttributes (DnsZoneV2Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     attributes =
-        P.lens (_attributes :: DnsZoneV2Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_attributes :: DnsZoneV2Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _attributes = a } :: DnsZoneV2Resource s)
 
 instance P.HasDescription (DnsZoneV2Resource s) (TF.Attr s P.Text) where
@@ -2045,15 +2012,15 @@ instance P.HasName (DnsZoneV2Resource s) (TF.Attr s P.Text) where
         P.lens (_name :: DnsZoneV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DnsZoneV2Resource s)
 
-instance P.HasValueSpecs (DnsZoneV2Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasValueSpecs (DnsZoneV2Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     valueSpecs =
-        P.lens (_valueSpecs :: DnsZoneV2Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_valueSpecs :: DnsZoneV2Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: DnsZoneV2Resource s)
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DnsZoneV2Resource s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DnsZoneV2Resource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DnsZoneV2Resource s)) (TF.Attr s P.Int) where
     computedTtl x = TF.compute (TF.refKey x) "ttl"
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (DnsZoneV2Resource s)) (TF.Attr s P.Text) where
@@ -2079,16 +2046,16 @@ data FwFirewallV1Resource s = FwFirewallV1Resource'
     , _policyId     :: TF.Attr s P.Text
     -- ^ @policy_id@ - (Required)
     --
-    , _valueSpecs   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _valueSpecs   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 fwFirewallV1Resource
     :: TF.Attr s P.Text -- ^ @policy_id@ - 'P.policyId'
     -> P.Resource (FwFirewallV1Resource s)
 fwFirewallV1Resource _policyId =
-    TF.newResource "openstack_fw_firewall_v1" TF.validator $
+    TF.unsafeResource "openstack_fw_firewall_v1" P.defaultProvider TF.validator $
         FwFirewallV1Resource'
             { _adminStateUp = TF.value P.True
             , _description = TF.Nil
@@ -2136,9 +2103,9 @@ instance P.HasPolicyId (FwFirewallV1Resource s) (TF.Attr s P.Text) where
         P.lens (_policyId :: FwFirewallV1Resource s -> TF.Attr s P.Text)
                (\s a -> s { _policyId = a } :: FwFirewallV1Resource s)
 
-instance P.HasValueSpecs (FwFirewallV1Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasValueSpecs (FwFirewallV1Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     valueSpecs =
-        P.lens (_valueSpecs :: FwFirewallV1Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_valueSpecs :: FwFirewallV1Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: FwFirewallV1Resource s)
 
 instance s ~ s' => P.HasComputedAssociatedRouters (TF.Ref s' (FwFirewallV1Resource s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -2170,15 +2137,15 @@ data FwPolicyV1Resource s = FwPolicyV1Resource'
     , _shared      :: TF.Attr s P.Bool
     -- ^ @shared@ - (Optional)
     --
-    , _valueSpecs  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _valueSpecs  :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 fwPolicyV1Resource
     :: P.Resource (FwPolicyV1Resource s)
 fwPolicyV1Resource =
-    TF.newResource "openstack_fw_policy_v1" TF.validator $
+    TF.unsafeResource "openstack_fw_policy_v1" P.defaultProvider TF.validator $
         FwPolicyV1Resource'
             { _audited = TF.value P.False
             , _description = TF.Nil
@@ -2226,9 +2193,9 @@ instance P.HasShared (FwPolicyV1Resource s) (TF.Attr s P.Bool) where
         P.lens (_shared :: FwPolicyV1Resource s -> TF.Attr s P.Bool)
                (\s a -> s { _shared = a } :: FwPolicyV1Resource s)
 
-instance P.HasValueSpecs (FwPolicyV1Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasValueSpecs (FwPolicyV1Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     valueSpecs =
-        P.lens (_valueSpecs :: FwPolicyV1Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_valueSpecs :: FwPolicyV1Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: FwPolicyV1Resource s)
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (FwPolicyV1Resource s)) (TF.Attr s P.Text) where
@@ -2257,7 +2224,7 @@ data FwRuleV1Resource s = FwRuleV1Resource'
     , _enabled              :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _ipVersion            :: TF.Attr s P.Integer
+    , _ipVersion            :: TF.Attr s P.Int
     -- ^ @ip_version@ - (Optional)
     --
     , _name                 :: TF.Attr s P.Text
@@ -2275,17 +2242,17 @@ data FwRuleV1Resource s = FwRuleV1Resource'
     , _tenantId             :: TF.Attr s P.Text
     -- ^ @tenant_id@ - (Optional, Forces New)
     --
-    , _valueSpecs           :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _valueSpecs           :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 fwRuleV1Resource
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> P.Resource (FwRuleV1Resource s)
 fwRuleV1Resource _action _protocol =
-    TF.newResource "openstack_fw_rule_v1" TF.validator $
+    TF.unsafeResource "openstack_fw_rule_v1" P.defaultProvider TF.validator $
         FwRuleV1Resource'
             { _action = _action
             , _description = TF.Nil
@@ -2345,9 +2312,9 @@ instance P.HasEnabled (FwRuleV1Resource s) (TF.Attr s P.Bool) where
         P.lens (_enabled :: FwRuleV1Resource s -> TF.Attr s P.Bool)
                (\s a -> s { _enabled = a } :: FwRuleV1Resource s)
 
-instance P.HasIpVersion (FwRuleV1Resource s) (TF.Attr s P.Integer) where
+instance P.HasIpVersion (FwRuleV1Resource s) (TF.Attr s P.Int) where
     ipVersion =
-        P.lens (_ipVersion :: FwRuleV1Resource s -> TF.Attr s P.Integer)
+        P.lens (_ipVersion :: FwRuleV1Resource s -> TF.Attr s P.Int)
                (\s a -> s { _ipVersion = a } :: FwRuleV1Resource s)
 
 instance P.HasName (FwRuleV1Resource s) (TF.Attr s P.Text) where
@@ -2375,9 +2342,9 @@ instance P.HasTenantId (FwRuleV1Resource s) (TF.Attr s P.Text) where
         P.lens (_tenantId :: FwRuleV1Resource s -> TF.Attr s P.Text)
                (\s a -> s { _tenantId = a } :: FwRuleV1Resource s)
 
-instance P.HasValueSpecs (FwRuleV1Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasValueSpecs (FwRuleV1Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     valueSpecs =
-        P.lens (_valueSpecs :: FwRuleV1Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_valueSpecs :: FwRuleV1Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: FwRuleV1Resource s)
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (FwRuleV1Resource s)) (TF.Attr s P.Text) where
@@ -2400,12 +2367,12 @@ data IdentityProjectV3Resource s = IdentityProjectV3Resource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 identityProjectV3Resource
     :: P.Resource (IdentityProjectV3Resource s)
 identityProjectV3Resource =
-    TF.newResource "openstack_identity_project_v3" TF.validator $
+    TF.unsafeResource "openstack_identity_project_v3" P.defaultProvider TF.validator $
         IdentityProjectV3Resource'
             { _description = TF.Nil
             , _enabled = TF.value P.True
@@ -2485,13 +2452,13 @@ data IdentityRoleAssignmentV3Resource s = IdentityRoleAssignmentV3Resource'
     -- Conflicts with:
     --
     -- * 'groupId'
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 identityRoleAssignmentV3Resource
     :: TF.Attr s P.Text -- ^ @role_id@ - 'P.roleId'
     -> P.Resource (IdentityRoleAssignmentV3Resource s)
 identityRoleAssignmentV3Resource _roleId =
-    TF.newResource "openstack_identity_role_assignment_v3" TF.validator $
+    TF.unsafeResource "openstack_identity_role_assignment_v3" P.defaultProvider TF.validator $
         IdentityRoleAssignmentV3Resource'
             { _domainId = TF.Nil
             , _groupId = TF.Nil
@@ -2566,13 +2533,13 @@ data IdentityRoleV3Resource s = IdentityRoleV3Resource'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 identityRoleV3Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (IdentityRoleV3Resource s)
 identityRoleV3Resource _name =
-    TF.newResource "openstack_identity_role_v3" TF.validator $
+    TF.unsafeResource "openstack_identity_role_v3" P.defaultProvider TF.validator $
         IdentityRoleV3Resource'
             { _name = _name
             }
@@ -2607,7 +2574,7 @@ data IdentityUserV3Resource s = IdentityUserV3Resource'
     , _enabled :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _extra :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _extra :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @extra@ - (Optional)
     --
     , _ignoreChangePasswordUponFirstUse :: TF.Attr s P.Bool
@@ -2622,7 +2589,7 @@ data IdentityUserV3Resource s = IdentityUserV3Resource'
     , _multiFactorAuthEnabled :: TF.Attr s P.Bool
     -- ^ @multi_factor_auth_enabled@ - (Optional)
     --
-    , _multiFactorAuthRule :: TF.Attr s [TF.Attr s (IdentityUserV3MultiFactorAuthRule s)]
+    , _multiFactorAuthRule :: TF.Attr s [TF.Attr s (MultiFactorAuthRuleSetting s)]
     -- ^ @multi_factor_auth_rule@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
@@ -2631,12 +2598,12 @@ data IdentityUserV3Resource s = IdentityUserV3Resource'
     , _password :: TF.Attr s P.Text
     -- ^ @password@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 identityUserV3Resource
     :: P.Resource (IdentityUserV3Resource s)
 identityUserV3Resource =
-    TF.newResource "openstack_identity_user_v3" TF.validator $
+    TF.unsafeResource "openstack_identity_user_v3" P.defaultProvider TF.validator $
         IdentityUserV3Resource'
             { _description = TF.Nil
             , _enabled = TF.value P.True
@@ -2666,10 +2633,6 @@ instance TF.IsObject (IdentityUserV3Resource s) where
 
 instance TF.IsValid (IdentityUserV3Resource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_multiFactorAuthRule"
-                  (_multiFactorAuthRule
-                      :: IdentityUserV3Resource s -> TF.Attr s [TF.Attr s (IdentityUserV3MultiFactorAuthRule s)])
-                  TF.validator
 
 instance P.HasDescription (IdentityUserV3Resource s) (TF.Attr s P.Text) where
     description =
@@ -2681,9 +2644,9 @@ instance P.HasEnabled (IdentityUserV3Resource s) (TF.Attr s P.Bool) where
         P.lens (_enabled :: IdentityUserV3Resource s -> TF.Attr s P.Bool)
                (\s a -> s { _enabled = a } :: IdentityUserV3Resource s)
 
-instance P.HasExtra (IdentityUserV3Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasExtra (IdentityUserV3Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     extra =
-        P.lens (_extra :: IdentityUserV3Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_extra :: IdentityUserV3Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _extra = a } :: IdentityUserV3Resource s)
 
 instance P.HasIgnoreChangePasswordUponFirstUse (IdentityUserV3Resource s) (TF.Attr s P.Bool) where
@@ -2706,9 +2669,9 @@ instance P.HasMultiFactorAuthEnabled (IdentityUserV3Resource s) (TF.Attr s P.Boo
         P.lens (_multiFactorAuthEnabled :: IdentityUserV3Resource s -> TF.Attr s P.Bool)
                (\s a -> s { _multiFactorAuthEnabled = a } :: IdentityUserV3Resource s)
 
-instance P.HasMultiFactorAuthRule (IdentityUserV3Resource s) (TF.Attr s [TF.Attr s (IdentityUserV3MultiFactorAuthRule s)]) where
+instance P.HasMultiFactorAuthRule (IdentityUserV3Resource s) (TF.Attr s [TF.Attr s (MultiFactorAuthRuleSetting s)]) where
     multiFactorAuthRule =
-        P.lens (_multiFactorAuthRule :: IdentityUserV3Resource s -> TF.Attr s [TF.Attr s (IdentityUserV3MultiFactorAuthRule s)])
+        P.lens (_multiFactorAuthRule :: IdentityUserV3Resource s -> TF.Attr s [TF.Attr s (MultiFactorAuthRuleSetting s)])
                (\s a -> s { _multiFactorAuthRule = a } :: IdentityUserV3Resource s)
 
 instance P.HasName (IdentityUserV3Resource s) (TF.Attr s P.Text) where
@@ -2756,10 +2719,10 @@ data ImagesImageV2Resource s = ImagesImageV2Resource'
     -- Conflicts with:
     --
     -- * 'imageSourceUrl'
-    , _minDiskGb       :: TF.Attr s P.Integer
+    , _minDiskGb       :: TF.Attr s P.Int
     -- ^ @min_disk_gb@ - (Optional, Forces New)
     --
-    , _minRamMb        :: TF.Attr s P.Integer
+    , _minRamMb        :: TF.Attr s P.Int
     -- ^ @min_ram_mb@ - (Optional, Forces New)
     --
     , _name            :: TF.Attr s P.Text
@@ -2777,7 +2740,7 @@ data ImagesImageV2Resource s = ImagesImageV2Resource'
     , _visibility      :: TF.Attr s P.Text
     -- ^ @visibility@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 imagesImageV2Resource
     :: TF.Attr s P.Text -- ^ @container_format@ - 'P.containerFormat'
@@ -2785,7 +2748,7 @@ imagesImageV2Resource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ImagesImageV2Resource s)
 imagesImageV2Resource _containerFormat _diskFormat _name =
-    TF.newResource "openstack_images_image_v2" TF.validator $
+    TF.unsafeResource "openstack_images_image_v2" P.defaultProvider TF.validator $
         ImagesImageV2Resource'
             { _containerFormat = _containerFormat
             , _diskFormat = _diskFormat
@@ -2856,14 +2819,14 @@ instance P.HasLocalFilePath (ImagesImageV2Resource s) (TF.Attr s P.Text) where
         P.lens (_localFilePath :: ImagesImageV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _localFilePath = a } :: ImagesImageV2Resource s)
 
-instance P.HasMinDiskGb (ImagesImageV2Resource s) (TF.Attr s P.Integer) where
+instance P.HasMinDiskGb (ImagesImageV2Resource s) (TF.Attr s P.Int) where
     minDiskGb =
-        P.lens (_minDiskGb :: ImagesImageV2Resource s -> TF.Attr s P.Integer)
+        P.lens (_minDiskGb :: ImagesImageV2Resource s -> TF.Attr s P.Int)
                (\s a -> s { _minDiskGb = a } :: ImagesImageV2Resource s)
 
-instance P.HasMinRamMb (ImagesImageV2Resource s) (TF.Attr s P.Integer) where
+instance P.HasMinRamMb (ImagesImageV2Resource s) (TF.Attr s P.Int) where
     minRamMb =
-        P.lens (_minRamMb :: ImagesImageV2Resource s -> TF.Attr s P.Integer)
+        P.lens (_minRamMb :: ImagesImageV2Resource s -> TF.Attr s P.Int)
                (\s a -> s { _minRamMb = a } :: ImagesImageV2Resource s)
 
 instance P.HasName (ImagesImageV2Resource s) (TF.Attr s P.Text) where
@@ -2900,13 +2863,13 @@ instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (ImagesImageV2Resource s)) 
 instance s ~ s' => P.HasComputedFile (TF.Ref s' (ImagesImageV2Resource s)) (TF.Attr s P.Text) where
     computedFile x = TF.compute (TF.refKey x) "file"
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ImagesImageV2Resource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ImagesImageV2Resource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedMetadata x = TF.compute (TF.refKey x) "metadata"
 
 instance s ~ s' => P.HasComputedOwner (TF.Ref s' (ImagesImageV2Resource s)) (TF.Attr s P.Text) where
     computedOwner x = TF.compute (TF.refKey x) "owner"
 
-instance s ~ s' => P.HasComputedProperties (TF.Ref s' (ImagesImageV2Resource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedProperties (TF.Ref s' (ImagesImageV2Resource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedProperties x = TF.compute (TF.refKey x) "properties"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ImagesImageV2Resource s)) (TF.Attr s P.Text) where
@@ -2915,7 +2878,7 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ImagesImageV2Resource s)) (TF
 instance s ~ s' => P.HasComputedSchema (TF.Ref s' (ImagesImageV2Resource s)) (TF.Attr s P.Text) where
     computedSchema x = TF.compute (TF.refKey x) "schema"
 
-instance s ~ s' => P.HasComputedSizeBytes (TF.Ref s' (ImagesImageV2Resource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedSizeBytes (TF.Ref s' (ImagesImageV2Resource s)) (TF.Attr s P.Int) where
     computedSizeBytes x = TF.compute (TF.refKey x) "size_bytes"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ImagesImageV2Resource s)) (TF.Attr s P.Text) where
@@ -2944,21 +2907,21 @@ data LbListenerV2Resource s = LbListenerV2Resource'
     , _protocol               :: TF.Attr s P.Text
     -- ^ @protocol@ - (Required, Forces New)
     --
-    , _protocolPort           :: TF.Attr s P.Integer
+    , _protocolPort           :: TF.Attr s P.Int
     -- ^ @protocol_port@ - (Required, Forces New)
     --
     , _sniContainerRefs       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @sni_container_refs@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 lbListenerV2Resource
     :: TF.Attr s P.Text -- ^ @loadbalancer_id@ - 'P.loadbalancerId'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
-    -> TF.Attr s P.Integer -- ^ @protocol_port@ - 'P.protocolPort'
+    -> TF.Attr s P.Int -- ^ @protocol_port@ - 'P.protocolPort'
     -> P.Resource (LbListenerV2Resource s)
 lbListenerV2Resource _loadbalancerId _protocol _protocolPort =
-    TF.newResource "openstack_lb_listener_v2" TF.validator $
+    TF.unsafeResource "openstack_lb_listener_v2" P.defaultProvider TF.validator $
         LbListenerV2Resource'
             { _adminStateUp = TF.value P.True
             , _defaultTlsContainerRef = TF.Nil
@@ -3008,9 +2971,9 @@ instance P.HasProtocol (LbListenerV2Resource s) (TF.Attr s P.Text) where
         P.lens (_protocol :: LbListenerV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _protocol = a } :: LbListenerV2Resource s)
 
-instance P.HasProtocolPort (LbListenerV2Resource s) (TF.Attr s P.Integer) where
+instance P.HasProtocolPort (LbListenerV2Resource s) (TF.Attr s P.Int) where
     protocolPort =
-        P.lens (_protocolPort :: LbListenerV2Resource s -> TF.Attr s P.Integer)
+        P.lens (_protocolPort :: LbListenerV2Resource s -> TF.Attr s P.Int)
                (\s a -> s { _protocolPort = a } :: LbListenerV2Resource s)
 
 instance P.HasSniContainerRefs (LbListenerV2Resource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -3018,7 +2981,7 @@ instance P.HasSniContainerRefs (LbListenerV2Resource s) (TF.Attr s [TF.Attr s P.
         P.lens (_sniContainerRefs :: LbListenerV2Resource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _sniContainerRefs = a } :: LbListenerV2Resource s)
 
-instance s ~ s' => P.HasComputedConnectionLimit (TF.Ref s' (LbListenerV2Resource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedConnectionLimit (TF.Ref s' (LbListenerV2Resource s)) (TF.Attr s P.Int) where
     computedConnectionLimit x = TF.compute (TF.refKey x) "connection_limit"
 
 instance s ~ s' => P.HasComputedDefaultPoolId (TF.Ref s' (LbListenerV2Resource s)) (TF.Attr s P.Text) where
@@ -3053,13 +3016,13 @@ data LbLoadbalancerV2Resource s = LbLoadbalancerV2Resource'
     , _vipSubnetId  :: TF.Attr s P.Text
     -- ^ @vip_subnet_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 lbLoadbalancerV2Resource
     :: TF.Attr s P.Text -- ^ @vip_subnet_id@ - 'P.vipSubnetId'
     -> P.Resource (LbLoadbalancerV2Resource s)
 lbLoadbalancerV2Resource _vipSubnetId =
-    TF.newResource "openstack_lb_loadbalancer_v2" TF.validator $
+    TF.unsafeResource "openstack_lb_loadbalancer_v2" P.defaultProvider TF.validator $
         LbLoadbalancerV2Resource'
             { _adminStateUp = TF.value P.True
             , _description = TF.Nil
@@ -3134,21 +3097,21 @@ data LbMemberV1Resource s = LbMemberV1Resource'
     , _poolId   :: TF.Attr s P.Text
     -- ^ @pool_id@ - (Required, Forces New)
     --
-    , _port     :: TF.Attr s P.Integer
+    , _port     :: TF.Attr s P.Int
     -- ^ @port@ - (Required, Forces New)
     --
     , _tenantId :: TF.Attr s P.Text
     -- ^ @tenant_id@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 lbMemberV1Resource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @pool_id@ - 'P.poolId'
-    -> TF.Attr s P.Integer -- ^ @port@ - 'P.port'
+    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
     -> P.Resource (LbMemberV1Resource s)
 lbMemberV1Resource _address _poolId _port =
-    TF.newResource "openstack_lb_member_v1" TF.validator $
+    TF.unsafeResource "openstack_lb_member_v1" P.defaultProvider TF.validator $
         LbMemberV1Resource'
             { _address = _address
             , _poolId = _poolId
@@ -3177,9 +3140,9 @@ instance P.HasPoolId (LbMemberV1Resource s) (TF.Attr s P.Text) where
         P.lens (_poolId :: LbMemberV1Resource s -> TF.Attr s P.Text)
                (\s a -> s { _poolId = a } :: LbMemberV1Resource s)
 
-instance P.HasPort (LbMemberV1Resource s) (TF.Attr s P.Integer) where
+instance P.HasPort (LbMemberV1Resource s) (TF.Attr s P.Int) where
     port =
-        P.lens (_port :: LbMemberV1Resource s -> TF.Attr s P.Integer)
+        P.lens (_port :: LbMemberV1Resource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: LbMemberV1Resource s)
 
 instance P.HasTenantId (LbMemberV1Resource s) (TF.Attr s P.Text) where
@@ -3193,7 +3156,7 @@ instance s ~ s' => P.HasComputedAdminStateUp (TF.Ref s' (LbMemberV1Resource s)) 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (LbMemberV1Resource s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedWeight (TF.Ref s' (LbMemberV1Resource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedWeight (TF.Ref s' (LbMemberV1Resource s)) (TF.Attr s P.Int) where
     computedWeight x = TF.compute (TF.refKey x) "weight"
 
 -- | @openstack_lb_member_v2@ Resource.
@@ -3213,21 +3176,21 @@ data LbMemberV2Resource s = LbMemberV2Resource'
     , _poolId       :: TF.Attr s P.Text
     -- ^ @pool_id@ - (Required, Forces New)
     --
-    , _protocolPort :: TF.Attr s P.Integer
+    , _protocolPort :: TF.Attr s P.Int
     -- ^ @protocol_port@ - (Required, Forces New)
     --
     , _subnetId     :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 lbMemberV2Resource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @pool_id@ - 'P.poolId'
-    -> TF.Attr s P.Integer -- ^ @protocol_port@ - 'P.protocolPort'
+    -> TF.Attr s P.Int -- ^ @protocol_port@ - 'P.protocolPort'
     -> P.Resource (LbMemberV2Resource s)
 lbMemberV2Resource _address _poolId _protocolPort =
-    TF.newResource "openstack_lb_member_v2" TF.validator $
+    TF.unsafeResource "openstack_lb_member_v2" P.defaultProvider TF.validator $
         LbMemberV2Resource'
             { _address = _address
             , _adminStateUp = TF.value P.True
@@ -3270,9 +3233,9 @@ instance P.HasPoolId (LbMemberV2Resource s) (TF.Attr s P.Text) where
         P.lens (_poolId :: LbMemberV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _poolId = a } :: LbMemberV2Resource s)
 
-instance P.HasProtocolPort (LbMemberV2Resource s) (TF.Attr s P.Integer) where
+instance P.HasProtocolPort (LbMemberV2Resource s) (TF.Attr s P.Int) where
     protocolPort =
-        P.lens (_protocolPort :: LbMemberV2Resource s -> TF.Attr s P.Integer)
+        P.lens (_protocolPort :: LbMemberV2Resource s -> TF.Attr s P.Int)
                (\s a -> s { _protocolPort = a } :: LbMemberV2Resource s)
 
 instance P.HasSubnetId (LbMemberV2Resource s) (TF.Attr s P.Text) where
@@ -3286,7 +3249,7 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (LbMemberV2Resource s)) (TF.At
 instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (LbMemberV2Resource s)) (TF.Attr s P.Text) where
     computedTenantId x = TF.compute (TF.refKey x) "tenant_id"
 
-instance s ~ s' => P.HasComputedWeight (TF.Ref s' (LbMemberV2Resource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedWeight (TF.Ref s' (LbMemberV2Resource s)) (TF.Attr s P.Int) where
     computedWeight x = TF.compute (TF.refKey x) "weight"
 
 -- | @openstack_lb_monitor_v1@ Resource.
@@ -3294,7 +3257,7 @@ instance s ~ s' => P.HasComputedWeight (TF.Ref s' (LbMemberV2Resource s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/openstack/r/lb_monitor_v1.html terraform documentation>
 -- for more information.
 data LbMonitorV1Resource s = LbMonitorV1Resource'
-    { _delay         :: TF.Attr s P.Integer
+    { _delay         :: TF.Attr s P.Int
     -- ^ @delay@ - (Required)
     --
     , _expectedCodes :: TF.Attr s P.Text
@@ -3303,10 +3266,10 @@ data LbMonitorV1Resource s = LbMonitorV1Resource'
     , _httpMethod    :: TF.Attr s P.Text
     -- ^ @http_method@ - (Optional)
     --
-    , _maxRetries    :: TF.Attr s P.Integer
+    , _maxRetries    :: TF.Attr s P.Int
     -- ^ @max_retries@ - (Required)
     --
-    , _timeout       :: TF.Attr s P.Integer
+    , _timeout       :: TF.Attr s P.Int
     -- ^ @timeout@ - (Required)
     --
     , _type'         :: TF.Attr s P.Text
@@ -3315,16 +3278,16 @@ data LbMonitorV1Resource s = LbMonitorV1Resource'
     , _urlPath       :: TF.Attr s P.Text
     -- ^ @url_path@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 lbMonitorV1Resource
-    :: TF.Attr s P.Integer -- ^ @delay@ - 'P.delay'
-    -> TF.Attr s P.Integer -- ^ @max_retries@ - 'P.maxRetries'
-    -> TF.Attr s P.Integer -- ^ @timeout@ - 'P.timeout'
+    :: TF.Attr s P.Int -- ^ @delay@ - 'P.delay'
+    -> TF.Attr s P.Int -- ^ @max_retries@ - 'P.maxRetries'
+    -> TF.Attr s P.Int -- ^ @timeout@ - 'P.timeout'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (LbMonitorV1Resource s)
 lbMonitorV1Resource _delay _maxRetries _timeout _type' =
-    TF.newResource "openstack_lb_monitor_v1" TF.validator $
+    TF.unsafeResource "openstack_lb_monitor_v1" P.defaultProvider TF.validator $
         LbMonitorV1Resource'
             { _delay = _delay
             , _expectedCodes = TF.Nil
@@ -3349,9 +3312,9 @@ instance TF.IsObject (LbMonitorV1Resource s) where
 instance TF.IsValid (LbMonitorV1Resource s) where
     validator = P.mempty
 
-instance P.HasDelay (LbMonitorV1Resource s) (TF.Attr s P.Integer) where
+instance P.HasDelay (LbMonitorV1Resource s) (TF.Attr s P.Int) where
     delay =
-        P.lens (_delay :: LbMonitorV1Resource s -> TF.Attr s P.Integer)
+        P.lens (_delay :: LbMonitorV1Resource s -> TF.Attr s P.Int)
                (\s a -> s { _delay = a } :: LbMonitorV1Resource s)
 
 instance P.HasExpectedCodes (LbMonitorV1Resource s) (TF.Attr s P.Text) where
@@ -3364,14 +3327,14 @@ instance P.HasHttpMethod (LbMonitorV1Resource s) (TF.Attr s P.Text) where
         P.lens (_httpMethod :: LbMonitorV1Resource s -> TF.Attr s P.Text)
                (\s a -> s { _httpMethod = a } :: LbMonitorV1Resource s)
 
-instance P.HasMaxRetries (LbMonitorV1Resource s) (TF.Attr s P.Integer) where
+instance P.HasMaxRetries (LbMonitorV1Resource s) (TF.Attr s P.Int) where
     maxRetries =
-        P.lens (_maxRetries :: LbMonitorV1Resource s -> TF.Attr s P.Integer)
+        P.lens (_maxRetries :: LbMonitorV1Resource s -> TF.Attr s P.Int)
                (\s a -> s { _maxRetries = a } :: LbMonitorV1Resource s)
 
-instance P.HasTimeout (LbMonitorV1Resource s) (TF.Attr s P.Integer) where
+instance P.HasTimeout (LbMonitorV1Resource s) (TF.Attr s P.Int) where
     timeout =
-        P.lens (_timeout :: LbMonitorV1Resource s -> TF.Attr s P.Integer)
+        P.lens (_timeout :: LbMonitorV1Resource s -> TF.Attr s P.Int)
                (\s a -> s { _timeout = a } :: LbMonitorV1Resource s)
 
 instance P.HasType' (LbMonitorV1Resource s) (TF.Attr s P.Text) where
@@ -3401,10 +3364,10 @@ data LbMonitorV2Resource s = LbMonitorV2Resource'
     { _adminStateUp :: TF.Attr s P.Bool
     -- ^ @admin_state_up@ - (Optional)
     --
-    , _delay        :: TF.Attr s P.Integer
+    , _delay        :: TF.Attr s P.Int
     -- ^ @delay@ - (Required)
     --
-    , _maxRetries   :: TF.Attr s P.Integer
+    , _maxRetries   :: TF.Attr s P.Int
     -- ^ @max_retries@ - (Required)
     --
     , _name         :: TF.Attr s P.Text
@@ -3413,23 +3376,23 @@ data LbMonitorV2Resource s = LbMonitorV2Resource'
     , _poolId       :: TF.Attr s P.Text
     -- ^ @pool_id@ - (Required, Forces New)
     --
-    , _timeout      :: TF.Attr s P.Integer
+    , _timeout      :: TF.Attr s P.Int
     -- ^ @timeout@ - (Required)
     --
     , _type'        :: TF.Attr s P.Text
     -- ^ @type@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 lbMonitorV2Resource
-    :: TF.Attr s P.Integer -- ^ @delay@ - 'P.delay'
-    -> TF.Attr s P.Integer -- ^ @max_retries@ - 'P.maxRetries'
+    :: TF.Attr s P.Int -- ^ @delay@ - 'P.delay'
+    -> TF.Attr s P.Int -- ^ @max_retries@ - 'P.maxRetries'
     -> TF.Attr s P.Text -- ^ @pool_id@ - 'P.poolId'
-    -> TF.Attr s P.Integer -- ^ @timeout@ - 'P.timeout'
+    -> TF.Attr s P.Int -- ^ @timeout@ - 'P.timeout'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (LbMonitorV2Resource s)
 lbMonitorV2Resource _delay _maxRetries _poolId _timeout _type' =
-    TF.newResource "openstack_lb_monitor_v2" TF.validator $
+    TF.unsafeResource "openstack_lb_monitor_v2" P.defaultProvider TF.validator $
         LbMonitorV2Resource'
             { _adminStateUp = TF.value P.True
             , _delay = _delay
@@ -3459,14 +3422,14 @@ instance P.HasAdminStateUp (LbMonitorV2Resource s) (TF.Attr s P.Bool) where
         P.lens (_adminStateUp :: LbMonitorV2Resource s -> TF.Attr s P.Bool)
                (\s a -> s { _adminStateUp = a } :: LbMonitorV2Resource s)
 
-instance P.HasDelay (LbMonitorV2Resource s) (TF.Attr s P.Integer) where
+instance P.HasDelay (LbMonitorV2Resource s) (TF.Attr s P.Int) where
     delay =
-        P.lens (_delay :: LbMonitorV2Resource s -> TF.Attr s P.Integer)
+        P.lens (_delay :: LbMonitorV2Resource s -> TF.Attr s P.Int)
                (\s a -> s { _delay = a } :: LbMonitorV2Resource s)
 
-instance P.HasMaxRetries (LbMonitorV2Resource s) (TF.Attr s P.Integer) where
+instance P.HasMaxRetries (LbMonitorV2Resource s) (TF.Attr s P.Int) where
     maxRetries =
-        P.lens (_maxRetries :: LbMonitorV2Resource s -> TF.Attr s P.Integer)
+        P.lens (_maxRetries :: LbMonitorV2Resource s -> TF.Attr s P.Int)
                (\s a -> s { _maxRetries = a } :: LbMonitorV2Resource s)
 
 instance P.HasName (LbMonitorV2Resource s) (TF.Attr s P.Text) where
@@ -3479,9 +3442,9 @@ instance P.HasPoolId (LbMonitorV2Resource s) (TF.Attr s P.Text) where
         P.lens (_poolId :: LbMonitorV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _poolId = a } :: LbMonitorV2Resource s)
 
-instance P.HasTimeout (LbMonitorV2Resource s) (TF.Attr s P.Integer) where
+instance P.HasTimeout (LbMonitorV2Resource s) (TF.Attr s P.Int) where
     timeout =
-        P.lens (_timeout :: LbMonitorV2Resource s -> TF.Attr s P.Integer)
+        P.lens (_timeout :: LbMonitorV2Resource s -> TF.Attr s P.Int)
                (\s a -> s { _timeout = a } :: LbMonitorV2Resource s)
 
 instance P.HasType' (LbMonitorV2Resource s) (TF.Attr s P.Text) where
@@ -3527,7 +3490,7 @@ data LbPoolV1Resource s = LbPoolV1Resource'
     , _subnetId   :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 lbPoolV1Resource
     :: TF.Attr s P.Text -- ^ @lb_method@ - 'P.lbMethod'
@@ -3536,7 +3499,7 @@ lbPoolV1Resource
     -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> P.Resource (LbPoolV1Resource s)
 lbPoolV1Resource _lbMethod _name _protocol _subnetId =
-    TF.newResource "openstack_lb_pool_v1" TF.validator $
+    TF.unsafeResource "openstack_lb_pool_v1" P.defaultProvider TF.validator $
         LbPoolV1Resource'
             { _lbMethod = _lbMethod
             , _member = TF.Nil
@@ -3621,20 +3584,20 @@ data LbPoolV2Resource s = LbPoolV2Resource'
     , _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _persistence    :: TF.Attr s [TF.Attr s (LbPoolV2Persistence s)]
+    , _persistence    :: TF.Attr s [TF.Attr s (PersistenceSetting s)]
     -- ^ @persistence@ - (Optional, Forces New)
     --
     , _protocol       :: TF.Attr s P.Text
     -- ^ @protocol@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 lbPoolV2Resource
     :: TF.Attr s P.Text -- ^ @lb_method@ - 'P.lbMethod'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> P.Resource (LbPoolV2Resource s)
 lbPoolV2Resource _lbMethod _protocol =
-    TF.newResource "openstack_lb_pool_v2" TF.validator $
+    TF.unsafeResource "openstack_lb_pool_v2" P.defaultProvider TF.validator $
         LbPoolV2Resource'
             { _adminStateUp = TF.value P.True
             , _description = TF.Nil
@@ -3660,10 +3623,6 @@ instance TF.IsObject (LbPoolV2Resource s) where
 
 instance TF.IsValid (LbPoolV2Resource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_persistence"
-                  (_persistence
-                      :: LbPoolV2Resource s -> TF.Attr s [TF.Attr s (LbPoolV2Persistence s)])
-                  TF.validator
 
 instance P.HasAdminStateUp (LbPoolV2Resource s) (TF.Attr s P.Bool) where
     adminStateUp =
@@ -3695,9 +3654,9 @@ instance P.HasName (LbPoolV2Resource s) (TF.Attr s P.Text) where
         P.lens (_name :: LbPoolV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: LbPoolV2Resource s)
 
-instance P.HasPersistence (LbPoolV2Resource s) (TF.Attr s [TF.Attr s (LbPoolV2Persistence s)]) where
+instance P.HasPersistence (LbPoolV2Resource s) (TF.Attr s [TF.Attr s (PersistenceSetting s)]) where
     persistence =
-        P.lens (_persistence :: LbPoolV2Resource s -> TF.Attr s [TF.Attr s (LbPoolV2Persistence s)])
+        P.lens (_persistence :: LbPoolV2Resource s -> TF.Attr s [TF.Attr s (PersistenceSetting s)])
                (\s a -> s { _persistence = a } :: LbPoolV2Resource s)
 
 instance P.HasProtocol (LbPoolV2Resource s) (TF.Attr s P.Text) where
@@ -3722,13 +3681,13 @@ data LbVipV1Resource s = LbVipV1Resource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _persistence :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _persistence :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @persistence@ - (Optional)
     --
     , _poolId      :: TF.Attr s P.Text
     -- ^ @pool_id@ - (Required)
     --
-    , _port        :: TF.Attr s P.Integer
+    , _port        :: TF.Attr s P.Int
     -- ^ @port@ - (Required, Forces New)
     --
     , _protocol    :: TF.Attr s P.Text
@@ -3737,17 +3696,17 @@ data LbVipV1Resource s = LbVipV1Resource'
     , _subnetId    :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 lbVipV1Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @pool_id@ - 'P.poolId'
-    -> TF.Attr s P.Integer -- ^ @port@ - 'P.port'
+    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> P.Resource (LbVipV1Resource s)
 lbVipV1Resource _name _poolId _port _protocol _subnetId =
-    TF.newResource "openstack_lb_vip_v1" TF.validator $
+    TF.unsafeResource "openstack_lb_vip_v1" P.defaultProvider TF.validator $
         LbVipV1Resource'
             { _floatingIp = TF.Nil
             , _name = _name
@@ -3782,9 +3741,9 @@ instance P.HasName (LbVipV1Resource s) (TF.Attr s P.Text) where
         P.lens (_name :: LbVipV1Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: LbVipV1Resource s)
 
-instance P.HasPersistence (LbVipV1Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasPersistence (LbVipV1Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     persistence =
-        P.lens (_persistence :: LbVipV1Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_persistence :: LbVipV1Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _persistence = a } :: LbVipV1Resource s)
 
 instance P.HasPoolId (LbVipV1Resource s) (TF.Attr s P.Text) where
@@ -3792,9 +3751,9 @@ instance P.HasPoolId (LbVipV1Resource s) (TF.Attr s P.Text) where
         P.lens (_poolId :: LbVipV1Resource s -> TF.Attr s P.Text)
                (\s a -> s { _poolId = a } :: LbVipV1Resource s)
 
-instance P.HasPort (LbVipV1Resource s) (TF.Attr s P.Integer) where
+instance P.HasPort (LbVipV1Resource s) (TF.Attr s P.Int) where
     port =
-        P.lens (_port :: LbVipV1Resource s -> TF.Attr s P.Integer)
+        P.lens (_port :: LbVipV1Resource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: LbVipV1Resource s)
 
 instance P.HasProtocol (LbVipV1Resource s) (TF.Attr s P.Text) where
@@ -3813,7 +3772,7 @@ instance s ~ s' => P.HasComputedAddress (TF.Ref s' (LbVipV1Resource s)) (TF.Attr
 instance s ~ s' => P.HasComputedAdminStateUp (TF.Ref s' (LbVipV1Resource s)) (TF.Attr s P.Bool) where
     computedAdminStateUp x = TF.compute (TF.refKey x) "admin_state_up"
 
-instance s ~ s' => P.HasComputedConnLimit (TF.Ref s' (LbVipV1Resource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedConnLimit (TF.Ref s' (LbVipV1Resource s)) (TF.Attr s P.Int) where
     computedConnLimit x = TF.compute (TF.refKey x) "conn_limit"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (LbVipV1Resource s)) (TF.Attr s P.Text) where
@@ -3839,14 +3798,14 @@ data NetworkingFloatingipAssociateV2Resource s = NetworkingFloatingipAssociateV2
     , _portId     :: TF.Attr s P.Text
     -- ^ @port_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkingFloatingipAssociateV2Resource
     :: TF.Attr s P.Text -- ^ @floating_ip@ - 'P.floatingIp'
     -> TF.Attr s P.Text -- ^ @port_id@ - 'P.portId'
     -> P.Resource (NetworkingFloatingipAssociateV2Resource s)
 networkingFloatingipAssociateV2Resource _floatingIp _portId =
-    TF.newResource "openstack_networking_floatingip_associate_v2" TF.validator $
+    TF.unsafeResource "openstack_networking_floatingip_associate_v2" P.defaultProvider TF.validator $
         NetworkingFloatingipAssociateV2Resource'
             { _floatingIp = _floatingIp
             , _portId = _portId
@@ -3885,16 +3844,16 @@ data NetworkingFloatingipV2Resource s = NetworkingFloatingipV2Resource'
     , _subnetId   :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Optional)
     --
-    , _valueSpecs :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _valueSpecs :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkingFloatingipV2Resource
     :: TF.Attr s P.Text -- ^ @pool@ - 'P.pool'
     -> P.Resource (NetworkingFloatingipV2Resource s)
 networkingFloatingipV2Resource _pool =
-    TF.newResource "openstack_networking_floatingip_v2" TF.validator $
+    TF.unsafeResource "openstack_networking_floatingip_v2" P.defaultProvider TF.validator $
         NetworkingFloatingipV2Resource'
             { _pool = _pool
             , _subnetId = TF.Nil
@@ -3921,9 +3880,9 @@ instance P.HasSubnetId (NetworkingFloatingipV2Resource s) (TF.Attr s P.Text) whe
         P.lens (_subnetId :: NetworkingFloatingipV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _subnetId = a } :: NetworkingFloatingipV2Resource s)
 
-instance P.HasValueSpecs (NetworkingFloatingipV2Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasValueSpecs (NetworkingFloatingipV2Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     valueSpecs =
-        P.lens (_valueSpecs :: NetworkingFloatingipV2Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_valueSpecs :: NetworkingFloatingipV2Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: NetworkingFloatingipV2Resource s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (NetworkingFloatingipV2Resource s)) (TF.Attr s P.Text) where
@@ -3949,18 +3908,18 @@ data NetworkingNetworkV2Resource s = NetworkingNetworkV2Resource'
     { _name       :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _segments   :: TF.Attr s [TF.Attr s (NetworkingNetworkV2Segments s)]
+    , _segments   :: TF.Attr s [TF.Attr s (SegmentsSetting s)]
     -- ^ @segments@ - (Optional, Forces New)
     --
-    , _valueSpecs :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _valueSpecs :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkingNetworkV2Resource
     :: P.Resource (NetworkingNetworkV2Resource s)
 networkingNetworkV2Resource =
-    TF.newResource "openstack_networking_network_v2" TF.validator $
+    TF.unsafeResource "openstack_networking_network_v2" P.defaultProvider TF.validator $
         NetworkingNetworkV2Resource'
             { _name = TF.Nil
             , _segments = TF.Nil
@@ -3976,24 +3935,20 @@ instance TF.IsObject (NetworkingNetworkV2Resource s) where
 
 instance TF.IsValid (NetworkingNetworkV2Resource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_segments"
-                  (_segments
-                      :: NetworkingNetworkV2Resource s -> TF.Attr s [TF.Attr s (NetworkingNetworkV2Segments s)])
-                  TF.validator
 
 instance P.HasName (NetworkingNetworkV2Resource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: NetworkingNetworkV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: NetworkingNetworkV2Resource s)
 
-instance P.HasSegments (NetworkingNetworkV2Resource s) (TF.Attr s [TF.Attr s (NetworkingNetworkV2Segments s)]) where
+instance P.HasSegments (NetworkingNetworkV2Resource s) (TF.Attr s [TF.Attr s (SegmentsSetting s)]) where
     segments =
-        P.lens (_segments :: NetworkingNetworkV2Resource s -> TF.Attr s [TF.Attr s (NetworkingNetworkV2Segments s)])
+        P.lens (_segments :: NetworkingNetworkV2Resource s -> TF.Attr s [TF.Attr s (SegmentsSetting s)])
                (\s a -> s { _segments = a } :: NetworkingNetworkV2Resource s)
 
-instance P.HasValueSpecs (NetworkingNetworkV2Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasValueSpecs (NetworkingNetworkV2Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     valueSpecs =
-        P.lens (_valueSpecs :: NetworkingNetworkV2Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_valueSpecs :: NetworkingNetworkV2Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: NetworkingNetworkV2Resource s)
 
 instance s ~ s' => P.HasComputedAdminStateUp (TF.Ref s' (NetworkingNetworkV2Resource s)) (TF.Attr s P.Text) where
@@ -4019,10 +3974,10 @@ instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (NetworkingNetworkV2Resource
 -- See the <https://www.terraform.io/docs/providers/openstack/r/networking_port_v2.html terraform documentation>
 -- for more information.
 data NetworkingPortV2Resource s = NetworkingPortV2Resource'
-    { _allowedAddressPairs :: TF.Attr s [TF.Attr s (NetworkingPortV2AllowedAddressPairs s)]
+    { _allowedAddressPairs :: TF.Attr s [TF.Attr s (AllowedAddressPairsSetting s)]
     -- ^ @allowed_address_pairs@ - (Optional)
     --
-    , _fixedIp :: TF.Attr s [TF.Attr s (NetworkingPortV2FixedIp s)]
+    , _fixedIp :: TF.Attr s [TF.Attr s (FixedIpSetting s)]
     -- ^ @fixed_ip@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
@@ -4037,16 +3992,16 @@ data NetworkingPortV2Resource s = NetworkingPortV2Resource'
     , _securityGroupIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @security_group_ids@ - (Optional)
     --
-    , _valueSpecs :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _valueSpecs :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkingPortV2Resource
     :: TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
     -> P.Resource (NetworkingPortV2Resource s)
 networkingPortV2Resource _networkId =
-    TF.newResource "openstack_networking_port_v2" TF.validator $
+    TF.unsafeResource "openstack_networking_port_v2" P.defaultProvider TF.validator $
         NetworkingPortV2Resource'
             { _allowedAddressPairs = TF.Nil
             , _fixedIp = TF.Nil
@@ -4070,23 +4025,15 @@ instance TF.IsObject (NetworkingPortV2Resource s) where
 
 instance TF.IsValid (NetworkingPortV2Resource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_allowedAddressPairs"
-                  (_allowedAddressPairs
-                      :: NetworkingPortV2Resource s -> TF.Attr s [TF.Attr s (NetworkingPortV2AllowedAddressPairs s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_fixedIp"
-                  (_fixedIp
-                      :: NetworkingPortV2Resource s -> TF.Attr s [TF.Attr s (NetworkingPortV2FixedIp s)])
-                  TF.validator
 
-instance P.HasAllowedAddressPairs (NetworkingPortV2Resource s) (TF.Attr s [TF.Attr s (NetworkingPortV2AllowedAddressPairs s)]) where
+instance P.HasAllowedAddressPairs (NetworkingPortV2Resource s) (TF.Attr s [TF.Attr s (AllowedAddressPairsSetting s)]) where
     allowedAddressPairs =
-        P.lens (_allowedAddressPairs :: NetworkingPortV2Resource s -> TF.Attr s [TF.Attr s (NetworkingPortV2AllowedAddressPairs s)])
+        P.lens (_allowedAddressPairs :: NetworkingPortV2Resource s -> TF.Attr s [TF.Attr s (AllowedAddressPairsSetting s)])
                (\s a -> s { _allowedAddressPairs = a } :: NetworkingPortV2Resource s)
 
-instance P.HasFixedIp (NetworkingPortV2Resource s) (TF.Attr s [TF.Attr s (NetworkingPortV2FixedIp s)]) where
+instance P.HasFixedIp (NetworkingPortV2Resource s) (TF.Attr s [TF.Attr s (FixedIpSetting s)]) where
     fixedIp =
-        P.lens (_fixedIp :: NetworkingPortV2Resource s -> TF.Attr s [TF.Attr s (NetworkingPortV2FixedIp s)])
+        P.lens (_fixedIp :: NetworkingPortV2Resource s -> TF.Attr s [TF.Attr s (FixedIpSetting s)])
                (\s a -> s { _fixedIp = a } :: NetworkingPortV2Resource s)
 
 instance P.HasName (NetworkingPortV2Resource s) (TF.Attr s P.Text) where
@@ -4109,9 +4056,9 @@ instance P.HasSecurityGroupIds (NetworkingPortV2Resource s) (TF.Attr s [TF.Attr 
         P.lens (_securityGroupIds :: NetworkingPortV2Resource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _securityGroupIds = a } :: NetworkingPortV2Resource s)
 
-instance P.HasValueSpecs (NetworkingPortV2Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasValueSpecs (NetworkingPortV2Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     valueSpecs =
-        P.lens (_valueSpecs :: NetworkingPortV2Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_valueSpecs :: NetworkingPortV2Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: NetworkingPortV2Resource s)
 
 instance s ~ s' => P.HasComputedAdminStateUp (TF.Ref s' (NetworkingPortV2Resource s)) (TF.Attr s P.Bool) where
@@ -4146,13 +4093,13 @@ data NetworkingRouterInterfaceV2Resource s = NetworkingRouterInterfaceV2Resource
     { _routerId :: TF.Attr s P.Text
     -- ^ @router_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkingRouterInterfaceV2Resource
     :: TF.Attr s P.Text -- ^ @router_id@ - 'P.routerId'
     -> P.Resource (NetworkingRouterInterfaceV2Resource s)
 networkingRouterInterfaceV2Resource _routerId =
-    TF.newResource "openstack_networking_router_interface_v2" TF.validator $
+    TF.unsafeResource "openstack_networking_router_interface_v2" P.defaultProvider TF.validator $
         NetworkingRouterInterfaceV2Resource'
             { _routerId = _routerId
             }
@@ -4193,7 +4140,7 @@ data NetworkingRouterRouteV2Resource s = NetworkingRouterRouteV2Resource'
     , _routerId        :: TF.Attr s P.Text
     -- ^ @router_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkingRouterRouteV2Resource
     :: TF.Attr s P.Text -- ^ @destination_cidr@ - 'P.destinationCidr'
@@ -4201,7 +4148,7 @@ networkingRouterRouteV2Resource
     -> TF.Attr s P.Text -- ^ @router_id@ - 'P.routerId'
     -> P.Resource (NetworkingRouterRouteV2Resource s)
 networkingRouterRouteV2Resource _destinationCidr _nextHop _routerId =
-    TF.newResource "openstack_networking_router_route_v2" TF.validator $
+    TF.unsafeResource "openstack_networking_router_route_v2" P.defaultProvider TF.validator $
         NetworkingRouterRouteV2Resource'
             { _destinationCidr = _destinationCidr
             , _nextHop = _nextHop
@@ -4244,18 +4191,18 @@ data NetworkingRouterV2Resource s = NetworkingRouterV2Resource'
     { _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _valueSpecs    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _valueSpecs    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
-    , _vendorOptions :: TF.Attr s (NetworkingRouterV2VendorOptions s)
+    , _vendorOptions :: TF.Attr s (VendorOptionsSetting s)
     -- ^ @vendor_options@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkingRouterV2Resource
     :: P.Resource (NetworkingRouterV2Resource s)
 networkingRouterV2Resource =
-    TF.newResource "openstack_networking_router_v2" TF.validator $
+    TF.unsafeResource "openstack_networking_router_v2" P.defaultProvider TF.validator $
         NetworkingRouterV2Resource'
             { _name = TF.Nil
             , _valueSpecs = TF.Nil
@@ -4273,7 +4220,7 @@ instance TF.IsValid (NetworkingRouterV2Resource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_vendorOptions"
                   (_vendorOptions
-                      :: NetworkingRouterV2Resource s -> TF.Attr s (NetworkingRouterV2VendorOptions s))
+                      :: NetworkingRouterV2Resource s -> TF.Attr s (VendorOptionsSetting s))
                   TF.validator
 
 instance P.HasName (NetworkingRouterV2Resource s) (TF.Attr s P.Text) where
@@ -4281,14 +4228,14 @@ instance P.HasName (NetworkingRouterV2Resource s) (TF.Attr s P.Text) where
         P.lens (_name :: NetworkingRouterV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: NetworkingRouterV2Resource s)
 
-instance P.HasValueSpecs (NetworkingRouterV2Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasValueSpecs (NetworkingRouterV2Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     valueSpecs =
-        P.lens (_valueSpecs :: NetworkingRouterV2Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_valueSpecs :: NetworkingRouterV2Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: NetworkingRouterV2Resource s)
 
-instance P.HasVendorOptions (NetworkingRouterV2Resource s) (TF.Attr s (NetworkingRouterV2VendorOptions s)) where
+instance P.HasVendorOptions (NetworkingRouterV2Resource s) (TF.Attr s (VendorOptionsSetting s)) where
     vendorOptions =
-        P.lens (_vendorOptions :: NetworkingRouterV2Resource s -> TF.Attr s (NetworkingRouterV2VendorOptions s))
+        P.lens (_vendorOptions :: NetworkingRouterV2Resource s -> TF.Attr s (VendorOptionsSetting s))
                (\s a -> s { _vendorOptions = a } :: NetworkingRouterV2Resource s)
 
 instance s ~ s' => P.HasComputedAdminStateUp (TF.Ref s' (NetworkingRouterV2Resource s)) (TF.Attr s P.Bool) where
@@ -4303,7 +4250,7 @@ instance s ~ s' => P.HasComputedDistributed (TF.Ref s' (NetworkingRouterV2Resour
 instance s ~ s' => P.HasComputedEnableSnat (TF.Ref s' (NetworkingRouterV2Resource s)) (TF.Attr s P.Bool) where
     computedEnableSnat x = TF.compute (TF.refKey x) "enable_snat"
 
-instance s ~ s' => P.HasComputedExternalFixedIp (TF.Ref s' (NetworkingRouterV2Resource s)) (TF.Attr s [TF.Attr s (NetworkingRouterV2ExternalFixedIp s)]) where
+instance s ~ s' => P.HasComputedExternalFixedIp (TF.Ref s' (NetworkingRouterV2Resource s)) (TF.Attr s [TF.Attr s (ExternalFixedIpSetting s)]) where
     computedExternalFixedIp x = TF.compute (TF.refKey x) "external_fixed_ip"
 
 instance s ~ s' => P.HasComputedExternalNetworkId (TF.Ref s' (NetworkingRouterV2Resource s)) (TF.Attr s P.Text) where
@@ -4329,7 +4276,7 @@ data NetworkingSecgroupRuleV2Resource s = NetworkingSecgroupRuleV2Resource'
     , _securityGroupId :: TF.Attr s P.Text
     -- ^ @security_group_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkingSecgroupRuleV2Resource
     :: TF.Attr s P.Text -- ^ @direction@ - 'P.direction'
@@ -4337,7 +4284,7 @@ networkingSecgroupRuleV2Resource
     -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
     -> P.Resource (NetworkingSecgroupRuleV2Resource s)
 networkingSecgroupRuleV2Resource _direction _ethertype _securityGroupId =
-    TF.newResource "openstack_networking_secgroup_rule_v2" TF.validator $
+    TF.unsafeResource "openstack_networking_secgroup_rule_v2" P.defaultProvider TF.validator $
         NetworkingSecgroupRuleV2Resource'
             { _direction = _direction
             , _ethertype = _ethertype
@@ -4369,10 +4316,10 @@ instance P.HasSecurityGroupId (NetworkingSecgroupRuleV2Resource s) (TF.Attr s P.
         P.lens (_securityGroupId :: NetworkingSecgroupRuleV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _securityGroupId = a } :: NetworkingSecgroupRuleV2Resource s)
 
-instance s ~ s' => P.HasComputedPortRangeMax (TF.Ref s' (NetworkingSecgroupRuleV2Resource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedPortRangeMax (TF.Ref s' (NetworkingSecgroupRuleV2Resource s)) (TF.Attr s P.Int) where
     computedPortRangeMax x = TF.compute (TF.refKey x) "port_range_max"
 
-instance s ~ s' => P.HasComputedPortRangeMin (TF.Ref s' (NetworkingSecgroupRuleV2Resource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedPortRangeMin (TF.Ref s' (NetworkingSecgroupRuleV2Resource s)) (TF.Attr s P.Int) where
     computedPortRangeMin x = TF.compute (TF.refKey x) "port_range_min"
 
 instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (NetworkingSecgroupRuleV2Resource s)) (TF.Attr s P.Text) where
@@ -4401,13 +4348,13 @@ data NetworkingSecgroupV2Resource s = NetworkingSecgroupV2Resource'
     , _name               :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkingSecgroupV2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NetworkingSecgroupV2Resource s)
 networkingSecgroupV2Resource _name =
-    TF.newResource "openstack_networking_secgroup_v2" TF.validator $
+    TF.unsafeResource "openstack_networking_secgroup_v2" P.defaultProvider TF.validator $
         NetworkingSecgroupV2Resource'
             { _deleteDefaultRules = TF.Nil
             , _name = _name
@@ -4455,7 +4402,7 @@ data NetworkingSubnetRouteV2Resource s = NetworkingSubnetRouteV2Resource'
     , _subnetId        :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkingSubnetRouteV2Resource
     :: TF.Attr s P.Text -- ^ @destination_cidr@ - 'P.destinationCidr'
@@ -4463,7 +4410,7 @@ networkingSubnetRouteV2Resource
     -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> P.Resource (NetworkingSubnetRouteV2Resource s)
 networkingSubnetRouteV2Resource _destinationCidr _nextHop _subnetId =
-    TF.newResource "openstack_networking_subnet_route_v2" TF.validator $
+    TF.unsafeResource "openstack_networking_subnet_route_v2" P.defaultProvider TF.validator $
         NetworkingSubnetRouteV2Resource'
             { _destinationCidr = _destinationCidr
             , _nextHop = _nextHop
@@ -4509,10 +4456,10 @@ data NetworkingSubnetV2Resource s = NetworkingSubnetV2Resource'
     , _enableDhcp     :: TF.Attr s P.Bool
     -- ^ @enable_dhcp@ - (Optional)
     --
-    , _hostRoutes     :: TF.Attr s [TF.Attr s (NetworkingSubnetV2HostRoutes s)]
+    , _hostRoutes     :: TF.Attr s [TF.Attr s (HostRoutesSetting s)]
     -- ^ @host_routes@ - (Optional)
     --
-    , _ipVersion      :: TF.Attr s P.Integer
+    , _ipVersion      :: TF.Attr s P.Int
     -- ^ @ip_version@ - (Optional, Forces New)
     --
     , _name           :: TF.Attr s P.Text
@@ -4527,16 +4474,16 @@ data NetworkingSubnetV2Resource s = NetworkingSubnetV2Resource'
     , _subnetpoolId   :: TF.Attr s P.Text
     -- ^ @subnetpool_id@ - (Optional, Forces New)
     --
-    , _valueSpecs     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _valueSpecs     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkingSubnetV2Resource
     :: TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
     -> P.Resource (NetworkingSubnetV2Resource s)
 networkingSubnetV2Resource _networkId =
-    TF.newResource "openstack_networking_subnet_v2" TF.validator $
+    TF.unsafeResource "openstack_networking_subnet_v2" P.defaultProvider TF.validator $
         NetworkingSubnetV2Resource'
             { _dnsNameservers = TF.Nil
             , _enableDhcp = TF.value P.True
@@ -4564,10 +4511,6 @@ instance TF.IsObject (NetworkingSubnetV2Resource s) where
 
 instance TF.IsValid (NetworkingSubnetV2Resource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_hostRoutes"
-                  (_hostRoutes
-                      :: NetworkingSubnetV2Resource s -> TF.Attr s [TF.Attr s (NetworkingSubnetV2HostRoutes s)])
-                  TF.validator
 
 instance P.HasDnsNameservers (NetworkingSubnetV2Resource s) (TF.Attr s [TF.Attr s P.Text]) where
     dnsNameservers =
@@ -4579,14 +4522,14 @@ instance P.HasEnableDhcp (NetworkingSubnetV2Resource s) (TF.Attr s P.Bool) where
         P.lens (_enableDhcp :: NetworkingSubnetV2Resource s -> TF.Attr s P.Bool)
                (\s a -> s { _enableDhcp = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasHostRoutes (NetworkingSubnetV2Resource s) (TF.Attr s [TF.Attr s (NetworkingSubnetV2HostRoutes s)]) where
+instance P.HasHostRoutes (NetworkingSubnetV2Resource s) (TF.Attr s [TF.Attr s (HostRoutesSetting s)]) where
     hostRoutes =
-        P.lens (_hostRoutes :: NetworkingSubnetV2Resource s -> TF.Attr s [TF.Attr s (NetworkingSubnetV2HostRoutes s)])
+        P.lens (_hostRoutes :: NetworkingSubnetV2Resource s -> TF.Attr s [TF.Attr s (HostRoutesSetting s)])
                (\s a -> s { _hostRoutes = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasIpVersion (NetworkingSubnetV2Resource s) (TF.Attr s P.Integer) where
+instance P.HasIpVersion (NetworkingSubnetV2Resource s) (TF.Attr s P.Int) where
     ipVersion =
-        P.lens (_ipVersion :: NetworkingSubnetV2Resource s -> TF.Attr s P.Integer)
+        P.lens (_ipVersion :: NetworkingSubnetV2Resource s -> TF.Attr s P.Int)
                (\s a -> s { _ipVersion = a } :: NetworkingSubnetV2Resource s)
 
 instance P.HasName (NetworkingSubnetV2Resource s) (TF.Attr s P.Text) where
@@ -4609,12 +4552,12 @@ instance P.HasSubnetpoolId (NetworkingSubnetV2Resource s) (TF.Attr s P.Text) whe
         P.lens (_subnetpoolId :: NetworkingSubnetV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _subnetpoolId = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasValueSpecs (NetworkingSubnetV2Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasValueSpecs (NetworkingSubnetV2Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     valueSpecs =
-        P.lens (_valueSpecs :: NetworkingSubnetV2Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_valueSpecs :: NetworkingSubnetV2Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: NetworkingSubnetV2Resource s)
 
-instance s ~ s' => P.HasComputedAllocationPools (TF.Ref s' (NetworkingSubnetV2Resource s)) (TF.Attr s [TF.Attr s (NetworkingSubnetV2AllocationPools s)]) where
+instance s ~ s' => P.HasComputedAllocationPools (TF.Ref s' (NetworkingSubnetV2Resource s)) (TF.Attr s [TF.Attr s (AllocationPoolsSetting s)]) where
     computedAllocationPools x = TF.compute (TF.refKey x) "allocation_pools"
 
 instance s ~ s' => P.HasComputedCidr (TF.Ref s' (NetworkingSubnetV2Resource s)) (TF.Attr s P.Text) where
@@ -4643,7 +4586,7 @@ data NetworkingSubnetpoolV2Resource s = NetworkingSubnetpoolV2Resource'
     { _addressScopeId :: TF.Attr s P.Text
     -- ^ @address_scope_id@ - (Optional)
     --
-    , _defaultQuota   :: TF.Attr s P.Integer
+    , _defaultQuota   :: TF.Attr s P.Int
     -- ^ @default_quota@ - (Optional)
     --
     , _description    :: TF.Attr s P.Text
@@ -4661,17 +4604,17 @@ data NetworkingSubnetpoolV2Resource s = NetworkingSubnetpoolV2Resource'
     , _shared         :: TF.Attr s P.Bool
     -- ^ @shared@ - (Optional)
     --
-    , _valueSpecs     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _valueSpecs     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkingSubnetpoolV2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @prefixes@ - 'P.prefixes'
     -> P.Resource (NetworkingSubnetpoolV2Resource s)
 networkingSubnetpoolV2Resource _name _prefixes =
-    TF.newResource "openstack_networking_subnetpool_v2" TF.validator $
+    TF.unsafeResource "openstack_networking_subnetpool_v2" P.defaultProvider TF.validator $
         NetworkingSubnetpoolV2Resource'
             { _addressScopeId = TF.Nil
             , _defaultQuota = TF.Nil
@@ -4703,9 +4646,9 @@ instance P.HasAddressScopeId (NetworkingSubnetpoolV2Resource s) (TF.Attr s P.Tex
         P.lens (_addressScopeId :: NetworkingSubnetpoolV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _addressScopeId = a } :: NetworkingSubnetpoolV2Resource s)
 
-instance P.HasDefaultQuota (NetworkingSubnetpoolV2Resource s) (TF.Attr s P.Integer) where
+instance P.HasDefaultQuota (NetworkingSubnetpoolV2Resource s) (TF.Attr s P.Int) where
     defaultQuota =
-        P.lens (_defaultQuota :: NetworkingSubnetpoolV2Resource s -> TF.Attr s P.Integer)
+        P.lens (_defaultQuota :: NetworkingSubnetpoolV2Resource s -> TF.Attr s P.Int)
                (\s a -> s { _defaultQuota = a } :: NetworkingSubnetpoolV2Resource s)
 
 instance P.HasDescription (NetworkingSubnetpoolV2Resource s) (TF.Attr s P.Text) where
@@ -4733,24 +4676,24 @@ instance P.HasShared (NetworkingSubnetpoolV2Resource s) (TF.Attr s P.Bool) where
         P.lens (_shared :: NetworkingSubnetpoolV2Resource s -> TF.Attr s P.Bool)
                (\s a -> s { _shared = a } :: NetworkingSubnetpoolV2Resource s)
 
-instance P.HasValueSpecs (NetworkingSubnetpoolV2Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasValueSpecs (NetworkingSubnetpoolV2Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     valueSpecs =
-        P.lens (_valueSpecs :: NetworkingSubnetpoolV2Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_valueSpecs :: NetworkingSubnetpoolV2Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: NetworkingSubnetpoolV2Resource s)
 
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (NetworkingSubnetpoolV2Resource s)) (TF.Attr s P.Text) where
     computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance s ~ s' => P.HasComputedDefaultPrefixlen (TF.Ref s' (NetworkingSubnetpoolV2Resource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedDefaultPrefixlen (TF.Ref s' (NetworkingSubnetpoolV2Resource s)) (TF.Attr s P.Int) where
     computedDefaultPrefixlen x = TF.compute (TF.refKey x) "default_prefixlen"
 
-instance s ~ s' => P.HasComputedIpVersion (TF.Ref s' (NetworkingSubnetpoolV2Resource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedIpVersion (TF.Ref s' (NetworkingSubnetpoolV2Resource s)) (TF.Attr s P.Int) where
     computedIpVersion x = TF.compute (TF.refKey x) "ip_version"
 
-instance s ~ s' => P.HasComputedMaxPrefixlen (TF.Ref s' (NetworkingSubnetpoolV2Resource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedMaxPrefixlen (TF.Ref s' (NetworkingSubnetpoolV2Resource s)) (TF.Attr s P.Int) where
     computedMaxPrefixlen x = TF.compute (TF.refKey x) "max_prefixlen"
 
-instance s ~ s' => P.HasComputedMinPrefixlen (TF.Ref s' (NetworkingSubnetpoolV2Resource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedMinPrefixlen (TF.Ref s' (NetworkingSubnetpoolV2Resource s)) (TF.Attr s P.Int) where
     computedMinPrefixlen x = TF.compute (TF.refKey x) "min_prefixlen"
 
 instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (NetworkingSubnetpoolV2Resource s)) (TF.Attr s P.Text) where
@@ -4759,7 +4702,7 @@ instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (NetworkingSubnetpoolV2Reso
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (NetworkingSubnetpoolV2Resource s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedRevisionNumber (TF.Ref s' (NetworkingSubnetpoolV2Resource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedRevisionNumber (TF.Ref s' (NetworkingSubnetpoolV2Resource s)) (TF.Attr s P.Int) where
     computedRevisionNumber x = TF.compute (TF.refKey x) "revision_number"
 
 instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (NetworkingSubnetpoolV2Resource s)) (TF.Attr s P.Text) where
@@ -4788,19 +4731,19 @@ data ObjectstorageContainerV1Resource s = ObjectstorageContainerV1Resource'
     , _forceDestroy     :: TF.Attr s P.Bool
     -- ^ @force_destroy@ - (Optional)
     --
-    , _metadata         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _metadata         :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @metadata@ - (Optional)
     --
     , _name             :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 objectstorageContainerV1Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ObjectstorageContainerV1Resource s)
 objectstorageContainerV1Resource _name =
-    TF.newResource "openstack_objectstorage_container_v1" TF.validator $
+    TF.unsafeResource "openstack_objectstorage_container_v1" P.defaultProvider TF.validator $
         ObjectstorageContainerV1Resource'
             { _containerRead = TF.Nil
             , _containerSyncKey = TF.Nil
@@ -4857,9 +4800,9 @@ instance P.HasForceDestroy (ObjectstorageContainerV1Resource s) (TF.Attr s P.Boo
         P.lens (_forceDestroy :: ObjectstorageContainerV1Resource s -> TF.Attr s P.Bool)
                (\s a -> s { _forceDestroy = a } :: ObjectstorageContainerV1Resource s)
 
-instance P.HasMetadata (ObjectstorageContainerV1Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasMetadata (ObjectstorageContainerV1Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     metadata =
-        P.lens (_metadata :: ObjectstorageContainerV1Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_metadata :: ObjectstorageContainerV1Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _metadata = a } :: ObjectstorageContainerV1Resource s)
 
 instance P.HasName (ObjectstorageContainerV1Resource s) (TF.Attr s P.Text) where
@@ -4883,22 +4826,22 @@ data ObjectstorageObjectV1Resource s = ObjectstorageObjectV1Resource'
     --
     -- Conflicts with:
     --
-    -- * 'source'
     -- * 'copyFrom'
+    -- * 'source'
     , _copyFrom          :: TF.Attr s P.Text
     -- ^ @copy_from@ - (Optional)
     --
     -- Conflicts with:
     --
-    -- * 'source'
     -- * 'content'
-    , _deleteAfter       :: TF.Attr s P.Integer
+    -- * 'source'
+    , _deleteAfter       :: TF.Attr s P.Int
     -- ^ @delete_after@ - (Optional)
     --
     , _detectContentType :: TF.Attr s P.Bool
     -- ^ @detect_content_type@ - (Optional)
     --
-    , _metadata          :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _metadata          :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @metadata@ - (Optional)
     --
     , _name              :: TF.Attr s P.Text
@@ -4909,16 +4852,16 @@ data ObjectstorageObjectV1Resource s = ObjectstorageObjectV1Resource'
     --
     -- Conflicts with:
     --
-    -- * 'copyFrom'
     -- * 'content'
-    } deriving (P.Show, P.Eq, P.Generic)
+    -- * 'copyFrom'
+    } deriving (P.Show, P.Eq, P.Ord)
 
 objectstorageObjectV1Resource
     :: TF.Attr s P.Text -- ^ @container_name@ - 'P.containerName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ObjectstorageObjectV1Resource s)
 objectstorageObjectV1Resource _containerName _name =
-    TF.newResource "openstack_objectstorage_object_v1" TF.validator $
+    TF.unsafeResource "openstack_objectstorage_object_v1" P.defaultProvider TF.validator $
         ObjectstorageObjectV1Resource'
             { _containerName = _containerName
             , _content = TF.Nil
@@ -4947,17 +4890,17 @@ instance TF.IsValid (ObjectstorageObjectV1Resource s) where
         [ if (_content P.== TF.Nil)
               then P.Nothing
               else P.Just ("_content",
-                            [ "_source"                            , "_copyFrom"
+                            [ "_copyFrom"                            , "_source"
                             ])
         , if (_copyFrom P.== TF.Nil)
               then P.Nothing
               else P.Just ("_copyFrom",
-                            [ "_source"                            , "_content"
+                            [ "_content"                            , "_source"
                             ])
         , if (_source P.== TF.Nil)
               then P.Nothing
               else P.Just ("_source",
-                            [ "_copyFrom"                            , "_content"
+                            [ "_content"                            , "_copyFrom"
                             ])
         ])
 
@@ -4976,9 +4919,9 @@ instance P.HasCopyFrom (ObjectstorageObjectV1Resource s) (TF.Attr s P.Text) wher
         P.lens (_copyFrom :: ObjectstorageObjectV1Resource s -> TF.Attr s P.Text)
                (\s a -> s { _copyFrom = a } :: ObjectstorageObjectV1Resource s)
 
-instance P.HasDeleteAfter (ObjectstorageObjectV1Resource s) (TF.Attr s P.Integer) where
+instance P.HasDeleteAfter (ObjectstorageObjectV1Resource s) (TF.Attr s P.Int) where
     deleteAfter =
-        P.lens (_deleteAfter :: ObjectstorageObjectV1Resource s -> TF.Attr s P.Integer)
+        P.lens (_deleteAfter :: ObjectstorageObjectV1Resource s -> TF.Attr s P.Int)
                (\s a -> s { _deleteAfter = a } :: ObjectstorageObjectV1Resource s)
 
 instance P.HasDetectContentType (ObjectstorageObjectV1Resource s) (TF.Attr s P.Bool) where
@@ -4986,9 +4929,9 @@ instance P.HasDetectContentType (ObjectstorageObjectV1Resource s) (TF.Attr s P.B
         P.lens (_detectContentType :: ObjectstorageObjectV1Resource s -> TF.Attr s P.Bool)
                (\s a -> s { _detectContentType = a } :: ObjectstorageObjectV1Resource s)
 
-instance P.HasMetadata (ObjectstorageObjectV1Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasMetadata (ObjectstorageObjectV1Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     metadata =
-        P.lens (_metadata :: ObjectstorageObjectV1Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_metadata :: ObjectstorageObjectV1Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _metadata = a } :: ObjectstorageObjectV1Resource s)
 
 instance P.HasName (ObjectstorageObjectV1Resource s) (TF.Attr s P.Text) where
@@ -5007,7 +4950,7 @@ instance s ~ s' => P.HasComputedContentDisposition (TF.Ref s' (ObjectstorageObje
 instance s ~ s' => P.HasComputedContentEncoding (TF.Ref s' (ObjectstorageObjectV1Resource s)) (TF.Attr s P.Text) where
     computedContentEncoding x = TF.compute (TF.refKey x) "content_encoding"
 
-instance s ~ s' => P.HasComputedContentLength (TF.Ref s' (ObjectstorageObjectV1Resource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedContentLength (TF.Ref s' (ObjectstorageObjectV1Resource s)) (TF.Attr s P.Int) where
     computedContentLength x = TF.compute (TF.refKey x) "content_length"
 
 instance s ~ s' => P.HasComputedContentType (TF.Ref s' (ObjectstorageObjectV1Resource s)) (TF.Attr s P.Text) where
@@ -5048,15 +4991,15 @@ data VpnaasEndpointGroupV2Resource s = VpnaasEndpointGroupV2Resource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _valueSpecs  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _valueSpecs  :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 vpnaasEndpointGroupV2Resource
     :: P.Resource (VpnaasEndpointGroupV2Resource s)
 vpnaasEndpointGroupV2Resource =
-    TF.newResource "openstack_vpnaas_endpoint_group_v2" TF.validator $
+    TF.unsafeResource "openstack_vpnaas_endpoint_group_v2" P.defaultProvider TF.validator $
         VpnaasEndpointGroupV2Resource'
             { _description = TF.Nil
             , _endpoints = TF.Nil
@@ -5090,9 +5033,9 @@ instance P.HasName (VpnaasEndpointGroupV2Resource s) (TF.Attr s P.Text) where
         P.lens (_name :: VpnaasEndpointGroupV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: VpnaasEndpointGroupV2Resource s)
 
-instance P.HasValueSpecs (VpnaasEndpointGroupV2Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasValueSpecs (VpnaasEndpointGroupV2Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     valueSpecs =
-        P.lens (_valueSpecs :: VpnaasEndpointGroupV2Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_valueSpecs :: VpnaasEndpointGroupV2Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: VpnaasEndpointGroupV2Resource s)
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (VpnaasEndpointGroupV2Resource s)) (TF.Attr s P.Text) where
@@ -5130,15 +5073,15 @@ data VpnaasIkePolicyV2Resource s = VpnaasIkePolicyV2Resource'
     , _phase1NegotiationMode :: TF.Attr s P.Text
     -- ^ @phase1_negotiation_mode@ - (Optional)
     --
-    , _valueSpecs            :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _valueSpecs            :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 vpnaasIkePolicyV2Resource
     :: P.Resource (VpnaasIkePolicyV2Resource s)
 vpnaasIkePolicyV2Resource =
-    TF.newResource "openstack_vpnaas_ike_policy_v2" TF.validator $
+    TF.unsafeResource "openstack_vpnaas_ike_policy_v2" P.defaultProvider TF.validator $
         VpnaasIkePolicyV2Resource'
             { _authAlgorithm = TF.value "sha1"
             , _description = TF.Nil
@@ -5200,12 +5143,12 @@ instance P.HasPhase1NegotiationMode (VpnaasIkePolicyV2Resource s) (TF.Attr s P.T
         P.lens (_phase1NegotiationMode :: VpnaasIkePolicyV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _phase1NegotiationMode = a } :: VpnaasIkePolicyV2Resource s)
 
-instance P.HasValueSpecs (VpnaasIkePolicyV2Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasValueSpecs (VpnaasIkePolicyV2Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     valueSpecs =
-        P.lens (_valueSpecs :: VpnaasIkePolicyV2Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_valueSpecs :: VpnaasIkePolicyV2Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: VpnaasIkePolicyV2Resource s)
 
-instance s ~ s' => P.HasComputedLifetime (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s [TF.Attr s (VpnaasIkePolicyV2Lifetime s)]) where
+instance s ~ s' => P.HasComputedLifetime (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s [TF.Attr s (LifetimeSetting s)]) where
     computedLifetime x = TF.compute (TF.refKey x) "lifetime"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s P.Text) where
@@ -5225,15 +5168,15 @@ data VpnaasIpsecPolicyV2Resource s = VpnaasIpsecPolicyV2Resource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _valueSpecs  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _valueSpecs  :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 vpnaasIpsecPolicyV2Resource
     :: P.Resource (VpnaasIpsecPolicyV2Resource s)
 vpnaasIpsecPolicyV2Resource =
-    TF.newResource "openstack_vpnaas_ipsec_policy_v2" TF.validator $
+    TF.unsafeResource "openstack_vpnaas_ipsec_policy_v2" P.defaultProvider TF.validator $
         VpnaasIpsecPolicyV2Resource'
             { _description = TF.Nil
             , _name = TF.Nil
@@ -5260,9 +5203,9 @@ instance P.HasName (VpnaasIpsecPolicyV2Resource s) (TF.Attr s P.Text) where
         P.lens (_name :: VpnaasIpsecPolicyV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: VpnaasIpsecPolicyV2Resource s)
 
-instance P.HasValueSpecs (VpnaasIpsecPolicyV2Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasValueSpecs (VpnaasIpsecPolicyV2Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     valueSpecs =
-        P.lens (_valueSpecs :: VpnaasIpsecPolicyV2Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_valueSpecs :: VpnaasIpsecPolicyV2Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: VpnaasIpsecPolicyV2Resource s)
 
 instance s ~ s' => P.HasComputedAuthAlgorithm (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s P.Text) where
@@ -5274,7 +5217,7 @@ instance s ~ s' => P.HasComputedEncapsulationMode (TF.Ref s' (VpnaasIpsecPolicyV
 instance s ~ s' => P.HasComputedEncryptionAlgorithm (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s P.Text) where
     computedEncryptionAlgorithm x = TF.compute (TF.refKey x) "encryption_algorithm"
 
-instance s ~ s' => P.HasComputedLifetime (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s [TF.Attr s (VpnaasIpsecPolicyV2Lifetime s)]) where
+instance s ~ s' => P.HasComputedLifetime (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s [TF.Attr s (LifetimeSetting s)]) where
     computedLifetime x = TF.compute (TF.refKey x) "lifetime"
 
 instance s ~ s' => P.HasComputedPfs (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s P.Text) where
@@ -5309,16 +5252,16 @@ data VpnaasServiceV2Resource s = VpnaasServiceV2Resource'
     , _subnetId     :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Optional, Forces New)
     --
-    , _valueSpecs   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _valueSpecs   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 vpnaasServiceV2Resource
     :: TF.Attr s P.Text -- ^ @router_id@ - 'P.routerId'
     -> P.Resource (VpnaasServiceV2Resource s)
 vpnaasServiceV2Resource _routerId =
-    TF.newResource "openstack_vpnaas_service_v2" TF.validator $
+    TF.unsafeResource "openstack_vpnaas_service_v2" P.defaultProvider TF.validator $
         VpnaasServiceV2Resource'
             { _adminStateUp = TF.value P.True
             , _description = TF.Nil
@@ -5366,9 +5309,9 @@ instance P.HasSubnetId (VpnaasServiceV2Resource s) (TF.Attr s P.Text) where
         P.lens (_subnetId :: VpnaasServiceV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _subnetId = a } :: VpnaasServiceV2Resource s)
 
-instance P.HasValueSpecs (VpnaasServiceV2Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasValueSpecs (VpnaasServiceV2Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     valueSpecs =
-        P.lens (_valueSpecs :: VpnaasServiceV2Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_valueSpecs :: VpnaasServiceV2Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: VpnaasServiceV2Resource s)
 
 instance s ~ s' => P.HasComputedExternalV4Ip (TF.Ref s' (VpnaasServiceV2Resource s)) (TF.Attr s P.Text) where
@@ -5427,13 +5370,13 @@ data VpnaasSiteConnectionV2Resource s = VpnaasSiteConnectionV2Resource'
     , _psk            :: TF.Attr s P.Text
     -- ^ @psk@ - (Required)
     --
-    , _valueSpecs     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _valueSpecs     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
     , _vpnserviceId   :: TF.Attr s P.Text
     -- ^ @vpnservice_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 vpnaasSiteConnectionV2Resource
     :: TF.Attr s P.Text -- ^ @ikepolicy_id@ - 'P.ikepolicyId'
@@ -5444,7 +5387,7 @@ vpnaasSiteConnectionV2Resource
     -> TF.Attr s P.Text -- ^ @vpnservice_id@ - 'P.vpnserviceId'
     -> P.Resource (VpnaasSiteConnectionV2Resource s)
 vpnaasSiteConnectionV2Resource _ikepolicyId _ipsecpolicyId _peerAddress _peerId _psk _vpnserviceId =
-    TF.newResource "openstack_vpnaas_site_connection_v2" TF.validator $
+    TF.unsafeResource "openstack_vpnaas_site_connection_v2" P.defaultProvider TF.validator $
         VpnaasSiteConnectionV2Resource'
             { _adminStateUp = TF.value P.False
             , _description = TF.Nil
@@ -5543,9 +5486,9 @@ instance P.HasPsk (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
         P.lens (_psk :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _psk = a } :: VpnaasSiteConnectionV2Resource s)
 
-instance P.HasValueSpecs (VpnaasSiteConnectionV2Resource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasValueSpecs (VpnaasSiteConnectionV2Resource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     valueSpecs =
-        P.lens (_valueSpecs :: VpnaasSiteConnectionV2Resource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_valueSpecs :: VpnaasSiteConnectionV2Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: VpnaasSiteConnectionV2Resource s)
 
 instance P.HasVpnserviceId (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
@@ -5553,13 +5496,13 @@ instance P.HasVpnserviceId (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text)
         P.lens (_vpnserviceId :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _vpnserviceId = a } :: VpnaasSiteConnectionV2Resource s)
 
-instance s ~ s' => P.HasComputedDpd (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s [TF.Attr s (VpnaasSiteConnectionV2Dpd s)]) where
+instance s ~ s' => P.HasComputedDpd (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s [TF.Attr s (DpdSetting s)]) where
     computedDpd x = TF.compute (TF.refKey x) "dpd"
 
 instance s ~ s' => P.HasComputedInitiator (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
     computedInitiator x = TF.compute (TF.refKey x) "initiator"
 
-instance s ~ s' => P.HasComputedMtu (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedMtu (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Int) where
     computedMtu x = TF.compute (TF.refKey x) "mtu"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where

@@ -12,11 +12,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.OpenStack
-    ( module Terrafomo.OpenStack.Settings
+    ( module Terrafomo.OpenStack.DataSource
     , module Terrafomo.OpenStack.Lens
-    , module Terrafomo.OpenStack.Resource
     , module Terrafomo.OpenStack.Provider
-    , module Terrafomo.OpenStack.DataSource
+    , module Terrafomo.OpenStack.Resource
+    , module Terrafomo.OpenStack.Settings
     , module Terrafomo.OpenStack.Types
     -- * Provider Aliases
     ) where
