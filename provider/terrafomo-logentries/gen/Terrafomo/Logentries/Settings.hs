@@ -17,7 +17,6 @@
 --
 module Terrafomo.Logentries.Settings
     (
-    -- * Settings Datatypes
     ) where
 
 import Data.Functor ((<$>))

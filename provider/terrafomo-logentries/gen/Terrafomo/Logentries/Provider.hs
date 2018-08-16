@@ -17,11 +17,10 @@
 --
 module Terrafomo.Logentries.Provider
     (
-    -- * Logentries Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * Logentries Specific Aliases
+    -- ** Logentries Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -78,7 +77,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "logentries"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "account_key" _accountKey
             ]

@@ -17,7 +17,6 @@
 --
 module Terrafomo.Logentries.DataSource
     (
-    -- * DataSource Datatypes
     -- ** logentries_logset
       LogsetData (..)
     , logsetData
@@ -61,6 +60,7 @@ data LogsetData s = LogsetData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @logentries_logset@ datasource value.
 logsetData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (LogsetData s)

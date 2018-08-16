@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Logentries
-    ( module Terrafomo.Logentries.DataSource
-    , module Terrafomo.Logentries.Lens
-    , module Terrafomo.Logentries.Provider
-    , module Terrafomo.Logentries.Resource
-    , module Terrafomo.Logentries.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Logentries.Provider
+
+    -- * Custom Types
     , module Terrafomo.Logentries.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.Logentries.DataSource
+
+    -- * Resources
+    , module Terrafomo.Logentries.Resource
+
+    -- * Settings
+    , module Terrafomo.Logentries.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Logentries.Lens
     ) where
 
 import Terrafomo.Logentries.DataSource

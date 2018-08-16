@@ -17,7 +17,6 @@
 --
 module Terrafomo.Logentries.Resource
     (
-    -- * Resource Datatypes
     -- ** logentries_log
       LogResource (..)
     , logResource
@@ -77,6 +76,7 @@ data LogResource s = LogResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @logentries_log@ resource value.
 logResource
     :: TF.Attr s P.Text -- ^ @logset_id@ - 'P.logsetId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -154,6 +154,7 @@ data LogsetResource s = LogsetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @logentries_logset@ resource value.
 logsetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LogsetResource s)
