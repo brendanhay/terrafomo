@@ -99,7 +99,7 @@ downtimeResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @scope@ - 'P.scope'
     -> P.Resource (DowntimeResource s)
 downtimeResource _scope =
-    TF.unsafeResource "datadog_downtime" P.defaultProvider TF.validator $
+    TF.unsafeResource "datadog_downtime" TF.validator $
         DowntimeResource'
             { _active = TF.Nil
             , _disabled = TF.Nil
@@ -202,7 +202,7 @@ metricMetadataResource
     :: TF.Attr s P.Text -- ^ @metric@ - 'P.metric'
     -> P.Resource (MetricMetadataResource s)
 metricMetadataResource _metric =
-    TF.unsafeResource "datadog_metric_metadata" P.defaultProvider TF.validator $
+    TF.unsafeResource "datadog_metric_metadata" TF.validator $
         MetricMetadataResource'
             { _description = TF.Nil
             , _metric = _metric
@@ -324,7 +324,7 @@ monitorResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (MonitorResource s)
 monitorResource _message _name _query _type' =
-    TF.unsafeResource "datadog_monitor" P.defaultProvider TF.validator $
+    TF.unsafeResource "datadog_monitor" TF.validator $
         MonitorResource'
             { _escalationMessage = TF.Nil
             , _includeTags = TF.value P.True
@@ -485,7 +485,7 @@ timeboardResource
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
     -> P.Resource (TimeboardResource s)
 timeboardResource _description _graph _title =
-    TF.unsafeResource "datadog_timeboard" P.defaultProvider TF.validator $
+    TF.unsafeResource "datadog_timeboard" TF.validator $
         TimeboardResource'
             { _description = _description
             , _graph = _graph
@@ -559,7 +559,7 @@ userResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (UserResource s)
 userResource _email _handle _name =
-    TF.unsafeResource "datadog_user" P.defaultProvider TF.validator $
+    TF.unsafeResource "datadog_user" TF.validator $
         UserResource'
             { _disabled = TF.value P.False
             , _email = _email
