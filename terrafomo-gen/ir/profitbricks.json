@@ -1175,6 +1175,23 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "_description",
+                    "method": "description",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "validate": false,
+                    "optional": true,
+                    "original": "description"
+                },
+                {
                     "default": "_location",
                     "computed": false,
                     "required": true,
@@ -1245,7 +1262,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDescription",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "description"
                 }
             ],
