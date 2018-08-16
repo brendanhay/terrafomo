@@ -161,7 +161,7 @@ affinityGroupResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (AffinityGroupResource s)
 affinityGroupResource _name _type' =
-    TF.unsafeResource "cloudstack_affinity_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_affinity_group" TF.validator $
         AffinityGroupResource'
             { _name = _name
             , _project = TF.Nil
@@ -226,7 +226,7 @@ diskResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (DiskResource s)
 diskResource _name _zone =
-    TF.unsafeResource "cloudstack_disk" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_disk" TF.validator $
         DiskResource'
             { _attach = TF.value P.False
             , _diskOffering = TF.Nil
@@ -314,7 +314,7 @@ egressFirewallResource
     :: TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
     -> P.Resource (EgressFirewallResource s)
 egressFirewallResource _networkId =
-    TF.unsafeResource "cloudstack_egress_firewall" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_egress_firewall" TF.validator $
         EgressFirewallResource'
             { _managed = TF.value P.False
             , _networkId = _networkId
@@ -376,7 +376,7 @@ firewallResource
     :: TF.Attr s P.Text -- ^ @ip_address_id@ - 'P.ipAddressId'
     -> P.Resource (FirewallResource s)
 firewallResource _ipAddressId =
-    TF.unsafeResource "cloudstack_firewall" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_firewall" TF.validator $
         FirewallResource'
             { _ipAddressId = _ipAddressId
             , _managed = TF.value P.False
@@ -470,7 +470,7 @@ instanceResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (InstanceResource s)
 instanceResource _serviceOffering _template _zone =
-    TF.unsafeResource "cloudstack_instance" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_instance" TF.validator $
         InstanceResource'
             { _affinityGroupIds = TF.Nil
             , _affinityGroupNames = TF.Nil
@@ -618,7 +618,7 @@ data IpaddressResource s = IpaddressResource'
 ipaddressResource
     :: P.Resource (IpaddressResource s)
 ipaddressResource =
-    TF.unsafeResource "cloudstack_ipaddress" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_ipaddress" TF.validator $
         IpaddressResource'
             { _isPortable = TF.value P.False
             , _networkId = TF.Nil
@@ -703,7 +703,7 @@ loadbalancerRuleResource
     -> TF.Attr s P.Int -- ^ @public_port@ - 'P.publicPort'
     -> P.Resource (LoadbalancerRuleResource s)
 loadbalancerRuleResource _algorithm _ipAddressId _memberIds _name _privatePort _publicPort =
-    TF.unsafeResource "cloudstack_loadbalancer_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_loadbalancer_rule" TF.validator $
         LoadbalancerRuleResource'
             { _algorithm = _algorithm
             , _ipAddressId = _ipAddressId
@@ -807,7 +807,7 @@ networkResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (NetworkResource s)
 networkResource _cidr _name _networkOffering _zone =
-    TF.unsafeResource "cloudstack_network" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_network" TF.validator $
         NetworkResource'
             { _aclId = TF.value "none"
             , _cidr = _cidr
@@ -909,7 +909,7 @@ networkAclResource
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.Resource (NetworkAclResource s)
 networkAclResource _name _vpcId =
-    TF.unsafeResource "cloudstack_network_acl" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_network_acl" TF.validator $
         NetworkAclResource'
             { _name = _name
             , _project = TF.Nil
@@ -970,7 +970,7 @@ networkAclRuleResource
     :: TF.Attr s P.Text -- ^ @acl_id@ - 'P.aclId'
     -> P.Resource (NetworkAclRuleResource s)
 networkAclRuleResource _aclId =
-    TF.unsafeResource "cloudstack_network_acl_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_network_acl_rule" TF.validator $
         NetworkAclRuleResource'
             { _aclId = _aclId
             , _managed = TF.value P.False
@@ -1034,7 +1034,7 @@ nicResource
     -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
     -> P.Resource (NicResource s)
 nicResource _networkId _virtualMachineId =
-    TF.unsafeResource "cloudstack_nic" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_nic" TF.validator $
         NicResource'
             { _networkId = _networkId
             , _virtualMachineId = _virtualMachineId
@@ -1086,7 +1086,7 @@ portForwardResource
     -> TF.Attr s P.Text -- ^ @ip_address_id@ - 'P.ipAddressId'
     -> P.Resource (PortForwardResource s)
 portForwardResource _forward _ipAddressId =
-    TF.unsafeResource "cloudstack_port_forward" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_port_forward" TF.validator $
         PortForwardResource'
             { _forward = _forward
             , _ipAddressId = _ipAddressId
@@ -1165,7 +1165,7 @@ privateGatewayResource
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.Resource (PrivateGatewayResource s)
 privateGatewayResource _aclId _gateway _ipAddress _netmask _vlan _vpcId =
-    TF.unsafeResource "cloudstack_private_gateway" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_private_gateway" TF.validator $
         PrivateGatewayResource'
             { _aclId = _aclId
             , _gateway = _gateway
@@ -1246,7 +1246,7 @@ secondaryIpaddressResource
     :: TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
     -> P.Resource (SecondaryIpaddressResource s)
 secondaryIpaddressResource _virtualMachineId =
-    TF.unsafeResource "cloudstack_secondary_ipaddress" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_secondary_ipaddress" TF.validator $
         SecondaryIpaddressResource'
             { _virtualMachineId = _virtualMachineId
             }
@@ -1284,7 +1284,7 @@ securityGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SecurityGroupResource s)
 securityGroupResource _name =
-    TF.unsafeResource "cloudstack_security_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_security_group" TF.validator $
         SecurityGroupResource'
             { _name = _name
             }
@@ -1332,7 +1332,7 @@ securityGroupRuleResource
     -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
     -> P.Resource (SecurityGroupRuleResource s)
 securityGroupRuleResource _rule _securityGroupId =
-    TF.unsafeResource "cloudstack_security_group_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_security_group_rule" TF.validator $
         SecurityGroupRuleResource'
             { _parallelism = TF.value 2
             , _project = TF.Nil
@@ -1391,7 +1391,7 @@ sshKeypairResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SshKeypairResource s)
 sshKeypairResource _name =
-    TF.unsafeResource "cloudstack_ssh_keypair" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_ssh_keypair" TF.validator $
         SshKeypairResource'
             { _name = _name
             , _project = TF.Nil
@@ -1447,7 +1447,7 @@ staticNatResource
     -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
     -> P.Resource (StaticNatResource s)
 staticNatResource _ipAddressId _virtualMachineId =
-    TF.unsafeResource "cloudstack_static_nat" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_static_nat" TF.validator $
         StaticNatResource'
             { _ipAddressId = _ipAddressId
             , _virtualMachineId = _virtualMachineId
@@ -1496,7 +1496,7 @@ staticRouteResource
     -> TF.Attr s P.Text -- ^ @gateway_id@ - 'P.gatewayId'
     -> P.Resource (StaticRouteResource s)
 staticRouteResource _cidr _gatewayId =
-    TF.unsafeResource "cloudstack_static_route" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_static_route" TF.validator $
         StaticRouteResource'
             { _cidr = _cidr
             , _gatewayId = _gatewayId
@@ -1558,7 +1558,7 @@ templateResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (TemplateResource s)
 templateResource _format _hypervisor _name _osType _url _zone =
-    TF.unsafeResource "cloudstack_template" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_template" TF.validator $
         TemplateResource'
             { _format = _format
             , _hypervisor = _hypervisor
@@ -1671,7 +1671,7 @@ vpcResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (VpcResource s)
 vpcResource _cidr _name _vpcOffering _zone =
-    TF.unsafeResource "cloudstack_vpc" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_vpc" TF.validator $
         VpcResource'
             { _cidr = _cidr
             , _name = _name
@@ -1743,7 +1743,7 @@ vpnConnectionResource
     -> TF.Attr s P.Text -- ^ @vpn_gateway_id@ - 'P.vpnGatewayId'
     -> P.Resource (VpnConnectionResource s)
 vpnConnectionResource _customerGatewayId _vpnGatewayId =
-    TF.unsafeResource "cloudstack_vpn_connection" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_vpn_connection" TF.validator $
         VpnConnectionResource'
             { _customerGatewayId = _customerGatewayId
             , _vpnGatewayId = _vpnGatewayId
@@ -1802,7 +1802,7 @@ vpnCustomerGatewayResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (VpnCustomerGatewayResource s)
 vpnCustomerGatewayResource _cidr _espPolicy _gateway _ikePolicy _ipsecPsk _name =
-    TF.unsafeResource "cloudstack_vpn_customer_gateway" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_vpn_customer_gateway" TF.validator $
         VpnCustomerGatewayResource'
             { _cidr = _cidr
             , _espPolicy = _espPolicy
@@ -1881,7 +1881,7 @@ vpnGatewayResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.Resource (VpnGatewayResource s)
 vpnGatewayResource _vpcId =
-    TF.unsafeResource "cloudstack_vpn_gateway" P.defaultProvider TF.validator $
+    TF.unsafeResource "cloudstack_vpn_gateway" TF.validator $
         VpnGatewayResource'
             { _vpcId = _vpcId
             }

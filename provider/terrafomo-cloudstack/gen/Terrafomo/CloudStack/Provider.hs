@@ -123,22 +123,17 @@ newProvider _httpGetOnly _timeout =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "cloudstack"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "api_key" <$> _apiKey
-                  , TF.assign "api_url" <$> _apiUrl
-                  , TF.assign "config" <$> _config
-                  , P.Just $ TF.assign "http_get_only" _httpGetOnly
-                  , TF.assign "profile" <$> _profile
-                  , TF.assign "secret_key" <$> _secretKey
-                  , P.Just $ TF.assign "timeout" _timeout
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ TF.assign "api_key" <$> _apiKey
+            , TF.assign "api_url" <$> _apiUrl
+            , TF.assign "config" <$> _config
+            , P.Just $ TF.assign "http_get_only" _httpGetOnly
+            , TF.assign "profile" <$> _profile
+            , TF.assign "secret_key" <$> _secretKey
+            , P.Just $ TF.assign "timeout" _timeout
+            ]
 
 instance TF.IsValid (Provider) where
     validator = TF.fieldsValidator (\Provider'{..} -> Map.fromList $ P.catMaybes

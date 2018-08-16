@@ -66,7 +66,7 @@ templateData
     -> TF.Attr s P.Text -- ^ @template_filter@ - 'P.templateFilter'
     -> P.DataSource (TemplateData s)
 templateData _filter _templateFilter =
-    TF.unsafeDataSource "cloudstack_template" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "cloudstack_template" TF.validator $
         TemplateData'
             { _filter = _filter
             , _templateFilter = _templateFilter
