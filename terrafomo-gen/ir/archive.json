@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "sourceSetting",
+                "smart": "newSourceSetting",
                 "name": "SourceSetting'"
             },
             "arguments": [
