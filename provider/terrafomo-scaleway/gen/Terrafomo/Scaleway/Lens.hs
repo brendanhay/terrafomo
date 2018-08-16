@@ -17,10 +17,12 @@ module Terrafomo.Scaleway.Lens
     -- ** Arguments
       HasAction (..)
     , HasArchitecture (..)
+    , HasBootType (..)
     , HasBootscript (..)
     , HasDescription (..)
     , HasDirection (..)
     , HasDynamicIpRequired (..)
+    , HasEmail (..)
     , HasEnableDefaultSecurity (..)
     , HasEnableIpv6 (..)
     , HasExpires (..)
@@ -34,11 +36,13 @@ module Terrafomo.Scaleway.Lens
     , HasPassword (..)
     , HasPort (..)
     , HasProtocol (..)
+    , HasPublicIp (..)
     , HasRegion (..)
     , HasReverse (..)
     , HasSecurityGroup (..)
     , HasServer (..)
     , HasSizeInGb (..)
+    , HasState (..)
     , HasTags (..)
     , HasToken (..)
     , HasType' (..)
@@ -94,6 +98,12 @@ class HasArchitecture a b | a -> b where
 instance HasArchitecture a b => HasArchitecture (TF.Schema l p a) b where
     architecture = TF.configuration . architecture
 
+class HasBootType a b | a -> b where
+    bootType :: P.Lens' a b
+
+instance HasBootType a b => HasBootType (TF.Schema l p a) b where
+    bootType = TF.configuration . bootType
+
 class HasBootscript a b | a -> b where
     bootscript :: P.Lens' a b
 
@@ -117,6 +127,12 @@ class HasDynamicIpRequired a b | a -> b where
 
 instance HasDynamicIpRequired a b => HasDynamicIpRequired (TF.Schema l p a) b where
     dynamicIpRequired = TF.configuration . dynamicIpRequired
+
+class HasEmail a b | a -> b where
+    email :: P.Lens' a b
+
+instance HasEmail a b => HasEmail (TF.Schema l p a) b where
+    email = TF.configuration . email
 
 class HasEnableDefaultSecurity a b | a -> b where
     enableDefaultSecurity :: P.Lens' a b
@@ -196,6 +212,12 @@ class HasProtocol a b | a -> b where
 instance HasProtocol a b => HasProtocol (TF.Schema l p a) b where
     protocol = TF.configuration . protocol
 
+class HasPublicIp a b | a -> b where
+    publicIp :: P.Lens' a b
+
+instance HasPublicIp a b => HasPublicIp (TF.Schema l p a) b where
+    publicIp = TF.configuration . publicIp
+
 class HasRegion a b | a -> b where
     region :: P.Lens' a b
 
@@ -225,6 +247,12 @@ class HasSizeInGb a b | a -> b where
 
 instance HasSizeInGb a b => HasSizeInGb (TF.Schema l p a) b where
     sizeInGb = TF.configuration . sizeInGb
+
+class HasState a b | a -> b where
+    state :: P.Lens' a b
+
+instance HasState a b => HasState (TF.Schema l p a) b where
+    state = TF.configuration . state
 
 class HasTags a b | a -> b where
     tags :: P.Lens' a b

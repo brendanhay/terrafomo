@@ -64,11 +64,15 @@ import qualified Terrafomo.Validator         as TF
 -- See the <https://www.terraform.io/docs/providers/scaleway/d/bootscript.html terraform documentation>
 -- for more information.
 data BootscriptData s = BootscriptData'
-    { _name       :: TF.Attr s P.Text
+    { _architecture :: TF.Attr s P.Text
+    -- ^ @architecture@ - (Optional)
+    -- Architecture of the desired bootscript
+    --
+    , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Optional, Forces New)
     -- Exact name of the desired bootscript
     --
-    , _nameFilter :: TF.Attr s P.Text
+    , _nameFilter   :: TF.Attr s P.Text
     -- ^ @name_filter@ - (Optional, Forces New)
     -- Partial name of the desired bootscript to filter with
     --
@@ -80,18 +84,25 @@ bootscriptData
 bootscriptData =
     TF.unsafeDataSource "scaleway_bootscript" TF.validator $
         BootscriptData'
-            { _name = TF.Nil
+            { _architecture = TF.Nil
+            , _name = TF.Nil
             , _nameFilter = TF.Nil
             }
 
 instance TF.IsObject (BootscriptData s) where
     toObject BootscriptData'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.assign "architecture" <$> TF.attribute _architecture
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_filter" <$> TF.attribute _nameFilter
         ]
 
 instance TF.IsValid (BootscriptData s) where
     validator = P.mempty
+
+instance P.HasArchitecture (BootscriptData s) (TF.Attr s P.Text) where
+    architecture =
+        P.lens (_architecture :: BootscriptData s -> TF.Attr s P.Text)
+               (\s a -> s { _architecture = a } :: BootscriptData s)
 
 instance P.HasName (BootscriptData s) (TF.Attr s P.Text) where
     name =
@@ -143,6 +154,10 @@ data ImageData s = ImageData'
     -- Conflicts with:
     --
     -- * 'nameFilter'
+    , _name         :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    -- Exact name of the desired image
+    --
     , _nameFilter   :: TF.Attr s P.Text
     -- ^ @name_filter@ - (Optional, Forces New)
     -- Partial name of the desired image to filter with
@@ -161,6 +176,7 @@ imageData _architecture =
         ImageData'
             { _architecture = _architecture
             , _mostRecent = TF.Nil
+            , _name = TF.Nil
             , _nameFilter = TF.Nil
             }
 
@@ -168,6 +184,7 @@ instance TF.IsObject (ImageData s) where
     toObject ImageData'{..} = P.catMaybes
         [ TF.assign "architecture" <$> TF.attribute _architecture
         , TF.assign "most_recent" <$> TF.attribute _mostRecent
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_filter" <$> TF.attribute _nameFilter
         ]
 
@@ -194,6 +211,11 @@ instance P.HasMostRecent (ImageData s) (TF.Attr s P.Bool) where
     mostRecent =
         P.lens (_mostRecent :: ImageData s -> TF.Attr s P.Bool)
                (\s a -> s { _mostRecent = a } :: ImageData s)
+
+instance P.HasName (ImageData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ImageData s)
 
 instance P.HasNameFilter (ImageData s) (TF.Attr s P.Text) where
     nameFilter =

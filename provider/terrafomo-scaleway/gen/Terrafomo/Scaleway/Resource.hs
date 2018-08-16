@@ -88,6 +88,10 @@ data IpResource s = IpResource'
     -- ^ @reverse@ - (Optional)
     -- The ipv4 reverse dns
     --
+    , _server  :: TF.Attr s P.Text
+    -- ^ @server@ - (Optional)
+    -- The server associated with the ip
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @scaleway_ip@ resource value.
@@ -97,11 +101,13 @@ ipResource =
     TF.unsafeResource "scaleway_ip" TF.validator $
         IpResource'
             { _reverse = TF.Nil
+            , _server = TF.Nil
             }
 
 instance TF.IsObject (IpResource s) where
     toObject IpResource'{..} = P.catMaybes
         [ TF.assign "reverse" <$> TF.attribute _reverse
+        , TF.assign "server" <$> TF.attribute _server
         ]
 
 instance TF.IsValid (IpResource s) where
@@ -111,6 +117,11 @@ instance P.HasReverse (IpResource s) (TF.Attr s P.Text) where
     reverse =
         P.lens (_reverse :: IpResource s -> TF.Attr s P.Text)
                (\s a -> s { _reverse = a } :: IpResource s)
+
+instance P.HasServer (IpResource s) (TF.Attr s P.Text) where
+    server =
+        P.lens (_server :: IpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _server = a } :: IpResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -283,7 +294,11 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupRuleResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/scaleway/r/server.html terraform documentation>
 -- for more information.
 data ServerResource s = ServerResource'
-    { _bootscript        :: TF.Attr s P.Text
+    { _bootType          :: TF.Attr s P.Text
+    -- ^ @boot_type@ - (Optional, Forces New)
+    -- The boot_type of the server
+    --
+    , _bootscript        :: TF.Attr s P.Text
     -- ^ @bootscript@ - (Optional)
     -- The boot configuration of the server
     --
@@ -303,9 +318,17 @@ data ServerResource s = ServerResource'
     -- ^ @name@ - (Required)
     -- The name of the server
     --
+    , _publicIp          :: TF.Attr s P.Text
+    -- ^ @public_ip@ - (Optional)
+    -- The public IPv4 address of the server
+    --
     , _securityGroup     :: TF.Attr s P.Text
     -- ^ @security_group@ - (Optional)
     -- The security group the server is attached to
+    --
+    , _state             :: TF.Attr s P.Text
+    -- ^ @state@ - (Optional)
+    -- The server state (running, stopped)
     --
     , _tags              :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
@@ -330,12 +353,15 @@ serverResource
 serverResource _image _name _type' =
     TF.unsafeResource "scaleway_server" TF.validator $
         ServerResource'
-            { _bootscript = TF.Nil
+            { _bootType = TF.Nil
+            , _bootscript = TF.Nil
             , _dynamicIpRequired = TF.Nil
             , _enableIpv6 = TF.value P.False
             , _image = _image
             , _name = _name
+            , _publicIp = TF.Nil
             , _securityGroup = TF.Nil
+            , _state = TF.Nil
             , _tags = TF.Nil
             , _type' = _type'
             , _volume = TF.Nil
@@ -343,12 +369,15 @@ serverResource _image _name _type' =
 
 instance TF.IsObject (ServerResource s) where
     toObject ServerResource'{..} = P.catMaybes
-        [ TF.assign "bootscript" <$> TF.attribute _bootscript
+        [ TF.assign "boot_type" <$> TF.attribute _bootType
+        , TF.assign "bootscript" <$> TF.attribute _bootscript
         , TF.assign "dynamic_ip_required" <$> TF.attribute _dynamicIpRequired
         , TF.assign "enable_ipv6" <$> TF.attribute _enableIpv6
         , TF.assign "image" <$> TF.attribute _image
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "public_ip" <$> TF.attribute _publicIp
         , TF.assign "security_group" <$> TF.attribute _securityGroup
+        , TF.assign "state" <$> TF.attribute _state
         , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "type" <$> TF.attribute _type'
         , TF.assign "volume" <$> TF.attribute _volume
@@ -356,6 +385,11 @@ instance TF.IsObject (ServerResource s) where
 
 instance TF.IsValid (ServerResource s) where
     validator = P.mempty
+
+instance P.HasBootType (ServerResource s) (TF.Attr s P.Text) where
+    bootType =
+        P.lens (_bootType :: ServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _bootType = a } :: ServerResource s)
 
 instance P.HasBootscript (ServerResource s) (TF.Attr s P.Text) where
     bootscript =
@@ -382,10 +416,20 @@ instance P.HasName (ServerResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ServerResource s)
 
+instance P.HasPublicIp (ServerResource s) (TF.Attr s P.Text) where
+    publicIp =
+        P.lens (_publicIp :: ServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _publicIp = a } :: ServerResource s)
+
 instance P.HasSecurityGroup (ServerResource s) (TF.Attr s P.Text) where
     securityGroup =
         P.lens (_securityGroup :: ServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _securityGroup = a } :: ServerResource s)
+
+instance P.HasState (ServerResource s) (TF.Attr s P.Text) where
+    state =
+        P.lens (_state :: ServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _state = a } :: ServerResource s)
 
 instance P.HasTags (ServerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
@@ -469,6 +513,10 @@ data TokenResource s = TokenResource'
     -- ^ @description@ - (Optional)
     -- The token description.
     --
+    , _email       :: TF.Attr s P.Text
+    -- ^ @email@ - (Optional)
+    -- The account email. Defaults to registered user.
+    --
     , _expires     :: TF.Attr s P.Bool
     -- ^ @expires@ - (Optional)
     -- Defines if the token is set to expire
@@ -486,6 +534,7 @@ tokenResource =
     TF.unsafeResource "scaleway_token" TF.validator $
         TokenResource'
             { _description = TF.Nil
+            , _email = TF.Nil
             , _expires = TF.value P.False
             , _password = TF.Nil
             }
@@ -493,6 +542,7 @@ tokenResource =
 instance TF.IsObject (TokenResource s) where
     toObject TokenResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "email" <$> TF.attribute _email
         , TF.assign "expires" <$> TF.attribute _expires
         , TF.assign "password" <$> TF.attribute _password
         ]
@@ -504,6 +554,11 @@ instance P.HasDescription (TokenResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: TokenResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: TokenResource s)
+
+instance P.HasEmail (TokenResource s) (TF.Attr s P.Text) where
+    email =
+        P.lens (_email :: TokenResource s -> TF.Attr s P.Text)
+               (\s a -> s { _email = a } :: TokenResource s)
 
 instance P.HasExpires (TokenResource s) (TF.Attr s P.Bool) where
     expires =
