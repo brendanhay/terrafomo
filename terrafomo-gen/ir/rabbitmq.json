@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "permissionsSetting",
+                "smart": "newPermissionsSetting",
                 "name": "PermissionsSetting'"
             },
             "arguments": [
@@ -121,7 +121,7 @@
         },
         {
             "con": {
-                "smart": "policySetting",
+                "smart": "newPolicySetting",
                 "name": "PolicySetting'"
             },
             "arguments": [
@@ -274,8 +274,8 @@
         },
         {
             "con": {
-                "smart": "settingsSetting",
-                "name": "SettingsSetting'"
+                "smart": "newSettings",
+                "name": "Settings'"
             },
             "arguments": [
                 {
@@ -371,7 +371,7 @@
                 }
             ],
             "key": "rabbitmq_exchange.settings",
-            "name": "SettingsSetting",
+            "name": "Settings",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -418,7 +418,7 @@
                     "original": "arguments_json"
                 }
             ],
-            "type": "SettingsSetting s",
+            "type": "Settings s",
             "original": "settings"
         }
     ],
@@ -682,7 +682,7 @@
                     "method": "settings",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (SettingsSetting s)",
+                    "type": "TF.Attr s (Settings s)",
                     "class": "HasSettings",
                     "validate": true,
                     "optional": false,
@@ -758,7 +758,7 @@
                     "method": "settings",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (SettingsSetting s)",
+                    "type": "TF.Attr s (Settings s)",
                     "class": "HasSettings",
                     "validate": true,
                     "optional": false,
@@ -1062,7 +1062,7 @@
                     "method": "settings",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (SettingsSetting s)",
+                    "type": "TF.Attr s (Settings s)",
                     "class": "HasSettings",
                     "validate": true,
                     "optional": false,
@@ -1138,7 +1138,7 @@
                     "method": "settings",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (SettingsSetting s)",
+                    "type": "TF.Attr s (Settings s)",
                     "class": "HasSettings",
                     "validate": true,
                     "optional": false,
