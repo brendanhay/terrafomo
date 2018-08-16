@@ -56,7 +56,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "record_records",
+            "name": "records",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
