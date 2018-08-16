@@ -19,7 +19,7 @@ module Terrafomo
     , localBackend
 
     -- * Providers
-    , Provider
+    , IsProvider     (..)
     , withProvider
 
     -- * Syntax

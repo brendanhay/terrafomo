@@ -14,7 +14,6 @@ module {{ namespace }}
     -- * {{ provider.name }} Provider Datatype
       Provider (..)
     , {{ provider.schema.con.smart }}
-    , defaultProvider
 
     -- * {{ provider.name }} Specific Aliases
     , DataSource
@@ -45,7 +44,7 @@ import qualified Terrafomo.Validator as TF
 type DataSource a = TF.Schema ()               Provider a
 type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
 
--- | The @{{ provider.name }}@ Terraform provider configuration.
+-- | The @{{ provider.original }}@ Terraform provider configuration.
 --
 -- See the <{{ provider.url }} terraform documentation>
 -- for more information.
@@ -64,26 +63,23 @@ data Provider = {{ provider.schema.con.name }}
       {% for field in provider.schema.arguments %}
         {% if field.first %}{ {% else %}, {% endif %}{{ field.value.name }} = {{ field.value.default }}{% if field.last %}
         }{% endif %}
-      {% endfor %}
+{% endfor %}
 
-defaultProvider :: TF.Provider (P.Maybe Provider)
-defaultProvider =
-    TF.Provider
-        { _providerType   = TF.Type P.Nothing "{{ provider.name }}"
-        , _providerAlias  = P.Nothing
-        , _providerConfig = P.Nothing
-        }
+instance TF.IsProvider Provider where
+    type ProviderType {{ provider.schema.name }} = "{{ provider.original }}"
 
-instance TF.IsObject Provider where
-    {% if provider.schema.arguments | empty %}
-    toObject {{ provider.schema.con.name }} = []
-    {% else %}
-    toObject {{ provider.schema.con.name }}{..} = P.catMaybes
-      {% for field in provider.schema.arguments %}
-        {% if field.first %}[ {% else %}, {% endif %} {{ field.value.encoder }} {{ field.value.name }}{% if field.last %}
-        ]{% endif %}
-      {% endfor %}
-    {% endif %}
+instance TF.IsSection Provider where
+    toSection x@{{ provider.schema.con.name }}{% if !(provider.schema.arguments | empty) %}{..}{% endif %} =
+        let typ = TF.providerType (Proxy :: Proxy Provider)
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                {% for field in provider.schema.arguments %}
+                  , {{ field.value.encoder }} {{ field.value.name }}
+                {% endfor %}
+                  ])
 
 {% include "_include/validator.ede" with schema = provider.schema %}
 {% include "_include/lenses.ede" with schema = provider.schema %}

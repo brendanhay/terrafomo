@@ -36,6 +36,7 @@ import Control.Monad.Morph  (MFunctor (hoist))
 import Control.Monad.Trans  (MonadTrans (lift))
 
 import Data.Map.Strict (Map)
+import Data.Proxy      (Proxy (Proxy))
 import Data.Semigroup  (Semigroup ((<>)))
 import Data.Set        (Set)
 import Data.Text       (Text)
@@ -243,38 +244,41 @@ instance ( MonadTerraform s m
 -- Providers
 
 withProvider
-    :: ( MonadTerraform s m
-       , HCL.IsObject p
+    :: forall s m p a.
+       ( MonadTerraform s m
+       , IsProvider p
        )
-    => Provider (Maybe p)
+    => p
     -> m a
     -> m a
 withProvider p m =
-    insertProvider p >>= \case
+    insertProvider (Just p) >>= \case
         Nothing  -> m
         Just key ->
             flip localTerraform m $ \s ->
-                s { aliases = Map.insert (_providerType p) key (aliases s)
+                s { aliases = Map.insert (providerType (Proxy @p)) key (aliases s)
                   }
 
 insertProvider
-    :: ( MonadTerraform s m
-       , HCL.IsObject p
+    :: forall s m p.
+       ( MonadTerraform s m
+       , IsProvider p
        )
-    => Provider (Maybe p)
+    => Maybe p
     -> m (Maybe Key)
-insertProvider p =
-    liftTerraform $
-        case _providerConfig p of
-            Nothing -> MTL.asks (Map.lookup (_providerType p) . aliases)
-            Just _  -> do
-                let value = HCL.toSection p
+insertProvider = \case
+    Nothing ->
+        liftTerraform $
+            MTL.asks (Map.lookup (providerType (Proxy @p)) . aliases)
 
-                key <- Key (_providerType p) <$> hashSection value
+    Just p  -> do
+        let value = HCL.toSection p
 
-                void $ insertValue key value providers (\s w -> w { providers = s })
+        key <- providerKey p <$> hashSection value
 
-                pure $! Just key
+        void $ insertValue key value providers (\s w -> w { providers = s })
+
+        pure $! Just key
 
 -- Values
 
@@ -283,7 +287,9 @@ insertProvider p =
 -- conjunction with accessors/lenses to obtain the terraform computed
 -- attributes and values.
 define
-    :: MonadTerraform s m
+    :: ( MonadTerraform s m
+       , IsProvider p
+       )
     => Name
     -> Schema l p a
     -> m (Ref s a)
@@ -299,10 +305,7 @@ define name x@Schema{_schemaProvider, _schemaConfig, _schemaValidator} =
         alias <- insertProvider _schemaProvider
 
         let value = HCL.toSection $
-                        x { _schemaProvider =
-                              _schemaProvider
-                                { _providerAlias = fmap keyName alias
-                                }
+                        x { _schemaProvider = keyName <$> alias
                           , _schemaKeywords =
                               _schemaKeywords x
                                   <> pure (HCL.type_ typ)

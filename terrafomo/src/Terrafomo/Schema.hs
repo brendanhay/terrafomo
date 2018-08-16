@@ -43,8 +43,8 @@ instance HCL.IsValue Dependency where
 
 data Schema l p a where
     Schema
-        :: (Eq l, Monoid l, HCL.IsObject l, HCL.IsObject p, HCL.IsObject a)
-        => { _schemaProvider    :: !(Provider (Maybe p))
+        :: (Eq l, Monoid l, HCL.IsObject l, HCL.IsObject a)
+        => { _schemaProvider    :: !(Maybe p)
            , _schemaLifecycle   :: !l
            , _schemaDependsOn   :: !(Set Dependency)
            , _schemaKeywords    :: !(NonEmpty HCL.Id)
@@ -59,11 +59,11 @@ instance HasLifecycle (Schema (Lifecycle a) p a) a where
 
 instance ( HCL.IsObject l
          , HCL.IsObject a
-         ) => HCL.IsSection (Schema l p a) where
+         ) => HCL.IsSection (Schema l Name a) where
     toSection Schema{..} =
         let k :| ks = _schemaKeywords
             common  = catMaybes
-                [ HCL.assign "provider" <$> _providerAlias _schemaProvider
+                [ HCL.assign "provider" <$> _schemaProvider
                 , if _schemaDependsOn == mempty
                     then Nothing
                     else Just (HCL.assign "depends_on" (HCL.list _schemaDependsOn))
@@ -76,16 +76,13 @@ instance ( HCL.IsObject l
                 & HCL.pairs (HCL.toObject _schemaConfig ++ common)
 
 unsafeDataSource
-    :: ( HCL.IsObject p
-       , HCL.IsObject a
-       )
+    :: HCL.IsObject a
     => Text
-    -> Provider (Maybe p)
     -> Validator a
     -> a
     -> Schema () p a
-unsafeDataSource name p validator cfg =
-    Schema { _schemaProvider  = p
+unsafeDataSource name validator cfg =
+    Schema { _schemaProvider  = Nothing
            , _schemaLifecycle = ()
            , _schemaDependsOn = mempty
            , _schemaKeywords  = pure (HCL.Unquoted "data")
@@ -95,16 +92,13 @@ unsafeDataSource name p validator cfg =
            }
 
 unsafeResource
-    :: ( HCL.IsObject p
-       , HCL.IsObject a
-       )
+    :: HCL.IsObject a
     => Text
-    -> Provider (Maybe p)
     -> Validator a
     -> a
     -> Schema (Lifecycle a) p a
-unsafeResource name p validator cfg =
-    Schema { _schemaProvider  = p
+unsafeResource name validator cfg =
+    Schema { _schemaProvider  = Nothing
            , _schemaLifecycle = mempty
            , _schemaDependsOn = mempty
            , _schemaKeywords  = pure (HCL.Unquoted "resource")
@@ -120,7 +114,6 @@ unsafeResource name p validator cfg =
 provider :: Lens' (Schema l p a) (Maybe p)
 provider =
     lens _schemaProvider (\s a -> s { _schemaProvider = a })
-        . providerConfig
 
 -- | The underlying type/data config representing the specific resource or
 -- datasource configuration.

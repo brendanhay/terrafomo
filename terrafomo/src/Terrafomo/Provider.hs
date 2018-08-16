@@ -1,30 +1,30 @@
 module Terrafomo.Provider
-    ( Provider (..)
-    , providerConfig
+    ( IsProvider (..)
+    , providerKey
     ) where
 
-import Data.Function ((&))
+import Data.Proxy  (Proxy (..))
+import Data.String (fromString)
 
-import Lens.Micro (Lens', lens)
+import GHC.TypeLits (KnownSymbol, Symbol, symbolVal)
 
 import Terrafomo.Name
 
-import qualified Terrafomo.HCL as HCL
+import qualified Terrafomo.Hash as Hash
+import qualified Terrafomo.HCL  as HCL
 
-data Provider a = Provider
-    { _providerType   :: !Type
-    , _providerAlias  :: !(Maybe Name)
-    , _providerConfig :: !a
-    } deriving (Show, Eq, Ord, Functor)
+class ( KnownSymbol (ProviderType p)
+      , HCL.IsSection p
+      ) => IsProvider p where
+    type ProviderType p :: Symbol
 
-providerConfig :: Lens' (Provider a) a
-providerConfig = lens _providerConfig (\s a -> s { _providerConfig = a })
+    providerType :: proxy p -> Type
+    providerType _ =
+        Type Nothing . fromString $
+            symbolVal (Proxy :: Proxy (ProviderType p))
 
-instance HCL.IsObject a => HCL.IsSection (Provider (Maybe a)) where
-    toSection x =
-        let config = maybe [] HCL.toObject (_providerConfig x)
-         in HCL.section "provider" [HCL.type_ (_providerType x)]
-          & HCL.pairs
-              (case _providerAlias x of
-                   Nothing    -> config
-                   Just alias -> HCL.assign "alias" alias : config)
+providerKey :: forall p. IsProvider p => p -> Name -> Key
+providerKey p name =
+    Key { keyType = providerType (Proxy :: Proxy p)
+        , keyName = name
+        }
