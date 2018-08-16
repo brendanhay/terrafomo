@@ -78,8 +78,8 @@ data DhcpPoolSetting s = DhcpPoolSetting'
 
 -- | Construct a new @dhcp_pool@ settings value.
 newDhcpPoolSetting
-    :: TF.Attr s P.Text -- ^ @end_address@ - 'P.endAddress'
-    -> TF.Attr s P.Text -- ^ @start_address@ - 'P.startAddress'
+    :: TF.Attr s P.Text -- ^ 'P._endAddress': @end_address@
+    -> TF.Attr s P.Text -- ^ 'P._startAddress': @start_address@
     -> DhcpPoolSetting s
 newDhcpPoolSetting _endAddress _startAddress =
     DhcpPoolSetting'
@@ -136,9 +136,9 @@ data LocalSubnetsSetting s = LocalSubnetsSetting'
 
 -- | Construct a new @local_subnets@ settings value.
 newLocalSubnetsSetting
-    :: TF.Attr s P.Text -- ^ @local_subnet_gateway@ - 'P.localSubnetGateway'
-    -> TF.Attr s P.Text -- ^ @local_subnet_mask@ - 'P.localSubnetMask'
-    -> TF.Attr s P.Text -- ^ @local_subnet_name@ - 'P.localSubnetName'
+    :: TF.Attr s P.Text -- ^ 'P._localSubnetGateway': @local_subnet_gateway@
+    -> TF.Attr s P.Text -- ^ 'P._localSubnetMask': @local_subnet_mask@
+    -> TF.Attr s P.Text -- ^ 'P._localSubnetName': @local_subnet_name@
     -> LocalSubnetsSetting s
 newLocalSubnetsSetting _localSubnetGateway _localSubnetMask _localSubnetName =
     LocalSubnetsSetting'
@@ -188,9 +188,9 @@ data PeerSubnetsSetting s = PeerSubnetsSetting'
 
 -- | Construct a new @peer_subnets@ settings value.
 newPeerSubnetsSetting
-    :: TF.Attr s P.Text -- ^ @peer_subnet_gateway@ - 'P.peerSubnetGateway'
-    -> TF.Attr s P.Text -- ^ @peer_subnet_mask@ - 'P.peerSubnetMask'
-    -> TF.Attr s P.Text -- ^ @peer_subnet_name@ - 'P.peerSubnetName'
+    :: TF.Attr s P.Text -- ^ 'P._peerSubnetGateway': @peer_subnet_gateway@
+    -> TF.Attr s P.Text -- ^ 'P._peerSubnetMask': @peer_subnet_mask@
+    -> TF.Attr s P.Text -- ^ 'P._peerSubnetName': @peer_subnet_name@
     -> PeerSubnetsSetting s
 newPeerSubnetsSetting _peerSubnetGateway _peerSubnetMask _peerSubnetName =
     PeerSubnetsSetting'
@@ -252,13 +252,13 @@ data RuleSetting s = RuleSetting'
 
 -- | Construct a new @rule@ settings value.
 newRuleSetting
-    :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
-    -> TF.Attr s P.Text -- ^ @destination_ip@ - 'P.destinationIp'
-    -> TF.Attr s P.Text -- ^ @source_ip@ - 'P.sourceIp'
-    -> TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
-    -> TF.Attr s P.Text -- ^ @destination_port@ - 'P.destinationPort'
-    -> TF.Attr s P.Text -- ^ @source_port@ - 'P.sourcePort'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    :: TF.Attr s P.Text -- ^ 'P._description': @description@
+    -> TF.Attr s P.Text -- ^ 'P._destinationIp': @destination_ip@
+    -> TF.Attr s P.Text -- ^ 'P._sourceIp': @source_ip@
+    -> TF.Attr s P.Text -- ^ 'P._policy': @policy@
+    -> TF.Attr s P.Text -- ^ 'P._destinationPort': @destination_port@
+    -> TF.Attr s P.Text -- ^ 'P._sourcePort': @source_port@
+    -> TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
     -> RuleSetting s
 newRuleSetting _description _destinationIp _sourceIp _policy _destinationPort _sourcePort _protocol =
     RuleSetting'
@@ -336,8 +336,8 @@ data StaticIpPoolSetting s = StaticIpPoolSetting'
 
 -- | Construct a new @static_ip_pool@ settings value.
 newStaticIpPoolSetting
-    :: TF.Attr s P.Text -- ^ @end_address@ - 'P.endAddress'
-    -> TF.Attr s P.Text -- ^ @start_address@ - 'P.startAddress'
+    :: TF.Attr s P.Text -- ^ 'P._endAddress': @end_address@
+    -> TF.Attr s P.Text -- ^ 'P._startAddress': @start_address@
     -> StaticIpPoolSetting s
 newStaticIpPoolSetting _endAddress _startAddress =
     StaticIpPoolSetting'

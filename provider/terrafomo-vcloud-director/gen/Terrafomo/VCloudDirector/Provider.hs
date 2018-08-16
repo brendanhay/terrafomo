@@ -17,10 +17,11 @@
 --
 module Terrafomo.VCloudDirector.Provider
     (
+    -- * VCloudDirector Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** VCloudDirector Specific Aliases
+    -- * VCloudDirector Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -91,10 +92,10 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @org@ - 'P.org'
-    -> P.Text -- ^ @password@ - 'P.password'
-    -> P.Text -- ^ @url@ - 'P.url'
-    -> P.Text -- ^ @user@ - 'P.user'
+    :: P.Text -- ^ @org@ ('P._org', 'P.org')
+    -> P.Text -- ^ @password@ ('P._password', 'P.password')
+    -> P.Text -- ^ @url@ ('P._url', 'P.url')
+    -> P.Text -- ^ @user@ ('P._user', 'P.user')
     -> Provider
 newProvider _org _password _url _user =
     Provider'
@@ -111,7 +112,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "vcd"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
             , TF.assign "max_retry_timeout" <$> _maxRetryTimeout

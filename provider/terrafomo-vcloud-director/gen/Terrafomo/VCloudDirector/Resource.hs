@@ -95,10 +95,10 @@ data DnatResource s = DnatResource'
 
 -- | Define a new @vcd_dnat@ resource value.
 dnatResource
-    :: TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
-    -> TF.Attr s P.Text -- ^ @external_ip@ - 'P.externalIp'
-    -> TF.Attr s P.Text -- ^ @internal_ip@ - 'P.internalIp'
-    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
+    :: TF.Attr s P.Text -- ^ @edge_gateway@ ('P._edgeGateway', 'P.edgeGateway')
+    -> TF.Attr s P.Text -- ^ @external_ip@ ('P._externalIp', 'P.externalIp')
+    -> TF.Attr s P.Text -- ^ @internal_ip@ ('P._internalIp', 'P.internalIp')
+    -> TF.Attr s P.Int -- ^ @port@ ('P._port', 'P.port')
     -> P.Resource (DnatResource s)
 dnatResource _edgeGateway _externalIp _internalIp _port =
     TF.unsafeResource "vcd_dnat" TF.validator $
@@ -195,15 +195,15 @@ data EdgegatewayVpnResource s = EdgegatewayVpnResource'
 
 -- | Define a new @vcd_edgegateway_vpn@ resource value.
 edgegatewayVpnResource
-    :: TF.Attr s P.Text -- ^ @local_ip_address@ - 'P.localIpAddress'
-    -> TF.Attr s P.Text -- ^ @peer_ip_address@ - 'P.peerIpAddress'
-    -> TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
-    -> TF.Attr s P.Text -- ^ @local_id@ - 'P.localId'
-    -> TF.Attr s P.Text -- ^ @peer_id@ - 'P.peerId'
-    -> TF.Attr s P.Int -- ^ @mtu@ - 'P.mtu'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @encryption_protocol@ - 'P.encryptionProtocol'
-    -> TF.Attr s P.Text -- ^ @shared_secret@ - 'P.sharedSecret'
+    :: TF.Attr s P.Text -- ^ @local_ip_address@ ('P._localIpAddress', 'P.localIpAddress')
+    -> TF.Attr s P.Text -- ^ @peer_ip_address@ ('P._peerIpAddress', 'P.peerIpAddress')
+    -> TF.Attr s P.Text -- ^ @edge_gateway@ ('P._edgeGateway', 'P.edgeGateway')
+    -> TF.Attr s P.Text -- ^ @local_id@ ('P._localId', 'P.localId')
+    -> TF.Attr s P.Text -- ^ @peer_id@ ('P._peerId', 'P.peerId')
+    -> TF.Attr s P.Int -- ^ @mtu@ ('P._mtu', 'P.mtu')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @encryption_protocol@ ('P._encryptionProtocol', 'P.encryptionProtocol')
+    -> TF.Attr s P.Text -- ^ @shared_secret@ ('P._sharedSecret', 'P.sharedSecret')
     -> P.Resource (EdgegatewayVpnResource s)
 edgegatewayVpnResource _localIpAddress _peerIpAddress _edgeGateway _localId _peerId _mtu _name _encryptionProtocol _sharedSecret =
     TF.unsafeResource "vcd_edgegateway_vpn" TF.validator $
@@ -322,8 +322,8 @@ data FirewallRulesResource s = FirewallRulesResource'
 
 -- | Define a new @vcd_firewall_rules@ resource value.
 firewallRulesResource
-    :: TF.Attr s P.Text -- ^ @default_action@ - 'P.defaultAction'
-    -> TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
+    :: TF.Attr s P.Text -- ^ @default_action@ ('P._defaultAction', 'P.defaultAction')
+    -> TF.Attr s P.Text -- ^ @edge_gateway@ ('P._edgeGateway', 'P.edgeGateway')
     -> P.Resource (FirewallRulesResource s)
 firewallRulesResource _defaultAction _edgeGateway =
     TF.unsafeResource "vcd_firewall_rules" TF.validator $
@@ -403,9 +403,9 @@ data NetworkResource s = NetworkResource'
 
 -- | Define a new @vcd_network@ resource value.
 networkResource
-    :: TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
-    -> TF.Attr s P.Text -- ^ @gateway@ - 'P.gateway'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @edge_gateway@ ('P._edgeGateway', 'P.edgeGateway')
+    -> TF.Attr s P.Text -- ^ @gateway@ ('P._gateway', 'P.gateway')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (NetworkResource s)
 networkResource _edgeGateway _gateway _name =
     TF.unsafeResource "vcd_network" TF.validator $
@@ -520,9 +520,9 @@ data SnatResource s = SnatResource'
 
 -- | Define a new @vcd_snat@ resource value.
 snatResource
-    :: TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
-    -> TF.Attr s P.Text -- ^ @external_ip@ - 'P.externalIp'
-    -> TF.Attr s P.Text -- ^ @internal_ip@ - 'P.internalIp'
+    :: TF.Attr s P.Text -- ^ @edge_gateway@ ('P._edgeGateway', 'P.edgeGateway')
+    -> TF.Attr s P.Text -- ^ @external_ip@ ('P._externalIp', 'P.externalIp')
+    -> TF.Attr s P.Text -- ^ @internal_ip@ ('P._internalIp', 'P.internalIp')
     -> P.Resource (SnatResource s)
 snatResource _edgeGateway _externalIp _internalIp =
     TF.unsafeResource "vcd_snat" TF.validator $
@@ -605,7 +605,7 @@ data VappResource s = VappResource'
 
 -- | Define a new @vcd_vapp@ resource value.
 vappResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (VappResource s)
 vappResource _name =
     TF.unsafeResource "vcd_vapp" TF.validator $
@@ -751,10 +751,10 @@ data VappVmResource s = VappVmResource'
 
 -- | Define a new @vcd_vapp_vm@ resource value.
 vappVmResource
-    :: TF.Attr s P.Text -- ^ @catalog_name@ - 'P.catalogName'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @template_name@ - 'P.templateName'
-    -> TF.Attr s P.Text -- ^ @vapp_name@ - 'P.vappName'
+    :: TF.Attr s P.Text -- ^ @catalog_name@ ('P._catalogName', 'P.catalogName')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @template_name@ ('P._templateName', 'P.templateName')
+    -> TF.Attr s P.Text -- ^ @vapp_name@ ('P._vappName', 'P.vappName')
     -> P.Resource (VappVmResource s)
 vappVmResource _catalogName _name _templateName _vappName =
     TF.unsafeResource "vcd_vapp_vm" TF.validator $
