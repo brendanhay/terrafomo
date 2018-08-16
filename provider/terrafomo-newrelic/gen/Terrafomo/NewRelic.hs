@@ -12,12 +12,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.NewRelic
-    ( module Terrafomo.NewRelic.Provider
-    , module Terrafomo.NewRelic.Resource
-    , module Terrafomo.NewRelic.Types
+    ( module Terrafomo.NewRelic.DataSource
     , module Terrafomo.NewRelic.Lens
+    , module Terrafomo.NewRelic.Provider
+    , module Terrafomo.NewRelic.Resource
     , module Terrafomo.NewRelic.Settings
-    , module Terrafomo.NewRelic.DataSource
+    , module Terrafomo.NewRelic.Types
     -- * Provider Aliases
     ) where
 

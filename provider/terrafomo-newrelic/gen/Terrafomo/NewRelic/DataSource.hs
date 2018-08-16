@@ -34,10 +34,9 @@ import GHC.Base (($))
 
 import Terrafomo.NewRelic.Settings
 
-import qualified Data.Hashable               as P
-import qualified Data.HashMap.Strict         as P
-import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Map.Strict             as P
+import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
 import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
@@ -61,13 +60,13 @@ data ApplicationData s = ApplicationData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 applicationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ApplicationData s)
 applicationData _name =
-    TF.newDataSource "newrelic_application" TF.validator $
+    TF.unsafeDataSource "newrelic_application" P.defaultProvider TF.validator $
         ApplicationData'
             { _name = _name
             }
@@ -88,10 +87,10 @@ instance P.HasName (ApplicationData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ApplicationData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedHostIds (TF.Ref s' (ApplicationData s)) (TF.Attr s [TF.Attr s P.Integer]) where
+instance s ~ s' => P.HasComputedHostIds (TF.Ref s' (ApplicationData s)) (TF.Attr s [TF.Attr s P.Int]) where
     computedHostIds x = TF.compute (TF.refKey x) "host_ids"
 
-instance s ~ s' => P.HasComputedInstanceIds (TF.Ref s' (ApplicationData s)) (TF.Attr s [TF.Attr s P.Integer]) where
+instance s ~ s' => P.HasComputedInstanceIds (TF.Ref s' (ApplicationData s)) (TF.Attr s [TF.Attr s P.Int]) where
     computedInstanceIds x = TF.compute (TF.refKey x) "instance_ids"
 
 -- | @newrelic_key_transaction@ DataSource.
@@ -102,13 +101,13 @@ data KeyTransactionData s = KeyTransactionData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 keyTransactionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (KeyTransactionData s)
 keyTransactionData _name =
-    TF.newDataSource "newrelic_key_transaction" TF.validator $
+    TF.unsafeDataSource "newrelic_key_transaction" P.defaultProvider TF.validator $
         KeyTransactionData'
             { _name = _name
             }
