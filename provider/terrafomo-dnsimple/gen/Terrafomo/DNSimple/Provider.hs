@@ -17,10 +17,11 @@
 --
 module Terrafomo.DNSimple.Provider
     (
+    -- * DNSimple Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** DNSimple Specific Aliases
+    -- * DNSimple Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -74,8 +75,8 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @account@ - 'P.account'
-    -> P.Text -- ^ @token@ - 'P.token'
+    :: P.Text -- ^ @account@ ('P._account', 'P.account')
+    -> P.Text -- ^ @token@ ('P._token', 'P.token')
     -> Provider
 newProvider _account _token =
     Provider'
@@ -88,7 +89,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "dnsimple"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "account" _account
             , TF.assign "email" <$> _email

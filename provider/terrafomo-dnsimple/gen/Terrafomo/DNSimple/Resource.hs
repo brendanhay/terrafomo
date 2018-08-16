@@ -71,10 +71,10 @@ data RecordResource s = RecordResource'
 
 -- | Define a new @dnsimple_record@ resource value.
 recordResource
-    :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
+    :: TF.Attr s P.Text -- ^ @domain@ ('P._domain', 'P.domain')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    -> TF.Attr s P.Text -- ^ @value@ ('P._value', 'P.value')
     -> P.Resource (RecordResource s)
 recordResource _domain _name _type' _value =
     TF.unsafeResource "dnsimple_record" TF.validator $
