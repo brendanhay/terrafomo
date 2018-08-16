@@ -19,7 +19,7 @@ module Terrafomo.Cobbler.Settings
     (
     -- ** interface
       InterfaceSetting (..)
-    , interfaceSetting
+    , newInterfaceSetting
 
     ) where
 
@@ -112,10 +112,10 @@ data InterfaceSetting s = InterfaceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @interface@ settings value.
-interfaceSetting
+newInterfaceSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> InterfaceSetting s
-interfaceSetting _name =
+newInterfaceSetting _name =
     InterfaceSetting'
         { _bondingOpts = TF.Nil
         , _bridgeOpts = TF.Nil
