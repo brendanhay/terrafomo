@@ -12,12 +12,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Grafana
-    ( module Terrafomo.Grafana.Lens
-    , module Terrafomo.Grafana.Provider
-    , module Terrafomo.Grafana.Resource
-    , module Terrafomo.Grafana.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Grafana.Provider
+
+    -- * Custom Types
     , module Terrafomo.Grafana.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+
+    -- * Resources
+    , module Terrafomo.Grafana.Resource
+
+    -- * Settings
+    , module Terrafomo.Grafana.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Grafana.Lens
     ) where
 
 import Terrafomo.Grafana.Lens

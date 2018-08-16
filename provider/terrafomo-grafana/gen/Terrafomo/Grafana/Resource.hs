@@ -17,7 +17,6 @@
 --
 module Terrafomo.Grafana.Resource
     (
-    -- * Resource Datatypes
     -- ** grafana_alert_notification
       AlertNotificationResource (..)
     , alertNotificationResource
@@ -79,6 +78,7 @@ data AlertNotificationResource s = AlertNotificationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @grafana_alert_notification@ resource value.
 alertNotificationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -136,6 +136,7 @@ data DashboardResource s = DashboardResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @grafana_dashboard@ resource value.
 dashboardResource
     :: TF.Attr s P.Text -- ^ @config_json@ - 'P.configJson'
     -> P.Resource (DashboardResource s)
@@ -210,6 +211,7 @@ data DataSourceResource s = DataSourceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @grafana_data_source@ resource value.
 dataSourceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -345,6 +347,7 @@ data OrganizationResource s = OrganizationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @grafana_organization@ resource value.
 organizationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (OrganizationResource s)

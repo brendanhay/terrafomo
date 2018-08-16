@@ -17,7 +17,6 @@
 --
 module Terrafomo.Grafana.Settings
     (
-    -- * Settings Datatypes
     -- ** json_data
       JsonDataSetting (..)
     , newJsonDataSetting
@@ -65,6 +64,7 @@ data JsonDataSetting s = JsonDataSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @json_data@ settings value.
 newJsonDataSetting
     :: TF.Attr s P.Text -- ^ @default_region@ - 'P.defaultRegion'
     -> TF.Attr s P.Text -- ^ @auth_type@ - 'P.authType'
@@ -119,6 +119,7 @@ data SecureJsonDataSetting s = SecureJsonDataSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @secure_json_data@ settings value.
 newSecureJsonDataSetting
     :: TF.Attr s P.Text -- ^ @access_key@ - 'P.accessKey'
     -> TF.Attr s P.Text -- ^ @secret_key@ - 'P.secretKey'
