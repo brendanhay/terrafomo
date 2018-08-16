@@ -88,18 +88,13 @@ newProvider _authToken _url =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "rundeck"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
-                  , P.Just $ TF.assign "auth_token" _authToken
-                  , P.Just $ TF.assign "url" _url
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
+            , P.Just $ TF.assign "auth_token" _authToken
+            , P.Just $ TF.assign "url" _url
+            ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty

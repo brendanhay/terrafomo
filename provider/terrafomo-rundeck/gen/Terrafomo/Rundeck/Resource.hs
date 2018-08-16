@@ -122,7 +122,7 @@ jobResource
     -> TF.Attr s P.Text -- ^ @project_name@ - 'P.projectName'
     -> P.Resource (JobResource s)
 jobResource _command _description _name _projectName =
-    TF.unsafeResource "rundeck_job" P.defaultProvider TF.validator $
+    TF.unsafeResource "rundeck_job" TF.validator $
         JobResource'
             { _allowConcurrentExecutions = TF.Nil
             , _command = _command
@@ -271,7 +271,7 @@ privateKeyResource
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> P.Resource (PrivateKeyResource s)
 privateKeyResource _keyMaterial _path =
-    TF.unsafeResource "rundeck_private_key" P.defaultProvider TF.validator $
+    TF.unsafeResource "rundeck_private_key" TF.validator $
         PrivateKeyResource'
             { _keyMaterial = _keyMaterial
             , _path = _path
@@ -340,7 +340,7 @@ projectResource
     -> TF.Attr s [TF.Attr s (ResourceModelSourceSetting s)] -- ^ @resource_model_source@ - 'P.resourceModelSource'
     -> P.Resource (ProjectResource s)
 projectResource _name _resourceModelSource =
-    TF.unsafeResource "rundeck_project" P.defaultProvider TF.validator $
+    TF.unsafeResource "rundeck_project" TF.validator $
         ProjectResource'
             { _defaultNodeExecutorPlugin = TF.value "jsch-ssh"
             , _defaultNodeFileCopierPlugin = TF.value "jsch-scp"
@@ -432,7 +432,7 @@ publicKeyResource
     :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> P.Resource (PublicKeyResource s)
 publicKeyResource _path =
-    TF.unsafeResource "rundeck_public_key" P.defaultProvider TF.validator $
+    TF.unsafeResource "rundeck_public_key" TF.validator $
         PublicKeyResource'
             { _path = _path
             }
