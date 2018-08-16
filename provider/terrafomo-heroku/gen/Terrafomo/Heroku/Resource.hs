@@ -94,10 +94,9 @@ import GHC.Base (($))
 
 import Terrafomo.Heroku.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
+import qualified Data.Map.Strict           as Map
 import qualified Data.Maybe                as P
 import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
@@ -121,20 +120,20 @@ data AddonResource s = AddonResource'
     { _app    :: TF.Attr s P.Text
     -- ^ @app@ - (Required, Forces New)
     --
-    , _config :: TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]
+    , _config :: TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]
     -- ^ @config@ - (Optional, Forces New)
     --
     , _plan   :: TF.Attr s P.Text
     -- ^ @plan@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 addonResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @plan@ - 'P.plan'
     -> P.Resource (AddonResource s)
 addonResource _app _plan =
-    TF.newResource "heroku_addon" TF.validator $
+    TF.unsafeResource "heroku_addon" P.defaultProvider TF.validator $
         AddonResource'
             { _app = _app
             , _config = TF.Nil
@@ -156,9 +155,9 @@ instance P.HasApp (AddonResource s) (TF.Attr s P.Text) where
         P.lens (_app :: AddonResource s -> TF.Attr s P.Text)
                (\s a -> s { _app = a } :: AddonResource s)
 
-instance P.HasConfig (AddonResource s) (TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]) where
+instance P.HasConfig (AddonResource s) (TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]) where
     config =
-        P.lens (_config :: AddonResource s -> TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))])
+        P.lens (_config :: AddonResource s -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))])
                (\s a -> s { _config = a } :: AddonResource s)
 
 instance P.HasPlan (AddonResource s) (TF.Attr s P.Text) where
@@ -186,14 +185,14 @@ data AddonAttachmentResource s = AddonAttachmentResource'
     , _appId   :: TF.Attr s P.Text
     -- ^ @app_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 addonAttachmentResource
     :: TF.Attr s P.Text -- ^ @addon_id@ - 'P.addonId'
     -> TF.Attr s P.Text -- ^ @app_id@ - 'P.appId'
     -> P.Resource (AddonAttachmentResource s)
 addonAttachmentResource _addonId _appId =
-    TF.newResource "heroku_addon_attachment" TF.validator $
+    TF.unsafeResource "heroku_addon_attachment" P.defaultProvider TF.validator $
         AddonAttachmentResource'
             { _addonId = _addonId
             , _appId = _appId
@@ -235,7 +234,7 @@ data AppResource s = AppResource'
     , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _organization :: TF.Attr s [TF.Attr s (AppOrganization s)]
+    , _organization :: TF.Attr s [TF.Attr s (OrganizationSetting s)]
     -- ^ @organization@ - (Optional, Forces New)
     --
     , _region       :: TF.Attr s P.Text
@@ -244,14 +243,14 @@ data AppResource s = AppResource'
     , _space        :: TF.Attr s P.Text
     -- ^ @space@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 appResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> P.Resource (AppResource s)
 appResource _name _region =
-    TF.newResource "heroku_app" TF.validator $
+    TF.unsafeResource "heroku_app" P.defaultProvider TF.validator $
         AppResource'
             { _acm = TF.Nil
             , _buildpacks = TF.Nil
@@ -273,10 +272,6 @@ instance TF.IsObject (AppResource s) where
 
 instance TF.IsValid (AppResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_organization"
-                  (_organization
-                      :: AppResource s -> TF.Attr s [TF.Attr s (AppOrganization s)])
-                  TF.validator
 
 instance P.HasAcm (AppResource s) (TF.Attr s P.Bool) where
     acm =
@@ -293,9 +288,9 @@ instance P.HasName (AppResource s) (TF.Attr s P.Text) where
         P.lens (_name :: AppResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: AppResource s)
 
-instance P.HasOrganization (AppResource s) (TF.Attr s [TF.Attr s (AppOrganization s)]) where
+instance P.HasOrganization (AppResource s) (TF.Attr s [TF.Attr s (OrganizationSetting s)]) where
     organization =
-        P.lens (_organization :: AppResource s -> TF.Attr s [TF.Attr s (AppOrganization s)])
+        P.lens (_organization :: AppResource s -> TF.Attr s [TF.Attr s (OrganizationSetting s)])
                (\s a -> s { _organization = a } :: AppResource s)
 
 instance P.HasRegion (AppResource s) (TF.Attr s P.Text) where
@@ -308,10 +303,10 @@ instance P.HasSpace (AppResource s) (TF.Attr s P.Text) where
         P.lens (_space :: AppResource s -> TF.Attr s P.Text)
                (\s a -> s { _space = a } :: AppResource s)
 
-instance s ~ s' => P.HasComputedAllConfigVars (TF.Ref s' (AppResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedAllConfigVars (TF.Ref s' (AppResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedAllConfigVars x = TF.compute (TF.refKey x) "all_config_vars"
 
-instance s ~ s' => P.HasComputedConfigVars (TF.Ref s' (AppResource s)) (TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]) where
+instance s ~ s' => P.HasComputedConfigVars (TF.Ref s' (AppResource s)) (TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]) where
     computedConfigVars x = TF.compute (TF.refKey x) "config_vars"
 
 instance s ~ s' => P.HasComputedGitUrl (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
@@ -343,14 +338,14 @@ data AppFeatureResource s = AppFeatureResource'
     , _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 appFeatureResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (AppFeatureResource s)
 appFeatureResource _app _name =
-    TF.newResource "heroku_app_feature" TF.validator $
+    TF.unsafeResource "heroku_app_feature" P.defaultProvider TF.validator $
         AppFeatureResource'
             { _app = _app
             , _enabled = TF.value P.True
@@ -393,14 +388,14 @@ data AppReleaseResource s = AppReleaseResource'
     , _slugId :: TF.Attr s P.Text
     -- ^ @slug_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 appReleaseResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @slug_id@ - 'P.slugId'
     -> P.Resource (AppReleaseResource s)
 appReleaseResource _app _slugId =
-    TF.newResource "heroku_app_release" TF.validator $
+    TF.unsafeResource "heroku_app_release" P.defaultProvider TF.validator $
         AppReleaseResource'
             { _app = _app
             , _slugId = _slugId
@@ -442,7 +437,7 @@ data CertResource s = CertResource'
     , _privateKey       :: TF.Attr s P.Text
     -- ^ @private_key@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 certResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
@@ -450,7 +445,7 @@ certResource
     -> TF.Attr s P.Text -- ^ @private_key@ - 'P.privateKey'
     -> P.Resource (CertResource s)
 certResource _app _certificateChain _privateKey =
-    TF.newResource "heroku_cert" TF.validator $
+    TF.unsafeResource "heroku_cert" P.defaultProvider TF.validator $
         CertResource'
             { _app = _app
             , _certificateChain = _certificateChain
@@ -499,14 +494,14 @@ data DomainResource s = DomainResource'
     , _hostname :: TF.Attr s P.Text
     -- ^ @hostname@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 domainResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
     -> P.Resource (DomainResource s)
 domainResource _app _hostname =
-    TF.newResource "heroku_domain" TF.validator $
+    TF.unsafeResource "heroku_domain" P.defaultProvider TF.validator $
         DomainResource'
             { _app = _app
             , _hostname = _hostname
@@ -545,14 +540,14 @@ data DrainResource s = DrainResource'
     , _url :: TF.Attr s P.Text
     -- ^ @url@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 drainResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
     -> P.Resource (DrainResource s)
 drainResource _app _url =
-    TF.newResource "heroku_drain" TF.validator $
+    TF.unsafeResource "heroku_drain" P.defaultProvider TF.validator $
         DrainResource'
             { _app = _app
             , _url = _url
@@ -588,7 +583,7 @@ data FormationResource s = FormationResource'
     { _app      :: TF.Attr s P.Text
     -- ^ @app@ - (Required, Forces New)
     --
-    , _quantity :: TF.Attr s P.Integer
+    , _quantity :: TF.Attr s P.Int
     -- ^ @quantity@ - (Required)
     --
     , _size     :: TF.Attr s P.Text
@@ -597,16 +592,16 @@ data FormationResource s = FormationResource'
     , _type'    :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 formationResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
-    -> TF.Attr s P.Integer -- ^ @quantity@ - 'P.quantity'
+    -> TF.Attr s P.Int -- ^ @quantity@ - 'P.quantity'
     -> TF.Attr s P.Text -- ^ @size@ - 'P.size'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (FormationResource s)
 formationResource _app _quantity _size _type' =
-    TF.newResource "heroku_formation" TF.validator $
+    TF.unsafeResource "heroku_formation" P.defaultProvider TF.validator $
         FormationResource'
             { _app = _app
             , _quantity = _quantity
@@ -630,9 +625,9 @@ instance P.HasApp (FormationResource s) (TF.Attr s P.Text) where
         P.lens (_app :: FormationResource s -> TF.Attr s P.Text)
                (\s a -> s { _app = a } :: FormationResource s)
 
-instance P.HasQuantity (FormationResource s) (TF.Attr s P.Integer) where
+instance P.HasQuantity (FormationResource s) (TF.Attr s P.Int) where
     quantity =
-        P.lens (_quantity :: FormationResource s -> TF.Attr s P.Integer)
+        P.lens (_quantity :: FormationResource s -> TF.Attr s P.Int)
                (\s a -> s { _quantity = a } :: FormationResource s)
 
 instance P.HasSize (FormationResource s) (TF.Attr s P.Text) where
@@ -653,13 +648,13 @@ data PipelineResource s = PipelineResource'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 pipelineResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (PipelineResource s)
 pipelineResource _name =
-    TF.newResource "heroku_pipeline" TF.validator $
+    TF.unsafeResource "heroku_pipeline" P.defaultProvider TF.validator $
         PipelineResource'
             { _name = _name
             }
@@ -691,7 +686,7 @@ data PipelineCouplingResource s = PipelineCouplingResource'
     , _stage    :: TF.Attr s P.Text
     -- ^ @stage@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 pipelineCouplingResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
@@ -699,7 +694,7 @@ pipelineCouplingResource
     -> TF.Attr s P.Text -- ^ @stage@ - 'P.stage'
     -> P.Resource (PipelineCouplingResource s)
 pipelineCouplingResource _app _pipeline _stage =
-    TF.newResource "heroku_pipeline_coupling" TF.validator $
+    TF.unsafeResource "heroku_pipeline_coupling" P.defaultProvider TF.validator $
         PipelineCouplingResource'
             { _app = _app
             , _pipeline = _pipeline
@@ -751,14 +746,14 @@ data SpaceResource s = SpaceResource'
     , _shield       :: TF.Attr s P.Bool
     -- ^ @shield@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 spaceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @organization@ - 'P.organization'
     -> P.Resource (SpaceResource s)
 spaceResource _name _organization =
-    TF.newResource "heroku_space" TF.validator $
+    TF.unsafeResource "heroku_space" P.defaultProvider TF.validator $
         SpaceResource'
             { _name = _name
             , _organization = _organization
@@ -814,7 +809,7 @@ data SpaceAppAccessResource s = SpaceAppAccessResource'
     , _space       :: TF.Attr s P.Text
     -- ^ @space@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 spaceAppAccessResource
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
@@ -822,7 +817,7 @@ spaceAppAccessResource
     -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
     -> P.Resource (SpaceAppAccessResource s)
 spaceAppAccessResource _email _permissions _space =
-    TF.newResource "heroku_space_app_access" TF.validator $
+    TF.unsafeResource "heroku_space_app_access" P.defaultProvider TF.validator $
         SpaceAppAccessResource'
             { _email = _email
             , _permissions = _permissions
@@ -859,20 +854,20 @@ instance P.HasSpace (SpaceAppAccessResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/heroku/r/space_inbound_ruleset.html terraform documentation>
 -- for more information.
 data SpaceInboundRulesetResource s = SpaceInboundRulesetResource'
-    { _rule  :: TF.Attr s (P.NonEmpty (TF.Attr s (SpaceInboundRulesetRule s)))
+    { _rule  :: TF.Attr s (P.NonEmpty (TF.Attr s (RuleSetting s)))
     -- ^ @rule@ - (Required)
     --
     , _space :: TF.Attr s P.Text
     -- ^ @space@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 spaceInboundRulesetResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s (SpaceInboundRulesetRule s))) -- ^ @rule@ - 'P.rule'
+    :: TF.Attr s (P.NonEmpty (TF.Attr s (RuleSetting s))) -- ^ @rule@ - 'P.rule'
     -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
     -> P.Resource (SpaceInboundRulesetResource s)
 spaceInboundRulesetResource _rule _space =
-    TF.newResource "heroku_space_inbound_ruleset" TF.validator $
+    TF.unsafeResource "heroku_space_inbound_ruleset" P.defaultProvider TF.validator $
         SpaceInboundRulesetResource'
             { _rule = _rule
             , _space = _space
@@ -886,14 +881,10 @@ instance TF.IsObject (SpaceInboundRulesetResource s) where
 
 instance TF.IsValid (SpaceInboundRulesetResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_rule"
-                  (_rule
-                      :: SpaceInboundRulesetResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (SpaceInboundRulesetRule s))))
-                  TF.validator
 
-instance P.HasRule (SpaceInboundRulesetResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (SpaceInboundRulesetRule s)))) where
+instance P.HasRule (SpaceInboundRulesetResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (RuleSetting s)))) where
     rule =
-        P.lens (_rule :: SpaceInboundRulesetResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (SpaceInboundRulesetRule s))))
+        P.lens (_rule :: SpaceInboundRulesetResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (RuleSetting s))))
                (\s a -> s { _rule = a } :: SpaceInboundRulesetResource s)
 
 instance P.HasSpace (SpaceInboundRulesetResource s) (TF.Attr s P.Text) where
@@ -912,14 +903,14 @@ data SpacePeeringConnectionAccepterResource s = SpacePeeringConnectionAccepterRe
     , _vpcPeeringConnectionId :: TF.Attr s P.Text
     -- ^ @vpc_peering_connection_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 spacePeeringConnectionAccepterResource
     :: TF.Attr s P.Text -- ^ @space@ - 'P.space'
     -> TF.Attr s P.Text -- ^ @vpc_peering_connection_id@ - 'P.vpcPeeringConnectionId'
     -> P.Resource (SpacePeeringConnectionAccepterResource s)
 spacePeeringConnectionAccepterResource _space _vpcPeeringConnectionId =
-    TF.newResource "heroku_space_peering_connection_accepter" TF.validator $
+    TF.unsafeResource "heroku_space_peering_connection_accepter" P.defaultProvider TF.validator $
         SpacePeeringConnectionAccepterResource'
             { _space = _space
             , _vpcPeeringConnectionId = _vpcPeeringConnectionId
@@ -967,7 +958,7 @@ data SpaceVpnConnectionResource s = SpaceVpnConnectionResource'
     , _space         :: TF.Attr s P.Text
     -- ^ @space@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 spaceVpnConnectionResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -976,7 +967,7 @@ spaceVpnConnectionResource
     -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
     -> P.Resource (SpaceVpnConnectionResource s)
 spaceVpnConnectionResource _name _publicIp _routableCidrs _space =
-    TF.newResource "heroku_space_vpn_connection" TF.validator $
+    TF.unsafeResource "heroku_space_vpn_connection" P.defaultProvider TF.validator $
         SpaceVpnConnectionResource'
             { _name = _name
             , _publicIp = _publicIp
@@ -1015,13 +1006,13 @@ instance P.HasSpace (SpaceVpnConnectionResource s) (TF.Attr s P.Text) where
         P.lens (_space :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _space = a } :: SpaceVpnConnectionResource s)
 
-instance s ~ s' => P.HasComputedIkeVersion (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedIkeVersion (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Int) where
     computedIkeVersion x = TF.compute (TF.refKey x) "ike_version"
 
 instance s ~ s' => P.HasComputedSpaceCidrBlock (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
     computedSpaceCidrBlock x = TF.compute (TF.refKey x) "space_cidr_block"
 
-instance s ~ s' => P.HasComputedTunnels (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s [TF.Attr s (SpaceVpnConnectionTunnels s)]) where
+instance s ~ s' => P.HasComputedTunnels (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s [TF.Attr s (TunnelsSetting s)]) where
     computedTunnels x = TF.compute (TF.refKey x) "tunnels"
 
 -- | @heroku_team_collaborator@ Resource.
@@ -1038,7 +1029,7 @@ data TeamCollaboratorResource s = TeamCollaboratorResource'
     , _permissions :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @permissions@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 teamCollaboratorResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
@@ -1046,7 +1037,7 @@ teamCollaboratorResource
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ - 'P.permissions'
     -> P.Resource (TeamCollaboratorResource s)
 teamCollaboratorResource _app _email _permissions =
-    TF.newResource "heroku_team_collaborator" TF.validator $
+    TF.unsafeResource "heroku_team_collaborator" P.defaultProvider TF.validator $
         TeamCollaboratorResource'
             { _app = _app
             , _email = _email
