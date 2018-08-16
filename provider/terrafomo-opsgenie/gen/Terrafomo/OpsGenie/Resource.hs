@@ -104,6 +104,9 @@ instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
         P.lens (_name :: TeamResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: TeamResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @opsgenie_user@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/opsgenie/r/user.html terraform documentation>
@@ -177,3 +180,6 @@ instance P.HasUsername (UserResource s) (TF.Attr s P.Text) where
     username =
         P.lens (_username :: UserResource s -> TF.Attr s P.Text)
                (\s a -> s { _username = a } :: UserResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
