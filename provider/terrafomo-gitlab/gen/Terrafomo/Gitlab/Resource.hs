@@ -92,9 +92,9 @@ data DeployKeyResource s = DeployKeyResource'
 
 -- | Define a new @gitlab_deploy_key@ resource value.
 deployKeyResource
-    :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
-    -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
+    :: TF.Attr s P.Text -- ^ @key@ ('P._key', 'P.key')
+    -> TF.Attr s P.Text -- ^ @project@ ('P._project', 'P.project')
+    -> TF.Attr s P.Text -- ^ @title@ ('P._title', 'P.title')
     -> P.Resource (DeployKeyResource s)
 deployKeyResource _key _project _title =
     TF.unsafeResource "gitlab_deploy_key" TF.validator $
@@ -166,8 +166,8 @@ data GroupResource s = GroupResource'
 
 -- | Define a new @gitlab_group@ resource value.
 groupResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @path@ ('P._path', 'P.path')
     -> P.Resource (GroupResource s)
 groupResource _name _path =
     TF.unsafeResource "gitlab_group" TF.validator $
@@ -250,9 +250,9 @@ data LabelResource s = LabelResource'
 
 -- | Define a new @gitlab_label@ resource value.
 labelResource
-    :: TF.Attr s P.Text -- ^ @color@ - 'P.color'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
+    :: TF.Attr s P.Text -- ^ @color@ ('P._color', 'P.color')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @project@ ('P._project', 'P.project')
     -> P.Resource (LabelResource s)
 labelResource _color _name _project =
     TF.unsafeResource "gitlab_label" TF.validator $
@@ -333,7 +333,7 @@ data ProjectResource s = ProjectResource'
 
 -- | Define a new @gitlab_project@ resource value.
 projectResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ProjectResource s)
 projectResource _name =
     TF.unsafeResource "gitlab_project" TF.validator $
@@ -470,8 +470,8 @@ data ProjectHookResource s = ProjectHookResource'
 
 -- | Define a new @gitlab_project_hook@ resource value.
 projectHookResource
-    :: TF.Attr s P.Text -- ^ @project@ - 'P.project'
-    -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
+    :: TF.Attr s P.Text -- ^ @project@ ('P._project', 'P.project')
+    -> TF.Attr s P.Text -- ^ @url@ ('P._url', 'P.url')
     -> P.Resource (ProjectHookResource s)
 projectHookResource _project _url =
     TF.unsafeResource "gitlab_project_hook" TF.validator $
@@ -590,9 +590,9 @@ data ProjectMembershipResource s = ProjectMembershipResource'
 
 -- | Define a new @gitlab_project_membership@ resource value.
 projectMembershipResource
-    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Attr s P.Int -- ^ @user_id@ - 'P.userId'
-    -> TF.Attr s P.Text -- ^ @access_level@ - 'P.accessLevel'
+    :: TF.Attr s P.Text -- ^ @project_id@ ('P._projectId', 'P.projectId')
+    -> TF.Attr s P.Int -- ^ @user_id@ ('P._userId', 'P.userId')
+    -> TF.Attr s P.Text -- ^ @access_level@ ('P._accessLevel', 'P.accessLevel')
     -> P.Resource (ProjectMembershipResource s)
 projectMembershipResource _projectId _userId _accessLevel =
     TF.unsafeResource "gitlab_project_membership" TF.validator $
@@ -666,10 +666,10 @@ data UserResource s = UserResource'
 
 -- | Define a new @gitlab_user@ resource value.
 userResource
-    :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
-    -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
+    :: TF.Attr s P.Text -- ^ @email@ ('P._email', 'P.email')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @password@ ('P._password', 'P.password')
+    -> TF.Attr s P.Text -- ^ @username@ ('P._username', 'P.username')
     -> P.Resource (UserResource s)
 userResource _email _name _password _username =
     TF.unsafeResource "gitlab_user" TF.validator $

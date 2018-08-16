@@ -63,7 +63,7 @@ data ProjectData s = ProjectData'
 
 -- | Define a new @gitlab_project@ datasource value.
 projectData
-    :: TF.Attr s P.Int -- ^ @id@ - 'P.id'
+    :: TF.Attr s P.Int -- ^ @id@ ('P._id', 'P.id')
     -> P.DataSource (ProjectData s)
 projectData _id =
     TF.unsafeDataSource "gitlab_project" TF.validator $
@@ -99,7 +99,7 @@ data UserData s = UserData'
 
 -- | Define a new @gitlab_user@ datasource value.
 userData
-    :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
+    :: TF.Attr s P.Text -- ^ @email@ ('P._email', 'P.email')
     -> P.DataSource (UserData s)
 userData _email =
     TF.unsafeDataSource "gitlab_user" TF.validator $
