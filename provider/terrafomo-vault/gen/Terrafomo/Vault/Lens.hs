@@ -46,12 +46,14 @@ module Terrafomo.Vault.Lens
     , HasCreationStatements (..)
     , HasDataJson (..)
     , HasDbName (..)
+    , HasDefaultLeaseTtlSeconds (..)
     , HasDefaultTtl (..)
     , HasDescription (..)
     , HasDisablePeriodicTidy (..)
     , HasDisableRead (..)
     , HasDisallowReauthentication (..)
     , HasEc2Endpoint (..)
+    , HasGroup (..)
     , HasGroupName (..)
     , HasGroups (..)
     , HasHana (..)
@@ -78,6 +80,7 @@ module Terrafomo.Vault.Lens
     , HasMssql (..)
     , HasMysql (..)
     , HasName (..)
+    , HasNonce (..)
     , HasOracle (..)
     , HasOrganization (..)
     , HasPassword (..)
@@ -92,7 +95,9 @@ module Terrafomo.Vault.Lens
     , HasPort (..)
     , HasPostgresql (..)
     , HasProtocolVersion (..)
+    , HasRegion (..)
     , HasRenewStatements (..)
+    , HasResolveAwsUniqueIds (..)
     , HasRevocationStatements (..)
     , HasRole (..)
     , HasRoleId (..)
@@ -115,6 +120,7 @@ module Terrafomo.Vault.Lens
     , HasTokenTtl (..)
     , HasTtl (..)
     , HasType' (..)
+    , HasUser (..)
     , HasUsername (..)
     , HasVerifyConnection (..)
 
@@ -343,6 +349,12 @@ class HasDbName a b | a -> b where
 instance HasDbName a b => HasDbName (TF.Schema l p a) b where
     dbName = TF.configuration . dbName
 
+class HasDefaultLeaseTtlSeconds a b | a -> b where
+    defaultLeaseTtlSeconds :: P.Lens' a b
+
+instance HasDefaultLeaseTtlSeconds a b => HasDefaultLeaseTtlSeconds (TF.Schema l p a) b where
+    defaultLeaseTtlSeconds = TF.configuration . defaultLeaseTtlSeconds
+
 class HasDefaultTtl a b | a -> b where
     defaultTtl :: P.Lens' a b
 
@@ -378,6 +390,12 @@ class HasEc2Endpoint a b | a -> b where
 
 instance HasEc2Endpoint a b => HasEc2Endpoint (TF.Schema l p a) b where
     ec2Endpoint = TF.configuration . ec2Endpoint
+
+class HasGroup a b | a -> b where
+    group :: P.Lens' a b
+
+instance HasGroup a b => HasGroup (TF.Schema l p a) b where
+    group = TF.configuration . group
 
 class HasGroupName a b | a -> b where
     groupName :: P.Lens' a b
@@ -535,6 +553,12 @@ class HasName a b | a -> b where
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
+class HasNonce a b | a -> b where
+    nonce :: P.Lens' a b
+
+instance HasNonce a b => HasNonce (TF.Schema l p a) b where
+    nonce = TF.configuration . nonce
+
 class HasOracle a b | a -> b where
     oracle :: P.Lens' a b
 
@@ -619,11 +643,23 @@ class HasProtocolVersion a b | a -> b where
 instance HasProtocolVersion a b => HasProtocolVersion (TF.Schema l p a) b where
     protocolVersion = TF.configuration . protocolVersion
 
+class HasRegion a b | a -> b where
+    region :: P.Lens' a b
+
+instance HasRegion a b => HasRegion (TF.Schema l p a) b where
+    region = TF.configuration . region
+
 class HasRenewStatements a b | a -> b where
     renewStatements :: P.Lens' a b
 
 instance HasRenewStatements a b => HasRenewStatements (TF.Schema l p a) b where
     renewStatements = TF.configuration . renewStatements
+
+class HasResolveAwsUniqueIds a b | a -> b where
+    resolveAwsUniqueIds :: P.Lens' a b
+
+instance HasResolveAwsUniqueIds a b => HasResolveAwsUniqueIds (TF.Schema l p a) b where
+    resolveAwsUniqueIds = TF.configuration . resolveAwsUniqueIds
 
 class HasRevocationStatements a b | a -> b where
     revocationStatements :: P.Lens' a b
@@ -756,6 +792,12 @@ class HasType' a b | a -> b where
 
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
+
+class HasUser a b | a -> b where
+    user :: P.Lens' a b
+
+instance HasUser a b => HasUser (TF.Schema l p a) b where
+    user = TF.configuration . user
 
 class HasUsername a b | a -> b where
     username :: P.Lens' a b

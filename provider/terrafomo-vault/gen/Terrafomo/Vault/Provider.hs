@@ -111,7 +111,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "vault"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "address" _address
             , TF.assign "ca_cert_dir" <$> _caCertDir
