@@ -58,7 +58,7 @@ data RegionsData s = RegionsData'
 regionsData
     :: P.DataSource (RegionsData s)
 regionsData =
-    TF.unsafeDataSource "nomad_regions" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "nomad_regions" TF.validator $
         RegionsData'
 
 instance TF.IsObject (RegionsData s) where

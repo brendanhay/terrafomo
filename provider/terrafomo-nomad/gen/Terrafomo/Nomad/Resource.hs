@@ -93,7 +93,7 @@ aclPolicyResource
     -> TF.Attr s P.Text -- ^ @rules_hcl@ - 'P.rulesHcl'
     -> P.Resource (AclPolicyResource s)
 aclPolicyResource _name _rulesHcl =
-    TF.unsafeResource "nomad_acl_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "nomad_acl_policy" TF.validator $
         AclPolicyResource'
             { _description = TF.Nil
             , _name = _name
@@ -152,7 +152,7 @@ aclTokenResource
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (AclTokenResource s)
 aclTokenResource _type' =
-    TF.unsafeResource "nomad_acl_token" P.defaultProvider TF.validator $
+    TF.unsafeResource "nomad_acl_token" TF.validator $
         AclTokenResource'
             { _global = TF.value P.False
             , _name = TF.Nil
@@ -224,7 +224,7 @@ jobResource
     :: TF.Attr s P.Text -- ^ @jobspec@ - 'P.jobspec'
     -> P.Resource (JobResource s)
 jobResource _jobspec =
-    TF.unsafeResource "nomad_job" P.defaultProvider TF.validator $
+    TF.unsafeResource "nomad_job" TF.validator $
         JobResource'
             { _deregisterOnDestroy = TF.value P.True
             , _deregisterOnIdChange = TF.value P.True
@@ -286,7 +286,7 @@ namespaceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NamespaceResource s)
 namespaceResource _name =
-    TF.unsafeResource "nomad_namespace" P.defaultProvider TF.validator $
+    TF.unsafeResource "nomad_namespace" TF.validator $
         NamespaceResource'
             { _description = TF.Nil
             , _name = _name
@@ -342,7 +342,7 @@ quotaSpecificationResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (QuotaSpecificationResource s)
 quotaSpecificationResource _limits _name =
-    TF.unsafeResource "nomad_quota_specification" P.defaultProvider TF.validator $
+    TF.unsafeResource "nomad_quota_specification" TF.validator $
         QuotaSpecificationResource'
             { _description = TF.Nil
             , _limits = _limits
@@ -409,7 +409,7 @@ sentinelPolicyResource
     -> TF.Attr s P.Text -- ^ @scope@ - 'P.scope'
     -> P.Resource (SentinelPolicyResource s)
 sentinelPolicyResource _enforcementLevel _name _policy _scope =
-    TF.unsafeResource "nomad_sentinel_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "nomad_sentinel_policy" TF.validator $
         SentinelPolicyResource'
             { _description = TF.Nil
             , _enforcementLevel = _enforcementLevel

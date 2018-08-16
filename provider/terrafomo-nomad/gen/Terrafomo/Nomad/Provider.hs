@@ -109,22 +109,17 @@ newProvider _address =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "nomad"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , P.Just $ TF.assign "address" _address
-                  , TF.assign "ca_file" <$> _caFile
-                  , TF.assign "cert_file" <$> _certFile
-                  , TF.assign "key_file" <$> _keyFile
-                  , TF.assign "region" <$> _region
-                  , TF.assign "secret_id" <$> _secretId
-                  , TF.assign "vault_token" <$> _vaultToken
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ P.Just $ TF.assign "address" _address
+            , TF.assign "ca_file" <$> _caFile
+            , TF.assign "cert_file" <$> _certFile
+            , TF.assign "key_file" <$> _keyFile
+            , TF.assign "region" <$> _region
+            , TF.assign "secret_id" <$> _secretId
+            , TF.assign "vault_token" <$> _vaultToken
+            ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
