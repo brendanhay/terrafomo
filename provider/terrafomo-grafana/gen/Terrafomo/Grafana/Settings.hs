@@ -66,10 +66,10 @@ data JsonDataSetting s = JsonDataSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newJsonDataSetting
-    :: TF.Attr s P.Text -- ^ @auth_type@ - 'P.authType'
-    -> TF.Attr s P.Text -- ^ @default_region@ - 'P.defaultRegion'
+    :: TF.Attr s P.Text -- ^ @default_region@ - 'P.defaultRegion'
+    -> TF.Attr s P.Text -- ^ @auth_type@ - 'P.authType'
     -> JsonDataSetting s
-newJsonDataSetting _authType _defaultRegion =
+newJsonDataSetting _defaultRegion _authType =
     JsonDataSetting'
         { _assumeRoleArn = TF.Nil
         , _authType = _authType
