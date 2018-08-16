@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "alertOptionSetting",
+                "smart": "newAlertOptionSetting",
                 "name": "AlertOptionSetting'"
             },
             "arguments": [
@@ -104,7 +104,7 @@
         },
         {
             "con": {
-                "smart": "caqlSetting",
+                "smart": "newCaqlSetting",
                 "name": "CaqlSetting'"
             },
             "arguments": [
@@ -159,7 +159,7 @@
         },
         {
             "con": {
-                "smart": "cloudwatchSetting",
+                "smart": "newCloudwatchSetting",
                 "name": "CloudwatchSetting'"
             },
             "arguments": [
@@ -427,7 +427,7 @@
         },
         {
             "con": {
-                "smart": "collectorSetting",
+                "smart": "newCollectorSetting",
                 "name": "CollectorSetting'"
             },
             "arguments": [
@@ -482,7 +482,7 @@
         },
         {
             "con": {
-                "smart": "consulSetting",
+                "smart": "newConsulSetting",
                 "name": "ConsulSetting'"
             },
             "arguments": [
@@ -910,7 +910,7 @@
         },
         {
             "con": {
-                "smart": "detailsSetting",
+                "smart": "newDetailsSetting",
                 "name": "DetailsSetting'"
             },
             "arguments": [],
@@ -1096,7 +1096,7 @@
         },
         {
             "con": {
-                "smart": "emailSetting",
+                "smart": "newEmailSetting",
                 "name": "EmailSetting'"
             },
             "arguments": [
@@ -1205,7 +1205,7 @@
         },
         {
             "con": {
-                "smart": "httpSetting",
+                "smart": "newHttpSetting",
                 "name": "HttpSetting'"
             },
             "arguments": [
@@ -1604,7 +1604,7 @@
         },
         {
             "con": {
-                "smart": "httptrapSetting",
+                "smart": "newHttptrapSetting",
                 "name": "HttptrapSetting'"
             },
             "arguments": [
@@ -1657,7 +1657,7 @@
         },
         {
             "con": {
-                "smart": "icmpPingSetting",
+                "smart": "newIcmpPingSetting",
                 "name": "IcmpPingSetting'"
             },
             "arguments": [
@@ -1731,8 +1731,8 @@
         },
         {
             "con": {
-                "smart": "ifSetting",
-                "name": "IfSetting'"
+                "smart": "newIf'Setting",
+                "name": "If'Setting'"
             },
             "arguments": [
                 {
@@ -1748,7 +1748,7 @@
                     "method": "then'",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (ThenSetting s)",
+                    "type": "TF.Attr s (Then'Setting s)",
                     "class": "HasThen'",
                     "validate": true,
                     "optional": true,
@@ -1775,17 +1775,17 @@
                 }
             ],
             "key": "circonus_rule_set.if",
-            "name": "IfSetting",
+            "name": "If'Setting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "IfSetting s",
+            "type": "If'Setting s",
             "original": "if"
         },
         {
             "con": {
-                "smart": "invitesSetting",
+                "smart": "newInvitesSetting",
                 "name": "InvitesSetting'"
             },
             "arguments": [],
@@ -1835,7 +1835,7 @@
         },
         {
             "con": {
-                "smart": "ircSetting",
+                "smart": "newIrcSetting",
                 "name": "IrcSetting'"
             },
             "arguments": [
@@ -1886,7 +1886,7 @@
         },
         {
             "con": {
-                "smart": "jsonSetting",
+                "smart": "newJsonSetting",
                 "name": "JsonSetting'"
             },
             "arguments": [
@@ -2191,7 +2191,7 @@
         },
         {
             "con": {
-                "smart": "metricSetting",
+                "smart": "newMetricSetting",
                 "name": "MetricSetting'"
             },
             "arguments": [
@@ -2661,7 +2661,7 @@
         },
         {
             "con": {
-                "smart": "metricClusterSetting",
+                "smart": "newMetricClusterSetting",
                 "name": "MetricClusterSetting'"
             },
             "arguments": [
@@ -2797,7 +2797,7 @@
         },
         {
             "con": {
-                "smart": "mysqlSetting",
+                "smart": "newMysqlSetting",
                 "name": "MysqlSetting'"
             },
             "arguments": [
@@ -2890,7 +2890,7 @@
         },
         {
             "con": {
-                "smart": "overSetting",
+                "smart": "newOverSetting",
                 "name": "OverSetting'"
             },
             "arguments": [
@@ -2944,7 +2944,7 @@
         },
         {
             "con": {
-                "smart": "pagerDutySetting",
+                "smart": "newPagerDutySetting",
                 "name": "PagerDutySetting'"
             },
             "arguments": [
@@ -3046,7 +3046,7 @@
         },
         {
             "con": {
-                "smart": "postgresqlSetting",
+                "smart": "newPostgresqlSetting",
                 "name": "PostgresqlSetting'"
             },
             "arguments": [
@@ -3139,7 +3139,7 @@
         },
         {
             "con": {
-                "smart": "querySetting",
+                "smart": "newQuerySetting",
                 "name": "QuerySetting'"
             },
             "arguments": [
@@ -3232,7 +3232,7 @@
         },
         {
             "con": {
-                "smart": "slackSetting",
+                "smart": "newSlackSetting",
                 "name": "SlackSetting'"
             },
             "arguments": [
@@ -3370,7 +3370,7 @@
         },
         {
             "con": {
-                "smart": "smsSetting",
+                "smart": "newSmsSetting",
                 "name": "SmsSetting'"
             },
             "arguments": [
@@ -3479,7 +3479,7 @@
         },
         {
             "con": {
-                "smart": "statsdSetting",
+                "smart": "newStatsdSetting",
                 "name": "StatsdSetting'"
             },
             "arguments": [
@@ -3534,7 +3534,7 @@
         },
         {
             "con": {
-                "smart": "tcpSetting",
+                "smart": "newTcpSetting",
                 "name": "TcpSetting'"
             },
             "arguments": [
@@ -3745,8 +3745,8 @@
         },
         {
             "con": {
-                "smart": "thenSetting",
-                "name": "ThenSetting'"
+                "smart": "newThen'Setting",
+                "name": "Then'Setting'"
             },
             "arguments": [
                 {
@@ -3810,17 +3810,17 @@
                 }
             ],
             "key": "circonus_rule_set.if.then",
-            "name": "ThenSetting",
+            "name": "Then'Setting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "ThenSetting s",
+            "type": "Then'Setting s",
             "original": "then"
         },
         {
             "con": {
-                "smart": "usageSetting",
+                "smart": "newUsageSetting",
                 "name": "UsageSetting'"
             },
             "arguments": [],
@@ -3887,7 +3887,7 @@
         },
         {
             "con": {
-                "smart": "usersSetting",
+                "smart": "newUsersSetting",
                 "name": "UsersSetting'"
             },
             "arguments": [],
@@ -3937,7 +3937,7 @@
         },
         {
             "con": {
-                "smart": "valueSetting",
+                "smart": "newValueSetting",
                 "name": "ValueSetting'"
             },
             "arguments": [
@@ -4996,7 +4996,7 @@
         },
         {
             "con": {
-                "smart": "victoropsSetting",
+                "smart": "newVictoropsSetting",
                 "name": "VictoropsSetting'"
             },
             "arguments": [
@@ -5200,7 +5200,7 @@
         },
         {
             "con": {
-                "smart": "xmppSetting",
+                "smart": "newXmppSetting",
                 "name": "XmppSetting'"
             },
             "arguments": [
@@ -7569,7 +7569,7 @@
                     "method": "if'",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (IfSetting s)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (If'Setting s)))",
                     "class": "HasIf'",
                     "validate": false,
                     "optional": false,
@@ -7803,7 +7803,7 @@
                     "method": "if'",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (IfSetting s)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (If'Setting s)))",
                     "class": "HasIf'",
                     "validate": false,
                     "optional": false,
