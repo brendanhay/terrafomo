@@ -13,9 +13,9 @@
 --
 module Terrafomo.Bitbucket
     ( module Terrafomo.Bitbucket.Lens
-    , module Terrafomo.Bitbucket.Settings
     , module Terrafomo.Bitbucket.Provider
     , module Terrafomo.Bitbucket.Resource
+    , module Terrafomo.Bitbucket.Settings
     , module Terrafomo.Bitbucket.Types
     -- * Provider Aliases
     ) where

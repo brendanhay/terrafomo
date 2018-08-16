@@ -38,10 +38,9 @@ import GHC.Base (($))
 
 import Terrafomo.Bitbucket.Settings
 
-import qualified Data.Hashable                as P
-import qualified Data.HashMap.Strict          as P
-import qualified Data.HashMap.Strict          as Map
 import qualified Data.List.NonEmpty           as P
+import qualified Data.Map.Strict              as P
+import qualified Data.Map.Strict              as Map
 import qualified Data.Maybe                   as P
 import qualified Data.Monoid                  as P
 import qualified Data.Text                    as P
@@ -71,7 +70,7 @@ data DefaultReviewersResource s = DefaultReviewersResource'
     , _reviewers  :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @reviewers@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 defaultReviewersResource
     :: TF.Attr s P.Text -- ^ @owner@ - 'P.owner'
@@ -79,7 +78,7 @@ defaultReviewersResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @reviewers@ - 'P.reviewers'
     -> P.Resource (DefaultReviewersResource s)
 defaultReviewersResource _owner _repository _reviewers =
-    TF.newResource "bitbucket_default_reviewers" TF.validator $
+    TF.unsafeResource "bitbucket_default_reviewers" P.defaultProvider TF.validator $
         DefaultReviewersResource'
             { _owner = _owner
             , _repository = _repository
@@ -137,7 +136,7 @@ data HookResource s = HookResource'
     , _url                  :: TF.Attr s P.Text
     -- ^ @url@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 hookResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
@@ -147,7 +146,7 @@ hookResource
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
     -> P.Resource (HookResource s)
 hookResource _description _events _owner _repository _url =
-    TF.newResource "bitbucket_hook" TF.validator $
+    TF.unsafeResource "bitbucket_hook" P.defaultProvider TF.validator $
         HookResource'
             { _active = TF.value P.True
             , _description = _description
@@ -248,14 +247,14 @@ data RepositoryResource s = RepositoryResource'
     , _website     :: TF.Attr s P.Text
     -- ^ @website@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 repositoryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @owner@ - 'P.owner'
     -> P.Resource (RepositoryResource s)
 repositoryResource _name _owner =
-    TF.newResource "bitbucket_repository" TF.validator $
+    TF.unsafeResource "bitbucket_repository" P.defaultProvider TF.validator $
         RepositoryResource'
             { _description = TF.Nil
             , _forkPolicy = TF.value "allow_forks"
