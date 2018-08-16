@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "cpuSetting",
+                "smart": "newCpuSetting",
                 "name": "CpuSetting'"
             },
             "arguments": [
@@ -87,7 +87,7 @@
         },
         {
             "con": {
-                "smart": "criticalSetting",
+                "smart": "newCriticalSetting",
                 "name": "CriticalSetting'"
             },
             "arguments": [
@@ -172,7 +172,7 @@
         },
         {
             "con": {
-                "smart": "diskSetting",
+                "smart": "newDiskSetting",
                 "name": "DiskSetting'"
             },
             "arguments": [
@@ -257,7 +257,7 @@
         },
         {
             "con": {
-                "smart": "hddsSetting",
+                "smart": "newHddsSetting",
                 "name": "HddsSetting'"
             },
             "arguments": [
@@ -343,7 +343,7 @@
         },
         {
             "con": {
-                "smart": "internalPingSetting",
+                "smart": "newInternalPingSetting",
                 "name": "InternalPingSetting'"
             },
             "arguments": [
@@ -428,7 +428,7 @@
         },
         {
             "con": {
-                "smart": "ipsSetting",
+                "smart": "newIpsSetting",
                 "name": "IpsSetting'"
             },
             "arguments": [
@@ -496,7 +496,7 @@
         },
         {
             "con": {
-                "smart": "portsSetting",
+                "smart": "newPortsSetting",
                 "name": "PortsSetting'"
             },
             "arguments": [
@@ -633,7 +633,7 @@
         },
         {
             "con": {
-                "smart": "processesSetting",
+                "smart": "newProcessesSetting",
                 "name": "ProcessesSetting'"
             },
             "arguments": [
@@ -753,7 +753,7 @@
         },
         {
             "con": {
-                "smart": "ramSetting",
+                "smart": "newRamSetting",
                 "name": "RamSetting'"
             },
             "arguments": [
@@ -838,7 +838,7 @@
         },
         {
             "con": {
-                "smart": "rulesSetting",
+                "smart": "newRulesSetting",
                 "name": "RulesSetting'"
             },
             "arguments": [
@@ -1026,7 +1026,7 @@
         },
         {
             "con": {
-                "smart": "serversSetting",
+                "smart": "newServersSetting",
                 "name": "ServersSetting'"
             },
             "arguments": [
@@ -1111,7 +1111,7 @@
         },
         {
             "con": {
-                "smart": "storageServersSetting",
+                "smart": "newStorageServersSetting",
                 "name": "StorageServersSetting'"
             },
             "arguments": [
@@ -1196,7 +1196,7 @@
         },
         {
             "con": {
-                "smart": "thresholdsSetting",
+                "smart": "newThresholdsSetting",
                 "name": "ThresholdsSetting'"
             },
             "arguments": [
@@ -1383,7 +1383,7 @@
         },
         {
             "con": {
-                "smart": "transferSetting",
+                "smart": "newTransferSetting",
                 "name": "TransferSetting'"
             },
             "arguments": [
@@ -1468,7 +1468,7 @@
         },
         {
             "con": {
-                "smart": "warningSetting",
+                "smart": "newWarningSetting",
                 "name": "WarningSetting'"
             },
             "arguments": [
