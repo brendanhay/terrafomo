@@ -226,7 +226,7 @@ appServiceData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (AppServiceData s)
 appServiceData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_app_service" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_app_service" TF.validator $
         AppServiceData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -311,7 +311,7 @@ appServicePlanData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (AppServicePlanData s)
 appServicePlanData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_app_service_plan" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_app_service_plan" TF.validator $
         AppServicePlanData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -375,7 +375,7 @@ applicationSecurityGroupData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (ApplicationSecurityGroupData s)
 applicationSecurityGroupData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_application_security_group" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_application_security_group" TF.validator $
         ApplicationSecurityGroupData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -419,7 +419,7 @@ data AzureadApplicationData s = AzureadApplicationData'
 azureadApplicationData
     :: P.DataSource (AzureadApplicationData s)
 azureadApplicationData =
-    TF.unsafeDataSource "azurerm_azuread_application" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_azuread_application" TF.validator $
         AzureadApplicationData'
 
 instance TF.IsObject (AzureadApplicationData s) where
@@ -465,7 +465,7 @@ data AzureadServicePrincipalData s = AzureadServicePrincipalData'
 azureadServicePrincipalData
     :: P.DataSource (AzureadServicePrincipalData s)
 azureadServicePrincipalData =
-    TF.unsafeDataSource "azurerm_azuread_service_principal" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_azuread_service_principal" TF.validator $
         AzureadServicePrincipalData'
 
 instance TF.IsObject (AzureadServicePrincipalData s) where
@@ -500,7 +500,7 @@ builtinRoleDefinitionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (BuiltinRoleDefinitionData s)
 builtinRoleDefinitionData _name =
-    TF.unsafeDataSource "azurerm_builtin_role_definition" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_builtin_role_definition" TF.validator $
         BuiltinRoleDefinitionData'
             { _name = _name
             }
@@ -551,7 +551,7 @@ cdnProfileData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (CdnProfileData s)
 cdnProfileData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_cdn_profile" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_cdn_profile" TF.validator $
         CdnProfileData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -598,7 +598,7 @@ data ClientConfigData s = ClientConfigData'
 clientConfigData
     :: P.DataSource (ClientConfigData s)
 clientConfigData =
-    TF.unsafeDataSource "azurerm_client_config" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_client_config" TF.validator $
         ClientConfigData'
 
 instance TF.IsObject (ClientConfigData s) where
@@ -643,7 +643,7 @@ containerRegistryData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (ContainerRegistryData s)
 containerRegistryData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_container_registry" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_container_registry" TF.validator $
         ContainerRegistryData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -710,7 +710,7 @@ cosmosdbAccountData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (CosmosdbAccountData s)
 cosmosdbAccountData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_cosmosdb_account" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_cosmosdb_account" TF.validator $
         CosmosdbAccountData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -804,7 +804,7 @@ dataLakeStoreData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (DataLakeStoreData s)
 dataLakeStoreData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_data_lake_store" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_data_lake_store" TF.validator $
         DataLakeStoreData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -867,7 +867,7 @@ dnsZoneData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DnsZoneData s)
 dnsZoneData _name =
-    TF.unsafeDataSource "azurerm_dns_zone" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_dns_zone" TF.validator $
         DnsZoneData'
             { _name = _name
             }
@@ -930,7 +930,7 @@ eventhubNamespaceData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (EventhubNamespaceData s)
 eventhubNamespaceData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_eventhub_namespace" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_eventhub_namespace" TF.validator $
         EventhubNamespaceData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -1017,7 +1017,7 @@ imageData
     :: TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (ImageData s)
 imageData _resourceGroupName =
-    TF.unsafeDataSource "azurerm_image" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_image" TF.validator $
         ImageData'
             { _name = TF.Nil
             , _nameRegex = TF.Nil
@@ -1100,7 +1100,7 @@ keyVaultData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (KeyVaultData s)
 keyVaultData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_key_vault" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_key_vault" TF.validator $
         KeyVaultData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -1169,7 +1169,7 @@ keyVaultAccessPolicyData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (KeyVaultAccessPolicyData s)
 keyVaultAccessPolicyData _name =
-    TF.unsafeDataSource "azurerm_key_vault_access_policy" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_key_vault_access_policy" TF.validator $
         KeyVaultAccessPolicyData'
             { _name = _name
             }
@@ -1217,7 +1217,7 @@ keyVaultSecretData
     -> TF.Attr s P.Text -- ^ @vault_uri@ - 'P.vaultUri'
     -> P.DataSource (KeyVaultSecretData s)
 keyVaultSecretData _name _vaultUri =
-    TF.unsafeDataSource "azurerm_key_vault_secret" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_key_vault_secret" TF.validator $
         KeyVaultSecretData'
             { _name = _name
             , _vaultUri = _vaultUri
@@ -1275,7 +1275,7 @@ kubernetesClusterData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (KubernetesClusterData s)
 kubernetesClusterData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_kubernetes_cluster" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_kubernetes_cluster" TF.validator $
         KubernetesClusterData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -1357,7 +1357,7 @@ logicAppWorkflowData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (LogicAppWorkflowData s)
 logicAppWorkflowData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_logic_app_workflow" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_logic_app_workflow" TF.validator $
         LogicAppWorkflowData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -1421,7 +1421,7 @@ managedDiskData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (ManagedDiskData s)
 managedDiskData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_managed_disk" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_managed_disk" TF.validator $
         ManagedDiskData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -1488,7 +1488,7 @@ networkInterfaceData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (NetworkInterfaceData s)
 networkInterfaceData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_network_interface" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_network_interface" TF.validator $
         NetworkInterfaceData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -1576,7 +1576,7 @@ networkSecurityGroupData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (NetworkSecurityGroupData s)
 networkSecurityGroupData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_network_security_group" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_network_security_group" TF.validator $
         NetworkSecurityGroupData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -1635,7 +1635,7 @@ notificationHubData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (NotificationHubData s)
 notificationHubData _name _namespaceName _resourceGroupName =
-    TF.unsafeDataSource "azurerm_notification_hub" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_notification_hub" TF.validator $
         NotificationHubData'
             { _name = _name
             , _namespaceName = _namespaceName
@@ -1697,7 +1697,7 @@ notificationHubNamespaceData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (NotificationHubNamespaceData s)
 notificationHubNamespaceData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_notification_hub_namespace" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_notification_hub_namespace" TF.validator $
         NotificationHubNamespaceData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -1766,7 +1766,7 @@ platformImageData
     -> TF.Attr s P.Text -- ^ @sku@ - 'P.sku'
     -> P.DataSource (PlatformImageData s)
 platformImageData _location _offer _publisher _sku =
-    TF.unsafeDataSource "azurerm_platform_image" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_platform_image" TF.validator $
         PlatformImageData'
             { _location = _location
             , _offer = _offer
@@ -1829,7 +1829,7 @@ publicIpData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (PublicIpData s)
 publicIpData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_public_ip" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_public_ip" TF.validator $
         PublicIpData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -1895,7 +1895,7 @@ publicIpsData
     :: TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (PublicIpsData s)
 publicIpsData _resourceGroupName =
-    TF.unsafeDataSource "azurerm_public_ips" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_public_ips" TF.validator $
         PublicIpsData'
             { _allocationType = TF.Nil
             , _attached = TF.Nil
@@ -1958,7 +1958,7 @@ recoveryServicesVaultData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (RecoveryServicesVaultData s)
 recoveryServicesVaultData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_recovery_services_vault" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_recovery_services_vault" TF.validator $
         RecoveryServicesVaultData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -2009,7 +2009,7 @@ resourceGroupData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ResourceGroupData s)
 resourceGroupData _name =
-    TF.unsafeDataSource "azurerm_resource_group" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_resource_group" TF.validator $
         ResourceGroupData'
             { _name = _name
             }
@@ -2054,7 +2054,7 @@ roleDefinitionData
     -> TF.Attr s P.Text -- ^ @scope@ - 'P.scope'
     -> P.DataSource (RoleDefinitionData s)
 roleDefinitionData _roleDefinitionId _scope =
-    TF.unsafeDataSource "azurerm_role_definition" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_role_definition" TF.validator $
         RoleDefinitionData'
             { _roleDefinitionId = _roleDefinitionId
             , _scope = _scope
@@ -2115,7 +2115,7 @@ routeTableData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (RouteTableData s)
 routeTableData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_route_table" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_route_table" TF.validator $
         RouteTableData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -2173,7 +2173,7 @@ schedulerJobCollectionData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (SchedulerJobCollectionData s)
 schedulerJobCollectionData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_scheduler_job_collection" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_scheduler_job_collection" TF.validator $
         SchedulerJobCollectionData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -2234,7 +2234,7 @@ snapshotData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (SnapshotData s)
 snapshotData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_snapshot" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_snapshot" TF.validator $
         SnapshotData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -2304,7 +2304,7 @@ storageAccountData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (StorageAccountData s)
 storageAccountData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_storage_account" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_storage_account" TF.validator $
         StorageAccountData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -2447,7 +2447,7 @@ storageAccountSasData
     -> TF.Attr s P.Text -- ^ @start@ - 'P.start'
     -> P.DataSource (StorageAccountSasData s)
 storageAccountSasData _connectionString _expiry _permissions _resourceTypes _services _start =
-    TF.unsafeDataSource "azurerm_storage_account_sas" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_storage_account_sas" TF.validator $
         StorageAccountSasData'
             { _connectionString = _connectionString
             , _expiry = _expiry
@@ -2547,7 +2547,7 @@ subnetData
     -> TF.Attr s P.Text -- ^ @virtual_network_name@ - 'P.virtualNetworkName'
     -> P.DataSource (SubnetData s)
 subnetData _name _resourceGroupName _virtualNetworkName =
-    TF.unsafeDataSource "azurerm_subnet" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_subnet" TF.validator $
         SubnetData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -2604,7 +2604,7 @@ data SubscriptionData s = SubscriptionData'
 subscriptionData
     :: P.DataSource (SubscriptionData s)
 subscriptionData =
-    TF.unsafeDataSource "azurerm_subscription" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_subscription" TF.validator $
         SubscriptionData'
 
 instance TF.IsObject (SubscriptionData s) where
@@ -2644,7 +2644,7 @@ data SubscriptionsData s = SubscriptionsData'
 subscriptionsData
     :: P.DataSource (SubscriptionsData s)
 subscriptionsData =
-    TF.unsafeDataSource "azurerm_subscriptions" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_subscriptions" TF.validator $
         SubscriptionsData'
 
 instance TF.IsObject (SubscriptionsData s) where
@@ -2673,7 +2673,7 @@ trafficManagerGeographicalLocationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (TrafficManagerGeographicalLocationData s)
 trafficManagerGeographicalLocationData _name =
-    TF.unsafeDataSource "azurerm_traffic_manager_geographical_location" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_traffic_manager_geographical_location" TF.validator $
         TrafficManagerGeographicalLocationData'
             { _name = _name
             }
@@ -2712,7 +2712,7 @@ virtualNetworkData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (VirtualNetworkData s)
 virtualNetworkData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_virtual_network" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_virtual_network" TF.validator $
         VirtualNetworkData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -2770,7 +2770,7 @@ virtualNetworkGatewayData
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (VirtualNetworkGatewayData s)
 virtualNetworkGatewayData _name _resourceGroupName =
-    TF.unsafeDataSource "azurerm_virtual_network_gateway" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "azurerm_virtual_network_gateway" TF.validator $
         VirtualNetworkGatewayData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName

@@ -237,7 +237,7 @@ roleDefinitionResource
     -> TF.Attr s P.Text -- ^ @scope@ - 'P.scope'
     -> P.Resource (RoleDefinitionResource s)
 roleDefinitionResource _assignableScopes _name _permissions _scope =
-    TF.unsafeResource "azurerm_role_definition" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_role_definition" TF.validator $
         RoleDefinitionResource'
             { _assignableScopes = _assignableScopes
             , _description = TF.Nil
@@ -316,7 +316,7 @@ routeResource
     -> TF.Attr s P.Text -- ^ @route_table_name@ - 'P.routeTableName'
     -> P.Resource (RouteResource s)
 routeResource _addressPrefix _name _nextHopType _resourceGroupName _routeTableName =
-    TF.unsafeResource "azurerm_route" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_route" TF.validator $
         RouteResource'
             { _addressPrefix = _addressPrefix
             , _name = _name
@@ -390,7 +390,7 @@ routeTableResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.Resource (RouteTableResource s)
 routeTableResource _location _name _resourceGroupName =
-    TF.unsafeResource "azurerm_route_table" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_route_table" TF.validator $
         RouteTableResource'
             { _disableBgpRoutePropagation = TF.value P.False
             , _location = _location
@@ -490,7 +490,7 @@ schedulerJobResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.Resource (SchedulerJobResource s)
 schedulerJobResource _jobCollectionName _name _resourceGroupName =
-    TF.unsafeResource "azurerm_scheduler_job" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_scheduler_job" TF.validator $
         SchedulerJobResource'
             { _actionStorageQueue = TF.Nil
             , _actionWeb = TF.Nil
@@ -647,7 +647,7 @@ schedulerJobCollectionResource
     -> TF.Attr s P.Text -- ^ @sku@ - 'P.sku'
     -> P.Resource (SchedulerJobCollectionResource s)
 schedulerJobCollectionResource _location _name _resourceGroupName _sku =
-    TF.unsafeResource "azurerm_scheduler_job_collection" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_scheduler_job_collection" TF.validator $
         SchedulerJobCollectionResource'
             { _location = _location
             , _name = _name
@@ -733,7 +733,7 @@ searchServiceResource
     -> TF.Attr s P.Text -- ^ @sku@ - 'P.sku'
     -> P.Resource (SearchServiceResource s)
 searchServiceResource _location _name _resourceGroupName _sku =
-    TF.unsafeResource "azurerm_search_service" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_search_service" TF.validator $
         SearchServiceResource'
             { _location = _location
             , _name = _name
@@ -838,7 +838,7 @@ serviceFabricClusterResource
     -> TF.Attr s P.Text -- ^ @vm_image@ - 'P.vmImage'
     -> P.Resource (ServiceFabricClusterResource s)
 serviceFabricClusterResource _location _managementEndpoint _name _nodeType _reliabilityLevel _resourceGroupName _upgradeMode _vmImage =
-    TF.unsafeResource "azurerm_service_fabric_cluster" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_service_fabric_cluster" TF.validator $
         ServiceFabricClusterResource'
             { _addOnFeatures = TF.Nil
             , _certificate = TF.Nil
@@ -987,7 +987,7 @@ servicebusNamespaceResource
     -> TF.Attr s P.Text -- ^ @sku@ - 'P.sku'
     -> P.Resource (ServicebusNamespaceResource s)
 servicebusNamespaceResource _location _name _resourceGroupName _sku =
-    TF.unsafeResource "azurerm_servicebus_namespace" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_servicebus_namespace" TF.validator $
         ServicebusNamespaceResource'
             { _capacity = TF.Nil
             , _location = _location
@@ -1079,7 +1079,7 @@ servicebusNamespaceAuthorizationRuleResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.Resource (ServicebusNamespaceAuthorizationRuleResource s)
 servicebusNamespaceAuthorizationRuleResource _name _namespaceName _resourceGroupName =
-    TF.unsafeResource "azurerm_servicebus_namespace_authorization_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_servicebus_namespace_authorization_rule" TF.validator $
         ServicebusNamespaceAuthorizationRuleResource'
             { _listen = TF.value P.False
             , _manage = TF.value P.False
@@ -1181,7 +1181,7 @@ servicebusQueueResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.Resource (ServicebusQueueResource s)
 servicebusQueueResource _name _namespaceName _resourceGroupName =
-    TF.unsafeResource "azurerm_servicebus_queue" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_servicebus_queue" TF.validator $
         ServicebusQueueResource'
             { _deadLetteringOnMessageExpiration = TF.value P.False
             , _enableExpress = TF.value P.False
@@ -1298,7 +1298,7 @@ servicebusQueueAuthorizationRuleResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.Resource (ServicebusQueueAuthorizationRuleResource s)
 servicebusQueueAuthorizationRuleResource _name _namespaceName _queueName _resourceGroupName =
-    TF.unsafeResource "azurerm_servicebus_queue_authorization_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_servicebus_queue_authorization_rule" TF.validator $
         ServicebusQueueAuthorizationRuleResource'
             { _listen = TF.value P.False
             , _manage = TF.value P.False
@@ -1412,7 +1412,7 @@ servicebusSubscriptionResource
     -> TF.Attr s P.Text -- ^ @topic_name@ - 'P.topicName'
     -> P.Resource (ServicebusSubscriptionResource s)
 servicebusSubscriptionResource _maxDeliveryCount _name _namespaceName _resourceGroupName _topicName =
-    TF.unsafeResource "azurerm_servicebus_subscription" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_servicebus_subscription" TF.validator $
         ServicebusSubscriptionResource'
             { _deadLetteringOnMessageExpiration = TF.Nil
             , _enableBatchedOperations = TF.Nil
@@ -1544,7 +1544,7 @@ servicebusSubscriptionRuleResource
     -> TF.Attr s P.Text -- ^ @topic_name@ - 'P.topicName'
     -> P.Resource (ServicebusSubscriptionRuleResource s)
 servicebusSubscriptionRuleResource _filterType _name _namespaceName _resourceGroupName _subscriptionName _topicName =
-    TF.unsafeResource "azurerm_servicebus_subscription_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_servicebus_subscription_rule" TF.validator $
         ServicebusSubscriptionRuleResource'
             { _action = TF.Nil
             , _correlationFilter = TF.Nil
@@ -1673,7 +1673,7 @@ servicebusTopicResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.Resource (ServicebusTopicResource s)
 servicebusTopicResource _name _namespaceName _resourceGroupName =
-    TF.unsafeResource "azurerm_servicebus_topic" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_servicebus_topic" TF.validator $
         ServicebusTopicResource'
             { _enableBatchedOperations = TF.Nil
             , _enableExpress = TF.Nil
@@ -1794,7 +1794,7 @@ servicebusTopicAuthorizationRuleResource
     -> TF.Attr s P.Text -- ^ @topic_name@ - 'P.topicName'
     -> P.Resource (ServicebusTopicAuthorizationRuleResource s)
 servicebusTopicAuthorizationRuleResource _name _namespaceName _resourceGroupName _topicName =
-    TF.unsafeResource "azurerm_servicebus_topic_authorization_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_servicebus_topic_authorization_rule" TF.validator $
         ServicebusTopicAuthorizationRuleResource'
             { _listen = TF.value P.False
             , _manage = TF.value P.False
@@ -1904,7 +1904,7 @@ snapshotResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.Resource (SnapshotResource s)
 snapshotResource _createOption _location _name _resourceGroupName =
-    TF.unsafeResource "azurerm_snapshot" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_snapshot" TF.validator $
         SnapshotResource'
             { _createOption = _createOption
             , _encryptionSettings = TF.Nil
@@ -2011,7 +2011,7 @@ sqlActiveDirectoryAdministratorResource
     -> TF.Attr s P.Text -- ^ @tenant_id@ - 'P.tenantId'
     -> P.Resource (SqlActiveDirectoryAdministratorResource s)
 sqlActiveDirectoryAdministratorResource _login _objectId _resourceGroupName _serverName _tenantId =
-    TF.unsafeResource "azurerm_sql_active_directory_administrator" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_sql_active_directory_administrator" TF.validator $
         SqlActiveDirectoryAdministratorResource'
             { _login = _login
             , _objectId = _objectId
@@ -2089,7 +2089,7 @@ sqlDatabaseResource
     -> TF.Attr s P.Text -- ^ @server_name@ - 'P.serverName'
     -> P.Resource (SqlDatabaseResource s)
 sqlDatabaseResource _location _name _resourceGroupName _serverName =
-    TF.unsafeResource "azurerm_sql_database" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_sql_database" TF.validator $
         SqlDatabaseResource'
             { _createMode = TF.value "Default"
             , _import' = TF.Nil
@@ -2219,7 +2219,7 @@ sqlElasticpoolResource
     -> TF.Attr s P.Text -- ^ @server_name@ - 'P.serverName'
     -> P.Resource (SqlElasticpoolResource s)
 sqlElasticpoolResource _dtu _edition _location _name _resourceGroupName _serverName =
-    TF.unsafeResource "azurerm_sql_elasticpool" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_sql_elasticpool" TF.validator $
         SqlElasticpoolResource'
             { _dtu = _dtu
             , _edition = _edition
@@ -2317,7 +2317,7 @@ sqlFirewallRuleResource
     -> TF.Attr s P.Text -- ^ @start_ip_address@ - 'P.startIpAddress'
     -> P.Resource (SqlFirewallRuleResource s)
 sqlFirewallRuleResource _endIpAddress _name _resourceGroupName _serverName _startIpAddress =
-    TF.unsafeResource "azurerm_sql_firewall_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_sql_firewall_rule" TF.validator $
         SqlFirewallRuleResource'
             { _endIpAddress = _endIpAddress
             , _name = _name
@@ -2397,7 +2397,7 @@ sqlServerResource
     -> TF.Attr s P.Text -- ^ @version@ - 'P.version'
     -> P.Resource (SqlServerResource s)
 sqlServerResource _administratorLogin _administratorLoginPassword _location _name _resourceGroupName _version =
-    TF.unsafeResource "azurerm_sql_server" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_sql_server" TF.validator $
         SqlServerResource'
             { _administratorLogin = _administratorLogin
             , _administratorLoginPassword = _administratorLoginPassword
@@ -2485,7 +2485,7 @@ sqlVirtualNetworkRuleResource
     -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> P.Resource (SqlVirtualNetworkRuleResource s)
 sqlVirtualNetworkRuleResource _name _resourceGroupName _serverName _subnetId =
-    TF.unsafeResource "azurerm_sql_virtual_network_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_sql_virtual_network_rule" TF.validator $
         SqlVirtualNetworkRuleResource'
             { _ignoreMissingVnetServiceEndpoint = TF.value P.False
             , _name = _name
@@ -2582,7 +2582,7 @@ storageAccountResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.Resource (StorageAccountResource s)
 storageAccountResource _accountReplicationType _accountTier _location _name _resourceGroupName =
-    TF.unsafeResource "azurerm_storage_account" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_storage_account" TF.validator $
         StorageAccountResource'
             { _accountEncryptionSource = TF.value "Microsoft.Storage"
             , _accountKind = TF.value "Storage"
@@ -2796,7 +2796,7 @@ storageBlobResource
     -> TF.Attr s P.Text -- ^ @storage_container_name@ - 'P.storageContainerName'
     -> P.Resource (StorageBlobResource s)
 storageBlobResource _name _resourceGroupName _storageAccountName _storageContainerName =
-    TF.unsafeResource "azurerm_storage_blob" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_storage_blob" TF.validator $
         StorageBlobResource'
             { _attempts = TF.value 1
             , _contentType = TF.value "application/octet-stream"
@@ -2928,7 +2928,7 @@ storageContainerResource
     -> TF.Attr s P.Text -- ^ @storage_account_name@ - 'P.storageAccountName'
     -> P.Resource (StorageContainerResource s)
 storageContainerResource _name _resourceGroupName _storageAccountName =
-    TF.unsafeResource "azurerm_storage_container" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_storage_container" TF.validator $
         StorageContainerResource'
             { _containerAccessType = TF.value "private"
             , _name = _name
@@ -2992,7 +2992,7 @@ storageQueueResource
     -> TF.Attr s P.Text -- ^ @storage_account_name@ - 'P.storageAccountName'
     -> P.Resource (StorageQueueResource s)
 storageQueueResource _name _resourceGroupName _storageAccountName =
-    TF.unsafeResource "azurerm_storage_queue" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_storage_queue" TF.validator $
         StorageQueueResource'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -3049,7 +3049,7 @@ storageShareResource
     -> TF.Attr s P.Text -- ^ @storage_account_name@ - 'P.storageAccountName'
     -> P.Resource (StorageShareResource s)
 storageShareResource _name _resourceGroupName _storageAccountName =
-    TF.unsafeResource "azurerm_storage_share" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_storage_share" TF.validator $
         StorageShareResource'
             { _name = _name
             , _quota = TF.value 5120
@@ -3113,7 +3113,7 @@ storageTableResource
     -> TF.Attr s P.Text -- ^ @storage_account_name@ - 'P.storageAccountName'
     -> P.Resource (StorageTableResource s)
 storageTableResource _name _resourceGroupName _storageAccountName =
-    TF.unsafeResource "azurerm_storage_table" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_storage_table" TF.validator $
         StorageTableResource'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
@@ -3180,7 +3180,7 @@ subnetResource
     -> TF.Attr s P.Text -- ^ @virtual_network_name@ - 'P.virtualNetworkName'
     -> P.Resource (SubnetResource s)
 subnetResource _addressPrefix _name _resourceGroupName _virtualNetworkName =
-    TF.unsafeResource "azurerm_subnet" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_subnet" TF.validator $
         SubnetResource'
             { _addressPrefix = _addressPrefix
             , _name = _name
@@ -3277,7 +3277,7 @@ templateDeploymentResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.Resource (TemplateDeploymentResource s)
 templateDeploymentResource _deploymentMode _name _resourceGroupName =
-    TF.unsafeResource "azurerm_template_deployment" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_template_deployment" TF.validator $
         TemplateDeploymentResource'
             { _deploymentMode = _deploymentMode
             , _name = _name
@@ -3375,7 +3375,7 @@ trafficManagerEndpointResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (TrafficManagerEndpointResource s)
 trafficManagerEndpointResource _name _profileName _resourceGroupName _type' =
-    TF.unsafeResource "azurerm_traffic_manager_endpoint" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_traffic_manager_endpoint" TF.validator $
         TrafficManagerEndpointResource'
             { _geoMappings = TF.Nil
             , _minChildEndpoints = TF.Nil
@@ -3483,7 +3483,7 @@ trafficManagerProfileResource
     -> TF.Attr s P.Text -- ^ @traffic_routing_method@ - 'P.trafficRoutingMethod'
     -> P.Resource (TrafficManagerProfileResource s)
 trafficManagerProfileResource _dnsConfig _monitorConfig _name _resourceGroupName _trafficRoutingMethod =
-    TF.unsafeResource "azurerm_traffic_manager_profile" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_traffic_manager_profile" TF.validator $
         TrafficManagerProfileResource'
             { _dnsConfig = _dnsConfig
             , _monitorConfig = _monitorConfig
@@ -3560,7 +3560,7 @@ userAssignedIdentityResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.Resource (UserAssignedIdentityResource s)
 userAssignedIdentityResource _location _name _resourceGroupName =
-    TF.unsafeResource "azurerm_user_assigned_identity" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_user_assigned_identity" TF.validator $
         UserAssignedIdentityResource'
             { _location = _location
             , _name = _name
@@ -3668,7 +3668,7 @@ virtualMachineResource
     -> TF.Attr s P.Text -- ^ @vm_size@ - 'P.vmSize'
     -> P.Resource (VirtualMachineResource s)
 virtualMachineResource _location _name _networkInterfaceIds _resourceGroupName _storageOsDisk _vmSize =
-    TF.unsafeResource "azurerm_virtual_machine" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_virtual_machine" TF.validator $
         VirtualMachineResource'
             { _bootDiagnostics = TF.Nil
             , _deleteDataDisksOnTermination = TF.value P.False
@@ -3876,7 +3876,7 @@ virtualMachineDataDiskAttachmentResource
     -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
     -> P.Resource (VirtualMachineDataDiskAttachmentResource s)
 virtualMachineDataDiskAttachmentResource _caching _lun _managedDiskId _virtualMachineId =
-    TF.unsafeResource "azurerm_virtual_machine_data_disk_attachment" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_virtual_machine_data_disk_attachment" TF.validator $
         VirtualMachineDataDiskAttachmentResource'
             { _caching = _caching
             , _createOption = TF.value "Attach"
@@ -3976,7 +3976,7 @@ virtualMachineExtensionResource
     -> TF.Attr s P.Text -- ^ @virtual_machine_name@ - 'P.virtualMachineName'
     -> P.Resource (VirtualMachineExtensionResource s)
 virtualMachineExtensionResource _location _name _publisher _resourceGroupName _type' _typeHandlerVersion _virtualMachineName =
-    TF.unsafeResource "azurerm_virtual_machine_extension" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_virtual_machine_extension" TF.validator $
         VirtualMachineExtensionResource'
             { _autoUpgradeMinorVersion = TF.Nil
             , _location = _location
@@ -4132,7 +4132,7 @@ virtualMachineScaleSetResource
     -> TF.Attr s P.Text -- ^ @upgrade_policy_mode@ - 'P.upgradePolicyMode'
     -> P.Resource (VirtualMachineScaleSetResource s)
 virtualMachineScaleSetResource _location _name _networkProfile _osProfile _resourceGroupName _sku _storageProfileOsDisk _upgradePolicyMode =
-    TF.unsafeResource "azurerm_virtual_machine_scale_set" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_virtual_machine_scale_set" TF.validator $
         VirtualMachineScaleSetResource'
             { _bootDiagnostics = TF.Nil
             , _extension = TF.Nil
@@ -4337,7 +4337,7 @@ virtualNetworkResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.Resource (VirtualNetworkResource s)
 virtualNetworkResource _addressSpace _location _name _resourceGroupName =
-    TF.unsafeResource "azurerm_virtual_network" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_virtual_network" TF.validator $
         VirtualNetworkResource'
             { _addressSpace = _addressSpace
             , _dnsServers = TF.Nil
@@ -4432,7 +4432,7 @@ virtualNetworkGatewayResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (VirtualNetworkGatewayResource s)
 virtualNetworkGatewayResource _ipConfiguration _location _name _resourceGroupName _sku _type' =
-    TF.unsafeResource "azurerm_virtual_network_gateway" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_virtual_network_gateway" TF.validator $
         VirtualNetworkGatewayResource'
             { _defaultLocalNetworkGatewayId = TF.Nil
             , _ipConfiguration = _ipConfiguration
@@ -4570,7 +4570,7 @@ virtualNetworkGatewayConnectionResource
     -> TF.Attr s P.Text -- ^ @virtual_network_gateway_id@ - 'P.virtualNetworkGatewayId'
     -> P.Resource (VirtualNetworkGatewayConnectionResource s)
 virtualNetworkGatewayConnectionResource _location _name _resourceGroupName _type' _virtualNetworkGatewayId =
-    TF.unsafeResource "azurerm_virtual_network_gateway_connection" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_virtual_network_gateway_connection" TF.validator $
         VirtualNetworkGatewayConnectionResource'
             { _authorizationKey = TF.Nil
             , _expressRouteCircuitId = TF.Nil
@@ -4700,7 +4700,7 @@ virtualNetworkPeeringResource
     -> TF.Attr s P.Text -- ^ @virtual_network_name@ - 'P.virtualNetworkName'
     -> P.Resource (VirtualNetworkPeeringResource s)
 virtualNetworkPeeringResource _name _remoteVirtualNetworkId _resourceGroupName _virtualNetworkName =
-    TF.unsafeResource "azurerm_virtual_network_peering" P.defaultProvider TF.validator $
+    TF.unsafeResource "azurerm_virtual_network_peering" TF.validator $
         VirtualNetworkPeeringResource'
             { _name = _name
             , _remoteVirtualNetworkId = _remoteVirtualNetworkId
