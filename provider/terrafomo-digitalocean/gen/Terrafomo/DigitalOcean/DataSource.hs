@@ -71,7 +71,7 @@ domainData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DomainData s)
 domainData _name =
-    TF.unsafeDataSource "digitalocean_domain" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "digitalocean_domain" TF.validator $
         DomainData'
             { _name = _name
             }
@@ -113,7 +113,7 @@ imageData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ImageData s)
 imageData _name =
-    TF.unsafeDataSource "digitalocean_image" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "digitalocean_image" TF.validator $
         ImageData'
             { _name = _name
             }
@@ -169,7 +169,7 @@ recordData
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (RecordData s)
 recordData _domain _name =
-    TF.unsafeDataSource "digitalocean_record" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "digitalocean_record" TF.validator $
         RecordData'
             { _domain = _domain
             , _name = _name

@@ -109,7 +109,7 @@ certificateResource
     -> TF.Attr s P.Text -- ^ @private_key@ - 'P.privateKey'
     -> P.Resource (CertificateResource s)
 certificateResource _leafCertificate _name _privateKey =
-    TF.unsafeResource "digitalocean_certificate" P.defaultProvider TF.validator $
+    TF.unsafeResource "digitalocean_certificate" TF.validator $
         CertificateResource'
             { _certificateChain = TF.Nil
             , _leafCertificate = _leafCertificate
@@ -172,7 +172,7 @@ domainResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DomainResource s)
 domainResource _ipAddress _name =
-    TF.unsafeResource "digitalocean_domain" P.defaultProvider TF.validator $
+    TF.unsafeResource "digitalocean_domain" TF.validator $
         DomainResource'
             { _ipAddress = _ipAddress
             , _name = _name
@@ -250,7 +250,7 @@ dropletResource
     -> TF.Attr s P.Text -- ^ @size@ - 'P.size'
     -> P.Resource (DropletResource s)
 dropletResource _image _name _region _size =
-    TF.unsafeResource "digitalocean_droplet" P.defaultProvider TF.validator $
+    TF.unsafeResource "digitalocean_droplet" TF.validator $
         DropletResource'
             { _backups = TF.Nil
             , _image = _image
@@ -408,7 +408,7 @@ firewallResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (FirewallResource s)
 firewallResource _name =
-    TF.unsafeResource "digitalocean_firewall" P.defaultProvider TF.validator $
+    TF.unsafeResource "digitalocean_firewall" TF.validator $
         FirewallResource'
             { _dropletIds = TF.Nil
             , _inboundRule = TF.Nil
@@ -480,7 +480,7 @@ floatingIpResource
     :: TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> P.Resource (FloatingIpResource s)
 floatingIpResource _region =
-    TF.unsafeResource "digitalocean_floating_ip" P.defaultProvider TF.validator $
+    TF.unsafeResource "digitalocean_floating_ip" TF.validator $
         FloatingIpResource'
             { _dropletId = TF.Nil
             , _region = _region
@@ -545,7 +545,7 @@ loadbalancerResource
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> P.Resource (LoadbalancerResource s)
 loadbalancerResource _forwardingRule _name _region =
-    TF.unsafeResource "digitalocean_loadbalancer" P.defaultProvider TF.validator $
+    TF.unsafeResource "digitalocean_loadbalancer" TF.validator $
         LoadbalancerResource'
             { _algorithm = TF.value "round_robin"
             , _dropletIds = TF.Nil
@@ -646,7 +646,7 @@ recordResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (RecordResource s)
 recordResource _domain _type' =
-    TF.unsafeResource "digitalocean_record" P.defaultProvider TF.validator $
+    TF.unsafeResource "digitalocean_record" TF.validator $
         RecordResource'
             { _domain = _domain
             , _name = TF.Nil
@@ -724,7 +724,7 @@ sshKeyResource
     -> TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
     -> P.Resource (SshKeyResource s)
 sshKeyResource _name _publicKey =
-    TF.unsafeResource "digitalocean_ssh_key" P.defaultProvider TF.validator $
+    TF.unsafeResource "digitalocean_ssh_key" TF.validator $
         SshKeyResource'
             { _name = _name
             , _publicKey = _publicKey
@@ -769,7 +769,7 @@ tagResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (TagResource s)
 tagResource _name =
-    TF.unsafeResource "digitalocean_tag" P.defaultProvider TF.validator $
+    TF.unsafeResource "digitalocean_tag" TF.validator $
         TagResource'
             { _name = _name
             }
@@ -815,7 +815,7 @@ volumeResource
     -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (VolumeResource s)
 volumeResource _name _region _size =
-    TF.unsafeResource "digitalocean_volume" P.defaultProvider TF.validator $
+    TF.unsafeResource "digitalocean_volume" TF.validator $
         VolumeResource'
             { _description = TF.Nil
             , _filesystemType = TF.Nil
