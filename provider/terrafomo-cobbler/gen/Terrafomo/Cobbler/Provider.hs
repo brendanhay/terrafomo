@@ -100,7 +100,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "cobbler"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "cacert_file" <$> _cacertFile
             , TF.assign "insecure" <$> _insecure
