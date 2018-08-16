@@ -632,23 +632,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_collector",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"collector\" <$> TF.attribute",
-                    "name": "_collector",
-                    "method": "collector",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasCollector",
-                    "validate": false,
-                    "optional": false,
-                    "original": "collector"
-                },
-                {
                     "default": "_ipAddr",
                     "computed": false,
                     "required": true,
@@ -664,6 +647,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "ip_addr"
+                },
+                {
+                    "default": "_collector",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"collector\" <$> TF.attribute",
+                    "name": "_collector",
+                    "method": "collector",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasCollector",
+                    "validate": false,
+                    "optional": false,
+                    "original": "collector"
                 }
             ],
             "conflicts": [],
@@ -872,6 +872,23 @@
         "attributes": [],
         "parameters": [
             {
+                "default": "_company",
+                "computed": false,
+                "required": true,
+                "help": [],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"company\"",
+                "name": "_company",
+                "method": "company",
+                "threaded": false,
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasCompany",
+                "validate": false,
+                "optional": false,
+                "original": "company"
+            },
+            {
                 "default": "_apiId",
                 "computed": false,
                 "required": true,
@@ -904,23 +921,6 @@
                 "validate": false,
                 "optional": false,
                 "original": "api_key"
-            },
-            {
-                "default": "_company",
-                "computed": false,
-                "required": true,
-                "help": [],
-                "forceNew": false,
-                "encoder": "P.Just $ TF.assign \"company\"",
-                "name": "_company",
-                "method": "company",
-                "threaded": false,
-                "conflicts": [],
-                "type": "P.Text",
-                "class": "HasCompany",
-                "validate": false,
-                "optional": false,
-                "original": "company"
             }
         ],
         "conflicts": [],
