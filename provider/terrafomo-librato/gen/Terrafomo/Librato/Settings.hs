@@ -19,15 +19,15 @@ module Terrafomo.Librato.Settings
     (
     -- ** attributes
       AttributesSetting (..)
-    , attributesSetting
+    , newAttributesSetting
 
     -- ** condition
     , ConditionSetting (..)
-    , conditionSetting
+    , newConditionSetting
 
     -- ** stream
     , StreamSetting (..)
-    , streamSetting
+    , newStreamSetting
 
     ) where
 
@@ -84,9 +84,9 @@ data AttributesSetting s = AttributesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @attributes@ settings value.
-attributesSetting
+newAttributesSetting
     :: AttributesSetting s
-attributesSetting =
+newAttributesSetting =
     AttributesSetting'
         { _runbookUrl = TF.Nil
         , _aggregate = TF.Nil
@@ -190,11 +190,11 @@ data ConditionSetting s = ConditionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @condition@ settings value.
-conditionSetting
+newConditionSetting
     :: TF.Attr s P.Text -- ^ 'P._metricName': @metric_name@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> ConditionSetting s
-conditionSetting _metricName _type' =
+newConditionSetting _metricName _type' =
     ConditionSetting'
         { _detectReset = TF.Nil
         , _duration = TF.Nil
@@ -313,9 +313,9 @@ data StreamSetting s = StreamSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @stream@ settings value.
-streamSetting
+newStreamSetting
     :: StreamSetting s
-streamSetting =
+newStreamSetting =
     StreamSetting'
         { _color = TF.Nil
         , _composite = TF.Nil
