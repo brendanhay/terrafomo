@@ -239,8 +239,8 @@ data DeviceResource s = DeviceResource'
 
 -- | Define a new @logicmonitor_device@ resource value.
 deviceResource
-    :: TF.Attr s P.Text -- ^ @ip_addr@ - 'P.ipAddr'
-    -> TF.Attr s P.Int -- ^ @collector@ - 'P.collector'
+    :: TF.Attr s P.Text -- ^ @ip_addr@ ('P._ipAddr', 'P.ipAddr')
+    -> TF.Attr s P.Int -- ^ @collector@ ('P._collector', 'P.collector')
     -> P.Resource (DeviceResource s)
 deviceResource _ipAddr _collector =
     TF.unsafeResource "logicmonitor_device" TF.validator $
@@ -333,7 +333,7 @@ data DeviceGroupResource s = DeviceGroupResource'
 
 -- | Define a new @logicmonitor_device_group@ resource value.
 deviceGroupResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (DeviceGroupResource s)
 deviceGroupResource _name =
     TF.unsafeResource "logicmonitor_device_group" TF.validator $
