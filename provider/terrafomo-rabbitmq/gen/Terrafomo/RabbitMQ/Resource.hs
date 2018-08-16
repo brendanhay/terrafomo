@@ -157,6 +157,9 @@ instance P.HasVhost (BindingResource s) (TF.Attr s P.Text) where
         P.lens (_vhost :: BindingResource s -> TF.Attr s P.Text)
                (\s a -> s { _vhost = a } :: BindingResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (BindingResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedPropertiesKey (TF.Ref s' (BindingResource s)) (TF.Attr s P.Text) where
     computedPropertiesKey x = TF.compute (TF.refKey x) "properties_key"
 
@@ -217,6 +220,9 @@ instance P.HasVhost (ExchangeResource s) (TF.Attr s P.Text) where
         P.lens (_vhost :: ExchangeResource s -> TF.Attr s P.Text)
                (\s a -> s { _vhost = a } :: ExchangeResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ExchangeResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @rabbitmq_permissions@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/rabbitmq/r/permissions.html terraform documentation>
@@ -273,6 +279,9 @@ instance P.HasVhost (PermissionsResource s) (TF.Attr s P.Text) where
     vhost =
         P.lens (_vhost :: PermissionsResource s -> TF.Attr s P.Text)
                (\s a -> s { _vhost = a } :: PermissionsResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PermissionsResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @rabbitmq_policy@ Resource.
 --
@@ -332,6 +341,9 @@ instance P.HasVhost (PolicyResource s) (TF.Attr s P.Text) where
         P.lens (_vhost :: PolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _vhost = a } :: PolicyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @rabbitmq_queue@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/rabbitmq/r/queue.html terraform documentation>
@@ -389,6 +401,9 @@ instance P.HasVhost (QueueResource s) (TF.Attr s P.Text) where
         P.lens (_vhost :: QueueResource s -> TF.Attr s P.Text)
                (\s a -> s { _vhost = a } :: QueueResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (QueueResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @rabbitmq_user@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/rabbitmq/r/user.html terraform documentation>
@@ -442,6 +457,9 @@ instance P.HasTags (UserResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_tags :: UserResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: UserResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @rabbitmq_vhost@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/rabbitmq/r/vhost.html terraform documentation>
@@ -473,3 +491,6 @@ instance P.HasName (VhostResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: VhostResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: VhostResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VhostResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"

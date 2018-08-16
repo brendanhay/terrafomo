@@ -45,6 +45,7 @@ module Terrafomo.RabbitMQ.Lens
     , HasWrite (..)
 
     -- ** Computed Attributes
+    , HasComputedId (..)
     , HasComputedPropertiesKey (..)
     ) where
 
@@ -220,6 +221,9 @@ class HasWrite a b | a -> b where
 
 instance HasWrite a b => HasWrite (TF.Schema l p a) b where
     write = TF.configuration . write
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedPropertiesKey a b | a -> b where
     computedPropertiesKey :: a -> b
