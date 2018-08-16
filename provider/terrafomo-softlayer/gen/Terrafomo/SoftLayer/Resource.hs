@@ -69,10 +69,10 @@ data SshKeyResource s = SshKeyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 sshKeyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
+    :: TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SshKeyResource s)
-sshKeyResource _name _publicKey =
+sshKeyResource _publicKey _name =
     TF.unsafeResource "softlayer_ssh_key" TF.validator $
         SshKeyResource'
             { _name = _name
@@ -173,15 +173,15 @@ data VirtualGuestResource s = VirtualGuestResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 virtualGuestResource
-    :: TF.Attr s P.Int -- ^ @cpu@ - 'P.cpu'
-    -> TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
-    -> TF.Attr s P.Bool -- ^ @hourly_billing@ - 'P.hourlyBilling'
+    :: TF.Attr s P.Bool -- ^ @hourly_billing@ - 'P.hourlyBilling'
+    -> TF.Attr s P.Int -- ^ @cpu@ - 'P.cpu'
     -> TF.Attr s P.Bool -- ^ @local_disk@ - 'P.localDisk'
+    -> TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Int -- ^ @ram@ - 'P.ram'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> P.Resource (VirtualGuestResource s)
-virtualGuestResource _cpu _domain _hourlyBilling _localDisk _name _ram _region =
+virtualGuestResource _hourlyBilling _cpu _localDisk _domain _name _ram _region =
     TF.unsafeResource "softlayer_virtual_guest" TF.validator $
         VirtualGuestResource'
             { _backendVlanId = TF.Nil
