@@ -19,23 +19,23 @@ module Terrafomo.VCloudDirector.Settings
     (
     -- ** dhcp_pool
       DhcpPoolSetting (..)
-    , newDhcpPoolSetting
+    , dhcpPoolSetting
 
     -- ** local_subnets
     , LocalSubnetsSetting (..)
-    , newLocalSubnetsSetting
+    , localSubnetsSetting
 
     -- ** peer_subnets
     , PeerSubnetsSetting (..)
-    , newPeerSubnetsSetting
+    , peerSubnetsSetting
 
     -- ** rule
     , RuleSetting (..)
-    , newRuleSetting
+    , ruleSetting
 
     -- ** static_ip_pool
     , StaticIpPoolSetting (..)
-    , newStaticIpPoolSetting
+    , staticIpPoolSetting
 
     ) where
 
@@ -77,11 +77,11 @@ data DhcpPoolSetting s = DhcpPoolSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @dhcp_pool@ settings value.
-newDhcpPoolSetting
+dhcpPoolSetting
     :: TF.Attr s P.Text -- ^ 'P._endAddress': @end_address@
     -> TF.Attr s P.Text -- ^ 'P._startAddress': @start_address@
     -> DhcpPoolSetting s
-newDhcpPoolSetting _endAddress _startAddress =
+dhcpPoolSetting _endAddress _startAddress =
     DhcpPoolSetting'
         { _defaultLeaseTime = TF.value 3600
         , _endAddress = _endAddress
@@ -135,12 +135,12 @@ data LocalSubnetsSetting s = LocalSubnetsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @local_subnets@ settings value.
-newLocalSubnetsSetting
+localSubnetsSetting
     :: TF.Attr s P.Text -- ^ 'P._localSubnetGateway': @local_subnet_gateway@
     -> TF.Attr s P.Text -- ^ 'P._localSubnetMask': @local_subnet_mask@
     -> TF.Attr s P.Text -- ^ 'P._localSubnetName': @local_subnet_name@
     -> LocalSubnetsSetting s
-newLocalSubnetsSetting _localSubnetGateway _localSubnetMask _localSubnetName =
+localSubnetsSetting _localSubnetGateway _localSubnetMask _localSubnetName =
     LocalSubnetsSetting'
         { _localSubnetGateway = _localSubnetGateway
         , _localSubnetMask = _localSubnetMask
@@ -187,12 +187,12 @@ data PeerSubnetsSetting s = PeerSubnetsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @peer_subnets@ settings value.
-newPeerSubnetsSetting
+peerSubnetsSetting
     :: TF.Attr s P.Text -- ^ 'P._peerSubnetGateway': @peer_subnet_gateway@
     -> TF.Attr s P.Text -- ^ 'P._peerSubnetMask': @peer_subnet_mask@
     -> TF.Attr s P.Text -- ^ 'P._peerSubnetName': @peer_subnet_name@
     -> PeerSubnetsSetting s
-newPeerSubnetsSetting _peerSubnetGateway _peerSubnetMask _peerSubnetName =
+peerSubnetsSetting _peerSubnetGateway _peerSubnetMask _peerSubnetName =
     PeerSubnetsSetting'
         { _peerSubnetGateway = _peerSubnetGateway
         , _peerSubnetMask = _peerSubnetMask
@@ -251,7 +251,7 @@ data RuleSetting s = RuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @rule@ settings value.
-newRuleSetting
+ruleSetting
     :: TF.Attr s P.Text -- ^ 'P._description': @description@
     -> TF.Attr s P.Text -- ^ 'P._destinationIp': @destination_ip@
     -> TF.Attr s P.Text -- ^ 'P._sourceIp': @source_ip@
@@ -260,7 +260,7 @@ newRuleSetting
     -> TF.Attr s P.Text -- ^ 'P._sourcePort': @source_port@
     -> TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
     -> RuleSetting s
-newRuleSetting _description _destinationIp _sourceIp _policy _destinationPort _sourcePort _protocol =
+ruleSetting _description _destinationIp _sourceIp _policy _destinationPort _sourcePort _protocol =
     RuleSetting'
         { _description = _description
         , _destinationIp = _destinationIp
@@ -335,11 +335,11 @@ data StaticIpPoolSetting s = StaticIpPoolSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @static_ip_pool@ settings value.
-newStaticIpPoolSetting
+staticIpPoolSetting
     :: TF.Attr s P.Text -- ^ 'P._endAddress': @end_address@
     -> TF.Attr s P.Text -- ^ 'P._startAddress': @start_address@
     -> StaticIpPoolSetting s
-newStaticIpPoolSetting _endAddress _startAddress =
+staticIpPoolSetting _endAddress _startAddress =
     StaticIpPoolSetting'
         { _endAddress = _endAddress
         , _startAddress = _startAddress
