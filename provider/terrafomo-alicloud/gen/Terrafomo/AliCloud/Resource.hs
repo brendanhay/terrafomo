@@ -360,6 +360,9 @@ data CdnDomainResource s = CdnDomainResource'
     , _referConfig :: TF.Attr s (ReferConfigSetting s)
     -- ^ @refer_config@ - (Optional)
     --
+    , _scope :: TF.Attr s P.Text
+    -- ^ @scope@ - (Optional)
+    --
     , _sourcePort :: TF.Attr s P.Int
     -- ^ @source_port@ - (Optional)
     --
@@ -394,6 +397,7 @@ cdnDomainResource _domainName _cdnType =
             , _parameterFilterConfig = TF.Nil
             , _rangeEnable = TF.value "off"
             , _referConfig = TF.Nil
+            , _scope = TF.Nil
             , _sourcePort = TF.value 80
             , _sourceType = TF.Nil
             , _sources = TF.Nil
@@ -414,6 +418,7 @@ instance TF.IsObject (CdnDomainResource s) where
         , TF.assign "parameter_filter_config" <$> TF.attribute _parameterFilterConfig
         , TF.assign "range_enable" <$> TF.attribute _rangeEnable
         , TF.assign "refer_config" <$> TF.attribute _referConfig
+        , TF.assign "scope" <$> TF.attribute _scope
         , TF.assign "source_port" <$> TF.attribute _sourcePort
         , TF.assign "source_type" <$> TF.attribute _sourceType
         , TF.assign "sources" <$> TF.attribute _sources
@@ -498,6 +503,11 @@ instance P.HasReferConfig (CdnDomainResource s) (TF.Attr s (ReferConfigSetting s
     referConfig =
         P.lens (_referConfig :: CdnDomainResource s -> TF.Attr s (ReferConfigSetting s))
                (\s a -> s { _referConfig = a } :: CdnDomainResource s)
+
+instance P.HasScope (CdnDomainResource s) (TF.Attr s P.Text) where
+    scope =
+        P.lens (_scope :: CdnDomainResource s -> TF.Attr s P.Text)
+               (\s a -> s { _scope = a } :: CdnDomainResource s)
 
 instance P.HasSourcePort (CdnDomainResource s) (TF.Attr s P.Int) where
     sourcePort =
@@ -732,9 +742,18 @@ data ContainerClusterResource s = ContainerClusterResource'
     , _isOutdated   :: TF.Attr s P.Bool
     -- ^ @is_outdated@ - (Optional)
     --
+    , _name         :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
     , _namePrefix   :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional)
     --
+    -- Conflicts with:
+    --
+    -- * 'name'
     , _nodeNumber   :: TF.Attr s P.Int
     -- ^ @node_number@ - (Optional)
     --
@@ -765,6 +784,7 @@ containerClusterResource _cidrBlock _vswitchId _password _instanceType =
             , _imageId = TF.Nil
             , _instanceType = _instanceType
             , _isOutdated = TF.Nil
+            , _name = TF.Nil
             , _namePrefix = TF.value "Terraform-Creation"
             , _nodeNumber = TF.value 1
             , _password = _password
@@ -780,6 +800,7 @@ instance TF.IsObject (ContainerClusterResource s) where
         , TF.assign "image_id" <$> TF.attribute _imageId
         , TF.assign "instance_type" <$> TF.attribute _instanceType
         , TF.assign "is_outdated" <$> TF.attribute _isOutdated
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _namePrefix
         , TF.assign "node_number" <$> TF.attribute _nodeNumber
         , TF.assign "password" <$> TF.attribute _password
@@ -788,7 +809,18 @@ instance TF.IsObject (ContainerClusterResource s) where
         ]
 
 instance TF.IsValid (ContainerClusterResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\ContainerClusterResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.value "Terraform-Creation")
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
+                            ])
+        ])
 
 instance P.HasCidrBlock (ContainerClusterResource s) (TF.Attr s P.Text) where
     cidrBlock =
@@ -819,6 +851,11 @@ instance P.HasIsOutdated (ContainerClusterResource s) (TF.Attr s P.Bool) where
     isOutdated =
         P.lens (_isOutdated :: ContainerClusterResource s -> TF.Attr s P.Bool)
                (\s a -> s { _isOutdated = a } :: ContainerClusterResource s)
+
+instance P.HasName (ContainerClusterResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ContainerClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ContainerClusterResource s)
 
 instance P.HasNamePrefix (ContainerClusterResource s) (TF.Attr s P.Text) where
     namePrefix =
@@ -995,7 +1032,10 @@ instance s ~ s' => P.HasComputedServices (TF.Ref s' (CsApplicationResource s)) (
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/cs_kubernetes.html terraform documentation>
 -- for more information.
 data CsKubernetesResource s = CsKubernetesResource'
-    { _clientCert          :: TF.Attr s P.Text
+    { _availabilityZone    :: TF.Attr s P.Text
+    -- ^ @availability_zone@ - (Optional, Forces New)
+    --
+    , _clientCert          :: TF.Attr s P.Text
     -- ^ @client_cert@ - (Optional)
     --
     , _clientKey           :: TF.Attr s P.Text
@@ -1025,9 +1065,18 @@ data CsKubernetesResource s = CsKubernetesResource'
     , _masterInstanceType  :: TF.Attr s P.Text
     -- ^ @master_instance_type@ - (Required)
     --
+    , _name                :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
     , _namePrefix          :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional)
     --
+    -- Conflicts with:
+    --
+    -- * 'name'
     , _newNatGateway       :: TF.Attr s P.Bool
     -- ^ @new_nat_gateway@ - (Optional)
     --
@@ -1042,6 +1091,9 @@ data CsKubernetesResource s = CsKubernetesResource'
     --
     , _version             :: TF.Attr s P.Text
     -- ^ @version@ - (Optional)
+    --
+    , _vswitchId           :: TF.Attr s P.Text
+    -- ^ @vswitch_id@ - (Optional, Forces New)
     --
     , _workerDiskCategory  :: TF.Attr s P.Text
     -- ^ @worker_disk_category@ - (Optional)
@@ -1066,7 +1118,8 @@ csKubernetesResource
 csKubernetesResource _password _masterInstanceType _workerInstanceType =
     TF.unsafeResource "alicloud_cs_kubernetes" TF.validator $
         CsKubernetesResource'
-            { _clientCert = TF.Nil
+            { _availabilityZone = TF.Nil
+            , _clientCert = TF.Nil
             , _clientKey = TF.Nil
             , _clusterCaCert = TF.Nil
             , _enableSsh = TF.value P.False
@@ -1076,12 +1129,14 @@ csKubernetesResource _password _masterInstanceType _workerInstanceType =
             , _masterDiskCategory = TF.Nil
             , _masterDiskSize = TF.value 40
             , _masterInstanceType = _masterInstanceType
+            , _name = TF.Nil
             , _namePrefix = TF.value "Terraform-Creation"
             , _newNatGateway = TF.value P.True
             , _password = _password
             , _podCidr = TF.Nil
             , _serviceCidr = TF.Nil
             , _version = TF.Nil
+            , _vswitchId = TF.Nil
             , _workerDiskCategory = TF.Nil
             , _workerDiskSize = TF.value 40
             , _workerInstanceType = _workerInstanceType
@@ -1090,7 +1145,8 @@ csKubernetesResource _password _masterInstanceType _workerInstanceType =
 
 instance TF.IsObject (CsKubernetesResource s) where
     toObject CsKubernetesResource'{..} = P.catMaybes
-        [ TF.assign "client_cert" <$> TF.attribute _clientCert
+        [ TF.assign "availability_zone" <$> TF.attribute _availabilityZone
+        , TF.assign "client_cert" <$> TF.attribute _clientCert
         , TF.assign "client_key" <$> TF.attribute _clientKey
         , TF.assign "cluster_ca_cert" <$> TF.attribute _clusterCaCert
         , TF.assign "enable_ssh" <$> TF.attribute _enableSsh
@@ -1100,12 +1156,14 @@ instance TF.IsObject (CsKubernetesResource s) where
         , TF.assign "master_disk_category" <$> TF.attribute _masterDiskCategory
         , TF.assign "master_disk_size" <$> TF.attribute _masterDiskSize
         , TF.assign "master_instance_type" <$> TF.attribute _masterInstanceType
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _namePrefix
         , TF.assign "new_nat_gateway" <$> TF.attribute _newNatGateway
         , TF.assign "password" <$> TF.attribute _password
         , TF.assign "pod_cidr" <$> TF.attribute _podCidr
         , TF.assign "service_cidr" <$> TF.attribute _serviceCidr
         , TF.assign "version" <$> TF.attribute _version
+        , TF.assign "vswitch_id" <$> TF.attribute _vswitchId
         , TF.assign "worker_disk_category" <$> TF.attribute _workerDiskCategory
         , TF.assign "worker_disk_size" <$> TF.attribute _workerDiskSize
         , TF.assign "worker_instance_type" <$> TF.attribute _workerInstanceType
@@ -1113,7 +1171,23 @@ instance TF.IsObject (CsKubernetesResource s) where
         ]
 
 instance TF.IsValid (CsKubernetesResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\CsKubernetesResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.value "Terraform-Creation")
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
+                            ])
+        ])
+
+instance P.HasAvailabilityZone (CsKubernetesResource s) (TF.Attr s P.Text) where
+    availabilityZone =
+        P.lens (_availabilityZone :: CsKubernetesResource s -> TF.Attr s P.Text)
+               (\s a -> s { _availabilityZone = a } :: CsKubernetesResource s)
 
 instance P.HasClientCert (CsKubernetesResource s) (TF.Attr s P.Text) where
     clientCert =
@@ -1165,6 +1239,11 @@ instance P.HasMasterInstanceType (CsKubernetesResource s) (TF.Attr s P.Text) whe
         P.lens (_masterInstanceType :: CsKubernetesResource s -> TF.Attr s P.Text)
                (\s a -> s { _masterInstanceType = a } :: CsKubernetesResource s)
 
+instance P.HasName (CsKubernetesResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: CsKubernetesResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: CsKubernetesResource s)
+
 instance P.HasNamePrefix (CsKubernetesResource s) (TF.Attr s P.Text) where
     namePrefix =
         P.lens (_namePrefix :: CsKubernetesResource s -> TF.Attr s P.Text)
@@ -1194,6 +1273,11 @@ instance P.HasVersion (CsKubernetesResource s) (TF.Attr s P.Text) where
     version =
         P.lens (_version :: CsKubernetesResource s -> TF.Attr s P.Text)
                (\s a -> s { _version = a } :: CsKubernetesResource s)
+
+instance P.HasVswitchId (CsKubernetesResource s) (TF.Attr s P.Text) where
+    vswitchId =
+        P.lens (_vswitchId :: CsKubernetesResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vswitchId = a } :: CsKubernetesResource s)
 
 instance P.HasWorkerDiskCategory (CsKubernetesResource s) (TF.Attr s P.Text) where
     workerDiskCategory =
@@ -1277,9 +1361,18 @@ data CsSwarmResource s = CsSwarmResource'
     , _isOutdated   :: TF.Attr s P.Bool
     -- ^ @is_outdated@ - (Optional)
     --
+    , _name         :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
     , _namePrefix   :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional)
     --
+    -- Conflicts with:
+    --
+    -- * 'name'
     , _nodeNumber   :: TF.Attr s P.Int
     -- ^ @node_number@ - (Optional)
     --
@@ -1310,6 +1403,7 @@ csSwarmResource _cidrBlock _vswitchId _password _instanceType =
             , _imageId = TF.Nil
             , _instanceType = _instanceType
             , _isOutdated = TF.Nil
+            , _name = TF.Nil
             , _namePrefix = TF.value "Terraform-Creation"
             , _nodeNumber = TF.value 1
             , _password = _password
@@ -1325,6 +1419,7 @@ instance TF.IsObject (CsSwarmResource s) where
         , TF.assign "image_id" <$> TF.attribute _imageId
         , TF.assign "instance_type" <$> TF.attribute _instanceType
         , TF.assign "is_outdated" <$> TF.attribute _isOutdated
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _namePrefix
         , TF.assign "node_number" <$> TF.attribute _nodeNumber
         , TF.assign "password" <$> TF.attribute _password
@@ -1333,7 +1428,18 @@ instance TF.IsObject (CsSwarmResource s) where
         ]
 
 instance TF.IsValid (CsSwarmResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\CsSwarmResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.value "Terraform-Creation")
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
+                            ])
+        ])
 
 instance P.HasCidrBlock (CsSwarmResource s) (TF.Attr s P.Text) where
     cidrBlock =
@@ -1364,6 +1470,11 @@ instance P.HasIsOutdated (CsSwarmResource s) (TF.Attr s P.Bool) where
     isOutdated =
         P.lens (_isOutdated :: CsSwarmResource s -> TF.Attr s P.Bool)
                (\s a -> s { _isOutdated = a } :: CsSwarmResource s)
+
+instance P.HasName (CsSwarmResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: CsSwarmResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: CsSwarmResource s)
 
 instance P.HasNamePrefix (CsSwarmResource s) (TF.Attr s P.Text) where
     namePrefix =
@@ -1562,7 +1673,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (DbAccountPrivilegeResource s)) (T
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/db_backup_policy.html terraform documentation>
 -- for more information.
 data DbBackupPolicyResource s = DbBackupPolicyResource'
-    { _backupTime         :: TF.Attr s P.Text
+    { _backupPeriod       :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @backup_period@ - (Optional)
+    --
+    , _backupTime         :: TF.Attr s P.Text
     -- ^ @backup_time@ - (Optional)
     --
     , _instanceId         :: TF.Attr s P.Text
@@ -1586,7 +1700,8 @@ dbBackupPolicyResource
 dbBackupPolicyResource _instanceId =
     TF.unsafeResource "alicloud_db_backup_policy" TF.validator $
         DbBackupPolicyResource'
-            { _backupTime = TF.value "02:00Z-03:00Z"
+            { _backupPeriod = TF.Nil
+            , _backupTime = TF.value "02:00Z-03:00Z"
             , _instanceId = _instanceId
             , _logBackup = TF.value P.True
             , _logRetentionPeriod = TF.value 7
@@ -1595,7 +1710,8 @@ dbBackupPolicyResource _instanceId =
 
 instance TF.IsObject (DbBackupPolicyResource s) where
     toObject DbBackupPolicyResource'{..} = P.catMaybes
-        [ TF.assign "backup_time" <$> TF.attribute _backupTime
+        [ TF.assign "backup_period" <$> TF.attribute _backupPeriod
+        , TF.assign "backup_time" <$> TF.attribute _backupTime
         , TF.assign "instance_id" <$> TF.attribute _instanceId
         , TF.assign "log_backup" <$> TF.attribute _logBackup
         , TF.assign "log_retention_period" <$> TF.attribute _logRetentionPeriod
@@ -1604,6 +1720,11 @@ instance TF.IsObject (DbBackupPolicyResource s) where
 
 instance TF.IsValid (DbBackupPolicyResource s) where
     validator = P.mempty
+
+instance P.HasBackupPeriod (DbBackupPolicyResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    backupPeriod =
+        P.lens (_backupPeriod :: DbBackupPolicyResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _backupPeriod = a } :: DbBackupPolicyResource s)
 
 instance P.HasBackupTime (DbBackupPolicyResource s) (TF.Attr s P.Text) where
     backupTime =
@@ -1641,10 +1762,13 @@ instance s ~ s' => P.HasComputedBackupPeriod (TF.Ref s' (DbBackupPolicyResource 
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/db_connection.html terraform documentation>
 -- for more information.
 data DbConnectionResource s = DbConnectionResource'
-    { _instanceId :: TF.Attr s P.Text
+    { _connectionPrefix :: TF.Attr s P.Text
+    -- ^ @connection_prefix@ - (Optional, Forces New)
+    --
+    , _instanceId       :: TF.Attr s P.Text
     -- ^ @instance_id@ - (Required, Forces New)
     --
-    , _port       :: TF.Attr s P.Text
+    , _port             :: TF.Attr s P.Text
     -- ^ @port@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1656,18 +1780,25 @@ dbConnectionResource
 dbConnectionResource _instanceId =
     TF.unsafeResource "alicloud_db_connection" TF.validator $
         DbConnectionResource'
-            { _instanceId = _instanceId
+            { _connectionPrefix = TF.Nil
+            , _instanceId = _instanceId
             , _port = TF.value "3306"
             }
 
 instance TF.IsObject (DbConnectionResource s) where
     toObject DbConnectionResource'{..} = P.catMaybes
-        [ TF.assign "instance_id" <$> TF.attribute _instanceId
+        [ TF.assign "connection_prefix" <$> TF.attribute _connectionPrefix
+        , TF.assign "instance_id" <$> TF.attribute _instanceId
         , TF.assign "port" <$> TF.attribute _port
         ]
 
 instance TF.IsValid (DbConnectionResource s) where
     validator = P.mempty
+
+instance P.HasConnectionPrefix (DbConnectionResource s) (TF.Attr s P.Text) where
+    connectionPrefix =
+        P.lens (_connectionPrefix :: DbConnectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _connectionPrefix = a } :: DbConnectionResource s)
 
 instance P.HasInstanceId (DbConnectionResource s) (TF.Attr s P.Text) where
     instanceId =
@@ -1784,8 +1915,14 @@ data DbInstanceResource s = DbInstanceResource'
     , _period             :: TF.Attr s P.Int
     -- ^ @period@ - (Optional)
     --
+    , _securityIps        :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @security_ips@ - (Optional)
+    --
     , _vswitchId          :: TF.Attr s P.Text
     -- ^ @vswitch_id@ - (Optional, Forces New)
+    --
+    , _zoneId             :: TF.Attr s P.Text
+    -- ^ @zone_id@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1806,7 +1943,9 @@ dbInstanceResource _engine _instanceStorage _instanceType _engineVersion =
             , _instanceStorage = _instanceStorage
             , _instanceType = _instanceType
             , _period = TF.value 1
+            , _securityIps = TF.Nil
             , _vswitchId = TF.Nil
+            , _zoneId = TF.Nil
             }
 
 instance TF.IsObject (DbInstanceResource s) where
@@ -1818,7 +1957,9 @@ instance TF.IsObject (DbInstanceResource s) where
         , TF.assign "instance_storage" <$> TF.attribute _instanceStorage
         , TF.assign "instance_type" <$> TF.attribute _instanceType
         , TF.assign "period" <$> TF.attribute _period
+        , TF.assign "security_ips" <$> TF.attribute _securityIps
         , TF.assign "vswitch_id" <$> TF.attribute _vswitchId
+        , TF.assign "zone_id" <$> TF.attribute _zoneId
         ]
 
 instance TF.IsValid (DbInstanceResource s) where
@@ -1859,10 +2000,20 @@ instance P.HasPeriod (DbInstanceResource s) (TF.Attr s P.Int) where
         P.lens (_period :: DbInstanceResource s -> TF.Attr s P.Int)
                (\s a -> s { _period = a } :: DbInstanceResource s)
 
+instance P.HasSecurityIps (DbInstanceResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    securityIps =
+        P.lens (_securityIps :: DbInstanceResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _securityIps = a } :: DbInstanceResource s)
+
 instance P.HasVswitchId (DbInstanceResource s) (TF.Attr s P.Text) where
     vswitchId =
         P.lens (_vswitchId :: DbInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _vswitchId = a } :: DbInstanceResource s)
+
+instance P.HasZoneId (DbInstanceResource s) (TF.Attr s P.Text) where
+    zoneId =
+        P.lens (_zoneId :: DbInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zoneId = a } :: DbInstanceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2234,6 +2385,9 @@ data EipResource s = EipResource'
     , _description        :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
+    , _instance'          :: TF.Attr s P.Text
+    -- ^ @instance@ - (Optional)
+    --
     , _instanceChargeType :: TF.Attr s P.Text
     -- ^ @instance_charge_type@ - (Optional, Forces New)
     --
@@ -2256,6 +2410,7 @@ eipResource =
         EipResource'
             { _bandwidth = TF.value 5
             , _description = TF.Nil
+            , _instance' = TF.Nil
             , _instanceChargeType = TF.Nil
             , _internetChargeType = TF.value "PayByTraffic"
             , _name = TF.Nil
@@ -2266,6 +2421,7 @@ instance TF.IsObject (EipResource s) where
     toObject EipResource'{..} = P.catMaybes
         [ TF.assign "bandwidth" <$> TF.attribute _bandwidth
         , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "instance" <$> TF.attribute _instance'
         , TF.assign "instance_charge_type" <$> TF.attribute _instanceChargeType
         , TF.assign "internet_charge_type" <$> TF.attribute _internetChargeType
         , TF.assign "name" <$> TF.attribute _name
@@ -2284,6 +2440,11 @@ instance P.HasDescription (EipResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: EipResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: EipResource s)
+
+instance P.HasInstance' (EipResource s) (TF.Attr s P.Text) where
+    instance' =
+        P.lens (_instance' :: EipResource s -> TF.Attr s P.Text)
+               (\s a -> s { _instance' = a } :: EipResource s)
 
 instance P.HasInstanceChargeType (EipResource s) (TF.Attr s P.Text) where
     instanceChargeType =
@@ -2322,7 +2483,13 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (EipResource s)) (TF.Attr s P.
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/eip_association.html terraform documentation>
 -- for more information.
 data EipAssociationResource s = EipAssociationResource'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _allocationId :: TF.Attr s P.Text
+    -- ^ @allocation_id@ - (Optional, Forces New)
+    --
+    , _instanceId   :: TF.Attr s P.Text
+    -- ^ @instance_id@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @alicloud_eip_association@ resource value.
 eipAssociationResource
@@ -2330,12 +2497,28 @@ eipAssociationResource
 eipAssociationResource =
     TF.unsafeResource "alicloud_eip_association" TF.validator $
         EipAssociationResource'
+            { _allocationId = TF.Nil
+            , _instanceId = TF.Nil
+            }
 
 instance TF.IsObject (EipAssociationResource s) where
-    toObject _ = []
+    toObject EipAssociationResource'{..} = P.catMaybes
+        [ TF.assign "allocation_id" <$> TF.attribute _allocationId
+        , TF.assign "instance_id" <$> TF.attribute _instanceId
+        ]
 
 instance TF.IsValid (EipAssociationResource s) where
     validator = P.mempty
+
+instance P.HasAllocationId (EipAssociationResource s) (TF.Attr s P.Text) where
+    allocationId =
+        P.lens (_allocationId :: EipAssociationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _allocationId = a } :: EipAssociationResource s)
+
+instance P.HasInstanceId (EipAssociationResource s) (TF.Attr s P.Text) where
+    instanceId =
+        P.lens (_instanceId :: EipAssociationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _instanceId = a } :: EipAssociationResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EipAssociationResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2408,52 +2591,64 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (EssAttachmentResource s)) (TF.Att
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_configuration.html terraform documentation>
 -- for more information.
 data EssScalingConfigurationResource s = EssScalingConfigurationResource'
-    { _dataDisk                :: TF.Attr s [TF.Attr s (DataDiskSetting s)]
+    { _active                   :: TF.Attr s P.Bool
+    -- ^ @active@ - (Optional)
+    --
+    , _dataDisk                 :: TF.Attr s [TF.Attr s (DataDiskSetting s)]
     -- ^ @data_disk@ - (Optional, Forces New)
     --
-    , _enable                  :: TF.Attr s P.Bool
+    , _enable                   :: TF.Attr s P.Bool
     -- ^ @enable@ - (Optional)
     --
-    , _forceDelete             :: TF.Attr s P.Bool
+    , _forceDelete              :: TF.Attr s P.Bool
     -- ^ @force_delete@ - (Optional)
     --
-    , _imageId                 :: TF.Attr s P.Text
+    , _imageId                  :: TF.Attr s P.Text
     -- ^ @image_id@ - (Required, Forces New)
     --
-    , _instanceName            :: TF.Attr s P.Text
+    , _instanceName             :: TF.Attr s P.Text
     -- ^ @instance_name@ - (Optional)
     --
-    , _instanceType            :: TF.Attr s P.Text
+    , _instanceType             :: TF.Attr s P.Text
     -- ^ @instance_type@ - (Required, Forces New)
     --
-    , _internetChargeType      :: TF.Attr s P.Text
+    , _internetChargeType       :: TF.Attr s P.Text
     -- ^ @internet_charge_type@ - (Optional, Forces New)
     --
-    , _internetMaxBandwidthOut :: TF.Attr s P.Int
+    , _internetMaxBandwidthIn   :: TF.Attr s P.Int
+    -- ^ @internet_max_bandwidth_in@ - (Optional, Forces New)
+    --
+    , _internetMaxBandwidthOut  :: TF.Attr s P.Int
     -- ^ @internet_max_bandwidth_out@ - (Optional, Forces New)
     --
-    , _isOutdated              :: TF.Attr s P.Bool
+    , _isOutdated               :: TF.Attr s P.Bool
     -- ^ @is_outdated@ - (Optional)
     --
-    , _keyName                 :: TF.Attr s P.Text
+    , _keyName                  :: TF.Attr s P.Text
     -- ^ @key_name@ - (Optional, Forces New)
     --
-    , _roleName                :: TF.Attr s P.Text
+    , _roleName                 :: TF.Attr s P.Text
     -- ^ @role_name@ - (Optional, Forces New)
     --
-    , _scalingGroupId          :: TF.Attr s P.Text
+    , _scalingConfigurationName :: TF.Attr s P.Text
+    -- ^ @scaling_configuration_name@ - (Optional)
+    --
+    , _scalingGroupId           :: TF.Attr s P.Text
     -- ^ @scaling_group_id@ - (Required, Forces New)
     --
-    , _securityGroupId         :: TF.Attr s P.Text
+    , _securityGroupId          :: TF.Attr s P.Text
     -- ^ @security_group_id@ - (Required, Forces New)
     --
-    , _systemDiskCategory      :: TF.Attr s P.Text
+    , _substitute               :: TF.Attr s P.Text
+    -- ^ @substitute@ - (Optional)
+    --
+    , _systemDiskCategory       :: TF.Attr s P.Text
     -- ^ @system_disk_category@ - (Optional, Forces New)
     --
-    , _tags                    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags                     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional, Forces New)
     --
-    , _userData                :: TF.Attr s P.Text
+    , _userData                 :: TF.Attr s P.Text
     -- ^ @user_data@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -2468,19 +2663,23 @@ essScalingConfigurationResource
 essScalingConfigurationResource _imageId _scalingGroupId _securityGroupId _instanceType =
     TF.unsafeResource "alicloud_ess_scaling_configuration" TF.validator $
         EssScalingConfigurationResource'
-            { _dataDisk = TF.Nil
+            { _active = TF.Nil
+            , _dataDisk = TF.Nil
             , _enable = TF.Nil
             , _forceDelete = TF.value P.False
             , _imageId = _imageId
             , _instanceName = TF.value "ESS-Instance"
             , _instanceType = _instanceType
             , _internetChargeType = TF.Nil
+            , _internetMaxBandwidthIn = TF.Nil
             , _internetMaxBandwidthOut = TF.Nil
             , _isOutdated = TF.Nil
             , _keyName = TF.Nil
             , _roleName = TF.Nil
+            , _scalingConfigurationName = TF.Nil
             , _scalingGroupId = _scalingGroupId
             , _securityGroupId = _securityGroupId
+            , _substitute = TF.Nil
             , _systemDiskCategory = TF.Nil
             , _tags = TF.Nil
             , _userData = TF.Nil
@@ -2488,19 +2687,23 @@ essScalingConfigurationResource _imageId _scalingGroupId _securityGroupId _insta
 
 instance TF.IsObject (EssScalingConfigurationResource s) where
     toObject EssScalingConfigurationResource'{..} = P.catMaybes
-        [ TF.assign "data_disk" <$> TF.attribute _dataDisk
+        [ TF.assign "active" <$> TF.attribute _active
+        , TF.assign "data_disk" <$> TF.attribute _dataDisk
         , TF.assign "enable" <$> TF.attribute _enable
         , TF.assign "force_delete" <$> TF.attribute _forceDelete
         , TF.assign "image_id" <$> TF.attribute _imageId
         , TF.assign "instance_name" <$> TF.attribute _instanceName
         , TF.assign "instance_type" <$> TF.attribute _instanceType
         , TF.assign "internet_charge_type" <$> TF.attribute _internetChargeType
+        , TF.assign "internet_max_bandwidth_in" <$> TF.attribute _internetMaxBandwidthIn
         , TF.assign "internet_max_bandwidth_out" <$> TF.attribute _internetMaxBandwidthOut
         , TF.assign "is_outdated" <$> TF.attribute _isOutdated
         , TF.assign "key_name" <$> TF.attribute _keyName
         , TF.assign "role_name" <$> TF.attribute _roleName
+        , TF.assign "scaling_configuration_name" <$> TF.attribute _scalingConfigurationName
         , TF.assign "scaling_group_id" <$> TF.attribute _scalingGroupId
         , TF.assign "security_group_id" <$> TF.attribute _securityGroupId
+        , TF.assign "substitute" <$> TF.attribute _substitute
         , TF.assign "system_disk_category" <$> TF.attribute _systemDiskCategory
         , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "user_data" <$> TF.attribute _userData
@@ -2508,6 +2711,11 @@ instance TF.IsObject (EssScalingConfigurationResource s) where
 
 instance TF.IsValid (EssScalingConfigurationResource s) where
     validator = P.mempty
+
+instance P.HasActive (EssScalingConfigurationResource s) (TF.Attr s P.Bool) where
+    active =
+        P.lens (_active :: EssScalingConfigurationResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _active = a } :: EssScalingConfigurationResource s)
 
 instance P.HasDataDisk (EssScalingConfigurationResource s) (TF.Attr s [TF.Attr s (DataDiskSetting s)]) where
     dataDisk =
@@ -2544,6 +2752,11 @@ instance P.HasInternetChargeType (EssScalingConfigurationResource s) (TF.Attr s 
         P.lens (_internetChargeType :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
                (\s a -> s { _internetChargeType = a } :: EssScalingConfigurationResource s)
 
+instance P.HasInternetMaxBandwidthIn (EssScalingConfigurationResource s) (TF.Attr s P.Int) where
+    internetMaxBandwidthIn =
+        P.lens (_internetMaxBandwidthIn :: EssScalingConfigurationResource s -> TF.Attr s P.Int)
+               (\s a -> s { _internetMaxBandwidthIn = a } :: EssScalingConfigurationResource s)
+
 instance P.HasInternetMaxBandwidthOut (EssScalingConfigurationResource s) (TF.Attr s P.Int) where
     internetMaxBandwidthOut =
         P.lens (_internetMaxBandwidthOut :: EssScalingConfigurationResource s -> TF.Attr s P.Int)
@@ -2564,6 +2777,11 @@ instance P.HasRoleName (EssScalingConfigurationResource s) (TF.Attr s P.Text) wh
         P.lens (_roleName :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
                (\s a -> s { _roleName = a } :: EssScalingConfigurationResource s)
 
+instance P.HasScalingConfigurationName (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+    scalingConfigurationName =
+        P.lens (_scalingConfigurationName :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _scalingConfigurationName = a } :: EssScalingConfigurationResource s)
+
 instance P.HasScalingGroupId (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
     scalingGroupId =
         P.lens (_scalingGroupId :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
@@ -2573,6 +2791,11 @@ instance P.HasSecurityGroupId (EssScalingConfigurationResource s) (TF.Attr s P.T
     securityGroupId =
         P.lens (_securityGroupId :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
                (\s a -> s { _securityGroupId = a } :: EssScalingConfigurationResource s)
+
+instance P.HasSubstitute (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+    substitute =
+        P.lens (_substitute :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _substitute = a } :: EssScalingConfigurationResource s)
 
 instance P.HasSystemDiskCategory (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
     systemDiskCategory =
@@ -2728,6 +2951,9 @@ data EssScalingRuleResource s = EssScalingRuleResource'
     , _scalingGroupId  :: TF.Attr s P.Text
     -- ^ @scaling_group_id@ - (Required)
     --
+    , _scalingRuleName :: TF.Attr s P.Text
+    -- ^ @scaling_rule_name@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @alicloud_ess_scaling_rule@ resource value.
@@ -2743,6 +2969,7 @@ essScalingRuleResource _scalingGroupId _adjustmentType _adjustmentValue =
             , _adjustmentValue = _adjustmentValue
             , _cooldown = TF.Nil
             , _scalingGroupId = _scalingGroupId
+            , _scalingRuleName = TF.Nil
             }
 
 instance TF.IsObject (EssScalingRuleResource s) where
@@ -2751,6 +2978,7 @@ instance TF.IsObject (EssScalingRuleResource s) where
         , TF.assign "adjustment_value" <$> TF.attribute _adjustmentValue
         , TF.assign "cooldown" <$> TF.attribute _cooldown
         , TF.assign "scaling_group_id" <$> TF.attribute _scalingGroupId
+        , TF.assign "scaling_rule_name" <$> TF.attribute _scalingRuleName
         ]
 
 instance TF.IsValid (EssScalingRuleResource s) where
@@ -2776,6 +3004,11 @@ instance P.HasScalingGroupId (EssScalingRuleResource s) (TF.Attr s P.Text) where
         P.lens (_scalingGroupId :: EssScalingRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _scalingGroupId = a } :: EssScalingRuleResource s)
 
+instance P.HasScalingRuleName (EssScalingRuleResource s) (TF.Attr s P.Text) where
+    scalingRuleName =
+        P.lens (_scalingRuleName :: EssScalingRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _scalingRuleName = a } :: EssScalingRuleResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EssScalingRuleResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -2790,11 +3023,23 @@ instance s ~ s' => P.HasComputedScalingRuleName (TF.Ref s' (EssScalingRuleResour
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/ess_schedule.html terraform documentation>
 -- for more information.
 data EssScheduleResource s = EssScheduleResource'
-    { _launchExpirationTime :: TF.Attr s P.Int
+    { _description          :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _launchExpirationTime :: TF.Attr s P.Int
     -- ^ @launch_expiration_time@ - (Optional)
     --
     , _launchTime           :: TF.Attr s P.Text
     -- ^ @launch_time@ - (Required)
+    --
+    , _recurrenceEndTime    :: TF.Attr s P.Text
+    -- ^ @recurrence_end_time@ - (Optional)
+    --
+    , _recurrenceType       :: TF.Attr s P.Text
+    -- ^ @recurrence_type@ - (Optional)
+    --
+    , _recurrenceValue      :: TF.Attr s P.Text
+    -- ^ @recurrence_value@ - (Optional)
     --
     , _scheduledAction      :: TF.Attr s P.Text
     -- ^ @scheduled_action@ - (Required)
@@ -2815,8 +3060,12 @@ essScheduleResource
 essScheduleResource _scheduledAction _launchTime =
     TF.unsafeResource "alicloud_ess_schedule" TF.validator $
         EssScheduleResource'
-            { _launchExpirationTime = TF.value 600
+            { _description = TF.Nil
+            , _launchExpirationTime = TF.value 600
             , _launchTime = _launchTime
+            , _recurrenceEndTime = TF.Nil
+            , _recurrenceType = TF.Nil
+            , _recurrenceValue = TF.Nil
             , _scheduledAction = _scheduledAction
             , _scheduledTaskName = TF.Nil
             , _taskEnabled = TF.value P.True
@@ -2824,8 +3073,12 @@ essScheduleResource _scheduledAction _launchTime =
 
 instance TF.IsObject (EssScheduleResource s) where
     toObject EssScheduleResource'{..} = P.catMaybes
-        [ TF.assign "launch_expiration_time" <$> TF.attribute _launchExpirationTime
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "launch_expiration_time" <$> TF.attribute _launchExpirationTime
         , TF.assign "launch_time" <$> TF.attribute _launchTime
+        , TF.assign "recurrence_end_time" <$> TF.attribute _recurrenceEndTime
+        , TF.assign "recurrence_type" <$> TF.attribute _recurrenceType
+        , TF.assign "recurrence_value" <$> TF.attribute _recurrenceValue
         , TF.assign "scheduled_action" <$> TF.attribute _scheduledAction
         , TF.assign "scheduled_task_name" <$> TF.attribute _scheduledTaskName
         , TF.assign "task_enabled" <$> TF.attribute _taskEnabled
@@ -2833,6 +3086,11 @@ instance TF.IsObject (EssScheduleResource s) where
 
 instance TF.IsValid (EssScheduleResource s) where
     validator = P.mempty
+
+instance P.HasDescription (EssScheduleResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: EssScheduleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: EssScheduleResource s)
 
 instance P.HasLaunchExpirationTime (EssScheduleResource s) (TF.Attr s P.Int) where
     launchExpirationTime =
@@ -2843,6 +3101,21 @@ instance P.HasLaunchTime (EssScheduleResource s) (TF.Attr s P.Text) where
     launchTime =
         P.lens (_launchTime :: EssScheduleResource s -> TF.Attr s P.Text)
                (\s a -> s { _launchTime = a } :: EssScheduleResource s)
+
+instance P.HasRecurrenceEndTime (EssScheduleResource s) (TF.Attr s P.Text) where
+    recurrenceEndTime =
+        P.lens (_recurrenceEndTime :: EssScheduleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _recurrenceEndTime = a } :: EssScheduleResource s)
+
+instance P.HasRecurrenceType (EssScheduleResource s) (TF.Attr s P.Text) where
+    recurrenceType =
+        P.lens (_recurrenceType :: EssScheduleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _recurrenceType = a } :: EssScheduleResource s)
+
+instance P.HasRecurrenceValue (EssScheduleResource s) (TF.Attr s P.Text) where
+    recurrenceValue =
+        P.lens (_recurrenceValue :: EssScheduleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _recurrenceValue = a } :: EssScheduleResource s)
 
 instance P.HasScheduledAction (EssScheduleResource s) (TF.Attr s P.Text) where
     scheduledAction =
@@ -2895,9 +3168,18 @@ data FcFunctionResource s = FcFunctionResource'
     , _memorySize  :: TF.Attr s P.Int
     -- ^ @memory_size@ - (Optional)
     --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
     , _namePrefix  :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
     --
+    -- Conflicts with:
+    --
+    -- * 'name'
     , _ossBucket   :: TF.Attr s P.Text
     -- ^ @oss_bucket@ - (Optional)
     --
@@ -2934,6 +3216,7 @@ fcFunctionResource _handler _runtime _service =
             , _filename = TF.Nil
             , _handler = _handler
             , _memorySize = TF.value 128
+            , _name = TF.Nil
             , _namePrefix = TF.Nil
             , _ossBucket = TF.Nil
             , _ossKey = TF.Nil
@@ -2948,6 +3231,7 @@ instance TF.IsObject (FcFunctionResource s) where
         , TF.assign "filename" <$> TF.attribute _filename
         , TF.assign "handler" <$> TF.attribute _handler
         , TF.assign "memory_size" <$> TF.attribute _memorySize
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _namePrefix
         , TF.assign "oss_bucket" <$> TF.attribute _ossBucket
         , TF.assign "oss_key" <$> TF.attribute _ossKey
@@ -2962,6 +3246,16 @@ instance TF.IsValid (FcFunctionResource s) where
               then P.Nothing
               else P.Just ("_filename",
                             [ "_ossBucket"                            , "_ossKey"
+                            ])
+        , if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
                             ])
         , if (_ossBucket P.== TF.Nil)
               then P.Nothing
@@ -2994,6 +3288,11 @@ instance P.HasMemorySize (FcFunctionResource s) (TF.Attr s P.Int) where
     memorySize =
         P.lens (_memorySize :: FcFunctionResource s -> TF.Attr s P.Int)
                (\s a -> s { _memorySize = a } :: FcFunctionResource s)
+
+instance P.HasName (FcFunctionResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: FcFunctionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: FcFunctionResource s)
 
 instance P.HasNamePrefix (FcFunctionResource s) (TF.Attr s P.Text) where
     namePrefix =
@@ -3048,9 +3347,18 @@ data FcServiceResource s = FcServiceResource'
     , _logConfig      :: TF.Attr s (LogConfigSetting s)
     -- ^ @log_config@ - (Optional)
     --
+    , _name           :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
     , _namePrefix     :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
     --
+    -- Conflicts with:
+    --
+    -- * 'name'
     , _role           :: TF.Attr s P.Text
     -- ^ @role@ - (Optional)
     --
@@ -3068,6 +3376,7 @@ fcServiceResource =
             { _description = TF.Nil
             , _internetAccess = TF.value P.True
             , _logConfig = TF.Nil
+            , _name = TF.Nil
             , _namePrefix = TF.Nil
             , _role = TF.Nil
             , _vpcConfig = TF.Nil
@@ -3078,13 +3387,25 @@ instance TF.IsObject (FcServiceResource s) where
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "internet_access" <$> TF.attribute _internetAccess
         , TF.assign "log_config" <$> TF.attribute _logConfig
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _namePrefix
         , TF.assign "role" <$> TF.attribute _role
         , TF.assign "vpc_config" <$> TF.attribute _vpcConfig
         ]
 
 instance TF.IsValid (FcServiceResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\FcServiceResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
+                            ])
+        ])
            P.<> TF.settingsValidator "_logConfig"
                   (_logConfig
                       :: FcServiceResource s -> TF.Attr s (LogConfigSetting s))
@@ -3108,6 +3429,11 @@ instance P.HasLogConfig (FcServiceResource s) (TF.Attr s (LogConfigSetting s)) w
     logConfig =
         P.lens (_logConfig :: FcServiceResource s -> TF.Attr s (LogConfigSetting s))
                (\s a -> s { _logConfig = a } :: FcServiceResource s)
+
+instance P.HasName (FcServiceResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: FcServiceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: FcServiceResource s)
 
 instance P.HasNamePrefix (FcServiceResource s) (TF.Attr s P.Text) where
     namePrefix =
@@ -3144,9 +3470,18 @@ data FcTriggerResource s = FcTriggerResource'
     , _function   :: TF.Attr s P.Text
     -- ^ @function@ - (Required, Forces New)
     --
+    , _name       :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
     , _namePrefix :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
     --
+    -- Conflicts with:
+    --
+    -- * 'name'
     , _role       :: TF.Attr s P.Text
     -- ^ @role@ - (Optional)
     --
@@ -3173,6 +3508,7 @@ fcTriggerResource _config _function _service _type' =
         FcTriggerResource'
             { _config = _config
             , _function = _function
+            , _name = TF.Nil
             , _namePrefix = TF.Nil
             , _role = TF.Nil
             , _service = _service
@@ -3184,6 +3520,7 @@ instance TF.IsObject (FcTriggerResource s) where
     toObject FcTriggerResource'{..} = P.catMaybes
         [ TF.assign "config" <$> TF.attribute _config
         , TF.assign "function" <$> TF.attribute _function
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _namePrefix
         , TF.assign "role" <$> TF.attribute _role
         , TF.assign "service" <$> TF.attribute _service
@@ -3192,7 +3529,18 @@ instance TF.IsObject (FcTriggerResource s) where
         ]
 
 instance TF.IsValid (FcTriggerResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\FcTriggerResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
+                            ])
+        ])
 
 instance P.HasConfig (FcTriggerResource s) (TF.Attr s P.Text) where
     config =
@@ -3203,6 +3551,11 @@ instance P.HasFunction (FcTriggerResource s) (TF.Attr s P.Text) where
     function =
         P.lens (_function :: FcTriggerResource s -> TF.Attr s P.Text)
                (\s a -> s { _function = a } :: FcTriggerResource s)
+
+instance P.HasName (FcTriggerResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: FcTriggerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: FcTriggerResource s)
 
 instance P.HasNamePrefix (FcTriggerResource s) (TF.Attr s P.Text) where
     namePrefix =
@@ -3337,11 +3690,17 @@ data InstanceResource s = InstanceResource'
     { _autoRenewPeriod         :: TF.Attr s P.Int
     -- ^ @auto_renew_period@ - (Optional)
     --
+    , _availabilityZone        :: TF.Attr s P.Text
+    -- ^ @availability_zone@ - (Optional, Forces New)
+    --
     , _description             :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _dryRun                  :: TF.Attr s P.Bool
     -- ^ @dry_run@ - (Optional)
+    --
+    , _hostName                :: TF.Attr s P.Text
+    -- ^ @host_name@ - (Optional)
     --
     , _imageId                 :: TF.Attr s P.Text
     -- ^ @image_id@ - (Required)
@@ -3361,11 +3720,17 @@ data InstanceResource s = InstanceResource'
     , _internetChargeType      :: TF.Attr s P.Text
     -- ^ @internet_charge_type@ - (Optional)
     --
+    , _internetMaxBandwidthIn  :: TF.Attr s P.Int
+    -- ^ @internet_max_bandwidth_in@ - (Optional)
+    --
     , _internetMaxBandwidthOut :: TF.Attr s P.Int
     -- ^ @internet_max_bandwidth_out@ - (Optional)
     --
     , _isOutdated              :: TF.Attr s P.Bool
     -- ^ @is_outdated@ - (Optional)
+    --
+    , _keyName                 :: TF.Attr s P.Text
+    -- ^ @key_name@ - (Optional, Forces New)
     --
     , _password                :: TF.Attr s P.Text
     -- ^ @password@ - (Optional)
@@ -3376,8 +3741,14 @@ data InstanceResource s = InstanceResource'
     , _periodUnit              :: TF.Attr s P.Text
     -- ^ @period_unit@ - (Optional)
     --
+    , _privateIp               :: TF.Attr s P.Text
+    -- ^ @private_ip@ - (Optional)
+    --
     , _renewalStatus           :: TF.Attr s P.Text
     -- ^ @renewal_status@ - (Optional)
+    --
+    , _roleName                :: TF.Attr s P.Text
+    -- ^ @role_name@ - (Optional, Forces New)
     --
     , _securityGroups          :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @security_groups@ - (Required)
@@ -3388,6 +3759,12 @@ data InstanceResource s = InstanceResource'
     , _spotStrategy            :: TF.Attr s P.Text
     -- ^ @spot_strategy@ - (Optional, Forces New)
     --
+    , _subnetId                :: TF.Attr s P.Text
+    -- ^ @subnet_id@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'vswitchId'
     , _systemDiskCategory      :: TF.Attr s P.Text
     -- ^ @system_disk_category@ - (Optional, Forces New)
     --
@@ -3403,6 +3780,9 @@ data InstanceResource s = InstanceResource'
     , _vswitchId               :: TF.Attr s P.Text
     -- ^ @vswitch_id@ - (Optional)
     --
+    -- Conflicts with:
+    --
+    -- * 'subnetId'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @alicloud_instance@ resource value.
@@ -3415,23 +3795,30 @@ instanceResource _securityGroups _imageId _instanceType =
     TF.unsafeResource "alicloud_instance" TF.validator $
         InstanceResource'
             { _autoRenewPeriod = TF.value 1
+            , _availabilityZone = TF.Nil
             , _description = TF.Nil
             , _dryRun = TF.value P.False
+            , _hostName = TF.Nil
             , _imageId = _imageId
             , _includeDataDisks = TF.value P.True
             , _instanceChargeType = TF.Nil
             , _instanceName = TF.value "ECS-Instance"
             , _instanceType = _instanceType
             , _internetChargeType = TF.Nil
+            , _internetMaxBandwidthIn = TF.Nil
             , _internetMaxBandwidthOut = TF.value 0
             , _isOutdated = TF.Nil
+            , _keyName = TF.Nil
             , _password = TF.Nil
             , _period = TF.value 1
             , _periodUnit = TF.Nil
+            , _privateIp = TF.Nil
             , _renewalStatus = TF.Nil
+            , _roleName = TF.Nil
             , _securityGroups = _securityGroups
             , _spotPriceLimit = TF.Nil
             , _spotStrategy = TF.Nil
+            , _subnetId = TF.Nil
             , _systemDiskCategory = TF.Nil
             , _systemDiskSize = TF.value 40
             , _tags = TF.Nil
@@ -3442,23 +3829,30 @@ instanceResource _securityGroups _imageId _instanceType =
 instance TF.IsObject (InstanceResource s) where
     toObject InstanceResource'{..} = P.catMaybes
         [ TF.assign "auto_renew_period" <$> TF.attribute _autoRenewPeriod
+        , TF.assign "availability_zone" <$> TF.attribute _availabilityZone
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "dry_run" <$> TF.attribute _dryRun
+        , TF.assign "host_name" <$> TF.attribute _hostName
         , TF.assign "image_id" <$> TF.attribute _imageId
         , TF.assign "include_data_disks" <$> TF.attribute _includeDataDisks
         , TF.assign "instance_charge_type" <$> TF.attribute _instanceChargeType
         , TF.assign "instance_name" <$> TF.attribute _instanceName
         , TF.assign "instance_type" <$> TF.attribute _instanceType
         , TF.assign "internet_charge_type" <$> TF.attribute _internetChargeType
+        , TF.assign "internet_max_bandwidth_in" <$> TF.attribute _internetMaxBandwidthIn
         , TF.assign "internet_max_bandwidth_out" <$> TF.attribute _internetMaxBandwidthOut
         , TF.assign "is_outdated" <$> TF.attribute _isOutdated
+        , TF.assign "key_name" <$> TF.attribute _keyName
         , TF.assign "password" <$> TF.attribute _password
         , TF.assign "period" <$> TF.attribute _period
         , TF.assign "period_unit" <$> TF.attribute _periodUnit
+        , TF.assign "private_ip" <$> TF.attribute _privateIp
         , TF.assign "renewal_status" <$> TF.attribute _renewalStatus
+        , TF.assign "role_name" <$> TF.attribute _roleName
         , TF.assign "security_groups" <$> TF.attribute _securityGroups
         , TF.assign "spot_price_limit" <$> TF.attribute _spotPriceLimit
         , TF.assign "spot_strategy" <$> TF.attribute _spotStrategy
+        , TF.assign "subnet_id" <$> TF.attribute _subnetId
         , TF.assign "system_disk_category" <$> TF.attribute _systemDiskCategory
         , TF.assign "system_disk_size" <$> TF.attribute _systemDiskSize
         , TF.assign "tags" <$> TF.attribute _tags
@@ -3467,12 +3861,28 @@ instance TF.IsObject (InstanceResource s) where
         ]
 
 instance TF.IsValid (InstanceResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\InstanceResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_subnetId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_subnetId",
+                            [ "_vswitchId"
+                            ])
+        , if (_vswitchId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_vswitchId",
+                            [ "_subnetId"
+                            ])
+        ])
 
 instance P.HasAutoRenewPeriod (InstanceResource s) (TF.Attr s P.Int) where
     autoRenewPeriod =
         P.lens (_autoRenewPeriod :: InstanceResource s -> TF.Attr s P.Int)
                (\s a -> s { _autoRenewPeriod = a } :: InstanceResource s)
+
+instance P.HasAvailabilityZone (InstanceResource s) (TF.Attr s P.Text) where
+    availabilityZone =
+        P.lens (_availabilityZone :: InstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _availabilityZone = a } :: InstanceResource s)
 
 instance P.HasDescription (InstanceResource s) (TF.Attr s P.Text) where
     description =
@@ -3483,6 +3893,11 @@ instance P.HasDryRun (InstanceResource s) (TF.Attr s P.Bool) where
     dryRun =
         P.lens (_dryRun :: InstanceResource s -> TF.Attr s P.Bool)
                (\s a -> s { _dryRun = a } :: InstanceResource s)
+
+instance P.HasHostName (InstanceResource s) (TF.Attr s P.Text) where
+    hostName =
+        P.lens (_hostName :: InstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _hostName = a } :: InstanceResource s)
 
 instance P.HasImageId (InstanceResource s) (TF.Attr s P.Text) where
     imageId =
@@ -3514,6 +3929,11 @@ instance P.HasInternetChargeType (InstanceResource s) (TF.Attr s P.Text) where
         P.lens (_internetChargeType :: InstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _internetChargeType = a } :: InstanceResource s)
 
+instance P.HasInternetMaxBandwidthIn (InstanceResource s) (TF.Attr s P.Int) where
+    internetMaxBandwidthIn =
+        P.lens (_internetMaxBandwidthIn :: InstanceResource s -> TF.Attr s P.Int)
+               (\s a -> s { _internetMaxBandwidthIn = a } :: InstanceResource s)
+
 instance P.HasInternetMaxBandwidthOut (InstanceResource s) (TF.Attr s P.Int) where
     internetMaxBandwidthOut =
         P.lens (_internetMaxBandwidthOut :: InstanceResource s -> TF.Attr s P.Int)
@@ -3523,6 +3943,11 @@ instance P.HasIsOutdated (InstanceResource s) (TF.Attr s P.Bool) where
     isOutdated =
         P.lens (_isOutdated :: InstanceResource s -> TF.Attr s P.Bool)
                (\s a -> s { _isOutdated = a } :: InstanceResource s)
+
+instance P.HasKeyName (InstanceResource s) (TF.Attr s P.Text) where
+    keyName =
+        P.lens (_keyName :: InstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _keyName = a } :: InstanceResource s)
 
 instance P.HasPassword (InstanceResource s) (TF.Attr s P.Text) where
     password =
@@ -3539,10 +3964,20 @@ instance P.HasPeriodUnit (InstanceResource s) (TF.Attr s P.Text) where
         P.lens (_periodUnit :: InstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _periodUnit = a } :: InstanceResource s)
 
+instance P.HasPrivateIp (InstanceResource s) (TF.Attr s P.Text) where
+    privateIp =
+        P.lens (_privateIp :: InstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _privateIp = a } :: InstanceResource s)
+
 instance P.HasRenewalStatus (InstanceResource s) (TF.Attr s P.Text) where
     renewalStatus =
         P.lens (_renewalStatus :: InstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _renewalStatus = a } :: InstanceResource s)
+
+instance P.HasRoleName (InstanceResource s) (TF.Attr s P.Text) where
+    roleName =
+        P.lens (_roleName :: InstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _roleName = a } :: InstanceResource s)
 
 instance P.HasSecurityGroups (InstanceResource s) (TF.Attr s [TF.Attr s P.Text]) where
     securityGroups =
@@ -3558,6 +3993,11 @@ instance P.HasSpotStrategy (InstanceResource s) (TF.Attr s P.Text) where
     spotStrategy =
         P.lens (_spotStrategy :: InstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _spotStrategy = a } :: InstanceResource s)
+
+instance P.HasSubnetId (InstanceResource s) (TF.Attr s P.Text) where
+    subnetId =
+        P.lens (_subnetId :: InstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _subnetId = a } :: InstanceResource s)
 
 instance P.HasSystemDiskCategory (InstanceResource s) (TF.Attr s P.Text) where
     systemDiskCategory =
@@ -3622,9 +4062,18 @@ data KeyPairResource s = KeyPairResource'
     { _keyFile       :: TF.Attr s P.Text
     -- ^ @key_file@ - (Optional, Forces New)
     --
+    , _keyName       :: TF.Attr s P.Text
+    -- ^ @key_name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'keyNamePrefix'
     , _keyNamePrefix :: TF.Attr s P.Text
     -- ^ @key_name_prefix@ - (Optional, Forces New)
     --
+    -- Conflicts with:
+    --
+    -- * 'keyName'
     , _publicKey     :: TF.Attr s P.Text
     -- ^ @public_key@ - (Optional, Forces New)
     --
@@ -3637,6 +4086,7 @@ keyPairResource =
     TF.unsafeResource "alicloud_key_pair" TF.validator $
         KeyPairResource'
             { _keyFile = TF.Nil
+            , _keyName = TF.Nil
             , _keyNamePrefix = TF.Nil
             , _publicKey = TF.Nil
             }
@@ -3644,17 +4094,34 @@ keyPairResource =
 instance TF.IsObject (KeyPairResource s) where
     toObject KeyPairResource'{..} = P.catMaybes
         [ TF.assign "key_file" <$> TF.attribute _keyFile
+        , TF.assign "key_name" <$> TF.attribute _keyName
         , TF.assign "key_name_prefix" <$> TF.attribute _keyNamePrefix
         , TF.assign "public_key" <$> TF.attribute _publicKey
         ]
 
 instance TF.IsValid (KeyPairResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\KeyPairResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_keyName P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_keyName",
+                            [ "_keyNamePrefix"
+                            ])
+        , if (_keyNamePrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_keyNamePrefix",
+                            [ "_keyName"
+                            ])
+        ])
 
 instance P.HasKeyFile (KeyPairResource s) (TF.Attr s P.Text) where
     keyFile =
         P.lens (_keyFile :: KeyPairResource s -> TF.Attr s P.Text)
                (\s a -> s { _keyFile = a } :: KeyPairResource s)
+
+instance P.HasKeyName (KeyPairResource s) (TF.Attr s P.Text) where
+    keyName =
+        P.lens (_keyName :: KeyPairResource s -> TF.Attr s P.Text)
+               (\s a -> s { _keyName = a } :: KeyPairResource s)
 
 instance P.HasKeyNamePrefix (KeyPairResource s) (TF.Attr s P.Text) where
     keyNamePrefix =
@@ -4063,6 +4530,9 @@ data NatGatewayResource s = NatGatewayResource'
     { _description   :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
+    , _name          :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
     , _specification :: TF.Attr s P.Text
     -- ^ @specification@ - (Optional)
     --
@@ -4079,6 +4549,7 @@ natGatewayResource _vpcId =
     TF.unsafeResource "alicloud_nat_gateway" TF.validator $
         NatGatewayResource'
             { _description = TF.Nil
+            , _name = TF.Nil
             , _specification = TF.Nil
             , _vpcId = _vpcId
             }
@@ -4086,6 +4557,7 @@ natGatewayResource _vpcId =
 instance TF.IsObject (NatGatewayResource s) where
     toObject NatGatewayResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "specification" <$> TF.attribute _specification
         , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
@@ -4097,6 +4569,11 @@ instance P.HasDescription (NatGatewayResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: NatGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: NatGatewayResource s)
+
+instance P.HasName (NatGatewayResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: NatGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: NatGatewayResource s)
 
 instance P.HasSpecification (NatGatewayResource s) (TF.Attr s P.Text) where
     specification =
@@ -4146,6 +4623,9 @@ data OssBucketResource s = OssBucketResource'
     , _loggingIsenable :: TF.Attr s P.Bool
     -- ^ @logging_isenable@ - (Optional)
     --
+    , _refererConfig   :: TF.Attr s (RefererConfigSetting s)
+    -- ^ @referer_config@ - (Optional)
+    --
     , _website         :: TF.Attr s (WebsiteSetting s)
     -- ^ @website@ - (Optional)
     --
@@ -4163,6 +4643,7 @@ ossBucketResource =
             , _lifecycleRule = TF.Nil
             , _logging = TF.Nil
             , _loggingIsenable = TF.value P.True
+            , _refererConfig = TF.Nil
             , _website = TF.Nil
             }
 
@@ -4174,6 +4655,7 @@ instance TF.IsObject (OssBucketResource s) where
         , TF.assign "lifecycle_rule" <$> TF.attribute _lifecycleRule
         , TF.assign "logging" <$> TF.attribute _logging
         , TF.assign "logging_isenable" <$> TF.attribute _loggingIsenable
+        , TF.assign "referer_config" <$> TF.attribute _refererConfig
         , TF.assign "website" <$> TF.attribute _website
         ]
 
@@ -4182,6 +4664,10 @@ instance TF.IsValid (OssBucketResource s) where
            P.<> TF.settingsValidator "_logging"
                   (_logging
                       :: OssBucketResource s -> TF.Attr s (LoggingSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_refererConfig"
+                  (_refererConfig
+                      :: OssBucketResource s -> TF.Attr s (RefererConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_website"
                   (_website
@@ -4218,6 +4704,11 @@ instance P.HasLoggingIsenable (OssBucketResource s) (TF.Attr s P.Bool) where
         P.lens (_loggingIsenable :: OssBucketResource s -> TF.Attr s P.Bool)
                (\s a -> s { _loggingIsenable = a } :: OssBucketResource s)
 
+instance P.HasRefererConfig (OssBucketResource s) (TF.Attr s (RefererConfigSetting s)) where
+    refererConfig =
+        P.lens (_refererConfig :: OssBucketResource s -> TF.Attr s (RefererConfigSetting s))
+               (\s a -> s { _refererConfig = a } :: OssBucketResource s)
+
 instance P.HasWebsite (OssBucketResource s) (TF.Attr s (WebsiteSetting s)) where
     website =
         P.lens (_website :: OssBucketResource s -> TF.Attr s (WebsiteSetting s))
@@ -4252,37 +4743,43 @@ instance s ~ s' => P.HasComputedStorageClass (TF.Ref s' (OssBucketResource s)) (
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/oss_bucket_object.html terraform documentation>
 -- for more information.
 data OssBucketObjectResource s = OssBucketObjectResource'
-    { _acl                :: TF.Attr s P.Text
+    { _acl                  :: TF.Attr s P.Text
     -- ^ @acl@ - (Optional)
     --
-    , _bucket             :: TF.Attr s P.Text
+    , _bucket               :: TF.Attr s P.Text
     -- ^ @bucket@ - (Required, Forces New)
     --
-    , _cacheControl       :: TF.Attr s P.Text
+    , _cacheControl         :: TF.Attr s P.Text
     -- ^ @cache_control@ - (Optional)
     --
-    , _content            :: TF.Attr s P.Text
+    , _content              :: TF.Attr s P.Text
     -- ^ @content@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'source'
-    , _contentDisposition :: TF.Attr s P.Text
+    , _contentDisposition   :: TF.Attr s P.Text
     -- ^ @content_disposition@ - (Optional)
     --
-    , _contentEncoding    :: TF.Attr s P.Text
+    , _contentEncoding      :: TF.Attr s P.Text
     -- ^ @content_encoding@ - (Optional)
     --
-    , _contentMd5         :: TF.Attr s P.Text
+    , _contentMd5           :: TF.Attr s P.Text
     -- ^ @content_md5@ - (Optional)
     --
-    , _expires            :: TF.Attr s P.Text
+    , _contentType          :: TF.Attr s P.Text
+    -- ^ @content_type@ - (Optional)
+    --
+    , _expires              :: TF.Attr s P.Text
     -- ^ @expires@ - (Optional)
     --
-    , _key                :: TF.Attr s P.Text
+    , _key                  :: TF.Attr s P.Text
     -- ^ @key@ - (Required, Forces New)
     --
-    , _source             :: TF.Attr s P.Text
+    , _serverSideEncryption :: TF.Attr s P.Text
+    -- ^ @server_side_encryption@ - (Optional)
+    --
+    , _source               :: TF.Attr s P.Text
     -- ^ @source@ - (Optional)
     --
     -- Conflicts with:
@@ -4305,8 +4802,10 @@ ossBucketObjectResource _bucket _key =
             , _contentDisposition = TF.Nil
             , _contentEncoding = TF.Nil
             , _contentMd5 = TF.Nil
+            , _contentType = TF.Nil
             , _expires = TF.Nil
             , _key = _key
+            , _serverSideEncryption = TF.Nil
             , _source = TF.Nil
             }
 
@@ -4319,8 +4818,10 @@ instance TF.IsObject (OssBucketObjectResource s) where
         , TF.assign "content_disposition" <$> TF.attribute _contentDisposition
         , TF.assign "content_encoding" <$> TF.attribute _contentEncoding
         , TF.assign "content_md5" <$> TF.attribute _contentMd5
+        , TF.assign "content_type" <$> TF.attribute _contentType
         , TF.assign "expires" <$> TF.attribute _expires
         , TF.assign "key" <$> TF.attribute _key
+        , TF.assign "server_side_encryption" <$> TF.attribute _serverSideEncryption
         , TF.assign "source" <$> TF.attribute _source
         ]
 
@@ -4373,6 +4874,11 @@ instance P.HasContentMd5 (OssBucketObjectResource s) (TF.Attr s P.Text) where
         P.lens (_contentMd5 :: OssBucketObjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _contentMd5 = a } :: OssBucketObjectResource s)
 
+instance P.HasContentType (OssBucketObjectResource s) (TF.Attr s P.Text) where
+    contentType =
+        P.lens (_contentType :: OssBucketObjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _contentType = a } :: OssBucketObjectResource s)
+
 instance P.HasExpires (OssBucketObjectResource s) (TF.Attr s P.Text) where
     expires =
         P.lens (_expires :: OssBucketObjectResource s -> TF.Attr s P.Text)
@@ -4382,6 +4888,11 @@ instance P.HasKey (OssBucketObjectResource s) (TF.Attr s P.Text) where
     key =
         P.lens (_key :: OssBucketObjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _key = a } :: OssBucketObjectResource s)
+
+instance P.HasServerSideEncryption (OssBucketObjectResource s) (TF.Attr s P.Text) where
+    serverSideEncryption =
+        P.lens (_serverSideEncryption :: OssBucketObjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _serverSideEncryption = a } :: OssBucketObjectResource s)
 
 instance P.HasSource (OssBucketObjectResource s) (TF.Attr s P.Text) where
     source =
@@ -4984,15 +5495,31 @@ data RamPolicyResource s = RamPolicyResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
+    , _document    :: TF.Attr s P.Text
+    -- ^ @document@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'statement'
+    -- * 'version'
     , _force       :: TF.Attr s P.Bool
     -- ^ @force@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _statement   :: TF.Attr s [TF.Attr s (StatementSetting s)]
+    -- ^ @statement@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'document'
     , _version     :: TF.Attr s P.Text
     -- ^ @version@ - (Optional)
     --
+    -- Conflicts with:
+    --
+    -- * 'document'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @alicloud_ram_policy@ resource value.
@@ -5003,26 +5530,51 @@ ramPolicyResource _name =
     TF.unsafeResource "alicloud_ram_policy" TF.validator $
         RamPolicyResource'
             { _description = TF.Nil
+            , _document = TF.Nil
             , _force = TF.value P.False
             , _name = _name
+            , _statement = TF.Nil
             , _version = TF.value "1"
             }
 
 instance TF.IsObject (RamPolicyResource s) where
     toObject RamPolicyResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "document" <$> TF.attribute _document
         , TF.assign "force" <$> TF.attribute _force
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "statement" <$> TF.attribute _statement
         , TF.assign "version" <$> TF.attribute _version
         ]
 
 instance TF.IsValid (RamPolicyResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\RamPolicyResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_document P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_document",
+                            [ "_statement"                            , "_version"
+                            ])
+        , if (_statement P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_statement",
+                            [ "_document"
+                            ])
+        , if (_version P.== TF.value "1")
+              then P.Nothing
+              else P.Just ("_version",
+                            [ "_document"
+                            ])
+        ])
 
 instance P.HasDescription (RamPolicyResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: RamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: RamPolicyResource s)
+
+instance P.HasDocument (RamPolicyResource s) (TF.Attr s P.Text) where
+    document =
+        P.lens (_document :: RamPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _document = a } :: RamPolicyResource s)
 
 instance P.HasForce (RamPolicyResource s) (TF.Attr s P.Bool) where
     force =
@@ -5033,6 +5585,11 @@ instance P.HasName (RamPolicyResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RamPolicyResource s)
+
+instance P.HasStatement (RamPolicyResource s) (TF.Attr s [TF.Attr s (StatementSetting s)]) where
+    statement =
+        P.lens (_statement :: RamPolicyResource s -> TF.Attr s [TF.Attr s (StatementSetting s)])
+               (\s a -> s { _statement = a } :: RamPolicyResource s)
 
 instance P.HasVersion (RamPolicyResource s) (TF.Attr s P.Text) where
     version =
@@ -5062,15 +5619,38 @@ data RamRoleResource s = RamRoleResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
+    , _document    :: TF.Attr s P.Text
+    -- ^ @document@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'ramUsers'
+    -- * 'services'
+    -- * 'version'
     , _force       :: TF.Attr s P.Bool
     -- ^ @force@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _ramUsers    :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @ram_users@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'document'
+    , _services    :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @services@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'document'
     , _version     :: TF.Attr s P.Text
     -- ^ @version@ - (Optional)
     --
+    -- Conflicts with:
+    --
+    -- * 'document'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @alicloud_ram_role@ resource value.
@@ -5081,26 +5661,58 @@ ramRoleResource _name =
     TF.unsafeResource "alicloud_ram_role" TF.validator $
         RamRoleResource'
             { _description = TF.Nil
+            , _document = TF.Nil
             , _force = TF.value P.False
             , _name = _name
+            , _ramUsers = TF.Nil
+            , _services = TF.Nil
             , _version = TF.value "1"
             }
 
 instance TF.IsObject (RamRoleResource s) where
     toObject RamRoleResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "document" <$> TF.attribute _document
         , TF.assign "force" <$> TF.attribute _force
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "ram_users" <$> TF.attribute _ramUsers
+        , TF.assign "services" <$> TF.attribute _services
         , TF.assign "version" <$> TF.attribute _version
         ]
 
 instance TF.IsValid (RamRoleResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\RamRoleResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_document P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_document",
+                            [ "_ramUsers"                            , "_services"                            , "_version"
+                            ])
+        , if (_ramUsers P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_ramUsers",
+                            [ "_document"
+                            ])
+        , if (_services P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_services",
+                            [ "_document"
+                            ])
+        , if (_version P.== TF.value "1")
+              then P.Nothing
+              else P.Just ("_version",
+                            [ "_document"
+                            ])
+        ])
 
 instance P.HasDescription (RamRoleResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: RamRoleResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: RamRoleResource s)
+
+instance P.HasDocument (RamRoleResource s) (TF.Attr s P.Text) where
+    document =
+        P.lens (_document :: RamRoleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _document = a } :: RamRoleResource s)
 
 instance P.HasForce (RamRoleResource s) (TF.Attr s P.Bool) where
     force =
@@ -5111,6 +5723,16 @@ instance P.HasName (RamRoleResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RamRoleResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RamRoleResource s)
+
+instance P.HasRamUsers (RamRoleResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    ramUsers =
+        P.lens (_ramUsers :: RamRoleResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _ramUsers = a } :: RamRoleResource s)
+
+instance P.HasServices (RamRoleResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    services =
+        P.lens (_services :: RamRoleResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _services = a } :: RamRoleResource s)
 
 instance P.HasVersion (RamRoleResource s) (TF.Attr s P.Text) where
     version =
@@ -5571,13 +6193,19 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (RouterInterfaceResource s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/router_interface_connection.html terraform documentation>
 -- for more information.
 data RouterInterfaceConnectionResource s = RouterInterfaceConnectionResource'
-    { _interfaceId         :: TF.Attr s P.Text
+    { _interfaceId              :: TF.Attr s P.Text
     -- ^ @interface_id@ - (Required, Forces New)
     --
-    , _oppositeInterfaceId :: TF.Attr s P.Text
+    , _oppositeInterfaceId      :: TF.Attr s P.Text
     -- ^ @opposite_interface_id@ - (Required, Forces New)
     --
-    , _oppositeRouterType  :: TF.Attr s P.Text
+    , _oppositeInterfaceOwnerId :: TF.Attr s P.Text
+    -- ^ @opposite_interface_owner_id@ - (Optional, Forces New)
+    --
+    , _oppositeRouterId         :: TF.Attr s P.Text
+    -- ^ @opposite_router_id@ - (Optional, Forces New)
+    --
+    , _oppositeRouterType       :: TF.Attr s P.Text
     -- ^ @opposite_router_type@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -5592,6 +6220,8 @@ routerInterfaceConnectionResource _interfaceId _oppositeInterfaceId =
         RouterInterfaceConnectionResource'
             { _interfaceId = _interfaceId
             , _oppositeInterfaceId = _oppositeInterfaceId
+            , _oppositeInterfaceOwnerId = TF.Nil
+            , _oppositeRouterId = TF.Nil
             , _oppositeRouterType = TF.Nil
             }
 
@@ -5599,6 +6229,8 @@ instance TF.IsObject (RouterInterfaceConnectionResource s) where
     toObject RouterInterfaceConnectionResource'{..} = P.catMaybes
         [ TF.assign "interface_id" <$> TF.attribute _interfaceId
         , TF.assign "opposite_interface_id" <$> TF.attribute _oppositeInterfaceId
+        , TF.assign "opposite_interface_owner_id" <$> TF.attribute _oppositeInterfaceOwnerId
+        , TF.assign "opposite_router_id" <$> TF.attribute _oppositeRouterId
         , TF.assign "opposite_router_type" <$> TF.attribute _oppositeRouterType
         ]
 
@@ -5614,6 +6246,16 @@ instance P.HasOppositeInterfaceId (RouterInterfaceConnectionResource s) (TF.Attr
     oppositeInterfaceId =
         P.lens (_oppositeInterfaceId :: RouterInterfaceConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _oppositeInterfaceId = a } :: RouterInterfaceConnectionResource s)
+
+instance P.HasOppositeInterfaceOwnerId (RouterInterfaceConnectionResource s) (TF.Attr s P.Text) where
+    oppositeInterfaceOwnerId =
+        P.lens (_oppositeInterfaceOwnerId :: RouterInterfaceConnectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _oppositeInterfaceOwnerId = a } :: RouterInterfaceConnectionResource s)
+
+instance P.HasOppositeRouterId (RouterInterfaceConnectionResource s) (TF.Attr s P.Text) where
+    oppositeRouterId =
+        P.lens (_oppositeRouterId :: RouterInterfaceConnectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _oppositeRouterId = a } :: RouterInterfaceConnectionResource s)
 
 instance P.HasOppositeRouterType (RouterInterfaceConnectionResource s) (TF.Attr s P.Text) where
     oppositeRouterType =
@@ -5708,6 +6350,9 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
     , _ipProtocol              :: TF.Attr s P.Text
     -- ^ @ip_protocol@ - (Required, Forces New)
     --
+    , _nicType                 :: TF.Attr s P.Text
+    -- ^ @nic_type@ - (Optional, Forces New)
+    --
     , _policy                  :: TF.Attr s P.Text
     -- ^ @policy@ - (Optional, Forces New)
     --
@@ -5746,6 +6391,7 @@ securityGroupRuleResource _securityGroupId _ipProtocol _type' =
         SecurityGroupRuleResource'
             { _cidrIp = TF.Nil
             , _ipProtocol = _ipProtocol
+            , _nicType = TF.Nil
             , _policy = TF.Nil
             , _portRange = TF.value "-1/-1"
             , _priority = TF.value 1
@@ -5759,6 +6405,7 @@ instance TF.IsObject (SecurityGroupRuleResource s) where
     toObject SecurityGroupRuleResource'{..} = P.catMaybes
         [ TF.assign "cidr_ip" <$> TF.attribute _cidrIp
         , TF.assign "ip_protocol" <$> TF.attribute _ipProtocol
+        , TF.assign "nic_type" <$> TF.attribute _nicType
         , TF.assign "policy" <$> TF.attribute _policy
         , TF.assign "port_range" <$> TF.attribute _portRange
         , TF.assign "priority" <$> TF.attribute _priority
@@ -5791,6 +6438,11 @@ instance P.HasIpProtocol (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
     ipProtocol =
         P.lens (_ipProtocol :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _ipProtocol = a } :: SecurityGroupRuleResource s)
+
+instance P.HasNicType (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
+    nicType =
+        P.lens (_nicType :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _nicType = a } :: SecurityGroupRuleResource s)
 
 instance P.HasPolicy (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
     policy =
@@ -5926,7 +6578,10 @@ instance s ~ s' => P.HasComputedAddress (TF.Ref s' (SlbResource s)) (TF.Attr s P
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/slb_attachment.html terraform documentation>
 -- for more information.
 data SlbAttachmentResource s = SlbAttachmentResource'
-    { _instanceIds    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    { _backendServers :: TF.Attr s P.Text
+    -- ^ @backend_servers@ - (Optional)
+    --
+    , _instanceIds    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @instance_ids@ - (Required)
     --
     , _loadBalancerId :: TF.Attr s P.Text
@@ -5945,20 +6600,27 @@ slbAttachmentResource
 slbAttachmentResource _loadBalancerId _instanceIds =
     TF.unsafeResource "alicloud_slb_attachment" TF.validator $
         SlbAttachmentResource'
-            { _instanceIds = _instanceIds
+            { _backendServers = TF.Nil
+            , _instanceIds = _instanceIds
             , _loadBalancerId = _loadBalancerId
             , _weight = TF.value 100
             }
 
 instance TF.IsObject (SlbAttachmentResource s) where
     toObject SlbAttachmentResource'{..} = P.catMaybes
-        [ TF.assign "instance_ids" <$> TF.attribute _instanceIds
+        [ TF.assign "backend_servers" <$> TF.attribute _backendServers
+        , TF.assign "instance_ids" <$> TF.attribute _instanceIds
         , TF.assign "load_balancer_id" <$> TF.attribute _loadBalancerId
         , TF.assign "weight" <$> TF.attribute _weight
         ]
 
 instance TF.IsValid (SlbAttachmentResource s) where
     validator = P.mempty
+
+instance P.HasBackendServers (SlbAttachmentResource s) (TF.Attr s P.Text) where
+    backendServers =
+        P.lens (_backendServers :: SlbAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _backendServers = a } :: SlbAttachmentResource s)
 
 instance P.HasInstanceIds (SlbAttachmentResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     instanceIds =
@@ -5986,70 +6648,73 @@ instance s ~ s' => P.HasComputedBackendServers (TF.Ref s' (SlbAttachmentResource
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/slb_listener.html terraform documentation>
 -- for more information.
 data SlbListenerResource s = SlbListenerResource'
-    { _backendPort         :: TF.Attr s P.Int
+    { _backendPort            :: TF.Attr s P.Int
     -- ^ @backend_port@ - (Required, Forces New)
     --
-    , _bandwidth           :: TF.Attr s P.Int
+    , _bandwidth              :: TF.Attr s P.Int
     -- ^ @bandwidth@ - (Required)
     --
-    , _cookie              :: TF.Attr s P.Text
+    , _cookie                 :: TF.Attr s P.Text
     -- ^ @cookie@ - (Optional)
     --
-    , _cookieTimeout       :: TF.Attr s P.Int
+    , _cookieTimeout          :: TF.Attr s P.Int
     -- ^ @cookie_timeout@ - (Optional)
     --
-    , _frontendPort        :: TF.Attr s P.Int
+    , _frontendPort           :: TF.Attr s P.Int
     -- ^ @frontend_port@ - (Required, Forces New)
     --
-    , _healthCheck         :: TF.Attr s P.Text
+    , _healthCheck            :: TF.Attr s P.Text
     -- ^ @health_check@ - (Optional)
     --
-    , _healthCheckDomain   :: TF.Attr s P.Text
+    , _healthCheckConnectPort :: TF.Attr s P.Int
+    -- ^ @health_check_connect_port@ - (Optional)
+    --
+    , _healthCheckDomain      :: TF.Attr s P.Text
     -- ^ @health_check_domain@ - (Optional)
     --
-    , _healthCheckHttpCode :: TF.Attr s P.Text
+    , _healthCheckHttpCode    :: TF.Attr s P.Text
     -- ^ @health_check_http_code@ - (Optional)
     --
-    , _healthCheckInterval :: TF.Attr s P.Int
+    , _healthCheckInterval    :: TF.Attr s P.Int
     -- ^ @health_check_interval@ - (Optional)
     --
-    , _healthCheckTimeout  :: TF.Attr s P.Int
+    , _healthCheckTimeout     :: TF.Attr s P.Int
     -- ^ @health_check_timeout@ - (Optional)
     --
-    , _healthCheckType     :: TF.Attr s P.Text
+    , _healthCheckType        :: TF.Attr s P.Text
     -- ^ @health_check_type@ - (Optional)
     --
-    , _healthCheckUri      :: TF.Attr s P.Text
+    , _healthCheckUri         :: TF.Attr s P.Text
     -- ^ @health_check_uri@ - (Optional)
     --
-    , _healthyThreshold    :: TF.Attr s P.Int
+    , _healthyThreshold       :: TF.Attr s P.Int
     -- ^ @healthy_threshold@ - (Optional)
     --
-    , _loadBalancerId      :: TF.Attr s P.Text
+    , _loadBalancerId         :: TF.Attr s P.Text
     -- ^ @load_balancer_id@ - (Required, Forces New)
     --
-    , _persistenceTimeout  :: TF.Attr s P.Int
+    , _persistenceTimeout     :: TF.Attr s P.Int
     -- ^ @persistence_timeout@ - (Optional)
     --
-    , _protocol            :: TF.Attr s P.Text
+    , _protocol               :: TF.Attr s P.Text
     -- ^ @protocol@ - (Required, Forces New)
     --
-    , _scheduler           :: TF.Attr s P.Text
+    , _scheduler              :: TF.Attr s P.Text
     -- ^ @scheduler@ - (Optional)
     --
-    , _serverGroupId       :: TF.Attr s P.Text
+    , _serverGroupId          :: TF.Attr s P.Text
     -- ^ @server_group_id@ - (Optional)
     --
-    , _sslCertificateId    :: TF.Attr s P.Text
+    , _sslCertificateId       :: TF.Attr s P.Text
     -- ^ @ssl_certificate_id@ - (Optional)
     --
-    , _stickySession       :: TF.Attr s P.Text
+    , _stickySession          :: TF.Attr s P.Text
     -- ^ @sticky_session@ - (Optional)
     --
-    , _stickySessionType   :: TF.Attr s P.Text
+    , _stickySessionType      :: TF.Attr s P.Text
     -- ^ @sticky_session_type@ - (Optional)
     --
-    , _unhealthyThreshold  :: TF.Attr s P.Int
+    , _unhealthyThreshold     :: TF.Attr s P.Int
     -- ^ @unhealthy_threshold@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6071,6 +6736,7 @@ slbListenerResource _bandwidth _loadBalancerId _backendPort _frontendPort _proto
             , _cookieTimeout = TF.Nil
             , _frontendPort = _frontendPort
             , _healthCheck = TF.Nil
+            , _healthCheckConnectPort = TF.Nil
             , _healthCheckDomain = TF.Nil
             , _healthCheckHttpCode = TF.Nil
             , _healthCheckInterval = TF.value 2
@@ -6097,6 +6763,7 @@ instance TF.IsObject (SlbListenerResource s) where
         , TF.assign "cookie_timeout" <$> TF.attribute _cookieTimeout
         , TF.assign "frontend_port" <$> TF.attribute _frontendPort
         , TF.assign "health_check" <$> TF.attribute _healthCheck
+        , TF.assign "health_check_connect_port" <$> TF.attribute _healthCheckConnectPort
         , TF.assign "health_check_domain" <$> TF.attribute _healthCheckDomain
         , TF.assign "health_check_http_code" <$> TF.attribute _healthCheckHttpCode
         , TF.assign "health_check_interval" <$> TF.attribute _healthCheckInterval
@@ -6147,6 +6814,11 @@ instance P.HasHealthCheck (SlbListenerResource s) (TF.Attr s P.Text) where
     healthCheck =
         P.lens (_healthCheck :: SlbListenerResource s -> TF.Attr s P.Text)
                (\s a -> s { _healthCheck = a } :: SlbListenerResource s)
+
+instance P.HasHealthCheckConnectPort (SlbListenerResource s) (TF.Attr s P.Int) where
+    healthCheckConnectPort =
+        P.lens (_healthCheckConnectPort :: SlbListenerResource s -> TF.Attr s P.Int)
+               (\s a -> s { _healthCheckConnectPort = a } :: SlbListenerResource s)
 
 instance P.HasHealthCheckDomain (SlbListenerResource s) (TF.Attr s P.Text) where
     healthCheckDomain =

@@ -230,10 +230,16 @@ import qualified Terrafomo.Validator      as TF
 
 -- | @auth_config@ nested settings.
 data AuthConfigSetting s = AuthConfigSetting'
-    { _authType :: TF.Attr s P.Text
+    { _authType  :: TF.Attr s P.Text
     -- ^ @auth_type@ - (Optional)
     --
-    , _timeout  :: TF.Attr s P.Int
+    , _masterKey :: TF.Attr s P.Text
+    -- ^ @master_key@ - (Optional)
+    --
+    , _slaveKey  :: TF.Attr s P.Text
+    -- ^ @slave_key@ - (Optional)
+    --
+    , _timeout   :: TF.Attr s P.Int
     -- ^ @timeout@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -244,6 +250,8 @@ authConfigSetting
 authConfigSetting =
     AuthConfigSetting'
         { _authType = TF.value "no_auth"
+        , _masterKey = TF.Nil
+        , _slaveKey = TF.Nil
         , _timeout = TF.value 1800
         }
 
@@ -251,6 +259,8 @@ instance TF.IsValue  (AuthConfigSetting s)
 instance TF.IsObject (AuthConfigSetting s) where
     toObject AuthConfigSetting'{..} = P.catMaybes
         [ TF.assign "auth_type" <$> TF.attribute _authType
+        , TF.assign "master_key" <$> TF.attribute _masterKey
+        , TF.assign "slave_key" <$> TF.attribute _slaveKey
         , TF.assign "timeout" <$> TF.attribute _timeout
         ]
 
@@ -261,6 +271,16 @@ instance P.HasAuthType (AuthConfigSetting s) (TF.Attr s P.Text) where
     authType =
         P.lens (_authType :: AuthConfigSetting s -> TF.Attr s P.Text)
                (\s a -> s { _authType = a } :: AuthConfigSetting s)
+
+instance P.HasMasterKey (AuthConfigSetting s) (TF.Attr s P.Text) where
+    masterKey =
+        P.lens (_masterKey :: AuthConfigSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _masterKey = a } :: AuthConfigSetting s)
+
+instance P.HasSlaveKey (AuthConfigSetting s) (TF.Attr s P.Text) where
+    slaveKey =
+        P.lens (_slaveKey :: AuthConfigSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _slaveKey = a } :: AuthConfigSetting s)
 
 instance P.HasTimeout (AuthConfigSetting s) (TF.Attr s P.Int) where
     timeout =
@@ -1264,6 +1284,9 @@ data LifecycleRuleSetting s = LifecycleRuleSetting'
     , _expiration :: TF.Attr s [TF.Attr s (ExpirationSetting s)]
     -- ^ @expiration@ - (Required)
     --
+    , _id         :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
     , _prefix     :: TF.Attr s P.Text
     -- ^ @prefix@ - (Required)
     --
@@ -1279,6 +1302,7 @@ lifecycleRuleSetting _enabled _expiration _prefix =
     LifecycleRuleSetting'
         { _enabled = _enabled
         , _expiration = _expiration
+        , _id = TF.Nil
         , _prefix = _prefix
         }
 
@@ -1287,6 +1311,7 @@ instance TF.IsObject (LifecycleRuleSetting s) where
     toObject LifecycleRuleSetting'{..} = P.catMaybes
         [ TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "expiration" <$> TF.attribute _expiration
+        , TF.assign "id" <$> TF.attribute _id
         , TF.assign "prefix" <$> TF.attribute _prefix
         ]
 
@@ -1302,6 +1327,11 @@ instance P.HasExpiration (LifecycleRuleSetting s) (TF.Attr s [TF.Attr s (Expirat
     expiration =
         P.lens (_expiration :: LifecycleRuleSetting s -> TF.Attr s [TF.Attr s (ExpirationSetting s)])
                (\s a -> s { _expiration = a } :: LifecycleRuleSetting s)
+
+instance P.HasId (LifecycleRuleSetting s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: LifecycleRuleSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: LifecycleRuleSetting s)
 
 instance P.HasPrefix (LifecycleRuleSetting s) (TF.Attr s P.Text) where
     prefix =
@@ -1520,8 +1550,11 @@ instance s ~ s' => P.HasComputedErrorCode (TF.Ref s' (Page404ConfigSetting s)) (
 
 -- | @parameter_filter_config@ nested settings.
 data ParameterFilterConfigSetting s = ParameterFilterConfigSetting'
-    { _enable :: TF.Attr s P.Text
+    { _enable      :: TF.Attr s P.Text
     -- ^ @enable@ - (Optional)
+    --
+    , _hashKeyArgs :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @hash_key_args@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1531,12 +1564,14 @@ parameterFilterConfigSetting
 parameterFilterConfigSetting =
     ParameterFilterConfigSetting'
         { _enable = TF.value "off"
+        , _hashKeyArgs = TF.Nil
         }
 
 instance TF.IsValue  (ParameterFilterConfigSetting s)
 instance TF.IsObject (ParameterFilterConfigSetting s) where
     toObject ParameterFilterConfigSetting'{..} = P.catMaybes
         [ TF.assign "enable" <$> TF.attribute _enable
+        , TF.assign "hash_key_args" <$> TF.attribute _hashKeyArgs
         ]
 
 instance TF.IsValid (ParameterFilterConfigSetting s) where
@@ -1546,6 +1581,11 @@ instance P.HasEnable (ParameterFilterConfigSetting s) (TF.Attr s P.Text) where
     enable =
         P.lens (_enable :: ParameterFilterConfigSetting s -> TF.Attr s P.Text)
                (\s a -> s { _enable = a } :: ParameterFilterConfigSetting s)
+
+instance P.HasHashKeyArgs (ParameterFilterConfigSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+    hashKeyArgs =
+        P.lens (_hashKeyArgs :: ParameterFilterConfigSetting s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _hashKeyArgs = a } :: ParameterFilterConfigSetting s)
 
 instance s ~ s' => P.HasComputedHashKeyArgs (TF.Ref s' (ParameterFilterConfigSetting s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedHashKeyArgs x = TF.compute (TF.refKey x) "hash_key_args"

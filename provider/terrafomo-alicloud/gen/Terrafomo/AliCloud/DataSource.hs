@@ -1026,10 +1026,13 @@ instance s ~ s' => P.HasComputedInstances (TF.Ref s' (InstancesData s)) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/alicloud/d/key_pairs.html terraform documentation>
 -- for more information.
 data KeyPairsData s = KeyPairsData'
-    { _nameRegex  :: TF.Attr s P.Text
+    { _fingerPrint :: TF.Attr s P.Bool
+    -- ^ @finger_print@ - (Optional)
+    --
+    , _nameRegex   :: TF.Attr s P.Text
     -- ^ @name_regex@ - (Optional, Forces New)
     --
-    , _outputFile :: TF.Attr s P.Text
+    , _outputFile  :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1040,18 +1043,25 @@ keyPairsData
 keyPairsData =
     TF.unsafeDataSource "alicloud_key_pairs" TF.validator $
         KeyPairsData'
-            { _nameRegex = TF.Nil
+            { _fingerPrint = TF.Nil
+            , _nameRegex = TF.Nil
             , _outputFile = TF.Nil
             }
 
 instance TF.IsObject (KeyPairsData s) where
     toObject KeyPairsData'{..} = P.catMaybes
-        [ TF.assign "name_regex" <$> TF.attribute _nameRegex
+        [ TF.assign "finger_print" <$> TF.attribute _fingerPrint
+        , TF.assign "name_regex" <$> TF.attribute _nameRegex
         , TF.assign "output_file" <$> TF.attribute _outputFile
         ]
 
 instance TF.IsValid (KeyPairsData s) where
     validator = P.mempty
+
+instance P.HasFingerPrint (KeyPairsData s) (TF.Attr s P.Bool) where
+    fingerPrint =
+        P.lens (_fingerPrint :: KeyPairsData s -> TF.Attr s P.Bool)
+               (\s a -> s { _fingerPrint = a } :: KeyPairsData s)
 
 instance P.HasNameRegex (KeyPairsData s) (TF.Attr s P.Text) where
     nameRegex =
@@ -1533,7 +1543,13 @@ instance s ~ s' => P.HasComputedUsers (TF.Ref s' (RamUsersData s)) (TF.Attr s [T
 -- See the <https://www.terraform.io/docs/providers/alicloud/d/regions.html terraform documentation>
 -- for more information.
 data RegionsData s = RegionsData'
-    { _outputFile :: TF.Attr s P.Text
+    { _current    :: TF.Attr s P.Bool
+    -- ^ @current@ - (Optional)
+    --
+    , _name       :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _outputFile :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1544,16 +1560,30 @@ regionsData
 regionsData =
     TF.unsafeDataSource "alicloud_regions" TF.validator $
         RegionsData'
-            { _outputFile = TF.Nil
+            { _current = TF.Nil
+            , _name = TF.Nil
+            , _outputFile = TF.Nil
             }
 
 instance TF.IsObject (RegionsData s) where
     toObject RegionsData'{..} = P.catMaybes
-        [ TF.assign "output_file" <$> TF.attribute _outputFile
+        [ TF.assign "current" <$> TF.attribute _current
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "output_file" <$> TF.attribute _outputFile
         ]
 
 instance TF.IsValid (RegionsData s) where
     validator = P.mempty
+
+instance P.HasCurrent (RegionsData s) (TF.Attr s P.Bool) where
+    current =
+        P.lens (_current :: RegionsData s -> TF.Attr s P.Bool)
+               (\s a -> s { _current = a } :: RegionsData s)
+
+instance P.HasName (RegionsData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: RegionsData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: RegionsData s)
 
 instance P.HasOutputFile (RegionsData s) (TF.Attr s P.Text) where
     outputFile =

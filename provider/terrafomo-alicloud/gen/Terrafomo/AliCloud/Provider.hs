@@ -110,7 +110,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "alicloud"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "access_key" _accessKey
             , TF.assign "account_id" <$> _accountId
