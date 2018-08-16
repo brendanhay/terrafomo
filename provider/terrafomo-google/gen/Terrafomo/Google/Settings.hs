@@ -4479,10 +4479,10 @@ data PathMatcherSetting s = PathMatcherSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newPathMatcherSetting
-    :: TF.Attr s P.Text -- ^ @default_service@ - 'P.defaultService'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @default_service@ - 'P.defaultService'
     -> PathMatcherSetting s
-newPathMatcherSetting _defaultService _name =
+newPathMatcherSetting _name _defaultService =
     PathMatcherSetting'
         { _defaultService = _defaultService
         , _description = TF.Nil
@@ -5462,10 +5462,10 @@ data SecondaryIpRangeSetting s = SecondaryIpRangeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newSecondaryIpRangeSetting
-    :: TF.Attr s P.Text -- ^ @ip_cidr_range@ - 'P.ipCidrRange'
-    -> TF.Attr s P.Text -- ^ @range_name@ - 'P.rangeName'
+    :: TF.Attr s P.Text -- ^ @range_name@ - 'P.rangeName'
+    -> TF.Attr s P.Text -- ^ @ip_cidr_range@ - 'P.ipCidrRange'
     -> SecondaryIpRangeSetting s
-newSecondaryIpRangeSetting _ipCidrRange _rangeName =
+newSecondaryIpRangeSetting _rangeName _ipCidrRange =
     SecondaryIpRangeSetting'
         { _ipCidrRange = _ipCidrRange
         , _rangeName = _rangeName
@@ -6518,10 +6518,10 @@ data VersionSetting s = VersionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newVersionSetting
-    :: TF.Attr s P.Text -- ^ @instance_template@ - 'P.instanceTemplate'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @instance_template@ - 'P.instanceTemplate'
     -> VersionSetting s
-newVersionSetting _instanceTemplate _name =
+newVersionSetting _name _instanceTemplate =
     VersionSetting'
         { _instanceTemplate = _instanceTemplate
         , _name = _name

@@ -976,11 +976,11 @@ data CloudfunctionsFunctionResource s = CloudfunctionsFunctionResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 cloudfunctionsFunctionResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @source_archive_bucket@ - 'P.sourceArchiveBucket'
+    :: TF.Attr s P.Text -- ^ @source_archive_bucket@ - 'P.sourceArchiveBucket'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @source_archive_object@ - 'P.sourceArchiveObject'
     -> P.Resource (CloudfunctionsFunctionResource s)
-cloudfunctionsFunctionResource _name _sourceArchiveBucket _sourceArchiveObject =
+cloudfunctionsFunctionResource _sourceArchiveBucket _name _sourceArchiveObject =
     TF.unsafeResource "google_cloudfunctions_function" TF.validator $
         CloudfunctionsFunctionResource'
             { _availableMemoryMb = TF.value 256
@@ -1303,11 +1303,11 @@ data ComputeAutoscalerResource s = ComputeAutoscalerResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 computeAutoscalerResource
-    :: TF.Attr s (AutoscalingPolicySetting s) -- ^ @autoscaling_policy@ - 'P.autoscalingPolicy'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s (AutoscalingPolicySetting s) -- ^ @autoscaling_policy@ - 'P.autoscalingPolicy'
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
     -> P.Resource (ComputeAutoscalerResource s)
-computeAutoscalerResource _autoscalingPolicy _name _target =
+computeAutoscalerResource _name _autoscalingPolicy _target =
     TF.unsafeResource "google_compute_autoscaler" TF.validator $
         ComputeAutoscalerResource'
             { _autoscalingPolicy = _autoscalingPolicy
@@ -2872,11 +2872,11 @@ data ComputeInstanceResource s = ComputeInstanceResource'
 
 computeInstanceResource
     :: TF.Attr s (BootDiskSetting s) -- ^ @boot_disk@ - 'P.bootDisk'
-    -> TF.Attr s P.Text -- ^ @machine_type@ - 'P.machineType'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)] -- ^ @network_interface@ - 'P.networkInterface'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @machine_type@ - 'P.machineType'
     -> P.Resource (ComputeInstanceResource s)
-computeInstanceResource _bootDisk _machineType _name _networkInterface =
+computeInstanceResource _bootDisk _networkInterface _name _machineType =
     TF.unsafeResource "google_compute_instance" TF.validator $
         ComputeInstanceResource'
             { _allowStoppingForUpdate = TF.Nil
@@ -3828,11 +3828,11 @@ data ComputeRegionAutoscalerResource s = ComputeRegionAutoscalerResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 computeRegionAutoscalerResource
-    :: TF.Attr s (AutoscalingPolicySetting s) -- ^ @autoscaling_policy@ - 'P.autoscalingPolicy'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s (AutoscalingPolicySetting s) -- ^ @autoscaling_policy@ - 'P.autoscalingPolicy'
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
     -> P.Resource (ComputeRegionAutoscalerResource s)
-computeRegionAutoscalerResource _autoscalingPolicy _name _target =
+computeRegionAutoscalerResource _name _autoscalingPolicy _target =
     TF.unsafeResource "google_compute_region_autoscaler" TF.validator $
         ComputeRegionAutoscalerResource'
             { _autoscalingPolicy = _autoscalingPolicy
@@ -4327,11 +4327,11 @@ data ComputeRouteResource s = ComputeRouteResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 computeRouteResource
-    :: TF.Attr s P.Text -- ^ @dest_range@ - 'P.destRange'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
+    -> TF.Attr s P.Text -- ^ @dest_range@ - 'P.destRange'
     -> P.Resource (ComputeRouteResource s)
-computeRouteResource _destRange _name _network =
+computeRouteResource _name _network _destRange =
     TF.unsafeResource "google_compute_route" TF.validator $
         ComputeRouteResource'
             { _description = TF.Nil
@@ -4604,12 +4604,12 @@ data ComputeRouterPeerResource s = ComputeRouterPeerResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 computeRouterPeerResource
-    :: TF.Attr s P.Text -- ^ @interface@ - 'P.interface'
+    :: TF.Attr s P.Int -- ^ @peer_asn@ - 'P.peerAsn'
+    -> TF.Attr s P.Text -- ^ @interface@ - 'P.interface'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @peer_asn@ - 'P.peerAsn'
     -> TF.Attr s P.Text -- ^ @router@ - 'P.router'
     -> P.Resource (ComputeRouterPeerResource s)
-computeRouterPeerResource _interface _name _peerAsn _router =
+computeRouterPeerResource _peerAsn _interface _name _router =
     TF.unsafeResource "google_compute_router_peer" TF.validator $
         ComputeRouterPeerResource'
             { _advertisedRoutePriority = TF.Nil
@@ -4824,10 +4824,10 @@ data ComputeSnapshotResource s = ComputeSnapshotResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 computeSnapshotResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @source_disk@ - 'P.sourceDisk'
+    :: TF.Attr s P.Text -- ^ @source_disk@ - 'P.sourceDisk'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSnapshotResource s)
-computeSnapshotResource _name _sourceDisk =
+computeSnapshotResource _sourceDisk _name =
     TF.unsafeResource "google_compute_snapshot" TF.validator $
         ComputeSnapshotResource'
             { _labels = TF.Nil
@@ -5076,11 +5076,11 @@ data ComputeSubnetworkResource s = ComputeSubnetworkResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 computeSubnetworkResource
-    :: TF.Attr s P.Text -- ^ @ip_cidr_range@ - 'P.ipCidrRange'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
+    -> TF.Attr s P.Text -- ^ @ip_cidr_range@ - 'P.ipCidrRange'
     -> P.Resource (ComputeSubnetworkResource s)
-computeSubnetworkResource _ipCidrRange _name _network =
+computeSubnetworkResource _name _network _ipCidrRange =
     TF.unsafeResource "google_compute_subnetwork" TF.validator $
         ComputeSubnetworkResource'
             { _description = TF.Nil
@@ -5350,10 +5350,10 @@ data ComputeTargetHttpProxyResource s = ComputeTargetHttpProxyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 computeTargetHttpProxyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @url_map@ - 'P.urlMap'
+    :: TF.Attr s P.Text -- ^ @url_map@ - 'P.urlMap'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeTargetHttpProxyResource s)
-computeTargetHttpProxyResource _name _urlMap =
+computeTargetHttpProxyResource _urlMap _name =
     TF.unsafeResource "google_compute_target_http_proxy" TF.validator $
         ComputeTargetHttpProxyResource'
             { _description = TF.Nil
@@ -5424,11 +5424,11 @@ data ComputeTargetHttpsProxyResource s = ComputeTargetHttpsProxyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 computeTargetHttpsProxyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @ssl_certificates@ - 'P.sslCertificates'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @ssl_certificates@ - 'P.sslCertificates'
     -> TF.Attr s P.Text -- ^ @url_map@ - 'P.urlMap'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeTargetHttpsProxyResource s)
-computeTargetHttpsProxyResource _name _sslCertificates _urlMap =
+computeTargetHttpsProxyResource _sslCertificates _urlMap _name =
     TF.unsafeResource "google_compute_target_https_proxy" TF.validator $
         ComputeTargetHttpsProxyResource'
             { _description = TF.Nil
@@ -5614,11 +5614,11 @@ data ComputeTargetSslProxyResource s = ComputeTargetSslProxyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 computeTargetSslProxyResource
-    :: TF.Attr s P.Text -- ^ @backend_service@ - 'P.backendService'
+    :: TF.Attr s P.Text -- ^ @ssl_certificates@ - 'P.sslCertificates'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @ssl_certificates@ - 'P.sslCertificates'
+    -> TF.Attr s P.Text -- ^ @backend_service@ - 'P.backendService'
     -> P.Resource (ComputeTargetSslProxyResource s)
-computeTargetSslProxyResource _backendService _name _sslCertificates =
+computeTargetSslProxyResource _sslCertificates _name _backendService =
     TF.unsafeResource "google_compute_target_ssl_proxy" TF.validator $
         ComputeTargetSslProxyResource'
             { _backendService = _backendService
@@ -5704,10 +5704,10 @@ data ComputeTargetTcpProxyResource s = ComputeTargetTcpProxyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 computeTargetTcpProxyResource
-    :: TF.Attr s P.Text -- ^ @backend_service@ - 'P.backendService'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @backend_service@ - 'P.backendService'
     -> P.Resource (ComputeTargetTcpProxyResource s)
-computeTargetTcpProxyResource _backendService _name =
+computeTargetTcpProxyResource _name _backendService =
     TF.unsafeResource "google_compute_target_tcp_proxy" TF.validator $
         ComputeTargetTcpProxyResource'
             { _backendService = _backendService
@@ -5785,10 +5785,10 @@ data ComputeUrlMapResource s = ComputeUrlMapResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 computeUrlMapResource
-    :: TF.Attr s P.Text -- ^ @default_service@ - 'P.defaultService'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @default_service@ - 'P.defaultService'
     -> P.Resource (ComputeUrlMapResource s)
-computeUrlMapResource _defaultService _name =
+computeUrlMapResource _name _defaultService =
     TF.unsafeResource "google_compute_url_map" TF.validator $
         ComputeUrlMapResource'
             { _defaultService = _defaultService
@@ -5951,12 +5951,12 @@ data ComputeVpnTunnelResource s = ComputeVpnTunnelResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 computeVpnTunnelResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @target_vpn_gateway@ - 'P.targetVpnGateway'
     -> TF.Attr s P.Text -- ^ @peer_ip@ - 'P.peerIp'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @shared_secret@ - 'P.sharedSecret'
-    -> TF.Attr s P.Text -- ^ @target_vpn_gateway@ - 'P.targetVpnGateway'
     -> P.Resource (ComputeVpnTunnelResource s)
-computeVpnTunnelResource _name _peerIp _sharedSecret _targetVpnGateway =
+computeVpnTunnelResource _targetVpnGateway _peerIp _name _sharedSecret =
     TF.unsafeResource "google_compute_vpn_tunnel" TF.validator $
         ComputeVpnTunnelResource'
             { _description = TF.Nil
@@ -6405,11 +6405,11 @@ data DataflowJobResource s = DataflowJobResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 dataflowJobResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @temp_gcs_location@ - 'P.tempGcsLocation'
+    :: TF.Attr s P.Text -- ^ @temp_gcs_location@ - 'P.tempGcsLocation'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @template_gcs_path@ - 'P.templateGcsPath'
     -> P.Resource (DataflowJobResource s)
-dataflowJobResource _name _tempGcsLocation _templateGcsPath =
+dataflowJobResource _tempGcsLocation _name _templateGcsPath =
     TF.unsafeResource "google_dataflow_job" TF.validator $
         DataflowJobResource'
             { _maxWorkers = TF.Nil
@@ -6867,13 +6867,13 @@ data DnsRecordSetResource s = DnsRecordSetResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 dnsRecordSetResource
-    :: TF.Attr s P.Text -- ^ @managed_zone@ - 'P.managedZone'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @rrdatas@ - 'P.rrdatas'
     -> TF.Attr s P.Int -- ^ @ttl@ - 'P.ttl'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    -> TF.Attr s P.Text -- ^ @managed_zone@ - 'P.managedZone'
     -> P.Resource (DnsRecordSetResource s)
-dnsRecordSetResource _managedZone _name _rrdatas _ttl _type' =
+dnsRecordSetResource _name _rrdatas _ttl _type' _managedZone =
     TF.unsafeResource "google_dns_record_set" TF.validator $
         DnsRecordSetResource'
             { _managedZone = _managedZone
@@ -7206,10 +7206,10 @@ data FolderIamPolicyResource s = FolderIamPolicyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 folderIamPolicyResource
-    :: TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
-    -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
+    :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
+    -> TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
     -> P.Resource (FolderIamPolicyResource s)
-folderIamPolicyResource _folder _policyData =
+folderIamPolicyResource _policyData _folder =
     TF.unsafeResource "google_folder_iam_policy" TF.validator $
         FolderIamPolicyResource'
             { _folder = _folder
@@ -7377,10 +7377,10 @@ data KmsCryptoKeyResource s = KmsCryptoKeyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 kmsCryptoKeyResource
-    :: TF.Attr s P.Text -- ^ @key_ring@ - 'P.keyRing'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @key_ring@ - 'P.keyRing'
     -> P.Resource (KmsCryptoKeyResource s)
-kmsCryptoKeyResource _keyRing _name =
+kmsCryptoKeyResource _name _keyRing =
     TF.unsafeResource "google_kms_crypto_key" TF.validator $
         KmsCryptoKeyResource'
             { _keyRing = _keyRing
@@ -7701,10 +7701,10 @@ data KmsKeyRingIamPolicyResource s = KmsKeyRingIamPolicyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 kmsKeyRingIamPolicyResource
-    :: TF.Attr s P.Text -- ^ @key_ring_id@ - 'P.keyRingId'
-    -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
+    :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
+    -> TF.Attr s P.Text -- ^ @key_ring_id@ - 'P.keyRingId'
     -> P.Resource (KmsKeyRingIamPolicyResource s)
-kmsKeyRingIamPolicyResource _keyRingId _policyData =
+kmsKeyRingIamPolicyResource _policyData _keyRingId =
     TF.unsafeResource "google_kms_key_ring_iam_policy" TF.validator $
         KmsKeyRingIamPolicyResource'
             { _keyRingId = _keyRingId
@@ -8049,10 +8049,10 @@ data LoggingOrganizationExclusionResource s = LoggingOrganizationExclusionResour
 
 loggingOrganizationExclusionResource
     :: TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LoggingOrganizationExclusionResource s)
-loggingOrganizationExclusionResource _filter _name _orgId =
+loggingOrganizationExclusionResource _filter _orgId _name =
     TF.unsafeResource "google_logging_organization_exclusion" TF.validator $
         LoggingOrganizationExclusionResource'
             { _description = TF.Nil
@@ -8123,10 +8123,10 @@ data LoggingOrganizationSinkResource s = LoggingOrganizationSinkResource'
 
 loggingOrganizationSinkResource
     :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LoggingOrganizationSinkResource s)
-loggingOrganizationSinkResource _destination _name _orgId =
+loggingOrganizationSinkResource _destination _orgId _name =
     TF.unsafeResource "google_logging_organization_sink" TF.validator $
         LoggingOrganizationSinkResource'
             { _destination = _destination
@@ -8328,11 +8328,11 @@ data OrganizationIamBindingResource s = OrganizationIamBindingResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 organizationIamBindingResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
-    -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
+    :: TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (OrganizationIamBindingResource s)
-organizationIamBindingResource _members _orgId _role =
+organizationIamBindingResource _orgId _members _role =
     TF.unsafeResource "google_organization_iam_binding" TF.validator $
         OrganizationIamBindingResource'
             { _members = _members
@@ -8398,11 +8398,11 @@ data OrganizationIamCustomRoleResource s = OrganizationIamCustomRoleResource'
 
 organizationIamCustomRoleResource
     :: TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ - 'P.permissions'
     -> TF.Attr s P.Text -- ^ @role_id@ - 'P.roleId'
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ - 'P.permissions'
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
     -> P.Resource (OrganizationIamCustomRoleResource s)
-organizationIamCustomRoleResource _orgId _permissions _roleId _title =
+organizationIamCustomRoleResource _orgId _roleId _permissions _title =
     TF.unsafeResource "google_organization_iam_custom_role" TF.validator $
         OrganizationIamCustomRoleResource'
             { _deleted = TF.value P.False
@@ -8480,11 +8480,11 @@ data OrganizationIamMemberResource s = OrganizationIamMemberResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 organizationIamMemberResource
-    :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
-    -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
+    :: TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
+    -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (OrganizationIamMemberResource s)
-organizationIamMemberResource _member _orgId _role =
+organizationIamMemberResource _orgId _member _role =
     TF.unsafeResource "google_organization_iam_member" TF.validator $
         OrganizationIamMemberResource'
             { _member = _member
@@ -8534,10 +8534,10 @@ data OrganizationIamPolicyResource s = OrganizationIamPolicyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 organizationIamPolicyResource
-    :: TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
-    -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
+    :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
+    -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
     -> P.Resource (OrganizationIamPolicyResource s)
-organizationIamPolicyResource _orgId _policyData =
+organizationIamPolicyResource _policyData _orgId =
     TF.unsafeResource "google_organization_iam_policy" TF.validator $
         OrganizationIamPolicyResource'
             { _orgId = _orgId
@@ -8714,10 +8714,10 @@ data ProjectResource s = ProjectResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 projectResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ProjectResource s)
-projectResource _name _projectId =
+projectResource _projectId _name =
     TF.unsafeResource "google_project" TF.validator $
         ProjectResource'
             { _appEngine = TF.Nil
@@ -8875,11 +8875,11 @@ data ProjectIamCustomRoleResource s = ProjectIamCustomRoleResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 projectIamCustomRoleResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ - 'P.permissions'
-    -> TF.Attr s P.Text -- ^ @role_id@ - 'P.roleId'
+    :: TF.Attr s P.Text -- ^ @role_id@ - 'P.roleId'
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ - 'P.permissions'
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
     -> P.Resource (ProjectIamCustomRoleResource s)
-projectIamCustomRoleResource _permissions _roleId _title =
+projectIamCustomRoleResource _roleId _permissions _title =
     TF.unsafeResource "google_project_iam_custom_role" TF.validator $
         ProjectIamCustomRoleResource'
             { _deleted = TF.value P.False

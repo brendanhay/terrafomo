@@ -826,11 +826,11 @@ data ServiceAccountIamBindingResource s = ServiceAccountIamBindingResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 serviceAccountIamBindingResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
+    :: TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
     -> P.Resource (ServiceAccountIamBindingResource s)
-serviceAccountIamBindingResource _members _role _serviceAccountId =
+serviceAccountIamBindingResource _serviceAccountId _members _role =
     TF.unsafeResource "google_service_account_iam_binding" TF.validator $
         ServiceAccountIamBindingResource'
             { _members = _members
@@ -883,11 +883,11 @@ data ServiceAccountIamMemberResource s = ServiceAccountIamMemberResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 serviceAccountIamMemberResource
-    :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
+    :: TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
+    -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
     -> P.Resource (ServiceAccountIamMemberResource s)
-serviceAccountIamMemberResource _member _role _serviceAccountId =
+serviceAccountIamMemberResource _serviceAccountId _member _role =
     TF.unsafeResource "google_service_account_iam_member" TF.validator $
         ServiceAccountIamMemberResource'
             { _member = _member
@@ -1321,11 +1321,11 @@ data SpannerDatabaseIamPolicyResource s = SpannerDatabaseIamPolicyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 spannerDatabaseIamPolicyResource
-    :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
+    :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
+    -> TF.Attr s P.Text -- ^ @database@ - 'P.database'
     -> TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
-    -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> P.Resource (SpannerDatabaseIamPolicyResource s)
-spannerDatabaseIamPolicyResource _database _instance' _policyData =
+spannerDatabaseIamPolicyResource _policyData _database _instance' =
     TF.unsafeResource "google_spanner_database_iam_policy" TF.validator $
         SpannerDatabaseIamPolicyResource'
             { _database = _database
@@ -1570,10 +1570,10 @@ data SpannerInstanceIamPolicyResource s = SpannerInstanceIamPolicyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 spannerInstanceIamPolicyResource
-    :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
-    -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
+    :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
+    -> TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
     -> P.Resource (SpannerInstanceIamPolicyResource s)
-spannerInstanceIamPolicyResource _instance' _policyData =
+spannerInstanceIamPolicyResource _policyData _instance' =
     TF.unsafeResource "google_spanner_instance_iam_policy" TF.validator $
         SpannerInstanceIamPolicyResource'
             { _instance' = _instance'
