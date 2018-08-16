@@ -2041,6 +2041,26 @@
                     "default": "TF.Nil",
                     "computed": false,
                     "required": false,
+                    "help": [
+                        "Can only be set after initial repository creation, and only if the target",
+                        "branch exists"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"default_branch\" <$> TF.attribute",
+                    "name": "_defaultBranch",
+                    "method": "defaultBranch",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDefaultBranch",
+                    "validate": false,
+                    "optional": true,
+                    "original": "default_branch"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
@@ -2264,7 +2284,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDefaultBranch",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "default_branch"
                 },
                 {
