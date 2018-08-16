@@ -78,10 +78,9 @@ import GHC.Base (($))
 
 import Terrafomo.ProfitBricks.Settings
 
-import qualified Data.Hashable                   as P
-import qualified Data.HashMap.Strict             as P
-import qualified Data.HashMap.Strict             as Map
 import qualified Data.List.NonEmpty              as P
+import qualified Data.Map.Strict                 as P
+import qualified Data.Map.Strict                 as Map
 import qualified Data.Maybe                      as P
 import qualified Data.Monoid                     as P
 import qualified Data.Text                       as P
@@ -108,14 +107,14 @@ data DatacenterResource s = DatacenterResource'
     , _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 datacenterResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DatacenterResource s)
 datacenterResource _location _name =
-    TF.newResource "profitbricks_datacenter" TF.validator $
+    TF.unsafeResource "profitbricks_datacenter" P.defaultProvider TF.validator $
         DatacenterResource'
             { _location = _location
             , _name = _name
@@ -163,10 +162,10 @@ data FirewallResource s = FirewallResource'
     , _nicId          :: TF.Attr s P.Text
     -- ^ @nic_id@ - (Required)
     --
-    , _portRangeEnd   :: TF.Attr s P.Integer
+    , _portRangeEnd   :: TF.Attr s P.Int
     -- ^ @port_range_end@ - (Optional)
     --
-    , _portRangeStart :: TF.Attr s P.Integer
+    , _portRangeStart :: TF.Attr s P.Int
     -- ^ @port_range_start@ - (Optional)
     --
     , _protocol       :: TF.Attr s P.Text
@@ -184,7 +183,7 @@ data FirewallResource s = FirewallResource'
     , _targetIp       :: TF.Attr s P.Text
     -- ^ @target_ip@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 firewallResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
@@ -193,7 +192,7 @@ firewallResource
     -> TF.Attr s P.Text -- ^ @server_id@ - 'P.serverId'
     -> P.Resource (FirewallResource s)
 firewallResource _datacenterId _nicId _protocol _serverId =
-    TF.newResource "profitbricks_firewall" TF.validator $
+    TF.unsafeResource "profitbricks_firewall" P.defaultProvider TF.validator $
         FirewallResource'
             { _datacenterId = _datacenterId
             , _icmpCode = TF.Nil
@@ -253,14 +252,14 @@ instance P.HasNicId (FirewallResource s) (TF.Attr s P.Text) where
         P.lens (_nicId :: FirewallResource s -> TF.Attr s P.Text)
                (\s a -> s { _nicId = a } :: FirewallResource s)
 
-instance P.HasPortRangeEnd (FirewallResource s) (TF.Attr s P.Integer) where
+instance P.HasPortRangeEnd (FirewallResource s) (TF.Attr s P.Int) where
     portRangeEnd =
-        P.lens (_portRangeEnd :: FirewallResource s -> TF.Attr s P.Integer)
+        P.lens (_portRangeEnd :: FirewallResource s -> TF.Attr s P.Int)
                (\s a -> s { _portRangeEnd = a } :: FirewallResource s)
 
-instance P.HasPortRangeStart (FirewallResource s) (TF.Attr s P.Integer) where
+instance P.HasPortRangeStart (FirewallResource s) (TF.Attr s P.Int) where
     portRangeStart =
-        P.lens (_portRangeStart :: FirewallResource s -> TF.Attr s P.Integer)
+        P.lens (_portRangeStart :: FirewallResource s -> TF.Attr s P.Int)
                (\s a -> s { _portRangeStart = a } :: FirewallResource s)
 
 instance P.HasProtocol (FirewallResource s) (TF.Attr s P.Text) where
@@ -311,13 +310,13 @@ data GroupResource s = GroupResource'
     , _userId            :: TF.Attr s P.Text
     -- ^ @user_id@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 groupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (GroupResource s)
 groupResource _name =
-    TF.newResource "profitbricks_group" TF.validator $
+    TF.unsafeResource "profitbricks_group" P.defaultProvider TF.validator $
         GroupResource'
             { _accessActivityLog = TF.Nil
             , _createDatacenter = TF.Nil
@@ -370,7 +369,7 @@ instance P.HasUserId (GroupResource s) (TF.Attr s P.Text) where
         P.lens (_userId :: GroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _userId = a } :: GroupResource s)
 
-instance s ~ s' => P.HasComputedUsers (TF.Ref s' (GroupResource s)) (TF.Attr s [TF.Attr s (GroupUsers s)]) where
+instance s ~ s' => P.HasComputedUsers (TF.Ref s' (GroupResource s)) (TF.Attr s [TF.Attr s (UsersSetting s)]) where
     computedUsers x = TF.compute (TF.refKey x) "users"
 
 -- | @profitbricks_ipblock@ Resource.
@@ -384,17 +383,17 @@ data IpblockResource s = IpblockResource'
     , _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _size     :: TF.Attr s P.Integer
+    , _size     :: TF.Attr s P.Int
     -- ^ @size@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 ipblockResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Integer -- ^ @size@ - 'P.size'
+    -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (IpblockResource s)
 ipblockResource _location _size =
-    TF.newResource "profitbricks_ipblock" TF.validator $
+    TF.unsafeResource "profitbricks_ipblock" P.defaultProvider TF.validator $
         IpblockResource'
             { _location = _location
             , _name = TF.Nil
@@ -421,9 +420,9 @@ instance P.HasName (IpblockResource s) (TF.Attr s P.Text) where
         P.lens (_name :: IpblockResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: IpblockResource s)
 
-instance P.HasSize (IpblockResource s) (TF.Attr s P.Integer) where
+instance P.HasSize (IpblockResource s) (TF.Attr s P.Int) where
     size =
-        P.lens (_size :: IpblockResource s -> TF.Attr s P.Integer)
+        P.lens (_size :: IpblockResource s -> TF.Attr s P.Int)
                (\s a -> s { _size = a } :: IpblockResource s)
 
 instance s ~ s' => P.HasComputedIps (TF.Ref s' (IpblockResource s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -446,7 +445,7 @@ data IpfailoverResource s = IpfailoverResource'
     , _nicuuid      :: TF.Attr s P.Text
     -- ^ @nicuuid@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 ipfailoverResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
@@ -455,7 +454,7 @@ ipfailoverResource
     -> TF.Attr s P.Text -- ^ @nicuuid@ - 'P.nicuuid'
     -> P.Resource (IpfailoverResource s)
 ipfailoverResource _datacenterId _ip _lanId _nicuuid =
-    TF.newResource "profitbricks_ipfailover" TF.validator $
+    TF.unsafeResource "profitbricks_ipfailover" P.defaultProvider TF.validator $
         IpfailoverResource'
             { _datacenterId = _datacenterId
             , _ip = _ip
@@ -508,14 +507,14 @@ data LanResource s = LanResource'
     , _public       :: TF.Attr s P.Bool
     -- ^ @public@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 lanResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> TF.Attr s P.Bool -- ^ @public@ - 'P.public'
     -> P.Resource (LanResource s)
 lanResource _datacenterId _public =
-    TF.newResource "profitbricks_lan" TF.validator $
+    TF.unsafeResource "profitbricks_lan" P.defaultProvider TF.validator $
         LanResource'
             { _datacenterId = _datacenterId
             , _name = TF.Nil
@@ -567,7 +566,7 @@ data LoadbalancerResource s = LoadbalancerResource'
     , _nicIds       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @nic_ids@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 loadbalancerResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
@@ -575,7 +574,7 @@ loadbalancerResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @nic_ids@ - 'P.nicIds'
     -> P.Resource (LoadbalancerResource s)
 loadbalancerResource _datacenterId _name _nicIds =
-    TF.newResource "profitbricks_loadbalancer" TF.validator $
+    TF.unsafeResource "profitbricks_loadbalancer" P.defaultProvider TF.validator $
         LoadbalancerResource'
             { _datacenterId = _datacenterId
             , _dhcp = TF.Nil
@@ -638,7 +637,7 @@ data NicResource s = NicResource'
     , _ip             :: TF.Attr s P.Text
     -- ^ @ip@ - (Optional)
     --
-    , _lan            :: TF.Attr s P.Integer
+    , _lan            :: TF.Attr s P.Int
     -- ^ @lan@ - (Required)
     --
     , _name           :: TF.Attr s P.Text
@@ -650,15 +649,15 @@ data NicResource s = NicResource'
     , _serverId       :: TF.Attr s P.Text
     -- ^ @server_id@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 nicResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
-    -> TF.Attr s P.Integer -- ^ @lan@ - 'P.lan'
+    -> TF.Attr s P.Int -- ^ @lan@ - 'P.lan'
     -> TF.Attr s P.Text -- ^ @server_id@ - 'P.serverId'
     -> P.Resource (NicResource s)
 nicResource _datacenterId _lan _serverId =
-    TF.newResource "profitbricks_nic" TF.validator $
+    TF.unsafeResource "profitbricks_nic" P.defaultProvider TF.validator $
         NicResource'
             { _datacenterId = _datacenterId
             , _dhcp = TF.Nil
@@ -705,9 +704,9 @@ instance P.HasIp (NicResource s) (TF.Attr s P.Text) where
         P.lens (_ip :: NicResource s -> TF.Attr s P.Text)
                (\s a -> s { _ip = a } :: NicResource s)
 
-instance P.HasLan (NicResource s) (TF.Attr s P.Integer) where
+instance P.HasLan (NicResource s) (TF.Attr s P.Int) where
     lan =
-        P.lens (_lan :: NicResource s -> TF.Attr s P.Integer)
+        P.lens (_lan :: NicResource s -> TF.Attr s P.Int)
                (\s a -> s { _lan = a } :: NicResource s)
 
 instance P.HasName (NicResource s) (TF.Attr s P.Text) where
@@ -736,7 +735,7 @@ data ServerResource s = ServerResource'
     { _availabilityZone :: TF.Attr s P.Text
     -- ^ @availability_zone@ - (Optional)
     --
-    , _cores            :: TF.Attr s P.Integer
+    , _cores            :: TF.Attr s P.Int
     -- ^ @cores@ - (Required)
     --
     , _cpuFamily        :: TF.Attr s P.Text
@@ -751,27 +750,27 @@ data ServerResource s = ServerResource'
     , _name             :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _nic              :: TF.Attr s [TF.Attr s (ServerNic s)]
+    , _nic              :: TF.Attr s [TF.Attr s (NicSetting s)]
     -- ^ @nic@ - (Required)
     --
-    , _ram              :: TF.Attr s P.Integer
+    , _ram              :: TF.Attr s P.Int
     -- ^ @ram@ - (Required)
     --
-    , _volume           :: TF.Attr s [TF.Attr s (ServerVolume s)]
+    , _volume           :: TF.Attr s [TF.Attr s (VolumeSetting s)]
     -- ^ @volume@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 serverResource
-    :: TF.Attr s P.Integer -- ^ @cores@ - 'P.cores'
+    :: TF.Attr s P.Int -- ^ @cores@ - 'P.cores'
     -> TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (ServerNic s)] -- ^ @nic@ - 'P.nic'
-    -> TF.Attr s P.Integer -- ^ @ram@ - 'P.ram'
-    -> TF.Attr s [TF.Attr s (ServerVolume s)] -- ^ @volume@ - 'P.volume'
+    -> TF.Attr s [TF.Attr s (NicSetting s)] -- ^ @nic@ - 'P.nic'
+    -> TF.Attr s P.Int -- ^ @ram@ - 'P.ram'
+    -> TF.Attr s [TF.Attr s (VolumeSetting s)] -- ^ @volume@ - 'P.volume'
     -> P.Resource (ServerResource s)
 serverResource _cores _datacenterId _name _nic _ram _volume =
-    TF.newResource "profitbricks_server" TF.validator $
+    TF.unsafeResource "profitbricks_server" P.defaultProvider TF.validator $
         ServerResource'
             { _availabilityZone = TF.Nil
             , _cores = _cores
@@ -799,23 +798,15 @@ instance TF.IsObject (ServerResource s) where
 
 instance TF.IsValid (ServerResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_nic"
-                  (_nic
-                      :: ServerResource s -> TF.Attr s [TF.Attr s (ServerNic s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_volume"
-                  (_volume
-                      :: ServerResource s -> TF.Attr s [TF.Attr s (ServerVolume s)])
-                  TF.validator
 
 instance P.HasAvailabilityZone (ServerResource s) (TF.Attr s P.Text) where
     availabilityZone =
         P.lens (_availabilityZone :: ServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _availabilityZone = a } :: ServerResource s)
 
-instance P.HasCores (ServerResource s) (TF.Attr s P.Integer) where
+instance P.HasCores (ServerResource s) (TF.Attr s P.Int) where
     cores =
-        P.lens (_cores :: ServerResource s -> TF.Attr s P.Integer)
+        P.lens (_cores :: ServerResource s -> TF.Attr s P.Int)
                (\s a -> s { _cores = a } :: ServerResource s)
 
 instance P.HasCpuFamily (ServerResource s) (TF.Attr s P.Text) where
@@ -838,19 +829,19 @@ instance P.HasName (ServerResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ServerResource s)
 
-instance P.HasNic (ServerResource s) (TF.Attr s [TF.Attr s (ServerNic s)]) where
+instance P.HasNic (ServerResource s) (TF.Attr s [TF.Attr s (NicSetting s)]) where
     nic =
-        P.lens (_nic :: ServerResource s -> TF.Attr s [TF.Attr s (ServerNic s)])
+        P.lens (_nic :: ServerResource s -> TF.Attr s [TF.Attr s (NicSetting s)])
                (\s a -> s { _nic = a } :: ServerResource s)
 
-instance P.HasRam (ServerResource s) (TF.Attr s P.Integer) where
+instance P.HasRam (ServerResource s) (TF.Attr s P.Int) where
     ram =
-        P.lens (_ram :: ServerResource s -> TF.Attr s P.Integer)
+        P.lens (_ram :: ServerResource s -> TF.Attr s P.Int)
                (\s a -> s { _ram = a } :: ServerResource s)
 
-instance P.HasVolume (ServerResource s) (TF.Attr s [TF.Attr s (ServerVolume s)]) where
+instance P.HasVolume (ServerResource s) (TF.Attr s [TF.Attr s (VolumeSetting s)]) where
     volume =
-        P.lens (_volume :: ServerResource s -> TF.Attr s [TF.Attr s (ServerVolume s)])
+        P.lens (_volume :: ServerResource s -> TF.Attr s [TF.Attr s (VolumeSetting s)])
                (\s a -> s { _volume = a } :: ServerResource s)
 
 instance s ~ s' => P.HasComputedBootCdrom (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
@@ -885,7 +876,7 @@ data ShareResource s = ShareResource'
     , _sharePrivilege :: TF.Attr s P.Bool
     -- ^ @share_privilege@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 shareResource
     :: TF.Attr s P.Bool -- ^ @edit_privilege@ - 'P.editPrivilege'
@@ -894,7 +885,7 @@ shareResource
     -> TF.Attr s P.Bool -- ^ @share_privilege@ - 'P.sharePrivilege'
     -> P.Resource (ShareResource s)
 shareResource _editPrivilege _groupId _resourceId _sharePrivilege =
-    TF.newResource "profitbricks_share" TF.validator $
+    TF.unsafeResource "profitbricks_share" P.defaultProvider TF.validator $
         ShareResource'
             { _editPrivilege = _editPrivilege
             , _groupId = _groupId
@@ -947,7 +938,7 @@ data SnapshotResource s = SnapshotResource'
     , _volumeId     :: TF.Attr s P.Text
     -- ^ @volume_id@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 snapshotResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
@@ -955,7 +946,7 @@ snapshotResource
     -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
     -> P.Resource (SnapshotResource s)
 snapshotResource _datacenterId _name _volumeId =
-    TF.newResource "profitbricks_snapshot" TF.validator $
+    TF.unsafeResource "profitbricks_snapshot" P.defaultProvider TF.validator $
         SnapshotResource'
             { _datacenterId = _datacenterId
             , _name = _name
@@ -1010,7 +1001,7 @@ data UserResource s = UserResource'
     , _password      :: TF.Attr s P.Text
     -- ^ @password@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 userResource
     :: TF.Attr s P.Bool -- ^ @administrator@ - 'P.administrator'
@@ -1021,7 +1012,7 @@ userResource
     -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
     -> P.Resource (UserResource s)
 userResource _administrator _email _firstName _forceSecAuth _lastName _password =
-    TF.newResource "profitbricks_user" TF.validator $
+    TF.unsafeResource "profitbricks_user" P.defaultProvider TF.validator $
         UserResource'
             { _administrator = _administrator
             , _email = _email
@@ -1106,22 +1097,22 @@ data VolumeResource s = VolumeResource'
     , _serverId         :: TF.Attr s P.Text
     -- ^ @server_id@ - (Required)
     --
-    , _size             :: TF.Attr s P.Integer
+    , _size             :: TF.Attr s P.Int
     -- ^ @size@ - (Required)
     --
     , _sshKeyPath       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @ssh_key_path@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 volumeResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> TF.Attr s P.Text -- ^ @disk_type@ - 'P.diskType'
     -> TF.Attr s P.Text -- ^ @server_id@ - 'P.serverId'
-    -> TF.Attr s P.Integer -- ^ @size@ - 'P.size'
+    -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (VolumeResource s)
 volumeResource _datacenterId _diskType _serverId _size =
-    TF.newResource "profitbricks_volume" TF.validator $
+    TF.unsafeResource "profitbricks_volume" P.defaultProvider TF.validator $
         VolumeResource'
             { _availabilityZone = TF.Nil
             , _bus = TF.Nil
@@ -1199,9 +1190,9 @@ instance P.HasServerId (VolumeResource s) (TF.Attr s P.Text) where
         P.lens (_serverId :: VolumeResource s -> TF.Attr s P.Text)
                (\s a -> s { _serverId = a } :: VolumeResource s)
 
-instance P.HasSize (VolumeResource s) (TF.Attr s P.Integer) where
+instance P.HasSize (VolumeResource s) (TF.Attr s P.Int) where
     size =
-        P.lens (_size :: VolumeResource s -> TF.Attr s P.Integer)
+        P.lens (_size :: VolumeResource s -> TF.Attr s P.Int)
                (\s a -> s { _size = a } :: VolumeResource s)
 
 instance P.HasSshKeyPath (VolumeResource s) (TF.Attr s [TF.Attr s P.Text]) where

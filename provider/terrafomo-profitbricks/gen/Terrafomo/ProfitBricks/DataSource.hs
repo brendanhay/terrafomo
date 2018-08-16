@@ -46,10 +46,9 @@ import GHC.Base (($))
 
 import Terrafomo.ProfitBricks.Settings
 
-import qualified Data.Hashable                   as P
-import qualified Data.HashMap.Strict             as P
-import qualified Data.HashMap.Strict             as Map
 import qualified Data.List.NonEmpty              as P
+import qualified Data.Map.Strict                 as P
+import qualified Data.Map.Strict                 as Map
 import qualified Data.Maybe                      as P
 import qualified Data.Monoid                     as P
 import qualified Data.Text                       as P
@@ -76,13 +75,13 @@ data DatacenterData s = DatacenterData'
     , _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 datacenterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DatacenterData s)
 datacenterData _name =
-    TF.newDataSource "profitbricks_datacenter" TF.validator $
+    TF.unsafeDataSource "profitbricks_datacenter" P.defaultProvider TF.validator $
         DatacenterData'
             { _location = TF.Nil
             , _name = _name
@@ -127,12 +126,12 @@ data ImageData s = ImageData'
     , _version  :: TF.Attr s P.Text
     -- ^ @version@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 imageData
     :: P.DataSource (ImageData s)
 imageData =
-    TF.newDataSource "profitbricks_image" TF.validator $
+    TF.unsafeDataSource "profitbricks_image" P.defaultProvider TF.validator $
         ImageData'
             { _location = TF.Nil
             , _name = TF.Nil
@@ -185,12 +184,12 @@ data LocationData s = LocationData'
     , _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 locationData
     :: P.DataSource (LocationData s)
 locationData =
-    TF.newDataSource "profitbricks_location" TF.validator $
+    TF.unsafeDataSource "profitbricks_location" P.defaultProvider TF.validator $
         LocationData'
             { _feature = TF.Nil
             , _name = TF.Nil
@@ -229,12 +228,12 @@ data ResourceData s = ResourceData'
     , _resourceType :: TF.Attr s P.Text
     -- ^ @resource_type@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 resourceData
     :: P.DataSource (ResourceData s)
 resourceData =
-    TF.newDataSource "profitbricks_resource" TF.validator $
+    TF.unsafeDataSource "profitbricks_resource" P.defaultProvider TF.validator $
         ResourceData'
             { _resourceId = TF.Nil
             , _resourceType = TF.Nil
@@ -273,16 +272,16 @@ data SnapshotData s = SnapshotData'
     , _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _size     :: TF.Attr s P.Integer
+    , _size     :: TF.Attr s P.Int
     -- ^ @size@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 snapshotData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SnapshotData s)
 snapshotData _name =
-    TF.newDataSource "profitbricks_snapshot" TF.validator $
+    TF.unsafeDataSource "profitbricks_snapshot" P.defaultProvider TF.validator $
         SnapshotData'
             { _location = TF.Nil
             , _name = _name
@@ -309,9 +308,9 @@ instance P.HasName (SnapshotData s) (TF.Attr s P.Text) where
         P.lens (_name :: SnapshotData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SnapshotData s)
 
-instance P.HasSize (SnapshotData s) (TF.Attr s P.Integer) where
+instance P.HasSize (SnapshotData s) (TF.Attr s P.Int) where
     size =
-        P.lens (_size :: SnapshotData s -> TF.Attr s P.Integer)
+        P.lens (_size :: SnapshotData s -> TF.Attr s P.Int)
                (\s a -> s { _size = a } :: SnapshotData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
