@@ -88,18 +88,13 @@ newProvider _account _token =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "dnsimple"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , P.Just $ TF.assign "account" _account
-                  , TF.assign "email" <$> _email
-                  , P.Just $ TF.assign "token" _token
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ P.Just $ TF.assign "account" _account
+            , TF.assign "email" <$> _email
+            , P.Just $ TF.assign "token" _token
+            ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty

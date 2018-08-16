@@ -77,7 +77,7 @@ recordResource
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> P.Resource (RecordResource s)
 recordResource _domain _name _type' _value =
-    TF.unsafeResource "dnsimple_record" P.defaultProvider TF.validator $
+    TF.unsafeResource "dnsimple_record" TF.validator $
         RecordResource'
             { _domain = _domain
             , _name = _name
