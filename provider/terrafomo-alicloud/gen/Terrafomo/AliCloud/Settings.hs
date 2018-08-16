@@ -19,191 +19,191 @@ module Terrafomo.AliCloud.Settings
     (
     -- ** auth_config
       AuthConfigSetting (..)
-    , newAuthConfigSetting
+    , authConfigSetting
 
     -- ** burstable_instance
     , BurstableInstanceSetting (..)
-    , newBurstableInstanceSetting
+    , burstableInstanceSetting
 
     -- ** cache_config
     , CacheConfigSetting (..)
-    , newCacheConfigSetting
+    , cacheConfigSetting
 
     -- ** connections
     , ConnectionsSetting (..)
-    , newConnectionsSetting
+    , connectionsSetting
 
     -- ** cors_rule
     , CorsRuleSetting (..)
-    , newCorsRuleSetting
+    , corsRuleSetting
 
     -- ** data_disk
     , DataDiskSetting (..)
-    , newDataDiskSetting
+    , dataDiskSetting
 
     -- ** disk_device_mappings
     , DiskDeviceMappingsSetting (..)
-    , newDiskDeviceMappingsSetting
+    , diskDeviceMappingsSetting
 
     -- ** domains
     , DomainsSetting (..)
-    , newDomainsSetting
+    , domainsSetting
 
     -- ** eips
     , EipsSetting (..)
-    , newEipsSetting
+    , eipsSetting
 
     -- ** expiration
     , ExpirationSetting (..)
-    , newExpirationSetting
+    , expirationSetting
 
     -- ** field_search
     , FieldSearchSetting (..)
-    , newFieldSearchSetting
+    , fieldSearchSetting
 
     -- ** full_text
     , FullTextSetting (..)
-    , newFullTextSetting
+    , fullTextSetting
 
     -- ** gpu
     , GpuSetting (..)
-    , newGpuSetting
+    , gpuSetting
 
     -- ** groups
     , GroupsSetting (..)
-    , newGroupsSetting
+    , groupsSetting
 
     -- ** http_header_config
     , HttpHeaderConfigSetting (..)
-    , newHttpHeaderConfigSetting
+    , httpHeaderConfigSetting
 
     -- ** images
     , ImagesSetting (..)
-    , newImagesSetting
+    , imagesSetting
 
     -- ** instance_types
     , InstanceTypesSetting (..)
-    , newInstanceTypesSetting
+    , instanceTypesSetting
 
     -- ** instances
     , InstancesSetting (..)
-    , newInstancesSetting
+    , instancesSetting
 
     -- ** key_pairs
     , KeyPairsSetting (..)
-    , newKeyPairsSetting
+    , keyPairsSetting
 
     -- ** keys
     , KeysSetting (..)
-    , newKeysSetting
+    , keysSetting
 
     -- ** lifecycle_rule
     , LifecycleRuleSetting (..)
-    , newLifecycleRuleSetting
+    , lifecycleRuleSetting
 
     -- ** local_storage
     , LocalStorageSetting (..)
-    , newLocalStorageSetting
+    , localStorageSetting
 
     -- ** log_config
     , LogConfigSetting (..)
-    , newLogConfigSetting
+    , logConfigSetting
 
     -- ** logging
     , LoggingSetting (..)
-    , newLoggingSetting
+    , loggingSetting
 
     -- ** master_nodes
     , MasterNodesSetting (..)
-    , newMasterNodesSetting
+    , masterNodesSetting
 
     -- ** nodes
     , NodesSetting (..)
-    , newNodesSetting
+    , nodesSetting
 
     -- ** page_404_config
     , Page404ConfigSetting (..)
-    , newPage404ConfigSetting
+    , page404ConfigSetting
 
     -- ** parameter_filter_config
     , ParameterFilterConfigSetting (..)
-    , newParameterFilterConfigSetting
+    , parameterFilterConfigSetting
 
     -- ** policies
     , PoliciesSetting (..)
-    , newPoliciesSetting
+    , policiesSetting
 
     -- ** primary_key
     , PrimaryKeySetting (..)
-    , newPrimaryKeySetting
+    , primaryKeySetting
 
     -- ** records
     , RecordsSetting (..)
-    , newRecordsSetting
+    , recordsSetting
 
     -- ** refer_config
     , ReferConfigSetting (..)
-    , newReferConfigSetting
+    , referConfigSetting
 
     -- ** referer_config
     , RefererConfigSetting (..)
-    , newRefererConfigSetting
+    , refererConfigSetting
 
     -- ** regions
     , RegionsSetting (..)
-    , newRegionsSetting
+    , regionsSetting
 
     -- ** roles
     , RolesSetting (..)
-    , newRolesSetting
+    , rolesSetting
 
     -- ** rules
     , RulesSetting (..)
-    , newRulesSetting
+    , rulesSetting
 
     -- ** servers
     , ServersSetting (..)
-    , newServersSetting
+    , serversSetting
 
     -- ** services
     , ServicesSetting (..)
-    , newServicesSetting
+    , servicesSetting
 
     -- ** shards
     , ShardsSetting (..)
-    , newShardsSetting
+    , shardsSetting
 
     -- ** statement
     , StatementSetting (..)
-    , newStatementSetting
+    , statementSetting
 
     -- ** users
     , UsersSetting (..)
-    , newUsersSetting
+    , usersSetting
 
     -- ** vpc_config
     , VpcConfigSetting (..)
-    , newVpcConfigSetting
+    , vpcConfigSetting
 
     -- ** vpcs
     , VpcsSetting (..)
-    , newVpcsSetting
+    , vpcsSetting
 
     -- ** vswitches
     , VswitchesSetting (..)
-    , newVswitchesSetting
+    , vswitchesSetting
 
     -- ** website
     , WebsiteSetting (..)
-    , newWebsiteSetting
+    , websiteSetting
 
     -- ** worker_nodes
     , WorkerNodesSetting (..)
-    , newWorkerNodesSetting
+    , workerNodesSetting
 
     -- ** zones
     , ZonesSetting (..)
-    , newZonesSetting
+    , zonesSetting
 
     ) where
 
@@ -239,9 +239,9 @@ data AuthConfigSetting s = AuthConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @auth_config@ settings value.
-newAuthConfigSetting
+authConfigSetting
     :: AuthConfigSetting s
-newAuthConfigSetting =
+authConfigSetting =
     AuthConfigSetting'
         { _authType = TF.value "no_auth"
         , _timeout = TF.value 1800
@@ -278,9 +278,9 @@ data BurstableInstanceSetting s = BurstableInstanceSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @burstable_instance@ settings value.
-newBurstableInstanceSetting
+burstableInstanceSetting
     :: BurstableInstanceSetting s
-newBurstableInstanceSetting =
+burstableInstanceSetting =
     BurstableInstanceSetting'
 
 instance TF.IsValue  (BurstableInstanceSetting s)
@@ -313,12 +313,12 @@ data CacheConfigSetting s = CacheConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @cache_config@ settings value.
-newCacheConfigSetting
+cacheConfigSetting
     :: TF.Attr s P.Text -- ^ 'P._cacheContent': @cache_content@
     -> TF.Attr s P.Int -- ^ 'P._ttl': @ttl@
     -> TF.Attr s P.Text -- ^ 'P._cacheType': @cache_type@
     -> CacheConfigSetting s
-newCacheConfigSetting _cacheContent _ttl _cacheType =
+cacheConfigSetting _cacheContent _ttl _cacheType =
     CacheConfigSetting'
         { _cacheContent = _cacheContent
         , _cacheType = _cacheType
@@ -366,9 +366,9 @@ data ConnectionsSetting s = ConnectionsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @connections@ settings value.
-newConnectionsSetting
+connectionsSetting
     :: ConnectionsSetting s
-newConnectionsSetting =
+connectionsSetting =
     ConnectionsSetting'
 
 instance TF.IsValue  (ConnectionsSetting s)
@@ -410,11 +410,11 @@ data CorsRuleSetting s = CorsRuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @cors_rule@ settings value.
-newCorsRuleSetting
+corsRuleSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._allowedMethods': @allowed_methods@
     -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._allowedOrigins': @allowed_origins@
     -> CorsRuleSetting s
-newCorsRuleSetting _allowedMethods _allowedOrigins =
+corsRuleSetting _allowedMethods _allowedOrigins =
     CorsRuleSetting'
         { _allowedHeaders = TF.Nil
         , _allowedMethods = _allowedMethods
@@ -475,9 +475,9 @@ data DataDiskSetting s = DataDiskSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @data_disk@ settings value.
-newDataDiskSetting
+dataDiskSetting
     :: DataDiskSetting s
-newDataDiskSetting =
+dataDiskSetting =
     DataDiskSetting'
         { _category = TF.Nil
         , _size = TF.Nil
@@ -515,9 +515,9 @@ data DiskDeviceMappingsSetting s = DiskDeviceMappingsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @disk_device_mappings@ settings value.
-newDiskDeviceMappingsSetting
+diskDeviceMappingsSetting
     :: DiskDeviceMappingsSetting s
-newDiskDeviceMappingsSetting =
+diskDeviceMappingsSetting =
     DiskDeviceMappingsSetting'
 
 instance TF.IsValue  (DiskDeviceMappingsSetting s)
@@ -547,9 +547,9 @@ data DomainsSetting s = DomainsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @domains@ settings value.
-newDomainsSetting
+domainsSetting
     :: DomainsSetting s
-newDomainsSetting =
+domainsSetting =
     DomainsSetting'
 
 instance TF.IsValue  (DomainsSetting s)
@@ -591,9 +591,9 @@ data EipsSetting s = EipsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @eips@ settings value.
-newEipsSetting
+eipsSetting
     :: EipsSetting s
-newEipsSetting =
+eipsSetting =
     EipsSetting'
 
 instance TF.IsValue  (EipsSetting s)
@@ -638,9 +638,9 @@ data ExpirationSetting s = ExpirationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @expiration@ settings value.
-newExpirationSetting
+expirationSetting
     :: ExpirationSetting s
-newExpirationSetting =
+expirationSetting =
     ExpirationSetting'
         { _date = TF.Nil
         , _days = TF.Nil
@@ -692,10 +692,10 @@ data FieldSearchSetting s = FieldSearchSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @field_search@ settings value.
-newFieldSearchSetting
+fieldSearchSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> FieldSearchSetting s
-newFieldSearchSetting _name =
+fieldSearchSetting _name =
     FieldSearchSetting'
         { _alias = TF.Nil
         , _caseSensitive = TF.value P.False
@@ -770,9 +770,9 @@ data FullTextSetting s = FullTextSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @full_text@ settings value.
-newFullTextSetting
+fullTextSetting
     :: FullTextSetting s
-newFullTextSetting =
+fullTextSetting =
     FullTextSetting'
         { _caseSensitive = TF.value P.False
         , _includeChinese = TF.value P.False
@@ -810,9 +810,9 @@ data GpuSetting s = GpuSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @gpu@ settings value.
-newGpuSetting
+gpuSetting
     :: GpuSetting s
-newGpuSetting =
+gpuSetting =
     GpuSetting'
 
 instance TF.IsValue  (GpuSetting s)
@@ -833,9 +833,9 @@ data GroupsSetting s = GroupsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @groups@ settings value.
-newGroupsSetting
+groupsSetting
     :: GroupsSetting s
-newGroupsSetting =
+groupsSetting =
     GroupsSetting'
 
 instance TF.IsValue  (GroupsSetting s)
@@ -883,11 +883,11 @@ data HttpHeaderConfigSetting s = HttpHeaderConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @http_header_config@ settings value.
-newHttpHeaderConfigSetting
+httpHeaderConfigSetting
     :: TF.Attr s P.Text -- ^ 'P._headerKey': @header_key@
     -> TF.Attr s P.Text -- ^ 'P._headerValue': @header_value@
     -> HttpHeaderConfigSetting s
-newHttpHeaderConfigSetting _headerKey _headerValue =
+httpHeaderConfigSetting _headerKey _headerValue =
     HttpHeaderConfigSetting'
         { _headerKey = _headerKey
         , _headerValue = _headerValue
@@ -924,9 +924,9 @@ data ImagesSetting s = ImagesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @images@ settings value.
-newImagesSetting
+imagesSetting
     :: ImagesSetting s
-newImagesSetting =
+imagesSetting =
     ImagesSetting'
         { _tags = TF.Nil
         }
@@ -1016,9 +1016,9 @@ data InstanceTypesSetting s = InstanceTypesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @instance_types@ settings value.
-newInstanceTypesSetting
+instanceTypesSetting
     :: InstanceTypesSetting s
-newInstanceTypesSetting =
+instanceTypesSetting =
     InstanceTypesSetting'
 
 instance TF.IsValue  (InstanceTypesSetting s)
@@ -1063,9 +1063,9 @@ data InstancesSetting s = InstancesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @instances@ settings value.
-newInstancesSetting
+instancesSetting
     :: InstancesSetting s
-newInstancesSetting =
+instancesSetting =
     InstancesSetting'
         { _tags = TF.Nil
         }
@@ -1194,9 +1194,9 @@ data KeyPairsSetting s = KeyPairsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @key_pairs@ settings value.
-newKeyPairsSetting
+keyPairsSetting
     :: KeyPairsSetting s
-newKeyPairsSetting =
+keyPairsSetting =
     KeyPairsSetting'
 
 instance TF.IsValue  (KeyPairsSetting s)
@@ -1223,9 +1223,9 @@ data KeysSetting s = KeysSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @keys@ settings value.
-newKeysSetting
+keysSetting
     :: KeysSetting s
-newKeysSetting =
+keysSetting =
     KeysSetting'
 
 instance TF.IsValue  (KeysSetting s)
@@ -1270,12 +1270,12 @@ data LifecycleRuleSetting s = LifecycleRuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @lifecycle_rule@ settings value.
-newLifecycleRuleSetting
+lifecycleRuleSetting
     :: TF.Attr s P.Bool -- ^ 'P._enabled': @enabled@
     -> TF.Attr s [TF.Attr s (ExpirationSetting s)] -- ^ 'P._expiration': @expiration@
     -> TF.Attr s P.Text -- ^ 'P._prefix': @prefix@
     -> LifecycleRuleSetting s
-newLifecycleRuleSetting _enabled _expiration _prefix =
+lifecycleRuleSetting _enabled _expiration _prefix =
     LifecycleRuleSetting'
         { _enabled = _enabled
         , _expiration = _expiration
@@ -1316,9 +1316,9 @@ data LocalStorageSetting s = LocalStorageSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @local_storage@ settings value.
-newLocalStorageSetting
+localStorageSetting
     :: LocalStorageSetting s
-newLocalStorageSetting =
+localStorageSetting =
     LocalStorageSetting'
 
 instance TF.IsValue  (LocalStorageSetting s)
@@ -1348,11 +1348,11 @@ data LogConfigSetting s = LogConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @log_config@ settings value.
-newLogConfigSetting
+logConfigSetting
     :: TF.Attr s P.Text -- ^ 'P._logstore': @logstore@
     -> TF.Attr s P.Text -- ^ 'P._project': @project@
     -> LogConfigSetting s
-newLogConfigSetting _logstore _project =
+logConfigSetting _logstore _project =
     LogConfigSetting'
         { _logstore = _logstore
         , _project = _project
@@ -1389,10 +1389,10 @@ data LoggingSetting s = LoggingSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @logging@ settings value.
-newLoggingSetting
+loggingSetting
     :: TF.Attr s P.Text -- ^ 'P._targetBucket': @target_bucket@
     -> LoggingSetting s
-newLoggingSetting _targetBucket =
+loggingSetting _targetBucket =
     LoggingSetting'
         { _targetBucket = _targetBucket
         , _targetPrefix = TF.Nil
@@ -1423,9 +1423,9 @@ data MasterNodesSetting s = MasterNodesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @master_nodes@ settings value.
-newMasterNodesSetting
+masterNodesSetting
     :: MasterNodesSetting s
-newMasterNodesSetting =
+masterNodesSetting =
     MasterNodesSetting'
 
 instance TF.IsValue  (MasterNodesSetting s)
@@ -1449,9 +1449,9 @@ data NodesSetting s = NodesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @nodes@ settings value.
-newNodesSetting
+nodesSetting
     :: NodesSetting s
-newNodesSetting =
+nodesSetting =
     NodesSetting'
 
 instance TF.IsValue  (NodesSetting s)
@@ -1487,9 +1487,9 @@ data Page404ConfigSetting s = Page404ConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @page_404_config@ settings value.
-newPage404ConfigSetting
+page404ConfigSetting
     :: Page404ConfigSetting s
-newPage404ConfigSetting =
+page404ConfigSetting =
     Page404ConfigSetting'
         { _customPageUrl = TF.Nil
         , _pageType = TF.value "default"
@@ -1526,9 +1526,9 @@ data ParameterFilterConfigSetting s = ParameterFilterConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @parameter_filter_config@ settings value.
-newParameterFilterConfigSetting
+parameterFilterConfigSetting
     :: ParameterFilterConfigSetting s
-newParameterFilterConfigSetting =
+parameterFilterConfigSetting =
     ParameterFilterConfigSetting'
         { _enable = TF.value "off"
         }
@@ -1555,9 +1555,9 @@ data PoliciesSetting s = PoliciesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @policies@ settings value.
-newPoliciesSetting
+policiesSetting
     :: PoliciesSetting s
-newPoliciesSetting =
+policiesSetting =
     PoliciesSetting'
 
 instance TF.IsValue  (PoliciesSetting s)
@@ -1602,11 +1602,11 @@ data PrimaryKeySetting s = PrimaryKeySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @primary_key@ settings value.
-newPrimaryKeySetting
+primaryKeySetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> PrimaryKeySetting s
-newPrimaryKeySetting _name _type' =
+primaryKeySetting _name _type' =
     PrimaryKeySetting'
         { _name = _name
         , _type' = _type'
@@ -1637,9 +1637,9 @@ data RecordsSetting s = RecordsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @records@ settings value.
-newRecordsSetting
+recordsSetting
     :: RecordsSetting s
-newRecordsSetting =
+recordsSetting =
     RecordsSetting'
 
 instance TF.IsValue  (RecordsSetting s)
@@ -1693,10 +1693,10 @@ data ReferConfigSetting s = ReferConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @refer_config@ settings value.
-newReferConfigSetting
+referConfigSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._referList': @refer_list@
     -> ReferConfigSetting s
-newReferConfigSetting _referList =
+referConfigSetting _referList =
     ReferConfigSetting'
         { _allowEmpty = TF.value "on"
         , _referList = _referList
@@ -1740,10 +1740,10 @@ data RefererConfigSetting s = RefererConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @referer_config@ settings value.
-newRefererConfigSetting
+refererConfigSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._referers': @referers@
     -> RefererConfigSetting s
-newRefererConfigSetting _referers =
+refererConfigSetting _referers =
     RefererConfigSetting'
         { _allowEmpty = TF.Nil
         , _referers = _referers
@@ -1774,9 +1774,9 @@ data RegionsSetting s = RegionsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @regions@ settings value.
-newRegionsSetting
+regionsSetting
     :: RegionsSetting s
-newRegionsSetting =
+regionsSetting =
     RegionsSetting'
 
 instance TF.IsValue  (RegionsSetting s)
@@ -1800,9 +1800,9 @@ data RolesSetting s = RolesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @roles@ settings value.
-newRolesSetting
+rolesSetting
     :: RolesSetting s
-newRolesSetting =
+rolesSetting =
     RolesSetting'
 
 instance TF.IsValue  (RolesSetting s)
@@ -1841,9 +1841,9 @@ data RulesSetting s = RulesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @rules@ settings value.
-newRulesSetting
+rulesSetting
     :: RulesSetting s
-newRulesSetting =
+rulesSetting =
     RulesSetting'
 
 instance TF.IsValue  (RulesSetting s)
@@ -1906,11 +1906,11 @@ data ServersSetting s = ServersSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @servers@ settings value.
-newServersSetting
+serversSetting
     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ 'P._serverIds': @server_ids@
     -> TF.Attr s P.Int -- ^ 'P._port': @port@
     -> ServersSetting s
-newServersSetting _serverIds _port =
+serversSetting _serverIds _port =
     ServersSetting'
         { _port = _port
         , _serverIds = _serverIds
@@ -1948,9 +1948,9 @@ data ServicesSetting s = ServicesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @services@ settings value.
-newServicesSetting
+servicesSetting
     :: ServicesSetting s
-newServicesSetting =
+servicesSetting =
     ServicesSetting'
 
 instance TF.IsValue  (ServicesSetting s)
@@ -1977,9 +1977,9 @@ data ShardsSetting s = ShardsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @shards@ settings value.
-newShardsSetting
+shardsSetting
     :: ShardsSetting s
-newShardsSetting =
+shardsSetting =
     ShardsSetting'
 
 instance TF.IsValue  (ShardsSetting s)
@@ -2015,12 +2015,12 @@ data StatementSetting s = StatementSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @statement@ settings value.
-newStatementSetting
+statementSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._action': @action@
     -> TF.Attr s P.Text -- ^ 'P._effect': @effect@
     -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._resource'': @resource@
     -> StatementSetting s
-newStatementSetting _action _effect _resource' =
+statementSetting _action _effect _resource' =
     StatementSetting'
         { _action = _action
         , _effect = _effect
@@ -2058,9 +2058,9 @@ data UsersSetting s = UsersSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @users@ settings value.
-newUsersSetting
+usersSetting
     :: UsersSetting s
-newUsersSetting =
+usersSetting =
     UsersSetting'
 
 instance TF.IsValue  (UsersSetting s)
@@ -2093,11 +2093,11 @@ data VpcConfigSetting s = VpcConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @vpc_config@ settings value.
-newVpcConfigSetting
+vpcConfigSetting
     :: TF.Attr s P.Text -- ^ 'P._securityGroupId': @security_group_id@
     -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._vswitchIds': @vswitch_ids@
     -> VpcConfigSetting s
-newVpcConfigSetting _securityGroupId _vswitchIds =
+vpcConfigSetting _securityGroupId _vswitchIds =
     VpcConfigSetting'
         { _securityGroupId = _securityGroupId
         , _vswitchIds = _vswitchIds
@@ -2131,9 +2131,9 @@ data VpcsSetting s = VpcsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @vpcs@ settings value.
-newVpcsSetting
+vpcsSetting
     :: VpcsSetting s
-newVpcsSetting =
+vpcsSetting =
     VpcsSetting'
 
 instance TF.IsValue  (VpcsSetting s)
@@ -2181,9 +2181,9 @@ data VswitchesSetting s = VswitchesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @vswitches@ settings value.
-newVswitchesSetting
+vswitchesSetting
     :: VswitchesSetting s
-newVswitchesSetting =
+vswitchesSetting =
     VswitchesSetting'
 
 instance TF.IsValue  (VswitchesSetting s)
@@ -2231,10 +2231,10 @@ data WebsiteSetting s = WebsiteSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @website@ settings value.
-newWebsiteSetting
+websiteSetting
     :: TF.Attr s P.Text -- ^ 'P._indexDocument': @index_document@
     -> WebsiteSetting s
-newWebsiteSetting _indexDocument =
+websiteSetting _indexDocument =
     WebsiteSetting'
         { _errorDocument = TF.Nil
         , _indexDocument = _indexDocument
@@ -2265,9 +2265,9 @@ data WorkerNodesSetting s = WorkerNodesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @worker_nodes@ settings value.
-newWorkerNodesSetting
+workerNodesSetting
     :: WorkerNodesSetting s
-newWorkerNodesSetting =
+workerNodesSetting =
     WorkerNodesSetting'
 
 instance TF.IsValue  (WorkerNodesSetting s)
@@ -2291,9 +2291,9 @@ data ZonesSetting s = ZonesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @zones@ settings value.
-newZonesSetting
+zonesSetting
     :: ZonesSetting s
-newZonesSetting =
+zonesSetting =
     ZonesSetting'
 
 instance TF.IsValue  (ZonesSetting s)
