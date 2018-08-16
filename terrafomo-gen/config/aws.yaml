@@ -37,6 +37,16 @@ field-overrides:
     type': 'TF.Attr s P.NetworkTraffic'
     protocol: 'TF.Attr s P.NetworkProtocol'
 
+  VpcResource:
+    cidr_block: 'TF.Attr s P.IPRange'
+
+  SubnetResource:
+    cidr_block: 'TF.Attr s P.IPRange'
+    availability_zone: 'TF.Attr s P.Zone'
+
+  RouteResource:
+    destination_cidr_block: 'TF.Attr s P.IPRange'
+
   # Settings
 
   AttributeSetting:
