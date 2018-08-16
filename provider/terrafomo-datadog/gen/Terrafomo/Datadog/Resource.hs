@@ -96,7 +96,7 @@ data DowntimeResource s = DowntimeResource'
 
 -- | Define a new @datadog_downtime@ resource value.
 downtimeResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @scope@ - 'P.scope'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @scope@ ('P._scope', 'P.scope')
     -> P.Resource (DowntimeResource s)
 downtimeResource _scope =
     TF.unsafeResource "datadog_downtime" TF.validator $
@@ -203,7 +203,7 @@ data MetricMetadataResource s = MetricMetadataResource'
 
 -- | Define a new @datadog_metric_metadata@ resource value.
 metricMetadataResource
-    :: TF.Attr s P.Text -- ^ @metric@ - 'P.metric'
+    :: TF.Attr s P.Text -- ^ @metric@ ('P._metric', 'P.metric')
     -> P.Resource (MetricMetadataResource s)
 metricMetadataResource _metric =
     TF.unsafeResource "datadog_metric_metadata" TF.validator $
@@ -326,10 +326,10 @@ data MonitorResource s = MonitorResource'
 
 -- | Define a new @datadog_monitor@ resource value.
 monitorResource
-    :: TF.Attr s P.Text -- ^ @message@ - 'P.message'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @query@ - 'P.query'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @message@ ('P._message', 'P.message')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @query@ ('P._query', 'P.query')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (MonitorResource s)
 monitorResource _message _name _query _type' =
     TF.unsafeResource "datadog_monitor" TF.validator $
@@ -492,9 +492,9 @@ data TimeboardResource s = TimeboardResource'
 
 -- | Define a new @datadog_timeboard@ resource value.
 timeboardResource
-    :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
-    -> TF.Attr s [TF.Attr s (GraphSetting s)] -- ^ @graph@ - 'P.graph'
-    -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
+    :: TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
+    -> TF.Attr s [TF.Attr s (GraphSetting s)] -- ^ @graph@ ('P._graph', 'P.graph')
+    -> TF.Attr s P.Text -- ^ @title@ ('P._title', 'P.title')
     -> P.Resource (TimeboardResource s)
 timeboardResource _description _graph _title =
     TF.unsafeResource "datadog_timeboard" TF.validator $
@@ -570,9 +570,9 @@ data UserResource s = UserResource'
 
 -- | Define a new @datadog_user@ resource value.
 userResource
-    :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
-    -> TF.Attr s P.Text -- ^ @handle@ - 'P.handle'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @email@ ('P._email', 'P.email')
+    -> TF.Attr s P.Text -- ^ @handle@ ('P._handle', 'P.handle')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (UserResource s)
 userResource _email _handle _name =
     TF.unsafeResource "datadog_user" TF.validator $

@@ -94,7 +94,7 @@ data ConditionalFormatSetting s = ConditionalFormatSetting'
 
 -- | Construct a new @conditional_format@ settings value.
 newConditionalFormatSetting
-    :: TF.Attr s P.Text -- ^ @comparator@ - 'P.comparator'
+    :: TF.Attr s P.Text -- ^ 'P._comparator': @comparator@
     -> ConditionalFormatSetting s
 newConditionalFormatSetting _comparator =
     ConditionalFormatSetting'
@@ -204,9 +204,9 @@ data GraphSetting s = GraphSetting'
 
 -- | Construct a new @graph@ settings value.
 newGraphSetting
-    :: TF.Attr s [TF.Attr s (RequestSetting s)] -- ^ @request@ - 'P.request'
-    -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
-    -> TF.Attr s P.Text -- ^ @viz@ - 'P.viz'
+    :: TF.Attr s [TF.Attr s (RequestSetting s)] -- ^ 'P._request': @request@
+    -> TF.Attr s P.Text -- ^ 'P._title': @title@
+    -> TF.Attr s P.Text -- ^ 'P._viz': @viz@
     -> GraphSetting s
 newGraphSetting _request _title _viz =
     GraphSetting'
@@ -340,8 +340,8 @@ data MarkerSetting s = MarkerSetting'
 
 -- | Construct a new @marker@ settings value.
 newMarkerSetting
-    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
+    -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> MarkerSetting s
 newMarkerSetting _type' _value =
     MarkerSetting'
@@ -403,8 +403,8 @@ data RecurrenceSetting s = RecurrenceSetting'
 
 -- | Construct a new @recurrence@ settings value.
 newRecurrenceSetting
-    :: TF.Attr s P.Int -- ^ @period@ - 'P.period'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Int -- ^ 'P._period': @period@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> RecurrenceSetting s
 newRecurrenceSetting _period _type' =
     RecurrenceSetting'
@@ -513,7 +513,7 @@ data RequestSetting s = RequestSetting'
 
 -- | Construct a new @request@ settings value.
 newRequestSetting
-    :: TF.Attr s P.Text -- ^ @q@ - 'P.q'
+    :: TF.Attr s P.Text -- ^ 'P._q': @q@
     -> RequestSetting s
 newRequestSetting _q =
     RequestSetting'
@@ -630,7 +630,7 @@ data TemplateVariableSetting s = TemplateVariableSetting'
 
 -- | Construct a new @template_variable@ settings value.
 newTemplateVariableSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TemplateVariableSetting s
 newTemplateVariableSetting _name =
     TemplateVariableSetting'
