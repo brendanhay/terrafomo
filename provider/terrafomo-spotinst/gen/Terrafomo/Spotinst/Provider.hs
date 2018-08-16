@@ -17,11 +17,10 @@
 --
 module Terrafomo.Spotinst.Provider
     (
-    -- * Spotinst Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * Spotinst Specific Aliases
+    -- ** Spotinst Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -82,7 +81,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "spotinst"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "account" <$> _account
             , TF.assign "token" <$> _token

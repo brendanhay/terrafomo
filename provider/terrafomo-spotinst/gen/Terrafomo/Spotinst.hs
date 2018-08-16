@@ -12,12 +12,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Spotinst
-    ( module Terrafomo.Spotinst.Lens
-    , module Terrafomo.Spotinst.Provider
-    , module Terrafomo.Spotinst.Resource
-    , module Terrafomo.Spotinst.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Spotinst.Provider
+
+    -- * Custom Types
     , module Terrafomo.Spotinst.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+
+    -- * Resources
+    , module Terrafomo.Spotinst.Resource
+
+    -- * Settings
+    , module Terrafomo.Spotinst.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Spotinst.Lens
     ) where
 
 import Terrafomo.Spotinst.Lens

@@ -17,7 +17,6 @@
 --
 module Terrafomo.Spotinst.Resource
     (
-    -- * Resource Datatypes
     -- ** spotinst_elastigroup_aws
       ElastigroupAwsResource (..)
     , elastigroupAwsResource
@@ -242,6 +241,7 @@ data ElastigroupAwsResource s = ElastigroupAwsResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @spotinst_elastigroup_aws@ resource value.
 elastigroupAwsResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ - 'P.securityGroups'
@@ -765,6 +765,7 @@ data SubscriptionResource s = SubscriptionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @spotinst_subscription@ resource value.
 subscriptionResource
     :: TF.Attr s P.Text -- ^ @endpoint@ - 'P.endpoint'
     -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
