@@ -446,6 +446,23 @@
                     "original": "path"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": true,
+                    "original": "value"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -481,7 +498,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedValue",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "value"
                 }
             ],
@@ -1121,6 +1138,23 @@
                     "original": "address"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_id",
+                    "method": "id",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "id"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -1190,7 +1224,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "id"
                 },
                 {
@@ -3857,6 +3891,23 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"datacenter\" <$> TF.attribute",
+                    "name": "_datacenter",
+                    "method": "datacenter",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatacenter",
+                    "validate": false,
+                    "optional": true,
+                    "original": "datacenter"
+                },
+                {
                     "default": "_pathPrefix",
                     "computed": false,
                     "required": true,
@@ -3944,7 +3995,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDatacenter",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "datacenter"
                 },
                 {
@@ -4016,6 +4067,23 @@
                     "computed": false,
                     "required": false,
                     "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"datacenter\" <$> TF.attribute",
+                    "name": "_datacenter",
+                    "method": "datacenter",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatacenter",
+                    "validate": false,
+                    "optional": true,
+                    "original": "datacenter"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"key\" <$> TF.attribute",
                     "name": "_key",
@@ -4082,7 +4150,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDatacenter",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "datacenter"
                 },
                 {
@@ -4478,6 +4546,23 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"address\" <$> TF.attribute",
+                    "name": "_address",
+                    "method": "address",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "address"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -4565,7 +4650,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAddress",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "address"
                 }
             ],
@@ -4614,6 +4699,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"datacenter\" <$> TF.attribute",
+                    "name": "_datacenter",
+                    "method": "datacenter",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatacenter",
+                    "validate": false,
+                    "optional": true,
+                    "original": "datacenter"
                 },
                 {
                     "default": "_node",
@@ -4703,7 +4805,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDatacenter",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "datacenter"
                 }
             ],
@@ -4926,6 +5028,23 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"datacenter\" <$> TF.attribute",
+                    "name": "_datacenter",
+                    "method": "datacenter",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatacenter",
+                    "validate": false,
+                    "optional": true,
+                    "original": "datacenter"
+                },
+                {
                     "default": "_pathPrefix",
                     "computed": false,
                     "required": true,
@@ -5013,7 +5132,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDatacenter",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "datacenter"
                 }
             ],
@@ -5063,6 +5182,23 @@
                 "name": "KeysResource'"
             },
             "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"datacenter\" <$> TF.attribute",
+                    "name": "_datacenter",
+                    "method": "datacenter",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatacenter",
+                    "validate": false,
+                    "optional": true,
+                    "original": "datacenter"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": false,
@@ -5134,7 +5270,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDatacenter",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "datacenter"
                 },
                 {
@@ -5182,6 +5318,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"datacenter\" <$> TF.attribute",
+                    "name": "_datacenter",
+                    "method": "datacenter",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatacenter",
+                    "validate": false,
+                    "optional": true,
+                    "original": "datacenter"
                 },
                 {
                     "default": "_name",
@@ -5254,7 +5407,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDatacenter",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "datacenter"
                 }
             ],
@@ -5579,6 +5732,40 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"address\" <$> TF.attribute",
+                    "name": "_address",
+                    "method": "address",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"datacenter\" <$> TF.attribute",
+                    "name": "_datacenter",
+                    "method": "datacenter",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatacenter",
+                    "validate": false,
+                    "optional": true,
+                    "original": "datacenter"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -5634,6 +5821,23 @@
                     "computed": false,
                     "required": false,
                     "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"service_id\" <$> TF.attribute",
+                    "name": "_serviceId",
+                    "method": "serviceId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasServiceId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "service_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"tags\" <$> TF.attribute",
                     "name": "_tags",
@@ -5683,7 +5887,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAddress",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "address"
                 },
                 {
@@ -5700,7 +5904,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDatacenter",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "datacenter"
                 },
                 {
@@ -5717,7 +5921,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedServiceId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "service_id"
                 }
             ],
