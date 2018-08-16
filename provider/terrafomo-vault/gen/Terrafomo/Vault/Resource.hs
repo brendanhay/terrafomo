@@ -183,6 +183,9 @@ instance P.HasSecretId (ApproleAuthBackendLoginResource s) (TF.Attr s P.Text) wh
         P.lens (_secretId :: ApproleAuthBackendLoginResource s -> TF.Attr s P.Text)
                (\s a -> s { _secretId = a } :: ApproleAuthBackendLoginResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ApproleAuthBackendLoginResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAccessor (TF.Ref s' (ApproleAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedAccessor x = TF.compute (TF.refKey x) "accessor"
 
@@ -354,6 +357,9 @@ instance P.HasTokenTtl (ApproleAuthBackendRoleResource s) (TF.Attr s P.Int) wher
         P.lens (_tokenTtl :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Int)
                (\s a -> s { _tokenTtl = a } :: ApproleAuthBackendRoleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ApproleAuthBackendRoleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (ApproleAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedRoleId x = TF.compute (TF.refKey x) "role_id"
 
@@ -423,6 +429,9 @@ instance P.HasRoleName (ApproleAuthBackendRoleSecretIdResource s) (TF.Attr s P.T
         P.lens (_roleName :: ApproleAuthBackendRoleSecretIdResource s -> TF.Attr s P.Text)
                (\s a -> s { _roleName = a } :: ApproleAuthBackendRoleSecretIdResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ApproleAuthBackendRoleSecretIdResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAccessor (TF.Ref s' (ApproleAuthBackendRoleSecretIdResource s)) (TF.Attr s P.Text) where
     computedAccessor x = TF.compute (TF.refKey x) "accessor"
 
@@ -472,6 +481,9 @@ instance P.HasType' (AuthBackendResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: AuthBackendResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: AuthBackendResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AuthBackendResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedPath (TF.Ref s' (AuthBackendResource s)) (TF.Attr s P.Text) where
     computedPath x = TF.compute (TF.refKey x) "path"
@@ -544,6 +556,9 @@ instance P.HasType' (AwsAuthBackendCertResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: AwsAuthBackendCertResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: AwsAuthBackendCertResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AwsAuthBackendCertResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vault_aws_auth_backend_client@ Resource.
 --
@@ -644,6 +659,9 @@ instance P.HasStsEndpoint (AwsAuthBackendClientResource s) (TF.Attr s P.Text) wh
         P.lens (_stsEndpoint :: AwsAuthBackendClientResource s -> TF.Attr s P.Text)
                (\s a -> s { _stsEndpoint = a } :: AwsAuthBackendClientResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AwsAuthBackendClientResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @vault_aws_auth_backend_identity_whitelist@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_identity_whitelist.html terraform documentation>
@@ -698,6 +716,9 @@ instance P.HasSafetyBuffer (AwsAuthBackendIdentityWhitelistResource s) (TF.Attr 
     safetyBuffer =
         P.lens (_safetyBuffer :: AwsAuthBackendIdentityWhitelistResource s -> TF.Attr s P.Int)
                (\s a -> s { _safetyBuffer = a } :: AwsAuthBackendIdentityWhitelistResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AwsAuthBackendIdentityWhitelistResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vault_aws_auth_backend_login@ Resource.
 --
@@ -810,6 +831,9 @@ instance P.HasSignature (AwsAuthBackendLoginResource s) (TF.Attr s P.Text) where
     signature =
         P.lens (_signature :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
                (\s a -> s { _signature = a } :: AwsAuthBackendLoginResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAccessor (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedAccessor x = TF.compute (TF.refKey x) "accessor"
@@ -1077,6 +1101,9 @@ instance P.HasTtl (AwsAuthBackendRoleResource s) (TF.Attr s P.Int) where
         P.lens (_ttl :: AwsAuthBackendRoleResource s -> TF.Attr s P.Int)
                (\s a -> s { _ttl = a } :: AwsAuthBackendRoleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAllowInstanceMigration (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Bool) where
     computedAllowInstanceMigration x = TF.compute (TF.refKey x) "allow_instance_migration"
 
@@ -1183,6 +1210,9 @@ instance P.HasRole (AwsAuthBackendRoleTagResource s) (TF.Attr s P.Text) where
         P.lens (_role :: AwsAuthBackendRoleTagResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: AwsAuthBackendRoleTagResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AwsAuthBackendRoleTagResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedTagKey (TF.Ref s' (AwsAuthBackendRoleTagResource s)) (TF.Attr s P.Text) where
     computedTagKey x = TF.compute (TF.refKey x) "tag_key"
 
@@ -1245,6 +1275,9 @@ instance P.HasStsRole (AwsAuthBackendStsRoleResource s) (TF.Attr s P.Text) where
     stsRole =
         P.lens (_stsRole :: AwsAuthBackendStsRoleResource s -> TF.Attr s P.Text)
                (\s a -> s { _stsRole = a } :: AwsAuthBackendStsRoleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AwsAuthBackendStsRoleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vault_aws_secret_backend@ Resource.
 --
@@ -1312,6 +1345,9 @@ instance P.HasSecretKey (AwsSecretBackendResource s) (TF.Attr s P.Text) where
     secretKey =
         P.lens (_secretKey :: AwsSecretBackendResource s -> TF.Attr s P.Text)
                (\s a -> s { _secretKey = a } :: AwsSecretBackendResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AwsSecretBackendResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDefaultLeaseTtlSeconds (TF.Ref s' (AwsSecretBackendResource s)) (TF.Attr s P.Int) where
     computedDefaultLeaseTtlSeconds x = TF.compute (TF.refKey x) "default_lease_ttl_seconds"
@@ -1405,6 +1441,9 @@ instance P.HasPolicyArn (AwsSecretBackendRoleResource s) (TF.Attr s P.Text) wher
     policyArn =
         P.lens (_policyArn :: AwsSecretBackendRoleResource s -> TF.Attr s P.Text)
                (\s a -> s { _policyArn = a } :: AwsSecretBackendRoleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AwsSecretBackendRoleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vault_database_secret_backend_connection@ Resource.
 --
@@ -1670,6 +1709,9 @@ instance P.HasVerifyConnection (DatabaseSecretBackendConnectionResource s) (TF.A
         P.lens (_verifyConnection :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Bool)
                (\s a -> s { _verifyConnection = a } :: DatabaseSecretBackendConnectionResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DatabaseSecretBackendConnectionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @vault_database_secret_backend_role@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/vault/r/database_secret_backend_role.html terraform documentation>
@@ -1795,6 +1837,9 @@ instance P.HasRollbackStatements (DatabaseSecretBackendRoleResource s) (TF.Attr 
         P.lens (_rollbackStatements :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
                (\s a -> s { _rollbackStatements = a } :: DatabaseSecretBackendRoleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DatabaseSecretBackendRoleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @vault_generic_secret@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/vault/r/generic_secret.html terraform documentation>
@@ -1851,6 +1896,9 @@ instance P.HasPath (GenericSecretResource s) (TF.Attr s P.Text) where
         P.lens (_path :: GenericSecretResource s -> TF.Attr s P.Text)
                (\s a -> s { _path = a } :: GenericSecretResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GenericSecretResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @vault_mount@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/vault/r/mount.html terraform documentation>
@@ -1906,6 +1954,9 @@ instance P.HasType' (MountResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: MountResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: MountResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MountResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDefaultLeaseTtlSeconds (TF.Ref s' (MountResource s)) (TF.Attr s P.Int) where
     computedDefaultLeaseTtlSeconds x = TF.compute (TF.refKey x) "default_lease_ttl_seconds"
@@ -2015,6 +2066,9 @@ instance P.HasTtl (OktaAuthBackendResource s) (TF.Attr s P.Text) where
         P.lens (_ttl :: OktaAuthBackendResource s -> TF.Attr s P.Text)
                (\s a -> s { _ttl = a } :: OktaAuthBackendResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedGroup (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s [TF.Attr s (GroupSetting s)]) where
     computedGroup x = TF.compute (TF.refKey x) "group"
 
@@ -2076,6 +2130,9 @@ instance P.HasPolicies (OktaAuthBackendGroupResource s) (TF.Attr s [TF.Attr s P.
     policies =
         P.lens (_policies :: OktaAuthBackendGroupResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _policies = a } :: OktaAuthBackendGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OktaAuthBackendGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vault_okta_auth_backend_user@ Resource.
 --
@@ -2144,6 +2201,9 @@ instance P.HasUsername (OktaAuthBackendUserResource s) (TF.Attr s P.Text) where
         P.lens (_username :: OktaAuthBackendUserResource s -> TF.Attr s P.Text)
                (\s a -> s { _username = a } :: OktaAuthBackendUserResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OktaAuthBackendUserResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @vault_policy@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/vault/r/policy.html terraform documentation>
@@ -2188,3 +2248,6 @@ instance P.HasPolicy (PolicyResource s) (TF.Attr s P.Text) where
     policy =
         P.lens (_policy :: PolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _policy = a } :: PolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
