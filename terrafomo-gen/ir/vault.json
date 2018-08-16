@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newCassandraSetting",
+                "smart": "cassandraSetting",
                 "name": "CassandraSetting'"
             },
             "arguments": [
@@ -211,7 +211,7 @@
         },
         {
             "con": {
-                "smart": "newClientAuthSetting",
+                "smart": "clientAuthSetting",
                 "name": "ClientAuthSetting'"
             },
             "arguments": [
@@ -306,7 +306,7 @@
         },
         {
             "con": {
-                "smart": "newGroupSetting",
+                "smart": "groupSetting",
                 "name": "GroupSetting'"
             },
             "arguments": [
@@ -399,7 +399,7 @@
         },
         {
             "con": {
-                "smart": "newHanaSetting",
+                "smart": "hanaSetting",
                 "name": "HanaSetting'"
             },
             "arguments": [
@@ -491,7 +491,7 @@
         },
         {
             "con": {
-                "smart": "newMongodbSetting",
+                "smart": "mongodbSetting",
                 "name": "MongodbSetting'"
             },
             "arguments": [
@@ -526,7 +526,7 @@
         },
         {
             "con": {
-                "smart": "newMssqlSetting",
+                "smart": "mssqlSetting",
                 "name": "MssqlSetting'"
             },
             "arguments": [
@@ -618,7 +618,7 @@
         },
         {
             "con": {
-                "smart": "newMysqlSetting",
+                "smart": "mysqlSetting",
                 "name": "MysqlSetting'"
             },
             "arguments": [
@@ -710,7 +710,7 @@
         },
         {
             "con": {
-                "smart": "newOracleSetting",
+                "smart": "oracleSetting",
                 "name": "OracleSetting'"
             },
             "arguments": [
@@ -802,7 +802,7 @@
         },
         {
             "con": {
-                "smart": "newPostgresqlSetting",
+                "smart": "postgresqlSetting",
                 "name": "PostgresqlSetting'"
             },
             "arguments": [
@@ -894,7 +894,7 @@
         },
         {
             "con": {
-                "smart": "newUserSetting",
+                "smart": "userSetting",
                 "name": "UserSetting'"
             },
             "arguments": [
