@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newBackendSetting",
+                "smart": "backendSetting",
                 "name": "BackendSetting'"
             },
             "arguments": [
@@ -496,7 +496,7 @@
         },
         {
             "con": {
-                "smart": "newBigqueryloggingSetting",
+                "smart": "bigqueryloggingSetting",
                 "name": "BigqueryloggingSetting'"
             },
             "arguments": [
@@ -742,7 +742,7 @@
         },
         {
             "con": {
-                "smart": "newCacheSettingSetting",
+                "smart": "cacheSettingSetting",
                 "name": "CacheSettingSetting'"
             },
             "arguments": [
@@ -873,7 +873,7 @@
         },
         {
             "con": {
-                "smart": "newConditionSetting",
+                "smart": "conditionSetting",
                 "name": "ConditionSetting'"
             },
             "arguments": [
@@ -1020,7 +1020,7 @@
         },
         {
             "con": {
-                "smart": "newDomainSetting",
+                "smart": "domainSetting",
                 "name": "DomainSetting'"
             },
             "arguments": [
@@ -1092,7 +1092,7 @@
         },
         {
             "con": {
-                "smart": "newGcsloggingSetting",
+                "smart": "gcsloggingSetting",
                 "name": "GcsloggingSetting'"
             },
             "arguments": [
@@ -1357,7 +1357,7 @@
         },
         {
             "con": {
-                "smart": "newGzipSetting",
+                "smart": "gzipSetting",
                 "name": "GzipSetting'"
             },
             "arguments": [
@@ -1469,7 +1469,7 @@
         },
         {
             "con": {
-                "smart": "newHeaderSetting",
+                "smart": "headerSetting",
                 "name": "HeaderSetting'"
             },
             "arguments": [
@@ -1795,7 +1795,7 @@
         },
         {
             "con": {
-                "smart": "newHealthcheckSetting",
+                "smart": "healthcheckSetting",
                 "name": "HealthcheckSetting'"
             },
             "arguments": [
@@ -2078,7 +2078,7 @@
         },
         {
             "con": {
-                "smart": "newLogentriesSetting",
+                "smart": "logentriesSetting",
                 "name": "LogentriesSetting'"
             },
             "arguments": [
@@ -2267,7 +2267,7 @@
         },
         {
             "con": {
-                "smart": "newPapertrailSetting",
+                "smart": "papertrailSetting",
                 "name": "PapertrailSetting'"
             },
             "arguments": [
@@ -2436,7 +2436,7 @@
         },
         {
             "con": {
-                "smart": "newRequestSettingSetting",
+                "smart": "requestSettingSetting",
                 "name": "RequestSettingSetting'"
             },
             "arguments": [
@@ -2702,7 +2702,7 @@
         },
         {
             "con": {
-                "smart": "newResponseObjectSetting",
+                "smart": "responseObjectSetting",
                 "name": "ResponseObjectSetting'"
             },
             "arguments": [
@@ -2873,7 +2873,7 @@
         },
         {
             "con": {
-                "smart": "newS3loggingSetting",
+                "smart": "s3loggingSetting",
                 "name": "S3loggingSetting'"
             },
             "arguments": [
@@ -3195,7 +3195,7 @@
         },
         {
             "con": {
-                "smart": "newSumologicSetting",
+                "smart": "sumologicSetting",
                 "name": "SumologicSetting'"
             },
             "arguments": [
@@ -3365,7 +3365,7 @@
         },
         {
             "con": {
-                "smart": "newSyslogSetting",
+                "smart": "syslogSetting",
                 "name": "SyslogSetting'"
             },
             "arguments": [
@@ -3629,7 +3629,7 @@
         },
         {
             "con": {
-                "smart": "newVclSetting",
+                "smart": "vclSetting",
                 "name": "VclSetting'"
             },
             "arguments": [
