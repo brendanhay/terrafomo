@@ -207,7 +207,7 @@ data AuthSetting s = AuthSetting'
 
 -- | Construct a new @auth@ settings value.
 newAuthSetting
-    :: TF.Attr s P.Text -- ^ @server_address@ - 'P.serverAddress'
+    :: TF.Attr s P.Text -- ^ 'P._serverAddress': @server_address@
     -> AuthSetting s
 newAuthSetting _serverAddress =
     AuthSetting'
@@ -331,8 +331,8 @@ data ConfigsSetting s = ConfigsSetting'
 
 -- | Construct a new @configs@ settings value.
 newConfigsSetting
-    :: TF.Attr s P.Text -- ^ @config_id@ - 'P.configId'
-    -> TF.Attr s P.Text -- ^ @file_name@ - 'P.fileName'
+    :: TF.Attr s P.Text -- ^ 'P._configId': @config_id@
+    -> TF.Attr s P.Text -- ^ 'P._fileName': @file_name@
     -> ConfigsSetting s
 newConfigsSetting _configId _fileName =
     ConfigsSetting'
@@ -442,7 +442,7 @@ data ContainerSpecSetting s = ContainerSpecSetting'
 
 -- | Construct a new @container_spec@ settings value.
 newContainerSpecSetting
-    :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
+    :: TF.Attr s P.Text -- ^ 'P._image': @image@
     -> ContainerSpecSetting s
 newContainerSpecSetting _image =
     ContainerSpecSetting'
@@ -685,7 +685,7 @@ data DevicesSetting s = DevicesSetting'
 
 -- | Construct a new @devices@ settings value.
 newDevicesSetting
-    :: TF.Attr s P.Text -- ^ @host_path@ - 'P.hostPath'
+    :: TF.Attr s P.Text -- ^ 'P._hostPath': @host_path@
     -> DevicesSetting s
 newDevicesSetting _hostPath =
     DevicesSetting'
@@ -739,7 +739,7 @@ data DnsConfigSetting s = DnsConfigSetting'
 
 -- | Construct a new @dns_config@ settings value.
 newDnsConfigSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @nameservers@ - 'P.nameservers'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._nameservers': @nameservers@
     -> DnsConfigSetting s
 newDnsConfigSetting _nameservers =
     DnsConfigSetting'
@@ -876,7 +876,7 @@ data HealthcheckSetting s = HealthcheckSetting'
 
 -- | Construct a new @healthcheck@ settings value.
 newHealthcheckSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @test@ - 'P.test'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._test': @test@
     -> HealthcheckSetting s
 newHealthcheckSetting _test =
     HealthcheckSetting'
@@ -937,8 +937,8 @@ data HostSetting s = HostSetting'
 
 -- | Construct a new @host@ settings value.
 newHostSetting
-    :: TF.Attr s P.Text -- ^ @host@ - 'P.host'
-    -> TF.Attr s P.Text -- ^ @ip@ - 'P.ip'
+    :: TF.Attr s P.Text -- ^ 'P._host': @host@
+    -> TF.Attr s P.Text -- ^ 'P._ip': @ip@
     -> HostSetting s
 newHostSetting _host _ip =
     HostSetting'
@@ -978,8 +978,8 @@ data HostsSetting s = HostsSetting'
 
 -- | Construct a new @hosts@ settings value.
 newHostsSetting
-    :: TF.Attr s P.Text -- ^ @host@ - 'P.host'
-    -> TF.Attr s P.Text -- ^ @ip@ - 'P.ip'
+    :: TF.Attr s P.Text -- ^ 'P._host': @host@
+    -> TF.Attr s P.Text -- ^ 'P._ip': @ip@
     -> HostsSetting s
 newHostsSetting _host _ip =
     HostsSetting'
@@ -1139,7 +1139,7 @@ data LogDriverSetting s = LogDriverSetting'
 
 -- | Construct a new @log_driver@ settings value.
 newLogDriverSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> LogDriverSetting s
 newLogDriverSetting _name =
     LogDriverSetting'
@@ -1234,9 +1234,9 @@ data MountsSetting s = MountsSetting'
 
 -- | Construct a new @mounts@ settings value.
 newMountsSetting
-    :: TF.Attr s P.Text -- ^ @source@ - 'P.source'
-    -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._source': @source@
+    -> TF.Attr s P.Text -- ^ 'P._target': @target@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> MountsSetting s
 newMountsSetting _source _target _type' =
     MountsSetting'
@@ -1379,8 +1379,8 @@ data PlatformsSetting s = PlatformsSetting'
 
 -- | Construct a new @platforms@ settings value.
 newPlatformsSetting
-    :: TF.Attr s P.Text -- ^ @architecture@ - 'P.architecture'
-    -> TF.Attr s P.Text -- ^ @os@ - 'P.os'
+    :: TF.Attr s P.Text -- ^ 'P._architecture': @architecture@
+    -> TF.Attr s P.Text -- ^ 'P._os': @os@
     -> PlatformsSetting s
 newPlatformsSetting _architecture _os =
     PlatformsSetting'
@@ -1443,8 +1443,8 @@ data PortsSetting s = PortsSetting'
 
 -- | Construct a new @ports@ settings value.
 newPortsSetting
-    :: TF.Attr s P.Int -- ^ @internal@ - 'P.internal'
-    -> TF.Attr s P.Int -- ^ @target_port@ - 'P.targetPort'
+    :: TF.Attr s P.Int -- ^ 'P._internal': @internal@
+    -> TF.Attr s P.Int -- ^ 'P._targetPort': @target_port@
     -> PortsSetting s
 newPortsSetting _internal _targetPort =
     PortsSetting'
@@ -1595,7 +1595,7 @@ data RegistryAuthSetting = RegistryAuthSetting'
 
 -- | Construct a new @registry_auth@ settings value.
 newRegistryAuthSetting
-    :: P.Text -- ^ @address@ - 'P.address'
+    :: P.Text -- ^ 'P._address': @address@
     -> RegistryAuthSetting
 newRegistryAuthSetting _address =
     RegistryAuthSetting'
@@ -2036,8 +2036,8 @@ data SecretsSetting s = SecretsSetting'
 
 -- | Construct a new @secrets@ settings value.
 newSecretsSetting
-    :: TF.Attr s P.Text -- ^ @secret_id@ - 'P.secretId'
-    -> TF.Attr s P.Text -- ^ @file_name@ - 'P.fileName'
+    :: TF.Attr s P.Text -- ^ 'P._secretId': @secret_id@
+    -> TF.Attr s P.Text -- ^ 'P._fileName': @file_name@
     -> SecretsSetting s
 newSecretsSetting _secretId _fileName =
     SecretsSetting'
@@ -2092,7 +2092,7 @@ data TaskSpecSetting s = TaskSpecSetting'
 
 -- | Construct a new @task_spec@ settings value.
 newTaskSpecSetting
-    :: TF.Attr s (ContainerSpecSetting s) -- ^ @container_spec@ - 'P.containerSpec'
+    :: TF.Attr s (ContainerSpecSetting s) -- ^ 'P._containerSpec': @container_spec@
     -> TaskSpecSetting s
 newTaskSpecSetting _containerSpec =
     TaskSpecSetting'
@@ -2206,9 +2206,9 @@ data UlimitSetting s = UlimitSetting'
 
 -- | Construct a new @ulimit@ settings value.
 newUlimitSetting
-    :: TF.Attr s P.Int -- ^ @hard@ - 'P.hard'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @soft@ - 'P.soft'
+    :: TF.Attr s P.Int -- ^ 'P._hard': @hard@
+    -> TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Int -- ^ 'P._soft': @soft@
     -> UlimitSetting s
 newUlimitSetting _hard _name _soft =
     UlimitSetting'
@@ -2343,8 +2343,8 @@ data UploadSetting s = UploadSetting'
 
 -- | Construct a new @upload@ settings value.
 newUploadSetting
-    :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
-    -> TF.Attr s P.Text -- ^ @file@ - 'P.file'
+    :: TF.Attr s P.Text -- ^ 'P._content': @content@
+    -> TF.Attr s P.Text -- ^ 'P._file': @file@
     -> UploadSetting s
 newUploadSetting _content _file =
     UploadSetting'

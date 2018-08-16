@@ -17,10 +17,11 @@
 --
 module Terrafomo.Docker.Provider
     (
+    -- * Docker Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** Docker Specific Aliases
+    -- * Docker Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -85,7 +86,7 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @host@ - 'P.host'
+    :: P.Text -- ^ @host@ ('P._host', 'P.host')
     -> Provider
 newProvider _host =
     Provider'
@@ -101,7 +102,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "docker"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ TF.assign "ca_material" <$> _caMaterial
             , TF.assign "cert_material" <$> _certMaterial

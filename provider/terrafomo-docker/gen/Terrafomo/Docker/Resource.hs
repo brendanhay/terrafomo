@@ -88,8 +88,8 @@ data ConfigResource s = ConfigResource'
 
 -- | Define a new @docker_config@ resource value.
 configResource
-    :: TF.Attr s P.Text -- ^ @data@ - 'P.data''
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @data@ ('P._data'', 'P.data'')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ConfigResource s)
 configResource _data' _name =
     TF.unsafeResource "docker_config" TF.validator $
@@ -228,8 +228,8 @@ data ContainerResource s = ContainerResource'
 
 -- | Define a new @docker_container@ resource value.
 containerResource
-    :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @image@ ('P._image', 'P.image')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ContainerResource s)
 containerResource _image _name =
     TF.unsafeResource "docker_container" TF.validator $
@@ -511,7 +511,7 @@ data ImageResource s = ImageResource'
 
 -- | Define a new @docker_image@ resource value.
 imageResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ImageResource s)
 imageResource _name =
     TF.unsafeResource "docker_image" TF.validator $
@@ -573,7 +573,7 @@ data NetworkResource s = NetworkResource'
 
 -- | Define a new @docker_network@ resource value.
 networkResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (NetworkResource s)
 networkResource _name =
     TF.unsafeResource "docker_network" TF.validator $
@@ -647,8 +647,8 @@ data SecretResource s = SecretResource'
 
 -- | Define a new @docker_secret@ resource value.
 secretResource
-    :: TF.Attr s P.Text -- ^ @data@ - 'P.data''
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @data@ ('P._data'', 'P.data'')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (SecretResource s)
 secretResource _data' _name =
     TF.unsafeResource "docker_secret" TF.validator $
@@ -712,8 +712,8 @@ data ServiceResource s = ServiceResource'
 
 -- | Define a new @docker_service@ resource value.
 serviceResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (TaskSpecSetting s) -- ^ @task_spec@ - 'P.taskSpec'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s (TaskSpecSetting s) -- ^ @task_spec@ ('P._taskSpec', 'P.taskSpec')
     -> P.Resource (ServiceResource s)
 serviceResource _name _taskSpec =
     TF.unsafeResource "docker_service" TF.validator $
