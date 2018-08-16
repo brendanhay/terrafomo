@@ -1364,7 +1364,7 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
     , _toPort          :: TF.Attr s P.Int
     -- ^ @to_port@ - (Required, Forces New)
     --
-    , _type'           :: TF.Attr s P.Text
+    , _type'           :: TF.Attr s P.NetworkTraffic
     -- ^ @type@ - (Required, Forces New)
     -- Type of rule, ingress (inbound) or egress (outbound).
     --
@@ -1375,7 +1375,7 @@ securityGroupRuleResource
     -> TF.Attr s P.Int -- ^ @from_port@ - 'P.fromPort'
     -> TF.Attr s P.Int -- ^ @to_port@ - 'P.toPort'
     -> TF.Attr s P.NetworkProtocol -- ^ @protocol@ - 'P.protocol'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    -> TF.Attr s P.NetworkTraffic -- ^ @type@ - 'P.type''
     -> P.Resource (SecurityGroupRuleResource s)
 securityGroupRuleResource _securityGroupId _fromPort _toPort _protocol _type' =
     TF.unsafeResource "aws_security_group_rule" TF.validator $
@@ -1454,9 +1454,9 @@ instance P.HasToPort (SecurityGroupRuleResource s) (TF.Attr s P.Int) where
         P.lens (_toPort :: SecurityGroupRuleResource s -> TF.Attr s P.Int)
                (\s a -> s { _toPort = a } :: SecurityGroupRuleResource s)
 
-instance P.HasType' (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
+instance P.HasType' (SecurityGroupRuleResource s) (TF.Attr s P.NetworkTraffic) where
     type' =
-        P.lens (_type' :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
+        P.lens (_type' :: SecurityGroupRuleResource s -> TF.Attr s P.NetworkTraffic)
                (\s a -> s { _type' = a } :: SecurityGroupRuleResource s)
 
 instance s ~ s' => P.HasComputedSourceSecurityGroupId (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
