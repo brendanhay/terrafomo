@@ -20,6 +20,7 @@ module Terrafomo.RabbitMQ.Provider
     -- * RabbitMQ Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * RabbitMQ Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.RabbitMQ.Settings
 
-import qualified Data.Hashable            as P
-import qualified Data.HashMap.Strict      as P
-import qualified Data.HashMap.Strict      as Map
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Map.Strict          as P
+import qualified Data.Map.Strict          as Map
 import qualified Data.Maybe               as P
 import qualified Data.Monoid              as P
 import qualified Data.Text                as P
@@ -76,7 +76,7 @@ data Provider = Provider'
     , _username   :: P.Text
     -- ^ @username@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: P.Text -- ^ @endpoint@ - 'P.endpoint'
@@ -92,25 +92,22 @@ newProvider _endpoint _password _username =
         , _username = _username
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "cacert_file" <$> _cacertFile
-                  , P.Just $ TF.assign "endpoint" _endpoint
-                  , TF.assign "insecure" <$> _insecure
-                  , P.Just $ TF.assign "password" _password
-                  , P.Just $ TF.assign "username" _username
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  TF.assign "cacert_file" <$> _cacertFile
+        ,  P.Just $ TF.assign "endpoint" _endpoint
+        ,  TF.assign "insecure" <$> _insecure
+        ,  P.Just $ TF.assign "password" _password
+        ,  P.Just $ TF.assign "username" _username
+        ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty

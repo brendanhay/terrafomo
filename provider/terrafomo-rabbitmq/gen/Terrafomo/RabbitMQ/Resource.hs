@@ -54,10 +54,9 @@ import GHC.Base (($))
 
 import Terrafomo.RabbitMQ.Settings
 
-import qualified Data.Hashable               as P
-import qualified Data.HashMap.Strict         as P
-import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Map.Strict             as P
+import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
 import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
@@ -78,7 +77,7 @@ import qualified Terrafomo.Validator         as TF
 -- See the <https://www.terraform.io/docs/providers/rabbitmq/r/binding.html terraform documentation>
 -- for more information.
 data BindingResource s = BindingResource'
-    { _arguments       :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _arguments       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @arguments@ - (Optional, Forces New)
     --
     , _destination     :: TF.Attr s P.Text
@@ -96,7 +95,7 @@ data BindingResource s = BindingResource'
     , _vhost           :: TF.Attr s P.Text
     -- ^ @vhost@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 bindingResource
     :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
@@ -105,7 +104,7 @@ bindingResource
     -> TF.Attr s P.Text -- ^ @vhost@ - 'P.vhost'
     -> P.Resource (BindingResource s)
 bindingResource _destination _destinationType _source _vhost =
-    TF.newResource "rabbitmq_binding" TF.validator $
+    TF.unsafeResource "rabbitmq_binding" P.defaultProvider TF.validator $
         BindingResource'
             { _arguments = TF.Nil
             , _destination = _destination
@@ -128,9 +127,9 @@ instance TF.IsObject (BindingResource s) where
 instance TF.IsValid (BindingResource s) where
     validator = P.mempty
 
-instance P.HasArguments (BindingResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasArguments (BindingResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     arguments =
-        P.lens (_arguments :: BindingResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_arguments :: BindingResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _arguments = a } :: BindingResource s)
 
 instance P.HasDestination (BindingResource s) (TF.Attr s P.Text) where
@@ -169,20 +168,20 @@ data ExchangeResource s = ExchangeResource'
     { _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _settings :: TF.Attr s (ExchangeSettings s)
+    , _settings :: TF.Attr s (SettingsSetting s)
     -- ^ @settings@ - (Required, Forces New)
     --
     , _vhost    :: TF.Attr s P.Text
     -- ^ @vhost@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 exchangeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (ExchangeSettings s) -- ^ @settings@ - 'P.settings'
+    -> TF.Attr s (SettingsSetting s) -- ^ @settings@ - 'P.settings'
     -> P.Resource (ExchangeResource s)
 exchangeResource _name _settings =
-    TF.newResource "rabbitmq_exchange" TF.validator $
+    TF.unsafeResource "rabbitmq_exchange" P.defaultProvider TF.validator $
         ExchangeResource'
             { _name = _name
             , _settings = _settings
@@ -200,7 +199,7 @@ instance TF.IsValid (ExchangeResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_settings"
                   (_settings
-                      :: ExchangeResource s -> TF.Attr s (ExchangeSettings s))
+                      :: ExchangeResource s -> TF.Attr s (SettingsSetting s))
                   TF.validator
 
 instance P.HasName (ExchangeResource s) (TF.Attr s P.Text) where
@@ -208,9 +207,9 @@ instance P.HasName (ExchangeResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ExchangeResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ExchangeResource s)
 
-instance P.HasSettings (ExchangeResource s) (TF.Attr s (ExchangeSettings s)) where
+instance P.HasSettings (ExchangeResource s) (TF.Attr s (SettingsSetting s)) where
     settings =
-        P.lens (_settings :: ExchangeResource s -> TF.Attr s (ExchangeSettings s))
+        P.lens (_settings :: ExchangeResource s -> TF.Attr s (SettingsSetting s))
                (\s a -> s { _settings = a } :: ExchangeResource s)
 
 instance P.HasVhost (ExchangeResource s) (TF.Attr s P.Text) where
@@ -223,7 +222,7 @@ instance P.HasVhost (ExchangeResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/rabbitmq/r/permissions.html terraform documentation>
 -- for more information.
 data PermissionsResource s = PermissionsResource'
-    { _permissions :: TF.Attr s (PermissionsPermissions s)
+    { _permissions :: TF.Attr s (PermissionsSetting s)
     -- ^ @permissions@ - (Required)
     --
     , _user        :: TF.Attr s P.Text
@@ -232,14 +231,14 @@ data PermissionsResource s = PermissionsResource'
     , _vhost       :: TF.Attr s P.Text
     -- ^ @vhost@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 permissionsResource
-    :: TF.Attr s (PermissionsPermissions s) -- ^ @permissions@ - 'P.permissions'
+    :: TF.Attr s (PermissionsSetting s) -- ^ @permissions@ - 'P.permissions'
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
     -> P.Resource (PermissionsResource s)
 permissionsResource _permissions _user =
-    TF.newResource "rabbitmq_permissions" TF.validator $
+    TF.unsafeResource "rabbitmq_permissions" P.defaultProvider TF.validator $
         PermissionsResource'
             { _permissions = _permissions
             , _user = _user
@@ -257,12 +256,12 @@ instance TF.IsValid (PermissionsResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_permissions"
                   (_permissions
-                      :: PermissionsResource s -> TF.Attr s (PermissionsPermissions s))
+                      :: PermissionsResource s -> TF.Attr s (PermissionsSetting s))
                   TF.validator
 
-instance P.HasPermissions (PermissionsResource s) (TF.Attr s (PermissionsPermissions s)) where
+instance P.HasPermissions (PermissionsResource s) (TF.Attr s (PermissionsSetting s)) where
     permissions =
-        P.lens (_permissions :: PermissionsResource s -> TF.Attr s (PermissionsPermissions s))
+        P.lens (_permissions :: PermissionsResource s -> TF.Attr s (PermissionsSetting s))
                (\s a -> s { _permissions = a } :: PermissionsResource s)
 
 instance P.HasUser (PermissionsResource s) (TF.Attr s P.Text) where
@@ -283,21 +282,21 @@ data PolicyResource s = PolicyResource'
     { _name   :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _policy :: TF.Attr s (PolicyPolicy s)
+    , _policy :: TF.Attr s (PolicySetting s)
     -- ^ @policy@ - (Required)
     --
     , _vhost  :: TF.Attr s P.Text
     -- ^ @vhost@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 policyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (PolicyPolicy s) -- ^ @policy@ - 'P.policy'
+    -> TF.Attr s (PolicySetting s) -- ^ @policy@ - 'P.policy'
     -> TF.Attr s P.Text -- ^ @vhost@ - 'P.vhost'
     -> P.Resource (PolicyResource s)
 policyResource _name _policy _vhost =
-    TF.newResource "rabbitmq_policy" TF.validator $
+    TF.unsafeResource "rabbitmq_policy" P.defaultProvider TF.validator $
         PolicyResource'
             { _name = _name
             , _policy = _policy
@@ -315,7 +314,7 @@ instance TF.IsValid (PolicyResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_policy"
                   (_policy
-                      :: PolicyResource s -> TF.Attr s (PolicyPolicy s))
+                      :: PolicyResource s -> TF.Attr s (PolicySetting s))
                   TF.validator
 
 instance P.HasName (PolicyResource s) (TF.Attr s P.Text) where
@@ -323,9 +322,9 @@ instance P.HasName (PolicyResource s) (TF.Attr s P.Text) where
         P.lens (_name :: PolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: PolicyResource s)
 
-instance P.HasPolicy (PolicyResource s) (TF.Attr s (PolicyPolicy s)) where
+instance P.HasPolicy (PolicyResource s) (TF.Attr s (PolicySetting s)) where
     policy =
-        P.lens (_policy :: PolicyResource s -> TF.Attr s (PolicyPolicy s))
+        P.lens (_policy :: PolicyResource s -> TF.Attr s (PolicySetting s))
                (\s a -> s { _policy = a } :: PolicyResource s)
 
 instance P.HasVhost (PolicyResource s) (TF.Attr s P.Text) where
@@ -341,20 +340,20 @@ data QueueResource s = QueueResource'
     { _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _settings :: TF.Attr s (QueueSettings s)
+    , _settings :: TF.Attr s (SettingsSetting s)
     -- ^ @settings@ - (Required, Forces New)
     --
     , _vhost    :: TF.Attr s P.Text
     -- ^ @vhost@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 queueResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (QueueSettings s) -- ^ @settings@ - 'P.settings'
+    -> TF.Attr s (SettingsSetting s) -- ^ @settings@ - 'P.settings'
     -> P.Resource (QueueResource s)
 queueResource _name _settings =
-    TF.newResource "rabbitmq_queue" TF.validator $
+    TF.unsafeResource "rabbitmq_queue" P.defaultProvider TF.validator $
         QueueResource'
             { _name = _name
             , _settings = _settings
@@ -372,7 +371,7 @@ instance TF.IsValid (QueueResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_settings"
                   (_settings
-                      :: QueueResource s -> TF.Attr s (QueueSettings s))
+                      :: QueueResource s -> TF.Attr s (SettingsSetting s))
                   TF.validator
 
 instance P.HasName (QueueResource s) (TF.Attr s P.Text) where
@@ -380,9 +379,9 @@ instance P.HasName (QueueResource s) (TF.Attr s P.Text) where
         P.lens (_name :: QueueResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: QueueResource s)
 
-instance P.HasSettings (QueueResource s) (TF.Attr s (QueueSettings s)) where
+instance P.HasSettings (QueueResource s) (TF.Attr s (SettingsSetting s)) where
     settings =
-        P.lens (_settings :: QueueResource s -> TF.Attr s (QueueSettings s))
+        P.lens (_settings :: QueueResource s -> TF.Attr s (SettingsSetting s))
                (\s a -> s { _settings = a } :: QueueResource s)
 
 instance P.HasVhost (QueueResource s) (TF.Attr s P.Text) where
@@ -404,14 +403,14 @@ data UserResource s = UserResource'
     , _tags     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 userResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
     -> P.Resource (UserResource s)
 userResource _name _password =
-    TF.newResource "rabbitmq_user" TF.validator $
+    TF.unsafeResource "rabbitmq_user" P.defaultProvider TF.validator $
         UserResource'
             { _name = _name
             , _password = _password
@@ -451,13 +450,13 @@ data VhostResource s = VhostResource'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 vhostResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (VhostResource s)
 vhostResource _name =
-    TF.newResource "rabbitmq_vhost" TF.validator $
+    TF.unsafeResource "rabbitmq_vhost" P.defaultProvider TF.validator $
         VhostResource'
             { _name = _name
             }

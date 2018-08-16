@@ -12,11 +12,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.RabbitMQ
-    ( module Terrafomo.RabbitMQ.Types
-    , module Terrafomo.RabbitMQ.Settings
-    , module Terrafomo.RabbitMQ.Lens
-    , module Terrafomo.RabbitMQ.Resource
+    ( module Terrafomo.RabbitMQ.Lens
     , module Terrafomo.RabbitMQ.Provider
+    , module Terrafomo.RabbitMQ.Resource
+    , module Terrafomo.RabbitMQ.Settings
+    , module Terrafomo.RabbitMQ.Types
     -- * Provider Aliases
     ) where
 
