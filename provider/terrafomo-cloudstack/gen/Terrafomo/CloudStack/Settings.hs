@@ -113,12 +113,12 @@ data ForwardSetting s = ForwardSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newForwardSetting
-    :: TF.Attr s P.Int -- ^ @private_port@ - 'P.privatePort'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    :: TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
+    -> TF.Attr s P.Int -- ^ @private_port@ - 'P.privatePort'
     -> TF.Attr s P.Int -- ^ @public_port@ - 'P.publicPort'
-    -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
+    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> ForwardSetting s
-newForwardSetting _privatePort _protocol _publicPort _virtualMachineId =
+newForwardSetting _virtualMachineId _privatePort _publicPort _protocol =
     ForwardSetting'
         { _privatePort = _privatePort
         , _protocol = _protocol

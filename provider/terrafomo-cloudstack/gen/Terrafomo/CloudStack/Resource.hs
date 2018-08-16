@@ -905,10 +905,10 @@ data NetworkAclResource s = NetworkAclResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 networkAclResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NetworkAclResource s)
-networkAclResource _name _vpcId =
+networkAclResource _vpcId _name =
     TF.unsafeResource "cloudstack_network_acl" TF.validator $
         NetworkAclResource'
             { _name = _name
@@ -1157,14 +1157,14 @@ data PrivateGatewayResource s = PrivateGatewayResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 privateGatewayResource
-    :: TF.Attr s P.Text -- ^ @acl_id@ - 'P.aclId'
+    :: TF.Attr s P.Text -- ^ @ip_address@ - 'P.ipAddress'
     -> TF.Attr s P.Text -- ^ @gateway@ - 'P.gateway'
-    -> TF.Attr s P.Text -- ^ @ip_address@ - 'P.ipAddress'
+    -> TF.Attr s P.Text -- ^ @acl_id@ - 'P.aclId'
+    -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> TF.Attr s P.Text -- ^ @netmask@ - 'P.netmask'
     -> TF.Attr s P.Text -- ^ @vlan@ - 'P.vlan'
-    -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.Resource (PrivateGatewayResource s)
-privateGatewayResource _aclId _gateway _ipAddress _netmask _vlan _vpcId =
+privateGatewayResource _ipAddress _gateway _aclId _vpcId _netmask _vlan =
     TF.unsafeResource "cloudstack_private_gateway" TF.validator $
         PrivateGatewayResource'
             { _aclId = _aclId
@@ -1328,10 +1328,10 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 securityGroupRuleResource
-    :: TF.Attr s [TF.Attr s (RuleSetting s)] -- ^ @rule@ - 'P.rule'
-    -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
+    :: TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
+    -> TF.Attr s [TF.Attr s (RuleSetting s)] -- ^ @rule@ - 'P.rule'
     -> P.Resource (SecurityGroupRuleResource s)
-securityGroupRuleResource _rule _securityGroupId =
+securityGroupRuleResource _securityGroupId _rule =
     TF.unsafeResource "cloudstack_security_group_rule" TF.validator $
         SecurityGroupRuleResource'
             { _parallelism = TF.value 2
@@ -1795,13 +1795,13 @@ data VpnCustomerGatewayResource s = VpnCustomerGatewayResource'
 
 vpnCustomerGatewayResource
     :: TF.Attr s P.Text -- ^ @cidr@ - 'P.cidr'
-    -> TF.Attr s P.Text -- ^ @esp_policy@ - 'P.espPolicy'
     -> TF.Attr s P.Text -- ^ @gateway@ - 'P.gateway'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @esp_policy@ - 'P.espPolicy'
     -> TF.Attr s P.Text -- ^ @ike_policy@ - 'P.ikePolicy'
     -> TF.Attr s P.Text -- ^ @ipsec_psk@ - 'P.ipsecPsk'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (VpnCustomerGatewayResource s)
-vpnCustomerGatewayResource _cidr _espPolicy _gateway _ikePolicy _ipsecPsk _name =
+vpnCustomerGatewayResource _cidr _gateway _name _espPolicy _ikePolicy _ipsecPsk =
     TF.unsafeResource "cloudstack_vpn_customer_gateway" TF.validator $
         VpnCustomerGatewayResource'
             { _cidr = _cidr
