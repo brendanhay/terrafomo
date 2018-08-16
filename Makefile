@@ -19,11 +19,13 @@ default: $(PROVIDERS)
 .PHONY: $(GENERATE)
 
 $(GENERATE):
-	@stack install --nix terrafomo-gen 1>&2
+	@stack build terrafomo-gen 1>&2
 
 clean: $(addsuffix -clean,$(PROVIDERS))
-	rm -f $(GENERATE)
-	rm -rf provider/*/gen provider/*/*.cabal
+	@rm -f $(GENERATE)
+	@rm -f $(shell find provider -type f -name 'package.yaml' | grep -v terrafomo-builtins)
+	@rm -f $(wildcard provider/terrafomo-*/*.cabal)
+	@rm -rf $(wildcard provider/*/gen)
 	@script/generate
 
 format: $(STYLISH)
@@ -39,7 +41,7 @@ commit:
 	@script/commit-packages $(PROVIDERS)
 
 $(STYLISH):
-	stack install --nix stylish-haskell
+	stack build --copy-bins stylish-haskell
 
 $(MODEL_DIR):
 	mkdir -p $@
