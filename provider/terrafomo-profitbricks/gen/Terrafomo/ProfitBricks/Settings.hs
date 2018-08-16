@@ -19,19 +19,19 @@ module Terrafomo.ProfitBricks.Settings
     (
     -- ** firewall
       FirewallSetting (..)
-    , newFirewallSetting
+    , firewallSetting
 
     -- ** nic
     , NicSetting (..)
-    , newNicSetting
+    , nicSetting
 
     -- ** users
     , UsersSetting (..)
-    , newUsersSetting
+    , usersSetting
 
     -- ** volume
     , VolumeSetting (..)
-    , newVolumeSetting
+    , volumeSetting
 
     ) where
 
@@ -94,10 +94,10 @@ data FirewallSetting s = FirewallSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @firewall@ settings value.
-newFirewallSetting
+firewallSetting
     :: TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
     -> FirewallSetting s
-newFirewallSetting _protocol =
+firewallSetting _protocol =
     FirewallSetting'
         { _icmpCode = TF.Nil
         , _icmpType = TF.Nil
@@ -212,10 +212,10 @@ data NicSetting s = NicSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @nic@ settings value.
-newNicSetting
+nicSetting
     :: TF.Attr s P.Int -- ^ 'P._lan': @lan@
     -> NicSetting s
-newNicSetting _lan =
+nicSetting _lan =
     NicSetting'
         { _dhcp = TF.Nil
         , _firewall = TF.Nil
@@ -284,9 +284,9 @@ data UsersSetting s = UsersSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @users@ settings value.
-newUsersSetting
+usersSetting
     :: UsersSetting s
-newUsersSetting =
+usersSetting =
     UsersSetting'
 
 instance TF.IsValue  (UsersSetting s)
@@ -346,12 +346,12 @@ data VolumeSetting s = VolumeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @volume@ settings value.
-newVolumeSetting
+volumeSetting
     :: TF.Attr s P.Text -- ^ 'P._imageName': @image_name@
     -> TF.Attr s P.Int -- ^ 'P._size': @size@
     -> TF.Attr s P.Text -- ^ 'P._diskType': @disk_type@
     -> VolumeSetting s
-newVolumeSetting _imageName _size _diskType =
+volumeSetting _imageName _size _diskType =
     VolumeSetting'
         { _availabilityZone = TF.Nil
         , _bus = TF.Nil
