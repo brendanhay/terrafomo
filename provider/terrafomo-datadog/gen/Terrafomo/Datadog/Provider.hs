@@ -20,7 +20,6 @@ module Terrafomo.Datadog.Provider
     -- * Datadog Provider Datatype
       Provider (..)
     , newProvider
-    , defaultProvider
 
     -- * Datadog Specific Aliases
     , DataSource
@@ -56,7 +55,7 @@ import qualified Terrafomo.Validator     as TF
 type DataSource a = TF.Schema ()               Provider a
 type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
 
--- | The @Datadog@ Terraform provider configuration.
+-- | The @datadog@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/datadog/index.html terraform documentation>
 -- for more information.
@@ -79,19 +78,20 @@ newProvider _apiKey _appKey =
         , _appKey = _appKey
         }
 
-defaultProvider :: TF.Provider (P.Maybe Provider)
-defaultProvider =
-    TF.Provider
-        { _providerType   = TF.Type P.Nothing "provider"
-        , _providerAlias  = P.Nothing
-        , _providerConfig = P.Nothing
-        }
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "datadog"
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} = P.catMaybes
-        [  P.Just $ TF.assign "api_key" _apiKey
-        ,  P.Just $ TF.assign "app_key" _appKey
-        ]
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy Provider)
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , P.Just $ TF.assign "api_key" _apiKey
+                  , P.Just $ TF.assign "app_key" _appKey
+                  ])
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
