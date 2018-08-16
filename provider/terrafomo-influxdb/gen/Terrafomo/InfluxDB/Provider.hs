@@ -17,11 +17,10 @@
 --
 module Terrafomo.InfluxDB.Provider
     (
-    -- * InfluxDB Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * InfluxDB Specific Aliases
+    -- ** InfluxDB Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -84,7 +83,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "influxdb"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "password" <$> _password
             , TF.assign "url" <$> _url

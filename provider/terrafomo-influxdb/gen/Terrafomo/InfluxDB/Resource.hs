@@ -17,7 +17,6 @@
 --
 module Terrafomo.InfluxDB.Resource
     (
-    -- * Resource Datatypes
     -- ** influxdb_continuous_query
       ContinuousQueryResource (..)
     , continuousQueryResource
@@ -72,6 +71,7 @@ data ContinuousQueryResource s = ContinuousQueryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @influxdb_continuous_query@ resource value.
 continuousQueryResource
     :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -126,6 +126,7 @@ data DatabaseResource s = DatabaseResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @influxdb_database@ resource value.
 databaseResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DatabaseResource s)
@@ -174,6 +175,7 @@ data UserResource s = UserResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @influxdb_user@ resource value.
 userResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
