@@ -194,8 +194,8 @@ data ActiveFolderData s = ActiveFolderData'
 
 -- | Define a new @google_active_folder@ datasource value.
 activeFolderData
-    :: TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
-    -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
+    :: TF.Attr s P.Text -- ^ @display_name@ ('P._displayName', 'P.displayName')
+    -> TF.Attr s P.Text -- ^ @parent@ ('P._parent', 'P.parent')
     -> P.DataSource (ActiveFolderData s)
 activeFolderData _displayName _parent =
     TF.unsafeDataSource "google_active_folder" TF.validator $
@@ -326,7 +326,7 @@ data CloudfunctionsFunctionData s = CloudfunctionsFunctionData'
 
 -- | Define a new @google_cloudfunctions_function@ datasource value.
 cloudfunctionsFunctionData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (CloudfunctionsFunctionData s)
 cloudfunctionsFunctionData _name =
     TF.unsafeDataSource "google_cloudfunctions_function" TF.validator $
@@ -412,7 +412,7 @@ data ComputeAddressData s = ComputeAddressData'
 
 -- | Define a new @google_compute_address@ datasource value.
 computeAddressData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ComputeAddressData s)
 computeAddressData _name =
     TF.unsafeDataSource "google_compute_address" TF.validator $
@@ -466,7 +466,7 @@ data ComputeBackendServiceData s = ComputeBackendServiceData'
 
 -- | Define a new @google_compute_backend_service@ datasource value.
 computeBackendServiceData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ComputeBackendServiceData s)
 computeBackendServiceData _name =
     TF.unsafeDataSource "google_compute_backend_service" TF.validator $
@@ -586,7 +586,7 @@ data ComputeForwardingRuleData s = ComputeForwardingRuleData'
 
 -- | Define a new @google_compute_forwarding_rule@ datasource value.
 computeForwardingRuleData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ComputeForwardingRuleData s)
 computeForwardingRuleData _name =
     TF.unsafeDataSource "google_compute_forwarding_rule" TF.validator $
@@ -661,7 +661,7 @@ data ComputeGlobalAddressData s = ComputeGlobalAddressData'
 
 -- | Define a new @google_compute_global_address@ datasource value.
 computeGlobalAddressData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ComputeGlobalAddressData s)
 computeGlobalAddressData _name =
     TF.unsafeDataSource "google_compute_global_address" TF.validator $
@@ -877,7 +877,7 @@ data ComputeNetworkData s = ComputeNetworkData'
 
 -- | Define a new @google_compute_network@ datasource value.
 computeNetworkData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ComputeNetworkData s)
 computeNetworkData _name =
     TF.unsafeDataSource "google_compute_network" TF.validator $
@@ -1017,7 +1017,7 @@ data ComputeSslPolicyData s = ComputeSslPolicyData'
 
 -- | Define a new @google_compute_ssl_policy@ datasource value.
 computeSslPolicyData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ComputeSslPolicyData s)
 computeSslPolicyData _name =
     TF.unsafeDataSource "google_compute_ssl_policy" TF.validator $
@@ -1084,7 +1084,7 @@ data ComputeSubnetworkData s = ComputeSubnetworkData'
 
 -- | Define a new @google_compute_subnetwork@ datasource value.
 computeSubnetworkData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ComputeSubnetworkData s)
 computeSubnetworkData _name =
     TF.unsafeDataSource "google_compute_subnetwork" TF.validator $
@@ -1147,7 +1147,7 @@ data ComputeVpnGatewayData s = ComputeVpnGatewayData'
 
 -- | Define a new @google_compute_vpn_gateway@ datasource value.
 computeVpnGatewayData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ComputeVpnGatewayData s)
 computeVpnGatewayData _name =
     TF.unsafeDataSource "google_compute_vpn_gateway" TF.validator $
@@ -1258,7 +1258,7 @@ data ContainerClusterData s = ContainerClusterData'
 
 -- | Define a new @google_container_cluster@ datasource value.
 containerClusterData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ContainerClusterData s)
 containerClusterData _name =
     TF.unsafeDataSource "google_container_cluster" TF.validator $
@@ -1468,7 +1468,7 @@ data ContainerRegistryImageData s = ContainerRegistryImageData'
 
 -- | Define a new @google_container_registry_image@ datasource value.
 containerRegistryImageData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ContainerRegistryImageData s)
 containerRegistryImageData _name =
     TF.unsafeDataSource "google_container_registry_image" TF.validator $
@@ -1575,7 +1575,7 @@ data DnsManagedZoneData s = DnsManagedZoneData'
 
 -- | Define a new @google_dns_managed_zone@ datasource value.
 dnsManagedZoneData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (DnsManagedZoneData s)
 dnsManagedZoneData _name =
     TF.unsafeDataSource "google_dns_managed_zone" TF.validator $
@@ -1630,7 +1630,7 @@ data FolderData s = FolderData'
 
 -- | Define a new @google_folder@ datasource value.
 folderData
-    :: TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
+    :: TF.Attr s P.Text -- ^ @folder@ ('P._folder', 'P.folder')
     -> P.DataSource (FolderData s)
 folderData _folder =
     TF.unsafeDataSource "google_folder" TF.validator $
@@ -1691,7 +1691,7 @@ data IamPolicyData s = IamPolicyData'
 
 -- | Define a new @google_iam_policy@ datasource value.
 iamPolicyData
-    :: TF.Attr s [TF.Attr s (BindingSetting s)] -- ^ @binding@ - 'P.binding'
+    :: TF.Attr s [TF.Attr s (BindingSetting s)] -- ^ @binding@ ('P._binding', 'P.binding')
     -> P.DataSource (IamPolicyData s)
 iamPolicyData _binding =
     TF.unsafeDataSource "google_iam_policy" TF.validator $
@@ -1733,8 +1733,8 @@ data KmsSecretData s = KmsSecretData'
 
 -- | Define a new @google_kms_secret@ datasource value.
 kmsSecretData
-    :: TF.Attr s P.Text -- ^ @ciphertext@ - 'P.ciphertext'
-    -> TF.Attr s P.Text -- ^ @crypto_key@ - 'P.cryptoKey'
+    :: TF.Attr s P.Text -- ^ @ciphertext@ ('P._ciphertext', 'P.ciphertext')
+    -> TF.Attr s P.Text -- ^ @crypto_key@ ('P._cryptoKey', 'P.cryptoKey')
     -> P.DataSource (KmsSecretData s)
 kmsSecretData _ciphertext _cryptoKey =
     TF.unsafeDataSource "google_kms_secret" TF.validator $
@@ -1933,7 +1933,7 @@ data ServiceAccountData s = ServiceAccountData'
 
 -- | Define a new @google_service_account@ datasource value.
 serviceAccountData
-    :: TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
+    :: TF.Attr s P.Text -- ^ @account_id@ ('P._accountId', 'P.accountId')
     -> P.DataSource (ServiceAccountData s)
 serviceAccountData _accountId =
     TF.unsafeDataSource "google_service_account" TF.validator $
@@ -1994,7 +1994,7 @@ data ServiceAccountKeyData s = ServiceAccountKeyData'
 
 -- | Define a new @google_service_account_key@ datasource value.
 serviceAccountKeyData
-    :: TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
+    :: TF.Attr s P.Text -- ^ @service_account_id@ ('P._serviceAccountId', 'P.serviceAccountId')
     -> P.DataSource (ServiceAccountKeyData s)
 serviceAccountKeyData _serviceAccountId =
     TF.unsafeDataSource "google_service_account_key" TF.validator $
@@ -2074,8 +2074,8 @@ data StorageObjectSignedUrlData s = StorageObjectSignedUrlData'
 
 -- | Define a new @google_storage_object_signed_url@ datasource value.
 storageObjectSignedUrlData
-    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
-    -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
+    :: TF.Attr s P.Text -- ^ @bucket@ ('P._bucket', 'P.bucket')
+    -> TF.Attr s P.Text -- ^ @path@ ('P._path', 'P.path')
     -> P.DataSource (StorageObjectSignedUrlData s)
 storageObjectSignedUrlData _bucket _path =
     TF.unsafeDataSource "google_storage_object_signed_url" TF.validator $

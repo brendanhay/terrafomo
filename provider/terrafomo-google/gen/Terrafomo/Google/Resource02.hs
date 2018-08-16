@@ -198,8 +198,8 @@ data PubsubSubscriptionIamPolicyResource s = PubsubSubscriptionIamPolicyResource
 
 -- | Define a new @google_pubsub_subscription_iam_policy@ resource value.
 pubsubSubscriptionIamPolicyResource
-    :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
-    -> TF.Attr s P.Text -- ^ @subscription@ - 'P.subscription'
+    :: TF.Attr s P.Text -- ^ @policy_data@ ('P._policyData', 'P.policyData')
+    -> TF.Attr s P.Text -- ^ @subscription@ ('P._subscription', 'P.subscription')
     -> P.Resource (PubsubSubscriptionIamPolicyResource s)
 pubsubSubscriptionIamPolicyResource _policyData _subscription =
     TF.unsafeResource "google_pubsub_subscription_iam_policy" TF.validator $
@@ -248,7 +248,7 @@ data PubsubTopicResource s = PubsubTopicResource'
 
 -- | Define a new @google_pubsub_topic@ resource value.
 pubsubTopicResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (PubsubTopicResource s)
 pubsubTopicResource _name =
     TF.unsafeResource "google_pubsub_topic" TF.validator $
@@ -293,9 +293,9 @@ data PubsubTopicIamBindingResource s = PubsubTopicIamBindingResource'
 
 -- | Define a new @google_pubsub_topic_iam_binding@ resource value.
 pubsubTopicIamBindingResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Attr s P.Text -- ^ @topic@ - 'P.topic'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ ('P._members', 'P.members')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
+    -> TF.Attr s P.Text -- ^ @topic@ ('P._topic', 'P.topic')
     -> P.Resource (PubsubTopicIamBindingResource s)
 pubsubTopicIamBindingResource _members _role _topic =
     TF.unsafeResource "google_pubsub_topic_iam_binding" TF.validator $
@@ -357,9 +357,9 @@ data PubsubTopicIamMemberResource s = PubsubTopicIamMemberResource'
 
 -- | Define a new @google_pubsub_topic_iam_member@ resource value.
 pubsubTopicIamMemberResource
-    :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Attr s P.Text -- ^ @topic@ - 'P.topic'
+    :: TF.Attr s P.Text -- ^ @member@ ('P._member', 'P.member')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
+    -> TF.Attr s P.Text -- ^ @topic@ ('P._topic', 'P.topic')
     -> P.Resource (PubsubTopicIamMemberResource s)
 pubsubTopicIamMemberResource _member _role _topic =
     TF.unsafeResource "google_pubsub_topic_iam_member" TF.validator $
@@ -418,8 +418,8 @@ data PubsubTopicIamPolicyResource s = PubsubTopicIamPolicyResource'
 
 -- | Define a new @google_pubsub_topic_iam_policy@ resource value.
 pubsubTopicIamPolicyResource
-    :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
-    -> TF.Attr s P.Text -- ^ @topic@ - 'P.topic'
+    :: TF.Attr s P.Text -- ^ @policy_data@ ('P._policyData', 'P.policyData')
+    -> TF.Attr s P.Text -- ^ @topic@ ('P._topic', 'P.topic')
     -> P.Resource (PubsubTopicIamPolicyResource s)
 pubsubTopicIamPolicyResource _policyData _topic =
     TF.unsafeResource "google_pubsub_topic_iam_policy" TF.validator $
@@ -483,8 +483,8 @@ data RedisInstanceResource s = RedisInstanceResource'
 
 -- | Define a new @google_redis_instance@ resource value.
 redisInstanceResource
-    :: TF.Attr s P.Int -- ^ @memory_size_gb@ - 'P.memorySizeGb'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Int -- ^ @memory_size_gb@ ('P._memorySizeGb', 'P.memorySizeGb')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (RedisInstanceResource s)
 redisInstanceResource _memorySizeGb _name =
     TF.unsafeResource "google_redis_instance" TF.validator $
@@ -597,10 +597,10 @@ data ResourceManagerLienResource s = ResourceManagerLienResource'
 
 -- | Define a new @google_resource_manager_lien@ resource value.
 resourceManagerLienResource
-    :: TF.Attr s P.Text -- ^ @origin@ - 'P.origin'
-    -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
-    -> TF.Attr s P.Text -- ^ @reason@ - 'P.reason'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @restrictions@ - 'P.restrictions'
+    :: TF.Attr s P.Text -- ^ @origin@ ('P._origin', 'P.origin')
+    -> TF.Attr s P.Text -- ^ @parent@ ('P._parent', 'P.parent')
+    -> TF.Attr s P.Text -- ^ @reason@ ('P._reason', 'P.reason')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @restrictions@ ('P._restrictions', 'P.restrictions')
     -> P.Resource (ResourceManagerLienResource s)
 resourceManagerLienResource _origin _parent _reason _restrictions =
     TF.unsafeResource "google_resource_manager_lien" TF.validator $
@@ -666,7 +666,7 @@ data RuntimeconfigConfigResource s = RuntimeconfigConfigResource'
 
 -- | Define a new @google_runtimeconfig_config@ resource value.
 runtimeconfigConfigResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (RuntimeconfigConfigResource s)
 runtimeconfigConfigResource _name =
     TF.unsafeResource "google_runtimeconfig_config" TF.validator $
@@ -727,8 +727,8 @@ data RuntimeconfigVariableResource s = RuntimeconfigVariableResource'
 
 -- | Define a new @google_runtimeconfig_variable@ resource value.
 runtimeconfigVariableResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @parent@ ('P._parent', 'P.parent')
     -> P.Resource (RuntimeconfigVariableResource s)
 runtimeconfigVariableResource _name _parent =
     TF.unsafeResource "google_runtimeconfig_variable" TF.validator $
@@ -805,7 +805,7 @@ data ServiceAccountResource s = ServiceAccountResource'
 
 -- | Define a new @google_service_account@ resource value.
 serviceAccountResource
-    :: TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
+    :: TF.Attr s P.Text -- ^ @account_id@ ('P._accountId', 'P.accountId')
     -> P.Resource (ServiceAccountResource s)
 serviceAccountResource _accountId =
     TF.unsafeResource "google_service_account" TF.validator $
@@ -866,9 +866,9 @@ data ServiceAccountIamBindingResource s = ServiceAccountIamBindingResource'
 
 -- | Define a new @google_service_account_iam_binding@ resource value.
 serviceAccountIamBindingResource
-    :: TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s P.Text -- ^ @service_account_id@ ('P._serviceAccountId', 'P.serviceAccountId')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ ('P._members', 'P.members')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
     -> P.Resource (ServiceAccountIamBindingResource s)
 serviceAccountIamBindingResource _serviceAccountId _members _role =
     TF.unsafeResource "google_service_account_iam_binding" TF.validator $
@@ -927,9 +927,9 @@ data ServiceAccountIamMemberResource s = ServiceAccountIamMemberResource'
 
 -- | Define a new @google_service_account_iam_member@ resource value.
 serviceAccountIamMemberResource
-    :: TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
-    -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s P.Text -- ^ @service_account_id@ ('P._serviceAccountId', 'P.serviceAccountId')
+    -> TF.Attr s P.Text -- ^ @member@ ('P._member', 'P.member')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
     -> P.Resource (ServiceAccountIamMemberResource s)
 serviceAccountIamMemberResource _serviceAccountId _member _role =
     TF.unsafeResource "google_service_account_iam_member" TF.validator $
@@ -985,8 +985,8 @@ data ServiceAccountIamPolicyResource s = ServiceAccountIamPolicyResource'
 
 -- | Define a new @google_service_account_iam_policy@ resource value.
 serviceAccountIamPolicyResource
-    :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
-    -> TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
+    :: TF.Attr s P.Text -- ^ @policy_data@ ('P._policyData', 'P.policyData')
+    -> TF.Attr s P.Text -- ^ @service_account_id@ ('P._serviceAccountId', 'P.serviceAccountId')
     -> P.Resource (ServiceAccountIamPolicyResource s)
 serviceAccountIamPolicyResource _policyData _serviceAccountId =
     TF.unsafeResource "google_service_account_iam_policy" TF.validator $
@@ -1044,7 +1044,7 @@ data ServiceAccountKeyResource s = ServiceAccountKeyResource'
 
 -- | Define a new @google_service_account_key@ resource value.
 serviceAccountKeyResource
-    :: TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
+    :: TF.Attr s P.Text -- ^ @service_account_id@ ('P._serviceAccountId', 'P.serviceAccountId')
     -> P.Resource (ServiceAccountKeyResource s)
 serviceAccountKeyResource _serviceAccountId =
     TF.unsafeResource "google_service_account_key" TF.validator $
@@ -1129,7 +1129,7 @@ data SourcerepoRepositoryResource s = SourcerepoRepositoryResource'
 
 -- | Define a new @google_sourcerepo_repository@ resource value.
 sourcerepoRepositoryResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (SourcerepoRepositoryResource s)
 sourcerepoRepositoryResource _name =
     TF.unsafeResource "google_sourcerepo_repository" TF.validator $
@@ -1180,8 +1180,8 @@ data SpannerDatabaseResource s = SpannerDatabaseResource'
 
 -- | Define a new @google_spanner_database@ resource value.
 spannerDatabaseResource
-    :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @instance@ ('P._instance'', 'P.instance'')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (SpannerDatabaseResource s)
 spannerDatabaseResource _instance' _name =
     TF.unsafeResource "google_spanner_database" TF.validator $
@@ -1246,10 +1246,10 @@ data SpannerDatabaseIamBindingResource s = SpannerDatabaseIamBindingResource'
 
 -- | Define a new @google_spanner_database_iam_binding@ resource value.
 spannerDatabaseIamBindingResource
-    :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
-    -> TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s P.Text -- ^ @database@ ('P._database', 'P.database')
+    -> TF.Attr s P.Text -- ^ @instance@ ('P._instance'', 'P.instance'')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ ('P._members', 'P.members')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
     -> P.Resource (SpannerDatabaseIamBindingResource s)
 spannerDatabaseIamBindingResource _database _instance' _members _role =
     TF.unsafeResource "google_spanner_database_iam_binding" TF.validator $
@@ -1321,10 +1321,10 @@ data SpannerDatabaseIamMemberResource s = SpannerDatabaseIamMemberResource'
 
 -- | Define a new @google_spanner_database_iam_member@ resource value.
 spannerDatabaseIamMemberResource
-    :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
-    -> TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
-    -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s P.Text -- ^ @database@ ('P._database', 'P.database')
+    -> TF.Attr s P.Text -- ^ @instance@ ('P._instance'', 'P.instance'')
+    -> TF.Attr s P.Text -- ^ @member@ ('P._member', 'P.member')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
     -> P.Resource (SpannerDatabaseIamMemberResource s)
 spannerDatabaseIamMemberResource _database _instance' _member _role =
     TF.unsafeResource "google_spanner_database_iam_member" TF.validator $
@@ -1393,9 +1393,9 @@ data SpannerDatabaseIamPolicyResource s = SpannerDatabaseIamPolicyResource'
 
 -- | Define a new @google_spanner_database_iam_policy@ resource value.
 spannerDatabaseIamPolicyResource
-    :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
-    -> TF.Attr s P.Text -- ^ @database@ - 'P.database'
-    -> TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
+    :: TF.Attr s P.Text -- ^ @policy_data@ ('P._policyData', 'P.policyData')
+    -> TF.Attr s P.Text -- ^ @database@ ('P._database', 'P.database')
+    -> TF.Attr s P.Text -- ^ @instance@ ('P._instance'', 'P.instance'')
     -> P.Resource (SpannerDatabaseIamPolicyResource s)
 spannerDatabaseIamPolicyResource _policyData _database _instance' =
     TF.unsafeResource "google_spanner_database_iam_policy" TF.validator $
@@ -1460,8 +1460,8 @@ data SpannerInstanceResource s = SpannerInstanceResource'
 
 -- | Define a new @google_spanner_instance@ resource value.
 spannerInstanceResource
-    :: TF.Attr s P.Text -- ^ @config@ - 'P.config'
-    -> TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
+    :: TF.Attr s P.Text -- ^ @config@ ('P._config', 'P.config')
+    -> TF.Attr s P.Text -- ^ @display_name@ ('P._displayName', 'P.displayName')
     -> P.Resource (SpannerInstanceResource s)
 spannerInstanceResource _config _displayName =
     TF.unsafeResource "google_spanner_instance" TF.validator $
@@ -1533,9 +1533,9 @@ data SpannerInstanceIamBindingResource s = SpannerInstanceIamBindingResource'
 
 -- | Define a new @google_spanner_instance_iam_binding@ resource value.
 spannerInstanceIamBindingResource
-    :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s P.Text -- ^ @instance@ ('P._instance'', 'P.instance'')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ ('P._members', 'P.members')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
     -> P.Resource (SpannerInstanceIamBindingResource s)
 spannerInstanceIamBindingResource _instance' _members _role =
     TF.unsafeResource "google_spanner_instance_iam_binding" TF.validator $
@@ -1597,9 +1597,9 @@ data SpannerInstanceIamMemberResource s = SpannerInstanceIamMemberResource'
 
 -- | Define a new @google_spanner_instance_iam_member@ resource value.
 spannerInstanceIamMemberResource
-    :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
-    -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s P.Text -- ^ @instance@ ('P._instance'', 'P.instance'')
+    -> TF.Attr s P.Text -- ^ @member@ ('P._member', 'P.member')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
     -> P.Resource (SpannerInstanceIamMemberResource s)
 spannerInstanceIamMemberResource _instance' _member _role =
     TF.unsafeResource "google_spanner_instance_iam_member" TF.validator $
@@ -1658,8 +1658,8 @@ data SpannerInstanceIamPolicyResource s = SpannerInstanceIamPolicyResource'
 
 -- | Define a new @google_spanner_instance_iam_policy@ resource value.
 spannerInstanceIamPolicyResource
-    :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
-    -> TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
+    :: TF.Attr s P.Text -- ^ @policy_data@ ('P._policyData', 'P.policyData')
+    -> TF.Attr s P.Text -- ^ @instance@ ('P._instance'', 'P.instance'')
     -> P.Resource (SpannerInstanceIamPolicyResource s)
 spannerInstanceIamPolicyResource _policyData _instance' =
     TF.unsafeResource "google_spanner_instance_iam_policy" TF.validator $
@@ -1711,8 +1711,8 @@ data SqlDatabaseResource s = SqlDatabaseResource'
 
 -- | Define a new @google_sql_database@ resource value.
 sqlDatabaseResource
-    :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @instance@ ('P._instance'', 'P.instance'')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (SqlDatabaseResource s)
 sqlDatabaseResource _instance' _name =
     TF.unsafeResource "google_sql_database" TF.validator $
@@ -1773,7 +1773,7 @@ data SqlDatabaseInstanceResource s = SqlDatabaseInstanceResource'
 
 -- | Define a new @google_sql_database_instance@ resource value.
 sqlDatabaseInstanceResource
-    :: TF.Attr s (SettingsSetting s) -- ^ @settings@ - 'P.settings'
+    :: TF.Attr s (SettingsSetting s) -- ^ @settings@ ('P._settings', 'P.settings')
     -> P.Resource (SqlDatabaseInstanceResource s)
 sqlDatabaseInstanceResource _settings =
     TF.unsafeResource "google_sql_database_instance" TF.validator $
@@ -1863,8 +1863,8 @@ data SqlUserResource s = SqlUserResource'
 
 -- | Define a new @google_sql_user@ resource value.
 sqlUserResource
-    :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @instance@ ('P._instance'', 'P.instance'')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (SqlUserResource s)
 sqlUserResource _instance' _name =
     TF.unsafeResource "google_sql_user" TF.validator $
@@ -1954,7 +1954,7 @@ data StorageBucketResource s = StorageBucketResource'
 
 -- | Define a new @google_storage_bucket@ resource value.
 storageBucketResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (StorageBucketResource s)
 storageBucketResource _name =
     TF.unsafeResource "google_storage_bucket" TF.validator $
@@ -2083,7 +2083,7 @@ data StorageBucketAclResource s = StorageBucketAclResource'
 
 -- | Define a new @google_storage_bucket_acl@ resource value.
 storageBucketAclResource
-    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
+    :: TF.Attr s P.Text -- ^ @bucket@ ('P._bucket', 'P.bucket')
     -> P.Resource (StorageBucketAclResource s)
 storageBucketAclResource _bucket =
     TF.unsafeResource "google_storage_bucket_acl" TF.validator $
@@ -2142,9 +2142,9 @@ data StorageBucketIamBindingResource s = StorageBucketIamBindingResource'
 
 -- | Define a new @google_storage_bucket_iam_binding@ resource value.
 storageBucketIamBindingResource
-    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s P.Text -- ^ @bucket@ ('P._bucket', 'P.bucket')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ ('P._members', 'P.members')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
     -> P.Resource (StorageBucketIamBindingResource s)
 storageBucketIamBindingResource _bucket _members _role =
     TF.unsafeResource "google_storage_bucket_iam_binding" TF.validator $
@@ -2203,9 +2203,9 @@ data StorageBucketIamMemberResource s = StorageBucketIamMemberResource'
 
 -- | Define a new @google_storage_bucket_iam_member@ resource value.
 storageBucketIamMemberResource
-    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
-    -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s P.Text -- ^ @bucket@ ('P._bucket', 'P.bucket')
+    -> TF.Attr s P.Text -- ^ @member@ ('P._member', 'P.member')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
     -> P.Resource (StorageBucketIamMemberResource s)
 storageBucketIamMemberResource _bucket _member _role =
     TF.unsafeResource "google_storage_bucket_iam_member" TF.validator $
@@ -2261,8 +2261,8 @@ data StorageBucketIamPolicyResource s = StorageBucketIamPolicyResource'
 
 -- | Define a new @google_storage_bucket_iam_policy@ resource value.
 storageBucketIamPolicyResource
-    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
-    -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
+    :: TF.Attr s P.Text -- ^ @bucket@ ('P._bucket', 'P.bucket')
+    -> TF.Attr s P.Text -- ^ @policy_data@ ('P._policyData', 'P.policyData')
     -> P.Resource (StorageBucketIamPolicyResource s)
 storageBucketIamPolicyResource _bucket _policyData =
     TF.unsafeResource "google_storage_bucket_iam_policy" TF.validator $
@@ -2341,8 +2341,8 @@ data StorageBucketObjectResource s = StorageBucketObjectResource'
 
 -- | Define a new @google_storage_bucket_object@ resource value.
 storageBucketObjectResource
-    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @bucket@ ('P._bucket', 'P.bucket')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (StorageBucketObjectResource s)
 storageBucketObjectResource _bucket _name =
     TF.unsafeResource "google_storage_bucket_object" TF.validator $
@@ -2464,7 +2464,7 @@ data StorageDefaultObjectAclResource s = StorageDefaultObjectAclResource'
 
 -- | Define a new @google_storage_default_object_acl@ resource value.
 storageDefaultObjectAclResource
-    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
+    :: TF.Attr s P.Text -- ^ @bucket@ ('P._bucket', 'P.bucket')
     -> P.Resource (StorageDefaultObjectAclResource s)
 storageDefaultObjectAclResource _bucket =
     TF.unsafeResource "google_storage_default_object_acl" TF.validator $
@@ -2518,9 +2518,9 @@ data StorageNotificationResource s = StorageNotificationResource'
 
 -- | Define a new @google_storage_notification@ resource value.
 storageNotificationResource
-    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
-    -> TF.Attr s P.Text -- ^ @payload_format@ - 'P.payloadFormat'
-    -> TF.Attr s P.Text -- ^ @topic@ - 'P.topic'
+    :: TF.Attr s P.Text -- ^ @bucket@ ('P._bucket', 'P.bucket')
+    -> TF.Attr s P.Text -- ^ @payload_format@ ('P._payloadFormat', 'P.payloadFormat')
+    -> TF.Attr s P.Text -- ^ @topic@ ('P._topic', 'P.topic')
     -> P.Resource (StorageNotificationResource s)
 storageNotificationResource _bucket _payloadFormat _topic =
     TF.unsafeResource "google_storage_notification" TF.validator $
@@ -2600,8 +2600,8 @@ data StorageObjectAclResource s = StorageObjectAclResource'
 
 -- | Define a new @google_storage_object_acl@ resource value.
 storageObjectAclResource
-    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
-    -> TF.Attr s P.Text -- ^ @object@ - 'P.object'
+    :: TF.Attr s P.Text -- ^ @bucket@ ('P._bucket', 'P.bucket')
+    -> TF.Attr s P.Text -- ^ @object@ ('P._object', 'P.object')
     -> P.Resource (StorageObjectAclResource s)
 storageObjectAclResource _bucket _object =
     TF.unsafeResource "google_storage_object_acl" TF.validator $

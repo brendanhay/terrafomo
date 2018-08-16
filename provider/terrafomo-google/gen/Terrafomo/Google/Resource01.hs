@@ -470,7 +470,7 @@ data BigqueryDatasetResource s = BigqueryDatasetResource'
 
 -- | Define a new @google_bigquery_dataset@ resource value.
 bigqueryDatasetResource
-    :: TF.Attr s P.Text -- ^ @dataset_id@ - 'P.datasetId'
+    :: TF.Attr s P.Text -- ^ @dataset_id@ ('P._datasetId', 'P.datasetId')
     -> P.Resource (BigqueryDatasetResource s)
 bigqueryDatasetResource _datasetId =
     TF.unsafeResource "google_bigquery_dataset" TF.validator $
@@ -574,8 +574,8 @@ data BigqueryTableResource s = BigqueryTableResource'
 
 -- | Define a new @google_bigquery_table@ resource value.
 bigqueryTableResource
-    :: TF.Attr s P.Text -- ^ @dataset_id@ - 'P.datasetId'
-    -> TF.Attr s P.Text -- ^ @table_id@ - 'P.tableId'
+    :: TF.Attr s P.Text -- ^ @dataset_id@ ('P._datasetId', 'P.datasetId')
+    -> TF.Attr s P.Text -- ^ @table_id@ ('P._tableId', 'P.tableId')
     -> P.Resource (BigqueryTableResource s)
 bigqueryTableResource _datasetId _tableId =
     TF.unsafeResource "google_bigquery_table" TF.validator $
@@ -709,8 +709,8 @@ data BigtableInstanceResource s = BigtableInstanceResource'
 
 -- | Define a new @google_bigtable_instance@ resource value.
 bigtableInstanceResource
-    :: TF.Attr s P.Text -- ^ @cluster_id@ - 'P.clusterId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @cluster_id@ ('P._clusterId', 'P.clusterId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (BigtableInstanceResource s)
 bigtableInstanceResource _clusterId _name =
     TF.unsafeResource "google_bigtable_instance" TF.validator $
@@ -789,8 +789,8 @@ data BigtableTableResource s = BigtableTableResource'
 
 -- | Define a new @google_bigtable_table@ resource value.
 bigtableTableResource
-    :: TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @instance_name@ ('P._instanceName', 'P.instanceName')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (BigtableTableResource s)
 bigtableTableResource _instanceName _name =
     TF.unsafeResource "google_bigtable_table" TF.validator $
@@ -996,9 +996,9 @@ data CloudfunctionsFunctionResource s = CloudfunctionsFunctionResource'
 
 -- | Define a new @google_cloudfunctions_function@ resource value.
 cloudfunctionsFunctionResource
-    :: TF.Attr s P.Text -- ^ @source_archive_bucket@ - 'P.sourceArchiveBucket'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @source_archive_object@ - 'P.sourceArchiveObject'
+    :: TF.Attr s P.Text -- ^ @source_archive_bucket@ ('P._sourceArchiveBucket', 'P.sourceArchiveBucket')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @source_archive_object@ ('P._sourceArchiveObject', 'P.sourceArchiveObject')
     -> P.Resource (CloudfunctionsFunctionResource s)
 cloudfunctionsFunctionResource _sourceArchiveBucket _name _sourceArchiveObject =
     TF.unsafeResource "google_cloudfunctions_function" TF.validator $
@@ -1156,7 +1156,7 @@ data CloudiotRegistryResource s = CloudiotRegistryResource'
 
 -- | Define a new @google_cloudiot_registry@ resource value.
 cloudiotRegistryResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (CloudiotRegistryResource s)
 cloudiotRegistryResource _name =
     TF.unsafeResource "google_cloudiot_registry" TF.validator $
@@ -1242,7 +1242,7 @@ data ComputeAddressResource s = ComputeAddressResource'
 
 -- | Define a new @google_compute_address@ resource value.
 computeAddressResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeAddressResource s)
 computeAddressResource _name =
     TF.unsafeResource "google_compute_address" TF.validator $
@@ -1335,9 +1335,9 @@ data ComputeAutoscalerResource s = ComputeAutoscalerResource'
 
 -- | Define a new @google_compute_autoscaler@ resource value.
 computeAutoscalerResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (AutoscalingPolicySetting s) -- ^ @autoscaling_policy@ - 'P.autoscalingPolicy'
-    -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s (AutoscalingPolicySetting s) -- ^ @autoscaling_policy@ ('P._autoscalingPolicy', 'P.autoscalingPolicy')
+    -> TF.Attr s P.Text -- ^ @target@ ('P._target', 'P.target')
     -> P.Resource (ComputeAutoscalerResource s)
 computeAutoscalerResource _name _autoscalingPolicy _target =
     TF.unsafeResource "google_compute_autoscaler" TF.validator $
@@ -1419,8 +1419,8 @@ data ComputeBackendBucketResource s = ComputeBackendBucketResource'
 
 -- | Define a new @google_compute_backend_bucket@ resource value.
 computeBackendBucketResource
-    :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @bucket_name@ ('P._bucketName', 'P.bucketName')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeBackendBucketResource s)
 computeBackendBucketResource _bucketName _name =
     TF.unsafeResource "google_compute_backend_bucket" TF.validator $
@@ -1513,8 +1513,8 @@ data ComputeBackendServiceResource s = ComputeBackendServiceResource'
 
 -- | Define a new @google_compute_backend_service@ resource value.
 computeBackendServiceResource
-    :: TF.Attr s P.Text -- ^ @health_checks@ - 'P.healthChecks'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @health_checks@ ('P._healthChecks', 'P.healthChecks')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeBackendServiceResource s)
 computeBackendServiceResource _healthChecks _name =
     TF.unsafeResource "google_compute_backend_service" TF.validator $
@@ -1665,7 +1665,7 @@ data ComputeDiskResource s = ComputeDiskResource'
 
 -- | Define a new @google_compute_disk@ resource value.
 computeDiskResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeDiskResource s)
 computeDiskResource _name =
     TF.unsafeResource "google_compute_disk" TF.validator $
@@ -1854,8 +1854,8 @@ data ComputeFirewallResource s = ComputeFirewallResource'
 
 -- | Define a new @google_compute_firewall@ resource value.
 computeFirewallResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @network@ ('P._network', 'P.network')
     -> P.Resource (ComputeFirewallResource s)
 computeFirewallResource _name _network =
     TF.unsafeResource "google_compute_firewall" TF.validator $
@@ -2034,7 +2034,7 @@ data ComputeForwardingRuleResource s = ComputeForwardingRuleResource'
 
 -- | Define a new @google_compute_forwarding_rule@ resource value.
 computeForwardingRuleResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeForwardingRuleResource s)
 computeForwardingRuleResource _name =
     TF.unsafeResource "google_compute_forwarding_rule" TF.validator $
@@ -2175,7 +2175,7 @@ data ComputeGlobalAddressResource s = ComputeGlobalAddressResource'
 
 -- | Define a new @google_compute_global_address@ resource value.
 computeGlobalAddressResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeGlobalAddressResource s)
 computeGlobalAddressResource _name =
     TF.unsafeResource "google_compute_global_address" TF.validator $
@@ -2265,8 +2265,8 @@ data ComputeGlobalForwardingRuleResource s = ComputeGlobalForwardingRuleResource
 
 -- | Define a new @google_compute_global_forwarding_rule@ resource value.
 computeGlobalForwardingRuleResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @target@ ('P._target', 'P.target')
     -> P.Resource (ComputeGlobalForwardingRuleResource s)
 computeGlobalForwardingRuleResource _name _target =
     TF.unsafeResource "google_compute_global_forwarding_rule" TF.validator $
@@ -2406,7 +2406,7 @@ data ComputeHealthCheckResource s = ComputeHealthCheckResource'
 
 -- | Define a new @google_compute_health_check@ resource value.
 computeHealthCheckResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeHealthCheckResource s)
 computeHealthCheckResource _name =
     TF.unsafeResource "google_compute_health_check" TF.validator $
@@ -2572,7 +2572,7 @@ data ComputeHttpHealthCheckResource s = ComputeHttpHealthCheckResource'
 
 -- | Define a new @google_compute_http_health_check@ resource value.
 computeHttpHealthCheckResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeHttpHealthCheckResource s)
 computeHttpHealthCheckResource _name =
     TF.unsafeResource "google_compute_http_health_check" TF.validator $
@@ -2697,7 +2697,7 @@ data ComputeHttpsHealthCheckResource s = ComputeHttpsHealthCheckResource'
 
 -- | Define a new @google_compute_https_health_check@ resource value.
 computeHttpsHealthCheckResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeHttpsHealthCheckResource s)
 computeHttpsHealthCheckResource _name =
     TF.unsafeResource "google_compute_https_health_check" TF.validator $
@@ -2813,7 +2813,7 @@ data ComputeImageResource s = ComputeImageResource'
 
 -- | Define a new @google_compute_image@ resource value.
 computeImageResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeImageResource s)
 computeImageResource _name =
     TF.unsafeResource "google_compute_image" TF.validator $
@@ -2951,10 +2951,10 @@ data ComputeInstanceResource s = ComputeInstanceResource'
 
 -- | Define a new @google_compute_instance@ resource value.
 computeInstanceResource
-    :: TF.Attr s (BootDiskSetting s) -- ^ @boot_disk@ - 'P.bootDisk'
-    -> TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)] -- ^ @network_interface@ - 'P.networkInterface'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @machine_type@ - 'P.machineType'
+    :: TF.Attr s (BootDiskSetting s) -- ^ @boot_disk@ ('P._bootDisk', 'P.bootDisk')
+    -> TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)] -- ^ @network_interface@ ('P._networkInterface', 'P.networkInterface')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @machine_type@ ('P._machineType', 'P.machineType')
     -> P.Resource (ComputeInstanceResource s)
 computeInstanceResource _bootDisk _networkInterface _name _machineType =
     TF.unsafeResource "google_compute_instance" TF.validator $
@@ -3150,8 +3150,8 @@ data ComputeInstanceFromTemplateResource s = ComputeInstanceFromTemplateResource
 
 -- | Define a new @google_compute_instance_from_template@ resource value.
 computeInstanceFromTemplateResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @source_instance_template@ - 'P.sourceInstanceTemplate'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @source_instance_template@ ('P._sourceInstanceTemplate', 'P.sourceInstanceTemplate')
     -> P.Resource (ComputeInstanceFromTemplateResource s)
 computeInstanceFromTemplateResource _name _sourceInstanceTemplate =
     TF.unsafeResource "google_compute_instance_from_template" TF.validator $
@@ -3275,7 +3275,7 @@ data ComputeInstanceGroupResource s = ComputeInstanceGroupResource'
 
 -- | Define a new @google_compute_instance_group@ resource value.
 computeInstanceGroupResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeInstanceGroupResource s)
 computeInstanceGroupResource _name =
     TF.unsafeResource "google_compute_instance_group" TF.validator $
@@ -3370,8 +3370,8 @@ data ComputeInstanceGroupManagerResource s = ComputeInstanceGroupManagerResource
 
 -- | Define a new @google_compute_instance_group_manager@ resource value.
 computeInstanceGroupManagerResource
-    :: TF.Attr s P.Text -- ^ @base_instance_name@ - 'P.baseInstanceName'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @base_instance_name@ ('P._baseInstanceName', 'P.baseInstanceName')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeInstanceGroupManagerResource s)
 computeInstanceGroupManagerResource _baseInstanceName _name =
     TF.unsafeResource "google_compute_instance_group_manager" TF.validator $
@@ -3541,8 +3541,8 @@ data ComputeInstanceTemplateResource s = ComputeInstanceTemplateResource'
 
 -- | Define a new @google_compute_instance_template@ resource value.
 computeInstanceTemplateResource
-    :: TF.Attr s [TF.Attr s (DiskSetting s)] -- ^ @disk@ - 'P.disk'
-    -> TF.Attr s P.Text -- ^ @machine_type@ - 'P.machineType'
+    :: TF.Attr s [TF.Attr s (DiskSetting s)] -- ^ @disk@ ('P._disk', 'P.disk')
+    -> TF.Attr s P.Text -- ^ @machine_type@ ('P._machineType', 'P.machineType')
     -> P.Resource (ComputeInstanceTemplateResource s)
 computeInstanceTemplateResource _disk _machineType =
     TF.unsafeResource "google_compute_instance_template" TF.validator $
@@ -3710,7 +3710,7 @@ data ComputeNetworkResource s = ComputeNetworkResource'
 
 -- | Define a new @google_compute_network@ resource value.
 computeNetworkResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeNetworkResource s)
 computeNetworkResource _name =
     TF.unsafeResource "google_compute_network" TF.validator $
@@ -3781,9 +3781,9 @@ data ComputeNetworkPeeringResource s = ComputeNetworkPeeringResource'
 
 -- | Define a new @google_compute_network_peering@ resource value.
 computeNetworkPeeringResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
-    -> TF.Attr s P.Text -- ^ @peer_network@ - 'P.peerNetwork'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @network@ ('P._network', 'P.network')
+    -> TF.Attr s P.Text -- ^ @peer_network@ ('P._peerNetwork', 'P.peerNetwork')
     -> P.Resource (ComputeNetworkPeeringResource s)
 computeNetworkPeeringResource _name _network _peerNetwork =
     TF.unsafeResource "google_compute_network_peering" TF.validator $
@@ -3846,7 +3846,7 @@ data ComputeProjectMetadataResource s = ComputeProjectMetadataResource'
 
 -- | Define a new @google_compute_project_metadata@ resource value.
 computeProjectMetadataResource
-    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @metadata@ - 'P.metadata'
+    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @metadata@ ('P._metadata', 'P.metadata')
     -> P.Resource (ComputeProjectMetadataResource s)
 computeProjectMetadataResource _metadata =
     TF.unsafeResource "google_compute_project_metadata" TF.validator $
@@ -3888,8 +3888,8 @@ data ComputeProjectMetadataItemResource s = ComputeProjectMetadataItemResource'
 
 -- | Define a new @google_compute_project_metadata_item@ resource value.
 computeProjectMetadataItemResource
-    :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
+    :: TF.Attr s P.Text -- ^ @key@ ('P._key', 'P.key')
+    -> TF.Attr s P.Text -- ^ @value@ ('P._value', 'P.value')
     -> P.Resource (ComputeProjectMetadataItemResource s)
 computeProjectMetadataItemResource _key _value =
     TF.unsafeResource "google_compute_project_metadata_item" TF.validator $
@@ -3944,9 +3944,9 @@ data ComputeRegionAutoscalerResource s = ComputeRegionAutoscalerResource'
 
 -- | Define a new @google_compute_region_autoscaler@ resource value.
 computeRegionAutoscalerResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (AutoscalingPolicySetting s) -- ^ @autoscaling_policy@ - 'P.autoscalingPolicy'
-    -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s (AutoscalingPolicySetting s) -- ^ @autoscaling_policy@ ('P._autoscalingPolicy', 'P.autoscalingPolicy')
+    -> TF.Attr s P.Text -- ^ @target@ ('P._target', 'P.target')
     -> P.Resource (ComputeRegionAutoscalerResource s)
 computeRegionAutoscalerResource _name _autoscalingPolicy _target =
     TF.unsafeResource "google_compute_region_autoscaler" TF.validator $
@@ -4031,8 +4031,8 @@ data ComputeRegionBackendServiceResource s = ComputeRegionBackendServiceResource
 
 -- | Define a new @google_compute_region_backend_service@ resource value.
 computeRegionBackendServiceResource
-    :: TF.Attr s P.Text -- ^ @health_checks@ - 'P.healthChecks'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @health_checks@ ('P._healthChecks', 'P.healthChecks')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeRegionBackendServiceResource s)
 computeRegionBackendServiceResource _healthChecks _name =
     TF.unsafeResource "google_compute_region_backend_service" TF.validator $
@@ -4138,8 +4138,8 @@ data ComputeRegionDiskResource s = ComputeRegionDiskResource'
 
 -- | Define a new @google_compute_region_disk@ resource value.
 computeRegionDiskResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @replica_zones@ - 'P.replicaZones'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @replica_zones@ ('P._replicaZones', 'P.replicaZones')
     -> P.Resource (ComputeRegionDiskResource s)
 computeRegionDiskResource _name _replicaZones =
     TF.unsafeResource "google_compute_region_disk" TF.validator $
@@ -4292,9 +4292,9 @@ data ComputeRegionInstanceGroupManagerResource s = ComputeRegionInstanceGroupMan
 
 -- | Define a new @google_compute_region_instance_group_manager@ resource value.
 computeRegionInstanceGroupManagerResource
-    :: TF.Attr s P.Text -- ^ @base_instance_name@ - 'P.baseInstanceName'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
+    :: TF.Attr s P.Text -- ^ @base_instance_name@ ('P._baseInstanceName', 'P.baseInstanceName')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @region@ ('P._region', 'P.region')
     -> P.Resource (ComputeRegionInstanceGroupManagerResource s)
 computeRegionInstanceGroupManagerResource _baseInstanceName _name _region =
     TF.unsafeResource "google_compute_region_instance_group_manager" TF.validator $
@@ -4459,9 +4459,9 @@ data ComputeRouteResource s = ComputeRouteResource'
 
 -- | Define a new @google_compute_route@ resource value.
 computeRouteResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
-    -> TF.Attr s P.Text -- ^ @dest_range@ - 'P.destRange'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @network@ ('P._network', 'P.network')
+    -> TF.Attr s P.Text -- ^ @dest_range@ ('P._destRange', 'P.destRange')
     -> P.Resource (ComputeRouteResource s)
 computeRouteResource _name _network _destRange =
     TF.unsafeResource "google_compute_route" TF.validator $
@@ -4585,8 +4585,8 @@ data ComputeRouterResource s = ComputeRouterResource'
 
 -- | Define a new @google_compute_router@ resource value.
 computeRouterResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @network@ ('P._network', 'P.network')
     -> P.Resource (ComputeRouterResource s)
 computeRouterResource _name _network =
     TF.unsafeResource "google_compute_router" TF.validator $
@@ -4668,9 +4668,9 @@ data ComputeRouterInterfaceResource s = ComputeRouterInterfaceResource'
 
 -- | Define a new @google_compute_router_interface@ resource value.
 computeRouterInterfaceResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @router@ - 'P.router'
-    -> TF.Attr s P.Text -- ^ @vpn_tunnel@ - 'P.vpnTunnel'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @router@ ('P._router', 'P.router')
+    -> TF.Attr s P.Text -- ^ @vpn_tunnel@ ('P._vpnTunnel', 'P.vpnTunnel')
     -> P.Resource (ComputeRouterInterfaceResource s)
 computeRouterInterfaceResource _name _router _vpnTunnel =
     TF.unsafeResource "google_compute_router_interface" TF.validator $
@@ -4748,10 +4748,10 @@ data ComputeRouterPeerResource s = ComputeRouterPeerResource'
 
 -- | Define a new @google_compute_router_peer@ resource value.
 computeRouterPeerResource
-    :: TF.Attr s P.Int -- ^ @peer_asn@ - 'P.peerAsn'
-    -> TF.Attr s P.Text -- ^ @interface@ - 'P.interface'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @router@ - 'P.router'
+    :: TF.Attr s P.Int -- ^ @peer_asn@ ('P._peerAsn', 'P.peerAsn')
+    -> TF.Attr s P.Text -- ^ @interface@ ('P._interface', 'P.interface')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @router@ ('P._router', 'P.router')
     -> P.Resource (ComputeRouterPeerResource s)
 computeRouterPeerResource _peerAsn _interface _name _router =
     TF.unsafeResource "google_compute_router_peer" TF.validator $
@@ -4834,7 +4834,7 @@ data ComputeSecurityPolicyResource s = ComputeSecurityPolicyResource'
 
 -- | Define a new @google_compute_security_policy@ resource value.
 computeSecurityPolicyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeSecurityPolicyResource s)
 computeSecurityPolicyResource _name =
     TF.unsafeResource "google_compute_security_policy" TF.validator $
@@ -4889,7 +4889,7 @@ data ComputeSharedVpcHostProjectResource s = ComputeSharedVpcHostProjectResource
 
 -- | Define a new @google_compute_shared_vpc_host_project@ resource value.
 computeSharedVpcHostProjectResource
-    :: TF.Attr s P.Text -- ^ @project@ - 'P.project'
+    :: TF.Attr s P.Text -- ^ @project@ ('P._project', 'P.project')
     -> P.Resource (ComputeSharedVpcHostProjectResource s)
 computeSharedVpcHostProjectResource _project =
     TF.unsafeResource "google_compute_shared_vpc_host_project" TF.validator $
@@ -4928,8 +4928,8 @@ data ComputeSharedVpcServiceProjectResource s = ComputeSharedVpcServiceProjectRe
 
 -- | Define a new @google_compute_shared_vpc_service_project@ resource value.
 computeSharedVpcServiceProjectResource
-    :: TF.Attr s P.Text -- ^ @host_project@ - 'P.hostProject'
-    -> TF.Attr s P.Text -- ^ @service_project@ - 'P.serviceProject'
+    :: TF.Attr s P.Text -- ^ @host_project@ ('P._hostProject', 'P.hostProject')
+    -> TF.Attr s P.Text -- ^ @service_project@ ('P._serviceProject', 'P.serviceProject')
     -> P.Resource (ComputeSharedVpcServiceProjectResource s)
 computeSharedVpcServiceProjectResource _hostProject _serviceProject =
     TF.unsafeResource "google_compute_shared_vpc_service_project" TF.validator $
@@ -4984,8 +4984,8 @@ data ComputeSnapshotResource s = ComputeSnapshotResource'
 
 -- | Define a new @google_compute_snapshot@ resource value.
 computeSnapshotResource
-    :: TF.Attr s P.Text -- ^ @source_disk@ - 'P.sourceDisk'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @source_disk@ ('P._sourceDisk', 'P.sourceDisk')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeSnapshotResource s)
 computeSnapshotResource _sourceDisk _name =
     TF.unsafeResource "google_compute_snapshot" TF.validator $
@@ -5076,8 +5076,8 @@ data ComputeSslCertificateResource s = ComputeSslCertificateResource'
 
 -- | Define a new @google_compute_ssl_certificate@ resource value.
 computeSslCertificateResource
-    :: TF.Attr s P.Text -- ^ @certificate@ - 'P.certificate'
-    -> TF.Attr s P.Text -- ^ @private_key@ - 'P.privateKey'
+    :: TF.Attr s P.Text -- ^ @certificate@ ('P._certificate', 'P.certificate')
+    -> TF.Attr s P.Text -- ^ @private_key@ ('P._privateKey', 'P.privateKey')
     -> P.Resource (ComputeSslCertificateResource s)
 computeSslCertificateResource _certificate _privateKey =
     TF.unsafeResource "google_compute_ssl_certificate" TF.validator $
@@ -5154,7 +5154,7 @@ data ComputeSslPolicyResource s = ComputeSslPolicyResource'
 
 -- | Define a new @google_compute_ssl_policy@ resource value.
 computeSslPolicyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeSslPolicyResource s)
 computeSslPolicyResource _name =
     TF.unsafeResource "google_compute_ssl_policy" TF.validator $
@@ -5248,9 +5248,9 @@ data ComputeSubnetworkResource s = ComputeSubnetworkResource'
 
 -- | Define a new @google_compute_subnetwork@ resource value.
 computeSubnetworkResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
-    -> TF.Attr s P.Text -- ^ @ip_cidr_range@ - 'P.ipCidrRange'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @network@ ('P._network', 'P.network')
+    -> TF.Attr s P.Text -- ^ @ip_cidr_range@ ('P._ipCidrRange', 'P.ipCidrRange')
     -> P.Resource (ComputeSubnetworkResource s)
 computeSubnetworkResource _name _network _ipCidrRange =
     TF.unsafeResource "google_compute_subnetwork" TF.validator $
@@ -5348,9 +5348,9 @@ data ComputeSubnetworkIamBindingResource s = ComputeSubnetworkIamBindingResource
 
 -- | Define a new @google_compute_subnetwork_iam_binding@ resource value.
 computeSubnetworkIamBindingResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Attr s P.Text -- ^ @subnetwork@ - 'P.subnetwork'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ ('P._members', 'P.members')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
+    -> TF.Attr s P.Text -- ^ @subnetwork@ ('P._subnetwork', 'P.subnetwork')
     -> P.Resource (ComputeSubnetworkIamBindingResource s)
 computeSubnetworkIamBindingResource _members _role _subnetwork =
     TF.unsafeResource "google_compute_subnetwork_iam_binding" TF.validator $
@@ -5415,9 +5415,9 @@ data ComputeSubnetworkIamMemberResource s = ComputeSubnetworkIamMemberResource'
 
 -- | Define a new @google_compute_subnetwork_iam_member@ resource value.
 computeSubnetworkIamMemberResource
-    :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Attr s P.Text -- ^ @subnetwork@ - 'P.subnetwork'
+    :: TF.Attr s P.Text -- ^ @member@ ('P._member', 'P.member')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
+    -> TF.Attr s P.Text -- ^ @subnetwork@ ('P._subnetwork', 'P.subnetwork')
     -> P.Resource (ComputeSubnetworkIamMemberResource s)
 computeSubnetworkIamMemberResource _member _role _subnetwork =
     TF.unsafeResource "google_compute_subnetwork_iam_member" TF.validator $
@@ -5479,8 +5479,8 @@ data ComputeSubnetworkIamPolicyResource s = ComputeSubnetworkIamPolicyResource'
 
 -- | Define a new @google_compute_subnetwork_iam_policy@ resource value.
 computeSubnetworkIamPolicyResource
-    :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
-    -> TF.Attr s P.Text -- ^ @subnetwork@ - 'P.subnetwork'
+    :: TF.Attr s P.Text -- ^ @policy_data@ ('P._policyData', 'P.policyData')
+    -> TF.Attr s P.Text -- ^ @subnetwork@ ('P._subnetwork', 'P.subnetwork')
     -> P.Resource (ComputeSubnetworkIamPolicyResource s)
 computeSubnetworkIamPolicyResource _policyData _subnetwork =
     TF.unsafeResource "google_compute_subnetwork_iam_policy" TF.validator $
@@ -5538,8 +5538,8 @@ data ComputeTargetHttpProxyResource s = ComputeTargetHttpProxyResource'
 
 -- | Define a new @google_compute_target_http_proxy@ resource value.
 computeTargetHttpProxyResource
-    :: TF.Attr s P.Text -- ^ @url_map@ - 'P.urlMap'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @url_map@ ('P._urlMap', 'P.urlMap')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeTargetHttpProxyResource s)
 computeTargetHttpProxyResource _urlMap _name =
     TF.unsafeResource "google_compute_target_http_proxy" TF.validator $
@@ -5616,9 +5616,9 @@ data ComputeTargetHttpsProxyResource s = ComputeTargetHttpsProxyResource'
 
 -- | Define a new @google_compute_target_https_proxy@ resource value.
 computeTargetHttpsProxyResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @ssl_certificates@ - 'P.sslCertificates'
-    -> TF.Attr s P.Text -- ^ @url_map@ - 'P.urlMap'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @ssl_certificates@ ('P._sslCertificates', 'P.sslCertificates')
+    -> TF.Attr s P.Text -- ^ @url_map@ ('P._urlMap', 'P.urlMap')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeTargetHttpsProxyResource s)
 computeTargetHttpsProxyResource _sslCertificates _urlMap _name =
     TF.unsafeResource "google_compute_target_https_proxy" TF.validator $
@@ -5716,7 +5716,7 @@ data ComputeTargetPoolResource s = ComputeTargetPoolResource'
 
 -- | Define a new @google_compute_target_pool@ resource value.
 computeTargetPoolResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeTargetPoolResource s)
 computeTargetPoolResource _name =
     TF.unsafeResource "google_compute_target_pool" TF.validator $
@@ -5814,9 +5814,9 @@ data ComputeTargetSslProxyResource s = ComputeTargetSslProxyResource'
 
 -- | Define a new @google_compute_target_ssl_proxy@ resource value.
 computeTargetSslProxyResource
-    :: TF.Attr s P.Text -- ^ @ssl_certificates@ - 'P.sslCertificates'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @backend_service@ - 'P.backendService'
+    :: TF.Attr s P.Text -- ^ @ssl_certificates@ ('P._sslCertificates', 'P.sslCertificates')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @backend_service@ ('P._backendService', 'P.backendService')
     -> P.Resource (ComputeTargetSslProxyResource s)
 computeTargetSslProxyResource _sslCertificates _name _backendService =
     TF.unsafeResource "google_compute_target_ssl_proxy" TF.validator $
@@ -5908,8 +5908,8 @@ data ComputeTargetTcpProxyResource s = ComputeTargetTcpProxyResource'
 
 -- | Define a new @google_compute_target_tcp_proxy@ resource value.
 computeTargetTcpProxyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @backend_service@ - 'P.backendService'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @backend_service@ ('P._backendService', 'P.backendService')
     -> P.Resource (ComputeTargetTcpProxyResource s)
 computeTargetTcpProxyResource _name _backendService =
     TF.unsafeResource "google_compute_target_tcp_proxy" TF.validator $
@@ -5993,8 +5993,8 @@ data ComputeUrlMapResource s = ComputeUrlMapResource'
 
 -- | Define a new @google_compute_url_map@ resource value.
 computeUrlMapResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @default_service@ - 'P.defaultService'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @default_service@ ('P._defaultService', 'P.defaultService')
     -> P.Resource (ComputeUrlMapResource s)
 computeUrlMapResource _name _defaultService =
     TF.unsafeResource "google_compute_url_map" TF.validator $
@@ -6083,8 +6083,8 @@ data ComputeVpnGatewayResource s = ComputeVpnGatewayResource'
 
 -- | Define a new @google_compute_vpn_gateway@ resource value.
 computeVpnGatewayResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @network@ ('P._network', 'P.network')
     -> P.Resource (ComputeVpnGatewayResource s)
 computeVpnGatewayResource _name _network =
     TF.unsafeResource "google_compute_vpn_gateway" TF.validator $
@@ -6167,10 +6167,10 @@ data ComputeVpnTunnelResource s = ComputeVpnTunnelResource'
 
 -- | Define a new @google_compute_vpn_tunnel@ resource value.
 computeVpnTunnelResource
-    :: TF.Attr s P.Text -- ^ @target_vpn_gateway@ - 'P.targetVpnGateway'
-    -> TF.Attr s P.Text -- ^ @peer_ip@ - 'P.peerIp'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @shared_secret@ - 'P.sharedSecret'
+    :: TF.Attr s P.Text -- ^ @target_vpn_gateway@ ('P._targetVpnGateway', 'P.targetVpnGateway')
+    -> TF.Attr s P.Text -- ^ @peer_ip@ ('P._peerIp', 'P.peerIp')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @shared_secret@ ('P._sharedSecret', 'P.sharedSecret')
     -> P.Resource (ComputeVpnTunnelResource s)
 computeVpnTunnelResource _targetVpnGateway _peerIp _name _sharedSecret =
     TF.unsafeResource "google_compute_vpn_tunnel" TF.validator $
@@ -6324,7 +6324,7 @@ data ContainerClusterResource s = ContainerClusterResource'
 
 -- | Define a new @google_container_cluster@ resource value.
 containerClusterResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ContainerClusterResource s)
 containerClusterResource _name =
     TF.unsafeResource "google_container_cluster" TF.validator $
@@ -6531,7 +6531,7 @@ data ContainerNodePoolResource s = ContainerNodePoolResource'
 
 -- | Define a new @google_container_node_pool@ resource value.
 containerNodePoolResource
-    :: TF.Attr s P.Text -- ^ @cluster@ - 'P.cluster'
+    :: TF.Attr s P.Text -- ^ @cluster@ ('P._cluster', 'P.cluster')
     -> P.Resource (ContainerNodePoolResource s)
 containerNodePoolResource _cluster =
     TF.unsafeResource "google_container_node_pool" TF.validator $
@@ -6633,9 +6633,9 @@ data DataflowJobResource s = DataflowJobResource'
 
 -- | Define a new @google_dataflow_job@ resource value.
 dataflowJobResource
-    :: TF.Attr s P.Text -- ^ @temp_gcs_location@ - 'P.tempGcsLocation'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @template_gcs_path@ - 'P.templateGcsPath'
+    :: TF.Attr s P.Text -- ^ @temp_gcs_location@ ('P._tempGcsLocation', 'P.tempGcsLocation')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @template_gcs_path@ ('P._templateGcsPath', 'P.templateGcsPath')
     -> P.Resource (DataflowJobResource s)
 dataflowJobResource _tempGcsLocation _name _templateGcsPath =
     TF.unsafeResource "google_dataflow_job" TF.validator $
@@ -6726,7 +6726,7 @@ data DataprocClusterResource s = DataprocClusterResource'
 
 -- | Define a new @google_dataproc_cluster@ resource value.
 dataprocClusterResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (DataprocClusterResource s)
 dataprocClusterResource _name =
     TF.unsafeResource "google_dataproc_cluster" TF.validator $
@@ -6852,7 +6852,7 @@ data DataprocJobResource s = DataprocJobResource'
 
 -- | Define a new @google_dataproc_job@ resource value.
 dataprocJobResource
-    :: TF.Attr s (PlacementSetting s) -- ^ @placement@ - 'P.placement'
+    :: TF.Attr s (PlacementSetting s) -- ^ @placement@ ('P._placement', 'P.placement')
     -> P.Resource (DataprocJobResource s)
 dataprocJobResource _placement =
     TF.unsafeResource "google_dataproc_job" TF.validator $
@@ -7042,8 +7042,8 @@ data DnsManagedZoneResource s = DnsManagedZoneResource'
 
 -- | Define a new @google_dns_managed_zone@ resource value.
 dnsManagedZoneResource
-    :: TF.Attr s P.Text -- ^ @dns_name@ - 'P.dnsName'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @dns_name@ ('P._dnsName', 'P.dnsName')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (DnsManagedZoneResource s)
 dnsManagedZoneResource _dnsName _name =
     TF.unsafeResource "google_dns_managed_zone" TF.validator $
@@ -7111,11 +7111,11 @@ data DnsRecordSetResource s = DnsRecordSetResource'
 
 -- | Define a new @google_dns_record_set@ resource value.
 dnsRecordSetResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @rrdatas@ - 'P.rrdatas'
-    -> TF.Attr s P.Int -- ^ @ttl@ - 'P.ttl'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Attr s P.Text -- ^ @managed_zone@ - 'P.managedZone'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @rrdatas@ ('P._rrdatas', 'P.rrdatas')
+    -> TF.Attr s P.Int -- ^ @ttl@ ('P._ttl', 'P.ttl')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    -> TF.Attr s P.Text -- ^ @managed_zone@ ('P._managedZone', 'P.managedZone')
     -> P.Resource (DnsRecordSetResource s)
 dnsRecordSetResource _name _rrdatas _ttl _type' _managedZone =
     TF.unsafeResource "google_dns_record_set" TF.validator $
@@ -7201,7 +7201,7 @@ data EndpointsServiceResource s = EndpointsServiceResource'
 
 -- | Define a new @google_endpoints_service@ resource value.
 endpointsServiceResource
-    :: TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
+    :: TF.Attr s P.Text -- ^ @service_name@ ('P._serviceName', 'P.serviceName')
     -> P.Resource (EndpointsServiceResource s)
 endpointsServiceResource _serviceName =
     TF.unsafeResource "google_endpoints_service" TF.validator $
@@ -7292,8 +7292,8 @@ data FolderResource s = FolderResource'
 
 -- | Define a new @google_folder@ resource value.
 folderResource
-    :: TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
-    -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
+    :: TF.Attr s P.Text -- ^ @display_name@ ('P._displayName', 'P.displayName')
+    -> TF.Attr s P.Text -- ^ @parent@ ('P._parent', 'P.parent')
     -> P.Resource (FolderResource s)
 folderResource _displayName _parent =
     TF.unsafeResource "google_folder" TF.validator $
@@ -7351,9 +7351,9 @@ data FolderIamBindingResource s = FolderIamBindingResource'
 
 -- | Define a new @google_folder_iam_binding@ resource value.
 folderIamBindingResource
-    :: TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s P.Text -- ^ @folder@ ('P._folder', 'P.folder')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ ('P._members', 'P.members')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
     -> P.Resource (FolderIamBindingResource s)
 folderIamBindingResource _folder _members _role =
     TF.unsafeResource "google_folder_iam_binding" TF.validator $
@@ -7412,9 +7412,9 @@ data FolderIamMemberResource s = FolderIamMemberResource'
 
 -- | Define a new @google_folder_iam_member@ resource value.
 folderIamMemberResource
-    :: TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
-    -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s P.Text -- ^ @folder@ ('P._folder', 'P.folder')
+    -> TF.Attr s P.Text -- ^ @member@ ('P._member', 'P.member')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
     -> P.Resource (FolderIamMemberResource s)
 folderIamMemberResource _folder _member _role =
     TF.unsafeResource "google_folder_iam_member" TF.validator $
@@ -7470,8 +7470,8 @@ data FolderIamPolicyResource s = FolderIamPolicyResource'
 
 -- | Define a new @google_folder_iam_policy@ resource value.
 folderIamPolicyResource
-    :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
-    -> TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
+    :: TF.Attr s P.Text -- ^ @policy_data@ ('P._policyData', 'P.policyData')
+    -> TF.Attr s P.Text -- ^ @folder@ ('P._folder', 'P.folder')
     -> P.Resource (FolderIamPolicyResource s)
 folderIamPolicyResource _policyData _folder =
     TF.unsafeResource "google_folder_iam_policy" TF.validator $
@@ -7541,8 +7541,8 @@ data FolderOrganizationPolicyResource s = FolderOrganizationPolicyResource'
 
 -- | Define a new @google_folder_organization_policy@ resource value.
 folderOrganizationPolicyResource
-    :: TF.Attr s P.Text -- ^ @constraint@ - 'P.constraint'
-    -> TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
+    :: TF.Attr s P.Text -- ^ @constraint@ ('P._constraint', 'P.constraint')
+    -> TF.Attr s P.Text -- ^ @folder@ ('P._folder', 'P.folder')
     -> P.Resource (FolderOrganizationPolicyResource s)
 folderOrganizationPolicyResource _constraint _folder =
     TF.unsafeResource "google_folder_organization_policy" TF.validator $
@@ -7649,8 +7649,8 @@ data KmsCryptoKeyResource s = KmsCryptoKeyResource'
 
 -- | Define a new @google_kms_crypto_key@ resource value.
 kmsCryptoKeyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @key_ring@ - 'P.keyRing'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @key_ring@ ('P._keyRing', 'P.keyRing')
     -> P.Resource (KmsCryptoKeyResource s)
 kmsCryptoKeyResource _name _keyRing =
     TF.unsafeResource "google_kms_crypto_key" TF.validator $
@@ -7706,9 +7706,9 @@ data KmsCryptoKeyIamBindingResource s = KmsCryptoKeyIamBindingResource'
 
 -- | Define a new @google_kms_crypto_key_iam_binding@ resource value.
 kmsCryptoKeyIamBindingResource
-    :: TF.Attr s P.Text -- ^ @crypto_key_id@ - 'P.cryptoKeyId'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s P.Text -- ^ @crypto_key_id@ ('P._cryptoKeyId', 'P.cryptoKeyId')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ ('P._members', 'P.members')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
     -> P.Resource (KmsCryptoKeyIamBindingResource s)
 kmsCryptoKeyIamBindingResource _cryptoKeyId _members _role =
     TF.unsafeResource "google_kms_crypto_key_iam_binding" TF.validator $
@@ -7767,9 +7767,9 @@ data KmsCryptoKeyIamMemberResource s = KmsCryptoKeyIamMemberResource'
 
 -- | Define a new @google_kms_crypto_key_iam_member@ resource value.
 kmsCryptoKeyIamMemberResource
-    :: TF.Attr s P.Text -- ^ @crypto_key_id@ - 'P.cryptoKeyId'
-    -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s P.Text -- ^ @crypto_key_id@ ('P._cryptoKeyId', 'P.cryptoKeyId')
+    -> TF.Attr s P.Text -- ^ @member@ ('P._member', 'P.member')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
     -> P.Resource (KmsCryptoKeyIamMemberResource s)
 kmsCryptoKeyIamMemberResource _cryptoKeyId _member _role =
     TF.unsafeResource "google_kms_crypto_key_iam_member" TF.validator $
@@ -7825,8 +7825,8 @@ data KmsKeyRingResource s = KmsKeyRingResource'
 
 -- | Define a new @google_kms_key_ring@ resource value.
 kmsKeyRingResource
-    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (KmsKeyRingResource s)
 kmsKeyRingResource _location _name =
     TF.unsafeResource "google_kms_key_ring" TF.validator $
@@ -7878,9 +7878,9 @@ data KmsKeyRingIamBindingResource s = KmsKeyRingIamBindingResource'
 
 -- | Define a new @google_kms_key_ring_iam_binding@ resource value.
 kmsKeyRingIamBindingResource
-    :: TF.Attr s P.Text -- ^ @key_ring_id@ - 'P.keyRingId'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s P.Text -- ^ @key_ring_id@ ('P._keyRingId', 'P.keyRingId')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ ('P._members', 'P.members')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
     -> P.Resource (KmsKeyRingIamBindingResource s)
 kmsKeyRingIamBindingResource _keyRingId _members _role =
     TF.unsafeResource "google_kms_key_ring_iam_binding" TF.validator $
@@ -7939,9 +7939,9 @@ data KmsKeyRingIamMemberResource s = KmsKeyRingIamMemberResource'
 
 -- | Define a new @google_kms_key_ring_iam_member@ resource value.
 kmsKeyRingIamMemberResource
-    :: TF.Attr s P.Text -- ^ @key_ring_id@ - 'P.keyRingId'
-    -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s P.Text -- ^ @key_ring_id@ ('P._keyRingId', 'P.keyRingId')
+    -> TF.Attr s P.Text -- ^ @member@ ('P._member', 'P.member')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
     -> P.Resource (KmsKeyRingIamMemberResource s)
 kmsKeyRingIamMemberResource _keyRingId _member _role =
     TF.unsafeResource "google_kms_key_ring_iam_member" TF.validator $
@@ -7997,8 +7997,8 @@ data KmsKeyRingIamPolicyResource s = KmsKeyRingIamPolicyResource'
 
 -- | Define a new @google_kms_key_ring_iam_policy@ resource value.
 kmsKeyRingIamPolicyResource
-    :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
-    -> TF.Attr s P.Text -- ^ @key_ring_id@ - 'P.keyRingId'
+    :: TF.Attr s P.Text -- ^ @policy_data@ ('P._policyData', 'P.policyData')
+    -> TF.Attr s P.Text -- ^ @key_ring_id@ ('P._keyRingId', 'P.keyRingId')
     -> P.Resource (KmsKeyRingIamPolicyResource s)
 kmsKeyRingIamPolicyResource _policyData _keyRingId =
     TF.unsafeResource "google_kms_key_ring_iam_policy" TF.validator $
@@ -8056,9 +8056,9 @@ data LoggingBillingAccountExclusionResource s = LoggingBillingAccountExclusionRe
 
 -- | Define a new @google_logging_billing_account_exclusion@ resource value.
 loggingBillingAccountExclusionResource
-    :: TF.Attr s P.Text -- ^ @billing_account@ - 'P.billingAccount'
-    -> TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @billing_account@ ('P._billingAccount', 'P.billingAccount')
+    -> TF.Attr s P.Text -- ^ @filter@ ('P._filter', 'P.filter')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (LoggingBillingAccountExclusionResource s)
 loggingBillingAccountExclusionResource _billingAccount _filter _name =
     TF.unsafeResource "google_logging_billing_account_exclusion" TF.validator $
@@ -8131,9 +8131,9 @@ data LoggingBillingAccountSinkResource s = LoggingBillingAccountSinkResource'
 
 -- | Define a new @google_logging_billing_account_sink@ resource value.
 loggingBillingAccountSinkResource
-    :: TF.Attr s P.Text -- ^ @billing_account@ - 'P.billingAccount'
-    -> TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @billing_account@ ('P._billingAccount', 'P.billingAccount')
+    -> TF.Attr s P.Text -- ^ @destination@ ('P._destination', 'P.destination')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (LoggingBillingAccountSinkResource s)
 loggingBillingAccountSinkResource _billingAccount _destination _name =
     TF.unsafeResource "google_logging_billing_account_sink" TF.validator $
@@ -8205,9 +8205,9 @@ data LoggingFolderExclusionResource s = LoggingFolderExclusionResource'
 
 -- | Define a new @google_logging_folder_exclusion@ resource value.
 loggingFolderExclusionResource
-    :: TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
-    -> TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @filter@ ('P._filter', 'P.filter')
+    -> TF.Attr s P.Text -- ^ @folder@ ('P._folder', 'P.folder')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (LoggingFolderExclusionResource s)
 loggingFolderExclusionResource _filter _folder _name =
     TF.unsafeResource "google_logging_folder_exclusion" TF.validator $
@@ -8283,9 +8283,9 @@ data LoggingFolderSinkResource s = LoggingFolderSinkResource'
 
 -- | Define a new @google_logging_folder_sink@ resource value.
 loggingFolderSinkResource
-    :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
-    -> TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @destination@ ('P._destination', 'P.destination')
+    -> TF.Attr s P.Text -- ^ @folder@ ('P._folder', 'P.folder')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (LoggingFolderSinkResource s)
 loggingFolderSinkResource _destination _folder _name =
     TF.unsafeResource "google_logging_folder_sink" TF.validator $
@@ -8364,9 +8364,9 @@ data LoggingOrganizationExclusionResource s = LoggingOrganizationExclusionResour
 
 -- | Define a new @google_logging_organization_exclusion@ resource value.
 loggingOrganizationExclusionResource
-    :: TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
-    -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @filter@ ('P._filter', 'P.filter')
+    -> TF.Attr s P.Text -- ^ @org_id@ ('P._orgId', 'P.orgId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (LoggingOrganizationExclusionResource s)
 loggingOrganizationExclusionResource _filter _orgId _name =
     TF.unsafeResource "google_logging_organization_exclusion" TF.validator $
@@ -8442,9 +8442,9 @@ data LoggingOrganizationSinkResource s = LoggingOrganizationSinkResource'
 
 -- | Define a new @google_logging_organization_sink@ resource value.
 loggingOrganizationSinkResource
-    :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
-    -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @destination@ ('P._destination', 'P.destination')
+    -> TF.Attr s P.Text -- ^ @org_id@ ('P._orgId', 'P.orgId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (LoggingOrganizationSinkResource s)
 loggingOrganizationSinkResource _destination _orgId _name =
     TF.unsafeResource "google_logging_organization_sink" TF.validator $
@@ -8520,8 +8520,8 @@ data LoggingProjectExclusionResource s = LoggingProjectExclusionResource'
 
 -- | Define a new @google_logging_project_exclusion@ resource value.
 loggingProjectExclusionResource
-    :: TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @filter@ ('P._filter', 'P.filter')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (LoggingProjectExclusionResource s)
 loggingProjectExclusionResource _filter _name =
     TF.unsafeResource "google_logging_project_exclusion" TF.validator $
@@ -8590,8 +8590,8 @@ data LoggingProjectSinkResource s = LoggingProjectSinkResource'
 
 -- | Define a new @google_logging_project_sink@ resource value.
 loggingProjectSinkResource
-    :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @destination@ ('P._destination', 'P.destination')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (LoggingProjectSinkResource s)
 loggingProjectSinkResource _destination _name =
     TF.unsafeResource "google_logging_project_sink" TF.validator $
@@ -8660,9 +8660,9 @@ data OrganizationIamBindingResource s = OrganizationIamBindingResource'
 
 -- | Define a new @google_organization_iam_binding@ resource value.
 organizationIamBindingResource
-    :: TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s P.Text -- ^ @org_id@ ('P._orgId', 'P.orgId')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ ('P._members', 'P.members')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
     -> P.Resource (OrganizationIamBindingResource s)
 organizationIamBindingResource _orgId _members _role =
     TF.unsafeResource "google_organization_iam_binding" TF.validator $
@@ -8733,10 +8733,10 @@ data OrganizationIamCustomRoleResource s = OrganizationIamCustomRoleResource'
 
 -- | Define a new @google_organization_iam_custom_role@ resource value.
 organizationIamCustomRoleResource
-    :: TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
-    -> TF.Attr s P.Text -- ^ @role_id@ - 'P.roleId'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ - 'P.permissions'
-    -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
+    :: TF.Attr s P.Text -- ^ @org_id@ ('P._orgId', 'P.orgId')
+    -> TF.Attr s P.Text -- ^ @role_id@ ('P._roleId', 'P.roleId')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ ('P._permissions', 'P.permissions')
+    -> TF.Attr s P.Text -- ^ @title@ ('P._title', 'P.title')
     -> P.Resource (OrganizationIamCustomRoleResource s)
 organizationIamCustomRoleResource _orgId _roleId _permissions _title =
     TF.unsafeResource "google_organization_iam_custom_role" TF.validator $
@@ -8820,9 +8820,9 @@ data OrganizationIamMemberResource s = OrganizationIamMemberResource'
 
 -- | Define a new @google_organization_iam_member@ resource value.
 organizationIamMemberResource
-    :: TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
-    -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s P.Text -- ^ @org_id@ ('P._orgId', 'P.orgId')
+    -> TF.Attr s P.Text -- ^ @member@ ('P._member', 'P.member')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
     -> P.Resource (OrganizationIamMemberResource s)
 organizationIamMemberResource _orgId _member _role =
     TF.unsafeResource "google_organization_iam_member" TF.validator $
@@ -8878,8 +8878,8 @@ data OrganizationIamPolicyResource s = OrganizationIamPolicyResource'
 
 -- | Define a new @google_organization_iam_policy@ resource value.
 organizationIamPolicyResource
-    :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
-    -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
+    :: TF.Attr s P.Text -- ^ @policy_data@ ('P._policyData', 'P.policyData')
+    -> TF.Attr s P.Text -- ^ @org_id@ ('P._orgId', 'P.orgId')
     -> P.Resource (OrganizationIamPolicyResource s)
 organizationIamPolicyResource _policyData _orgId =
     TF.unsafeResource "google_organization_iam_policy" TF.validator $
@@ -8949,8 +8949,8 @@ data OrganizationPolicyResource s = OrganizationPolicyResource'
 
 -- | Define a new @google_organization_policy@ resource value.
 organizationPolicyResource
-    :: TF.Attr s P.Text -- ^ @constraint@ - 'P.constraint'
-    -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
+    :: TF.Attr s P.Text -- ^ @constraint@ ('P._constraint', 'P.constraint')
+    -> TF.Attr s P.Text -- ^ @org_id@ ('P._orgId', 'P.orgId')
     -> P.Resource (OrganizationPolicyResource s)
 organizationPolicyResource _constraint _orgId =
     TF.unsafeResource "google_organization_policy" TF.validator $
@@ -9066,8 +9066,8 @@ data ProjectResource s = ProjectResource'
 
 -- | Define a new @google_project@ resource value.
 projectResource
-    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @project_id@ ('P._projectId', 'P.projectId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ProjectResource s)
 projectResource _projectId _name =
     TF.unsafeResource "google_project" TF.validator $
@@ -9166,8 +9166,8 @@ data ProjectIamBindingResource s = ProjectIamBindingResource'
 
 -- | Define a new @google_project_iam_binding@ resource value.
 projectIamBindingResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ ('P._members', 'P.members')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
     -> P.Resource (ProjectIamBindingResource s)
 projectIamBindingResource _members _role =
     TF.unsafeResource "google_project_iam_binding" TF.validator $
@@ -9235,9 +9235,9 @@ data ProjectIamCustomRoleResource s = ProjectIamCustomRoleResource'
 
 -- | Define a new @google_project_iam_custom_role@ resource value.
 projectIamCustomRoleResource
-    :: TF.Attr s P.Text -- ^ @role_id@ - 'P.roleId'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ - 'P.permissions'
-    -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
+    :: TF.Attr s P.Text -- ^ @role_id@ ('P._roleId', 'P.roleId')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ ('P._permissions', 'P.permissions')
+    -> TF.Attr s P.Text -- ^ @title@ ('P._title', 'P.title')
     -> P.Resource (ProjectIamCustomRoleResource s)
 projectIamCustomRoleResource _roleId _permissions _title =
     TF.unsafeResource "google_project_iam_custom_role" TF.validator $
@@ -9317,8 +9317,8 @@ data ProjectIamMemberResource s = ProjectIamMemberResource'
 
 -- | Define a new @google_project_iam_member@ resource value.
 projectIamMemberResource
-    :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s P.Text -- ^ @member@ ('P._member', 'P.member')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
     -> P.Resource (ProjectIamMemberResource s)
 projectIamMemberResource _member _role =
     TF.unsafeResource "google_project_iam_member" TF.validator $
@@ -9371,7 +9371,7 @@ data ProjectIamPolicyResource s = ProjectIamPolicyResource'
 
 -- | Define a new @google_project_iam_policy@ resource value.
 projectIamPolicyResource
-    :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
+    :: TF.Attr s P.Text -- ^ @policy_data@ ('P._policyData', 'P.policyData')
     -> P.Resource (ProjectIamPolicyResource s)
 projectIamPolicyResource _policyData =
     TF.unsafeResource "google_project_iam_policy" TF.validator $
@@ -9440,8 +9440,8 @@ data ProjectOrganizationPolicyResource s = ProjectOrganizationPolicyResource'
 
 -- | Define a new @google_project_organization_policy@ resource value.
 projectOrganizationPolicyResource
-    :: TF.Attr s P.Text -- ^ @constraint@ - 'P.constraint'
-    -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
+    :: TF.Attr s P.Text -- ^ @constraint@ ('P._constraint', 'P.constraint')
+    -> TF.Attr s P.Text -- ^ @project@ ('P._project', 'P.project')
     -> P.Resource (ProjectOrganizationPolicyResource s)
 projectOrganizationPolicyResource _constraint _project =
     TF.unsafeResource "google_project_organization_policy" TF.validator $
@@ -9545,7 +9545,7 @@ data ProjectServiceResource s = ProjectServiceResource'
 
 -- | Define a new @google_project_service@ resource value.
 projectServiceResource
-    :: TF.Attr s P.Text -- ^ @service@ - 'P.service'
+    :: TF.Attr s P.Text -- ^ @service@ ('P._service', 'P.service')
     -> P.Resource (ProjectServiceResource s)
 projectServiceResource _service =
     TF.unsafeResource "google_project_service" TF.validator $
@@ -9594,7 +9594,7 @@ data ProjectServicesResource s = ProjectServicesResource'
 
 -- | Define a new @google_project_services@ resource value.
 projectServicesResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @services@ - 'P.services'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @services@ ('P._services', 'P.services')
     -> P.Resource (ProjectServicesResource s)
 projectServicesResource _services =
     TF.unsafeResource "google_project_services" TF.validator $
@@ -9643,7 +9643,7 @@ data ProjectUsageExportBucketResource s = ProjectUsageExportBucketResource'
 
 -- | Define a new @google_project_usage_export_bucket@ resource value.
 projectUsageExportBucketResource
-    :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
+    :: TF.Attr s P.Text -- ^ @bucket_name@ ('P._bucketName', 'P.bucketName')
     -> P.Resource (ProjectUsageExportBucketResource s)
 projectUsageExportBucketResource _bucketName =
     TF.unsafeResource "google_project_usage_export_bucket" TF.validator $
@@ -9695,8 +9695,8 @@ data PubsubSubscriptionResource s = PubsubSubscriptionResource'
 
 -- | Define a new @google_pubsub_subscription@ resource value.
 pubsubSubscriptionResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @topic@ - 'P.topic'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @topic@ ('P._topic', 'P.topic')
     -> P.Resource (PubsubSubscriptionResource s)
 pubsubSubscriptionResource _name _topic =
     TF.unsafeResource "google_pubsub_subscription" TF.validator $
@@ -9765,9 +9765,9 @@ data PubsubSubscriptionIamBindingResource s = PubsubSubscriptionIamBindingResour
 
 -- | Define a new @google_pubsub_subscription_iam_binding@ resource value.
 pubsubSubscriptionIamBindingResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Attr s P.Text -- ^ @subscription@ - 'P.subscription'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ ('P._members', 'P.members')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
+    -> TF.Attr s P.Text -- ^ @subscription@ ('P._subscription', 'P.subscription')
     -> P.Resource (PubsubSubscriptionIamBindingResource s)
 pubsubSubscriptionIamBindingResource _members _role _subscription =
     TF.unsafeResource "google_pubsub_subscription_iam_binding" TF.validator $
@@ -9829,9 +9829,9 @@ data PubsubSubscriptionIamMemberResource s = PubsubSubscriptionIamMemberResource
 
 -- | Define a new @google_pubsub_subscription_iam_member@ resource value.
 pubsubSubscriptionIamMemberResource
-    :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Attr s P.Text -- ^ @subscription@ - 'P.subscription'
+    :: TF.Attr s P.Text -- ^ @member@ ('P._member', 'P.member')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
+    -> TF.Attr s P.Text -- ^ @subscription@ ('P._subscription', 'P.subscription')
     -> P.Resource (PubsubSubscriptionIamMemberResource s)
 pubsubSubscriptionIamMemberResource _member _role _subscription =
     TF.unsafeResource "google_pubsub_subscription_iam_member" TF.validator $

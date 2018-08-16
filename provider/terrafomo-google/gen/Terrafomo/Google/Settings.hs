@@ -589,7 +589,7 @@ data ActionSetting s = ActionSetting'
 
 -- | Construct a new @action@ settings value.
 newActionSetting
-    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> ActionSetting s
 newActionSetting _type' =
     ActionSetting'
@@ -697,7 +697,7 @@ data AliasIpRangeSetting s = AliasIpRangeSetting'
 
 -- | Construct a new @alias_ip_range@ settings value.
 newAliasIpRangeSetting
-    :: TF.Attr s P.Text -- ^ @ip_cidr_range@ - 'P.ipCidrRange'
+    :: TF.Attr s P.Text -- ^ 'P._ipCidrRange': @ip_cidr_range@
     -> AliasIpRangeSetting s
 newAliasIpRangeSetting _ipCidrRange =
     AliasIpRangeSetting'
@@ -752,7 +752,7 @@ data AllowSetting s = AllowSetting'
 
 -- | Construct a new @allow@ settings value.
 newAllowSetting
-    :: TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    :: TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
     -> AllowSetting s
 newAllowSetting _protocol =
     AllowSetting'
@@ -896,7 +896,7 @@ data AttachedDiskSetting s = AttachedDiskSetting'
 
 -- | Construct a new @attached_disk@ settings value.
 newAttachedDiskSetting
-    :: TF.Attr s P.Text -- ^ @source@ - 'P.source'
+    :: TF.Attr s P.Text -- ^ 'P._source': @source@
     -> AttachedDiskSetting s
 newAttachedDiskSetting _source =
     AttachedDiskSetting'
@@ -1004,8 +1004,8 @@ data AutoHealingPoliciesSetting s = AutoHealingPoliciesSetting'
 
 -- | Construct a new @auto_healing_policies@ settings value.
 newAutoHealingPoliciesSetting
-    :: TF.Attr s P.Text -- ^ @health_check@ - 'P.healthCheck'
-    -> TF.Attr s P.Int -- ^ @initial_delay_sec@ - 'P.initialDelaySec'
+    :: TF.Attr s P.Text -- ^ 'P._healthCheck': @health_check@
+    -> TF.Attr s P.Int -- ^ 'P._initialDelaySec': @initial_delay_sec@
     -> AutoHealingPoliciesSetting s
 newAutoHealingPoliciesSetting _healthCheck _initialDelaySec =
     AutoHealingPoliciesSetting'
@@ -1045,8 +1045,8 @@ data AutoscalingSetting s = AutoscalingSetting'
 
 -- | Construct a new @autoscaling@ settings value.
 newAutoscalingSetting
-    :: TF.Attr s P.Int -- ^ @max_node_count@ - 'P.maxNodeCount'
-    -> TF.Attr s P.Int -- ^ @min_node_count@ - 'P.minNodeCount'
+    :: TF.Attr s P.Int -- ^ 'P._maxNodeCount': @max_node_count@
+    -> TF.Attr s P.Int -- ^ 'P._minNodeCount': @min_node_count@
     -> AutoscalingSetting s
 newAutoscalingSetting _maxNodeCount _minNodeCount =
     AutoscalingSetting'
@@ -1101,8 +1101,8 @@ data AutoscalingPolicySetting s = AutoscalingPolicySetting'
 
 -- | Construct a new @autoscaling_policy@ settings value.
 newAutoscalingPolicySetting
-    :: TF.Attr s P.Int -- ^ @max_replicas@ - 'P.maxReplicas'
-    -> TF.Attr s P.Int -- ^ @min_replicas@ - 'P.minReplicas'
+    :: TF.Attr s P.Int -- ^ 'P._maxReplicas': @max_replicas@
+    -> TF.Attr s P.Int -- ^ 'P._minReplicas': @min_replicas@
     -> AutoscalingPolicySetting s
 newAutoscalingPolicySetting _maxReplicas _minReplicas =
     AutoscalingPolicySetting'
@@ -1354,7 +1354,7 @@ data BgpSetting s = BgpSetting'
 
 -- | Construct a new @bgp@ settings value.
 newBgpSetting
-    :: TF.Attr s P.Int -- ^ @asn@ - 'P.asn'
+    :: TF.Attr s P.Int -- ^ 'P._asn': @asn@
     -> BgpSetting s
 newBgpSetting _asn =
     BgpSetting'
@@ -1408,8 +1408,8 @@ data BindingSetting s = BindingSetting'
 
 -- | Construct a new @binding@ settings value.
 newBindingSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._members': @members@
+    -> TF.Attr s P.Text -- ^ 'P._role': @role@
     -> BindingSetting s
 newBindingSetting _members _role =
     BindingSetting'
@@ -1446,7 +1446,7 @@ data BooleanPolicySetting s = BooleanPolicySetting'
 
 -- | Construct a new @boolean_policy@ settings value.
 newBooleanPolicySetting
-    :: TF.Attr s P.Bool -- ^ @enforced@ - 'P.enforced'
+    :: TF.Attr s P.Bool -- ^ 'P._enforced': @enforced@
     -> BooleanPolicySetting s
 newBooleanPolicySetting _enforced =
     BooleanPolicySetting'
@@ -1722,7 +1722,7 @@ data CidrBlocksSetting s = CidrBlocksSetting'
 
 -- | Construct a new @cidr_blocks@ settings value.
 newCidrBlocksSetting
-    :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
+    :: TF.Attr s P.Text -- ^ 'P._cidrBlock': @cidr_block@
     -> CidrBlocksSetting s
 newCidrBlocksSetting _cidrBlock =
     CidrBlocksSetting'
@@ -1765,7 +1765,7 @@ data ClientCertificateConfigSetting s = ClientCertificateConfigSetting'
 
 -- | Construct a new @client_certificate_config@ settings value.
 newClientCertificateConfigSetting
-    :: TF.Attr s P.Bool -- ^ @issue_client_certificate@ - 'P.issueClientCertificate'
+    :: TF.Attr s P.Bool -- ^ 'P._issueClientCertificate': @issue_client_certificate@
     -> ClientCertificateConfigSetting s
 newClientCertificateConfigSetting _issueClientCertificate =
     ClientCertificateConfigSetting'
@@ -1924,7 +1924,7 @@ data ConfigSetting s = ConfigSetting'
 
 -- | Construct a new @config@ settings value.
 newConfigSetting
-    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @src_ip_ranges@ - 'P.srcIpRanges'
+    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ 'P._srcIpRanges': @src_ip_ranges@
     -> ConfigSetting s
 newConfigSetting _srcIpRanges =
     ConfigSetting'
@@ -2013,7 +2013,7 @@ data CpuUtilizationSetting s = CpuUtilizationSetting'
 
 -- | Construct a new @cpu_utilization@ settings value.
 newCpuUtilizationSetting
-    :: TF.Attr s P.Double -- ^ @target@ - 'P.target'
+    :: TF.Attr s P.Double -- ^ 'P._target': @target@
     -> CpuUtilizationSetting s
 newCpuUtilizationSetting _target =
     CpuUtilizationSetting'
@@ -2072,7 +2072,7 @@ data DailyMaintenanceWindowSetting s = DailyMaintenanceWindowSetting'
 
 -- | Construct a new @daily_maintenance_window@ settings value.
 newDailyMaintenanceWindowSetting
-    :: TF.Attr s P.Text -- ^ @start_time@ - 'P.startTime'
+    :: TF.Attr s P.Text -- ^ 'P._startTime': @start_time@
     -> DailyMaintenanceWindowSetting s
 newDailyMaintenanceWindowSetting _startTime =
     DailyMaintenanceWindowSetting'
@@ -2162,7 +2162,7 @@ data DenySetting s = DenySetting'
 
 -- | Construct a new @deny@ settings value.
 newDenySetting
-    :: TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    :: TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
     -> DenySetting s
 newDenySetting _protocol =
     DenySetting'
@@ -2462,7 +2462,7 @@ data EventNotificationConfigSetting s = EventNotificationConfigSetting'
 
 -- | Construct a new @event_notification_config@ settings value.
 newEventNotificationConfigSetting
-    :: TF.Attr s P.Text -- ^ @pubsub_topic_name@ - 'P.pubsubTopicName'
+    :: TF.Attr s P.Text -- ^ 'P._pubsubTopicName': @pubsub_topic_name@
     -> EventNotificationConfigSetting s
 newEventNotificationConfigSetting _pubsubTopicName =
     EventNotificationConfigSetting'
@@ -2605,8 +2605,8 @@ data GuestAcceleratorSetting s = GuestAcceleratorSetting'
 
 -- | Construct a new @guest_accelerator@ settings value.
 newGuestAcceleratorSetting
-    :: TF.Attr s P.Int -- ^ @count@ - 'P.count'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Int -- ^ 'P._count': @count@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> GuestAcceleratorSetting s
 newGuestAcceleratorSetting _count _type' =
     GuestAcceleratorSetting'
@@ -2892,8 +2892,8 @@ data HostRuleSetting s = HostRuleSetting'
 
 -- | Construct a new @host_rule@ settings value.
 newHostRuleSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @hosts@ - 'P.hosts'
-    -> TF.Attr s P.Text -- ^ @path_matcher@ - 'P.pathMatcher'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._hosts': @hosts@
+    -> TF.Attr s P.Text -- ^ 'P._pathMatcher': @path_matcher@
     -> HostRuleSetting s
 newHostRuleSetting _hosts _pathMatcher =
     HostRuleSetting'
@@ -2937,7 +2937,7 @@ data HttpConfigSetting s = HttpConfigSetting'
 
 -- | Construct a new @http_config@ settings value.
 newHttpConfigSetting
-    :: TF.Attr s P.Text -- ^ @http_enabled_state@ - 'P.httpEnabledState'
+    :: TF.Attr s P.Text -- ^ 'P._httpEnabledState': @http_enabled_state@
     -> HttpConfigSetting s
 newHttpConfigSetting _httpEnabledState =
     HttpConfigSetting'
@@ -3120,8 +3120,8 @@ data IapSetting s = IapSetting'
 
 -- | Construct a new @iap@ settings value.
 newIapSetting
-    :: TF.Attr s P.Text -- ^ @oauth2_client_id@ - 'P.oauth2ClientId'
-    -> TF.Attr s P.Text -- ^ @oauth2_client_secret@ - 'P.oauth2ClientSecret'
+    :: TF.Attr s P.Text -- ^ 'P._oauth2ClientId': @oauth2_client_id@
+    -> TF.Attr s P.Text -- ^ 'P._oauth2ClientSecret': @oauth2_client_secret@
     -> IapSetting s
 newIapSetting _oauth2ClientId _oauth2ClientSecret =
     IapSetting'
@@ -3167,7 +3167,7 @@ data InitializationActionSetting s = InitializationActionSetting'
 
 -- | Construct a new @initialization_action@ settings value.
 newInitializationActionSetting
-    :: TF.Attr s P.Text -- ^ @script@ - 'P.script'
+    :: TF.Attr s P.Text -- ^ 'P._script': @script@
     -> InitializationActionSetting s
 newInitializationActionSetting _script =
     InitializationActionSetting'
@@ -3233,8 +3233,8 @@ data InstancesSetting s = InstancesSetting'
 
 -- | Construct a new @instances@ settings value.
 newInstancesSetting
-    :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
-    -> TF.Attr s P.Text -- ^ @status@ - 'P.status'
+    :: TF.Attr s P.Text -- ^ 'P._instance'': @instance@
+    -> TF.Attr s P.Text -- ^ 'P._status': @status@
     -> InstancesSetting s
 newInstancesSetting _instance' _status =
     InstancesSetting'
@@ -3419,8 +3419,8 @@ data LifecycleRuleSetting s = LifecycleRuleSetting'
 
 -- | Construct a new @lifecycle_rule@ settings value.
 newLifecycleRuleSetting
-    :: TF.Attr s (ActionSetting s) -- ^ @action@ - 'P.action'
-    -> TF.Attr s (ConditionSetting s) -- ^ @condition@ - 'P.condition'
+    :: TF.Attr s (ActionSetting s) -- ^ 'P._action': @action@
+    -> TF.Attr s (ConditionSetting s) -- ^ 'P._condition': @condition@
     -> LifecycleRuleSetting s
 newLifecycleRuleSetting _action _condition =
     LifecycleRuleSetting'
@@ -3532,7 +3532,7 @@ data LoadBalancingUtilizationSetting s = LoadBalancingUtilizationSetting'
 
 -- | Construct a new @load_balancing_utilization@ settings value.
 newLoadBalancingUtilizationSetting
-    :: TF.Attr s P.Double -- ^ @target@ - 'P.target'
+    :: TF.Attr s P.Double -- ^ 'P._target': @target@
     -> LoadBalancingUtilizationSetting s
 newLoadBalancingUtilizationSetting _target =
     LoadBalancingUtilizationSetting'
@@ -3601,7 +3601,7 @@ data LoggingSetting s = LoggingSetting'
 
 -- | Construct a new @logging@ settings value.
 newLoggingSetting
-    :: TF.Attr s P.Text -- ^ @log_bucket@ - 'P.logBucket'
+    :: TF.Attr s P.Text -- ^ 'P._logBucket': @log_bucket@
     -> LoggingSetting s
 newLoggingSetting _logBucket =
     LoggingSetting'
@@ -3666,7 +3666,7 @@ data MaintenancePolicySetting s = MaintenancePolicySetting'
 
 -- | Construct a new @maintenance_policy@ settings value.
 newMaintenancePolicySetting
-    :: TF.Attr s (DailyMaintenanceWindowSetting s) -- ^ @daily_maintenance_window@ - 'P.dailyMaintenanceWindow'
+    :: TF.Attr s (DailyMaintenanceWindowSetting s) -- ^ 'P._dailyMaintenanceWindow': @daily_maintenance_window@
     -> MaintenancePolicySetting s
 newMaintenancePolicySetting _dailyMaintenanceWindow =
     MaintenancePolicySetting'
@@ -3803,8 +3803,8 @@ data MasterAuthSetting s = MasterAuthSetting'
 
 -- | Construct a new @master_auth@ settings value.
 newMasterAuthSetting
-    :: TF.Attr s P.Text -- ^ @password@ - 'P.password'
-    -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
+    :: TF.Attr s P.Text -- ^ 'P._password': @password@
+    -> TF.Attr s P.Text -- ^ 'P._username': @username@
     -> MasterAuthSetting s
 newMasterAuthSetting _password _username =
     MasterAuthSetting'
@@ -3922,8 +3922,8 @@ data MatchSetting s = MatchSetting'
 
 -- | Construct a new @match@ settings value.
 newMatchSetting
-    :: TF.Attr s (ConfigSetting s) -- ^ @config@ - 'P.config'
-    -> TF.Attr s P.Text -- ^ @versioned_expr@ - 'P.versionedExpr'
+    :: TF.Attr s (ConfigSetting s) -- ^ 'P._config': @config@
+    -> TF.Attr s P.Text -- ^ 'P._versionedExpr': @versioned_expr@
     -> MatchSetting s
 newMatchSetting _config _versionedExpr =
     MatchSetting'
@@ -3999,9 +3999,9 @@ data MetricSetting s = MetricSetting'
 
 -- | Construct a new @metric@ settings value.
 newMetricSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Double -- ^ @target@ - 'P.target'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Double -- ^ 'P._target': @target@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> MetricSetting s
 newMetricSetting _name _target _type' =
     MetricSetting'
@@ -4045,7 +4045,7 @@ data MqttConfigSetting s = MqttConfigSetting'
 
 -- | Construct a new @mqtt_config@ settings value.
 newMqttConfigSetting
-    :: TF.Attr s P.Text -- ^ @mqtt_enabled_state@ - 'P.mqttEnabledState'
+    :: TF.Attr s P.Text -- ^ 'P._mqttEnabledState': @mqtt_enabled_state@
     -> MqttConfigSetting s
 newMqttConfigSetting _mqttEnabledState =
     MqttConfigSetting'
@@ -4078,8 +4078,8 @@ data NamedPortSetting s = NamedPortSetting'
 
 -- | Construct a new @named_port@ settings value.
 newNamedPortSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Int -- ^ 'P._port': @port@
     -> NamedPortSetting s
 newNamedPortSetting _name _port =
     NamedPortSetting'
@@ -4125,8 +4125,8 @@ data NamedPortsSetting s = NamedPortsSetting'
 
 -- | Construct a new @named_ports@ settings value.
 newNamedPortsSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Int -- ^ 'P._port': @port@
     -> NamedPortsSetting s
 newNamedPortsSetting _name _port =
     NamedPortsSetting'
@@ -4166,7 +4166,7 @@ data NetworkSetting s = NetworkSetting'
 
 -- | Construct a new @network@ settings value.
 newNetworkSetting
-    :: TF.Attr s P.Text -- ^ @source@ - 'P.source'
+    :: TF.Attr s P.Text -- ^ 'P._source': @source@
     -> NetworkSetting s
 newNetworkSetting _source =
     NetworkSetting'
@@ -4560,8 +4560,8 @@ data PathMatcherSetting s = PathMatcherSetting'
 
 -- | Construct a new @path_matcher@ settings value.
 newPathMatcherSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @default_service@ - 'P.defaultService'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._defaultService': @default_service@
     -> PathMatcherSetting s
 newPathMatcherSetting _name _defaultService =
     PathMatcherSetting'
@@ -4615,8 +4615,8 @@ data PathRuleSetting s = PathRuleSetting'
 
 -- | Construct a new @path_rule@ settings value.
 newPathRuleSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @paths@ - 'P.paths'
-    -> TF.Attr s P.Text -- ^ @service@ - 'P.service'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._paths': @paths@
+    -> TF.Attr s P.Text -- ^ 'P._service': @service@
     -> PathRuleSetting s
 newPathRuleSetting _paths _service =
     PathRuleSetting'
@@ -4753,7 +4753,7 @@ data PlacementSetting s = PlacementSetting'
 
 -- | Construct a new @placement@ settings value.
 newPlacementSetting
-    :: TF.Attr s P.Text -- ^ @cluster_name@ - 'P.clusterName'
+    :: TF.Attr s P.Text -- ^ 'P._clusterName': @cluster_name@
     -> PlacementSetting s
 newPlacementSetting _clusterName =
     PlacementSetting'
@@ -4786,7 +4786,7 @@ data PodSecurityPolicyConfigSetting s = PodSecurityPolicyConfigSetting'
 
 -- | Construct a new @pod_security_policy_config@ settings value.
 newPodSecurityPolicyConfigSetting
-    :: TF.Attr s P.Bool -- ^ @enabled@ - 'P.enabled'
+    :: TF.Attr s P.Bool -- ^ 'P._enabled': @enabled@
     -> PodSecurityPolicyConfigSetting s
 newPodSecurityPolicyConfigSetting _enabled =
     PodSecurityPolicyConfigSetting'
@@ -4848,8 +4848,8 @@ data PublicKeyCertificateSetting s = PublicKeyCertificateSetting'
 
 -- | Construct a new @public_key_certificate@ settings value.
 newPublicKeyCertificateSetting
-    :: TF.Attr s P.Text -- ^ @certificate@ - 'P.certificate'
-    -> TF.Attr s P.Text -- ^ @format@ - 'P.format'
+    :: TF.Attr s P.Text -- ^ 'P._certificate': @certificate@
+    -> TF.Attr s P.Text -- ^ 'P._format': @format@
     -> PublicKeyCertificateSetting s
 newPublicKeyCertificateSetting _certificate _format =
     PublicKeyCertificateSetting'
@@ -4889,7 +4889,7 @@ data PushConfigSetting s = PushConfigSetting'
 
 -- | Construct a new @push_config@ settings value.
 newPushConfigSetting
-    :: TF.Attr s P.Text -- ^ @push_endpoint@ - 'P.pushEndpoint'
+    :: TF.Attr s P.Text -- ^ 'P._pushEndpoint': @push_endpoint@
     -> PushConfigSetting s
 newPushConfigSetting _pushEndpoint =
     PushConfigSetting'
@@ -4961,7 +4961,7 @@ data PysparkConfigSetting s = PysparkConfigSetting'
 
 -- | Construct a new @pyspark_config@ settings value.
 newPysparkConfigSetting
-    :: TF.Attr s P.Text -- ^ @main_python_file_uri@ - 'P.mainPythonFileUri'
+    :: TF.Attr s P.Text -- ^ 'P._mainPythonFileUri': @main_python_file_uri@
     -> PysparkConfigSetting s
 newPysparkConfigSetting _mainPythonFileUri =
     PysparkConfigSetting'
@@ -5042,7 +5042,7 @@ data RawDiskSetting s = RawDiskSetting'
 
 -- | Construct a new @raw_disk@ settings value.
 newRawDiskSetting
-    :: TF.Attr s P.Text -- ^ @source@ - 'P.source'
+    :: TF.Attr s P.Text -- ^ 'P._source': @source@
     -> RawDiskSetting s
 newRawDiskSetting _source =
     RawDiskSetting'
@@ -5235,7 +5235,7 @@ data RestorePolicySetting s = RestorePolicySetting'
 
 -- | Construct a new @restore_policy@ settings value.
 newRestorePolicySetting
-    :: TF.Attr s P.Bool -- ^ @default@ - 'P.default''
+    :: TF.Attr s P.Bool -- ^ 'P._default'': @default@
     -> RestorePolicySetting s
 newRestorePolicySetting _default' =
     RestorePolicySetting'
@@ -5295,8 +5295,8 @@ data RollingUpdatePolicySetting s = RollingUpdatePolicySetting'
 
 -- | Construct a new @rolling_update_policy@ settings value.
 newRollingUpdatePolicySetting
-    :: TF.Attr s P.Text -- ^ @minimal_action@ - 'P.minimalAction'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._minimalAction': @minimal_action@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> RollingUpdatePolicySetting s
 newRollingUpdatePolicySetting _minimalAction _type' =
     RollingUpdatePolicySetting'
@@ -5401,9 +5401,9 @@ data RuleSetting s = RuleSetting'
 
 -- | Construct a new @rule@ settings value.
 newRuleSetting
-    :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
-    -> TF.Attr s (MatchSetting s) -- ^ @match@ - 'P.match'
-    -> TF.Attr s P.Int -- ^ @priority@ - 'P.priority'
+    :: TF.Attr s P.Text -- ^ 'P._action': @action@
+    -> TF.Attr s (MatchSetting s) -- ^ 'P._match': @match@
+    -> TF.Attr s P.Int -- ^ 'P._priority': @priority@
     -> RuleSetting s
 newRuleSetting _action _match _priority =
     RuleSetting'
@@ -5560,8 +5560,8 @@ data SecondaryIpRangeSetting s = SecondaryIpRangeSetting'
 
 -- | Construct a new @secondary_ip_range@ settings value.
 newSecondaryIpRangeSetting
-    :: TF.Attr s P.Text -- ^ @range_name@ - 'P.rangeName'
-    -> TF.Attr s P.Text -- ^ @ip_cidr_range@ - 'P.ipCidrRange'
+    :: TF.Attr s P.Text -- ^ 'P._rangeName': @range_name@
+    -> TF.Attr s P.Text -- ^ 'P._ipCidrRange': @ip_cidr_range@
     -> SecondaryIpRangeSetting s
 newSecondaryIpRangeSetting _rangeName _ipCidrRange =
     SecondaryIpRangeSetting'
@@ -5636,7 +5636,7 @@ data ServiceAccountSetting s = ServiceAccountSetting'
 
 -- | Construct a new @service_account@ settings value.
 newServiceAccountSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @scopes@ - 'P.scopes'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._scopes': @scopes@
     -> ServiceAccountSetting s
 newServiceAccountSetting _scopes =
     ServiceAccountSetting'
@@ -5690,7 +5690,7 @@ data SettingsSetting s = SettingsSetting'
 
 -- | Construct a new @settings@ settings value.
 newSettingsSetting
-    :: TF.Attr s P.Text -- ^ @tier@ - 'P.tier'
+    :: TF.Attr s P.Text -- ^ 'P._tier': @tier@
     -> SettingsSetting s
 newSettingsSetting _tier =
     SettingsSetting'
@@ -6156,7 +6156,7 @@ data StateNotificationConfigSetting s = StateNotificationConfigSetting'
 
 -- | Construct a new @state_notification_config@ settings value.
 newStateNotificationConfigSetting
-    :: TF.Attr s P.Text -- ^ @pubsub_topic_name@ - 'P.pubsubTopicName'
+    :: TF.Attr s P.Text -- ^ 'P._pubsubTopicName': @pubsub_topic_name@
     -> StateNotificationConfigSetting s
 newStateNotificationConfigSetting _pubsubTopicName =
     StateNotificationConfigSetting'
@@ -6260,9 +6260,9 @@ data TaintSetting s = TaintSetting'
 
 -- | Construct a new @taint@ settings value.
 newTaintSetting
-    :: TF.Attr s P.Text -- ^ @effect@ - 'P.effect'
-    -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
+    :: TF.Attr s P.Text -- ^ 'P._effect': @effect@
+    -> TF.Attr s P.Text -- ^ 'P._key': @key@
+    -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> TaintSetting s
 newTaintSetting _effect _key _value =
     TaintSetting'
@@ -6422,9 +6422,9 @@ data TestSetting s = TestSetting'
 
 -- | Construct a new @test@ settings value.
 newTestSetting
-    :: TF.Attr s P.Text -- ^ @host@ - 'P.host'
-    -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
-    -> TF.Attr s P.Text -- ^ @service@ - 'P.service'
+    :: TF.Attr s P.Text -- ^ 'P._host': @host@
+    -> TF.Attr s P.Text -- ^ 'P._path': @path@
+    -> TF.Attr s P.Text -- ^ 'P._service': @service@
     -> TestSetting s
 newTestSetting _host _path _service =
     TestSetting'
@@ -6481,7 +6481,7 @@ data TimePartitioningSetting s = TimePartitioningSetting'
 
 -- | Construct a new @time_partitioning@ settings value.
 newTimePartitioningSetting
-    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> TimePartitioningSetting s
 newTimePartitioningSetting _type' =
     TimePartitioningSetting'
@@ -6636,8 +6636,8 @@ data VersionSetting s = VersionSetting'
 
 -- | Construct a new @version@ settings value.
 newVersionSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @instance_template@ - 'P.instanceTemplate'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._instanceTemplate': @instance_template@
     -> VersionSetting s
 newVersionSetting _name _instanceTemplate =
     VersionSetting'
@@ -6717,7 +6717,7 @@ data ViewSetting s = ViewSetting'
 
 -- | Construct a new @view@ settings value.
 newViewSetting
-    :: TF.Attr s P.Text -- ^ @query@ - 'P.query'
+    :: TF.Attr s P.Text -- ^ 'P._query': @query@
     -> ViewSetting s
 newViewSetting _query =
     ViewSetting'
@@ -6822,7 +6822,7 @@ data WorkloadMetadataConfigSetting s = WorkloadMetadataConfigSetting'
 
 -- | Construct a new @workload_metadata_config@ settings value.
 newWorkloadMetadataConfigSetting
-    :: TF.Attr s P.Text -- ^ @node_metadata@ - 'P.nodeMetadata'
+    :: TF.Attr s P.Text -- ^ 'P._nodeMetadata': @node_metadata@
     -> WorkloadMetadataConfigSetting s
 newWorkloadMetadataConfigSetting _nodeMetadata =
     WorkloadMetadataConfigSetting'

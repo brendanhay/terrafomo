@@ -17,10 +17,11 @@
 --
 module Terrafomo.Google.Provider
     (
+    -- * Google Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** Google Specific Aliases
+    -- * Google Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -87,7 +88,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "google"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ TF.assign "credentials" <$> _credentials
             , TF.assign "project" <$> _project
