@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Fastly
-    ( module Terrafomo.Fastly.DataSource
-    , module Terrafomo.Fastly.Lens
-    , module Terrafomo.Fastly.Provider
-    , module Terrafomo.Fastly.Resource
-    , module Terrafomo.Fastly.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Fastly.Provider
+
+    -- * Custom Types
     , module Terrafomo.Fastly.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.Fastly.DataSource
+
+    -- * Resources
+    , module Terrafomo.Fastly.Resource
+
+    -- * Settings
+    , module Terrafomo.Fastly.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Fastly.Lens
     ) where
 
 import Terrafomo.Fastly.DataSource

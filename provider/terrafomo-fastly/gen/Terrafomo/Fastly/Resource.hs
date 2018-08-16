@@ -17,7 +17,6 @@
 --
 module Terrafomo.Fastly.Resource
     (
-    -- * Resource Datatypes
     -- ** fastly_service_v1
       ServiceV1Resource (..)
     , serviceV1Resource
@@ -117,6 +116,7 @@ data ServiceV1Resource s = ServiceV1Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @fastly_service_v1@ resource value.
 serviceV1Resource
     :: TF.Attr s [TF.Attr s (DomainSetting s)] -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'

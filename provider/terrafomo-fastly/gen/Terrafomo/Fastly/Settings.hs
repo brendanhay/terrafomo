@@ -17,7 +17,6 @@
 --
 module Terrafomo.Fastly.Settings
     (
-    -- * Settings Datatypes
     -- ** backend
       BackendSetting (..)
     , newBackendSetting
@@ -207,6 +206,7 @@ data BackendSetting s = BackendSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @backend@ settings value.
 newBackendSetting
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -421,6 +421,7 @@ data BigqueryloggingSetting s = BigqueryloggingSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @bigquerylogging@ settings value.
 newBigqueryloggingSetting
     :: TF.Attr s P.Text -- ^ @dataset@ - 'P.dataset'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
@@ -519,6 +520,7 @@ data CacheSettingSetting s = CacheSettingSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @cache_setting@ settings value.
 newCacheSettingSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> CacheSettingSetting s
@@ -589,6 +591,7 @@ data ConditionSetting s = ConditionSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @condition@ settings value.
 newConditionSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @statement@ - 'P.statement'
@@ -645,6 +648,7 @@ data DomainSetting s = DomainSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @domain@ settings value.
 newDomainSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> DomainSetting s
@@ -723,6 +727,7 @@ data GcsloggingSetting s = GcsloggingSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @gcslogging@ settings value.
 newGcsloggingSetting
     :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -836,6 +841,7 @@ data GzipSetting s = GzipSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @gzip@ settings value.
 newGzipSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> GzipSetting s
@@ -920,6 +926,7 @@ data HeaderSetting s = HeaderSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @header@ settings value.
 newHeaderSetting
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
@@ -1058,6 +1065,7 @@ data HealthcheckSetting s = HealthcheckSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @healthcheck@ settings value.
 newHealthcheckSetting
     :: TF.Attr s P.Text -- ^ @host@ - 'P.host'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1185,6 +1193,7 @@ data LogentriesSetting s = LogentriesSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @logentries@ settings value.
 newLogentriesSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @token@ - 'P.token'
@@ -1274,6 +1283,7 @@ data PapertrailSetting s = PapertrailSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @papertrail@ settings value.
 newPapertrailSetting
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1380,6 +1390,7 @@ data RequestSettingSetting s = RequestSettingSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @request_setting@ settings value.
 newRequestSettingSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> RequestSettingSetting s
@@ -1513,6 +1524,7 @@ data ResponseObjectSetting s = ResponseObjectSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @response_object@ settings value.
 newResponseObjectSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> ResponseObjectSetting s
@@ -1638,6 +1650,7 @@ data S3loggingSetting s = S3loggingSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @s3logging@ settings value.
 newS3loggingSetting
     :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1781,6 +1794,7 @@ data SumologicSetting s = SumologicSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @sumologic@ settings value.
 newSumologicSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
@@ -1887,6 +1901,7 @@ data SyslogSetting s = SyslogSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @syslog@ settings value.
 newSyslogSetting
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1996,6 +2011,7 @@ data VclSetting s = VclSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @vcl@ settings value.
 newVclSetting
     :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'

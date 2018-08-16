@@ -17,7 +17,6 @@
 --
 module Terrafomo.Fastly.DataSource
     (
-    -- * DataSource Datatypes
     -- ** fastly_ip_ranges
       IpRangesData (..)
     , ipRangesData
@@ -55,6 +54,7 @@ import qualified Terrafomo.Validator       as TF
 data IpRangesData s = IpRangesData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @fastly_ip_ranges@ datasource value.
 ipRangesData
     :: P.DataSource (IpRangesData s)
 ipRangesData =
