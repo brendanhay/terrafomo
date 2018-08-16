@@ -19,155 +19,155 @@ module Terrafomo.Docker.Settings
     (
     -- ** auth
       AuthSetting (..)
-    , authSetting
+    , newAuthSetting
 
     -- ** bind_options
     , BindOptionsSetting (..)
-    , bindOptionsSetting
+    , newBindOptionsSetting
 
     -- ** capabilities
     , CapabilitiesSetting (..)
-    , capabilitiesSetting
+    , newCapabilitiesSetting
 
     -- ** configs
     , ConfigsSetting (..)
-    , configsSetting
+    , newConfigsSetting
 
     -- ** container_spec
     , ContainerSpecSetting (..)
-    , containerSpecSetting
+    , newContainerSpecSetting
 
     -- ** converge_config
     , ConvergeConfigSetting (..)
-    , convergeConfigSetting
+    , newConvergeConfigSetting
 
     -- ** credential_spec
     , CredentialSpecSetting (..)
-    , credentialSpecSetting
+    , newCredentialSpecSetting
 
     -- ** devices
     , DevicesSetting (..)
-    , devicesSetting
+    , newDevicesSetting
 
     -- ** dns_config
     , DnsConfigSetting (..)
-    , dnsConfigSetting
+    , newDnsConfigSetting
 
     -- ** endpoint_spec
     , EndpointSpecSetting (..)
-    , endpointSpecSetting
+    , newEndpointSpecSetting
 
     -- ** generic_resources
     , GenericResourcesSetting (..)
-    , genericResourcesSetting
+    , newGenericResourcesSetting
 
     -- ** healthcheck
     , HealthcheckSetting (..)
-    , healthcheckSetting
+    , newHealthcheckSetting
 
     -- ** host
     , HostSetting (..)
-    , hostSetting
+    , newHostSetting
 
     -- ** hosts
     , HostsSetting (..)
-    , hostsSetting
+    , newHostsSetting
 
     -- ** ipam_config
     , IpamConfigSetting (..)
-    , ipamConfigSetting
+    , newIpamConfigSetting
 
     -- ** limits
     , LimitsSetting (..)
-    , limitsSetting
+    , newLimitsSetting
 
     -- ** log_driver
     , LogDriverSetting (..)
-    , logDriverSetting
+    , newLogDriverSetting
 
     -- ** mode
     , ModeSetting (..)
-    , modeSetting
+    , newModeSetting
 
     -- ** mounts
     , MountsSetting (..)
-    , mountsSetting
+    , newMountsSetting
 
     -- ** placement
     , PlacementSetting (..)
-    , placementSetting
+    , newPlacementSetting
 
     -- ** platforms
     , PlatformsSetting (..)
-    , platformsSetting
+    , newPlatformsSetting
 
     -- ** ports
     , PortsSetting (..)
-    , portsSetting
+    , newPortsSetting
 
     -- ** privileges
     , PrivilegesSetting (..)
-    , privilegesSetting
+    , newPrivilegesSetting
 
     -- ** registry_auth
     , RegistryAuthSetting (..)
-    , registryAuthSetting
+    , newRegistryAuthSetting
 
     -- ** replicated
     , ReplicatedSetting (..)
-    , replicatedSetting
+    , newReplicatedSetting
 
     -- ** reservation
     , ReservationSetting (..)
-    , reservationSetting
+    , newReservationSetting
 
     -- ** resources
     , ResourcesSetting (..)
-    , resourcesSetting
+    , newResourcesSetting
 
     -- ** restart_policy
     , RestartPolicySetting (..)
-    , restartPolicySetting
+    , newRestartPolicySetting
 
     -- ** rollback_config
     , RollbackConfigSetting (..)
-    , rollbackConfigSetting
+    , newRollbackConfigSetting
 
     -- ** se_linux_context
     , SeLinuxContextSetting (..)
-    , seLinuxContextSetting
+    , newSeLinuxContextSetting
 
     -- ** secrets
     , SecretsSetting (..)
-    , secretsSetting
+    , newSecretsSetting
 
     -- ** task_spec
     , TaskSpecSetting (..)
-    , taskSpecSetting
+    , newTaskSpecSetting
 
     -- ** tmpfs_options
     , TmpfsOptionsSetting (..)
-    , tmpfsOptionsSetting
+    , newTmpfsOptionsSetting
 
     -- ** ulimit
     , UlimitSetting (..)
-    , ulimitSetting
+    , newUlimitSetting
 
     -- ** update_config
     , UpdateConfigSetting (..)
-    , updateConfigSetting
+    , newUpdateConfigSetting
 
     -- ** upload
     , UploadSetting (..)
-    , uploadSetting
+    , newUploadSetting
 
     -- ** volume_options
     , VolumeOptionsSetting (..)
-    , volumeOptionsSetting
+    , newVolumeOptionsSetting
 
     -- ** volumes
     , VolumesSetting (..)
-    , volumesSetting
+    , newVolumesSetting
 
     ) where
 
@@ -206,10 +206,10 @@ data AuthSetting s = AuthSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @auth@ settings value.
-authSetting
+newAuthSetting
     :: TF.Attr s P.Text -- ^ 'P._serverAddress': @server_address@
     -> AuthSetting s
-authSetting _serverAddress =
+newAuthSetting _serverAddress =
     AuthSetting'
         { _password = TF.Nil
         , _serverAddress = _serverAddress
@@ -251,9 +251,9 @@ data BindOptionsSetting s = BindOptionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @bind_options@ settings value.
-bindOptionsSetting
+newBindOptionsSetting
     :: BindOptionsSetting s
-bindOptionsSetting =
+newBindOptionsSetting =
     BindOptionsSetting'
         { _propagation = TF.Nil
         }
@@ -283,9 +283,9 @@ data CapabilitiesSetting s = CapabilitiesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @capabilities@ settings value.
-capabilitiesSetting
+newCapabilitiesSetting
     :: CapabilitiesSetting s
-capabilitiesSetting =
+newCapabilitiesSetting =
     CapabilitiesSetting'
         { _add = TF.Nil
         , _drop = TF.Nil
@@ -330,11 +330,11 @@ data ConfigsSetting s = ConfigsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @configs@ settings value.
-configsSetting
+newConfigsSetting
     :: TF.Attr s P.Text -- ^ 'P._configId': @config_id@
     -> TF.Attr s P.Text -- ^ 'P._fileName': @file_name@
     -> ConfigsSetting s
-configsSetting _configId _fileName =
+newConfigsSetting _configId _fileName =
     ConfigsSetting'
         { _configId = _configId
         , _configName = TF.Nil
@@ -455,10 +455,10 @@ data ContainerSpecSetting s = ContainerSpecSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @container_spec@ settings value.
-containerSpecSetting
+newContainerSpecSetting
     :: TF.Attr s P.Text -- ^ 'P._image': @image@
     -> ContainerSpecSetting s
-containerSpecSetting _image =
+newContainerSpecSetting _image =
     ContainerSpecSetting'
         { _args = TF.Nil
         , _command = TF.Nil
@@ -644,9 +644,9 @@ data ConvergeConfigSetting s = ConvergeConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @converge_config@ settings value.
-convergeConfigSetting
+newConvergeConfigSetting
     :: ConvergeConfigSetting s
-convergeConfigSetting =
+newConvergeConfigSetting =
     ConvergeConfigSetting'
         { _delay = TF.value "7s"
         , _timeout = TF.value "3m"
@@ -685,9 +685,9 @@ data CredentialSpecSetting s = CredentialSpecSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @credential_spec@ settings value.
-credentialSpecSetting
+newCredentialSpecSetting
     :: CredentialSpecSetting s
-credentialSpecSetting =
+newCredentialSpecSetting =
     CredentialSpecSetting'
         { _file = TF.Nil
         , _registry = TF.Nil
@@ -727,10 +727,10 @@ data DevicesSetting s = DevicesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @devices@ settings value.
-devicesSetting
+newDevicesSetting
     :: TF.Attr s P.Text -- ^ 'P._hostPath': @host_path@
     -> DevicesSetting s
-devicesSetting _hostPath =
+newDevicesSetting _hostPath =
     DevicesSetting'
         { _containerPath = TF.Nil
         , _hostPath = _hostPath
@@ -781,10 +781,10 @@ data DnsConfigSetting s = DnsConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @dns_config@ settings value.
-dnsConfigSetting
+newDnsConfigSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._nameservers': @nameservers@
     -> DnsConfigSetting s
-dnsConfigSetting _nameservers =
+newDnsConfigSetting _nameservers =
     DnsConfigSetting'
         { _nameservers = _nameservers
         , _options = TF.Nil
@@ -831,9 +831,9 @@ data EndpointSpecSetting s = EndpointSpecSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @endpoint_spec@ settings value.
-endpointSpecSetting
+newEndpointSpecSetting
     :: EndpointSpecSetting s
-endpointSpecSetting =
+newEndpointSpecSetting =
     EndpointSpecSetting'
         { _mode = TF.Nil
         , _ports = TF.Nil
@@ -875,9 +875,9 @@ data GenericResourcesSetting s = GenericResourcesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @generic_resources@ settings value.
-genericResourcesSetting
+newGenericResourcesSetting
     :: GenericResourcesSetting s
-genericResourcesSetting =
+newGenericResourcesSetting =
     GenericResourcesSetting'
         { _discreteResourcesSpec = TF.Nil
         , _namedResourcesSpec = TF.Nil
@@ -929,10 +929,10 @@ data HealthcheckSetting s = HealthcheckSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @healthcheck@ settings value.
-healthcheckSetting
+newHealthcheckSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._test': @test@
     -> HealthcheckSetting s
-healthcheckSetting _test =
+newHealthcheckSetting _test =
     HealthcheckSetting'
         { _interval = TF.value "0s"
         , _retries = TF.value 0
@@ -990,11 +990,11 @@ data HostSetting s = HostSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @host@ settings value.
-hostSetting
+newHostSetting
     :: TF.Attr s P.Text -- ^ 'P._host': @host@
     -> TF.Attr s P.Text -- ^ 'P._ip': @ip@
     -> HostSetting s
-hostSetting _host _ip =
+newHostSetting _host _ip =
     HostSetting'
         { _host = _host
         , _ip = _ip
@@ -1031,11 +1031,11 @@ data HostsSetting s = HostsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @hosts@ settings value.
-hostsSetting
+newHostsSetting
     :: TF.Attr s P.Text -- ^ 'P._host': @host@
     -> TF.Attr s P.Text -- ^ 'P._ip': @ip@
     -> HostsSetting s
-hostsSetting _host _ip =
+newHostsSetting _host _ip =
     HostsSetting'
         { _host = _host
         , _ip = _ip
@@ -1078,9 +1078,9 @@ data IpamConfigSetting s = IpamConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ipam_config@ settings value.
-ipamConfigSetting
+newIpamConfigSetting
     :: IpamConfigSetting s
-ipamConfigSetting =
+newIpamConfigSetting =
     IpamConfigSetting'
         { _auxAddress = TF.Nil
         , _gateway = TF.Nil
@@ -1139,9 +1139,9 @@ data LimitsSetting s = LimitsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @limits@ settings value.
-limitsSetting
+newLimitsSetting
     :: LimitsSetting s
-limitsSetting =
+newLimitsSetting =
     LimitsSetting'
         { _genericResources = TF.Nil
         , _memoryBytes = TF.Nil
@@ -1192,10 +1192,10 @@ data LogDriverSetting s = LogDriverSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @log_driver@ settings value.
-logDriverSetting
+newLogDriverSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> LogDriverSetting s
-logDriverSetting _name =
+newLogDriverSetting _name =
     LogDriverSetting'
         { _name = _name
         , _options = TF.Nil
@@ -1240,9 +1240,9 @@ data ModeSetting s = ModeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @mode@ settings value.
-modeSetting
+newModeSetting
     :: ModeSetting s
-modeSetting =
+newModeSetting =
     ModeSetting'
         { _global = TF.value P.False
         , _replicated = TF.Nil
@@ -1319,12 +1319,12 @@ data MountsSetting s = MountsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @mounts@ settings value.
-mountsSetting
+newMountsSetting
     :: TF.Attr s P.Text -- ^ 'P._source': @source@
     -> TF.Attr s P.Text -- ^ 'P._target': @target@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> MountsSetting s
-mountsSetting _source _target _type' =
+newMountsSetting _source _target _type' =
     MountsSetting'
         { _bindOptions = TF.Nil
         , _readOnly = TF.Nil
@@ -1416,9 +1416,9 @@ data PlacementSetting s = PlacementSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @placement@ settings value.
-placementSetting
+newPlacementSetting
     :: PlacementSetting s
-placementSetting =
+newPlacementSetting =
     PlacementSetting'
         { _constraints = TF.Nil
         , _platforms = TF.Nil
@@ -1464,11 +1464,11 @@ data PlatformsSetting s = PlatformsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @platforms@ settings value.
-platformsSetting
+newPlatformsSetting
     :: TF.Attr s P.Text -- ^ 'P._architecture': @architecture@
     -> TF.Attr s P.Text -- ^ 'P._os': @os@
     -> PlatformsSetting s
-platformsSetting _architecture _os =
+newPlatformsSetting _architecture _os =
     PlatformsSetting'
         { _architecture = _architecture
         , _os = _os
@@ -1528,11 +1528,11 @@ data PortsSetting s = PortsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ports@ settings value.
-portsSetting
+newPortsSetting
     :: TF.Attr s P.Int -- ^ 'P._internal': @internal@
     -> TF.Attr s P.Int -- ^ 'P._targetPort': @target_port@
     -> PortsSetting s
-portsSetting _internal _targetPort =
+newPortsSetting _internal _targetPort =
     PortsSetting'
         { _external = TF.Nil
         , _internal = _internal
@@ -1613,9 +1613,9 @@ data PrivilegesSetting s = PrivilegesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @privileges@ settings value.
-privilegesSetting
+newPrivilegesSetting
     :: PrivilegesSetting s
-privilegesSetting =
+newPrivilegesSetting =
     PrivilegesSetting'
         { _credentialSpec = TF.Nil
         , _seLinuxContext = TF.Nil
@@ -1680,10 +1680,10 @@ data RegistryAuthSetting = RegistryAuthSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @registry_auth@ settings value.
-registryAuthSetting
+newRegistryAuthSetting
     :: P.Text -- ^ 'P._address': @address@
     -> RegistryAuthSetting
-registryAuthSetting _address =
+newRegistryAuthSetting _address =
     RegistryAuthSetting'
         { _address = _address
         , _configFile = P.Nothing
@@ -1748,9 +1748,9 @@ data ReplicatedSetting s = ReplicatedSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @replicated@ settings value.
-replicatedSetting
+newReplicatedSetting
     :: ReplicatedSetting s
-replicatedSetting =
+newReplicatedSetting =
     ReplicatedSetting'
         { _replicas = TF.value 1
         }
@@ -1788,9 +1788,9 @@ data ReservationSetting s = ReservationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @reservation@ settings value.
-reservationSetting
+newReservationSetting
     :: ReservationSetting s
-reservationSetting =
+newReservationSetting =
     ReservationSetting'
         { _genericResources = TF.Nil
         , _memoryBytes = TF.Nil
@@ -1842,9 +1842,9 @@ data ResourcesSetting s = ResourcesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @resources@ settings value.
-resourcesSetting
+newResourcesSetting
     :: ResourcesSetting s
-resourcesSetting =
+newResourcesSetting =
     ResourcesSetting'
         { _limits = TF.Nil
         , _reservation = TF.Nil
@@ -1901,9 +1901,9 @@ data RestartPolicySetting s = RestartPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @restart_policy@ settings value.
-restartPolicySetting
+newRestartPolicySetting
     :: RestartPolicySetting s
-restartPolicySetting =
+newRestartPolicySetting =
     RestartPolicySetting'
         { _condition = TF.Nil
         , _delay = TF.Nil
@@ -1972,9 +1972,9 @@ data RollbackConfigSetting s = RollbackConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @rollback_config@ settings value.
-rollbackConfigSetting
+newRollbackConfigSetting
     :: RollbackConfigSetting s
-rollbackConfigSetting =
+newRollbackConfigSetting =
     RollbackConfigSetting'
         { _delay = TF.value "0s"
         , _failureAction = TF.value "pause"
@@ -2053,9 +2053,9 @@ data SeLinuxContextSetting s = SeLinuxContextSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @se_linux_context@ settings value.
-seLinuxContextSetting
+newSeLinuxContextSetting
     :: SeLinuxContextSetting s
-seLinuxContextSetting =
+newSeLinuxContextSetting =
     SeLinuxContextSetting'
         { _disable = TF.Nil
         , _level = TF.Nil
@@ -2121,11 +2121,11 @@ data SecretsSetting s = SecretsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @secrets@ settings value.
-secretsSetting
+newSecretsSetting
     :: TF.Attr s P.Text -- ^ 'P._secretId': @secret_id@
     -> TF.Attr s P.Text -- ^ 'P._fileName': @file_name@
     -> SecretsSetting s
-secretsSetting _secretId _fileName =
+newSecretsSetting _secretId _fileName =
     SecretsSetting'
         { _fileName = _fileName
         , _secretId = _secretId
@@ -2202,10 +2202,10 @@ data TaskSpecSetting s = TaskSpecSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @task_spec@ settings value.
-taskSpecSetting
+newTaskSpecSetting
     :: TF.Attr s (ContainerSpecSetting s) -- ^ 'P._containerSpec': @container_spec@
     -> TaskSpecSetting s
-taskSpecSetting _containerSpec =
+newTaskSpecSetting _containerSpec =
     TaskSpecSetting'
         { _containerSpec = _containerSpec
         , _forceUpdate = TF.Nil
@@ -2317,9 +2317,9 @@ data TmpfsOptionsSetting s = TmpfsOptionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @tmpfs_options@ settings value.
-tmpfsOptionsSetting
+newTmpfsOptionsSetting
     :: TmpfsOptionsSetting s
-tmpfsOptionsSetting =
+newTmpfsOptionsSetting =
     TmpfsOptionsSetting'
         { _mode = TF.Nil
         , _sizeBytes = TF.Nil
@@ -2359,12 +2359,12 @@ data UlimitSetting s = UlimitSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ulimit@ settings value.
-ulimitSetting
+newUlimitSetting
     :: TF.Attr s P.Int -- ^ 'P._hard': @hard@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Int -- ^ 'P._soft': @soft@
     -> UlimitSetting s
-ulimitSetting _hard _name _soft =
+newUlimitSetting _hard _name _soft =
     UlimitSetting'
         { _hard = _hard
         , _name = _name
@@ -2426,9 +2426,9 @@ data UpdateConfigSetting s = UpdateConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @update_config@ settings value.
-updateConfigSetting
+newUpdateConfigSetting
     :: UpdateConfigSetting s
-updateConfigSetting =
+newUpdateConfigSetting =
     UpdateConfigSetting'
         { _delay = TF.value "0s"
         , _failureAction = TF.value "pause"
@@ -2496,11 +2496,11 @@ data UploadSetting s = UploadSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @upload@ settings value.
-uploadSetting
+newUploadSetting
     :: TF.Attr s P.Text -- ^ 'P._content': @content@
     -> TF.Attr s P.Text -- ^ 'P._file': @file@
     -> UploadSetting s
-uploadSetting _content _file =
+newUploadSetting _content _file =
     UploadSetting'
         { _content = _content
         , _executable = TF.value P.False
@@ -2554,9 +2554,9 @@ data VolumeOptionsSetting s = VolumeOptionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @volume_options@ settings value.
-volumeOptionsSetting
+newVolumeOptionsSetting
     :: VolumeOptionsSetting s
-volumeOptionsSetting =
+newVolumeOptionsSetting =
     VolumeOptionsSetting'
         { _driverName = TF.Nil
         , _driverOptions = TF.Nil
@@ -2616,9 +2616,9 @@ data VolumesSetting s = VolumesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @volumes@ settings value.
-volumesSetting
+newVolumesSetting
     :: VolumesSetting s
-volumesSetting =
+newVolumesSetting =
     VolumesSetting'
         { _containerPath = TF.Nil
         , _fromContainer = TF.Nil
