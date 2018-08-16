@@ -110,22 +110,17 @@ newProvider _address _token =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "vault"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , P.Just $ TF.assign "address" _address
-                  , TF.assign "ca_cert_dir" <$> _caCertDir
-                  , TF.assign "ca_cert_file" <$> _caCertFile
-                  , TF.assign "client_auth" <$> _clientAuth
-                  , TF.assign "max_lease_ttl_seconds" <$> _maxLeaseTtlSeconds
-                  , TF.assign "skip_tls_verify" <$> _skipTlsVerify
-                  , P.Just $ TF.assign "token" _token
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ P.Just $ TF.assign "address" _address
+            , TF.assign "ca_cert_dir" <$> _caCertDir
+            , TF.assign "ca_cert_file" <$> _caCertFile
+            , TF.assign "client_auth" <$> _clientAuth
+            , TF.assign "max_lease_ttl_seconds" <$> _maxLeaseTtlSeconds
+            , TF.assign "skip_tls_verify" <$> _skipTlsVerify
+            , P.Just $ TF.assign "token" _token
+            ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty

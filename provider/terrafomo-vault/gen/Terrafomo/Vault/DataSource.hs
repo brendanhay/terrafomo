@@ -75,7 +75,7 @@ approleAuthBackendRoleIdData
     :: TF.Attr s P.Text -- ^ @role_name@ - 'P.roleName'
     -> P.DataSource (ApproleAuthBackendRoleIdData s)
 approleAuthBackendRoleIdData _roleName =
-    TF.unsafeDataSource "vault_approle_auth_backend_role_id" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "vault_approle_auth_backend_role_id" TF.validator $
         ApproleAuthBackendRoleIdData'
             { _backend = TF.value "approle"
             , _roleName = _roleName
@@ -131,7 +131,7 @@ awsAccessCredentialsData
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.DataSource (AwsAccessCredentialsData s)
 awsAccessCredentialsData _backend _role =
-    TF.unsafeDataSource "vault_aws_access_credentials" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "vault_aws_access_credentials" TF.validator $
         AwsAccessCredentialsData'
             { _backend = _backend
             , _role = _role
@@ -202,7 +202,7 @@ genericSecretData
     :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> P.DataSource (GenericSecretData s)
 genericSecretData _path =
-    TF.unsafeDataSource "vault_generic_secret" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "vault_generic_secret" TF.validator $
         GenericSecretData'
             { _path = _path
             }
