@@ -49,6 +49,7 @@ module Terrafomo.StatusCake.Lens
     , HasWebsiteUrl (..)
 
     -- ** Computed Attributes
+    , HasComputedId (..)
     , HasComputedStatus (..)
     , HasComputedTestId (..)
     , HasComputedUptime (..)
@@ -250,6 +251,9 @@ class HasWebsiteUrl a b | a -> b where
 
 instance HasWebsiteUrl a b => HasWebsiteUrl (TF.Schema l p a) b where
     websiteUrl = TF.configuration . websiteUrl
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedStatus a b | a -> b where
     computedStatus :: a -> b

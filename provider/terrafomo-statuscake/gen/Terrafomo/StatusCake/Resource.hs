@@ -372,6 +372,9 @@ instance P.HasWebsiteUrl (TestResource s) (TF.Attr s P.Text) where
         P.lens (_websiteUrl :: TestResource s -> TF.Attr s P.Text)
                (\s a -> s { _websiteUrl = a } :: TestResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
