@@ -73,7 +73,7 @@ sshKeyResource
     -> TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
     -> P.Resource (SshKeyResource s)
 sshKeyResource _name _publicKey =
-    TF.unsafeResource "softlayer_ssh_key" P.defaultProvider TF.validator $
+    TF.unsafeResource "softlayer_ssh_key" TF.validator $
         SshKeyResource'
             { _name = _name
             , _notes = TF.Nil
@@ -182,7 +182,7 @@ virtualGuestResource
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> P.Resource (VirtualGuestResource s)
 virtualGuestResource _cpu _domain _hourlyBilling _localDisk _name _ram _region =
-    TF.unsafeResource "softlayer_virtual_guest" P.defaultProvider TF.validator $
+    TF.unsafeResource "softlayer_virtual_guest" TF.validator $
         VirtualGuestResource'
             { _backendVlanId = TF.Nil
             , _blockDeviceTemplateGroupGid = TF.Nil
