@@ -12,11 +12,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.DNSimple
-    ( module Terrafomo.DNSimple.Types
+    ( module Terrafomo.DNSimple.Lens
     , module Terrafomo.DNSimple.Provider
     , module Terrafomo.DNSimple.Resource
     , module Terrafomo.DNSimple.Settings
-    , module Terrafomo.DNSimple.Lens
+    , module Terrafomo.DNSimple.Types
     -- * Provider Aliases
     ) where
 

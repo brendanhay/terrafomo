@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.DNSimple.Settings
 
-import qualified Data.Hashable               as P
-import qualified Data.HashMap.Strict         as P
-import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Map.Strict             as P
+import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
 import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
@@ -69,7 +68,7 @@ data RecordResource s = RecordResource'
     , _value  :: TF.Attr s P.Text
     -- ^ @value@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 recordResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
@@ -78,7 +77,7 @@ recordResource
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> P.Resource (RecordResource s)
 recordResource _domain _name _type' _value =
-    TF.newResource "dnsimple_record" TF.validator $
+    TF.unsafeResource "dnsimple_record" P.defaultProvider TF.validator $
         RecordResource'
             { _domain = _domain
             , _name = _name
