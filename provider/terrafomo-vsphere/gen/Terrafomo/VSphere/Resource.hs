@@ -840,6 +840,9 @@ instance P.HasTags (ComputeClusterResource s) (TF.Attr s [TF.Attr s P.Text]) whe
         P.lens (_tags :: ComputeClusterResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: ComputeClusterResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeClusterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedResourcePoolId (TF.Ref s' (ComputeClusterResource s)) (TF.Attr s P.Text) where
     computedResourcePoolId x = TF.compute (TF.refKey x) "resource_pool_id"
 
@@ -898,6 +901,9 @@ instance P.HasName (ComputeClusterHostGroupResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeClusterHostGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeClusterHostGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vsphere_compute_cluster_vm_affinity_rule@ Resource.
 --
@@ -979,6 +985,9 @@ instance P.HasVirtualMachineIds (ComputeClusterVmAffinityRuleResource s) (TF.Att
         P.lens (_virtualMachineIds :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _virtualMachineIds = a } :: ComputeClusterVmAffinityRuleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeClusterVmAffinityRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @vsphere_compute_cluster_vm_anti_affinity_rule@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_vm_anti_affinity_rule.html terraform documentation>
@@ -1058,6 +1067,9 @@ instance P.HasVirtualMachineIds (ComputeClusterVmAntiAffinityRuleResource s) (TF
     virtualMachineIds =
         P.lens (_virtualMachineIds :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _virtualMachineIds = a } :: ComputeClusterVmAntiAffinityRuleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeClusterVmAntiAffinityRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vsphere_compute_cluster_vm_dependency_rule@ Resource.
 --
@@ -1155,6 +1167,9 @@ instance P.HasVmGroupName (ComputeClusterVmDependencyRuleResource s) (TF.Attr s 
         P.lens (_vmGroupName :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _vmGroupName = a } :: ComputeClusterVmDependencyRuleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeClusterVmDependencyRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @vsphere_compute_cluster_vm_group@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_vm_group.html terraform documentation>
@@ -1210,6 +1225,9 @@ instance P.HasVirtualMachineIds (ComputeClusterVmGroupResource s) (TF.Attr s [TF
     virtualMachineIds =
         P.lens (_virtualMachineIds :: ComputeClusterVmGroupResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _virtualMachineIds = a } :: ComputeClusterVmGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeClusterVmGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vsphere_compute_cluster_vm_host_rule@ Resource.
 --
@@ -1332,6 +1350,9 @@ instance P.HasVmGroupName (ComputeClusterVmHostRuleResource s) (TF.Attr s P.Text
         P.lens (_vmGroupName :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _vmGroupName = a } :: ComputeClusterVmHostRuleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeClusterVmHostRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @vsphere_custom_attribute@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/vsphere/r/custom_attribute.html terraform documentation>
@@ -1376,6 +1397,9 @@ instance P.HasName (CustomAttributeResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CustomAttributeResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: CustomAttributeResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CustomAttributeResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vsphere_datacenter@ Resource.
 --
@@ -1440,6 +1464,9 @@ instance P.HasTags (DatacenterResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
         P.lens (_tags :: DatacenterResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: DatacenterResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedMoid (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
     computedMoid x = TF.compute (TF.refKey x) "moid"
@@ -1760,6 +1787,9 @@ instance P.HasTags (DatastoreClusterResource s) (TF.Attr s [TF.Attr s P.Text]) w
         P.lens (_tags :: DatastoreClusterResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: DatastoreClusterResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DatastoreClusterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @vsphere_datastore_cluster_vm_anti_affinity_rule@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/vsphere/r/datastore_cluster_vm_anti_affinity_rule.html terraform documentation>
@@ -1840,6 +1870,9 @@ instance P.HasVirtualMachineIds (DatastoreClusterVmAntiAffinityRuleResource s) (
     virtualMachineIds =
         P.lens (_virtualMachineIds :: DatastoreClusterVmAntiAffinityRuleResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _virtualMachineIds = a } :: DatastoreClusterVmAntiAffinityRuleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DatastoreClusterVmAntiAffinityRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vsphere_distributed_port_group@ Resource.
 --
@@ -2080,6 +2113,9 @@ instance P.HasVlanOverrideAllowed (DistributedPortGroupResource s) (TF.Attr s P.
     vlanOverrideAllowed =
         P.lens (_vlanOverrideAllowed :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
                (\s a -> s { _vlanOverrideAllowed = a } :: DistributedPortGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedActiveUplinks (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedActiveUplinks x = TF.compute (TF.refKey x) "active_uplinks"
@@ -2420,6 +2456,9 @@ instance P.HasTags (DistributedVirtualSwitchResource s) (TF.Attr s [TF.Attr s P.
         P.lens (_tags :: DistributedVirtualSwitchResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: DistributedVirtualSwitchResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedActiveUplinks (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedActiveUplinks x = TF.compute (TF.refKey x) "active_uplinks"
 
@@ -2695,6 +2734,9 @@ instance P.HasHostSystemId (DpmHostOverrideResource s) (TF.Attr s P.Text) where
         P.lens (_hostSystemId :: DpmHostOverrideResource s -> TF.Attr s P.Text)
                (\s a -> s { _hostSystemId = a } :: DpmHostOverrideResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DpmHostOverrideResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @vsphere_drs_vm_override@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/vsphere/r/drs_vm_override.html terraform documentation>
@@ -2762,6 +2804,9 @@ instance P.HasVirtualMachineId (DrsVmOverrideResource s) (TF.Attr s P.Text) wher
     virtualMachineId =
         P.lens (_virtualMachineId :: DrsVmOverrideResource s -> TF.Attr s P.Text)
                (\s a -> s { _virtualMachineId = a } :: DrsVmOverrideResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DrsVmOverrideResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vsphere_file@ Resource.
 --
@@ -2857,6 +2902,9 @@ instance P.HasSourceFile (FileResource s) (TF.Attr s P.Text) where
         P.lens (_sourceFile :: FileResource s -> TF.Attr s P.Text)
                (\s a -> s { _sourceFile = a } :: FileResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @vsphere_folder@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/vsphere/r/folder.html terraform documentation>
@@ -2936,6 +2984,9 @@ instance P.HasType' (FolderResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: FolderResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: FolderResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FolderResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vsphere_ha_vm_override@ Resource.
 --
@@ -3149,6 +3200,9 @@ instance P.HasVirtualMachineId (HaVmOverrideResource s) (TF.Attr s P.Text) where
     virtualMachineId =
         P.lens (_virtualMachineId :: HaVmOverrideResource s -> TF.Attr s P.Text)
                (\s a -> s { _virtualMachineId = a } :: HaVmOverrideResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (HaVmOverrideResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vsphere_host_port_group@ Resource.
 --
@@ -3370,6 +3424,9 @@ instance P.HasVlanId (HostPortGroupResource s) (TF.Attr s P.Int) where
     vlanId =
         P.lens (_vlanId :: HostPortGroupResource s -> TF.Attr s P.Int)
                (\s a -> s { _vlanId = a } :: HostPortGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedComputedPolicy (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedComputedPolicy x = TF.compute (TF.refKey x) "computed_policy"
@@ -3647,6 +3704,9 @@ instance P.HasTeamingPolicy (HostVirtualSwitchResource s) (TF.Attr s P.Text) whe
         P.lens (_teamingPolicy :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
                (\s a -> s { _teamingPolicy = a } :: HostVirtualSwitchResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (HostVirtualSwitchResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @vsphere_license@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/vsphere/r/license.html terraform documentation>
@@ -3688,6 +3748,9 @@ instance P.HasLicenseKey (LicenseResource s) (TF.Attr s P.Text) where
     licenseKey =
         P.lens (_licenseKey :: LicenseResource s -> TF.Attr s P.Text)
                (\s a -> s { _licenseKey = a } :: LicenseResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEditionKey (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
     computedEditionKey x = TF.compute (TF.refKey x) "edition_key"
@@ -3866,6 +3929,9 @@ instance P.HasType' (NasDatastoreResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: NasDatastoreResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: NasDatastoreResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAccessible (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Bool) where
     computedAccessible x = TF.compute (TF.refKey x) "accessible"
@@ -4055,6 +4121,9 @@ instance P.HasTags (ResourcePoolResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_tags :: ResourcePoolResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: ResourcePoolResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCpuShares (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Int) where
     computedCpuShares x = TF.compute (TF.refKey x) "cpu_shares"
 
@@ -4139,6 +4208,9 @@ instance P.HasVirtualMachineId (StorageDrsVmOverrideResource s) (TF.Attr s P.Tex
         P.lens (_virtualMachineId :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
                (\s a -> s { _virtualMachineId = a } :: StorageDrsVmOverrideResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageDrsVmOverrideResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @vsphere_tag@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/vsphere/r/tag.html terraform documentation>
@@ -4195,6 +4267,9 @@ instance P.HasName (TagResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: TagResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: TagResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TagResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vsphere_tag_category@ Resource.
 --
@@ -4265,6 +4340,9 @@ instance P.HasName (TagCategoryResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: TagCategoryResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: TagCategoryResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TagCategoryResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vsphere_vapp_container@ Resource.
 --
@@ -4441,6 +4519,9 @@ instance P.HasTags (VappContainerResource s) (TF.Attr s [TF.Attr s P.Text]) wher
         P.lens (_tags :: VappContainerResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: VappContainerResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCpuShares (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Int) where
     computedCpuShares x = TF.compute (TF.refKey x) "cpu_shares"
 
@@ -4530,6 +4611,9 @@ instance P.HasVmdkPath (VirtualDiskResource s) (TF.Attr s P.Text) where
     vmdkPath =
         P.lens (_vmdkPath :: VirtualDiskResource s -> TF.Attr s P.Text)
                (\s a -> s { _vmdkPath = a } :: VirtualDiskResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualDiskResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vsphere_virtual_machine@ Resource.
 --
@@ -5188,6 +5272,9 @@ instance P.HasWaitForGuestNetTimeout (VirtualMachineResource s) (TF.Attr s P.Int
         P.lens (_waitForGuestNetTimeout :: VirtualMachineResource s -> TF.Attr s P.Int)
                (\s a -> s { _waitForGuestNetTimeout = a } :: VirtualMachineResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedChangeVersion (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
     computedChangeVersion x = TF.compute (TF.refKey x) "change_version"
 
@@ -5329,6 +5416,9 @@ instance P.HasVirtualMachineUuid (VirtualMachineSnapshotResource s) (TF.Attr s P
         P.lens (_virtualMachineUuid :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
                (\s a -> s { _virtualMachineUuid = a } :: VirtualMachineSnapshotResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualMachineSnapshotResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @vsphere_vmfs_datastore@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/vsphere/r/vmfs_datastore.html terraform documentation>
@@ -5446,6 +5536,9 @@ instance P.HasTags (VmfsDatastoreResource s) (TF.Attr s [TF.Attr s P.Text]) wher
     tags =
         P.lens (_tags :: VmfsDatastoreResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: VmfsDatastoreResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAccessible (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Bool) where
     computedAccessible x = TF.compute (TF.refKey x) "accessible"
