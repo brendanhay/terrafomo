@@ -27,11 +27,10 @@ module Terrafomo.AWS.Types
     , IAM.Policy
 
     -- * DynamoDB
-    , DynamodbTableAttributeType (..)
+    , TableAttributeType (..)
     ) where
 
-import Data.Hashable (Hashable (hashWithSalt))
-import Data.IP       (IPRange)
+import Data.IP (IPRange)
 
 import Formatting (Format, (%))
 
@@ -42,7 +41,6 @@ import Network.AWS.Types (Region (..))
 import Terrafomo
 
 import qualified Amazonka.IAM.Policy    as IAM
-import qualified Data.IP                as IP
 import qualified Data.Text.Lazy.Builder as Build
 import qualified Formatting             as Format
 import qualified Network.AWS.Data.Text  as AWS
@@ -50,9 +48,7 @@ import qualified Terrafomo.HCL          as HCL
 
 -- | A specific AWS availability zone.
 data Zone = Zone !Region !Char
-    deriving (Show, Eq, Generic)
-
-instance Hashable Zone
+    deriving (Show, Eq, Ord, Generic)
 
 instance IsValue Zone where
     toValue = HCL.toValue . Format.bprint fzone
@@ -77,23 +73,6 @@ fzonesuf =
     Format.later $ \(Zone _ suf) ->
         Format.bprint Format.char suf
 
--- WARNING: This orphan exists because of the need to Data.Hashable.hash
--- the AWS provider, which potentially contains an IPRoute under the current
--- generation scheme.
-instance Hashable IPRange where
-    hashWithSalt s =
-        hashWithSalt s . \case
-            IP.IPv4Range addr ->
-               let (ip4, mask) = IP.addrRangePair addr
-                in s `hashWithSalt` (0 :: Int)
-                     `hashWithSalt` IP.fromIPv4 ip4
-                     `hashWithSalt` mask
-            IP.IPv6Range addr ->
-               let (ip6, mask) = IP.addrRangePair addr
-                in s `hashWithSalt` (1 :: Int)
-                     `hashWithSalt` IP.fromIPv6 ip6
-                     `hashWithSalt` mask
-
 -- Orphan instance for amazonka-iam-policy type.
 instance IsValue IAM.Document where
     toValue = HCL.json
@@ -101,9 +80,7 @@ instance IsValue IAM.Document where
 data NetworkTraffic
     = TrafficIngress
     | TrafficEgress
-      deriving (Show, Eq, Generic)
-
-instance Hashable NetworkTraffic
+      deriving (Show, Eq, Ord, Generic)
 
 instance IsValue NetworkTraffic where
     toValue = HCL.string . \case
@@ -115,9 +92,7 @@ data NetworkProtocol
     | ProtocolTCP
     | ProtocolUDP
     | ProtocolAll
-      deriving (Show, Eq, Generic)
-
-instance Hashable NetworkProtocol
+      deriving (Show, Eq, Ord, Generic)
 
 instance IsValue NetworkProtocol where
     toValue = HCL.string . \case
@@ -129,16 +104,14 @@ instance IsValue NetworkProtocol where
 -- DynamoDB Specific
 
 -- | One of: S, N, or B for (S)tring, (N)umber or (B)inary data.
-data DynamodbTableAttributeType
-    = DynamoString
-    | DynamoNumber
-    | DynamoBinary
-      deriving (Show, Eq, Generic)
+data TableAttributeType
+    = TypeString
+    | TypeNumber
+    | TypeBinary
+      deriving (Show, Eq, Ord, Generic)
 
-instance Hashable DynamodbTableAttributeType
-
-instance IsValue DynamodbTableAttributeType where
+instance IsValue TableAttributeType where
     toValue = HCL.string . \case
-        DynamoString -> "S"
-        DynamoNumber -> "N"
-        DynamoBinary -> "B"
+        TypeString -> "S"
+        TypeNumber -> "N"
+        TypeBinary -> "B"
