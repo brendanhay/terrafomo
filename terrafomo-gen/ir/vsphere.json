@@ -775,6 +775,26 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "The full path of the virtual disk. This can only be provided if attach is",
+                        "set to true, otherwise it is a read-only value."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"path\" <$> TF.attribute",
+                    "name": "_path",
+                    "method": "path",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPath",
+                    "validate": false,
+                    "optional": true,
+                    "original": "path"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "The size of the disk, in GB."
                     ],
                     "forceNew": false,
@@ -912,7 +932,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPath",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "path"
                 },
                 {
@@ -1415,6 +1435,25 @@
                     "original": "bandwidth_reservation"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The share count for this network interface when the share level is custom."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"bandwidth_share_count\" <$> TF.attribute",
+                    "name": "_bandwidthShareCount",
+                    "method": "bandwidthShareCount",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasBandwidthShareCount",
+                    "validate": false,
+                    "optional": true,
+                    "original": "bandwidth_share_count"
+                },
+                {
                     "default": "TF.value \"normal\"",
                     "computed": false,
                     "required": false,
@@ -1433,6 +1472,26 @@
                     "validate": false,
                     "optional": true,
                     "original": "bandwidth_share_level"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The MAC address of this network interface. Can only be manually set if",
+                        "use_static_mac is true."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"mac_address\" <$> TF.attribute",
+                    "name": "_macAddress",
+                    "method": "macAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMacAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "mac_address"
                 },
                 {
                     "default": "_networkId",
@@ -1494,7 +1553,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedBandwidthShareCount",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "bandwidth_share_count"
                 },
                 {
@@ -1553,7 +1612,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMacAddress",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "mac_address"
                 }
             ],
@@ -7070,6 +7129,86 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "List of active uplinks used for load balancing, matching the names of the",
+                        "uplinks assigned in the DVS."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"active_uplinks\" <$> TF.attribute",
+                    "name": "_activeUplinks",
+                    "method": "activeUplinks",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasActiveUplinks",
+                    "validate": false,
+                    "optional": true,
+                    "original": "active_uplinks"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Controls whether or not the virtual network adapter is allowed to send",
+                        "network traffic with a different MAC address than that of its own."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"allow_forged_transmits\" <$> TF.attribute",
+                    "name": "_allowForgedTransmits",
+                    "method": "allowForgedTransmits",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAllowForgedTransmits",
+                    "validate": false,
+                    "optional": true,
+                    "original": "allow_forged_transmits"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Controls whether or not the Media Access Control (MAC) address can be",
+                        "changed."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"allow_mac_changes\" <$> TF.attribute",
+                    "name": "_allowMacChanges",
+                    "method": "allowMacChanges",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAllowMacChanges",
+                    "validate": false,
+                    "optional": true,
+                    "original": "allow_mac_changes"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Enable promiscuous mode on the network. This flag indicates whether or not",
+                        "all traffic is seen on a given port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"allow_promiscuous\" <$> TF.attribute",
+                    "name": "_allowPromiscuous",
+                    "method": "allowPromiscuous",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAllowPromiscuous",
+                    "validate": false,
+                    "optional": true,
+                    "original": "allow_promiscuous"
+                },
+                {
                     "default": "TF.value P.True",
                     "computed": false,
                     "required": false,
@@ -7094,6 +7233,25 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "Indicates whether to block all ports by default."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"block_all_ports\" <$> TF.attribute",
+                    "name": "_blockAllPorts",
+                    "method": "blockAllPorts",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasBlockAllPorts",
+                    "validate": false,
+                    "optional": true,
+                    "original": "block_all_ports"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "Allow the blocked setting of an individual port to override the setting in",
                         "the portgroup."
                     ],
@@ -7108,6 +7266,25 @@
                     "validate": false,
                     "optional": true,
                     "original": "block_override_allowed"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Enable beacon probing on the ports this policy applies to."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"check_beacon\" <$> TF.attribute",
+                    "name": "_checkBeacon",
+                    "method": "checkBeacon",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasCheckBeacon",
+                    "validate": false,
+                    "optional": true,
+                    "original": "check_beacon"
                 },
                 {
                     "default": "TF.Nil",
@@ -7148,6 +7325,25 @@
                     "original": "description"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Allow VMDirectPath Gen2 on the ports this policy applies to."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"directpath_gen2_allowed\" <$> TF.attribute",
+                    "name": "_directpathGen2Allowed",
+                    "method": "directpathGen2Allowed",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasDirectpathGen2Allowed",
+                    "validate": false,
+                    "optional": true,
+                    "original": "directpath_gen2_allowed"
+                },
+                {
                     "default": "_distributedVirtualSwitchUuid",
                     "computed": false,
                     "required": true,
@@ -7165,6 +7361,222 @@
                     "validate": false,
                     "optional": false,
                     "original": "distributed_virtual_switch_uuid"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The average egress bandwidth in bits per second if egress shaping is enabled",
+                        "on the port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"egress_shaping_average_bandwidth\" <$> TF.attribute",
+                    "name": "_egressShapingAverageBandwidth",
+                    "method": "egressShapingAverageBandwidth",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasEgressShapingAverageBandwidth",
+                    "validate": false,
+                    "optional": true,
+                    "original": "egress_shaping_average_bandwidth"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The maximum egress burst size allowed in bytes if egress shaping is enabled",
+                        "on the port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"egress_shaping_burst_size\" <$> TF.attribute",
+                    "name": "_egressShapingBurstSize",
+                    "method": "egressShapingBurstSize",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasEgressShapingBurstSize",
+                    "validate": false,
+                    "optional": true,
+                    "original": "egress_shaping_burst_size"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "True if the traffic shaper is enabled for egress traffic on the port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"egress_shaping_enabled\" <$> TF.attribute",
+                    "name": "_egressShapingEnabled",
+                    "method": "egressShapingEnabled",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasEgressShapingEnabled",
+                    "validate": false,
+                    "optional": true,
+                    "original": "egress_shaping_enabled"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The peak egress bandwidth during bursts in bits per second if egress traffic",
+                        "shaping is enabled on the port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"egress_shaping_peak_bandwidth\" <$> TF.attribute",
+                    "name": "_egressShapingPeakBandwidth",
+                    "method": "egressShapingPeakBandwidth",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasEgressShapingPeakBandwidth",
+                    "validate": false,
+                    "optional": true,
+                    "original": "egress_shaping_peak_bandwidth"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "If true, the teaming policy will re-activate failed interfaces higher in",
+                        "precedence when they come back up."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"failback\" <$> TF.attribute",
+                    "name": "_failback",
+                    "method": "failback",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasFailback",
+                    "validate": false,
+                    "optional": true,
+                    "original": "failback"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The average ingress bandwidth in bits per second if ingress shaping is",
+                        "enabled on the port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ingress_shaping_average_bandwidth\" <$> TF.attribute",
+                    "name": "_ingressShapingAverageBandwidth",
+                    "method": "ingressShapingAverageBandwidth",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasIngressShapingAverageBandwidth",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ingress_shaping_average_bandwidth"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The maximum ingress burst size allowed in bytes if ingress shaping is",
+                        "enabled on the port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ingress_shaping_burst_size\" <$> TF.attribute",
+                    "name": "_ingressShapingBurstSize",
+                    "method": "ingressShapingBurstSize",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasIngressShapingBurstSize",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ingress_shaping_burst_size"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "True if the traffic shaper is enabled for ingress traffic on the port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ingress_shaping_enabled\" <$> TF.attribute",
+                    "name": "_ingressShapingEnabled",
+                    "method": "ingressShapingEnabled",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasIngressShapingEnabled",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ingress_shaping_enabled"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The peak ingress bandwidth during bursts in bits per second if ingress",
+                        "traffic shaping is enabled on the port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ingress_shaping_peak_bandwidth\" <$> TF.attribute",
+                    "name": "_ingressShapingPeakBandwidth",
+                    "method": "ingressShapingPeakBandwidth",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasIngressShapingPeakBandwidth",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ingress_shaping_peak_bandwidth"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Whether or not to enable LACP on all uplink ports."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"lacp_enabled\" <$> TF.attribute",
+                    "name": "_lacpEnabled",
+                    "method": "lacpEnabled",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasLacpEnabled",
+                    "validate": false,
+                    "optional": true,
+                    "original": "lacp_enabled"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The uplink LACP mode to use. Can be one of active or passive."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"lacp_mode\" <$> TF.attribute",
+                    "name": "_lacpMode",
+                    "method": "lacpMode",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLacpMode",
+                    "validate": false,
+                    "optional": true,
+                    "original": "lacp_mode"
                 },
                 {
                     "default": "TF.Nil",
@@ -7203,6 +7615,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Indicates whether to enable netflow on all ports."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"netflow_enabled\" <$> TF.attribute",
+                    "name": "_netflowEnabled",
+                    "method": "netflowEnabled",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasNetflowEnabled",
+                    "validate": false,
+                    "optional": true,
+                    "original": "netflow_enabled"
                 },
                 {
                     "default": "TF.Nil",
@@ -7268,6 +7699,46 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "If true, the teaming policy will notify the broadcast network of a NIC",
+                        "failover, triggering cache updates."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"notify_switches\" <$> TF.attribute",
+                    "name": "_notifySwitches",
+                    "method": "notifySwitches",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasNotifySwitches",
+                    "validate": false,
+                    "optional": true,
+                    "original": "notify_switches"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The number of ports in this portgroup. The DVS will expand and shrink by",
+                        "modifying this setting."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"number_of_ports\" <$> TF.attribute",
+                    "name": "_numberOfPorts",
+                    "method": "numberOfPorts",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasNumberOfPorts",
+                    "validate": false,
+                    "optional": true,
+                    "original": "number_of_ports"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "Reset the setting of any ports in this portgroup back to the default setting",
                         "when the port disconnects."
                     ],
@@ -7301,6 +7772,36 @@
                     "validate": false,
                     "optional": true,
                     "original": "port_name_format"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The secondary VLAN ID for this port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"port_private_secondary_vlan_id\" <$> TF.attribute",
+                    "name": "_portPrivateSecondaryVlanId",
+                    "method": "portPrivateSecondaryVlanId",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vlanId",
+                            "method": "vlanId"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vlanRange",
+                            "method": "vlanRange"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasPortPrivateSecondaryVlanId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "port_private_secondary_vlan_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -7346,6 +7847,26 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "List of active uplinks used for load balancing, matching the names of the",
+                        "uplinks assigned in the DVS."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"standby_uplinks\" <$> TF.attribute",
+                    "name": "_standbyUplinks",
+                    "method": "standbyUplinks",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasStandbyUplinks",
+                    "validate": false,
+                    "optional": true,
+                    "original": "standby_uplinks"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "A list of tag IDs to apply to this object."
                     ],
                     "forceNew": false,
@@ -7359,6 +7880,27 @@
                     "validate": false,
                     "optional": true,
                     "original": "tags"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The network adapter teaming policy. Can be one of loadbalance_ip,",
+                        "loadbalance_srcmac, loadbalance_srcid, failover_explicit, or",
+                        "loadbalance_loadbased."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"teaming_policy\" <$> TF.attribute",
+                    "name": "_teamingPolicy",
+                    "method": "teamingPolicy",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTeamingPolicy",
+                    "validate": false,
+                    "optional": true,
+                    "original": "teaming_policy"
                 },
                 {
                     "default": "TF.Nil",
@@ -7379,6 +7921,26 @@
                     "validate": false,
                     "optional": true,
                     "original": "traffic_filter_override_allowed"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "If true, a copy of packets sent to the switch will always be forwarded to an",
+                        "uplink in addition to the regular packet forwarded done by the switch."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"tx_uplink\" <$> TF.attribute",
+                    "name": "_txUplink",
+                    "method": "txUplink",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasTxUplink",
+                    "validate": false,
+                    "optional": true,
+                    "original": "tx_uplink"
                 },
                 {
                     "default": "TF.value \"earlyBinding\"",
@@ -7424,6 +7986,36 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "The VLAN ID for single VLAN mode. 0 denotes no VLAN."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vlan_id\" <$> TF.attribute",
+                    "name": "_vlanId",
+                    "method": "vlanId",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_portPrivateSecondaryVlanId",
+                            "method": "portPrivateSecondaryVlanId"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vlanRange",
+                            "method": "vlanRange"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasVlanId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vlan_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "Allow the VLAN configuration on a port to override those on the portgroup."
                     ],
                     "forceNew": false,
@@ -7437,6 +8029,36 @@
                     "validate": false,
                     "optional": true,
                     "original": "vlan_override_allowed"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The VLAN ID for single VLAN mode. 0 denotes no VLAN."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vlan_range\" <$> TF.attribute",
+                    "name": "_vlanRange",
+                    "method": "vlanRange",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_portPrivateSecondaryVlanId",
+                            "method": "portPrivateSecondaryVlanId"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vlanId",
+                            "method": "vlanId"
+                        }
+                    ],
+                    "type": "TF.Attr s [TF.Attr s (VlanRangeSetting s)]",
+                    "class": "HasVlanRange",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vlan_range"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/distributed_port_group.html",
@@ -7478,7 +8100,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedActiveUplinks",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "active_uplinks"
                 },
                 {
@@ -7498,7 +8120,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedAllowForgedTransmits",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "allow_forged_transmits"
                 },
                 {
@@ -7518,7 +8140,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedAllowMacChanges",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "allow_mac_changes"
                 },
                 {
@@ -7538,7 +8160,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedAllowPromiscuous",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "allow_promiscuous"
                 },
                 {
@@ -7557,7 +8179,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedBlockAllPorts",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "block_all_ports"
                 },
                 {
@@ -7576,7 +8198,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedCheckBeacon",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "check_beacon"
                 },
                 {
@@ -7614,7 +8236,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedDirectpathGen2Allowed",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "directpath_gen2_allowed"
                 },
                 {
@@ -7634,7 +8256,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedEgressShapingAverageBandwidth",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "egress_shaping_average_bandwidth"
                 },
                 {
@@ -7654,7 +8276,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedEgressShapingBurstSize",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "egress_shaping_burst_size"
                 },
                 {
@@ -7673,7 +8295,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedEgressShapingEnabled",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "egress_shaping_enabled"
                 },
                 {
@@ -7693,7 +8315,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedEgressShapingPeakBandwidth",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "egress_shaping_peak_bandwidth"
                 },
                 {
@@ -7713,7 +8335,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedFailback",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "failback"
                 },
                 {
@@ -7733,7 +8355,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedIngressShapingAverageBandwidth",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ingress_shaping_average_bandwidth"
                 },
                 {
@@ -7753,7 +8375,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedIngressShapingBurstSize",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ingress_shaping_burst_size"
                 },
                 {
@@ -7772,7 +8394,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedIngressShapingEnabled",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ingress_shaping_enabled"
                 },
                 {
@@ -7792,7 +8414,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedIngressShapingPeakBandwidth",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ingress_shaping_peak_bandwidth"
                 },
                 {
@@ -7830,7 +8452,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedLacpEnabled",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "lacp_enabled"
                 },
                 {
@@ -7849,7 +8471,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedLacpMode",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "lacp_mode"
                 },
                 {
@@ -7868,7 +8490,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedNetflowEnabled",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "netflow_enabled"
                 },
                 {
@@ -7888,7 +8510,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedNotifySwitches",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "notify_switches"
                 },
                 {
@@ -7908,7 +8530,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedNumberOfPorts",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "number_of_ports"
                 },
                 {
@@ -7930,7 +8552,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedPortPrivateSecondaryVlanId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "port_private_secondary_vlan_id"
                 },
                 {
@@ -7950,7 +8572,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedStandbyUplinks",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "standby_uplinks"
                 },
                 {
@@ -7971,7 +8593,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTeamingPolicy",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "teaming_policy"
                 },
                 {
@@ -7991,7 +8613,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedTxUplink",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "tx_uplink"
                 },
                 {
@@ -8013,7 +8635,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedVlanId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vlan_id"
                 },
                 {
@@ -8035,7 +8657,7 @@
                     "type": "TF.Attr s [TF.Attr s (VlanRangeSetting s)]",
                     "class": "HasComputedVlanRange",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vlan_range"
                 }
             ],
@@ -8079,7 +8701,98 @@
                     "original": "distributed_virtual_switch_uuid"
                 }
             ],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The secondary VLAN ID for this port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"port_private_secondary_vlan_id\" <$> TF.attribute",
+                    "name": "_portPrivateSecondaryVlanId",
+                    "method": "portPrivateSecondaryVlanId",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vlanId",
+                            "method": "vlanId"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vlanRange",
+                            "method": "vlanRange"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasPortPrivateSecondaryVlanId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "port_private_secondary_vlan_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The VLAN ID for single VLAN mode. 0 denotes no VLAN."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vlan_id\" <$> TF.attribute",
+                    "name": "_vlanId",
+                    "method": "vlanId",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_portPrivateSecondaryVlanId",
+                            "method": "portPrivateSecondaryVlanId"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vlanRange",
+                            "method": "vlanRange"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasVlanId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vlan_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The VLAN ID for single VLAN mode. 0 denotes no VLAN."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vlan_range\" <$> TF.attribute",
+                    "name": "_vlanRange",
+                    "method": "vlanRange",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_portPrivateSecondaryVlanId",
+                            "method": "portPrivateSecondaryVlanId"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vlanId",
+                            "method": "vlanId"
+                        }
+                    ],
+                    "type": "TF.Attr s [TF.Attr s (VlanRangeSetting s)]",
+                    "class": "HasVlanRange",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vlan_range"
+                }
+            ],
             "type": "DistributedPortGroupResource s",
             "original": "vsphere_distributed_port_group"
         },
@@ -8089,6 +8802,124 @@
                 "name": "DistributedVirtualSwitchResource'"
             },
             "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "List of active uplinks used for load balancing, matching the names of the",
+                        "uplinks assigned in the DVS."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"active_uplinks\" <$> TF.attribute",
+                    "name": "_activeUplinks",
+                    "method": "activeUplinks",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasActiveUplinks",
+                    "validate": false,
+                    "optional": true,
+                    "original": "active_uplinks"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Controls whether or not the virtual network adapter is allowed to send",
+                        "network traffic with a different MAC address than that of its own."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"allow_forged_transmits\" <$> TF.attribute",
+                    "name": "_allowForgedTransmits",
+                    "method": "allowForgedTransmits",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAllowForgedTransmits",
+                    "validate": false,
+                    "optional": true,
+                    "original": "allow_forged_transmits"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Controls whether or not the Media Access Control (MAC) address can be",
+                        "changed."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"allow_mac_changes\" <$> TF.attribute",
+                    "name": "_allowMacChanges",
+                    "method": "allowMacChanges",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAllowMacChanges",
+                    "validate": false,
+                    "optional": true,
+                    "original": "allow_mac_changes"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Enable promiscuous mode on the network. This flag indicates whether or not",
+                        "all traffic is seen on a given port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"allow_promiscuous\" <$> TF.attribute",
+                    "name": "_allowPromiscuous",
+                    "method": "allowPromiscuous",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAllowPromiscuous",
+                    "validate": false,
+                    "optional": true,
+                    "original": "allow_promiscuous"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Indicates whether to block all ports by default."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"block_all_ports\" <$> TF.attribute",
+                    "name": "_blockAllPorts",
+                    "method": "blockAllPorts",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasBlockAllPorts",
+                    "validate": false,
+                    "optional": true,
+                    "original": "block_all_ports"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Enable beacon probing on the ports this policy applies to."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"check_beacon\" <$> TF.attribute",
+                    "name": "_checkBeacon",
+                    "method": "checkBeacon",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasCheckBeacon",
+                    "validate": false,
+                    "optional": true,
+                    "original": "check_beacon"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": false,
@@ -8189,6 +9020,204 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "Allow VMDirectPath Gen2 on the ports this policy applies to."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"directpath_gen2_allowed\" <$> TF.attribute",
+                    "name": "_directpathGen2Allowed",
+                    "method": "directpathGen2Allowed",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasDirectpathGen2Allowed",
+                    "validate": false,
+                    "optional": true,
+                    "original": "directpath_gen2_allowed"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The average egress bandwidth in bits per second if egress shaping is enabled",
+                        "on the port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"egress_shaping_average_bandwidth\" <$> TF.attribute",
+                    "name": "_egressShapingAverageBandwidth",
+                    "method": "egressShapingAverageBandwidth",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasEgressShapingAverageBandwidth",
+                    "validate": false,
+                    "optional": true,
+                    "original": "egress_shaping_average_bandwidth"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The maximum egress burst size allowed in bytes if egress shaping is enabled",
+                        "on the port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"egress_shaping_burst_size\" <$> TF.attribute",
+                    "name": "_egressShapingBurstSize",
+                    "method": "egressShapingBurstSize",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasEgressShapingBurstSize",
+                    "validate": false,
+                    "optional": true,
+                    "original": "egress_shaping_burst_size"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "True if the traffic shaper is enabled for egress traffic on the port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"egress_shaping_enabled\" <$> TF.attribute",
+                    "name": "_egressShapingEnabled",
+                    "method": "egressShapingEnabled",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasEgressShapingEnabled",
+                    "validate": false,
+                    "optional": true,
+                    "original": "egress_shaping_enabled"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The peak egress bandwidth during bursts in bits per second if egress traffic",
+                        "shaping is enabled on the port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"egress_shaping_peak_bandwidth\" <$> TF.attribute",
+                    "name": "_egressShapingPeakBandwidth",
+                    "method": "egressShapingPeakBandwidth",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasEgressShapingPeakBandwidth",
+                    "validate": false,
+                    "optional": true,
+                    "original": "egress_shaping_peak_bandwidth"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "If true, the teaming policy will re-activate failed interfaces higher in",
+                        "precedence when they come back up."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"failback\" <$> TF.attribute",
+                    "name": "_failback",
+                    "method": "failback",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasFailback",
+                    "validate": false,
+                    "optional": true,
+                    "original": "failback"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The maximum allowed usage for the faultTolerance traffic class, in",
+                        "Mbits/sec."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"faulttolerance_maximum_mbit\" <$> TF.attribute",
+                    "name": "_faulttoleranceMaximumMbit",
+                    "method": "faulttoleranceMaximumMbit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasFaulttoleranceMaximumMbit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "faulttolerance_maximum_mbit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of guaranteed bandwidth for the faultTolerance traffic class, in",
+                        "Mbits/sec."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"faulttolerance_reservation_mbit\" <$> TF.attribute",
+                    "name": "_faulttoleranceReservationMbit",
+                    "method": "faulttoleranceReservationMbit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasFaulttoleranceReservationMbit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "faulttolerance_reservation_mbit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of shares to allocate to the faultTolerance traffic class for a",
+                        "custom share level."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"faulttolerance_share_count\" <$> TF.attribute",
+                    "name": "_faulttoleranceShareCount",
+                    "method": "faulttoleranceShareCount",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasFaulttoleranceShareCount",
+                    "validate": false,
+                    "optional": true,
+                    "original": "faulttolerance_share_count"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The allocation level for the faultTolerance traffic class. Can be one of",
+                        "high, low, normal, or custom."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"faulttolerance_share_level\" <$> TF.attribute",
+                    "name": "_faulttoleranceShareLevel",
+                    "method": "faulttoleranceShareLevel",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFaulttoleranceShareLevel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "faulttolerance_share_level"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "The folder to create this virtual switch in, relative to the datacenter."
                     ],
                     "forceNew": true,
@@ -8202,6 +9231,84 @@
                     "validate": false,
                     "optional": true,
                     "original": "folder"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The maximum allowed usage for the hbr traffic class, in Mbits/sec."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"hbr_maximum_mbit\" <$> TF.attribute",
+                    "name": "_hbrMaximumMbit",
+                    "method": "hbrMaximumMbit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasHbrMaximumMbit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "hbr_maximum_mbit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of guaranteed bandwidth for the hbr traffic class, in Mbits/sec."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"hbr_reservation_mbit\" <$> TF.attribute",
+                    "name": "_hbrReservationMbit",
+                    "method": "hbrReservationMbit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasHbrReservationMbit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "hbr_reservation_mbit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of shares to allocate to the hbr traffic class for a custom share",
+                        "level."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"hbr_share_count\" <$> TF.attribute",
+                    "name": "_hbrShareCount",
+                    "method": "hbrShareCount",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasHbrShareCount",
+                    "validate": false,
+                    "optional": true,
+                    "original": "hbr_share_count"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The allocation level for the hbr traffic class. Can be one of high, low,",
+                        "normal, or custom."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"hbr_share_level\" <$> TF.attribute",
+                    "name": "_hbrShareLevel",
+                    "method": "hbrShareLevel",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHbrShareLevel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "hbr_share_level"
                 },
                 {
                     "default": "TF.Nil",
@@ -8227,6 +9334,85 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "The average ingress bandwidth in bits per second if ingress shaping is",
+                        "enabled on the port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ingress_shaping_average_bandwidth\" <$> TF.attribute",
+                    "name": "_ingressShapingAverageBandwidth",
+                    "method": "ingressShapingAverageBandwidth",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasIngressShapingAverageBandwidth",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ingress_shaping_average_bandwidth"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The maximum ingress burst size allowed in bytes if ingress shaping is",
+                        "enabled on the port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ingress_shaping_burst_size\" <$> TF.attribute",
+                    "name": "_ingressShapingBurstSize",
+                    "method": "ingressShapingBurstSize",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasIngressShapingBurstSize",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ingress_shaping_burst_size"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "True if the traffic shaper is enabled for ingress traffic on the port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ingress_shaping_enabled\" <$> TF.attribute",
+                    "name": "_ingressShapingEnabled",
+                    "method": "ingressShapingEnabled",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasIngressShapingEnabled",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ingress_shaping_enabled"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The peak ingress bandwidth during bursts in bits per second if ingress",
+                        "traffic shaping is enabled on the port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ingress_shaping_peak_bandwidth\" <$> TF.attribute",
+                    "name": "_ingressShapingPeakBandwidth",
+                    "method": "ingressShapingPeakBandwidth",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasIngressShapingPeakBandwidth",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ingress_shaping_peak_bandwidth"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "The IPv4 address of the switch. This can be used to see the DVS as a unique",
                         "device with NetFlow."
                     ],
@@ -8241,6 +9427,143 @@
                     "validate": false,
                     "optional": true,
                     "original": "ipv4_address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The maximum allowed usage for the iSCSI traffic class, in Mbits/sec."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"iscsi_maximum_mbit\" <$> TF.attribute",
+                    "name": "_iscsiMaximumMbit",
+                    "method": "iscsiMaximumMbit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasIscsiMaximumMbit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "iscsi_maximum_mbit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of guaranteed bandwidth for the iSCSI traffic class, in",
+                        "Mbits/sec."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"iscsi_reservation_mbit\" <$> TF.attribute",
+                    "name": "_iscsiReservationMbit",
+                    "method": "iscsiReservationMbit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasIscsiReservationMbit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "iscsi_reservation_mbit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of shares to allocate to the iSCSI traffic class for a custom",
+                        "share level."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"iscsi_share_count\" <$> TF.attribute",
+                    "name": "_iscsiShareCount",
+                    "method": "iscsiShareCount",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasIscsiShareCount",
+                    "validate": false,
+                    "optional": true,
+                    "original": "iscsi_share_count"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The allocation level for the iSCSI traffic class. Can be one of high, low,",
+                        "normal, or custom."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"iscsi_share_level\" <$> TF.attribute",
+                    "name": "_iscsiShareLevel",
+                    "method": "iscsiShareLevel",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIscsiShareLevel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "iscsi_share_level"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The Link Aggregation Control Protocol group version in the switch. Can be",
+                        "one of singleLag or multipleLag."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"lacp_api_version\" <$> TF.attribute",
+                    "name": "_lacpApiVersion",
+                    "method": "lacpApiVersion",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLacpApiVersion",
+                    "validate": false,
+                    "optional": true,
+                    "original": "lacp_api_version"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Whether or not to enable LACP on all uplink ports."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"lacp_enabled\" <$> TF.attribute",
+                    "name": "_lacpEnabled",
+                    "method": "lacpEnabled",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasLacpEnabled",
+                    "validate": false,
+                    "optional": true,
+                    "original": "lacp_enabled"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The uplink LACP mode to use. Can be one of active or passive."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"lacp_mode\" <$> TF.attribute",
+                    "name": "_lacpMode",
+                    "method": "lacpMode",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLacpMode",
+                    "validate": false,
+                    "optional": true,
+                    "original": "lacp_mode"
                 },
                 {
                     "default": "TF.value \"listen\"",
@@ -8280,6 +9603,124 @@
                     "validate": false,
                     "optional": true,
                     "original": "link_discovery_protocol"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The maximum allowed usage for the management traffic class, in Mbits/sec."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"management_maximum_mbit\" <$> TF.attribute",
+                    "name": "_managementMaximumMbit",
+                    "method": "managementMaximumMbit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasManagementMaximumMbit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "management_maximum_mbit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of guaranteed bandwidth for the management traffic class, in",
+                        "Mbits/sec."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"management_reservation_mbit\" <$> TF.attribute",
+                    "name": "_managementReservationMbit",
+                    "method": "managementReservationMbit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasManagementReservationMbit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "management_reservation_mbit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of shares to allocate to the management traffic class for a",
+                        "custom share level."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"management_share_count\" <$> TF.attribute",
+                    "name": "_managementShareCount",
+                    "method": "managementShareCount",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasManagementShareCount",
+                    "validate": false,
+                    "optional": true,
+                    "original": "management_share_count"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The allocation level for the management traffic class. Can be one of high,",
+                        "low, normal, or custom."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"management_share_level\" <$> TF.attribute",
+                    "name": "_managementShareLevel",
+                    "method": "managementShareLevel",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasManagementShareLevel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "management_share_level"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The maximum MTU on the switch."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_mtu\" <$> TF.attribute",
+                    "name": "_maxMtu",
+                    "method": "maxMtu",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMaxMtu",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_mtu"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The multicast filtering mode on the switch. Can be one of legacyFiltering,",
+                        "or snooping."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"multicast_filtering_mode\" <$> TF.attribute",
+                    "name": "_multicastFilteringMode",
+                    "method": "multicastFilteringMode",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMulticastFilteringMode",
+                    "validate": false,
+                    "optional": true,
+                    "original": "multicast_filtering_mode"
                 },
                 {
                     "default": "_name",
@@ -8359,6 +9800,25 @@
                     "validate": false,
                     "optional": true,
                     "original": "netflow_collector_port"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Indicates whether to enable netflow on all ports."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"netflow_enabled\" <$> TF.attribute",
+                    "name": "_netflowEnabled",
+                    "method": "netflowEnabled",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasNetflowEnabled",
+                    "validate": false,
+                    "optional": true,
+                    "original": "netflow_enabled"
                 },
                 {
                     "default": "TF.value 15",
@@ -8464,6 +9924,173 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "The network I/O control version to use. Can be one of version2 or version3."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"network_resource_control_version\" <$> TF.attribute",
+                    "name": "_networkResourceControlVersion",
+                    "method": "networkResourceControlVersion",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNetworkResourceControlVersion",
+                    "validate": false,
+                    "optional": true,
+                    "original": "network_resource_control_version"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The maximum allowed usage for the nfs traffic class, in Mbits/sec."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"nfs_maximum_mbit\" <$> TF.attribute",
+                    "name": "_nfsMaximumMbit",
+                    "method": "nfsMaximumMbit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasNfsMaximumMbit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "nfs_maximum_mbit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of guaranteed bandwidth for the nfs traffic class, in Mbits/sec."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"nfs_reservation_mbit\" <$> TF.attribute",
+                    "name": "_nfsReservationMbit",
+                    "method": "nfsReservationMbit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasNfsReservationMbit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "nfs_reservation_mbit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of shares to allocate to the nfs traffic class for a custom share",
+                        "level."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"nfs_share_count\" <$> TF.attribute",
+                    "name": "_nfsShareCount",
+                    "method": "nfsShareCount",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasNfsShareCount",
+                    "validate": false,
+                    "optional": true,
+                    "original": "nfs_share_count"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The allocation level for the nfs traffic class. Can be one of high, low,",
+                        "normal, or custom."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"nfs_share_level\" <$> TF.attribute",
+                    "name": "_nfsShareLevel",
+                    "method": "nfsShareLevel",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNfsShareLevel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "nfs_share_level"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "If true, the teaming policy will notify the broadcast network of a NIC",
+                        "failover, triggering cache updates."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"notify_switches\" <$> TF.attribute",
+                    "name": "_notifySwitches",
+                    "method": "notifySwitches",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasNotifySwitches",
+                    "validate": false,
+                    "optional": true,
+                    "original": "notify_switches"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The secondary VLAN ID for this port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"port_private_secondary_vlan_id\" <$> TF.attribute",
+                    "name": "_portPrivateSecondaryVlanId",
+                    "method": "portPrivateSecondaryVlanId",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vlanId",
+                            "method": "vlanId"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vlanRange",
+                            "method": "vlanRange"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasPortPrivateSecondaryVlanId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "port_private_secondary_vlan_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "List of active uplinks used for load balancing, matching the names of the",
+                        "uplinks assigned in the DVS."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"standby_uplinks\" <$> TF.attribute",
+                    "name": "_standbyUplinks",
+                    "method": "standbyUplinks",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasStandbyUplinks",
+                    "validate": false,
+                    "optional": true,
+                    "original": "standby_uplinks"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "A list of tag IDs to apply to this object."
                     ],
                     "forceNew": false,
@@ -8477,6 +10104,462 @@
                     "validate": false,
                     "optional": true,
                     "original": "tags"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The network adapter teaming policy. Can be one of loadbalance_ip,",
+                        "loadbalance_srcmac, loadbalance_srcid, failover_explicit, or",
+                        "loadbalance_loadbased."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"teaming_policy\" <$> TF.attribute",
+                    "name": "_teamingPolicy",
+                    "method": "teamingPolicy",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTeamingPolicy",
+                    "validate": false,
+                    "optional": true,
+                    "original": "teaming_policy"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "If true, a copy of packets sent to the switch will always be forwarded to an",
+                        "uplink in addition to the regular packet forwarded done by the switch."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"tx_uplink\" <$> TF.attribute",
+                    "name": "_txUplink",
+                    "method": "txUplink",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasTxUplink",
+                    "validate": false,
+                    "optional": true,
+                    "original": "tx_uplink"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "A list of uplink ports. The contents of this list control both the uplink",
+                        "count and names of the uplinks on the DVS across hosts."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"uplinks\" <$> TF.attribute",
+                    "name": "_uplinks",
+                    "method": "uplinks",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasUplinks",
+                    "validate": false,
+                    "optional": true,
+                    "original": "uplinks"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The maximum allowed usage for the vdp traffic class, in Mbits/sec."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vdp_maximum_mbit\" <$> TF.attribute",
+                    "name": "_vdpMaximumMbit",
+                    "method": "vdpMaximumMbit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasVdpMaximumMbit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vdp_maximum_mbit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of guaranteed bandwidth for the vdp traffic class, in Mbits/sec."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vdp_reservation_mbit\" <$> TF.attribute",
+                    "name": "_vdpReservationMbit",
+                    "method": "vdpReservationMbit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasVdpReservationMbit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vdp_reservation_mbit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of shares to allocate to the vdp traffic class for a custom share",
+                        "level."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vdp_share_count\" <$> TF.attribute",
+                    "name": "_vdpShareCount",
+                    "method": "vdpShareCount",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasVdpShareCount",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vdp_share_count"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The allocation level for the vdp traffic class. Can be one of high, low,",
+                        "normal, or custom."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vdp_share_level\" <$> TF.attribute",
+                    "name": "_vdpShareLevel",
+                    "method": "vdpShareLevel",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVdpShareLevel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vdp_share_level"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The version of this virtual switch. Allowed versions are 6.5.0, 6.0.0,",
+                        "5.5.0, 5.1.0, and 5.0.0."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"version\" <$> TF.attribute",
+                    "name": "_version",
+                    "method": "version",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVersion",
+                    "validate": false,
+                    "optional": true,
+                    "original": "version"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The maximum allowed usage for the virtualMachine traffic class, in",
+                        "Mbits/sec."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virtualmachine_maximum_mbit\" <$> TF.attribute",
+                    "name": "_virtualmachineMaximumMbit",
+                    "method": "virtualmachineMaximumMbit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasVirtualmachineMaximumMbit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virtualmachine_maximum_mbit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of guaranteed bandwidth for the virtualMachine traffic class, in",
+                        "Mbits/sec."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virtualmachine_reservation_mbit\" <$> TF.attribute",
+                    "name": "_virtualmachineReservationMbit",
+                    "method": "virtualmachineReservationMbit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasVirtualmachineReservationMbit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virtualmachine_reservation_mbit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of shares to allocate to the virtualMachine traffic class for a",
+                        "custom share level."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virtualmachine_share_count\" <$> TF.attribute",
+                    "name": "_virtualmachineShareCount",
+                    "method": "virtualmachineShareCount",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasVirtualmachineShareCount",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virtualmachine_share_count"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The allocation level for the virtualMachine traffic class. Can be one of",
+                        "high, low, normal, or custom."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virtualmachine_share_level\" <$> TF.attribute",
+                    "name": "_virtualmachineShareLevel",
+                    "method": "virtualmachineShareLevel",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtualmachineShareLevel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virtualmachine_share_level"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The VLAN ID for single VLAN mode. 0 denotes no VLAN."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vlan_id\" <$> TF.attribute",
+                    "name": "_vlanId",
+                    "method": "vlanId",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_portPrivateSecondaryVlanId",
+                            "method": "portPrivateSecondaryVlanId"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vlanRange",
+                            "method": "vlanRange"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasVlanId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vlan_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The VLAN ID for single VLAN mode. 0 denotes no VLAN."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vlan_range\" <$> TF.attribute",
+                    "name": "_vlanRange",
+                    "method": "vlanRange",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_portPrivateSecondaryVlanId",
+                            "method": "portPrivateSecondaryVlanId"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vlanId",
+                            "method": "vlanId"
+                        }
+                    ],
+                    "type": "TF.Attr s [TF.Attr s (VlanRangeSetting s)]",
+                    "class": "HasVlanRange",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vlan_range"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The maximum allowed usage for the vmotion traffic class, in Mbits/sec."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vmotion_maximum_mbit\" <$> TF.attribute",
+                    "name": "_vmotionMaximumMbit",
+                    "method": "vmotionMaximumMbit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasVmotionMaximumMbit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vmotion_maximum_mbit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of guaranteed bandwidth for the vmotion traffic class, in",
+                        "Mbits/sec."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vmotion_reservation_mbit\" <$> TF.attribute",
+                    "name": "_vmotionReservationMbit",
+                    "method": "vmotionReservationMbit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasVmotionReservationMbit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vmotion_reservation_mbit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of shares to allocate to the vmotion traffic class for a custom",
+                        "share level."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vmotion_share_count\" <$> TF.attribute",
+                    "name": "_vmotionShareCount",
+                    "method": "vmotionShareCount",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasVmotionShareCount",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vmotion_share_count"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The allocation level for the vmotion traffic class. Can be one of high, low,",
+                        "normal, or custom."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vmotion_share_level\" <$> TF.attribute",
+                    "name": "_vmotionShareLevel",
+                    "method": "vmotionShareLevel",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVmotionShareLevel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vmotion_share_level"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The maximum allowed usage for the vsan traffic class, in Mbits/sec."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vsan_maximum_mbit\" <$> TF.attribute",
+                    "name": "_vsanMaximumMbit",
+                    "method": "vsanMaximumMbit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasVsanMaximumMbit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vsan_maximum_mbit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of guaranteed bandwidth for the vsan traffic class, in Mbits/sec."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vsan_reservation_mbit\" <$> TF.attribute",
+                    "name": "_vsanReservationMbit",
+                    "method": "vsanReservationMbit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasVsanReservationMbit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vsan_reservation_mbit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of shares to allocate to the vsan traffic class for a custom",
+                        "share level."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vsan_share_count\" <$> TF.attribute",
+                    "name": "_vsanShareCount",
+                    "method": "vsanShareCount",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasVsanShareCount",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vsan_share_count"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The allocation level for the vsan traffic class. Can be one of high, low,",
+                        "normal, or custom."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vsan_share_level\" <$> TF.attribute",
+                    "name": "_vsanShareLevel",
+                    "method": "vsanShareLevel",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVsanShareLevel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vsan_share_level"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/distributed_virtual_switch.html",
@@ -8518,7 +10601,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedActiveUplinks",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "active_uplinks"
                 },
                 {
@@ -8538,7 +10621,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedAllowForgedTransmits",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "allow_forged_transmits"
                 },
                 {
@@ -8558,7 +10641,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedAllowMacChanges",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "allow_mac_changes"
                 },
                 {
@@ -8578,7 +10661,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedAllowPromiscuous",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "allow_promiscuous"
                 },
                 {
@@ -8597,7 +10680,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedBlockAllPorts",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "block_all_ports"
                 },
                 {
@@ -8616,7 +10699,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedCheckBeacon",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "check_beacon"
                 },
                 {
@@ -8654,7 +10737,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedDirectpathGen2Allowed",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "directpath_gen2_allowed"
                 },
                 {
@@ -8674,7 +10757,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedEgressShapingAverageBandwidth",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "egress_shaping_average_bandwidth"
                 },
                 {
@@ -8694,7 +10777,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedEgressShapingBurstSize",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "egress_shaping_burst_size"
                 },
                 {
@@ -8713,7 +10796,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedEgressShapingEnabled",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "egress_shaping_enabled"
                 },
                 {
@@ -8733,7 +10816,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedEgressShapingPeakBandwidth",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "egress_shaping_peak_bandwidth"
                 },
                 {
@@ -8753,7 +10836,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedFailback",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "failback"
                 },
                 {
@@ -8773,7 +10856,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedFaulttoleranceMaximumMbit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "faulttolerance_maximum_mbit"
                 },
                 {
@@ -8793,7 +10876,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedFaulttoleranceReservationMbit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "faulttolerance_reservation_mbit"
                 },
                 {
@@ -8813,7 +10896,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedFaulttoleranceShareCount",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "faulttolerance_share_count"
                 },
                 {
@@ -8833,7 +10916,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedFaulttoleranceShareLevel",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "faulttolerance_share_level"
                 },
                 {
@@ -8852,7 +10935,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedHbrMaximumMbit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "hbr_maximum_mbit"
                 },
                 {
@@ -8871,7 +10954,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedHbrReservationMbit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "hbr_reservation_mbit"
                 },
                 {
@@ -8891,7 +10974,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedHbrShareCount",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "hbr_share_count"
                 },
                 {
@@ -8911,7 +10994,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHbrShareLevel",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "hbr_share_level"
                 },
                 {
@@ -8931,7 +11014,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedIngressShapingAverageBandwidth",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ingress_shaping_average_bandwidth"
                 },
                 {
@@ -8951,7 +11034,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedIngressShapingBurstSize",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ingress_shaping_burst_size"
                 },
                 {
@@ -8970,7 +11053,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedIngressShapingEnabled",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ingress_shaping_enabled"
                 },
                 {
@@ -8990,7 +11073,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedIngressShapingPeakBandwidth",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ingress_shaping_peak_bandwidth"
                 },
                 {
@@ -9009,7 +11092,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedIscsiMaximumMbit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "iscsi_maximum_mbit"
                 },
                 {
@@ -9029,7 +11112,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedIscsiReservationMbit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "iscsi_reservation_mbit"
                 },
                 {
@@ -9049,7 +11132,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedIscsiShareCount",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "iscsi_share_count"
                 },
                 {
@@ -9069,7 +11152,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIscsiShareLevel",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "iscsi_share_level"
                 },
                 {
@@ -9089,7 +11172,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedLacpApiVersion",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "lacp_api_version"
                 },
                 {
@@ -9108,7 +11191,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedLacpEnabled",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "lacp_enabled"
                 },
                 {
@@ -9127,7 +11210,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedLacpMode",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "lacp_mode"
                 },
                 {
@@ -9146,7 +11229,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedManagementMaximumMbit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "management_maximum_mbit"
                 },
                 {
@@ -9166,7 +11249,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedManagementReservationMbit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "management_reservation_mbit"
                 },
                 {
@@ -9186,7 +11269,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedManagementShareCount",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "management_share_count"
                 },
                 {
@@ -9206,7 +11289,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedManagementShareLevel",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "management_share_level"
                 },
                 {
@@ -9225,7 +11308,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedMaxMtu",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "max_mtu"
                 },
                 {
@@ -9245,7 +11328,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMulticastFilteringMode",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "multicast_filtering_mode"
                 },
                 {
@@ -9264,7 +11347,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedNetflowEnabled",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "netflow_enabled"
                 },
                 {
@@ -9283,7 +11366,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedNetworkResourceControlVersion",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "network_resource_control_version"
                 },
                 {
@@ -9302,7 +11385,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedNfsMaximumMbit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "nfs_maximum_mbit"
                 },
                 {
@@ -9321,7 +11404,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedNfsReservationMbit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "nfs_reservation_mbit"
                 },
                 {
@@ -9341,7 +11424,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedNfsShareCount",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "nfs_share_count"
                 },
                 {
@@ -9361,7 +11444,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedNfsShareLevel",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "nfs_share_level"
                 },
                 {
@@ -9381,7 +11464,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedNotifySwitches",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "notify_switches"
                 },
                 {
@@ -9403,7 +11486,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedPortPrivateSecondaryVlanId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "port_private_secondary_vlan_id"
                 },
                 {
@@ -9423,7 +11506,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedStandbyUplinks",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "standby_uplinks"
                 },
                 {
@@ -9444,7 +11527,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTeamingPolicy",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "teaming_policy"
                 },
                 {
@@ -9464,7 +11547,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedTxUplink",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "tx_uplink"
                 },
                 {
@@ -9484,7 +11567,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedUplinks",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "uplinks"
                 },
                 {
@@ -9503,7 +11586,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedVdpMaximumMbit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vdp_maximum_mbit"
                 },
                 {
@@ -9522,7 +11605,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedVdpReservationMbit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vdp_reservation_mbit"
                 },
                 {
@@ -9542,7 +11625,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedVdpShareCount",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vdp_share_count"
                 },
                 {
@@ -9562,7 +11645,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVdpShareLevel",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vdp_share_level"
                 },
                 {
@@ -9582,7 +11665,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVersion",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "version"
                 },
                 {
@@ -9602,7 +11685,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedVirtualmachineMaximumMbit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virtualmachine_maximum_mbit"
                 },
                 {
@@ -9622,7 +11705,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedVirtualmachineReservationMbit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virtualmachine_reservation_mbit"
                 },
                 {
@@ -9642,7 +11725,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedVirtualmachineShareCount",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virtualmachine_share_count"
                 },
                 {
@@ -9662,7 +11745,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtualmachineShareLevel",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virtualmachine_share_level"
                 },
                 {
@@ -9684,7 +11767,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedVlanId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vlan_id"
                 },
                 {
@@ -9706,7 +11789,7 @@
                     "type": "TF.Attr s [TF.Attr s (VlanRangeSetting s)]",
                     "class": "HasComputedVlanRange",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vlan_range"
                 },
                 {
@@ -9725,7 +11808,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedVmotionMaximumMbit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vmotion_maximum_mbit"
                 },
                 {
@@ -9745,7 +11828,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedVmotionReservationMbit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vmotion_reservation_mbit"
                 },
                 {
@@ -9765,7 +11848,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedVmotionShareCount",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vmotion_share_count"
                 },
                 {
@@ -9785,7 +11868,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVmotionShareLevel",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vmotion_share_level"
                 },
                 {
@@ -9804,7 +11887,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedVsanMaximumMbit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vsan_maximum_mbit"
                 },
                 {
@@ -9823,7 +11906,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedVsanReservationMbit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vsan_reservation_mbit"
                 },
                 {
@@ -9843,7 +11926,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedVsanShareCount",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vsan_share_count"
                 },
                 {
@@ -9863,7 +11946,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVsanShareLevel",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vsan_share_level"
                 }
             ],
@@ -9908,7 +11991,98 @@
                     "original": "name"
                 }
             ],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The secondary VLAN ID for this port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"port_private_secondary_vlan_id\" <$> TF.attribute",
+                    "name": "_portPrivateSecondaryVlanId",
+                    "method": "portPrivateSecondaryVlanId",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vlanId",
+                            "method": "vlanId"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vlanRange",
+                            "method": "vlanRange"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasPortPrivateSecondaryVlanId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "port_private_secondary_vlan_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The VLAN ID for single VLAN mode. 0 denotes no VLAN."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vlan_id\" <$> TF.attribute",
+                    "name": "_vlanId",
+                    "method": "vlanId",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_portPrivateSecondaryVlanId",
+                            "method": "portPrivateSecondaryVlanId"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vlanRange",
+                            "method": "vlanRange"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasVlanId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vlan_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The VLAN ID for single VLAN mode. 0 denotes no VLAN."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vlan_range\" <$> TF.attribute",
+                    "name": "_vlanRange",
+                    "method": "vlanRange",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_portPrivateSecondaryVlanId",
+                            "method": "portPrivateSecondaryVlanId"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vlanId",
+                            "method": "vlanId"
+                        }
+                    ],
+                    "type": "TF.Attr s [TF.Attr s (VlanRangeSetting s)]",
+                    "class": "HasVlanRange",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vlan_range"
+                }
+            ],
             "type": "DistributedVirtualSwitchResource s",
             "original": "vsphere_distributed_virtual_switch"
         },
@@ -12792,6 +14966,26 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "The number of shares allocated. Used to determine resource allocation in",
+                        "case of resource contention. If this is set, cpu_share_level must be custom."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cpu_shares\" <$> TF.attribute",
+                    "name": "_cpuShares",
+                    "method": "cpuShares",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasCpuShares",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cpu_shares"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "A list of custom attributes to set on this resource."
                     ],
                     "forceNew": false,
@@ -12885,6 +15079,27 @@
                     "validate": false,
                     "optional": true,
                     "original": "memory_share_level"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The number of shares allocated. Used to determine resource allocation in",
+                        "case of resource contention. If this is set, memory_share_level must be",
+                        "custom."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"memory_shares\" <$> TF.attribute",
+                    "name": "_memoryShares",
+                    "method": "memoryShares",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMemoryShares",
+                    "validate": false,
+                    "optional": true,
+                    "original": "memory_shares"
                 },
                 {
                     "default": "_name",
@@ -12984,7 +15199,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedCpuShares",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "cpu_shares"
                 },
                 {
@@ -13005,7 +15220,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedMemoryShares",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "memory_shares"
                 }
             ],
@@ -13620,6 +15835,26 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "The number of shares allocated. Used to determine resource allocation in",
+                        "case of resource contention. If this is set, cpu_share_level must be custom."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cpu_shares\" <$> TF.attribute",
+                    "name": "_cpuShares",
+                    "method": "cpuShares",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasCpuShares",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cpu_shares"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "A list of custom attributes to set on this resource."
                     ],
                     "forceNew": false,
@@ -13713,6 +15948,27 @@
                     "validate": false,
                     "optional": true,
                     "original": "memory_share_level"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The number of shares allocated. Used to determine resource allocation in",
+                        "case of resource contention. If this is set, memory_share_level must be",
+                        "custom."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"memory_shares\" <$> TF.attribute",
+                    "name": "_memoryShares",
+                    "method": "memoryShares",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMemoryShares",
+                    "validate": false,
+                    "optional": true,
+                    "original": "memory_shares"
                 },
                 {
                     "default": "_name",
@@ -13831,7 +16087,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedCpuShares",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "cpu_shares"
                 },
                 {
@@ -13852,7 +16108,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedMemoryShares",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "memory_shares"
                 }
             ],
@@ -14329,6 +16585,25 @@
                     "original": "cpu_reservation"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of shares to allocate to cpu for a custom share level."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cpu_share_count\" <$> TF.attribute",
+                    "name": "_cpuShareCount",
+                    "method": "cpuShareCount",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasCpuShareCount",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cpu_share_count"
+                },
+                {
                     "default": "TF.value \"normal\"",
                     "computed": false,
                     "required": false,
@@ -14379,12 +16654,64 @@
                     "name": "_datastoreClusterId",
                     "method": "datastoreClusterId",
                     "threaded": true,
-                    "conflicts": [],
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_datastoreId",
+                            "method": "datastoreId"
+                        }
+                    ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDatastoreClusterId",
                     "validate": false,
                     "optional": true,
                     "original": "datastore_cluster_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The ID of the virtual machine's datastore. The virtual machine configuration",
+                        "is placed here, along with any virtual disks that are created without",
+                        "datastores."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"datastore_id\" <$> TF.attribute",
+                    "name": "_datastoreId",
+                    "method": "datastoreId",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_datastoreClusterId",
+                            "method": "datastoreClusterId"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatastoreId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "datastore_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "A specification for a virtual disk device on this virtual machine."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"disk\" <$> TF.attribute",
+                    "name": "_disk",
+                    "method": "disk",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (DiskSetting s)]",
+                    "class": "HasDisk",
+                    "validate": false,
+                    "optional": true,
+                    "original": "disk"
                 },
                 {
                     "default": "TF.Nil",
@@ -14565,6 +16892,25 @@
                     "original": "guest_id"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The ID of an optional host system to pin the virtual machine to."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"host_system_id\" <$> TF.attribute",
+                    "name": "_hostSystemId",
+                    "method": "hostSystemId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHostSystemId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "host_system_id"
+                },
+                {
                     "default": "TF.value \"hvAuto\"",
                     "computed": false,
                     "required": false,
@@ -14684,6 +17030,25 @@
                     "validate": false,
                     "optional": true,
                     "original": "memory_reservation"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The amount of shares to allocate to memory for a custom share level."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"memory_share_count\" <$> TF.attribute",
+                    "name": "_memoryShareCount",
+                    "method": "memoryShareCount",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMemoryShareCount",
+                    "validate": false,
+                    "optional": true,
+                    "original": "memory_share_count"
                 },
                 {
                     "default": "TF.value \"normal\"",
@@ -15200,7 +17565,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedCpuShareCount",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "cpu_share_count"
                 },
                 {
@@ -15223,7 +17588,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDatastoreId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "datastore_id"
                 },
                 {
@@ -15261,7 +17626,7 @@
                     "type": "TF.Attr s [TF.Attr s (DiskSetting s)]",
                     "class": "HasComputedDisk",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "disk"
                 },
                 {
@@ -15299,7 +17664,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHostSystemId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "host_system_id"
                 },
                 {
@@ -15339,7 +17704,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedMemoryShareCount",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "memory_share_count"
                 },
                 {
@@ -15518,7 +17883,60 @@
                     "original": "name"
                 }
             ],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The ID of a datastore cluster to put the virtual machine in."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"datastore_cluster_id\" <$> TF.attribute",
+                    "name": "_datastoreClusterId",
+                    "method": "datastoreClusterId",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_datastoreId",
+                            "method": "datastoreId"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatastoreClusterId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "datastore_cluster_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The ID of the virtual machine's datastore. The virtual machine configuration",
+                        "is placed here, along with any virtual disks that are created without",
+                        "datastores."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"datastore_id\" <$> TF.attribute",
+                    "name": "_datastoreId",
+                    "method": "datastoreId",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_datastoreClusterId",
+                            "method": "datastoreClusterId"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatastoreId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "datastore_id"
+                }
+            ],
             "type": "VirtualMachineResource s",
             "original": "vsphere_virtual_machine"
         },
