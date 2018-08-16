@@ -38,10 +38,9 @@ import GHC.Base (($))
 
 import Terrafomo.DigitalOcean.Settings
 
-import qualified Data.Hashable                   as P
-import qualified Data.HashMap.Strict             as P
-import qualified Data.HashMap.Strict             as Map
 import qualified Data.List.NonEmpty              as P
+import qualified Data.Map.Strict                 as P
+import qualified Data.Map.Strict                 as Map
 import qualified Data.Maybe                      as P
 import qualified Data.Monoid                     as P
 import qualified Data.Text                       as P
@@ -66,13 +65,13 @@ data DomainData s = DomainData'
     -- ^ @name@ - (Required)
     -- Name of the domain
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 domainData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DomainData s)
 domainData _name =
-    TF.newDataSource "digitalocean_domain" TF.validator $
+    TF.unsafeDataSource "digitalocean_domain" P.defaultProvider TF.validator $
         DomainData'
             { _name = _name
             }
@@ -93,7 +92,7 @@ instance P.HasName (DomainData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DomainData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DomainData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DomainData s)) (TF.Attr s P.Int) where
     computedTtl x = TF.compute (TF.refKey x) "ttl"
 
 instance s ~ s' => P.HasComputedZoneFile (TF.Ref s' (DomainData s)) (TF.Attr s P.Text) where
@@ -108,13 +107,13 @@ data ImageData s = ImageData'
     -- ^ @name@ - (Required)
     -- Name of the image
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 imageData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ImageData s)
 imageData _name =
-    TF.newDataSource "digitalocean_image" TF.validator $
+    TF.unsafeDataSource "digitalocean_image" P.defaultProvider TF.validator $
         ImageData'
             { _name = _name
             }
@@ -138,7 +137,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) 
 instance s ~ s' => P.HasComputedImage (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedImage x = TF.compute (TF.refKey x) "image"
 
-instance s ~ s' => P.HasComputedMinDiskSize (TF.Ref s' (ImageData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedMinDiskSize (TF.Ref s' (ImageData s)) (TF.Attr s P.Int) where
     computedMinDiskSize x = TF.compute (TF.refKey x) "min_disk_size"
 
 instance s ~ s' => P.HasComputedPrivate (TF.Ref s' (ImageData s)) (TF.Attr s P.Bool) where
@@ -163,14 +162,14 @@ data RecordData s = RecordData'
     -- ^ @name@ - (Required)
     -- Name of the record
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 recordData
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (RecordData s)
 recordData _domain _name =
-    TF.newDataSource "digitalocean_record" TF.validator $
+    TF.unsafeDataSource "digitalocean_record" P.defaultProvider TF.validator $
         RecordData'
             { _domain = _domain
             , _name = _name
@@ -198,26 +197,26 @@ instance P.HasName (RecordData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedData (TF.Ref s' (RecordData s)) (TF.Attr s P.Text) where
     computedData x = TF.compute (TF.refKey x) "data"
 
-instance s ~ s' => P.HasComputedFlags (TF.Ref s' (RecordData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedFlags (TF.Ref s' (RecordData s)) (TF.Attr s P.Int) where
     computedFlags x = TF.compute (TF.refKey x) "flags"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RecordData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RecordData s)) (TF.Attr s P.Int) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedPort (TF.Ref s' (RecordData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (RecordData s)) (TF.Attr s P.Int) where
     computedPort x = TF.compute (TF.refKey x) "port"
 
-instance s ~ s' => P.HasComputedPriority (TF.Ref s' (RecordData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedPriority (TF.Ref s' (RecordData s)) (TF.Attr s P.Int) where
     computedPriority x = TF.compute (TF.refKey x) "priority"
 
 instance s ~ s' => P.HasComputedTag (TF.Ref s' (RecordData s)) (TF.Attr s P.Text) where
     computedTag x = TF.compute (TF.refKey x) "tag"
 
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordData s)) (TF.Attr s P.Int) where
     computedTtl x = TF.compute (TF.refKey x) "ttl"
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (RecordData s)) (TF.Attr s P.Text) where
     computedType x = TF.compute (TF.refKey x) "type"
 
-instance s ~ s' => P.HasComputedWeight (TF.Ref s' (RecordData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedWeight (TF.Ref s' (RecordData s)) (TF.Attr s P.Int) where
     computedWeight x = TF.compute (TF.refKey x) "weight"

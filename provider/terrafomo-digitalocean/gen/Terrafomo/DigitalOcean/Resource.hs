@@ -66,10 +66,9 @@ import GHC.Base (($))
 
 import Terrafomo.DigitalOcean.Settings
 
-import qualified Data.Hashable                   as P
-import qualified Data.HashMap.Strict             as P
-import qualified Data.HashMap.Strict             as Map
 import qualified Data.List.NonEmpty              as P
+import qualified Data.Map.Strict                 as P
+import qualified Data.Map.Strict                 as Map
 import qualified Data.Maybe                      as P
 import qualified Data.Monoid                     as P
 import qualified Data.Text                       as P
@@ -102,7 +101,7 @@ data CertificateResource s = CertificateResource'
     , _privateKey       :: TF.Attr s P.Text
     -- ^ @private_key@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 certificateResource
     :: TF.Attr s P.Text -- ^ @leaf_certificate@ - 'P.leafCertificate'
@@ -110,7 +109,7 @@ certificateResource
     -> TF.Attr s P.Text -- ^ @private_key@ - 'P.privateKey'
     -> P.Resource (CertificateResource s)
 certificateResource _leafCertificate _name _privateKey =
-    TF.newResource "digitalocean_certificate" TF.validator $
+    TF.unsafeResource "digitalocean_certificate" P.defaultProvider TF.validator $
         CertificateResource'
             { _certificateChain = TF.Nil
             , _leafCertificate = _leafCertificate
@@ -166,14 +165,14 @@ data DomainResource s = DomainResource'
     , _name      :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 domainResource
     :: TF.Attr s P.Text -- ^ @ip_address@ - 'P.ipAddress'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DomainResource s)
 domainResource _ipAddress _name =
-    TF.newResource "digitalocean_domain" TF.validator $
+    TF.unsafeResource "digitalocean_domain" P.defaultProvider TF.validator $
         DomainResource'
             { _ipAddress = _ipAddress
             , _name = _name
@@ -242,7 +241,7 @@ data DropletResource s = DropletResource'
     , _volumeIds         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @volume_ids@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dropletResource
     :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
@@ -251,7 +250,7 @@ dropletResource
     -> TF.Attr s P.Text -- ^ @size@ - 'P.size'
     -> P.Resource (DropletResource s)
 dropletResource _image _name _region _size =
-    TF.newResource "digitalocean_droplet" TF.validator $
+    TF.unsafeResource "digitalocean_droplet" P.defaultProvider TF.validator $
         DropletResource'
             { _backups = TF.Nil
             , _image = _image
@@ -353,7 +352,7 @@ instance P.HasVolumeIds (DropletResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_volumeIds :: DropletResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _volumeIds = a } :: DropletResource s)
 
-instance s ~ s' => P.HasComputedDisk (TF.Ref s' (DropletResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedDisk (TF.Ref s' (DropletResource s)) (TF.Attr s P.Int) where
     computedDisk x = TF.compute (TF.refKey x) "disk"
 
 instance s ~ s' => P.HasComputedIpv4Address (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
@@ -380,7 +379,7 @@ instance s ~ s' => P.HasComputedPriceMonthly (TF.Ref s' (DropletResource s)) (TF
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance s ~ s' => P.HasComputedVcpus (TF.Ref s' (DropletResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedVcpus (TF.Ref s' (DropletResource s)) (TF.Attr s P.Int) where
     computedVcpus x = TF.compute (TF.refKey x) "vcpus"
 
 -- | @digitalocean_firewall@ Resource.
@@ -391,25 +390,25 @@ data FirewallResource s = FirewallResource'
     { _dropletIds   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @droplet_ids@ - (Optional)
     --
-    , _inboundRule  :: TF.Attr s [TF.Attr s (FirewallInboundRule s)]
+    , _inboundRule  :: TF.Attr s [TF.Attr s (InboundRuleSetting s)]
     -- ^ @inbound_rule@ - (Optional)
     --
     , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _outboundRule :: TF.Attr s [TF.Attr s (FirewallOutboundRule s)]
+    , _outboundRule :: TF.Attr s [TF.Attr s (OutboundRuleSetting s)]
     -- ^ @outbound_rule@ - (Optional)
     --
     , _tags         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 firewallResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (FirewallResource s)
 firewallResource _name =
-    TF.newResource "digitalocean_firewall" TF.validator $
+    TF.unsafeResource "digitalocean_firewall" P.defaultProvider TF.validator $
         FirewallResource'
             { _dropletIds = TF.Nil
             , _inboundRule = TF.Nil
@@ -429,23 +428,15 @@ instance TF.IsObject (FirewallResource s) where
 
 instance TF.IsValid (FirewallResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_inboundRule"
-                  (_inboundRule
-                      :: FirewallResource s -> TF.Attr s [TF.Attr s (FirewallInboundRule s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_outboundRule"
-                  (_outboundRule
-                      :: FirewallResource s -> TF.Attr s [TF.Attr s (FirewallOutboundRule s)])
-                  TF.validator
 
 instance P.HasDropletIds (FirewallResource s) (TF.Attr s [TF.Attr s P.Text]) where
     dropletIds =
         P.lens (_dropletIds :: FirewallResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _dropletIds = a } :: FirewallResource s)
 
-instance P.HasInboundRule (FirewallResource s) (TF.Attr s [TF.Attr s (FirewallInboundRule s)]) where
+instance P.HasInboundRule (FirewallResource s) (TF.Attr s [TF.Attr s (InboundRuleSetting s)]) where
     inboundRule =
-        P.lens (_inboundRule :: FirewallResource s -> TF.Attr s [TF.Attr s (FirewallInboundRule s)])
+        P.lens (_inboundRule :: FirewallResource s -> TF.Attr s [TF.Attr s (InboundRuleSetting s)])
                (\s a -> s { _inboundRule = a } :: FirewallResource s)
 
 instance P.HasName (FirewallResource s) (TF.Attr s P.Text) where
@@ -453,9 +444,9 @@ instance P.HasName (FirewallResource s) (TF.Attr s P.Text) where
         P.lens (_name :: FirewallResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: FirewallResource s)
 
-instance P.HasOutboundRule (FirewallResource s) (TF.Attr s [TF.Attr s (FirewallOutboundRule s)]) where
+instance P.HasOutboundRule (FirewallResource s) (TF.Attr s [TF.Attr s (OutboundRuleSetting s)]) where
     outboundRule =
-        P.lens (_outboundRule :: FirewallResource s -> TF.Attr s [TF.Attr s (FirewallOutboundRule s)])
+        P.lens (_outboundRule :: FirewallResource s -> TF.Attr s [TF.Attr s (OutboundRuleSetting s)])
                (\s a -> s { _outboundRule = a } :: FirewallResource s)
 
 instance P.HasTags (FirewallResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -466,7 +457,7 @@ instance P.HasTags (FirewallResource s) (TF.Attr s [TF.Attr s P.Text]) where
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
     computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance s ~ s' => P.HasComputedPendingChanges (TF.Ref s' (FirewallResource s)) (TF.Attr s [TF.Attr s (FirewallPendingChanges s)]) where
+instance s ~ s' => P.HasComputedPendingChanges (TF.Ref s' (FirewallResource s)) (TF.Attr s [TF.Attr s (PendingChangesSetting s)]) where
     computedPendingChanges x = TF.compute (TF.refKey x) "pending_changes"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
@@ -477,19 +468,19 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (FirewallResource s)) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/digitalocean/r/floating_ip.html terraform documentation>
 -- for more information.
 data FloatingIpResource s = FloatingIpResource'
-    { _dropletId :: TF.Attr s P.Integer
+    { _dropletId :: TF.Attr s P.Int
     -- ^ @droplet_id@ - (Optional)
     --
     , _region    :: TF.Attr s P.Text
     -- ^ @region@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 floatingIpResource
     :: TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> P.Resource (FloatingIpResource s)
 floatingIpResource _region =
-    TF.newResource "digitalocean_floating_ip" TF.validator $
+    TF.unsafeResource "digitalocean_floating_ip" P.defaultProvider TF.validator $
         FloatingIpResource'
             { _dropletId = TF.Nil
             , _region = _region
@@ -504,9 +495,9 @@ instance TF.IsObject (FloatingIpResource s) where
 instance TF.IsValid (FloatingIpResource s) where
     validator = P.mempty
 
-instance P.HasDropletId (FloatingIpResource s) (TF.Attr s P.Integer) where
+instance P.HasDropletId (FloatingIpResource s) (TF.Attr s P.Int) where
     dropletId =
-        P.lens (_dropletId :: FloatingIpResource s -> TF.Attr s P.Integer)
+        P.lens (_dropletId :: FloatingIpResource s -> TF.Attr s P.Int)
                (\s a -> s { _dropletId = a } :: FloatingIpResource s)
 
 instance P.HasRegion (FloatingIpResource s) (TF.Attr s P.Text) where
@@ -531,10 +522,10 @@ data LoadbalancerResource s = LoadbalancerResource'
     , _dropletTag :: TF.Attr s P.Text
     -- ^ @droplet_tag@ - (Optional)
     --
-    , _forwardingRule :: TF.Attr s (P.NonEmpty (TF.Attr s (LoadbalancerForwardingRule s)))
+    , _forwardingRule :: TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRuleSetting s)))
     -- ^ @forwarding_rule@ - (Required)
     --
-    , _healthcheck :: TF.Attr s (LoadbalancerHealthcheck s)
+    , _healthcheck :: TF.Attr s (HealthcheckSetting s)
     -- ^ @healthcheck@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
@@ -546,15 +537,15 @@ data LoadbalancerResource s = LoadbalancerResource'
     , _region :: TF.Attr s P.Text
     -- ^ @region@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 loadbalancerResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s (LoadbalancerForwardingRule s))) -- ^ @forwarding_rule@ - 'P.forwardingRule'
+    :: TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRuleSetting s))) -- ^ @forwarding_rule@ - 'P.forwardingRule'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> P.Resource (LoadbalancerResource s)
 loadbalancerResource _forwardingRule _name _region =
-    TF.newResource "digitalocean_loadbalancer" TF.validator $
+    TF.unsafeResource "digitalocean_loadbalancer" P.defaultProvider TF.validator $
         LoadbalancerResource'
             { _algorithm = TF.value "round_robin"
             , _dropletIds = TF.Nil
@@ -580,13 +571,9 @@ instance TF.IsObject (LoadbalancerResource s) where
 
 instance TF.IsValid (LoadbalancerResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_forwardingRule"
-                  (_forwardingRule
-                      :: LoadbalancerResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (LoadbalancerForwardingRule s))))
-                  TF.validator
            P.<> TF.settingsValidator "_healthcheck"
                   (_healthcheck
-                      :: LoadbalancerResource s -> TF.Attr s (LoadbalancerHealthcheck s))
+                      :: LoadbalancerResource s -> TF.Attr s (HealthcheckSetting s))
                   TF.validator
 
 instance P.HasAlgorithm (LoadbalancerResource s) (TF.Attr s P.Text) where
@@ -604,14 +591,14 @@ instance P.HasDropletTag (LoadbalancerResource s) (TF.Attr s P.Text) where
         P.lens (_dropletTag :: LoadbalancerResource s -> TF.Attr s P.Text)
                (\s a -> s { _dropletTag = a } :: LoadbalancerResource s)
 
-instance P.HasForwardingRule (LoadbalancerResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (LoadbalancerForwardingRule s)))) where
+instance P.HasForwardingRule (LoadbalancerResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRuleSetting s)))) where
     forwardingRule =
-        P.lens (_forwardingRule :: LoadbalancerResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (LoadbalancerForwardingRule s))))
+        P.lens (_forwardingRule :: LoadbalancerResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRuleSetting s))))
                (\s a -> s { _forwardingRule = a } :: LoadbalancerResource s)
 
-instance P.HasHealthcheck (LoadbalancerResource s) (TF.Attr s (LoadbalancerHealthcheck s)) where
+instance P.HasHealthcheck (LoadbalancerResource s) (TF.Attr s (HealthcheckSetting s)) where
     healthcheck =
-        P.lens (_healthcheck :: LoadbalancerResource s -> TF.Attr s (LoadbalancerHealthcheck s))
+        P.lens (_healthcheck :: LoadbalancerResource s -> TF.Attr s (HealthcheckSetting s))
                (\s a -> s { _healthcheck = a } :: LoadbalancerResource s)
 
 instance P.HasName (LoadbalancerResource s) (TF.Attr s P.Text) where
@@ -632,7 +619,7 @@ instance P.HasRegion (LoadbalancerResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
     computedIp x = TF.compute (TF.refKey x) "ip"
 
-instance s ~ s' => P.HasComputedStickySessions (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s (LoadbalancerStickySessions s)) where
+instance s ~ s' => P.HasComputedStickySessions (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s (StickySessionsSetting s)) where
     computedStickySessions x = TF.compute (TF.refKey x) "sticky_sessions"
 
 -- | @digitalocean_record@ Resource.
@@ -652,14 +639,14 @@ data RecordResource s = RecordResource'
     , _type'  :: TF.Attr s P.Text
     -- ^ @type@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 recordResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (RecordResource s)
 recordResource _domain _type' =
-    TF.newResource "digitalocean_record" TF.validator $
+    TF.unsafeResource "digitalocean_record" P.defaultProvider TF.validator $
         RecordResource'
             { _domain = _domain
             , _name = TF.Nil
@@ -730,14 +717,14 @@ data SshKeyResource s = SshKeyResource'
     , _publicKey :: TF.Attr s P.Text
     -- ^ @public_key@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 sshKeyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
     -> P.Resource (SshKeyResource s)
 sshKeyResource _name _publicKey =
-    TF.newResource "digitalocean_ssh_key" TF.validator $
+    TF.unsafeResource "digitalocean_ssh_key" P.defaultProvider TF.validator $
         SshKeyResource'
             { _name = _name
             , _publicKey = _publicKey
@@ -776,13 +763,13 @@ data TagResource s = TagResource'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 tagResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (TagResource s)
 tagResource _name =
-    TF.newResource "digitalocean_tag" TF.validator $
+    TF.unsafeResource "digitalocean_tag" P.defaultProvider TF.validator $
         TagResource'
             { _name = _name
             }
@@ -817,18 +804,18 @@ data VolumeResource s = VolumeResource'
     , _region         :: TF.Attr s P.Text
     -- ^ @region@ - (Required, Forces New)
     --
-    , _size           :: TF.Attr s P.Integer
+    , _size           :: TF.Attr s P.Int
     -- ^ @size@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 volumeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> TF.Attr s P.Integer -- ^ @size@ - 'P.size'
+    -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (VolumeResource s)
 volumeResource _name _region _size =
-    TF.newResource "digitalocean_volume" TF.validator $
+    TF.unsafeResource "digitalocean_volume" P.defaultProvider TF.validator $
         VolumeResource'
             { _description = TF.Nil
             , _filesystemType = TF.Nil
@@ -869,12 +856,12 @@ instance P.HasRegion (VolumeResource s) (TF.Attr s P.Text) where
         P.lens (_region :: VolumeResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: VolumeResource s)
 
-instance P.HasSize (VolumeResource s) (TF.Attr s P.Integer) where
+instance P.HasSize (VolumeResource s) (TF.Attr s P.Int) where
     size =
-        P.lens (_size :: VolumeResource s -> TF.Attr s P.Integer)
+        P.lens (_size :: VolumeResource s -> TF.Attr s P.Int)
                (\s a -> s { _size = a } :: VolumeResource s)
 
-instance s ~ s' => P.HasComputedDropletIds (TF.Ref s' (VolumeResource s)) (TF.Attr s [TF.Attr s P.Integer]) where
+instance s ~ s' => P.HasComputedDropletIds (TF.Ref s' (VolumeResource s)) (TF.Attr s [TF.Attr s P.Int]) where
     computedDropletIds x = TF.compute (TF.refKey x) "droplet_ids"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where

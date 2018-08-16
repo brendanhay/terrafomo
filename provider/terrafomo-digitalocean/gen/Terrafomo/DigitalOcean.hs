@@ -12,12 +12,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.DigitalOcean
-    ( module Terrafomo.DigitalOcean.Types
-    , module Terrafomo.DigitalOcean.DataSource
+    ( module Terrafomo.DigitalOcean.DataSource
+    , module Terrafomo.DigitalOcean.Lens
     , module Terrafomo.DigitalOcean.Provider
     , module Terrafomo.DigitalOcean.Resource
     , module Terrafomo.DigitalOcean.Settings
-    , module Terrafomo.DigitalOcean.Lens
+    , module Terrafomo.DigitalOcean.Types
     -- * Provider Aliases
     ) where
 
