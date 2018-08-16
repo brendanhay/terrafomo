@@ -92,7 +92,7 @@ groupResource
     -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
     -> P.Resource (GroupResource s)
 groupResource _locationId _name _parent =
-    TF.unsafeResource "clc_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "clc_group" TF.validator $
         GroupResource'
             { _customFields = TF.Nil
             , _description = TF.Nil
@@ -166,7 +166,7 @@ loadBalancerResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LoadBalancerResource s)
 loadBalancerResource _dataCenter _description _name =
-    TF.unsafeResource "clc_load_balancer" P.defaultProvider TF.validator $
+    TF.unsafeResource "clc_load_balancer" TF.validator $
         LoadBalancerResource'
             { _dataCenter = _dataCenter
             , _description = _description
@@ -240,7 +240,7 @@ loadBalancerPoolResource
     -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
     -> P.Resource (LoadBalancerPoolResource s)
 loadBalancerPoolResource _dataCenter _loadBalancer _nodes _port =
-    TF.unsafeResource "clc_load_balancer_pool" P.defaultProvider TF.validator $
+    TF.unsafeResource "clc_load_balancer_pool" TF.validator $
         LoadBalancerPoolResource'
             { _dataCenter = _dataCenter
             , _loadBalancer = _loadBalancer
@@ -314,7 +314,7 @@ publicIpResource
     -> TF.Attr s P.Text -- ^ @server_id@ - 'P.serverId'
     -> P.Resource (PublicIpResource s)
 publicIpResource _ports _serverId =
-    TF.unsafeResource "clc_public_ip" P.defaultProvider TF.validator $
+    TF.unsafeResource "clc_public_ip" TF.validator $
         PublicIpResource'
             { _ports = _ports
             , _serverId = _serverId
@@ -412,7 +412,7 @@ serverResource
     -> TF.Attr s P.Text -- ^ @source_server_id@ - 'P.sourceServerId'
     -> P.Resource (ServerResource s)
 serverResource _cpu _groupId _memoryMb _nameTemplate _sourceServerId =
-    TF.unsafeResource "clc_server" P.defaultProvider TF.validator $
+    TF.unsafeResource "clc_server" TF.validator $
         ServerResource'
             { _aaPolicyId = TF.Nil
             , _additionalDisks = TF.Nil
