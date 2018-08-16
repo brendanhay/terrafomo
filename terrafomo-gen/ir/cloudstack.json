@@ -201,6 +201,23 @@
             ],
             "parameters": [
                 {
+                    "default": "_virtualMachineId",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virtual_machine_id\" <$> TF.attribute",
+                    "name": "_virtualMachineId",
+                    "method": "virtualMachineId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtualMachineId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "virtual_machine_id"
+                },
+                {
                     "default": "_privatePort",
                     "computed": false,
                     "required": true,
@@ -216,23 +233,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "private_port"
-                },
-                {
-                    "default": "_protocol",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
-                    "name": "_protocol",
-                    "method": "protocol",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasProtocol",
-                    "validate": false,
-                    "optional": false,
-                    "original": "protocol"
                 },
                 {
                     "default": "_publicPort",
@@ -252,21 +252,21 @@
                     "original": "public_port"
                 },
                 {
-                    "default": "_virtualMachineId",
+                    "default": "_protocol",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"virtual_machine_id\" <$> TF.attribute",
-                    "name": "_virtualMachineId",
-                    "method": "virtualMachineId",
+                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
+                    "name": "_protocol",
+                    "method": "protocol",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasVirtualMachineId",
+                    "class": "HasProtocol",
                     "validate": false,
                     "optional": false,
-                    "original": "virtual_machine_id"
+                    "original": "protocol"
                 }
             ],
             "conflicts": [],
@@ -2619,23 +2619,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_vpcId",
                     "computed": false,
                     "required": true,
@@ -2651,6 +2634,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "vpc_id"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 }
             ],
             "conflicts": [],
@@ -3151,21 +3151,21 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_aclId",
+                    "default": "_ipAddress",
                     "computed": false,
                     "required": true,
                     "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"acl_id\" <$> TF.attribute",
-                    "name": "_aclId",
-                    "method": "aclId",
+                    "forceNew": true,
+                    "encoder": "TF.assign \"ip_address\" <$> TF.attribute",
+                    "name": "_ipAddress",
+                    "method": "ipAddress",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasAclId",
+                    "class": "HasIpAddress",
                     "validate": false,
                     "optional": false,
-                    "original": "acl_id"
+                    "original": "ip_address"
                 },
                 {
                     "default": "_gateway",
@@ -3185,21 +3185,38 @@
                     "original": "gateway"
                 },
                 {
-                    "default": "_ipAddress",
+                    "default": "_aclId",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"acl_id\" <$> TF.attribute",
+                    "name": "_aclId",
+                    "method": "aclId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAclId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "acl_id"
+                },
+                {
+                    "default": "_vpcId",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": true,
-                    "encoder": "TF.assign \"ip_address\" <$> TF.attribute",
-                    "name": "_ipAddress",
-                    "method": "ipAddress",
+                    "encoder": "TF.assign \"vpc_id\" <$> TF.attribute",
+                    "name": "_vpcId",
+                    "method": "vpcId",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasIpAddress",
+                    "class": "HasVpcId",
                     "validate": false,
                     "optional": false,
-                    "original": "ip_address"
+                    "original": "vpc_id"
                 },
                 {
                     "default": "_netmask",
@@ -3234,23 +3251,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "vlan"
-                },
-                {
-                    "default": "_vpcId",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"vpc_id\" <$> TF.attribute",
-                    "name": "_vpcId",
-                    "method": "vpcId",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasVpcId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "vpc_id"
                 }
             ],
             "conflicts": [],
@@ -3513,23 +3513,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_rule",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"rule\" <$> TF.attribute",
-                    "name": "_rule",
-                    "method": "rule",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RuleSetting s)]",
-                    "class": "HasRule",
-                    "validate": false,
-                    "optional": false,
-                    "original": "rule"
-                },
-                {
                     "default": "_securityGroupId",
                     "computed": false,
                     "required": true,
@@ -3545,6 +3528,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "security_group_id"
+                },
+                {
+                    "default": "_rule",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"rule\" <$> TF.attribute",
+                    "name": "_rule",
+                    "method": "rule",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (RuleSetting s)]",
+                    "class": "HasRule",
+                    "validate": false,
+                    "optional": false,
+                    "original": "rule"
                 }
             ],
             "conflicts": [],
@@ -4800,23 +4800,6 @@
                     "original": "cidr"
                 },
                 {
-                    "default": "_espPolicy",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"esp_policy\" <$> TF.attribute",
-                    "name": "_espPolicy",
-                    "method": "espPolicy",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasEspPolicy",
-                    "validate": false,
-                    "optional": false,
-                    "original": "esp_policy"
-                },
-                {
                     "default": "_gateway",
                     "computed": false,
                     "required": true,
@@ -4832,6 +4815,40 @@
                     "validate": false,
                     "optional": false,
                     "original": "gateway"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_espPolicy",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"esp_policy\" <$> TF.attribute",
+                    "name": "_espPolicy",
+                    "method": "espPolicy",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEspPolicy",
+                    "validate": false,
+                    "optional": false,
+                    "original": "esp_policy"
                 },
                 {
                     "default": "_ikePolicy",
@@ -4866,23 +4883,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "ipsec_psk"
-                },
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
                 }
             ],
             "conflicts": [],
