@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newSchemaPolicy",
-                "name": "SchemaPolicy'"
+                "smart": "newPolicySetting",
+                "name": "PolicySetting'"
             },
             "arguments": [
                 {
@@ -18,6 +18,7 @@
                     "encoder": "TF.assign \"create\" <$> TF.attribute",
                     "name": "_create",
                     "method": "create",
+                    "threaded": true,
                     "conflicts": [
                         {
                             "default": "TF.value P.False",
@@ -43,6 +44,7 @@
                     "encoder": "TF.assign \"create_with_grant\" <$> TF.attribute",
                     "name": "_createWithGrant",
                     "method": "createWithGrant",
+                    "threaded": true,
                     "conflicts": [
                         {
                             "default": "TF.value P.False",
@@ -67,6 +69,7 @@
                     "encoder": "TF.assign \"role\" <$> TF.attribute",
                     "name": "_role",
                     "method": "role",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRole",
@@ -85,6 +88,7 @@
                     "encoder": "TF.assign \"usage\" <$> TF.attribute",
                     "name": "_usage",
                     "method": "usage",
+                    "threaded": true,
                     "conflicts": [
                         {
                             "default": "TF.value P.False",
@@ -110,6 +114,7 @@
                     "encoder": "TF.assign \"usage_with_grant\" <$> TF.attribute",
                     "name": "_usageWithGrant",
                     "method": "usageWithGrant",
+                    "threaded": true,
                     "conflicts": [
                         {
                             "default": "TF.value P.False",
@@ -124,7 +129,8 @@
                     "original": "usage_with_grant"
                 }
             ],
-            "name": "SchemaPolicy",
+            "key": "postgresql_schema.policy",
+            "name": "PolicySetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
@@ -141,6 +147,7 @@
                     "encoder": "TF.assign \"create\" <$> TF.attribute",
                     "name": "_create",
                     "method": "create",
+                    "threaded": true,
                     "conflicts": [
                         {
                             "default": "TF.value P.False",
@@ -166,6 +173,7 @@
                     "encoder": "TF.assign \"create_with_grant\" <$> TF.attribute",
                     "name": "_createWithGrant",
                     "method": "createWithGrant",
+                    "threaded": true,
                     "conflicts": [
                         {
                             "default": "TF.value P.False",
@@ -190,6 +198,7 @@
                     "encoder": "TF.assign \"usage\" <$> TF.attribute",
                     "name": "_usage",
                     "method": "usage",
+                    "threaded": true,
                     "conflicts": [
                         {
                             "default": "TF.value P.False",
@@ -215,6 +224,7 @@
                     "encoder": "TF.assign \"usage_with_grant\" <$> TF.attribute",
                     "name": "_usageWithGrant",
                     "method": "usageWithGrant",
+                    "threaded": true,
                     "conflicts": [
                         {
                             "default": "TF.value P.False",
@@ -229,8 +239,8 @@
                     "original": "usage_with_grant"
                 }
             ],
-            "type": "SchemaPolicy s",
-            "original": "schema_policy"
+            "type": "PolicySetting s",
+            "original": "policy"
         }
     ],
     "url": "https://www.terraform.io/docs/providers/postgresql/index.html",
@@ -253,6 +263,7 @@
                     "encoder": "TF.assign \"allow_connections\" <$> TF.attribute",
                     "name": "_allowConnections",
                     "method": "allowConnections",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasAllowConnections",
@@ -271,8 +282,9 @@
                     "encoder": "TF.assign \"connection_limit\" <$> TF.attribute",
                     "name": "_connectionLimit",
                     "method": "connectionLimit",
+                    "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
+                    "type": "TF.Attr s P.Int",
                     "class": "HasConnectionLimit",
                     "validate": false,
                     "optional": true,
@@ -289,6 +301,7 @@
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
@@ -298,6 +311,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/postgresql/r/database.html",
+            "key": "postgresql_database",
             "name": "DatabaseResource",
             "threaded": true,
             "attributes": [
@@ -312,6 +326,7 @@
                     "encoder": "TF.assign \"encoding\" <$> TF.attribute",
                     "name": "_computedEncoding",
                     "method": "computedEncoding",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedEncoding",
@@ -331,6 +346,7 @@
                     "encoder": "TF.assign \"is_template\" <$> TF.attribute",
                     "name": "_computedIsTemplate",
                     "method": "computedIsTemplate",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedIsTemplate",
@@ -349,6 +365,7 @@
                     "encoder": "TF.assign \"lc_collate\" <$> TF.attribute",
                     "name": "_computedLcCollate",
                     "method": "computedLcCollate",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedLcCollate",
@@ -367,6 +384,7 @@
                     "encoder": "TF.assign \"lc_ctype\" <$> TF.attribute",
                     "name": "_computedLcCtype",
                     "method": "computedLcCtype",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedLcCtype",
@@ -385,6 +403,7 @@
                     "encoder": "TF.assign \"owner\" <$> TF.attribute",
                     "name": "_computedOwner",
                     "method": "computedOwner",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOwner",
@@ -403,6 +422,7 @@
                     "encoder": "TF.assign \"tablespace_name\" <$> TF.attribute",
                     "name": "_computedTablespaceName",
                     "method": "computedTablespaceName",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTablespaceName",
@@ -421,6 +441,7 @@
                     "encoder": "TF.assign \"template\" <$> TF.attribute",
                     "name": "_computedTemplate",
                     "method": "computedTemplate",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTemplate",
@@ -441,6 +462,7 @@
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
@@ -468,6 +490,7 @@
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
@@ -477,6 +500,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/postgresql/r/extension.html",
+            "key": "postgresql_extension",
             "name": "ExtensionResource",
             "threaded": true,
             "attributes": [
@@ -491,6 +515,7 @@
                     "encoder": "TF.assign \"schema\" <$> TF.attribute",
                     "name": "_computedSchema",
                     "method": "computedSchema",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSchema",
@@ -509,6 +534,7 @@
                     "encoder": "TF.assign \"version\" <$> TF.attribute",
                     "name": "_computedVersion",
                     "method": "computedVersion",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVersion",
@@ -527,6 +553,7 @@
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
@@ -556,6 +583,7 @@
                     "encoder": "TF.assign \"bypass_row_level_security\" <$> TF.attribute",
                     "name": "_bypassRowLevelSecurity",
                     "method": "bypassRowLevelSecurity",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasBypassRowLevelSecurity",
@@ -574,8 +602,9 @@
                     "encoder": "TF.assign \"connection_limit\" <$> TF.attribute",
                     "name": "_connectionLimit",
                     "method": "connectionLimit",
+                    "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
+                    "type": "TF.Attr s P.Int",
                     "class": "HasConnectionLimit",
                     "validate": false,
                     "optional": true,
@@ -592,6 +621,7 @@
                     "encoder": "TF.assign \"create_database\" <$> TF.attribute",
                     "name": "_createDatabase",
                     "method": "createDatabase",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasCreateDatabase",
@@ -610,6 +640,7 @@
                     "encoder": "TF.assign \"create_role\" <$> TF.attribute",
                     "name": "_createRole",
                     "method": "createRole",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasCreateRole",
@@ -628,6 +659,7 @@
                     "encoder": "TF.assign \"encrypted_password\" <$> TF.attribute",
                     "name": "_encryptedPassword",
                     "method": "encryptedPassword",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasEncryptedPassword",
@@ -647,6 +679,7 @@
                     "encoder": "TF.assign \"inherit\" <$> TF.attribute",
                     "name": "_inherit",
                     "method": "inherit",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasInherit",
@@ -665,6 +698,7 @@
                     "encoder": "TF.assign \"login\" <$> TF.attribute",
                     "name": "_login",
                     "method": "login",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasLogin",
@@ -683,6 +717,7 @@
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
@@ -702,6 +737,7 @@
                     "encoder": "TF.assign \"replication\" <$> TF.attribute",
                     "name": "_replication",
                     "method": "replication",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasReplication",
@@ -721,6 +757,7 @@
                     "encoder": "TF.assign \"skip_drop_role\" <$> TF.attribute",
                     "name": "_skipDropRole",
                     "method": "skipDropRole",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasSkipDropRole",
@@ -740,6 +777,7 @@
                     "encoder": "TF.assign \"skip_reassign_owned\" <$> TF.attribute",
                     "name": "_skipReassignOwned",
                     "method": "skipReassignOwned",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasSkipReassignOwned",
@@ -758,6 +796,7 @@
                     "encoder": "TF.assign \"superuser\" <$> TF.attribute",
                     "name": "_superuser",
                     "method": "superuser",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasSuperuser",
@@ -776,6 +815,7 @@
                     "encoder": "TF.assign \"valid_until\" <$> TF.attribute",
                     "name": "_validUntil",
                     "method": "validUntil",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasValidUntil",
@@ -785,6 +825,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/postgresql/r/role.html",
+            "key": "postgresql_role",
             "name": "RoleResource",
             "threaded": true,
             "attributes": [
@@ -799,6 +840,7 @@
                     "encoder": "TF.assign \"password\" <$> TF.attribute",
                     "name": "_computedPassword",
                     "method": "computedPassword",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPassword",
@@ -819,6 +861,7 @@
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
@@ -848,6 +891,7 @@
                     "encoder": "TF.assign \"if_not_exists\" <$> TF.attribute",
                     "name": "_ifNotExists",
                     "method": "ifNotExists",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasIfNotExists",
@@ -866,6 +910,7 @@
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
@@ -875,6 +920,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/postgresql/r/schema.html",
+            "key": "postgresql_schema",
             "name": "SchemaResource",
             "threaded": true,
             "attributes": [
@@ -889,6 +935,7 @@
                     "encoder": "TF.assign \"owner\" <$> TF.attribute",
                     "name": "_computedOwner",
                     "method": "computedOwner",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOwner",
@@ -905,10 +952,11 @@
                     "encoder": "TF.assign \"policy\" <$> TF.attribute",
                     "name": "_computedPolicy",
                     "method": "computedPolicy",
+                    "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (SchemaPolicy s)]",
+                    "type": "TF.Attr s [TF.Attr s (PolicySetting s)]",
                     "class": "HasComputedPolicy",
-                    "validate": true,
+                    "validate": false,
                     "optional": true,
                     "original": "policy"
                 }
@@ -925,6 +973,7 @@
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
@@ -956,8 +1005,9 @@
                 "encoder": "TF.assign \"connect_timeout\" <$>",
                 "name": "_connectTimeout",
                 "method": "connectTimeout",
+                "threaded": false,
                 "conflicts": [],
-                "type": "P.Maybe P.Integer",
+                "type": "P.Maybe P.Int",
                 "class": "HasConnectTimeout",
                 "validate": false,
                 "optional": true,
@@ -975,6 +1025,7 @@
                 "encoder": "TF.assign \"database\" <$>",
                 "name": "_database",
                 "method": "database",
+                "threaded": false,
                 "conflicts": [],
                 "type": "P.Maybe P.Text",
                 "class": "HasDatabase",
@@ -993,6 +1044,7 @@
                 "encoder": "P.Just $ TF.assign \"expected_version\"",
                 "name": "_expectedVersion",
                 "method": "expectedVersion",
+                "threaded": false,
                 "conflicts": [],
                 "type": "P.Text",
                 "class": "HasExpectedVersion",
@@ -1011,6 +1063,7 @@
                 "encoder": "TF.assign \"host\" <$>",
                 "name": "_host",
                 "method": "host",
+                "threaded": false,
                 "conflicts": [],
                 "type": "P.Maybe P.Text",
                 "class": "HasHost",
@@ -1030,8 +1083,9 @@
                 "encoder": "TF.assign \"max_connections\" <$>",
                 "name": "_maxConnections",
                 "method": "maxConnections",
+                "threaded": false,
                 "conflicts": [],
-                "type": "P.Maybe P.Integer",
+                "type": "P.Maybe P.Int",
                 "class": "HasMaxConnections",
                 "validate": false,
                 "optional": true,
@@ -1048,6 +1102,7 @@
                 "encoder": "TF.assign \"password\" <$>",
                 "name": "_password",
                 "method": "password",
+                "threaded": false,
                 "conflicts": [],
                 "type": "P.Maybe P.Text",
                 "class": "HasPassword",
@@ -1067,8 +1122,9 @@
                 "encoder": "TF.assign \"port\" <$>",
                 "name": "_port",
                 "method": "port",
+                "threaded": false,
                 "conflicts": [],
-                "type": "P.Maybe P.Integer",
+                "type": "P.Maybe P.Int",
                 "class": "HasPort",
                 "validate": false,
                 "optional": true,
@@ -1086,6 +1142,7 @@
                 "encoder": "TF.assign \"sslmode\" <$>",
                 "name": "_sslmode",
                 "method": "sslmode",
+                "threaded": false,
                 "conflicts": [],
                 "type": "P.Maybe P.Text",
                 "class": "HasSslmode",
@@ -1104,6 +1161,7 @@
                 "encoder": "TF.assign \"username\" <$>",
                 "name": "_username",
                 "method": "username",
+                "threaded": false,
                 "conflicts": [],
                 "type": "P.Maybe P.Text",
                 "class": "HasUsername",
@@ -1112,6 +1170,7 @@
                 "original": "username"
             }
         ],
+        "key": "provider",
         "name": "Provider",
         "threaded": false,
         "attributes": [],
@@ -1121,14 +1180,15 @@
         "original": "provider"
     },
     "dependencies": [
+        "aeson",
         "base",
-        "unordered-containers",
-        "text",
+        "containers",
+        "microlens",
         "terrafomo",
-        "hashable",
-        "microlens"
+        "text"
     ],
     "name": "PostgreSQL",
     "package": "terrafomo-postgresql",
+    "primitives": [],
     "original": "postgresql"
 }
