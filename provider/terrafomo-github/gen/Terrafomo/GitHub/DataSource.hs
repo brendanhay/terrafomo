@@ -17,7 +17,6 @@
 --
 module Terrafomo.GitHub.DataSource
     (
-    -- * DataSource Datatypes
     -- ** github_ip_ranges
       IpRangesData (..)
     , ipRangesData
@@ -67,6 +66,7 @@ import qualified Terrafomo.Validator       as TF
 data IpRangesData s = IpRangesData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_ip_ranges@ datasource value.
 ipRangesData
     :: P.DataSource (IpRangesData s)
 ipRangesData =
@@ -113,6 +113,7 @@ data RepositoryData s = RepositoryData'
     -- * 'fullName'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_repository@ datasource value.
 repositoryData
     :: P.DataSource (RepositoryData s)
 repositoryData =
@@ -219,6 +220,7 @@ data TeamData s = TeamData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_team@ datasource value.
 teamData
     :: TF.Attr s P.Text -- ^ @slug@ - 'P.slug'
     -> P.DataSource (TeamData s)
@@ -269,6 +271,7 @@ data UserData s = UserData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_user@ datasource value.
 userData
     :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.DataSource (UserData s)

@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.GitHub
-    ( module Terrafomo.GitHub.DataSource
-    , module Terrafomo.GitHub.Lens
-    , module Terrafomo.GitHub.Provider
-    , module Terrafomo.GitHub.Resource
-    , module Terrafomo.GitHub.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.GitHub.Provider
+
+    -- * Custom Types
     , module Terrafomo.GitHub.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.GitHub.DataSource
+
+    -- * Resources
+    , module Terrafomo.GitHub.Resource
+
+    -- * Settings
+    , module Terrafomo.GitHub.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.GitHub.Lens
     ) where
 
 import Terrafomo.GitHub.DataSource

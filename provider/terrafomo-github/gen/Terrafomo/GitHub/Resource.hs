@@ -17,7 +17,6 @@
 --
 module Terrafomo.GitHub.Resource
     (
-    -- * Resource Datatypes
     -- ** github_branch_protection
       BranchProtectionResource (..)
     , branchProtectionResource
@@ -129,6 +128,7 @@ data BranchProtectionResource s = BranchProtectionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_branch_protection@ resource value.
 branchProtectionResource
     :: TF.Attr s P.Text -- ^ @branch@ - 'P.branch'
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
@@ -221,6 +221,7 @@ data IssueLabelResource s = IssueLabelResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_issue_label@ resource value.
 issueLabelResource
     :: TF.Attr s P.Text -- ^ @color@ - 'P.color'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -285,6 +286,7 @@ data MembershipResource s = MembershipResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_membership@ resource value.
 membershipResource
     :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.Resource (MembershipResource s)
@@ -330,6 +332,7 @@ data OrganizationProjectResource s = OrganizationProjectResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_organization_project@ resource value.
 organizationProjectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (OrganizationProjectResource s)
@@ -384,6 +387,7 @@ data OrganizationWebhookResource s = OrganizationWebhookResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_organization_webhook@ resource value.
 organizationWebhookResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @events@ - 'P.events'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -489,6 +493,7 @@ data RepositoryResource s = RepositoryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_repository@ resource value.
 repositoryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RepositoryResource s)
@@ -656,6 +661,7 @@ data RepositoryCollaboratorResource s = RepositoryCollaboratorResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_repository_collaborator@ resource value.
 repositoryCollaboratorResource
     :: TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
@@ -715,6 +721,7 @@ data RepositoryDeployKeyResource s = RepositoryDeployKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_repository_deploy_key@ resource value.
 repositoryDeployKeyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
@@ -779,6 +786,7 @@ data RepositoryProjectResource s = RepositoryProjectResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_repository_project@ resource value.
 repositoryProjectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
@@ -844,6 +852,7 @@ data RepositoryWebhookResource s = RepositoryWebhookResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_repository_webhook@ resource value.
 repositoryWebhookResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @events@ - 'P.events'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -924,6 +933,7 @@ data TeamResource s = TeamResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_team@ resource value.
 teamResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (TeamResource s)
@@ -993,6 +1003,7 @@ data TeamMembershipResource s = TeamMembershipResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_team_membership@ resource value.
 teamMembershipResource
     :: TF.Attr s P.Text -- ^ @team_id@ - 'P.teamId'
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
@@ -1049,6 +1060,7 @@ data TeamRepositoryResource s = TeamRepositoryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_team_repository@ resource value.
 teamRepositoryResource
     :: TF.Attr s P.Text -- ^ @team_id@ - 'P.teamId'
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
@@ -1099,6 +1111,7 @@ data UserGpgKeyResource s = UserGpgKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_user_gpg_key@ resource value.
 userGpgKeyResource
     :: TF.Attr s P.Text -- ^ @armored_public_key@ - 'P.armoredPublicKey'
     -> P.Resource (UserGpgKeyResource s)
@@ -1140,6 +1153,7 @@ data UserSshKeyResource s = UserSshKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @github_user_ssh_key@ resource value.
 userSshKeyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'

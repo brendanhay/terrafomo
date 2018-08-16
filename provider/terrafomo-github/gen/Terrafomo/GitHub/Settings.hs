@@ -17,7 +17,6 @@
 --
 module Terrafomo.GitHub.Settings
     (
-    -- * Settings Datatypes
     -- ** required_pull_request_reviews
       RequiredPullRequestReviewsSetting (..)
     , newRequiredPullRequestReviewsSetting
@@ -69,6 +68,7 @@ data RequiredPullRequestReviewsSetting s = RequiredPullRequestReviewsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @required_pull_request_reviews@ settings value.
 newRequiredPullRequestReviewsSetting
     :: RequiredPullRequestReviewsSetting s
 newRequiredPullRequestReviewsSetting =
@@ -121,6 +121,7 @@ data RequiredStatusChecksSetting s = RequiredStatusChecksSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @required_status_checks@ settings value.
 newRequiredStatusChecksSetting
     :: RequiredStatusChecksSetting s
 newRequiredStatusChecksSetting =
@@ -159,6 +160,7 @@ data RestrictionsSetting s = RestrictionsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @restrictions@ settings value.
 newRestrictionsSetting
     :: RestrictionsSetting s
 newRestrictionsSetting =
