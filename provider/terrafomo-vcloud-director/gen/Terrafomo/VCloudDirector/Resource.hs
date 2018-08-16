@@ -387,6 +387,9 @@ data NetworkResource s = NetworkResource'
     , _gateway      :: TF.Attr s P.Text
     -- ^ @gateway@ - (Required, Forces New)
     --
+    , _href         :: TF.Attr s P.Text
+    -- ^ @href@ - (Optional, Forces New)
+    --
     , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
@@ -417,6 +420,7 @@ networkResource _edgeGateway _gateway _name =
             , _edgeGateway = _edgeGateway
             , _fenceMode = TF.value "natRouted"
             , _gateway = _gateway
+            , _href = TF.Nil
             , _name = _name
             , _netmask = TF.value "255.255.255.0"
             , _shared = TF.value P.False
@@ -432,6 +436,7 @@ instance TF.IsObject (NetworkResource s) where
         , TF.assign "edge_gateway" <$> TF.attribute _edgeGateway
         , TF.assign "fence_mode" <$> TF.attribute _fenceMode
         , TF.assign "gateway" <$> TF.attribute _gateway
+        , TF.assign "href" <$> TF.attribute _href
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "netmask" <$> TF.attribute _netmask
         , TF.assign "shared" <$> TF.attribute _shared
@@ -475,6 +480,11 @@ instance P.HasGateway (NetworkResource s) (TF.Attr s P.Text) where
     gateway =
         P.lens (_gateway :: NetworkResource s -> TF.Attr s P.Text)
                (\s a -> s { _gateway = a } :: NetworkResource s)
+
+instance P.HasHref (NetworkResource s) (TF.Attr s P.Text) where
+    href =
+        P.lens (_href :: NetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _href = a } :: NetworkResource s)
 
 instance P.HasName (NetworkResource s) (TF.Attr s P.Text) where
     name =
@@ -574,8 +584,14 @@ data VappResource s = VappResource'
     , _description    :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
+    , _href           :: TF.Attr s P.Text
+    -- ^ @href@ - (Optional)
+    --
     , _initscript     :: TF.Attr s P.Text
     -- ^ @initscript@ - (Optional, Forces New)
+    --
+    , _ip             :: TF.Attr s P.Text
+    -- ^ @ip@ - (Optional)
     --
     , _memory         :: TF.Attr s P.Int
     -- ^ @memory@ - (Optional)
@@ -613,7 +629,9 @@ vappResource _name =
             { _catalogName = TF.Nil
             , _cpus = TF.Nil
             , _description = TF.Nil
+            , _href = TF.Nil
             , _initscript = TF.Nil
+            , _ip = TF.Nil
             , _memory = TF.Nil
             , _metadata = TF.Nil
             , _name = _name
@@ -629,7 +647,9 @@ instance TF.IsObject (VappResource s) where
         [ TF.assign "catalog_name" <$> TF.attribute _catalogName
         , TF.assign "cpus" <$> TF.attribute _cpus
         , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "href" <$> TF.attribute _href
         , TF.assign "initscript" <$> TF.attribute _initscript
+        , TF.assign "ip" <$> TF.attribute _ip
         , TF.assign "memory" <$> TF.attribute _memory
         , TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "name" <$> TF.attribute _name
@@ -658,10 +678,20 @@ instance P.HasDescription (VappResource s) (TF.Attr s P.Text) where
         P.lens (_description :: VappResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: VappResource s)
 
+instance P.HasHref (VappResource s) (TF.Attr s P.Text) where
+    href =
+        P.lens (_href :: VappResource s -> TF.Attr s P.Text)
+               (\s a -> s { _href = a } :: VappResource s)
+
 instance P.HasInitscript (VappResource s) (TF.Attr s P.Text) where
     initscript =
         P.lens (_initscript :: VappResource s -> TF.Attr s P.Text)
                (\s a -> s { _initscript = a } :: VappResource s)
+
+instance P.HasIp (VappResource s) (TF.Attr s P.Text) where
+    ip =
+        P.lens (_ip :: VappResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ip = a } :: VappResource s)
 
 instance P.HasMemory (VappResource s) (TF.Attr s P.Int) where
     memory =
@@ -723,8 +753,14 @@ data VappVmResource s = VappVmResource'
     , _cpus         :: TF.Attr s P.Int
     -- ^ @cpus@ - (Optional)
     --
+    , _href         :: TF.Attr s P.Text
+    -- ^ @href@ - (Optional)
+    --
     , _initscript   :: TF.Attr s P.Text
     -- ^ @initscript@ - (Optional, Forces New)
+    --
+    , _ip           :: TF.Attr s P.Text
+    -- ^ @ip@ - (Optional)
     --
     , _memory       :: TF.Attr s P.Int
     -- ^ @memory@ - (Optional)
@@ -761,7 +797,9 @@ vappVmResource _catalogName _name _templateName _vappName =
         VappVmResource'
             { _catalogName = _catalogName
             , _cpus = TF.Nil
+            , _href = TF.Nil
             , _initscript = TF.Nil
+            , _ip = TF.Nil
             , _memory = TF.Nil
             , _name = _name
             , _networkHref = TF.Nil
@@ -775,7 +813,9 @@ instance TF.IsObject (VappVmResource s) where
     toObject VappVmResource'{..} = P.catMaybes
         [ TF.assign "catalog_name" <$> TF.attribute _catalogName
         , TF.assign "cpus" <$> TF.attribute _cpus
+        , TF.assign "href" <$> TF.attribute _href
         , TF.assign "initscript" <$> TF.attribute _initscript
+        , TF.assign "ip" <$> TF.attribute _ip
         , TF.assign "memory" <$> TF.attribute _memory
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network_href" <$> TF.attribute _networkHref
@@ -798,10 +838,20 @@ instance P.HasCpus (VappVmResource s) (TF.Attr s P.Int) where
         P.lens (_cpus :: VappVmResource s -> TF.Attr s P.Int)
                (\s a -> s { _cpus = a } :: VappVmResource s)
 
+instance P.HasHref (VappVmResource s) (TF.Attr s P.Text) where
+    href =
+        P.lens (_href :: VappVmResource s -> TF.Attr s P.Text)
+               (\s a -> s { _href = a } :: VappVmResource s)
+
 instance P.HasInitscript (VappVmResource s) (TF.Attr s P.Text) where
     initscript =
         P.lens (_initscript :: VappVmResource s -> TF.Attr s P.Text)
                (\s a -> s { _initscript = a } :: VappVmResource s)
+
+instance P.HasIp (VappVmResource s) (TF.Attr s P.Text) where
+    ip =
+        P.lens (_ip :: VappVmResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ip = a } :: VappVmResource s)
 
 instance P.HasMemory (VappVmResource s) (TF.Attr s P.Int) where
     memory =

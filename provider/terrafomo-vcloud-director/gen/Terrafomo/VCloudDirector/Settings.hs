@@ -236,6 +236,9 @@ data RuleSetting s = RuleSetting'
     , _destinationPort :: TF.Attr s P.Text
     -- ^ @destination_port@ - (Required)
     --
+    , _id              :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
     , _policy          :: TF.Attr s P.Text
     -- ^ @policy@ - (Required)
     --
@@ -265,6 +268,7 @@ ruleSetting _description _destinationIp _sourceIp _policy _destinationPort _sour
         { _description = _description
         , _destinationIp = _destinationIp
         , _destinationPort = _destinationPort
+        , _id = TF.Nil
         , _policy = _policy
         , _protocol = _protocol
         , _sourceIp = _sourceIp
@@ -277,6 +281,7 @@ instance TF.IsObject (RuleSetting s) where
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "destination_ip" <$> TF.attribute _destinationIp
         , TF.assign "destination_port" <$> TF.attribute _destinationPort
+        , TF.assign "id" <$> TF.attribute _id
         , TF.assign "policy" <$> TF.attribute _policy
         , TF.assign "protocol" <$> TF.attribute _protocol
         , TF.assign "source_ip" <$> TF.attribute _sourceIp
@@ -300,6 +305,11 @@ instance P.HasDestinationPort (RuleSetting s) (TF.Attr s P.Text) where
     destinationPort =
         P.lens (_destinationPort :: RuleSetting s -> TF.Attr s P.Text)
                (\s a -> s { _destinationPort = a } :: RuleSetting s)
+
+instance P.HasId (RuleSetting s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: RuleSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: RuleSetting s)
 
 instance P.HasPolicy (RuleSetting s) (TF.Attr s P.Text) where
     policy =

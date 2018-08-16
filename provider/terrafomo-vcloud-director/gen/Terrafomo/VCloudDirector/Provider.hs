@@ -112,7 +112,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "vcd"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
             , TF.assign "max_retry_timeout" <$> _maxRetryTimeout

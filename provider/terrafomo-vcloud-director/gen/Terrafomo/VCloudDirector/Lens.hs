@@ -33,8 +33,11 @@ module Terrafomo.VCloudDirector.Lens
     , HasExternalIp (..)
     , HasFenceMode (..)
     , HasGateway (..)
+    , HasHref (..)
+    , HasId (..)
     , HasInitscript (..)
     , HasInternalIp (..)
+    , HasIp (..)
     , HasLocalId (..)
     , HasLocalIpAddress (..)
     , HasLocalSubnetGateway (..)
@@ -197,6 +200,18 @@ class HasGateway a b | a -> b where
 instance HasGateway a b => HasGateway (TF.Schema l p a) b where
     gateway = TF.configuration . gateway
 
+class HasHref a b | a -> b where
+    href :: P.Lens' a b
+
+instance HasHref a b => HasHref (TF.Schema l p a) b where
+    href = TF.configuration . href
+
+class HasId a b | a -> b where
+    id :: P.Lens' a b
+
+instance HasId a b => HasId (TF.Schema l p a) b where
+    id = TF.configuration . id
+
 class HasInitscript a b | a -> b where
     initscript :: P.Lens' a b
 
@@ -208,6 +223,12 @@ class HasInternalIp a b | a -> b where
 
 instance HasInternalIp a b => HasInternalIp (TF.Schema l p a) b where
     internalIp = TF.configuration . internalIp
+
+class HasIp a b | a -> b where
+    ip :: P.Lens' a b
+
+instance HasIp a b => HasIp (TF.Schema l p a) b where
+    ip = TF.configuration . ip
 
 class HasLocalId a b | a -> b where
     localId :: P.Lens' a b
