@@ -1889,15 +1889,43 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (DatastoreClusterVmAntiAffinityRul
 -- See the <https://www.terraform.io/docs/providers/vsphere/r/distributed_port_group.html terraform documentation>
 -- for more information.
 data DistributedPortGroupResource s = DistributedPortGroupResource'
-    { _autoExpand :: TF.Attr s P.Bool
+    { _activeUplinks :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @active_uplinks@ - (Optional)
+    -- List of active uplinks used for load balancing, matching the names of the
+    -- uplinks assigned in the DVS.
+    --
+    , _allowForgedTransmits :: TF.Attr s P.Bool
+    -- ^ @allow_forged_transmits@ - (Optional)
+    -- Controls whether or not the virtual network adapter is allowed to send
+    -- network traffic with a different MAC address than that of its own.
+    --
+    , _allowMacChanges :: TF.Attr s P.Bool
+    -- ^ @allow_mac_changes@ - (Optional)
+    -- Controls whether or not the Media Access Control (MAC) address can be
+    -- changed.
+    --
+    , _allowPromiscuous :: TF.Attr s P.Bool
+    -- ^ @allow_promiscuous@ - (Optional)
+    -- Enable promiscuous mode on the network. This flag indicates whether or not
+    -- all traffic is seen on a given port.
+    --
+    , _autoExpand :: TF.Attr s P.Bool
     -- ^ @auto_expand@ - (Optional)
     -- Auto-expands the port group beyond the port count configured in
     -- number_of_ports when necessary.
+    --
+    , _blockAllPorts :: TF.Attr s P.Bool
+    -- ^ @block_all_ports@ - (Optional)
+    -- Indicates whether to block all ports by default.
     --
     , _blockOverrideAllowed :: TF.Attr s P.Bool
     -- ^ @block_override_allowed@ - (Optional)
     -- Allow the blocked setting of an individual port to override the setting in
     -- the portgroup.
+    --
+    , _checkBeacon :: TF.Attr s P.Bool
+    -- ^ @check_beacon@ - (Optional)
+    -- Enable beacon probing on the ports this policy applies to.
     --
     , _customAttributes :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @custom_attributes@ - (Optional)
@@ -1907,9 +1935,64 @@ data DistributedPortGroupResource s = DistributedPortGroupResource'
     -- ^ @description@ - (Optional)
     -- The description of the portgroup.
     --
+    , _directpathGen2Allowed :: TF.Attr s P.Bool
+    -- ^ @directpath_gen2_allowed@ - (Optional)
+    -- Allow VMDirectPath Gen2 on the ports this policy applies to.
+    --
     , _distributedVirtualSwitchUuid :: TF.Attr s P.Text
     -- ^ @distributed_virtual_switch_uuid@ - (Required, Forces New)
     -- The UUID of the DVS to attach this port group to.
+    --
+    , _egressShapingAverageBandwidth :: TF.Attr s P.Int
+    -- ^ @egress_shaping_average_bandwidth@ - (Optional)
+    -- The average egress bandwidth in bits per second if egress shaping is enabled
+    -- on the port.
+    --
+    , _egressShapingBurstSize :: TF.Attr s P.Int
+    -- ^ @egress_shaping_burst_size@ - (Optional)
+    -- The maximum egress burst size allowed in bytes if egress shaping is enabled
+    -- on the port.
+    --
+    , _egressShapingEnabled :: TF.Attr s P.Bool
+    -- ^ @egress_shaping_enabled@ - (Optional)
+    -- True if the traffic shaper is enabled for egress traffic on the port.
+    --
+    , _egressShapingPeakBandwidth :: TF.Attr s P.Int
+    -- ^ @egress_shaping_peak_bandwidth@ - (Optional)
+    -- The peak egress bandwidth during bursts in bits per second if egress traffic
+    -- shaping is enabled on the port.
+    --
+    , _failback :: TF.Attr s P.Bool
+    -- ^ @failback@ - (Optional)
+    -- If true, the teaming policy will re-activate failed interfaces higher in
+    -- precedence when they come back up.
+    --
+    , _ingressShapingAverageBandwidth :: TF.Attr s P.Int
+    -- ^ @ingress_shaping_average_bandwidth@ - (Optional)
+    -- The average ingress bandwidth in bits per second if ingress shaping is
+    -- enabled on the port.
+    --
+    , _ingressShapingBurstSize :: TF.Attr s P.Int
+    -- ^ @ingress_shaping_burst_size@ - (Optional)
+    -- The maximum ingress burst size allowed in bytes if ingress shaping is
+    -- enabled on the port.
+    --
+    , _ingressShapingEnabled :: TF.Attr s P.Bool
+    -- ^ @ingress_shaping_enabled@ - (Optional)
+    -- True if the traffic shaper is enabled for ingress traffic on the port.
+    --
+    , _ingressShapingPeakBandwidth :: TF.Attr s P.Int
+    -- ^ @ingress_shaping_peak_bandwidth@ - (Optional)
+    -- The peak ingress bandwidth during bursts in bits per second if ingress
+    -- traffic shaping is enabled on the port.
+    --
+    , _lacpEnabled :: TF.Attr s P.Bool
+    -- ^ @lacp_enabled@ - (Optional)
+    -- Whether or not to enable LACP on all uplink ports.
+    --
+    , _lacpMode :: TF.Attr s P.Text
+    -- ^ @lacp_mode@ - (Optional)
+    -- The uplink LACP mode to use. Can be one of active or passive.
     --
     , _livePortMovingAllowed :: TF.Attr s P.Bool
     -- ^ @live_port_moving_allowed@ - (Optional)
@@ -1918,6 +2001,10 @@ data DistributedPortGroupResource s = DistributedPortGroupResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     -- The name of the portgroup.
+    --
+    , _netflowEnabled :: TF.Attr s P.Bool
+    -- ^ @netflow_enabled@ - (Optional)
+    -- Indicates whether to enable netflow on all ports.
     --
     , _netflowOverrideAllowed :: TF.Attr s P.Bool
     -- ^ @netflow_override_allowed@ - (Optional)
@@ -1933,6 +2020,16 @@ data DistributedPortGroupResource s = DistributedPortGroupResource'
     -- Allow the network resource pool of an individual port to override the
     -- setting in the portgroup.
     --
+    , _notifySwitches :: TF.Attr s P.Bool
+    -- ^ @notify_switches@ - (Optional)
+    -- If true, the teaming policy will notify the broadcast network of a NIC
+    -- failover, triggering cache updates.
+    --
+    , _numberOfPorts :: TF.Attr s P.Int
+    -- ^ @number_of_ports@ - (Optional)
+    -- The number of ports in this portgroup. The DVS will expand and shrink by
+    -- modifying this setting.
+    --
     , _portConfigResetAtDisconnect :: TF.Attr s P.Bool
     -- ^ @port_config_reset_at_disconnect@ - (Optional)
     -- Reset the setting of any ports in this portgroup back to the default setting
@@ -1942,6 +2039,14 @@ data DistributedPortGroupResource s = DistributedPortGroupResource'
     -- ^ @port_name_format@ - (Optional)
     -- A template string to use when creating ports in the portgroup.
     --
+    , _portPrivateSecondaryVlanId :: TF.Attr s P.Int
+    -- ^ @port_private_secondary_vlan_id@ - (Optional)
+    -- The secondary VLAN ID for this port.
+    --
+    -- Conflicts with:
+    --
+    -- * 'vlanId'
+    -- * 'vlanRange'
     , _securityPolicyOverrideAllowed :: TF.Attr s P.Bool
     -- ^ @security_policy_override_allowed@ - (Optional)
     -- Allow security policy settings on a port to override those on the portgroup.
@@ -1951,14 +2056,30 @@ data DistributedPortGroupResource s = DistributedPortGroupResource'
     -- Allow the traffic shaping policies of an individual port to override the
     -- settings in the portgroup.
     --
+    , _standbyUplinks :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @standby_uplinks@ - (Optional)
+    -- List of active uplinks used for load balancing, matching the names of the
+    -- uplinks assigned in the DVS.
+    --
     , _tags :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     -- A list of tag IDs to apply to this object.
+    --
+    , _teamingPolicy :: TF.Attr s P.Text
+    -- ^ @teaming_policy@ - (Optional)
+    -- The network adapter teaming policy. Can be one of loadbalance_ip,
+    -- loadbalance_srcmac, loadbalance_srcid, failover_explicit, or
+    -- loadbalance_loadbased.
     --
     , _trafficFilterOverrideAllowed :: TF.Attr s P.Bool
     -- ^ @traffic_filter_override_allowed@ - (Optional)
     -- Allow any filter policies set on the individual port to override those in
     -- the portgroup.
+    --
+    , _txUplink :: TF.Attr s P.Bool
+    -- ^ @tx_uplink@ - (Optional)
+    -- If true, a copy of packets sent to the switch will always be forwarded to an
+    -- uplink in addition to the regular packet forwarded done by the switch.
     --
     , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Optional)
@@ -1969,10 +2090,26 @@ data DistributedPortGroupResource s = DistributedPortGroupResource'
     -- Allow the uplink teaming policies on a port to override those on the
     -- portgroup.
     --
+    , _vlanId :: TF.Attr s P.Int
+    -- ^ @vlan_id@ - (Optional)
+    -- The VLAN ID for single VLAN mode. 0 denotes no VLAN.
+    --
+    -- Conflicts with:
+    --
+    -- * 'portPrivateSecondaryVlanId'
+    -- * 'vlanRange'
     , _vlanOverrideAllowed :: TF.Attr s P.Bool
     -- ^ @vlan_override_allowed@ - (Optional)
     -- Allow the VLAN configuration on a port to override those on the portgroup.
     --
+    , _vlanRange :: TF.Attr s [TF.Attr s (VlanRangeSetting s)]
+    -- ^ @vlan_range@ - (Optional)
+    -- The VLAN ID for single VLAN mode. 0 denotes no VLAN.
+    --
+    -- Conflicts with:
+    --
+    -- * 'portPrivateSecondaryVlanId'
+    -- * 'vlanId'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @vsphere_distributed_port_group@ resource value.
@@ -1983,62 +2120,162 @@ distributedPortGroupResource
 distributedPortGroupResource _name _distributedVirtualSwitchUuid =
     TF.unsafeResource "vsphere_distributed_port_group" TF.validator $
         DistributedPortGroupResource'
-            { _autoExpand = TF.value P.True
+            { _activeUplinks = TF.Nil
+            , _allowForgedTransmits = TF.Nil
+            , _allowMacChanges = TF.Nil
+            , _allowPromiscuous = TF.Nil
+            , _autoExpand = TF.value P.True
+            , _blockAllPorts = TF.Nil
             , _blockOverrideAllowed = TF.Nil
+            , _checkBeacon = TF.Nil
             , _customAttributes = TF.Nil
             , _description = TF.Nil
+            , _directpathGen2Allowed = TF.Nil
             , _distributedVirtualSwitchUuid = _distributedVirtualSwitchUuid
+            , _egressShapingAverageBandwidth = TF.Nil
+            , _egressShapingBurstSize = TF.Nil
+            , _egressShapingEnabled = TF.Nil
+            , _egressShapingPeakBandwidth = TF.Nil
+            , _failback = TF.Nil
+            , _ingressShapingAverageBandwidth = TF.Nil
+            , _ingressShapingBurstSize = TF.Nil
+            , _ingressShapingEnabled = TF.Nil
+            , _ingressShapingPeakBandwidth = TF.Nil
+            , _lacpEnabled = TF.Nil
+            , _lacpMode = TF.Nil
             , _livePortMovingAllowed = TF.Nil
             , _name = _name
+            , _netflowEnabled = TF.Nil
             , _netflowOverrideAllowed = TF.Nil
             , _networkResourcePoolKey = TF.value "-1"
             , _networkResourcePoolOverrideAllowed = TF.Nil
+            , _notifySwitches = TF.Nil
+            , _numberOfPorts = TF.Nil
             , _portConfigResetAtDisconnect = TF.Nil
             , _portNameFormat = TF.Nil
+            , _portPrivateSecondaryVlanId = TF.Nil
             , _securityPolicyOverrideAllowed = TF.Nil
             , _shapingOverrideAllowed = TF.Nil
+            , _standbyUplinks = TF.Nil
             , _tags = TF.Nil
+            , _teamingPolicy = TF.Nil
             , _trafficFilterOverrideAllowed = TF.Nil
+            , _txUplink = TF.Nil
             , _type' = TF.value "earlyBinding"
             , _uplinkTeamingOverrideAllowed = TF.Nil
+            , _vlanId = TF.Nil
             , _vlanOverrideAllowed = TF.Nil
+            , _vlanRange = TF.Nil
             }
 
 instance TF.IsObject (DistributedPortGroupResource s) where
     toObject DistributedPortGroupResource'{..} = P.catMaybes
-        [ TF.assign "auto_expand" <$> TF.attribute _autoExpand
+        [ TF.assign "active_uplinks" <$> TF.attribute _activeUplinks
+        , TF.assign "allow_forged_transmits" <$> TF.attribute _allowForgedTransmits
+        , TF.assign "allow_mac_changes" <$> TF.attribute _allowMacChanges
+        , TF.assign "allow_promiscuous" <$> TF.attribute _allowPromiscuous
+        , TF.assign "auto_expand" <$> TF.attribute _autoExpand
+        , TF.assign "block_all_ports" <$> TF.attribute _blockAllPorts
         , TF.assign "block_override_allowed" <$> TF.attribute _blockOverrideAllowed
+        , TF.assign "check_beacon" <$> TF.attribute _checkBeacon
         , TF.assign "custom_attributes" <$> TF.attribute _customAttributes
         , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "directpath_gen2_allowed" <$> TF.attribute _directpathGen2Allowed
         , TF.assign "distributed_virtual_switch_uuid" <$> TF.attribute _distributedVirtualSwitchUuid
+        , TF.assign "egress_shaping_average_bandwidth" <$> TF.attribute _egressShapingAverageBandwidth
+        , TF.assign "egress_shaping_burst_size" <$> TF.attribute _egressShapingBurstSize
+        , TF.assign "egress_shaping_enabled" <$> TF.attribute _egressShapingEnabled
+        , TF.assign "egress_shaping_peak_bandwidth" <$> TF.attribute _egressShapingPeakBandwidth
+        , TF.assign "failback" <$> TF.attribute _failback
+        , TF.assign "ingress_shaping_average_bandwidth" <$> TF.attribute _ingressShapingAverageBandwidth
+        , TF.assign "ingress_shaping_burst_size" <$> TF.attribute _ingressShapingBurstSize
+        , TF.assign "ingress_shaping_enabled" <$> TF.attribute _ingressShapingEnabled
+        , TF.assign "ingress_shaping_peak_bandwidth" <$> TF.attribute _ingressShapingPeakBandwidth
+        , TF.assign "lacp_enabled" <$> TF.attribute _lacpEnabled
+        , TF.assign "lacp_mode" <$> TF.attribute _lacpMode
         , TF.assign "live_port_moving_allowed" <$> TF.attribute _livePortMovingAllowed
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "netflow_enabled" <$> TF.attribute _netflowEnabled
         , TF.assign "netflow_override_allowed" <$> TF.attribute _netflowOverrideAllowed
         , TF.assign "network_resource_pool_key" <$> TF.attribute _networkResourcePoolKey
         , TF.assign "network_resource_pool_override_allowed" <$> TF.attribute _networkResourcePoolOverrideAllowed
+        , TF.assign "notify_switches" <$> TF.attribute _notifySwitches
+        , TF.assign "number_of_ports" <$> TF.attribute _numberOfPorts
         , TF.assign "port_config_reset_at_disconnect" <$> TF.attribute _portConfigResetAtDisconnect
         , TF.assign "port_name_format" <$> TF.attribute _portNameFormat
+        , TF.assign "port_private_secondary_vlan_id" <$> TF.attribute _portPrivateSecondaryVlanId
         , TF.assign "security_policy_override_allowed" <$> TF.attribute _securityPolicyOverrideAllowed
         , TF.assign "shaping_override_allowed" <$> TF.attribute _shapingOverrideAllowed
+        , TF.assign "standby_uplinks" <$> TF.attribute _standbyUplinks
         , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "teaming_policy" <$> TF.attribute _teamingPolicy
         , TF.assign "traffic_filter_override_allowed" <$> TF.attribute _trafficFilterOverrideAllowed
+        , TF.assign "tx_uplink" <$> TF.attribute _txUplink
         , TF.assign "type" <$> TF.attribute _type'
         , TF.assign "uplink_teaming_override_allowed" <$> TF.attribute _uplinkTeamingOverrideAllowed
+        , TF.assign "vlan_id" <$> TF.attribute _vlanId
         , TF.assign "vlan_override_allowed" <$> TF.attribute _vlanOverrideAllowed
+        , TF.assign "vlan_range" <$> TF.attribute _vlanRange
         ]
 
 instance TF.IsValid (DistributedPortGroupResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\DistributedPortGroupResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_portPrivateSecondaryVlanId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_portPrivateSecondaryVlanId",
+                            [ "_vlanId"                            , "_vlanRange"
+                            ])
+        , if (_vlanId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_vlanId",
+                            [ "_portPrivateSecondaryVlanId"                            , "_vlanRange"
+                            ])
+        , if (_vlanRange P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_vlanRange",
+                            [ "_portPrivateSecondaryVlanId"                            , "_vlanId"
+                            ])
+        ])
+
+instance P.HasActiveUplinks (DistributedPortGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    activeUplinks =
+        P.lens (_activeUplinks :: DistributedPortGroupResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _activeUplinks = a } :: DistributedPortGroupResource s)
+
+instance P.HasAllowForgedTransmits (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    allowForgedTransmits =
+        P.lens (_allowForgedTransmits :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowForgedTransmits = a } :: DistributedPortGroupResource s)
+
+instance P.HasAllowMacChanges (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    allowMacChanges =
+        P.lens (_allowMacChanges :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowMacChanges = a } :: DistributedPortGroupResource s)
+
+instance P.HasAllowPromiscuous (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    allowPromiscuous =
+        P.lens (_allowPromiscuous :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowPromiscuous = a } :: DistributedPortGroupResource s)
 
 instance P.HasAutoExpand (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
     autoExpand =
         P.lens (_autoExpand :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
                (\s a -> s { _autoExpand = a } :: DistributedPortGroupResource s)
 
+instance P.HasBlockAllPorts (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    blockAllPorts =
+        P.lens (_blockAllPorts :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _blockAllPorts = a } :: DistributedPortGroupResource s)
+
 instance P.HasBlockOverrideAllowed (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
     blockOverrideAllowed =
         P.lens (_blockOverrideAllowed :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
                (\s a -> s { _blockOverrideAllowed = a } :: DistributedPortGroupResource s)
+
+instance P.HasCheckBeacon (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    checkBeacon =
+        P.lens (_checkBeacon :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _checkBeacon = a } :: DistributedPortGroupResource s)
 
 instance P.HasCustomAttributes (DistributedPortGroupResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     customAttributes =
@@ -2050,10 +2287,70 @@ instance P.HasDescription (DistributedPortGroupResource s) (TF.Attr s P.Text) wh
         P.lens (_description :: DistributedPortGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: DistributedPortGroupResource s)
 
+instance P.HasDirectpathGen2Allowed (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    directpathGen2Allowed =
+        P.lens (_directpathGen2Allowed :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _directpathGen2Allowed = a } :: DistributedPortGroupResource s)
+
 instance P.HasDistributedVirtualSwitchUuid (DistributedPortGroupResource s) (TF.Attr s P.Text) where
     distributedVirtualSwitchUuid =
         P.lens (_distributedVirtualSwitchUuid :: DistributedPortGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _distributedVirtualSwitchUuid = a } :: DistributedPortGroupResource s)
+
+instance P.HasEgressShapingAverageBandwidth (DistributedPortGroupResource s) (TF.Attr s P.Int) where
+    egressShapingAverageBandwidth =
+        P.lens (_egressShapingAverageBandwidth :: DistributedPortGroupResource s -> TF.Attr s P.Int)
+               (\s a -> s { _egressShapingAverageBandwidth = a } :: DistributedPortGroupResource s)
+
+instance P.HasEgressShapingBurstSize (DistributedPortGroupResource s) (TF.Attr s P.Int) where
+    egressShapingBurstSize =
+        P.lens (_egressShapingBurstSize :: DistributedPortGroupResource s -> TF.Attr s P.Int)
+               (\s a -> s { _egressShapingBurstSize = a } :: DistributedPortGroupResource s)
+
+instance P.HasEgressShapingEnabled (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    egressShapingEnabled =
+        P.lens (_egressShapingEnabled :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _egressShapingEnabled = a } :: DistributedPortGroupResource s)
+
+instance P.HasEgressShapingPeakBandwidth (DistributedPortGroupResource s) (TF.Attr s P.Int) where
+    egressShapingPeakBandwidth =
+        P.lens (_egressShapingPeakBandwidth :: DistributedPortGroupResource s -> TF.Attr s P.Int)
+               (\s a -> s { _egressShapingPeakBandwidth = a } :: DistributedPortGroupResource s)
+
+instance P.HasFailback (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    failback =
+        P.lens (_failback :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _failback = a } :: DistributedPortGroupResource s)
+
+instance P.HasIngressShapingAverageBandwidth (DistributedPortGroupResource s) (TF.Attr s P.Int) where
+    ingressShapingAverageBandwidth =
+        P.lens (_ingressShapingAverageBandwidth :: DistributedPortGroupResource s -> TF.Attr s P.Int)
+               (\s a -> s { _ingressShapingAverageBandwidth = a } :: DistributedPortGroupResource s)
+
+instance P.HasIngressShapingBurstSize (DistributedPortGroupResource s) (TF.Attr s P.Int) where
+    ingressShapingBurstSize =
+        P.lens (_ingressShapingBurstSize :: DistributedPortGroupResource s -> TF.Attr s P.Int)
+               (\s a -> s { _ingressShapingBurstSize = a } :: DistributedPortGroupResource s)
+
+instance P.HasIngressShapingEnabled (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    ingressShapingEnabled =
+        P.lens (_ingressShapingEnabled :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _ingressShapingEnabled = a } :: DistributedPortGroupResource s)
+
+instance P.HasIngressShapingPeakBandwidth (DistributedPortGroupResource s) (TF.Attr s P.Int) where
+    ingressShapingPeakBandwidth =
+        P.lens (_ingressShapingPeakBandwidth :: DistributedPortGroupResource s -> TF.Attr s P.Int)
+               (\s a -> s { _ingressShapingPeakBandwidth = a } :: DistributedPortGroupResource s)
+
+instance P.HasLacpEnabled (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    lacpEnabled =
+        P.lens (_lacpEnabled :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _lacpEnabled = a } :: DistributedPortGroupResource s)
+
+instance P.HasLacpMode (DistributedPortGroupResource s) (TF.Attr s P.Text) where
+    lacpMode =
+        P.lens (_lacpMode :: DistributedPortGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _lacpMode = a } :: DistributedPortGroupResource s)
 
 instance P.HasLivePortMovingAllowed (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
     livePortMovingAllowed =
@@ -2064,6 +2361,11 @@ instance P.HasName (DistributedPortGroupResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DistributedPortGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DistributedPortGroupResource s)
+
+instance P.HasNetflowEnabled (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    netflowEnabled =
+        P.lens (_netflowEnabled :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _netflowEnabled = a } :: DistributedPortGroupResource s)
 
 instance P.HasNetflowOverrideAllowed (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
     netflowOverrideAllowed =
@@ -2080,6 +2382,16 @@ instance P.HasNetworkResourcePoolOverrideAllowed (DistributedPortGroupResource s
         P.lens (_networkResourcePoolOverrideAllowed :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
                (\s a -> s { _networkResourcePoolOverrideAllowed = a } :: DistributedPortGroupResource s)
 
+instance P.HasNotifySwitches (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    notifySwitches =
+        P.lens (_notifySwitches :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _notifySwitches = a } :: DistributedPortGroupResource s)
+
+instance P.HasNumberOfPorts (DistributedPortGroupResource s) (TF.Attr s P.Int) where
+    numberOfPorts =
+        P.lens (_numberOfPorts :: DistributedPortGroupResource s -> TF.Attr s P.Int)
+               (\s a -> s { _numberOfPorts = a } :: DistributedPortGroupResource s)
+
 instance P.HasPortConfigResetAtDisconnect (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
     portConfigResetAtDisconnect =
         P.lens (_portConfigResetAtDisconnect :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
@@ -2089,6 +2401,11 @@ instance P.HasPortNameFormat (DistributedPortGroupResource s) (TF.Attr s P.Text)
     portNameFormat =
         P.lens (_portNameFormat :: DistributedPortGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _portNameFormat = a } :: DistributedPortGroupResource s)
+
+instance P.HasPortPrivateSecondaryVlanId (DistributedPortGroupResource s) (TF.Attr s P.Int) where
+    portPrivateSecondaryVlanId =
+        P.lens (_portPrivateSecondaryVlanId :: DistributedPortGroupResource s -> TF.Attr s P.Int)
+               (\s a -> s { _portPrivateSecondaryVlanId = a } :: DistributedPortGroupResource s)
 
 instance P.HasSecurityPolicyOverrideAllowed (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
     securityPolicyOverrideAllowed =
@@ -2100,15 +2417,30 @@ instance P.HasShapingOverrideAllowed (DistributedPortGroupResource s) (TF.Attr s
         P.lens (_shapingOverrideAllowed :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
                (\s a -> s { _shapingOverrideAllowed = a } :: DistributedPortGroupResource s)
 
+instance P.HasStandbyUplinks (DistributedPortGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    standbyUplinks =
+        P.lens (_standbyUplinks :: DistributedPortGroupResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _standbyUplinks = a } :: DistributedPortGroupResource s)
+
 instance P.HasTags (DistributedPortGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
         P.lens (_tags :: DistributedPortGroupResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: DistributedPortGroupResource s)
 
+instance P.HasTeamingPolicy (DistributedPortGroupResource s) (TF.Attr s P.Text) where
+    teamingPolicy =
+        P.lens (_teamingPolicy :: DistributedPortGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _teamingPolicy = a } :: DistributedPortGroupResource s)
+
 instance P.HasTrafficFilterOverrideAllowed (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
     trafficFilterOverrideAllowed =
         P.lens (_trafficFilterOverrideAllowed :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
                (\s a -> s { _trafficFilterOverrideAllowed = a } :: DistributedPortGroupResource s)
+
+instance P.HasTxUplink (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    txUplink =
+        P.lens (_txUplink :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _txUplink = a } :: DistributedPortGroupResource s)
 
 instance P.HasType' (DistributedPortGroupResource s) (TF.Attr s P.Text) where
     type' =
@@ -2120,10 +2452,20 @@ instance P.HasUplinkTeamingOverrideAllowed (DistributedPortGroupResource s) (TF.
         P.lens (_uplinkTeamingOverrideAllowed :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
                (\s a -> s { _uplinkTeamingOverrideAllowed = a } :: DistributedPortGroupResource s)
 
+instance P.HasVlanId (DistributedPortGroupResource s) (TF.Attr s P.Int) where
+    vlanId =
+        P.lens (_vlanId :: DistributedPortGroupResource s -> TF.Attr s P.Int)
+               (\s a -> s { _vlanId = a } :: DistributedPortGroupResource s)
+
 instance P.HasVlanOverrideAllowed (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
     vlanOverrideAllowed =
         P.lens (_vlanOverrideAllowed :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
                (\s a -> s { _vlanOverrideAllowed = a } :: DistributedPortGroupResource s)
+
+instance P.HasVlanRange (DistributedPortGroupResource s) (TF.Attr s [TF.Attr s (VlanRangeSetting s)]) where
+    vlanRange =
+        P.lens (_vlanRange :: DistributedPortGroupResource s -> TF.Attr s [TF.Attr s (VlanRangeSetting s)])
+               (\s a -> s { _vlanRange = a } :: DistributedPortGroupResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2220,7 +2562,35 @@ instance s ~ s' => P.HasComputedVlanRange (TF.Ref s' (DistributedPortGroupResour
 -- See the <https://www.terraform.io/docs/providers/vsphere/r/distributed_virtual_switch.html terraform documentation>
 -- for more information.
 data DistributedVirtualSwitchResource s = DistributedVirtualSwitchResource'
-    { _contactDetail :: TF.Attr s P.Text
+    { _activeUplinks :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @active_uplinks@ - (Optional)
+    -- List of active uplinks used for load balancing, matching the names of the
+    -- uplinks assigned in the DVS.
+    --
+    , _allowForgedTransmits :: TF.Attr s P.Bool
+    -- ^ @allow_forged_transmits@ - (Optional)
+    -- Controls whether or not the virtual network adapter is allowed to send
+    -- network traffic with a different MAC address than that of its own.
+    --
+    , _allowMacChanges :: TF.Attr s P.Bool
+    -- ^ @allow_mac_changes@ - (Optional)
+    -- Controls whether or not the Media Access Control (MAC) address can be
+    -- changed.
+    --
+    , _allowPromiscuous :: TF.Attr s P.Bool
+    -- ^ @allow_promiscuous@ - (Optional)
+    -- Enable promiscuous mode on the network. This flag indicates whether or not
+    -- all traffic is seen on a given port.
+    --
+    , _blockAllPorts :: TF.Attr s P.Bool
+    -- ^ @block_all_ports@ - (Optional)
+    -- Indicates whether to block all ports by default.
+    --
+    , _checkBeacon :: TF.Attr s P.Bool
+    -- ^ @check_beacon@ - (Optional)
+    -- Enable beacon probing on the ports this policy applies to.
+    --
+    , _contactDetail :: TF.Attr s P.Text
     -- ^ @contact_detail@ - (Optional)
     -- The contact detail for this DVS.
     --
@@ -2240,18 +2610,135 @@ data DistributedVirtualSwitchResource s = DistributedVirtualSwitchResource'
     -- ^ @description@ - (Optional)
     -- The description of the DVS.
     --
+    , _directpathGen2Allowed :: TF.Attr s P.Bool
+    -- ^ @directpath_gen2_allowed@ - (Optional)
+    -- Allow VMDirectPath Gen2 on the ports this policy applies to.
+    --
+    , _egressShapingAverageBandwidth :: TF.Attr s P.Int
+    -- ^ @egress_shaping_average_bandwidth@ - (Optional)
+    -- The average egress bandwidth in bits per second if egress shaping is enabled
+    -- on the port.
+    --
+    , _egressShapingBurstSize :: TF.Attr s P.Int
+    -- ^ @egress_shaping_burst_size@ - (Optional)
+    -- The maximum egress burst size allowed in bytes if egress shaping is enabled
+    -- on the port.
+    --
+    , _egressShapingEnabled :: TF.Attr s P.Bool
+    -- ^ @egress_shaping_enabled@ - (Optional)
+    -- True if the traffic shaper is enabled for egress traffic on the port.
+    --
+    , _egressShapingPeakBandwidth :: TF.Attr s P.Int
+    -- ^ @egress_shaping_peak_bandwidth@ - (Optional)
+    -- The peak egress bandwidth during bursts in bits per second if egress traffic
+    -- shaping is enabled on the port.
+    --
+    , _failback :: TF.Attr s P.Bool
+    -- ^ @failback@ - (Optional)
+    -- If true, the teaming policy will re-activate failed interfaces higher in
+    -- precedence when they come back up.
+    --
+    , _faulttoleranceMaximumMbit :: TF.Attr s P.Int
+    -- ^ @faulttolerance_maximum_mbit@ - (Optional)
+    -- The maximum allowed usage for the faultTolerance traffic class, in
+    -- Mbits/sec.
+    --
+    , _faulttoleranceReservationMbit :: TF.Attr s P.Int
+    -- ^ @faulttolerance_reservation_mbit@ - (Optional)
+    -- The amount of guaranteed bandwidth for the faultTolerance traffic class, in
+    -- Mbits/sec.
+    --
+    , _faulttoleranceShareCount :: TF.Attr s P.Int
+    -- ^ @faulttolerance_share_count@ - (Optional)
+    -- The amount of shares to allocate to the faultTolerance traffic class for a
+    -- custom share level.
+    --
+    , _faulttoleranceShareLevel :: TF.Attr s P.Text
+    -- ^ @faulttolerance_share_level@ - (Optional)
+    -- The allocation level for the faultTolerance traffic class. Can be one of
+    -- high, low, normal, or custom.
+    --
     , _folder :: TF.Attr s P.Text
     -- ^ @folder@ - (Optional, Forces New)
     -- The folder to create this virtual switch in, relative to the datacenter.
+    --
+    , _hbrMaximumMbit :: TF.Attr s P.Int
+    -- ^ @hbr_maximum_mbit@ - (Optional)
+    -- The maximum allowed usage for the hbr traffic class, in Mbits/sec.
+    --
+    , _hbrReservationMbit :: TF.Attr s P.Int
+    -- ^ @hbr_reservation_mbit@ - (Optional)
+    -- The amount of guaranteed bandwidth for the hbr traffic class, in Mbits/sec.
+    --
+    , _hbrShareCount :: TF.Attr s P.Int
+    -- ^ @hbr_share_count@ - (Optional)
+    -- The amount of shares to allocate to the hbr traffic class for a custom share
+    -- level.
+    --
+    , _hbrShareLevel :: TF.Attr s P.Text
+    -- ^ @hbr_share_level@ - (Optional)
+    -- The allocation level for the hbr traffic class. Can be one of high, low,
+    -- normal, or custom.
     --
     , _host :: TF.Attr s [TF.Attr s (HostSetting s)]
     -- ^ @host@ - (Optional)
     -- A host member specification.
     --
+    , _ingressShapingAverageBandwidth :: TF.Attr s P.Int
+    -- ^ @ingress_shaping_average_bandwidth@ - (Optional)
+    -- The average ingress bandwidth in bits per second if ingress shaping is
+    -- enabled on the port.
+    --
+    , _ingressShapingBurstSize :: TF.Attr s P.Int
+    -- ^ @ingress_shaping_burst_size@ - (Optional)
+    -- The maximum ingress burst size allowed in bytes if ingress shaping is
+    -- enabled on the port.
+    --
+    , _ingressShapingEnabled :: TF.Attr s P.Bool
+    -- ^ @ingress_shaping_enabled@ - (Optional)
+    -- True if the traffic shaper is enabled for ingress traffic on the port.
+    --
+    , _ingressShapingPeakBandwidth :: TF.Attr s P.Int
+    -- ^ @ingress_shaping_peak_bandwidth@ - (Optional)
+    -- The peak ingress bandwidth during bursts in bits per second if ingress
+    -- traffic shaping is enabled on the port.
+    --
     , _ipv4Address :: TF.Attr s P.Text
     -- ^ @ipv4_address@ - (Optional)
     -- The IPv4 address of the switch. This can be used to see the DVS as a unique
     -- device with NetFlow.
+    --
+    , _iscsiMaximumMbit :: TF.Attr s P.Int
+    -- ^ @iscsi_maximum_mbit@ - (Optional)
+    -- The maximum allowed usage for the iSCSI traffic class, in Mbits/sec.
+    --
+    , _iscsiReservationMbit :: TF.Attr s P.Int
+    -- ^ @iscsi_reservation_mbit@ - (Optional)
+    -- The amount of guaranteed bandwidth for the iSCSI traffic class, in
+    -- Mbits/sec.
+    --
+    , _iscsiShareCount :: TF.Attr s P.Int
+    -- ^ @iscsi_share_count@ - (Optional)
+    -- The amount of shares to allocate to the iSCSI traffic class for a custom
+    -- share level.
+    --
+    , _iscsiShareLevel :: TF.Attr s P.Text
+    -- ^ @iscsi_share_level@ - (Optional)
+    -- The allocation level for the iSCSI traffic class. Can be one of high, low,
+    -- normal, or custom.
+    --
+    , _lacpApiVersion :: TF.Attr s P.Text
+    -- ^ @lacp_api_version@ - (Optional)
+    -- The Link Aggregation Control Protocol group version in the switch. Can be
+    -- one of singleLag or multipleLag.
+    --
+    , _lacpEnabled :: TF.Attr s P.Bool
+    -- ^ @lacp_enabled@ - (Optional)
+    -- Whether or not to enable LACP on all uplink ports.
+    --
+    , _lacpMode :: TF.Attr s P.Text
+    -- ^ @lacp_mode@ - (Optional)
+    -- The uplink LACP mode to use. Can be one of active or passive.
     --
     , _linkDiscoveryOperation :: TF.Attr s P.Text
     -- ^ @link_discovery_operation@ - (Optional)
@@ -2261,6 +2748,34 @@ data DistributedVirtualSwitchResource s = DistributedVirtualSwitchResource'
     , _linkDiscoveryProtocol :: TF.Attr s P.Text
     -- ^ @link_discovery_protocol@ - (Optional)
     -- The discovery protocol type. Valid values are cdp and lldp.
+    --
+    , _managementMaximumMbit :: TF.Attr s P.Int
+    -- ^ @management_maximum_mbit@ - (Optional)
+    -- The maximum allowed usage for the management traffic class, in Mbits/sec.
+    --
+    , _managementReservationMbit :: TF.Attr s P.Int
+    -- ^ @management_reservation_mbit@ - (Optional)
+    -- The amount of guaranteed bandwidth for the management traffic class, in
+    -- Mbits/sec.
+    --
+    , _managementShareCount :: TF.Attr s P.Int
+    -- ^ @management_share_count@ - (Optional)
+    -- The amount of shares to allocate to the management traffic class for a
+    -- custom share level.
+    --
+    , _managementShareLevel :: TF.Attr s P.Text
+    -- ^ @management_share_level@ - (Optional)
+    -- The allocation level for the management traffic class. Can be one of high,
+    -- low, normal, or custom.
+    --
+    , _maxMtu :: TF.Attr s P.Int
+    -- ^ @max_mtu@ - (Optional)
+    -- The maximum MTU on the switch.
+    --
+    , _multicastFilteringMode :: TF.Attr s P.Text
+    -- ^ @multicast_filtering_mode@ - (Optional)
+    -- The multicast filtering mode on the switch. Can be one of legacyFiltering,
+    -- or snooping.
     --
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
@@ -2280,6 +2795,10 @@ data DistributedVirtualSwitchResource s = DistributedVirtualSwitchResource'
     , _netflowCollectorPort :: TF.Attr s P.Int
     -- ^ @netflow_collector_port@ - (Optional)
     -- The port for the netflow collector.
+    --
+    , _netflowEnabled :: TF.Attr s P.Bool
+    -- ^ @netflow_enabled@ - (Optional)
+    -- Indicates whether to enable netflow on all ports.
     --
     , _netflowIdleFlowTimeout :: TF.Attr s P.Int
     -- ^ @netflow_idle_flow_timeout@ - (Optional)
@@ -2305,9 +2824,161 @@ data DistributedVirtualSwitchResource s = DistributedVirtualSwitchResource'
     -- Whether or not to enable network resource control, enabling advanced traffic
     -- shaping and resource control features.
     --
+    , _networkResourceControlVersion :: TF.Attr s P.Text
+    -- ^ @network_resource_control_version@ - (Optional)
+    -- The network I/O control version to use. Can be one of version2 or version3.
+    --
+    , _nfsMaximumMbit :: TF.Attr s P.Int
+    -- ^ @nfs_maximum_mbit@ - (Optional)
+    -- The maximum allowed usage for the nfs traffic class, in Mbits/sec.
+    --
+    , _nfsReservationMbit :: TF.Attr s P.Int
+    -- ^ @nfs_reservation_mbit@ - (Optional)
+    -- The amount of guaranteed bandwidth for the nfs traffic class, in Mbits/sec.
+    --
+    , _nfsShareCount :: TF.Attr s P.Int
+    -- ^ @nfs_share_count@ - (Optional)
+    -- The amount of shares to allocate to the nfs traffic class for a custom share
+    -- level.
+    --
+    , _nfsShareLevel :: TF.Attr s P.Text
+    -- ^ @nfs_share_level@ - (Optional)
+    -- The allocation level for the nfs traffic class. Can be one of high, low,
+    -- normal, or custom.
+    --
+    , _notifySwitches :: TF.Attr s P.Bool
+    -- ^ @notify_switches@ - (Optional)
+    -- If true, the teaming policy will notify the broadcast network of a NIC
+    -- failover, triggering cache updates.
+    --
+    , _portPrivateSecondaryVlanId :: TF.Attr s P.Int
+    -- ^ @port_private_secondary_vlan_id@ - (Optional)
+    -- The secondary VLAN ID for this port.
+    --
+    -- Conflicts with:
+    --
+    -- * 'vlanId'
+    -- * 'vlanRange'
+    , _standbyUplinks :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @standby_uplinks@ - (Optional)
+    -- List of active uplinks used for load balancing, matching the names of the
+    -- uplinks assigned in the DVS.
+    --
     , _tags :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     -- A list of tag IDs to apply to this object.
+    --
+    , _teamingPolicy :: TF.Attr s P.Text
+    -- ^ @teaming_policy@ - (Optional)
+    -- The network adapter teaming policy. Can be one of loadbalance_ip,
+    -- loadbalance_srcmac, loadbalance_srcid, failover_explicit, or
+    -- loadbalance_loadbased.
+    --
+    , _txUplink :: TF.Attr s P.Bool
+    -- ^ @tx_uplink@ - (Optional)
+    -- If true, a copy of packets sent to the switch will always be forwarded to an
+    -- uplink in addition to the regular packet forwarded done by the switch.
+    --
+    , _uplinks :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @uplinks@ - (Optional)
+    -- A list of uplink ports. The contents of this list control both the uplink
+    -- count and names of the uplinks on the DVS across hosts.
+    --
+    , _vdpMaximumMbit :: TF.Attr s P.Int
+    -- ^ @vdp_maximum_mbit@ - (Optional)
+    -- The maximum allowed usage for the vdp traffic class, in Mbits/sec.
+    --
+    , _vdpReservationMbit :: TF.Attr s P.Int
+    -- ^ @vdp_reservation_mbit@ - (Optional)
+    -- The amount of guaranteed bandwidth for the vdp traffic class, in Mbits/sec.
+    --
+    , _vdpShareCount :: TF.Attr s P.Int
+    -- ^ @vdp_share_count@ - (Optional)
+    -- The amount of shares to allocate to the vdp traffic class for a custom share
+    -- level.
+    --
+    , _vdpShareLevel :: TF.Attr s P.Text
+    -- ^ @vdp_share_level@ - (Optional)
+    -- The allocation level for the vdp traffic class. Can be one of high, low,
+    -- normal, or custom.
+    --
+    , _version :: TF.Attr s P.Text
+    -- ^ @version@ - (Optional)
+    -- The version of this virtual switch. Allowed versions are 6.5.0, 6.0.0,
+    -- 5.5.0, 5.1.0, and 5.0.0.
+    --
+    , _virtualmachineMaximumMbit :: TF.Attr s P.Int
+    -- ^ @virtualmachine_maximum_mbit@ - (Optional)
+    -- The maximum allowed usage for the virtualMachine traffic class, in
+    -- Mbits/sec.
+    --
+    , _virtualmachineReservationMbit :: TF.Attr s P.Int
+    -- ^ @virtualmachine_reservation_mbit@ - (Optional)
+    -- The amount of guaranteed bandwidth for the virtualMachine traffic class, in
+    -- Mbits/sec.
+    --
+    , _virtualmachineShareCount :: TF.Attr s P.Int
+    -- ^ @virtualmachine_share_count@ - (Optional)
+    -- The amount of shares to allocate to the virtualMachine traffic class for a
+    -- custom share level.
+    --
+    , _virtualmachineShareLevel :: TF.Attr s P.Text
+    -- ^ @virtualmachine_share_level@ - (Optional)
+    -- The allocation level for the virtualMachine traffic class. Can be one of
+    -- high, low, normal, or custom.
+    --
+    , _vlanId :: TF.Attr s P.Int
+    -- ^ @vlan_id@ - (Optional)
+    -- The VLAN ID for single VLAN mode. 0 denotes no VLAN.
+    --
+    -- Conflicts with:
+    --
+    -- * 'portPrivateSecondaryVlanId'
+    -- * 'vlanRange'
+    , _vlanRange :: TF.Attr s [TF.Attr s (VlanRangeSetting s)]
+    -- ^ @vlan_range@ - (Optional)
+    -- The VLAN ID for single VLAN mode. 0 denotes no VLAN.
+    --
+    -- Conflicts with:
+    --
+    -- * 'portPrivateSecondaryVlanId'
+    -- * 'vlanId'
+    , _vmotionMaximumMbit :: TF.Attr s P.Int
+    -- ^ @vmotion_maximum_mbit@ - (Optional)
+    -- The maximum allowed usage for the vmotion traffic class, in Mbits/sec.
+    --
+    , _vmotionReservationMbit :: TF.Attr s P.Int
+    -- ^ @vmotion_reservation_mbit@ - (Optional)
+    -- The amount of guaranteed bandwidth for the vmotion traffic class, in
+    -- Mbits/sec.
+    --
+    , _vmotionShareCount :: TF.Attr s P.Int
+    -- ^ @vmotion_share_count@ - (Optional)
+    -- The amount of shares to allocate to the vmotion traffic class for a custom
+    -- share level.
+    --
+    , _vmotionShareLevel :: TF.Attr s P.Text
+    -- ^ @vmotion_share_level@ - (Optional)
+    -- The allocation level for the vmotion traffic class. Can be one of high, low,
+    -- normal, or custom.
+    --
+    , _vsanMaximumMbit :: TF.Attr s P.Int
+    -- ^ @vsan_maximum_mbit@ - (Optional)
+    -- The maximum allowed usage for the vsan traffic class, in Mbits/sec.
+    --
+    , _vsanReservationMbit :: TF.Attr s P.Int
+    -- ^ @vsan_reservation_mbit@ - (Optional)
+    -- The amount of guaranteed bandwidth for the vsan traffic class, in Mbits/sec.
+    --
+    , _vsanShareCount :: TF.Attr s P.Int
+    -- ^ @vsan_share_count@ - (Optional)
+    -- The amount of shares to allocate to the vsan traffic class for a custom
+    -- share level.
+    --
+    , _vsanShareLevel :: TF.Attr s P.Text
+    -- ^ @vsan_share_level@ - (Optional)
+    -- The allocation level for the vsan traffic class. Can be one of high, low,
+    -- normal, or custom.
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -2319,54 +2990,236 @@ distributedVirtualSwitchResource
 distributedVirtualSwitchResource _datacenterId _name =
     TF.unsafeResource "vsphere_distributed_virtual_switch" TF.validator $
         DistributedVirtualSwitchResource'
-            { _contactDetail = TF.Nil
+            { _activeUplinks = TF.Nil
+            , _allowForgedTransmits = TF.Nil
+            , _allowMacChanges = TF.Nil
+            , _allowPromiscuous = TF.Nil
+            , _blockAllPorts = TF.Nil
+            , _checkBeacon = TF.Nil
+            , _contactDetail = TF.Nil
             , _contactName = TF.Nil
             , _customAttributes = TF.Nil
             , _datacenterId = _datacenterId
             , _description = TF.Nil
+            , _directpathGen2Allowed = TF.Nil
+            , _egressShapingAverageBandwidth = TF.Nil
+            , _egressShapingBurstSize = TF.Nil
+            , _egressShapingEnabled = TF.Nil
+            , _egressShapingPeakBandwidth = TF.Nil
+            , _failback = TF.Nil
+            , _faulttoleranceMaximumMbit = TF.Nil
+            , _faulttoleranceReservationMbit = TF.Nil
+            , _faulttoleranceShareCount = TF.Nil
+            , _faulttoleranceShareLevel = TF.Nil
             , _folder = TF.Nil
+            , _hbrMaximumMbit = TF.Nil
+            , _hbrReservationMbit = TF.Nil
+            , _hbrShareCount = TF.Nil
+            , _hbrShareLevel = TF.Nil
             , _host = TF.Nil
+            , _ingressShapingAverageBandwidth = TF.Nil
+            , _ingressShapingBurstSize = TF.Nil
+            , _ingressShapingEnabled = TF.Nil
+            , _ingressShapingPeakBandwidth = TF.Nil
             , _ipv4Address = TF.Nil
+            , _iscsiMaximumMbit = TF.Nil
+            , _iscsiReservationMbit = TF.Nil
+            , _iscsiShareCount = TF.Nil
+            , _iscsiShareLevel = TF.Nil
+            , _lacpApiVersion = TF.Nil
+            , _lacpEnabled = TF.Nil
+            , _lacpMode = TF.Nil
             , _linkDiscoveryOperation = TF.value "listen"
             , _linkDiscoveryProtocol = TF.value "cdp"
+            , _managementMaximumMbit = TF.Nil
+            , _managementReservationMbit = TF.Nil
+            , _managementShareCount = TF.Nil
+            , _managementShareLevel = TF.Nil
+            , _maxMtu = TF.Nil
+            , _multicastFilteringMode = TF.Nil
             , _name = _name
             , _netflowActiveFlowTimeout = TF.value 60
             , _netflowCollectorIpAddress = TF.Nil
             , _netflowCollectorPort = TF.Nil
+            , _netflowEnabled = TF.Nil
             , _netflowIdleFlowTimeout = TF.value 15
             , _netflowInternalFlowsOnly = TF.Nil
             , _netflowObservationDomainId = TF.Nil
             , _netflowSamplingRate = TF.Nil
             , _networkResourceControlEnabled = TF.Nil
+            , _networkResourceControlVersion = TF.Nil
+            , _nfsMaximumMbit = TF.Nil
+            , _nfsReservationMbit = TF.Nil
+            , _nfsShareCount = TF.Nil
+            , _nfsShareLevel = TF.Nil
+            , _notifySwitches = TF.Nil
+            , _portPrivateSecondaryVlanId = TF.Nil
+            , _standbyUplinks = TF.Nil
             , _tags = TF.Nil
+            , _teamingPolicy = TF.Nil
+            , _txUplink = TF.Nil
+            , _uplinks = TF.Nil
+            , _vdpMaximumMbit = TF.Nil
+            , _vdpReservationMbit = TF.Nil
+            , _vdpShareCount = TF.Nil
+            , _vdpShareLevel = TF.Nil
+            , _version = TF.Nil
+            , _virtualmachineMaximumMbit = TF.Nil
+            , _virtualmachineReservationMbit = TF.Nil
+            , _virtualmachineShareCount = TF.Nil
+            , _virtualmachineShareLevel = TF.Nil
+            , _vlanId = TF.Nil
+            , _vlanRange = TF.Nil
+            , _vmotionMaximumMbit = TF.Nil
+            , _vmotionReservationMbit = TF.Nil
+            , _vmotionShareCount = TF.Nil
+            , _vmotionShareLevel = TF.Nil
+            , _vsanMaximumMbit = TF.Nil
+            , _vsanReservationMbit = TF.Nil
+            , _vsanShareCount = TF.Nil
+            , _vsanShareLevel = TF.Nil
             }
 
 instance TF.IsObject (DistributedVirtualSwitchResource s) where
     toObject DistributedVirtualSwitchResource'{..} = P.catMaybes
-        [ TF.assign "contact_detail" <$> TF.attribute _contactDetail
+        [ TF.assign "active_uplinks" <$> TF.attribute _activeUplinks
+        , TF.assign "allow_forged_transmits" <$> TF.attribute _allowForgedTransmits
+        , TF.assign "allow_mac_changes" <$> TF.attribute _allowMacChanges
+        , TF.assign "allow_promiscuous" <$> TF.attribute _allowPromiscuous
+        , TF.assign "block_all_ports" <$> TF.attribute _blockAllPorts
+        , TF.assign "check_beacon" <$> TF.attribute _checkBeacon
+        , TF.assign "contact_detail" <$> TF.attribute _contactDetail
         , TF.assign "contact_name" <$> TF.attribute _contactName
         , TF.assign "custom_attributes" <$> TF.attribute _customAttributes
         , TF.assign "datacenter_id" <$> TF.attribute _datacenterId
         , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "directpath_gen2_allowed" <$> TF.attribute _directpathGen2Allowed
+        , TF.assign "egress_shaping_average_bandwidth" <$> TF.attribute _egressShapingAverageBandwidth
+        , TF.assign "egress_shaping_burst_size" <$> TF.attribute _egressShapingBurstSize
+        , TF.assign "egress_shaping_enabled" <$> TF.attribute _egressShapingEnabled
+        , TF.assign "egress_shaping_peak_bandwidth" <$> TF.attribute _egressShapingPeakBandwidth
+        , TF.assign "failback" <$> TF.attribute _failback
+        , TF.assign "faulttolerance_maximum_mbit" <$> TF.attribute _faulttoleranceMaximumMbit
+        , TF.assign "faulttolerance_reservation_mbit" <$> TF.attribute _faulttoleranceReservationMbit
+        , TF.assign "faulttolerance_share_count" <$> TF.attribute _faulttoleranceShareCount
+        , TF.assign "faulttolerance_share_level" <$> TF.attribute _faulttoleranceShareLevel
         , TF.assign "folder" <$> TF.attribute _folder
+        , TF.assign "hbr_maximum_mbit" <$> TF.attribute _hbrMaximumMbit
+        , TF.assign "hbr_reservation_mbit" <$> TF.attribute _hbrReservationMbit
+        , TF.assign "hbr_share_count" <$> TF.attribute _hbrShareCount
+        , TF.assign "hbr_share_level" <$> TF.attribute _hbrShareLevel
         , TF.assign "host" <$> TF.attribute _host
+        , TF.assign "ingress_shaping_average_bandwidth" <$> TF.attribute _ingressShapingAverageBandwidth
+        , TF.assign "ingress_shaping_burst_size" <$> TF.attribute _ingressShapingBurstSize
+        , TF.assign "ingress_shaping_enabled" <$> TF.attribute _ingressShapingEnabled
+        , TF.assign "ingress_shaping_peak_bandwidth" <$> TF.attribute _ingressShapingPeakBandwidth
         , TF.assign "ipv4_address" <$> TF.attribute _ipv4Address
+        , TF.assign "iscsi_maximum_mbit" <$> TF.attribute _iscsiMaximumMbit
+        , TF.assign "iscsi_reservation_mbit" <$> TF.attribute _iscsiReservationMbit
+        , TF.assign "iscsi_share_count" <$> TF.attribute _iscsiShareCount
+        , TF.assign "iscsi_share_level" <$> TF.attribute _iscsiShareLevel
+        , TF.assign "lacp_api_version" <$> TF.attribute _lacpApiVersion
+        , TF.assign "lacp_enabled" <$> TF.attribute _lacpEnabled
+        , TF.assign "lacp_mode" <$> TF.attribute _lacpMode
         , TF.assign "link_discovery_operation" <$> TF.attribute _linkDiscoveryOperation
         , TF.assign "link_discovery_protocol" <$> TF.attribute _linkDiscoveryProtocol
+        , TF.assign "management_maximum_mbit" <$> TF.attribute _managementMaximumMbit
+        , TF.assign "management_reservation_mbit" <$> TF.attribute _managementReservationMbit
+        , TF.assign "management_share_count" <$> TF.attribute _managementShareCount
+        , TF.assign "management_share_level" <$> TF.attribute _managementShareLevel
+        , TF.assign "max_mtu" <$> TF.attribute _maxMtu
+        , TF.assign "multicast_filtering_mode" <$> TF.attribute _multicastFilteringMode
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "netflow_active_flow_timeout" <$> TF.attribute _netflowActiveFlowTimeout
         , TF.assign "netflow_collector_ip_address" <$> TF.attribute _netflowCollectorIpAddress
         , TF.assign "netflow_collector_port" <$> TF.attribute _netflowCollectorPort
+        , TF.assign "netflow_enabled" <$> TF.attribute _netflowEnabled
         , TF.assign "netflow_idle_flow_timeout" <$> TF.attribute _netflowIdleFlowTimeout
         , TF.assign "netflow_internal_flows_only" <$> TF.attribute _netflowInternalFlowsOnly
         , TF.assign "netflow_observation_domain_id" <$> TF.attribute _netflowObservationDomainId
         , TF.assign "netflow_sampling_rate" <$> TF.attribute _netflowSamplingRate
         , TF.assign "network_resource_control_enabled" <$> TF.attribute _networkResourceControlEnabled
+        , TF.assign "network_resource_control_version" <$> TF.attribute _networkResourceControlVersion
+        , TF.assign "nfs_maximum_mbit" <$> TF.attribute _nfsMaximumMbit
+        , TF.assign "nfs_reservation_mbit" <$> TF.attribute _nfsReservationMbit
+        , TF.assign "nfs_share_count" <$> TF.attribute _nfsShareCount
+        , TF.assign "nfs_share_level" <$> TF.attribute _nfsShareLevel
+        , TF.assign "notify_switches" <$> TF.attribute _notifySwitches
+        , TF.assign "port_private_secondary_vlan_id" <$> TF.attribute _portPrivateSecondaryVlanId
+        , TF.assign "standby_uplinks" <$> TF.attribute _standbyUplinks
         , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "teaming_policy" <$> TF.attribute _teamingPolicy
+        , TF.assign "tx_uplink" <$> TF.attribute _txUplink
+        , TF.assign "uplinks" <$> TF.attribute _uplinks
+        , TF.assign "vdp_maximum_mbit" <$> TF.attribute _vdpMaximumMbit
+        , TF.assign "vdp_reservation_mbit" <$> TF.attribute _vdpReservationMbit
+        , TF.assign "vdp_share_count" <$> TF.attribute _vdpShareCount
+        , TF.assign "vdp_share_level" <$> TF.attribute _vdpShareLevel
+        , TF.assign "version" <$> TF.attribute _version
+        , TF.assign "virtualmachine_maximum_mbit" <$> TF.attribute _virtualmachineMaximumMbit
+        , TF.assign "virtualmachine_reservation_mbit" <$> TF.attribute _virtualmachineReservationMbit
+        , TF.assign "virtualmachine_share_count" <$> TF.attribute _virtualmachineShareCount
+        , TF.assign "virtualmachine_share_level" <$> TF.attribute _virtualmachineShareLevel
+        , TF.assign "vlan_id" <$> TF.attribute _vlanId
+        , TF.assign "vlan_range" <$> TF.attribute _vlanRange
+        , TF.assign "vmotion_maximum_mbit" <$> TF.attribute _vmotionMaximumMbit
+        , TF.assign "vmotion_reservation_mbit" <$> TF.attribute _vmotionReservationMbit
+        , TF.assign "vmotion_share_count" <$> TF.attribute _vmotionShareCount
+        , TF.assign "vmotion_share_level" <$> TF.attribute _vmotionShareLevel
+        , TF.assign "vsan_maximum_mbit" <$> TF.attribute _vsanMaximumMbit
+        , TF.assign "vsan_reservation_mbit" <$> TF.attribute _vsanReservationMbit
+        , TF.assign "vsan_share_count" <$> TF.attribute _vsanShareCount
+        , TF.assign "vsan_share_level" <$> TF.attribute _vsanShareLevel
         ]
 
 instance TF.IsValid (DistributedVirtualSwitchResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\DistributedVirtualSwitchResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_portPrivateSecondaryVlanId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_portPrivateSecondaryVlanId",
+                            [ "_vlanId"                            , "_vlanRange"
+                            ])
+        , if (_vlanId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_vlanId",
+                            [ "_portPrivateSecondaryVlanId"                            , "_vlanRange"
+                            ])
+        , if (_vlanRange P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_vlanRange",
+                            [ "_portPrivateSecondaryVlanId"                            , "_vlanId"
+                            ])
+        ])
+
+instance P.HasActiveUplinks (DistributedVirtualSwitchResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    activeUplinks =
+        P.lens (_activeUplinks :: DistributedVirtualSwitchResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _activeUplinks = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasAllowForgedTransmits (DistributedVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    allowForgedTransmits =
+        P.lens (_allowForgedTransmits :: DistributedVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowForgedTransmits = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasAllowMacChanges (DistributedVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    allowMacChanges =
+        P.lens (_allowMacChanges :: DistributedVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowMacChanges = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasAllowPromiscuous (DistributedVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    allowPromiscuous =
+        P.lens (_allowPromiscuous :: DistributedVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowPromiscuous = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasBlockAllPorts (DistributedVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    blockAllPorts =
+        P.lens (_blockAllPorts :: DistributedVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _blockAllPorts = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasCheckBeacon (DistributedVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    checkBeacon =
+        P.lens (_checkBeacon :: DistributedVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _checkBeacon = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasContactDetail (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
     contactDetail =
@@ -2393,20 +3246,145 @@ instance P.HasDescription (DistributedVirtualSwitchResource s) (TF.Attr s P.Text
         P.lens (_description :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: DistributedVirtualSwitchResource s)
 
+instance P.HasDirectpathGen2Allowed (DistributedVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    directpathGen2Allowed =
+        P.lens (_directpathGen2Allowed :: DistributedVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _directpathGen2Allowed = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasEgressShapingAverageBandwidth (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    egressShapingAverageBandwidth =
+        P.lens (_egressShapingAverageBandwidth :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _egressShapingAverageBandwidth = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasEgressShapingBurstSize (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    egressShapingBurstSize =
+        P.lens (_egressShapingBurstSize :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _egressShapingBurstSize = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasEgressShapingEnabled (DistributedVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    egressShapingEnabled =
+        P.lens (_egressShapingEnabled :: DistributedVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _egressShapingEnabled = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasEgressShapingPeakBandwidth (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    egressShapingPeakBandwidth =
+        P.lens (_egressShapingPeakBandwidth :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _egressShapingPeakBandwidth = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasFailback (DistributedVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    failback =
+        P.lens (_failback :: DistributedVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _failback = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasFaulttoleranceMaximumMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    faulttoleranceMaximumMbit =
+        P.lens (_faulttoleranceMaximumMbit :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _faulttoleranceMaximumMbit = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasFaulttoleranceReservationMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    faulttoleranceReservationMbit =
+        P.lens (_faulttoleranceReservationMbit :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _faulttoleranceReservationMbit = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasFaulttoleranceShareCount (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    faulttoleranceShareCount =
+        P.lens (_faulttoleranceShareCount :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _faulttoleranceShareCount = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasFaulttoleranceShareLevel (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+    faulttoleranceShareLevel =
+        P.lens (_faulttoleranceShareLevel :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _faulttoleranceShareLevel = a } :: DistributedVirtualSwitchResource s)
+
 instance P.HasFolder (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
     folder =
         P.lens (_folder :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
                (\s a -> s { _folder = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasHbrMaximumMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    hbrMaximumMbit =
+        P.lens (_hbrMaximumMbit :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _hbrMaximumMbit = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasHbrReservationMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    hbrReservationMbit =
+        P.lens (_hbrReservationMbit :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _hbrReservationMbit = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasHbrShareCount (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    hbrShareCount =
+        P.lens (_hbrShareCount :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _hbrShareCount = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasHbrShareLevel (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+    hbrShareLevel =
+        P.lens (_hbrShareLevel :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _hbrShareLevel = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasHost (DistributedVirtualSwitchResource s) (TF.Attr s [TF.Attr s (HostSetting s)]) where
     host =
         P.lens (_host :: DistributedVirtualSwitchResource s -> TF.Attr s [TF.Attr s (HostSetting s)])
                (\s a -> s { _host = a } :: DistributedVirtualSwitchResource s)
 
+instance P.HasIngressShapingAverageBandwidth (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    ingressShapingAverageBandwidth =
+        P.lens (_ingressShapingAverageBandwidth :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _ingressShapingAverageBandwidth = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasIngressShapingBurstSize (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    ingressShapingBurstSize =
+        P.lens (_ingressShapingBurstSize :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _ingressShapingBurstSize = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasIngressShapingEnabled (DistributedVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    ingressShapingEnabled =
+        P.lens (_ingressShapingEnabled :: DistributedVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _ingressShapingEnabled = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasIngressShapingPeakBandwidth (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    ingressShapingPeakBandwidth =
+        P.lens (_ingressShapingPeakBandwidth :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _ingressShapingPeakBandwidth = a } :: DistributedVirtualSwitchResource s)
+
 instance P.HasIpv4Address (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
     ipv4Address =
         P.lens (_ipv4Address :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
                (\s a -> s { _ipv4Address = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasIscsiMaximumMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    iscsiMaximumMbit =
+        P.lens (_iscsiMaximumMbit :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _iscsiMaximumMbit = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasIscsiReservationMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    iscsiReservationMbit =
+        P.lens (_iscsiReservationMbit :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _iscsiReservationMbit = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasIscsiShareCount (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    iscsiShareCount =
+        P.lens (_iscsiShareCount :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _iscsiShareCount = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasIscsiShareLevel (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+    iscsiShareLevel =
+        P.lens (_iscsiShareLevel :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _iscsiShareLevel = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasLacpApiVersion (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+    lacpApiVersion =
+        P.lens (_lacpApiVersion :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _lacpApiVersion = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasLacpEnabled (DistributedVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    lacpEnabled =
+        P.lens (_lacpEnabled :: DistributedVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _lacpEnabled = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasLacpMode (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+    lacpMode =
+        P.lens (_lacpMode :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _lacpMode = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasLinkDiscoveryOperation (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
     linkDiscoveryOperation =
@@ -2417,6 +3395,36 @@ instance P.HasLinkDiscoveryProtocol (DistributedVirtualSwitchResource s) (TF.Att
     linkDiscoveryProtocol =
         P.lens (_linkDiscoveryProtocol :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
                (\s a -> s { _linkDiscoveryProtocol = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasManagementMaximumMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    managementMaximumMbit =
+        P.lens (_managementMaximumMbit :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _managementMaximumMbit = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasManagementReservationMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    managementReservationMbit =
+        P.lens (_managementReservationMbit :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _managementReservationMbit = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasManagementShareCount (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    managementShareCount =
+        P.lens (_managementShareCount :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _managementShareCount = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasManagementShareLevel (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+    managementShareLevel =
+        P.lens (_managementShareLevel :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _managementShareLevel = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasMaxMtu (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    maxMtu =
+        P.lens (_maxMtu :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _maxMtu = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasMulticastFilteringMode (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+    multicastFilteringMode =
+        P.lens (_multicastFilteringMode :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _multicastFilteringMode = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasName (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
     name =
@@ -2437,6 +3445,11 @@ instance P.HasNetflowCollectorPort (DistributedVirtualSwitchResource s) (TF.Attr
     netflowCollectorPort =
         P.lens (_netflowCollectorPort :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
                (\s a -> s { _netflowCollectorPort = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasNetflowEnabled (DistributedVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    netflowEnabled =
+        P.lens (_netflowEnabled :: DistributedVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _netflowEnabled = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasNetflowIdleFlowTimeout (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
     netflowIdleFlowTimeout =
@@ -2463,10 +3476,160 @@ instance P.HasNetworkResourceControlEnabled (DistributedVirtualSwitchResource s)
         P.lens (_networkResourceControlEnabled :: DistributedVirtualSwitchResource s -> TF.Attr s P.Bool)
                (\s a -> s { _networkResourceControlEnabled = a } :: DistributedVirtualSwitchResource s)
 
+instance P.HasNetworkResourceControlVersion (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+    networkResourceControlVersion =
+        P.lens (_networkResourceControlVersion :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _networkResourceControlVersion = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasNfsMaximumMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    nfsMaximumMbit =
+        P.lens (_nfsMaximumMbit :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _nfsMaximumMbit = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasNfsReservationMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    nfsReservationMbit =
+        P.lens (_nfsReservationMbit :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _nfsReservationMbit = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasNfsShareCount (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    nfsShareCount =
+        P.lens (_nfsShareCount :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _nfsShareCount = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasNfsShareLevel (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+    nfsShareLevel =
+        P.lens (_nfsShareLevel :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _nfsShareLevel = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasNotifySwitches (DistributedVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    notifySwitches =
+        P.lens (_notifySwitches :: DistributedVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _notifySwitches = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasPortPrivateSecondaryVlanId (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    portPrivateSecondaryVlanId =
+        P.lens (_portPrivateSecondaryVlanId :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _portPrivateSecondaryVlanId = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasStandbyUplinks (DistributedVirtualSwitchResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    standbyUplinks =
+        P.lens (_standbyUplinks :: DistributedVirtualSwitchResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _standbyUplinks = a } :: DistributedVirtualSwitchResource s)
+
 instance P.HasTags (DistributedVirtualSwitchResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
         P.lens (_tags :: DistributedVirtualSwitchResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasTeamingPolicy (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+    teamingPolicy =
+        P.lens (_teamingPolicy :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _teamingPolicy = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasTxUplink (DistributedVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    txUplink =
+        P.lens (_txUplink :: DistributedVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _txUplink = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasUplinks (DistributedVirtualSwitchResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    uplinks =
+        P.lens (_uplinks :: DistributedVirtualSwitchResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _uplinks = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVdpMaximumMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    vdpMaximumMbit =
+        P.lens (_vdpMaximumMbit :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _vdpMaximumMbit = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVdpReservationMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    vdpReservationMbit =
+        P.lens (_vdpReservationMbit :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _vdpReservationMbit = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVdpShareCount (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    vdpShareCount =
+        P.lens (_vdpShareCount :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _vdpShareCount = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVdpShareLevel (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+    vdpShareLevel =
+        P.lens (_vdpShareLevel :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vdpShareLevel = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVersion (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+    version =
+        P.lens (_version :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _version = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVirtualmachineMaximumMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    virtualmachineMaximumMbit =
+        P.lens (_virtualmachineMaximumMbit :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _virtualmachineMaximumMbit = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVirtualmachineReservationMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    virtualmachineReservationMbit =
+        P.lens (_virtualmachineReservationMbit :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _virtualmachineReservationMbit = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVirtualmachineShareCount (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    virtualmachineShareCount =
+        P.lens (_virtualmachineShareCount :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _virtualmachineShareCount = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVirtualmachineShareLevel (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+    virtualmachineShareLevel =
+        P.lens (_virtualmachineShareLevel :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _virtualmachineShareLevel = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVlanId (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    vlanId =
+        P.lens (_vlanId :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _vlanId = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVlanRange (DistributedVirtualSwitchResource s) (TF.Attr s [TF.Attr s (VlanRangeSetting s)]) where
+    vlanRange =
+        P.lens (_vlanRange :: DistributedVirtualSwitchResource s -> TF.Attr s [TF.Attr s (VlanRangeSetting s)])
+               (\s a -> s { _vlanRange = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVmotionMaximumMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    vmotionMaximumMbit =
+        P.lens (_vmotionMaximumMbit :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _vmotionMaximumMbit = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVmotionReservationMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    vmotionReservationMbit =
+        P.lens (_vmotionReservationMbit :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _vmotionReservationMbit = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVmotionShareCount (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    vmotionShareCount =
+        P.lens (_vmotionShareCount :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _vmotionShareCount = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVmotionShareLevel (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+    vmotionShareLevel =
+        P.lens (_vmotionShareLevel :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vmotionShareLevel = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVsanMaximumMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    vsanMaximumMbit =
+        P.lens (_vsanMaximumMbit :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _vsanMaximumMbit = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVsanReservationMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    vsanReservationMbit =
+        P.lens (_vsanReservationMbit :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _vsanReservationMbit = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVsanShareCount (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
+    vsanShareCount =
+        P.lens (_vsanShareCount :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
+               (\s a -> s { _vsanShareCount = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasVsanShareLevel (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+    vsanShareLevel =
+        P.lens (_vsanShareLevel :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vsanShareLevel = a } :: DistributedVirtualSwitchResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -4003,6 +5166,11 @@ data ResourcePoolResource s = ResourcePoolResource'
     -- to a pre-determined set of numeric values for shares. Can be one of low,
     -- normal, high, or custom.
     --
+    , _cpuShares            :: TF.Attr s P.Int
+    -- ^ @cpu_shares@ - (Optional)
+    -- The number of shares allocated. Used to determine resource allocation in
+    -- case of resource contention. If this is set, cpu_share_level must be custom.
+    --
     , _customAttributes     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @custom_attributes@ - (Optional)
     -- A list of custom attributes to set on this resource.
@@ -4026,6 +5194,12 @@ data ResourcePoolResource s = ResourcePoolResource'
     -- The allocation level. The level is a simplified view of shares. Levels map
     -- to a pre-determined set of numeric values for shares. Can be one of low,
     -- normal, high, or custom.
+    --
+    , _memoryShares         :: TF.Attr s P.Int
+    -- ^ @memory_shares@ - (Optional)
+    -- The number of shares allocated. Used to determine resource allocation in
+    -- case of resource contention. If this is set, memory_share_level must be
+    -- custom.
     --
     , _name                 :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
@@ -4054,11 +5228,13 @@ resourcePoolResource _parentResourcePoolId _name =
             , _cpuLimit = TF.value (-1)
             , _cpuReservation = TF.value 0
             , _cpuShareLevel = TF.value "normal"
+            , _cpuShares = TF.Nil
             , _customAttributes = TF.Nil
             , _memoryExpandable = TF.value P.True
             , _memoryLimit = TF.value (-1)
             , _memoryReservation = TF.value 0
             , _memoryShareLevel = TF.value "normal"
+            , _memoryShares = TF.Nil
             , _name = _name
             , _parentResourcePoolId = _parentResourcePoolId
             , _tags = TF.Nil
@@ -4070,11 +5246,13 @@ instance TF.IsObject (ResourcePoolResource s) where
         , TF.assign "cpu_limit" <$> TF.attribute _cpuLimit
         , TF.assign "cpu_reservation" <$> TF.attribute _cpuReservation
         , TF.assign "cpu_share_level" <$> TF.attribute _cpuShareLevel
+        , TF.assign "cpu_shares" <$> TF.attribute _cpuShares
         , TF.assign "custom_attributes" <$> TF.attribute _customAttributes
         , TF.assign "memory_expandable" <$> TF.attribute _memoryExpandable
         , TF.assign "memory_limit" <$> TF.attribute _memoryLimit
         , TF.assign "memory_reservation" <$> TF.attribute _memoryReservation
         , TF.assign "memory_share_level" <$> TF.attribute _memoryShareLevel
+        , TF.assign "memory_shares" <$> TF.attribute _memoryShares
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "parent_resource_pool_id" <$> TF.attribute _parentResourcePoolId
         , TF.assign "tags" <$> TF.attribute _tags
@@ -4103,6 +5281,11 @@ instance P.HasCpuShareLevel (ResourcePoolResource s) (TF.Attr s P.Text) where
         P.lens (_cpuShareLevel :: ResourcePoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _cpuShareLevel = a } :: ResourcePoolResource s)
 
+instance P.HasCpuShares (ResourcePoolResource s) (TF.Attr s P.Int) where
+    cpuShares =
+        P.lens (_cpuShares :: ResourcePoolResource s -> TF.Attr s P.Int)
+               (\s a -> s { _cpuShares = a } :: ResourcePoolResource s)
+
 instance P.HasCustomAttributes (ResourcePoolResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     customAttributes =
         P.lens (_customAttributes :: ResourcePoolResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
@@ -4127,6 +5310,11 @@ instance P.HasMemoryShareLevel (ResourcePoolResource s) (TF.Attr s P.Text) where
     memoryShareLevel =
         P.lens (_memoryShareLevel :: ResourcePoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _memoryShareLevel = a } :: ResourcePoolResource s)
+
+instance P.HasMemoryShares (ResourcePoolResource s) (TF.Attr s P.Int) where
+    memoryShares =
+        P.lens (_memoryShares :: ResourcePoolResource s -> TF.Attr s P.Int)
+               (\s a -> s { _memoryShares = a } :: ResourcePoolResource s)
 
 instance P.HasName (ResourcePoolResource s) (TF.Attr s P.Text) where
     name =
@@ -4394,6 +5582,11 @@ data VappContainerResource s = VappContainerResource'
     -- to a pre-determined set of numeric values for shares. Can be one of low,
     -- normal, high, or custom.
     --
+    , _cpuShares            :: TF.Attr s P.Int
+    -- ^ @cpu_shares@ - (Optional)
+    -- The number of shares allocated. Used to determine resource allocation in
+    -- case of resource contention. If this is set, cpu_share_level must be custom.
+    --
     , _customAttributes     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @custom_attributes@ - (Optional)
     -- A list of custom attributes to set on this resource.
@@ -4417,6 +5610,12 @@ data VappContainerResource s = VappContainerResource'
     -- The allocation level. The level is a simplified view of shares. Levels map
     -- to a pre-determined set of numeric values for shares. Can be one of low,
     -- normal, high, or custom.
+    --
+    , _memoryShares         :: TF.Attr s P.Int
+    -- ^ @memory_shares@ - (Optional)
+    -- The number of shares allocated. Used to determine resource allocation in
+    -- case of resource contention. If this is set, memory_share_level must be
+    -- custom.
     --
     , _name                 :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
@@ -4449,11 +5648,13 @@ vappContainerResource _parentResourcePoolId _name =
             , _cpuLimit = TF.value (-1)
             , _cpuReservation = TF.value 0
             , _cpuShareLevel = TF.value "normal"
+            , _cpuShares = TF.Nil
             , _customAttributes = TF.Nil
             , _memoryExpandable = TF.value P.True
             , _memoryLimit = TF.value (-1)
             , _memoryReservation = TF.value 0
             , _memoryShareLevel = TF.value "normal"
+            , _memoryShares = TF.Nil
             , _name = _name
             , _parentFolderId = TF.Nil
             , _parentResourcePoolId = _parentResourcePoolId
@@ -4466,11 +5667,13 @@ instance TF.IsObject (VappContainerResource s) where
         , TF.assign "cpu_limit" <$> TF.attribute _cpuLimit
         , TF.assign "cpu_reservation" <$> TF.attribute _cpuReservation
         , TF.assign "cpu_share_level" <$> TF.attribute _cpuShareLevel
+        , TF.assign "cpu_shares" <$> TF.attribute _cpuShares
         , TF.assign "custom_attributes" <$> TF.attribute _customAttributes
         , TF.assign "memory_expandable" <$> TF.attribute _memoryExpandable
         , TF.assign "memory_limit" <$> TF.attribute _memoryLimit
         , TF.assign "memory_reservation" <$> TF.attribute _memoryReservation
         , TF.assign "memory_share_level" <$> TF.attribute _memoryShareLevel
+        , TF.assign "memory_shares" <$> TF.attribute _memoryShares
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "parent_folder_id" <$> TF.attribute _parentFolderId
         , TF.assign "parent_resource_pool_id" <$> TF.attribute _parentResourcePoolId
@@ -4500,6 +5703,11 @@ instance P.HasCpuShareLevel (VappContainerResource s) (TF.Attr s P.Text) where
         P.lens (_cpuShareLevel :: VappContainerResource s -> TF.Attr s P.Text)
                (\s a -> s { _cpuShareLevel = a } :: VappContainerResource s)
 
+instance P.HasCpuShares (VappContainerResource s) (TF.Attr s P.Int) where
+    cpuShares =
+        P.lens (_cpuShares :: VappContainerResource s -> TF.Attr s P.Int)
+               (\s a -> s { _cpuShares = a } :: VappContainerResource s)
+
 instance P.HasCustomAttributes (VappContainerResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     customAttributes =
         P.lens (_customAttributes :: VappContainerResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
@@ -4524,6 +5732,11 @@ instance P.HasMemoryShareLevel (VappContainerResource s) (TF.Attr s P.Text) wher
     memoryShareLevel =
         P.lens (_memoryShareLevel :: VappContainerResource s -> TF.Attr s P.Text)
                (\s a -> s { _memoryShareLevel = a } :: VappContainerResource s)
+
+instance P.HasMemoryShares (VappContainerResource s) (TF.Attr s P.Int) where
+    memoryShares =
+        P.lens (_memoryShares :: VappContainerResource s -> TF.Attr s P.Int)
+               (\s a -> s { _memoryShares = a } :: VappContainerResource s)
 
 instance P.HasName (VappContainerResource s) (TF.Attr s P.Text) where
     name =
@@ -4699,6 +5912,10 @@ data VirtualMachineResource s = VirtualMachineResource'
     -- The amount of memory (in MB) or CPU (in MHz) that this virtual machine is
     -- guaranteed.%!(EXTRA string=cpu)
     --
+    , _cpuShareCount :: TF.Attr s P.Int
+    -- ^ @cpu_share_count@ - (Optional)
+    -- The amount of shares to allocate to cpu for a custom share level.
+    --
     , _cpuShareLevel :: TF.Attr s P.Text
     -- ^ @cpu_share_level@ - (Optional)
     -- The allocation level for cpu resources. Can be one of high, low, normal, or
@@ -4711,6 +5928,22 @@ data VirtualMachineResource s = VirtualMachineResource'
     , _datastoreClusterId :: TF.Attr s P.Text
     -- ^ @datastore_cluster_id@ - (Optional)
     -- The ID of a datastore cluster to put the virtual machine in.
+    --
+    -- Conflicts with:
+    --
+    -- * 'datastoreId'
+    , _datastoreId :: TF.Attr s P.Text
+    -- ^ @datastore_id@ - (Optional)
+    -- The ID of the virtual machine's datastore. The virtual machine configuration
+    -- is placed here, along with any virtual disks that are created without
+    -- datastores.
+    --
+    -- Conflicts with:
+    --
+    -- * 'datastoreClusterId'
+    , _disk :: TF.Attr s [TF.Attr s (DiskSetting s)]
+    -- ^ @disk@ - (Optional)
+    -- A specification for a virtual disk device on this virtual machine.
     --
     , _efiSecureBootEnabled :: TF.Attr s P.Bool
     -- ^ @efi_secure_boot_enabled@ - (Optional)
@@ -4755,6 +5988,10 @@ data VirtualMachineResource s = VirtualMachineResource'
     -- ^ @guest_id@ - (Optional)
     -- The guest ID for the operating system.
     --
+    , _hostSystemId :: TF.Attr s P.Text
+    -- ^ @host_system_id@ - (Optional)
+    -- The ID of an optional host system to pin the virtual machine to.
+    --
     , _hvMode :: TF.Attr s P.Text
     -- ^ @hv_mode@ - (Optional)
     -- The (non-nested) hardware virtualization setting for this virtual machine.
@@ -4785,6 +6022,10 @@ data VirtualMachineResource s = VirtualMachineResource'
     -- ^ @memory_reservation@ - (Optional)
     -- The amount of memory (in MB) or CPU (in MHz) that this virtual machine is
     -- guaranteed.%!(EXTRA string=memory)
+    --
+    , _memoryShareCount :: TF.Attr s P.Int
+    -- ^ @memory_share_count@ - (Optional)
+    -- The amount of shares to allocate to memory for a custom share level.
     --
     , _memoryShareLevel :: TF.Attr s P.Text
     -- ^ @memory_share_level@ - (Optional)
@@ -4920,9 +6161,12 @@ virtualMachineResource _resourcePoolId _networkInterface _name =
             , _cpuLimit = TF.value (-1)
             , _cpuPerformanceCountersEnabled = TF.Nil
             , _cpuReservation = TF.Nil
+            , _cpuShareCount = TF.Nil
             , _cpuShareLevel = TF.value "normal"
             , _customAttributes = TF.Nil
             , _datastoreClusterId = TF.Nil
+            , _datastoreId = TF.Nil
+            , _disk = TF.Nil
             , _efiSecureBootEnabled = TF.Nil
             , _enableDiskUuid = TF.Nil
             , _enableLogging = TF.Nil
@@ -4932,12 +6176,14 @@ virtualMachineResource _resourcePoolId _networkInterface _name =
             , _folder = TF.Nil
             , _forcePowerOff = TF.value P.True
             , _guestId = TF.value "other-64"
+            , _hostSystemId = TF.Nil
             , _hvMode = TF.value "hvAuto"
             , _latencySensitivity = TF.Nil
             , _memory = TF.value 1024
             , _memoryHotAddEnabled = TF.Nil
             , _memoryLimit = TF.value (-1)
             , _memoryReservation = TF.Nil
+            , _memoryShareCount = TF.Nil
             , _memoryShareLevel = TF.value "normal"
             , _migrateWaitTimeout = TF.value 30
             , _name = _name
@@ -4977,9 +6223,12 @@ instance TF.IsObject (VirtualMachineResource s) where
         , TF.assign "cpu_limit" <$> TF.attribute _cpuLimit
         , TF.assign "cpu_performance_counters_enabled" <$> TF.attribute _cpuPerformanceCountersEnabled
         , TF.assign "cpu_reservation" <$> TF.attribute _cpuReservation
+        , TF.assign "cpu_share_count" <$> TF.attribute _cpuShareCount
         , TF.assign "cpu_share_level" <$> TF.attribute _cpuShareLevel
         , TF.assign "custom_attributes" <$> TF.attribute _customAttributes
         , TF.assign "datastore_cluster_id" <$> TF.attribute _datastoreClusterId
+        , TF.assign "datastore_id" <$> TF.attribute _datastoreId
+        , TF.assign "disk" <$> TF.attribute _disk
         , TF.assign "efi_secure_boot_enabled" <$> TF.attribute _efiSecureBootEnabled
         , TF.assign "enable_disk_uuid" <$> TF.attribute _enableDiskUuid
         , TF.assign "enable_logging" <$> TF.attribute _enableLogging
@@ -4989,12 +6238,14 @@ instance TF.IsObject (VirtualMachineResource s) where
         , TF.assign "folder" <$> TF.attribute _folder
         , TF.assign "force_power_off" <$> TF.attribute _forcePowerOff
         , TF.assign "guest_id" <$> TF.attribute _guestId
+        , TF.assign "host_system_id" <$> TF.attribute _hostSystemId
         , TF.assign "hv_mode" <$> TF.attribute _hvMode
         , TF.assign "latency_sensitivity" <$> TF.attribute _latencySensitivity
         , TF.assign "memory" <$> TF.attribute _memory
         , TF.assign "memory_hot_add_enabled" <$> TF.attribute _memoryHotAddEnabled
         , TF.assign "memory_limit" <$> TF.attribute _memoryLimit
         , TF.assign "memory_reservation" <$> TF.attribute _memoryReservation
+        , TF.assign "memory_share_count" <$> TF.attribute _memoryShareCount
         , TF.assign "memory_share_level" <$> TF.attribute _memoryShareLevel
         , TF.assign "migrate_wait_timeout" <$> TF.attribute _migrateWaitTimeout
         , TF.assign "name" <$> TF.attribute _name
@@ -5021,7 +6272,18 @@ instance TF.IsObject (VirtualMachineResource s) where
         ]
 
 instance TF.IsValid (VirtualMachineResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\VirtualMachineResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_datastoreClusterId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_datastoreClusterId",
+                            [ "_datastoreId"
+                            ])
+        , if (_datastoreId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_datastoreId",
+                            [ "_datastoreClusterId"
+                            ])
+        ])
            P.<> TF.settingsValidator "_cdrom"
                   (_cdrom
                       :: VirtualMachineResource s -> TF.Attr s (CdromSetting s))
@@ -5095,6 +6357,11 @@ instance P.HasCpuReservation (VirtualMachineResource s) (TF.Attr s P.Int) where
         P.lens (_cpuReservation :: VirtualMachineResource s -> TF.Attr s P.Int)
                (\s a -> s { _cpuReservation = a } :: VirtualMachineResource s)
 
+instance P.HasCpuShareCount (VirtualMachineResource s) (TF.Attr s P.Int) where
+    cpuShareCount =
+        P.lens (_cpuShareCount :: VirtualMachineResource s -> TF.Attr s P.Int)
+               (\s a -> s { _cpuShareCount = a } :: VirtualMachineResource s)
+
 instance P.HasCpuShareLevel (VirtualMachineResource s) (TF.Attr s P.Text) where
     cpuShareLevel =
         P.lens (_cpuShareLevel :: VirtualMachineResource s -> TF.Attr s P.Text)
@@ -5109,6 +6376,16 @@ instance P.HasDatastoreClusterId (VirtualMachineResource s) (TF.Attr s P.Text) w
     datastoreClusterId =
         P.lens (_datastoreClusterId :: VirtualMachineResource s -> TF.Attr s P.Text)
                (\s a -> s { _datastoreClusterId = a } :: VirtualMachineResource s)
+
+instance P.HasDatastoreId (VirtualMachineResource s) (TF.Attr s P.Text) where
+    datastoreId =
+        P.lens (_datastoreId :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datastoreId = a } :: VirtualMachineResource s)
+
+instance P.HasDisk (VirtualMachineResource s) (TF.Attr s [TF.Attr s (DiskSetting s)]) where
+    disk =
+        P.lens (_disk :: VirtualMachineResource s -> TF.Attr s [TF.Attr s (DiskSetting s)])
+               (\s a -> s { _disk = a } :: VirtualMachineResource s)
 
 instance P.HasEfiSecureBootEnabled (VirtualMachineResource s) (TF.Attr s P.Bool) where
     efiSecureBootEnabled =
@@ -5155,6 +6432,11 @@ instance P.HasGuestId (VirtualMachineResource s) (TF.Attr s P.Text) where
         P.lens (_guestId :: VirtualMachineResource s -> TF.Attr s P.Text)
                (\s a -> s { _guestId = a } :: VirtualMachineResource s)
 
+instance P.HasHostSystemId (VirtualMachineResource s) (TF.Attr s P.Text) where
+    hostSystemId =
+        P.lens (_hostSystemId :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _hostSystemId = a } :: VirtualMachineResource s)
+
 instance P.HasHvMode (VirtualMachineResource s) (TF.Attr s P.Text) where
     hvMode =
         P.lens (_hvMode :: VirtualMachineResource s -> TF.Attr s P.Text)
@@ -5184,6 +6466,11 @@ instance P.HasMemoryReservation (VirtualMachineResource s) (TF.Attr s P.Int) whe
     memoryReservation =
         P.lens (_memoryReservation :: VirtualMachineResource s -> TF.Attr s P.Int)
                (\s a -> s { _memoryReservation = a } :: VirtualMachineResource s)
+
+instance P.HasMemoryShareCount (VirtualMachineResource s) (TF.Attr s P.Int) where
+    memoryShareCount =
+        P.lens (_memoryShareCount :: VirtualMachineResource s -> TF.Attr s P.Int)
+               (\s a -> s { _memoryShareCount = a } :: VirtualMachineResource s)
 
 instance P.HasMemoryShareLevel (VirtualMachineResource s) (TF.Attr s P.Text) where
     memoryShareLevel =

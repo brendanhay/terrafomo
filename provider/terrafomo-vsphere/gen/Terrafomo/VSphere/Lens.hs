@@ -17,6 +17,7 @@ module Terrafomo.VSphere.Lens
     -- ** Arguments
       HasAccessMode (..)
     , HasActiveNics (..)
+    , HasActiveUplinks (..)
     , HasAdapterType (..)
     , HasAdminPassword (..)
     , HasAffinityHostGroupName (..)
@@ -34,8 +35,10 @@ module Terrafomo.VSphere.Lens
     , HasAutoLogonCount (..)
     , HasBandwidthLimit (..)
     , HasBandwidthReservation (..)
+    , HasBandwidthShareCount (..)
     , HasBandwidthShareLevel (..)
     , HasBeaconInterval (..)
+    , HasBlockAllPorts (..)
     , HasBlockOverrideAllowed (..)
     , HasBootDelay (..)
     , HasBootRetryDelay (..)
@@ -60,7 +63,9 @@ module Terrafomo.VSphere.Lens
     , HasCpuLimit (..)
     , HasCpuPerformanceCountersEnabled (..)
     , HasCpuReservation (..)
+    , HasCpuShareCount (..)
     , HasCpuShareLevel (..)
+    , HasCpuShares (..)
     , HasCreateDirectories (..)
     , HasCustomAttributes (..)
     , HasCustomize (..)
@@ -73,6 +78,8 @@ module Terrafomo.VSphere.Lens
     , HasDescription (..)
     , HasDestinationFile (..)
     , HasDevices (..)
+    , HasDirectpathGen2Allowed (..)
+    , HasDisk (..)
     , HasDiskMode (..)
     , HasDiskSharing (..)
     , HasDisks (..)
@@ -94,12 +101,20 @@ module Terrafomo.VSphere.Lens
     , HasDrsMigrationThreshold (..)
     , HasEagerlyScrub (..)
     , HasEfiSecureBootEnabled (..)
+    , HasEgressShapingAverageBandwidth (..)
+    , HasEgressShapingBurstSize (..)
+    , HasEgressShapingEnabled (..)
+    , HasEgressShapingPeakBandwidth (..)
     , HasEnableDiskUuid (..)
     , HasEnableLogging (..)
     , HasEnabled (..)
     , HasEptRviMode (..)
     , HasExtraConfig (..)
     , HasFailback (..)
+    , HasFaulttoleranceMaximumMbit (..)
+    , HasFaulttoleranceReservationMbit (..)
+    , HasFaulttoleranceShareCount (..)
+    , HasFaulttoleranceShareLevel (..)
     , HasFilter (..)
     , HasFirmware (..)
     , HasFolder (..)
@@ -138,6 +153,10 @@ module Terrafomo.VSphere.Lens
     , HasHaVmRestartAdditionalDelay (..)
     , HasHaVmRestartPriority (..)
     , HasHaVmRestartTimeout (..)
+    , HasHbrMaximumMbit (..)
+    , HasHbrReservationMbit (..)
+    , HasHbrShareCount (..)
+    , HasHbrShareLevel (..)
     , HasHost (..)
     , HasHostClusterExitTimeout (..)
     , HasHostName (..)
@@ -145,6 +164,10 @@ module Terrafomo.VSphere.Lens
     , HasHostSystemIds (..)
     , HasHvMode (..)
     , HasHwClockUtc (..)
+    , HasIngressShapingAverageBandwidth (..)
+    , HasIngressShapingBurstSize (..)
+    , HasIngressShapingEnabled (..)
+    , HasIngressShapingPeakBandwidth (..)
     , HasIoLimit (..)
     , HasIoReservation (..)
     , HasIoShareCount (..)
@@ -155,10 +178,17 @@ module Terrafomo.VSphere.Lens
     , HasIpv6Address (..)
     , HasIpv6Gateway (..)
     , HasIpv6Netmask (..)
+    , HasIscsiMaximumMbit (..)
+    , HasIscsiReservationMbit (..)
+    , HasIscsiShareCount (..)
+    , HasIscsiShareLevel (..)
     , HasJoinDomain (..)
     , HasKeepOnRemove (..)
     , HasLabel (..)
     , HasLabels (..)
+    , HasLacpApiVersion (..)
+    , HasLacpEnabled (..)
+    , HasLacpMode (..)
     , HasLatencySensitivity (..)
     , HasLicenseKey (..)
     , HasLinkDiscoveryOperation (..)
@@ -166,23 +196,33 @@ module Terrafomo.VSphere.Lens
     , HasLinkedClone (..)
     , HasLinuxOptions (..)
     , HasLivePortMovingAllowed (..)
+    , HasMacAddress (..)
     , HasManagedObjectType (..)
+    , HasManagementMaximumMbit (..)
+    , HasManagementReservationMbit (..)
+    , HasManagementShareCount (..)
+    , HasManagementShareLevel (..)
     , HasMandatory (..)
+    , HasMaxMtu (..)
     , HasMaxVlan (..)
     , HasMemory (..)
     , HasMemoryExpandable (..)
     , HasMemoryHotAddEnabled (..)
     , HasMemoryLimit (..)
     , HasMemoryReservation (..)
+    , HasMemoryShareCount (..)
     , HasMemoryShareLevel (..)
+    , HasMemoryShares (..)
     , HasMigrateWaitTimeout (..)
     , HasMinVlan (..)
     , HasMtu (..)
+    , HasMulticastFilteringMode (..)
     , HasName (..)
     , HasNestedHvEnabled (..)
     , HasNetflowActiveFlowTimeout (..)
     , HasNetflowCollectorIpAddress (..)
     , HasNetflowCollectorPort (..)
+    , HasNetflowEnabled (..)
     , HasNetflowIdleFlowTimeout (..)
     , HasNetflowInternalFlowsOnly (..)
     , HasNetflowObservationDomainId (..)
@@ -192,8 +232,13 @@ module Terrafomo.VSphere.Lens
     , HasNetworkId (..)
     , HasNetworkInterface (..)
     , HasNetworkResourceControlEnabled (..)
+    , HasNetworkResourceControlVersion (..)
     , HasNetworkResourcePoolKey (..)
     , HasNetworkResourcePoolOverrideAllowed (..)
+    , HasNfsMaximumMbit (..)
+    , HasNfsReservationMbit (..)
+    , HasNfsShareCount (..)
+    , HasNfsShareLevel (..)
     , HasNotifySwitches (..)
     , HasNumCoresPerSocket (..)
     , HasNumCpus (..)
@@ -206,6 +251,7 @@ module Terrafomo.VSphere.Lens
     , HasPersistSession (..)
     , HasPortConfigResetAtDisconnect (..)
     , HasPortNameFormat (..)
+    , HasPortPrivateSecondaryVlanId (..)
     , HasProactiveHaAutomationLevel (..)
     , HasProactiveHaEnabled (..)
     , HasProactiveHaModerateRemediation (..)
@@ -265,6 +311,7 @@ module Terrafomo.VSphere.Lens
     , HasSourceDatastore (..)
     , HasSourceFile (..)
     , HasStandbyNics (..)
+    , HasStandbyUplinks (..)
     , HasSwapPlacementPolicy (..)
     , HasSyncTimeWithHost (..)
     , HasTags (..)
@@ -274,21 +321,41 @@ module Terrafomo.VSphere.Lens
     , HasTimeZone (..)
     , HasTimeout (..)
     , HasTrafficFilterOverrideAllowed (..)
+    , HasTxUplink (..)
     , HasType' (..)
     , HasUnitNumber (..)
     , HasUplinkTeamingOverrideAllowed (..)
+    , HasUplinks (..)
     , HasUseStaticMac (..)
     , HasUser (..)
     , HasVapp (..)
+    , HasVdpMaximumMbit (..)
+    , HasVdpReservationMbit (..)
+    , HasVdpShareCount (..)
+    , HasVdpShareLevel (..)
+    , HasVersion (..)
     , HasVimSessionPath (..)
     , HasVirtualMachineId (..)
     , HasVirtualMachineIds (..)
     , HasVirtualMachineUuid (..)
     , HasVirtualSwitchName (..)
+    , HasVirtualmachineMaximumMbit (..)
+    , HasVirtualmachineReservationMbit (..)
+    , HasVirtualmachineShareCount (..)
+    , HasVirtualmachineShareLevel (..)
     , HasVlanId (..)
     , HasVlanOverrideAllowed (..)
+    , HasVlanRange (..)
     , HasVmGroupName (..)
     , HasVmdkPath (..)
+    , HasVmotionMaximumMbit (..)
+    , HasVmotionReservationMbit (..)
+    , HasVmotionShareCount (..)
+    , HasVmotionShareLevel (..)
+    , HasVsanMaximumMbit (..)
+    , HasVsanReservationMbit (..)
+    , HasVsanShareCount (..)
+    , HasVsanShareLevel (..)
     , HasVsphereServer (..)
     , HasWaitForGuestNetRoutable (..)
     , HasWaitForGuestNetTimeout (..)
@@ -441,6 +508,12 @@ class HasActiveNics a b | a -> b where
 instance HasActiveNics a b => HasActiveNics (TF.Schema l p a) b where
     activeNics = TF.configuration . activeNics
 
+class HasActiveUplinks a b | a -> b where
+    activeUplinks :: P.Lens' a b
+
+instance HasActiveUplinks a b => HasActiveUplinks (TF.Schema l p a) b where
+    activeUplinks = TF.configuration . activeUplinks
+
 class HasAdapterType a b | a -> b where
     adapterType :: P.Lens' a b
 
@@ -543,6 +616,12 @@ class HasBandwidthReservation a b | a -> b where
 instance HasBandwidthReservation a b => HasBandwidthReservation (TF.Schema l p a) b where
     bandwidthReservation = TF.configuration . bandwidthReservation
 
+class HasBandwidthShareCount a b | a -> b where
+    bandwidthShareCount :: P.Lens' a b
+
+instance HasBandwidthShareCount a b => HasBandwidthShareCount (TF.Schema l p a) b where
+    bandwidthShareCount = TF.configuration . bandwidthShareCount
+
 class HasBandwidthShareLevel a b | a -> b where
     bandwidthShareLevel :: P.Lens' a b
 
@@ -554,6 +633,12 @@ class HasBeaconInterval a b | a -> b where
 
 instance HasBeaconInterval a b => HasBeaconInterval (TF.Schema l p a) b where
     beaconInterval = TF.configuration . beaconInterval
+
+class HasBlockAllPorts a b | a -> b where
+    blockAllPorts :: P.Lens' a b
+
+instance HasBlockAllPorts a b => HasBlockAllPorts (TF.Schema l p a) b where
+    blockAllPorts = TF.configuration . blockAllPorts
 
 class HasBlockOverrideAllowed a b | a -> b where
     blockOverrideAllowed :: P.Lens' a b
@@ -699,11 +784,23 @@ class HasCpuReservation a b | a -> b where
 instance HasCpuReservation a b => HasCpuReservation (TF.Schema l p a) b where
     cpuReservation = TF.configuration . cpuReservation
 
+class HasCpuShareCount a b | a -> b where
+    cpuShareCount :: P.Lens' a b
+
+instance HasCpuShareCount a b => HasCpuShareCount (TF.Schema l p a) b where
+    cpuShareCount = TF.configuration . cpuShareCount
+
 class HasCpuShareLevel a b | a -> b where
     cpuShareLevel :: P.Lens' a b
 
 instance HasCpuShareLevel a b => HasCpuShareLevel (TF.Schema l p a) b where
     cpuShareLevel = TF.configuration . cpuShareLevel
+
+class HasCpuShares a b | a -> b where
+    cpuShares :: P.Lens' a b
+
+instance HasCpuShares a b => HasCpuShares (TF.Schema l p a) b where
+    cpuShares = TF.configuration . cpuShares
 
 class HasCreateDirectories a b | a -> b where
     createDirectories :: P.Lens' a b
@@ -776,6 +873,18 @@ class HasDevices a b | a -> b where
 
 instance HasDevices a b => HasDevices (TF.Schema l p a) b where
     devices = TF.configuration . devices
+
+class HasDirectpathGen2Allowed a b | a -> b where
+    directpathGen2Allowed :: P.Lens' a b
+
+instance HasDirectpathGen2Allowed a b => HasDirectpathGen2Allowed (TF.Schema l p a) b where
+    directpathGen2Allowed = TF.configuration . directpathGen2Allowed
+
+class HasDisk a b | a -> b where
+    disk :: P.Lens' a b
+
+instance HasDisk a b => HasDisk (TF.Schema l p a) b where
+    disk = TF.configuration . disk
 
 class HasDiskMode a b | a -> b where
     diskMode :: P.Lens' a b
@@ -903,6 +1012,30 @@ class HasEfiSecureBootEnabled a b | a -> b where
 instance HasEfiSecureBootEnabled a b => HasEfiSecureBootEnabled (TF.Schema l p a) b where
     efiSecureBootEnabled = TF.configuration . efiSecureBootEnabled
 
+class HasEgressShapingAverageBandwidth a b | a -> b where
+    egressShapingAverageBandwidth :: P.Lens' a b
+
+instance HasEgressShapingAverageBandwidth a b => HasEgressShapingAverageBandwidth (TF.Schema l p a) b where
+    egressShapingAverageBandwidth = TF.configuration . egressShapingAverageBandwidth
+
+class HasEgressShapingBurstSize a b | a -> b where
+    egressShapingBurstSize :: P.Lens' a b
+
+instance HasEgressShapingBurstSize a b => HasEgressShapingBurstSize (TF.Schema l p a) b where
+    egressShapingBurstSize = TF.configuration . egressShapingBurstSize
+
+class HasEgressShapingEnabled a b | a -> b where
+    egressShapingEnabled :: P.Lens' a b
+
+instance HasEgressShapingEnabled a b => HasEgressShapingEnabled (TF.Schema l p a) b where
+    egressShapingEnabled = TF.configuration . egressShapingEnabled
+
+class HasEgressShapingPeakBandwidth a b | a -> b where
+    egressShapingPeakBandwidth :: P.Lens' a b
+
+instance HasEgressShapingPeakBandwidth a b => HasEgressShapingPeakBandwidth (TF.Schema l p a) b where
+    egressShapingPeakBandwidth = TF.configuration . egressShapingPeakBandwidth
+
 class HasEnableDiskUuid a b | a -> b where
     enableDiskUuid :: P.Lens' a b
 
@@ -938,6 +1071,30 @@ class HasFailback a b | a -> b where
 
 instance HasFailback a b => HasFailback (TF.Schema l p a) b where
     failback = TF.configuration . failback
+
+class HasFaulttoleranceMaximumMbit a b | a -> b where
+    faulttoleranceMaximumMbit :: P.Lens' a b
+
+instance HasFaulttoleranceMaximumMbit a b => HasFaulttoleranceMaximumMbit (TF.Schema l p a) b where
+    faulttoleranceMaximumMbit = TF.configuration . faulttoleranceMaximumMbit
+
+class HasFaulttoleranceReservationMbit a b | a -> b where
+    faulttoleranceReservationMbit :: P.Lens' a b
+
+instance HasFaulttoleranceReservationMbit a b => HasFaulttoleranceReservationMbit (TF.Schema l p a) b where
+    faulttoleranceReservationMbit = TF.configuration . faulttoleranceReservationMbit
+
+class HasFaulttoleranceShareCount a b | a -> b where
+    faulttoleranceShareCount :: P.Lens' a b
+
+instance HasFaulttoleranceShareCount a b => HasFaulttoleranceShareCount (TF.Schema l p a) b where
+    faulttoleranceShareCount = TF.configuration . faulttoleranceShareCount
+
+class HasFaulttoleranceShareLevel a b | a -> b where
+    faulttoleranceShareLevel :: P.Lens' a b
+
+instance HasFaulttoleranceShareLevel a b => HasFaulttoleranceShareLevel (TF.Schema l p a) b where
+    faulttoleranceShareLevel = TF.configuration . faulttoleranceShareLevel
 
 class HasFilter a b | a -> b where
     filter :: P.Lens' a b
@@ -1167,6 +1324,30 @@ class HasHaVmRestartTimeout a b | a -> b where
 instance HasHaVmRestartTimeout a b => HasHaVmRestartTimeout (TF.Schema l p a) b where
     haVmRestartTimeout = TF.configuration . haVmRestartTimeout
 
+class HasHbrMaximumMbit a b | a -> b where
+    hbrMaximumMbit :: P.Lens' a b
+
+instance HasHbrMaximumMbit a b => HasHbrMaximumMbit (TF.Schema l p a) b where
+    hbrMaximumMbit = TF.configuration . hbrMaximumMbit
+
+class HasHbrReservationMbit a b | a -> b where
+    hbrReservationMbit :: P.Lens' a b
+
+instance HasHbrReservationMbit a b => HasHbrReservationMbit (TF.Schema l p a) b where
+    hbrReservationMbit = TF.configuration . hbrReservationMbit
+
+class HasHbrShareCount a b | a -> b where
+    hbrShareCount :: P.Lens' a b
+
+instance HasHbrShareCount a b => HasHbrShareCount (TF.Schema l p a) b where
+    hbrShareCount = TF.configuration . hbrShareCount
+
+class HasHbrShareLevel a b | a -> b where
+    hbrShareLevel :: P.Lens' a b
+
+instance HasHbrShareLevel a b => HasHbrShareLevel (TF.Schema l p a) b where
+    hbrShareLevel = TF.configuration . hbrShareLevel
+
 class HasHost a b | a -> b where
     host :: P.Lens' a b
 
@@ -1208,6 +1389,30 @@ class HasHwClockUtc a b | a -> b where
 
 instance HasHwClockUtc a b => HasHwClockUtc (TF.Schema l p a) b where
     hwClockUtc = TF.configuration . hwClockUtc
+
+class HasIngressShapingAverageBandwidth a b | a -> b where
+    ingressShapingAverageBandwidth :: P.Lens' a b
+
+instance HasIngressShapingAverageBandwidth a b => HasIngressShapingAverageBandwidth (TF.Schema l p a) b where
+    ingressShapingAverageBandwidth = TF.configuration . ingressShapingAverageBandwidth
+
+class HasIngressShapingBurstSize a b | a -> b where
+    ingressShapingBurstSize :: P.Lens' a b
+
+instance HasIngressShapingBurstSize a b => HasIngressShapingBurstSize (TF.Schema l p a) b where
+    ingressShapingBurstSize = TF.configuration . ingressShapingBurstSize
+
+class HasIngressShapingEnabled a b | a -> b where
+    ingressShapingEnabled :: P.Lens' a b
+
+instance HasIngressShapingEnabled a b => HasIngressShapingEnabled (TF.Schema l p a) b where
+    ingressShapingEnabled = TF.configuration . ingressShapingEnabled
+
+class HasIngressShapingPeakBandwidth a b | a -> b where
+    ingressShapingPeakBandwidth :: P.Lens' a b
+
+instance HasIngressShapingPeakBandwidth a b => HasIngressShapingPeakBandwidth (TF.Schema l p a) b where
+    ingressShapingPeakBandwidth = TF.configuration . ingressShapingPeakBandwidth
 
 class HasIoLimit a b | a -> b where
     ioLimit :: P.Lens' a b
@@ -1269,6 +1474,30 @@ class HasIpv6Netmask a b | a -> b where
 instance HasIpv6Netmask a b => HasIpv6Netmask (TF.Schema l p a) b where
     ipv6Netmask = TF.configuration . ipv6Netmask
 
+class HasIscsiMaximumMbit a b | a -> b where
+    iscsiMaximumMbit :: P.Lens' a b
+
+instance HasIscsiMaximumMbit a b => HasIscsiMaximumMbit (TF.Schema l p a) b where
+    iscsiMaximumMbit = TF.configuration . iscsiMaximumMbit
+
+class HasIscsiReservationMbit a b | a -> b where
+    iscsiReservationMbit :: P.Lens' a b
+
+instance HasIscsiReservationMbit a b => HasIscsiReservationMbit (TF.Schema l p a) b where
+    iscsiReservationMbit = TF.configuration . iscsiReservationMbit
+
+class HasIscsiShareCount a b | a -> b where
+    iscsiShareCount :: P.Lens' a b
+
+instance HasIscsiShareCount a b => HasIscsiShareCount (TF.Schema l p a) b where
+    iscsiShareCount = TF.configuration . iscsiShareCount
+
+class HasIscsiShareLevel a b | a -> b where
+    iscsiShareLevel :: P.Lens' a b
+
+instance HasIscsiShareLevel a b => HasIscsiShareLevel (TF.Schema l p a) b where
+    iscsiShareLevel = TF.configuration . iscsiShareLevel
+
 class HasJoinDomain a b | a -> b where
     joinDomain :: P.Lens' a b
 
@@ -1292,6 +1521,24 @@ class HasLabels a b | a -> b where
 
 instance HasLabels a b => HasLabels (TF.Schema l p a) b where
     labels = TF.configuration . labels
+
+class HasLacpApiVersion a b | a -> b where
+    lacpApiVersion :: P.Lens' a b
+
+instance HasLacpApiVersion a b => HasLacpApiVersion (TF.Schema l p a) b where
+    lacpApiVersion = TF.configuration . lacpApiVersion
+
+class HasLacpEnabled a b | a -> b where
+    lacpEnabled :: P.Lens' a b
+
+instance HasLacpEnabled a b => HasLacpEnabled (TF.Schema l p a) b where
+    lacpEnabled = TF.configuration . lacpEnabled
+
+class HasLacpMode a b | a -> b where
+    lacpMode :: P.Lens' a b
+
+instance HasLacpMode a b => HasLacpMode (TF.Schema l p a) b where
+    lacpMode = TF.configuration . lacpMode
 
 class HasLatencySensitivity a b | a -> b where
     latencySensitivity :: P.Lens' a b
@@ -1335,17 +1582,53 @@ class HasLivePortMovingAllowed a b | a -> b where
 instance HasLivePortMovingAllowed a b => HasLivePortMovingAllowed (TF.Schema l p a) b where
     livePortMovingAllowed = TF.configuration . livePortMovingAllowed
 
+class HasMacAddress a b | a -> b where
+    macAddress :: P.Lens' a b
+
+instance HasMacAddress a b => HasMacAddress (TF.Schema l p a) b where
+    macAddress = TF.configuration . macAddress
+
 class HasManagedObjectType a b | a -> b where
     managedObjectType :: P.Lens' a b
 
 instance HasManagedObjectType a b => HasManagedObjectType (TF.Schema l p a) b where
     managedObjectType = TF.configuration . managedObjectType
 
+class HasManagementMaximumMbit a b | a -> b where
+    managementMaximumMbit :: P.Lens' a b
+
+instance HasManagementMaximumMbit a b => HasManagementMaximumMbit (TF.Schema l p a) b where
+    managementMaximumMbit = TF.configuration . managementMaximumMbit
+
+class HasManagementReservationMbit a b | a -> b where
+    managementReservationMbit :: P.Lens' a b
+
+instance HasManagementReservationMbit a b => HasManagementReservationMbit (TF.Schema l p a) b where
+    managementReservationMbit = TF.configuration . managementReservationMbit
+
+class HasManagementShareCount a b | a -> b where
+    managementShareCount :: P.Lens' a b
+
+instance HasManagementShareCount a b => HasManagementShareCount (TF.Schema l p a) b where
+    managementShareCount = TF.configuration . managementShareCount
+
+class HasManagementShareLevel a b | a -> b where
+    managementShareLevel :: P.Lens' a b
+
+instance HasManagementShareLevel a b => HasManagementShareLevel (TF.Schema l p a) b where
+    managementShareLevel = TF.configuration . managementShareLevel
+
 class HasMandatory a b | a -> b where
     mandatory :: P.Lens' a b
 
 instance HasMandatory a b => HasMandatory (TF.Schema l p a) b where
     mandatory = TF.configuration . mandatory
+
+class HasMaxMtu a b | a -> b where
+    maxMtu :: P.Lens' a b
+
+instance HasMaxMtu a b => HasMaxMtu (TF.Schema l p a) b where
+    maxMtu = TF.configuration . maxMtu
 
 class HasMaxVlan a b | a -> b where
     maxVlan :: P.Lens' a b
@@ -1383,11 +1666,23 @@ class HasMemoryReservation a b | a -> b where
 instance HasMemoryReservation a b => HasMemoryReservation (TF.Schema l p a) b where
     memoryReservation = TF.configuration . memoryReservation
 
+class HasMemoryShareCount a b | a -> b where
+    memoryShareCount :: P.Lens' a b
+
+instance HasMemoryShareCount a b => HasMemoryShareCount (TF.Schema l p a) b where
+    memoryShareCount = TF.configuration . memoryShareCount
+
 class HasMemoryShareLevel a b | a -> b where
     memoryShareLevel :: P.Lens' a b
 
 instance HasMemoryShareLevel a b => HasMemoryShareLevel (TF.Schema l p a) b where
     memoryShareLevel = TF.configuration . memoryShareLevel
+
+class HasMemoryShares a b | a -> b where
+    memoryShares :: P.Lens' a b
+
+instance HasMemoryShares a b => HasMemoryShares (TF.Schema l p a) b where
+    memoryShares = TF.configuration . memoryShares
 
 class HasMigrateWaitTimeout a b | a -> b where
     migrateWaitTimeout :: P.Lens' a b
@@ -1406,6 +1701,12 @@ class HasMtu a b | a -> b where
 
 instance HasMtu a b => HasMtu (TF.Schema l p a) b where
     mtu = TF.configuration . mtu
+
+class HasMulticastFilteringMode a b | a -> b where
+    multicastFilteringMode :: P.Lens' a b
+
+instance HasMulticastFilteringMode a b => HasMulticastFilteringMode (TF.Schema l p a) b where
+    multicastFilteringMode = TF.configuration . multicastFilteringMode
 
 class HasName a b | a -> b where
     name :: P.Lens' a b
@@ -1436,6 +1737,12 @@ class HasNetflowCollectorPort a b | a -> b where
 
 instance HasNetflowCollectorPort a b => HasNetflowCollectorPort (TF.Schema l p a) b where
     netflowCollectorPort = TF.configuration . netflowCollectorPort
+
+class HasNetflowEnabled a b | a -> b where
+    netflowEnabled :: P.Lens' a b
+
+instance HasNetflowEnabled a b => HasNetflowEnabled (TF.Schema l p a) b where
+    netflowEnabled = TF.configuration . netflowEnabled
 
 class HasNetflowIdleFlowTimeout a b | a -> b where
     netflowIdleFlowTimeout :: P.Lens' a b
@@ -1491,6 +1798,12 @@ class HasNetworkResourceControlEnabled a b | a -> b where
 instance HasNetworkResourceControlEnabled a b => HasNetworkResourceControlEnabled (TF.Schema l p a) b where
     networkResourceControlEnabled = TF.configuration . networkResourceControlEnabled
 
+class HasNetworkResourceControlVersion a b | a -> b where
+    networkResourceControlVersion :: P.Lens' a b
+
+instance HasNetworkResourceControlVersion a b => HasNetworkResourceControlVersion (TF.Schema l p a) b where
+    networkResourceControlVersion = TF.configuration . networkResourceControlVersion
+
 class HasNetworkResourcePoolKey a b | a -> b where
     networkResourcePoolKey :: P.Lens' a b
 
@@ -1502,6 +1815,30 @@ class HasNetworkResourcePoolOverrideAllowed a b | a -> b where
 
 instance HasNetworkResourcePoolOverrideAllowed a b => HasNetworkResourcePoolOverrideAllowed (TF.Schema l p a) b where
     networkResourcePoolOverrideAllowed = TF.configuration . networkResourcePoolOverrideAllowed
+
+class HasNfsMaximumMbit a b | a -> b where
+    nfsMaximumMbit :: P.Lens' a b
+
+instance HasNfsMaximumMbit a b => HasNfsMaximumMbit (TF.Schema l p a) b where
+    nfsMaximumMbit = TF.configuration . nfsMaximumMbit
+
+class HasNfsReservationMbit a b | a -> b where
+    nfsReservationMbit :: P.Lens' a b
+
+instance HasNfsReservationMbit a b => HasNfsReservationMbit (TF.Schema l p a) b where
+    nfsReservationMbit = TF.configuration . nfsReservationMbit
+
+class HasNfsShareCount a b | a -> b where
+    nfsShareCount :: P.Lens' a b
+
+instance HasNfsShareCount a b => HasNfsShareCount (TF.Schema l p a) b where
+    nfsShareCount = TF.configuration . nfsShareCount
+
+class HasNfsShareLevel a b | a -> b where
+    nfsShareLevel :: P.Lens' a b
+
+instance HasNfsShareLevel a b => HasNfsShareLevel (TF.Schema l p a) b where
+    nfsShareLevel = TF.configuration . nfsShareLevel
 
 class HasNotifySwitches a b | a -> b where
     notifySwitches :: P.Lens' a b
@@ -1574,6 +1911,12 @@ class HasPortNameFormat a b | a -> b where
 
 instance HasPortNameFormat a b => HasPortNameFormat (TF.Schema l p a) b where
     portNameFormat = TF.configuration . portNameFormat
+
+class HasPortPrivateSecondaryVlanId a b | a -> b where
+    portPrivateSecondaryVlanId :: P.Lens' a b
+
+instance HasPortPrivateSecondaryVlanId a b => HasPortPrivateSecondaryVlanId (TF.Schema l p a) b where
+    portPrivateSecondaryVlanId = TF.configuration . portPrivateSecondaryVlanId
 
 class HasProactiveHaAutomationLevel a b | a -> b where
     proactiveHaAutomationLevel :: P.Lens' a b
@@ -1929,6 +2272,12 @@ class HasStandbyNics a b | a -> b where
 instance HasStandbyNics a b => HasStandbyNics (TF.Schema l p a) b where
     standbyNics = TF.configuration . standbyNics
 
+class HasStandbyUplinks a b | a -> b where
+    standbyUplinks :: P.Lens' a b
+
+instance HasStandbyUplinks a b => HasStandbyUplinks (TF.Schema l p a) b where
+    standbyUplinks = TF.configuration . standbyUplinks
+
 class HasSwapPlacementPolicy a b | a -> b where
     swapPlacementPolicy :: P.Lens' a b
 
@@ -1983,6 +2332,12 @@ class HasTrafficFilterOverrideAllowed a b | a -> b where
 instance HasTrafficFilterOverrideAllowed a b => HasTrafficFilterOverrideAllowed (TF.Schema l p a) b where
     trafficFilterOverrideAllowed = TF.configuration . trafficFilterOverrideAllowed
 
+class HasTxUplink a b | a -> b where
+    txUplink :: P.Lens' a b
+
+instance HasTxUplink a b => HasTxUplink (TF.Schema l p a) b where
+    txUplink = TF.configuration . txUplink
+
 class HasType' a b | a -> b where
     type' :: P.Lens' a b
 
@@ -2001,6 +2356,12 @@ class HasUplinkTeamingOverrideAllowed a b | a -> b where
 instance HasUplinkTeamingOverrideAllowed a b => HasUplinkTeamingOverrideAllowed (TF.Schema l p a) b where
     uplinkTeamingOverrideAllowed = TF.configuration . uplinkTeamingOverrideAllowed
 
+class HasUplinks a b | a -> b where
+    uplinks :: P.Lens' a b
+
+instance HasUplinks a b => HasUplinks (TF.Schema l p a) b where
+    uplinks = TF.configuration . uplinks
+
 class HasUseStaticMac a b | a -> b where
     useStaticMac :: P.Lens' a b
 
@@ -2018,6 +2379,36 @@ class HasVapp a b | a -> b where
 
 instance HasVapp a b => HasVapp (TF.Schema l p a) b where
     vapp = TF.configuration . vapp
+
+class HasVdpMaximumMbit a b | a -> b where
+    vdpMaximumMbit :: P.Lens' a b
+
+instance HasVdpMaximumMbit a b => HasVdpMaximumMbit (TF.Schema l p a) b where
+    vdpMaximumMbit = TF.configuration . vdpMaximumMbit
+
+class HasVdpReservationMbit a b | a -> b where
+    vdpReservationMbit :: P.Lens' a b
+
+instance HasVdpReservationMbit a b => HasVdpReservationMbit (TF.Schema l p a) b where
+    vdpReservationMbit = TF.configuration . vdpReservationMbit
+
+class HasVdpShareCount a b | a -> b where
+    vdpShareCount :: P.Lens' a b
+
+instance HasVdpShareCount a b => HasVdpShareCount (TF.Schema l p a) b where
+    vdpShareCount = TF.configuration . vdpShareCount
+
+class HasVdpShareLevel a b | a -> b where
+    vdpShareLevel :: P.Lens' a b
+
+instance HasVdpShareLevel a b => HasVdpShareLevel (TF.Schema l p a) b where
+    vdpShareLevel = TF.configuration . vdpShareLevel
+
+class HasVersion a b | a -> b where
+    version :: P.Lens' a b
+
+instance HasVersion a b => HasVersion (TF.Schema l p a) b where
+    version = TF.configuration . version
 
 class HasVimSessionPath a b | a -> b where
     vimSessionPath :: P.Lens' a b
@@ -2049,6 +2440,30 @@ class HasVirtualSwitchName a b | a -> b where
 instance HasVirtualSwitchName a b => HasVirtualSwitchName (TF.Schema l p a) b where
     virtualSwitchName = TF.configuration . virtualSwitchName
 
+class HasVirtualmachineMaximumMbit a b | a -> b where
+    virtualmachineMaximumMbit :: P.Lens' a b
+
+instance HasVirtualmachineMaximumMbit a b => HasVirtualmachineMaximumMbit (TF.Schema l p a) b where
+    virtualmachineMaximumMbit = TF.configuration . virtualmachineMaximumMbit
+
+class HasVirtualmachineReservationMbit a b | a -> b where
+    virtualmachineReservationMbit :: P.Lens' a b
+
+instance HasVirtualmachineReservationMbit a b => HasVirtualmachineReservationMbit (TF.Schema l p a) b where
+    virtualmachineReservationMbit = TF.configuration . virtualmachineReservationMbit
+
+class HasVirtualmachineShareCount a b | a -> b where
+    virtualmachineShareCount :: P.Lens' a b
+
+instance HasVirtualmachineShareCount a b => HasVirtualmachineShareCount (TF.Schema l p a) b where
+    virtualmachineShareCount = TF.configuration . virtualmachineShareCount
+
+class HasVirtualmachineShareLevel a b | a -> b where
+    virtualmachineShareLevel :: P.Lens' a b
+
+instance HasVirtualmachineShareLevel a b => HasVirtualmachineShareLevel (TF.Schema l p a) b where
+    virtualmachineShareLevel = TF.configuration . virtualmachineShareLevel
+
 class HasVlanId a b | a -> b where
     vlanId :: P.Lens' a b
 
@@ -2061,6 +2476,12 @@ class HasVlanOverrideAllowed a b | a -> b where
 instance HasVlanOverrideAllowed a b => HasVlanOverrideAllowed (TF.Schema l p a) b where
     vlanOverrideAllowed = TF.configuration . vlanOverrideAllowed
 
+class HasVlanRange a b | a -> b where
+    vlanRange :: P.Lens' a b
+
+instance HasVlanRange a b => HasVlanRange (TF.Schema l p a) b where
+    vlanRange = TF.configuration . vlanRange
+
 class HasVmGroupName a b | a -> b where
     vmGroupName :: P.Lens' a b
 
@@ -2072,6 +2493,54 @@ class HasVmdkPath a b | a -> b where
 
 instance HasVmdkPath a b => HasVmdkPath (TF.Schema l p a) b where
     vmdkPath = TF.configuration . vmdkPath
+
+class HasVmotionMaximumMbit a b | a -> b where
+    vmotionMaximumMbit :: P.Lens' a b
+
+instance HasVmotionMaximumMbit a b => HasVmotionMaximumMbit (TF.Schema l p a) b where
+    vmotionMaximumMbit = TF.configuration . vmotionMaximumMbit
+
+class HasVmotionReservationMbit a b | a -> b where
+    vmotionReservationMbit :: P.Lens' a b
+
+instance HasVmotionReservationMbit a b => HasVmotionReservationMbit (TF.Schema l p a) b where
+    vmotionReservationMbit = TF.configuration . vmotionReservationMbit
+
+class HasVmotionShareCount a b | a -> b where
+    vmotionShareCount :: P.Lens' a b
+
+instance HasVmotionShareCount a b => HasVmotionShareCount (TF.Schema l p a) b where
+    vmotionShareCount = TF.configuration . vmotionShareCount
+
+class HasVmotionShareLevel a b | a -> b where
+    vmotionShareLevel :: P.Lens' a b
+
+instance HasVmotionShareLevel a b => HasVmotionShareLevel (TF.Schema l p a) b where
+    vmotionShareLevel = TF.configuration . vmotionShareLevel
+
+class HasVsanMaximumMbit a b | a -> b where
+    vsanMaximumMbit :: P.Lens' a b
+
+instance HasVsanMaximumMbit a b => HasVsanMaximumMbit (TF.Schema l p a) b where
+    vsanMaximumMbit = TF.configuration . vsanMaximumMbit
+
+class HasVsanReservationMbit a b | a -> b where
+    vsanReservationMbit :: P.Lens' a b
+
+instance HasVsanReservationMbit a b => HasVsanReservationMbit (TF.Schema l p a) b where
+    vsanReservationMbit = TF.configuration . vsanReservationMbit
+
+class HasVsanShareCount a b | a -> b where
+    vsanShareCount :: P.Lens' a b
+
+instance HasVsanShareCount a b => HasVsanShareCount (TF.Schema l p a) b where
+    vsanShareCount = TF.configuration . vsanShareCount
+
+class HasVsanShareLevel a b | a -> b where
+    vsanShareLevel :: P.Lens' a b
+
+instance HasVsanShareLevel a b => HasVsanShareLevel (TF.Schema l p a) b where
+    vsanShareLevel = TF.configuration . vsanShareLevel
 
 class HasVsphereServer a b | a -> b where
     vsphereServer :: P.Lens' a b

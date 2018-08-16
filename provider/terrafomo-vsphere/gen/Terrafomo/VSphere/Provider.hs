@@ -124,7 +124,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "vsphere"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
             , TF.assign "client_debug" <$> _clientDebug

@@ -433,6 +433,11 @@ data DiskSetting s = DiskSetting'
     -- ^ @label@ - (Optional)
     -- A unique label for this disk.
     --
+    , _path            :: TF.Attr s P.Text
+    -- ^ @path@ - (Optional)
+    -- The full path of the virtual disk. This can only be provided if attach is
+    -- set to true, otherwise it is a read-only value.
+    --
     , _size            :: TF.Attr s P.Int
     -- ^ @size@ - (Optional)
     -- The size of the disk, in GB.
@@ -470,6 +475,7 @@ diskSetting =
         , _ioShareLevel = TF.value "normal"
         , _keepOnRemove = TF.value P.False
         , _label = TF.Nil
+        , _path = TF.Nil
         , _size = TF.Nil
         , _thinProvisioned = TF.value P.True
         , _unitNumber = TF.value 0
@@ -490,6 +496,7 @@ instance TF.IsObject (DiskSetting s) where
         , TF.assign "io_share_level" <$> TF.attribute _ioShareLevel
         , TF.assign "keep_on_remove" <$> TF.attribute _keepOnRemove
         , TF.assign "label" <$> TF.attribute _label
+        , TF.assign "path" <$> TF.attribute _path
         , TF.assign "size" <$> TF.attribute _size
         , TF.assign "thin_provisioned" <$> TF.attribute _thinProvisioned
         , TF.assign "unit_number" <$> TF.attribute _unitNumber
@@ -553,6 +560,11 @@ instance P.HasLabel (DiskSetting s) (TF.Attr s P.Text) where
     label =
         P.lens (_label :: DiskSetting s -> TF.Attr s P.Text)
                (\s a -> s { _label = a } :: DiskSetting s)
+
+instance P.HasPath (DiskSetting s) (TF.Attr s P.Text) where
+    path =
+        P.lens (_path :: DiskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _path = a } :: DiskSetting s)
 
 instance P.HasSize (DiskSetting s) (TF.Attr s P.Int) where
     size =
@@ -764,10 +776,19 @@ data NetworkInterfaceSetting s = NetworkInterfaceSetting'
     -- ^ @bandwidth_reservation@ - (Optional)
     -- The bandwidth reservation of this network interface, in Mbits/sec.
     --
+    , _bandwidthShareCount  :: TF.Attr s P.Int
+    -- ^ @bandwidth_share_count@ - (Optional)
+    -- The share count for this network interface when the share level is custom.
+    --
     , _bandwidthShareLevel  :: TF.Attr s P.Text
     -- ^ @bandwidth_share_level@ - (Optional)
     -- The bandwidth share allocation level for this interface. Can be one of low,
     -- normal, high, or custom.
+    --
+    , _macAddress           :: TF.Attr s P.Text
+    -- ^ @mac_address@ - (Optional)
+    -- The MAC address of this network interface. Can only be manually set if
+    -- use_static_mac is true.
     --
     , _networkId            :: TF.Attr s P.Text
     -- ^ @network_id@ - (Required)
@@ -795,7 +816,9 @@ networkInterfaceSetting _networkId =
         , _adapterType = TF.value "vmxnet3"
         , _bandwidthLimit = TF.value (-1)
         , _bandwidthReservation = TF.value 0
+        , _bandwidthShareCount = TF.Nil
         , _bandwidthShareLevel = TF.value "normal"
+        , _macAddress = TF.Nil
         , _networkId = _networkId
         , _useStaticMac = TF.Nil
         }
@@ -812,7 +835,9 @@ instance TF.IsObject (NetworkInterfaceSetting s) where
         , TF.assign "adapter_type" <$> TF.attribute _adapterType
         , TF.assign "bandwidth_limit" <$> TF.attribute _bandwidthLimit
         , TF.assign "bandwidth_reservation" <$> TF.attribute _bandwidthReservation
+        , TF.assign "bandwidth_share_count" <$> TF.attribute _bandwidthShareCount
         , TF.assign "bandwidth_share_level" <$> TF.attribute _bandwidthShareLevel
+        , TF.assign "mac_address" <$> TF.attribute _macAddress
         , TF.assign "network_id" <$> TF.attribute _networkId
         , TF.assign "use_static_mac" <$> TF.attribute _useStaticMac
         ]
@@ -865,10 +890,20 @@ instance P.HasBandwidthReservation (NetworkInterfaceSetting s) (TF.Attr s P.Int)
         P.lens (_bandwidthReservation :: NetworkInterfaceSetting s -> TF.Attr s P.Int)
                (\s a -> s { _bandwidthReservation = a } :: NetworkInterfaceSetting s)
 
+instance P.HasBandwidthShareCount (NetworkInterfaceSetting s) (TF.Attr s P.Int) where
+    bandwidthShareCount =
+        P.lens (_bandwidthShareCount :: NetworkInterfaceSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _bandwidthShareCount = a } :: NetworkInterfaceSetting s)
+
 instance P.HasBandwidthShareLevel (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
     bandwidthShareLevel =
         P.lens (_bandwidthShareLevel :: NetworkInterfaceSetting s -> TF.Attr s P.Text)
                (\s a -> s { _bandwidthShareLevel = a } :: NetworkInterfaceSetting s)
+
+instance P.HasMacAddress (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
+    macAddress =
+        P.lens (_macAddress :: NetworkInterfaceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _macAddress = a } :: NetworkInterfaceSetting s)
 
 instance P.HasNetworkId (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
     networkId =
