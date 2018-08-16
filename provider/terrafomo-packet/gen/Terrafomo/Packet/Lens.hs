@@ -23,15 +23,19 @@ module Terrafomo.Packet.Lens
     , HasDescription (..)
     , HasDeviceId (..)
     , HasFacility (..)
+    , HasHardwareReservationId (..)
     , HasHostname (..)
     , HasIpxeScriptUrl (..)
     , HasLocked (..)
     , HasLogo (..)
     , HasName (..)
     , HasOperatingSystem (..)
+    , HasOrganizationId (..)
+    , HasPaymentMethodId (..)
     , HasPlan (..)
     , HasProjectId (..)
     , HasPublic (..)
+    , HasPublicIpv4SubnetSize (..)
     , HasPublicKey (..)
     , HasQuantity (..)
     , HasSize (..)
@@ -131,6 +135,12 @@ class HasFacility a b | a -> b where
 instance HasFacility a b => HasFacility (TF.Schema l p a) b where
     facility = TF.configuration . facility
 
+class HasHardwareReservationId a b | a -> b where
+    hardwareReservationId :: P.Lens' a b
+
+instance HasHardwareReservationId a b => HasHardwareReservationId (TF.Schema l p a) b where
+    hardwareReservationId = TF.configuration . hardwareReservationId
+
 class HasHostname a b | a -> b where
     hostname :: P.Lens' a b
 
@@ -167,6 +177,18 @@ class HasOperatingSystem a b | a -> b where
 instance HasOperatingSystem a b => HasOperatingSystem (TF.Schema l p a) b where
     operatingSystem = TF.configuration . operatingSystem
 
+class HasOrganizationId a b | a -> b where
+    organizationId :: P.Lens' a b
+
+instance HasOrganizationId a b => HasOrganizationId (TF.Schema l p a) b where
+    organizationId = TF.configuration . organizationId
+
+class HasPaymentMethodId a b | a -> b where
+    paymentMethodId :: P.Lens' a b
+
+instance HasPaymentMethodId a b => HasPaymentMethodId (TF.Schema l p a) b where
+    paymentMethodId = TF.configuration . paymentMethodId
+
 class HasPlan a b | a -> b where
     plan :: P.Lens' a b
 
@@ -184,6 +206,12 @@ class HasPublic a b | a -> b where
 
 instance HasPublic a b => HasPublic (TF.Schema l p a) b where
     public = TF.configuration . public
+
+class HasPublicIpv4SubnetSize a b | a -> b where
+    publicIpv4SubnetSize :: P.Lens' a b
+
+instance HasPublicIpv4SubnetSize a b => HasPublicIpv4SubnetSize (TF.Schema l p a) b where
+    publicIpv4SubnetSize = TF.configuration . publicIpv4SubnetSize
 
 class HasPublicKey a b | a -> b where
     publicKey :: P.Lens' a b

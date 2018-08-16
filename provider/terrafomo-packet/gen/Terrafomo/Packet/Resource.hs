@@ -80,40 +80,46 @@ import qualified Terrafomo.Validator       as TF
 -- See the <https://www.terraform.io/docs/providers/packet/r/device.html terraform documentation>
 -- for more information.
 data DeviceResource s = DeviceResource'
-    { _alwaysPxe       :: TF.Attr s P.Bool
+    { _alwaysPxe             :: TF.Attr s P.Bool
     -- ^ @always_pxe@ - (Optional)
     --
-    , _billingCycle    :: TF.Attr s P.Text
+    , _billingCycle          :: TF.Attr s P.Text
     -- ^ @billing_cycle@ - (Required, Forces New)
     --
-    , _description     :: TF.Attr s P.Text
+    , _description           :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _facility        :: TF.Attr s P.Text
+    , _facility              :: TF.Attr s P.Text
     -- ^ @facility@ - (Required, Forces New)
     --
-    , _hostname        :: TF.Attr s P.Text
+    , _hardwareReservationId :: TF.Attr s P.Text
+    -- ^ @hardware_reservation_id@ - (Optional, Forces New)
+    --
+    , _hostname              :: TF.Attr s P.Text
     -- ^ @hostname@ - (Required)
     --
-    , _ipxeScriptUrl   :: TF.Attr s P.Text
+    , _ipxeScriptUrl         :: TF.Attr s P.Text
     -- ^ @ipxe_script_url@ - (Optional)
     --
-    , _operatingSystem :: TF.Attr s P.Text
+    , _operatingSystem       :: TF.Attr s P.Text
     -- ^ @operating_system@ - (Required, Forces New)
     --
-    , _plan            :: TF.Attr s P.Text
+    , _plan                  :: TF.Attr s P.Text
     -- ^ @plan@ - (Required, Forces New)
     --
-    , _projectId       :: TF.Attr s P.Text
+    , _projectId             :: TF.Attr s P.Text
     -- ^ @project_id@ - (Required, Forces New)
     --
-    , _storage         :: TF.Attr s P.Text
+    , _publicIpv4SubnetSize  :: TF.Attr s P.Int
+    -- ^ @public_ipv4_subnet_size@ - (Optional, Forces New)
+    --
+    , _storage               :: TF.Attr s P.Text
     -- ^ @storage@ - (Optional, Forces New)
     --
-    , _tags            :: TF.Attr s [TF.Attr s P.Text]
+    , _tags                  :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    , _userData        :: TF.Attr s P.Text
+    , _userData              :: TF.Attr s P.Text
     -- ^ @user_data@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -134,11 +140,13 @@ deviceResource _billingCycle _facility _hostname _projectId _plan _operatingSyst
             , _billingCycle = _billingCycle
             , _description = TF.Nil
             , _facility = _facility
+            , _hardwareReservationId = TF.Nil
             , _hostname = _hostname
             , _ipxeScriptUrl = TF.Nil
             , _operatingSystem = _operatingSystem
             , _plan = _plan
             , _projectId = _projectId
+            , _publicIpv4SubnetSize = TF.Nil
             , _storage = TF.Nil
             , _tags = TF.Nil
             , _userData = TF.Nil
@@ -150,11 +158,13 @@ instance TF.IsObject (DeviceResource s) where
         , TF.assign "billing_cycle" <$> TF.attribute _billingCycle
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "facility" <$> TF.attribute _facility
+        , TF.assign "hardware_reservation_id" <$> TF.attribute _hardwareReservationId
         , TF.assign "hostname" <$> TF.attribute _hostname
         , TF.assign "ipxe_script_url" <$> TF.attribute _ipxeScriptUrl
         , TF.assign "operating_system" <$> TF.attribute _operatingSystem
         , TF.assign "plan" <$> TF.attribute _plan
         , TF.assign "project_id" <$> TF.attribute _projectId
+        , TF.assign "public_ipv4_subnet_size" <$> TF.attribute _publicIpv4SubnetSize
         , TF.assign "storage" <$> TF.attribute _storage
         , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "user_data" <$> TF.attribute _userData
@@ -183,6 +193,11 @@ instance P.HasFacility (DeviceResource s) (TF.Attr s P.Text) where
         P.lens (_facility :: DeviceResource s -> TF.Attr s P.Text)
                (\s a -> s { _facility = a } :: DeviceResource s)
 
+instance P.HasHardwareReservationId (DeviceResource s) (TF.Attr s P.Text) where
+    hardwareReservationId =
+        P.lens (_hardwareReservationId :: DeviceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _hardwareReservationId = a } :: DeviceResource s)
+
 instance P.HasHostname (DeviceResource s) (TF.Attr s P.Text) where
     hostname =
         P.lens (_hostname :: DeviceResource s -> TF.Attr s P.Text)
@@ -207,6 +222,11 @@ instance P.HasProjectId (DeviceResource s) (TF.Attr s P.Text) where
     projectId =
         P.lens (_projectId :: DeviceResource s -> TF.Attr s P.Text)
                (\s a -> s { _projectId = a } :: DeviceResource s)
+
+instance P.HasPublicIpv4SubnetSize (DeviceResource s) (TF.Attr s P.Int) where
+    publicIpv4SubnetSize =
+        P.lens (_publicIpv4SubnetSize :: DeviceResource s -> TF.Attr s P.Int)
+               (\s a -> s { _publicIpv4SubnetSize = a } :: DeviceResource s)
 
 instance P.HasStorage (DeviceResource s) (TF.Attr s P.Text) where
     storage =
@@ -420,8 +440,14 @@ instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (OrganizationResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/packet/r/project.html terraform documentation>
 -- for more information.
 data ProjectResource s = ProjectResource'
-    { _name :: TF.Attr s P.Text
+    { _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
+    --
+    , _organizationId  :: TF.Attr s P.Text
+    -- ^ @organization_id@ - (Optional, Forces New)
+    --
+    , _paymentMethodId :: TF.Attr s P.Text
+    -- ^ @payment_method_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -433,11 +459,15 @@ projectResource _name =
     TF.unsafeResource "packet_project" TF.validator $
         ProjectResource'
             { _name = _name
+            , _organizationId = TF.Nil
+            , _paymentMethodId = TF.Nil
             }
 
 instance TF.IsObject (ProjectResource s) where
     toObject ProjectResource'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "organization_id" <$> TF.attribute _organizationId
+        , TF.assign "payment_method_id" <$> TF.attribute _paymentMethodId
         ]
 
 instance TF.IsValid (ProjectResource s) where
@@ -447,6 +477,16 @@ instance P.HasName (ProjectResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ProjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ProjectResource s)
+
+instance P.HasOrganizationId (ProjectResource s) (TF.Attr s P.Text) where
+    organizationId =
+        P.lens (_organizationId :: ProjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _organizationId = a } :: ProjectResource s)
+
+instance P.HasPaymentMethodId (ProjectResource s) (TF.Attr s P.Text) where
+    paymentMethodId =
+        P.lens (_paymentMethodId :: ProjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _paymentMethodId = a } :: ProjectResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -612,7 +652,10 @@ instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (SshKeyResource s)) (TF.Attr 
 -- See the <https://www.terraform.io/docs/providers/packet/r/volume.html terraform documentation>
 -- for more information.
 data VolumeResource s = VolumeResource'
-    { _description      :: TF.Attr s P.Text
+    { _billingCycle     :: TF.Attr s P.Text
+    -- ^ @billing_cycle@ - (Optional)
+    --
+    , _description      :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _facility         :: TF.Attr s P.Text
@@ -645,7 +688,8 @@ volumeResource
 volumeResource _facility _projectId _plan _size =
     TF.unsafeResource "packet_volume" TF.validator $
         VolumeResource'
-            { _description = TF.Nil
+            { _billingCycle = TF.Nil
+            , _description = TF.Nil
             , _facility = _facility
             , _locked = TF.Nil
             , _plan = _plan
@@ -656,7 +700,8 @@ volumeResource _facility _projectId _plan _size =
 
 instance TF.IsObject (VolumeResource s) where
     toObject VolumeResource'{..} = P.catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
+        [ TF.assign "billing_cycle" <$> TF.attribute _billingCycle
+        , TF.assign "description" <$> TF.attribute _description
         , TF.assign "facility" <$> TF.attribute _facility
         , TF.assign "locked" <$> TF.attribute _locked
         , TF.assign "plan" <$> TF.attribute _plan
@@ -667,6 +712,11 @@ instance TF.IsObject (VolumeResource s) where
 
 instance TF.IsValid (VolumeResource s) where
     validator = P.mempty
+
+instance P.HasBillingCycle (VolumeResource s) (TF.Attr s P.Text) where
+    billingCycle =
+        P.lens (_billingCycle :: VolumeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _billingCycle = a } :: VolumeResource s)
 
 instance P.HasDescription (VolumeResource s) (TF.Attr s P.Text) where
     description =
