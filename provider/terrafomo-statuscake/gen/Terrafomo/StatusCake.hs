@@ -12,11 +12,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.StatusCake
-    ( module Terrafomo.StatusCake.Types
-    , module Terrafomo.StatusCake.Settings
-    , module Terrafomo.StatusCake.Lens
+    ( module Terrafomo.StatusCake.Lens
     , module Terrafomo.StatusCake.Provider
     , module Terrafomo.StatusCake.Resource
+    , module Terrafomo.StatusCake.Settings
+    , module Terrafomo.StatusCake.Types
     -- * Provider Aliases
     ) where
 

@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.StatusCake.Settings
 
-import qualified Data.Hashable                 as P
-import qualified Data.HashMap.Strict           as P
-import qualified Data.HashMap.Strict           as Map
 import qualified Data.List.NonEmpty            as P
+import qualified Data.Map.Strict               as P
+import qualified Data.Map.Strict               as Map
 import qualified Data.Maybe                    as P
 import qualified Data.Monoid                   as P
 import qualified Data.Text                     as P
@@ -60,16 +59,16 @@ data TestResource s = TestResource'
     , _basicUser      :: TF.Attr s P.Text
     -- ^ @basic_user@ - (Optional)
     --
-    , _branding       :: TF.Attr s P.Integer
+    , _branding       :: TF.Attr s P.Int
     -- ^ @branding@ - (Optional)
     --
-    , _checkRate      :: TF.Attr s P.Integer
+    , _checkRate      :: TF.Attr s P.Int
     -- ^ @check_rate@ - (Optional)
     --
-    , _confirmations  :: TF.Attr s P.Integer
+    , _confirmations  :: TF.Attr s P.Int
     -- ^ @confirmations@ - (Optional)
     --
-    , _contactId      :: TF.Attr s P.Integer
+    , _contactId      :: TF.Attr s P.Int
     -- ^ @contact_id@ - (Optional)
     --
     , _customHeader   :: TF.Attr s P.Text
@@ -99,16 +98,16 @@ data TestResource s = TestResource'
     , _pingUrl        :: TF.Attr s P.Text
     -- ^ @ping_url@ - (Optional)
     --
-    , _port           :: TF.Attr s P.Integer
+    , _port           :: TF.Attr s P.Int
     -- ^ @port@ - (Optional)
     --
     , _postRaw        :: TF.Attr s P.Text
     -- ^ @post_raw@ - (Optional)
     --
-    , _public         :: TF.Attr s P.Integer
+    , _public         :: TF.Attr s P.Int
     -- ^ @public@ - (Optional)
     --
-    , _realBrowser    :: TF.Attr s P.Integer
+    , _realBrowser    :: TF.Attr s P.Int
     -- ^ @real_browser@ - (Optional)
     --
     , _statusCodes    :: TF.Attr s P.Text
@@ -120,19 +119,19 @@ data TestResource s = TestResource'
     , _testType       :: TF.Attr s P.Text
     -- ^ @test_type@ - (Required)
     --
-    , _timeout        :: TF.Attr s P.Integer
+    , _timeout        :: TF.Attr s P.Int
     -- ^ @timeout@ - (Optional)
     --
-    , _triggerRate    :: TF.Attr s P.Integer
+    , _triggerRate    :: TF.Attr s P.Int
     -- ^ @trigger_rate@ - (Optional)
     --
-    , _useJar         :: TF.Attr s P.Integer
+    , _useJar         :: TF.Attr s P.Int
     -- ^ @use_jar@ - (Optional)
     --
     , _userAgent      :: TF.Attr s P.Text
     -- ^ @user_agent@ - (Optional)
     --
-    , _virus          :: TF.Attr s P.Integer
+    , _virus          :: TF.Attr s P.Int
     -- ^ @virus@ - (Optional)
     --
     , _websiteHost    :: TF.Attr s P.Text
@@ -144,7 +143,7 @@ data TestResource s = TestResource'
     , _websiteUrl     :: TF.Attr s P.Text
     -- ^ @website_url@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 testResource
     :: TF.Attr s P.Text -- ^ @test_type@ - 'P.testType'
@@ -152,7 +151,7 @@ testResource
     -> TF.Attr s P.Text -- ^ @website_url@ - 'P.websiteUrl'
     -> P.Resource (TestResource s)
 testResource _testType _websiteName _websiteUrl =
-    TF.newResource "statuscake_test" TF.validator $
+    TF.unsafeResource "statuscake_test" P.defaultProvider TF.validator $
         TestResource'
             { _basicPass = TF.Nil
             , _basicUser = TF.Nil
@@ -233,24 +232,24 @@ instance P.HasBasicUser (TestResource s) (TF.Attr s P.Text) where
         P.lens (_basicUser :: TestResource s -> TF.Attr s P.Text)
                (\s a -> s { _basicUser = a } :: TestResource s)
 
-instance P.HasBranding (TestResource s) (TF.Attr s P.Integer) where
+instance P.HasBranding (TestResource s) (TF.Attr s P.Int) where
     branding =
-        P.lens (_branding :: TestResource s -> TF.Attr s P.Integer)
+        P.lens (_branding :: TestResource s -> TF.Attr s P.Int)
                (\s a -> s { _branding = a } :: TestResource s)
 
-instance P.HasCheckRate (TestResource s) (TF.Attr s P.Integer) where
+instance P.HasCheckRate (TestResource s) (TF.Attr s P.Int) where
     checkRate =
-        P.lens (_checkRate :: TestResource s -> TF.Attr s P.Integer)
+        P.lens (_checkRate :: TestResource s -> TF.Attr s P.Int)
                (\s a -> s { _checkRate = a } :: TestResource s)
 
-instance P.HasConfirmations (TestResource s) (TF.Attr s P.Integer) where
+instance P.HasConfirmations (TestResource s) (TF.Attr s P.Int) where
     confirmations =
-        P.lens (_confirmations :: TestResource s -> TF.Attr s P.Integer)
+        P.lens (_confirmations :: TestResource s -> TF.Attr s P.Int)
                (\s a -> s { _confirmations = a } :: TestResource s)
 
-instance P.HasContactId (TestResource s) (TF.Attr s P.Integer) where
+instance P.HasContactId (TestResource s) (TF.Attr s P.Int) where
     contactId =
-        P.lens (_contactId :: TestResource s -> TF.Attr s P.Integer)
+        P.lens (_contactId :: TestResource s -> TF.Attr s P.Int)
                (\s a -> s { _contactId = a } :: TestResource s)
 
 instance P.HasCustomHeader (TestResource s) (TF.Attr s P.Text) where
@@ -298,9 +297,9 @@ instance P.HasPingUrl (TestResource s) (TF.Attr s P.Text) where
         P.lens (_pingUrl :: TestResource s -> TF.Attr s P.Text)
                (\s a -> s { _pingUrl = a } :: TestResource s)
 
-instance P.HasPort (TestResource s) (TF.Attr s P.Integer) where
+instance P.HasPort (TestResource s) (TF.Attr s P.Int) where
     port =
-        P.lens (_port :: TestResource s -> TF.Attr s P.Integer)
+        P.lens (_port :: TestResource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: TestResource s)
 
 instance P.HasPostRaw (TestResource s) (TF.Attr s P.Text) where
@@ -308,14 +307,14 @@ instance P.HasPostRaw (TestResource s) (TF.Attr s P.Text) where
         P.lens (_postRaw :: TestResource s -> TF.Attr s P.Text)
                (\s a -> s { _postRaw = a } :: TestResource s)
 
-instance P.HasPublic (TestResource s) (TF.Attr s P.Integer) where
+instance P.HasPublic (TestResource s) (TF.Attr s P.Int) where
     public =
-        P.lens (_public :: TestResource s -> TF.Attr s P.Integer)
+        P.lens (_public :: TestResource s -> TF.Attr s P.Int)
                (\s a -> s { _public = a } :: TestResource s)
 
-instance P.HasRealBrowser (TestResource s) (TF.Attr s P.Integer) where
+instance P.HasRealBrowser (TestResource s) (TF.Attr s P.Int) where
     realBrowser =
-        P.lens (_realBrowser :: TestResource s -> TF.Attr s P.Integer)
+        P.lens (_realBrowser :: TestResource s -> TF.Attr s P.Int)
                (\s a -> s { _realBrowser = a } :: TestResource s)
 
 instance P.HasStatusCodes (TestResource s) (TF.Attr s P.Text) where
@@ -333,19 +332,19 @@ instance P.HasTestType (TestResource s) (TF.Attr s P.Text) where
         P.lens (_testType :: TestResource s -> TF.Attr s P.Text)
                (\s a -> s { _testType = a } :: TestResource s)
 
-instance P.HasTimeout (TestResource s) (TF.Attr s P.Integer) where
+instance P.HasTimeout (TestResource s) (TF.Attr s P.Int) where
     timeout =
-        P.lens (_timeout :: TestResource s -> TF.Attr s P.Integer)
+        P.lens (_timeout :: TestResource s -> TF.Attr s P.Int)
                (\s a -> s { _timeout = a } :: TestResource s)
 
-instance P.HasTriggerRate (TestResource s) (TF.Attr s P.Integer) where
+instance P.HasTriggerRate (TestResource s) (TF.Attr s P.Int) where
     triggerRate =
-        P.lens (_triggerRate :: TestResource s -> TF.Attr s P.Integer)
+        P.lens (_triggerRate :: TestResource s -> TF.Attr s P.Int)
                (\s a -> s { _triggerRate = a } :: TestResource s)
 
-instance P.HasUseJar (TestResource s) (TF.Attr s P.Integer) where
+instance P.HasUseJar (TestResource s) (TF.Attr s P.Int) where
     useJar =
-        P.lens (_useJar :: TestResource s -> TF.Attr s P.Integer)
+        P.lens (_useJar :: TestResource s -> TF.Attr s P.Int)
                (\s a -> s { _useJar = a } :: TestResource s)
 
 instance P.HasUserAgent (TestResource s) (TF.Attr s P.Text) where
@@ -353,9 +352,9 @@ instance P.HasUserAgent (TestResource s) (TF.Attr s P.Text) where
         P.lens (_userAgent :: TestResource s -> TF.Attr s P.Text)
                (\s a -> s { _userAgent = a } :: TestResource s)
 
-instance P.HasVirus (TestResource s) (TF.Attr s P.Integer) where
+instance P.HasVirus (TestResource s) (TF.Attr s P.Int) where
     virus =
-        P.lens (_virus :: TestResource s -> TF.Attr s P.Integer)
+        P.lens (_virus :: TestResource s -> TF.Attr s P.Int)
                (\s a -> s { _virus = a } :: TestResource s)
 
 instance P.HasWebsiteHost (TestResource s) (TF.Attr s P.Text) where
