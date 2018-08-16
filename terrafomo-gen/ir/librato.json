@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "attributesSetting",
+                "smart": "newAttributesSetting",
                 "name": "AttributesSetting'"
             },
             "arguments": [
@@ -189,7 +189,7 @@
         },
         {
             "con": {
-                "smart": "conditionSetting",
+                "smart": "newConditionSetting",
                 "name": "ConditionSetting'"
             },
             "arguments": [
@@ -359,7 +359,7 @@
         },
         {
             "con": {
-                "smart": "streamSetting",
+                "smart": "newStreamSetting",
                 "name": "StreamSetting'"
             },
             "arguments": [
