@@ -2,6 +2,9 @@ resolver: lts-11.19
 
 local-bin-path: bin
 
+build:
+  copy-bins: true
+
 nix:
   enable: true
   add-gc-roots: true
