@@ -12,12 +12,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Chef
-    ( module Terrafomo.Chef.Lens
-    , module Terrafomo.Chef.Provider
-    , module Terrafomo.Chef.Resource
-    , module Terrafomo.Chef.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Chef.Provider
+
+    -- * Custom Types
     , module Terrafomo.Chef.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+
+    -- * Resources
+    , module Terrafomo.Chef.Resource
+
+    -- * Settings
+    , module Terrafomo.Chef.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Chef.Lens
     ) where
 
 import Terrafomo.Chef.Lens

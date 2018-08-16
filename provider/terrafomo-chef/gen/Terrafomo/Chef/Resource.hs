@@ -17,7 +17,6 @@
 --
 module Terrafomo.Chef.Resource
     (
-    -- * Resource Datatypes
     -- ** chef_data_bag
       DataBagResource (..)
     , dataBagResource
@@ -74,6 +73,7 @@ data DataBagResource s = DataBagResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @chef_data_bag@ resource value.
 dataBagResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DataBagResource s)
@@ -115,6 +115,7 @@ data DataBagItemResource s = DataBagItemResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @chef_data_bag_item@ resource value.
 dataBagItemResource
     :: TF.Attr s P.Text -- ^ @content_json@ - 'P.contentJson'
     -> TF.Attr s P.Text -- ^ @data_bag_name@ - 'P.dataBagName'
@@ -170,6 +171,7 @@ data EnvironmentResource s = EnvironmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @chef_environment@ resource value.
 environmentResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (EnvironmentResource s)
@@ -251,6 +253,7 @@ data NodeResource s = NodeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @chef_node@ resource value.
 nodeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NodeResource s)
@@ -340,6 +343,7 @@ data RoleResource s = RoleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @chef_role@ resource value.
 roleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RoleResource s)
