@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Consul
-    ( module Terrafomo.Consul.DataSource
-    , module Terrafomo.Consul.Lens
-    , module Terrafomo.Consul.Provider
-    , module Terrafomo.Consul.Resource
-    , module Terrafomo.Consul.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Consul.Provider
+
+    -- * Custom Types
     , module Terrafomo.Consul.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.Consul.DataSource
+
+    -- * Resources
+    , module Terrafomo.Consul.Resource
+
+    -- * Settings
+    , module Terrafomo.Consul.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Consul.Lens
     ) where
 
 import Terrafomo.Consul.DataSource

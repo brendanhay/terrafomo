@@ -17,7 +17,6 @@
 --
 module Terrafomo.Consul.Settings
     (
-    -- * Settings Datatypes
     -- ** addresses
       AddressesSetting (..)
     , newAddressesSetting
@@ -117,6 +116,7 @@ import qualified Terrafomo.Validator    as TF
 data AddressesSetting s = AddressesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @addresses@ settings value.
 newAddressesSetting
     :: AddressesSetting s
 newAddressesSetting =
@@ -145,6 +145,7 @@ instance s ~ s' => P.HasComputedRpc (TF.Ref s' (AddressesSetting s)) (TF.Attr s 
 data AdvertiseAddrsSetting s = AdvertiseAddrsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @advertise_addrs@ settings value.
 newAdvertiseAddrsSetting
     :: AdvertiseAddrsSetting s
 newAdvertiseAddrsSetting =
@@ -173,6 +174,7 @@ data DnsSetting s = DnsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @dns@ settings value.
 newDnsSetting
     :: DnsSetting s
 newDnsSetting =
@@ -231,6 +233,7 @@ data FailoverSetting s = FailoverSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @failover@ settings value.
 newFailoverSetting
     :: FailoverSetting s
 newFailoverSetting =
@@ -275,6 +278,7 @@ data KeySetting s = KeySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @key@ settings value.
 newKeySetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
@@ -326,6 +330,7 @@ instance s ~ s' => P.HasComputedValue (TF.Ref s' (KeySetting s)) (TF.Attr s P.Te
 data NodesSetting s = NodesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @nodes@ settings value.
 newNodesSetting
     :: NodesSetting s
 newNodesSetting =
@@ -357,6 +362,7 @@ instance s ~ s' => P.HasComputedTaggedAddresses (TF.Ref s' (NodesSetting s)) (TF
 data PerformanceSetting s = PerformanceSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @performance@ settings value.
 newPerformanceSetting
     :: PerformanceSetting s
 newPerformanceSetting =
@@ -376,6 +382,7 @@ instance s ~ s' => P.HasComputedRaftMultiplier (TF.Ref s' (PerformanceSetting s)
 data PortsSetting s = PortsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @ports@ settings value.
 newPortsSetting
     :: PortsSetting s
 newPortsSetting =
@@ -437,6 +444,7 @@ data QueryOptionsSetting s = QueryOptionsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @query_options@ settings value.
 newQueryOptionsSetting
     :: QueryOptionsSetting s
 newQueryOptionsSetting =
@@ -511,6 +519,7 @@ instance P.HasWaitTime (QueryOptionsSetting s) (TF.Attr s P.Text) where
 data RetryJoinEc2Setting s = RetryJoinEc2Setting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @retry_join_ec2@ settings value.
 newRetryJoinEc2Setting
     :: RetryJoinEc2Setting s
 newRetryJoinEc2Setting =
@@ -536,6 +545,7 @@ instance s ~ s' => P.HasComputedTagValue (TF.Ref s' (RetryJoinEc2Setting s)) (TF
 data RetryJoinGceSetting s = RetryJoinGceSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @retry_join_gce@ settings value.
 newRetryJoinGceSetting
     :: RetryJoinGceSetting s
 newRetryJoinGceSetting =
@@ -576,6 +586,7 @@ data ServiceSetting s = ServiceSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @service@ settings value.
 newServiceSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> ServiceSetting s
@@ -662,6 +673,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (ServiceSetting s)) (TF.Attr s [
 data ServicesSetting s = ServicesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @services@ settings value.
 newServicesSetting
     :: ServicesSetting s
 newServicesSetting =
@@ -690,6 +702,7 @@ data SubkeySetting s = SubkeySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @subkey@ settings value.
 newSubkeySetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
@@ -731,6 +744,7 @@ instance P.HasPath (SubkeySetting s) (TF.Attr s P.Text) where
 data TaggedAddressesSetting s = TaggedAddressesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @tagged_addresses@ settings value.
 newTaggedAddressesSetting
     :: TaggedAddressesSetting s
 newTaggedAddressesSetting =
@@ -753,6 +767,7 @@ instance s ~ s' => P.HasComputedWan (TF.Ref s' (TaggedAddressesSetting s)) (TF.A
 data TelemetrySetting s = TelemetrySetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @telemetry@ settings value.
 newTelemetrySetting
     :: TelemetrySetting s
 newTelemetrySetting =
@@ -832,6 +847,7 @@ data TemplateSetting s = TemplateSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @template@ settings value.
 newTemplateSetting
     :: TF.Attr s P.Text -- ^ @regexp@ - 'P.regexp'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -866,6 +882,7 @@ instance P.HasType' (TemplateSetting s) (TF.Attr s P.Text) where
 data UnixSocketsSetting s = UnixSocketsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @unix_sockets@ settings value.
 newUnixSocketsSetting
     :: UnixSocketsSetting s
 newUnixSocketsSetting =

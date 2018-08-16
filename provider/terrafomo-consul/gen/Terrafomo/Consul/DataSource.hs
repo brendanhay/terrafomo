@@ -17,7 +17,6 @@
 --
 module Terrafomo.Consul.DataSource
     (
-    -- * DataSource Datatypes
     -- ** consul_agent_config
       AgentConfigData (..)
     , agentConfigData
@@ -91,6 +90,7 @@ import qualified Terrafomo.Validator       as TF
 data AgentConfigData s = AgentConfigData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @consul_agent_config@ datasource value.
 agentConfigData
     :: P.DataSource (AgentConfigData s)
 agentConfigData =
@@ -131,6 +131,7 @@ instance s ~ s' => P.HasComputedVersion (TF.Ref s' (AgentConfigData s)) (TF.Attr
 data AgentSelfData s = AgentSelfData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @consul_agent_self@ datasource value.
 agentSelfData
     :: P.DataSource (AgentSelfData s)
 agentSelfData =
@@ -369,6 +370,7 @@ data CatalogNodesData s = CatalogNodesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @consul_catalog_nodes@ datasource value.
 catalogNodesData
     :: P.DataSource (CatalogNodesData s)
 catalogNodesData =
@@ -424,6 +426,7 @@ data CatalogServiceData s = CatalogServiceData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @consul_catalog_service@ datasource value.
 catalogServiceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CatalogServiceData s)
@@ -483,6 +486,7 @@ data CatalogServicesData s = CatalogServicesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @consul_catalog_services@ datasource value.
 catalogServicesData
     :: P.DataSource (CatalogServicesData s)
 catalogServicesData =
@@ -532,6 +536,7 @@ data KeyPrefixData s = KeyPrefixData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @consul_key_prefix@ datasource value.
 keyPrefixData
     :: TF.Attr s P.Text -- ^ @path_prefix@ - 'P.pathPrefix'
     -> P.DataSource (KeyPrefixData s)
@@ -593,6 +598,7 @@ data KeysData s = KeysData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @consul_keys@ datasource value.
 keysData
     :: P.DataSource (KeysData s)
 keysData =
@@ -640,6 +646,7 @@ data NodesData s = NodesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @consul_nodes@ datasource value.
 nodesData
     :: P.DataSource (NodesData s)
 nodesData =
@@ -695,6 +702,7 @@ data ServiceData s = ServiceData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @consul_service@ datasource value.
 serviceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ServiceData s)
@@ -754,6 +762,7 @@ data ServicesData s = ServicesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @consul_services@ datasource value.
 servicesData
     :: P.DataSource (ServicesData s)
 servicesData =

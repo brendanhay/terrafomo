@@ -17,11 +17,10 @@
 --
 module Terrafomo.Consul.Provider
     (
-    -- * Consul Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * Consul Specific Aliases
+    -- ** Consul Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -108,7 +107,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "consul"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "address" <$> _address
             , TF.assign "ca_file" <$> _caFile

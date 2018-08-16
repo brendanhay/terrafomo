@@ -17,7 +17,6 @@
 --
 module Terrafomo.Consul.Resource
     (
-    -- * Resource Datatypes
     -- ** consul_agent_service
       AgentServiceResource (..)
     , agentServiceResource
@@ -92,6 +91,7 @@ data AgentServiceResource s = AgentServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @consul_agent_service@ resource value.
 agentServiceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (AgentServiceResource s)
@@ -153,6 +153,7 @@ data CatalogEntryResource s = CatalogEntryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @consul_catalog_entry@ resource value.
 catalogEntryResource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @node@ - 'P.node'
@@ -225,6 +226,7 @@ data IntentionResource s = IntentionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @consul_intention@ resource value.
 intentionResource
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @destination_name@ - 'P.destinationName'
@@ -296,6 +298,7 @@ data KeyPrefixResource s = KeyPrefixResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @consul_key_prefix@ resource value.
 keyPrefixResource
     :: TF.Attr s P.Text -- ^ @path_prefix@ - 'P.pathPrefix'
     -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @subkeys@ - 'P.subkeys'
@@ -352,6 +355,7 @@ data KeysResource s = KeysResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @consul_keys@ resource value.
 keysResource
     :: P.Resource (KeysResource s)
 keysResource =
@@ -405,6 +409,7 @@ data NodeResource s = NodeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @consul_node@ resource value.
 nodeResource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -491,6 +496,7 @@ data PreparedQueryResource s = PreparedQueryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @consul_prepared_query@ resource value.
 preparedQueryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @service@ - 'P.service'
@@ -625,6 +631,7 @@ data ServiceResource s = ServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @consul_service@ resource value.
 serviceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @node@ - 'P.node'
