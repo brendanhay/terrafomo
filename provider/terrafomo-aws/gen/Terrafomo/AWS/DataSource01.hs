@@ -2475,10 +2475,10 @@ data EcsContainerDefinitionData s = EcsContainerDefinitionData'
     } deriving (P.Show, P.Eq, P.Ord)
 
 ecsContainerDefinitionData
-    :: TF.Attr s P.Text -- ^ @container_name@ - 'P.containerName'
-    -> TF.Attr s P.Text -- ^ @task_definition@ - 'P.taskDefinition'
+    :: TF.Attr s P.Text -- ^ @task_definition@ - 'P.taskDefinition'
+    -> TF.Attr s P.Text -- ^ @container_name@ - 'P.containerName'
     -> P.DataSource (EcsContainerDefinitionData s)
-ecsContainerDefinitionData _containerName _taskDefinition =
+ecsContainerDefinitionData _taskDefinition _containerName =
     TF.unsafeDataSource "aws_ecs_container_definition" TF.validator $
         EcsContainerDefinitionData'
             { _containerName = _containerName
@@ -4492,10 +4492,10 @@ data LambdaInvocationData s = LambdaInvocationData'
     } deriving (P.Show, P.Eq, P.Ord)
 
 lambdaInvocationData
-    :: TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
-    -> TF.Attr s P.Text -- ^ @input@ - 'P.input'
+    :: TF.Attr s P.Text -- ^ @input@ - 'P.input'
+    -> TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
     -> P.DataSource (LambdaInvocationData s)
-lambdaInvocationData _functionName _input =
+lambdaInvocationData _input _functionName =
     TF.unsafeDataSource "aws_lambda_invocation" TF.validator $
         LambdaInvocationData'
             { _functionName = _functionName
@@ -5161,10 +5161,10 @@ data PricingProductData s = PricingProductData'
     } deriving (P.Show, P.Eq, P.Ord)
 
 pricingProductData
-    :: TF.Attr s (P.NonEmpty (TF.Attr s (FiltersSetting s))) -- ^ @filters@ - 'P.filters'
-    -> TF.Attr s P.Text -- ^ @service_code@ - 'P.serviceCode'
+    :: TF.Attr s P.Text -- ^ @service_code@ - 'P.serviceCode'
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (FiltersSetting s))) -- ^ @filters@ - 'P.filters'
     -> P.DataSource (PricingProductData s)
-pricingProductData _filters _serviceCode =
+pricingProductData _serviceCode _filters =
     TF.unsafeDataSource "aws_pricing_product" TF.validator $
         PricingProductData'
             { _filters = _filters
@@ -6224,10 +6224,10 @@ data StoragegatewayLocalDiskData s = StoragegatewayLocalDiskData'
     } deriving (P.Show, P.Eq, P.Ord)
 
 storagegatewayLocalDiskData
-    :: TF.Attr s P.Text -- ^ @disk_path@ - 'P.diskPath'
-    -> TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
+    :: TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
+    -> TF.Attr s P.Text -- ^ @disk_path@ - 'P.diskPath'
     -> P.DataSource (StoragegatewayLocalDiskData s)
-storagegatewayLocalDiskData _diskPath _gatewayArn =
+storagegatewayLocalDiskData _gatewayArn _diskPath =
     TF.unsafeDataSource "aws_storagegateway_local_disk" TF.validator $
         StoragegatewayLocalDiskData'
             { _diskPath = _diskPath

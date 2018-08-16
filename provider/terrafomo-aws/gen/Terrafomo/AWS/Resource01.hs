@@ -464,10 +464,10 @@ data AcmCertificateResource s = AcmCertificateResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 acmCertificateResource
-    :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
-    -> TF.Attr s P.Text -- ^ @validation_method@ - 'P.validationMethod'
+    :: TF.Attr s P.Text -- ^ @validation_method@ - 'P.validationMethod'
+    -> TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
     -> P.Resource (AcmCertificateResource s)
-acmCertificateResource _domainName _validationMethod =
+acmCertificateResource _validationMethod _domainName =
     TF.unsafeResource "aws_acm_certificate" TF.validator $
         AcmCertificateResource'
             { _domainName = _domainName
@@ -930,10 +930,10 @@ data AlbListenerRuleResource s = AlbListenerRuleResource'
 
 albListenerRuleResource
     :: TF.Attr s [TF.Attr s (ActionSetting s)] -- ^ @action@ - 'P.action'
-    -> TF.Attr s [TF.Attr s (ConditionSetting s)] -- ^ @condition@ - 'P.condition'
     -> TF.Attr s P.Text -- ^ @listener_arn@ - 'P.listenerArn'
+    -> TF.Attr s [TF.Attr s (ConditionSetting s)] -- ^ @condition@ - 'P.condition'
     -> P.Resource (AlbListenerRuleResource s)
-albListenerRuleResource _action _condition _listenerArn =
+albListenerRuleResource _action _listenerArn _condition =
     TF.unsafeResource "aws_alb_listener_rule" TF.validator $
         AlbListenerRuleResource'
             { _action = _action
@@ -1007,11 +1007,11 @@ data AlbTargetGroupResource s = AlbTargetGroupResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 albTargetGroupResource
-    :: TF.Attr s P.Int -- ^ @port@ - 'P.port'
+    :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
-    -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.Resource (AlbTargetGroupResource s)
-albTargetGroupResource _port _protocol _vpcId =
+albTargetGroupResource _vpcId _port _protocol =
     TF.unsafeResource "aws_alb_target_group" TF.validator $
         AlbTargetGroupResource'
             { _deregistrationDelay = TF.value 300
@@ -1327,11 +1327,11 @@ data AmiCopyResource s = AmiCopyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 amiCopyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @source_ami_id@ - 'P.sourceAmiId'
+    :: TF.Attr s P.Text -- ^ @source_ami_id@ - 'P.sourceAmiId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @source_ami_region@ - 'P.sourceAmiRegion'
     -> P.Resource (AmiCopyResource s)
-amiCopyResource _name _sourceAmiId _sourceAmiRegion =
+amiCopyResource _sourceAmiId _name _sourceAmiRegion =
     TF.unsafeResource "aws_ami_copy" TF.validator $
         AmiCopyResource'
             { _description = TF.Nil
@@ -1447,10 +1447,10 @@ data AmiFromInstanceResource s = AmiFromInstanceResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 amiFromInstanceResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @source_instance_id@ - 'P.sourceInstanceId'
+    :: TF.Attr s P.Text -- ^ @source_instance_id@ - 'P.sourceInstanceId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (AmiFromInstanceResource s)
-amiFromInstanceResource _name _sourceInstanceId =
+amiFromInstanceResource _sourceInstanceId _name =
     TF.unsafeResource "aws_ami_from_instance" TF.validator $
         AmiFromInstanceResource'
             { _description = TF.Nil
@@ -1706,10 +1706,10 @@ data ApiGatewayAuthorizerResource s = ApiGatewayAuthorizerResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 apiGatewayAuthorizerResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
+    :: TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ApiGatewayAuthorizerResource s)
-apiGatewayAuthorizerResource _name _restApiId =
+apiGatewayAuthorizerResource _restApiId _name =
     TF.unsafeResource "aws_api_gateway_authorizer" TF.validator $
         ApiGatewayAuthorizerResource'
             { _authorizerCredentials = TF.Nil
@@ -1986,11 +1986,11 @@ data ApiGatewayDocumentationPartResource s = ApiGatewayDocumentationPartResource
     } deriving (P.Show, P.Eq, P.Ord)
 
 apiGatewayDocumentationPartResource
-    :: TF.Attr s (LocationSetting s) -- ^ @location@ - 'P.location'
+    :: TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
+    -> TF.Attr s (LocationSetting s) -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @properties@ - 'P.properties'
-    -> TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
     -> P.Resource (ApiGatewayDocumentationPartResource s)
-apiGatewayDocumentationPartResource _location _properties _restApiId =
+apiGatewayDocumentationPartResource _restApiId _location _properties =
     TF.unsafeResource "aws_api_gateway_documentation_part" TF.validator $
         ApiGatewayDocumentationPartResource'
             { _location = _location
@@ -2297,10 +2297,10 @@ data ApiGatewayGatewayResponseResource s = ApiGatewayGatewayResponseResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 apiGatewayGatewayResponseResource
-    :: TF.Attr s P.Text -- ^ @response_type@ - 'P.responseType'
-    -> TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
+    :: TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
+    -> TF.Attr s P.Text -- ^ @response_type@ - 'P.responseType'
     -> P.Resource (ApiGatewayGatewayResponseResource s)
-apiGatewayGatewayResponseResource _responseType _restApiId =
+apiGatewayGatewayResponseResource _restApiId _responseType =
     TF.unsafeResource "aws_api_gateway_gateway_response" TF.validator $
         ApiGatewayGatewayResponseResource'
             { _responseParameters = TF.Nil
@@ -2397,12 +2397,12 @@ data ApiGatewayIntegrationResource s = ApiGatewayIntegrationResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 apiGatewayIntegrationResource
-    :: TF.Attr s P.Text -- ^ @http_method@ - 'P.httpMethod'
-    -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
+    :: TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
     -> TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
+    -> TF.Attr s P.Text -- ^ @http_method@ - 'P.httpMethod'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (ApiGatewayIntegrationResource s)
-apiGatewayIntegrationResource _httpMethod _resourceId _restApiId _type' =
+apiGatewayIntegrationResource _resourceId _restApiId _httpMethod _type' =
     TF.unsafeResource "aws_api_gateway_integration" TF.validator $
         ApiGatewayIntegrationResource'
             { _cacheKeyParameters = TF.Nil
@@ -2550,12 +2550,12 @@ data ApiGatewayIntegrationResponseResource s = ApiGatewayIntegrationResponseReso
     } deriving (P.Show, P.Eq, P.Ord)
 
 apiGatewayIntegrationResponseResource
-    :: TF.Attr s P.Text -- ^ @http_method@ - 'P.httpMethod'
+    :: TF.Attr s P.Text -- ^ @status_code@ - 'P.statusCode'
     -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
     -> TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
-    -> TF.Attr s P.Text -- ^ @status_code@ - 'P.statusCode'
+    -> TF.Attr s P.Text -- ^ @http_method@ - 'P.httpMethod'
     -> P.Resource (ApiGatewayIntegrationResponseResource s)
-apiGatewayIntegrationResponseResource _httpMethod _resourceId _restApiId _statusCode =
+apiGatewayIntegrationResponseResource _statusCode _resourceId _restApiId _httpMethod =
     TF.unsafeResource "aws_api_gateway_integration_response" TF.validator $
         ApiGatewayIntegrationResponseResource'
             { _contentHandling = TF.Nil
@@ -2662,11 +2662,11 @@ data ApiGatewayMethodResource s = ApiGatewayMethodResource'
 
 apiGatewayMethodResource
     :: TF.Attr s P.Text -- ^ @authorization@ - 'P.authorization'
-    -> TF.Attr s P.Text -- ^ @http_method@ - 'P.httpMethod'
     -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
     -> TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
+    -> TF.Attr s P.Text -- ^ @http_method@ - 'P.httpMethod'
     -> P.Resource (ApiGatewayMethodResource s)
-apiGatewayMethodResource _authorization _httpMethod _resourceId _restApiId =
+apiGatewayMethodResource _authorization _resourceId _restApiId _httpMethod =
     TF.unsafeResource "aws_api_gateway_method" TF.validator $
         ApiGatewayMethodResource'
             { _apiKeyRequired = TF.value P.False
@@ -2774,12 +2774,12 @@ data ApiGatewayMethodResponseResource s = ApiGatewayMethodResponseResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 apiGatewayMethodResponseResource
-    :: TF.Attr s P.Text -- ^ @http_method@ - 'P.httpMethod'
+    :: TF.Attr s P.Text -- ^ @status_code@ - 'P.statusCode'
     -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
     -> TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
-    -> TF.Attr s P.Text -- ^ @status_code@ - 'P.statusCode'
+    -> TF.Attr s P.Text -- ^ @http_method@ - 'P.httpMethod'
     -> P.Resource (ApiGatewayMethodResponseResource s)
-apiGatewayMethodResponseResource _httpMethod _resourceId _restApiId _statusCode =
+apiGatewayMethodResponseResource _statusCode _resourceId _restApiId _httpMethod =
     TF.unsafeResource "aws_api_gateway_method_response" TF.validator $
         ApiGatewayMethodResponseResource'
             { _httpMethod = _httpMethod
@@ -2853,12 +2853,12 @@ data ApiGatewayMethodSettingsResource s = ApiGatewayMethodSettingsResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 apiGatewayMethodSettingsResource
-    :: TF.Attr s P.Text -- ^ @method_path@ - 'P.methodPath'
-    -> TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
-    -> TF.Attr s (SettingsSetting s) -- ^ @settings@ - 'P.settings'
+    :: TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
     -> TF.Attr s P.Text -- ^ @stage_name@ - 'P.stageName'
+    -> TF.Attr s P.Text -- ^ @method_path@ - 'P.methodPath'
+    -> TF.Attr s (SettingsSetting s) -- ^ @settings@ - 'P.settings'
     -> P.Resource (ApiGatewayMethodSettingsResource s)
-apiGatewayMethodSettingsResource _methodPath _restApiId _settings _stageName =
+apiGatewayMethodSettingsResource _restApiId _stageName _methodPath _settings =
     TF.unsafeResource "aws_api_gateway_method_settings" TF.validator $
         ApiGatewayMethodSettingsResource'
             { _methodPath = _methodPath
@@ -2925,11 +2925,11 @@ data ApiGatewayModelResource s = ApiGatewayModelResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 apiGatewayModelResource
-    :: TF.Attr s P.Text -- ^ @content_type@ - 'P.contentType'
+    :: TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
+    -> TF.Attr s P.Text -- ^ @content_type@ - 'P.contentType'
     -> P.Resource (ApiGatewayModelResource s)
-apiGatewayModelResource _contentType _name _restApiId =
+apiGatewayModelResource _restApiId _name _contentType =
     TF.unsafeResource "aws_api_gateway_model" TF.validator $
         ApiGatewayModelResource'
             { _contentType = _contentType
@@ -2996,10 +2996,10 @@ data ApiGatewayRequestValidatorResource s = ApiGatewayRequestValidatorResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 apiGatewayRequestValidatorResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
+    :: TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ApiGatewayRequestValidatorResource s)
-apiGatewayRequestValidatorResource _name _restApiId =
+apiGatewayRequestValidatorResource _restApiId _name =
     TF.unsafeResource "aws_api_gateway_request_validator" TF.validator $
         ApiGatewayRequestValidatorResource'
             { _name = _name
@@ -3057,10 +3057,10 @@ data ApiGatewayResourceResource s = ApiGatewayResourceResource'
 
 apiGatewayResourceResource
     :: TF.Attr s P.Text -- ^ @parent_id@ - 'P.parentId'
-    -> TF.Attr s P.Text -- ^ @path_part@ - 'P.pathPart'
     -> TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
+    -> TF.Attr s P.Text -- ^ @path_part@ - 'P.pathPart'
     -> P.Resource (ApiGatewayResourceResource s)
-apiGatewayResourceResource _parentId _pathPart _restApiId =
+apiGatewayResourceResource _parentId _restApiId _pathPart =
     TF.unsafeResource "aws_api_gateway_resource" TF.validator $
         ApiGatewayResourceResource'
             { _parentId = _parentId
@@ -3452,10 +3452,10 @@ data ApiGatewayUsagePlanKeyResource s = ApiGatewayUsagePlanKeyResource'
 
 apiGatewayUsagePlanKeyResource
     :: TF.Attr s P.Text -- ^ @key_id@ - 'P.keyId'
-    -> TF.Attr s P.Text -- ^ @key_type@ - 'P.keyType'
     -> TF.Attr s P.Text -- ^ @usage_plan_id@ - 'P.usagePlanId'
+    -> TF.Attr s P.Text -- ^ @key_type@ - 'P.keyType'
     -> P.Resource (ApiGatewayUsagePlanKeyResource s)
-apiGatewayUsagePlanKeyResource _keyId _keyType _usagePlanId =
+apiGatewayUsagePlanKeyResource _keyId _usagePlanId _keyType =
     TF.unsafeResource "aws_api_gateway_usage_plan_key" TF.validator $
         ApiGatewayUsagePlanKeyResource'
             { _keyId = _keyId
@@ -3511,10 +3511,10 @@ data ApiGatewayVpcLinkResource s = ApiGatewayVpcLinkResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 apiGatewayVpcLinkResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @target_arns@ - 'P.targetArns'
+    :: TF.Attr s P.Text -- ^ @target_arns@ - 'P.targetArns'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ApiGatewayVpcLinkResource s)
-apiGatewayVpcLinkResource _name _targetArns =
+apiGatewayVpcLinkResource _targetArns _name =
     TF.unsafeResource "aws_api_gateway_vpc_link" TF.validator $
         ApiGatewayVpcLinkResource'
             { _description = TF.Nil
@@ -3567,12 +3567,12 @@ data AppCookieStickinessPolicyResource s = AppCookieStickinessPolicyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 appCookieStickinessPolicyResource
-    :: TF.Attr s P.Text -- ^ @cookie_name@ - 'P.cookieName'
-    -> TF.Attr s P.Int -- ^ @lb_port@ - 'P.lbPort'
-    -> TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
+    :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
+    -> TF.Attr s P.Text -- ^ @cookie_name@ - 'P.cookieName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Int -- ^ @lb_port@ - 'P.lbPort'
     -> P.Resource (AppCookieStickinessPolicyResource s)
-appCookieStickinessPolicyResource _cookieName _lbPort _loadBalancer _name =
+appCookieStickinessPolicyResource _loadBalancer _cookieName _name _lbPort =
     TF.unsafeResource "aws_app_cookie_stickiness_policy" TF.validator $
         AppCookieStickinessPolicyResource'
             { _cookieName = _cookieName
@@ -3644,12 +3644,12 @@ data AppautoscalingPolicyResource s = AppautoscalingPolicyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 appautoscalingPolicyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @scalable_dimension@ - 'P.scalableDimension'
     -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
-    -> TF.Attr s P.Text -- ^ @scalable_dimension@ - 'P.scalableDimension'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @service_namespace@ - 'P.serviceNamespace'
     -> P.Resource (AppautoscalingPolicyResource s)
-appautoscalingPolicyResource _name _resourceId _scalableDimension _serviceNamespace =
+appautoscalingPolicyResource _scalableDimension _resourceId _name _serviceNamespace =
     TF.unsafeResource "aws_appautoscaling_policy" TF.validator $
         AppautoscalingPolicyResource'
             { _alarms = TF.Nil
@@ -3756,11 +3756,11 @@ data AppautoscalingScheduledActionResource s = AppautoscalingScheduledActionReso
     } deriving (P.Show, P.Eq, P.Ord)
 
 appautoscalingScheduledActionResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
+    :: TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @service_namespace@ - 'P.serviceNamespace'
     -> P.Resource (AppautoscalingScheduledActionResource s)
-appautoscalingScheduledActionResource _name _resourceId _serviceNamespace =
+appautoscalingScheduledActionResource _resourceId _name _serviceNamespace =
     TF.unsafeResource "aws_appautoscaling_scheduled_action" TF.validator $
         AppautoscalingScheduledActionResource'
             { _endTime = TF.Nil
@@ -3860,11 +3860,11 @@ data AppautoscalingTargetResource s = AppautoscalingTargetResource'
 appautoscalingTargetResource
     :: TF.Attr s P.Int -- ^ @max_capacity@ - 'P.maxCapacity'
     -> TF.Attr s P.Int -- ^ @min_capacity@ - 'P.minCapacity'
-    -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
     -> TF.Attr s P.Text -- ^ @scalable_dimension@ - 'P.scalableDimension'
+    -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
     -> TF.Attr s P.Text -- ^ @service_namespace@ - 'P.serviceNamespace'
     -> P.Resource (AppautoscalingTargetResource s)
-appautoscalingTargetResource _maxCapacity _minCapacity _resourceId _scalableDimension _serviceNamespace =
+appautoscalingTargetResource _maxCapacity _minCapacity _scalableDimension _resourceId _serviceNamespace =
     TF.unsafeResource "aws_appautoscaling_target" TF.validator $
         AppautoscalingTargetResource'
             { _maxCapacity = _maxCapacity
@@ -4133,10 +4133,10 @@ data AppsyncGraphqlApiResource s = AppsyncGraphqlApiResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 appsyncGraphqlApiResource
-    :: TF.Attr s P.Text -- ^ @authentication_type@ - 'P.authenticationType'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @authentication_type@ - 'P.authenticationType'
     -> P.Resource (AppsyncGraphqlApiResource s)
-appsyncGraphqlApiResource _authenticationType _name =
+appsyncGraphqlApiResource _name _authenticationType =
     TF.unsafeResource "aws_appsync_graphql_api" TF.validator $
         AppsyncGraphqlApiResource'
             { _authenticationType = _authenticationType
@@ -4655,10 +4655,10 @@ data AutoscalingLifecycleHookResource s = AutoscalingLifecycleHookResource'
 
 autoscalingLifecycleHookResource
     :: TF.Attr s P.Text -- ^ @autoscaling_group_name@ - 'P.autoscalingGroupName'
-    -> TF.Attr s P.Text -- ^ @lifecycle_transition@ - 'P.lifecycleTransition'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @lifecycle_transition@ - 'P.lifecycleTransition'
     -> P.Resource (AutoscalingLifecycleHookResource s)
-autoscalingLifecycleHookResource _autoscalingGroupName _lifecycleTransition _name =
+autoscalingLifecycleHookResource _autoscalingGroupName _name _lifecycleTransition =
     TF.unsafeResource "aws_autoscaling_lifecycle_hook" TF.validator $
         AutoscalingLifecycleHookResource'
             { _autoscalingGroupName = _autoscalingGroupName
@@ -4739,11 +4739,11 @@ data AutoscalingNotificationResource s = AutoscalingNotificationResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 autoscalingNotificationResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @group_names@ - 'P.groupNames'
+    :: TF.Attr s P.Text -- ^ @topic_arn@ - 'P.topicArn'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @group_names@ - 'P.groupNames'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @notifications@ - 'P.notifications'
-    -> TF.Attr s P.Text -- ^ @topic_arn@ - 'P.topicArn'
     -> P.Resource (AutoscalingNotificationResource s)
-autoscalingNotificationResource _groupNames _notifications _topicArn =
+autoscalingNotificationResource _topicArn _groupNames _notifications =
     TF.unsafeResource "aws_autoscaling_notification" TF.validator $
         AutoscalingNotificationResource'
             { _groupNames = _groupNames
@@ -5271,13 +5271,13 @@ data BudgetsBudgetResource s = BudgetsBudgetResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 budgetsBudgetResource
-    :: TF.Attr s P.Text -- ^ @budget_type@ - 'P.budgetType'
-    -> TF.Attr s P.Text -- ^ @limit_amount@ - 'P.limitAmount'
-    -> TF.Attr s P.Text -- ^ @limit_unit@ - 'P.limitUnit'
+    :: TF.Attr s P.Text -- ^ @limit_amount@ - 'P.limitAmount'
     -> TF.Attr s P.Text -- ^ @time_period_start@ - 'P.timePeriodStart'
+    -> TF.Attr s P.Text -- ^ @budget_type@ - 'P.budgetType'
+    -> TF.Attr s P.Text -- ^ @limit_unit@ - 'P.limitUnit'
     -> TF.Attr s P.Text -- ^ @time_unit@ - 'P.timeUnit'
     -> P.Resource (BudgetsBudgetResource s)
-budgetsBudgetResource _budgetType _limitAmount _limitUnit _timePeriodStart _timeUnit =
+budgetsBudgetResource _limitAmount _timePeriodStart _budgetType _limitUnit _timeUnit =
     TF.unsafeResource "aws_budgets_budget" TF.validator $
         BudgetsBudgetResource'
             { _budgetType = _budgetType
@@ -5369,10 +5369,10 @@ data Cloud9EnvironmentEc2Resource s = Cloud9EnvironmentEc2Resource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 cloud9EnvironmentEc2Resource
-    :: TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
     -> P.Resource (Cloud9EnvironmentEc2Resource s)
-cloud9EnvironmentEc2Resource _instanceType _name =
+cloud9EnvironmentEc2Resource _name _instanceType =
     TF.unsafeResource "aws_cloud9_environment_ec2" TF.validator $
         Cloud9EnvironmentEc2Resource'
             { _automaticStopTimeMinutes = TF.Nil
@@ -5622,12 +5622,12 @@ data CloudfrontDistributionResource s = CloudfrontDistributionResource'
 
 cloudfrontDistributionResource
     :: TF.Attr s (DefaultCacheBehaviorSetting s) -- ^ @default_cache_behavior@ - 'P.defaultCacheBehavior'
+    -> TF.Attr s (ViewerCertificateSetting s) -- ^ @viewer_certificate@ - 'P.viewerCertificate'
     -> TF.Attr s P.Bool -- ^ @enabled@ - 'P.enabled'
     -> TF.Attr s [TF.Attr s (OriginSetting s)] -- ^ @origin@ - 'P.origin'
     -> TF.Attr s (RestrictionsSetting s) -- ^ @restrictions@ - 'P.restrictions'
-    -> TF.Attr s (ViewerCertificateSetting s) -- ^ @viewer_certificate@ - 'P.viewerCertificate'
     -> P.Resource (CloudfrontDistributionResource s)
-cloudfrontDistributionResource _defaultCacheBehavior _enabled _origin _restrictions _viewerCertificate =
+cloudfrontDistributionResource _defaultCacheBehavior _viewerCertificate _enabled _origin _restrictions =
     TF.unsafeResource "aws_cloudfront_distribution" TF.validator $
         CloudfrontDistributionResource'
             { _aliases = TF.Nil
@@ -6069,10 +6069,10 @@ data CloudwatchEventPermissionResource s = CloudwatchEventPermissionResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 cloudwatchEventPermissionResource
-    :: TF.Attr s P.Text -- ^ @principal@ - 'P.principal'
-    -> TF.Attr s P.Text -- ^ @statement_id@ - 'P.statementId'
+    :: TF.Attr s P.Text -- ^ @statement_id@ - 'P.statementId'
+    -> TF.Attr s P.Text -- ^ @principal@ - 'P.principal'
     -> P.Resource (CloudwatchEventPermissionResource s)
-cloudwatchEventPermissionResource _principal _statementId =
+cloudwatchEventPermissionResource _statementId _principal =
     TF.unsafeResource "aws_cloudwatch_event_permission" TF.validator $
         CloudwatchEventPermissionResource'
             { _action = TF.value "events:PutEvents"
@@ -6382,11 +6382,11 @@ data CloudwatchLogDestinationResource s = CloudwatchLogDestinationResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 cloudwatchLogDestinationResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> TF.Attr s P.Text -- ^ @target_arn@ - 'P.targetArn'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (CloudwatchLogDestinationResource s)
-cloudwatchLogDestinationResource _name _roleArn _targetArn =
+cloudwatchLogDestinationResource _roleArn _targetArn _name =
     TF.unsafeResource "aws_cloudwatch_log_destination" TF.validator $
         CloudwatchLogDestinationResource'
             { _name = _name
@@ -6436,10 +6436,10 @@ data CloudwatchLogDestinationPolicyResource s = CloudwatchLogDestinationPolicyRe
     } deriving (P.Show, P.Eq, P.Ord)
 
 cloudwatchLogDestinationPolicyResource
-    :: TF.Attr s P.Text -- ^ @access_policy@ - 'P.accessPolicy'
-    -> TF.Attr s P.Text -- ^ @destination_name@ - 'P.destinationName'
+    :: TF.Attr s P.Text -- ^ @destination_name@ - 'P.destinationName'
+    -> TF.Attr s P.Text -- ^ @access_policy@ - 'P.accessPolicy'
     -> P.Resource (CloudwatchLogDestinationPolicyResource s)
-cloudwatchLogDestinationPolicyResource _accessPolicy _destinationName =
+cloudwatchLogDestinationPolicyResource _destinationName _accessPolicy =
     TF.unsafeResource "aws_cloudwatch_log_destination_policy" TF.validator $
         CloudwatchLogDestinationPolicyResource'
             { _accessPolicy = _accessPolicy
@@ -6553,11 +6553,11 @@ data CloudwatchLogMetricFilterResource s = CloudwatchLogMetricFilterResource'
 
 cloudwatchLogMetricFilterResource
     :: TF.Attr s P.Text -- ^ @log_group_name@ - 'P.logGroupName'
-    -> TF.Attr s (MetricTransformationSetting s) -- ^ @metric_transformation@ - 'P.metricTransformation'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @pattern@ - 'P.pattern''
+    -> TF.Attr s (MetricTransformationSetting s) -- ^ @metric_transformation@ - 'P.metricTransformation'
     -> P.Resource (CloudwatchLogMetricFilterResource s)
-cloudwatchLogMetricFilterResource _logGroupName _metricTransformation _name _pattern' =
+cloudwatchLogMetricFilterResource _logGroupName _name _pattern' _metricTransformation =
     TF.unsafeResource "aws_cloudwatch_log_metric_filter" TF.validator $
         CloudwatchLogMetricFilterResource'
             { _logGroupName = _logGroupName
@@ -6714,11 +6714,11 @@ data CloudwatchLogSubscriptionFilterResource s = CloudwatchLogSubscriptionFilter
 
 cloudwatchLogSubscriptionFilterResource
     :: TF.Attr s P.Text -- ^ @destination_arn@ - 'P.destinationArn'
-    -> TF.Attr s P.Text -- ^ @filter_pattern@ - 'P.filterPattern'
     -> TF.Attr s P.Text -- ^ @log_group_name@ - 'P.logGroupName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @filter_pattern@ - 'P.filterPattern'
     -> P.Resource (CloudwatchLogSubscriptionFilterResource s)
-cloudwatchLogSubscriptionFilterResource _destinationArn _filterPattern _logGroupName _name =
+cloudwatchLogSubscriptionFilterResource _destinationArn _logGroupName _name _filterPattern =
     TF.unsafeResource "aws_cloudwatch_log_subscription_filter" TF.validator $
         CloudwatchLogSubscriptionFilterResource'
             { _destinationArn = _destinationArn
@@ -6837,14 +6837,14 @@ data CloudwatchMetricAlarmResource s = CloudwatchMetricAlarmResource'
 
 cloudwatchMetricAlarmResource
     :: TF.Attr s P.Text -- ^ @alarm_name@ - 'P.alarmName'
-    -> TF.Attr s P.Text -- ^ @comparison_operator@ - 'P.comparisonOperator'
-    -> TF.Attr s P.Int -- ^ @evaluation_periods@ - 'P.evaluationPeriods'
     -> TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
     -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
+    -> TF.Attr s P.Text -- ^ @comparison_operator@ - 'P.comparisonOperator'
     -> TF.Attr s P.Int -- ^ @period@ - 'P.period'
+    -> TF.Attr s P.Int -- ^ @evaluation_periods@ - 'P.evaluationPeriods'
     -> TF.Attr s P.Double -- ^ @threshold@ - 'P.threshold'
     -> P.Resource (CloudwatchMetricAlarmResource s)
-cloudwatchMetricAlarmResource _alarmName _comparisonOperator _evaluationPeriods _metricName _namespace _period _threshold =
+cloudwatchMetricAlarmResource _alarmName _metricName _namespace _comparisonOperator _period _evaluationPeriods _threshold =
     TF.unsafeResource "aws_cloudwatch_metric_alarm" TF.validator $
         CloudwatchMetricAlarmResource'
             { _actionsEnabled = TF.value P.True
@@ -7381,10 +7381,10 @@ data CodedeployDeploymentConfigResource s = CodedeployDeploymentConfigResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 codedeployDeploymentConfigResource
-    :: TF.Attr s P.Text -- ^ @deployment_config_name@ - 'P.deploymentConfigName'
-    -> TF.Attr s (MinimumHealthyHostsSetting s) -- ^ @minimum_healthy_hosts@ - 'P.minimumHealthyHosts'
+    :: TF.Attr s (MinimumHealthyHostsSetting s) -- ^ @minimum_healthy_hosts@ - 'P.minimumHealthyHosts'
+    -> TF.Attr s P.Text -- ^ @deployment_config_name@ - 'P.deploymentConfigName'
     -> P.Resource (CodedeployDeploymentConfigResource s)
-codedeployDeploymentConfigResource _deploymentConfigName _minimumHealthyHosts =
+codedeployDeploymentConfigResource _minimumHealthyHosts _deploymentConfigName =
     TF.unsafeResource "aws_codedeploy_deployment_config" TF.validator $
         CodedeployDeploymentConfigResource'
             { _deploymentConfigName = _deploymentConfigName
@@ -7458,11 +7458,11 @@ data CodedeployDeploymentGroupResource s = CodedeployDeploymentGroupResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 codedeployDeploymentGroupResource
-    :: TF.Attr s P.Text -- ^ @app_name@ - 'P.appName'
+    :: TF.Attr s P.Text -- ^ @service_role_arn@ - 'P.serviceRoleArn'
+    -> TF.Attr s P.Text -- ^ @app_name@ - 'P.appName'
     -> TF.Attr s P.Text -- ^ @deployment_group_name@ - 'P.deploymentGroupName'
-    -> TF.Attr s P.Text -- ^ @service_role_arn@ - 'P.serviceRoleArn'
     -> P.Resource (CodedeployDeploymentGroupResource s)
-codedeployDeploymentGroupResource _appName _deploymentGroupName _serviceRoleArn =
+codedeployDeploymentGroupResource _serviceRoleArn _appName _deploymentGroupName =
     TF.unsafeResource "aws_codedeploy_deployment_group" TF.validator $
         CodedeployDeploymentGroupResource'
             { _alarmConfiguration = TF.Nil
@@ -7588,12 +7588,12 @@ data CodepipelineResource s = CodepipelineResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 codepipelineResource
-    :: TF.Attr s (ArtifactStoreSetting s) -- ^ @artifact_store@ - 'P.artifactStore'
+    :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> TF.Attr s (P.NonEmpty (TF.Attr s (StageSetting s))) -- ^ @stage@ - 'P.stage'
+    -> TF.Attr s (ArtifactStoreSetting s) -- ^ @artifact_store@ - 'P.artifactStore'
     -> P.Resource (CodepipelineResource s)
-codepipelineResource _artifactStore _name _roleArn _stage =
+codepipelineResource _roleArn _name _stage _artifactStore =
     TF.unsafeResource "aws_codepipeline" TF.validator $
         CodepipelineResource'
             { _artifactStore = _artifactStore
@@ -7815,11 +7815,11 @@ data CognitoIdentityProviderResource s = CognitoIdentityProviderResource'
 
 cognitoIdentityProviderResource
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @provider_details@ - 'P.providerDetails'
+    -> TF.Attr s P.Text -- ^ @user_pool_id@ - 'P.userPoolId'
     -> TF.Attr s P.Text -- ^ @provider_name@ - 'P.providerName'
     -> TF.Attr s P.Text -- ^ @provider_type@ - 'P.providerType'
-    -> TF.Attr s P.Text -- ^ @user_pool_id@ - 'P.userPoolId'
     -> P.Resource (CognitoIdentityProviderResource s)
-cognitoIdentityProviderResource _providerDetails _providerName _providerType _userPoolId =
+cognitoIdentityProviderResource _providerDetails _userPoolId _providerName _providerType =
     TF.unsafeResource "aws_cognito_identity_provider" TF.validator $
         CognitoIdentityProviderResource'
             { _attributeMapping = TF.Nil
@@ -7893,11 +7893,11 @@ data CognitoResourceServerResource s = CognitoResourceServerResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 cognitoResourceServerResource
-    :: TF.Attr s P.Text -- ^ @identifier@ - 'P.identifier'
+    :: TF.Attr s P.Text -- ^ @user_pool_id@ - 'P.userPoolId'
+    -> TF.Attr s P.Text -- ^ @identifier@ - 'P.identifier'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @user_pool_id@ - 'P.userPoolId'
     -> P.Resource (CognitoResourceServerResource s)
-cognitoResourceServerResource _identifier _name _userPoolId =
+cognitoResourceServerResource _userPoolId _identifier _name =
     TF.unsafeResource "aws_cognito_resource_server" TF.validator $
         CognitoResourceServerResource'
             { _identifier = _identifier
@@ -7963,10 +7963,10 @@ data CognitoUserGroupResource s = CognitoUserGroupResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 cognitoUserGroupResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @user_pool_id@ - 'P.userPoolId'
+    :: TF.Attr s P.Text -- ^ @user_pool_id@ - 'P.userPoolId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (CognitoUserGroupResource s)
-cognitoUserGroupResource _name _userPoolId =
+cognitoUserGroupResource _userPoolId _name =
     TF.unsafeResource "aws_cognito_user_group" TF.validator $
         CognitoUserGroupResource'
             { _description = TF.Nil
@@ -8264,10 +8264,10 @@ data CognitoUserPoolClientResource s = CognitoUserPoolClientResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 cognitoUserPoolClientResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @user_pool_id@ - 'P.userPoolId'
+    :: TF.Attr s P.Text -- ^ @user_pool_id@ - 'P.userPoolId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (CognitoUserPoolClientResource s)
-cognitoUserPoolClientResource _name _userPoolId =
+cognitoUserPoolClientResource _userPoolId _name =
     TF.unsafeResource "aws_cognito_user_pool_client" TF.validator $
         CognitoUserPoolClientResource'
             { _allowedOauthFlows = TF.Nil
@@ -8842,11 +8842,11 @@ data CustomerGatewayResource s = CustomerGatewayResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 customerGatewayResource
-    :: TF.Attr s P.Int -- ^ @bgp_asn@ - 'P.bgpAsn'
-    -> TF.Attr s P.Text -- ^ @ip_address@ - 'P.ipAddress'
+    :: TF.Attr s P.Text -- ^ @ip_address@ - 'P.ipAddress'
+    -> TF.Attr s P.Int -- ^ @bgp_asn@ - 'P.bgpAsn'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (CustomerGatewayResource s)
-customerGatewayResource _bgpAsn _ipAddress _type' =
+customerGatewayResource _ipAddress _bgpAsn _type' =
     TF.unsafeResource "aws_customer_gateway" TF.validator $
         CustomerGatewayResource'
             { _bgpAsn = _bgpAsn
@@ -8918,12 +8918,12 @@ data DaxClusterResource s = DaxClusterResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 daxClusterResource
-    :: TF.Attr s P.Text -- ^ @cluster_name@ - 'P.clusterName'
-    -> TF.Attr s P.Text -- ^ @iam_role_arn@ - 'P.iamRoleArn'
-    -> TF.Attr s P.Text -- ^ @node_type@ - 'P.nodeType'
+    :: TF.Attr s P.Text -- ^ @iam_role_arn@ - 'P.iamRoleArn'
     -> TF.Attr s P.Int -- ^ @replication_factor@ - 'P.replicationFactor'
+    -> TF.Attr s P.Text -- ^ @cluster_name@ - 'P.clusterName'
+    -> TF.Attr s P.Text -- ^ @node_type@ - 'P.nodeType'
     -> P.Resource (DaxClusterResource s)
-daxClusterResource _clusterName _iamRoleArn _nodeType _replicationFactor =
+daxClusterResource _iamRoleArn _replicationFactor _clusterName _nodeType =
     TF.unsafeResource "aws_dax_cluster" TF.validator $
         DaxClusterResource'
             { _availabilityZones = TF.Nil
@@ -9080,10 +9080,10 @@ data DaxSubnetGroupResource s = DaxSubnetGroupResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 daxSubnetGroupResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @subnet_ids@ - 'P.subnetIds'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @subnet_ids@ - 'P.subnetIds'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DaxSubnetGroupResource s)
-daxSubnetGroupResource _name _subnetIds =
+daxSubnetGroupResource _subnetIds _name =
     TF.unsafeResource "aws_dax_subnet_group" TF.validator $
         DaxSubnetGroupResource'
             { _description = TF.Nil

@@ -650,11 +650,11 @@ data S3BucketInventoryResource s = S3BucketInventoryResource'
 s3BucketInventoryResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s (DestinationSetting s) -- ^ @destination@ - 'P.destination'
-    -> TF.Attr s P.Text -- ^ @included_object_versions@ - 'P.includedObjectVersions'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (ScheduleSetting s) -- ^ @schedule@ - 'P.schedule'
+    -> TF.Attr s P.Text -- ^ @included_object_versions@ - 'P.includedObjectVersions'
     -> P.Resource (S3BucketInventoryResource s)
-s3BucketInventoryResource _bucket _destination _includedObjectVersions _name _schedule =
+s3BucketInventoryResource _bucket _destination _name _schedule _includedObjectVersions =
     TF.unsafeResource "aws_s3_bucket_inventory" TF.validator $
         S3BucketInventoryResource'
             { _bucket = _bucket
@@ -1371,13 +1371,13 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 securityGroupRuleResource
-    :: TF.Attr s P.Int -- ^ @from_port@ - 'P.fromPort'
-    -> TF.Attr s P.NetworkProtocol -- ^ @protocol@ - 'P.protocol'
-    -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
+    :: TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
+    -> TF.Attr s P.Int -- ^ @from_port@ - 'P.fromPort'
     -> TF.Attr s P.Int -- ^ @to_port@ - 'P.toPort'
+    -> TF.Attr s P.NetworkProtocol -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (SecurityGroupRuleResource s)
-securityGroupRuleResource _fromPort _protocol _securityGroupId _toPort _type' =
+securityGroupRuleResource _securityGroupId _fromPort _toPort _protocol _type' =
     TF.unsafeResource "aws_security_group_rule" TF.validator $
         SecurityGroupRuleResource'
             { _cidrBlocks = TF.Nil
@@ -1985,10 +1985,10 @@ data SesEventDestinationResource s = SesEventDestinationResource'
 
 sesEventDestinationResource
     :: TF.Attr s P.Text -- ^ @configuration_set_name@ - 'P.configurationSetName'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @matching_types@ - 'P.matchingTypes'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @matching_types@ - 'P.matchingTypes'
     -> P.Resource (SesEventDestinationResource s)
-sesEventDestinationResource _configurationSetName _matchingTypes _name =
+sesEventDestinationResource _configurationSetName _name _matchingTypes =
     TF.unsafeResource "aws_ses_event_destination" TF.validator $
         SesEventDestinationResource'
             { _cloudwatchDestination = TF.Nil
@@ -2472,11 +2472,11 @@ data SfnStateMachineResource s = SfnStateMachineResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 sfnStateMachineResource
-    :: TF.Attr s P.Text -- ^ @definition@ - 'P.definition'
+    :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    -> TF.Attr s P.Text -- ^ @definition@ - 'P.definition'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> P.Resource (SfnStateMachineResource s)
-sfnStateMachineResource _definition _name _roleArn =
+sfnStateMachineResource _roleArn _definition _name =
     TF.unsafeResource "aws_sfn_state_machine" TF.validator $
         SfnStateMachineResource'
             { _definition = _definition
@@ -2631,11 +2631,11 @@ data SnsPlatformApplicationResource s = SnsPlatformApplicationResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 snsPlatformApplicationResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @platform_credential@ - 'P.platformCredential'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @platform@ - 'P.platform'
-    -> TF.Attr s P.Text -- ^ @platform_credential@ - 'P.platformCredential'
     -> P.Resource (SnsPlatformApplicationResource s)
-snsPlatformApplicationResource _name _platform _platformCredential =
+snsPlatformApplicationResource _platformCredential _name _platform =
     TF.unsafeResource "aws_sns_platform_application" TF.validator $
         SnsPlatformApplicationResource'
             { _eventDeliveryFailureTopicArn = TF.Nil
@@ -3063,11 +3063,11 @@ data SnsTopicSubscriptionResource s = SnsTopicSubscriptionResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 snsTopicSubscriptionResource
-    :: TF.Attr s P.Text -- ^ @endpoint@ - 'P.endpoint'
+    :: TF.Attr s P.Text -- ^ @topic_arn@ - 'P.topicArn'
+    -> TF.Attr s P.Text -- ^ @endpoint@ - 'P.endpoint'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
-    -> TF.Attr s P.Text -- ^ @topic_arn@ - 'P.topicArn'
     -> P.Resource (SnsTopicSubscriptionResource s)
-snsTopicSubscriptionResource _endpoint _protocol _topicArn =
+snsTopicSubscriptionResource _topicArn _endpoint _protocol =
     TF.unsafeResource "aws_sns_topic_subscription" TF.validator $
         SnsTopicSubscriptionResource'
             { _confirmationTimeoutInMinutes = TF.value 1
@@ -3227,11 +3227,11 @@ data SpotFleetRequestResource s = SpotFleetRequestResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 spotFleetRequestResource
-    :: TF.Attr s P.Text -- ^ @iam_fleet_role@ - 'P.iamFleetRole'
+    :: TF.Attr s P.Int -- ^ @target_capacity@ - 'P.targetCapacity'
+    -> TF.Attr s P.Text -- ^ @iam_fleet_role@ - 'P.iamFleetRole'
     -> TF.Attr s [TF.Attr s (LaunchSpecificationSetting s)] -- ^ @launch_specification@ - 'P.launchSpecification'
-    -> TF.Attr s P.Int -- ^ @target_capacity@ - 'P.targetCapacity'
     -> P.Resource (SpotFleetRequestResource s)
-spotFleetRequestResource _iamFleetRole _launchSpecification _targetCapacity =
+spotFleetRequestResource _targetCapacity _iamFleetRole _launchSpecification =
     TF.unsafeResource "aws_spot_fleet_request" TF.validator $
         SpotFleetRequestResource'
             { _allocationStrategy = TF.value "lowestPrice"
@@ -4069,10 +4069,10 @@ data SsmDocumentResource s = SsmDocumentResource'
 
 ssmDocumentResource
     :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
-    -> TF.Attr s P.Text -- ^ @document_type@ - 'P.documentType'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @document_type@ - 'P.documentType'
     -> P.Resource (SsmDocumentResource s)
-ssmDocumentResource _content _documentType _name =
+ssmDocumentResource _content _name _documentType =
     TF.unsafeResource "aws_ssm_document" TF.validator $
         SsmDocumentResource'
             { _content = _content
@@ -4267,11 +4267,11 @@ data SsmMaintenanceWindowTargetResource s = SsmMaintenanceWindowTargetResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 ssmMaintenanceWindowTargetResource
-    :: TF.Attr s P.Text -- ^ @resource_type@ - 'P.resourceType'
+    :: TF.Attr s P.Text -- ^ @window_id@ - 'P.windowId'
     -> TF.Attr s [TF.Attr s (TargetsSetting s)] -- ^ @targets@ - 'P.targets'
-    -> TF.Attr s P.Text -- ^ @window_id@ - 'P.windowId'
+    -> TF.Attr s P.Text -- ^ @resource_type@ - 'P.resourceType'
     -> P.Resource (SsmMaintenanceWindowTargetResource s)
-ssmMaintenanceWindowTargetResource _resourceType _targets _windowId =
+ssmMaintenanceWindowTargetResource _windowId _targets _resourceType =
     TF.unsafeResource "aws_ssm_maintenance_window_target" TF.validator $
         SsmMaintenanceWindowTargetResource'
             { _ownerInformation = TF.Nil
@@ -4349,15 +4349,15 @@ data SsmMaintenanceWindowTaskResource s = SsmMaintenanceWindowTaskResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 ssmMaintenanceWindowTaskResource
-    :: TF.Attr s P.Text -- ^ @max_concurrency@ - 'P.maxConcurrency'
-    -> TF.Attr s P.Text -- ^ @max_errors@ - 'P.maxErrors'
-    -> TF.Attr s P.Text -- ^ @service_role_arn@ - 'P.serviceRoleArn'
-    -> TF.Attr s [TF.Attr s (TargetsSetting s)] -- ^ @targets@ - 'P.targets'
+    :: TF.Attr s P.Text -- ^ @service_role_arn@ - 'P.serviceRoleArn'
     -> TF.Attr s P.Text -- ^ @task_arn@ - 'P.taskArn'
-    -> TF.Attr s P.Text -- ^ @task_type@ - 'P.taskType'
+    -> TF.Attr s P.Text -- ^ @max_concurrency@ - 'P.maxConcurrency'
+    -> TF.Attr s P.Text -- ^ @max_errors@ - 'P.maxErrors'
     -> TF.Attr s P.Text -- ^ @window_id@ - 'P.windowId'
+    -> TF.Attr s [TF.Attr s (TargetsSetting s)] -- ^ @targets@ - 'P.targets'
+    -> TF.Attr s P.Text -- ^ @task_type@ - 'P.taskType'
     -> P.Resource (SsmMaintenanceWindowTaskResource s)
-ssmMaintenanceWindowTaskResource _maxConcurrency _maxErrors _serviceRoleArn _targets _taskArn _taskType _windowId =
+ssmMaintenanceWindowTaskResource _serviceRoleArn _taskArn _maxConcurrency _maxErrors _windowId _targets _taskType =
     TF.unsafeResource "aws_ssm_maintenance_window_task" TF.validator $
         SsmMaintenanceWindowTaskResource'
             { _loggingInfo = TF.Nil
@@ -4659,10 +4659,10 @@ data SsmPatchGroupResource s = SsmPatchGroupResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 ssmPatchGroupResource
-    :: TF.Attr s P.Text -- ^ @baseline_id@ - 'P.baselineId'
-    -> TF.Attr s P.Text -- ^ @patch_group@ - 'P.patchGroup'
+    :: TF.Attr s P.Text -- ^ @patch_group@ - 'P.patchGroup'
+    -> TF.Attr s P.Text -- ^ @baseline_id@ - 'P.baselineId'
     -> P.Resource (SsmPatchGroupResource s)
-ssmPatchGroupResource _baselineId _patchGroup =
+ssmPatchGroupResource _patchGroup _baselineId =
     TF.unsafeResource "aws_ssm_patch_group" TF.validator $
         SsmPatchGroupResource'
             { _baselineId = _baselineId
@@ -4702,10 +4702,10 @@ data SsmResourceDataSyncResource s = SsmResourceDataSyncResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 ssmResourceDataSyncResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (S3DestinationSetting s) -- ^ @s3_destination@ - 'P.s3Destination'
+    :: TF.Attr s (S3DestinationSetting s) -- ^ @s3_destination@ - 'P.s3Destination'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SsmResourceDataSyncResource s)
-ssmResourceDataSyncResource _name _s3Destination =
+ssmResourceDataSyncResource _s3Destination _name =
     TF.unsafeResource "aws_ssm_resource_data_sync" TF.validator $
         SsmResourceDataSyncResource'
             { _name = _name
@@ -4749,10 +4749,10 @@ data StoragegatewayCacheResource s = StoragegatewayCacheResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 storagegatewayCacheResource
-    :: TF.Attr s P.Text -- ^ @disk_id@ - 'P.diskId'
-    -> TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
+    :: TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
+    -> TF.Attr s P.Text -- ^ @disk_id@ - 'P.diskId'
     -> P.Resource (StoragegatewayCacheResource s)
-storagegatewayCacheResource _diskId _gatewayArn =
+storagegatewayCacheResource _gatewayArn _diskId =
     TF.unsafeResource "aws_storagegateway_cache" TF.validator $
         StoragegatewayCacheResource'
             { _diskId = _diskId
@@ -4934,12 +4934,12 @@ data StoragegatewayNfsFileShareResource s = StoragegatewayNfsFileShareResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 storagegatewayNfsFileShareResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @client_list@ - 'P.clientList'
-    -> TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
+    :: TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
     -> TF.Attr s P.Text -- ^ @location_arn@ - 'P.locationArn'
     -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @client_list@ - 'P.clientList'
     -> P.Resource (StoragegatewayNfsFileShareResource s)
-storagegatewayNfsFileShareResource _clientList _gatewayArn _locationArn _roleArn =
+storagegatewayNfsFileShareResource _gatewayArn _locationArn _roleArn _clientList =
     TF.unsafeResource "aws_storagegateway_nfs_file_share" TF.validator $
         StoragegatewayNfsFileShareResource'
             { _clientList = _clientList
@@ -5226,10 +5226,10 @@ data StoragegatewayUploadBufferResource s = StoragegatewayUploadBufferResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 storagegatewayUploadBufferResource
-    :: TF.Attr s P.Text -- ^ @disk_id@ - 'P.diskId'
-    -> TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
+    :: TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
+    -> TF.Attr s P.Text -- ^ @disk_id@ - 'P.diskId'
     -> P.Resource (StoragegatewayUploadBufferResource s)
-storagegatewayUploadBufferResource _diskId _gatewayArn =
+storagegatewayUploadBufferResource _gatewayArn _diskId =
     TF.unsafeResource "aws_storagegateway_upload_buffer" TF.validator $
         StoragegatewayUploadBufferResource'
             { _diskId = _diskId
@@ -5269,10 +5269,10 @@ data StoragegatewayWorkingStorageResource s = StoragegatewayWorkingStorageResour
     } deriving (P.Show, P.Eq, P.Ord)
 
 storagegatewayWorkingStorageResource
-    :: TF.Attr s P.Text -- ^ @disk_id@ - 'P.diskId'
-    -> TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
+    :: TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
+    -> TF.Attr s P.Text -- ^ @disk_id@ - 'P.diskId'
     -> P.Resource (StoragegatewayWorkingStorageResource s)
-storagegatewayWorkingStorageResource _diskId _gatewayArn =
+storagegatewayWorkingStorageResource _gatewayArn _diskId =
     TF.unsafeResource "aws_storagegateway_working_storage" TF.validator $
         StoragegatewayWorkingStorageResource'
             { _diskId = _diskId
@@ -5458,11 +5458,11 @@ data VolumeAttachmentResource s = VolumeAttachmentResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 volumeAttachmentResource
-    :: TF.Attr s P.Text -- ^ @device_name@ - 'P.deviceName'
-    -> TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
+    :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
+    -> TF.Attr s P.Text -- ^ @device_name@ - 'P.deviceName'
     -> P.Resource (VolumeAttachmentResource s)
-volumeAttachmentResource _deviceName _instanceId _volumeId =
+volumeAttachmentResource _instanceId _volumeId _deviceName =
     TF.unsafeResource "aws_volume_attachment" TF.validator $
         VolumeAttachmentResource'
             { _deviceName = _deviceName
@@ -5761,10 +5761,10 @@ data VpcEndpointResource s = VpcEndpointResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 vpcEndpointResource
-    :: TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
-    -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
     -> P.Resource (VpcEndpointResource s)
-vpcEndpointResource _serviceName _vpcId =
+vpcEndpointResource _vpcId _serviceName =
     TF.unsafeResource "aws_vpc_endpoint" TF.validator $
         VpcEndpointResource'
             { _autoAccept = TF.Nil
@@ -5864,10 +5864,10 @@ data VpcEndpointConnectionNotificationResource s = VpcEndpointConnectionNotifica
     } deriving (P.Show, P.Eq, P.Ord)
 
 vpcEndpointConnectionNotificationResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @connection_events@ - 'P.connectionEvents'
-    -> TF.Attr s P.Text -- ^ @connection_notification_arn@ - 'P.connectionNotificationArn'
+    :: TF.Attr s P.Text -- ^ @connection_notification_arn@ - 'P.connectionNotificationArn'
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @connection_events@ - 'P.connectionEvents'
     -> P.Resource (VpcEndpointConnectionNotificationResource s)
-vpcEndpointConnectionNotificationResource _connectionEvents _connectionNotificationArn =
+vpcEndpointConnectionNotificationResource _connectionNotificationArn _connectionEvents =
     TF.unsafeResource "aws_vpc_endpoint_connection_notification" TF.validator $
         VpcEndpointConnectionNotificationResource'
             { _connectionEvents = _connectionEvents
@@ -5981,10 +5981,10 @@ data VpcEndpointServiceResource s = VpcEndpointServiceResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 vpcEndpointServiceResource
-    :: TF.Attr s P.Bool -- ^ @acceptance_required@ - 'P.acceptanceRequired'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @network_load_balancer_arns@ - 'P.networkLoadBalancerArns'
+    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @network_load_balancer_arns@ - 'P.networkLoadBalancerArns'
+    -> TF.Attr s P.Bool -- ^ @acceptance_required@ - 'P.acceptanceRequired'
     -> P.Resource (VpcEndpointServiceResource s)
-vpcEndpointServiceResource _acceptanceRequired _networkLoadBalancerArns =
+vpcEndpointServiceResource _networkLoadBalancerArns _acceptanceRequired =
     TF.unsafeResource "aws_vpc_endpoint_service" TF.validator $
         VpcEndpointServiceResource'
             { _acceptanceRequired = _acceptanceRequired
@@ -6370,10 +6370,10 @@ data VpnConnectionResource s = VpnConnectionResource'
 
 vpnConnectionResource
     :: TF.Attr s P.Text -- ^ @customer_gateway_id@ - 'P.customerGatewayId'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @vpn_gateway_id@ - 'P.vpnGatewayId'
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (VpnConnectionResource s)
-vpnConnectionResource _customerGatewayId _type' _vpnGatewayId =
+vpnConnectionResource _customerGatewayId _vpnGatewayId _type' =
     TF.unsafeResource "aws_vpn_connection" TF.validator $
         VpnConnectionResource'
             { _customerGatewayId = _customerGatewayId
@@ -6795,12 +6795,12 @@ data WafRateBasedRuleResource s = WafRateBasedRuleResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 wafRateBasedRuleResource
-    :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @rate_key@ - 'P.rateKey'
+    :: TF.Attr s P.Text -- ^ @rate_key@ - 'P.rateKey'
     -> TF.Attr s P.Int -- ^ @rate_limit@ - 'P.rateLimit'
+    -> TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (WafRateBasedRuleResource s)
-wafRateBasedRuleResource _metricName _name _rateKey _rateLimit =
+wafRateBasedRuleResource _rateKey _rateLimit _metricName _name =
     TF.unsafeResource "aws_waf_rate_based_rule" TF.validator $
         WafRateBasedRuleResource'
             { _metricName = _metricName
@@ -7383,12 +7383,12 @@ data WafregionalRateBasedRuleResource s = WafregionalRateBasedRuleResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 wafregionalRateBasedRuleResource
-    :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @rate_key@ - 'P.rateKey'
+    :: TF.Attr s P.Text -- ^ @rate_key@ - 'P.rateKey'
     -> TF.Attr s P.Int -- ^ @rate_limit@ - 'P.rateLimit'
+    -> TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (WafregionalRateBasedRuleResource s)
-wafregionalRateBasedRuleResource _metricName _name _rateKey _rateLimit =
+wafregionalRateBasedRuleResource _rateKey _rateLimit _metricName _name =
     TF.unsafeResource "aws_wafregional_rate_based_rule" TF.validator $
         WafregionalRateBasedRuleResource'
             { _metricName = _metricName

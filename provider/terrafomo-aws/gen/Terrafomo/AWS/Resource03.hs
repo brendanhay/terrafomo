@@ -732,10 +732,10 @@ data InspectorAssessmentTargetResource s = InspectorAssessmentTargetResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 inspectorAssessmentTargetResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_arn@ - 'P.resourceGroupArn'
+    :: TF.Attr s P.Text -- ^ @resource_group_arn@ - 'P.resourceGroupArn'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (InspectorAssessmentTargetResource s)
-inspectorAssessmentTargetResource _name _resourceGroupArn =
+inspectorAssessmentTargetResource _resourceGroupArn _name =
     TF.unsafeResource "aws_inspector_assessment_target" TF.validator $
         InspectorAssessmentTargetResource'
             { _name = _name
@@ -784,12 +784,12 @@ data InspectorAssessmentTemplateResource s = InspectorAssessmentTemplateResource
     } deriving (P.Show, P.Eq, P.Ord)
 
 inspectorAssessmentTemplateResource
-    :: TF.Attr s P.Int -- ^ @duration@ - 'P.duration'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @target_arn@ - 'P.targetArn'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @rules_package_arns@ - 'P.rulesPackageArns'
-    -> TF.Attr s P.Text -- ^ @target_arn@ - 'P.targetArn'
+    -> TF.Attr s P.Int -- ^ @duration@ - 'P.duration'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (InspectorAssessmentTemplateResource s)
-inspectorAssessmentTemplateResource _duration _name _rulesPackageArns _targetArn =
+inspectorAssessmentTemplateResource _targetArn _rulesPackageArns _duration _name =
     TF.unsafeResource "aws_inspector_assessment_template" TF.validator $
         InspectorAssessmentTemplateResource'
             { _duration = _duration
@@ -1800,10 +1800,10 @@ data KinesisStreamResource s = KinesisStreamResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 kinesisStreamResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @shard_count@ - 'P.shardCount'
+    :: TF.Attr s P.Int -- ^ @shard_count@ - 'P.shardCount'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (KinesisStreamResource s)
-kinesisStreamResource _name _shardCount =
+kinesisStreamResource _shardCount _name =
     TF.unsafeResource "aws_kinesis_stream" TF.validator $
         KinesisStreamResource'
             { _encryptionType = TF.value "NONE"
@@ -1974,11 +1974,11 @@ data KmsGrantResource s = KmsGrantResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 kmsGrantResource
-    :: TF.Attr s P.Text -- ^ @grantee_principal@ - 'P.granteePrincipal'
-    -> TF.Attr s P.Text -- ^ @key_id@ - 'P.keyId'
+    :: TF.Attr s P.Text -- ^ @key_id@ - 'P.keyId'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @operations@ - 'P.operations'
+    -> TF.Attr s P.Text -- ^ @grantee_principal@ - 'P.granteePrincipal'
     -> P.Resource (KmsGrantResource s)
-kmsGrantResource _granteePrincipal _keyId _operations =
+kmsGrantResource _keyId _operations _granteePrincipal =
     TF.unsafeResource "aws_kms_grant" TF.validator $
         KmsGrantResource'
             { _constraints = TF.Nil
@@ -2152,10 +2152,10 @@ data LambdaAliasResource s = LambdaAliasResource'
 
 lambdaAliasResource
     :: TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
-    -> TF.Attr s P.Text -- ^ @function_version@ - 'P.functionVersion'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @function_version@ - 'P.functionVersion'
     -> P.Resource (LambdaAliasResource s)
-lambdaAliasResource _functionName _functionVersion _name =
+lambdaAliasResource _functionName _name _functionVersion =
     TF.unsafeResource "aws_lambda_alias" TF.validator $
         LambdaAliasResource'
             { _description = TF.Nil
@@ -2376,12 +2376,12 @@ data LambdaFunctionResource s = LambdaFunctionResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 lambdaFunctionResource
-    :: TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
-    -> TF.Attr s P.Text -- ^ @handler@ - 'P.handler'
+    :: TF.Attr s P.Text -- ^ @handler@ - 'P.handler'
+    -> TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> TF.Attr s P.Text -- ^ @runtime@ - 'P.runtime'
     -> P.Resource (LambdaFunctionResource s)
-lambdaFunctionResource _functionName _handler _role _runtime =
+lambdaFunctionResource _handler _functionName _role _runtime =
     TF.unsafeResource "aws_lambda_function" TF.validator $
         LambdaFunctionResource'
             { _deadLetterConfig = TF.Nil
@@ -3325,11 +3325,11 @@ data LbCookieStickinessPolicyResource s = LbCookieStickinessPolicyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 lbCookieStickinessPolicyResource
-    :: TF.Attr s P.Int -- ^ @lb_port@ - 'P.lbPort'
-    -> TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
+    :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Int -- ^ @lb_port@ - 'P.lbPort'
     -> P.Resource (LbCookieStickinessPolicyResource s)
-lbCookieStickinessPolicyResource _lbPort _loadBalancer _name =
+lbCookieStickinessPolicyResource _loadBalancer _name _lbPort =
     TF.unsafeResource "aws_lb_cookie_stickiness_policy" TF.validator $
         LbCookieStickinessPolicyResource'
             { _cookieExpirationPeriod = TF.Nil
@@ -3510,10 +3510,10 @@ data LbListenerRuleResource s = LbListenerRuleResource'
 
 lbListenerRuleResource
     :: TF.Attr s [TF.Attr s (ActionSetting s)] -- ^ @action@ - 'P.action'
-    -> TF.Attr s [TF.Attr s (ConditionSetting s)] -- ^ @condition@ - 'P.condition'
     -> TF.Attr s P.Text -- ^ @listener_arn@ - 'P.listenerArn'
+    -> TF.Attr s [TF.Attr s (ConditionSetting s)] -- ^ @condition@ - 'P.condition'
     -> P.Resource (LbListenerRuleResource s)
-lbListenerRuleResource _action _condition _listenerArn =
+lbListenerRuleResource _action _listenerArn _condition =
     TF.unsafeResource "aws_lb_listener_rule" TF.validator $
         LbListenerRuleResource'
             { _action = _action
@@ -3572,11 +3572,11 @@ data LbSslNegotiationPolicyResource s = LbSslNegotiationPolicyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 lbSslNegotiationPolicyResource
-    :: TF.Attr s P.Int -- ^ @lb_port@ - 'P.lbPort'
-    -> TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
+    :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Int -- ^ @lb_port@ - 'P.lbPort'
     -> P.Resource (LbSslNegotiationPolicyResource s)
-lbSslNegotiationPolicyResource _lbPort _loadBalancer _name =
+lbSslNegotiationPolicyResource _loadBalancer _name _lbPort =
     TF.unsafeResource "aws_lb_ssl_negotiation_policy" TF.validator $
         LbSslNegotiationPolicyResource'
             { _attribute = TF.Nil
@@ -3651,11 +3651,11 @@ data LbTargetGroupResource s = LbTargetGroupResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 lbTargetGroupResource
-    :: TF.Attr s P.Int -- ^ @port@ - 'P.port'
+    :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
-    -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.Resource (LbTargetGroupResource s)
-lbTargetGroupResource _port _protocol _vpcId =
+lbTargetGroupResource _vpcId _port _protocol =
     TF.unsafeResource "aws_lb_target_group" TF.validator $
         LbTargetGroupResource'
             { _deregistrationDelay = TF.value 300
@@ -3869,12 +3869,12 @@ data LightsailInstanceResource s = LightsailInstanceResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 lightsailInstanceResource
-    :: TF.Attr s P.Text -- ^ @availability_zone@ - 'P.availabilityZone'
-    -> TF.Attr s P.Text -- ^ @blueprint_id@ - 'P.blueprintId'
+    :: TF.Attr s P.Text -- ^ @blueprint_id@ - 'P.blueprintId'
     -> TF.Attr s P.Text -- ^ @bundle_id@ - 'P.bundleId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @availability_zone@ - 'P.availabilityZone'
     -> P.Resource (LightsailInstanceResource s)
-lightsailInstanceResource _availabilityZone _blueprintId _bundleId _name =
+lightsailInstanceResource _blueprintId _bundleId _name _availabilityZone =
     TF.unsafeResource "aws_lightsail_instance" TF.validator $
         LightsailInstanceResource'
             { _availabilityZone = _availabilityZone
@@ -4118,10 +4118,10 @@ data LoadBalancerBackendServerPolicyResource s = LoadBalancerBackendServerPolicy
     } deriving (P.Show, P.Eq, P.Ord)
 
 loadBalancerBackendServerPolicyResource
-    :: TF.Attr s P.Int -- ^ @instance_port@ - 'P.instancePort'
-    -> TF.Attr s P.Text -- ^ @load_balancer_name@ - 'P.loadBalancerName'
+    :: TF.Attr s P.Text -- ^ @load_balancer_name@ - 'P.loadBalancerName'
+    -> TF.Attr s P.Int -- ^ @instance_port@ - 'P.instancePort'
     -> P.Resource (LoadBalancerBackendServerPolicyResource s)
-loadBalancerBackendServerPolicyResource _instancePort _loadBalancerName =
+loadBalancerBackendServerPolicyResource _loadBalancerName _instancePort =
     TF.unsafeResource "aws_load_balancer_backend_server_policy" TF.validator $
         LoadBalancerBackendServerPolicyResource'
             { _instancePort = _instancePort
@@ -4523,14 +4523,14 @@ data MqBrokerResource s = MqBrokerResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 mqBrokerResource
-    :: TF.Attr s P.Text -- ^ @broker_name@ - 'P.brokerName'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ - 'P.securityGroups'
+    -> TF.Attr s P.Text -- ^ @broker_name@ - 'P.brokerName'
     -> TF.Attr s P.Text -- ^ @engine_type@ - 'P.engineType'
-    -> TF.Attr s P.Text -- ^ @engine_version@ - 'P.engineVersion'
     -> TF.Attr s P.Text -- ^ @host_instance_type@ - 'P.hostInstanceType'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ - 'P.securityGroups'
     -> TF.Attr s [TF.Attr s (UserSetting s)] -- ^ @user@ - 'P.user'
+    -> TF.Attr s P.Text -- ^ @engine_version@ - 'P.engineVersion'
     -> P.Resource (MqBrokerResource s)
-mqBrokerResource _brokerName _engineType _engineVersion _hostInstanceType _securityGroups _user =
+mqBrokerResource _securityGroups _brokerName _engineType _hostInstanceType _user _engineVersion =
     TF.unsafeResource "aws_mq_broker" TF.validator $
         MqBrokerResource'
             { _applyImmediately = TF.value P.False
@@ -4651,11 +4651,11 @@ data MqConfigurationResource s = MqConfigurationResource'
 
 mqConfigurationResource
     :: TF.Attr s P.Text -- ^ @data@ - 'P.data''
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @engine_type@ - 'P.engineType'
     -> TF.Attr s P.Text -- ^ @engine_version@ - 'P.engineVersion'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (MqConfigurationResource s)
-mqConfigurationResource _data' _engineType _engineVersion _name =
+mqConfigurationResource _data' _name _engineType _engineVersion =
     TF.unsafeResource "aws_mq_configuration" TF.validator $
         MqConfigurationResource'
             { _data' = _data'
@@ -4994,10 +4994,10 @@ data NeptuneClusterInstanceResource s = NeptuneClusterInstanceResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 neptuneClusterInstanceResource
-    :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
-    -> TF.Attr s P.Text -- ^ @instance_class@ - 'P.instanceClass'
+    :: TF.Attr s P.Text -- ^ @instance_class@ - 'P.instanceClass'
+    -> TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
     -> P.Resource (NeptuneClusterInstanceResource s)
-neptuneClusterInstanceResource _clusterIdentifier _instanceClass =
+neptuneClusterInstanceResource _instanceClass _clusterIdentifier =
     TF.unsafeResource "aws_neptune_cluster_instance" TF.validator $
         NeptuneClusterInstanceResource'
             { _autoMinorVersionUpgrade = TF.value P.True
@@ -5517,12 +5517,12 @@ data NetworkAclRuleResource s = NetworkAclRuleResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 networkAclRuleResource
-    :: TF.Attr s P.Text -- ^ @network_acl_id@ - 'P.networkAclId'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
-    -> TF.Attr s P.Text -- ^ @rule_action@ - 'P.ruleAction'
+    :: TF.Attr s P.Text -- ^ @rule_action@ - 'P.ruleAction'
+    -> TF.Attr s P.Text -- ^ @network_acl_id@ - 'P.networkAclId'
     -> TF.Attr s P.Int -- ^ @rule_number@ - 'P.ruleNumber'
+    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> P.Resource (NetworkAclRuleResource s)
-networkAclRuleResource _networkAclId _protocol _ruleAction _ruleNumber =
+networkAclRuleResource _ruleAction _networkAclId _ruleNumber _protocol =
     TF.unsafeResource "aws_network_acl_rule" TF.validator $
         NetworkAclRuleResource'
             { _cidrBlock = TF.Nil
@@ -5719,11 +5719,11 @@ data NetworkInterfaceAttachmentResource s = NetworkInterfaceAttachmentResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 networkInterfaceAttachmentResource
-    :: TF.Attr s P.Int -- ^ @device_index@ - 'P.deviceIndex'
-    -> TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
+    :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> TF.Attr s P.Text -- ^ @network_interface_id@ - 'P.networkInterfaceId'
+    -> TF.Attr s P.Int -- ^ @device_index@ - 'P.deviceIndex'
     -> P.Resource (NetworkInterfaceAttachmentResource s)
-networkInterfaceAttachmentResource _deviceIndex _instanceId _networkInterfaceId =
+networkInterfaceAttachmentResource _instanceId _networkInterfaceId _deviceIndex =
     TF.unsafeResource "aws_network_interface_attachment" TF.validator $
         NetworkInterfaceAttachmentResource'
             { _deviceIndex = _deviceIndex
@@ -5858,11 +5858,11 @@ data OpsworksApplicationResource s = OpsworksApplicationResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 opsworksApplicationResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
+    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (OpsworksApplicationResource s)
-opsworksApplicationResource _name _stackId _type' =
+opsworksApplicationResource _stackId _name _type' =
     TF.unsafeResource "aws_opsworks_application" TF.validator $
         OpsworksApplicationResource'
             { _autoBundleOnDeploy = TF.Nil
@@ -6056,11 +6056,11 @@ data OpsworksCustomLayerResource s = OpsworksCustomLayerResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 opsworksCustomLayerResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @short_name@ - 'P.shortName'
-    -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksCustomLayerResource s)
-opsworksCustomLayerResource _name _shortName _stackId =
+opsworksCustomLayerResource _stackId _name _shortName =
     TF.unsafeResource "aws_opsworks_custom_layer" TF.validator $
         OpsworksCustomLayerResource'
             { _autoAssignElasticIps = TF.value P.False
@@ -6296,10 +6296,10 @@ data OpsworksGangliaLayerResource s = OpsworksGangliaLayerResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 opsworksGangliaLayerResource
-    :: TF.Attr s P.Text -- ^ @password@ - 'P.password'
-    -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
+    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
+    -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
     -> P.Resource (OpsworksGangliaLayerResource s)
-opsworksGangliaLayerResource _password _stackId =
+opsworksGangliaLayerResource _stackId _password =
     TF.unsafeResource "aws_opsworks_ganglia_layer" TF.validator $
         OpsworksGangliaLayerResource'
             { _autoAssignElasticIps = TF.value P.False
@@ -6796,10 +6796,10 @@ data OpsworksInstanceResource s = OpsworksInstanceResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 opsworksInstanceResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @layer_ids@ - 'P.layerIds'
-    -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
+    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @layer_ids@ - 'P.layerIds'
     -> P.Resource (OpsworksInstanceResource s)
-opsworksInstanceResource _layerIds _stackId =
+opsworksInstanceResource _stackId _layerIds =
     TF.unsafeResource "aws_opsworks_instance" TF.validator $
         OpsworksInstanceResource'
             { _agentVersion = TF.value "INHERIT"
@@ -8536,12 +8536,12 @@ data OpsworksRdsDbInstanceResource s = OpsworksRdsDbInstanceResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 opsworksRdsDbInstanceResource
-    :: TF.Attr s P.Text -- ^ @db_password@ - 'P.dbPassword'
-    -> TF.Attr s P.Text -- ^ @db_user@ - 'P.dbUser'
-    -> TF.Attr s P.Text -- ^ @rds_db_instance_arn@ - 'P.rdsDbInstanceArn'
+    :: TF.Attr s P.Text -- ^ @rds_db_instance_arn@ - 'P.rdsDbInstanceArn'
     -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
+    -> TF.Attr s P.Text -- ^ @db_password@ - 'P.dbPassword'
+    -> TF.Attr s P.Text -- ^ @db_user@ - 'P.dbUser'
     -> P.Resource (OpsworksRdsDbInstanceResource s)
-opsworksRdsDbInstanceResource _dbPassword _dbUser _rdsDbInstanceArn _stackId =
+opsworksRdsDbInstanceResource _rdsDbInstanceArn _stackId _dbPassword _dbUser =
     TF.unsafeResource "aws_opsworks_rds_db_instance" TF.validator $
         OpsworksRdsDbInstanceResource'
             { _dbPassword = _dbPassword
@@ -8641,11 +8641,11 @@ data OpsworksStackResource s = OpsworksStackResource'
 
 opsworksStackResource
     :: TF.Attr s P.Text -- ^ @default_instance_profile_arn@ - 'P.defaultInstanceProfileArn'
+    -> TF.Attr s P.Text -- ^ @service_role_arn@ - 'P.serviceRoleArn'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> TF.Attr s P.Text -- ^ @service_role_arn@ - 'P.serviceRoleArn'
     -> P.Resource (OpsworksStackResource s)
-opsworksStackResource _defaultInstanceProfileArn _name _region _serviceRoleArn =
+opsworksStackResource _defaultInstanceProfileArn _serviceRoleArn _name _region =
     TF.unsafeResource "aws_opsworks_stack" TF.validator $
         OpsworksStackResource'
             { _berkshelfVersion = TF.value "3.2.0"
@@ -9039,10 +9039,10 @@ data OpsworksUserProfileResource s = OpsworksUserProfileResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 opsworksUserProfileResource
-    :: TF.Attr s P.Text -- ^ @ssh_username@ - 'P.sshUsername'
-    -> TF.Attr s P.Text -- ^ @user_arn@ - 'P.userArn'
+    :: TF.Attr s P.Text -- ^ @user_arn@ - 'P.userArn'
+    -> TF.Attr s P.Text -- ^ @ssh_username@ - 'P.sshUsername'
     -> P.Resource (OpsworksUserProfileResource s)
-opsworksUserProfileResource _sshUsername _userArn =
+opsworksUserProfileResource _userArn _sshUsername =
     TF.unsafeResource "aws_opsworks_user_profile" TF.validator $
         OpsworksUserProfileResource'
             { _allowSelfManagement = TF.value P.False
@@ -9366,10 +9366,10 @@ data ProxyProtocolPolicyResource s = ProxyProtocolPolicyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 proxyProtocolPolicyResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @instance_ports@ - 'P.instancePorts'
-    -> TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
+    :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @instance_ports@ - 'P.instancePorts'
     -> P.Resource (ProxyProtocolPolicyResource s)
-proxyProtocolPolicyResource _instancePorts _loadBalancer =
+proxyProtocolPolicyResource _loadBalancer _instancePorts =
     TF.unsafeResource "aws_proxy_protocol_policy" TF.validator $
         ProxyProtocolPolicyResource'
             { _instancePorts = _instancePorts
@@ -9679,10 +9679,10 @@ data RdsClusterInstanceResource s = RdsClusterInstanceResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 rdsClusterInstanceResource
-    :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
-    -> TF.Attr s P.Text -- ^ @instance_class@ - 'P.instanceClass'
+    :: TF.Attr s P.Text -- ^ @instance_class@ - 'P.instanceClass'
+    -> TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
     -> P.Resource (RdsClusterInstanceResource s)
-rdsClusterInstanceResource _clusterIdentifier _instanceClass =
+rdsClusterInstanceResource _instanceClass _clusterIdentifier =
     TF.unsafeResource "aws_rds_cluster_instance" TF.validator $
         RdsClusterInstanceResource'
             { _autoMinorVersionUpgrade = TF.value P.True
@@ -10283,10 +10283,10 @@ data RedshiftSubnetGroupResource s = RedshiftSubnetGroupResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 redshiftSubnetGroupResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @subnet_ids@ - 'P.subnetIds'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @subnet_ids@ - 'P.subnetIds'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RedshiftSubnetGroupResource s)
-redshiftSubnetGroupResource _name _subnetIds =
+redshiftSubnetGroupResource _subnetIds _name =
     TF.unsafeResource "aws_redshift_subnet_group" TF.validator $
         RedshiftSubnetGroupResource'
             { _description = TF.value "Managed by Terraform"
@@ -10793,11 +10793,11 @@ data Route53RecordResource s = Route53RecordResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 route53RecordResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
     -> P.Resource (Route53RecordResource s)
-route53RecordResource _name _type' _zoneId =
+route53RecordResource _zoneId _name _type' =
     TF.unsafeResource "aws_route53_record" TF.validator $
         Route53RecordResource'
             { _alias = TF.Nil

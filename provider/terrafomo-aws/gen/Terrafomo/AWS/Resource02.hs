@@ -1876,10 +1876,10 @@ data DmsEndpointResource s = DmsEndpointResource'
 
 dmsEndpointResource
     :: TF.Attr s P.Text -- ^ @endpoint_id@ - 'P.endpointId'
-    -> TF.Attr s P.Text -- ^ @endpoint_type@ - 'P.endpointType'
     -> TF.Attr s P.Text -- ^ @engine_name@ - 'P.engineName'
+    -> TF.Attr s P.Text -- ^ @endpoint_type@ - 'P.endpointType'
     -> P.Resource (DmsEndpointResource s)
-dmsEndpointResource _endpointId _endpointType _engineName =
+dmsEndpointResource _endpointId _engineName _endpointType =
     TF.unsafeResource "aws_dms_endpoint" TF.validator $
         DmsEndpointResource'
             { _databaseName = TF.Nil
@@ -2205,14 +2205,14 @@ data DmsReplicationTaskResource s = DmsReplicationTaskResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 dmsReplicationTaskResource
-    :: TF.Attr s P.Text -- ^ @migration_type@ - 'P.migrationType'
-    -> TF.Attr s P.Text -- ^ @replication_instance_arn@ - 'P.replicationInstanceArn'
-    -> TF.Attr s P.Text -- ^ @replication_task_id@ - 'P.replicationTaskId'
+    :: TF.Attr s P.Text -- ^ @replication_instance_arn@ - 'P.replicationInstanceArn'
     -> TF.Attr s P.Text -- ^ @source_endpoint_arn@ - 'P.sourceEndpointArn'
-    -> TF.Attr s P.Text -- ^ @table_mappings@ - 'P.tableMappings'
     -> TF.Attr s P.Text -- ^ @target_endpoint_arn@ - 'P.targetEndpointArn'
+    -> TF.Attr s P.Text -- ^ @replication_task_id@ - 'P.replicationTaskId'
+    -> TF.Attr s P.Text -- ^ @table_mappings@ - 'P.tableMappings'
+    -> TF.Attr s P.Text -- ^ @migration_type@ - 'P.migrationType'
     -> P.Resource (DmsReplicationTaskResource s)
-dmsReplicationTaskResource _migrationType _replicationInstanceArn _replicationTaskId _sourceEndpointArn _tableMappings _targetEndpointArn =
+dmsReplicationTaskResource _replicationInstanceArn _sourceEndpointArn _targetEndpointArn _replicationTaskId _tableMappings _migrationType =
     TF.unsafeResource "aws_dms_replication_task" TF.validator $
         DmsReplicationTaskResource'
             { _cdcStartTime = TF.Nil
@@ -2512,14 +2512,14 @@ data DxHostedPrivateVirtualInterfaceResource s = DxHostedPrivateVirtualInterface
     } deriving (P.Show, P.Eq, P.Ord)
 
 dxHostedPrivateVirtualInterfaceResource
-    :: TF.Attr s P.Text -- ^ @address_family@ - 'P.addressFamily'
-    -> TF.Attr s P.Int -- ^ @bgp_asn@ - 'P.bgpAsn'
+    :: TF.Attr s P.Int -- ^ @bgp_asn@ - 'P.bgpAsn'
+    -> TF.Attr s P.Text -- ^ @address_family@ - 'P.addressFamily'
     -> TF.Attr s P.Text -- ^ @connection_id@ - 'P.connectionId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @owner_account_id@ - 'P.ownerAccountId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Int -- ^ @vlan@ - 'P.vlan'
     -> P.Resource (DxHostedPrivateVirtualInterfaceResource s)
-dxHostedPrivateVirtualInterfaceResource _addressFamily _bgpAsn _connectionId _name _ownerAccountId _vlan =
+dxHostedPrivateVirtualInterfaceResource _bgpAsn _addressFamily _connectionId _ownerAccountId _name _vlan =
     TF.unsafeResource "aws_dx_hosted_private_virtual_interface" TF.validator $
         DxHostedPrivateVirtualInterfaceResource'
             { _addressFamily = _addressFamily
@@ -2696,15 +2696,15 @@ data DxHostedPublicVirtualInterfaceResource s = DxHostedPublicVirtualInterfaceRe
     } deriving (P.Show, P.Eq, P.Ord)
 
 dxHostedPublicVirtualInterfaceResource
-    :: TF.Attr s P.Text -- ^ @address_family@ - 'P.addressFamily'
-    -> TF.Attr s P.Int -- ^ @bgp_asn@ - 'P.bgpAsn'
+    :: TF.Attr s P.Int -- ^ @bgp_asn@ - 'P.bgpAsn'
+    -> TF.Attr s P.Text -- ^ @address_family@ - 'P.addressFamily'
     -> TF.Attr s P.Text -- ^ @connection_id@ - 'P.connectionId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @owner_account_id@ - 'P.ownerAccountId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @route_filter_prefixes@ - 'P.routeFilterPrefixes'
     -> TF.Attr s P.Int -- ^ @vlan@ - 'P.vlan'
     -> P.Resource (DxHostedPublicVirtualInterfaceResource s)
-dxHostedPublicVirtualInterfaceResource _addressFamily _bgpAsn _connectionId _name _ownerAccountId _routeFilterPrefixes _vlan =
+dxHostedPublicVirtualInterfaceResource _bgpAsn _addressFamily _connectionId _ownerAccountId _name _routeFilterPrefixes _vlan =
     TF.unsafeResource "aws_dx_hosted_public_virtual_interface" TF.validator $
         DxHostedPublicVirtualInterfaceResource'
             { _addressFamily = _addressFamily
@@ -2937,13 +2937,13 @@ data DxPrivateVirtualInterfaceResource s = DxPrivateVirtualInterfaceResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 dxPrivateVirtualInterfaceResource
-    :: TF.Attr s P.Text -- ^ @address_family@ - 'P.addressFamily'
-    -> TF.Attr s P.Int -- ^ @bgp_asn@ - 'P.bgpAsn'
+    :: TF.Attr s P.Int -- ^ @bgp_asn@ - 'P.bgpAsn'
+    -> TF.Attr s P.Text -- ^ @address_family@ - 'P.addressFamily'
     -> TF.Attr s P.Text -- ^ @connection_id@ - 'P.connectionId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Int -- ^ @vlan@ - 'P.vlan'
     -> P.Resource (DxPrivateVirtualInterfaceResource s)
-dxPrivateVirtualInterfaceResource _addressFamily _bgpAsn _connectionId _name _vlan =
+dxPrivateVirtualInterfaceResource _bgpAsn _addressFamily _connectionId _name _vlan =
     TF.unsafeResource "aws_dx_private_virtual_interface" TF.validator $
         DxPrivateVirtualInterfaceResource'
             { _addressFamily = _addressFamily
@@ -3063,14 +3063,14 @@ data DxPublicVirtualInterfaceResource s = DxPublicVirtualInterfaceResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 dxPublicVirtualInterfaceResource
-    :: TF.Attr s P.Text -- ^ @address_family@ - 'P.addressFamily'
-    -> TF.Attr s P.Int -- ^ @bgp_asn@ - 'P.bgpAsn'
+    :: TF.Attr s P.Int -- ^ @bgp_asn@ - 'P.bgpAsn'
+    -> TF.Attr s P.Text -- ^ @address_family@ - 'P.addressFamily'
     -> TF.Attr s P.Text -- ^ @connection_id@ - 'P.connectionId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @route_filter_prefixes@ - 'P.routeFilterPrefixes'
     -> TF.Attr s P.Int -- ^ @vlan@ - 'P.vlan'
     -> P.Resource (DxPublicVirtualInterfaceResource s)
-dxPublicVirtualInterfaceResource _addressFamily _bgpAsn _connectionId _name _routeFilterPrefixes _vlan =
+dxPublicVirtualInterfaceResource _bgpAsn _addressFamily _connectionId _name _routeFilterPrefixes _vlan =
     TF.unsafeResource "aws_dx_public_virtual_interface" TF.validator $
         DxPublicVirtualInterfaceResource'
             { _addressFamily = _addressFamily
@@ -3231,12 +3231,12 @@ data DynamodbTableResource s = DynamodbTableResource'
 
 dynamodbTableResource
     :: TF.Attr s [TF.Attr s (AttributeSetting s)] -- ^ @attribute@ - 'P.attribute'
-    -> TF.Attr s P.Text -- ^ @hash_key@ - 'P.hashKey'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Int -- ^ @read_capacity@ - 'P.readCapacity'
     -> TF.Attr s P.Int -- ^ @write_capacity@ - 'P.writeCapacity'
+    -> TF.Attr s P.Text -- ^ @hash_key@ - 'P.hashKey'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DynamodbTableResource s)
-dynamodbTableResource _attribute _hashKey _name _readCapacity _writeCapacity =
+dynamodbTableResource _attribute _readCapacity _writeCapacity _hashKey _name =
     TF.unsafeResource "aws_dynamodb_table" TF.validator $
         DynamodbTableResource'
             { _attribute = _attribute
@@ -3367,11 +3367,11 @@ data DynamodbTableItemResource s = DynamodbTableItemResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 dynamodbTableItemResource
-    :: TF.Attr s P.Text -- ^ @hash_key@ - 'P.hashKey'
-    -> TF.Attr s P.Text -- ^ @item@ - 'P.item'
+    :: TF.Attr s P.Text -- ^ @item@ - 'P.item'
+    -> TF.Attr s P.Text -- ^ @hash_key@ - 'P.hashKey'
     -> TF.Attr s P.Text -- ^ @table_name@ - 'P.tableName'
     -> P.Resource (DynamodbTableItemResource s)
-dynamodbTableItemResource _hashKey _item _tableName =
+dynamodbTableItemResource _item _hashKey _tableName =
     TF.unsafeResource "aws_dynamodb_table_item" TF.validator $
         DynamodbTableItemResource'
             { _hashKey = _hashKey
@@ -3759,10 +3759,10 @@ data EcsServiceResource s = EcsServiceResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 ecsServiceResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @task_definition@ - 'P.taskDefinition'
+    :: TF.Attr s P.Text -- ^ @task_definition@ - 'P.taskDefinition'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (EcsServiceResource s)
-ecsServiceResource _name _taskDefinition =
+ecsServiceResource _taskDefinition _name =
     TF.unsafeResource "aws_ecs_service" TF.validator $
         EcsServiceResource'
             { _deploymentMaximumPercent = TF.value 200
@@ -4286,11 +4286,11 @@ data EksClusterResource s = EksClusterResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 eksClusterResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> TF.Attr s (VpcConfigSetting s) -- ^ @vpc_config@ - 'P.vpcConfig'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (EksClusterResource s)
-eksClusterResource _name _roleArn _vpcConfig =
+eksClusterResource _roleArn _vpcConfig _name =
     TF.unsafeResource "aws_eks_cluster" TF.validator $
         EksClusterResource'
             { _name = _name
@@ -5209,10 +5209,10 @@ data ElasticacheSubnetGroupResource s = ElasticacheSubnetGroupResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 elasticacheSubnetGroupResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @subnet_ids@ - 'P.subnetIds'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @subnet_ids@ - 'P.subnetIds'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ElasticacheSubnetGroupResource s)
-elasticacheSubnetGroupResource _name _subnetIds =
+elasticacheSubnetGroupResource _subnetIds _name =
     TF.unsafeResource "aws_elasticache_subnet_group" TF.validator $
         ElasticacheSubnetGroupResource'
             { _description = TF.value "Managed by Terraform"
@@ -5386,10 +5386,10 @@ data ElasticsearchDomainPolicyResource s = ElasticsearchDomainPolicyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 elasticsearchDomainPolicyResource
-    :: TF.Attr s P.Text -- ^ @access_policies@ - 'P.accessPolicies'
-    -> TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
+    :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
+    -> TF.Attr s P.Text -- ^ @access_policies@ - 'P.accessPolicies'
     -> P.Resource (ElasticsearchDomainPolicyResource s)
-elasticsearchDomainPolicyResource _accessPolicies _domainName =
+elasticsearchDomainPolicyResource _domainName _accessPolicies =
     TF.unsafeResource "aws_elasticsearch_domain_policy" TF.validator $
         ElasticsearchDomainPolicyResource'
             { _accessPolicies = _accessPolicies
@@ -5903,11 +5903,11 @@ data EmrClusterResource s = EmrClusterResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 emrClusterResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @release_label@ - 'P.releaseLabel'
+    :: TF.Attr s P.Text -- ^ @release_label@ - 'P.releaseLabel'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @service_role@ - 'P.serviceRole'
     -> P.Resource (EmrClusterResource s)
-emrClusterResource _name _releaseLabel _serviceRole =
+emrClusterResource _releaseLabel _name _serviceRole =
     TF.unsafeResource "aws_emr_cluster" TF.validator $
         EmrClusterResource'
             { _additionalInfo = TF.Nil
@@ -6428,11 +6428,11 @@ data GameliftBuildResource s = GameliftBuildResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 gameliftBuildResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s (StorageLocationSetting s) -- ^ @storage_location@ - 'P.storageLocation'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @operating_system@ - 'P.operatingSystem'
-    -> TF.Attr s (StorageLocationSetting s) -- ^ @storage_location@ - 'P.storageLocation'
     -> P.Resource (GameliftBuildResource s)
-gameliftBuildResource _name _operatingSystem _storageLocation =
+gameliftBuildResource _storageLocation _name _operatingSystem =
     TF.unsafeResource "aws_gamelift_build" TF.validator $
         GameliftBuildResource'
             { _name = _name
@@ -6509,10 +6509,10 @@ data GameliftFleetResource s = GameliftFleetResource'
 
 gameliftFleetResource
     :: TF.Attr s P.Text -- ^ @build_id@ - 'P.buildId'
-    -> TF.Attr s P.Text -- ^ @ec2_instance_type@ - 'P.ec2InstanceType'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @ec2_instance_type@ - 'P.ec2InstanceType'
     -> P.Resource (GameliftFleetResource s)
-gameliftFleetResource _buildId _ec2InstanceType _name =
+gameliftFleetResource _buildId _name _ec2InstanceType =
     TF.unsafeResource "aws_gamelift_fleet" TF.validator $
         GameliftFleetResource'
             { _buildId = _buildId
@@ -7001,10 +7001,10 @@ data GlueConnectionResource s = GlueConnectionResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 glueConnectionResource
-    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @connection_properties@ - 'P.connectionProperties'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @connection_properties@ - 'P.connectionProperties'
     -> P.Resource (GlueConnectionResource s)
-glueConnectionResource _connectionProperties _name =
+glueConnectionResource _name _connectionProperties =
     TF.unsafeResource "aws_glue_connection" TF.validator $
         GlueConnectionResource'
             { _connectionProperties = _connectionProperties
@@ -7248,11 +7248,11 @@ data GlueJobResource s = GlueJobResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 glueJobResource
-    :: TF.Attr s (CommandSetting s) -- ^ @command@ - 'P.command'
+    :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    -> TF.Attr s (CommandSetting s) -- ^ @command@ - 'P.command'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> P.Resource (GlueJobResource s)
-glueJobResource _command _name _roleArn =
+glueJobResource _roleArn _command _name =
     TF.unsafeResource "aws_glue_job" TF.validator $
         GlueJobResource'
             { _allocatedCapacity = TF.value 10
@@ -7490,12 +7490,12 @@ data GuarddutyIpsetResource s = GuarddutyIpsetResource'
 
 guarddutyIpsetResource
     :: TF.Attr s P.Bool -- ^ @activate@ - 'P.activate'
-    -> TF.Attr s P.Text -- ^ @detector_id@ - 'P.detectorId'
     -> TF.Attr s P.Text -- ^ @format@ - 'P.format'
+    -> TF.Attr s P.Text -- ^ @detector_id@ - 'P.detectorId'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (GuarddutyIpsetResource s)
-guarddutyIpsetResource _activate _detectorId _format _location _name =
+guarddutyIpsetResource _activate _format _detectorId _location _name =
     TF.unsafeResource "aws_guardduty_ipset" TF.validator $
         GuarddutyIpsetResource'
             { _activate = _activate
@@ -7568,11 +7568,11 @@ data GuarddutyMemberResource s = GuarddutyMemberResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 guarddutyMemberResource
-    :: TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
+    :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
+    -> TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
     -> TF.Attr s P.Text -- ^ @detector_id@ - 'P.detectorId'
-    -> TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> P.Resource (GuarddutyMemberResource s)
-guarddutyMemberResource _accountId _detectorId _email =
+guarddutyMemberResource _email _accountId _detectorId =
     TF.unsafeResource "aws_guardduty_member" TF.validator $
         GuarddutyMemberResource'
             { _accountId = _accountId
@@ -7653,12 +7653,12 @@ data GuarddutyThreatintelsetResource s = GuarddutyThreatintelsetResource'
 
 guarddutyThreatintelsetResource
     :: TF.Attr s P.Bool -- ^ @activate@ - 'P.activate'
-    -> TF.Attr s P.Text -- ^ @detector_id@ - 'P.detectorId'
     -> TF.Attr s P.Text -- ^ @format@ - 'P.format'
+    -> TF.Attr s P.Text -- ^ @detector_id@ - 'P.detectorId'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (GuarddutyThreatintelsetResource s)
-guarddutyThreatintelsetResource _activate _detectorId _format _location _name =
+guarddutyThreatintelsetResource _activate _format _detectorId _location _name =
     TF.unsafeResource "aws_guardduty_threatintelset" TF.validator $
         GuarddutyThreatintelsetResource'
             { _activate = _activate
@@ -8028,10 +8028,10 @@ data IamGroupPolicyAttachmentResource s = IamGroupPolicyAttachmentResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 iamGroupPolicyAttachmentResource
-    :: TF.Attr s P.Text -- ^ @group@ - 'P.group'
-    -> TF.Attr s P.Text -- ^ @policy_arn@ - 'P.policyArn'
+    :: TF.Attr s P.Text -- ^ @policy_arn@ - 'P.policyArn'
+    -> TF.Attr s P.Text -- ^ @group@ - 'P.group'
     -> P.Resource (IamGroupPolicyAttachmentResource s)
-iamGroupPolicyAttachmentResource _group _policyArn =
+iamGroupPolicyAttachmentResource _policyArn _group =
     TF.unsafeResource "aws_iam_group_policy_attachment" TF.validator $
         IamGroupPolicyAttachmentResource'
             { _group = _group
@@ -8261,10 +8261,10 @@ data IamPolicyAttachmentResource s = IamPolicyAttachmentResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 iamPolicyAttachmentResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @policy_arn@ - 'P.policyArn'
+    :: TF.Attr s P.Text -- ^ @policy_arn@ - 'P.policyArn'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (IamPolicyAttachmentResource s)
-iamPolicyAttachmentResource _name _policyArn =
+iamPolicyAttachmentResource _policyArn _name =
     TF.unsafeResource "aws_iam_policy_attachment" TF.validator $
         IamPolicyAttachmentResource'
             { _groups = TF.Nil
@@ -8528,10 +8528,10 @@ data IamSamlProviderResource s = IamSamlProviderResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 iamSamlProviderResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @saml_metadata_document@ - 'P.samlMetadataDocument'
+    :: TF.Attr s P.Text -- ^ @saml_metadata_document@ - 'P.samlMetadataDocument'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (IamSamlProviderResource s)
-iamSamlProviderResource _name _samlMetadataDocument =
+iamSamlProviderResource _samlMetadataDocument _name =
     TF.unsafeResource "aws_iam_saml_provider" TF.validator $
         IamSamlProviderResource'
             { _name = _name

@@ -1689,14 +1689,14 @@ data ActionSetting s = ActionSetting'
 
 newActionSetting
     :: TF.Attr s P.Text -- ^ @target_group_arn@ - 'P.targetGroupArn'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @category@ - 'P.category'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @owner@ - 'P.owner'
     -> TF.Attr s P.Text -- ^ @provider@ - 'P.provider''
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @version@ - 'P.version'
     -> ActionSetting s
-newActionSetting _targetGroupArn _type' _category _name _owner _provider' _version =
+newActionSetting _targetGroupArn _category _name _owner _provider' _type' _version =
     ActionSetting'
         { _targetGroupArn = _targetGroupArn
         , _type' = _type'
@@ -1855,10 +1855,10 @@ data ActivatedRuleSetting s = ActivatedRuleSetting'
 
 newActivatedRuleSetting
     :: TF.Attr s (ActionSetting s) -- ^ @action@ - 'P.action'
-    -> TF.Attr s P.Int -- ^ @priority@ - 'P.priority'
     -> TF.Attr s P.Text -- ^ @rule_id@ - 'P.ruleId'
+    -> TF.Attr s P.Int -- ^ @priority@ - 'P.priority'
     -> ActivatedRuleSetting s
-newActivatedRuleSetting _action _priority _ruleId =
+newActivatedRuleSetting _action _ruleId _priority =
     ActivatedRuleSetting'
         { _action = _action
         , _priority = _priority
@@ -1917,10 +1917,10 @@ data AddHeaderActionSetting s = AddHeaderActionSetting'
 
 newAddHeaderActionSetting
     :: TF.Attr s P.Text -- ^ @header_name@ - 'P.headerName'
-    -> TF.Attr s P.Text -- ^ @header_value@ - 'P.headerValue'
     -> TF.Attr s P.Int -- ^ @position@ - 'P.position'
+    -> TF.Attr s P.Text -- ^ @header_value@ - 'P.headerValue'
     -> AddHeaderActionSetting s
-newAddHeaderActionSetting _headerName _headerValue _position =
+newAddHeaderActionSetting _headerName _position _headerValue =
     AddHeaderActionSetting'
         { _headerName = _headerName
         , _headerValue = _headerValue
@@ -2068,10 +2068,10 @@ data AliasSetting s = AliasSetting'
 
 newAliasSetting
     :: TF.Attr s P.Bool -- ^ @evaluate_target_health@ - 'P.evaluateTargetHealth'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> AliasSetting s
-newAliasSetting _evaluateTargetHealth _name _zoneId =
+newAliasSetting _evaluateTargetHealth _zoneId _name =
     AliasSetting'
         { _evaluateTargetHealth = _evaluateTargetHealth
         , _name = _name
@@ -3340,12 +3340,12 @@ data BounceActionSetting s = BounceActionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newBounceActionSetting
-    :: TF.Attr s P.Text -- ^ @message@ - 'P.message'
+    :: TF.Attr s P.Text -- ^ @smtp_reply_code@ - 'P.smtpReplyCode'
+    -> TF.Attr s P.Text -- ^ @message@ - 'P.message'
     -> TF.Attr s P.Int -- ^ @position@ - 'P.position'
     -> TF.Attr s P.Text -- ^ @sender@ - 'P.sender'
-    -> TF.Attr s P.Text -- ^ @smtp_reply_code@ - 'P.smtpReplyCode'
     -> BounceActionSetting s
-newBounceActionSetting _message _position _sender _smtpReplyCode =
+newBounceActionSetting _smtpReplyCode _message _position _sender =
     BounceActionSetting'
         { _message = _message
         , _position = _position
@@ -3490,11 +3490,11 @@ data ByteMatchTuplesSetting s = ByteMatchTuplesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newByteMatchTuplesSetting
-    :: TF.Attr s (FieldToMatchSetting s) -- ^ @field_to_match@ - 'P.fieldToMatch'
-    -> TF.Attr s P.Text -- ^ @positional_constraint@ - 'P.positionalConstraint'
+    :: TF.Attr s P.Text -- ^ @positional_constraint@ - 'P.positionalConstraint'
+    -> TF.Attr s (FieldToMatchSetting s) -- ^ @field_to_match@ - 'P.fieldToMatch'
     -> TF.Attr s P.Text -- ^ @text_transformation@ - 'P.textTransformation'
     -> ByteMatchTuplesSetting s
-newByteMatchTuplesSetting _fieldToMatch _positionalConstraint _textTransformation =
+newByteMatchTuplesSetting _positionalConstraint _fieldToMatch _textTransformation =
     ByteMatchTuplesSetting'
         { _fieldToMatch = _fieldToMatch
         , _positionalConstraint = _positionalConstraint
@@ -3758,12 +3758,12 @@ data CloudwatchAlarmSetting s = CloudwatchAlarmSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newCloudwatchAlarmSetting
-    :: TF.Attr s P.Text -- ^ @alarm_name@ - 'P.alarmName'
-    -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    -> TF.Attr s P.Text -- ^ @alarm_name@ - 'P.alarmName'
     -> TF.Attr s P.Text -- ^ @state_reason@ - 'P.stateReason'
     -> TF.Attr s P.Text -- ^ @state_value@ - 'P.stateValue'
     -> CloudwatchAlarmSetting s
-newCloudwatchAlarmSetting _alarmName _roleArn _stateReason _stateValue =
+newCloudwatchAlarmSetting _roleArn _alarmName _stateReason _stateValue =
     CloudwatchAlarmSetting'
         { _alarmName = _alarmName
         , _roleArn = _roleArn
@@ -3817,11 +3817,11 @@ data CloudwatchDestinationSetting s = CloudwatchDestinationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newCloudwatchDestinationSetting
-    :: TF.Attr s P.Text -- ^ @default_value@ - 'P.defaultValue'
-    -> TF.Attr s P.Text -- ^ @dimension_name@ - 'P.dimensionName'
+    :: TF.Attr s P.Text -- ^ @dimension_name@ - 'P.dimensionName'
     -> TF.Attr s P.Text -- ^ @value_source@ - 'P.valueSource'
+    -> TF.Attr s P.Text -- ^ @default_value@ - 'P.defaultValue'
     -> CloudwatchDestinationSetting s
-newCloudwatchDestinationSetting _defaultValue _dimensionName _valueSource =
+newCloudwatchDestinationSetting _dimensionName _valueSource _defaultValue =
     CloudwatchDestinationSetting'
         { _defaultValue = _defaultValue
         , _dimensionName = _dimensionName
@@ -3925,13 +3925,13 @@ data CloudwatchMetricSetting s = CloudwatchMetricSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newCloudwatchMetricSetting
-    :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
+    :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    -> TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
     -> TF.Attr s P.Text -- ^ @metric_namespace@ - 'P.metricNamespace'
     -> TF.Attr s P.Text -- ^ @metric_unit@ - 'P.metricUnit'
     -> TF.Attr s P.Text -- ^ @metric_value@ - 'P.metricValue'
-    -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> CloudwatchMetricSetting s
-newCloudwatchMetricSetting _metricName _metricNamespace _metricUnit _metricValue _roleArn =
+newCloudwatchMetricSetting _roleArn _metricName _metricNamespace _metricUnit _metricValue =
     CloudwatchMetricSetting'
         { _metricName = _metricName
         , _metricNamespace = _metricNamespace
@@ -4074,10 +4074,10 @@ data ClusterModeSetting s = ClusterModeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newClusterModeSetting
-    :: TF.Attr s P.Int -- ^ @num_node_groups@ - 'P.numNodeGroups'
-    -> TF.Attr s P.Int -- ^ @replicas_per_node_group@ - 'P.replicasPerNodeGroup'
+    :: TF.Attr s P.Int -- ^ @replicas_per_node_group@ - 'P.replicasPerNodeGroup'
+    -> TF.Attr s P.Int -- ^ @num_node_groups@ - 'P.numNodeGroups'
     -> ClusterModeSetting s
-newClusterModeSetting _numNodeGroups _replicasPerNodeGroup =
+newClusterModeSetting _replicasPerNodeGroup _numNodeGroups =
     ClusterModeSetting'
         { _numNodeGroups = _numNodeGroups
         , _replicasPerNodeGroup = _replicasPerNodeGroup
@@ -4168,11 +4168,11 @@ data CognitoOptionsSetting s = CognitoOptionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newCognitoOptionsSetting
-    :: TF.Attr s P.Text -- ^ @identity_pool_id@ - 'P.identityPoolId'
-    -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    -> TF.Attr s P.Text -- ^ @identity_pool_id@ - 'P.identityPoolId'
     -> TF.Attr s P.Text -- ^ @user_pool_id@ - 'P.userPoolId'
     -> CognitoOptionsSetting s
-newCognitoOptionsSetting _identityPoolId _roleArn _userPoolId =
+newCognitoOptionsSetting _roleArn _identityPoolId _userPoolId =
     CognitoOptionsSetting'
         { _enabled = TF.value P.False
         , _identityPoolId = _identityPoolId
@@ -4366,15 +4366,15 @@ data ComputeResourcesSetting s = ComputeResourcesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newComputeResourcesSetting
-    :: TF.Attr s P.Text -- ^ @instance_role@ - 'P.instanceRole'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @security_group_ids@ - 'P.securityGroupIds'
+    -> TF.Attr s P.Text -- ^ @instance_role@ - 'P.instanceRole'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @subnets@ - 'P.subnets'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @instance_type@ - 'P.instanceType'
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Int -- ^ @max_vcpus@ - 'P.maxVcpus'
     -> TF.Attr s P.Int -- ^ @min_vcpus@ - 'P.minVcpus'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @security_group_ids@ - 'P.securityGroupIds'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @subnets@ - 'P.subnets'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> ComputeResourcesSetting s
-newComputeResourcesSetting _instanceRole _instanceType _maxVcpus _minVcpus _securityGroupIds _subnets _type' =
+newComputeResourcesSetting _securityGroupIds _instanceRole _subnets _instanceType _type' _maxVcpus _minVcpus =
     ComputeResourcesSetting'
         { _bidPercentage = TF.Nil
         , _desiredVcpus = TF.Nil
@@ -4626,12 +4626,12 @@ data ConnectSettingsSetting s = ConnectSettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newConnectSettingsSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @customer_dns_ips@ - 'P.customerDnsIps'
-    -> TF.Attr s P.Text -- ^ @customer_username@ - 'P.customerUsername'
+    :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @subnet_ids@ - 'P.subnetIds'
-    -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @customer_dns_ips@ - 'P.customerDnsIps'
+    -> TF.Attr s P.Text -- ^ @customer_username@ - 'P.customerUsername'
     -> ConnectSettingsSetting s
-newConnectSettingsSetting _customerDnsIps _customerUsername _subnetIds _vpcId =
+newConnectSettingsSetting _vpcId _subnetIds _customerDnsIps _customerUsername =
     ConnectSettingsSetting'
         { _customerDnsIps = _customerDnsIps
         , _customerUsername = _customerUsername
@@ -5329,12 +5329,12 @@ data CustomOriginConfigSetting s = CustomOriginConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newCustomOriginConfigSetting
-    :: TF.Attr s P.Int -- ^ @http_port@ - 'P.httpPort'
+    :: TF.Attr s P.Text -- ^ @origin_protocol_policy@ - 'P.originProtocolPolicy'
+    -> TF.Attr s P.Int -- ^ @http_port@ - 'P.httpPort'
     -> TF.Attr s P.Int -- ^ @https_port@ - 'P.httpsPort'
-    -> TF.Attr s P.Text -- ^ @origin_protocol_policy@ - 'P.originProtocolPolicy'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @origin_ssl_protocols@ - 'P.originSslProtocols'
     -> CustomOriginConfigSetting s
-newCustomOriginConfigSetting _httpPort _httpsPort _originProtocolPolicy _originSslProtocols =
+newCustomOriginConfigSetting _originProtocolPolicy _httpPort _httpsPort _originSslProtocols =
     CustomOriginConfigSetting'
         { _httpPort = _httpPort
         , _httpsPort = _httpsPort
@@ -5815,13 +5815,13 @@ data DefaultCacheBehaviorSetting s = DefaultCacheBehaviorSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newDefaultCacheBehaviorSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_methods@ - 'P.allowedMethods'
+    :: TF.Attr s P.Text -- ^ @target_origin_id@ - 'P.targetOriginId'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_methods@ - 'P.allowedMethods'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @cached_methods@ - 'P.cachedMethods'
-    -> TF.Attr s (ForwardedValuesSetting s) -- ^ @forwarded_values@ - 'P.forwardedValues'
-    -> TF.Attr s P.Text -- ^ @target_origin_id@ - 'P.targetOriginId'
     -> TF.Attr s P.Text -- ^ @viewer_protocol_policy@ - 'P.viewerProtocolPolicy'
+    -> TF.Attr s (ForwardedValuesSetting s) -- ^ @forwarded_values@ - 'P.forwardedValues'
     -> DefaultCacheBehaviorSetting s
-newDefaultCacheBehaviorSetting _allowedMethods _cachedMethods _forwardedValues _targetOriginId _viewerProtocolPolicy =
+newDefaultCacheBehaviorSetting _targetOriginId _allowedMethods _cachedMethods _viewerProtocolPolicy _forwardedValues =
     DefaultCacheBehaviorSetting'
         { _allowedMethods = _allowedMethods
         , _cachedMethods = _cachedMethods
@@ -6208,10 +6208,10 @@ data DnsConfigSetting s = DnsConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newDnsConfigSetting
-    :: TF.Attr s [TF.Attr s (DnsRecordsSetting s)] -- ^ @dns_records@ - 'P.dnsRecords'
-    -> TF.Attr s P.Text -- ^ @namespace_id@ - 'P.namespaceId'
+    :: TF.Attr s P.Text -- ^ @namespace_id@ - 'P.namespaceId'
+    -> TF.Attr s [TF.Attr s (DnsRecordsSetting s)] -- ^ @dns_records@ - 'P.dnsRecords'
     -> DnsConfigSetting s
-newDnsConfigSetting _dnsRecords _namespaceId =
+newDnsConfigSetting _namespaceId _dnsRecords =
     DnsConfigSetting'
         { _dnsRecords = _dnsRecords
         , _namespaceId = _namespaceId
@@ -6366,14 +6366,14 @@ data DynamodbSetting s = DynamodbSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newDynamodbSetting
-    :: TF.Attr s P.Text -- ^ @hash_key_field@ - 'P.hashKeyField'
-    -> TF.Attr s P.Text -- ^ @hash_key_value@ - 'P.hashKeyValue'
+    :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    -> TF.Attr s P.Text -- ^ @hash_key_field@ - 'P.hashKeyField'
     -> TF.Attr s P.Text -- ^ @range_key_field@ - 'P.rangeKeyField'
-    -> TF.Attr s P.Text -- ^ @range_key_value@ - 'P.rangeKeyValue'
-    -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> TF.Attr s P.Text -- ^ @table_name@ - 'P.tableName'
+    -> TF.Attr s P.Text -- ^ @hash_key_value@ - 'P.hashKeyValue'
+    -> TF.Attr s P.Text -- ^ @range_key_value@ - 'P.rangeKeyValue'
     -> DynamodbSetting s
-newDynamodbSetting _hashKeyField _hashKeyValue _rangeKeyField _rangeKeyValue _roleArn _tableName =
+newDynamodbSetting _roleArn _hashKeyField _rangeKeyField _tableName _hashKeyValue _rangeKeyValue =
     DynamodbSetting'
         { _hashKeyField = _hashKeyField
         , _hashKeyType = TF.Nil
@@ -6462,10 +6462,10 @@ data DynamodbConfigSetting s = DynamodbConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newDynamodbConfigSetting
-    :: TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> TF.Attr s P.Text -- ^ @table_name@ - 'P.tableName'
+    :: TF.Attr s P.Text -- ^ @table_name@ - 'P.tableName'
+    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> DynamodbConfigSetting s
-newDynamodbConfigSetting _region _tableName =
+newDynamodbConfigSetting _tableName _region =
     DynamodbConfigSetting'
         { _region = _region
         , _tableName = _tableName
@@ -6842,11 +6842,11 @@ data EbsVolumeSetting s = EbsVolumeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newEbsVolumeSetting
-    :: TF.Attr s P.Text -- ^ @mount_point@ - 'P.mountPoint'
-    -> TF.Attr s P.Int -- ^ @number_of_disks@ - 'P.numberOfDisks'
+    :: TF.Attr s P.Int -- ^ @number_of_disks@ - 'P.numberOfDisks'
+    -> TF.Attr s P.Text -- ^ @mount_point@ - 'P.mountPoint'
     -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> EbsVolumeSetting s
-newEbsVolumeSetting _mountPoint _numberOfDisks _size =
+newEbsVolumeSetting _numberOfDisks _mountPoint _size =
     EbsVolumeSetting'
         { _iops = TF.value 0
         , _mountPoint = _mountPoint
@@ -7017,11 +7017,11 @@ data Ec2InboundPermissionSetting s = Ec2InboundPermissionSetting'
 
 newEc2InboundPermissionSetting
     :: TF.Attr s P.Int -- ^ @from_port@ - 'P.fromPort'
-    -> TF.Attr s P.Text -- ^ @ip_range@ - 'P.ipRange'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Int -- ^ @to_port@ - 'P.toPort'
+    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    -> TF.Attr s P.Text -- ^ @ip_range@ - 'P.ipRange'
     -> Ec2InboundPermissionSetting s
-newEc2InboundPermissionSetting _fromPort _ipRange _protocol _toPort =
+newEc2InboundPermissionSetting _fromPort _toPort _protocol _ipRange =
     Ec2InboundPermissionSetting'
         { _fromPort = _fromPort
         , _ipRange = _ipRange
@@ -7227,12 +7227,12 @@ data EgressSetting s = EgressSetting'
 
 newEgressSetting
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
-    -> TF.Attr s P.Int -- ^ @from_port@ - 'P.fromPort'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Int -- ^ @rule_no@ - 'P.ruleNo'
+    -> TF.Attr s P.Int -- ^ @from_port@ - 'P.fromPort'
     -> TF.Attr s P.Int -- ^ @to_port@ - 'P.toPort'
+    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> EgressSetting s
-newEgressSetting _action _fromPort _protocol _ruleNo _toPort =
+newEgressSetting _action _ruleNo _fromPort _toPort _protocol =
     EgressSetting'
         { _action = _action
         , _cidrBlock = TF.Nil
@@ -7398,13 +7398,13 @@ data ElasticsearchSetting s = ElasticsearchSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newElasticsearchSetting
-    :: TF.Attr s P.Text -- ^ @endpoint@ - 'P.endpoint'
+    :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    -> TF.Attr s P.Text -- ^ @endpoint@ - 'P.endpoint'
     -> TF.Attr s P.Text -- ^ @id@ - 'P.id'
     -> TF.Attr s P.Text -- ^ @index@ - 'P.index'
-    -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> ElasticsearchSetting s
-newElasticsearchSetting _endpoint _id _index _roleArn _type' =
+newElasticsearchSetting _roleArn _endpoint _id _index _type' =
     ElasticsearchSetting'
         { _endpoint = _endpoint
         , _id = _id
@@ -7527,10 +7527,10 @@ data ElasticsearchConfigurationSetting s = ElasticsearchConfigurationSetting'
 
 newElasticsearchConfigurationSetting
     :: TF.Attr s P.Text -- ^ @domain_arn@ - 'P.domainArn'
-    -> TF.Attr s P.Text -- ^ @index_name@ - 'P.indexName'
     -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    -> TF.Attr s P.Text -- ^ @index_name@ - 'P.indexName'
     -> ElasticsearchConfigurationSetting s
-newElasticsearchConfigurationSetting _domainArn _indexName _roleArn =
+newElasticsearchConfigurationSetting _domainArn _roleArn _indexName =
     ElasticsearchConfigurationSetting'
         { _bufferingInterval = TF.value 300
         , _bufferingSize = TF.value 5
@@ -8179,13 +8179,13 @@ data EnvironmentSetting s = EnvironmentSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newEnvironmentSetting
-    :: TF.Attr s P.Text -- ^ @compute_type@ - 'P.computeType'
-    -> TF.Attr s P.Text -- ^ @image@ - 'P.image'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
     -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
+    -> TF.Attr s P.Text -- ^ @compute_type@ - 'P.computeType'
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> EnvironmentSetting s
-newEnvironmentSetting _computeType _image _type' _key _value =
+newEnvironmentSetting _image _key _computeType _type' _value =
     EnvironmentSetting'
         { _computeType = _computeType
         , _image = _image
@@ -8813,10 +8813,10 @@ data FirehoseSetting s = FirehoseSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newFirehoseSetting
-    :: TF.Attr s P.Text -- ^ @delivery_stream_name@ - 'P.deliveryStreamName'
-    -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    -> TF.Attr s P.Text -- ^ @delivery_stream_name@ - 'P.deliveryStreamName'
     -> FirehoseSetting s
-newFirehoseSetting _deliveryStreamName _roleArn =
+newFirehoseSetting _roleArn _deliveryStreamName =
     FirehoseSetting'
         { _deliveryStreamName = _deliveryStreamName
         , _roleArn = _roleArn
@@ -9099,13 +9099,13 @@ data GlobalSecondaryIndexSetting s = GlobalSecondaryIndexSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newGlobalSecondaryIndexSetting
-    :: TF.Attr s P.Text -- ^ @hash_key@ - 'P.hashKey'
+    :: TF.Attr s P.Int -- ^ @read_capacity@ - 'P.readCapacity'
+    -> TF.Attr s P.Int -- ^ @write_capacity@ - 'P.writeCapacity'
+    -> TF.Attr s P.Text -- ^ @hash_key@ - 'P.hashKey'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @projection_type@ - 'P.projectionType'
-    -> TF.Attr s P.Int -- ^ @read_capacity@ - 'P.readCapacity'
-    -> TF.Attr s P.Int -- ^ @write_capacity@ - 'P.writeCapacity'
     -> GlobalSecondaryIndexSetting s
-newGlobalSecondaryIndexSetting _hashKey _name _projectionType _readCapacity _writeCapacity =
+newGlobalSecondaryIndexSetting _readCapacity _writeCapacity _hashKey _name _projectionType =
     GlobalSecondaryIndexSetting'
         { _hashKey = _hashKey
         , _name = _name
@@ -9651,12 +9651,12 @@ data IngressSetting s = IngressSetting'
 
 newIngressSetting
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
-    -> TF.Attr s P.Int -- ^ @from_port@ - 'P.fromPort'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Int -- ^ @rule_no@ - 'P.ruleNo'
+    -> TF.Attr s P.Int -- ^ @from_port@ - 'P.fromPort'
     -> TF.Attr s P.Int -- ^ @to_port@ - 'P.toPort'
+    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> IngressSetting s
-newIngressSetting _action _fromPort _protocol _ruleNo _toPort =
+newIngressSetting _action _ruleNo _fromPort _toPort _protocol =
     IngressSetting'
         { _cidr = TF.Nil
         , _action = _action
@@ -9805,10 +9805,10 @@ data InitialLifecycleHookSetting s = InitialLifecycleHookSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newInitialLifecycleHookSetting
-    :: TF.Attr s P.Text -- ^ @lifecycle_transition@ - 'P.lifecycleTransition'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @lifecycle_transition@ - 'P.lifecycleTransition'
     -> InitialLifecycleHookSetting s
-newInitialLifecycleHookSetting _lifecycleTransition _name =
+newInitialLifecycleHookSetting _name _lifecycleTransition =
     InitialLifecycleHookSetting'
         { _heartbeatTimeout = TF.Nil
         , _lifecycleTransition = _lifecycleTransition
@@ -10810,10 +10810,10 @@ data LambdaFunctionAssociationSetting s = LambdaFunctionAssociationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newLambdaFunctionAssociationSetting
-    :: TF.Attr s P.Text -- ^ @event_type@ - 'P.eventType'
-    -> TF.Attr s P.Text -- ^ @lambda_arn@ - 'P.lambdaArn'
+    :: TF.Attr s P.Text -- ^ @lambda_arn@ - 'P.lambdaArn'
+    -> TF.Attr s P.Text -- ^ @event_type@ - 'P.eventType'
     -> LambdaFunctionAssociationSetting s
-newLambdaFunctionAssociationSetting _eventType _lambdaArn =
+newLambdaFunctionAssociationSetting _lambdaArn _eventType =
     LambdaFunctionAssociationSetting'
         { _eventType = _eventType
         , _lambdaArn = _lambdaArn
@@ -11189,11 +11189,11 @@ data ListenerSetting s = ListenerSetting'
 
 newListenerSetting
     :: TF.Attr s P.Int -- ^ @instance_port@ - 'P.instancePort'
-    -> TF.Attr s P.Text -- ^ @instance_protocol@ - 'P.instanceProtocol'
     -> TF.Attr s P.Int -- ^ @lb_port@ - 'P.lbPort'
+    -> TF.Attr s P.Text -- ^ @instance_protocol@ - 'P.instanceProtocol'
     -> TF.Attr s P.Text -- ^ @lb_protocol@ - 'P.lbProtocol'
     -> ListenerSetting s
-newListenerSetting _instancePort _instanceProtocol _lbPort _lbProtocol =
+newListenerSetting _instancePort _lbPort _instanceProtocol _lbProtocol =
     ListenerSetting'
         { _instancePort = _instancePort
         , _instanceProtocol = _instanceProtocol
@@ -11370,11 +11370,11 @@ data LocalSecondaryIndexSetting s = LocalSecondaryIndexSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newLocalSecondaryIndexSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @range_key@ - 'P.rangeKey'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @projection_type@ - 'P.projectionType'
-    -> TF.Attr s P.Text -- ^ @range_key@ - 'P.rangeKey'
     -> LocalSecondaryIndexSetting s
-newLocalSecondaryIndexSetting _name _projectionType _rangeKey =
+newLocalSecondaryIndexSetting _rangeKey _name _projectionType =
     LocalSecondaryIndexSetting'
         { _name = _name
         , _nonKeyAttributes = TF.Nil
@@ -11559,10 +11559,10 @@ data LoggingSetting s = LoggingSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newLoggingSetting
-    :: TF.Attr s P.Bool -- ^ @enable@ - 'P.enable'
-    -> TF.Attr s P.Text -- ^ @target_bucket@ - 'P.targetBucket'
+    :: TF.Attr s P.Text -- ^ @target_bucket@ - 'P.targetBucket'
+    -> TF.Attr s P.Bool -- ^ @enable@ - 'P.enable'
     -> LoggingSetting s
-newLoggingSetting _enable _targetBucket =
+newLoggingSetting _targetBucket _enable =
     LoggingSetting'
         { _enable = _enable
         , _targetBucket = _targetBucket
@@ -11714,11 +11714,11 @@ data MaintenanceWindowStartTimeSetting s = MaintenanceWindowStartTimeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newMaintenanceWindowStartTimeSetting
-    :: TF.Attr s P.Text -- ^ @day_of_week@ - 'P.dayOfWeek'
-    -> TF.Attr s P.Text -- ^ @time_of_day@ - 'P.timeOfDay'
+    :: TF.Attr s P.Text -- ^ @time_of_day@ - 'P.timeOfDay'
+    -> TF.Attr s P.Text -- ^ @day_of_week@ - 'P.dayOfWeek'
     -> TF.Attr s P.Text -- ^ @time_zone@ - 'P.timeZone'
     -> MaintenanceWindowStartTimeSetting s
-newMaintenanceWindowStartTimeSetting _dayOfWeek _timeOfDay _timeZone =
+newMaintenanceWindowStartTimeSetting _timeOfDay _dayOfWeek _timeZone =
     MaintenanceWindowStartTimeSetting'
         { _dayOfWeek = _dayOfWeek
         , _timeOfDay = _timeOfDay
@@ -11777,12 +11777,12 @@ data MappingRuleSetting s = MappingRuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newMappingRuleSetting
-    :: TF.Attr s P.Text -- ^ @claim@ - 'P.claim'
+    :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    -> TF.Attr s P.Text -- ^ @claim@ - 'P.claim'
     -> TF.Attr s P.Text -- ^ @match_type@ - 'P.matchType'
-    -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> MappingRuleSetting s
-newMappingRuleSetting _claim _matchType _roleArn _value =
+newMappingRuleSetting _roleArn _claim _matchType _value =
     MappingRuleSetting'
         { _claim = _claim
         , _matchType = _matchType
@@ -12131,10 +12131,10 @@ data NetworkInterfaceSetting s = NetworkInterfaceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newNetworkInterfaceSetting
-    :: TF.Attr s P.Int -- ^ @device_index@ - 'P.deviceIndex'
-    -> TF.Attr s P.Text -- ^ @network_interface_id@ - 'P.networkInterfaceId'
+    :: TF.Attr s P.Text -- ^ @network_interface_id@ - 'P.networkInterfaceId'
+    -> TF.Attr s P.Int -- ^ @device_index@ - 'P.deviceIndex'
     -> NetworkInterfaceSetting s
-newNetworkInterfaceSetting _deviceIndex _networkInterfaceId =
+newNetworkInterfaceSetting _networkInterfaceId _deviceIndex =
     NetworkInterfaceSetting'
         { _deleteOnTermination = TF.value P.False
         , _deviceIndex = _deviceIndex
@@ -13000,14 +13000,14 @@ data OrderedCacheBehaviorSetting s = OrderedCacheBehaviorSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newOrderedCacheBehaviorSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_methods@ - 'P.allowedMethods'
+    :: TF.Attr s P.Text -- ^ @target_origin_id@ - 'P.targetOriginId'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_methods@ - 'P.allowedMethods'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @cached_methods@ - 'P.cachedMethods'
-    -> TF.Attr s (ForwardedValuesSetting s) -- ^ @forwarded_values@ - 'P.forwardedValues'
     -> TF.Attr s P.Text -- ^ @path_pattern@ - 'P.pathPattern'
-    -> TF.Attr s P.Text -- ^ @target_origin_id@ - 'P.targetOriginId'
     -> TF.Attr s P.Text -- ^ @viewer_protocol_policy@ - 'P.viewerProtocolPolicy'
+    -> TF.Attr s (ForwardedValuesSetting s) -- ^ @forwarded_values@ - 'P.forwardedValues'
     -> OrderedCacheBehaviorSetting s
-newOrderedCacheBehaviorSetting _allowedMethods _cachedMethods _forwardedValues _pathPattern _targetOriginId _viewerProtocolPolicy =
+newOrderedCacheBehaviorSetting _targetOriginId _allowedMethods _cachedMethods _pathPattern _viewerProtocolPolicy _forwardedValues =
     OrderedCacheBehaviorSetting'
         { _allowedMethods = _allowedMethods
         , _cachedMethods = _cachedMethods
@@ -13238,10 +13238,10 @@ data OriginSetting s = OriginSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newOriginSetting
-    :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
-    -> TF.Attr s P.Text -- ^ @origin_id@ - 'P.originId'
+    :: TF.Attr s P.Text -- ^ @origin_id@ - 'P.originId'
+    -> TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
     -> OriginSetting s
-newOriginSetting _domainName _originId =
+newOriginSetting _originId _domainName =
     OriginSetting'
         { _customHeader = TF.Nil
         , _customOriginConfig = TF.Nil
@@ -13513,11 +13513,11 @@ data ParametersSetting s = ParametersSetting'
 
 newParametersSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> TF.Attr s P.Text -- ^ @parameter_name@ - 'P.parameterName'
     -> TF.Attr s P.Text -- ^ @parameter_value@ - 'P.parameterValue'
+    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> ParametersSetting s
-newParametersSetting _name _value _parameterName _parameterValue =
+newParametersSetting _name _parameterName _parameterValue _value =
     ParametersSetting'
         { _name = _name
         , _value = _value
@@ -14413,10 +14413,10 @@ data QueueSetting s = QueueSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newQueueSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @events@ - 'P.events'
-    -> TF.Attr s P.Text -- ^ @queue_arn@ - 'P.queueArn'
+    :: TF.Attr s P.Text -- ^ @queue_arn@ - 'P.queueArn'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @events@ - 'P.events'
     -> QueueSetting s
-newQueueSetting _events _queueArn =
+newQueueSetting _queueArn _events =
     QueueSetting'
         { _events = _events
         , _filterPrefix = TF.Nil
@@ -14595,13 +14595,13 @@ data RedshiftConfigurationSetting s = RedshiftConfigurationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newRedshiftConfigurationSetting
-    :: TF.Attr s P.Text -- ^ @cluster_jdbcurl@ - 'P.clusterJdbcurl'
+    :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    -> TF.Attr s P.Text -- ^ @cluster_jdbcurl@ - 'P.clusterJdbcurl'
     -> TF.Attr s P.Text -- ^ @data_table_name@ - 'P.dataTableName'
     -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
-    -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> RedshiftConfigurationSetting s
-newRedshiftConfigurationSetting _clusterJdbcurl _dataTableName _password _roleArn _username =
+newRedshiftConfigurationSetting _roleArn _clusterJdbcurl _dataTableName _password _username =
     RedshiftConfigurationSetting'
         { _clusterJdbcurl = _clusterJdbcurl
         , _copyOptions = TF.Nil
@@ -14715,11 +14715,11 @@ data RegexMatchTupleSetting s = RegexMatchTupleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newRegexMatchTupleSetting
-    :: TF.Attr s (FieldToMatchSetting s) -- ^ @field_to_match@ - 'P.fieldToMatch'
-    -> TF.Attr s P.Text -- ^ @regex_pattern_set_id@ - 'P.regexPatternSetId'
+    :: TF.Attr s P.Text -- ^ @regex_pattern_set_id@ - 'P.regexPatternSetId'
+    -> TF.Attr s (FieldToMatchSetting s) -- ^ @field_to_match@ - 'P.fieldToMatch'
     -> TF.Attr s P.Text -- ^ @text_transformation@ - 'P.textTransformation'
     -> RegexMatchTupleSetting s
-newRegexMatchTupleSetting _fieldToMatch _regexPatternSetId _textTransformation =
+newRegexMatchTupleSetting _regexPatternSetId _fieldToMatch _textTransformation =
     RegexMatchTupleSetting'
         { _fieldToMatch = _fieldToMatch
         , _regexPatternSetId = _regexPatternSetId
@@ -15468,10 +15468,10 @@ data RuleSetting s = RuleSetting'
 
 newRuleSetting
     :: TF.Attr s (ApplyServerSideEncryptionByDefaultSetting s) -- ^ @apply_server_side_encryption_by_default@ - 'P.applyServerSideEncryptionByDefault'
-    -> TF.Attr s P.Int -- ^ @priority@ - 'P.priority'
     -> TF.Attr s P.Text -- ^ @rule_id@ - 'P.ruleId'
+    -> TF.Attr s P.Int -- ^ @priority@ - 'P.priority'
     -> RuleSetting s
-newRuleSetting _applyServerSideEncryptionByDefault _priority _ruleId =
+newRuleSetting _applyServerSideEncryptionByDefault _ruleId _priority =
     RuleSetting'
         { _applyServerSideEncryptionByDefault = _applyServerSideEncryptionByDefault
         , _action = TF.Nil
@@ -15573,12 +15573,12 @@ data RulesSetting s = RulesSetting'
 
 newRulesSetting
     :: TF.Attr s (DestinationSetting s) -- ^ @destination@ - 'P.destination'
-    -> TF.Attr s P.Text -- ^ @prefix@ - 'P.prefix'
-    -> TF.Attr s P.Text -- ^ @status@ - 'P.status'
-    -> TF.Attr s P.Int -- ^ @priority@ - 'P.priority'
     -> TF.Attr s P.Text -- ^ @rule_id@ - 'P.ruleId'
+    -> TF.Attr s P.Text -- ^ @prefix@ - 'P.prefix'
+    -> TF.Attr s P.Int -- ^ @priority@ - 'P.priority'
+    -> TF.Attr s P.Text -- ^ @status@ - 'P.status'
     -> RulesSetting s
-newRulesSetting _destination _prefix _status _priority _ruleId =
+newRulesSetting _destination _ruleId _prefix _priority _status =
     RulesSetting'
         { _destination = _destination
         , _id = TF.Nil
@@ -15778,11 +15778,11 @@ data S3Setting s = S3Setting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newS3Setting
-    :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
+    :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    -> TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
     -> S3Setting s
-newS3Setting _bucketName _key _roleArn =
+newS3Setting _roleArn _key _bucketName =
     S3Setting'
         { _bucketName = _bucketName
         , _key = _key
@@ -16161,12 +16161,12 @@ data S3ImportSetting s = S3ImportSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newS3ImportSetting
-    :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
+    :: TF.Attr s P.Text -- ^ @source_engine@ - 'P.sourceEngine'
+    -> TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
     -> TF.Attr s P.Text -- ^ @ingestion_role@ - 'P.ingestionRole'
-    -> TF.Attr s P.Text -- ^ @source_engine@ - 'P.sourceEngine'
     -> TF.Attr s P.Text -- ^ @source_engine_version@ - 'P.sourceEngineVersion'
     -> S3ImportSetting s
-newS3ImportSetting _bucketName _ingestionRole _sourceEngine _sourceEngineVersion =
+newS3ImportSetting _sourceEngine _bucketName _ingestionRole _sourceEngineVersion =
     S3ImportSetting'
         { _bucketName = _bucketName
         , _bucketPrefix = TF.Nil
@@ -16462,10 +16462,10 @@ data SchemaSetting s = SchemaSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newSchemaSetting
-    :: TF.Attr s P.Text -- ^ @attribute_data_type@ - 'P.attributeDataType'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @attribute_data_type@ - 'P.attributeDataType'
     -> SchemaSetting s
-newSchemaSetting _attributeDataType _name =
+newSchemaSetting _name _attributeDataType =
     SchemaSetting'
         { _attributeDataType = _attributeDataType
         , _developerOnlyAttribute = TF.Nil
@@ -16589,11 +16589,11 @@ data SchemaConfigurationSetting s = SchemaConfigurationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newSchemaConfigurationSetting
-    :: TF.Attr s P.Text -- ^ @database_name@ - 'P.databaseName'
-    -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    -> TF.Attr s P.Text -- ^ @database_name@ - 'P.databaseName'
     -> TF.Attr s P.Text -- ^ @table_name@ - 'P.tableName'
     -> SchemaConfigurationSetting s
-newSchemaConfigurationSetting _databaseName _roleArn _tableName =
+newSchemaConfigurationSetting _roleArn _databaseName _tableName =
     SchemaConfigurationSetting'
         { _databaseName = _databaseName
         , _roleArn = _roleArn
@@ -17260,12 +17260,12 @@ data SizeConstraintsSetting s = SizeConstraintsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newSizeConstraintsSetting
-    :: TF.Attr s P.Text -- ^ @comparison_operator@ - 'P.comparisonOperator'
-    -> TF.Attr s (FieldToMatchSetting s) -- ^ @field_to_match@ - 'P.fieldToMatch'
+    :: TF.Attr s (FieldToMatchSetting s) -- ^ @field_to_match@ - 'P.fieldToMatch'
+    -> TF.Attr s P.Text -- ^ @comparison_operator@ - 'P.comparisonOperator'
     -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> TF.Attr s P.Text -- ^ @text_transformation@ - 'P.textTransformation'
     -> SizeConstraintsSetting s
-newSizeConstraintsSetting _comparisonOperator _fieldToMatch _size _textTransformation =
+newSizeConstraintsSetting _fieldToMatch _comparisonOperator _size _textTransformation =
     SizeConstraintsSetting'
         { _comparisonOperator = _comparisonOperator
         , _fieldToMatch = _fieldToMatch
@@ -17419,10 +17419,10 @@ data SmsConfigurationSetting s = SmsConfigurationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newSmsConfigurationSetting
-    :: TF.Attr s P.Text -- ^ @external_id@ - 'P.externalId'
-    -> TF.Attr s P.Text -- ^ @sns_caller_arn@ - 'P.snsCallerArn'
+    :: TF.Attr s P.Text -- ^ @sns_caller_arn@ - 'P.snsCallerArn'
+    -> TF.Attr s P.Text -- ^ @external_id@ - 'P.externalId'
     -> SmsConfigurationSetting s
-newSmsConfigurationSetting _externalId _snsCallerArn =
+newSmsConfigurationSetting _snsCallerArn _externalId =
     SmsConfigurationSetting'
         { _externalId = _externalId
         , _snsCallerArn = _snsCallerArn
@@ -17615,10 +17615,10 @@ data SnsActionSetting s = SnsActionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newSnsActionSetting
-    :: TF.Attr s P.Int -- ^ @position@ - 'P.position'
-    -> TF.Attr s P.Text -- ^ @topic_arn@ - 'P.topicArn'
+    :: TF.Attr s P.Text -- ^ @topic_arn@ - 'P.topicArn'
+    -> TF.Attr s P.Int -- ^ @position@ - 'P.position'
     -> SnsActionSetting s
-newSnsActionSetting _position _topicArn =
+newSnsActionSetting _topicArn _position =
     SnsActionSetting'
         { _position = _position
         , _topicArn = _topicArn
@@ -17748,11 +17748,11 @@ data SourceSetting s = SourceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newSourceSetting
-    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @source_identifier@ - 'P.sourceIdentifier'
     -> TF.Attr s P.Text -- ^ @owner@ - 'P.owner'
-    -> TF.Attr s P.Text -- ^ @source_identifier@ - 'P.sourceIdentifier'
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> SourceSetting s
-newSourceSetting _type' _owner _sourceIdentifier =
+newSourceSetting _sourceIdentifier _owner _type' =
     SourceSetting'
         { _auth = TF.Nil
         , _buildspec = TF.Nil
@@ -18174,11 +18174,11 @@ data SqsSetting s = SqsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newSqsSetting
-    :: TF.Attr s P.Text -- ^ @queue_url@ - 'P.queueUrl'
-    -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> TF.Attr s P.Bool -- ^ @use_base64@ - 'P.useBase64'
+    -> TF.Attr s P.Text -- ^ @queue_url@ - 'P.queueUrl'
     -> SqsSetting s
-newSqsSetting _queueUrl _roleArn _useBase64 =
+newSqsSetting _roleArn _useBase64 _queueUrl =
     SqsSetting'
         { _queueUrl = _queueUrl
         , _roleArn = _roleArn
@@ -18526,10 +18526,10 @@ data StepSetting s = StepSetting'
 
 newStepSetting
     :: TF.Attr s P.Text -- ^ @action_on_failure@ - 'P.actionOnFailure'
-    -> TF.Attr s (HadoopJarStepSetting s) -- ^ @hadoop_jar_step@ - 'P.hadoopJarStep'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s (HadoopJarStepSetting s) -- ^ @hadoop_jar_step@ - 'P.hadoopJarStep'
     -> StepSetting s
-newStepSetting _actionOnFailure _hadoopJarStep _name =
+newStepSetting _actionOnFailure _name _hadoopJarStep =
     StepSetting'
         { _actionOnFailure = _actionOnFailure
         , _hadoopJarStep = _hadoopJarStep
@@ -18951,11 +18951,11 @@ data StorageLocationSetting s = StorageLocationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newStorageLocationSetting
-    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
+    :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
+    -> TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> StorageLocationSetting s
-newStorageLocationSetting _bucket _key _roleArn =
+newStorageLocationSetting _roleArn _bucket _key =
     StorageLocationSetting'
         { _bucket = _bucket
         , _key = _key
@@ -19902,10 +19902,10 @@ data TopicSetting s = TopicSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newTopicSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @events@ - 'P.events'
-    -> TF.Attr s P.Text -- ^ @topic_arn@ - 'P.topicArn'
+    :: TF.Attr s P.Text -- ^ @topic_arn@ - 'P.topicArn'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @events@ - 'P.events'
     -> TopicSetting s
-newTopicSetting _events _topicArn =
+newTopicSetting _topicArn _events =
     TopicSetting'
         { _events = _events
         , _filterPrefix = TF.Nil
@@ -20114,11 +20114,11 @@ data TriggerConfigurationSetting s = TriggerConfigurationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newTriggerConfigurationSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @trigger_events@ - 'P.triggerEvents'
+    :: TF.Attr s P.Text -- ^ @trigger_target_arn@ - 'P.triggerTargetArn'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @trigger_events@ - 'P.triggerEvents'
     -> TF.Attr s P.Text -- ^ @trigger_name@ - 'P.triggerName'
-    -> TF.Attr s P.Text -- ^ @trigger_target_arn@ - 'P.triggerTargetArn'
     -> TriggerConfigurationSetting s
-newTriggerConfigurationSetting _triggerEvents _triggerName _triggerTargetArn =
+newTriggerConfigurationSetting _triggerTargetArn _triggerEvents _triggerName =
     TriggerConfigurationSetting'
         { _triggerEvents = _triggerEvents
         , _triggerName = _triggerName
@@ -20162,10 +20162,10 @@ data TtlSetting s = TtlSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newTtlSetting
-    :: TF.Attr s P.Text -- ^ @attribute_name@ - 'P.attributeName'
-    -> TF.Attr s P.Bool -- ^ @enabled@ - 'P.enabled'
+    :: TF.Attr s P.Bool -- ^ @enabled@ - 'P.enabled'
+    -> TF.Attr s P.Text -- ^ @attribute_name@ - 'P.attributeName'
     -> TtlSetting s
-newTtlSetting _attributeName _enabled =
+newTtlSetting _enabled _attributeName =
     TtlSetting'
         { _attributeName = _attributeName
         , _enabled = _enabled
@@ -20280,11 +20280,11 @@ data UserPoolConfigSetting s = UserPoolConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newUserPoolConfigSetting
-    :: TF.Attr s P.Text -- ^ @aws_region@ - 'P.awsRegion'
-    -> TF.Attr s P.Text -- ^ @default_action@ - 'P.defaultAction'
+    :: TF.Attr s P.Text -- ^ @default_action@ - 'P.defaultAction'
     -> TF.Attr s P.Text -- ^ @user_pool_id@ - 'P.userPoolId'
+    -> TF.Attr s P.Text -- ^ @aws_region@ - 'P.awsRegion'
     -> UserPoolConfigSetting s
-newUserPoolConfigSetting _awsRegion _defaultAction _userPoolId =
+newUserPoolConfigSetting _defaultAction _userPoolId _awsRegion =
     UserPoolConfigSetting'
         { _appIdClientRegex = TF.Nil
         , _awsRegion = _awsRegion
@@ -20854,12 +20854,12 @@ data VpcConfigSetting s = VpcConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newVpcConfigSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @security_group_ids@ - 'P.securityGroupIds'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @subnets@ - 'P.subnets'
-    -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @security_group_ids@ - 'P.securityGroupIds'
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @subnet_ids@ - 'P.subnetIds'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @subnets@ - 'P.subnets'
     -> VpcConfigSetting s
-newVpcConfigSetting _securityGroupIds _subnets _vpcId _subnetIds =
+newVpcConfigSetting _vpcId _securityGroupIds _subnetIds _subnets =
     VpcConfigSetting'
         { _securityGroupIds = _securityGroupIds
         , _subnets = _subnets
@@ -20963,10 +20963,10 @@ data VpcSettingsSetting s = VpcSettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newVpcSettingsSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @subnet_ids@ - 'P.subnetIds'
-    -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @subnet_ids@ - 'P.subnetIds'
     -> VpcSettingsSetting s
-newVpcSettingsSetting _subnetIds _vpcId =
+newVpcSettingsSetting _vpcId _subnetIds =
     VpcSettingsSetting'
         { _subnetIds = _subnetIds
         , _vpcId = _vpcId
