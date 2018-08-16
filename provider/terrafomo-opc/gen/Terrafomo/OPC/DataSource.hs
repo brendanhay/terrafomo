@@ -97,7 +97,7 @@ computeImageListEntryData
     -> TF.Attr s P.Int -- ^ @version@ - 'P.version'
     -> P.DataSource (ComputeImageListEntryData s)
 computeImageListEntryData _imageList _version =
-    TF.unsafeDataSource "opc_compute_image_list_entry" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "opc_compute_image_list_entry" TF.validator $
         ComputeImageListEntryData'
             { _entry = TF.Nil
             , _imageList = _imageList
@@ -155,7 +155,7 @@ computeIpAddressReservationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeIpAddressReservationData s)
 computeIpAddressReservationData _name =
-    TF.unsafeDataSource "opc_compute_ip_address_reservation" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "opc_compute_ip_address_reservation" TF.validator $
         ComputeIpAddressReservationData'
             { _name = _name
             }
@@ -205,7 +205,7 @@ computeIpReservationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeIpReservationData s)
 computeIpReservationData _name =
-    TF.unsafeDataSource "opc_compute_ip_reservation" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "opc_compute_ip_reservation" TF.validator $
         ComputeIpReservationData'
             { _name = _name
             }
@@ -259,7 +259,7 @@ computeMachineImageData
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeMachineImageData s)
 computeMachineImageData _account _name =
-    TF.unsafeDataSource "opc_compute_machine_image" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "opc_compute_machine_image" TF.validator $
         ComputeMachineImageData'
             { _account = _account
             , _name = _name
@@ -342,7 +342,7 @@ computeNetworkInterfaceData
     -> TF.Attr s P.Text -- ^ @interface@ - 'P.interface'
     -> P.DataSource (ComputeNetworkInterfaceData s)
 computeNetworkInterfaceData _instanceId _instanceName _interface =
-    TF.unsafeDataSource "opc_compute_network_interface" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "opc_compute_network_interface" TF.validator $
         ComputeNetworkInterfaceData'
             { _instanceId = _instanceId
             , _instanceName = _instanceName
@@ -430,7 +430,7 @@ computeSshKeyData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeSshKeyData s)
 computeSshKeyData _name =
-    TF.unsafeDataSource "opc_compute_ssh_key" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "opc_compute_ssh_key" TF.validator $
         ComputeSshKeyData'
             { _name = _name
             }
@@ -471,7 +471,7 @@ computeStorageVolumeSnapshotData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeStorageVolumeSnapshotData s)
 computeStorageVolumeSnapshotData _name =
-    TF.unsafeDataSource "opc_compute_storage_volume_snapshot" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "opc_compute_storage_volume_snapshot" TF.validator $
         ComputeStorageVolumeSnapshotData'
             { _name = _name
             }
@@ -557,7 +557,7 @@ computeVnicData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeVnicData s)
 computeVnicData _name =
-    TF.unsafeDataSource "opc_compute_vnic" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "opc_compute_vnic" TF.validator $
         ComputeVnicData'
             { _name = _name
             }

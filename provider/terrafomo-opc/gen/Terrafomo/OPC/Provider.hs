@@ -121,24 +121,19 @@ newProvider _identityDomain _password _user =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "opc"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "endpoint" <$> _endpoint
-                  , P.Just $ TF.assign "identity_domain" _identityDomain
-                  , TF.assign "insecure" <$> _insecure
-                  , TF.assign "lbaas_endpoint" <$> _lbaasEndpoint
-                  , TF.assign "max_retries" <$> _maxRetries
-                  , P.Just $ TF.assign "password" _password
-                  , TF.assign "storage_endpoint" <$> _storageEndpoint
-                  , TF.assign "storage_service_id" <$> _storageServiceId
-                  , P.Just $ TF.assign "user" _user
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ TF.assign "endpoint" <$> _endpoint
+            , P.Just $ TF.assign "identity_domain" _identityDomain
+            , TF.assign "insecure" <$> _insecure
+            , TF.assign "lbaas_endpoint" <$> _lbaasEndpoint
+            , TF.assign "max_retries" <$> _maxRetries
+            , P.Just $ TF.assign "password" _password
+            , TF.assign "storage_endpoint" <$> _storageEndpoint
+            , TF.assign "storage_service_id" <$> _storageServiceId
+            , P.Just $ TF.assign "user" _user
+            ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty

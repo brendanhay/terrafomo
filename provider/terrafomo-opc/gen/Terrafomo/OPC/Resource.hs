@@ -203,7 +203,7 @@ computeAclResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeAclResource s)
 computeAclResource _name =
-    TF.unsafeResource "opc_compute_acl" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_acl" TF.validator $
         ComputeAclResource'
             { _description = TF.Nil
             , _enabled = TF.value P.True
@@ -266,7 +266,7 @@ computeImageListResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeImageListResource s)
 computeImageListResource _description _name =
-    TF.unsafeResource "opc_compute_image_list" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_image_list" TF.validator $
         ComputeImageListResource'
             { _default' = TF.value 1
             , _description = _description
@@ -323,7 +323,7 @@ computeImageListEntryResource
     -> TF.Attr s P.Int -- ^ @version@ - 'P.version'
     -> P.Resource (ComputeImageListEntryResource s)
 computeImageListEntryResource _machineImages _name _version =
-    TF.unsafeResource "opc_compute_image_list_entry" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_image_list_entry" TF.validator $
         ComputeImageListEntryResource'
             { _attributes = TF.Nil
             , _machineImages = _machineImages
@@ -407,7 +407,7 @@ computeInstanceResource
     -> TF.Attr s P.Text -- ^ @shape@ - 'P.shape'
     -> P.Resource (ComputeInstanceResource s)
 computeInstanceResource _name _shape =
-    TF.unsafeResource "opc_compute_instance" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_instance" TF.validator $
         ComputeInstanceResource'
             { _bootOrder = TF.Nil
             , _desiredState = TF.Nil
@@ -583,7 +583,7 @@ computeIpAddressAssociationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeIpAddressAssociationResource s)
 computeIpAddressAssociationResource _name =
-    TF.unsafeResource "opc_compute_ip_address_association" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_ip_address_association" TF.validator $
         ComputeIpAddressAssociationResource'
             { _description = TF.Nil
             , _ipAddressReservation = TF.Nil
@@ -655,7 +655,7 @@ computeIpAddressPrefixSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeIpAddressPrefixSetResource s)
 computeIpAddressPrefixSetResource _name =
-    TF.unsafeResource "opc_compute_ip_address_prefix_set" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_ip_address_prefix_set" TF.validator $
         ComputeIpAddressPrefixSetResource'
             { _description = TF.Nil
             , _name = _name
@@ -721,7 +721,7 @@ computeIpAddressReservationResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeIpAddressReservationResource s)
 computeIpAddressReservationResource _ipAddressPool _name =
-    TF.unsafeResource "opc_compute_ip_address_reservation" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_ip_address_reservation" TF.validator $
         ComputeIpAddressReservationResource'
             { _description = TF.Nil
             , _ipAddressPool = _ipAddressPool
@@ -784,7 +784,7 @@ computeIpAssociationResource
     -> TF.Attr s P.Text -- ^ @vcable@ - 'P.vcable'
     -> P.Resource (ComputeIpAssociationResource s)
 computeIpAssociationResource _parentPool _vcable =
-    TF.unsafeResource "opc_compute_ip_association" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_ip_association" TF.validator $
         ComputeIpAssociationResource'
             { _parentPool = _parentPool
             , _vcable = _vcable
@@ -842,7 +842,7 @@ computeIpNetworkResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeIpNetworkResource s)
 computeIpNetworkResource _ipAddressPrefix _name =
-    TF.unsafeResource "opc_compute_ip_network" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_ip_network" TF.validator $
         ComputeIpNetworkResource'
             { _description = TF.Nil
             , _ipAddressPrefix = _ipAddressPrefix
@@ -918,7 +918,7 @@ computeIpNetworkExchangeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeIpNetworkExchangeResource s)
 computeIpNetworkExchangeResource _name =
-    TF.unsafeResource "opc_compute_ip_network_exchange" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_ip_network_exchange" TF.validator $
         ComputeIpNetworkExchangeResource'
             { _description = TF.Nil
             , _name = _name
@@ -973,7 +973,7 @@ computeIpReservationResource
     :: TF.Attr s P.Bool -- ^ @permanent@ - 'P.permanent'
     -> P.Resource (ComputeIpReservationResource s)
 computeIpReservationResource _permanent =
-    TF.unsafeResource "opc_compute_ip_reservation" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_ip_reservation" TF.validator $
         ComputeIpReservationResource'
             { _parentPool = TF.value "/oracle/public/ippool"
             , _permanent = _permanent
@@ -1042,7 +1042,7 @@ computeMachineImageResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeMachineImageResource s)
 computeMachineImageResource _account _file _name =
-    TF.unsafeResource "opc_compute_machine_image" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_machine_image" TF.validator $
         ComputeMachineImageResource'
             { _account = _account
             , _attributes = TF.Nil
@@ -1137,7 +1137,7 @@ computeOrchestratedInstanceResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeOrchestratedInstanceResource s)
 computeOrchestratedInstanceResource _desiredState _instance' _name =
-    TF.unsafeResource "opc_compute_orchestrated_instance" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_orchestrated_instance" TF.validator $
         ComputeOrchestratedInstanceResource'
             { _description = TF.Nil
             , _desiredState = _desiredState
@@ -1217,7 +1217,7 @@ computeRouteResource
     -> TF.Attr s P.Text -- ^ @next_hop_vnic_set@ - 'P.nextHopVnicSet'
     -> P.Resource (ComputeRouteResource s)
 computeRouteResource _ipAddressPrefix _name _nextHopVnicSet =
-    TF.unsafeResource "opc_compute_route" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_route" TF.validator $
         ComputeRouteResource'
             { _adminDistance = TF.Nil
             , _description = TF.Nil
@@ -1306,7 +1306,7 @@ computeSecRuleResource
     -> TF.Attr s P.Text -- ^ @source_list@ - 'P.sourceList'
     -> P.Resource (ComputeSecRuleResource s)
 computeSecRuleResource _action _application _destinationList _name _sourceList =
-    TF.unsafeResource "opc_compute_sec_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_sec_rule" TF.validator $
         ComputeSecRuleResource'
             { _action = _action
             , _application = _application
@@ -1396,7 +1396,7 @@ computeSecurityApplicationResource
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> P.Resource (ComputeSecurityApplicationResource s)
 computeSecurityApplicationResource _name _protocol =
-    TF.unsafeResource "opc_compute_security_application" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_security_application" TF.validator $
         ComputeSecurityApplicationResource'
             { _description = TF.Nil
             , _dport = TF.Nil
@@ -1467,7 +1467,7 @@ computeSecurityAssociationResource
     -> TF.Attr s P.Text -- ^ @vcable@ - 'P.vcable'
     -> P.Resource (ComputeSecurityAssociationResource s)
 computeSecurityAssociationResource _seclist _vcable =
-    TF.unsafeResource "opc_compute_security_association" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_security_association" TF.validator $
         ComputeSecurityAssociationResource'
             { _seclist = _seclist
             , _vcable = _vcable
@@ -1516,7 +1516,7 @@ computeSecurityIpListResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSecurityIpListResource s)
 computeSecurityIpListResource _ipEntries _name =
-    TF.unsafeResource "opc_compute_security_ip_list" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_security_ip_list" TF.validator $
         ComputeSecurityIpListResource'
             { _description = TF.Nil
             , _ipEntries = _ipEntries
@@ -1571,7 +1571,7 @@ computeSecurityListResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSecurityListResource s)
 computeSecurityListResource _name =
-    TF.unsafeResource "opc_compute_security_list" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_security_list" TF.validator $
         ComputeSecurityListResource'
             { _description = TF.Nil
             , _name = _name
@@ -1639,7 +1639,7 @@ computeSecurityProtocolResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSecurityProtocolResource s)
 computeSecurityProtocolResource _name =
-    TF.unsafeResource "opc_compute_security_protocol" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_security_protocol" TF.validator $
         ComputeSecurityProtocolResource'
             { _description = TF.Nil
             , _dstPorts = TF.Nil
@@ -1740,7 +1740,7 @@ computeSecurityRuleResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSecurityRuleResource s)
 computeSecurityRuleResource _flowDirection _name =
-    TF.unsafeResource "opc_compute_security_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_security_rule" TF.validator $
         ComputeSecurityRuleResource'
             { _acl = TF.Nil
             , _description = TF.Nil
@@ -1848,7 +1848,7 @@ computeSnapshotResource
     :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
     -> P.Resource (ComputeSnapshotResource s)
 computeSnapshotResource _instance' =
-    TF.unsafeResource "opc_compute_snapshot" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_snapshot" TF.validator $
         ComputeSnapshotResource'
             { _account = TF.Nil
             , _instance' = _instance'
@@ -1906,7 +1906,7 @@ computeSshKeyResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSshKeyResource s)
 computeSshKeyResource _key _name =
-    TF.unsafeResource "opc_compute_ssh_key" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_ssh_key" TF.validator $
         ComputeSshKeyResource'
             { _enabled = TF.value P.True
             , _key = _key
@@ -1960,7 +1960,7 @@ computeStorageAttachmentResource
     -> TF.Attr s P.Text -- ^ @storage_volume@ - 'P.storageVolume'
     -> P.Resource (ComputeStorageAttachmentResource s)
 computeStorageAttachmentResource _index _instance' _storageVolume =
-    TF.unsafeResource "opc_compute_storage_attachment" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_storage_attachment" TF.validator $
         ComputeStorageAttachmentResource'
             { _index = _index
             , _instance' = _instance'
@@ -2028,7 +2028,7 @@ computeStorageVolumeResource
     -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (ComputeStorageVolumeResource s)
 computeStorageVolumeResource _name _size =
-    TF.unsafeResource "opc_compute_storage_volume" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_storage_volume" TF.validator $
         ComputeStorageVolumeResource'
             { _bootable = TF.value P.False
             , _description = TF.Nil
@@ -2154,7 +2154,7 @@ computeStorageVolumeSnapshotResource
     :: TF.Attr s P.Text -- ^ @volume_name@ - 'P.volumeName'
     -> P.Resource (ComputeStorageVolumeSnapshotResource s)
 computeStorageVolumeSnapshotResource _volumeName =
-    TF.unsafeResource "opc_compute_storage_volume_snapshot" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_storage_volume_snapshot" TF.validator $
         ComputeStorageVolumeSnapshotResource'
             { _collocated = TF.value P.False
             , _description = TF.Nil
@@ -2262,7 +2262,7 @@ computeVnicSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeVnicSetResource s)
 computeVnicSetResource _name =
-    TF.unsafeResource "opc_compute_vnic_set" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_compute_vnic_set" TF.validator $
         ComputeVnicSetResource'
             { _appliedAcls = TF.Nil
             , _description = TF.Nil
@@ -2332,7 +2332,7 @@ lbaasCertificateResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (LbaasCertificateResource s)
 lbaasCertificateResource _certificateBody _name _type' =
-    TF.unsafeResource "opc_lbaas_certificate" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_lbaas_certificate" TF.validator $
         LbaasCertificateResource'
             { _certificateBody = _certificateBody
             , _certificateChain = TF.Nil
@@ -2435,7 +2435,7 @@ lbaasListenerResource
     -> TF.Attr s P.Text -- ^ @server_protocol@ - 'P.serverProtocol'
     -> P.Resource (LbaasListenerResource s)
 lbaasListenerResource _balancerProtocol _loadBalancer _name _port _serverProtocol =
-    TF.unsafeResource "opc_lbaas_listener" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_lbaas_listener" TF.validator $
         LbaasListenerResource'
             { _balancerProtocol = _balancerProtocol
             , _certificates = TF.Nil
@@ -2588,7 +2588,7 @@ lbaasLoadBalancerResource
     -> TF.Attr s P.Text -- ^ @scheme@ - 'P.scheme'
     -> P.Resource (LbaasLoadBalancerResource s)
 lbaasLoadBalancerResource _name _region _scheme =
-    TF.unsafeResource "opc_lbaas_load_balancer" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_lbaas_load_balancer" TF.validator $
         LbaasLoadBalancerResource'
             { _description = TF.Nil
             , _enabled = TF.value P.True
@@ -2849,7 +2849,7 @@ lbaasPolicyResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LbaasPolicyResource s)
 lbaasPolicyResource _loadBalancer _name =
-    TF.unsafeResource "opc_lbaas_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_lbaas_policy" TF.validator $
         LbaasPolicyResource'
             { _applicationCookieStickinessPolicy = TF.Nil
             , _cloudgatePolicy = TF.Nil
@@ -3078,7 +3078,7 @@ lbaasServerPoolResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @servers@ - 'P.servers'
     -> P.Resource (LbaasServerPoolResource s)
 lbaasServerPoolResource _loadBalancer _name _servers =
-    TF.unsafeResource "opc_lbaas_server_pool" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_lbaas_server_pool" TF.validator $
         LbaasServerPoolResource'
             { _enabled = TF.value P.True
             , _healthCheck = TF.Nil
@@ -3189,7 +3189,7 @@ storageContainerResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (StorageContainerResource s)
 storageContainerResource _name =
-    TF.unsafeResource "opc_storage_container" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_storage_container" TF.validator $
         StorageContainerResource'
             { _maxAge = TF.Nil
             , _metadata = TF.Nil
@@ -3317,7 +3317,7 @@ storageObjectResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (StorageObjectResource s)
 storageObjectResource _container _name =
-    TF.unsafeResource "opc_storage_object" P.defaultProvider TF.validator $
+    TF.unsafeResource "opc_storage_object" TF.validator $
         StorageObjectResource'
             { _container = _container
             , _content = TF.Nil
