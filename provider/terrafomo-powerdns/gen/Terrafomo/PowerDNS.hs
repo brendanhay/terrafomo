@@ -12,10 +12,10 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.PowerDNS
-    ( module Terrafomo.PowerDNS.Resource
+    ( module Terrafomo.PowerDNS.Lens
     , module Terrafomo.PowerDNS.Provider
+    , module Terrafomo.PowerDNS.Resource
     , module Terrafomo.PowerDNS.Settings
-    , module Terrafomo.PowerDNS.Lens
     , module Terrafomo.PowerDNS.Types
     -- * Provider Aliases
     ) where

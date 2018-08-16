@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.PowerDNS.Settings
 
-import qualified Data.Hashable               as P
-import qualified Data.HashMap.Strict         as P
-import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Map.Strict             as P
+import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
 import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
@@ -60,7 +59,7 @@ data RecordResource s = RecordResource'
     , _records :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @records@ - (Required, Forces New)
     --
-    , _ttl     :: TF.Attr s P.Integer
+    , _ttl     :: TF.Attr s P.Int
     -- ^ @ttl@ - (Required, Forces New)
     --
     , _type'   :: TF.Attr s P.Text
@@ -69,17 +68,17 @@ data RecordResource s = RecordResource'
     , _zone    :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 recordResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @records@ - 'P.records'
-    -> TF.Attr s P.Integer -- ^ @ttl@ - 'P.ttl'
+    -> TF.Attr s P.Int -- ^ @ttl@ - 'P.ttl'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (RecordResource s)
 recordResource _name _records _ttl _type' _zone =
-    TF.newResource "powerdns_record" TF.validator $
+    TF.unsafeResource "powerdns_record" P.defaultProvider TF.validator $
         RecordResource'
             { _name = _name
             , _records = _records
@@ -110,9 +109,9 @@ instance P.HasRecords (RecordResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_records :: RecordResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _records = a } :: RecordResource s)
 
-instance P.HasTtl (RecordResource s) (TF.Attr s P.Integer) where
+instance P.HasTtl (RecordResource s) (TF.Attr s P.Int) where
     ttl =
-        P.lens (_ttl :: RecordResource s -> TF.Attr s P.Integer)
+        P.lens (_ttl :: RecordResource s -> TF.Attr s P.Int)
                (\s a -> s { _ttl = a } :: RecordResource s)
 
 instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
