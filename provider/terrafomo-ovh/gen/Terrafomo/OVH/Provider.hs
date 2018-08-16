@@ -93,7 +93,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "ovh"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "application_key" <$> _applicationKey
             , TF.assign "application_secret" <$> _applicationSecret

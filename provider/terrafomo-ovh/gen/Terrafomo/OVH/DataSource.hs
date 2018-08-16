@@ -223,7 +223,40 @@ instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (DomainZoneData s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/ovh/d/iploadbalancing.html terraform documentation>
 -- for more information.
 data IploadbalancingData s = IploadbalancingData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _displayName      :: TF.Attr s P.Text
+    -- ^ @display_name@ - (Optional)
+    --
+    , _ipLoadbalancing  :: TF.Attr s P.Text
+    -- ^ @ip_loadbalancing@ - (Optional)
+    --
+    , _ipv4             :: TF.Attr s P.Text
+    -- ^ @ipv4@ - (Optional)
+    --
+    , _ipv6             :: TF.Attr s P.Text
+    -- ^ @ipv6@ - (Optional)
+    --
+    , _offer            :: TF.Attr s P.Text
+    -- ^ @offer@ - (Optional)
+    --
+    , _serviceName      :: TF.Attr s P.Text
+    -- ^ @service_name@ - (Optional)
+    --
+    , _sslConfiguration :: TF.Attr s P.Text
+    -- ^ @ssl_configuration@ - (Optional)
+    --
+    , _state            :: TF.Attr s P.Text
+    -- ^ @state@ - (Optional)
+    --
+    , _vrackEligibility :: TF.Attr s P.Bool
+    -- ^ @vrack_eligibility@ - (Optional)
+    --
+    , _vrackName        :: TF.Attr s P.Text
+    -- ^ @vrack_name@ - (Optional)
+    --
+    , _zone             :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @zone@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @ovh_iploadbalancing@ datasource value.
 iploadbalancingData
@@ -231,12 +264,91 @@ iploadbalancingData
 iploadbalancingData =
     TF.unsafeDataSource "ovh_iploadbalancing" TF.validator $
         IploadbalancingData'
+            { _displayName = TF.Nil
+            , _ipLoadbalancing = TF.Nil
+            , _ipv4 = TF.Nil
+            , _ipv6 = TF.Nil
+            , _offer = TF.Nil
+            , _serviceName = TF.Nil
+            , _sslConfiguration = TF.Nil
+            , _state = TF.Nil
+            , _vrackEligibility = TF.Nil
+            , _vrackName = TF.Nil
+            , _zone = TF.Nil
+            }
 
 instance TF.IsObject (IploadbalancingData s) where
-    toObject _ = []
+    toObject IploadbalancingData'{..} = P.catMaybes
+        [ TF.assign "display_name" <$> TF.attribute _displayName
+        , TF.assign "ip_loadbalancing" <$> TF.attribute _ipLoadbalancing
+        , TF.assign "ipv4" <$> TF.attribute _ipv4
+        , TF.assign "ipv6" <$> TF.attribute _ipv6
+        , TF.assign "offer" <$> TF.attribute _offer
+        , TF.assign "service_name" <$> TF.attribute _serviceName
+        , TF.assign "ssl_configuration" <$> TF.attribute _sslConfiguration
+        , TF.assign "state" <$> TF.attribute _state
+        , TF.assign "vrack_eligibility" <$> TF.attribute _vrackEligibility
+        , TF.assign "vrack_name" <$> TF.attribute _vrackName
+        , TF.assign "zone" <$> TF.attribute _zone
+        ]
 
 instance TF.IsValid (IploadbalancingData s) where
     validator = P.mempty
+
+instance P.HasDisplayName (IploadbalancingData s) (TF.Attr s P.Text) where
+    displayName =
+        P.lens (_displayName :: IploadbalancingData s -> TF.Attr s P.Text)
+               (\s a -> s { _displayName = a } :: IploadbalancingData s)
+
+instance P.HasIpLoadbalancing (IploadbalancingData s) (TF.Attr s P.Text) where
+    ipLoadbalancing =
+        P.lens (_ipLoadbalancing :: IploadbalancingData s -> TF.Attr s P.Text)
+               (\s a -> s { _ipLoadbalancing = a } :: IploadbalancingData s)
+
+instance P.HasIpv4 (IploadbalancingData s) (TF.Attr s P.Text) where
+    ipv4 =
+        P.lens (_ipv4 :: IploadbalancingData s -> TF.Attr s P.Text)
+               (\s a -> s { _ipv4 = a } :: IploadbalancingData s)
+
+instance P.HasIpv6 (IploadbalancingData s) (TF.Attr s P.Text) where
+    ipv6 =
+        P.lens (_ipv6 :: IploadbalancingData s -> TF.Attr s P.Text)
+               (\s a -> s { _ipv6 = a } :: IploadbalancingData s)
+
+instance P.HasOffer (IploadbalancingData s) (TF.Attr s P.Text) where
+    offer =
+        P.lens (_offer :: IploadbalancingData s -> TF.Attr s P.Text)
+               (\s a -> s { _offer = a } :: IploadbalancingData s)
+
+instance P.HasServiceName (IploadbalancingData s) (TF.Attr s P.Text) where
+    serviceName =
+        P.lens (_serviceName :: IploadbalancingData s -> TF.Attr s P.Text)
+               (\s a -> s { _serviceName = a } :: IploadbalancingData s)
+
+instance P.HasSslConfiguration (IploadbalancingData s) (TF.Attr s P.Text) where
+    sslConfiguration =
+        P.lens (_sslConfiguration :: IploadbalancingData s -> TF.Attr s P.Text)
+               (\s a -> s { _sslConfiguration = a } :: IploadbalancingData s)
+
+instance P.HasState (IploadbalancingData s) (TF.Attr s P.Text) where
+    state =
+        P.lens (_state :: IploadbalancingData s -> TF.Attr s P.Text)
+               (\s a -> s { _state = a } :: IploadbalancingData s)
+
+instance P.HasVrackEligibility (IploadbalancingData s) (TF.Attr s P.Bool) where
+    vrackEligibility =
+        P.lens (_vrackEligibility :: IploadbalancingData s -> TF.Attr s P.Bool)
+               (\s a -> s { _vrackEligibility = a } :: IploadbalancingData s)
+
+instance P.HasVrackName (IploadbalancingData s) (TF.Attr s P.Text) where
+    vrackName =
+        P.lens (_vrackName :: IploadbalancingData s -> TF.Attr s P.Text)
+               (\s a -> s { _vrackName = a } :: IploadbalancingData s)
+
+instance P.HasZone (IploadbalancingData s) (TF.Attr s [TF.Attr s P.Text]) where
+    zone =
+        P.lens (_zone :: IploadbalancingData s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _zone = a } :: IploadbalancingData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -288,6 +400,9 @@ data MePaymentmeanBankaccountData s = MePaymentmeanBankaccountData'
     { _descriptionRegexp :: TF.Attr s P.Text
     -- ^ @description_regexp@ - (Optional, Forces New)
     --
+    , _state             :: TF.Attr s P.Text
+    -- ^ @state@ - (Optional)
+    --
     , _useDefault        :: TF.Attr s P.Bool
     -- ^ @use_default@ - (Optional, Forces New)
     --
@@ -303,6 +418,7 @@ mePaymentmeanBankaccountData =
     TF.unsafeDataSource "ovh_me_paymentmean_bankaccount" TF.validator $
         MePaymentmeanBankaccountData'
             { _descriptionRegexp = TF.value ".*"
+            , _state = TF.Nil
             , _useDefault = TF.value P.False
             , _useOldest = TF.value P.False
             }
@@ -310,6 +426,7 @@ mePaymentmeanBankaccountData =
 instance TF.IsObject (MePaymentmeanBankaccountData s) where
     toObject MePaymentmeanBankaccountData'{..} = P.catMaybes
         [ TF.assign "description_regexp" <$> TF.attribute _descriptionRegexp
+        , TF.assign "state" <$> TF.attribute _state
         , TF.assign "use_default" <$> TF.attribute _useDefault
         , TF.assign "use_oldest" <$> TF.attribute _useOldest
         ]
@@ -321,6 +438,11 @@ instance P.HasDescriptionRegexp (MePaymentmeanBankaccountData s) (TF.Attr s P.Te
     descriptionRegexp =
         P.lens (_descriptionRegexp :: MePaymentmeanBankaccountData s -> TF.Attr s P.Text)
                (\s a -> s { _descriptionRegexp = a } :: MePaymentmeanBankaccountData s)
+
+instance P.HasState (MePaymentmeanBankaccountData s) (TF.Attr s P.Text) where
+    state =
+        P.lens (_state :: MePaymentmeanBankaccountData s -> TF.Attr s P.Text)
+               (\s a -> s { _state = a } :: MePaymentmeanBankaccountData s)
 
 instance P.HasUseDefault (MePaymentmeanBankaccountData s) (TF.Attr s P.Bool) where
     useDefault =

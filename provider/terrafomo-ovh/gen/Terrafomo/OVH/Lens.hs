@@ -33,7 +33,11 @@ module Terrafomo.OVH.Lens
     , HasField (..)
     , HasFieldtype (..)
     , HasForceSsl (..)
+    , HasFrontendId (..)
     , HasInterval (..)
+    , HasIpLoadbalancing (..)
+    , HasIpv4 (..)
+    , HasIpv6 (..)
     , HasKeywords (..)
     , HasMatch (..)
     , HasMethod (..)
@@ -42,16 +46,21 @@ module Terrafomo.OVH.Lens
     , HasNetwork (..)
     , HasNetworkId (..)
     , HasNoGateway (..)
+    , HasOffer (..)
+    , HasOpenstackRc (..)
     , HasPattern' (..)
     , HasPort (..)
     , HasProbe (..)
     , HasProjectId (..)
     , HasProxyProtocolVersion (..)
     , HasRegion (..)
+    , HasRegions (..)
     , HasRouteId (..)
     , HasServiceName (..)
     , HasSsl (..)
+    , HasSslConfiguration (..)
     , HasStart (..)
+    , HasState (..)
     , HasStates (..)
     , HasStatus (..)
     , HasStickiness (..)
@@ -66,7 +75,9 @@ module Terrafomo.OVH.Lens
     , HasUseLastToExpire (..)
     , HasUseOldest (..)
     , HasVlanId (..)
+    , HasVrackEligibility (..)
     , HasVrackId (..)
+    , HasVrackName (..)
     , HasVrackNetworkId (..)
     , HasWeight (..)
     , HasZone (..)
@@ -231,11 +242,35 @@ class HasForceSsl a b | a -> b where
 instance HasForceSsl a b => HasForceSsl (TF.Schema l p a) b where
     forceSsl = TF.configuration . forceSsl
 
+class HasFrontendId a b | a -> b where
+    frontendId :: P.Lens' a b
+
+instance HasFrontendId a b => HasFrontendId (TF.Schema l p a) b where
+    frontendId = TF.configuration . frontendId
+
 class HasInterval a b | a -> b where
     interval :: P.Lens' a b
 
 instance HasInterval a b => HasInterval (TF.Schema l p a) b where
     interval = TF.configuration . interval
+
+class HasIpLoadbalancing a b | a -> b where
+    ipLoadbalancing :: P.Lens' a b
+
+instance HasIpLoadbalancing a b => HasIpLoadbalancing (TF.Schema l p a) b where
+    ipLoadbalancing = TF.configuration . ipLoadbalancing
+
+class HasIpv4 a b | a -> b where
+    ipv4 :: P.Lens' a b
+
+instance HasIpv4 a b => HasIpv4 (TF.Schema l p a) b where
+    ipv4 = TF.configuration . ipv4
+
+class HasIpv6 a b | a -> b where
+    ipv6 :: P.Lens' a b
+
+instance HasIpv6 a b => HasIpv6 (TF.Schema l p a) b where
+    ipv6 = TF.configuration . ipv6
 
 class HasKeywords a b | a -> b where
     keywords :: P.Lens' a b
@@ -285,6 +320,18 @@ class HasNoGateway a b | a -> b where
 instance HasNoGateway a b => HasNoGateway (TF.Schema l p a) b where
     noGateway = TF.configuration . noGateway
 
+class HasOffer a b | a -> b where
+    offer :: P.Lens' a b
+
+instance HasOffer a b => HasOffer (TF.Schema l p a) b where
+    offer = TF.configuration . offer
+
+class HasOpenstackRc a b | a -> b where
+    openstackRc :: P.Lens' a b
+
+instance HasOpenstackRc a b => HasOpenstackRc (TF.Schema l p a) b where
+    openstackRc = TF.configuration . openstackRc
+
 class HasPattern' a b | a -> b where
     pattern' :: P.Lens' a b
 
@@ -321,6 +368,12 @@ class HasRegion a b | a -> b where
 instance HasRegion a b => HasRegion (TF.Schema l p a) b where
     region = TF.configuration . region
 
+class HasRegions a b | a -> b where
+    regions :: P.Lens' a b
+
+instance HasRegions a b => HasRegions (TF.Schema l p a) b where
+    regions = TF.configuration . regions
+
 class HasRouteId a b | a -> b where
     routeId :: P.Lens' a b
 
@@ -339,11 +392,23 @@ class HasSsl a b | a -> b where
 instance HasSsl a b => HasSsl (TF.Schema l p a) b where
     ssl = TF.configuration . ssl
 
+class HasSslConfiguration a b | a -> b where
+    sslConfiguration :: P.Lens' a b
+
+instance HasSslConfiguration a b => HasSslConfiguration (TF.Schema l p a) b where
+    sslConfiguration = TF.configuration . sslConfiguration
+
 class HasStart a b | a -> b where
     start :: P.Lens' a b
 
 instance HasStart a b => HasStart (TF.Schema l p a) b where
     start = TF.configuration . start
+
+class HasState a b | a -> b where
+    state :: P.Lens' a b
+
+instance HasState a b => HasState (TF.Schema l p a) b where
+    state = TF.configuration . state
 
 class HasStates a b | a -> b where
     states :: P.Lens' a b
@@ -429,11 +494,23 @@ class HasVlanId a b | a -> b where
 instance HasVlanId a b => HasVlanId (TF.Schema l p a) b where
     vlanId = TF.configuration . vlanId
 
+class HasVrackEligibility a b | a -> b where
+    vrackEligibility :: P.Lens' a b
+
+instance HasVrackEligibility a b => HasVrackEligibility (TF.Schema l p a) b where
+    vrackEligibility = TF.configuration . vrackEligibility
+
 class HasVrackId a b | a -> b where
     vrackId :: P.Lens' a b
 
 instance HasVrackId a b => HasVrackId (TF.Schema l p a) b where
     vrackId = TF.configuration . vrackId
+
+class HasVrackName a b | a -> b where
+    vrackName :: P.Lens' a b
+
+instance HasVrackName a b => HasVrackName (TF.Schema l p a) b where
+    vrackName = TF.configuration . vrackName
 
 class HasVrackNetworkId a b | a -> b where
     vrackNetworkId :: P.Lens' a b

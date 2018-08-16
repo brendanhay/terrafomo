@@ -110,6 +110,9 @@ data CloudNetworkPrivateResource s = CloudNetworkPrivateResource'
     , _projectId :: TF.Attr s P.Text
     -- ^ @project_id@ - (Required, Forces New)
     --
+    , _regions   :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @regions@ - (Optional, Forces New)
+    --
     , _vlanId    :: TF.Attr s P.Int
     -- ^ @vlan_id@ - (Optional, Forces New)
     --
@@ -125,6 +128,7 @@ cloudNetworkPrivateResource _projectId _name =
         CloudNetworkPrivateResource'
             { _name = _name
             , _projectId = _projectId
+            , _regions = TF.Nil
             , _vlanId = TF.value 0
             }
 
@@ -132,6 +136,7 @@ instance TF.IsObject (CloudNetworkPrivateResource s) where
     toObject CloudNetworkPrivateResource'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project_id" <$> TF.attribute _projectId
+        , TF.assign "regions" <$> TF.attribute _regions
         , TF.assign "vlan_id" <$> TF.attribute _vlanId
         ]
 
@@ -147,6 +152,11 @@ instance P.HasProjectId (CloudNetworkPrivateResource s) (TF.Attr s P.Text) where
     projectId =
         P.lens (_projectId :: CloudNetworkPrivateResource s -> TF.Attr s P.Text)
                (\s a -> s { _projectId = a } :: CloudNetworkPrivateResource s)
+
+instance P.HasRegions (CloudNetworkPrivateResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    regions =
+        P.lens (_regions :: CloudNetworkPrivateResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _regions = a } :: CloudNetworkPrivateResource s)
 
 instance P.HasVlanId (CloudNetworkPrivateResource s) (TF.Attr s P.Int) where
     vlanId =
@@ -296,6 +306,9 @@ data CloudUserResource s = CloudUserResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
+    , _openstackRc :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @openstack_rc@ - (Optional)
+    --
     , _projectId   :: TF.Attr s P.Text
     -- ^ @project_id@ - (Required, Forces New)
     --
@@ -309,12 +322,14 @@ cloudUserResource _projectId =
     TF.unsafeResource "ovh_cloud_user" TF.validator $
         CloudUserResource'
             { _description = TF.Nil
+            , _openstackRc = TF.Nil
             , _projectId = _projectId
             }
 
 instance TF.IsObject (CloudUserResource s) where
     toObject CloudUserResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "openstack_rc" <$> TF.attribute _openstackRc
         , TF.assign "project_id" <$> TF.attribute _projectId
         ]
 
@@ -325,6 +340,11 @@ instance P.HasDescription (CloudUserResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: CloudUserResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: CloudUserResource s)
+
+instance P.HasOpenstackRc (CloudUserResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    openstackRc =
+        P.lens (_openstackRc :: CloudUserResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _openstackRc = a } :: CloudUserResource s)
 
 instance P.HasProjectId (CloudUserResource s) (TF.Attr s P.Text) where
     projectId =
@@ -536,6 +556,9 @@ data IploadbalancingHttpRouteResource s = IploadbalancingHttpRouteResource'
     , _displayName :: TF.Attr s P.Text
     -- ^ @display_name@ - (Optional)
     --
+    , _frontendId  :: TF.Attr s P.Int
+    -- ^ @frontend_id@ - (Optional)
+    --
     , _serviceName :: TF.Attr s P.Text
     -- ^ @service_name@ - (Required, Forces New)
     --
@@ -554,6 +577,7 @@ iploadbalancingHttpRouteResource _action _serviceName =
         IploadbalancingHttpRouteResource'
             { _action = _action
             , _displayName = TF.Nil
+            , _frontendId = TF.Nil
             , _serviceName = _serviceName
             , _weight = TF.Nil
             }
@@ -562,6 +586,7 @@ instance TF.IsObject (IploadbalancingHttpRouteResource s) where
     toObject IploadbalancingHttpRouteResource'{..} = P.catMaybes
         [ TF.assign "action" <$> TF.attribute _action
         , TF.assign "display_name" <$> TF.attribute _displayName
+        , TF.assign "frontend_id" <$> TF.attribute _frontendId
         , TF.assign "service_name" <$> TF.attribute _serviceName
         , TF.assign "weight" <$> TF.attribute _weight
         ]
@@ -578,6 +603,11 @@ instance P.HasDisplayName (IploadbalancingHttpRouteResource s) (TF.Attr s P.Text
     displayName =
         P.lens (_displayName :: IploadbalancingHttpRouteResource s -> TF.Attr s P.Text)
                (\s a -> s { _displayName = a } :: IploadbalancingHttpRouteResource s)
+
+instance P.HasFrontendId (IploadbalancingHttpRouteResource s) (TF.Attr s P.Int) where
+    frontendId =
+        P.lens (_frontendId :: IploadbalancingHttpRouteResource s -> TF.Attr s P.Int)
+               (\s a -> s { _frontendId = a } :: IploadbalancingHttpRouteResource s)
 
 instance P.HasServiceName (IploadbalancingHttpRouteResource s) (TF.Attr s P.Text) where
     serviceName =
@@ -974,6 +1004,9 @@ data PubliccloudPrivateNetworkResource s = PubliccloudPrivateNetworkResource'
     , _projectId :: TF.Attr s P.Text
     -- ^ @project_id@ - (Required, Forces New)
     --
+    , _regions   :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @regions@ - (Optional, Forces New)
+    --
     , _vlanId    :: TF.Attr s P.Int
     -- ^ @vlan_id@ - (Optional, Forces New)
     --
@@ -989,6 +1022,7 @@ publiccloudPrivateNetworkResource _projectId _name =
         PubliccloudPrivateNetworkResource'
             { _name = _name
             , _projectId = _projectId
+            , _regions = TF.Nil
             , _vlanId = TF.value 0
             }
 
@@ -996,6 +1030,7 @@ instance TF.IsObject (PubliccloudPrivateNetworkResource s) where
     toObject PubliccloudPrivateNetworkResource'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project_id" <$> TF.attribute _projectId
+        , TF.assign "regions" <$> TF.attribute _regions
         , TF.assign "vlan_id" <$> TF.attribute _vlanId
         ]
 
@@ -1011,6 +1046,11 @@ instance P.HasProjectId (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Text)
     projectId =
         P.lens (_projectId :: PubliccloudPrivateNetworkResource s -> TF.Attr s P.Text)
                (\s a -> s { _projectId = a } :: PubliccloudPrivateNetworkResource s)
+
+instance P.HasRegions (PubliccloudPrivateNetworkResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    regions =
+        P.lens (_regions :: PubliccloudPrivateNetworkResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _regions = a } :: PubliccloudPrivateNetworkResource s)
 
 instance P.HasVlanId (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Int) where
     vlanId =
@@ -1160,6 +1200,9 @@ data PubliccloudUserResource s = PubliccloudUserResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
+    , _openstackRc :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @openstack_rc@ - (Optional)
+    --
     , _projectId   :: TF.Attr s P.Text
     -- ^ @project_id@ - (Required, Forces New)
     --
@@ -1173,12 +1216,14 @@ publiccloudUserResource _projectId =
     TF.unsafeResource "ovh_publiccloud_user" TF.validator $
         PubliccloudUserResource'
             { _description = TF.Nil
+            , _openstackRc = TF.Nil
             , _projectId = _projectId
             }
 
 instance TF.IsObject (PubliccloudUserResource s) where
     toObject PubliccloudUserResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "openstack_rc" <$> TF.attribute _openstackRc
         , TF.assign "project_id" <$> TF.attribute _projectId
         ]
 
@@ -1189,6 +1234,11 @@ instance P.HasDescription (PubliccloudUserResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: PubliccloudUserResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: PubliccloudUserResource s)
+
+instance P.HasOpenstackRc (PubliccloudUserResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    openstackRc =
+        P.lens (_openstackRc :: PubliccloudUserResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _openstackRc = a } :: PubliccloudUserResource s)
 
 instance P.HasProjectId (PubliccloudUserResource s) (TF.Attr s P.Text) where
     projectId =
