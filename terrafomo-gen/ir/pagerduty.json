@@ -555,23 +555,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_durationSeconds",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"duration_seconds\" <$> TF.attribute",
-                    "name": "_durationSeconds",
-                    "method": "durationSeconds",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasDurationSeconds",
-                    "validate": false,
-                    "optional": false,
-                    "original": "duration_seconds"
-                },
-                {
                     "default": "_startTimeOfDay",
                     "computed": false,
                     "required": true,
@@ -587,6 +570,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "start_time_of_day"
+                },
+                {
+                    "default": "_durationSeconds",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"duration_seconds\" <$> TF.attribute",
+                    "name": "_durationSeconds",
+                    "method": "durationSeconds",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasDurationSeconds",
+                    "validate": false,
+                    "optional": false,
+                    "original": "duration_seconds"
                 },
                 {
                     "default": "_type'",
@@ -1906,23 +1906,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_endTime",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"end_time\" <$> TF.attribute",
-                    "name": "_endTime",
-                    "method": "endTime",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasEndTime",
-                    "validate": false,
-                    "optional": false,
-                    "original": "end_time"
-                },
-                {
                     "default": "_services",
                     "computed": false,
                     "required": true,
@@ -1938,6 +1921,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "services"
+                },
+                {
+                    "default": "_endTime",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"end_time\" <$> TF.attribute",
+                    "name": "_endTime",
+                    "method": "endTime",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEndTime",
+                    "validate": false,
+                    "optional": false,
+                    "original": "end_time"
                 },
                 {
                     "default": "_startTime",
@@ -3060,6 +3060,23 @@
                     "original": "address"
                 },
                 {
+                    "default": "_userId",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"user_id\" <$> TF.attribute",
+                    "name": "_userId",
+                    "method": "userId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUserId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "user_id"
+                },
+                {
                     "default": "_label",
                     "computed": false,
                     "required": true,
@@ -3092,23 +3109,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "type"
-                },
-                {
-                    "default": "_userId",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"user_id\" <$> TF.attribute",
-                    "name": "_userId",
-                    "method": "userId",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasUserId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "user_id"
                 }
             ],
             "conflicts": [],
