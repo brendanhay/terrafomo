@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "cdromSetting",
+                "smart": "newCdromSetting",
                 "name": "CdromSetting'"
             },
             "arguments": [
@@ -115,7 +115,7 @@
         },
         {
             "con": {
-                "smart": "cloneSetting",
+                "smart": "newCloneSetting",
                 "name": "CloneSetting'"
             },
             "arguments": [
@@ -229,7 +229,7 @@
         },
         {
             "con": {
-                "smart": "customizeSetting",
+                "smart": "newCustomizeSetting",
                 "name": "CustomizeSetting'"
             },
             "arguments": [
@@ -548,7 +548,7 @@
         },
         {
             "con": {
-                "smart": "diskSetting",
+                "smart": "newDiskSetting",
                 "name": "DiskSetting'"
             },
             "arguments": [
@@ -962,7 +962,7 @@
         },
         {
             "con": {
-                "smart": "disksSetting",
+                "smart": "newDisksSetting",
                 "name": "DisksSetting'"
             },
             "arguments": [],
@@ -1029,7 +1029,7 @@
         },
         {
             "con": {
-                "smart": "hostSetting",
+                "smart": "newHostSetting",
                 "name": "HostSetting'"
             },
             "arguments": [
@@ -1122,7 +1122,7 @@
         },
         {
             "con": {
-                "smart": "linuxOptionsSetting",
+                "smart": "newLinuxOptionsSetting",
                 "name": "LinuxOptionsSetting'"
             },
             "arguments": [
@@ -1254,7 +1254,7 @@
         },
         {
             "con": {
-                "smart": "networkInterfaceSetting",
+                "smart": "newNetworkInterfaceSetting",
                 "name": "NetworkInterfaceSetting'"
             },
             "arguments": [
@@ -1643,7 +1643,7 @@
         },
         {
             "con": {
-                "smart": "portsSetting",
+                "smart": "newPortsSetting",
                 "name": "PortsSetting'"
             },
             "arguments": [],
@@ -1718,7 +1718,7 @@
         },
         {
             "con": {
-                "smart": "vappSetting",
+                "smart": "newVappSetting",
                 "name": "VappSetting'"
             },
             "arguments": [
@@ -1754,7 +1754,7 @@
         },
         {
             "con": {
-                "smart": "vlanRangeSetting",
+                "smart": "newVlanRangeSetting",
                 "name": "VlanRangeSetting'"
             },
             "arguments": [
@@ -1847,7 +1847,7 @@
         },
         {
             "con": {
-                "smart": "windowsOptionsSetting",
+                "smart": "newWindowsOptionsSetting",
                 "name": "WindowsOptionsSetting'"
             },
             "arguments": [
