@@ -2280,6 +2280,23 @@
                     "original": "droplet_id"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip_address\" <$> TF.attribute",
+                    "name": "_ipAddress",
+                    "method": "ipAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ip_address"
+                },
+                {
                     "default": "_region",
                     "computed": false,
                     "required": true,
@@ -2333,7 +2350,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpAddress",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ip_address"
                 }
             ],
@@ -2501,6 +2518,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "region"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"sticky_sessions\" <$> TF.attribute",
+                    "name": "_stickySessions",
+                    "method": "stickySessions",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (StickySessionsSetting s)",
+                    "class": "HasStickySessions",
+                    "validate": true,
+                    "optional": true,
+                    "original": "sticky_sessions"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/digitalocean/r/loadbalancer.html",
@@ -2556,7 +2590,7 @@
                     "type": "TF.Attr s (StickySessionsSetting s)",
                     "class": "HasComputedStickySessions",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "sticky_sessions"
                 }
             ],
@@ -2645,6 +2679,23 @@
                     "computed": false,
                     "required": false,
                     "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"flags\" <$> TF.attribute",
+                    "name": "_flags",
+                    "method": "flags",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFlags",
+                    "validate": false,
+                    "optional": true,
+                    "original": "flags"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
@@ -2656,6 +2707,40 @@
                     "validate": false,
                     "optional": true,
                     "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"port\" <$> TF.attribute",
+                    "name": "_port",
+                    "method": "port",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPort",
+                    "validate": false,
+                    "optional": true,
+                    "original": "port"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"priority\" <$> TF.attribute",
+                    "name": "_priority",
+                    "method": "priority",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPriority",
+                    "validate": false,
+                    "optional": true,
+                    "original": "priority"
                 },
                 {
                     "default": "TF.Nil",
@@ -2675,6 +2760,23 @@
                     "original": "tag"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ttl\" <$> TF.attribute",
+                    "name": "_ttl",
+                    "method": "ttl",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTtl",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ttl"
+                },
+                {
                     "default": "_type'",
                     "computed": false,
                     "required": true,
@@ -2690,6 +2792,40 @@
                     "validate": false,
                     "optional": false,
                     "original": "type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": true,
+                    "original": "value"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"weight\" <$> TF.attribute",
+                    "name": "_weight",
+                    "method": "weight",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasWeight",
+                    "validate": false,
+                    "optional": true,
+                    "original": "weight"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/digitalocean/r/record.html",
@@ -2728,7 +2864,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedFlags",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "flags"
                 },
                 {
@@ -2762,7 +2898,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPort",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "port"
                 },
                 {
@@ -2779,7 +2915,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPriority",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "priority"
                 },
                 {
@@ -2796,7 +2932,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTtl",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ttl"
                 },
                 {
@@ -2813,7 +2949,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedValue",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "value"
                 },
                 {
@@ -2830,7 +2966,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedWeight",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "weight"
                 }
             ],
