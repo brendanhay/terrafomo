@@ -2415,6 +2415,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"function\" <$> TF.attribute",
+                    "name": "_function",
+                    "method": "function",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFunction",
+                    "validate": false,
+                    "optional": true,
+                    "original": "function"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"legend_formula\" <$> TF.attribute",
                     "name": "_legendFormula",
                     "method": "legendFormula",
@@ -2502,7 +2519,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedFunction",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "function"
                 }
             ],
@@ -5298,7 +5315,54 @@
                 "smart": "accountData",
                 "name": "AccountData'"
             },
-            "arguments": [],
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"current\" <$> TF.attribute",
+                    "name": "_current",
+                    "method": "current",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_id",
+                            "method": "id"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasCurrent",
+                    "validate": false,
+                    "optional": true,
+                    "original": "current"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_id",
+                    "method": "id",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_current",
+                            "method": "current"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "id"
+                }
+            ],
             "url": "https://www.terraform.io/docs/providers/circonus/d/account.html",
             "key": "circonus_account",
             "name": "AccountData",
@@ -5424,7 +5488,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedCurrent",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "current"
                 },
                 {
@@ -5460,7 +5524,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "id"
                 },
                 {
@@ -5607,7 +5671,54 @@
                 }
             ],
             "parameters": [],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"current\" <$> TF.attribute",
+                    "name": "_current",
+                    "method": "current",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_id",
+                            "method": "id"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasCurrent",
+                    "validate": false,
+                    "optional": true,
+                    "original": "current"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_id",
+                    "method": "id",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_current",
+                            "method": "current"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "id"
+                }
+            ],
             "type": "AccountData s",
             "original": "circonus_account"
         },
@@ -5617,6 +5728,23 @@
                 "name": "CollectorData'"
             },
             "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_id",
+                    "method": "id",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "id"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": false,
@@ -5673,7 +5801,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "id"
                 },
                 {
@@ -5953,6 +6081,27 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "Setting a metric_limit will enable all (-1), disable (0), or allow up to the",
+                        "specified limit of metrics for this check (\"N+\", where N is a positive",
+                        "integer)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"metric_limit\" <$> TF.attribute",
+                    "name": "_metricLimit",
+                    "method": "metricLimit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMetricLimit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "metric_limit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "MySQL check configuration"
                     ],
                     "forceNew": false,
@@ -5966,6 +6115,63 @@
                     "validate": true,
                     "optional": true,
                     "original": "mysql"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The name of the check bundle that will be displayed in the web interface"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Notes about this check bundle"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"notes\" <$> TF.attribute",
+                    "name": "_notes",
+                    "method": "notes",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNotes",
+                    "validate": false,
+                    "optional": true,
+                    "original": "notes"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The period between each time the check is made"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"period\" <$> TF.attribute",
+                    "name": "_period",
+                    "method": "period",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPeriod",
+                    "validate": false,
+                    "optional": true,
+                    "original": "period"
                 },
                 {
                     "default": "TF.Nil",
@@ -6029,6 +6235,25 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "The target of the check (e.g. hostname, URL, IP, etc)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"target\" <$> TF.attribute",
+                    "name": "_target",
+                    "method": "target",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTarget",
+                    "validate": false,
+                    "optional": true,
+                    "original": "target"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "TCP check configuration"
                     ],
                     "forceNew": false,
@@ -6042,6 +6267,45 @@
                     "validate": true,
                     "optional": true,
                     "original": "tcp"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The length of time in seconds (and fractions of a second) before the check",
+                        "will timeout if no response is returned to the collector"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"timeout\" <$> TF.attribute",
+                    "name": "_timeout",
+                    "method": "timeout",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTimeout",
+                    "validate": false,
+                    "optional": true,
+                    "original": "timeout"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The check type"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": true,
+                    "original": "type"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/circonus/r/check.html",
@@ -6186,7 +6450,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedMetricLimit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "metric_limit"
                 },
                 {
@@ -6205,7 +6469,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 },
                 {
@@ -6224,7 +6488,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedNotes",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "notes"
                 },
                 {
@@ -6243,7 +6507,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPeriod",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "period"
                 },
                 {
@@ -6279,7 +6543,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTarget",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "target"
                 },
                 {
@@ -6299,7 +6563,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTimeout",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "timeout"
                 },
                 {
@@ -6318,7 +6582,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedType",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "type"
                 },
                 {
@@ -7122,6 +7386,25 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "A description of the metric cluster"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "_description",
+                    "method": "description",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "validate": false,
+                    "optional": true,
+                    "original": "description"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -7200,7 +7483,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDescription",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "description"
                 },
                 {
@@ -7293,6 +7576,25 @@
                     "original": "if"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "URL to show users when this rule set is active (e.g. wiki)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"link\" <$> TF.attribute",
+                    "name": "_link",
+                    "method": "link",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLink",
+                    "validate": false,
+                    "optional": true,
+                    "original": "link"
+                },
+                {
                     "default": "_metricName",
                     "computed": false,
                     "required": true,
@@ -7329,6 +7631,44 @@
                     "validate": false,
                     "optional": true,
                     "original": "metric_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Notes describing this rule set"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"notes\" <$> TF.attribute",
+                    "name": "_notes",
+                    "method": "notes",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNotes",
+                    "validate": false,
+                    "optional": true,
+                    "original": "notes"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Parent CID that must be healthy for this rule set to be active"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"parent\" <$> TF.attribute",
+                    "name": "_parent",
+                    "method": "parent",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasParent",
+                    "validate": false,
+                    "optional": true,
+                    "original": "parent"
                 },
                 {
                     "default": "TF.Nil",
@@ -7388,7 +7728,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedLink",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "link"
                 },
                 {
@@ -7407,7 +7747,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedNotes",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "notes"
                 },
                 {
@@ -7426,7 +7766,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedParent",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "parent"
                 }
             ],
