@@ -5240,25 +5240,6 @@
                     "original": "backend"
                 },
                 {
-                    "default": "_creationStatements",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Database statements to execute to create and configure a user."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"creation_statements\" <$> TF.attribute",
-                    "name": "_creationStatements",
-                    "method": "creationStatements",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCreationStatements",
-                    "validate": false,
-                    "optional": false,
-                    "original": "creation_statements"
-                },
-                {
                     "default": "_dbName",
                     "computed": false,
                     "required": true,
@@ -5295,6 +5276,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "_creationStatements",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Database statements to execute to create and configure a user."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"creation_statements\" <$> TF.attribute",
+                    "name": "_creationStatements",
+                    "method": "creationStatements",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCreationStatements",
+                    "validate": false,
+                    "optional": false,
+                    "original": "creation_statements"
                 }
             ],
             "conflicts": [],
