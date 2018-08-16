@@ -160,6 +160,23 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"accepted_return_codes\" <$> TF.attribute",
+                    "name": "_acceptedReturnCodes",
+                    "method": "acceptedReturnCodes",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasAcceptedReturnCodes",
+                    "validate": false,
+                    "optional": true,
+                    "original": "accepted_return_codes"
+                },
+                {
                     "default": "TF.value P.True",
                     "computed": false,
                     "required": false,
@@ -297,7 +314,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedAcceptedReturnCodes",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "accepted_return_codes"
                 }
             ],
@@ -335,6 +352,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
+                    "encoder": "TF.assign \"hostname\" <$> TF.attribute",
+                    "name": "_hostname",
+                    "method": "hostname",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHostname",
+                    "validate": false,
+                    "optional": true,
+                    "original": "hostname"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
                     "encoder": "TF.assign \"image_list\" <$> TF.attribute",
                     "name": "_imageList",
                     "method": "imageList",
@@ -345,6 +379,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "image_list"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"label\" <$> TF.attribute",
+                    "name": "_label",
+                    "method": "label",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLabel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "label"
                 },
                 {
                     "default": "_name",
@@ -362,6 +413,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"networking_info\" <$> TF.attribute",
+                    "name": "_networkingInfo",
+                    "method": "networkingInfo",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]",
+                    "class": "HasNetworkingInfo",
+                    "validate": false,
+                    "optional": true,
+                    "original": "networking_info"
                 },
                 {
                     "default": "TF.value P.False",
@@ -586,7 +654,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHostname",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "hostname"
                 },
                 {
@@ -671,7 +739,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedLabel",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "label"
                 },
                 {
@@ -688,7 +756,7 @@
                     "type": "TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]",
                     "class": "HasComputedNetworkingInfo",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "networking_info"
                 },
                 {
@@ -1045,6 +1113,23 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"dns\" <$> TF.attribute",
+                    "name": "_dns",
+                    "method": "dns",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasDns",
+                    "validate": false,
+                    "optional": true,
+                    "original": "dns"
+                },
+                {
                     "default": "_index",
                     "computed": false,
                     "required": true,
@@ -1118,6 +1203,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
+                    "encoder": "TF.assign \"mac_address\" <$> TF.attribute",
+                    "name": "_macAddress",
+                    "method": "macAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMacAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "mac_address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
                     "encoder": "TF.assign \"name_servers\" <$> TF.attribute",
                     "name": "_nameServers",
                     "method": "nameServers",
@@ -1162,6 +1264,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "search_domains"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"sec_lists\" <$> TF.attribute",
+                    "name": "_secLists",
+                    "method": "secLists",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasSecLists",
+                    "validate": false,
+                    "optional": true,
+                    "original": "sec_lists"
                 },
                 {
                     "default": "TF.value P.False",
@@ -1233,7 +1352,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedDns",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "dns"
                 },
                 {
@@ -1250,7 +1369,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMacAddress",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "mac_address"
                 },
                 {
@@ -1267,7 +1386,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedSecLists",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "sec_lists"
                 }
             ],
@@ -4309,6 +4428,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
+                    "encoder": "TF.assign \"hostname\" <$> TF.attribute",
+                    "name": "_hostname",
+                    "method": "hostname",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHostname",
+                    "validate": false,
+                    "optional": true,
+                    "original": "hostname"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
                     "encoder": "TF.assign \"image_list\" <$> TF.attribute",
                     "name": "_imageList",
                     "method": "imageList",
@@ -4338,6 +4474,23 @@
                     "original": "instance_attributes"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"label\" <$> TF.attribute",
+                    "name": "_label",
+                    "method": "label",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLabel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "label"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -4353,6 +4506,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"networking_info\" <$> TF.attribute",
+                    "name": "_networkingInfo",
+                    "method": "networkingInfo",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]",
+                    "class": "HasNetworkingInfo",
+                    "validate": false,
+                    "optional": true,
+                    "original": "networking_info"
                 },
                 {
                     "default": "TF.value P.True",
@@ -4578,7 +4748,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHostname",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "hostname"
                 },
                 {
@@ -4629,7 +4799,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedLabel",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "label"
                 },
                 {
@@ -4646,7 +4816,7 @@
                     "type": "TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]",
                     "class": "HasComputedNetworkingInfo",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "networking_info"
                 },
                 {
@@ -5366,6 +5536,23 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
                     "default": "_parentPool",
                     "computed": false,
                     "required": true,
@@ -5436,7 +5623,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 }
             ],
@@ -5797,6 +5984,23 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
                     "default": "TF.value \"/oracle/public/ippool\"",
                     "computed": false,
                     "required": false,
@@ -5901,7 +6105,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 },
                 {
@@ -7033,6 +7237,23 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
                     "default": "_seclist",
                     "computed": false,
                     "required": true,
@@ -7103,7 +7324,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 }
             ],
@@ -7874,6 +8095,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "instance"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"machine_image\" <$> TF.attribute",
+                    "name": "_machineImage",
+                    "method": "machineImage",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMachineImage",
+                    "validate": false,
+                    "optional": true,
+                    "original": "machine_image"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_snapshot.html",
@@ -7929,7 +8167,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMachineImage",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "machine_image"
                 },
                 {
@@ -8294,6 +8532,23 @@
                     "computed": false,
                     "required": false,
                     "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"hypervisor\" <$> TF.attribute",
+                    "name": "_hypervisor",
+                    "method": "hypervisor",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHypervisor",
+                    "validate": false,
+                    "optional": true,
+                    "original": "hypervisor"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"image_list\" <$> TF.attribute",
                     "name": "_imageList",
@@ -8324,6 +8579,40 @@
                     "original": "image_list_entry"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"machine_image\" <$> TF.attribute",
+                    "name": "_machineImage",
+                    "method": "machineImage",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMachineImage",
+                    "validate": false,
+                    "optional": true,
+                    "original": "machine_image"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"managed\" <$> TF.attribute",
+                    "name": "_managed",
+                    "method": "managed",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasManaged",
+                    "validate": false,
+                    "optional": true,
+                    "original": "managed"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -8341,6 +8630,40 @@
                     "original": "name"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"platform\" <$> TF.attribute",
+                    "name": "_platform",
+                    "method": "platform",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPlatform",
+                    "validate": false,
+                    "optional": true,
+                    "original": "platform"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"readonly\" <$> TF.attribute",
+                    "name": "_readonly",
+                    "method": "readonly",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasReadonly",
+                    "validate": false,
+                    "optional": true,
+                    "original": "readonly"
+                },
+                {
                     "default": "_size",
                     "computed": false,
                     "required": true,
@@ -8356,6 +8679,91 @@
                     "validate": false,
                     "optional": false,
                     "original": "size"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"snapshot\" <$> TF.attribute",
+                    "name": "_snapshot",
+                    "method": "snapshot",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSnapshot",
+                    "validate": false,
+                    "optional": true,
+                    "original": "snapshot"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"snapshot_account\" <$> TF.attribute",
+                    "name": "_snapshotAccount",
+                    "method": "snapshotAccount",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSnapshotAccount",
+                    "validate": false,
+                    "optional": true,
+                    "original": "snapshot_account"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"snapshot_id\" <$> TF.attribute",
+                    "name": "_snapshotId",
+                    "method": "snapshotId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSnapshotId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "snapshot_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"status\" <$> TF.attribute",
+                    "name": "_status",
+                    "method": "status",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasStatus",
+                    "validate": false,
+                    "optional": true,
+                    "original": "status"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"storage_pool\" <$> TF.attribute",
+                    "name": "_storagePool",
+                    "method": "storagePool",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasStoragePool",
+                    "validate": false,
+                    "optional": true,
+                    "original": "storage_pool"
                 },
                 {
                     "default": "TF.Nil",
@@ -8390,6 +8798,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "tags"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"uri\" <$> TF.attribute",
+                    "name": "_uri",
+                    "method": "uri",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUri",
+                    "validate": false,
+                    "optional": true,
+                    "original": "uri"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_storage_volume.html",
@@ -8428,7 +8853,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHypervisor",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "hypervisor"
                 },
                 {
@@ -8445,7 +8870,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMachineImage",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "machine_image"
                 },
                 {
@@ -8462,7 +8887,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedManaged",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "managed"
                 },
                 {
@@ -8479,7 +8904,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPlatform",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "platform"
                 },
                 {
@@ -8496,7 +8921,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedReadonly",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "readonly"
                 },
                 {
@@ -8513,7 +8938,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSnapshot",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "snapshot"
                 },
                 {
@@ -8530,7 +8955,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSnapshotAccount",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "snapshot_account"
                 },
                 {
@@ -8547,7 +8972,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSnapshotId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "snapshot_id"
                 },
                 {
@@ -8564,7 +8989,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedStatus",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "status"
                 },
                 {
@@ -8581,7 +9006,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedStoragePool",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "storage_pool"
                 },
                 {
@@ -8598,7 +9023,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedUri",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "uri"
                 }
             ],
@@ -8681,6 +9106,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "description"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
                 },
                 {
                     "default": "TF.value P.False",
@@ -8804,7 +9246,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 },
                 {
@@ -9074,6 +9516,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "tags"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virtual_nics\" <$> TF.attribute",
+                    "name": "_virtualNics",
+                    "method": "virtualNics",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasVirtualNics",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virtual_nics"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_vnic_set.html",
@@ -9112,7 +9571,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedVirtualNics",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virtual_nics"
                 }
             ],
@@ -9779,6 +10238,23 @@
                     "original": "enabled"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"ip_network\" <$> TF.attribute",
+                    "name": "_ipNetwork",
+                    "method": "ipNetwork",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpNetwork",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ip_network"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -10019,7 +10495,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpNetwork",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ip_network"
                 },
                 {
@@ -11816,6 +12292,40 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"allowed_origins\" <$> TF.attribute",
+                    "name": "_allowedOrigins",
+                    "method": "allowedOrigins",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasAllowedOrigins",
+                    "validate": false,
+                    "optional": true,
+                    "original": "allowed_origins"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"exposed_headers\" <$> TF.attribute",
+                    "name": "_exposedHeaders",
+                    "method": "exposedHeaders",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasExposedHeaders",
+                    "validate": false,
+                    "optional": true,
+                    "original": "exposed_headers"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"max_age\" <$> TF.attribute",
                     "name": "_maxAge",
                     "method": "maxAge",
@@ -11918,6 +12428,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"read_acls\" <$> TF.attribute",
+                    "name": "_readAcls",
+                    "method": "readAcls",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasReadAcls",
+                    "validate": false,
+                    "optional": true,
+                    "original": "read_acls"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"secondary_key\" <$> TF.attribute",
                     "name": "_secondaryKey",
                     "method": "secondaryKey",
@@ -11928,6 +12455,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "secondary_key"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"write_acls\" <$> TF.attribute",
+                    "name": "_writeAcls",
+                    "method": "writeAcls",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasWriteAcls",
+                    "validate": false,
+                    "optional": true,
+                    "original": "write_acls"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/storage_container.html",
@@ -11966,7 +12510,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedAllowedOrigins",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "allowed_origins"
                 },
                 {
@@ -11983,7 +12527,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedExposedHeaders",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "exposed_headers"
                 },
                 {
@@ -12000,7 +12544,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedReadAcls",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "read_acls"
                 },
                 {
@@ -12017,7 +12561,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedWriteAcls",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "write_acls"
                 }
             ],
@@ -12141,6 +12685,25 @@
                     "default": "TF.Nil",
                     "computed": false,
                     "required": false,
+                    "help": [
+                        "Set the MIME type for the object"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"content_type\" <$> TF.attribute",
+                    "name": "_contentType",
+                    "method": "contentType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasContentType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "content_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"copy_from\" <$> TF.attribute",
@@ -12164,6 +12727,45 @@
                     "validate": false,
                     "optional": true,
                     "original": "copy_from"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The date and time in UNIX Epoch time stamp format when the system removes",
+                        "the object"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"delete_at\" <$> TF.attribute",
+                    "name": "_deleteAt",
+                    "method": "deleteAt",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasDeleteAt",
+                    "validate": false,
+                    "optional": true,
+                    "original": "delete_at"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "MD5 checksum value of the request body. Unquoted. Strongly Recommended"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"etag\" <$> TF.attribute",
+                    "name": "_etag",
+                    "method": "etag",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEtag",
+                    "validate": false,
+                    "optional": true,
+                    "original": "etag"
                 },
                 {
                     "default": "TF.Nil",
@@ -12194,6 +12796,25 @@
                     "validate": false,
                     "optional": true,
                     "original": "file"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The object metadata"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"metadata\" <$> TF.attribute",
+                    "name": "_metadata",
+                    "method": "metadata",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
+                    "class": "HasMetadata",
+                    "validate": false,
+                    "optional": true,
+                    "original": "metadata"
                 },
                 {
                     "default": "_name",
@@ -12311,7 +12932,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedContentType",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "content_type"
                 },
                 {
@@ -12331,7 +12952,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedDeleteAt",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "delete_at"
                 },
                 {
@@ -12350,7 +12971,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedEtag",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "etag"
                 },
                 {
@@ -12388,7 +13009,7 @@
                     "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
                     "class": "HasComputedMetadata",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "metadata"
                 },
                 {
