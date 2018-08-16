@@ -85,7 +85,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "newrelic"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "api_key" _apiKey
             , TF.assign "api_url" <$> _apiUrl
