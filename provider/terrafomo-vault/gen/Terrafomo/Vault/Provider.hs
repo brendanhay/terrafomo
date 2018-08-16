@@ -20,7 +20,6 @@ module Terrafomo.Vault.Provider
     -- * Vault Provider Datatype
       Provider (..)
     , newProvider
-    , defaultProvider
 
     -- * Vault Specific Aliases
     , DataSource
@@ -56,7 +55,7 @@ import qualified Terrafomo.Vault.Types as P
 type DataSource a = TF.Schema ()               Provider a
 type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
 
--- | The @Vault@ Terraform provider configuration.
+-- | The @vault@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/vault/index.html terraform documentation>
 -- for more information.
@@ -108,24 +107,25 @@ newProvider _address _token =
         , _token = _token
         }
 
-defaultProvider :: TF.Provider (P.Maybe Provider)
-defaultProvider =
-    TF.Provider
-        { _providerType   = TF.Type P.Nothing "provider"
-        , _providerAlias  = P.Nothing
-        , _providerConfig = P.Nothing
-        }
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "vault"
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} = P.catMaybes
-        [  P.Just $ TF.assign "address" _address
-        ,  TF.assign "ca_cert_dir" <$> _caCertDir
-        ,  TF.assign "ca_cert_file" <$> _caCertFile
-        ,  TF.assign "client_auth" <$> _clientAuth
-        ,  TF.assign "max_lease_ttl_seconds" <$> _maxLeaseTtlSeconds
-        ,  TF.assign "skip_tls_verify" <$> _skipTlsVerify
-        ,  P.Just $ TF.assign "token" _token
-        ]
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy Provider)
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , P.Just $ TF.assign "address" _address
+                  , TF.assign "ca_cert_dir" <$> _caCertDir
+                  , TF.assign "ca_cert_file" <$> _caCertFile
+                  , TF.assign "client_auth" <$> _clientAuth
+                  , TF.assign "max_lease_ttl_seconds" <$> _maxLeaseTtlSeconds
+                  , TF.assign "skip_tls_verify" <$> _skipTlsVerify
+                  , P.Just $ TF.assign "token" _token
+                  ])
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
