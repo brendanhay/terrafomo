@@ -13,11 +13,11 @@
 --
 module Terrafomo.AliCloud
     ( module Terrafomo.AliCloud.DataSource
+    , module Terrafomo.AliCloud.Lens
     , module Terrafomo.AliCloud.Provider
     , module Terrafomo.AliCloud.Resource
-    , module Terrafomo.AliCloud.Types
-    , module Terrafomo.AliCloud.Lens
     , module Terrafomo.AliCloud.Settings
+    , module Terrafomo.AliCloud.Types
     -- * Provider Aliases
     ) where
 

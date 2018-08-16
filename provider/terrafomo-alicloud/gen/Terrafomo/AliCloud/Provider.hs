@@ -20,6 +20,7 @@ module Terrafomo.AliCloud.Provider
     -- * AliCloud Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * AliCloud Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.AliCloud.Settings
 
-import qualified Data.Hashable            as P
-import qualified Data.HashMap.Strict      as P
-import qualified Data.HashMap.Strict      as Map
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Map.Strict          as P
+import qualified Data.Map.Strict          as Map
 import qualified Data.Maybe               as P
 import qualified Data.Monoid              as P
 import qualified Data.Text                as P
@@ -89,7 +89,7 @@ data Provider = Provider'
     -- ^ @security_token@ - (Optional)
     -- Alibaba Cloud Security Token
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: P.Text -- ^ @access_key@ - 'P.accessKey'
@@ -107,27 +107,24 @@ newProvider _accessKey _region _secretKey =
         , _securityToken = P.Nothing
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , P.Just $ TF.assign "access_key" _accessKey
-                  , TF.assign "account_id" <$> _accountId
-                  , TF.assign "fc" <$> _fc
-                  , TF.assign "log_endpoint" <$> _logEndpoint
-                  , P.Just $ TF.assign "region" _region
-                  , P.Just $ TF.assign "secret_key" _secretKey
-                  , TF.assign "security_token" <$> _securityToken
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  P.Just $ TF.assign "access_key" _accessKey
+        ,  TF.assign "account_id" <$> _accountId
+        ,  TF.assign "fc" <$> _fc
+        ,  TF.assign "log_endpoint" <$> _logEndpoint
+        ,  P.Just $ TF.assign "region" _region
+        ,  P.Just $ TF.assign "secret_key" _secretKey
+        ,  TF.assign "security_token" <$> _securityToken
+        ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty

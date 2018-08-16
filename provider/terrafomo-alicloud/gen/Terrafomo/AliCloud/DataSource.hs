@@ -122,10 +122,9 @@ import GHC.Base (($))
 
 import Terrafomo.AliCloud.Settings
 
-import qualified Data.Hashable               as P
-import qualified Data.HashMap.Strict         as P
-import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Map.Strict             as P
+import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
 import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
@@ -173,12 +172,12 @@ data DbInstancesData s = DbInstancesData'
     , _vswitchId      :: TF.Attr s P.Text
     -- ^ @vswitch_id@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dbInstancesData
     :: P.DataSource (DbInstancesData s)
 dbInstancesData =
-    TF.newDataSource "alicloud_db_instances" TF.validator $
+    TF.unsafeDataSource "alicloud_db_instances" P.defaultProvider TF.validator $
         DbInstancesData'
             { _connectionMode = TF.Nil
             , _dbType = TF.Nil
@@ -255,7 +254,7 @@ instance P.HasVswitchId (DbInstancesData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DbInstancesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (DbInstancesData s)) (TF.Attr s [TF.Attr s (DbInstancesInstances s)]) where
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (DbInstancesData s)) (TF.Attr s [TF.Attr s (InstancesSetting s)]) where
     computedInstances x = TF.compute (TF.refKey x) "instances"
 
 -- | @alicloud_dns_domain_groups@ DataSource.
@@ -269,12 +268,12 @@ data DnsDomainGroupsData s = DnsDomainGroupsData'
     , _outputFile :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dnsDomainGroupsData
     :: P.DataSource (DnsDomainGroupsData s)
 dnsDomainGroupsData =
-    TF.newDataSource "alicloud_dns_domain_groups" TF.validator $
+    TF.unsafeDataSource "alicloud_dns_domain_groups" P.defaultProvider TF.validator $
         DnsDomainGroupsData'
             { _nameRegex = TF.Nil
             , _outputFile = TF.Nil
@@ -302,7 +301,7 @@ instance P.HasOutputFile (DnsDomainGroupsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsDomainGroupsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (DnsDomainGroupsData s)) (TF.Attr s [TF.Attr s (DnsDomainGroupsGroups s)]) where
+instance s ~ s' => P.HasComputedGroups (TF.Ref s' (DnsDomainGroupsData s)) (TF.Attr s [TF.Attr s (GroupsSetting s)]) where
     computedGroups x = TF.compute (TF.refKey x) "groups"
 
 -- | @alicloud_dns_domain_records@ DataSource.
@@ -334,13 +333,13 @@ data DnsDomainRecordsData s = DnsDomainRecordsData'
     , _valueRegex      :: TF.Attr s P.Text
     -- ^ @value_regex@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dnsDomainRecordsData
     :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
     -> P.DataSource (DnsDomainRecordsData s)
 dnsDomainRecordsData _domainName =
-    TF.newDataSource "alicloud_dns_domain_records" TF.validator $
+    TF.unsafeDataSource "alicloud_dns_domain_records" P.defaultProvider TF.validator $
         DnsDomainRecordsData'
             { _domainName = _domainName
             , _hostRecordRegex = TF.Nil
@@ -410,7 +409,7 @@ instance P.HasValueRegex (DnsDomainRecordsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsDomainRecordsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedRecords (TF.Ref s' (DnsDomainRecordsData s)) (TF.Attr s [TF.Attr s (DnsDomainRecordsRecords s)]) where
+instance s ~ s' => P.HasComputedRecords (TF.Ref s' (DnsDomainRecordsData s)) (TF.Attr s [TF.Attr s (RecordsSetting s)]) where
     computedRecords x = TF.compute (TF.refKey x) "records"
 
 -- | @alicloud_dns_domains@ DataSource.
@@ -436,12 +435,12 @@ data DnsDomainsData s = DnsDomainsData'
     , _versionCode     :: TF.Attr s P.Text
     -- ^ @version_code@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dnsDomainsData
     :: P.DataSource (DnsDomainsData s)
 dnsDomainsData =
-    TF.newDataSource "alicloud_dns_domains" TF.validator $
+    TF.unsafeDataSource "alicloud_dns_domains" P.defaultProvider TF.validator $
         DnsDomainsData'
             { _aliDomain = TF.Nil
             , _domainNameRegex = TF.Nil
@@ -497,7 +496,7 @@ instance P.HasVersionCode (DnsDomainsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsDomainsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedDomains (TF.Ref s' (DnsDomainsData s)) (TF.Attr s [TF.Attr s (DnsDomainsDomains s)]) where
+instance s ~ s' => P.HasComputedDomains (TF.Ref s' (DnsDomainsData s)) (TF.Attr s [TF.Attr s (DomainsSetting s)]) where
     computedDomains x = TF.compute (TF.refKey x) "domains"
 
 -- | @alicloud_dns_groups@ DataSource.
@@ -511,12 +510,12 @@ data DnsGroupsData s = DnsGroupsData'
     , _outputFile :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dnsGroupsData
     :: P.DataSource (DnsGroupsData s)
 dnsGroupsData =
-    TF.newDataSource "alicloud_dns_groups" TF.validator $
+    TF.unsafeDataSource "alicloud_dns_groups" P.defaultProvider TF.validator $
         DnsGroupsData'
             { _nameRegex = TF.Nil
             , _outputFile = TF.Nil
@@ -544,7 +543,7 @@ instance P.HasOutputFile (DnsGroupsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsGroupsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (DnsGroupsData s)) (TF.Attr s [TF.Attr s (DnsGroupsGroups s)]) where
+instance s ~ s' => P.HasComputedGroups (TF.Ref s' (DnsGroupsData s)) (TF.Attr s [TF.Attr s (GroupsSetting s)]) where
     computedGroups x = TF.compute (TF.refKey x) "groups"
 
 -- | @alicloud_dns_records@ DataSource.
@@ -576,13 +575,13 @@ data DnsRecordsData s = DnsRecordsData'
     , _valueRegex      :: TF.Attr s P.Text
     -- ^ @value_regex@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dnsRecordsData
     :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
     -> P.DataSource (DnsRecordsData s)
 dnsRecordsData _domainName =
-    TF.newDataSource "alicloud_dns_records" TF.validator $
+    TF.unsafeDataSource "alicloud_dns_records" P.defaultProvider TF.validator $
         DnsRecordsData'
             { _domainName = _domainName
             , _hostRecordRegex = TF.Nil
@@ -652,7 +651,7 @@ instance P.HasValueRegex (DnsRecordsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsRecordsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedRecords (TF.Ref s' (DnsRecordsData s)) (TF.Attr s [TF.Attr s (DnsRecordsRecords s)]) where
+instance s ~ s' => P.HasComputedRecords (TF.Ref s' (DnsRecordsData s)) (TF.Attr s [TF.Attr s (RecordsSetting s)]) where
     computedRecords x = TF.compute (TF.refKey x) "records"
 
 -- | @alicloud_eips@ DataSource.
@@ -669,12 +668,12 @@ data EipsData s = EipsData'
     , _outputFile  :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 eipsData
     :: P.DataSource (EipsData s)
 eipsData =
-    TF.newDataSource "alicloud_eips" TF.validator $
+    TF.unsafeDataSource "alicloud_eips" P.defaultProvider TF.validator $
         EipsData'
             { _ids = TF.Nil
             , _ipAddresses = TF.Nil
@@ -709,7 +708,7 @@ instance P.HasOutputFile (EipsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EipsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedEips (TF.Ref s' (EipsData s)) (TF.Attr s [TF.Attr s (EipsEips s)]) where
+instance s ~ s' => P.HasComputedEips (TF.Ref s' (EipsData s)) (TF.Attr s [TF.Attr s (EipsSetting s)]) where
     computedEips x = TF.compute (TF.refKey x) "eips"
 
 -- | @alicloud_images@ DataSource.
@@ -729,12 +728,12 @@ data ImagesData s = ImagesData'
     , _owners     :: TF.Attr s P.Text
     -- ^ @owners@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 imagesData
     :: P.DataSource (ImagesData s)
 imagesData =
-    TF.newDataSource "alicloud_images" TF.validator $
+    TF.unsafeDataSource "alicloud_images" P.defaultProvider TF.validator $
         ImagesData'
             { _mostRecent = TF.value P.False
             , _nameRegex = TF.Nil
@@ -776,7 +775,7 @@ instance P.HasOwners (ImagesData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ImagesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedImages (TF.Ref s' (ImagesData s)) (TF.Attr s [TF.Attr s (ImagesImages s)]) where
+instance s ~ s' => P.HasComputedImages (TF.Ref s' (ImagesData s)) (TF.Attr s [TF.Attr s (ImagesSetting s)]) where
     computedImages x = TF.compute (TF.refKey x) "images"
 
 -- | @alicloud_instance_types@ DataSource.
@@ -787,7 +786,7 @@ data InstanceTypesData s = InstanceTypesData'
     { _availabilityZone   :: TF.Attr s P.Text
     -- ^ @availability_zone@ - (Optional, Forces New)
     --
-    , _cpuCoreCount       :: TF.Attr s P.Integer
+    , _cpuCoreCount       :: TF.Attr s P.Int
     -- ^ @cpu_core_count@ - (Optional, Forces New)
     --
     , _instanceChargeType :: TF.Attr s P.Text
@@ -811,12 +810,12 @@ data InstanceTypesData s = InstanceTypesData'
     , _spotStrategy       :: TF.Attr s P.Text
     -- ^ @spot_strategy@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 instanceTypesData
     :: P.DataSource (InstanceTypesData s)
 instanceTypesData =
-    TF.newDataSource "alicloud_instance_types" TF.validator $
+    TF.unsafeDataSource "alicloud_instance_types" P.defaultProvider TF.validator $
         InstanceTypesData'
             { _availabilityZone = TF.Nil
             , _cpuCoreCount = TF.Nil
@@ -850,9 +849,9 @@ instance P.HasAvailabilityZone (InstanceTypesData s) (TF.Attr s P.Text) where
         P.lens (_availabilityZone :: InstanceTypesData s -> TF.Attr s P.Text)
                (\s a -> s { _availabilityZone = a } :: InstanceTypesData s)
 
-instance P.HasCpuCoreCount (InstanceTypesData s) (TF.Attr s P.Integer) where
+instance P.HasCpuCoreCount (InstanceTypesData s) (TF.Attr s P.Int) where
     cpuCoreCount =
-        P.lens (_cpuCoreCount :: InstanceTypesData s -> TF.Attr s P.Integer)
+        P.lens (_cpuCoreCount :: InstanceTypesData s -> TF.Attr s P.Int)
                (\s a -> s { _cpuCoreCount = a } :: InstanceTypesData s)
 
 instance P.HasInstanceChargeType (InstanceTypesData s) (TF.Attr s P.Text) where
@@ -893,7 +892,7 @@ instance P.HasSpotStrategy (InstanceTypesData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (InstanceTypesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedInstanceTypes (TF.Ref s' (InstanceTypesData s)) (TF.Attr s [TF.Attr s (InstanceTypesInstanceTypes s)]) where
+instance s ~ s' => P.HasComputedInstanceTypes (TF.Ref s' (InstanceTypesData s)) (TF.Attr s [TF.Attr s (InstanceTypesSetting s)]) where
     computedInstanceTypes x = TF.compute (TF.refKey x) "instance_types"
 
 -- | @alicloud_instances@ DataSource.
@@ -919,7 +918,7 @@ data InstancesData s = InstancesData'
     , _status           :: TF.Attr s P.Text
     -- ^ @status@ - (Optional, Forces New)
     --
-    , _tags             :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags             :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     , _vpcId            :: TF.Attr s P.Text
@@ -928,12 +927,12 @@ data InstancesData s = InstancesData'
     , _vswitchId        :: TF.Attr s P.Text
     -- ^ @vswitch_id@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 instancesData
     :: P.DataSource (InstancesData s)
 instancesData =
-    TF.newDataSource "alicloud_instances" TF.validator $
+    TF.unsafeDataSource "alicloud_instances" P.defaultProvider TF.validator $
         InstancesData'
             { _availabilityZone = TF.Nil
             , _ids = TF.Nil
@@ -992,9 +991,9 @@ instance P.HasStatus (InstancesData s) (TF.Attr s P.Text) where
         P.lens (_status :: InstancesData s -> TF.Attr s P.Text)
                (\s a -> s { _status = a } :: InstancesData s)
 
-instance P.HasTags (InstancesData s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasTags (InstancesData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     tags =
-        P.lens (_tags :: InstancesData s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_tags :: InstancesData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: InstancesData s)
 
 instance P.HasVpcId (InstancesData s) (TF.Attr s P.Text) where
@@ -1010,7 +1009,7 @@ instance P.HasVswitchId (InstancesData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (InstancesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (InstancesData s)) (TF.Attr s [TF.Attr s (InstancesInstances s)]) where
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (InstancesData s)) (TF.Attr s [TF.Attr s (InstancesSetting s)]) where
     computedInstances x = TF.compute (TF.refKey x) "instances"
 
 -- | @alicloud_key_pairs@ DataSource.
@@ -1024,12 +1023,12 @@ data KeyPairsData s = KeyPairsData'
     , _outputFile :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 keyPairsData
     :: P.DataSource (KeyPairsData s)
 keyPairsData =
-    TF.newDataSource "alicloud_key_pairs" TF.validator $
+    TF.unsafeDataSource "alicloud_key_pairs" P.defaultProvider TF.validator $
         KeyPairsData'
             { _nameRegex = TF.Nil
             , _outputFile = TF.Nil
@@ -1060,7 +1059,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyPairsData s)) (TF.Attr s P.Tex
 instance s ~ s' => P.HasComputedFingerPrint (TF.Ref s' (KeyPairsData s)) (TF.Attr s P.Bool) where
     computedFingerPrint x = TF.compute (TF.refKey x) "finger_print"
 
-instance s ~ s' => P.HasComputedKeyPairs (TF.Ref s' (KeyPairsData s)) (TF.Attr s [TF.Attr s (KeyPairsKeyPairs s)]) where
+instance s ~ s' => P.HasComputedKeyPairs (TF.Ref s' (KeyPairsData s)) (TF.Attr s [TF.Attr s (KeyPairsSetting s)]) where
     computedKeyPairs x = TF.compute (TF.refKey x) "key_pairs"
 
 -- | @alicloud_kms_keys@ DataSource.
@@ -1080,12 +1079,12 @@ data KmsKeysData s = KmsKeysData'
     , _status           :: TF.Attr s P.Text
     -- ^ @status@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 kmsKeysData
     :: P.DataSource (KmsKeysData s)
 kmsKeysData =
-    TF.newDataSource "alicloud_kms_keys" TF.validator $
+    TF.unsafeDataSource "alicloud_kms_keys" P.defaultProvider TF.validator $
         KmsKeysData'
             { _descriptionRegex = TF.Nil
             , _ids = TF.Nil
@@ -1127,7 +1126,7 @@ instance P.HasStatus (KmsKeysData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (KmsKeysData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedKeys (TF.Ref s' (KmsKeysData s)) (TF.Attr s [TF.Attr s (KmsKeysKeys s)]) where
+instance s ~ s' => P.HasComputedKeys (TF.Ref s' (KmsKeysData s)) (TF.Attr s [TF.Attr s (KeysSetting s)]) where
     computedKeys x = TF.compute (TF.refKey x) "keys"
 
 -- | @alicloud_ram_account_alias@ DataSource.
@@ -1138,12 +1137,12 @@ data RamAccountAliasData s = RamAccountAliasData'
     { _outputFile :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 ramAccountAliasData
     :: P.DataSource (RamAccountAliasData s)
 ramAccountAliasData =
-    TF.newDataSource "alicloud_ram_account_alias" TF.validator $
+    TF.unsafeDataSource "alicloud_ram_account_alias" P.defaultProvider TF.validator $
         RamAccountAliasData'
             { _outputFile = TF.Nil
             }
@@ -1175,12 +1174,12 @@ data RamAccountAliasesData s = RamAccountAliasesData'
     { _outputFile :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 ramAccountAliasesData
     :: P.DataSource (RamAccountAliasesData s)
 ramAccountAliasesData =
-    TF.newDataSource "alicloud_ram_account_aliases" TF.validator $
+    TF.unsafeDataSource "alicloud_ram_account_aliases" P.defaultProvider TF.validator $
         RamAccountAliasesData'
             { _outputFile = TF.Nil
             }
@@ -1224,12 +1223,12 @@ data RamGroupsData s = RamGroupsData'
     , _userName   :: TF.Attr s P.Text
     -- ^ @user_name@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 ramGroupsData
     :: P.DataSource (RamGroupsData s)
 ramGroupsData =
-    TF.newDataSource "alicloud_ram_groups" TF.validator $
+    TF.unsafeDataSource "alicloud_ram_groups" P.defaultProvider TF.validator $
         RamGroupsData'
             { _nameRegex = TF.Nil
             , _outputFile = TF.Nil
@@ -1278,7 +1277,7 @@ instance P.HasUserName (RamGroupsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RamGroupsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (RamGroupsData s)) (TF.Attr s [TF.Attr s (RamGroupsGroups s)]) where
+instance s ~ s' => P.HasComputedGroups (TF.Ref s' (RamGroupsData s)) (TF.Attr s [TF.Attr s (GroupsSetting s)]) where
     computedGroups x = TF.compute (TF.refKey x) "groups"
 
 -- | @alicloud_ram_policies@ DataSource.
@@ -1304,12 +1303,12 @@ data RamPoliciesData s = RamPoliciesData'
     , _userName   :: TF.Attr s P.Text
     -- ^ @user_name@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 ramPoliciesData
     :: P.DataSource (RamPoliciesData s)
 ramPoliciesData =
-    TF.newDataSource "alicloud_ram_policies" TF.validator $
+    TF.unsafeDataSource "alicloud_ram_policies" P.defaultProvider TF.validator $
         RamPoliciesData'
             { _groupName = TF.Nil
             , _nameRegex = TF.Nil
@@ -1365,7 +1364,7 @@ instance P.HasUserName (RamPoliciesData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RamPoliciesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (RamPoliciesData s)) (TF.Attr s [TF.Attr s (RamPoliciesPolicies s)]) where
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (RamPoliciesData s)) (TF.Attr s [TF.Attr s (PoliciesSetting s)]) where
     computedPolicies x = TF.compute (TF.refKey x) "policies"
 
 -- | @alicloud_ram_roles@ DataSource.
@@ -1385,12 +1384,12 @@ data RamRolesData s = RamRolesData'
     , _policyType :: TF.Attr s P.Text
     -- ^ @policy_type@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 ramRolesData
     :: P.DataSource (RamRolesData s)
 ramRolesData =
-    TF.newDataSource "alicloud_ram_roles" TF.validator $
+    TF.unsafeDataSource "alicloud_ram_roles" P.defaultProvider TF.validator $
         RamRolesData'
             { _nameRegex = TF.Nil
             , _outputFile = TF.Nil
@@ -1432,7 +1431,7 @@ instance P.HasPolicyType (RamRolesData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RamRolesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedRoles (TF.Ref s' (RamRolesData s)) (TF.Attr s [TF.Attr s (RamRolesRoles s)]) where
+instance s ~ s' => P.HasComputedRoles (TF.Ref s' (RamRolesData s)) (TF.Attr s [TF.Attr s (RolesSetting s)]) where
     computedRoles x = TF.compute (TF.refKey x) "roles"
 
 -- | @alicloud_ram_users@ DataSource.
@@ -1455,12 +1454,12 @@ data RamUsersData s = RamUsersData'
     , _policyType :: TF.Attr s P.Text
     -- ^ @policy_type@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 ramUsersData
     :: P.DataSource (RamUsersData s)
 ramUsersData =
-    TF.newDataSource "alicloud_ram_users" TF.validator $
+    TF.unsafeDataSource "alicloud_ram_users" P.defaultProvider TF.validator $
         RamUsersData'
             { _groupName = TF.Nil
             , _nameRegex = TF.Nil
@@ -1509,7 +1508,7 @@ instance P.HasPolicyType (RamUsersData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RamUsersData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedUsers (TF.Ref s' (RamUsersData s)) (TF.Attr s [TF.Attr s (RamUsersUsers s)]) where
+instance s ~ s' => P.HasComputedUsers (TF.Ref s' (RamUsersData s)) (TF.Attr s [TF.Attr s (UsersSetting s)]) where
     computedUsers x = TF.compute (TF.refKey x) "users"
 
 -- | @alicloud_regions@ DataSource.
@@ -1520,12 +1519,12 @@ data RegionsData s = RegionsData'
     { _outputFile :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 regionsData
     :: P.DataSource (RegionsData s)
 regionsData =
-    TF.newDataSource "alicloud_regions" TF.validator $
+    TF.unsafeDataSource "alicloud_regions" P.defaultProvider TF.validator $
         RegionsData'
             { _outputFile = TF.Nil
             }
@@ -1552,7 +1551,7 @@ instance s ~ s' => P.HasComputedCurrent (TF.Ref s' (RegionsData s)) (TF.Attr s P
 instance s ~ s' => P.HasComputedName (TF.Ref s' (RegionsData s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedRegions (TF.Ref s' (RegionsData s)) (TF.Attr s [TF.Attr s (RegionsRegions s)]) where
+instance s ~ s' => P.HasComputedRegions (TF.Ref s' (RegionsData s)) (TF.Attr s [TF.Attr s (RegionsSetting s)]) where
     computedRegions x = TF.compute (TF.refKey x) "regions"
 
 -- | @alicloud_security_group_rules@ DataSource.
@@ -1578,13 +1577,13 @@ data SecurityGroupRulesData s = SecurityGroupRulesData'
     , _policy     :: TF.Attr s P.Text
     -- ^ @policy@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 securityGroupRulesData
     :: TF.Attr s P.Text -- ^ @group_id@ - 'P.groupId'
     -> P.DataSource (SecurityGroupRulesData s)
 securityGroupRulesData _groupId =
-    TF.newDataSource "alicloud_security_group_rules" TF.validator $
+    TF.unsafeDataSource "alicloud_security_group_rules" P.defaultProvider TF.validator $
         SecurityGroupRulesData'
             { _direction = TF.Nil
             , _groupId = _groupId
@@ -1646,7 +1645,7 @@ instance s ~ s' => P.HasComputedGroupDesc (TF.Ref s' (SecurityGroupRulesData s))
 instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s P.Text) where
     computedGroupName x = TF.compute (TF.refKey x) "group_name"
 
-instance s ~ s' => P.HasComputedRules (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s [TF.Attr s (SecurityGroupRulesRules s)]) where
+instance s ~ s' => P.HasComputedRules (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s [TF.Attr s (RulesSetting s)]) where
     computedRules x = TF.compute (TF.refKey x) "rules"
 
 -- | @alicloud_security_groups@ DataSource.
@@ -1663,12 +1662,12 @@ data SecurityGroupsData s = SecurityGroupsData'
     , _vpcId      :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 securityGroupsData
     :: P.DataSource (SecurityGroupsData s)
 securityGroupsData =
-    TF.newDataSource "alicloud_security_groups" TF.validator $
+    TF.unsafeDataSource "alicloud_security_groups" P.defaultProvider TF.validator $
         SecurityGroupsData'
             { _nameRegex = TF.Nil
             , _outputFile = TF.Nil
@@ -1703,7 +1702,7 @@ instance P.HasVpcId (SecurityGroupsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s [TF.Attr s (SecurityGroupsGroups s)]) where
+instance s ~ s' => P.HasComputedGroups (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s [TF.Attr s (GroupsSetting s)]) where
     computedGroups x = TF.compute (TF.refKey x) "groups"
 
 -- | @alicloud_vpcs@ DataSource.
@@ -1729,12 +1728,12 @@ data VpcsData s = VpcsData'
     , _vswitchId  :: TF.Attr s P.Text
     -- ^ @vswitch_id@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 vpcsData
     :: P.DataSource (VpcsData s)
 vpcsData =
-    TF.newDataSource "alicloud_vpcs" TF.validator $
+    TF.unsafeDataSource "alicloud_vpcs" P.defaultProvider TF.validator $
         VpcsData'
             { _cidrBlock = TF.Nil
             , _isDefault = TF.Nil
@@ -1790,7 +1789,7 @@ instance P.HasVswitchId (VpcsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedVpcs (TF.Ref s' (VpcsData s)) (TF.Attr s [TF.Attr s (VpcsVpcs s)]) where
+instance s ~ s' => P.HasComputedVpcs (TF.Ref s' (VpcsData s)) (TF.Attr s [TF.Attr s (VpcsSetting s)]) where
     computedVpcs x = TF.compute (TF.refKey x) "vpcs"
 
 -- | @alicloud_vswitches@ DataSource.
@@ -1816,12 +1815,12 @@ data VswitchesData s = VswitchesData'
     , _zoneId     :: TF.Attr s P.Text
     -- ^ @zone_id@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 vswitchesData
     :: P.DataSource (VswitchesData s)
 vswitchesData =
-    TF.newDataSource "alicloud_vswitches" TF.validator $
+    TF.unsafeDataSource "alicloud_vswitches" P.defaultProvider TF.validator $
         VswitchesData'
             { _cidrBlock = TF.Nil
             , _isDefault = TF.Nil
@@ -1877,7 +1876,7 @@ instance P.HasZoneId (VswitchesData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VswitchesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedVswitches (TF.Ref s' (VswitchesData s)) (TF.Attr s [TF.Attr s (VswitchesVswitches s)]) where
+instance s ~ s' => P.HasComputedVswitches (TF.Ref s' (VswitchesData s)) (TF.Attr s [TF.Attr s (VswitchesSetting s)]) where
     computedVswitches x = TF.compute (TF.refKey x) "vswitches"
 
 -- | @alicloud_zones@ DataSource.
@@ -1909,12 +1908,12 @@ data ZonesData s = ZonesData'
     , _spotStrategy              :: TF.Attr s P.Text
     -- ^ @spot_strategy@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 zonesData
     :: P.DataSource (ZonesData s)
 zonesData =
-    TF.newDataSource "alicloud_zones" TF.validator $
+    TF.unsafeDataSource "alicloud_zones" P.defaultProvider TF.validator $
         ZonesData'
             { _availableDiskCategory = TF.Nil
             , _availableInstanceType = TF.Nil
@@ -1984,5 +1983,5 @@ instance P.HasSpotStrategy (ZonesData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ZonesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedZones (TF.Ref s' (ZonesData s)) (TF.Attr s [TF.Attr s (ZonesZones s)]) where
+instance s ~ s' => P.HasComputedZones (TF.Ref s' (ZonesData s)) (TF.Attr s [TF.Attr s (ZonesSetting s)]) where
     computedZones x = TF.compute (TF.refKey x) "zones"
