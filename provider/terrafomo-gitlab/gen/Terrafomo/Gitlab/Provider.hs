@@ -17,11 +17,10 @@
 --
 module Terrafomo.Gitlab.Provider
     (
-    -- * Gitlab Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * Gitlab Specific Aliases
+    -- ** Gitlab Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -94,7 +93,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "gitlab"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "base_url" <$> _baseUrl
             , TF.assign "cacert_file" <$> _cacertFile

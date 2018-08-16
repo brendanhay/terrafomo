@@ -17,7 +17,6 @@
 --
 module Terrafomo.Gitlab.Settings
     (
-    -- * Settings Datatypes
     ) where
 
 import Data.Functor ((<$>))

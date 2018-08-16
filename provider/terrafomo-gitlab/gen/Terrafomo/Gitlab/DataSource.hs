@@ -17,7 +17,6 @@
 --
 module Terrafomo.Gitlab.DataSource
     (
-    -- * DataSource Datatypes
     -- ** gitlab_project
       ProjectData (..)
     , projectData
@@ -62,6 +61,7 @@ data ProjectData s = ProjectData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @gitlab_project@ datasource value.
 projectData
     :: TF.Attr s P.Int -- ^ @id@ - 'P.id'
     -> P.DataSource (ProjectData s)
@@ -97,6 +97,7 @@ data UserData s = UserData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @gitlab_user@ datasource value.
 userData
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> P.DataSource (UserData s)

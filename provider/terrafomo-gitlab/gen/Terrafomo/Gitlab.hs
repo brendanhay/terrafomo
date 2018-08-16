@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Gitlab
-    ( module Terrafomo.Gitlab.DataSource
-    , module Terrafomo.Gitlab.Lens
-    , module Terrafomo.Gitlab.Provider
-    , module Terrafomo.Gitlab.Resource
-    , module Terrafomo.Gitlab.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Gitlab.Provider
+
+    -- * Custom Types
     , module Terrafomo.Gitlab.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.Gitlab.DataSource
+
+    -- * Resources
+    , module Terrafomo.Gitlab.Resource
+
+    -- * Settings
+    , module Terrafomo.Gitlab.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Gitlab.Lens
     ) where
 
 import Terrafomo.Gitlab.DataSource

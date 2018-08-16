@@ -17,7 +17,6 @@
 --
 module Terrafomo.Gitlab.Resource
     (
-    -- * Resource Datatypes
     -- ** gitlab_deploy_key
       DeployKeyResource (..)
     , deployKeyResource
@@ -91,6 +90,7 @@ data DeployKeyResource s = DeployKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @gitlab_deploy_key@ resource value.
 deployKeyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
@@ -164,6 +164,7 @@ data GroupResource s = GroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @gitlab_group@ resource value.
 groupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
@@ -247,6 +248,7 @@ data LabelResource s = LabelResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @gitlab_label@ resource value.
 labelResource
     :: TF.Attr s P.Text -- ^ @color@ - 'P.color'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -329,6 +331,7 @@ data ProjectResource s = ProjectResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @gitlab_project@ resource value.
 projectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ProjectResource s)
@@ -465,6 +468,7 @@ data ProjectHookResource s = ProjectHookResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @gitlab_project_hook@ resource value.
 projectHookResource
     :: TF.Attr s P.Text -- ^ @project@ - 'P.project'
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
@@ -584,6 +588,7 @@ data ProjectMembershipResource s = ProjectMembershipResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @gitlab_project_membership@ resource value.
 projectMembershipResource
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Int -- ^ @user_id@ - 'P.userId'
@@ -659,6 +664,7 @@ data UserResource s = UserResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @gitlab_user@ resource value.
 userResource
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
