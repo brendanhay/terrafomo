@@ -19,27 +19,27 @@ module Terrafomo.Rundeck.Settings
     (
     -- ** command
       CommandSetting (..)
-    , newCommandSetting
+    , commandSetting
 
     -- ** job
     , JobSetting (..)
-    , newJobSetting
+    , jobSetting
 
     -- ** node_step_plugin
     , NodeStepPluginSetting (..)
-    , newNodeStepPluginSetting
+    , nodeStepPluginSetting
 
     -- ** option
     , OptionSetting (..)
-    , newOptionSetting
+    , optionSetting
 
     -- ** resource_model_source
     , ResourceModelSourceSetting (..)
-    , newResourceModelSourceSetting
+    , resourceModelSourceSetting
 
     -- ** step_plugin
     , StepPluginSetting (..)
-    , newStepPluginSetting
+    , stepPluginSetting
 
     ) where
 
@@ -93,9 +93,9 @@ data CommandSetting s = CommandSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @command@ settings value.
-newCommandSetting
+commandSetting
     :: CommandSetting s
-newCommandSetting =
+commandSetting =
     CommandSetting'
         { _description = TF.Nil
         , _inlineScript = TF.Nil
@@ -180,10 +180,10 @@ data JobSetting s = JobSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @job@ settings value.
-newJobSetting
+jobSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> JobSetting s
-newJobSetting _name =
+jobSetting _name =
     JobSetting'
         { _args = TF.Nil
         , _groupName = TF.Nil
@@ -234,10 +234,10 @@ data NodeStepPluginSetting s = NodeStepPluginSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @node_step_plugin@ settings value.
-newNodeStepPluginSetting
+nodeStepPluginSetting
     :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> NodeStepPluginSetting s
-newNodeStepPluginSetting _type' =
+nodeStepPluginSetting _type' =
     NodeStepPluginSetting'
         { _config = TF.Nil
         , _type' = _type'
@@ -304,10 +304,10 @@ data OptionSetting s = OptionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @option@ settings value.
-newOptionSetting
+optionSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> OptionSetting s
-newOptionSetting _name =
+optionSetting _name =
     OptionSetting'
         { _allowMultipleValues = TF.Nil
         , _defaultValue = TF.Nil
@@ -416,11 +416,11 @@ data ResourceModelSourceSetting s = ResourceModelSourceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @resource_model_source@ settings value.
-newResourceModelSourceSetting
+resourceModelSourceSetting
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ 'P._config': @config@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> ResourceModelSourceSetting s
-newResourceModelSourceSetting _config _type' =
+resourceModelSourceSetting _config _type' =
     ResourceModelSourceSetting'
         { _config = _config
         , _type' = _type'
@@ -457,10 +457,10 @@ data StepPluginSetting s = StepPluginSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @step_plugin@ settings value.
-newStepPluginSetting
+stepPluginSetting
     :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> StepPluginSetting s
-newStepPluginSetting _type' =
+stepPluginSetting _type' =
     StepPluginSetting'
         { _config = TF.Nil
         , _type' = _type'
