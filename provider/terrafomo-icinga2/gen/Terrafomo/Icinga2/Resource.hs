@@ -17,7 +17,6 @@
 --
 module Terrafomo.Icinga2.Resource
     (
-    -- * Resource Datatypes
     -- ** icinga2_checkcommand
       CheckcommandResource (..)
     , checkcommandResource
@@ -88,6 +87,7 @@ data CheckcommandResource s = CheckcommandResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @icinga2_checkcommand@ resource value.
 checkcommandResource
     :: TF.Attr s P.Text -- ^ @command@ - 'P.command'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -162,6 +162,7 @@ data HostResource s = HostResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @icinga2_host@ resource value.
 hostResource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @check_command@ - 'P.checkCommand'
@@ -239,6 +240,7 @@ data HostgroupResource s = HostgroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @icinga2_hostgroup@ resource value.
 hostgroupResource
     :: TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -300,6 +302,7 @@ data NotificationResource s = NotificationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @icinga2_notification@ resource value.
 notificationResource
     :: TF.Attr s P.Text -- ^ @command@ - 'P.command'
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
@@ -387,6 +390,7 @@ data ServiceResource s = ServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @icinga2_service@ resource value.
 serviceResource
     :: TF.Attr s P.Text -- ^ @check_command@ - 'P.checkCommand'
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
@@ -442,6 +446,7 @@ data UserResource s = UserResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @icinga2_user@ resource value.
 userResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (UserResource s)

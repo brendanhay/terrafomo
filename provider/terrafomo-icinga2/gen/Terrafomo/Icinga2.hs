@@ -12,12 +12,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Icinga2
-    ( module Terrafomo.Icinga2.Lens
-    , module Terrafomo.Icinga2.Provider
-    , module Terrafomo.Icinga2.Resource
-    , module Terrafomo.Icinga2.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Icinga2.Provider
+
+    -- * Custom Types
     , module Terrafomo.Icinga2.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+
+    -- * Resources
+    , module Terrafomo.Icinga2.Resource
+
+    -- * Settings
+    , module Terrafomo.Icinga2.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Icinga2.Lens
     ) where
 
 import Terrafomo.Icinga2.Lens

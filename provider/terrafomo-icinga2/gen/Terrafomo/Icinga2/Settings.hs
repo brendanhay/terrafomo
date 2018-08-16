@@ -17,7 +17,6 @@
 --
 module Terrafomo.Icinga2.Settings
     (
-    -- * Settings Datatypes
     ) where
 
 import Data.Functor ((<$>))

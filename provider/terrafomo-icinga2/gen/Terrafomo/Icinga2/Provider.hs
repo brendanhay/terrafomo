@@ -17,11 +17,10 @@
 --
 module Terrafomo.Icinga2.Provider
     (
-    -- * Icinga2 Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * Icinga2 Specific Aliases
+    -- ** Icinga2 Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -95,7 +94,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "icinga2"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "api_password" _apiPassword
             , P.Just $ TF.assign "api_url" _apiUrl
