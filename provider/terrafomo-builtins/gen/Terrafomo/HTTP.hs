@@ -12,12 +12,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.HTTP
-    ( module Terrafomo.HTTP.DataSource
-    , module Terrafomo.HTTP.Lens
-    , module Terrafomo.HTTP.Provider
-    , module Terrafomo.HTTP.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.HTTP.Provider
+
+    -- * Custom Types
     , module Terrafomo.HTTP.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.HTTP.DataSource
+
+    -- * Resources
+
+    -- * Settings
+    , module Terrafomo.HTTP.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.HTTP.Lens
     ) where
 
 import Terrafomo.HTTP.DataSource

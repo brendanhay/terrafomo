@@ -17,7 +17,6 @@
 --
 module Terrafomo.Template.Resource
     (
-    -- * Resource Datatypes
     -- ** template_cloudinit_config
       CloudinitConfigResource (..)
     , cloudinitConfigResource
@@ -72,6 +71,7 @@ data CloudinitConfigResource s = CloudinitConfigResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @template_cloudinit_config@ resource value.
 cloudinitConfigResource
     :: TF.Attr s [TF.Attr s (PartSetting s)] -- ^ @part@ - 'P.part'
     -> P.Resource (CloudinitConfigResource s)
@@ -133,6 +133,7 @@ data DirResource s = DirResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @template_dir@ resource value.
 dirResource
     :: TF.Attr s P.Text -- ^ @destination_dir@ - 'P.destinationDir'
     -> TF.Attr s P.Text -- ^ @source_dir@ - 'P.sourceDir'
@@ -188,6 +189,7 @@ data FileResource s = FileResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @template_file@ resource value.
 fileResource
     :: P.Resource (FileResource s)
 fileResource =

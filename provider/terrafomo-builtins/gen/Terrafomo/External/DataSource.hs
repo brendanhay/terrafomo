@@ -17,7 +17,6 @@
 --
 module Terrafomo.External.DataSource
     (
-    -- * DataSource Datatypes
     -- ** external
       Data (..)
     , data'
@@ -64,6 +63,7 @@ data Data s = Data'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @external@ datasource value.
 data'
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @program@ - 'P.program'
     -> P.DataSource (Data s)

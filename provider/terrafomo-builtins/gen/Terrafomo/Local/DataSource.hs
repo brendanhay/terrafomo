@@ -17,7 +17,6 @@
 --
 module Terrafomo.Local.DataSource
     (
-    -- * DataSource Datatypes
     -- ** local_file
       FileData (..)
     , fileData
@@ -59,6 +58,7 @@ data FileData s = FileData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @local_file@ datasource value.
 fileData
     :: TF.Attr s P.Text -- ^ @filename@ - 'P.filename'
     -> P.DataSource (FileData s)

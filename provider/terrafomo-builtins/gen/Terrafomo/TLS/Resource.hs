@@ -17,7 +17,6 @@
 --
 module Terrafomo.TLS.Resource
     (
-    -- * Resource Datatypes
     -- ** tls_cert_request
       CertRequestResource (..)
     , certRequestResource
@@ -86,6 +85,7 @@ data CertRequestResource s = CertRequestResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @tls_cert_request@ resource value.
 certRequestResource
     :: TF.Attr s P.Text -- ^ @key_algorithm@ - 'P.keyAlgorithm'
     -> TF.Attr s P.Text -- ^ @private_key_pem@ - 'P.privateKeyPem'
@@ -184,6 +184,7 @@ data LocallySignedCertResource s = LocallySignedCertResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @tls_locally_signed_cert@ resource value.
 locallySignedCertResource
     :: TF.Attr s P.Text -- ^ @ca_key_algorithm@ - 'P.caKeyAlgorithm'
     -> TF.Attr s P.Int -- ^ @validity_period_hours@ - 'P.validityPeriodHours'
@@ -291,6 +292,7 @@ data PrivateKeyResource s = PrivateKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @tls_private_key@ resource value.
 privateKeyResource
     :: TF.Attr s P.Text -- ^ @algorithm@ - 'P.algorithm'
     -> P.Resource (PrivateKeyResource s)
@@ -382,6 +384,7 @@ data SelfSignedCertResource s = SelfSignedCertResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @tls_self_signed_cert@ resource value.
 selfSignedCertResource
     :: TF.Attr s P.Text -- ^ @key_algorithm@ - 'P.keyAlgorithm'
     -> TF.Attr s P.Int -- ^ @validity_period_hours@ - 'P.validityPeriodHours'

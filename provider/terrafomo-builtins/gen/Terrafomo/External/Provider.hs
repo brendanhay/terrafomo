@@ -17,11 +17,10 @@
 --
 module Terrafomo.External.Provider
     (
-    -- * External Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * External Specific Aliases
+    -- ** External Specific Aliases
     , DataSource
     , Resource
     ) where

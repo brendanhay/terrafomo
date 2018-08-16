@@ -12,12 +12,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Random
-    ( module Terrafomo.Random.Lens
-    , module Terrafomo.Random.Provider
-    , module Terrafomo.Random.Resource
-    , module Terrafomo.Random.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Random.Provider
+
+    -- * Custom Types
     , module Terrafomo.Random.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+
+    -- * Resources
+    , module Terrafomo.Random.Resource
+
+    -- * Settings
+    , module Terrafomo.Random.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Random.Lens
     ) where
 
 import Terrafomo.Random.Lens

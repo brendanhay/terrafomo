@@ -17,7 +17,6 @@
 --
 module Terrafomo.Template.Settings
     (
-    -- * Settings Datatypes
     -- ** part
       PartSetting (..)
     , newPartSetting
@@ -61,6 +60,7 @@ data PartSetting s = PartSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @part@ settings value.
 newPartSetting
     :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
     -> PartSetting s

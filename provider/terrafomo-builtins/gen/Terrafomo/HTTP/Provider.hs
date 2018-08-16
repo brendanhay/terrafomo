@@ -17,11 +17,10 @@
 --
 module Terrafomo.HTTP.Provider
     (
-    -- * HTTP Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * HTTP Specific Aliases
+    -- ** HTTP Specific Aliases
     , DataSource
     , Resource
     ) where

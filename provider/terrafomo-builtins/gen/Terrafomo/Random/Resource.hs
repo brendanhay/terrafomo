@@ -17,7 +17,6 @@
 --
 module Terrafomo.Random.Resource
     (
-    -- * Resource Datatypes
     -- ** random_id
       IdResource (..)
     , idResource
@@ -84,6 +83,7 @@ data IdResource s = IdResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @random_id@ resource value.
 idResource
     :: TF.Attr s P.Int -- ^ @byte_length@ - 'P.byteLength'
     -> P.Resource (IdResource s)
@@ -154,6 +154,7 @@ data IntegerResource s = IntegerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @random_integer@ resource value.
 integerResource
     :: TF.Attr s P.Int -- ^ @max@ - 'P.max'
     -> TF.Attr s P.Int -- ^ @min@ - 'P.min'
@@ -223,6 +224,7 @@ data PetResource s = PetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @random_pet@ resource value.
 petResource
     :: P.Resource (PetResource s)
 petResource =
@@ -287,6 +289,7 @@ data ShuffleResource s = ShuffleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @random_shuffle@ resource value.
 shuffleResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @input@ - 'P.input'
     -> P.Resource (ShuffleResource s)
@@ -376,6 +379,7 @@ data StringResource s = StringResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @random_string@ resource value.
 stringResource
     :: TF.Attr s P.Int -- ^ @length@ - 'P.length'
     -> P.Resource (StringResource s)
@@ -484,6 +488,7 @@ data UuidResource s = UuidResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @random_uuid@ resource value.
 uuidResource
     :: P.Resource (UuidResource s)
 uuidResource =

@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Archive
-    ( module Terrafomo.Archive.DataSource
-    , module Terrafomo.Archive.Lens
-    , module Terrafomo.Archive.Provider
-    , module Terrafomo.Archive.Resource
-    , module Terrafomo.Archive.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Archive.Provider
+
+    -- * Custom Types
     , module Terrafomo.Archive.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.Archive.DataSource
+
+    -- * Resources
+    , module Terrafomo.Archive.Resource
+
+    -- * Settings
+    , module Terrafomo.Archive.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Archive.Lens
     ) where
 
 import Terrafomo.Archive.DataSource

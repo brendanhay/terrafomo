@@ -17,7 +17,6 @@
 --
 module Terrafomo.Archive.Settings
     (
-    -- * Settings Datatypes
     -- ** source
       SourceSetting (..)
     , newSourceSetting
@@ -55,6 +54,7 @@ data SourceSetting s = SourceSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @source@ settings value.
 newSourceSetting
     :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
     -> TF.Attr s P.Text -- ^ @filename@ - 'P.filename'

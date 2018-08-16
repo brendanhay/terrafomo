@@ -17,7 +17,6 @@
 --
 module Terrafomo.HTTP.DataSource
     (
-    -- * DataSource Datatypes
     -- ** http
       Data (..)
     , data'
@@ -61,6 +60,7 @@ data Data s = Data'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @http@ datasource value.
 data'
     :: TF.Attr s P.Text -- ^ @url@ - 'P.url'
     -> P.DataSource (Data s)

@@ -17,11 +17,10 @@
 --
 module Terrafomo.Archive.Provider
     (
-    -- * Archive Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * Archive Specific Aliases
+    -- ** Archive Specific Aliases
     , DataSource
     , Resource
     ) where

@@ -17,7 +17,6 @@
 --
 module Terrafomo.Template.DataSource
     (
-    -- * DataSource Datatypes
     -- ** template_cloudinit_config
       CloudinitConfigData (..)
     , cloudinitConfigData
@@ -68,6 +67,7 @@ data CloudinitConfigData s = CloudinitConfigData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @template_cloudinit_config@ datasource value.
 cloudinitConfigData
     :: TF.Attr s [TF.Attr s (PartSetting s)] -- ^ @part@ - 'P.part'
     -> P.DataSource (CloudinitConfigData s)
@@ -125,6 +125,7 @@ data FileData s = FileData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @template_file@ datasource value.
 fileData
     :: P.DataSource (FileData s)
 fileData =

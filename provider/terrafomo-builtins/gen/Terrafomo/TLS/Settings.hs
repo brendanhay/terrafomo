@@ -17,7 +17,6 @@
 --
 module Terrafomo.TLS.Settings
     (
-    -- * Settings Datatypes
     -- ** subject
       SubjectSetting (..)
     , newSubjectSetting
@@ -76,6 +75,7 @@ data SubjectSetting s = SubjectSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @subject@ settings value.
 newSubjectSetting
     :: SubjectSetting s
 newSubjectSetting =

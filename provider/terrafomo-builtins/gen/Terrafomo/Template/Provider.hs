@@ -17,11 +17,10 @@
 --
 module Terrafomo.Template.Provider
     (
-    -- * Template Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * Template Specific Aliases
+    -- ** Template Specific Aliases
     , DataSource
     , Resource
     ) where

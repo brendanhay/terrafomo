@@ -17,7 +17,6 @@
 --
 module Terrafomo.Local.Resource
     (
-    -- * Resource Datatypes
     -- ** local_file
       FileResource (..)
     , fileResource
@@ -71,6 +70,7 @@ data FileResource s = FileResource'
     -- * 'content'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @local_file@ resource value.
 fileResource
     :: TF.Attr s P.Text -- ^ @filename@ - 'P.filename'
     -> P.Resource (FileResource s)

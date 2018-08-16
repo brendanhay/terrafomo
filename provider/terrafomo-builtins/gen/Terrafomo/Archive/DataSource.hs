@@ -17,7 +17,6 @@
 --
 module Terrafomo.Archive.DataSource
     (
-    -- * DataSource Datatypes
     -- ** archive_file
       FileData (..)
     , fileData
@@ -102,6 +101,7 @@ data FileData s = FileData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @archive_file@ datasource value.
 fileData
     :: TF.Attr s P.Text -- ^ @output_path@ - 'P.outputPath'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''

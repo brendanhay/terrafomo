@@ -17,7 +17,6 @@
 --
 module Terrafomo.TLS.DataSource
     (
-    -- * DataSource Datatypes
     -- ** tls_public_key
       PublicKeyData (..)
     , publicKeyData
@@ -59,6 +58,7 @@ data PublicKeyData s = PublicKeyData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @tls_public_key@ datasource value.
 publicKeyData
     :: TF.Attr s P.Text -- ^ @private_key_pem@ - 'P.privateKeyPem'
     -> P.DataSource (PublicKeyData s)

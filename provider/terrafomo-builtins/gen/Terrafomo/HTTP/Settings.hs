@@ -17,7 +17,6 @@
 --
 module Terrafomo.HTTP.Settings
     (
-    -- * Settings Datatypes
     ) where
 
 import Data.Functor ((<$>))

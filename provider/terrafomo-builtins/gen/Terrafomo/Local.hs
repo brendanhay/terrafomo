@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Local
-    ( module Terrafomo.Local.DataSource
-    , module Terrafomo.Local.Lens
-    , module Terrafomo.Local.Provider
-    , module Terrafomo.Local.Resource
-    , module Terrafomo.Local.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Local.Provider
+
+    -- * Custom Types
     , module Terrafomo.Local.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.Local.DataSource
+
+    -- * Resources
+    , module Terrafomo.Local.Resource
+
+    -- * Settings
+    , module Terrafomo.Local.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Local.Lens
     ) where
 
 import Terrafomo.Local.DataSource
