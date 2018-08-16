@@ -38,14 +38,15 @@ field-overrides:
     protocol: 'TF.Attr s P.NetworkProtocol'
 
   VpcResource:
-    cidr_block: 'TF.Attr s P.IPRange'
+    cidrBlock: 'TF.Attr s P.IPRange'
 
   SubnetResource:
-    cidr_block: 'TF.Attr s P.IPRange'
-    availability_zone: 'TF.Attr s P.Zone'
+    cidrBlock: 'TF.Attr s P.IPRange'
+    availabilityZone: 'TF.Attr s P.Zone'
 
   RouteResource:
-    destination_cidr_block: 'TF.Attr s P.IPRange'
+    destinationCidrBlock: 'TF.Attr s P.IPRange'
+    destinationIpv6CidrBlock: 'TF.Attr s P.IPRange'
 
   # Settings
 
