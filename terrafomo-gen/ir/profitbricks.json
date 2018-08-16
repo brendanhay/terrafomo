@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newFirewallSetting",
+                "smart": "firewallSetting",
                 "name": "FirewallSetting'"
             },
             "arguments": [
@@ -223,7 +223,7 @@
         },
         {
             "con": {
-                "smart": "newNicSetting",
+                "smart": "nicSetting",
                 "name": "NicSetting'"
             },
             "arguments": [
@@ -394,7 +394,7 @@
         },
         {
             "con": {
-                "smart": "newUsersSetting",
+                "smart": "usersSetting",
                 "name": "UsersSetting'"
             },
             "arguments": [],
@@ -512,7 +512,7 @@
         },
         {
             "con": {
-                "smart": "newVolumeSetting",
+                "smart": "volumeSetting",
                 "name": "VolumeSetting'"
             },
             "arguments": [
