@@ -862,23 +862,6 @@
                     "original": "cleanup_on_failure"
                 },
                 {
-                    "default": "_deploymentGroups",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"deployment_groups\" <$> TF.attribute",
-                    "name": "_deploymentGroups",
-                    "method": "deploymentGroups",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (DeploymentGroupsSetting s)]",
-                    "class": "HasDeploymentGroups",
-                    "validate": false,
-                    "optional": false,
-                    "original": "deployment_groups"
-                },
-                {
                     "default": "_terminateInstanceOnFailure",
                     "computed": false,
                     "required": true,
@@ -894,6 +877,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "terminate_instance_on_failure"
+                },
+                {
+                    "default": "_deploymentGroups",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"deployment_groups\" <$> TF.attribute",
+                    "name": "_deploymentGroups",
+                    "method": "deploymentGroups",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (DeploymentGroupsSetting s)]",
+                    "class": "HasDeploymentGroups",
+                    "validate": false,
+                    "optional": false,
+                    "original": "deployment_groups"
                 }
             ],
             "conflicts": [],
@@ -1625,23 +1625,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_accessKey",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"access_key\" <$> TF.attribute",
-                    "name": "_accessKey",
-                    "method": "accessKey",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAccessKey",
-                    "validate": false,
-                    "optional": false,
-                    "original": "access_key"
-                },
-                {
                     "default": "_masterHost",
                     "computed": false,
                     "required": true,
@@ -1657,6 +1640,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "master_host"
+                },
+                {
+                    "default": "_accessKey",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"access_key\" <$> TF.attribute",
+                    "name": "_accessKey",
+                    "method": "accessKey",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAccessKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "access_key"
                 },
                 {
                     "default": "_secretKey",
@@ -2476,23 +2476,6 @@
                     "original": "metric_name"
                 },
                 {
-                    "default": "_namespace",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"namespace\" <$> TF.attribute",
-                    "name": "_namespace",
-                    "method": "namespace",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasNamespace",
-                    "validate": false,
-                    "optional": false,
-                    "original": "namespace"
-                },
-                {
                     "default": "_policyName",
                     "computed": false,
                     "required": true,
@@ -2508,6 +2491,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "policy_name"
+                },
+                {
+                    "default": "_namespace",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"namespace\" <$> TF.attribute",
+                    "name": "_namespace",
+                    "method": "namespace",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNamespace",
+                    "validate": false,
+                    "optional": false,
+                    "original": "namespace"
                 },
                 {
                     "default": "_threshold",
@@ -2732,23 +2732,6 @@
                     "original": "metric_name"
                 },
                 {
-                    "default": "_namespace",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"namespace\" <$> TF.attribute",
-                    "name": "_namespace",
-                    "method": "namespace",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasNamespace",
-                    "validate": false,
-                    "optional": false,
-                    "original": "namespace"
-                },
-                {
                     "default": "_policyName",
                     "computed": false,
                     "required": true,
@@ -2764,6 +2747,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "policy_name"
+                },
+                {
+                    "default": "_namespace",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"namespace\" <$> TF.attribute",
+                    "name": "_namespace",
+                    "method": "namespace",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNamespace",
+                    "validate": false,
+                    "optional": false,
+                    "original": "namespace"
                 },
                 {
                     "default": "_target",
@@ -3158,23 +3158,6 @@
                     "original": "metric_name"
                 },
                 {
-                    "default": "_namespace",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"namespace\" <$> TF.attribute",
-                    "name": "_namespace",
-                    "method": "namespace",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasNamespace",
-                    "validate": false,
-                    "optional": false,
-                    "original": "namespace"
-                },
-                {
                     "default": "_policyName",
                     "computed": false,
                     "required": true,
@@ -3190,6 +3173,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "policy_name"
+                },
+                {
+                    "default": "_namespace",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"namespace\" <$> TF.attribute",
+                    "name": "_namespace",
+                    "method": "namespace",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNamespace",
+                    "validate": false,
+                    "optional": false,
+                    "original": "namespace"
                 },
                 {
                     "default": "_threshold",
@@ -3786,23 +3786,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_shouldResumeStateful",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"should_resume_stateful\" <$> TF.attribute",
-                    "name": "_shouldResumeStateful",
-                    "method": "shouldResumeStateful",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasShouldResumeStateful",
-                    "validate": false,
-                    "optional": false,
-                    "original": "should_resume_stateful"
-                },
-                {
                     "default": "_shouldRoll",
                     "computed": false,
                     "required": true,
@@ -3818,6 +3801,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "should_roll"
+                },
+                {
+                    "default": "_shouldResumeStateful",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"should_resume_stateful\" <$> TF.attribute",
+                    "name": "_shouldResumeStateful",
+                    "method": "shouldResumeStateful",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasShouldResumeStateful",
+                    "validate": false,
+                    "optional": false,
+                    "original": "should_resume_stateful"
                 }
             ],
             "conflicts": [],
@@ -4921,6 +4921,40 @@
                     "original": "description"
                 },
                 {
+                    "default": "_securityGroups",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"security_groups\" <$> TF.attribute",
+                    "name": "_securityGroups",
+                    "method": "securityGroups",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasSecurityGroups",
+                    "validate": false,
+                    "optional": false,
+                    "original": "security_groups"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
                     "default": "_fallbackToOndemand",
                     "computed": false,
                     "required": true,
@@ -4953,40 +4987,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "instance_types_ondemand"
-                },
-                {
-                    "default": "_instanceTypesSpot",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"instance_types_spot\" <$> TF.attribute",
-                    "name": "_instanceTypesSpot",
-                    "method": "instanceTypesSpot",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasInstanceTypesSpot",
-                    "validate": false,
-                    "optional": false,
-                    "original": "instance_types_spot"
-                },
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
                 },
                 {
                     "default": "_orientation",
@@ -5023,21 +5023,21 @@
                     "original": "product"
                 },
                 {
-                    "default": "_securityGroups",
+                    "default": "_instanceTypesSpot",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"security_groups\" <$> TF.attribute",
-                    "name": "_securityGroups",
-                    "method": "securityGroups",
+                    "encoder": "TF.assign \"instance_types_spot\" <$> TF.attribute",
+                    "name": "_instanceTypesSpot",
+                    "method": "instanceTypesSpot",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasSecurityGroups",
+                    "class": "HasInstanceTypesSpot",
                     "validate": false,
                     "optional": false,
-                    "original": "security_groups"
+                    "original": "instance_types_spot"
                 }
             ],
             "conflicts": [
@@ -5253,21 +5253,21 @@
                     "original": "endpoint"
                 },
                 {
-                    "default": "_eventType",
+                    "default": "_resourceId",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"event_type\" <$> TF.attribute",
-                    "name": "_eventType",
-                    "method": "eventType",
+                    "encoder": "TF.assign \"resource_id\" <$> TF.attribute",
+                    "name": "_resourceId",
+                    "method": "resourceId",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasEventType",
+                    "class": "HasResourceId",
                     "validate": false,
                     "optional": false,
-                    "original": "event_type"
+                    "original": "resource_id"
                 },
                 {
                     "default": "_protocol",
@@ -5287,21 +5287,21 @@
                     "original": "protocol"
                 },
                 {
-                    "default": "_resourceId",
+                    "default": "_eventType",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"resource_id\" <$> TF.attribute",
-                    "name": "_resourceId",
-                    "method": "resourceId",
+                    "encoder": "TF.assign \"event_type\" <$> TF.attribute",
+                    "name": "_eventType",
+                    "method": "eventType",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasResourceId",
+                    "class": "HasEventType",
                     "validate": false,
                     "optional": false,
-                    "original": "resource_id"
+                    "original": "event_type"
                 }
             ],
             "conflicts": [],
