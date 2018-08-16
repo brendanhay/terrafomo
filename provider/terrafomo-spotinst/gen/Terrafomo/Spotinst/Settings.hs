@@ -19,123 +19,123 @@ module Terrafomo.Spotinst.Settings
     (
     -- ** autoscale_attributes
       AutoscaleAttributesSetting (..)
-    , autoscaleAttributesSetting
+    , newAutoscaleAttributesSetting
 
     -- ** autoscale_constraints
     , AutoscaleConstraintsSetting (..)
-    , autoscaleConstraintsSetting
+    , newAutoscaleConstraintsSetting
 
     -- ** autoscale_down
     , AutoscaleDownSetting (..)
-    , autoscaleDownSetting
+    , newAutoscaleDownSetting
 
     -- ** autoscale_headroom
     , AutoscaleHeadroomSetting (..)
-    , autoscaleHeadroomSetting
+    , newAutoscaleHeadroomSetting
 
     -- ** autoscale_labels
     , AutoscaleLabelsSetting (..)
-    , autoscaleLabelsSetting
+    , newAutoscaleLabelsSetting
 
     -- ** deployment_groups
     , DeploymentGroupsSetting (..)
-    , deploymentGroupsSetting
+    , newDeploymentGroupsSetting
 
     -- ** ebs_block_device
     , EbsBlockDeviceSetting (..)
-    , ebsBlockDeviceSetting
+    , newEbsBlockDeviceSetting
 
     -- ** ephemeral_block_device
     , EphemeralBlockDeviceSetting (..)
-    , ephemeralBlockDeviceSetting
+    , newEphemeralBlockDeviceSetting
 
     -- ** instance_types_weights
     , InstanceTypesWeightsSetting (..)
-    , instanceTypesWeightsSetting
+    , newInstanceTypesWeightsSetting
 
     -- ** integration_codedeploy
     , IntegrationCodedeploySetting (..)
-    , integrationCodedeploySetting
+    , newIntegrationCodedeploySetting
 
     -- ** integration_ecs
     , IntegrationEcsSetting (..)
-    , integrationEcsSetting
+    , newIntegrationEcsSetting
 
     -- ** integration_gitlab
     , IntegrationGitlabSetting (..)
-    , integrationGitlabSetting
+    , newIntegrationGitlabSetting
 
     -- ** integration_kubernetes
     , IntegrationKubernetesSetting (..)
-    , integrationKubernetesSetting
+    , newIntegrationKubernetesSetting
 
     -- ** integration_mesosphere
     , IntegrationMesosphereSetting (..)
-    , integrationMesosphereSetting
+    , newIntegrationMesosphereSetting
 
     -- ** integration_multai_runtime
     , IntegrationMultaiRuntimeSetting (..)
-    , integrationMultaiRuntimeSetting
+    , newIntegrationMultaiRuntimeSetting
 
     -- ** integration_nomad
     , IntegrationNomadSetting (..)
-    , integrationNomadSetting
+    , newIntegrationNomadSetting
 
     -- ** integration_rancher
     , IntegrationRancherSetting (..)
-    , integrationRancherSetting
+    , newIntegrationRancherSetting
 
     -- ** multai_target_sets
     , MultaiTargetSetsSetting (..)
-    , multaiTargetSetsSetting
+    , newMultaiTargetSetsSetting
 
     -- ** network_interface
     , NetworkInterfaceSetting (..)
-    , networkInterfaceSetting
+    , newNetworkInterfaceSetting
 
     -- ** revert_to_spot
     , RevertToSpotSetting (..)
-    , revertToSpotSetting
+    , newRevertToSpotSetting
 
     -- ** roll_config
     , RollConfigSetting (..)
-    , rollConfigSetting
+    , newRollConfigSetting
 
     -- ** runner
     , RunnerSetting (..)
-    , runnerSetting
+    , newRunnerSetting
 
     -- ** scaling_down_policy
     , ScalingDownPolicySetting (..)
-    , scalingDownPolicySetting
+    , newScalingDownPolicySetting
 
     -- ** scaling_target_policy
     , ScalingTargetPolicySetting (..)
-    , scalingTargetPolicySetting
+    , newScalingTargetPolicySetting
 
     -- ** scaling_up_policy
     , ScalingUpPolicySetting (..)
-    , scalingUpPolicySetting
+    , newScalingUpPolicySetting
 
     -- ** scheduled_task
     , ScheduledTaskSetting (..)
-    , scheduledTaskSetting
+    , newScheduledTaskSetting
 
     -- ** signal
     , SignalSetting (..)
-    , signalSetting
+    , newSignalSetting
 
     -- ** stateful_deallocation
     , StatefulDeallocationSetting (..)
-    , statefulDeallocationSetting
+    , newStatefulDeallocationSetting
 
     -- ** tags
     , TagsSetting (..)
-    , tagsSetting
+    , newTagsSetting
 
     -- ** update_policy
     , UpdatePolicySetting (..)
-    , updatePolicySetting
+    , newUpdatePolicySetting
 
     ) where
 
@@ -171,11 +171,11 @@ data AutoscaleAttributesSetting s = AutoscaleAttributesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @autoscale_attributes@ settings value.
-autoscaleAttributesSetting
+newAutoscaleAttributesSetting
     :: TF.Attr s P.Text -- ^ 'P._key': @key@
     -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> AutoscaleAttributesSetting s
-autoscaleAttributesSetting _key _value =
+newAutoscaleAttributesSetting _key _value =
     AutoscaleAttributesSetting'
         { _key = _key
         , _value = _value
@@ -212,11 +212,11 @@ data AutoscaleConstraintsSetting s = AutoscaleConstraintsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @autoscale_constraints@ settings value.
-autoscaleConstraintsSetting
+newAutoscaleConstraintsSetting
     :: TF.Attr s P.Text -- ^ 'P._key': @key@
     -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> AutoscaleConstraintsSetting s
-autoscaleConstraintsSetting _key _value =
+newAutoscaleConstraintsSetting _key _value =
     AutoscaleConstraintsSetting'
         { _key = _key
         , _value = _value
@@ -250,9 +250,9 @@ data AutoscaleDownSetting s = AutoscaleDownSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @autoscale_down@ settings value.
-autoscaleDownSetting
+newAutoscaleDownSetting
     :: AutoscaleDownSetting s
-autoscaleDownSetting =
+newAutoscaleDownSetting =
     AutoscaleDownSetting'
         { _evaluationPeriods = TF.Nil
         }
@@ -285,9 +285,9 @@ data AutoscaleHeadroomSetting s = AutoscaleHeadroomSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @autoscale_headroom@ settings value.
-autoscaleHeadroomSetting
+newAutoscaleHeadroomSetting
     :: AutoscaleHeadroomSetting s
-autoscaleHeadroomSetting =
+newAutoscaleHeadroomSetting =
     AutoscaleHeadroomSetting'
         { _cpuPerUnit = TF.Nil
         , _memoryPerUnit = TF.Nil
@@ -331,11 +331,11 @@ data AutoscaleLabelsSetting s = AutoscaleLabelsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @autoscale_labels@ settings value.
-autoscaleLabelsSetting
+newAutoscaleLabelsSetting
     :: TF.Attr s P.Text -- ^ 'P._key': @key@
     -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> AutoscaleLabelsSetting s
-autoscaleLabelsSetting _key _value =
+newAutoscaleLabelsSetting _key _value =
     AutoscaleLabelsSetting'
         { _key = _key
         , _value = _value
@@ -372,11 +372,11 @@ data DeploymentGroupsSetting s = DeploymentGroupsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @deployment_groups@ settings value.
-deploymentGroupsSetting
+newDeploymentGroupsSetting
     :: TF.Attr s P.Text -- ^ 'P._applicationName': @application_name@
     -> TF.Attr s P.Text -- ^ 'P._deploymentGroupName': @deployment_group_name@
     -> DeploymentGroupsSetting s
-deploymentGroupsSetting _applicationName _deploymentGroupName =
+newDeploymentGroupsSetting _applicationName _deploymentGroupName =
     DeploymentGroupsSetting'
         { _applicationName = _applicationName
         , _deploymentGroupName = _deploymentGroupName
@@ -431,10 +431,10 @@ data EbsBlockDeviceSetting s = EbsBlockDeviceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ebs_block_device@ settings value.
-ebsBlockDeviceSetting
+newEbsBlockDeviceSetting
     :: TF.Attr s P.Text -- ^ 'P._deviceName': @device_name@
     -> EbsBlockDeviceSetting s
-ebsBlockDeviceSetting _deviceName =
+newEbsBlockDeviceSetting _deviceName =
     EbsBlockDeviceSetting'
         { _deleteOnTermination = TF.Nil
         , _deviceName = _deviceName
@@ -522,11 +522,11 @@ data EphemeralBlockDeviceSetting s = EphemeralBlockDeviceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ephemeral_block_device@ settings value.
-ephemeralBlockDeviceSetting
+newEphemeralBlockDeviceSetting
     :: TF.Attr s P.Text -- ^ 'P._deviceName': @device_name@
     -> TF.Attr s P.Text -- ^ 'P._virtualName': @virtual_name@
     -> EphemeralBlockDeviceSetting s
-ephemeralBlockDeviceSetting _deviceName _virtualName =
+newEphemeralBlockDeviceSetting _deviceName _virtualName =
     EphemeralBlockDeviceSetting'
         { _deviceName = _deviceName
         , _virtualName = _virtualName
@@ -563,11 +563,11 @@ data InstanceTypesWeightsSetting s = InstanceTypesWeightsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @instance_types_weights@ settings value.
-instanceTypesWeightsSetting
+newInstanceTypesWeightsSetting
     :: TF.Attr s P.Text -- ^ 'P._instanceType': @instance_type@
     -> TF.Attr s P.Int -- ^ 'P._weight': @weight@
     -> InstanceTypesWeightsSetting s
-instanceTypesWeightsSetting _instanceType _weight =
+newInstanceTypesWeightsSetting _instanceType _weight =
     InstanceTypesWeightsSetting'
         { _instanceType = _instanceType
         , _weight = _weight
@@ -607,12 +607,12 @@ data IntegrationCodedeploySetting s = IntegrationCodedeploySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @integration_codedeploy@ settings value.
-integrationCodedeploySetting
+newIntegrationCodedeploySetting
     :: TF.Attr s P.Bool -- ^ 'P._cleanupOnFailure': @cleanup_on_failure@
     -> TF.Attr s P.Bool -- ^ 'P._terminateInstanceOnFailure': @terminate_instance_on_failure@
     -> TF.Attr s [TF.Attr s (DeploymentGroupsSetting s)] -- ^ 'P._deploymentGroups': @deployment_groups@
     -> IntegrationCodedeploySetting s
-integrationCodedeploySetting _cleanupOnFailure _terminateInstanceOnFailure _deploymentGroups =
+newIntegrationCodedeploySetting _cleanupOnFailure _terminateInstanceOnFailure _deploymentGroups =
     IntegrationCodedeploySetting'
         { _cleanupOnFailure = _cleanupOnFailure
         , _deploymentGroups = _deploymentGroups
@@ -671,10 +671,10 @@ data IntegrationEcsSetting s = IntegrationEcsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @integration_ecs@ settings value.
-integrationEcsSetting
+newIntegrationEcsSetting
     :: TF.Attr s P.Text -- ^ 'P._clusterName': @cluster_name@
     -> IntegrationEcsSetting s
-integrationEcsSetting _clusterName =
+newIntegrationEcsSetting _clusterName =
     IntegrationEcsSetting'
         { _autoscaleAttributes = TF.Nil
         , _autoscaleCooldown = TF.Nil
@@ -751,9 +751,9 @@ data IntegrationGitlabSetting s = IntegrationGitlabSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @integration_gitlab@ settings value.
-integrationGitlabSetting
+newIntegrationGitlabSetting
     :: IntegrationGitlabSetting s
-integrationGitlabSetting =
+newIntegrationGitlabSetting =
     IntegrationGitlabSetting'
         { _runner = TF.Nil
         }
@@ -811,9 +811,9 @@ data IntegrationKubernetesSetting s = IntegrationKubernetesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @integration_kubernetes@ settings value.
-integrationKubernetesSetting
+newIntegrationKubernetesSetting
     :: IntegrationKubernetesSetting s
-integrationKubernetesSetting =
+newIntegrationKubernetesSetting =
     IntegrationKubernetesSetting'
         { _apiServer = TF.Nil
         , _autoscaleCooldown = TF.Nil
@@ -911,10 +911,10 @@ data IntegrationMesosphereSetting s = IntegrationMesosphereSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @integration_mesosphere@ settings value.
-integrationMesosphereSetting
+newIntegrationMesosphereSetting
     :: TF.Attr s P.Text -- ^ 'P._apiServer': @api_server@
     -> IntegrationMesosphereSetting s
-integrationMesosphereSetting _apiServer =
+newIntegrationMesosphereSetting _apiServer =
     IntegrationMesosphereSetting'
         { _apiServer = _apiServer
         }
@@ -941,10 +941,10 @@ data IntegrationMultaiRuntimeSetting s = IntegrationMultaiRuntimeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @integration_multai_runtime@ settings value.
-integrationMultaiRuntimeSetting
+newIntegrationMultaiRuntimeSetting
     :: TF.Attr s P.Text -- ^ 'P._deploymentId': @deployment_id@
     -> IntegrationMultaiRuntimeSetting s
-integrationMultaiRuntimeSetting _deploymentId =
+newIntegrationMultaiRuntimeSetting _deploymentId =
     IntegrationMultaiRuntimeSetting'
         { _deploymentId = _deploymentId
         }
@@ -992,11 +992,11 @@ data IntegrationNomadSetting s = IntegrationNomadSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @integration_nomad@ settings value.
-integrationNomadSetting
+newIntegrationNomadSetting
     :: TF.Attr s P.Text -- ^ 'P._masterHost': @master_host@
     -> TF.Attr s P.Int -- ^ 'P._masterPort': @master_port@
     -> IntegrationNomadSetting s
-integrationNomadSetting _masterHost _masterPort =
+newIntegrationNomadSetting _masterHost _masterPort =
     IntegrationNomadSetting'
         { _aclToken = TF.Nil
         , _autoscaleConstraints = TF.Nil
@@ -1086,12 +1086,12 @@ data IntegrationRancherSetting s = IntegrationRancherSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @integration_rancher@ settings value.
-integrationRancherSetting
+newIntegrationRancherSetting
     :: TF.Attr s P.Text -- ^ 'P._masterHost': @master_host@
     -> TF.Attr s P.Text -- ^ 'P._accessKey': @access_key@
     -> TF.Attr s P.Text -- ^ 'P._secretKey': @secret_key@
     -> IntegrationRancherSetting s
-integrationRancherSetting _masterHost _accessKey _secretKey =
+newIntegrationRancherSetting _masterHost _accessKey _secretKey =
     IntegrationRancherSetting'
         { _accessKey = _accessKey
         , _masterHost = _masterHost
@@ -1135,11 +1135,11 @@ data MultaiTargetSetsSetting s = MultaiTargetSetsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @multai_target_sets@ settings value.
-multaiTargetSetsSetting
+newMultaiTargetSetsSetting
     :: TF.Attr s P.Text -- ^ 'P._balancerId': @balancer_id@
     -> TF.Attr s P.Text -- ^ 'P._targetSetId': @target_set_id@
     -> MultaiTargetSetsSetting s
-multaiTargetSetsSetting _balancerId _targetSetId =
+newMultaiTargetSetsSetting _balancerId _targetSetId =
     MultaiTargetSetsSetting'
         { _balancerId = _balancerId
         , _targetSetId = _targetSetId
@@ -1191,11 +1191,11 @@ data NetworkInterfaceSetting s = NetworkInterfaceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @network_interface@ settings value.
-networkInterfaceSetting
+newNetworkInterfaceSetting
     :: TF.Attr s P.Text -- ^ 'P._description': @description@
     -> TF.Attr s P.Text -- ^ 'P._deviceIndex': @device_index@
     -> NetworkInterfaceSetting s
-networkInterfaceSetting _description _deviceIndex =
+newNetworkInterfaceSetting _description _deviceIndex =
     NetworkInterfaceSetting'
         { _associatePublicIpAddress = TF.Nil
         , _deleteOnTermination = TF.Nil
@@ -1270,10 +1270,10 @@ data RevertToSpotSetting s = RevertToSpotSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @revert_to_spot@ settings value.
-revertToSpotSetting
+newRevertToSpotSetting
     :: TF.Attr s P.Text -- ^ 'P._performAt': @perform_at@
     -> RevertToSpotSetting s
-revertToSpotSetting _performAt =
+newRevertToSpotSetting _performAt =
     RevertToSpotSetting'
         { _performAt = _performAt
         , _timeWindows = TF.Nil
@@ -1313,10 +1313,10 @@ data RollConfigSetting s = RollConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @roll_config@ settings value.
-rollConfigSetting
+newRollConfigSetting
     :: TF.Attr s P.Int -- ^ 'P._batchSizePercentage': @batch_size_percentage@
     -> RollConfigSetting s
-rollConfigSetting _batchSizePercentage =
+newRollConfigSetting _batchSizePercentage =
     RollConfigSetting'
         { _batchSizePercentage = _batchSizePercentage
         , _gracePeriod = TF.value (-1)
@@ -1357,9 +1357,9 @@ data RunnerSetting s = RunnerSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @runner@ settings value.
-runnerSetting
+newRunnerSetting
     :: RunnerSetting s
-runnerSetting =
+newRunnerSetting =
     RunnerSetting'
         { _isEnabled = TF.Nil
         }
@@ -1440,14 +1440,14 @@ data ScalingDownPolicySetting s = ScalingDownPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @scaling_down_policy@ settings value.
-scalingDownPolicySetting
+newScalingDownPolicySetting
     :: TF.Attr s P.Text -- ^ 'P._metricName': @metric_name@
     -> TF.Attr s P.Text -- ^ 'P._policyName': @policy_name@
     -> TF.Attr s P.Text -- ^ 'P._namespace': @namespace@
     -> TF.Attr s P.Double -- ^ 'P._threshold': @threshold@
     -> TF.Attr s P.Text -- ^ 'P._unit': @unit@
     -> ScalingDownPolicySetting s
-scalingDownPolicySetting _metricName _policyName _namespace _threshold _unit =
+newScalingDownPolicySetting _metricName _policyName _namespace _threshold _unit =
     ScalingDownPolicySetting'
         { _actionType = TF.Nil
         , _adjustment = TF.Nil
@@ -1642,14 +1642,14 @@ data ScalingTargetPolicySetting s = ScalingTargetPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @scaling_target_policy@ settings value.
-scalingTargetPolicySetting
+newScalingTargetPolicySetting
     :: TF.Attr s P.Text -- ^ 'P._metricName': @metric_name@
     -> TF.Attr s P.Text -- ^ 'P._policyName': @policy_name@
     -> TF.Attr s P.Text -- ^ 'P._namespace': @namespace@
     -> TF.Attr s P.Double -- ^ 'P._target': @target@
     -> TF.Attr s P.Text -- ^ 'P._unit': @unit@
     -> ScalingTargetPolicySetting s
-scalingTargetPolicySetting _metricName _policyName _namespace _target _unit =
+newScalingTargetPolicySetting _metricName _policyName _namespace _target _unit =
     ScalingTargetPolicySetting'
         { _cooldown = TF.Nil
         , _dimensions = TF.Nil
@@ -1795,14 +1795,14 @@ data ScalingUpPolicySetting s = ScalingUpPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @scaling_up_policy@ settings value.
-scalingUpPolicySetting
+newScalingUpPolicySetting
     :: TF.Attr s P.Text -- ^ 'P._metricName': @metric_name@
     -> TF.Attr s P.Text -- ^ 'P._policyName': @policy_name@
     -> TF.Attr s P.Text -- ^ 'P._namespace': @namespace@
     -> TF.Attr s P.Double -- ^ 'P._threshold': @threshold@
     -> TF.Attr s P.Text -- ^ 'P._unit': @unit@
     -> ScalingUpPolicySetting s
-scalingUpPolicySetting _metricName _policyName _namespace _threshold _unit =
+newScalingUpPolicySetting _metricName _policyName _namespace _threshold _unit =
     ScalingUpPolicySetting'
         { _actionType = TF.Nil
         , _adjustment = TF.Nil
@@ -2009,10 +2009,10 @@ data ScheduledTaskSetting s = ScheduledTaskSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @scheduled_task@ settings value.
-scheduledTaskSetting
+newScheduledTaskSetting
     :: TF.Attr s P.Text -- ^ 'P._taskType': @task_type@
     -> ScheduledTaskSetting s
-scheduledTaskSetting _taskType =
+newScheduledTaskSetting _taskType =
     ScheduledTaskSetting'
         { _batchSizePercentage = TF.Nil
         , _cronExpression = TF.Nil
@@ -2126,10 +2126,10 @@ data SignalSetting s = SignalSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @signal@ settings value.
-signalSetting
+newSignalSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> SignalSetting s
-signalSetting _name =
+newSignalSetting _name =
     SignalSetting'
         { _name = _name
         , _timeout = TF.Nil
@@ -2172,9 +2172,9 @@ data StatefulDeallocationSetting s = StatefulDeallocationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @stateful_deallocation@ settings value.
-statefulDeallocationSetting
+newStatefulDeallocationSetting
     :: StatefulDeallocationSetting s
-statefulDeallocationSetting =
+newStatefulDeallocationSetting =
     StatefulDeallocationSetting'
         { _shouldDeleteImages = TF.Nil
         , _shouldDeleteNetworkInterfaces = TF.Nil
@@ -2225,11 +2225,11 @@ data TagsSetting s = TagsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @tags@ settings value.
-tagsSetting
+newTagsSetting
     :: TF.Attr s P.Text -- ^ 'P._key': @key@
     -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> TagsSetting s
-tagsSetting _key _value =
+newTagsSetting _key _value =
     TagsSetting'
         { _key = _key
         , _value = _value
@@ -2269,11 +2269,11 @@ data UpdatePolicySetting s = UpdatePolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @update_policy@ settings value.
-updatePolicySetting
+newUpdatePolicySetting
     :: TF.Attr s P.Bool -- ^ 'P._shouldRoll': @should_roll@
     -> TF.Attr s P.Bool -- ^ 'P._shouldResumeStateful': @should_resume_stateful@
     -> UpdatePolicySetting s
-updatePolicySetting _shouldRoll _shouldResumeStateful =
+newUpdatePolicySetting _shouldRoll _shouldResumeStateful =
     UpdatePolicySetting'
         { _rollConfig = TF.Nil
         , _shouldResumeStateful = _shouldResumeStateful
