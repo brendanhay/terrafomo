@@ -520,6 +520,12 @@ data AcmpcaCertificateAuthorityData s = AcmpcaCertificateAuthorityData'
     { _arn :: TF.Attr s P.Text
     -- ^ @arn@ - (Required)
     --
+    , _revocationConfiguration :: TF.Attr s [TF.Attr s (RevocationConfigurationSetting s)]
+    -- ^ @revocation_configuration@ - (Optional)
+    --
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_acmpca_certificate_authority@ datasource value.
@@ -530,11 +536,15 @@ acmpcaCertificateAuthorityData _arn =
     TF.unsafeDataSource "aws_acmpca_certificate_authority" TF.validator $
         AcmpcaCertificateAuthorityData'
             { _arn = _arn
+            , _revocationConfiguration = TF.Nil
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (AcmpcaCertificateAuthorityData s) where
     toObject AcmpcaCertificateAuthorityData'{..} = P.catMaybes
         [ TF.assign "arn" <$> TF.attribute _arn
+        , TF.assign "revocation_configuration" <$> TF.attribute _revocationConfiguration
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (AcmpcaCertificateAuthorityData s) where
@@ -544,6 +554,16 @@ instance P.HasArn (AcmpcaCertificateAuthorityData s) (TF.Attr s P.Text) where
     arn =
         P.lens (_arn :: AcmpcaCertificateAuthorityData s -> TF.Attr s P.Text)
                (\s a -> s { _arn = a } :: AcmpcaCertificateAuthorityData s)
+
+instance P.HasRevocationConfiguration (AcmpcaCertificateAuthorityData s) (TF.Attr s [TF.Attr s (RevocationConfigurationSetting s)]) where
+    revocationConfiguration =
+        P.lens (_revocationConfiguration :: AcmpcaCertificateAuthorityData s -> TF.Attr s [TF.Attr s (RevocationConfigurationSetting s)])
+               (\s a -> s { _revocationConfiguration = a } :: AcmpcaCertificateAuthorityData s)
+
+instance P.HasTags (AcmpcaCertificateAuthorityData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: AcmpcaCertificateAuthorityData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: AcmpcaCertificateAuthorityData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -583,7 +603,16 @@ instance s ~ s' => P.HasComputedType (TF.Ref s' (AcmpcaCertificateAuthorityData 
 -- See the <https://www.terraform.io/docs/providers/aws/d/alb.html terraform documentation>
 -- for more information.
 data AlbData s = AlbData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _arn  :: TF.Attr s P.Text
+    -- ^ @arn@ - (Optional)
+    --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_alb@ datasource value.
 albData
@@ -591,12 +620,35 @@ albData
 albData =
     TF.unsafeDataSource "aws_alb" TF.validator $
         AlbData'
+            { _arn = TF.Nil
+            , _name = TF.Nil
+            , _tags = TF.Nil
+            }
 
 instance TF.IsObject (AlbData s) where
-    toObject _ = []
+    toObject AlbData'{..} = P.catMaybes
+        [ TF.assign "arn" <$> TF.attribute _arn
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
 
 instance TF.IsValid (AlbData s) where
     validator = P.mempty
+
+instance P.HasArn (AlbData s) (TF.Attr s P.Text) where
+    arn =
+        P.lens (_arn :: AlbData s -> TF.Attr s P.Text)
+               (\s a -> s { _arn = a } :: AlbData s)
+
+instance P.HasName (AlbData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: AlbData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AlbData s)
+
+instance P.HasTags (AlbData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: AlbData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: AlbData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AlbData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -651,7 +703,26 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (AlbData s)) (TF.Attr s P.Text
 -- See the <https://www.terraform.io/docs/providers/aws/d/alb_listener.html terraform documentation>
 -- for more information.
 data AlbListenerData s = AlbListenerData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _arn             :: TF.Attr s P.Text
+    -- ^ @arn@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'loadBalancerArn'
+    -- * 'port'
+    , _loadBalancerArn :: TF.Attr s P.Text
+    -- ^ @load_balancer_arn@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'arn'
+    , _port            :: TF.Attr s P.Int
+    -- ^ @port@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'arn'
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_alb_listener@ datasource value.
 albListenerData
@@ -659,12 +730,51 @@ albListenerData
 albListenerData =
     TF.unsafeDataSource "aws_alb_listener" TF.validator $
         AlbListenerData'
+            { _arn = TF.Nil
+            , _loadBalancerArn = TF.Nil
+            , _port = TF.Nil
+            }
 
 instance TF.IsObject (AlbListenerData s) where
-    toObject _ = []
+    toObject AlbListenerData'{..} = P.catMaybes
+        [ TF.assign "arn" <$> TF.attribute _arn
+        , TF.assign "load_balancer_arn" <$> TF.attribute _loadBalancerArn
+        , TF.assign "port" <$> TF.attribute _port
+        ]
 
 instance TF.IsValid (AlbListenerData s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\AlbListenerData'{..} -> Map.fromList $ P.catMaybes
+        [ if (_arn P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_arn",
+                            [ "_loadBalancerArn"                            , "_port"
+                            ])
+        , if (_loadBalancerArn P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_loadBalancerArn",
+                            [ "_arn"
+                            ])
+        , if (_port P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_port",
+                            [ "_arn"
+                            ])
+        ])
+
+instance P.HasArn (AlbListenerData s) (TF.Attr s P.Text) where
+    arn =
+        P.lens (_arn :: AlbListenerData s -> TF.Attr s P.Text)
+               (\s a -> s { _arn = a } :: AlbListenerData s)
+
+instance P.HasLoadBalancerArn (AlbListenerData s) (TF.Attr s P.Text) where
+    loadBalancerArn =
+        P.lens (_loadBalancerArn :: AlbListenerData s -> TF.Attr s P.Text)
+               (\s a -> s { _loadBalancerArn = a } :: AlbListenerData s)
+
+instance P.HasPort (AlbListenerData s) (TF.Attr s P.Int) where
+    port =
+        P.lens (_port :: AlbListenerData s -> TF.Attr s P.Int)
+               (\s a -> s { _port = a } :: AlbListenerData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AlbListenerData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -695,7 +805,16 @@ instance s ~ s' => P.HasComputedSslPolicy (TF.Ref s' (AlbListenerData s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/aws/d/alb_target_group.html terraform documentation>
 -- for more information.
 data AlbTargetGroupData s = AlbTargetGroupData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _arn  :: TF.Attr s P.Text
+    -- ^ @arn@ - (Optional)
+    --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_alb_target_group@ datasource value.
 albTargetGroupData
@@ -703,12 +822,35 @@ albTargetGroupData
 albTargetGroupData =
     TF.unsafeDataSource "aws_alb_target_group" TF.validator $
         AlbTargetGroupData'
+            { _arn = TF.Nil
+            , _name = TF.Nil
+            , _tags = TF.Nil
+            }
 
 instance TF.IsObject (AlbTargetGroupData s) where
-    toObject _ = []
+    toObject AlbTargetGroupData'{..} = P.catMaybes
+        [ TF.assign "arn" <$> TF.attribute _arn
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
 
 instance TF.IsValid (AlbTargetGroupData s) where
     validator = P.mempty
+
+instance P.HasArn (AlbTargetGroupData s) (TF.Attr s P.Text) where
+    arn =
+        P.lens (_arn :: AlbTargetGroupData s -> TF.Attr s P.Text)
+               (\s a -> s { _arn = a } :: AlbTargetGroupData s)
+
+instance P.HasName (AlbTargetGroupData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: AlbTargetGroupData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AlbTargetGroupData s)
+
+instance P.HasTags (AlbTargetGroupData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: AlbTargetGroupData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: AlbTargetGroupData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AlbTargetGroupData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -766,6 +908,9 @@ data AmiData s = AmiData'
     , _owners          :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @owners@ - (Optional, Forces New)
     --
+    , _tags            :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_ami@ datasource value.
@@ -779,6 +924,7 @@ amiData =
             , _mostRecent = TF.value P.False
             , _nameRegex = TF.Nil
             , _owners = TF.Nil
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (AmiData s) where
@@ -788,6 +934,7 @@ instance TF.IsObject (AmiData s) where
         , TF.assign "most_recent" <$> TF.attribute _mostRecent
         , TF.assign "name_regex" <$> TF.attribute _nameRegex
         , TF.assign "owners" <$> TF.attribute _owners
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (AmiData s) where
@@ -817,6 +964,11 @@ instance P.HasOwners (AmiData s) (TF.Attr s [TF.Attr s P.Text]) where
     owners =
         P.lens (_owners :: AmiData s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _owners = a } :: AmiData s)
+
+instance P.HasTags (AmiData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: AmiData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: AmiData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AmiData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1094,7 +1246,13 @@ instance s ~ s' => P.HasComputedNames (TF.Ref s' (AutoscalingGroupsData s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/aws/d/availability_zone.html terraform documentation>
 -- for more information.
 data AvailabilityZoneData s = AvailabilityZoneData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _name  :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _state :: TF.Attr s P.Text
+    -- ^ @state@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_availability_zone@ datasource value.
 availabilityZoneData
@@ -1102,12 +1260,28 @@ availabilityZoneData
 availabilityZoneData =
     TF.unsafeDataSource "aws_availability_zone" TF.validator $
         AvailabilityZoneData'
+            { _name = TF.Nil
+            , _state = TF.Nil
+            }
 
 instance TF.IsObject (AvailabilityZoneData s) where
-    toObject _ = []
+    toObject AvailabilityZoneData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "state" <$> TF.attribute _state
+        ]
 
 instance TF.IsValid (AvailabilityZoneData s) where
     validator = P.mempty
+
+instance P.HasName (AvailabilityZoneData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: AvailabilityZoneData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AvailabilityZoneData s)
+
+instance P.HasState (AvailabilityZoneData s) (TF.Attr s P.Text) where
+    state =
+        P.lens (_state :: AvailabilityZoneData s -> TF.Attr s P.Text)
+               (\s a -> s { _state = a } :: AvailabilityZoneData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AvailabilityZoneData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2080,8 +2254,14 @@ instance s ~ s' => P.HasComputedAmazonSideAsn (TF.Ref s' (DxGatewayData s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/aws/d/dynamodb_table.html terraform documentation>
 -- for more information.
 data DynamodbTableData s = DynamodbTableData'
-    { _name :: TF.Attr s P.Text
+    { _name                 :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
+    --
+    , _serverSideEncryption :: TF.Attr s (ServerSideEncryptionSetting s)
+    -- ^ @server_side_encryption@ - (Optional)
+    --
+    , _tags                 :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -2093,20 +2273,38 @@ dynamodbTableData _name =
     TF.unsafeDataSource "aws_dynamodb_table" TF.validator $
         DynamodbTableData'
             { _name = _name
+            , _serverSideEncryption = TF.Nil
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (DynamodbTableData s) where
     toObject DynamodbTableData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "server_side_encryption" <$> TF.attribute _serverSideEncryption
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (DynamodbTableData s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_serverSideEncryption"
+                  (_serverSideEncryption
+                      :: DynamodbTableData s -> TF.Attr s (ServerSideEncryptionSetting s))
+                  TF.validator
 
 instance P.HasName (DynamodbTableData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DynamodbTableData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DynamodbTableData s)
+
+instance P.HasServerSideEncryption (DynamodbTableData s) (TF.Attr s (ServerSideEncryptionSetting s)) where
+    serverSideEncryption =
+        P.lens (_serverSideEncryption :: DynamodbTableData s -> TF.Attr s (ServerSideEncryptionSetting s))
+               (\s a -> s { _serverSideEncryption = a } :: DynamodbTableData s)
+
+instance P.HasTags (DynamodbTableData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: DynamodbTableData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: DynamodbTableData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DynamodbTableData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2176,6 +2374,9 @@ data EbsSnapshotData s = EbsSnapshotData'
     , _snapshotIds         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @snapshot_ids@ - (Optional, Forces New)
     --
+    , _tags                :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_ebs_snapshot@ datasource value.
@@ -2189,6 +2390,7 @@ ebsSnapshotData =
             , _owners = TF.Nil
             , _restorableByUserIds = TF.Nil
             , _snapshotIds = TF.Nil
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (EbsSnapshotData s) where
@@ -2198,6 +2400,7 @@ instance TF.IsObject (EbsSnapshotData s) where
         , TF.assign "owners" <$> TF.attribute _owners
         , TF.assign "restorable_by_user_ids" <$> TF.attribute _restorableByUserIds
         , TF.assign "snapshot_ids" <$> TF.attribute _snapshotIds
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (EbsSnapshotData s) where
@@ -2227,6 +2430,11 @@ instance P.HasSnapshotIds (EbsSnapshotData s) (TF.Attr s [TF.Attr s P.Text]) whe
     snapshotIds =
         P.lens (_snapshotIds :: EbsSnapshotData s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _snapshotIds = a } :: EbsSnapshotData s)
+
+instance P.HasTags (EbsSnapshotData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: EbsSnapshotData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: EbsSnapshotData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EbsSnapshotData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2333,6 +2541,9 @@ data EbsVolumeData s = EbsVolumeData'
     , _mostRecent :: TF.Attr s P.Bool
     -- ^ @most_recent@ - (Optional, Forces New)
     --
+    , _tags       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_ebs_volume@ datasource value.
@@ -2343,12 +2554,14 @@ ebsVolumeData =
         EbsVolumeData'
             { _filter = TF.Nil
             , _mostRecent = TF.value P.False
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (EbsVolumeData s) where
     toObject EbsVolumeData'{..} = P.catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "most_recent" <$> TF.attribute _mostRecent
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (EbsVolumeData s) where
@@ -2363,6 +2576,11 @@ instance P.HasMostRecent (EbsVolumeData s) (TF.Attr s P.Bool) where
     mostRecent =
         P.lens (_mostRecent :: EbsVolumeData s -> TF.Attr s P.Bool)
                (\s a -> s { _mostRecent = a } :: EbsVolumeData s)
+
+instance P.HasTags (EbsVolumeData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: EbsVolumeData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: EbsVolumeData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EbsVolumeData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2682,7 +2900,16 @@ instance s ~ s' => P.HasComputedTaskRoleArn (TF.Ref s' (EcsTaskDefinitionData s)
 -- See the <https://www.terraform.io/docs/providers/aws/d/efs_file_system.html terraform documentation>
 -- for more information.
 data EfsFileSystemData s = EfsFileSystemData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _creationToken :: TF.Attr s P.Text
+    -- ^ @creation_token@ - (Optional, Forces New)
+    --
+    , _fileSystemId  :: TF.Attr s P.Text
+    -- ^ @file_system_id@ - (Optional, Forces New)
+    --
+    , _tags          :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_efs_file_system@ datasource value.
 efsFileSystemData
@@ -2690,12 +2917,35 @@ efsFileSystemData
 efsFileSystemData =
     TF.unsafeDataSource "aws_efs_file_system" TF.validator $
         EfsFileSystemData'
+            { _creationToken = TF.Nil
+            , _fileSystemId = TF.Nil
+            , _tags = TF.Nil
+            }
 
 instance TF.IsObject (EfsFileSystemData s) where
-    toObject _ = []
+    toObject EfsFileSystemData'{..} = P.catMaybes
+        [ TF.assign "creation_token" <$> TF.attribute _creationToken
+        , TF.assign "file_system_id" <$> TF.attribute _fileSystemId
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
 
 instance TF.IsValid (EfsFileSystemData s) where
     validator = P.mempty
+
+instance P.HasCreationToken (EfsFileSystemData s) (TF.Attr s P.Text) where
+    creationToken =
+        P.lens (_creationToken :: EfsFileSystemData s -> TF.Attr s P.Text)
+               (\s a -> s { _creationToken = a } :: EfsFileSystemData s)
+
+instance P.HasFileSystemId (EfsFileSystemData s) (TF.Attr s P.Text) where
+    fileSystemId =
+        P.lens (_fileSystemId :: EfsFileSystemData s -> TF.Attr s P.Text)
+               (\s a -> s { _fileSystemId = a } :: EfsFileSystemData s)
+
+instance P.HasTags (EfsFileSystemData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: EfsFileSystemData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: EfsFileSystemData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EfsFileSystemData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2780,7 +3030,13 @@ instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (EfsMountTargetData s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/aws/d/eip.html terraform documentation>
 -- for more information.
 data EipData s = EipData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _id       :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
+    , _publicIp :: TF.Attr s P.Text
+    -- ^ @public_ip@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_eip@ datasource value.
 eipData
@@ -2788,12 +3044,28 @@ eipData
 eipData =
     TF.unsafeDataSource "aws_eip" TF.validator $
         EipData'
+            { _id = TF.Nil
+            , _publicIp = TF.Nil
+            }
 
 instance TF.IsObject (EipData s) where
-    toObject _ = []
+    toObject EipData'{..} = P.catMaybes
+        [ TF.assign "id" <$> TF.attribute _id
+        , TF.assign "public_ip" <$> TF.attribute _publicIp
+        ]
 
 instance TF.IsValid (EipData s) where
     validator = P.mempty
+
+instance P.HasId (EipData s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: EipData s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: EipData s)
+
+instance P.HasPublicIp (EipData s) (TF.Attr s P.Text) where
+    publicIp =
+        P.lens (_publicIp :: EipData s -> TF.Attr s P.Text)
+               (\s a -> s { _publicIp = a } :: EipData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EipData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2950,6 +3222,9 @@ data ElasticacheClusterData s = ElasticacheClusterData'
     { _clusterId :: TF.Attr s P.Text
     -- ^ @cluster_id@ - (Required, Forces New)
     --
+    , _tags      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_elasticache_cluster@ datasource value.
@@ -2960,11 +3235,13 @@ elasticacheClusterData _clusterId =
     TF.unsafeDataSource "aws_elasticache_cluster" TF.validator $
         ElasticacheClusterData'
             { _clusterId = _clusterId
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (ElasticacheClusterData s) where
     toObject ElasticacheClusterData'{..} = P.catMaybes
         [ TF.assign "cluster_id" <$> TF.attribute _clusterId
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (ElasticacheClusterData s) where
@@ -2974,6 +3251,11 @@ instance P.HasClusterId (ElasticacheClusterData s) (TF.Attr s P.Text) where
     clusterId =
         P.lens (_clusterId :: ElasticacheClusterData s -> TF.Attr s P.Text)
                (\s a -> s { _clusterId = a } :: ElasticacheClusterData s)
+
+instance P.HasTags (ElasticacheClusterData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: ElasticacheClusterData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: ElasticacheClusterData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticacheClusterData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -3115,6 +3397,9 @@ data ElbData s = ElbData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_elb@ datasource value.
@@ -3125,11 +3410,13 @@ elbData _name =
     TF.unsafeDataSource "aws_elb" TF.validator $
         ElbData'
             { _name = _name
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (ElbData s) where
     toObject ElbData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (ElbData s) where
@@ -3139,6 +3426,11 @@ instance P.HasName (ElbData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ElbData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ElbData s)
+
+instance P.HasTags (ElbData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: ElbData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: ElbData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ElbData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -3639,9 +3931,18 @@ data IamServerCertificateData s = IamServerCertificateData'
     { _latest     :: TF.Attr s P.Bool
     -- ^ @latest@ - (Optional, Forces New)
     --
+    , _name       :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
     , _namePrefix :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
     --
+    -- Conflicts with:
+    --
+    -- * 'name'
     , _pathPrefix :: TF.Attr s P.Text
     -- ^ @path_prefix@ - (Optional, Forces New)
     --
@@ -3654,6 +3955,7 @@ iamServerCertificateData =
     TF.unsafeDataSource "aws_iam_server_certificate" TF.validator $
         IamServerCertificateData'
             { _latest = TF.value P.False
+            , _name = TF.Nil
             , _namePrefix = TF.Nil
             , _pathPrefix = TF.Nil
             }
@@ -3661,17 +3963,34 @@ iamServerCertificateData =
 instance TF.IsObject (IamServerCertificateData s) where
     toObject IamServerCertificateData'{..} = P.catMaybes
         [ TF.assign "latest" <$> TF.attribute _latest
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _namePrefix
         , TF.assign "path_prefix" <$> TF.attribute _pathPrefix
         ]
 
 instance TF.IsValid (IamServerCertificateData s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\IamServerCertificateData'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
+                            ])
+        ])
 
 instance P.HasLatest (IamServerCertificateData s) (TF.Attr s P.Bool) where
     latest =
         P.lens (_latest :: IamServerCertificateData s -> TF.Attr s P.Bool)
                (\s a -> s { _latest = a } :: IamServerCertificateData s)
+
+instance P.HasName (IamServerCertificateData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: IamServerCertificateData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: IamServerCertificateData s)
 
 instance P.HasNamePrefix (IamServerCertificateData s) (TF.Attr s P.Text) where
     namePrefix =
@@ -3795,6 +4114,12 @@ data InstanceData s = InstanceData'
     , _instanceId      :: TF.Attr s P.Text
     -- ^ @instance_id@ - (Optional, Forces New)
     --
+    , _instanceTags    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @instance_tags@ - (Optional)
+    --
+    , _tags            :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_instance@ datasource value.
@@ -3806,6 +4131,8 @@ instanceData =
             { _filter = TF.Nil
             , _getPasswordData = TF.value P.False
             , _instanceId = TF.Nil
+            , _instanceTags = TF.Nil
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (InstanceData s) where
@@ -3813,6 +4140,8 @@ instance TF.IsObject (InstanceData s) where
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "get_password_data" <$> TF.attribute _getPasswordData
         , TF.assign "instance_id" <$> TF.attribute _instanceId
+        , TF.assign "instance_tags" <$> TF.attribute _instanceTags
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (InstanceData s) where
@@ -3832,6 +4161,16 @@ instance P.HasInstanceId (InstanceData s) (TF.Attr s P.Text) where
     instanceId =
         P.lens (_instanceId :: InstanceData s -> TF.Attr s P.Text)
                (\s a -> s { _instanceId = a } :: InstanceData s)
+
+instance P.HasInstanceTags (InstanceData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    instanceTags =
+        P.lens (_instanceTags :: InstanceData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _instanceTags = a } :: InstanceData s)
+
+instance P.HasTags (InstanceData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: InstanceData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: InstanceData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (InstanceData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -3937,6 +4276,9 @@ data InstancesData s = InstancesData'
     , _instanceStateNames :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @instance_state_names@ - (Optional)
     --
+    , _instanceTags       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @instance_tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_instances@ datasource value.
@@ -3947,12 +4289,14 @@ instancesData =
         InstancesData'
             { _filter = TF.Nil
             , _instanceStateNames = TF.Nil
+            , _instanceTags = TF.Nil
             }
 
 instance TF.IsObject (InstancesData s) where
     toObject InstancesData'{..} = P.catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "instance_state_names" <$> TF.attribute _instanceStateNames
+        , TF.assign "instance_tags" <$> TF.attribute _instanceTags
         ]
 
 instance TF.IsValid (InstancesData s) where
@@ -3967,6 +4311,11 @@ instance P.HasInstanceStateNames (InstancesData s) (TF.Attr s [TF.Attr s P.Text]
     instanceStateNames =
         P.lens (_instanceStateNames :: InstancesData s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _instanceStateNames = a } :: InstancesData s)
+
+instance P.HasInstanceTags (InstancesData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    instanceTags =
+        P.lens (_instanceTags :: InstancesData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _instanceTags = a } :: InstancesData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (InstancesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -3988,8 +4337,14 @@ instance s ~ s' => P.HasComputedPublicIps (TF.Ref s' (InstancesData s)) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/aws/d/internet_gateway.html terraform documentation>
 -- for more information.
 data InternetGatewayData s = InternetGatewayData'
-    { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
+    { _filter            :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Optional)
+    --
+    , _internetGatewayId :: TF.Attr s P.Text
+    -- ^ @internet_gateway_id@ - (Optional)
+    --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -4000,11 +4355,15 @@ internetGatewayData =
     TF.unsafeDataSource "aws_internet_gateway" TF.validator $
         InternetGatewayData'
             { _filter = TF.Nil
+            , _internetGatewayId = TF.Nil
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (InternetGatewayData s) where
     toObject InternetGatewayData'{..} = P.catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "internet_gateway_id" <$> TF.attribute _internetGatewayId
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (InternetGatewayData s) where
@@ -4014,6 +4373,16 @@ instance P.HasFilter (InternetGatewayData s) (TF.Attr s [TF.Attr s (FilterSettin
     filter =
         P.lens (_filter :: InternetGatewayData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: InternetGatewayData s)
+
+instance P.HasInternetGatewayId (InternetGatewayData s) (TF.Attr s P.Text) where
+    internetGatewayId =
+        P.lens (_internetGatewayId :: InternetGatewayData s -> TF.Attr s P.Text)
+               (\s a -> s { _internetGatewayId = a } :: InternetGatewayData s)
+
+instance P.HasTags (InternetGatewayData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: InternetGatewayData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: InternetGatewayData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (InternetGatewayData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -4695,7 +5064,16 @@ instance s ~ s' => P.HasComputedVpcClassicLinkSecurityGroups (TF.Ref s' (LaunchC
 -- See the <https://www.terraform.io/docs/providers/aws/d/lb.html terraform documentation>
 -- for more information.
 data LbData s = LbData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _arn  :: TF.Attr s P.Text
+    -- ^ @arn@ - (Optional)
+    --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_lb@ datasource value.
 lbData
@@ -4703,12 +5081,35 @@ lbData
 lbData =
     TF.unsafeDataSource "aws_lb" TF.validator $
         LbData'
+            { _arn = TF.Nil
+            , _name = TF.Nil
+            , _tags = TF.Nil
+            }
 
 instance TF.IsObject (LbData s) where
-    toObject _ = []
+    toObject LbData'{..} = P.catMaybes
+        [ TF.assign "arn" <$> TF.attribute _arn
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
 
 instance TF.IsValid (LbData s) where
     validator = P.mempty
+
+instance P.HasArn (LbData s) (TF.Attr s P.Text) where
+    arn =
+        P.lens (_arn :: LbData s -> TF.Attr s P.Text)
+               (\s a -> s { _arn = a } :: LbData s)
+
+instance P.HasName (LbData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LbData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LbData s)
+
+instance P.HasTags (LbData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: LbData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: LbData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (LbData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -4763,7 +5164,26 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (LbData s)) (TF.Attr s P.Text)
 -- See the <https://www.terraform.io/docs/providers/aws/d/lb_listener.html terraform documentation>
 -- for more information.
 data LbListenerData s = LbListenerData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _arn             :: TF.Attr s P.Text
+    -- ^ @arn@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'loadBalancerArn'
+    -- * 'port'
+    , _loadBalancerArn :: TF.Attr s P.Text
+    -- ^ @load_balancer_arn@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'arn'
+    , _port            :: TF.Attr s P.Int
+    -- ^ @port@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'arn'
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_lb_listener@ datasource value.
 lbListenerData
@@ -4771,12 +5191,51 @@ lbListenerData
 lbListenerData =
     TF.unsafeDataSource "aws_lb_listener" TF.validator $
         LbListenerData'
+            { _arn = TF.Nil
+            , _loadBalancerArn = TF.Nil
+            , _port = TF.Nil
+            }
 
 instance TF.IsObject (LbListenerData s) where
-    toObject _ = []
+    toObject LbListenerData'{..} = P.catMaybes
+        [ TF.assign "arn" <$> TF.attribute _arn
+        , TF.assign "load_balancer_arn" <$> TF.attribute _loadBalancerArn
+        , TF.assign "port" <$> TF.attribute _port
+        ]
 
 instance TF.IsValid (LbListenerData s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\LbListenerData'{..} -> Map.fromList $ P.catMaybes
+        [ if (_arn P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_arn",
+                            [ "_loadBalancerArn"                            , "_port"
+                            ])
+        , if (_loadBalancerArn P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_loadBalancerArn",
+                            [ "_arn"
+                            ])
+        , if (_port P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_port",
+                            [ "_arn"
+                            ])
+        ])
+
+instance P.HasArn (LbListenerData s) (TF.Attr s P.Text) where
+    arn =
+        P.lens (_arn :: LbListenerData s -> TF.Attr s P.Text)
+               (\s a -> s { _arn = a } :: LbListenerData s)
+
+instance P.HasLoadBalancerArn (LbListenerData s) (TF.Attr s P.Text) where
+    loadBalancerArn =
+        P.lens (_loadBalancerArn :: LbListenerData s -> TF.Attr s P.Text)
+               (\s a -> s { _loadBalancerArn = a } :: LbListenerData s)
+
+instance P.HasPort (LbListenerData s) (TF.Attr s P.Int) where
+    port =
+        P.lens (_port :: LbListenerData s -> TF.Attr s P.Int)
+               (\s a -> s { _port = a } :: LbListenerData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (LbListenerData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -4807,7 +5266,16 @@ instance s ~ s' => P.HasComputedSslPolicy (TF.Ref s' (LbListenerData s)) (TF.Att
 -- See the <https://www.terraform.io/docs/providers/aws/d/lb_target_group.html terraform documentation>
 -- for more information.
 data LbTargetGroupData s = LbTargetGroupData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _arn  :: TF.Attr s P.Text
+    -- ^ @arn@ - (Optional)
+    --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_lb_target_group@ datasource value.
 lbTargetGroupData
@@ -4815,12 +5283,35 @@ lbTargetGroupData
 lbTargetGroupData =
     TF.unsafeDataSource "aws_lb_target_group" TF.validator $
         LbTargetGroupData'
+            { _arn = TF.Nil
+            , _name = TF.Nil
+            , _tags = TF.Nil
+            }
 
 instance TF.IsObject (LbTargetGroupData s) where
-    toObject _ = []
+    toObject LbTargetGroupData'{..} = P.catMaybes
+        [ TF.assign "arn" <$> TF.attribute _arn
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
 
 instance TF.IsValid (LbTargetGroupData s) where
     validator = P.mempty
+
+instance P.HasArn (LbTargetGroupData s) (TF.Attr s P.Text) where
+    arn =
+        P.lens (_arn :: LbTargetGroupData s -> TF.Attr s P.Text)
+               (\s a -> s { _arn = a } :: LbTargetGroupData s)
+
+instance P.HasName (LbTargetGroupData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LbTargetGroupData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LbTargetGroupData s)
+
+instance P.HasTags (LbTargetGroupData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: LbTargetGroupData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: LbTargetGroupData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (LbTargetGroupData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -4863,7 +5354,19 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (LbTargetGroupData s)) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/aws/d/mq_broker.html terraform documentation>
 -- for more information.
 data MqBrokerData s = MqBrokerData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _brokerId   :: TF.Attr s P.Text
+    -- ^ @broker_id@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'brokerName'
+    , _brokerName :: TF.Attr s P.Text
+    -- ^ @broker_name@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'brokerId'
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_mq_broker@ datasource value.
 mqBrokerData
@@ -4871,12 +5374,39 @@ mqBrokerData
 mqBrokerData =
     TF.unsafeDataSource "aws_mq_broker" TF.validator $
         MqBrokerData'
+            { _brokerId = TF.Nil
+            , _brokerName = TF.Nil
+            }
 
 instance TF.IsObject (MqBrokerData s) where
-    toObject _ = []
+    toObject MqBrokerData'{..} = P.catMaybes
+        [ TF.assign "broker_id" <$> TF.attribute _brokerId
+        , TF.assign "broker_name" <$> TF.attribute _brokerName
+        ]
 
 instance TF.IsValid (MqBrokerData s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\MqBrokerData'{..} -> Map.fromList $ P.catMaybes
+        [ if (_brokerId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_brokerId",
+                            [ "_brokerName"
+                            ])
+        , if (_brokerName P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_brokerName",
+                            [ "_brokerId"
+                            ])
+        ])
+
+instance P.HasBrokerId (MqBrokerData s) (TF.Attr s P.Text) where
+    brokerId =
+        P.lens (_brokerId :: MqBrokerData s -> TF.Attr s P.Text)
+               (\s a -> s { _brokerId = a } :: MqBrokerData s)
+
+instance P.HasBrokerName (MqBrokerData s) (TF.Attr s P.Text) where
+    brokerName =
+        P.lens (_brokerName :: MqBrokerData s -> TF.Attr s P.Text)
+               (\s a -> s { _brokerName = a } :: MqBrokerData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (MqBrokerData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -4931,8 +5461,23 @@ instance s ~ s' => P.HasComputedUser (TF.Ref s' (MqBrokerData s)) (TF.Attr s [TF
 -- See the <https://www.terraform.io/docs/providers/aws/d/nat_gateway.html terraform documentation>
 -- for more information.
 data NatGatewayData s = NatGatewayData'
-    { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
+    { _filter   :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Optional)
+    --
+    , _id       :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
+    , _state    :: TF.Attr s P.Text
+    -- ^ @state@ - (Optional)
+    --
+    , _subnetId :: TF.Attr s P.Text
+    -- ^ @subnet_id@ - (Optional)
+    --
+    , _tags     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _vpcId    :: TF.Attr s P.Text
+    -- ^ @vpc_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -4943,11 +5488,21 @@ natGatewayData =
     TF.unsafeDataSource "aws_nat_gateway" TF.validator $
         NatGatewayData'
             { _filter = TF.Nil
+            , _id = TF.Nil
+            , _state = TF.Nil
+            , _subnetId = TF.Nil
+            , _tags = TF.Nil
+            , _vpcId = TF.Nil
             }
 
 instance TF.IsObject (NatGatewayData s) where
     toObject NatGatewayData'{..} = P.catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "id" <$> TF.attribute _id
+        , TF.assign "state" <$> TF.attribute _state
+        , TF.assign "subnet_id" <$> TF.attribute _subnetId
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
 
 instance TF.IsValid (NatGatewayData s) where
@@ -4957,6 +5512,31 @@ instance P.HasFilter (NatGatewayData s) (TF.Attr s [TF.Attr s (FilterSetting s)]
     filter =
         P.lens (_filter :: NatGatewayData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: NatGatewayData s)
+
+instance P.HasId (NatGatewayData s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: NatGatewayData s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: NatGatewayData s)
+
+instance P.HasState (NatGatewayData s) (TF.Attr s P.Text) where
+    state =
+        P.lens (_state :: NatGatewayData s -> TF.Attr s P.Text)
+               (\s a -> s { _state = a } :: NatGatewayData s)
+
+instance P.HasSubnetId (NatGatewayData s) (TF.Attr s P.Text) where
+    subnetId =
+        P.lens (_subnetId :: NatGatewayData s -> TF.Attr s P.Text)
+               (\s a -> s { _subnetId = a } :: NatGatewayData s)
+
+instance P.HasTags (NatGatewayData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: NatGatewayData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: NatGatewayData s)
+
+instance P.HasVpcId (NatGatewayData s) (TF.Attr s P.Text) where
+    vpcId =
+        P.lens (_vpcId :: NatGatewayData s -> TF.Attr s P.Text)
+               (\s a -> s { _vpcId = a } :: NatGatewayData s)
 
 instance s ~ s' => P.HasComputedAllocationId (TF.Ref s' (NatGatewayData s)) (TF.Attr s P.Text) where
     computedAllocationId x = TF.compute (TF.refKey x) "allocation_id"
@@ -4993,6 +5573,9 @@ data NetworkAclsData s = NetworkAclsData'
     { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Optional)
     --
+    , _tags   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     , _vpcId  :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Optional)
     --
@@ -5005,12 +5588,14 @@ networkAclsData =
     TF.unsafeDataSource "aws_network_acls" TF.validator $
         NetworkAclsData'
             { _filter = TF.Nil
+            , _tags = TF.Nil
             , _vpcId = TF.Nil
             }
 
 instance TF.IsObject (NetworkAclsData s) where
     toObject NetworkAclsData'{..} = P.catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
 
@@ -5021,6 +5606,11 @@ instance P.HasFilter (NetworkAclsData s) (TF.Attr s [TF.Attr s (FilterSetting s)
     filter =
         P.lens (_filter :: NetworkAclsData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: NetworkAclsData s)
+
+instance P.HasTags (NetworkAclsData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: NetworkAclsData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: NetworkAclsData s)
 
 instance P.HasVpcId (NetworkAclsData s) (TF.Attr s P.Text) where
     vpcId =
@@ -5044,6 +5634,12 @@ data NetworkInterfaceData s = NetworkInterfaceData'
     { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Optional, Forces New)
     --
+    , _id     :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
+    , _tags   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_network_interface@ datasource value.
@@ -5053,11 +5649,15 @@ networkInterfaceData =
     TF.unsafeDataSource "aws_network_interface" TF.validator $
         NetworkInterfaceData'
             { _filter = TF.Nil
+            , _id = TF.Nil
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (NetworkInterfaceData s) where
     toObject NetworkInterfaceData'{..} = P.catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "id" <$> TF.attribute _id
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (NetworkInterfaceData s) where
@@ -5067,6 +5667,16 @@ instance P.HasFilter (NetworkInterfaceData s) (TF.Attr s [TF.Attr s (FilterSetti
     filter =
         P.lens (_filter :: NetworkInterfaceData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: NetworkInterfaceData s)
+
+instance P.HasId (NetworkInterfaceData s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: NetworkInterfaceData s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: NetworkInterfaceData s)
+
+instance P.HasTags (NetworkInterfaceData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: NetworkInterfaceData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: NetworkInterfaceData s)
 
 instance s ~ s' => P.HasComputedAssociation (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s [TF.Attr s (AssociationSetting s)]) where
     computedAssociation x = TF.compute (TF.refKey x) "association"
@@ -5127,6 +5737,9 @@ data NetworkInterfacesData s = NetworkInterfacesData'
     { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Optional)
     --
+    , _tags   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_network_interfaces@ datasource value.
@@ -5136,11 +5749,13 @@ networkInterfacesData =
     TF.unsafeDataSource "aws_network_interfaces" TF.validator $
         NetworkInterfacesData'
             { _filter = TF.Nil
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (NetworkInterfacesData s) where
     toObject NetworkInterfacesData'{..} = P.catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (NetworkInterfacesData s) where
@@ -5150,6 +5765,11 @@ instance P.HasFilter (NetworkInterfacesData s) (TF.Attr s [TF.Attr s (FilterSett
     filter =
         P.lens (_filter :: NetworkInterfacesData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: NetworkInterfacesData s)
+
+instance P.HasTags (NetworkInterfacesData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: NetworkInterfacesData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: NetworkInterfacesData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkInterfacesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -5191,7 +5811,10 @@ instance s ~ s' => P.HasComputedPartition (TF.Ref s' (PartitionData s)) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/aws/d/prefix_list.html terraform documentation>
 -- for more information.
 data PrefixListData s = PrefixListData'
-    { _prefixListId :: TF.Attr s P.Text
+    { _name         :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _prefixListId :: TF.Attr s P.Text
     -- ^ @prefix_list_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -5202,16 +5825,23 @@ prefixListData
 prefixListData =
     TF.unsafeDataSource "aws_prefix_list" TF.validator $
         PrefixListData'
-            { _prefixListId = TF.Nil
+            { _name = TF.Nil
+            , _prefixListId = TF.Nil
             }
 
 instance TF.IsObject (PrefixListData s) where
     toObject PrefixListData'{..} = P.catMaybes
-        [ TF.assign "prefix_list_id" <$> TF.attribute _prefixListId
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "prefix_list_id" <$> TF.attribute _prefixListId
         ]
 
 instance TF.IsValid (PrefixListData s) where
     validator = P.mempty
+
+instance P.HasName (PrefixListData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: PrefixListData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: PrefixListData s)
 
 instance P.HasPrefixListId (PrefixListData s) (TF.Attr s P.Text) where
     prefixListId =
@@ -5285,6 +5915,9 @@ data RdsClusterData s = RdsClusterData'
     { _clusterIdentifier :: TF.Attr s P.Text
     -- ^ @cluster_identifier@ - (Required)
     --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_rds_cluster@ datasource value.
@@ -5295,11 +5928,13 @@ rdsClusterData _clusterIdentifier =
     TF.unsafeDataSource "aws_rds_cluster" TF.validator $
         RdsClusterData'
             { _clusterIdentifier = _clusterIdentifier
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (RdsClusterData s) where
     toObject RdsClusterData'{..} = P.catMaybes
         [ TF.assign "cluster_identifier" <$> TF.attribute _clusterIdentifier
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (RdsClusterData s) where
@@ -5309,6 +5944,11 @@ instance P.HasClusterIdentifier (RdsClusterData s) (TF.Attr s P.Text) where
     clusterIdentifier =
         P.lens (_clusterIdentifier :: RdsClusterData s -> TF.Attr s P.Text)
                (\s a -> s { _clusterIdentifier = a } :: RdsClusterData s)
+
+instance P.HasTags (RdsClusterData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: RdsClusterData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: RdsClusterData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -5561,7 +6201,13 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (RedshiftServiceAccountData s)) (
 -- See the <https://www.terraform.io/docs/providers/aws/d/region.html terraform documentation>
 -- for more information.
 data RegionData s = RegionData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _endpoint :: TF.Attr s P.Text
+    -- ^ @endpoint@ - (Optional)
+    --
+    , _name     :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_region@ datasource value.
 regionData
@@ -5569,12 +6215,28 @@ regionData
 regionData =
     TF.unsafeDataSource "aws_region" TF.validator $
         RegionData'
+            { _endpoint = TF.Nil
+            , _name = TF.Nil
+            }
 
 instance TF.IsObject (RegionData s) where
-    toObject _ = []
+    toObject RegionData'{..} = P.catMaybes
+        [ TF.assign "endpoint" <$> TF.attribute _endpoint
+        , TF.assign "name" <$> TF.attribute _name
+        ]
 
 instance TF.IsValid (RegionData s) where
     validator = P.mempty
+
+instance P.HasEndpoint (RegionData s) (TF.Attr s P.Text) where
+    endpoint =
+        P.lens (_endpoint :: RegionData s -> TF.Attr s P.Text)
+               (\s a -> s { _endpoint = a } :: RegionData s)
+
+instance P.HasName (RegionData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: RegionData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: RegionData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RegionData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -5593,8 +6255,32 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (RegionData s)) (TF.Attr s P.Tex
 -- See the <https://www.terraform.io/docs/providers/aws/d/route.html terraform documentation>
 -- for more information.
 data RouteData s = RouteData'
-    { _routeTableId :: TF.Attr s P.Text
+    { _destinationCidrBlock     :: TF.Attr s P.Text
+    -- ^ @destination_cidr_block@ - (Optional)
+    --
+    , _destinationIpv6CidrBlock :: TF.Attr s P.Text
+    -- ^ @destination_ipv6_cidr_block@ - (Optional)
+    --
+    , _egressOnlyGatewayId      :: TF.Attr s P.Text
+    -- ^ @egress_only_gateway_id@ - (Optional)
+    --
+    , _gatewayId                :: TF.Attr s P.Text
+    -- ^ @gateway_id@ - (Optional)
+    --
+    , _instanceId               :: TF.Attr s P.Text
+    -- ^ @instance_id@ - (Optional)
+    --
+    , _natGatewayId             :: TF.Attr s P.Text
+    -- ^ @nat_gateway_id@ - (Optional)
+    --
+    , _networkInterfaceId       :: TF.Attr s P.Text
+    -- ^ @network_interface_id@ - (Optional)
+    --
+    , _routeTableId             :: TF.Attr s P.Text
     -- ^ @route_table_id@ - (Required)
+    --
+    , _vpcPeeringConnectionId   :: TF.Attr s P.Text
+    -- ^ @vpc_peering_connection_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -5605,21 +6291,77 @@ routeData
 routeData _routeTableId =
     TF.unsafeDataSource "aws_route" TF.validator $
         RouteData'
-            { _routeTableId = _routeTableId
+            { _destinationCidrBlock = TF.Nil
+            , _destinationIpv6CidrBlock = TF.Nil
+            , _egressOnlyGatewayId = TF.Nil
+            , _gatewayId = TF.Nil
+            , _instanceId = TF.Nil
+            , _natGatewayId = TF.Nil
+            , _networkInterfaceId = TF.Nil
+            , _routeTableId = _routeTableId
+            , _vpcPeeringConnectionId = TF.Nil
             }
 
 instance TF.IsObject (RouteData s) where
     toObject RouteData'{..} = P.catMaybes
-        [ TF.assign "route_table_id" <$> TF.attribute _routeTableId
+        [ TF.assign "destination_cidr_block" <$> TF.attribute _destinationCidrBlock
+        , TF.assign "destination_ipv6_cidr_block" <$> TF.attribute _destinationIpv6CidrBlock
+        , TF.assign "egress_only_gateway_id" <$> TF.attribute _egressOnlyGatewayId
+        , TF.assign "gateway_id" <$> TF.attribute _gatewayId
+        , TF.assign "instance_id" <$> TF.attribute _instanceId
+        , TF.assign "nat_gateway_id" <$> TF.attribute _natGatewayId
+        , TF.assign "network_interface_id" <$> TF.attribute _networkInterfaceId
+        , TF.assign "route_table_id" <$> TF.attribute _routeTableId
+        , TF.assign "vpc_peering_connection_id" <$> TF.attribute _vpcPeeringConnectionId
         ]
 
 instance TF.IsValid (RouteData s) where
     validator = P.mempty
 
+instance P.HasDestinationCidrBlock (RouteData s) (TF.Attr s P.Text) where
+    destinationCidrBlock =
+        P.lens (_destinationCidrBlock :: RouteData s -> TF.Attr s P.Text)
+               (\s a -> s { _destinationCidrBlock = a } :: RouteData s)
+
+instance P.HasDestinationIpv6CidrBlock (RouteData s) (TF.Attr s P.Text) where
+    destinationIpv6CidrBlock =
+        P.lens (_destinationIpv6CidrBlock :: RouteData s -> TF.Attr s P.Text)
+               (\s a -> s { _destinationIpv6CidrBlock = a } :: RouteData s)
+
+instance P.HasEgressOnlyGatewayId (RouteData s) (TF.Attr s P.Text) where
+    egressOnlyGatewayId =
+        P.lens (_egressOnlyGatewayId :: RouteData s -> TF.Attr s P.Text)
+               (\s a -> s { _egressOnlyGatewayId = a } :: RouteData s)
+
+instance P.HasGatewayId (RouteData s) (TF.Attr s P.Text) where
+    gatewayId =
+        P.lens (_gatewayId :: RouteData s -> TF.Attr s P.Text)
+               (\s a -> s { _gatewayId = a } :: RouteData s)
+
+instance P.HasInstanceId (RouteData s) (TF.Attr s P.Text) where
+    instanceId =
+        P.lens (_instanceId :: RouteData s -> TF.Attr s P.Text)
+               (\s a -> s { _instanceId = a } :: RouteData s)
+
+instance P.HasNatGatewayId (RouteData s) (TF.Attr s P.Text) where
+    natGatewayId =
+        P.lens (_natGatewayId :: RouteData s -> TF.Attr s P.Text)
+               (\s a -> s { _natGatewayId = a } :: RouteData s)
+
+instance P.HasNetworkInterfaceId (RouteData s) (TF.Attr s P.Text) where
+    networkInterfaceId =
+        P.lens (_networkInterfaceId :: RouteData s -> TF.Attr s P.Text)
+               (\s a -> s { _networkInterfaceId = a } :: RouteData s)
+
 instance P.HasRouteTableId (RouteData s) (TF.Attr s P.Text) where
     routeTableId =
         P.lens (_routeTableId :: RouteData s -> TF.Attr s P.Text)
                (\s a -> s { _routeTableId = a } :: RouteData s)
+
+instance P.HasVpcPeeringConnectionId (RouteData s) (TF.Attr s P.Text) where
+    vpcPeeringConnectionId =
+        P.lens (_vpcPeeringConnectionId :: RouteData s -> TF.Attr s P.Text)
+               (\s a -> s { _vpcPeeringConnectionId = a } :: RouteData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -5653,8 +6395,29 @@ instance s ~ s' => P.HasComputedVpcPeeringConnectionId (TF.Ref s' (RouteData s))
 -- See the <https://www.terraform.io/docs/providers/aws/d/route53_zone.html terraform documentation>
 -- for more information.
 data Route53ZoneData s = Route53ZoneData'
-    { _privateZone :: TF.Attr s P.Bool
+    { _callerReference        :: TF.Attr s P.Text
+    -- ^ @caller_reference@ - (Optional)
+    --
+    , _comment                :: TF.Attr s P.Text
+    -- ^ @comment@ - (Optional)
+    --
+    , _name                   :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _privateZone            :: TF.Attr s P.Bool
     -- ^ @private_zone@ - (Optional)
+    --
+    , _resourceRecordSetCount :: TF.Attr s P.Int
+    -- ^ @resource_record_set_count@ - (Optional)
+    --
+    , _tags                   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _vpcId                  :: TF.Attr s P.Text
+    -- ^ @vpc_id@ - (Optional)
+    --
+    , _zoneId                 :: TF.Attr s P.Text
+    -- ^ @zone_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -5664,21 +6427,70 @@ route53ZoneData
 route53ZoneData =
     TF.unsafeDataSource "aws_route53_zone" TF.validator $
         Route53ZoneData'
-            { _privateZone = TF.value P.False
+            { _callerReference = TF.Nil
+            , _comment = TF.Nil
+            , _name = TF.Nil
+            , _privateZone = TF.value P.False
+            , _resourceRecordSetCount = TF.Nil
+            , _tags = TF.Nil
+            , _vpcId = TF.Nil
+            , _zoneId = TF.Nil
             }
 
 instance TF.IsObject (Route53ZoneData s) where
     toObject Route53ZoneData'{..} = P.catMaybes
-        [ TF.assign "private_zone" <$> TF.attribute _privateZone
+        [ TF.assign "caller_reference" <$> TF.attribute _callerReference
+        , TF.assign "comment" <$> TF.attribute _comment
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "private_zone" <$> TF.attribute _privateZone
+        , TF.assign "resource_record_set_count" <$> TF.attribute _resourceRecordSetCount
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpcId
+        , TF.assign "zone_id" <$> TF.attribute _zoneId
         ]
 
 instance TF.IsValid (Route53ZoneData s) where
     validator = P.mempty
 
+instance P.HasCallerReference (Route53ZoneData s) (TF.Attr s P.Text) where
+    callerReference =
+        P.lens (_callerReference :: Route53ZoneData s -> TF.Attr s P.Text)
+               (\s a -> s { _callerReference = a } :: Route53ZoneData s)
+
+instance P.HasComment (Route53ZoneData s) (TF.Attr s P.Text) where
+    comment =
+        P.lens (_comment :: Route53ZoneData s -> TF.Attr s P.Text)
+               (\s a -> s { _comment = a } :: Route53ZoneData s)
+
+instance P.HasName (Route53ZoneData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: Route53ZoneData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: Route53ZoneData s)
+
 instance P.HasPrivateZone (Route53ZoneData s) (TF.Attr s P.Bool) where
     privateZone =
         P.lens (_privateZone :: Route53ZoneData s -> TF.Attr s P.Bool)
                (\s a -> s { _privateZone = a } :: Route53ZoneData s)
+
+instance P.HasResourceRecordSetCount (Route53ZoneData s) (TF.Attr s P.Int) where
+    resourceRecordSetCount =
+        P.lens (_resourceRecordSetCount :: Route53ZoneData s -> TF.Attr s P.Int)
+               (\s a -> s { _resourceRecordSetCount = a } :: Route53ZoneData s)
+
+instance P.HasTags (Route53ZoneData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: Route53ZoneData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: Route53ZoneData s)
+
+instance P.HasVpcId (Route53ZoneData s) (TF.Attr s P.Text) where
+    vpcId =
+        P.lens (_vpcId :: Route53ZoneData s -> TF.Attr s P.Text)
+               (\s a -> s { _vpcId = a } :: Route53ZoneData s)
+
+instance P.HasZoneId (Route53ZoneData s) (TF.Attr s P.Text) where
+    zoneId =
+        P.lens (_zoneId :: Route53ZoneData s -> TF.Attr s P.Text)
+               (\s a -> s { _zoneId = a } :: Route53ZoneData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Route53ZoneData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -5712,8 +6524,20 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (Route53ZoneData s)) (TF.Attr 
 -- See the <https://www.terraform.io/docs/providers/aws/d/route_table.html terraform documentation>
 -- for more information.
 data RouteTableData s = RouteTableData'
-    { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
+    { _filter       :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Optional)
+    --
+    , _routeTableId :: TF.Attr s P.Text
+    -- ^ @route_table_id@ - (Optional)
+    --
+    , _subnetId     :: TF.Attr s P.Text
+    -- ^ @subnet_id@ - (Optional)
+    --
+    , _tags         :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _vpcId        :: TF.Attr s P.Text
+    -- ^ @vpc_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -5724,11 +6548,19 @@ routeTableData =
     TF.unsafeDataSource "aws_route_table" TF.validator $
         RouteTableData'
             { _filter = TF.Nil
+            , _routeTableId = TF.Nil
+            , _subnetId = TF.Nil
+            , _tags = TF.Nil
+            , _vpcId = TF.Nil
             }
 
 instance TF.IsObject (RouteTableData s) where
     toObject RouteTableData'{..} = P.catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "route_table_id" <$> TF.attribute _routeTableId
+        , TF.assign "subnet_id" <$> TF.attribute _subnetId
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
 
 instance TF.IsValid (RouteTableData s) where
@@ -5738,6 +6570,26 @@ instance P.HasFilter (RouteTableData s) (TF.Attr s [TF.Attr s (FilterSetting s)]
     filter =
         P.lens (_filter :: RouteTableData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: RouteTableData s)
+
+instance P.HasRouteTableId (RouteTableData s) (TF.Attr s P.Text) where
+    routeTableId =
+        P.lens (_routeTableId :: RouteTableData s -> TF.Attr s P.Text)
+               (\s a -> s { _routeTableId = a } :: RouteTableData s)
+
+instance P.HasSubnetId (RouteTableData s) (TF.Attr s P.Text) where
+    subnetId =
+        P.lens (_subnetId :: RouteTableData s -> TF.Attr s P.Text)
+               (\s a -> s { _subnetId = a } :: RouteTableData s)
+
+instance P.HasTags (RouteTableData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: RouteTableData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: RouteTableData s)
+
+instance P.HasVpcId (RouteTableData s) (TF.Attr s P.Text) where
+    vpcId =
+        P.lens (_vpcId :: RouteTableData s -> TF.Attr s P.Text)
+               (\s a -> s { _vpcId = a } :: RouteTableData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RouteTableData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -5768,6 +6620,9 @@ data RouteTablesData s = RouteTablesData'
     { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Optional)
     --
+    , _tags   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     , _vpcId  :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Optional)
     --
@@ -5780,12 +6635,14 @@ routeTablesData =
     TF.unsafeDataSource "aws_route_tables" TF.validator $
         RouteTablesData'
             { _filter = TF.Nil
+            , _tags = TF.Nil
             , _vpcId = TF.Nil
             }
 
 instance TF.IsObject (RouteTablesData s) where
     toObject RouteTablesData'{..} = P.catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
 
@@ -5796,6 +6653,11 @@ instance P.HasFilter (RouteTablesData s) (TF.Attr s [TF.Attr s (FilterSetting s)
     filter =
         P.lens (_filter :: RouteTablesData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: RouteTablesData s)
+
+instance P.HasTags (RouteTablesData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: RouteTablesData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: RouteTablesData s)
 
 instance P.HasVpcId (RouteTablesData s) (TF.Attr s P.Text) where
     vpcId =
@@ -5870,14 +6732,20 @@ instance s ~ s' => P.HasComputedWebsiteEndpoint (TF.Ref s' (S3BucketData s)) (TF
 -- See the <https://www.terraform.io/docs/providers/aws/d/s3_bucket_object.html terraform documentation>
 -- for more information.
 data S3BucketObjectData s = S3BucketObjectData'
-    { _bucket :: TF.Attr s P.Text
+    { _bucket    :: TF.Attr s P.Text
     -- ^ @bucket@ - (Required)
     --
-    , _key    :: TF.Attr s P.Text
+    , _key       :: TF.Attr s P.Text
     -- ^ @key@ - (Required)
     --
-    , _range  :: TF.Attr s P.Text
+    , _range     :: TF.Attr s P.Text
     -- ^ @range@ - (Optional)
+    --
+    , _tags      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _versionId :: TF.Attr s P.Text
+    -- ^ @version_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -5892,6 +6760,8 @@ s3BucketObjectData _bucket _key =
             { _bucket = _bucket
             , _key = _key
             , _range = TF.Nil
+            , _tags = TF.Nil
+            , _versionId = TF.Nil
             }
 
 instance TF.IsObject (S3BucketObjectData s) where
@@ -5899,6 +6769,8 @@ instance TF.IsObject (S3BucketObjectData s) where
         [ TF.assign "bucket" <$> TF.attribute _bucket
         , TF.assign "key" <$> TF.attribute _key
         , TF.assign "range" <$> TF.attribute _range
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "version_id" <$> TF.attribute _versionId
         ]
 
 instance TF.IsValid (S3BucketObjectData s) where
@@ -5918,6 +6790,16 @@ instance P.HasRange (S3BucketObjectData s) (TF.Attr s P.Text) where
     range =
         P.lens (_range :: S3BucketObjectData s -> TF.Attr s P.Text)
                (\s a -> s { _range = a } :: S3BucketObjectData s)
+
+instance P.HasTags (S3BucketObjectData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: S3BucketObjectData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: S3BucketObjectData s)
+
+instance P.HasVersionId (S3BucketObjectData s) (TF.Attr s P.Text) where
+    versionId =
+        P.lens (_versionId :: S3BucketObjectData s -> TF.Attr s P.Text)
+               (\s a -> s { _versionId = a } :: S3BucketObjectData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -5981,7 +6863,13 @@ instance s ~ s' => P.HasComputedWebsiteRedirectLocation (TF.Ref s' (S3BucketObje
 -- See the <https://www.terraform.io/docs/providers/aws/d/secretsmanager_secret.html terraform documentation>
 -- for more information.
 data SecretsmanagerSecretData s = SecretsmanagerSecretData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _arn  :: TF.Attr s P.Text
+    -- ^ @arn@ - (Optional)
+    --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_secretsmanager_secret@ datasource value.
 secretsmanagerSecretData
@@ -5989,12 +6877,28 @@ secretsmanagerSecretData
 secretsmanagerSecretData =
     TF.unsafeDataSource "aws_secretsmanager_secret" TF.validator $
         SecretsmanagerSecretData'
+            { _arn = TF.Nil
+            , _name = TF.Nil
+            }
 
 instance TF.IsObject (SecretsmanagerSecretData s) where
-    toObject _ = []
+    toObject SecretsmanagerSecretData'{..} = P.catMaybes
+        [ TF.assign "arn" <$> TF.attribute _arn
+        , TF.assign "name" <$> TF.attribute _name
+        ]
 
 instance TF.IsValid (SecretsmanagerSecretData s) where
     validator = P.mempty
+
+instance P.HasArn (SecretsmanagerSecretData s) (TF.Attr s P.Text) where
+    arn =
+        P.lens (_arn :: SecretsmanagerSecretData s -> TF.Attr s P.Text)
+               (\s a -> s { _arn = a } :: SecretsmanagerSecretData s)
+
+instance P.HasName (SecretsmanagerSecretData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: SecretsmanagerSecretData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SecretsmanagerSecretData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -6031,6 +6935,9 @@ data SecretsmanagerSecretVersionData s = SecretsmanagerSecretVersionData'
     { _secretId     :: TF.Attr s P.Text
     -- ^ @secret_id@ - (Required, Forces New)
     --
+    , _versionId    :: TF.Attr s P.Text
+    -- ^ @version_id@ - (Optional)
+    --
     , _versionStage :: TF.Attr s P.Text
     -- ^ @version_stage@ - (Optional)
     --
@@ -6044,12 +6951,14 @@ secretsmanagerSecretVersionData _secretId =
     TF.unsafeDataSource "aws_secretsmanager_secret_version" TF.validator $
         SecretsmanagerSecretVersionData'
             { _secretId = _secretId
+            , _versionId = TF.Nil
             , _versionStage = TF.value "AWSCURRENT"
             }
 
 instance TF.IsObject (SecretsmanagerSecretVersionData s) where
     toObject SecretsmanagerSecretVersionData'{..} = P.catMaybes
         [ TF.assign "secret_id" <$> TF.attribute _secretId
+        , TF.assign "version_id" <$> TF.attribute _versionId
         , TF.assign "version_stage" <$> TF.attribute _versionStage
         ]
 
@@ -6060,6 +6969,11 @@ instance P.HasSecretId (SecretsmanagerSecretVersionData s) (TF.Attr s P.Text) wh
     secretId =
         P.lens (_secretId :: SecretsmanagerSecretVersionData s -> TF.Attr s P.Text)
                (\s a -> s { _secretId = a } :: SecretsmanagerSecretVersionData s)
+
+instance P.HasVersionId (SecretsmanagerSecretVersionData s) (TF.Attr s P.Text) where
+    versionId =
+        P.lens (_versionId :: SecretsmanagerSecretVersionData s -> TF.Attr s P.Text)
+               (\s a -> s { _versionId = a } :: SecretsmanagerSecretVersionData s)
 
 instance P.HasVersionStage (SecretsmanagerSecretVersionData s) (TF.Attr s P.Text) where
     versionStage =
@@ -6086,6 +7000,18 @@ data SecurityGroupData s = SecurityGroupData'
     { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Optional)
     --
+    , _id     :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
+    , _name   :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _tags   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _vpcId  :: TF.Attr s P.Text
+    -- ^ @vpc_id@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_security_group@ datasource value.
@@ -6095,11 +7021,19 @@ securityGroupData =
     TF.unsafeDataSource "aws_security_group" TF.validator $
         SecurityGroupData'
             { _filter = TF.Nil
+            , _id = TF.Nil
+            , _name = TF.Nil
+            , _tags = TF.Nil
+            , _vpcId = TF.Nil
             }
 
 instance TF.IsObject (SecurityGroupData s) where
     toObject SecurityGroupData'{..} = P.catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "id" <$> TF.attribute _id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
 
 instance TF.IsValid (SecurityGroupData s) where
@@ -6109,6 +7043,26 @@ instance P.HasFilter (SecurityGroupData s) (TF.Attr s [TF.Attr s (FilterSetting 
     filter =
         P.lens (_filter :: SecurityGroupData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: SecurityGroupData s)
+
+instance P.HasId (SecurityGroupData s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: SecurityGroupData s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: SecurityGroupData s)
+
+instance P.HasName (SecurityGroupData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: SecurityGroupData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SecurityGroupData s)
+
+instance P.HasTags (SecurityGroupData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: SecurityGroupData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: SecurityGroupData s)
+
+instance P.HasVpcId (SecurityGroupData s) (TF.Attr s P.Text) where
+    vpcId =
+        P.lens (_vpcId :: SecurityGroupData s -> TF.Attr s P.Text)
+               (\s a -> s { _vpcId = a } :: SecurityGroupData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SecurityGroupData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -6136,6 +7090,9 @@ data SecurityGroupsData s = SecurityGroupsData'
     { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Optional, Forces New)
     --
+    , _tags   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_security_groups@ datasource value.
@@ -6145,11 +7102,13 @@ securityGroupsData =
     TF.unsafeDataSource "aws_security_groups" TF.validator $
         SecurityGroupsData'
             { _filter = TF.Nil
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (SecurityGroupsData s) where
     toObject SecurityGroupsData'{..} = P.catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (SecurityGroupsData s) where
@@ -6159,6 +7118,11 @@ instance P.HasFilter (SecurityGroupsData s) (TF.Attr s [TF.Attr s (FilterSetting
     filter =
         P.lens (_filter :: SecurityGroupsData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: SecurityGroupsData s)
+
+instance P.HasTags (SecurityGroupsData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: SecurityGroupsData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: SecurityGroupsData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"

@@ -678,7 +678,10 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (AcmpcaCertificateAuthorityRes
 -- See the <https://www.terraform.io/docs/providers/aws/r/alb.html terraform documentation>
 -- for more information.
 data AlbResource s = AlbResource'
-    { _enableCrossZoneLoadBalancing :: TF.Attr s P.Bool
+    { _accessLogs :: TF.Attr s (AccessLogsSetting s)
+    -- ^ @access_logs@ - (Optional)
+    --
+    , _enableCrossZoneLoadBalancing :: TF.Attr s P.Bool
     -- ^ @enable_cross_zone_load_balancing@ - (Optional)
     --
     , _enableDeletionProtection :: TF.Attr s P.Bool
@@ -690,11 +693,35 @@ data AlbResource s = AlbResource'
     , _idleTimeout :: TF.Attr s P.Int
     -- ^ @idle_timeout@ - (Optional)
     --
+    , _internal :: TF.Attr s P.Bool
+    -- ^ @internal@ - (Optional, Forces New)
+    --
+    , _ipAddressType :: TF.Attr s P.Text
+    -- ^ @ip_address_type@ - (Optional)
+    --
     , _loadBalancerType :: TF.Attr s P.Text
     -- ^ @load_balancer_type@ - (Optional, Forces New)
     --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
     , _namePrefix :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'name'
+    , _securityGroups :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @security_groups@ - (Optional)
+    --
+    , _subnetMapping :: TF.Attr s [TF.Attr s (SubnetMappingSetting s)]
+    -- ^ @subnet_mapping@ - (Optional, Forces New)
+    --
+    , _subnets :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @subnets@ - (Optional)
     --
     , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
@@ -707,28 +734,62 @@ albResource
 albResource =
     TF.unsafeResource "aws_alb" TF.validator $
         AlbResource'
-            { _enableCrossZoneLoadBalancing = TF.value P.False
+            { _accessLogs = TF.Nil
+            , _enableCrossZoneLoadBalancing = TF.value P.False
             , _enableDeletionProtection = TF.value P.False
             , _enableHttp2 = TF.value P.True
             , _idleTimeout = TF.value 60
+            , _internal = TF.Nil
+            , _ipAddressType = TF.Nil
             , _loadBalancerType = TF.value "application"
+            , _name = TF.Nil
             , _namePrefix = TF.Nil
+            , _securityGroups = TF.Nil
+            , _subnetMapping = TF.Nil
+            , _subnets = TF.Nil
             , _tags = TF.Nil
             }
 
 instance TF.IsObject (AlbResource s) where
     toObject AlbResource'{..} = P.catMaybes
-        [ TF.assign "enable_cross_zone_load_balancing" <$> TF.attribute _enableCrossZoneLoadBalancing
+        [ TF.assign "access_logs" <$> TF.attribute _accessLogs
+        , TF.assign "enable_cross_zone_load_balancing" <$> TF.attribute _enableCrossZoneLoadBalancing
         , TF.assign "enable_deletion_protection" <$> TF.attribute _enableDeletionProtection
         , TF.assign "enable_http2" <$> TF.attribute _enableHttp2
         , TF.assign "idle_timeout" <$> TF.attribute _idleTimeout
+        , TF.assign "internal" <$> TF.attribute _internal
+        , TF.assign "ip_address_type" <$> TF.attribute _ipAddressType
         , TF.assign "load_balancer_type" <$> TF.attribute _loadBalancerType
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _namePrefix
+        , TF.assign "security_groups" <$> TF.attribute _securityGroups
+        , TF.assign "subnet_mapping" <$> TF.attribute _subnetMapping
+        , TF.assign "subnets" <$> TF.attribute _subnets
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (AlbResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\AlbResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
+                            ])
+        ])
+           P.<> TF.settingsValidator "_accessLogs"
+                  (_accessLogs
+                      :: AlbResource s -> TF.Attr s (AccessLogsSetting s))
+                  TF.validator
+
+instance P.HasAccessLogs (AlbResource s) (TF.Attr s (AccessLogsSetting s)) where
+    accessLogs =
+        P.lens (_accessLogs :: AlbResource s -> TF.Attr s (AccessLogsSetting s))
+               (\s a -> s { _accessLogs = a } :: AlbResource s)
 
 instance P.HasEnableCrossZoneLoadBalancing (AlbResource s) (TF.Attr s P.Bool) where
     enableCrossZoneLoadBalancing =
@@ -750,15 +811,45 @@ instance P.HasIdleTimeout (AlbResource s) (TF.Attr s P.Int) where
         P.lens (_idleTimeout :: AlbResource s -> TF.Attr s P.Int)
                (\s a -> s { _idleTimeout = a } :: AlbResource s)
 
+instance P.HasInternal (AlbResource s) (TF.Attr s P.Bool) where
+    internal =
+        P.lens (_internal :: AlbResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _internal = a } :: AlbResource s)
+
+instance P.HasIpAddressType (AlbResource s) (TF.Attr s P.Text) where
+    ipAddressType =
+        P.lens (_ipAddressType :: AlbResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ipAddressType = a } :: AlbResource s)
+
 instance P.HasLoadBalancerType (AlbResource s) (TF.Attr s P.Text) where
     loadBalancerType =
         P.lens (_loadBalancerType :: AlbResource s -> TF.Attr s P.Text)
                (\s a -> s { _loadBalancerType = a } :: AlbResource s)
 
+instance P.HasName (AlbResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: AlbResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AlbResource s)
+
 instance P.HasNamePrefix (AlbResource s) (TF.Attr s P.Text) where
     namePrefix =
         P.lens (_namePrefix :: AlbResource s -> TF.Attr s P.Text)
                (\s a -> s { _namePrefix = a } :: AlbResource s)
+
+instance P.HasSecurityGroups (AlbResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    securityGroups =
+        P.lens (_securityGroups :: AlbResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _securityGroups = a } :: AlbResource s)
+
+instance P.HasSubnetMapping (AlbResource s) (TF.Attr s [TF.Attr s (SubnetMappingSetting s)]) where
+    subnetMapping =
+        P.lens (_subnetMapping :: AlbResource s -> TF.Attr s [TF.Attr s (SubnetMappingSetting s)])
+               (\s a -> s { _subnetMapping = a } :: AlbResource s)
+
+instance P.HasSubnets (AlbResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    subnets =
+        P.lens (_subnets :: AlbResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _subnets = a } :: AlbResource s)
 
 instance P.HasTags (AlbResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     tags =
@@ -824,6 +915,9 @@ data AlbListenerResource s = AlbListenerResource'
     , _protocol        :: TF.Attr s P.Text
     -- ^ @protocol@ - (Optional)
     --
+    , _sslPolicy       :: TF.Attr s P.Text
+    -- ^ @ssl_policy@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_alb_listener@ resource value.
@@ -840,6 +934,7 @@ albListenerResource _defaultAction _loadBalancerArn _port =
             , _loadBalancerArn = _loadBalancerArn
             , _port = _port
             , _protocol = TF.value "HTTP"
+            , _sslPolicy = TF.Nil
             }
 
 instance TF.IsObject (AlbListenerResource s) where
@@ -849,6 +944,7 @@ instance TF.IsObject (AlbListenerResource s) where
         , TF.assign "load_balancer_arn" <$> TF.attribute _loadBalancerArn
         , TF.assign "port" <$> TF.attribute _port
         , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "ssl_policy" <$> TF.attribute _sslPolicy
         ]
 
 instance TF.IsValid (AlbListenerResource s) where
@@ -878,6 +974,11 @@ instance P.HasProtocol (AlbListenerResource s) (TF.Attr s P.Text) where
     protocol =
         P.lens (_protocol :: AlbListenerResource s -> TF.Attr s P.Text)
                (\s a -> s { _protocol = a } :: AlbListenerResource s)
+
+instance P.HasSslPolicy (AlbListenerResource s) (TF.Attr s P.Text) where
+    sslPolicy =
+        P.lens (_sslPolicy :: AlbListenerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sslPolicy = a } :: AlbListenerResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AlbListenerResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -949,6 +1050,9 @@ data AlbListenerRuleResource s = AlbListenerRuleResource'
     , _listenerArn :: TF.Attr s P.Text
     -- ^ @listener_arn@ - (Required, Forces New)
     --
+    , _priority    :: TF.Attr s P.Int
+    -- ^ @priority@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_alb_listener_rule@ resource value.
@@ -963,6 +1067,7 @@ albListenerRuleResource _action _listenerArn _condition =
             { _action = _action
             , _condition = _condition
             , _listenerArn = _listenerArn
+            , _priority = TF.Nil
             }
 
 instance TF.IsObject (AlbListenerRuleResource s) where
@@ -970,6 +1075,7 @@ instance TF.IsObject (AlbListenerRuleResource s) where
         [ TF.assign "action" <$> TF.attribute _action
         , TF.assign "condition" <$> TF.attribute _condition
         , TF.assign "listener_arn" <$> TF.attribute _listenerArn
+        , TF.assign "priority" <$> TF.attribute _priority
         ]
 
 instance TF.IsValid (AlbListenerRuleResource s) where
@@ -990,6 +1096,11 @@ instance P.HasListenerArn (AlbListenerRuleResource s) (TF.Attr s P.Text) where
         P.lens (_listenerArn :: AlbListenerRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _listenerArn = a } :: AlbListenerRuleResource s)
 
+instance P.HasPriority (AlbListenerRuleResource s) (TF.Attr s P.Int) where
+    priority =
+        P.lens (_priority :: AlbListenerRuleResource s -> TF.Attr s P.Int)
+               (\s a -> s { _priority = a } :: AlbListenerRuleResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AlbListenerRuleResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -1007,9 +1118,21 @@ data AlbTargetGroupResource s = AlbTargetGroupResource'
     { _deregistrationDelay :: TF.Attr s P.Int
     -- ^ @deregistration_delay@ - (Optional)
     --
+    , _healthCheck         :: TF.Attr s (HealthCheckSetting s)
+    -- ^ @health_check@ - (Optional)
+    --
+    , _name                :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
     , _namePrefix          :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
     --
+    -- Conflicts with:
+    --
+    -- * 'name'
     , _port                :: TF.Attr s P.Int
     -- ^ @port@ - (Required, Forces New)
     --
@@ -1021,6 +1144,9 @@ data AlbTargetGroupResource s = AlbTargetGroupResource'
     --
     , _slowStart           :: TF.Attr s P.Int
     -- ^ @slow_start@ - (Optional)
+    --
+    , _stickiness          :: TF.Attr s (StickinessSetting s)
+    -- ^ @stickiness@ - (Optional)
     --
     , _tags                :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
@@ -1043,11 +1169,14 @@ albTargetGroupResource _vpcId _port _protocol =
     TF.unsafeResource "aws_alb_target_group" TF.validator $
         AlbTargetGroupResource'
             { _deregistrationDelay = TF.value 300
+            , _healthCheck = TF.Nil
+            , _name = TF.Nil
             , _namePrefix = TF.Nil
             , _port = _port
             , _protocol = _protocol
             , _proxyProtocolV2 = TF.value P.False
             , _slowStart = TF.value 0
+            , _stickiness = TF.Nil
             , _tags = TF.Nil
             , _targetType = TF.value "instance"
             , _vpcId = _vpcId
@@ -1056,23 +1185,55 @@ albTargetGroupResource _vpcId _port _protocol =
 instance TF.IsObject (AlbTargetGroupResource s) where
     toObject AlbTargetGroupResource'{..} = P.catMaybes
         [ TF.assign "deregistration_delay" <$> TF.attribute _deregistrationDelay
+        , TF.assign "health_check" <$> TF.attribute _healthCheck
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _namePrefix
         , TF.assign "port" <$> TF.attribute _port
         , TF.assign "protocol" <$> TF.attribute _protocol
         , TF.assign "proxy_protocol_v2" <$> TF.attribute _proxyProtocolV2
         , TF.assign "slow_start" <$> TF.attribute _slowStart
+        , TF.assign "stickiness" <$> TF.attribute _stickiness
         , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "target_type" <$> TF.attribute _targetType
         , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
 
 instance TF.IsValid (AlbTargetGroupResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\AlbTargetGroupResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
+                            ])
+        ])
+           P.<> TF.settingsValidator "_healthCheck"
+                  (_healthCheck
+                      :: AlbTargetGroupResource s -> TF.Attr s (HealthCheckSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_stickiness"
+                  (_stickiness
+                      :: AlbTargetGroupResource s -> TF.Attr s (StickinessSetting s))
+                  TF.validator
 
 instance P.HasDeregistrationDelay (AlbTargetGroupResource s) (TF.Attr s P.Int) where
     deregistrationDelay =
         P.lens (_deregistrationDelay :: AlbTargetGroupResource s -> TF.Attr s P.Int)
                (\s a -> s { _deregistrationDelay = a } :: AlbTargetGroupResource s)
+
+instance P.HasHealthCheck (AlbTargetGroupResource s) (TF.Attr s (HealthCheckSetting s)) where
+    healthCheck =
+        P.lens (_healthCheck :: AlbTargetGroupResource s -> TF.Attr s (HealthCheckSetting s))
+               (\s a -> s { _healthCheck = a } :: AlbTargetGroupResource s)
+
+instance P.HasName (AlbTargetGroupResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: AlbTargetGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AlbTargetGroupResource s)
 
 instance P.HasNamePrefix (AlbTargetGroupResource s) (TF.Attr s P.Text) where
     namePrefix =
@@ -1098,6 +1259,11 @@ instance P.HasSlowStart (AlbTargetGroupResource s) (TF.Attr s P.Int) where
     slowStart =
         P.lens (_slowStart :: AlbTargetGroupResource s -> TF.Attr s P.Int)
                (\s a -> s { _slowStart = a } :: AlbTargetGroupResource s)
+
+instance P.HasStickiness (AlbTargetGroupResource s) (TF.Attr s (StickinessSetting s)) where
+    stickiness =
+        P.lens (_stickiness :: AlbTargetGroupResource s -> TF.Attr s (StickinessSetting s))
+               (\s a -> s { _stickiness = a } :: AlbTargetGroupResource s)
 
 instance P.HasTags (AlbTargetGroupResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     tags =
@@ -1204,31 +1370,40 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (AlbTargetGroupAttachmentResource 
 -- See the <https://www.terraform.io/docs/providers/aws/r/ami.html terraform documentation>
 -- for more information.
 data AmiResource s = AmiResource'
-    { _architecture       :: TF.Attr s P.Text
+    { _architecture :: TF.Attr s P.Text
     -- ^ @architecture@ - (Optional, Forces New)
     --
-    , _description        :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _enaSupport         :: TF.Attr s P.Bool
+    , _ebsBlockDevice :: TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)]
+    -- ^ @ebs_block_device@ - (Optional)
+    --
+    , _enaSupport :: TF.Attr s P.Bool
     -- ^ @ena_support@ - (Optional, Forces New)
     --
-    , _kernelId           :: TF.Attr s P.Text
+    , _ephemeralBlockDevice :: TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)]
+    -- ^ @ephemeral_block_device@ - (Optional, Forces New)
+    --
+    , _imageLocation :: TF.Attr s P.Text
+    -- ^ @image_location@ - (Optional, Forces New)
+    --
+    , _kernelId :: TF.Attr s P.Text
     -- ^ @kernel_id@ - (Optional, Forces New)
     --
-    , _name               :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _ramdiskId          :: TF.Attr s P.Text
+    , _ramdiskId :: TF.Attr s P.Text
     -- ^ @ramdisk_id@ - (Optional, Forces New)
     --
-    , _rootDeviceName     :: TF.Attr s P.Text
+    , _rootDeviceName :: TF.Attr s P.Text
     -- ^ @root_device_name@ - (Optional, Forces New)
     --
-    , _sriovNetSupport    :: TF.Attr s P.Text
+    , _sriovNetSupport :: TF.Attr s P.Text
     -- ^ @sriov_net_support@ - (Optional, Forces New)
     --
-    , _tags               :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     , _virtualizationType :: TF.Attr s P.Text
@@ -1245,7 +1420,10 @@ amiResource _name =
         AmiResource'
             { _architecture = TF.value "x86_64"
             , _description = TF.Nil
+            , _ebsBlockDevice = TF.Nil
             , _enaSupport = TF.Nil
+            , _ephemeralBlockDevice = TF.Nil
+            , _imageLocation = TF.Nil
             , _kernelId = TF.Nil
             , _name = _name
             , _ramdiskId = TF.Nil
@@ -1259,7 +1437,10 @@ instance TF.IsObject (AmiResource s) where
     toObject AmiResource'{..} = P.catMaybes
         [ TF.assign "architecture" <$> TF.attribute _architecture
         , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "ebs_block_device" <$> TF.attribute _ebsBlockDevice
         , TF.assign "ena_support" <$> TF.attribute _enaSupport
+        , TF.assign "ephemeral_block_device" <$> TF.attribute _ephemeralBlockDevice
+        , TF.assign "image_location" <$> TF.attribute _imageLocation
         , TF.assign "kernel_id" <$> TF.attribute _kernelId
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "ramdisk_id" <$> TF.attribute _ramdiskId
@@ -1282,10 +1463,25 @@ instance P.HasDescription (AmiResource s) (TF.Attr s P.Text) where
         P.lens (_description :: AmiResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: AmiResource s)
 
+instance P.HasEbsBlockDevice (AmiResource s) (TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)]) where
+    ebsBlockDevice =
+        P.lens (_ebsBlockDevice :: AmiResource s -> TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)])
+               (\s a -> s { _ebsBlockDevice = a } :: AmiResource s)
+
 instance P.HasEnaSupport (AmiResource s) (TF.Attr s P.Bool) where
     enaSupport =
         P.lens (_enaSupport :: AmiResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enaSupport = a } :: AmiResource s)
+
+instance P.HasEphemeralBlockDevice (AmiResource s) (TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)]) where
+    ephemeralBlockDevice =
+        P.lens (_ephemeralBlockDevice :: AmiResource s -> TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)])
+               (\s a -> s { _ephemeralBlockDevice = a } :: AmiResource s)
+
+instance P.HasImageLocation (AmiResource s) (TF.Attr s P.Text) where
+    imageLocation =
+        P.lens (_imageLocation :: AmiResource s -> TF.Attr s P.Text)
+               (\s a -> s { _imageLocation = a } :: AmiResource s)
 
 instance P.HasKernelId (AmiResource s) (TF.Attr s P.Text) where
     kernelId =
@@ -1345,22 +1541,31 @@ instance s ~ s' => P.HasComputedRootSnapshotId (TF.Ref s' (AmiResource s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/aws/r/ami_copy.html terraform documentation>
 -- for more information.
 data AmiCopyResource s = AmiCopyResource'
-    { _description     :: TF.Attr s P.Text
+    { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _encrypted       :: TF.Attr s P.Bool
+    , _ebsBlockDevice :: TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)]
+    -- ^ @ebs_block_device@ - (Optional)
+    --
+    , _encrypted :: TF.Attr s P.Bool
     -- ^ @encrypted@ - (Optional, Forces New)
     --
-    , _name            :: TF.Attr s P.Text
+    , _ephemeralBlockDevice :: TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)]
+    -- ^ @ephemeral_block_device@ - (Optional, Forces New)
+    --
+    , _kmsKeyId :: TF.Attr s P.Text
+    -- ^ @kms_key_id@ - (Optional, Forces New)
+    --
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _sourceAmiId     :: TF.Attr s P.Text
+    , _sourceAmiId :: TF.Attr s P.Text
     -- ^ @source_ami_id@ - (Required, Forces New)
     --
     , _sourceAmiRegion :: TF.Attr s P.Text
     -- ^ @source_ami_region@ - (Required, Forces New)
     --
-    , _tags            :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1375,7 +1580,10 @@ amiCopyResource _sourceAmiId _name _sourceAmiRegion =
     TF.unsafeResource "aws_ami_copy" TF.validator $
         AmiCopyResource'
             { _description = TF.Nil
+            , _ebsBlockDevice = TF.Nil
             , _encrypted = TF.value P.False
+            , _ephemeralBlockDevice = TF.Nil
+            , _kmsKeyId = TF.Nil
             , _name = _name
             , _sourceAmiId = _sourceAmiId
             , _sourceAmiRegion = _sourceAmiRegion
@@ -1385,7 +1593,10 @@ amiCopyResource _sourceAmiId _name _sourceAmiRegion =
 instance TF.IsObject (AmiCopyResource s) where
     toObject AmiCopyResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "ebs_block_device" <$> TF.attribute _ebsBlockDevice
         , TF.assign "encrypted" <$> TF.attribute _encrypted
+        , TF.assign "ephemeral_block_device" <$> TF.attribute _ephemeralBlockDevice
+        , TF.assign "kms_key_id" <$> TF.attribute _kmsKeyId
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "source_ami_id" <$> TF.attribute _sourceAmiId
         , TF.assign "source_ami_region" <$> TF.attribute _sourceAmiRegion
@@ -1400,10 +1611,25 @@ instance P.HasDescription (AmiCopyResource s) (TF.Attr s P.Text) where
         P.lens (_description :: AmiCopyResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: AmiCopyResource s)
 
+instance P.HasEbsBlockDevice (AmiCopyResource s) (TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)]) where
+    ebsBlockDevice =
+        P.lens (_ebsBlockDevice :: AmiCopyResource s -> TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)])
+               (\s a -> s { _ebsBlockDevice = a } :: AmiCopyResource s)
+
 instance P.HasEncrypted (AmiCopyResource s) (TF.Attr s P.Bool) where
     encrypted =
         P.lens (_encrypted :: AmiCopyResource s -> TF.Attr s P.Bool)
                (\s a -> s { _encrypted = a } :: AmiCopyResource s)
+
+instance P.HasEphemeralBlockDevice (AmiCopyResource s) (TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)]) where
+    ephemeralBlockDevice =
+        P.lens (_ephemeralBlockDevice :: AmiCopyResource s -> TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)])
+               (\s a -> s { _ephemeralBlockDevice = a } :: AmiCopyResource s)
+
+instance P.HasKmsKeyId (AmiCopyResource s) (TF.Attr s P.Text) where
+    kmsKeyId =
+        P.lens (_kmsKeyId :: AmiCopyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _kmsKeyId = a } :: AmiCopyResource s)
 
 instance P.HasName (AmiCopyResource s) (TF.Attr s P.Text) where
     name =
@@ -1472,19 +1698,25 @@ instance s ~ s' => P.HasComputedVirtualizationType (TF.Ref s' (AmiCopyResource s
 -- See the <https://www.terraform.io/docs/providers/aws/r/ami_from_instance.html terraform documentation>
 -- for more information.
 data AmiFromInstanceResource s = AmiFromInstanceResource'
-    { _description           :: TF.Attr s P.Text
+    { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name                  :: TF.Attr s P.Text
+    , _ebsBlockDevice :: TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)]
+    -- ^ @ebs_block_device@ - (Optional)
+    --
+    , _ephemeralBlockDevice :: TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)]
+    -- ^ @ephemeral_block_device@ - (Optional, Forces New)
+    --
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
     , _snapshotWithoutReboot :: TF.Attr s P.Bool
     -- ^ @snapshot_without_reboot@ - (Optional, Forces New)
     --
-    , _sourceInstanceId      :: TF.Attr s P.Text
+    , _sourceInstanceId :: TF.Attr s P.Text
     -- ^ @source_instance_id@ - (Required, Forces New)
     --
-    , _tags                  :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1498,6 +1730,8 @@ amiFromInstanceResource _sourceInstanceId _name =
     TF.unsafeResource "aws_ami_from_instance" TF.validator $
         AmiFromInstanceResource'
             { _description = TF.Nil
+            , _ebsBlockDevice = TF.Nil
+            , _ephemeralBlockDevice = TF.Nil
             , _name = _name
             , _snapshotWithoutReboot = TF.Nil
             , _sourceInstanceId = _sourceInstanceId
@@ -1507,6 +1741,8 @@ amiFromInstanceResource _sourceInstanceId _name =
 instance TF.IsObject (AmiFromInstanceResource s) where
     toObject AmiFromInstanceResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "ebs_block_device" <$> TF.attribute _ebsBlockDevice
+        , TF.assign "ephemeral_block_device" <$> TF.attribute _ephemeralBlockDevice
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "snapshot_without_reboot" <$> TF.attribute _snapshotWithoutReboot
         , TF.assign "source_instance_id" <$> TF.attribute _sourceInstanceId
@@ -1520,6 +1756,16 @@ instance P.HasDescription (AmiFromInstanceResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: AmiFromInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: AmiFromInstanceResource s)
+
+instance P.HasEbsBlockDevice (AmiFromInstanceResource s) (TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)]) where
+    ebsBlockDevice =
+        P.lens (_ebsBlockDevice :: AmiFromInstanceResource s -> TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)])
+               (\s a -> s { _ebsBlockDevice = a } :: AmiFromInstanceResource s)
+
+instance P.HasEphemeralBlockDevice (AmiFromInstanceResource s) (TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)]) where
+    ephemeralBlockDevice =
+        P.lens (_ephemeralBlockDevice :: AmiFromInstanceResource s -> TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)])
+               (\s a -> s { _ephemeralBlockDevice = a } :: AmiFromInstanceResource s)
 
 instance P.HasName (AmiFromInstanceResource s) (TF.Attr s P.Text) where
     name =
@@ -1679,6 +1925,9 @@ data ApiGatewayApiKeyResource s = ApiGatewayApiKeyResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _value       :: TF.Attr s P.Text
+    -- ^ @value@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_api_gateway_api_key@ resource value.
@@ -1691,6 +1940,7 @@ apiGatewayApiKeyResource _name =
             { _description = TF.value "Managed by Terraform"
             , _enabled = TF.value P.True
             , _name = _name
+            , _value = TF.Nil
             }
 
 instance TF.IsObject (ApiGatewayApiKeyResource s) where
@@ -1698,6 +1948,7 @@ instance TF.IsObject (ApiGatewayApiKeyResource s) where
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "value" <$> TF.attribute _value
         ]
 
 instance TF.IsValid (ApiGatewayApiKeyResource s) where
@@ -1717,6 +1968,11 @@ instance P.HasName (ApiGatewayApiKeyResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ApiGatewayApiKeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ApiGatewayApiKeyResource s)
+
+instance P.HasValue (ApiGatewayApiKeyResource s) (TF.Attr s P.Text) where
+    value =
+        P.lens (_value :: ApiGatewayApiKeyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: ApiGatewayApiKeyResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ApiGatewayApiKeyResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2211,6 +2467,9 @@ data ApiGatewayDomainNameResource s = ApiGatewayDomainNameResource'
     , _domainName              :: TF.Attr s P.Text
     -- ^ @domain_name@ - (Required, Forces New)
     --
+    , _endpointConfiguration   :: TF.Attr s (EndpointConfigurationSetting s)
+    -- ^ @endpoint_configuration@ - (Optional)
+    --
     , _regionalCertificateArn  :: TF.Attr s P.Text
     -- ^ @regional_certificate_arn@ - (Optional)
     --
@@ -2245,6 +2504,7 @@ apiGatewayDomainNameResource _domainName =
             , _certificateName = TF.Nil
             , _certificatePrivateKey = TF.Nil
             , _domainName = _domainName
+            , _endpointConfiguration = TF.Nil
             , _regionalCertificateArn = TF.Nil
             , _regionalCertificateName = TF.Nil
             }
@@ -2257,6 +2517,7 @@ instance TF.IsObject (ApiGatewayDomainNameResource s) where
         , TF.assign "certificate_name" <$> TF.attribute _certificateName
         , TF.assign "certificate_private_key" <$> TF.attribute _certificatePrivateKey
         , TF.assign "domain_name" <$> TF.attribute _domainName
+        , TF.assign "endpoint_configuration" <$> TF.attribute _endpointConfiguration
         , TF.assign "regional_certificate_arn" <$> TF.attribute _regionalCertificateArn
         , TF.assign "regional_certificate_name" <$> TF.attribute _regionalCertificateName
         ]
@@ -2299,6 +2560,10 @@ instance TF.IsValid (ApiGatewayDomainNameResource s) where
                             [ "_certificateArn"                            , "_certificateName"                            , "_regionalCertificateArn"
                             ])
         ])
+           P.<> TF.settingsValidator "_endpointConfiguration"
+                  (_endpointConfiguration
+                      :: ApiGatewayDomainNameResource s -> TF.Attr s (EndpointConfigurationSetting s))
+                  TF.validator
 
 instance P.HasCertificateArn (ApiGatewayDomainNameResource s) (TF.Attr s P.Text) where
     certificateArn =
@@ -2329,6 +2594,11 @@ instance P.HasDomainName (ApiGatewayDomainNameResource s) (TF.Attr s P.Text) whe
     domainName =
         P.lens (_domainName :: ApiGatewayDomainNameResource s -> TF.Attr s P.Text)
                (\s a -> s { _domainName = a } :: ApiGatewayDomainNameResource s)
+
+instance P.HasEndpointConfiguration (ApiGatewayDomainNameResource s) (TF.Attr s (EndpointConfigurationSetting s)) where
+    endpointConfiguration =
+        P.lens (_endpointConfiguration :: ApiGatewayDomainNameResource s -> TF.Attr s (EndpointConfigurationSetting s))
+               (\s a -> s { _endpointConfiguration = a } :: ApiGatewayDomainNameResource s)
 
 instance P.HasRegionalCertificateArn (ApiGatewayDomainNameResource s) (TF.Attr s P.Text) where
     regionalCertificateArn =
@@ -2446,6 +2716,9 @@ data ApiGatewayIntegrationResource s = ApiGatewayIntegrationResource'
     { _cacheKeyParameters    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @cache_key_parameters@ - (Optional)
     --
+    , _cacheNamespace        :: TF.Attr s P.Text
+    -- ^ @cache_namespace@ - (Optional)
+    --
     , _connectionId          :: TF.Attr s P.Text
     -- ^ @connection_id@ - (Optional)
     --
@@ -2463,6 +2736,9 @@ data ApiGatewayIntegrationResource s = ApiGatewayIntegrationResource'
     --
     , _integrationHttpMethod :: TF.Attr s P.Text
     -- ^ @integration_http_method@ - (Optional, Forces New)
+    --
+    , _passthroughBehavior   :: TF.Attr s P.Text
+    -- ^ @passthrough_behavior@ - (Optional, Forces New)
     --
     , _requestParameters     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @request_parameters@ - (Optional)
@@ -2498,12 +2774,14 @@ apiGatewayIntegrationResource _resourceId _restApiId _httpMethod _type' =
     TF.unsafeResource "aws_api_gateway_integration" TF.validator $
         ApiGatewayIntegrationResource'
             { _cacheKeyParameters = TF.Nil
+            , _cacheNamespace = TF.Nil
             , _connectionId = TF.Nil
             , _connectionType = TF.value "INTERNET"
             , _contentHandling = TF.Nil
             , _credentials = TF.Nil
             , _httpMethod = _httpMethod
             , _integrationHttpMethod = TF.Nil
+            , _passthroughBehavior = TF.Nil
             , _requestParameters = TF.Nil
             , _requestTemplates = TF.Nil
             , _resourceId = _resourceId
@@ -2516,12 +2794,14 @@ apiGatewayIntegrationResource _resourceId _restApiId _httpMethod _type' =
 instance TF.IsObject (ApiGatewayIntegrationResource s) where
     toObject ApiGatewayIntegrationResource'{..} = P.catMaybes
         [ TF.assign "cache_key_parameters" <$> TF.attribute _cacheKeyParameters
+        , TF.assign "cache_namespace" <$> TF.attribute _cacheNamespace
         , TF.assign "connection_id" <$> TF.attribute _connectionId
         , TF.assign "connection_type" <$> TF.attribute _connectionType
         , TF.assign "content_handling" <$> TF.attribute _contentHandling
         , TF.assign "credentials" <$> TF.attribute _credentials
         , TF.assign "http_method" <$> TF.attribute _httpMethod
         , TF.assign "integration_http_method" <$> TF.attribute _integrationHttpMethod
+        , TF.assign "passthrough_behavior" <$> TF.attribute _passthroughBehavior
         , TF.assign "request_parameters" <$> TF.attribute _requestParameters
         , TF.assign "request_templates" <$> TF.attribute _requestTemplates
         , TF.assign "resource_id" <$> TF.attribute _resourceId
@@ -2538,6 +2818,11 @@ instance P.HasCacheKeyParameters (ApiGatewayIntegrationResource s) (TF.Attr s [T
     cacheKeyParameters =
         P.lens (_cacheKeyParameters :: ApiGatewayIntegrationResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _cacheKeyParameters = a } :: ApiGatewayIntegrationResource s)
+
+instance P.HasCacheNamespace (ApiGatewayIntegrationResource s) (TF.Attr s P.Text) where
+    cacheNamespace =
+        P.lens (_cacheNamespace :: ApiGatewayIntegrationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _cacheNamespace = a } :: ApiGatewayIntegrationResource s)
 
 instance P.HasConnectionId (ApiGatewayIntegrationResource s) (TF.Attr s P.Text) where
     connectionId =
@@ -2568,6 +2853,11 @@ instance P.HasIntegrationHttpMethod (ApiGatewayIntegrationResource s) (TF.Attr s
     integrationHttpMethod =
         P.lens (_integrationHttpMethod :: ApiGatewayIntegrationResource s -> TF.Attr s P.Text)
                (\s a -> s { _integrationHttpMethod = a } :: ApiGatewayIntegrationResource s)
+
+instance P.HasPassthroughBehavior (ApiGatewayIntegrationResource s) (TF.Attr s P.Text) where
+    passthroughBehavior =
+        P.lens (_passthroughBehavior :: ApiGatewayIntegrationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _passthroughBehavior = a } :: ApiGatewayIntegrationResource s)
 
 instance P.HasRequestParameters (ApiGatewayIntegrationResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     requestParameters =
@@ -3236,6 +3526,9 @@ data ApiGatewayRestApiResource s = ApiGatewayRestApiResource'
     , _description            :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
+    , _endpointConfiguration  :: TF.Attr s (EndpointConfigurationSetting s)
+    -- ^ @endpoint_configuration@ - (Optional)
+    --
     , _minimumCompressionSize :: TF.Attr s P.Int
     -- ^ @minimum_compression_size@ - (Optional)
     --
@@ -3258,6 +3551,7 @@ apiGatewayRestApiResource _name =
             , _binaryMediaTypes = TF.Nil
             , _body = TF.Nil
             , _description = TF.Nil
+            , _endpointConfiguration = TF.Nil
             , _minimumCompressionSize = TF.value (-1)
             , _name = _name
             , _policy = TF.Nil
@@ -3269,6 +3563,7 @@ instance TF.IsObject (ApiGatewayRestApiResource s) where
         , TF.assign "binary_media_types" <$> TF.attribute _binaryMediaTypes
         , TF.assign "body" <$> TF.attribute _body
         , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "endpoint_configuration" <$> TF.attribute _endpointConfiguration
         , TF.assign "minimum_compression_size" <$> TF.attribute _minimumCompressionSize
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "policy" <$> TF.attribute _policy
@@ -3276,6 +3571,10 @@ instance TF.IsObject (ApiGatewayRestApiResource s) where
 
 instance TF.IsValid (ApiGatewayRestApiResource s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_endpointConfiguration"
+                  (_endpointConfiguration
+                      :: ApiGatewayRestApiResource s -> TF.Attr s (EndpointConfigurationSetting s))
+                  TF.validator
 
 instance P.HasApiKeySource (ApiGatewayRestApiResource s) (TF.Attr s P.Text) where
     apiKeySource =
@@ -3296,6 +3595,11 @@ instance P.HasDescription (ApiGatewayRestApiResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: ApiGatewayRestApiResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ApiGatewayRestApiResource s)
+
+instance P.HasEndpointConfiguration (ApiGatewayRestApiResource s) (TF.Attr s (EndpointConfigurationSetting s)) where
+    endpointConfiguration =
+        P.lens (_endpointConfiguration :: ApiGatewayRestApiResource s -> TF.Attr s (EndpointConfigurationSetting s))
+               (\s a -> s { _endpointConfiguration = a } :: ApiGatewayRestApiResource s)
 
 instance P.HasMinimumCompressionSize (ApiGatewayRestApiResource s) (TF.Attr s P.Int) where
     minimumCompressionSize =
@@ -4004,6 +4308,9 @@ data AppautoscalingTargetResource s = AppautoscalingTargetResource'
     , _resourceId        :: TF.Attr s P.Text
     -- ^ @resource_id@ - (Required, Forces New)
     --
+    , _roleArn           :: TF.Attr s P.Text
+    -- ^ @role_arn@ - (Optional)
+    --
     , _scalableDimension :: TF.Attr s P.Text
     -- ^ @scalable_dimension@ - (Required, Forces New)
     --
@@ -4026,6 +4333,7 @@ appautoscalingTargetResource _maxCapacity _minCapacity _scalableDimension _resou
             { _maxCapacity = _maxCapacity
             , _minCapacity = _minCapacity
             , _resourceId = _resourceId
+            , _roleArn = TF.Nil
             , _scalableDimension = _scalableDimension
             , _serviceNamespace = _serviceNamespace
             }
@@ -4035,6 +4343,7 @@ instance TF.IsObject (AppautoscalingTargetResource s) where
         [ TF.assign "max_capacity" <$> TF.attribute _maxCapacity
         , TF.assign "min_capacity" <$> TF.attribute _minCapacity
         , TF.assign "resource_id" <$> TF.attribute _resourceId
+        , TF.assign "role_arn" <$> TF.attribute _roleArn
         , TF.assign "scalable_dimension" <$> TF.attribute _scalableDimension
         , TF.assign "service_namespace" <$> TF.attribute _serviceNamespace
         ]
@@ -4056,6 +4365,11 @@ instance P.HasResourceId (AppautoscalingTargetResource s) (TF.Attr s P.Text) whe
     resourceId =
         P.lens (_resourceId :: AppautoscalingTargetResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceId = a } :: AppautoscalingTargetResource s)
+
+instance P.HasRoleArn (AppautoscalingTargetResource s) (TF.Attr s P.Text) where
+    roleArn =
+        P.lens (_roleArn :: AppautoscalingTargetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _roleArn = a } :: AppautoscalingTargetResource s)
 
 instance P.HasScalableDimension (AppautoscalingTargetResource s) (TF.Attr s P.Text) where
     scalableDimension =
@@ -4533,7 +4847,16 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (AutoscalingAttachmentResource s))
 -- See the <https://www.terraform.io/docs/providers/aws/r/autoscaling_group.html terraform documentation>
 -- for more information.
 data AutoscalingGroupResource s = AutoscalingGroupResource'
-    { _enabledMetrics :: TF.Attr s [TF.Attr s P.Text]
+    { _availabilityZones :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @availability_zones@ - (Optional)
+    --
+    , _defaultCooldown :: TF.Attr s P.Int
+    -- ^ @default_cooldown@ - (Optional)
+    --
+    , _desiredCapacity :: TF.Attr s P.Int
+    -- ^ @desired_capacity@ - (Optional)
+    --
+    , _enabledMetrics :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @enabled_metrics@ - (Optional)
     --
     , _forceDelete :: TF.Attr s P.Bool
@@ -4541,6 +4864,9 @@ data AutoscalingGroupResource s = AutoscalingGroupResource'
     --
     , _healthCheckGracePeriod :: TF.Attr s P.Int
     -- ^ @health_check_grace_period@ - (Optional)
+    --
+    , _healthCheckType :: TF.Attr s P.Text
+    -- ^ @health_check_type@ - (Optional)
     --
     , _initialLifecycleHook :: TF.Attr s [TF.Attr s (InitialLifecycleHookSetting s)]
     -- ^ @initial_lifecycle_hook@ - (Optional)
@@ -4557,6 +4883,9 @@ data AutoscalingGroupResource s = AutoscalingGroupResource'
     -- Conflicts with:
     --
     -- * 'launchConfiguration'
+    , _loadBalancers :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @load_balancers@ - (Optional)
+    --
     , _maxSize :: TF.Attr s P.Int
     -- ^ @max_size@ - (Required)
     --
@@ -4569,14 +4898,26 @@ data AutoscalingGroupResource s = AutoscalingGroupResource'
     , _minSize :: TF.Attr s P.Int
     -- ^ @min_size@ - (Required)
     --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
     , _namePrefix :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
     --
+    -- Conflicts with:
+    --
+    -- * 'name'
     , _placementGroup :: TF.Attr s P.Text
     -- ^ @placement_group@ - (Optional)
     --
     , _protectFromScaleIn :: TF.Attr s P.Bool
     -- ^ @protect_from_scale_in@ - (Optional)
+    --
+    , _serviceLinkedRoleArn :: TF.Attr s P.Text
+    -- ^ @service_linked_role_arn@ - (Optional)
     --
     , _suspendedProcesses :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @suspended_processes@ - (Optional)
@@ -4593,8 +4934,14 @@ data AutoscalingGroupResource s = AutoscalingGroupResource'
     -- Conflicts with:
     --
     -- * 'tag'
+    , _targetGroupArns :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @target_group_arns@ - (Optional)
+    --
     , _terminationPolicies :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @termination_policies@ - (Optional)
+    --
+    , _vpcZoneIdentifier :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @vpc_zone_identifier@ - (Optional)
     --
     , _waitForCapacityTimeout :: TF.Attr s P.Text
     -- ^ @wait_for_capacity_timeout@ - (Optional)
@@ -4612,46 +4959,64 @@ autoscalingGroupResource
 autoscalingGroupResource _maxSize _minSize =
     TF.unsafeResource "aws_autoscaling_group" TF.validator $
         AutoscalingGroupResource'
-            { _enabledMetrics = TF.Nil
+            { _availabilityZones = TF.Nil
+            , _defaultCooldown = TF.Nil
+            , _desiredCapacity = TF.Nil
+            , _enabledMetrics = TF.Nil
             , _forceDelete = TF.value P.False
             , _healthCheckGracePeriod = TF.value 300
+            , _healthCheckType = TF.Nil
             , _initialLifecycleHook = TF.Nil
             , _launchConfiguration = TF.Nil
             , _launchTemplate = TF.Nil
+            , _loadBalancers = TF.Nil
             , _maxSize = _maxSize
             , _metricsGranularity = TF.value "1Minute"
             , _minElbCapacity = TF.Nil
             , _minSize = _minSize
+            , _name = TF.Nil
             , _namePrefix = TF.Nil
             , _placementGroup = TF.Nil
             , _protectFromScaleIn = TF.value P.False
+            , _serviceLinkedRoleArn = TF.Nil
             , _suspendedProcesses = TF.Nil
             , _tag = TF.Nil
             , _tags = TF.Nil
+            , _targetGroupArns = TF.Nil
             , _terminationPolicies = TF.Nil
+            , _vpcZoneIdentifier = TF.Nil
             , _waitForCapacityTimeout = TF.value "10m"
             , _waitForElbCapacity = TF.Nil
             }
 
 instance TF.IsObject (AutoscalingGroupResource s) where
     toObject AutoscalingGroupResource'{..} = P.catMaybes
-        [ TF.assign "enabled_metrics" <$> TF.attribute _enabledMetrics
+        [ TF.assign "availability_zones" <$> TF.attribute _availabilityZones
+        , TF.assign "default_cooldown" <$> TF.attribute _defaultCooldown
+        , TF.assign "desired_capacity" <$> TF.attribute _desiredCapacity
+        , TF.assign "enabled_metrics" <$> TF.attribute _enabledMetrics
         , TF.assign "force_delete" <$> TF.attribute _forceDelete
         , TF.assign "health_check_grace_period" <$> TF.attribute _healthCheckGracePeriod
+        , TF.assign "health_check_type" <$> TF.attribute _healthCheckType
         , TF.assign "initial_lifecycle_hook" <$> TF.attribute _initialLifecycleHook
         , TF.assign "launch_configuration" <$> TF.attribute _launchConfiguration
         , TF.assign "launch_template" <$> TF.attribute _launchTemplate
+        , TF.assign "load_balancers" <$> TF.attribute _loadBalancers
         , TF.assign "max_size" <$> TF.attribute _maxSize
         , TF.assign "metrics_granularity" <$> TF.attribute _metricsGranularity
         , TF.assign "min_elb_capacity" <$> TF.attribute _minElbCapacity
         , TF.assign "min_size" <$> TF.attribute _minSize
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _namePrefix
         , TF.assign "placement_group" <$> TF.attribute _placementGroup
         , TF.assign "protect_from_scale_in" <$> TF.attribute _protectFromScaleIn
+        , TF.assign "service_linked_role_arn" <$> TF.attribute _serviceLinkedRoleArn
         , TF.assign "suspended_processes" <$> TF.attribute _suspendedProcesses
         , TF.assign "tag" <$> TF.attribute _tag
         , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "target_group_arns" <$> TF.attribute _targetGroupArns
         , TF.assign "termination_policies" <$> TF.attribute _terminationPolicies
+        , TF.assign "vpc_zone_identifier" <$> TF.attribute _vpcZoneIdentifier
         , TF.assign "wait_for_capacity_timeout" <$> TF.attribute _waitForCapacityTimeout
         , TF.assign "wait_for_elb_capacity" <$> TF.attribute _waitForElbCapacity
         ]
@@ -4667,6 +5032,16 @@ instance TF.IsValid (AutoscalingGroupResource s) where
               then P.Nothing
               else P.Just ("_launchTemplate",
                             [ "_launchConfiguration"
+                            ])
+        , if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
                             ])
         , if (_tag P.== TF.Nil)
               then P.Nothing
@@ -4684,6 +5059,21 @@ instance TF.IsValid (AutoscalingGroupResource s) where
                       :: AutoscalingGroupResource s -> TF.Attr s (LaunchTemplateSetting s))
                   TF.validator
 
+instance P.HasAvailabilityZones (AutoscalingGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    availabilityZones =
+        P.lens (_availabilityZones :: AutoscalingGroupResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _availabilityZones = a } :: AutoscalingGroupResource s)
+
+instance P.HasDefaultCooldown (AutoscalingGroupResource s) (TF.Attr s P.Int) where
+    defaultCooldown =
+        P.lens (_defaultCooldown :: AutoscalingGroupResource s -> TF.Attr s P.Int)
+               (\s a -> s { _defaultCooldown = a } :: AutoscalingGroupResource s)
+
+instance P.HasDesiredCapacity (AutoscalingGroupResource s) (TF.Attr s P.Int) where
+    desiredCapacity =
+        P.lens (_desiredCapacity :: AutoscalingGroupResource s -> TF.Attr s P.Int)
+               (\s a -> s { _desiredCapacity = a } :: AutoscalingGroupResource s)
+
 instance P.HasEnabledMetrics (AutoscalingGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
     enabledMetrics =
         P.lens (_enabledMetrics :: AutoscalingGroupResource s -> TF.Attr s [TF.Attr s P.Text])
@@ -4699,6 +5089,11 @@ instance P.HasHealthCheckGracePeriod (AutoscalingGroupResource s) (TF.Attr s P.I
         P.lens (_healthCheckGracePeriod :: AutoscalingGroupResource s -> TF.Attr s P.Int)
                (\s a -> s { _healthCheckGracePeriod = a } :: AutoscalingGroupResource s)
 
+instance P.HasHealthCheckType (AutoscalingGroupResource s) (TF.Attr s P.Text) where
+    healthCheckType =
+        P.lens (_healthCheckType :: AutoscalingGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _healthCheckType = a } :: AutoscalingGroupResource s)
+
 instance P.HasInitialLifecycleHook (AutoscalingGroupResource s) (TF.Attr s [TF.Attr s (InitialLifecycleHookSetting s)]) where
     initialLifecycleHook =
         P.lens (_initialLifecycleHook :: AutoscalingGroupResource s -> TF.Attr s [TF.Attr s (InitialLifecycleHookSetting s)])
@@ -4713,6 +5108,11 @@ instance P.HasLaunchTemplate (AutoscalingGroupResource s) (TF.Attr s (LaunchTemp
     launchTemplate =
         P.lens (_launchTemplate :: AutoscalingGroupResource s -> TF.Attr s (LaunchTemplateSetting s))
                (\s a -> s { _launchTemplate = a } :: AutoscalingGroupResource s)
+
+instance P.HasLoadBalancers (AutoscalingGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    loadBalancers =
+        P.lens (_loadBalancers :: AutoscalingGroupResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _loadBalancers = a } :: AutoscalingGroupResource s)
 
 instance P.HasMaxSize (AutoscalingGroupResource s) (TF.Attr s P.Int) where
     maxSize =
@@ -4734,6 +5134,11 @@ instance P.HasMinSize (AutoscalingGroupResource s) (TF.Attr s P.Int) where
         P.lens (_minSize :: AutoscalingGroupResource s -> TF.Attr s P.Int)
                (\s a -> s { _minSize = a } :: AutoscalingGroupResource s)
 
+instance P.HasName (AutoscalingGroupResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: AutoscalingGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AutoscalingGroupResource s)
+
 instance P.HasNamePrefix (AutoscalingGroupResource s) (TF.Attr s P.Text) where
     namePrefix =
         P.lens (_namePrefix :: AutoscalingGroupResource s -> TF.Attr s P.Text)
@@ -4748,6 +5153,11 @@ instance P.HasProtectFromScaleIn (AutoscalingGroupResource s) (TF.Attr s P.Bool)
     protectFromScaleIn =
         P.lens (_protectFromScaleIn :: AutoscalingGroupResource s -> TF.Attr s P.Bool)
                (\s a -> s { _protectFromScaleIn = a } :: AutoscalingGroupResource s)
+
+instance P.HasServiceLinkedRoleArn (AutoscalingGroupResource s) (TF.Attr s P.Text) where
+    serviceLinkedRoleArn =
+        P.lens (_serviceLinkedRoleArn :: AutoscalingGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _serviceLinkedRoleArn = a } :: AutoscalingGroupResource s)
 
 instance P.HasSuspendedProcesses (AutoscalingGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
     suspendedProcesses =
@@ -4764,10 +5174,20 @@ instance P.HasTags (AutoscalingGroupResource s) (TF.Attr s [TF.Attr s (P.Map P.T
         P.lens (_tags :: AutoscalingGroupResource s -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))])
                (\s a -> s { _tags = a } :: AutoscalingGroupResource s)
 
+instance P.HasTargetGroupArns (AutoscalingGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    targetGroupArns =
+        P.lens (_targetGroupArns :: AutoscalingGroupResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _targetGroupArns = a } :: AutoscalingGroupResource s)
+
 instance P.HasTerminationPolicies (AutoscalingGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
     terminationPolicies =
         P.lens (_terminationPolicies :: AutoscalingGroupResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _terminationPolicies = a } :: AutoscalingGroupResource s)
+
+instance P.HasVpcZoneIdentifier (AutoscalingGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    vpcZoneIdentifier =
+        P.lens (_vpcZoneIdentifier :: AutoscalingGroupResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _vpcZoneIdentifier = a } :: AutoscalingGroupResource s)
 
 instance P.HasWaitForCapacityTimeout (AutoscalingGroupResource s) (TF.Attr s P.Text) where
     waitForCapacityTimeout =
@@ -4820,6 +5240,9 @@ data AutoscalingLifecycleHookResource s = AutoscalingLifecycleHookResource'
     { _autoscalingGroupName  :: TF.Attr s P.Text
     -- ^ @autoscaling_group_name@ - (Required)
     --
+    , _defaultResult         :: TF.Attr s P.Text
+    -- ^ @default_result@ - (Optional)
+    --
     , _heartbeatTimeout      :: TF.Attr s P.Int
     -- ^ @heartbeat_timeout@ - (Optional)
     --
@@ -4850,6 +5273,7 @@ autoscalingLifecycleHookResource _autoscalingGroupName _name _lifecycleTransitio
     TF.unsafeResource "aws_autoscaling_lifecycle_hook" TF.validator $
         AutoscalingLifecycleHookResource'
             { _autoscalingGroupName = _autoscalingGroupName
+            , _defaultResult = TF.Nil
             , _heartbeatTimeout = TF.Nil
             , _lifecycleTransition = _lifecycleTransition
             , _name = _name
@@ -4861,6 +5285,7 @@ autoscalingLifecycleHookResource _autoscalingGroupName _name _lifecycleTransitio
 instance TF.IsObject (AutoscalingLifecycleHookResource s) where
     toObject AutoscalingLifecycleHookResource'{..} = P.catMaybes
         [ TF.assign "autoscaling_group_name" <$> TF.attribute _autoscalingGroupName
+        , TF.assign "default_result" <$> TF.attribute _defaultResult
         , TF.assign "heartbeat_timeout" <$> TF.attribute _heartbeatTimeout
         , TF.assign "lifecycle_transition" <$> TF.attribute _lifecycleTransition
         , TF.assign "name" <$> TF.attribute _name
@@ -4876,6 +5301,11 @@ instance P.HasAutoscalingGroupName (AutoscalingLifecycleHookResource s) (TF.Attr
     autoscalingGroupName =
         P.lens (_autoscalingGroupName :: AutoscalingLifecycleHookResource s -> TF.Attr s P.Text)
                (\s a -> s { _autoscalingGroupName = a } :: AutoscalingLifecycleHookResource s)
+
+instance P.HasDefaultResult (AutoscalingLifecycleHookResource s) (TF.Attr s P.Text) where
+    defaultResult =
+        P.lens (_defaultResult :: AutoscalingLifecycleHookResource s -> TF.Attr s P.Text)
+               (\s a -> s { _defaultResult = a } :: AutoscalingLifecycleHookResource s)
 
 instance P.HasHeartbeatTimeout (AutoscalingLifecycleHookResource s) (TF.Attr s P.Int) where
     heartbeatTimeout =
@@ -4988,6 +5418,9 @@ data AutoscalingPolicyResource s = AutoscalingPolicyResource'
     , _estimatedInstanceWarmup :: TF.Attr s P.Int
     -- ^ @estimated_instance_warmup@ - (Optional)
     --
+    , _metricAggregationType :: TF.Attr s P.Text
+    -- ^ @metric_aggregation_type@ - (Optional)
+    --
     , _minAdjustmentMagnitude :: TF.Attr s P.Int
     -- ^ @min_adjustment_magnitude@ - (Optional)
     --
@@ -5026,6 +5459,7 @@ autoscalingPolicyResource _autoscalingGroupName _name =
             , _autoscalingGroupName = _autoscalingGroupName
             , _cooldown = TF.Nil
             , _estimatedInstanceWarmup = TF.Nil
+            , _metricAggregationType = TF.Nil
             , _minAdjustmentMagnitude = TF.Nil
             , _name = _name
             , _policyType = TF.value "SimpleScaling"
@@ -5040,6 +5474,7 @@ instance TF.IsObject (AutoscalingPolicyResource s) where
         , TF.assign "autoscaling_group_name" <$> TF.attribute _autoscalingGroupName
         , TF.assign "cooldown" <$> TF.attribute _cooldown
         , TF.assign "estimated_instance_warmup" <$> TF.attribute _estimatedInstanceWarmup
+        , TF.assign "metric_aggregation_type" <$> TF.attribute _metricAggregationType
         , TF.assign "min_adjustment_magnitude" <$> TF.attribute _minAdjustmentMagnitude
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "policy_type" <$> TF.attribute _policyType
@@ -5085,6 +5520,11 @@ instance P.HasEstimatedInstanceWarmup (AutoscalingPolicyResource s) (TF.Attr s P
     estimatedInstanceWarmup =
         P.lens (_estimatedInstanceWarmup :: AutoscalingPolicyResource s -> TF.Attr s P.Int)
                (\s a -> s { _estimatedInstanceWarmup = a } :: AutoscalingPolicyResource s)
+
+instance P.HasMetricAggregationType (AutoscalingPolicyResource s) (TF.Attr s P.Text) where
+    metricAggregationType =
+        P.lens (_metricAggregationType :: AutoscalingPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _metricAggregationType = a } :: AutoscalingPolicyResource s)
 
 instance P.HasMinAdjustmentMagnitude (AutoscalingPolicyResource s) (TF.Attr s P.Int) where
     minAdjustmentMagnitude =
@@ -5133,8 +5573,26 @@ data AutoscalingScheduleResource s = AutoscalingScheduleResource'
     { _autoscalingGroupName :: TF.Attr s P.Text
     -- ^ @autoscaling_group_name@ - (Required, Forces New)
     --
+    , _desiredCapacity      :: TF.Attr s P.Int
+    -- ^ @desired_capacity@ - (Optional)
+    --
+    , _endTime              :: TF.Attr s P.Text
+    -- ^ @end_time@ - (Optional)
+    --
+    , _maxSize              :: TF.Attr s P.Int
+    -- ^ @max_size@ - (Optional)
+    --
+    , _minSize              :: TF.Attr s P.Int
+    -- ^ @min_size@ - (Optional)
+    --
+    , _recurrence           :: TF.Attr s P.Text
+    -- ^ @recurrence@ - (Optional)
+    --
     , _scheduledActionName  :: TF.Attr s P.Text
     -- ^ @scheduled_action_name@ - (Required, Forces New)
+    --
+    , _startTime            :: TF.Attr s P.Text
+    -- ^ @start_time@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -5147,13 +5605,25 @@ autoscalingScheduleResource _autoscalingGroupName _scheduledActionName =
     TF.unsafeResource "aws_autoscaling_schedule" TF.validator $
         AutoscalingScheduleResource'
             { _autoscalingGroupName = _autoscalingGroupName
+            , _desiredCapacity = TF.Nil
+            , _endTime = TF.Nil
+            , _maxSize = TF.Nil
+            , _minSize = TF.Nil
+            , _recurrence = TF.Nil
             , _scheduledActionName = _scheduledActionName
+            , _startTime = TF.Nil
             }
 
 instance TF.IsObject (AutoscalingScheduleResource s) where
     toObject AutoscalingScheduleResource'{..} = P.catMaybes
         [ TF.assign "autoscaling_group_name" <$> TF.attribute _autoscalingGroupName
+        , TF.assign "desired_capacity" <$> TF.attribute _desiredCapacity
+        , TF.assign "end_time" <$> TF.attribute _endTime
+        , TF.assign "max_size" <$> TF.attribute _maxSize
+        , TF.assign "min_size" <$> TF.attribute _minSize
+        , TF.assign "recurrence" <$> TF.attribute _recurrence
         , TF.assign "scheduled_action_name" <$> TF.attribute _scheduledActionName
+        , TF.assign "start_time" <$> TF.attribute _startTime
         ]
 
 instance TF.IsValid (AutoscalingScheduleResource s) where
@@ -5164,10 +5634,40 @@ instance P.HasAutoscalingGroupName (AutoscalingScheduleResource s) (TF.Attr s P.
         P.lens (_autoscalingGroupName :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
                (\s a -> s { _autoscalingGroupName = a } :: AutoscalingScheduleResource s)
 
+instance P.HasDesiredCapacity (AutoscalingScheduleResource s) (TF.Attr s P.Int) where
+    desiredCapacity =
+        P.lens (_desiredCapacity :: AutoscalingScheduleResource s -> TF.Attr s P.Int)
+               (\s a -> s { _desiredCapacity = a } :: AutoscalingScheduleResource s)
+
+instance P.HasEndTime (AutoscalingScheduleResource s) (TF.Attr s P.Text) where
+    endTime =
+        P.lens (_endTime :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _endTime = a } :: AutoscalingScheduleResource s)
+
+instance P.HasMaxSize (AutoscalingScheduleResource s) (TF.Attr s P.Int) where
+    maxSize =
+        P.lens (_maxSize :: AutoscalingScheduleResource s -> TF.Attr s P.Int)
+               (\s a -> s { _maxSize = a } :: AutoscalingScheduleResource s)
+
+instance P.HasMinSize (AutoscalingScheduleResource s) (TF.Attr s P.Int) where
+    minSize =
+        P.lens (_minSize :: AutoscalingScheduleResource s -> TF.Attr s P.Int)
+               (\s a -> s { _minSize = a } :: AutoscalingScheduleResource s)
+
+instance P.HasRecurrence (AutoscalingScheduleResource s) (TF.Attr s P.Text) where
+    recurrence =
+        P.lens (_recurrence :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _recurrence = a } :: AutoscalingScheduleResource s)
+
 instance P.HasScheduledActionName (AutoscalingScheduleResource s) (TF.Attr s P.Text) where
     scheduledActionName =
         P.lens (_scheduledActionName :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
                (\s a -> s { _scheduledActionName = a } :: AutoscalingScheduleResource s)
+
+instance P.HasStartTime (AutoscalingScheduleResource s) (TF.Attr s P.Text) where
+    startTime =
+        P.lens (_startTime :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _startTime = a } :: AutoscalingScheduleResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AutoscalingScheduleResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -5465,8 +5965,17 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (BatchJobQueueResource s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/aws/r/budgets_budget.html terraform documentation>
 -- for more information.
 data BudgetsBudgetResource s = BudgetsBudgetResource'
-    { _budgetType      :: TF.Attr s P.Text
+    { _accountId       :: TF.Attr s P.Text
+    -- ^ @account_id@ - (Optional, Forces New)
+    --
+    , _budgetType      :: TF.Attr s P.Text
     -- ^ @budget_type@ - (Required)
+    --
+    , _costFilters     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @cost_filters@ - (Optional)
+    --
+    , _costTypes       :: TF.Attr s (CostTypesSetting s)
+    -- ^ @cost_types@ - (Optional)
     --
     , _limitAmount     :: TF.Attr s P.Text
     -- ^ @limit_amount@ - (Required)
@@ -5474,6 +5983,18 @@ data BudgetsBudgetResource s = BudgetsBudgetResource'
     , _limitUnit       :: TF.Attr s P.Text
     -- ^ @limit_unit@ - (Required)
     --
+    , _name            :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
+    , _namePrefix      :: TF.Attr s P.Text
+    -- ^ @name_prefix@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'name'
     , _timePeriodEnd   :: TF.Attr s P.Text
     -- ^ @time_period_end@ - (Optional)
     --
@@ -5496,9 +6017,14 @@ budgetsBudgetResource
 budgetsBudgetResource _limitAmount _timePeriodStart _budgetType _limitUnit _timeUnit =
     TF.unsafeResource "aws_budgets_budget" TF.validator $
         BudgetsBudgetResource'
-            { _budgetType = _budgetType
+            { _accountId = TF.Nil
+            , _budgetType = _budgetType
+            , _costFilters = TF.Nil
+            , _costTypes = TF.Nil
             , _limitAmount = _limitAmount
             , _limitUnit = _limitUnit
+            , _name = TF.Nil
+            , _namePrefix = TF.Nil
             , _timePeriodEnd = TF.value "2087-06-15_00:00"
             , _timePeriodStart = _timePeriodStart
             , _timeUnit = _timeUnit
@@ -5506,21 +6032,56 @@ budgetsBudgetResource _limitAmount _timePeriodStart _budgetType _limitUnit _time
 
 instance TF.IsObject (BudgetsBudgetResource s) where
     toObject BudgetsBudgetResource'{..} = P.catMaybes
-        [ TF.assign "budget_type" <$> TF.attribute _budgetType
+        [ TF.assign "account_id" <$> TF.attribute _accountId
+        , TF.assign "budget_type" <$> TF.attribute _budgetType
+        , TF.assign "cost_filters" <$> TF.attribute _costFilters
+        , TF.assign "cost_types" <$> TF.attribute _costTypes
         , TF.assign "limit_amount" <$> TF.attribute _limitAmount
         , TF.assign "limit_unit" <$> TF.attribute _limitUnit
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "name_prefix" <$> TF.attribute _namePrefix
         , TF.assign "time_period_end" <$> TF.attribute _timePeriodEnd
         , TF.assign "time_period_start" <$> TF.attribute _timePeriodStart
         , TF.assign "time_unit" <$> TF.attribute _timeUnit
         ]
 
 instance TF.IsValid (BudgetsBudgetResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\BudgetsBudgetResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
+                            ])
+        ])
+           P.<> TF.settingsValidator "_costTypes"
+                  (_costTypes
+                      :: BudgetsBudgetResource s -> TF.Attr s (CostTypesSetting s))
+                  TF.validator
+
+instance P.HasAccountId (BudgetsBudgetResource s) (TF.Attr s P.Text) where
+    accountId =
+        P.lens (_accountId :: BudgetsBudgetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _accountId = a } :: BudgetsBudgetResource s)
 
 instance P.HasBudgetType (BudgetsBudgetResource s) (TF.Attr s P.Text) where
     budgetType =
         P.lens (_budgetType :: BudgetsBudgetResource s -> TF.Attr s P.Text)
                (\s a -> s { _budgetType = a } :: BudgetsBudgetResource s)
+
+instance P.HasCostFilters (BudgetsBudgetResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    costFilters =
+        P.lens (_costFilters :: BudgetsBudgetResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _costFilters = a } :: BudgetsBudgetResource s)
+
+instance P.HasCostTypes (BudgetsBudgetResource s) (TF.Attr s (CostTypesSetting s)) where
+    costTypes =
+        P.lens (_costTypes :: BudgetsBudgetResource s -> TF.Attr s (CostTypesSetting s))
+               (\s a -> s { _costTypes = a } :: BudgetsBudgetResource s)
 
 instance P.HasLimitAmount (BudgetsBudgetResource s) (TF.Attr s P.Text) where
     limitAmount =
@@ -5531,6 +6092,16 @@ instance P.HasLimitUnit (BudgetsBudgetResource s) (TF.Attr s P.Text) where
     limitUnit =
         P.lens (_limitUnit :: BudgetsBudgetResource s -> TF.Attr s P.Text)
                (\s a -> s { _limitUnit = a } :: BudgetsBudgetResource s)
+
+instance P.HasName (BudgetsBudgetResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: BudgetsBudgetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: BudgetsBudgetResource s)
+
+instance P.HasNamePrefix (BudgetsBudgetResource s) (TF.Attr s P.Text) where
+    namePrefix =
+        P.lens (_namePrefix :: BudgetsBudgetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _namePrefix = a } :: BudgetsBudgetResource s)
 
 instance P.HasTimePeriodEnd (BudgetsBudgetResource s) (TF.Attr s P.Text) where
     timePeriodEnd =
@@ -5582,6 +6153,9 @@ data Cloud9EnvironmentEc2Resource s = Cloud9EnvironmentEc2Resource'
     , _name                     :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
+    , _ownerArn                 :: TF.Attr s P.Text
+    -- ^ @owner_arn@ - (Optional, Forces New)
+    --
     , _subnetId                 :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Optional, Forces New)
     --
@@ -5599,6 +6173,7 @@ cloud9EnvironmentEc2Resource _name _instanceType =
             , _description = TF.Nil
             , _instanceType = _instanceType
             , _name = _name
+            , _ownerArn = TF.Nil
             , _subnetId = TF.Nil
             }
 
@@ -5608,6 +6183,7 @@ instance TF.IsObject (Cloud9EnvironmentEc2Resource s) where
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "instance_type" <$> TF.attribute _instanceType
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "owner_arn" <$> TF.attribute _ownerArn
         , TF.assign "subnet_id" <$> TF.attribute _subnetId
         ]
 
@@ -5633,6 +6209,11 @@ instance P.HasName (Cloud9EnvironmentEc2Resource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: Cloud9EnvironmentEc2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: Cloud9EnvironmentEc2Resource s)
+
+instance P.HasOwnerArn (Cloud9EnvironmentEc2Resource s) (TF.Attr s P.Text) where
+    ownerArn =
+        P.lens (_ownerArn :: Cloud9EnvironmentEc2Resource s -> TF.Attr s P.Text)
+               (\s a -> s { _ownerArn = a } :: Cloud9EnvironmentEc2Resource s)
 
 instance P.HasSubnetId (Cloud9EnvironmentEc2Resource s) (TF.Attr s P.Text) where
     subnetId =
@@ -5674,11 +6255,20 @@ data CloudformationStackResource s = CloudformationStackResource'
     , _onFailure        :: TF.Attr s P.Text
     -- ^ @on_failure@ - (Optional, Forces New)
     --
+    , _parameters       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @parameters@ - (Optional)
+    --
+    , _policyBody       :: TF.Attr s P.Text
+    -- ^ @policy_body@ - (Optional)
+    --
     , _policyUrl        :: TF.Attr s P.Text
     -- ^ @policy_url@ - (Optional)
     --
     , _tags             :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
+    --
+    , _templateBody     :: TF.Attr s P.Text
+    -- ^ @template_body@ - (Optional)
     --
     , _templateUrl      :: TF.Attr s P.Text
     -- ^ @template_url@ - (Optional)
@@ -5701,8 +6291,11 @@ cloudformationStackResource _name =
             , _name = _name
             , _notificationArns = TF.Nil
             , _onFailure = TF.Nil
+            , _parameters = TF.Nil
+            , _policyBody = TF.Nil
             , _policyUrl = TF.Nil
             , _tags = TF.Nil
+            , _templateBody = TF.Nil
             , _templateUrl = TF.Nil
             , _timeoutInMinutes = TF.Nil
             }
@@ -5715,8 +6308,11 @@ instance TF.IsObject (CloudformationStackResource s) where
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "notification_arns" <$> TF.attribute _notificationArns
         , TF.assign "on_failure" <$> TF.attribute _onFailure
+        , TF.assign "parameters" <$> TF.attribute _parameters
+        , TF.assign "policy_body" <$> TF.attribute _policyBody
         , TF.assign "policy_url" <$> TF.attribute _policyUrl
         , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "template_body" <$> TF.attribute _templateBody
         , TF.assign "template_url" <$> TF.attribute _templateUrl
         , TF.assign "timeout_in_minutes" <$> TF.attribute _timeoutInMinutes
         ]
@@ -5754,6 +6350,16 @@ instance P.HasOnFailure (CloudformationStackResource s) (TF.Attr s P.Text) where
         P.lens (_onFailure :: CloudformationStackResource s -> TF.Attr s P.Text)
                (\s a -> s { _onFailure = a } :: CloudformationStackResource s)
 
+instance P.HasParameters (CloudformationStackResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    parameters =
+        P.lens (_parameters :: CloudformationStackResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _parameters = a } :: CloudformationStackResource s)
+
+instance P.HasPolicyBody (CloudformationStackResource s) (TF.Attr s P.Text) where
+    policyBody =
+        P.lens (_policyBody :: CloudformationStackResource s -> TF.Attr s P.Text)
+               (\s a -> s { _policyBody = a } :: CloudformationStackResource s)
+
 instance P.HasPolicyUrl (CloudformationStackResource s) (TF.Attr s P.Text) where
     policyUrl =
         P.lens (_policyUrl :: CloudformationStackResource s -> TF.Attr s P.Text)
@@ -5763,6 +6369,11 @@ instance P.HasTags (CloudformationStackResource s) (TF.Attr s (P.Map P.Text (TF.
     tags =
         P.lens (_tags :: CloudformationStackResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: CloudformationStackResource s)
+
+instance P.HasTemplateBody (CloudformationStackResource s) (TF.Attr s P.Text) where
+    templateBody =
+        P.lens (_templateBody :: CloudformationStackResource s -> TF.Attr s P.Text)
+               (\s a -> s { _templateBody = a } :: CloudformationStackResource s)
 
 instance P.HasTemplateUrl (CloudformationStackResource s) (TF.Attr s P.Text) where
     templateUrl =
@@ -6366,9 +6977,18 @@ data CloudwatchEventRuleResource s = CloudwatchEventRuleResource'
     , _isEnabled          :: TF.Attr s P.Bool
     -- ^ @is_enabled@ - (Optional)
     --
+    , _name               :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
     , _namePrefix         :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
     --
+    -- Conflicts with:
+    --
+    -- * 'name'
     , _roleArn            :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Optional)
     --
@@ -6386,6 +7006,7 @@ cloudwatchEventRuleResource =
             { _description = TF.Nil
             , _eventPattern = TF.Nil
             , _isEnabled = TF.value P.True
+            , _name = TF.Nil
             , _namePrefix = TF.Nil
             , _roleArn = TF.Nil
             , _scheduleExpression = TF.Nil
@@ -6396,13 +7017,25 @@ instance TF.IsObject (CloudwatchEventRuleResource s) where
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "event_pattern" <$> TF.attribute _eventPattern
         , TF.assign "is_enabled" <$> TF.attribute _isEnabled
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _namePrefix
         , TF.assign "role_arn" <$> TF.attribute _roleArn
         , TF.assign "schedule_expression" <$> TF.attribute _scheduleExpression
         ]
 
 instance TF.IsValid (CloudwatchEventRuleResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\CloudwatchEventRuleResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
+                            ])
+        ])
 
 instance P.HasDescription (CloudwatchEventRuleResource s) (TF.Attr s P.Text) where
     description =
@@ -6418,6 +7051,11 @@ instance P.HasIsEnabled (CloudwatchEventRuleResource s) (TF.Attr s P.Bool) where
     isEnabled =
         P.lens (_isEnabled :: CloudwatchEventRuleResource s -> TF.Attr s P.Bool)
                (\s a -> s { _isEnabled = a } :: CloudwatchEventRuleResource s)
+
+instance P.HasName (CloudwatchEventRuleResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: CloudwatchEventRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: CloudwatchEventRuleResource s)
 
 instance P.HasNamePrefix (CloudwatchEventRuleResource s) (TF.Attr s P.Text) where
     namePrefix =
@@ -6487,6 +7125,9 @@ data CloudwatchEventTargetResource s = CloudwatchEventTargetResource'
     , _sqsTarget         :: TF.Attr s (SqsTargetSetting s)
     -- ^ @sqs_target@ - (Optional)
     --
+    , _targetId          :: TF.Attr s P.Text
+    -- ^ @target_id@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_cloudwatch_event_target@ resource value.
@@ -6508,6 +7149,7 @@ cloudwatchEventTargetResource _arn _rule =
             , _rule = _rule
             , _runCommandTargets = TF.Nil
             , _sqsTarget = TF.Nil
+            , _targetId = TF.Nil
             }
 
 instance TF.IsObject (CloudwatchEventTargetResource s) where
@@ -6523,6 +7165,7 @@ instance TF.IsObject (CloudwatchEventTargetResource s) where
         , TF.assign "rule" <$> TF.attribute _rule
         , TF.assign "run_command_targets" <$> TF.attribute _runCommandTargets
         , TF.assign "sqs_target" <$> TF.attribute _sqsTarget
+        , TF.assign "target_id" <$> TF.attribute _targetId
         ]
 
 instance TF.IsValid (CloudwatchEventTargetResource s) where
@@ -6613,6 +7256,11 @@ instance P.HasSqsTarget (CloudwatchEventTargetResource s) (TF.Attr s (SqsTargetS
     sqsTarget =
         P.lens (_sqsTarget :: CloudwatchEventTargetResource s -> TF.Attr s (SqsTargetSetting s))
                (\s a -> s { _sqsTarget = a } :: CloudwatchEventTargetResource s)
+
+instance P.HasTargetId (CloudwatchEventTargetResource s) (TF.Attr s P.Text) where
+    targetId =
+        P.lens (_targetId :: CloudwatchEventTargetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _targetId = a } :: CloudwatchEventTargetResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudwatchEventTargetResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -6736,9 +7384,18 @@ data CloudwatchLogGroupResource s = CloudwatchLogGroupResource'
     { _kmsKeyId        :: TF.Attr s P.Text
     -- ^ @kms_key_id@ - (Optional)
     --
+    , _name            :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
     , _namePrefix      :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
     --
+    -- Conflicts with:
+    --
+    -- * 'name'
     , _retentionInDays :: TF.Attr s P.Int
     -- ^ @retention_in_days@ - (Optional)
     --
@@ -6754,6 +7411,7 @@ cloudwatchLogGroupResource =
     TF.unsafeResource "aws_cloudwatch_log_group" TF.validator $
         CloudwatchLogGroupResource'
             { _kmsKeyId = TF.Nil
+            , _name = TF.Nil
             , _namePrefix = TF.Nil
             , _retentionInDays = TF.value 0
             , _tags = TF.Nil
@@ -6762,18 +7420,35 @@ cloudwatchLogGroupResource =
 instance TF.IsObject (CloudwatchLogGroupResource s) where
     toObject CloudwatchLogGroupResource'{..} = P.catMaybes
         [ TF.assign "kms_key_id" <$> TF.attribute _kmsKeyId
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _namePrefix
         , TF.assign "retention_in_days" <$> TF.attribute _retentionInDays
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (CloudwatchLogGroupResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\CloudwatchLogGroupResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
+                            ])
+        ])
 
 instance P.HasKmsKeyId (CloudwatchLogGroupResource s) (TF.Attr s P.Text) where
     kmsKeyId =
         P.lens (_kmsKeyId :: CloudwatchLogGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _kmsKeyId = a } :: CloudwatchLogGroupResource s)
+
+instance P.HasName (CloudwatchLogGroupResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: CloudwatchLogGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: CloudwatchLogGroupResource s)
 
 instance P.HasNamePrefix (CloudwatchLogGroupResource s) (TF.Attr s P.Text) where
     namePrefix =
@@ -6989,6 +7664,9 @@ data CloudwatchLogSubscriptionFilterResource s = CloudwatchLogSubscriptionFilter
     , _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _roleArn        :: TF.Attr s P.Text
+    -- ^ @role_arn@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_cloudwatch_log_subscription_filter@ resource value.
@@ -7006,6 +7684,7 @@ cloudwatchLogSubscriptionFilterResource _destinationArn _logGroupName _name _fil
             , _filterPattern = _filterPattern
             , _logGroupName = _logGroupName
             , _name = _name
+            , _roleArn = TF.Nil
             }
 
 instance TF.IsObject (CloudwatchLogSubscriptionFilterResource s) where
@@ -7015,6 +7694,7 @@ instance TF.IsObject (CloudwatchLogSubscriptionFilterResource s) where
         , TF.assign "filter_pattern" <$> TF.attribute _filterPattern
         , TF.assign "log_group_name" <$> TF.attribute _logGroupName
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "role_arn" <$> TF.attribute _roleArn
         ]
 
 instance TF.IsValid (CloudwatchLogSubscriptionFilterResource s) where
@@ -7045,6 +7725,11 @@ instance P.HasName (CloudwatchLogSubscriptionFilterResource s) (TF.Attr s P.Text
         P.lens (_name :: CloudwatchLogSubscriptionFilterResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: CloudwatchLogSubscriptionFilterResource s)
 
+instance P.HasRoleArn (CloudwatchLogSubscriptionFilterResource s) (TF.Attr s P.Text) where
+    roleArn =
+        P.lens (_roleArn :: CloudwatchLogSubscriptionFilterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _roleArn = a } :: CloudwatchLogSubscriptionFilterResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudwatchLogSubscriptionFilterResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -7056,31 +7741,34 @@ instance s ~ s' => P.HasComputedRoleArn (TF.Ref s' (CloudwatchLogSubscriptionFil
 -- See the <https://www.terraform.io/docs/providers/aws/r/cloudwatch_metric_alarm.html terraform documentation>
 -- for more information.
 data CloudwatchMetricAlarmResource s = CloudwatchMetricAlarmResource'
-    { _actionsEnabled          :: TF.Attr s P.Bool
+    { _actionsEnabled :: TF.Attr s P.Bool
     -- ^ @actions_enabled@ - (Optional)
     --
-    , _alarmActions            :: TF.Attr s [TF.Attr s P.Text]
+    , _alarmActions :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @alarm_actions@ - (Optional)
     --
-    , _alarmDescription        :: TF.Attr s P.Text
+    , _alarmDescription :: TF.Attr s P.Text
     -- ^ @alarm_description@ - (Optional)
     --
-    , _alarmName               :: TF.Attr s P.Text
+    , _alarmName :: TF.Attr s P.Text
     -- ^ @alarm_name@ - (Required, Forces New)
     --
-    , _comparisonOperator      :: TF.Attr s P.Text
+    , _comparisonOperator :: TF.Attr s P.Text
     -- ^ @comparison_operator@ - (Required)
     --
-    , _datapointsToAlarm       :: TF.Attr s P.Int
+    , _datapointsToAlarm :: TF.Attr s P.Int
     -- ^ @datapoints_to_alarm@ - (Optional)
     --
-    , _dimensions              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _dimensions :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @dimensions@ - (Optional)
     --
-    , _evaluationPeriods       :: TF.Attr s P.Int
+    , _evaluateLowSampleCountPercentiles :: TF.Attr s P.Text
+    -- ^ @evaluate_low_sample_count_percentiles@ - (Optional)
+    --
+    , _evaluationPeriods :: TF.Attr s P.Int
     -- ^ @evaluation_periods@ - (Required)
     --
-    , _extendedStatistic       :: TF.Attr s P.Text
+    , _extendedStatistic :: TF.Attr s P.Text
     -- ^ @extended_statistic@ - (Optional)
     --
     -- Conflicts with:
@@ -7089,31 +7777,31 @@ data CloudwatchMetricAlarmResource s = CloudwatchMetricAlarmResource'
     , _insufficientDataActions :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @insufficient_data_actions@ - (Optional)
     --
-    , _metricName              :: TF.Attr s P.Text
+    , _metricName :: TF.Attr s P.Text
     -- ^ @metric_name@ - (Required)
     --
-    , _namespace               :: TF.Attr s P.Text
+    , _namespace :: TF.Attr s P.Text
     -- ^ @namespace@ - (Required)
     --
-    , _okActions               :: TF.Attr s [TF.Attr s P.Text]
+    , _okActions :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @ok_actions@ - (Optional)
     --
-    , _period                  :: TF.Attr s P.Int
+    , _period :: TF.Attr s P.Int
     -- ^ @period@ - (Required)
     --
-    , _statistic               :: TF.Attr s P.Text
+    , _statistic :: TF.Attr s P.Text
     -- ^ @statistic@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'extendedStatistic'
-    , _threshold               :: TF.Attr s P.Double
+    , _threshold :: TF.Attr s P.Double
     -- ^ @threshold@ - (Required)
     --
-    , _treatMissingData        :: TF.Attr s P.Text
+    , _treatMissingData :: TF.Attr s P.Text
     -- ^ @treat_missing_data@ - (Optional)
     --
-    , _unit                    :: TF.Attr s P.Text
+    , _unit :: TF.Attr s P.Text
     -- ^ @unit@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -7138,6 +7826,7 @@ cloudwatchMetricAlarmResource _alarmName _metricName _namespace _comparisonOpera
             , _comparisonOperator = _comparisonOperator
             , _datapointsToAlarm = TF.Nil
             , _dimensions = TF.Nil
+            , _evaluateLowSampleCountPercentiles = TF.Nil
             , _evaluationPeriods = _evaluationPeriods
             , _extendedStatistic = TF.Nil
             , _insufficientDataActions = TF.Nil
@@ -7160,6 +7849,7 @@ instance TF.IsObject (CloudwatchMetricAlarmResource s) where
         , TF.assign "comparison_operator" <$> TF.attribute _comparisonOperator
         , TF.assign "datapoints_to_alarm" <$> TF.attribute _datapointsToAlarm
         , TF.assign "dimensions" <$> TF.attribute _dimensions
+        , TF.assign "evaluate_low_sample_count_percentiles" <$> TF.attribute _evaluateLowSampleCountPercentiles
         , TF.assign "evaluation_periods" <$> TF.attribute _evaluationPeriods
         , TF.assign "extended_statistic" <$> TF.attribute _extendedStatistic
         , TF.assign "insufficient_data_actions" <$> TF.attribute _insufficientDataActions
@@ -7221,6 +7911,11 @@ instance P.HasDimensions (CloudwatchMetricAlarmResource s) (TF.Attr s (P.Map P.T
     dimensions =
         P.lens (_dimensions :: CloudwatchMetricAlarmResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _dimensions = a } :: CloudwatchMetricAlarmResource s)
+
+instance P.HasEvaluateLowSampleCountPercentiles (CloudwatchMetricAlarmResource s) (TF.Attr s P.Text) where
+    evaluateLowSampleCountPercentiles =
+        P.lens (_evaluateLowSampleCountPercentiles :: CloudwatchMetricAlarmResource s -> TF.Attr s P.Text)
+               (\s a -> s { _evaluateLowSampleCountPercentiles = a } :: CloudwatchMetricAlarmResource s)
 
 instance P.HasEvaluationPeriods (CloudwatchMetricAlarmResource s) (TF.Attr s P.Int) where
     evaluationPeriods =
@@ -7288,37 +7983,43 @@ instance s ~ s' => P.HasComputedEvaluateLowSampleCountPercentiles (TF.Ref s' (Cl
 -- See the <https://www.terraform.io/docs/providers/aws/r/codebuild_project.html terraform documentation>
 -- for more information.
 data CodebuildProjectResource s = CodebuildProjectResource'
-    { _artifacts    :: TF.Attr s (ArtifactsSetting s)
+    { _artifacts     :: TF.Attr s (ArtifactsSetting s)
     -- ^ @artifacts@ - (Required)
     --
-    , _badgeEnabled :: TF.Attr s P.Bool
+    , _badgeEnabled  :: TF.Attr s P.Bool
     -- ^ @badge_enabled@ - (Optional)
     --
-    , _buildTimeout :: TF.Attr s P.Int
+    , _buildTimeout  :: TF.Attr s P.Int
     -- ^ @build_timeout@ - (Optional)
     --
-    , _cache        :: TF.Attr s (CacheSetting s)
+    , _cache         :: TF.Attr s (CacheSetting s)
     -- ^ @cache@ - (Optional)
     --
-    , _environment  :: TF.Attr s (EnvironmentSetting s)
+    , _description   :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _encryptionKey :: TF.Attr s P.Text
+    -- ^ @encryption_key@ - (Optional)
+    --
+    , _environment   :: TF.Attr s (EnvironmentSetting s)
     -- ^ @environment@ - (Required)
     --
-    , _name         :: TF.Attr s P.Text
+    , _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _serviceRole  :: TF.Attr s P.Text
+    , _serviceRole   :: TF.Attr s P.Text
     -- ^ @service_role@ - (Required)
     --
-    , _source       :: TF.Attr s (SourceSetting s)
+    , _source        :: TF.Attr s (SourceSetting s)
     -- ^ @source@ - (Required)
     --
-    , _tags         :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags          :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _timeout      :: TF.Attr s P.Int
+    , _timeout       :: TF.Attr s P.Int
     -- ^ @timeout@ - (Optional)
     --
-    , _vpcConfig    :: TF.Attr s (VpcConfigSetting s)
+    , _vpcConfig     :: TF.Attr s (VpcConfigSetting s)
     -- ^ @vpc_config@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -7338,6 +8039,8 @@ codebuildProjectResource _artifacts _environment _name _serviceRole _source =
             , _badgeEnabled = TF.value P.False
             , _buildTimeout = TF.value 60
             , _cache = TF.Nil
+            , _description = TF.Nil
+            , _encryptionKey = TF.Nil
             , _environment = _environment
             , _name = _name
             , _serviceRole = _serviceRole
@@ -7353,6 +8056,8 @@ instance TF.IsObject (CodebuildProjectResource s) where
         , TF.assign "badge_enabled" <$> TF.attribute _badgeEnabled
         , TF.assign "build_timeout" <$> TF.attribute _buildTimeout
         , TF.assign "cache" <$> TF.attribute _cache
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "encryption_key" <$> TF.attribute _encryptionKey
         , TF.assign "environment" <$> TF.attribute _environment
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "service_role" <$> TF.attribute _serviceRole
@@ -7404,6 +8109,16 @@ instance P.HasCache (CodebuildProjectResource s) (TF.Attr s (CacheSetting s)) wh
     cache =
         P.lens (_cache :: CodebuildProjectResource s -> TF.Attr s (CacheSetting s))
                (\s a -> s { _cache = a } :: CodebuildProjectResource s)
+
+instance P.HasDescription (CodebuildProjectResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: CodebuildProjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: CodebuildProjectResource s)
+
+instance P.HasEncryptionKey (CodebuildProjectResource s) (TF.Attr s P.Text) where
+    encryptionKey =
+        P.lens (_encryptionKey :: CodebuildProjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _encryptionKey = a } :: CodebuildProjectResource s)
 
 instance P.HasEnvironment (CodebuildProjectResource s) (TF.Attr s (EnvironmentSetting s)) where
     environment =
@@ -7636,6 +8351,9 @@ data CodedeployAppResource s = CodedeployAppResource'
     , _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _uniqueId        :: TF.Attr s P.Text
+    -- ^ @unique_id@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_codedeploy_app@ resource value.
@@ -7647,12 +8365,14 @@ codedeployAppResource _name =
         CodedeployAppResource'
             { _computePlatform = TF.value "Server"
             , _name = _name
+            , _uniqueId = TF.Nil
             }
 
 instance TF.IsObject (CodedeployAppResource s) where
     toObject CodedeployAppResource'{..} = P.catMaybes
         [ TF.assign "compute_platform" <$> TF.attribute _computePlatform
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "unique_id" <$> TF.attribute _uniqueId
         ]
 
 instance TF.IsValid (CodedeployAppResource s) where
@@ -7667,6 +8387,11 @@ instance P.HasName (CodedeployAppResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CodedeployAppResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: CodedeployAppResource s)
+
+instance P.HasUniqueId (CodedeployAppResource s) (TF.Attr s P.Text) where
+    uniqueId =
+        P.lens (_uniqueId :: CodedeployAppResource s -> TF.Attr s P.Text)
+               (\s a -> s { _uniqueId = a } :: CodedeployAppResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CodedeployAppResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -7745,17 +8470,26 @@ data CodedeployDeploymentGroupResource s = CodedeployDeploymentGroupResource'
     , _autoscalingGroups :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @autoscaling_groups@ - (Optional)
     --
+    , _blueGreenDeploymentConfig :: TF.Attr s (BlueGreenDeploymentConfigSetting s)
+    -- ^ @blue_green_deployment_config@ - (Optional)
+    --
     , _deploymentConfigName :: TF.Attr s P.Text
     -- ^ @deployment_config_name@ - (Optional)
     --
     , _deploymentGroupName :: TF.Attr s P.Text
     -- ^ @deployment_group_name@ - (Required, Forces New)
     --
+    , _deploymentStyle :: TF.Attr s (DeploymentStyleSetting s)
+    -- ^ @deployment_style@ - (Optional)
+    --
     , _ec2TagFilter :: TF.Attr s [TF.Attr s (Ec2TagFilterSetting s)]
     -- ^ @ec2_tag_filter@ - (Optional)
     --
     , _ec2TagSet :: TF.Attr s [TF.Attr s (Ec2TagSetSetting s)]
     -- ^ @ec2_tag_set@ - (Optional)
+    --
+    , _loadBalancerInfo :: TF.Attr s (LoadBalancerInfoSetting s)
+    -- ^ @load_balancer_info@ - (Optional)
     --
     , _onPremisesInstanceTagFilter :: TF.Attr s [TF.Attr s (OnPremisesInstanceTagFilterSetting s)]
     -- ^ @on_premises_instance_tag_filter@ - (Optional)
@@ -7781,10 +8515,13 @@ codedeployDeploymentGroupResource _serviceRoleArn _appName _deploymentGroupName 
             , _appName = _appName
             , _autoRollbackConfiguration = TF.Nil
             , _autoscalingGroups = TF.Nil
+            , _blueGreenDeploymentConfig = TF.Nil
             , _deploymentConfigName = TF.value "CodeDeployDefault.OneAtATime"
             , _deploymentGroupName = _deploymentGroupName
+            , _deploymentStyle = TF.Nil
             , _ec2TagFilter = TF.Nil
             , _ec2TagSet = TF.Nil
+            , _loadBalancerInfo = TF.Nil
             , _onPremisesInstanceTagFilter = TF.Nil
             , _serviceRoleArn = _serviceRoleArn
             , _triggerConfiguration = TF.Nil
@@ -7796,10 +8533,13 @@ instance TF.IsObject (CodedeployDeploymentGroupResource s) where
         , TF.assign "app_name" <$> TF.attribute _appName
         , TF.assign "auto_rollback_configuration" <$> TF.attribute _autoRollbackConfiguration
         , TF.assign "autoscaling_groups" <$> TF.attribute _autoscalingGroups
+        , TF.assign "blue_green_deployment_config" <$> TF.attribute _blueGreenDeploymentConfig
         , TF.assign "deployment_config_name" <$> TF.attribute _deploymentConfigName
         , TF.assign "deployment_group_name" <$> TF.attribute _deploymentGroupName
+        , TF.assign "deployment_style" <$> TF.attribute _deploymentStyle
         , TF.assign "ec2_tag_filter" <$> TF.attribute _ec2TagFilter
         , TF.assign "ec2_tag_set" <$> TF.attribute _ec2TagSet
+        , TF.assign "load_balancer_info" <$> TF.attribute _loadBalancerInfo
         , TF.assign "on_premises_instance_tag_filter" <$> TF.attribute _onPremisesInstanceTagFilter
         , TF.assign "service_role_arn" <$> TF.attribute _serviceRoleArn
         , TF.assign "trigger_configuration" <$> TF.attribute _triggerConfiguration
@@ -7814,6 +8554,18 @@ instance TF.IsValid (CodedeployDeploymentGroupResource s) where
            P.<> TF.settingsValidator "_autoRollbackConfiguration"
                   (_autoRollbackConfiguration
                       :: CodedeployDeploymentGroupResource s -> TF.Attr s (AutoRollbackConfigurationSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_blueGreenDeploymentConfig"
+                  (_blueGreenDeploymentConfig
+                      :: CodedeployDeploymentGroupResource s -> TF.Attr s (BlueGreenDeploymentConfigSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_deploymentStyle"
+                  (_deploymentStyle
+                      :: CodedeployDeploymentGroupResource s -> TF.Attr s (DeploymentStyleSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_loadBalancerInfo"
+                  (_loadBalancerInfo
+                      :: CodedeployDeploymentGroupResource s -> TF.Attr s (LoadBalancerInfoSetting s))
                   TF.validator
 
 instance P.HasAlarmConfiguration (CodedeployDeploymentGroupResource s) (TF.Attr s (AlarmConfigurationSetting s)) where
@@ -7836,6 +8588,11 @@ instance P.HasAutoscalingGroups (CodedeployDeploymentGroupResource s) (TF.Attr s
         P.lens (_autoscalingGroups :: CodedeployDeploymentGroupResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _autoscalingGroups = a } :: CodedeployDeploymentGroupResource s)
 
+instance P.HasBlueGreenDeploymentConfig (CodedeployDeploymentGroupResource s) (TF.Attr s (BlueGreenDeploymentConfigSetting s)) where
+    blueGreenDeploymentConfig =
+        P.lens (_blueGreenDeploymentConfig :: CodedeployDeploymentGroupResource s -> TF.Attr s (BlueGreenDeploymentConfigSetting s))
+               (\s a -> s { _blueGreenDeploymentConfig = a } :: CodedeployDeploymentGroupResource s)
+
 instance P.HasDeploymentConfigName (CodedeployDeploymentGroupResource s) (TF.Attr s P.Text) where
     deploymentConfigName =
         P.lens (_deploymentConfigName :: CodedeployDeploymentGroupResource s -> TF.Attr s P.Text)
@@ -7846,6 +8603,11 @@ instance P.HasDeploymentGroupName (CodedeployDeploymentGroupResource s) (TF.Attr
         P.lens (_deploymentGroupName :: CodedeployDeploymentGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _deploymentGroupName = a } :: CodedeployDeploymentGroupResource s)
 
+instance P.HasDeploymentStyle (CodedeployDeploymentGroupResource s) (TF.Attr s (DeploymentStyleSetting s)) where
+    deploymentStyle =
+        P.lens (_deploymentStyle :: CodedeployDeploymentGroupResource s -> TF.Attr s (DeploymentStyleSetting s))
+               (\s a -> s { _deploymentStyle = a } :: CodedeployDeploymentGroupResource s)
+
 instance P.HasEc2TagFilter (CodedeployDeploymentGroupResource s) (TF.Attr s [TF.Attr s (Ec2TagFilterSetting s)]) where
     ec2TagFilter =
         P.lens (_ec2TagFilter :: CodedeployDeploymentGroupResource s -> TF.Attr s [TF.Attr s (Ec2TagFilterSetting s)])
@@ -7855,6 +8617,11 @@ instance P.HasEc2TagSet (CodedeployDeploymentGroupResource s) (TF.Attr s [TF.Att
     ec2TagSet =
         P.lens (_ec2TagSet :: CodedeployDeploymentGroupResource s -> TF.Attr s [TF.Attr s (Ec2TagSetSetting s)])
                (\s a -> s { _ec2TagSet = a } :: CodedeployDeploymentGroupResource s)
+
+instance P.HasLoadBalancerInfo (CodedeployDeploymentGroupResource s) (TF.Attr s (LoadBalancerInfoSetting s)) where
+    loadBalancerInfo =
+        P.lens (_loadBalancerInfo :: CodedeployDeploymentGroupResource s -> TF.Attr s (LoadBalancerInfoSetting s))
+               (\s a -> s { _loadBalancerInfo = a } :: CodedeployDeploymentGroupResource s)
 
 instance P.HasOnPremisesInstanceTagFilter (CodedeployDeploymentGroupResource s) (TF.Attr s [TF.Attr s (OnPremisesInstanceTagFilterSetting s)]) where
     onPremisesInstanceTagFilter =
@@ -8357,7 +9124,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (CognitoUserGroupResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/aws/r/cognito_user_pool.html terraform documentation>
 -- for more information.
 data CognitoUserPoolResource s = CognitoUserPoolResource'
-    { _aliasAttributes :: TF.Attr s [TF.Attr s P.Text]
+    { _adminCreateUserConfig :: TF.Attr s (AdminCreateUserConfigSetting s)
+    -- ^ @admin_create_user_config@ - (Optional)
+    --
+    , _aliasAttributes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @alias_attributes@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -8372,11 +9142,23 @@ data CognitoUserPoolResource s = CognitoUserPoolResource'
     , _emailConfiguration :: TF.Attr s (EmailConfigurationSetting s)
     -- ^ @email_configuration@ - (Optional)
     --
+    , _emailVerificationMessage :: TF.Attr s P.Text
+    -- ^ @email_verification_message@ - (Optional)
+    --
+    , _emailVerificationSubject :: TF.Attr s P.Text
+    -- ^ @email_verification_subject@ - (Optional)
+    --
+    , _lambdaConfig :: TF.Attr s (LambdaConfigSetting s)
+    -- ^ @lambda_config@ - (Optional)
+    --
     , _mfaConfiguration :: TF.Attr s P.Text
     -- ^ @mfa_configuration@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
+    --
+    , _passwordPolicy :: TF.Attr s (PasswordPolicySetting s)
+    -- ^ @password_policy@ - (Optional)
     --
     , _schema :: TF.Attr s (P.NonEmpty (TF.Attr s (SchemaSetting s)))
     -- ^ @schema@ - (Optional, Forces New)
@@ -8399,6 +9181,9 @@ data CognitoUserPoolResource s = CognitoUserPoolResource'
     -- Conflicts with:
     --
     -- * 'aliasAttributes'
+    , _verificationMessageTemplate :: TF.Attr s (VerificationMessageTemplateSetting s)
+    -- ^ @verification_message_template@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_cognito_user_pool@ resource value.
@@ -8408,34 +9193,46 @@ cognitoUserPoolResource
 cognitoUserPoolResource _name =
     TF.unsafeResource "aws_cognito_user_pool" TF.validator $
         CognitoUserPoolResource'
-            { _aliasAttributes = TF.Nil
+            { _adminCreateUserConfig = TF.Nil
+            , _aliasAttributes = TF.Nil
             , _autoVerifiedAttributes = TF.Nil
             , _deviceConfiguration = TF.Nil
             , _emailConfiguration = TF.Nil
+            , _emailVerificationMessage = TF.Nil
+            , _emailVerificationSubject = TF.Nil
+            , _lambdaConfig = TF.Nil
             , _mfaConfiguration = TF.value "OFF"
             , _name = _name
+            , _passwordPolicy = TF.Nil
             , _schema = TF.Nil
             , _smsAuthenticationMessage = TF.Nil
             , _smsConfiguration = TF.Nil
             , _smsVerificationMessage = TF.Nil
             , _tags = TF.Nil
             , _usernameAttributes = TF.Nil
+            , _verificationMessageTemplate = TF.Nil
             }
 
 instance TF.IsObject (CognitoUserPoolResource s) where
     toObject CognitoUserPoolResource'{..} = P.catMaybes
-        [ TF.assign "alias_attributes" <$> TF.attribute _aliasAttributes
+        [ TF.assign "admin_create_user_config" <$> TF.attribute _adminCreateUserConfig
+        , TF.assign "alias_attributes" <$> TF.attribute _aliasAttributes
         , TF.assign "auto_verified_attributes" <$> TF.attribute _autoVerifiedAttributes
         , TF.assign "device_configuration" <$> TF.attribute _deviceConfiguration
         , TF.assign "email_configuration" <$> TF.attribute _emailConfiguration
+        , TF.assign "email_verification_message" <$> TF.attribute _emailVerificationMessage
+        , TF.assign "email_verification_subject" <$> TF.attribute _emailVerificationSubject
+        , TF.assign "lambda_config" <$> TF.attribute _lambdaConfig
         , TF.assign "mfa_configuration" <$> TF.attribute _mfaConfiguration
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "password_policy" <$> TF.attribute _passwordPolicy
         , TF.assign "schema" <$> TF.attribute _schema
         , TF.assign "sms_authentication_message" <$> TF.attribute _smsAuthenticationMessage
         , TF.assign "sms_configuration" <$> TF.attribute _smsConfiguration
         , TF.assign "sms_verification_message" <$> TF.attribute _smsVerificationMessage
         , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "username_attributes" <$> TF.attribute _usernameAttributes
+        , TF.assign "verification_message_template" <$> TF.attribute _verificationMessageTemplate
         ]
 
 instance TF.IsValid (CognitoUserPoolResource s) where
@@ -8451,6 +9248,10 @@ instance TF.IsValid (CognitoUserPoolResource s) where
                             [ "_aliasAttributes"
                             ])
         ])
+           P.<> TF.settingsValidator "_adminCreateUserConfig"
+                  (_adminCreateUserConfig
+                      :: CognitoUserPoolResource s -> TF.Attr s (AdminCreateUserConfigSetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_deviceConfiguration"
                   (_deviceConfiguration
                       :: CognitoUserPoolResource s -> TF.Attr s (DeviceConfigurationSetting s))
@@ -8459,10 +9260,27 @@ instance TF.IsValid (CognitoUserPoolResource s) where
                   (_emailConfiguration
                       :: CognitoUserPoolResource s -> TF.Attr s (EmailConfigurationSetting s))
                   TF.validator
+           P.<> TF.settingsValidator "_lambdaConfig"
+                  (_lambdaConfig
+                      :: CognitoUserPoolResource s -> TF.Attr s (LambdaConfigSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_passwordPolicy"
+                  (_passwordPolicy
+                      :: CognitoUserPoolResource s -> TF.Attr s (PasswordPolicySetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_smsConfiguration"
                   (_smsConfiguration
                       :: CognitoUserPoolResource s -> TF.Attr s (SmsConfigurationSetting s))
                   TF.validator
+           P.<> TF.settingsValidator "_verificationMessageTemplate"
+                  (_verificationMessageTemplate
+                      :: CognitoUserPoolResource s -> TF.Attr s (VerificationMessageTemplateSetting s))
+                  TF.validator
+
+instance P.HasAdminCreateUserConfig (CognitoUserPoolResource s) (TF.Attr s (AdminCreateUserConfigSetting s)) where
+    adminCreateUserConfig =
+        P.lens (_adminCreateUserConfig :: CognitoUserPoolResource s -> TF.Attr s (AdminCreateUserConfigSetting s))
+               (\s a -> s { _adminCreateUserConfig = a } :: CognitoUserPoolResource s)
 
 instance P.HasAliasAttributes (CognitoUserPoolResource s) (TF.Attr s [TF.Attr s P.Text]) where
     aliasAttributes =
@@ -8484,6 +9302,21 @@ instance P.HasEmailConfiguration (CognitoUserPoolResource s) (TF.Attr s (EmailCo
         P.lens (_emailConfiguration :: CognitoUserPoolResource s -> TF.Attr s (EmailConfigurationSetting s))
                (\s a -> s { _emailConfiguration = a } :: CognitoUserPoolResource s)
 
+instance P.HasEmailVerificationMessage (CognitoUserPoolResource s) (TF.Attr s P.Text) where
+    emailVerificationMessage =
+        P.lens (_emailVerificationMessage :: CognitoUserPoolResource s -> TF.Attr s P.Text)
+               (\s a -> s { _emailVerificationMessage = a } :: CognitoUserPoolResource s)
+
+instance P.HasEmailVerificationSubject (CognitoUserPoolResource s) (TF.Attr s P.Text) where
+    emailVerificationSubject =
+        P.lens (_emailVerificationSubject :: CognitoUserPoolResource s -> TF.Attr s P.Text)
+               (\s a -> s { _emailVerificationSubject = a } :: CognitoUserPoolResource s)
+
+instance P.HasLambdaConfig (CognitoUserPoolResource s) (TF.Attr s (LambdaConfigSetting s)) where
+    lambdaConfig =
+        P.lens (_lambdaConfig :: CognitoUserPoolResource s -> TF.Attr s (LambdaConfigSetting s))
+               (\s a -> s { _lambdaConfig = a } :: CognitoUserPoolResource s)
+
 instance P.HasMfaConfiguration (CognitoUserPoolResource s) (TF.Attr s P.Text) where
     mfaConfiguration =
         P.lens (_mfaConfiguration :: CognitoUserPoolResource s -> TF.Attr s P.Text)
@@ -8493,6 +9326,11 @@ instance P.HasName (CognitoUserPoolResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CognitoUserPoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: CognitoUserPoolResource s)
+
+instance P.HasPasswordPolicy (CognitoUserPoolResource s) (TF.Attr s (PasswordPolicySetting s)) where
+    passwordPolicy =
+        P.lens (_passwordPolicy :: CognitoUserPoolResource s -> TF.Attr s (PasswordPolicySetting s))
+               (\s a -> s { _passwordPolicy = a } :: CognitoUserPoolResource s)
 
 instance P.HasSchema (CognitoUserPoolResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (SchemaSetting s)))) where
     schema =
@@ -8523,6 +9361,11 @@ instance P.HasUsernameAttributes (CognitoUserPoolResource s) (TF.Attr s [TF.Attr
     usernameAttributes =
         P.lens (_usernameAttributes :: CognitoUserPoolResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _usernameAttributes = a } :: CognitoUserPoolResource s)
+
+instance P.HasVerificationMessageTemplate (CognitoUserPoolResource s) (TF.Attr s (VerificationMessageTemplateSetting s)) where
+    verificationMessageTemplate =
+        P.lens (_verificationMessageTemplate :: CognitoUserPoolResource s -> TF.Attr s (VerificationMessageTemplateSetting s))
+               (\s a -> s { _verificationMessageTemplate = a } :: CognitoUserPoolResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CognitoUserPoolResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -9026,10 +9869,13 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (ConfigConfigurationAggregatorRes
 -- See the <https://www.terraform.io/docs/providers/aws/r/config_configuration_recorder.html terraform documentation>
 -- for more information.
 data ConfigConfigurationRecorderResource s = ConfigConfigurationRecorderResource'
-    { _name    :: TF.Attr s P.Text
+    { _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Optional, Forces New)
     --
-    , _roleArn :: TF.Attr s P.Text
+    , _recordingGroup :: TF.Attr s (RecordingGroupSetting s)
+    -- ^ @recording_group@ - (Optional)
+    --
+    , _roleArn        :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -9042,22 +9888,33 @@ configConfigurationRecorderResource _roleArn =
     TF.unsafeResource "aws_config_configuration_recorder" TF.validator $
         ConfigConfigurationRecorderResource'
             { _name = TF.value "default"
+            , _recordingGroup = TF.Nil
             , _roleArn = _roleArn
             }
 
 instance TF.IsObject (ConfigConfigurationRecorderResource s) where
     toObject ConfigConfigurationRecorderResource'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "recording_group" <$> TF.attribute _recordingGroup
         , TF.assign "role_arn" <$> TF.attribute _roleArn
         ]
 
 instance TF.IsValid (ConfigConfigurationRecorderResource s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_recordingGroup"
+                  (_recordingGroup
+                      :: ConfigConfigurationRecorderResource s -> TF.Attr s (RecordingGroupSetting s))
+                  TF.validator
 
 instance P.HasName (ConfigConfigurationRecorderResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ConfigConfigurationRecorderResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ConfigConfigurationRecorderResource s)
+
+instance P.HasRecordingGroup (ConfigConfigurationRecorderResource s) (TF.Attr s (RecordingGroupSetting s)) where
+    recordingGroup =
+        P.lens (_recordingGroup :: ConfigConfigurationRecorderResource s -> TF.Attr s (RecordingGroupSetting s))
+               (\s a -> s { _recordingGroup = a } :: ConfigConfigurationRecorderResource s)
 
 instance P.HasRoleArn (ConfigConfigurationRecorderResource s) (TF.Attr s P.Text) where
     roleArn =
@@ -9282,14 +10139,26 @@ data DaxClusterResource s = DaxClusterResource'
     , _iamRoleArn           :: TF.Attr s P.Text
     -- ^ @iam_role_arn@ - (Required, Forces New)
     --
+    , _maintenanceWindow    :: TF.Attr s P.Text
+    -- ^ @maintenance_window@ - (Optional)
+    --
     , _nodeType             :: TF.Attr s P.Text
     -- ^ @node_type@ - (Required, Forces New)
     --
     , _notificationTopicArn :: TF.Attr s P.Text
     -- ^ @notification_topic_arn@ - (Optional)
     --
+    , _parameterGroupName   :: TF.Attr s P.Text
+    -- ^ @parameter_group_name@ - (Optional)
+    --
     , _replicationFactor    :: TF.Attr s P.Int
     -- ^ @replication_factor@ - (Required)
+    --
+    , _securityGroupIds     :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @security_group_ids@ - (Optional)
+    --
+    , _subnetGroupName      :: TF.Attr s P.Text
+    -- ^ @subnet_group_name@ - (Optional, Forces New)
     --
     , _tags                 :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
@@ -9310,9 +10179,13 @@ daxClusterResource _iamRoleArn _replicationFactor _clusterName _nodeType =
             , _clusterName = _clusterName
             , _description = TF.Nil
             , _iamRoleArn = _iamRoleArn
+            , _maintenanceWindow = TF.Nil
             , _nodeType = _nodeType
             , _notificationTopicArn = TF.Nil
+            , _parameterGroupName = TF.Nil
             , _replicationFactor = _replicationFactor
+            , _securityGroupIds = TF.Nil
+            , _subnetGroupName = TF.Nil
             , _tags = TF.Nil
             }
 
@@ -9322,9 +10195,13 @@ instance TF.IsObject (DaxClusterResource s) where
         , TF.assign "cluster_name" <$> TF.attribute _clusterName
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "iam_role_arn" <$> TF.attribute _iamRoleArn
+        , TF.assign "maintenance_window" <$> TF.attribute _maintenanceWindow
         , TF.assign "node_type" <$> TF.attribute _nodeType
         , TF.assign "notification_topic_arn" <$> TF.attribute _notificationTopicArn
+        , TF.assign "parameter_group_name" <$> TF.attribute _parameterGroupName
         , TF.assign "replication_factor" <$> TF.attribute _replicationFactor
+        , TF.assign "security_group_ids" <$> TF.attribute _securityGroupIds
+        , TF.assign "subnet_group_name" <$> TF.attribute _subnetGroupName
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
@@ -9351,6 +10228,11 @@ instance P.HasIamRoleArn (DaxClusterResource s) (TF.Attr s P.Text) where
         P.lens (_iamRoleArn :: DaxClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _iamRoleArn = a } :: DaxClusterResource s)
 
+instance P.HasMaintenanceWindow (DaxClusterResource s) (TF.Attr s P.Text) where
+    maintenanceWindow =
+        P.lens (_maintenanceWindow :: DaxClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _maintenanceWindow = a } :: DaxClusterResource s)
+
 instance P.HasNodeType (DaxClusterResource s) (TF.Attr s P.Text) where
     nodeType =
         P.lens (_nodeType :: DaxClusterResource s -> TF.Attr s P.Text)
@@ -9361,10 +10243,25 @@ instance P.HasNotificationTopicArn (DaxClusterResource s) (TF.Attr s P.Text) whe
         P.lens (_notificationTopicArn :: DaxClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _notificationTopicArn = a } :: DaxClusterResource s)
 
+instance P.HasParameterGroupName (DaxClusterResource s) (TF.Attr s P.Text) where
+    parameterGroupName =
+        P.lens (_parameterGroupName :: DaxClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _parameterGroupName = a } :: DaxClusterResource s)
+
 instance P.HasReplicationFactor (DaxClusterResource s) (TF.Attr s P.Int) where
     replicationFactor =
         P.lens (_replicationFactor :: DaxClusterResource s -> TF.Attr s P.Int)
                (\s a -> s { _replicationFactor = a } :: DaxClusterResource s)
+
+instance P.HasSecurityGroupIds (DaxClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    securityGroupIds =
+        P.lens (_securityGroupIds :: DaxClusterResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _securityGroupIds = a } :: DaxClusterResource s)
+
+instance P.HasSubnetGroupName (DaxClusterResource s) (TF.Attr s P.Text) where
+    subnetGroupName =
+        P.lens (_subnetGroupName :: DaxClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _subnetGroupName = a } :: DaxClusterResource s)
 
 instance P.HasTags (DaxClusterResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     tags =
@@ -9412,6 +10309,9 @@ data DaxParameterGroupResource s = DaxParameterGroupResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _parameters  :: TF.Attr s [TF.Attr s (ParametersSetting s)]
+    -- ^ @parameters@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_dax_parameter_group@ resource value.
@@ -9423,12 +10323,14 @@ daxParameterGroupResource _name =
         DaxParameterGroupResource'
             { _description = TF.Nil
             , _name = _name
+            , _parameters = TF.Nil
             }
 
 instance TF.IsObject (DaxParameterGroupResource s) where
     toObject DaxParameterGroupResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parameters" <$> TF.attribute _parameters
         ]
 
 instance TF.IsValid (DaxParameterGroupResource s) where
@@ -9443,6 +10345,11 @@ instance P.HasName (DaxParameterGroupResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DaxParameterGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DaxParameterGroupResource s)
+
+instance P.HasParameters (DaxParameterGroupResource s) (TF.Attr s [TF.Attr s (ParametersSetting s)]) where
+    parameters =
+        P.lens (_parameters :: DaxParameterGroupResource s -> TF.Attr s [TF.Attr s (ParametersSetting s)])
+               (\s a -> s { _parameters = a } :: DaxParameterGroupResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DaxParameterGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -9607,9 +10514,18 @@ data DbEventSubscriptionResource s = DbEventSubscriptionResource'
     , _eventCategories :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @event_categories@ - (Optional)
     --
+    , _name            :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
     , _namePrefix      :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
     --
+    -- Conflicts with:
+    --
+    -- * 'name'
     , _snsTopic        :: TF.Attr s P.Text
     -- ^ @sns_topic@ - (Required)
     --
@@ -9633,6 +10549,7 @@ dbEventSubscriptionResource _snsTopic =
         DbEventSubscriptionResource'
             { _enabled = TF.value P.True
             , _eventCategories = TF.Nil
+            , _name = TF.Nil
             , _namePrefix = TF.Nil
             , _snsTopic = _snsTopic
             , _sourceIds = TF.Nil
@@ -9644,6 +10561,7 @@ instance TF.IsObject (DbEventSubscriptionResource s) where
     toObject DbEventSubscriptionResource'{..} = P.catMaybes
         [ TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "event_categories" <$> TF.attribute _eventCategories
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _namePrefix
         , TF.assign "sns_topic" <$> TF.attribute _snsTopic
         , TF.assign "source_ids" <$> TF.attribute _sourceIds
@@ -9652,7 +10570,18 @@ instance TF.IsObject (DbEventSubscriptionResource s) where
         ]
 
 instance TF.IsValid (DbEventSubscriptionResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\DbEventSubscriptionResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
+                            ])
+        ])
 
 instance P.HasEnabled (DbEventSubscriptionResource s) (TF.Attr s P.Bool) where
     enabled =
@@ -9663,6 +10592,11 @@ instance P.HasEventCategories (DbEventSubscriptionResource s) (TF.Attr s [TF.Att
     eventCategories =
         P.lens (_eventCategories :: DbEventSubscriptionResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _eventCategories = a } :: DbEventSubscriptionResource s)
+
+instance P.HasName (DbEventSubscriptionResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: DbEventSubscriptionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DbEventSubscriptionResource s)
 
 instance P.HasNamePrefix (DbEventSubscriptionResource s) (TF.Attr s P.Text) where
     namePrefix =

@@ -84,8 +84,32 @@ import qualified Terrafomo.Validator    as TF
 -- See the <https://www.terraform.io/docs/providers/aws/d/subnet.html terraform documentation>
 -- for more information.
 data SubnetData s = SubnetData'
-    { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
+    { _availabilityZone :: TF.Attr s P.Text
+    -- ^ @availability_zone@ - (Optional)
+    --
+    , _cidrBlock        :: TF.Attr s P.Text
+    -- ^ @cidr_block@ - (Optional)
+    --
+    , _defaultForAz     :: TF.Attr s P.Bool
+    -- ^ @default_for_az@ - (Optional)
+    --
+    , _filter           :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Optional)
+    --
+    , _id               :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
+    , _ipv6CidrBlock    :: TF.Attr s P.Text
+    -- ^ @ipv6_cidr_block@ - (Optional)
+    --
+    , _state            :: TF.Attr s P.Text
+    -- ^ @state@ - (Optional)
+    --
+    , _tags             :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _vpcId            :: TF.Attr s P.Text
+    -- ^ @vpc_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -95,21 +119,77 @@ subnetData
 subnetData =
     TF.unsafeDataSource "aws_subnet" TF.validator $
         SubnetData'
-            { _filter = TF.Nil
+            { _availabilityZone = TF.Nil
+            , _cidrBlock = TF.Nil
+            , _defaultForAz = TF.Nil
+            , _filter = TF.Nil
+            , _id = TF.Nil
+            , _ipv6CidrBlock = TF.Nil
+            , _state = TF.Nil
+            , _tags = TF.Nil
+            , _vpcId = TF.Nil
             }
 
 instance TF.IsObject (SubnetData s) where
     toObject SubnetData'{..} = P.catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
+        [ TF.assign "availability_zone" <$> TF.attribute _availabilityZone
+        , TF.assign "cidr_block" <$> TF.attribute _cidrBlock
+        , TF.assign "default_for_az" <$> TF.attribute _defaultForAz
+        , TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "id" <$> TF.attribute _id
+        , TF.assign "ipv6_cidr_block" <$> TF.attribute _ipv6CidrBlock
+        , TF.assign "state" <$> TF.attribute _state
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
 
 instance TF.IsValid (SubnetData s) where
     validator = P.mempty
 
+instance P.HasAvailabilityZone (SubnetData s) (TF.Attr s P.Text) where
+    availabilityZone =
+        P.lens (_availabilityZone :: SubnetData s -> TF.Attr s P.Text)
+               (\s a -> s { _availabilityZone = a } :: SubnetData s)
+
+instance P.HasCidrBlock (SubnetData s) (TF.Attr s P.Text) where
+    cidrBlock =
+        P.lens (_cidrBlock :: SubnetData s -> TF.Attr s P.Text)
+               (\s a -> s { _cidrBlock = a } :: SubnetData s)
+
+instance P.HasDefaultForAz (SubnetData s) (TF.Attr s P.Bool) where
+    defaultForAz =
+        P.lens (_defaultForAz :: SubnetData s -> TF.Attr s P.Bool)
+               (\s a -> s { _defaultForAz = a } :: SubnetData s)
+
 instance P.HasFilter (SubnetData s) (TF.Attr s [TF.Attr s (FilterSetting s)]) where
     filter =
         P.lens (_filter :: SubnetData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: SubnetData s)
+
+instance P.HasId (SubnetData s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: SubnetData s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: SubnetData s)
+
+instance P.HasIpv6CidrBlock (SubnetData s) (TF.Attr s P.Text) where
+    ipv6CidrBlock =
+        P.lens (_ipv6CidrBlock :: SubnetData s -> TF.Attr s P.Text)
+               (\s a -> s { _ipv6CidrBlock = a } :: SubnetData s)
+
+instance P.HasState (SubnetData s) (TF.Attr s P.Text) where
+    state =
+        P.lens (_state :: SubnetData s -> TF.Attr s P.Text)
+               (\s a -> s { _state = a } :: SubnetData s)
+
+instance P.HasTags (SubnetData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: SubnetData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: SubnetData s)
+
+instance P.HasVpcId (SubnetData s) (TF.Attr s P.Text) where
+    vpcId =
+        P.lens (_vpcId :: SubnetData s -> TF.Attr s P.Text)
+               (\s a -> s { _vpcId = a } :: SubnetData s)
 
 instance s ~ s' => P.HasComputedAssignIpv6AddressOnCreation (TF.Ref s' (SubnetData s)) (TF.Attr s P.Bool) where
     computedAssignIpv6AddressOnCreation x = TF.compute (TF.refKey x) "assign_ipv6_address_on_creation"
@@ -152,6 +232,9 @@ data SubnetIdsData s = SubnetIdsData'
     { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Optional)
     --
+    , _tags   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     , _vpcId  :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Required)
     --
@@ -165,12 +248,14 @@ subnetIdsData _vpcId =
     TF.unsafeDataSource "aws_subnet_ids" TF.validator $
         SubnetIdsData'
             { _filter = TF.Nil
+            , _tags = TF.Nil
             , _vpcId = _vpcId
             }
 
 instance TF.IsObject (SubnetIdsData s) where
     toObject SubnetIdsData'{..} = P.catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
 
@@ -181,6 +266,11 @@ instance P.HasFilter (SubnetIdsData s) (TF.Attr s [TF.Attr s (FilterSetting s)])
     filter =
         P.lens (_filter :: SubnetIdsData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: SubnetIdsData s)
+
+instance P.HasTags (SubnetIdsData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: SubnetIdsData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: SubnetIdsData s)
 
 instance P.HasVpcId (SubnetIdsData s) (TF.Attr s P.Text) where
     vpcId =
@@ -201,8 +291,26 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (SubnetIdsData s)) (TF.Attr s (P
 -- See the <https://www.terraform.io/docs/providers/aws/d/vpc.html terraform documentation>
 -- for more information.
 data VpcData s = VpcData'
-    { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
+    { _cidrBlock     :: TF.Attr s P.Text
+    -- ^ @cidr_block@ - (Optional)
+    --
+    , _default'      :: TF.Attr s P.Bool
+    -- ^ @default@ - (Optional)
+    --
+    , _dhcpOptionsId :: TF.Attr s P.Text
+    -- ^ @dhcp_options_id@ - (Optional)
+    --
+    , _filter        :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Optional)
+    --
+    , _id            :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
+    , _state         :: TF.Attr s P.Text
+    -- ^ @state@ - (Optional)
+    --
+    , _tags          :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -212,21 +320,63 @@ vpcData
 vpcData =
     TF.unsafeDataSource "aws_vpc" TF.validator $
         VpcData'
-            { _filter = TF.Nil
+            { _cidrBlock = TF.Nil
+            , _default' = TF.Nil
+            , _dhcpOptionsId = TF.Nil
+            , _filter = TF.Nil
+            , _id = TF.Nil
+            , _state = TF.Nil
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (VpcData s) where
     toObject VpcData'{..} = P.catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
+        [ TF.assign "cidr_block" <$> TF.attribute _cidrBlock
+        , TF.assign "default" <$> TF.attribute _default'
+        , TF.assign "dhcp_options_id" <$> TF.attribute _dhcpOptionsId
+        , TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "id" <$> TF.attribute _id
+        , TF.assign "state" <$> TF.attribute _state
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (VpcData s) where
     validator = P.mempty
 
+instance P.HasCidrBlock (VpcData s) (TF.Attr s P.Text) where
+    cidrBlock =
+        P.lens (_cidrBlock :: VpcData s -> TF.Attr s P.Text)
+               (\s a -> s { _cidrBlock = a } :: VpcData s)
+
+instance P.HasDefault' (VpcData s) (TF.Attr s P.Bool) where
+    default' =
+        P.lens (_default' :: VpcData s -> TF.Attr s P.Bool)
+               (\s a -> s { _default' = a } :: VpcData s)
+
+instance P.HasDhcpOptionsId (VpcData s) (TF.Attr s P.Text) where
+    dhcpOptionsId =
+        P.lens (_dhcpOptionsId :: VpcData s -> TF.Attr s P.Text)
+               (\s a -> s { _dhcpOptionsId = a } :: VpcData s)
+
 instance P.HasFilter (VpcData s) (TF.Attr s [TF.Attr s (FilterSetting s)]) where
     filter =
         P.lens (_filter :: VpcData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: VpcData s)
+
+instance P.HasId (VpcData s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: VpcData s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: VpcData s)
+
+instance P.HasState (VpcData s) (TF.Attr s P.Text) where
+    state =
+        P.lens (_state :: VpcData s -> TF.Attr s P.Text)
+               (\s a -> s { _state = a } :: VpcData s)
+
+instance P.HasTags (VpcData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: VpcData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: VpcData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (VpcData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -272,8 +422,14 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcData s)) (TF.Attr s (P.Map P
 -- See the <https://www.terraform.io/docs/providers/aws/d/vpc_dhcp_options.html terraform documentation>
 -- for more information.
 data VpcDhcpOptionsData s = VpcDhcpOptionsData'
-    { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
+    { _dhcpOptionsId :: TF.Attr s P.Text
+    -- ^ @dhcp_options_id@ - (Optional)
+    --
+    , _filter        :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Optional)
+    --
+    , _tags          :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -283,21 +439,35 @@ vpcDhcpOptionsData
 vpcDhcpOptionsData =
     TF.unsafeDataSource "aws_vpc_dhcp_options" TF.validator $
         VpcDhcpOptionsData'
-            { _filter = TF.Nil
+            { _dhcpOptionsId = TF.Nil
+            , _filter = TF.Nil
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (VpcDhcpOptionsData s) where
     toObject VpcDhcpOptionsData'{..} = P.catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
+        [ TF.assign "dhcp_options_id" <$> TF.attribute _dhcpOptionsId
+        , TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (VpcDhcpOptionsData s) where
     validator = P.mempty
 
+instance P.HasDhcpOptionsId (VpcDhcpOptionsData s) (TF.Attr s P.Text) where
+    dhcpOptionsId =
+        P.lens (_dhcpOptionsId :: VpcDhcpOptionsData s -> TF.Attr s P.Text)
+               (\s a -> s { _dhcpOptionsId = a } :: VpcDhcpOptionsData s)
+
 instance P.HasFilter (VpcDhcpOptionsData s) (TF.Attr s [TF.Attr s (FilterSetting s)]) where
     filter =
         P.lens (_filter :: VpcDhcpOptionsData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: VpcDhcpOptionsData s)
+
+instance P.HasTags (VpcDhcpOptionsData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: VpcDhcpOptionsData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: VpcDhcpOptionsData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -328,7 +498,19 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/aws/d/vpc_endpoint.html terraform documentation>
 -- for more information.
 data VpcEndpointData s = VpcEndpointData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _id          :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
+    , _serviceName :: TF.Attr s P.Text
+    -- ^ @service_name@ - (Optional)
+    --
+    , _state       :: TF.Attr s P.Text
+    -- ^ @state@ - (Optional)
+    --
+    , _vpcId       :: TF.Attr s P.Text
+    -- ^ @vpc_id@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_vpc_endpoint@ datasource value.
 vpcEndpointData
@@ -336,12 +518,42 @@ vpcEndpointData
 vpcEndpointData =
     TF.unsafeDataSource "aws_vpc_endpoint" TF.validator $
         VpcEndpointData'
+            { _id = TF.Nil
+            , _serviceName = TF.Nil
+            , _state = TF.Nil
+            , _vpcId = TF.Nil
+            }
 
 instance TF.IsObject (VpcEndpointData s) where
-    toObject _ = []
+    toObject VpcEndpointData'{..} = P.catMaybes
+        [ TF.assign "id" <$> TF.attribute _id
+        , TF.assign "service_name" <$> TF.attribute _serviceName
+        , TF.assign "state" <$> TF.attribute _state
+        , TF.assign "vpc_id" <$> TF.attribute _vpcId
+        ]
 
 instance TF.IsValid (VpcEndpointData s) where
     validator = P.mempty
+
+instance P.HasId (VpcEndpointData s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: VpcEndpointData s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: VpcEndpointData s)
+
+instance P.HasServiceName (VpcEndpointData s) (TF.Attr s P.Text) where
+    serviceName =
+        P.lens (_serviceName :: VpcEndpointData s -> TF.Attr s P.Text)
+               (\s a -> s { _serviceName = a } :: VpcEndpointData s)
+
+instance P.HasState (VpcEndpointData s) (TF.Attr s P.Text) where
+    state =
+        P.lens (_state :: VpcEndpointData s -> TF.Attr s P.Text)
+               (\s a -> s { _state = a } :: VpcEndpointData s)
+
+instance P.HasVpcId (VpcEndpointData s) (TF.Attr s P.Text) where
+    vpcId =
+        P.lens (_vpcId :: VpcEndpointData s -> TF.Attr s P.Text)
+               (\s a -> s { _vpcId = a } :: VpcEndpointData s)
 
 instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (VpcEndpointData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
@@ -390,9 +602,18 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcEndpointData s)) (TF.Attr s
 -- See the <https://www.terraform.io/docs/providers/aws/d/vpc_endpoint_service.html terraform documentation>
 -- for more information.
 data VpcEndpointServiceData s = VpcEndpointServiceData'
-    { _service :: TF.Attr s P.Text
+    { _service     :: TF.Attr s P.Text
     -- ^ @service@ - (Optional)
     --
+    -- Conflicts with:
+    --
+    -- * 'serviceName'
+    , _serviceName :: TF.Attr s P.Text
+    -- ^ @service_name@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'service'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_vpc_endpoint_service@ datasource value.
@@ -402,20 +623,38 @@ vpcEndpointServiceData =
     TF.unsafeDataSource "aws_vpc_endpoint_service" TF.validator $
         VpcEndpointServiceData'
             { _service = TF.Nil
+            , _serviceName = TF.Nil
             }
 
 instance TF.IsObject (VpcEndpointServiceData s) where
     toObject VpcEndpointServiceData'{..} = P.catMaybes
         [ TF.assign "service" <$> TF.attribute _service
+        , TF.assign "service_name" <$> TF.attribute _serviceName
         ]
 
 instance TF.IsValid (VpcEndpointServiceData s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\VpcEndpointServiceData'{..} -> Map.fromList $ P.catMaybes
+        [ if (_service P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_service",
+                            [ "_serviceName"
+                            ])
+        , if (_serviceName P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_serviceName",
+                            [ "_service"
+                            ])
+        ])
 
 instance P.HasService (VpcEndpointServiceData s) (TF.Attr s P.Text) where
     service =
         P.lens (_service :: VpcEndpointServiceData s -> TF.Attr s P.Text)
                (\s a -> s { _service = a } :: VpcEndpointServiceData s)
+
+instance P.HasServiceName (VpcEndpointServiceData s) (TF.Attr s P.Text) where
+    serviceName =
+        P.lens (_serviceName :: VpcEndpointServiceData s -> TF.Attr s P.Text)
+               (\s a -> s { _serviceName = a } :: VpcEndpointServiceData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcEndpointServiceData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -449,8 +688,41 @@ instance s ~ s' => P.HasComputedVpcEndpointPolicySupported (TF.Ref s' (VpcEndpoi
 -- See the <https://www.terraform.io/docs/providers/aws/d/vpc_peering_connection.html terraform documentation>
 -- for more information.
 data VpcPeeringConnectionData s = VpcPeeringConnectionData'
-    { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
+    { _cidrBlock     :: TF.Attr s P.Text
+    -- ^ @cidr_block@ - (Optional)
+    --
+    , _filter        :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Optional)
+    --
+    , _id            :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
+    , _ownerId       :: TF.Attr s P.Text
+    -- ^ @owner_id@ - (Optional)
+    --
+    , _peerCidrBlock :: TF.Attr s P.Text
+    -- ^ @peer_cidr_block@ - (Optional)
+    --
+    , _peerOwnerId   :: TF.Attr s P.Text
+    -- ^ @peer_owner_id@ - (Optional)
+    --
+    , _peerRegion    :: TF.Attr s P.Text
+    -- ^ @peer_region@ - (Optional)
+    --
+    , _peerVpcId     :: TF.Attr s P.Text
+    -- ^ @peer_vpc_id@ - (Optional)
+    --
+    , _region        :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional)
+    --
+    , _status        :: TF.Attr s P.Text
+    -- ^ @status@ - (Optional)
+    --
+    , _tags          :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _vpcId         :: TF.Attr s P.Text
+    -- ^ @vpc_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -460,21 +732,98 @@ vpcPeeringConnectionData
 vpcPeeringConnectionData =
     TF.unsafeDataSource "aws_vpc_peering_connection" TF.validator $
         VpcPeeringConnectionData'
-            { _filter = TF.Nil
+            { _cidrBlock = TF.Nil
+            , _filter = TF.Nil
+            , _id = TF.Nil
+            , _ownerId = TF.Nil
+            , _peerCidrBlock = TF.Nil
+            , _peerOwnerId = TF.Nil
+            , _peerRegion = TF.Nil
+            , _peerVpcId = TF.Nil
+            , _region = TF.Nil
+            , _status = TF.Nil
+            , _tags = TF.Nil
+            , _vpcId = TF.Nil
             }
 
 instance TF.IsObject (VpcPeeringConnectionData s) where
     toObject VpcPeeringConnectionData'{..} = P.catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
+        [ TF.assign "cidr_block" <$> TF.attribute _cidrBlock
+        , TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "id" <$> TF.attribute _id
+        , TF.assign "owner_id" <$> TF.attribute _ownerId
+        , TF.assign "peer_cidr_block" <$> TF.attribute _peerCidrBlock
+        , TF.assign "peer_owner_id" <$> TF.attribute _peerOwnerId
+        , TF.assign "peer_region" <$> TF.attribute _peerRegion
+        , TF.assign "peer_vpc_id" <$> TF.attribute _peerVpcId
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
 
 instance TF.IsValid (VpcPeeringConnectionData s) where
     validator = P.mempty
 
+instance P.HasCidrBlock (VpcPeeringConnectionData s) (TF.Attr s P.Text) where
+    cidrBlock =
+        P.lens (_cidrBlock :: VpcPeeringConnectionData s -> TF.Attr s P.Text)
+               (\s a -> s { _cidrBlock = a } :: VpcPeeringConnectionData s)
+
 instance P.HasFilter (VpcPeeringConnectionData s) (TF.Attr s [TF.Attr s (FilterSetting s)]) where
     filter =
         P.lens (_filter :: VpcPeeringConnectionData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: VpcPeeringConnectionData s)
+
+instance P.HasId (VpcPeeringConnectionData s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: VpcPeeringConnectionData s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: VpcPeeringConnectionData s)
+
+instance P.HasOwnerId (VpcPeeringConnectionData s) (TF.Attr s P.Text) where
+    ownerId =
+        P.lens (_ownerId :: VpcPeeringConnectionData s -> TF.Attr s P.Text)
+               (\s a -> s { _ownerId = a } :: VpcPeeringConnectionData s)
+
+instance P.HasPeerCidrBlock (VpcPeeringConnectionData s) (TF.Attr s P.Text) where
+    peerCidrBlock =
+        P.lens (_peerCidrBlock :: VpcPeeringConnectionData s -> TF.Attr s P.Text)
+               (\s a -> s { _peerCidrBlock = a } :: VpcPeeringConnectionData s)
+
+instance P.HasPeerOwnerId (VpcPeeringConnectionData s) (TF.Attr s P.Text) where
+    peerOwnerId =
+        P.lens (_peerOwnerId :: VpcPeeringConnectionData s -> TF.Attr s P.Text)
+               (\s a -> s { _peerOwnerId = a } :: VpcPeeringConnectionData s)
+
+instance P.HasPeerRegion (VpcPeeringConnectionData s) (TF.Attr s P.Text) where
+    peerRegion =
+        P.lens (_peerRegion :: VpcPeeringConnectionData s -> TF.Attr s P.Text)
+               (\s a -> s { _peerRegion = a } :: VpcPeeringConnectionData s)
+
+instance P.HasPeerVpcId (VpcPeeringConnectionData s) (TF.Attr s P.Text) where
+    peerVpcId =
+        P.lens (_peerVpcId :: VpcPeeringConnectionData s -> TF.Attr s P.Text)
+               (\s a -> s { _peerVpcId = a } :: VpcPeeringConnectionData s)
+
+instance P.HasRegion (VpcPeeringConnectionData s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: VpcPeeringConnectionData s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: VpcPeeringConnectionData s)
+
+instance P.HasStatus (VpcPeeringConnectionData s) (TF.Attr s P.Text) where
+    status =
+        P.lens (_status :: VpcPeeringConnectionData s -> TF.Attr s P.Text)
+               (\s a -> s { _status = a } :: VpcPeeringConnectionData s)
+
+instance P.HasTags (VpcPeeringConnectionData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: VpcPeeringConnectionData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: VpcPeeringConnectionData s)
+
+instance P.HasVpcId (VpcPeeringConnectionData s) (TF.Attr s P.Text) where
+    vpcId =
+        P.lens (_vpcId :: VpcPeeringConnectionData s -> TF.Attr s P.Text)
+               (\s a -> s { _vpcId = a } :: VpcPeeringConnectionData s)
 
 instance s ~ s' => P.HasComputedAccepter (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Bool))) where
     computedAccepter x = TF.compute (TF.refKey x) "accepter"
@@ -523,6 +872,9 @@ data VpcsData s = VpcsData'
     { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Optional)
     --
+    , _tags   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_vpcs@ datasource value.
@@ -532,11 +884,13 @@ vpcsData =
     TF.unsafeDataSource "aws_vpcs" TF.validator $
         VpcsData'
             { _filter = TF.Nil
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (VpcsData s) where
     toObject VpcsData'{..} = P.catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (VpcsData s) where
@@ -546,6 +900,11 @@ instance P.HasFilter (VpcsData s) (TF.Attr s [TF.Attr s (FilterSetting s)]) wher
     filter =
         P.lens (_filter :: VpcsData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: VpcsData s)
+
+instance P.HasTags (VpcsData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: VpcsData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: VpcsData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -561,8 +920,26 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcsData s)) (TF.Attr s (P.Map 
 -- See the <https://www.terraform.io/docs/providers/aws/d/vpn_gateway.html terraform documentation>
 -- for more information.
 data VpnGatewayData s = VpnGatewayData'
-    { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
+    { _amazonSideAsn    :: TF.Attr s P.Text
+    -- ^ @amazon_side_asn@ - (Optional)
+    --
+    , _attachedVpcId    :: TF.Attr s P.Text
+    -- ^ @attached_vpc_id@ - (Optional)
+    --
+    , _availabilityZone :: TF.Attr s P.Text
+    -- ^ @availability_zone@ - (Optional)
+    --
+    , _filter           :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Optional)
+    --
+    , _id               :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
+    , _state            :: TF.Attr s P.Text
+    -- ^ @state@ - (Optional)
+    --
+    , _tags             :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -572,21 +949,63 @@ vpnGatewayData
 vpnGatewayData =
     TF.unsafeDataSource "aws_vpn_gateway" TF.validator $
         VpnGatewayData'
-            { _filter = TF.Nil
+            { _amazonSideAsn = TF.Nil
+            , _attachedVpcId = TF.Nil
+            , _availabilityZone = TF.Nil
+            , _filter = TF.Nil
+            , _id = TF.Nil
+            , _state = TF.Nil
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (VpnGatewayData s) where
     toObject VpnGatewayData'{..} = P.catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
+        [ TF.assign "amazon_side_asn" <$> TF.attribute _amazonSideAsn
+        , TF.assign "attached_vpc_id" <$> TF.attribute _attachedVpcId
+        , TF.assign "availability_zone" <$> TF.attribute _availabilityZone
+        , TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "id" <$> TF.attribute _id
+        , TF.assign "state" <$> TF.attribute _state
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (VpnGatewayData s) where
     validator = P.mempty
 
+instance P.HasAmazonSideAsn (VpnGatewayData s) (TF.Attr s P.Text) where
+    amazonSideAsn =
+        P.lens (_amazonSideAsn :: VpnGatewayData s -> TF.Attr s P.Text)
+               (\s a -> s { _amazonSideAsn = a } :: VpnGatewayData s)
+
+instance P.HasAttachedVpcId (VpnGatewayData s) (TF.Attr s P.Text) where
+    attachedVpcId =
+        P.lens (_attachedVpcId :: VpnGatewayData s -> TF.Attr s P.Text)
+               (\s a -> s { _attachedVpcId = a } :: VpnGatewayData s)
+
+instance P.HasAvailabilityZone (VpnGatewayData s) (TF.Attr s P.Text) where
+    availabilityZone =
+        P.lens (_availabilityZone :: VpnGatewayData s -> TF.Attr s P.Text)
+               (\s a -> s { _availabilityZone = a } :: VpnGatewayData s)
+
 instance P.HasFilter (VpnGatewayData s) (TF.Attr s [TF.Attr s (FilterSetting s)]) where
     filter =
         P.lens (_filter :: VpnGatewayData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: VpnGatewayData s)
+
+instance P.HasId (VpnGatewayData s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: VpnGatewayData s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: VpnGatewayData s)
+
+instance P.HasState (VpnGatewayData s) (TF.Attr s P.Text) where
+    state =
+        P.lens (_state :: VpnGatewayData s -> TF.Attr s P.Text)
+               (\s a -> s { _state = a } :: VpnGatewayData s)
+
+instance P.HasTags (VpnGatewayData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: VpnGatewayData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: VpnGatewayData s)
 
 instance s ~ s' => P.HasComputedAmazonSideAsn (TF.Ref s' (VpnGatewayData s)) (TF.Attr s P.Text) where
     computedAmazonSideAsn x = TF.compute (TF.refKey x) "amazon_side_asn"

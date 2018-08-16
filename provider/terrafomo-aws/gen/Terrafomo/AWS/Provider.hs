@@ -191,7 +191,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "aws"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "access_key" <$> _accessKey
             , TF.assign "allowed_account_ids" <$> _allowedAccountIds

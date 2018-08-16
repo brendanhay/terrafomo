@@ -448,17 +448,35 @@ import qualified Terrafomo.Validator    as TF
 -- See the <https://www.terraform.io/docs/providers/aws/r/s3_bucket.html terraform documentation>
 -- for more information.
 data S3BucketResource s = S3BucketResource'
-    { _acl :: TF.Attr s P.Text
+    { _accelerationStatus :: TF.Attr s P.Text
+    -- ^ @acceleration_status@ - (Optional)
+    --
+    , _acl :: TF.Attr s P.Text
     -- ^ @acl@ - (Optional)
     --
+    , _arn :: TF.Attr s P.Text
+    -- ^ @arn@ - (Optional)
+    --
+    , _bucket :: TF.Attr s P.Text
+    -- ^ @bucket@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'bucketPrefix'
     , _bucketPrefix :: TF.Attr s P.Text
     -- ^ @bucket_prefix@ - (Optional, Forces New)
     --
+    -- Conflicts with:
+    --
+    -- * 'bucket'
     , _corsRule :: TF.Attr s [TF.Attr s (CorsRuleSetting s)]
     -- ^ @cors_rule@ - (Optional)
     --
     , _forceDestroy :: TF.Attr s P.Bool
     -- ^ @force_destroy@ - (Optional)
+    --
+    , _hostedZoneId :: TF.Attr s P.Text
+    -- ^ @hosted_zone_id@ - (Optional)
     --
     , _lifecycleRule :: TF.Attr s [TF.Attr s (LifecycleRuleSetting s)]
     -- ^ @lifecycle_rule@ - (Optional)
@@ -469,8 +487,14 @@ data S3BucketResource s = S3BucketResource'
     , _policy :: TF.Attr s P.Text
     -- ^ @policy@ - (Optional)
     --
+    , _region :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional)
+    --
     , _replicationConfiguration :: TF.Attr s (ReplicationConfigurationSetting s)
     -- ^ @replication_configuration@ - (Optional)
+    --
+    , _requestPayer :: TF.Attr s P.Text
+    -- ^ @request_payer@ - (Optional)
     --
     , _serverSideEncryptionConfiguration :: TF.Attr s (ServerSideEncryptionConfigurationSetting s)
     -- ^ @server_side_encryption_configuration@ - (Optional)
@@ -478,8 +502,17 @@ data S3BucketResource s = S3BucketResource'
     , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
+    , _versioning :: TF.Attr s (VersioningSetting s)
+    -- ^ @versioning@ - (Optional)
+    --
     , _website :: TF.Attr s [TF.Attr s (WebsiteSetting s)]
     -- ^ @website@ - (Optional)
+    --
+    , _websiteDomain :: TF.Attr s P.Text
+    -- ^ @website_domain@ - (Optional)
+    --
+    , _websiteEndpoint :: TF.Attr s P.Text
+    -- ^ @website_endpoint@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -489,36 +522,65 @@ s3BucketResource
 s3BucketResource =
     TF.unsafeResource "aws_s3_bucket" TF.validator $
         S3BucketResource'
-            { _acl = TF.value "private"
+            { _accelerationStatus = TF.Nil
+            , _acl = TF.value "private"
+            , _arn = TF.Nil
+            , _bucket = TF.Nil
             , _bucketPrefix = TF.Nil
             , _corsRule = TF.Nil
             , _forceDestroy = TF.value P.False
+            , _hostedZoneId = TF.Nil
             , _lifecycleRule = TF.Nil
             , _logging = TF.Nil
             , _policy = TF.Nil
+            , _region = TF.Nil
             , _replicationConfiguration = TF.Nil
+            , _requestPayer = TF.Nil
             , _serverSideEncryptionConfiguration = TF.Nil
             , _tags = TF.Nil
+            , _versioning = TF.Nil
             , _website = TF.Nil
+            , _websiteDomain = TF.Nil
+            , _websiteEndpoint = TF.Nil
             }
 
 instance TF.IsObject (S3BucketResource s) where
     toObject S3BucketResource'{..} = P.catMaybes
-        [ TF.assign "acl" <$> TF.attribute _acl
+        [ TF.assign "acceleration_status" <$> TF.attribute _accelerationStatus
+        , TF.assign "acl" <$> TF.attribute _acl
+        , TF.assign "arn" <$> TF.attribute _arn
+        , TF.assign "bucket" <$> TF.attribute _bucket
         , TF.assign "bucket_prefix" <$> TF.attribute _bucketPrefix
         , TF.assign "cors_rule" <$> TF.attribute _corsRule
         , TF.assign "force_destroy" <$> TF.attribute _forceDestroy
+        , TF.assign "hosted_zone_id" <$> TF.attribute _hostedZoneId
         , TF.assign "lifecycle_rule" <$> TF.attribute _lifecycleRule
         , TF.assign "logging" <$> TF.attribute _logging
         , TF.assign "policy" <$> TF.attribute _policy
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "replication_configuration" <$> TF.attribute _replicationConfiguration
+        , TF.assign "request_payer" <$> TF.attribute _requestPayer
         , TF.assign "server_side_encryption_configuration" <$> TF.attribute _serverSideEncryptionConfiguration
         , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "versioning" <$> TF.attribute _versioning
         , TF.assign "website" <$> TF.attribute _website
+        , TF.assign "website_domain" <$> TF.attribute _websiteDomain
+        , TF.assign "website_endpoint" <$> TF.attribute _websiteEndpoint
         ]
 
 instance TF.IsValid (S3BucketResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\S3BucketResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_bucket P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_bucket",
+                            [ "_bucketPrefix"
+                            ])
+        , if (_bucketPrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_bucketPrefix",
+                            [ "_bucket"
+                            ])
+        ])
            P.<> TF.settingsValidator "_replicationConfiguration"
                   (_replicationConfiguration
                       :: S3BucketResource s -> TF.Attr s (ReplicationConfigurationSetting s))
@@ -527,11 +589,30 @@ instance TF.IsValid (S3BucketResource s) where
                   (_serverSideEncryptionConfiguration
                       :: S3BucketResource s -> TF.Attr s (ServerSideEncryptionConfigurationSetting s))
                   TF.validator
+           P.<> TF.settingsValidator "_versioning"
+                  (_versioning
+                      :: S3BucketResource s -> TF.Attr s (VersioningSetting s))
+                  TF.validator
+
+instance P.HasAccelerationStatus (S3BucketResource s) (TF.Attr s P.Text) where
+    accelerationStatus =
+        P.lens (_accelerationStatus :: S3BucketResource s -> TF.Attr s P.Text)
+               (\s a -> s { _accelerationStatus = a } :: S3BucketResource s)
 
 instance P.HasAcl (S3BucketResource s) (TF.Attr s P.Text) where
     acl =
         P.lens (_acl :: S3BucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _acl = a } :: S3BucketResource s)
+
+instance P.HasArn (S3BucketResource s) (TF.Attr s P.Text) where
+    arn =
+        P.lens (_arn :: S3BucketResource s -> TF.Attr s P.Text)
+               (\s a -> s { _arn = a } :: S3BucketResource s)
+
+instance P.HasBucket (S3BucketResource s) (TF.Attr s P.Text) where
+    bucket =
+        P.lens (_bucket :: S3BucketResource s -> TF.Attr s P.Text)
+               (\s a -> s { _bucket = a } :: S3BucketResource s)
 
 instance P.HasBucketPrefix (S3BucketResource s) (TF.Attr s P.Text) where
     bucketPrefix =
@@ -548,6 +629,11 @@ instance P.HasForceDestroy (S3BucketResource s) (TF.Attr s P.Bool) where
         P.lens (_forceDestroy :: S3BucketResource s -> TF.Attr s P.Bool)
                (\s a -> s { _forceDestroy = a } :: S3BucketResource s)
 
+instance P.HasHostedZoneId (S3BucketResource s) (TF.Attr s P.Text) where
+    hostedZoneId =
+        P.lens (_hostedZoneId :: S3BucketResource s -> TF.Attr s P.Text)
+               (\s a -> s { _hostedZoneId = a } :: S3BucketResource s)
+
 instance P.HasLifecycleRule (S3BucketResource s) (TF.Attr s [TF.Attr s (LifecycleRuleSetting s)]) where
     lifecycleRule =
         P.lens (_lifecycleRule :: S3BucketResource s -> TF.Attr s [TF.Attr s (LifecycleRuleSetting s)])
@@ -563,10 +649,20 @@ instance P.HasPolicy (S3BucketResource s) (TF.Attr s P.Text) where
         P.lens (_policy :: S3BucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _policy = a } :: S3BucketResource s)
 
+instance P.HasRegion (S3BucketResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: S3BucketResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: S3BucketResource s)
+
 instance P.HasReplicationConfiguration (S3BucketResource s) (TF.Attr s (ReplicationConfigurationSetting s)) where
     replicationConfiguration =
         P.lens (_replicationConfiguration :: S3BucketResource s -> TF.Attr s (ReplicationConfigurationSetting s))
                (\s a -> s { _replicationConfiguration = a } :: S3BucketResource s)
+
+instance P.HasRequestPayer (S3BucketResource s) (TF.Attr s P.Text) where
+    requestPayer =
+        P.lens (_requestPayer :: S3BucketResource s -> TF.Attr s P.Text)
+               (\s a -> s { _requestPayer = a } :: S3BucketResource s)
 
 instance P.HasServerSideEncryptionConfiguration (S3BucketResource s) (TF.Attr s (ServerSideEncryptionConfigurationSetting s)) where
     serverSideEncryptionConfiguration =
@@ -578,10 +674,25 @@ instance P.HasTags (S3BucketResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Te
         P.lens (_tags :: S3BucketResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: S3BucketResource s)
 
+instance P.HasVersioning (S3BucketResource s) (TF.Attr s (VersioningSetting s)) where
+    versioning =
+        P.lens (_versioning :: S3BucketResource s -> TF.Attr s (VersioningSetting s))
+               (\s a -> s { _versioning = a } :: S3BucketResource s)
+
 instance P.HasWebsite (S3BucketResource s) (TF.Attr s [TF.Attr s (WebsiteSetting s)]) where
     website =
         P.lens (_website :: S3BucketResource s -> TF.Attr s [TF.Attr s (WebsiteSetting s)])
                (\s a -> s { _website = a } :: S3BucketResource s)
+
+instance P.HasWebsiteDomain (S3BucketResource s) (TF.Attr s P.Text) where
+    websiteDomain =
+        P.lens (_websiteDomain :: S3BucketResource s -> TF.Attr s P.Text)
+               (\s a -> s { _websiteDomain = a } :: S3BucketResource s)
+
+instance P.HasWebsiteEndpoint (S3BucketResource s) (TF.Attr s P.Text) where
+    websiteEndpoint =
+        P.lens (_websiteEndpoint :: S3BucketResource s -> TF.Attr s P.Text)
+               (\s a -> s { _websiteEndpoint = a } :: S3BucketResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (S3BucketResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -873,55 +984,77 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (S3BucketNotificationResource s)) 
 -- See the <https://www.terraform.io/docs/providers/aws/r/s3_bucket_object.html terraform documentation>
 -- for more information.
 data S3BucketObjectResource s = S3BucketObjectResource'
-    { _acl                :: TF.Attr s P.Text
+    { _acl                  :: TF.Attr s P.Text
     -- ^ @acl@ - (Optional)
     --
-    , _bucket             :: TF.Attr s P.Text
+    , _bucket               :: TF.Attr s P.Text
     -- ^ @bucket@ - (Required, Forces New)
     --
-    , _cacheControl       :: TF.Attr s P.Text
+    , _cacheControl         :: TF.Attr s P.Text
     -- ^ @cache_control@ - (Optional)
     --
-    , _content            :: TF.Attr s P.Text
+    , _content              :: TF.Attr s P.Text
     -- ^ @content@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'contentBase64'
     -- * 'source'
-    , _contentBase64      :: TF.Attr s P.Text
+    , _contentBase64        :: TF.Attr s P.Text
     -- ^ @content_base64@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'content'
     -- * 'source'
-    , _contentDisposition :: TF.Attr s P.Text
+    , _contentDisposition   :: TF.Attr s P.Text
     -- ^ @content_disposition@ - (Optional)
     --
-    , _contentEncoding    :: TF.Attr s P.Text
+    , _contentEncoding      :: TF.Attr s P.Text
     -- ^ @content_encoding@ - (Optional)
     --
-    , _contentLanguage    :: TF.Attr s P.Text
+    , _contentLanguage      :: TF.Attr s P.Text
     -- ^ @content_language@ - (Optional)
     --
-    , _key                :: TF.Attr s P.Text
+    , _contentType          :: TF.Attr s P.Text
+    -- ^ @content_type@ - (Optional)
+    --
+    , _etag                 :: TF.Attr s P.Text
+    -- ^ @etag@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'kmsKeyId'
+    -- * 'serverSideEncryption'
+    , _key                  :: TF.Attr s P.Text
     -- ^ @key@ - (Required, Forces New)
     --
-    , _kmsKeyId           :: TF.Attr s P.Text
+    , _kmsKeyId             :: TF.Attr s P.Text
     -- ^ @kms_key_id@ - (Optional)
     --
-    , _source             :: TF.Attr s P.Text
+    -- Conflicts with:
+    --
+    -- * 'etag'
+    , _serverSideEncryption :: TF.Attr s P.Text
+    -- ^ @server_side_encryption@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'etag'
+    , _source               :: TF.Attr s P.Text
     -- ^ @source@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'content'
     -- * 'contentBase64'
-    , _tags               :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _storageClass         :: TF.Attr s P.Text
+    -- ^ @storage_class@ - (Optional)
+    --
+    , _tags                 :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _websiteRedirect    :: TF.Attr s P.Text
+    , _websiteRedirect      :: TF.Attr s P.Text
     -- ^ @website_redirect@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -942,9 +1075,13 @@ s3BucketObjectResource _bucket _key =
             , _contentDisposition = TF.Nil
             , _contentEncoding = TF.Nil
             , _contentLanguage = TF.Nil
+            , _contentType = TF.Nil
+            , _etag = TF.Nil
             , _key = _key
             , _kmsKeyId = TF.Nil
+            , _serverSideEncryption = TF.Nil
             , _source = TF.Nil
+            , _storageClass = TF.Nil
             , _tags = TF.Nil
             , _websiteRedirect = TF.Nil
             }
@@ -959,9 +1096,13 @@ instance TF.IsObject (S3BucketObjectResource s) where
         , TF.assign "content_disposition" <$> TF.attribute _contentDisposition
         , TF.assign "content_encoding" <$> TF.attribute _contentEncoding
         , TF.assign "content_language" <$> TF.attribute _contentLanguage
+        , TF.assign "content_type" <$> TF.attribute _contentType
+        , TF.assign "etag" <$> TF.attribute _etag
         , TF.assign "key" <$> TF.attribute _key
         , TF.assign "kms_key_id" <$> TF.attribute _kmsKeyId
+        , TF.assign "server_side_encryption" <$> TF.attribute _serverSideEncryption
         , TF.assign "source" <$> TF.attribute _source
+        , TF.assign "storage_class" <$> TF.attribute _storageClass
         , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "website_redirect" <$> TF.attribute _websiteRedirect
         ]
@@ -977,6 +1118,21 @@ instance TF.IsValid (S3BucketObjectResource s) where
               then P.Nothing
               else P.Just ("_contentBase64",
                             [ "_content"                            , "_source"
+                            ])
+        , if (_etag P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_etag",
+                            [ "_kmsKeyId"                            , "_serverSideEncryption"
+                            ])
+        , if (_kmsKeyId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_kmsKeyId",
+                            [ "_etag"
+                            ])
+        , if (_serverSideEncryption P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_serverSideEncryption",
+                            [ "_etag"
                             ])
         , if (_source P.== TF.Nil)
               then P.Nothing
@@ -1025,6 +1181,16 @@ instance P.HasContentLanguage (S3BucketObjectResource s) (TF.Attr s P.Text) wher
         P.lens (_contentLanguage :: S3BucketObjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _contentLanguage = a } :: S3BucketObjectResource s)
 
+instance P.HasContentType (S3BucketObjectResource s) (TF.Attr s P.Text) where
+    contentType =
+        P.lens (_contentType :: S3BucketObjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _contentType = a } :: S3BucketObjectResource s)
+
+instance P.HasEtag (S3BucketObjectResource s) (TF.Attr s P.Text) where
+    etag =
+        P.lens (_etag :: S3BucketObjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _etag = a } :: S3BucketObjectResource s)
+
 instance P.HasKey (S3BucketObjectResource s) (TF.Attr s P.Text) where
     key =
         P.lens (_key :: S3BucketObjectResource s -> TF.Attr s P.Text)
@@ -1035,10 +1201,20 @@ instance P.HasKmsKeyId (S3BucketObjectResource s) (TF.Attr s P.Text) where
         P.lens (_kmsKeyId :: S3BucketObjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _kmsKeyId = a } :: S3BucketObjectResource s)
 
+instance P.HasServerSideEncryption (S3BucketObjectResource s) (TF.Attr s P.Text) where
+    serverSideEncryption =
+        P.lens (_serverSideEncryption :: S3BucketObjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _serverSideEncryption = a } :: S3BucketObjectResource s)
+
 instance P.HasSource (S3BucketObjectResource s) (TF.Attr s P.Text) where
     source =
         P.lens (_source :: S3BucketObjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _source = a } :: S3BucketObjectResource s)
+
+instance P.HasStorageClass (S3BucketObjectResource s) (TF.Attr s P.Text) where
+    storageClass =
+        P.lens (_storageClass :: S3BucketObjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _storageClass = a } :: S3BucketObjectResource s)
 
 instance P.HasTags (S3BucketObjectResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     tags =
@@ -1236,11 +1412,14 @@ instance s ~ s' => P.HasComputedRotationEnabled (TF.Ref s' (SecretsmanagerSecret
 -- See the <https://www.terraform.io/docs/providers/aws/r/secretsmanager_secret_version.html terraform documentation>
 -- for more information.
 data SecretsmanagerSecretVersionResource s = SecretsmanagerSecretVersionResource'
-    { _secretId     :: TF.Attr s P.Text
+    { _secretId      :: TF.Attr s P.Text
     -- ^ @secret_id@ - (Required, Forces New)
     --
-    , _secretString :: TF.Attr s P.Text
+    , _secretString  :: TF.Attr s P.Text
     -- ^ @secret_string@ - (Required, Forces New)
+    --
+    , _versionStages :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @version_stages@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1254,12 +1433,14 @@ secretsmanagerSecretVersionResource _secretId _secretString =
         SecretsmanagerSecretVersionResource'
             { _secretId = _secretId
             , _secretString = _secretString
+            , _versionStages = TF.Nil
             }
 
 instance TF.IsObject (SecretsmanagerSecretVersionResource s) where
     toObject SecretsmanagerSecretVersionResource'{..} = P.catMaybes
         [ TF.assign "secret_id" <$> TF.attribute _secretId
         , TF.assign "secret_string" <$> TF.attribute _secretString
+        , TF.assign "version_stages" <$> TF.attribute _versionStages
         ]
 
 instance TF.IsValid (SecretsmanagerSecretVersionResource s) where
@@ -1274,6 +1455,11 @@ instance P.HasSecretString (SecretsmanagerSecretVersionResource s) (TF.Attr s P.
     secretString =
         P.lens (_secretString :: SecretsmanagerSecretVersionResource s -> TF.Attr s P.Text)
                (\s a -> s { _secretString = a } :: SecretsmanagerSecretVersionResource s)
+
+instance P.HasVersionStages (SecretsmanagerSecretVersionResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    versionStages =
+        P.lens (_versionStages :: SecretsmanagerSecretVersionResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _versionStages = a } :: SecretsmanagerSecretVersionResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SecretsmanagerSecretVersionResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1292,14 +1478,32 @@ data SecurityGroupResource s = SecurityGroupResource'
     { _description         :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
+    , _egress              :: TF.Attr s [TF.Attr s (EgressSetting s)]
+    -- ^ @egress@ - (Optional)
+    --
+    , _ingress             :: TF.Attr s [TF.Attr s (IngressSetting s)]
+    -- ^ @ingress@ - (Optional)
+    --
+    , _name                :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
     , _namePrefix          :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
     --
+    -- Conflicts with:
+    --
+    -- * 'name'
     , _revokeRulesOnDelete :: TF.Attr s P.Bool
     -- ^ @revoke_rules_on_delete@ - (Optional)
     --
     , _tags                :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
+    --
+    , _vpcId               :: TF.Attr s P.Text
+    -- ^ @vpc_id@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1310,26 +1514,60 @@ securityGroupResource =
     TF.unsafeResource "aws_security_group" TF.validator $
         SecurityGroupResource'
             { _description = TF.value "Managed by Terraform"
+            , _egress = TF.Nil
+            , _ingress = TF.Nil
+            , _name = TF.Nil
             , _namePrefix = TF.Nil
             , _revokeRulesOnDelete = TF.value P.False
             , _tags = TF.Nil
+            , _vpcId = TF.Nil
             }
 
 instance TF.IsObject (SecurityGroupResource s) where
     toObject SecurityGroupResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "egress" <$> TF.attribute _egress
+        , TF.assign "ingress" <$> TF.attribute _ingress
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _namePrefix
         , TF.assign "revoke_rules_on_delete" <$> TF.attribute _revokeRulesOnDelete
         , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
 
 instance TF.IsValid (SecurityGroupResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\SecurityGroupResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
+                            ])
+        ])
 
 instance P.HasDescription (SecurityGroupResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: SecurityGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: SecurityGroupResource s)
+
+instance P.HasEgress (SecurityGroupResource s) (TF.Attr s [TF.Attr s (EgressSetting s)]) where
+    egress =
+        P.lens (_egress :: SecurityGroupResource s -> TF.Attr s [TF.Attr s (EgressSetting s)])
+               (\s a -> s { _egress = a } :: SecurityGroupResource s)
+
+instance P.HasIngress (SecurityGroupResource s) (TF.Attr s [TF.Attr s (IngressSetting s)]) where
+    ingress =
+        P.lens (_ingress :: SecurityGroupResource s -> TF.Attr s [TF.Attr s (IngressSetting s)])
+               (\s a -> s { _ingress = a } :: SecurityGroupResource s)
+
+instance P.HasName (SecurityGroupResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: SecurityGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SecurityGroupResource s)
 
 instance P.HasNamePrefix (SecurityGroupResource s) (TF.Attr s P.Text) where
     namePrefix =
@@ -1345,6 +1583,11 @@ instance P.HasTags (SecurityGroupResource s) (TF.Attr s (P.Map P.Text (TF.Attr s
     tags =
         P.lens (_tags :: SecurityGroupResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: SecurityGroupResource s)
+
+instance P.HasVpcId (SecurityGroupResource s) (TF.Attr s P.Text) where
+    vpcId =
+        P.lens (_vpcId :: SecurityGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vpcId = a } :: SecurityGroupResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1372,34 +1615,47 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SecurityGroupResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/aws/r/security_group_rule.html terraform documentation>
 -- for more information.
 data SecurityGroupRuleResource s = SecurityGroupRuleResource'
-    { _cidrBlocks      :: TF.Attr s [TF.Attr s P.Text]
+    { _cidrBlocks            :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @cidr_blocks@ - (Optional, Forces New)
     --
-    , _description     :: TF.Attr s P.Text
+    -- Conflicts with:
+    --
+    -- * 'sourceSecurityGroupId'
+    , _description           :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _fromPort        :: TF.Attr s P.Int
+    , _fromPort              :: TF.Attr s P.Int
     -- ^ @from_port@ - (Required, Forces New)
     --
-    , _ipv6CidrBlocks  :: TF.Attr s [TF.Attr s P.Text]
+    , _ipv6CidrBlocks        :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @ipv6_cidr_blocks@ - (Optional, Forces New)
     --
-    , _prefixListIds   :: TF.Attr s [TF.Attr s P.Text]
+    , _prefixListIds         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @prefix_list_ids@ - (Optional, Forces New)
     --
-    , _protocol        :: TF.Attr s P.NetworkProtocol
+    , _protocol              :: TF.Attr s P.NetworkProtocol
     -- ^ @protocol@ - (Required, Forces New)
     --
-    , _securityGroupId :: TF.Attr s P.Text
+    , _securityGroupId       :: TF.Attr s P.Text
     -- ^ @security_group_id@ - (Required, Forces New)
     --
-    , _self            :: TF.Attr s P.Bool
+    , _self                  :: TF.Attr s P.Bool
     -- ^ @self@ - (Optional, Forces New)
     --
-    , _toPort          :: TF.Attr s P.Int
+    -- Conflicts with:
+    --
+    -- * 'sourceSecurityGroupId'
+    , _sourceSecurityGroupId :: TF.Attr s P.Text
+    -- ^ @source_security_group_id@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'cidrBlocks'
+    -- * 'self'
+    , _toPort                :: TF.Attr s P.Int
     -- ^ @to_port@ - (Required, Forces New)
     --
-    , _type'           :: TF.Attr s P.NetworkTraffic
+    , _type'                 :: TF.Attr s P.NetworkTraffic
     -- ^ @type@ - (Required, Forces New)
     -- Type of rule, ingress (inbound) or egress (outbound).
     --
@@ -1424,6 +1680,7 @@ securityGroupRuleResource _securityGroupId _fromPort _toPort _protocol _type' =
             , _protocol = _protocol
             , _securityGroupId = _securityGroupId
             , _self = TF.value P.False
+            , _sourceSecurityGroupId = TF.Nil
             , _toPort = _toPort
             , _type' = _type'
             }
@@ -1438,12 +1695,29 @@ instance TF.IsObject (SecurityGroupRuleResource s) where
         , TF.assign "protocol" <$> TF.attribute _protocol
         , TF.assign "security_group_id" <$> TF.attribute _securityGroupId
         , TF.assign "self" <$> TF.attribute _self
+        , TF.assign "source_security_group_id" <$> TF.attribute _sourceSecurityGroupId
         , TF.assign "to_port" <$> TF.attribute _toPort
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
 instance TF.IsValid (SecurityGroupRuleResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\SecurityGroupRuleResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_cidrBlocks P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_cidrBlocks",
+                            [ "_sourceSecurityGroupId"
+                            ])
+        , if (_self P.== TF.value P.False)
+              then P.Nothing
+              else P.Just ("_self",
+                            [ "_sourceSecurityGroupId"
+                            ])
+        , if (_sourceSecurityGroupId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_sourceSecurityGroupId",
+                            [ "_cidrBlocks"                            , "_self"
+                            ])
+        ])
 
 instance P.HasCidrBlocks (SecurityGroupRuleResource s) (TF.Attr s [TF.Attr s P.Text]) where
     cidrBlocks =
@@ -1484,6 +1758,11 @@ instance P.HasSelf (SecurityGroupRuleResource s) (TF.Attr s P.Bool) where
     self =
         P.lens (_self :: SecurityGroupRuleResource s -> TF.Attr s P.Bool)
                (\s a -> s { _self = a } :: SecurityGroupRuleResource s)
+
+instance P.HasSourceSecurityGroupId (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
+    sourceSecurityGroupId =
+        P.lens (_sourceSecurityGroupId :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceSecurityGroupId = a } :: SecurityGroupRuleResource s)
 
 instance P.HasToPort (SecurityGroupRuleResource s) (TF.Attr s P.Int) where
     toPort =
@@ -1713,7 +1992,10 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (ServiceDiscoveryServiceResource 
 -- See the <https://www.terraform.io/docs/providers/aws/r/servicecatalog_portfolio.html terraform documentation>
 -- for more information.
 data ServicecatalogPortfolioResource s = ServicecatalogPortfolioResource'
-    { _name         :: TF.Attr s P.Text
+    { _description  :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _providerName :: TF.Attr s P.Text
@@ -1731,20 +2013,27 @@ servicecatalogPortfolioResource
 servicecatalogPortfolioResource _name =
     TF.unsafeResource "aws_servicecatalog_portfolio" TF.validator $
         ServicecatalogPortfolioResource'
-            { _name = _name
+            { _description = TF.Nil
+            , _name = _name
             , _providerName = TF.Nil
             , _tags = TF.Nil
             }
 
 instance TF.IsObject (ServicecatalogPortfolioResource s) where
     toObject ServicecatalogPortfolioResource'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "provider_name" <$> TF.attribute _providerName
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (ServicecatalogPortfolioResource s) where
     validator = P.mempty
+
+instance P.HasDescription (ServicecatalogPortfolioResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: ServicecatalogPortfolioResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: ServicecatalogPortfolioResource s)
 
 instance P.HasName (ServicecatalogPortfolioResource s) (TF.Attr s P.Text) where
     name =
@@ -2289,6 +2578,9 @@ data SesReceiptRuleResource s = SesReceiptRuleResource'
     , _bounceAction    :: TF.Attr s [TF.Attr s (BounceActionSetting s)]
     -- ^ @bounce_action@ - (Optional)
     --
+    , _enabled         :: TF.Attr s P.Bool
+    -- ^ @enabled@ - (Optional)
+    --
     , _lambdaAction    :: TF.Attr s [TF.Attr s (LambdaActionSetting s)]
     -- ^ @lambda_action@ - (Optional)
     --
@@ -2304,11 +2596,17 @@ data SesReceiptRuleResource s = SesReceiptRuleResource'
     , _s3Action        :: TF.Attr s [TF.Attr s (S3ActionSetting s)]
     -- ^ @s3_action@ - (Optional)
     --
+    , _scanEnabled     :: TF.Attr s P.Bool
+    -- ^ @scan_enabled@ - (Optional)
+    --
     , _snsAction       :: TF.Attr s [TF.Attr s (SnsActionSetting s)]
     -- ^ @sns_action@ - (Optional)
     --
     , _stopAction      :: TF.Attr s [TF.Attr s (StopActionSetting s)]
     -- ^ @stop_action@ - (Optional)
+    --
+    , _tlsPolicy       :: TF.Attr s P.Text
+    -- ^ @tls_policy@ - (Optional)
     --
     , _workmailAction  :: TF.Attr s [TF.Attr s (WorkmailActionSetting s)]
     -- ^ @workmail_action@ - (Optional)
@@ -2326,13 +2624,16 @@ sesReceiptRuleResource _name _ruleSetName =
             { _addHeaderAction = TF.Nil
             , _after = TF.Nil
             , _bounceAction = TF.Nil
+            , _enabled = TF.Nil
             , _lambdaAction = TF.Nil
             , _name = _name
             , _recipients = TF.Nil
             , _ruleSetName = _ruleSetName
             , _s3Action = TF.Nil
+            , _scanEnabled = TF.Nil
             , _snsAction = TF.Nil
             , _stopAction = TF.Nil
+            , _tlsPolicy = TF.Nil
             , _workmailAction = TF.Nil
             }
 
@@ -2341,13 +2642,16 @@ instance TF.IsObject (SesReceiptRuleResource s) where
         [ TF.assign "add_header_action" <$> TF.attribute _addHeaderAction
         , TF.assign "after" <$> TF.attribute _after
         , TF.assign "bounce_action" <$> TF.attribute _bounceAction
+        , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "lambda_action" <$> TF.attribute _lambdaAction
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "recipients" <$> TF.attribute _recipients
         , TF.assign "rule_set_name" <$> TF.attribute _ruleSetName
         , TF.assign "s3_action" <$> TF.attribute _s3Action
+        , TF.assign "scan_enabled" <$> TF.attribute _scanEnabled
         , TF.assign "sns_action" <$> TF.attribute _snsAction
         , TF.assign "stop_action" <$> TF.attribute _stopAction
+        , TF.assign "tls_policy" <$> TF.attribute _tlsPolicy
         , TF.assign "workmail_action" <$> TF.attribute _workmailAction
         ]
 
@@ -2368,6 +2672,11 @@ instance P.HasBounceAction (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (Bou
     bounceAction =
         P.lens (_bounceAction :: SesReceiptRuleResource s -> TF.Attr s [TF.Attr s (BounceActionSetting s)])
                (\s a -> s { _bounceAction = a } :: SesReceiptRuleResource s)
+
+instance P.HasEnabled (SesReceiptRuleResource s) (TF.Attr s P.Bool) where
+    enabled =
+        P.lens (_enabled :: SesReceiptRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enabled = a } :: SesReceiptRuleResource s)
 
 instance P.HasLambdaAction (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (LambdaActionSetting s)]) where
     lambdaAction =
@@ -2394,6 +2703,11 @@ instance P.HasS3Action (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (S3Actio
         P.lens (_s3Action :: SesReceiptRuleResource s -> TF.Attr s [TF.Attr s (S3ActionSetting s)])
                (\s a -> s { _s3Action = a } :: SesReceiptRuleResource s)
 
+instance P.HasScanEnabled (SesReceiptRuleResource s) (TF.Attr s P.Bool) where
+    scanEnabled =
+        P.lens (_scanEnabled :: SesReceiptRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _scanEnabled = a } :: SesReceiptRuleResource s)
+
 instance P.HasSnsAction (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (SnsActionSetting s)]) where
     snsAction =
         P.lens (_snsAction :: SesReceiptRuleResource s -> TF.Attr s [TF.Attr s (SnsActionSetting s)])
@@ -2403,6 +2717,11 @@ instance P.HasStopAction (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (StopA
     stopAction =
         P.lens (_stopAction :: SesReceiptRuleResource s -> TF.Attr s [TF.Attr s (StopActionSetting s)])
                (\s a -> s { _stopAction = a } :: SesReceiptRuleResource s)
+
+instance P.HasTlsPolicy (SesReceiptRuleResource s) (TF.Attr s P.Text) where
+    tlsPolicy =
+        P.lens (_tlsPolicy :: SesReceiptRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _tlsPolicy = a } :: SesReceiptRuleResource s)
 
 instance P.HasWorkmailAction (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (WorkmailActionSetting s)]) where
     workmailAction =
@@ -2973,8 +3292,20 @@ data SnsTopicResource s = SnsTopicResource'
     , _lambdaSuccessFeedbackSampleRate      :: TF.Attr s P.Int
     -- ^ @lambda_success_feedback_sample_rate@ - (Optional)
     --
+    , _name                                 :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
     , _namePrefix                           :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'name'
+    , _policy                               :: TF.Attr s P.Text
+    -- ^ @policy@ - (Optional)
     --
     , _sqsFailureFeedbackRoleArn            :: TF.Attr s P.Text
     -- ^ @sqs_failure_feedback_role_arn@ - (Optional)
@@ -3004,7 +3335,9 @@ snsTopicResource =
             , _lambdaFailureFeedbackRoleArn = TF.Nil
             , _lambdaSuccessFeedbackRoleArn = TF.Nil
             , _lambdaSuccessFeedbackSampleRate = TF.Nil
+            , _name = TF.Nil
             , _namePrefix = TF.Nil
+            , _policy = TF.Nil
             , _sqsFailureFeedbackRoleArn = TF.Nil
             , _sqsSuccessFeedbackRoleArn = TF.Nil
             , _sqsSuccessFeedbackSampleRate = TF.Nil
@@ -3023,14 +3356,27 @@ instance TF.IsObject (SnsTopicResource s) where
         , TF.assign "lambda_failure_feedback_role_arn" <$> TF.attribute _lambdaFailureFeedbackRoleArn
         , TF.assign "lambda_success_feedback_role_arn" <$> TF.attribute _lambdaSuccessFeedbackRoleArn
         , TF.assign "lambda_success_feedback_sample_rate" <$> TF.attribute _lambdaSuccessFeedbackSampleRate
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _namePrefix
+        , TF.assign "policy" <$> TF.attribute _policy
         , TF.assign "sqs_failure_feedback_role_arn" <$> TF.attribute _sqsFailureFeedbackRoleArn
         , TF.assign "sqs_success_feedback_role_arn" <$> TF.attribute _sqsSuccessFeedbackRoleArn
         , TF.assign "sqs_success_feedback_sample_rate" <$> TF.attribute _sqsSuccessFeedbackSampleRate
         ]
 
 instance TF.IsValid (SnsTopicResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\SnsTopicResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
+                            ])
+        ])
 
 instance P.HasApplicationFailureFeedbackRoleArn (SnsTopicResource s) (TF.Attr s P.Text) where
     applicationFailureFeedbackRoleArn =
@@ -3087,10 +3433,20 @@ instance P.HasLambdaSuccessFeedbackSampleRate (SnsTopicResource s) (TF.Attr s P.
         P.lens (_lambdaSuccessFeedbackSampleRate :: SnsTopicResource s -> TF.Attr s P.Int)
                (\s a -> s { _lambdaSuccessFeedbackSampleRate = a } :: SnsTopicResource s)
 
+instance P.HasName (SnsTopicResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: SnsTopicResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SnsTopicResource s)
+
 instance P.HasNamePrefix (SnsTopicResource s) (TF.Attr s P.Text) where
     namePrefix =
         P.lens (_namePrefix :: SnsTopicResource s -> TF.Attr s P.Text)
                (\s a -> s { _namePrefix = a } :: SnsTopicResource s)
+
+instance P.HasPolicy (SnsTopicResource s) (TF.Attr s P.Text) where
+    policy =
+        P.lens (_policy :: SnsTopicResource s -> TF.Attr s P.Text)
+               (\s a -> s { _policy = a } :: SnsTopicResource s)
 
 instance P.HasSqsFailureFeedbackRoleArn (SnsTopicResource s) (TF.Attr s P.Text) where
     sqsFailureFeedbackRoleArn =
@@ -3346,6 +3702,9 @@ data SpotFleetRequestResource s = SpotFleetRequestResource'
     , _launchSpecification :: TF.Attr s [TF.Attr s (LaunchSpecificationSetting s)]
     -- ^ @launch_specification@ - (Required, Forces New)
     --
+    , _loadBalancers :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @load_balancers@ - (Optional, Forces New)
+    --
     , _replaceUnhealthyInstances :: TF.Attr s P.Bool
     -- ^ @replace_unhealthy_instances@ - (Optional, Forces New)
     --
@@ -3354,6 +3713,9 @@ data SpotFleetRequestResource s = SpotFleetRequestResource'
     --
     , _targetCapacity :: TF.Attr s P.Int
     -- ^ @target_capacity@ - (Required)
+    --
+    , _targetGroupArns :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @target_group_arns@ - (Optional, Forces New)
     --
     , _terminateInstancesWithExpiration :: TF.Attr s P.Bool
     -- ^ @terminate_instances_with_expiration@ - (Optional, Forces New)
@@ -3384,9 +3746,11 @@ spotFleetRequestResource _targetCapacity _iamFleetRole _launchSpecification =
             , _iamFleetRole = _iamFleetRole
             , _instanceInterruptionBehaviour = TF.value "terminate"
             , _launchSpecification = _launchSpecification
+            , _loadBalancers = TF.Nil
             , _replaceUnhealthyInstances = TF.value P.False
             , _spotPrice = TF.Nil
             , _targetCapacity = _targetCapacity
+            , _targetGroupArns = TF.Nil
             , _terminateInstancesWithExpiration = TF.Nil
             , _validFrom = TF.Nil
             , _validUntil = TF.Nil
@@ -3401,9 +3765,11 @@ instance TF.IsObject (SpotFleetRequestResource s) where
         , TF.assign "iam_fleet_role" <$> TF.attribute _iamFleetRole
         , TF.assign "instance_interruption_behaviour" <$> TF.attribute _instanceInterruptionBehaviour
         , TF.assign "launch_specification" <$> TF.attribute _launchSpecification
+        , TF.assign "load_balancers" <$> TF.attribute _loadBalancers
         , TF.assign "replace_unhealthy_instances" <$> TF.attribute _replaceUnhealthyInstances
         , TF.assign "spot_price" <$> TF.attribute _spotPrice
         , TF.assign "target_capacity" <$> TF.attribute _targetCapacity
+        , TF.assign "target_group_arns" <$> TF.attribute _targetGroupArns
         , TF.assign "terminate_instances_with_expiration" <$> TF.attribute _terminateInstancesWithExpiration
         , TF.assign "valid_from" <$> TF.attribute _validFrom
         , TF.assign "valid_until" <$> TF.attribute _validUntil
@@ -3443,6 +3809,11 @@ instance P.HasLaunchSpecification (SpotFleetRequestResource s) (TF.Attr s [TF.At
         P.lens (_launchSpecification :: SpotFleetRequestResource s -> TF.Attr s [TF.Attr s (LaunchSpecificationSetting s)])
                (\s a -> s { _launchSpecification = a } :: SpotFleetRequestResource s)
 
+instance P.HasLoadBalancers (SpotFleetRequestResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    loadBalancers =
+        P.lens (_loadBalancers :: SpotFleetRequestResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _loadBalancers = a } :: SpotFleetRequestResource s)
+
 instance P.HasReplaceUnhealthyInstances (SpotFleetRequestResource s) (TF.Attr s P.Bool) where
     replaceUnhealthyInstances =
         P.lens (_replaceUnhealthyInstances :: SpotFleetRequestResource s -> TF.Attr s P.Bool)
@@ -3457,6 +3828,11 @@ instance P.HasTargetCapacity (SpotFleetRequestResource s) (TF.Attr s P.Int) wher
     targetCapacity =
         P.lens (_targetCapacity :: SpotFleetRequestResource s -> TF.Attr s P.Int)
                (\s a -> s { _targetCapacity = a } :: SpotFleetRequestResource s)
+
+instance P.HasTargetGroupArns (SpotFleetRequestResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    targetGroupArns =
+        P.lens (_targetGroupArns :: SpotFleetRequestResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _targetGroupArns = a } :: SpotFleetRequestResource s)
 
 instance P.HasTerminateInstancesWithExpiration (SpotFleetRequestResource s) (TF.Attr s P.Bool) where
     terminateInstancesWithExpiration =
@@ -3501,11 +3877,26 @@ data SpotInstanceRequestResource s = SpotInstanceRequestResource'
     { _ami :: TF.Attr s P.Text
     -- ^ @ami@ - (Required, Forces New)
     --
+    , _associatePublicIpAddress :: TF.Attr s P.Bool
+    -- ^ @associate_public_ip_address@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'networkInterface'
+    , _availabilityZone :: TF.Attr s P.Text
+    -- ^ @availability_zone@ - (Optional, Forces New)
+    --
     , _blockDevice :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @block_device@ - (Optional, Forces New)
     --
     , _blockDurationMinutes :: TF.Attr s P.Int
     -- ^ @block_duration_minutes@ - (Optional, Forces New)
+    --
+    , _cpuCoreCount :: TF.Attr s P.Int
+    -- ^ @cpu_core_count@ - (Optional, Forces New)
+    --
+    , _cpuThreadsPerCore :: TF.Attr s P.Int
+    -- ^ @cpu_threads_per_core@ - (Optional, Forces New)
     --
     , _creditSpecification :: TF.Attr s (CreditSpecificationSetting s)
     -- ^ @credit_specification@ - (Optional, Forces New)
@@ -3513,8 +3904,14 @@ data SpotInstanceRequestResource s = SpotInstanceRequestResource'
     , _disableApiTermination :: TF.Attr s P.Bool
     -- ^ @disable_api_termination@ - (Optional, Forces New)
     --
+    , _ebsBlockDevice :: TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)]
+    -- ^ @ebs_block_device@ - (Optional, Forces New)
+    --
     , _ebsOptimized :: TF.Attr s P.Bool
     -- ^ @ebs_optimized@ - (Optional, Forces New)
+    --
+    , _ephemeralBlockDevice :: TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)]
+    -- ^ @ephemeral_block_device@ - (Optional, Forces New)
     --
     , _getPasswordData :: TF.Attr s P.Bool
     -- ^ @get_password_data@ - (Optional, Forces New)
@@ -3531,23 +3928,81 @@ data SpotInstanceRequestResource s = SpotInstanceRequestResource'
     , _instanceType :: TF.Attr s P.Text
     -- ^ @instance_type@ - (Required, Forces New)
     --
+    , _ipv6AddressCount :: TF.Attr s P.Int
+    -- ^ @ipv6_address_count@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'networkInterface'
+    , _ipv6Addresses :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @ipv6_addresses@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'networkInterface'
+    , _keyName :: TF.Attr s P.Text
+    -- ^ @key_name@ - (Optional, Forces New)
+    --
     , _launchGroup :: TF.Attr s P.Text
     -- ^ @launch_group@ - (Optional, Forces New)
     --
     , _monitoring :: TF.Attr s P.Bool
     -- ^ @monitoring@ - (Optional, Forces New)
     --
+    , _networkInterface :: TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]
+    -- ^ @network_interface@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'associatePublicIpAddress'
+    -- * 'ipv6AddressCount'
+    -- * 'ipv6Addresses'
+    -- * 'privateIp'
+    -- * 'securityGroups'
+    -- * 'sourceDestCheck'
+    -- * 'subnetId'
+    -- * 'vpcSecurityGroupIds'
+    , _placementGroup :: TF.Attr s P.Text
+    -- ^ @placement_group@ - (Optional, Forces New)
+    --
+    , _privateIp :: TF.Attr s P.Text
+    -- ^ @private_ip@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'networkInterface'
+    , _rootBlockDevice :: TF.Attr s (RootBlockDeviceSetting s)
+    -- ^ @root_block_device@ - (Optional, Forces New)
+    --
+    , _securityGroups :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @security_groups@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'networkInterface'
     , _sourceDestCheck :: TF.Attr s P.Bool
     -- ^ @source_dest_check@ - (Optional, Forces New)
     --
+    -- Conflicts with:
+    --
+    -- * 'networkInterface'
     , _spotPrice :: TF.Attr s P.Text
     -- ^ @spot_price@ - (Optional, Forces New)
     --
     , _spotType :: TF.Attr s P.Text
     -- ^ @spot_type@ - (Optional)
     --
+    , _subnetId :: TF.Attr s P.Text
+    -- ^ @subnet_id@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'networkInterface'
     , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
+    --
+    , _tenancy :: TF.Attr s P.Text
+    -- ^ @tenancy@ - (Optional, Forces New)
     --
     , _userData :: TF.Attr s P.Text
     -- ^ @user_data@ - (Optional, Forces New)
@@ -3561,9 +4016,21 @@ data SpotInstanceRequestResource s = SpotInstanceRequestResource'
     -- Conflicts with:
     --
     -- * 'userData'
+    , _validFrom :: TF.Attr s P.Text
+    -- ^ @valid_from@ - (Optional, Forces New)
+    --
+    , _validUntil :: TF.Attr s P.Text
+    -- ^ @valid_until@ - (Optional, Forces New)
+    --
     , _volumeTags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @volume_tags@ - (Optional)
     --
+    , _vpcSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @vpc_security_group_ids@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'networkInterface'
     , _waitForFulfillment :: TF.Attr s P.Bool
     -- ^ @wait_for_fulfillment@ - (Optional)
     --
@@ -3578,56 +4045,134 @@ spotInstanceRequestResource _ami _instanceType =
     TF.unsafeResource "aws_spot_instance_request" TF.validator $
         SpotInstanceRequestResource'
             { _ami = _ami
+            , _associatePublicIpAddress = TF.Nil
+            , _availabilityZone = TF.Nil
             , _blockDevice = TF.Nil
             , _blockDurationMinutes = TF.Nil
+            , _cpuCoreCount = TF.Nil
+            , _cpuThreadsPerCore = TF.Nil
             , _creditSpecification = TF.Nil
             , _disableApiTermination = TF.Nil
+            , _ebsBlockDevice = TF.Nil
             , _ebsOptimized = TF.Nil
+            , _ephemeralBlockDevice = TF.Nil
             , _getPasswordData = TF.value P.False
             , _iamInstanceProfile = TF.Nil
             , _instanceInitiatedShutdownBehavior = TF.Nil
             , _instanceInterruptionBehaviour = TF.value "terminate"
             , _instanceType = _instanceType
+            , _ipv6AddressCount = TF.Nil
+            , _ipv6Addresses = TF.Nil
+            , _keyName = TF.Nil
             , _launchGroup = TF.Nil
             , _monitoring = TF.Nil
+            , _networkInterface = TF.Nil
+            , _placementGroup = TF.Nil
+            , _privateIp = TF.Nil
+            , _rootBlockDevice = TF.Nil
+            , _securityGroups = TF.Nil
             , _sourceDestCheck = TF.value P.True
             , _spotPrice = TF.Nil
             , _spotType = TF.value "persistent"
+            , _subnetId = TF.Nil
             , _tags = TF.Nil
+            , _tenancy = TF.Nil
             , _userData = TF.Nil
             , _userDataBase64 = TF.Nil
+            , _validFrom = TF.Nil
+            , _validUntil = TF.Nil
             , _volumeTags = TF.Nil
+            , _vpcSecurityGroupIds = TF.Nil
             , _waitForFulfillment = TF.value P.False
             }
 
 instance TF.IsObject (SpotInstanceRequestResource s) where
     toObject SpotInstanceRequestResource'{..} = P.catMaybes
         [ TF.assign "ami" <$> TF.attribute _ami
+        , TF.assign "associate_public_ip_address" <$> TF.attribute _associatePublicIpAddress
+        , TF.assign "availability_zone" <$> TF.attribute _availabilityZone
         , TF.assign "block_device" <$> TF.attribute _blockDevice
         , TF.assign "block_duration_minutes" <$> TF.attribute _blockDurationMinutes
+        , TF.assign "cpu_core_count" <$> TF.attribute _cpuCoreCount
+        , TF.assign "cpu_threads_per_core" <$> TF.attribute _cpuThreadsPerCore
         , TF.assign "credit_specification" <$> TF.attribute _creditSpecification
         , TF.assign "disable_api_termination" <$> TF.attribute _disableApiTermination
+        , TF.assign "ebs_block_device" <$> TF.attribute _ebsBlockDevice
         , TF.assign "ebs_optimized" <$> TF.attribute _ebsOptimized
+        , TF.assign "ephemeral_block_device" <$> TF.attribute _ephemeralBlockDevice
         , TF.assign "get_password_data" <$> TF.attribute _getPasswordData
         , TF.assign "iam_instance_profile" <$> TF.attribute _iamInstanceProfile
         , TF.assign "instance_initiated_shutdown_behavior" <$> TF.attribute _instanceInitiatedShutdownBehavior
         , TF.assign "instance_interruption_behaviour" <$> TF.attribute _instanceInterruptionBehaviour
         , TF.assign "instance_type" <$> TF.attribute _instanceType
+        , TF.assign "ipv6_address_count" <$> TF.attribute _ipv6AddressCount
+        , TF.assign "ipv6_addresses" <$> TF.attribute _ipv6Addresses
+        , TF.assign "key_name" <$> TF.attribute _keyName
         , TF.assign "launch_group" <$> TF.attribute _launchGroup
         , TF.assign "monitoring" <$> TF.attribute _monitoring
+        , TF.assign "network_interface" <$> TF.attribute _networkInterface
+        , TF.assign "placement_group" <$> TF.attribute _placementGroup
+        , TF.assign "private_ip" <$> TF.attribute _privateIp
+        , TF.assign "root_block_device" <$> TF.attribute _rootBlockDevice
+        , TF.assign "security_groups" <$> TF.attribute _securityGroups
         , TF.assign "source_dest_check" <$> TF.attribute _sourceDestCheck
         , TF.assign "spot_price" <$> TF.attribute _spotPrice
         , TF.assign "spot_type" <$> TF.attribute _spotType
+        , TF.assign "subnet_id" <$> TF.attribute _subnetId
         , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "tenancy" <$> TF.attribute _tenancy
         , TF.assign "user_data" <$> TF.attribute _userData
         , TF.assign "user_data_base64" <$> TF.attribute _userDataBase64
+        , TF.assign "valid_from" <$> TF.attribute _validFrom
+        , TF.assign "valid_until" <$> TF.attribute _validUntil
         , TF.assign "volume_tags" <$> TF.attribute _volumeTags
+        , TF.assign "vpc_security_group_ids" <$> TF.attribute _vpcSecurityGroupIds
         , TF.assign "wait_for_fulfillment" <$> TF.attribute _waitForFulfillment
         ]
 
 instance TF.IsValid (SpotInstanceRequestResource s) where
     validator = TF.fieldsValidator (\SpotInstanceRequestResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_userData P.== TF.Nil)
+        [ if (_associatePublicIpAddress P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_associatePublicIpAddress",
+                            [ "_networkInterface"
+                            ])
+        , if (_ipv6AddressCount P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_ipv6AddressCount",
+                            [ "_networkInterface"
+                            ])
+        , if (_ipv6Addresses P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_ipv6Addresses",
+                            [ "_networkInterface"
+                            ])
+        , if (_networkInterface P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_networkInterface",
+                            [ "_associatePublicIpAddress"                            , "_ipv6AddressCount"                            , "_ipv6Addresses"                            , "_privateIp"                            , "_securityGroups"                            , "_sourceDestCheck"                            , "_subnetId"                            , "_vpcSecurityGroupIds"
+                            ])
+        , if (_privateIp P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_privateIp",
+                            [ "_networkInterface"
+                            ])
+        , if (_securityGroups P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_securityGroups",
+                            [ "_networkInterface"
+                            ])
+        , if (_sourceDestCheck P.== TF.value P.True)
+              then P.Nothing
+              else P.Just ("_sourceDestCheck",
+                            [ "_networkInterface"
+                            ])
+        , if (_subnetId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_subnetId",
+                            [ "_networkInterface"
+                            ])
+        , if (_userData P.== TF.Nil)
               then P.Nothing
               else P.Just ("_userData",
                             [ "_userDataBase64"
@@ -3637,16 +4182,35 @@ instance TF.IsValid (SpotInstanceRequestResource s) where
               else P.Just ("_userDataBase64",
                             [ "_userData"
                             ])
+        , if (_vpcSecurityGroupIds P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_vpcSecurityGroupIds",
+                            [ "_networkInterface"
+                            ])
         ])
            P.<> TF.settingsValidator "_creditSpecification"
                   (_creditSpecification
                       :: SpotInstanceRequestResource s -> TF.Attr s (CreditSpecificationSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_rootBlockDevice"
+                  (_rootBlockDevice
+                      :: SpotInstanceRequestResource s -> TF.Attr s (RootBlockDeviceSetting s))
                   TF.validator
 
 instance P.HasAmi (SpotInstanceRequestResource s) (TF.Attr s P.Text) where
     ami =
         P.lens (_ami :: SpotInstanceRequestResource s -> TF.Attr s P.Text)
                (\s a -> s { _ami = a } :: SpotInstanceRequestResource s)
+
+instance P.HasAssociatePublicIpAddress (SpotInstanceRequestResource s) (TF.Attr s P.Bool) where
+    associatePublicIpAddress =
+        P.lens (_associatePublicIpAddress :: SpotInstanceRequestResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _associatePublicIpAddress = a } :: SpotInstanceRequestResource s)
+
+instance P.HasAvailabilityZone (SpotInstanceRequestResource s) (TF.Attr s P.Text) where
+    availabilityZone =
+        P.lens (_availabilityZone :: SpotInstanceRequestResource s -> TF.Attr s P.Text)
+               (\s a -> s { _availabilityZone = a } :: SpotInstanceRequestResource s)
 
 instance P.HasBlockDevice (SpotInstanceRequestResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     blockDevice =
@@ -3658,6 +4222,16 @@ instance P.HasBlockDurationMinutes (SpotInstanceRequestResource s) (TF.Attr s P.
         P.lens (_blockDurationMinutes :: SpotInstanceRequestResource s -> TF.Attr s P.Int)
                (\s a -> s { _blockDurationMinutes = a } :: SpotInstanceRequestResource s)
 
+instance P.HasCpuCoreCount (SpotInstanceRequestResource s) (TF.Attr s P.Int) where
+    cpuCoreCount =
+        P.lens (_cpuCoreCount :: SpotInstanceRequestResource s -> TF.Attr s P.Int)
+               (\s a -> s { _cpuCoreCount = a } :: SpotInstanceRequestResource s)
+
+instance P.HasCpuThreadsPerCore (SpotInstanceRequestResource s) (TF.Attr s P.Int) where
+    cpuThreadsPerCore =
+        P.lens (_cpuThreadsPerCore :: SpotInstanceRequestResource s -> TF.Attr s P.Int)
+               (\s a -> s { _cpuThreadsPerCore = a } :: SpotInstanceRequestResource s)
+
 instance P.HasCreditSpecification (SpotInstanceRequestResource s) (TF.Attr s (CreditSpecificationSetting s)) where
     creditSpecification =
         P.lens (_creditSpecification :: SpotInstanceRequestResource s -> TF.Attr s (CreditSpecificationSetting s))
@@ -3668,10 +4242,20 @@ instance P.HasDisableApiTermination (SpotInstanceRequestResource s) (TF.Attr s P
         P.lens (_disableApiTermination :: SpotInstanceRequestResource s -> TF.Attr s P.Bool)
                (\s a -> s { _disableApiTermination = a } :: SpotInstanceRequestResource s)
 
+instance P.HasEbsBlockDevice (SpotInstanceRequestResource s) (TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)]) where
+    ebsBlockDevice =
+        P.lens (_ebsBlockDevice :: SpotInstanceRequestResource s -> TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)])
+               (\s a -> s { _ebsBlockDevice = a } :: SpotInstanceRequestResource s)
+
 instance P.HasEbsOptimized (SpotInstanceRequestResource s) (TF.Attr s P.Bool) where
     ebsOptimized =
         P.lens (_ebsOptimized :: SpotInstanceRequestResource s -> TF.Attr s P.Bool)
                (\s a -> s { _ebsOptimized = a } :: SpotInstanceRequestResource s)
+
+instance P.HasEphemeralBlockDevice (SpotInstanceRequestResource s) (TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)]) where
+    ephemeralBlockDevice =
+        P.lens (_ephemeralBlockDevice :: SpotInstanceRequestResource s -> TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)])
+               (\s a -> s { _ephemeralBlockDevice = a } :: SpotInstanceRequestResource s)
 
 instance P.HasGetPasswordData (SpotInstanceRequestResource s) (TF.Attr s P.Bool) where
     getPasswordData =
@@ -3698,6 +4282,21 @@ instance P.HasInstanceType (SpotInstanceRequestResource s) (TF.Attr s P.Text) wh
         P.lens (_instanceType :: SpotInstanceRequestResource s -> TF.Attr s P.Text)
                (\s a -> s { _instanceType = a } :: SpotInstanceRequestResource s)
 
+instance P.HasIpv6AddressCount (SpotInstanceRequestResource s) (TF.Attr s P.Int) where
+    ipv6AddressCount =
+        P.lens (_ipv6AddressCount :: SpotInstanceRequestResource s -> TF.Attr s P.Int)
+               (\s a -> s { _ipv6AddressCount = a } :: SpotInstanceRequestResource s)
+
+instance P.HasIpv6Addresses (SpotInstanceRequestResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    ipv6Addresses =
+        P.lens (_ipv6Addresses :: SpotInstanceRequestResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _ipv6Addresses = a } :: SpotInstanceRequestResource s)
+
+instance P.HasKeyName (SpotInstanceRequestResource s) (TF.Attr s P.Text) where
+    keyName =
+        P.lens (_keyName :: SpotInstanceRequestResource s -> TF.Attr s P.Text)
+               (\s a -> s { _keyName = a } :: SpotInstanceRequestResource s)
+
 instance P.HasLaunchGroup (SpotInstanceRequestResource s) (TF.Attr s P.Text) where
     launchGroup =
         P.lens (_launchGroup :: SpotInstanceRequestResource s -> TF.Attr s P.Text)
@@ -3707,6 +4306,31 @@ instance P.HasMonitoring (SpotInstanceRequestResource s) (TF.Attr s P.Bool) wher
     monitoring =
         P.lens (_monitoring :: SpotInstanceRequestResource s -> TF.Attr s P.Bool)
                (\s a -> s { _monitoring = a } :: SpotInstanceRequestResource s)
+
+instance P.HasNetworkInterface (SpotInstanceRequestResource s) (TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]) where
+    networkInterface =
+        P.lens (_networkInterface :: SpotInstanceRequestResource s -> TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)])
+               (\s a -> s { _networkInterface = a } :: SpotInstanceRequestResource s)
+
+instance P.HasPlacementGroup (SpotInstanceRequestResource s) (TF.Attr s P.Text) where
+    placementGroup =
+        P.lens (_placementGroup :: SpotInstanceRequestResource s -> TF.Attr s P.Text)
+               (\s a -> s { _placementGroup = a } :: SpotInstanceRequestResource s)
+
+instance P.HasPrivateIp (SpotInstanceRequestResource s) (TF.Attr s P.Text) where
+    privateIp =
+        P.lens (_privateIp :: SpotInstanceRequestResource s -> TF.Attr s P.Text)
+               (\s a -> s { _privateIp = a } :: SpotInstanceRequestResource s)
+
+instance P.HasRootBlockDevice (SpotInstanceRequestResource s) (TF.Attr s (RootBlockDeviceSetting s)) where
+    rootBlockDevice =
+        P.lens (_rootBlockDevice :: SpotInstanceRequestResource s -> TF.Attr s (RootBlockDeviceSetting s))
+               (\s a -> s { _rootBlockDevice = a } :: SpotInstanceRequestResource s)
+
+instance P.HasSecurityGroups (SpotInstanceRequestResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    securityGroups =
+        P.lens (_securityGroups :: SpotInstanceRequestResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _securityGroups = a } :: SpotInstanceRequestResource s)
 
 instance P.HasSourceDestCheck (SpotInstanceRequestResource s) (TF.Attr s P.Bool) where
     sourceDestCheck =
@@ -3723,10 +4347,20 @@ instance P.HasSpotType (SpotInstanceRequestResource s) (TF.Attr s P.Text) where
         P.lens (_spotType :: SpotInstanceRequestResource s -> TF.Attr s P.Text)
                (\s a -> s { _spotType = a } :: SpotInstanceRequestResource s)
 
+instance P.HasSubnetId (SpotInstanceRequestResource s) (TF.Attr s P.Text) where
+    subnetId =
+        P.lens (_subnetId :: SpotInstanceRequestResource s -> TF.Attr s P.Text)
+               (\s a -> s { _subnetId = a } :: SpotInstanceRequestResource s)
+
 instance P.HasTags (SpotInstanceRequestResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: SpotInstanceRequestResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: SpotInstanceRequestResource s)
+
+instance P.HasTenancy (SpotInstanceRequestResource s) (TF.Attr s P.Text) where
+    tenancy =
+        P.lens (_tenancy :: SpotInstanceRequestResource s -> TF.Attr s P.Text)
+               (\s a -> s { _tenancy = a } :: SpotInstanceRequestResource s)
 
 instance P.HasUserData (SpotInstanceRequestResource s) (TF.Attr s P.Text) where
     userData =
@@ -3738,10 +4372,25 @@ instance P.HasUserDataBase64 (SpotInstanceRequestResource s) (TF.Attr s P.Text) 
         P.lens (_userDataBase64 :: SpotInstanceRequestResource s -> TF.Attr s P.Text)
                (\s a -> s { _userDataBase64 = a } :: SpotInstanceRequestResource s)
 
+instance P.HasValidFrom (SpotInstanceRequestResource s) (TF.Attr s P.Text) where
+    validFrom =
+        P.lens (_validFrom :: SpotInstanceRequestResource s -> TF.Attr s P.Text)
+               (\s a -> s { _validFrom = a } :: SpotInstanceRequestResource s)
+
+instance P.HasValidUntil (SpotInstanceRequestResource s) (TF.Attr s P.Text) where
+    validUntil =
+        P.lens (_validUntil :: SpotInstanceRequestResource s -> TF.Attr s P.Text)
+               (\s a -> s { _validUntil = a } :: SpotInstanceRequestResource s)
+
 instance P.HasVolumeTags (SpotInstanceRequestResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     volumeTags =
         P.lens (_volumeTags :: SpotInstanceRequestResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _volumeTags = a } :: SpotInstanceRequestResource s)
+
+instance P.HasVpcSecurityGroupIds (SpotInstanceRequestResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    vpcSecurityGroupIds =
+        P.lens (_vpcSecurityGroupIds :: SpotInstanceRequestResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _vpcSecurityGroupIds = a } :: SpotInstanceRequestResource s)
 
 instance P.HasWaitForFulfillment (SpotInstanceRequestResource s) (TF.Attr s P.Bool) where
     waitForFulfillment =
@@ -3846,34 +4495,49 @@ data SqsQueueResource s = SqsQueueResource'
     { _contentBasedDeduplication :: TF.Attr s P.Bool
     -- ^ @content_based_deduplication@ - (Optional)
     --
-    , _delaySeconds              :: TF.Attr s P.Int
+    , _delaySeconds :: TF.Attr s P.Int
     -- ^ @delay_seconds@ - (Optional)
     --
-    , _fifoQueue                 :: TF.Attr s P.Bool
+    , _fifoQueue :: TF.Attr s P.Bool
     -- ^ @fifo_queue@ - (Optional, Forces New)
     --
-    , _kmsMasterKeyId            :: TF.Attr s P.Text
+    , _kmsDataKeyReusePeriodSeconds :: TF.Attr s P.Int
+    -- ^ @kms_data_key_reuse_period_seconds@ - (Optional)
+    --
+    , _kmsMasterKeyId :: TF.Attr s P.Text
     -- ^ @kms_master_key_id@ - (Optional)
     --
-    , _maxMessageSize            :: TF.Attr s P.Int
+    , _maxMessageSize :: TF.Attr s P.Int
     -- ^ @max_message_size@ - (Optional)
     --
-    , _messageRetentionSeconds   :: TF.Attr s P.Int
+    , _messageRetentionSeconds :: TF.Attr s P.Int
     -- ^ @message_retention_seconds@ - (Optional)
     --
-    , _namePrefix                :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
+    , _namePrefix :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
     --
-    , _receiveWaitTimeSeconds    :: TF.Attr s P.Int
+    -- Conflicts with:
+    --
+    -- * 'name'
+    , _policy :: TF.Attr s P.Text
+    -- ^ @policy@ - (Optional)
+    --
+    , _receiveWaitTimeSeconds :: TF.Attr s P.Int
     -- ^ @receive_wait_time_seconds@ - (Optional)
     --
-    , _redrivePolicy             :: TF.Attr s P.Text
+    , _redrivePolicy :: TF.Attr s P.Text
     -- ^ @redrive_policy@ - (Optional)
     --
-    , _tags                      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _visibilityTimeoutSeconds  :: TF.Attr s P.Int
+    , _visibilityTimeoutSeconds :: TF.Attr s P.Int
     -- ^ @visibility_timeout_seconds@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -3887,10 +4551,13 @@ sqsQueueResource =
             { _contentBasedDeduplication = TF.value P.False
             , _delaySeconds = TF.value 0
             , _fifoQueue = TF.value P.False
+            , _kmsDataKeyReusePeriodSeconds = TF.Nil
             , _kmsMasterKeyId = TF.Nil
             , _maxMessageSize = TF.value 262144
             , _messageRetentionSeconds = TF.value 345600
+            , _name = TF.Nil
             , _namePrefix = TF.Nil
+            , _policy = TF.Nil
             , _receiveWaitTimeSeconds = TF.value 0
             , _redrivePolicy = TF.Nil
             , _tags = TF.Nil
@@ -3902,10 +4569,13 @@ instance TF.IsObject (SqsQueueResource s) where
         [ TF.assign "content_based_deduplication" <$> TF.attribute _contentBasedDeduplication
         , TF.assign "delay_seconds" <$> TF.attribute _delaySeconds
         , TF.assign "fifo_queue" <$> TF.attribute _fifoQueue
+        , TF.assign "kms_data_key_reuse_period_seconds" <$> TF.attribute _kmsDataKeyReusePeriodSeconds
         , TF.assign "kms_master_key_id" <$> TF.attribute _kmsMasterKeyId
         , TF.assign "max_message_size" <$> TF.attribute _maxMessageSize
         , TF.assign "message_retention_seconds" <$> TF.attribute _messageRetentionSeconds
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _namePrefix
+        , TF.assign "policy" <$> TF.attribute _policy
         , TF.assign "receive_wait_time_seconds" <$> TF.attribute _receiveWaitTimeSeconds
         , TF.assign "redrive_policy" <$> TF.attribute _redrivePolicy
         , TF.assign "tags" <$> TF.attribute _tags
@@ -3913,7 +4583,18 @@ instance TF.IsObject (SqsQueueResource s) where
         ]
 
 instance TF.IsValid (SqsQueueResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\SqsQueueResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
+                            ])
+        ])
 
 instance P.HasContentBasedDeduplication (SqsQueueResource s) (TF.Attr s P.Bool) where
     contentBasedDeduplication =
@@ -3930,6 +4611,11 @@ instance P.HasFifoQueue (SqsQueueResource s) (TF.Attr s P.Bool) where
         P.lens (_fifoQueue :: SqsQueueResource s -> TF.Attr s P.Bool)
                (\s a -> s { _fifoQueue = a } :: SqsQueueResource s)
 
+instance P.HasKmsDataKeyReusePeriodSeconds (SqsQueueResource s) (TF.Attr s P.Int) where
+    kmsDataKeyReusePeriodSeconds =
+        P.lens (_kmsDataKeyReusePeriodSeconds :: SqsQueueResource s -> TF.Attr s P.Int)
+               (\s a -> s { _kmsDataKeyReusePeriodSeconds = a } :: SqsQueueResource s)
+
 instance P.HasKmsMasterKeyId (SqsQueueResource s) (TF.Attr s P.Text) where
     kmsMasterKeyId =
         P.lens (_kmsMasterKeyId :: SqsQueueResource s -> TF.Attr s P.Text)
@@ -3945,10 +4631,20 @@ instance P.HasMessageRetentionSeconds (SqsQueueResource s) (TF.Attr s P.Int) whe
         P.lens (_messageRetentionSeconds :: SqsQueueResource s -> TF.Attr s P.Int)
                (\s a -> s { _messageRetentionSeconds = a } :: SqsQueueResource s)
 
+instance P.HasName (SqsQueueResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: SqsQueueResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SqsQueueResource s)
+
 instance P.HasNamePrefix (SqsQueueResource s) (TF.Attr s P.Text) where
     namePrefix =
         P.lens (_namePrefix :: SqsQueueResource s -> TF.Attr s P.Text)
                (\s a -> s { _namePrefix = a } :: SqsQueueResource s)
+
+instance P.HasPolicy (SqsQueueResource s) (TF.Attr s P.Text) where
+    policy =
+        P.lens (_policy :: SqsQueueResource s -> TF.Attr s P.Text)
+               (\s a -> s { _policy = a } :: SqsQueueResource s)
 
 instance P.HasReceiveWaitTimeSeconds (SqsQueueResource s) (TF.Attr s P.Int) where
     receiveWaitTimeSeconds =
@@ -4125,6 +4821,9 @@ data SsmAssociationResource s = SsmAssociationResource'
     { _associationName    :: TF.Attr s P.Text
     -- ^ @association_name@ - (Optional)
     --
+    , _documentVersion    :: TF.Attr s P.Text
+    -- ^ @document_version@ - (Optional)
+    --
     , _instanceId         :: TF.Attr s P.Text
     -- ^ @instance_id@ - (Optional, Forces New)
     --
@@ -4134,8 +4833,14 @@ data SsmAssociationResource s = SsmAssociationResource'
     , _outputLocation     :: TF.Attr s (OutputLocationSetting s)
     -- ^ @output_location@ - (Optional)
     --
+    , _parameters         :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @parameters@ - (Optional)
+    --
     , _scheduleExpression :: TF.Attr s P.Text
     -- ^ @schedule_expression@ - (Optional)
+    --
+    , _targets            :: TF.Attr s [TF.Attr s (TargetsSetting s)]
+    -- ^ @targets@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -4147,19 +4852,25 @@ ssmAssociationResource _name =
     TF.unsafeResource "aws_ssm_association" TF.validator $
         SsmAssociationResource'
             { _associationName = TF.Nil
+            , _documentVersion = TF.Nil
             , _instanceId = TF.Nil
             , _name = _name
             , _outputLocation = TF.Nil
+            , _parameters = TF.Nil
             , _scheduleExpression = TF.Nil
+            , _targets = TF.Nil
             }
 
 instance TF.IsObject (SsmAssociationResource s) where
     toObject SsmAssociationResource'{..} = P.catMaybes
         [ TF.assign "association_name" <$> TF.attribute _associationName
+        , TF.assign "document_version" <$> TF.attribute _documentVersion
         , TF.assign "instance_id" <$> TF.attribute _instanceId
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "output_location" <$> TF.attribute _outputLocation
+        , TF.assign "parameters" <$> TF.attribute _parameters
         , TF.assign "schedule_expression" <$> TF.attribute _scheduleExpression
+        , TF.assign "targets" <$> TF.attribute _targets
         ]
 
 instance TF.IsValid (SsmAssociationResource s) where
@@ -4173,6 +4884,11 @@ instance P.HasAssociationName (SsmAssociationResource s) (TF.Attr s P.Text) wher
     associationName =
         P.lens (_associationName :: SsmAssociationResource s -> TF.Attr s P.Text)
                (\s a -> s { _associationName = a } :: SsmAssociationResource s)
+
+instance P.HasDocumentVersion (SsmAssociationResource s) (TF.Attr s P.Text) where
+    documentVersion =
+        P.lens (_documentVersion :: SsmAssociationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _documentVersion = a } :: SsmAssociationResource s)
 
 instance P.HasInstanceId (SsmAssociationResource s) (TF.Attr s P.Text) where
     instanceId =
@@ -4189,10 +4905,20 @@ instance P.HasOutputLocation (SsmAssociationResource s) (TF.Attr s (OutputLocati
         P.lens (_outputLocation :: SsmAssociationResource s -> TF.Attr s (OutputLocationSetting s))
                (\s a -> s { _outputLocation = a } :: SsmAssociationResource s)
 
+instance P.HasParameters (SsmAssociationResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    parameters =
+        P.lens (_parameters :: SsmAssociationResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _parameters = a } :: SsmAssociationResource s)
+
 instance P.HasScheduleExpression (SsmAssociationResource s) (TF.Attr s P.Text) where
     scheduleExpression =
         P.lens (_scheduleExpression :: SsmAssociationResource s -> TF.Attr s P.Text)
                (\s a -> s { _scheduleExpression = a } :: SsmAssociationResource s)
+
+instance P.HasTargets (SsmAssociationResource s) (TF.Attr s [TF.Attr s (TargetsSetting s)]) where
+    targets =
+        P.lens (_targets :: SsmAssociationResource s -> TF.Attr s [TF.Attr s (TargetsSetting s)])
+               (\s a -> s { _targets = a } :: SsmAssociationResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SsmAssociationResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -4634,8 +5360,14 @@ data SsmParameterResource s = SsmParameterResource'
     { _allowedPattern :: TF.Attr s P.Text
     -- ^ @allowed_pattern@ - (Optional)
     --
+    , _arn            :: TF.Attr s P.Text
+    -- ^ @arn@ - (Optional)
+    --
     , _description    :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
+    --
+    , _keyId          :: TF.Attr s P.Text
+    -- ^ @key_id@ - (Optional)
     --
     , _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
@@ -4664,7 +5396,9 @@ ssmParameterResource _name _type' _value =
     TF.unsafeResource "aws_ssm_parameter" TF.validator $
         SsmParameterResource'
             { _allowedPattern = TF.Nil
+            , _arn = TF.Nil
             , _description = TF.Nil
+            , _keyId = TF.Nil
             , _name = _name
             , _overwrite = TF.Nil
             , _tags = TF.Nil
@@ -4675,7 +5409,9 @@ ssmParameterResource _name _type' _value =
 instance TF.IsObject (SsmParameterResource s) where
     toObject SsmParameterResource'{..} = P.catMaybes
         [ TF.assign "allowed_pattern" <$> TF.attribute _allowedPattern
+        , TF.assign "arn" <$> TF.attribute _arn
         , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "key_id" <$> TF.attribute _keyId
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "overwrite" <$> TF.attribute _overwrite
         , TF.assign "tags" <$> TF.attribute _tags
@@ -4691,10 +5427,20 @@ instance P.HasAllowedPattern (SsmParameterResource s) (TF.Attr s P.Text) where
         P.lens (_allowedPattern :: SsmParameterResource s -> TF.Attr s P.Text)
                (\s a -> s { _allowedPattern = a } :: SsmParameterResource s)
 
+instance P.HasArn (SsmParameterResource s) (TF.Attr s P.Text) where
+    arn =
+        P.lens (_arn :: SsmParameterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _arn = a } :: SsmParameterResource s)
+
 instance P.HasDescription (SsmParameterResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: SsmParameterResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: SsmParameterResource s)
+
+instance P.HasKeyId (SsmParameterResource s) (TF.Attr s P.Text) where
+    keyId =
+        P.lens (_keyId :: SsmParameterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _keyId = a } :: SsmParameterResource s)
 
 instance P.HasName (SsmParameterResource s) (TF.Attr s P.Text) where
     name =
@@ -4986,7 +5732,19 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (StoragegatewayCacheResource s)) (
 -- See the <https://www.terraform.io/docs/providers/aws/r/storagegateway_gateway.html terraform documentation>
 -- for more information.
 data StoragegatewayGatewayResource s = StoragegatewayGatewayResource'
-    { _gatewayName :: TF.Attr s P.Text
+    { _activationKey :: TF.Attr s P.Text
+    -- ^ @activation_key@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'gatewayIpAddress'
+    , _gatewayIpAddress :: TF.Attr s P.Text
+    -- ^ @gateway_ip_address@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'activationKey'
+    , _gatewayName :: TF.Attr s P.Text
     -- ^ @gateway_name@ - (Required)
     --
     , _gatewayTimezone :: TF.Attr s P.Text
@@ -5017,7 +5775,9 @@ storagegatewayGatewayResource
 storagegatewayGatewayResource _gatewayName _gatewayTimezone =
     TF.unsafeResource "aws_storagegateway_gateway" TF.validator $
         StoragegatewayGatewayResource'
-            { _gatewayName = _gatewayName
+            { _activationKey = TF.Nil
+            , _gatewayIpAddress = TF.Nil
+            , _gatewayName = _gatewayName
             , _gatewayTimezone = _gatewayTimezone
             , _gatewayType = TF.value "STORED"
             , _mediumChangerType = TF.Nil
@@ -5028,7 +5788,9 @@ storagegatewayGatewayResource _gatewayName _gatewayTimezone =
 
 instance TF.IsObject (StoragegatewayGatewayResource s) where
     toObject StoragegatewayGatewayResource'{..} = P.catMaybes
-        [ TF.assign "gateway_name" <$> TF.attribute _gatewayName
+        [ TF.assign "activation_key" <$> TF.attribute _activationKey
+        , TF.assign "gateway_ip_address" <$> TF.attribute _gatewayIpAddress
+        , TF.assign "gateway_name" <$> TF.attribute _gatewayName
         , TF.assign "gateway_timezone" <$> TF.attribute _gatewayTimezone
         , TF.assign "gateway_type" <$> TF.attribute _gatewayType
         , TF.assign "medium_changer_type" <$> TF.attribute _mediumChangerType
@@ -5038,11 +5800,32 @@ instance TF.IsObject (StoragegatewayGatewayResource s) where
         ]
 
 instance TF.IsValid (StoragegatewayGatewayResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\StoragegatewayGatewayResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_activationKey P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_activationKey",
+                            [ "_gatewayIpAddress"
+                            ])
+        , if (_gatewayIpAddress P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_gatewayIpAddress",
+                            [ "_activationKey"
+                            ])
+        ])
            P.<> TF.settingsValidator "_smbActiveDirectorySettings"
                   (_smbActiveDirectorySettings
                       :: StoragegatewayGatewayResource s -> TF.Attr s (SmbActiveDirectorySettingsSetting s))
                   TF.validator
+
+instance P.HasActivationKey (StoragegatewayGatewayResource s) (TF.Attr s P.Text) where
+    activationKey =
+        P.lens (_activationKey :: StoragegatewayGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _activationKey = a } :: StoragegatewayGatewayResource s)
+
+instance P.HasGatewayIpAddress (StoragegatewayGatewayResource s) (TF.Attr s P.Text) where
+    gatewayIpAddress =
+        P.lens (_gatewayIpAddress :: StoragegatewayGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _gatewayIpAddress = a } :: StoragegatewayGatewayResource s)
 
 instance P.HasGatewayName (StoragegatewayGatewayResource s) (TF.Attr s P.Text) where
     gatewayName =
@@ -5529,8 +6312,14 @@ data SubnetResource s = SubnetResource'
     { _assignIpv6AddressOnCreation :: TF.Attr s P.Bool
     -- ^ @assign_ipv6_address_on_creation@ - (Optional)
     --
+    , _availabilityZone :: TF.Attr s P.Text
+    -- ^ @availability_zone@ - (Optional, Forces New)
+    --
     , _cidrBlock :: TF.Attr s P.Text
     -- ^ @cidr_block@ - (Required, Forces New)
+    --
+    , _ipv6CidrBlock :: TF.Attr s P.Text
+    -- ^ @ipv6_cidr_block@ - (Optional)
     --
     , _mapPublicIpOnLaunch :: TF.Attr s P.Bool
     -- ^ @map_public_ip_on_launch@ - (Optional)
@@ -5552,7 +6341,9 @@ subnetResource _cidrBlock _vpcId =
     TF.unsafeResource "aws_subnet" TF.validator $
         SubnetResource'
             { _assignIpv6AddressOnCreation = TF.value P.False
+            , _availabilityZone = TF.Nil
             , _cidrBlock = _cidrBlock
+            , _ipv6CidrBlock = TF.Nil
             , _mapPublicIpOnLaunch = TF.value P.False
             , _tags = TF.Nil
             , _vpcId = _vpcId
@@ -5561,7 +6352,9 @@ subnetResource _cidrBlock _vpcId =
 instance TF.IsObject (SubnetResource s) where
     toObject SubnetResource'{..} = P.catMaybes
         [ TF.assign "assign_ipv6_address_on_creation" <$> TF.attribute _assignIpv6AddressOnCreation
+        , TF.assign "availability_zone" <$> TF.attribute _availabilityZone
         , TF.assign "cidr_block" <$> TF.attribute _cidrBlock
+        , TF.assign "ipv6_cidr_block" <$> TF.attribute _ipv6CidrBlock
         , TF.assign "map_public_ip_on_launch" <$> TF.attribute _mapPublicIpOnLaunch
         , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "vpc_id" <$> TF.attribute _vpcId
@@ -5575,10 +6368,20 @@ instance P.HasAssignIpv6AddressOnCreation (SubnetResource s) (TF.Attr s P.Bool) 
         P.lens (_assignIpv6AddressOnCreation :: SubnetResource s -> TF.Attr s P.Bool)
                (\s a -> s { _assignIpv6AddressOnCreation = a } :: SubnetResource s)
 
+instance P.HasAvailabilityZone (SubnetResource s) (TF.Attr s P.Text) where
+    availabilityZone =
+        P.lens (_availabilityZone :: SubnetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _availabilityZone = a } :: SubnetResource s)
+
 instance P.HasCidrBlock (SubnetResource s) (TF.Attr s P.Text) where
     cidrBlock =
         P.lens (_cidrBlock :: SubnetResource s -> TF.Attr s P.Text)
                (\s a -> s { _cidrBlock = a } :: SubnetResource s)
+
+instance P.HasIpv6CidrBlock (SubnetResource s) (TF.Attr s P.Text) where
+    ipv6CidrBlock =
+        P.lens (_ipv6CidrBlock :: SubnetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ipv6CidrBlock = a } :: SubnetResource s)
 
 instance P.HasMapPublicIpOnLaunch (SubnetResource s) (TF.Attr s P.Bool) where
     mapPublicIpOnLaunch =
@@ -5615,9 +6418,18 @@ data SwfDomainResource s = SwfDomainResource'
     { _description                            :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
+    , _name                                   :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
     , _namePrefix                             :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
     --
+    -- Conflicts with:
+    --
+    -- * 'name'
     , _workflowExecutionRetentionPeriodInDays :: TF.Attr s P.Text
     -- ^ @workflow_execution_retention_period_in_days@ - (Required, Forces New)
     --
@@ -5631,6 +6443,7 @@ swfDomainResource _workflowExecutionRetentionPeriodInDays =
     TF.unsafeResource "aws_swf_domain" TF.validator $
         SwfDomainResource'
             { _description = TF.Nil
+            , _name = TF.Nil
             , _namePrefix = TF.Nil
             , _workflowExecutionRetentionPeriodInDays = _workflowExecutionRetentionPeriodInDays
             }
@@ -5638,17 +6451,34 @@ swfDomainResource _workflowExecutionRetentionPeriodInDays =
 instance TF.IsObject (SwfDomainResource s) where
     toObject SwfDomainResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _namePrefix
         , TF.assign "workflow_execution_retention_period_in_days" <$> TF.attribute _workflowExecutionRetentionPeriodInDays
         ]
 
 instance TF.IsValid (SwfDomainResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\SwfDomainResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
+                            ])
+        ])
 
 instance P.HasDescription (SwfDomainResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: SwfDomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: SwfDomainResource s)
+
+instance P.HasName (SwfDomainResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: SwfDomainResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SwfDomainResource s)
 
 instance P.HasNamePrefix (SwfDomainResource s) (TF.Attr s P.Text) where
     namePrefix =
@@ -5755,6 +6585,15 @@ data VpcResource s = VpcResource'
     , _cidrBlock :: TF.Attr s P.Text
     -- ^ @cidr_block@ - (Required, Forces New)
     --
+    , _enableClassiclink :: TF.Attr s P.Bool
+    -- ^ @enable_classiclink@ - (Optional)
+    --
+    , _enableClassiclinkDnsSupport :: TF.Attr s P.Bool
+    -- ^ @enable_classiclink_dns_support@ - (Optional)
+    --
+    , _enableDnsHostnames :: TF.Attr s P.Bool
+    -- ^ @enable_dns_hostnames@ - (Optional)
+    --
     , _enableDnsSupport :: TF.Attr s P.Bool
     -- ^ @enable_dns_support@ - (Optional)
     --
@@ -5775,6 +6614,9 @@ vpcResource _cidrBlock =
         VpcResource'
             { _assignGeneratedIpv6CidrBlock = TF.value P.False
             , _cidrBlock = _cidrBlock
+            , _enableClassiclink = TF.Nil
+            , _enableClassiclinkDnsSupport = TF.Nil
+            , _enableDnsHostnames = TF.Nil
             , _enableDnsSupport = TF.value P.True
             , _instanceTenancy = TF.value "default"
             , _tags = TF.Nil
@@ -5784,6 +6626,9 @@ instance TF.IsObject (VpcResource s) where
     toObject VpcResource'{..} = P.catMaybes
         [ TF.assign "assign_generated_ipv6_cidr_block" <$> TF.attribute _assignGeneratedIpv6CidrBlock
         , TF.assign "cidr_block" <$> TF.attribute _cidrBlock
+        , TF.assign "enable_classiclink" <$> TF.attribute _enableClassiclink
+        , TF.assign "enable_classiclink_dns_support" <$> TF.attribute _enableClassiclinkDnsSupport
+        , TF.assign "enable_dns_hostnames" <$> TF.attribute _enableDnsHostnames
         , TF.assign "enable_dns_support" <$> TF.attribute _enableDnsSupport
         , TF.assign "instance_tenancy" <$> TF.attribute _instanceTenancy
         , TF.assign "tags" <$> TF.attribute _tags
@@ -5801,6 +6646,21 @@ instance P.HasCidrBlock (VpcResource s) (TF.Attr s P.Text) where
     cidrBlock =
         P.lens (_cidrBlock :: VpcResource s -> TF.Attr s P.Text)
                (\s a -> s { _cidrBlock = a } :: VpcResource s)
+
+instance P.HasEnableClassiclink (VpcResource s) (TF.Attr s P.Bool) where
+    enableClassiclink =
+        P.lens (_enableClassiclink :: VpcResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enableClassiclink = a } :: VpcResource s)
+
+instance P.HasEnableClassiclinkDnsSupport (VpcResource s) (TF.Attr s P.Bool) where
+    enableClassiclinkDnsSupport =
+        P.lens (_enableClassiclinkDnsSupport :: VpcResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enableClassiclinkDnsSupport = a } :: VpcResource s)
+
+instance P.HasEnableDnsHostnames (VpcResource s) (TF.Attr s P.Bool) where
+    enableDnsHostnames =
+        P.lens (_enableDnsHostnames :: VpcResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enableDnsHostnames = a } :: VpcResource s)
 
 instance P.HasEnableDnsSupport (VpcResource s) (TF.Attr s P.Bool) where
     enableDnsSupport =
@@ -5993,11 +6853,23 @@ data VpcEndpointResource s = VpcEndpointResource'
     { _autoAccept        :: TF.Attr s P.Bool
     -- ^ @auto_accept@ - (Optional)
     --
+    , _policy            :: TF.Attr s P.Text
+    -- ^ @policy@ - (Optional)
+    --
     , _privateDnsEnabled :: TF.Attr s P.Bool
     -- ^ @private_dns_enabled@ - (Optional)
     --
+    , _routeTableIds     :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @route_table_ids@ - (Optional)
+    --
+    , _securityGroupIds  :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @security_group_ids@ - (Optional)
+    --
     , _serviceName       :: TF.Attr s P.Text
     -- ^ @service_name@ - (Required, Forces New)
+    --
+    , _subnetIds         :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @subnet_ids@ - (Optional)
     --
     , _vpcEndpointType   :: TF.Attr s P.Text
     -- ^ @vpc_endpoint_type@ - (Optional, Forces New)
@@ -6016,8 +6888,12 @@ vpcEndpointResource _vpcId _serviceName =
     TF.unsafeResource "aws_vpc_endpoint" TF.validator $
         VpcEndpointResource'
             { _autoAccept = TF.Nil
+            , _policy = TF.Nil
             , _privateDnsEnabled = TF.value P.False
+            , _routeTableIds = TF.Nil
+            , _securityGroupIds = TF.Nil
             , _serviceName = _serviceName
+            , _subnetIds = TF.Nil
             , _vpcEndpointType = TF.value "Gateway"
             , _vpcId = _vpcId
             }
@@ -6025,8 +6901,12 @@ vpcEndpointResource _vpcId _serviceName =
 instance TF.IsObject (VpcEndpointResource s) where
     toObject VpcEndpointResource'{..} = P.catMaybes
         [ TF.assign "auto_accept" <$> TF.attribute _autoAccept
+        , TF.assign "policy" <$> TF.attribute _policy
         , TF.assign "private_dns_enabled" <$> TF.attribute _privateDnsEnabled
+        , TF.assign "route_table_ids" <$> TF.attribute _routeTableIds
+        , TF.assign "security_group_ids" <$> TF.attribute _securityGroupIds
         , TF.assign "service_name" <$> TF.attribute _serviceName
+        , TF.assign "subnet_ids" <$> TF.attribute _subnetIds
         , TF.assign "vpc_endpoint_type" <$> TF.attribute _vpcEndpointType
         , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
@@ -6039,15 +6919,35 @@ instance P.HasAutoAccept (VpcEndpointResource s) (TF.Attr s P.Bool) where
         P.lens (_autoAccept :: VpcEndpointResource s -> TF.Attr s P.Bool)
                (\s a -> s { _autoAccept = a } :: VpcEndpointResource s)
 
+instance P.HasPolicy (VpcEndpointResource s) (TF.Attr s P.Text) where
+    policy =
+        P.lens (_policy :: VpcEndpointResource s -> TF.Attr s P.Text)
+               (\s a -> s { _policy = a } :: VpcEndpointResource s)
+
 instance P.HasPrivateDnsEnabled (VpcEndpointResource s) (TF.Attr s P.Bool) where
     privateDnsEnabled =
         P.lens (_privateDnsEnabled :: VpcEndpointResource s -> TF.Attr s P.Bool)
                (\s a -> s { _privateDnsEnabled = a } :: VpcEndpointResource s)
 
+instance P.HasRouteTableIds (VpcEndpointResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    routeTableIds =
+        P.lens (_routeTableIds :: VpcEndpointResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _routeTableIds = a } :: VpcEndpointResource s)
+
+instance P.HasSecurityGroupIds (VpcEndpointResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    securityGroupIds =
+        P.lens (_securityGroupIds :: VpcEndpointResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _securityGroupIds = a } :: VpcEndpointResource s)
+
 instance P.HasServiceName (VpcEndpointResource s) (TF.Attr s P.Text) where
     serviceName =
         P.lens (_serviceName :: VpcEndpointResource s -> TF.Attr s P.Text)
                (\s a -> s { _serviceName = a } :: VpcEndpointResource s)
+
+instance P.HasSubnetIds (VpcEndpointResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    subnetIds =
+        P.lens (_subnetIds :: VpcEndpointResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _subnetIds = a } :: VpcEndpointResource s)
 
 instance P.HasVpcEndpointType (VpcEndpointResource s) (TF.Attr s P.Text) where
     vpcEndpointType =
@@ -6234,6 +7134,9 @@ data VpcEndpointServiceResource s = VpcEndpointServiceResource'
     { _acceptanceRequired      :: TF.Attr s P.Bool
     -- ^ @acceptance_required@ - (Required)
     --
+    , _allowedPrincipals       :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @allowed_principals@ - (Optional)
+    --
     , _networkLoadBalancerArns :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @network_load_balancer_arns@ - (Required)
     --
@@ -6248,12 +7151,14 @@ vpcEndpointServiceResource _networkLoadBalancerArns _acceptanceRequired =
     TF.unsafeResource "aws_vpc_endpoint_service" TF.validator $
         VpcEndpointServiceResource'
             { _acceptanceRequired = _acceptanceRequired
+            , _allowedPrincipals = TF.Nil
             , _networkLoadBalancerArns = _networkLoadBalancerArns
             }
 
 instance TF.IsObject (VpcEndpointServiceResource s) where
     toObject VpcEndpointServiceResource'{..} = P.catMaybes
         [ TF.assign "acceptance_required" <$> TF.attribute _acceptanceRequired
+        , TF.assign "allowed_principals" <$> TF.attribute _allowedPrincipals
         , TF.assign "network_load_balancer_arns" <$> TF.attribute _networkLoadBalancerArns
         ]
 
@@ -6264,6 +7169,11 @@ instance P.HasAcceptanceRequired (VpcEndpointServiceResource s) (TF.Attr s P.Boo
     acceptanceRequired =
         P.lens (_acceptanceRequired :: VpcEndpointServiceResource s -> TF.Attr s P.Bool)
                (\s a -> s { _acceptanceRequired = a } :: VpcEndpointServiceResource s)
+
+instance P.HasAllowedPrincipals (VpcEndpointServiceResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    allowedPrincipals =
+        P.lens (_allowedPrincipals :: VpcEndpointServiceResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _allowedPrincipals = a } :: VpcEndpointServiceResource s)
 
 instance P.HasNetworkLoadBalancerArns (VpcEndpointServiceResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     networkLoadBalancerArns =
@@ -6440,16 +7350,28 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcIpv4CidrBlockAssociationResour
 -- See the <https://www.terraform.io/docs/providers/aws/r/vpc_peering_connection.html terraform documentation>
 -- for more information.
 data VpcPeeringConnectionResource s = VpcPeeringConnectionResource'
-    { _autoAccept :: TF.Attr s P.Bool
+    { _accepter    :: TF.Attr s (AccepterSetting s)
+    -- ^ @accepter@ - (Optional)
+    --
+    , _autoAccept  :: TF.Attr s P.Bool
     -- ^ @auto_accept@ - (Optional)
     --
-    , _peerVpcId  :: TF.Attr s P.Text
+    , _peerOwnerId :: TF.Attr s P.Text
+    -- ^ @peer_owner_id@ - (Optional, Forces New)
+    --
+    , _peerRegion  :: TF.Attr s P.Text
+    -- ^ @peer_region@ - (Optional, Forces New)
+    --
+    , _peerVpcId   :: TF.Attr s P.Text
     -- ^ @peer_vpc_id@ - (Required, Forces New)
     --
-    , _tags       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _requester   :: TF.Attr s (RequesterSetting s)
+    -- ^ @requester@ - (Optional)
+    --
+    , _tags        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _vpcId      :: TF.Attr s P.Text
+    , _vpcId       :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6462,32 +7384,68 @@ vpcPeeringConnectionResource
 vpcPeeringConnectionResource _peerVpcId _vpcId =
     TF.unsafeResource "aws_vpc_peering_connection" TF.validator $
         VpcPeeringConnectionResource'
-            { _autoAccept = TF.Nil
+            { _accepter = TF.Nil
+            , _autoAccept = TF.Nil
+            , _peerOwnerId = TF.Nil
+            , _peerRegion = TF.Nil
             , _peerVpcId = _peerVpcId
+            , _requester = TF.Nil
             , _tags = TF.Nil
             , _vpcId = _vpcId
             }
 
 instance TF.IsObject (VpcPeeringConnectionResource s) where
     toObject VpcPeeringConnectionResource'{..} = P.catMaybes
-        [ TF.assign "auto_accept" <$> TF.attribute _autoAccept
+        [ TF.assign "accepter" <$> TF.attribute _accepter
+        , TF.assign "auto_accept" <$> TF.attribute _autoAccept
+        , TF.assign "peer_owner_id" <$> TF.attribute _peerOwnerId
+        , TF.assign "peer_region" <$> TF.attribute _peerRegion
         , TF.assign "peer_vpc_id" <$> TF.attribute _peerVpcId
+        , TF.assign "requester" <$> TF.attribute _requester
         , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
 
 instance TF.IsValid (VpcPeeringConnectionResource s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_accepter"
+                  (_accepter
+                      :: VpcPeeringConnectionResource s -> TF.Attr s (AccepterSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_requester"
+                  (_requester
+                      :: VpcPeeringConnectionResource s -> TF.Attr s (RequesterSetting s))
+                  TF.validator
+
+instance P.HasAccepter (VpcPeeringConnectionResource s) (TF.Attr s (AccepterSetting s)) where
+    accepter =
+        P.lens (_accepter :: VpcPeeringConnectionResource s -> TF.Attr s (AccepterSetting s))
+               (\s a -> s { _accepter = a } :: VpcPeeringConnectionResource s)
 
 instance P.HasAutoAccept (VpcPeeringConnectionResource s) (TF.Attr s P.Bool) where
     autoAccept =
         P.lens (_autoAccept :: VpcPeeringConnectionResource s -> TF.Attr s P.Bool)
                (\s a -> s { _autoAccept = a } :: VpcPeeringConnectionResource s)
 
+instance P.HasPeerOwnerId (VpcPeeringConnectionResource s) (TF.Attr s P.Text) where
+    peerOwnerId =
+        P.lens (_peerOwnerId :: VpcPeeringConnectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _peerOwnerId = a } :: VpcPeeringConnectionResource s)
+
+instance P.HasPeerRegion (VpcPeeringConnectionResource s) (TF.Attr s P.Text) where
+    peerRegion =
+        P.lens (_peerRegion :: VpcPeeringConnectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _peerRegion = a } :: VpcPeeringConnectionResource s)
+
 instance P.HasPeerVpcId (VpcPeeringConnectionResource s) (TF.Attr s P.Text) where
     peerVpcId =
         P.lens (_peerVpcId :: VpcPeeringConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _peerVpcId = a } :: VpcPeeringConnectionResource s)
+
+instance P.HasRequester (VpcPeeringConnectionResource s) (TF.Attr s (RequesterSetting s)) where
+    requester =
+        P.lens (_requester :: VpcPeeringConnectionResource s -> TF.Attr s (RequesterSetting s))
+               (\s a -> s { _requester = a } :: VpcPeeringConnectionResource s)
 
 instance P.HasTags (VpcPeeringConnectionResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     tags =
@@ -6522,8 +7480,14 @@ instance s ~ s' => P.HasComputedRequester (TF.Ref s' (VpcPeeringConnectionResour
 -- See the <https://www.terraform.io/docs/providers/aws/r/vpc_peering_connection_accepter.html terraform documentation>
 -- for more information.
 data VpcPeeringConnectionAccepterResource s = VpcPeeringConnectionAccepterResource'
-    { _autoAccept             :: TF.Attr s P.Bool
+    { _accepter               :: TF.Attr s (AccepterSetting s)
+    -- ^ @accepter@ - (Optional)
+    --
+    , _autoAccept             :: TF.Attr s P.Bool
     -- ^ @auto_accept@ - (Optional)
+    --
+    , _requester              :: TF.Attr s (RequesterSetting s)
+    -- ^ @requester@ - (Optional)
     --
     , _tags                   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
@@ -6540,25 +7504,47 @@ vpcPeeringConnectionAccepterResource
 vpcPeeringConnectionAccepterResource _vpcPeeringConnectionId =
     TF.unsafeResource "aws_vpc_peering_connection_accepter" TF.validator $
         VpcPeeringConnectionAccepterResource'
-            { _autoAccept = TF.Nil
+            { _accepter = TF.Nil
+            , _autoAccept = TF.Nil
+            , _requester = TF.Nil
             , _tags = TF.Nil
             , _vpcPeeringConnectionId = _vpcPeeringConnectionId
             }
 
 instance TF.IsObject (VpcPeeringConnectionAccepterResource s) where
     toObject VpcPeeringConnectionAccepterResource'{..} = P.catMaybes
-        [ TF.assign "auto_accept" <$> TF.attribute _autoAccept
+        [ TF.assign "accepter" <$> TF.attribute _accepter
+        , TF.assign "auto_accept" <$> TF.attribute _autoAccept
+        , TF.assign "requester" <$> TF.attribute _requester
         , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "vpc_peering_connection_id" <$> TF.attribute _vpcPeeringConnectionId
         ]
 
 instance TF.IsValid (VpcPeeringConnectionAccepterResource s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_accepter"
+                  (_accepter
+                      :: VpcPeeringConnectionAccepterResource s -> TF.Attr s (AccepterSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_requester"
+                  (_requester
+                      :: VpcPeeringConnectionAccepterResource s -> TF.Attr s (RequesterSetting s))
+                  TF.validator
+
+instance P.HasAccepter (VpcPeeringConnectionAccepterResource s) (TF.Attr s (AccepterSetting s)) where
+    accepter =
+        P.lens (_accepter :: VpcPeeringConnectionAccepterResource s -> TF.Attr s (AccepterSetting s))
+               (\s a -> s { _accepter = a } :: VpcPeeringConnectionAccepterResource s)
 
 instance P.HasAutoAccept (VpcPeeringConnectionAccepterResource s) (TF.Attr s P.Bool) where
     autoAccept =
         P.lens (_autoAccept :: VpcPeeringConnectionAccepterResource s -> TF.Attr s P.Bool)
                (\s a -> s { _autoAccept = a } :: VpcPeeringConnectionAccepterResource s)
+
+instance P.HasRequester (VpcPeeringConnectionAccepterResource s) (TF.Attr s (RequesterSetting s)) where
+    requester =
+        P.lens (_requester :: VpcPeeringConnectionAccepterResource s -> TF.Attr s (RequesterSetting s))
+               (\s a -> s { _requester = a } :: VpcPeeringConnectionAccepterResource s)
 
 instance P.HasTags (VpcPeeringConnectionAccepterResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     tags =
@@ -6599,7 +7585,13 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcPeeringConnectionAccepterRe
 -- See the <https://www.terraform.io/docs/providers/aws/r/vpc_peering_connection_options.html terraform documentation>
 -- for more information.
 data VpcPeeringConnectionOptionsResource s = VpcPeeringConnectionOptionsResource'
-    { _vpcPeeringConnectionId :: TF.Attr s P.Text
+    { _accepter               :: TF.Attr s (AccepterSetting s)
+    -- ^ @accepter@ - (Optional)
+    --
+    , _requester              :: TF.Attr s (RequesterSetting s)
+    -- ^ @requester@ - (Optional)
+    --
+    , _vpcPeeringConnectionId :: TF.Attr s P.Text
     -- ^ @vpc_peering_connection_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6611,16 +7603,38 @@ vpcPeeringConnectionOptionsResource
 vpcPeeringConnectionOptionsResource _vpcPeeringConnectionId =
     TF.unsafeResource "aws_vpc_peering_connection_options" TF.validator $
         VpcPeeringConnectionOptionsResource'
-            { _vpcPeeringConnectionId = _vpcPeeringConnectionId
+            { _accepter = TF.Nil
+            , _requester = TF.Nil
+            , _vpcPeeringConnectionId = _vpcPeeringConnectionId
             }
 
 instance TF.IsObject (VpcPeeringConnectionOptionsResource s) where
     toObject VpcPeeringConnectionOptionsResource'{..} = P.catMaybes
-        [ TF.assign "vpc_peering_connection_id" <$> TF.attribute _vpcPeeringConnectionId
+        [ TF.assign "accepter" <$> TF.attribute _accepter
+        , TF.assign "requester" <$> TF.attribute _requester
+        , TF.assign "vpc_peering_connection_id" <$> TF.attribute _vpcPeeringConnectionId
         ]
 
 instance TF.IsValid (VpcPeeringConnectionOptionsResource s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_accepter"
+                  (_accepter
+                      :: VpcPeeringConnectionOptionsResource s -> TF.Attr s (AccepterSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_requester"
+                  (_requester
+                      :: VpcPeeringConnectionOptionsResource s -> TF.Attr s (RequesterSetting s))
+                  TF.validator
+
+instance P.HasAccepter (VpcPeeringConnectionOptionsResource s) (TF.Attr s (AccepterSetting s)) where
+    accepter =
+        P.lens (_accepter :: VpcPeeringConnectionOptionsResource s -> TF.Attr s (AccepterSetting s))
+               (\s a -> s { _accepter = a } :: VpcPeeringConnectionOptionsResource s)
+
+instance P.HasRequester (VpcPeeringConnectionOptionsResource s) (TF.Attr s (RequesterSetting s)) where
+    requester =
+        P.lens (_requester :: VpcPeeringConnectionOptionsResource s -> TF.Attr s (RequesterSetting s))
+               (\s a -> s { _requester = a } :: VpcPeeringConnectionOptionsResource s)
 
 instance P.HasVpcPeeringConnectionId (VpcPeeringConnectionOptionsResource s) (TF.Attr s P.Text) where
     vpcPeeringConnectionId =
@@ -6641,16 +7655,40 @@ instance s ~ s' => P.HasComputedRequester (TF.Ref s' (VpcPeeringConnectionOption
 -- See the <https://www.terraform.io/docs/providers/aws/r/vpn_connection.html terraform documentation>
 -- for more information.
 data VpnConnectionResource s = VpnConnectionResource'
-    { _customerGatewayId :: TF.Attr s P.Text
+    { _customerGatewayConfiguration :: TF.Attr s P.Text
+    -- ^ @customer_gateway_configuration@ - (Optional)
+    --
+    , _customerGatewayId :: TF.Attr s P.Text
     -- ^ @customer_gateway_id@ - (Required, Forces New)
     --
-    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _routes :: TF.Attr s [TF.Attr s (RoutesSetting s)]
+    -- ^ @routes@ - (Optional)
+    --
+    , _staticRoutesOnly :: TF.Attr s P.Bool
+    -- ^ @static_routes_only@ - (Optional, Forces New)
+    --
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _type'             :: TF.Attr s P.Text
+    , _tunnel1InsideCidr :: TF.Attr s P.Text
+    -- ^ @tunnel1_inside_cidr@ - (Optional, Forces New)
+    --
+    , _tunnel1PresharedKey :: TF.Attr s P.Text
+    -- ^ @tunnel1_preshared_key@ - (Optional, Forces New)
+    --
+    , _tunnel2InsideCidr :: TF.Attr s P.Text
+    -- ^ @tunnel2_inside_cidr@ - (Optional, Forces New)
+    --
+    , _tunnel2PresharedKey :: TF.Attr s P.Text
+    -- ^ @tunnel2_preshared_key@ - (Optional, Forces New)
+    --
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required, Forces New)
     --
-    , _vpnGatewayId      :: TF.Attr s P.Text
+    , _vgwTelemetry :: TF.Attr s [TF.Attr s (VgwTelemetrySetting s)]
+    -- ^ @vgw_telemetry@ - (Optional)
+    --
+    , _vpnGatewayId :: TF.Attr s P.Text
     -- ^ @vpn_gateway_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6664,37 +7702,93 @@ vpnConnectionResource
 vpnConnectionResource _customerGatewayId _vpnGatewayId _type' =
     TF.unsafeResource "aws_vpn_connection" TF.validator $
         VpnConnectionResource'
-            { _customerGatewayId = _customerGatewayId
+            { _customerGatewayConfiguration = TF.Nil
+            , _customerGatewayId = _customerGatewayId
+            , _routes = TF.Nil
+            , _staticRoutesOnly = TF.Nil
             , _tags = TF.Nil
+            , _tunnel1InsideCidr = TF.Nil
+            , _tunnel1PresharedKey = TF.Nil
+            , _tunnel2InsideCidr = TF.Nil
+            , _tunnel2PresharedKey = TF.Nil
             , _type' = _type'
+            , _vgwTelemetry = TF.Nil
             , _vpnGatewayId = _vpnGatewayId
             }
 
 instance TF.IsObject (VpnConnectionResource s) where
     toObject VpnConnectionResource'{..} = P.catMaybes
-        [ TF.assign "customer_gateway_id" <$> TF.attribute _customerGatewayId
+        [ TF.assign "customer_gateway_configuration" <$> TF.attribute _customerGatewayConfiguration
+        , TF.assign "customer_gateway_id" <$> TF.attribute _customerGatewayId
+        , TF.assign "routes" <$> TF.attribute _routes
+        , TF.assign "static_routes_only" <$> TF.attribute _staticRoutesOnly
         , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "tunnel1_inside_cidr" <$> TF.attribute _tunnel1InsideCidr
+        , TF.assign "tunnel1_preshared_key" <$> TF.attribute _tunnel1PresharedKey
+        , TF.assign "tunnel2_inside_cidr" <$> TF.attribute _tunnel2InsideCidr
+        , TF.assign "tunnel2_preshared_key" <$> TF.attribute _tunnel2PresharedKey
         , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "vgw_telemetry" <$> TF.attribute _vgwTelemetry
         , TF.assign "vpn_gateway_id" <$> TF.attribute _vpnGatewayId
         ]
 
 instance TF.IsValid (VpnConnectionResource s) where
     validator = P.mempty
 
+instance P.HasCustomerGatewayConfiguration (VpnConnectionResource s) (TF.Attr s P.Text) where
+    customerGatewayConfiguration =
+        P.lens (_customerGatewayConfiguration :: VpnConnectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _customerGatewayConfiguration = a } :: VpnConnectionResource s)
+
 instance P.HasCustomerGatewayId (VpnConnectionResource s) (TF.Attr s P.Text) where
     customerGatewayId =
         P.lens (_customerGatewayId :: VpnConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _customerGatewayId = a } :: VpnConnectionResource s)
+
+instance P.HasRoutes (VpnConnectionResource s) (TF.Attr s [TF.Attr s (RoutesSetting s)]) where
+    routes =
+        P.lens (_routes :: VpnConnectionResource s -> TF.Attr s [TF.Attr s (RoutesSetting s)])
+               (\s a -> s { _routes = a } :: VpnConnectionResource s)
+
+instance P.HasStaticRoutesOnly (VpnConnectionResource s) (TF.Attr s P.Bool) where
+    staticRoutesOnly =
+        P.lens (_staticRoutesOnly :: VpnConnectionResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _staticRoutesOnly = a } :: VpnConnectionResource s)
 
 instance P.HasTags (VpnConnectionResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: VpnConnectionResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: VpnConnectionResource s)
 
+instance P.HasTunnel1InsideCidr (VpnConnectionResource s) (TF.Attr s P.Text) where
+    tunnel1InsideCidr =
+        P.lens (_tunnel1InsideCidr :: VpnConnectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _tunnel1InsideCidr = a } :: VpnConnectionResource s)
+
+instance P.HasTunnel1PresharedKey (VpnConnectionResource s) (TF.Attr s P.Text) where
+    tunnel1PresharedKey =
+        P.lens (_tunnel1PresharedKey :: VpnConnectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _tunnel1PresharedKey = a } :: VpnConnectionResource s)
+
+instance P.HasTunnel2InsideCidr (VpnConnectionResource s) (TF.Attr s P.Text) where
+    tunnel2InsideCidr =
+        P.lens (_tunnel2InsideCidr :: VpnConnectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _tunnel2InsideCidr = a } :: VpnConnectionResource s)
+
+instance P.HasTunnel2PresharedKey (VpnConnectionResource s) (TF.Attr s P.Text) where
+    tunnel2PresharedKey =
+        P.lens (_tunnel2PresharedKey :: VpnConnectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _tunnel2PresharedKey = a } :: VpnConnectionResource s)
+
 instance P.HasType' (VpnConnectionResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: VpnConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: VpnConnectionResource s)
+
+instance P.HasVgwTelemetry (VpnConnectionResource s) (TF.Attr s [TF.Attr s (VgwTelemetrySetting s)]) where
+    vgwTelemetry =
+        P.lens (_vgwTelemetry :: VpnConnectionResource s -> TF.Attr s [TF.Attr s (VgwTelemetrySetting s)])
+               (\s a -> s { _vgwTelemetry = a } :: VpnConnectionResource s)
 
 instance P.HasVpnGatewayId (VpnConnectionResource s) (TF.Attr s P.Text) where
     vpnGatewayId =
@@ -6810,11 +7904,17 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VpnConnectionRouteResource s)) (T
 -- See the <https://www.terraform.io/docs/providers/aws/r/vpn_gateway.html terraform documentation>
 -- for more information.
 data VpnGatewayResource s = VpnGatewayResource'
-    { _availabilityZone :: TF.Attr s P.Text
+    { _amazonSideAsn    :: TF.Attr s P.Text
+    -- ^ @amazon_side_asn@ - (Optional, Forces New)
+    --
+    , _availabilityZone :: TF.Attr s P.Text
     -- ^ @availability_zone@ - (Optional, Forces New)
     --
     , _tags             :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
+    --
+    , _vpcId            :: TF.Attr s P.Text
+    -- ^ @vpc_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -6824,18 +7924,27 @@ vpnGatewayResource
 vpnGatewayResource =
     TF.unsafeResource "aws_vpn_gateway" TF.validator $
         VpnGatewayResource'
-            { _availabilityZone = TF.Nil
+            { _amazonSideAsn = TF.Nil
+            , _availabilityZone = TF.Nil
             , _tags = TF.Nil
+            , _vpcId = TF.Nil
             }
 
 instance TF.IsObject (VpnGatewayResource s) where
     toObject VpnGatewayResource'{..} = P.catMaybes
-        [ TF.assign "availability_zone" <$> TF.attribute _availabilityZone
+        [ TF.assign "amazon_side_asn" <$> TF.attribute _amazonSideAsn
+        , TF.assign "availability_zone" <$> TF.attribute _availabilityZone
         , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
 
 instance TF.IsValid (VpnGatewayResource s) where
     validator = P.mempty
+
+instance P.HasAmazonSideAsn (VpnGatewayResource s) (TF.Attr s P.Text) where
+    amazonSideAsn =
+        P.lens (_amazonSideAsn :: VpnGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _amazonSideAsn = a } :: VpnGatewayResource s)
 
 instance P.HasAvailabilityZone (VpnGatewayResource s) (TF.Attr s P.Text) where
     availabilityZone =
@@ -6846,6 +7955,11 @@ instance P.HasTags (VpnGatewayResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.
     tags =
         P.lens (_tags :: VpnGatewayResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: VpnGatewayResource s)
+
+instance P.HasVpcId (VpnGatewayResource s) (TF.Attr s P.Text) where
+    vpcId =
+        P.lens (_vpcId :: VpnGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vpcId = a } :: VpnGatewayResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VpnGatewayResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"

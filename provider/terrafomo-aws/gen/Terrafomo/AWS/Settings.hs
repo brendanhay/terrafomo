@@ -1685,6 +1685,9 @@ data ActionSetting s = ActionSetting'
     , _roleArn         :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Optional)
     --
+    , _runOrder        :: TF.Attr s P.Int
+    -- ^ @run_order@ - (Optional)
+    --
     , _version         :: TF.Attr s P.Text
     -- ^ @version@ - (Required)
     --
@@ -1712,6 +1715,7 @@ actionSetting _targetGroupArn _category _name _owner _provider' _type' _version 
         , _owner = _owner
         , _provider' = _provider'
         , _roleArn = TF.Nil
+        , _runOrder = TF.Nil
         , _version = _version
         }
 
@@ -1728,6 +1732,7 @@ instance TF.IsObject (ActionSetting s) where
         , TF.assign "owner" <$> TF.attribute _owner
         , TF.assign "provider" <$> TF.attribute _provider'
         , TF.assign "role_arn" <$> TF.attribute _roleArn
+        , TF.assign "run_order" <$> TF.attribute _runOrder
         , TF.assign "version" <$> TF.attribute _version
         ]
 
@@ -1783,6 +1788,11 @@ instance P.HasRoleArn (ActionSetting s) (TF.Attr s P.Text) where
     roleArn =
         P.lens (_roleArn :: ActionSetting s -> TF.Attr s P.Text)
                (\s a -> s { _roleArn = a } :: ActionSetting s)
+
+instance P.HasRunOrder (ActionSetting s) (TF.Attr s P.Int) where
+    runOrder =
+        P.lens (_runOrder :: ActionSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _runOrder = a } :: ActionSetting s)
 
 instance P.HasVersion (ActionSetting s) (TF.Attr s P.Text) where
     version =
@@ -3254,6 +3264,9 @@ data BlueGreenDeploymentConfigSetting s = BlueGreenDeploymentConfigSetting'
     { _deploymentReadyOption :: TF.Attr s (DeploymentReadyOptionSetting s)
     -- ^ @deployment_ready_option@ - (Optional)
     --
+    , _greenFleetProvisioningOption :: TF.Attr s (GreenFleetProvisioningOptionSetting s)
+    -- ^ @green_fleet_provisioning_option@ - (Optional)
+    --
     , _terminateBlueInstancesOnDeploymentSuccess :: TF.Attr s (TerminateBlueInstancesOnDeploymentSuccessSetting s)
     -- ^ @terminate_blue_instances_on_deployment_success@ - (Optional)
     --
@@ -3265,6 +3278,7 @@ blueGreenDeploymentConfigSetting
 blueGreenDeploymentConfigSetting =
     BlueGreenDeploymentConfigSetting'
         { _deploymentReadyOption = TF.Nil
+        , _greenFleetProvisioningOption = TF.Nil
         , _terminateBlueInstancesOnDeploymentSuccess = TF.Nil
         }
 
@@ -3272,6 +3286,7 @@ instance TF.IsValue  (BlueGreenDeploymentConfigSetting s)
 instance TF.IsObject (BlueGreenDeploymentConfigSetting s) where
     toObject BlueGreenDeploymentConfigSetting'{..} = P.catMaybes
         [ TF.assign "deployment_ready_option" <$> TF.attribute _deploymentReadyOption
+        , TF.assign "green_fleet_provisioning_option" <$> TF.attribute _greenFleetProvisioningOption
         , TF.assign "terminate_blue_instances_on_deployment_success" <$> TF.attribute _terminateBlueInstancesOnDeploymentSuccess
         ]
 
@@ -3280,6 +3295,10 @@ instance TF.IsValid (BlueGreenDeploymentConfigSetting s) where
            P.<> TF.settingsValidator "_deploymentReadyOption"
                   (_deploymentReadyOption
                       :: BlueGreenDeploymentConfigSetting s -> TF.Attr s (DeploymentReadyOptionSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_greenFleetProvisioningOption"
+                  (_greenFleetProvisioningOption
+                      :: BlueGreenDeploymentConfigSetting s -> TF.Attr s (GreenFleetProvisioningOptionSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_terminateBlueInstancesOnDeploymentSuccess"
                   (_terminateBlueInstancesOnDeploymentSuccess
@@ -3290,6 +3309,11 @@ instance P.HasDeploymentReadyOption (BlueGreenDeploymentConfigSetting s) (TF.Att
     deploymentReadyOption =
         P.lens (_deploymentReadyOption :: BlueGreenDeploymentConfigSetting s -> TF.Attr s (DeploymentReadyOptionSetting s))
                (\s a -> s { _deploymentReadyOption = a } :: BlueGreenDeploymentConfigSetting s)
+
+instance P.HasGreenFleetProvisioningOption (BlueGreenDeploymentConfigSetting s) (TF.Attr s (GreenFleetProvisioningOptionSetting s)) where
+    greenFleetProvisioningOption =
+        P.lens (_greenFleetProvisioningOption :: BlueGreenDeploymentConfigSetting s -> TF.Attr s (GreenFleetProvisioningOptionSetting s))
+               (\s a -> s { _greenFleetProvisioningOption = a } :: BlueGreenDeploymentConfigSetting s)
 
 instance P.HasTerminateBlueInstancesOnDeploymentSuccess (BlueGreenDeploymentConfigSetting s) (TF.Attr s (TerminateBlueInstancesOnDeploymentSuccessSetting s)) where
     terminateBlueInstancesOnDeploymentSuccess =
@@ -4645,20 +4669,42 @@ instance P.HasState (ConditionsSetting s) (TF.Attr s P.Text) where
 
 -- | @configuration@ nested settings.
 data ConfigurationSetting s = ConfigurationSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _id       :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
+    , _revision :: TF.Attr s P.Int
+    -- ^ @revision@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @configuration@ settings value.
 configurationSetting
     :: ConfigurationSetting s
 configurationSetting =
     ConfigurationSetting'
+        { _id = TF.Nil
+        , _revision = TF.Nil
+        }
 
 instance TF.IsValue  (ConfigurationSetting s)
 instance TF.IsObject (ConfigurationSetting s) where
-    toObject ConfigurationSetting' = []
+    toObject ConfigurationSetting'{..} = P.catMaybes
+        [ TF.assign "id" <$> TF.attribute _id
+        , TF.assign "revision" <$> TF.attribute _revision
+        ]
 
 instance TF.IsValid (ConfigurationSetting s) where
     validator = P.mempty
+
+instance P.HasId (ConfigurationSetting s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: ConfigurationSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: ConfigurationSetting s)
+
+instance P.HasRevision (ConfigurationSetting s) (TF.Attr s P.Int) where
+    revision =
+        P.lens (_revision :: ConfigurationSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _revision = a } :: ConfigurationSetting s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ConfigurationSetting s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -4770,7 +4816,10 @@ instance P.HasEncryptionContextSubset (ConstraintsSetting s) (TF.Attr s (P.Map P
 
 -- | @content_config@ nested settings.
 data ContentConfigSetting s = ContentConfigSetting'
-    { _storageClass :: TF.Attr s P.Text
+    { _bucket       :: TF.Attr s P.Text
+    -- ^ @bucket@ - (Optional)
+    --
+    , _storageClass :: TF.Attr s P.Text
     -- ^ @storage_class@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -4780,17 +4829,24 @@ contentConfigSetting
     :: ContentConfigSetting s
 contentConfigSetting =
     ContentConfigSetting'
-        { _storageClass = TF.Nil
+        { _bucket = TF.Nil
+        , _storageClass = TF.Nil
         }
 
 instance TF.IsValue  (ContentConfigSetting s)
 instance TF.IsObject (ContentConfigSetting s) where
     toObject ContentConfigSetting'{..} = P.catMaybes
-        [ TF.assign "storage_class" <$> TF.attribute _storageClass
+        [ TF.assign "bucket" <$> TF.attribute _bucket
+        , TF.assign "storage_class" <$> TF.attribute _storageClass
         ]
 
 instance TF.IsValid (ContentConfigSetting s) where
     validator = P.mempty
+
+instance P.HasBucket (ContentConfigSetting s) (TF.Attr s P.Text) where
+    bucket =
+        P.lens (_bucket :: ContentConfigSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _bucket = a } :: ContentConfigSetting s)
 
 instance P.HasStorageClass (ContentConfigSetting s) (TF.Attr s P.Text) where
     storageClass =
@@ -6626,11 +6682,20 @@ data EbsSetting s = EbsSetting'
     , _encrypted           :: TF.Attr s P.Bool
     -- ^ @encrypted@ - (Optional)
     --
+    , _iops                :: TF.Attr s P.Int
+    -- ^ @iops@ - (Optional)
+    --
     , _kmsKeyId            :: TF.Attr s P.Text
     -- ^ @kms_key_id@ - (Optional)
     --
     , _snapshotId          :: TF.Attr s P.Text
     -- ^ @snapshot_id@ - (Optional)
+    --
+    , _volumeSize          :: TF.Attr s P.Int
+    -- ^ @volume_size@ - (Optional)
+    --
+    , _volumeType          :: TF.Attr s P.Text
+    -- ^ @volume_type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -6641,8 +6706,11 @@ ebsSetting =
     EbsSetting'
         { _deleteOnTermination = TF.Nil
         , _encrypted = TF.Nil
+        , _iops = TF.Nil
         , _kmsKeyId = TF.Nil
         , _snapshotId = TF.Nil
+        , _volumeSize = TF.Nil
+        , _volumeType = TF.Nil
         }
 
 instance TF.IsValue  (EbsSetting s)
@@ -6650,8 +6718,11 @@ instance TF.IsObject (EbsSetting s) where
     toObject EbsSetting'{..} = P.catMaybes
         [ TF.assign "delete_on_termination" <$> TF.attribute _deleteOnTermination
         , TF.assign "encrypted" <$> TF.attribute _encrypted
+        , TF.assign "iops" <$> TF.attribute _iops
         , TF.assign "kms_key_id" <$> TF.attribute _kmsKeyId
         , TF.assign "snapshot_id" <$> TF.attribute _snapshotId
+        , TF.assign "volume_size" <$> TF.attribute _volumeSize
+        , TF.assign "volume_type" <$> TF.attribute _volumeType
         ]
 
 instance TF.IsValid (EbsSetting s) where
@@ -6667,6 +6738,11 @@ instance P.HasEncrypted (EbsSetting s) (TF.Attr s P.Bool) where
         P.lens (_encrypted :: EbsSetting s -> TF.Attr s P.Bool)
                (\s a -> s { _encrypted = a } :: EbsSetting s)
 
+instance P.HasIops (EbsSetting s) (TF.Attr s P.Int) where
+    iops =
+        P.lens (_iops :: EbsSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _iops = a } :: EbsSetting s)
+
 instance P.HasKmsKeyId (EbsSetting s) (TF.Attr s P.Text) where
     kmsKeyId =
         P.lens (_kmsKeyId :: EbsSetting s -> TF.Attr s P.Text)
@@ -6676,6 +6752,16 @@ instance P.HasSnapshotId (EbsSetting s) (TF.Attr s P.Text) where
     snapshotId =
         P.lens (_snapshotId :: EbsSetting s -> TF.Attr s P.Text)
                (\s a -> s { _snapshotId = a } :: EbsSetting s)
+
+instance P.HasVolumeSize (EbsSetting s) (TF.Attr s P.Int) where
+    volumeSize =
+        P.lens (_volumeSize :: EbsSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _volumeSize = a } :: EbsSetting s)
+
+instance P.HasVolumeType (EbsSetting s) (TF.Attr s P.Text) where
+    volumeType =
+        P.lens (_volumeType :: EbsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _volumeType = a } :: EbsSetting s)
 
 instance s ~ s' => P.HasComputedIops (TF.Ref s' (EbsSetting s)) (TF.Attr s P.Int) where
     computedIops x = TF.compute (TF.refKey x) "iops"
@@ -6703,6 +6789,9 @@ data EbsBlockDeviceSetting s = EbsBlockDeviceSetting'
     , _snapshotId          :: TF.Attr s P.Text
     -- ^ @snapshot_id@ - (Optional, Forces New)
     --
+    , _volumeSize          :: TF.Attr s P.Int
+    -- ^ @volume_size@ - (Optional, Forces New)
+    --
     , _volumeType          :: TF.Attr s P.Text
     -- ^ @volume_type@ - (Optional, Forces New)
     --
@@ -6722,6 +6811,7 @@ ebsBlockDeviceSetting _deviceName =
         , _encrypted = TF.Nil
         , _iops = TF.Nil
         , _snapshotId = TF.Nil
+        , _volumeSize = TF.Nil
         , _volumeType = TF.value "standard"
         , _noDevice = TF.Nil
         }
@@ -6734,6 +6824,7 @@ instance TF.IsObject (EbsBlockDeviceSetting s) where
         , TF.assign "encrypted" <$> TF.attribute _encrypted
         , TF.assign "iops" <$> TF.attribute _iops
         , TF.assign "snapshot_id" <$> TF.attribute _snapshotId
+        , TF.assign "volume_size" <$> TF.attribute _volumeSize
         , TF.assign "volume_type" <$> TF.attribute _volumeType
         , TF.assign "no_device" <$> TF.attribute _noDevice
         ]
@@ -6765,6 +6856,11 @@ instance P.HasSnapshotId (EbsBlockDeviceSetting s) (TF.Attr s P.Text) where
     snapshotId =
         P.lens (_snapshotId :: EbsBlockDeviceSetting s -> TF.Attr s P.Text)
                (\s a -> s { _snapshotId = a } :: EbsBlockDeviceSetting s)
+
+instance P.HasVolumeSize (EbsBlockDeviceSetting s) (TF.Attr s P.Int) where
+    volumeSize =
+        P.lens (_volumeSize :: EbsBlockDeviceSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _volumeSize = a } :: EbsBlockDeviceSetting s)
 
 instance P.HasVolumeType (EbsBlockDeviceSetting s) (TF.Attr s P.Text) where
     volumeType =
@@ -6872,6 +6968,9 @@ data EbsOptionsSetting s = EbsOptionsSetting'
     , _volumeSize :: TF.Attr s P.Int
     -- ^ @volume_size@ - (Optional)
     --
+    , _volumeType :: TF.Attr s P.Text
+    -- ^ @volume_type@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ebs_options@ settings value.
@@ -6883,6 +6982,7 @@ ebsOptionsSetting _ebsEnabled =
         { _ebsEnabled = _ebsEnabled
         , _iops = TF.Nil
         , _volumeSize = TF.Nil
+        , _volumeType = TF.Nil
         }
 
 instance TF.IsValue  (EbsOptionsSetting s)
@@ -6891,6 +6991,7 @@ instance TF.IsObject (EbsOptionsSetting s) where
         [ TF.assign "ebs_enabled" <$> TF.attribute _ebsEnabled
         , TF.assign "iops" <$> TF.attribute _iops
         , TF.assign "volume_size" <$> TF.attribute _volumeSize
+        , TF.assign "volume_type" <$> TF.attribute _volumeType
         ]
 
 instance TF.IsValid (EbsOptionsSetting s) where
@@ -6910,6 +7011,11 @@ instance P.HasVolumeSize (EbsOptionsSetting s) (TF.Attr s P.Int) where
     volumeSize =
         P.lens (_volumeSize :: EbsOptionsSetting s -> TF.Attr s P.Int)
                (\s a -> s { _volumeSize = a } :: EbsOptionsSetting s)
+
+instance P.HasVolumeType (EbsOptionsSetting s) (TF.Attr s P.Text) where
+    volumeType =
+        P.lens (_volumeType :: EbsOptionsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _volumeType = a } :: EbsOptionsSetting s)
 
 instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (EbsOptionsSetting s)) (TF.Attr s P.Text) where
     computedVolumeType x = TF.compute (TF.refKey x) "volume_type"
@@ -7598,34 +7704,37 @@ instance P.HasRegion (ElasticsearchConfigSetting s) (TF.Attr s P.Text) where
 
 -- | @elasticsearch_configuration@ nested settings.
 data ElasticsearchConfigurationSetting s = ElasticsearchConfigurationSetting'
-    { _bufferingInterval       :: TF.Attr s P.Int
+    { _bufferingInterval        :: TF.Attr s P.Int
     -- ^ @buffering_interval@ - (Optional)
     --
-    , _bufferingSize           :: TF.Attr s P.Int
+    , _bufferingSize            :: TF.Attr s P.Int
     -- ^ @buffering_size@ - (Optional)
     --
-    , _domainArn               :: TF.Attr s P.Text
+    , _cloudwatchLoggingOptions :: TF.Attr s (CloudwatchLoggingOptionsSetting s)
+    -- ^ @cloudwatch_logging_options@ - (Optional)
+    --
+    , _domainArn                :: TF.Attr s P.Text
     -- ^ @domain_arn@ - (Required)
     --
-    , _indexName               :: TF.Attr s P.Text
+    , _indexName                :: TF.Attr s P.Text
     -- ^ @index_name@ - (Required)
     --
-    , _indexRotationPeriod     :: TF.Attr s P.Text
+    , _indexRotationPeriod      :: TF.Attr s P.Text
     -- ^ @index_rotation_period@ - (Optional)
     --
-    , _processingConfiguration :: TF.Attr s (ProcessingConfigurationSetting s)
+    , _processingConfiguration  :: TF.Attr s (ProcessingConfigurationSetting s)
     -- ^ @processing_configuration@ - (Optional)
     --
-    , _retryDuration           :: TF.Attr s P.Int
+    , _retryDuration            :: TF.Attr s P.Int
     -- ^ @retry_duration@ - (Optional)
     --
-    , _roleArn                 :: TF.Attr s P.Text
+    , _roleArn                  :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
-    , _s3BackupMode            :: TF.Attr s P.Text
+    , _s3BackupMode             :: TF.Attr s P.Text
     -- ^ @s3_backup_mode@ - (Optional)
     --
-    , _typeName                :: TF.Attr s P.Text
+    , _typeName                 :: TF.Attr s P.Text
     -- ^ @type_name@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -7640,6 +7749,7 @@ elasticsearchConfigurationSetting _domainArn _roleArn _indexName =
     ElasticsearchConfigurationSetting'
         { _bufferingInterval = TF.value 300
         , _bufferingSize = TF.value 5
+        , _cloudwatchLoggingOptions = TF.Nil
         , _domainArn = _domainArn
         , _indexName = _indexName
         , _indexRotationPeriod = TF.value "OneDay"
@@ -7655,6 +7765,7 @@ instance TF.IsObject (ElasticsearchConfigurationSetting s) where
     toObject ElasticsearchConfigurationSetting'{..} = P.catMaybes
         [ TF.assign "buffering_interval" <$> TF.attribute _bufferingInterval
         , TF.assign "buffering_size" <$> TF.attribute _bufferingSize
+        , TF.assign "cloudwatch_logging_options" <$> TF.attribute _cloudwatchLoggingOptions
         , TF.assign "domain_arn" <$> TF.attribute _domainArn
         , TF.assign "index_name" <$> TF.attribute _indexName
         , TF.assign "index_rotation_period" <$> TF.attribute _indexRotationPeriod
@@ -7667,6 +7778,10 @@ instance TF.IsObject (ElasticsearchConfigurationSetting s) where
 
 instance TF.IsValid (ElasticsearchConfigurationSetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_cloudwatchLoggingOptions"
+                  (_cloudwatchLoggingOptions
+                      :: ElasticsearchConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_processingConfiguration"
                   (_processingConfiguration
                       :: ElasticsearchConfigurationSetting s -> TF.Attr s (ProcessingConfigurationSetting s))
@@ -7681,6 +7796,11 @@ instance P.HasBufferingSize (ElasticsearchConfigurationSetting s) (TF.Attr s P.I
     bufferingSize =
         P.lens (_bufferingSize :: ElasticsearchConfigurationSetting s -> TF.Attr s P.Int)
                (\s a -> s { _bufferingSize = a } :: ElasticsearchConfigurationSetting s)
+
+instance P.HasCloudwatchLoggingOptions (ElasticsearchConfigurationSetting s) (TF.Attr s (CloudwatchLoggingOptionsSetting s)) where
+    cloudwatchLoggingOptions =
+        P.lens (_cloudwatchLoggingOptions :: ElasticsearchConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
+               (\s a -> s { _cloudwatchLoggingOptions = a } :: ElasticsearchConfigurationSetting s)
 
 instance P.HasDomainArn (ElasticsearchConfigurationSetting s) (TF.Attr s P.Text) where
     domainArn =
@@ -7795,8 +7915,11 @@ instance P.HasSourceArn (EmailConfigurationSetting s) (TF.Attr s P.Text) where
 
 -- | @encrypt_at_rest@ nested settings.
 data EncryptAtRestSetting s = EncryptAtRestSetting'
-    { _enabled :: TF.Attr s P.Bool
+    { _enabled  :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Required, Forces New)
+    --
+    , _kmsKeyId :: TF.Attr s P.Text
+    -- ^ @kms_key_id@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -7807,12 +7930,14 @@ encryptAtRestSetting
 encryptAtRestSetting _enabled =
     EncryptAtRestSetting'
         { _enabled = _enabled
+        , _kmsKeyId = TF.Nil
         }
 
 instance TF.IsValue  (EncryptAtRestSetting s)
 instance TF.IsObject (EncryptAtRestSetting s) where
     toObject EncryptAtRestSetting'{..} = P.catMaybes
         [ TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "kms_key_id" <$> TF.attribute _kmsKeyId
         ]
 
 instance TF.IsValid (EncryptAtRestSetting s) where
@@ -7822,6 +7947,11 @@ instance P.HasEnabled (EncryptAtRestSetting s) (TF.Attr s P.Bool) where
     enabled =
         P.lens (_enabled :: EncryptAtRestSetting s -> TF.Attr s P.Bool)
                (\s a -> s { _enabled = a } :: EncryptAtRestSetting s)
+
+instance P.HasKmsKeyId (EncryptAtRestSetting s) (TF.Attr s P.Text) where
+    kmsKeyId =
+        P.lens (_kmsKeyId :: EncryptAtRestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _kmsKeyId = a } :: EncryptAtRestSetting s)
 
 instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (EncryptAtRestSetting s)) (TF.Attr s P.Text) where
     computedKmsKeyId x = TF.compute (TF.refKey x) "kms_key_id"
@@ -8265,28 +8395,31 @@ instance P.HasSts (EndpointsSetting) (P.Maybe P.Text) where
 
 -- | @environment@ nested settings.
 data EnvironmentSetting s = EnvironmentSetting'
-    { _computeType    :: TF.Attr s P.Text
+    { _computeType :: TF.Attr s P.Text
     -- ^ @compute_type@ - (Required)
     --
-    , _image          :: TF.Attr s P.Text
+    , _environmentVariable :: TF.Attr s [TF.Attr s (EnvironmentVariableSetting s)]
+    -- ^ @environment_variable@ - (Optional)
+    --
+    , _image :: TF.Attr s P.Text
     -- ^ @image@ - (Required)
     --
     , _privilegedMode :: TF.Attr s P.Bool
     -- ^ @privileged_mode@ - (Optional)
     --
-    , _type'          :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
-    , _variables      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _variables :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @variables@ - (Optional)
     --
-    , _key            :: TF.Attr s P.Text
+    , _key :: TF.Attr s P.Text
     -- ^ @key@ - (Required)
     --
-    , _secure         :: TF.Attr s P.Bool
+    , _secure :: TF.Attr s P.Bool
     -- ^ @secure@ - (Optional)
     --
-    , _value          :: TF.Attr s P.Text
+    , _value :: TF.Attr s P.Text
     -- ^ @value@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -8302,6 +8435,7 @@ environmentSetting
 environmentSetting _image _key _computeType _type' _value =
     EnvironmentSetting'
         { _computeType = _computeType
+        , _environmentVariable = TF.Nil
         , _image = _image
         , _privilegedMode = TF.value P.False
         , _type' = _type'
@@ -8315,6 +8449,7 @@ instance TF.IsValue  (EnvironmentSetting s)
 instance TF.IsObject (EnvironmentSetting s) where
     toObject EnvironmentSetting'{..} = P.catMaybes
         [ TF.assign "compute_type" <$> TF.attribute _computeType
+        , TF.assign "environment_variable" <$> TF.attribute _environmentVariable
         , TF.assign "image" <$> TF.attribute _image
         , TF.assign "privileged_mode" <$> TF.attribute _privilegedMode
         , TF.assign "type" <$> TF.attribute _type'
@@ -8331,6 +8466,11 @@ instance P.HasComputeType (EnvironmentSetting s) (TF.Attr s P.Text) where
     computeType =
         P.lens (_computeType :: EnvironmentSetting s -> TF.Attr s P.Text)
                (\s a -> s { _computeType = a } :: EnvironmentSetting s)
+
+instance P.HasEnvironmentVariable (EnvironmentSetting s) (TF.Attr s [TF.Attr s (EnvironmentVariableSetting s)]) where
+    environmentVariable =
+        P.lens (_environmentVariable :: EnvironmentSetting s -> TF.Attr s [TF.Attr s (EnvironmentVariableSetting s)])
+               (\s a -> s { _environmentVariable = a } :: EnvironmentSetting s)
 
 instance P.HasImage (EnvironmentSetting s) (TF.Attr s P.Text) where
     image =
@@ -8619,6 +8759,9 @@ data ExtendedS3ConfigurationSetting s = ExtendedS3ConfigurationSetting'
     , _bufferSize :: TF.Attr s P.Int
     -- ^ @buffer_size@ - (Optional)
     --
+    , _cloudwatchLoggingOptions :: TF.Attr s (CloudwatchLoggingOptionsSetting s)
+    -- ^ @cloudwatch_logging_options@ - (Optional)
+    --
     , _compressionFormat :: TF.Attr s P.Text
     -- ^ @compression_format@ - (Optional)
     --
@@ -8655,6 +8798,7 @@ extendedS3ConfigurationSetting _bucketArn _roleArn =
         { _bucketArn = _bucketArn
         , _bufferInterval = TF.value 300
         , _bufferSize = TF.value 5
+        , _cloudwatchLoggingOptions = TF.Nil
         , _compressionFormat = TF.value "UNCOMPRESSED"
         , _dataFormatConversionConfiguration = TF.Nil
         , _kmsKeyArn = TF.Nil
@@ -8671,6 +8815,7 @@ instance TF.IsObject (ExtendedS3ConfigurationSetting s) where
         [ TF.assign "bucket_arn" <$> TF.attribute _bucketArn
         , TF.assign "buffer_interval" <$> TF.attribute _bufferInterval
         , TF.assign "buffer_size" <$> TF.attribute _bufferSize
+        , TF.assign "cloudwatch_logging_options" <$> TF.attribute _cloudwatchLoggingOptions
         , TF.assign "compression_format" <$> TF.attribute _compressionFormat
         , TF.assign "data_format_conversion_configuration" <$> TF.attribute _dataFormatConversionConfiguration
         , TF.assign "kms_key_arn" <$> TF.attribute _kmsKeyArn
@@ -8683,6 +8828,10 @@ instance TF.IsObject (ExtendedS3ConfigurationSetting s) where
 
 instance TF.IsValid (ExtendedS3ConfigurationSetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_cloudwatchLoggingOptions"
+                  (_cloudwatchLoggingOptions
+                      :: ExtendedS3ConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_dataFormatConversionConfiguration"
                   (_dataFormatConversionConfiguration
                       :: ExtendedS3ConfigurationSetting s -> TF.Attr s (DataFormatConversionConfigurationSetting s))
@@ -8710,6 +8859,11 @@ instance P.HasBufferSize (ExtendedS3ConfigurationSetting s) (TF.Attr s P.Int) wh
     bufferSize =
         P.lens (_bufferSize :: ExtendedS3ConfigurationSetting s -> TF.Attr s P.Int)
                (\s a -> s { _bufferSize = a } :: ExtendedS3ConfigurationSetting s)
+
+instance P.HasCloudwatchLoggingOptions (ExtendedS3ConfigurationSetting s) (TF.Attr s (CloudwatchLoggingOptionsSetting s)) where
+    cloudwatchLoggingOptions =
+        P.lens (_cloudwatchLoggingOptions :: ExtendedS3ConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
+               (\s a -> s { _cloudwatchLoggingOptions = a } :: ExtendedS3ConfigurationSetting s)
 
 instance P.HasCompressionFormat (ExtendedS3ConfigurationSetting s) (TF.Attr s P.Text) where
     compressionFormat =
@@ -9466,11 +9620,20 @@ data HealthCheckSetting s = HealthCheckSetting'
     , _interval           :: TF.Attr s P.Int
     -- ^ @interval@ - (Optional)
     --
+    , _matcher            :: TF.Attr s P.Text
+    -- ^ @matcher@ - (Optional)
+    --
+    , _path               :: TF.Attr s P.Text
+    -- ^ @path@ - (Optional)
+    --
     , _port               :: TF.Attr s P.Text
     -- ^ @port@ - (Optional)
     --
     , _protocol           :: TF.Attr s P.Text
     -- ^ @protocol@ - (Optional)
+    --
+    , _timeout            :: TF.Attr s P.Int
+    -- ^ @timeout@ - (Optional)
     --
     , _unhealthyThreshold :: TF.Attr s P.Int
     -- ^ @unhealthy_threshold@ - (Optional)
@@ -9478,25 +9641,23 @@ data HealthCheckSetting s = HealthCheckSetting'
     , _target             :: TF.Attr s P.Text
     -- ^ @target@ - (Required)
     --
-    , _timeout            :: TF.Attr s P.Int
-    -- ^ @timeout@ - (Required)
-    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @health_check@ settings value.
 healthCheckSetting
     :: TF.Attr s P.Text -- ^ 'P._target': @target@
-    -> TF.Attr s P.Int -- ^ 'P._timeout': @timeout@
     -> HealthCheckSetting s
-healthCheckSetting _target _timeout =
+healthCheckSetting _target =
     HealthCheckSetting'
         { _healthyThreshold = TF.value 3
         , _interval = TF.value 30
+        , _matcher = TF.Nil
+        , _path = TF.Nil
         , _port = TF.value "traffic-port"
         , _protocol = TF.value "HTTP"
+        , _timeout = TF.Nil
         , _unhealthyThreshold = TF.value 3
         , _target = _target
-        , _timeout = _timeout
         }
 
 instance TF.IsValue  (HealthCheckSetting s)
@@ -9504,11 +9665,13 @@ instance TF.IsObject (HealthCheckSetting s) where
     toObject HealthCheckSetting'{..} = P.catMaybes
         [ TF.assign "healthy_threshold" <$> TF.attribute _healthyThreshold
         , TF.assign "interval" <$> TF.attribute _interval
+        , TF.assign "matcher" <$> TF.attribute _matcher
+        , TF.assign "path" <$> TF.attribute _path
         , TF.assign "port" <$> TF.attribute _port
         , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "timeout" <$> TF.attribute _timeout
         , TF.assign "unhealthy_threshold" <$> TF.attribute _unhealthyThreshold
         , TF.assign "target" <$> TF.attribute _target
-        , TF.assign "timeout" <$> TF.attribute _timeout
         ]
 
 instance TF.IsValid (HealthCheckSetting s) where
@@ -9524,6 +9687,16 @@ instance P.HasInterval (HealthCheckSetting s) (TF.Attr s P.Int) where
         P.lens (_interval :: HealthCheckSetting s -> TF.Attr s P.Int)
                (\s a -> s { _interval = a } :: HealthCheckSetting s)
 
+instance P.HasMatcher (HealthCheckSetting s) (TF.Attr s P.Text) where
+    matcher =
+        P.lens (_matcher :: HealthCheckSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _matcher = a } :: HealthCheckSetting s)
+
+instance P.HasPath (HealthCheckSetting s) (TF.Attr s P.Text) where
+    path =
+        P.lens (_path :: HealthCheckSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _path = a } :: HealthCheckSetting s)
+
 instance P.HasPort (HealthCheckSetting s) (TF.Attr s P.Text) where
     port =
         P.lens (_port :: HealthCheckSetting s -> TF.Attr s P.Text)
@@ -9534,6 +9707,11 @@ instance P.HasProtocol (HealthCheckSetting s) (TF.Attr s P.Text) where
         P.lens (_protocol :: HealthCheckSetting s -> TF.Attr s P.Text)
                (\s a -> s { _protocol = a } :: HealthCheckSetting s)
 
+instance P.HasTimeout (HealthCheckSetting s) (TF.Attr s P.Int) where
+    timeout =
+        P.lens (_timeout :: HealthCheckSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _timeout = a } :: HealthCheckSetting s)
+
 instance P.HasUnhealthyThreshold (HealthCheckSetting s) (TF.Attr s P.Int) where
     unhealthyThreshold =
         P.lens (_unhealthyThreshold :: HealthCheckSetting s -> TF.Attr s P.Int)
@@ -9543,11 +9721,6 @@ instance P.HasTarget (HealthCheckSetting s) (TF.Attr s P.Text) where
     target =
         P.lens (_target :: HealthCheckSetting s -> TF.Attr s P.Text)
                (\s a -> s { _target = a } :: HealthCheckSetting s)
-
-instance P.HasTimeout (HealthCheckSetting s) (TF.Attr s P.Int) where
-    timeout =
-        P.lens (_timeout :: HealthCheckSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _timeout = a } :: HealthCheckSetting s)
 
 instance s ~ s' => P.HasComputedMatcher (TF.Ref s' (HealthCheckSetting s)) (TF.Attr s P.Text) where
     computedMatcher x = TF.compute (TF.refKey x) "matcher"
@@ -9741,49 +9914,58 @@ instance P.HasName (IamInstanceProfileSetting s) (TF.Attr s P.Text) where
 
 -- | @ingress@ nested settings.
 data IngressSetting s = IngressSetting'
-    { _cidr           :: TF.Attr s P.Text
+    { _cidr                 :: TF.Attr s P.Text
     -- ^ @cidr@ - (Optional)
     --
-    , _action         :: TF.Attr s P.Text
+    , _securityGroupId      :: TF.Attr s P.Text
+    -- ^ @security_group_id@ - (Optional)
+    --
+    , _securityGroupName    :: TF.Attr s P.Text
+    -- ^ @security_group_name@ - (Optional)
+    --
+    , _securityGroupOwnerId :: TF.Attr s P.Text
+    -- ^ @security_group_owner_id@ - (Optional)
+    --
+    , _action               :: TF.Attr s P.Text
     -- ^ @action@ - (Required)
     --
-    , _cidrBlock      :: TF.Attr s P.Text
+    , _cidrBlock            :: TF.Attr s P.Text
     -- ^ @cidr_block@ - (Optional)
     --
-    , _fromPort       :: TF.Attr s P.Int
+    , _fromPort             :: TF.Attr s P.Int
     -- ^ @from_port@ - (Required)
     --
-    , _icmpCode       :: TF.Attr s P.Int
+    , _icmpCode             :: TF.Attr s P.Int
     -- ^ @icmp_code@ - (Optional)
     --
-    , _icmpType       :: TF.Attr s P.Int
+    , _icmpType             :: TF.Attr s P.Int
     -- ^ @icmp_type@ - (Optional)
     --
-    , _ipv6CidrBlock  :: TF.Attr s P.Text
+    , _ipv6CidrBlock        :: TF.Attr s P.Text
     -- ^ @ipv6_cidr_block@ - (Optional)
     --
-    , _protocol       :: TF.Attr s P.Text
+    , _protocol             :: TF.Attr s P.Text
     -- ^ @protocol@ - (Required)
     --
-    , _ruleNo         :: TF.Attr s P.Int
+    , _ruleNo               :: TF.Attr s P.Int
     -- ^ @rule_no@ - (Required)
     --
-    , _toPort         :: TF.Attr s P.Int
+    , _toPort               :: TF.Attr s P.Int
     -- ^ @to_port@ - (Required)
     --
-    , _cidrBlocks     :: TF.Attr s [TF.Attr s P.Text]
+    , _cidrBlocks           :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @cidr_blocks@ - (Optional)
     --
-    , _description    :: TF.Attr s P.Text
+    , _description          :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _ipv6CidrBlocks :: TF.Attr s [TF.Attr s P.Text]
+    , _ipv6CidrBlocks       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @ipv6_cidr_blocks@ - (Optional)
     --
-    , _securityGroups :: TF.Attr s [TF.Attr s P.Text]
+    , _securityGroups       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @security_groups@ - (Optional)
     --
-    , _self           :: TF.Attr s P.Bool
+    , _self                 :: TF.Attr s P.Bool
     -- ^ @self@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -9799,6 +9981,9 @@ ingressSetting
 ingressSetting _action _ruleNo _fromPort _toPort _protocol =
     IngressSetting'
         { _cidr = TF.Nil
+        , _securityGroupId = TF.Nil
+        , _securityGroupName = TF.Nil
+        , _securityGroupOwnerId = TF.Nil
         , _action = _action
         , _cidrBlock = TF.Nil
         , _fromPort = _fromPort
@@ -9819,6 +10004,9 @@ instance TF.IsValue  (IngressSetting s)
 instance TF.IsObject (IngressSetting s) where
     toObject IngressSetting'{..} = P.catMaybes
         [ TF.assign "cidr" <$> TF.attribute _cidr
+        , TF.assign "security_group_id" <$> TF.attribute _securityGroupId
+        , TF.assign "security_group_name" <$> TF.attribute _securityGroupName
+        , TF.assign "security_group_owner_id" <$> TF.attribute _securityGroupOwnerId
         , TF.assign "action" <$> TF.attribute _action
         , TF.assign "cidr_block" <$> TF.attribute _cidrBlock
         , TF.assign "from_port" <$> TF.attribute _fromPort
@@ -9842,6 +10030,21 @@ instance P.HasCidr (IngressSetting s) (TF.Attr s P.Text) where
     cidr =
         P.lens (_cidr :: IngressSetting s -> TF.Attr s P.Text)
                (\s a -> s { _cidr = a } :: IngressSetting s)
+
+instance P.HasSecurityGroupId (IngressSetting s) (TF.Attr s P.Text) where
+    securityGroupId =
+        P.lens (_securityGroupId :: IngressSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _securityGroupId = a } :: IngressSetting s)
+
+instance P.HasSecurityGroupName (IngressSetting s) (TF.Attr s P.Text) where
+    securityGroupName =
+        P.lens (_securityGroupName :: IngressSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _securityGroupName = a } :: IngressSetting s)
+
+instance P.HasSecurityGroupOwnerId (IngressSetting s) (TF.Attr s P.Text) where
+    securityGroupOwnerId =
+        P.lens (_securityGroupOwnerId :: IngressSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _securityGroupOwnerId = a } :: IngressSetting s)
 
 instance P.HasAction (IngressSetting s) (TF.Attr s P.Text) where
     action =
@@ -9924,7 +10127,10 @@ instance s ~ s' => P.HasComputedSecurityGroupOwnerId (TF.Ref s' (IngressSetting 
 
 -- | @initial_lifecycle_hook@ nested settings.
 data InitialLifecycleHookSetting s = InitialLifecycleHookSetting'
-    { _heartbeatTimeout      :: TF.Attr s P.Int
+    { _defaultResult         :: TF.Attr s P.Text
+    -- ^ @default_result@ - (Optional)
+    --
+    , _heartbeatTimeout      :: TF.Attr s P.Int
     -- ^ @heartbeat_timeout@ - (Optional)
     --
     , _lifecycleTransition   :: TF.Attr s P.Text
@@ -9951,7 +10157,8 @@ initialLifecycleHookSetting
     -> InitialLifecycleHookSetting s
 initialLifecycleHookSetting _name _lifecycleTransition =
     InitialLifecycleHookSetting'
-        { _heartbeatTimeout = TF.Nil
+        { _defaultResult = TF.Nil
+        , _heartbeatTimeout = TF.Nil
         , _lifecycleTransition = _lifecycleTransition
         , _name = _name
         , _notificationMetadata = TF.Nil
@@ -9962,7 +10169,8 @@ initialLifecycleHookSetting _name _lifecycleTransition =
 instance TF.IsValue  (InitialLifecycleHookSetting s)
 instance TF.IsObject (InitialLifecycleHookSetting s) where
     toObject InitialLifecycleHookSetting'{..} = P.catMaybes
-        [ TF.assign "heartbeat_timeout" <$> TF.attribute _heartbeatTimeout
+        [ TF.assign "default_result" <$> TF.attribute _defaultResult
+        , TF.assign "heartbeat_timeout" <$> TF.attribute _heartbeatTimeout
         , TF.assign "lifecycle_transition" <$> TF.attribute _lifecycleTransition
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "notification_metadata" <$> TF.attribute _notificationMetadata
@@ -9972,6 +10180,11 @@ instance TF.IsObject (InitialLifecycleHookSetting s) where
 
 instance TF.IsValid (InitialLifecycleHookSetting s) where
     validator = P.mempty
+
+instance P.HasDefaultResult (InitialLifecycleHookSetting s) (TF.Attr s P.Text) where
+    defaultResult =
+        P.lens (_defaultResult :: InitialLifecycleHookSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _defaultResult = a } :: InitialLifecycleHookSetting s)
 
 instance P.HasHeartbeatTimeout (InitialLifecycleHookSetting s) (TF.Attr s P.Int) where
     heartbeatTimeout =
@@ -10714,13 +10927,16 @@ instance P.HasFunctionArn (LambdaSetting s) (TF.Attr s P.Text) where
 
 -- | @lambda_action@ nested settings.
 data LambdaActionSetting s = LambdaActionSetting'
-    { _functionArn :: TF.Attr s P.Text
+    { _functionArn    :: TF.Attr s P.Text
     -- ^ @function_arn@ - (Required)
     --
-    , _position    :: TF.Attr s P.Int
+    , _invocationType :: TF.Attr s P.Text
+    -- ^ @invocation_type@ - (Optional)
+    --
+    , _position       :: TF.Attr s P.Int
     -- ^ @position@ - (Required)
     --
-    , _topicArn    :: TF.Attr s P.Text
+    , _topicArn       :: TF.Attr s P.Text
     -- ^ @topic_arn@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -10733,6 +10949,7 @@ lambdaActionSetting
 lambdaActionSetting _functionArn _position =
     LambdaActionSetting'
         { _functionArn = _functionArn
+        , _invocationType = TF.Nil
         , _position = _position
         , _topicArn = TF.Nil
         }
@@ -10741,6 +10958,7 @@ instance TF.IsValue  (LambdaActionSetting s)
 instance TF.IsObject (LambdaActionSetting s) where
     toObject LambdaActionSetting'{..} = P.catMaybes
         [ TF.assign "function_arn" <$> TF.attribute _functionArn
+        , TF.assign "invocation_type" <$> TF.attribute _invocationType
         , TF.assign "position" <$> TF.attribute _position
         , TF.assign "topic_arn" <$> TF.attribute _topicArn
         ]
@@ -10752,6 +10970,11 @@ instance P.HasFunctionArn (LambdaActionSetting s) (TF.Attr s P.Text) where
     functionArn =
         P.lens (_functionArn :: LambdaActionSetting s -> TF.Attr s P.Text)
                (\s a -> s { _functionArn = a } :: LambdaActionSetting s)
+
+instance P.HasInvocationType (LambdaActionSetting s) (TF.Attr s P.Text) where
+    invocationType =
+        P.lens (_invocationType :: LambdaActionSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _invocationType = a } :: LambdaActionSetting s)
 
 instance P.HasPosition (LambdaActionSetting s) (TF.Attr s P.Int) where
     position =
@@ -10907,6 +11130,9 @@ data LambdaFunctionSetting s = LambdaFunctionSetting'
     , _filterSuffix      :: TF.Attr s P.Text
     -- ^ @filter_suffix@ - (Optional)
     --
+    , _id                :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
     , _lambdaFunctionArn :: TF.Attr s P.Text
     -- ^ @lambda_function_arn@ - (Optional)
     --
@@ -10921,6 +11147,7 @@ lambdaFunctionSetting _events =
         { _events = _events
         , _filterPrefix = TF.Nil
         , _filterSuffix = TF.Nil
+        , _id = TF.Nil
         , _lambdaFunctionArn = TF.Nil
         }
 
@@ -10930,6 +11157,7 @@ instance TF.IsObject (LambdaFunctionSetting s) where
         [ TF.assign "events" <$> TF.attribute _events
         , TF.assign "filter_prefix" <$> TF.attribute _filterPrefix
         , TF.assign "filter_suffix" <$> TF.attribute _filterSuffix
+        , TF.assign "id" <$> TF.attribute _id
         , TF.assign "lambda_function_arn" <$> TF.attribute _lambdaFunctionArn
         ]
 
@@ -10950,6 +11178,11 @@ instance P.HasFilterSuffix (LambdaFunctionSetting s) (TF.Attr s P.Text) where
     filterSuffix =
         P.lens (_filterSuffix :: LambdaFunctionSetting s -> TF.Attr s P.Text)
                (\s a -> s { _filterSuffix = a } :: LambdaFunctionSetting s)
+
+instance P.HasId (LambdaFunctionSetting s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: LambdaFunctionSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: LambdaFunctionSetting s)
 
 instance P.HasLambdaFunctionArn (LambdaFunctionSetting s) (TF.Attr s P.Text) where
     lambdaFunctionArn =
@@ -11032,40 +11265,64 @@ instance P.HasRegion (LatencyRoutingPolicySetting s) (TF.Attr s P.Text) where
 
 -- | @launch_specification@ nested settings.
 data LaunchSpecificationSetting s = LaunchSpecificationSetting'
-    { _ami                      :: TF.Attr s P.Text
+    { _ami :: TF.Attr s P.Text
     -- ^ @ami@ - (Required, Forces New)
     --
     , _associatePublicIpAddress :: TF.Attr s P.Bool
     -- ^ @associate_public_ip_address@ - (Optional)
     --
-    , _ebsOptimized             :: TF.Attr s P.Bool
+    , _availabilityZone :: TF.Attr s P.Text
+    -- ^ @availability_zone@ - (Optional, Forces New)
+    --
+    , _ebsBlockDevice :: TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)]
+    -- ^ @ebs_block_device@ - (Optional)
+    --
+    , _ebsOptimized :: TF.Attr s P.Bool
     -- ^ @ebs_optimized@ - (Optional)
     --
-    , _iamInstanceProfile       :: TF.Attr s P.Text
+    , _ephemeralBlockDevice :: TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)]
+    -- ^ @ephemeral_block_device@ - (Optional, Forces New)
+    --
+    , _iamInstanceProfile :: TF.Attr s P.Text
     -- ^ @iam_instance_profile@ - (Optional, Forces New)
     --
-    , _iamInstanceProfileArn    :: TF.Attr s P.Text
+    , _iamInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @iam_instance_profile_arn@ - (Optional, Forces New)
     --
-    , _instanceType             :: TF.Attr s P.Text
+    , _instanceType :: TF.Attr s P.Text
     -- ^ @instance_type@ - (Required, Forces New)
     --
-    , _monitoring               :: TF.Attr s P.Bool
+    , _keyName :: TF.Attr s P.Text
+    -- ^ @key_name@ - (Optional, Forces New)
+    --
+    , _monitoring :: TF.Attr s P.Bool
     -- ^ @monitoring@ - (Optional)
     --
-    , _placementTenancy         :: TF.Attr s P.Text
+    , _placementGroup :: TF.Attr s P.Text
+    -- ^ @placement_group@ - (Optional, Forces New)
+    --
+    , _placementTenancy :: TF.Attr s P.Text
     -- ^ @placement_tenancy@ - (Optional, Forces New)
     --
-    , _spotPrice                :: TF.Attr s P.Text
+    , _rootBlockDevice :: TF.Attr s [TF.Attr s (RootBlockDeviceSetting s)]
+    -- ^ @root_block_device@ - (Optional)
+    --
+    , _spotPrice :: TF.Attr s P.Text
     -- ^ @spot_price@ - (Optional, Forces New)
     --
-    , _tags                     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _subnetId :: TF.Attr s P.Text
+    -- ^ @subnet_id@ - (Optional, Forces New)
+    --
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional, Forces New)
     --
-    , _userData                 :: TF.Attr s P.Text
+    , _userData :: TF.Attr s P.Text
     -- ^ @user_data@ - (Optional, Forces New)
     --
-    , _weightedCapacity         :: TF.Attr s P.Text
+    , _vpcSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @vpc_security_group_ids@ - (Optional)
+    --
+    , _weightedCapacity :: TF.Attr s P.Text
     -- ^ @weighted_capacity@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -11079,15 +11336,23 @@ launchSpecificationSetting _ami _instanceType =
     LaunchSpecificationSetting'
         { _ami = _ami
         , _associatePublicIpAddress = TF.value P.False
+        , _availabilityZone = TF.Nil
+        , _ebsBlockDevice = TF.Nil
         , _ebsOptimized = TF.value P.False
+        , _ephemeralBlockDevice = TF.Nil
         , _iamInstanceProfile = TF.Nil
         , _iamInstanceProfileArn = TF.Nil
         , _instanceType = _instanceType
+        , _keyName = TF.Nil
         , _monitoring = TF.value P.False
+        , _placementGroup = TF.Nil
         , _placementTenancy = TF.Nil
+        , _rootBlockDevice = TF.Nil
         , _spotPrice = TF.Nil
+        , _subnetId = TF.Nil
         , _tags = TF.Nil
         , _userData = TF.Nil
+        , _vpcSecurityGroupIds = TF.Nil
         , _weightedCapacity = TF.Nil
         }
 
@@ -11096,15 +11361,23 @@ instance TF.IsObject (LaunchSpecificationSetting s) where
     toObject LaunchSpecificationSetting'{..} = P.catMaybes
         [ TF.assign "ami" <$> TF.attribute _ami
         , TF.assign "associate_public_ip_address" <$> TF.attribute _associatePublicIpAddress
+        , TF.assign "availability_zone" <$> TF.attribute _availabilityZone
+        , TF.assign "ebs_block_device" <$> TF.attribute _ebsBlockDevice
         , TF.assign "ebs_optimized" <$> TF.attribute _ebsOptimized
+        , TF.assign "ephemeral_block_device" <$> TF.attribute _ephemeralBlockDevice
         , TF.assign "iam_instance_profile" <$> TF.attribute _iamInstanceProfile
         , TF.assign "iam_instance_profile_arn" <$> TF.attribute _iamInstanceProfileArn
         , TF.assign "instance_type" <$> TF.attribute _instanceType
+        , TF.assign "key_name" <$> TF.attribute _keyName
         , TF.assign "monitoring" <$> TF.attribute _monitoring
+        , TF.assign "placement_group" <$> TF.attribute _placementGroup
         , TF.assign "placement_tenancy" <$> TF.attribute _placementTenancy
+        , TF.assign "root_block_device" <$> TF.attribute _rootBlockDevice
         , TF.assign "spot_price" <$> TF.attribute _spotPrice
+        , TF.assign "subnet_id" <$> TF.attribute _subnetId
         , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "user_data" <$> TF.attribute _userData
+        , TF.assign "vpc_security_group_ids" <$> TF.attribute _vpcSecurityGroupIds
         , TF.assign "weighted_capacity" <$> TF.attribute _weightedCapacity
         ]
 
@@ -11121,10 +11394,25 @@ instance P.HasAssociatePublicIpAddress (LaunchSpecificationSetting s) (TF.Attr s
         P.lens (_associatePublicIpAddress :: LaunchSpecificationSetting s -> TF.Attr s P.Bool)
                (\s a -> s { _associatePublicIpAddress = a } :: LaunchSpecificationSetting s)
 
+instance P.HasAvailabilityZone (LaunchSpecificationSetting s) (TF.Attr s P.Text) where
+    availabilityZone =
+        P.lens (_availabilityZone :: LaunchSpecificationSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _availabilityZone = a } :: LaunchSpecificationSetting s)
+
+instance P.HasEbsBlockDevice (LaunchSpecificationSetting s) (TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)]) where
+    ebsBlockDevice =
+        P.lens (_ebsBlockDevice :: LaunchSpecificationSetting s -> TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)])
+               (\s a -> s { _ebsBlockDevice = a } :: LaunchSpecificationSetting s)
+
 instance P.HasEbsOptimized (LaunchSpecificationSetting s) (TF.Attr s P.Bool) where
     ebsOptimized =
         P.lens (_ebsOptimized :: LaunchSpecificationSetting s -> TF.Attr s P.Bool)
                (\s a -> s { _ebsOptimized = a } :: LaunchSpecificationSetting s)
+
+instance P.HasEphemeralBlockDevice (LaunchSpecificationSetting s) (TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)]) where
+    ephemeralBlockDevice =
+        P.lens (_ephemeralBlockDevice :: LaunchSpecificationSetting s -> TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)])
+               (\s a -> s { _ephemeralBlockDevice = a } :: LaunchSpecificationSetting s)
 
 instance P.HasIamInstanceProfile (LaunchSpecificationSetting s) (TF.Attr s P.Text) where
     iamInstanceProfile =
@@ -11141,20 +11429,40 @@ instance P.HasInstanceType (LaunchSpecificationSetting s) (TF.Attr s P.Text) whe
         P.lens (_instanceType :: LaunchSpecificationSetting s -> TF.Attr s P.Text)
                (\s a -> s { _instanceType = a } :: LaunchSpecificationSetting s)
 
+instance P.HasKeyName (LaunchSpecificationSetting s) (TF.Attr s P.Text) where
+    keyName =
+        P.lens (_keyName :: LaunchSpecificationSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _keyName = a } :: LaunchSpecificationSetting s)
+
 instance P.HasMonitoring (LaunchSpecificationSetting s) (TF.Attr s P.Bool) where
     monitoring =
         P.lens (_monitoring :: LaunchSpecificationSetting s -> TF.Attr s P.Bool)
                (\s a -> s { _monitoring = a } :: LaunchSpecificationSetting s)
+
+instance P.HasPlacementGroup (LaunchSpecificationSetting s) (TF.Attr s P.Text) where
+    placementGroup =
+        P.lens (_placementGroup :: LaunchSpecificationSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _placementGroup = a } :: LaunchSpecificationSetting s)
 
 instance P.HasPlacementTenancy (LaunchSpecificationSetting s) (TF.Attr s P.Text) where
     placementTenancy =
         P.lens (_placementTenancy :: LaunchSpecificationSetting s -> TF.Attr s P.Text)
                (\s a -> s { _placementTenancy = a } :: LaunchSpecificationSetting s)
 
+instance P.HasRootBlockDevice (LaunchSpecificationSetting s) (TF.Attr s [TF.Attr s (RootBlockDeviceSetting s)]) where
+    rootBlockDevice =
+        P.lens (_rootBlockDevice :: LaunchSpecificationSetting s -> TF.Attr s [TF.Attr s (RootBlockDeviceSetting s)])
+               (\s a -> s { _rootBlockDevice = a } :: LaunchSpecificationSetting s)
+
 instance P.HasSpotPrice (LaunchSpecificationSetting s) (TF.Attr s P.Text) where
     spotPrice =
         P.lens (_spotPrice :: LaunchSpecificationSetting s -> TF.Attr s P.Text)
                (\s a -> s { _spotPrice = a } :: LaunchSpecificationSetting s)
+
+instance P.HasSubnetId (LaunchSpecificationSetting s) (TF.Attr s P.Text) where
+    subnetId =
+        P.lens (_subnetId :: LaunchSpecificationSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _subnetId = a } :: LaunchSpecificationSetting s)
 
 instance P.HasTags (LaunchSpecificationSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     tags =
@@ -11165,6 +11473,11 @@ instance P.HasUserData (LaunchSpecificationSetting s) (TF.Attr s P.Text) where
     userData =
         P.lens (_userData :: LaunchSpecificationSetting s -> TF.Attr s P.Text)
                (\s a -> s { _userData = a } :: LaunchSpecificationSetting s)
+
+instance P.HasVpcSecurityGroupIds (LaunchSpecificationSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+    vpcSecurityGroupIds =
+        P.lens (_vpcSecurityGroupIds :: LaunchSpecificationSetting s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _vpcSecurityGroupIds = a } :: LaunchSpecificationSetting s)
 
 instance P.HasWeightedCapacity (LaunchSpecificationSetting s) (TF.Attr s P.Text) where
     weightedCapacity =
@@ -11197,7 +11510,19 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (LaunchSpecificat
 
 -- | @launch_template@ nested settings.
 data LaunchTemplateSetting s = LaunchTemplateSetting'
-    { _version :: TF.Attr s P.Text
+    { _id      :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'name'
+    , _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'id'
+    , _version :: TF.Attr s P.Text
     -- ^ @version@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -11207,17 +11532,42 @@ launchTemplateSetting
     :: LaunchTemplateSetting s
 launchTemplateSetting =
     LaunchTemplateSetting'
-        { _version = TF.Nil
+        { _id = TF.Nil
+        , _name = TF.Nil
+        , _version = TF.Nil
         }
 
 instance TF.IsValue  (LaunchTemplateSetting s)
 instance TF.IsObject (LaunchTemplateSetting s) where
     toObject LaunchTemplateSetting'{..} = P.catMaybes
-        [ TF.assign "version" <$> TF.attribute _version
+        [ TF.assign "id" <$> TF.attribute _id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "version" <$> TF.attribute _version
         ]
 
 instance TF.IsValid (LaunchTemplateSetting s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\LaunchTemplateSetting'{..} -> Map.fromList $ P.catMaybes
+        [ if (_id P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_id",
+                            [ "_name"
+                            ])
+        , if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_id"
+                            ])
+        ])
+
+instance P.HasId (LaunchTemplateSetting s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: LaunchTemplateSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: LaunchTemplateSetting s)
+
+instance P.HasName (LaunchTemplateSetting s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LaunchTemplateSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LaunchTemplateSetting s)
 
 instance P.HasVersion (LaunchTemplateSetting s) (TF.Attr s P.Text) where
     version =
@@ -11240,6 +11590,9 @@ data LifecycleRuleSetting s = LifecycleRuleSetting'
     --
     , _expiration :: TF.Attr s [TF.Attr s (ExpirationSetting s)]
     -- ^ @expiration@ - (Optional)
+    --
+    , _id :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
     --
     , _noncurrentVersionExpiration :: TF.Attr s [TF.Attr s (NoncurrentVersionExpirationSetting s)]
     -- ^ @noncurrent_version_expiration@ - (Optional)
@@ -11267,6 +11620,7 @@ lifecycleRuleSetting _enabled =
         { _abortIncompleteMultipartUploadDays = TF.Nil
         , _enabled = _enabled
         , _expiration = TF.Nil
+        , _id = TF.Nil
         , _noncurrentVersionExpiration = TF.Nil
         , _noncurrentVersionTransition = TF.Nil
         , _prefix = TF.Nil
@@ -11280,6 +11634,7 @@ instance TF.IsObject (LifecycleRuleSetting s) where
         [ TF.assign "abort_incomplete_multipart_upload_days" <$> TF.attribute _abortIncompleteMultipartUploadDays
         , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "expiration" <$> TF.attribute _expiration
+        , TF.assign "id" <$> TF.attribute _id
         , TF.assign "noncurrent_version_expiration" <$> TF.attribute _noncurrentVersionExpiration
         , TF.assign "noncurrent_version_transition" <$> TF.attribute _noncurrentVersionTransition
         , TF.assign "prefix" <$> TF.attribute _prefix
@@ -11304,6 +11659,11 @@ instance P.HasExpiration (LifecycleRuleSetting s) (TF.Attr s [TF.Attr s (Expirat
     expiration =
         P.lens (_expiration :: LifecycleRuleSetting s -> TF.Attr s [TF.Attr s (ExpirationSetting s)])
                (\s a -> s { _expiration = a } :: LifecycleRuleSetting s)
+
+instance P.HasId (LifecycleRuleSetting s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: LifecycleRuleSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: LifecycleRuleSetting s)
 
 instance P.HasNoncurrentVersionExpiration (LifecycleRuleSetting s) (TF.Attr s [TF.Attr s (NoncurrentVersionExpirationSetting s)]) where
     noncurrentVersionExpiration =
@@ -11718,8 +12078,14 @@ instance P.HasLogType (LogPublishingOptionsSetting s) (TF.Attr s P.Text) where
 
 -- | @logging@ nested settings.
 data LoggingSetting s = LoggingSetting'
-    { _enable       :: TF.Attr s P.Bool
+    { _bucketName   :: TF.Attr s P.Text
+    -- ^ @bucket_name@ - (Optional)
+    --
+    , _enable       :: TF.Attr s P.Bool
     -- ^ @enable@ - (Required)
+    --
+    , _s3KeyPrefix  :: TF.Attr s P.Text
+    -- ^ @s3_key_prefix@ - (Optional)
     --
     , _targetBucket :: TF.Attr s P.Text
     -- ^ @target_bucket@ - (Required)
@@ -11736,7 +12102,9 @@ loggingSetting
     -> LoggingSetting s
 loggingSetting _targetBucket _enable =
     LoggingSetting'
-        { _enable = _enable
+        { _bucketName = TF.Nil
+        , _enable = _enable
+        , _s3KeyPrefix = TF.Nil
         , _targetBucket = _targetBucket
         , _targetPrefix = TF.Nil
         }
@@ -11744,7 +12112,9 @@ loggingSetting _targetBucket _enable =
 instance TF.IsValue  (LoggingSetting s)
 instance TF.IsObject (LoggingSetting s) where
     toObject LoggingSetting'{..} = P.catMaybes
-        [ TF.assign "enable" <$> TF.attribute _enable
+        [ TF.assign "bucket_name" <$> TF.attribute _bucketName
+        , TF.assign "enable" <$> TF.attribute _enable
+        , TF.assign "s3_key_prefix" <$> TF.attribute _s3KeyPrefix
         , TF.assign "target_bucket" <$> TF.attribute _targetBucket
         , TF.assign "target_prefix" <$> TF.attribute _targetPrefix
         ]
@@ -11752,10 +12122,20 @@ instance TF.IsObject (LoggingSetting s) where
 instance TF.IsValid (LoggingSetting s) where
     validator = P.mempty
 
+instance P.HasBucketName (LoggingSetting s) (TF.Attr s P.Text) where
+    bucketName =
+        P.lens (_bucketName :: LoggingSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _bucketName = a } :: LoggingSetting s)
+
 instance P.HasEnable (LoggingSetting s) (TF.Attr s P.Bool) where
     enable =
         P.lens (_enable :: LoggingSetting s -> TF.Attr s P.Bool)
                (\s a -> s { _enable = a } :: LoggingSetting s)
+
+instance P.HasS3KeyPrefix (LoggingSetting s) (TF.Attr s P.Text) where
+    s3KeyPrefix =
+        P.lens (_s3KeyPrefix :: LoggingSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _s3KeyPrefix = a } :: LoggingSetting s)
 
 instance P.HasTargetBucket (LoggingSetting s) (TF.Attr s P.Text) where
     targetBucket =
@@ -14590,8 +14970,11 @@ instance s ~ s' => P.HasComputedProductCodeType (TF.Ref s' (ProductCodesSetting 
 
 -- | @properties@ nested settings.
 data PropertiesSetting s = PropertiesSetting'
-    { _description :: TF.Attr s P.Text
+    { _description          :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
+    --
+    , _searchableAttributes :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @searchable_attributes@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -14601,12 +14984,14 @@ propertiesSetting
 propertiesSetting =
     PropertiesSetting'
         { _description = TF.Nil
+        , _searchableAttributes = TF.Nil
         }
 
 instance TF.IsValue  (PropertiesSetting s)
 instance TF.IsObject (PropertiesSetting s) where
     toObject PropertiesSetting'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "searchable_attributes" <$> TF.attribute _searchableAttributes
         ]
 
 instance TF.IsValid (PropertiesSetting s) where
@@ -14616,6 +15001,11 @@ instance P.HasDescription (PropertiesSetting s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: PropertiesSetting s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: PropertiesSetting s)
+
+instance P.HasSearchableAttributes (PropertiesSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+    searchableAttributes =
+        P.lens (_searchableAttributes :: PropertiesSetting s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _searchableAttributes = a } :: PropertiesSetting s)
 
 instance s ~ s' => P.HasComputedSearchableAttributes (TF.Ref s' (PropertiesSetting s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSearchableAttributes x = TF.compute (TF.refKey x) "searchable_attributes"
@@ -14630,6 +15020,9 @@ data QueueSetting s = QueueSetting'
     --
     , _filterSuffix :: TF.Attr s P.Text
     -- ^ @filter_suffix@ - (Optional)
+    --
+    , _id           :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
     --
     , _queueArn     :: TF.Attr s P.Text
     -- ^ @queue_arn@ - (Required)
@@ -14646,6 +15039,7 @@ queueSetting _queueArn _events =
         { _events = _events
         , _filterPrefix = TF.Nil
         , _filterSuffix = TF.Nil
+        , _id = TF.Nil
         , _queueArn = _queueArn
         }
 
@@ -14655,6 +15049,7 @@ instance TF.IsObject (QueueSetting s) where
         [ TF.assign "events" <$> TF.attribute _events
         , TF.assign "filter_prefix" <$> TF.attribute _filterPrefix
         , TF.assign "filter_suffix" <$> TF.attribute _filterSuffix
+        , TF.assign "id" <$> TF.attribute _id
         , TF.assign "queue_arn" <$> TF.attribute _queueArn
         ]
 
@@ -14675,6 +15070,11 @@ instance P.HasFilterSuffix (QueueSetting s) (TF.Attr s P.Text) where
     filterSuffix =
         P.lens (_filterSuffix :: QueueSetting s -> TF.Attr s P.Text)
                (\s a -> s { _filterSuffix = a } :: QueueSetting s)
+
+instance P.HasId (QueueSetting s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: QueueSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: QueueSetting s)
 
 instance P.HasQueueArn (QueueSetting s) (TF.Attr s P.Text) where
     queueArn =
@@ -14786,37 +15186,40 @@ instance P.HasResourceTypes (RecordingGroupSetting s) (TF.Attr s [TF.Attr s P.Te
 
 -- | @redshift_configuration@ nested settings.
 data RedshiftConfigurationSetting s = RedshiftConfigurationSetting'
-    { _clusterJdbcurl          :: TF.Attr s P.Text
+    { _cloudwatchLoggingOptions :: TF.Attr s (CloudwatchLoggingOptionsSetting s)
+    -- ^ @cloudwatch_logging_options@ - (Optional)
+    --
+    , _clusterJdbcurl           :: TF.Attr s P.Text
     -- ^ @cluster_jdbcurl@ - (Required)
     --
-    , _copyOptions             :: TF.Attr s P.Text
+    , _copyOptions              :: TF.Attr s P.Text
     -- ^ @copy_options@ - (Optional)
     --
-    , _dataTableColumns        :: TF.Attr s P.Text
+    , _dataTableColumns         :: TF.Attr s P.Text
     -- ^ @data_table_columns@ - (Optional)
     --
-    , _dataTableName           :: TF.Attr s P.Text
+    , _dataTableName            :: TF.Attr s P.Text
     -- ^ @data_table_name@ - (Required)
     --
-    , _password                :: TF.Attr s P.Text
+    , _password                 :: TF.Attr s P.Text
     -- ^ @password@ - (Required)
     --
-    , _processingConfiguration :: TF.Attr s (ProcessingConfigurationSetting s)
+    , _processingConfiguration  :: TF.Attr s (ProcessingConfigurationSetting s)
     -- ^ @processing_configuration@ - (Optional)
     --
-    , _retryDuration           :: TF.Attr s P.Int
+    , _retryDuration            :: TF.Attr s P.Int
     -- ^ @retry_duration@ - (Optional)
     --
-    , _roleArn                 :: TF.Attr s P.Text
+    , _roleArn                  :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
-    , _s3BackupConfiguration   :: TF.Attr s (S3BackupConfigurationSetting s)
+    , _s3BackupConfiguration    :: TF.Attr s (S3BackupConfigurationSetting s)
     -- ^ @s3_backup_configuration@ - (Optional)
     --
-    , _s3BackupMode            :: TF.Attr s P.Text
+    , _s3BackupMode             :: TF.Attr s P.Text
     -- ^ @s3_backup_mode@ - (Optional)
     --
-    , _username                :: TF.Attr s P.Text
+    , _username                 :: TF.Attr s P.Text
     -- ^ @username@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -14831,7 +15234,8 @@ redshiftConfigurationSetting
     -> RedshiftConfigurationSetting s
 redshiftConfigurationSetting _roleArn _clusterJdbcurl _dataTableName _password _username =
     RedshiftConfigurationSetting'
-        { _clusterJdbcurl = _clusterJdbcurl
+        { _cloudwatchLoggingOptions = TF.Nil
+        , _clusterJdbcurl = _clusterJdbcurl
         , _copyOptions = TF.Nil
         , _dataTableColumns = TF.Nil
         , _dataTableName = _dataTableName
@@ -14847,7 +15251,8 @@ redshiftConfigurationSetting _roleArn _clusterJdbcurl _dataTableName _password _
 instance TF.IsValue  (RedshiftConfigurationSetting s)
 instance TF.IsObject (RedshiftConfigurationSetting s) where
     toObject RedshiftConfigurationSetting'{..} = P.catMaybes
-        [ TF.assign "cluster_jdbcurl" <$> TF.attribute _clusterJdbcurl
+        [ TF.assign "cloudwatch_logging_options" <$> TF.attribute _cloudwatchLoggingOptions
+        , TF.assign "cluster_jdbcurl" <$> TF.attribute _clusterJdbcurl
         , TF.assign "copy_options" <$> TF.attribute _copyOptions
         , TF.assign "data_table_columns" <$> TF.attribute _dataTableColumns
         , TF.assign "data_table_name" <$> TF.attribute _dataTableName
@@ -14862,6 +15267,10 @@ instance TF.IsObject (RedshiftConfigurationSetting s) where
 
 instance TF.IsValid (RedshiftConfigurationSetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_cloudwatchLoggingOptions"
+                  (_cloudwatchLoggingOptions
+                      :: RedshiftConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_processingConfiguration"
                   (_processingConfiguration
                       :: RedshiftConfigurationSetting s -> TF.Attr s (ProcessingConfigurationSetting s))
@@ -14870,6 +15279,11 @@ instance TF.IsValid (RedshiftConfigurationSetting s) where
                   (_s3BackupConfiguration
                       :: RedshiftConfigurationSetting s -> TF.Attr s (S3BackupConfigurationSetting s))
                   TF.validator
+
+instance P.HasCloudwatchLoggingOptions (RedshiftConfigurationSetting s) (TF.Attr s (CloudwatchLoggingOptionsSetting s)) where
+    cloudwatchLoggingOptions =
+        P.lens (_cloudwatchLoggingOptions :: RedshiftConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
+               (\s a -> s { _cloudwatchLoggingOptions = a } :: RedshiftConfigurationSetting s)
 
 instance P.HasClusterJdbcurl (RedshiftConfigurationSetting s) (TF.Attr s P.Text) where
     clusterJdbcurl =
@@ -15389,6 +15803,15 @@ data RootBlockDeviceSetting s = RootBlockDeviceSetting'
     { _deleteOnTermination :: TF.Attr s P.Bool
     -- ^ @delete_on_termination@ - (Optional, Forces New)
     --
+    , _iops                :: TF.Attr s P.Int
+    -- ^ @iops@ - (Optional, Forces New)
+    --
+    , _volumeSize          :: TF.Attr s P.Int
+    -- ^ @volume_size@ - (Optional, Forces New)
+    --
+    , _volumeType          :: TF.Attr s P.Text
+    -- ^ @volume_type@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @root_block_device@ settings value.
@@ -15397,12 +15820,18 @@ rootBlockDeviceSetting
 rootBlockDeviceSetting =
     RootBlockDeviceSetting'
         { _deleteOnTermination = TF.value P.True
+        , _iops = TF.Nil
+        , _volumeSize = TF.Nil
+        , _volumeType = TF.Nil
         }
 
 instance TF.IsValue  (RootBlockDeviceSetting s)
 instance TF.IsObject (RootBlockDeviceSetting s) where
     toObject RootBlockDeviceSetting'{..} = P.catMaybes
         [ TF.assign "delete_on_termination" <$> TF.attribute _deleteOnTermination
+        , TF.assign "iops" <$> TF.attribute _iops
+        , TF.assign "volume_size" <$> TF.attribute _volumeSize
+        , TF.assign "volume_type" <$> TF.attribute _volumeType
         ]
 
 instance TF.IsValid (RootBlockDeviceSetting s) where
@@ -15412,6 +15841,21 @@ instance P.HasDeleteOnTermination (RootBlockDeviceSetting s) (TF.Attr s P.Bool) 
     deleteOnTermination =
         P.lens (_deleteOnTermination :: RootBlockDeviceSetting s -> TF.Attr s P.Bool)
                (\s a -> s { _deleteOnTermination = a } :: RootBlockDeviceSetting s)
+
+instance P.HasIops (RootBlockDeviceSetting s) (TF.Attr s P.Int) where
+    iops =
+        P.lens (_iops :: RootBlockDeviceSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _iops = a } :: RootBlockDeviceSetting s)
+
+instance P.HasVolumeSize (RootBlockDeviceSetting s) (TF.Attr s P.Int) where
+    volumeSize =
+        P.lens (_volumeSize :: RootBlockDeviceSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _volumeSize = a } :: RootBlockDeviceSetting s)
+
+instance P.HasVolumeType (RootBlockDeviceSetting s) (TF.Attr s P.Text) where
+    volumeType =
+        P.lens (_volumeType :: RootBlockDeviceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _volumeType = a } :: RootBlockDeviceSetting s)
 
 instance s ~ s' => P.HasComputedIops (TF.Ref s' (RootBlockDeviceSetting s)) (TF.Attr s P.Int) where
     computedIops x = TF.compute (TF.refKey x) "iops"
@@ -15562,20 +16006,52 @@ instance P.HasVpcPeeringConnectionId (RouteSetting s) (TF.Attr s P.Text) where
 
 -- | @routes@ nested settings.
 data RoutesSetting s = RoutesSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _destinationCidrBlock :: TF.Attr s P.Text
+    -- ^ @destination_cidr_block@ - (Optional)
+    --
+    , _source               :: TF.Attr s P.Text
+    -- ^ @source@ - (Optional)
+    --
+    , _state                :: TF.Attr s P.Text
+    -- ^ @state@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @routes@ settings value.
 routesSetting
     :: RoutesSetting s
 routesSetting =
     RoutesSetting'
+        { _destinationCidrBlock = TF.Nil
+        , _source = TF.Nil
+        , _state = TF.Nil
+        }
 
 instance TF.IsValue  (RoutesSetting s)
 instance TF.IsObject (RoutesSetting s) where
-    toObject RoutesSetting' = []
+    toObject RoutesSetting'{..} = P.catMaybes
+        [ TF.assign "destination_cidr_block" <$> TF.attribute _destinationCidrBlock
+        , TF.assign "source" <$> TF.attribute _source
+        , TF.assign "state" <$> TF.attribute _state
+        ]
 
 instance TF.IsValid (RoutesSetting s) where
     validator = P.mempty
+
+instance P.HasDestinationCidrBlock (RoutesSetting s) (TF.Attr s P.Text) where
+    destinationCidrBlock =
+        P.lens (_destinationCidrBlock :: RoutesSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _destinationCidrBlock = a } :: RoutesSetting s)
+
+instance P.HasSource (RoutesSetting s) (TF.Attr s P.Text) where
+    source =
+        P.lens (_source :: RoutesSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _source = a } :: RoutesSetting s)
+
+instance P.HasState (RoutesSetting s) (TF.Attr s P.Text) where
+    state =
+        P.lens (_state :: RoutesSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _state = a } :: RoutesSetting s)
 
 instance s ~ s' => P.HasComputedDestinationCidrBlock (TF.Ref s' (RoutesSetting s)) (TF.Attr s P.Text) where
     computedDestinationCidrBlock x = TF.compute (TF.refKey x) "destination_cidr_block"
@@ -16138,25 +16614,28 @@ instance P.HasTopicArn (S3ActionSetting s) (TF.Attr s P.Text) where
 
 -- | @s3_backup_configuration@ nested settings.
 data S3BackupConfigurationSetting s = S3BackupConfigurationSetting'
-    { _bucketArn         :: TF.Attr s P.Text
+    { _bucketArn                :: TF.Attr s P.Text
     -- ^ @bucket_arn@ - (Required)
     --
-    , _bufferInterval    :: TF.Attr s P.Int
+    , _bufferInterval           :: TF.Attr s P.Int
     -- ^ @buffer_interval@ - (Optional)
     --
-    , _bufferSize        :: TF.Attr s P.Int
+    , _bufferSize               :: TF.Attr s P.Int
     -- ^ @buffer_size@ - (Optional)
     --
-    , _compressionFormat :: TF.Attr s P.Text
+    , _cloudwatchLoggingOptions :: TF.Attr s (CloudwatchLoggingOptionsSetting s)
+    -- ^ @cloudwatch_logging_options@ - (Optional)
+    --
+    , _compressionFormat        :: TF.Attr s P.Text
     -- ^ @compression_format@ - (Optional)
     --
-    , _kmsKeyArn         :: TF.Attr s P.Text
+    , _kmsKeyArn                :: TF.Attr s P.Text
     -- ^ @kms_key_arn@ - (Optional)
     --
-    , _prefix            :: TF.Attr s P.Text
+    , _prefix                   :: TF.Attr s P.Text
     -- ^ @prefix@ - (Optional)
     --
-    , _roleArn           :: TF.Attr s P.Text
+    , _roleArn                  :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -16171,6 +16650,7 @@ s3BackupConfigurationSetting _bucketArn _roleArn =
         { _bucketArn = _bucketArn
         , _bufferInterval = TF.value 300
         , _bufferSize = TF.value 5
+        , _cloudwatchLoggingOptions = TF.Nil
         , _compressionFormat = TF.value "UNCOMPRESSED"
         , _kmsKeyArn = TF.Nil
         , _prefix = TF.Nil
@@ -16183,6 +16663,7 @@ instance TF.IsObject (S3BackupConfigurationSetting s) where
         [ TF.assign "bucket_arn" <$> TF.attribute _bucketArn
         , TF.assign "buffer_interval" <$> TF.attribute _bufferInterval
         , TF.assign "buffer_size" <$> TF.attribute _bufferSize
+        , TF.assign "cloudwatch_logging_options" <$> TF.attribute _cloudwatchLoggingOptions
         , TF.assign "compression_format" <$> TF.attribute _compressionFormat
         , TF.assign "kms_key_arn" <$> TF.attribute _kmsKeyArn
         , TF.assign "prefix" <$> TF.attribute _prefix
@@ -16191,6 +16672,10 @@ instance TF.IsObject (S3BackupConfigurationSetting s) where
 
 instance TF.IsValid (S3BackupConfigurationSetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_cloudwatchLoggingOptions"
+                  (_cloudwatchLoggingOptions
+                      :: S3BackupConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
+                  TF.validator
 
 instance P.HasBucketArn (S3BackupConfigurationSetting s) (TF.Attr s P.Text) where
     bucketArn =
@@ -16206,6 +16691,11 @@ instance P.HasBufferSize (S3BackupConfigurationSetting s) (TF.Attr s P.Int) wher
     bufferSize =
         P.lens (_bufferSize :: S3BackupConfigurationSetting s -> TF.Attr s P.Int)
                (\s a -> s { _bufferSize = a } :: S3BackupConfigurationSetting s)
+
+instance P.HasCloudwatchLoggingOptions (S3BackupConfigurationSetting s) (TF.Attr s (CloudwatchLoggingOptionsSetting s)) where
+    cloudwatchLoggingOptions =
+        P.lens (_cloudwatchLoggingOptions :: S3BackupConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
+               (\s a -> s { _cloudwatchLoggingOptions = a } :: S3BackupConfigurationSetting s)
 
 instance P.HasCompressionFormat (S3BackupConfigurationSetting s) (TF.Attr s P.Text) where
     compressionFormat =
@@ -16232,25 +16722,28 @@ instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (S3BackupCon
 
 -- | @s3_configuration@ nested settings.
 data S3ConfigurationSetting s = S3ConfigurationSetting'
-    { _bucketArn         :: TF.Attr s P.Text
+    { _bucketArn                :: TF.Attr s P.Text
     -- ^ @bucket_arn@ - (Required)
     --
-    , _bufferInterval    :: TF.Attr s P.Int
+    , _bufferInterval           :: TF.Attr s P.Int
     -- ^ @buffer_interval@ - (Optional)
     --
-    , _bufferSize        :: TF.Attr s P.Int
+    , _bufferSize               :: TF.Attr s P.Int
     -- ^ @buffer_size@ - (Optional)
     --
-    , _compressionFormat :: TF.Attr s P.Text
+    , _cloudwatchLoggingOptions :: TF.Attr s (CloudwatchLoggingOptionsSetting s)
+    -- ^ @cloudwatch_logging_options@ - (Optional)
+    --
+    , _compressionFormat        :: TF.Attr s P.Text
     -- ^ @compression_format@ - (Optional)
     --
-    , _kmsKeyArn         :: TF.Attr s P.Text
+    , _kmsKeyArn                :: TF.Attr s P.Text
     -- ^ @kms_key_arn@ - (Optional)
     --
-    , _prefix            :: TF.Attr s P.Text
+    , _prefix                   :: TF.Attr s P.Text
     -- ^ @prefix@ - (Optional)
     --
-    , _roleArn           :: TF.Attr s P.Text
+    , _roleArn                  :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -16265,6 +16758,7 @@ s3ConfigurationSetting _bucketArn _roleArn =
         { _bucketArn = _bucketArn
         , _bufferInterval = TF.value 300
         , _bufferSize = TF.value 5
+        , _cloudwatchLoggingOptions = TF.Nil
         , _compressionFormat = TF.value "UNCOMPRESSED"
         , _kmsKeyArn = TF.Nil
         , _prefix = TF.Nil
@@ -16277,6 +16771,7 @@ instance TF.IsObject (S3ConfigurationSetting s) where
         [ TF.assign "bucket_arn" <$> TF.attribute _bucketArn
         , TF.assign "buffer_interval" <$> TF.attribute _bufferInterval
         , TF.assign "buffer_size" <$> TF.attribute _bufferSize
+        , TF.assign "cloudwatch_logging_options" <$> TF.attribute _cloudwatchLoggingOptions
         , TF.assign "compression_format" <$> TF.attribute _compressionFormat
         , TF.assign "kms_key_arn" <$> TF.attribute _kmsKeyArn
         , TF.assign "prefix" <$> TF.attribute _prefix
@@ -16285,6 +16780,10 @@ instance TF.IsObject (S3ConfigurationSetting s) where
 
 instance TF.IsValid (S3ConfigurationSetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_cloudwatchLoggingOptions"
+                  (_cloudwatchLoggingOptions
+                      :: S3ConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
+                  TF.validator
 
 instance P.HasBucketArn (S3ConfigurationSetting s) (TF.Attr s P.Text) where
     bucketArn =
@@ -16300,6 +16799,11 @@ instance P.HasBufferSize (S3ConfigurationSetting s) (TF.Attr s P.Int) where
     bufferSize =
         P.lens (_bufferSize :: S3ConfigurationSetting s -> TF.Attr s P.Int)
                (\s a -> s { _bufferSize = a } :: S3ConfigurationSetting s)
+
+instance P.HasCloudwatchLoggingOptions (S3ConfigurationSetting s) (TF.Attr s (CloudwatchLoggingOptionsSetting s)) where
+    cloudwatchLoggingOptions =
+        P.lens (_cloudwatchLoggingOptions :: S3ConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
+               (\s a -> s { _cloudwatchLoggingOptions = a } :: S3ConfigurationSetting s)
 
 instance P.HasCompressionFormat (S3ConfigurationSetting s) (TF.Attr s P.Text) where
     compressionFormat =
@@ -16836,8 +17340,14 @@ instance P.HasUpdateBehavior (SchemaChangePolicySetting s) (TF.Attr s P.Text) wh
 
 -- | @schema_configuration@ nested settings.
 data SchemaConfigurationSetting s = SchemaConfigurationSetting'
-    { _databaseName :: TF.Attr s P.Text
+    { _catalogId    :: TF.Attr s P.Text
+    -- ^ @catalog_id@ - (Optional)
+    --
+    , _databaseName :: TF.Attr s P.Text
     -- ^ @database_name@ - (Required)
+    --
+    , _region       :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional)
     --
     , _roleArn      :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
@@ -16858,7 +17368,9 @@ schemaConfigurationSetting
     -> SchemaConfigurationSetting s
 schemaConfigurationSetting _roleArn _databaseName _tableName =
     SchemaConfigurationSetting'
-        { _databaseName = _databaseName
+        { _catalogId = TF.Nil
+        , _databaseName = _databaseName
+        , _region = TF.Nil
         , _roleArn = _roleArn
         , _tableName = _tableName
         , _versionId = TF.value "LATEST"
@@ -16867,7 +17379,9 @@ schemaConfigurationSetting _roleArn _databaseName _tableName =
 instance TF.IsValue  (SchemaConfigurationSetting s)
 instance TF.IsObject (SchemaConfigurationSetting s) where
     toObject SchemaConfigurationSetting'{..} = P.catMaybes
-        [ TF.assign "database_name" <$> TF.attribute _databaseName
+        [ TF.assign "catalog_id" <$> TF.attribute _catalogId
+        , TF.assign "database_name" <$> TF.attribute _databaseName
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "role_arn" <$> TF.attribute _roleArn
         , TF.assign "table_name" <$> TF.attribute _tableName
         , TF.assign "version_id" <$> TF.attribute _versionId
@@ -16876,10 +17390,20 @@ instance TF.IsObject (SchemaConfigurationSetting s) where
 instance TF.IsValid (SchemaConfigurationSetting s) where
     validator = P.mempty
 
+instance P.HasCatalogId (SchemaConfigurationSetting s) (TF.Attr s P.Text) where
+    catalogId =
+        P.lens (_catalogId :: SchemaConfigurationSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _catalogId = a } :: SchemaConfigurationSetting s)
+
 instance P.HasDatabaseName (SchemaConfigurationSetting s) (TF.Attr s P.Text) where
     databaseName =
         P.lens (_databaseName :: SchemaConfigurationSetting s -> TF.Attr s P.Text)
                (\s a -> s { _databaseName = a } :: SchemaConfigurationSetting s)
+
+instance P.HasRegion (SchemaConfigurationSetting s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: SchemaConfigurationSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: SchemaConfigurationSetting s)
 
 instance P.HasRoleArn (SchemaConfigurationSetting s) (TF.Attr s P.Text) where
     roleArn =
@@ -18203,7 +18727,10 @@ instance P.HasSseKmsEncryptedObjects (SourceSelectionCriteriaSetting s) (TF.Attr
 
 -- | @splunk_configuration@ nested settings.
 data SplunkConfigurationSetting s = SplunkConfigurationSetting'
-    { _hecAcknowledgmentTimeout :: TF.Attr s P.Int
+    { _cloudwatchLoggingOptions :: TF.Attr s (CloudwatchLoggingOptionsSetting s)
+    -- ^ @cloudwatch_logging_options@ - (Optional)
+    --
+    , _hecAcknowledgmentTimeout :: TF.Attr s P.Int
     -- ^ @hec_acknowledgment_timeout@ - (Optional)
     --
     , _hecEndpoint              :: TF.Attr s P.Text
@@ -18233,7 +18760,8 @@ splunkConfigurationSetting
     -> SplunkConfigurationSetting s
 splunkConfigurationSetting _hecEndpoint _hecToken =
     SplunkConfigurationSetting'
-        { _hecAcknowledgmentTimeout = TF.value 180
+        { _cloudwatchLoggingOptions = TF.Nil
+        , _hecAcknowledgmentTimeout = TF.value 180
         , _hecEndpoint = _hecEndpoint
         , _hecEndpointType = TF.value "Raw"
         , _hecToken = _hecToken
@@ -18245,7 +18773,8 @@ splunkConfigurationSetting _hecEndpoint _hecToken =
 instance TF.IsValue  (SplunkConfigurationSetting s)
 instance TF.IsObject (SplunkConfigurationSetting s) where
     toObject SplunkConfigurationSetting'{..} = P.catMaybes
-        [ TF.assign "hec_acknowledgment_timeout" <$> TF.attribute _hecAcknowledgmentTimeout
+        [ TF.assign "cloudwatch_logging_options" <$> TF.attribute _cloudwatchLoggingOptions
+        , TF.assign "hec_acknowledgment_timeout" <$> TF.attribute _hecAcknowledgmentTimeout
         , TF.assign "hec_endpoint" <$> TF.attribute _hecEndpoint
         , TF.assign "hec_endpoint_type" <$> TF.attribute _hecEndpointType
         , TF.assign "hec_token" <$> TF.attribute _hecToken
@@ -18256,10 +18785,19 @@ instance TF.IsObject (SplunkConfigurationSetting s) where
 
 instance TF.IsValid (SplunkConfigurationSetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_cloudwatchLoggingOptions"
+                  (_cloudwatchLoggingOptions
+                      :: SplunkConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_processingConfiguration"
                   (_processingConfiguration
                       :: SplunkConfigurationSetting s -> TF.Attr s (ProcessingConfigurationSetting s))
                   TF.validator
+
+instance P.HasCloudwatchLoggingOptions (SplunkConfigurationSetting s) (TF.Attr s (CloudwatchLoggingOptionsSetting s)) where
+    cloudwatchLoggingOptions =
+        P.lens (_cloudwatchLoggingOptions :: SplunkConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
+               (\s a -> s { _cloudwatchLoggingOptions = a } :: SplunkConfigurationSetting s)
 
 instance P.HasHecAcknowledgmentTimeout (SplunkConfigurationSetting s) (TF.Attr s P.Int) where
     hecAcknowledgmentTimeout =
@@ -18313,6 +18851,9 @@ data SpotOptionsSetting s = SpotOptionsSetting'
     , _spotInstanceType             :: TF.Attr s P.Text
     -- ^ @spot_instance_type@ - (Optional)
     --
+    , _validUntil                   :: TF.Attr s P.Text
+    -- ^ @valid_until@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @spot_options@ settings value.
@@ -18324,6 +18865,7 @@ spotOptionsSetting =
         , _instanceInterruptionBehavior = TF.Nil
         , _maxPrice = TF.Nil
         , _spotInstanceType = TF.Nil
+        , _validUntil = TF.Nil
         }
 
 instance TF.IsValue  (SpotOptionsSetting s)
@@ -18333,6 +18875,7 @@ instance TF.IsObject (SpotOptionsSetting s) where
         , TF.assign "instance_interruption_behavior" <$> TF.attribute _instanceInterruptionBehavior
         , TF.assign "max_price" <$> TF.attribute _maxPrice
         , TF.assign "spot_instance_type" <$> TF.attribute _spotInstanceType
+        , TF.assign "valid_until" <$> TF.attribute _validUntil
         ]
 
 instance TF.IsValid (SpotOptionsSetting s) where
@@ -18357,6 +18900,11 @@ instance P.HasSpotInstanceType (SpotOptionsSetting s) (TF.Attr s P.Text) where
     spotInstanceType =
         P.lens (_spotInstanceType :: SpotOptionsSetting s -> TF.Attr s P.Text)
                (\s a -> s { _spotInstanceType = a } :: SpotOptionsSetting s)
+
+instance P.HasValidUntil (SpotOptionsSetting s) (TF.Attr s P.Text) where
+    validUntil =
+        P.lens (_validUntil :: SpotOptionsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _validUntil = a } :: SpotOptionsSetting s)
 
 instance s ~ s' => P.HasComputedValidUntil (TF.Ref s' (SpotOptionsSetting s)) (TF.Attr s P.Text) where
     computedValidUntil x = TF.compute (TF.refKey x) "valid_until"
@@ -20000,7 +20548,10 @@ instance s ~ s' => P.HasComputedRateLimit (TF.Ref s' (ThrottleSettingsSetting s)
 
 -- | @thumbnail_config@ nested settings.
 data ThumbnailConfigSetting s = ThumbnailConfigSetting'
-    { _storageClass :: TF.Attr s P.Text
+    { _bucket       :: TF.Attr s P.Text
+    -- ^ @bucket@ - (Optional)
+    --
+    , _storageClass :: TF.Attr s P.Text
     -- ^ @storage_class@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -20010,17 +20561,24 @@ thumbnailConfigSetting
     :: ThumbnailConfigSetting s
 thumbnailConfigSetting =
     ThumbnailConfigSetting'
-        { _storageClass = TF.Nil
+        { _bucket = TF.Nil
+        , _storageClass = TF.Nil
         }
 
 instance TF.IsValue  (ThumbnailConfigSetting s)
 instance TF.IsObject (ThumbnailConfigSetting s) where
     toObject ThumbnailConfigSetting'{..} = P.catMaybes
-        [ TF.assign "storage_class" <$> TF.attribute _storageClass
+        [ TF.assign "bucket" <$> TF.attribute _bucket
+        , TF.assign "storage_class" <$> TF.attribute _storageClass
         ]
 
 instance TF.IsValid (ThumbnailConfigSetting s) where
     validator = P.mempty
+
+instance P.HasBucket (ThumbnailConfigSetting s) (TF.Attr s P.Text) where
+    bucket =
+        P.lens (_bucket :: ThumbnailConfigSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _bucket = a } :: ThumbnailConfigSetting s)
 
 instance P.HasStorageClass (ThumbnailConfigSetting s) (TF.Attr s P.Text) where
     storageClass =
@@ -20218,6 +20776,9 @@ data TopicSetting s = TopicSetting'
     , _filterSuffix :: TF.Attr s P.Text
     -- ^ @filter_suffix@ - (Optional)
     --
+    , _id           :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
     , _topicArn     :: TF.Attr s P.Text
     -- ^ @topic_arn@ - (Required)
     --
@@ -20233,6 +20794,7 @@ topicSetting _topicArn _events =
         { _events = _events
         , _filterPrefix = TF.Nil
         , _filterSuffix = TF.Nil
+        , _id = TF.Nil
         , _topicArn = _topicArn
         }
 
@@ -20242,6 +20804,7 @@ instance TF.IsObject (TopicSetting s) where
         [ TF.assign "events" <$> TF.attribute _events
         , TF.assign "filter_prefix" <$> TF.attribute _filterPrefix
         , TF.assign "filter_suffix" <$> TF.attribute _filterSuffix
+        , TF.assign "id" <$> TF.attribute _id
         , TF.assign "topic_arn" <$> TF.attribute _topicArn
         ]
 
@@ -20262,6 +20825,11 @@ instance P.HasFilterSuffix (TopicSetting s) (TF.Attr s P.Text) where
     filterSuffix =
         P.lens (_filterSuffix :: TopicSetting s -> TF.Attr s P.Text)
                (\s a -> s { _filterSuffix = a } :: TopicSetting s)
+
+instance P.HasId (TopicSetting s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: TopicSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: TopicSetting s)
 
 instance P.HasTopicArn (TopicSetting s) (TF.Attr s P.Text) where
     topicArn =
@@ -20659,6 +21227,21 @@ data VerificationMessageTemplateSetting s = VerificationMessageTemplateSetting'
     { _defaultEmailOption :: TF.Attr s P.Text
     -- ^ @default_email_option@ - (Optional)
     --
+    , _emailMessage       :: TF.Attr s P.Text
+    -- ^ @email_message@ - (Optional)
+    --
+    , _emailMessageByLink :: TF.Attr s P.Text
+    -- ^ @email_message_by_link@ - (Optional)
+    --
+    , _emailSubject       :: TF.Attr s P.Text
+    -- ^ @email_subject@ - (Optional)
+    --
+    , _emailSubjectByLink :: TF.Attr s P.Text
+    -- ^ @email_subject_by_link@ - (Optional)
+    --
+    , _smsMessage         :: TF.Attr s P.Text
+    -- ^ @sms_message@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @verification_message_template@ settings value.
@@ -20667,12 +21250,22 @@ verificationMessageTemplateSetting
 verificationMessageTemplateSetting =
     VerificationMessageTemplateSetting'
         { _defaultEmailOption = TF.value "CONFIRM_WITH_CODE"
+        , _emailMessage = TF.Nil
+        , _emailMessageByLink = TF.Nil
+        , _emailSubject = TF.Nil
+        , _emailSubjectByLink = TF.Nil
+        , _smsMessage = TF.Nil
         }
 
 instance TF.IsValue  (VerificationMessageTemplateSetting s)
 instance TF.IsObject (VerificationMessageTemplateSetting s) where
     toObject VerificationMessageTemplateSetting'{..} = P.catMaybes
         [ TF.assign "default_email_option" <$> TF.attribute _defaultEmailOption
+        , TF.assign "email_message" <$> TF.attribute _emailMessage
+        , TF.assign "email_message_by_link" <$> TF.attribute _emailMessageByLink
+        , TF.assign "email_subject" <$> TF.attribute _emailSubject
+        , TF.assign "email_subject_by_link" <$> TF.attribute _emailSubjectByLink
+        , TF.assign "sms_message" <$> TF.attribute _smsMessage
         ]
 
 instance TF.IsValid (VerificationMessageTemplateSetting s) where
@@ -20682,6 +21275,31 @@ instance P.HasDefaultEmailOption (VerificationMessageTemplateSetting s) (TF.Attr
     defaultEmailOption =
         P.lens (_defaultEmailOption :: VerificationMessageTemplateSetting s -> TF.Attr s P.Text)
                (\s a -> s { _defaultEmailOption = a } :: VerificationMessageTemplateSetting s)
+
+instance P.HasEmailMessage (VerificationMessageTemplateSetting s) (TF.Attr s P.Text) where
+    emailMessage =
+        P.lens (_emailMessage :: VerificationMessageTemplateSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _emailMessage = a } :: VerificationMessageTemplateSetting s)
+
+instance P.HasEmailMessageByLink (VerificationMessageTemplateSetting s) (TF.Attr s P.Text) where
+    emailMessageByLink =
+        P.lens (_emailMessageByLink :: VerificationMessageTemplateSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _emailMessageByLink = a } :: VerificationMessageTemplateSetting s)
+
+instance P.HasEmailSubject (VerificationMessageTemplateSetting s) (TF.Attr s P.Text) where
+    emailSubject =
+        P.lens (_emailSubject :: VerificationMessageTemplateSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _emailSubject = a } :: VerificationMessageTemplateSetting s)
+
+instance P.HasEmailSubjectByLink (VerificationMessageTemplateSetting s) (TF.Attr s P.Text) where
+    emailSubjectByLink =
+        P.lens (_emailSubjectByLink :: VerificationMessageTemplateSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _emailSubjectByLink = a } :: VerificationMessageTemplateSetting s)
+
+instance P.HasSmsMessage (VerificationMessageTemplateSetting s) (TF.Attr s P.Text) where
+    smsMessage =
+        P.lens (_smsMessage :: VerificationMessageTemplateSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _smsMessage = a } :: VerificationMessageTemplateSetting s)
 
 instance s ~ s' => P.HasComputedEmailMessage (TF.Ref s' (VerificationMessageTemplateSetting s)) (TF.Attr s P.Text) where
     computedEmailMessage x = TF.compute (TF.refKey x) "email_message"
@@ -20739,20 +21357,72 @@ instance P.HasMfaDelete (VersioningSetting s) (TF.Attr s P.Bool) where
 
 -- | @vgw_telemetry@ nested settings.
 data VgwTelemetrySetting s = VgwTelemetrySetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _acceptedRouteCount :: TF.Attr s P.Int
+    -- ^ @accepted_route_count@ - (Optional)
+    --
+    , _lastStatusChange   :: TF.Attr s P.Text
+    -- ^ @last_status_change@ - (Optional)
+    --
+    , _outsideIpAddress   :: TF.Attr s P.Text
+    -- ^ @outside_ip_address@ - (Optional)
+    --
+    , _status             :: TF.Attr s P.Text
+    -- ^ @status@ - (Optional)
+    --
+    , _statusMessage      :: TF.Attr s P.Text
+    -- ^ @status_message@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @vgw_telemetry@ settings value.
 vgwTelemetrySetting
     :: VgwTelemetrySetting s
 vgwTelemetrySetting =
     VgwTelemetrySetting'
+        { _acceptedRouteCount = TF.Nil
+        , _lastStatusChange = TF.Nil
+        , _outsideIpAddress = TF.Nil
+        , _status = TF.Nil
+        , _statusMessage = TF.Nil
+        }
 
 instance TF.IsValue  (VgwTelemetrySetting s)
 instance TF.IsObject (VgwTelemetrySetting s) where
-    toObject VgwTelemetrySetting' = []
+    toObject VgwTelemetrySetting'{..} = P.catMaybes
+        [ TF.assign "accepted_route_count" <$> TF.attribute _acceptedRouteCount
+        , TF.assign "last_status_change" <$> TF.attribute _lastStatusChange
+        , TF.assign "outside_ip_address" <$> TF.attribute _outsideIpAddress
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "status_message" <$> TF.attribute _statusMessage
+        ]
 
 instance TF.IsValid (VgwTelemetrySetting s) where
     validator = P.mempty
+
+instance P.HasAcceptedRouteCount (VgwTelemetrySetting s) (TF.Attr s P.Int) where
+    acceptedRouteCount =
+        P.lens (_acceptedRouteCount :: VgwTelemetrySetting s -> TF.Attr s P.Int)
+               (\s a -> s { _acceptedRouteCount = a } :: VgwTelemetrySetting s)
+
+instance P.HasLastStatusChange (VgwTelemetrySetting s) (TF.Attr s P.Text) where
+    lastStatusChange =
+        P.lens (_lastStatusChange :: VgwTelemetrySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _lastStatusChange = a } :: VgwTelemetrySetting s)
+
+instance P.HasOutsideIpAddress (VgwTelemetrySetting s) (TF.Attr s P.Text) where
+    outsideIpAddress =
+        P.lens (_outsideIpAddress :: VgwTelemetrySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _outsideIpAddress = a } :: VgwTelemetrySetting s)
+
+instance P.HasStatus (VgwTelemetrySetting s) (TF.Attr s P.Text) where
+    status =
+        P.lens (_status :: VgwTelemetrySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _status = a } :: VgwTelemetrySetting s)
+
+instance P.HasStatusMessage (VgwTelemetrySetting s) (TF.Attr s P.Text) where
+    statusMessage =
+        P.lens (_statusMessage :: VgwTelemetrySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _statusMessage = a } :: VgwTelemetrySetting s)
 
 instance s ~ s' => P.HasComputedAcceptedRouteCount (TF.Ref s' (VgwTelemetrySetting s)) (TF.Attr s P.Int) where
     computedAcceptedRouteCount x = TF.compute (TF.refKey x) "accepted_route_count"
