@@ -78,7 +78,7 @@ data BootscriptData s = BootscriptData'
 bootscriptData
     :: P.DataSource (BootscriptData s)
 bootscriptData =
-    TF.unsafeDataSource "scaleway_bootscript" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "scaleway_bootscript" TF.validator $
         BootscriptData'
             { _name = TF.Nil
             , _nameFilter = TF.Nil
@@ -156,7 +156,7 @@ imageData
     :: TF.Attr s P.Text -- ^ @architecture@ - 'P.architecture'
     -> P.DataSource (ImageData s)
 imageData _architecture =
-    TF.unsafeDataSource "scaleway_image" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "scaleway_image" TF.validator $
         ImageData'
             { _architecture = _architecture
             , _mostRecent = TF.Nil
@@ -229,7 +229,7 @@ securityGroupData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SecurityGroupData s)
 securityGroupData _name =
-    TF.unsafeDataSource "scaleway_security_group" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "scaleway_security_group" TF.validator $
         SecurityGroupData'
             { _name = _name
             }
@@ -271,7 +271,7 @@ volumeData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (VolumeData s)
 volumeData _name =
-    TF.unsafeDataSource "scaleway_volume" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "scaleway_volume" TF.validator $
         VolumeData'
             { _name = _name
             }
