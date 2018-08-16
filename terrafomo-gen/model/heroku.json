@@ -66,7 +66,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "addon_config",
+            "name": "config",
             "type": "TypeMap",
             "conflictsWith": [],
             "optional": false,
@@ -90,7 +90,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "addon_config_vars",
+            "name": "config_vars",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -220,7 +220,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "app_buildpacks",
+            "name": "buildpacks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -244,7 +244,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "app_config_vars",
+            "name": "config_vars",
             "type": "TypeMap",
             "conflictsWith": [],
             "optional": false,
@@ -316,7 +316,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "app_organization",
+            "name": "organization",
             "schemas": [
               {
                 "name": "locked",
@@ -799,7 +799,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "space_outbound_ips",
+            "name": "outbound_ips",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -849,7 +849,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "space_trusted_ip_ranges",
+            "name": "trusted_ip_ranges",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -890,7 +890,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "space_app_access_permissions",
+            "name": "permissions",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -931,7 +931,7 @@
           "minItems": 1,
           "maxItems": 0,
           "resource": {
-            "name": "space_inbound_ruleset_rule",
+            "name": "rule",
             "schemas": [
               {
                 "name": "action",
@@ -1078,7 +1078,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "space_vpn_connection_routable_cidrs",
+            "name": "routable_cidrs",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1126,7 +1126,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "space_vpn_connection_tunnels",
+            "name": "tunnels",
             "schemas": [
               {
                 "name": "ip",
@@ -1196,7 +1196,7 @@
           "minItems": 1,
           "maxItems": 4,
           "schema": {
-            "name": "team_collaborator_permissions",
+            "name": "permissions",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1239,7 +1239,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "app_buildpacks",
+            "name": "buildpacks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1323,7 +1323,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "app_organization",
+            "name": "organization",
             "schemas": [
               {
                 "name": "locked",
@@ -1453,7 +1453,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "space_outbound_ips",
+            "name": "outbound_ips",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1513,7 +1513,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "space_trusted_ip_ranges",
+            "name": "trusted_ip_ranges",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1566,7 +1566,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "space_peering_info_dyno_cidr_blocks",
+            "name": "dyno_cidr_blocks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1602,7 +1602,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "space_peering_info_unavailable_cidr_blocks",
+            "name": "unavailable_cidr_blocks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
