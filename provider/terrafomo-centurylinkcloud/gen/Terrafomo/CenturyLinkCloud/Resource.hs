@@ -46,10 +46,9 @@ import GHC.Base (($))
 
 import Terrafomo.CenturyLinkCloud.Settings
 
-import qualified Data.Hashable                       as P
-import qualified Data.HashMap.Strict                 as P
-import qualified Data.HashMap.Strict                 as Map
 import qualified Data.List.NonEmpty                  as P
+import qualified Data.Map.Strict                     as P
+import qualified Data.Map.Strict                     as Map
 import qualified Data.Maybe                          as P
 import qualified Data.Monoid                         as P
 import qualified Data.Text                           as P
@@ -70,22 +69,22 @@ import qualified Terrafomo.Validator                 as TF
 -- See the <https://www.terraform.io/docs/providers/clc/r/group.html terraform documentation>
 -- for more information.
 data GroupResource s = GroupResource'
-    { _customFields :: TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]
+    { _customFields :: TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]
     -- ^ @custom_fields@ - (Optional)
     --
-    , _description :: TF.Attr s P.Text
+    , _description  :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _locationId :: TF.Attr s P.Text
+    , _locationId   :: TF.Attr s P.Text
     -- ^ @location_id@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
+    , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _parent :: TF.Attr s P.Text
+    , _parent       :: TF.Attr s P.Text
     -- ^ @parent@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 groupResource
     :: TF.Attr s P.Text -- ^ @location_id@ - 'P.locationId'
@@ -93,7 +92,7 @@ groupResource
     -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
     -> P.Resource (GroupResource s)
 groupResource _locationId _name _parent =
-    TF.newResource "clc_group" TF.validator $
+    TF.unsafeResource "clc_group" P.defaultProvider TF.validator $
         GroupResource'
             { _customFields = TF.Nil
             , _description = TF.Nil
@@ -114,9 +113,9 @@ instance TF.IsObject (GroupResource s) where
 instance TF.IsValid (GroupResource s) where
     validator = P.mempty
 
-instance P.HasCustomFields (GroupResource s) (TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]) where
+instance P.HasCustomFields (GroupResource s) (TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]) where
     customFields =
-        P.lens (_customFields :: GroupResource s -> TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))])
+        P.lens (_customFields :: GroupResource s -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))])
                (\s a -> s { _customFields = a } :: GroupResource s)
 
 instance P.HasDescription (GroupResource s) (TF.Attr s P.Text) where
@@ -159,7 +158,7 @@ data LoadBalancerResource s = LoadBalancerResource'
     , _status      :: TF.Attr s P.Text
     -- ^ @status@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 loadBalancerResource
     :: TF.Attr s P.Text -- ^ @data_center@ - 'P.dataCenter'
@@ -167,7 +166,7 @@ loadBalancerResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LoadBalancerResource s)
 loadBalancerResource _dataCenter _description _name =
-    TF.newResource "clc_load_balancer" TF.validator $
+    TF.unsafeResource "clc_load_balancer" P.defaultProvider TF.validator $
         LoadBalancerResource'
             { _dataCenter = _dataCenter
             , _description = _description
@@ -214,34 +213,34 @@ instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (LoadBalancerResource s)) (
 -- See the <https://www.terraform.io/docs/providers/clc/r/load_balancer_pool.html terraform documentation>
 -- for more information.
 data LoadBalancerPoolResource s = LoadBalancerPoolResource'
-    { _dataCenter :: TF.Attr s P.Text
+    { _dataCenter   :: TF.Attr s P.Text
     -- ^ @data_center@ - (Required)
     --
     , _loadBalancer :: TF.Attr s P.Text
     -- ^ @load_balancer@ - (Required)
     --
-    , _method :: TF.Attr s P.Text
+    , _method       :: TF.Attr s P.Text
     -- ^ @method@ - (Optional)
     --
-    , _nodes :: TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]
+    , _nodes        :: TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]
     -- ^ @nodes@ - (Required)
     --
-    , _persistence :: TF.Attr s P.Text
+    , _persistence  :: TF.Attr s P.Text
     -- ^ @persistence@ - (Optional)
     --
-    , _port :: TF.Attr s P.Integer
+    , _port         :: TF.Attr s P.Int
     -- ^ @port@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 loadBalancerPoolResource
     :: TF.Attr s P.Text -- ^ @data_center@ - 'P.dataCenter'
     -> TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
-    -> TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))] -- ^ @nodes@ - 'P.nodes'
-    -> TF.Attr s P.Integer -- ^ @port@ - 'P.port'
+    -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))] -- ^ @nodes@ - 'P.nodes'
+    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
     -> P.Resource (LoadBalancerPoolResource s)
 loadBalancerPoolResource _dataCenter _loadBalancer _nodes _port =
-    TF.newResource "clc_load_balancer_pool" TF.validator $
+    TF.unsafeResource "clc_load_balancer_pool" P.defaultProvider TF.validator $
         LoadBalancerPoolResource'
             { _dataCenter = _dataCenter
             , _loadBalancer = _loadBalancer
@@ -279,9 +278,9 @@ instance P.HasMethod (LoadBalancerPoolResource s) (TF.Attr s P.Text) where
         P.lens (_method :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _method = a } :: LoadBalancerPoolResource s)
 
-instance P.HasNodes (LoadBalancerPoolResource s) (TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]) where
+instance P.HasNodes (LoadBalancerPoolResource s) (TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]) where
     nodes =
-        P.lens (_nodes :: LoadBalancerPoolResource s -> TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))])
+        P.lens (_nodes :: LoadBalancerPoolResource s -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))])
                (\s a -> s { _nodes = a } :: LoadBalancerPoolResource s)
 
 instance P.HasPersistence (LoadBalancerPoolResource s) (TF.Attr s P.Text) where
@@ -289,9 +288,9 @@ instance P.HasPersistence (LoadBalancerPoolResource s) (TF.Attr s P.Text) where
         P.lens (_persistence :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _persistence = a } :: LoadBalancerPoolResource s)
 
-instance P.HasPort (LoadBalancerPoolResource s) (TF.Attr s P.Integer) where
+instance P.HasPort (LoadBalancerPoolResource s) (TF.Attr s P.Int) where
     port =
-        P.lens (_port :: LoadBalancerPoolResource s -> TF.Attr s P.Integer)
+        P.lens (_port :: LoadBalancerPoolResource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: LoadBalancerPoolResource s)
 
 -- | @clc_public_ip@ Resource.
@@ -299,23 +298,23 @@ instance P.HasPort (LoadBalancerPoolResource s) (TF.Attr s P.Integer) where
 -- See the <https://www.terraform.io/docs/providers/clc/r/public_ip.html terraform documentation>
 -- for more information.
 data PublicIpResource s = PublicIpResource'
-    { _ports :: TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]
+    { _ports :: TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]
     -- ^ @ports@ - (Required)
     --
     , _serverId :: TF.Attr s P.Text
     -- ^ @server_id@ - (Required, Forces New)
     --
-    , _sourceRestrictions :: TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]
+    , _sourceRestrictions :: TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]
     -- ^ @source_restrictions@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 publicIpResource
-    :: TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))] -- ^ @ports@ - 'P.ports'
+    :: TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))] -- ^ @ports@ - 'P.ports'
     -> TF.Attr s P.Text -- ^ @server_id@ - 'P.serverId'
     -> P.Resource (PublicIpResource s)
 publicIpResource _ports _serverId =
-    TF.newResource "clc_public_ip" TF.validator $
+    TF.unsafeResource "clc_public_ip" P.defaultProvider TF.validator $
         PublicIpResource'
             { _ports = _ports
             , _serverId = _serverId
@@ -332,9 +331,9 @@ instance TF.IsObject (PublicIpResource s) where
 instance TF.IsValid (PublicIpResource s) where
     validator = P.mempty
 
-instance P.HasPorts (PublicIpResource s) (TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]) where
+instance P.HasPorts (PublicIpResource s) (TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]) where
     ports =
-        P.lens (_ports :: PublicIpResource s -> TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))])
+        P.lens (_ports :: PublicIpResource s -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))])
                (\s a -> s { _ports = a } :: PublicIpResource s)
 
 instance P.HasServerId (PublicIpResource s) (TF.Attr s P.Text) where
@@ -342,9 +341,9 @@ instance P.HasServerId (PublicIpResource s) (TF.Attr s P.Text) where
         P.lens (_serverId :: PublicIpResource s -> TF.Attr s P.Text)
                (\s a -> s { _serverId = a } :: PublicIpResource s)
 
-instance P.HasSourceRestrictions (PublicIpResource s) (TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]) where
+instance P.HasSourceRestrictions (PublicIpResource s) (TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]) where
     sourceRestrictions =
-        P.lens (_sourceRestrictions :: PublicIpResource s -> TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))])
+        P.lens (_sourceRestrictions :: PublicIpResource s -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))])
                (\s a -> s { _sourceRestrictions = a } :: PublicIpResource s)
 
 instance s ~ s' => P.HasComputedInternalIpAddress (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
@@ -358,16 +357,16 @@ data ServerResource s = ServerResource'
     { _aaPolicyId :: TF.Attr s P.Text
     -- ^ @aa_policy_id@ - (Optional)
     --
-    , _additionalDisks :: TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]
+    , _additionalDisks :: TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]
     -- ^ @additional_disks@ - (Optional)
     --
     , _configurationId :: TF.Attr s P.Text
     -- ^ @configuration_id@ - (Optional, Forces New)
     --
-    , _cpu :: TF.Attr s P.Integer
+    , _cpu :: TF.Attr s P.Int
     -- ^ @cpu@ - (Required)
     --
-    , _customFields :: TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]
+    , _customFields :: TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]
     -- ^ @custom_fields@ - (Optional)
     --
     , _description :: TF.Attr s P.Text
@@ -376,10 +375,10 @@ data ServerResource s = ServerResource'
     , _groupId :: TF.Attr s P.Text
     -- ^ @group_id@ - (Required)
     --
-    , _memoryMb :: TF.Attr s P.Integer
+    , _memoryMb :: TF.Attr s P.Int
     -- ^ @memory_mb@ - (Required)
     --
-    , _metadata :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _metadata :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @metadata@ - (Optional)
     --
     , _nameTemplate :: TF.Attr s P.Text
@@ -391,7 +390,7 @@ data ServerResource s = ServerResource'
     , _osType :: TF.Attr s P.Text
     -- ^ @os_type@ - (Optional, Forces New)
     --
-    , _packages :: TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]
+    , _packages :: TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]
     -- ^ @packages@ - (Optional)
     --
     , _sourceServerId :: TF.Attr s P.Text
@@ -403,17 +402,17 @@ data ServerResource s = ServerResource'
     , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 serverResource
-    :: TF.Attr s P.Integer -- ^ @cpu@ - 'P.cpu'
+    :: TF.Attr s P.Int -- ^ @cpu@ - 'P.cpu'
     -> TF.Attr s P.Text -- ^ @group_id@ - 'P.groupId'
-    -> TF.Attr s P.Integer -- ^ @memory_mb@ - 'P.memoryMb'
+    -> TF.Attr s P.Int -- ^ @memory_mb@ - 'P.memoryMb'
     -> TF.Attr s P.Text -- ^ @name_template@ - 'P.nameTemplate'
     -> TF.Attr s P.Text -- ^ @source_server_id@ - 'P.sourceServerId'
     -> P.Resource (ServerResource s)
 serverResource _cpu _groupId _memoryMb _nameTemplate _sourceServerId =
-    TF.newResource "clc_server" TF.validator $
+    TF.unsafeResource "clc_server" P.defaultProvider TF.validator $
         ServerResource'
             { _aaPolicyId = TF.Nil
             , _additionalDisks = TF.Nil
@@ -461,9 +460,9 @@ instance P.HasAaPolicyId (ServerResource s) (TF.Attr s P.Text) where
         P.lens (_aaPolicyId :: ServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _aaPolicyId = a } :: ServerResource s)
 
-instance P.HasAdditionalDisks (ServerResource s) (TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]) where
+instance P.HasAdditionalDisks (ServerResource s) (TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]) where
     additionalDisks =
-        P.lens (_additionalDisks :: ServerResource s -> TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))])
+        P.lens (_additionalDisks :: ServerResource s -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))])
                (\s a -> s { _additionalDisks = a } :: ServerResource s)
 
 instance P.HasConfigurationId (ServerResource s) (TF.Attr s P.Text) where
@@ -471,14 +470,14 @@ instance P.HasConfigurationId (ServerResource s) (TF.Attr s P.Text) where
         P.lens (_configurationId :: ServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _configurationId = a } :: ServerResource s)
 
-instance P.HasCpu (ServerResource s) (TF.Attr s P.Integer) where
+instance P.HasCpu (ServerResource s) (TF.Attr s P.Int) where
     cpu =
-        P.lens (_cpu :: ServerResource s -> TF.Attr s P.Integer)
+        P.lens (_cpu :: ServerResource s -> TF.Attr s P.Int)
                (\s a -> s { _cpu = a } :: ServerResource s)
 
-instance P.HasCustomFields (ServerResource s) (TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]) where
+instance P.HasCustomFields (ServerResource s) (TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]) where
     customFields =
-        P.lens (_customFields :: ServerResource s -> TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))])
+        P.lens (_customFields :: ServerResource s -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))])
                (\s a -> s { _customFields = a } :: ServerResource s)
 
 instance P.HasDescription (ServerResource s) (TF.Attr s P.Text) where
@@ -491,14 +490,14 @@ instance P.HasGroupId (ServerResource s) (TF.Attr s P.Text) where
         P.lens (_groupId :: ServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _groupId = a } :: ServerResource s)
 
-instance P.HasMemoryMb (ServerResource s) (TF.Attr s P.Integer) where
+instance P.HasMemoryMb (ServerResource s) (TF.Attr s P.Int) where
     memoryMb =
-        P.lens (_memoryMb :: ServerResource s -> TF.Attr s P.Integer)
+        P.lens (_memoryMb :: ServerResource s -> TF.Attr s P.Int)
                (\s a -> s { _memoryMb = a } :: ServerResource s)
 
-instance P.HasMetadata (ServerResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasMetadata (ServerResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     metadata =
-        P.lens (_metadata :: ServerResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_metadata :: ServerResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _metadata = a } :: ServerResource s)
 
 instance P.HasNameTemplate (ServerResource s) (TF.Attr s P.Text) where
@@ -516,9 +515,9 @@ instance P.HasOsType (ServerResource s) (TF.Attr s P.Text) where
         P.lens (_osType :: ServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _osType = a } :: ServerResource s)
 
-instance P.HasPackages (ServerResource s) (TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]) where
+instance P.HasPackages (ServerResource s) (TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]) where
     packages =
-        P.lens (_packages :: ServerResource s -> TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))])
+        P.lens (_packages :: ServerResource s -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))])
                (\s a -> s { _packages = a } :: ServerResource s)
 
 instance P.HasSourceServerId (ServerResource s) (TF.Attr s P.Text) where

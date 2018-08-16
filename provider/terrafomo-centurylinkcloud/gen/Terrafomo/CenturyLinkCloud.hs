@@ -13,10 +13,10 @@
 --
 module Terrafomo.CenturyLinkCloud
     ( module Terrafomo.CenturyLinkCloud.Lens
-    , module Terrafomo.CenturyLinkCloud.Settings
-    , module Terrafomo.CenturyLinkCloud.Resource
-    , module Terrafomo.CenturyLinkCloud.Types
     , module Terrafomo.CenturyLinkCloud.Provider
+    , module Terrafomo.CenturyLinkCloud.Resource
+    , module Terrafomo.CenturyLinkCloud.Settings
+    , module Terrafomo.CenturyLinkCloud.Types
     -- * Provider Aliases
     ) where
 

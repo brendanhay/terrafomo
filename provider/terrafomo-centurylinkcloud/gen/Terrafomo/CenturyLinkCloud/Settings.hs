@@ -24,10 +24,10 @@ import Data.Functor ((<$>))
 
 import GHC.Base (($))
 
-import qualified Data.Hashable                    as P
-import qualified Data.HashMap.Strict              as P
-import qualified Data.HashMap.Strict              as Map
+
 import qualified Data.List.NonEmpty               as P
+import qualified Data.Map.Strict                  as P
+import qualified Data.Map.Strict                  as Map
 import qualified Data.Maybe                       as P
 import qualified Data.Monoid                      as P
 import qualified Data.Text                        as P
