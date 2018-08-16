@@ -101,21 +101,16 @@ newProvider _host =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "docker"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "ca_material" <$> _caMaterial
-                  , TF.assign "cert_material" <$> _certMaterial
-                  , TF.assign "cert_path" <$> _certPath
-                  , P.Just $ TF.assign "host" _host
-                  , TF.assign "key_material" <$> _keyMaterial
-                  , TF.assign "registry_auth" <$> _registryAuth
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ TF.assign "ca_material" <$> _caMaterial
+            , TF.assign "cert_material" <$> _certMaterial
+            , TF.assign "cert_path" <$> _certPath
+            , P.Just $ TF.assign "host" _host
+            , TF.assign "key_material" <$> _keyMaterial
+            , TF.assign "registry_auth" <$> _registryAuth
+            ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty

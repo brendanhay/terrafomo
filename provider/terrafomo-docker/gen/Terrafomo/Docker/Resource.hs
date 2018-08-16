@@ -92,7 +92,7 @@ configResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ConfigResource s)
 configResource _data' _name =
-    TF.unsafeResource "docker_config" P.defaultProvider TF.validator $
+    TF.unsafeResource "docker_config" TF.validator $
         ConfigResource'
             { _data' = _data'
             , _name = _name
@@ -228,7 +228,7 @@ containerResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ContainerResource s)
 containerResource _image _name =
-    TF.unsafeResource "docker_container" P.defaultProvider TF.validator $
+    TF.unsafeResource "docker_container" TF.validator $
         ContainerResource'
             { _capabilities = TF.Nil
             , _command = TF.Nil
@@ -506,7 +506,7 @@ imageResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ImageResource s)
 imageResource _name =
-    TF.unsafeResource "docker_image" P.defaultProvider TF.validator $
+    TF.unsafeResource "docker_image" TF.validator $
         ImageResource'
             { _keepLocally = TF.Nil
             , _name = _name
@@ -564,7 +564,7 @@ networkResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NetworkResource s)
 networkResource _name =
-    TF.unsafeResource "docker_network" P.defaultProvider TF.validator $
+    TF.unsafeResource "docker_network" TF.validator $
         NetworkResource'
             { _checkDuplicate = TF.Nil
             , _ipamConfig = TF.Nil
@@ -635,7 +635,7 @@ secretResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SecretResource s)
 secretResource _data' _name =
-    TF.unsafeResource "docker_secret" P.defaultProvider TF.validator $
+    TF.unsafeResource "docker_secret" TF.validator $
         SecretResource'
             { _data' = _data'
             , _name = _name
@@ -696,7 +696,7 @@ serviceResource
     -> TF.Attr s (TaskSpecSetting s) -- ^ @task_spec@ - 'P.taskSpec'
     -> P.Resource (ServiceResource s)
 serviceResource _name _taskSpec =
-    TF.unsafeResource "docker_service" P.defaultProvider TF.validator $
+    TF.unsafeResource "docker_service" TF.validator $
         ServiceResource'
             { _auth = TF.Nil
             , _convergeConfig = TF.Nil
@@ -787,7 +787,7 @@ data VolumeResource s = VolumeResource'
 volumeResource
     :: P.Resource (VolumeResource s)
 volumeResource =
-    TF.unsafeResource "docker_volume" P.defaultProvider TF.validator $
+    TF.unsafeResource "docker_volume" TF.validator $
         VolumeResource'
             { _driverOpts = TF.Nil
             }

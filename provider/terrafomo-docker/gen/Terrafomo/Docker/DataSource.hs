@@ -61,7 +61,7 @@ data RegistryImageData s = RegistryImageData'
 registryImageData
     :: P.DataSource (RegistryImageData s)
 registryImageData =
-    TF.unsafeDataSource "docker_registry_image" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "docker_registry_image" TF.validator $
         RegistryImageData'
             { _name = TF.Nil
             }
