@@ -252,25 +252,6 @@
                     "original": "caching_mode"
                 },
                 {
-                    "default": "_dataDiskUri",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The URI the data disk in the blob storage"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"data_disk_uri\" <$> TF.attribute",
-                    "name": "_dataDiskUri",
-                    "method": "dataDiskUri",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDataDiskUri",
-                    "validate": false,
-                    "optional": false,
-                    "original": "data_disk_uri"
-                },
-                {
                     "default": "_diskName",
                     "computed": false,
                     "required": true,
@@ -288,6 +269,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "disk_name"
+                },
+                {
+                    "default": "_dataDiskUri",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The URI the data disk in the blob storage"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"data_disk_uri\" <$> TF.attribute",
+                    "name": "_dataDiskUri",
+                    "method": "dataDiskUri",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDataDiskUri",
+                    "validate": false,
+                    "optional": false,
+                    "original": "data_disk_uri"
                 }
             ],
             "conflicts": [],
@@ -5375,26 +5375,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_cephMonitors",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "A collection of Ceph monitors. More info:",
-                        "http://releases.k8s.io/HEAD/examples/volumes/rbd/README.md#how-to-use-it"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ceph_monitors\" <$> TF.attribute",
-                    "name": "_cephMonitors",
-                    "method": "cephMonitors",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasCephMonitors",
-                    "validate": false,
-                    "optional": false,
-                    "original": "ceph_monitors"
-                },
-                {
                     "default": "_rbdImage",
                     "computed": false,
                     "required": true,
@@ -5413,6 +5393,26 @@
                     "validate": false,
                     "optional": false,
                     "original": "rbd_image"
+                },
+                {
+                    "default": "_cephMonitors",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "A collection of Ceph monitors. More info:",
+                        "http://releases.k8s.io/HEAD/examples/volumes/rbd/README.md#how-to-use-it"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ceph_monitors\" <$> TF.attribute",
+                    "name": "_cephMonitors",
+                    "method": "cephMonitors",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasCephMonitors",
+                    "validate": false,
+                    "optional": false,
+                    "original": "ceph_monitors"
                 }
             ],
             "conflicts": [],
@@ -7589,42 +7589,24 @@
             ],
             "parameters": [
                 {
-                    "default": "_maxReplicas",
+                    "default": "_capacity",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "Upper limit for the number of pods that can be set by the autoscaler."
+                        "A description of the persistent volume's resources and capacity. More info:",
+                        "http://kubernetes.io/docs/user-guide/persistent-volumes#capacity"
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"max_replicas\" <$> TF.attribute",
-                    "name": "_maxReplicas",
-                    "method": "maxReplicas",
+                    "encoder": "TF.assign \"capacity\" <$> TF.attribute",
+                    "name": "_capacity",
+                    "method": "capacity",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasMaxReplicas",
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
+                    "class": "HasCapacity",
                     "validate": false,
                     "optional": false,
-                    "original": "max_replicas"
-                },
-                {
-                    "default": "_scaleTargetRef",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Reference to scaled resource. e.g. Replication Controller"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"scale_target_ref\" <$> TF.attribute",
-                    "name": "_scaleTargetRef",
-                    "method": "scaleTargetRef",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (ScaleTargetRefSetting s)",
-                    "class": "HasScaleTargetRef",
-                    "validate": true,
-                    "optional": false,
-                    "original": "scale_target_ref"
+                    "original": "capacity"
                 },
                 {
                     "default": "_accessModes",
@@ -7647,43 +7629,42 @@
                     "original": "access_modes"
                 },
                 {
-                    "default": "_capacity",
+                    "default": "_scaleTargetRef",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "A description of the persistent volume's resources and capacity. More info:",
-                        "http://kubernetes.io/docs/user-guide/persistent-volumes#capacity"
+                        "Reference to scaled resource. e.g. Replication Controller"
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"capacity\" <$> TF.attribute",
-                    "name": "_capacity",
-                    "method": "capacity",
+                    "encoder": "TF.assign \"scale_target_ref\" <$> TF.attribute",
+                    "name": "_scaleTargetRef",
+                    "method": "scaleTargetRef",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
-                    "class": "HasCapacity",
-                    "validate": false,
-                    "optional": false,
-                    "original": "capacity"
-                },
-                {
-                    "default": "_persistentVolumeSource",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The specification of a persistent volume."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"persistent_volume_source\" <$> TF.attribute",
-                    "name": "_persistentVolumeSource",
-                    "method": "persistentVolumeSource",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (PersistentVolumeSourceSetting s)",
-                    "class": "HasPersistentVolumeSource",
+                    "type": "TF.Attr s (ScaleTargetRefSetting s)",
+                    "class": "HasScaleTargetRef",
                     "validate": true,
                     "optional": false,
-                    "original": "persistent_volume_source"
+                    "original": "scale_target_ref"
+                },
+                {
+                    "default": "_maxReplicas",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Upper limit for the number of pods that can be set by the autoscaler."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_replicas\" <$> TF.attribute",
+                    "name": "_maxReplicas",
+                    "method": "maxReplicas",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMaxReplicas",
+                    "validate": false,
+                    "optional": false,
+                    "original": "max_replicas"
                 },
                 {
                     "default": "_resources",
@@ -7704,6 +7685,25 @@
                     "validate": true,
                     "optional": false,
                     "original": "resources"
+                },
+                {
+                    "default": "_persistentVolumeSource",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The specification of a persistent volume."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"persistent_volume_source\" <$> TF.attribute",
+                    "name": "_persistentVolumeSource",
+                    "method": "persistentVolumeSource",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (PersistentVolumeSourceSetting s)",
+                    "class": "HasPersistentVolumeSource",
+                    "validate": true,
+                    "optional": false,
+                    "original": "persistent_volume_source"
                 },
                 {
                     "default": "_template",
@@ -8845,6 +8845,25 @@
             "attributes": [],
             "parameters": [
                 {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "This must match the Name of a Volume."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
                     "default": "_mountPath",
                     "computed": false,
                     "required": true,
@@ -8863,25 +8882,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "mount_path"
-                },
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "This must match the Name of a Volume."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
                 }
             ],
             "conflicts": [],
