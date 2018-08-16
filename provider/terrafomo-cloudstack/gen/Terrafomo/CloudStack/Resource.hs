@@ -122,10 +122,9 @@ import GHC.Base (($))
 
 import Terrafomo.CloudStack.Settings
 
-import qualified Data.Hashable                 as P
-import qualified Data.HashMap.Strict           as P
-import qualified Data.HashMap.Strict           as Map
 import qualified Data.List.NonEmpty            as P
+import qualified Data.Map.Strict               as P
+import qualified Data.Map.Strict               as Map
 import qualified Data.Maybe                    as P
 import qualified Data.Monoid                   as P
 import qualified Data.Text                     as P
@@ -155,14 +154,14 @@ data AffinityGroupResource s = AffinityGroupResource'
     , _type'   :: TF.Attr s P.Text
     -- ^ @type@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 affinityGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (AffinityGroupResource s)
 affinityGroupResource _name _type' =
-    TF.newResource "cloudstack_affinity_group" TF.validator $
+    TF.unsafeResource "cloudstack_affinity_group" P.defaultProvider TF.validator $
         AffinityGroupResource'
             { _name = _name
             , _project = TF.Nil
@@ -220,14 +219,14 @@ data DiskResource s = DiskResource'
     , _zone             :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 diskResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (DiskResource s)
 diskResource _name _zone =
-    TF.newResource "cloudstack_disk" TF.validator $
+    TF.unsafeResource "cloudstack_disk" P.defaultProvider TF.validator $
         DiskResource'
             { _attach = TF.value P.False
             , _diskOffering = TF.Nil
@@ -280,16 +279,16 @@ instance P.HasZone (DiskResource s) (TF.Attr s P.Text) where
         P.lens (_zone :: DiskResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: DiskResource s)
 
-instance s ~ s' => P.HasComputedDeviceId (TF.Ref s' (DiskResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedDeviceId (TF.Ref s' (DiskResource s)) (TF.Attr s P.Int) where
     computedDeviceId x = TF.compute (TF.refKey x) "device_id"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (DiskResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (DiskResource s)) (TF.Attr s P.Int) where
     computedSize x = TF.compute (TF.refKey x) "size"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DiskResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DiskResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @cloudstack_egress_firewall@ Resource.
@@ -303,19 +302,19 @@ data EgressFirewallResource s = EgressFirewallResource'
     , _networkId   :: TF.Attr s P.Text
     -- ^ @network_id@ - (Required, Forces New)
     --
-    , _parallelism :: TF.Attr s P.Integer
+    , _parallelism :: TF.Attr s P.Int
     -- ^ @parallelism@ - (Optional)
     --
-    , _rule        :: TF.Attr s [TF.Attr s (EgressFirewallRule s)]
+    , _rule        :: TF.Attr s [TF.Attr s (RuleSetting s)]
     -- ^ @rule@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 egressFirewallResource
     :: TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
     -> P.Resource (EgressFirewallResource s)
 egressFirewallResource _networkId =
-    TF.newResource "cloudstack_egress_firewall" TF.validator $
+    TF.unsafeResource "cloudstack_egress_firewall" P.defaultProvider TF.validator $
         EgressFirewallResource'
             { _managed = TF.value P.False
             , _networkId = _networkId
@@ -333,10 +332,6 @@ instance TF.IsObject (EgressFirewallResource s) where
 
 instance TF.IsValid (EgressFirewallResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_rule"
-                  (_rule
-                      :: EgressFirewallResource s -> TF.Attr s [TF.Attr s (EgressFirewallRule s)])
-                  TF.validator
 
 instance P.HasManaged (EgressFirewallResource s) (TF.Attr s P.Bool) where
     managed =
@@ -348,14 +343,14 @@ instance P.HasNetworkId (EgressFirewallResource s) (TF.Attr s P.Text) where
         P.lens (_networkId :: EgressFirewallResource s -> TF.Attr s P.Text)
                (\s a -> s { _networkId = a } :: EgressFirewallResource s)
 
-instance P.HasParallelism (EgressFirewallResource s) (TF.Attr s P.Integer) where
+instance P.HasParallelism (EgressFirewallResource s) (TF.Attr s P.Int) where
     parallelism =
-        P.lens (_parallelism :: EgressFirewallResource s -> TF.Attr s P.Integer)
+        P.lens (_parallelism :: EgressFirewallResource s -> TF.Attr s P.Int)
                (\s a -> s { _parallelism = a } :: EgressFirewallResource s)
 
-instance P.HasRule (EgressFirewallResource s) (TF.Attr s [TF.Attr s (EgressFirewallRule s)]) where
+instance P.HasRule (EgressFirewallResource s) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
     rule =
-        P.lens (_rule :: EgressFirewallResource s -> TF.Attr s [TF.Attr s (EgressFirewallRule s)])
+        P.lens (_rule :: EgressFirewallResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
                (\s a -> s { _rule = a } :: EgressFirewallResource s)
 
 -- | @cloudstack_firewall@ Resource.
@@ -369,19 +364,19 @@ data FirewallResource s = FirewallResource'
     , _managed     :: TF.Attr s P.Bool
     -- ^ @managed@ - (Optional)
     --
-    , _parallelism :: TF.Attr s P.Integer
+    , _parallelism :: TF.Attr s P.Int
     -- ^ @parallelism@ - (Optional)
     --
-    , _rule        :: TF.Attr s [TF.Attr s (FirewallRule s)]
+    , _rule        :: TF.Attr s [TF.Attr s (RuleSetting s)]
     -- ^ @rule@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 firewallResource
     :: TF.Attr s P.Text -- ^ @ip_address_id@ - 'P.ipAddressId'
     -> P.Resource (FirewallResource s)
 firewallResource _ipAddressId =
-    TF.newResource "cloudstack_firewall" TF.validator $
+    TF.unsafeResource "cloudstack_firewall" P.defaultProvider TF.validator $
         FirewallResource'
             { _ipAddressId = _ipAddressId
             , _managed = TF.value P.False
@@ -399,10 +394,6 @@ instance TF.IsObject (FirewallResource s) where
 
 instance TF.IsValid (FirewallResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_rule"
-                  (_rule
-                      :: FirewallResource s -> TF.Attr s [TF.Attr s (FirewallRule s)])
-                  TF.validator
 
 instance P.HasIpAddressId (FirewallResource s) (TF.Attr s P.Text) where
     ipAddressId =
@@ -414,14 +405,14 @@ instance P.HasManaged (FirewallResource s) (TF.Attr s P.Bool) where
         P.lens (_managed :: FirewallResource s -> TF.Attr s P.Bool)
                (\s a -> s { _managed = a } :: FirewallResource s)
 
-instance P.HasParallelism (FirewallResource s) (TF.Attr s P.Integer) where
+instance P.HasParallelism (FirewallResource s) (TF.Attr s P.Int) where
     parallelism =
-        P.lens (_parallelism :: FirewallResource s -> TF.Attr s P.Integer)
+        P.lens (_parallelism :: FirewallResource s -> TF.Attr s P.Int)
                (\s a -> s { _parallelism = a } :: FirewallResource s)
 
-instance P.HasRule (FirewallResource s) (TF.Attr s [TF.Attr s (FirewallRule s)]) where
+instance P.HasRule (FirewallResource s) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
     rule =
-        P.lens (_rule :: FirewallResource s -> TF.Attr s [TF.Attr s (FirewallRule s)])
+        P.lens (_rule :: FirewallResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
                (\s a -> s { _rule = a } :: FirewallResource s)
 
 -- | @cloudstack_instance@ Resource.
@@ -471,7 +462,7 @@ data InstanceResource s = InstanceResource'
     , _zone               :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 instanceResource
     :: TF.Attr s P.Text -- ^ @service_offering@ - 'P.serviceOffering'
@@ -479,7 +470,7 @@ instanceResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (InstanceResource s)
 instanceResource _serviceOffering _template _zone =
-    TF.newResource "cloudstack_instance" TF.validator $
+    TF.unsafeResource "cloudstack_instance" P.defaultProvider TF.validator $
         InstanceResource'
             { _affinityGroupIds = TF.Nil
             , _affinityGroupNames = TF.Nil
@@ -599,10 +590,10 @@ instance s ~ s' => P.HasComputedNetworkId (TF.Ref s' (InstanceResource s)) (TF.A
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedRootDiskSize (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedRootDiskSize (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Int) where
     computedRootDiskSize x = TF.compute (TF.refKey x) "root_disk_size"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (InstanceResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (InstanceResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @cloudstack_ipaddress@ Resource.
@@ -622,12 +613,12 @@ data IpaddressResource s = IpaddressResource'
     , _zone       :: TF.Attr s P.Text
     -- ^ @zone@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 ipaddressResource
     :: P.Resource (IpaddressResource s)
 ipaddressResource =
-    TF.newResource "cloudstack_ipaddress" TF.validator $
+    TF.unsafeResource "cloudstack_ipaddress" P.defaultProvider TF.validator $
         IpaddressResource'
             { _isPortable = TF.value P.False
             , _networkId = TF.Nil
@@ -672,7 +663,7 @@ instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (IpaddressResource s)) (TF.
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (IpaddressResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (IpaddressResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (IpaddressResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @cloudstack_loadbalancer_rule@ Resource.
@@ -695,24 +686,24 @@ data LoadbalancerRuleResource s = LoadbalancerRuleResource'
     , _networkId   :: TF.Attr s P.Text
     -- ^ @network_id@ - (Optional, Forces New)
     --
-    , _privatePort :: TF.Attr s P.Integer
+    , _privatePort :: TF.Attr s P.Int
     -- ^ @private_port@ - (Required, Forces New)
     --
-    , _publicPort  :: TF.Attr s P.Integer
+    , _publicPort  :: TF.Attr s P.Int
     -- ^ @public_port@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 loadbalancerRuleResource
     :: TF.Attr s P.Text -- ^ @algorithm@ - 'P.algorithm'
     -> TF.Attr s P.Text -- ^ @ip_address_id@ - 'P.ipAddressId'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @member_ids@ - 'P.memberIds'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Integer -- ^ @private_port@ - 'P.privatePort'
-    -> TF.Attr s P.Integer -- ^ @public_port@ - 'P.publicPort'
+    -> TF.Attr s P.Int -- ^ @private_port@ - 'P.privatePort'
+    -> TF.Attr s P.Int -- ^ @public_port@ - 'P.publicPort'
     -> P.Resource (LoadbalancerRuleResource s)
 loadbalancerRuleResource _algorithm _ipAddressId _memberIds _name _privatePort _publicPort =
-    TF.newResource "cloudstack_loadbalancer_rule" TF.validator $
+    TF.unsafeResource "cloudstack_loadbalancer_rule" P.defaultProvider TF.validator $
         LoadbalancerRuleResource'
             { _algorithm = _algorithm
             , _ipAddressId = _ipAddressId
@@ -762,14 +753,14 @@ instance P.HasNetworkId (LoadbalancerRuleResource s) (TF.Attr s P.Text) where
         P.lens (_networkId :: LoadbalancerRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _networkId = a } :: LoadbalancerRuleResource s)
 
-instance P.HasPrivatePort (LoadbalancerRuleResource s) (TF.Attr s P.Integer) where
+instance P.HasPrivatePort (LoadbalancerRuleResource s) (TF.Attr s P.Int) where
     privatePort =
-        P.lens (_privatePort :: LoadbalancerRuleResource s -> TF.Attr s P.Integer)
+        P.lens (_privatePort :: LoadbalancerRuleResource s -> TF.Attr s P.Int)
                (\s a -> s { _privatePort = a } :: LoadbalancerRuleResource s)
 
-instance P.HasPublicPort (LoadbalancerRuleResource s) (TF.Attr s P.Integer) where
+instance P.HasPublicPort (LoadbalancerRuleResource s) (TF.Attr s P.Int) where
     publicPort =
-        P.lens (_publicPort :: LoadbalancerRuleResource s -> TF.Attr s P.Integer)
+        P.lens (_publicPort :: LoadbalancerRuleResource s -> TF.Attr s P.Int)
                (\s a -> s { _publicPort = a } :: LoadbalancerRuleResource s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (LoadbalancerRuleResource s)) (TF.Attr s P.Text) where
@@ -798,7 +789,7 @@ data NetworkResource s = NetworkResource'
     , _networkOffering :: TF.Attr s P.Text
     -- ^ @network_offering@ - (Required)
     --
-    , _vlan            :: TF.Attr s P.Integer
+    , _vlan            :: TF.Attr s P.Int
     -- ^ @vlan@ - (Optional, Forces New)
     --
     , _vpcId           :: TF.Attr s P.Text
@@ -807,7 +798,7 @@ data NetworkResource s = NetworkResource'
     , _zone            :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkResource
     :: TF.Attr s P.Text -- ^ @cidr@ - 'P.cidr'
@@ -816,7 +807,7 @@ networkResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (NetworkResource s)
 networkResource _cidr _name _networkOffering _zone =
-    TF.newResource "cloudstack_network" TF.validator $
+    TF.unsafeResource "cloudstack_network" P.defaultProvider TF.validator $
         NetworkResource'
             { _aclId = TF.value "none"
             , _cidr = _cidr
@@ -861,9 +852,9 @@ instance P.HasNetworkOffering (NetworkResource s) (TF.Attr s P.Text) where
         P.lens (_networkOffering :: NetworkResource s -> TF.Attr s P.Text)
                (\s a -> s { _networkOffering = a } :: NetworkResource s)
 
-instance P.HasVlan (NetworkResource s) (TF.Attr s P.Integer) where
+instance P.HasVlan (NetworkResource s) (TF.Attr s P.Int) where
     vlan =
-        P.lens (_vlan :: NetworkResource s -> TF.Attr s P.Integer)
+        P.lens (_vlan :: NetworkResource s -> TF.Attr s P.Int)
                (\s a -> s { _vlan = a } :: NetworkResource s)
 
 instance P.HasVpcId (NetworkResource s) (TF.Attr s P.Text) where
@@ -894,7 +885,7 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (NetworkResource s)) (TF.Attr
 instance s ~ s' => P.HasComputedStartip (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
     computedStartip x = TF.compute (TF.refKey x) "startip"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @cloudstack_network_acl@ Resource.
@@ -911,14 +902,14 @@ data NetworkAclResource s = NetworkAclResource'
     , _vpcId   :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkAclResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.Resource (NetworkAclResource s)
 networkAclResource _name _vpcId =
-    TF.newResource "cloudstack_network_acl" TF.validator $
+    TF.unsafeResource "cloudstack_network_acl" P.defaultProvider TF.validator $
         NetworkAclResource'
             { _name = _name
             , _project = TF.Nil
@@ -964,22 +955,22 @@ data NetworkAclRuleResource s = NetworkAclRuleResource'
     , _managed     :: TF.Attr s P.Bool
     -- ^ @managed@ - (Optional)
     --
-    , _parallelism :: TF.Attr s P.Integer
+    , _parallelism :: TF.Attr s P.Int
     -- ^ @parallelism@ - (Optional)
     --
     , _project     :: TF.Attr s P.Text
     -- ^ @project@ - (Optional, Forces New)
     --
-    , _rule        :: TF.Attr s [TF.Attr s (NetworkAclRuleRule s)]
+    , _rule        :: TF.Attr s [TF.Attr s (RuleSetting s)]
     -- ^ @rule@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkAclRuleResource
     :: TF.Attr s P.Text -- ^ @acl_id@ - 'P.aclId'
     -> P.Resource (NetworkAclRuleResource s)
 networkAclRuleResource _aclId =
-    TF.newResource "cloudstack_network_acl_rule" TF.validator $
+    TF.unsafeResource "cloudstack_network_acl_rule" P.defaultProvider TF.validator $
         NetworkAclRuleResource'
             { _aclId = _aclId
             , _managed = TF.value P.False
@@ -999,10 +990,6 @@ instance TF.IsObject (NetworkAclRuleResource s) where
 
 instance TF.IsValid (NetworkAclRuleResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_rule"
-                  (_rule
-                      :: NetworkAclRuleResource s -> TF.Attr s [TF.Attr s (NetworkAclRuleRule s)])
-                  TF.validator
 
 instance P.HasAclId (NetworkAclRuleResource s) (TF.Attr s P.Text) where
     aclId =
@@ -1014,9 +1001,9 @@ instance P.HasManaged (NetworkAclRuleResource s) (TF.Attr s P.Bool) where
         P.lens (_managed :: NetworkAclRuleResource s -> TF.Attr s P.Bool)
                (\s a -> s { _managed = a } :: NetworkAclRuleResource s)
 
-instance P.HasParallelism (NetworkAclRuleResource s) (TF.Attr s P.Integer) where
+instance P.HasParallelism (NetworkAclRuleResource s) (TF.Attr s P.Int) where
     parallelism =
-        P.lens (_parallelism :: NetworkAclRuleResource s -> TF.Attr s P.Integer)
+        P.lens (_parallelism :: NetworkAclRuleResource s -> TF.Attr s P.Int)
                (\s a -> s { _parallelism = a } :: NetworkAclRuleResource s)
 
 instance P.HasProject (NetworkAclRuleResource s) (TF.Attr s P.Text) where
@@ -1024,9 +1011,9 @@ instance P.HasProject (NetworkAclRuleResource s) (TF.Attr s P.Text) where
         P.lens (_project :: NetworkAclRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _project = a } :: NetworkAclRuleResource s)
 
-instance P.HasRule (NetworkAclRuleResource s) (TF.Attr s [TF.Attr s (NetworkAclRuleRule s)]) where
+instance P.HasRule (NetworkAclRuleResource s) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
     rule =
-        P.lens (_rule :: NetworkAclRuleResource s -> TF.Attr s [TF.Attr s (NetworkAclRuleRule s)])
+        P.lens (_rule :: NetworkAclRuleResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
                (\s a -> s { _rule = a } :: NetworkAclRuleResource s)
 
 -- | @cloudstack_nic@ Resource.
@@ -1040,14 +1027,14 @@ data NicResource s = NicResource'
     , _virtualMachineId :: TF.Attr s P.Text
     -- ^ @virtual_machine_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 nicResource
     :: TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
     -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
     -> P.Resource (NicResource s)
 nicResource _networkId _virtualMachineId =
-    TF.newResource "cloudstack_nic" TF.validator $
+    TF.unsafeResource "cloudstack_nic" P.defaultProvider TF.validator $
         NicResource'
             { _networkId = _networkId
             , _virtualMachineId = _virtualMachineId
@@ -1080,7 +1067,7 @@ instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (NicResource s)) (TF.Attr s
 -- See the <https://www.terraform.io/docs/providers/cloudstack/r/port_forward.html terraform documentation>
 -- for more information.
 data PortForwardResource s = PortForwardResource'
-    { _forward     :: TF.Attr s [TF.Attr s (PortForwardForward s)]
+    { _forward     :: TF.Attr s [TF.Attr s (ForwardSetting s)]
     -- ^ @forward@ - (Required)
     --
     , _ipAddressId :: TF.Attr s P.Text
@@ -1092,14 +1079,14 @@ data PortForwardResource s = PortForwardResource'
     , _project     :: TF.Attr s P.Text
     -- ^ @project@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 portForwardResource
-    :: TF.Attr s [TF.Attr s (PortForwardForward s)] -- ^ @forward@ - 'P.forward'
+    :: TF.Attr s [TF.Attr s (ForwardSetting s)] -- ^ @forward@ - 'P.forward'
     -> TF.Attr s P.Text -- ^ @ip_address_id@ - 'P.ipAddressId'
     -> P.Resource (PortForwardResource s)
 portForwardResource _forward _ipAddressId =
-    TF.newResource "cloudstack_port_forward" TF.validator $
+    TF.unsafeResource "cloudstack_port_forward" P.defaultProvider TF.validator $
         PortForwardResource'
             { _forward = _forward
             , _ipAddressId = _ipAddressId
@@ -1117,14 +1104,10 @@ instance TF.IsObject (PortForwardResource s) where
 
 instance TF.IsValid (PortForwardResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_forward"
-                  (_forward
-                      :: PortForwardResource s -> TF.Attr s [TF.Attr s (PortForwardForward s)])
-                  TF.validator
 
-instance P.HasForward (PortForwardResource s) (TF.Attr s [TF.Attr s (PortForwardForward s)]) where
+instance P.HasForward (PortForwardResource s) (TF.Attr s [TF.Attr s (ForwardSetting s)]) where
     forward =
-        P.lens (_forward :: PortForwardResource s -> TF.Attr s [TF.Attr s (PortForwardForward s)])
+        P.lens (_forward :: PortForwardResource s -> TF.Attr s [TF.Attr s (ForwardSetting s)])
                (\s a -> s { _forward = a } :: PortForwardResource s)
 
 instance P.HasIpAddressId (PortForwardResource s) (TF.Attr s P.Text) where
@@ -1171,7 +1154,7 @@ data PrivateGatewayResource s = PrivateGatewayResource'
     , _vpcId             :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 privateGatewayResource
     :: TF.Attr s P.Text -- ^ @acl_id@ - 'P.aclId'
@@ -1182,7 +1165,7 @@ privateGatewayResource
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.Resource (PrivateGatewayResource s)
 privateGatewayResource _aclId _gateway _ipAddress _netmask _vlan _vpcId =
-    TF.newResource "cloudstack_private_gateway" TF.validator $
+    TF.unsafeResource "cloudstack_private_gateway" P.defaultProvider TF.validator $
         PrivateGatewayResource'
             { _aclId = _aclId
             , _gateway = _gateway
@@ -1257,13 +1240,13 @@ data SecondaryIpaddressResource s = SecondaryIpaddressResource'
     { _virtualMachineId :: TF.Attr s P.Text
     -- ^ @virtual_machine_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 secondaryIpaddressResource
     :: TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
     -> P.Resource (SecondaryIpaddressResource s)
 secondaryIpaddressResource _virtualMachineId =
-    TF.newResource "cloudstack_secondary_ipaddress" TF.validator $
+    TF.unsafeResource "cloudstack_secondary_ipaddress" P.defaultProvider TF.validator $
         SecondaryIpaddressResource'
             { _virtualMachineId = _virtualMachineId
             }
@@ -1295,13 +1278,13 @@ data SecurityGroupResource s = SecurityGroupResource'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 securityGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SecurityGroupResource s)
 securityGroupResource _name =
-    TF.newResource "cloudstack_security_group" TF.validator $
+    TF.unsafeResource "cloudstack_security_group" P.defaultProvider TF.validator $
         SecurityGroupResource'
             { _name = _name
             }
@@ -1330,26 +1313,26 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (SecurityGroupResource s)) (T
 -- See the <https://www.terraform.io/docs/providers/cloudstack/r/security_group_rule.html terraform documentation>
 -- for more information.
 data SecurityGroupRuleResource s = SecurityGroupRuleResource'
-    { _parallelism     :: TF.Attr s P.Integer
+    { _parallelism     :: TF.Attr s P.Int
     -- ^ @parallelism@ - (Optional)
     --
     , _project         :: TF.Attr s P.Text
     -- ^ @project@ - (Optional, Forces New)
     --
-    , _rule            :: TF.Attr s [TF.Attr s (SecurityGroupRuleRule s)]
+    , _rule            :: TF.Attr s [TF.Attr s (RuleSetting s)]
     -- ^ @rule@ - (Required)
     --
     , _securityGroupId :: TF.Attr s P.Text
     -- ^ @security_group_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 securityGroupRuleResource
-    :: TF.Attr s [TF.Attr s (SecurityGroupRuleRule s)] -- ^ @rule@ - 'P.rule'
+    :: TF.Attr s [TF.Attr s (RuleSetting s)] -- ^ @rule@ - 'P.rule'
     -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
     -> P.Resource (SecurityGroupRuleResource s)
 securityGroupRuleResource _rule _securityGroupId =
-    TF.newResource "cloudstack_security_group_rule" TF.validator $
+    TF.unsafeResource "cloudstack_security_group_rule" P.defaultProvider TF.validator $
         SecurityGroupRuleResource'
             { _parallelism = TF.value 2
             , _project = TF.Nil
@@ -1367,14 +1350,10 @@ instance TF.IsObject (SecurityGroupRuleResource s) where
 
 instance TF.IsValid (SecurityGroupRuleResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_rule"
-                  (_rule
-                      :: SecurityGroupRuleResource s -> TF.Attr s [TF.Attr s (SecurityGroupRuleRule s)])
-                  TF.validator
 
-instance P.HasParallelism (SecurityGroupRuleResource s) (TF.Attr s P.Integer) where
+instance P.HasParallelism (SecurityGroupRuleResource s) (TF.Attr s P.Int) where
     parallelism =
-        P.lens (_parallelism :: SecurityGroupRuleResource s -> TF.Attr s P.Integer)
+        P.lens (_parallelism :: SecurityGroupRuleResource s -> TF.Attr s P.Int)
                (\s a -> s { _parallelism = a } :: SecurityGroupRuleResource s)
 
 instance P.HasProject (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
@@ -1382,9 +1361,9 @@ instance P.HasProject (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
         P.lens (_project :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _project = a } :: SecurityGroupRuleResource s)
 
-instance P.HasRule (SecurityGroupRuleResource s) (TF.Attr s [TF.Attr s (SecurityGroupRuleRule s)]) where
+instance P.HasRule (SecurityGroupRuleResource s) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
     rule =
-        P.lens (_rule :: SecurityGroupRuleResource s -> TF.Attr s [TF.Attr s (SecurityGroupRuleRule s)])
+        P.lens (_rule :: SecurityGroupRuleResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
                (\s a -> s { _rule = a } :: SecurityGroupRuleResource s)
 
 instance P.HasSecurityGroupId (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
@@ -1406,13 +1385,13 @@ data SshKeypairResource s = SshKeypairResource'
     , _publicKey :: TF.Attr s P.Text
     -- ^ @public_key@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 sshKeypairResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SshKeypairResource s)
 sshKeypairResource _name =
-    TF.newResource "cloudstack_ssh_keypair" TF.validator $
+    TF.unsafeResource "cloudstack_ssh_keypair" P.defaultProvider TF.validator $
         SshKeypairResource'
             { _name = _name
             , _project = TF.Nil
@@ -1461,14 +1440,14 @@ data StaticNatResource s = StaticNatResource'
     , _virtualMachineId :: TF.Attr s P.Text
     -- ^ @virtual_machine_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 staticNatResource
     :: TF.Attr s P.Text -- ^ @ip_address_id@ - 'P.ipAddressId'
     -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
     -> P.Resource (StaticNatResource s)
 staticNatResource _ipAddressId _virtualMachineId =
-    TF.newResource "cloudstack_static_nat" TF.validator $
+    TF.unsafeResource "cloudstack_static_nat" P.defaultProvider TF.validator $
         StaticNatResource'
             { _ipAddressId = _ipAddressId
             , _virtualMachineId = _virtualMachineId
@@ -1510,14 +1489,14 @@ data StaticRouteResource s = StaticRouteResource'
     , _gatewayId :: TF.Attr s P.Text
     -- ^ @gateway_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 staticRouteResource
     :: TF.Attr s P.Text -- ^ @cidr@ - 'P.cidr'
     -> TF.Attr s P.Text -- ^ @gateway_id@ - 'P.gatewayId'
     -> P.Resource (StaticRouteResource s)
 staticRouteResource _cidr _gatewayId =
-    TF.newResource "cloudstack_static_route" TF.validator $
+    TF.unsafeResource "cloudstack_static_route" P.defaultProvider TF.validator $
         StaticRouteResource'
             { _cidr = _cidr
             , _gatewayId = _gatewayId
@@ -1553,7 +1532,7 @@ data TemplateResource s = TemplateResource'
     , _hypervisor     :: TF.Attr s P.Text
     -- ^ @hypervisor@ - (Required, Forces New)
     --
-    , _isReadyTimeout :: TF.Attr s P.Integer
+    , _isReadyTimeout :: TF.Attr s P.Int
     -- ^ @is_ready_timeout@ - (Optional)
     --
     , _name           :: TF.Attr s P.Text
@@ -1568,7 +1547,7 @@ data TemplateResource s = TemplateResource'
     , _zone           :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 templateResource
     :: TF.Attr s P.Text -- ^ @format@ - 'P.format'
@@ -1579,7 +1558,7 @@ templateResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (TemplateResource s)
 templateResource _format _hypervisor _name _osType _url _zone =
-    TF.newResource "cloudstack_template" TF.validator $
+    TF.unsafeResource "cloudstack_template" P.defaultProvider TF.validator $
         TemplateResource'
             { _format = _format
             , _hypervisor = _hypervisor
@@ -1614,9 +1593,9 @@ instance P.HasHypervisor (TemplateResource s) (TF.Attr s P.Text) where
         P.lens (_hypervisor :: TemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _hypervisor = a } :: TemplateResource s)
 
-instance P.HasIsReadyTimeout (TemplateResource s) (TF.Attr s P.Integer) where
+instance P.HasIsReadyTimeout (TemplateResource s) (TF.Attr s P.Int) where
     isReadyTimeout =
-        P.lens (_isReadyTimeout :: TemplateResource s -> TF.Attr s P.Integer)
+        P.lens (_isReadyTimeout :: TemplateResource s -> TF.Attr s P.Int)
                (\s a -> s { _isReadyTimeout = a } :: TemplateResource s)
 
 instance P.HasName (TemplateResource s) (TF.Attr s P.Text) where
@@ -1663,7 +1642,7 @@ instance s ~ s' => P.HasComputedPasswordEnabled (TF.Ref s' (TemplateResource s))
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (TemplateResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (TemplateResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (TemplateResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @cloudstack_vpc@ Resource.
@@ -1683,7 +1662,7 @@ data VpcResource s = VpcResource'
     , _zone        :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 vpcResource
     :: TF.Attr s P.Text -- ^ @cidr@ - 'P.cidr'
@@ -1692,7 +1671,7 @@ vpcResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (VpcResource s)
 vpcResource _cidr _name _vpcOffering _zone =
-    TF.newResource "cloudstack_vpc" TF.validator $
+    TF.unsafeResource "cloudstack_vpc" P.defaultProvider TF.validator $
         VpcResource'
             { _cidr = _cidr
             , _name = _name
@@ -1743,7 +1722,7 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (VpcResource s)) (TF.Attr s P
 instance s ~ s' => P.HasComputedSourceNatIp (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
     computedSourceNatIp x = TF.compute (TF.refKey x) "source_nat_ip"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @cloudstack_vpn_connection@ Resource.
@@ -1757,14 +1736,14 @@ data VpnConnectionResource s = VpnConnectionResource'
     , _vpnGatewayId      :: TF.Attr s P.Text
     -- ^ @vpn_gateway_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 vpnConnectionResource
     :: TF.Attr s P.Text -- ^ @customer_gateway_id@ - 'P.customerGatewayId'
     -> TF.Attr s P.Text -- ^ @vpn_gateway_id@ - 'P.vpnGatewayId'
     -> P.Resource (VpnConnectionResource s)
 vpnConnectionResource _customerGatewayId _vpnGatewayId =
-    TF.newResource "cloudstack_vpn_connection" TF.validator $
+    TF.unsafeResource "cloudstack_vpn_connection" P.defaultProvider TF.validator $
         VpnConnectionResource'
             { _customerGatewayId = _customerGatewayId
             , _vpnGatewayId = _vpnGatewayId
@@ -1812,7 +1791,7 @@ data VpnCustomerGatewayResource s = VpnCustomerGatewayResource'
     , _name      :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 vpnCustomerGatewayResource
     :: TF.Attr s P.Text -- ^ @cidr@ - 'P.cidr'
@@ -1823,7 +1802,7 @@ vpnCustomerGatewayResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (VpnCustomerGatewayResource s)
 vpnCustomerGatewayResource _cidr _espPolicy _gateway _ikePolicy _ipsecPsk _name =
-    TF.newResource "cloudstack_vpn_customer_gateway" TF.validator $
+    TF.unsafeResource "cloudstack_vpn_customer_gateway" P.defaultProvider TF.validator $
         VpnCustomerGatewayResource'
             { _cidr = _cidr
             , _espPolicy = _espPolicy
@@ -1879,10 +1858,10 @@ instance P.HasName (VpnCustomerGatewayResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedDpd (TF.Ref s' (VpnCustomerGatewayResource s)) (TF.Attr s P.Bool) where
     computedDpd x = TF.compute (TF.refKey x) "dpd"
 
-instance s ~ s' => P.HasComputedEspLifetime (TF.Ref s' (VpnCustomerGatewayResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedEspLifetime (TF.Ref s' (VpnCustomerGatewayResource s)) (TF.Attr s P.Int) where
     computedEspLifetime x = TF.compute (TF.refKey x) "esp_lifetime"
 
-instance s ~ s' => P.HasComputedIkeLifetime (TF.Ref s' (VpnCustomerGatewayResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedIkeLifetime (TF.Ref s' (VpnCustomerGatewayResource s)) (TF.Attr s P.Int) where
     computedIkeLifetime x = TF.compute (TF.refKey x) "ike_lifetime"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (VpnCustomerGatewayResource s)) (TF.Attr s P.Text) where
@@ -1896,13 +1875,13 @@ data VpnGatewayResource s = VpnGatewayResource'
     { _vpcId :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 vpnGatewayResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.Resource (VpnGatewayResource s)
 vpnGatewayResource _vpcId =
-    TF.newResource "cloudstack_vpn_gateway" TF.validator $
+    TF.unsafeResource "cloudstack_vpn_gateway" P.defaultProvider TF.validator $
         VpnGatewayResource'
             { _vpcId = _vpcId
             }

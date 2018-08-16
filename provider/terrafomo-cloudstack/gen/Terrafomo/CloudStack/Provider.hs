@@ -20,6 +20,7 @@ module Terrafomo.CloudStack.Provider
     -- * CloudStack Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * CloudStack Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.CloudStack.Settings
 
-import qualified Data.Hashable              as P
-import qualified Data.HashMap.Strict        as P
-import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Map.Strict            as P
+import qualified Data.Map.Strict            as Map
 import qualified Data.Maybe                 as P
 import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
@@ -66,23 +66,23 @@ data Provider = Provider'
     --
     -- Conflicts with:
     --
-    -- * 'profile'
     -- * 'config'
+    -- * 'profile'
     , _apiUrl      :: P.Maybe P.Text
     -- ^ @api_url@ - (Optional)
     --
     -- Conflicts with:
     --
-    -- * 'profile'
     -- * 'config'
+    -- * 'profile'
     , _config      :: P.Maybe P.Text
     -- ^ @config@ - (Optional)
     --
     -- Conflicts with:
     --
-    -- * 'secretKey'
     -- * 'apiKey'
     -- * 'apiUrl'
+    -- * 'secretKey'
     , _httpGetOnly :: P.Bool
     -- ^ @http_get_only@ - (Required)
     --
@@ -91,24 +91,24 @@ data Provider = Provider'
     --
     -- Conflicts with:
     --
-    -- * 'secretKey'
     -- * 'apiKey'
     -- * 'apiUrl'
+    -- * 'secretKey'
     , _secretKey   :: P.Maybe P.Text
     -- ^ @secret_key@ - (Optional)
     --
     -- Conflicts with:
     --
-    -- * 'profile'
     -- * 'config'
-    , _timeout     :: P.Integer
+    -- * 'profile'
+    , _timeout     :: P.Int
     -- ^ @timeout@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: P.Bool -- ^ @http_get_only@ - 'P.httpGetOnly'
-    -> P.Integer -- ^ @timeout@ - 'P.timeout'
+    -> P.Int -- ^ @timeout@ - 'P.timeout'
     -> Provider
 newProvider _httpGetOnly _timeout =
     Provider'
@@ -121,54 +121,51 @@ newProvider _httpGetOnly _timeout =
         , _timeout = _timeout
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "api_key" <$> _apiKey
-                  , TF.assign "api_url" <$> _apiUrl
-                  , TF.assign "config" <$> _config
-                  , P.Just $ TF.assign "http_get_only" _httpGetOnly
-                  , TF.assign "profile" <$> _profile
-                  , TF.assign "secret_key" <$> _secretKey
-                  , P.Just $ TF.assign "timeout" _timeout
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  TF.assign "api_key" <$> _apiKey
+        ,  TF.assign "api_url" <$> _apiUrl
+        ,  TF.assign "config" <$> _config
+        ,  P.Just $ TF.assign "http_get_only" _httpGetOnly
+        ,  TF.assign "profile" <$> _profile
+        ,  TF.assign "secret_key" <$> _secretKey
+        ,  P.Just $ TF.assign "timeout" _timeout
+        ]
 
 instance TF.IsValid (Provider) where
     validator = TF.fieldsValidator (\Provider'{..} -> Map.fromList $ P.catMaybes
         [ if (_apiKey P.== P.Nothing)
               then P.Nothing
               else P.Just ("_apiKey",
-                            [ "_profile"                            , "_config"
+                            [ "_config"                            , "_profile"
                             ])
         , if (_apiUrl P.== P.Nothing)
               then P.Nothing
               else P.Just ("_apiUrl",
-                            [ "_profile"                            , "_config"
+                            [ "_config"                            , "_profile"
                             ])
         , if (_config P.== P.Nothing)
               then P.Nothing
               else P.Just ("_config",
-                            [ "_secretKey"                            , "_apiKey"                            , "_apiUrl"
+                            [ "_apiKey"                            , "_apiUrl"                            , "_secretKey"
                             ])
         , if (_profile P.== P.Nothing)
               then P.Nothing
               else P.Just ("_profile",
-                            [ "_secretKey"                            , "_apiKey"                            , "_apiUrl"
+                            [ "_apiKey"                            , "_apiUrl"                            , "_secretKey"
                             ])
         , if (_secretKey P.== P.Nothing)
               then P.Nothing
               else P.Just ("_secretKey",
-                            [ "_profile"                            , "_config"
+                            [ "_config"                            , "_profile"
                             ])
         ])
 
@@ -202,7 +199,7 @@ instance P.HasSecretKey (Provider) (P.Maybe P.Text) where
         P.lens (_secretKey :: Provider -> P.Maybe P.Text)
                (\s a -> s { _secretKey = a } :: Provider)
 
-instance P.HasTimeout (Provider) (P.Integer) where
+instance P.HasTimeout (Provider) (P.Int) where
     timeout =
-        P.lens (_timeout :: Provider -> P.Integer)
+        P.lens (_timeout :: Provider -> P.Int)
                (\s a -> s { _timeout = a } :: Provider)

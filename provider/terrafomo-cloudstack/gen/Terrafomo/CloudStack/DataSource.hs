@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.CloudStack.Settings
 
-import qualified Data.Hashable                 as P
-import qualified Data.HashMap.Strict           as P
-import qualified Data.HashMap.Strict           as Map
 import qualified Data.List.NonEmpty            as P
+import qualified Data.Map.Strict               as P
+import qualified Data.Map.Strict               as Map
 import qualified Data.Maybe                    as P
 import qualified Data.Monoid                   as P
 import qualified Data.Text                     as P
@@ -54,20 +53,20 @@ import qualified Terrafomo.Validator           as TF
 -- See the <https://www.terraform.io/docs/providers/cloudstack/d/template.html terraform documentation>
 -- for more information.
 data TemplateData s = TemplateData'
-    { _filter         :: TF.Attr s [TF.Attr s (TemplateFilter s)]
+    { _filter         :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Required, Forces New)
     --
     , _templateFilter :: TF.Attr s P.Text
     -- ^ @template_filter@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 templateData
-    :: TF.Attr s [TF.Attr s (TemplateFilter s)] -- ^ @filter@ - 'P.filter'
+    :: TF.Attr s [TF.Attr s (FilterSetting s)] -- ^ @filter@ - 'P.filter'
     -> TF.Attr s P.Text -- ^ @template_filter@ - 'P.templateFilter'
     -> P.DataSource (TemplateData s)
 templateData _filter _templateFilter =
-    TF.newDataSource "cloudstack_template" TF.validator $
+    TF.unsafeDataSource "cloudstack_template" P.defaultProvider TF.validator $
         TemplateData'
             { _filter = _filter
             , _templateFilter = _templateFilter
@@ -81,14 +80,10 @@ instance TF.IsObject (TemplateData s) where
 
 instance TF.IsValid (TemplateData s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_filter"
-                  (_filter
-                      :: TemplateData s -> TF.Attr s [TF.Attr s (TemplateFilter s)])
-                  TF.validator
 
-instance P.HasFilter (TemplateData s) (TF.Attr s [TF.Attr s (TemplateFilter s)]) where
+instance P.HasFilter (TemplateData s) (TF.Attr s [TF.Attr s (FilterSetting s)]) where
     filter =
-        P.lens (_filter :: TemplateData s -> TF.Attr s [TF.Attr s (TemplateFilter s)])
+        P.lens (_filter :: TemplateData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: TemplateData s)
 
 instance P.HasTemplateFilter (TemplateData s) (TF.Attr s P.Text) where
@@ -120,7 +115,7 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (TemplateData s)) (TF.Attr s P.T
 instance s ~ s' => P.HasComputedSize (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
     computedSize x = TF.compute (TF.refKey x) "size"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (TemplateData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (TemplateData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedTemplateId (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
