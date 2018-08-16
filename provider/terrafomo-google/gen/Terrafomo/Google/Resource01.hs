@@ -338,6 +338,86 @@ module Terrafomo.Google.Resource01
     , LoggingOrganizationExclusionResource (..)
     , loggingOrganizationExclusionResource
 
+    -- ** google_logging_organization_sink
+    , LoggingOrganizationSinkResource (..)
+    , loggingOrganizationSinkResource
+
+    -- ** google_logging_project_exclusion
+    , LoggingProjectExclusionResource (..)
+    , loggingProjectExclusionResource
+
+    -- ** google_logging_project_sink
+    , LoggingProjectSinkResource (..)
+    , loggingProjectSinkResource
+
+    -- ** google_organization_iam_binding
+    , OrganizationIamBindingResource (..)
+    , organizationIamBindingResource
+
+    -- ** google_organization_iam_custom_role
+    , OrganizationIamCustomRoleResource (..)
+    , organizationIamCustomRoleResource
+
+    -- ** google_organization_iam_member
+    , OrganizationIamMemberResource (..)
+    , organizationIamMemberResource
+
+    -- ** google_organization_iam_policy
+    , OrganizationIamPolicyResource (..)
+    , organizationIamPolicyResource
+
+    -- ** google_organization_policy
+    , OrganizationPolicyResource (..)
+    , organizationPolicyResource
+
+    -- ** google_project
+    , ProjectResource (..)
+    , projectResource
+
+    -- ** google_project_iam_binding
+    , ProjectIamBindingResource (..)
+    , projectIamBindingResource
+
+    -- ** google_project_iam_custom_role
+    , ProjectIamCustomRoleResource (..)
+    , projectIamCustomRoleResource
+
+    -- ** google_project_iam_member
+    , ProjectIamMemberResource (..)
+    , projectIamMemberResource
+
+    -- ** google_project_iam_policy
+    , ProjectIamPolicyResource (..)
+    , projectIamPolicyResource
+
+    -- ** google_project_organization_policy
+    , ProjectOrganizationPolicyResource (..)
+    , projectOrganizationPolicyResource
+
+    -- ** google_project_service
+    , ProjectServiceResource (..)
+    , projectServiceResource
+
+    -- ** google_project_services
+    , ProjectServicesResource (..)
+    , projectServicesResource
+
+    -- ** google_project_usage_export_bucket
+    , ProjectUsageExportBucketResource (..)
+    , projectUsageExportBucketResource
+
+    -- ** google_pubsub_subscription
+    , PubsubSubscriptionResource (..)
+    , pubsubSubscriptionResource
+
+    -- ** google_pubsub_subscription_iam_binding
+    , PubsubSubscriptionIamBindingResource (..)
+    , pubsubSubscriptionIamBindingResource
+
+    -- ** google_pubsub_subscription_iam_member
+    , PubsubSubscriptionIamMemberResource (..)
+    , pubsubSubscriptionIamMemberResource
+
     ) where
 
 import Data.Functor ((<$>))
@@ -346,10 +426,9 @@ import GHC.Base (($))
 
 import Terrafomo.Google.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
+import qualified Data.Map.Strict           as Map
 import qualified Data.Maybe                as P
 import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
@@ -370,31 +449,31 @@ import qualified Terrafomo.Validator       as TF
 -- See the <https://www.terraform.io/docs/providers/google/r/bigquery_dataset.html terraform documentation>
 -- for more information.
 data BigqueryDatasetResource s = BigqueryDatasetResource'
-    { _datasetId :: TF.Attr s P.Text
+    { _datasetId                :: TF.Attr s P.Text
     -- ^ @dataset_id@ - (Required, Forces New)
     --
-    , _defaultTableExpirationMs :: TF.Attr s P.Integer
+    , _defaultTableExpirationMs :: TF.Attr s P.Int
     -- ^ @default_table_expiration_ms@ - (Optional)
     --
-    , _description :: TF.Attr s P.Text
+    , _description              :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _friendlyName :: TF.Attr s P.Text
+    , _friendlyName             :: TF.Attr s P.Text
     -- ^ @friendly_name@ - (Optional)
     --
-    , _labels :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels                   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
-    , _location :: TF.Attr s P.Text
+    , _location                 :: TF.Attr s P.Text
     -- ^ @location@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 bigqueryDatasetResource
     :: TF.Attr s P.Text -- ^ @dataset_id@ - 'P.datasetId'
     -> P.Resource (BigqueryDatasetResource s)
 bigqueryDatasetResource _datasetId =
-    TF.newResource "google_bigquery_dataset" TF.validator $
+    TF.unsafeResource "google_bigquery_dataset" P.defaultProvider TF.validator $
         BigqueryDatasetResource'
             { _datasetId = _datasetId
             , _defaultTableExpirationMs = TF.Nil
@@ -422,9 +501,9 @@ instance P.HasDatasetId (BigqueryDatasetResource s) (TF.Attr s P.Text) where
         P.lens (_datasetId :: BigqueryDatasetResource s -> TF.Attr s P.Text)
                (\s a -> s { _datasetId = a } :: BigqueryDatasetResource s)
 
-instance P.HasDefaultTableExpirationMs (BigqueryDatasetResource s) (TF.Attr s P.Integer) where
+instance P.HasDefaultTableExpirationMs (BigqueryDatasetResource s) (TF.Attr s P.Int) where
     defaultTableExpirationMs =
-        P.lens (_defaultTableExpirationMs :: BigqueryDatasetResource s -> TF.Attr s P.Integer)
+        P.lens (_defaultTableExpirationMs :: BigqueryDatasetResource s -> TF.Attr s P.Int)
                (\s a -> s { _defaultTableExpirationMs = a } :: BigqueryDatasetResource s)
 
 instance P.HasDescription (BigqueryDatasetResource s) (TF.Attr s P.Text) where
@@ -437,9 +516,9 @@ instance P.HasFriendlyName (BigqueryDatasetResource s) (TF.Attr s P.Text) where
         P.lens (_friendlyName :: BigqueryDatasetResource s -> TF.Attr s P.Text)
                (\s a -> s { _friendlyName = a } :: BigqueryDatasetResource s)
 
-instance P.HasLabels (BigqueryDatasetResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (BigqueryDatasetResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: BigqueryDatasetResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: BigqueryDatasetResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: BigqueryDatasetResource s)
 
 instance P.HasLocation (BigqueryDatasetResource s) (TF.Attr s P.Text) where
@@ -447,13 +526,13 @@ instance P.HasLocation (BigqueryDatasetResource s) (TF.Attr s P.Text) where
         P.lens (_location :: BigqueryDatasetResource s -> TF.Attr s P.Text)
                (\s a -> s { _location = a } :: BigqueryDatasetResource s)
 
-instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Int) where
     computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
-instance s ~ s' => P.HasComputedLastModifiedTime (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedLastModifiedTime (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Int) where
     computedLastModifiedTime x = TF.compute (TF.refKey x) "last_modified_time"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Text) where
@@ -476,26 +555,26 @@ data BigqueryTableResource s = BigqueryTableResource'
     , _friendlyName     :: TF.Attr s P.Text
     -- ^ @friendly_name@ - (Optional)
     --
-    , _labels           :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels           :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _tableId          :: TF.Attr s P.Text
     -- ^ @table_id@ - (Required, Forces New)
     --
-    , _timePartitioning :: TF.Attr s (BigqueryTableTimePartitioning s)
+    , _timePartitioning :: TF.Attr s (TimePartitioningSetting s)
     -- ^ @time_partitioning@ - (Optional)
     --
-    , _view             :: TF.Attr s (BigqueryTableView s)
+    , _view             :: TF.Attr s (ViewSetting s)
     -- ^ @view@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 bigqueryTableResource
     :: TF.Attr s P.Text -- ^ @dataset_id@ - 'P.datasetId'
     -> TF.Attr s P.Text -- ^ @table_id@ - 'P.tableId'
     -> P.Resource (BigqueryTableResource s)
 bigqueryTableResource _datasetId _tableId =
-    TF.newResource "google_bigquery_table" TF.validator $
+    TF.unsafeResource "google_bigquery_table" P.defaultProvider TF.validator $
         BigqueryTableResource'
             { _datasetId = _datasetId
             , _description = TF.Nil
@@ -521,11 +600,11 @@ instance TF.IsValid (BigqueryTableResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_timePartitioning"
                   (_timePartitioning
-                      :: BigqueryTableResource s -> TF.Attr s (BigqueryTableTimePartitioning s))
+                      :: BigqueryTableResource s -> TF.Attr s (TimePartitioningSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_view"
                   (_view
-                      :: BigqueryTableResource s -> TF.Attr s (BigqueryTableView s))
+                      :: BigqueryTableResource s -> TF.Attr s (ViewSetting s))
                   TF.validator
 
 instance P.HasDatasetId (BigqueryTableResource s) (TF.Attr s P.Text) where
@@ -543,9 +622,9 @@ instance P.HasFriendlyName (BigqueryTableResource s) (TF.Attr s P.Text) where
         P.lens (_friendlyName :: BigqueryTableResource s -> TF.Attr s P.Text)
                (\s a -> s { _friendlyName = a } :: BigqueryTableResource s)
 
-instance P.HasLabels (BigqueryTableResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (BigqueryTableResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: BigqueryTableResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: BigqueryTableResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: BigqueryTableResource s)
 
 instance P.HasTableId (BigqueryTableResource s) (TF.Attr s P.Text) where
@@ -553,38 +632,38 @@ instance P.HasTableId (BigqueryTableResource s) (TF.Attr s P.Text) where
         P.lens (_tableId :: BigqueryTableResource s -> TF.Attr s P.Text)
                (\s a -> s { _tableId = a } :: BigqueryTableResource s)
 
-instance P.HasTimePartitioning (BigqueryTableResource s) (TF.Attr s (BigqueryTableTimePartitioning s)) where
+instance P.HasTimePartitioning (BigqueryTableResource s) (TF.Attr s (TimePartitioningSetting s)) where
     timePartitioning =
-        P.lens (_timePartitioning :: BigqueryTableResource s -> TF.Attr s (BigqueryTableTimePartitioning s))
+        P.lens (_timePartitioning :: BigqueryTableResource s -> TF.Attr s (TimePartitioningSetting s))
                (\s a -> s { _timePartitioning = a } :: BigqueryTableResource s)
 
-instance P.HasView (BigqueryTableResource s) (TF.Attr s (BigqueryTableView s)) where
+instance P.HasView (BigqueryTableResource s) (TF.Attr s (ViewSetting s)) where
     view =
-        P.lens (_view :: BigqueryTableResource s -> TF.Attr s (BigqueryTableView s))
+        P.lens (_view :: BigqueryTableResource s -> TF.Attr s (ViewSetting s))
                (\s a -> s { _view = a } :: BigqueryTableResource s)
 
-instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Int) where
     computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
-instance s ~ s' => P.HasComputedExpirationTime (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedExpirationTime (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Int) where
     computedExpirationTime x = TF.compute (TF.refKey x) "expiration_time"
 
-instance s ~ s' => P.HasComputedLastModifiedTime (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedLastModifiedTime (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Int) where
     computedLastModifiedTime x = TF.compute (TF.refKey x) "last_modified_time"
 
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
-instance s ~ s' => P.HasComputedNumBytes (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedNumBytes (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Int) where
     computedNumBytes x = TF.compute (TF.refKey x) "num_bytes"
 
-instance s ~ s' => P.HasComputedNumLongTermBytes (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedNumLongTermBytes (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Int) where
     computedNumLongTermBytes x = TF.compute (TF.refKey x) "num_long_term_bytes"
 
-instance s ~ s' => P.HasComputedNumRows (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedNumRows (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Int) where
     computedNumRows x = TF.compute (TF.refKey x) "num_rows"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
@@ -613,20 +692,20 @@ data BigtableInstanceResource s = BigtableInstanceResource'
     , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _numNodes     :: TF.Attr s P.Integer
+    , _numNodes     :: TF.Attr s P.Int
     -- ^ @num_nodes@ - (Optional, Forces New)
     --
     , _storageType  :: TF.Attr s P.Text
     -- ^ @storage_type@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 bigtableInstanceResource
     :: TF.Attr s P.Text -- ^ @cluster_id@ - 'P.clusterId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (BigtableInstanceResource s)
 bigtableInstanceResource _clusterId _name =
-    TF.newResource "google_bigtable_instance" TF.validator $
+    TF.unsafeResource "google_bigtable_instance" P.defaultProvider TF.validator $
         BigtableInstanceResource'
             { _clusterId = _clusterId
             , _instanceType = TF.value "PRODUCTION"
@@ -662,9 +741,9 @@ instance P.HasName (BigtableInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_name :: BigtableInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: BigtableInstanceResource s)
 
-instance P.HasNumNodes (BigtableInstanceResource s) (TF.Attr s P.Integer) where
+instance P.HasNumNodes (BigtableInstanceResource s) (TF.Attr s P.Int) where
     numNodes =
-        P.lens (_numNodes :: BigtableInstanceResource s -> TF.Attr s P.Integer)
+        P.lens (_numNodes :: BigtableInstanceResource s -> TF.Attr s P.Int)
                (\s a -> s { _numNodes = a } :: BigtableInstanceResource s)
 
 instance P.HasStorageType (BigtableInstanceResource s) (TF.Attr s P.Text) where
@@ -695,14 +774,14 @@ data BigtableTableResource s = BigtableTableResource'
     , _splitKeys    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @split_keys@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 bigtableTableResource
     :: TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (BigtableTableResource s)
 bigtableTableResource _instanceName _name =
-    TF.newResource "google_bigtable_table" TF.validator $
+    TF.unsafeResource "google_bigtable_table" P.defaultProvider TF.validator $
         BigtableTableResource'
             { _instanceName = _instanceName
             , _name = _name
@@ -742,7 +821,7 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (BigtableTableResource s)) (T
 -- See the <https://www.terraform.io/docs/providers/google/r/cloudbuild_trigger.html terraform documentation>
 -- for more information.
 data CloudbuildTriggerResource s = CloudbuildTriggerResource'
-    { _build           :: TF.Attr s (CloudbuildTriggerBuild s)
+    { _build           :: TF.Attr s (BuildSetting s)
     -- ^ @build@ - (Optional, Forces New)
     -- Contents of the build template.
     --
@@ -758,18 +837,18 @@ data CloudbuildTriggerResource s = CloudbuildTriggerResource'
     -- Conflicts with:
     --
     -- * 'build'
-    , _substitutions   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _substitutions   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @substitutions@ - (Optional, Forces New)
     --
-    , _triggerTemplate :: TF.Attr s (CloudbuildTriggerTriggerTemplate s)
+    , _triggerTemplate :: TF.Attr s (TriggerTemplateSetting s)
     -- ^ @trigger_template@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 cloudbuildTriggerResource
     :: P.Resource (CloudbuildTriggerResource s)
 cloudbuildTriggerResource =
-    TF.newResource "google_cloudbuild_trigger" TF.validator $
+    TF.unsafeResource "google_cloudbuild_trigger" P.defaultProvider TF.validator $
         CloudbuildTriggerResource'
             { _build = TF.Nil
             , _description = TF.Nil
@@ -802,16 +881,16 @@ instance TF.IsValid (CloudbuildTriggerResource s) where
         ])
            P.<> TF.settingsValidator "_build"
                   (_build
-                      :: CloudbuildTriggerResource s -> TF.Attr s (CloudbuildTriggerBuild s))
+                      :: CloudbuildTriggerResource s -> TF.Attr s (BuildSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_triggerTemplate"
                   (_triggerTemplate
-                      :: CloudbuildTriggerResource s -> TF.Attr s (CloudbuildTriggerTriggerTemplate s))
+                      :: CloudbuildTriggerResource s -> TF.Attr s (TriggerTemplateSetting s))
                   TF.validator
 
-instance P.HasBuild (CloudbuildTriggerResource s) (TF.Attr s (CloudbuildTriggerBuild s)) where
+instance P.HasBuild (CloudbuildTriggerResource s) (TF.Attr s (BuildSetting s)) where
     build =
-        P.lens (_build :: CloudbuildTriggerResource s -> TF.Attr s (CloudbuildTriggerBuild s))
+        P.lens (_build :: CloudbuildTriggerResource s -> TF.Attr s (BuildSetting s))
                (\s a -> s { _build = a } :: CloudbuildTriggerResource s)
 
 instance P.HasDescription (CloudbuildTriggerResource s) (TF.Attr s P.Text) where
@@ -824,14 +903,14 @@ instance P.HasFilename (CloudbuildTriggerResource s) (TF.Attr s P.Text) where
         P.lens (_filename :: CloudbuildTriggerResource s -> TF.Attr s P.Text)
                (\s a -> s { _filename = a } :: CloudbuildTriggerResource s)
 
-instance P.HasSubstitutions (CloudbuildTriggerResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasSubstitutions (CloudbuildTriggerResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     substitutions =
-        P.lens (_substitutions :: CloudbuildTriggerResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_substitutions :: CloudbuildTriggerResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _substitutions = a } :: CloudbuildTriggerResource s)
 
-instance P.HasTriggerTemplate (CloudbuildTriggerResource s) (TF.Attr s (CloudbuildTriggerTriggerTemplate s)) where
+instance P.HasTriggerTemplate (CloudbuildTriggerResource s) (TF.Attr s (TriggerTemplateSetting s)) where
     triggerTemplate =
-        P.lens (_triggerTemplate :: CloudbuildTriggerResource s -> TF.Attr s (CloudbuildTriggerTriggerTemplate s))
+        P.lens (_triggerTemplate :: CloudbuildTriggerResource s -> TF.Attr s (TriggerTemplateSetting s))
                (\s a -> s { _triggerTemplate = a } :: CloudbuildTriggerResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (CloudbuildTriggerResource s)) (TF.Attr s P.Text) where
@@ -842,7 +921,7 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (CloudbuildTriggerResource s)
 -- See the <https://www.terraform.io/docs/providers/google/r/cloudfunctions_function.html terraform documentation>
 -- for more information.
 data CloudfunctionsFunctionResource s = CloudfunctionsFunctionResource'
-    { _availableMemoryMb   :: TF.Attr s P.Integer
+    { _availableMemoryMb   :: TF.Attr s P.Int
     -- ^ @available_memory_mb@ - (Optional)
     --
     , _description         :: TF.Attr s P.Text
@@ -851,7 +930,7 @@ data CloudfunctionsFunctionResource s = CloudfunctionsFunctionResource'
     , _entryPoint          :: TF.Attr s P.Text
     -- ^ @entry_point@ - (Optional, Forces New)
     --
-    , _labels              :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name                :: TF.Attr s P.Text
@@ -869,7 +948,7 @@ data CloudfunctionsFunctionResource s = CloudfunctionsFunctionResource'
     , _sourceArchiveObject :: TF.Attr s P.Text
     -- ^ @source_archive_object@ - (Required)
     --
-    , _timeout             :: TF.Attr s P.Integer
+    , _timeout             :: TF.Attr s P.Int
     -- ^ @timeout@ - (Optional)
     --
     , _triggerBucket       :: TF.Attr s P.Text
@@ -877,16 +956,16 @@ data CloudfunctionsFunctionResource s = CloudfunctionsFunctionResource'
     --
     -- Conflicts with:
     --
-    -- * 'triggerTopic'
     -- * 'triggerHttp'
+    -- * 'triggerTopic'
     , _triggerHttp         :: TF.Attr s P.Bool
     -- ^ @trigger_http@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
+    -- * 'retryOnFailure'
     -- * 'triggerBucket'
     -- * 'triggerTopic'
-    -- * 'retryOnFailure'
     , _triggerTopic        :: TF.Attr s P.Text
     -- ^ @trigger_topic@ - (Optional, Forces New)
     --
@@ -894,7 +973,7 @@ data CloudfunctionsFunctionResource s = CloudfunctionsFunctionResource'
     --
     -- * 'triggerBucket'
     -- * 'triggerHttp'
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 cloudfunctionsFunctionResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -902,7 +981,7 @@ cloudfunctionsFunctionResource
     -> TF.Attr s P.Text -- ^ @source_archive_object@ - 'P.sourceArchiveObject'
     -> P.Resource (CloudfunctionsFunctionResource s)
 cloudfunctionsFunctionResource _name _sourceArchiveBucket _sourceArchiveObject =
-    TF.newResource "google_cloudfunctions_function" TF.validator $
+    TF.unsafeResource "google_cloudfunctions_function" P.defaultProvider TF.validator $
         CloudfunctionsFunctionResource'
             { _availableMemoryMb = TF.value 256
             , _description = TF.Nil
@@ -944,12 +1023,12 @@ instance TF.IsValid (CloudfunctionsFunctionResource s) where
         , if (_triggerBucket P.== TF.Nil)
               then P.Nothing
               else P.Just ("_triggerBucket",
-                            [ "_triggerTopic"                            , "_triggerHttp"
+                            [ "_triggerHttp"                            , "_triggerTopic"
                             ])
         , if (_triggerHttp P.== TF.Nil)
               then P.Nothing
               else P.Just ("_triggerHttp",
-                            [ "_triggerBucket"                            , "_triggerTopic"                            , "_retryOnFailure"
+                            [ "_retryOnFailure"                            , "_triggerBucket"                            , "_triggerTopic"
                             ])
         , if (_triggerTopic P.== TF.Nil)
               then P.Nothing
@@ -958,9 +1037,9 @@ instance TF.IsValid (CloudfunctionsFunctionResource s) where
                             ])
         ])
 
-instance P.HasAvailableMemoryMb (CloudfunctionsFunctionResource s) (TF.Attr s P.Integer) where
+instance P.HasAvailableMemoryMb (CloudfunctionsFunctionResource s) (TF.Attr s P.Int) where
     availableMemoryMb =
-        P.lens (_availableMemoryMb :: CloudfunctionsFunctionResource s -> TF.Attr s P.Integer)
+        P.lens (_availableMemoryMb :: CloudfunctionsFunctionResource s -> TF.Attr s P.Int)
                (\s a -> s { _availableMemoryMb = a } :: CloudfunctionsFunctionResource s)
 
 instance P.HasDescription (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) where
@@ -973,9 +1052,9 @@ instance P.HasEntryPoint (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) w
         P.lens (_entryPoint :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
                (\s a -> s { _entryPoint = a } :: CloudfunctionsFunctionResource s)
 
-instance P.HasLabels (CloudfunctionsFunctionResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (CloudfunctionsFunctionResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: CloudfunctionsFunctionResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: CloudfunctionsFunctionResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: CloudfunctionsFunctionResource s)
 
 instance P.HasName (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) where
@@ -998,9 +1077,9 @@ instance P.HasSourceArchiveObject (CloudfunctionsFunctionResource s) (TF.Attr s 
         P.lens (_sourceArchiveObject :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
                (\s a -> s { _sourceArchiveObject = a } :: CloudfunctionsFunctionResource s)
 
-instance P.HasTimeout (CloudfunctionsFunctionResource s) (TF.Attr s P.Integer) where
+instance P.HasTimeout (CloudfunctionsFunctionResource s) (TF.Attr s P.Int) where
     timeout =
-        P.lens (_timeout :: CloudfunctionsFunctionResource s -> TF.Attr s P.Integer)
+        P.lens (_timeout :: CloudfunctionsFunctionResource s -> TF.Attr s P.Int)
                (\s a -> s { _timeout = a } :: CloudfunctionsFunctionResource s)
 
 instance P.HasTriggerBucket (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) where
@@ -1032,31 +1111,31 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (CloudfunctionsFunctionResourc
 -- See the <https://www.terraform.io/docs/providers/google/r/cloudiot_registry.html terraform documentation>
 -- for more information.
 data CloudiotRegistryResource s = CloudiotRegistryResource'
-    { _credentials :: TF.Attr s [TF.Attr s (CloudiotRegistryCredentials s)]
+    { _credentials :: TF.Attr s [TF.Attr s (CredentialsSetting s)]
     -- ^ @credentials@ - (Optional)
     --
-    , _eventNotificationConfig :: TF.Attr s (P.HashMap P.Text (CloudiotRegistryEventNotificationConfig s))
+    , _eventNotificationConfig :: TF.Attr s (P.Map P.Text (TF.Attr s (EventNotificationConfigSetting s)))
     -- ^ @event_notification_config@ - (Optional)
     --
-    , _httpConfig :: TF.Attr s (P.HashMap P.Text (CloudiotRegistryHttpConfig s))
+    , _httpConfig :: TF.Attr s (P.Map P.Text (TF.Attr s (HttpConfigSetting s)))
     -- ^ @http_config@ - (Optional)
     --
-    , _mqttConfig :: TF.Attr s (P.HashMap P.Text (CloudiotRegistryMqttConfig s))
+    , _mqttConfig :: TF.Attr s (P.Map P.Text (TF.Attr s (MqttConfigSetting s)))
     -- ^ @mqtt_config@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _stateNotificationConfig :: TF.Attr s (P.HashMap P.Text (CloudiotRegistryStateNotificationConfig s))
+    , _stateNotificationConfig :: TF.Attr s (P.Map P.Text (TF.Attr s (StateNotificationConfigSetting s)))
     -- ^ @state_notification_config@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 cloudiotRegistryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (CloudiotRegistryResource s)
 cloudiotRegistryResource _name =
-    TF.newResource "google_cloudiot_registry" TF.validator $
+    TF.unsafeResource "google_cloudiot_registry" P.defaultProvider TF.validator $
         CloudiotRegistryResource'
             { _credentials = TF.Nil
             , _eventNotificationConfig = TF.Nil
@@ -1078,45 +1157,25 @@ instance TF.IsObject (CloudiotRegistryResource s) where
 
 instance TF.IsValid (CloudiotRegistryResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_credentials"
-                  (_credentials
-                      :: CloudiotRegistryResource s -> TF.Attr s [TF.Attr s (CloudiotRegistryCredentials s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_eventNotificationConfig"
-                  (_eventNotificationConfig
-                      :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (CloudiotRegistryEventNotificationConfig s)))
-                  TF.validator
-           P.<> TF.settingsValidator "_httpConfig"
-                  (_httpConfig
-                      :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (CloudiotRegistryHttpConfig s)))
-                  TF.validator
-           P.<> TF.settingsValidator "_mqttConfig"
-                  (_mqttConfig
-                      :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (CloudiotRegistryMqttConfig s)))
-                  TF.validator
-           P.<> TF.settingsValidator "_stateNotificationConfig"
-                  (_stateNotificationConfig
-                      :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (CloudiotRegistryStateNotificationConfig s)))
-                  TF.validator
 
-instance P.HasCredentials (CloudiotRegistryResource s) (TF.Attr s [TF.Attr s (CloudiotRegistryCredentials s)]) where
+instance P.HasCredentials (CloudiotRegistryResource s) (TF.Attr s [TF.Attr s (CredentialsSetting s)]) where
     credentials =
-        P.lens (_credentials :: CloudiotRegistryResource s -> TF.Attr s [TF.Attr s (CloudiotRegistryCredentials s)])
+        P.lens (_credentials :: CloudiotRegistryResource s -> TF.Attr s [TF.Attr s (CredentialsSetting s)])
                (\s a -> s { _credentials = a } :: CloudiotRegistryResource s)
 
-instance P.HasEventNotificationConfig (CloudiotRegistryResource s) (TF.Attr s (P.HashMap P.Text (CloudiotRegistryEventNotificationConfig s))) where
+instance P.HasEventNotificationConfig (CloudiotRegistryResource s) (TF.Attr s (P.Map P.Text (TF.Attr s (EventNotificationConfigSetting s)))) where
     eventNotificationConfig =
-        P.lens (_eventNotificationConfig :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (CloudiotRegistryEventNotificationConfig s)))
+        P.lens (_eventNotificationConfig :: CloudiotRegistryResource s -> TF.Attr s (P.Map P.Text (TF.Attr s (EventNotificationConfigSetting s))))
                (\s a -> s { _eventNotificationConfig = a } :: CloudiotRegistryResource s)
 
-instance P.HasHttpConfig (CloudiotRegistryResource s) (TF.Attr s (P.HashMap P.Text (CloudiotRegistryHttpConfig s))) where
+instance P.HasHttpConfig (CloudiotRegistryResource s) (TF.Attr s (P.Map P.Text (TF.Attr s (HttpConfigSetting s)))) where
     httpConfig =
-        P.lens (_httpConfig :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (CloudiotRegistryHttpConfig s)))
+        P.lens (_httpConfig :: CloudiotRegistryResource s -> TF.Attr s (P.Map P.Text (TF.Attr s (HttpConfigSetting s))))
                (\s a -> s { _httpConfig = a } :: CloudiotRegistryResource s)
 
-instance P.HasMqttConfig (CloudiotRegistryResource s) (TF.Attr s (P.HashMap P.Text (CloudiotRegistryMqttConfig s))) where
+instance P.HasMqttConfig (CloudiotRegistryResource s) (TF.Attr s (P.Map P.Text (TF.Attr s (MqttConfigSetting s)))) where
     mqttConfig =
-        P.lens (_mqttConfig :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (CloudiotRegistryMqttConfig s)))
+        P.lens (_mqttConfig :: CloudiotRegistryResource s -> TF.Attr s (P.Map P.Text (TF.Attr s (MqttConfigSetting s))))
                (\s a -> s { _mqttConfig = a } :: CloudiotRegistryResource s)
 
 instance P.HasName (CloudiotRegistryResource s) (TF.Attr s P.Text) where
@@ -1124,9 +1183,9 @@ instance P.HasName (CloudiotRegistryResource s) (TF.Attr s P.Text) where
         P.lens (_name :: CloudiotRegistryResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: CloudiotRegistryResource s)
 
-instance P.HasStateNotificationConfig (CloudiotRegistryResource s) (TF.Attr s (P.HashMap P.Text (CloudiotRegistryStateNotificationConfig s))) where
+instance P.HasStateNotificationConfig (CloudiotRegistryResource s) (TF.Attr s (P.Map P.Text (TF.Attr s (StateNotificationConfigSetting s)))) where
     stateNotificationConfig =
-        P.lens (_stateNotificationConfig :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (CloudiotRegistryStateNotificationConfig s)))
+        P.lens (_stateNotificationConfig :: CloudiotRegistryResource s -> TF.Attr s (P.Map P.Text (TF.Attr s (StateNotificationConfigSetting s))))
                (\s a -> s { _stateNotificationConfig = a } :: CloudiotRegistryResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (CloudiotRegistryResource s)) (TF.Attr s P.Text) where
@@ -1146,19 +1205,19 @@ data ComputeAddressResource s = ComputeAddressResource'
     , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _labels      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeAddressResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeAddressResource s)
 computeAddressResource _name =
-    TF.newResource "google_compute_address" TF.validator $
+    TF.unsafeResource "google_compute_address" P.defaultProvider TF.validator $
         ComputeAddressResource'
             { _addressType = TF.value "EXTERNAL"
             , _description = TF.Nil
@@ -1187,9 +1246,9 @@ instance P.HasDescription (ComputeAddressResource s) (TF.Attr s P.Text) where
         P.lens (_description :: ComputeAddressResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeAddressResource s)
 
-instance P.HasLabels (ComputeAddressResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (ComputeAddressResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: ComputeAddressResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: ComputeAddressResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: ComputeAddressResource s)
 
 instance P.HasName (ComputeAddressResource s) (TF.Attr s P.Text) where
@@ -1229,7 +1288,7 @@ instance s ~ s' => P.HasComputedUsers (TF.Ref s' (ComputeAddressResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_autoscaler.html terraform documentation>
 -- for more information.
 data ComputeAutoscalerResource s = ComputeAutoscalerResource'
-    { _autoscalingPolicy :: TF.Attr s (ComputeAutoscalerAutoscalingPolicy s)
+    { _autoscalingPolicy :: TF.Attr s (AutoscalingPolicySetting s)
     -- ^ @autoscaling_policy@ - (Required)
     --
     , _description       :: TF.Attr s P.Text
@@ -1241,15 +1300,15 @@ data ComputeAutoscalerResource s = ComputeAutoscalerResource'
     , _target            :: TF.Attr s P.Text
     -- ^ @target@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeAutoscalerResource
-    :: TF.Attr s (ComputeAutoscalerAutoscalingPolicy s) -- ^ @autoscaling_policy@ - 'P.autoscalingPolicy'
+    :: TF.Attr s (AutoscalingPolicySetting s) -- ^ @autoscaling_policy@ - 'P.autoscalingPolicy'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
     -> P.Resource (ComputeAutoscalerResource s)
 computeAutoscalerResource _autoscalingPolicy _name _target =
-    TF.newResource "google_compute_autoscaler" TF.validator $
+    TF.unsafeResource "google_compute_autoscaler" P.defaultProvider TF.validator $
         ComputeAutoscalerResource'
             { _autoscalingPolicy = _autoscalingPolicy
             , _description = TF.Nil
@@ -1269,12 +1328,12 @@ instance TF.IsValid (ComputeAutoscalerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_autoscalingPolicy"
                   (_autoscalingPolicy
-                      :: ComputeAutoscalerResource s -> TF.Attr s (ComputeAutoscalerAutoscalingPolicy s))
+                      :: ComputeAutoscalerResource s -> TF.Attr s (AutoscalingPolicySetting s))
                   TF.validator
 
-instance P.HasAutoscalingPolicy (ComputeAutoscalerResource s) (TF.Attr s (ComputeAutoscalerAutoscalingPolicy s)) where
+instance P.HasAutoscalingPolicy (ComputeAutoscalerResource s) (TF.Attr s (AutoscalingPolicySetting s)) where
     autoscalingPolicy =
-        P.lens (_autoscalingPolicy :: ComputeAutoscalerResource s -> TF.Attr s (ComputeAutoscalerAutoscalingPolicy s))
+        P.lens (_autoscalingPolicy :: ComputeAutoscalerResource s -> TF.Attr s (AutoscalingPolicySetting s))
                (\s a -> s { _autoscalingPolicy = a } :: ComputeAutoscalerResource s)
 
 instance P.HasDescription (ComputeAutoscalerResource s) (TF.Attr s P.Text) where
@@ -1321,14 +1380,14 @@ data ComputeBackendBucketResource s = ComputeBackendBucketResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeBackendBucketResource
     :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeBackendBucketResource s)
 computeBackendBucketResource _bucketName _name =
-    TF.newResource "google_compute_backend_bucket" TF.validator $
+    TF.unsafeResource "google_compute_backend_bucket" P.defaultProvider TF.validator $
         ComputeBackendBucketResource'
             { _bucketName = _bucketName
             , _description = TF.Nil
@@ -1381,44 +1440,44 @@ instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeBackendBucketResourc
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_backend_service.html terraform documentation>
 -- for more information.
 data ComputeBackendServiceResource s = ComputeBackendServiceResource'
-    { _backend :: TF.Attr s [TF.Attr s (ComputeBackendServiceBackend s)]
+    { _backend                      :: TF.Attr s [TF.Attr s (BackendSetting s)]
     -- ^ @backend@ - (Optional)
     --
-    , _connectionDrainingTimeoutSec :: TF.Attr s P.Integer
+    , _connectionDrainingTimeoutSec :: TF.Attr s P.Int
     -- ^ @connection_draining_timeout_sec@ - (Optional)
     --
-    , _customRequestHeaders :: TF.Attr s [TF.Attr s P.Text]
+    , _customRequestHeaders         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_request_headers@ - (Optional)
     --
-    , _description :: TF.Attr s P.Text
+    , _description                  :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _enableCdn :: TF.Attr s P.Bool
+    , _enableCdn                    :: TF.Attr s P.Bool
     -- ^ @enable_cdn@ - (Optional)
     --
-    , _healthChecks :: TF.Attr s P.Text
+    , _healthChecks                 :: TF.Attr s P.Text
     -- ^ @health_checks@ - (Required)
     --
-    , _iap :: TF.Attr s (ComputeBackendServiceIap s)
+    , _iap                          :: TF.Attr s (IapSetting s)
     -- ^ @iap@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                         :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _region :: TF.Attr s P.Text
+    , _region                       :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
-    , _securityPolicy :: TF.Attr s P.Text
+    , _securityPolicy               :: TF.Attr s P.Text
     -- ^ @security_policy@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeBackendServiceResource
     :: TF.Attr s P.Text -- ^ @health_checks@ - 'P.healthChecks'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeBackendServiceResource s)
 computeBackendServiceResource _healthChecks _name =
-    TF.newResource "google_compute_backend_service" TF.validator $
+    TF.unsafeResource "google_compute_backend_service" P.defaultProvider TF.validator $
         ComputeBackendServiceResource'
             { _backend = TF.Nil
             , _connectionDrainingTimeoutSec = TF.value 300
@@ -1448,23 +1507,19 @@ instance TF.IsObject (ComputeBackendServiceResource s) where
 
 instance TF.IsValid (ComputeBackendServiceResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_backend"
-                  (_backend
-                      :: ComputeBackendServiceResource s -> TF.Attr s [TF.Attr s (ComputeBackendServiceBackend s)])
-                  TF.validator
            P.<> TF.settingsValidator "_iap"
                   (_iap
-                      :: ComputeBackendServiceResource s -> TF.Attr s (ComputeBackendServiceIap s))
+                      :: ComputeBackendServiceResource s -> TF.Attr s (IapSetting s))
                   TF.validator
 
-instance P.HasBackend (ComputeBackendServiceResource s) (TF.Attr s [TF.Attr s (ComputeBackendServiceBackend s)]) where
+instance P.HasBackend (ComputeBackendServiceResource s) (TF.Attr s [TF.Attr s (BackendSetting s)]) where
     backend =
-        P.lens (_backend :: ComputeBackendServiceResource s -> TF.Attr s [TF.Attr s (ComputeBackendServiceBackend s)])
+        P.lens (_backend :: ComputeBackendServiceResource s -> TF.Attr s [TF.Attr s (BackendSetting s)])
                (\s a -> s { _backend = a } :: ComputeBackendServiceResource s)
 
-instance P.HasConnectionDrainingTimeoutSec (ComputeBackendServiceResource s) (TF.Attr s P.Integer) where
+instance P.HasConnectionDrainingTimeoutSec (ComputeBackendServiceResource s) (TF.Attr s P.Int) where
     connectionDrainingTimeoutSec =
-        P.lens (_connectionDrainingTimeoutSec :: ComputeBackendServiceResource s -> TF.Attr s P.Integer)
+        P.lens (_connectionDrainingTimeoutSec :: ComputeBackendServiceResource s -> TF.Attr s P.Int)
                (\s a -> s { _connectionDrainingTimeoutSec = a } :: ComputeBackendServiceResource s)
 
 instance P.HasCustomRequestHeaders (ComputeBackendServiceResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -1487,9 +1542,9 @@ instance P.HasHealthChecks (ComputeBackendServiceResource s) (TF.Attr s P.Text) 
         P.lens (_healthChecks :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _healthChecks = a } :: ComputeBackendServiceResource s)
 
-instance P.HasIap (ComputeBackendServiceResource s) (TF.Attr s (ComputeBackendServiceIap s)) where
+instance P.HasIap (ComputeBackendServiceResource s) (TF.Attr s (IapSetting s)) where
     iap =
-        P.lens (_iap :: ComputeBackendServiceResource s -> TF.Attr s (ComputeBackendServiceIap s))
+        P.lens (_iap :: ComputeBackendServiceResource s -> TF.Attr s (IapSetting s))
                (\s a -> s { _iap = a } :: ComputeBackendServiceResource s)
 
 instance P.HasName (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
@@ -1507,7 +1562,7 @@ instance P.HasSecurityPolicy (ComputeBackendServiceResource s) (TF.Attr s P.Text
         P.lens (_securityPolicy :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _securityPolicy = a } :: ComputeBackendServiceResource s)
 
-instance s ~ s' => P.HasComputedCdnPolicy (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s (ComputeBackendServiceCdnPolicy s)) where
+instance s ~ s' => P.HasComputedCdnPolicy (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s (CdnPolicySetting s)) where
     computedCdnPolicy x = TF.compute (TF.refKey x) "cdn_policy"
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
@@ -1528,7 +1583,7 @@ instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeBackendServiceResour
 instance s ~ s' => P.HasComputedSessionAffinity (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
     computedSessionAffinity x = TF.compute (TF.refKey x) "session_affinity"
 
-instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Int) where
     computedTimeoutSec x = TF.compute (TF.refKey x) "timeout_sec"
 
 -- | @google_compute_disk@ Resource.
@@ -1539,13 +1594,13 @@ data ComputeDiskResource s = ComputeDiskResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _diskEncryptionKey :: TF.Attr s (ComputeDiskDiskEncryptionKey s)
+    , _diskEncryptionKey :: TF.Attr s (DiskEncryptionKeySetting s)
     -- ^ @disk_encryption_key@ - (Optional, Forces New)
     --
     , _image :: TF.Attr s P.Text
     -- ^ @image@ - (Optional, Forces New)
     --
-    , _labels :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
@@ -1554,22 +1609,22 @@ data ComputeDiskResource s = ComputeDiskResource'
     , _snapshot :: TF.Attr s P.Text
     -- ^ @snapshot@ - (Optional, Forces New)
     --
-    , _sourceImageEncryptionKey :: TF.Attr s (ComputeDiskSourceImageEncryptionKey s)
+    , _sourceImageEncryptionKey :: TF.Attr s (SourceImageEncryptionKeySetting s)
     -- ^ @source_image_encryption_key@ - (Optional, Forces New)
     --
-    , _sourceSnapshotEncryptionKey :: TF.Attr s (ComputeDiskSourceSnapshotEncryptionKey s)
+    , _sourceSnapshotEncryptionKey :: TF.Attr s (SourceSnapshotEncryptionKeySetting s)
     -- ^ @source_snapshot_encryption_key@ - (Optional, Forces New)
     --
     , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeDiskResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeDiskResource s)
 computeDiskResource _name =
-    TF.newResource "google_compute_disk" TF.validator $
+    TF.unsafeResource "google_compute_disk" P.defaultProvider TF.validator $
         ComputeDiskResource'
             { _description = TF.Nil
             , _diskEncryptionKey = TF.Nil
@@ -1599,15 +1654,15 @@ instance TF.IsValid (ComputeDiskResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_diskEncryptionKey"
                   (_diskEncryptionKey
-                      :: ComputeDiskResource s -> TF.Attr s (ComputeDiskDiskEncryptionKey s))
+                      :: ComputeDiskResource s -> TF.Attr s (DiskEncryptionKeySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_sourceImageEncryptionKey"
                   (_sourceImageEncryptionKey
-                      :: ComputeDiskResource s -> TF.Attr s (ComputeDiskSourceImageEncryptionKey s))
+                      :: ComputeDiskResource s -> TF.Attr s (SourceImageEncryptionKeySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_sourceSnapshotEncryptionKey"
                   (_sourceSnapshotEncryptionKey
-                      :: ComputeDiskResource s -> TF.Attr s (ComputeDiskSourceSnapshotEncryptionKey s))
+                      :: ComputeDiskResource s -> TF.Attr s (SourceSnapshotEncryptionKeySetting s))
                   TF.validator
 
 instance P.HasDescription (ComputeDiskResource s) (TF.Attr s P.Text) where
@@ -1615,9 +1670,9 @@ instance P.HasDescription (ComputeDiskResource s) (TF.Attr s P.Text) where
         P.lens (_description :: ComputeDiskResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeDiskResource s)
 
-instance P.HasDiskEncryptionKey (ComputeDiskResource s) (TF.Attr s (ComputeDiskDiskEncryptionKey s)) where
+instance P.HasDiskEncryptionKey (ComputeDiskResource s) (TF.Attr s (DiskEncryptionKeySetting s)) where
     diskEncryptionKey =
-        P.lens (_diskEncryptionKey :: ComputeDiskResource s -> TF.Attr s (ComputeDiskDiskEncryptionKey s))
+        P.lens (_diskEncryptionKey :: ComputeDiskResource s -> TF.Attr s (DiskEncryptionKeySetting s))
                (\s a -> s { _diskEncryptionKey = a } :: ComputeDiskResource s)
 
 instance P.HasImage (ComputeDiskResource s) (TF.Attr s P.Text) where
@@ -1625,9 +1680,9 @@ instance P.HasImage (ComputeDiskResource s) (TF.Attr s P.Text) where
         P.lens (_image :: ComputeDiskResource s -> TF.Attr s P.Text)
                (\s a -> s { _image = a } :: ComputeDiskResource s)
 
-instance P.HasLabels (ComputeDiskResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (ComputeDiskResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: ComputeDiskResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: ComputeDiskResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: ComputeDiskResource s)
 
 instance P.HasName (ComputeDiskResource s) (TF.Attr s P.Text) where
@@ -1640,14 +1695,14 @@ instance P.HasSnapshot (ComputeDiskResource s) (TF.Attr s P.Text) where
         P.lens (_snapshot :: ComputeDiskResource s -> TF.Attr s P.Text)
                (\s a -> s { _snapshot = a } :: ComputeDiskResource s)
 
-instance P.HasSourceImageEncryptionKey (ComputeDiskResource s) (TF.Attr s (ComputeDiskSourceImageEncryptionKey s)) where
+instance P.HasSourceImageEncryptionKey (ComputeDiskResource s) (TF.Attr s (SourceImageEncryptionKeySetting s)) where
     sourceImageEncryptionKey =
-        P.lens (_sourceImageEncryptionKey :: ComputeDiskResource s -> TF.Attr s (ComputeDiskSourceImageEncryptionKey s))
+        P.lens (_sourceImageEncryptionKey :: ComputeDiskResource s -> TF.Attr s (SourceImageEncryptionKeySetting s))
                (\s a -> s { _sourceImageEncryptionKey = a } :: ComputeDiskResource s)
 
-instance P.HasSourceSnapshotEncryptionKey (ComputeDiskResource s) (TF.Attr s (ComputeDiskSourceSnapshotEncryptionKey s)) where
+instance P.HasSourceSnapshotEncryptionKey (ComputeDiskResource s) (TF.Attr s (SourceSnapshotEncryptionKeySetting s)) where
     sourceSnapshotEncryptionKey =
-        P.lens (_sourceSnapshotEncryptionKey :: ComputeDiskResource s -> TF.Attr s (ComputeDiskSourceSnapshotEncryptionKey s))
+        P.lens (_sourceSnapshotEncryptionKey :: ComputeDiskResource s -> TF.Attr s (SourceSnapshotEncryptionKeySetting s))
                (\s a -> s { _sourceSnapshotEncryptionKey = a } :: ComputeDiskResource s)
 
 instance P.HasType' (ComputeDiskResource s) (TF.Attr s P.Text) where
@@ -1673,7 +1728,7 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeDiskResource s)) (TF.
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
     computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Int) where
     computedSize x = TF.compute (TF.refKey x) "size"
 
 instance s ~ s' => P.HasComputedSourceImageId (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
@@ -1693,13 +1748,13 @@ instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeDiskResource s)) (TF.Att
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_firewall.html terraform documentation>
 -- for more information.
 data ComputeFirewallResource s = ComputeFirewallResource'
-    { _allow                 :: TF.Attr s [TF.Attr s (ComputeFirewallAllow s)]
+    { _allow                 :: TF.Attr s [TF.Attr s (AllowSetting s)]
     -- ^ @allow@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'deny'
-    , _deny                  :: TF.Attr s [TF.Attr s (ComputeFirewallDeny s)]
+    , _deny                  :: TF.Attr s [TF.Attr s (DenySetting s)]
     -- ^ @deny@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -1717,7 +1772,7 @@ data ComputeFirewallResource s = ComputeFirewallResource'
     , _network               :: TF.Attr s P.Text
     -- ^ @network@ - (Required, Forces New)
     --
-    , _priority              :: TF.Attr s P.Integer
+    , _priority              :: TF.Attr s P.Int
     -- ^ @priority@ - (Optional, Forces New)
     --
     , _sourceServiceAccounts :: TF.Attr s P.Text
@@ -1748,14 +1803,14 @@ data ComputeFirewallResource s = ComputeFirewallResource'
     --
     -- * 'sourceServiceAccounts'
     -- * 'targetServiceAccounts'
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeFirewallResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
     -> P.Resource (ComputeFirewallResource s)
 computeFirewallResource _name _network =
-    TF.newResource "google_compute_firewall" TF.validator $
+    TF.unsafeResource "google_compute_firewall" P.defaultProvider TF.validator $
         ComputeFirewallResource'
             { _allow = TF.Nil
             , _deny = TF.Nil
@@ -1818,23 +1873,15 @@ instance TF.IsValid (ComputeFirewallResource s) where
                             [ "_sourceServiceAccounts"                            , "_targetServiceAccounts"
                             ])
         ])
-           P.<> TF.settingsValidator "_allow"
-                  (_allow
-                      :: ComputeFirewallResource s -> TF.Attr s [TF.Attr s (ComputeFirewallAllow s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_deny"
-                  (_deny
-                      :: ComputeFirewallResource s -> TF.Attr s [TF.Attr s (ComputeFirewallDeny s)])
-                  TF.validator
 
-instance P.HasAllow (ComputeFirewallResource s) (TF.Attr s [TF.Attr s (ComputeFirewallAllow s)]) where
+instance P.HasAllow (ComputeFirewallResource s) (TF.Attr s [TF.Attr s (AllowSetting s)]) where
     allow =
-        P.lens (_allow :: ComputeFirewallResource s -> TF.Attr s [TF.Attr s (ComputeFirewallAllow s)])
+        P.lens (_allow :: ComputeFirewallResource s -> TF.Attr s [TF.Attr s (AllowSetting s)])
                (\s a -> s { _allow = a } :: ComputeFirewallResource s)
 
-instance P.HasDeny (ComputeFirewallResource s) (TF.Attr s [TF.Attr s (ComputeFirewallDeny s)]) where
+instance P.HasDeny (ComputeFirewallResource s) (TF.Attr s [TF.Attr s (DenySetting s)]) where
     deny =
-        P.lens (_deny :: ComputeFirewallResource s -> TF.Attr s [TF.Attr s (ComputeFirewallDeny s)])
+        P.lens (_deny :: ComputeFirewallResource s -> TF.Attr s [TF.Attr s (DenySetting s)])
                (\s a -> s { _deny = a } :: ComputeFirewallResource s)
 
 instance P.HasDescription (ComputeFirewallResource s) (TF.Attr s P.Text) where
@@ -1857,9 +1904,9 @@ instance P.HasNetwork (ComputeFirewallResource s) (TF.Attr s P.Text) where
         P.lens (_network :: ComputeFirewallResource s -> TF.Attr s P.Text)
                (\s a -> s { _network = a } :: ComputeFirewallResource s)
 
-instance P.HasPriority (ComputeFirewallResource s) (TF.Attr s P.Integer) where
+instance P.HasPriority (ComputeFirewallResource s) (TF.Attr s P.Int) where
     priority =
-        P.lens (_priority :: ComputeFirewallResource s -> TF.Attr s P.Integer)
+        P.lens (_priority :: ComputeFirewallResource s -> TF.Attr s P.Int)
                (\s a -> s { _priority = a } :: ComputeFirewallResource s)
 
 instance P.HasSourceServiceAccounts (ComputeFirewallResource s) (TF.Attr s P.Text) where
@@ -1911,7 +1958,7 @@ data ComputeForwardingRuleResource s = ComputeForwardingRuleResource'
     , _ipVersion           :: TF.Attr s P.Text
     -- ^ @ip_version@ - (Optional, Forces New)
     --
-    , _labels              :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _loadBalancingScheme :: TF.Attr s P.Text
@@ -1932,13 +1979,13 @@ data ComputeForwardingRuleResource s = ComputeForwardingRuleResource'
     , _target              :: TF.Attr s P.Text
     -- ^ @target@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeForwardingRuleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeForwardingRuleResource s)
 computeForwardingRuleResource _name =
-    TF.newResource "google_compute_forwarding_rule" TF.validator $
+    TF.unsafeResource "google_compute_forwarding_rule" P.defaultProvider TF.validator $
         ComputeForwardingRuleResource'
             { _backendService = TF.Nil
             , _description = TF.Nil
@@ -1984,9 +2031,9 @@ instance P.HasIpVersion (ComputeForwardingRuleResource s) (TF.Attr s P.Text) whe
         P.lens (_ipVersion :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _ipVersion = a } :: ComputeForwardingRuleResource s)
 
-instance P.HasLabels (ComputeForwardingRuleResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (ComputeForwardingRuleResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: ComputeForwardingRuleResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: ComputeForwardingRuleResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: ComputeForwardingRuleResource s)
 
 instance P.HasLoadBalancingScheme (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
@@ -2063,19 +2110,19 @@ data ComputeGlobalAddressResource s = ComputeGlobalAddressResource'
     , _ipVersion   :: TF.Attr s P.Text
     -- ^ @ip_version@ - (Optional, Forces New)
     --
-    , _labels      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeGlobalAddressResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeGlobalAddressResource s)
 computeGlobalAddressResource _name =
-    TF.newResource "google_compute_global_address" TF.validator $
+    TF.unsafeResource "google_compute_global_address" P.defaultProvider TF.validator $
         ComputeGlobalAddressResource'
             { _description = TF.Nil
             , _ipVersion = TF.Nil
@@ -2104,9 +2151,9 @@ instance P.HasIpVersion (ComputeGlobalAddressResource s) (TF.Attr s P.Text) wher
         P.lens (_ipVersion :: ComputeGlobalAddressResource s -> TF.Attr s P.Text)
                (\s a -> s { _ipVersion = a } :: ComputeGlobalAddressResource s)
 
-instance P.HasLabels (ComputeGlobalAddressResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (ComputeGlobalAddressResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: ComputeGlobalAddressResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: ComputeGlobalAddressResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: ComputeGlobalAddressResource s)
 
 instance P.HasName (ComputeGlobalAddressResource s) (TF.Attr s P.Text) where
@@ -2140,7 +2187,7 @@ data ComputeGlobalForwardingRuleResource s = ComputeGlobalForwardingRuleResource
     , _ipVersion   :: TF.Attr s P.Text
     -- ^ @ip_version@ - (Optional, Forces New)
     --
-    , _labels      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
@@ -2155,14 +2202,14 @@ data ComputeGlobalForwardingRuleResource s = ComputeGlobalForwardingRuleResource
     , _target      :: TF.Attr s P.Text
     -- ^ @target@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeGlobalForwardingRuleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
     -> P.Resource (ComputeGlobalForwardingRuleResource s)
 computeGlobalForwardingRuleResource _name _target =
-    TF.newResource "google_compute_global_forwarding_rule" TF.validator $
+    TF.unsafeResource "google_compute_global_forwarding_rule" P.defaultProvider TF.validator $
         ComputeGlobalForwardingRuleResource'
             { _description = TF.Nil
             , _ipVersion = TF.Nil
@@ -2197,9 +2244,9 @@ instance P.HasIpVersion (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Tex
         P.lens (_ipVersion :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _ipVersion = a } :: ComputeGlobalForwardingRuleResource s)
 
-instance P.HasLabels (ComputeGlobalForwardingRuleResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (ComputeGlobalForwardingRuleResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: ComputeGlobalForwardingRuleResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: ComputeGlobalForwardingRuleResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: ComputeGlobalForwardingRuleResource s)
 
 instance P.HasName (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Text) where
@@ -2242,63 +2289,63 @@ instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeGlobalForwardingRule
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_health_check.html terraform documentation>
 -- for more information.
 data ComputeHealthCheckResource s = ComputeHealthCheckResource'
-    { _checkIntervalSec   :: TF.Attr s P.Integer
+    { _checkIntervalSec   :: TF.Attr s P.Int
     -- ^ @check_interval_sec@ - (Optional)
     --
     , _description        :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _healthyThreshold   :: TF.Attr s P.Integer
+    , _healthyThreshold   :: TF.Attr s P.Int
     -- ^ @healthy_threshold@ - (Optional)
     --
-    , _httpHealthCheck    :: TF.Attr s (ComputeHealthCheckHttpHealthCheck s)
+    , _httpHealthCheck    :: TF.Attr s (HttpHealthCheckSetting s)
     -- ^ @http_health_check@ - (Optional)
     --
     -- Conflicts with:
     --
-    -- * 'tcpHealthCheck'
-    -- * 'sslHealthCheck'
     -- * 'httpsHealthCheck'
-    , _httpsHealthCheck   :: TF.Attr s (ComputeHealthCheckHttpsHealthCheck s)
+    -- * 'sslHealthCheck'
+    -- * 'tcpHealthCheck'
+    , _httpsHealthCheck   :: TF.Attr s (HttpsHealthCheckSetting s)
     -- ^ @https_health_check@ - (Optional)
     --
     -- Conflicts with:
     --
-    -- * 'tcpHealthCheck'
     -- * 'httpHealthCheck'
     -- * 'sslHealthCheck'
+    -- * 'tcpHealthCheck'
     , _name               :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _sslHealthCheck     :: TF.Attr s (ComputeHealthCheckSslHealthCheck s)
+    , _sslHealthCheck     :: TF.Attr s (SslHealthCheckSetting s)
     -- ^ @ssl_health_check@ - (Optional)
     --
     -- Conflicts with:
     --
-    -- * 'tcpHealthCheck'
     -- * 'httpHealthCheck'
     -- * 'httpsHealthCheck'
-    , _tcpHealthCheck     :: TF.Attr s (ComputeHealthCheckTcpHealthCheck s)
+    -- * 'tcpHealthCheck'
+    , _tcpHealthCheck     :: TF.Attr s (TcpHealthCheckSetting s)
     -- ^ @tcp_health_check@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'httpHealthCheck'
-    -- * 'sslHealthCheck'
     -- * 'httpsHealthCheck'
-    , _timeoutSec         :: TF.Attr s P.Integer
+    -- * 'sslHealthCheck'
+    , _timeoutSec         :: TF.Attr s P.Int
     -- ^ @timeout_sec@ - (Optional)
     --
-    , _unhealthyThreshold :: TF.Attr s P.Integer
+    , _unhealthyThreshold :: TF.Attr s P.Int
     -- ^ @unhealthy_threshold@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeHealthCheckResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeHealthCheckResource s)
 computeHealthCheckResource _name =
-    TF.newResource "google_compute_health_check" TF.validator $
+    TF.unsafeResource "google_compute_health_check" P.defaultProvider TF.validator $
         ComputeHealthCheckResource'
             { _checkIntervalSec = TF.value 5
             , _description = TF.Nil
@@ -2331,44 +2378,44 @@ instance TF.IsValid (ComputeHealthCheckResource s) where
         [ if (_httpHealthCheck P.== TF.Nil)
               then P.Nothing
               else P.Just ("_httpHealthCheck",
-                            [ "_tcpHealthCheck"                            , "_sslHealthCheck"                            , "_httpsHealthCheck"
+                            [ "_httpsHealthCheck"                            , "_sslHealthCheck"                            , "_tcpHealthCheck"
                             ])
         , if (_httpsHealthCheck P.== TF.Nil)
               then P.Nothing
               else P.Just ("_httpsHealthCheck",
-                            [ "_tcpHealthCheck"                            , "_httpHealthCheck"                            , "_sslHealthCheck"
+                            [ "_httpHealthCheck"                            , "_sslHealthCheck"                            , "_tcpHealthCheck"
                             ])
         , if (_sslHealthCheck P.== TF.Nil)
               then P.Nothing
               else P.Just ("_sslHealthCheck",
-                            [ "_tcpHealthCheck"                            , "_httpHealthCheck"                            , "_httpsHealthCheck"
+                            [ "_httpHealthCheck"                            , "_httpsHealthCheck"                            , "_tcpHealthCheck"
                             ])
         , if (_tcpHealthCheck P.== TF.Nil)
               then P.Nothing
               else P.Just ("_tcpHealthCheck",
-                            [ "_httpHealthCheck"                            , "_sslHealthCheck"                            , "_httpsHealthCheck"
+                            [ "_httpHealthCheck"                            , "_httpsHealthCheck"                            , "_sslHealthCheck"
                             ])
         ])
            P.<> TF.settingsValidator "_httpHealthCheck"
                   (_httpHealthCheck
-                      :: ComputeHealthCheckResource s -> TF.Attr s (ComputeHealthCheckHttpHealthCheck s))
+                      :: ComputeHealthCheckResource s -> TF.Attr s (HttpHealthCheckSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_httpsHealthCheck"
                   (_httpsHealthCheck
-                      :: ComputeHealthCheckResource s -> TF.Attr s (ComputeHealthCheckHttpsHealthCheck s))
+                      :: ComputeHealthCheckResource s -> TF.Attr s (HttpsHealthCheckSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_sslHealthCheck"
                   (_sslHealthCheck
-                      :: ComputeHealthCheckResource s -> TF.Attr s (ComputeHealthCheckSslHealthCheck s))
+                      :: ComputeHealthCheckResource s -> TF.Attr s (SslHealthCheckSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_tcpHealthCheck"
                   (_tcpHealthCheck
-                      :: ComputeHealthCheckResource s -> TF.Attr s (ComputeHealthCheckTcpHealthCheck s))
+                      :: ComputeHealthCheckResource s -> TF.Attr s (TcpHealthCheckSetting s))
                   TF.validator
 
-instance P.HasCheckIntervalSec (ComputeHealthCheckResource s) (TF.Attr s P.Integer) where
+instance P.HasCheckIntervalSec (ComputeHealthCheckResource s) (TF.Attr s P.Int) where
     checkIntervalSec =
-        P.lens (_checkIntervalSec :: ComputeHealthCheckResource s -> TF.Attr s P.Integer)
+        P.lens (_checkIntervalSec :: ComputeHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _checkIntervalSec = a } :: ComputeHealthCheckResource s)
 
 instance P.HasDescription (ComputeHealthCheckResource s) (TF.Attr s P.Text) where
@@ -2376,19 +2423,19 @@ instance P.HasDescription (ComputeHealthCheckResource s) (TF.Attr s P.Text) wher
         P.lens (_description :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeHealthCheckResource s)
 
-instance P.HasHealthyThreshold (ComputeHealthCheckResource s) (TF.Attr s P.Integer) where
+instance P.HasHealthyThreshold (ComputeHealthCheckResource s) (TF.Attr s P.Int) where
     healthyThreshold =
-        P.lens (_healthyThreshold :: ComputeHealthCheckResource s -> TF.Attr s P.Integer)
+        P.lens (_healthyThreshold :: ComputeHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _healthyThreshold = a } :: ComputeHealthCheckResource s)
 
-instance P.HasHttpHealthCheck (ComputeHealthCheckResource s) (TF.Attr s (ComputeHealthCheckHttpHealthCheck s)) where
+instance P.HasHttpHealthCheck (ComputeHealthCheckResource s) (TF.Attr s (HttpHealthCheckSetting s)) where
     httpHealthCheck =
-        P.lens (_httpHealthCheck :: ComputeHealthCheckResource s -> TF.Attr s (ComputeHealthCheckHttpHealthCheck s))
+        P.lens (_httpHealthCheck :: ComputeHealthCheckResource s -> TF.Attr s (HttpHealthCheckSetting s))
                (\s a -> s { _httpHealthCheck = a } :: ComputeHealthCheckResource s)
 
-instance P.HasHttpsHealthCheck (ComputeHealthCheckResource s) (TF.Attr s (ComputeHealthCheckHttpsHealthCheck s)) where
+instance P.HasHttpsHealthCheck (ComputeHealthCheckResource s) (TF.Attr s (HttpsHealthCheckSetting s)) where
     httpsHealthCheck =
-        P.lens (_httpsHealthCheck :: ComputeHealthCheckResource s -> TF.Attr s (ComputeHealthCheckHttpsHealthCheck s))
+        P.lens (_httpsHealthCheck :: ComputeHealthCheckResource s -> TF.Attr s (HttpsHealthCheckSetting s))
                (\s a -> s { _httpsHealthCheck = a } :: ComputeHealthCheckResource s)
 
 instance P.HasName (ComputeHealthCheckResource s) (TF.Attr s P.Text) where
@@ -2396,24 +2443,24 @@ instance P.HasName (ComputeHealthCheckResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeHealthCheckResource s)
 
-instance P.HasSslHealthCheck (ComputeHealthCheckResource s) (TF.Attr s (ComputeHealthCheckSslHealthCheck s)) where
+instance P.HasSslHealthCheck (ComputeHealthCheckResource s) (TF.Attr s (SslHealthCheckSetting s)) where
     sslHealthCheck =
-        P.lens (_sslHealthCheck :: ComputeHealthCheckResource s -> TF.Attr s (ComputeHealthCheckSslHealthCheck s))
+        P.lens (_sslHealthCheck :: ComputeHealthCheckResource s -> TF.Attr s (SslHealthCheckSetting s))
                (\s a -> s { _sslHealthCheck = a } :: ComputeHealthCheckResource s)
 
-instance P.HasTcpHealthCheck (ComputeHealthCheckResource s) (TF.Attr s (ComputeHealthCheckTcpHealthCheck s)) where
+instance P.HasTcpHealthCheck (ComputeHealthCheckResource s) (TF.Attr s (TcpHealthCheckSetting s)) where
     tcpHealthCheck =
-        P.lens (_tcpHealthCheck :: ComputeHealthCheckResource s -> TF.Attr s (ComputeHealthCheckTcpHealthCheck s))
+        P.lens (_tcpHealthCheck :: ComputeHealthCheckResource s -> TF.Attr s (TcpHealthCheckSetting s))
                (\s a -> s { _tcpHealthCheck = a } :: ComputeHealthCheckResource s)
 
-instance P.HasTimeoutSec (ComputeHealthCheckResource s) (TF.Attr s P.Integer) where
+instance P.HasTimeoutSec (ComputeHealthCheckResource s) (TF.Attr s P.Int) where
     timeoutSec =
-        P.lens (_timeoutSec :: ComputeHealthCheckResource s -> TF.Attr s P.Integer)
+        P.lens (_timeoutSec :: ComputeHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _timeoutSec = a } :: ComputeHealthCheckResource s)
 
-instance P.HasUnhealthyThreshold (ComputeHealthCheckResource s) (TF.Attr s P.Integer) where
+instance P.HasUnhealthyThreshold (ComputeHealthCheckResource s) (TF.Attr s P.Int) where
     unhealthyThreshold =
-        P.lens (_unhealthyThreshold :: ComputeHealthCheckResource s -> TF.Attr s P.Integer)
+        P.lens (_unhealthyThreshold :: ComputeHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _unhealthyThreshold = a } :: ComputeHealthCheckResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeHealthCheckResource s)) (TF.Attr s P.Text) where
@@ -2427,13 +2474,13 @@ instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeHealthCheckResource 
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_http_health_check.html terraform documentation>
 -- for more information.
 data ComputeHttpHealthCheckResource s = ComputeHttpHealthCheckResource'
-    { _checkIntervalSec   :: TF.Attr s P.Integer
+    { _checkIntervalSec   :: TF.Attr s P.Int
     -- ^ @check_interval_sec@ - (Optional)
     --
     , _description        :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _healthyThreshold   :: TF.Attr s P.Integer
+    , _healthyThreshold   :: TF.Attr s P.Int
     -- ^ @healthy_threshold@ - (Optional)
     --
     , _host               :: TF.Attr s P.Text
@@ -2442,25 +2489,25 @@ data ComputeHttpHealthCheckResource s = ComputeHttpHealthCheckResource'
     , _name               :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _port               :: TF.Attr s P.Integer
+    , _port               :: TF.Attr s P.Int
     -- ^ @port@ - (Optional)
     --
     , _requestPath        :: TF.Attr s P.Text
     -- ^ @request_path@ - (Optional)
     --
-    , _timeoutSec         :: TF.Attr s P.Integer
+    , _timeoutSec         :: TF.Attr s P.Int
     -- ^ @timeout_sec@ - (Optional)
     --
-    , _unhealthyThreshold :: TF.Attr s P.Integer
+    , _unhealthyThreshold :: TF.Attr s P.Int
     -- ^ @unhealthy_threshold@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeHttpHealthCheckResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeHttpHealthCheckResource s)
 computeHttpHealthCheckResource _name =
-    TF.newResource "google_compute_http_health_check" TF.validator $
+    TF.unsafeResource "google_compute_http_health_check" P.defaultProvider TF.validator $
         ComputeHttpHealthCheckResource'
             { _checkIntervalSec = TF.value 5
             , _description = TF.Nil
@@ -2489,9 +2536,9 @@ instance TF.IsObject (ComputeHttpHealthCheckResource s) where
 instance TF.IsValid (ComputeHttpHealthCheckResource s) where
     validator = P.mempty
 
-instance P.HasCheckIntervalSec (ComputeHttpHealthCheckResource s) (TF.Attr s P.Integer) where
+instance P.HasCheckIntervalSec (ComputeHttpHealthCheckResource s) (TF.Attr s P.Int) where
     checkIntervalSec =
-        P.lens (_checkIntervalSec :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Integer)
+        P.lens (_checkIntervalSec :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _checkIntervalSec = a } :: ComputeHttpHealthCheckResource s)
 
 instance P.HasDescription (ComputeHttpHealthCheckResource s) (TF.Attr s P.Text) where
@@ -2499,9 +2546,9 @@ instance P.HasDescription (ComputeHttpHealthCheckResource s) (TF.Attr s P.Text) 
         P.lens (_description :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeHttpHealthCheckResource s)
 
-instance P.HasHealthyThreshold (ComputeHttpHealthCheckResource s) (TF.Attr s P.Integer) where
+instance P.HasHealthyThreshold (ComputeHttpHealthCheckResource s) (TF.Attr s P.Int) where
     healthyThreshold =
-        P.lens (_healthyThreshold :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Integer)
+        P.lens (_healthyThreshold :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _healthyThreshold = a } :: ComputeHttpHealthCheckResource s)
 
 instance P.HasHost (ComputeHttpHealthCheckResource s) (TF.Attr s P.Text) where
@@ -2514,9 +2561,9 @@ instance P.HasName (ComputeHttpHealthCheckResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeHttpHealthCheckResource s)
 
-instance P.HasPort (ComputeHttpHealthCheckResource s) (TF.Attr s P.Integer) where
+instance P.HasPort (ComputeHttpHealthCheckResource s) (TF.Attr s P.Int) where
     port =
-        P.lens (_port :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Integer)
+        P.lens (_port :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: ComputeHttpHealthCheckResource s)
 
 instance P.HasRequestPath (ComputeHttpHealthCheckResource s) (TF.Attr s P.Text) where
@@ -2524,14 +2571,14 @@ instance P.HasRequestPath (ComputeHttpHealthCheckResource s) (TF.Attr s P.Text) 
         P.lens (_requestPath :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
                (\s a -> s { _requestPath = a } :: ComputeHttpHealthCheckResource s)
 
-instance P.HasTimeoutSec (ComputeHttpHealthCheckResource s) (TF.Attr s P.Integer) where
+instance P.HasTimeoutSec (ComputeHttpHealthCheckResource s) (TF.Attr s P.Int) where
     timeoutSec =
-        P.lens (_timeoutSec :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Integer)
+        P.lens (_timeoutSec :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _timeoutSec = a } :: ComputeHttpHealthCheckResource s)
 
-instance P.HasUnhealthyThreshold (ComputeHttpHealthCheckResource s) (TF.Attr s P.Integer) where
+instance P.HasUnhealthyThreshold (ComputeHttpHealthCheckResource s) (TF.Attr s P.Int) where
     unhealthyThreshold =
-        P.lens (_unhealthyThreshold :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Integer)
+        P.lens (_unhealthyThreshold :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _unhealthyThreshold = a } :: ComputeHttpHealthCheckResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeHttpHealthCheckResource s)) (TF.Attr s P.Text) where
@@ -2548,13 +2595,13 @@ instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeHttpHealthCheckResou
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_https_health_check.html terraform documentation>
 -- for more information.
 data ComputeHttpsHealthCheckResource s = ComputeHttpsHealthCheckResource'
-    { _checkIntervalSec   :: TF.Attr s P.Integer
+    { _checkIntervalSec   :: TF.Attr s P.Int
     -- ^ @check_interval_sec@ - (Optional)
     --
     , _description        :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _healthyThreshold   :: TF.Attr s P.Integer
+    , _healthyThreshold   :: TF.Attr s P.Int
     -- ^ @healthy_threshold@ - (Optional)
     --
     , _host               :: TF.Attr s P.Text
@@ -2563,25 +2610,25 @@ data ComputeHttpsHealthCheckResource s = ComputeHttpsHealthCheckResource'
     , _name               :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _port               :: TF.Attr s P.Integer
+    , _port               :: TF.Attr s P.Int
     -- ^ @port@ - (Optional)
     --
     , _requestPath        :: TF.Attr s P.Text
     -- ^ @request_path@ - (Optional)
     --
-    , _timeoutSec         :: TF.Attr s P.Integer
+    , _timeoutSec         :: TF.Attr s P.Int
     -- ^ @timeout_sec@ - (Optional)
     --
-    , _unhealthyThreshold :: TF.Attr s P.Integer
+    , _unhealthyThreshold :: TF.Attr s P.Int
     -- ^ @unhealthy_threshold@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeHttpsHealthCheckResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeHttpsHealthCheckResource s)
 computeHttpsHealthCheckResource _name =
-    TF.newResource "google_compute_https_health_check" TF.validator $
+    TF.unsafeResource "google_compute_https_health_check" P.defaultProvider TF.validator $
         ComputeHttpsHealthCheckResource'
             { _checkIntervalSec = TF.value 5
             , _description = TF.Nil
@@ -2610,9 +2657,9 @@ instance TF.IsObject (ComputeHttpsHealthCheckResource s) where
 instance TF.IsValid (ComputeHttpsHealthCheckResource s) where
     validator = P.mempty
 
-instance P.HasCheckIntervalSec (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Integer) where
+instance P.HasCheckIntervalSec (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Int) where
     checkIntervalSec =
-        P.lens (_checkIntervalSec :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Integer)
+        P.lens (_checkIntervalSec :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _checkIntervalSec = a } :: ComputeHttpsHealthCheckResource s)
 
 instance P.HasDescription (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Text) where
@@ -2620,9 +2667,9 @@ instance P.HasDescription (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Text)
         P.lens (_description :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeHttpsHealthCheckResource s)
 
-instance P.HasHealthyThreshold (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Integer) where
+instance P.HasHealthyThreshold (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Int) where
     healthyThreshold =
-        P.lens (_healthyThreshold :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Integer)
+        P.lens (_healthyThreshold :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _healthyThreshold = a } :: ComputeHttpsHealthCheckResource s)
 
 instance P.HasHost (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Text) where
@@ -2635,9 +2682,9 @@ instance P.HasName (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeHttpsHealthCheckResource s)
 
-instance P.HasPort (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Integer) where
+instance P.HasPort (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Int) where
     port =
-        P.lens (_port :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Integer)
+        P.lens (_port :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: ComputeHttpsHealthCheckResource s)
 
 instance P.HasRequestPath (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Text) where
@@ -2645,14 +2692,14 @@ instance P.HasRequestPath (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Text)
         P.lens (_requestPath :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
                (\s a -> s { _requestPath = a } :: ComputeHttpsHealthCheckResource s)
 
-instance P.HasTimeoutSec (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Integer) where
+instance P.HasTimeoutSec (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Int) where
     timeoutSec =
-        P.lens (_timeoutSec :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Integer)
+        P.lens (_timeoutSec :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _timeoutSec = a } :: ComputeHttpsHealthCheckResource s)
 
-instance P.HasUnhealthyThreshold (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Integer) where
+instance P.HasUnhealthyThreshold (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Int) where
     unhealthyThreshold =
-        P.lens (_unhealthyThreshold :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Integer)
+        P.lens (_unhealthyThreshold :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _unhealthyThreshold = a } :: ComputeHttpsHealthCheckResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeHttpsHealthCheckResource s)) (TF.Attr s P.Text) where
@@ -2675,25 +2722,25 @@ data ComputeImageResource s = ComputeImageResource'
     , _family'     :: TF.Attr s P.Text
     -- ^ @family@ - (Optional, Forces New)
     --
-    , _labels      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _rawDisk     :: TF.Attr s (ComputeImageRawDisk s)
+    , _rawDisk     :: TF.Attr s (RawDiskSetting s)
     -- ^ @raw_disk@ - (Optional, Forces New)
     --
     , _sourceDisk  :: TF.Attr s P.Text
     -- ^ @source_disk@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeImageResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeImageResource s)
 computeImageResource _name =
-    TF.newResource "google_compute_image" TF.validator $
+    TF.unsafeResource "google_compute_image" P.defaultProvider TF.validator $
         ComputeImageResource'
             { _description = TF.Nil
             , _family' = TF.Nil
@@ -2717,7 +2764,7 @@ instance TF.IsValid (ComputeImageResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_rawDisk"
                   (_rawDisk
-                      :: ComputeImageResource s -> TF.Attr s (ComputeImageRawDisk s))
+                      :: ComputeImageResource s -> TF.Attr s (RawDiskSetting s))
                   TF.validator
 
 instance P.HasDescription (ComputeImageResource s) (TF.Attr s P.Text) where
@@ -2730,9 +2777,9 @@ instance P.HasFamily' (ComputeImageResource s) (TF.Attr s P.Text) where
         P.lens (_family' :: ComputeImageResource s -> TF.Attr s P.Text)
                (\s a -> s { _family' = a } :: ComputeImageResource s)
 
-instance P.HasLabels (ComputeImageResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (ComputeImageResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: ComputeImageResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: ComputeImageResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: ComputeImageResource s)
 
 instance P.HasName (ComputeImageResource s) (TF.Attr s P.Text) where
@@ -2740,9 +2787,9 @@ instance P.HasName (ComputeImageResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeImageResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeImageResource s)
 
-instance P.HasRawDisk (ComputeImageResource s) (TF.Attr s (ComputeImageRawDisk s)) where
+instance P.HasRawDisk (ComputeImageResource s) (TF.Attr s (RawDiskSetting s)) where
     rawDisk =
-        P.lens (_rawDisk :: ComputeImageResource s -> TF.Attr s (ComputeImageRawDisk s))
+        P.lens (_rawDisk :: ComputeImageResource s -> TF.Attr s (RawDiskSetting s))
                (\s a -> s { _rawDisk = a } :: ComputeImageResource s)
 
 instance P.HasSourceDisk (ComputeImageResource s) (TF.Attr s P.Text) where
@@ -2770,10 +2817,10 @@ data ComputeInstanceResource s = ComputeInstanceResource'
     { _allowStoppingForUpdate :: TF.Attr s P.Bool
     -- ^ @allow_stopping_for_update@ - (Optional)
     --
-    , _attachedDisk :: TF.Attr s [TF.Attr s (ComputeInstanceAttachedDisk s)]
+    , _attachedDisk :: TF.Attr s [TF.Attr s (AttachedDiskSetting s)]
     -- ^ @attached_disk@ - (Optional)
     --
-    , _bootDisk :: TF.Attr s (ComputeInstanceBootDisk s)
+    , _bootDisk :: TF.Attr s (BootDiskSetting s)
     -- ^ @boot_disk@ - (Required, Forces New)
     --
     , _canIpForward :: TF.Attr s P.Bool
@@ -2785,16 +2832,16 @@ data ComputeInstanceResource s = ComputeInstanceResource'
     , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _disk :: TF.Attr s [TF.Attr s (ComputeInstanceDisk s)]
+    , _disk :: TF.Attr s [TF.Attr s (DiskSetting s)]
     -- ^ @disk@ - (Optional, Forces New)
     --
-    , _labels :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _machineType :: TF.Attr s P.Text
     -- ^ @machine_type@ - (Required)
     --
-    , _metadata :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _metadata :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @metadata@ - (Optional)
     --
     , _metadataStartupScript :: TF.Attr s P.Text
@@ -2806,31 +2853,31 @@ data ComputeInstanceResource s = ComputeInstanceResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _network :: TF.Attr s [TF.Attr s (ComputeInstanceNetwork s)]
+    , _network :: TF.Attr s [TF.Attr s (NetworkSetting s)]
     -- ^ @network@ - (Optional, Forces New)
     --
-    , _networkInterface :: TF.Attr s [TF.Attr s (ComputeInstanceNetworkInterface s)]
+    , _networkInterface :: TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]
     -- ^ @network_interface@ - (Required, Forces New)
     --
-    , _scratchDisk :: TF.Attr s [TF.Attr s (ComputeInstanceScratchDisk s)]
+    , _scratchDisk :: TF.Attr s [TF.Attr s (ScratchDiskSetting s)]
     -- ^ @scratch_disk@ - (Optional, Forces New)
     --
-    , _serviceAccount :: TF.Attr s (ComputeInstanceServiceAccount s)
+    , _serviceAccount :: TF.Attr s (ServiceAccountSetting s)
     -- ^ @service_account@ - (Optional)
     --
     , _tags :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeInstanceResource
-    :: TF.Attr s (ComputeInstanceBootDisk s) -- ^ @boot_disk@ - 'P.bootDisk'
+    :: TF.Attr s (BootDiskSetting s) -- ^ @boot_disk@ - 'P.bootDisk'
     -> TF.Attr s P.Text -- ^ @machine_type@ - 'P.machineType'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (ComputeInstanceNetworkInterface s)] -- ^ @network_interface@ - 'P.networkInterface'
+    -> TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)] -- ^ @network_interface@ - 'P.networkInterface'
     -> P.Resource (ComputeInstanceResource s)
 computeInstanceResource _bootDisk _machineType _name _networkInterface =
-    TF.newResource "google_compute_instance" TF.validator $
+    TF.unsafeResource "google_compute_instance" P.defaultProvider TF.validator $
         ComputeInstanceResource'
             { _allowStoppingForUpdate = TF.Nil
             , _attachedDisk = TF.Nil
@@ -2876,33 +2923,13 @@ instance TF.IsObject (ComputeInstanceResource s) where
 
 instance TF.IsValid (ComputeInstanceResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_attachedDisk"
-                  (_attachedDisk
-                      :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceAttachedDisk s)])
-                  TF.validator
            P.<> TF.settingsValidator "_bootDisk"
                   (_bootDisk
-                      :: ComputeInstanceResource s -> TF.Attr s (ComputeInstanceBootDisk s))
-                  TF.validator
-           P.<> TF.settingsValidator "_disk"
-                  (_disk
-                      :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceDisk s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_network"
-                  (_network
-                      :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceNetwork s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_networkInterface"
-                  (_networkInterface
-                      :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceNetworkInterface s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_scratchDisk"
-                  (_scratchDisk
-                      :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceScratchDisk s)])
+                      :: ComputeInstanceResource s -> TF.Attr s (BootDiskSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_serviceAccount"
                   (_serviceAccount
-                      :: ComputeInstanceResource s -> TF.Attr s (ComputeInstanceServiceAccount s))
+                      :: ComputeInstanceResource s -> TF.Attr s (ServiceAccountSetting s))
                   TF.validator
 
 instance P.HasAllowStoppingForUpdate (ComputeInstanceResource s) (TF.Attr s P.Bool) where
@@ -2910,14 +2937,14 @@ instance P.HasAllowStoppingForUpdate (ComputeInstanceResource s) (TF.Attr s P.Bo
         P.lens (_allowStoppingForUpdate :: ComputeInstanceResource s -> TF.Attr s P.Bool)
                (\s a -> s { _allowStoppingForUpdate = a } :: ComputeInstanceResource s)
 
-instance P.HasAttachedDisk (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (ComputeInstanceAttachedDisk s)]) where
+instance P.HasAttachedDisk (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (AttachedDiskSetting s)]) where
     attachedDisk =
-        P.lens (_attachedDisk :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceAttachedDisk s)])
+        P.lens (_attachedDisk :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (AttachedDiskSetting s)])
                (\s a -> s { _attachedDisk = a } :: ComputeInstanceResource s)
 
-instance P.HasBootDisk (ComputeInstanceResource s) (TF.Attr s (ComputeInstanceBootDisk s)) where
+instance P.HasBootDisk (ComputeInstanceResource s) (TF.Attr s (BootDiskSetting s)) where
     bootDisk =
-        P.lens (_bootDisk :: ComputeInstanceResource s -> TF.Attr s (ComputeInstanceBootDisk s))
+        P.lens (_bootDisk :: ComputeInstanceResource s -> TF.Attr s (BootDiskSetting s))
                (\s a -> s { _bootDisk = a } :: ComputeInstanceResource s)
 
 instance P.HasCanIpForward (ComputeInstanceResource s) (TF.Attr s P.Bool) where
@@ -2935,14 +2962,14 @@ instance P.HasDescription (ComputeInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_description :: ComputeInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeInstanceResource s)
 
-instance P.HasDisk (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (ComputeInstanceDisk s)]) where
+instance P.HasDisk (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (DiskSetting s)]) where
     disk =
-        P.lens (_disk :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceDisk s)])
+        P.lens (_disk :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (DiskSetting s)])
                (\s a -> s { _disk = a } :: ComputeInstanceResource s)
 
-instance P.HasLabels (ComputeInstanceResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (ComputeInstanceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: ComputeInstanceResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: ComputeInstanceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: ComputeInstanceResource s)
 
 instance P.HasMachineType (ComputeInstanceResource s) (TF.Attr s P.Text) where
@@ -2950,9 +2977,9 @@ instance P.HasMachineType (ComputeInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_machineType :: ComputeInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _machineType = a } :: ComputeInstanceResource s)
 
-instance P.HasMetadata (ComputeInstanceResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasMetadata (ComputeInstanceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     metadata =
-        P.lens (_metadata :: ComputeInstanceResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_metadata :: ComputeInstanceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _metadata = a } :: ComputeInstanceResource s)
 
 instance P.HasMetadataStartupScript (ComputeInstanceResource s) (TF.Attr s P.Text) where
@@ -2970,24 +2997,24 @@ instance P.HasName (ComputeInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeInstanceResource s)
 
-instance P.HasNetwork (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (ComputeInstanceNetwork s)]) where
+instance P.HasNetwork (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (NetworkSetting s)]) where
     network =
-        P.lens (_network :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceNetwork s)])
+        P.lens (_network :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (NetworkSetting s)])
                (\s a -> s { _network = a } :: ComputeInstanceResource s)
 
-instance P.HasNetworkInterface (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (ComputeInstanceNetworkInterface s)]) where
+instance P.HasNetworkInterface (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]) where
     networkInterface =
-        P.lens (_networkInterface :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceNetworkInterface s)])
+        P.lens (_networkInterface :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)])
                (\s a -> s { _networkInterface = a } :: ComputeInstanceResource s)
 
-instance P.HasScratchDisk (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (ComputeInstanceScratchDisk s)]) where
+instance P.HasScratchDisk (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (ScratchDiskSetting s)]) where
     scratchDisk =
-        P.lens (_scratchDisk :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceScratchDisk s)])
+        P.lens (_scratchDisk :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ScratchDiskSetting s)])
                (\s a -> s { _scratchDisk = a } :: ComputeInstanceResource s)
 
-instance P.HasServiceAccount (ComputeInstanceResource s) (TF.Attr s (ComputeInstanceServiceAccount s)) where
+instance P.HasServiceAccount (ComputeInstanceResource s) (TF.Attr s (ServiceAccountSetting s)) where
     serviceAccount =
-        P.lens (_serviceAccount :: ComputeInstanceResource s -> TF.Attr s (ComputeInstanceServiceAccount s))
+        P.lens (_serviceAccount :: ComputeInstanceResource s -> TF.Attr s (ServiceAccountSetting s))
                (\s a -> s { _serviceAccount = a } :: ComputeInstanceResource s)
 
 instance P.HasTags (ComputeInstanceResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -2998,7 +3025,7 @@ instance P.HasTags (ComputeInstanceResource s) (TF.Attr s [TF.Attr s P.Text]) wh
 instance s ~ s' => P.HasComputedCpuPlatform (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedCpuPlatform x = TF.compute (TF.refKey x) "cpu_platform"
 
-instance s ~ s' => P.HasComputedGuestAccelerator (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s [TF.Attr s (ComputeInstanceGuestAccelerator s)]) where
+instance s ~ s' => P.HasComputedGuestAccelerator (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s [TF.Attr s (GuestAcceleratorSetting s)]) where
     computedGuestAccelerator x = TF.compute (TF.refKey x) "guest_accelerator"
 
 instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
@@ -3013,7 +3040,7 @@ instance s ~ s' => P.HasComputedMetadataFingerprint (TF.Ref s' (ComputeInstanceR
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedScheduling (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s (ComputeInstanceScheduling s)) where
+instance s ~ s' => P.HasComputedScheduling (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s (SchedulingSetting s)) where
     computedScheduling x = TF.compute (TF.refKey x) "scheduling"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
@@ -3036,14 +3063,14 @@ data ComputeInstanceFromTemplateResource s = ComputeInstanceFromTemplateResource
     , _sourceInstanceTemplate :: TF.Attr s P.Text
     -- ^ @source_instance_template@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeInstanceFromTemplateResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @source_instance_template@ - 'P.sourceInstanceTemplate'
     -> P.Resource (ComputeInstanceFromTemplateResource s)
 computeInstanceFromTemplateResource _name _sourceInstanceTemplate =
-    TF.newResource "google_compute_instance_from_template" TF.validator $
+    TF.unsafeResource "google_compute_instance_from_template" P.defaultProvider TF.validator $
         ComputeInstanceFromTemplateResource'
             { _name = _name
             , _sourceInstanceTemplate = _sourceInstanceTemplate
@@ -3071,10 +3098,10 @@ instance P.HasSourceInstanceTemplate (ComputeInstanceFromTemplateResource s) (TF
 instance s ~ s' => P.HasComputedAllowStoppingForUpdate (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Bool) where
     computedAllowStoppingForUpdate x = TF.compute (TF.refKey x) "allow_stopping_for_update"
 
-instance s ~ s' => P.HasComputedAttachedDisk (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s [TF.Attr s (ComputeInstanceFromTemplateAttachedDisk s)]) where
+instance s ~ s' => P.HasComputedAttachedDisk (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s [TF.Attr s (AttachedDiskSetting s)]) where
     computedAttachedDisk x = TF.compute (TF.refKey x) "attached_disk"
 
-instance s ~ s' => P.HasComputedBootDisk (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s (ComputeInstanceFromTemplateBootDisk s)) where
+instance s ~ s' => P.HasComputedBootDisk (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s (BootDiskSetting s)) where
     computedBootDisk x = TF.compute (TF.refKey x) "boot_disk"
 
 instance s ~ s' => P.HasComputedCanIpForward (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Bool) where
@@ -3089,7 +3116,7 @@ instance s ~ s' => P.HasComputedDeletionProtection (TF.Ref s' (ComputeInstanceFr
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputedGuestAccelerator (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s [TF.Attr s (ComputeInstanceFromTemplateGuestAccelerator s)]) where
+instance s ~ s' => P.HasComputedGuestAccelerator (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s [TF.Attr s (GuestAcceleratorSetting s)]) where
     computedGuestAccelerator x = TF.compute (TF.refKey x) "guest_accelerator"
 
 instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
@@ -3098,13 +3125,13 @@ instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (ComputeInstanceFromTempla
 instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
     computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedLabels x = TF.compute (TF.refKey x) "labels"
 
 instance s ~ s' => P.HasComputedMachineType (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
     computedMachineType x = TF.compute (TF.refKey x) "machine_type"
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedMetadata x = TF.compute (TF.refKey x) "metadata"
 
 instance s ~ s' => P.HasComputedMetadataFingerprint (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
@@ -3116,22 +3143,22 @@ instance s ~ s' => P.HasComputedMetadataStartupScript (TF.Ref s' (ComputeInstanc
 instance s ~ s' => P.HasComputedMinCpuPlatform (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
     computedMinCpuPlatform x = TF.compute (TF.refKey x) "min_cpu_platform"
 
-instance s ~ s' => P.HasComputedNetworkInterface (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s [TF.Attr s (ComputeInstanceFromTemplateNetworkInterface s)]) where
+instance s ~ s' => P.HasComputedNetworkInterface (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]) where
     computedNetworkInterface x = TF.compute (TF.refKey x) "network_interface"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedScheduling (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s (ComputeInstanceFromTemplateScheduling s)) where
+instance s ~ s' => P.HasComputedScheduling (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s (SchedulingSetting s)) where
     computedScheduling x = TF.compute (TF.refKey x) "scheduling"
 
-instance s ~ s' => P.HasComputedScratchDisk (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s [TF.Attr s (ComputeInstanceFromTemplateScratchDisk s)]) where
+instance s ~ s' => P.HasComputedScratchDisk (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s [TF.Attr s (ScratchDiskSetting s)]) where
     computedScratchDisk x = TF.compute (TF.refKey x) "scratch_disk"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
     computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedServiceAccount (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s (ComputeInstanceFromTemplateServiceAccount s)) where
+instance s ~ s' => P.HasComputedServiceAccount (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s (ServiceAccountSetting s)) where
     computedServiceAccount x = TF.compute (TF.refKey x) "service_account"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -3154,16 +3181,16 @@ data ComputeInstanceGroupResource s = ComputeInstanceGroupResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _namedPort   :: TF.Attr s [TF.Attr s (ComputeInstanceGroupNamedPort s)]
+    , _namedPort   :: TF.Attr s [TF.Attr s (NamedPortSetting s)]
     -- ^ @named_port@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeInstanceGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeInstanceGroupResource s)
 computeInstanceGroupResource _name =
-    TF.newResource "google_compute_instance_group" TF.validator $
+    TF.unsafeResource "google_compute_instance_group" P.defaultProvider TF.validator $
         ComputeInstanceGroupResource'
             { _description = TF.Nil
             , _name = _name
@@ -3179,10 +3206,6 @@ instance TF.IsObject (ComputeInstanceGroupResource s) where
 
 instance TF.IsValid (ComputeInstanceGroupResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_namedPort"
-                  (_namedPort
-                      :: ComputeInstanceGroupResource s -> TF.Attr s [TF.Attr s (ComputeInstanceGroupNamedPort s)])
-                  TF.validator
 
 instance P.HasDescription (ComputeInstanceGroupResource s) (TF.Attr s P.Text) where
     description =
@@ -3194,9 +3217,9 @@ instance P.HasName (ComputeInstanceGroupResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeInstanceGroupResource s)
 
-instance P.HasNamedPort (ComputeInstanceGroupResource s) (TF.Attr s [TF.Attr s (ComputeInstanceGroupNamedPort s)]) where
+instance P.HasNamedPort (ComputeInstanceGroupResource s) (TF.Attr s [TF.Attr s (NamedPortSetting s)]) where
     namedPort =
-        P.lens (_namedPort :: ComputeInstanceGroupResource s -> TF.Attr s [TF.Attr s (ComputeInstanceGroupNamedPort s)])
+        P.lens (_namedPort :: ComputeInstanceGroupResource s -> TF.Attr s [TF.Attr s (NamedPortSetting s)])
                (\s a -> s { _namedPort = a } :: ComputeInstanceGroupResource s)
 
 instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -3211,7 +3234,7 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeInstanceGroupResource
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Text) where
     computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Int) where
     computedSize x = TF.compute (TF.refKey x) "size"
 
 instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Text) where
@@ -3222,44 +3245,44 @@ instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeInstanceGroupResource s)
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_instance_group_manager.html terraform documentation>
 -- for more information.
 data ComputeInstanceGroupManagerResource s = ComputeInstanceGroupManagerResource'
-    { _autoHealingPolicies :: TF.Attr s (ComputeInstanceGroupManagerAutoHealingPolicies s)
+    { _autoHealingPolicies :: TF.Attr s (AutoHealingPoliciesSetting s)
     -- ^ @auto_healing_policies@ - (Optional)
     --
-    , _baseInstanceName :: TF.Attr s P.Text
+    , _baseInstanceName    :: TF.Attr s P.Text
     -- ^ @base_instance_name@ - (Required, Forces New)
     --
-    , _description :: TF.Attr s P.Text
+    , _description         :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _instanceTemplate :: TF.Attr s P.Text
+    , _instanceTemplate    :: TF.Attr s P.Text
     -- ^ @instance_template@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _namedPort :: TF.Attr s [TF.Attr s (ComputeInstanceGroupManagerNamedPort s)]
+    , _namedPort           :: TF.Attr s [TF.Attr s (NamedPortSetting s)]
     -- ^ @named_port@ - (Optional)
     --
-    , _rollingUpdatePolicy :: TF.Attr s (ComputeInstanceGroupManagerRollingUpdatePolicy s)
+    , _rollingUpdatePolicy :: TF.Attr s (RollingUpdatePolicySetting s)
     -- ^ @rolling_update_policy@ - (Optional)
     --
-    , _targetPools :: TF.Attr s [TF.Attr s P.Text]
+    , _targetPools         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @target_pools@ - (Optional)
     --
-    , _updateStrategy :: TF.Attr s P.Text
+    , _updateStrategy      :: TF.Attr s P.Text
     -- ^ @update_strategy@ - (Optional)
     --
-    , _waitForInstances :: TF.Attr s P.Bool
+    , _waitForInstances    :: TF.Attr s P.Bool
     -- ^ @wait_for_instances@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeInstanceGroupManagerResource
     :: TF.Attr s P.Text -- ^ @base_instance_name@ - 'P.baseInstanceName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeInstanceGroupManagerResource s)
 computeInstanceGroupManagerResource _baseInstanceName _name =
-    TF.newResource "google_compute_instance_group_manager" TF.validator $
+    TF.unsafeResource "google_compute_instance_group_manager" P.defaultProvider TF.validator $
         ComputeInstanceGroupManagerResource'
             { _autoHealingPolicies = TF.Nil
             , _baseInstanceName = _baseInstanceName
@@ -3291,20 +3314,16 @@ instance TF.IsValid (ComputeInstanceGroupManagerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_autoHealingPolicies"
                   (_autoHealingPolicies
-                      :: ComputeInstanceGroupManagerResource s -> TF.Attr s (ComputeInstanceGroupManagerAutoHealingPolicies s))
-                  TF.validator
-           P.<> TF.settingsValidator "_namedPort"
-                  (_namedPort
-                      :: ComputeInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s (ComputeInstanceGroupManagerNamedPort s)])
+                      :: ComputeInstanceGroupManagerResource s -> TF.Attr s (AutoHealingPoliciesSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_rollingUpdatePolicy"
                   (_rollingUpdatePolicy
-                      :: ComputeInstanceGroupManagerResource s -> TF.Attr s (ComputeInstanceGroupManagerRollingUpdatePolicy s))
+                      :: ComputeInstanceGroupManagerResource s -> TF.Attr s (RollingUpdatePolicySetting s))
                   TF.validator
 
-instance P.HasAutoHealingPolicies (ComputeInstanceGroupManagerResource s) (TF.Attr s (ComputeInstanceGroupManagerAutoHealingPolicies s)) where
+instance P.HasAutoHealingPolicies (ComputeInstanceGroupManagerResource s) (TF.Attr s (AutoHealingPoliciesSetting s)) where
     autoHealingPolicies =
-        P.lens (_autoHealingPolicies :: ComputeInstanceGroupManagerResource s -> TF.Attr s (ComputeInstanceGroupManagerAutoHealingPolicies s))
+        P.lens (_autoHealingPolicies :: ComputeInstanceGroupManagerResource s -> TF.Attr s (AutoHealingPoliciesSetting s))
                (\s a -> s { _autoHealingPolicies = a } :: ComputeInstanceGroupManagerResource s)
 
 instance P.HasBaseInstanceName (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Text) where
@@ -3327,14 +3346,14 @@ instance P.HasName (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Text) wh
         P.lens (_name :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeInstanceGroupManagerResource s)
 
-instance P.HasNamedPort (ComputeInstanceGroupManagerResource s) (TF.Attr s [TF.Attr s (ComputeInstanceGroupManagerNamedPort s)]) where
+instance P.HasNamedPort (ComputeInstanceGroupManagerResource s) (TF.Attr s [TF.Attr s (NamedPortSetting s)]) where
     namedPort =
-        P.lens (_namedPort :: ComputeInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s (ComputeInstanceGroupManagerNamedPort s)])
+        P.lens (_namedPort :: ComputeInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s (NamedPortSetting s)])
                (\s a -> s { _namedPort = a } :: ComputeInstanceGroupManagerResource s)
 
-instance P.HasRollingUpdatePolicy (ComputeInstanceGroupManagerResource s) (TF.Attr s (ComputeInstanceGroupManagerRollingUpdatePolicy s)) where
+instance P.HasRollingUpdatePolicy (ComputeInstanceGroupManagerResource s) (TF.Attr s (RollingUpdatePolicySetting s)) where
     rollingUpdatePolicy =
-        P.lens (_rollingUpdatePolicy :: ComputeInstanceGroupManagerResource s -> TF.Attr s (ComputeInstanceGroupManagerRollingUpdatePolicy s))
+        P.lens (_rollingUpdatePolicy :: ComputeInstanceGroupManagerResource s -> TF.Attr s (RollingUpdatePolicySetting s))
                (\s a -> s { _rollingUpdatePolicy = a } :: ComputeInstanceGroupManagerResource s)
 
 instance P.HasTargetPools (ComputeInstanceGroupManagerResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -3364,10 +3383,10 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeInstanceGroupManagerR
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
     computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedTargetSize (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedTargetSize (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Int) where
     computedTargetSize x = TF.compute (TF.refKey x) "target_size"
 
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s [TF.Attr s (ComputeInstanceGroupManagerVersion s)]) where
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s [TF.Attr s (VersionSetting s)]) where
     computedVersion x = TF.compute (TF.refKey x) "version"
 
 instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
@@ -3387,22 +3406,22 @@ data ComputeInstanceTemplateResource s = ComputeInstanceTemplateResource'
     , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _disk :: TF.Attr s [TF.Attr s (ComputeInstanceTemplateDisk s)]
+    , _disk :: TF.Attr s [TF.Attr s (DiskSetting s)]
     -- ^ @disk@ - (Required, Forces New)
     --
-    , _guestAccelerator :: TF.Attr s [TF.Attr s (ComputeInstanceTemplateGuestAccelerator s)]
+    , _guestAccelerator :: TF.Attr s [TF.Attr s (GuestAcceleratorSetting s)]
     -- ^ @guest_accelerator@ - (Optional, Forces New)
     --
     , _instanceDescription :: TF.Attr s P.Text
     -- ^ @instance_description@ - (Optional, Forces New)
     --
-    , _labels :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional, Forces New)
     --
     , _machineType :: TF.Attr s P.Text
     -- ^ @machine_type@ - (Required, Forces New)
     --
-    , _metadata :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _metadata :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @metadata@ - (Optional, Forces New)
     --
     , _metadataStartupScript :: TF.Attr s P.Text
@@ -3411,26 +3430,26 @@ data ComputeInstanceTemplateResource s = ComputeInstanceTemplateResource'
     , _minCpuPlatform :: TF.Attr s P.Text
     -- ^ @min_cpu_platform@ - (Optional, Forces New)
     --
-    , _networkInterface :: TF.Attr s [TF.Attr s (ComputeInstanceTemplateNetworkInterface s)]
+    , _networkInterface :: TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]
     -- ^ @network_interface@ - (Optional, Forces New)
     --
     , _onHostMaintenance :: TF.Attr s P.Text
     -- ^ @on_host_maintenance@ - (Optional, Forces New)
     --
-    , _serviceAccount :: TF.Attr s (ComputeInstanceTemplateServiceAccount s)
+    , _serviceAccount :: TF.Attr s (ServiceAccountSetting s)
     -- ^ @service_account@ - (Optional, Forces New)
     --
     , _tags :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeInstanceTemplateResource
-    :: TF.Attr s [TF.Attr s (ComputeInstanceTemplateDisk s)] -- ^ @disk@ - 'P.disk'
+    :: TF.Attr s [TF.Attr s (DiskSetting s)] -- ^ @disk@ - 'P.disk'
     -> TF.Attr s P.Text -- ^ @machine_type@ - 'P.machineType'
     -> P.Resource (ComputeInstanceTemplateResource s)
 computeInstanceTemplateResource _disk _machineType =
-    TF.newResource "google_compute_instance_template" TF.validator $
+    TF.unsafeResource "google_compute_instance_template" P.defaultProvider TF.validator $
         ComputeInstanceTemplateResource'
             { _automaticRestart = TF.Nil
             , _canIpForward = TF.value P.False
@@ -3470,21 +3489,9 @@ instance TF.IsObject (ComputeInstanceTemplateResource s) where
 
 instance TF.IsValid (ComputeInstanceTemplateResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_disk"
-                  (_disk
-                      :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (ComputeInstanceTemplateDisk s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_guestAccelerator"
-                  (_guestAccelerator
-                      :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (ComputeInstanceTemplateGuestAccelerator s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_networkInterface"
-                  (_networkInterface
-                      :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (ComputeInstanceTemplateNetworkInterface s)])
-                  TF.validator
            P.<> TF.settingsValidator "_serviceAccount"
                   (_serviceAccount
-                      :: ComputeInstanceTemplateResource s -> TF.Attr s (ComputeInstanceTemplateServiceAccount s))
+                      :: ComputeInstanceTemplateResource s -> TF.Attr s (ServiceAccountSetting s))
                   TF.validator
 
 instance P.HasAutomaticRestart (ComputeInstanceTemplateResource s) (TF.Attr s P.Bool) where
@@ -3502,14 +3509,14 @@ instance P.HasDescription (ComputeInstanceTemplateResource s) (TF.Attr s P.Text)
         P.lens (_description :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeInstanceTemplateResource s)
 
-instance P.HasDisk (ComputeInstanceTemplateResource s) (TF.Attr s [TF.Attr s (ComputeInstanceTemplateDisk s)]) where
+instance P.HasDisk (ComputeInstanceTemplateResource s) (TF.Attr s [TF.Attr s (DiskSetting s)]) where
     disk =
-        P.lens (_disk :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (ComputeInstanceTemplateDisk s)])
+        P.lens (_disk :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (DiskSetting s)])
                (\s a -> s { _disk = a } :: ComputeInstanceTemplateResource s)
 
-instance P.HasGuestAccelerator (ComputeInstanceTemplateResource s) (TF.Attr s [TF.Attr s (ComputeInstanceTemplateGuestAccelerator s)]) where
+instance P.HasGuestAccelerator (ComputeInstanceTemplateResource s) (TF.Attr s [TF.Attr s (GuestAcceleratorSetting s)]) where
     guestAccelerator =
-        P.lens (_guestAccelerator :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (ComputeInstanceTemplateGuestAccelerator s)])
+        P.lens (_guestAccelerator :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (GuestAcceleratorSetting s)])
                (\s a -> s { _guestAccelerator = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasInstanceDescription (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
@@ -3517,9 +3524,9 @@ instance P.HasInstanceDescription (ComputeInstanceTemplateResource s) (TF.Attr s
         P.lens (_instanceDescription :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _instanceDescription = a } :: ComputeInstanceTemplateResource s)
 
-instance P.HasLabels (ComputeInstanceTemplateResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (ComputeInstanceTemplateResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: ComputeInstanceTemplateResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: ComputeInstanceTemplateResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasMachineType (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
@@ -3527,9 +3534,9 @@ instance P.HasMachineType (ComputeInstanceTemplateResource s) (TF.Attr s P.Text)
         P.lens (_machineType :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _machineType = a } :: ComputeInstanceTemplateResource s)
 
-instance P.HasMetadata (ComputeInstanceTemplateResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasMetadata (ComputeInstanceTemplateResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     metadata =
-        P.lens (_metadata :: ComputeInstanceTemplateResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_metadata :: ComputeInstanceTemplateResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _metadata = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasMetadataStartupScript (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
@@ -3542,9 +3549,9 @@ instance P.HasMinCpuPlatform (ComputeInstanceTemplateResource s) (TF.Attr s P.Te
         P.lens (_minCpuPlatform :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _minCpuPlatform = a } :: ComputeInstanceTemplateResource s)
 
-instance P.HasNetworkInterface (ComputeInstanceTemplateResource s) (TF.Attr s [TF.Attr s (ComputeInstanceTemplateNetworkInterface s)]) where
+instance P.HasNetworkInterface (ComputeInstanceTemplateResource s) (TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]) where
     networkInterface =
-        P.lens (_networkInterface :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (ComputeInstanceTemplateNetworkInterface s)])
+        P.lens (_networkInterface :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)])
                (\s a -> s { _networkInterface = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasOnHostMaintenance (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
@@ -3552,9 +3559,9 @@ instance P.HasOnHostMaintenance (ComputeInstanceTemplateResource s) (TF.Attr s P
         P.lens (_onHostMaintenance :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _onHostMaintenance = a } :: ComputeInstanceTemplateResource s)
 
-instance P.HasServiceAccount (ComputeInstanceTemplateResource s) (TF.Attr s (ComputeInstanceTemplateServiceAccount s)) where
+instance P.HasServiceAccount (ComputeInstanceTemplateResource s) (TF.Attr s (ServiceAccountSetting s)) where
     serviceAccount =
-        P.lens (_serviceAccount :: ComputeInstanceTemplateResource s -> TF.Attr s (ComputeInstanceTemplateServiceAccount s))
+        P.lens (_serviceAccount :: ComputeInstanceTemplateResource s -> TF.Attr s (ServiceAccountSetting s))
                (\s a -> s { _serviceAccount = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasTags (ComputeInstanceTemplateResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -3577,7 +3584,7 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeInstanceTemplateResou
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedScheduling (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s [TF.Attr s (ComputeInstanceTemplateScheduling s)]) where
+instance s ~ s' => P.HasComputedScheduling (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s [TF.Attr s (SchedulingSetting s)]) where
     computedScheduling x = TF.compute (TF.refKey x) "scheduling"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
@@ -3600,13 +3607,13 @@ data ComputeNetworkResource s = ComputeNetworkResource'
     , _name                  :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeNetworkResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeNetworkResource s)
 computeNetworkResource _name =
-    TF.newResource "google_compute_network" TF.validator $
+    TF.unsafeResource "google_compute_network" P.defaultProvider TF.validator $
         ComputeNetworkResource'
             { _autoCreateSubnetworks = TF.value P.True
             , _description = TF.Nil
@@ -3667,7 +3674,7 @@ data ComputeNetworkPeeringResource s = ComputeNetworkPeeringResource'
     , _peerNetwork      :: TF.Attr s P.Text
     -- ^ @peer_network@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeNetworkPeeringResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -3675,7 +3682,7 @@ computeNetworkPeeringResource
     -> TF.Attr s P.Text -- ^ @peer_network@ - 'P.peerNetwork'
     -> P.Resource (ComputeNetworkPeeringResource s)
 computeNetworkPeeringResource _name _network _peerNetwork =
-    TF.newResource "google_compute_network_peering" TF.validator $
+    TF.unsafeResource "google_compute_network_peering" P.defaultProvider TF.validator $
         ComputeNetworkPeeringResource'
             { _autoCreateRoutes = TF.value P.True
             , _name = _name
@@ -3725,16 +3732,16 @@ instance s ~ s' => P.HasComputedStateDetails (TF.Ref s' (ComputeNetworkPeeringRe
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_project_metadata.html terraform documentation>
 -- for more information.
 data ComputeProjectMetadataResource s = ComputeProjectMetadataResource'
-    { _metadata :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _metadata :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @metadata@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeProjectMetadataResource
-    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)) -- ^ @metadata@ - 'P.metadata'
+    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @metadata@ - 'P.metadata'
     -> P.Resource (ComputeProjectMetadataResource s)
 computeProjectMetadataResource _metadata =
-    TF.newResource "google_compute_project_metadata" TF.validator $
+    TF.unsafeResource "google_compute_project_metadata" P.defaultProvider TF.validator $
         ComputeProjectMetadataResource'
             { _metadata = _metadata
             }
@@ -3747,9 +3754,9 @@ instance TF.IsObject (ComputeProjectMetadataResource s) where
 instance TF.IsValid (ComputeProjectMetadataResource s) where
     validator = P.mempty
 
-instance P.HasMetadata (ComputeProjectMetadataResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasMetadata (ComputeProjectMetadataResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     metadata =
-        P.lens (_metadata :: ComputeProjectMetadataResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_metadata :: ComputeProjectMetadataResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _metadata = a } :: ComputeProjectMetadataResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeProjectMetadataResource s)) (TF.Attr s P.Text) where
@@ -3766,14 +3773,14 @@ data ComputeProjectMetadataItemResource s = ComputeProjectMetadataItemResource'
     , _value :: TF.Attr s P.Text
     -- ^ @value@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeProjectMetadataItemResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> P.Resource (ComputeProjectMetadataItemResource s)
 computeProjectMetadataItemResource _key _value =
-    TF.newResource "google_compute_project_metadata_item" TF.validator $
+    TF.unsafeResource "google_compute_project_metadata_item" P.defaultProvider TF.validator $
         ComputeProjectMetadataItemResource'
             { _key = _key
             , _value = _value
@@ -3806,27 +3813,27 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeProjectMetadataItemRe
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_region_autoscaler.html terraform documentation>
 -- for more information.
 data ComputeRegionAutoscalerResource s = ComputeRegionAutoscalerResource'
-    { _autoscalingPolicy :: TF.Attr s (ComputeRegionAutoscalerAutoscalingPolicy s)
+    { _autoscalingPolicy :: TF.Attr s (AutoscalingPolicySetting s)
     -- ^ @autoscaling_policy@ - (Required)
     --
-    , _description :: TF.Attr s P.Text
+    , _description       :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _target :: TF.Attr s P.Text
+    , _target            :: TF.Attr s P.Text
     -- ^ @target@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeRegionAutoscalerResource
-    :: TF.Attr s (ComputeRegionAutoscalerAutoscalingPolicy s) -- ^ @autoscaling_policy@ - 'P.autoscalingPolicy'
+    :: TF.Attr s (AutoscalingPolicySetting s) -- ^ @autoscaling_policy@ - 'P.autoscalingPolicy'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
     -> P.Resource (ComputeRegionAutoscalerResource s)
 computeRegionAutoscalerResource _autoscalingPolicy _name _target =
-    TF.newResource "google_compute_region_autoscaler" TF.validator $
+    TF.unsafeResource "google_compute_region_autoscaler" P.defaultProvider TF.validator $
         ComputeRegionAutoscalerResource'
             { _autoscalingPolicy = _autoscalingPolicy
             , _description = TF.Nil
@@ -3846,12 +3853,12 @@ instance TF.IsValid (ComputeRegionAutoscalerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_autoscalingPolicy"
                   (_autoscalingPolicy
-                      :: ComputeRegionAutoscalerResource s -> TF.Attr s (ComputeRegionAutoscalerAutoscalingPolicy s))
+                      :: ComputeRegionAutoscalerResource s -> TF.Attr s (AutoscalingPolicySetting s))
                   TF.validator
 
-instance P.HasAutoscalingPolicy (ComputeRegionAutoscalerResource s) (TF.Attr s (ComputeRegionAutoscalerAutoscalingPolicy s)) where
+instance P.HasAutoscalingPolicy (ComputeRegionAutoscalerResource s) (TF.Attr s (AutoscalingPolicySetting s)) where
     autoscalingPolicy =
-        P.lens (_autoscalingPolicy :: ComputeRegionAutoscalerResource s -> TF.Attr s (ComputeRegionAutoscalerAutoscalingPolicy s))
+        P.lens (_autoscalingPolicy :: ComputeRegionAutoscalerResource s -> TF.Attr s (AutoscalingPolicySetting s))
                (\s a -> s { _autoscalingPolicy = a } :: ComputeRegionAutoscalerResource s)
 
 instance P.HasDescription (ComputeRegionAutoscalerResource s) (TF.Attr s P.Text) where
@@ -3886,29 +3893,29 @@ instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRegionAutoscalerReso
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_region_backend_service.html terraform documentation>
 -- for more information.
 data ComputeRegionBackendServiceResource s = ComputeRegionBackendServiceResource'
-    { _backend :: TF.Attr s [TF.Attr s (ComputeRegionBackendServiceBackend s)]
+    { _backend                      :: TF.Attr s [TF.Attr s (BackendSetting s)]
     -- ^ @backend@ - (Optional)
     --
-    , _connectionDrainingTimeoutSec :: TF.Attr s P.Integer
+    , _connectionDrainingTimeoutSec :: TF.Attr s P.Int
     -- ^ @connection_draining_timeout_sec@ - (Optional)
     --
-    , _description :: TF.Attr s P.Text
+    , _description                  :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _healthChecks :: TF.Attr s P.Text
+    , _healthChecks                 :: TF.Attr s P.Text
     -- ^ @health_checks@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                         :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeRegionBackendServiceResource
     :: TF.Attr s P.Text -- ^ @health_checks@ - 'P.healthChecks'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeRegionBackendServiceResource s)
 computeRegionBackendServiceResource _healthChecks _name =
-    TF.newResource "google_compute_region_backend_service" TF.validator $
+    TF.unsafeResource "google_compute_region_backend_service" P.defaultProvider TF.validator $
         ComputeRegionBackendServiceResource'
             { _backend = TF.Nil
             , _connectionDrainingTimeoutSec = TF.value 0
@@ -3928,19 +3935,15 @@ instance TF.IsObject (ComputeRegionBackendServiceResource s) where
 
 instance TF.IsValid (ComputeRegionBackendServiceResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_backend"
-                  (_backend
-                      :: ComputeRegionBackendServiceResource s -> TF.Attr s [TF.Attr s (ComputeRegionBackendServiceBackend s)])
-                  TF.validator
 
-instance P.HasBackend (ComputeRegionBackendServiceResource s) (TF.Attr s [TF.Attr s (ComputeRegionBackendServiceBackend s)]) where
+instance P.HasBackend (ComputeRegionBackendServiceResource s) (TF.Attr s [TF.Attr s (BackendSetting s)]) where
     backend =
-        P.lens (_backend :: ComputeRegionBackendServiceResource s -> TF.Attr s [TF.Attr s (ComputeRegionBackendServiceBackend s)])
+        P.lens (_backend :: ComputeRegionBackendServiceResource s -> TF.Attr s [TF.Attr s (BackendSetting s)])
                (\s a -> s { _backend = a } :: ComputeRegionBackendServiceResource s)
 
-instance P.HasConnectionDrainingTimeoutSec (ComputeRegionBackendServiceResource s) (TF.Attr s P.Integer) where
+instance P.HasConnectionDrainingTimeoutSec (ComputeRegionBackendServiceResource s) (TF.Attr s P.Int) where
     connectionDrainingTimeoutSec =
-        P.lens (_connectionDrainingTimeoutSec :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Integer)
+        P.lens (_connectionDrainingTimeoutSec :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Int)
                (\s a -> s { _connectionDrainingTimeoutSec = a } :: ComputeRegionBackendServiceResource s)
 
 instance P.HasDescription (ComputeRegionBackendServiceResource s) (TF.Attr s P.Text) where
@@ -3976,7 +3979,7 @@ instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRegionBackendService
 instance s ~ s' => P.HasComputedSessionAffinity (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
     computedSessionAffinity x = TF.compute (TF.refKey x) "session_affinity"
 
-instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Int) where
     computedTimeoutSec x = TF.compute (TF.refKey x) "timeout_sec"
 
 -- | @google_compute_region_disk@ Resource.
@@ -3987,10 +3990,10 @@ data ComputeRegionDiskResource s = ComputeRegionDiskResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _diskEncryptionKey :: TF.Attr s (ComputeRegionDiskDiskEncryptionKey s)
+    , _diskEncryptionKey :: TF.Attr s (DiskEncryptionKeySetting s)
     -- ^ @disk_encryption_key@ - (Optional, Forces New)
     --
-    , _labels :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
@@ -4002,20 +4005,20 @@ data ComputeRegionDiskResource s = ComputeRegionDiskResource'
     , _snapshot :: TF.Attr s P.Text
     -- ^ @snapshot@ - (Optional, Forces New)
     --
-    , _sourceSnapshotEncryptionKey :: TF.Attr s (ComputeRegionDiskSourceSnapshotEncryptionKey s)
+    , _sourceSnapshotEncryptionKey :: TF.Attr s (SourceSnapshotEncryptionKeySetting s)
     -- ^ @source_snapshot_encryption_key@ - (Optional, Forces New)
     --
     , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeRegionDiskResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @replica_zones@ - 'P.replicaZones'
     -> P.Resource (ComputeRegionDiskResource s)
 computeRegionDiskResource _name _replicaZones =
-    TF.newResource "google_compute_region_disk" TF.validator $
+    TF.unsafeResource "google_compute_region_disk" P.defaultProvider TF.validator $
         ComputeRegionDiskResource'
             { _description = TF.Nil
             , _diskEncryptionKey = TF.Nil
@@ -4043,11 +4046,11 @@ instance TF.IsValid (ComputeRegionDiskResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_diskEncryptionKey"
                   (_diskEncryptionKey
-                      :: ComputeRegionDiskResource s -> TF.Attr s (ComputeRegionDiskDiskEncryptionKey s))
+                      :: ComputeRegionDiskResource s -> TF.Attr s (DiskEncryptionKeySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_sourceSnapshotEncryptionKey"
                   (_sourceSnapshotEncryptionKey
-                      :: ComputeRegionDiskResource s -> TF.Attr s (ComputeRegionDiskSourceSnapshotEncryptionKey s))
+                      :: ComputeRegionDiskResource s -> TF.Attr s (SourceSnapshotEncryptionKeySetting s))
                   TF.validator
 
 instance P.HasDescription (ComputeRegionDiskResource s) (TF.Attr s P.Text) where
@@ -4055,14 +4058,14 @@ instance P.HasDescription (ComputeRegionDiskResource s) (TF.Attr s P.Text) where
         P.lens (_description :: ComputeRegionDiskResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeRegionDiskResource s)
 
-instance P.HasDiskEncryptionKey (ComputeRegionDiskResource s) (TF.Attr s (ComputeRegionDiskDiskEncryptionKey s)) where
+instance P.HasDiskEncryptionKey (ComputeRegionDiskResource s) (TF.Attr s (DiskEncryptionKeySetting s)) where
     diskEncryptionKey =
-        P.lens (_diskEncryptionKey :: ComputeRegionDiskResource s -> TF.Attr s (ComputeRegionDiskDiskEncryptionKey s))
+        P.lens (_diskEncryptionKey :: ComputeRegionDiskResource s -> TF.Attr s (DiskEncryptionKeySetting s))
                (\s a -> s { _diskEncryptionKey = a } :: ComputeRegionDiskResource s)
 
-instance P.HasLabels (ComputeRegionDiskResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (ComputeRegionDiskResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: ComputeRegionDiskResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: ComputeRegionDiskResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: ComputeRegionDiskResource s)
 
 instance P.HasName (ComputeRegionDiskResource s) (TF.Attr s P.Text) where
@@ -4080,9 +4083,9 @@ instance P.HasSnapshot (ComputeRegionDiskResource s) (TF.Attr s P.Text) where
         P.lens (_snapshot :: ComputeRegionDiskResource s -> TF.Attr s P.Text)
                (\s a -> s { _snapshot = a } :: ComputeRegionDiskResource s)
 
-instance P.HasSourceSnapshotEncryptionKey (ComputeRegionDiskResource s) (TF.Attr s (ComputeRegionDiskSourceSnapshotEncryptionKey s)) where
+instance P.HasSourceSnapshotEncryptionKey (ComputeRegionDiskResource s) (TF.Attr s (SourceSnapshotEncryptionKeySetting s)) where
     sourceSnapshotEncryptionKey =
-        P.lens (_sourceSnapshotEncryptionKey :: ComputeRegionDiskResource s -> TF.Attr s (ComputeRegionDiskSourceSnapshotEncryptionKey s))
+        P.lens (_sourceSnapshotEncryptionKey :: ComputeRegionDiskResource s -> TF.Attr s (SourceSnapshotEncryptionKeySetting s))
                (\s a -> s { _sourceSnapshotEncryptionKey = a } :: ComputeRegionDiskResource s)
 
 instance P.HasType' (ComputeRegionDiskResource s) (TF.Attr s P.Text) where
@@ -4111,7 +4114,7 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeRegionDiskResource s))
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRegionDiskResource s)) (TF.Attr s P.Text) where
     computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeRegionDiskResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeRegionDiskResource s)) (TF.Attr s P.Int) where
     computedSize x = TF.compute (TF.refKey x) "size"
 
 instance s ~ s' => P.HasComputedSourceSnapshotId (TF.Ref s' (ComputeRegionDiskResource s)) (TF.Attr s P.Text) where
@@ -4125,40 +4128,40 @@ instance s ~ s' => P.HasComputedUsers (TF.Ref s' (ComputeRegionDiskResource s)) 
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_region_instance_group_manager.html terraform documentation>
 -- for more information.
 data ComputeRegionInstanceGroupManagerResource s = ComputeRegionInstanceGroupManagerResource'
-    { _autoHealingPolicies :: TF.Attr s (ComputeRegionInstanceGroupManagerAutoHealingPolicies s)
+    { _autoHealingPolicies :: TF.Attr s (AutoHealingPoliciesSetting s)
     -- ^ @auto_healing_policies@ - (Optional)
     --
-    , _baseInstanceName :: TF.Attr s P.Text
+    , _baseInstanceName    :: TF.Attr s P.Text
     -- ^ @base_instance_name@ - (Required, Forces New)
     --
-    , _description :: TF.Attr s P.Text
+    , _description         :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _instanceTemplate :: TF.Attr s P.Text
+    , _instanceTemplate    :: TF.Attr s P.Text
     -- ^ @instance_template@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _namedPort :: TF.Attr s [TF.Attr s (ComputeRegionInstanceGroupManagerNamedPort s)]
+    , _namedPort           :: TF.Attr s [TF.Attr s (NamedPortSetting s)]
     -- ^ @named_port@ - (Optional)
     --
-    , _region :: TF.Attr s P.Text
+    , _region              :: TF.Attr s P.Text
     -- ^ @region@ - (Required, Forces New)
     --
-    , _rollingUpdatePolicy :: TF.Attr s (ComputeRegionInstanceGroupManagerRollingUpdatePolicy s)
+    , _rollingUpdatePolicy :: TF.Attr s (RollingUpdatePolicySetting s)
     -- ^ @rolling_update_policy@ - (Optional)
     --
-    , _targetPools :: TF.Attr s [TF.Attr s P.Text]
+    , _targetPools         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @target_pools@ - (Optional)
     --
-    , _updateStrategy :: TF.Attr s P.Text
+    , _updateStrategy      :: TF.Attr s P.Text
     -- ^ @update_strategy@ - (Optional)
     --
-    , _waitForInstances :: TF.Attr s P.Bool
+    , _waitForInstances    :: TF.Attr s P.Bool
     -- ^ @wait_for_instances@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeRegionInstanceGroupManagerResource
     :: TF.Attr s P.Text -- ^ @base_instance_name@ - 'P.baseInstanceName'
@@ -4166,7 +4169,7 @@ computeRegionInstanceGroupManagerResource
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> P.Resource (ComputeRegionInstanceGroupManagerResource s)
 computeRegionInstanceGroupManagerResource _baseInstanceName _name _region =
-    TF.newResource "google_compute_region_instance_group_manager" TF.validator $
+    TF.unsafeResource "google_compute_region_instance_group_manager" P.defaultProvider TF.validator $
         ComputeRegionInstanceGroupManagerResource'
             { _autoHealingPolicies = TF.Nil
             , _baseInstanceName = _baseInstanceName
@@ -4200,20 +4203,16 @@ instance TF.IsValid (ComputeRegionInstanceGroupManagerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_autoHealingPolicies"
                   (_autoHealingPolicies
-                      :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s (ComputeRegionInstanceGroupManagerAutoHealingPolicies s))
-                  TF.validator
-           P.<> TF.settingsValidator "_namedPort"
-                  (_namedPort
-                      :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s (ComputeRegionInstanceGroupManagerNamedPort s)])
+                      :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s (AutoHealingPoliciesSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_rollingUpdatePolicy"
                   (_rollingUpdatePolicy
-                      :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s (ComputeRegionInstanceGroupManagerRollingUpdatePolicy s))
+                      :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s (RollingUpdatePolicySetting s))
                   TF.validator
 
-instance P.HasAutoHealingPolicies (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s (ComputeRegionInstanceGroupManagerAutoHealingPolicies s)) where
+instance P.HasAutoHealingPolicies (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s (AutoHealingPoliciesSetting s)) where
     autoHealingPolicies =
-        P.lens (_autoHealingPolicies :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s (ComputeRegionInstanceGroupManagerAutoHealingPolicies s))
+        P.lens (_autoHealingPolicies :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s (AutoHealingPoliciesSetting s))
                (\s a -> s { _autoHealingPolicies = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasBaseInstanceName (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
@@ -4236,9 +4235,9 @@ instance P.HasName (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Te
         P.lens (_name :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeRegionInstanceGroupManagerResource s)
 
-instance P.HasNamedPort (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s [TF.Attr s (ComputeRegionInstanceGroupManagerNamedPort s)]) where
+instance P.HasNamedPort (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s [TF.Attr s (NamedPortSetting s)]) where
     namedPort =
-        P.lens (_namedPort :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s (ComputeRegionInstanceGroupManagerNamedPort s)])
+        P.lens (_namedPort :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s (NamedPortSetting s)])
                (\s a -> s { _namedPort = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasRegion (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
@@ -4246,9 +4245,9 @@ instance P.HasRegion (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.
         P.lens (_region :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: ComputeRegionInstanceGroupManagerResource s)
 
-instance P.HasRollingUpdatePolicy (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s (ComputeRegionInstanceGroupManagerRollingUpdatePolicy s)) where
+instance P.HasRollingUpdatePolicy (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s (RollingUpdatePolicySetting s)) where
     rollingUpdatePolicy =
-        P.lens (_rollingUpdatePolicy :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s (ComputeRegionInstanceGroupManagerRollingUpdatePolicy s))
+        P.lens (_rollingUpdatePolicy :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s (RollingUpdatePolicySetting s))
                (\s a -> s { _rollingUpdatePolicy = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasTargetPools (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -4281,10 +4280,10 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRegionInstanceGroupMa
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
     computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedTargetSize (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedTargetSize (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Int) where
     computedTargetSize x = TF.compute (TF.refKey x) "target_size"
 
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s [TF.Attr s (ComputeRegionInstanceGroupManagerVersion s)]) where
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s [TF.Attr s (VersionSetting s)]) where
     computedVersion x = TF.compute (TF.refKey x) "version"
 
 -- | @google_compute_route@ Resource.
@@ -4319,13 +4318,13 @@ data ComputeRouteResource s = ComputeRouteResource'
     , _nextHopVpnTunnel    :: TF.Attr s P.Text
     -- ^ @next_hop_vpn_tunnel@ - (Optional, Forces New)
     --
-    , _priority            :: TF.Attr s P.Integer
+    , _priority            :: TF.Attr s P.Int
     -- ^ @priority@ - (Optional, Forces New)
     --
     , _tags                :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeRouteResource
     :: TF.Attr s P.Text -- ^ @dest_range@ - 'P.destRange'
@@ -4333,7 +4332,7 @@ computeRouteResource
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
     -> P.Resource (ComputeRouteResource s)
 computeRouteResource _destRange _name _network =
-    TF.newResource "google_compute_route" TF.validator $
+    TF.unsafeResource "google_compute_route" P.defaultProvider TF.validator $
         ComputeRouteResource'
             { _description = TF.Nil
             , _destRange = _destRange
@@ -4411,9 +4410,9 @@ instance P.HasNextHopVpnTunnel (ComputeRouteResource s) (TF.Attr s P.Text) where
         P.lens (_nextHopVpnTunnel :: ComputeRouteResource s -> TF.Attr s P.Text)
                (\s a -> s { _nextHopVpnTunnel = a } :: ComputeRouteResource s)
 
-instance P.HasPriority (ComputeRouteResource s) (TF.Attr s P.Integer) where
+instance P.HasPriority (ComputeRouteResource s) (TF.Attr s P.Int) where
     priority =
-        P.lens (_priority :: ComputeRouteResource s -> TF.Attr s P.Integer)
+        P.lens (_priority :: ComputeRouteResource s -> TF.Attr s P.Int)
                (\s a -> s { _priority = a } :: ComputeRouteResource s)
 
 instance P.HasTags (ComputeRouteResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -4435,7 +4434,7 @@ instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRouteResource s)) (T
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_router.html terraform documentation>
 -- for more information.
 data ComputeRouterResource s = ComputeRouterResource'
-    { _bgp         :: TF.Attr s (ComputeRouterBgp s)
+    { _bgp         :: TF.Attr s (BgpSetting s)
     -- ^ @bgp@ - (Optional)
     --
     , _description :: TF.Attr s P.Text
@@ -4447,14 +4446,14 @@ data ComputeRouterResource s = ComputeRouterResource'
     , _network     :: TF.Attr s P.Text
     -- ^ @network@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeRouterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
     -> P.Resource (ComputeRouterResource s)
 computeRouterResource _name _network =
-    TF.newResource "google_compute_router" TF.validator $
+    TF.unsafeResource "google_compute_router" P.defaultProvider TF.validator $
         ComputeRouterResource'
             { _bgp = TF.Nil
             , _description = TF.Nil
@@ -4474,12 +4473,12 @@ instance TF.IsValid (ComputeRouterResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_bgp"
                   (_bgp
-                      :: ComputeRouterResource s -> TF.Attr s (ComputeRouterBgp s))
+                      :: ComputeRouterResource s -> TF.Attr s (BgpSetting s))
                   TF.validator
 
-instance P.HasBgp (ComputeRouterResource s) (TF.Attr s (ComputeRouterBgp s)) where
+instance P.HasBgp (ComputeRouterResource s) (TF.Attr s (BgpSetting s)) where
     bgp =
-        P.lens (_bgp :: ComputeRouterResource s -> TF.Attr s (ComputeRouterBgp s))
+        P.lens (_bgp :: ComputeRouterResource s -> TF.Attr s (BgpSetting s))
                (\s a -> s { _bgp = a } :: ComputeRouterResource s)
 
 instance P.HasDescription (ComputeRouterResource s) (TF.Attr s P.Text) where
@@ -4526,7 +4525,7 @@ data ComputeRouterInterfaceResource s = ComputeRouterInterfaceResource'
     , _vpnTunnel :: TF.Attr s P.Text
     -- ^ @vpn_tunnel@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeRouterInterfaceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4534,7 +4533,7 @@ computeRouterInterfaceResource
     -> TF.Attr s P.Text -- ^ @vpn_tunnel@ - 'P.vpnTunnel'
     -> P.Resource (ComputeRouterInterfaceResource s)
 computeRouterInterfaceResource _name _router _vpnTunnel =
-    TF.newResource "google_compute_router_interface" TF.validator $
+    TF.unsafeResource "google_compute_router_interface" P.defaultProvider TF.validator $
         ComputeRouterInterfaceResource'
             { _ipRange = TF.Nil
             , _name = _name
@@ -4584,7 +4583,7 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeRouterInterfaceResourc
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_router_peer.html terraform documentation>
 -- for more information.
 data ComputeRouterPeerResource s = ComputeRouterPeerResource'
-    { _advertisedRoutePriority :: TF.Attr s P.Integer
+    { _advertisedRoutePriority :: TF.Attr s P.Int
     -- ^ @advertised_route_priority@ - (Optional, Forces New)
     --
     , _interface               :: TF.Attr s P.Text
@@ -4593,7 +4592,7 @@ data ComputeRouterPeerResource s = ComputeRouterPeerResource'
     , _name                    :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _peerAsn                 :: TF.Attr s P.Integer
+    , _peerAsn                 :: TF.Attr s P.Int
     -- ^ @peer_asn@ - (Required, Forces New)
     --
     , _peerIpAddress           :: TF.Attr s P.Text
@@ -4602,16 +4601,16 @@ data ComputeRouterPeerResource s = ComputeRouterPeerResource'
     , _router                  :: TF.Attr s P.Text
     -- ^ @router@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeRouterPeerResource
     :: TF.Attr s P.Text -- ^ @interface@ - 'P.interface'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Integer -- ^ @peer_asn@ - 'P.peerAsn'
+    -> TF.Attr s P.Int -- ^ @peer_asn@ - 'P.peerAsn'
     -> TF.Attr s P.Text -- ^ @router@ - 'P.router'
     -> P.Resource (ComputeRouterPeerResource s)
 computeRouterPeerResource _interface _name _peerAsn _router =
-    TF.newResource "google_compute_router_peer" TF.validator $
+    TF.unsafeResource "google_compute_router_peer" P.defaultProvider TF.validator $
         ComputeRouterPeerResource'
             { _advertisedRoutePriority = TF.Nil
             , _interface = _interface
@@ -4634,9 +4633,9 @@ instance TF.IsObject (ComputeRouterPeerResource s) where
 instance TF.IsValid (ComputeRouterPeerResource s) where
     validator = P.mempty
 
-instance P.HasAdvertisedRoutePriority (ComputeRouterPeerResource s) (TF.Attr s P.Integer) where
+instance P.HasAdvertisedRoutePriority (ComputeRouterPeerResource s) (TF.Attr s P.Int) where
     advertisedRoutePriority =
-        P.lens (_advertisedRoutePriority :: ComputeRouterPeerResource s -> TF.Attr s P.Integer)
+        P.lens (_advertisedRoutePriority :: ComputeRouterPeerResource s -> TF.Attr s P.Int)
                (\s a -> s { _advertisedRoutePriority = a } :: ComputeRouterPeerResource s)
 
 instance P.HasInterface (ComputeRouterPeerResource s) (TF.Attr s P.Text) where
@@ -4649,9 +4648,9 @@ instance P.HasName (ComputeRouterPeerResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeRouterPeerResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeRouterPeerResource s)
 
-instance P.HasPeerAsn (ComputeRouterPeerResource s) (TF.Attr s P.Integer) where
+instance P.HasPeerAsn (ComputeRouterPeerResource s) (TF.Attr s P.Int) where
     peerAsn =
-        P.lens (_peerAsn :: ComputeRouterPeerResource s -> TF.Attr s P.Integer)
+        P.lens (_peerAsn :: ComputeRouterPeerResource s -> TF.Attr s P.Int)
                (\s a -> s { _peerAsn = a } :: ComputeRouterPeerResource s)
 
 instance P.HasPeerIpAddress (ComputeRouterPeerResource s) (TF.Attr s P.Text) where
@@ -4684,13 +4683,13 @@ data ComputeSecurityPolicyResource s = ComputeSecurityPolicyResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSecurityPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSecurityPolicyResource s)
 computeSecurityPolicyResource _name =
-    TF.newResource "google_compute_security_policy" TF.validator $
+    TF.unsafeResource "google_compute_security_policy" P.defaultProvider TF.validator $
         ComputeSecurityPolicyResource'
             { _description = TF.Nil
             , _name = _name
@@ -4721,7 +4720,7 @@ instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeSecurityPolicyRes
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSecurityPolicyResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedRule (TF.Ref s' (ComputeSecurityPolicyResource s)) (TF.Attr s [TF.Attr s (ComputeSecurityPolicyRule s)]) where
+instance s ~ s' => P.HasComputedRule (TF.Ref s' (ComputeSecurityPolicyResource s)) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
     computedRule x = TF.compute (TF.refKey x) "rule"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSecurityPolicyResource s)) (TF.Attr s P.Text) where
@@ -4735,13 +4734,13 @@ data ComputeSharedVpcHostProjectResource s = ComputeSharedVpcHostProjectResource
     { _project :: TF.Attr s P.Text
     -- ^ @project@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSharedVpcHostProjectResource
     :: TF.Attr s P.Text -- ^ @project@ - 'P.project'
     -> P.Resource (ComputeSharedVpcHostProjectResource s)
 computeSharedVpcHostProjectResource _project =
-    TF.newResource "google_compute_shared_vpc_host_project" TF.validator $
+    TF.unsafeResource "google_compute_shared_vpc_host_project" P.defaultProvider TF.validator $
         ComputeSharedVpcHostProjectResource'
             { _project = _project
             }
@@ -4770,14 +4769,14 @@ data ComputeSharedVpcServiceProjectResource s = ComputeSharedVpcServiceProjectRe
     , _serviceProject :: TF.Attr s P.Text
     -- ^ @service_project@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSharedVpcServiceProjectResource
     :: TF.Attr s P.Text -- ^ @host_project@ - 'P.hostProject'
     -> TF.Attr s P.Text -- ^ @service_project@ - 'P.serviceProject'
     -> P.Resource (ComputeSharedVpcServiceProjectResource s)
 computeSharedVpcServiceProjectResource _hostProject _serviceProject =
-    TF.newResource "google_compute_shared_vpc_service_project" TF.validator $
+    TF.unsafeResource "google_compute_shared_vpc_service_project" P.defaultProvider TF.validator $
         ComputeSharedVpcServiceProjectResource'
             { _hostProject = _hostProject
             , _serviceProject = _serviceProject
@@ -4807,29 +4806,29 @@ instance P.HasServiceProject (ComputeSharedVpcServiceProjectResource s) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_snapshot.html terraform documentation>
 -- for more information.
 data ComputeSnapshotResource s = ComputeSnapshotResource'
-    { _labels :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _labels                     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                       :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _snapshotEncryptionKeyRaw :: TF.Attr s P.Text
+    , _snapshotEncryptionKeyRaw   :: TF.Attr s P.Text
     -- ^ @snapshot_encryption_key_raw@ - (Optional, Forces New)
     --
-    , _sourceDisk :: TF.Attr s P.Text
+    , _sourceDisk                 :: TF.Attr s P.Text
     -- ^ @source_disk@ - (Required, Forces New)
     --
     , _sourceDiskEncryptionKeyRaw :: TF.Attr s P.Text
     -- ^ @source_disk_encryption_key_raw@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSnapshotResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @source_disk@ - 'P.sourceDisk'
     -> P.Resource (ComputeSnapshotResource s)
 computeSnapshotResource _name _sourceDisk =
-    TF.newResource "google_compute_snapshot" TF.validator $
+    TF.unsafeResource "google_compute_snapshot" P.defaultProvider TF.validator $
         ComputeSnapshotResource'
             { _labels = TF.Nil
             , _name = _name
@@ -4850,9 +4849,9 @@ instance TF.IsObject (ComputeSnapshotResource s) where
 instance TF.IsValid (ComputeSnapshotResource s) where
     validator = P.mempty
 
-instance P.HasLabels (ComputeSnapshotResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (ComputeSnapshotResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: ComputeSnapshotResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: ComputeSnapshotResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: ComputeSnapshotResource s)
 
 instance P.HasName (ComputeSnapshotResource s) (TF.Attr s P.Text) where
@@ -4910,14 +4909,14 @@ data ComputeSslCertificateResource s = ComputeSslCertificateResource'
     , _privateKey  :: TF.Attr s P.Text
     -- ^ @private_key@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSslCertificateResource
     :: TF.Attr s P.Text -- ^ @certificate@ - 'P.certificate'
     -> TF.Attr s P.Text -- ^ @private_key@ - 'P.privateKey'
     -> P.Resource (ComputeSslCertificateResource s)
 computeSslCertificateResource _certificate _privateKey =
-    TF.newResource "google_compute_ssl_certificate" TF.validator $
+    TF.unsafeResource "google_compute_ssl_certificate" P.defaultProvider TF.validator $
         ComputeSslCertificateResource'
             { _certificate = _certificate
             , _description = TF.Nil
@@ -4984,13 +4983,13 @@ data ComputeSslPolicyResource s = ComputeSslPolicyResource'
     , _profile        :: TF.Attr s P.Text
     -- ^ @profile@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSslPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSslPolicyResource s)
 computeSslPolicyResource _name =
-    TF.newResource "google_compute_ssl_policy" TF.validator $
+    TF.unsafeResource "google_compute_ssl_policy" P.defaultProvider TF.validator $
         ComputeSslPolicyResource'
             { _customFeatures = TF.Nil
             , _description = TF.Nil
@@ -5074,7 +5073,7 @@ data ComputeSubnetworkResource s = ComputeSubnetworkResource'
     , _privateIpGoogleAccess :: TF.Attr s P.Bool
     -- ^ @private_ip_google_access@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSubnetworkResource
     :: TF.Attr s P.Text -- ^ @ip_cidr_range@ - 'P.ipCidrRange'
@@ -5082,7 +5081,7 @@ computeSubnetworkResource
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
     -> P.Resource (ComputeSubnetworkResource s)
 computeSubnetworkResource _ipCidrRange _name _network =
-    TF.newResource "google_compute_subnetwork" TF.validator $
+    TF.unsafeResource "google_compute_subnetwork" P.defaultProvider TF.validator $
         ComputeSubnetworkResource'
             { _description = TF.Nil
             , _enableFlowLogs = TF.Nil
@@ -5150,7 +5149,7 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSubnetworkResource s)
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedSecondaryIpRange (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s [TF.Attr s (ComputeSubnetworkSecondaryIpRange s)]) where
+instance s ~ s' => P.HasComputedSecondaryIpRange (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s [TF.Attr s (SecondaryIpRangeSetting s)]) where
     computedSecondaryIpRange x = TF.compute (TF.refKey x) "secondary_ip_range"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
@@ -5170,7 +5169,7 @@ data ComputeSubnetworkIamBindingResource s = ComputeSubnetworkIamBindingResource
     , _subnetwork :: TF.Attr s P.Text
     -- ^ @subnetwork@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSubnetworkIamBindingResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
@@ -5178,7 +5177,7 @@ computeSubnetworkIamBindingResource
     -> TF.Attr s P.Text -- ^ @subnetwork@ - 'P.subnetwork'
     -> P.Resource (ComputeSubnetworkIamBindingResource s)
 computeSubnetworkIamBindingResource _members _role _subnetwork =
-    TF.newResource "google_compute_subnetwork_iam_binding" TF.validator $
+    TF.unsafeResource "google_compute_subnetwork_iam_binding" P.defaultProvider TF.validator $
         ComputeSubnetworkIamBindingResource'
             { _members = _members
             , _role = _role
@@ -5233,7 +5232,7 @@ data ComputeSubnetworkIamMemberResource s = ComputeSubnetworkIamMemberResource'
     , _subnetwork :: TF.Attr s P.Text
     -- ^ @subnetwork@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSubnetworkIamMemberResource
     :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
@@ -5241,7 +5240,7 @@ computeSubnetworkIamMemberResource
     -> TF.Attr s P.Text -- ^ @subnetwork@ - 'P.subnetwork'
     -> P.Resource (ComputeSubnetworkIamMemberResource s)
 computeSubnetworkIamMemberResource _member _role _subnetwork =
-    TF.newResource "google_compute_subnetwork_iam_member" TF.validator $
+    TF.unsafeResource "google_compute_subnetwork_iam_member" P.defaultProvider TF.validator $
         ComputeSubnetworkIamMemberResource'
             { _member = _member
             , _role = _role
@@ -5293,14 +5292,14 @@ data ComputeSubnetworkIamPolicyResource s = ComputeSubnetworkIamPolicyResource'
     , _subnetwork :: TF.Attr s P.Text
     -- ^ @subnetwork@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSubnetworkIamPolicyResource
     :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> TF.Attr s P.Text -- ^ @subnetwork@ - 'P.subnetwork'
     -> P.Resource (ComputeSubnetworkIamPolicyResource s)
 computeSubnetworkIamPolicyResource _policyData _subnetwork =
-    TF.newResource "google_compute_subnetwork_iam_policy" TF.validator $
+    TF.unsafeResource "google_compute_subnetwork_iam_policy" P.defaultProvider TF.validator $
         ComputeSubnetworkIamPolicyResource'
             { _policyData = _policyData
             , _subnetwork = _subnetwork
@@ -5348,14 +5347,14 @@ data ComputeTargetHttpProxyResource s = ComputeTargetHttpProxyResource'
     , _urlMap      :: TF.Attr s P.Text
     -- ^ @url_map@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeTargetHttpProxyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @url_map@ - 'P.urlMap'
     -> P.Resource (ComputeTargetHttpProxyResource s)
 computeTargetHttpProxyResource _name _urlMap =
-    TF.newResource "google_compute_target_http_proxy" TF.validator $
+    TF.unsafeResource "google_compute_target_http_proxy" P.defaultProvider TF.validator $
         ComputeTargetHttpProxyResource'
             { _description = TF.Nil
             , _name = _name
@@ -5393,7 +5392,7 @@ instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeTargetHttpP
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeTargetHttpProxyResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedProxyId (TF.Ref s' (ComputeTargetHttpProxyResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedProxyId (TF.Ref s' (ComputeTargetHttpProxyResource s)) (TF.Attr s P.Int) where
     computedProxyId x = TF.compute (TF.refKey x) "proxy_id"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeTargetHttpProxyResource s)) (TF.Attr s P.Text) where
@@ -5422,7 +5421,7 @@ data ComputeTargetHttpsProxyResource s = ComputeTargetHttpsProxyResource'
     , _urlMap          :: TF.Attr s P.Text
     -- ^ @url_map@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeTargetHttpsProxyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -5430,7 +5429,7 @@ computeTargetHttpsProxyResource
     -> TF.Attr s P.Text -- ^ @url_map@ - 'P.urlMap'
     -> P.Resource (ComputeTargetHttpsProxyResource s)
 computeTargetHttpsProxyResource _name _sslCertificates _urlMap =
-    TF.newResource "google_compute_target_https_proxy" TF.validator $
+    TF.unsafeResource "google_compute_target_https_proxy" P.defaultProvider TF.validator $
         ComputeTargetHttpsProxyResource'
             { _description = TF.Nil
             , _name = _name
@@ -5489,7 +5488,7 @@ instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeTargetHttps
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeTargetHttpsProxyResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedProxyId (TF.Ref s' (ComputeTargetHttpsProxyResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedProxyId (TF.Ref s' (ComputeTargetHttpsProxyResource s)) (TF.Attr s P.Int) where
     computedProxyId x = TF.compute (TF.refKey x) "proxy_id"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeTargetHttpsProxyResource s)) (TF.Attr s P.Text) where
@@ -5518,13 +5517,13 @@ data ComputeTargetPoolResource s = ComputeTargetPoolResource'
     , _sessionAffinity :: TF.Attr s P.Text
     -- ^ @session_affinity@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeTargetPoolResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeTargetPoolResource s)
 computeTargetPoolResource _name =
-    TF.newResource "google_compute_target_pool" TF.validator $
+    TF.unsafeResource "google_compute_target_pool" P.defaultProvider TF.validator $
         ComputeTargetPoolResource'
             { _backupPool = TF.Nil
             , _description = TF.Nil
@@ -5612,7 +5611,7 @@ data ComputeTargetSslProxyResource s = ComputeTargetSslProxyResource'
     , _sslPolicy       :: TF.Attr s P.Text
     -- ^ @ssl_policy@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeTargetSslProxyResource
     :: TF.Attr s P.Text -- ^ @backend_service@ - 'P.backendService'
@@ -5620,7 +5619,7 @@ computeTargetSslProxyResource
     -> TF.Attr s P.Text -- ^ @ssl_certificates@ - 'P.sslCertificates'
     -> P.Resource (ComputeTargetSslProxyResource s)
 computeTargetSslProxyResource _backendService _name _sslCertificates =
-    TF.newResource "google_compute_target_ssl_proxy" TF.validator $
+    TF.unsafeResource "google_compute_target_ssl_proxy" P.defaultProvider TF.validator $
         ComputeTargetSslProxyResource'
             { _backendService = _backendService
             , _description = TF.Nil
@@ -5679,7 +5678,7 @@ instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeTargetSslPr
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeTargetSslProxyResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedProxyId (TF.Ref s' (ComputeTargetSslProxyResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedProxyId (TF.Ref s' (ComputeTargetSslProxyResource s)) (TF.Attr s P.Int) where
     computedProxyId x = TF.compute (TF.refKey x) "proxy_id"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeTargetSslProxyResource s)) (TF.Attr s P.Text) where
@@ -5702,14 +5701,14 @@ data ComputeTargetTcpProxyResource s = ComputeTargetTcpProxyResource'
     , _proxyHeader    :: TF.Attr s P.Text
     -- ^ @proxy_header@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeTargetTcpProxyResource
     :: TF.Attr s P.Text -- ^ @backend_service@ - 'P.backendService'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeTargetTcpProxyResource s)
 computeTargetTcpProxyResource _backendService _name =
-    TF.newResource "google_compute_target_tcp_proxy" TF.validator $
+    TF.unsafeResource "google_compute_target_tcp_proxy" P.defaultProvider TF.validator $
         ComputeTargetTcpProxyResource'
             { _backendService = _backendService
             , _description = TF.Nil
@@ -5754,7 +5753,7 @@ instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeTargetTcpPr
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeTargetTcpProxyResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedProxyId (TF.Ref s' (ComputeTargetTcpProxyResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedProxyId (TF.Ref s' (ComputeTargetTcpProxyResource s)) (TF.Attr s P.Int) where
     computedProxyId x = TF.compute (TF.refKey x) "proxy_id"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeTargetTcpProxyResource s)) (TF.Attr s P.Text) where
@@ -5771,26 +5770,26 @@ data ComputeUrlMapResource s = ComputeUrlMapResource'
     , _description    :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _hostRule       :: TF.Attr s [TF.Attr s (ComputeUrlMapHostRule s)]
+    , _hostRule       :: TF.Attr s [TF.Attr s (HostRuleSetting s)]
     -- ^ @host_rule@ - (Optional)
     --
     , _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _pathMatcher    :: TF.Attr s [TF.Attr s (ComputeUrlMapPathMatcher s)]
+    , _pathMatcher    :: TF.Attr s [TF.Attr s (PathMatcherSetting s)]
     -- ^ @path_matcher@ - (Optional)
     --
-    , _test           :: TF.Attr s [TF.Attr s (ComputeUrlMapTest s)]
+    , _test           :: TF.Attr s [TF.Attr s (TestSetting s)]
     -- ^ @test@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeUrlMapResource
     :: TF.Attr s P.Text -- ^ @default_service@ - 'P.defaultService'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeUrlMapResource s)
 computeUrlMapResource _defaultService _name =
-    TF.newResource "google_compute_url_map" TF.validator $
+    TF.unsafeResource "google_compute_url_map" P.defaultProvider TF.validator $
         ComputeUrlMapResource'
             { _defaultService = _defaultService
             , _description = TF.Nil
@@ -5812,18 +5811,6 @@ instance TF.IsObject (ComputeUrlMapResource s) where
 
 instance TF.IsValid (ComputeUrlMapResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_hostRule"
-                  (_hostRule
-                      :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (ComputeUrlMapHostRule s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_pathMatcher"
-                  (_pathMatcher
-                      :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (ComputeUrlMapPathMatcher s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_test"
-                  (_test
-                      :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (ComputeUrlMapTest s)])
-                  TF.validator
 
 instance P.HasDefaultService (ComputeUrlMapResource s) (TF.Attr s P.Text) where
     defaultService =
@@ -5835,9 +5822,9 @@ instance P.HasDescription (ComputeUrlMapResource s) (TF.Attr s P.Text) where
         P.lens (_description :: ComputeUrlMapResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeUrlMapResource s)
 
-instance P.HasHostRule (ComputeUrlMapResource s) (TF.Attr s [TF.Attr s (ComputeUrlMapHostRule s)]) where
+instance P.HasHostRule (ComputeUrlMapResource s) (TF.Attr s [TF.Attr s (HostRuleSetting s)]) where
     hostRule =
-        P.lens (_hostRule :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (ComputeUrlMapHostRule s)])
+        P.lens (_hostRule :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (HostRuleSetting s)])
                (\s a -> s { _hostRule = a } :: ComputeUrlMapResource s)
 
 instance P.HasName (ComputeUrlMapResource s) (TF.Attr s P.Text) where
@@ -5845,14 +5832,14 @@ instance P.HasName (ComputeUrlMapResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeUrlMapResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeUrlMapResource s)
 
-instance P.HasPathMatcher (ComputeUrlMapResource s) (TF.Attr s [TF.Attr s (ComputeUrlMapPathMatcher s)]) where
+instance P.HasPathMatcher (ComputeUrlMapResource s) (TF.Attr s [TF.Attr s (PathMatcherSetting s)]) where
     pathMatcher =
-        P.lens (_pathMatcher :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (ComputeUrlMapPathMatcher s)])
+        P.lens (_pathMatcher :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (PathMatcherSetting s)])
                (\s a -> s { _pathMatcher = a } :: ComputeUrlMapResource s)
 
-instance P.HasTest (ComputeUrlMapResource s) (TF.Attr s [TF.Attr s (ComputeUrlMapTest s)]) where
+instance P.HasTest (ComputeUrlMapResource s) (TF.Attr s [TF.Attr s (TestSetting s)]) where
     test =
-        P.lens (_test :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (ComputeUrlMapTest s)])
+        P.lens (_test :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (TestSetting s)])
                (\s a -> s { _test = a } :: ComputeUrlMapResource s)
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeUrlMapResource s)) (TF.Attr s P.Text) where
@@ -5881,14 +5868,14 @@ data ComputeVpnGatewayResource s = ComputeVpnGatewayResource'
     , _network     :: TF.Attr s P.Text
     -- ^ @network@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeVpnGatewayResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
     -> P.Resource (ComputeVpnGatewayResource s)
 computeVpnGatewayResource _name _network =
-    TF.newResource "google_compute_vpn_gateway" TF.validator $
+    TF.unsafeResource "google_compute_vpn_gateway" P.defaultProvider TF.validator $
         ComputeVpnGatewayResource'
             { _description = TF.Nil
             , _name = _name
@@ -5940,10 +5927,10 @@ data ComputeVpnTunnelResource s = ComputeVpnTunnelResource'
     { _description      :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _ikeVersion       :: TF.Attr s P.Integer
+    , _ikeVersion       :: TF.Attr s P.Int
     -- ^ @ike_version@ - (Optional, Forces New)
     --
-    , _labels           :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels           :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name             :: TF.Attr s P.Text
@@ -5961,7 +5948,7 @@ data ComputeVpnTunnelResource s = ComputeVpnTunnelResource'
     , _targetVpnGateway :: TF.Attr s P.Text
     -- ^ @target_vpn_gateway@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeVpnTunnelResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -5970,7 +5957,7 @@ computeVpnTunnelResource
     -> TF.Attr s P.Text -- ^ @target_vpn_gateway@ - 'P.targetVpnGateway'
     -> P.Resource (ComputeVpnTunnelResource s)
 computeVpnTunnelResource _name _peerIp _sharedSecret _targetVpnGateway =
-    TF.newResource "google_compute_vpn_tunnel" TF.validator $
+    TF.unsafeResource "google_compute_vpn_tunnel" P.defaultProvider TF.validator $
         ComputeVpnTunnelResource'
             { _description = TF.Nil
             , _ikeVersion = TF.value 2
@@ -6002,14 +5989,14 @@ instance P.HasDescription (ComputeVpnTunnelResource s) (TF.Attr s P.Text) where
         P.lens (_description :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeVpnTunnelResource s)
 
-instance P.HasIkeVersion (ComputeVpnTunnelResource s) (TF.Attr s P.Integer) where
+instance P.HasIkeVersion (ComputeVpnTunnelResource s) (TF.Attr s P.Int) where
     ikeVersion =
-        P.lens (_ikeVersion :: ComputeVpnTunnelResource s -> TF.Attr s P.Integer)
+        P.lens (_ikeVersion :: ComputeVpnTunnelResource s -> TF.Attr s P.Int)
                (\s a -> s { _ikeVersion = a } :: ComputeVpnTunnelResource s)
 
-instance P.HasLabels (ComputeVpnTunnelResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (ComputeVpnTunnelResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: ComputeVpnTunnelResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: ComputeVpnTunnelResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: ComputeVpnTunnelResource s)
 
 instance P.HasName (ComputeVpnTunnelResource s) (TF.Attr s P.Text) where
@@ -6078,16 +6065,16 @@ data ContainerClusterResource s = ContainerClusterResource'
     , _enableLegacyAbac :: TF.Attr s P.Bool
     -- ^ @enable_legacy_abac@ - (Optional)
     --
-    , _initialNodeCount :: TF.Attr s P.Integer
+    , _initialNodeCount :: TF.Attr s P.Int
     -- ^ @initial_node_count@ - (Optional, Forces New)
     --
-    , _ipAllocationPolicy :: TF.Attr s (ContainerClusterIpAllocationPolicy s)
+    , _ipAllocationPolicy :: TF.Attr s (IpAllocationPolicySetting s)
     -- ^ @ip_allocation_policy@ - (Optional, Forces New)
     --
-    , _maintenancePolicy :: TF.Attr s (ContainerClusterMaintenancePolicy s)
+    , _maintenancePolicy :: TF.Attr s (MaintenancePolicySetting s)
     -- ^ @maintenance_policy@ - (Optional)
     --
-    , _masterAuthorizedNetworksConfig :: TF.Attr s (ContainerClusterMasterAuthorizedNetworksConfig s)
+    , _masterAuthorizedNetworksConfig :: TF.Attr s (MasterAuthorizedNetworksConfigSetting s)
     -- ^ @master_authorized_networks_config@ - (Optional)
     --
     , _masterIpv4CidrBlock :: TF.Attr s P.Text
@@ -6102,7 +6089,7 @@ data ContainerClusterResource s = ContainerClusterResource'
     , _network :: TF.Attr s P.Text
     -- ^ @network@ - (Optional, Forces New)
     --
-    , _podSecurityPolicyConfig :: TF.Attr s (ContainerClusterPodSecurityPolicyConfig s)
+    , _podSecurityPolicyConfig :: TF.Attr s (PodSecurityPolicyConfigSetting s)
     -- ^ @pod_security_policy_config@ - (Optional)
     --
     , _privateCluster :: TF.Attr s P.Bool
@@ -6111,16 +6098,16 @@ data ContainerClusterResource s = ContainerClusterResource'
     , _removeDefaultNodePool :: TF.Attr s P.Bool
     -- ^ @remove_default_node_pool@ - (Optional)
     --
-    , _resourceLabels :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _resourceLabels :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @resource_labels@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 containerClusterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ContainerClusterResource s)
 containerClusterResource _name =
-    TF.newResource "google_container_cluster" TF.validator $
+    TF.unsafeResource "google_container_cluster" P.defaultProvider TF.validator $
         ContainerClusterResource'
             { _description = TF.Nil
             , _enableKubernetesAlpha = TF.value P.False
@@ -6162,19 +6149,19 @@ instance TF.IsValid (ContainerClusterResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_ipAllocationPolicy"
                   (_ipAllocationPolicy
-                      :: ContainerClusterResource s -> TF.Attr s (ContainerClusterIpAllocationPolicy s))
+                      :: ContainerClusterResource s -> TF.Attr s (IpAllocationPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_maintenancePolicy"
                   (_maintenancePolicy
-                      :: ContainerClusterResource s -> TF.Attr s (ContainerClusterMaintenancePolicy s))
+                      :: ContainerClusterResource s -> TF.Attr s (MaintenancePolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_masterAuthorizedNetworksConfig"
                   (_masterAuthorizedNetworksConfig
-                      :: ContainerClusterResource s -> TF.Attr s (ContainerClusterMasterAuthorizedNetworksConfig s))
+                      :: ContainerClusterResource s -> TF.Attr s (MasterAuthorizedNetworksConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_podSecurityPolicyConfig"
                   (_podSecurityPolicyConfig
-                      :: ContainerClusterResource s -> TF.Attr s (ContainerClusterPodSecurityPolicyConfig s))
+                      :: ContainerClusterResource s -> TF.Attr s (PodSecurityPolicyConfigSetting s))
                   TF.validator
 
 instance P.HasDescription (ContainerClusterResource s) (TF.Attr s P.Text) where
@@ -6192,24 +6179,24 @@ instance P.HasEnableLegacyAbac (ContainerClusterResource s) (TF.Attr s P.Bool) w
         P.lens (_enableLegacyAbac :: ContainerClusterResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enableLegacyAbac = a } :: ContainerClusterResource s)
 
-instance P.HasInitialNodeCount (ContainerClusterResource s) (TF.Attr s P.Integer) where
+instance P.HasInitialNodeCount (ContainerClusterResource s) (TF.Attr s P.Int) where
     initialNodeCount =
-        P.lens (_initialNodeCount :: ContainerClusterResource s -> TF.Attr s P.Integer)
+        P.lens (_initialNodeCount :: ContainerClusterResource s -> TF.Attr s P.Int)
                (\s a -> s { _initialNodeCount = a } :: ContainerClusterResource s)
 
-instance P.HasIpAllocationPolicy (ContainerClusterResource s) (TF.Attr s (ContainerClusterIpAllocationPolicy s)) where
+instance P.HasIpAllocationPolicy (ContainerClusterResource s) (TF.Attr s (IpAllocationPolicySetting s)) where
     ipAllocationPolicy =
-        P.lens (_ipAllocationPolicy :: ContainerClusterResource s -> TF.Attr s (ContainerClusterIpAllocationPolicy s))
+        P.lens (_ipAllocationPolicy :: ContainerClusterResource s -> TF.Attr s (IpAllocationPolicySetting s))
                (\s a -> s { _ipAllocationPolicy = a } :: ContainerClusterResource s)
 
-instance P.HasMaintenancePolicy (ContainerClusterResource s) (TF.Attr s (ContainerClusterMaintenancePolicy s)) where
+instance P.HasMaintenancePolicy (ContainerClusterResource s) (TF.Attr s (MaintenancePolicySetting s)) where
     maintenancePolicy =
-        P.lens (_maintenancePolicy :: ContainerClusterResource s -> TF.Attr s (ContainerClusterMaintenancePolicy s))
+        P.lens (_maintenancePolicy :: ContainerClusterResource s -> TF.Attr s (MaintenancePolicySetting s))
                (\s a -> s { _maintenancePolicy = a } :: ContainerClusterResource s)
 
-instance P.HasMasterAuthorizedNetworksConfig (ContainerClusterResource s) (TF.Attr s (ContainerClusterMasterAuthorizedNetworksConfig s)) where
+instance P.HasMasterAuthorizedNetworksConfig (ContainerClusterResource s) (TF.Attr s (MasterAuthorizedNetworksConfigSetting s)) where
     masterAuthorizedNetworksConfig =
-        P.lens (_masterAuthorizedNetworksConfig :: ContainerClusterResource s -> TF.Attr s (ContainerClusterMasterAuthorizedNetworksConfig s))
+        P.lens (_masterAuthorizedNetworksConfig :: ContainerClusterResource s -> TF.Attr s (MasterAuthorizedNetworksConfigSetting s))
                (\s a -> s { _masterAuthorizedNetworksConfig = a } :: ContainerClusterResource s)
 
 instance P.HasMasterIpv4CidrBlock (ContainerClusterResource s) (TF.Attr s P.Text) where
@@ -6232,9 +6219,9 @@ instance P.HasNetwork (ContainerClusterResource s) (TF.Attr s P.Text) where
         P.lens (_network :: ContainerClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _network = a } :: ContainerClusterResource s)
 
-instance P.HasPodSecurityPolicyConfig (ContainerClusterResource s) (TF.Attr s (ContainerClusterPodSecurityPolicyConfig s)) where
+instance P.HasPodSecurityPolicyConfig (ContainerClusterResource s) (TF.Attr s (PodSecurityPolicyConfigSetting s)) where
     podSecurityPolicyConfig =
-        P.lens (_podSecurityPolicyConfig :: ContainerClusterResource s -> TF.Attr s (ContainerClusterPodSecurityPolicyConfig s))
+        P.lens (_podSecurityPolicyConfig :: ContainerClusterResource s -> TF.Attr s (PodSecurityPolicyConfigSetting s))
                (\s a -> s { _podSecurityPolicyConfig = a } :: ContainerClusterResource s)
 
 instance P.HasPrivateCluster (ContainerClusterResource s) (TF.Attr s P.Bool) where
@@ -6247,15 +6234,15 @@ instance P.HasRemoveDefaultNodePool (ContainerClusterResource s) (TF.Attr s P.Bo
         P.lens (_removeDefaultNodePool :: ContainerClusterResource s -> TF.Attr s P.Bool)
                (\s a -> s { _removeDefaultNodePool = a } :: ContainerClusterResource s)
 
-instance P.HasResourceLabels (ContainerClusterResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasResourceLabels (ContainerClusterResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     resourceLabels =
-        P.lens (_resourceLabels :: ContainerClusterResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_resourceLabels :: ContainerClusterResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _resourceLabels = a } :: ContainerClusterResource s)
 
 instance s ~ s' => P.HasComputedAdditionalZones (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedAdditionalZones x = TF.compute (TF.refKey x) "additional_zones"
 
-instance s ~ s' => P.HasComputedAddonsConfig (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (ContainerClusterAddonsConfig s)) where
+instance s ~ s' => P.HasComputedAddonsConfig (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (AddonsConfigSetting s)) where
     computedAddonsConfig x = TF.compute (TF.refKey x) "addons_config"
 
 instance s ~ s' => P.HasComputedClusterIpv4Cidr (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
@@ -6270,7 +6257,7 @@ instance s ~ s' => P.HasComputedInstanceGroupUrls (TF.Ref s' (ContainerClusterRe
 instance s ~ s' => P.HasComputedLoggingService (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedLoggingService x = TF.compute (TF.refKey x) "logging_service"
 
-instance s ~ s' => P.HasComputedMasterAuth (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (ContainerClusterMasterAuth s)) where
+instance s ~ s' => P.HasComputedMasterAuth (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (MasterAuthSetting s)) where
     computedMasterAuth x = TF.compute (TF.refKey x) "master_auth"
 
 instance s ~ s' => P.HasComputedMasterVersion (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
@@ -6279,13 +6266,13 @@ instance s ~ s' => P.HasComputedMasterVersion (TF.Ref s' (ContainerClusterResour
 instance s ~ s' => P.HasComputedMonitoringService (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedMonitoringService x = TF.compute (TF.refKey x) "monitoring_service"
 
-instance s ~ s' => P.HasComputedNetworkPolicy (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (ContainerClusterNetworkPolicy s)) where
+instance s ~ s' => P.HasComputedNetworkPolicy (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (NetworkPolicySetting s)) where
     computedNetworkPolicy x = TF.compute (TF.refKey x) "network_policy"
 
-instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (ContainerClusterNodeConfig s)) where
+instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (NodeConfigSetting s)) where
     computedNodeConfig x = TF.compute (TF.refKey x) "node_config"
 
-instance s ~ s' => P.HasComputedNodePool (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s [TF.Attr s (ContainerClusterNodePool s)]) where
+instance s ~ s' => P.HasComputedNodePool (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s [TF.Attr s (NodePoolSetting s)]) where
     computedNodePool x = TF.compute (TF.refKey x) "node_pool"
 
 instance s ~ s' => P.HasComputedNodeVersion (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
@@ -6308,7 +6295,7 @@ instance s ~ s' => P.HasComputedZone (TF.Ref s' (ContainerClusterResource s)) (T
 -- See the <https://www.terraform.io/docs/providers/google/r/container_node_pool.html terraform documentation>
 -- for more information.
 data ContainerNodePoolResource s = ContainerNodePoolResource'
-    { _autoscaling :: TF.Attr s (ContainerNodePoolAutoscaling s)
+    { _autoscaling :: TF.Attr s (AutoscalingSetting s)
     -- ^ @autoscaling@ - (Optional)
     --
     , _cluster     :: TF.Attr s P.Text
@@ -6317,13 +6304,13 @@ data ContainerNodePoolResource s = ContainerNodePoolResource'
     , _region      :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 containerNodePoolResource
     :: TF.Attr s P.Text -- ^ @cluster@ - 'P.cluster'
     -> P.Resource (ContainerNodePoolResource s)
 containerNodePoolResource _cluster =
-    TF.newResource "google_container_node_pool" TF.validator $
+    TF.unsafeResource "google_container_node_pool" P.defaultProvider TF.validator $
         ContainerNodePoolResource'
             { _autoscaling = TF.Nil
             , _cluster = _cluster
@@ -6341,12 +6328,12 @@ instance TF.IsValid (ContainerNodePoolResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_autoscaling"
                   (_autoscaling
-                      :: ContainerNodePoolResource s -> TF.Attr s (ContainerNodePoolAutoscaling s))
+                      :: ContainerNodePoolResource s -> TF.Attr s (AutoscalingSetting s))
                   TF.validator
 
-instance P.HasAutoscaling (ContainerNodePoolResource s) (TF.Attr s (ContainerNodePoolAutoscaling s)) where
+instance P.HasAutoscaling (ContainerNodePoolResource s) (TF.Attr s (AutoscalingSetting s)) where
     autoscaling =
-        P.lens (_autoscaling :: ContainerNodePoolResource s -> TF.Attr s (ContainerNodePoolAutoscaling s))
+        P.lens (_autoscaling :: ContainerNodePoolResource s -> TF.Attr s (AutoscalingSetting s))
                (\s a -> s { _autoscaling = a } :: ContainerNodePoolResource s)
 
 instance P.HasCluster (ContainerNodePoolResource s) (TF.Attr s P.Text) where
@@ -6359,22 +6346,22 @@ instance P.HasRegion (ContainerNodePoolResource s) (TF.Attr s P.Text) where
         P.lens (_region :: ContainerNodePoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: ContainerNodePoolResource s)
 
-instance s ~ s' => P.HasComputedInitialNodeCount (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedInitialNodeCount (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Int) where
     computedInitialNodeCount x = TF.compute (TF.refKey x) "initial_node_count"
 
 instance s ~ s' => P.HasComputedInstanceGroupUrls (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedInstanceGroupUrls x = TF.compute (TF.refKey x) "instance_group_urls"
 
-instance s ~ s' => P.HasComputedManagement (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s (ContainerNodePoolManagement s)) where
+instance s ~ s' => P.HasComputedManagement (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s (ManagementSetting s)) where
     computedManagement x = TF.compute (TF.refKey x) "management"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s (ContainerNodePoolNodeConfig s)) where
+instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s (NodeConfigSetting s)) where
     computedNodeConfig x = TF.compute (TF.refKey x) "node_config"
 
-instance s ~ s' => P.HasComputedNodeCount (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedNodeCount (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Int) where
     computedNodeCount x = TF.compute (TF.refKey x) "node_count"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
@@ -6391,7 +6378,7 @@ instance s ~ s' => P.HasComputedZone (TF.Ref s' (ContainerNodePoolResource s)) (
 -- See the <https://www.terraform.io/docs/providers/google/r/dataflow_job.html terraform documentation>
 -- for more information.
 data DataflowJobResource s = DataflowJobResource'
-    { _maxWorkers      :: TF.Attr s P.Integer
+    { _maxWorkers      :: TF.Attr s P.Int
     -- ^ @max_workers@ - (Optional, Forces New)
     --
     , _name            :: TF.Attr s P.Text
@@ -6400,7 +6387,7 @@ data DataflowJobResource s = DataflowJobResource'
     , _onDelete        :: TF.Attr s P.Text
     -- ^ @on_delete@ - (Optional, Forces New)
     --
-    , _parameters      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _parameters      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @parameters@ - (Optional, Forces New)
     --
     , _project         :: TF.Attr s P.Text
@@ -6415,7 +6402,7 @@ data DataflowJobResource s = DataflowJobResource'
     , _zone            :: TF.Attr s P.Text
     -- ^ @zone@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dataflowJobResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -6423,7 +6410,7 @@ dataflowJobResource
     -> TF.Attr s P.Text -- ^ @template_gcs_path@ - 'P.templateGcsPath'
     -> P.Resource (DataflowJobResource s)
 dataflowJobResource _name _tempGcsLocation _templateGcsPath =
-    TF.newResource "google_dataflow_job" TF.validator $
+    TF.unsafeResource "google_dataflow_job" P.defaultProvider TF.validator $
         DataflowJobResource'
             { _maxWorkers = TF.Nil
             , _name = _name
@@ -6450,9 +6437,9 @@ instance TF.IsObject (DataflowJobResource s) where
 instance TF.IsValid (DataflowJobResource s) where
     validator = P.mempty
 
-instance P.HasMaxWorkers (DataflowJobResource s) (TF.Attr s P.Integer) where
+instance P.HasMaxWorkers (DataflowJobResource s) (TF.Attr s P.Int) where
     maxWorkers =
-        P.lens (_maxWorkers :: DataflowJobResource s -> TF.Attr s P.Integer)
+        P.lens (_maxWorkers :: DataflowJobResource s -> TF.Attr s P.Int)
                (\s a -> s { _maxWorkers = a } :: DataflowJobResource s)
 
 instance P.HasName (DataflowJobResource s) (TF.Attr s P.Text) where
@@ -6465,9 +6452,9 @@ instance P.HasOnDelete (DataflowJobResource s) (TF.Attr s P.Text) where
         P.lens (_onDelete :: DataflowJobResource s -> TF.Attr s P.Text)
                (\s a -> s { _onDelete = a } :: DataflowJobResource s)
 
-instance P.HasParameters (DataflowJobResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasParameters (DataflowJobResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     parameters =
-        P.lens (_parameters :: DataflowJobResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_parameters :: DataflowJobResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _parameters = a } :: DataflowJobResource s)
 
 instance P.HasProject (DataflowJobResource s) (TF.Attr s P.Text) where
@@ -6504,13 +6491,13 @@ data DataprocClusterResource s = DataprocClusterResource'
     , _region :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dataprocClusterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DataprocClusterResource s)
 dataprocClusterResource _name =
-    TF.newResource "google_dataproc_cluster" TF.validator $
+    TF.unsafeResource "google_dataproc_cluster" P.defaultProvider TF.validator $
         DataprocClusterResource'
             { _name = _name
             , _region = TF.value "global"
@@ -6535,10 +6522,10 @@ instance P.HasRegion (DataprocClusterResource s) (TF.Attr s P.Text) where
         P.lens (_region :: DataprocClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: DataprocClusterResource s)
 
-instance s ~ s' => P.HasComputedClusterConfig (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s (DataprocClusterClusterConfig s)) where
+instance s ~ s' => P.HasComputedClusterConfig (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s (ClusterConfigSetting s)) where
     computedClusterConfig x = TF.compute (TF.refKey x) "cluster_config"
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedLabels (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedLabels x = TF.compute (TF.refKey x) "labels"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s P.Text) where
@@ -6552,87 +6539,87 @@ data DataprocJobResource s = DataprocJobResource'
     { _forceDelete    :: TF.Attr s P.Bool
     -- ^ @force_delete@ - (Optional)
     --
-    , _hadoopConfig   :: TF.Attr s (DataprocJobHadoopConfig s)
+    , _hadoopConfig   :: TF.Attr s (HadoopConfigSetting s)
     -- ^ @hadoop_config@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
-    -- * 'sparksqlConfig'
     -- * 'hiveConfig'
-    -- * 'pysparkConfig'
     -- * 'pigConfig'
+    -- * 'pysparkConfig'
     -- * 'sparkConfig'
-    , _hiveConfig     :: TF.Attr s (DataprocJobHiveConfig s)
+    -- * 'sparksqlConfig'
+    , _hiveConfig     :: TF.Attr s (HiveConfigSetting s)
     -- ^ @hive_config@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'hadoopConfig'
-    -- * 'sparksqlConfig'
-    -- * 'pysparkConfig'
     -- * 'pigConfig'
+    -- * 'pysparkConfig'
     -- * 'sparkConfig'
-    , _labels         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- * 'sparksqlConfig'
+    , _labels         :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional, Forces New)
     -- Optional. The labels to associate with this job.
     --
-    , _pigConfig      :: TF.Attr s (DataprocJobPigConfig s)
+    , _pigConfig      :: TF.Attr s (PigConfigSetting s)
     -- ^ @pig_config@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'hadoopConfig'
-    -- * 'sparksqlConfig'
     -- * 'hiveConfig'
     -- * 'pysparkConfig'
     -- * 'sparkConfig'
-    , _placement      :: TF.Attr s (DataprocJobPlacement s)
+    -- * 'sparksqlConfig'
+    , _placement      :: TF.Attr s (PlacementSetting s)
     -- ^ @placement@ - (Required)
     --
-    , _pysparkConfig  :: TF.Attr s (DataprocJobPysparkConfig s)
+    , _pysparkConfig  :: TF.Attr s (PysparkConfigSetting s)
     -- ^ @pyspark_config@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'hadoopConfig'
-    -- * 'sparksqlConfig'
     -- * 'hiveConfig'
     -- * 'pigConfig'
     -- * 'sparkConfig'
+    -- * 'sparksqlConfig'
     , _region         :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
-    , _scheduling     :: TF.Attr s (DataprocJobScheduling s)
+    , _scheduling     :: TF.Attr s (SchedulingSetting s)
     -- ^ @scheduling@ - (Optional, Forces New)
     -- Optional. Job scheduling configuration.
     --
-    , _sparkConfig    :: TF.Attr s (DataprocJobSparkConfig s)
+    , _sparkConfig    :: TF.Attr s (SparkConfigSetting s)
     -- ^ @spark_config@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'hadoopConfig'
-    -- * 'sparksqlConfig'
     -- * 'hiveConfig'
-    -- * 'pysparkConfig'
     -- * 'pigConfig'
-    , _sparksqlConfig :: TF.Attr s (DataprocJobSparksqlConfig s)
+    -- * 'pysparkConfig'
+    -- * 'sparksqlConfig'
+    , _sparksqlConfig :: TF.Attr s (SparksqlConfigSetting s)
     -- ^ @sparksql_config@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'hadoopConfig'
     -- * 'hiveConfig'
-    -- * 'pysparkConfig'
     -- * 'pigConfig'
+    -- * 'pysparkConfig'
     -- * 'sparkConfig'
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dataprocJobResource
-    :: TF.Attr s (DataprocJobPlacement s) -- ^ @placement@ - 'P.placement'
+    :: TF.Attr s (PlacementSetting s) -- ^ @placement@ - 'P.placement'
     -> P.Resource (DataprocJobResource s)
 dataprocJobResource _placement =
-    TF.newResource "google_dataproc_job" TF.validator $
+    TF.unsafeResource "google_dataproc_job" P.defaultProvider TF.validator $
         DataprocJobResource'
             { _forceDelete = TF.value P.False
             , _hadoopConfig = TF.Nil
@@ -6667,65 +6654,65 @@ instance TF.IsValid (DataprocJobResource s) where
         [ if (_hadoopConfig P.== TF.Nil)
               then P.Nothing
               else P.Just ("_hadoopConfig",
-                            [ "_sparksqlConfig"                            , "_hiveConfig"                            , "_pysparkConfig"                            , "_pigConfig"                            , "_sparkConfig"
+                            [ "_hiveConfig"                            , "_pigConfig"                            , "_pysparkConfig"                            , "_sparkConfig"                            , "_sparksqlConfig"
                             ])
         , if (_hiveConfig P.== TF.Nil)
               then P.Nothing
               else P.Just ("_hiveConfig",
-                            [ "_hadoopConfig"                            , "_sparksqlConfig"                            , "_pysparkConfig"                            , "_pigConfig"                            , "_sparkConfig"
+                            [ "_hadoopConfig"                            , "_pigConfig"                            , "_pysparkConfig"                            , "_sparkConfig"                            , "_sparksqlConfig"
                             ])
         , if (_pigConfig P.== TF.Nil)
               then P.Nothing
               else P.Just ("_pigConfig",
-                            [ "_hadoopConfig"                            , "_sparksqlConfig"                            , "_hiveConfig"                            , "_pysparkConfig"                            , "_sparkConfig"
+                            [ "_hadoopConfig"                            , "_hiveConfig"                            , "_pysparkConfig"                            , "_sparkConfig"                            , "_sparksqlConfig"
                             ])
         , if (_pysparkConfig P.== TF.Nil)
               then P.Nothing
               else P.Just ("_pysparkConfig",
-                            [ "_hadoopConfig"                            , "_sparksqlConfig"                            , "_hiveConfig"                            , "_pigConfig"                            , "_sparkConfig"
+                            [ "_hadoopConfig"                            , "_hiveConfig"                            , "_pigConfig"                            , "_sparkConfig"                            , "_sparksqlConfig"
                             ])
         , if (_sparkConfig P.== TF.Nil)
               then P.Nothing
               else P.Just ("_sparkConfig",
-                            [ "_hadoopConfig"                            , "_sparksqlConfig"                            , "_hiveConfig"                            , "_pysparkConfig"                            , "_pigConfig"
+                            [ "_hadoopConfig"                            , "_hiveConfig"                            , "_pigConfig"                            , "_pysparkConfig"                            , "_sparksqlConfig"
                             ])
         , if (_sparksqlConfig P.== TF.Nil)
               then P.Nothing
               else P.Just ("_sparksqlConfig",
-                            [ "_hadoopConfig"                            , "_hiveConfig"                            , "_pysparkConfig"                            , "_pigConfig"                            , "_sparkConfig"
+                            [ "_hadoopConfig"                            , "_hiveConfig"                            , "_pigConfig"                            , "_pysparkConfig"                            , "_sparkConfig"
                             ])
         ])
            P.<> TF.settingsValidator "_hadoopConfig"
                   (_hadoopConfig
-                      :: DataprocJobResource s -> TF.Attr s (DataprocJobHadoopConfig s))
+                      :: DataprocJobResource s -> TF.Attr s (HadoopConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_hiveConfig"
                   (_hiveConfig
-                      :: DataprocJobResource s -> TF.Attr s (DataprocJobHiveConfig s))
+                      :: DataprocJobResource s -> TF.Attr s (HiveConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_pigConfig"
                   (_pigConfig
-                      :: DataprocJobResource s -> TF.Attr s (DataprocJobPigConfig s))
+                      :: DataprocJobResource s -> TF.Attr s (PigConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_placement"
                   (_placement
-                      :: DataprocJobResource s -> TF.Attr s (DataprocJobPlacement s))
+                      :: DataprocJobResource s -> TF.Attr s (PlacementSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_pysparkConfig"
                   (_pysparkConfig
-                      :: DataprocJobResource s -> TF.Attr s (DataprocJobPysparkConfig s))
+                      :: DataprocJobResource s -> TF.Attr s (PysparkConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_scheduling"
                   (_scheduling
-                      :: DataprocJobResource s -> TF.Attr s (DataprocJobScheduling s))
+                      :: DataprocJobResource s -> TF.Attr s (SchedulingSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_sparkConfig"
                   (_sparkConfig
-                      :: DataprocJobResource s -> TF.Attr s (DataprocJobSparkConfig s))
+                      :: DataprocJobResource s -> TF.Attr s (SparkConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_sparksqlConfig"
                   (_sparksqlConfig
-                      :: DataprocJobResource s -> TF.Attr s (DataprocJobSparksqlConfig s))
+                      :: DataprocJobResource s -> TF.Attr s (SparksqlConfigSetting s))
                   TF.validator
 
 instance P.HasForceDelete (DataprocJobResource s) (TF.Attr s P.Bool) where
@@ -6733,34 +6720,34 @@ instance P.HasForceDelete (DataprocJobResource s) (TF.Attr s P.Bool) where
         P.lens (_forceDelete :: DataprocJobResource s -> TF.Attr s P.Bool)
                (\s a -> s { _forceDelete = a } :: DataprocJobResource s)
 
-instance P.HasHadoopConfig (DataprocJobResource s) (TF.Attr s (DataprocJobHadoopConfig s)) where
+instance P.HasHadoopConfig (DataprocJobResource s) (TF.Attr s (HadoopConfigSetting s)) where
     hadoopConfig =
-        P.lens (_hadoopConfig :: DataprocJobResource s -> TF.Attr s (DataprocJobHadoopConfig s))
+        P.lens (_hadoopConfig :: DataprocJobResource s -> TF.Attr s (HadoopConfigSetting s))
                (\s a -> s { _hadoopConfig = a } :: DataprocJobResource s)
 
-instance P.HasHiveConfig (DataprocJobResource s) (TF.Attr s (DataprocJobHiveConfig s)) where
+instance P.HasHiveConfig (DataprocJobResource s) (TF.Attr s (HiveConfigSetting s)) where
     hiveConfig =
-        P.lens (_hiveConfig :: DataprocJobResource s -> TF.Attr s (DataprocJobHiveConfig s))
+        P.lens (_hiveConfig :: DataprocJobResource s -> TF.Attr s (HiveConfigSetting s))
                (\s a -> s { _hiveConfig = a } :: DataprocJobResource s)
 
-instance P.HasLabels (DataprocJobResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (DataprocJobResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: DataprocJobResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: DataprocJobResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: DataprocJobResource s)
 
-instance P.HasPigConfig (DataprocJobResource s) (TF.Attr s (DataprocJobPigConfig s)) where
+instance P.HasPigConfig (DataprocJobResource s) (TF.Attr s (PigConfigSetting s)) where
     pigConfig =
-        P.lens (_pigConfig :: DataprocJobResource s -> TF.Attr s (DataprocJobPigConfig s))
+        P.lens (_pigConfig :: DataprocJobResource s -> TF.Attr s (PigConfigSetting s))
                (\s a -> s { _pigConfig = a } :: DataprocJobResource s)
 
-instance P.HasPlacement (DataprocJobResource s) (TF.Attr s (DataprocJobPlacement s)) where
+instance P.HasPlacement (DataprocJobResource s) (TF.Attr s (PlacementSetting s)) where
     placement =
-        P.lens (_placement :: DataprocJobResource s -> TF.Attr s (DataprocJobPlacement s))
+        P.lens (_placement :: DataprocJobResource s -> TF.Attr s (PlacementSetting s))
                (\s a -> s { _placement = a } :: DataprocJobResource s)
 
-instance P.HasPysparkConfig (DataprocJobResource s) (TF.Attr s (DataprocJobPysparkConfig s)) where
+instance P.HasPysparkConfig (DataprocJobResource s) (TF.Attr s (PysparkConfigSetting s)) where
     pysparkConfig =
-        P.lens (_pysparkConfig :: DataprocJobResource s -> TF.Attr s (DataprocJobPysparkConfig s))
+        P.lens (_pysparkConfig :: DataprocJobResource s -> TF.Attr s (PysparkConfigSetting s))
                (\s a -> s { _pysparkConfig = a } :: DataprocJobResource s)
 
 instance P.HasRegion (DataprocJobResource s) (TF.Attr s P.Text) where
@@ -6768,19 +6755,19 @@ instance P.HasRegion (DataprocJobResource s) (TF.Attr s P.Text) where
         P.lens (_region :: DataprocJobResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: DataprocJobResource s)
 
-instance P.HasScheduling (DataprocJobResource s) (TF.Attr s (DataprocJobScheduling s)) where
+instance P.HasScheduling (DataprocJobResource s) (TF.Attr s (SchedulingSetting s)) where
     scheduling =
-        P.lens (_scheduling :: DataprocJobResource s -> TF.Attr s (DataprocJobScheduling s))
+        P.lens (_scheduling :: DataprocJobResource s -> TF.Attr s (SchedulingSetting s))
                (\s a -> s { _scheduling = a } :: DataprocJobResource s)
 
-instance P.HasSparkConfig (DataprocJobResource s) (TF.Attr s (DataprocJobSparkConfig s)) where
+instance P.HasSparkConfig (DataprocJobResource s) (TF.Attr s (SparkConfigSetting s)) where
     sparkConfig =
-        P.lens (_sparkConfig :: DataprocJobResource s -> TF.Attr s (DataprocJobSparkConfig s))
+        P.lens (_sparkConfig :: DataprocJobResource s -> TF.Attr s (SparkConfigSetting s))
                (\s a -> s { _sparkConfig = a } :: DataprocJobResource s)
 
-instance P.HasSparksqlConfig (DataprocJobResource s) (TF.Attr s (DataprocJobSparksqlConfig s)) where
+instance P.HasSparksqlConfig (DataprocJobResource s) (TF.Attr s (SparksqlConfigSetting s)) where
     sparksqlConfig =
-        P.lens (_sparksqlConfig :: DataprocJobResource s -> TF.Attr s (DataprocJobSparksqlConfig s))
+        P.lens (_sparksqlConfig :: DataprocJobResource s -> TF.Attr s (SparksqlConfigSetting s))
                (\s a -> s { _sparksqlConfig = a } :: DataprocJobResource s)
 
 instance s ~ s' => P.HasComputedDriverControlsFilesUri (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
@@ -6792,10 +6779,10 @@ instance s ~ s' => P.HasComputedDriverOutputResourceUri (TF.Ref s' (DataprocJobR
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedReference (TF.Ref s' (DataprocJobResource s)) (TF.Attr s (DataprocJobReference s)) where
+instance s ~ s' => P.HasComputedReference (TF.Ref s' (DataprocJobResource s)) (TF.Attr s (ReferenceSetting s)) where
     computedReference x = TF.compute (TF.refKey x) "reference"
 
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DataprocJobResource s)) (TF.Attr s (DataprocJobStatus s)) where
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DataprocJobResource s)) (TF.Attr s (StatusSetting s)) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
 -- | @google_dns_managed_zone@ Resource.
@@ -6812,14 +6799,14 @@ data DnsManagedZoneResource s = DnsManagedZoneResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dnsManagedZoneResource
     :: TF.Attr s P.Text -- ^ @dns_name@ - 'P.dnsName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DnsManagedZoneResource s)
 dnsManagedZoneResource _dnsName _name =
-    TF.newResource "google_dns_managed_zone" TF.validator $
+    TF.unsafeResource "google_dns_managed_zone" P.defaultProvider TF.validator $
         DnsManagedZoneResource'
             { _description = TF.value "Managed by Terraform"
             , _dnsName = _dnsName
@@ -6871,23 +6858,23 @@ data DnsRecordSetResource s = DnsRecordSetResource'
     , _rrdatas     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @rrdatas@ - (Required)
     --
-    , _ttl         :: TF.Attr s P.Integer
+    , _ttl         :: TF.Attr s P.Int
     -- ^ @ttl@ - (Required)
     --
     , _type'       :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dnsRecordSetResource
     :: TF.Attr s P.Text -- ^ @managed_zone@ - 'P.managedZone'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @rrdatas@ - 'P.rrdatas'
-    -> TF.Attr s P.Integer -- ^ @ttl@ - 'P.ttl'
+    -> TF.Attr s P.Int -- ^ @ttl@ - 'P.ttl'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (DnsRecordSetResource s)
 dnsRecordSetResource _managedZone _name _rrdatas _ttl _type' =
-    TF.newResource "google_dns_record_set" TF.validator $
+    TF.unsafeResource "google_dns_record_set" P.defaultProvider TF.validator $
         DnsRecordSetResource'
             { _managedZone = _managedZone
             , _name = _name
@@ -6923,9 +6910,9 @@ instance P.HasRrdatas (DnsRecordSetResource s) (TF.Attr s [TF.Attr s P.Text]) wh
         P.lens (_rrdatas :: DnsRecordSetResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _rrdatas = a } :: DnsRecordSetResource s)
 
-instance P.HasTtl (DnsRecordSetResource s) (TF.Attr s P.Integer) where
+instance P.HasTtl (DnsRecordSetResource s) (TF.Attr s P.Int) where
     ttl =
-        P.lens (_ttl :: DnsRecordSetResource s -> TF.Attr s P.Integer)
+        P.lens (_ttl :: DnsRecordSetResource s -> TF.Attr s P.Int)
                (\s a -> s { _ttl = a } :: DnsRecordSetResource s)
 
 instance P.HasType' (DnsRecordSetResource s) (TF.Attr s P.Text) where
@@ -6952,8 +6939,8 @@ data EndpointsServiceResource s = EndpointsServiceResource'
     --
     -- Conflicts with:
     --
-    -- * 'protocOutputBase64'
     -- * 'grpcConfig'
+    -- * 'protocOutputBase64'
     , _protocOutputBase64 :: TF.Attr s P.Text
     -- ^ @protoc_output_base64@ - (Optional)
     --
@@ -6963,13 +6950,13 @@ data EndpointsServiceResource s = EndpointsServiceResource'
     , _serviceName        :: TF.Attr s P.Text
     -- ^ @service_name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 endpointsServiceResource
     :: TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
     -> P.Resource (EndpointsServiceResource s)
 endpointsServiceResource _serviceName =
-    TF.newResource "google_endpoints_service" TF.validator $
+    TF.unsafeResource "google_endpoints_service" P.defaultProvider TF.validator $
         EndpointsServiceResource'
             { _grpcConfig = TF.Nil
             , _openapiConfig = TF.Nil
@@ -6995,7 +6982,7 @@ instance TF.IsValid (EndpointsServiceResource s) where
         , if (_openapiConfig P.== TF.Nil)
               then P.Nothing
               else P.Just ("_openapiConfig",
-                            [ "_protocOutputBase64"                            , "_grpcConfig"
+                            [ "_grpcConfig"                            , "_protocOutputBase64"
                             ])
         , if (_protocOutputBase64 P.== TF.Nil)
               then P.Nothing
@@ -7024,7 +7011,7 @@ instance P.HasServiceName (EndpointsServiceResource s) (TF.Attr s P.Text) where
         P.lens (_serviceName :: EndpointsServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _serviceName = a } :: EndpointsServiceResource s)
 
-instance s ~ s' => P.HasComputedApis (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s [TF.Attr s (EndpointsServiceApis s)]) where
+instance s ~ s' => P.HasComputedApis (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s [TF.Attr s (ApisSetting s)]) where
     computedApis x = TF.compute (TF.refKey x) "apis"
 
 instance s ~ s' => P.HasComputedConfigId (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
@@ -7033,7 +7020,7 @@ instance s ~ s' => P.HasComputedConfigId (TF.Ref s' (EndpointsServiceResource s)
 instance s ~ s' => P.HasComputedDnsAddress (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
     computedDnsAddress x = TF.compute (TF.refKey x) "dns_address"
 
-instance s ~ s' => P.HasComputedEndpoints (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s [TF.Attr s (EndpointsServiceEndpoints s)]) where
+instance s ~ s' => P.HasComputedEndpoints (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s [TF.Attr s (EndpointsSetting s)]) where
     computedEndpoints x = TF.compute (TF.refKey x) "endpoints"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
@@ -7050,14 +7037,14 @@ data FolderResource s = FolderResource'
     , _parent      :: TF.Attr s P.Text
     -- ^ @parent@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 folderResource
     :: TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
     -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
     -> P.Resource (FolderResource s)
 folderResource _displayName _parent =
-    TF.newResource "google_folder" TF.validator $
+    TF.unsafeResource "google_folder" P.defaultProvider TF.validator $
         FolderResource'
             { _displayName = _displayName
             , _parent = _parent
@@ -7105,7 +7092,7 @@ data FolderIamBindingResource s = FolderIamBindingResource'
     , _role    :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 folderIamBindingResource
     :: TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
@@ -7113,7 +7100,7 @@ folderIamBindingResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (FolderIamBindingResource s)
 folderIamBindingResource _folder _members _role =
-    TF.newResource "google_folder_iam_binding" TF.validator $
+    TF.unsafeResource "google_folder_iam_binding" P.defaultProvider TF.validator $
         FolderIamBindingResource'
             { _folder = _folder
             , _members = _members
@@ -7162,7 +7149,7 @@ data FolderIamMemberResource s = FolderIamMemberResource'
     , _role   :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 folderIamMemberResource
     :: TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
@@ -7170,7 +7157,7 @@ folderIamMemberResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (FolderIamMemberResource s)
 folderIamMemberResource _folder _member _role =
-    TF.newResource "google_folder_iam_member" TF.validator $
+    TF.unsafeResource "google_folder_iam_member" P.defaultProvider TF.validator $
         FolderIamMemberResource'
             { _folder = _folder
             , _member = _member
@@ -7216,14 +7203,14 @@ data FolderIamPolicyResource s = FolderIamPolicyResource'
     , _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 folderIamPolicyResource
     :: TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
     -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> P.Resource (FolderIamPolicyResource s)
 folderIamPolicyResource _folder _policyData =
-    TF.newResource "google_folder_iam_policy" TF.validator $
+    TF.unsafeResource "google_folder_iam_policy" P.defaultProvider TF.validator $
         FolderIamPolicyResource'
             { _folder = _folder
             , _policyData = _policyData
@@ -7256,7 +7243,7 @@ instance s ~ s' => P.HasComputedEtag (TF.Ref s' (FolderIamPolicyResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/google/r/folder_organization_policy.html terraform documentation>
 -- for more information.
 data FolderOrganizationPolicyResource s = FolderOrganizationPolicyResource'
-    { _booleanPolicy :: TF.Attr s (FolderOrganizationPolicyBooleanPolicy s)
+    { _booleanPolicy :: TF.Attr s (BooleanPolicySetting s)
     -- ^ @boolean_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -7269,28 +7256,28 @@ data FolderOrganizationPolicyResource s = FolderOrganizationPolicyResource'
     , _folder        :: TF.Attr s P.Text
     -- ^ @folder@ - (Required, Forces New)
     --
-    , _listPolicy    :: TF.Attr s (FolderOrganizationPolicyListPolicy s)
+    , _listPolicy    :: TF.Attr s (ListPolicySetting s)
     -- ^ @list_policy@ - (Optional)
     --
     -- Conflicts with:
     --
-    -- * 'restorePolicy'
     -- * 'booleanPolicy'
-    , _restorePolicy :: TF.Attr s (FolderOrganizationPolicyRestorePolicy s)
+    -- * 'restorePolicy'
+    , _restorePolicy :: TF.Attr s (RestorePolicySetting s)
     -- ^ @restore_policy@ - (Optional)
     --
     -- Conflicts with:
     --
-    -- * 'listPolicy'
     -- * 'booleanPolicy'
-    } deriving (P.Show, P.Eq, P.Generic)
+    -- * 'listPolicy'
+    } deriving (P.Show, P.Eq, P.Ord)
 
 folderOrganizationPolicyResource
     :: TF.Attr s P.Text -- ^ @constraint@ - 'P.constraint'
     -> TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
     -> P.Resource (FolderOrganizationPolicyResource s)
 folderOrganizationPolicyResource _constraint _folder =
-    TF.newResource "google_folder_organization_policy" TF.validator $
+    TF.unsafeResource "google_folder_organization_policy" P.defaultProvider TF.validator $
         FolderOrganizationPolicyResource'
             { _booleanPolicy = TF.Nil
             , _constraint = _constraint
@@ -7318,30 +7305,30 @@ instance TF.IsValid (FolderOrganizationPolicyResource s) where
         , if (_listPolicy P.== TF.Nil)
               then P.Nothing
               else P.Just ("_listPolicy",
-                            [ "_restorePolicy"                            , "_booleanPolicy"
+                            [ "_booleanPolicy"                            , "_restorePolicy"
                             ])
         , if (_restorePolicy P.== TF.Nil)
               then P.Nothing
               else P.Just ("_restorePolicy",
-                            [ "_listPolicy"                            , "_booleanPolicy"
+                            [ "_booleanPolicy"                            , "_listPolicy"
                             ])
         ])
            P.<> TF.settingsValidator "_booleanPolicy"
                   (_booleanPolicy
-                      :: FolderOrganizationPolicyResource s -> TF.Attr s (FolderOrganizationPolicyBooleanPolicy s))
+                      :: FolderOrganizationPolicyResource s -> TF.Attr s (BooleanPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_listPolicy"
                   (_listPolicy
-                      :: FolderOrganizationPolicyResource s -> TF.Attr s (FolderOrganizationPolicyListPolicy s))
+                      :: FolderOrganizationPolicyResource s -> TF.Attr s (ListPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_restorePolicy"
                   (_restorePolicy
-                      :: FolderOrganizationPolicyResource s -> TF.Attr s (FolderOrganizationPolicyRestorePolicy s))
+                      :: FolderOrganizationPolicyResource s -> TF.Attr s (RestorePolicySetting s))
                   TF.validator
 
-instance P.HasBooleanPolicy (FolderOrganizationPolicyResource s) (TF.Attr s (FolderOrganizationPolicyBooleanPolicy s)) where
+instance P.HasBooleanPolicy (FolderOrganizationPolicyResource s) (TF.Attr s (BooleanPolicySetting s)) where
     booleanPolicy =
-        P.lens (_booleanPolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (FolderOrganizationPolicyBooleanPolicy s))
+        P.lens (_booleanPolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (BooleanPolicySetting s))
                (\s a -> s { _booleanPolicy = a } :: FolderOrganizationPolicyResource s)
 
 instance P.HasConstraint (FolderOrganizationPolicyResource s) (TF.Attr s P.Text) where
@@ -7354,14 +7341,14 @@ instance P.HasFolder (FolderOrganizationPolicyResource s) (TF.Attr s P.Text) whe
         P.lens (_folder :: FolderOrganizationPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _folder = a } :: FolderOrganizationPolicyResource s)
 
-instance P.HasListPolicy (FolderOrganizationPolicyResource s) (TF.Attr s (FolderOrganizationPolicyListPolicy s)) where
+instance P.HasListPolicy (FolderOrganizationPolicyResource s) (TF.Attr s (ListPolicySetting s)) where
     listPolicy =
-        P.lens (_listPolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (FolderOrganizationPolicyListPolicy s))
+        P.lens (_listPolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (ListPolicySetting s))
                (\s a -> s { _listPolicy = a } :: FolderOrganizationPolicyResource s)
 
-instance P.HasRestorePolicy (FolderOrganizationPolicyResource s) (TF.Attr s (FolderOrganizationPolicyRestorePolicy s)) where
+instance P.HasRestorePolicy (FolderOrganizationPolicyResource s) (TF.Attr s (RestorePolicySetting s)) where
     restorePolicy =
-        P.lens (_restorePolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (FolderOrganizationPolicyRestorePolicy s))
+        P.lens (_restorePolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (RestorePolicySetting s))
                (\s a -> s { _restorePolicy = a } :: FolderOrganizationPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (FolderOrganizationPolicyResource s)) (TF.Attr s P.Text) where
@@ -7370,7 +7357,7 @@ instance s ~ s' => P.HasComputedEtag (TF.Ref s' (FolderOrganizationPolicyResourc
 instance s ~ s' => P.HasComputedUpdateTime (TF.Ref s' (FolderOrganizationPolicyResource s)) (TF.Attr s P.Text) where
     computedUpdateTime x = TF.compute (TF.refKey x) "update_time"
 
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (FolderOrganizationPolicyResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (FolderOrganizationPolicyResource s)) (TF.Attr s P.Int) where
     computedVersion x = TF.compute (TF.refKey x) "version"
 
 -- | @google_kms_crypto_key@ Resource.
@@ -7387,14 +7374,14 @@ data KmsCryptoKeyResource s = KmsCryptoKeyResource'
     , _rotationPeriod :: TF.Attr s P.Text
     -- ^ @rotation_period@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 kmsCryptoKeyResource
     :: TF.Attr s P.Text -- ^ @key_ring@ - 'P.keyRing'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (KmsCryptoKeyResource s)
 kmsCryptoKeyResource _keyRing _name =
-    TF.newResource "google_kms_crypto_key" TF.validator $
+    TF.unsafeResource "google_kms_crypto_key" P.defaultProvider TF.validator $
         KmsCryptoKeyResource'
             { _keyRing = _keyRing
             , _name = _name
@@ -7440,7 +7427,7 @@ data KmsCryptoKeyIamBindingResource s = KmsCryptoKeyIamBindingResource'
     , _role        :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 kmsCryptoKeyIamBindingResource
     :: TF.Attr s P.Text -- ^ @crypto_key_id@ - 'P.cryptoKeyId'
@@ -7448,7 +7435,7 @@ kmsCryptoKeyIamBindingResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (KmsCryptoKeyIamBindingResource s)
 kmsCryptoKeyIamBindingResource _cryptoKeyId _members _role =
-    TF.newResource "google_kms_crypto_key_iam_binding" TF.validator $
+    TF.unsafeResource "google_kms_crypto_key_iam_binding" P.defaultProvider TF.validator $
         KmsCryptoKeyIamBindingResource'
             { _cryptoKeyId = _cryptoKeyId
             , _members = _members
@@ -7497,7 +7484,7 @@ data KmsCryptoKeyIamMemberResource s = KmsCryptoKeyIamMemberResource'
     , _role        :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 kmsCryptoKeyIamMemberResource
     :: TF.Attr s P.Text -- ^ @crypto_key_id@ - 'P.cryptoKeyId'
@@ -7505,7 +7492,7 @@ kmsCryptoKeyIamMemberResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (KmsCryptoKeyIamMemberResource s)
 kmsCryptoKeyIamMemberResource _cryptoKeyId _member _role =
-    TF.newResource "google_kms_crypto_key_iam_member" TF.validator $
+    TF.unsafeResource "google_kms_crypto_key_iam_member" P.defaultProvider TF.validator $
         KmsCryptoKeyIamMemberResource'
             { _cryptoKeyId = _cryptoKeyId
             , _member = _member
@@ -7551,14 +7538,14 @@ data KmsKeyRingResource s = KmsKeyRingResource'
     , _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 kmsKeyRingResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (KmsKeyRingResource s)
 kmsKeyRingResource _location _name =
-    TF.newResource "google_kms_key_ring" TF.validator $
+    TF.unsafeResource "google_kms_key_ring" P.defaultProvider TF.validator $
         KmsKeyRingResource'
             { _location = _location
             , _name = _name
@@ -7600,7 +7587,7 @@ data KmsKeyRingIamBindingResource s = KmsKeyRingIamBindingResource'
     , _role      :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 kmsKeyRingIamBindingResource
     :: TF.Attr s P.Text -- ^ @key_ring_id@ - 'P.keyRingId'
@@ -7608,7 +7595,7 @@ kmsKeyRingIamBindingResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (KmsKeyRingIamBindingResource s)
 kmsKeyRingIamBindingResource _keyRingId _members _role =
-    TF.newResource "google_kms_key_ring_iam_binding" TF.validator $
+    TF.unsafeResource "google_kms_key_ring_iam_binding" P.defaultProvider TF.validator $
         KmsKeyRingIamBindingResource'
             { _keyRingId = _keyRingId
             , _members = _members
@@ -7657,7 +7644,7 @@ data KmsKeyRingIamMemberResource s = KmsKeyRingIamMemberResource'
     , _role      :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 kmsKeyRingIamMemberResource
     :: TF.Attr s P.Text -- ^ @key_ring_id@ - 'P.keyRingId'
@@ -7665,7 +7652,7 @@ kmsKeyRingIamMemberResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (KmsKeyRingIamMemberResource s)
 kmsKeyRingIamMemberResource _keyRingId _member _role =
-    TF.newResource "google_kms_key_ring_iam_member" TF.validator $
+    TF.unsafeResource "google_kms_key_ring_iam_member" P.defaultProvider TF.validator $
         KmsKeyRingIamMemberResource'
             { _keyRingId = _keyRingId
             , _member = _member
@@ -7711,14 +7698,14 @@ data KmsKeyRingIamPolicyResource s = KmsKeyRingIamPolicyResource'
     , _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 kmsKeyRingIamPolicyResource
     :: TF.Attr s P.Text -- ^ @key_ring_id@ - 'P.keyRingId'
     -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> P.Resource (KmsKeyRingIamPolicyResource s)
 kmsKeyRingIamPolicyResource _keyRingId _policyData =
-    TF.newResource "google_kms_key_ring_iam_policy" TF.validator $
+    TF.unsafeResource "google_kms_key_ring_iam_policy" P.defaultProvider TF.validator $
         KmsKeyRingIamPolicyResource'
             { _keyRingId = _keyRingId
             , _policyData = _policyData
@@ -7766,7 +7753,7 @@ data LoggingBillingAccountExclusionResource s = LoggingBillingAccountExclusionRe
     , _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 loggingBillingAccountExclusionResource
     :: TF.Attr s P.Text -- ^ @billing_account@ - 'P.billingAccount'
@@ -7774,7 +7761,7 @@ loggingBillingAccountExclusionResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LoggingBillingAccountExclusionResource s)
 loggingBillingAccountExclusionResource _billingAccount _filter _name =
-    TF.newResource "google_logging_billing_account_exclusion" TF.validator $
+    TF.unsafeResource "google_logging_billing_account_exclusion" P.defaultProvider TF.validator $
         LoggingBillingAccountExclusionResource'
             { _billingAccount = _billingAccount
             , _description = TF.Nil
@@ -7837,7 +7824,7 @@ data LoggingBillingAccountSinkResource s = LoggingBillingAccountSinkResource'
     , _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 loggingBillingAccountSinkResource
     :: TF.Attr s P.Text -- ^ @billing_account@ - 'P.billingAccount'
@@ -7845,7 +7832,7 @@ loggingBillingAccountSinkResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LoggingBillingAccountSinkResource s)
 loggingBillingAccountSinkResource _billingAccount _destination _name =
-    TF.newResource "google_logging_billing_account_sink" TF.validator $
+    TF.unsafeResource "google_logging_billing_account_sink" P.defaultProvider TF.validator $
         LoggingBillingAccountSinkResource'
             { _billingAccount = _billingAccount
             , _destination = _destination
@@ -7907,7 +7894,7 @@ data LoggingFolderExclusionResource s = LoggingFolderExclusionResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 loggingFolderExclusionResource
     :: TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
@@ -7915,7 +7902,7 @@ loggingFolderExclusionResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LoggingFolderExclusionResource s)
 loggingFolderExclusionResource _filter _folder _name =
-    TF.newResource "google_logging_folder_exclusion" TF.validator $
+    TF.unsafeResource "google_logging_folder_exclusion" P.defaultProvider TF.validator $
         LoggingFolderExclusionResource'
             { _description = TF.Nil
             , _disabled = TF.Nil
@@ -7981,7 +7968,7 @@ data LoggingFolderSinkResource s = LoggingFolderSinkResource'
     , _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 loggingFolderSinkResource
     :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
@@ -7989,7 +7976,7 @@ loggingFolderSinkResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LoggingFolderSinkResource s)
 loggingFolderSinkResource _destination _folder _name =
-    TF.newResource "google_logging_folder_sink" TF.validator $
+    TF.unsafeResource "google_logging_folder_sink" P.defaultProvider TF.validator $
         LoggingFolderSinkResource'
             { _destination = _destination
             , _filter = TF.Nil
@@ -8058,7 +8045,7 @@ data LoggingOrganizationExclusionResource s = LoggingOrganizationExclusionResour
     , _orgId       :: TF.Attr s P.Text
     -- ^ @org_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 loggingOrganizationExclusionResource
     :: TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
@@ -8066,7 +8053,7 @@ loggingOrganizationExclusionResource
     -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
     -> P.Resource (LoggingOrganizationExclusionResource s)
 loggingOrganizationExclusionResource _filter _name _orgId =
-    TF.newResource "google_logging_organization_exclusion" TF.validator $
+    TF.unsafeResource "google_logging_organization_exclusion" P.defaultProvider TF.validator $
         LoggingOrganizationExclusionResource'
             { _description = TF.Nil
             , _disabled = TF.Nil
@@ -8111,3 +8098,1380 @@ instance P.HasOrgId (LoggingOrganizationExclusionResource s) (TF.Attr s P.Text) 
     orgId =
         P.lens (_orgId :: LoggingOrganizationExclusionResource s -> TF.Attr s P.Text)
                (\s a -> s { _orgId = a } :: LoggingOrganizationExclusionResource s)
+
+-- | @google_logging_organization_sink@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/logging_organization_sink.html terraform documentation>
+-- for more information.
+data LoggingOrganizationSinkResource s = LoggingOrganizationSinkResource'
+    { _destination     :: TF.Attr s P.Text
+    -- ^ @destination@ - (Required)
+    --
+    , _filter          :: TF.Attr s P.Text
+    -- ^ @filter@ - (Optional)
+    --
+    , _includeChildren :: TF.Attr s P.Bool
+    -- ^ @include_children@ - (Optional, Forces New)
+    --
+    , _name            :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _orgId           :: TF.Attr s P.Text
+    -- ^ @org_id@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+loggingOrganizationSinkResource
+    :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
+    -> P.Resource (LoggingOrganizationSinkResource s)
+loggingOrganizationSinkResource _destination _name _orgId =
+    TF.unsafeResource "google_logging_organization_sink" P.defaultProvider TF.validator $
+        LoggingOrganizationSinkResource'
+            { _destination = _destination
+            , _filter = TF.Nil
+            , _includeChildren = TF.value P.False
+            , _name = _name
+            , _orgId = _orgId
+            }
+
+instance TF.IsObject (LoggingOrganizationSinkResource s) where
+    toObject LoggingOrganizationSinkResource'{..} = P.catMaybes
+        [ TF.assign "destination" <$> TF.attribute _destination
+        , TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "include_children" <$> TF.attribute _includeChildren
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "org_id" <$> TF.attribute _orgId
+        ]
+
+instance TF.IsValid (LoggingOrganizationSinkResource s) where
+    validator = P.mempty
+
+instance P.HasDestination (LoggingOrganizationSinkResource s) (TF.Attr s P.Text) where
+    destination =
+        P.lens (_destination :: LoggingOrganizationSinkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _destination = a } :: LoggingOrganizationSinkResource s)
+
+instance P.HasFilter (LoggingOrganizationSinkResource s) (TF.Attr s P.Text) where
+    filter =
+        P.lens (_filter :: LoggingOrganizationSinkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _filter = a } :: LoggingOrganizationSinkResource s)
+
+instance P.HasIncludeChildren (LoggingOrganizationSinkResource s) (TF.Attr s P.Bool) where
+    includeChildren =
+        P.lens (_includeChildren :: LoggingOrganizationSinkResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _includeChildren = a } :: LoggingOrganizationSinkResource s)
+
+instance P.HasName (LoggingOrganizationSinkResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LoggingOrganizationSinkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LoggingOrganizationSinkResource s)
+
+instance P.HasOrgId (LoggingOrganizationSinkResource s) (TF.Attr s P.Text) where
+    orgId =
+        P.lens (_orgId :: LoggingOrganizationSinkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _orgId = a } :: LoggingOrganizationSinkResource s)
+
+instance s ~ s' => P.HasComputedWriterIdentity (TF.Ref s' (LoggingOrganizationSinkResource s)) (TF.Attr s P.Text) where
+    computedWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
+
+-- | @google_logging_project_exclusion@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/logging_project_exclusion.html terraform documentation>
+-- for more information.
+data LoggingProjectExclusionResource s = LoggingProjectExclusionResource'
+    { _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _disabled    :: TF.Attr s P.Bool
+    -- ^ @disabled@ - (Optional)
+    --
+    , _filter      :: TF.Attr s P.Text
+    -- ^ @filter@ - (Required)
+    --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+loggingProjectExclusionResource
+    :: TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> P.Resource (LoggingProjectExclusionResource s)
+loggingProjectExclusionResource _filter _name =
+    TF.unsafeResource "google_logging_project_exclusion" P.defaultProvider TF.validator $
+        LoggingProjectExclusionResource'
+            { _description = TF.Nil
+            , _disabled = TF.Nil
+            , _filter = _filter
+            , _name = _name
+            }
+
+instance TF.IsObject (LoggingProjectExclusionResource s) where
+    toObject LoggingProjectExclusionResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "disabled" <$> TF.attribute _disabled
+        , TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (LoggingProjectExclusionResource s) where
+    validator = P.mempty
+
+instance P.HasDescription (LoggingProjectExclusionResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: LoggingProjectExclusionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: LoggingProjectExclusionResource s)
+
+instance P.HasDisabled (LoggingProjectExclusionResource s) (TF.Attr s P.Bool) where
+    disabled =
+        P.lens (_disabled :: LoggingProjectExclusionResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _disabled = a } :: LoggingProjectExclusionResource s)
+
+instance P.HasFilter (LoggingProjectExclusionResource s) (TF.Attr s P.Text) where
+    filter =
+        P.lens (_filter :: LoggingProjectExclusionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _filter = a } :: LoggingProjectExclusionResource s)
+
+instance P.HasName (LoggingProjectExclusionResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LoggingProjectExclusionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LoggingProjectExclusionResource s)
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (LoggingProjectExclusionResource s)) (TF.Attr s P.Text) where
+    computedProject x = TF.compute (TF.refKey x) "project"
+
+-- | @google_logging_project_sink@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/logging_project_sink.html terraform documentation>
+-- for more information.
+data LoggingProjectSinkResource s = LoggingProjectSinkResource'
+    { _destination          :: TF.Attr s P.Text
+    -- ^ @destination@ - (Required)
+    --
+    , _filter               :: TF.Attr s P.Text
+    -- ^ @filter@ - (Optional)
+    --
+    , _name                 :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _uniqueWriterIdentity :: TF.Attr s P.Bool
+    -- ^ @unique_writer_identity@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+loggingProjectSinkResource
+    :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> P.Resource (LoggingProjectSinkResource s)
+loggingProjectSinkResource _destination _name =
+    TF.unsafeResource "google_logging_project_sink" P.defaultProvider TF.validator $
+        LoggingProjectSinkResource'
+            { _destination = _destination
+            , _filter = TF.Nil
+            , _name = _name
+            , _uniqueWriterIdentity = TF.value P.False
+            }
+
+instance TF.IsObject (LoggingProjectSinkResource s) where
+    toObject LoggingProjectSinkResource'{..} = P.catMaybes
+        [ TF.assign "destination" <$> TF.attribute _destination
+        , TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "unique_writer_identity" <$> TF.attribute _uniqueWriterIdentity
+        ]
+
+instance TF.IsValid (LoggingProjectSinkResource s) where
+    validator = P.mempty
+
+instance P.HasDestination (LoggingProjectSinkResource s) (TF.Attr s P.Text) where
+    destination =
+        P.lens (_destination :: LoggingProjectSinkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _destination = a } :: LoggingProjectSinkResource s)
+
+instance P.HasFilter (LoggingProjectSinkResource s) (TF.Attr s P.Text) where
+    filter =
+        P.lens (_filter :: LoggingProjectSinkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _filter = a } :: LoggingProjectSinkResource s)
+
+instance P.HasName (LoggingProjectSinkResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LoggingProjectSinkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LoggingProjectSinkResource s)
+
+instance P.HasUniqueWriterIdentity (LoggingProjectSinkResource s) (TF.Attr s P.Bool) where
+    uniqueWriterIdentity =
+        P.lens (_uniqueWriterIdentity :: LoggingProjectSinkResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _uniqueWriterIdentity = a } :: LoggingProjectSinkResource s)
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (LoggingProjectSinkResource s)) (TF.Attr s P.Text) where
+    computedProject x = TF.compute (TF.refKey x) "project"
+
+instance s ~ s' => P.HasComputedWriterIdentity (TF.Ref s' (LoggingProjectSinkResource s)) (TF.Attr s P.Text) where
+    computedWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
+
+-- | @google_organization_iam_binding@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/organization_iam_binding.html terraform documentation>
+-- for more information.
+data OrganizationIamBindingResource s = OrganizationIamBindingResource'
+    { _members :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @members@ - (Required)
+    --
+    , _orgId   :: TF.Attr s P.Text
+    -- ^ @org_id@ - (Required, Forces New)
+    --
+    , _role    :: TF.Attr s P.Text
+    -- ^ @role@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+organizationIamBindingResource
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
+    -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
+    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    -> P.Resource (OrganizationIamBindingResource s)
+organizationIamBindingResource _members _orgId _role =
+    TF.unsafeResource "google_organization_iam_binding" P.defaultProvider TF.validator $
+        OrganizationIamBindingResource'
+            { _members = _members
+            , _orgId = _orgId
+            , _role = _role
+            }
+
+instance TF.IsObject (OrganizationIamBindingResource s) where
+    toObject OrganizationIamBindingResource'{..} = P.catMaybes
+        [ TF.assign "members" <$> TF.attribute _members
+        , TF.assign "org_id" <$> TF.attribute _orgId
+        , TF.assign "role" <$> TF.attribute _role
+        ]
+
+instance TF.IsValid (OrganizationIamBindingResource s) where
+    validator = P.mempty
+
+instance P.HasMembers (OrganizationIamBindingResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    members =
+        P.lens (_members :: OrganizationIamBindingResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _members = a } :: OrganizationIamBindingResource s)
+
+instance P.HasOrgId (OrganizationIamBindingResource s) (TF.Attr s P.Text) where
+    orgId =
+        P.lens (_orgId :: OrganizationIamBindingResource s -> TF.Attr s P.Text)
+               (\s a -> s { _orgId = a } :: OrganizationIamBindingResource s)
+
+instance P.HasRole (OrganizationIamBindingResource s) (TF.Attr s P.Text) where
+    role =
+        P.lens (_role :: OrganizationIamBindingResource s -> TF.Attr s P.Text)
+               (\s a -> s { _role = a } :: OrganizationIamBindingResource s)
+
+instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationIamBindingResource s)) (TF.Attr s P.Text) where
+    computedEtag x = TF.compute (TF.refKey x) "etag"
+
+-- | @google_organization_iam_custom_role@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/organization_iam_custom_role.html terraform documentation>
+-- for more information.
+data OrganizationIamCustomRoleResource s = OrganizationIamCustomRoleResource'
+    { _deleted     :: TF.Attr s P.Bool
+    -- ^ @deleted@ - (Optional)
+    --
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _orgId       :: TF.Attr s P.Text
+    -- ^ @org_id@ - (Required, Forces New)
+    --
+    , _permissions :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    -- ^ @permissions@ - (Required)
+    --
+    , _roleId      :: TF.Attr s P.Text
+    -- ^ @role_id@ - (Required, Forces New)
+    --
+    , _stage       :: TF.Attr s P.Text
+    -- ^ @stage@ - (Optional)
+    --
+    , _title       :: TF.Attr s P.Text
+    -- ^ @title@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+organizationIamCustomRoleResource
+    :: TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ - 'P.permissions'
+    -> TF.Attr s P.Text -- ^ @role_id@ - 'P.roleId'
+    -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
+    -> P.Resource (OrganizationIamCustomRoleResource s)
+organizationIamCustomRoleResource _orgId _permissions _roleId _title =
+    TF.unsafeResource "google_organization_iam_custom_role" P.defaultProvider TF.validator $
+        OrganizationIamCustomRoleResource'
+            { _deleted = TF.value P.False
+            , _description = TF.Nil
+            , _orgId = _orgId
+            , _permissions = _permissions
+            , _roleId = _roleId
+            , _stage = TF.value "GA"
+            , _title = _title
+            }
+
+instance TF.IsObject (OrganizationIamCustomRoleResource s) where
+    toObject OrganizationIamCustomRoleResource'{..} = P.catMaybes
+        [ TF.assign "deleted" <$> TF.attribute _deleted
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "org_id" <$> TF.attribute _orgId
+        , TF.assign "permissions" <$> TF.attribute _permissions
+        , TF.assign "role_id" <$> TF.attribute _roleId
+        , TF.assign "stage" <$> TF.attribute _stage
+        , TF.assign "title" <$> TF.attribute _title
+        ]
+
+instance TF.IsValid (OrganizationIamCustomRoleResource s) where
+    validator = P.mempty
+
+instance P.HasDeleted (OrganizationIamCustomRoleResource s) (TF.Attr s P.Bool) where
+    deleted =
+        P.lens (_deleted :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _deleted = a } :: OrganizationIamCustomRoleResource s)
+
+instance P.HasDescription (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: OrganizationIamCustomRoleResource s)
+
+instance P.HasOrgId (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) where
+    orgId =
+        P.lens (_orgId :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _orgId = a } :: OrganizationIamCustomRoleResource s)
+
+instance P.HasPermissions (OrganizationIamCustomRoleResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
+    permissions =
+        P.lens (_permissions :: OrganizationIamCustomRoleResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
+               (\s a -> s { _permissions = a } :: OrganizationIamCustomRoleResource s)
+
+instance P.HasRoleId (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) where
+    roleId =
+        P.lens (_roleId :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _roleId = a } :: OrganizationIamCustomRoleResource s)
+
+instance P.HasStage (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) where
+    stage =
+        P.lens (_stage :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _stage = a } :: OrganizationIamCustomRoleResource s)
+
+instance P.HasTitle (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) where
+    title =
+        P.lens (_title :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _title = a } :: OrganizationIamCustomRoleResource s)
+
+-- | @google_organization_iam_member@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/organization_iam_member.html terraform documentation>
+-- for more information.
+data OrganizationIamMemberResource s = OrganizationIamMemberResource'
+    { _member :: TF.Attr s P.Text
+    -- ^ @member@ - (Required, Forces New)
+    --
+    , _orgId  :: TF.Attr s P.Text
+    -- ^ @org_id@ - (Required, Forces New)
+    --
+    , _role   :: TF.Attr s P.Text
+    -- ^ @role@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+organizationIamMemberResource
+    :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
+    -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
+    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    -> P.Resource (OrganizationIamMemberResource s)
+organizationIamMemberResource _member _orgId _role =
+    TF.unsafeResource "google_organization_iam_member" P.defaultProvider TF.validator $
+        OrganizationIamMemberResource'
+            { _member = _member
+            , _orgId = _orgId
+            , _role = _role
+            }
+
+instance TF.IsObject (OrganizationIamMemberResource s) where
+    toObject OrganizationIamMemberResource'{..} = P.catMaybes
+        [ TF.assign "member" <$> TF.attribute _member
+        , TF.assign "org_id" <$> TF.attribute _orgId
+        , TF.assign "role" <$> TF.attribute _role
+        ]
+
+instance TF.IsValid (OrganizationIamMemberResource s) where
+    validator = P.mempty
+
+instance P.HasMember (OrganizationIamMemberResource s) (TF.Attr s P.Text) where
+    member =
+        P.lens (_member :: OrganizationIamMemberResource s -> TF.Attr s P.Text)
+               (\s a -> s { _member = a } :: OrganizationIamMemberResource s)
+
+instance P.HasOrgId (OrganizationIamMemberResource s) (TF.Attr s P.Text) where
+    orgId =
+        P.lens (_orgId :: OrganizationIamMemberResource s -> TF.Attr s P.Text)
+               (\s a -> s { _orgId = a } :: OrganizationIamMemberResource s)
+
+instance P.HasRole (OrganizationIamMemberResource s) (TF.Attr s P.Text) where
+    role =
+        P.lens (_role :: OrganizationIamMemberResource s -> TF.Attr s P.Text)
+               (\s a -> s { _role = a } :: OrganizationIamMemberResource s)
+
+instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationIamMemberResource s)) (TF.Attr s P.Text) where
+    computedEtag x = TF.compute (TF.refKey x) "etag"
+
+-- | @google_organization_iam_policy@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/organization_iam_policy.html terraform documentation>
+-- for more information.
+data OrganizationIamPolicyResource s = OrganizationIamPolicyResource'
+    { _orgId      :: TF.Attr s P.Text
+    -- ^ @org_id@ - (Required, Forces New)
+    --
+    , _policyData :: TF.Attr s P.Text
+    -- ^ @policy_data@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+organizationIamPolicyResource
+    :: TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
+    -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
+    -> P.Resource (OrganizationIamPolicyResource s)
+organizationIamPolicyResource _orgId _policyData =
+    TF.unsafeResource "google_organization_iam_policy" P.defaultProvider TF.validator $
+        OrganizationIamPolicyResource'
+            { _orgId = _orgId
+            , _policyData = _policyData
+            }
+
+instance TF.IsObject (OrganizationIamPolicyResource s) where
+    toObject OrganizationIamPolicyResource'{..} = P.catMaybes
+        [ TF.assign "org_id" <$> TF.attribute _orgId
+        , TF.assign "policy_data" <$> TF.attribute _policyData
+        ]
+
+instance TF.IsValid (OrganizationIamPolicyResource s) where
+    validator = P.mempty
+
+instance P.HasOrgId (OrganizationIamPolicyResource s) (TF.Attr s P.Text) where
+    orgId =
+        P.lens (_orgId :: OrganizationIamPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _orgId = a } :: OrganizationIamPolicyResource s)
+
+instance P.HasPolicyData (OrganizationIamPolicyResource s) (TF.Attr s P.Text) where
+    policyData =
+        P.lens (_policyData :: OrganizationIamPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _policyData = a } :: OrganizationIamPolicyResource s)
+
+instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationIamPolicyResource s)) (TF.Attr s P.Text) where
+    computedEtag x = TF.compute (TF.refKey x) "etag"
+
+-- | @google_organization_policy@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/organization_policy.html terraform documentation>
+-- for more information.
+data OrganizationPolicyResource s = OrganizationPolicyResource'
+    { _booleanPolicy :: TF.Attr s (BooleanPolicySetting s)
+    -- ^ @boolean_policy@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'listPolicy'
+    -- * 'restorePolicy'
+    , _constraint    :: TF.Attr s P.Text
+    -- ^ @constraint@ - (Required, Forces New)
+    --
+    , _listPolicy    :: TF.Attr s (ListPolicySetting s)
+    -- ^ @list_policy@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'booleanPolicy'
+    -- * 'restorePolicy'
+    , _orgId         :: TF.Attr s P.Text
+    -- ^ @org_id@ - (Required, Forces New)
+    --
+    , _restorePolicy :: TF.Attr s (RestorePolicySetting s)
+    -- ^ @restore_policy@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'booleanPolicy'
+    -- * 'listPolicy'
+    } deriving (P.Show, P.Eq, P.Ord)
+
+organizationPolicyResource
+    :: TF.Attr s P.Text -- ^ @constraint@ - 'P.constraint'
+    -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
+    -> P.Resource (OrganizationPolicyResource s)
+organizationPolicyResource _constraint _orgId =
+    TF.unsafeResource "google_organization_policy" P.defaultProvider TF.validator $
+        OrganizationPolicyResource'
+            { _booleanPolicy = TF.Nil
+            , _constraint = _constraint
+            , _listPolicy = TF.Nil
+            , _orgId = _orgId
+            , _restorePolicy = TF.Nil
+            }
+
+instance TF.IsObject (OrganizationPolicyResource s) where
+    toObject OrganizationPolicyResource'{..} = P.catMaybes
+        [ TF.assign "boolean_policy" <$> TF.attribute _booleanPolicy
+        , TF.assign "constraint" <$> TF.attribute _constraint
+        , TF.assign "list_policy" <$> TF.attribute _listPolicy
+        , TF.assign "org_id" <$> TF.attribute _orgId
+        , TF.assign "restore_policy" <$> TF.attribute _restorePolicy
+        ]
+
+instance TF.IsValid (OrganizationPolicyResource s) where
+    validator = TF.fieldsValidator (\OrganizationPolicyResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_booleanPolicy P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_booleanPolicy",
+                            [ "_listPolicy"                            , "_restorePolicy"
+                            ])
+        , if (_listPolicy P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_listPolicy",
+                            [ "_booleanPolicy"                            , "_restorePolicy"
+                            ])
+        , if (_restorePolicy P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_restorePolicy",
+                            [ "_booleanPolicy"                            , "_listPolicy"
+                            ])
+        ])
+           P.<> TF.settingsValidator "_booleanPolicy"
+                  (_booleanPolicy
+                      :: OrganizationPolicyResource s -> TF.Attr s (BooleanPolicySetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_listPolicy"
+                  (_listPolicy
+                      :: OrganizationPolicyResource s -> TF.Attr s (ListPolicySetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_restorePolicy"
+                  (_restorePolicy
+                      :: OrganizationPolicyResource s -> TF.Attr s (RestorePolicySetting s))
+                  TF.validator
+
+instance P.HasBooleanPolicy (OrganizationPolicyResource s) (TF.Attr s (BooleanPolicySetting s)) where
+    booleanPolicy =
+        P.lens (_booleanPolicy :: OrganizationPolicyResource s -> TF.Attr s (BooleanPolicySetting s))
+               (\s a -> s { _booleanPolicy = a } :: OrganizationPolicyResource s)
+
+instance P.HasConstraint (OrganizationPolicyResource s) (TF.Attr s P.Text) where
+    constraint =
+        P.lens (_constraint :: OrganizationPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _constraint = a } :: OrganizationPolicyResource s)
+
+instance P.HasListPolicy (OrganizationPolicyResource s) (TF.Attr s (ListPolicySetting s)) where
+    listPolicy =
+        P.lens (_listPolicy :: OrganizationPolicyResource s -> TF.Attr s (ListPolicySetting s))
+               (\s a -> s { _listPolicy = a } :: OrganizationPolicyResource s)
+
+instance P.HasOrgId (OrganizationPolicyResource s) (TF.Attr s P.Text) where
+    orgId =
+        P.lens (_orgId :: OrganizationPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _orgId = a } :: OrganizationPolicyResource s)
+
+instance P.HasRestorePolicy (OrganizationPolicyResource s) (TF.Attr s (RestorePolicySetting s)) where
+    restorePolicy =
+        P.lens (_restorePolicy :: OrganizationPolicyResource s -> TF.Attr s (RestorePolicySetting s))
+               (\s a -> s { _restorePolicy = a } :: OrganizationPolicyResource s)
+
+instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Text) where
+    computedEtag x = TF.compute (TF.refKey x) "etag"
+
+instance s ~ s' => P.HasComputedUpdateTime (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Text) where
+    computedUpdateTime x = TF.compute (TF.refKey x) "update_time"
+
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Int) where
+    computedVersion x = TF.compute (TF.refKey x) "version"
+
+-- | @google_project@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/project.html terraform documentation>
+-- for more information.
+data ProjectResource s = ProjectResource'
+    { _appEngine         :: TF.Attr s (AppEngineSetting s)
+    -- ^ @app_engine@ - (Optional)
+    --
+    , _autoCreateNetwork :: TF.Attr s P.Bool
+    -- ^ @auto_create_network@ - (Optional)
+    --
+    , _billingAccount    :: TF.Attr s P.Text
+    -- ^ @billing_account@ - (Optional)
+    --
+    , _labels            :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @labels@ - (Optional)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _projectId         :: TF.Attr s P.Text
+    -- ^ @project_id@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+projectResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> P.Resource (ProjectResource s)
+projectResource _name _projectId =
+    TF.unsafeResource "google_project" P.defaultProvider TF.validator $
+        ProjectResource'
+            { _appEngine = TF.Nil
+            , _autoCreateNetwork = TF.value P.True
+            , _billingAccount = TF.Nil
+            , _labels = TF.Nil
+            , _name = _name
+            , _projectId = _projectId
+            }
+
+instance TF.IsObject (ProjectResource s) where
+    toObject ProjectResource'{..} = P.catMaybes
+        [ TF.assign "app_engine" <$> TF.attribute _appEngine
+        , TF.assign "auto_create_network" <$> TF.attribute _autoCreateNetwork
+        , TF.assign "billing_account" <$> TF.attribute _billingAccount
+        , TF.assign "labels" <$> TF.attribute _labels
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project_id" <$> TF.attribute _projectId
+        ]
+
+instance TF.IsValid (ProjectResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_appEngine"
+                  (_appEngine
+                      :: ProjectResource s -> TF.Attr s (AppEngineSetting s))
+                  TF.validator
+
+instance P.HasAppEngine (ProjectResource s) (TF.Attr s (AppEngineSetting s)) where
+    appEngine =
+        P.lens (_appEngine :: ProjectResource s -> TF.Attr s (AppEngineSetting s))
+               (\s a -> s { _appEngine = a } :: ProjectResource s)
+
+instance P.HasAutoCreateNetwork (ProjectResource s) (TF.Attr s P.Bool) where
+    autoCreateNetwork =
+        P.lens (_autoCreateNetwork :: ProjectResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _autoCreateNetwork = a } :: ProjectResource s)
+
+instance P.HasBillingAccount (ProjectResource s) (TF.Attr s P.Text) where
+    billingAccount =
+        P.lens (_billingAccount :: ProjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _billingAccount = a } :: ProjectResource s)
+
+instance P.HasLabels (ProjectResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    labels =
+        P.lens (_labels :: ProjectResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _labels = a } :: ProjectResource s)
+
+instance P.HasName (ProjectResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ProjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ProjectResource s)
+
+instance P.HasProjectId (ProjectResource s) (TF.Attr s P.Text) where
+    projectId =
+        P.lens (_projectId :: ProjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _projectId = a } :: ProjectResource s)
+
+instance s ~ s' => P.HasComputedFolderId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
+    computedFolderId x = TF.compute (TF.refKey x) "folder_id"
+
+instance s ~ s' => P.HasComputedNumber (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
+    computedNumber x = TF.compute (TF.refKey x) "number"
+
+instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
+    computedOrgId x = TF.compute (TF.refKey x) "org_id"
+
+instance s ~ s' => P.HasComputedPolicyData (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
+    computedPolicyData x = TF.compute (TF.refKey x) "policy_data"
+
+instance s ~ s' => P.HasComputedPolicyEtag (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
+    computedPolicyEtag x = TF.compute (TF.refKey x) "policy_etag"
+
+instance s ~ s' => P.HasComputedSkipDelete (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Bool) where
+    computedSkipDelete x = TF.compute (TF.refKey x) "skip_delete"
+
+-- | @google_project_iam_binding@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/project_iam_binding.html terraform documentation>
+-- for more information.
+data ProjectIamBindingResource s = ProjectIamBindingResource'
+    { _members :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @members@ - (Required)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _role    :: TF.Attr s P.Text
+    -- ^ @role@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+projectIamBindingResource
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
+    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    -> P.Resource (ProjectIamBindingResource s)
+projectIamBindingResource _members _role =
+    TF.unsafeResource "google_project_iam_binding" P.defaultProvider TF.validator $
+        ProjectIamBindingResource'
+            { _members = _members
+            , _project = TF.Nil
+            , _role = _role
+            }
+
+instance TF.IsObject (ProjectIamBindingResource s) where
+    toObject ProjectIamBindingResource'{..} = P.catMaybes
+        [ TF.assign "members" <$> TF.attribute _members
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "role" <$> TF.attribute _role
+        ]
+
+instance TF.IsValid (ProjectIamBindingResource s) where
+    validator = P.mempty
+
+instance P.HasMembers (ProjectIamBindingResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    members =
+        P.lens (_members :: ProjectIamBindingResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _members = a } :: ProjectIamBindingResource s)
+
+instance P.HasProject (ProjectIamBindingResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ProjectIamBindingResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ProjectIamBindingResource s)
+
+instance P.HasRole (ProjectIamBindingResource s) (TF.Attr s P.Text) where
+    role =
+        P.lens (_role :: ProjectIamBindingResource s -> TF.Attr s P.Text)
+               (\s a -> s { _role = a } :: ProjectIamBindingResource s)
+
+instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamBindingResource s)) (TF.Attr s P.Text) where
+    computedEtag x = TF.compute (TF.refKey x) "etag"
+
+-- | @google_project_iam_custom_role@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/project_iam_custom_role.html terraform documentation>
+-- for more information.
+data ProjectIamCustomRoleResource s = ProjectIamCustomRoleResource'
+    { _deleted     :: TF.Attr s P.Bool
+    -- ^ @deleted@ - (Optional)
+    --
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _permissions :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    -- ^ @permissions@ - (Required)
+    --
+    , _roleId      :: TF.Attr s P.Text
+    -- ^ @role_id@ - (Required, Forces New)
+    --
+    , _stage       :: TF.Attr s P.Text
+    -- ^ @stage@ - (Optional)
+    --
+    , _title       :: TF.Attr s P.Text
+    -- ^ @title@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+projectIamCustomRoleResource
+    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ - 'P.permissions'
+    -> TF.Attr s P.Text -- ^ @role_id@ - 'P.roleId'
+    -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
+    -> P.Resource (ProjectIamCustomRoleResource s)
+projectIamCustomRoleResource _permissions _roleId _title =
+    TF.unsafeResource "google_project_iam_custom_role" P.defaultProvider TF.validator $
+        ProjectIamCustomRoleResource'
+            { _deleted = TF.value P.False
+            , _description = TF.Nil
+            , _permissions = _permissions
+            , _roleId = _roleId
+            , _stage = TF.value "GA"
+            , _title = _title
+            }
+
+instance TF.IsObject (ProjectIamCustomRoleResource s) where
+    toObject ProjectIamCustomRoleResource'{..} = P.catMaybes
+        [ TF.assign "deleted" <$> TF.attribute _deleted
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "permissions" <$> TF.attribute _permissions
+        , TF.assign "role_id" <$> TF.attribute _roleId
+        , TF.assign "stage" <$> TF.attribute _stage
+        , TF.assign "title" <$> TF.attribute _title
+        ]
+
+instance TF.IsValid (ProjectIamCustomRoleResource s) where
+    validator = P.mempty
+
+instance P.HasDeleted (ProjectIamCustomRoleResource s) (TF.Attr s P.Bool) where
+    deleted =
+        P.lens (_deleted :: ProjectIamCustomRoleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _deleted = a } :: ProjectIamCustomRoleResource s)
+
+instance P.HasDescription (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: ProjectIamCustomRoleResource s)
+
+instance P.HasPermissions (ProjectIamCustomRoleResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
+    permissions =
+        P.lens (_permissions :: ProjectIamCustomRoleResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
+               (\s a -> s { _permissions = a } :: ProjectIamCustomRoleResource s)
+
+instance P.HasRoleId (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
+    roleId =
+        P.lens (_roleId :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _roleId = a } :: ProjectIamCustomRoleResource s)
+
+instance P.HasStage (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
+    stage =
+        P.lens (_stage :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _stage = a } :: ProjectIamCustomRoleResource s)
+
+instance P.HasTitle (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
+    title =
+        P.lens (_title :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _title = a } :: ProjectIamCustomRoleResource s)
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectIamCustomRoleResource s)) (TF.Attr s P.Text) where
+    computedProject x = TF.compute (TF.refKey x) "project"
+
+-- | @google_project_iam_member@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/project_iam_member.html terraform documentation>
+-- for more information.
+data ProjectIamMemberResource s = ProjectIamMemberResource'
+    { _member  :: TF.Attr s P.Text
+    -- ^ @member@ - (Required, Forces New)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _role    :: TF.Attr s P.Text
+    -- ^ @role@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+projectIamMemberResource
+    :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
+    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    -> P.Resource (ProjectIamMemberResource s)
+projectIamMemberResource _member _role =
+    TF.unsafeResource "google_project_iam_member" P.defaultProvider TF.validator $
+        ProjectIamMemberResource'
+            { _member = _member
+            , _project = TF.Nil
+            , _role = _role
+            }
+
+instance TF.IsObject (ProjectIamMemberResource s) where
+    toObject ProjectIamMemberResource'{..} = P.catMaybes
+        [ TF.assign "member" <$> TF.attribute _member
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "role" <$> TF.attribute _role
+        ]
+
+instance TF.IsValid (ProjectIamMemberResource s) where
+    validator = P.mempty
+
+instance P.HasMember (ProjectIamMemberResource s) (TF.Attr s P.Text) where
+    member =
+        P.lens (_member :: ProjectIamMemberResource s -> TF.Attr s P.Text)
+               (\s a -> s { _member = a } :: ProjectIamMemberResource s)
+
+instance P.HasProject (ProjectIamMemberResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ProjectIamMemberResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ProjectIamMemberResource s)
+
+instance P.HasRole (ProjectIamMemberResource s) (TF.Attr s P.Text) where
+    role =
+        P.lens (_role :: ProjectIamMemberResource s -> TF.Attr s P.Text)
+               (\s a -> s { _role = a } :: ProjectIamMemberResource s)
+
+instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamMemberResource s)) (TF.Attr s P.Text) where
+    computedEtag x = TF.compute (TF.refKey x) "etag"
+
+-- | @google_project_iam_policy@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/project_iam_policy.html terraform documentation>
+-- for more information.
+data ProjectIamPolicyResource s = ProjectIamPolicyResource'
+    { _policyData :: TF.Attr s P.Text
+    -- ^ @policy_data@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+projectIamPolicyResource
+    :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
+    -> P.Resource (ProjectIamPolicyResource s)
+projectIamPolicyResource _policyData =
+    TF.unsafeResource "google_project_iam_policy" P.defaultProvider TF.validator $
+        ProjectIamPolicyResource'
+            { _policyData = _policyData
+            }
+
+instance TF.IsObject (ProjectIamPolicyResource s) where
+    toObject ProjectIamPolicyResource'{..} = P.catMaybes
+        [ TF.assign "policy_data" <$> TF.attribute _policyData
+        ]
+
+instance TF.IsValid (ProjectIamPolicyResource s) where
+    validator = P.mempty
+
+instance P.HasPolicyData (ProjectIamPolicyResource s) (TF.Attr s P.Text) where
+    policyData =
+        P.lens (_policyData :: ProjectIamPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _policyData = a } :: ProjectIamPolicyResource s)
+
+instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
+    computedEtag x = TF.compute (TF.refKey x) "etag"
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
+    computedProject x = TF.compute (TF.refKey x) "project"
+
+instance s ~ s' => P.HasComputedRestorePolicy (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
+    computedRestorePolicy x = TF.compute (TF.refKey x) "restore_policy"
+
+-- | @google_project_organization_policy@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/project_organization_policy.html terraform documentation>
+-- for more information.
+data ProjectOrganizationPolicyResource s = ProjectOrganizationPolicyResource'
+    { _booleanPolicy :: TF.Attr s (BooleanPolicySetting s)
+    -- ^ @boolean_policy@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'listPolicy'
+    -- * 'restorePolicy'
+    , _constraint    :: TF.Attr s P.Text
+    -- ^ @constraint@ - (Required, Forces New)
+    --
+    , _listPolicy    :: TF.Attr s (ListPolicySetting s)
+    -- ^ @list_policy@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'booleanPolicy'
+    -- * 'restorePolicy'
+    , _project       :: TF.Attr s P.Text
+    -- ^ @project@ - (Required, Forces New)
+    --
+    , _restorePolicy :: TF.Attr s (RestorePolicySetting s)
+    -- ^ @restore_policy@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'booleanPolicy'
+    -- * 'listPolicy'
+    } deriving (P.Show, P.Eq, P.Ord)
+
+projectOrganizationPolicyResource
+    :: TF.Attr s P.Text -- ^ @constraint@ - 'P.constraint'
+    -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
+    -> P.Resource (ProjectOrganizationPolicyResource s)
+projectOrganizationPolicyResource _constraint _project =
+    TF.unsafeResource "google_project_organization_policy" P.defaultProvider TF.validator $
+        ProjectOrganizationPolicyResource'
+            { _booleanPolicy = TF.Nil
+            , _constraint = _constraint
+            , _listPolicy = TF.Nil
+            , _project = _project
+            , _restorePolicy = TF.Nil
+            }
+
+instance TF.IsObject (ProjectOrganizationPolicyResource s) where
+    toObject ProjectOrganizationPolicyResource'{..} = P.catMaybes
+        [ TF.assign "boolean_policy" <$> TF.attribute _booleanPolicy
+        , TF.assign "constraint" <$> TF.attribute _constraint
+        , TF.assign "list_policy" <$> TF.attribute _listPolicy
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "restore_policy" <$> TF.attribute _restorePolicy
+        ]
+
+instance TF.IsValid (ProjectOrganizationPolicyResource s) where
+    validator = TF.fieldsValidator (\ProjectOrganizationPolicyResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_booleanPolicy P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_booleanPolicy",
+                            [ "_listPolicy"                            , "_restorePolicy"
+                            ])
+        , if (_listPolicy P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_listPolicy",
+                            [ "_booleanPolicy"                            , "_restorePolicy"
+                            ])
+        , if (_restorePolicy P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_restorePolicy",
+                            [ "_booleanPolicy"                            , "_listPolicy"
+                            ])
+        ])
+           P.<> TF.settingsValidator "_booleanPolicy"
+                  (_booleanPolicy
+                      :: ProjectOrganizationPolicyResource s -> TF.Attr s (BooleanPolicySetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_listPolicy"
+                  (_listPolicy
+                      :: ProjectOrganizationPolicyResource s -> TF.Attr s (ListPolicySetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_restorePolicy"
+                  (_restorePolicy
+                      :: ProjectOrganizationPolicyResource s -> TF.Attr s (RestorePolicySetting s))
+                  TF.validator
+
+instance P.HasBooleanPolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (BooleanPolicySetting s)) where
+    booleanPolicy =
+        P.lens (_booleanPolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (BooleanPolicySetting s))
+               (\s a -> s { _booleanPolicy = a } :: ProjectOrganizationPolicyResource s)
+
+instance P.HasConstraint (ProjectOrganizationPolicyResource s) (TF.Attr s P.Text) where
+    constraint =
+        P.lens (_constraint :: ProjectOrganizationPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _constraint = a } :: ProjectOrganizationPolicyResource s)
+
+instance P.HasListPolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (ListPolicySetting s)) where
+    listPolicy =
+        P.lens (_listPolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (ListPolicySetting s))
+               (\s a -> s { _listPolicy = a } :: ProjectOrganizationPolicyResource s)
+
+instance P.HasProject (ProjectOrganizationPolicyResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ProjectOrganizationPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ProjectOrganizationPolicyResource s)
+
+instance P.HasRestorePolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (RestorePolicySetting s)) where
+    restorePolicy =
+        P.lens (_restorePolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (RestorePolicySetting s))
+               (\s a -> s { _restorePolicy = a } :: ProjectOrganizationPolicyResource s)
+
+instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectOrganizationPolicyResource s)) (TF.Attr s P.Text) where
+    computedEtag x = TF.compute (TF.refKey x) "etag"
+
+instance s ~ s' => P.HasComputedUpdateTime (TF.Ref s' (ProjectOrganizationPolicyResource s)) (TF.Attr s P.Text) where
+    computedUpdateTime x = TF.compute (TF.refKey x) "update_time"
+
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ProjectOrganizationPolicyResource s)) (TF.Attr s P.Int) where
+    computedVersion x = TF.compute (TF.refKey x) "version"
+
+-- | @google_project_service@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/project_service.html terraform documentation>
+-- for more information.
+data ProjectServiceResource s = ProjectServiceResource'
+    { _disableOnDestroy :: TF.Attr s P.Bool
+    -- ^ @disable_on_destroy@ - (Optional)
+    --
+    , _service          :: TF.Attr s P.Text
+    -- ^ @service@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+projectServiceResource
+    :: TF.Attr s P.Text -- ^ @service@ - 'P.service'
+    -> P.Resource (ProjectServiceResource s)
+projectServiceResource _service =
+    TF.unsafeResource "google_project_service" P.defaultProvider TF.validator $
+        ProjectServiceResource'
+            { _disableOnDestroy = TF.value P.True
+            , _service = _service
+            }
+
+instance TF.IsObject (ProjectServiceResource s) where
+    toObject ProjectServiceResource'{..} = P.catMaybes
+        [ TF.assign "disable_on_destroy" <$> TF.attribute _disableOnDestroy
+        , TF.assign "service" <$> TF.attribute _service
+        ]
+
+instance TF.IsValid (ProjectServiceResource s) where
+    validator = P.mempty
+
+instance P.HasDisableOnDestroy (ProjectServiceResource s) (TF.Attr s P.Bool) where
+    disableOnDestroy =
+        P.lens (_disableOnDestroy :: ProjectServiceResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _disableOnDestroy = a } :: ProjectServiceResource s)
+
+instance P.HasService (ProjectServiceResource s) (TF.Attr s P.Text) where
+    service =
+        P.lens (_service :: ProjectServiceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _service = a } :: ProjectServiceResource s)
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectServiceResource s)) (TF.Attr s P.Text) where
+    computedProject x = TF.compute (TF.refKey x) "project"
+
+-- | @google_project_services@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/project_services.html terraform documentation>
+-- for more information.
+data ProjectServicesResource s = ProjectServicesResource'
+    { _disableOnDestroy :: TF.Attr s P.Bool
+    -- ^ @disable_on_destroy@ - (Optional)
+    --
+    , _services         :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @services@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+projectServicesResource
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @services@ - 'P.services'
+    -> P.Resource (ProjectServicesResource s)
+projectServicesResource _services =
+    TF.unsafeResource "google_project_services" P.defaultProvider TF.validator $
+        ProjectServicesResource'
+            { _disableOnDestroy = TF.value P.True
+            , _services = _services
+            }
+
+instance TF.IsObject (ProjectServicesResource s) where
+    toObject ProjectServicesResource'{..} = P.catMaybes
+        [ TF.assign "disable_on_destroy" <$> TF.attribute _disableOnDestroy
+        , TF.assign "services" <$> TF.attribute _services
+        ]
+
+instance TF.IsValid (ProjectServicesResource s) where
+    validator = P.mempty
+
+instance P.HasDisableOnDestroy (ProjectServicesResource s) (TF.Attr s P.Bool) where
+    disableOnDestroy =
+        P.lens (_disableOnDestroy :: ProjectServicesResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _disableOnDestroy = a } :: ProjectServicesResource s)
+
+instance P.HasServices (ProjectServicesResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    services =
+        P.lens (_services :: ProjectServicesResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _services = a } :: ProjectServicesResource s)
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectServicesResource s)) (TF.Attr s P.Text) where
+    computedProject x = TF.compute (TF.refKey x) "project"
+
+-- | @google_project_usage_export_bucket@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/project_usage_export_bucket.html terraform documentation>
+-- for more information.
+data ProjectUsageExportBucketResource s = ProjectUsageExportBucketResource'
+    { _bucketName :: TF.Attr s P.Text
+    -- ^ @bucket_name@ - (Required, Forces New)
+    --
+    , _prefix     :: TF.Attr s P.Text
+    -- ^ @prefix@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+projectUsageExportBucketResource
+    :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
+    -> P.Resource (ProjectUsageExportBucketResource s)
+projectUsageExportBucketResource _bucketName =
+    TF.unsafeResource "google_project_usage_export_bucket" P.defaultProvider TF.validator $
+        ProjectUsageExportBucketResource'
+            { _bucketName = _bucketName
+            , _prefix = TF.Nil
+            }
+
+instance TF.IsObject (ProjectUsageExportBucketResource s) where
+    toObject ProjectUsageExportBucketResource'{..} = P.catMaybes
+        [ TF.assign "bucket_name" <$> TF.attribute _bucketName
+        , TF.assign "prefix" <$> TF.attribute _prefix
+        ]
+
+instance TF.IsValid (ProjectUsageExportBucketResource s) where
+    validator = P.mempty
+
+instance P.HasBucketName (ProjectUsageExportBucketResource s) (TF.Attr s P.Text) where
+    bucketName =
+        P.lens (_bucketName :: ProjectUsageExportBucketResource s -> TF.Attr s P.Text)
+               (\s a -> s { _bucketName = a } :: ProjectUsageExportBucketResource s)
+
+instance P.HasPrefix (ProjectUsageExportBucketResource s) (TF.Attr s P.Text) where
+    prefix =
+        P.lens (_prefix :: ProjectUsageExportBucketResource s -> TF.Attr s P.Text)
+               (\s a -> s { _prefix = a } :: ProjectUsageExportBucketResource s)
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectUsageExportBucketResource s)) (TF.Attr s P.Text) where
+    computedProject x = TF.compute (TF.refKey x) "project"
+
+-- | @google_pubsub_subscription@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/pubsub_subscription.html terraform documentation>
+-- for more information.
+data PubsubSubscriptionResource s = PubsubSubscriptionResource'
+    { _name       :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _pushConfig :: TF.Attr s (PushConfigSetting s)
+    -- ^ @push_config@ - (Optional)
+    --
+    , _topic      :: TF.Attr s P.Text
+    -- ^ @topic@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+pubsubSubscriptionResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @topic@ - 'P.topic'
+    -> P.Resource (PubsubSubscriptionResource s)
+pubsubSubscriptionResource _name _topic =
+    TF.unsafeResource "google_pubsub_subscription" P.defaultProvider TF.validator $
+        PubsubSubscriptionResource'
+            { _name = _name
+            , _pushConfig = TF.Nil
+            , _topic = _topic
+            }
+
+instance TF.IsObject (PubsubSubscriptionResource s) where
+    toObject PubsubSubscriptionResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "push_config" <$> TF.attribute _pushConfig
+        , TF.assign "topic" <$> TF.attribute _topic
+        ]
+
+instance TF.IsValid (PubsubSubscriptionResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_pushConfig"
+                  (_pushConfig
+                      :: PubsubSubscriptionResource s -> TF.Attr s (PushConfigSetting s))
+                  TF.validator
+
+instance P.HasName (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: PubsubSubscriptionResource s)
+
+instance P.HasPushConfig (PubsubSubscriptionResource s) (TF.Attr s (PushConfigSetting s)) where
+    pushConfig =
+        P.lens (_pushConfig :: PubsubSubscriptionResource s -> TF.Attr s (PushConfigSetting s))
+               (\s a -> s { _pushConfig = a } :: PubsubSubscriptionResource s)
+
+instance P.HasTopic (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
+    topic =
+        P.lens (_topic :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _topic = a } :: PubsubSubscriptionResource s)
+
+instance s ~ s' => P.HasComputedAckDeadlineSeconds (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Int) where
+    computedAckDeadlineSeconds x = TF.compute (TF.refKey x) "ack_deadline_seconds"
+
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Text) where
+    computedPath x = TF.compute (TF.refKey x) "path"
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Text) where
+    computedProject x = TF.compute (TF.refKey x) "project"
+
+-- | @google_pubsub_subscription_iam_binding@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/pubsub_subscription_iam_binding.html terraform documentation>
+-- for more information.
+data PubsubSubscriptionIamBindingResource s = PubsubSubscriptionIamBindingResource'
+    { _members      :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @members@ - (Required)
+    --
+    , _role         :: TF.Attr s P.Text
+    -- ^ @role@ - (Required, Forces New)
+    --
+    , _subscription :: TF.Attr s P.Text
+    -- ^ @subscription@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+pubsubSubscriptionIamBindingResource
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
+    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    -> TF.Attr s P.Text -- ^ @subscription@ - 'P.subscription'
+    -> P.Resource (PubsubSubscriptionIamBindingResource s)
+pubsubSubscriptionIamBindingResource _members _role _subscription =
+    TF.unsafeResource "google_pubsub_subscription_iam_binding" P.defaultProvider TF.validator $
+        PubsubSubscriptionIamBindingResource'
+            { _members = _members
+            , _role = _role
+            , _subscription = _subscription
+            }
+
+instance TF.IsObject (PubsubSubscriptionIamBindingResource s) where
+    toObject PubsubSubscriptionIamBindingResource'{..} = P.catMaybes
+        [ TF.assign "members" <$> TF.attribute _members
+        , TF.assign "role" <$> TF.attribute _role
+        , TF.assign "subscription" <$> TF.attribute _subscription
+        ]
+
+instance TF.IsValid (PubsubSubscriptionIamBindingResource s) where
+    validator = P.mempty
+
+instance P.HasMembers (PubsubSubscriptionIamBindingResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    members =
+        P.lens (_members :: PubsubSubscriptionIamBindingResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _members = a } :: PubsubSubscriptionIamBindingResource s)
+
+instance P.HasRole (PubsubSubscriptionIamBindingResource s) (TF.Attr s P.Text) where
+    role =
+        P.lens (_role :: PubsubSubscriptionIamBindingResource s -> TF.Attr s P.Text)
+               (\s a -> s { _role = a } :: PubsubSubscriptionIamBindingResource s)
+
+instance P.HasSubscription (PubsubSubscriptionIamBindingResource s) (TF.Attr s P.Text) where
+    subscription =
+        P.lens (_subscription :: PubsubSubscriptionIamBindingResource s -> TF.Attr s P.Text)
+               (\s a -> s { _subscription = a } :: PubsubSubscriptionIamBindingResource s)
+
+instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubSubscriptionIamBindingResource s)) (TF.Attr s P.Text) where
+    computedEtag x = TF.compute (TF.refKey x) "etag"
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubSubscriptionIamBindingResource s)) (TF.Attr s P.Text) where
+    computedProject x = TF.compute (TF.refKey x) "project"
+
+-- | @google_pubsub_subscription_iam_member@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/google/r/pubsub_subscription_iam_member.html terraform documentation>
+-- for more information.
+data PubsubSubscriptionIamMemberResource s = PubsubSubscriptionIamMemberResource'
+    { _member       :: TF.Attr s P.Text
+    -- ^ @member@ - (Required, Forces New)
+    --
+    , _role         :: TF.Attr s P.Text
+    -- ^ @role@ - (Required, Forces New)
+    --
+    , _subscription :: TF.Attr s P.Text
+    -- ^ @subscription@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+pubsubSubscriptionIamMemberResource
+    :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
+    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    -> TF.Attr s P.Text -- ^ @subscription@ - 'P.subscription'
+    -> P.Resource (PubsubSubscriptionIamMemberResource s)
+pubsubSubscriptionIamMemberResource _member _role _subscription =
+    TF.unsafeResource "google_pubsub_subscription_iam_member" P.defaultProvider TF.validator $
+        PubsubSubscriptionIamMemberResource'
+            { _member = _member
+            , _role = _role
+            , _subscription = _subscription
+            }
+
+instance TF.IsObject (PubsubSubscriptionIamMemberResource s) where
+    toObject PubsubSubscriptionIamMemberResource'{..} = P.catMaybes
+        [ TF.assign "member" <$> TF.attribute _member
+        , TF.assign "role" <$> TF.attribute _role
+        , TF.assign "subscription" <$> TF.attribute _subscription
+        ]
+
+instance TF.IsValid (PubsubSubscriptionIamMemberResource s) where
+    validator = P.mempty
+
+instance P.HasMember (PubsubSubscriptionIamMemberResource s) (TF.Attr s P.Text) where
+    member =
+        P.lens (_member :: PubsubSubscriptionIamMemberResource s -> TF.Attr s P.Text)
+               (\s a -> s { _member = a } :: PubsubSubscriptionIamMemberResource s)
+
+instance P.HasRole (PubsubSubscriptionIamMemberResource s) (TF.Attr s P.Text) where
+    role =
+        P.lens (_role :: PubsubSubscriptionIamMemberResource s -> TF.Attr s P.Text)
+               (\s a -> s { _role = a } :: PubsubSubscriptionIamMemberResource s)
+
+instance P.HasSubscription (PubsubSubscriptionIamMemberResource s) (TF.Attr s P.Text) where
+    subscription =
+        P.lens (_subscription :: PubsubSubscriptionIamMemberResource s -> TF.Attr s P.Text)
+               (\s a -> s { _subscription = a } :: PubsubSubscriptionIamMemberResource s)
+
+instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubSubscriptionIamMemberResource s)) (TF.Attr s P.Text) where
+    computedEtag x = TF.compute (TF.refKey x) "etag"
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubSubscriptionIamMemberResource s)) (TF.Attr s P.Text) where
+    computedProject x = TF.compute (TF.refKey x) "project"

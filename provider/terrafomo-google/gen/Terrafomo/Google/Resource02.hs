@@ -18,88 +18,8 @@
 module Terrafomo.Google.Resource02
     (
     -- * Resource Datatypes
-    -- ** google_logging_organization_sink
-      LoggingOrganizationSinkResource (..)
-    , loggingOrganizationSinkResource
-
-    -- ** google_logging_project_exclusion
-    , LoggingProjectExclusionResource (..)
-    , loggingProjectExclusionResource
-
-    -- ** google_logging_project_sink
-    , LoggingProjectSinkResource (..)
-    , loggingProjectSinkResource
-
-    -- ** google_organization_iam_binding
-    , OrganizationIamBindingResource (..)
-    , organizationIamBindingResource
-
-    -- ** google_organization_iam_custom_role
-    , OrganizationIamCustomRoleResource (..)
-    , organizationIamCustomRoleResource
-
-    -- ** google_organization_iam_member
-    , OrganizationIamMemberResource (..)
-    , organizationIamMemberResource
-
-    -- ** google_organization_iam_policy
-    , OrganizationIamPolicyResource (..)
-    , organizationIamPolicyResource
-
-    -- ** google_organization_policy
-    , OrganizationPolicyResource (..)
-    , organizationPolicyResource
-
-    -- ** google_project
-    , ProjectResource (..)
-    , projectResource
-
-    -- ** google_project_iam_binding
-    , ProjectIamBindingResource (..)
-    , projectIamBindingResource
-
-    -- ** google_project_iam_custom_role
-    , ProjectIamCustomRoleResource (..)
-    , projectIamCustomRoleResource
-
-    -- ** google_project_iam_member
-    , ProjectIamMemberResource (..)
-    , projectIamMemberResource
-
-    -- ** google_project_iam_policy
-    , ProjectIamPolicyResource (..)
-    , projectIamPolicyResource
-
-    -- ** google_project_organization_policy
-    , ProjectOrganizationPolicyResource (..)
-    , projectOrganizationPolicyResource
-
-    -- ** google_project_service
-    , ProjectServiceResource (..)
-    , projectServiceResource
-
-    -- ** google_project_services
-    , ProjectServicesResource (..)
-    , projectServicesResource
-
-    -- ** google_project_usage_export_bucket
-    , ProjectUsageExportBucketResource (..)
-    , projectUsageExportBucketResource
-
-    -- ** google_pubsub_subscription
-    , PubsubSubscriptionResource (..)
-    , pubsubSubscriptionResource
-
-    -- ** google_pubsub_subscription_iam_binding
-    , PubsubSubscriptionIamBindingResource (..)
-    , pubsubSubscriptionIamBindingResource
-
-    -- ** google_pubsub_subscription_iam_member
-    , PubsubSubscriptionIamMemberResource (..)
-    , pubsubSubscriptionIamMemberResource
-
     -- ** google_pubsub_subscription_iam_policy
-    , PubsubSubscriptionIamPolicyResource (..)
+      PubsubSubscriptionIamPolicyResource (..)
     , pubsubSubscriptionIamPolicyResource
 
     -- ** google_pubsub_topic
@@ -246,10 +166,9 @@ import GHC.Base (($))
 
 import Terrafomo.Google.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
+import qualified Data.Map.Strict           as Map
 import qualified Data.Maybe                as P
 import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
@@ -265,1383 +184,6 @@ import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.Schema          as TF
 import qualified Terrafomo.Validator       as TF
 
--- | @google_logging_organization_sink@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/logging_organization_sink.html terraform documentation>
--- for more information.
-data LoggingOrganizationSinkResource s = LoggingOrganizationSinkResource'
-    { _destination     :: TF.Attr s P.Text
-    -- ^ @destination@ - (Required)
-    --
-    , _filter          :: TF.Attr s P.Text
-    -- ^ @filter@ - (Optional)
-    --
-    , _includeChildren :: TF.Attr s P.Bool
-    -- ^ @include_children@ - (Optional, Forces New)
-    --
-    , _name            :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    , _orgId           :: TF.Attr s P.Text
-    -- ^ @org_id@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-loggingOrganizationSinkResource
-    :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
-    -> P.Resource (LoggingOrganizationSinkResource s)
-loggingOrganizationSinkResource _destination _name _orgId =
-    TF.newResource "google_logging_organization_sink" TF.validator $
-        LoggingOrganizationSinkResource'
-            { _destination = _destination
-            , _filter = TF.Nil
-            , _includeChildren = TF.value P.False
-            , _name = _name
-            , _orgId = _orgId
-            }
-
-instance TF.IsObject (LoggingOrganizationSinkResource s) where
-    toObject LoggingOrganizationSinkResource'{..} = P.catMaybes
-        [ TF.assign "destination" <$> TF.attribute _destination
-        , TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "include_children" <$> TF.attribute _includeChildren
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "org_id" <$> TF.attribute _orgId
-        ]
-
-instance TF.IsValid (LoggingOrganizationSinkResource s) where
-    validator = P.mempty
-
-instance P.HasDestination (LoggingOrganizationSinkResource s) (TF.Attr s P.Text) where
-    destination =
-        P.lens (_destination :: LoggingOrganizationSinkResource s -> TF.Attr s P.Text)
-               (\s a -> s { _destination = a } :: LoggingOrganizationSinkResource s)
-
-instance P.HasFilter (LoggingOrganizationSinkResource s) (TF.Attr s P.Text) where
-    filter =
-        P.lens (_filter :: LoggingOrganizationSinkResource s -> TF.Attr s P.Text)
-               (\s a -> s { _filter = a } :: LoggingOrganizationSinkResource s)
-
-instance P.HasIncludeChildren (LoggingOrganizationSinkResource s) (TF.Attr s P.Bool) where
-    includeChildren =
-        P.lens (_includeChildren :: LoggingOrganizationSinkResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _includeChildren = a } :: LoggingOrganizationSinkResource s)
-
-instance P.HasName (LoggingOrganizationSinkResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: LoggingOrganizationSinkResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: LoggingOrganizationSinkResource s)
-
-instance P.HasOrgId (LoggingOrganizationSinkResource s) (TF.Attr s P.Text) where
-    orgId =
-        P.lens (_orgId :: LoggingOrganizationSinkResource s -> TF.Attr s P.Text)
-               (\s a -> s { _orgId = a } :: LoggingOrganizationSinkResource s)
-
-instance s ~ s' => P.HasComputedWriterIdentity (TF.Ref s' (LoggingOrganizationSinkResource s)) (TF.Attr s P.Text) where
-    computedWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
-
--- | @google_logging_project_exclusion@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/logging_project_exclusion.html terraform documentation>
--- for more information.
-data LoggingProjectExclusionResource s = LoggingProjectExclusionResource'
-    { _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
-    --
-    , _disabled    :: TF.Attr s P.Bool
-    -- ^ @disabled@ - (Optional)
-    --
-    , _filter      :: TF.Attr s P.Text
-    -- ^ @filter@ - (Required)
-    --
-    , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-loggingProjectExclusionResource
-    :: TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> P.Resource (LoggingProjectExclusionResource s)
-loggingProjectExclusionResource _filter _name =
-    TF.newResource "google_logging_project_exclusion" TF.validator $
-        LoggingProjectExclusionResource'
-            { _description = TF.Nil
-            , _disabled = TF.Nil
-            , _filter = _filter
-            , _name = _name
-            }
-
-instance TF.IsObject (LoggingProjectExclusionResource s) where
-    toObject LoggingProjectExclusionResource'{..} = P.catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "disabled" <$> TF.attribute _disabled
-        , TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance TF.IsValid (LoggingProjectExclusionResource s) where
-    validator = P.mempty
-
-instance P.HasDescription (LoggingProjectExclusionResource s) (TF.Attr s P.Text) where
-    description =
-        P.lens (_description :: LoggingProjectExclusionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: LoggingProjectExclusionResource s)
-
-instance P.HasDisabled (LoggingProjectExclusionResource s) (TF.Attr s P.Bool) where
-    disabled =
-        P.lens (_disabled :: LoggingProjectExclusionResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _disabled = a } :: LoggingProjectExclusionResource s)
-
-instance P.HasFilter (LoggingProjectExclusionResource s) (TF.Attr s P.Text) where
-    filter =
-        P.lens (_filter :: LoggingProjectExclusionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _filter = a } :: LoggingProjectExclusionResource s)
-
-instance P.HasName (LoggingProjectExclusionResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: LoggingProjectExclusionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: LoggingProjectExclusionResource s)
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (LoggingProjectExclusionResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
-
--- | @google_logging_project_sink@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/logging_project_sink.html terraform documentation>
--- for more information.
-data LoggingProjectSinkResource s = LoggingProjectSinkResource'
-    { _destination          :: TF.Attr s P.Text
-    -- ^ @destination@ - (Required)
-    --
-    , _filter               :: TF.Attr s P.Text
-    -- ^ @filter@ - (Optional)
-    --
-    , _name                 :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    , _uniqueWriterIdentity :: TF.Attr s P.Bool
-    -- ^ @unique_writer_identity@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-loggingProjectSinkResource
-    :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> P.Resource (LoggingProjectSinkResource s)
-loggingProjectSinkResource _destination _name =
-    TF.newResource "google_logging_project_sink" TF.validator $
-        LoggingProjectSinkResource'
-            { _destination = _destination
-            , _filter = TF.Nil
-            , _name = _name
-            , _uniqueWriterIdentity = TF.value P.False
-            }
-
-instance TF.IsObject (LoggingProjectSinkResource s) where
-    toObject LoggingProjectSinkResource'{..} = P.catMaybes
-        [ TF.assign "destination" <$> TF.attribute _destination
-        , TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "unique_writer_identity" <$> TF.attribute _uniqueWriterIdentity
-        ]
-
-instance TF.IsValid (LoggingProjectSinkResource s) where
-    validator = P.mempty
-
-instance P.HasDestination (LoggingProjectSinkResource s) (TF.Attr s P.Text) where
-    destination =
-        P.lens (_destination :: LoggingProjectSinkResource s -> TF.Attr s P.Text)
-               (\s a -> s { _destination = a } :: LoggingProjectSinkResource s)
-
-instance P.HasFilter (LoggingProjectSinkResource s) (TF.Attr s P.Text) where
-    filter =
-        P.lens (_filter :: LoggingProjectSinkResource s -> TF.Attr s P.Text)
-               (\s a -> s { _filter = a } :: LoggingProjectSinkResource s)
-
-instance P.HasName (LoggingProjectSinkResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: LoggingProjectSinkResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: LoggingProjectSinkResource s)
-
-instance P.HasUniqueWriterIdentity (LoggingProjectSinkResource s) (TF.Attr s P.Bool) where
-    uniqueWriterIdentity =
-        P.lens (_uniqueWriterIdentity :: LoggingProjectSinkResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _uniqueWriterIdentity = a } :: LoggingProjectSinkResource s)
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (LoggingProjectSinkResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
-
-instance s ~ s' => P.HasComputedWriterIdentity (TF.Ref s' (LoggingProjectSinkResource s)) (TF.Attr s P.Text) where
-    computedWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
-
--- | @google_organization_iam_binding@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/organization_iam_binding.html terraform documentation>
--- for more information.
-data OrganizationIamBindingResource s = OrganizationIamBindingResource'
-    { _members :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @members@ - (Required)
-    --
-    , _orgId   :: TF.Attr s P.Text
-    -- ^ @org_id@ - (Required, Forces New)
-    --
-    , _role    :: TF.Attr s P.Text
-    -- ^ @role@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-organizationIamBindingResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
-    -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> P.Resource (OrganizationIamBindingResource s)
-organizationIamBindingResource _members _orgId _role =
-    TF.newResource "google_organization_iam_binding" TF.validator $
-        OrganizationIamBindingResource'
-            { _members = _members
-            , _orgId = _orgId
-            , _role = _role
-            }
-
-instance TF.IsObject (OrganizationIamBindingResource s) where
-    toObject OrganizationIamBindingResource'{..} = P.catMaybes
-        [ TF.assign "members" <$> TF.attribute _members
-        , TF.assign "org_id" <$> TF.attribute _orgId
-        , TF.assign "role" <$> TF.attribute _role
-        ]
-
-instance TF.IsValid (OrganizationIamBindingResource s) where
-    validator = P.mempty
-
-instance P.HasMembers (OrganizationIamBindingResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    members =
-        P.lens (_members :: OrganizationIamBindingResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _members = a } :: OrganizationIamBindingResource s)
-
-instance P.HasOrgId (OrganizationIamBindingResource s) (TF.Attr s P.Text) where
-    orgId =
-        P.lens (_orgId :: OrganizationIamBindingResource s -> TF.Attr s P.Text)
-               (\s a -> s { _orgId = a } :: OrganizationIamBindingResource s)
-
-instance P.HasRole (OrganizationIamBindingResource s) (TF.Attr s P.Text) where
-    role =
-        P.lens (_role :: OrganizationIamBindingResource s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a } :: OrganizationIamBindingResource s)
-
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
-
--- | @google_organization_iam_custom_role@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/organization_iam_custom_role.html terraform documentation>
--- for more information.
-data OrganizationIamCustomRoleResource s = OrganizationIamCustomRoleResource'
-    { _deleted     :: TF.Attr s P.Bool
-    -- ^ @deleted@ - (Optional)
-    --
-    , _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
-    --
-    , _orgId       :: TF.Attr s P.Text
-    -- ^ @org_id@ - (Required, Forces New)
-    --
-    , _permissions :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
-    -- ^ @permissions@ - (Required)
-    --
-    , _roleId      :: TF.Attr s P.Text
-    -- ^ @role_id@ - (Required, Forces New)
-    --
-    , _stage       :: TF.Attr s P.Text
-    -- ^ @stage@ - (Optional)
-    --
-    , _title       :: TF.Attr s P.Text
-    -- ^ @title@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-organizationIamCustomRoleResource
-    :: TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ - 'P.permissions'
-    -> TF.Attr s P.Text -- ^ @role_id@ - 'P.roleId'
-    -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
-    -> P.Resource (OrganizationIamCustomRoleResource s)
-organizationIamCustomRoleResource _orgId _permissions _roleId _title =
-    TF.newResource "google_organization_iam_custom_role" TF.validator $
-        OrganizationIamCustomRoleResource'
-            { _deleted = TF.value P.False
-            , _description = TF.Nil
-            , _orgId = _orgId
-            , _permissions = _permissions
-            , _roleId = _roleId
-            , _stage = TF.value "GA"
-            , _title = _title
-            }
-
-instance TF.IsObject (OrganizationIamCustomRoleResource s) where
-    toObject OrganizationIamCustomRoleResource'{..} = P.catMaybes
-        [ TF.assign "deleted" <$> TF.attribute _deleted
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "org_id" <$> TF.attribute _orgId
-        , TF.assign "permissions" <$> TF.attribute _permissions
-        , TF.assign "role_id" <$> TF.attribute _roleId
-        , TF.assign "stage" <$> TF.attribute _stage
-        , TF.assign "title" <$> TF.attribute _title
-        ]
-
-instance TF.IsValid (OrganizationIamCustomRoleResource s) where
-    validator = P.mempty
-
-instance P.HasDeleted (OrganizationIamCustomRoleResource s) (TF.Attr s P.Bool) where
-    deleted =
-        P.lens (_deleted :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _deleted = a } :: OrganizationIamCustomRoleResource s)
-
-instance P.HasDescription (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) where
-    description =
-        P.lens (_description :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: OrganizationIamCustomRoleResource s)
-
-instance P.HasOrgId (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) where
-    orgId =
-        P.lens (_orgId :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _orgId = a } :: OrganizationIamCustomRoleResource s)
-
-instance P.HasPermissions (OrganizationIamCustomRoleResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
-    permissions =
-        P.lens (_permissions :: OrganizationIamCustomRoleResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
-               (\s a -> s { _permissions = a } :: OrganizationIamCustomRoleResource s)
-
-instance P.HasRoleId (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) where
-    roleId =
-        P.lens (_roleId :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _roleId = a } :: OrganizationIamCustomRoleResource s)
-
-instance P.HasStage (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) where
-    stage =
-        P.lens (_stage :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _stage = a } :: OrganizationIamCustomRoleResource s)
-
-instance P.HasTitle (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) where
-    title =
-        P.lens (_title :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _title = a } :: OrganizationIamCustomRoleResource s)
-
--- | @google_organization_iam_member@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/organization_iam_member.html terraform documentation>
--- for more information.
-data OrganizationIamMemberResource s = OrganizationIamMemberResource'
-    { _member :: TF.Attr s P.Text
-    -- ^ @member@ - (Required, Forces New)
-    --
-    , _orgId  :: TF.Attr s P.Text
-    -- ^ @org_id@ - (Required, Forces New)
-    --
-    , _role   :: TF.Attr s P.Text
-    -- ^ @role@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-organizationIamMemberResource
-    :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
-    -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> P.Resource (OrganizationIamMemberResource s)
-organizationIamMemberResource _member _orgId _role =
-    TF.newResource "google_organization_iam_member" TF.validator $
-        OrganizationIamMemberResource'
-            { _member = _member
-            , _orgId = _orgId
-            , _role = _role
-            }
-
-instance TF.IsObject (OrganizationIamMemberResource s) where
-    toObject OrganizationIamMemberResource'{..} = P.catMaybes
-        [ TF.assign "member" <$> TF.attribute _member
-        , TF.assign "org_id" <$> TF.attribute _orgId
-        , TF.assign "role" <$> TF.attribute _role
-        ]
-
-instance TF.IsValid (OrganizationIamMemberResource s) where
-    validator = P.mempty
-
-instance P.HasMember (OrganizationIamMemberResource s) (TF.Attr s P.Text) where
-    member =
-        P.lens (_member :: OrganizationIamMemberResource s -> TF.Attr s P.Text)
-               (\s a -> s { _member = a } :: OrganizationIamMemberResource s)
-
-instance P.HasOrgId (OrganizationIamMemberResource s) (TF.Attr s P.Text) where
-    orgId =
-        P.lens (_orgId :: OrganizationIamMemberResource s -> TF.Attr s P.Text)
-               (\s a -> s { _orgId = a } :: OrganizationIamMemberResource s)
-
-instance P.HasRole (OrganizationIamMemberResource s) (TF.Attr s P.Text) where
-    role =
-        P.lens (_role :: OrganizationIamMemberResource s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a } :: OrganizationIamMemberResource s)
-
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
-
--- | @google_organization_iam_policy@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/organization_iam_policy.html terraform documentation>
--- for more information.
-data OrganizationIamPolicyResource s = OrganizationIamPolicyResource'
-    { _orgId      :: TF.Attr s P.Text
-    -- ^ @org_id@ - (Required, Forces New)
-    --
-    , _policyData :: TF.Attr s P.Text
-    -- ^ @policy_data@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-organizationIamPolicyResource
-    :: TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
-    -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
-    -> P.Resource (OrganizationIamPolicyResource s)
-organizationIamPolicyResource _orgId _policyData =
-    TF.newResource "google_organization_iam_policy" TF.validator $
-        OrganizationIamPolicyResource'
-            { _orgId = _orgId
-            , _policyData = _policyData
-            }
-
-instance TF.IsObject (OrganizationIamPolicyResource s) where
-    toObject OrganizationIamPolicyResource'{..} = P.catMaybes
-        [ TF.assign "org_id" <$> TF.attribute _orgId
-        , TF.assign "policy_data" <$> TF.attribute _policyData
-        ]
-
-instance TF.IsValid (OrganizationIamPolicyResource s) where
-    validator = P.mempty
-
-instance P.HasOrgId (OrganizationIamPolicyResource s) (TF.Attr s P.Text) where
-    orgId =
-        P.lens (_orgId :: OrganizationIamPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _orgId = a } :: OrganizationIamPolicyResource s)
-
-instance P.HasPolicyData (OrganizationIamPolicyResource s) (TF.Attr s P.Text) where
-    policyData =
-        P.lens (_policyData :: OrganizationIamPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _policyData = a } :: OrganizationIamPolicyResource s)
-
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
-
--- | @google_organization_policy@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/organization_policy.html terraform documentation>
--- for more information.
-data OrganizationPolicyResource s = OrganizationPolicyResource'
-    { _booleanPolicy :: TF.Attr s (OrganizationPolicyBooleanPolicy s)
-    -- ^ @boolean_policy@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'listPolicy'
-    -- * 'restorePolicy'
-    , _constraint    :: TF.Attr s P.Text
-    -- ^ @constraint@ - (Required, Forces New)
-    --
-    , _listPolicy    :: TF.Attr s (OrganizationPolicyListPolicy s)
-    -- ^ @list_policy@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'restorePolicy'
-    -- * 'booleanPolicy'
-    , _orgId         :: TF.Attr s P.Text
-    -- ^ @org_id@ - (Required, Forces New)
-    --
-    , _restorePolicy :: TF.Attr s (OrganizationPolicyRestorePolicy s)
-    -- ^ @restore_policy@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'listPolicy'
-    -- * 'booleanPolicy'
-    } deriving (P.Show, P.Eq, P.Generic)
-
-organizationPolicyResource
-    :: TF.Attr s P.Text -- ^ @constraint@ - 'P.constraint'
-    -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
-    -> P.Resource (OrganizationPolicyResource s)
-organizationPolicyResource _constraint _orgId =
-    TF.newResource "google_organization_policy" TF.validator $
-        OrganizationPolicyResource'
-            { _booleanPolicy = TF.Nil
-            , _constraint = _constraint
-            , _listPolicy = TF.Nil
-            , _orgId = _orgId
-            , _restorePolicy = TF.Nil
-            }
-
-instance TF.IsObject (OrganizationPolicyResource s) where
-    toObject OrganizationPolicyResource'{..} = P.catMaybes
-        [ TF.assign "boolean_policy" <$> TF.attribute _booleanPolicy
-        , TF.assign "constraint" <$> TF.attribute _constraint
-        , TF.assign "list_policy" <$> TF.attribute _listPolicy
-        , TF.assign "org_id" <$> TF.attribute _orgId
-        , TF.assign "restore_policy" <$> TF.attribute _restorePolicy
-        ]
-
-instance TF.IsValid (OrganizationPolicyResource s) where
-    validator = TF.fieldsValidator (\OrganizationPolicyResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_booleanPolicy P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_booleanPolicy",
-                            [ "_listPolicy"                            , "_restorePolicy"
-                            ])
-        , if (_listPolicy P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_listPolicy",
-                            [ "_restorePolicy"                            , "_booleanPolicy"
-                            ])
-        , if (_restorePolicy P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_restorePolicy",
-                            [ "_listPolicy"                            , "_booleanPolicy"
-                            ])
-        ])
-           P.<> TF.settingsValidator "_booleanPolicy"
-                  (_booleanPolicy
-                      :: OrganizationPolicyResource s -> TF.Attr s (OrganizationPolicyBooleanPolicy s))
-                  TF.validator
-           P.<> TF.settingsValidator "_listPolicy"
-                  (_listPolicy
-                      :: OrganizationPolicyResource s -> TF.Attr s (OrganizationPolicyListPolicy s))
-                  TF.validator
-           P.<> TF.settingsValidator "_restorePolicy"
-                  (_restorePolicy
-                      :: OrganizationPolicyResource s -> TF.Attr s (OrganizationPolicyRestorePolicy s))
-                  TF.validator
-
-instance P.HasBooleanPolicy (OrganizationPolicyResource s) (TF.Attr s (OrganizationPolicyBooleanPolicy s)) where
-    booleanPolicy =
-        P.lens (_booleanPolicy :: OrganizationPolicyResource s -> TF.Attr s (OrganizationPolicyBooleanPolicy s))
-               (\s a -> s { _booleanPolicy = a } :: OrganizationPolicyResource s)
-
-instance P.HasConstraint (OrganizationPolicyResource s) (TF.Attr s P.Text) where
-    constraint =
-        P.lens (_constraint :: OrganizationPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _constraint = a } :: OrganizationPolicyResource s)
-
-instance P.HasListPolicy (OrganizationPolicyResource s) (TF.Attr s (OrganizationPolicyListPolicy s)) where
-    listPolicy =
-        P.lens (_listPolicy :: OrganizationPolicyResource s -> TF.Attr s (OrganizationPolicyListPolicy s))
-               (\s a -> s { _listPolicy = a } :: OrganizationPolicyResource s)
-
-instance P.HasOrgId (OrganizationPolicyResource s) (TF.Attr s P.Text) where
-    orgId =
-        P.lens (_orgId :: OrganizationPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _orgId = a } :: OrganizationPolicyResource s)
-
-instance P.HasRestorePolicy (OrganizationPolicyResource s) (TF.Attr s (OrganizationPolicyRestorePolicy s)) where
-    restorePolicy =
-        P.lens (_restorePolicy :: OrganizationPolicyResource s -> TF.Attr s (OrganizationPolicyRestorePolicy s))
-               (\s a -> s { _restorePolicy = a } :: OrganizationPolicyResource s)
-
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
-
-instance s ~ s' => P.HasComputedUpdateTime (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedUpdateTime x = TF.compute (TF.refKey x) "update_time"
-
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Integer) where
-    computedVersion x = TF.compute (TF.refKey x) "version"
-
--- | @google_project@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/project.html terraform documentation>
--- for more information.
-data ProjectResource s = ProjectResource'
-    { _appEngine         :: TF.Attr s (ProjectAppEngine s)
-    -- ^ @app_engine@ - (Optional)
-    --
-    , _autoCreateNetwork :: TF.Attr s P.Bool
-    -- ^ @auto_create_network@ - (Optional)
-    --
-    , _billingAccount    :: TF.Attr s P.Text
-    -- ^ @billing_account@ - (Optional)
-    --
-    , _labels            :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @labels@ - (Optional)
-    --
-    , _name              :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _projectId         :: TF.Attr s P.Text
-    -- ^ @project_id@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-projectResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> P.Resource (ProjectResource s)
-projectResource _name _projectId =
-    TF.newResource "google_project" TF.validator $
-        ProjectResource'
-            { _appEngine = TF.Nil
-            , _autoCreateNetwork = TF.value P.True
-            , _billingAccount = TF.Nil
-            , _labels = TF.Nil
-            , _name = _name
-            , _projectId = _projectId
-            }
-
-instance TF.IsObject (ProjectResource s) where
-    toObject ProjectResource'{..} = P.catMaybes
-        [ TF.assign "app_engine" <$> TF.attribute _appEngine
-        , TF.assign "auto_create_network" <$> TF.attribute _autoCreateNetwork
-        , TF.assign "billing_account" <$> TF.attribute _billingAccount
-        , TF.assign "labels" <$> TF.attribute _labels
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project_id" <$> TF.attribute _projectId
-        ]
-
-instance TF.IsValid (ProjectResource s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_appEngine"
-                  (_appEngine
-                      :: ProjectResource s -> TF.Attr s (ProjectAppEngine s))
-                  TF.validator
-
-instance P.HasAppEngine (ProjectResource s) (TF.Attr s (ProjectAppEngine s)) where
-    appEngine =
-        P.lens (_appEngine :: ProjectResource s -> TF.Attr s (ProjectAppEngine s))
-               (\s a -> s { _appEngine = a } :: ProjectResource s)
-
-instance P.HasAutoCreateNetwork (ProjectResource s) (TF.Attr s P.Bool) where
-    autoCreateNetwork =
-        P.lens (_autoCreateNetwork :: ProjectResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoCreateNetwork = a } :: ProjectResource s)
-
-instance P.HasBillingAccount (ProjectResource s) (TF.Attr s P.Text) where
-    billingAccount =
-        P.lens (_billingAccount :: ProjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _billingAccount = a } :: ProjectResource s)
-
-instance P.HasLabels (ProjectResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    labels =
-        P.lens (_labels :: ProjectResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _labels = a } :: ProjectResource s)
-
-instance P.HasName (ProjectResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: ProjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ProjectResource s)
-
-instance P.HasProjectId (ProjectResource s) (TF.Attr s P.Text) where
-    projectId =
-        P.lens (_projectId :: ProjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _projectId = a } :: ProjectResource s)
-
-instance s ~ s' => P.HasComputedFolderId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedFolderId x = TF.compute (TF.refKey x) "folder_id"
-
-instance s ~ s' => P.HasComputedNumber (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedNumber x = TF.compute (TF.refKey x) "number"
-
-instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedOrgId x = TF.compute (TF.refKey x) "org_id"
-
-instance s ~ s' => P.HasComputedPolicyData (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedPolicyData x = TF.compute (TF.refKey x) "policy_data"
-
-instance s ~ s' => P.HasComputedPolicyEtag (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedPolicyEtag x = TF.compute (TF.refKey x) "policy_etag"
-
-instance s ~ s' => P.HasComputedSkipDelete (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Bool) where
-    computedSkipDelete x = TF.compute (TF.refKey x) "skip_delete"
-
--- | @google_project_iam_binding@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/project_iam_binding.html terraform documentation>
--- for more information.
-data ProjectIamBindingResource s = ProjectIamBindingResource'
-    { _members :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @members@ - (Required)
-    --
-    , _project :: TF.Attr s P.Text
-    -- ^ @project@ - (Optional, Forces New)
-    --
-    , _role    :: TF.Attr s P.Text
-    -- ^ @role@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-projectIamBindingResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> P.Resource (ProjectIamBindingResource s)
-projectIamBindingResource _members _role =
-    TF.newResource "google_project_iam_binding" TF.validator $
-        ProjectIamBindingResource'
-            { _members = _members
-            , _project = TF.Nil
-            , _role = _role
-            }
-
-instance TF.IsObject (ProjectIamBindingResource s) where
-    toObject ProjectIamBindingResource'{..} = P.catMaybes
-        [ TF.assign "members" <$> TF.attribute _members
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "role" <$> TF.attribute _role
-        ]
-
-instance TF.IsValid (ProjectIamBindingResource s) where
-    validator = P.mempty
-
-instance P.HasMembers (ProjectIamBindingResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    members =
-        P.lens (_members :: ProjectIamBindingResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _members = a } :: ProjectIamBindingResource s)
-
-instance P.HasProject (ProjectIamBindingResource s) (TF.Attr s P.Text) where
-    project =
-        P.lens (_project :: ProjectIamBindingResource s -> TF.Attr s P.Text)
-               (\s a -> s { _project = a } :: ProjectIamBindingResource s)
-
-instance P.HasRole (ProjectIamBindingResource s) (TF.Attr s P.Text) where
-    role =
-        P.lens (_role :: ProjectIamBindingResource s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a } :: ProjectIamBindingResource s)
-
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
-
--- | @google_project_iam_custom_role@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/project_iam_custom_role.html terraform documentation>
--- for more information.
-data ProjectIamCustomRoleResource s = ProjectIamCustomRoleResource'
-    { _deleted     :: TF.Attr s P.Bool
-    -- ^ @deleted@ - (Optional)
-    --
-    , _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
-    --
-    , _permissions :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
-    -- ^ @permissions@ - (Required)
-    --
-    , _roleId      :: TF.Attr s P.Text
-    -- ^ @role_id@ - (Required, Forces New)
-    --
-    , _stage       :: TF.Attr s P.Text
-    -- ^ @stage@ - (Optional)
-    --
-    , _title       :: TF.Attr s P.Text
-    -- ^ @title@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-projectIamCustomRoleResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ - 'P.permissions'
-    -> TF.Attr s P.Text -- ^ @role_id@ - 'P.roleId'
-    -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
-    -> P.Resource (ProjectIamCustomRoleResource s)
-projectIamCustomRoleResource _permissions _roleId _title =
-    TF.newResource "google_project_iam_custom_role" TF.validator $
-        ProjectIamCustomRoleResource'
-            { _deleted = TF.value P.False
-            , _description = TF.Nil
-            , _permissions = _permissions
-            , _roleId = _roleId
-            , _stage = TF.value "GA"
-            , _title = _title
-            }
-
-instance TF.IsObject (ProjectIamCustomRoleResource s) where
-    toObject ProjectIamCustomRoleResource'{..} = P.catMaybes
-        [ TF.assign "deleted" <$> TF.attribute _deleted
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "permissions" <$> TF.attribute _permissions
-        , TF.assign "role_id" <$> TF.attribute _roleId
-        , TF.assign "stage" <$> TF.attribute _stage
-        , TF.assign "title" <$> TF.attribute _title
-        ]
-
-instance TF.IsValid (ProjectIamCustomRoleResource s) where
-    validator = P.mempty
-
-instance P.HasDeleted (ProjectIamCustomRoleResource s) (TF.Attr s P.Bool) where
-    deleted =
-        P.lens (_deleted :: ProjectIamCustomRoleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _deleted = a } :: ProjectIamCustomRoleResource s)
-
-instance P.HasDescription (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
-    description =
-        P.lens (_description :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: ProjectIamCustomRoleResource s)
-
-instance P.HasPermissions (ProjectIamCustomRoleResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
-    permissions =
-        P.lens (_permissions :: ProjectIamCustomRoleResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
-               (\s a -> s { _permissions = a } :: ProjectIamCustomRoleResource s)
-
-instance P.HasRoleId (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
-    roleId =
-        P.lens (_roleId :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _roleId = a } :: ProjectIamCustomRoleResource s)
-
-instance P.HasStage (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
-    stage =
-        P.lens (_stage :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _stage = a } :: ProjectIamCustomRoleResource s)
-
-instance P.HasTitle (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
-    title =
-        P.lens (_title :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _title = a } :: ProjectIamCustomRoleResource s)
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectIamCustomRoleResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
-
--- | @google_project_iam_member@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/project_iam_member.html terraform documentation>
--- for more information.
-data ProjectIamMemberResource s = ProjectIamMemberResource'
-    { _member  :: TF.Attr s P.Text
-    -- ^ @member@ - (Required, Forces New)
-    --
-    , _project :: TF.Attr s P.Text
-    -- ^ @project@ - (Optional, Forces New)
-    --
-    , _role    :: TF.Attr s P.Text
-    -- ^ @role@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-projectIamMemberResource
-    :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> P.Resource (ProjectIamMemberResource s)
-projectIamMemberResource _member _role =
-    TF.newResource "google_project_iam_member" TF.validator $
-        ProjectIamMemberResource'
-            { _member = _member
-            , _project = TF.Nil
-            , _role = _role
-            }
-
-instance TF.IsObject (ProjectIamMemberResource s) where
-    toObject ProjectIamMemberResource'{..} = P.catMaybes
-        [ TF.assign "member" <$> TF.attribute _member
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "role" <$> TF.attribute _role
-        ]
-
-instance TF.IsValid (ProjectIamMemberResource s) where
-    validator = P.mempty
-
-instance P.HasMember (ProjectIamMemberResource s) (TF.Attr s P.Text) where
-    member =
-        P.lens (_member :: ProjectIamMemberResource s -> TF.Attr s P.Text)
-               (\s a -> s { _member = a } :: ProjectIamMemberResource s)
-
-instance P.HasProject (ProjectIamMemberResource s) (TF.Attr s P.Text) where
-    project =
-        P.lens (_project :: ProjectIamMemberResource s -> TF.Attr s P.Text)
-               (\s a -> s { _project = a } :: ProjectIamMemberResource s)
-
-instance P.HasRole (ProjectIamMemberResource s) (TF.Attr s P.Text) where
-    role =
-        P.lens (_role :: ProjectIamMemberResource s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a } :: ProjectIamMemberResource s)
-
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
-
--- | @google_project_iam_policy@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/project_iam_policy.html terraform documentation>
--- for more information.
-data ProjectIamPolicyResource s = ProjectIamPolicyResource'
-    { _policyData :: TF.Attr s P.Text
-    -- ^ @policy_data@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-projectIamPolicyResource
-    :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
-    -> P.Resource (ProjectIamPolicyResource s)
-projectIamPolicyResource _policyData =
-    TF.newResource "google_project_iam_policy" TF.validator $
-        ProjectIamPolicyResource'
-            { _policyData = _policyData
-            }
-
-instance TF.IsObject (ProjectIamPolicyResource s) where
-    toObject ProjectIamPolicyResource'{..} = P.catMaybes
-        [ TF.assign "policy_data" <$> TF.attribute _policyData
-        ]
-
-instance TF.IsValid (ProjectIamPolicyResource s) where
-    validator = P.mempty
-
-instance P.HasPolicyData (ProjectIamPolicyResource s) (TF.Attr s P.Text) where
-    policyData =
-        P.lens (_policyData :: ProjectIamPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _policyData = a } :: ProjectIamPolicyResource s)
-
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
-
-instance s ~ s' => P.HasComputedRestorePolicy (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedRestorePolicy x = TF.compute (TF.refKey x) "restore_policy"
-
--- | @google_project_organization_policy@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/project_organization_policy.html terraform documentation>
--- for more information.
-data ProjectOrganizationPolicyResource s = ProjectOrganizationPolicyResource'
-    { _booleanPolicy :: TF.Attr s (ProjectOrganizationPolicyBooleanPolicy s)
-    -- ^ @boolean_policy@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'listPolicy'
-    -- * 'restorePolicy'
-    , _constraint    :: TF.Attr s P.Text
-    -- ^ @constraint@ - (Required, Forces New)
-    --
-    , _listPolicy    :: TF.Attr s (ProjectOrganizationPolicyListPolicy s)
-    -- ^ @list_policy@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'restorePolicy'
-    -- * 'booleanPolicy'
-    , _project       :: TF.Attr s P.Text
-    -- ^ @project@ - (Required, Forces New)
-    --
-    , _restorePolicy :: TF.Attr s (ProjectOrganizationPolicyRestorePolicy s)
-    -- ^ @restore_policy@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'listPolicy'
-    -- * 'booleanPolicy'
-    } deriving (P.Show, P.Eq, P.Generic)
-
-projectOrganizationPolicyResource
-    :: TF.Attr s P.Text -- ^ @constraint@ - 'P.constraint'
-    -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
-    -> P.Resource (ProjectOrganizationPolicyResource s)
-projectOrganizationPolicyResource _constraint _project =
-    TF.newResource "google_project_organization_policy" TF.validator $
-        ProjectOrganizationPolicyResource'
-            { _booleanPolicy = TF.Nil
-            , _constraint = _constraint
-            , _listPolicy = TF.Nil
-            , _project = _project
-            , _restorePolicy = TF.Nil
-            }
-
-instance TF.IsObject (ProjectOrganizationPolicyResource s) where
-    toObject ProjectOrganizationPolicyResource'{..} = P.catMaybes
-        [ TF.assign "boolean_policy" <$> TF.attribute _booleanPolicy
-        , TF.assign "constraint" <$> TF.attribute _constraint
-        , TF.assign "list_policy" <$> TF.attribute _listPolicy
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "restore_policy" <$> TF.attribute _restorePolicy
-        ]
-
-instance TF.IsValid (ProjectOrganizationPolicyResource s) where
-    validator = TF.fieldsValidator (\ProjectOrganizationPolicyResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_booleanPolicy P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_booleanPolicy",
-                            [ "_listPolicy"                            , "_restorePolicy"
-                            ])
-        , if (_listPolicy P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_listPolicy",
-                            [ "_restorePolicy"                            , "_booleanPolicy"
-                            ])
-        , if (_restorePolicy P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_restorePolicy",
-                            [ "_listPolicy"                            , "_booleanPolicy"
-                            ])
-        ])
-           P.<> TF.settingsValidator "_booleanPolicy"
-                  (_booleanPolicy
-                      :: ProjectOrganizationPolicyResource s -> TF.Attr s (ProjectOrganizationPolicyBooleanPolicy s))
-                  TF.validator
-           P.<> TF.settingsValidator "_listPolicy"
-                  (_listPolicy
-                      :: ProjectOrganizationPolicyResource s -> TF.Attr s (ProjectOrganizationPolicyListPolicy s))
-                  TF.validator
-           P.<> TF.settingsValidator "_restorePolicy"
-                  (_restorePolicy
-                      :: ProjectOrganizationPolicyResource s -> TF.Attr s (ProjectOrganizationPolicyRestorePolicy s))
-                  TF.validator
-
-instance P.HasBooleanPolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (ProjectOrganizationPolicyBooleanPolicy s)) where
-    booleanPolicy =
-        P.lens (_booleanPolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (ProjectOrganizationPolicyBooleanPolicy s))
-               (\s a -> s { _booleanPolicy = a } :: ProjectOrganizationPolicyResource s)
-
-instance P.HasConstraint (ProjectOrganizationPolicyResource s) (TF.Attr s P.Text) where
-    constraint =
-        P.lens (_constraint :: ProjectOrganizationPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _constraint = a } :: ProjectOrganizationPolicyResource s)
-
-instance P.HasListPolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (ProjectOrganizationPolicyListPolicy s)) where
-    listPolicy =
-        P.lens (_listPolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (ProjectOrganizationPolicyListPolicy s))
-               (\s a -> s { _listPolicy = a } :: ProjectOrganizationPolicyResource s)
-
-instance P.HasProject (ProjectOrganizationPolicyResource s) (TF.Attr s P.Text) where
-    project =
-        P.lens (_project :: ProjectOrganizationPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _project = a } :: ProjectOrganizationPolicyResource s)
-
-instance P.HasRestorePolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (ProjectOrganizationPolicyRestorePolicy s)) where
-    restorePolicy =
-        P.lens (_restorePolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (ProjectOrganizationPolicyRestorePolicy s))
-               (\s a -> s { _restorePolicy = a } :: ProjectOrganizationPolicyResource s)
-
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectOrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
-
-instance s ~ s' => P.HasComputedUpdateTime (TF.Ref s' (ProjectOrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedUpdateTime x = TF.compute (TF.refKey x) "update_time"
-
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ProjectOrganizationPolicyResource s)) (TF.Attr s P.Integer) where
-    computedVersion x = TF.compute (TF.refKey x) "version"
-
--- | @google_project_service@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/project_service.html terraform documentation>
--- for more information.
-data ProjectServiceResource s = ProjectServiceResource'
-    { _disableOnDestroy :: TF.Attr s P.Bool
-    -- ^ @disable_on_destroy@ - (Optional)
-    --
-    , _service          :: TF.Attr s P.Text
-    -- ^ @service@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-projectServiceResource
-    :: TF.Attr s P.Text -- ^ @service@ - 'P.service'
-    -> P.Resource (ProjectServiceResource s)
-projectServiceResource _service =
-    TF.newResource "google_project_service" TF.validator $
-        ProjectServiceResource'
-            { _disableOnDestroy = TF.value P.True
-            , _service = _service
-            }
-
-instance TF.IsObject (ProjectServiceResource s) where
-    toObject ProjectServiceResource'{..} = P.catMaybes
-        [ TF.assign "disable_on_destroy" <$> TF.attribute _disableOnDestroy
-        , TF.assign "service" <$> TF.attribute _service
-        ]
-
-instance TF.IsValid (ProjectServiceResource s) where
-    validator = P.mempty
-
-instance P.HasDisableOnDestroy (ProjectServiceResource s) (TF.Attr s P.Bool) where
-    disableOnDestroy =
-        P.lens (_disableOnDestroy :: ProjectServiceResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _disableOnDestroy = a } :: ProjectServiceResource s)
-
-instance P.HasService (ProjectServiceResource s) (TF.Attr s P.Text) where
-    service =
-        P.lens (_service :: ProjectServiceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _service = a } :: ProjectServiceResource s)
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectServiceResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
-
--- | @google_project_services@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/project_services.html terraform documentation>
--- for more information.
-data ProjectServicesResource s = ProjectServicesResource'
-    { _disableOnDestroy :: TF.Attr s P.Bool
-    -- ^ @disable_on_destroy@ - (Optional)
-    --
-    , _services         :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @services@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-projectServicesResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @services@ - 'P.services'
-    -> P.Resource (ProjectServicesResource s)
-projectServicesResource _services =
-    TF.newResource "google_project_services" TF.validator $
-        ProjectServicesResource'
-            { _disableOnDestroy = TF.value P.True
-            , _services = _services
-            }
-
-instance TF.IsObject (ProjectServicesResource s) where
-    toObject ProjectServicesResource'{..} = P.catMaybes
-        [ TF.assign "disable_on_destroy" <$> TF.attribute _disableOnDestroy
-        , TF.assign "services" <$> TF.attribute _services
-        ]
-
-instance TF.IsValid (ProjectServicesResource s) where
-    validator = P.mempty
-
-instance P.HasDisableOnDestroy (ProjectServicesResource s) (TF.Attr s P.Bool) where
-    disableOnDestroy =
-        P.lens (_disableOnDestroy :: ProjectServicesResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _disableOnDestroy = a } :: ProjectServicesResource s)
-
-instance P.HasServices (ProjectServicesResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    services =
-        P.lens (_services :: ProjectServicesResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _services = a } :: ProjectServicesResource s)
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectServicesResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
-
--- | @google_project_usage_export_bucket@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/project_usage_export_bucket.html terraform documentation>
--- for more information.
-data ProjectUsageExportBucketResource s = ProjectUsageExportBucketResource'
-    { _bucketName :: TF.Attr s P.Text
-    -- ^ @bucket_name@ - (Required, Forces New)
-    --
-    , _prefix     :: TF.Attr s P.Text
-    -- ^ @prefix@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-projectUsageExportBucketResource
-    :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
-    -> P.Resource (ProjectUsageExportBucketResource s)
-projectUsageExportBucketResource _bucketName =
-    TF.newResource "google_project_usage_export_bucket" TF.validator $
-        ProjectUsageExportBucketResource'
-            { _bucketName = _bucketName
-            , _prefix = TF.Nil
-            }
-
-instance TF.IsObject (ProjectUsageExportBucketResource s) where
-    toObject ProjectUsageExportBucketResource'{..} = P.catMaybes
-        [ TF.assign "bucket_name" <$> TF.attribute _bucketName
-        , TF.assign "prefix" <$> TF.attribute _prefix
-        ]
-
-instance TF.IsValid (ProjectUsageExportBucketResource s) where
-    validator = P.mempty
-
-instance P.HasBucketName (ProjectUsageExportBucketResource s) (TF.Attr s P.Text) where
-    bucketName =
-        P.lens (_bucketName :: ProjectUsageExportBucketResource s -> TF.Attr s P.Text)
-               (\s a -> s { _bucketName = a } :: ProjectUsageExportBucketResource s)
-
-instance P.HasPrefix (ProjectUsageExportBucketResource s) (TF.Attr s P.Text) where
-    prefix =
-        P.lens (_prefix :: ProjectUsageExportBucketResource s -> TF.Attr s P.Text)
-               (\s a -> s { _prefix = a } :: ProjectUsageExportBucketResource s)
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectUsageExportBucketResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
-
--- | @google_pubsub_subscription@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/pubsub_subscription.html terraform documentation>
--- for more information.
-data PubsubSubscriptionResource s = PubsubSubscriptionResource'
-    { _name       :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    , _pushConfig :: TF.Attr s (PubsubSubscriptionPushConfig s)
-    -- ^ @push_config@ - (Optional)
-    --
-    , _topic      :: TF.Attr s P.Text
-    -- ^ @topic@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-pubsubSubscriptionResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @topic@ - 'P.topic'
-    -> P.Resource (PubsubSubscriptionResource s)
-pubsubSubscriptionResource _name _topic =
-    TF.newResource "google_pubsub_subscription" TF.validator $
-        PubsubSubscriptionResource'
-            { _name = _name
-            , _pushConfig = TF.Nil
-            , _topic = _topic
-            }
-
-instance TF.IsObject (PubsubSubscriptionResource s) where
-    toObject PubsubSubscriptionResource'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "push_config" <$> TF.attribute _pushConfig
-        , TF.assign "topic" <$> TF.attribute _topic
-        ]
-
-instance TF.IsValid (PubsubSubscriptionResource s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_pushConfig"
-                  (_pushConfig
-                      :: PubsubSubscriptionResource s -> TF.Attr s (PubsubSubscriptionPushConfig s))
-                  TF.validator
-
-instance P.HasName (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: PubsubSubscriptionResource s)
-
-instance P.HasPushConfig (PubsubSubscriptionResource s) (TF.Attr s (PubsubSubscriptionPushConfig s)) where
-    pushConfig =
-        P.lens (_pushConfig :: PubsubSubscriptionResource s -> TF.Attr s (PubsubSubscriptionPushConfig s))
-               (\s a -> s { _pushConfig = a } :: PubsubSubscriptionResource s)
-
-instance P.HasTopic (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
-    topic =
-        P.lens (_topic :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _topic = a } :: PubsubSubscriptionResource s)
-
-instance s ~ s' => P.HasComputedAckDeadlineSeconds (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Integer) where
-    computedAckDeadlineSeconds x = TF.compute (TF.refKey x) "ack_deadline_seconds"
-
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Text) where
-    computedPath x = TF.compute (TF.refKey x) "path"
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
-
--- | @google_pubsub_subscription_iam_binding@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/pubsub_subscription_iam_binding.html terraform documentation>
--- for more information.
-data PubsubSubscriptionIamBindingResource s = PubsubSubscriptionIamBindingResource'
-    { _members      :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @members@ - (Required)
-    --
-    , _role         :: TF.Attr s P.Text
-    -- ^ @role@ - (Required, Forces New)
-    --
-    , _subscription :: TF.Attr s P.Text
-    -- ^ @subscription@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-pubsubSubscriptionIamBindingResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Attr s P.Text -- ^ @subscription@ - 'P.subscription'
-    -> P.Resource (PubsubSubscriptionIamBindingResource s)
-pubsubSubscriptionIamBindingResource _members _role _subscription =
-    TF.newResource "google_pubsub_subscription_iam_binding" TF.validator $
-        PubsubSubscriptionIamBindingResource'
-            { _members = _members
-            , _role = _role
-            , _subscription = _subscription
-            }
-
-instance TF.IsObject (PubsubSubscriptionIamBindingResource s) where
-    toObject PubsubSubscriptionIamBindingResource'{..} = P.catMaybes
-        [ TF.assign "members" <$> TF.attribute _members
-        , TF.assign "role" <$> TF.attribute _role
-        , TF.assign "subscription" <$> TF.attribute _subscription
-        ]
-
-instance TF.IsValid (PubsubSubscriptionIamBindingResource s) where
-    validator = P.mempty
-
-instance P.HasMembers (PubsubSubscriptionIamBindingResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    members =
-        P.lens (_members :: PubsubSubscriptionIamBindingResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _members = a } :: PubsubSubscriptionIamBindingResource s)
-
-instance P.HasRole (PubsubSubscriptionIamBindingResource s) (TF.Attr s P.Text) where
-    role =
-        P.lens (_role :: PubsubSubscriptionIamBindingResource s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a } :: PubsubSubscriptionIamBindingResource s)
-
-instance P.HasSubscription (PubsubSubscriptionIamBindingResource s) (TF.Attr s P.Text) where
-    subscription =
-        P.lens (_subscription :: PubsubSubscriptionIamBindingResource s -> TF.Attr s P.Text)
-               (\s a -> s { _subscription = a } :: PubsubSubscriptionIamBindingResource s)
-
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubSubscriptionIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubSubscriptionIamBindingResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
-
--- | @google_pubsub_subscription_iam_member@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/google/r/pubsub_subscription_iam_member.html terraform documentation>
--- for more information.
-data PubsubSubscriptionIamMemberResource s = PubsubSubscriptionIamMemberResource'
-    { _member       :: TF.Attr s P.Text
-    -- ^ @member@ - (Required, Forces New)
-    --
-    , _role         :: TF.Attr s P.Text
-    -- ^ @role@ - (Required, Forces New)
-    --
-    , _subscription :: TF.Attr s P.Text
-    -- ^ @subscription@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-pubsubSubscriptionIamMemberResource
-    :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Attr s P.Text -- ^ @subscription@ - 'P.subscription'
-    -> P.Resource (PubsubSubscriptionIamMemberResource s)
-pubsubSubscriptionIamMemberResource _member _role _subscription =
-    TF.newResource "google_pubsub_subscription_iam_member" TF.validator $
-        PubsubSubscriptionIamMemberResource'
-            { _member = _member
-            , _role = _role
-            , _subscription = _subscription
-            }
-
-instance TF.IsObject (PubsubSubscriptionIamMemberResource s) where
-    toObject PubsubSubscriptionIamMemberResource'{..} = P.catMaybes
-        [ TF.assign "member" <$> TF.attribute _member
-        , TF.assign "role" <$> TF.attribute _role
-        , TF.assign "subscription" <$> TF.attribute _subscription
-        ]
-
-instance TF.IsValid (PubsubSubscriptionIamMemberResource s) where
-    validator = P.mempty
-
-instance P.HasMember (PubsubSubscriptionIamMemberResource s) (TF.Attr s P.Text) where
-    member =
-        P.lens (_member :: PubsubSubscriptionIamMemberResource s -> TF.Attr s P.Text)
-               (\s a -> s { _member = a } :: PubsubSubscriptionIamMemberResource s)
-
-instance P.HasRole (PubsubSubscriptionIamMemberResource s) (TF.Attr s P.Text) where
-    role =
-        P.lens (_role :: PubsubSubscriptionIamMemberResource s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a } :: PubsubSubscriptionIamMemberResource s)
-
-instance P.HasSubscription (PubsubSubscriptionIamMemberResource s) (TF.Attr s P.Text) where
-    subscription =
-        P.lens (_subscription :: PubsubSubscriptionIamMemberResource s -> TF.Attr s P.Text)
-               (\s a -> s { _subscription = a } :: PubsubSubscriptionIamMemberResource s)
-
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubSubscriptionIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubSubscriptionIamMemberResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
-
 -- | @google_pubsub_subscription_iam_policy@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/google/r/pubsub_subscription_iam_policy.html terraform documentation>
@@ -1653,14 +195,14 @@ data PubsubSubscriptionIamPolicyResource s = PubsubSubscriptionIamPolicyResource
     , _subscription :: TF.Attr s P.Text
     -- ^ @subscription@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 pubsubSubscriptionIamPolicyResource
     :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> TF.Attr s P.Text -- ^ @subscription@ - 'P.subscription'
     -> P.Resource (PubsubSubscriptionIamPolicyResource s)
 pubsubSubscriptionIamPolicyResource _policyData _subscription =
-    TF.newResource "google_pubsub_subscription_iam_policy" TF.validator $
+    TF.unsafeResource "google_pubsub_subscription_iam_policy" P.defaultProvider TF.validator $
         PubsubSubscriptionIamPolicyResource'
             { _policyData = _policyData
             , _subscription = _subscription
@@ -1699,13 +241,13 @@ data PubsubTopicResource s = PubsubTopicResource'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 pubsubTopicResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (PubsubTopicResource s)
 pubsubTopicResource _name =
-    TF.newResource "google_pubsub_topic" TF.validator $
+    TF.unsafeResource "google_pubsub_topic" P.defaultProvider TF.validator $
         PubsubTopicResource'
             { _name = _name
             }
@@ -1740,7 +282,7 @@ data PubsubTopicIamBindingResource s = PubsubTopicIamBindingResource'
     , _topic   :: TF.Attr s P.Text
     -- ^ @topic@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 pubsubTopicIamBindingResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
@@ -1748,7 +290,7 @@ pubsubTopicIamBindingResource
     -> TF.Attr s P.Text -- ^ @topic@ - 'P.topic'
     -> P.Resource (PubsubTopicIamBindingResource s)
 pubsubTopicIamBindingResource _members _role _topic =
-    TF.newResource "google_pubsub_topic_iam_binding" TF.validator $
+    TF.unsafeResource "google_pubsub_topic_iam_binding" P.defaultProvider TF.validator $
         PubsubTopicIamBindingResource'
             { _members = _members
             , _role = _role
@@ -1800,7 +342,7 @@ data PubsubTopicIamMemberResource s = PubsubTopicIamMemberResource'
     , _topic  :: TF.Attr s P.Text
     -- ^ @topic@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 pubsubTopicIamMemberResource
     :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
@@ -1808,7 +350,7 @@ pubsubTopicIamMemberResource
     -> TF.Attr s P.Text -- ^ @topic@ - 'P.topic'
     -> P.Resource (PubsubTopicIamMemberResource s)
 pubsubTopicIamMemberResource _member _role _topic =
-    TF.newResource "google_pubsub_topic_iam_member" TF.validator $
+    TF.unsafeResource "google_pubsub_topic_iam_member" P.defaultProvider TF.validator $
         PubsubTopicIamMemberResource'
             { _member = _member
             , _role = _role
@@ -1857,14 +399,14 @@ data PubsubTopicIamPolicyResource s = PubsubTopicIamPolicyResource'
     , _topic      :: TF.Attr s P.Text
     -- ^ @topic@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 pubsubTopicIamPolicyResource
     :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> TF.Attr s P.Text -- ^ @topic@ - 'P.topic'
     -> P.Resource (PubsubTopicIamPolicyResource s)
 pubsubTopicIamPolicyResource _policyData _topic =
-    TF.newResource "google_pubsub_topic_iam_policy" TF.validator $
+    TF.unsafeResource "google_pubsub_topic_iam_policy" P.defaultProvider TF.validator $
         PubsubTopicIamPolicyResource'
             { _policyData = _policyData
             , _topic = _topic
@@ -1903,29 +445,29 @@ data RedisInstanceResource s = RedisInstanceResource'
     { _displayName  :: TF.Attr s P.Text
     -- ^ @display_name@ - (Optional)
     --
-    , _labels       :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
-    , _memorySizeGb :: TF.Attr s P.Integer
+    , _memorySizeGb :: TF.Attr s P.Int
     -- ^ @memory_size_gb@ - (Required)
     --
     , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _redisConfigs :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _redisConfigs :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @redis_configs@ - (Optional)
     --
     , _tier         :: TF.Attr s P.Text
     -- ^ @tier@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 redisInstanceResource
-    :: TF.Attr s P.Integer -- ^ @memory_size_gb@ - 'P.memorySizeGb'
+    :: TF.Attr s P.Int -- ^ @memory_size_gb@ - 'P.memorySizeGb'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RedisInstanceResource s)
 redisInstanceResource _memorySizeGb _name =
-    TF.newResource "google_redis_instance" TF.validator $
+    TF.unsafeResource "google_redis_instance" P.defaultProvider TF.validator $
         RedisInstanceResource'
             { _displayName = TF.Nil
             , _labels = TF.Nil
@@ -1953,14 +495,14 @@ instance P.HasDisplayName (RedisInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_displayName :: RedisInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _displayName = a } :: RedisInstanceResource s)
 
-instance P.HasLabels (RedisInstanceResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (RedisInstanceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: RedisInstanceResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: RedisInstanceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: RedisInstanceResource s)
 
-instance P.HasMemorySizeGb (RedisInstanceResource s) (TF.Attr s P.Integer) where
+instance P.HasMemorySizeGb (RedisInstanceResource s) (TF.Attr s P.Int) where
     memorySizeGb =
-        P.lens (_memorySizeGb :: RedisInstanceResource s -> TF.Attr s P.Integer)
+        P.lens (_memorySizeGb :: RedisInstanceResource s -> TF.Attr s P.Int)
                (\s a -> s { _memorySizeGb = a } :: RedisInstanceResource s)
 
 instance P.HasName (RedisInstanceResource s) (TF.Attr s P.Text) where
@@ -1968,9 +510,9 @@ instance P.HasName (RedisInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_name :: RedisInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RedisInstanceResource s)
 
-instance P.HasRedisConfigs (RedisInstanceResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasRedisConfigs (RedisInstanceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     redisConfigs =
-        P.lens (_redisConfigs :: RedisInstanceResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_redisConfigs :: RedisInstanceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _redisConfigs = a } :: RedisInstanceResource s)
 
 instance P.HasTier (RedisInstanceResource s) (TF.Attr s P.Text) where
@@ -1996,7 +538,7 @@ instance s ~ s' => P.HasComputedHost (TF.Ref s' (RedisInstanceResource s)) (TF.A
 instance s ~ s' => P.HasComputedLocationId (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
     computedLocationId x = TF.compute (TF.refKey x) "location_id"
 
-instance s ~ s' => P.HasComputedPort (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Int) where
     computedPort x = TF.compute (TF.refKey x) "port"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
@@ -2028,7 +570,7 @@ data ResourceManagerLienResource s = ResourceManagerLienResource'
     , _restrictions :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @restrictions@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 resourceManagerLienResource
     :: TF.Attr s P.Text -- ^ @origin@ - 'P.origin'
@@ -2037,7 +579,7 @@ resourceManagerLienResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @restrictions@ - 'P.restrictions'
     -> P.Resource (ResourceManagerLienResource s)
 resourceManagerLienResource _origin _parent _reason _restrictions =
-    TF.newResource "google_resource_manager_lien" TF.validator $
+    TF.unsafeResource "google_resource_manager_lien" P.defaultProvider TF.validator $
         ResourceManagerLienResource'
             { _origin = _origin
             , _parent = _parent
@@ -2093,13 +635,13 @@ data RuntimeconfigConfigResource s = RuntimeconfigConfigResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 runtimeconfigConfigResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RuntimeconfigConfigResource s)
 runtimeconfigConfigResource _name =
-    TF.newResource "google_runtimeconfig_config" TF.validator $
+    TF.unsafeResource "google_runtimeconfig_config" P.defaultProvider TF.validator $
         RuntimeconfigConfigResource'
             { _description = TF.Nil
             , _name = _name
@@ -2150,14 +692,14 @@ data RuntimeconfigVariableResource s = RuntimeconfigVariableResource'
     -- Conflicts with:
     --
     -- * 'text'
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 runtimeconfigVariableResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
     -> P.Resource (RuntimeconfigVariableResource s)
 runtimeconfigVariableResource _name _parent =
-    TF.newResource "google_runtimeconfig_variable" TF.validator $
+    TF.unsafeResource "google_runtimeconfig_variable" P.defaultProvider TF.validator $
         RuntimeconfigVariableResource'
             { _name = _name
             , _parent = _parent
@@ -2224,13 +766,13 @@ data ServiceAccountResource s = ServiceAccountResource'
     , _displayName :: TF.Attr s P.Text
     -- ^ @display_name@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 serviceAccountResource
     :: TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
     -> P.Resource (ServiceAccountResource s)
 serviceAccountResource _accountId =
-    TF.newResource "google_service_account" TF.validator $
+    TF.unsafeResource "google_service_account" P.defaultProvider TF.validator $
         ServiceAccountResource'
             { _accountId = _accountId
             , _displayName = TF.Nil
@@ -2281,7 +823,7 @@ data ServiceAccountIamBindingResource s = ServiceAccountIamBindingResource'
     , _serviceAccountId :: TF.Attr s P.Text
     -- ^ @service_account_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 serviceAccountIamBindingResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
@@ -2289,7 +831,7 @@ serviceAccountIamBindingResource
     -> TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
     -> P.Resource (ServiceAccountIamBindingResource s)
 serviceAccountIamBindingResource _members _role _serviceAccountId =
-    TF.newResource "google_service_account_iam_binding" TF.validator $
+    TF.unsafeResource "google_service_account_iam_binding" P.defaultProvider TF.validator $
         ServiceAccountIamBindingResource'
             { _members = _members
             , _role = _role
@@ -2338,7 +880,7 @@ data ServiceAccountIamMemberResource s = ServiceAccountIamMemberResource'
     , _serviceAccountId :: TF.Attr s P.Text
     -- ^ @service_account_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 serviceAccountIamMemberResource
     :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
@@ -2346,7 +888,7 @@ serviceAccountIamMemberResource
     -> TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
     -> P.Resource (ServiceAccountIamMemberResource s)
 serviceAccountIamMemberResource _member _role _serviceAccountId =
-    TF.newResource "google_service_account_iam_member" TF.validator $
+    TF.unsafeResource "google_service_account_iam_member" P.defaultProvider TF.validator $
         ServiceAccountIamMemberResource'
             { _member = _member
             , _role = _role
@@ -2392,14 +934,14 @@ data ServiceAccountIamPolicyResource s = ServiceAccountIamPolicyResource'
     , _serviceAccountId :: TF.Attr s P.Text
     -- ^ @service_account_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 serviceAccountIamPolicyResource
     :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
     -> P.Resource (ServiceAccountIamPolicyResource s)
 serviceAccountIamPolicyResource _policyData _serviceAccountId =
-    TF.newResource "google_service_account_iam_policy" TF.validator $
+    TF.unsafeResource "google_service_account_iam_policy" P.defaultProvider TF.validator $
         ServiceAccountIamPolicyResource'
             { _policyData = _policyData
             , _serviceAccountId = _serviceAccountId
@@ -2447,13 +989,13 @@ data ServiceAccountKeyResource s = ServiceAccountKeyResource'
     , _serviceAccountId :: TF.Attr s P.Text
     -- ^ @service_account_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 serviceAccountKeyResource
     :: TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
     -> P.Resource (ServiceAccountKeyResource s)
 serviceAccountKeyResource _serviceAccountId =
-    TF.newResource "google_service_account_key" TF.validator $
+    TF.unsafeResource "google_service_account_key" P.defaultProvider TF.validator $
         ServiceAccountKeyResource'
             { _keyAlgorithm = TF.value "KEY_ALG_RSA_2048"
             , _pgpKey = TF.Nil
@@ -2528,13 +1070,13 @@ data SourcerepoRepositoryResource s = SourcerepoRepositoryResource'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 sourcerepoRepositoryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SourcerepoRepositoryResource s)
 sourcerepoRepositoryResource _name =
-    TF.newResource "google_sourcerepo_repository" TF.validator $
+    TF.unsafeResource "google_sourcerepo_repository" P.defaultProvider TF.validator $
         SourcerepoRepositoryResource'
             { _name = _name
             }
@@ -2555,7 +1097,7 @@ instance P.HasName (SourcerepoRepositoryResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SourcerepoRepositoryResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (SourcerepoRepositoryResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (SourcerepoRepositoryResource s)) (TF.Attr s P.Int) where
     computedSize x = TF.compute (TF.refKey x) "size"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (SourcerepoRepositoryResource s)) (TF.Attr s P.Text) where
@@ -2575,14 +1117,14 @@ data SpannerDatabaseResource s = SpannerDatabaseResource'
     , _name      :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 spannerDatabaseResource
     :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SpannerDatabaseResource s)
 spannerDatabaseResource _instance' _name =
-    TF.newResource "google_spanner_database" TF.validator $
+    TF.unsafeResource "google_spanner_database" P.defaultProvider TF.validator $
         SpannerDatabaseResource'
             { _ddl = TF.Nil
             , _instance' = _instance'
@@ -2637,7 +1179,7 @@ data SpannerDatabaseIamBindingResource s = SpannerDatabaseIamBindingResource'
     , _role      :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 spannerDatabaseIamBindingResource
     :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
@@ -2646,7 +1188,7 @@ spannerDatabaseIamBindingResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (SpannerDatabaseIamBindingResource s)
 spannerDatabaseIamBindingResource _database _instance' _members _role =
-    TF.newResource "google_spanner_database_iam_binding" TF.validator $
+    TF.unsafeResource "google_spanner_database_iam_binding" P.defaultProvider TF.validator $
         SpannerDatabaseIamBindingResource'
             { _database = _database
             , _instance' = _instance'
@@ -2708,7 +1250,7 @@ data SpannerDatabaseIamMemberResource s = SpannerDatabaseIamMemberResource'
     , _role      :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 spannerDatabaseIamMemberResource
     :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
@@ -2717,7 +1259,7 @@ spannerDatabaseIamMemberResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (SpannerDatabaseIamMemberResource s)
 spannerDatabaseIamMemberResource _database _instance' _member _role =
-    TF.newResource "google_spanner_database_iam_member" TF.validator $
+    TF.unsafeResource "google_spanner_database_iam_member" P.defaultProvider TF.validator $
         SpannerDatabaseIamMemberResource'
             { _database = _database
             , _instance' = _instance'
@@ -2776,7 +1318,7 @@ data SpannerDatabaseIamPolicyResource s = SpannerDatabaseIamPolicyResource'
     , _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 spannerDatabaseIamPolicyResource
     :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
@@ -2784,7 +1326,7 @@ spannerDatabaseIamPolicyResource
     -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> P.Resource (SpannerDatabaseIamPolicyResource s)
 spannerDatabaseIamPolicyResource _database _instance' _policyData =
-    TF.newResource "google_spanner_database_iam_policy" TF.validator $
+    TF.unsafeResource "google_spanner_database_iam_policy" P.defaultProvider TF.validator $
         SpannerDatabaseIamPolicyResource'
             { _database = _database
             , _instance' = _instance'
@@ -2833,20 +1375,20 @@ data SpannerInstanceResource s = SpannerInstanceResource'
     , _displayName :: TF.Attr s P.Text
     -- ^ @display_name@ - (Required)
     --
-    , _labels      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
-    , _numNodes    :: TF.Attr s P.Integer
+    , _numNodes    :: TF.Attr s P.Int
     -- ^ @num_nodes@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 spannerInstanceResource
     :: TF.Attr s P.Text -- ^ @config@ - 'P.config'
     -> TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
     -> P.Resource (SpannerInstanceResource s)
 spannerInstanceResource _config _displayName =
-    TF.newResource "google_spanner_instance" TF.validator $
+    TF.unsafeResource "google_spanner_instance" P.defaultProvider TF.validator $
         SpannerInstanceResource'
             { _config = _config
             , _displayName = _displayName
@@ -2875,14 +1417,14 @@ instance P.HasDisplayName (SpannerInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_displayName :: SpannerInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _displayName = a } :: SpannerInstanceResource s)
 
-instance P.HasLabels (SpannerInstanceResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (SpannerInstanceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: SpannerInstanceResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: SpannerInstanceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: SpannerInstanceResource s)
 
-instance P.HasNumNodes (SpannerInstanceResource s) (TF.Attr s P.Integer) where
+instance P.HasNumNodes (SpannerInstanceResource s) (TF.Attr s P.Int) where
     numNodes =
-        P.lens (_numNodes :: SpannerInstanceResource s -> TF.Attr s P.Integer)
+        P.lens (_numNodes :: SpannerInstanceResource s -> TF.Attr s P.Int)
                (\s a -> s { _numNodes = a } :: SpannerInstanceResource s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (SpannerInstanceResource s)) (TF.Attr s P.Text) where
@@ -2908,7 +1450,7 @@ data SpannerInstanceIamBindingResource s = SpannerInstanceIamBindingResource'
     , _role      :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 spannerInstanceIamBindingResource
     :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
@@ -2916,7 +1458,7 @@ spannerInstanceIamBindingResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (SpannerInstanceIamBindingResource s)
 spannerInstanceIamBindingResource _instance' _members _role =
-    TF.newResource "google_spanner_instance_iam_binding" TF.validator $
+    TF.unsafeResource "google_spanner_instance_iam_binding" P.defaultProvider TF.validator $
         SpannerInstanceIamBindingResource'
             { _instance' = _instance'
             , _members = _members
@@ -2968,7 +1510,7 @@ data SpannerInstanceIamMemberResource s = SpannerInstanceIamMemberResource'
     , _role      :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 spannerInstanceIamMemberResource
     :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
@@ -2976,7 +1518,7 @@ spannerInstanceIamMemberResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (SpannerInstanceIamMemberResource s)
 spannerInstanceIamMemberResource _instance' _member _role =
-    TF.newResource "google_spanner_instance_iam_member" TF.validator $
+    TF.unsafeResource "google_spanner_instance_iam_member" P.defaultProvider TF.validator $
         SpannerInstanceIamMemberResource'
             { _instance' = _instance'
             , _member = _member
@@ -3025,14 +1567,14 @@ data SpannerInstanceIamPolicyResource s = SpannerInstanceIamPolicyResource'
     , _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 spannerInstanceIamPolicyResource
     :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
     -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> P.Resource (SpannerInstanceIamPolicyResource s)
 spannerInstanceIamPolicyResource _instance' _policyData =
-    TF.newResource "google_spanner_instance_iam_policy" TF.validator $
+    TF.unsafeResource "google_spanner_instance_iam_policy" P.defaultProvider TF.validator $
         SpannerInstanceIamPolicyResource'
             { _instance' = _instance'
             , _policyData = _policyData
@@ -3074,14 +1616,14 @@ data SqlDatabaseResource s = SqlDatabaseResource'
     , _name      :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 sqlDatabaseResource
     :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SqlDatabaseResource s)
 sqlDatabaseResource _instance' _name =
-    TF.newResource "google_sql_database" TF.validator $
+    TF.unsafeResource "google_sql_database" P.defaultProvider TF.validator $
         SqlDatabaseResource'
             { _instance' = _instance'
             , _name = _name
@@ -3129,16 +1671,16 @@ data SqlDatabaseInstanceResource s = SqlDatabaseInstanceResource'
     , _region          :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
-    , _settings        :: TF.Attr s (SqlDatabaseInstanceSettings s)
+    , _settings        :: TF.Attr s (SettingsSetting s)
     -- ^ @settings@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 sqlDatabaseInstanceResource
-    :: TF.Attr s (SqlDatabaseInstanceSettings s) -- ^ @settings@ - 'P.settings'
+    :: TF.Attr s (SettingsSetting s) -- ^ @settings@ - 'P.settings'
     -> P.Resource (SqlDatabaseInstanceResource s)
 sqlDatabaseInstanceResource _settings =
-    TF.newResource "google_sql_database_instance" TF.validator $
+    TF.unsafeResource "google_sql_database_instance" P.defaultProvider TF.validator $
         SqlDatabaseInstanceResource'
             { _databaseVersion = TF.value "MYSQL_5_6"
             , _region = TF.Nil
@@ -3156,7 +1698,7 @@ instance TF.IsValid (SqlDatabaseInstanceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_settings"
                   (_settings
-                      :: SqlDatabaseInstanceResource s -> TF.Attr s (SqlDatabaseInstanceSettings s))
+                      :: SqlDatabaseInstanceResource s -> TF.Attr s (SettingsSetting s))
                   TF.validator
 
 instance P.HasDatabaseVersion (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
@@ -3169,9 +1711,9 @@ instance P.HasRegion (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_region :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: SqlDatabaseInstanceResource s)
 
-instance P.HasSettings (SqlDatabaseInstanceResource s) (TF.Attr s (SqlDatabaseInstanceSettings s)) where
+instance P.HasSettings (SqlDatabaseInstanceResource s) (TF.Attr s (SettingsSetting s)) where
     settings =
-        P.lens (_settings :: SqlDatabaseInstanceResource s -> TF.Attr s (SqlDatabaseInstanceSettings s))
+        P.lens (_settings :: SqlDatabaseInstanceResource s -> TF.Attr s (SettingsSetting s))
                (\s a -> s { _settings = a } :: SqlDatabaseInstanceResource s)
 
 instance s ~ s' => P.HasComputedConnectionName (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
@@ -3180,7 +1722,7 @@ instance s ~ s' => P.HasComputedConnectionName (TF.Ref s' (SqlDatabaseInstanceRe
 instance s ~ s' => P.HasComputedFirstIpAddress (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
     computedFirstIpAddress x = TF.compute (TF.refKey x) "first_ip_address"
 
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s [TF.Attr s (SqlDatabaseInstanceIpAddress s)]) where
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s [TF.Attr s (IpAddressSetting s)]) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
 instance s ~ s' => P.HasComputedMasterInstanceName (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
@@ -3192,13 +1734,13 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (SqlDatabaseInstanceResource s))
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedReplicaConfiguration (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s (SqlDatabaseInstanceReplicaConfiguration s)) where
+instance s ~ s' => P.HasComputedReplicaConfiguration (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s (ReplicaConfigurationSetting s)) where
     computedReplicaConfiguration x = TF.compute (TF.refKey x) "replica_configuration"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
     computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedServerCaCert (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s (SqlDatabaseInstanceServerCaCert s)) where
+instance s ~ s' => P.HasComputedServerCaCert (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s (ServerCaCertSetting s)) where
     computedServerCaCert x = TF.compute (TF.refKey x) "server_ca_cert"
 
 -- | @google_sql_user@ Resource.
@@ -3218,14 +1760,14 @@ data SqlUserResource s = SqlUserResource'
     , _password  :: TF.Attr s P.Text
     -- ^ @password@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 sqlUserResource
     :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SqlUserResource s)
 sqlUserResource _instance' _name =
-    TF.newResource "google_sql_user" TF.validator $
+    TF.unsafeResource "google_sql_user" P.defaultProvider TF.validator $
         SqlUserResource'
             { _host = TF.Nil
             , _instance' = _instance'
@@ -3272,22 +1814,22 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (SqlUserResource s)) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/google/r/storage_bucket.html terraform documentation>
 -- for more information.
 data StorageBucketResource s = StorageBucketResource'
-    { _cors          :: TF.Attr s [TF.Attr s (StorageBucketCors s)]
+    { _cors          :: TF.Attr s [TF.Attr s (CorsSetting s)]
     -- ^ @cors@ - (Optional)
     --
     , _forceDestroy  :: TF.Attr s P.Bool
     -- ^ @force_destroy@ - (Optional)
     --
-    , _labels        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
-    , _lifecycleRule :: TF.Attr s [TF.Attr s (StorageBucketLifecycleRule s)]
+    , _lifecycleRule :: TF.Attr s [TF.Attr s (LifecycleRuleSetting s)]
     -- ^ @lifecycle_rule@ - (Optional)
     --
     , _location      :: TF.Attr s P.Text
     -- ^ @location@ - (Optional, Forces New)
     --
-    , _logging       :: TF.Attr s (StorageBucketLogging s)
+    , _logging       :: TF.Attr s (LoggingSetting s)
     -- ^ @logging@ - (Optional)
     --
     , _name          :: TF.Attr s P.Text
@@ -3299,19 +1841,19 @@ data StorageBucketResource s = StorageBucketResource'
     , _storageClass  :: TF.Attr s P.Text
     -- ^ @storage_class@ - (Optional, Forces New)
     --
-    , _versioning    :: TF.Attr s (StorageBucketVersioning s)
+    , _versioning    :: TF.Attr s (VersioningSetting s)
     -- ^ @versioning@ - (Optional)
     --
-    , _website       :: TF.Attr s [TF.Attr s (StorageBucketWebsite s)]
+    , _website       :: TF.Attr s [TF.Attr s (WebsiteSetting s)]
     -- ^ @website@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 storageBucketResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (StorageBucketResource s)
 storageBucketResource _name =
-    TF.newResource "google_storage_bucket" TF.validator $
+    TF.unsafeResource "google_storage_bucket" P.defaultProvider TF.validator $
         StorageBucketResource'
             { _cors = TF.Nil
             , _forceDestroy = TF.value P.False
@@ -3343,30 +1885,18 @@ instance TF.IsObject (StorageBucketResource s) where
 
 instance TF.IsValid (StorageBucketResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_cors"
-                  (_cors
-                      :: StorageBucketResource s -> TF.Attr s [TF.Attr s (StorageBucketCors s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_lifecycleRule"
-                  (_lifecycleRule
-                      :: StorageBucketResource s -> TF.Attr s [TF.Attr s (StorageBucketLifecycleRule s)])
-                  TF.validator
            P.<> TF.settingsValidator "_logging"
                   (_logging
-                      :: StorageBucketResource s -> TF.Attr s (StorageBucketLogging s))
+                      :: StorageBucketResource s -> TF.Attr s (LoggingSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_versioning"
                   (_versioning
-                      :: StorageBucketResource s -> TF.Attr s (StorageBucketVersioning s))
-                  TF.validator
-           P.<> TF.settingsValidator "_website"
-                  (_website
-                      :: StorageBucketResource s -> TF.Attr s [TF.Attr s (StorageBucketWebsite s)])
+                      :: StorageBucketResource s -> TF.Attr s (VersioningSetting s))
                   TF.validator
 
-instance P.HasCors (StorageBucketResource s) (TF.Attr s [TF.Attr s (StorageBucketCors s)]) where
+instance P.HasCors (StorageBucketResource s) (TF.Attr s [TF.Attr s (CorsSetting s)]) where
     cors =
-        P.lens (_cors :: StorageBucketResource s -> TF.Attr s [TF.Attr s (StorageBucketCors s)])
+        P.lens (_cors :: StorageBucketResource s -> TF.Attr s [TF.Attr s (CorsSetting s)])
                (\s a -> s { _cors = a } :: StorageBucketResource s)
 
 instance P.HasForceDestroy (StorageBucketResource s) (TF.Attr s P.Bool) where
@@ -3374,14 +1904,14 @@ instance P.HasForceDestroy (StorageBucketResource s) (TF.Attr s P.Bool) where
         P.lens (_forceDestroy :: StorageBucketResource s -> TF.Attr s P.Bool)
                (\s a -> s { _forceDestroy = a } :: StorageBucketResource s)
 
-instance P.HasLabels (StorageBucketResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (StorageBucketResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: StorageBucketResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: StorageBucketResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: StorageBucketResource s)
 
-instance P.HasLifecycleRule (StorageBucketResource s) (TF.Attr s [TF.Attr s (StorageBucketLifecycleRule s)]) where
+instance P.HasLifecycleRule (StorageBucketResource s) (TF.Attr s [TF.Attr s (LifecycleRuleSetting s)]) where
     lifecycleRule =
-        P.lens (_lifecycleRule :: StorageBucketResource s -> TF.Attr s [TF.Attr s (StorageBucketLifecycleRule s)])
+        P.lens (_lifecycleRule :: StorageBucketResource s -> TF.Attr s [TF.Attr s (LifecycleRuleSetting s)])
                (\s a -> s { _lifecycleRule = a } :: StorageBucketResource s)
 
 instance P.HasLocation (StorageBucketResource s) (TF.Attr s P.Text) where
@@ -3389,9 +1919,9 @@ instance P.HasLocation (StorageBucketResource s) (TF.Attr s P.Text) where
         P.lens (_location :: StorageBucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _location = a } :: StorageBucketResource s)
 
-instance P.HasLogging (StorageBucketResource s) (TF.Attr s (StorageBucketLogging s)) where
+instance P.HasLogging (StorageBucketResource s) (TF.Attr s (LoggingSetting s)) where
     logging =
-        P.lens (_logging :: StorageBucketResource s -> TF.Attr s (StorageBucketLogging s))
+        P.lens (_logging :: StorageBucketResource s -> TF.Attr s (LoggingSetting s))
                (\s a -> s { _logging = a } :: StorageBucketResource s)
 
 instance P.HasName (StorageBucketResource s) (TF.Attr s P.Text) where
@@ -3409,14 +1939,14 @@ instance P.HasStorageClass (StorageBucketResource s) (TF.Attr s P.Text) where
         P.lens (_storageClass :: StorageBucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _storageClass = a } :: StorageBucketResource s)
 
-instance P.HasVersioning (StorageBucketResource s) (TF.Attr s (StorageBucketVersioning s)) where
+instance P.HasVersioning (StorageBucketResource s) (TF.Attr s (VersioningSetting s)) where
     versioning =
-        P.lens (_versioning :: StorageBucketResource s -> TF.Attr s (StorageBucketVersioning s))
+        P.lens (_versioning :: StorageBucketResource s -> TF.Attr s (VersioningSetting s))
                (\s a -> s { _versioning = a } :: StorageBucketResource s)
 
-instance P.HasWebsite (StorageBucketResource s) (TF.Attr s [TF.Attr s (StorageBucketWebsite s)]) where
+instance P.HasWebsite (StorageBucketResource s) (TF.Attr s [TF.Attr s (WebsiteSetting s)]) where
     website =
-        P.lens (_website :: StorageBucketResource s -> TF.Attr s [TF.Attr s (StorageBucketWebsite s)])
+        P.lens (_website :: StorageBucketResource s -> TF.Attr s [TF.Attr s (WebsiteSetting s)])
                (\s a -> s { _website = a } :: StorageBucketResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
@@ -3442,13 +1972,13 @@ data StorageBucketAclResource s = StorageBucketAclResource'
     , _predefinedAcl :: TF.Attr s P.Text
     -- ^ @predefined_acl@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 storageBucketAclResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> P.Resource (StorageBucketAclResource s)
 storageBucketAclResource _bucket =
-    TF.newResource "google_storage_bucket_acl" TF.validator $
+    TF.unsafeResource "google_storage_bucket_acl" P.defaultProvider TF.validator $
         StorageBucketAclResource'
             { _bucket = _bucket
             , _defaultAcl = TF.Nil
@@ -3497,7 +2027,7 @@ data StorageBucketIamBindingResource s = StorageBucketIamBindingResource'
     , _role    :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 storageBucketIamBindingResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
@@ -3505,7 +2035,7 @@ storageBucketIamBindingResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (StorageBucketIamBindingResource s)
 storageBucketIamBindingResource _bucket _members _role =
-    TF.newResource "google_storage_bucket_iam_binding" TF.validator $
+    TF.unsafeResource "google_storage_bucket_iam_binding" P.defaultProvider TF.validator $
         StorageBucketIamBindingResource'
             { _bucket = _bucket
             , _members = _members
@@ -3554,7 +2084,7 @@ data StorageBucketIamMemberResource s = StorageBucketIamMemberResource'
     , _role   :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 storageBucketIamMemberResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
@@ -3562,7 +2092,7 @@ storageBucketIamMemberResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (StorageBucketIamMemberResource s)
 storageBucketIamMemberResource _bucket _member _role =
-    TF.newResource "google_storage_bucket_iam_member" TF.validator $
+    TF.unsafeResource "google_storage_bucket_iam_member" P.defaultProvider TF.validator $
         StorageBucketIamMemberResource'
             { _bucket = _bucket
             , _member = _member
@@ -3608,14 +2138,14 @@ data StorageBucketIamPolicyResource s = StorageBucketIamPolicyResource'
     , _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 storageBucketIamPolicyResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> P.Resource (StorageBucketIamPolicyResource s)
 storageBucketIamPolicyResource _bucket _policyData =
-    TF.newResource "google_storage_bucket_iam_policy" TF.validator $
+    TF.unsafeResource "google_storage_bucket_iam_policy" P.defaultProvider TF.validator $
         StorageBucketIamPolicyResource'
             { _bucket = _bucket
             , _policyData = _policyData
@@ -3684,14 +2214,14 @@ data StorageBucketObjectResource s = StorageBucketObjectResource'
     -- Conflicts with:
     --
     -- * 'content'
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 storageBucketObjectResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (StorageBucketObjectResource s)
 storageBucketObjectResource _bucket _name =
-    TF.newResource "google_storage_bucket_object" TF.validator $
+    TF.unsafeResource "google_storage_bucket_object" P.defaultProvider TF.validator $
         StorageBucketObjectResource'
             { _bucket = _bucket
             , _cacheControl = TF.Nil
@@ -3803,13 +2333,13 @@ data StorageDefaultObjectAclResource s = StorageDefaultObjectAclResource'
     { _bucket :: TF.Attr s P.Text
     -- ^ @bucket@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 storageDefaultObjectAclResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> P.Resource (StorageDefaultObjectAclResource s)
 storageDefaultObjectAclResource _bucket =
-    TF.newResource "google_storage_default_object_acl" TF.validator $
+    TF.unsafeResource "google_storage_default_object_acl" P.defaultProvider TF.validator $
         StorageDefaultObjectAclResource'
             { _bucket = _bucket
             }
@@ -3838,7 +2368,7 @@ data StorageNotificationResource s = StorageNotificationResource'
     { _bucket           :: TF.Attr s P.Text
     -- ^ @bucket@ - (Required, Forces New)
     --
-    , _customAttributes :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _customAttributes :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @custom_attributes@ - (Optional, Forces New)
     --
     , _eventTypes       :: TF.Attr s [TF.Attr s P.Text]
@@ -3853,7 +2383,7 @@ data StorageNotificationResource s = StorageNotificationResource'
     , _topic            :: TF.Attr s P.Text
     -- ^ @topic@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 storageNotificationResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
@@ -3861,7 +2391,7 @@ storageNotificationResource
     -> TF.Attr s P.Text -- ^ @topic@ - 'P.topic'
     -> P.Resource (StorageNotificationResource s)
 storageNotificationResource _bucket _payloadFormat _topic =
-    TF.newResource "google_storage_notification" TF.validator $
+    TF.unsafeResource "google_storage_notification" P.defaultProvider TF.validator $
         StorageNotificationResource'
             { _bucket = _bucket
             , _customAttributes = TF.Nil
@@ -3889,9 +2419,9 @@ instance P.HasBucket (StorageNotificationResource s) (TF.Attr s P.Text) where
         P.lens (_bucket :: StorageNotificationResource s -> TF.Attr s P.Text)
                (\s a -> s { _bucket = a } :: StorageNotificationResource s)
 
-instance P.HasCustomAttributes (StorageNotificationResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasCustomAttributes (StorageNotificationResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     customAttributes =
-        P.lens (_customAttributes :: StorageNotificationResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_customAttributes :: StorageNotificationResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _customAttributes = a } :: StorageNotificationResource s)
 
 instance P.HasEventTypes (StorageNotificationResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -3931,14 +2461,14 @@ data StorageObjectAclResource s = StorageObjectAclResource'
     , _predefinedAcl :: TF.Attr s P.Text
     -- ^ @predefined_acl@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 storageObjectAclResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @object@ - 'P.object'
     -> P.Resource (StorageObjectAclResource s)
 storageObjectAclResource _bucket _object =
-    TF.newResource "google_storage_object_acl" TF.validator $
+    TF.unsafeResource "google_storage_object_acl" P.defaultProvider TF.validator $
         StorageObjectAclResource'
             { _bucket = _bucket
             , _object = _object

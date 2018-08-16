@@ -13,11 +13,11 @@
 --
 module Terrafomo.Google
     ( module Terrafomo.Google.DataSource
-    , module Terrafomo.Google.Resource01
     , module Terrafomo.Google.Lens
-    , module Terrafomo.Google.Settings
-    , module Terrafomo.Google.Resource02
     , module Terrafomo.Google.Provider
+    , module Terrafomo.Google.Resource01
+    , module Terrafomo.Google.Resource02
+    , module Terrafomo.Google.Settings
     , module Terrafomo.Google.Types
     -- * Provider Aliases
     ) where

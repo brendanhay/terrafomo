@@ -162,10 +162,9 @@ import GHC.Base (($))
 
 import Terrafomo.Google.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
+import qualified Data.Map.Strict           as Map
 import qualified Data.Maybe                as P
 import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
@@ -192,14 +191,14 @@ data ActiveFolderData s = ActiveFolderData'
     , _parent      :: TF.Attr s P.Text
     -- ^ @parent@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 activeFolderData
     :: TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
     -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
     -> P.DataSource (ActiveFolderData s)
 activeFolderData _displayName _parent =
-    TF.newDataSource "google_active_folder" TF.validator $
+    TF.unsafeDataSource "google_active_folder" P.defaultProvider TF.validator $
         ActiveFolderData'
             { _displayName = _displayName
             , _parent = _parent
@@ -238,12 +237,12 @@ data BillingAccountData s = BillingAccountData'
     { _billingAccount :: TF.Attr s P.Text
     -- ^ @billing_account@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 billingAccountData
     :: P.DataSource (BillingAccountData s)
 billingAccountData =
-    TF.newDataSource "google_billing_account" TF.validator $
+    TF.unsafeDataSource "google_billing_account" P.defaultProvider TF.validator $
         BillingAccountData'
             { _billingAccount = TF.Nil
             }
@@ -281,12 +280,12 @@ instance s ~ s' => P.HasComputedProjectIds (TF.Ref s' (BillingAccountData s)) (T
 -- See the <https://www.terraform.io/docs/providers/google/d/client_config.html terraform documentation>
 -- for more information.
 data ClientConfigData s = ClientConfigData'
-    deriving (P.Show, P.Eq, P.Generic)
+    deriving (P.Show, P.Eq, P.Ord)
 
 clientConfigData
     :: P.DataSource (ClientConfigData s)
 clientConfigData =
-    TF.newDataSource "google_client_config" TF.validator $
+    TF.unsafeDataSource "google_client_config" P.defaultProvider TF.validator $
         ClientConfigData'
 
 instance TF.IsObject (ClientConfigData s) where
@@ -321,13 +320,13 @@ data CloudfunctionsFunctionData s = CloudfunctionsFunctionData'
     , _region  :: TF.Attr s P.Text
     -- ^ @region@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 cloudfunctionsFunctionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CloudfunctionsFunctionData s)
 cloudfunctionsFunctionData _name =
-    TF.newDataSource "google_cloudfunctions_function" TF.validator $
+    TF.unsafeDataSource "google_cloudfunctions_function" P.defaultProvider TF.validator $
         CloudfunctionsFunctionData'
             { _name = _name
             , _project = TF.Nil
@@ -362,7 +361,7 @@ instance P.HasRegion (CloudfunctionsFunctionData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAvailableMemoryMb (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedAvailableMemoryMb (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Int) where
     computedAvailableMemoryMb x = TF.compute (TF.refKey x) "available_memory_mb"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
@@ -374,7 +373,7 @@ instance s ~ s' => P.HasComputedEntryPoint (TF.Ref s' (CloudfunctionsFunctionDat
 instance s ~ s' => P.HasComputedHttpsTriggerUrl (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
     computedHttpsTriggerUrl x = TF.compute (TF.refKey x) "https_trigger_url"
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedLabels (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedLabels x = TF.compute (TF.refKey x) "labels"
 
 instance s ~ s' => P.HasComputedRetryOnFailure (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Bool) where
@@ -386,7 +385,7 @@ instance s ~ s' => P.HasComputedSourceArchiveBucket (TF.Ref s' (CloudfunctionsFu
 instance s ~ s' => P.HasComputedSourceArchiveObject (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
     computedSourceArchiveObject x = TF.compute (TF.refKey x) "source_archive_object"
 
-instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Int) where
     computedTimeout x = TF.compute (TF.refKey x) "timeout"
 
 instance s ~ s' => P.HasComputedTriggerBucket (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
@@ -406,13 +405,13 @@ data ComputeAddressData s = ComputeAddressData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeAddressData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeAddressData s)
 computeAddressData _name =
-    TF.newDataSource "google_compute_address" TF.validator $
+    TF.unsafeDataSource "google_compute_address" P.defaultProvider TF.validator $
         ComputeAddressData'
             { _name = _name
             }
@@ -459,13 +458,13 @@ data ComputeBackendServiceData s = ComputeBackendServiceData'
     , _project :: TF.Attr s P.Text
     -- ^ @project@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeBackendServiceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeBackendServiceData s)
 computeBackendServiceData _name =
-    TF.newDataSource "google_compute_backend_service" TF.validator $
+    TF.unsafeDataSource "google_compute_backend_service" P.defaultProvider TF.validator $
         ComputeBackendServiceData'
             { _name = _name
             , _project = TF.Nil
@@ -493,13 +492,13 @@ instance P.HasProject (ComputeBackendServiceData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (ComputeBackendServiceBackend s)]) where
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (BackendSetting s)]) where
     computedBackend x = TF.compute (TF.refKey x) "backend"
 
-instance s ~ s' => P.HasComputedCdnPolicy (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (ComputeBackendServiceCdnPolicy s)]) where
+instance s ~ s' => P.HasComputedCdnPolicy (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (CdnPolicySetting s)]) where
     computedCdnPolicy x = TF.compute (TF.refKey x) "cdn_policy"
 
-instance s ~ s' => P.HasComputedConnectionDrainingTimeoutSec (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedConnectionDrainingTimeoutSec (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Int) where
     computedConnectionDrainingTimeoutSec x = TF.compute (TF.refKey x) "connection_draining_timeout_sec"
 
 instance s ~ s' => P.HasComputedCustomRequestHeaders (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -517,7 +516,7 @@ instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeBackendServiceDat
 instance s ~ s' => P.HasComputedHealthChecks (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedHealthChecks x = TF.compute (TF.refKey x) "health_checks"
 
-instance s ~ s' => P.HasComputedIap (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (ComputeBackendServiceIap s)]) where
+instance s ~ s' => P.HasComputedIap (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (IapSetting s)]) where
     computedIap x = TF.compute (TF.refKey x) "iap"
 
 instance s ~ s' => P.HasComputedPortName (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
@@ -538,7 +537,7 @@ instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeBackendServiceData s
 instance s ~ s' => P.HasComputedSessionAffinity (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
     computedSessionAffinity x = TF.compute (TF.refKey x) "session_affinity"
 
-instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Int) where
     computedTimeoutSec x = TF.compute (TF.refKey x) "timeout_sec"
 
 -- | @google_compute_default_service_account@ DataSource.
@@ -546,12 +545,12 @@ instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeBackendServiceData
 -- See the <https://www.terraform.io/docs/providers/google/d/compute_default_service_account.html terraform documentation>
 -- for more information.
 data ComputeDefaultServiceAccountData s = ComputeDefaultServiceAccountData'
-    deriving (P.Show, P.Eq, P.Generic)
+    deriving (P.Show, P.Eq, P.Ord)
 
 computeDefaultServiceAccountData
     :: P.DataSource (ComputeDefaultServiceAccountData s)
 computeDefaultServiceAccountData =
-    TF.newDataSource "google_compute_default_service_account" TF.validator $
+    TF.unsafeDataSource "google_compute_default_service_account" P.defaultProvider TF.validator $
         ComputeDefaultServiceAccountData'
 
 instance TF.IsObject (ComputeDefaultServiceAccountData s) where
@@ -577,13 +576,13 @@ data ComputeForwardingRuleData s = ComputeForwardingRuleData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeForwardingRuleData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeForwardingRuleData s)
 computeForwardingRuleData _name =
-    TF.newDataSource "google_compute_forwarding_rule" TF.validator $
+    TF.unsafeDataSource "google_compute_forwarding_rule" P.defaultProvider TF.validator $
         ComputeForwardingRuleData'
             { _name = _name
             }
@@ -651,13 +650,13 @@ data ComputeGlobalAddressData s = ComputeGlobalAddressData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeGlobalAddressData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeGlobalAddressData s)
 computeGlobalAddressData _name =
-    TF.newDataSource "google_compute_global_address" TF.validator $
+    TF.unsafeDataSource "google_compute_global_address" P.defaultProvider TF.validator $
         ComputeGlobalAddressData'
             { _name = _name
             }
@@ -695,12 +694,12 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ComputeGlobalAddressData s)) 
 -- See the <https://www.terraform.io/docs/providers/google/d/compute_image.html terraform documentation>
 -- for more information.
 data ComputeImageData s = ComputeImageData'
-    deriving (P.Show, P.Eq, P.Generic)
+    deriving (P.Show, P.Eq, P.Ord)
 
 computeImageData
     :: P.DataSource (ComputeImageData s)
 computeImageData =
-    TF.newDataSource "google_compute_image" TF.validator $
+    TF.unsafeDataSource "google_compute_image" P.defaultProvider TF.validator $
         ComputeImageData'
 
 instance TF.IsObject (ComputeImageData s) where
@@ -712,7 +711,7 @@ instance TF.IsValid (ComputeImageData s) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedArchiveSizeBytes (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedArchiveSizeBytes (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Int) where
     computedArchiveSizeBytes x = TF.compute (TF.refKey x) "archive_size_bytes"
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
@@ -721,7 +720,7 @@ instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeImageData s
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputedDiskSizeGb (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedDiskSizeGb (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Int) where
     computedDiskSizeGb x = TF.compute (TF.refKey x) "disk_size_gb"
 
 instance s ~ s' => P.HasComputedFamily (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
@@ -736,7 +735,7 @@ instance s ~ s' => P.HasComputedImageId (TF.Ref s' (ComputeImageData s)) (TF.Att
 instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
     computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ComputeImageData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ComputeImageData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedLabels x = TF.compute (TF.refKey x) "labels"
 
 instance s ~ s' => P.HasComputedLicenses (TF.Ref s' (ComputeImageData s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -774,12 +773,12 @@ data ComputeInstanceGroupData s = ComputeInstanceGroupData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeInstanceGroupData
     :: P.DataSource (ComputeInstanceGroupData s)
 computeInstanceGroupData =
-    TF.newDataSource "google_compute_instance_group" TF.validator $
+    TF.unsafeDataSource "google_compute_instance_group" P.defaultProvider TF.validator $
         ComputeInstanceGroupData'
             { _name = TF.Nil
             }
@@ -806,7 +805,7 @@ instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeInstanceGroupData
 instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedInstances x = TF.compute (TF.refKey x) "instances"
 
-instance s ~ s' => P.HasComputedNamedPort (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s [TF.Attr s (ComputeInstanceGroupNamedPort s)]) where
+instance s ~ s' => P.HasComputedNamedPort (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s [TF.Attr s (NamedPortSetting s)]) where
     computedNamedPort x = TF.compute (TF.refKey x) "named_port"
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Text) where
@@ -818,7 +817,7 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeInstanceGroupData s))
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Text) where
     computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Int) where
     computedSize x = TF.compute (TF.refKey x) "size"
 
 instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Text) where
@@ -829,12 +828,12 @@ instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeInstanceGroupData s)) (T
 -- See the <https://www.terraform.io/docs/providers/google/d/compute_lb_ip_ranges.html terraform documentation>
 -- for more information.
 data ComputeLbIpRangesData s = ComputeLbIpRangesData'
-    deriving (P.Show, P.Eq, P.Generic)
+    deriving (P.Show, P.Eq, P.Ord)
 
 computeLbIpRangesData
     :: P.DataSource (ComputeLbIpRangesData s)
 computeLbIpRangesData =
-    TF.newDataSource "google_compute_lb_ip_ranges" TF.validator $
+    TF.unsafeDataSource "google_compute_lb_ip_ranges" P.defaultProvider TF.validator $
         ComputeLbIpRangesData'
 
 instance TF.IsObject (ComputeLbIpRangesData s) where
@@ -863,13 +862,13 @@ data ComputeNetworkData s = ComputeNetworkData'
     , _project :: TF.Attr s P.Text
     -- ^ @project@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeNetworkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeNetworkData s)
 computeNetworkData _name =
-    TF.newDataSource "google_compute_network" TF.validator $
+    TF.unsafeDataSource "google_compute_network" P.defaultProvider TF.validator $
         ComputeNetworkData'
             { _name = _name
             , _project = TF.Nil
@@ -914,12 +913,12 @@ instance s ~ s' => P.HasComputedSubnetworksSelfLinks (TF.Ref s' (ComputeNetworkD
 -- See the <https://www.terraform.io/docs/providers/google/d/compute_region_instance_group.html terraform documentation>
 -- for more information.
 data ComputeRegionInstanceGroupData s = ComputeRegionInstanceGroupData'
-    deriving (P.Show, P.Eq, P.Generic)
+    deriving (P.Show, P.Eq, P.Ord)
 
 computeRegionInstanceGroupData
     :: P.DataSource (ComputeRegionInstanceGroupData s)
 computeRegionInstanceGroupData =
-    TF.newDataSource "google_compute_region_instance_group" TF.validator $
+    TF.unsafeDataSource "google_compute_region_instance_group" P.defaultProvider TF.validator $
         ComputeRegionInstanceGroupData'
 
 instance TF.IsObject (ComputeRegionInstanceGroupData s) where
@@ -931,7 +930,7 @@ instance TF.IsValid (ComputeRegionInstanceGroupData s) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s [TF.Attr s (ComputeRegionInstanceGroupInstances s)]) where
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s [TF.Attr s (InstancesSetting s)]) where
     computedInstances x = TF.compute (TF.refKey x) "instances"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s P.Text) where
@@ -946,7 +945,7 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeRegionInstanceGroupDat
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s P.Text) where
     computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s P.Int) where
     computedSize x = TF.compute (TF.refKey x) "size"
 
 -- | @google_compute_regions@ DataSource.
@@ -957,12 +956,12 @@ data ComputeRegionsData s = ComputeRegionsData'
     { _status :: TF.Attr s P.Text
     -- ^ @status@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeRegionsData
     :: P.DataSource (ComputeRegionsData s)
 computeRegionsData =
-    TF.newDataSource "google_compute_regions" TF.validator $
+    TF.unsafeDataSource "google_compute_regions" P.defaultProvider TF.validator $
         ComputeRegionsData'
             { _status = TF.Nil
             }
@@ -1000,13 +999,13 @@ data ComputeSslPolicyData s = ComputeSslPolicyData'
     , _project :: TF.Attr s P.Text
     -- ^ @project@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSslPolicyData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeSslPolicyData s)
 computeSslPolicyData _name =
-    TF.newDataSource "google_compute_ssl_policy" TF.validator $
+    TF.unsafeDataSource "google_compute_ssl_policy" P.defaultProvider TF.validator $
         ComputeSslPolicyData'
             { _name = _name
             , _project = TF.Nil
@@ -1066,13 +1065,13 @@ data ComputeSubnetworkData s = ComputeSubnetworkData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSubnetworkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeSubnetworkData s)
 computeSubnetworkData _name =
-    TF.newDataSource "google_compute_subnetwork" TF.validator $
+    TF.unsafeDataSource "google_compute_subnetwork" P.defaultProvider TF.validator $
         ComputeSubnetworkData'
             { _name = _name
             }
@@ -1114,7 +1113,7 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSubnetworkData s)) (T
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedSecondaryIpRange (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s [TF.Attr s (ComputeSubnetworkSecondaryIpRange s)]) where
+instance s ~ s' => P.HasComputedSecondaryIpRange (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s [TF.Attr s (SecondaryIpRangeSetting s)]) where
     computedSecondaryIpRange x = TF.compute (TF.refKey x) "secondary_ip_range"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
@@ -1128,13 +1127,13 @@ data ComputeVpnGatewayData s = ComputeVpnGatewayData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeVpnGatewayData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeVpnGatewayData s)
 computeVpnGatewayData _name =
-    TF.newDataSource "google_compute_vpn_gateway" TF.validator $
+    TF.unsafeDataSource "google_compute_vpn_gateway" P.defaultProvider TF.validator $
         ComputeVpnGatewayData'
             { _name = _name
             }
@@ -1181,12 +1180,12 @@ data ComputeZonesData s = ComputeZonesData'
     , _status :: TF.Attr s P.Text
     -- ^ @status@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeZonesData
     :: P.DataSource (ComputeZonesData s)
 computeZonesData =
-    TF.newDataSource "google_compute_zones" TF.validator $
+    TF.unsafeDataSource "google_compute_zones" P.defaultProvider TF.validator $
         ComputeZonesData'
             { _region = TF.Nil
             , _status = TF.Nil
@@ -1237,13 +1236,13 @@ data ContainerClusterData s = ContainerClusterData'
     , _zone    :: TF.Attr s P.Text
     -- ^ @zone@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 containerClusterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ContainerClusterData s)
 containerClusterData _name =
-    TF.newDataSource "google_container_cluster" TF.validator $
+    TF.unsafeDataSource "google_container_cluster" P.defaultProvider TF.validator $
         ContainerClusterData'
             { _name = _name
             , _project = TF.Nil
@@ -1288,7 +1287,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerClusterData s)) (TF.Attr
 instance s ~ s' => P.HasComputedAdditionalZones (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedAdditionalZones x = TF.compute (TF.refKey x) "additional_zones"
 
-instance s ~ s' => P.HasComputedAddonsConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (ContainerClusterAddonsConfig s)]) where
+instance s ~ s' => P.HasComputedAddonsConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (AddonsConfigSetting s)]) where
     computedAddonsConfig x = TF.compute (TF.refKey x) "addons_config"
 
 instance s ~ s' => P.HasComputedClusterIpv4Cidr (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
@@ -1306,25 +1305,25 @@ instance s ~ s' => P.HasComputedEnableLegacyAbac (TF.Ref s' (ContainerClusterDat
 instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
     computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
 
-instance s ~ s' => P.HasComputedInitialNodeCount (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedInitialNodeCount (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Int) where
     computedInitialNodeCount x = TF.compute (TF.refKey x) "initial_node_count"
 
 instance s ~ s' => P.HasComputedInstanceGroupUrls (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedInstanceGroupUrls x = TF.compute (TF.refKey x) "instance_group_urls"
 
-instance s ~ s' => P.HasComputedIpAllocationPolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (ContainerClusterIpAllocationPolicy s)]) where
+instance s ~ s' => P.HasComputedIpAllocationPolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (IpAllocationPolicySetting s)]) where
     computedIpAllocationPolicy x = TF.compute (TF.refKey x) "ip_allocation_policy"
 
 instance s ~ s' => P.HasComputedLoggingService (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
     computedLoggingService x = TF.compute (TF.refKey x) "logging_service"
 
-instance s ~ s' => P.HasComputedMaintenancePolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (ContainerClusterMaintenancePolicy s)]) where
+instance s ~ s' => P.HasComputedMaintenancePolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (MaintenancePolicySetting s)]) where
     computedMaintenancePolicy x = TF.compute (TF.refKey x) "maintenance_policy"
 
-instance s ~ s' => P.HasComputedMasterAuth (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (ContainerClusterMasterAuth s)]) where
+instance s ~ s' => P.HasComputedMasterAuth (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (MasterAuthSetting s)]) where
     computedMasterAuth x = TF.compute (TF.refKey x) "master_auth"
 
-instance s ~ s' => P.HasComputedMasterAuthorizedNetworksConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (ContainerClusterMasterAuthorizedNetworksConfig s)]) where
+instance s ~ s' => P.HasComputedMasterAuthorizedNetworksConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (MasterAuthorizedNetworksConfigSetting s)]) where
     computedMasterAuthorizedNetworksConfig x = TF.compute (TF.refKey x) "master_authorized_networks_config"
 
 instance s ~ s' => P.HasComputedMasterIpv4CidrBlock (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
@@ -1342,19 +1341,19 @@ instance s ~ s' => P.HasComputedMonitoringService (TF.Ref s' (ContainerClusterDa
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
     computedNetwork x = TF.compute (TF.refKey x) "network"
 
-instance s ~ s' => P.HasComputedNetworkPolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (ContainerClusterNetworkPolicy s)]) where
+instance s ~ s' => P.HasComputedNetworkPolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (NetworkPolicySetting s)]) where
     computedNetworkPolicy x = TF.compute (TF.refKey x) "network_policy"
 
-instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (ContainerClusterNodeConfig s)]) where
+instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (NodeConfigSetting s)]) where
     computedNodeConfig x = TF.compute (TF.refKey x) "node_config"
 
-instance s ~ s' => P.HasComputedNodePool (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (ContainerClusterNodePool s)]) where
+instance s ~ s' => P.HasComputedNodePool (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (NodePoolSetting s)]) where
     computedNodePool x = TF.compute (TF.refKey x) "node_pool"
 
 instance s ~ s' => P.HasComputedNodeVersion (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
     computedNodeVersion x = TF.compute (TF.refKey x) "node_version"
 
-instance s ~ s' => P.HasComputedPodSecurityPolicyConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (ContainerClusterPodSecurityPolicyConfig s)]) where
+instance s ~ s' => P.HasComputedPodSecurityPolicyConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (PodSecurityPolicyConfigSetting s)]) where
     computedPodSecurityPolicyConfig x = TF.compute (TF.refKey x) "pod_security_policy_config"
 
 instance s ~ s' => P.HasComputedPrivateCluster (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Bool) where
@@ -1363,7 +1362,7 @@ instance s ~ s' => P.HasComputedPrivateCluster (TF.Ref s' (ContainerClusterData 
 instance s ~ s' => P.HasComputedRemoveDefaultNodePool (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Bool) where
     computedRemoveDefaultNodePool x = TF.compute (TF.refKey x) "remove_default_node_pool"
 
-instance s ~ s' => P.HasComputedResourceLabels (TF.Ref s' (ContainerClusterData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedResourceLabels (TF.Ref s' (ContainerClusterData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedResourceLabels x = TF.compute (TF.refKey x) "resource_labels"
 
 instance s ~ s' => P.HasComputedSubnetwork (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
@@ -1380,12 +1379,12 @@ data ContainerEngineVersionsData s = ContainerEngineVersionsData'
     , _zone    :: TF.Attr s P.Text
     -- ^ @zone@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 containerEngineVersionsData
     :: P.DataSource (ContainerEngineVersionsData s)
 containerEngineVersionsData =
-    TF.newDataSource "google_container_engine_versions" TF.validator $
+    TF.unsafeDataSource "google_container_engine_versions" P.defaultProvider TF.validator $
         ContainerEngineVersionsData'
             { _project = TF.Nil
             , _zone = TF.Nil
@@ -1445,13 +1444,13 @@ data ContainerRegistryImageData s = ContainerRegistryImageData'
     , _tag    :: TF.Attr s P.Text
     -- ^ @tag@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 containerRegistryImageData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ContainerRegistryImageData s)
 containerRegistryImageData _name =
-    TF.newDataSource "google_container_registry_image" TF.validator $
+    TF.unsafeDataSource "google_container_registry_image" P.defaultProvider TF.validator $
         ContainerRegistryImageData'
             { _digest = TF.Nil
             , _name = _name
@@ -1507,12 +1506,12 @@ data ContainerRegistryRepositoryData s = ContainerRegistryRepositoryData'
     { _region :: TF.Attr s P.Text
     -- ^ @region@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 containerRegistryRepositoryData
     :: P.DataSource (ContainerRegistryRepositoryData s)
 containerRegistryRepositoryData =
-    TF.newDataSource "google_container_registry_repository" TF.validator $
+    TF.unsafeDataSource "google_container_registry_repository" P.defaultProvider TF.validator $
         ContainerRegistryRepositoryData'
             { _region = TF.Nil
             }
@@ -1550,13 +1549,13 @@ data DnsManagedZoneData s = DnsManagedZoneData'
     , _project :: TF.Attr s P.Text
     -- ^ @project@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dnsManagedZoneData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DnsManagedZoneData s)
 dnsManagedZoneData _name =
-    TF.newDataSource "google_dns_managed_zone" TF.validator $
+    TF.unsafeDataSource "google_dns_managed_zone" P.defaultProvider TF.validator $
         DnsManagedZoneData'
             { _name = _name
             , _project = TF.Nil
@@ -1604,13 +1603,13 @@ data FolderData s = FolderData'
     , _lookupOrganization :: TF.Attr s P.Bool
     -- ^ @lookup_organization@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 folderData
     :: TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
     -> P.DataSource (FolderData s)
 folderData _folder =
-    TF.newDataSource "google_folder" TF.validator $
+    TF.unsafeDataSource "google_folder" P.defaultProvider TF.validator $
         FolderData'
             { _folder = _folder
             , _lookupOrganization = TF.value P.False
@@ -1661,16 +1660,16 @@ instance s ~ s' => P.HasComputedParent (TF.Ref s' (FolderData s)) (TF.Attr s P.T
 -- See the <https://www.terraform.io/docs/providers/google/d/iam_policy.html terraform documentation>
 -- for more information.
 data IamPolicyData s = IamPolicyData'
-    { _binding :: TF.Attr s [TF.Attr s (IamPolicyBinding s)]
+    { _binding :: TF.Attr s [TF.Attr s (BindingSetting s)]
     -- ^ @binding@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 iamPolicyData
-    :: TF.Attr s [TF.Attr s (IamPolicyBinding s)] -- ^ @binding@ - 'P.binding'
+    :: TF.Attr s [TF.Attr s (BindingSetting s)] -- ^ @binding@ - 'P.binding'
     -> P.DataSource (IamPolicyData s)
 iamPolicyData _binding =
-    TF.newDataSource "google_iam_policy" TF.validator $
+    TF.unsafeDataSource "google_iam_policy" P.defaultProvider TF.validator $
         IamPolicyData'
             { _binding = _binding
             }
@@ -1682,14 +1681,10 @@ instance TF.IsObject (IamPolicyData s) where
 
 instance TF.IsValid (IamPolicyData s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_binding"
-                  (_binding
-                      :: IamPolicyData s -> TF.Attr s [TF.Attr s (IamPolicyBinding s)])
-                  TF.validator
 
-instance P.HasBinding (IamPolicyData s) (TF.Attr s [TF.Attr s (IamPolicyBinding s)]) where
+instance P.HasBinding (IamPolicyData s) (TF.Attr s [TF.Attr s (BindingSetting s)]) where
     binding =
-        P.lens (_binding :: IamPolicyData s -> TF.Attr s [TF.Attr s (IamPolicyBinding s)])
+        P.lens (_binding :: IamPolicyData s -> TF.Attr s [TF.Attr s (BindingSetting s)])
                (\s a -> s { _binding = a } :: IamPolicyData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (IamPolicyData s)) (TF.Attr s P.Text) where
@@ -1709,14 +1704,14 @@ data KmsSecretData s = KmsSecretData'
     , _cryptoKey  :: TF.Attr s P.Text
     -- ^ @crypto_key@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 kmsSecretData
     :: TF.Attr s P.Text -- ^ @ciphertext@ - 'P.ciphertext'
     -> TF.Attr s P.Text -- ^ @crypto_key@ - 'P.cryptoKey'
     -> P.DataSource (KmsSecretData s)
 kmsSecretData _ciphertext _cryptoKey =
-    TF.newDataSource "google_kms_secret" TF.validator $
+    TF.unsafeDataSource "google_kms_secret" P.defaultProvider TF.validator $
         KmsSecretData'
             { _ciphertext = _ciphertext
             , _cryptoKey = _cryptoKey
@@ -1752,12 +1747,12 @@ instance s ~ s' => P.HasComputedPlaintext (TF.Ref s' (KmsSecretData s)) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/google/d/netblock_ip_ranges.html terraform documentation>
 -- for more information.
 data NetblockIpRangesData s = NetblockIpRangesData'
-    deriving (P.Show, P.Eq, P.Generic)
+    deriving (P.Show, P.Eq, P.Ord)
 
 netblockIpRangesData
     :: P.DataSource (NetblockIpRangesData s)
 netblockIpRangesData =
-    TF.newDataSource "google_netblock_ip_ranges" TF.validator $
+    TF.unsafeDataSource "google_netblock_ip_ranges" P.defaultProvider TF.validator $
         NetblockIpRangesData'
 
 instance TF.IsObject (NetblockIpRangesData s) where
@@ -1786,12 +1781,12 @@ data OrganizationData s = OrganizationData'
     { _organization :: TF.Attr s P.Text
     -- ^ @organization@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 organizationData
     :: P.DataSource (OrganizationData s)
 organizationData =
-    TF.newDataSource "google_organization" TF.validator $
+    TF.unsafeDataSource "google_organization" P.defaultProvider TF.validator $
         OrganizationData'
             { _organization = TF.Nil
             }
@@ -1835,12 +1830,12 @@ data ProjectData s = ProjectData'
     { _projectId :: TF.Attr s P.Text
     -- ^ @project_id@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 projectData
     :: P.DataSource (ProjectData s)
 projectData =
-    TF.newDataSource "google_project" TF.validator $
+    TF.unsafeDataSource "google_project" P.defaultProvider TF.validator $
         ProjectData'
             { _projectId = TF.Nil
             }
@@ -1861,7 +1856,7 @@ instance P.HasProjectId (ProjectData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAppEngine (TF.Ref s' (ProjectData s)) (TF.Attr s [TF.Attr s (ProjectAppEngine s)]) where
+instance s ~ s' => P.HasComputedAppEngine (TF.Ref s' (ProjectData s)) (TF.Attr s [TF.Attr s (AppEngineSetting s)]) where
     computedAppEngine x = TF.compute (TF.refKey x) "app_engine"
 
 instance s ~ s' => P.HasComputedAutoCreateNetwork (TF.Ref s' (ProjectData s)) (TF.Attr s P.Bool) where
@@ -1873,7 +1868,7 @@ instance s ~ s' => P.HasComputedBillingAccount (TF.Ref s' (ProjectData s)) (TF.A
 instance s ~ s' => P.HasComputedFolderId (TF.Ref s' (ProjectData s)) (TF.Attr s P.Text) where
     computedFolderId x = TF.compute (TF.refKey x) "folder_id"
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ProjectData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ProjectData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedLabels x = TF.compute (TF.refKey x) "labels"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ProjectData s)) (TF.Attr s P.Text) where
@@ -1905,13 +1900,13 @@ data ServiceAccountData s = ServiceAccountData'
     , _project   :: TF.Attr s P.Text
     -- ^ @project@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 serviceAccountData
     :: TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
     -> P.DataSource (ServiceAccountData s)
 serviceAccountData _accountId =
-    TF.newDataSource "google_service_account" TF.validator $
+    TF.unsafeDataSource "google_service_account" P.defaultProvider TF.validator $
         ServiceAccountData'
             { _accountId = _accountId
             , _project = TF.Nil
@@ -1965,13 +1960,13 @@ data ServiceAccountKeyData s = ServiceAccountKeyData'
     , _serviceAccountId :: TF.Attr s P.Text
     -- ^ @service_account_id@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 serviceAccountKeyData
     :: TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
     -> P.DataSource (ServiceAccountKeyData s)
 serviceAccountKeyData _serviceAccountId =
-    TF.newDataSource "google_service_account_key" TF.validator $
+    TF.unsafeDataSource "google_service_account_key" P.defaultProvider TF.validator $
         ServiceAccountKeyData'
             { _project = TF.Nil
             , _publicKeyType = TF.value "TYPE_X509_PEM_FILE"
@@ -2035,7 +2030,7 @@ data StorageObjectSignedUrlData s = StorageObjectSignedUrlData'
     , _duration         :: TF.Attr s P.Text
     -- ^ @duration@ - (Optional)
     --
-    , _extensionHeaders :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _extensionHeaders :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @extension_headers@ - (Optional)
     --
     , _httpMethod       :: TF.Attr s P.Text
@@ -2044,14 +2039,14 @@ data StorageObjectSignedUrlData s = StorageObjectSignedUrlData'
     , _path             :: TF.Attr s P.Text
     -- ^ @path@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 storageObjectSignedUrlData
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> P.DataSource (StorageObjectSignedUrlData s)
 storageObjectSignedUrlData _bucket _path =
-    TF.newDataSource "google_storage_object_signed_url" TF.validator $
+    TF.unsafeDataSource "google_storage_object_signed_url" P.defaultProvider TF.validator $
         StorageObjectSignedUrlData'
             { _bucket = _bucket
             , _contentMd5 = TF.Nil
@@ -2103,9 +2098,9 @@ instance P.HasDuration (StorageObjectSignedUrlData s) (TF.Attr s P.Text) where
         P.lens (_duration :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
                (\s a -> s { _duration = a } :: StorageObjectSignedUrlData s)
 
-instance P.HasExtensionHeaders (StorageObjectSignedUrlData s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasExtensionHeaders (StorageObjectSignedUrlData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     extensionHeaders =
-        P.lens (_extensionHeaders :: StorageObjectSignedUrlData s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_extensionHeaders :: StorageObjectSignedUrlData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _extensionHeaders = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasHttpMethod (StorageObjectSignedUrlData s) (TF.Attr s P.Text) where
@@ -2129,12 +2124,12 @@ instance s ~ s' => P.HasComputedSignedUrl (TF.Ref s' (StorageObjectSignedUrlData
 -- See the <https://www.terraform.io/docs/providers/google/d/storage_project_service_account.html terraform documentation>
 -- for more information.
 data StorageProjectServiceAccountData s = StorageProjectServiceAccountData'
-    deriving (P.Show, P.Eq, P.Generic)
+    deriving (P.Show, P.Eq, P.Ord)
 
 storageProjectServiceAccountData
     :: P.DataSource (StorageProjectServiceAccountData s)
 storageProjectServiceAccountData =
-    TF.newDataSource "google_storage_project_service_account" TF.validator $
+    TF.unsafeDataSource "google_storage_project_service_account" P.defaultProvider TF.validator $
         StorageProjectServiceAccountData'
 
 instance TF.IsObject (StorageProjectServiceAccountData s) where
