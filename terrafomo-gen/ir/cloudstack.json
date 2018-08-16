@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newFilterSetting",
+                "smart": "filterSetting",
                 "name": "FilterSetting'"
             },
             "arguments": [
@@ -87,7 +87,7 @@
         },
         {
             "con": {
-                "smart": "newForwardSetting",
+                "smart": "forwardSetting",
                 "name": "ForwardSetting'"
             },
             "arguments": [
@@ -275,7 +275,7 @@
         },
         {
             "con": {
-                "smart": "newRuleSetting",
+                "smart": "ruleSetting",
                 "name": "RuleSetting'"
             },
             "arguments": [
