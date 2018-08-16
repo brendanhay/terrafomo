@@ -14,10 +14,10 @@
 module Terrafomo.OneAndOne
     ( module Terrafomo.OneAndOne.DataSource
     , module Terrafomo.OneAndOne.Lens
-    , module Terrafomo.OneAndOne.Settings
-    , module Terrafomo.OneAndOne.Resource
-    , module Terrafomo.OneAndOne.Types
     , module Terrafomo.OneAndOne.Provider
+    , module Terrafomo.OneAndOne.Resource
+    , module Terrafomo.OneAndOne.Settings
+    , module Terrafomo.OneAndOne.Types
     -- * Provider Aliases
     ) where
 

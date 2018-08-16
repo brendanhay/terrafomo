@@ -20,6 +20,7 @@ module Terrafomo.OneAndOne.Provider
     -- * OneAndOne Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * OneAndOne Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.OneAndOne.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
+import qualified Data.Map.Strict           as Map
 import qualified Data.Maybe                as P
 import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
@@ -64,14 +64,14 @@ data Provider = Provider'
     { _endpoint :: P.Text
     -- ^ @endpoint@ - (Optional)
     --
-    , _retries  :: P.Integer
+    , _retries  :: P.Int
     -- ^ @retries@ - (Optional)
     --
     , _token    :: P.Text
     -- ^ @token@ - (Required)
     -- 1&1 token for API operations.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: P.Text -- ^ @token@ - 'P.token'
@@ -83,23 +83,20 @@ newProvider _token =
         , _token = _token
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , P.Just $ TF.assign "endpoint" _endpoint
-                  , P.Just $ TF.assign "retries" _retries
-                  , P.Just $ TF.assign "token" _token
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  P.Just $ TF.assign "endpoint" _endpoint
+        ,  P.Just $ TF.assign "retries" _retries
+        ,  P.Just $ TF.assign "token" _token
+        ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
@@ -109,9 +106,9 @@ instance P.HasEndpoint (Provider) (P.Text) where
         P.lens (_endpoint :: Provider -> P.Text)
                (\s a -> s { _endpoint = a } :: Provider)
 
-instance P.HasRetries (Provider) (P.Integer) where
+instance P.HasRetries (Provider) (P.Int) where
     retries =
-        P.lens (_retries :: Provider -> P.Integer)
+        P.lens (_retries :: Provider -> P.Int)
                (\s a -> s { _retries = a } :: Provider)
 
 instance P.HasToken (Provider) (P.Text) where

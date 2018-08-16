@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.OneAndOne.Settings
 
-import qualified Data.Hashable                as P
-import qualified Data.HashMap.Strict          as P
-import qualified Data.HashMap.Strict          as Map
 import qualified Data.List.NonEmpty           as P
+import qualified Data.Map.Strict              as P
+import qualified Data.Map.Strict              as Map
 import qualified Data.Maybe                   as P
 import qualified Data.Monoid                  as P
 import qualified Data.Text                    as P
@@ -59,26 +58,26 @@ data InstanceSizeData s = InstanceSizeData'
     --
     -- Conflicts with:
     --
-    -- * 'vcores'
     -- * 'ram'
+    -- * 'vcores'
     , _ram    :: TF.Attr s P.Double
     -- ^ @ram@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'name'
-    , _vcores :: TF.Attr s P.Integer
+    , _vcores :: TF.Attr s P.Int
     -- ^ @vcores@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'name'
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 instanceSizeData
     :: P.DataSource (InstanceSizeData s)
 instanceSizeData =
-    TF.newDataSource "oneandone_instance_size" TF.validator $
+    TF.unsafeDataSource "oneandone_instance_size" P.defaultProvider TF.validator $
         InstanceSizeData'
             { _name = TF.Nil
             , _ram = TF.Nil
@@ -97,7 +96,7 @@ instance TF.IsValid (InstanceSizeData s) where
         [ if (_name P.== TF.Nil)
               then P.Nothing
               else P.Just ("_name",
-                            [ "_vcores"                            , "_ram"
+                            [ "_ram"                            , "_vcores"
                             ])
         , if (_ram P.== TF.Nil)
               then P.Nothing
@@ -121,9 +120,9 @@ instance P.HasRam (InstanceSizeData s) (TF.Attr s P.Double) where
         P.lens (_ram :: InstanceSizeData s -> TF.Attr s P.Double)
                (\s a -> s { _ram = a } :: InstanceSizeData s)
 
-instance P.HasVcores (InstanceSizeData s) (TF.Attr s P.Integer) where
+instance P.HasVcores (InstanceSizeData s) (TF.Attr s P.Int) where
     vcores =
-        P.lens (_vcores :: InstanceSizeData s -> TF.Attr s P.Integer)
+        P.lens (_vcores :: InstanceSizeData s -> TF.Attr s P.Int)
                (\s a -> s { _vcores = a } :: InstanceSizeData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (InstanceSizeData s)) (TF.Attr s P.Text) where
