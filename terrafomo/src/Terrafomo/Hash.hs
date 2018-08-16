@@ -3,25 +3,23 @@ module Terrafomo.Hash
     , human
     ) where
 
-import Data.Hashable (Hashable (hash))
-import Data.Text     (Text)
+import Data.Text (Text)
 
 import qualified Data.Text     as Text
 import qualified System.Random as Random
 
-range :: Hashable a => a -> Int -> [b] -> [b]
-range x n rs =
+range :: Int -> Int -> [b] -> [b]
+range i len rs =
       map (rs !!)
-    . take n
+    . take len
     . Random.randomRs (0, length rs - 1)
-    . Random.mkStdGen
-    $ hash x
+    $ Random.mkStdGen i
 
-hashid :: Hashable a => a -> Text
+hashid :: Int -> Text
 hashid x =
     Text.pack $ range x 9 (['a' .. 'z'] ++ ['A' .. 'Z'] ++ ['0' .. '9'])
 
-human :: Hashable a => a -> Text
+human :: Int -> Text
 human x =
     Text.intercalate "_" $ range x 5
         [ "aardvark"

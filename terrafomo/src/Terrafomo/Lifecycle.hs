@@ -7,8 +7,8 @@ module Terrafomo.Lifecycle
     )where
 
 import Data.Function  (on)
-import Data.HashSet   (HashSet)
 import Data.Semigroup (Semigroup ((<>)))
+import Data.Set       (Set)
 
 import GHC.Exts (IsList (..))
 
@@ -16,7 +16,7 @@ import Lens.Micro (ASetter', Lens', lens)
 
 import Terrafomo.Name
 
-import qualified Data.HashSet  as Set
+import qualified Data.Set      as Set
 import qualified Lens.Micro    as Lens
 import qualified Terrafomo.HCL as HCL
 
@@ -30,7 +30,7 @@ import qualified Terrafomo.HCL as HCL
 -- (e.g. "rout*") is not supported.
 data Changes a
     = Wildcard -- '*'
-    | Match !(HashSet Name)
+    | Match !(Set Name)
       deriving (Show, Eq, Ord)
 
 instance Semigroup (Changes a) where
@@ -76,7 +76,7 @@ data Lifecycle a = Lifecycle
     { _preventDestroy      :: !Bool
     , _createBeforeDestroy :: !Bool
     , _ignoreChanges       :: !(Changes a)
-    } deriving (Show, Eq)
+    } deriving (Show, Eq, Ord)
 
 instance Semigroup (Lifecycle a) where
     (<>) a b = Lifecycle

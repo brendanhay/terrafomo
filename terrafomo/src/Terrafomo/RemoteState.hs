@@ -1,8 +1,8 @@
 -- | Remote state is a custom data source that doesn't support a provider.
 module Terrafomo.RemoteState
     ( RemoteState (..)
+    , remoteStateType
     , remoteStateKey
-    , newRemoteState
     ) where
 
 import Data.Function ((&))
@@ -13,25 +13,21 @@ import Terrafomo.Name
 import qualified Terrafomo.HCL as HCL
 
 data RemoteState b = RemoteState
-    { remoteStateBackend :: !(Backend b)
-    , remoteStateName    :: !Name
+    { remoteStateName    :: !Name
+    , remoteStateBackend :: !(Backend b)
     } deriving (Show, Eq, Functor)
+
+remoteStateType :: Type
+remoteStateType = Type (Just "data") "terraform_remote_state"
 
 remoteStateKey :: RemoteState b -> Key
 remoteStateKey x =
-    Key { keyType = Type (Just "data") "terraform_remote_state"
+    Key { keyType = remoteStateType
         , keyName = remoteStateName x
         }
 
-newRemoteState :: Name -> Backend b -> RemoteState b
-newRemoteState n x =
-    RemoteState
-        { remoteStateBackend = x
-        , remoteStateName    = n
-        }
-
 instance HCL.IsObject b => HCL.IsSection (RemoteState b) where
-    toSection s@(RemoteState x _) =
+    toSection s@(RemoteState _ x) =
         HCL.section "data" (HCL.key (remoteStateKey s))
             & HCL.pairs
                 [ HCL.assign "backend" (backendName   x)

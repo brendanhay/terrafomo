@@ -12,10 +12,9 @@ module Terrafomo.Attribute
     , false
     ) where
 
-import Data.Hashable (Hashable)
-import Data.Monoid   ((<>))
-import Data.String   (IsString (fromString))
-import Data.Text     (Text)
+import Data.Monoid ((<>))
+import Data.String (IsString (fromString))
+import Data.Text   (Text)
 
 import GHC.Generics (Generic)
 
@@ -30,14 +29,12 @@ data Attr s a
     | Join     !Text ![Attr s a]
     | Apply    !Text ![Attr s a]
     | Infix    !Text !(Attr s a) !(Attr s a)
-      deriving (Show, Eq, Generic)
+      deriving (Show, Eq, Ord, Generic)
 
 -- FIXME: Flatten above is really a sign of some expression language - rather
 -- than a special one off case. For instance, doing a join(strs, ',')
 --
 -- The expression language and HCL serialization needs to be re/thought/worked.
-
-instance Hashable a => Hashable (Attr s a)
 
 instance IsString a => IsString (Attr s a) where
     fromString = value . fromString

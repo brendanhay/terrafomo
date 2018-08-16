@@ -5,7 +5,6 @@ module Terrafomo.Backend
     ) where
 
 import Data.Function ((&))
-import Data.Hashable (Hashable (hashWithSalt))
 
 import Terrafomo.Name (Name)
 
@@ -17,12 +16,7 @@ import qualified Terrafomo.HCL as HCL
 data Backend b = Backend
     { backendName   :: !Name
     , backendConfig :: !b
-    } deriving (Show, Eq, Functor)
-
-instance Hashable b => Hashable (Backend b) where
-    hashWithSalt s x =
-        s `hashWithSalt` backendName   x
-          `hashWithSalt` backendConfig x
+    } deriving (Show, Eq, Ord, Functor)
 
 instance HCL.IsObject b => HCL.IsSection (Backend b) where
     toSection (Backend n x) =

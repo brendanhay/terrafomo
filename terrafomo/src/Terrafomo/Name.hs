@@ -12,7 +12,6 @@ module Terrafomo.Name
     , fref
     ) where
 
-import Data.Hashable  (Hashable (hashWithSalt))
 import Data.Semigroup (Semigroup)
 import Data.String    (IsString)
 import Data.Text      (Text)
@@ -23,7 +22,7 @@ import qualified Data.Text.Lazy.Builder as Build
 import qualified Formatting             as Format
 
 newtype Name = Name { fromName :: Text }
-    deriving (Show, Eq, Ord, Semigroup, IsString, Hashable)
+    deriving (Show, Eq, Ord, Semigroup, IsString)
 
 -- | Output a Terraform 'Name'.
 fname :: Format r (Name -> r)
@@ -33,11 +32,6 @@ data Type = Type
     { typePrefix :: !(Maybe Text)
     , typeName   :: !Text
     } deriving (Show, Eq, Ord)
-
-instance Hashable Type where
-    hashWithSalt s x =
-        s `hashWithSalt` typePrefix x
-          `hashWithSalt` typeName   x
 
 -- | Output a Terraform 'Type'.
 ftype :: Format r (Type -> r)
@@ -50,16 +44,11 @@ data Key = Key
     , keyName :: !Name
     } deriving (Show, Eq, Ord)
 
-instance Hashable Key where
-    hashWithSalt s x =
-        s `hashWithSalt` keyType x
-          `hashWithSalt` keyName x
-
 -- | Opaque Named Ref.
 data Ref s a = UnsafeRef
     { refKey   :: !Key
     , refValue :: !a
-    } deriving (Show)
+    } deriving (Show, Eq, Ord)
 
 refName :: Ref s a -> Name
 refName = keyName . refKey

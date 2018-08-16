@@ -38,8 +38,8 @@ library:
   dependencies:
     - aeson
     - aeson-pretty
+    - containers
     - formatting >= 6.2.5
-    - hashable
     - iproute
     - microlens
     - microlens-th
@@ -50,7 +50,6 @@ library:
     - template-haskell
     - text
     - transformers
-    - unordered-containers
 
 tests:
   hspec:

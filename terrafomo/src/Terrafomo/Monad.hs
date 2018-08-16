@@ -35,13 +35,11 @@ import Control.Monad.Except (Except)
 import Control.Monad.Morph  (MFunctor (hoist))
 import Control.Monad.Trans  (MonadTrans (lift))
 
-import Data.Hashable       (Hashable)
-import Data.HashMap.Strict (HashMap)
-import Data.HashSet        (HashSet)
-import Data.Proxy          (Proxy (..))
-import Data.Semigroup      (Semigroup ((<>)))
-import Data.Text           (Text)
-import Data.Typeable       (Typeable)
+import Data.Map.Strict (Map)
+import Data.Semigroup  (Semigroup ((<>)))
+import Data.Set        (Set)
+import Data.Text       (Text)
+import Data.Typeable   (Typeable)
 
 import Terrafomo.Attribute   (Attr (Compute))
 import Terrafomo.Backend
@@ -65,7 +63,7 @@ import qualified Control.Monad.Trans.State.Lazy    as Lazy
 import qualified Control.Monad.Trans.State.Strict  as Strict
 import qualified Control.Monad.Trans.Writer.Lazy   as Lazy
 import qualified Control.Monad.Trans.Writer.Strict as Strict
-import qualified Data.HashMap.Strict               as Map
+import qualified Data.Map.Strict                   as Map
 import qualified Data.Text.Lazy                    as LText
 import qualified System.IO                         as IO
 import qualified Terrafomo.Format                  as Format
@@ -76,18 +74,17 @@ import qualified Terrafomo.ValueMap                as VMap
 data Error
     = NonUniqueRef    !Key  !HCL.Section
     | NonUniqueOutput !Name !HCL.Section
-    | ConflictsWith   !Key  !(HashMap Text (HashSet Text))
+    | ConflictsWith   !Key  !(Map Text (Set Text))
       deriving (Eq, Show, Typeable)
 
 instance Exception Error
 
-newtype Config = Config
-    { aliases :: HashMap Type Key
-    }
+newtype Config = Config { aliases :: Map Type Key }
 
 -- | Provides key uniquness invariants and ordering of output statements.
 data Document = UnsafeDocument
-    { supply     :: !Int -- Deliberate use of 'Int', for overflow.
+    { supply     :: !Int
+    , hashes     :: !(Map HCL.Section Name)
     , backend    :: !(Backend [HCL.Pair])
     , providers  :: !(ValueMap Key  HCL.Section)
     , remotes    :: !(ValueMap Key  HCL.Section)
@@ -134,6 +131,7 @@ runTerraform x m =
                 }
             UnsafeDocument
                 { supply     = 100000
+                , hashes     = mempty
                 , backend    = HCL.toObject <$> x
                 , providers  = VMap.empty
                 , remotes    = VMap.empty
@@ -245,41 +243,38 @@ instance ( MonadTerraform s m
 -- Providers
 
 withProvider
-    :: forall s m p a.
-       ( MonadTerraform s m
-       , IsProvider p
+    :: ( MonadTerraform s m
+       , HCL.IsObject p
        )
-    => p
+    => Provider (Maybe p)
     -> m a
     -> m a
 withProvider p m =
-    insertProvider (Just p) >>= \case
+    insertProvider p >>= \case
         Nothing  -> m
         Just key ->
             flip localTerraform m $ \s ->
-                s { aliases =
-                      Map.insert (providerType (Proxy :: Proxy p)) key
-                                 (aliases s)
+                s { aliases = Map.insert (_providerType p) key (aliases s)
                   }
 
 insertProvider
-    :: forall s m p.
-       ( MonadTerraform s m
-       , IsProvider p
+    :: ( MonadTerraform s m
+       , HCL.IsObject p
        )
-    => Maybe p
+    => Provider (Maybe p)
     -> m (Maybe Key)
-insertProvider = \case
-    Nothing ->
-        liftTerraform $
-            MTL.asks (Map.lookup (providerType (Proxy :: Proxy p)) . aliases)
-    Just p  -> do
-        let key   = providerKey p
-            value = HCL.toSection p
+insertProvider p =
+    liftTerraform $
+        case _providerConfig p of
+            Nothing -> MTL.asks (Map.lookup (_providerType p) . aliases)
+            Just _  -> do
+                let value = HCL.toSection p
 
-        void $ insertValue key value providers (\s w -> w { providers = s })
+                key <- Key (_providerType p) <$> hashSection value
 
-        pure $! Just key
+                void $ insertValue key value providers (\s w -> w { providers = s })
+
+                pure $! Just key
 
 -- Values
 
@@ -294,20 +289,25 @@ define
     -> m (Ref s a)
 define name x@Schema{_schemaProvider, _schemaConfig, _schemaValidator} =
     liftTerraform $ do
-        let typ   = _schemaType x
-            key   = Key typ name
-            value = HCL.toSection $
-                        x { _schemaKeywords =
-                              _schemaKeywords x
-                                  <> pure (HCL.type_ typ)
-                                  <> pure (HCL.name  name)
-                          }
+        let typ = _schemaType x
+            key = Key typ name
 
         case applyValidator _schemaValidator _schemaConfig of
             Nothing   -> pure ()
             Just errs -> MTL.throwError (ConflictsWith key errs)
 
-        void $ insertProvider _schemaProvider
+        alias <- insertProvider _schemaProvider
+
+        let value = HCL.toSection $
+                        x { _schemaProvider =
+                              _schemaProvider
+                                { _providerAlias = fmap keyName alias
+                                }
+                          , _schemaKeywords =
+                              _schemaKeywords x
+                                  <> pure (HCL.type_ typ)
+                                  <> pure (HCL.name  name)
+                          }
 
         unique <-
             insertValue key value references (\s w -> w { references = s })
@@ -364,10 +364,11 @@ remote
     -> m (Attr s a)
 remote x@(Output _ _ attr) =
     liftTerraform $ do
-        let hash  = Name (Hash.human (outputBackend x))
-            state = newRemoteState hash (outputBackend x)
+        hash <- hashSection $ HCL.toSection (outputBackend x)
+
+        let state = RemoteState hash (outputBackend x)
             key   = remoteStateKey state
-            value = HCL.toSection state
+            value = HCL.toSection  state
 
         exists <-
             MTL.gets (VMap.member key . remotes)
@@ -380,10 +381,22 @@ remote x@(Output _ _ attr) =
                 Compute _ _ n -> Compute key (outputName x) n
                 _             -> Compute key (outputName x) (outputName x)
 
+hashSection
+    :: MonadTerraform s m
+    => HCL.Section
+    -> m Name
+hashSection x =
+    liftTerraform $
+        MTL.gets (Map.lookup x . hashes) >>= \case
+            Just name -> pure name
+            Nothing   -> do
+                name <- getNextName
+                MTL.modify' (\s -> s { hashes = Map.insert x name (hashes s) })
+                pure name
+
 insertValue
     :: ( MonadTerraform s m
-       , Eq k
-       , Hashable k
+       , Ord k
        )
     => k
     -- ^ The key.
@@ -408,5 +421,5 @@ getNextName :: MonadTerraform s m => m Name
 getNextName =
     liftTerraform $ do
         MTL.modify' (\s -> s { supply = supply s + 1 })
-        nformat (Format.stext) . Hash.hashid
+        nformat Format.stext . Hash.hashid
             <$> MTL.gets supply

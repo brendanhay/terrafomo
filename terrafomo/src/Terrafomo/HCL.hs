@@ -51,10 +51,9 @@ module Terrafomo.HCL
 import Prelude hiding (concat, null)
 
 import Data.Aeson                (ToJSON (..))
-import Data.Hashable             (Hashable)
-import Data.HashMap.Strict       (HashMap)
 import Data.Int
 import Data.List.NonEmpty        (NonEmpty ((:|)))
+import Data.Map.Strict           (Map)
 import Data.Maybe                (fromMaybe, mapMaybe, maybeToList)
 import Data.Semigroup            ((<>))
 import Data.String               (IsString (fromString))
@@ -75,9 +74,9 @@ import Terrafomo.Name
 import qualified Data.Aeson                            as JSON
 import qualified Data.Aeson.Encode.Pretty              as JSON (encodePretty)
 import qualified Data.Foldable                         as Fold
-import qualified Data.HashMap.Strict                   as Map
 import qualified Data.IP                               as IP
 import qualified Data.List                             as List
+import qualified Data.Map.Strict                       as Map
 import qualified Data.Text.Lazy                        as LText
 import qualified Data.Text.Lazy.Builder                as Build
 import qualified Data.Text.Lazy.Encoding               as LText (decodeUtf8)
@@ -91,9 +90,7 @@ import qualified System.IO                             as IO
 data Id
     = Unquoted !Text
     | Quoted   !Text
-      deriving (Show, Eq, Generic)
-
-instance Hashable Id
+      deriving (Show, Eq, Ord, Generic)
 
 -- | Provides an instance for _unquoted_ keys.
 instance IsString Id where
@@ -115,9 +112,7 @@ data Interpolate
     = Chunk  !LText.Text
     | Escape ![Value]
     | Concat ![Interpolate]
-      deriving (Show, Eq, Generic)
-
-instance Hashable Interpolate
+      deriving (Show, Eq, Ord, Generic)
 
 instance IsString Interpolate where
     fromString = Chunk . fromString
@@ -161,16 +156,14 @@ data Value
     | List    ![Value]
     -- ^ Lists of primitive types can be made with square brackets ([]). Example:
     -- ["foo", "bar", "baz"].
-    | Map     !(HashMap Text Value)
+    | Map     !(Map Text Value)
     -- ^ Maps can be made with braces ({}) and colons (:): { "foo": "bar",
     -- "bar": "baz" }. Quotes may be omitted on keys, unless the key starts
     -- with a number, in which case quotes are required. Commas are required
     -- between key/value pairs for single line maps. A newline between
     -- key/value pairs is sufficient in multi-line maps.
     | Block  ![Pair]
-      deriving (Show, Eq, Generic)
-
-instance Hashable Value
+      deriving (Show, Eq, Ord, Generic)
 
 instance IsString Value where
     fromString = String . fromString
@@ -195,9 +188,7 @@ instance Pretty Value where
 -- matter). The value can be any primitive (string, number, boolean), a
 -- list, or a map.
 data Pair = Assign !Id !Value
-    deriving (Show, Eq, Generic)
-
-instance Hashable Pair
+    deriving (Show, Eq, Ord, Generic)
 
 instance Pretty Pair where
     prettyList = PP.vsep . map pretty
@@ -209,9 +200,7 @@ instance Pretty Pair where
 -- sections, such as the "resource" and "variable" in the example
 -- above. These sections are similar to maps, but visually look better.
 data Section = Section !(NonEmpty Id) ![Pair] ![Section]
-    deriving (Show, Eq, Generic)
-
-instance Hashable Section
+    deriving (Show, Eq, Ord, Generic)
 
 instance Pretty Section where
     prettyList                = PP.vsep . map pretty
@@ -286,7 +275,7 @@ instance IsValue a => IsValue [a] where
 instance IsValue a => IsValue (NonEmpty a) where
     toValue = list . Fold.toList
 
-instance IsValue a => IsValue (HashMap Text a) where
+instance IsValue a => IsValue (Map Text a) where
     toValue = Map . Map.map toValue
 
 instance IsValue a => IsValue (Attr s a) where
@@ -329,7 +318,7 @@ null = Null
 number :: Integral a => a -> Value
 number = Number . fromIntegral
 
-object :: IsValue a => HashMap Text a -> [Pair]
+object :: IsValue a => Map Text a -> [Pair]
 object = map (\(k, v) -> assign (Unquoted k) v) . Map.toList
 
 list :: (Foldable f, IsValue a) => f a -> Value
