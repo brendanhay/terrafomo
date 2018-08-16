@@ -17,10 +17,11 @@
 --
 module Terrafomo.Packet.Provider
     (
+    -- * Packet Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** Packet Specific Aliases
+    -- * Packet Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -66,7 +67,7 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @auth_token@ - 'P.authToken'
+    :: P.Text -- ^ @auth_token@ ('P._authToken', 'P.authToken')
     -> Provider
 newProvider _authToken =
     Provider'
@@ -77,7 +78,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "packet"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "auth_token" _authToken
             ]

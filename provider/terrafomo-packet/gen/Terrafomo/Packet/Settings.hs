@@ -116,8 +116,8 @@ data SnapshotPoliciesSetting s = SnapshotPoliciesSetting'
 
 -- | Construct a new @snapshot_policies@ settings value.
 newSnapshotPoliciesSetting
-    :: TF.Attr s P.Int -- ^ @snapshot_count@ - 'P.snapshotCount'
-    -> TF.Attr s P.Text -- ^ @snapshot_frequency@ - 'P.snapshotFrequency'
+    :: TF.Attr s P.Int -- ^ 'P._snapshotCount': @snapshot_count@
+    -> TF.Attr s P.Text -- ^ 'P._snapshotFrequency': @snapshot_frequency@
     -> SnapshotPoliciesSetting s
 newSnapshotPoliciesSetting _snapshotCount _snapshotFrequency =
     SnapshotPoliciesSetting'

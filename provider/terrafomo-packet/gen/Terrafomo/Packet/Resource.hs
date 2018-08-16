@@ -120,12 +120,12 @@ data DeviceResource s = DeviceResource'
 
 -- | Define a new @packet_device@ resource value.
 deviceResource
-    :: TF.Attr s P.Text -- ^ @billing_cycle@ - 'P.billingCycle'
-    -> TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
-    -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
-    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Attr s P.Text -- ^ @plan@ - 'P.plan'
-    -> TF.Attr s P.Text -- ^ @operating_system@ - 'P.operatingSystem'
+    :: TF.Attr s P.Text -- ^ @billing_cycle@ ('P._billingCycle', 'P.billingCycle')
+    -> TF.Attr s P.Text -- ^ @facility@ ('P._facility', 'P.facility')
+    -> TF.Attr s P.Text -- ^ @hostname@ ('P._hostname', 'P.hostname')
+    -> TF.Attr s P.Text -- ^ @project_id@ ('P._projectId', 'P.projectId')
+    -> TF.Attr s P.Text -- ^ @plan@ ('P._plan', 'P.plan')
+    -> TF.Attr s P.Text -- ^ @operating_system@ ('P._operatingSystem', 'P.operatingSystem')
     -> P.Resource (DeviceResource s)
 deviceResource _billingCycle _facility _hostname _projectId _plan _operatingSystem =
     TF.unsafeResource "packet_device" TF.validator $
@@ -274,8 +274,8 @@ data IpAttachmentResource s = IpAttachmentResource'
 
 -- | Define a new @packet_ip_attachment@ resource value.
 ipAttachmentResource
-    :: TF.Attr s P.Text -- ^ @device_id@ - 'P.deviceId'
-    -> TF.Attr s P.Text -- ^ @cidr_notation@ - 'P.cidrNotation'
+    :: TF.Attr s P.Text -- ^ @device_id@ ('P._deviceId', 'P.deviceId')
+    -> TF.Attr s P.Text -- ^ @cidr_notation@ ('P._cidrNotation', 'P.cidrNotation')
     -> P.Resource (IpAttachmentResource s)
 ipAttachmentResource _deviceId _cidrNotation =
     TF.unsafeResource "packet_ip_attachment" TF.validator $
@@ -357,7 +357,7 @@ data OrganizationResource s = OrganizationResource'
 
 -- | Define a new @packet_organization@ resource value.
 organizationResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (OrganizationResource s)
 organizationResource _name =
     TF.unsafeResource "packet_organization" TF.validator $
@@ -427,7 +427,7 @@ data ProjectResource s = ProjectResource'
 
 -- | Define a new @packet_project@ resource value.
 projectResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ProjectResource s)
 projectResource _name =
     TF.unsafeResource "packet_project" TF.validator $
@@ -481,9 +481,9 @@ data ReservedIpBlockResource s = ReservedIpBlockResource'
 
 -- | Define a new @packet_reserved_ip_block@ resource value.
 reservedIpBlockResource
-    :: TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
-    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Attr s P.Int -- ^ @quantity@ - 'P.quantity'
+    :: TF.Attr s P.Text -- ^ @facility@ ('P._facility', 'P.facility')
+    -> TF.Attr s P.Text -- ^ @project_id@ ('P._projectId', 'P.projectId')
+    -> TF.Attr s P.Int -- ^ @quantity@ ('P._quantity', 'P.quantity')
     -> P.Resource (ReservedIpBlockResource s)
 reservedIpBlockResource _facility _projectId _quantity =
     TF.unsafeResource "packet_reserved_ip_block" TF.validator $
@@ -566,8 +566,8 @@ data SshKeyResource s = SshKeyResource'
 
 -- | Define a new @packet_ssh_key@ resource value.
 sshKeyResource
-    :: TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @public_key@ ('P._publicKey', 'P.publicKey')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (SshKeyResource s)
 sshKeyResource _publicKey _name =
     TF.unsafeResource "packet_ssh_key" TF.validator $
@@ -637,10 +637,10 @@ data VolumeResource s = VolumeResource'
 
 -- | Define a new @packet_volume@ resource value.
 volumeResource
-    :: TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
-    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Attr s P.Text -- ^ @plan@ - 'P.plan'
-    -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
+    :: TF.Attr s P.Text -- ^ @facility@ ('P._facility', 'P.facility')
+    -> TF.Attr s P.Text -- ^ @project_id@ ('P._projectId', 'P.projectId')
+    -> TF.Attr s P.Text -- ^ @plan@ ('P._plan', 'P.plan')
+    -> TF.Attr s P.Int -- ^ @size@ ('P._size', 'P.size')
     -> P.Resource (VolumeResource s)
 volumeResource _facility _projectId _plan _size =
     TF.unsafeResource "packet_volume" TF.validator $
@@ -739,8 +739,8 @@ data VolumeAttachmentResource s = VolumeAttachmentResource'
 
 -- | Define a new @packet_volume_attachment@ resource value.
 volumeAttachmentResource
-    :: TF.Attr s P.Text -- ^ @device_id@ - 'P.deviceId'
-    -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
+    :: TF.Attr s P.Text -- ^ @device_id@ ('P._deviceId', 'P.deviceId')
+    -> TF.Attr s P.Text -- ^ @volume_id@ ('P._volumeId', 'P.volumeId')
     -> P.Resource (VolumeAttachmentResource s)
 volumeAttachmentResource _deviceId _volumeId =
     TF.unsafeResource "packet_volume_attachment" TF.validator $

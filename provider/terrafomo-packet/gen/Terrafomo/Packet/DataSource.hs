@@ -68,10 +68,10 @@ data PrecreatedIpBlockData s = PrecreatedIpBlockData'
 
 -- | Define a new @packet_precreated_ip_block@ datasource value.
 precreatedIpBlockData
-    :: TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
-    -> TF.Attr s P.Int -- ^ @address_family@ - 'P.addressFamily'
-    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Attr s P.Bool -- ^ @public@ - 'P.public'
+    :: TF.Attr s P.Text -- ^ @facility@ ('P._facility', 'P.facility')
+    -> TF.Attr s P.Int -- ^ @address_family@ ('P._addressFamily', 'P.addressFamily')
+    -> TF.Attr s P.Text -- ^ @project_id@ ('P._projectId', 'P.projectId')
+    -> TF.Attr s P.Bool -- ^ @public@ ('P._public', 'P.public')
     -> P.DataSource (PrecreatedIpBlockData s)
 precreatedIpBlockData _facility _addressFamily _projectId _public =
     TF.unsafeDataSource "packet_precreated_ip_block" TF.validator $
