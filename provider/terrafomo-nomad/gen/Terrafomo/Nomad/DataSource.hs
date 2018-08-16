@@ -17,7 +17,6 @@
 --
 module Terrafomo.Nomad.DataSource
     (
-    -- * DataSource Datatypes
     -- ** nomad_regions
       RegionsData (..)
     , regionsData
@@ -55,6 +54,7 @@ import qualified Terrafomo.Validator      as TF
 data RegionsData s = RegionsData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @nomad_regions@ datasource value.
 regionsData
     :: P.DataSource (RegionsData s)
 regionsData =

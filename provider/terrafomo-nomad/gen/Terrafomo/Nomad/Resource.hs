@@ -17,7 +17,6 @@
 --
 module Terrafomo.Nomad.Resource
     (
-    -- * Resource Datatypes
     -- ** nomad_acl_policy
       AclPolicyResource (..)
     , aclPolicyResource
@@ -88,6 +87,7 @@ data AclPolicyResource s = AclPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @nomad_acl_policy@ resource value.
 aclPolicyResource
     :: TF.Attr s P.Text -- ^ @rules_hcl@ - 'P.rulesHcl'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -151,6 +151,7 @@ data AclTokenResource s = AclTokenResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @nomad_acl_token@ resource value.
 aclTokenResource
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (AclTokenResource s)
@@ -226,6 +227,7 @@ data JobResource s = JobResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @nomad_job@ resource value.
 jobResource
     :: TF.Attr s P.Text -- ^ @jobspec@ - 'P.jobspec'
     -> P.Resource (JobResource s)
@@ -291,6 +293,7 @@ data NamespaceResource s = NamespaceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @nomad_namespace@ resource value.
 namespaceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NamespaceResource s)
@@ -349,6 +352,7 @@ data QuotaSpecificationResource s = QuotaSpecificationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @nomad_quota_specification@ resource value.
 quotaSpecificationResource
     :: TF.Attr s [TF.Attr s (LimitsSetting s)] -- ^ @limits@ - 'P.limits'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -417,6 +421,7 @@ data SentinelPolicyResource s = SentinelPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @nomad_sentinel_policy@ resource value.
 sentinelPolicyResource
     :: TF.Attr s P.Text -- ^ @enforcement_level@ - 'P.enforcementLevel'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
