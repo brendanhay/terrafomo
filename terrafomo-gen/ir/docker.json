@@ -3111,25 +3111,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_fileName",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Represents the final filename in the filesystem"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"file_name\" <$> TF.attribute",
-                    "name": "_fileName",
-                    "method": "fileName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasFileName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "file_name"
-                },
-                {
                     "default": "_secretId",
                     "computed": false,
                     "required": true,
@@ -3147,6 +3128,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "secret_id"
+                },
+                {
+                    "default": "_fileName",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Represents the final filename in the filesystem"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"file_name\" <$> TF.attribute",
+                    "name": "_fileName",
+                    "method": "fileName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFileName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "file_name"
                 }
             ],
             "conflicts": [],
