@@ -12,11 +12,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.PostgreSQL
-    ( module Terrafomo.PostgreSQL.Types
-    , module Terrafomo.PostgreSQL.Resource
+    ( module Terrafomo.PostgreSQL.Lens
     , module Terrafomo.PostgreSQL.Provider
+    , module Terrafomo.PostgreSQL.Resource
     , module Terrafomo.PostgreSQL.Settings
-    , module Terrafomo.PostgreSQL.Lens
+    , module Terrafomo.PostgreSQL.Types
     -- * Provider Aliases
     ) where
 

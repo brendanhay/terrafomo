@@ -42,10 +42,9 @@ import GHC.Base (($))
 
 import Terrafomo.PostgreSQL.Settings
 
-import qualified Data.Hashable                 as P
-import qualified Data.HashMap.Strict           as P
-import qualified Data.HashMap.Strict           as Map
 import qualified Data.List.NonEmpty            as P
+import qualified Data.Map.Strict               as P
+import qualified Data.Map.Strict               as Map
 import qualified Data.Maybe                    as P
 import qualified Data.Monoid                   as P
 import qualified Data.Text                     as P
@@ -70,7 +69,7 @@ data DatabaseResource s = DatabaseResource'
     -- ^ @allow_connections@ - (Optional)
     -- If false then no one can connect to this database
     --
-    , _connectionLimit  :: TF.Attr s P.Integer
+    , _connectionLimit  :: TF.Attr s P.Int
     -- ^ @connection_limit@ - (Optional)
     -- How many concurrent connections can be made to this database
     --
@@ -78,13 +77,13 @@ data DatabaseResource s = DatabaseResource'
     -- ^ @name@ - (Required)
     -- The PostgreSQL database name to connect to
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 databaseResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DatabaseResource s)
 databaseResource _name =
-    TF.newResource "postgresql_database" TF.validator $
+    TF.unsafeResource "postgresql_database" P.defaultProvider TF.validator $
         DatabaseResource'
             { _allowConnections = TF.value P.True
             , _connectionLimit = TF.value (-1)
@@ -106,9 +105,9 @@ instance P.HasAllowConnections (DatabaseResource s) (TF.Attr s P.Bool) where
         P.lens (_allowConnections :: DatabaseResource s -> TF.Attr s P.Bool)
                (\s a -> s { _allowConnections = a } :: DatabaseResource s)
 
-instance P.HasConnectionLimit (DatabaseResource s) (TF.Attr s P.Integer) where
+instance P.HasConnectionLimit (DatabaseResource s) (TF.Attr s P.Int) where
     connectionLimit =
-        P.lens (_connectionLimit :: DatabaseResource s -> TF.Attr s P.Integer)
+        P.lens (_connectionLimit :: DatabaseResource s -> TF.Attr s P.Int)
                (\s a -> s { _connectionLimit = a } :: DatabaseResource s)
 
 instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
@@ -145,13 +144,13 @@ data ExtensionResource s = ExtensionResource'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 extensionResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ExtensionResource s)
 extensionResource _name =
-    TF.newResource "postgresql_extension" TF.validator $
+    TF.unsafeResource "postgresql_extension" P.defaultProvider TF.validator $
         ExtensionResource'
             { _name = _name
             }
@@ -184,7 +183,7 @@ data RoleResource s = RoleResource'
     -- ^ @bypass_row_level_security@ - (Optional)
     -- Determine whether a role bypasses every row-level security (RLS) policy
     --
-    , _connectionLimit        :: TF.Attr s P.Integer
+    , _connectionLimit        :: TF.Attr s P.Int
     -- ^ @connection_limit@ - (Optional)
     -- How many concurrent connections can be made with this role
     --
@@ -236,13 +235,13 @@ data RoleResource s = RoleResource'
     -- ^ @valid_until@ - (Optional)
     -- Sets a date and time after which the role's password is no longer valid
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 roleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RoleResource s)
 roleResource _name =
-    TF.newResource "postgresql_role" TF.validator $
+    TF.unsafeResource "postgresql_role" P.defaultProvider TF.validator $
         RoleResource'
             { _bypassRowLevelSecurity = TF.value P.False
             , _connectionLimit = TF.value (-1)
@@ -284,9 +283,9 @@ instance P.HasBypassRowLevelSecurity (RoleResource s) (TF.Attr s P.Bool) where
         P.lens (_bypassRowLevelSecurity :: RoleResource s -> TF.Attr s P.Bool)
                (\s a -> s { _bypassRowLevelSecurity = a } :: RoleResource s)
 
-instance P.HasConnectionLimit (RoleResource s) (TF.Attr s P.Integer) where
+instance P.HasConnectionLimit (RoleResource s) (TF.Attr s P.Int) where
     connectionLimit =
-        P.lens (_connectionLimit :: RoleResource s -> TF.Attr s P.Integer)
+        P.lens (_connectionLimit :: RoleResource s -> TF.Attr s P.Int)
                (\s a -> s { _connectionLimit = a } :: RoleResource s)
 
 instance P.HasCreateDatabase (RoleResource s) (TF.Attr s P.Bool) where
@@ -360,13 +359,13 @@ data SchemaResource s = SchemaResource'
     -- ^ @name@ - (Required)
     -- The name of the schema
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 schemaResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SchemaResource s)
 schemaResource _name =
-    TF.newResource "postgresql_schema" TF.validator $
+    TF.unsafeResource "postgresql_schema" P.defaultProvider TF.validator $
         SchemaResource'
             { _ifNotExists = TF.value P.True
             , _name = _name
@@ -394,5 +393,5 @@ instance P.HasName (SchemaResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedOwner (TF.Ref s' (SchemaResource s)) (TF.Attr s P.Text) where
     computedOwner x = TF.compute (TF.refKey x) "owner"
 
-instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (SchemaResource s)) (TF.Attr s [TF.Attr s (SchemaPolicy s)]) where
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (SchemaResource s)) (TF.Attr s [TF.Attr s (PolicySetting s)]) where
     computedPolicy x = TF.compute (TF.refKey x) "policy"

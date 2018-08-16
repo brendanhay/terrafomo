@@ -20,6 +20,7 @@ module Terrafomo.PostgreSQL.Provider
     -- * PostgreSQL Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * PostgreSQL Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.PostgreSQL.Settings
 
-import qualified Data.Hashable              as P
-import qualified Data.HashMap.Strict        as P
-import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Map.Strict            as P
+import qualified Data.Map.Strict            as Map
 import qualified Data.Maybe                 as P
 import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
@@ -61,7 +61,7 @@ type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
 -- See the <https://www.terraform.io/docs/providers/postgresql/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
-    { _connectTimeout  :: P.Maybe P.Integer
+    { _connectTimeout  :: P.Maybe P.Int
     -- ^ @connect_timeout@ - (Optional)
     -- Maximum wait for connection, in seconds. Zero or not specified means wait
     -- indefinitely.
@@ -79,7 +79,7 @@ data Provider = Provider'
     -- ^ @host@ - (Optional)
     -- Name of PostgreSQL server address to connect to
     --
-    , _maxConnections  :: P.Maybe P.Integer
+    , _maxConnections  :: P.Maybe P.Int
     -- ^ @max_connections@ - (Optional)
     -- Maximum number of connections to establish to the database. Zero means
     -- unlimited.
@@ -88,7 +88,7 @@ data Provider = Provider'
     -- ^ @password@ - (Optional)
     -- Password to be used if the PostgreSQL server demands password authentication
     --
-    , _port            :: P.Maybe P.Integer
+    , _port            :: P.Maybe P.Int
     -- ^ @port@ - (Optional)
     -- The PostgreSQL port number to connect to at the server host, or socket file
     -- name extension for Unix-domain connections
@@ -102,7 +102,7 @@ data Provider = Provider'
     -- ^ @username@ - (Optional)
     -- PostgreSQL user name to connect as
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: Provider
@@ -119,36 +119,33 @@ newProvider =
         , _username = P.Nothing
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "connect_timeout" <$> _connectTimeout
-                  , TF.assign "database" <$> _database
-                  , P.Just $ TF.assign "expected_version" _expectedVersion
-                  , TF.assign "host" <$> _host
-                  , TF.assign "max_connections" <$> _maxConnections
-                  , TF.assign "password" <$> _password
-                  , TF.assign "port" <$> _port
-                  , TF.assign "sslmode" <$> _sslmode
-                  , TF.assign "username" <$> _username
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  TF.assign "connect_timeout" <$> _connectTimeout
+        ,  TF.assign "database" <$> _database
+        ,  P.Just $ TF.assign "expected_version" _expectedVersion
+        ,  TF.assign "host" <$> _host
+        ,  TF.assign "max_connections" <$> _maxConnections
+        ,  TF.assign "password" <$> _password
+        ,  TF.assign "port" <$> _port
+        ,  TF.assign "sslmode" <$> _sslmode
+        ,  TF.assign "username" <$> _username
+        ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
 
-instance P.HasConnectTimeout (Provider) (P.Maybe P.Integer) where
+instance P.HasConnectTimeout (Provider) (P.Maybe P.Int) where
     connectTimeout =
-        P.lens (_connectTimeout :: Provider -> P.Maybe P.Integer)
+        P.lens (_connectTimeout :: Provider -> P.Maybe P.Int)
                (\s a -> s { _connectTimeout = a } :: Provider)
 
 instance P.HasDatabase (Provider) (P.Maybe P.Text) where
@@ -166,9 +163,9 @@ instance P.HasHost (Provider) (P.Maybe P.Text) where
         P.lens (_host :: Provider -> P.Maybe P.Text)
                (\s a -> s { _host = a } :: Provider)
 
-instance P.HasMaxConnections (Provider) (P.Maybe P.Integer) where
+instance P.HasMaxConnections (Provider) (P.Maybe P.Int) where
     maxConnections =
-        P.lens (_maxConnections :: Provider -> P.Maybe P.Integer)
+        P.lens (_maxConnections :: Provider -> P.Maybe P.Int)
                (\s a -> s { _maxConnections = a } :: Provider)
 
 instance P.HasPassword (Provider) (P.Maybe P.Text) where
@@ -176,9 +173,9 @@ instance P.HasPassword (Provider) (P.Maybe P.Text) where
         P.lens (_password :: Provider -> P.Maybe P.Text)
                (\s a -> s { _password = a } :: Provider)
 
-instance P.HasPort (Provider) (P.Maybe P.Integer) where
+instance P.HasPort (Provider) (P.Maybe P.Int) where
     port =
-        P.lens (_port :: Provider -> P.Maybe P.Integer)
+        P.lens (_port :: Provider -> P.Maybe P.Int)
                (\s a -> s { _port = a } :: Provider)
 
 instance P.HasSslmode (Provider) (P.Maybe P.Text) where

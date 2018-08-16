@@ -18,9 +18,9 @@
 module Terrafomo.PostgreSQL.Settings
     (
     -- * Settings Datatypes
-    -- ** schema_policy
-      SchemaPolicy (..)
-    , newSchemaPolicy
+    -- ** policy
+      PolicySetting (..)
+    , newPolicySetting
 
     ) where
 
@@ -28,10 +28,10 @@ import Data.Functor ((<$>))
 
 import GHC.Base (($))
 
-import qualified Data.Hashable              as P
-import qualified Data.HashMap.Strict        as P
-import qualified Data.HashMap.Strict        as Map
+
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Map.Strict            as P
+import qualified Data.Map.Strict            as Map
 import qualified Data.Maybe                 as P
 import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
@@ -45,8 +45,8 @@ import qualified Terrafomo.PostgreSQL.Lens  as P
 import qualified Terrafomo.PostgreSQL.Types as P
 import qualified Terrafomo.Validator        as TF
 
--- | @schema_policy@ nested settings.
-data SchemaPolicy s = SchemaPolicy'
+-- | @policy@ nested settings.
+data PolicySetting s = PolicySetting'
     { _create          :: TF.Attr s P.Bool
     -- ^ @create@ - (Optional)
     -- If true, allow the specified ROLEs to CREATE new objects within the
@@ -82,12 +82,12 @@ data SchemaPolicy s = SchemaPolicy'
     -- Conflicts with:
     --
     -- * 'usage'
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
-newSchemaPolicy
-    :: SchemaPolicy s
-newSchemaPolicy =
-    SchemaPolicy'
+newPolicySetting
+    :: PolicySetting s
+newPolicySetting =
+    PolicySetting'
         { _create = TF.value P.False
         , _createWithGrant = TF.value P.False
         , _role = TF.Nil
@@ -95,10 +95,9 @@ newSchemaPolicy =
         , _usageWithGrant = TF.value P.False
         }
 
-instance P.Hashable  (SchemaPolicy s)
-instance TF.IsValue  (SchemaPolicy s)
-instance TF.IsObject (SchemaPolicy s) where
-    toObject SchemaPolicy'{..} = P.catMaybes
+instance TF.IsValue  (PolicySetting s)
+instance TF.IsObject (PolicySetting s) where
+    toObject PolicySetting'{..} = P.catMaybes
         [ TF.assign "create" <$> TF.attribute _create
         , TF.assign "create_with_grant" <$> TF.attribute _createWithGrant
         , TF.assign "role" <$> TF.attribute _role
@@ -106,8 +105,8 @@ instance TF.IsObject (SchemaPolicy s) where
         , TF.assign "usage_with_grant" <$> TF.attribute _usageWithGrant
         ]
 
-instance TF.IsValid (SchemaPolicy s) where
-    validator = TF.fieldsValidator (\SchemaPolicy'{..} -> Map.fromList $ P.catMaybes
+instance TF.IsValid (PolicySetting s) where
+    validator = TF.fieldsValidator (\PolicySetting'{..} -> Map.fromList $ P.catMaybes
         [ if (_create P.== TF.value P.False)
               then P.Nothing
               else P.Just ("_create",
@@ -130,27 +129,27 @@ instance TF.IsValid (SchemaPolicy s) where
                             ])
         ])
 
-instance P.HasCreate (SchemaPolicy s) (TF.Attr s P.Bool) where
+instance P.HasCreate (PolicySetting s) (TF.Attr s P.Bool) where
     create =
-        P.lens (_create :: SchemaPolicy s -> TF.Attr s P.Bool)
-               (\s a -> s { _create = a } :: SchemaPolicy s)
+        P.lens (_create :: PolicySetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _create = a } :: PolicySetting s)
 
-instance P.HasCreateWithGrant (SchemaPolicy s) (TF.Attr s P.Bool) where
+instance P.HasCreateWithGrant (PolicySetting s) (TF.Attr s P.Bool) where
     createWithGrant =
-        P.lens (_createWithGrant :: SchemaPolicy s -> TF.Attr s P.Bool)
-               (\s a -> s { _createWithGrant = a } :: SchemaPolicy s)
+        P.lens (_createWithGrant :: PolicySetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _createWithGrant = a } :: PolicySetting s)
 
-instance P.HasRole (SchemaPolicy s) (TF.Attr s P.Text) where
+instance P.HasRole (PolicySetting s) (TF.Attr s P.Text) where
     role =
-        P.lens (_role :: SchemaPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a } :: SchemaPolicy s)
+        P.lens (_role :: PolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _role = a } :: PolicySetting s)
 
-instance P.HasUsage (SchemaPolicy s) (TF.Attr s P.Bool) where
+instance P.HasUsage (PolicySetting s) (TF.Attr s P.Bool) where
     usage =
-        P.lens (_usage :: SchemaPolicy s -> TF.Attr s P.Bool)
-               (\s a -> s { _usage = a } :: SchemaPolicy s)
+        P.lens (_usage :: PolicySetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _usage = a } :: PolicySetting s)
 
-instance P.HasUsageWithGrant (SchemaPolicy s) (TF.Attr s P.Bool) where
+instance P.HasUsageWithGrant (PolicySetting s) (TF.Attr s P.Bool) where
     usageWithGrant =
-        P.lens (_usageWithGrant :: SchemaPolicy s -> TF.Attr s P.Bool)
-               (\s a -> s { _usageWithGrant = a } :: SchemaPolicy s)
+        P.lens (_usageWithGrant :: PolicySetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _usageWithGrant = a } :: PolicySetting s)
