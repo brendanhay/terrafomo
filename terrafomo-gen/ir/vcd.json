@@ -415,6 +415,23 @@
                     "original": "destination_port"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_id",
+                    "method": "id",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "id"
+                },
+                {
                     "default": "_policy",
                     "computed": false,
                     "required": true,
@@ -501,7 +518,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "id"
                 }
             ],
@@ -1548,6 +1565,23 @@
                     "original": "gateway"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"href\" <$> TF.attribute",
+                    "name": "_href",
+                    "method": "href",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHref",
+                    "validate": false,
+                    "optional": true,
+                    "original": "href"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -1652,7 +1686,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHref",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "href"
                 }
             ],
@@ -1913,6 +1947,23 @@
                     "computed": false,
                     "required": false,
                     "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"href\" <$> TF.attribute",
+                    "name": "_href",
+                    "method": "href",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHref",
+                    "validate": false,
+                    "optional": true,
+                    "original": "href"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"initscript\" <$> TF.attribute",
                     "name": "_initscript",
@@ -1924,6 +1975,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "initscript"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip\" <$> TF.attribute",
+                    "name": "_ip",
+                    "method": "ip",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIp",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ip"
                 },
                 {
                     "default": "TF.Nil",
@@ -2098,7 +2166,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHref",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "href"
                 },
                 {
@@ -2115,7 +2183,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIp",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ip"
                 }
             ],
@@ -2187,6 +2255,23 @@
                     "computed": false,
                     "required": false,
                     "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"href\" <$> TF.attribute",
+                    "name": "_href",
+                    "method": "href",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHref",
+                    "validate": false,
+                    "optional": true,
+                    "original": "href"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"initscript\" <$> TF.attribute",
                     "name": "_initscript",
@@ -2198,6 +2283,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "initscript"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip\" <$> TF.attribute",
+                    "name": "_ip",
+                    "method": "ip",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIp",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ip"
                 },
                 {
                     "default": "TF.Nil",
@@ -2355,7 +2457,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHref",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "href"
                 },
                 {
@@ -2372,7 +2474,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIp",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ip"
                 }
             ],
