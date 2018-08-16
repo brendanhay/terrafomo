@@ -497,7 +497,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "blockstorage_volume_attach_v2_wwpn",
+            "name": "wwpn",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -698,7 +698,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "blockstorage_volume_attach_v3_wwpn",
+            "name": "wwpn",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -731,7 +731,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "blockstorage_volume_v1_attachment",
+            "name": "attachment",
             "schemas": [
               {
                 "name": "device",
@@ -913,7 +913,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "blockstorage_volume_v2_attachment",
+            "name": "attachment",
             "schemas": [
               {
                 "name": "device",
@@ -1119,7 +1119,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "blockstorage_volume_v3_attachment",
+            "name": "attachment",
             "schemas": [
               {
                 "name": "device",
@@ -1656,7 +1656,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "compute_instance_v2_block_device",
+            "name": "block_device",
             "schemas": [
               {
                 "name": "boot_index",
@@ -1880,7 +1880,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "compute_instance_v2_network",
+            "name": "network",
             "schemas": [
               {
                 "name": "access_network",
@@ -1995,7 +1995,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "compute_instance_v2_personality",
+            "name": "personality",
             "schemas": [
               {
                 "name": "content",
@@ -2061,7 +2061,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "compute_instance_v2_scheduler_hints",
+            "name": "scheduler_hints",
             "schemas": [
               {
                 "name": "additional_properties",
@@ -2099,7 +2099,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "scheduler_hints_different_host",
+                  "name": "different_host",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -2135,7 +2135,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "scheduler_hints_query",
+                  "name": "query",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -2159,7 +2159,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "scheduler_hints_same_host",
+                  "name": "same_host",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -2198,7 +2198,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "compute_instance_v2_security_groups",
+            "name": "security_groups",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2248,7 +2248,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "compute_instance_v2_volume",
+            "name": "volume",
             "schemas": [
               {
                 "name": "device",
@@ -2424,7 +2424,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "compute_secgroup_v2_rule",
+            "name": "rule",
             "schemas": [
               {
                 "name": "cidr",
@@ -2534,7 +2534,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "compute_servergroup_v2_members",
+            "name": "members",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2570,7 +2570,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "compute_servergroup_v2_policies",
+            "name": "policies",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2680,7 +2680,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "db_configuration_v1_configuration",
+            "name": "configuration",
             "schemas": [
               {
                 "name": "name",
@@ -2721,7 +2721,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "db_configuration_v1_datastore",
+            "name": "datastore",
             "schemas": [
               {
                 "name": "type",
@@ -2864,7 +2864,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "db_instance_v1_database",
+            "name": "database",
             "schemas": [
               {
                 "name": "charset",
@@ -2917,7 +2917,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "db_instance_v1_datastore",
+            "name": "datastore",
             "schemas": [
               {
                 "name": "type",
@@ -2982,7 +2982,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "db_instance_v1_network",
+            "name": "network",
             "schemas": [
               {
                 "name": "fixed_ip_v4",
@@ -3071,7 +3071,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "db_instance_v1_user",
+            "name": "user",
             "schemas": [
               {
                 "name": "databases",
@@ -3085,7 +3085,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "user_databases",
+                  "name": "databases",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -3157,7 +3157,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "db_user_v1_databases",
+            "name": "databases",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3274,7 +3274,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "dns_recordset_v2_records",
+            "name": "records",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3404,7 +3404,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "dns_zone_v2_masters",
+            "name": "masters",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3513,7 +3513,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "fw_firewall_v1_associated_routers",
+            "name": "associated_routers",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3682,7 +3682,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "fw_policy_v1_rules",
+            "name": "rules",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4226,7 +4226,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "identity_user_v3_multi_factor_auth_rule",
+            "name": "multi_factor_auth_rule",
             "schemas": [
               {
                 "name": "rule",
@@ -4240,7 +4240,7 @@
                 "minItems": 1,
                 "maxItems": 0,
                 "schema": {
-                  "name": "multi_factor_auth_rule_rule",
+                  "name": "rule",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -4544,7 +4544,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "images_image_v2_tags",
+            "name": "tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4735,7 +4735,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "lb_listener_v2_sni_container_refs",
+            "name": "sni_container_refs",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4854,7 +4854,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "lb_loadbalancer_v2_security_group_ids",
+            "name": "security_group_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -5457,7 +5457,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "lb_pool_v1_member",
+            "name": "member",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -5481,7 +5481,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "lb_pool_v1_monitor_ids",
+            "name": "monitor_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -5647,7 +5647,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "lb_pool_v2_persistence",
+            "name": "persistence",
             "schemas": [
               {
                 "name": "cookie_name",
@@ -6069,7 +6069,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "networking_network_v2_availability_zone_hints",
+            "name": "availability_zone_hints",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -6129,7 +6129,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "networking_network_v2_segments",
+            "name": "segments",
             "schemas": [
               {
                 "name": "network_type",
@@ -6239,7 +6239,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "networking_port_v2_all_fixed_ips",
+            "name": "all_fixed_ips",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -6263,7 +6263,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "networking_port_v2_all_security_group_ids",
+            "name": "all_security_group_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -6287,7 +6287,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "networking_port_v2_allowed_address_pairs",
+            "name": "allowed_address_pairs",
             "schemas": [
               {
                 "name": "ip_address",
@@ -6352,7 +6352,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "networking_port_v2_fixed_ip",
+            "name": "fixed_ip",
             "schemas": [
               {
                 "name": "ip_address",
@@ -6453,7 +6453,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "networking_port_v2_security_group_ids",
+            "name": "security_group_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -6632,7 +6632,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "networking_router_v2_availability_zone_hints",
+            "name": "availability_zone_hints",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -6680,7 +6680,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "networking_router_v2_external_fixed_ip",
+            "name": "external_fixed_ip",
             "schemas": [
               {
                 "name": "ip_address",
@@ -6798,7 +6798,7 @@
           "minItems": 1,
           "maxItems": 1,
           "resource": {
-            "name": "networking_router_v2_vendor_options",
+            "name": "vendor_options",
             "schemas": [
               {
                 "name": "set_router_gateway_after_create",
@@ -7086,7 +7086,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "networking_subnet_v2_allocation_pools",
+            "name": "allocation_pools",
             "schemas": [
               {
                 "name": "end",
@@ -7139,7 +7139,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "networking_subnet_v2_dns_nameservers",
+            "name": "dns_nameservers",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -7190,7 +7190,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "networking_subnet_v2_host_routes",
+            "name": "host_routes",
             "schemas": [
               {
                 "name": "destination_cidr",
@@ -7484,7 +7484,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "networking_subnetpool_v2_prefixes",
+            "name": "prefixes",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -7971,7 +7971,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "vpnaas_endpoint_group_v2_endpoints",
+            "name": "endpoints",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -8116,7 +8116,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "vpnaas_ike_policy_v2_lifetime",
+            "name": "lifetime",
             "schemas": [
               {
                 "name": "units",
@@ -8287,7 +8287,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "vpnaas_ipsec_policy_v2_lifetime",
+            "name": "lifetime",
             "schemas": [
               {
                 "name": "units",
@@ -8576,7 +8576,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "vpnaas_site_connection_v2_dpd",
+            "name": "dpd",
             "schemas": [
               {
                 "name": "action",
@@ -8725,7 +8725,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "vpnaas_site_connection_v2_peer_cidrs",
+            "name": "peer_cidrs",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -9059,7 +9059,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "dns_zone_v2_masters",
+            "name": "masters",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -9280,7 +9280,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "fw_policy_v1_rules",
+            "name": "rules",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -9405,7 +9405,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "identity_auth_scope_v3_roles",
+            "name": "roles",
             "schemas": [
               {
                 "name": "role_id",
@@ -10237,7 +10237,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "networking_network_v2_availability_zone_hints",
+            "name": "availability_zone_hints",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -10416,7 +10416,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "networking_subnet_v2_allocation_pools",
+            "name": "allocation_pools",
             "schemas": [
               {
                 "name": "end",
@@ -10497,7 +10497,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "networking_subnet_v2_dns_nameservers",
+            "name": "dns_nameservers",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -10545,7 +10545,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "networking_subnet_v2_host_routes",
+            "name": "host_routes",
             "schemas": [
               {
                 "name": "destination_cidr",
@@ -10820,7 +10820,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "networking_subnetpool_v2_prefixes",
+            "name": "prefixes",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
