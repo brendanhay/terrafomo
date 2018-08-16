@@ -95,7 +95,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "rabbitmq"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "cacert_file" <$> _cacertFile
             , P.Just $ TF.assign "endpoint" _endpoint
