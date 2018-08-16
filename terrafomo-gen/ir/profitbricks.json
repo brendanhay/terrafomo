@@ -676,23 +676,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_diskType",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"disk_type\" <$> TF.attribute",
-                    "name": "_diskType",
-                    "method": "diskType",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDiskType",
-                    "validate": false,
-                    "optional": false,
-                    "original": "disk_type"
-                },
-                {
                     "default": "_imageName",
                     "computed": false,
                     "required": true,
@@ -725,6 +708,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "size"
+                },
+                {
+                    "default": "_diskType",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"disk_type\" <$> TF.attribute",
+                    "name": "_diskType",
+                    "method": "diskType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDiskType",
+                    "validate": false,
+                    "optional": false,
+                    "original": "disk_type"
                 }
             ],
             "conflicts": [],
@@ -1524,23 +1524,6 @@
                     "original": "nic_id"
                 },
                 {
-                    "default": "_protocol",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
-                    "name": "_protocol",
-                    "method": "protocol",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasProtocol",
-                    "validate": false,
-                    "optional": false,
-                    "original": "protocol"
-                },
-                {
                     "default": "_serverId",
                     "computed": false,
                     "required": true,
@@ -1556,6 +1539,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "server_id"
+                },
+                {
+                    "default": "_protocol",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
+                    "name": "_protocol",
+                    "method": "protocol",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProtocol",
+                    "validate": false,
+                    "optional": false,
+                    "original": "protocol"
                 }
             ],
             "conflicts": [],
@@ -1937,23 +1937,6 @@
                     "original": "datacenter_id"
                 },
                 {
-                    "default": "_ip",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ip\" <$> TF.attribute",
-                    "name": "_ip",
-                    "method": "ip",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasIp",
-                    "validate": false,
-                    "optional": false,
-                    "original": "ip"
-                },
-                {
                     "default": "_lanId",
                     "computed": false,
                     "required": true,
@@ -1969,6 +1952,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "lan_id"
+                },
+                {
+                    "default": "_ip",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip\" <$> TF.attribute",
+                    "name": "_ip",
+                    "method": "ip",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIp",
+                    "validate": false,
+                    "optional": false,
+                    "original": "ip"
                 },
                 {
                     "default": "_nicuuid",
@@ -2211,23 +2211,6 @@
                     "original": "datacenter_id"
                 },
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_nicIds",
                     "computed": false,
                     "required": true,
@@ -2243,6 +2226,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "nic_ids"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 }
             ],
             "conflicts": [],
@@ -2434,23 +2434,6 @@
                     "original": "datacenter_id"
                 },
                 {
-                    "default": "_lan",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"lan\" <$> TF.attribute",
-                    "name": "_lan",
-                    "method": "lan",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasLan",
-                    "validate": false,
-                    "optional": false,
-                    "original": "lan"
-                },
-                {
                     "default": "_serverId",
                     "computed": false,
                     "required": true,
@@ -2466,6 +2449,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "server_id"
+                },
+                {
+                    "default": "_lan",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"lan\" <$> TF.attribute",
+                    "name": "_lan",
+                    "method": "lan",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasLan",
+                    "validate": false,
+                    "optional": false,
+                    "original": "lan"
                 }
             ],
             "conflicts": [],
@@ -2913,23 +2913,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_editPrivilege",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"edit_privilege\" <$> TF.attribute",
-                    "name": "_editPrivilege",
-                    "method": "editPrivilege",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasEditPrivilege",
-                    "validate": false,
-                    "optional": false,
-                    "original": "edit_privilege"
-                },
-                {
                     "default": "_groupId",
                     "computed": false,
                     "required": true,
@@ -2962,6 +2945,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "resource_id"
+                },
+                {
+                    "default": "_editPrivilege",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"edit_privilege\" <$> TF.attribute",
+                    "name": "_editPrivilege",
+                    "method": "editPrivilege",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasEditPrivilege",
+                    "validate": false,
+                    "optional": false,
+                    "original": "edit_privilege"
                 },
                 {
                     "default": "_sharePrivilege",
@@ -3067,23 +3067,6 @@
                     "original": "datacenter_id"
                 },
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_volumeId",
                     "computed": false,
                     "required": true,
@@ -3099,6 +3082,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "volume_id"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 }
             ],
             "conflicts": [],
@@ -3238,6 +3238,23 @@
                     "original": "administrator"
                 },
                 {
+                    "default": "_forceSecAuth",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"force_sec_auth\" <$> TF.attribute",
+                    "name": "_forceSecAuth",
+                    "method": "forceSecAuth",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasForceSecAuth",
+                    "validate": false,
+                    "optional": false,
+                    "original": "force_sec_auth"
+                },
+                {
                     "default": "_email",
                     "computed": false,
                     "required": true,
@@ -3270,23 +3287,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "first_name"
-                },
-                {
-                    "default": "_forceSecAuth",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"force_sec_auth\" <$> TF.attribute",
-                    "name": "_forceSecAuth",
-                    "method": "forceSecAuth",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasForceSecAuth",
-                    "validate": false,
-                    "optional": false,
-                    "original": "force_sec_auth"
                 },
                 {
                     "default": "_lastName",
@@ -3563,23 +3563,6 @@
                     "original": "datacenter_id"
                 },
                 {
-                    "default": "_diskType",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"disk_type\" <$> TF.attribute",
-                    "name": "_diskType",
-                    "method": "diskType",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDiskType",
-                    "validate": false,
-                    "optional": false,
-                    "original": "disk_type"
-                },
-                {
                     "default": "_serverId",
                     "computed": false,
                     "required": true,
@@ -3612,6 +3595,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "size"
+                },
+                {
+                    "default": "_diskType",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"disk_type\" <$> TF.attribute",
+                    "name": "_diskType",
+                    "method": "diskType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDiskType",
+                    "validate": false,
+                    "optional": false,
+                    "original": "disk_type"
                 }
             ],
             "conflicts": [],
