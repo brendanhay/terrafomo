@@ -66,7 +66,7 @@ domainResource
     -> TF.Attr s P.Text -- ^ @smtp_password@ - 'P.smtpPassword'
     -> P.Resource (DomainResource s)
 domainResource _name _smtpPassword =
-    TF.unsafeResource "mailgun_domain" P.defaultProvider TF.validator $
+    TF.unsafeResource "mailgun_domain" TF.validator $
         DomainResource'
             { _name = _name
             , _smtpPassword = _smtpPassword
