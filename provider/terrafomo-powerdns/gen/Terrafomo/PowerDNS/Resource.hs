@@ -71,11 +71,11 @@ data RecordResource s = RecordResource'
 
 -- | Define a new @powerdns_record@ resource value.
 recordResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @records@ - 'P.records'
-    -> TF.Attr s P.Int -- ^ @ttl@ - 'P.ttl'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @records@ ('P._records', 'P.records')
+    -> TF.Attr s P.Int -- ^ @ttl@ ('P._ttl', 'P.ttl')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    -> TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
     -> P.Resource (RecordResource s)
 recordResource _name _records _ttl _type' _zone =
     TF.unsafeResource "powerdns_record" TF.validator $

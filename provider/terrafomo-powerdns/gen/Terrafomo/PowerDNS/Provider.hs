@@ -17,10 +17,11 @@
 --
 module Terrafomo.PowerDNS.Provider
     (
+    -- * PowerDNS Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** PowerDNS Specific Aliases
+    -- * PowerDNS Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -70,8 +71,8 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @api_key@ - 'P.apiKey'
-    -> P.Text -- ^ @server_url@ - 'P.serverUrl'
+    :: P.Text -- ^ @api_key@ ('P._apiKey', 'P.apiKey')
+    -> P.Text -- ^ @server_url@ ('P._serverUrl', 'P.serverUrl')
     -> Provider
 newProvider _apiKey _serverUrl =
     Provider'
@@ -83,7 +84,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "powerdns"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "api_key" _apiKey
             , P.Just $ TF.assign "server_url" _serverUrl
