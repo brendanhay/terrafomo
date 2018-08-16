@@ -1158,23 +1158,23 @@
                     "original": "direction"
                 },
                 {
-                    "default": "_ipRange",
+                    "default": "_securityGroup",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "The ip range affected by the security group rule"
+                        "The security group this rule is attached to"
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"ip_range\" <$> TF.attribute",
-                    "name": "_ipRange",
-                    "method": "ipRange",
+                    "encoder": "TF.assign \"security_group\" <$> TF.attribute",
+                    "name": "_securityGroup",
+                    "method": "securityGroup",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasIpRange",
+                    "class": "HasSecurityGroup",
                     "validate": false,
                     "optional": false,
-                    "original": "ip_range"
+                    "original": "security_group"
                 },
                 {
                     "default": "_protocol",
@@ -1196,23 +1196,23 @@
                     "original": "protocol"
                 },
                 {
-                    "default": "_securityGroup",
+                    "default": "_ipRange",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "The security group this rule is attached to"
+                        "The ip range affected by the security group rule"
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"security_group\" <$> TF.attribute",
-                    "name": "_securityGroup",
-                    "method": "securityGroup",
+                    "encoder": "TF.assign \"ip_range\" <$> TF.attribute",
+                    "name": "_ipRange",
+                    "method": "ipRange",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasSecurityGroup",
+                    "class": "HasIpRange",
                     "validate": false,
                     "optional": false,
-                    "original": "security_group"
+                    "original": "ip_range"
                 }
             ],
             "conflicts": [],
@@ -2048,25 +2048,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The name of the volume"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_sizeInGb",
                     "computed": false,
                     "required": true,
@@ -2084,6 +2065,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "size_in_gb"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The name of the volume"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 },
                 {
                     "default": "_type'",
