@@ -342,7 +342,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "droplet_ssh_keys",
+            "name": "ssh_keys",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -378,7 +378,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "droplet_tags",
+            "name": "tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -426,7 +426,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "droplet_volume_ids",
+            "name": "volume_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -467,7 +467,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "firewall_droplet_ids",
+            "name": "droplet_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -491,7 +491,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "firewall_inbound_rule",
+            "name": "inbound_rule",
             "schemas": [
               {
                 "name": "port_range",
@@ -529,7 +529,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "inbound_rule_source_addresses",
+                  "name": "source_addresses",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -553,7 +553,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "inbound_rule_source_droplet_ids",
+                  "name": "source_droplet_ids",
                   "type": "TypeInt",
                   "conflictsWith": [],
                   "optional": false,
@@ -577,7 +577,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "inbound_rule_source_load_balancer_uids",
+                  "name": "source_load_balancer_uids",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -601,7 +601,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "inbound_rule_source_tags",
+                  "name": "source_tags",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -640,7 +640,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "firewall_outbound_rule",
+            "name": "outbound_rule",
             "schemas": [
               {
                 "name": "destination_addresses",
@@ -654,7 +654,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "outbound_rule_destination_addresses",
+                  "name": "destination_addresses",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -678,7 +678,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "outbound_rule_destination_droplet_ids",
+                  "name": "destination_droplet_ids",
                   "type": "TypeInt",
                   "conflictsWith": [],
                   "optional": false,
@@ -702,7 +702,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "outbound_rule_destination_load_balancer_uids",
+                  "name": "destination_load_balancer_uids",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -726,7 +726,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "outbound_rule_destination_tags",
+                  "name": "destination_tags",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -777,7 +777,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "firewall_pending_changes",
+            "name": "pending_changes",
             "schemas": [
               {
                 "name": "droplet_id",
@@ -842,7 +842,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "firewall_tags",
+            "name": "tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -925,7 +925,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "loadbalancer_droplet_ids",
+            "name": "droplet_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -961,7 +961,7 @@
           "minItems": 1,
           "maxItems": 0,
           "resource": {
-            "name": "loadbalancer_forwarding_rule",
+            "name": "forwarding_rule",
             "schemas": [
               {
                 "name": "certificate_id",
@@ -1051,7 +1051,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "loadbalancer_healthcheck",
+            "name": "healthcheck",
             "schemas": [
               {
                 "name": "check_interval_seconds",
@@ -1205,7 +1205,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "loadbalancer_sticky_sessions",
+            "name": "sticky_sessions",
             "schemas": [
               {
                 "name": "cookie_name",
@@ -1483,7 +1483,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "volume_droplet_ids",
+            "name": "droplet_ids",
             "type": "TypeInt",
             "conflictsWith": [],
             "optional": false,
@@ -1671,7 +1671,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "image_regions",
+            "name": "regions",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
