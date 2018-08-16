@@ -19,15 +19,15 @@ module Terrafomo.CloudStack.Settings
     (
     -- ** filter
       FilterSetting (..)
-    , filterSetting
+    , newFilterSetting
 
     -- ** forward
     , ForwardSetting (..)
-    , forwardSetting
+    , newForwardSetting
 
     -- ** rule
     , RuleSetting (..)
-    , ruleSetting
+    , newRuleSetting
 
     ) where
 
@@ -63,11 +63,11 @@ data FilterSetting s = FilterSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @filter@ settings value.
-filterSetting
+newFilterSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> FilterSetting s
-filterSetting _name _value =
+newFilterSetting _name _value =
     FilterSetting'
         { _name = _name
         , _value = _value
@@ -113,13 +113,13 @@ data ForwardSetting s = ForwardSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @forward@ settings value.
-forwardSetting
+newForwardSetting
     :: TF.Attr s P.Text -- ^ 'P._virtualMachineId': @virtual_machine_id@
     -> TF.Attr s P.Int -- ^ 'P._privatePort': @private_port@
     -> TF.Attr s P.Int -- ^ 'P._publicPort': @public_port@
     -> TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
     -> ForwardSetting s
-forwardSetting _virtualMachineId _privatePort _publicPort _protocol =
+newForwardSetting _virtualMachineId _privatePort _publicPort _protocol =
     ForwardSetting'
         { _privatePort = _privatePort
         , _protocol = _protocol
@@ -198,11 +198,11 @@ data RuleSetting s = RuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @rule@ settings value.
-ruleSetting
+newRuleSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._cidrList': @cidr_list@
     -> TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
     -> RuleSetting s
-ruleSetting _cidrList _protocol =
+newRuleSetting _cidrList _protocol =
     RuleSetting'
         { _cidrList = _cidrList
         , _icmpCode = TF.Nil
