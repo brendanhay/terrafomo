@@ -188,25 +188,28 @@ instance P.HasVirtualHostnameForPolicyAttribution (CloudgatePolicySetting s) (TF
 
 -- | @health_check@ nested settings.
 data HealthCheckSetting s = HealthCheckSetting'
-    { _enabled            :: TF.Attr s P.Bool
+    { _acceptedReturnCodes :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @accepted_return_codes@ - (Optional)
+    --
+    , _enabled             :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _healthyThreshold   :: TF.Attr s P.Int
+    , _healthyThreshold    :: TF.Attr s P.Int
     -- ^ @healthy_threshold@ - (Optional)
     --
-    , _interval           :: TF.Attr s P.Int
+    , _interval            :: TF.Attr s P.Int
     -- ^ @interval@ - (Optional)
     --
-    , _path               :: TF.Attr s P.Text
+    , _path                :: TF.Attr s P.Text
     -- ^ @path@ - (Optional)
     --
-    , _timeout            :: TF.Attr s P.Int
+    , _timeout             :: TF.Attr s P.Int
     -- ^ @timeout@ - (Optional)
     --
-    , _type'              :: TF.Attr s P.Text
+    , _type'               :: TF.Attr s P.Text
     -- ^ @type@ - (Optional)
     --
-    , _unhealthyThreshold :: TF.Attr s P.Int
+    , _unhealthyThreshold  :: TF.Attr s P.Int
     -- ^ @unhealthy_threshold@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -216,7 +219,8 @@ healthCheckSetting
     :: HealthCheckSetting s
 healthCheckSetting =
     HealthCheckSetting'
-        { _enabled = TF.value P.True
+        { _acceptedReturnCodes = TF.Nil
+        , _enabled = TF.value P.True
         , _healthyThreshold = TF.value 5
         , _interval = TF.value 30
         , _path = TF.Nil
@@ -228,7 +232,8 @@ healthCheckSetting =
 instance TF.IsValue  (HealthCheckSetting s)
 instance TF.IsObject (HealthCheckSetting s) where
     toObject HealthCheckSetting'{..} = P.catMaybes
-        [ TF.assign "enabled" <$> TF.attribute _enabled
+        [ TF.assign "accepted_return_codes" <$> TF.attribute _acceptedReturnCodes
+        , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "healthy_threshold" <$> TF.attribute _healthyThreshold
         , TF.assign "interval" <$> TF.attribute _interval
         , TF.assign "path" <$> TF.attribute _path
@@ -239,6 +244,11 @@ instance TF.IsObject (HealthCheckSetting s) where
 
 instance TF.IsValid (HealthCheckSetting s) where
     validator = P.mempty
+
+instance P.HasAcceptedReturnCodes (HealthCheckSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+    acceptedReturnCodes =
+        P.lens (_acceptedReturnCodes :: HealthCheckSetting s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _acceptedReturnCodes = a } :: HealthCheckSetting s)
 
 instance P.HasEnabled (HealthCheckSetting s) (TF.Attr s P.Bool) where
     enabled =
@@ -280,31 +290,40 @@ instance s ~ s' => P.HasComputedAcceptedReturnCodes (TF.Ref s' (HealthCheckSetti
 
 -- | @instance@ nested settings.
 data InstanceSetting s = InstanceSetting'
-    { _bootOrder  :: TF.Attr s [TF.Attr s P.Int]
+    { _bootOrder      :: TF.Attr s [TF.Attr s P.Int]
     -- ^ @boot_order@ - (Optional, Forces New)
     --
-    , _imageList  :: TF.Attr s P.Text
+    , _hostname       :: TF.Attr s P.Text
+    -- ^ @hostname@ - (Optional, Forces New)
+    --
+    , _imageList      :: TF.Attr s P.Text
     -- ^ @image_list@ - (Optional, Forces New)
     --
-    , _name       :: TF.Attr s P.Text
+    , _label          :: TF.Attr s P.Text
+    -- ^ @label@ - (Optional, Forces New)
+    --
+    , _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _persistent :: TF.Attr s P.Bool
+    , _networkingInfo :: TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]
+    -- ^ @networking_info@ - (Optional, Forces New)
+    --
+    , _persistent     :: TF.Attr s P.Bool
     -- ^ @persistent@ - (Optional)
     --
-    , _reverseDns :: TF.Attr s P.Bool
+    , _reverseDns     :: TF.Attr s P.Bool
     -- ^ @reverse_dns@ - (Optional, Forces New)
     --
-    , _shape      :: TF.Attr s P.Text
+    , _shape          :: TF.Attr s P.Text
     -- ^ @shape@ - (Required, Forces New)
     --
-    , _sshKeys    :: TF.Attr s [TF.Attr s P.Text]
+    , _sshKeys        :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @ssh_keys@ - (Optional, Forces New)
     --
-    , _storage    :: TF.Attr s [TF.Attr s (StorageSetting s)]
+    , _storage        :: TF.Attr s [TF.Attr s (StorageSetting s)]
     -- ^ @storage@ - (Optional, Forces New)
     --
-    , _tags       :: TF.Attr s [TF.Attr s P.Text]
+    , _tags           :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -317,8 +336,11 @@ instanceSetting
 instanceSetting _name _shape =
     InstanceSetting'
         { _bootOrder = TF.Nil
+        , _hostname = TF.Nil
         , _imageList = TF.Nil
+        , _label = TF.Nil
         , _name = _name
+        , _networkingInfo = TF.Nil
         , _persistent = TF.value P.False
         , _reverseDns = TF.value P.True
         , _shape = _shape
@@ -331,8 +353,11 @@ instance TF.IsValue  (InstanceSetting s)
 instance TF.IsObject (InstanceSetting s) where
     toObject InstanceSetting'{..} = P.catMaybes
         [ TF.assign "boot_order" <$> TF.attribute _bootOrder
+        , TF.assign "hostname" <$> TF.attribute _hostname
         , TF.assign "image_list" <$> TF.attribute _imageList
+        , TF.assign "label" <$> TF.attribute _label
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "networking_info" <$> TF.attribute _networkingInfo
         , TF.assign "persistent" <$> TF.attribute _persistent
         , TF.assign "reverse_dns" <$> TF.attribute _reverseDns
         , TF.assign "shape" <$> TF.attribute _shape
@@ -349,15 +374,30 @@ instance P.HasBootOrder (InstanceSetting s) (TF.Attr s [TF.Attr s P.Int]) where
         P.lens (_bootOrder :: InstanceSetting s -> TF.Attr s [TF.Attr s P.Int])
                (\s a -> s { _bootOrder = a } :: InstanceSetting s)
 
+instance P.HasHostname (InstanceSetting s) (TF.Attr s P.Text) where
+    hostname =
+        P.lens (_hostname :: InstanceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _hostname = a } :: InstanceSetting s)
+
 instance P.HasImageList (InstanceSetting s) (TF.Attr s P.Text) where
     imageList =
         P.lens (_imageList :: InstanceSetting s -> TF.Attr s P.Text)
                (\s a -> s { _imageList = a } :: InstanceSetting s)
 
+instance P.HasLabel (InstanceSetting s) (TF.Attr s P.Text) where
+    label =
+        P.lens (_label :: InstanceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _label = a } :: InstanceSetting s)
+
 instance P.HasName (InstanceSetting s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: InstanceSetting s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: InstanceSetting s)
+
+instance P.HasNetworkingInfo (InstanceSetting s) (TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]) where
+    networkingInfo =
+        P.lens (_networkingInfo :: InstanceSetting s -> TF.Attr s [TF.Attr s (NetworkingInfoSetting s)])
+               (\s a -> s { _networkingInfo = a } :: InstanceSetting s)
 
 instance P.HasPersistent (InstanceSetting s) (TF.Attr s P.Bool) where
     persistent =
@@ -526,7 +566,10 @@ instance P.HasLoadBalancingMechanism (LoadBalancingMechanismPolicySetting s) (TF
 
 -- | @networking_info@ nested settings.
 data NetworkingInfoSetting s = NetworkingInfoSetting'
-    { _index            :: TF.Attr s P.Int
+    { _dns              :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @dns@ - (Optional, Forces New)
+    --
+    , _index            :: TF.Attr s P.Int
     -- ^ @index@ - (Required, Forces New)
     --
     , _ipAddress        :: TF.Attr s P.Text
@@ -538,6 +581,9 @@ data NetworkingInfoSetting s = NetworkingInfoSetting'
     , _isDefaultGateway :: TF.Attr s P.Bool
     -- ^ @is_default_gateway@ - (Optional, Forces New)
     --
+    , _macAddress       :: TF.Attr s P.Text
+    -- ^ @mac_address@ - (Optional, Forces New)
+    --
     , _nameServers      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @name_servers@ - (Optional, Forces New)
     --
@@ -546,6 +592,9 @@ data NetworkingInfoSetting s = NetworkingInfoSetting'
     --
     , _searchDomains    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @search_domains@ - (Optional, Forces New)
+    --
+    , _secLists         :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @sec_lists@ - (Optional, Forces New)
     --
     , _sharedNetwork    :: TF.Attr s P.Bool
     -- ^ @shared_network@ - (Optional, Forces New)
@@ -564,13 +613,16 @@ networkingInfoSetting
     -> NetworkingInfoSetting s
 networkingInfoSetting _index =
     NetworkingInfoSetting'
-        { _index = _index
+        { _dns = TF.Nil
+        , _index = _index
         , _ipAddress = TF.Nil
         , _ipNetwork = TF.Nil
         , _isDefaultGateway = TF.Nil
+        , _macAddress = TF.Nil
         , _nameServers = TF.Nil
         , _nat = TF.Nil
         , _searchDomains = TF.Nil
+        , _secLists = TF.Nil
         , _sharedNetwork = TF.value P.False
         , _vnic = TF.Nil
         , _vnicSets = TF.Nil
@@ -579,13 +631,16 @@ networkingInfoSetting _index =
 instance TF.IsValue  (NetworkingInfoSetting s)
 instance TF.IsObject (NetworkingInfoSetting s) where
     toObject NetworkingInfoSetting'{..} = P.catMaybes
-        [ TF.assign "index" <$> TF.attribute _index
+        [ TF.assign "dns" <$> TF.attribute _dns
+        , TF.assign "index" <$> TF.attribute _index
         , TF.assign "ip_address" <$> TF.attribute _ipAddress
         , TF.assign "ip_network" <$> TF.attribute _ipNetwork
         , TF.assign "is_default_gateway" <$> TF.attribute _isDefaultGateway
+        , TF.assign "mac_address" <$> TF.attribute _macAddress
         , TF.assign "name_servers" <$> TF.attribute _nameServers
         , TF.assign "nat" <$> TF.attribute _nat
         , TF.assign "search_domains" <$> TF.attribute _searchDomains
+        , TF.assign "sec_lists" <$> TF.attribute _secLists
         , TF.assign "shared_network" <$> TF.attribute _sharedNetwork
         , TF.assign "vnic" <$> TF.attribute _vnic
         , TF.assign "vnic_sets" <$> TF.attribute _vnicSets
@@ -593,6 +648,11 @@ instance TF.IsObject (NetworkingInfoSetting s) where
 
 instance TF.IsValid (NetworkingInfoSetting s) where
     validator = P.mempty
+
+instance P.HasDns (NetworkingInfoSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+    dns =
+        P.lens (_dns :: NetworkingInfoSetting s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _dns = a } :: NetworkingInfoSetting s)
 
 instance P.HasIndex (NetworkingInfoSetting s) (TF.Attr s P.Int) where
     index =
@@ -614,6 +674,11 @@ instance P.HasIsDefaultGateway (NetworkingInfoSetting s) (TF.Attr s P.Bool) wher
         P.lens (_isDefaultGateway :: NetworkingInfoSetting s -> TF.Attr s P.Bool)
                (\s a -> s { _isDefaultGateway = a } :: NetworkingInfoSetting s)
 
+instance P.HasMacAddress (NetworkingInfoSetting s) (TF.Attr s P.Text) where
+    macAddress =
+        P.lens (_macAddress :: NetworkingInfoSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _macAddress = a } :: NetworkingInfoSetting s)
+
 instance P.HasNameServers (NetworkingInfoSetting s) (TF.Attr s [TF.Attr s P.Text]) where
     nameServers =
         P.lens (_nameServers :: NetworkingInfoSetting s -> TF.Attr s [TF.Attr s P.Text])
@@ -628,6 +693,11 @@ instance P.HasSearchDomains (NetworkingInfoSetting s) (TF.Attr s [TF.Attr s P.Te
     searchDomains =
         P.lens (_searchDomains :: NetworkingInfoSetting s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _searchDomains = a } :: NetworkingInfoSetting s)
+
+instance P.HasSecLists (NetworkingInfoSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+    secLists =
+        P.lens (_secLists :: NetworkingInfoSetting s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _secLists = a } :: NetworkingInfoSetting s)
 
 instance P.HasSharedNetwork (NetworkingInfoSetting s) (TF.Attr s P.Bool) where
     sharedNetwork =

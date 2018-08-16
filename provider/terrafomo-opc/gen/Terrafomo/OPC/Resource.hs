@@ -387,14 +387,23 @@ data ComputeInstanceResource s = ComputeInstanceResource'
     , _desiredState       :: TF.Attr s P.Text
     -- ^ @desired_state@ - (Optional)
     --
+    , _hostname           :: TF.Attr s P.Text
+    -- ^ @hostname@ - (Optional, Forces New)
+    --
     , _imageList          :: TF.Attr s P.Text
     -- ^ @image_list@ - (Optional, Forces New)
     --
     , _instanceAttributes :: TF.Attr s P.Text
     -- ^ @instance_attributes@ - (Optional, Forces New)
     --
+    , _label              :: TF.Attr s P.Text
+    -- ^ @label@ - (Optional, Forces New)
+    --
     , _name               :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
+    --
+    , _networkingInfo     :: TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]
+    -- ^ @networking_info@ - (Optional, Forces New)
     --
     , _reverseDns         :: TF.Attr s P.Bool
     -- ^ @reverse_dns@ - (Optional, Forces New)
@@ -423,9 +432,12 @@ computeInstanceResource _name _shape =
         ComputeInstanceResource'
             { _bootOrder = TF.Nil
             , _desiredState = TF.Nil
+            , _hostname = TF.Nil
             , _imageList = TF.Nil
             , _instanceAttributes = TF.Nil
+            , _label = TF.Nil
             , _name = _name
+            , _networkingInfo = TF.Nil
             , _reverseDns = TF.value P.True
             , _shape = _shape
             , _sshKeys = TF.Nil
@@ -437,9 +449,12 @@ instance TF.IsObject (ComputeInstanceResource s) where
     toObject ComputeInstanceResource'{..} = P.catMaybes
         [ TF.assign "boot_order" <$> TF.attribute _bootOrder
         , TF.assign "desired_state" <$> TF.attribute _desiredState
+        , TF.assign "hostname" <$> TF.attribute _hostname
         , TF.assign "image_list" <$> TF.attribute _imageList
         , TF.assign "instance_attributes" <$> TF.attribute _instanceAttributes
+        , TF.assign "label" <$> TF.attribute _label
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "networking_info" <$> TF.attribute _networkingInfo
         , TF.assign "reverse_dns" <$> TF.attribute _reverseDns
         , TF.assign "shape" <$> TF.attribute _shape
         , TF.assign "ssh_keys" <$> TF.attribute _sshKeys
@@ -460,6 +475,11 @@ instance P.HasDesiredState (ComputeInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_desiredState :: ComputeInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _desiredState = a } :: ComputeInstanceResource s)
 
+instance P.HasHostname (ComputeInstanceResource s) (TF.Attr s P.Text) where
+    hostname =
+        P.lens (_hostname :: ComputeInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _hostname = a } :: ComputeInstanceResource s)
+
 instance P.HasImageList (ComputeInstanceResource s) (TF.Attr s P.Text) where
     imageList =
         P.lens (_imageList :: ComputeInstanceResource s -> TF.Attr s P.Text)
@@ -470,10 +490,20 @@ instance P.HasInstanceAttributes (ComputeInstanceResource s) (TF.Attr s P.Text) 
         P.lens (_instanceAttributes :: ComputeInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _instanceAttributes = a } :: ComputeInstanceResource s)
 
+instance P.HasLabel (ComputeInstanceResource s) (TF.Attr s P.Text) where
+    label =
+        P.lens (_label :: ComputeInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _label = a } :: ComputeInstanceResource s)
+
 instance P.HasName (ComputeInstanceResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeInstanceResource s)
+
+instance P.HasNetworkingInfo (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]) where
+    networkingInfo =
+        P.lens (_networkingInfo :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (NetworkingInfoSetting s)])
+               (\s a -> s { _networkingInfo = a } :: ComputeInstanceResource s)
 
 instance P.HasReverseDns (ComputeInstanceResource s) (TF.Attr s P.Bool) where
     reverseDns =
@@ -798,7 +828,10 @@ instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeIpAddressReservationResou
 -- See the <https://www.terraform.io/docs/providers/opc/r/compute_ip_association.html terraform documentation>
 -- for more information.
 data ComputeIpAssociationResource s = ComputeIpAssociationResource'
-    { _parentPool :: TF.Attr s P.Text
+    { _name       :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _parentPool :: TF.Attr s P.Text
     -- ^ @parent_pool@ - (Required, Forces New)
     --
     , _vcable     :: TF.Attr s P.Text
@@ -814,18 +847,25 @@ computeIpAssociationResource
 computeIpAssociationResource _parentPool _vcable =
     TF.unsafeResource "opc_compute_ip_association" TF.validator $
         ComputeIpAssociationResource'
-            { _parentPool = _parentPool
+            { _name = TF.Nil
+            , _parentPool = _parentPool
             , _vcable = _vcable
             }
 
 instance TF.IsObject (ComputeIpAssociationResource s) where
     toObject ComputeIpAssociationResource'{..} = P.catMaybes
-        [ TF.assign "parent_pool" <$> TF.attribute _parentPool
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parent_pool" <$> TF.attribute _parentPool
         , TF.assign "vcable" <$> TF.attribute _vcable
         ]
 
 instance TF.IsValid (ComputeIpAssociationResource s) where
     validator = P.mempty
+
+instance P.HasName (ComputeIpAssociationResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ComputeIpAssociationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeIpAssociationResource s)
 
 instance P.HasParentPool (ComputeIpAssociationResource s) (TF.Attr s P.Text) where
     parentPool =
@@ -997,7 +1037,10 @@ instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeIpNetworkExchangeResource
 -- See the <https://www.terraform.io/docs/providers/opc/r/compute_ip_reservation.html terraform documentation>
 -- for more information.
 data ComputeIpReservationResource s = ComputeIpReservationResource'
-    { _parentPool :: TF.Attr s P.Text
+    { _name       :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _parentPool :: TF.Attr s P.Text
     -- ^ @parent_pool@ - (Optional, Forces New)
     --
     , _permanent  :: TF.Attr s P.Bool
@@ -1015,20 +1058,27 @@ computeIpReservationResource
 computeIpReservationResource _permanent =
     TF.unsafeResource "opc_compute_ip_reservation" TF.validator $
         ComputeIpReservationResource'
-            { _parentPool = TF.value "/oracle/public/ippool"
+            { _name = TF.Nil
+            , _parentPool = TF.value "/oracle/public/ippool"
             , _permanent = _permanent
             , _tags = TF.Nil
             }
 
 instance TF.IsObject (ComputeIpReservationResource s) where
     toObject ComputeIpReservationResource'{..} = P.catMaybes
-        [ TF.assign "parent_pool" <$> TF.attribute _parentPool
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parent_pool" <$> TF.attribute _parentPool
         , TF.assign "permanent" <$> TF.attribute _permanent
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (ComputeIpReservationResource s) where
     validator = P.mempty
+
+instance P.HasName (ComputeIpReservationResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ComputeIpReservationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeIpReservationResource s)
 
 instance P.HasParentPool (ComputeIpReservationResource s) (TF.Attr s P.Text) where
     parentPool =
@@ -1517,7 +1567,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSecurityApplicationResourc
 -- See the <https://www.terraform.io/docs/providers/opc/r/compute_security_association.html terraform documentation>
 -- for more information.
 data ComputeSecurityAssociationResource s = ComputeSecurityAssociationResource'
-    { _seclist :: TF.Attr s P.Text
+    { _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    , _seclist :: TF.Attr s P.Text
     -- ^ @seclist@ - (Required, Forces New)
     --
     , _vcable  :: TF.Attr s P.Text
@@ -1533,18 +1586,25 @@ computeSecurityAssociationResource
 computeSecurityAssociationResource _seclist _vcable =
     TF.unsafeResource "opc_compute_security_association" TF.validator $
         ComputeSecurityAssociationResource'
-            { _seclist = _seclist
+            { _name = TF.Nil
+            , _seclist = _seclist
             , _vcable = _vcable
             }
 
 instance TF.IsObject (ComputeSecurityAssociationResource s) where
     toObject ComputeSecurityAssociationResource'{..} = P.catMaybes
-        [ TF.assign "seclist" <$> TF.attribute _seclist
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "seclist" <$> TF.attribute _seclist
         , TF.assign "vcable" <$> TF.attribute _vcable
         ]
 
 instance TF.IsValid (ComputeSecurityAssociationResource s) where
     validator = P.mempty
+
+instance P.HasName (ComputeSecurityAssociationResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ComputeSecurityAssociationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeSecurityAssociationResource s)
 
 instance P.HasSeclist (ComputeSecurityAssociationResource s) (TF.Attr s P.Text) where
     seclist =
@@ -1919,11 +1979,14 @@ instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeSecurityRuleResource s)) 
 -- See the <https://www.terraform.io/docs/providers/opc/r/compute_snapshot.html terraform documentation>
 -- for more information.
 data ComputeSnapshotResource s = ComputeSnapshotResource'
-    { _account   :: TF.Attr s P.Text
+    { _account      :: TF.Attr s P.Text
     -- ^ @account@ - (Optional, Forces New)
     --
-    , _instance' :: TF.Attr s P.Text
+    , _instance'    :: TF.Attr s P.Text
     -- ^ @instance@ - (Required, Forces New)
+    --
+    , _machineImage :: TF.Attr s P.Text
+    -- ^ @machine_image@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1936,12 +1999,14 @@ computeSnapshotResource _instance' =
         ComputeSnapshotResource'
             { _account = TF.Nil
             , _instance' = _instance'
+            , _machineImage = TF.Nil
             }
 
 instance TF.IsObject (ComputeSnapshotResource s) where
     toObject ComputeSnapshotResource'{..} = P.catMaybes
         [ TF.assign "account" <$> TF.attribute _account
         , TF.assign "instance" <$> TF.attribute _instance'
+        , TF.assign "machine_image" <$> TF.attribute _machineImage
         ]
 
 instance TF.IsValid (ComputeSnapshotResource s) where
@@ -1956,6 +2021,11 @@ instance P.HasInstance' (ComputeSnapshotResource s) (TF.Attr s P.Text) where
     instance' =
         P.lens (_instance' :: ComputeSnapshotResource s -> TF.Attr s P.Text)
                (\s a -> s { _instance' = a } :: ComputeSnapshotResource s)
+
+instance P.HasMachineImage (ComputeSnapshotResource s) (TF.Attr s P.Text) where
+    machineImage =
+        P.lens (_machineImage :: ComputeSnapshotResource s -> TF.Attr s P.Text)
+               (\s a -> s { _machineImage = a } :: ComputeSnapshotResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2092,29 +2162,62 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeStorageAttachmentResource 
 -- See the <https://www.terraform.io/docs/providers/opc/r/compute_storage_volume.html terraform documentation>
 -- for more information.
 data ComputeStorageVolumeResource s = ComputeStorageVolumeResource'
-    { _bootable       :: TF.Attr s P.Bool
+    { _bootable        :: TF.Attr s P.Bool
     -- ^ @bootable@ - (Optional, Forces New)
     --
-    , _description    :: TF.Attr s P.Text
+    , _description     :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _imageList      :: TF.Attr s P.Text
+    , _hypervisor      :: TF.Attr s P.Text
+    -- ^ @hypervisor@ - (Optional)
+    --
+    , _imageList       :: TF.Attr s P.Text
     -- ^ @image_list@ - (Optional, Forces New)
     --
-    , _imageListEntry :: TF.Attr s P.Int
+    , _imageListEntry  :: TF.Attr s P.Int
     -- ^ @image_list_entry@ - (Optional, Forces New)
     --
-    , _name           :: TF.Attr s P.Text
+    , _machineImage    :: TF.Attr s P.Text
+    -- ^ @machine_image@ - (Optional)
+    --
+    , _managed         :: TF.Attr s P.Bool
+    -- ^ @managed@ - (Optional)
+    --
+    , _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _size           :: TF.Attr s P.Int
+    , _platform        :: TF.Attr s P.Text
+    -- ^ @platform@ - (Optional)
+    --
+    , _readonly        :: TF.Attr s P.Bool
+    -- ^ @readonly@ - (Optional)
+    --
+    , _size            :: TF.Attr s P.Int
     -- ^ @size@ - (Required)
     --
-    , _storageType    :: TF.Attr s P.Text
+    , _snapshot        :: TF.Attr s P.Text
+    -- ^ @snapshot@ - (Optional, Forces New)
+    --
+    , _snapshotAccount :: TF.Attr s P.Text
+    -- ^ @snapshot_account@ - (Optional, Forces New)
+    --
+    , _snapshotId      :: TF.Attr s P.Text
+    -- ^ @snapshot_id@ - (Optional, Forces New)
+    --
+    , _status          :: TF.Attr s P.Text
+    -- ^ @status@ - (Optional)
+    --
+    , _storagePool     :: TF.Attr s P.Text
+    -- ^ @storage_pool@ - (Optional)
+    --
+    , _storageType     :: TF.Attr s P.Text
     -- ^ @storage_type@ - (Optional, Forces New)
     --
-    , _tags           :: TF.Attr s [TF.Attr s P.Text]
+    , _tags            :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
+    --
+    , _uri             :: TF.Attr s P.Text
+    -- ^ @uri@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -2128,24 +2231,46 @@ computeStorageVolumeResource _name _size =
         ComputeStorageVolumeResource'
             { _bootable = TF.value P.False
             , _description = TF.Nil
+            , _hypervisor = TF.Nil
             , _imageList = TF.Nil
             , _imageListEntry = TF.value (-1)
+            , _machineImage = TF.Nil
+            , _managed = TF.Nil
             , _name = _name
+            , _platform = TF.Nil
+            , _readonly = TF.Nil
             , _size = _size
+            , _snapshot = TF.Nil
+            , _snapshotAccount = TF.Nil
+            , _snapshotId = TF.Nil
+            , _status = TF.Nil
+            , _storagePool = TF.Nil
             , _storageType = TF.Nil
             , _tags = TF.Nil
+            , _uri = TF.Nil
             }
 
 instance TF.IsObject (ComputeStorageVolumeResource s) where
     toObject ComputeStorageVolumeResource'{..} = P.catMaybes
         [ TF.assign "bootable" <$> TF.attribute _bootable
         , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "hypervisor" <$> TF.attribute _hypervisor
         , TF.assign "image_list" <$> TF.attribute _imageList
         , TF.assign "image_list_entry" <$> TF.attribute _imageListEntry
+        , TF.assign "machine_image" <$> TF.attribute _machineImage
+        , TF.assign "managed" <$> TF.attribute _managed
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "platform" <$> TF.attribute _platform
+        , TF.assign "readonly" <$> TF.attribute _readonly
         , TF.assign "size" <$> TF.attribute _size
+        , TF.assign "snapshot" <$> TF.attribute _snapshot
+        , TF.assign "snapshot_account" <$> TF.attribute _snapshotAccount
+        , TF.assign "snapshot_id" <$> TF.attribute _snapshotId
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "storage_pool" <$> TF.attribute _storagePool
         , TF.assign "storage_type" <$> TF.attribute _storageType
         , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "uri" <$> TF.attribute _uri
         ]
 
 instance TF.IsValid (ComputeStorageVolumeResource s) where
@@ -2161,6 +2286,11 @@ instance P.HasDescription (ComputeStorageVolumeResource s) (TF.Attr s P.Text) wh
         P.lens (_description :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeStorageVolumeResource s)
 
+instance P.HasHypervisor (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
+    hypervisor =
+        P.lens (_hypervisor :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _hypervisor = a } :: ComputeStorageVolumeResource s)
+
 instance P.HasImageList (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     imageList =
         P.lens (_imageList :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
@@ -2171,15 +2301,60 @@ instance P.HasImageListEntry (ComputeStorageVolumeResource s) (TF.Attr s P.Int) 
         P.lens (_imageListEntry :: ComputeStorageVolumeResource s -> TF.Attr s P.Int)
                (\s a -> s { _imageListEntry = a } :: ComputeStorageVolumeResource s)
 
+instance P.HasMachineImage (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
+    machineImage =
+        P.lens (_machineImage :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _machineImage = a } :: ComputeStorageVolumeResource s)
+
+instance P.HasManaged (ComputeStorageVolumeResource s) (TF.Attr s P.Bool) where
+    managed =
+        P.lens (_managed :: ComputeStorageVolumeResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _managed = a } :: ComputeStorageVolumeResource s)
+
 instance P.HasName (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeStorageVolumeResource s)
 
+instance P.HasPlatform (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
+    platform =
+        P.lens (_platform :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _platform = a } :: ComputeStorageVolumeResource s)
+
+instance P.HasReadonly (ComputeStorageVolumeResource s) (TF.Attr s P.Bool) where
+    readonly =
+        P.lens (_readonly :: ComputeStorageVolumeResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _readonly = a } :: ComputeStorageVolumeResource s)
+
 instance P.HasSize (ComputeStorageVolumeResource s) (TF.Attr s P.Int) where
     size =
         P.lens (_size :: ComputeStorageVolumeResource s -> TF.Attr s P.Int)
                (\s a -> s { _size = a } :: ComputeStorageVolumeResource s)
+
+instance P.HasSnapshot (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
+    snapshot =
+        P.lens (_snapshot :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _snapshot = a } :: ComputeStorageVolumeResource s)
+
+instance P.HasSnapshotAccount (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
+    snapshotAccount =
+        P.lens (_snapshotAccount :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _snapshotAccount = a } :: ComputeStorageVolumeResource s)
+
+instance P.HasSnapshotId (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
+    snapshotId =
+        P.lens (_snapshotId :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _snapshotId = a } :: ComputeStorageVolumeResource s)
+
+instance P.HasStatus (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
+    status =
+        P.lens (_status :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _status = a } :: ComputeStorageVolumeResource s)
+
+instance P.HasStoragePool (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
+    storagePool =
+        P.lens (_storagePool :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _storagePool = a } :: ComputeStorageVolumeResource s)
 
 instance P.HasStorageType (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     storageType =
@@ -2190,6 +2365,11 @@ instance P.HasTags (ComputeStorageVolumeResource s) (TF.Attr s [TF.Attr s P.Text
     tags =
         P.lens (_tags :: ComputeStorageVolumeResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: ComputeStorageVolumeResource s)
+
+instance P.HasUri (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
+    uri =
+        P.lens (_uri :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _uri = a } :: ComputeStorageVolumeResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2238,6 +2418,9 @@ data ComputeStorageVolumeSnapshotResource s = ComputeStorageVolumeSnapshotResour
     , _description          :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
+    , _name                 :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
     , _parentVolumeBootable :: TF.Attr s P.Bool
     -- ^ @parent_volume_bootable@ - (Optional, Forces New)
     --
@@ -2258,6 +2441,7 @@ computeStorageVolumeSnapshotResource _volumeName =
         ComputeStorageVolumeSnapshotResource'
             { _collocated = TF.value P.False
             , _description = TF.Nil
+            , _name = TF.Nil
             , _parentVolumeBootable = TF.value P.False
             , _tags = TF.Nil
             , _volumeName = _volumeName
@@ -2267,6 +2451,7 @@ instance TF.IsObject (ComputeStorageVolumeSnapshotResource s) where
     toObject ComputeStorageVolumeSnapshotResource'{..} = P.catMaybes
         [ TF.assign "collocated" <$> TF.attribute _collocated
         , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "parent_volume_bootable" <$> TF.attribute _parentVolumeBootable
         , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "volume_name" <$> TF.attribute _volumeName
@@ -2284,6 +2469,11 @@ instance P.HasDescription (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.
     description =
         P.lens (_description :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeStorageVolumeSnapshotResource s)
+
+instance P.HasName (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeStorageVolumeSnapshotResource s)
 
 instance P.HasParentVolumeBootable (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Bool) where
     parentVolumeBootable =
@@ -2359,6 +2549,9 @@ data ComputeVnicSetResource s = ComputeVnicSetResource'
     , _tags        :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
+    , _virtualNics :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @virtual_nics@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @opc_compute_vnic_set@ resource value.
@@ -2372,6 +2565,7 @@ computeVnicSetResource _name =
             , _description = TF.Nil
             , _name = _name
             , _tags = TF.Nil
+            , _virtualNics = TF.Nil
             }
 
 instance TF.IsObject (ComputeVnicSetResource s) where
@@ -2380,6 +2574,7 @@ instance TF.IsObject (ComputeVnicSetResource s) where
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "virtual_nics" <$> TF.attribute _virtualNics
         ]
 
 instance TF.IsValid (ComputeVnicSetResource s) where
@@ -2404,6 +2599,11 @@ instance P.HasTags (ComputeVnicSetResource s) (TF.Attr s [TF.Attr s P.Text]) whe
     tags =
         P.lens (_tags :: ComputeVnicSetResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: ComputeVnicSetResource s)
+
+instance P.HasVirtualNics (ComputeVnicSetResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    virtualNics =
+        P.lens (_virtualNics :: ComputeVnicSetResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _virtualNics = a } :: ComputeVnicSetResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeVnicSetResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2668,6 +2868,9 @@ data LbaasLoadBalancerResource s = LbaasLoadBalancerResource'
     , _enabled            :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
+    , _ipNetwork          :: TF.Attr s P.Text
+    -- ^ @ip_network@ - (Optional, Forces New)
+    --
     , _name               :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
@@ -2708,6 +2911,7 @@ lbaasLoadBalancerResource _name _region _scheme =
         LbaasLoadBalancerResource'
             { _description = TF.Nil
             , _enabled = TF.value P.True
+            , _ipNetwork = TF.Nil
             , _name = _name
             , _parentLoadBalancer = TF.Nil
             , _permittedClients = TF.Nil
@@ -2723,6 +2927,7 @@ instance TF.IsObject (LbaasLoadBalancerResource s) where
     toObject LbaasLoadBalancerResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "ip_network" <$> TF.attribute _ipNetwork
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "parent_load_balancer" <$> TF.attribute _parentLoadBalancer
         , TF.assign "permitted_clients" <$> TF.attribute _permittedClients
@@ -2746,6 +2951,11 @@ instance P.HasEnabled (LbaasLoadBalancerResource s) (TF.Attr s P.Bool) where
     enabled =
         P.lens (_enabled :: LbaasLoadBalancerResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enabled = a } :: LbaasLoadBalancerResource s)
+
+instance P.HasIpNetwork (LbaasLoadBalancerResource s) (TF.Attr s P.Text) where
+    ipNetwork =
+        P.lens (_ipNetwork :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ipNetwork = a } :: LbaasLoadBalancerResource s)
 
 instance P.HasName (LbaasLoadBalancerResource s) (TF.Attr s P.Text) where
     name =
@@ -3289,26 +3499,38 @@ instance s ~ s' => P.HasComputedUri (TF.Ref s' (LbaasServerPoolResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/opc/r/storage_container.html terraform documentation>
 -- for more information.
 data StorageContainerResource s = StorageContainerResource'
-    { _maxAge       :: TF.Attr s P.Int
+    { _allowedOrigins :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @allowed_origins@ - (Optional)
+    --
+    , _exposedHeaders :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @exposed_headers@ - (Optional)
+    --
+    , _maxAge         :: TF.Attr s P.Int
     -- ^ @max_age@ - (Optional)
     --
-    , _metadata     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _metadata       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @metadata@ - (Optional)
     --
-    , _name         :: TF.Attr s P.Text
+    , _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _primaryKey   :: TF.Attr s P.Text
+    , _primaryKey     :: TF.Attr s P.Text
     -- ^ @primary_key@ - (Optional)
     --
-    , _quotaBytes   :: TF.Attr s P.Int
+    , _quotaBytes     :: TF.Attr s P.Int
     -- ^ @quota_bytes@ - (Optional)
     --
-    , _quotaCount   :: TF.Attr s P.Int
+    , _quotaCount     :: TF.Attr s P.Int
     -- ^ @quota_count@ - (Optional)
     --
-    , _secondaryKey :: TF.Attr s P.Text
+    , _readAcls       :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @read_acls@ - (Optional)
+    --
+    , _secondaryKey   :: TF.Attr s P.Text
     -- ^ @secondary_key@ - (Optional)
+    --
+    , _writeAcls      :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @write_acls@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -3319,28 +3541,46 @@ storageContainerResource
 storageContainerResource _name =
     TF.unsafeResource "opc_storage_container" TF.validator $
         StorageContainerResource'
-            { _maxAge = TF.Nil
+            { _allowedOrigins = TF.Nil
+            , _exposedHeaders = TF.Nil
+            , _maxAge = TF.Nil
             , _metadata = TF.Nil
             , _name = _name
             , _primaryKey = TF.Nil
             , _quotaBytes = TF.Nil
             , _quotaCount = TF.Nil
+            , _readAcls = TF.Nil
             , _secondaryKey = TF.Nil
+            , _writeAcls = TF.Nil
             }
 
 instance TF.IsObject (StorageContainerResource s) where
     toObject StorageContainerResource'{..} = P.catMaybes
-        [ TF.assign "max_age" <$> TF.attribute _maxAge
+        [ TF.assign "allowed_origins" <$> TF.attribute _allowedOrigins
+        , TF.assign "exposed_headers" <$> TF.attribute _exposedHeaders
+        , TF.assign "max_age" <$> TF.attribute _maxAge
         , TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "primary_key" <$> TF.attribute _primaryKey
         , TF.assign "quota_bytes" <$> TF.attribute _quotaBytes
         , TF.assign "quota_count" <$> TF.attribute _quotaCount
+        , TF.assign "read_acls" <$> TF.attribute _readAcls
         , TF.assign "secondary_key" <$> TF.attribute _secondaryKey
+        , TF.assign "write_acls" <$> TF.attribute _writeAcls
         ]
 
 instance TF.IsValid (StorageContainerResource s) where
     validator = P.mempty
+
+instance P.HasAllowedOrigins (StorageContainerResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    allowedOrigins =
+        P.lens (_allowedOrigins :: StorageContainerResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _allowedOrigins = a } :: StorageContainerResource s)
+
+instance P.HasExposedHeaders (StorageContainerResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    exposedHeaders =
+        P.lens (_exposedHeaders :: StorageContainerResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _exposedHeaders = a } :: StorageContainerResource s)
 
 instance P.HasMaxAge (StorageContainerResource s) (TF.Attr s P.Int) where
     maxAge =
@@ -3372,10 +3612,20 @@ instance P.HasQuotaCount (StorageContainerResource s) (TF.Attr s P.Int) where
         P.lens (_quotaCount :: StorageContainerResource s -> TF.Attr s P.Int)
                (\s a -> s { _quotaCount = a } :: StorageContainerResource s)
 
+instance P.HasReadAcls (StorageContainerResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    readAcls =
+        P.lens (_readAcls :: StorageContainerResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _readAcls = a } :: StorageContainerResource s)
+
 instance P.HasSecondaryKey (StorageContainerResource s) (TF.Attr s P.Text) where
     secondaryKey =
         P.lens (_secondaryKey :: StorageContainerResource s -> TF.Attr s P.Text)
                (\s a -> s { _secondaryKey = a } :: StorageContainerResource s)
+
+instance P.HasWriteAcls (StorageContainerResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    writeAcls =
+        P.lens (_writeAcls :: StorageContainerResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _writeAcls = a } :: StorageContainerResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageContainerResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -3417,6 +3667,10 @@ data StorageObjectResource s = StorageObjectResource'
     -- ^ @content_encoding@ - (Optional, Forces New)
     -- Set the content-encoding metadata
     --
+    , _contentType        :: TF.Attr s P.Text
+    -- ^ @content_type@ - (Optional, Forces New)
+    -- Set the MIME type for the object
+    --
     , _copyFrom           :: TF.Attr s P.Text
     -- ^ @copy_from@ - (Optional, Forces New)
     --
@@ -3424,6 +3678,15 @@ data StorageObjectResource s = StorageObjectResource'
     --
     -- * 'content'
     -- * 'file'
+    , _deleteAt           :: TF.Attr s P.Int
+    -- ^ @delete_at@ - (Optional, Forces New)
+    -- The date and time in UNIX Epoch time stamp format when the system removes
+    -- the object
+    --
+    , _etag               :: TF.Attr s P.Text
+    -- ^ @etag@ - (Optional, Forces New)
+    -- MD5 checksum value of the request body. Unquoted. Strongly Recommended
+    --
     , _file               :: TF.Attr s P.Text
     -- ^ @file@ - (Optional, Forces New)
     -- File path for the content to use for data
@@ -3432,6 +3695,10 @@ data StorageObjectResource s = StorageObjectResource'
     --
     -- * 'content'
     -- * 'copyFrom'
+    , _metadata           :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @metadata@ - (Optional, Forces New)
+    -- The object metadata
+    --
     , _name               :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     -- Name of the storage object
@@ -3455,8 +3722,12 @@ storageObjectResource _container _name =
             , _content = TF.Nil
             , _contentDisposition = TF.Nil
             , _contentEncoding = TF.Nil
+            , _contentType = TF.Nil
             , _copyFrom = TF.Nil
+            , _deleteAt = TF.Nil
+            , _etag = TF.Nil
             , _file = TF.Nil
+            , _metadata = TF.Nil
             , _name = _name
             , _transferEncoding = TF.Nil
             }
@@ -3467,8 +3738,12 @@ instance TF.IsObject (StorageObjectResource s) where
         , TF.assign "content" <$> TF.attribute _content
         , TF.assign "content_disposition" <$> TF.attribute _contentDisposition
         , TF.assign "content_encoding" <$> TF.attribute _contentEncoding
+        , TF.assign "content_type" <$> TF.attribute _contentType
         , TF.assign "copy_from" <$> TF.attribute _copyFrom
+        , TF.assign "delete_at" <$> TF.attribute _deleteAt
+        , TF.assign "etag" <$> TF.attribute _etag
         , TF.assign "file" <$> TF.attribute _file
+        , TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "transfer_encoding" <$> TF.attribute _transferEncoding
         ]
@@ -3512,15 +3787,35 @@ instance P.HasContentEncoding (StorageObjectResource s) (TF.Attr s P.Text) where
         P.lens (_contentEncoding :: StorageObjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _contentEncoding = a } :: StorageObjectResource s)
 
+instance P.HasContentType (StorageObjectResource s) (TF.Attr s P.Text) where
+    contentType =
+        P.lens (_contentType :: StorageObjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _contentType = a } :: StorageObjectResource s)
+
 instance P.HasCopyFrom (StorageObjectResource s) (TF.Attr s P.Text) where
     copyFrom =
         P.lens (_copyFrom :: StorageObjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _copyFrom = a } :: StorageObjectResource s)
 
+instance P.HasDeleteAt (StorageObjectResource s) (TF.Attr s P.Int) where
+    deleteAt =
+        P.lens (_deleteAt :: StorageObjectResource s -> TF.Attr s P.Int)
+               (\s a -> s { _deleteAt = a } :: StorageObjectResource s)
+
+instance P.HasEtag (StorageObjectResource s) (TF.Attr s P.Text) where
+    etag =
+        P.lens (_etag :: StorageObjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _etag = a } :: StorageObjectResource s)
+
 instance P.HasFile (StorageObjectResource s) (TF.Attr s P.Text) where
     file =
         P.lens (_file :: StorageObjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _file = a } :: StorageObjectResource s)
+
+instance P.HasMetadata (StorageObjectResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    metadata =
+        P.lens (_metadata :: StorageObjectResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _metadata = a } :: StorageObjectResource s)
 
 instance P.HasName (StorageObjectResource s) (TF.Attr s P.Text) where
     name =
