@@ -445,6 +445,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"admin\" <$> TF.attribute",
+                    "name": "_admin",
+                    "method": "admin",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAdmin",
+                    "validate": false,
+                    "optional": true,
+                    "original": "admin"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"grant\" <$> TF.attribute",
                     "name": "_grant",
                     "method": "grant",
@@ -527,7 +544,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedAdmin",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "admin"
                 }
             ],
