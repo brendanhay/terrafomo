@@ -57,7 +57,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "alert_attributes",
+            "name": "attributes",
             "schemas": [
               {
                 "name": "runbook_url",
@@ -86,7 +86,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "alert_condition",
+            "name": "condition",
             "schemas": [
               {
                 "name": "detect_reset",
@@ -224,7 +224,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "alert_services",
+            "name": "services",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -253,7 +253,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "metric_attributes",
+            "name": "attributes",
             "schemas": [
               {
                 "name": "aggregate",
@@ -612,7 +612,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "space_chart_stream",
+            "name": "stream",
             "schemas": [
               {
                 "name": "color",
