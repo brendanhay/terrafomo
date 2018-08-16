@@ -17,7 +17,6 @@
 --
 module Terrafomo.Kubernetes.DataSource
     (
-    -- * DataSource Datatypes
     -- ** kubernetes_service
       ServiceData (..)
     , serviceData
@@ -64,6 +63,7 @@ data ServiceData s = ServiceData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @kubernetes_service@ datasource value.
 serviceData
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> P.DataSource (ServiceData s)
@@ -111,6 +111,7 @@ data StorageClassData s = StorageClassData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @kubernetes_storage_class@ datasource value.
 storageClassData
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> P.DataSource (StorageClassData s)

@@ -17,7 +17,6 @@
 --
 module Terrafomo.Kubernetes.Settings
     (
-    -- * Settings Datatypes
     -- ** aws_elastic_block_store
       AwsElasticBlockStoreSetting (..)
     , newAwsElasticBlockStoreSetting
@@ -318,6 +317,7 @@ data AwsElasticBlockStoreSetting s = AwsElasticBlockStoreSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @aws_elastic_block_store@ settings value.
 newAwsElasticBlockStoreSetting
     :: TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
     -> AwsElasticBlockStoreSetting s
@@ -388,6 +388,7 @@ data AzureDiskSetting s = AzureDiskSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @azure_disk@ settings value.
 newAzureDiskSetting
     :: TF.Attr s P.Text -- ^ @caching_mode@ - 'P.cachingMode'
     -> TF.Attr s P.Text -- ^ @disk_name@ - 'P.diskName'
@@ -457,6 +458,7 @@ data AzureFileSetting s = AzureFileSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @azure_file@ settings value.
 newAzureFileSetting
     :: TF.Attr s P.Text -- ^ @secret_name@ - 'P.secretName'
     -> TF.Attr s P.Text -- ^ @share_name@ - 'P.shareName'
@@ -506,6 +508,7 @@ data CapabilitiesSetting s = CapabilitiesSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @capabilities@ settings value.
 newCapabilitiesSetting
     :: CapabilitiesSetting s
 newCapabilitiesSetting =
@@ -569,6 +572,7 @@ data CephFsSetting s = CephFsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @ceph_fs@ settings value.
 newCephFsSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @monitors@ - 'P.monitors'
     -> CephFsSetting s
@@ -652,6 +656,7 @@ data CinderSetting s = CinderSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @cinder@ settings value.
 newCinderSetting
     :: TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
     -> CinderSetting s
@@ -715,6 +720,7 @@ data ConfigMapSetting s = ConfigMapSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @config_map@ settings value.
 newConfigMapSetting
     :: ConfigMapSetting s
 newConfigMapSetting =
@@ -763,6 +769,7 @@ data ConfigMapKeyRefSetting s = ConfigMapKeyRefSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @config_map_key_ref@ settings value.
 newConfigMapKeyRefSetting
     :: ConfigMapKeyRefSetting s
 newConfigMapKeyRefSetting =
@@ -899,6 +906,7 @@ data ContainerSetting s = ContainerSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @container@ settings value.
 newContainerSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> ContainerSetting s
@@ -1070,6 +1078,7 @@ data DownwardApiSetting s = DownwardApiSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @downward_api@ settings value.
 newDownwardApiSetting
     :: DownwardApiSetting s
 newDownwardApiSetting =
@@ -1109,6 +1118,7 @@ data EmptyDirSetting s = EmptyDirSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @empty_dir@ settings value.
 newEmptyDirSetting
     :: EmptyDirSetting s
 newEmptyDirSetting =
@@ -1151,6 +1161,7 @@ data EnvSetting s = EnvSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @env@ settings value.
 newEnvSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> EnvSetting s
@@ -1203,6 +1214,7 @@ data ExecSetting s = ExecSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @exec@ settings value.
 newExecSetting
     :: ExecSetting s
 newExecSetting =
@@ -1247,6 +1259,7 @@ data FcSetting s = FcSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @fc@ settings value.
 newFcSetting
     :: TF.Attr s P.Int -- ^ @lun@ - 'P.lun'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @target_ww_ns@ - 'P.targetWwNs'
@@ -1304,6 +1317,7 @@ data FieldRefSetting s = FieldRefSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @field_ref@ settings value.
 newFieldRefSetting
     :: FieldRefSetting s
 newFieldRefSetting =
@@ -1362,6 +1376,7 @@ data FlexVolumeSetting s = FlexVolumeSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @flex_volume@ settings value.
 newFlexVolumeSetting
     :: TF.Attr s P.Text -- ^ @driver@ - 'P.driver'
     -> FlexVolumeSetting s
@@ -1429,6 +1444,7 @@ data FlockerSetting s = FlockerSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @flocker@ settings value.
 newFlockerSetting
     :: FlockerSetting s
 newFlockerSetting =
@@ -1486,6 +1502,7 @@ data GcePersistentDiskSetting s = GcePersistentDiskSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @gce_persistent_disk@ settings value.
 newGcePersistentDiskSetting
     :: TF.Attr s P.Text -- ^ @pd_name@ - 'P.pdName'
     -> GcePersistentDiskSetting s
@@ -1548,6 +1565,7 @@ data GitRepoSetting s = GitRepoSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @git_repo@ settings value.
 newGitRepoSetting
     :: GitRepoSetting s
 newGitRepoSetting =
@@ -1603,6 +1621,7 @@ data GlusterfsSetting s = GlusterfsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @glusterfs@ settings value.
 newGlusterfsSetting
     :: TF.Attr s P.Text -- ^ @endpoints_name@ - 'P.endpointsName'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
@@ -1649,6 +1668,7 @@ data HostPathSetting s = HostPathSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @host_path@ settings value.
 newHostPathSetting
     :: HostPathSetting s
 newHostPathSetting =
@@ -1696,6 +1716,7 @@ data HttpGetSetting s = HttpGetSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @http_get@ settings value.
 newHttpGetSetting
     :: HttpGetSetting s
 newHttpGetSetting =
@@ -1757,6 +1778,7 @@ data HttpHeaderSetting s = HttpHeaderSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @http_header@ settings value.
 newHttpHeaderSetting
     :: HttpHeaderSetting s
 newHttpHeaderSetting =
@@ -1794,6 +1816,7 @@ data ImagePullSecretSetting s = ImagePullSecretSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @image_pull_secret@ settings value.
 newImagePullSecretSetting
     :: ImagePullSecretSetting s
 newImagePullSecretSetting =
@@ -1824,6 +1847,7 @@ data ImagePullSecretsSetting s = ImagePullSecretsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @image_pull_secrets@ settings value.
 newImagePullSecretsSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> ImagePullSecretsSetting s
@@ -1954,6 +1978,7 @@ data InitContainerSetting s = InitContainerSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @init_container@ settings value.
 newInitContainerSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> InitContainerSetting s
@@ -2136,6 +2161,7 @@ data IscsiSetting s = IscsiSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @iscsi@ settings value.
 newIscsiSetting
     :: TF.Attr s P.Text -- ^ @iqn@ - 'P.iqn'
     -> TF.Attr s P.Text -- ^ @target_portal@ - 'P.targetPortal'
@@ -2226,6 +2252,7 @@ data ItemsSetting s = ItemsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @items@ settings value.
 newItemsSetting
     :: TF.Attr s (FieldRefSetting s) -- ^ @field_ref@ - 'P.fieldRef'
     -> ItemsSetting s
@@ -2305,6 +2332,7 @@ data LifecycleSetting s = LifecycleSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @lifecycle@ settings value.
 newLifecycleSetting
     :: LifecycleSetting s
 newLifecycleSetting =
@@ -2360,6 +2388,7 @@ data LimitSetting s = LimitSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @limit@ settings value.
 newLimitSetting
     :: LimitSetting s
 newLimitSetting =
@@ -2416,6 +2445,7 @@ instance s ~ s' => P.HasComputedDefaultRequest (TF.Ref s' (LimitSetting s)) (TF.
 data LimitsSetting s = LimitsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @limits@ settings value.
 newLimitsSetting
     :: LimitsSetting s
 newLimitsSetting =
@@ -2476,6 +2506,7 @@ data LivenessProbeSetting s = LivenessProbeSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @liveness_probe@ settings value.
 newLivenessProbeSetting
     :: LivenessProbeSetting s
 newLivenessProbeSetting =
@@ -2558,6 +2589,7 @@ instance P.HasTimeoutSeconds (LivenessProbeSetting s) (TF.Attr s P.Int) where
 data LoadBalancerIngressSetting s = LoadBalancerIngressSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @load_balancer_ingress@ settings value.
 newLoadBalancerIngressSetting
     :: LoadBalancerIngressSetting s
 newLoadBalancerIngressSetting =
@@ -2596,6 +2628,7 @@ data MatchExpressionsSetting s = MatchExpressionsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @match_expressions@ settings value.
 newMatchExpressionsSetting
     :: MatchExpressionsSetting s
 newMatchExpressionsSetting =
@@ -2660,6 +2693,7 @@ data MetadataSetting s = MetadataSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @metadata@ settings value.
 newMetadataSetting
     :: MetadataSetting s
 newMetadataSetting =
@@ -2737,6 +2771,7 @@ data NfsSetting s = NfsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @nfs@ settings value.
 newNfsSetting
     :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> TF.Attr s P.Text -- ^ @server@ - 'P.server'
@@ -2786,6 +2821,7 @@ data PersistentVolumeClaimSetting s = PersistentVolumeClaimSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @persistent_volume_claim@ settings value.
 newPersistentVolumeClaimSetting
     :: PersistentVolumeClaimSetting s
 newPersistentVolumeClaimSetting =
@@ -2906,6 +2942,7 @@ data PersistentVolumeSourceSetting s = PersistentVolumeSourceSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @persistent_volume_source@ settings value.
 newPersistentVolumeSourceSetting
     :: PersistentVolumeSourceSetting s
 newPersistentVolumeSourceSetting =
@@ -3121,6 +3158,7 @@ data PhotonPersistentDiskSetting s = PhotonPersistentDiskSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @photon_persistent_disk@ settings value.
 newPhotonPersistentDiskSetting
     :: TF.Attr s P.Text -- ^ @pd_id@ - 'P.pdId'
     -> PhotonPersistentDiskSetting s
@@ -3183,6 +3221,7 @@ data PortSetting s = PortSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @port@ settings value.
 newPortSetting
     :: TF.Attr s P.Int -- ^ @container_port@ - 'P.containerPort'
     -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
@@ -3273,6 +3312,7 @@ data PostStartSetting s = PostStartSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @post_start@ settings value.
 newPostStartSetting
     :: PostStartSetting s
 newPostStartSetting =
@@ -3333,6 +3373,7 @@ data PreStopSetting s = PreStopSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @pre_stop@ settings value.
 newPreStopSetting
     :: PreStopSetting s
 newPreStopSetting =
@@ -3404,6 +3445,7 @@ data QuobyteSetting s = QuobyteSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @quobyte@ settings value.
 newQuobyteSetting
     :: TF.Attr s P.Text -- ^ @registry@ - 'P.registry'
     -> TF.Attr s P.Text -- ^ @volume@ - 'P.volume'
@@ -3498,6 +3540,7 @@ data RbdSetting s = RbdSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @rbd@ settings value.
 newRbdSetting
     :: TF.Attr s P.Text -- ^ @rbd_image@ - 'P.rbdImage'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @ceph_monitors@ - 'P.cephMonitors'
@@ -3612,6 +3655,7 @@ data ReadinessProbeSetting s = ReadinessProbeSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @readiness_probe@ settings value.
 newReadinessProbeSetting
     :: ReadinessProbeSetting s
 newReadinessProbeSetting =
@@ -3694,6 +3738,7 @@ instance P.HasTimeoutSeconds (ReadinessProbeSetting s) (TF.Attr s P.Int) where
 data RequestsSetting s = RequestsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @requests@ settings value.
 newRequestsSetting
     :: RequestsSetting s
 newRequestsSetting =
@@ -3726,6 +3771,7 @@ data ResourceFieldRefSetting s = ResourceFieldRefSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @resource_field_ref@ settings value.
 newResourceFieldRefSetting
     :: TF.Attr s P.Text -- ^ @resource@ - 'P.resource''
     -> ResourceFieldRefSetting s
@@ -3778,6 +3824,7 @@ data ResourcesSetting s = ResourcesSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @resources@ settings value.
 newResourcesSetting
     :: ResourcesSetting s
 newResourcesSetting =
@@ -3830,6 +3877,7 @@ data ScaleTargetRefSetting s = ScaleTargetRefSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @scale_target_ref@ settings value.
 newScaleTargetRefSetting
     :: TF.Attr s P.Text -- ^ @kind@ - 'P.kind'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -3887,6 +3935,7 @@ data SeLinuxOptionsSetting s = SeLinuxOptionsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @se_linux_options@ settings value.
 newSeLinuxOptionsSetting
     :: SeLinuxOptionsSetting s
 newSeLinuxOptionsSetting =
@@ -3965,6 +4014,7 @@ data SecretSetting s = SecretSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @secret@ settings value.
 newSecretSetting
     :: SecretSetting s
 newSecretSetting =
@@ -4027,6 +4077,7 @@ data SecretKeyRefSetting s = SecretKeyRefSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @secret_key_ref@ settings value.
 newSecretKeyRefSetting
     :: SecretKeyRefSetting s
 newSecretKeyRefSetting =
@@ -4064,6 +4115,7 @@ data SecretRefSetting s = SecretRefSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @secret_ref@ settings value.
 newSecretRefSetting
     :: SecretRefSetting s
 newSecretRefSetting =
@@ -4138,6 +4190,7 @@ data SecurityContextSetting s = SecurityContextSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @security_context@ settings value.
 newSecurityContextSetting
     :: SecurityContextSetting s
 newSecurityContextSetting =
@@ -4231,6 +4284,7 @@ data SelectorSetting s = SelectorSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @selector@ settings value.
 newSelectorSetting
     :: SelectorSetting s
 newSelectorSetting =
@@ -4464,6 +4518,7 @@ data SpecSetting s = SpecSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @spec@ settings value.
 newSpecSetting
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @capacity@ - 'P.capacity'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @access_modes@ - 'P.accessModes'
@@ -4818,6 +4873,7 @@ data TcpSocketSetting s = TcpSocketSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @tcp_socket@ settings value.
 newTcpSocketSetting
     :: TF.Attr s P.Text -- ^ @port@ - 'P.port'
     -> TcpSocketSetting s
@@ -4918,6 +4974,7 @@ data TemplateSetting s = TemplateSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @template@ settings value.
 newTemplateSetting
     :: TemplateSetting s
 newTemplateSetting =
@@ -5065,6 +5122,7 @@ data ValueFromSetting s = ValueFromSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @value_from@ settings value.
 newValueFromSetting
     :: ValueFromSetting s
 newValueFromSetting =
@@ -5247,6 +5305,7 @@ data VolumeSetting s = VolumeSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @volume@ settings value.
 newVolumeSetting
     :: VolumeSetting s
 newVolumeSetting =
@@ -5544,6 +5603,7 @@ data VolumeMountSetting s = VolumeMountSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @volume_mount@ settings value.
 newVolumeMountSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @mount_path@ - 'P.mountPath'
@@ -5602,6 +5662,7 @@ data VsphereVolumeSetting s = VsphereVolumeSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @vsphere_volume@ settings value.
 newVsphereVolumeSetting
     :: TF.Attr s P.Text -- ^ @volume_path@ - 'P.volumePath'
     -> VsphereVolumeSetting s

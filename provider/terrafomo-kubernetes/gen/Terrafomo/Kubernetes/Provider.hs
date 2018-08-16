@@ -17,11 +17,10 @@
 --
 module Terrafomo.Kubernetes.Provider
     (
-    -- * Kubernetes Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * Kubernetes Specific Aliases
+    -- ** Kubernetes Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -136,7 +135,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "kubernetes"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "client_certificate" <$> _clientCertificate
             , TF.assign "client_key" <$> _clientKey

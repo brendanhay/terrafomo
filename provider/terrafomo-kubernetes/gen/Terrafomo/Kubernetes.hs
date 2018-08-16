@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Kubernetes
-    ( module Terrafomo.Kubernetes.DataSource
-    , module Terrafomo.Kubernetes.Lens
-    , module Terrafomo.Kubernetes.Provider
-    , module Terrafomo.Kubernetes.Resource
-    , module Terrafomo.Kubernetes.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Kubernetes.Provider
+
+    -- * Custom Types
     , module Terrafomo.Kubernetes.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.Kubernetes.DataSource
+
+    -- * Resources
+    , module Terrafomo.Kubernetes.Resource
+
+    -- * Settings
+    , module Terrafomo.Kubernetes.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Kubernetes.Lens
     ) where
 
 import Terrafomo.Kubernetes.DataSource

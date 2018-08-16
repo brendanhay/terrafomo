@@ -17,7 +17,6 @@
 --
 module Terrafomo.Kubernetes.Resource
     (
-    -- * Resource Datatypes
     -- ** kubernetes_config_map
       ConfigMapResource (..)
     , configMapResource
@@ -112,6 +111,7 @@ data ConfigMapResource s = ConfigMapResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @kubernetes_config_map@ resource value.
 configMapResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> P.Resource (ConfigMapResource s)
@@ -165,6 +165,7 @@ data HorizontalPodAutoscalerResource s = HorizontalPodAutoscalerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @kubernetes_horizontal_pod_autoscaler@ resource value.
 horizontalPodAutoscalerResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Attr s (SpecSetting s) -- ^ @spec@ - 'P.spec'
@@ -223,6 +224,7 @@ data LimitRangeResource s = LimitRangeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @kubernetes_limit_range@ resource value.
 limitRangeResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> P.Resource (LimitRangeResource s)
@@ -275,6 +277,7 @@ data NamespaceResource s = NamespaceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @kubernetes_namespace@ resource value.
 namespaceResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> P.Resource (NamespaceResource s)
@@ -320,6 +323,7 @@ data PersistentVolumeResource s = PersistentVolumeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @kubernetes_persistent_volume@ resource value.
 persistentVolumeResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Attr s [TF.Attr s (SpecSetting s)] -- ^ @spec@ - 'P.spec'
@@ -380,6 +384,7 @@ data PersistentVolumeClaimResource s = PersistentVolumeClaimResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @kubernetes_persistent_volume_claim@ resource value.
 persistentVolumeClaimResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Attr s (SpecSetting s) -- ^ @spec@ - 'P.spec'
@@ -444,6 +449,7 @@ data PodResource s = PodResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @kubernetes_pod@ resource value.
 podResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Attr s (SpecSetting s) -- ^ @spec@ - 'P.spec'
@@ -503,6 +509,7 @@ data ReplicationControllerResource s = ReplicationControllerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @kubernetes_replication_controller@ resource value.
 replicationControllerResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Attr s (SpecSetting s) -- ^ @spec@ - 'P.spec'
@@ -561,6 +568,7 @@ data ResourceQuotaResource s = ResourceQuotaResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @kubernetes_resource_quota@ resource value.
 resourceQuotaResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> P.Resource (ResourceQuotaResource s)
@@ -621,6 +629,7 @@ data SecretResource s = SecretResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @kubernetes_secret@ resource value.
 secretResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> P.Resource (SecretResource s)
@@ -681,6 +690,7 @@ data ServiceResource s = ServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @kubernetes_service@ resource value.
 serviceResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Attr s (SpecSetting s) -- ^ @spec@ - 'P.spec'
@@ -748,6 +758,7 @@ data ServiceAccountResource s = ServiceAccountResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @kubernetes_service_account@ resource value.
 serviceAccountResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> P.Resource (ServiceAccountResource s)
@@ -815,6 +826,7 @@ data StorageClassResource s = StorageClassResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @kubernetes_storage_class@ resource value.
 storageClassResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Attr s P.Text -- ^ @storage_provisioner@ - 'P.storageProvisioner'
