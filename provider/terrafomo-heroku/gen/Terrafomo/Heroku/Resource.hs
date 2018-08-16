@@ -165,6 +165,9 @@ instance P.HasPlan (AddonResource s) (TF.Attr s P.Text) where
         P.lens (_plan :: AddonResource s -> TF.Attr s P.Text)
                (\s a -> s { _plan = a } :: AddonResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AddonResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedConfigVars (TF.Ref s' (AddonResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedConfigVars x = TF.compute (TF.refKey x) "config_vars"
 
@@ -216,6 +219,9 @@ instance P.HasAppId (AddonAttachmentResource s) (TF.Attr s P.Text) where
     appId =
         P.lens (_appId :: AddonAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _appId = a } :: AddonAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AddonAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (AddonAttachmentResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
@@ -303,6 +309,9 @@ instance P.HasSpace (AppResource s) (TF.Attr s P.Text) where
         P.lens (_space :: AppResource s -> TF.Attr s P.Text)
                (\s a -> s { _space = a } :: AppResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAllConfigVars (TF.Ref s' (AppResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedAllConfigVars x = TF.compute (TF.refKey x) "all_config_vars"
 
@@ -377,6 +386,9 @@ instance P.HasName (AppFeatureResource s) (TF.Attr s P.Text) where
         P.lens (_name :: AppFeatureResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: AppFeatureResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AppFeatureResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @heroku_app_release@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/heroku/r/app_release.html terraform documentation>
@@ -419,6 +431,9 @@ instance P.HasSlugId (AppReleaseResource s) (TF.Attr s P.Text) where
     slugId =
         P.lens (_slugId :: AppReleaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _slugId = a } :: AppReleaseResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AppReleaseResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (AppReleaseResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
@@ -477,6 +492,9 @@ instance P.HasPrivateKey (CertResource s) (TF.Attr s P.Text) where
         P.lens (_privateKey :: CertResource s -> TF.Attr s P.Text)
                (\s a -> s { _privateKey = a } :: CertResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CertResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCname (TF.Ref s' (CertResource s)) (TF.Attr s P.Text) where
     computedCname x = TF.compute (TF.refKey x) "cname"
 
@@ -526,6 +544,9 @@ instance P.HasHostname (DomainResource s) (TF.Attr s P.Text) where
         P.lens (_hostname :: DomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _hostname = a } :: DomainResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCname (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
     computedCname x = TF.compute (TF.refKey x) "cname"
 
@@ -571,6 +592,9 @@ instance P.HasUrl (DrainResource s) (TF.Attr s P.Text) where
     url =
         P.lens (_url :: DrainResource s -> TF.Attr s P.Text)
                (\s a -> s { _url = a } :: DrainResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DrainResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedToken (TF.Ref s' (DrainResource s)) (TF.Attr s P.Text) where
     computedToken x = TF.compute (TF.refKey x) "token"
@@ -640,6 +664,9 @@ instance P.HasType' (FormationResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: FormationResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: FormationResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FormationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @heroku_pipeline@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/heroku/r/pipeline.html terraform documentation>
@@ -671,6 +698,9 @@ instance P.HasName (PipelineResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: PipelineResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: PipelineResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PipelineResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @heroku_pipeline_coupling@ Resource.
 --
@@ -725,6 +755,9 @@ instance P.HasStage (PipelineCouplingResource s) (TF.Attr s P.Text) where
     stage =
         P.lens (_stage :: PipelineCouplingResource s -> TF.Attr s P.Text)
                (\s a -> s { _stage = a } :: PipelineCouplingResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PipelineCouplingResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAppId (TF.Ref s' (PipelineCouplingResource s)) (TF.Attr s P.Text) where
     computedAppId x = TF.compute (TF.refKey x) "app_id"
@@ -792,6 +825,9 @@ instance P.HasShield (SpaceResource s) (TF.Attr s P.Bool) where
         P.lens (_shield :: SpaceResource s -> TF.Attr s P.Bool)
                (\s a -> s { _shield = a } :: SpaceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedOutboundIps (TF.Ref s' (SpaceResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedOutboundIps x = TF.compute (TF.refKey x) "outbound_ips"
 
@@ -849,6 +885,9 @@ instance P.HasSpace (SpaceAppAccessResource s) (TF.Attr s P.Text) where
         P.lens (_space :: SpaceAppAccessResource s -> TF.Attr s P.Text)
                (\s a -> s { _space = a } :: SpaceAppAccessResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceAppAccessResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @heroku_space_inbound_ruleset@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/heroku/r/space_inbound_ruleset.html terraform documentation>
@@ -892,6 +931,9 @@ instance P.HasSpace (SpaceInboundRulesetResource s) (TF.Attr s P.Text) where
         P.lens (_space :: SpaceInboundRulesetResource s -> TF.Attr s P.Text)
                (\s a -> s { _space = a } :: SpaceInboundRulesetResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceInboundRulesetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @heroku_space_peering_connection_accepter@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/heroku/r/space_peering_connection_accepter.html terraform documentation>
@@ -934,6 +976,9 @@ instance P.HasVpcPeeringConnectionId (SpacePeeringConnectionAccepterResource s) 
     vpcPeeringConnectionId =
         P.lens (_vpcPeeringConnectionId :: SpacePeeringConnectionAccepterResource s -> TF.Attr s P.Text)
                (\s a -> s { _vpcPeeringConnectionId = a } :: SpacePeeringConnectionAccepterResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpacePeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (SpacePeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
@@ -1006,6 +1051,9 @@ instance P.HasSpace (SpaceVpnConnectionResource s) (TF.Attr s P.Text) where
         P.lens (_space :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _space = a } :: SpaceVpnConnectionResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedIkeVersion (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Int) where
     computedIkeVersion x = TF.compute (TF.refKey x) "ike_version"
 
@@ -1068,3 +1116,6 @@ instance P.HasPermissions (TeamCollaboratorResource s) (TF.Attr s (P.NonEmpty (T
     permissions =
         P.lens (_permissions :: TeamCollaboratorResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
                (\s a -> s { _permissions = a } :: TeamCollaboratorResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamCollaboratorResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
