@@ -154,7 +154,7 @@ apikeyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ApikeyResource s)
 apikeyResource _name =
-    TF.unsafeResource "ns1_apikey" P.defaultProvider TF.validator $
+    TF.unsafeResource "ns1_apikey" TF.validator $
         ApikeyResource'
             { _accountManageAccountSettings = TF.Nil
             , _accountManageApikeys = TF.Nil
@@ -339,7 +339,7 @@ datafeedResource
     -> TF.Attr s P.Text -- ^ @source_id@ - 'P.sourceId'
     -> P.Resource (DatafeedResource s)
 datafeedResource _name _sourceId =
-    TF.unsafeResource "ns1_datafeed" P.defaultProvider TF.validator $
+    TF.unsafeResource "ns1_datafeed" TF.validator $
         DatafeedResource'
             { _config = TF.Nil
             , _name = _name
@@ -395,7 +395,7 @@ datasourceResource
     -> TF.Attr s P.Text -- ^ @sourcetype@ - 'P.sourcetype'
     -> P.Resource (DatasourceResource s)
 datasourceResource _name _sourcetype =
-    TF.unsafeResource "ns1_datasource" P.defaultProvider TF.validator $
+    TF.unsafeResource "ns1_datasource" TF.validator $
         DatasourceResource'
             { _config = TF.Nil
             , _name = _name
@@ -490,7 +490,7 @@ monitoringjobResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @regions@ - 'P.regions'
     -> P.Resource (MonitoringjobResource s)
 monitoringjobResource _config _frequency _jobType _name _regions =
-    TF.unsafeResource "ns1_monitoringjob" P.defaultProvider TF.validator $
+    TF.unsafeResource "ns1_monitoringjob" TF.validator $
         MonitoringjobResource'
             { _active = TF.value P.True
             , _config = _config
@@ -626,7 +626,7 @@ notifylistResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NotifylistResource s)
 notifylistResource _name =
-    TF.unsafeResource "ns1_notifylist" P.defaultProvider TF.validator $
+    TF.unsafeResource "ns1_notifylist" TF.validator $
         NotifylistResource'
             { _name = _name
             , _notifications = TF.Nil
@@ -694,7 +694,7 @@ recordResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (RecordResource s)
 recordResource _domain _type' _zone =
-    TF.unsafeResource "ns1_record" P.defaultProvider TF.validator $
+    TF.unsafeResource "ns1_record" TF.validator $
         RecordResource'
             { _answers = TF.Nil
             , _domain = _domain
@@ -845,7 +845,7 @@ teamResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (TeamResource s)
 teamResource _name =
-    TF.unsafeResource "ns1_team" P.defaultProvider TF.validator $
+    TF.unsafeResource "ns1_team" TF.validator $
         TeamResource'
             { _accountManageAccountSettings = TF.Nil
             , _accountManageApikeys = TF.Nil
@@ -1084,7 +1084,7 @@ userResource
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.Resource (UserResource s)
 userResource _email _name _username =
-    TF.unsafeResource "ns1_user" P.defaultProvider TF.validator $
+    TF.unsafeResource "ns1_user" TF.validator $
         UserResource'
             { _accountManageAccountSettings = TF.Nil
             , _accountManageApikeys = TF.Nil
@@ -1289,7 +1289,7 @@ zoneResource
     :: TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (ZoneResource s)
 zoneResource _zone =
-    TF.unsafeResource "ns1_zone" P.defaultProvider TF.validator $
+    TF.unsafeResource "ns1_zone" TF.validator $
         ZoneResource'
             { _link = TF.Nil
             , _networks = TF.Nil
