@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "applicationCookieStickinessPolicySetting",
+                "smart": "newApplicationCookieStickinessPolicySetting",
                 "name": "ApplicationCookieStickinessPolicySetting'"
             },
             "arguments": [
@@ -53,7 +53,7 @@
         },
         {
             "con": {
-                "smart": "cloudgatePolicySetting",
+                "smart": "newCloudgatePolicySetting",
                 "name": "CloudgatePolicySetting'"
             },
             "arguments": [
@@ -155,7 +155,7 @@
         },
         {
             "con": {
-                "smart": "healthCheckSetting",
+                "smart": "newHealthCheckSetting",
                 "name": "HealthCheckSetting'"
             },
             "arguments": [
@@ -325,8 +325,8 @@
         },
         {
             "con": {
-                "smart": "instanceSetting",
-                "name": "InstanceSetting'"
+                "smart": "newInstance'Setting",
+                "name": "Instance'Setting'"
             },
             "arguments": [
                 {
@@ -535,7 +535,7 @@
                 }
             ],
             "key": "opc_compute_orchestrated_instance.instance",
-            "name": "InstanceSetting",
+            "name": "Instance'Setting",
             "threaded": true,
             "attributes": [
                 {
@@ -1001,12 +1001,12 @@
                 }
             ],
             "conflicts": [],
-            "type": "InstanceSetting s",
+            "type": "Instance'Setting s",
             "original": "instance"
         },
         {
             "con": {
-                "smart": "loadBalancerCookieStickinessPolicySetting",
+                "smart": "newLoadBalancerCookieStickinessPolicySetting",
                 "name": "LoadBalancerCookieStickinessPolicySetting'"
             },
             "arguments": [
@@ -1057,7 +1057,7 @@
         },
         {
             "con": {
-                "smart": "loadBalancingMechanismPolicySetting",
+                "smart": "newLoadBalancingMechanismPolicySetting",
                 "name": "LoadBalancingMechanismPolicySetting'"
             },
             "arguments": [
@@ -1108,7 +1108,7 @@
         },
         {
             "con": {
-                "smart": "networkingInfoSetting",
+                "smart": "newNetworkingInfoSetting",
                 "name": "NetworkingInfoSetting'"
             },
             "arguments": [
@@ -1415,7 +1415,7 @@
         },
         {
             "con": {
-                "smart": "rateLimitingRequestPolicySetting",
+                "smart": "newRateLimitingRequestPolicySetting",
                 "name": "RateLimitingRequestPolicySetting'"
             },
             "arguments": [
@@ -1636,7 +1636,7 @@
         },
         {
             "con": {
-                "smart": "redirectPolicySetting",
+                "smart": "newRedirectPolicySetting",
                 "name": "RedirectPolicySetting'"
             },
             "arguments": [
@@ -1721,7 +1721,7 @@
         },
         {
             "con": {
-                "smart": "resourceAccessControlPolicySetting",
+                "smart": "newResourceAccessControlPolicySetting",
                 "name": "ResourceAccessControlPolicySetting'"
             },
             "arguments": [
@@ -1806,7 +1806,7 @@
         },
         {
             "con": {
-                "smart": "setRequestHeaderPolicySetting",
+                "smart": "newSetRequestHeaderPolicySetting",
                 "name": "SetRequestHeaderPolicySetting'"
             },
             "arguments": [
@@ -1925,7 +1925,7 @@
         },
         {
             "con": {
-                "smart": "sslNegotiationPolicySetting",
+                "smart": "newSslNegotiationPolicySetting",
                 "name": "SslNegotiationPolicySetting'"
             },
             "arguments": [
@@ -2044,7 +2044,7 @@
         },
         {
             "con": {
-                "smart": "storageSetting",
+                "smart": "newStorageSetting",
                 "name": "StorageSetting'"
             },
             "arguments": [
@@ -2147,7 +2147,7 @@
         },
         {
             "con": {
-                "smart": "trustedCertificatePolicySetting",
+                "smart": "newTrustedCertificatePolicySetting",
                 "name": "TrustedCertificatePolicySetting'"
             },
             "arguments": [
@@ -6491,7 +6491,7 @@
                     "method": "instance'",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (InstanceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (Instance'Setting s)]",
                     "class": "HasInstance'",
                     "validate": false,
                     "optional": false,
@@ -6584,7 +6584,7 @@
                     "method": "instance'",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (InstanceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (Instance'Setting s)]",
                     "class": "HasInstance'",
                     "validate": false,
                     "optional": false,
