@@ -55,6 +55,7 @@ module Terrafomo.Circonus.Lens
     , HasContains (..)
     , HasCount (..)
     , HasCritical (..)
+    , HasCurrent (..)
     , HasDc (..)
     , HasDefinition (..)
     , HasDescription (..)
@@ -66,6 +67,7 @@ module Terrafomo.Circonus.Lens
     , HasExtract (..)
     , HasFormat (..)
     , HasFormula (..)
+    , HasFunction (..)
     , HasGraphStyle (..)
     , HasHeaders (..)
     , HasHost (..)
@@ -85,6 +87,7 @@ module Terrafomo.Circonus.Lens
     , HasLeft (..)
     , HasLegendFormula (..)
     , HasLineStyle (..)
+    , HasLink (..)
     , HasLongMessage (..)
     , HasLongSubject (..)
     , HasLongSummary (..)
@@ -93,6 +96,7 @@ module Terrafomo.Circonus.Lens
     , HasMethod (..)
     , HasMetric (..)
     , HasMetricCluster (..)
+    , HasMetricLimit (..)
     , HasMetricName (..)
     , HasMetricType (..)
     , HasMinValue (..)
@@ -107,7 +111,9 @@ module Terrafomo.Circonus.Lens
     , HasNotify (..)
     , HasOver (..)
     , HasPagerDuty (..)
+    , HasParent (..)
     , HasPayload (..)
+    , HasPeriod (..)
     , HasPort (..)
     , HasPostgresql (..)
     , HasQuery (..)
@@ -128,9 +134,11 @@ module Terrafomo.Circonus.Lens
     , HasState (..)
     , HasStatsd (..)
     , HasTags (..)
+    , HasTarget (..)
     , HasTcp (..)
     , HasTeam (..)
     , HasThen' (..)
+    , HasTimeout (..)
     , HasTls (..)
     , HasType' (..)
     , HasUnit (..)
@@ -444,6 +452,12 @@ class HasCritical a b | a -> b where
 instance HasCritical a b => HasCritical (TF.Schema l p a) b where
     critical = TF.configuration . critical
 
+class HasCurrent a b | a -> b where
+    current :: P.Lens' a b
+
+instance HasCurrent a b => HasCurrent (TF.Schema l p a) b where
+    current = TF.configuration . current
+
 class HasDc a b | a -> b where
     dc :: P.Lens' a b
 
@@ -509,6 +523,12 @@ class HasFormula a b | a -> b where
 
 instance HasFormula a b => HasFormula (TF.Schema l p a) b where
     formula = TF.configuration . formula
+
+class HasFunction a b | a -> b where
+    function :: P.Lens' a b
+
+instance HasFunction a b => HasFunction (TF.Schema l p a) b where
+    function = TF.configuration . function
 
 class HasGraphStyle a b | a -> b where
     graphStyle :: P.Lens' a b
@@ -624,6 +644,12 @@ class HasLineStyle a b | a -> b where
 instance HasLineStyle a b => HasLineStyle (TF.Schema l p a) b where
     lineStyle = TF.configuration . lineStyle
 
+class HasLink a b | a -> b where
+    link :: P.Lens' a b
+
+instance HasLink a b => HasLink (TF.Schema l p a) b where
+    link = TF.configuration . link
+
 class HasLongMessage a b | a -> b where
     longMessage :: P.Lens' a b
 
@@ -671,6 +697,12 @@ class HasMetricCluster a b | a -> b where
 
 instance HasMetricCluster a b => HasMetricCluster (TF.Schema l p a) b where
     metricCluster = TF.configuration . metricCluster
+
+class HasMetricLimit a b | a -> b where
+    metricLimit :: P.Lens' a b
+
+instance HasMetricLimit a b => HasMetricLimit (TF.Schema l p a) b where
+    metricLimit = TF.configuration . metricLimit
 
 class HasMetricName a b | a -> b where
     metricName :: P.Lens' a b
@@ -756,11 +788,23 @@ class HasPagerDuty a b | a -> b where
 instance HasPagerDuty a b => HasPagerDuty (TF.Schema l p a) b where
     pagerDuty = TF.configuration . pagerDuty
 
+class HasParent a b | a -> b where
+    parent :: P.Lens' a b
+
+instance HasParent a b => HasParent (TF.Schema l p a) b where
+    parent = TF.configuration . parent
+
 class HasPayload a b | a -> b where
     payload :: P.Lens' a b
 
 instance HasPayload a b => HasPayload (TF.Schema l p a) b where
     payload = TF.configuration . payload
+
+class HasPeriod a b | a -> b where
+    period :: P.Lens' a b
+
+instance HasPeriod a b => HasPeriod (TF.Schema l p a) b where
+    period = TF.configuration . period
 
 class HasPort a b | a -> b where
     port :: P.Lens' a b
@@ -882,6 +926,12 @@ class HasTags a b | a -> b where
 instance HasTags a b => HasTags (TF.Schema l p a) b where
     tags = TF.configuration . tags
 
+class HasTarget a b | a -> b where
+    target :: P.Lens' a b
+
+instance HasTarget a b => HasTarget (TF.Schema l p a) b where
+    target = TF.configuration . target
+
 class HasTcp a b | a -> b where
     tcp :: P.Lens' a b
 
@@ -899,6 +949,12 @@ class HasThen' a b | a -> b where
 
 instance HasThen' a b => HasThen' (TF.Schema l p a) b where
     then' = TF.configuration . then'
+
+class HasTimeout a b | a -> b where
+    timeout :: P.Lens' a b
+
+instance HasTimeout a b => HasTimeout (TF.Schema l p a) b where
+    timeout = TF.configuration . timeout
 
 class HasTls a b | a -> b where
     tls :: P.Lens' a b

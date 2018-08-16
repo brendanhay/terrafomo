@@ -1353,6 +1353,9 @@ data MetricSetting s = MetricSetting'
     , _formula       :: TF.Attr s P.Text
     -- ^ @formula@ - (Optional)
     --
+    , _function      :: TF.Attr s P.Text
+    -- ^ @function@ - (Optional)
+    --
     , _legendFormula :: TF.Attr s P.Text
     -- ^ @legend_formula@ - (Optional)
     --
@@ -1389,6 +1392,7 @@ metricSetting _name _metricType _type' =
         , _check = TF.Nil
         , _color = TF.Nil
         , _formula = TF.Nil
+        , _function = TF.Nil
         , _legendFormula = TF.Nil
         , _metricName = TF.Nil
         , _metricType = _metricType
@@ -1409,6 +1413,7 @@ instance TF.IsObject (MetricSetting s) where
         , TF.assign "check" <$> TF.attribute _check
         , TF.assign "color" <$> TF.attribute _color
         , TF.assign "formula" <$> TF.attribute _formula
+        , TF.assign "function" <$> TF.attribute _function
         , TF.assign "legend_formula" <$> TF.attribute _legendFormula
         , TF.assign "metric_name" <$> TF.attribute _metricName
         , TF.assign "metric_type" <$> TF.attribute _metricType
@@ -1488,6 +1493,11 @@ instance P.HasFormula (MetricSetting s) (TF.Attr s P.Text) where
     formula =
         P.lens (_formula :: MetricSetting s -> TF.Attr s P.Text)
                (\s a -> s { _formula = a } :: MetricSetting s)
+
+instance P.HasFunction (MetricSetting s) (TF.Attr s P.Text) where
+    function =
+        P.lens (_function :: MetricSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _function = a } :: MetricSetting s)
 
 instance P.HasLegendFormula (MetricSetting s) (TF.Attr s P.Text) where
     legendFormula =

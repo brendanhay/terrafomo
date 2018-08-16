@@ -56,7 +56,19 @@ import qualified Terrafomo.Validator         as TF
 -- See the <https://www.terraform.io/docs/providers/circonus/d/account.html terraform documentation>
 -- for more information.
 data AccountData s = AccountData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _current :: TF.Attr s P.Bool
+    -- ^ @current@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'id'
+    , _id      :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'current'
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @circonus_account@ datasource value.
 accountData
@@ -64,12 +76,39 @@ accountData
 accountData =
     TF.unsafeDataSource "circonus_account" TF.validator $
         AccountData'
+            { _current = TF.Nil
+            , _id = TF.Nil
+            }
 
 instance TF.IsObject (AccountData s) where
-    toObject _ = []
+    toObject AccountData'{..} = P.catMaybes
+        [ TF.assign "current" <$> TF.attribute _current
+        , TF.assign "id" <$> TF.attribute _id
+        ]
 
 instance TF.IsValid (AccountData s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\AccountData'{..} -> Map.fromList $ P.catMaybes
+        [ if (_current P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_current",
+                            [ "_id"
+                            ])
+        , if (_id P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_id",
+                            [ "_current"
+                            ])
+        ])
+
+instance P.HasCurrent (AccountData s) (TF.Attr s P.Bool) where
+    current =
+        P.lens (_current :: AccountData s -> TF.Attr s P.Bool)
+               (\s a -> s { _current = a } :: AccountData s)
+
+instance P.HasId (AccountData s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: AccountData s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: AccountData s)
 
 instance s ~ s' => P.HasComputedAddress1 (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
     computedAddress1 x = TF.compute (TF.refKey x) "address1"
@@ -127,7 +166,10 @@ instance s ~ s' => P.HasComputedUsers (TF.Ref s' (AccountData s)) (TF.Attr s [TF
 -- See the <https://www.terraform.io/docs/providers/circonus/d/collector.html terraform documentation>
 -- for more information.
 data CollectorData s = CollectorData'
-    { _tags :: TF.Attr s [TF.Attr s P.Text]
+    { _id   :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
+    , _tags :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -138,16 +180,23 @@ collectorData
 collectorData =
     TF.unsafeDataSource "circonus_collector" TF.validator $
         CollectorData'
-            { _tags = TF.Nil
+            { _id = TF.Nil
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (CollectorData s) where
     toObject CollectorData'{..} = P.catMaybes
-        [ TF.assign "tags" <$> TF.attribute _tags
+        [ TF.assign "id" <$> TF.attribute _id
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (CollectorData s) where
     validator = P.mempty
+
+instance P.HasId (CollectorData s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: CollectorData s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: CollectorData s)
 
 instance P.HasTags (CollectorData s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =

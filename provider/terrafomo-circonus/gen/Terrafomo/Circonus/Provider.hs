@@ -89,7 +89,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "circonus"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "api_url" _apiUrl
             , P.Just $ TF.assign "auto_tag" _autoTag
