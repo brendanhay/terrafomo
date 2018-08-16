@@ -487,7 +487,7 @@ data S3BucketResource s = S3BucketResource'
     , _policy :: TF.Attr s P.Text
     -- ^ @policy@ - (Optional)
     --
-    , _region :: TF.Attr s P.Text
+    , _region :: TF.Attr s P.Region
     -- ^ @region@ - (Optional)
     --
     , _replicationConfiguration :: TF.Attr s (ReplicationConfigurationSetting s)
@@ -649,9 +649,9 @@ instance P.HasPolicy (S3BucketResource s) (TF.Attr s P.Text) where
         P.lens (_policy :: S3BucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _policy = a } :: S3BucketResource s)
 
-instance P.HasRegion (S3BucketResource s) (TF.Attr s P.Text) where
+instance P.HasRegion (S3BucketResource s) (TF.Attr s P.Region) where
     region =
-        P.lens (_region :: S3BucketResource s -> TF.Attr s P.Text)
+        P.lens (_region :: S3BucketResource s -> TF.Attr s P.Region)
                (\s a -> s { _region = a } :: S3BucketResource s)
 
 instance P.HasReplicationConfiguration (S3BucketResource s) (TF.Attr s (ReplicationConfigurationSetting s)) where
@@ -5732,37 +5732,37 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (StoragegatewayCacheResource s)) (
 -- See the <https://www.terraform.io/docs/providers/aws/r/storagegateway_gateway.html terraform documentation>
 -- for more information.
 data StoragegatewayGatewayResource s = StoragegatewayGatewayResource'
-    { _activationKey :: TF.Attr s P.Text
+    { _activationKey              :: TF.Attr s P.Text
     -- ^ @activation_key@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'gatewayIpAddress'
-    , _gatewayIpAddress :: TF.Attr s P.Text
+    , _gatewayIpAddress           :: TF.Attr s P.Text
     -- ^ @gateway_ip_address@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'activationKey'
-    , _gatewayName :: TF.Attr s P.Text
+    , _gatewayName                :: TF.Attr s P.Text
     -- ^ @gateway_name@ - (Required)
     --
-    , _gatewayTimezone :: TF.Attr s P.Text
+    , _gatewayTimezone            :: TF.Attr s P.Text
     -- ^ @gateway_timezone@ - (Required)
     --
-    , _gatewayType :: TF.Attr s P.Text
+    , _gatewayType                :: TF.Attr s P.Text
     -- ^ @gateway_type@ - (Optional, Forces New)
     --
-    , _mediumChangerType :: TF.Attr s P.Text
+    , _mediumChangerType          :: TF.Attr s P.Text
     -- ^ @medium_changer_type@ - (Optional, Forces New)
     --
-    , _smbActiveDirectorySettings :: TF.Attr s (SmbActiveDirectorySettingsSetting s)
+    , _smbActiveDirectorySettings :: TF.Attr s (SmbActiveDirectorySettings s)
     -- ^ @smb_active_directory_settings@ - (Optional)
     --
-    , _smbGuestPassword :: TF.Attr s P.Text
+    , _smbGuestPassword           :: TF.Attr s P.Text
     -- ^ @smb_guest_password@ - (Optional)
     --
-    , _tapeDriveType :: TF.Attr s P.Text
+    , _tapeDriveType              :: TF.Attr s P.Text
     -- ^ @tape_drive_type@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -5814,7 +5814,7 @@ instance TF.IsValid (StoragegatewayGatewayResource s) where
         ])
            P.<> TF.settingsValidator "_smbActiveDirectorySettings"
                   (_smbActiveDirectorySettings
-                      :: StoragegatewayGatewayResource s -> TF.Attr s (SmbActiveDirectorySettingsSetting s))
+                      :: StoragegatewayGatewayResource s -> TF.Attr s (SmbActiveDirectorySettings s))
                   TF.validator
 
 instance P.HasActivationKey (StoragegatewayGatewayResource s) (TF.Attr s P.Text) where
@@ -5847,9 +5847,9 @@ instance P.HasMediumChangerType (StoragegatewayGatewayResource s) (TF.Attr s P.T
         P.lens (_mediumChangerType :: StoragegatewayGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _mediumChangerType = a } :: StoragegatewayGatewayResource s)
 
-instance P.HasSmbActiveDirectorySettings (StoragegatewayGatewayResource s) (TF.Attr s (SmbActiveDirectorySettingsSetting s)) where
+instance P.HasSmbActiveDirectorySettings (StoragegatewayGatewayResource s) (TF.Attr s (SmbActiveDirectorySettings s)) where
     smbActiveDirectorySettings =
-        P.lens (_smbActiveDirectorySettings :: StoragegatewayGatewayResource s -> TF.Attr s (SmbActiveDirectorySettingsSetting s))
+        P.lens (_smbActiveDirectorySettings :: StoragegatewayGatewayResource s -> TF.Attr s (SmbActiveDirectorySettings s))
                (\s a -> s { _smbActiveDirectorySettings = a } :: StoragegatewayGatewayResource s)
 
 instance P.HasSmbGuestPassword (StoragegatewayGatewayResource s) (TF.Attr s P.Text) where

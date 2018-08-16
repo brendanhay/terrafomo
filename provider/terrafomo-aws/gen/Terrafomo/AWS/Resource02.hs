@@ -2134,7 +2134,7 @@ data DirectoryServiceDirectoryResource s = DirectoryServiceDirectoryResource'
     { _alias           :: TF.Attr s P.Text
     -- ^ @alias@ - (Optional, Forces New)
     --
-    , _connectSettings :: TF.Attr s (ConnectSettingsSetting s)
+    , _connectSettings :: TF.Attr s (ConnectSettings s)
     -- ^ @connect_settings@ - (Optional, Forces New)
     --
     , _description     :: TF.Attr s P.Text
@@ -2164,7 +2164,7 @@ data DirectoryServiceDirectoryResource s = DirectoryServiceDirectoryResource'
     , _type'           :: TF.Attr s P.Text
     -- ^ @type@ - (Optional, Forces New)
     --
-    , _vpcSettings     :: TF.Attr s (VpcSettingsSetting s)
+    , _vpcSettings     :: TF.Attr s (VpcSettings s)
     -- ^ @vpc_settings@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -2211,11 +2211,11 @@ instance TF.IsValid (DirectoryServiceDirectoryResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_connectSettings"
                   (_connectSettings
-                      :: DirectoryServiceDirectoryResource s -> TF.Attr s (ConnectSettingsSetting s))
+                      :: DirectoryServiceDirectoryResource s -> TF.Attr s (ConnectSettings s))
                   TF.validator
            P.<> TF.settingsValidator "_vpcSettings"
                   (_vpcSettings
-                      :: DirectoryServiceDirectoryResource s -> TF.Attr s (VpcSettingsSetting s))
+                      :: DirectoryServiceDirectoryResource s -> TF.Attr s (VpcSettings s))
                   TF.validator
 
 instance P.HasAlias (DirectoryServiceDirectoryResource s) (TF.Attr s P.Text) where
@@ -2223,9 +2223,9 @@ instance P.HasAlias (DirectoryServiceDirectoryResource s) (TF.Attr s P.Text) whe
         P.lens (_alias :: DirectoryServiceDirectoryResource s -> TF.Attr s P.Text)
                (\s a -> s { _alias = a } :: DirectoryServiceDirectoryResource s)
 
-instance P.HasConnectSettings (DirectoryServiceDirectoryResource s) (TF.Attr s (ConnectSettingsSetting s)) where
+instance P.HasConnectSettings (DirectoryServiceDirectoryResource s) (TF.Attr s (ConnectSettings s)) where
     connectSettings =
-        P.lens (_connectSettings :: DirectoryServiceDirectoryResource s -> TF.Attr s (ConnectSettingsSetting s))
+        P.lens (_connectSettings :: DirectoryServiceDirectoryResource s -> TF.Attr s (ConnectSettings s))
                (\s a -> s { _connectSettings = a } :: DirectoryServiceDirectoryResource s)
 
 instance P.HasDescription (DirectoryServiceDirectoryResource s) (TF.Attr s P.Text) where
@@ -2273,9 +2273,9 @@ instance P.HasType' (DirectoryServiceDirectoryResource s) (TF.Attr s P.Text) whe
         P.lens (_type' :: DirectoryServiceDirectoryResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: DirectoryServiceDirectoryResource s)
 
-instance P.HasVpcSettings (DirectoryServiceDirectoryResource s) (TF.Attr s (VpcSettingsSetting s)) where
+instance P.HasVpcSettings (DirectoryServiceDirectoryResource s) (TF.Attr s (VpcSettings s)) where
     vpcSettings =
-        P.lens (_vpcSettings :: DirectoryServiceDirectoryResource s -> TF.Attr s (VpcSettingsSetting s))
+        P.lens (_vpcSettings :: DirectoryServiceDirectoryResource s -> TF.Attr s (VpcSettings s))
                (\s a -> s { _vpcSettings = a } :: DirectoryServiceDirectoryResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DirectoryServiceDirectoryResource s)) (TF.Attr s P.Text) where
@@ -2387,7 +2387,7 @@ data DmsEndpointResource s = DmsEndpointResource'
     , _kmsKeyArn                 :: TF.Attr s P.Text
     -- ^ @kms_key_arn@ - (Optional, Forces New)
     --
-    , _mongodbSettings           :: TF.Attr s (MongodbSettingsSetting s)
+    , _mongodbSettings           :: TF.Attr s (MongodbSettings s)
     -- ^ @mongodb_settings@ - (Optional)
     --
     , _password                  :: TF.Attr s P.Text
@@ -2396,7 +2396,7 @@ data DmsEndpointResource s = DmsEndpointResource'
     , _port                      :: TF.Attr s P.Int
     -- ^ @port@ - (Optional)
     --
-    , _s3Settings                :: TF.Attr s (S3SettingsSetting s)
+    , _s3Settings                :: TF.Attr s (S3Settings s)
     -- ^ @s3_settings@ - (Optional)
     --
     , _serverName                :: TF.Attr s P.Text
@@ -2467,11 +2467,11 @@ instance TF.IsValid (DmsEndpointResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_mongodbSettings"
                   (_mongodbSettings
-                      :: DmsEndpointResource s -> TF.Attr s (MongodbSettingsSetting s))
+                      :: DmsEndpointResource s -> TF.Attr s (MongodbSettings s))
                   TF.validator
            P.<> TF.settingsValidator "_s3Settings"
                   (_s3Settings
-                      :: DmsEndpointResource s -> TF.Attr s (S3SettingsSetting s))
+                      :: DmsEndpointResource s -> TF.Attr s (S3Settings s))
                   TF.validator
 
 instance P.HasCertificateArn (DmsEndpointResource s) (TF.Attr s P.Text) where
@@ -2509,9 +2509,9 @@ instance P.HasKmsKeyArn (DmsEndpointResource s) (TF.Attr s P.Text) where
         P.lens (_kmsKeyArn :: DmsEndpointResource s -> TF.Attr s P.Text)
                (\s a -> s { _kmsKeyArn = a } :: DmsEndpointResource s)
 
-instance P.HasMongodbSettings (DmsEndpointResource s) (TF.Attr s (MongodbSettingsSetting s)) where
+instance P.HasMongodbSettings (DmsEndpointResource s) (TF.Attr s (MongodbSettings s)) where
     mongodbSettings =
-        P.lens (_mongodbSettings :: DmsEndpointResource s -> TF.Attr s (MongodbSettingsSetting s))
+        P.lens (_mongodbSettings :: DmsEndpointResource s -> TF.Attr s (MongodbSettings s))
                (\s a -> s { _mongodbSettings = a } :: DmsEndpointResource s)
 
 instance P.HasPassword (DmsEndpointResource s) (TF.Attr s P.Text) where
@@ -2524,9 +2524,9 @@ instance P.HasPort (DmsEndpointResource s) (TF.Attr s P.Int) where
         P.lens (_port :: DmsEndpointResource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: DmsEndpointResource s)
 
-instance P.HasS3Settings (DmsEndpointResource s) (TF.Attr s (S3SettingsSetting s)) where
+instance P.HasS3Settings (DmsEndpointResource s) (TF.Attr s (S3Settings s)) where
     s3Settings =
-        P.lens (_s3Settings :: DmsEndpointResource s -> TF.Attr s (S3SettingsSetting s))
+        P.lens (_s3Settings :: DmsEndpointResource s -> TF.Attr s (S3Settings s))
                (\s a -> s { _s3Settings = a } :: DmsEndpointResource s)
 
 instance P.HasServerName (DmsEndpointResource s) (TF.Attr s P.Text) where
@@ -5704,7 +5704,7 @@ data ElasticBeanstalkConfigurationTemplateResource s = ElasticBeanstalkConfigura
     , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _setting           :: TF.Attr s [TF.Attr s (SettingSetting s)]
+    , _setting           :: TF.Attr s [TF.Attr s (Setting s)]
     -- ^ @setting@ - (Optional)
     --
     , _solutionStackName :: TF.Attr s P.Text
@@ -5761,9 +5761,9 @@ instance P.HasName (ElasticBeanstalkConfigurationTemplateResource s) (TF.Attr s 
         P.lens (_name :: ElasticBeanstalkConfigurationTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ElasticBeanstalkConfigurationTemplateResource s)
 
-instance P.HasSetting (ElasticBeanstalkConfigurationTemplateResource s) (TF.Attr s [TF.Attr s (SettingSetting s)]) where
+instance P.HasSetting (ElasticBeanstalkConfigurationTemplateResource s) (TF.Attr s [TF.Attr s (Setting s)]) where
     setting =
-        P.lens (_setting :: ElasticBeanstalkConfigurationTemplateResource s -> TF.Attr s [TF.Attr s (SettingSetting s)])
+        P.lens (_setting :: ElasticBeanstalkConfigurationTemplateResource s -> TF.Attr s [TF.Attr s (Setting s)])
                (\s a -> s { _setting = a } :: ElasticBeanstalkConfigurationTemplateResource s)
 
 instance P.HasSolutionStackName (ElasticBeanstalkConfigurationTemplateResource s) (TF.Attr s P.Text) where
@@ -5774,7 +5774,7 @@ instance P.HasSolutionStackName (ElasticBeanstalkConfigurationTemplateResource s
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticBeanstalkConfigurationTemplateResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedSetting (TF.Ref s' (ElasticBeanstalkConfigurationTemplateResource s)) (TF.Attr s [TF.Attr s (SettingSetting s)]) where
+instance s ~ s' => P.HasComputedSetting (TF.Ref s' (ElasticBeanstalkConfigurationTemplateResource s)) (TF.Attr s [TF.Attr s (Setting s)]) where
     computedSetting x = TF.compute (TF.refKey x) "setting"
 
 -- | @aws_elastic_beanstalk_environment@ Resource.
@@ -5797,7 +5797,7 @@ data ElasticBeanstalkEnvironmentResource s = ElasticBeanstalkEnvironmentResource
     , _pollInterval        :: TF.Attr s P.Text
     -- ^ @poll_interval@ - (Optional)
     --
-    , _setting             :: TF.Attr s [TF.Attr s (SettingSetting s)]
+    , _setting             :: TF.Attr s [TF.Attr s (Setting s)]
     -- ^ @setting@ - (Optional)
     --
     , _solutionStackName   :: TF.Attr s P.Text
@@ -5903,9 +5903,9 @@ instance P.HasPollInterval (ElasticBeanstalkEnvironmentResource s) (TF.Attr s P.
         P.lens (_pollInterval :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _pollInterval = a } :: ElasticBeanstalkEnvironmentResource s)
 
-instance P.HasSetting (ElasticBeanstalkEnvironmentResource s) (TF.Attr s [TF.Attr s (SettingSetting s)]) where
+instance P.HasSetting (ElasticBeanstalkEnvironmentResource s) (TF.Attr s [TF.Attr s (Setting s)]) where
     setting =
-        P.lens (_setting :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s [TF.Attr s (SettingSetting s)])
+        P.lens (_setting :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s [TF.Attr s (Setting s)])
                (\s a -> s { _setting = a } :: ElasticBeanstalkEnvironmentResource s)
 
 instance P.HasSolutionStackName (ElasticBeanstalkEnvironmentResource s) (TF.Attr s P.Text) where
@@ -5941,7 +5941,7 @@ instance P.HasWaitForReadyTimeout (ElasticBeanstalkEnvironmentResource s) (TF.At
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAllSettings (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s [TF.Attr s (AllSettingsSetting s)]) where
+instance s ~ s' => P.HasComputedAllSettings (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s [TF.Attr s (AllSettings s)]) where
     computedAllSettings x = TF.compute (TF.refKey x) "all_settings"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where

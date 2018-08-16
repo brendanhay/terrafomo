@@ -22,8 +22,8 @@ module Terrafomo.AWS.Settings
     , accepterSetting
 
     -- ** access_log_settings
-    , AccessLogSettingsSetting (..)
-    , accessLogSettingsSetting
+    , AccessLogSettings (..)
+    , accessLogSettings
 
     -- ** access_logs
     , AccessLogsSetting (..)
@@ -62,8 +62,8 @@ module Terrafomo.AWS.Settings
     , aliasSetting
 
     -- ** all_settings
-    , AllSettingsSetting (..)
-    , allSettingsSetting
+    , AllSettings (..)
+    , allSettings
 
     -- ** api_stages
     , ApiStagesSetting (..)
@@ -250,8 +250,8 @@ module Terrafomo.AWS.Settings
     , configurationSetting
 
     -- ** connect_settings
-    , ConnectSettingsSetting (..)
-    , connectSettingsSetting
+    , ConnectSettings (..)
+    , connectSettings
 
     -- ** constraints
     , ConstraintsSetting (..)
@@ -738,8 +738,8 @@ module Terrafomo.AWS.Settings
     , minimumHealthyHostsSetting
 
     -- ** mongodb_settings
-    , MongodbSettingsSetting (..)
-    , mongodbSettingsSetting
+    , MongodbSettings (..)
+    , mongodbSettings
 
     -- ** monitoring
     , MonitoringSetting (..)
@@ -802,8 +802,8 @@ module Terrafomo.AWS.Settings
     , optionSetting
 
     -- ** option_settings
-    , OptionSettingsSetting (..)
-    , optionSettingsSetting
+    , OptionSettings (..)
+    , optionSettings
 
     -- ** orc_ser_de
     , OrcSerDeSetting (..)
@@ -922,8 +922,8 @@ module Terrafomo.AWS.Settings
     , queueSetting
 
     -- ** quota_settings
-    , QuotaSettingsSetting (..)
-    , quotaSettingsSetting
+    , QuotaSettings (..)
+    , quotaSettings
 
     -- ** recording_group
     , RecordingGroupSetting (..)
@@ -1046,8 +1046,8 @@ module Terrafomo.AWS.Settings
     , s3OriginConfigSetting
 
     -- ** s3_settings
-    , S3SettingsSetting (..)
-    , s3SettingsSetting
+    , S3Settings (..)
+    , s3Settings
 
     -- ** s3_target
     , S3TargetSetting (..)
@@ -1106,12 +1106,12 @@ module Terrafomo.AWS.Settings
     , serviceRegistriesSetting
 
     -- ** setting
-    , SettingSetting (..)
-    , settingSetting
+    , Setting (..)
+    , setting
 
     -- ** settings
-    , SettingsSetting (..)
-    , settingsSetting
+    , Settings (..)
+    , settings
 
     -- ** size_constraints
     , SizeConstraintsSetting (..)
@@ -1122,8 +1122,8 @@ module Terrafomo.AWS.Settings
     , skewedInfoSetting
 
     -- ** smb_active_directory_settings
-    , SmbActiveDirectorySettingsSetting (..)
-    , smbActiveDirectorySettingsSetting
+    , SmbActiveDirectorySettings (..)
+    , smbActiveDirectorySettings
 
     -- ** sms_configuration
     , SmsConfigurationSetting (..)
@@ -1290,8 +1290,8 @@ module Terrafomo.AWS.Settings
     , terminateBlueInstancesOnDeploymentSuccessSetting
 
     -- ** throttle_settings
-    , ThrottleSettingsSetting (..)
-    , throttleSettingsSetting
+    , ThrottleSettings (..)
+    , throttleSettings
 
     -- ** thumbnail_config
     , ThumbnailConfigSetting (..)
@@ -1378,8 +1378,8 @@ module Terrafomo.AWS.Settings
     , vpcOptionsSetting
 
     -- ** vpc_settings
-    , VpcSettingsSetting (..)
-    , vpcSettingsSetting
+    , VpcSettings (..)
+    , vpcSettings
 
     -- ** website
     , WebsiteSetting (..)
@@ -1478,7 +1478,7 @@ instance P.HasAllowVpcToRemoteClassicLink (AccepterSetting s) (TF.Attr s P.Bool)
                (\s a -> s { _allowVpcToRemoteClassicLink = a } :: AccepterSetting s)
 
 -- | @access_log_settings@ nested settings.
-data AccessLogSettingsSetting s = AccessLogSettingsSetting'
+data AccessLogSettings s = AccessLogSettings'
     { _destinationArn :: TF.Attr s P.Text
     -- ^ @destination_arn@ - (Required)
     --
@@ -1488,35 +1488,35 @@ data AccessLogSettingsSetting s = AccessLogSettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @access_log_settings@ settings value.
-accessLogSettingsSetting
+accessLogSettings
     :: TF.Attr s P.Text -- ^ 'P._destinationArn': @destination_arn@
     -> TF.Attr s P.Text -- ^ 'P._format': @format@
-    -> AccessLogSettingsSetting s
-accessLogSettingsSetting _destinationArn _format =
-    AccessLogSettingsSetting'
+    -> AccessLogSettings s
+accessLogSettings _destinationArn _format =
+    AccessLogSettings'
         { _destinationArn = _destinationArn
         , _format = _format
         }
 
-instance TF.IsValue  (AccessLogSettingsSetting s)
-instance TF.IsObject (AccessLogSettingsSetting s) where
-    toObject AccessLogSettingsSetting'{..} = P.catMaybes
+instance TF.IsValue  (AccessLogSettings s)
+instance TF.IsObject (AccessLogSettings s) where
+    toObject AccessLogSettings'{..} = P.catMaybes
         [ TF.assign "destination_arn" <$> TF.attribute _destinationArn
         , TF.assign "format" <$> TF.attribute _format
         ]
 
-instance TF.IsValid (AccessLogSettingsSetting s) where
+instance TF.IsValid (AccessLogSettings s) where
     validator = P.mempty
 
-instance P.HasDestinationArn (AccessLogSettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasDestinationArn (AccessLogSettings s) (TF.Attr s P.Text) where
     destinationArn =
-        P.lens (_destinationArn :: AccessLogSettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _destinationArn = a } :: AccessLogSettingsSetting s)
+        P.lens (_destinationArn :: AccessLogSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _destinationArn = a } :: AccessLogSettings s)
 
-instance P.HasFormat (AccessLogSettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasFormat (AccessLogSettings s) (TF.Attr s P.Text) where
     format =
-        P.lens (_format :: AccessLogSettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _format = a } :: AccessLogSettingsSetting s)
+        P.lens (_format :: AccessLogSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _format = a } :: AccessLogSettings s)
 
 -- | @access_logs@ nested settings.
 data AccessLogsSetting s = AccessLogsSetting'
@@ -2125,7 +2125,7 @@ instance P.HasZoneId (AliasSetting s) (TF.Attr s P.Text) where
                (\s a -> s { _zoneId = a } :: AliasSetting s)
 
 -- | @all_settings@ nested settings.
-data AllSettingsSetting s = AllSettingsSetting'
+data AllSettings s = AllSettings'
     { _name      :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
@@ -2141,50 +2141,50 @@ data AllSettingsSetting s = AllSettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @all_settings@ settings value.
-allSettingsSetting
+allSettings
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._namespace': @namespace@
     -> TF.Attr s P.Text -- ^ 'P._value': @value@
-    -> AllSettingsSetting s
-allSettingsSetting _name _namespace _value =
-    AllSettingsSetting'
+    -> AllSettings s
+allSettings _name _namespace _value =
+    AllSettings'
         { _name = _name
         , _namespace = _namespace
         , _resource' = TF.Nil
         , _value = _value
         }
 
-instance TF.IsValue  (AllSettingsSetting s)
-instance TF.IsObject (AllSettingsSetting s) where
-    toObject AllSettingsSetting'{..} = P.catMaybes
+instance TF.IsValue  (AllSettings s)
+instance TF.IsObject (AllSettings s) where
+    toObject AllSettings'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "namespace" <$> TF.attribute _namespace
         , TF.assign "resource" <$> TF.attribute _resource'
         , TF.assign "value" <$> TF.attribute _value
         ]
 
-instance TF.IsValid (AllSettingsSetting s) where
+instance TF.IsValid (AllSettings s) where
     validator = P.mempty
 
-instance P.HasName (AllSettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasName (AllSettings s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: AllSettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: AllSettingsSetting s)
+        P.lens (_name :: AllSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AllSettings s)
 
-instance P.HasNamespace (AllSettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasNamespace (AllSettings s) (TF.Attr s P.Text) where
     namespace =
-        P.lens (_namespace :: AllSettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _namespace = a } :: AllSettingsSetting s)
+        P.lens (_namespace :: AllSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _namespace = a } :: AllSettings s)
 
-instance P.HasResource' (AllSettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasResource' (AllSettings s) (TF.Attr s P.Text) where
     resource' =
-        P.lens (_resource' :: AllSettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _resource' = a } :: AllSettingsSetting s)
+        P.lens (_resource' :: AllSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _resource' = a } :: AllSettings s)
 
-instance P.HasValue (AllSettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasValue (AllSettings s) (TF.Attr s P.Text) where
     value =
-        P.lens (_value :: AllSettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: AllSettingsSetting s)
+        P.lens (_value :: AllSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: AllSettings s)
 
 -- | @api_stages@ nested settings.
 data ApiStagesSetting s = ApiStagesSetting'
@@ -4713,7 +4713,7 @@ instance s ~ s' => P.HasComputedRevision (TF.Ref s' (ConfigurationSetting s)) (T
     computedRevision x = TF.compute (TF.refKey x) "revision"
 
 -- | @connect_settings@ nested settings.
-data ConnectSettingsSetting s = ConnectSettingsSetting'
+data ConnectSettings s = ConnectSettings'
     { _customerDnsIps   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @customer_dns_ips@ - (Required, Forces New)
     --
@@ -4729,51 +4729,51 @@ data ConnectSettingsSetting s = ConnectSettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @connect_settings@ settings value.
-connectSettingsSetting
+connectSettings
     :: TF.Attr s P.Text -- ^ 'P._vpcId': @vpc_id@
     -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._subnetIds': @subnet_ids@
     -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._customerDnsIps': @customer_dns_ips@
     -> TF.Attr s P.Text -- ^ 'P._customerUsername': @customer_username@
-    -> ConnectSettingsSetting s
-connectSettingsSetting _vpcId _subnetIds _customerDnsIps _customerUsername =
-    ConnectSettingsSetting'
+    -> ConnectSettings s
+connectSettings _vpcId _subnetIds _customerDnsIps _customerUsername =
+    ConnectSettings'
         { _customerDnsIps = _customerDnsIps
         , _customerUsername = _customerUsername
         , _subnetIds = _subnetIds
         , _vpcId = _vpcId
         }
 
-instance TF.IsValue  (ConnectSettingsSetting s)
-instance TF.IsObject (ConnectSettingsSetting s) where
-    toObject ConnectSettingsSetting'{..} = P.catMaybes
+instance TF.IsValue  (ConnectSettings s)
+instance TF.IsObject (ConnectSettings s) where
+    toObject ConnectSettings'{..} = P.catMaybes
         [ TF.assign "customer_dns_ips" <$> TF.attribute _customerDnsIps
         , TF.assign "customer_username" <$> TF.attribute _customerUsername
         , TF.assign "subnet_ids" <$> TF.attribute _subnetIds
         , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
 
-instance TF.IsValid (ConnectSettingsSetting s) where
+instance TF.IsValid (ConnectSettings s) where
     validator = P.mempty
 
-instance P.HasCustomerDnsIps (ConnectSettingsSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasCustomerDnsIps (ConnectSettings s) (TF.Attr s [TF.Attr s P.Text]) where
     customerDnsIps =
-        P.lens (_customerDnsIps :: ConnectSettingsSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customerDnsIps = a } :: ConnectSettingsSetting s)
+        P.lens (_customerDnsIps :: ConnectSettings s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _customerDnsIps = a } :: ConnectSettings s)
 
-instance P.HasCustomerUsername (ConnectSettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasCustomerUsername (ConnectSettings s) (TF.Attr s P.Text) where
     customerUsername =
-        P.lens (_customerUsername :: ConnectSettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _customerUsername = a } :: ConnectSettingsSetting s)
+        P.lens (_customerUsername :: ConnectSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _customerUsername = a } :: ConnectSettings s)
 
-instance P.HasSubnetIds (ConnectSettingsSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasSubnetIds (ConnectSettings s) (TF.Attr s [TF.Attr s P.Text]) where
     subnetIds =
-        P.lens (_subnetIds :: ConnectSettingsSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _subnetIds = a } :: ConnectSettingsSetting s)
+        P.lens (_subnetIds :: ConnectSettings s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _subnetIds = a } :: ConnectSettings s)
 
-instance P.HasVpcId (ConnectSettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasVpcId (ConnectSettings s) (TF.Attr s P.Text) where
     vpcId =
-        P.lens (_vpcId :: ConnectSettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _vpcId = a } :: ConnectSettingsSetting s)
+        P.lens (_vpcId :: ConnectSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _vpcId = a } :: ConnectSettings s)
 
 -- | @constraints@ nested settings.
 data ConstraintsSetting s = ConstraintsSetting'
@@ -12522,7 +12522,7 @@ instance P.HasValue (MinimumHealthyHostsSetting s) (TF.Attr s P.Int) where
                (\s a -> s { _value = a } :: MinimumHealthyHostsSetting s)
 
 -- | @mongodb_settings@ nested settings.
-data MongodbSettingsSetting s = MongodbSettingsSetting'
+data MongodbSettings s = MongodbSettings'
     { _authMechanism     :: TF.Attr s P.Text
     -- ^ @auth_mechanism@ - (Optional)
     --
@@ -12544,10 +12544,10 @@ data MongodbSettingsSetting s = MongodbSettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @mongodb_settings@ settings value.
-mongodbSettingsSetting
-    :: MongodbSettingsSetting s
-mongodbSettingsSetting =
-    MongodbSettingsSetting'
+mongodbSettings
+    :: MongodbSettings s
+mongodbSettings =
+    MongodbSettings'
         { _authMechanism = TF.value "DEFAULT"
         , _authSource = TF.value "admin"
         , _authType = TF.value "PASSWORD"
@@ -12556,9 +12556,9 @@ mongodbSettingsSetting =
         , _nestingLevel = TF.value "NONE"
         }
 
-instance TF.IsValue  (MongodbSettingsSetting s)
-instance TF.IsObject (MongodbSettingsSetting s) where
-    toObject MongodbSettingsSetting'{..} = P.catMaybes
+instance TF.IsValue  (MongodbSettings s)
+instance TF.IsObject (MongodbSettings s) where
+    toObject MongodbSettings'{..} = P.catMaybes
         [ TF.assign "auth_mechanism" <$> TF.attribute _authMechanism
         , TF.assign "auth_source" <$> TF.attribute _authSource
         , TF.assign "auth_type" <$> TF.attribute _authType
@@ -12567,38 +12567,38 @@ instance TF.IsObject (MongodbSettingsSetting s) where
         , TF.assign "nesting_level" <$> TF.attribute _nestingLevel
         ]
 
-instance TF.IsValid (MongodbSettingsSetting s) where
+instance TF.IsValid (MongodbSettings s) where
     validator = P.mempty
 
-instance P.HasAuthMechanism (MongodbSettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasAuthMechanism (MongodbSettings s) (TF.Attr s P.Text) where
     authMechanism =
-        P.lens (_authMechanism :: MongodbSettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _authMechanism = a } :: MongodbSettingsSetting s)
+        P.lens (_authMechanism :: MongodbSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _authMechanism = a } :: MongodbSettings s)
 
-instance P.HasAuthSource (MongodbSettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasAuthSource (MongodbSettings s) (TF.Attr s P.Text) where
     authSource =
-        P.lens (_authSource :: MongodbSettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _authSource = a } :: MongodbSettingsSetting s)
+        P.lens (_authSource :: MongodbSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _authSource = a } :: MongodbSettings s)
 
-instance P.HasAuthType (MongodbSettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasAuthType (MongodbSettings s) (TF.Attr s P.Text) where
     authType =
-        P.lens (_authType :: MongodbSettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _authType = a } :: MongodbSettingsSetting s)
+        P.lens (_authType :: MongodbSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _authType = a } :: MongodbSettings s)
 
-instance P.HasDocsToInvestigate (MongodbSettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasDocsToInvestigate (MongodbSettings s) (TF.Attr s P.Text) where
     docsToInvestigate =
-        P.lens (_docsToInvestigate :: MongodbSettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _docsToInvestigate = a } :: MongodbSettingsSetting s)
+        P.lens (_docsToInvestigate :: MongodbSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _docsToInvestigate = a } :: MongodbSettings s)
 
-instance P.HasExtractDocId (MongodbSettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasExtractDocId (MongodbSettings s) (TF.Attr s P.Text) where
     extractDocId =
-        P.lens (_extractDocId :: MongodbSettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _extractDocId = a } :: MongodbSettingsSetting s)
+        P.lens (_extractDocId :: MongodbSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _extractDocId = a } :: MongodbSettings s)
 
-instance P.HasNestingLevel (MongodbSettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasNestingLevel (MongodbSettings s) (TF.Attr s P.Text) where
     nestingLevel =
-        P.lens (_nestingLevel :: MongodbSettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _nestingLevel = a } :: MongodbSettingsSetting s)
+        P.lens (_nestingLevel :: MongodbSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _nestingLevel = a } :: MongodbSettings s)
 
 -- | @monitoring@ nested settings.
 data MonitoringSetting s = MonitoringSetting'
@@ -13292,19 +13292,19 @@ instance P.HasConvertDotsInJsonKeysToUnderscores (OpenXJsonSerDeSetting s) (TF.A
 
 -- | @option@ nested settings.
 data OptionSetting s = OptionSetting'
-    { _dbSecurityGroupMemberships :: TF.Attr s [TF.Attr s P.Text]
+    { _dbSecurityGroupMemberships  :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @db_security_group_memberships@ - (Optional)
     --
-    , _optionName :: TF.Attr s P.Text
+    , _optionName                  :: TF.Attr s P.Text
     -- ^ @option_name@ - (Required)
     --
-    , _optionSettings :: TF.Attr s [TF.Attr s (OptionSettingsSetting s)]
+    , _optionSettings              :: TF.Attr s [TF.Attr s (OptionSettings s)]
     -- ^ @option_settings@ - (Optional)
     --
-    , _port :: TF.Attr s P.Int
+    , _port                        :: TF.Attr s P.Int
     -- ^ @port@ - (Optional)
     --
-    , _version :: TF.Attr s P.Text
+    , _version                     :: TF.Attr s P.Text
     -- ^ @version@ - (Optional)
     --
     , _vpcSecurityGroupMemberships :: TF.Attr s [TF.Attr s P.Text]
@@ -13350,9 +13350,9 @@ instance P.HasOptionName (OptionSetting s) (TF.Attr s P.Text) where
         P.lens (_optionName :: OptionSetting s -> TF.Attr s P.Text)
                (\s a -> s { _optionName = a } :: OptionSetting s)
 
-instance P.HasOptionSettings (OptionSetting s) (TF.Attr s [TF.Attr s (OptionSettingsSetting s)]) where
+instance P.HasOptionSettings (OptionSetting s) (TF.Attr s [TF.Attr s (OptionSettings s)]) where
     optionSettings =
-        P.lens (_optionSettings :: OptionSetting s -> TF.Attr s [TF.Attr s (OptionSettingsSetting s)])
+        P.lens (_optionSettings :: OptionSetting s -> TF.Attr s [TF.Attr s (OptionSettings s)])
                (\s a -> s { _optionSettings = a } :: OptionSetting s)
 
 instance P.HasPort (OptionSetting s) (TF.Attr s P.Int) where
@@ -13371,7 +13371,7 @@ instance P.HasVpcSecurityGroupMemberships (OptionSetting s) (TF.Attr s [TF.Attr 
                (\s a -> s { _vpcSecurityGroupMemberships = a } :: OptionSetting s)
 
 -- | @option_settings@ nested settings.
-data OptionSettingsSetting s = OptionSettingsSetting'
+data OptionSettings s = OptionSettings'
     { _name  :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
@@ -13381,35 +13381,35 @@ data OptionSettingsSetting s = OptionSettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @option_settings@ settings value.
-optionSettingsSetting
+optionSettings
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._value': @value@
-    -> OptionSettingsSetting s
-optionSettingsSetting _name _value =
-    OptionSettingsSetting'
+    -> OptionSettings s
+optionSettings _name _value =
+    OptionSettings'
         { _name = _name
         , _value = _value
         }
 
-instance TF.IsValue  (OptionSettingsSetting s)
-instance TF.IsObject (OptionSettingsSetting s) where
-    toObject OptionSettingsSetting'{..} = P.catMaybes
+instance TF.IsValue  (OptionSettings s)
+instance TF.IsObject (OptionSettings s) where
+    toObject OptionSettings'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "value" <$> TF.attribute _value
         ]
 
-instance TF.IsValid (OptionSettingsSetting s) where
+instance TF.IsValid (OptionSettings s) where
     validator = P.mempty
 
-instance P.HasName (OptionSettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasName (OptionSettings s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: OptionSettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: OptionSettingsSetting s)
+        P.lens (_name :: OptionSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: OptionSettings s)
 
-instance P.HasValue (OptionSettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasValue (OptionSettings s) (TF.Attr s P.Text) where
     value =
-        P.lens (_value :: OptionSettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: OptionSettingsSetting s)
+        P.lens (_value :: OptionSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: OptionSettings s)
 
 -- | @orc_ser_de@ nested settings.
 data OrcSerDeSetting s = OrcSerDeSetting'
@@ -15085,7 +15085,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (QueueSetting s)) (TF.Attr s P.Tex
     computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @quota_settings@ nested settings.
-data QuotaSettingsSetting s = QuotaSettingsSetting'
+data QuotaSettings s = QuotaSettings'
     { _limit  :: TF.Attr s P.Int
     -- ^ @limit@ - (Required)
     --
@@ -15098,42 +15098,42 @@ data QuotaSettingsSetting s = QuotaSettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @quota_settings@ settings value.
-quotaSettingsSetting
+quotaSettings
     :: TF.Attr s P.Int -- ^ 'P._limit': @limit@
     -> TF.Attr s P.Text -- ^ 'P._period': @period@
-    -> QuotaSettingsSetting s
-quotaSettingsSetting _limit _period =
-    QuotaSettingsSetting'
+    -> QuotaSettings s
+quotaSettings _limit _period =
+    QuotaSettings'
         { _limit = _limit
         , _offset = TF.value 0
         , _period = _period
         }
 
-instance TF.IsValue  (QuotaSettingsSetting s)
-instance TF.IsObject (QuotaSettingsSetting s) where
-    toObject QuotaSettingsSetting'{..} = P.catMaybes
+instance TF.IsValue  (QuotaSettings s)
+instance TF.IsObject (QuotaSettings s) where
+    toObject QuotaSettings'{..} = P.catMaybes
         [ TF.assign "limit" <$> TF.attribute _limit
         , TF.assign "offset" <$> TF.attribute _offset
         , TF.assign "period" <$> TF.attribute _period
         ]
 
-instance TF.IsValid (QuotaSettingsSetting s) where
+instance TF.IsValid (QuotaSettings s) where
     validator = P.mempty
 
-instance P.HasLimit (QuotaSettingsSetting s) (TF.Attr s P.Int) where
+instance P.HasLimit (QuotaSettings s) (TF.Attr s P.Int) where
     limit =
-        P.lens (_limit :: QuotaSettingsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _limit = a } :: QuotaSettingsSetting s)
+        P.lens (_limit :: QuotaSettings s -> TF.Attr s P.Int)
+               (\s a -> s { _limit = a } :: QuotaSettings s)
 
-instance P.HasOffset (QuotaSettingsSetting s) (TF.Attr s P.Int) where
+instance P.HasOffset (QuotaSettings s) (TF.Attr s P.Int) where
     offset =
-        P.lens (_offset :: QuotaSettingsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _offset = a } :: QuotaSettingsSetting s)
+        P.lens (_offset :: QuotaSettings s -> TF.Attr s P.Int)
+               (\s a -> s { _offset = a } :: QuotaSettings s)
 
-instance P.HasPeriod (QuotaSettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasPeriod (QuotaSettings s) (TF.Attr s P.Text) where
     period =
-        P.lens (_period :: QuotaSettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _period = a } :: QuotaSettingsSetting s)
+        P.lens (_period :: QuotaSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _period = a } :: QuotaSettings s)
 
 -- | @recording_group@ nested settings.
 data RecordingGroupSetting s = RecordingGroupSetting'
@@ -17003,7 +17003,7 @@ instance P.HasOriginAccessIdentity (S3OriginConfigSetting s) (TF.Attr s P.Text) 
                (\s a -> s { _originAccessIdentity = a } :: S3OriginConfigSetting s)
 
 -- | @s3_settings@ nested settings.
-data S3SettingsSetting s = S3SettingsSetting'
+data S3Settings s = S3Settings'
     { _bucketFolder            :: TF.Attr s P.Text
     -- ^ @bucket_folder@ - (Optional)
     --
@@ -17028,10 +17028,10 @@ data S3SettingsSetting s = S3SettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @s3_settings@ settings value.
-s3SettingsSetting
-    :: S3SettingsSetting s
-s3SettingsSetting =
-    S3SettingsSetting'
+s3Settings
+    :: S3Settings s
+s3Settings =
+    S3Settings'
         { _bucketFolder = TF.Nil
         , _bucketName = TF.Nil
         , _compressionType = TF.value "NONE"
@@ -17041,9 +17041,9 @@ s3SettingsSetting =
         , _serviceAccessRoleArn = TF.Nil
         }
 
-instance TF.IsValue  (S3SettingsSetting s)
-instance TF.IsObject (S3SettingsSetting s) where
-    toObject S3SettingsSetting'{..} = P.catMaybes
+instance TF.IsValue  (S3Settings s)
+instance TF.IsObject (S3Settings s) where
+    toObject S3Settings'{..} = P.catMaybes
         [ TF.assign "bucket_folder" <$> TF.attribute _bucketFolder
         , TF.assign "bucket_name" <$> TF.attribute _bucketName
         , TF.assign "compression_type" <$> TF.attribute _compressionType
@@ -17053,43 +17053,43 @@ instance TF.IsObject (S3SettingsSetting s) where
         , TF.assign "service_access_role_arn" <$> TF.attribute _serviceAccessRoleArn
         ]
 
-instance TF.IsValid (S3SettingsSetting s) where
+instance TF.IsValid (S3Settings s) where
     validator = P.mempty
 
-instance P.HasBucketFolder (S3SettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasBucketFolder (S3Settings s) (TF.Attr s P.Text) where
     bucketFolder =
-        P.lens (_bucketFolder :: S3SettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _bucketFolder = a } :: S3SettingsSetting s)
+        P.lens (_bucketFolder :: S3Settings s -> TF.Attr s P.Text)
+               (\s a -> s { _bucketFolder = a } :: S3Settings s)
 
-instance P.HasBucketName (S3SettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasBucketName (S3Settings s) (TF.Attr s P.Text) where
     bucketName =
-        P.lens (_bucketName :: S3SettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _bucketName = a } :: S3SettingsSetting s)
+        P.lens (_bucketName :: S3Settings s -> TF.Attr s P.Text)
+               (\s a -> s { _bucketName = a } :: S3Settings s)
 
-instance P.HasCompressionType (S3SettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasCompressionType (S3Settings s) (TF.Attr s P.Text) where
     compressionType =
-        P.lens (_compressionType :: S3SettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _compressionType = a } :: S3SettingsSetting s)
+        P.lens (_compressionType :: S3Settings s -> TF.Attr s P.Text)
+               (\s a -> s { _compressionType = a } :: S3Settings s)
 
-instance P.HasCsvDelimiter (S3SettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasCsvDelimiter (S3Settings s) (TF.Attr s P.Text) where
     csvDelimiter =
-        P.lens (_csvDelimiter :: S3SettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _csvDelimiter = a } :: S3SettingsSetting s)
+        P.lens (_csvDelimiter :: S3Settings s -> TF.Attr s P.Text)
+               (\s a -> s { _csvDelimiter = a } :: S3Settings s)
 
-instance P.HasCsvRowDelimiter (S3SettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasCsvRowDelimiter (S3Settings s) (TF.Attr s P.Text) where
     csvRowDelimiter =
-        P.lens (_csvRowDelimiter :: S3SettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _csvRowDelimiter = a } :: S3SettingsSetting s)
+        P.lens (_csvRowDelimiter :: S3Settings s -> TF.Attr s P.Text)
+               (\s a -> s { _csvRowDelimiter = a } :: S3Settings s)
 
-instance P.HasExternalTableDefinition (S3SettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasExternalTableDefinition (S3Settings s) (TF.Attr s P.Text) where
     externalTableDefinition =
-        P.lens (_externalTableDefinition :: S3SettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _externalTableDefinition = a } :: S3SettingsSetting s)
+        P.lens (_externalTableDefinition :: S3Settings s -> TF.Attr s P.Text)
+               (\s a -> s { _externalTableDefinition = a } :: S3Settings s)
 
-instance P.HasServiceAccessRoleArn (S3SettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasServiceAccessRoleArn (S3Settings s) (TF.Attr s P.Text) where
     serviceAccessRoleArn =
-        P.lens (_serviceAccessRoleArn :: S3SettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _serviceAccessRoleArn = a } :: S3SettingsSetting s)
+        P.lens (_serviceAccessRoleArn :: S3Settings s -> TF.Attr s P.Text)
+               (\s a -> s { _serviceAccessRoleArn = a } :: S3Settings s)
 
 -- | @s3_target@ nested settings.
 data S3TargetSetting s = S3TargetSetting'
@@ -17860,7 +17860,7 @@ instance P.HasRegistryArn (ServiceRegistriesSetting s) (TF.Attr s P.Text) where
                (\s a -> s { _registryArn = a } :: ServiceRegistriesSetting s)
 
 -- | @setting@ nested settings.
-data SettingSetting s = SettingSetting'
+data Setting s = Setting'
     { _name      :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
@@ -17876,53 +17876,53 @@ data SettingSetting s = SettingSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @setting@ settings value.
-settingSetting
+setting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._namespace': @namespace@
     -> TF.Attr s P.Text -- ^ 'P._value': @value@
-    -> SettingSetting s
-settingSetting _name _namespace _value =
-    SettingSetting'
+    -> Setting s
+setting _name _namespace _value =
+    Setting'
         { _name = _name
         , _namespace = _namespace
         , _resource' = TF.Nil
         , _value = _value
         }
 
-instance TF.IsValue  (SettingSetting s)
-instance TF.IsObject (SettingSetting s) where
-    toObject SettingSetting'{..} = P.catMaybes
+instance TF.IsValue  (Setting s)
+instance TF.IsObject (Setting s) where
+    toObject Setting'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "namespace" <$> TF.attribute _namespace
         , TF.assign "resource" <$> TF.attribute _resource'
         , TF.assign "value" <$> TF.attribute _value
         ]
 
-instance TF.IsValid (SettingSetting s) where
+instance TF.IsValid (Setting s) where
     validator = P.mempty
 
-instance P.HasName (SettingSetting s) (TF.Attr s P.Text) where
+instance P.HasName (Setting s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: SettingSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SettingSetting s)
+        P.lens (_name :: Setting s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: Setting s)
 
-instance P.HasNamespace (SettingSetting s) (TF.Attr s P.Text) where
+instance P.HasNamespace (Setting s) (TF.Attr s P.Text) where
     namespace =
-        P.lens (_namespace :: SettingSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _namespace = a } :: SettingSetting s)
+        P.lens (_namespace :: Setting s -> TF.Attr s P.Text)
+               (\s a -> s { _namespace = a } :: Setting s)
 
-instance P.HasResource' (SettingSetting s) (TF.Attr s P.Text) where
+instance P.HasResource' (Setting s) (TF.Attr s P.Text) where
     resource' =
-        P.lens (_resource' :: SettingSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _resource' = a } :: SettingSetting s)
+        P.lens (_resource' :: Setting s -> TF.Attr s P.Text)
+               (\s a -> s { _resource' = a } :: Setting s)
 
-instance P.HasValue (SettingSetting s) (TF.Attr s P.Text) where
+instance P.HasValue (Setting s) (TF.Attr s P.Text) where
     value =
-        P.lens (_value :: SettingSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: SettingSetting s)
+        P.lens (_value :: Setting s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: Setting s)
 
 -- | @settings@ nested settings.
-data SettingsSetting s = SettingsSetting'
+data Settings s = Settings'
     { _cacheDataEncrypted                     :: TF.Attr s P.Bool
     -- ^ @cache_data_encrypted@ - (Optional)
     --
@@ -17956,10 +17956,10 @@ data SettingsSetting s = SettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @settings@ settings value.
-settingsSetting
-    :: SettingsSetting s
-settingsSetting =
-    SettingsSetting'
+settings
+    :: Settings s
+settings =
+    Settings'
         { _cacheDataEncrypted = TF.Nil
         , _cacheTtlInSeconds = TF.Nil
         , _cachingEnabled = TF.Nil
@@ -17972,9 +17972,9 @@ settingsSetting =
         , _unauthorizedCacheControlHeaderStrategy = TF.Nil
         }
 
-instance TF.IsValue  (SettingsSetting s)
-instance TF.IsObject (SettingsSetting s) where
-    toObject SettingsSetting'{..} = P.catMaybes
+instance TF.IsValue  (Settings s)
+instance TF.IsObject (Settings s) where
+    toObject Settings'{..} = P.catMaybes
         [ TF.assign "cache_data_encrypted" <$> TF.attribute _cacheDataEncrypted
         , TF.assign "cache_ttl_in_seconds" <$> TF.attribute _cacheTtlInSeconds
         , TF.assign "caching_enabled" <$> TF.attribute _cachingEnabled
@@ -17987,58 +17987,58 @@ instance TF.IsObject (SettingsSetting s) where
         , TF.assign "unauthorized_cache_control_header_strategy" <$> TF.attribute _unauthorizedCacheControlHeaderStrategy
         ]
 
-instance TF.IsValid (SettingsSetting s) where
+instance TF.IsValid (Settings s) where
     validator = P.mempty
 
-instance P.HasCacheDataEncrypted (SettingsSetting s) (TF.Attr s P.Bool) where
+instance P.HasCacheDataEncrypted (Settings s) (TF.Attr s P.Bool) where
     cacheDataEncrypted =
-        P.lens (_cacheDataEncrypted :: SettingsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _cacheDataEncrypted = a } :: SettingsSetting s)
+        P.lens (_cacheDataEncrypted :: Settings s -> TF.Attr s P.Bool)
+               (\s a -> s { _cacheDataEncrypted = a } :: Settings s)
 
-instance P.HasCacheTtlInSeconds (SettingsSetting s) (TF.Attr s P.Int) where
+instance P.HasCacheTtlInSeconds (Settings s) (TF.Attr s P.Int) where
     cacheTtlInSeconds =
-        P.lens (_cacheTtlInSeconds :: SettingsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _cacheTtlInSeconds = a } :: SettingsSetting s)
+        P.lens (_cacheTtlInSeconds :: Settings s -> TF.Attr s P.Int)
+               (\s a -> s { _cacheTtlInSeconds = a } :: Settings s)
 
-instance P.HasCachingEnabled (SettingsSetting s) (TF.Attr s P.Bool) where
+instance P.HasCachingEnabled (Settings s) (TF.Attr s P.Bool) where
     cachingEnabled =
-        P.lens (_cachingEnabled :: SettingsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _cachingEnabled = a } :: SettingsSetting s)
+        P.lens (_cachingEnabled :: Settings s -> TF.Attr s P.Bool)
+               (\s a -> s { _cachingEnabled = a } :: Settings s)
 
-instance P.HasDataTraceEnabled (SettingsSetting s) (TF.Attr s P.Bool) where
+instance P.HasDataTraceEnabled (Settings s) (TF.Attr s P.Bool) where
     dataTraceEnabled =
-        P.lens (_dataTraceEnabled :: SettingsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _dataTraceEnabled = a } :: SettingsSetting s)
+        P.lens (_dataTraceEnabled :: Settings s -> TF.Attr s P.Bool)
+               (\s a -> s { _dataTraceEnabled = a } :: Settings s)
 
-instance P.HasLoggingLevel (SettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasLoggingLevel (Settings s) (TF.Attr s P.Text) where
     loggingLevel =
-        P.lens (_loggingLevel :: SettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _loggingLevel = a } :: SettingsSetting s)
+        P.lens (_loggingLevel :: Settings s -> TF.Attr s P.Text)
+               (\s a -> s { _loggingLevel = a } :: Settings s)
 
-instance P.HasMetricsEnabled (SettingsSetting s) (TF.Attr s P.Bool) where
+instance P.HasMetricsEnabled (Settings s) (TF.Attr s P.Bool) where
     metricsEnabled =
-        P.lens (_metricsEnabled :: SettingsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _metricsEnabled = a } :: SettingsSetting s)
+        P.lens (_metricsEnabled :: Settings s -> TF.Attr s P.Bool)
+               (\s a -> s { _metricsEnabled = a } :: Settings s)
 
-instance P.HasRequireAuthorizationForCacheControl (SettingsSetting s) (TF.Attr s P.Bool) where
+instance P.HasRequireAuthorizationForCacheControl (Settings s) (TF.Attr s P.Bool) where
     requireAuthorizationForCacheControl =
-        P.lens (_requireAuthorizationForCacheControl :: SettingsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _requireAuthorizationForCacheControl = a } :: SettingsSetting s)
+        P.lens (_requireAuthorizationForCacheControl :: Settings s -> TF.Attr s P.Bool)
+               (\s a -> s { _requireAuthorizationForCacheControl = a } :: Settings s)
 
-instance P.HasThrottlingBurstLimit (SettingsSetting s) (TF.Attr s P.Int) where
+instance P.HasThrottlingBurstLimit (Settings s) (TF.Attr s P.Int) where
     throttlingBurstLimit =
-        P.lens (_throttlingBurstLimit :: SettingsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _throttlingBurstLimit = a } :: SettingsSetting s)
+        P.lens (_throttlingBurstLimit :: Settings s -> TF.Attr s P.Int)
+               (\s a -> s { _throttlingBurstLimit = a } :: Settings s)
 
-instance P.HasThrottlingRateLimit (SettingsSetting s) (TF.Attr s P.Double) where
+instance P.HasThrottlingRateLimit (Settings s) (TF.Attr s P.Double) where
     throttlingRateLimit =
-        P.lens (_throttlingRateLimit :: SettingsSetting s -> TF.Attr s P.Double)
-               (\s a -> s { _throttlingRateLimit = a } :: SettingsSetting s)
+        P.lens (_throttlingRateLimit :: Settings s -> TF.Attr s P.Double)
+               (\s a -> s { _throttlingRateLimit = a } :: Settings s)
 
-instance P.HasUnauthorizedCacheControlHeaderStrategy (SettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasUnauthorizedCacheControlHeaderStrategy (Settings s) (TF.Attr s P.Text) where
     unauthorizedCacheControlHeaderStrategy =
-        P.lens (_unauthorizedCacheControlHeaderStrategy :: SettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _unauthorizedCacheControlHeaderStrategy = a } :: SettingsSetting s)
+        P.lens (_unauthorizedCacheControlHeaderStrategy :: Settings s -> TF.Attr s P.Text)
+               (\s a -> s { _unauthorizedCacheControlHeaderStrategy = a } :: Settings s)
 
 -- | @size_constraints@ nested settings.
 data SizeConstraintsSetting s = SizeConstraintsSetting'
@@ -18157,7 +18157,7 @@ instance P.HasSkewedColumnValues (SkewedInfoSetting s) (TF.Attr s [TF.Attr s P.T
                (\s a -> s { _skewedColumnValues = a } :: SkewedInfoSetting s)
 
 -- | @smb_active_directory_settings@ nested settings.
-data SmbActiveDirectorySettingsSetting s = SmbActiveDirectorySettingsSetting'
+data SmbActiveDirectorySettings s = SmbActiveDirectorySettings'
     { _domainName :: TF.Attr s P.Text
     -- ^ @domain_name@ - (Required)
     --
@@ -18170,43 +18170,43 @@ data SmbActiveDirectorySettingsSetting s = SmbActiveDirectorySettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @smb_active_directory_settings@ settings value.
-smbActiveDirectorySettingsSetting
+smbActiveDirectorySettings
     :: TF.Attr s P.Text -- ^ 'P._domainName': @domain_name@
     -> TF.Attr s P.Text -- ^ 'P._password': @password@
     -> TF.Attr s P.Text -- ^ 'P._username': @username@
-    -> SmbActiveDirectorySettingsSetting s
-smbActiveDirectorySettingsSetting _domainName _password _username =
-    SmbActiveDirectorySettingsSetting'
+    -> SmbActiveDirectorySettings s
+smbActiveDirectorySettings _domainName _password _username =
+    SmbActiveDirectorySettings'
         { _domainName = _domainName
         , _password = _password
         , _username = _username
         }
 
-instance TF.IsValue  (SmbActiveDirectorySettingsSetting s)
-instance TF.IsObject (SmbActiveDirectorySettingsSetting s) where
-    toObject SmbActiveDirectorySettingsSetting'{..} = P.catMaybes
+instance TF.IsValue  (SmbActiveDirectorySettings s)
+instance TF.IsObject (SmbActiveDirectorySettings s) where
+    toObject SmbActiveDirectorySettings'{..} = P.catMaybes
         [ TF.assign "domain_name" <$> TF.attribute _domainName
         , TF.assign "password" <$> TF.attribute _password
         , TF.assign "username" <$> TF.attribute _username
         ]
 
-instance TF.IsValid (SmbActiveDirectorySettingsSetting s) where
+instance TF.IsValid (SmbActiveDirectorySettings s) where
     validator = P.mempty
 
-instance P.HasDomainName (SmbActiveDirectorySettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasDomainName (SmbActiveDirectorySettings s) (TF.Attr s P.Text) where
     domainName =
-        P.lens (_domainName :: SmbActiveDirectorySettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _domainName = a } :: SmbActiveDirectorySettingsSetting s)
+        P.lens (_domainName :: SmbActiveDirectorySettings s -> TF.Attr s P.Text)
+               (\s a -> s { _domainName = a } :: SmbActiveDirectorySettings s)
 
-instance P.HasPassword (SmbActiveDirectorySettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasPassword (SmbActiveDirectorySettings s) (TF.Attr s P.Text) where
     password =
-        P.lens (_password :: SmbActiveDirectorySettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _password = a } :: SmbActiveDirectorySettingsSetting s)
+        P.lens (_password :: SmbActiveDirectorySettings s -> TF.Attr s P.Text)
+               (\s a -> s { _password = a } :: SmbActiveDirectorySettings s)
 
-instance P.HasUsername (SmbActiveDirectorySettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasUsername (SmbActiveDirectorySettings s) (TF.Attr s P.Text) where
     username =
-        P.lens (_username :: SmbActiveDirectorySettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _username = a } :: SmbActiveDirectorySettingsSetting s)
+        P.lens (_username :: SmbActiveDirectorySettings s -> TF.Attr s P.Text)
+               (\s a -> s { _username = a } :: SmbActiveDirectorySettings s)
 
 -- | @sms_configuration@ nested settings.
 data SmsConfigurationSetting s = SmsConfigurationSetting'
@@ -20502,7 +20502,7 @@ instance P.HasTerminationWaitTimeInMinutes (TerminateBlueInstancesOnDeploymentSu
                (\s a -> s { _terminationWaitTimeInMinutes = a } :: TerminateBlueInstancesOnDeploymentSuccessSetting s)
 
 -- | @throttle_settings@ nested settings.
-data ThrottleSettingsSetting s = ThrottleSettingsSetting'
+data ThrottleSettings s = ThrottleSettings'
     { _burstLimit :: TF.Attr s P.Int
     -- ^ @burst_limit@ - (Optional)
     --
@@ -20512,38 +20512,38 @@ data ThrottleSettingsSetting s = ThrottleSettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @throttle_settings@ settings value.
-throttleSettingsSetting
-    :: ThrottleSettingsSetting s
-throttleSettingsSetting =
-    ThrottleSettingsSetting'
+throttleSettings
+    :: ThrottleSettings s
+throttleSettings =
+    ThrottleSettings'
         { _burstLimit = TF.value 0
         , _rateLimit = TF.value 0.0
         }
 
-instance TF.IsValue  (ThrottleSettingsSetting s)
-instance TF.IsObject (ThrottleSettingsSetting s) where
-    toObject ThrottleSettingsSetting'{..} = P.catMaybes
+instance TF.IsValue  (ThrottleSettings s)
+instance TF.IsObject (ThrottleSettings s) where
+    toObject ThrottleSettings'{..} = P.catMaybes
         [ TF.assign "burst_limit" <$> TF.attribute _burstLimit
         , TF.assign "rate_limit" <$> TF.attribute _rateLimit
         ]
 
-instance TF.IsValid (ThrottleSettingsSetting s) where
+instance TF.IsValid (ThrottleSettings s) where
     validator = P.mempty
 
-instance P.HasBurstLimit (ThrottleSettingsSetting s) (TF.Attr s P.Int) where
+instance P.HasBurstLimit (ThrottleSettings s) (TF.Attr s P.Int) where
     burstLimit =
-        P.lens (_burstLimit :: ThrottleSettingsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _burstLimit = a } :: ThrottleSettingsSetting s)
+        P.lens (_burstLimit :: ThrottleSettings s -> TF.Attr s P.Int)
+               (\s a -> s { _burstLimit = a } :: ThrottleSettings s)
 
-instance P.HasRateLimit (ThrottleSettingsSetting s) (TF.Attr s P.Double) where
+instance P.HasRateLimit (ThrottleSettings s) (TF.Attr s P.Double) where
     rateLimit =
-        P.lens (_rateLimit :: ThrottleSettingsSetting s -> TF.Attr s P.Double)
-               (\s a -> s { _rateLimit = a } :: ThrottleSettingsSetting s)
+        P.lens (_rateLimit :: ThrottleSettings s -> TF.Attr s P.Double)
+               (\s a -> s { _rateLimit = a } :: ThrottleSettings s)
 
-instance s ~ s' => P.HasComputedBurstLimit (TF.Ref s' (ThrottleSettingsSetting s)) (TF.Attr s P.Int) where
+instance s ~ s' => P.HasComputedBurstLimit (TF.Ref s' (ThrottleSettings s)) (TF.Attr s P.Int) where
     computedBurstLimit x = TF.compute (TF.refKey x) "burst_limit"
 
-instance s ~ s' => P.HasComputedRateLimit (TF.Ref s' (ThrottleSettingsSetting s)) (TF.Attr s P.Double) where
+instance s ~ s' => P.HasComputedRateLimit (TF.Ref s' (ThrottleSettings s)) (TF.Attr s P.Double) where
     computedRateLimit x = TF.compute (TF.refKey x) "rate_limit"
 
 -- | @thumbnail_config@ nested settings.
@@ -21962,7 +21962,7 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcOptionsSetting s)) (TF.Attr
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @vpc_settings@ nested settings.
-data VpcSettingsSetting s = VpcSettingsSetting'
+data VpcSettings s = VpcSettings'
     { _subnetIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @subnet_ids@ - (Required, Forces New)
     --
@@ -21972,35 +21972,35 @@ data VpcSettingsSetting s = VpcSettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @vpc_settings@ settings value.
-vpcSettingsSetting
+vpcSettings
     :: TF.Attr s P.Text -- ^ 'P._vpcId': @vpc_id@
     -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._subnetIds': @subnet_ids@
-    -> VpcSettingsSetting s
-vpcSettingsSetting _vpcId _subnetIds =
-    VpcSettingsSetting'
+    -> VpcSettings s
+vpcSettings _vpcId _subnetIds =
+    VpcSettings'
         { _subnetIds = _subnetIds
         , _vpcId = _vpcId
         }
 
-instance TF.IsValue  (VpcSettingsSetting s)
-instance TF.IsObject (VpcSettingsSetting s) where
-    toObject VpcSettingsSetting'{..} = P.catMaybes
+instance TF.IsValue  (VpcSettings s)
+instance TF.IsObject (VpcSettings s) where
+    toObject VpcSettings'{..} = P.catMaybes
         [ TF.assign "subnet_ids" <$> TF.attribute _subnetIds
         , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
 
-instance TF.IsValid (VpcSettingsSetting s) where
+instance TF.IsValid (VpcSettings s) where
     validator = P.mempty
 
-instance P.HasSubnetIds (VpcSettingsSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasSubnetIds (VpcSettings s) (TF.Attr s [TF.Attr s P.Text]) where
     subnetIds =
-        P.lens (_subnetIds :: VpcSettingsSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _subnetIds = a } :: VpcSettingsSetting s)
+        P.lens (_subnetIds :: VpcSettings s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _subnetIds = a } :: VpcSettings s)
 
-instance P.HasVpcId (VpcSettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasVpcId (VpcSettings s) (TF.Attr s P.Text) where
     vpcId =
-        P.lens (_vpcId :: VpcSettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _vpcId = a } :: VpcSettingsSetting s)
+        P.lens (_vpcId :: VpcSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _vpcId = a } :: VpcSettings s)
 
 -- | @website@ nested settings.
 data WebsiteSetting s = WebsiteSetting'

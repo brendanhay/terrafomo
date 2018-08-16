@@ -1908,7 +1908,7 @@ instance P.HasCloudwatchRoleArn (ApiGatewayAccountResource s) (TF.Attr s P.Text)
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ApiGatewayAccountResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedThrottleSettings (TF.Ref s' (ApiGatewayAccountResource s)) (TF.Attr s (ThrottleSettingsSetting s)) where
+instance s ~ s' => P.HasComputedThrottleSettings (TF.Ref s' (ApiGatewayAccountResource s)) (TF.Attr s (ThrottleSettings s)) where
     computedThrottleSettings x = TF.compute (TF.refKey x) "throttle_settings"
 
 -- | @aws_api_gateway_api_key@ Resource.
@@ -3241,7 +3241,7 @@ data ApiGatewayMethodSettingsResource s = ApiGatewayMethodSettingsResource'
     , _restApiId  :: TF.Attr s P.Text
     -- ^ @rest_api_id@ - (Required, Forces New)
     --
-    , _settings   :: TF.Attr s (SettingsSetting s)
+    , _settings   :: TF.Attr s (Settings s)
     -- ^ @settings@ - (Required)
     --
     , _stageName  :: TF.Attr s P.Text
@@ -3254,7 +3254,7 @@ apiGatewayMethodSettingsResource
     :: TF.Attr s P.Text -- ^ @rest_api_id@ ('P._restApiId', 'P.restApiId')
     -> TF.Attr s P.Text -- ^ @stage_name@ ('P._stageName', 'P.stageName')
     -> TF.Attr s P.Text -- ^ @method_path@ ('P._methodPath', 'P.methodPath')
-    -> TF.Attr s (SettingsSetting s) -- ^ @settings@ ('P._settings', 'P.settings')
+    -> TF.Attr s (Settings s) -- ^ @settings@ ('P._settings', 'P.settings')
     -> P.Resource (ApiGatewayMethodSettingsResource s)
 apiGatewayMethodSettingsResource _restApiId _stageName _methodPath _settings =
     TF.unsafeResource "aws_api_gateway_method_settings" TF.validator $
@@ -3277,7 +3277,7 @@ instance TF.IsValid (ApiGatewayMethodSettingsResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_settings"
                   (_settings
-                      :: ApiGatewayMethodSettingsResource s -> TF.Attr s (SettingsSetting s))
+                      :: ApiGatewayMethodSettingsResource s -> TF.Attr s (Settings s))
                   TF.validator
 
 instance P.HasMethodPath (ApiGatewayMethodSettingsResource s) (TF.Attr s P.Text) where
@@ -3290,9 +3290,9 @@ instance P.HasRestApiId (ApiGatewayMethodSettingsResource s) (TF.Attr s P.Text) 
         P.lens (_restApiId :: ApiGatewayMethodSettingsResource s -> TF.Attr s P.Text)
                (\s a -> s { _restApiId = a } :: ApiGatewayMethodSettingsResource s)
 
-instance P.HasSettings (ApiGatewayMethodSettingsResource s) (TF.Attr s (SettingsSetting s)) where
+instance P.HasSettings (ApiGatewayMethodSettingsResource s) (TF.Attr s (Settings s)) where
     settings =
-        P.lens (_settings :: ApiGatewayMethodSettingsResource s -> TF.Attr s (SettingsSetting s))
+        P.lens (_settings :: ApiGatewayMethodSettingsResource s -> TF.Attr s (Settings s))
                (\s a -> s { _settings = a } :: ApiGatewayMethodSettingsResource s)
 
 instance P.HasStageName (ApiGatewayMethodSettingsResource s) (TF.Attr s P.Text) where
@@ -3636,7 +3636,7 @@ instance s ~ s' => P.HasComputedRootResourceId (TF.Ref s' (ApiGatewayRestApiReso
 -- See the <https://www.terraform.io/docs/providers/aws/r/api_gateway_stage.html terraform documentation>
 -- for more information.
 data ApiGatewayStageResource s = ApiGatewayStageResource'
-    { _accessLogSettings    :: TF.Attr s (AccessLogSettingsSetting s)
+    { _accessLogSettings    :: TF.Attr s (AccessLogSettings s)
     -- ^ @access_log_settings@ - (Optional)
     --
     , _cacheClusterEnabled  :: TF.Attr s P.Bool
@@ -3712,12 +3712,12 @@ instance TF.IsValid (ApiGatewayStageResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_accessLogSettings"
                   (_accessLogSettings
-                      :: ApiGatewayStageResource s -> TF.Attr s (AccessLogSettingsSetting s))
+                      :: ApiGatewayStageResource s -> TF.Attr s (AccessLogSettings s))
                   TF.validator
 
-instance P.HasAccessLogSettings (ApiGatewayStageResource s) (TF.Attr s (AccessLogSettingsSetting s)) where
+instance P.HasAccessLogSettings (ApiGatewayStageResource s) (TF.Attr s (AccessLogSettings s)) where
     accessLogSettings =
-        P.lens (_accessLogSettings :: ApiGatewayStageResource s -> TF.Attr s (AccessLogSettingsSetting s))
+        P.lens (_accessLogSettings :: ApiGatewayStageResource s -> TF.Attr s (AccessLogSettings s))
                (\s a -> s { _accessLogSettings = a } :: ApiGatewayStageResource s)
 
 instance P.HasCacheClusterEnabled (ApiGatewayStageResource s) (TF.Attr s P.Bool) where
@@ -3796,10 +3796,10 @@ data ApiGatewayUsagePlanResource s = ApiGatewayUsagePlanResource'
     , _productCode      :: TF.Attr s P.Text
     -- ^ @product_code@ - (Optional)
     --
-    , _quotaSettings    :: TF.Attr s (QuotaSettingsSetting s)
+    , _quotaSettings    :: TF.Attr s (QuotaSettings s)
     -- ^ @quota_settings@ - (Optional)
     --
-    , _throttleSettings :: TF.Attr s (ThrottleSettingsSetting s)
+    , _throttleSettings :: TF.Attr s (ThrottleSettings s)
     -- ^ @throttle_settings@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -3833,11 +3833,11 @@ instance TF.IsValid (ApiGatewayUsagePlanResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_quotaSettings"
                   (_quotaSettings
-                      :: ApiGatewayUsagePlanResource s -> TF.Attr s (QuotaSettingsSetting s))
+                      :: ApiGatewayUsagePlanResource s -> TF.Attr s (QuotaSettings s))
                   TF.validator
            P.<> TF.settingsValidator "_throttleSettings"
                   (_throttleSettings
-                      :: ApiGatewayUsagePlanResource s -> TF.Attr s (ThrottleSettingsSetting s))
+                      :: ApiGatewayUsagePlanResource s -> TF.Attr s (ThrottleSettings s))
                   TF.validator
 
 instance P.HasApiStages (ApiGatewayUsagePlanResource s) (TF.Attr s [TF.Attr s (ApiStagesSetting s)]) where
@@ -3860,14 +3860,14 @@ instance P.HasProductCode (ApiGatewayUsagePlanResource s) (TF.Attr s P.Text) whe
         P.lens (_productCode :: ApiGatewayUsagePlanResource s -> TF.Attr s P.Text)
                (\s a -> s { _productCode = a } :: ApiGatewayUsagePlanResource s)
 
-instance P.HasQuotaSettings (ApiGatewayUsagePlanResource s) (TF.Attr s (QuotaSettingsSetting s)) where
+instance P.HasQuotaSettings (ApiGatewayUsagePlanResource s) (TF.Attr s (QuotaSettings s)) where
     quotaSettings =
-        P.lens (_quotaSettings :: ApiGatewayUsagePlanResource s -> TF.Attr s (QuotaSettingsSetting s))
+        P.lens (_quotaSettings :: ApiGatewayUsagePlanResource s -> TF.Attr s (QuotaSettings s))
                (\s a -> s { _quotaSettings = a } :: ApiGatewayUsagePlanResource s)
 
-instance P.HasThrottleSettings (ApiGatewayUsagePlanResource s) (TF.Attr s (ThrottleSettingsSetting s)) where
+instance P.HasThrottleSettings (ApiGatewayUsagePlanResource s) (TF.Attr s (ThrottleSettings s)) where
     throttleSettings =
-        P.lens (_throttleSettings :: ApiGatewayUsagePlanResource s -> TF.Attr s (ThrottleSettingsSetting s))
+        P.lens (_throttleSettings :: ApiGatewayUsagePlanResource s -> TF.Attr s (ThrottleSettings s))
                (\s a -> s { _throttleSettings = a } :: ApiGatewayUsagePlanResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ApiGatewayUsagePlanResource s)) (TF.Attr s P.Text) where
