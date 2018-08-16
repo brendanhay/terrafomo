@@ -56,7 +56,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service_v1_backend",
+            "name": "backend",
             "schemas": [
               {
                 "name": "address",
@@ -396,7 +396,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service_v1_bigquerylogging",
+            "name": "bigquerylogging",
             "schemas": [
               {
                 "name": "dataset",
@@ -518,7 +518,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service_v1_cache_setting",
+            "name": "cache_setting",
             "schemas": [
               {
                 "name": "action",
@@ -600,7 +600,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service_v1_condition",
+            "name": "condition",
             "schemas": [
               {
                 "name": "name",
@@ -696,7 +696,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service_v1_domain",
+            "name": "domain",
             "schemas": [
               {
                 "name": "comment",
@@ -750,7 +750,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service_v1_gcslogging",
+            "name": "gcslogging",
             "schemas": [
               {
                 "name": "bucket_name",
@@ -915,7 +915,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service_v1_gzip",
+            "name": "gzip",
             "schemas": [
               {
                 "name": "cache_condition",
@@ -943,7 +943,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "gzip_content_types",
+                  "name": "content_types",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -968,7 +968,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "gzip_extensions",
+                  "name": "extensions",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1008,7 +1008,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service_v1_header",
+            "name": "header",
             "schemas": [
               {
                 "name": "action",
@@ -1183,7 +1183,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service_v1_healthcheck",
+            "name": "healthcheck",
             "schemas": [
               {
                 "name": "check_interval",
@@ -1351,7 +1351,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service_v1_logentries",
+            "name": "logentries",
             "schemas": [
               {
                 "name": "format",
@@ -1476,7 +1476,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service_v1_papertrail",
+            "name": "papertrail",
             "schemas": [
               {
                 "name": "address",
@@ -1559,7 +1559,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service_v1_request_setting",
+            "name": "request_setting",
             "schemas": [
               {
                 "name": "action",
@@ -1733,7 +1733,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service_v1_response_object",
+            "name": "response_object",
             "schemas": [
               {
                 "name": "cache_condition",
@@ -1843,7 +1843,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service_v1_s3logging",
+            "name": "s3logging",
             "schemas": [
               {
                 "name": "bucket_name",
@@ -2049,7 +2049,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service_v1_sumologic",
+            "name": "sumologic",
             "schemas": [
               {
                 "name": "format",
@@ -2147,7 +2147,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service_v1_syslog",
+            "name": "syslog",
             "schemas": [
               {
                 "name": "address",
@@ -2312,7 +2312,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service_v1_vcl",
+            "name": "vcl",
             "schemas": [
               {
                 "name": "content",
@@ -2376,7 +2376,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "ip_ranges_cidr_blocks",
+            "name": "cidr_blocks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
