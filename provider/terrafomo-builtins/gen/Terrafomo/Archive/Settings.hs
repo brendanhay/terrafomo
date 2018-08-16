@@ -19,7 +19,7 @@ module Terrafomo.Archive.Settings
     (
     -- ** source
       SourceSetting (..)
-    , newSourceSetting
+    , sourceSetting
 
     ) where
 
@@ -55,11 +55,11 @@ data SourceSetting s = SourceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @source@ settings value.
-newSourceSetting
+sourceSetting
     :: TF.Attr s P.Text -- ^ 'P._content': @content@
     -> TF.Attr s P.Text -- ^ 'P._filename': @filename@
     -> SourceSetting s
-newSourceSetting _content _filename =
+sourceSetting _content _filename =
     SourceSetting'
         { _content = _content
         , _filename = _filename

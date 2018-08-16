@@ -19,7 +19,7 @@ module Terrafomo.TLS.Settings
     (
     -- ** subject
       SubjectSetting (..)
-    , newSubjectSetting
+    , subjectSetting
 
     ) where
 
@@ -76,9 +76,9 @@ data SubjectSetting s = SubjectSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @subject@ settings value.
-newSubjectSetting
+subjectSetting
     :: SubjectSetting s
-newSubjectSetting =
+subjectSetting =
     SubjectSetting'
         { _commonName = TF.Nil
         , _country = TF.Nil
