@@ -447,6 +447,23 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"delete_on_termination\" <$> TF.attribute",
+                    "name": "_deleteOnTermination",
+                    "method": "deleteOnTermination",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasDeleteOnTermination",
+                    "validate": false,
+                    "optional": true,
+                    "original": "delete_on_termination"
+                },
+                {
                     "default": "_deviceName",
                     "computed": false,
                     "required": true,
@@ -462,6 +479,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "device_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"encrypted\" <$> TF.attribute",
+                    "name": "_encrypted",
+                    "method": "encrypted",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasEncrypted",
+                    "validate": false,
+                    "optional": true,
+                    "original": "encrypted"
                 },
                 {
                     "default": "TF.Nil",
@@ -530,6 +564,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "volume_size"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"volume_type\" <$> TF.attribute",
+                    "name": "_volumeType",
+                    "method": "volumeType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVolumeType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "volume_type"
                 }
             ],
             "key": "spotinst_elastigroup_aws.ebs_block_device",
@@ -550,7 +601,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedDeleteOnTermination",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "delete_on_termination"
                 },
                 {
@@ -567,7 +618,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedEncrypted",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "encrypted"
                 },
                 {
@@ -584,7 +635,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVolumeType",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "volume_type"
                 }
             ],
@@ -1789,6 +1840,23 @@
                     "original": "associate_public_ip_address"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"delete_on_termination\" <$> TF.attribute",
+                    "name": "_deleteOnTermination",
+                    "method": "deleteOnTermination",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasDeleteOnTermination",
+                    "validate": false,
+                    "optional": true,
+                    "original": "delete_on_termination"
+                },
+                {
                     "default": "_description",
                     "computed": false,
                     "required": true,
@@ -1892,7 +1960,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedDeleteOnTermination",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "delete_on_termination"
                 }
             ],
@@ -2168,6 +2236,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"cooldown\" <$> TF.attribute",
+                    "name": "_cooldown",
+                    "method": "cooldown",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasCooldown",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cooldown"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"dimensions\" <$> TF.attribute",
                     "name": "_dimensions",
                     "method": "dimensions",
@@ -2178,6 +2263,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "dimensions"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"evaluation_periods\" <$> TF.attribute",
+                    "name": "_evaluationPeriods",
+                    "method": "evaluationPeriods",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasEvaluationPeriods",
+                    "validate": false,
+                    "optional": true,
+                    "original": "evaluation_periods"
                 },
                 {
                     "default": "TF.Nil",
@@ -2282,6 +2384,40 @@
                     "original": "namespace"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"operator\" <$> TF.attribute",
+                    "name": "_operator",
+                    "method": "operator",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOperator",
+                    "validate": false,
+                    "optional": true,
+                    "original": "operator"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"period\" <$> TF.attribute",
+                    "name": "_period",
+                    "method": "period",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasPeriod",
+                    "validate": false,
+                    "optional": true,
+                    "original": "period"
+                },
+                {
                     "default": "_policyName",
                     "computed": false,
                     "required": true,
@@ -2297,6 +2433,40 @@
                     "validate": false,
                     "optional": false,
                     "original": "policy_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"source\" <$> TF.attribute",
+                    "name": "_source",
+                    "method": "source",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSource",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"statistic\" <$> TF.attribute",
+                    "name": "_statistic",
+                    "method": "statistic",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasStatistic",
+                    "validate": false,
+                    "optional": true,
+                    "original": "statistic"
                 },
                 {
                     "default": "TF.Nil",
@@ -2368,7 +2538,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedCooldown",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "cooldown"
                 },
                 {
@@ -2385,7 +2555,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedEvaluationPeriods",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "evaluation_periods"
                 },
                 {
@@ -2402,7 +2572,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOperator",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "operator"
                 },
                 {
@@ -2419,7 +2589,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedPeriod",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "period"
                 },
                 {
@@ -2436,7 +2606,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSource",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "source"
                 },
                 {
@@ -2453,7 +2623,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedStatistic",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "statistic"
                 }
             ],
@@ -2560,6 +2730,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"cooldown\" <$> TF.attribute",
+                    "name": "_cooldown",
+                    "method": "cooldown",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasCooldown",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cooldown"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"dimensions\" <$> TF.attribute",
                     "name": "_dimensions",
                     "method": "dimensions",
@@ -2623,6 +2810,40 @@
                     "original": "policy_name"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"source\" <$> TF.attribute",
+                    "name": "_source",
+                    "method": "source",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSource",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"statistic\" <$> TF.attribute",
+                    "name": "_statistic",
+                    "method": "statistic",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasStatistic",
+                    "validate": false,
+                    "optional": true,
+                    "original": "statistic"
+                },
+                {
                     "default": "_target",
                     "computed": false,
                     "required": true,
@@ -2675,7 +2896,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedCooldown",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "cooldown"
                 },
                 {
@@ -2692,7 +2913,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSource",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "source"
                 },
                 {
@@ -2709,7 +2930,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedStatistic",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "statistic"
                 }
             ],
@@ -2850,6 +3071,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"cooldown\" <$> TF.attribute",
+                    "name": "_cooldown",
+                    "method": "cooldown",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasCooldown",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cooldown"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"dimensions\" <$> TF.attribute",
                     "name": "_dimensions",
                     "method": "dimensions",
@@ -2860,6 +3098,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "dimensions"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"evaluation_periods\" <$> TF.attribute",
+                    "name": "_evaluationPeriods",
+                    "method": "evaluationPeriods",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasEvaluationPeriods",
+                    "validate": false,
+                    "optional": true,
+                    "original": "evaluation_periods"
                 },
                 {
                     "default": "TF.Nil",
@@ -2964,6 +3219,40 @@
                     "original": "namespace"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"operator\" <$> TF.attribute",
+                    "name": "_operator",
+                    "method": "operator",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOperator",
+                    "validate": false,
+                    "optional": true,
+                    "original": "operator"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"period\" <$> TF.attribute",
+                    "name": "_period",
+                    "method": "period",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasPeriod",
+                    "validate": false,
+                    "optional": true,
+                    "original": "period"
+                },
+                {
                     "default": "_policyName",
                     "computed": false,
                     "required": true,
@@ -2979,6 +3268,40 @@
                     "validate": false,
                     "optional": false,
                     "original": "policy_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"source\" <$> TF.attribute",
+                    "name": "_source",
+                    "method": "source",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSource",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"statistic\" <$> TF.attribute",
+                    "name": "_statistic",
+                    "method": "statistic",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasStatistic",
+                    "validate": false,
+                    "optional": true,
+                    "original": "statistic"
                 },
                 {
                     "default": "TF.Nil",
@@ -3050,7 +3373,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedCooldown",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "cooldown"
                 },
                 {
@@ -3067,7 +3390,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedEvaluationPeriods",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "evaluation_periods"
                 },
                 {
@@ -3084,7 +3407,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOperator",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "operator"
                 },
                 {
@@ -3101,7 +3424,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedPeriod",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "period"
                 },
                 {
@@ -3118,7 +3441,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSource",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "source"
                 },
                 {
@@ -3135,7 +3458,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedStatistic",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "statistic"
                 }
             ],
@@ -3875,6 +4198,23 @@
                     "original": "block_devices_mode"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"capacity_unit\" <$> TF.attribute",
+                    "name": "_capacityUnit",
+                    "method": "capacityUnit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCapacityUnit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "capacity_unit"
+                },
+                {
                     "default": "_description",
                     "computed": false,
                     "required": true,
@@ -3941,6 +4281,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "ebs_block_device"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ebs_optimized\" <$> TF.attribute",
+                    "name": "_ebsOptimized",
+                    "method": "ebsOptimized",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasEbsOptimized",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ebs_optimized"
                 },
                 {
                     "default": "TF.Nil",
@@ -4332,6 +4689,40 @@
                     "validate": false,
                     "optional": true,
                     "original": "lifetime_period"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_size\" <$> TF.attribute",
+                    "name": "_maxSize",
+                    "method": "maxSize",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMaxSize",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_size"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"min_size\" <$> TF.attribute",
+                    "name": "_minSize",
+                    "method": "minSize",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMinSize",
+                    "validate": false,
+                    "optional": true,
+                    "original": "min_size"
                 },
                 {
                     "default": "TF.Nil",
@@ -4864,7 +5255,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCapacityUnit",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "capacity_unit"
                 },
                 {
@@ -4881,7 +5272,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedEbsOptimized",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ebs_optimized"
                 },
                 {
@@ -4898,7 +5289,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedMaxSize",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "max_size"
                 },
                 {
@@ -4915,7 +5306,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedMinSize",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "min_size"
                 }
             ],
