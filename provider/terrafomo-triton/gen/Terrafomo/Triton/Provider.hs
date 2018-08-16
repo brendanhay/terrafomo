@@ -20,7 +20,6 @@ module Terrafomo.Triton.Provider
     -- * Triton Provider Datatype
       Provider (..)
     , newProvider
-    , defaultProvider
 
     -- * Triton Specific Aliases
     , DataSource
@@ -56,7 +55,7 @@ import qualified Terrafomo.Validator    as TF
 type DataSource a = TF.Schema ()               Provider a
 type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
 
--- | The @Triton@ Terraform provider configuration.
+-- | The @triton@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/triton/index.html terraform documentation>
 -- for more information.
@@ -97,23 +96,24 @@ newProvider _account _keyId _url _user =
         , _user = _user
         }
 
-defaultProvider :: TF.Provider (P.Maybe Provider)
-defaultProvider =
-    TF.Provider
-        { _providerType   = TF.Type P.Nothing "provider"
-        , _providerAlias  = P.Nothing
-        , _providerConfig = P.Nothing
-        }
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "triton"
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} = P.catMaybes
-        [  P.Just $ TF.assign "account" _account
-        ,  TF.assign "insecure_skip_tls_verify" <$> _insecureSkipTlsVerify
-        ,  P.Just $ TF.assign "key_id" _keyId
-        ,  TF.assign "key_material" <$> _keyMaterial
-        ,  P.Just $ TF.assign "url" _url
-        ,  P.Just $ TF.assign "user" _user
-        ]
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy Provider)
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , P.Just $ TF.assign "account" _account
+                  , TF.assign "insecure_skip_tls_verify" <$> _insecureSkipTlsVerify
+                  , P.Just $ TF.assign "key_id" _keyId
+                  , TF.assign "key_material" <$> _keyMaterial
+                  , P.Just $ TF.assign "url" _url
+                  , P.Just $ TF.assign "user" _user
+                  ])
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
