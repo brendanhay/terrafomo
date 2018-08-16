@@ -104,6 +104,14 @@ data FabricResource s = FabricResource'
     -- ^ @provision_start_ip@ - (Required, Forces New)
     -- First IP on the network that can be assigned
     --
+    , _resolvers        :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @resolvers@ - (Optional)
+    -- List of IP addresses for DNS resolvers
+    --
+    , _routes           :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @routes@ - (Optional, Forces New)
+    -- Map of CIDR block to Gateway IP address
+    --
     , _subnet           :: TF.Attr s P.Text
     -- ^ @subnet@ - (Required, Forces New)
     -- CIDR formatted string describing network address space
@@ -131,6 +139,8 @@ fabricResource _vlanId _provisionEndIp _provisionStartIp _name _subnet =
             , _name = _name
             , _provisionEndIp = _provisionEndIp
             , _provisionStartIp = _provisionStartIp
+            , _resolvers = TF.Nil
+            , _routes = TF.Nil
             , _subnet = _subnet
             , _vlanId = _vlanId
             }
@@ -143,6 +153,8 @@ instance TF.IsObject (FabricResource s) where
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "provision_end_ip" <$> TF.attribute _provisionEndIp
         , TF.assign "provision_start_ip" <$> TF.attribute _provisionStartIp
+        , TF.assign "resolvers" <$> TF.attribute _resolvers
+        , TF.assign "routes" <$> TF.attribute _routes
         , TF.assign "subnet" <$> TF.attribute _subnet
         , TF.assign "vlan_id" <$> TF.attribute _vlanId
         ]
@@ -179,6 +191,16 @@ instance P.HasProvisionStartIp (FabricResource s) (TF.Attr s P.Text) where
     provisionStartIp =
         P.lens (_provisionStartIp :: FabricResource s -> TF.Attr s P.Text)
                (\s a -> s { _provisionStartIp = a } :: FabricResource s)
+
+instance P.HasResolvers (FabricResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    resolvers =
+        P.lens (_resolvers :: FabricResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _resolvers = a } :: FabricResource s)
+
+instance P.HasRoutes (FabricResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    routes =
+        P.lens (_routes :: FabricResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _routes = a } :: FabricResource s)
 
 instance P.HasSubnet (FabricResource s) (TF.Attr s P.Text) where
     subnet =
@@ -280,13 +302,29 @@ data InstanceTemplateResource s = InstanceTemplateResource'
     -- ^ @image@ - (Required, Forces New)
     -- UUID of the image
     --
+    , _metadata        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @metadata@ - (Optional, Forces New)
+    -- Metadata for group instances
+    --
+    , _networks        :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @networks@ - (Optional, Forces New)
+    -- Network IDs for group instances
+    --
     , _package         :: TF.Attr s P.Text
     -- ^ @package@ - (Required, Forces New)
     -- Package name used for provisioning
     --
+    , _tags            :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional, Forces New)
+    -- Tags for group instances
+    --
     , _templateName    :: TF.Attr s P.Text
     -- ^ @template_name@ - (Required, Forces New)
     -- Friendly name for the instance template
+    --
+    , _userdata        :: TF.Attr s P.Text
+    -- ^ @userdata@ - (Optional, Forces New)
+    -- Data copied to instance on boot
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -301,16 +339,24 @@ instanceTemplateResource _image _templateName _package =
         InstanceTemplateResource'
             { _firewallEnabled = TF.value P.False
             , _image = _image
+            , _metadata = TF.Nil
+            , _networks = TF.Nil
             , _package = _package
+            , _tags = TF.Nil
             , _templateName = _templateName
+            , _userdata = TF.Nil
             }
 
 instance TF.IsObject (InstanceTemplateResource s) where
     toObject InstanceTemplateResource'{..} = P.catMaybes
         [ TF.assign "firewall_enabled" <$> TF.attribute _firewallEnabled
         , TF.assign "image" <$> TF.attribute _image
+        , TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "networks" <$> TF.attribute _networks
         , TF.assign "package" <$> TF.attribute _package
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "template_name" <$> TF.attribute _templateName
+        , TF.assign "userdata" <$> TF.attribute _userdata
         ]
 
 instance TF.IsValid (InstanceTemplateResource s) where
@@ -326,15 +372,35 @@ instance P.HasImage (InstanceTemplateResource s) (TF.Attr s P.Text) where
         P.lens (_image :: InstanceTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _image = a } :: InstanceTemplateResource s)
 
+instance P.HasMetadata (InstanceTemplateResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    metadata =
+        P.lens (_metadata :: InstanceTemplateResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _metadata = a } :: InstanceTemplateResource s)
+
+instance P.HasNetworks (InstanceTemplateResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    networks =
+        P.lens (_networks :: InstanceTemplateResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _networks = a } :: InstanceTemplateResource s)
+
 instance P.HasPackage (InstanceTemplateResource s) (TF.Attr s P.Text) where
     package =
         P.lens (_package :: InstanceTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _package = a } :: InstanceTemplateResource s)
 
+instance P.HasTags (InstanceTemplateResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: InstanceTemplateResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: InstanceTemplateResource s)
+
 instance P.HasTemplateName (InstanceTemplateResource s) (TF.Attr s P.Text) where
     templateName =
         P.lens (_templateName :: InstanceTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _templateName = a } :: InstanceTemplateResource s)
+
+instance P.HasUserdata (InstanceTemplateResource s) (TF.Attr s P.Text) where
+    userdata =
+        P.lens (_userdata :: InstanceTemplateResource s -> TF.Attr s P.Text)
+               (\s a -> s { _userdata = a } :: InstanceTemplateResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -356,9 +422,13 @@ instance s ~ s' => P.HasComputedUserdata (TF.Ref s' (InstanceTemplateResource s)
 -- See the <https://www.terraform.io/docs/providers/triton/r/key.html terraform documentation>
 -- for more information.
 data KeyResource s = KeyResource'
-    { _key :: TF.Attr s P.Text
+    { _key  :: TF.Attr s P.Text
     -- ^ @key@ - (Required, Forces New)
     -- Content of public key from disk in OpenSSH format
+    --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    -- Name of the key (generated from the key comment if not set)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -370,11 +440,13 @@ keyResource _key =
     TF.unsafeResource "triton_key" TF.validator $
         KeyResource'
             { _key = _key
+            , _name = TF.Nil
             }
 
 instance TF.IsObject (KeyResource s) where
     toObject KeyResource'{..} = P.catMaybes
         [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
 instance TF.IsValid (KeyResource s) where
@@ -384,6 +456,11 @@ instance P.HasKey (KeyResource s) (TF.Attr s P.Text) where
     key =
         P.lens (_key :: KeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _key = a } :: KeyResource s)
+
+instance P.HasName (KeyResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: KeyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: KeyResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -428,13 +505,25 @@ data MachineResource s = MachineResource'
     -- ^ @metadata@ - (Optional)
     -- Machine metadata
     --
+    , _name                      :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    -- Friendly name for machine
+    --
     , _networks                  :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @networks@ - (Optional)
     -- Desired network IDs
     --
+    , _nic                       :: TF.Attr s [TF.Attr s (NicSetting s)]
+    -- ^ @nic@ - (Optional)
+    -- Network interface
+    --
     , _package                   :: TF.Attr s P.Text
     -- ^ @package@ - (Required)
     -- The package for use for provisioning
+    --
+    , _rootAuthorizedKeys        :: TF.Attr s P.Text
+    -- ^ @root_authorized_keys@ - (Optional)
+    -- Authorized keys for the root user on this machine
     --
     , _tags                      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
@@ -466,8 +555,11 @@ machineResource _image _package =
             , _firewallEnabled = TF.value P.False
             , _image = _image
             , _metadata = TF.Nil
+            , _name = TF.Nil
             , _networks = TF.Nil
+            , _nic = TF.Nil
             , _package = _package
+            , _rootAuthorizedKeys = TF.Nil
             , _tags = TF.Nil
             , _userData = TF.Nil
             , _userScript = TF.Nil
@@ -483,8 +575,11 @@ instance TF.IsObject (MachineResource s) where
         , TF.assign "firewall_enabled" <$> TF.attribute _firewallEnabled
         , TF.assign "image" <$> TF.attribute _image
         , TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "networks" <$> TF.attribute _networks
+        , TF.assign "nic" <$> TF.attribute _nic
         , TF.assign "package" <$> TF.attribute _package
+        , TF.assign "root_authorized_keys" <$> TF.attribute _rootAuthorizedKeys
         , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "user_data" <$> TF.attribute _userData
         , TF.assign "user_script" <$> TF.attribute _userScript
@@ -537,15 +632,30 @@ instance P.HasMetadata (MachineResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P
         P.lens (_metadata :: MachineResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _metadata = a } :: MachineResource s)
 
+instance P.HasName (MachineResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: MachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: MachineResource s)
+
 instance P.HasNetworks (MachineResource s) (TF.Attr s [TF.Attr s P.Text]) where
     networks =
         P.lens (_networks :: MachineResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _networks = a } :: MachineResource s)
 
+instance P.HasNic (MachineResource s) (TF.Attr s [TF.Attr s (NicSetting s)]) where
+    nic =
+        P.lens (_nic :: MachineResource s -> TF.Attr s [TF.Attr s (NicSetting s)])
+               (\s a -> s { _nic = a } :: MachineResource s)
+
 instance P.HasPackage (MachineResource s) (TF.Attr s P.Text) where
     package =
         P.lens (_package :: MachineResource s -> TF.Attr s P.Text)
                (\s a -> s { _package = a } :: MachineResource s)
+
+instance P.HasRootAuthorizedKeys (MachineResource s) (TF.Attr s P.Text) where
+    rootAuthorizedKeys =
+        P.lens (_rootAuthorizedKeys :: MachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _rootAuthorizedKeys = a } :: MachineResource s)
 
 instance P.HasTags (MachineResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     tags =
@@ -609,7 +719,11 @@ instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (MachineResource s)) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/triton/r/service_group.html terraform documentation>
 -- for more information.
 data ServiceGroupResource s = ServiceGroupResource'
-    { _groupName :: TF.Attr s P.Text
+    { _capacity  :: TF.Attr s P.Int
+    -- ^ @capacity@ - (Optional)
+    -- Number of instances to launch and monitor
+    --
+    , _groupName :: TF.Attr s P.Text
     -- ^ @group_name@ - (Required, Forces New)
     -- Friendly name for the service group
     --
@@ -627,18 +741,25 @@ serviceGroupResource
 serviceGroupResource _groupName _template =
     TF.unsafeResource "triton_service_group" TF.validator $
         ServiceGroupResource'
-            { _groupName = _groupName
+            { _capacity = TF.Nil
+            , _groupName = _groupName
             , _template = _template
             }
 
 instance TF.IsObject (ServiceGroupResource s) where
     toObject ServiceGroupResource'{..} = P.catMaybes
-        [ TF.assign "group_name" <$> TF.attribute _groupName
+        [ TF.assign "capacity" <$> TF.attribute _capacity
+        , TF.assign "group_name" <$> TF.attribute _groupName
         , TF.assign "template" <$> TF.attribute _template
         ]
 
 instance TF.IsValid (ServiceGroupResource s) where
     validator = P.mempty
+
+instance P.HasCapacity (ServiceGroupResource s) (TF.Attr s P.Int) where
+    capacity =
+        P.lens (_capacity :: ServiceGroupResource s -> TF.Attr s P.Int)
+               (\s a -> s { _capacity = a } :: ServiceGroupResource s)
 
 instance P.HasGroupName (ServiceGroupResource s) (TF.Attr s P.Text) where
     groupName =

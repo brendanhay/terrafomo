@@ -18,6 +18,7 @@ module Terrafomo.Triton.Lens
       HasAccount (..)
     , HasAdministratorPw (..)
     , HasAffinity (..)
+    , HasCapacity (..)
     , HasCloudConfig (..)
     , HasCns (..)
     , HasDeletionProtectionEnabled (..)
@@ -44,12 +45,16 @@ module Terrafomo.Triton.Lens
     , HasName (..)
     , HasNetwork (..)
     , HasNetworks (..)
+    , HasNic (..)
     , HasOs (..)
     , HasOwner (..)
     , HasPackage (..)
     , HasProvisionEndIp (..)
     , HasProvisionStartIp (..)
     , HasPublic (..)
+    , HasResolvers (..)
+    , HasRootAuthorizedKeys (..)
+    , HasRoutes (..)
     , HasRule (..)
     , HasServices (..)
     , HasState (..)
@@ -63,6 +68,7 @@ module Terrafomo.Triton.Lens
     , HasUser (..)
     , HasUserData (..)
     , HasUserScript (..)
+    , HasUserdata (..)
     , HasVcpus (..)
     , HasVersion (..)
     , HasVlanId (..)
@@ -136,6 +142,12 @@ class HasAffinity a b | a -> b where
 
 instance HasAffinity a b => HasAffinity (TF.Schema l p a) b where
     affinity = TF.configuration . affinity
+
+class HasCapacity a b | a -> b where
+    capacity :: P.Lens' a b
+
+instance HasCapacity a b => HasCapacity (TF.Schema l p a) b where
+    capacity = TF.configuration . capacity
 
 class HasCloudConfig a b | a -> b where
     cloudConfig :: P.Lens' a b
@@ -293,6 +305,12 @@ class HasNetworks a b | a -> b where
 instance HasNetworks a b => HasNetworks (TF.Schema l p a) b where
     networks = TF.configuration . networks
 
+class HasNic a b | a -> b where
+    nic :: P.Lens' a b
+
+instance HasNic a b => HasNic (TF.Schema l p a) b where
+    nic = TF.configuration . nic
+
 class HasOs a b | a -> b where
     os :: P.Lens' a b
 
@@ -328,6 +346,24 @@ class HasPublic a b | a -> b where
 
 instance HasPublic a b => HasPublic (TF.Schema l p a) b where
     public = TF.configuration . public
+
+class HasResolvers a b | a -> b where
+    resolvers :: P.Lens' a b
+
+instance HasResolvers a b => HasResolvers (TF.Schema l p a) b where
+    resolvers = TF.configuration . resolvers
+
+class HasRootAuthorizedKeys a b | a -> b where
+    rootAuthorizedKeys :: P.Lens' a b
+
+instance HasRootAuthorizedKeys a b => HasRootAuthorizedKeys (TF.Schema l p a) b where
+    rootAuthorizedKeys = TF.configuration . rootAuthorizedKeys
+
+class HasRoutes a b | a -> b where
+    routes :: P.Lens' a b
+
+instance HasRoutes a b => HasRoutes (TF.Schema l p a) b where
+    routes = TF.configuration . routes
 
 class HasRule a b | a -> b where
     rule :: P.Lens' a b
@@ -406,6 +442,12 @@ class HasUserScript a b | a -> b where
 
 instance HasUserScript a b => HasUserScript (TF.Schema l p a) b where
     userScript = TF.configuration . userScript
+
+class HasUserdata a b | a -> b where
+    userdata :: P.Lens' a b
+
+instance HasUserdata a b => HasUserdata (TF.Schema l p a) b where
+    userdata = TF.configuration . userdata
 
 class HasVcpus a b | a -> b where
     vcpus :: P.Lens' a b
