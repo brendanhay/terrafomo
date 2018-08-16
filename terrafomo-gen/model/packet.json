@@ -176,7 +176,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "device_network",
+            "name": "network",
             "schemas": [
               {
                 "name": "address",
@@ -337,7 +337,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "device_tags",
+            "name": "tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -907,7 +907,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "volume_attachments",
+            "name": "attachments",
             "schemas": [
               {
                 "name": "href",
@@ -1044,7 +1044,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "volume_snapshot_policies",
+            "name": "snapshot_policies",
             "schemas": [
               {
                 "name": "snapshot_count",
