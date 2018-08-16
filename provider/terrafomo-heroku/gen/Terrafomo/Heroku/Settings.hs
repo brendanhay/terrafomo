@@ -19,15 +19,15 @@ module Terrafomo.Heroku.Settings
     (
     -- ** organization
       OrganizationSetting (..)
-    , organizationSetting
+    , newOrganizationSetting
 
     -- ** rule
     , RuleSetting (..)
-    , ruleSetting
+    , newRuleSetting
 
     -- ** tunnels
     , TunnelsSetting (..)
-    , tunnelsSetting
+    , newTunnelsSetting
 
     ) where
 
@@ -66,10 +66,10 @@ data OrganizationSetting s = OrganizationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @organization@ settings value.
-organizationSetting
+newOrganizationSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> OrganizationSetting s
-organizationSetting _name =
+newOrganizationSetting _name =
     OrganizationSetting'
         { _locked = TF.Nil
         , _name = _name
@@ -122,11 +122,11 @@ data RuleSetting s = RuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @rule@ settings value.
-ruleSetting
+newRuleSetting
     :: TF.Attr s P.Text -- ^ 'P._action': @action@
     -> TF.Attr s P.Text -- ^ 'P._source': @source@
     -> RuleSetting s
-ruleSetting _action _source =
+newRuleSetting _action _source =
     RuleSetting'
         { _action = _action
         , _source = _source
@@ -163,9 +163,9 @@ data TunnelsSetting s = TunnelsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @tunnels@ settings value.
-tunnelsSetting
+newTunnelsSetting
     :: TunnelsSetting s
-tunnelsSetting =
+newTunnelsSetting =
     TunnelsSetting'
         { _ip = TF.Nil
         , _preSharedKey = TF.Nil
