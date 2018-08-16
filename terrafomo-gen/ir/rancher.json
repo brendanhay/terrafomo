@@ -133,23 +133,6 @@
                     "original": "external_id"
                 },
                 {
-                    "default": "_externalIdType",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"external_id_type\" <$> TF.attribute",
-                    "name": "_externalIdType",
-                    "method": "externalIdType",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasExternalIdType",
-                    "validate": false,
-                    "optional": false,
-                    "original": "external_id_type"
-                },
-                {
                     "default": "_role",
                     "computed": false,
                     "required": true,
@@ -165,6 +148,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "role"
+                },
+                {
+                    "default": "_externalIdType",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"external_id_type\" <$> TF.attribute",
+                    "name": "_externalIdType",
+                    "method": "externalIdType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasExternalIdType",
+                    "validate": false,
+                    "optional": false,
+                    "original": "external_id_type"
                 }
             ],
             "conflicts": [],
@@ -1327,23 +1327,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_environmentId",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"environment_id\" <$> TF.attribute",
-                    "name": "_environmentId",
-                    "method": "environmentId",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasEnvironmentId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "environment_id"
-                },
-                {
                     "default": "_hostname",
                     "computed": false,
                     "required": true,
@@ -1359,6 +1342,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "hostname"
+                },
+                {
+                    "default": "_environmentId",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"environment_id\" <$> TF.attribute",
+                    "name": "_environmentId",
+                    "method": "environmentId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEnvironmentId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "environment_id"
                 },
                 {
                     "default": "_name",
@@ -1705,6 +1705,23 @@
             ],
             "parameters": [
                 {
+                    "default": "_serverAddress",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"server_address\" <$> TF.attribute",
+                    "name": "_serverAddress",
+                    "method": "serverAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasServerAddress",
+                    "validate": false,
+                    "optional": false,
+                    "original": "server_address"
+                },
+                {
                     "default": "_environmentId",
                     "computed": false,
                     "required": true,
@@ -1737,23 +1754,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
-                },
-                {
-                    "default": "_serverAddress",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"server_address\" <$> TF.attribute",
-                    "name": "_serverAddress",
-                    "method": "serverAddress",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasServerAddress",
-                    "validate": false,
-                    "optional": false,
-                    "original": "server_address"
                 }
             ],
             "conflicts": [],
@@ -1877,6 +1877,23 @@
             ],
             "parameters": [
                 {
+                    "default": "_registryId",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"registry_id\" <$> TF.attribute",
+                    "name": "_registryId",
+                    "method": "registryId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRegistryId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "registry_id"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -1909,23 +1926,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "public_value"
-                },
-                {
-                    "default": "_registryId",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"registry_id\" <$> TF.attribute",
-                    "name": "_registryId",
-                    "method": "registryId",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasRegistryId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "registry_id"
                 },
                 {
                     "default": "_secretValue",
