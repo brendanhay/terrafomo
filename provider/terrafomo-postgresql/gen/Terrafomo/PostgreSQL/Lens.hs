@@ -47,6 +47,7 @@ module Terrafomo.PostgreSQL.Lens
 
     -- ** Computed Attributes
     , HasComputedEncoding (..)
+    , HasComputedId (..)
     , HasComputedIsTemplate (..)
     , HasComputedLcCollate (..)
     , HasComputedLcCtype (..)
@@ -240,6 +241,9 @@ instance HasValidUntil a b => HasValidUntil (TF.Schema l p a) b where
 
 class HasComputedEncoding a b | a -> b where
     computedEncoding :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedIsTemplate a b | a -> b where
     computedIsTemplate :: a -> b

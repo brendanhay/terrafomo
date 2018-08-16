@@ -115,6 +115,9 @@ instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DatabaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DatabaseResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEncoding (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
     computedEncoding x = TF.compute (TF.refKey x) "encoding"
 
@@ -167,6 +170,9 @@ instance P.HasName (ExtensionResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ExtensionResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ExtensionResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedSchema (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
     computedSchema x = TF.compute (TF.refKey x) "schema"
@@ -343,6 +349,9 @@ instance P.HasValidUntil (RoleResource s) (TF.Attr s P.Text) where
         P.lens (_validUntil :: RoleResource s -> TF.Attr s P.Text)
                (\s a -> s { _validUntil = a } :: RoleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RoleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (RoleResource s)) (TF.Attr s P.Text) where
     computedPassword x = TF.compute (TF.refKey x) "password"
 
@@ -389,6 +398,9 @@ instance P.HasName (SchemaResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SchemaResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SchemaResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SchemaResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedOwner (TF.Ref s' (SchemaResource s)) (TF.Attr s P.Text) where
     computedOwner x = TF.compute (TF.refKey x) "owner"
