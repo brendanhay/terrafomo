@@ -17,7 +17,6 @@
 --
 module Terrafomo.StatusCake.Resource
     (
-    -- * Resource Datatypes
     -- ** statuscake_test
       TestResource (..)
     , testResource
@@ -145,6 +144,7 @@ data TestResource s = TestResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @statuscake_test@ resource value.
 testResource
     :: TF.Attr s P.Text -- ^ @website_name@ - 'P.websiteName'
     -> TF.Attr s P.Text -- ^ @test_type@ - 'P.testType'
