@@ -148,6 +148,9 @@ instance P.HasPrivateKey (CertificateResource s) (TF.Attr s P.Text) where
         P.lens (_privateKey :: CertificateResource s -> TF.Attr s P.Text)
                (\s a -> s { _privateKey = a } :: CertificateResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedNotAfter (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedNotAfter x = TF.compute (TF.refKey x) "not_after"
 
@@ -196,6 +199,9 @@ instance P.HasName (DomainResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DomainResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @digitalocean_droplet@ Resource.
 --
@@ -352,6 +358,9 @@ instance P.HasVolumeIds (DropletResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_volumeIds :: DropletResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _volumeIds = a } :: DropletResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDisk (TF.Ref s' (DropletResource s)) (TF.Attr s P.Int) where
     computedDisk x = TF.compute (TF.refKey x) "disk"
 
@@ -454,6 +463,9 @@ instance P.HasTags (FirewallResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_tags :: FirewallResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: FirewallResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
     computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
@@ -504,6 +516,9 @@ instance P.HasRegion (FloatingIpResource s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: FloatingIpResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: FloatingIpResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FloatingIpResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (FloatingIpResource s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
@@ -616,6 +631,9 @@ instance P.HasRegion (LoadbalancerResource s) (TF.Attr s P.Text) where
         P.lens (_region :: LoadbalancerResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: LoadbalancerResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
     computedIp x = TF.compute (TF.refKey x) "ip"
 
@@ -684,6 +702,9 @@ instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: RecordResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedFlags (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedFlags x = TF.compute (TF.refKey x) "flags"
@@ -786,6 +807,9 @@ instance P.HasName (TagResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: TagResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: TagResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TagResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @digitalocean_volume@ Resource.
 --
