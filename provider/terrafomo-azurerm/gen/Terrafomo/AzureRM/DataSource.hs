@@ -2453,7 +2453,7 @@ instance s ~ s' => P.HasComputedCreationOption (TF.Ref s' (SnapshotData s)) (TF.
 instance s ~ s' => P.HasComputedDiskSizeGb (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
     computedDiskSizeGb x = TF.compute (TF.refKey x) "disk_size_gb"
 
-instance s ~ s' => P.HasComputedEncryptionSettings (TF.Ref s' (SnapshotData s)) (TF.Attr s [TF.Attr s (EncryptionSettingsSetting s)]) where
+instance s ~ s' => P.HasComputedEncryptionSettings (TF.Ref s' (SnapshotData s)) (TF.Attr s [TF.Attr s (EncryptionSettings s)]) where
     computedEncryptionSettings x = TF.compute (TF.refKey x) "encryption_settings"
 
 instance s ~ s' => P.HasComputedOsType (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
@@ -3006,7 +3006,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualNetworkGatewayData s)) (TF
 instance s ~ s' => P.HasComputedActiveActive (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Bool) where
     computedActiveActive x = TF.compute (TF.refKey x) "active_active"
 
-instance s ~ s' => P.HasComputedBgpSettings (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s [TF.Attr s (BgpSettingsSetting s)]) where
+instance s ~ s' => P.HasComputedBgpSettings (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s [TF.Attr s (BgpSettings s)]) where
     computedBgpSettings x = TF.compute (TF.refKey x) "bgp_settings"
 
 instance s ~ s' => P.HasComputedDefaultLocalNetworkGatewayId (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where

@@ -921,7 +921,7 @@ data ServiceFabricClusterResource s = ServiceFabricClusterResource'
     , _diagnosticsConfig :: TF.Attr s (DiagnosticsConfigSetting s)
     -- ^ @diagnostics_config@ - (Optional, Forces New)
     --
-    , _fabricSettings :: TF.Attr s [TF.Attr s (FabricSettingsSetting s)]
+    , _fabricSettings :: TF.Attr s [TF.Attr s (FabricSettings s)]
     -- ^ @fabric_settings@ - (Optional)
     --
     , _location :: TF.Attr s P.Text
@@ -1036,9 +1036,9 @@ instance P.HasDiagnosticsConfig (ServiceFabricClusterResource s) (TF.Attr s (Dia
         P.lens (_diagnosticsConfig :: ServiceFabricClusterResource s -> TF.Attr s (DiagnosticsConfigSetting s))
                (\s a -> s { _diagnosticsConfig = a } :: ServiceFabricClusterResource s)
 
-instance P.HasFabricSettings (ServiceFabricClusterResource s) (TF.Attr s [TF.Attr s (FabricSettingsSetting s)]) where
+instance P.HasFabricSettings (ServiceFabricClusterResource s) (TF.Attr s [TF.Attr s (FabricSettings s)]) where
     fabricSettings =
-        P.lens (_fabricSettings :: ServiceFabricClusterResource s -> TF.Attr s [TF.Attr s (FabricSettingsSetting s)])
+        P.lens (_fabricSettings :: ServiceFabricClusterResource s -> TF.Attr s [TF.Attr s (FabricSettings s)])
                (\s a -> s { _fabricSettings = a } :: ServiceFabricClusterResource s)
 
 instance P.HasLocation (ServiceFabricClusterResource s) (TF.Attr s P.Text) where
@@ -2176,7 +2176,7 @@ data SnapshotResource s = SnapshotResource'
     , _diskSizeGb         :: TF.Attr s P.Int
     -- ^ @disk_size_gb@ - (Optional)
     --
-    , _encryptionSettings :: TF.Attr s (EncryptionSettingsSetting s)
+    , _encryptionSettings :: TF.Attr s (EncryptionSettings s)
     -- ^ @encryption_settings@ - (Optional)
     --
     , _location           :: TF.Attr s P.Text
@@ -2242,7 +2242,7 @@ instance TF.IsValid (SnapshotResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_encryptionSettings"
                   (_encryptionSettings
-                      :: SnapshotResource s -> TF.Attr s (EncryptionSettingsSetting s))
+                      :: SnapshotResource s -> TF.Attr s (EncryptionSettings s))
                   TF.validator
 
 instance P.HasCreateOption (SnapshotResource s) (TF.Attr s P.Text) where
@@ -2255,9 +2255,9 @@ instance P.HasDiskSizeGb (SnapshotResource s) (TF.Attr s P.Int) where
         P.lens (_diskSizeGb :: SnapshotResource s -> TF.Attr s P.Int)
                (\s a -> s { _diskSizeGb = a } :: SnapshotResource s)
 
-instance P.HasEncryptionSettings (SnapshotResource s) (TF.Attr s (EncryptionSettingsSetting s)) where
+instance P.HasEncryptionSettings (SnapshotResource s) (TF.Attr s (EncryptionSettings s)) where
     encryptionSettings =
-        P.lens (_encryptionSettings :: SnapshotResource s -> TF.Attr s (EncryptionSettingsSetting s))
+        P.lens (_encryptionSettings :: SnapshotResource s -> TF.Attr s (EncryptionSettings s))
                (\s a -> s { _encryptionSettings = a } :: SnapshotResource s)
 
 instance P.HasLocation (SnapshotResource s) (TF.Attr s P.Text) where
@@ -2401,7 +2401,7 @@ data SqlDatabaseResource s = SqlDatabaseResource'
     , _elasticPoolName :: TF.Attr s P.Text
     -- ^ @elastic_pool_name@ - (Optional)
     --
-    , _import' :: TF.Attr s (ImportSetting s)
+    , _import' :: TF.Attr s (Import'Setting s)
     -- ^ @import@ - (Optional)
     --
     , _location :: TF.Attr s P.Text
@@ -2491,7 +2491,7 @@ instance TF.IsValid (SqlDatabaseResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_import'"
                   (_import'
-                      :: SqlDatabaseResource s -> TF.Attr s (ImportSetting s))
+                      :: SqlDatabaseResource s -> TF.Attr s (Import'Setting s))
                   TF.validator
 
 instance P.HasCollation (SqlDatabaseResource s) (TF.Attr s P.Text) where
@@ -2514,9 +2514,9 @@ instance P.HasElasticPoolName (SqlDatabaseResource s) (TF.Attr s P.Text) where
         P.lens (_elasticPoolName :: SqlDatabaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _elasticPoolName = a } :: SqlDatabaseResource s)
 
-instance P.HasImport' (SqlDatabaseResource s) (TF.Attr s (ImportSetting s)) where
+instance P.HasImport' (SqlDatabaseResource s) (TF.Attr s (Import'Setting s)) where
     import' =
-        P.lens (_import' :: SqlDatabaseResource s -> TF.Attr s (ImportSetting s))
+        P.lens (_import' :: SqlDatabaseResource s -> TF.Attr s (Import'Setting s))
                (\s a -> s { _import' = a } :: SqlDatabaseResource s)
 
 instance P.HasLocation (SqlDatabaseResource s) (TF.Attr s P.Text) where
@@ -5252,7 +5252,7 @@ data VirtualNetworkGatewayResource s = VirtualNetworkGatewayResource'
     { _activeActive :: TF.Attr s P.Bool
     -- ^ @active_active@ - (Optional)
     --
-    , _bgpSettings :: TF.Attr s (BgpSettingsSetting s)
+    , _bgpSettings :: TF.Attr s (BgpSettings s)
     -- ^ @bgp_settings@ - (Optional)
     --
     , _defaultLocalNetworkGatewayId :: TF.Attr s P.Text
@@ -5338,7 +5338,7 @@ instance TF.IsValid (VirtualNetworkGatewayResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_bgpSettings"
                   (_bgpSettings
-                      :: VirtualNetworkGatewayResource s -> TF.Attr s (BgpSettingsSetting s))
+                      :: VirtualNetworkGatewayResource s -> TF.Attr s (BgpSettings s))
                   TF.validator
            P.<> TF.settingsValidator "_vpnClientConfiguration"
                   (_vpnClientConfiguration
@@ -5350,9 +5350,9 @@ instance P.HasActiveActive (VirtualNetworkGatewayResource s) (TF.Attr s P.Bool) 
         P.lens (_activeActive :: VirtualNetworkGatewayResource s -> TF.Attr s P.Bool)
                (\s a -> s { _activeActive = a } :: VirtualNetworkGatewayResource s)
 
-instance P.HasBgpSettings (VirtualNetworkGatewayResource s) (TF.Attr s (BgpSettingsSetting s)) where
+instance P.HasBgpSettings (VirtualNetworkGatewayResource s) (TF.Attr s (BgpSettings s)) where
     bgpSettings =
-        P.lens (_bgpSettings :: VirtualNetworkGatewayResource s -> TF.Attr s (BgpSettingsSetting s))
+        P.lens (_bgpSettings :: VirtualNetworkGatewayResource s -> TF.Attr s (BgpSettings s))
                (\s a -> s { _bgpSettings = a } :: VirtualNetworkGatewayResource s)
 
 instance P.HasDefaultLocalNetworkGatewayId (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
@@ -5416,7 +5416,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualNetworkGatewayResource s))
 instance s ~ s' => P.HasComputedActiveActive (TF.Ref s' (VirtualNetworkGatewayResource s)) (TF.Attr s P.Bool) where
     computedActiveActive x = TF.compute (TF.refKey x) "active_active"
 
-instance s ~ s' => P.HasComputedBgpSettings (TF.Ref s' (VirtualNetworkGatewayResource s)) (TF.Attr s (BgpSettingsSetting s)) where
+instance s ~ s' => P.HasComputedBgpSettings (TF.Ref s' (VirtualNetworkGatewayResource s)) (TF.Attr s (BgpSettings s)) where
     computedBgpSettings x = TF.compute (TF.refKey x) "bgp_settings"
 
 instance s ~ s' => P.HasComputedEnableBgp (TF.Ref s' (VirtualNetworkGatewayResource s)) (TF.Attr s P.Bool) where

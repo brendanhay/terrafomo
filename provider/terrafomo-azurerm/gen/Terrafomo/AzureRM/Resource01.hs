@@ -1059,7 +1059,7 @@ data ApplicationGatewayResource s = ApplicationGatewayResource'
     , _backendAddressPool :: TF.Attr s [TF.Attr s (BackendAddressPoolSetting s)]
     -- ^ @backend_address_pool@ - (Required)
     --
-    , _backendHttpSettings :: TF.Attr s (P.NonEmpty (TF.Attr s (BackendHttpSettingsSetting s)))
+    , _backendHttpSettings :: TF.Attr s (P.NonEmpty (TF.Attr s (BackendHttpSettings s)))
     -- ^ @backend_http_settings@ - (Required)
     --
     , _disabledSslProtocols :: TF.Attr s [TF.Attr s P.Text]
@@ -1120,7 +1120,7 @@ applicationGatewayResource
     -> TF.Attr s [TF.Attr s (BackendAddressPoolSetting s)] -- ^ @backend_address_pool@ ('P._backendAddressPool', 'P.backendAddressPool')
     -> TF.Attr s [TF.Attr s (FrontendPortSetting s)] -- ^ @frontend_port@ ('P._frontendPort', 'P.frontendPort')
     -> TF.Attr s (P.NonEmpty (TF.Attr s (RequestRoutingRuleSetting s))) -- ^ @request_routing_rule@ ('P._requestRoutingRule', 'P.requestRoutingRule')
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (BackendHttpSettingsSetting s))) -- ^ @backend_http_settings@ ('P._backendHttpSettings', 'P.backendHttpSettings')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (BackendHttpSettings s))) -- ^ @backend_http_settings@ ('P._backendHttpSettings', 'P.backendHttpSettings')
     -> TF.Attr s (SkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
     -> P.Resource (ApplicationGatewayResource s)
 applicationGatewayResource _frontendIpConfiguration _gatewayIpConfiguration _httpListener _location _name _resourceGroupName _backendAddressPool _frontendPort _requestRoutingRule _backendHttpSettings _sku =
@@ -1189,9 +1189,9 @@ instance P.HasBackendAddressPool (ApplicationGatewayResource s) (TF.Attr s [TF.A
         P.lens (_backendAddressPool :: ApplicationGatewayResource s -> TF.Attr s [TF.Attr s (BackendAddressPoolSetting s)])
                (\s a -> s { _backendAddressPool = a } :: ApplicationGatewayResource s)
 
-instance P.HasBackendHttpSettings (ApplicationGatewayResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (BackendHttpSettingsSetting s)))) where
+instance P.HasBackendHttpSettings (ApplicationGatewayResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (BackendHttpSettings s)))) where
     backendHttpSettings =
-        P.lens (_backendHttpSettings :: ApplicationGatewayResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (BackendHttpSettingsSetting s))))
+        P.lens (_backendHttpSettings :: ApplicationGatewayResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (BackendHttpSettings s))))
                (\s a -> s { _backendHttpSettings = a } :: ApplicationGatewayResource s)
 
 instance P.HasDisabledSslProtocols (ApplicationGatewayResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -7293,7 +7293,7 @@ data LocalNetworkGatewayResource s = LocalNetworkGatewayResource'
     { _addressSpace      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @address_space@ - (Required)
     --
-    , _bgpSettings       :: TF.Attr s (BgpSettingsSetting s)
+    , _bgpSettings       :: TF.Attr s (BgpSettings s)
     -- ^ @bgp_settings@ - (Optional)
     --
     , _gatewayAddress    :: TF.Attr s P.Text
@@ -7348,7 +7348,7 @@ instance TF.IsValid (LocalNetworkGatewayResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_bgpSettings"
                   (_bgpSettings
-                      :: LocalNetworkGatewayResource s -> TF.Attr s (BgpSettingsSetting s))
+                      :: LocalNetworkGatewayResource s -> TF.Attr s (BgpSettings s))
                   TF.validator
 
 instance P.HasAddressSpace (LocalNetworkGatewayResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -7356,9 +7356,9 @@ instance P.HasAddressSpace (LocalNetworkGatewayResource s) (TF.Attr s [TF.Attr s
         P.lens (_addressSpace :: LocalNetworkGatewayResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _addressSpace = a } :: LocalNetworkGatewayResource s)
 
-instance P.HasBgpSettings (LocalNetworkGatewayResource s) (TF.Attr s (BgpSettingsSetting s)) where
+instance P.HasBgpSettings (LocalNetworkGatewayResource s) (TF.Attr s (BgpSettings s)) where
     bgpSettings =
-        P.lens (_bgpSettings :: LocalNetworkGatewayResource s -> TF.Attr s (BgpSettingsSetting s))
+        P.lens (_bgpSettings :: LocalNetworkGatewayResource s -> TF.Attr s (BgpSettings s))
                (\s a -> s { _bgpSettings = a } :: LocalNetworkGatewayResource s)
 
 instance P.HasGatewayAddress (LocalNetworkGatewayResource s) (TF.Attr s P.Text) where
@@ -8061,7 +8061,7 @@ data ManagedDiskResource s = ManagedDiskResource'
     , _diskSizeGb         :: TF.Attr s P.Int
     -- ^ @disk_size_gb@ - (Optional)
     --
-    , _encryptionSettings :: TF.Attr s (EncryptionSettingsSetting s)
+    , _encryptionSettings :: TF.Attr s (EncryptionSettings s)
     -- ^ @encryption_settings@ - (Optional)
     --
     , _imageReferenceId   :: TF.Attr s P.Text
@@ -8143,7 +8143,7 @@ instance TF.IsValid (ManagedDiskResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_encryptionSettings"
                   (_encryptionSettings
-                      :: ManagedDiskResource s -> TF.Attr s (EncryptionSettingsSetting s))
+                      :: ManagedDiskResource s -> TF.Attr s (EncryptionSettings s))
                   TF.validator
 
 instance P.HasCreateOption (ManagedDiskResource s) (TF.Attr s P.Text) where
@@ -8156,9 +8156,9 @@ instance P.HasDiskSizeGb (ManagedDiskResource s) (TF.Attr s P.Int) where
         P.lens (_diskSizeGb :: ManagedDiskResource s -> TF.Attr s P.Int)
                (\s a -> s { _diskSizeGb = a } :: ManagedDiskResource s)
 
-instance P.HasEncryptionSettings (ManagedDiskResource s) (TF.Attr s (EncryptionSettingsSetting s)) where
+instance P.HasEncryptionSettings (ManagedDiskResource s) (TF.Attr s (EncryptionSettings s)) where
     encryptionSettings =
-        P.lens (_encryptionSettings :: ManagedDiskResource s -> TF.Attr s (EncryptionSettingsSetting s))
+        P.lens (_encryptionSettings :: ManagedDiskResource s -> TF.Attr s (EncryptionSettings s))
                (\s a -> s { _encryptionSettings = a } :: ManagedDiskResource s)
 
 instance P.HasImageReferenceId (ManagedDiskResource s) (TF.Attr s P.Text) where
