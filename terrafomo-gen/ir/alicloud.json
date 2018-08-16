@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newAuthConfigSetting",
+                "smart": "authConfigSetting",
                 "name": "AuthConfigSetting'"
             },
             "arguments": [
@@ -87,7 +87,7 @@
         },
         {
             "con": {
-                "smart": "newBurstableInstanceSetting",
+                "smart": "burstableInstanceSetting",
                 "name": "BurstableInstanceSetting'"
             },
             "arguments": [],
@@ -137,7 +137,7 @@
         },
         {
             "con": {
-                "smart": "newCacheConfigSetting",
+                "smart": "cacheConfigSetting",
                 "name": "CacheConfigSetting'"
             },
             "arguments": [
@@ -291,7 +291,7 @@
         },
         {
             "con": {
-                "smart": "newConnectionsSetting",
+                "smart": "connectionsSetting",
                 "name": "ConnectionsSetting'"
             },
             "arguments": [],
@@ -375,7 +375,7 @@
         },
         {
             "con": {
-                "smart": "newCorsRuleSetting",
+                "smart": "corsRuleSetting",
                 "name": "CorsRuleSetting'"
             },
             "arguments": [
@@ -511,7 +511,7 @@
         },
         {
             "con": {
-                "smart": "newDataDiskSetting",
+                "smart": "dataDiskSetting",
                 "name": "DataDiskSetting'"
             },
             "arguments": [
@@ -578,7 +578,7 @@
         },
         {
             "con": {
-                "smart": "newDiskDeviceMappingsSetting",
+                "smart": "diskDeviceMappingsSetting",
                 "name": "DiskDeviceMappingsSetting'"
             },
             "arguments": [],
@@ -679,7 +679,7 @@
         },
         {
             "con": {
-                "smart": "newDomainsSetting",
+                "smart": "domainsSetting",
                 "name": "DomainsSetting'"
             },
             "arguments": [],
@@ -848,7 +848,7 @@
         },
         {
             "con": {
-                "smart": "newEipsSetting",
+                "smart": "eipsSetting",
                 "name": "EipsSetting'"
             },
             "arguments": [],
@@ -1000,7 +1000,7 @@
         },
         {
             "con": {
-                "smart": "newExpirationSetting",
+                "smart": "expirationSetting",
                 "name": "ExpirationSetting'"
             },
             "arguments": [
@@ -1050,7 +1050,7 @@
         },
         {
             "con": {
-                "smart": "newFieldSearchSetting",
+                "smart": "fieldSearchSetting",
                 "name": "FieldSearchSetting'"
             },
             "arguments": [
@@ -1203,7 +1203,7 @@
         },
         {
             "con": {
-                "smart": "newFullTextSetting",
+                "smart": "fullTextSetting",
                 "name": "FullTextSetting'"
             },
             "arguments": [
@@ -1270,7 +1270,7 @@
         },
         {
             "con": {
-                "smart": "newGpuSetting",
+                "smart": "gpuSetting",
                 "name": "GpuSetting'"
             },
             "arguments": [],
@@ -1320,7 +1320,7 @@
         },
         {
             "con": {
-                "smart": "newGroupsSetting",
+                "smart": "groupsSetting",
                 "name": "GroupsSetting'"
             },
             "arguments": [],
@@ -1489,7 +1489,7 @@
         },
         {
             "con": {
-                "smart": "newHttpHeaderConfigSetting",
+                "smart": "httpHeaderConfigSetting",
                 "name": "HttpHeaderConfigSetting'"
             },
             "arguments": [
@@ -1592,7 +1592,7 @@
         },
         {
             "con": {
-                "smart": "newImagesSetting",
+                "smart": "imagesSetting",
                 "name": "ImagesSetting'"
             },
             "arguments": [
@@ -2000,7 +2000,7 @@
         },
         {
             "con": {
-                "smart": "newInstanceTypesSetting",
+                "smart": "instanceTypesSetting",
                 "name": "InstanceTypesSetting'"
             },
             "arguments": [],
@@ -2169,7 +2169,7 @@
         },
         {
             "con": {
-                "smart": "newInstancesSetting",
+                "smart": "instancesSetting",
                 "name": "InstancesSetting'"
             },
             "arguments": [
@@ -2798,7 +2798,7 @@
         },
         {
             "con": {
-                "smart": "newKeyPairsSetting",
+                "smart": "keyPairsSetting",
                 "name": "KeyPairsSetting'"
             },
             "arguments": [],
@@ -2882,7 +2882,7 @@
         },
         {
             "con": {
-                "smart": "newKeysSetting",
+                "smart": "keysSetting",
                 "name": "KeysSetting'"
             },
             "arguments": [],
@@ -3017,7 +3017,7 @@
         },
         {
             "con": {
-                "smart": "newLifecycleRuleSetting",
+                "smart": "lifecycleRuleSetting",
                 "name": "LifecycleRuleSetting'"
             },
             "arguments": [
@@ -3154,7 +3154,7 @@
         },
         {
             "con": {
-                "smart": "newLocalStorageSetting",
+                "smart": "localStorageSetting",
                 "name": "LocalStorageSetting'"
             },
             "arguments": [],
@@ -3221,7 +3221,7 @@
         },
         {
             "con": {
-                "smart": "newLogConfigSetting",
+                "smart": "logConfigSetting",
                 "name": "LogConfigSetting'"
             },
             "arguments": [
@@ -3306,7 +3306,7 @@
         },
         {
             "con": {
-                "smart": "newLoggingSetting",
+                "smart": "loggingSetting",
                 "name": "LoggingSetting'"
             },
             "arguments": [
@@ -3374,7 +3374,7 @@
         },
         {
             "con": {
-                "smart": "newMasterNodesSetting",
+                "smart": "masterNodesSetting",
                 "name": "MasterNodesSetting'"
             },
             "arguments": [],
@@ -3441,7 +3441,7 @@
         },
         {
             "con": {
-                "smart": "newNodesSetting",
+                "smart": "nodesSetting",
                 "name": "NodesSetting'"
             },
             "arguments": [],
@@ -3542,7 +3542,7 @@
         },
         {
             "con": {
-                "smart": "newPage404ConfigSetting",
+                "smart": "page404ConfigSetting",
                 "name": "Page404ConfigSetting'"
             },
             "arguments": [
@@ -3610,7 +3610,7 @@
         },
         {
             "con": {
-                "smart": "newParameterFilterConfigSetting",
+                "smart": "parameterFilterConfigSetting",
                 "name": "ParameterFilterConfigSetting'"
             },
             "arguments": [
@@ -3661,7 +3661,7 @@
         },
         {
             "con": {
-                "smart": "newPoliciesSetting",
+                "smart": "policiesSetting",
                 "name": "PoliciesSetting'"
             },
             "arguments": [],
@@ -3813,7 +3813,7 @@
         },
         {
             "con": {
-                "smart": "newPrimaryKeySetting",
+                "smart": "primaryKeySetting",
                 "name": "PrimaryKeySetting'"
             },
             "arguments": [
@@ -3898,7 +3898,7 @@
         },
         {
             "con": {
-                "smart": "newRecordsSetting",
+                "smart": "recordsSetting",
                 "name": "RecordsSetting'"
             },
             "arguments": [],
@@ -4084,7 +4084,7 @@
         },
         {
             "con": {
-                "smart": "newReferConfigSetting",
+                "smart": "referConfigSetting",
                 "name": "ReferConfigSetting'"
             },
             "arguments": [
@@ -4169,7 +4169,7 @@
         },
         {
             "con": {
-                "smart": "newRefererConfigSetting",
+                "smart": "refererConfigSetting",
                 "name": "RefererConfigSetting'"
             },
             "arguments": [
@@ -4237,7 +4237,7 @@
         },
         {
             "con": {
-                "smart": "newRegionsSetting",
+                "smart": "regionsSetting",
                 "name": "RegionsSetting'"
             },
             "arguments": [],
@@ -4304,7 +4304,7 @@
         },
         {
             "con": {
-                "smart": "newRolesSetting",
+                "smart": "rolesSetting",
                 "name": "RolesSetting'"
             },
             "arguments": [],
@@ -4456,7 +4456,7 @@
         },
         {
             "con": {
-                "smart": "newRulesSetting",
+                "smart": "rulesSetting",
                 "name": "RulesSetting'"
             },
             "arguments": [],
@@ -4693,7 +4693,7 @@
         },
         {
             "con": {
-                "smart": "newServersSetting",
+                "smart": "serversSetting",
                 "name": "ServersSetting'"
             },
             "arguments": [
@@ -4795,7 +4795,7 @@
         },
         {
             "con": {
-                "smart": "newServicesSetting",
+                "smart": "servicesSetting",
                 "name": "ServicesSetting'"
             },
             "arguments": [],
@@ -4879,7 +4879,7 @@
         },
         {
             "con": {
-                "smart": "newShardsSetting",
+                "smart": "shardsSetting",
                 "name": "ShardsSetting'"
             },
             "arguments": [],
@@ -4963,7 +4963,7 @@
         },
         {
             "con": {
-                "smart": "newStatementSetting",
+                "smart": "statementSetting",
                 "name": "StatementSetting'"
             },
             "arguments": [
@@ -5082,7 +5082,7 @@
         },
         {
             "con": {
-                "smart": "newUsersSetting",
+                "smart": "usersSetting",
                 "name": "UsersSetting'"
             },
             "arguments": [],
@@ -5166,7 +5166,7 @@
         },
         {
             "con": {
-                "smart": "newVpcConfigSetting",
+                "smart": "vpcConfigSetting",
                 "name": "VpcConfigSetting'"
             },
             "arguments": [
@@ -5269,7 +5269,7 @@
         },
         {
             "con": {
-                "smart": "newVpcsSetting",
+                "smart": "vpcsSetting",
                 "name": "VpcsSetting'"
             },
             "arguments": [],
@@ -5472,7 +5472,7 @@
         },
         {
             "con": {
-                "smart": "newVswitchesSetting",
+                "smart": "vswitchesSetting",
                 "name": "VswitchesSetting'"
             },
             "arguments": [],
@@ -5641,7 +5641,7 @@
         },
         {
             "con": {
-                "smart": "newWebsiteSetting",
+                "smart": "websiteSetting",
                 "name": "WebsiteSetting'"
             },
             "arguments": [
@@ -5709,7 +5709,7 @@
         },
         {
             "con": {
-                "smart": "newWorkerNodesSetting",
+                "smart": "workerNodesSetting",
                 "name": "WorkerNodesSetting'"
             },
             "arguments": [],
@@ -5776,7 +5776,7 @@
         },
         {
             "con": {
-                "smart": "newZonesSetting",
+                "smart": "zonesSetting",
                 "name": "ZonesSetting'"
             },
             "arguments": [],
