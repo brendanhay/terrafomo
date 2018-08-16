@@ -126,6 +126,9 @@ instance P.HasType' (AlertChannelResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: AlertChannelResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: AlertChannelResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertChannelResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @newrelic_alert_condition@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/newrelic/r/alert_condition.html terraform documentation>
@@ -273,6 +276,9 @@ instance P.HasViolationCloseTimer (AlertConditionResource s) (TF.Attr s P.Int) w
         P.lens (_violationCloseTimer :: AlertConditionResource s -> TF.Attr s P.Int)
                (\s a -> s { _violationCloseTimer = a } :: AlertConditionResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertConditionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @newrelic_alert_policy@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/newrelic/r/alert_policy.html terraform documentation>
@@ -314,6 +320,9 @@ instance P.HasName (AlertPolicyResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: AlertPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: AlertPolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (AlertPolicyResource s)) (TF.Attr s P.Int) where
     computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
@@ -363,6 +372,9 @@ instance P.HasPolicyId (AlertPolicyChannelResource s) (TF.Attr s P.Int) where
     policyId =
         P.lens (_policyId :: AlertPolicyChannelResource s -> TF.Attr s P.Int)
                (\s a -> s { _policyId = a } :: AlertPolicyChannelResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertPolicyChannelResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @newrelic_dashboard@ Resource.
 --
@@ -435,6 +447,9 @@ instance P.HasWidget (DashboardResource s) (TF.Attr s [TF.Attr s (WidgetSetting 
     widget =
         P.lens (_widget :: DashboardResource s -> TF.Attr s [TF.Attr s (WidgetSetting s)])
                (\s a -> s { _widget = a } :: DashboardResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DashboardResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDashboardUrl (TF.Ref s' (DashboardResource s)) (TF.Attr s P.Text) where
     computedDashboardUrl x = TF.compute (TF.refKey x) "dashboard_url"
@@ -581,6 +596,9 @@ instance P.HasWhere' (InfraAlertConditionResource s) (TF.Attr s P.Text) where
         P.lens (_where' :: InfraAlertConditionResource s -> TF.Attr s P.Text)
                (\s a -> s { _where' = a } :: InfraAlertConditionResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Int) where
     computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
@@ -685,3 +703,6 @@ instance P.HasValueFunction (NrqlAlertConditionResource s) (TF.Attr s P.Text) wh
     valueFunction =
         P.lens (_valueFunction :: NrqlAlertConditionResource s -> TF.Attr s P.Text)
                (\s a -> s { _valueFunction = a } :: NrqlAlertConditionResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NrqlAlertConditionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
