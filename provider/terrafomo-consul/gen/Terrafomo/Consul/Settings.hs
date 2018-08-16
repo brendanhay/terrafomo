@@ -276,10 +276,10 @@ data KeySetting s = KeySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newKeySetting
-    :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> KeySetting s
-newKeySetting _path _name =
+newKeySetting _name _path =
     KeySetting'
         { _default' = TF.Nil
         , _delete = TF.value P.False
