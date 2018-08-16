@@ -3449,7 +3449,7 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (IamPolicyData s)) (TF.Attr s P.
 instance s ~ s' => P.HasComputedPath (TF.Ref s' (IamPolicyData s)) (TF.Attr s P.Text) where
     computedPath x = TF.compute (TF.refKey x) "path"
 
-instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (IamPolicyData s)) (TF.Attr s P.Document) where
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (IamPolicyData s)) (TF.Attr s P.Text) where
     computedPolicy x = TF.compute (TF.refKey x) "policy"
 
 -- | @aws_iam_policy_document@ DataSource.
@@ -3557,7 +3557,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Text
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputedAssumeRolePolicy (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Document) where
+instance s ~ s' => P.HasComputedAssumeRolePolicy (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Text) where
     computedAssumeRolePolicy x = TF.compute (TF.refKey x) "assume_role_policy"
 
 instance s ~ s' => P.HasComputedCreateDate (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Text) where

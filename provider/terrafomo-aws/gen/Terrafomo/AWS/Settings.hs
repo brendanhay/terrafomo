@@ -2829,7 +2829,7 @@ data AttributeSetting s = AttributeSetting'
     { _name  :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _type' :: TF.Attr s P.TableAttributeType
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     , _value :: TF.Attr s P.Text
@@ -2839,7 +2839,7 @@ data AttributeSetting s = AttributeSetting'
 
 newAttributeSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.TableAttributeType -- ^ @type@ - 'P.type''
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> AttributeSetting s
 newAttributeSetting _name _type' _value =
@@ -2865,9 +2865,9 @@ instance P.HasName (AttributeSetting s) (TF.Attr s P.Text) where
         P.lens (_name :: AttributeSetting s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: AttributeSetting s)
 
-instance P.HasType' (AttributeSetting s) (TF.Attr s P.TableAttributeType) where
+instance P.HasType' (AttributeSetting s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: AttributeSetting s -> TF.Attr s P.TableAttributeType)
+        P.lens (_type' :: AttributeSetting s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: AttributeSetting s)
 
 instance P.HasValue (AttributeSetting s) (TF.Attr s P.Text) where
@@ -2878,7 +2878,7 @@ instance P.HasValue (AttributeSetting s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedName (TF.Ref s' (AttributeSetting s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedType (TF.Ref s' (AttributeSetting s)) (TF.Attr s P.TableAttributeType) where
+instance s ~ s' => P.HasComputedType (TF.Ref s' (AttributeSetting s)) (TF.Attr s P.Text) where
     computedType x = TF.compute (TF.refKey x) "type"
 
 -- | @audio@ nested settings.
