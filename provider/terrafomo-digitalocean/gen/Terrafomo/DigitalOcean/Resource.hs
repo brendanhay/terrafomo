@@ -486,6 +486,9 @@ data FloatingIpResource s = FloatingIpResource'
     { _dropletId :: TF.Attr s P.Int
     -- ^ @droplet_id@ - (Optional)
     --
+    , _ipAddress :: TF.Attr s P.Text
+    -- ^ @ip_address@ - (Optional)
+    --
     , _region    :: TF.Attr s P.Text
     -- ^ @region@ - (Required, Forces New)
     --
@@ -499,12 +502,14 @@ floatingIpResource _region =
     TF.unsafeResource "digitalocean_floating_ip" TF.validator $
         FloatingIpResource'
             { _dropletId = TF.Nil
+            , _ipAddress = TF.Nil
             , _region = _region
             }
 
 instance TF.IsObject (FloatingIpResource s) where
     toObject FloatingIpResource'{..} = P.catMaybes
         [ TF.assign "droplet_id" <$> TF.attribute _dropletId
+        , TF.assign "ip_address" <$> TF.attribute _ipAddress
         , TF.assign "region" <$> TF.attribute _region
         ]
 
@@ -515,6 +520,11 @@ instance P.HasDropletId (FloatingIpResource s) (TF.Attr s P.Int) where
     dropletId =
         P.lens (_dropletId :: FloatingIpResource s -> TF.Attr s P.Int)
                (\s a -> s { _dropletId = a } :: FloatingIpResource s)
+
+instance P.HasIpAddress (FloatingIpResource s) (TF.Attr s P.Text) where
+    ipAddress =
+        P.lens (_ipAddress :: FloatingIpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ipAddress = a } :: FloatingIpResource s)
 
 instance P.HasRegion (FloatingIpResource s) (TF.Attr s P.Text) where
     region =
@@ -556,6 +566,9 @@ data LoadbalancerResource s = LoadbalancerResource'
     , _region :: TF.Attr s P.Text
     -- ^ @region@ - (Required, Forces New)
     --
+    , _stickySessions :: TF.Attr s (StickySessionsSetting s)
+    -- ^ @sticky_sessions@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @digitalocean_loadbalancer@ resource value.
@@ -575,6 +588,7 @@ loadbalancerResource _name _region _forwardingRule =
             , _name = _name
             , _redirectHttpToHttps = TF.value P.False
             , _region = _region
+            , _stickySessions = TF.Nil
             }
 
 instance TF.IsObject (LoadbalancerResource s) where
@@ -587,6 +601,7 @@ instance TF.IsObject (LoadbalancerResource s) where
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "redirect_http_to_https" <$> TF.attribute _redirectHttpToHttps
         , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "sticky_sessions" <$> TF.attribute _stickySessions
         ]
 
 instance TF.IsValid (LoadbalancerResource s) where
@@ -594,6 +609,10 @@ instance TF.IsValid (LoadbalancerResource s) where
            P.<> TF.settingsValidator "_healthcheck"
                   (_healthcheck
                       :: LoadbalancerResource s -> TF.Attr s (HealthcheckSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_stickySessions"
+                  (_stickySessions
+                      :: LoadbalancerResource s -> TF.Attr s (StickySessionsSetting s))
                   TF.validator
 
 instance P.HasAlgorithm (LoadbalancerResource s) (TF.Attr s P.Text) where
@@ -636,6 +655,11 @@ instance P.HasRegion (LoadbalancerResource s) (TF.Attr s P.Text) where
         P.lens (_region :: LoadbalancerResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: LoadbalancerResource s)
 
+instance P.HasStickySessions (LoadbalancerResource s) (TF.Attr s (StickySessionsSetting s)) where
+    stickySessions =
+        P.lens (_stickySessions :: LoadbalancerResource s -> TF.Attr s (StickySessionsSetting s))
+               (\s a -> s { _stickySessions = a } :: LoadbalancerResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -650,17 +674,35 @@ instance s ~ s' => P.HasComputedStickySessions (TF.Ref s' (LoadbalancerResource 
 -- See the <https://www.terraform.io/docs/providers/digitalocean/r/record.html terraform documentation>
 -- for more information.
 data RecordResource s = RecordResource'
-    { _domain :: TF.Attr s P.Text
+    { _domain   :: TF.Attr s P.Text
     -- ^ @domain@ - (Required, Forces New)
     --
-    , _name   :: TF.Attr s P.Text
+    , _flags    :: TF.Attr s P.Text
+    -- ^ @flags@ - (Optional, Forces New)
+    --
+    , _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _tag    :: TF.Attr s P.Text
+    , _port     :: TF.Attr s P.Text
+    -- ^ @port@ - (Optional, Forces New)
+    --
+    , _priority :: TF.Attr s P.Text
+    -- ^ @priority@ - (Optional, Forces New)
+    --
+    , _tag      :: TF.Attr s P.Text
     -- ^ @tag@ - (Optional, Forces New)
     --
-    , _type'  :: TF.Attr s P.Text
+    , _ttl      :: TF.Attr s P.Text
+    -- ^ @ttl@ - (Optional)
+    --
+    , _type'    :: TF.Attr s P.Text
     -- ^ @type@ - (Required, Forces New)
+    --
+    , _value    :: TF.Attr s P.Text
+    -- ^ @value@ - (Optional, Forces New)
+    --
+    , _weight   :: TF.Attr s P.Text
+    -- ^ @weight@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -673,17 +715,29 @@ recordResource _domain _type' =
     TF.unsafeResource "digitalocean_record" TF.validator $
         RecordResource'
             { _domain = _domain
+            , _flags = TF.Nil
             , _name = TF.Nil
+            , _port = TF.Nil
+            , _priority = TF.Nil
             , _tag = TF.Nil
+            , _ttl = TF.Nil
             , _type' = _type'
+            , _value = TF.Nil
+            , _weight = TF.Nil
             }
 
 instance TF.IsObject (RecordResource s) where
     toObject RecordResource'{..} = P.catMaybes
         [ TF.assign "domain" <$> TF.attribute _domain
+        , TF.assign "flags" <$> TF.attribute _flags
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "priority" <$> TF.attribute _priority
         , TF.assign "tag" <$> TF.attribute _tag
+        , TF.assign "ttl" <$> TF.attribute _ttl
         , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "value" <$> TF.attribute _value
+        , TF.assign "weight" <$> TF.attribute _weight
         ]
 
 instance TF.IsValid (RecordResource s) where
@@ -694,20 +748,50 @@ instance P.HasDomain (RecordResource s) (TF.Attr s P.Text) where
         P.lens (_domain :: RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _domain = a } :: RecordResource s)
 
+instance P.HasFlags (RecordResource s) (TF.Attr s P.Text) where
+    flags =
+        P.lens (_flags :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _flags = a } :: RecordResource s)
+
 instance P.HasName (RecordResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RecordResource s)
+
+instance P.HasPort (RecordResource s) (TF.Attr s P.Text) where
+    port =
+        P.lens (_port :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _port = a } :: RecordResource s)
+
+instance P.HasPriority (RecordResource s) (TF.Attr s P.Text) where
+    priority =
+        P.lens (_priority :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _priority = a } :: RecordResource s)
 
 instance P.HasTag (RecordResource s) (TF.Attr s P.Text) where
     tag =
         P.lens (_tag :: RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _tag = a } :: RecordResource s)
 
+instance P.HasTtl (RecordResource s) (TF.Attr s P.Text) where
+    ttl =
+        P.lens (_ttl :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ttl = a } :: RecordResource s)
+
 instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: RecordResource s)
+
+instance P.HasValue (RecordResource s) (TF.Attr s P.Text) where
+    value =
+        P.lens (_value :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: RecordResource s)
+
+instance P.HasWeight (RecordResource s) (TF.Attr s P.Text) where
+    weight =
+        P.lens (_weight :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _weight = a } :: RecordResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"

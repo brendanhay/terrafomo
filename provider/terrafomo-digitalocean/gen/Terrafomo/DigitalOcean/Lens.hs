@@ -34,6 +34,7 @@ module Terrafomo.DigitalOcean.Lens
     , HasEntryPort (..)
     , HasEntryProtocol (..)
     , HasFilesystemType (..)
+    , HasFlags (..)
     , HasForwardingRule (..)
     , HasHealthcheck (..)
     , HasHealthyThreshold (..)
@@ -48,6 +49,7 @@ module Terrafomo.DigitalOcean.Lens
     , HasPath (..)
     , HasPort (..)
     , HasPortRange (..)
+    , HasPriority (..)
     , HasPrivateKey (..)
     , HasPrivateNetworking (..)
     , HasProtocol (..)
@@ -64,16 +66,20 @@ module Terrafomo.DigitalOcean.Lens
     , HasSourceTags (..)
     , HasSshKeys (..)
     , HasStatus (..)
+    , HasStickySessions (..)
     , HasTag (..)
     , HasTags (..)
     , HasTargetPort (..)
     , HasTargetProtocol (..)
     , HasTlsPassthrough (..)
     , HasToken (..)
+    , HasTtl (..)
     , HasType' (..)
     , HasUnhealthyThreshold (..)
     , HasUserData (..)
+    , HasValue (..)
     , HasVolumeIds (..)
+    , HasWeight (..)
 
     -- ** Computed Attributes
     , HasComputedCreatedAt (..)
@@ -232,6 +238,12 @@ class HasFilesystemType a b | a -> b where
 instance HasFilesystemType a b => HasFilesystemType (TF.Schema l p a) b where
     filesystemType = TF.configuration . filesystemType
 
+class HasFlags a b | a -> b where
+    flags :: P.Lens' a b
+
+instance HasFlags a b => HasFlags (TF.Schema l p a) b where
+    flags = TF.configuration . flags
+
 class HasForwardingRule a b | a -> b where
     forwardingRule :: P.Lens' a b
 
@@ -315,6 +327,12 @@ class HasPortRange a b | a -> b where
 
 instance HasPortRange a b => HasPortRange (TF.Schema l p a) b where
     portRange = TF.configuration . portRange
+
+class HasPriority a b | a -> b where
+    priority :: P.Lens' a b
+
+instance HasPriority a b => HasPriority (TF.Schema l p a) b where
+    priority = TF.configuration . priority
 
 class HasPrivateKey a b | a -> b where
     privateKey :: P.Lens' a b
@@ -412,6 +430,12 @@ class HasStatus a b | a -> b where
 instance HasStatus a b => HasStatus (TF.Schema l p a) b where
     status = TF.configuration . status
 
+class HasStickySessions a b | a -> b where
+    stickySessions :: P.Lens' a b
+
+instance HasStickySessions a b => HasStickySessions (TF.Schema l p a) b where
+    stickySessions = TF.configuration . stickySessions
+
 class HasTag a b | a -> b where
     tag :: P.Lens' a b
 
@@ -448,6 +472,12 @@ class HasToken a b | a -> b where
 instance HasToken a b => HasToken (TF.Schema l p a) b where
     token = TF.configuration . token
 
+class HasTtl a b | a -> b where
+    ttl :: P.Lens' a b
+
+instance HasTtl a b => HasTtl (TF.Schema l p a) b where
+    ttl = TF.configuration . ttl
+
 class HasType' a b | a -> b where
     type' :: P.Lens' a b
 
@@ -466,11 +496,23 @@ class HasUserData a b | a -> b where
 instance HasUserData a b => HasUserData (TF.Schema l p a) b where
     userData = TF.configuration . userData
 
+class HasValue a b | a -> b where
+    value :: P.Lens' a b
+
+instance HasValue a b => HasValue (TF.Schema l p a) b where
+    value = TF.configuration . value
+
 class HasVolumeIds a b | a -> b where
     volumeIds :: P.Lens' a b
 
 instance HasVolumeIds a b => HasVolumeIds (TF.Schema l p a) b where
     volumeIds = TF.configuration . volumeIds
+
+class HasWeight a b | a -> b where
+    weight :: P.Lens' a b
+
+instance HasWeight a b => HasWeight (TF.Schema l p a) b where
+    weight = TF.configuration . weight
 
 class HasComputedCreatedAt a b | a -> b where
     computedCreatedAt :: a -> b

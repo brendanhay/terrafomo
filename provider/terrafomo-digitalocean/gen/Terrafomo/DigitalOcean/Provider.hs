@@ -78,7 +78,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "digitalocean"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "token" _token
             ]
