@@ -17,10 +17,11 @@
 --
 module Terrafomo.SoftLayer.Provider
     (
+    -- * SoftLayer Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** SoftLayer Specific Aliases
+    -- * SoftLayer Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -70,8 +71,8 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @api_key@ - 'P.apiKey'
-    -> P.Text -- ^ @username@ - 'P.username'
+    :: P.Text -- ^ @api_key@ ('P._apiKey', 'P.apiKey')
+    -> P.Text -- ^ @username@ ('P._username', 'P.username')
     -> Provider
 newProvider _apiKey _username =
     Provider'
@@ -83,7 +84,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "softlayer"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "api_key" _apiKey
             , P.Just $ TF.assign "username" _username

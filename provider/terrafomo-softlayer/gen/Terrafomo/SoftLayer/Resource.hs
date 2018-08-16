@@ -69,8 +69,8 @@ data SshKeyResource s = SshKeyResource'
 
 -- | Define a new @softlayer_ssh_key@ resource value.
 sshKeyResource
-    :: TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @public_key@ ('P._publicKey', 'P.publicKey')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (SshKeyResource s)
 sshKeyResource _publicKey _name =
     TF.unsafeResource "softlayer_ssh_key" TF.validator $
@@ -174,13 +174,13 @@ data VirtualGuestResource s = VirtualGuestResource'
 
 -- | Define a new @softlayer_virtual_guest@ resource value.
 virtualGuestResource
-    :: TF.Attr s P.Bool -- ^ @hourly_billing@ - 'P.hourlyBilling'
-    -> TF.Attr s P.Int -- ^ @cpu@ - 'P.cpu'
-    -> TF.Attr s P.Bool -- ^ @local_disk@ - 'P.localDisk'
-    -> TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @ram@ - 'P.ram'
-    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
+    :: TF.Attr s P.Bool -- ^ @hourly_billing@ ('P._hourlyBilling', 'P.hourlyBilling')
+    -> TF.Attr s P.Int -- ^ @cpu@ ('P._cpu', 'P.cpu')
+    -> TF.Attr s P.Bool -- ^ @local_disk@ ('P._localDisk', 'P.localDisk')
+    -> TF.Attr s P.Text -- ^ @domain@ ('P._domain', 'P.domain')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Int -- ^ @ram@ ('P._ram', 'P.ram')
+    -> TF.Attr s P.Text -- ^ @region@ ('P._region', 'P.region')
     -> P.Resource (VirtualGuestResource s)
 virtualGuestResource _hourlyBilling _cpu _localDisk _domain _name _ram _region =
     TF.unsafeResource "softlayer_virtual_guest" TF.validator $
