@@ -19,43 +19,43 @@ module Terrafomo.PagerDuty.Settings
     (
     -- ** at
       AtSetting (..)
-    , atSetting
+    , newAtSetting
 
     -- ** during_support_hours
     , DuringSupportHoursSetting (..)
-    , duringSupportHoursSetting
+    , newDuringSupportHoursSetting
 
     -- ** incident_urgency_rule
     , IncidentUrgencyRuleSetting (..)
-    , incidentUrgencyRuleSetting
+    , newIncidentUrgencyRuleSetting
 
     -- ** layer
     , LayerSetting (..)
-    , layerSetting
+    , newLayerSetting
 
     -- ** outside_support_hours
     , OutsideSupportHoursSetting (..)
-    , outsideSupportHoursSetting
+    , newOutsideSupportHoursSetting
 
     -- ** restriction
     , RestrictionSetting (..)
-    , restrictionSetting
+    , newRestrictionSetting
 
     -- ** rule
     , RuleSetting (..)
-    , ruleSetting
+    , newRuleSetting
 
     -- ** scheduled_actions
     , ScheduledActionsSetting (..)
-    , scheduledActionsSetting
+    , newScheduledActionsSetting
 
     -- ** support_hours
     , SupportHoursSetting (..)
-    , supportHoursSetting
+    , newSupportHoursSetting
 
     -- ** target
     , TargetSetting (..)
-    , targetSetting
+    , newTargetSetting
 
     ) where
 
@@ -91,9 +91,9 @@ data AtSetting s = AtSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @at@ settings value.
-atSetting
+newAtSetting
     :: AtSetting s
-atSetting =
+newAtSetting =
     AtSetting'
         { _name = TF.Nil
         , _type' = TF.Nil
@@ -130,9 +130,9 @@ data DuringSupportHoursSetting s = DuringSupportHoursSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @during_support_hours@ settings value.
-duringSupportHoursSetting
+newDuringSupportHoursSetting
     :: DuringSupportHoursSetting s
-duringSupportHoursSetting =
+newDuringSupportHoursSetting =
     DuringSupportHoursSetting'
         { _type' = TF.Nil
         , _urgency = TF.Nil
@@ -175,10 +175,10 @@ data IncidentUrgencyRuleSetting s = IncidentUrgencyRuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @incident_urgency_rule@ settings value.
-incidentUrgencyRuleSetting
+newIncidentUrgencyRuleSetting
     :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> IncidentUrgencyRuleSetting s
-incidentUrgencyRuleSetting _type' =
+newIncidentUrgencyRuleSetting _type' =
     IncidentUrgencyRuleSetting'
         { _duringSupportHours = TF.Nil
         , _outsideSupportHours = TF.Nil
@@ -252,13 +252,13 @@ data LayerSetting s = LayerSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @layer@ settings value.
-layerSetting
+newLayerSetting
     :: TF.Attr s P.Int -- ^ 'P._rotationTurnLengthSeconds': @rotation_turn_length_seconds@
     -> TF.Attr s P.Text -- ^ 'P._rotationVirtualStart': @rotation_virtual_start@
     -> TF.Attr s P.Text -- ^ 'P._start': @start@
     -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._users': @users@
     -> LayerSetting s
-layerSetting _rotationTurnLengthSeconds _rotationVirtualStart _start _users =
+newLayerSetting _rotationTurnLengthSeconds _rotationVirtualStart _start _users =
     LayerSetting'
         { _end = TF.Nil
         , _name = TF.Nil
@@ -336,9 +336,9 @@ data OutsideSupportHoursSetting s = OutsideSupportHoursSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @outside_support_hours@ settings value.
-outsideSupportHoursSetting
+newOutsideSupportHoursSetting
     :: OutsideSupportHoursSetting s
-outsideSupportHoursSetting =
+newOutsideSupportHoursSetting =
     OutsideSupportHoursSetting'
         { _type' = TF.Nil
         , _urgency = TF.Nil
@@ -381,12 +381,12 @@ data RestrictionSetting s = RestrictionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @restriction@ settings value.
-restrictionSetting
+newRestrictionSetting
     :: TF.Attr s P.Text -- ^ 'P._startTimeOfDay': @start_time_of_day@
     -> TF.Attr s P.Int -- ^ 'P._durationSeconds': @duration_seconds@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> RestrictionSetting s
-restrictionSetting _startTimeOfDay _durationSeconds _type' =
+newRestrictionSetting _startTimeOfDay _durationSeconds _type' =
     RestrictionSetting'
         { _durationSeconds = _durationSeconds
         , _startDayOfWeek = TF.Nil
@@ -437,11 +437,11 @@ data RuleSetting s = RuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @rule@ settings value.
-ruleSetting
+newRuleSetting
     :: TF.Attr s P.Int -- ^ 'P._escalationDelayInMinutes': @escalation_delay_in_minutes@
     -> TF.Attr s [TF.Attr s (TargetSetting s)] -- ^ 'P._target': @target@
     -> RuleSetting s
-ruleSetting _escalationDelayInMinutes _target =
+newRuleSetting _escalationDelayInMinutes _target =
     RuleSetting'
         { _escalationDelayInMinutes = _escalationDelayInMinutes
         , _target = _target
@@ -484,9 +484,9 @@ data ScheduledActionsSetting s = ScheduledActionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @scheduled_actions@ settings value.
-scheduledActionsSetting
+newScheduledActionsSetting
     :: ScheduledActionsSetting s
-scheduledActionsSetting =
+newScheduledActionsSetting =
     ScheduledActionsSetting'
         { _at = TF.Nil
         , _toUrgency = TF.Nil
@@ -539,9 +539,9 @@ data SupportHoursSetting s = SupportHoursSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @support_hours@ settings value.
-supportHoursSetting
+newSupportHoursSetting
     :: SupportHoursSetting s
-supportHoursSetting =
+newSupportHoursSetting =
     SupportHoursSetting'
         { _daysOfWeek = TF.Nil
         , _endTime = TF.Nil
@@ -599,10 +599,10 @@ data TargetSetting s = TargetSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @target@ settings value.
-targetSetting
+newTargetSetting
     :: TF.Attr s P.Text -- ^ 'P._id': @id@
     -> TargetSetting s
-targetSetting _id =
+newTargetSetting _id =
     TargetSetting'
         { _id = _id
         , _type' = TF.value "user_reference"
