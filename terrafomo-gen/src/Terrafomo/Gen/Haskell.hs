@@ -2,6 +2,7 @@
 
 module Terrafomo.Gen.Haskell where
 
+import Data.Function  (on)
 import Data.Semigroup (Semigroup ((<>)))
 import Data.Set       (Set)
 import Data.Text      (Text)
@@ -13,6 +14,7 @@ import Terrafomo.Gen.Name
 import Terrafomo.Gen.Type (Type)
 
 import qualified Data.HashMap.Strict              as HashMap
+import qualified Data.List                        as List
 import qualified Data.Set                         as Set
 import qualified Data.Text                        as Text
 import qualified Data.Text.Lazy                   as LText
@@ -138,13 +140,20 @@ instance JSON.ToJSON a => JSON.ToJSON (Schema a) where
             ]
 
 schemaParameters :: Schema a -> [Field a]
-schemaParameters = filter (go . fieldDefault) . schemaArguments
+schemaParameters = sort . filter (go . fieldDefault) . schemaArguments
   where
     go = \case
         DefaultParam {}  -> True
         DefaultPrim  _ x -> go x
         DefaultAttr    x -> go x
         _                -> False
+
+    sort = map snd . List.sortBy (on compare fst) . map (\x -> (key x, x))
+
+    key x =
+        ( Text.takeWhileEnd (/= '_') (fieldOriginal x)
+        , fieldOriginal x
+        )
 
 schemaConflicts :: Schema a -> [Field a]
 schemaConflicts = filter (not . Set.null . fieldConflicts) . schemaArguments
