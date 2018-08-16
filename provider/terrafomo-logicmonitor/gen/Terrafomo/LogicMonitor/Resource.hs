@@ -231,10 +231,10 @@ data DeviceResource s = DeviceResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 deviceResource
-    :: TF.Attr s P.Int -- ^ @collector@ - 'P.collector'
-    -> TF.Attr s P.Text -- ^ @ip_addr@ - 'P.ipAddr'
+    :: TF.Attr s P.Text -- ^ @ip_addr@ - 'P.ipAddr'
+    -> TF.Attr s P.Int -- ^ @collector@ - 'P.collector'
     -> P.Resource (DeviceResource s)
-deviceResource _collector _ipAddr =
+deviceResource _ipAddr _collector =
     TF.unsafeResource "logicmonitor_device" TF.validator $
         DeviceResource'
             { _collector = _collector

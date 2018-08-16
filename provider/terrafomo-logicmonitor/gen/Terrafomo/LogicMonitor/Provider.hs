@@ -72,11 +72,11 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @api_id@ - 'P.apiId'
+    :: P.Text -- ^ @company@ - 'P.company'
+    -> P.Text -- ^ @api_id@ - 'P.apiId'
     -> P.Text -- ^ @api_key@ - 'P.apiKey'
-    -> P.Text -- ^ @company@ - 'P.company'
     -> Provider
-newProvider _apiId _apiKey _company =
+newProvider _company _apiId _apiKey =
     Provider'
         { _apiId = _apiId
         , _apiKey = _apiKey
