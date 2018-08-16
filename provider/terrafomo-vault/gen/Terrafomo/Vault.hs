@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Vault
-    ( module Terrafomo.Vault.DataSource
-    , module Terrafomo.Vault.Lens
-    , module Terrafomo.Vault.Provider
-    , module Terrafomo.Vault.Resource
-    , module Terrafomo.Vault.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Vault.Provider
+
+    -- * Custom Types
     , module Terrafomo.Vault.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.Vault.DataSource
+
+    -- * Resources
+    , module Terrafomo.Vault.Resource
+
+    -- * Settings
+    , module Terrafomo.Vault.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Vault.Lens
     ) where
 
 import Terrafomo.Vault.DataSource

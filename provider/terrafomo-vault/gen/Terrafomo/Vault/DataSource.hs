@@ -17,7 +17,6 @@
 --
 module Terrafomo.Vault.DataSource
     (
-    -- * DataSource Datatypes
     -- ** vault_approle_auth_backend_role_id
       ApproleAuthBackendRoleIdData (..)
     , approleAuthBackendRoleIdData
@@ -71,6 +70,7 @@ data ApproleAuthBackendRoleIdData s = ApproleAuthBackendRoleIdData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_approle_auth_backend_role_id@ datasource value.
 approleAuthBackendRoleIdData
     :: TF.Attr s P.Text -- ^ @role_name@ - 'P.roleName'
     -> P.DataSource (ApproleAuthBackendRoleIdData s)
@@ -126,6 +126,7 @@ data AwsAccessCredentialsData s = AwsAccessCredentialsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_aws_access_credentials@ datasource value.
 awsAccessCredentialsData
     :: TF.Attr s P.Text -- ^ @backend@ - 'P.backend'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
@@ -198,6 +199,7 @@ data GenericSecretData s = GenericSecretData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_generic_secret@ datasource value.
 genericSecretData
     :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> P.DataSource (GenericSecretData s)

@@ -17,7 +17,6 @@
 --
 module Terrafomo.Vault.Resource
     (
-    -- * Resource Datatypes
     -- ** vault_approle_auth_backend_login
       ApproleAuthBackendLoginResource (..)
     , approleAuthBackendLoginResource
@@ -147,6 +146,7 @@ data ApproleAuthBackendLoginResource s = ApproleAuthBackendLoginResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_approle_auth_backend_login@ resource value.
 approleAuthBackendLoginResource
     :: TF.Attr s P.Text -- ^ @role_id@ - 'P.roleId'
     -> P.Resource (ApproleAuthBackendLoginResource s)
@@ -265,6 +265,7 @@ data ApproleAuthBackendRoleResource s = ApproleAuthBackendRoleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_approle_auth_backend_role@ resource value.
 approleAuthBackendRoleResource
     :: TF.Attr s P.Text -- ^ @role_name@ - 'P.roleName'
     -> P.Resource (ApproleAuthBackendRoleResource s)
@@ -386,6 +387,7 @@ data ApproleAuthBackendRoleSecretIdResource s = ApproleAuthBackendRoleSecretIdRe
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_approle_auth_backend_role_secret_id@ resource value.
 approleAuthBackendRoleSecretIdResource
     :: TF.Attr s P.Text -- ^ @role_name@ - 'P.roleName'
     -> P.Resource (ApproleAuthBackendRoleSecretIdResource s)
@@ -453,6 +455,7 @@ data AuthBackendResource s = AuthBackendResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_auth_backend@ resource value.
 authBackendResource
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (AuthBackendResource s)
@@ -513,6 +516,7 @@ data AwsAuthBackendCertResource s = AwsAuthBackendCertResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_aws_auth_backend_cert@ resource value.
 awsAuthBackendCertResource
     :: TF.Attr s P.Text -- ^ @aws_public_cert@ - 'P.awsPublicCert'
     -> TF.Attr s P.Text -- ^ @cert_name@ - 'P.certName'
@@ -596,6 +600,7 @@ data AwsAuthBackendClientResource s = AwsAuthBackendClientResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_aws_auth_backend_client@ resource value.
 awsAuthBackendClientResource
     :: P.Resource (AwsAuthBackendClientResource s)
 awsAuthBackendClientResource =
@@ -682,6 +687,7 @@ data AwsAuthBackendIdentityWhitelistResource s = AwsAuthBackendIdentityWhitelist
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_aws_auth_backend_identity_whitelist@ resource value.
 awsAuthBackendIdentityWhitelistResource
     :: P.Resource (AwsAuthBackendIdentityWhitelistResource s)
 awsAuthBackendIdentityWhitelistResource =
@@ -762,6 +768,7 @@ data AwsAuthBackendLoginResource s = AwsAuthBackendLoginResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_aws_auth_backend_login@ resource value.
 awsAuthBackendLoginResource
     :: P.Resource (AwsAuthBackendLoginResource s)
 awsAuthBackendLoginResource =
@@ -953,6 +960,7 @@ data AwsAuthBackendRoleResource s = AwsAuthBackendRoleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_aws_auth_backend_role@ resource value.
 awsAuthBackendRoleResource
     :: TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (AwsAuthBackendRoleResource s)
@@ -1146,6 +1154,7 @@ data AwsAuthBackendRoleTagResource s = AwsAuthBackendRoleTagResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_aws_auth_backend_role_tag@ resource value.
 awsAuthBackendRoleTagResource
     :: TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (AwsAuthBackendRoleTagResource s)
@@ -1239,6 +1248,7 @@ data AwsAuthBackendStsRoleResource s = AwsAuthBackendStsRoleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_aws_auth_backend_sts_role@ resource value.
 awsAuthBackendStsRoleResource
     :: TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
     -> TF.Attr s P.Text -- ^ @sts_role@ - 'P.stsRole'
@@ -1302,6 +1312,7 @@ data AwsSecretBackendResource s = AwsSecretBackendResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_aws_secret_backend@ resource value.
 awsSecretBackendResource
     :: TF.Attr s P.Text -- ^ @access_key@ - 'P.accessKey'
     -> TF.Attr s P.Text -- ^ @secret_key@ - 'P.secretKey'
@@ -1387,6 +1398,7 @@ data AwsSecretBackendRoleResource s = AwsSecretBackendRoleResource'
     -- * 'policy'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_aws_secret_backend_role@ resource value.
 awsSecretBackendRoleResource
     :: TF.Attr s P.Text -- ^ @backend@ - 'P.backend'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1552,6 +1564,7 @@ data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnection
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_database_secret_backend_connection@ resource value.
 databaseSecretBackendConnectionResource
     :: TF.Attr s P.Text -- ^ @backend@ - 'P.backend'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1756,6 +1769,7 @@ data DatabaseSecretBackendRoleResource s = DatabaseSecretBackendRoleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_database_secret_backend_role@ resource value.
 databaseSecretBackendRoleResource
     :: TF.Attr s P.Text -- ^ @backend@ - 'P.backend'
     -> TF.Attr s P.Text -- ^ @db_name@ - 'P.dbName'
@@ -1859,6 +1873,7 @@ data GenericSecretResource s = GenericSecretResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_generic_secret@ resource value.
 genericSecretResource
     :: TF.Attr s P.Text -- ^ @data_json@ - 'P.dataJson'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
@@ -1918,6 +1933,7 @@ data MountResource s = MountResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_mount@ resource value.
 mountResource
     :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -2002,6 +2018,7 @@ data OktaAuthBackendResource s = OktaAuthBackendResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_okta_auth_backend@ resource value.
 oktaAuthBackendResource
     :: TF.Attr s P.Text -- ^ @organization@ - 'P.organization'
     -> P.Resource (OktaAuthBackendResource s)
@@ -2094,6 +2111,7 @@ data OktaAuthBackendGroupResource s = OktaAuthBackendGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_okta_auth_backend_group@ resource value.
 oktaAuthBackendGroupResource
     :: TF.Attr s P.Text -- ^ @group_name@ - 'P.groupName'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
@@ -2157,6 +2175,7 @@ data OktaAuthBackendUserResource s = OktaAuthBackendUserResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_okta_auth_backend_user@ resource value.
 oktaAuthBackendUserResource
     :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
@@ -2219,6 +2238,7 @@ data PolicyResource s = PolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vault_policy@ resource value.
 policyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @policy@ - 'P.policy'

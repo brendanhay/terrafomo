@@ -17,7 +17,6 @@
 --
 module Terrafomo.Vault.Settings
     (
-    -- * Settings Datatypes
     -- ** cassandra
       CassandraSetting (..)
     , newCassandraSetting
@@ -128,6 +127,7 @@ data CassandraSetting s = CassandraSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @cassandra@ settings value.
 newCassandraSetting
     :: CassandraSetting s
 newCassandraSetting =
@@ -225,6 +225,7 @@ data ClientAuthSetting = ClientAuthSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @client_auth@ settings value.
 newClientAuthSetting
     :: P.Text -- ^ @cert_file@ - 'P.certFile'
     -> P.Text -- ^ @key_file@ - 'P.keyFile'
@@ -267,6 +268,7 @@ data GroupSetting s = GroupSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @group@ settings value.
 newGroupSetting
     :: TF.Attr s P.Text -- ^ @group_name@ - 'P.groupName'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @policies@ - 'P.policies'
@@ -317,6 +319,7 @@ data HanaSetting s = HanaSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @hana@ settings value.
 newHanaSetting
     :: HanaSetting s
 newHanaSetting =
@@ -367,6 +370,7 @@ data MongodbSetting s = MongodbSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @mongodb@ settings value.
 newMongodbSetting
     :: MongodbSetting s
 newMongodbSetting =
@@ -408,6 +412,7 @@ data MssqlSetting s = MssqlSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @mssql@ settings value.
 newMssqlSetting
     :: MssqlSetting s
 newMssqlSetting =
@@ -470,6 +475,7 @@ data MysqlSetting s = MysqlSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @mysql@ settings value.
 newMysqlSetting
     :: MysqlSetting s
 newMysqlSetting =
@@ -532,6 +538,7 @@ data OracleSetting s = OracleSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @oracle@ settings value.
 newOracleSetting
     :: OracleSetting s
 newOracleSetting =
@@ -594,6 +601,7 @@ data PostgresqlSetting s = PostgresqlSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @postgresql@ settings value.
 newPostgresqlSetting
     :: PostgresqlSetting s
 newPostgresqlSetting =
@@ -652,6 +660,7 @@ data UserSetting s = UserSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @user@ settings value.
 newUserSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @groups@ - 'P.groups'
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
