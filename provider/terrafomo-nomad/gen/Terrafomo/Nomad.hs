@@ -12,12 +12,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Nomad
-    ( module Terrafomo.Nomad.Lens
-    , module Terrafomo.Nomad.Settings
+    ( module Terrafomo.Nomad.DataSource
+    , module Terrafomo.Nomad.Lens
     , module Terrafomo.Nomad.Provider
     , module Terrafomo.Nomad.Resource
+    , module Terrafomo.Nomad.Settings
     , module Terrafomo.Nomad.Types
-    , module Terrafomo.Nomad.DataSource
     -- * Provider Aliases
     ) where
 

@@ -50,10 +50,9 @@ import GHC.Base (($))
 
 import Terrafomo.Nomad.Settings
 
-import qualified Data.Hashable            as P
-import qualified Data.HashMap.Strict      as P
-import qualified Data.HashMap.Strict      as Map
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Map.Strict          as P
+import qualified Data.Map.Strict          as Map
 import qualified Data.Maybe               as P
 import qualified Data.Monoid              as P
 import qualified Data.Text                as P
@@ -87,14 +86,14 @@ data AclPolicyResource s = AclPolicyResource'
     -- HCL or JSON representation of the rules to enforce on this policy. Use
     -- file() to specify a file as input.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 aclPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @rules_hcl@ - 'P.rulesHcl'
     -> P.Resource (AclPolicyResource s)
 aclPolicyResource _name _rulesHcl =
-    TF.newResource "nomad_acl_policy" TF.validator $
+    TF.unsafeResource "nomad_acl_policy" P.defaultProvider TF.validator $
         AclPolicyResource'
             { _description = TF.Nil
             , _name = _name
@@ -147,13 +146,13 @@ data AclTokenResource s = AclTokenResource'
     -- ^ @type@ - (Required)
     -- The type of token to create, 'client' or 'management'.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 aclTokenResource
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (AclTokenResource s)
 aclTokenResource _type' =
-    TF.newResource "nomad_acl_token" TF.validator $
+    TF.unsafeResource "nomad_acl_token" P.defaultProvider TF.validator $
         AclTokenResource'
             { _global = TF.value P.False
             , _name = TF.Nil
@@ -219,13 +218,13 @@ data JobResource s = JobResource'
     -- ^ @policy_override@ - (Optional)
     -- Override any soft-mandatory Sentinel policies that fail.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 jobResource
     :: TF.Attr s P.Text -- ^ @jobspec@ - 'P.jobspec'
     -> P.Resource (JobResource s)
 jobResource _jobspec =
-    TF.newResource "nomad_job" TF.validator $
+    TF.unsafeResource "nomad_job" P.defaultProvider TF.validator $
         JobResource'
             { _deregisterOnDestroy = TF.value P.True
             , _deregisterOnIdChange = TF.value P.True
@@ -281,13 +280,13 @@ data NamespaceResource s = NamespaceResource'
     -- ^ @quota@ - (Optional)
     -- Quota to set for this namespace.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 namespaceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NamespaceResource s)
 namespaceResource _name =
-    TF.newResource "nomad_namespace" TF.validator $
+    TF.unsafeResource "nomad_namespace" P.defaultProvider TF.validator $
         NamespaceResource'
             { _description = TF.Nil
             , _name = _name
@@ -328,7 +327,7 @@ data QuotaSpecificationResource s = QuotaSpecificationResource'
     -- ^ @description@ - (Optional)
     -- Description for this quota specification.
     --
-    , _limits      :: TF.Attr s [TF.Attr s (QuotaSpecificationLimits s)]
+    , _limits      :: TF.Attr s [TF.Attr s (LimitsSetting s)]
     -- ^ @limits@ - (Required)
     -- Limits encapsulated by this quota specification.
     --
@@ -336,14 +335,14 @@ data QuotaSpecificationResource s = QuotaSpecificationResource'
     -- ^ @name@ - (Required, Forces New)
     -- Unique name for this quota specification.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 quotaSpecificationResource
-    :: TF.Attr s [TF.Attr s (QuotaSpecificationLimits s)] -- ^ @limits@ - 'P.limits'
+    :: TF.Attr s [TF.Attr s (LimitsSetting s)] -- ^ @limits@ - 'P.limits'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (QuotaSpecificationResource s)
 quotaSpecificationResource _limits _name =
-    TF.newResource "nomad_quota_specification" TF.validator $
+    TF.unsafeResource "nomad_quota_specification" P.defaultProvider TF.validator $
         QuotaSpecificationResource'
             { _description = TF.Nil
             , _limits = _limits
@@ -359,19 +358,15 @@ instance TF.IsObject (QuotaSpecificationResource s) where
 
 instance TF.IsValid (QuotaSpecificationResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_limits"
-                  (_limits
-                      :: QuotaSpecificationResource s -> TF.Attr s [TF.Attr s (QuotaSpecificationLimits s)])
-                  TF.validator
 
 instance P.HasDescription (QuotaSpecificationResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: QuotaSpecificationResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: QuotaSpecificationResource s)
 
-instance P.HasLimits (QuotaSpecificationResource s) (TF.Attr s [TF.Attr s (QuotaSpecificationLimits s)]) where
+instance P.HasLimits (QuotaSpecificationResource s) (TF.Attr s [TF.Attr s (LimitsSetting s)]) where
     limits =
-        P.lens (_limits :: QuotaSpecificationResource s -> TF.Attr s [TF.Attr s (QuotaSpecificationLimits s)])
+        P.lens (_limits :: QuotaSpecificationResource s -> TF.Attr s [TF.Attr s (LimitsSetting s)])
                (\s a -> s { _limits = a } :: QuotaSpecificationResource s)
 
 instance P.HasName (QuotaSpecificationResource s) (TF.Attr s P.Text) where
@@ -405,7 +400,7 @@ data SentinelPolicyResource s = SentinelPolicyResource'
     -- Specifies the scope for this policy. Only 'submit-job' is currently
     -- supported.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 sentinelPolicyResource
     :: TF.Attr s P.Text -- ^ @enforcement_level@ - 'P.enforcementLevel'
@@ -414,7 +409,7 @@ sentinelPolicyResource
     -> TF.Attr s P.Text -- ^ @scope@ - 'P.scope'
     -> P.Resource (SentinelPolicyResource s)
 sentinelPolicyResource _enforcementLevel _name _policy _scope =
-    TF.newResource "nomad_sentinel_policy" TF.validator $
+    TF.unsafeResource "nomad_sentinel_policy" P.defaultProvider TF.validator $
         SentinelPolicyResource'
             { _description = TF.Nil
             , _enforcementLevel = _enforcementLevel
