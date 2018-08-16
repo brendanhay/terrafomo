@@ -59,9 +59,9 @@ data MemberSetting s = MemberSetting'
 
 -- | Construct a new @member@ settings value.
 newMemberSetting
-    :: TF.Attr s P.Text -- ^ @external_id@ - 'P.externalId'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Attr s P.Text -- ^ @external_id_type@ - 'P.externalIdType'
+    :: TF.Attr s P.Text -- ^ 'P._externalId': @external_id@
+    -> TF.Attr s P.Text -- ^ 'P._role': @role@
+    -> TF.Attr s P.Text -- ^ 'P._externalIdType': @external_id_type@
     -> MemberSetting s
 newMemberSetting _externalId _role _externalIdType =
     MemberSetting'

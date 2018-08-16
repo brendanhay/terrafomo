@@ -106,10 +106,10 @@ data CertificateResource s = CertificateResource'
 
 -- | Define a new @rancher_certificate@ resource value.
 certificateResource
-    :: TF.Attr s P.Text -- ^ @cert@ - 'P.cert'
-    -> TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
-    -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @cert@ ('P._cert', 'P.cert')
+    -> TF.Attr s P.Text -- ^ @environment_id@ ('P._environmentId', 'P.environmentId')
+    -> TF.Attr s P.Text -- ^ @key@ ('P._key', 'P.key')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (CertificateResource s)
 certificateResource _cert _environmentId _key _name =
     TF.unsafeResource "rancher_certificate" TF.validator $
@@ -213,7 +213,7 @@ data EnvironmentResource s = EnvironmentResource'
 
 -- | Define a new @rancher_environment@ resource value.
 environmentResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (EnvironmentResource s)
 environmentResource _name =
     TF.unsafeResource "rancher_environment" TF.validator $
@@ -277,9 +277,9 @@ data HostResource s = HostResource'
 
 -- | Define a new @rancher_host@ resource value.
 hostResource
-    :: TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
-    -> TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @hostname@ ('P._hostname', 'P.hostname')
+    -> TF.Attr s P.Text -- ^ @environment_id@ ('P._environmentId', 'P.environmentId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (HostResource s)
 hostResource _hostname _environmentId _name =
     TF.unsafeResource "rancher_host" TF.validator $
@@ -355,8 +355,8 @@ data RegistrationTokenResource s = RegistrationTokenResource'
 
 -- | Define a new @rancher_registration_token@ resource value.
 registrationTokenResource
-    :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @environment_id@ ('P._environmentId', 'P.environmentId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (RegistrationTokenResource s)
 registrationTokenResource _environmentId _name =
     TF.unsafeResource "rancher_registration_token" TF.validator $
@@ -441,9 +441,9 @@ data RegistryResource s = RegistryResource'
 
 -- | Define a new @rancher_registry@ resource value.
 registryResource
-    :: TF.Attr s P.Text -- ^ @server_address@ - 'P.serverAddress'
-    -> TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @server_address@ ('P._serverAddress', 'P.serverAddress')
+    -> TF.Attr s P.Text -- ^ @environment_id@ ('P._environmentId', 'P.environmentId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (RegistryResource s)
 registryResource _serverAddress _environmentId _name =
     TF.unsafeResource "rancher_registry" TF.validator $
@@ -512,10 +512,10 @@ data RegistryCredentialResource s = RegistryCredentialResource'
 
 -- | Define a new @rancher_registry_credential@ resource value.
 registryCredentialResource
-    :: TF.Attr s P.Text -- ^ @registry_id@ - 'P.registryId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @public_value@ - 'P.publicValue'
-    -> TF.Attr s P.Text -- ^ @secret_value@ - 'P.secretValue'
+    :: TF.Attr s P.Text -- ^ @registry_id@ ('P._registryId', 'P.registryId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @public_value@ ('P._publicValue', 'P.publicValue')
+    -> TF.Attr s P.Text -- ^ @secret_value@ ('P._secretValue', 'P.secretValue')
     -> P.Resource (RegistryCredentialResource s)
 registryCredentialResource _registryId _name _publicValue _secretValue =
     TF.unsafeResource "rancher_registry_credential" TF.validator $
@@ -588,9 +588,9 @@ data SecretResource s = SecretResource'
 
 -- | Define a new @rancher_secret@ resource value.
 secretResource
-    :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
+    :: TF.Attr s P.Text -- ^ @environment_id@ ('P._environmentId', 'P.environmentId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @value@ ('P._value', 'P.value')
     -> P.Resource (SecretResource s)
 secretResource _environmentId _name _value =
     TF.unsafeResource "rancher_secret" TF.validator $
@@ -671,8 +671,8 @@ data StackResource s = StackResource'
 
 -- | Define a new @rancher_stack@ resource value.
 stackResource
-    :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @environment_id@ ('P._environmentId', 'P.environmentId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (StackResource s)
 stackResource _environmentId _name =
     TF.unsafeResource "rancher_stack" TF.validator $
@@ -782,9 +782,9 @@ data VolumeResource s = VolumeResource'
 
 -- | Define a new @rancher_volume@ resource value.
 volumeResource
-    :: TF.Attr s P.Text -- ^ @driver@ - 'P.driver'
-    -> TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @driver@ ('P._driver', 'P.driver')
+    -> TF.Attr s P.Text -- ^ @environment_id@ ('P._environmentId', 'P.environmentId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (VolumeResource s)
 volumeResource _driver _environmentId _name =
     TF.unsafeResource "rancher_volume" TF.validator $

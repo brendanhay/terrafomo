@@ -70,8 +70,8 @@ data CertificateData s = CertificateData'
 
 -- | Define a new @rancher_certificate@ datasource value.
 certificateData
-    :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @environment_id@ ('P._environmentId', 'P.environmentId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (CertificateData s)
 certificateData _environmentId _name =
     TF.unsafeDataSource "rancher_certificate" TF.validator $
@@ -147,7 +147,7 @@ data EnvironmentData s = EnvironmentData'
 
 -- | Define a new @rancher_environment@ datasource value.
 environmentData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (EnvironmentData s)
 environmentData _name =
     TF.unsafeDataSource "rancher_environment" TF.validator $
@@ -195,7 +195,7 @@ data SettingData s = SettingData'
 
 -- | Define a new @rancher_setting@ datasource value.
 settingData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (SettingData s)
 settingData _name =
     TF.unsafeDataSource "rancher_setting" TF.validator $
