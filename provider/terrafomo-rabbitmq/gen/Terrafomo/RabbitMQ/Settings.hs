@@ -121,12 +121,12 @@ data PolicySetting s = PolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newPolicySetting
-    :: TF.Attr s P.Text -- ^ @apply_to@ - 'P.applyTo'
-    -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @definition@ - 'P.definition'
+    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @definition@ - 'P.definition'
     -> TF.Attr s P.Text -- ^ @pattern@ - 'P.pattern''
     -> TF.Attr s P.Int -- ^ @priority@ - 'P.priority'
+    -> TF.Attr s P.Text -- ^ @apply_to@ - 'P.applyTo'
     -> PolicySetting s
-newPolicySetting _applyTo _definition _pattern' _priority =
+newPolicySetting _definition _pattern' _priority _applyTo =
     PolicySetting'
         { _applyTo = _applyTo
         , _definition = _definition

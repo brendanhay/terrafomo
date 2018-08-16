@@ -99,11 +99,11 @@ data BindingResource s = BindingResource'
 
 bindingResource
     :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
-    -> TF.Attr s P.Text -- ^ @destination_type@ - 'P.destinationType'
     -> TF.Attr s P.Text -- ^ @source@ - 'P.source'
+    -> TF.Attr s P.Text -- ^ @destination_type@ - 'P.destinationType'
     -> TF.Attr s P.Text -- ^ @vhost@ - 'P.vhost'
     -> P.Resource (BindingResource s)
-bindingResource _destination _destinationType _source _vhost =
+bindingResource _destination _source _destinationType _vhost =
     TF.unsafeResource "rabbitmq_binding" TF.validator $
         BindingResource'
             { _arguments = TF.Nil
