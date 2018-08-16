@@ -12,12 +12,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.VCloudDirector
-    ( module Terrafomo.VCloudDirector.Lens
-    , module Terrafomo.VCloudDirector.Provider
-    , module Terrafomo.VCloudDirector.Resource
-    , module Terrafomo.VCloudDirector.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.VCloudDirector.Provider
+
+    -- * Custom Types
     , module Terrafomo.VCloudDirector.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+
+    -- * Resources
+    , module Terrafomo.VCloudDirector.Resource
+
+    -- * Settings
+    , module Terrafomo.VCloudDirector.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.VCloudDirector.Lens
     ) where
 
 import Terrafomo.VCloudDirector.Lens

@@ -17,7 +17,6 @@
 --
 module Terrafomo.VCloudDirector.Settings
     (
-    -- * Settings Datatypes
     -- ** dhcp_pool
       DhcpPoolSetting (..)
     , newDhcpPoolSetting
@@ -77,6 +76,7 @@ data DhcpPoolSetting s = DhcpPoolSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @dhcp_pool@ settings value.
 newDhcpPoolSetting
     :: TF.Attr s P.Text -- ^ @end_address@ - 'P.endAddress'
     -> TF.Attr s P.Text -- ^ @start_address@ - 'P.startAddress'
@@ -134,6 +134,7 @@ data LocalSubnetsSetting s = LocalSubnetsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @local_subnets@ settings value.
 newLocalSubnetsSetting
     :: TF.Attr s P.Text -- ^ @local_subnet_gateway@ - 'P.localSubnetGateway'
     -> TF.Attr s P.Text -- ^ @local_subnet_mask@ - 'P.localSubnetMask'
@@ -185,6 +186,7 @@ data PeerSubnetsSetting s = PeerSubnetsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @peer_subnets@ settings value.
 newPeerSubnetsSetting
     :: TF.Attr s P.Text -- ^ @peer_subnet_gateway@ - 'P.peerSubnetGateway'
     -> TF.Attr s P.Text -- ^ @peer_subnet_mask@ - 'P.peerSubnetMask'
@@ -248,6 +250,7 @@ data RuleSetting s = RuleSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @rule@ settings value.
 newRuleSetting
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @destination_ip@ - 'P.destinationIp'
@@ -331,6 +334,7 @@ data StaticIpPoolSetting s = StaticIpPoolSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @static_ip_pool@ settings value.
 newStaticIpPoolSetting
     :: TF.Attr s P.Text -- ^ @end_address@ - 'P.endAddress'
     -> TF.Attr s P.Text -- ^ @start_address@ - 'P.startAddress'

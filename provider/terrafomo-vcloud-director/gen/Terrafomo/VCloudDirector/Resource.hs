@@ -17,7 +17,6 @@
 --
 module Terrafomo.VCloudDirector.Resource
     (
-    -- * Resource Datatypes
     -- ** vcd_dnat
       DnatResource (..)
     , dnatResource
@@ -94,6 +93,7 @@ data DnatResource s = DnatResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vcd_dnat@ resource value.
 dnatResource
     :: TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
     -> TF.Attr s P.Text -- ^ @external_ip@ - 'P.externalIp'
@@ -193,6 +193,7 @@ data EdgegatewayVpnResource s = EdgegatewayVpnResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vcd_edgegateway_vpn@ resource value.
 edgegatewayVpnResource
     :: TF.Attr s P.Text -- ^ @local_ip_address@ - 'P.localIpAddress'
     -> TF.Attr s P.Text -- ^ @peer_ip_address@ - 'P.peerIpAddress'
@@ -319,6 +320,7 @@ data FirewallRulesResource s = FirewallRulesResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vcd_firewall_rules@ resource value.
 firewallRulesResource
     :: TF.Attr s P.Text -- ^ @default_action@ - 'P.defaultAction'
     -> TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
@@ -399,6 +401,7 @@ data NetworkResource s = NetworkResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vcd_network@ resource value.
 networkResource
     :: TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
     -> TF.Attr s P.Text -- ^ @gateway@ - 'P.gateway'
@@ -515,6 +518,7 @@ data SnatResource s = SnatResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vcd_snat@ resource value.
 snatResource
     :: TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
     -> TF.Attr s P.Text -- ^ @external_ip@ - 'P.externalIp'
@@ -599,6 +603,7 @@ data VappResource s = VappResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vcd_vapp@ resource value.
 vappResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (VappResource s)
@@ -744,6 +749,7 @@ data VappVmResource s = VappVmResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vcd_vapp_vm@ resource value.
 vappVmResource
     :: TF.Attr s P.Text -- ^ @catalog_name@ - 'P.catalogName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
