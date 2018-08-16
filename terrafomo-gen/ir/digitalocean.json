@@ -132,23 +132,6 @@
                     "original": "entry_port"
                 },
                 {
-                    "default": "_entryProtocol",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"entry_protocol\" <$> TF.attribute",
-                    "name": "_entryProtocol",
-                    "method": "entryProtocol",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasEntryProtocol",
-                    "validate": false,
-                    "optional": false,
-                    "original": "entry_protocol"
-                },
-                {
                     "default": "_targetPort",
                     "computed": false,
                     "required": true,
@@ -164,6 +147,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "target_port"
+                },
+                {
+                    "default": "_entryProtocol",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"entry_protocol\" <$> TF.attribute",
+                    "name": "_entryProtocol",
+                    "method": "entryProtocol",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEntryProtocol",
+                    "validate": false,
+                    "optional": false,
+                    "original": "entry_protocol"
                 },
                 {
                     "default": "_targetProtocol",
@@ -1413,23 +1413,6 @@
                     "original": "leaf_certificate"
                 },
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_privateKey",
                     "computed": false,
                     "required": true,
@@ -1445,6 +1428,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "private_key"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 }
             ],
             "conflicts": [],
@@ -2459,23 +2459,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_forwardingRule",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"forwarding_rule\" <$> TF.attribute",
-                    "name": "_forwardingRule",
-                    "method": "forwardingRule",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRuleSetting s)))",
-                    "class": "HasForwardingRule",
-                    "validate": false,
-                    "optional": false,
-                    "original": "forwarding_rule"
-                },
-                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -2508,6 +2491,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "region"
+                },
+                {
+                    "default": "_forwardingRule",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"forwarding_rule\" <$> TF.attribute",
+                    "name": "_forwardingRule",
+                    "method": "forwardingRule",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRuleSetting s)))",
+                    "class": "HasForwardingRule",
+                    "validate": false,
+                    "optional": false,
+                    "original": "forwarding_rule"
                 }
             ],
             "conflicts": [],
@@ -2837,23 +2837,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_publicKey",
                     "computed": false,
                     "required": true,
@@ -2869,6 +2852,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "public_key"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 }
             ],
             "conflicts": [],
