@@ -177,7 +177,7 @@ data DbInstancesData s = DbInstancesData'
 dbInstancesData
     :: P.DataSource (DbInstancesData s)
 dbInstancesData =
-    TF.unsafeDataSource "alicloud_db_instances" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_db_instances" TF.validator $
         DbInstancesData'
             { _connectionMode = TF.Nil
             , _dbType = TF.Nil
@@ -273,7 +273,7 @@ data DnsDomainGroupsData s = DnsDomainGroupsData'
 dnsDomainGroupsData
     :: P.DataSource (DnsDomainGroupsData s)
 dnsDomainGroupsData =
-    TF.unsafeDataSource "alicloud_dns_domain_groups" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_dns_domain_groups" TF.validator $
         DnsDomainGroupsData'
             { _nameRegex = TF.Nil
             , _outputFile = TF.Nil
@@ -339,7 +339,7 @@ dnsDomainRecordsData
     :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
     -> P.DataSource (DnsDomainRecordsData s)
 dnsDomainRecordsData _domainName =
-    TF.unsafeDataSource "alicloud_dns_domain_records" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_dns_domain_records" TF.validator $
         DnsDomainRecordsData'
             { _domainName = _domainName
             , _hostRecordRegex = TF.Nil
@@ -440,7 +440,7 @@ data DnsDomainsData s = DnsDomainsData'
 dnsDomainsData
     :: P.DataSource (DnsDomainsData s)
 dnsDomainsData =
-    TF.unsafeDataSource "alicloud_dns_domains" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_dns_domains" TF.validator $
         DnsDomainsData'
             { _aliDomain = TF.Nil
             , _domainNameRegex = TF.Nil
@@ -515,7 +515,7 @@ data DnsGroupsData s = DnsGroupsData'
 dnsGroupsData
     :: P.DataSource (DnsGroupsData s)
 dnsGroupsData =
-    TF.unsafeDataSource "alicloud_dns_groups" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_dns_groups" TF.validator $
         DnsGroupsData'
             { _nameRegex = TF.Nil
             , _outputFile = TF.Nil
@@ -581,7 +581,7 @@ dnsRecordsData
     :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
     -> P.DataSource (DnsRecordsData s)
 dnsRecordsData _domainName =
-    TF.unsafeDataSource "alicloud_dns_records" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_dns_records" TF.validator $
         DnsRecordsData'
             { _domainName = _domainName
             , _hostRecordRegex = TF.Nil
@@ -673,7 +673,7 @@ data EipsData s = EipsData'
 eipsData
     :: P.DataSource (EipsData s)
 eipsData =
-    TF.unsafeDataSource "alicloud_eips" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_eips" TF.validator $
         EipsData'
             { _ids = TF.Nil
             , _ipAddresses = TF.Nil
@@ -733,7 +733,7 @@ data ImagesData s = ImagesData'
 imagesData
     :: P.DataSource (ImagesData s)
 imagesData =
-    TF.unsafeDataSource "alicloud_images" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_images" TF.validator $
         ImagesData'
             { _mostRecent = TF.value P.False
             , _nameRegex = TF.Nil
@@ -815,7 +815,7 @@ data InstanceTypesData s = InstanceTypesData'
 instanceTypesData
     :: P.DataSource (InstanceTypesData s)
 instanceTypesData =
-    TF.unsafeDataSource "alicloud_instance_types" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_instance_types" TF.validator $
         InstanceTypesData'
             { _availabilityZone = TF.Nil
             , _cpuCoreCount = TF.Nil
@@ -932,7 +932,7 @@ data InstancesData s = InstancesData'
 instancesData
     :: P.DataSource (InstancesData s)
 instancesData =
-    TF.unsafeDataSource "alicloud_instances" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_instances" TF.validator $
         InstancesData'
             { _availabilityZone = TF.Nil
             , _ids = TF.Nil
@@ -1028,7 +1028,7 @@ data KeyPairsData s = KeyPairsData'
 keyPairsData
     :: P.DataSource (KeyPairsData s)
 keyPairsData =
-    TF.unsafeDataSource "alicloud_key_pairs" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_key_pairs" TF.validator $
         KeyPairsData'
             { _nameRegex = TF.Nil
             , _outputFile = TF.Nil
@@ -1084,7 +1084,7 @@ data KmsKeysData s = KmsKeysData'
 kmsKeysData
     :: P.DataSource (KmsKeysData s)
 kmsKeysData =
-    TF.unsafeDataSource "alicloud_kms_keys" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_kms_keys" TF.validator $
         KmsKeysData'
             { _descriptionRegex = TF.Nil
             , _ids = TF.Nil
@@ -1142,7 +1142,7 @@ data RamAccountAliasData s = RamAccountAliasData'
 ramAccountAliasData
     :: P.DataSource (RamAccountAliasData s)
 ramAccountAliasData =
-    TF.unsafeDataSource "alicloud_ram_account_alias" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_ram_account_alias" TF.validator $
         RamAccountAliasData'
             { _outputFile = TF.Nil
             }
@@ -1179,7 +1179,7 @@ data RamAccountAliasesData s = RamAccountAliasesData'
 ramAccountAliasesData
     :: P.DataSource (RamAccountAliasesData s)
 ramAccountAliasesData =
-    TF.unsafeDataSource "alicloud_ram_account_aliases" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_ram_account_aliases" TF.validator $
         RamAccountAliasesData'
             { _outputFile = TF.Nil
             }
@@ -1228,7 +1228,7 @@ data RamGroupsData s = RamGroupsData'
 ramGroupsData
     :: P.DataSource (RamGroupsData s)
 ramGroupsData =
-    TF.unsafeDataSource "alicloud_ram_groups" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_ram_groups" TF.validator $
         RamGroupsData'
             { _nameRegex = TF.Nil
             , _outputFile = TF.Nil
@@ -1308,7 +1308,7 @@ data RamPoliciesData s = RamPoliciesData'
 ramPoliciesData
     :: P.DataSource (RamPoliciesData s)
 ramPoliciesData =
-    TF.unsafeDataSource "alicloud_ram_policies" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_ram_policies" TF.validator $
         RamPoliciesData'
             { _groupName = TF.Nil
             , _nameRegex = TF.Nil
@@ -1389,7 +1389,7 @@ data RamRolesData s = RamRolesData'
 ramRolesData
     :: P.DataSource (RamRolesData s)
 ramRolesData =
-    TF.unsafeDataSource "alicloud_ram_roles" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_ram_roles" TF.validator $
         RamRolesData'
             { _nameRegex = TF.Nil
             , _outputFile = TF.Nil
@@ -1459,7 +1459,7 @@ data RamUsersData s = RamUsersData'
 ramUsersData
     :: P.DataSource (RamUsersData s)
 ramUsersData =
-    TF.unsafeDataSource "alicloud_ram_users" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_ram_users" TF.validator $
         RamUsersData'
             { _groupName = TF.Nil
             , _nameRegex = TF.Nil
@@ -1524,7 +1524,7 @@ data RegionsData s = RegionsData'
 regionsData
     :: P.DataSource (RegionsData s)
 regionsData =
-    TF.unsafeDataSource "alicloud_regions" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_regions" TF.validator $
         RegionsData'
             { _outputFile = TF.Nil
             }
@@ -1583,7 +1583,7 @@ securityGroupRulesData
     :: TF.Attr s P.Text -- ^ @group_id@ - 'P.groupId'
     -> P.DataSource (SecurityGroupRulesData s)
 securityGroupRulesData _groupId =
-    TF.unsafeDataSource "alicloud_security_group_rules" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_security_group_rules" TF.validator $
         SecurityGroupRulesData'
             { _direction = TF.Nil
             , _groupId = _groupId
@@ -1667,7 +1667,7 @@ data SecurityGroupsData s = SecurityGroupsData'
 securityGroupsData
     :: P.DataSource (SecurityGroupsData s)
 securityGroupsData =
-    TF.unsafeDataSource "alicloud_security_groups" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_security_groups" TF.validator $
         SecurityGroupsData'
             { _nameRegex = TF.Nil
             , _outputFile = TF.Nil
@@ -1733,7 +1733,7 @@ data VpcsData s = VpcsData'
 vpcsData
     :: P.DataSource (VpcsData s)
 vpcsData =
-    TF.unsafeDataSource "alicloud_vpcs" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_vpcs" TF.validator $
         VpcsData'
             { _cidrBlock = TF.Nil
             , _isDefault = TF.Nil
@@ -1820,7 +1820,7 @@ data VswitchesData s = VswitchesData'
 vswitchesData
     :: P.DataSource (VswitchesData s)
 vswitchesData =
-    TF.unsafeDataSource "alicloud_vswitches" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_vswitches" TF.validator $
         VswitchesData'
             { _cidrBlock = TF.Nil
             , _isDefault = TF.Nil
@@ -1913,7 +1913,7 @@ data ZonesData s = ZonesData'
 zonesData
     :: P.DataSource (ZonesData s)
 zonesData =
-    TF.unsafeDataSource "alicloud_zones" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "alicloud_zones" TF.validator $
         ZonesData'
             { _availableDiskCategory = TF.Nil
             , _availableInstanceType = TF.Nil
