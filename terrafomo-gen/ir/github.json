@@ -3110,23 +3110,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_repository",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"repository\" <$> TF.attribute",
-                    "name": "_repository",
-                    "method": "repository",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasRepository",
-                    "validate": false,
-                    "optional": false,
-                    "original": "repository"
-                },
-                {
                     "default": "_teamId",
                     "computed": false,
                     "required": true,
@@ -3142,6 +3125,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "team_id"
+                },
+                {
+                    "default": "_repository",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"repository\" <$> TF.attribute",
+                    "name": "_repository",
+                    "method": "repository",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRepository",
+                    "validate": false,
+                    "optional": false,
+                    "original": "repository"
                 }
             ],
             "conflicts": [],
