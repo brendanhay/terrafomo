@@ -147,8 +147,8 @@ data FabricNetworkData s = FabricNetworkData'
 
 -- | Define a new @triton_fabric_network@ datasource value.
 fabricNetworkData
-    :: TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Int -- ^ @vlan_id@ ('P._vlanId', 'P.vlanId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (FabricNetworkData s)
 fabricNetworkData _vlanId _name =
     TF.unsafeDataSource "triton_fabric_network" TF.validator $
@@ -381,7 +381,7 @@ data NetworkData s = NetworkData'
 
 -- | Define a new @triton_network@ datasource value.
 networkData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (NetworkData s)
 networkData _name =
     TF.unsafeDataSource "triton_network" TF.validator $
@@ -423,7 +423,7 @@ data PackageData s = PackageData'
 
 -- | Define a new @triton_package@ datasource value.
 packageData
-    :: TF.Attr s [TF.Attr s (FilterSetting s)] -- ^ @filter@ - 'P.filter'
+    :: TF.Attr s [TF.Attr s (FilterSetting s)] -- ^ @filter@ ('P._filter', 'P.filter')
     -> P.DataSource (PackageData s)
 packageData _filter =
     TF.unsafeDataSource "triton_package" TF.validator $

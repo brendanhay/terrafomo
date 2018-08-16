@@ -202,7 +202,7 @@ data NicSetting s = NicSetting'
 
 -- | Construct a new @nic@ settings value.
 newNicSetting
-    :: TF.Attr s P.Text -- ^ @network@ - 'P.network'
+    :: TF.Attr s P.Text -- ^ 'P._network': @network@
     -> NicSetting s
 newNicSetting _network =
     NicSetting'

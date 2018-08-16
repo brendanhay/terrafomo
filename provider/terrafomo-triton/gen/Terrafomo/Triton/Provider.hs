@@ -17,10 +17,11 @@
 --
 module Terrafomo.Triton.Provider
     (
+    -- * Triton Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** Triton Specific Aliases
+    -- * Triton Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -80,10 +81,10 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @account@ - 'P.account'
-    -> P.Text -- ^ @key_id@ - 'P.keyId'
-    -> P.Text -- ^ @url@ - 'P.url'
-    -> P.Text -- ^ @user@ - 'P.user'
+    :: P.Text -- ^ @account@ ('P._account', 'P.account')
+    -> P.Text -- ^ @key_id@ ('P._keyId', 'P.keyId')
+    -> P.Text -- ^ @url@ ('P._url', 'P.url')
+    -> P.Text -- ^ @user@ ('P._user', 'P.user')
     -> Provider
 newProvider _account _keyId _url _user =
     Provider'
@@ -99,7 +100,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "triton"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "account" _account
             , TF.assign "insecure_skip_tls_verify" <$> _insecureSkipTlsVerify

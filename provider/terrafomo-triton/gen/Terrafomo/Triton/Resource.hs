@@ -116,11 +116,11 @@ data FabricResource s = FabricResource'
 
 -- | Define a new @triton_fabric@ resource value.
 fabricResource
-    :: TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
-    -> TF.Attr s P.Text -- ^ @provision_end_ip@ - 'P.provisionEndIp'
-    -> TF.Attr s P.Text -- ^ @provision_start_ip@ - 'P.provisionStartIp'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @subnet@ - 'P.subnet'
+    :: TF.Attr s P.Int -- ^ @vlan_id@ ('P._vlanId', 'P.vlanId')
+    -> TF.Attr s P.Text -- ^ @provision_end_ip@ ('P._provisionEndIp', 'P.provisionEndIp')
+    -> TF.Attr s P.Text -- ^ @provision_start_ip@ ('P._provisionStartIp', 'P.provisionStartIp')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @subnet@ ('P._subnet', 'P.subnet')
     -> P.Resource (FabricResource s)
 fabricResource _vlanId _provisionEndIp _provisionStartIp _name _subnet =
     TF.unsafeResource "triton_fabric" TF.validator $
@@ -226,7 +226,7 @@ data FirewallRuleResource s = FirewallRuleResource'
 
 -- | Define a new @triton_firewall_rule@ resource value.
 firewallRuleResource
-    :: TF.Attr s P.Text -- ^ @rule@ - 'P.rule'
+    :: TF.Attr s P.Text -- ^ @rule@ ('P._rule', 'P.rule')
     -> P.Resource (FirewallRuleResource s)
 firewallRuleResource _rule =
     TF.unsafeResource "triton_firewall_rule" TF.validator $
@@ -292,9 +292,9 @@ data InstanceTemplateResource s = InstanceTemplateResource'
 
 -- | Define a new @triton_instance_template@ resource value.
 instanceTemplateResource
-    :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
-    -> TF.Attr s P.Text -- ^ @template_name@ - 'P.templateName'
-    -> TF.Attr s P.Text -- ^ @package@ - 'P.package'
+    :: TF.Attr s P.Text -- ^ @image@ ('P._image', 'P.image')
+    -> TF.Attr s P.Text -- ^ @template_name@ ('P._templateName', 'P.templateName')
+    -> TF.Attr s P.Text -- ^ @package@ ('P._package', 'P.package')
     -> P.Resource (InstanceTemplateResource s)
 instanceTemplateResource _image _templateName _package =
     TF.unsafeResource "triton_instance_template" TF.validator $
@@ -364,7 +364,7 @@ data KeyResource s = KeyResource'
 
 -- | Define a new @triton_key@ resource value.
 keyResource
-    :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
+    :: TF.Attr s P.Text -- ^ @key@ ('P._key', 'P.key')
     -> P.Resource (KeyResource s)
 keyResource _key =
     TF.unsafeResource "triton_key" TF.validator $
@@ -452,8 +452,8 @@ data MachineResource s = MachineResource'
 
 -- | Define a new @triton_machine@ resource value.
 machineResource
-    :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
-    -> TF.Attr s P.Text -- ^ @package@ - 'P.package'
+    :: TF.Attr s P.Text -- ^ @image@ ('P._image', 'P.image')
+    -> TF.Attr s P.Text -- ^ @package@ ('P._package', 'P.package')
     -> P.Resource (MachineResource s)
 machineResource _image _package =
     TF.unsafeResource "triton_machine" TF.validator $
@@ -621,8 +621,8 @@ data ServiceGroupResource s = ServiceGroupResource'
 
 -- | Define a new @triton_service_group@ resource value.
 serviceGroupResource
-    :: TF.Attr s P.Text -- ^ @group_name@ - 'P.groupName'
-    -> TF.Attr s P.Text -- ^ @template@ - 'P.template'
+    :: TF.Attr s P.Text -- ^ @group_name@ ('P._groupName', 'P.groupName')
+    -> TF.Attr s P.Text -- ^ @template@ ('P._template', 'P.template')
     -> P.Resource (ServiceGroupResource s)
 serviceGroupResource _groupName _template =
     TF.unsafeResource "triton_service_group" TF.validator $
@@ -671,8 +671,8 @@ data SnapshotResource s = SnapshotResource'
 
 -- | Define a new @triton_snapshot@ resource value.
 snapshotResource
-    :: TF.Attr s P.Text -- ^ @machine_id@ - 'P.machineId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @machine_id@ ('P._machineId', 'P.machineId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (SnapshotResource s)
 snapshotResource _machineId _name =
     TF.unsafeResource "triton_snapshot" TF.validator $
@@ -727,8 +727,8 @@ data VlanResource s = VlanResource'
 
 -- | Define a new @triton_vlan@ resource value.
 vlanResource
-    :: TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Int -- ^ @vlan_id@ ('P._vlanId', 'P.vlanId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (VlanResource s)
 vlanResource _vlanId _name =
     TF.unsafeResource "triton_vlan" TF.validator $
