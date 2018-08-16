@@ -308,10 +308,10 @@ data BlockstorageVolumeAttachV2Resource s = BlockstorageVolumeAttachV2Resource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 blockstorageVolumeAttachV2Resource
-    :: TF.Attr s P.Text -- ^ @host_name@ - 'P.hostName'
-    -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
+    :: TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
+    -> TF.Attr s P.Text -- ^ @host_name@ - 'P.hostName'
     -> P.Resource (BlockstorageVolumeAttachV2Resource s)
-blockstorageVolumeAttachV2Resource _hostName _volumeId =
+blockstorageVolumeAttachV2Resource _volumeId _hostName =
     TF.unsafeResource "openstack_blockstorage_volume_attach_v2" TF.validator $
         BlockstorageVolumeAttachV2Resource'
             { _attachMode = TF.Nil
@@ -460,10 +460,10 @@ data BlockstorageVolumeAttachV3Resource s = BlockstorageVolumeAttachV3Resource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 blockstorageVolumeAttachV3Resource
-    :: TF.Attr s P.Text -- ^ @host_name@ - 'P.hostName'
-    -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
+    :: TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
+    -> TF.Attr s P.Text -- ^ @host_name@ - 'P.hostName'
     -> P.Resource (BlockstorageVolumeAttachV3Resource s)
-blockstorageVolumeAttachV3Resource _hostName _volumeId =
+blockstorageVolumeAttachV3Resource _volumeId _hostName =
     TF.unsafeResource "openstack_blockstorage_volume_attach_v3" TF.validator $
         BlockstorageVolumeAttachV3Resource'
             { _attachMode = TF.Nil
@@ -1036,10 +1036,10 @@ data ComputeFloatingipAssociateV2Resource s = ComputeFloatingipAssociateV2Resour
     } deriving (P.Show, P.Eq, P.Ord)
 
 computeFloatingipAssociateV2Resource
-    :: TF.Attr s P.Text -- ^ @floating_ip@ - 'P.floatingIp'
-    -> TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
+    :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
+    -> TF.Attr s P.Text -- ^ @floating_ip@ - 'P.floatingIp'
     -> P.Resource (ComputeFloatingipAssociateV2Resource s)
-computeFloatingipAssociateV2Resource _floatingIp _instanceId =
+computeFloatingipAssociateV2Resource _instanceId _floatingIp =
     TF.unsafeResource "openstack_compute_floatingip_associate_v2" TF.validator $
         ComputeFloatingipAssociateV2Resource'
             { _fixedIp = TF.Nil
@@ -1876,10 +1876,10 @@ data DnsRecordsetV2Resource s = DnsRecordsetV2Resource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 dnsRecordsetV2Resource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
+    :: TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DnsRecordsetV2Resource s)
-dnsRecordsetV2Resource _name _zoneId =
+dnsRecordsetV2Resource _zoneId _name =
     TF.unsafeResource "openstack_dns_recordset_v2" TF.validator $
         DnsRecordsetV2Resource'
             { _description = TF.Nil
@@ -2917,10 +2917,10 @@ data LbListenerV2Resource s = LbListenerV2Resource'
 
 lbListenerV2Resource
     :: TF.Attr s P.Text -- ^ @loadbalancer_id@ - 'P.loadbalancerId'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Int -- ^ @protocol_port@ - 'P.protocolPort'
+    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> P.Resource (LbListenerV2Resource s)
-lbListenerV2Resource _loadbalancerId _protocol _protocolPort =
+lbListenerV2Resource _loadbalancerId _protocolPort _protocol =
     TF.unsafeResource "openstack_lb_listener_v2" TF.validator $
         LbListenerV2Resource'
             { _adminStateUp = TF.value P.True
@@ -3386,12 +3386,12 @@ data LbMonitorV2Resource s = LbMonitorV2Resource'
 
 lbMonitorV2Resource
     :: TF.Attr s P.Int -- ^ @delay@ - 'P.delay'
-    -> TF.Attr s P.Int -- ^ @max_retries@ - 'P.maxRetries'
     -> TF.Attr s P.Text -- ^ @pool_id@ - 'P.poolId'
+    -> TF.Attr s P.Int -- ^ @max_retries@ - 'P.maxRetries'
     -> TF.Attr s P.Int -- ^ @timeout@ - 'P.timeout'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (LbMonitorV2Resource s)
-lbMonitorV2Resource _delay _maxRetries _poolId _timeout _type' =
+lbMonitorV2Resource _delay _poolId _maxRetries _timeout _type' =
     TF.unsafeResource "openstack_lb_monitor_v2" TF.validator $
         LbMonitorV2Resource'
             { _adminStateUp = TF.value P.True
@@ -3493,12 +3493,12 @@ data LbPoolV1Resource s = LbPoolV1Resource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 lbPoolV1Resource
-    :: TF.Attr s P.Text -- ^ @lb_method@ - 'P.lbMethod'
+    :: TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
+    -> TF.Attr s P.Text -- ^ @lb_method@ - 'P.lbMethod'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
-    -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> P.Resource (LbPoolV1Resource s)
-lbPoolV1Resource _lbMethod _name _protocol _subnetId =
+lbPoolV1Resource _subnetId _lbMethod _name _protocol =
     TF.unsafeResource "openstack_lb_pool_v1" TF.validator $
         LbPoolV1Resource'
             { _lbMethod = _lbMethod
@@ -3699,13 +3699,13 @@ data LbVipV1Resource s = LbVipV1Resource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 lbVipV1Resource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @pool_id@ - 'P.poolId'
+    :: TF.Attr s P.Text -- ^ @pool_id@ - 'P.poolId'
+    -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
-    -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> P.Resource (LbVipV1Resource s)
-lbVipV1Resource _name _poolId _port _protocol _subnetId =
+lbVipV1Resource _poolId _subnetId _name _port _protocol =
     TF.unsafeResource "openstack_lb_vip_v1" TF.validator $
         LbVipV1Resource'
             { _floatingIp = TF.Nil
@@ -3801,10 +3801,10 @@ data NetworkingFloatingipAssociateV2Resource s = NetworkingFloatingipAssociateV2
     } deriving (P.Show, P.Eq, P.Ord)
 
 networkingFloatingipAssociateV2Resource
-    :: TF.Attr s P.Text -- ^ @floating_ip@ - 'P.floatingIp'
-    -> TF.Attr s P.Text -- ^ @port_id@ - 'P.portId'
+    :: TF.Attr s P.Text -- ^ @port_id@ - 'P.portId'
+    -> TF.Attr s P.Text -- ^ @floating_ip@ - 'P.floatingIp'
     -> P.Resource (NetworkingFloatingipAssociateV2Resource s)
-networkingFloatingipAssociateV2Resource _floatingIp _portId =
+networkingFloatingipAssociateV2Resource _portId _floatingIp =
     TF.unsafeResource "openstack_networking_floatingip_associate_v2" TF.validator $
         NetworkingFloatingipAssociateV2Resource'
             { _floatingIp = _floatingIp
@@ -5379,14 +5379,14 @@ data VpnaasSiteConnectionV2Resource s = VpnaasSiteConnectionV2Resource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 vpnaasSiteConnectionV2Resource
-    :: TF.Attr s P.Text -- ^ @ikepolicy_id@ - 'P.ikepolicyId'
+    :: TF.Attr s P.Text -- ^ @peer_address@ - 'P.peerAddress'
+    -> TF.Attr s P.Text -- ^ @ikepolicy_id@ - 'P.ikepolicyId'
     -> TF.Attr s P.Text -- ^ @ipsecpolicy_id@ - 'P.ipsecpolicyId'
-    -> TF.Attr s P.Text -- ^ @peer_address@ - 'P.peerAddress'
     -> TF.Attr s P.Text -- ^ @peer_id@ - 'P.peerId'
-    -> TF.Attr s P.Text -- ^ @psk@ - 'P.psk'
     -> TF.Attr s P.Text -- ^ @vpnservice_id@ - 'P.vpnserviceId'
+    -> TF.Attr s P.Text -- ^ @psk@ - 'P.psk'
     -> P.Resource (VpnaasSiteConnectionV2Resource s)
-vpnaasSiteConnectionV2Resource _ikepolicyId _ipsecpolicyId _peerAddress _peerId _psk _vpnserviceId =
+vpnaasSiteConnectionV2Resource _peerAddress _ikepolicyId _ipsecpolicyId _peerId _vpnserviceId _psk =
     TF.unsafeResource "openstack_vpnaas_site_connection_v2" TF.validator $
         VpnaasSiteConnectionV2Resource'
             { _adminStateUp = TF.value P.False

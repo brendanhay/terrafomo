@@ -874,10 +874,10 @@ data RuleSetting s = RuleSetting'
 
 newRuleSetting
     :: TF.Attr s P.Int -- ^ @from_port@ - 'P.fromPort'
-    -> TF.Attr s P.Text -- ^ @ip_protocol@ - 'P.ipProtocol'
     -> TF.Attr s P.Int -- ^ @to_port@ - 'P.toPort'
+    -> TF.Attr s P.Text -- ^ @ip_protocol@ - 'P.ipProtocol'
     -> RuleSetting s
-newRuleSetting _fromPort _ipProtocol _toPort =
+newRuleSetting _fromPort _toPort _ipProtocol =
     RuleSetting'
         { _cidr = TF.Nil
         , _fromGroupId = TF.Nil
