@@ -17,11 +17,10 @@
 --
 module Terrafomo.Rancher.Provider
     (
-    -- * Rancher Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * Rancher Specific Aliases
+    -- ** Rancher Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -92,7 +91,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "rancher"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "access_key" <$> _accessKey
             , TF.assign "api_url" <$> _apiUrl

@@ -17,7 +17,6 @@
 --
 module Terrafomo.Rancher.DataSource
     (
-    -- * DataSource Datatypes
     -- ** rancher_certificate
       CertificateData (..)
     , certificateData
@@ -69,6 +68,7 @@ data CertificateData s = CertificateData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rancher_certificate@ datasource value.
 certificateData
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -145,6 +145,7 @@ data EnvironmentData s = EnvironmentData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rancher_environment@ datasource value.
 environmentData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (EnvironmentData s)
@@ -192,6 +193,7 @@ data SettingData s = SettingData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rancher_setting@ datasource value.
 settingData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SettingData s)

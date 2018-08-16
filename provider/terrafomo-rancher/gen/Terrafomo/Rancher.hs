@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Rancher
-    ( module Terrafomo.Rancher.DataSource
-    , module Terrafomo.Rancher.Lens
-    , module Terrafomo.Rancher.Provider
-    , module Terrafomo.Rancher.Resource
-    , module Terrafomo.Rancher.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Rancher.Provider
+
+    -- * Custom Types
     , module Terrafomo.Rancher.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.Rancher.DataSource
+
+    -- * Resources
+    , module Terrafomo.Rancher.Resource
+
+    -- * Settings
+    , module Terrafomo.Rancher.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Rancher.Lens
     ) where
 
 import Terrafomo.Rancher.DataSource

@@ -17,7 +17,6 @@
 --
 module Terrafomo.Rancher.Settings
     (
-    -- * Settings Datatypes
     -- ** member
       MemberSetting (..)
     , newMemberSetting
@@ -58,6 +57,7 @@ data MemberSetting s = MemberSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @member@ settings value.
 newMemberSetting
     :: TF.Attr s P.Text -- ^ @external_id@ - 'P.externalId'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'

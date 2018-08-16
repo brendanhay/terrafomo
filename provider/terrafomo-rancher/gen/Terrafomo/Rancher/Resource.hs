@@ -17,7 +17,6 @@
 --
 module Terrafomo.Rancher.Resource
     (
-    -- * Resource Datatypes
     -- ** rancher_certificate
       CertificateResource (..)
     , certificateResource
@@ -105,6 +104,7 @@ data CertificateResource s = CertificateResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rancher_certificate@ resource value.
 certificateResource
     :: TF.Attr s P.Text -- ^ @cert@ - 'P.cert'
     -> TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
@@ -211,6 +211,7 @@ data EnvironmentResource s = EnvironmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rancher_environment@ resource value.
 environmentResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (EnvironmentResource s)
@@ -274,6 +275,7 @@ data HostResource s = HostResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rancher_host@ resource value.
 hostResource
     :: TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
     -> TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
@@ -351,6 +353,7 @@ data RegistrationTokenResource s = RegistrationTokenResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rancher_registration_token@ resource value.
 registrationTokenResource
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -436,6 +439,7 @@ data RegistryResource s = RegistryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rancher_registry@ resource value.
 registryResource
     :: TF.Attr s P.Text -- ^ @server_address@ - 'P.serverAddress'
     -> TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
@@ -506,6 +510,7 @@ data RegistryCredentialResource s = RegistryCredentialResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rancher_registry_credential@ resource value.
 registryCredentialResource
     :: TF.Attr s P.Text -- ^ @registry_id@ - 'P.registryId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -581,6 +586,7 @@ data SecretResource s = SecretResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rancher_secret@ resource value.
 secretResource
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -663,6 +669,7 @@ data StackResource s = StackResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rancher_stack@ resource value.
 stackResource
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -773,6 +780,7 @@ data VolumeResource s = VolumeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rancher_volume@ resource value.
 volumeResource
     :: TF.Attr s P.Text -- ^ @driver@ - 'P.driver'
     -> TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
