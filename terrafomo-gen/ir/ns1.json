@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newAnswersSetting",
+                "smart": "answersSetting",
                 "name": "AnswersSetting'"
             },
             "arguments": [
@@ -69,7 +69,7 @@
         },
         {
             "con": {
-                "smart": "newFiltersSetting",
+                "smart": "filtersSetting",
                 "name": "FiltersSetting'"
             },
             "arguments": [
@@ -154,7 +154,7 @@
         },
         {
             "con": {
-                "smart": "newNotificationsSetting",
+                "smart": "notificationsSetting",
                 "name": "NotificationsSetting'"
             },
             "arguments": [
@@ -239,7 +239,7 @@
         },
         {
             "con": {
-                "smart": "newRegionsSetting",
+                "smart": "regionsSetting",
                 "name": "RegionsSetting'"
             },
             "arguments": [
@@ -307,7 +307,7 @@
         },
         {
             "con": {
-                "smart": "newRulesSetting",
+                "smart": "rulesSetting",
                 "name": "RulesSetting'"
             },
             "arguments": [
