@@ -50,10 +50,9 @@ import GHC.Base (($))
 
 import Terrafomo.Cobbler.Settings
 
-import qualified Data.Hashable              as P
-import qualified Data.HashMap.Strict        as P
-import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Map.Strict            as P
+import qualified Data.Map.Strict            as Map
 import qualified Data.Maybe                 as P
 import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
@@ -89,7 +88,7 @@ data DistroResource s = DistroResource'
     , _osVersion :: TF.Attr s P.Text
     -- ^ @os_version@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 distroResource
     :: TF.Attr s P.Text -- ^ @breed@ - 'P.breed'
@@ -99,7 +98,7 @@ distroResource
     -> TF.Attr s P.Text -- ^ @os_version@ - 'P.osVersion'
     -> P.Resource (DistroResource s)
 distroResource _breed _initrd _kernel _name _osVersion =
-    TF.newResource "cobbler_distro" TF.validator $
+    TF.unsafeResource "cobbler_distro" P.defaultProvider TF.validator $
         DistroResource'
             { _breed = _breed
             , _initrd = _initrd
@@ -189,14 +188,14 @@ data KickstartFileResource s = KickstartFileResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 kickstartFileResource
     :: TF.Attr s P.Text -- ^ @body@ - 'P.body'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (KickstartFileResource s)
 kickstartFileResource _body _name =
-    TF.newResource "cobbler_kickstart_file" TF.validator $
+    TF.unsafeResource "cobbler_kickstart_file" P.defaultProvider TF.validator $
         KickstartFileResource'
             { _body = _body
             , _name = _name
@@ -232,14 +231,14 @@ data ProfileResource s = ProfileResource'
     , _name   :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 profileResource
     :: TF.Attr s P.Text -- ^ @distro@ - 'P.distro'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ProfileResource s)
 profileResource _distro _name =
-    TF.newResource "cobbler_profile" TF.validator $
+    TF.unsafeResource "cobbler_profile" P.defaultProvider TF.validator $
         ProfileResource'
             { _distro = _distro
             , _name = _name
@@ -327,7 +326,7 @@ instance s ~ s' => P.HasComputedServer (TF.Ref s' (ProfileResource s)) (TF.Attr 
 instance s ~ s' => P.HasComputedTemplateFiles (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
     computedTemplateFiles x = TF.compute (TF.refKey x) "template_files"
 
-instance s ~ s' => P.HasComputedTemplateRemoteKickstarts (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedTemplateRemoteKickstarts (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Int) where
     computedTemplateRemoteKickstarts x = TF.compute (TF.refKey x) "template_remote_kickstarts"
 
 instance s ~ s' => P.HasComputedVirtAutoBoot (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
@@ -368,7 +367,7 @@ data RepoResource s = RepoResource'
     , _name   :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 repoResource
     :: TF.Attr s P.Text -- ^ @breed@ - 'P.breed'
@@ -376,7 +375,7 @@ repoResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RepoResource s)
 repoResource _breed _mirror _name =
-    TF.newResource "cobbler_repo" TF.validator $
+    TF.unsafeResource "cobbler_repo" P.defaultProvider TF.validator $
         RepoResource'
             { _breed = _breed
             , _mirror = _mirror
@@ -452,14 +451,14 @@ data SnippetResource s = SnippetResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 snippetResource
     :: TF.Attr s P.Text -- ^ @body@ - 'P.body'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SnippetResource s)
 snippetResource _body _name =
-    TF.newResource "cobbler_snippet" TF.validator $
+    TF.unsafeResource "cobbler_snippet" P.defaultProvider TF.validator $
         SnippetResource'
             { _body = _body
             , _name = _name
@@ -495,14 +494,14 @@ data SystemResource s = SystemResource'
     , _profile :: TF.Attr s P.Text
     -- ^ @profile@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 systemResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @profile@ - 'P.profile'
     -> P.Resource (SystemResource s)
 systemResource _name _profile =
-    TF.newResource "cobbler_system" TF.validator $
+    TF.unsafeResource "cobbler_system" P.defaultProvider TF.validator $
         SystemResource'
             { _name = _name
             , _profile = _profile
@@ -548,7 +547,7 @@ instance s ~ s' => P.HasComputedHostname (TF.Ref s' (SystemResource s)) (TF.Attr
 instance s ~ s' => P.HasComputedImage (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
     computedImage x = TF.compute (TF.refKey x) "image"
 
-instance s ~ s' => P.HasComputedInterface (TF.Ref s' (SystemResource s)) (TF.Attr s [TF.Attr s (SystemInterface s)]) where
+instance s ~ s' => P.HasComputedInterface (TF.Ref s' (SystemResource s)) (TF.Attr s [TF.Attr s (InterfaceSetting s)]) where
     computedInterface x = TF.compute (TF.refKey x) "interface"
 
 instance s ~ s' => P.HasComputedIpv6DefaultDevice (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
@@ -623,7 +622,7 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (SystemResource s)) (TF.Attr s
 instance s ~ s' => P.HasComputedTemplateFiles (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
     computedTemplateFiles x = TF.compute (TF.refKey x) "template_files"
 
-instance s ~ s' => P.HasComputedTemplateRemoteKickstarts (TF.Ref s' (SystemResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedTemplateRemoteKickstarts (TF.Ref s' (SystemResource s)) (TF.Attr s P.Int) where
     computedTemplateRemoteKickstarts x = TF.compute (TF.refKey x) "template_remote_kickstarts"
 
 instance s ~ s' => P.HasComputedVirtAutoBoot (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
@@ -641,7 +640,7 @@ instance s ~ s' => P.HasComputedVirtFileSize (TF.Ref s' (SystemResource s)) (TF.
 instance s ~ s' => P.HasComputedVirtPath (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
     computedVirtPath x = TF.compute (TF.refKey x) "virt_path"
 
-instance s ~ s' => P.HasComputedVirtPxeBoot (TF.Ref s' (SystemResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedVirtPxeBoot (TF.Ref s' (SystemResource s)) (TF.Attr s P.Int) where
     computedVirtPxeBoot x = TF.compute (TF.refKey x) "virt_pxe_boot"
 
 instance s ~ s' => P.HasComputedVirtRam (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where

@@ -12,11 +12,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Cobbler
-    ( module Terrafomo.Cobbler.Resource
-    , module Terrafomo.Cobbler.Types
+    ( module Terrafomo.Cobbler.Lens
     , module Terrafomo.Cobbler.Provider
-    , module Terrafomo.Cobbler.Lens
+    , module Terrafomo.Cobbler.Resource
     , module Terrafomo.Cobbler.Settings
+    , module Terrafomo.Cobbler.Types
     -- * Provider Aliases
     ) where
 
