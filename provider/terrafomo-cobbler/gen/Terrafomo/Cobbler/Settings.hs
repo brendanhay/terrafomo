@@ -53,7 +53,7 @@ data InterfaceSetting s = InterfaceSetting'
 
 -- | Construct a new @interface@ settings value.
 newInterfaceSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> InterfaceSetting s
 newInterfaceSetting _name =
     InterfaceSetting'

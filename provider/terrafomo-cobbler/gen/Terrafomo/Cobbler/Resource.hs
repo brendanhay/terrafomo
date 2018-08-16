@@ -91,11 +91,11 @@ data DistroResource s = DistroResource'
 
 -- | Define a new @cobbler_distro@ resource value.
 distroResource
-    :: TF.Attr s P.Text -- ^ @breed@ - 'P.breed'
-    -> TF.Attr s P.Text -- ^ @initrd@ - 'P.initrd'
-    -> TF.Attr s P.Text -- ^ @kernel@ - 'P.kernel'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @os_version@ - 'P.osVersion'
+    :: TF.Attr s P.Text -- ^ @breed@ ('P._breed', 'P.breed')
+    -> TF.Attr s P.Text -- ^ @initrd@ ('P._initrd', 'P.initrd')
+    -> TF.Attr s P.Text -- ^ @kernel@ ('P._kernel', 'P.kernel')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @os_version@ ('P._osVersion', 'P.osVersion')
     -> P.Resource (DistroResource s)
 distroResource _breed _initrd _kernel _name _osVersion =
     TF.unsafeResource "cobbler_distro" TF.validator $
@@ -195,8 +195,8 @@ data KickstartFileResource s = KickstartFileResource'
 
 -- | Define a new @cobbler_kickstart_file@ resource value.
 kickstartFileResource
-    :: TF.Attr s P.Text -- ^ @body@ - 'P.body'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @body@ ('P._body', 'P.body')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (KickstartFileResource s)
 kickstartFileResource _body _name =
     TF.unsafeResource "cobbler_kickstart_file" TF.validator $
@@ -242,8 +242,8 @@ data ProfileResource s = ProfileResource'
 
 -- | Define a new @cobbler_profile@ resource value.
 profileResource
-    :: TF.Attr s P.Text -- ^ @distro@ - 'P.distro'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @distro@ ('P._distro', 'P.distro')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ProfileResource s)
 profileResource _distro _name =
     TF.unsafeResource "cobbler_profile" TF.validator $
@@ -382,9 +382,9 @@ data RepoResource s = RepoResource'
 
 -- | Define a new @cobbler_repo@ resource value.
 repoResource
-    :: TF.Attr s P.Text -- ^ @breed@ - 'P.breed'
-    -> TF.Attr s P.Text -- ^ @mirror@ - 'P.mirror'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @breed@ ('P._breed', 'P.breed')
+    -> TF.Attr s P.Text -- ^ @mirror@ ('P._mirror', 'P.mirror')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (RepoResource s)
 repoResource _breed _mirror _name =
     TF.unsafeResource "cobbler_repo" TF.validator $
@@ -470,8 +470,8 @@ data SnippetResource s = SnippetResource'
 
 -- | Define a new @cobbler_snippet@ resource value.
 snippetResource
-    :: TF.Attr s P.Text -- ^ @body@ - 'P.body'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @body@ ('P._body', 'P.body')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (SnippetResource s)
 snippetResource _body _name =
     TF.unsafeResource "cobbler_snippet" TF.validator $
@@ -517,8 +517,8 @@ data SystemResource s = SystemResource'
 
 -- | Define a new @cobbler_system@ resource value.
 systemResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @profile@ - 'P.profile'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @profile@ ('P._profile', 'P.profile')
     -> P.Resource (SystemResource s)
 systemResource _name _profile =
     TF.unsafeResource "cobbler_system" TF.validator $

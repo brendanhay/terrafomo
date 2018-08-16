@@ -17,10 +17,11 @@
 --
 module Terrafomo.Cobbler.Provider
     (
+    -- * Cobbler Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** Cobbler Specific Aliases
+    -- * Cobbler Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -82,9 +83,9 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @password@ - 'P.password'
-    -> P.Text -- ^ @url@ - 'P.url'
-    -> P.Text -- ^ @username@ - 'P.username'
+    :: P.Text -- ^ @password@ ('P._password', 'P.password')
+    -> P.Text -- ^ @url@ ('P._url', 'P.url')
+    -> P.Text -- ^ @username@ ('P._username', 'P.username')
     -> Provider
 newProvider _password _url _username =
     Provider'
@@ -99,7 +100,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "cobbler"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ TF.assign "cacert_file" <$> _cacertFile
             , TF.assign "insecure" <$> _insecure
