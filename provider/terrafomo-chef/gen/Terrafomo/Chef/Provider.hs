@@ -20,7 +20,6 @@ module Terrafomo.Chef.Provider
     -- * Chef Provider Datatype
       Provider (..)
     , newProvider
-    , defaultProvider
 
     -- * Chef Specific Aliases
     , DataSource
@@ -56,7 +55,7 @@ import qualified Terrafomo.Validator  as TF
 type DataSource a = TF.Schema ()               Provider a
 type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
 
--- | The @Chef@ Terraform provider configuration.
+-- | The @chef@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/chef/index.html terraform documentation>
 -- for more information.
@@ -90,21 +89,22 @@ newProvider _clientName _serverUrl =
         , _serverUrl = _serverUrl
         }
 
-defaultProvider :: TF.Provider (P.Maybe Provider)
-defaultProvider =
-    TF.Provider
-        { _providerType   = TF.Type P.Nothing "provider"
-        , _providerAlias  = P.Nothing
-        , _providerConfig = P.Nothing
-        }
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "chef"
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} = P.catMaybes
-        [  TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
-        ,  P.Just $ TF.assign "client_name" _clientName
-        ,  TF.assign "key_material" <$> _keyMaterial
-        ,  P.Just $ TF.assign "server_url" _serverUrl
-        ]
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy Provider)
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
+                  , P.Just $ TF.assign "client_name" _clientName
+                  , TF.assign "key_material" <$> _keyMaterial
+                  , P.Just $ TF.assign "server_url" _serverUrl
+                  ])
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
