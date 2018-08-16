@@ -162,10 +162,9 @@ import GHC.Base (($))
 
 import Terrafomo.OPC.Settings
 
-import qualified Data.Hashable          as P
-import qualified Data.HashMap.Strict    as P
-import qualified Data.HashMap.Strict    as Map
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Map.Strict        as P
+import qualified Data.Map.Strict        as Map
 import qualified Data.Maybe             as P
 import qualified Data.Monoid            as P
 import qualified Data.Text              as P
@@ -198,13 +197,13 @@ data ComputeAclResource s = ComputeAclResource'
     , _tags        :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeAclResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeAclResource s)
 computeAclResource _name =
-    TF.newResource "opc_compute_acl" TF.validator $
+    TF.unsafeResource "opc_compute_acl" P.defaultProvider TF.validator $
         ComputeAclResource'
             { _description = TF.Nil
             , _enabled = TF.value P.True
@@ -251,7 +250,7 @@ instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeAclResource s)) (TF.Attr 
 -- See the <https://www.terraform.io/docs/providers/opc/r/compute_image_list.html terraform documentation>
 -- for more information.
 data ComputeImageListResource s = ComputeImageListResource'
-    { _default'    :: TF.Attr s P.Integer
+    { _default'    :: TF.Attr s P.Int
     -- ^ @default@ - (Optional)
     --
     , _description :: TF.Attr s P.Text
@@ -260,14 +259,14 @@ data ComputeImageListResource s = ComputeImageListResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeImageListResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeImageListResource s)
 computeImageListResource _description _name =
-    TF.newResource "opc_compute_image_list" TF.validator $
+    TF.unsafeResource "opc_compute_image_list" P.defaultProvider TF.validator $
         ComputeImageListResource'
             { _default' = TF.value 1
             , _description = _description
@@ -284,9 +283,9 @@ instance TF.IsObject (ComputeImageListResource s) where
 instance TF.IsValid (ComputeImageListResource s) where
     validator = P.mempty
 
-instance P.HasDefault' (ComputeImageListResource s) (TF.Attr s P.Integer) where
+instance P.HasDefault' (ComputeImageListResource s) (TF.Attr s P.Int) where
     default' =
-        P.lens (_default' :: ComputeImageListResource s -> TF.Attr s P.Integer)
+        P.lens (_default' :: ComputeImageListResource s -> TF.Attr s P.Int)
                (\s a -> s { _default' = a } :: ComputeImageListResource s)
 
 instance P.HasDescription (ComputeImageListResource s) (TF.Attr s P.Text) where
@@ -313,18 +312,18 @@ data ComputeImageListEntryResource s = ComputeImageListEntryResource'
     , _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _version       :: TF.Attr s P.Integer
+    , _version       :: TF.Attr s P.Int
     -- ^ @version@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeImageListEntryResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @machine_images@ - 'P.machineImages'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Integer -- ^ @version@ - 'P.version'
+    -> TF.Attr s P.Int -- ^ @version@ - 'P.version'
     -> P.Resource (ComputeImageListEntryResource s)
 computeImageListEntryResource _machineImages _name _version =
-    TF.newResource "opc_compute_image_list_entry" TF.validator $
+    TF.unsafeResource "opc_compute_image_list_entry" P.defaultProvider TF.validator $
         ComputeImageListEntryResource'
             { _attributes = TF.Nil
             , _machineImages = _machineImages
@@ -358,9 +357,9 @@ instance P.HasName (ComputeImageListEntryResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeImageListEntryResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeImageListEntryResource s)
 
-instance P.HasVersion (ComputeImageListEntryResource s) (TF.Attr s P.Integer) where
+instance P.HasVersion (ComputeImageListEntryResource s) (TF.Attr s P.Int) where
     version =
-        P.lens (_version :: ComputeImageListEntryResource s -> TF.Attr s P.Integer)
+        P.lens (_version :: ComputeImageListEntryResource s -> TF.Attr s P.Int)
                (\s a -> s { _version = a } :: ComputeImageListEntryResource s)
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeImageListEntryResource s)) (TF.Attr s P.Text) where
@@ -371,7 +370,7 @@ instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeImageListEntryResource s)
 -- See the <https://www.terraform.io/docs/providers/opc/r/compute_instance.html terraform documentation>
 -- for more information.
 data ComputeInstanceResource s = ComputeInstanceResource'
-    { _bootOrder          :: TF.Attr s [TF.Attr s P.Integer]
+    { _bootOrder          :: TF.Attr s [TF.Attr s P.Int]
     -- ^ @boot_order@ - (Optional, Forces New)
     --
     , _desiredState       :: TF.Attr s P.Text
@@ -395,20 +394,20 @@ data ComputeInstanceResource s = ComputeInstanceResource'
     , _sshKeys            :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @ssh_keys@ - (Optional, Forces New)
     --
-    , _storage            :: TF.Attr s [TF.Attr s (ComputeInstanceStorage s)]
+    , _storage            :: TF.Attr s [TF.Attr s (StorageSetting s)]
     -- ^ @storage@ - (Optional, Forces New)
     --
     , _tags               :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeInstanceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @shape@ - 'P.shape'
     -> P.Resource (ComputeInstanceResource s)
 computeInstanceResource _name _shape =
-    TF.newResource "opc_compute_instance" TF.validator $
+    TF.unsafeResource "opc_compute_instance" P.defaultProvider TF.validator $
         ComputeInstanceResource'
             { _bootOrder = TF.Nil
             , _desiredState = TF.Nil
@@ -438,14 +437,10 @@ instance TF.IsObject (ComputeInstanceResource s) where
 
 instance TF.IsValid (ComputeInstanceResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_storage"
-                  (_storage
-                      :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceStorage s)])
-                  TF.validator
 
-instance P.HasBootOrder (ComputeInstanceResource s) (TF.Attr s [TF.Attr s P.Integer]) where
+instance P.HasBootOrder (ComputeInstanceResource s) (TF.Attr s [TF.Attr s P.Int]) where
     bootOrder =
-        P.lens (_bootOrder :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s P.Integer])
+        P.lens (_bootOrder :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s P.Int])
                (\s a -> s { _bootOrder = a } :: ComputeInstanceResource s)
 
 instance P.HasDesiredState (ComputeInstanceResource s) (TF.Attr s P.Text) where
@@ -483,9 +478,9 @@ instance P.HasSshKeys (ComputeInstanceResource s) (TF.Attr s [TF.Attr s P.Text])
         P.lens (_sshKeys :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _sshKeys = a } :: ComputeInstanceResource s)
 
-instance P.HasStorage (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (ComputeInstanceStorage s)]) where
+instance P.HasStorage (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (StorageSetting s)]) where
     storage =
-        P.lens (_storage :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceStorage s)])
+        P.lens (_storage :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (StorageSetting s)])
                (\s a -> s { _storage = a } :: ComputeInstanceResource s)
 
 instance P.HasTags (ComputeInstanceResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -502,7 +497,7 @@ instance s ~ s' => P.HasComputedAvailabilityDomain (TF.Ref s' (ComputeInstanceRe
 instance s ~ s' => P.HasComputedDomain (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedDomain x = TF.compute (TF.refKey x) "domain"
 
-instance s ~ s' => P.HasComputedEntry (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedEntry (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Int) where
     computedEntry x = TF.compute (TF.refKey x) "entry"
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
@@ -523,7 +518,7 @@ instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeInstanceResource s)
 instance s ~ s' => P.HasComputedLabel (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedLabel x = TF.compute (TF.refKey x) "label"
 
-instance s ~ s' => P.HasComputedNetworkingInfo (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s [TF.Attr s (ComputeInstanceNetworkingInfo s)]) where
+instance s ~ s' => P.HasComputedNetworkingInfo (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]) where
     computedNetworkingInfo x = TF.compute (TF.refKey x) "networking_info"
 
 instance s ~ s' => P.HasComputedPlacementRequirements (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -582,13 +577,13 @@ data ComputeIpAddressAssociationResource s = ComputeIpAddressAssociationResource
     , _vnic                 :: TF.Attr s P.Text
     -- ^ @vnic@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeIpAddressAssociationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeIpAddressAssociationResource s)
 computeIpAddressAssociationResource _name =
-    TF.newResource "opc_compute_ip_address_association" TF.validator $
+    TF.unsafeResource "opc_compute_ip_address_association" P.defaultProvider TF.validator $
         ComputeIpAddressAssociationResource'
             { _description = TF.Nil
             , _ipAddressReservation = TF.Nil
@@ -654,13 +649,13 @@ data ComputeIpAddressPrefixSetResource s = ComputeIpAddressPrefixSetResource'
     , _tags        :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeIpAddressPrefixSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeIpAddressPrefixSetResource s)
 computeIpAddressPrefixSetResource _name =
-    TF.newResource "opc_compute_ip_address_prefix_set" TF.validator $
+    TF.unsafeResource "opc_compute_ip_address_prefix_set" P.defaultProvider TF.validator $
         ComputeIpAddressPrefixSetResource'
             { _description = TF.Nil
             , _name = _name
@@ -719,14 +714,14 @@ data ComputeIpAddressReservationResource s = ComputeIpAddressReservationResource
     , _tags          :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeIpAddressReservationResource
     :: TF.Attr s P.Text -- ^ @ip_address_pool@ - 'P.ipAddressPool'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeIpAddressReservationResource s)
 computeIpAddressReservationResource _ipAddressPool _name =
-    TF.newResource "opc_compute_ip_address_reservation" TF.validator $
+    TF.unsafeResource "opc_compute_ip_address_reservation" P.defaultProvider TF.validator $
         ComputeIpAddressReservationResource'
             { _description = TF.Nil
             , _ipAddressPool = _ipAddressPool
@@ -782,14 +777,14 @@ data ComputeIpAssociationResource s = ComputeIpAssociationResource'
     , _vcable     :: TF.Attr s P.Text
     -- ^ @vcable@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeIpAssociationResource
     :: TF.Attr s P.Text -- ^ @parent_pool@ - 'P.parentPool'
     -> TF.Attr s P.Text -- ^ @vcable@ - 'P.vcable'
     -> P.Resource (ComputeIpAssociationResource s)
 computeIpAssociationResource _parentPool _vcable =
-    TF.newResource "opc_compute_ip_association" TF.validator $
+    TF.unsafeResource "opc_compute_ip_association" P.defaultProvider TF.validator $
         ComputeIpAssociationResource'
             { _parentPool = _parentPool
             , _vcable = _vcable
@@ -840,14 +835,14 @@ data ComputeIpNetworkResource s = ComputeIpNetworkResource'
     , _tags              :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeIpNetworkResource
     :: TF.Attr s P.Text -- ^ @ip_address_prefix@ - 'P.ipAddressPrefix'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeIpNetworkResource s)
 computeIpNetworkResource _ipAddressPrefix _name =
-    TF.newResource "opc_compute_ip_network" TF.validator $
+    TF.unsafeResource "opc_compute_ip_network" P.defaultProvider TF.validator $
         ComputeIpNetworkResource'
             { _description = TF.Nil
             , _ipAddressPrefix = _ipAddressPrefix
@@ -917,13 +912,13 @@ data ComputeIpNetworkExchangeResource s = ComputeIpNetworkExchangeResource'
     , _tags        :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeIpNetworkExchangeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeIpNetworkExchangeResource s)
 computeIpNetworkExchangeResource _name =
-    TF.newResource "opc_compute_ip_network_exchange" TF.validator $
+    TF.unsafeResource "opc_compute_ip_network_exchange" P.defaultProvider TF.validator $
         ComputeIpNetworkExchangeResource'
             { _description = TF.Nil
             , _name = _name
@@ -972,13 +967,13 @@ data ComputeIpReservationResource s = ComputeIpReservationResource'
     , _tags       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeIpReservationResource
     :: TF.Attr s P.Bool -- ^ @permanent@ - 'P.permanent'
     -> P.Resource (ComputeIpReservationResource s)
 computeIpReservationResource _permanent =
-    TF.newResource "opc_compute_ip_reservation" TF.validator $
+    TF.unsafeResource "opc_compute_ip_reservation" P.defaultProvider TF.validator $
         ComputeIpReservationResource'
             { _parentPool = TF.value "/oracle/public/ippool"
             , _permanent = _permanent
@@ -1039,7 +1034,7 @@ data ComputeMachineImageResource s = ComputeMachineImageResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeMachineImageResource
     :: TF.Attr s P.Text -- ^ @account@ - 'P.account'
@@ -1047,7 +1042,7 @@ computeMachineImageResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeMachineImageResource s)
 computeMachineImageResource _account _file _name =
-    TF.newResource "opc_compute_machine_image" TF.validator $
+    TF.unsafeResource "opc_compute_machine_image" P.defaultProvider TF.validator $
         ComputeMachineImageResource'
             { _account = _account
             , _attributes = TF.Nil
@@ -1096,7 +1091,7 @@ instance P.HasName (ComputeMachineImageResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedErrorReason (TF.Ref s' (ComputeMachineImageResource s)) (TF.Attr s P.Text) where
     computedErrorReason x = TF.compute (TF.refKey x) "error_reason"
 
-instance s ~ s' => P.HasComputedHypervisor (TF.Ref s' (ComputeMachineImageResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedHypervisor (TF.Ref s' (ComputeMachineImageResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedHypervisor x = TF.compute (TF.refKey x) "hypervisor"
 
 instance s ~ s' => P.HasComputedImageFormat (TF.Ref s' (ComputeMachineImageResource s)) (TF.Attr s P.Text) where
@@ -1119,30 +1114,30 @@ instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeMachineImageResource s)) 
 -- See the <https://www.terraform.io/docs/providers/opc/r/compute_orchestrated_instance.html terraform documentation>
 -- for more information.
 data ComputeOrchestratedInstanceResource s = ComputeOrchestratedInstanceResource'
-    { _description :: TF.Attr s P.Text
+    { _description  :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _desiredState :: TF.Attr s P.Text
     -- ^ @desired_state@ - (Required)
     --
-    , _instance' :: TF.Attr s [TF.Attr s (ComputeOrchestratedInstanceInstance s)]
+    , _instance'    :: TF.Attr s [TF.Attr s (InstanceSetting s)]
     -- ^ @instance@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
+    , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _tags :: TF.Attr s [TF.Attr s P.Text]
+    , _tags         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeOrchestratedInstanceResource
     :: TF.Attr s P.Text -- ^ @desired_state@ - 'P.desiredState'
-    -> TF.Attr s [TF.Attr s (ComputeOrchestratedInstanceInstance s)] -- ^ @instance@ - 'P.instance''
+    -> TF.Attr s [TF.Attr s (InstanceSetting s)] -- ^ @instance@ - 'P.instance''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeOrchestratedInstanceResource s)
 computeOrchestratedInstanceResource _desiredState _instance' _name =
-    TF.newResource "opc_compute_orchestrated_instance" TF.validator $
+    TF.unsafeResource "opc_compute_orchestrated_instance" P.defaultProvider TF.validator $
         ComputeOrchestratedInstanceResource'
             { _description = TF.Nil
             , _desiredState = _desiredState
@@ -1162,10 +1157,6 @@ instance TF.IsObject (ComputeOrchestratedInstanceResource s) where
 
 instance TF.IsValid (ComputeOrchestratedInstanceResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_instance'"
-                  (_instance'
-                      :: ComputeOrchestratedInstanceResource s -> TF.Attr s [TF.Attr s (ComputeOrchestratedInstanceInstance s)])
-                  TF.validator
 
 instance P.HasDescription (ComputeOrchestratedInstanceResource s) (TF.Attr s P.Text) where
     description =
@@ -1177,9 +1168,9 @@ instance P.HasDesiredState (ComputeOrchestratedInstanceResource s) (TF.Attr s P.
         P.lens (_desiredState :: ComputeOrchestratedInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _desiredState = a } :: ComputeOrchestratedInstanceResource s)
 
-instance P.HasInstance' (ComputeOrchestratedInstanceResource s) (TF.Attr s [TF.Attr s (ComputeOrchestratedInstanceInstance s)]) where
+instance P.HasInstance' (ComputeOrchestratedInstanceResource s) (TF.Attr s [TF.Attr s (InstanceSetting s)]) where
     instance' =
-        P.lens (_instance' :: ComputeOrchestratedInstanceResource s -> TF.Attr s [TF.Attr s (ComputeOrchestratedInstanceInstance s)])
+        P.lens (_instance' :: ComputeOrchestratedInstanceResource s -> TF.Attr s [TF.Attr s (InstanceSetting s)])
                (\s a -> s { _instance' = a } :: ComputeOrchestratedInstanceResource s)
 
 instance P.HasName (ComputeOrchestratedInstanceResource s) (TF.Attr s P.Text) where
@@ -1192,7 +1183,7 @@ instance P.HasTags (ComputeOrchestratedInstanceResource s) (TF.Attr s [TF.Attr s
         P.lens (_tags :: ComputeOrchestratedInstanceResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: ComputeOrchestratedInstanceResource s)
 
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ComputeOrchestratedInstanceResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ComputeOrchestratedInstanceResource s)) (TF.Attr s P.Int) where
     computedVersion x = TF.compute (TF.refKey x) "version"
 
 -- | @opc_compute_route@ Resource.
@@ -1200,7 +1191,7 @@ instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ComputeOrchestratedInstanceR
 -- See the <https://www.terraform.io/docs/providers/opc/r/compute_route.html terraform documentation>
 -- for more information.
 data ComputeRouteResource s = ComputeRouteResource'
-    { _adminDistance   :: TF.Attr s P.Integer
+    { _adminDistance   :: TF.Attr s P.Int
     -- ^ @admin_distance@ - (Optional)
     --
     , _description     :: TF.Attr s P.Text
@@ -1218,7 +1209,7 @@ data ComputeRouteResource s = ComputeRouteResource'
     , _tags            :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeRouteResource
     :: TF.Attr s P.Text -- ^ @ip_address_prefix@ - 'P.ipAddressPrefix'
@@ -1226,7 +1217,7 @@ computeRouteResource
     -> TF.Attr s P.Text -- ^ @next_hop_vnic_set@ - 'P.nextHopVnicSet'
     -> P.Resource (ComputeRouteResource s)
 computeRouteResource _ipAddressPrefix _name _nextHopVnicSet =
-    TF.newResource "opc_compute_route" TF.validator $
+    TF.unsafeResource "opc_compute_route" P.defaultProvider TF.validator $
         ComputeRouteResource'
             { _adminDistance = TF.Nil
             , _description = TF.Nil
@@ -1249,9 +1240,9 @@ instance TF.IsObject (ComputeRouteResource s) where
 instance TF.IsValid (ComputeRouteResource s) where
     validator = P.mempty
 
-instance P.HasAdminDistance (ComputeRouteResource s) (TF.Attr s P.Integer) where
+instance P.HasAdminDistance (ComputeRouteResource s) (TF.Attr s P.Int) where
     adminDistance =
-        P.lens (_adminDistance :: ComputeRouteResource s -> TF.Attr s P.Integer)
+        P.lens (_adminDistance :: ComputeRouteResource s -> TF.Attr s P.Int)
                (\s a -> s { _adminDistance = a } :: ComputeRouteResource s)
 
 instance P.HasDescription (ComputeRouteResource s) (TF.Attr s P.Text) where
@@ -1305,7 +1296,7 @@ data ComputeSecRuleResource s = ComputeSecRuleResource'
     , _sourceList      :: TF.Attr s P.Text
     -- ^ @source_list@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSecRuleResource
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
@@ -1315,7 +1306,7 @@ computeSecRuleResource
     -> TF.Attr s P.Text -- ^ @source_list@ - 'P.sourceList'
     -> P.Resource (ComputeSecRuleResource s)
 computeSecRuleResource _action _application _destinationList _name _sourceList =
-    TF.newResource "opc_compute_sec_rule" TF.validator $
+    TF.unsafeResource "opc_compute_sec_rule" P.defaultProvider TF.validator $
         ComputeSecRuleResource'
             { _action = _action
             , _application = _application
@@ -1398,14 +1389,14 @@ data ComputeSecurityApplicationResource s = ComputeSecurityApplicationResource'
     , _protocol    :: TF.Attr s P.Text
     -- ^ @protocol@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSecurityApplicationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> P.Resource (ComputeSecurityApplicationResource s)
 computeSecurityApplicationResource _name _protocol =
-    TF.newResource "opc_compute_security_application" TF.validator $
+    TF.unsafeResource "opc_compute_security_application" P.defaultProvider TF.validator $
         ComputeSecurityApplicationResource'
             { _description = TF.Nil
             , _dport = TF.Nil
@@ -1469,14 +1460,14 @@ data ComputeSecurityAssociationResource s = ComputeSecurityAssociationResource'
     , _vcable  :: TF.Attr s P.Text
     -- ^ @vcable@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSecurityAssociationResource
     :: TF.Attr s P.Text -- ^ @seclist@ - 'P.seclist'
     -> TF.Attr s P.Text -- ^ @vcable@ - 'P.vcable'
     -> P.Resource (ComputeSecurityAssociationResource s)
 computeSecurityAssociationResource _seclist _vcable =
-    TF.newResource "opc_compute_security_association" TF.validator $
+    TF.unsafeResource "opc_compute_security_association" P.defaultProvider TF.validator $
         ComputeSecurityAssociationResource'
             { _seclist = _seclist
             , _vcable = _vcable
@@ -1518,14 +1509,14 @@ data ComputeSecurityIpListResource s = ComputeSecurityIpListResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSecurityIpListResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @ip_entries@ - 'P.ipEntries'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSecurityIpListResource s)
 computeSecurityIpListResource _ipEntries _name =
-    TF.newResource "opc_compute_security_ip_list" TF.validator $
+    TF.unsafeResource "opc_compute_security_ip_list" P.defaultProvider TF.validator $
         ComputeSecurityIpListResource'
             { _description = TF.Nil
             , _ipEntries = _ipEntries
@@ -1574,13 +1565,13 @@ data ComputeSecurityListResource s = ComputeSecurityListResource'
     , _policy             :: TF.Attr s P.Text
     -- ^ @policy@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSecurityListResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSecurityListResource s)
 computeSecurityListResource _name =
-    TF.newResource "opc_compute_security_list" TF.validator $
+    TF.unsafeResource "opc_compute_security_list" P.defaultProvider TF.validator $
         ComputeSecurityListResource'
             { _description = TF.Nil
             , _name = _name
@@ -1642,13 +1633,13 @@ data ComputeSecurityProtocolResource s = ComputeSecurityProtocolResource'
     , _tags        :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSecurityProtocolResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSecurityProtocolResource s)
 computeSecurityProtocolResource _name =
-    TF.newResource "opc_compute_security_protocol" TF.validator $
+    TF.unsafeResource "opc_compute_security_protocol" P.defaultProvider TF.validator $
         ComputeSecurityProtocolResource'
             { _description = TF.Nil
             , _dstPorts = TF.Nil
@@ -1742,14 +1733,14 @@ data ComputeSecurityRuleResource s = ComputeSecurityRuleResource'
     , _tags                 :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSecurityRuleResource
     :: TF.Attr s P.Text -- ^ @flow_direction@ - 'P.flowDirection'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSecurityRuleResource s)
 computeSecurityRuleResource _flowDirection _name =
-    TF.newResource "opc_compute_security_rule" TF.validator $
+    TF.unsafeResource "opc_compute_security_rule" P.defaultProvider TF.validator $
         ComputeSecurityRuleResource'
             { _acl = TF.Nil
             , _description = TF.Nil
@@ -1851,13 +1842,13 @@ data ComputeSnapshotResource s = ComputeSnapshotResource'
     , _instance' :: TF.Attr s P.Text
     -- ^ @instance@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSnapshotResource
     :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
     -> P.Resource (ComputeSnapshotResource s)
 computeSnapshotResource _instance' =
-    TF.newResource "opc_compute_snapshot" TF.validator $
+    TF.unsafeResource "opc_compute_snapshot" P.defaultProvider TF.validator $
         ComputeSnapshotResource'
             { _account = TF.Nil
             , _instance' = _instance'
@@ -1908,14 +1899,14 @@ data ComputeSshKeyResource s = ComputeSshKeyResource'
     , _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSshKeyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSshKeyResource s)
 computeSshKeyResource _key _name =
-    TF.newResource "opc_compute_ssh_key" TF.validator $
+    TF.unsafeResource "opc_compute_ssh_key" P.defaultProvider TF.validator $
         ComputeSshKeyResource'
             { _enabled = TF.value P.True
             , _key = _key
@@ -1952,7 +1943,7 @@ instance P.HasName (ComputeSshKeyResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/opc/r/compute_storage_attachment.html terraform documentation>
 -- for more information.
 data ComputeStorageAttachmentResource s = ComputeStorageAttachmentResource'
-    { _index         :: TF.Attr s P.Integer
+    { _index         :: TF.Attr s P.Int
     -- ^ @index@ - (Required, Forces New)
     --
     , _instance'     :: TF.Attr s P.Text
@@ -1961,15 +1952,15 @@ data ComputeStorageAttachmentResource s = ComputeStorageAttachmentResource'
     , _storageVolume :: TF.Attr s P.Text
     -- ^ @storage_volume@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeStorageAttachmentResource
-    :: TF.Attr s P.Integer -- ^ @index@ - 'P.index'
+    :: TF.Attr s P.Int -- ^ @index@ - 'P.index'
     -> TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
     -> TF.Attr s P.Text -- ^ @storage_volume@ - 'P.storageVolume'
     -> P.Resource (ComputeStorageAttachmentResource s)
 computeStorageAttachmentResource _index _instance' _storageVolume =
-    TF.newResource "opc_compute_storage_attachment" TF.validator $
+    TF.unsafeResource "opc_compute_storage_attachment" P.defaultProvider TF.validator $
         ComputeStorageAttachmentResource'
             { _index = _index
             , _instance' = _instance'
@@ -1986,9 +1977,9 @@ instance TF.IsObject (ComputeStorageAttachmentResource s) where
 instance TF.IsValid (ComputeStorageAttachmentResource s) where
     validator = P.mempty
 
-instance P.HasIndex (ComputeStorageAttachmentResource s) (TF.Attr s P.Integer) where
+instance P.HasIndex (ComputeStorageAttachmentResource s) (TF.Attr s P.Int) where
     index =
-        P.lens (_index :: ComputeStorageAttachmentResource s -> TF.Attr s P.Integer)
+        P.lens (_index :: ComputeStorageAttachmentResource s -> TF.Attr s P.Int)
                (\s a -> s { _index = a } :: ComputeStorageAttachmentResource s)
 
 instance P.HasInstance' (ComputeStorageAttachmentResource s) (TF.Attr s P.Text) where
@@ -2015,13 +2006,13 @@ data ComputeStorageVolumeResource s = ComputeStorageVolumeResource'
     , _imageList      :: TF.Attr s P.Text
     -- ^ @image_list@ - (Optional, Forces New)
     --
-    , _imageListEntry :: TF.Attr s P.Integer
+    , _imageListEntry :: TF.Attr s P.Int
     -- ^ @image_list_entry@ - (Optional, Forces New)
     --
     , _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _size           :: TF.Attr s P.Integer
+    , _size           :: TF.Attr s P.Int
     -- ^ @size@ - (Required)
     --
     , _storageType    :: TF.Attr s P.Text
@@ -2030,14 +2021,14 @@ data ComputeStorageVolumeResource s = ComputeStorageVolumeResource'
     , _tags           :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeStorageVolumeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Integer -- ^ @size@ - 'P.size'
+    -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (ComputeStorageVolumeResource s)
 computeStorageVolumeResource _name _size =
-    TF.newResource "opc_compute_storage_volume" TF.validator $
+    TF.unsafeResource "opc_compute_storage_volume" P.defaultProvider TF.validator $
         ComputeStorageVolumeResource'
             { _bootable = TF.value P.False
             , _description = TF.Nil
@@ -2079,9 +2070,9 @@ instance P.HasImageList (ComputeStorageVolumeResource s) (TF.Attr s P.Text) wher
         P.lens (_imageList :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
                (\s a -> s { _imageList = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasImageListEntry (ComputeStorageVolumeResource s) (TF.Attr s P.Integer) where
+instance P.HasImageListEntry (ComputeStorageVolumeResource s) (TF.Attr s P.Int) where
     imageListEntry =
-        P.lens (_imageListEntry :: ComputeStorageVolumeResource s -> TF.Attr s P.Integer)
+        P.lens (_imageListEntry :: ComputeStorageVolumeResource s -> TF.Attr s P.Int)
                (\s a -> s { _imageListEntry = a } :: ComputeStorageVolumeResource s)
 
 instance P.HasName (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
@@ -2089,9 +2080,9 @@ instance P.HasName (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasSize (ComputeStorageVolumeResource s) (TF.Attr s P.Integer) where
+instance P.HasSize (ComputeStorageVolumeResource s) (TF.Attr s P.Int) where
     size =
-        P.lens (_size :: ComputeStorageVolumeResource s -> TF.Attr s P.Integer)
+        P.lens (_size :: ComputeStorageVolumeResource s -> TF.Attr s P.Int)
                (\s a -> s { _size = a } :: ComputeStorageVolumeResource s)
 
 instance P.HasStorageType (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
@@ -2157,13 +2148,13 @@ data ComputeStorageVolumeSnapshotResource s = ComputeStorageVolumeSnapshotResour
     , _volumeName           :: TF.Attr s P.Text
     -- ^ @volume_name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeStorageVolumeSnapshotResource
     :: TF.Attr s P.Text -- ^ @volume_name@ - 'P.volumeName'
     -> P.Resource (ComputeStorageVolumeSnapshotResource s)
 computeStorageVolumeSnapshotResource _volumeName =
-    TF.newResource "opc_compute_storage_volume_snapshot" TF.validator $
+    TF.unsafeResource "opc_compute_storage_volume_snapshot" P.defaultProvider TF.validator $
         ComputeStorageVolumeSnapshotResource'
             { _collocated = TF.value P.False
             , _description = TF.Nil
@@ -2265,13 +2256,13 @@ data ComputeVnicSetResource s = ComputeVnicSetResource'
     , _tags        :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeVnicSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeVnicSetResource s)
 computeVnicSetResource _name =
-    TF.newResource "opc_compute_vnic_set" TF.validator $
+    TF.unsafeResource "opc_compute_vnic_set" P.defaultProvider TF.validator $
         ComputeVnicSetResource'
             { _appliedAcls = TF.Nil
             , _description = TF.Nil
@@ -2333,7 +2324,7 @@ data LbaasCertificateResource s = LbaasCertificateResource'
     , _type'            :: TF.Attr s P.Text
     -- ^ @type@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 lbaasCertificateResource
     :: TF.Attr s P.Text -- ^ @certificate_body@ - 'P.certificateBody'
@@ -2341,7 +2332,7 @@ lbaasCertificateResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (LbaasCertificateResource s)
 lbaasCertificateResource _certificateBody _name _type' =
-    TF.newResource "opc_lbaas_certificate" TF.validator $
+    TF.unsafeResource "opc_lbaas_certificate" P.defaultProvider TF.validator $
         LbaasCertificateResource'
             { _certificateBody = _certificateBody
             , _certificateChain = TF.Nil
@@ -2419,7 +2410,7 @@ data LbaasListenerResource s = LbaasListenerResource'
     , _policies         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @policies@ - (Optional)
     --
-    , _port             :: TF.Attr s P.Integer
+    , _port             :: TF.Attr s P.Int
     -- ^ @port@ - (Required, Forces New)
     --
     , _serverPool       :: TF.Attr s P.Text
@@ -2434,17 +2425,17 @@ data LbaasListenerResource s = LbaasListenerResource'
     , _virtualHosts     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @virtual_hosts@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 lbaasListenerResource
     :: TF.Attr s P.Text -- ^ @balancer_protocol@ - 'P.balancerProtocol'
     -> TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Integer -- ^ @port@ - 'P.port'
+    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
     -> TF.Attr s P.Text -- ^ @server_protocol@ - 'P.serverProtocol'
     -> P.Resource (LbaasListenerResource s)
 lbaasListenerResource _balancerProtocol _loadBalancer _name _port _serverProtocol =
-    TF.newResource "opc_lbaas_listener" TF.validator $
+    TF.unsafeResource "opc_lbaas_listener" P.defaultProvider TF.validator $
         LbaasListenerResource'
             { _balancerProtocol = _balancerProtocol
             , _certificates = TF.Nil
@@ -2514,9 +2505,9 @@ instance P.HasPolicies (LbaasListenerResource s) (TF.Attr s [TF.Attr s P.Text]) 
         P.lens (_policies :: LbaasListenerResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _policies = a } :: LbaasListenerResource s)
 
-instance P.HasPort (LbaasListenerResource s) (TF.Attr s P.Integer) where
+instance P.HasPort (LbaasListenerResource s) (TF.Attr s P.Int) where
     port =
-        P.lens (_port :: LbaasListenerResource s -> TF.Attr s P.Integer)
+        P.lens (_port :: LbaasListenerResource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: LbaasListenerResource s)
 
 instance P.HasServerPool (LbaasListenerResource s) (TF.Attr s P.Text) where
@@ -2589,7 +2580,7 @@ data LbaasLoadBalancerResource s = LbaasLoadBalancerResource'
     , _tags               :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 lbaasLoadBalancerResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2597,7 +2588,7 @@ lbaasLoadBalancerResource
     -> TF.Attr s P.Text -- ^ @scheme@ - 'P.scheme'
     -> P.Resource (LbaasLoadBalancerResource s)
 lbaasLoadBalancerResource _name _region _scheme =
-    TF.newResource "opc_lbaas_load_balancer" TF.validator $
+    TF.unsafeResource "opc_lbaas_load_balancer" P.defaultProvider TF.validator $
         LbaasLoadBalancerResource'
             { _description = TF.Nil
             , _enabled = TF.value P.True
@@ -2705,160 +2696,160 @@ instance s ~ s' => P.HasComputedUri (TF.Ref s' (LbaasLoadBalancerResource s)) (T
 -- See the <https://www.terraform.io/docs/providers/opc/r/lbaas_policy.html terraform documentation>
 -- for more information.
 data LbaasPolicyResource s = LbaasPolicyResource'
-    { _applicationCookieStickinessPolicy :: TF.Attr s (LbaasPolicyApplicationCookieStickinessPolicy s)
+    { _applicationCookieStickinessPolicy :: TF.Attr s (ApplicationCookieStickinessPolicySetting s)
     -- ^ @application_cookie_stickiness_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
-    -- * 'trustedCertificatePolicy'
-    -- * 'sslNegotiationPolicy'
-    -- * 'setRequestHeaderPolicy'
     -- * 'cloudgatePolicy'
-    -- * 'rateLimitingRequestPolicy'
     -- * 'loadBalancerCookieStickinessPolicy'
-    -- * 'redirectPolicy'
     -- * 'loadBalancingMechanismPolicy'
+    -- * 'rateLimitingRequestPolicy'
+    -- * 'redirectPolicy'
     -- * 'resourceAccessControlPolicy'
-    , _cloudgatePolicy :: TF.Attr s (LbaasPolicyCloudgatePolicy s)
+    -- * 'setRequestHeaderPolicy'
+    -- * 'sslNegotiationPolicy'
+    -- * 'trustedCertificatePolicy'
+    , _cloudgatePolicy :: TF.Attr s (CloudgatePolicySetting s)
     -- ^ @cloudgate_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
-    -- * 'trustedCertificatePolicy'
-    -- * 'sslNegotiationPolicy'
-    -- * 'setRequestHeaderPolicy'
-    -- * 'rateLimitingRequestPolicy'
-    -- * 'loadBalancerCookieStickinessPolicy'
     -- * 'applicationCookieStickinessPolicy'
-    -- * 'redirectPolicy'
+    -- * 'loadBalancerCookieStickinessPolicy'
     -- * 'loadBalancingMechanismPolicy'
+    -- * 'rateLimitingRequestPolicy'
+    -- * 'redirectPolicy'
     -- * 'resourceAccessControlPolicy'
+    -- * 'setRequestHeaderPolicy'
+    -- * 'sslNegotiationPolicy'
+    -- * 'trustedCertificatePolicy'
     , _loadBalancer :: TF.Attr s P.Text
     -- ^ @load_balancer@ - (Required)
     --
-    , _loadBalancerCookieStickinessPolicy :: TF.Attr s (LbaasPolicyLoadBalancerCookieStickinessPolicy s)
+    , _loadBalancerCookieStickinessPolicy :: TF.Attr s (LoadBalancerCookieStickinessPolicySetting s)
     -- ^ @load_balancer_cookie_stickiness_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
-    -- * 'trustedCertificatePolicy'
-    -- * 'sslNegotiationPolicy'
-    -- * 'setRequestHeaderPolicy'
-    -- * 'cloudgatePolicy'
-    -- * 'rateLimitingRequestPolicy'
     -- * 'applicationCookieStickinessPolicy'
-    -- * 'redirectPolicy'
+    -- * 'cloudgatePolicy'
     -- * 'loadBalancingMechanismPolicy'
+    -- * 'rateLimitingRequestPolicy'
+    -- * 'redirectPolicy'
     -- * 'resourceAccessControlPolicy'
-    , _loadBalancingMechanismPolicy :: TF.Attr s (LbaasPolicyLoadBalancingMechanismPolicy s)
+    -- * 'setRequestHeaderPolicy'
+    -- * 'sslNegotiationPolicy'
+    -- * 'trustedCertificatePolicy'
+    , _loadBalancingMechanismPolicy :: TF.Attr s (LoadBalancingMechanismPolicySetting s)
     -- ^ @load_balancing_mechanism_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
-    -- * 'trustedCertificatePolicy'
-    -- * 'sslNegotiationPolicy'
-    -- * 'setRequestHeaderPolicy'
-    -- * 'cloudgatePolicy'
-    -- * 'rateLimitingRequestPolicy'
-    -- * 'loadBalancerCookieStickinessPolicy'
     -- * 'applicationCookieStickinessPolicy'
+    -- * 'cloudgatePolicy'
+    -- * 'loadBalancerCookieStickinessPolicy'
+    -- * 'rateLimitingRequestPolicy'
     -- * 'redirectPolicy'
     -- * 'resourceAccessControlPolicy'
+    -- * 'setRequestHeaderPolicy'
+    -- * 'sslNegotiationPolicy'
+    -- * 'trustedCertificatePolicy'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _rateLimitingRequestPolicy :: TF.Attr s (LbaasPolicyRateLimitingRequestPolicy s)
+    , _rateLimitingRequestPolicy :: TF.Attr s (RateLimitingRequestPolicySetting s)
     -- ^ @rate_limiting_request_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
-    -- * 'trustedCertificatePolicy'
-    -- * 'sslNegotiationPolicy'
-    -- * 'setRequestHeaderPolicy'
+    -- * 'applicationCookieStickinessPolicy'
     -- * 'cloudgatePolicy'
     -- * 'loadBalancerCookieStickinessPolicy'
-    -- * 'applicationCookieStickinessPolicy'
-    -- * 'redirectPolicy'
     -- * 'loadBalancingMechanismPolicy'
+    -- * 'redirectPolicy'
     -- * 'resourceAccessControlPolicy'
-    , _redirectPolicy :: TF.Attr s (LbaasPolicyRedirectPolicy s)
+    -- * 'setRequestHeaderPolicy'
+    -- * 'sslNegotiationPolicy'
+    -- * 'trustedCertificatePolicy'
+    , _redirectPolicy :: TF.Attr s (RedirectPolicySetting s)
     -- ^ @redirect_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
-    -- * 'trustedCertificatePolicy'
-    -- * 'sslNegotiationPolicy'
-    -- * 'setRequestHeaderPolicy'
-    -- * 'cloudgatePolicy'
-    -- * 'rateLimitingRequestPolicy'
-    -- * 'loadBalancerCookieStickinessPolicy'
     -- * 'applicationCookieStickinessPolicy'
+    -- * 'cloudgatePolicy'
+    -- * 'loadBalancerCookieStickinessPolicy'
     -- * 'loadBalancingMechanismPolicy'
+    -- * 'rateLimitingRequestPolicy'
     -- * 'resourceAccessControlPolicy'
-    , _resourceAccessControlPolicy :: TF.Attr s (LbaasPolicyResourceAccessControlPolicy s)
+    -- * 'setRequestHeaderPolicy'
+    -- * 'sslNegotiationPolicy'
+    -- * 'trustedCertificatePolicy'
+    , _resourceAccessControlPolicy :: TF.Attr s (ResourceAccessControlPolicySetting s)
     -- ^ @resource_access_control_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
-    -- * 'trustedCertificatePolicy'
-    -- * 'sslNegotiationPolicy'
-    -- * 'setRequestHeaderPolicy'
-    -- * 'cloudgatePolicy'
-    -- * 'rateLimitingRequestPolicy'
-    -- * 'loadBalancerCookieStickinessPolicy'
     -- * 'applicationCookieStickinessPolicy'
-    -- * 'redirectPolicy'
+    -- * 'cloudgatePolicy'
+    -- * 'loadBalancerCookieStickinessPolicy'
     -- * 'loadBalancingMechanismPolicy'
-    , _setRequestHeaderPolicy :: TF.Attr s (LbaasPolicySetRequestHeaderPolicy s)
+    -- * 'rateLimitingRequestPolicy'
+    -- * 'redirectPolicy'
+    -- * 'setRequestHeaderPolicy'
+    -- * 'sslNegotiationPolicy'
+    -- * 'trustedCertificatePolicy'
+    , _setRequestHeaderPolicy :: TF.Attr s (SetRequestHeaderPolicySetting s)
     -- ^ @set_request_header_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
-    -- * 'trustedCertificatePolicy'
-    -- * 'sslNegotiationPolicy'
-    -- * 'cloudgatePolicy'
-    -- * 'rateLimitingRequestPolicy'
-    -- * 'loadBalancerCookieStickinessPolicy'
     -- * 'applicationCookieStickinessPolicy'
-    -- * 'redirectPolicy'
+    -- * 'cloudgatePolicy'
+    -- * 'loadBalancerCookieStickinessPolicy'
     -- * 'loadBalancingMechanismPolicy'
+    -- * 'rateLimitingRequestPolicy'
+    -- * 'redirectPolicy'
     -- * 'resourceAccessControlPolicy'
-    , _sslNegotiationPolicy :: TF.Attr s (LbaasPolicySslNegotiationPolicy s)
+    -- * 'sslNegotiationPolicy'
+    -- * 'trustedCertificatePolicy'
+    , _sslNegotiationPolicy :: TF.Attr s (SslNegotiationPolicySetting s)
     -- ^ @ssl_negotiation_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
-    -- * 'trustedCertificatePolicy'
-    -- * 'setRequestHeaderPolicy'
-    -- * 'cloudgatePolicy'
-    -- * 'rateLimitingRequestPolicy'
-    -- * 'loadBalancerCookieStickinessPolicy'
     -- * 'applicationCookieStickinessPolicy'
-    -- * 'redirectPolicy'
+    -- * 'cloudgatePolicy'
+    -- * 'loadBalancerCookieStickinessPolicy'
     -- * 'loadBalancingMechanismPolicy'
+    -- * 'rateLimitingRequestPolicy'
+    -- * 'redirectPolicy'
     -- * 'resourceAccessControlPolicy'
-    , _trustedCertificatePolicy :: TF.Attr s (LbaasPolicyTrustedCertificatePolicy s)
+    -- * 'setRequestHeaderPolicy'
+    -- * 'trustedCertificatePolicy'
+    , _trustedCertificatePolicy :: TF.Attr s (TrustedCertificatePolicySetting s)
     -- ^ @trusted_certificate_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
-    -- * 'sslNegotiationPolicy'
-    -- * 'setRequestHeaderPolicy'
-    -- * 'cloudgatePolicy'
-    -- * 'rateLimitingRequestPolicy'
-    -- * 'loadBalancerCookieStickinessPolicy'
     -- * 'applicationCookieStickinessPolicy'
-    -- * 'redirectPolicy'
+    -- * 'cloudgatePolicy'
+    -- * 'loadBalancerCookieStickinessPolicy'
     -- * 'loadBalancingMechanismPolicy'
+    -- * 'rateLimitingRequestPolicy'
+    -- * 'redirectPolicy'
     -- * 'resourceAccessControlPolicy'
-    } deriving (P.Show, P.Eq, P.Generic)
+    -- * 'setRequestHeaderPolicy'
+    -- * 'sslNegotiationPolicy'
+    } deriving (P.Show, P.Eq, P.Ord)
 
 lbaasPolicyResource
     :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LbaasPolicyResource s)
 lbaasPolicyResource _loadBalancer _name =
-    TF.newResource "opc_lbaas_policy" TF.validator $
+    TF.unsafeResource "opc_lbaas_policy" P.defaultProvider TF.validator $
         LbaasPolicyResource'
             { _applicationCookieStickinessPolicy = TF.Nil
             , _cloudgatePolicy = TF.Nil
@@ -2895,103 +2886,103 @@ instance TF.IsValid (LbaasPolicyResource s) where
         [ if (_applicationCookieStickinessPolicy P.== TF.Nil)
               then P.Nothing
               else P.Just ("_applicationCookieStickinessPolicy",
-                            [ "_trustedCertificatePolicy"                            , "_sslNegotiationPolicy"                            , "_setRequestHeaderPolicy"                            , "_cloudgatePolicy"                            , "_rateLimitingRequestPolicy"                            , "_loadBalancerCookieStickinessPolicy"                            , "_redirectPolicy"                            , "_loadBalancingMechanismPolicy"                            , "_resourceAccessControlPolicy"
+                            [ "_cloudgatePolicy"                            , "_loadBalancerCookieStickinessPolicy"                            , "_loadBalancingMechanismPolicy"                            , "_rateLimitingRequestPolicy"                            , "_redirectPolicy"                            , "_resourceAccessControlPolicy"                            , "_setRequestHeaderPolicy"                            , "_sslNegotiationPolicy"                            , "_trustedCertificatePolicy"
                             ])
         , if (_cloudgatePolicy P.== TF.Nil)
               then P.Nothing
               else P.Just ("_cloudgatePolicy",
-                            [ "_trustedCertificatePolicy"                            , "_sslNegotiationPolicy"                            , "_setRequestHeaderPolicy"                            , "_rateLimitingRequestPolicy"                            , "_loadBalancerCookieStickinessPolicy"                            , "_applicationCookieStickinessPolicy"                            , "_redirectPolicy"                            , "_loadBalancingMechanismPolicy"                            , "_resourceAccessControlPolicy"
+                            [ "_applicationCookieStickinessPolicy"                            , "_loadBalancerCookieStickinessPolicy"                            , "_loadBalancingMechanismPolicy"                            , "_rateLimitingRequestPolicy"                            , "_redirectPolicy"                            , "_resourceAccessControlPolicy"                            , "_setRequestHeaderPolicy"                            , "_sslNegotiationPolicy"                            , "_trustedCertificatePolicy"
                             ])
         , if (_loadBalancerCookieStickinessPolicy P.== TF.Nil)
               then P.Nothing
               else P.Just ("_loadBalancerCookieStickinessPolicy",
-                            [ "_trustedCertificatePolicy"                            , "_sslNegotiationPolicy"                            , "_setRequestHeaderPolicy"                            , "_cloudgatePolicy"                            , "_rateLimitingRequestPolicy"                            , "_applicationCookieStickinessPolicy"                            , "_redirectPolicy"                            , "_loadBalancingMechanismPolicy"                            , "_resourceAccessControlPolicy"
+                            [ "_applicationCookieStickinessPolicy"                            , "_cloudgatePolicy"                            , "_loadBalancingMechanismPolicy"                            , "_rateLimitingRequestPolicy"                            , "_redirectPolicy"                            , "_resourceAccessControlPolicy"                            , "_setRequestHeaderPolicy"                            , "_sslNegotiationPolicy"                            , "_trustedCertificatePolicy"
                             ])
         , if (_loadBalancingMechanismPolicy P.== TF.Nil)
               then P.Nothing
               else P.Just ("_loadBalancingMechanismPolicy",
-                            [ "_trustedCertificatePolicy"                            , "_sslNegotiationPolicy"                            , "_setRequestHeaderPolicy"                            , "_cloudgatePolicy"                            , "_rateLimitingRequestPolicy"                            , "_loadBalancerCookieStickinessPolicy"                            , "_applicationCookieStickinessPolicy"                            , "_redirectPolicy"                            , "_resourceAccessControlPolicy"
+                            [ "_applicationCookieStickinessPolicy"                            , "_cloudgatePolicy"                            , "_loadBalancerCookieStickinessPolicy"                            , "_rateLimitingRequestPolicy"                            , "_redirectPolicy"                            , "_resourceAccessControlPolicy"                            , "_setRequestHeaderPolicy"                            , "_sslNegotiationPolicy"                            , "_trustedCertificatePolicy"
                             ])
         , if (_rateLimitingRequestPolicy P.== TF.Nil)
               then P.Nothing
               else P.Just ("_rateLimitingRequestPolicy",
-                            [ "_trustedCertificatePolicy"                            , "_sslNegotiationPolicy"                            , "_setRequestHeaderPolicy"                            , "_cloudgatePolicy"                            , "_loadBalancerCookieStickinessPolicy"                            , "_applicationCookieStickinessPolicy"                            , "_redirectPolicy"                            , "_loadBalancingMechanismPolicy"                            , "_resourceAccessControlPolicy"
+                            [ "_applicationCookieStickinessPolicy"                            , "_cloudgatePolicy"                            , "_loadBalancerCookieStickinessPolicy"                            , "_loadBalancingMechanismPolicy"                            , "_redirectPolicy"                            , "_resourceAccessControlPolicy"                            , "_setRequestHeaderPolicy"                            , "_sslNegotiationPolicy"                            , "_trustedCertificatePolicy"
                             ])
         , if (_redirectPolicy P.== TF.Nil)
               then P.Nothing
               else P.Just ("_redirectPolicy",
-                            [ "_trustedCertificatePolicy"                            , "_sslNegotiationPolicy"                            , "_setRequestHeaderPolicy"                            , "_cloudgatePolicy"                            , "_rateLimitingRequestPolicy"                            , "_loadBalancerCookieStickinessPolicy"                            , "_applicationCookieStickinessPolicy"                            , "_loadBalancingMechanismPolicy"                            , "_resourceAccessControlPolicy"
+                            [ "_applicationCookieStickinessPolicy"                            , "_cloudgatePolicy"                            , "_loadBalancerCookieStickinessPolicy"                            , "_loadBalancingMechanismPolicy"                            , "_rateLimitingRequestPolicy"                            , "_resourceAccessControlPolicy"                            , "_setRequestHeaderPolicy"                            , "_sslNegotiationPolicy"                            , "_trustedCertificatePolicy"
                             ])
         , if (_resourceAccessControlPolicy P.== TF.Nil)
               then P.Nothing
               else P.Just ("_resourceAccessControlPolicy",
-                            [ "_trustedCertificatePolicy"                            , "_sslNegotiationPolicy"                            , "_setRequestHeaderPolicy"                            , "_cloudgatePolicy"                            , "_rateLimitingRequestPolicy"                            , "_loadBalancerCookieStickinessPolicy"                            , "_applicationCookieStickinessPolicy"                            , "_redirectPolicy"                            , "_loadBalancingMechanismPolicy"
+                            [ "_applicationCookieStickinessPolicy"                            , "_cloudgatePolicy"                            , "_loadBalancerCookieStickinessPolicy"                            , "_loadBalancingMechanismPolicy"                            , "_rateLimitingRequestPolicy"                            , "_redirectPolicy"                            , "_setRequestHeaderPolicy"                            , "_sslNegotiationPolicy"                            , "_trustedCertificatePolicy"
                             ])
         , if (_setRequestHeaderPolicy P.== TF.Nil)
               then P.Nothing
               else P.Just ("_setRequestHeaderPolicy",
-                            [ "_trustedCertificatePolicy"                            , "_sslNegotiationPolicy"                            , "_cloudgatePolicy"                            , "_rateLimitingRequestPolicy"                            , "_loadBalancerCookieStickinessPolicy"                            , "_applicationCookieStickinessPolicy"                            , "_redirectPolicy"                            , "_loadBalancingMechanismPolicy"                            , "_resourceAccessControlPolicy"
+                            [ "_applicationCookieStickinessPolicy"                            , "_cloudgatePolicy"                            , "_loadBalancerCookieStickinessPolicy"                            , "_loadBalancingMechanismPolicy"                            , "_rateLimitingRequestPolicy"                            , "_redirectPolicy"                            , "_resourceAccessControlPolicy"                            , "_sslNegotiationPolicy"                            , "_trustedCertificatePolicy"
                             ])
         , if (_sslNegotiationPolicy P.== TF.Nil)
               then P.Nothing
               else P.Just ("_sslNegotiationPolicy",
-                            [ "_trustedCertificatePolicy"                            , "_setRequestHeaderPolicy"                            , "_cloudgatePolicy"                            , "_rateLimitingRequestPolicy"                            , "_loadBalancerCookieStickinessPolicy"                            , "_applicationCookieStickinessPolicy"                            , "_redirectPolicy"                            , "_loadBalancingMechanismPolicy"                            , "_resourceAccessControlPolicy"
+                            [ "_applicationCookieStickinessPolicy"                            , "_cloudgatePolicy"                            , "_loadBalancerCookieStickinessPolicy"                            , "_loadBalancingMechanismPolicy"                            , "_rateLimitingRequestPolicy"                            , "_redirectPolicy"                            , "_resourceAccessControlPolicy"                            , "_setRequestHeaderPolicy"                            , "_trustedCertificatePolicy"
                             ])
         , if (_trustedCertificatePolicy P.== TF.Nil)
               then P.Nothing
               else P.Just ("_trustedCertificatePolicy",
-                            [ "_sslNegotiationPolicy"                            , "_setRequestHeaderPolicy"                            , "_cloudgatePolicy"                            , "_rateLimitingRequestPolicy"                            , "_loadBalancerCookieStickinessPolicy"                            , "_applicationCookieStickinessPolicy"                            , "_redirectPolicy"                            , "_loadBalancingMechanismPolicy"                            , "_resourceAccessControlPolicy"
+                            [ "_applicationCookieStickinessPolicy"                            , "_cloudgatePolicy"                            , "_loadBalancerCookieStickinessPolicy"                            , "_loadBalancingMechanismPolicy"                            , "_rateLimitingRequestPolicy"                            , "_redirectPolicy"                            , "_resourceAccessControlPolicy"                            , "_setRequestHeaderPolicy"                            , "_sslNegotiationPolicy"
                             ])
         ])
            P.<> TF.settingsValidator "_applicationCookieStickinessPolicy"
                   (_applicationCookieStickinessPolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyApplicationCookieStickinessPolicy s))
+                      :: LbaasPolicyResource s -> TF.Attr s (ApplicationCookieStickinessPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_cloudgatePolicy"
                   (_cloudgatePolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyCloudgatePolicy s))
+                      :: LbaasPolicyResource s -> TF.Attr s (CloudgatePolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_loadBalancerCookieStickinessPolicy"
                   (_loadBalancerCookieStickinessPolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyLoadBalancerCookieStickinessPolicy s))
+                      :: LbaasPolicyResource s -> TF.Attr s (LoadBalancerCookieStickinessPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_loadBalancingMechanismPolicy"
                   (_loadBalancingMechanismPolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyLoadBalancingMechanismPolicy s))
+                      :: LbaasPolicyResource s -> TF.Attr s (LoadBalancingMechanismPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_rateLimitingRequestPolicy"
                   (_rateLimitingRequestPolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyRateLimitingRequestPolicy s))
+                      :: LbaasPolicyResource s -> TF.Attr s (RateLimitingRequestPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_redirectPolicy"
                   (_redirectPolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyRedirectPolicy s))
+                      :: LbaasPolicyResource s -> TF.Attr s (RedirectPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_resourceAccessControlPolicy"
                   (_resourceAccessControlPolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyResourceAccessControlPolicy s))
+                      :: LbaasPolicyResource s -> TF.Attr s (ResourceAccessControlPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_setRequestHeaderPolicy"
                   (_setRequestHeaderPolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicySetRequestHeaderPolicy s))
+                      :: LbaasPolicyResource s -> TF.Attr s (SetRequestHeaderPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_sslNegotiationPolicy"
                   (_sslNegotiationPolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicySslNegotiationPolicy s))
+                      :: LbaasPolicyResource s -> TF.Attr s (SslNegotiationPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_trustedCertificatePolicy"
                   (_trustedCertificatePolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyTrustedCertificatePolicy s))
+                      :: LbaasPolicyResource s -> TF.Attr s (TrustedCertificatePolicySetting s))
                   TF.validator
 
-instance P.HasApplicationCookieStickinessPolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicyApplicationCookieStickinessPolicy s)) where
+instance P.HasApplicationCookieStickinessPolicy (LbaasPolicyResource s) (TF.Attr s (ApplicationCookieStickinessPolicySetting s)) where
     applicationCookieStickinessPolicy =
-        P.lens (_applicationCookieStickinessPolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyApplicationCookieStickinessPolicy s))
+        P.lens (_applicationCookieStickinessPolicy :: LbaasPolicyResource s -> TF.Attr s (ApplicationCookieStickinessPolicySetting s))
                (\s a -> s { _applicationCookieStickinessPolicy = a } :: LbaasPolicyResource s)
 
-instance P.HasCloudgatePolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicyCloudgatePolicy s)) where
+instance P.HasCloudgatePolicy (LbaasPolicyResource s) (TF.Attr s (CloudgatePolicySetting s)) where
     cloudgatePolicy =
-        P.lens (_cloudgatePolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyCloudgatePolicy s))
+        P.lens (_cloudgatePolicy :: LbaasPolicyResource s -> TF.Attr s (CloudgatePolicySetting s))
                (\s a -> s { _cloudgatePolicy = a } :: LbaasPolicyResource s)
 
 instance P.HasLoadBalancer (LbaasPolicyResource s) (TF.Attr s P.Text) where
@@ -2999,14 +2990,14 @@ instance P.HasLoadBalancer (LbaasPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_loadBalancer :: LbaasPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _loadBalancer = a } :: LbaasPolicyResource s)
 
-instance P.HasLoadBalancerCookieStickinessPolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicyLoadBalancerCookieStickinessPolicy s)) where
+instance P.HasLoadBalancerCookieStickinessPolicy (LbaasPolicyResource s) (TF.Attr s (LoadBalancerCookieStickinessPolicySetting s)) where
     loadBalancerCookieStickinessPolicy =
-        P.lens (_loadBalancerCookieStickinessPolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyLoadBalancerCookieStickinessPolicy s))
+        P.lens (_loadBalancerCookieStickinessPolicy :: LbaasPolicyResource s -> TF.Attr s (LoadBalancerCookieStickinessPolicySetting s))
                (\s a -> s { _loadBalancerCookieStickinessPolicy = a } :: LbaasPolicyResource s)
 
-instance P.HasLoadBalancingMechanismPolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicyLoadBalancingMechanismPolicy s)) where
+instance P.HasLoadBalancingMechanismPolicy (LbaasPolicyResource s) (TF.Attr s (LoadBalancingMechanismPolicySetting s)) where
     loadBalancingMechanismPolicy =
-        P.lens (_loadBalancingMechanismPolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyLoadBalancingMechanismPolicy s))
+        P.lens (_loadBalancingMechanismPolicy :: LbaasPolicyResource s -> TF.Attr s (LoadBalancingMechanismPolicySetting s))
                (\s a -> s { _loadBalancingMechanismPolicy = a } :: LbaasPolicyResource s)
 
 instance P.HasName (LbaasPolicyResource s) (TF.Attr s P.Text) where
@@ -3014,34 +3005,34 @@ instance P.HasName (LbaasPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_name :: LbaasPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: LbaasPolicyResource s)
 
-instance P.HasRateLimitingRequestPolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicyRateLimitingRequestPolicy s)) where
+instance P.HasRateLimitingRequestPolicy (LbaasPolicyResource s) (TF.Attr s (RateLimitingRequestPolicySetting s)) where
     rateLimitingRequestPolicy =
-        P.lens (_rateLimitingRequestPolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyRateLimitingRequestPolicy s))
+        P.lens (_rateLimitingRequestPolicy :: LbaasPolicyResource s -> TF.Attr s (RateLimitingRequestPolicySetting s))
                (\s a -> s { _rateLimitingRequestPolicy = a } :: LbaasPolicyResource s)
 
-instance P.HasRedirectPolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicyRedirectPolicy s)) where
+instance P.HasRedirectPolicy (LbaasPolicyResource s) (TF.Attr s (RedirectPolicySetting s)) where
     redirectPolicy =
-        P.lens (_redirectPolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyRedirectPolicy s))
+        P.lens (_redirectPolicy :: LbaasPolicyResource s -> TF.Attr s (RedirectPolicySetting s))
                (\s a -> s { _redirectPolicy = a } :: LbaasPolicyResource s)
 
-instance P.HasResourceAccessControlPolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicyResourceAccessControlPolicy s)) where
+instance P.HasResourceAccessControlPolicy (LbaasPolicyResource s) (TF.Attr s (ResourceAccessControlPolicySetting s)) where
     resourceAccessControlPolicy =
-        P.lens (_resourceAccessControlPolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyResourceAccessControlPolicy s))
+        P.lens (_resourceAccessControlPolicy :: LbaasPolicyResource s -> TF.Attr s (ResourceAccessControlPolicySetting s))
                (\s a -> s { _resourceAccessControlPolicy = a } :: LbaasPolicyResource s)
 
-instance P.HasSetRequestHeaderPolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicySetRequestHeaderPolicy s)) where
+instance P.HasSetRequestHeaderPolicy (LbaasPolicyResource s) (TF.Attr s (SetRequestHeaderPolicySetting s)) where
     setRequestHeaderPolicy =
-        P.lens (_setRequestHeaderPolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicySetRequestHeaderPolicy s))
+        P.lens (_setRequestHeaderPolicy :: LbaasPolicyResource s -> TF.Attr s (SetRequestHeaderPolicySetting s))
                (\s a -> s { _setRequestHeaderPolicy = a } :: LbaasPolicyResource s)
 
-instance P.HasSslNegotiationPolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicySslNegotiationPolicy s)) where
+instance P.HasSslNegotiationPolicy (LbaasPolicyResource s) (TF.Attr s (SslNegotiationPolicySetting s)) where
     sslNegotiationPolicy =
-        P.lens (_sslNegotiationPolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicySslNegotiationPolicy s))
+        P.lens (_sslNegotiationPolicy :: LbaasPolicyResource s -> TF.Attr s (SslNegotiationPolicySetting s))
                (\s a -> s { _sslNegotiationPolicy = a } :: LbaasPolicyResource s)
 
-instance P.HasTrustedCertificatePolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicyTrustedCertificatePolicy s)) where
+instance P.HasTrustedCertificatePolicy (LbaasPolicyResource s) (TF.Attr s (TrustedCertificatePolicySetting s)) where
     trustedCertificatePolicy =
-        P.lens (_trustedCertificatePolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyTrustedCertificatePolicy s))
+        P.lens (_trustedCertificatePolicy :: LbaasPolicyResource s -> TF.Attr s (TrustedCertificatePolicySetting s))
                (\s a -> s { _trustedCertificatePolicy = a } :: LbaasPolicyResource s)
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (LbaasPolicyResource s)) (TF.Attr s P.Bool) where
@@ -3061,7 +3052,7 @@ data LbaasServerPoolResource s = LbaasServerPoolResource'
     { _enabled      :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _healthCheck  :: TF.Attr s (LbaasServerPoolHealthCheck s)
+    , _healthCheck  :: TF.Attr s (HealthCheckSetting s)
     -- ^ @health_check@ - (Optional)
     --
     , _loadBalancer :: TF.Attr s P.Text
@@ -3079,7 +3070,7 @@ data LbaasServerPoolResource s = LbaasServerPoolResource'
     , _vnicSet      :: TF.Attr s P.Text
     -- ^ @vnic_set@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 lbaasServerPoolResource
     :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
@@ -3087,7 +3078,7 @@ lbaasServerPoolResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @servers@ - 'P.servers'
     -> P.Resource (LbaasServerPoolResource s)
 lbaasServerPoolResource _loadBalancer _name _servers =
-    TF.newResource "opc_lbaas_server_pool" TF.validator $
+    TF.unsafeResource "opc_lbaas_server_pool" P.defaultProvider TF.validator $
         LbaasServerPoolResource'
             { _enabled = TF.value P.True
             , _healthCheck = TF.Nil
@@ -3113,7 +3104,7 @@ instance TF.IsValid (LbaasServerPoolResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_healthCheck"
                   (_healthCheck
-                      :: LbaasServerPoolResource s -> TF.Attr s (LbaasServerPoolHealthCheck s))
+                      :: LbaasServerPoolResource s -> TF.Attr s (HealthCheckSetting s))
                   TF.validator
 
 instance P.HasEnabled (LbaasServerPoolResource s) (TF.Attr s P.Bool) where
@@ -3121,9 +3112,9 @@ instance P.HasEnabled (LbaasServerPoolResource s) (TF.Attr s P.Bool) where
         P.lens (_enabled :: LbaasServerPoolResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enabled = a } :: LbaasServerPoolResource s)
 
-instance P.HasHealthCheck (LbaasServerPoolResource s) (TF.Attr s (LbaasServerPoolHealthCheck s)) where
+instance P.HasHealthCheck (LbaasServerPoolResource s) (TF.Attr s (HealthCheckSetting s)) where
     healthCheck =
-        P.lens (_healthCheck :: LbaasServerPoolResource s -> TF.Attr s (LbaasServerPoolHealthCheck s))
+        P.lens (_healthCheck :: LbaasServerPoolResource s -> TF.Attr s (HealthCheckSetting s))
                (\s a -> s { _healthCheck = a } :: LbaasServerPoolResource s)
 
 instance P.HasLoadBalancer (LbaasServerPoolResource s) (TF.Attr s P.Text) where
@@ -3171,10 +3162,10 @@ instance s ~ s' => P.HasComputedUri (TF.Ref s' (LbaasServerPoolResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/opc/r/storage_container.html terraform documentation>
 -- for more information.
 data StorageContainerResource s = StorageContainerResource'
-    { _maxAge       :: TF.Attr s P.Integer
+    { _maxAge       :: TF.Attr s P.Int
     -- ^ @max_age@ - (Optional)
     --
-    , _metadata     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _metadata     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @metadata@ - (Optional)
     --
     , _name         :: TF.Attr s P.Text
@@ -3183,22 +3174,22 @@ data StorageContainerResource s = StorageContainerResource'
     , _primaryKey   :: TF.Attr s P.Text
     -- ^ @primary_key@ - (Optional)
     --
-    , _quotaBytes   :: TF.Attr s P.Integer
+    , _quotaBytes   :: TF.Attr s P.Int
     -- ^ @quota_bytes@ - (Optional)
     --
-    , _quotaCount   :: TF.Attr s P.Integer
+    , _quotaCount   :: TF.Attr s P.Int
     -- ^ @quota_count@ - (Optional)
     --
     , _secondaryKey :: TF.Attr s P.Text
     -- ^ @secondary_key@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 storageContainerResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (StorageContainerResource s)
 storageContainerResource _name =
-    TF.newResource "opc_storage_container" TF.validator $
+    TF.unsafeResource "opc_storage_container" P.defaultProvider TF.validator $
         StorageContainerResource'
             { _maxAge = TF.Nil
             , _metadata = TF.Nil
@@ -3223,14 +3214,14 @@ instance TF.IsObject (StorageContainerResource s) where
 instance TF.IsValid (StorageContainerResource s) where
     validator = P.mempty
 
-instance P.HasMaxAge (StorageContainerResource s) (TF.Attr s P.Integer) where
+instance P.HasMaxAge (StorageContainerResource s) (TF.Attr s P.Int) where
     maxAge =
-        P.lens (_maxAge :: StorageContainerResource s -> TF.Attr s P.Integer)
+        P.lens (_maxAge :: StorageContainerResource s -> TF.Attr s P.Int)
                (\s a -> s { _maxAge = a } :: StorageContainerResource s)
 
-instance P.HasMetadata (StorageContainerResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasMetadata (StorageContainerResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     metadata =
-        P.lens (_metadata :: StorageContainerResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_metadata :: StorageContainerResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _metadata = a } :: StorageContainerResource s)
 
 instance P.HasName (StorageContainerResource s) (TF.Attr s P.Text) where
@@ -3243,14 +3234,14 @@ instance P.HasPrimaryKey (StorageContainerResource s) (TF.Attr s P.Text) where
         P.lens (_primaryKey :: StorageContainerResource s -> TF.Attr s P.Text)
                (\s a -> s { _primaryKey = a } :: StorageContainerResource s)
 
-instance P.HasQuotaBytes (StorageContainerResource s) (TF.Attr s P.Integer) where
+instance P.HasQuotaBytes (StorageContainerResource s) (TF.Attr s P.Int) where
     quotaBytes =
-        P.lens (_quotaBytes :: StorageContainerResource s -> TF.Attr s P.Integer)
+        P.lens (_quotaBytes :: StorageContainerResource s -> TF.Attr s P.Int)
                (\s a -> s { _quotaBytes = a } :: StorageContainerResource s)
 
-instance P.HasQuotaCount (StorageContainerResource s) (TF.Attr s P.Integer) where
+instance P.HasQuotaCount (StorageContainerResource s) (TF.Attr s P.Int) where
     quotaCount =
-        P.lens (_quotaCount :: StorageContainerResource s -> TF.Attr s P.Integer)
+        P.lens (_quotaCount :: StorageContainerResource s -> TF.Attr s P.Int)
                (\s a -> s { _quotaCount = a } :: StorageContainerResource s)
 
 instance P.HasSecondaryKey (StorageContainerResource s) (TF.Attr s P.Text) where
@@ -3285,8 +3276,8 @@ data StorageObjectResource s = StorageObjectResource'
     --
     -- Conflicts with:
     --
-    -- * 'file'
     -- * 'copyFrom'
+    -- * 'file'
     , _contentDisposition :: TF.Attr s P.Text
     -- ^ @content_disposition@ - (Optional, Forces New)
     -- Overrides the behavior of the browser
@@ -3300,16 +3291,16 @@ data StorageObjectResource s = StorageObjectResource'
     --
     -- Conflicts with:
     --
-    -- * 'file'
     -- * 'content'
+    -- * 'file'
     , _file               :: TF.Attr s P.Text
     -- ^ @file@ - (Optional, Forces New)
     -- File path for the content to use for data
     --
     -- Conflicts with:
     --
-    -- * 'copyFrom'
     -- * 'content'
+    -- * 'copyFrom'
     , _name               :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     -- Name of the storage object
@@ -3319,14 +3310,14 @@ data StorageObjectResource s = StorageObjectResource'
     -- Sets the transfer encoding. Can only be 'chunked' or Nil, requires
     -- Content-Length to be 0 if set
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 storageObjectResource
     :: TF.Attr s P.Text -- ^ @container@ - 'P.container'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (StorageObjectResource s)
 storageObjectResource _container _name =
-    TF.newResource "opc_storage_object" TF.validator $
+    TF.unsafeResource "opc_storage_object" P.defaultProvider TF.validator $
         StorageObjectResource'
             { _container = _container
             , _content = TF.Nil
@@ -3355,17 +3346,17 @@ instance TF.IsValid (StorageObjectResource s) where
         [ if (_content P.== TF.Nil)
               then P.Nothing
               else P.Just ("_content",
-                            [ "_file"                            , "_copyFrom"
+                            [ "_copyFrom"                            , "_file"
                             ])
         , if (_copyFrom P.== TF.Nil)
               then P.Nothing
               else P.Just ("_copyFrom",
-                            [ "_file"                            , "_content"
+                            [ "_content"                            , "_file"
                             ])
         , if (_file P.== TF.Nil)
               then P.Nothing
               else P.Just ("_file",
-                            [ "_copyFrom"                            , "_content"
+                            [ "_content"                            , "_copyFrom"
                             ])
         ])
 
@@ -3412,13 +3403,13 @@ instance P.HasTransferEncoding (StorageObjectResource s) (TF.Attr s P.Text) wher
 instance s ~ s' => P.HasComputedAcceptRanges (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Text) where
     computedAcceptRanges x = TF.compute (TF.refKey x) "accept_ranges"
 
-instance s ~ s' => P.HasComputedContentLength (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedContentLength (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Int) where
     computedContentLength x = TF.compute (TF.refKey x) "content_length"
 
 instance s ~ s' => P.HasComputedContentType (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Text) where
     computedContentType x = TF.compute (TF.refKey x) "content_type"
 
-instance s ~ s' => P.HasComputedDeleteAt (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedDeleteAt (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Int) where
     computedDeleteAt x = TF.compute (TF.refKey x) "delete_at"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Text) where
@@ -3427,7 +3418,7 @@ instance s ~ s' => P.HasComputedEtag (TF.Ref s' (StorageObjectResource s)) (TF.A
 instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Text) where
     computedLastModified x = TF.compute (TF.refKey x) "last_modified"
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (StorageObjectResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (StorageObjectResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedMetadata x = TF.compute (TF.refKey x) "metadata"
 
 instance s ~ s' => P.HasComputedObjectManifest (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Text) where

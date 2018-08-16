@@ -20,6 +20,7 @@ module Terrafomo.OPC.Provider
     -- * OPC Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * OPC Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.OPC.Settings
 
-import qualified Data.Hashable       as P
-import qualified Data.HashMap.Strict as P
-import qualified Data.HashMap.Strict as Map
 import qualified Data.List.NonEmpty  as P
+import qualified Data.Map.Strict     as P
+import qualified Data.Map.Strict     as Map
 import qualified Data.Maybe          as P
 import qualified Data.Monoid         as P
 import qualified Data.Text           as P
@@ -78,7 +78,7 @@ data Provider = Provider'
     -- ^ @lbaas_endpoint@ - (Optional)
     -- The HTTP endpoint for the Load Balancer Classic service.
     --
-    , _maxRetries       :: P.Maybe P.Integer
+    , _maxRetries       :: P.Maybe P.Int
     -- ^ @max_retries@ - (Optional)
     -- Maximum number retries to wait for a successful response when operating on
     -- resources within OPC (defaults to 1)
@@ -99,7 +99,7 @@ data Provider = Provider'
     -- ^ @user@ - (Required)
     -- The user name for OPC API operations.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: P.Text -- ^ @identity_domain@ - 'P.identityDomain'
@@ -119,29 +119,26 @@ newProvider _identityDomain _password _user =
         , _user = _user
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "endpoint" <$> _endpoint
-                  , P.Just $ TF.assign "identity_domain" _identityDomain
-                  , TF.assign "insecure" <$> _insecure
-                  , TF.assign "lbaas_endpoint" <$> _lbaasEndpoint
-                  , TF.assign "max_retries" <$> _maxRetries
-                  , P.Just $ TF.assign "password" _password
-                  , TF.assign "storage_endpoint" <$> _storageEndpoint
-                  , TF.assign "storage_service_id" <$> _storageServiceId
-                  , P.Just $ TF.assign "user" _user
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  TF.assign "endpoint" <$> _endpoint
+        ,  P.Just $ TF.assign "identity_domain" _identityDomain
+        ,  TF.assign "insecure" <$> _insecure
+        ,  TF.assign "lbaas_endpoint" <$> _lbaasEndpoint
+        ,  TF.assign "max_retries" <$> _maxRetries
+        ,  P.Just $ TF.assign "password" _password
+        ,  TF.assign "storage_endpoint" <$> _storageEndpoint
+        ,  TF.assign "storage_service_id" <$> _storageServiceId
+        ,  P.Just $ TF.assign "user" _user
+        ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
@@ -166,9 +163,9 @@ instance P.HasLbaasEndpoint (Provider) (P.Maybe P.Text) where
         P.lens (_lbaasEndpoint :: Provider -> P.Maybe P.Text)
                (\s a -> s { _lbaasEndpoint = a } :: Provider)
 
-instance P.HasMaxRetries (Provider) (P.Maybe P.Integer) where
+instance P.HasMaxRetries (Provider) (P.Maybe P.Int) where
     maxRetries =
-        P.lens (_maxRetries :: Provider -> P.Maybe P.Integer)
+        P.lens (_maxRetries :: Provider -> P.Maybe P.Int)
                (\s a -> s { _maxRetries = a } :: Provider)
 
 instance P.HasPassword (Provider) (P.Text) where

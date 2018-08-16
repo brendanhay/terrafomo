@@ -58,10 +58,9 @@ import GHC.Base (($))
 
 import Terrafomo.OPC.Settings
 
-import qualified Data.Hashable          as P
-import qualified Data.HashMap.Strict    as P
-import qualified Data.HashMap.Strict    as Map
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Map.Strict        as P
+import qualified Data.Map.Strict        as Map
 import qualified Data.Maybe             as P
 import qualified Data.Monoid            as P
 import qualified Data.Text              as P
@@ -82,23 +81,23 @@ import qualified Terrafomo.Validator    as TF
 -- See the <https://www.terraform.io/docs/providers/opc/d/compute_image_list_entry.html terraform documentation>
 -- for more information.
 data ComputeImageListEntryData s = ComputeImageListEntryData'
-    { _entry     :: TF.Attr s P.Integer
+    { _entry     :: TF.Attr s P.Int
     -- ^ @entry@ - (Optional)
     --
     , _imageList :: TF.Attr s P.Text
     -- ^ @image_list@ - (Required)
     --
-    , _version   :: TF.Attr s P.Integer
+    , _version   :: TF.Attr s P.Int
     -- ^ @version@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeImageListEntryData
     :: TF.Attr s P.Text -- ^ @image_list@ - 'P.imageList'
-    -> TF.Attr s P.Integer -- ^ @version@ - 'P.version'
+    -> TF.Attr s P.Int -- ^ @version@ - 'P.version'
     -> P.DataSource (ComputeImageListEntryData s)
 computeImageListEntryData _imageList _version =
-    TF.newDataSource "opc_compute_image_list_entry" TF.validator $
+    TF.unsafeDataSource "opc_compute_image_list_entry" P.defaultProvider TF.validator $
         ComputeImageListEntryData'
             { _entry = TF.Nil
             , _imageList = _imageList
@@ -115,9 +114,9 @@ instance TF.IsObject (ComputeImageListEntryData s) where
 instance TF.IsValid (ComputeImageListEntryData s) where
     validator = P.mempty
 
-instance P.HasEntry (ComputeImageListEntryData s) (TF.Attr s P.Integer) where
+instance P.HasEntry (ComputeImageListEntryData s) (TF.Attr s P.Int) where
     entry =
-        P.lens (_entry :: ComputeImageListEntryData s -> TF.Attr s P.Integer)
+        P.lens (_entry :: ComputeImageListEntryData s -> TF.Attr s P.Int)
                (\s a -> s { _entry = a } :: ComputeImageListEntryData s)
 
 instance P.HasImageList (ComputeImageListEntryData s) (TF.Attr s P.Text) where
@@ -125,9 +124,9 @@ instance P.HasImageList (ComputeImageListEntryData s) (TF.Attr s P.Text) where
         P.lens (_imageList :: ComputeImageListEntryData s -> TF.Attr s P.Text)
                (\s a -> s { _imageList = a } :: ComputeImageListEntryData s)
 
-instance P.HasVersion (ComputeImageListEntryData s) (TF.Attr s P.Integer) where
+instance P.HasVersion (ComputeImageListEntryData s) (TF.Attr s P.Int) where
     version =
-        P.lens (_version :: ComputeImageListEntryData s -> TF.Attr s P.Integer)
+        P.lens (_version :: ComputeImageListEntryData s -> TF.Attr s P.Int)
                (\s a -> s { _version = a } :: ComputeImageListEntryData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeImageListEntryData s)) (TF.Attr s P.Text) where
@@ -150,13 +149,13 @@ data ComputeIpAddressReservationData s = ComputeIpAddressReservationData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeIpAddressReservationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeIpAddressReservationData s)
 computeIpAddressReservationData _name =
-    TF.newDataSource "opc_compute_ip_address_reservation" TF.validator $
+    TF.unsafeDataSource "opc_compute_ip_address_reservation" P.defaultProvider TF.validator $
         ComputeIpAddressReservationData'
             { _name = _name
             }
@@ -200,13 +199,13 @@ data ComputeIpReservationData s = ComputeIpReservationData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeIpReservationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeIpReservationData s)
 computeIpReservationData _name =
-    TF.newDataSource "opc_compute_ip_reservation" TF.validator $
+    TF.unsafeDataSource "opc_compute_ip_reservation" P.defaultProvider TF.validator $
         ComputeIpReservationData'
             { _name = _name
             }
@@ -253,14 +252,14 @@ data ComputeMachineImageData s = ComputeMachineImageData'
     , _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeMachineImageData
     :: TF.Attr s P.Text -- ^ @account@ - 'P.account'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeMachineImageData s)
 computeMachineImageData _account _name =
-    TF.newDataSource "opc_compute_machine_image" TF.validator $
+    TF.unsafeDataSource "opc_compute_machine_image" P.defaultProvider TF.validator $
         ComputeMachineImageData'
             { _account = _account
             , _name = _name
@@ -300,7 +299,7 @@ instance s ~ s' => P.HasComputedErrorReason (TF.Ref s' (ComputeMachineImageData 
 instance s ~ s' => P.HasComputedFile (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
     computedFile x = TF.compute (TF.refKey x) "file"
 
-instance s ~ s' => P.HasComputedHypervisor (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedHypervisor (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedHypervisor x = TF.compute (TF.refKey x) "hypervisor"
 
 instance s ~ s' => P.HasComputedImageFormat (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
@@ -312,7 +311,7 @@ instance s ~ s' => P.HasComputedNoUpload (TF.Ref s' (ComputeMachineImageData s))
 instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
     computedPlatform x = TF.compute (TF.refKey x) "platform"
 
-instance s ~ s' => P.HasComputedSizes (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedSizes (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedSizes x = TF.compute (TF.refKey x) "sizes"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
@@ -335,7 +334,7 @@ data ComputeNetworkInterfaceData s = ComputeNetworkInterfaceData'
     , _interface    :: TF.Attr s P.Text
     -- ^ @interface@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeNetworkInterfaceData
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
@@ -343,7 +342,7 @@ computeNetworkInterfaceData
     -> TF.Attr s P.Text -- ^ @interface@ - 'P.interface'
     -> P.DataSource (ComputeNetworkInterfaceData s)
 computeNetworkInterfaceData _instanceId _instanceName _interface =
-    TF.newDataSource "opc_compute_network_interface" TF.validator $
+    TF.unsafeDataSource "opc_compute_network_interface" P.defaultProvider TF.validator $
         ComputeNetworkInterfaceData'
             { _instanceId = _instanceId
             , _instanceName = _instanceName
@@ -425,13 +424,13 @@ data ComputeSshKeyData s = ComputeSshKeyData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeSshKeyData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeSshKeyData s)
 computeSshKeyData _name =
-    TF.newDataSource "opc_compute_ssh_key" TF.validator $
+    TF.unsafeDataSource "opc_compute_ssh_key" P.defaultProvider TF.validator $
         ComputeSshKeyData'
             { _name = _name
             }
@@ -466,13 +465,13 @@ data ComputeStorageVolumeSnapshotData s = ComputeStorageVolumeSnapshotData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeStorageVolumeSnapshotData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeStorageVolumeSnapshotData s)
 computeStorageVolumeSnapshotData _name =
-    TF.newDataSource "opc_compute_storage_volume_snapshot" TF.validator $
+    TF.unsafeDataSource "opc_compute_storage_volume_snapshot" P.defaultProvider TF.validator $
         ComputeStorageVolumeSnapshotData'
             { _name = _name
             }
@@ -552,13 +551,13 @@ data ComputeVnicData s = ComputeVnicData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeVnicData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeVnicData s)
 computeVnicData _name =
-    TF.newDataSource "opc_compute_vnic" TF.validator $
+    TF.unsafeDataSource "opc_compute_vnic" P.defaultProvider TF.validator $
         ComputeVnicData'
             { _name = _name
             }
