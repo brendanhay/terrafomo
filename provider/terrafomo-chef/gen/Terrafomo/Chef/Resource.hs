@@ -75,7 +75,7 @@ data DataBagResource s = DataBagResource'
 
 -- | Define a new @chef_data_bag@ resource value.
 dataBagResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (DataBagResource s)
 dataBagResource _name =
     TF.unsafeResource "chef_data_bag" TF.validator $
@@ -117,8 +117,8 @@ data DataBagItemResource s = DataBagItemResource'
 
 -- | Define a new @chef_data_bag_item@ resource value.
 dataBagItemResource
-    :: TF.Attr s P.Text -- ^ @content_json@ - 'P.contentJson'
-    -> TF.Attr s P.Text -- ^ @data_bag_name@ - 'P.dataBagName'
+    :: TF.Attr s P.Text -- ^ @content_json@ ('P._contentJson', 'P.contentJson')
+    -> TF.Attr s P.Text -- ^ @data_bag_name@ ('P._dataBagName', 'P.dataBagName')
     -> P.Resource (DataBagItemResource s)
 dataBagItemResource _contentJson _dataBagName =
     TF.unsafeResource "chef_data_bag_item" TF.validator $
@@ -173,7 +173,7 @@ data EnvironmentResource s = EnvironmentResource'
 
 -- | Define a new @chef_environment@ resource value.
 environmentResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (EnvironmentResource s)
 environmentResource _name =
     TF.unsafeResource "chef_environment" TF.validator $
@@ -255,7 +255,7 @@ data NodeResource s = NodeResource'
 
 -- | Define a new @chef_node@ resource value.
 nodeResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (NodeResource s)
 nodeResource _name =
     TF.unsafeResource "chef_node" TF.validator $
@@ -345,7 +345,7 @@ data RoleResource s = RoleResource'
 
 -- | Define a new @chef_role@ resource value.
 roleResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (RoleResource s)
 roleResource _name =
     TF.unsafeResource "chef_role" TF.validator $

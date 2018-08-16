@@ -17,10 +17,11 @@
 --
 module Terrafomo.Chef.Provider
     (
+    -- * Chef Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** Chef Specific Aliases
+    -- * Chef Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -77,8 +78,8 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @client_name@ - 'P.clientName'
-    -> P.Text -- ^ @server_url@ - 'P.serverUrl'
+    :: P.Text -- ^ @client_name@ ('P._clientName', 'P.clientName')
+    -> P.Text -- ^ @server_url@ ('P._serverUrl', 'P.serverUrl')
     -> Provider
 newProvider _clientName _serverUrl =
     Provider'
@@ -92,7 +93,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "chef"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
             , P.Just $ TF.assign "client_name" _clientName
