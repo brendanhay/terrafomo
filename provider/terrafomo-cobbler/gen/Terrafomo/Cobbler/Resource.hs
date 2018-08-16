@@ -17,7 +17,6 @@
 --
 module Terrafomo.Cobbler.Resource
     (
-    -- * Resource Datatypes
     -- ** cobbler_distro
       DistroResource (..)
     , distroResource
@@ -90,6 +89,7 @@ data DistroResource s = DistroResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cobbler_distro@ resource value.
 distroResource
     :: TF.Attr s P.Text -- ^ @breed@ - 'P.breed'
     -> TF.Attr s P.Text -- ^ @initrd@ - 'P.initrd'
@@ -193,6 +193,7 @@ data KickstartFileResource s = KickstartFileResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cobbler_kickstart_file@ resource value.
 kickstartFileResource
     :: TF.Attr s P.Text -- ^ @body@ - 'P.body'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -239,6 +240,7 @@ data ProfileResource s = ProfileResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cobbler_profile@ resource value.
 profileResource
     :: TF.Attr s P.Text -- ^ @distro@ - 'P.distro'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -378,6 +380,7 @@ data RepoResource s = RepoResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cobbler_repo@ resource value.
 repoResource
     :: TF.Attr s P.Text -- ^ @breed@ - 'P.breed'
     -> TF.Attr s P.Text -- ^ @mirror@ - 'P.mirror'
@@ -465,6 +468,7 @@ data SnippetResource s = SnippetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cobbler_snippet@ resource value.
 snippetResource
     :: TF.Attr s P.Text -- ^ @body@ - 'P.body'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -511,6 +515,7 @@ data SystemResource s = SystemResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cobbler_system@ resource value.
 systemResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @profile@ - 'P.profile'
