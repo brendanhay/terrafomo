@@ -38,10 +38,9 @@ import GHC.Base (($))
 
 import Terrafomo.Rancher.Settings
 
-import qualified Data.Hashable              as P
-import qualified Data.HashMap.Strict        as P
-import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Map.Strict            as P
+import qualified Data.Map.Strict            as Map
 import qualified Data.Maybe                 as P
 import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
@@ -68,14 +67,14 @@ data CertificateData s = CertificateData'
     , _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 certificateData
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CertificateData s)
 certificateData _environmentId _name =
-    TF.newDataSource "rancher_certificate" TF.validator $
+    TF.unsafeDataSource "rancher_certificate" P.defaultProvider TF.validator $
         CertificateData'
             { _environmentId = _environmentId
             , _name = _name
@@ -144,13 +143,13 @@ data EnvironmentData s = EnvironmentData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 environmentData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (EnvironmentData s)
 environmentData _name =
-    TF.newDataSource "rancher_environment" TF.validator $
+    TF.unsafeDataSource "rancher_environment" P.defaultProvider TF.validator $
         EnvironmentData'
             { _name = _name
             }
@@ -174,7 +173,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (EnvironmentData s)) (TF.Attr s P.
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (EnvironmentData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputedMember (TF.Ref s' (EnvironmentData s)) (TF.Attr s [TF.Attr s (EnvironmentMember s)]) where
+instance s ~ s' => P.HasComputedMember (TF.Ref s' (EnvironmentData s)) (TF.Attr s [TF.Attr s (MemberSetting s)]) where
     computedMember x = TF.compute (TF.refKey x) "member"
 
 instance s ~ s' => P.HasComputedOrchestration (TF.Ref s' (EnvironmentData s)) (TF.Attr s P.Text) where
@@ -191,13 +190,13 @@ data SettingData s = SettingData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 settingData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SettingData s)
 settingData _name =
-    TF.newDataSource "rancher_setting" TF.validator $
+    TF.unsafeDataSource "rancher_setting" P.defaultProvider TF.validator $
         SettingData'
             { _name = _name
             }

@@ -12,12 +12,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Rancher
-    ( module Terrafomo.Rancher.Lens
-    , module Terrafomo.Rancher.Settings
+    ( module Terrafomo.Rancher.DataSource
+    , module Terrafomo.Rancher.Lens
     , module Terrafomo.Rancher.Provider
     , module Terrafomo.Rancher.Resource
+    , module Terrafomo.Rancher.Settings
     , module Terrafomo.Rancher.Types
-    , module Terrafomo.Rancher.DataSource
     -- * Provider Aliases
     ) where
 

@@ -62,10 +62,9 @@ import GHC.Base (($))
 
 import Terrafomo.Rancher.Settings
 
-import qualified Data.Hashable              as P
-import qualified Data.HashMap.Strict        as P
-import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Map.Strict            as P
+import qualified Data.Map.Strict            as Map
 import qualified Data.Maybe                 as P
 import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
@@ -104,7 +103,7 @@ data CertificateResource s = CertificateResource'
     , _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 certificateResource
     :: TF.Attr s P.Text -- ^ @cert@ - 'P.cert'
@@ -113,7 +112,7 @@ certificateResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (CertificateResource s)
 certificateResource _cert _environmentId _key _name =
-    TF.newResource "rancher_certificate" TF.validator $
+    TF.unsafeResource "rancher_certificate" P.defaultProvider TF.validator $
         CertificateResource'
             { _cert = _cert
             , _certChain = TF.Nil
@@ -210,13 +209,13 @@ data EnvironmentResource s = EnvironmentResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 environmentResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (EnvironmentResource s)
 environmentResource _name =
-    TF.newResource "rancher_environment" TF.validator $
+    TF.unsafeResource "rancher_environment" P.defaultProvider TF.validator $
         EnvironmentResource'
             { _description = TF.Nil
             , _name = _name
@@ -244,7 +243,7 @@ instance P.HasName (EnvironmentResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedMember (TF.Ref s' (EnvironmentResource s)) (TF.Attr s [TF.Attr s (EnvironmentMember s)]) where
+instance s ~ s' => P.HasComputedMember (TF.Ref s' (EnvironmentResource s)) (TF.Attr s [TF.Attr s (MemberSetting s)]) where
     computedMember x = TF.compute (TF.refKey x) "member"
 
 instance s ~ s' => P.HasComputedOrchestration (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
@@ -267,13 +266,13 @@ data HostResource s = HostResource'
     , _hostname      :: TF.Attr s P.Text
     -- ^ @hostname@ - (Required)
     --
-    , _labels        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 hostResource
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
@@ -281,7 +280,7 @@ hostResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (HostResource s)
 hostResource _environmentId _hostname _name =
-    TF.newResource "rancher_host" TF.validator $
+    TF.unsafeResource "rancher_host" P.defaultProvider TF.validator $
         HostResource'
             { _description = TF.Nil
             , _environmentId = _environmentId
@@ -317,9 +316,9 @@ instance P.HasHostname (HostResource s) (TF.Attr s P.Text) where
         P.lens (_hostname :: HostResource s -> TF.Attr s P.Text)
                (\s a -> s { _hostname = a } :: HostResource s)
 
-instance P.HasLabels (HostResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (HostResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: HostResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: HostResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: HostResource s)
 
 instance P.HasName (HostResource s) (TF.Attr s P.Text) where
@@ -344,20 +343,20 @@ data RegistrationTokenResource s = RegistrationTokenResource'
     , _environmentId :: TF.Attr s P.Text
     -- ^ @environment_id@ - (Required, Forces New)
     --
-    , _hostLabels    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _hostLabels    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @host_labels@ - (Optional)
     --
     , _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 registrationTokenResource
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RegistrationTokenResource s)
 registrationTokenResource _environmentId _name =
-    TF.newResource "rancher_registration_token" TF.validator $
+    TF.unsafeResource "rancher_registration_token" P.defaultProvider TF.validator $
         RegistrationTokenResource'
             { _agentIp = TF.Nil
             , _description = TF.Nil
@@ -393,9 +392,9 @@ instance P.HasEnvironmentId (RegistrationTokenResource s) (TF.Attr s P.Text) whe
         P.lens (_environmentId :: RegistrationTokenResource s -> TF.Attr s P.Text)
                (\s a -> s { _environmentId = a } :: RegistrationTokenResource s)
 
-instance P.HasHostLabels (RegistrationTokenResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasHostLabels (RegistrationTokenResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     hostLabels =
-        P.lens (_hostLabels :: RegistrationTokenResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_hostLabels :: RegistrationTokenResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _hostLabels = a } :: RegistrationTokenResource s)
 
 instance P.HasName (RegistrationTokenResource s) (TF.Attr s P.Text) where
@@ -435,7 +434,7 @@ data RegistryResource s = RegistryResource'
     , _serverAddress :: TF.Attr s P.Text
     -- ^ @server_address@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 registryResource
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
@@ -443,7 +442,7 @@ registryResource
     -> TF.Attr s P.Text -- ^ @server_address@ - 'P.serverAddress'
     -> P.Resource (RegistryResource s)
 registryResource _environmentId _name _serverAddress =
-    TF.newResource "rancher_registry" TF.validator $
+    TF.unsafeResource "rancher_registry" P.defaultProvider TF.validator $
         RegistryResource'
             { _description = TF.Nil
             , _environmentId = _environmentId
@@ -505,7 +504,7 @@ data RegistryCredentialResource s = RegistryCredentialResource'
     , _secretValue :: TF.Attr s P.Text
     -- ^ @secret_value@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 registryCredentialResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -514,7 +513,7 @@ registryCredentialResource
     -> TF.Attr s P.Text -- ^ @secret_value@ - 'P.secretValue'
     -> P.Resource (RegistryCredentialResource s)
 registryCredentialResource _name _publicValue _registryId _secretValue =
-    TF.newResource "rancher_registry_credential" TF.validator $
+    TF.unsafeResource "rancher_registry_credential" P.defaultProvider TF.validator $
         RegistryCredentialResource'
             { _description = TF.Nil
             , _name = _name
@@ -580,7 +579,7 @@ data SecretResource s = SecretResource'
     , _value         :: TF.Attr s P.Text
     -- ^ @value@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 secretResource
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
@@ -588,7 +587,7 @@ secretResource
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> P.Resource (SecretResource s)
 secretResource _environmentId _name _value =
-    TF.newResource "rancher_secret" TF.validator $
+    TF.unsafeResource "rancher_secret" P.defaultProvider TF.validator $
         SecretResource'
             { _description = TF.Nil
             , _environmentId = _environmentId
@@ -644,7 +643,7 @@ data StackResource s = StackResource'
     , _dockerCompose  :: TF.Attr s P.Text
     -- ^ @docker_compose@ - (Optional)
     --
-    , _environment    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _environment    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @environment@ - (Optional)
     --
     , _environmentId  :: TF.Attr s P.Text
@@ -662,14 +661,14 @@ data StackResource s = StackResource'
     , _scope          :: TF.Attr s P.Text
     -- ^ @scope@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 stackResource
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (StackResource s)
 stackResource _environmentId _name =
-    TF.newResource "rancher_stack" TF.validator $
+    TF.unsafeResource "rancher_stack" P.defaultProvider TF.validator $
         StackResource'
             { _catalogId = TF.Nil
             , _description = TF.Nil
@@ -713,9 +712,9 @@ instance P.HasDockerCompose (StackResource s) (TF.Attr s P.Text) where
         P.lens (_dockerCompose :: StackResource s -> TF.Attr s P.Text)
                (\s a -> s { _dockerCompose = a } :: StackResource s)
 
-instance P.HasEnvironment (StackResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasEnvironment (StackResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     environment =
-        P.lens (_environment :: StackResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_environment :: StackResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _environment = a } :: StackResource s)
 
 instance P.HasEnvironmentId (StackResource s) (TF.Attr s P.Text) where
@@ -772,7 +771,7 @@ data VolumeResource s = VolumeResource'
     , _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 volumeResource
     :: TF.Attr s P.Text -- ^ @driver@ - 'P.driver'
@@ -780,7 +779,7 @@ volumeResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (VolumeResource s)
 volumeResource _driver _environmentId _name =
-    TF.newResource "rancher_volume" TF.validator $
+    TF.unsafeResource "rancher_volume" P.defaultProvider TF.validator $
         VolumeResource'
             { _description = TF.Nil
             , _driver = _driver
