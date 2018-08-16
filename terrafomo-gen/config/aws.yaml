@@ -36,6 +36,8 @@ field-overrides:
   SecurityGroupRuleResource:
     type': 'TF.Attr s P.NetworkTraffic'
     protocol: 'TF.Attr s P.NetworkProtocol'
+    cidrBocks: 'TF.Attr s [TF.Attr s P.IPRange]'
+    ipv6CidrBlock: 'TF.Attr s [TF.Attr s P.IPRange]'
 
   VpcResource:
     cidrBlock: 'TF.Attr s P.IPRange'
