@@ -147,6 +147,9 @@ instance P.HasTranslatedPort (DnatResource s) (TF.Attr s P.Int) where
         P.lens (_translatedPort :: DnatResource s -> TF.Attr s P.Int)
                (\s a -> s { _translatedPort = a } :: DnatResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DnatResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @vcd_edgegateway_vpn@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/vcd/r/edgegateway_vpn.html terraform documentation>
@@ -297,6 +300,9 @@ instance P.HasSharedSecret (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
         P.lens (_sharedSecret :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
                (\s a -> s { _sharedSecret = a } :: EdgegatewayVpnResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EdgegatewayVpnResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @vcd_firewall_rules@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/vcd/r/firewall_rules.html terraform documentation>
@@ -349,6 +355,9 @@ instance P.HasRule (FirewallRulesResource s) (TF.Attr s [TF.Attr s (RuleSetting 
     rule =
         P.lens (_rule :: FirewallRulesResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
                (\s a -> s { _rule = a } :: FirewallRulesResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FirewallRulesResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vcd_network@ Resource.
 --
@@ -484,6 +493,9 @@ instance P.HasStaticIpPool (NetworkResource s) (TF.Attr s [TF.Attr s (StaticIpPo
         P.lens (_staticIpPool :: NetworkResource s -> TF.Attr s [TF.Attr s (StaticIpPoolSetting s)])
                (\s a -> s { _staticIpPool = a } :: NetworkResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedHref (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
     computedHref x = TF.compute (TF.refKey x) "href"
 
@@ -540,6 +552,9 @@ instance P.HasInternalIp (SnatResource s) (TF.Attr s P.Text) where
     internalIp =
         P.lens (_internalIp :: SnatResource s -> TF.Attr s P.Text)
                (\s a -> s { _internalIp = a } :: SnatResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SnatResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vcd_vapp@ Resource.
 --
@@ -683,6 +698,9 @@ instance P.HasTemplateName (VappResource s) (TF.Attr s P.Text) where
         P.lens (_templateName :: VappResource s -> TF.Attr s P.Text)
                (\s a -> s { _templateName = a } :: VappResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VappResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedHref (TF.Ref s' (VappResource s)) (TF.Attr s P.Text) where
     computedHref x = TF.compute (TF.refKey x) "href"
 
@@ -813,6 +831,9 @@ instance P.HasVappName (VappVmResource s) (TF.Attr s P.Text) where
     vappName =
         P.lens (_vappName :: VappVmResource s -> TF.Attr s P.Text)
                (\s a -> s { _vappName = a } :: VappVmResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VappVmResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedHref (TF.Ref s' (VappVmResource s)) (TF.Attr s P.Text) where
     computedHref x = TF.compute (TF.refKey x) "href"
