@@ -83,7 +83,7 @@ databaseResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DatabaseResource s)
 databaseResource _name =
-    TF.unsafeResource "postgresql_database" P.defaultProvider TF.validator $
+    TF.unsafeResource "postgresql_database" TF.validator $
         DatabaseResource'
             { _allowConnections = TF.value P.True
             , _connectionLimit = TF.value (-1)
@@ -150,7 +150,7 @@ extensionResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ExtensionResource s)
 extensionResource _name =
-    TF.unsafeResource "postgresql_extension" P.defaultProvider TF.validator $
+    TF.unsafeResource "postgresql_extension" TF.validator $
         ExtensionResource'
             { _name = _name
             }
@@ -241,7 +241,7 @@ roleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RoleResource s)
 roleResource _name =
-    TF.unsafeResource "postgresql_role" P.defaultProvider TF.validator $
+    TF.unsafeResource "postgresql_role" TF.validator $
         RoleResource'
             { _bypassRowLevelSecurity = TF.value P.False
             , _connectionLimit = TF.value (-1)
@@ -365,7 +365,7 @@ schemaResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SchemaResource s)
 schemaResource _name =
-    TF.unsafeResource "postgresql_schema" P.defaultProvider TF.validator $
+    TF.unsafeResource "postgresql_schema" TF.validator $
         SchemaResource'
             { _ifNotExists = TF.value P.True
             , _name = _name
