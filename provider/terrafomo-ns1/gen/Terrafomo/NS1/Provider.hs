@@ -17,10 +17,11 @@
 --
 module Terrafomo.NS1.Provider
     (
+    -- * NS1 Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** NS1 Specific Aliases
+    -- * NS1 Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -84,7 +85,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "ns1"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ TF.assign "apikey" <$> _apikey
             , TF.assign "endpoint" <$> _endpoint

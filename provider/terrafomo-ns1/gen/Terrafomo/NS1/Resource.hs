@@ -151,7 +151,7 @@ data ApikeyResource s = ApikeyResource'
 
 -- | Define a new @ns1_apikey@ resource value.
 apikeyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ApikeyResource s)
 apikeyResource _name =
     TF.unsafeResource "ns1_apikey" TF.validator $
@@ -336,8 +336,8 @@ data DatafeedResource s = DatafeedResource'
 
 -- | Define a new @ns1_datafeed@ resource value.
 datafeedResource
-    :: TF.Attr s P.Text -- ^ @source_id@ - 'P.sourceId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @source_id@ ('P._sourceId', 'P.sourceId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (DatafeedResource s)
 datafeedResource _sourceId _name =
     TF.unsafeResource "ns1_datafeed" TF.validator $
@@ -393,8 +393,8 @@ data DatasourceResource s = DatasourceResource'
 
 -- | Define a new @ns1_datasource@ resource value.
 datasourceResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @sourcetype@ - 'P.sourcetype'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @sourcetype@ ('P._sourcetype', 'P.sourcetype')
     -> P.Resource (DatasourceResource s)
 datasourceResource _name _sourcetype =
     TF.unsafeResource "ns1_datasource" TF.validator $
@@ -486,11 +486,11 @@ data MonitoringjobResource s = MonitoringjobResource'
 
 -- | Define a new @ns1_monitoringjob@ resource value.
 monitoringjobResource
-    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @config@ - 'P.config'
-    -> TF.Attr s P.Int -- ^ @frequency@ - 'P.frequency'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @regions@ - 'P.regions'
-    -> TF.Attr s P.Text -- ^ @job_type@ - 'P.jobType'
+    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @config@ ('P._config', 'P.config')
+    -> TF.Attr s P.Int -- ^ @frequency@ ('P._frequency', 'P.frequency')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @regions@ ('P._regions', 'P.regions')
+    -> TF.Attr s P.Text -- ^ @job_type@ ('P._jobType', 'P.jobType')
     -> P.Resource (MonitoringjobResource s)
 monitoringjobResource _config _frequency _name _regions _jobType =
     TF.unsafeResource "ns1_monitoringjob" TF.validator $
@@ -627,7 +627,7 @@ data NotifylistResource s = NotifylistResource'
 
 -- | Define a new @ns1_notifylist@ resource value.
 notifylistResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (NotifylistResource s)
 notifylistResource _name =
     TF.unsafeResource "ns1_notifylist" TF.validator $
@@ -694,9 +694,9 @@ data RecordResource s = RecordResource'
 
 -- | Define a new @ns1_record@ resource value.
 recordResource
-    :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    :: TF.Attr s P.Text -- ^ @domain@ ('P._domain', 'P.domain')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    -> TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
     -> P.Resource (RecordResource s)
 recordResource _domain _type' _zone =
     TF.unsafeResource "ns1_record" TF.validator $
@@ -848,7 +848,7 @@ data TeamResource s = TeamResource'
 
 -- | Define a new @ns1_team@ resource value.
 teamResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (TeamResource s)
 teamResource _name =
     TF.unsafeResource "ns1_team" TF.validator $
@@ -1086,9 +1086,9 @@ data UserResource s = UserResource'
 
 -- | Define a new @ns1_user@ resource value.
 userResource
-    :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
+    :: TF.Attr s P.Text -- ^ @email@ ('P._email', 'P.email')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @username@ ('P._username', 'P.username')
     -> P.Resource (UserResource s)
 userResource _email _name _username =
     TF.unsafeResource "ns1_user" TF.validator $
@@ -1294,7 +1294,7 @@ data ZoneResource s = ZoneResource'
 
 -- | Define a new @ns1_zone@ resource value.
 zoneResource
-    :: TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    :: TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
     -> P.Resource (ZoneResource s)
 zoneResource _zone =
     TF.unsafeResource "ns1_zone" TF.validator $

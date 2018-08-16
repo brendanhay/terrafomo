@@ -124,7 +124,7 @@ data FiltersSetting s = FiltersSetting'
 
 -- | Construct a new @filters@ settings value.
 newFiltersSetting
-    :: TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
+    :: TF.Attr s P.Text -- ^ 'P._filter': @filter@
     -> FiltersSetting s
 newFiltersSetting _filter =
     FiltersSetting'
@@ -171,8 +171,8 @@ data NotificationsSetting s = NotificationsSetting'
 
 -- | Construct a new @notifications@ settings value.
 newNotificationsSetting
-    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @config@ - 'P.config'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ 'P._config': @config@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> NotificationsSetting s
 newNotificationsSetting _config _type' =
     NotificationsSetting'
@@ -212,7 +212,7 @@ data RegionsSetting s = RegionsSetting'
 
 -- | Construct a new @regions@ settings value.
 newRegionsSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> RegionsSetting s
 newRegionsSetting _name =
     RegionsSetting'
@@ -255,9 +255,9 @@ data RulesSetting s = RulesSetting'
 
 -- | Construct a new @rules@ settings value.
 newRulesSetting
-    :: TF.Attr s P.Text -- ^ @comparison@ - 'P.comparison'
-    -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
+    :: TF.Attr s P.Text -- ^ 'P._comparison': @comparison@
+    -> TF.Attr s P.Text -- ^ 'P._key': @key@
+    -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> RulesSetting s
 newRulesSetting _comparison _key _value =
     RulesSetting'
