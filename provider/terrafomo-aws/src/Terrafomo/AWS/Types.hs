@@ -10,7 +10,7 @@
 --
 module Terrafomo.AWS.Types
     (
-    -- * General
+    -- ** Regions and Availability Zones
       Region                     (..)
     , fregion
 
@@ -22,11 +22,11 @@ module Terrafomo.AWS.Types
     , NetworkTraffic             (..)
     , NetworkProtocol            (..)
 
-    -- * IAM
+    -- ** IAM
     , IAM.Document
     , IAM.Policy
 
-    -- * DynamoDB
+    -- ** DynamoDB
     , TableAttributeType (..)
     ) where
 
