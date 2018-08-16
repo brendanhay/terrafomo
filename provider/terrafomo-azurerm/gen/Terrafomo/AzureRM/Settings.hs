@@ -608,12 +608,12 @@ data AccessPolicySetting s = AccessPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newAccessPolicySetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @key_permissions@ - 'P.keyPermissions'
-    -> TF.Attr s P.Text -- ^ @object_id@ - 'P.objectId'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @secret_permissions@ - 'P.secretPermissions'
+    :: TF.Attr s P.Text -- ^ @object_id@ - 'P.objectId'
     -> TF.Attr s P.Text -- ^ @tenant_id@ - 'P.tenantId'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @key_permissions@ - 'P.keyPermissions'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @secret_permissions@ - 'P.secretPermissions'
     -> AccessPolicySetting s
-newAccessPolicySetting _keyPermissions _objectId _secretPermissions _tenantId =
+newAccessPolicySetting _objectId _tenantId _keyPermissions _secretPermissions =
     AccessPolicySetting'
         { _applicationId = TF.Nil
         , _certificatePermissions = TF.Nil
@@ -732,11 +732,11 @@ data ActionStorageQueueSetting s = ActionStorageQueueSetting'
 
 newActionStorageQueueSetting
     :: TF.Attr s P.Text -- ^ @message@ - 'P.message'
-    -> TF.Attr s P.Text -- ^ @sas_token@ - 'P.sasToken'
     -> TF.Attr s P.Text -- ^ @storage_account_name@ - 'P.storageAccountName'
     -> TF.Attr s P.Text -- ^ @storage_queue_name@ - 'P.storageQueueName'
+    -> TF.Attr s P.Text -- ^ @sas_token@ - 'P.sasToken'
     -> ActionStorageQueueSetting s
-newActionStorageQueueSetting _message _sasToken _storageAccountName _storageQueueName =
+newActionStorageQueueSetting _message _storageAccountName _storageQueueName _sasToken =
     ActionStorageQueueSetting'
         { _message = _message
         , _sasToken = _sasToken
@@ -925,10 +925,10 @@ data AdditionalUnattendConfigSetting s = AdditionalUnattendConfigSetting'
 newAdditionalUnattendConfigSetting
     :: TF.Attr s P.Text -- ^ @component@ - 'P.component'
     -> TF.Attr s P.Text -- ^ @content@ - 'P.content'
-    -> TF.Attr s P.Text -- ^ @pass@ - 'P.pass'
     -> TF.Attr s P.Text -- ^ @setting_name@ - 'P.settingName'
+    -> TF.Attr s P.Text -- ^ @pass@ - 'P.pass'
     -> AdditionalUnattendConfigSetting s
-newAdditionalUnattendConfigSetting _component _content _pass _settingName =
+newAdditionalUnattendConfigSetting _component _content _settingName _pass =
     AdditionalUnattendConfigSetting'
         { _component = _component
         , _content = _content
@@ -994,11 +994,11 @@ data AgentPoolProfileSetting s = AgentPoolProfileSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newAgentPoolProfileSetting
-    :: TF.Attr s P.Text -- ^ @dns_prefix@ - 'P.dnsPrefix'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @dns_prefix@ - 'P.dnsPrefix'
     -> TF.Attr s P.Text -- ^ @vm_size@ - 'P.vmSize'
     -> AgentPoolProfileSetting s
-newAgentPoolProfileSetting _dnsPrefix _name _vmSize =
+newAgentPoolProfileSetting _name _dnsPrefix _vmSize =
     AgentPoolProfileSetting'
         { _count = TF.value 1
         , _dnsPrefix = _dnsPrefix
@@ -1103,13 +1103,13 @@ data ApnsCredentialSetting s = ApnsCredentialSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newApnsCredentialSetting
-    :: TF.Attr s P.Text -- ^ @application_mode@ - 'P.applicationMode'
-    -> TF.Attr s P.Text -- ^ @bundle_id@ - 'P.bundleId'
+    :: TF.Attr s P.Text -- ^ @bundle_id@ - 'P.bundleId'
     -> TF.Attr s P.Text -- ^ @key_id@ - 'P.keyId'
     -> TF.Attr s P.Text -- ^ @team_id@ - 'P.teamId'
+    -> TF.Attr s P.Text -- ^ @application_mode@ - 'P.applicationMode'
     -> TF.Attr s P.Text -- ^ @token@ - 'P.token'
     -> ApnsCredentialSetting s
-newApnsCredentialSetting _applicationMode _bundleId _keyId _teamId _token =
+newApnsCredentialSetting _bundleId _keyId _teamId _applicationMode _token =
     ApnsCredentialSetting'
         { _applicationMode = _applicationMode
         , _bundleId = _bundleId
@@ -1226,10 +1226,10 @@ data AuthenticationActiveDirectorySetting s = AuthenticationActiveDirectorySetti
 
 newAuthenticationActiveDirectorySetting
     :: TF.Attr s P.Text -- ^ @client_id@ - 'P.clientId'
-    -> TF.Attr s P.Text -- ^ @secret@ - 'P.secret'
     -> TF.Attr s P.Text -- ^ @tenant_id@ - 'P.tenantId'
+    -> TF.Attr s P.Text -- ^ @secret@ - 'P.secret'
     -> AuthenticationActiveDirectorySetting s
-newAuthenticationActiveDirectorySetting _clientId _secret _tenantId =
+newAuthenticationActiveDirectorySetting _clientId _tenantId _secret =
     AuthenticationActiveDirectorySetting'
         { _clientId = _clientId
         , _secret = _secret
@@ -1543,10 +1543,10 @@ data BgpSettingsSetting s = BgpSettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newBgpSettingsSetting
-    :: TF.Attr s P.Int -- ^ @asn@ - 'P.asn'
-    -> TF.Attr s P.Text -- ^ @bgp_peering_address@ - 'P.bgpPeeringAddress'
+    :: TF.Attr s P.Text -- ^ @bgp_peering_address@ - 'P.bgpPeeringAddress'
+    -> TF.Attr s P.Int -- ^ @asn@ - 'P.asn'
     -> BgpSettingsSetting s
-newBgpSettingsSetting _asn _bgpPeeringAddress =
+newBgpSettingsSetting _bgpPeeringAddress _asn =
     BgpSettingsSetting'
         { _asn = _asn
         , _bgpPeeringAddress = _bgpPeeringAddress
@@ -1807,10 +1807,10 @@ data CertificateSetting s = CertificateSetting'
 
 newCertificateSetting
     :: TF.Attr s P.Text -- ^ @contents@ - 'P.contents'
-    -> TF.Attr s P.Text -- ^ @thumbprint@ - 'P.thumbprint'
     -> TF.Attr s P.Text -- ^ @x509_store_name@ - 'P.x509StoreName'
+    -> TF.Attr s P.Text -- ^ @thumbprint@ - 'P.thumbprint'
     -> CertificateSetting s
-newCertificateSetting _contents _thumbprint _x509StoreName =
+newCertificateSetting _contents _x509StoreName _thumbprint =
     CertificateSetting'
         { _contents = _contents
         , _password = TF.Nil
@@ -2417,11 +2417,11 @@ data DestinationSetting s = DestinationSetting'
 
 newDestinationSetting
     :: TF.Attr s P.Text -- ^ @archive_name_format@ - 'P.archiveNameFormat'
+    -> TF.Attr s P.Text -- ^ @storage_account_id@ - 'P.storageAccountId'
     -> TF.Attr s P.Text -- ^ @blob_container_name@ - 'P.blobContainerName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @storage_account_id@ - 'P.storageAccountId'
     -> DestinationSetting s
-newDestinationSetting _archiveNameFormat _blobContainerName _name _storageAccountId =
+newDestinationSetting _archiveNameFormat _storageAccountId _blobContainerName _name =
     DestinationSetting'
         { _archiveNameFormat = _archiveNameFormat
         , _blobContainerName = _blobContainerName
@@ -2482,12 +2482,12 @@ data DiagnosticsConfigSetting s = DiagnosticsConfigSetting'
 
 newDiagnosticsConfigSetting
     :: TF.Attr s P.Text -- ^ @blob_endpoint@ - 'P.blobEndpoint'
-    -> TF.Attr s P.Text -- ^ @protected_account_key_name@ - 'P.protectedAccountKeyName'
     -> TF.Attr s P.Text -- ^ @queue_endpoint@ - 'P.queueEndpoint'
-    -> TF.Attr s P.Text -- ^ @storage_account_name@ - 'P.storageAccountName'
     -> TF.Attr s P.Text -- ^ @table_endpoint@ - 'P.tableEndpoint'
+    -> TF.Attr s P.Text -- ^ @protected_account_key_name@ - 'P.protectedAccountKeyName'
+    -> TF.Attr s P.Text -- ^ @storage_account_name@ - 'P.storageAccountName'
     -> DiagnosticsConfigSetting s
-newDiagnosticsConfigSetting _blobEndpoint _protectedAccountKeyName _queueEndpoint _storageAccountName _tableEndpoint =
+newDiagnosticsConfigSetting _blobEndpoint _queueEndpoint _tableEndpoint _protectedAccountKeyName _storageAccountName =
     DiagnosticsConfigSetting'
         { _blobEndpoint = _blobEndpoint
         , _protectedAccountKeyName = _protectedAccountKeyName
@@ -2577,10 +2577,10 @@ data DiskEncryptionKeySetting s = DiskEncryptionKeySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newDiskEncryptionKeySetting
-    :: TF.Attr s P.Text -- ^ @secret_url@ - 'P.secretUrl'
-    -> TF.Attr s P.Text -- ^ @source_vault_id@ - 'P.sourceVaultId'
+    :: TF.Attr s P.Text -- ^ @source_vault_id@ - 'P.sourceVaultId'
+    -> TF.Attr s P.Text -- ^ @secret_url@ - 'P.secretUrl'
     -> DiskEncryptionKeySetting s
-newDiskEncryptionKeySetting _secretUrl _sourceVaultId =
+newDiskEncryptionKeySetting _sourceVaultId _secretUrl =
     DiskEncryptionKeySetting'
         { _secretUrl = _secretUrl
         , _sourceVaultId = _sourceVaultId
@@ -2915,11 +2915,11 @@ data ErrorActionStorageQueueSetting s = ErrorActionStorageQueueSetting'
 
 newErrorActionStorageQueueSetting
     :: TF.Attr s P.Text -- ^ @message@ - 'P.message'
-    -> TF.Attr s P.Text -- ^ @sas_token@ - 'P.sasToken'
     -> TF.Attr s P.Text -- ^ @storage_account_name@ - 'P.storageAccountName'
     -> TF.Attr s P.Text -- ^ @storage_queue_name@ - 'P.storageQueueName'
+    -> TF.Attr s P.Text -- ^ @sas_token@ - 'P.sasToken'
     -> ErrorActionStorageQueueSetting s
-newErrorActionStorageQueueSetting _message _sasToken _storageAccountName _storageQueueName =
+newErrorActionStorageQueueSetting _message _storageAccountName _storageQueueName _sasToken =
     ErrorActionStorageQueueSetting'
         { _message = _message
         , _sasToken = _sasToken
@@ -3453,10 +3453,10 @@ data GatewayIpConfigurationSetting s = GatewayIpConfigurationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newGatewayIpConfigurationSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
+    :: TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> GatewayIpConfigurationSetting s
-newGatewayIpConfigurationSetting _name _subnetId =
+newGatewayIpConfigurationSetting _subnetId _name =
     GatewayIpConfigurationSetting'
         { _name = _name
         , _subnetId = _subnetId
@@ -3582,10 +3582,10 @@ data GeoLocationSetting s = GeoLocationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newGeoLocationSetting
-    :: TF.Attr s P.Int -- ^ @failover_priority@ - 'P.failoverPriority'
-    -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
+    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
+    -> TF.Attr s P.Int -- ^ @failover_priority@ - 'P.failoverPriority'
     -> GeoLocationSetting s
-newGeoLocationSetting _failoverPriority _location =
+newGeoLocationSetting _location _failoverPriority =
     GeoLocationSetting'
         { _failoverPriority = _failoverPriority
         , _location = _location
@@ -3893,14 +3893,14 @@ data ImportSetting s = ImportSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newImportSetting
-    :: TF.Attr s P.Text -- ^ @administrator_login@ - 'P.administratorLogin'
+    :: TF.Attr s P.Text -- ^ @storage_key@ - 'P.storageKey'
+    -> TF.Attr s P.Text -- ^ @administrator_login@ - 'P.administratorLogin'
     -> TF.Attr s P.Text -- ^ @administrator_login_password@ - 'P.administratorLoginPassword'
     -> TF.Attr s P.Text -- ^ @authentication_type@ - 'P.authenticationType'
-    -> TF.Attr s P.Text -- ^ @storage_key@ - 'P.storageKey'
     -> TF.Attr s P.Text -- ^ @storage_key_type@ - 'P.storageKeyType'
     -> TF.Attr s P.Text -- ^ @storage_uri@ - 'P.storageUri'
     -> ImportSetting s
-newImportSetting _administratorLogin _administratorLoginPassword _authenticationType _storageKey _storageKeyType _storageUri =
+newImportSetting _storageKey _administratorLogin _administratorLoginPassword _authenticationType _storageKeyType _storageUri =
     ImportSetting'
         { _administratorLogin = _administratorLogin
         , _administratorLoginPassword = _administratorLoginPassword
@@ -3993,11 +3993,11 @@ data IpConfigurationSetting s = IpConfigurationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newIpConfigurationSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @private_ip_address_allocation@ - 'P.privateIpAddressAllocation'
+    :: TF.Attr s P.Text -- ^ @private_ip_address_allocation@ - 'P.privateIpAddressAllocation'
     -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> IpConfigurationSetting s
-newIpConfigurationSetting _name _privateIpAddressAllocation _subnetId =
+newIpConfigurationSetting _privateIpAddressAllocation _subnetId _name =
     IpConfigurationSetting'
         { _name = _name
         , _privateIpAddress = TF.Nil
@@ -4168,14 +4168,14 @@ data IpsecPolicySetting s = IpsecPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newIpsecPolicySetting
-    :: TF.Attr s P.Text -- ^ @dh_group@ - 'P.dhGroup'
-    -> TF.Attr s P.Text -- ^ @ike_encryption@ - 'P.ikeEncryption'
-    -> TF.Attr s P.Text -- ^ @ike_integrity@ - 'P.ikeIntegrity'
+    :: TF.Attr s P.Text -- ^ @ike_encryption@ - 'P.ikeEncryption'
     -> TF.Attr s P.Text -- ^ @ipsec_encryption@ - 'P.ipsecEncryption'
-    -> TF.Attr s P.Text -- ^ @ipsec_integrity@ - 'P.ipsecIntegrity'
+    -> TF.Attr s P.Text -- ^ @dh_group@ - 'P.dhGroup'
     -> TF.Attr s P.Text -- ^ @pfs_group@ - 'P.pfsGroup'
+    -> TF.Attr s P.Text -- ^ @ike_integrity@ - 'P.ikeIntegrity'
+    -> TF.Attr s P.Text -- ^ @ipsec_integrity@ - 'P.ipsecIntegrity'
     -> IpsecPolicySetting s
-newIpsecPolicySetting _dhGroup _ikeEncryption _ikeIntegrity _ipsecEncryption _ipsecIntegrity _pfsGroup =
+newIpsecPolicySetting _ikeEncryption _ipsecEncryption _dhGroup _pfsGroup _ikeIntegrity _ipsecIntegrity =
     IpsecPolicySetting'
         { _dhGroup = _dhGroup
         , _ikeEncryption = _ikeEncryption
@@ -4275,10 +4275,10 @@ data KeyEncryptionKeySetting s = KeyEncryptionKeySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newKeyEncryptionKeySetting
-    :: TF.Attr s P.Text -- ^ @key_url@ - 'P.keyUrl'
-    -> TF.Attr s P.Text -- ^ @source_vault_id@ - 'P.sourceVaultId'
+    :: TF.Attr s P.Text -- ^ @source_vault_id@ - 'P.sourceVaultId'
+    -> TF.Attr s P.Text -- ^ @key_url@ - 'P.keyUrl'
     -> KeyEncryptionKeySetting s
-newKeyEncryptionKeySetting _keyUrl _sourceVaultId =
+newKeyEncryptionKeySetting _sourceVaultId _keyUrl =
     KeyEncryptionKeySetting'
         { _keyUrl = _keyUrl
         , _sourceVaultId = _sourceVaultId
@@ -4328,11 +4328,11 @@ data KeyPropertiesSetting s = KeyPropertiesSetting'
 
 newKeyPropertiesSetting
     :: TF.Attr s P.Bool -- ^ @exportable@ - 'P.exportable'
+    -> TF.Attr s P.Bool -- ^ @reuse_key@ - 'P.reuseKey'
     -> TF.Attr s P.Int -- ^ @key_size@ - 'P.keySize'
     -> TF.Attr s P.Text -- ^ @key_type@ - 'P.keyType'
-    -> TF.Attr s P.Bool -- ^ @reuse_key@ - 'P.reuseKey'
     -> KeyPropertiesSetting s
-newKeyPropertiesSetting _exportable _keySize _keyType _reuseKey =
+newKeyPropertiesSetting _exportable _reuseKey _keySize _keyType =
     KeyPropertiesSetting'
         { _exportable = _exportable
         , _keySize = _keySize
@@ -4465,10 +4465,10 @@ data LinuxProfileSetting s = LinuxProfileSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newLinuxProfileSetting
-    :: TF.Attr s P.Text -- ^ @admin_username@ - 'P.adminUsername'
-    -> TF.Attr s (SshKeySetting s) -- ^ @ssh_key@ - 'P.sshKey'
+    :: TF.Attr s (SshKeySetting s) -- ^ @ssh_key@ - 'P.sshKey'
+    -> TF.Attr s P.Text -- ^ @admin_username@ - 'P.adminUsername'
     -> LinuxProfileSetting s
-newLinuxProfileSetting _adminUsername _sshKey =
+newLinuxProfileSetting _sshKey _adminUsername =
     LinuxProfileSetting'
         { _adminUsername = _adminUsername
         , _sshKey = _sshKey
@@ -4613,16 +4613,16 @@ data MetricTriggerSetting s = MetricTriggerSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newMetricTriggerSetting
-    :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
+    :: TF.Attr s P.Text -- ^ @time_aggregation@ - 'P.timeAggregation'
+    -> TF.Attr s P.Text -- ^ @time_grain@ - 'P.timeGrain'
     -> TF.Attr s P.Text -- ^ @metric_resource_id@ - 'P.metricResourceId'
+    -> TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
     -> TF.Attr s P.Text -- ^ @operator@ - 'P.operator'
     -> TF.Attr s P.Text -- ^ @statistic@ - 'P.statistic'
     -> TF.Attr s P.Double -- ^ @threshold@ - 'P.threshold'
-    -> TF.Attr s P.Text -- ^ @time_aggregation@ - 'P.timeAggregation'
-    -> TF.Attr s P.Text -- ^ @time_grain@ - 'P.timeGrain'
     -> TF.Attr s P.Text -- ^ @time_window@ - 'P.timeWindow'
     -> MetricTriggerSetting s
-newMetricTriggerSetting _metricName _metricResourceId _operator _statistic _threshold _timeAggregation _timeGrain _timeWindow =
+newMetricTriggerSetting _timeAggregation _timeGrain _metricResourceId _metricName _operator _statistic _threshold _timeWindow =
     MetricTriggerSetting'
         { _metricName = _metricName
         , _metricResourceId = _metricResourceId
@@ -4838,12 +4838,12 @@ data NetworkProfileSetting s = NetworkProfileSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newNetworkProfileSetting
-    :: TF.Attr s P.Text -- ^ @network_plugin@ - 'P.networkPlugin'
-    -> TF.Attr s [TF.Attr s (IpConfigurationSetting s)] -- ^ @ip_configuration@ - 'P.ipConfiguration'
+    :: TF.Attr s [TF.Attr s (IpConfigurationSetting s)] -- ^ @ip_configuration@ - 'P.ipConfiguration'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @network_plugin@ - 'P.networkPlugin'
     -> TF.Attr s P.Bool -- ^ @primary@ - 'P.primary'
     -> NetworkProfileSetting s
-newNetworkProfileSetting _networkPlugin _ipConfiguration _name _primary =
+newNetworkProfileSetting _ipConfiguration _name _networkPlugin _primary =
     NetworkProfileSetting'
         { _networkPlugin = _networkPlugin
         , _acceleratedNetworking = TF.Nil
@@ -4994,13 +4994,13 @@ data NodeTypeSetting s = NodeTypeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newNodeTypeSetting
-    :: TF.Attr s P.Int -- ^ @client_endpoint_port@ - 'P.clientEndpointPort'
-    -> TF.Attr s P.Int -- ^ @http_endpoint_port@ - 'P.httpEndpointPort'
-    -> TF.Attr s P.Int -- ^ @instance_count@ - 'P.instanceCount'
-    -> TF.Attr s P.Bool -- ^ @is_primary@ - 'P.isPrimary'
+    :: TF.Attr s P.Int -- ^ @instance_count@ - 'P.instanceCount'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Int -- ^ @client_endpoint_port@ - 'P.clientEndpointPort'
+    -> TF.Attr s P.Int -- ^ @http_endpoint_port@ - 'P.httpEndpointPort'
+    -> TF.Attr s P.Bool -- ^ @is_primary@ - 'P.isPrimary'
     -> NodeTypeSetting s
-newNodeTypeSetting _clientEndpointPort _httpEndpointPort _instanceCount _isPrimary _name =
+newNodeTypeSetting _instanceCount _name _clientEndpointPort _httpEndpointPort _isPrimary =
     NodeTypeSetting'
         { _clientEndpointPort = _clientEndpointPort
         , _durabilityLevel = TF.value "Bronze"
@@ -5248,11 +5248,11 @@ data OsProfileSetting s = OsProfileSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newOsProfileSetting
-    :: TF.Attr s P.Text -- ^ @admin_username@ - 'P.adminUsername'
-    -> TF.Attr s P.Text -- ^ @computer_name@ - 'P.computerName'
+    :: TF.Attr s P.Text -- ^ @computer_name@ - 'P.computerName'
     -> TF.Attr s P.Text -- ^ @computer_name_prefix@ - 'P.computerNamePrefix'
+    -> TF.Attr s P.Text -- ^ @admin_username@ - 'P.adminUsername'
     -> OsProfileSetting s
-newOsProfileSetting _adminUsername _computerName _computerNamePrefix =
+newOsProfileSetting _computerName _computerNamePrefix _adminUsername =
     OsProfileSetting'
         { _adminPassword = TF.Nil
         , _adminUsername = _adminUsername
@@ -5707,11 +5707,11 @@ data PlanSetting s = PlanSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newPlanSetting
-    :: TF.Attr s P.Text -- ^ @product@ - 'P.product'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @product@ - 'P.product'
     -> TF.Attr s P.Text -- ^ @publisher@ - 'P.publisher'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> PlanSetting s
-newPlanSetting _product _publisher _name =
+newPlanSetting _name _product _publisher =
     PlanSetting'
         { _product = _product
         , _promotionCode = TF.Nil
@@ -5791,10 +5791,10 @@ newProbeSetting
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
-    -> TF.Attr s P.Int -- ^ @timeout@ - 'P.timeout'
     -> TF.Attr s P.Int -- ^ @unhealthy_threshold@ - 'P.unhealthyThreshold'
+    -> TF.Attr s P.Int -- ^ @timeout@ - 'P.timeout'
     -> ProbeSetting s
-newProbeSetting _host _interval _name _path _protocol _timeout _unhealthyThreshold =
+newProbeSetting _host _interval _name _path _protocol _unhealthyThreshold _timeout =
     ProbeSetting'
         { _host = _host
         , _interval = _interval
@@ -6030,10 +6030,10 @@ data PublicIpAddressConfigurationSetting s = PublicIpAddressConfigurationSetting
 
 newPublicIpAddressConfigurationSetting
     :: TF.Attr s P.Text -- ^ @domain_name_label@ - 'P.domainNameLabel'
-    -> TF.Attr s P.Int -- ^ @idle_timeout@ - 'P.idleTimeout'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Int -- ^ @idle_timeout@ - 'P.idleTimeout'
     -> PublicIpAddressConfigurationSetting s
-newPublicIpAddressConfigurationSetting _domainNameLabel _idleTimeout _name =
+newPublicIpAddressConfigurationSetting _domainNameLabel _name _idleTimeout =
     PublicIpAddressConfigurationSetting'
         { _domainNameLabel = _domainNameLabel
         , _idleTimeout = _idleTimeout
@@ -6240,17 +6240,17 @@ data RecordSetting s = RecordSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newRecordSetting
-    :: TF.Attr s P.Int -- ^ @flags@ - 'P.flags'
-    -> TF.Attr s P.Text -- ^ @tag@ - 'P.tag'
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
-    -> TF.Attr s P.Text -- ^ @exchange@ - 'P.exchange'
-    -> TF.Attr s P.Text -- ^ @preference@ - 'P.preference'
+    :: TF.Attr s P.Text -- ^ @exchange@ - 'P.exchange'
+    -> TF.Attr s P.Int -- ^ @flags@ - 'P.flags'
     -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
+    -> TF.Attr s P.Text -- ^ @preference@ - 'P.preference'
     -> TF.Attr s P.Int -- ^ @priority@ - 'P.priority'
+    -> TF.Attr s P.Text -- ^ @tag@ - 'P.tag'
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
+    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> TF.Attr s P.Int -- ^ @weight@ - 'P.weight'
     -> RecordSetting s
-newRecordSetting _flags _tag _value _exchange _preference _port _priority _target _weight =
+newRecordSetting _exchange _flags _port _preference _priority _tag _target _value _weight =
     RecordSetting'
         { _flags = _flags
         , _tag = _tag
@@ -6373,11 +6373,11 @@ data RecurrenceSetting s = RecurrenceSetting'
 
 newRecurrenceSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @days@ - 'P.days'
+    -> TF.Attr s P.Text -- ^ @frequency@ - 'P.frequency'
     -> TF.Attr s P.Int -- ^ @hours@ - 'P.hours'
     -> TF.Attr s P.Int -- ^ @minutes@ - 'P.minutes'
-    -> TF.Attr s P.Text -- ^ @frequency@ - 'P.frequency'
     -> RecurrenceSetting s
-newRecurrenceSetting _days _hours _minutes _frequency =
+newRecurrenceSetting _days _frequency _hours _minutes =
     RecurrenceSetting'
         { _days = _days
         , _hours = _hours
@@ -6807,10 +6807,10 @@ data RootCertificateSetting s = RootCertificateSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newRootCertificateSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @public_cert_data@ - 'P.publicCertData'
+    :: TF.Attr s P.Text -- ^ @public_cert_data@ - 'P.publicCertData'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> RootCertificateSetting s
-newRootCertificateSetting _name _publicCertData =
+newRootCertificateSetting _publicCertData _name =
     RootCertificateSetting'
         { _name = _name
         , _publicCertData = _publicCertData
@@ -6856,11 +6856,11 @@ data RouteSetting s = RouteSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newRouteSetting
-    :: TF.Attr s P.Text -- ^ @address_prefix@ - 'P.addressPrefix'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @address_prefix@ - 'P.addressPrefix'
     -> TF.Attr s P.Text -- ^ @next_hop_type@ - 'P.nextHopType'
     -> RouteSetting s
-newRouteSetting _addressPrefix _name _nextHopType =
+newRouteSetting _name _addressPrefix _nextHopType =
     RouteSetting'
         { _addressPrefix = _addressPrefix
         , _name = _name
@@ -6916,10 +6916,10 @@ data RuleSetting s = RuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newRuleSetting
-    :: TF.Attr s (MetricTriggerSetting s) -- ^ @metric_trigger@ - 'P.metricTrigger'
-    -> TF.Attr s (ScaleActionSetting s) -- ^ @scale_action@ - 'P.scaleAction'
+    :: TF.Attr s (ScaleActionSetting s) -- ^ @scale_action@ - 'P.scaleAction'
+    -> TF.Attr s (MetricTriggerSetting s) -- ^ @metric_trigger@ - 'P.metricTrigger'
     -> RuleSetting s
-newRuleSetting _metricTrigger _scaleAction =
+newRuleSetting _scaleAction _metricTrigger =
     RuleSetting'
         { _metricTrigger = _metricTrigger
         , _scaleAction = _scaleAction
@@ -7619,13 +7619,13 @@ data SkuSetting s = SkuSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newSkuSetting
-    :: TF.Attr s P.Text -- ^ @size@ - 'P.size'
-    -> TF.Attr s P.Text -- ^ @tier@ - 'P.tier'
-    -> TF.Attr s P.Int -- ^ @capacity@ - 'P.capacity'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Int -- ^ @capacity@ - 'P.capacity'
     -> TF.Attr s P.Text -- ^ @family@ - 'P.family''
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @size@ - 'P.size'
+    -> TF.Attr s P.Text -- ^ @tier@ - 'P.tier'
     -> SkuSetting s
-newSkuSetting _size _tier _capacity _name _family' =
+newSkuSetting _capacity _family' _name _size _tier =
     SkuSetting'
         { _size = _size
         , _tier = _tier
@@ -7906,11 +7906,11 @@ data StorageDataDiskSetting s = StorageDataDiskSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newStorageDataDiskSetting
-    :: TF.Attr s P.Text -- ^ @create_option@ - 'P.createOption'
-    -> TF.Attr s P.Int -- ^ @lun@ - 'P.lun'
+    :: TF.Attr s P.Int -- ^ @lun@ - 'P.lun'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @create_option@ - 'P.createOption'
     -> StorageDataDiskSetting s
-newStorageDataDiskSetting _createOption _lun _name =
+newStorageDataDiskSetting _lun _name _createOption =
     StorageDataDiskSetting'
         { _createOption = _createOption
         , _lun = _lun
@@ -8091,10 +8091,10 @@ data StorageOsDiskSetting s = StorageOsDiskSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newStorageOsDiskSetting
-    :: TF.Attr s P.Text -- ^ @create_option@ - 'P.createOption'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @create_option@ - 'P.createOption'
     -> StorageOsDiskSetting s
-newStorageOsDiskSetting _createOption _name =
+newStorageOsDiskSetting _name _createOption =
     StorageOsDiskSetting'
         { _createOption = _createOption
         , _imageUri = TF.Nil
@@ -8216,10 +8216,10 @@ data StorageProfileDataDiskSetting s = StorageProfileDataDiskSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newStorageProfileDataDiskSetting
-    :: TF.Attr s P.Text -- ^ @create_option@ - 'P.createOption'
-    -> TF.Attr s P.Int -- ^ @lun@ - 'P.lun'
+    :: TF.Attr s P.Int -- ^ @lun@ - 'P.lun'
+    -> TF.Attr s P.Text -- ^ @create_option@ - 'P.createOption'
     -> StorageProfileDataDiskSetting s
-newStorageProfileDataDiskSetting _createOption _lun =
+newStorageProfileDataDiskSetting _lun _createOption =
     StorageProfileDataDiskSetting'
         { _createOption = _createOption
         , _lun = _lun
@@ -8411,10 +8411,10 @@ data SubnetSetting s = SubnetSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newSubnetSetting
-    :: TF.Attr s P.Text -- ^ @address_prefix@ - 'P.addressPrefix'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @address_prefix@ - 'P.addressPrefix'
     -> SubnetSetting s
-newSubnetSetting _addressPrefix _name =
+newSubnetSetting _name _addressPrefix =
     SubnetSetting'
         { _addressPrefix = _addressPrefix
         , _name = _name
@@ -8669,13 +8669,13 @@ data VolumeSetting s = VolumeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newVolumeSetting
-    :: TF.Attr s P.Text -- ^ @mount_path@ - 'P.mountPath'
+    :: TF.Attr s P.Text -- ^ @storage_account_key@ - 'P.storageAccountKey'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @share_name@ - 'P.shareName'
-    -> TF.Attr s P.Text -- ^ @storage_account_key@ - 'P.storageAccountKey'
     -> TF.Attr s P.Text -- ^ @storage_account_name@ - 'P.storageAccountName'
+    -> TF.Attr s P.Text -- ^ @mount_path@ - 'P.mountPath'
     -> VolumeSetting s
-newVolumeSetting _mountPath _name _shareName _storageAccountKey _storageAccountName =
+newVolumeSetting _storageAccountKey _name _shareName _storageAccountName _mountPath =
     VolumeSetting'
         { _mountPath = _mountPath
         , _name = _name
@@ -9088,11 +9088,11 @@ data X509CertificatePropertiesSetting s = X509CertificatePropertiesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newX509CertificatePropertiesSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @key_usage@ - 'P.keyUsage'
+    :: TF.Attr s P.Int -- ^ @validity_in_months@ - 'P.validityInMonths'
     -> TF.Attr s P.Text -- ^ @subject@ - 'P.subject'
-    -> TF.Attr s P.Int -- ^ @validity_in_months@ - 'P.validityInMonths'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @key_usage@ - 'P.keyUsage'
     -> X509CertificatePropertiesSetting s
-newX509CertificatePropertiesSetting _keyUsage _subject _validityInMonths =
+newX509CertificatePropertiesSetting _validityInMonths _subject _keyUsage =
     X509CertificatePropertiesSetting'
         { _keyUsage = _keyUsage
         , _subject = _subject

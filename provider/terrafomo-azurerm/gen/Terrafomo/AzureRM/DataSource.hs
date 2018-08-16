@@ -2439,14 +2439,14 @@ data StorageAccountSasData s = StorageAccountSasData'
     } deriving (P.Show, P.Eq, P.Ord)
 
 storageAccountSasData
-    :: TF.Attr s P.Text -- ^ @connection_string@ - 'P.connectionString'
-    -> TF.Attr s P.Text -- ^ @expiry@ - 'P.expiry'
+    :: TF.Attr s P.Text -- ^ @expiry@ - 'P.expiry'
     -> TF.Attr s (PermissionsSetting s) -- ^ @permissions@ - 'P.permissions'
-    -> TF.Attr s (ResourceTypesSetting s) -- ^ @resource_types@ - 'P.resourceTypes'
     -> TF.Attr s (ServicesSetting s) -- ^ @services@ - 'P.services'
     -> TF.Attr s P.Text -- ^ @start@ - 'P.start'
+    -> TF.Attr s P.Text -- ^ @connection_string@ - 'P.connectionString'
+    -> TF.Attr s (ResourceTypesSetting s) -- ^ @resource_types@ - 'P.resourceTypes'
     -> P.DataSource (StorageAccountSasData s)
-storageAccountSasData _connectionString _expiry _permissions _resourceTypes _services _start =
+storageAccountSasData _expiry _permissions _services _start _connectionString _resourceTypes =
     TF.unsafeDataSource "azurerm_storage_account_sas" TF.validator $
         StorageAccountSasData'
             { _connectionString = _connectionString

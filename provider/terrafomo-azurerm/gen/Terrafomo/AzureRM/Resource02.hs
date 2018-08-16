@@ -231,12 +231,12 @@ data RoleDefinitionResource s = RoleDefinitionResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 roleDefinitionResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @assignable_scopes@ - 'P.assignableScopes'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s (PermissionsSetting s)] -- ^ @permissions@ - 'P.permissions'
     -> TF.Attr s P.Text -- ^ @scope@ - 'P.scope'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @assignable_scopes@ - 'P.assignableScopes'
     -> P.Resource (RoleDefinitionResource s)
-roleDefinitionResource _assignableScopes _name _permissions _scope =
+roleDefinitionResource _name _permissions _scope _assignableScopes =
     TF.unsafeResource "azurerm_role_definition" TF.validator $
         RoleDefinitionResource'
             { _assignableScopes = _assignableScopes
@@ -309,13 +309,13 @@ data RouteResource s = RouteResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 routeResource
-    :: TF.Attr s P.Text -- ^ @address_prefix@ - 'P.addressPrefix'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @next_hop_type@ - 'P.nextHopType'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @route_table_name@ - 'P.routeTableName'
+    -> TF.Attr s P.Text -- ^ @address_prefix@ - 'P.addressPrefix'
+    -> TF.Attr s P.Text -- ^ @next_hop_type@ - 'P.nextHopType'
     -> P.Resource (RouteResource s)
-routeResource _addressPrefix _name _nextHopType _resourceGroupName _routeTableName =
+routeResource _name _resourceGroupName _routeTableName _addressPrefix _nextHopType =
     TF.unsafeResource "azurerm_route" TF.validator $
         RouteResource'
             { _addressPrefix = _addressPrefix
@@ -828,16 +828,16 @@ data ServiceFabricClusterResource s = ServiceFabricClusterResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 serviceFabricClusterResource
-    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @management_endpoint@ - 'P.managementEndpoint'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (NodeTypeSetting s)] -- ^ @node_type@ - 'P.nodeType'
-    -> TF.Attr s P.Text -- ^ @reliability_level@ - 'P.reliabilityLevel'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @upgrade_mode@ - 'P.upgradeMode'
+    :: TF.Attr s P.Text -- ^ @management_endpoint@ - 'P.managementEndpoint'
     -> TF.Attr s P.Text -- ^ @vm_image@ - 'P.vmImage'
+    -> TF.Attr s P.Text -- ^ @reliability_level@ - 'P.reliabilityLevel'
+    -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
+    -> TF.Attr s P.Text -- ^ @upgrade_mode@ - 'P.upgradeMode'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    -> TF.Attr s [TF.Attr s (NodeTypeSetting s)] -- ^ @node_type@ - 'P.nodeType'
     -> P.Resource (ServiceFabricClusterResource s)
-serviceFabricClusterResource _location _managementEndpoint _name _nodeType _reliabilityLevel _resourceGroupName _upgradeMode _vmImage =
+serviceFabricClusterResource _managementEndpoint _vmImage _reliabilityLevel _location _upgradeMode _name _resourceGroupName _nodeType =
     TF.unsafeResource "azurerm_service_fabric_cluster" TF.validator $
         ServiceFabricClusterResource'
             { _addOnFeatures = TF.Nil
@@ -1536,14 +1536,14 @@ data ServicebusSubscriptionRuleResource s = ServicebusSubscriptionRuleResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 servicebusSubscriptionRuleResource
-    :: TF.Attr s P.Text -- ^ @filter_type@ - 'P.filterType'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @subscription_name@ - 'P.subscriptionName'
     -> TF.Attr s P.Text -- ^ @topic_name@ - 'P.topicName'
+    -> TF.Attr s P.Text -- ^ @filter_type@ - 'P.filterType'
     -> P.Resource (ServicebusSubscriptionRuleResource s)
-servicebusSubscriptionRuleResource _filterType _name _namespaceName _resourceGroupName _subscriptionName _topicName =
+servicebusSubscriptionRuleResource _name _namespaceName _resourceGroupName _subscriptionName _topicName _filterType =
     TF.unsafeResource "azurerm_servicebus_subscription_rule" TF.validator $
         ServicebusSubscriptionRuleResource'
             { _action = TF.Nil
@@ -1898,12 +1898,12 @@ data SnapshotResource s = SnapshotResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 snapshotResource
-    :: TF.Attr s P.Text -- ^ @create_option@ - 'P.createOption'
-    -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
+    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    -> TF.Attr s P.Text -- ^ @create_option@ - 'P.createOption'
     -> P.Resource (SnapshotResource s)
-snapshotResource _createOption _location _name _resourceGroupName =
+snapshotResource _location _name _resourceGroupName _createOption =
     TF.unsafeResource "azurerm_snapshot" TF.validator $
         SnapshotResource'
             { _createOption = _createOption
@@ -2004,13 +2004,13 @@ data SqlActiveDirectoryAdministratorResource s = SqlActiveDirectoryAdministrator
     } deriving (P.Show, P.Eq, P.Ord)
 
 sqlActiveDirectoryAdministratorResource
-    :: TF.Attr s P.Text -- ^ @login@ - 'P.login'
-    -> TF.Attr s P.Text -- ^ @object_id@ - 'P.objectId'
+    :: TF.Attr s P.Text -- ^ @object_id@ - 'P.objectId'
+    -> TF.Attr s P.Text -- ^ @tenant_id@ - 'P.tenantId'
+    -> TF.Attr s P.Text -- ^ @login@ - 'P.login'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @server_name@ - 'P.serverName'
-    -> TF.Attr s P.Text -- ^ @tenant_id@ - 'P.tenantId'
     -> P.Resource (SqlActiveDirectoryAdministratorResource s)
-sqlActiveDirectoryAdministratorResource _login _objectId _resourceGroupName _serverName _tenantId =
+sqlActiveDirectoryAdministratorResource _objectId _tenantId _login _resourceGroupName _serverName =
     TF.unsafeResource "azurerm_sql_active_directory_administrator" TF.validator $
         SqlActiveDirectoryAdministratorResource'
             { _login = _login
@@ -2311,12 +2311,12 @@ data SqlFirewallRuleResource s = SqlFirewallRuleResource'
 
 sqlFirewallRuleResource
     :: TF.Attr s P.Text -- ^ @end_ip_address@ - 'P.endIpAddress'
+    -> TF.Attr s P.Text -- ^ @start_ip_address@ - 'P.startIpAddress'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @server_name@ - 'P.serverName'
-    -> TF.Attr s P.Text -- ^ @start_ip_address@ - 'P.startIpAddress'
     -> P.Resource (SqlFirewallRuleResource s)
-sqlFirewallRuleResource _endIpAddress _name _resourceGroupName _serverName _startIpAddress =
+sqlFirewallRuleResource _endIpAddress _startIpAddress _name _resourceGroupName _serverName =
     TF.unsafeResource "azurerm_sql_firewall_rule" TF.validator $
         SqlFirewallRuleResource'
             { _endIpAddress = _endIpAddress
@@ -2389,14 +2389,14 @@ data SqlServerResource s = SqlServerResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 sqlServerResource
-    :: TF.Attr s P.Text -- ^ @administrator_login@ - 'P.administratorLogin'
-    -> TF.Attr s P.Text -- ^ @administrator_login_password@ - 'P.administratorLoginPassword'
-    -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
+    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
+    -> TF.Attr s P.Text -- ^ @administrator_login@ - 'P.administratorLogin'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    -> TF.Attr s P.Text -- ^ @administrator_login_password@ - 'P.administratorLoginPassword'
     -> TF.Attr s P.Text -- ^ @version@ - 'P.version'
     -> P.Resource (SqlServerResource s)
-sqlServerResource _administratorLogin _administratorLoginPassword _location _name _resourceGroupName _version =
+sqlServerResource _location _administratorLogin _name _resourceGroupName _administratorLoginPassword _version =
     TF.unsafeResource "azurerm_sql_server" TF.validator $
         SqlServerResource'
             { _administratorLogin = _administratorLogin
@@ -2479,12 +2479,12 @@ data SqlVirtualNetworkRuleResource s = SqlVirtualNetworkRuleResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 sqlVirtualNetworkRuleResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @server_name@ - 'P.serverName'
-    -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> P.Resource (SqlVirtualNetworkRuleResource s)
-sqlVirtualNetworkRuleResource _name _resourceGroupName _serverName _subnetId =
+sqlVirtualNetworkRuleResource _subnetId _name _resourceGroupName _serverName =
     TF.unsafeResource "azurerm_sql_virtual_network_rule" TF.validator $
         SqlVirtualNetworkRuleResource'
             { _ignoreMissingVnetServiceEndpoint = TF.value P.False
@@ -2575,13 +2575,13 @@ data StorageAccountResource s = StorageAccountResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 storageAccountResource
-    :: TF.Attr s P.Text -- ^ @account_replication_type@ - 'P.accountReplicationType'
-    -> TF.Attr s P.Text -- ^ @account_tier@ - 'P.accountTier'
-    -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
+    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    -> TF.Attr s P.Text -- ^ @account_tier@ - 'P.accountTier'
+    -> TF.Attr s P.Text -- ^ @account_replication_type@ - 'P.accountReplicationType'
     -> P.Resource (StorageAccountResource s)
-storageAccountResource _accountReplicationType _accountTier _location _name _resourceGroupName =
+storageAccountResource _location _name _resourceGroupName _accountTier _accountReplicationType =
     TF.unsafeResource "azurerm_storage_account" TF.validator $
         StorageAccountResource'
             { _accountEncryptionSource = TF.value "Microsoft.Storage"
@@ -3174,12 +3174,12 @@ data SubnetResource s = SubnetResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 subnetResource
-    :: TF.Attr s P.Text -- ^ @address_prefix@ - 'P.addressPrefix'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @virtual_network_name@ - 'P.virtualNetworkName'
+    -> TF.Attr s P.Text -- ^ @address_prefix@ - 'P.addressPrefix'
     -> P.Resource (SubnetResource s)
-subnetResource _addressPrefix _name _resourceGroupName _virtualNetworkName =
+subnetResource _name _resourceGroupName _virtualNetworkName _addressPrefix =
     TF.unsafeResource "azurerm_subnet" TF.validator $
         SubnetResource'
             { _addressPrefix = _addressPrefix
@@ -3478,11 +3478,11 @@ data TrafficManagerProfileResource s = TrafficManagerProfileResource'
 trafficManagerProfileResource
     :: TF.Attr s [TF.Attr s (DnsConfigSetting s)] -- ^ @dns_config@ - 'P.dnsConfig'
     -> TF.Attr s [TF.Attr s (MonitorConfigSetting s)] -- ^ @monitor_config@ - 'P.monitorConfig'
+    -> TF.Attr s P.Text -- ^ @traffic_routing_method@ - 'P.trafficRoutingMethod'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @traffic_routing_method@ - 'P.trafficRoutingMethod'
     -> P.Resource (TrafficManagerProfileResource s)
-trafficManagerProfileResource _dnsConfig _monitorConfig _name _resourceGroupName _trafficRoutingMethod =
+trafficManagerProfileResource _dnsConfig _monitorConfig _trafficRoutingMethod _name _resourceGroupName =
     TF.unsafeResource "azurerm_traffic_manager_profile" TF.validator $
         TrafficManagerProfileResource'
             { _dnsConfig = _dnsConfig
@@ -3660,14 +3660,14 @@ data VirtualMachineResource s = VirtualMachineResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 virtualMachineResource
-    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s (StorageOsDiskSetting s) -- ^ @storage_os_disk@ - 'P.storageOsDisk'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @network_interface_ids@ - 'P.networkInterfaceIds'
+    -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s (StorageOsDiskSetting s) -- ^ @storage_os_disk@ - 'P.storageOsDisk'
     -> TF.Attr s P.Text -- ^ @vm_size@ - 'P.vmSize'
     -> P.Resource (VirtualMachineResource s)
-virtualMachineResource _location _name _networkInterfaceIds _resourceGroupName _storageOsDisk _vmSize =
+virtualMachineResource _storageOsDisk _networkInterfaceIds _location _name _resourceGroupName _vmSize =
     TF.unsafeResource "azurerm_virtual_machine" TF.validator $
         VirtualMachineResource'
             { _bootDiagnostics = TF.Nil
@@ -3871,11 +3871,11 @@ data VirtualMachineDataDiskAttachmentResource s = VirtualMachineDataDiskAttachme
 
 virtualMachineDataDiskAttachmentResource
     :: TF.Attr s P.Text -- ^ @caching@ - 'P.caching'
-    -> TF.Attr s P.Int -- ^ @lun@ - 'P.lun'
     -> TF.Attr s P.Text -- ^ @managed_disk_id@ - 'P.managedDiskId'
     -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
+    -> TF.Attr s P.Int -- ^ @lun@ - 'P.lun'
     -> P.Resource (VirtualMachineDataDiskAttachmentResource s)
-virtualMachineDataDiskAttachmentResource _caching _lun _managedDiskId _virtualMachineId =
+virtualMachineDataDiskAttachmentResource _caching _managedDiskId _virtualMachineId _lun =
     TF.unsafeResource "azurerm_virtual_machine_data_disk_attachment" TF.validator $
         VirtualMachineDataDiskAttachmentResource'
             { _caching = _caching
@@ -3969,13 +3969,13 @@ data VirtualMachineExtensionResource s = VirtualMachineExtensionResource'
 virtualMachineExtensionResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @publisher@ - 'P.publisher'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    -> TF.Attr s P.Text -- ^ @virtual_machine_name@ - 'P.virtualMachineName'
+    -> TF.Attr s P.Text -- ^ @publisher@ - 'P.publisher'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @type_handler_version@ - 'P.typeHandlerVersion'
-    -> TF.Attr s P.Text -- ^ @virtual_machine_name@ - 'P.virtualMachineName'
     -> P.Resource (VirtualMachineExtensionResource s)
-virtualMachineExtensionResource _location _name _publisher _resourceGroupName _type' _typeHandlerVersion _virtualMachineName =
+virtualMachineExtensionResource _location _name _resourceGroupName _virtualMachineName _publisher _type' _typeHandlerVersion =
     TF.unsafeResource "azurerm_virtual_machine_extension" TF.validator $
         VirtualMachineExtensionResource'
             { _autoUpgradeMinorVersion = TF.Nil
@@ -4122,16 +4122,16 @@ data VirtualMachineScaleSetResource s = VirtualMachineScaleSetResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 virtualMachineScaleSetResource
-    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
+    :: TF.Attr s (StorageProfileOsDiskSetting s) -- ^ @storage_profile_os_disk@ - 'P.storageProfileOsDisk'
+    -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
+    -> TF.Attr s P.Text -- ^ @upgrade_policy_mode@ - 'P.upgradePolicyMode'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s [TF.Attr s (NetworkProfileSetting s)] -- ^ @network_profile@ - 'P.networkProfile'
     -> TF.Attr s (OsProfileSetting s) -- ^ @os_profile@ - 'P.osProfile'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s (SkuSetting s) -- ^ @sku@ - 'P.sku'
-    -> TF.Attr s (StorageProfileOsDiskSetting s) -- ^ @storage_profile_os_disk@ - 'P.storageProfileOsDisk'
-    -> TF.Attr s P.Text -- ^ @upgrade_policy_mode@ - 'P.upgradePolicyMode'
     -> P.Resource (VirtualMachineScaleSetResource s)
-virtualMachineScaleSetResource _location _name _networkProfile _osProfile _resourceGroupName _sku _storageProfileOsDisk _upgradePolicyMode =
+virtualMachineScaleSetResource _storageProfileOsDisk _location _upgradePolicyMode _name _resourceGroupName _networkProfile _osProfile _sku =
     TF.unsafeResource "azurerm_virtual_machine_scale_set" TF.validator $
         VirtualMachineScaleSetResource'
             { _bootDiagnostics = TF.Nil
@@ -4331,12 +4331,12 @@ data VirtualNetworkResource s = VirtualNetworkResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 virtualNetworkResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @address_space@ - 'P.addressSpace'
-    -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
+    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @address_space@ - 'P.addressSpace'
     -> P.Resource (VirtualNetworkResource s)
-virtualNetworkResource _addressSpace _location _name _resourceGroupName =
+virtualNetworkResource _location _name _resourceGroupName _addressSpace =
     TF.unsafeResource "azurerm_virtual_network" TF.validator $
         VirtualNetworkResource'
             { _addressSpace = _addressSpace
@@ -4563,13 +4563,13 @@ data VirtualNetworkGatewayConnectionResource s = VirtualNetworkGatewayConnection
     } deriving (P.Show, P.Eq, P.Ord)
 
 virtualNetworkGatewayConnectionResource
-    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
+    :: TF.Attr s P.Text -- ^ @virtual_network_gateway_id@ - 'P.virtualNetworkGatewayId'
+    -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Attr s P.Text -- ^ @virtual_network_gateway_id@ - 'P.virtualNetworkGatewayId'
     -> P.Resource (VirtualNetworkGatewayConnectionResource s)
-virtualNetworkGatewayConnectionResource _location _name _resourceGroupName _type' _virtualNetworkGatewayId =
+virtualNetworkGatewayConnectionResource _virtualNetworkGatewayId _location _name _resourceGroupName _type' =
     TF.unsafeResource "azurerm_virtual_network_gateway_connection" TF.validator $
         VirtualNetworkGatewayConnectionResource'
             { _authorizationKey = TF.Nil
@@ -4694,12 +4694,12 @@ data VirtualNetworkPeeringResource s = VirtualNetworkPeeringResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 virtualNetworkPeeringResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @remote_virtual_network_id@ - 'P.remoteVirtualNetworkId'
+    :: TF.Attr s P.Text -- ^ @remote_virtual_network_id@ - 'P.remoteVirtualNetworkId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @virtual_network_name@ - 'P.virtualNetworkName'
     -> P.Resource (VirtualNetworkPeeringResource s)
-virtualNetworkPeeringResource _name _remoteVirtualNetworkId _resourceGroupName _virtualNetworkName =
+virtualNetworkPeeringResource _remoteVirtualNetworkId _name _resourceGroupName _virtualNetworkName =
     TF.unsafeResource "azurerm_virtual_network_peering" TF.validator $
         VirtualNetworkPeeringResource'
             { _name = _name
