@@ -815,7 +815,25 @@
             "key": "vcd_dnat",
             "name": "DnatResource",
             "threaded": true,
-            "attributes": [],
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
             "parameters": [
                 {
                     "default": "_edgeGateway",
@@ -1105,7 +1123,25 @@
             "key": "vcd_edgegateway_vpn",
             "name": "EdgegatewayVpnResource",
             "threaded": true,
-            "attributes": [],
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
             "parameters": [
                 {
                     "default": "_localIpAddress",
@@ -1327,7 +1363,25 @@
             "key": "vcd_firewall_rules",
             "name": "FirewallRulesResource",
             "threaded": true,
-            "attributes": [],
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
             "parameters": [
                 {
                     "default": "_defaultAction",
@@ -1572,6 +1626,23 @@
                     "computed": true,
                     "required": false,
                     "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"href\" <$> TF.attribute",
                     "name": "_computedHref",
@@ -1704,7 +1775,25 @@
             "key": "vcd_snat",
             "name": "SnatResource",
             "threaded": true,
-            "attributes": [],
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
             "parameters": [
                 {
                     "default": "_edgeGateway",
@@ -1984,6 +2073,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"href\" <$> TF.attribute",
                     "name": "_computedHref",
                     "method": "computedHref",
@@ -2218,6 +2324,23 @@
             "name": "VappVmResource",
             "threaded": true,
             "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": true,
