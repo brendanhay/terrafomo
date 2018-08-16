@@ -162,6 +162,9 @@ instance P.HasSize (BlockStorageResource s) (TF.Attr s P.Int) where
         P.lens (_size :: BlockStorageResource s -> TF.Attr s P.Int)
                (\s a -> s { _size = a } :: BlockStorageResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (BlockStorageResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @oneandone_firewall_policy@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/oneandone/r/firewall_policy.html terraform documentation>
@@ -214,6 +217,9 @@ instance P.HasRules (FirewallPolicyResource s) (TF.Attr s [TF.Attr s (RulesSetti
     rules =
         P.lens (_rules :: FirewallPolicyResource s -> TF.Attr s [TF.Attr s (RulesSetting s)])
                (\s a -> s { _rules = a } :: FirewallPolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FirewallPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @oneandone_image@ Resource.
 --
@@ -354,6 +360,9 @@ instance P.HasUrl (ImageResource s) (TF.Attr s P.Text) where
         P.lens (_url :: ImageResource s -> TF.Attr s P.Text)
                (\s a -> s { _url = a } :: ImageResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @oneandone_loadbalancer@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/oneandone/r/loadbalancer.html terraform documentation>
@@ -488,6 +497,9 @@ instance P.HasRules (LoadbalancerResource s) (TF.Attr s [TF.Attr s (RulesSetting
         P.lens (_rules :: LoadbalancerResource s -> TF.Attr s [TF.Attr s (RulesSetting s)])
                (\s a -> s { _rules = a } :: LoadbalancerResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @oneandone_monitoring_policy@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/oneandone/r/monitoring_policy.html terraform documentation>
@@ -582,6 +594,9 @@ instance P.HasThresholds (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (Thr
         P.lens (_thresholds :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (ThresholdsSetting s)])
                (\s a -> s { _thresholds = a } :: MonitoringPolicyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MonitoringPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @oneandone_private_network@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/oneandone/r/private_network.html terraform documentation>
@@ -664,6 +679,9 @@ instance P.HasSubnetMask (PrivateNetworkResource s) (TF.Attr s P.Text) where
         P.lens (_subnetMask :: PrivateNetworkResource s -> TF.Attr s P.Text)
                (\s a -> s { _subnetMask = a } :: PrivateNetworkResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PrivateNetworkResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @oneandone_public_ip@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/oneandone/r/public_ip.html terraform documentation>
@@ -715,6 +733,9 @@ instance P.HasReverseDns (PublicIpResource s) (TF.Attr s P.Text) where
     reverseDns =
         P.lens (_reverseDns :: PublicIpResource s -> TF.Attr s P.Text)
                (\s a -> s { _reverseDns = a } :: PublicIpResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
@@ -952,6 +973,9 @@ instance P.HasVcores (ServerResource s) (TF.Attr s P.Int) where
         P.lens (_vcores :: ServerResource s -> TF.Attr s P.Int)
                (\s a -> s { _vcores = a } :: ServerResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedIps (TF.Ref s' (ServerResource s)) (TF.Attr s [TF.Attr s (IpsSetting s)]) where
     computedIps x = TF.compute (TF.refKey x) "ips"
 
@@ -1032,6 +1056,9 @@ instance P.HasStorageServers (SharedStorageResource s) (TF.Attr s [TF.Attr s (St
         P.lens (_storageServers :: SharedStorageResource s -> TF.Attr s [TF.Attr s (StorageServersSetting s)])
                (\s a -> s { _storageServers = a } :: SharedStorageResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SharedStorageResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @oneandone_ssh_key@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/oneandone/r/ssh_key.html terraform documentation>
@@ -1073,6 +1100,9 @@ instance P.HasName (SshKeyResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SshKeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SshKeyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedMd5 (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedMd5 x = TF.compute (TF.refKey x) "md5"
@@ -1134,6 +1164,9 @@ instance P.HasName (VpnResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: VpnResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: VpnResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDownloadPath (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
     computedDownloadPath x = TF.compute (TF.refKey x) "download_path"
