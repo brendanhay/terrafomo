@@ -109,7 +109,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "escalation_policy_rule",
+            "name": "rule",
             "schemas": [
               {
                 "name": "escalation_delay_in_minutes",
@@ -147,7 +147,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "rule_target",
+                  "name": "target",
                   "schemas": [
                     {
                       "name": "id",
@@ -192,7 +192,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "escalation_policy_teams",
+            "name": "teams",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -233,7 +233,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "extension_extension_objects",
+            "name": "extension_objects",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -323,7 +323,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "maintenance_window_services",
+            "name": "services",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -377,7 +377,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "schedule_layer",
+            "name": "layer",
             "schemas": [
               {
                 "name": "end",
@@ -427,7 +427,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "layer_restriction",
+                  "name": "restriction",
                   "schemas": [
                     {
                       "name": "duration_seconds",
@@ -528,7 +528,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "layer_users",
+                  "name": "users",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -672,7 +672,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "service_incident_urgency_rule",
+            "name": "incident_urgency_rule",
             "schemas": [
               {
                 "name": "during_support_hours",
@@ -686,7 +686,7 @@
                 "minItems": 1,
                 "maxItems": 1,
                 "resource": {
-                  "name": "incident_urgency_rule_during_support_hours",
+                  "name": "during_support_hours",
                   "schemas": [
                     {
                       "name": "type",
@@ -727,7 +727,7 @@
                 "minItems": 1,
                 "maxItems": 1,
                 "resource": {
-                  "name": "incident_urgency_rule_outside_support_hours",
+                  "name": "outside_support_hours",
                   "schemas": [
                     {
                       "name": "type",
@@ -819,7 +819,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service_scheduled_actions",
+            "name": "scheduled_actions",
             "schemas": [
               {
                 "name": "at",
@@ -833,7 +833,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "scheduled_actions_at",
+                  "name": "at",
                   "schemas": [
                     {
                       "name": "name",
@@ -913,7 +913,7 @@
           "minItems": 1,
           "maxItems": 1,
           "resource": {
-            "name": "service_support_hours",
+            "name": "support_hours",
             "schemas": [
               {
                 "name": "days_of_week",
@@ -927,7 +927,7 @@
                 "minItems": 0,
                 "maxItems": 7,
                 "schema": {
-                  "name": "support_hours_days_of_week",
+                  "name": "days_of_week",
                   "type": "TypeInt",
                   "conflictsWith": [],
                   "optional": false,
@@ -1269,7 +1269,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "user_teams",
+            "name": "teams",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
