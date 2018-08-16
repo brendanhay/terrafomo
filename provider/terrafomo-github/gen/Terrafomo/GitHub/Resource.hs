@@ -1014,10 +1014,10 @@ data TeamRepositoryResource s = TeamRepositoryResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 teamRepositoryResource
-    :: TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
-    -> TF.Attr s P.Text -- ^ @team_id@ - 'P.teamId'
+    :: TF.Attr s P.Text -- ^ @team_id@ - 'P.teamId'
+    -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> P.Resource (TeamRepositoryResource s)
-teamRepositoryResource _repository _teamId =
+teamRepositoryResource _teamId _repository =
     TF.unsafeResource "github_team_repository" TF.validator $
         TeamRepositoryResource'
             { _permission = TF.value "pull"
