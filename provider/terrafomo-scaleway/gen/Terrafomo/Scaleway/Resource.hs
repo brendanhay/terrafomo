@@ -209,11 +209,11 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
 securityGroupRuleResource
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @direction@ - 'P.direction'
-    -> TF.Attr s P.Text -- ^ @ip_range@ - 'P.ipRange'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Text -- ^ @security_group@ - 'P.securityGroup'
+    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    -> TF.Attr s P.Text -- ^ @ip_range@ - 'P.ipRange'
     -> P.Resource (SecurityGroupRuleResource s)
-securityGroupRuleResource _action _direction _ipRange _protocol _securityGroup =
+securityGroupRuleResource _action _direction _securityGroup _protocol _ipRange =
     TF.unsafeResource "scaleway_security_group_rule" TF.validator $
         SecurityGroupRuleResource'
             { _action = _action
@@ -590,11 +590,11 @@ data VolumeResource s = VolumeResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 volumeResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @size_in_gb@ - 'P.sizeInGb'
+    :: TF.Attr s P.Int -- ^ @size_in_gb@ - 'P.sizeInGb'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (VolumeResource s)
-volumeResource _name _sizeInGb _type' =
+volumeResource _sizeInGb _name _type' =
     TF.unsafeResource "scaleway_volume" TF.validator $
         VolumeResource'
             { _name = _name
