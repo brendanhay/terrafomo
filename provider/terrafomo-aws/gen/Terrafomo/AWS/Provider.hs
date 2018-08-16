@@ -20,7 +20,6 @@ module Terrafomo.AWS.Provider
     -- * AWS Provider Datatype
       Provider (..)
     , newProvider
-    , defaultProvider
 
     -- * AWS Specific Aliases
     , DataSource
@@ -188,37 +187,38 @@ newProvider _region =
         , _token = P.Nothing
         }
 
-defaultProvider :: TF.Provider (P.Maybe Provider)
-defaultProvider =
-    TF.Provider
-        { _providerType   = TF.Type P.Nothing "aws"
-        , _providerAlias  = P.Nothing
-        , _providerConfig = P.Nothing
-        }
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "aws"
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} = P.catMaybes
-        [  TF.assign "access_key" <$> _accessKey
-        ,  TF.assign "allowed_account_ids" <$> _allowedAccountIds
-        ,  TF.assign "assume_role" <$> _assumeRole
-        ,  TF.assign "dynamodb_endpoint" <$> _dynamodbEndpoint
-        ,  TF.assign "endpoints" <$> _endpoints
-        ,  TF.assign "forbidden_account_ids" <$> _forbiddenAccountIds
-        ,  P.Just $ TF.assign "insecure" _insecure
-        ,  TF.assign "kinesis_endpoint" <$> _kinesisEndpoint
-        ,  P.Just $ TF.assign "max_retries" _maxRetries
-        ,  TF.assign "profile" <$> _profile
-        ,  P.Just $ TF.assign "region" _region
-        ,  P.Just $ TF.assign "s3_force_path_style" _s3ForcePathStyle
-        ,  TF.assign "secret_key" <$> _secretKey
-        ,  TF.assign "shared_credentials_file" <$> _sharedCredentialsFile
-        ,  P.Just $ TF.assign "skip_credentials_validation" _skipCredentialsValidation
-        ,  P.Just $ TF.assign "skip_get_ec2_platforms" _skipGetEc2Platforms
-        ,  P.Just $ TF.assign "skip_metadata_api_check" _skipMetadataApiCheck
-        ,  P.Just $ TF.assign "skip_region_validation" _skipRegionValidation
-        ,  P.Just $ TF.assign "skip_requesting_account_id" _skipRequestingAccountId
-        ,  TF.assign "token" <$> _token
-        ]
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy Provider)
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "access_key" <$> _accessKey
+                  , TF.assign "allowed_account_ids" <$> _allowedAccountIds
+                  , TF.assign "assume_role" <$> _assumeRole
+                  , TF.assign "dynamodb_endpoint" <$> _dynamodbEndpoint
+                  , TF.assign "endpoints" <$> _endpoints
+                  , TF.assign "forbidden_account_ids" <$> _forbiddenAccountIds
+                  , P.Just $ TF.assign "insecure" _insecure
+                  , TF.assign "kinesis_endpoint" <$> _kinesisEndpoint
+                  , P.Just $ TF.assign "max_retries" _maxRetries
+                  , TF.assign "profile" <$> _profile
+                  , P.Just $ TF.assign "region" _region
+                  , P.Just $ TF.assign "s3_force_path_style" _s3ForcePathStyle
+                  , TF.assign "secret_key" <$> _secretKey
+                  , TF.assign "shared_credentials_file" <$> _sharedCredentialsFile
+                  , P.Just $ TF.assign "skip_credentials_validation" _skipCredentialsValidation
+                  , P.Just $ TF.assign "skip_get_ec2_platforms" _skipGetEc2Platforms
+                  , P.Just $ TF.assign "skip_metadata_api_check" _skipMetadataApiCheck
+                  , P.Just $ TF.assign "skip_region_validation" _skipRegionValidation
+                  , P.Just $ TF.assign "skip_requesting_account_id" _skipRequestingAccountId
+                  , TF.assign "token" <$> _token
+                  ])
 
 instance TF.IsValid (Provider) where
     validator = TF.fieldsValidator (\Provider'{..} -> Map.fromList $ P.catMaybes
