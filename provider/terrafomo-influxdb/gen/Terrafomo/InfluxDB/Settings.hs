@@ -19,11 +19,11 @@ module Terrafomo.InfluxDB.Settings
     (
     -- ** grant
       GrantSetting (..)
-    , newGrantSetting
+    , grantSetting
 
     -- ** retention_policies
     , RetentionPoliciesSetting (..)
-    , newRetentionPoliciesSetting
+    , retentionPoliciesSetting
 
     ) where
 
@@ -59,11 +59,11 @@ data GrantSetting s = GrantSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @grant@ settings value.
-newGrantSetting
+grantSetting
     :: TF.Attr s P.Text -- ^ 'P._database': @database@
     -> TF.Attr s P.Text -- ^ 'P._privilege': @privilege@
     -> GrantSetting s
-newGrantSetting _database _privilege =
+grantSetting _database _privilege =
     GrantSetting'
         { _database = _database
         , _privilege = _privilege
@@ -106,11 +106,11 @@ data RetentionPoliciesSetting s = RetentionPoliciesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @retention_policies@ settings value.
-newRetentionPoliciesSetting
+retentionPoliciesSetting
     :: TF.Attr s P.Text -- ^ 'P._duration': @duration@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> RetentionPoliciesSetting s
-newRetentionPoliciesSetting _duration _name =
+retentionPoliciesSetting _duration _name =
     RetentionPoliciesSetting'
         { _default' = TF.value P.False
         , _duration = _duration
