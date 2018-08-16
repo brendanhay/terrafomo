@@ -17,7 +17,6 @@
 --
 module Terrafomo.AWS.Resource04
     (
-    -- * Resource Datatypes
     -- ** aws_s3_bucket
       S3BucketResource (..)
     , s3BucketResource
@@ -484,6 +483,7 @@ data S3BucketResource s = S3BucketResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_s3_bucket@ resource value.
 s3BucketResource
     :: P.Resource (S3BucketResource s)
 s3BucketResource =
@@ -650,6 +650,7 @@ data S3BucketInventoryResource s = S3BucketInventoryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_s3_bucket_inventory@ resource value.
 s3BucketInventoryResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s (DestinationSetting s) -- ^ @destination@ - 'P.destination'
@@ -756,6 +757,7 @@ data S3BucketMetricResource s = S3BucketMetricResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_s3_bucket_metric@ resource value.
 s3BucketMetricResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -819,6 +821,7 @@ data S3BucketNotificationResource s = S3BucketNotificationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_s3_bucket_notification@ resource value.
 s3BucketNotificationResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> P.Resource (S3BucketNotificationResource s)
@@ -923,6 +926,7 @@ data S3BucketObjectResource s = S3BucketObjectResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_s3_bucket_object@ resource value.
 s3BucketObjectResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
@@ -1077,6 +1081,7 @@ data S3BucketPolicyResource s = S3BucketPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_s3_bucket_policy@ resource value.
 s3BucketPolicyResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
@@ -1141,6 +1146,7 @@ data SecretsmanagerSecretResource s = SecretsmanagerSecretResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_secretsmanager_secret@ resource value.
 secretsmanagerSecretResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SecretsmanagerSecretResource s)
@@ -1238,6 +1244,7 @@ data SecretsmanagerSecretVersionResource s = SecretsmanagerSecretVersionResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_secretsmanager_secret_version@ resource value.
 secretsmanagerSecretVersionResource
     :: TF.Attr s P.Text -- ^ @secret_id@ - 'P.secretId'
     -> TF.Attr s P.Text -- ^ @secret_string@ - 'P.secretString'
@@ -1296,6 +1303,7 @@ data SecurityGroupResource s = SecurityGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_security_group@ resource value.
 securityGroupResource
     :: P.Resource (SecurityGroupResource s)
 securityGroupResource =
@@ -1397,6 +1405,7 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_security_group_rule@ resource value.
 securityGroupRuleResource
     :: TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
     -> TF.Attr s P.Int -- ^ @from_port@ - 'P.fromPort'
@@ -1508,6 +1517,7 @@ data ServiceDiscoveryPrivateDnsNamespaceResource s = ServiceDiscoveryPrivateDnsN
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_service_discovery_private_dns_namespace@ resource value.
 serviceDiscoveryPrivateDnsNamespaceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @vpc@ - 'P.vpc'
@@ -1567,6 +1577,7 @@ data ServiceDiscoveryPublicDnsNamespaceResource s = ServiceDiscoveryPublicDnsNam
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_service_discovery_public_dns_namespace@ resource value.
 serviceDiscoveryPublicDnsNamespaceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ServiceDiscoveryPublicDnsNamespaceResource s)
@@ -1627,6 +1638,7 @@ data ServiceDiscoveryServiceResource s = ServiceDiscoveryServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_service_discovery_service@ resource value.
 serviceDiscoveryServiceResource
     :: TF.Attr s (DnsConfigSetting s) -- ^ @dns_config@ - 'P.dnsConfig'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1712,6 +1724,7 @@ data ServicecatalogPortfolioResource s = ServicecatalogPortfolioResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_servicecatalog_portfolio@ resource value.
 servicecatalogPortfolioResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ServicecatalogPortfolioResource s)
@@ -1770,6 +1783,7 @@ data SesActiveReceiptRuleSetResource s = SesActiveReceiptRuleSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ses_active_receipt_rule_set@ resource value.
 sesActiveReceiptRuleSetResource
     :: TF.Attr s P.Text -- ^ @rule_set_name@ - 'P.ruleSetName'
     -> P.Resource (SesActiveReceiptRuleSetResource s)
@@ -1805,6 +1819,7 @@ data SesConfigurationSetResource s = SesConfigurationSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ses_configuration_set@ resource value.
 sesConfigurationSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SesConfigurationSetResource s)
@@ -1840,6 +1855,7 @@ data SesDomainDkimResource s = SesDomainDkimResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ses_domain_dkim@ resource value.
 sesDomainDkimResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> P.Resource (SesDomainDkimResource s)
@@ -1878,6 +1894,7 @@ data SesDomainIdentityResource s = SesDomainIdentityResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ses_domain_identity@ resource value.
 sesDomainIdentityResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> P.Resource (SesDomainIdentityResource s)
@@ -1919,6 +1936,7 @@ data SesDomainIdentityVerificationResource s = SesDomainIdentityVerificationReso
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ses_domain_identity_verification@ resource value.
 sesDomainIdentityVerificationResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> P.Resource (SesDomainIdentityVerificationResource s)
@@ -1963,6 +1981,7 @@ data SesDomainMailFromResource s = SesDomainMailFromResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ses_domain_mail_from@ resource value.
 sesDomainMailFromResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @mail_from_domain@ - 'P.mailFromDomain'
@@ -2043,6 +2062,7 @@ data SesEventDestinationResource s = SesEventDestinationResource'
     -- * 'kinesisDestination'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ses_event_destination@ resource value.
 sesEventDestinationResource
     :: TF.Attr s P.Text -- ^ @configuration_set_name@ - 'P.configurationSetName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2156,6 +2176,7 @@ data SesIdentityNotificationTopicResource s = SesIdentityNotificationTopicResour
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ses_identity_notification_topic@ resource value.
 sesIdentityNotificationTopicResource
     :: TF.Attr s P.Text -- ^ @identity@ - 'P.identity'
     -> TF.Attr s P.Text -- ^ @notification_type@ - 'P.notificationType'
@@ -2212,6 +2233,7 @@ data SesReceiptFilterResource s = SesReceiptFilterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ses_receipt_filter@ resource value.
 sesReceiptFilterResource
     :: TF.Attr s P.Text -- ^ @cidr@ - 'P.cidr'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2293,6 +2315,7 @@ data SesReceiptRuleResource s = SesReceiptRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ses_receipt_rule@ resource value.
 sesReceiptRuleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @rule_set_name@ - 'P.ruleSetName'
@@ -2408,6 +2431,7 @@ data SesReceiptRuleSetResource s = SesReceiptRuleSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ses_receipt_rule_set@ resource value.
 sesReceiptRuleSetResource
     :: TF.Attr s P.Text -- ^ @rule_set_name@ - 'P.ruleSetName'
     -> P.Resource (SesReceiptRuleSetResource s)
@@ -2452,6 +2476,7 @@ data SesTemplateResource s = SesTemplateResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ses_template@ resource value.
 sesTemplateResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SesTemplateResource s)
@@ -2508,6 +2533,7 @@ data SfnActivityResource s = SfnActivityResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_sfn_activity@ resource value.
 sfnActivityResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SfnActivityResource s)
@@ -2552,6 +2578,7 @@ data SfnStateMachineResource s = SfnStateMachineResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_sfn_state_machine@ resource value.
 sfnStateMachineResource
     :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> TF.Attr s P.Text -- ^ @definition@ - 'P.definition'
@@ -2609,6 +2636,7 @@ data SimpledbDomainResource s = SimpledbDomainResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_simpledb_domain@ resource value.
 simpledbDomainResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SimpledbDomainResource s)
@@ -2647,6 +2675,7 @@ data SnapshotCreateVolumePermissionResource s = SnapshotCreateVolumePermissionRe
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_snapshot_create_volume_permission@ resource value.
 snapshotCreateVolumePermissionResource
     :: TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
     -> TF.Attr s P.Text -- ^ @snapshot_id@ - 'P.snapshotId'
@@ -2720,6 +2749,7 @@ data SnsPlatformApplicationResource s = SnsPlatformApplicationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_sns_platform_application@ resource value.
 snsPlatformApplicationResource
     :: TF.Attr s P.Text -- ^ @platform_credential@ - 'P.platformCredential'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2845,6 +2875,7 @@ data SnsSmsPreferencesResource s = SnsSmsPreferencesResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_sns_sms_preferences@ resource value.
 snsSmsPreferencesResource
     :: P.Resource (SnsSmsPreferencesResource s)
 snsSmsPreferencesResource =
@@ -2956,6 +2987,7 @@ data SnsTopicResource s = SnsTopicResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_sns_topic@ resource value.
 snsTopicResource
     :: P.Resource (SnsTopicResource s)
 snsTopicResource =
@@ -3100,6 +3132,7 @@ data SnsTopicPolicyResource s = SnsTopicPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_sns_topic_policy@ resource value.
 snsTopicPolicyResource
     :: TF.Attr s P.Text -- ^ @arn@ - 'P.arn'
     -> TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
@@ -3164,6 +3197,7 @@ data SnsTopicSubscriptionResource s = SnsTopicSubscriptionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_sns_topic_subscription@ resource value.
 snsTopicSubscriptionResource
     :: TF.Attr s P.Text -- ^ @topic_arn@ - 'P.topicArn'
     -> TF.Attr s P.Text -- ^ @endpoint@ - 'P.endpoint'
@@ -3256,6 +3290,7 @@ data SpotDatafeedSubscriptionResource s = SpotDatafeedSubscriptionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_spot_datafeed_subscription@ resource value.
 spotDatafeedSubscriptionResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> P.Resource (SpotDatafeedSubscriptionResource s)
@@ -3334,6 +3369,7 @@ data SpotFleetRequestResource s = SpotFleetRequestResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_spot_fleet_request@ resource value.
 spotFleetRequestResource
     :: TF.Attr s P.Int -- ^ @target_capacity@ - 'P.targetCapacity'
     -> TF.Attr s P.Text -- ^ @iam_fleet_role@ - 'P.iamFleetRole'
@@ -3533,6 +3569,7 @@ data SpotInstanceRequestResource s = SpotInstanceRequestResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_spot_instance_request@ resource value.
 spotInstanceRequestResource
     :: TF.Attr s P.Text -- ^ @ami@ - 'P.ami'
     -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
@@ -3841,6 +3878,7 @@ data SqsQueueResource s = SqsQueueResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_sqs_queue@ resource value.
 sqsQueueResource
     :: P.Resource (SqsQueueResource s)
 sqsQueueResource =
@@ -3960,6 +3998,7 @@ data SqsQueuePolicyResource s = SqsQueuePolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_sqs_queue_policy@ resource value.
 sqsQueuePolicyResource
     :: TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
     -> TF.Attr s P.Text -- ^ @queue_url@ - 'P.queueUrl'
@@ -4015,6 +4054,7 @@ data SsmActivationResource s = SsmActivationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ssm_activation@ resource value.
 ssmActivationResource
     :: TF.Attr s P.Text -- ^ @iam_role@ - 'P.iamRole'
     -> P.Resource (SsmActivationResource s)
@@ -4099,6 +4139,7 @@ data SsmAssociationResource s = SsmAssociationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ssm_association@ resource value.
 ssmAssociationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SsmAssociationResource s)
@@ -4193,6 +4234,7 @@ data SsmDocumentResource s = SsmDocumentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ssm_document@ resource value.
 ssmDocumentResource
     :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4316,6 +4358,7 @@ data SsmMaintenanceWindowResource s = SsmMaintenanceWindowResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ssm_maintenance_window@ resource value.
 ssmMaintenanceWindowResource
     :: TF.Attr s P.Int -- ^ @cutoff@ - 'P.cutoff'
     -> TF.Attr s P.Int -- ^ @duration@ - 'P.duration'
@@ -4398,6 +4441,7 @@ data SsmMaintenanceWindowTargetResource s = SsmMaintenanceWindowTargetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ssm_maintenance_window_target@ resource value.
 ssmMaintenanceWindowTargetResource
     :: TF.Attr s P.Text -- ^ @window_id@ - 'P.windowId'
     -> TF.Attr s [TF.Attr s (TargetsSetting s)] -- ^ @targets@ - 'P.targets'
@@ -4483,6 +4527,7 @@ data SsmMaintenanceWindowTaskResource s = SsmMaintenanceWindowTaskResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ssm_maintenance_window_task@ resource value.
 ssmMaintenanceWindowTaskResource
     :: TF.Attr s P.Text -- ^ @service_role_arn@ - 'P.serviceRoleArn'
     -> TF.Attr s P.Text -- ^ @task_arn@ - 'P.taskArn'
@@ -4609,6 +4654,7 @@ data SsmParameterResource s = SsmParameterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ssm_parameter@ resource value.
 ssmParameterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -4715,6 +4761,7 @@ data SsmPatchBaselineResource s = SsmPatchBaselineResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ssm_patch_baseline@ resource value.
 ssmPatchBaselineResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SsmPatchBaselineResource s)
@@ -4802,6 +4849,7 @@ data SsmPatchGroupResource s = SsmPatchGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ssm_patch_group@ resource value.
 ssmPatchGroupResource
     :: TF.Attr s P.Text -- ^ @patch_group@ - 'P.patchGroup'
     -> TF.Attr s P.Text -- ^ @baseline_id@ - 'P.baselineId'
@@ -4848,6 +4896,7 @@ data SsmResourceDataSyncResource s = SsmResourceDataSyncResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ssm_resource_data_sync@ resource value.
 ssmResourceDataSyncResource
     :: TF.Attr s (S3DestinationSetting s) -- ^ @s3_destination@ - 'P.s3Destination'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4898,6 +4947,7 @@ data StoragegatewayCacheResource s = StoragegatewayCacheResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_storagegateway_cache@ resource value.
 storagegatewayCacheResource
     :: TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
     -> TF.Attr s P.Text -- ^ @disk_id@ - 'P.diskId'
@@ -4959,6 +5009,7 @@ data StoragegatewayGatewayResource s = StoragegatewayGatewayResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_storagegateway_gateway@ resource value.
 storagegatewayGatewayResource
     :: TF.Attr s P.Text -- ^ @gateway_name@ - 'P.gatewayName'
     -> TF.Attr s P.Text -- ^ @gateway_timezone@ - 'P.gatewayTimezone'
@@ -5089,6 +5140,7 @@ data StoragegatewayNfsFileShareResource s = StoragegatewayNfsFileShareResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_storagegateway_nfs_file_share@ resource value.
 storagegatewayNfsFileShareResource
     :: TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
     -> TF.Attr s P.Text -- ^ @location_arn@ - 'P.locationArn'
@@ -5257,6 +5309,7 @@ data StoragegatewaySmbFileShareResource s = StoragegatewaySmbFileShareResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_storagegateway_smb_file_share@ resource value.
 storagegatewaySmbFileShareResource
     :: TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
     -> TF.Attr s P.Text -- ^ @location_arn@ - 'P.locationArn'
@@ -5387,6 +5440,7 @@ data StoragegatewayUploadBufferResource s = StoragegatewayUploadBufferResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_storagegateway_upload_buffer@ resource value.
 storagegatewayUploadBufferResource
     :: TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
     -> TF.Attr s P.Text -- ^ @disk_id@ - 'P.diskId'
@@ -5433,6 +5487,7 @@ data StoragegatewayWorkingStorageResource s = StoragegatewayWorkingStorageResour
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_storagegateway_working_storage@ resource value.
 storagegatewayWorkingStorageResource
     :: TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
     -> TF.Attr s P.Text -- ^ @disk_id@ - 'P.diskId'
@@ -5488,6 +5543,7 @@ data SubnetResource s = SubnetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_subnet@ resource value.
 subnetResource
     :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
@@ -5567,6 +5623,7 @@ data SwfDomainResource s = SwfDomainResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_swf_domain@ resource value.
 swfDomainResource
     :: TF.Attr s P.Text -- ^ @workflow_execution_retention_period_in_days@ - 'P.workflowExecutionRetentionPeriodInDays'
     -> P.Resource (SwfDomainResource s)
@@ -5631,6 +5688,7 @@ data VolumeAttachmentResource s = VolumeAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_volume_attachment@ resource value.
 volumeAttachmentResource
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
@@ -5708,6 +5766,7 @@ data VpcResource s = VpcResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpc@ resource value.
 vpcResource
     :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
     -> P.Resource (VpcResource s)
@@ -5819,6 +5878,7 @@ data VpcDhcpOptionsResource s = VpcDhcpOptionsResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpc_dhcp_options@ resource value.
 vpcDhcpOptionsResource
     :: P.Resource (VpcDhcpOptionsResource s)
 vpcDhcpOptionsResource =
@@ -5891,6 +5951,7 @@ data VpcDhcpOptionsAssociationResource s = VpcDhcpOptionsAssociationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpc_dhcp_options_association@ resource value.
 vpcDhcpOptionsAssociationResource
     :: TF.Attr s P.Text -- ^ @dhcp_options_id@ - 'P.dhcpOptionsId'
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
@@ -5946,6 +6007,7 @@ data VpcEndpointResource s = VpcEndpointResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpc_endpoint@ resource value.
 vpcEndpointResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
@@ -6052,6 +6114,7 @@ data VpcEndpointConnectionNotificationResource s = VpcEndpointConnectionNotifica
     -- * 'vpcEndpointId'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpc_endpoint_connection_notification@ resource value.
 vpcEndpointConnectionNotificationResource
     :: TF.Attr s P.Text -- ^ @connection_notification_arn@ - 'P.connectionNotificationArn'
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @connection_events@ - 'P.connectionEvents'
@@ -6129,6 +6192,7 @@ data VpcEndpointRouteTableAssociationResource s = VpcEndpointRouteTableAssociati
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpc_endpoint_route_table_association@ resource value.
 vpcEndpointRouteTableAssociationResource
     :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
     -> TF.Attr s P.Text -- ^ @vpc_endpoint_id@ - 'P.vpcEndpointId'
@@ -6175,6 +6239,7 @@ data VpcEndpointServiceResource s = VpcEndpointServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpc_endpoint_service@ resource value.
 vpcEndpointServiceResource
     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @network_load_balancer_arns@ - 'P.networkLoadBalancerArns'
     -> TF.Attr s P.Bool -- ^ @acceptance_required@ - 'P.acceptanceRequired'
@@ -6242,6 +6307,7 @@ data VpcEndpointServiceAllowedPrincipalResource s = VpcEndpointServiceAllowedPri
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpc_endpoint_service_allowed_principal@ resource value.
 vpcEndpointServiceAllowedPrincipalResource
     :: TF.Attr s P.Text -- ^ @principal_arn@ - 'P.principalArn'
     -> TF.Attr s P.Text -- ^ @vpc_endpoint_service_id@ - 'P.vpcEndpointServiceId'
@@ -6288,6 +6354,7 @@ data VpcEndpointSubnetAssociationResource s = VpcEndpointSubnetAssociationResour
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpc_endpoint_subnet_association@ resource value.
 vpcEndpointSubnetAssociationResource
     :: TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> TF.Attr s P.Text -- ^ @vpc_endpoint_id@ - 'P.vpcEndpointId'
@@ -6334,6 +6401,7 @@ data VpcIpv4CidrBlockAssociationResource s = VpcIpv4CidrBlockAssociationResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpc_ipv4_cidr_block_association@ resource value.
 vpcIpv4CidrBlockAssociationResource
     :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
@@ -6386,6 +6454,7 @@ data VpcPeeringConnectionResource s = VpcPeeringConnectionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpc_peering_connection@ resource value.
 vpcPeeringConnectionResource
     :: TF.Attr s P.Text -- ^ @peer_vpc_id@ - 'P.peerVpcId'
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
@@ -6464,6 +6533,7 @@ data VpcPeeringConnectionAccepterResource s = VpcPeeringConnectionAccepterResour
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpc_peering_connection_accepter@ resource value.
 vpcPeeringConnectionAccepterResource
     :: TF.Attr s P.Text -- ^ @vpc_peering_connection_id@ - 'P.vpcPeeringConnectionId'
     -> P.Resource (VpcPeeringConnectionAccepterResource s)
@@ -6534,6 +6604,7 @@ data VpcPeeringConnectionOptionsResource s = VpcPeeringConnectionOptionsResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpc_peering_connection_options@ resource value.
 vpcPeeringConnectionOptionsResource
     :: TF.Attr s P.Text -- ^ @vpc_peering_connection_id@ - 'P.vpcPeeringConnectionId'
     -> P.Resource (VpcPeeringConnectionOptionsResource s)
@@ -6584,6 +6655,7 @@ data VpnConnectionResource s = VpnConnectionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpn_connection@ resource value.
 vpnConnectionResource
     :: TF.Attr s P.Text -- ^ @customer_gateway_id@ - 'P.customerGatewayId'
     -> TF.Attr s P.Text -- ^ @vpn_gateway_id@ - 'P.vpnGatewayId'
@@ -6699,6 +6771,7 @@ data VpnConnectionRouteResource s = VpnConnectionRouteResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpn_connection_route@ resource value.
 vpnConnectionRouteResource
     :: TF.Attr s P.Text -- ^ @destination_cidr_block@ - 'P.destinationCidrBlock'
     -> TF.Attr s P.Text -- ^ @vpn_connection_id@ - 'P.vpnConnectionId'
@@ -6745,6 +6818,7 @@ data VpnGatewayResource s = VpnGatewayResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpn_gateway@ resource value.
 vpnGatewayResource
     :: P.Resource (VpnGatewayResource s)
 vpnGatewayResource =
@@ -6795,6 +6869,7 @@ data VpnGatewayAttachmentResource s = VpnGatewayAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpn_gateway_attachment@ resource value.
 vpnGatewayAttachmentResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> TF.Attr s P.Text -- ^ @vpn_gateway_id@ - 'P.vpnGatewayId'
@@ -6841,6 +6916,7 @@ data VpnGatewayRoutePropagationResource s = VpnGatewayRoutePropagationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpn_gateway_route_propagation@ resource value.
 vpnGatewayRoutePropagationResource
     :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
     -> TF.Attr s P.Text -- ^ @vpn_gateway_id@ - 'P.vpnGatewayId'
@@ -6887,6 +6963,7 @@ data WafByteMatchSetResource s = WafByteMatchSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_waf_byte_match_set@ resource value.
 wafByteMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (WafByteMatchSetResource s)
@@ -6932,6 +7009,7 @@ data WafGeoMatchSetResource s = WafGeoMatchSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_waf_geo_match_set@ resource value.
 wafGeoMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (WafGeoMatchSetResource s)
@@ -6977,6 +7055,7 @@ data WafIpsetResource s = WafIpsetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_waf_ipset@ resource value.
 wafIpsetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (WafIpsetResource s)
@@ -7034,6 +7113,7 @@ data WafRateBasedRuleResource s = WafRateBasedRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_waf_rate_based_rule@ resource value.
 wafRateBasedRuleResource
     :: TF.Attr s P.Text -- ^ @rate_key@ - 'P.rateKey'
     -> TF.Attr s P.Int -- ^ @rate_limit@ - 'P.rateLimit'
@@ -7103,6 +7183,7 @@ data WafRegexMatchSetResource s = WafRegexMatchSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_waf_regex_match_set@ resource value.
 wafRegexMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (WafRegexMatchSetResource s)
@@ -7148,6 +7229,7 @@ data WafRegexPatternSetResource s = WafRegexPatternSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_waf_regex_pattern_set@ resource value.
 wafRegexPatternSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (WafRegexPatternSetResource s)
@@ -7196,6 +7278,7 @@ data WafRuleResource s = WafRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_waf_rule@ resource value.
 wafRuleResource
     :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -7252,6 +7335,7 @@ data WafRuleGroupResource s = WafRuleGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_waf_rule_group@ resource value.
 wafRuleGroupResource
     :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -7305,6 +7389,7 @@ data WafSizeConstraintSetResource s = WafSizeConstraintSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_waf_size_constraint_set@ resource value.
 wafSizeConstraintSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (WafSizeConstraintSetResource s)
@@ -7350,6 +7435,7 @@ data WafSqlInjectionMatchSetResource s = WafSqlInjectionMatchSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_waf_sql_injection_match_set@ resource value.
 wafSqlInjectionMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (WafSqlInjectionMatchSetResource s)
@@ -7401,6 +7487,7 @@ data WafWebAclResource s = WafWebAclResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_waf_web_acl@ resource value.
 wafWebAclResource
     :: TF.Attr s (DefaultActionSetting s) -- ^ @default_action@ - 'P.defaultAction'
     -> TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
@@ -7466,6 +7553,7 @@ data WafXssMatchSetResource s = WafXssMatchSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_waf_xss_match_set@ resource value.
 wafXssMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (WafXssMatchSetResource s)
@@ -7511,6 +7599,7 @@ data WafregionalByteMatchSetResource s = WafregionalByteMatchSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_wafregional_byte_match_set@ resource value.
 wafregionalByteMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (WafregionalByteMatchSetResource s)
@@ -7556,6 +7645,7 @@ data WafregionalGeoMatchSetResource s = WafregionalGeoMatchSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_wafregional_geo_match_set@ resource value.
 wafregionalGeoMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (WafregionalGeoMatchSetResource s)
@@ -7601,6 +7691,7 @@ data WafregionalIpsetResource s = WafregionalIpsetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_wafregional_ipset@ resource value.
 wafregionalIpsetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (WafregionalIpsetResource s)
@@ -7658,6 +7749,7 @@ data WafregionalRateBasedRuleResource s = WafregionalRateBasedRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_wafregional_rate_based_rule@ resource value.
 wafregionalRateBasedRuleResource
     :: TF.Attr s P.Text -- ^ @rate_key@ - 'P.rateKey'
     -> TF.Attr s P.Int -- ^ @rate_limit@ - 'P.rateLimit'
@@ -7727,6 +7819,7 @@ data WafregionalRegexMatchSetResource s = WafregionalRegexMatchSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_wafregional_regex_match_set@ resource value.
 wafregionalRegexMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (WafregionalRegexMatchSetResource s)
@@ -7772,6 +7865,7 @@ data WafregionalRegexPatternSetResource s = WafregionalRegexPatternSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_wafregional_regex_pattern_set@ resource value.
 wafregionalRegexPatternSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (WafregionalRegexPatternSetResource s)
@@ -7820,6 +7914,7 @@ data WafregionalRuleResource s = WafregionalRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_wafregional_rule@ resource value.
 wafregionalRuleResource
     :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -7876,6 +7971,7 @@ data WafregionalRuleGroupResource s = WafregionalRuleGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_wafregional_rule_group@ resource value.
 wafregionalRuleGroupResource
     :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -7929,6 +8025,7 @@ data WafregionalSizeConstraintSetResource s = WafregionalSizeConstraintSetResour
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_wafregional_size_constraint_set@ resource value.
 wafregionalSizeConstraintSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (WafregionalSizeConstraintSetResource s)
@@ -7974,6 +8071,7 @@ data WafregionalSqlInjectionMatchSetResource s = WafregionalSqlInjectionMatchSet
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_wafregional_sql_injection_match_set@ resource value.
 wafregionalSqlInjectionMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (WafregionalSqlInjectionMatchSetResource s)
@@ -8025,6 +8123,7 @@ data WafregionalWebAclResource s = WafregionalWebAclResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_wafregional_web_acl@ resource value.
 wafregionalWebAclResource
     :: TF.Attr s (DefaultActionSetting s) -- ^ @default_action@ - 'P.defaultAction'
     -> TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'

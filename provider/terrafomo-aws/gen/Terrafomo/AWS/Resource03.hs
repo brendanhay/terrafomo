@@ -17,7 +17,6 @@
 --
 module Terrafomo.AWS.Resource03
     (
-    -- * Resource Datatypes
     -- ** aws_iam_user_group_membership
       IamUserGroupMembershipResource (..)
     , iamUserGroupMembershipResource
@@ -457,6 +456,7 @@ data IamUserGroupMembershipResource s = IamUserGroupMembershipResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_user_group_membership@ resource value.
 iamUserGroupMembershipResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @groups@ - 'P.groups'
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
@@ -509,6 +509,7 @@ data IamUserLoginProfileResource s = IamUserLoginProfileResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_user_login_profile@ resource value.
 iamUserLoginProfileResource
     :: TF.Attr s P.Text -- ^ @pgp_key@ - 'P.pgpKey'
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
@@ -578,6 +579,7 @@ data IamUserPolicyResource s = IamUserPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_user_policy@ resource value.
 iamUserPolicyResource
     :: TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
@@ -634,6 +636,7 @@ data IamUserPolicyAttachmentResource s = IamUserPolicyAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_user_policy_attachment@ resource value.
 iamUserPolicyAttachmentResource
     :: TF.Attr s P.Text -- ^ @policy_arn@ - 'P.policyArn'
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
@@ -683,6 +686,7 @@ data IamUserSshKeyResource s = IamUserSshKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_user_ssh_key@ resource value.
 iamUserSshKeyResource
     :: TF.Attr s P.Text -- ^ @encoding@ - 'P.encoding'
     -> TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
@@ -746,6 +750,7 @@ data InspectorAssessmentTargetResource s = InspectorAssessmentTargetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_inspector_assessment_target@ resource value.
 inspectorAssessmentTargetResource
     :: TF.Attr s P.Text -- ^ @resource_group_arn@ - 'P.resourceGroupArn'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -801,6 +806,7 @@ data InspectorAssessmentTemplateResource s = InspectorAssessmentTemplateResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_inspector_assessment_template@ resource value.
 inspectorAssessmentTemplateResource
     :: TF.Attr s P.Text -- ^ @target_arn@ - 'P.targetArn'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @rules_package_arns@ - 'P.rulesPackageArns'
@@ -863,6 +869,7 @@ data InspectorResourceGroupResource s = InspectorResourceGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_inspector_resource_group@ resource value.
 inspectorResourceGroupResource
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @tags@ - 'P.tags'
     -> P.Resource (InspectorResourceGroupResource s)
@@ -946,6 +953,7 @@ data InstanceResource s = InstanceResource'
     -- * 'userData'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_instance@ resource value.
 instanceResource
     :: TF.Attr s P.Text -- ^ @ami@ - 'P.ami'
     -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
@@ -1166,6 +1174,7 @@ data InternetGatewayResource s = InternetGatewayResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_internet_gateway@ resource value.
 internetGatewayResource
     :: P.Resource (InternetGatewayResource s)
 internetGatewayResource =
@@ -1210,6 +1219,7 @@ data IotCertificateResource s = IotCertificateResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iot_certificate@ resource value.
 iotCertificateResource
     :: TF.Attr s P.Bool -- ^ @active@ - 'P.active'
     -> TF.Attr s P.Text -- ^ @csr@ - 'P.csr'
@@ -1259,6 +1269,7 @@ data IotPolicyResource s = IotPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iot_policy@ resource value.
 iotPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
@@ -1314,6 +1325,7 @@ data IotThingResource s = IotThingResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iot_thing@ resource value.
 iotThingResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (IotThingResource s)
@@ -1378,6 +1390,7 @@ data IotThingTypeResource s = IotThingTypeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iot_thing_type@ resource value.
 iotThingTypeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (IotThingTypeResource s)
@@ -1479,6 +1492,7 @@ data IotTopicRuleResource s = IotTopicRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iot_topic_rule@ resource value.
 iotTopicRuleResource
     :: TF.Attr s P.Bool -- ^ @enabled@ - 'P.enabled'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1628,6 +1642,7 @@ data KeyPairResource s = KeyPairResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_key_pair@ resource value.
 keyPairResource
     :: TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
     -> P.Resource (KeyPairResource s)
@@ -1703,6 +1718,7 @@ data KinesisFirehoseDeliveryStreamResource s = KinesisFirehoseDeliveryStreamReso
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_kinesis_firehose_delivery_stream@ resource value.
 kinesisFirehoseDeliveryStreamResource
     :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1850,6 +1866,7 @@ data KinesisStreamResource s = KinesisStreamResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_kinesis_stream@ resource value.
 kinesisStreamResource
     :: TF.Attr s P.Int -- ^ @shard_count@ - 'P.shardCount'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1943,6 +1960,7 @@ data KmsAliasResource s = KmsAliasResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_kms_alias@ resource value.
 kmsAliasResource
     :: TF.Attr s P.Text -- ^ @target_key_id@ - 'P.targetKeyId'
     -> P.Resource (KmsAliasResource s)
@@ -2030,6 +2048,7 @@ data KmsGrantResource s = KmsGrantResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_kms_grant@ resource value.
 kmsGrantResource
     :: TF.Attr s P.Text -- ^ @key_id@ - 'P.keyId'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @operations@ - 'P.operations'
@@ -2131,6 +2150,7 @@ data KmsKeyResource s = KmsKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_kms_key@ resource value.
 kmsKeyResource
     :: P.Resource (KmsKeyResource s)
 kmsKeyResource =
@@ -2213,6 +2233,7 @@ data LambdaAliasResource s = LambdaAliasResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lambda_alias@ resource value.
 lambdaAliasResource
     :: TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2297,6 +2318,7 @@ data LambdaEventSourceMappingResource s = LambdaEventSourceMappingResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lambda_event_source_mapping@ resource value.
 lambdaEventSourceMappingResource
     :: TF.Attr s P.Text -- ^ @event_source_arn@ - 'P.eventSourceArn'
     -> TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
@@ -2444,6 +2466,7 @@ data LambdaFunctionResource s = LambdaFunctionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lambda_function@ resource value.
 lambdaFunctionResource
     :: TF.Attr s P.Text -- ^ @handler@ - 'P.handler'
     -> TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
@@ -2679,6 +2702,7 @@ data LambdaPermissionResource s = LambdaPermissionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lambda_permission@ resource value.
 lambdaPermissionResource
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
@@ -2813,6 +2837,7 @@ data LaunchConfigurationResource s = LaunchConfigurationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_launch_configuration@ resource value.
 launchConfigurationResource
     :: TF.Attr s P.Text -- ^ @image_id@ - 'P.imageId'
     -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
@@ -3038,6 +3063,7 @@ data LaunchTemplateResource s = LaunchTemplateResource'
     -- * 'securityGroupNames'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_launch_template@ resource value.
 launchTemplateResource
     :: P.Resource (LaunchTemplateResource s)
 launchTemplateResource =
@@ -3287,6 +3313,7 @@ data LbResource s = LbResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lb@ resource value.
 lbResource
     :: P.Resource (LbResource s)
 lbResource =
@@ -3408,6 +3435,7 @@ data LbCookieStickinessPolicyResource s = LbCookieStickinessPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lb_cookie_stickiness_policy@ resource value.
 lbCookieStickinessPolicyResource
     :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -3478,6 +3506,7 @@ data LbListenerResource s = LbListenerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lb_listener@ resource value.
 lbListenerResource
     :: TF.Attr s [TF.Attr s (DefaultActionSetting s)] -- ^ @default_action@ - 'P.defaultAction'
     -> TF.Attr s P.Text -- ^ @load_balancer_arn@ - 'P.loadBalancerArn'
@@ -3552,6 +3581,7 @@ data LbListenerCertificateResource s = LbListenerCertificateResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lb_listener_certificate@ resource value.
 lbListenerCertificateResource
     :: TF.Attr s P.Text -- ^ @certificate_arn@ - 'P.certificateArn'
     -> TF.Attr s P.Text -- ^ @listener_arn@ - 'P.listenerArn'
@@ -3601,6 +3631,7 @@ data LbListenerRuleResource s = LbListenerRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lb_listener_rule@ resource value.
 lbListenerRuleResource
     :: TF.Attr s [TF.Attr s (ActionSetting s)] -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @listener_arn@ - 'P.listenerArn'
@@ -3667,6 +3698,7 @@ data LbSslNegotiationPolicyResource s = LbSslNegotiationPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lb_ssl_negotiation_policy@ resource value.
 lbSslNegotiationPolicyResource
     :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -3749,6 +3781,7 @@ data LbTargetGroupResource s = LbTargetGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lb_target_group@ resource value.
 lbTargetGroupResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
@@ -3866,6 +3899,7 @@ data LbTargetGroupAttachmentResource s = LbTargetGroupAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lb_target_group_attachment@ resource value.
 lbTargetGroupAttachmentResource
     :: TF.Attr s P.Text -- ^ @target_group_arn@ - 'P.targetGroupArn'
     -> TF.Attr s P.Text -- ^ @target_id@ - 'P.targetId'
@@ -3923,6 +3957,7 @@ data LightsailDomainResource s = LightsailDomainResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lightsail_domain@ resource value.
 lightsailDomainResource
     :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
     -> P.Resource (LightsailDomainResource s)
@@ -3976,6 +4011,7 @@ data LightsailInstanceResource s = LightsailInstanceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lightsail_instance@ resource value.
 lightsailInstanceResource
     :: TF.Attr s P.Text -- ^ @blueprint_id@ - 'P.blueprintId'
     -> TF.Attr s P.Text -- ^ @bundle_id@ - 'P.bundleId'
@@ -4079,6 +4115,7 @@ data LightsailKeyPairResource s = LightsailKeyPairResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lightsail_key_pair@ resource value.
 lightsailKeyPairResource
     :: P.Resource (LightsailKeyPairResource s)
 lightsailKeyPairResource =
@@ -4141,6 +4178,7 @@ data LightsailStaticIpResource s = LightsailStaticIpResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lightsail_static_ip@ resource value.
 lightsailStaticIpResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LightsailStaticIpResource s)
@@ -4188,6 +4226,7 @@ data LightsailStaticIpAttachmentResource s = LightsailStaticIpAttachmentResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lightsail_static_ip_attachment@ resource value.
 lightsailStaticIpAttachmentResource
     :: TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
     -> TF.Attr s P.Text -- ^ @static_ip_name@ - 'P.staticIpName'
@@ -4237,6 +4276,7 @@ data LoadBalancerBackendServerPolicyResource s = LoadBalancerBackendServerPolicy
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_load_balancer_backend_server_policy@ resource value.
 loadBalancerBackendServerPolicyResource
     :: TF.Attr s P.Text -- ^ @load_balancer_name@ - 'P.loadBalancerName'
     -> TF.Attr s P.Int -- ^ @instance_port@ - 'P.instancePort'
@@ -4293,6 +4333,7 @@ data LoadBalancerListenerPolicyResource s = LoadBalancerListenerPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_load_balancer_listener_policy@ resource value.
 loadBalancerListenerPolicyResource
     :: TF.Attr s P.Text -- ^ @load_balancer_name@ - 'P.loadBalancerName'
     -> TF.Attr s P.Int -- ^ @load_balancer_port@ - 'P.loadBalancerPort'
@@ -4352,6 +4393,7 @@ data LoadBalancerPolicyResource s = LoadBalancerPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_load_balancer_policy@ resource value.
 loadBalancerPolicyResource
     :: TF.Attr s P.Text -- ^ @load_balancer_name@ - 'P.loadBalancerName'
     -> TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
@@ -4410,6 +4452,7 @@ data MacieMemberAccountAssociationResource s = MacieMemberAccountAssociationReso
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_macie_member_account_association@ resource value.
 macieMemberAccountAssociationResource
     :: TF.Attr s P.Text -- ^ @member_account_id@ - 'P.memberAccountId'
     -> P.Resource (MacieMemberAccountAssociationResource s)
@@ -4451,6 +4494,7 @@ data MacieS3BucketAssociationResource s = MacieS3BucketAssociationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_macie_s3_bucket_association@ resource value.
 macieS3BucketAssociationResource
     :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
     -> P.Resource (MacieS3BucketAssociationResource s)
@@ -4506,6 +4550,7 @@ data MainRouteTableAssociationResource s = MainRouteTableAssociationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_main_route_table_association@ resource value.
 mainRouteTableAssociationResource
     :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
@@ -4552,6 +4597,7 @@ data MediaStoreContainerResource s = MediaStoreContainerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_media_store_container@ resource value.
 mediaStoreContainerResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (MediaStoreContainerResource s)
@@ -4596,6 +4642,7 @@ data MediaStoreContainerPolicyResource s = MediaStoreContainerPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_media_store_container_policy@ resource value.
 mediaStoreContainerPolicyResource
     :: TF.Attr s P.Text -- ^ @container_name@ - 'P.containerName'
     -> TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
@@ -4666,6 +4713,7 @@ data MqBrokerResource s = MqBrokerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_mq_broker@ resource value.
 mqBrokerResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ - 'P.securityGroups'
     -> TF.Attr s P.Text -- ^ @broker_name@ - 'P.brokerName'
@@ -4796,6 +4844,7 @@ data MqConfigurationResource s = MqConfigurationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_mq_configuration@ resource value.
 mqConfigurationResource
     :: TF.Attr s P.Text -- ^ @data@ - 'P.data''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4874,6 +4923,7 @@ data NatGatewayResource s = NatGatewayResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_nat_gateway@ resource value.
 natGatewayResource
     :: TF.Attr s P.Text -- ^ @allocation_id@ - 'P.allocationId'
     -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
@@ -4966,6 +5016,7 @@ data NeptuneClusterResource s = NeptuneClusterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_neptune_cluster@ resource value.
 neptuneClusterResource
     :: P.Resource (NeptuneClusterResource s)
 neptuneClusterResource =
@@ -5149,6 +5200,7 @@ data NeptuneClusterInstanceResource s = NeptuneClusterInstanceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_neptune_cluster_instance@ resource value.
 neptuneClusterInstanceResource
     :: TF.Attr s P.Text -- ^ @instance_class@ - 'P.instanceClass'
     -> TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
@@ -5295,6 +5347,7 @@ data NeptuneClusterParameterGroupResource s = NeptuneClusterParameterGroupResour
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_neptune_cluster_parameter_group@ resource value.
 neptuneClusterParameterGroupResource
     :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
     -> P.Resource (NeptuneClusterParameterGroupResource s)
@@ -5375,6 +5428,7 @@ data NeptuneEventSubscriptionResource s = NeptuneEventSubscriptionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_neptune_event_subscription@ resource value.
 neptuneEventSubscriptionResource
     :: TF.Attr s P.Text -- ^ @sns_topic_arn@ - 'P.snsTopicArn'
     -> P.Resource (NeptuneEventSubscriptionResource s)
@@ -5469,6 +5523,7 @@ data NeptuneParameterGroupResource s = NeptuneParameterGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_neptune_parameter_group@ resource value.
 neptuneParameterGroupResource
     :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -5542,6 +5597,7 @@ data NeptuneSubnetGroupResource s = NeptuneSubnetGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_neptune_subnet_group@ resource value.
 neptuneSubnetGroupResource
     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @subnet_ids@ - 'P.subnetIds'
     -> P.Resource (NeptuneSubnetGroupResource s)
@@ -5603,6 +5659,7 @@ data NetworkAclResource s = NetworkAclResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_network_acl@ resource value.
 networkAclResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.Resource (NetworkAclResource s)
@@ -5690,6 +5747,7 @@ data NetworkAclRuleResource s = NetworkAclRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_network_acl_rule@ resource value.
 networkAclRuleResource
     :: TF.Attr s P.Text -- ^ @rule_action@ - 'P.ruleAction'
     -> TF.Attr s P.Text -- ^ @network_acl_id@ - 'P.networkAclId'
@@ -5818,6 +5876,7 @@ data NetworkInterfaceResource s = NetworkInterfaceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_network_interface@ resource value.
 networkInterfaceResource
     :: TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> P.Resource (NetworkInterfaceResource s)
@@ -5898,6 +5957,7 @@ data NetworkInterfaceAttachmentResource s = NetworkInterfaceAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_network_interface_attachment@ resource value.
 networkInterfaceAttachmentResource
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> TF.Attr s P.Text -- ^ @network_interface_id@ - 'P.networkInterfaceId'
@@ -5958,6 +6018,7 @@ data NetworkInterfaceSgAttachmentResource s = NetworkInterfaceSgAttachmentResour
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_network_interface_sg_attachment@ resource value.
 networkInterfaceSgAttachmentResource
     :: TF.Attr s P.Text -- ^ @network_interface_id@ - 'P.networkInterfaceId'
     -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
@@ -6043,6 +6104,7 @@ data OpsworksApplicationResource s = OpsworksApplicationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_opsworks_application@ resource value.
 opsworksApplicationResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -6244,6 +6306,7 @@ data OpsworksCustomLayerResource s = OpsworksCustomLayerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_opsworks_custom_layer@ resource value.
 opsworksCustomLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -6487,6 +6550,7 @@ data OpsworksGangliaLayerResource s = OpsworksGangliaLayerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_opsworks_ganglia_layer@ resource value.
 opsworksGangliaLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
@@ -6752,6 +6816,7 @@ data OpsworksHaproxyLayerResource s = OpsworksHaproxyLayerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_opsworks_haproxy_layer@ resource value.
 opsworksHaproxyLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> TF.Attr s P.Text -- ^ @stats_password@ - 'P.statsPassword'
@@ -6993,6 +7058,7 @@ data OpsworksInstanceResource s = OpsworksInstanceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_opsworks_instance@ resource value.
 opsworksInstanceResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @layer_ids@ - 'P.layerIds'
@@ -7273,6 +7339,7 @@ data OpsworksJavaAppLayerResource s = OpsworksJavaAppLayerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_opsworks_java_app_layer@ resource value.
 opsworksJavaAppLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksJavaAppLayerResource s)
@@ -7536,6 +7603,7 @@ data OpsworksMemcachedLayerResource s = OpsworksMemcachedLayerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_opsworks_memcached_layer@ resource value.
 opsworksMemcachedLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksMemcachedLayerResource s)
@@ -7774,6 +7842,7 @@ data OpsworksMysqlLayerResource s = OpsworksMysqlLayerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_opsworks_mysql_layer@ resource value.
 opsworksMysqlLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksMysqlLayerResource s)
@@ -8016,6 +8085,7 @@ data OpsworksNodejsAppLayerResource s = OpsworksNodejsAppLayerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_opsworks_nodejs_app_layer@ resource value.
 opsworksNodejsAppLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksNodejsAppLayerResource s)
@@ -8191,6 +8261,7 @@ data OpsworksPermissionResource s = OpsworksPermissionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_opsworks_permission@ resource value.
 opsworksPermissionResource
     :: TF.Attr s P.Text -- ^ @user_arn@ - 'P.userArn'
     -> P.Resource (OpsworksPermissionResource s)
@@ -8295,6 +8366,7 @@ data OpsworksPhpAppLayerResource s = OpsworksPhpAppLayerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_opsworks_php_app_layer@ resource value.
 opsworksPhpAppLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksPhpAppLayerResource s)
@@ -8538,6 +8610,7 @@ data OpsworksRailsAppLayerResource s = OpsworksRailsAppLayerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_opsworks_rails_app_layer@ resource value.
 opsworksRailsAppLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksRailsAppLayerResource s)
@@ -8757,6 +8830,7 @@ data OpsworksRdsDbInstanceResource s = OpsworksRdsDbInstanceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_opsworks_rds_db_instance@ resource value.
 opsworksRdsDbInstanceResource
     :: TF.Attr s P.Text -- ^ @rds_db_instance_arn@ - 'P.rdsDbInstanceArn'
     -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
@@ -8864,6 +8938,7 @@ data OpsworksStackResource s = OpsworksStackResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_opsworks_stack@ resource value.
 opsworksStackResource
     :: TF.Attr s P.Text -- ^ @default_instance_profile_arn@ - 'P.defaultInstanceProfileArn'
     -> TF.Attr s P.Text -- ^ @service_role_arn@ - 'P.serviceRoleArn'
@@ -9092,6 +9167,7 @@ data OpsworksStaticWebLayerResource s = OpsworksStaticWebLayerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_opsworks_static_web_layer@ resource value.
 opsworksStaticWebLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksStaticWebLayerResource s)
@@ -9269,6 +9345,7 @@ data OpsworksUserProfileResource s = OpsworksUserProfileResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_opsworks_user_profile@ resource value.
 opsworksUserProfileResource
     :: TF.Attr s P.Text -- ^ @user_arn@ - 'P.userArn'
     -> TF.Attr s P.Text -- ^ @ssh_username@ - 'P.sshUsername'
@@ -9335,6 +9412,7 @@ data OrganizationsAccountResource s = OrganizationsAccountResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_organizations_account@ resource value.
 organizationsAccountResource
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -9404,6 +9482,7 @@ data OrganizationsOrganizationResource s = OrganizationsOrganizationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_organizations_organization@ resource value.
 organizationsOrganizationResource
     :: P.Resource (OrganizationsOrganizationResource s)
 organizationsOrganizationResource =
@@ -9459,6 +9538,7 @@ data OrganizationsPolicyResource s = OrganizationsPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_organizations_policy@ resource value.
 organizationsPolicyResource
     :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -9522,6 +9602,7 @@ data OrganizationsPolicyAttachmentResource s = OrganizationsPolicyAttachmentReso
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_organizations_policy_attachment@ resource value.
 organizationsPolicyAttachmentResource
     :: TF.Attr s P.Text -- ^ @policy_id@ - 'P.policyId'
     -> TF.Attr s P.Text -- ^ @target_id@ - 'P.targetId'
@@ -9568,6 +9649,7 @@ data PlacementGroupResource s = PlacementGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_placement_group@ resource value.
 placementGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @strategy@ - 'P.strategy'
@@ -9614,6 +9696,7 @@ data ProxyProtocolPolicyResource s = ProxyProtocolPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_proxy_protocol_policy@ resource value.
 proxyProtocolPolicyResource
     :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @instance_ports@ - 'P.instancePorts'
@@ -9705,6 +9788,7 @@ data RdsClusterResource s = RdsClusterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_rds_cluster@ resource value.
 rdsClusterResource
     :: P.Resource (RdsClusterResource s)
 rdsClusterResource =
@@ -9933,6 +10017,7 @@ data RdsClusterInstanceResource s = RdsClusterInstanceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_rds_cluster_instance@ resource value.
 rdsClusterInstanceResource
     :: TF.Attr s P.Text -- ^ @instance_class@ - 'P.instanceClass'
     -> TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
@@ -10084,6 +10169,7 @@ data RdsClusterParameterGroupResource s = RdsClusterParameterGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_rds_cluster_parameter_group@ resource value.
 rdsClusterParameterGroupResource
     :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
     -> P.Resource (RdsClusterParameterGroupResource s)
@@ -10203,6 +10289,7 @@ data RedshiftClusterResource s = RedshiftClusterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_redshift_cluster@ resource value.
 redshiftClusterResource
     :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
     -> TF.Attr s P.Text -- ^ @node_type@ - 'P.nodeType'
@@ -10430,6 +10517,7 @@ data RedshiftParameterGroupResource s = RedshiftParameterGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_redshift_parameter_group@ resource value.
 redshiftParameterGroupResource
     :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -10493,6 +10581,7 @@ data RedshiftSecurityGroupResource s = RedshiftSecurityGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_redshift_security_group@ resource value.
 redshiftSecurityGroupResource
     :: TF.Attr s [TF.Attr s (IngressSetting s)] -- ^ @ingress@ - 'P.ingress'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -10552,6 +10641,7 @@ data RedshiftSubnetGroupResource s = RedshiftSubnetGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_redshift_subnet_group@ resource value.
 redshiftSubnetGroupResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @subnet_ids@ - 'P.subnetIds'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -10618,6 +10708,7 @@ data RouteResource s = RouteResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_route@ resource value.
 routeResource
     :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
     -> P.Resource (RouteResource s)
@@ -10701,6 +10792,7 @@ data Route53DelegationSetResource s = Route53DelegationSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_route53_delegation_set@ resource value.
 route53DelegationSetResource
     :: P.Resource (Route53DelegationSetResource s)
 route53DelegationSetResource =
@@ -10789,6 +10881,7 @@ data Route53HealthCheckResource s = Route53HealthCheckResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_route53_health_check@ resource value.
 route53HealthCheckResource
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (Route53HealthCheckResource s)
@@ -10949,6 +11042,7 @@ data Route53QueryLogResource s = Route53QueryLogResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_route53_query_log@ resource value.
 route53QueryLogResource
     :: TF.Attr s P.Text -- ^ @cloudwatch_log_group_arn@ - 'P.cloudwatchLogGroupArn'
     -> TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
@@ -11077,6 +11171,7 @@ data Route53RecordResource s = Route53RecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_route53_record@ resource value.
 route53RecordResource
     :: TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -11284,6 +11379,7 @@ data Route53ZoneResource s = Route53ZoneResource'
     -- * 'delegationSetId'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_route53_zone@ resource value.
 route53ZoneResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (Route53ZoneResource s)
@@ -11377,6 +11473,7 @@ data Route53ZoneAssociationResource s = Route53ZoneAssociationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_route53_zone_association@ resource value.
 route53ZoneAssociationResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
@@ -11426,6 +11523,7 @@ data RouteTableResource s = RouteTableResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_route_table@ resource value.
 routeTableResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.Resource (RouteTableResource s)
@@ -11477,6 +11575,7 @@ data RouteTableAssociationResource s = RouteTableAssociationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_route_table_association@ resource value.
 routeTableAssociationResource
     :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
     -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'

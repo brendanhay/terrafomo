@@ -12,18 +12,29 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.AWS
-    ( module Terrafomo.AWS.DataSource01
+    (
+    -- * Provider Datatype
+      module Terrafomo.AWS.Provider
+
+    -- * Custom Types
+    , module Terrafomo.AWS.Types
+
+    -- * DataSources
+    , module Terrafomo.AWS.DataSource01
     , module Terrafomo.AWS.DataSource02
-    , module Terrafomo.AWS.Lens
-    , module Terrafomo.AWS.Provider
+
+    -- * Resources
     , module Terrafomo.AWS.Resource01
     , module Terrafomo.AWS.Resource02
     , module Terrafomo.AWS.Resource03
     , module Terrafomo.AWS.Resource04
     , module Terrafomo.AWS.Resource05
+
+    -- * Settings
     , module Terrafomo.AWS.Settings
-    , module Terrafomo.AWS.Types
-    -- * Provider Aliases
+
+    -- * Overloaded Lenses
+    , module Terrafomo.AWS.Lens
     ) where
 
 import Terrafomo.AWS.DataSource01

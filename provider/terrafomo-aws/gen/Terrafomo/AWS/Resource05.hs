@@ -17,7 +17,6 @@
 --
 module Terrafomo.AWS.Resource05
     (
-    -- * Resource Datatypes
     -- ** aws_wafregional_web_acl_association
       WafregionalWebAclAssociationResource (..)
     , wafregionalWebAclAssociationResource
@@ -65,6 +64,7 @@ data WafregionalWebAclAssociationResource s = WafregionalWebAclAssociationResour
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_wafregional_web_acl_association@ resource value.
 wafregionalWebAclAssociationResource
     :: TF.Attr s P.Text -- ^ @resource_arn@ - 'P.resourceArn'
     -> TF.Attr s P.Text -- ^ @web_acl_id@ - 'P.webAclId'
@@ -111,6 +111,7 @@ data WafregionalXssMatchSetResource s = WafregionalXssMatchSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_wafregional_xss_match_set@ resource value.
 wafregionalXssMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (WafregionalXssMatchSetResource s)

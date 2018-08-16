@@ -17,7 +17,6 @@
 --
 module Terrafomo.AWS.DataSource01
     (
-    -- * DataSource Datatypes
     -- ** aws_acm_certificate
       AcmCertificateData (..)
     , acmCertificateData
@@ -463,6 +462,7 @@ data AcmCertificateData s = AcmCertificateData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_acm_certificate@ datasource value.
 acmCertificateData
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> P.DataSource (AcmCertificateData s)
@@ -522,6 +522,7 @@ data AcmpcaCertificateAuthorityData s = AcmpcaCertificateAuthorityData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_acmpca_certificate_authority@ datasource value.
 acmpcaCertificateAuthorityData
     :: TF.Attr s P.Text -- ^ @arn@ - 'P.arn'
     -> P.DataSource (AcmpcaCertificateAuthorityData s)
@@ -584,6 +585,7 @@ instance s ~ s' => P.HasComputedType (TF.Ref s' (AcmpcaCertificateAuthorityData 
 data AlbData s = AlbData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_alb@ datasource value.
 albData
     :: P.DataSource (AlbData s)
 albData =
@@ -651,6 +653,7 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (AlbData s)) (TF.Attr s P.Text
 data AlbListenerData s = AlbListenerData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_alb_listener@ datasource value.
 albListenerData
     :: P.DataSource (AlbListenerData s)
 albListenerData =
@@ -694,6 +697,7 @@ instance s ~ s' => P.HasComputedSslPolicy (TF.Ref s' (AlbListenerData s)) (TF.At
 data AlbTargetGroupData s = AlbTargetGroupData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_alb_target_group@ datasource value.
 albTargetGroupData
     :: P.DataSource (AlbTargetGroupData s)
 albTargetGroupData =
@@ -764,6 +768,7 @@ data AmiData s = AmiData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ami@ datasource value.
 amiData
     :: P.DataSource (AmiData s)
 amiData =
@@ -907,6 +912,7 @@ data AmiIdsData s = AmiIdsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ami_ids@ datasource value.
 amiIdsData
     :: P.DataSource (AmiIdsData s)
 amiIdsData =
@@ -965,6 +971,7 @@ data ApiGatewayRestApiData s = ApiGatewayRestApiData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_rest_api@ datasource value.
 apiGatewayRestApiData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ApiGatewayRestApiData s)
@@ -1003,6 +1010,7 @@ data ArnData s = ArnData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_arn@ datasource value.
 arnData
     :: TF.Attr s P.Text -- ^ @arn@ - 'P.arn'
     -> P.DataSource (ArnData s)
@@ -1053,6 +1061,7 @@ data AutoscalingGroupsData s = AutoscalingGroupsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_autoscaling_groups@ datasource value.
 autoscalingGroupsData
     :: P.DataSource (AutoscalingGroupsData s)
 autoscalingGroupsData =
@@ -1087,6 +1096,7 @@ instance s ~ s' => P.HasComputedNames (TF.Ref s' (AutoscalingGroupsData s)) (TF.
 data AvailabilityZoneData s = AvailabilityZoneData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_availability_zone@ datasource value.
 availabilityZoneData
     :: P.DataSource (AvailabilityZoneData s)
 availabilityZoneData =
@@ -1124,6 +1134,7 @@ data AvailabilityZonesData s = AvailabilityZonesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_availability_zones@ datasource value.
 availabilityZonesData
     :: P.DataSource (AvailabilityZonesData s)
 availabilityZonesData =
@@ -1161,6 +1172,7 @@ data BatchComputeEnvironmentData s = BatchComputeEnvironmentData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_batch_compute_environment@ datasource value.
 batchComputeEnvironmentData
     :: TF.Attr s P.Text -- ^ @compute_environment_name@ - 'P.computeEnvironmentName'
     -> P.DataSource (BatchComputeEnvironmentData s)
@@ -1217,6 +1229,7 @@ data BatchJobQueueData s = BatchJobQueueData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_batch_job_queue@ datasource value.
 batchJobQueueData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (BatchJobQueueData s)
@@ -1267,6 +1280,7 @@ instance s ~ s' => P.HasComputedStatusReason (TF.Ref s' (BatchJobQueueData s)) (
 data BillingServiceAccountData s = BillingServiceAccountData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_billing_service_account@ datasource value.
 billingServiceAccountData
     :: P.DataSource (BillingServiceAccountData s)
 billingServiceAccountData =
@@ -1292,6 +1306,7 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (BillingServiceAccountData s)) (T
 data CallerIdentityData s = CallerIdentityData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_caller_identity@ datasource value.
 callerIdentityData
     :: P.DataSource (CallerIdentityData s)
 callerIdentityData =
@@ -1323,6 +1338,7 @@ instance s ~ s' => P.HasComputedUserId (TF.Ref s' (CallerIdentityData s)) (TF.At
 data CanonicalUserIdData s = CanonicalUserIdData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_canonical_user_id@ datasource value.
 canonicalUserIdData
     :: P.DataSource (CanonicalUserIdData s)
 canonicalUserIdData =
@@ -1351,6 +1367,7 @@ data CloudformationExportData s = CloudformationExportData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudformation_export@ datasource value.
 cloudformationExportData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CloudformationExportData s)
@@ -1392,6 +1409,7 @@ data CloudformationStackData s = CloudformationStackData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudformation_stack@ datasource value.
 cloudformationStackData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CloudformationStackData s)
@@ -1457,6 +1475,7 @@ data CloudtrailServiceAccountData s = CloudtrailServiceAccountData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudtrail_service_account@ datasource value.
 cloudtrailServiceAccountData
     :: P.DataSource (CloudtrailServiceAccountData s)
 cloudtrailServiceAccountData =
@@ -1494,6 +1513,7 @@ data CloudwatchLogGroupData s = CloudwatchLogGroupData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudwatch_log_group@ datasource value.
 cloudwatchLogGroupData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CloudwatchLogGroupData s)
@@ -1535,6 +1555,7 @@ data CodecommitRepositoryData s = CodecommitRepositoryData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_codecommit_repository@ datasource value.
 codecommitRepositoryData
     :: TF.Attr s P.Text -- ^ @repository_name@ - 'P.repositoryName'
     -> P.DataSource (CodecommitRepositoryData s)
@@ -1582,6 +1603,7 @@ data CognitoUserPoolsData s = CognitoUserPoolsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cognito_user_pools@ datasource value.
 cognitoUserPoolsData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CognitoUserPoolsData s)
@@ -1638,6 +1660,7 @@ data DbClusterSnapshotData s = DbClusterSnapshotData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_db_cluster_snapshot@ datasource value.
 dbClusterSnapshotData
     :: P.DataSource (DbClusterSnapshotData s)
 dbClusterSnapshotData =
@@ -1746,6 +1769,7 @@ data DbInstanceData s = DbInstanceData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_db_instance@ datasource value.
 dbInstanceData
     :: TF.Attr s P.Text -- ^ @db_instance_identifier@ - 'P.dbInstanceIdentifier'
     -> P.DataSource (DbInstanceData s)
@@ -1901,6 +1925,7 @@ data DbSnapshotData s = DbSnapshotData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_db_snapshot@ datasource value.
 dbSnapshotData
     :: P.DataSource (DbSnapshotData s)
 dbSnapshotData =
@@ -2021,6 +2046,7 @@ data DxGatewayData s = DxGatewayData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dx_gateway@ datasource value.
 dxGatewayData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DxGatewayData s)
@@ -2059,6 +2085,7 @@ data DynamodbTableData s = DynamodbTableData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dynamodb_table@ datasource value.
 dynamodbTableData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DynamodbTableData s)
@@ -2151,6 +2178,7 @@ data EbsSnapshotData s = EbsSnapshotData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ebs_snapshot@ datasource value.
 ebsSnapshotData
     :: P.DataSource (EbsSnapshotData s)
 ebsSnapshotData =
@@ -2252,6 +2280,7 @@ data EbsSnapshotIdsData s = EbsSnapshotIdsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ebs_snapshot_ids@ datasource value.
 ebsSnapshotIdsData
     :: P.DataSource (EbsSnapshotIdsData s)
 ebsSnapshotIdsData =
@@ -2306,6 +2335,7 @@ data EbsVolumeData s = EbsVolumeData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ebs_volume@ datasource value.
 ebsVolumeData
     :: P.DataSource (EbsVolumeData s)
 ebsVolumeData =
@@ -2377,6 +2407,7 @@ data EcrRepositoryData s = EcrRepositoryData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ecr_repository@ datasource value.
 ecrRepositoryData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (EcrRepositoryData s)
@@ -2421,6 +2452,7 @@ data EcsClusterData s = EcsClusterData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ecs_cluster@ datasource value.
 ecsClusterData
     :: TF.Attr s P.Text -- ^ @cluster_name@ - 'P.clusterName'
     -> P.DataSource (EcsClusterData s)
@@ -2474,6 +2506,7 @@ data EcsContainerDefinitionData s = EcsContainerDefinitionData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ecs_container_definition@ datasource value.
 ecsContainerDefinitionData
     :: TF.Attr s P.Text -- ^ @task_definition@ - 'P.taskDefinition'
     -> TF.Attr s P.Text -- ^ @container_name@ - 'P.containerName'
@@ -2544,6 +2577,7 @@ data EcsServiceData s = EcsServiceData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ecs_service@ datasource value.
 ecsServiceData
     :: TF.Attr s P.Text -- ^ @cluster_arn@ - 'P.clusterArn'
     -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
@@ -2602,6 +2636,7 @@ data EcsTaskDefinitionData s = EcsTaskDefinitionData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ecs_task_definition@ datasource value.
 ecsTaskDefinitionData
     :: TF.Attr s P.Text -- ^ @task_definition@ - 'P.taskDefinition'
     -> P.DataSource (EcsTaskDefinitionData s)
@@ -2649,6 +2684,7 @@ instance s ~ s' => P.HasComputedTaskRoleArn (TF.Ref s' (EcsTaskDefinitionData s)
 data EfsFileSystemData s = EfsFileSystemData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_efs_file_system@ datasource value.
 efsFileSystemData
     :: P.DataSource (EfsFileSystemData s)
 efsFileSystemData =
@@ -2695,6 +2731,7 @@ data EfsMountTargetData s = EfsMountTargetData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_efs_mount_target@ datasource value.
 efsMountTargetData
     :: TF.Attr s P.Text -- ^ @mount_target_id@ - 'P.mountTargetId'
     -> P.DataSource (EfsMountTargetData s)
@@ -2745,6 +2782,7 @@ instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (EfsMountTargetData s)) (TF.
 data EipData s = EipData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_eip@ datasource value.
 eipData
     :: P.DataSource (EipData s)
 eipData =
@@ -2773,6 +2811,7 @@ data EksClusterData s = EksClusterData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_eks_cluster@ datasource value.
 eksClusterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (EksClusterData s)
@@ -2829,6 +2868,7 @@ data ElasticBeanstalkHostedZoneData s = ElasticBeanstalkHostedZoneData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elastic_beanstalk_hosted_zone@ datasource value.
 elasticBeanstalkHostedZoneData
     :: P.DataSource (ElasticBeanstalkHostedZoneData s)
 elasticBeanstalkHostedZoneData =
@@ -2866,6 +2906,7 @@ data ElasticBeanstalkSolutionStackData s = ElasticBeanstalkSolutionStackData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elastic_beanstalk_solution_stack@ datasource value.
 elasticBeanstalkSolutionStackData
     :: TF.Attr s P.Text -- ^ @name_regex@ - 'P.nameRegex'
     -> P.DataSource (ElasticBeanstalkSolutionStackData s)
@@ -2911,6 +2952,7 @@ data ElasticacheClusterData s = ElasticacheClusterData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elasticache_cluster@ datasource value.
 elasticacheClusterData
     :: TF.Attr s P.Text -- ^ @cluster_id@ - 'P.clusterId'
     -> P.DataSource (ElasticacheClusterData s)
@@ -3006,6 +3048,7 @@ data ElasticacheReplicationGroupData s = ElasticacheReplicationGroupData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elasticache_replication_group@ datasource value.
 elasticacheReplicationGroupData
     :: TF.Attr s P.Text -- ^ @replication_group_id@ - 'P.replicationGroupId'
     -> P.DataSource (ElasticacheReplicationGroupData s)
@@ -3074,6 +3117,7 @@ data ElbData s = ElbData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elb@ datasource value.
 elbData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ElbData s)
@@ -3160,6 +3204,7 @@ data ElbHostedZoneIdData s = ElbHostedZoneIdData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elb_hosted_zone_id@ datasource value.
 elbHostedZoneIdData
     :: P.DataSource (ElbHostedZoneIdData s)
 elbHostedZoneIdData =
@@ -3194,6 +3239,7 @@ data ElbServiceAccountData s = ElbServiceAccountData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elb_service_account@ datasource value.
 elbServiceAccountData
     :: P.DataSource (ElbServiceAccountData s)
 elbServiceAccountData =
@@ -3237,6 +3283,7 @@ data GlueScriptData s = GlueScriptData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_glue_script@ datasource value.
 glueScriptData
     :: TF.Attr s [TF.Attr s (DagEdgeSetting s)] -- ^ @dag_edge@ - 'P.dagEdge'
     -> TF.Attr s [TF.Attr s (DagNodeSetting s)] -- ^ @dag_node@ - 'P.dagNode'
@@ -3290,6 +3337,7 @@ instance s ~ s' => P.HasComputedScalaCode (TF.Ref s' (GlueScriptData s)) (TF.Att
 data IamAccountAliasData s = IamAccountAliasData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_account_alias@ datasource value.
 iamAccountAliasData
     :: P.DataSource (IamAccountAliasData s)
 iamAccountAliasData =
@@ -3318,6 +3366,7 @@ data IamGroupData s = IamGroupData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_group@ datasource value.
 iamGroupData
     :: TF.Attr s P.Text -- ^ @group_name@ - 'P.groupName'
     -> P.DataSource (IamGroupData s)
@@ -3362,6 +3411,7 @@ data IamInstanceProfileData s = IamInstanceProfileData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_instance_profile@ datasource value.
 iamInstanceProfileData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (IamInstanceProfileData s)
@@ -3415,6 +3465,7 @@ data IamPolicyData s = IamPolicyData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_policy@ datasource value.
 iamPolicyData
     :: TF.Attr s P.Text -- ^ @arn@ - 'P.arn'
     -> P.DataSource (IamPolicyData s)
@@ -3471,6 +3522,7 @@ data IamPolicyDocumentData s = IamPolicyDocumentData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_policy_document@ datasource value.
 iamPolicyDocumentData
     :: TF.Attr s [TF.Attr s (StatementSetting s)] -- ^ @statement@ - 'P.statement'
     -> P.DataSource (IamPolicyDocumentData s)
@@ -3530,6 +3582,7 @@ data IamRoleData s = IamRoleData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_role@ datasource value.
 iamRoleData
     :: P.DataSource (IamRoleData s)
 iamRoleData =
@@ -3594,6 +3647,7 @@ data IamServerCertificateData s = IamServerCertificateData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_server_certificate@ datasource value.
 iamServerCertificateData
     :: P.DataSource (IamServerCertificateData s)
 iamServerCertificateData =
@@ -3663,6 +3717,7 @@ data IamUserData s = IamUserData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_user@ datasource value.
 iamUserData
     :: TF.Attr s P.Text -- ^ @user_name@ - 'P.userName'
     -> P.DataSource (IamUserData s)
@@ -3707,6 +3762,7 @@ instance s ~ s' => P.HasComputedUserId (TF.Ref s' (IamUserData s)) (TF.Attr s P.
 data InspectorRulesPackagesData s = InspectorRulesPackagesData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_inspector_rules_packages@ datasource value.
 inspectorRulesPackagesData
     :: P.DataSource (InspectorRulesPackagesData s)
 inspectorRulesPackagesData =
@@ -3741,6 +3797,7 @@ data InstanceData s = InstanceData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_instance@ datasource value.
 instanceData
     :: P.DataSource (InstanceData s)
 instanceData =
@@ -3882,6 +3939,7 @@ data InstancesData s = InstancesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_instances@ datasource value.
 instancesData
     :: P.DataSource (InstancesData s)
 instancesData =
@@ -3935,6 +3993,7 @@ data InternetGatewayData s = InternetGatewayData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_internet_gateway@ datasource value.
 internetGatewayData
     :: P.DataSource (InternetGatewayData s)
 internetGatewayData =
@@ -3975,6 +4034,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (InternetGatewayData s)) (TF.Att
 data IotEndpointData s = IotEndpointData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iot_endpoint@ datasource value.
 iotEndpointData
     :: P.DataSource (IotEndpointData s)
 iotEndpointData =
@@ -4006,6 +4066,7 @@ data IpRangesData s = IpRangesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ip_ranges@ datasource value.
 ipRangesData
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @services@ - 'P.services'
     -> P.DataSource (IpRangesData s)
@@ -4057,6 +4118,7 @@ data KinesisStreamData s = KinesisStreamData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_kinesis_stream@ datasource value.
 kinesisStreamData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (KinesisStreamData s)
@@ -4116,6 +4178,7 @@ data KmsAliasData s = KmsAliasData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_kms_alias@ datasource value.
 kmsAliasData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (KmsAliasData s)
@@ -4166,6 +4229,7 @@ data KmsCiphertextData s = KmsCiphertextData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_kms_ciphertext@ datasource value.
 kmsCiphertextData
     :: TF.Attr s P.Text -- ^ @key_id@ - 'P.keyId'
     -> TF.Attr s P.Text -- ^ @plaintext@ - 'P.plaintext'
@@ -4222,6 +4286,7 @@ data KmsKeyData s = KmsKeyData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_kms_key@ datasource value.
 kmsKeyData
     :: TF.Attr s P.Text -- ^ @key_id@ - 'P.keyId'
     -> P.DataSource (KmsKeyData s)
@@ -4303,6 +4368,7 @@ data KmsSecretData s = KmsSecretData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_kms_secret@ datasource value.
 kmsSecretData
     :: TF.Attr s [TF.Attr s (SecretSetting s)] -- ^ @secret@ - 'P.secret'
     -> P.DataSource (KmsSecretData s)
@@ -4345,6 +4411,7 @@ data KmsSecretsData s = KmsSecretsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_kms_secrets@ datasource value.
 kmsSecretsData
     :: TF.Attr s [TF.Attr s (SecretSetting s)] -- ^ @secret@ - 'P.secret'
     -> P.DataSource (KmsSecretsData s)
@@ -4386,6 +4453,7 @@ data LambdaFunctionData s = LambdaFunctionData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lambda_function@ datasource value.
 lambdaFunctionData
     :: TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
     -> P.DataSource (LambdaFunctionData s)
@@ -4491,6 +4559,7 @@ data LambdaInvocationData s = LambdaInvocationData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lambda_invocation@ datasource value.
 lambdaInvocationData
     :: TF.Attr s P.Text -- ^ @input@ - 'P.input'
     -> TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
@@ -4547,6 +4616,7 @@ data LaunchConfigurationData s = LaunchConfigurationData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_launch_configuration@ datasource value.
 launchConfigurationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (LaunchConfigurationData s)
@@ -4627,6 +4697,7 @@ instance s ~ s' => P.HasComputedVpcClassicLinkSecurityGroups (TF.Ref s' (LaunchC
 data LbData s = LbData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lb@ datasource value.
 lbData
     :: P.DataSource (LbData s)
 lbData =
@@ -4694,6 +4765,7 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (LbData s)) (TF.Attr s P.Text)
 data LbListenerData s = LbListenerData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lb_listener@ datasource value.
 lbListenerData
     :: P.DataSource (LbListenerData s)
 lbListenerData =
@@ -4737,6 +4809,7 @@ instance s ~ s' => P.HasComputedSslPolicy (TF.Ref s' (LbListenerData s)) (TF.Att
 data LbTargetGroupData s = LbTargetGroupData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_lb_target_group@ datasource value.
 lbTargetGroupData
     :: P.DataSource (LbTargetGroupData s)
 lbTargetGroupData =
@@ -4792,6 +4865,7 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (LbTargetGroupData s)) (TF.Attr
 data MqBrokerData s = MqBrokerData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_mq_broker@ datasource value.
 mqBrokerData
     :: P.DataSource (MqBrokerData s)
 mqBrokerData =
@@ -4862,6 +4936,7 @@ data NatGatewayData s = NatGatewayData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_nat_gateway@ datasource value.
 natGatewayData
     :: P.DataSource (NatGatewayData s)
 natGatewayData =
@@ -4923,6 +4998,7 @@ data NetworkAclsData s = NetworkAclsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_network_acls@ datasource value.
 networkAclsData
     :: P.DataSource (NetworkAclsData s)
 networkAclsData =
@@ -4970,6 +5046,7 @@ data NetworkInterfaceData s = NetworkInterfaceData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_network_interface@ datasource value.
 networkInterfaceData
     :: P.DataSource (NetworkInterfaceData s)
 networkInterfaceData =
@@ -5052,6 +5129,7 @@ data NetworkInterfacesData s = NetworkInterfacesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_network_interfaces@ datasource value.
 networkInterfacesData
     :: P.DataSource (NetworkInterfacesData s)
 networkInterfacesData =
@@ -5089,6 +5167,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkInterfacesData s)) (TF.A
 data PartitionData s = PartitionData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_partition@ datasource value.
 partitionData
     :: P.DataSource (PartitionData s)
 partitionData =
@@ -5117,6 +5196,7 @@ data PrefixListData s = PrefixListData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_prefix_list@ datasource value.
 prefixListData
     :: P.DataSource (PrefixListData s)
 prefixListData =
@@ -5160,6 +5240,7 @@ data PricingProductData s = PricingProductData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_pricing_product@ datasource value.
 pricingProductData
     :: TF.Attr s P.Text -- ^ @service_code@ - 'P.serviceCode'
     -> TF.Attr s (P.NonEmpty (TF.Attr s (FiltersSetting s))) -- ^ @filters@ - 'P.filters'
@@ -5206,6 +5287,7 @@ data RdsClusterData s = RdsClusterData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_rds_cluster@ datasource value.
 rdsClusterData
     :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
     -> P.DataSource (RdsClusterData s)
@@ -5319,6 +5401,7 @@ data RedshiftClusterData s = RedshiftClusterData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_redshift_cluster@ datasource value.
 redshiftClusterData
     :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
     -> P.DataSource (RedshiftClusterData s)
@@ -5445,6 +5528,7 @@ data RedshiftServiceAccountData s = RedshiftServiceAccountData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_redshift_service_account@ datasource value.
 redshiftServiceAccountData
     :: P.DataSource (RedshiftServiceAccountData s)
 redshiftServiceAccountData =
@@ -5479,6 +5563,7 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (RedshiftServiceAccountData s)) (
 data RegionData s = RegionData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_region@ datasource value.
 regionData
     :: P.DataSource (RegionData s)
 regionData =
@@ -5513,6 +5598,7 @@ data RouteData s = RouteData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_route@ datasource value.
 routeData
     :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
     -> P.DataSource (RouteData s)
@@ -5572,6 +5658,7 @@ data Route53ZoneData s = Route53ZoneData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_route53_zone@ datasource value.
 route53ZoneData
     :: P.DataSource (Route53ZoneData s)
 route53ZoneData =
@@ -5630,6 +5717,7 @@ data RouteTableData s = RouteTableData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_route_table@ datasource value.
 routeTableData
     :: P.DataSource (RouteTableData s)
 routeTableData =
@@ -5685,6 +5773,7 @@ data RouteTablesData s = RouteTablesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_route_tables@ datasource value.
 routeTablesData
     :: P.DataSource (RouteTablesData s)
 routeTablesData =
@@ -5732,6 +5821,7 @@ data S3BucketData s = S3BucketData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_s3_bucket@ datasource value.
 s3BucketData
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> P.DataSource (S3BucketData s)
@@ -5791,6 +5881,7 @@ data S3BucketObjectData s = S3BucketObjectData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_s3_bucket_object@ datasource value.
 s3BucketObjectData
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
@@ -5892,6 +5983,7 @@ instance s ~ s' => P.HasComputedWebsiteRedirectLocation (TF.Ref s' (S3BucketObje
 data SecretsmanagerSecretData s = SecretsmanagerSecretData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_secretsmanager_secret@ datasource value.
 secretsmanagerSecretData
     :: P.DataSource (SecretsmanagerSecretData s)
 secretsmanagerSecretData =
@@ -5944,6 +6036,7 @@ data SecretsmanagerSecretVersionData s = SecretsmanagerSecretVersionData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_secretsmanager_secret_version@ datasource value.
 secretsmanagerSecretVersionData
     :: TF.Attr s P.Text -- ^ @secret_id@ - 'P.secretId'
     -> P.DataSource (SecretsmanagerSecretVersionData s)
@@ -5995,6 +6088,7 @@ data SecurityGroupData s = SecurityGroupData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_security_group@ datasource value.
 securityGroupData
     :: P.DataSource (SecurityGroupData s)
 securityGroupData =
@@ -6044,6 +6138,7 @@ data SecurityGroupsData s = SecurityGroupsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_security_groups@ datasource value.
 securityGroupsData
     :: P.DataSource (SecurityGroupsData s)
 securityGroupsData =
@@ -6087,6 +6182,7 @@ data SnsTopicData s = SnsTopicData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_sns_topic@ datasource value.
 snsTopicData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SnsTopicData s)
@@ -6125,6 +6221,7 @@ data SqsQueueData s = SqsQueueData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_sqs_queue@ datasource value.
 sqsQueueData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SqsQueueData s)
@@ -6169,6 +6266,7 @@ data SsmParameterData s = SsmParameterData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ssm_parameter@ datasource value.
 ssmParameterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SsmParameterData s)
@@ -6223,6 +6321,7 @@ data StoragegatewayLocalDiskData s = StoragegatewayLocalDiskData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_storagegateway_local_disk@ datasource value.
 storagegatewayLocalDiskData
     :: TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
     -> TF.Attr s P.Text -- ^ @disk_path@ - 'P.diskPath'

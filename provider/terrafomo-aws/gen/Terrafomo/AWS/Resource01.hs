@@ -17,7 +17,6 @@
 --
 module Terrafomo.AWS.Resource01
     (
-    -- * Resource Datatypes
     -- ** aws_acm_certificate
       AcmCertificateResource (..)
     , acmCertificateResource
@@ -463,6 +462,7 @@ data AcmCertificateResource s = AcmCertificateResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_acm_certificate@ resource value.
 acmCertificateResource
     :: TF.Attr s P.Text -- ^ @validation_method@ - 'P.validationMethod'
     -> TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
@@ -532,6 +532,7 @@ data AcmCertificateValidationResource s = AcmCertificateValidationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_acm_certificate_validation@ resource value.
 acmCertificateValidationResource
     :: TF.Attr s P.Text -- ^ @certificate_arn@ - 'P.certificateArn'
     -> P.Resource (AcmCertificateValidationResource s)
@@ -586,6 +587,7 @@ data AcmpcaCertificateAuthorityResource s = AcmpcaCertificateAuthorityResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_acmpca_certificate_authority@ resource value.
 acmpcaCertificateAuthorityResource
     :: TF.Attr s (CertificateAuthorityConfigurationSetting s) -- ^ @certificate_authority_configuration@ - 'P.certificateAuthorityConfiguration'
     -> P.Resource (AcmpcaCertificateAuthorityResource s)
@@ -699,6 +701,7 @@ data AlbResource s = AlbResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_alb@ resource value.
 albResource
     :: P.Resource (AlbResource s)
 albResource =
@@ -823,6 +826,7 @@ data AlbListenerResource s = AlbListenerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_alb_listener@ resource value.
 albListenerResource
     :: TF.Attr s [TF.Attr s (DefaultActionSetting s)] -- ^ @default_action@ - 'P.defaultAction'
     -> TF.Attr s P.Text -- ^ @load_balancer_arn@ - 'P.loadBalancerArn'
@@ -897,6 +901,7 @@ data AlbListenerCertificateResource s = AlbListenerCertificateResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_alb_listener_certificate@ resource value.
 albListenerCertificateResource
     :: TF.Attr s P.Text -- ^ @certificate_arn@ - 'P.certificateArn'
     -> TF.Attr s P.Text -- ^ @listener_arn@ - 'P.listenerArn'
@@ -946,6 +951,7 @@ data AlbListenerRuleResource s = AlbListenerRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_alb_listener_rule@ resource value.
 albListenerRuleResource
     :: TF.Attr s [TF.Attr s (ActionSetting s)] -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @listener_arn@ - 'P.listenerArn'
@@ -1027,6 +1033,7 @@ data AlbTargetGroupResource s = AlbTargetGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_alb_target_group@ resource value.
 albTargetGroupResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
@@ -1144,6 +1151,7 @@ data AlbTargetGroupAttachmentResource s = AlbTargetGroupAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_alb_target_group_attachment@ resource value.
 albTargetGroupAttachmentResource
     :: TF.Attr s P.Text -- ^ @target_group_arn@ - 'P.targetGroupArn'
     -> TF.Attr s P.Text -- ^ @target_id@ - 'P.targetId'
@@ -1228,6 +1236,7 @@ data AmiResource s = AmiResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ami@ resource value.
 amiResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (AmiResource s)
@@ -1356,6 +1365,7 @@ data AmiCopyResource s = AmiCopyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ami_copy@ resource value.
 amiCopyResource
     :: TF.Attr s P.Text -- ^ @source_ami_id@ - 'P.sourceAmiId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1479,6 +1489,7 @@ data AmiFromInstanceResource s = AmiFromInstanceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ami_from_instance@ resource value.
 amiFromInstanceResource
     :: TF.Attr s P.Text -- ^ @source_instance_id@ - 'P.sourceInstanceId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1582,6 +1593,7 @@ data AmiLaunchPermissionResource s = AmiLaunchPermissionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ami_launch_permission@ resource value.
 amiLaunchPermissionResource
     :: TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
     -> TF.Attr s P.Text -- ^ @image_id@ - 'P.imageId'
@@ -1625,6 +1637,7 @@ data ApiGatewayAccountResource s = ApiGatewayAccountResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_account@ resource value.
 apiGatewayAccountResource
     :: P.Resource (ApiGatewayAccountResource s)
 apiGatewayAccountResource =
@@ -1668,6 +1681,7 @@ data ApiGatewayApiKeyResource s = ApiGatewayApiKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_api_key@ resource value.
 apiGatewayApiKeyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ApiGatewayApiKeyResource s)
@@ -1750,6 +1764,7 @@ data ApiGatewayAuthorizerResource s = ApiGatewayAuthorizerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_authorizer@ resource value.
 apiGatewayAuthorizerResource
     :: TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1851,6 +1866,7 @@ data ApiGatewayBasePathMappingResource s = ApiGatewayBasePathMappingResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_base_path_mapping@ resource value.
 apiGatewayBasePathMappingResource
     :: TF.Attr s P.Text -- ^ @api_id@ - 'P.apiId'
     -> TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
@@ -1908,6 +1924,7 @@ data ApiGatewayClientCertificateResource s = ApiGatewayClientCertificateResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_client_certificate@ resource value.
 apiGatewayClientCertificateResource
     :: P.Resource (ApiGatewayClientCertificateResource s)
 apiGatewayClientCertificateResource =
@@ -1963,6 +1980,7 @@ data ApiGatewayDeploymentResource s = ApiGatewayDeploymentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_deployment@ resource value.
 apiGatewayDeploymentResource
     :: TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
     -> TF.Attr s P.Text -- ^ @stage_name@ - 'P.stageName'
@@ -2042,6 +2060,7 @@ data ApiGatewayDocumentationPartResource s = ApiGatewayDocumentationPartResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_documentation_part@ resource value.
 apiGatewayDocumentationPartResource
     :: TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
     -> TF.Attr s (LocationSetting s) -- ^ @location@ - 'P.location'
@@ -2103,6 +2122,7 @@ data ApiGatewayDocumentationVersionResource s = ApiGatewayDocumentationVersionRe
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_documentation_version@ resource value.
 apiGatewayDocumentationVersionResource
     :: TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
     -> TF.Attr s P.Text -- ^ @version@ - 'P.version'
@@ -2212,6 +2232,7 @@ data ApiGatewayDomainNameResource s = ApiGatewayDomainNameResource'
     -- * 'regionalCertificateArn'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_domain_name@ resource value.
 apiGatewayDomainNameResource
     :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
     -> P.Resource (ApiGatewayDomainNameResource s)
@@ -2362,6 +2383,7 @@ data ApiGatewayGatewayResponseResource s = ApiGatewayGatewayResponseResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_gateway_response@ resource value.
 apiGatewayGatewayResponseResource
     :: TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
     -> TF.Attr s P.Text -- ^ @response_type@ - 'P.responseType'
@@ -2465,6 +2487,7 @@ data ApiGatewayIntegrationResource s = ApiGatewayIntegrationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_integration@ resource value.
 apiGatewayIntegrationResource
     :: TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
     -> TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
@@ -2621,6 +2644,7 @@ data ApiGatewayIntegrationResponseResource s = ApiGatewayIntegrationResponseReso
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_integration_response@ resource value.
 apiGatewayIntegrationResponseResource
     :: TF.Attr s P.Text -- ^ @status_code@ - 'P.statusCode'
     -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
@@ -2735,6 +2759,7 @@ data ApiGatewayMethodResource s = ApiGatewayMethodResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_method@ resource value.
 apiGatewayMethodResource
     :: TF.Attr s P.Text -- ^ @authorization@ - 'P.authorization'
     -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
@@ -2851,6 +2876,7 @@ data ApiGatewayMethodResponseResource s = ApiGatewayMethodResponseResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_method_response@ resource value.
 apiGatewayMethodResponseResource
     :: TF.Attr s P.Text -- ^ @status_code@ - 'P.statusCode'
     -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
@@ -2933,6 +2959,7 @@ data ApiGatewayMethodSettingsResource s = ApiGatewayMethodSettingsResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_method_settings@ resource value.
 apiGatewayMethodSettingsResource
     :: TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
     -> TF.Attr s P.Text -- ^ @stage_name@ - 'P.stageName'
@@ -3008,6 +3035,7 @@ data ApiGatewayModelResource s = ApiGatewayModelResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_model@ resource value.
 apiGatewayModelResource
     :: TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -3082,6 +3110,7 @@ data ApiGatewayRequestValidatorResource s = ApiGatewayRequestValidatorResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_request_validator@ resource value.
 apiGatewayRequestValidatorResource
     :: TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -3145,6 +3174,7 @@ data ApiGatewayResourceResource s = ApiGatewayResourceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_resource@ resource value.
 apiGatewayResourceResource
     :: TF.Attr s P.Text -- ^ @parent_id@ - 'P.parentId'
     -> TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
@@ -3217,6 +3247,7 @@ data ApiGatewayRestApiResource s = ApiGatewayRestApiResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_rest_api@ resource value.
 apiGatewayRestApiResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ApiGatewayRestApiResource s)
@@ -3336,6 +3367,7 @@ data ApiGatewayStageResource s = ApiGatewayStageResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_stage@ resource value.
 apiGatewayStageResource
     :: TF.Attr s P.Text -- ^ @deployment_id@ - 'P.deploymentId'
     -> TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
@@ -3468,6 +3500,7 @@ data ApiGatewayUsagePlanResource s = ApiGatewayUsagePlanResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_usage_plan@ resource value.
 apiGatewayUsagePlanResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ApiGatewayUsagePlanResource s)
@@ -3552,6 +3585,7 @@ data ApiGatewayUsagePlanKeyResource s = ApiGatewayUsagePlanKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_usage_plan_key@ resource value.
 apiGatewayUsagePlanKeyResource
     :: TF.Attr s P.Text -- ^ @key_id@ - 'P.keyId'
     -> TF.Attr s P.Text -- ^ @usage_plan_id@ - 'P.usagePlanId'
@@ -3615,6 +3649,7 @@ data ApiGatewayVpcLinkResource s = ApiGatewayVpcLinkResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_api_gateway_vpc_link@ resource value.
 apiGatewayVpcLinkResource
     :: TF.Attr s P.Text -- ^ @target_arns@ - 'P.targetArns'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -3674,6 +3709,7 @@ data AppCookieStickinessPolicyResource s = AppCookieStickinessPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_app_cookie_stickiness_policy@ resource value.
 appCookieStickinessPolicyResource
     :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Attr s P.Text -- ^ @cookie_name@ - 'P.cookieName'
@@ -3754,6 +3790,7 @@ data AppautoscalingPolicyResource s = AppautoscalingPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_appautoscaling_policy@ resource value.
 appautoscalingPolicyResource
     :: TF.Attr s P.Text -- ^ @scalable_dimension@ - 'P.scalableDimension'
     -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
@@ -3869,6 +3906,7 @@ data AppautoscalingScheduledActionResource s = AppautoscalingScheduledActionReso
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_appautoscaling_scheduled_action@ resource value.
 appautoscalingScheduledActionResource
     :: TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -3974,6 +4012,7 @@ data AppautoscalingTargetResource s = AppautoscalingTargetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_appautoscaling_target@ resource value.
 appautoscalingTargetResource
     :: TF.Attr s P.Int -- ^ @max_capacity@ - 'P.maxCapacity'
     -> TF.Attr s P.Int -- ^ @min_capacity@ - 'P.minCapacity'
@@ -4050,6 +4089,7 @@ data AppsyncApiKeyResource s = AppsyncApiKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_appsync_api_key@ resource value.
 appsyncApiKeyResource
     :: TF.Attr s P.Text -- ^ @api_id@ - 'P.apiId'
     -> P.Resource (AppsyncApiKeyResource s)
@@ -4135,6 +4175,7 @@ data AppsyncDatasourceResource s = AppsyncDatasourceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_appsync_datasource@ resource value.
 appsyncDatasourceResource
     :: TF.Attr s P.Text -- ^ @api_id@ - 'P.apiId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4258,6 +4299,7 @@ data AppsyncGraphqlApiResource s = AppsyncGraphqlApiResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_appsync_graphql_api@ resource value.
 appsyncGraphqlApiResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @authentication_type@ - 'P.authenticationType'
@@ -4321,6 +4363,7 @@ data AthenaDatabaseResource s = AthenaDatabaseResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_athena_database@ resource value.
 athenaDatabaseResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4380,6 +4423,7 @@ data AthenaNamedQueryResource s = AthenaNamedQueryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_athena_named_query@ resource value.
 athenaNamedQueryResource
     :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4444,6 +4488,7 @@ data AutoscalingAttachmentResource s = AutoscalingAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_autoscaling_attachment@ resource value.
 autoscalingAttachmentResource
     :: TF.Attr s P.Text -- ^ @autoscaling_group_name@ - 'P.autoscalingGroupName'
     -> P.Resource (AutoscalingAttachmentResource s)
@@ -4559,6 +4604,7 @@ data AutoscalingGroupResource s = AutoscalingGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_autoscaling_group@ resource value.
 autoscalingGroupResource
     :: TF.Attr s P.Int -- ^ @max_size@ - 'P.maxSize'
     -> TF.Attr s P.Int -- ^ @min_size@ - 'P.minSize'
@@ -4794,6 +4840,7 @@ data AutoscalingLifecycleHookResource s = AutoscalingLifecycleHookResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_autoscaling_lifecycle_hook@ resource value.
 autoscalingLifecycleHookResource
     :: TF.Attr s P.Text -- ^ @autoscaling_group_name@ - 'P.autoscalingGroupName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4882,6 +4929,7 @@ data AutoscalingNotificationResource s = AutoscalingNotificationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_autoscaling_notification@ resource value.
 autoscalingNotificationResource
     :: TF.Attr s P.Text -- ^ @topic_arn@ - 'P.topicArn'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @group_names@ - 'P.groupNames'
@@ -4966,6 +5014,7 @@ data AutoscalingPolicyResource s = AutoscalingPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_autoscaling_policy@ resource value.
 autoscalingPolicyResource
     :: TF.Attr s P.Text -- ^ @autoscaling_group_name@ - 'P.autoscalingGroupName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -5089,6 +5138,7 @@ data AutoscalingScheduleResource s = AutoscalingScheduleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_autoscaling_schedule@ resource value.
 autoscalingScheduleResource
     :: TF.Attr s P.Text -- ^ @autoscaling_group_name@ - 'P.autoscalingGroupName'
     -> TF.Attr s P.Text -- ^ @scheduled_action_name@ - 'P.scheduledActionName'
@@ -5165,6 +5215,7 @@ data BatchComputeEnvironmentResource s = BatchComputeEnvironmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_batch_compute_environment@ resource value.
 batchComputeEnvironmentResource
     :: TF.Attr s P.Text -- ^ @compute_environment_name@ - 'P.computeEnvironmentName'
     -> TF.Attr s P.Text -- ^ @service_role@ - 'P.serviceRole'
@@ -5261,6 +5312,7 @@ data BatchJobDefinitionResource s = BatchJobDefinitionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_batch_job_definition@ resource value.
 batchJobDefinitionResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -5355,6 +5407,7 @@ data BatchJobQueueResource s = BatchJobQueueResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_batch_job_queue@ resource value.
 batchJobQueueResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @compute_environments@ - 'P.computeEnvironments'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -5432,6 +5485,7 @@ data BudgetsBudgetResource s = BudgetsBudgetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_budgets_budget@ resource value.
 budgetsBudgetResource
     :: TF.Attr s P.Text -- ^ @limit_amount@ - 'P.limitAmount'
     -> TF.Attr s P.Text -- ^ @time_period_start@ - 'P.timePeriodStart'
@@ -5533,6 +5587,7 @@ data Cloud9EnvironmentEc2Resource s = Cloud9EnvironmentEc2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloud9_environment_ec2@ resource value.
 cloud9EnvironmentEc2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
@@ -5633,6 +5688,7 @@ data CloudformationStackResource s = CloudformationStackResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudformation_stack@ resource value.
 cloudformationStackResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (CloudformationStackResource s)
@@ -5791,6 +5847,7 @@ data CloudfrontDistributionResource s = CloudfrontDistributionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudfront_distribution@ resource value.
 cloudfrontDistributionResource
     :: TF.Attr s (DefaultCacheBehaviorSetting s) -- ^ @default_cache_behavior@ - 'P.defaultCacheBehavior'
     -> TF.Attr s (ViewerCertificateSetting s) -- ^ @viewer_certificate@ - 'P.viewerCertificate'
@@ -5985,6 +6042,7 @@ data CloudfrontOriginAccessIdentityResource s = CloudfrontOriginAccessIdentityRe
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudfront_origin_access_identity@ resource value.
 cloudfrontOriginAccessIdentityResource
     :: P.Resource (CloudfrontOriginAccessIdentityResource s)
 cloudfrontOriginAccessIdentityResource =
@@ -6070,6 +6128,7 @@ data CloudtrailResource s = CloudtrailResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudtrail@ resource value.
 cloudtrailResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @s3_bucket_name@ - 'P.s3BucketName'
@@ -6199,6 +6258,7 @@ data CloudwatchDashboardResource s = CloudwatchDashboardResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudwatch_dashboard@ resource value.
 cloudwatchDashboardResource
     :: TF.Attr s P.Text -- ^ @dashboard_body@ - 'P.dashboardBody'
     -> TF.Attr s P.Text -- ^ @dashboard_name@ - 'P.dashboardName'
@@ -6251,6 +6311,7 @@ data CloudwatchEventPermissionResource s = CloudwatchEventPermissionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudwatch_event_permission@ resource value.
 cloudwatchEventPermissionResource
     :: TF.Attr s P.Text -- ^ @statement_id@ - 'P.statementId'
     -> TF.Attr s P.Text -- ^ @principal@ - 'P.principal'
@@ -6316,6 +6377,7 @@ data CloudwatchEventRuleResource s = CloudwatchEventRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudwatch_event_rule@ resource value.
 cloudwatchEventRuleResource
     :: P.Resource (CloudwatchEventRuleResource s)
 cloudwatchEventRuleResource =
@@ -6427,6 +6489,7 @@ data CloudwatchEventTargetResource s = CloudwatchEventTargetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudwatch_event_target@ resource value.
 cloudwatchEventTargetResource
     :: TF.Attr s P.Text -- ^ @arn@ - 'P.arn'
     -> TF.Attr s P.Text -- ^ @rule@ - 'P.rule'
@@ -6573,6 +6636,7 @@ data CloudwatchLogDestinationResource s = CloudwatchLogDestinationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudwatch_log_destination@ resource value.
 cloudwatchLogDestinationResource
     :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> TF.Attr s P.Text -- ^ @target_arn@ - 'P.targetArn'
@@ -6630,6 +6694,7 @@ data CloudwatchLogDestinationPolicyResource s = CloudwatchLogDestinationPolicyRe
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudwatch_log_destination_policy@ resource value.
 cloudwatchLogDestinationPolicyResource
     :: TF.Attr s P.Text -- ^ @destination_name@ - 'P.destinationName'
     -> TF.Attr s P.Text -- ^ @access_policy@ - 'P.accessPolicy'
@@ -6682,6 +6747,7 @@ data CloudwatchLogGroupResource s = CloudwatchLogGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudwatch_log_group@ resource value.
 cloudwatchLogGroupResource
     :: P.Resource (CloudwatchLogGroupResource s)
 cloudwatchLogGroupResource =
@@ -6752,6 +6818,7 @@ data CloudwatchLogMetricFilterResource s = CloudwatchLogMetricFilterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudwatch_log_metric_filter@ resource value.
 cloudwatchLogMetricFilterResource
     :: TF.Attr s P.Text -- ^ @log_group_name@ - 'P.logGroupName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -6818,6 +6885,7 @@ data CloudwatchLogResourcePolicyResource s = CloudwatchLogResourcePolicyResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudwatch_log_resource_policy@ resource value.
 cloudwatchLogResourcePolicyResource
     :: TF.Attr s P.Text -- ^ @policy_document@ - 'P.policyDocument'
     -> TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
@@ -6864,6 +6932,7 @@ data CloudwatchLogStreamResource s = CloudwatchLogStreamResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudwatch_log_stream@ resource value.
 cloudwatchLogStreamResource
     :: TF.Attr s P.Text -- ^ @log_group_name@ - 'P.logGroupName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -6922,6 +6991,7 @@ data CloudwatchLogSubscriptionFilterResource s = CloudwatchLogSubscriptionFilter
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudwatch_log_subscription_filter@ resource value.
 cloudwatchLogSubscriptionFilterResource
     :: TF.Attr s P.Text -- ^ @destination_arn@ - 'P.destinationArn'
     -> TF.Attr s P.Text -- ^ @log_group_name@ - 'P.logGroupName'
@@ -7048,6 +7118,7 @@ data CloudwatchMetricAlarmResource s = CloudwatchMetricAlarmResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cloudwatch_metric_alarm@ resource value.
 cloudwatchMetricAlarmResource
     :: TF.Attr s P.Text -- ^ @alarm_name@ - 'P.alarmName'
     -> TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
@@ -7252,6 +7323,7 @@ data CodebuildProjectResource s = CodebuildProjectResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_codebuild_project@ resource value.
 codebuildProjectResource
     :: TF.Attr s (ArtifactsSetting s) -- ^ @artifacts@ - 'P.artifacts'
     -> TF.Attr s (EnvironmentSetting s) -- ^ @environment@ - 'P.environment'
@@ -7393,6 +7465,7 @@ data CodebuildWebhookResource s = CodebuildWebhookResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_codebuild_webhook@ resource value.
 codebuildWebhookResource
     :: TF.Attr s P.Text -- ^ @project_name@ - 'P.projectName'
     -> P.Resource (CodebuildWebhookResource s)
@@ -7450,6 +7523,7 @@ data CodecommitRepositoryResource s = CodecommitRepositoryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_codecommit_repository@ resource value.
 codecommitRepositoryResource
     :: TF.Attr s P.Text -- ^ @repository_name@ - 'P.repositoryName'
     -> P.Resource (CodecommitRepositoryResource s)
@@ -7514,6 +7588,7 @@ data CodecommitTriggerResource s = CodecommitTriggerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_codecommit_trigger@ resource value.
 codecommitTriggerResource
     :: TF.Attr s P.Text -- ^ @repository_name@ - 'P.repositoryName'
     -> TF.Attr s [TF.Attr s (TriggerSetting s)] -- ^ @trigger@ - 'P.trigger'
@@ -7563,6 +7638,7 @@ data CodedeployAppResource s = CodedeployAppResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_codedeploy_app@ resource value.
 codedeployAppResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (CodedeployAppResource s)
@@ -7611,6 +7687,7 @@ data CodedeployDeploymentConfigResource s = CodedeployDeploymentConfigResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_codedeploy_deployment_config@ resource value.
 codedeployDeploymentConfigResource
     :: TF.Attr s (MinimumHealthyHostsSetting s) -- ^ @minimum_healthy_hosts@ - 'P.minimumHealthyHosts'
     -> TF.Attr s P.Text -- ^ @deployment_config_name@ - 'P.deploymentConfigName'
@@ -7691,6 +7768,7 @@ data CodedeployDeploymentGroupResource s = CodedeployDeploymentGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_codedeploy_deployment_group@ resource value.
 codedeployDeploymentGroupResource
     :: TF.Attr s P.Text -- ^ @service_role_arn@ - 'P.serviceRoleArn'
     -> TF.Attr s P.Text -- ^ @app_name@ - 'P.appName'
@@ -7824,6 +7902,7 @@ data CodepipelineResource s = CodepipelineResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_codepipeline@ resource value.
 codepipelineResource
     :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -7908,6 +7987,7 @@ data CognitoIdentityPoolResource s = CognitoIdentityPoolResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cognito_identity_pool@ resource value.
 cognitoIdentityPoolResource
     :: TF.Attr s P.Text -- ^ @identity_pool_name@ - 'P.identityPoolName'
     -> P.Resource (CognitoIdentityPoolResource s)
@@ -7994,6 +8074,7 @@ data CognitoIdentityPoolRolesAttachmentResource s = CognitoIdentityPoolRolesAtta
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cognito_identity_pool_roles_attachment@ resource value.
 cognitoIdentityPoolRolesAttachmentResource
     :: TF.Attr s P.Text -- ^ @identity_pool_id@ - 'P.identityPoolId'
     -> TF.Attr s (P.Map P.Text (TF.Attr s (RolesSetting s))) -- ^ @roles@ - 'P.roles'
@@ -8059,6 +8140,7 @@ data CognitoIdentityProviderResource s = CognitoIdentityProviderResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cognito_identity_provider@ resource value.
 cognitoIdentityProviderResource
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @provider_details@ - 'P.providerDetails'
     -> TF.Attr s P.Text -- ^ @user_pool_id@ - 'P.userPoolId'
@@ -8141,6 +8223,7 @@ data CognitoResourceServerResource s = CognitoResourceServerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cognito_resource_server@ resource value.
 cognitoResourceServerResource
     :: TF.Attr s P.Text -- ^ @user_pool_id@ - 'P.userPoolId'
     -> TF.Attr s P.Text -- ^ @identifier@ - 'P.identifier'
@@ -8214,6 +8297,7 @@ data CognitoUserGroupResource s = CognitoUserGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cognito_user_group@ resource value.
 cognitoUserGroupResource
     :: TF.Attr s P.Text -- ^ @user_pool_id@ - 'P.userPoolId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -8317,6 +8401,7 @@ data CognitoUserPoolResource s = CognitoUserPoolResource'
     -- * 'aliasAttributes'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cognito_user_pool@ resource value.
 cognitoUserPoolResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (CognitoUserPoolResource s)
@@ -8521,6 +8606,7 @@ data CognitoUserPoolClientResource s = CognitoUserPoolClientResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cognito_user_pool_client@ resource value.
 cognitoUserPoolClientResource
     :: TF.Attr s P.Text -- ^ @user_pool_id@ - 'P.userPoolId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -8654,6 +8740,7 @@ data CognitoUserPoolDomainResource s = CognitoUserPoolDomainResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_cognito_user_pool_domain@ resource value.
 cognitoUserPoolDomainResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @user_pool_id@ - 'P.userPoolId'
@@ -8712,6 +8799,7 @@ data ConfigAggregateAuthorizationResource s = ConfigAggregateAuthorizationResour
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_config_aggregate_authorization@ resource value.
 configAggregateAuthorizationResource
     :: TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
@@ -8773,6 +8861,7 @@ data ConfigConfigRuleResource s = ConfigConfigRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_config_config_rule@ resource value.
 configConfigRuleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (SourceSetting s) -- ^ @source@ - 'P.source'
@@ -8870,6 +8959,7 @@ data ConfigConfigurationAggregatorResource s = ConfigConfigurationAggregatorReso
     -- * 'accountAggregationSource'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_config_configuration_aggregator@ resource value.
 configConfigurationAggregatorResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ConfigConfigurationAggregatorResource s)
@@ -8944,6 +9034,7 @@ data ConfigConfigurationRecorderResource s = ConfigConfigurationRecorderResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_config_configuration_recorder@ resource value.
 configConfigurationRecorderResource
     :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> P.Resource (ConfigConfigurationRecorderResource s)
@@ -8992,6 +9083,7 @@ data ConfigConfigurationRecorderStatusResource s = ConfigConfigurationRecorderSt
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_config_configuration_recorder_status@ resource value.
 configConfigurationRecorderStatusResource
     :: TF.Attr s P.Bool -- ^ @is_enabled@ - 'P.isEnabled'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -9047,6 +9139,7 @@ data ConfigDeliveryChannelResource s = ConfigDeliveryChannelResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_config_delivery_channel@ resource value.
 configDeliveryChannelResource
     :: TF.Attr s P.Text -- ^ @s3_bucket_name@ - 'P.s3BucketName'
     -> P.Resource (ConfigDeliveryChannelResource s)
@@ -9123,6 +9216,7 @@ data CustomerGatewayResource s = CustomerGatewayResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_customer_gateway@ resource value.
 customerGatewayResource
     :: TF.Attr s P.Text -- ^ @ip_address@ - 'P.ipAddress'
     -> TF.Attr s P.Int -- ^ @bgp_asn@ - 'P.bgpAsn'
@@ -9202,6 +9296,7 @@ data DaxClusterResource s = DaxClusterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dax_cluster@ resource value.
 daxClusterResource
     :: TF.Attr s P.Text -- ^ @iam_role_arn@ - 'P.iamRoleArn'
     -> TF.Attr s P.Int -- ^ @replication_factor@ - 'P.replicationFactor'
@@ -9319,6 +9414,7 @@ data DaxParameterGroupResource s = DaxParameterGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dax_parameter_group@ resource value.
 daxParameterGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DaxParameterGroupResource s)
@@ -9370,6 +9466,7 @@ data DaxSubnetGroupResource s = DaxSubnetGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dax_subnet_group@ resource value.
 daxSubnetGroupResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @subnet_ids@ - 'P.subnetIds'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -9426,6 +9523,7 @@ data DbClusterSnapshotResource s = DbClusterSnapshotResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_db_cluster_snapshot@ resource value.
 dbClusterSnapshotResource
     :: TF.Attr s P.Text -- ^ @db_cluster_identifier@ - 'P.dbClusterIdentifier'
     -> TF.Attr s P.Text -- ^ @db_cluster_snapshot_identifier@ - 'P.dbClusterSnapshotIdentifier'
@@ -9526,6 +9624,7 @@ data DbEventSubscriptionResource s = DbEventSubscriptionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_db_event_subscription@ resource value.
 dbEventSubscriptionResource
     :: TF.Attr s P.Text -- ^ @sns_topic@ - 'P.snsTopic'
     -> P.Resource (DbEventSubscriptionResource s)

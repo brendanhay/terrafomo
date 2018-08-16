@@ -17,7 +17,6 @@
 --
 module Terrafomo.AWS.DataSource02
     (
-    -- * DataSource Datatypes
     -- ** aws_subnet
       SubnetData (..)
     , subnetData
@@ -90,6 +89,7 @@ data SubnetData s = SubnetData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_subnet@ datasource value.
 subnetData
     :: P.DataSource (SubnetData s)
 subnetData =
@@ -157,6 +157,7 @@ data SubnetIdsData s = SubnetIdsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_subnet_ids@ datasource value.
 subnetIdsData
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.DataSource (SubnetIdsData s)
@@ -205,6 +206,7 @@ data VpcData s = VpcData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpc@ datasource value.
 vpcData
     :: P.DataSource (VpcData s)
 vpcData =
@@ -275,6 +277,7 @@ data VpcDhcpOptionsData s = VpcDhcpOptionsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpc_dhcp_options@ datasource value.
 vpcDhcpOptionsData
     :: P.DataSource (VpcDhcpOptionsData s)
 vpcDhcpOptionsData =
@@ -327,6 +330,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr
 data VpcEndpointData s = VpcEndpointData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpc_endpoint@ datasource value.
 vpcEndpointData
     :: P.DataSource (VpcEndpointData s)
 vpcEndpointData =
@@ -391,6 +395,7 @@ data VpcEndpointServiceData s = VpcEndpointServiceData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpc_endpoint_service@ datasource value.
 vpcEndpointServiceData
     :: P.DataSource (VpcEndpointServiceData s)
 vpcEndpointServiceData =
@@ -449,6 +454,7 @@ data VpcPeeringConnectionData s = VpcPeeringConnectionData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpc_peering_connection@ datasource value.
 vpcPeeringConnectionData
     :: P.DataSource (VpcPeeringConnectionData s)
 vpcPeeringConnectionData =
@@ -519,6 +525,7 @@ data VpcsData s = VpcsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpcs@ datasource value.
 vpcsData
     :: P.DataSource (VpcsData s)
 vpcsData =
@@ -559,6 +566,7 @@ data VpnGatewayData s = VpnGatewayData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_vpn_gateway@ datasource value.
 vpnGatewayData
     :: P.DataSource (VpnGatewayData s)
 vpnGatewayData =

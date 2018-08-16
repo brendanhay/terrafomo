@@ -17,7 +17,6 @@
 --
 module Terrafomo.AWS.Resource02
     (
-    -- * Resource Datatypes
     -- ** aws_db_instance
       DbInstanceResource (..)
     , dbInstanceResource
@@ -515,6 +514,7 @@ data DbInstanceResource s = DbInstanceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_db_instance@ resource value.
 dbInstanceResource
     :: TF.Attr s P.Text -- ^ @instance_class@ - 'P.instanceClass'
     -> P.Resource (DbInstanceResource s)
@@ -797,6 +797,7 @@ data DbOptionGroupResource s = DbOptionGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_db_option_group@ resource value.
 dbOptionGroupResource
     :: TF.Attr s P.Text -- ^ @engine_name@ - 'P.engineName'
     -> TF.Attr s P.Text -- ^ @major_engine_version@ - 'P.majorEngineVersion'
@@ -879,6 +880,7 @@ data DbParameterGroupResource s = DbParameterGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_db_parameter_group@ resource value.
 dbParameterGroupResource
     :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
     -> P.Resource (DbParameterGroupResource s)
@@ -953,6 +955,7 @@ data DbSecurityGroupResource s = DbSecurityGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_db_security_group@ resource value.
 dbSecurityGroupResource
     :: TF.Attr s [TF.Attr s (IngressSetting s)] -- ^ @ingress@ - 'P.ingress'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1016,6 +1019,7 @@ data DbSnapshotResource s = DbSnapshotResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_db_snapshot@ resource value.
 dbSnapshotResource
     :: TF.Attr s P.Text -- ^ @db_instance_identifier@ - 'P.dbInstanceIdentifier'
     -> TF.Attr s P.Text -- ^ @db_snapshot_identifier@ - 'P.dbSnapshotIdentifier'
@@ -1116,6 +1120,7 @@ data DbSubnetGroupResource s = DbSubnetGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_db_subnet_group@ resource value.
 dbSubnetGroupResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @subnet_ids@ - 'P.subnetIds'
     -> P.Resource (DbSubnetGroupResource s)
@@ -1186,6 +1191,7 @@ data DefaultNetworkAclResource s = DefaultNetworkAclResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_default_network_acl@ resource value.
 defaultNetworkAclResource
     :: TF.Attr s P.Text -- ^ @default_network_acl_id@ - 'P.defaultNetworkAclId'
     -> P.Resource (DefaultNetworkAclResource s)
@@ -1258,6 +1264,7 @@ data DefaultRouteTableResource s = DefaultRouteTableResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_default_route_table@ resource value.
 defaultRouteTableResource
     :: TF.Attr s P.Text -- ^ @default_route_table_id@ - 'P.defaultRouteTableId'
     -> P.Resource (DefaultRouteTableResource s)
@@ -1322,6 +1329,7 @@ data DefaultSecurityGroupResource s = DefaultSecurityGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_default_security_group@ resource value.
 defaultSecurityGroupResource
     :: P.Resource (DefaultSecurityGroupResource s)
 defaultSecurityGroupResource =
@@ -1392,6 +1400,7 @@ data DefaultSubnetResource s = DefaultSubnetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_default_subnet@ resource value.
 defaultSubnetResource
     :: TF.Attr s P.Text -- ^ @availability_zone@ - 'P.availabilityZone'
     -> P.Resource (DefaultSubnetResource s)
@@ -1455,6 +1464,7 @@ data DefaultVpcResource s = DefaultVpcResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_default_vpc@ resource value.
 defaultVpcResource
     :: P.Resource (DefaultVpcResource s)
 defaultVpcResource =
@@ -1544,6 +1554,7 @@ data DefaultVpcDhcpOptionsResource s = DefaultVpcDhcpOptionsResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_default_vpc_dhcp_options@ resource value.
 defaultVpcDhcpOptionsResource
     :: P.Resource (DefaultVpcDhcpOptionsResource s)
 defaultVpcDhcpOptionsResource =
@@ -1601,6 +1612,7 @@ data DevicefarmProjectResource s = DevicefarmProjectResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_devicefarm_project@ resource value.
 devicefarmProjectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DevicefarmProjectResource s)
@@ -1645,6 +1657,7 @@ data DirectoryServiceConditionalForwarderResource s = DirectoryServiceConditiona
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_directory_service_conditional_forwarder@ resource value.
 directoryServiceConditionalForwarderResource
     :: TF.Attr s P.Text -- ^ @directory_id@ - 'P.directoryId'
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @dns_ips@ - 'P.dnsIps'
@@ -1717,6 +1730,7 @@ data DirectoryServiceDirectoryResource s = DirectoryServiceDirectoryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_directory_service_directory@ resource value.
 directoryServiceDirectoryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
@@ -1837,6 +1851,7 @@ data DmsCertificateResource s = DmsCertificateResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dms_certificate@ resource value.
 dmsCertificateResource
     :: TF.Attr s P.Text -- ^ @certificate_id@ - 'P.certificateId'
     -> P.Resource (DmsCertificateResource s)
@@ -1922,6 +1937,7 @@ data DmsEndpointResource s = DmsEndpointResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dms_endpoint@ resource value.
 dmsEndpointResource
     :: TF.Attr s P.Text -- ^ @endpoint_id@ - 'P.endpointId'
     -> TF.Attr s P.Text -- ^ @engine_name@ - 'P.engineName'
@@ -2068,6 +2084,7 @@ data DmsReplicationInstanceResource s = DmsReplicationInstanceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dms_replication_instance@ resource value.
 dmsReplicationInstanceResource
     :: TF.Attr s P.Text -- ^ @replication_instance_class@ - 'P.replicationInstanceClass'
     -> TF.Attr s P.Text -- ^ @replication_instance_id@ - 'P.replicationInstanceId'
@@ -2173,6 +2190,7 @@ data DmsReplicationSubnetGroupResource s = DmsReplicationSubnetGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dms_replication_subnet_group@ resource value.
 dmsReplicationSubnetGroupResource
     :: TF.Attr s P.Text -- ^ @replication_subnet_group_description@ - 'P.replicationSubnetGroupDescription'
     -> TF.Attr s P.Text -- ^ @replication_subnet_group_id@ - 'P.replicationSubnetGroupId'
@@ -2261,6 +2279,7 @@ data DmsReplicationTaskResource s = DmsReplicationTaskResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dms_replication_task@ resource value.
 dmsReplicationTaskResource
     :: TF.Attr s P.Text -- ^ @replication_instance_arn@ - 'P.replicationInstanceArn'
     -> TF.Attr s P.Text -- ^ @source_endpoint_arn@ - 'P.sourceEndpointArn'
@@ -2369,6 +2388,7 @@ data DxConnectionResource s = DxConnectionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dx_connection@ resource value.
 dxConnectionResource
     :: TF.Attr s P.Text -- ^ @bandwidth@ - 'P.bandwidth'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
@@ -2433,6 +2453,7 @@ data DxConnectionAssociationResource s = DxConnectionAssociationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dx_connection_association@ resource value.
 dxConnectionAssociationResource
     :: TF.Attr s P.Text -- ^ @connection_id@ - 'P.connectionId'
     -> TF.Attr s P.Text -- ^ @lag_id@ - 'P.lagId'
@@ -2479,6 +2500,7 @@ data DxGatewayResource s = DxGatewayResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dx_gateway@ resource value.
 dxGatewayResource
     :: TF.Attr s P.Text -- ^ @amazon_side_asn@ - 'P.amazonSideAsn'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2525,6 +2547,7 @@ data DxGatewayAssociationResource s = DxGatewayAssociationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dx_gateway_association@ resource value.
 dxGatewayAssociationResource
     :: TF.Attr s P.Text -- ^ @dx_gateway_id@ - 'P.dxGatewayId'
     -> TF.Attr s P.Text -- ^ @vpn_gateway_id@ - 'P.vpnGatewayId'
@@ -2583,6 +2606,7 @@ data DxHostedPrivateVirtualInterfaceResource s = DxHostedPrivateVirtualInterface
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dx_hosted_private_virtual_interface@ resource value.
 dxHostedPrivateVirtualInterfaceResource
     :: TF.Attr s P.Int -- ^ @bgp_asn@ - 'P.bgpAsn'
     -> TF.Attr s P.Text -- ^ @address_family@ - 'P.addressFamily'
@@ -2685,6 +2709,7 @@ data DxHostedPrivateVirtualInterfaceAccepterResource s = DxHostedPrivateVirtualI
     -- * 'dxGatewayId'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dx_hosted_private_virtual_interface_accepter@ resource value.
 dxHostedPrivateVirtualInterfaceAccepterResource
     :: TF.Attr s P.Text -- ^ @virtual_interface_id@ - 'P.virtualInterfaceId'
     -> P.Resource (DxHostedPrivateVirtualInterfaceAccepterResource s)
@@ -2773,6 +2798,7 @@ data DxHostedPublicVirtualInterfaceResource s = DxHostedPublicVirtualInterfaceRe
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dx_hosted_public_virtual_interface@ resource value.
 dxHostedPublicVirtualInterfaceResource
     :: TF.Attr s P.Int -- ^ @bgp_asn@ - 'P.bgpAsn'
     -> TF.Attr s P.Text -- ^ @address_family@ - 'P.addressFamily'
@@ -2871,6 +2897,7 @@ data DxHostedPublicVirtualInterfaceAccepterResource s = DxHostedPublicVirtualInt
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dx_hosted_public_virtual_interface_accepter@ resource value.
 dxHostedPublicVirtualInterfaceAccepterResource
     :: TF.Attr s P.Text -- ^ @virtual_interface_id@ - 'P.virtualInterfaceId'
     -> P.Resource (DxHostedPublicVirtualInterfaceAccepterResource s)
@@ -2928,6 +2955,7 @@ data DxLagResource s = DxLagResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dx_lag@ resource value.
 dxLagResource
     :: TF.Attr s P.Text -- ^ @connections_bandwidth@ - 'P.connectionsBandwidth'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
@@ -3023,6 +3051,7 @@ data DxPrivateVirtualInterfaceResource s = DxPrivateVirtualInterfaceResource'
     -- * 'dxGatewayId'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dx_private_virtual_interface@ resource value.
 dxPrivateVirtualInterfaceResource
     :: TF.Attr s P.Int -- ^ @bgp_asn@ - 'P.bgpAsn'
     -> TF.Attr s P.Text -- ^ @address_family@ - 'P.addressFamily'
@@ -3152,6 +3181,7 @@ data DxPublicVirtualInterfaceResource s = DxPublicVirtualInterfaceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dx_public_virtual_interface@ resource value.
 dxPublicVirtualInterfaceResource
     :: TF.Attr s P.Int -- ^ @bgp_asn@ - 'P.bgpAsn'
     -> TF.Attr s P.Text -- ^ @address_family@ - 'P.addressFamily'
@@ -3249,6 +3279,7 @@ data DynamodbGlobalTableResource s = DynamodbGlobalTableResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dynamodb_global_table@ resource value.
 dynamodbGlobalTableResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s (ReplicaSetting s)] -- ^ @replica@ - 'P.replica'
@@ -3325,6 +3356,7 @@ data DynamodbTableResource s = DynamodbTableResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dynamodb_table@ resource value.
 dynamodbTableResource
     :: TF.Attr s [TF.Attr s (AttributeSetting s)] -- ^ @attribute@ - 'P.attribute'
     -> TF.Attr s P.Int -- ^ @read_capacity@ - 'P.readCapacity'
@@ -3465,6 +3497,7 @@ data DynamodbTableItemResource s = DynamodbTableItemResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_dynamodb_table_item@ resource value.
 dynamodbTableItemResource
     :: TF.Attr s P.Text -- ^ @item@ - 'P.item'
     -> TF.Attr s P.Text -- ^ @hash_key@ - 'P.hashKey'
@@ -3529,6 +3562,7 @@ data EbsSnapshotResource s = EbsSnapshotResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ebs_snapshot@ resource value.
 ebsSnapshotResource
     :: TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
     -> P.Resource (EbsSnapshotResource s)
@@ -3599,6 +3633,7 @@ data EbsVolumeResource s = EbsVolumeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ebs_volume@ resource value.
 ebsVolumeResource
     :: TF.Attr s P.Text -- ^ @availability_zone@ - 'P.availabilityZone'
     -> P.Resource (EbsVolumeResource s)
@@ -3665,6 +3700,7 @@ data EcrLifecyclePolicyResource s = EcrLifecyclePolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ecr_lifecycle_policy@ resource value.
 ecrLifecyclePolicyResource
     :: TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
@@ -3711,6 +3747,7 @@ data EcrRepositoryResource s = EcrRepositoryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ecr_repository@ resource value.
 ecrRepositoryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (EcrRepositoryResource s)
@@ -3758,6 +3795,7 @@ data EcrRepositoryPolicyResource s = EcrRepositoryPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ecr_repository_policy@ resource value.
 ecrRepositoryPolicyResource
     :: TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
@@ -3804,6 +3842,7 @@ data EcsClusterResource s = EcsClusterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ecs_cluster@ resource value.
 ecsClusterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (EcsClusterResource s)
@@ -3878,6 +3917,7 @@ data EcsServiceResource s = EcsServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ecs_service@ resource value.
 ecsServiceResource
     :: TF.Attr s P.Text -- ^ @task_definition@ - 'P.taskDefinition'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4040,6 +4080,7 @@ data EcsTaskDefinitionResource s = EcsTaskDefinitionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_ecs_task_definition@ resource value.
 ecsTaskDefinitionResource
     :: TF.Attr s P.Text -- ^ @container_definitions@ - 'P.containerDefinitions'
     -> TF.Attr s P.Text -- ^ @family@ - 'P.family''
@@ -4147,6 +4188,7 @@ data EfsFileSystemResource s = EfsFileSystemResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_efs_file_system@ resource value.
 efsFileSystemResource
     :: P.Resource (EfsFileSystemResource s)
 efsFileSystemResource =
@@ -4213,6 +4255,7 @@ data EfsMountTargetResource s = EfsMountTargetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_efs_mount_target@ resource value.
 efsMountTargetResource
     :: TF.Attr s P.Text -- ^ @file_system_id@ - 'P.fileSystemId'
     -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
@@ -4268,6 +4311,7 @@ data EgressOnlyInternetGatewayResource s = EgressOnlyInternetGatewayResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_egress_only_internet_gateway@ resource value.
 egressOnlyInternetGatewayResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.Resource (EgressOnlyInternetGatewayResource s)
@@ -4306,6 +4350,7 @@ data EipResource s = EipResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_eip@ resource value.
 eipResource
     :: P.Resource (EipResource s)
 eipResource =
@@ -4371,6 +4416,7 @@ data EipAssociationResource s = EipAssociationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_eip_association@ resource value.
 eipAssociationResource
     :: P.Resource (EipAssociationResource s)
 eipAssociationResource =
@@ -4426,6 +4472,7 @@ data EksClusterResource s = EksClusterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_eks_cluster@ resource value.
 eksClusterResource
     :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> TF.Attr s (VpcConfigSetting s) -- ^ @vpc_config@ - 'P.vpcConfig'
@@ -4502,6 +4549,7 @@ data ElasticBeanstalkApplicationResource s = ElasticBeanstalkApplicationResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elastic_beanstalk_application@ resource value.
 elasticBeanstalkApplicationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ElasticBeanstalkApplicationResource s)
@@ -4570,6 +4618,7 @@ data ElasticBeanstalkApplicationVersionResource s = ElasticBeanstalkApplicationV
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elastic_beanstalk_application_version@ resource value.
 elasticBeanstalkApplicationVersionResource
     :: TF.Attr s P.Text -- ^ @application@ - 'P.application'
     -> TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
@@ -4655,6 +4704,7 @@ data ElasticBeanstalkConfigurationTemplateResource s = ElasticBeanstalkConfigura
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elastic_beanstalk_configuration_template@ resource value.
 elasticBeanstalkConfigurationTemplateResource
     :: TF.Attr s P.Text -- ^ @application@ - 'P.application'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4746,6 +4796,7 @@ data ElasticBeanstalkEnvironmentResource s = ElasticBeanstalkEnvironmentResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elastic_beanstalk_environment@ resource value.
 elasticBeanstalkEnvironmentResource
     :: TF.Attr s P.Text -- ^ @application@ - 'P.application'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4895,6 +4946,7 @@ data ElasticacheClusterResource s = ElasticacheClusterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elasticache_cluster@ resource value.
 elasticacheClusterResource
     :: TF.Attr s P.Text -- ^ @cluster_id@ - 'P.clusterId'
     -> P.Resource (ElasticacheClusterResource s)
@@ -5039,6 +5091,7 @@ data ElasticacheParameterGroupResource s = ElasticacheParameterGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elasticache_parameter_group@ resource value.
 elasticacheParameterGroupResource
     :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -5138,6 +5191,7 @@ data ElasticacheReplicationGroupResource s = ElasticacheReplicationGroupResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elasticache_replication_group@ resource value.
 elasticacheReplicationGroupResource
     :: TF.Attr s P.Text -- ^ @replication_group_description@ - 'P.replicationGroupDescription'
     -> TF.Attr s P.Text -- ^ @replication_group_id@ - 'P.replicationGroupId'
@@ -5320,6 +5374,7 @@ data ElasticacheSecurityGroupResource s = ElasticacheSecurityGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elasticache_security_group@ resource value.
 elasticacheSecurityGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @security_group_names@ - 'P.securityGroupNames'
@@ -5376,6 +5431,7 @@ data ElasticacheSubnetGroupResource s = ElasticacheSubnetGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elasticache_subnet_group@ resource value.
 elasticacheSubnetGroupResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @subnet_ids@ - 'P.subnetIds'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -5444,6 +5500,7 @@ data ElasticsearchDomainResource s = ElasticsearchDomainResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elasticsearch_domain@ resource value.
 elasticsearchDomainResource
     :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
     -> P.Resource (ElasticsearchDomainResource s)
@@ -5559,6 +5616,7 @@ data ElasticsearchDomainPolicyResource s = ElasticsearchDomainPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elasticsearch_domain_policy@ resource value.
 elasticsearchDomainPolicyResource
     :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
     -> TF.Attr s P.Text -- ^ @access_policies@ - 'P.accessPolicies'
@@ -5617,6 +5675,7 @@ data ElastictranscoderPipelineResource s = ElastictranscoderPipelineResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elastictranscoder_pipeline@ resource value.
 elastictranscoderPipelineResource
     :: TF.Attr s P.Text -- ^ @input_bucket@ - 'P.inputBucket'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
@@ -5728,6 +5787,7 @@ data ElastictranscoderPresetResource s = ElastictranscoderPresetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elastictranscoder_preset@ resource value.
 elastictranscoderPresetResource
     :: TF.Attr s P.Text -- ^ @container@ - 'P.container'
     -> P.Resource (ElastictranscoderPresetResource s)
@@ -5858,6 +5918,7 @@ data ElbResource s = ElbResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elb@ resource value.
 elbResource
     :: TF.Attr s [TF.Attr s (ListenerSetting s)] -- ^ @listener@ - 'P.listener'
     -> P.Resource (ElbResource s)
@@ -5985,6 +6046,7 @@ data ElbAttachmentResource s = ElbAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_elb_attachment@ resource value.
 elbAttachmentResource
     :: TF.Attr s P.Text -- ^ @elb@ - 'P.elb'
     -> TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
@@ -6091,6 +6153,7 @@ data EmrClusterResource s = EmrClusterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_emr_cluster@ resource value.
 emrClusterResource
     :: TF.Attr s P.Text -- ^ @release_label@ - 'P.releaseLabel'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -6316,6 +6379,7 @@ data EmrInstanceGroupResource s = EmrInstanceGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_emr_instance_group@ resource value.
 emrInstanceGroupResource
     :: TF.Attr s P.Text -- ^ @cluster_id@ - 'P.clusterId'
     -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
@@ -6396,6 +6460,7 @@ data EmrSecurityConfigurationResource s = EmrSecurityConfigurationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_emr_security_configuration@ resource value.
 emrSecurityConfigurationResource
     :: TF.Attr s P.Text -- ^ @configuration@ - 'P.configuration'
     -> P.Resource (EmrSecurityConfigurationResource s)
@@ -6471,6 +6536,7 @@ data FlowLogResource s = FlowLogResource'
     -- * 'subnetId'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_flow_log@ resource value.
 flowLogResource
     :: TF.Attr s P.Text -- ^ @iam_role_arn@ - 'P.iamRoleArn'
     -> TF.Attr s P.Text -- ^ @log_group_name@ - 'P.logGroupName'
@@ -6565,6 +6631,7 @@ data GameliftAliasResource s = GameliftAliasResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_gamelift_alias@ resource value.
 gameliftAliasResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (RoutingStrategySetting s) -- ^ @routing_strategy@ - 'P.routingStrategy'
@@ -6631,6 +6698,7 @@ data GameliftBuildResource s = GameliftBuildResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_gamelift_build@ resource value.
 gameliftBuildResource
     :: TF.Attr s (StorageLocationSetting s) -- ^ @storage_location@ - 'P.storageLocation'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -6714,6 +6782,7 @@ data GameliftFleetResource s = GameliftFleetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_gamelift_fleet@ resource value.
 gameliftFleetResource
     :: TF.Attr s P.Text -- ^ @build_id@ - 'P.buildId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -6829,6 +6898,7 @@ data GlacierVaultResource s = GlacierVaultResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_glacier_vault@ resource value.
 glacierVaultResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (GlacierVaultResource s)
@@ -6900,6 +6970,7 @@ data GlueCatalogDatabaseResource s = GlueCatalogDatabaseResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_glue_catalog_database@ resource value.
 glueCatalogDatabaseResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (GlueCatalogDatabaseResource s)
@@ -6989,6 +7060,7 @@ data GlueCatalogTableResource s = GlueCatalogTableResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_glue_catalog_table@ resource value.
 glueCatalogTableResource
     :: TF.Attr s P.Text -- ^ @database_name@ - 'P.databaseName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -7123,6 +7195,7 @@ data GlueClassifierResource s = GlueClassifierResource'
     -- * 'jsonClassifier'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_glue_classifier@ resource value.
 glueClassifierResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (GlueClassifierResource s)
@@ -7222,6 +7295,7 @@ data GlueConnectionResource s = GlueConnectionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_glue_connection@ resource value.
 glueConnectionResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @connection_properties@ - 'P.connectionProperties'
@@ -7333,6 +7407,7 @@ data GlueCrawlerResource s = GlueCrawlerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_glue_crawler@ resource value.
 glueCrawlerResource
     :: TF.Attr s P.Text -- ^ @database_name@ - 'P.databaseName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -7475,6 +7550,7 @@ data GlueJobResource s = GlueJobResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_glue_job@ resource value.
 glueJobResource
     :: TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> TF.Attr s (CommandSetting s) -- ^ @command@ - 'P.command'
@@ -7593,6 +7669,7 @@ data GlueTriggerResource s = GlueTriggerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_glue_trigger@ resource value.
 glueTriggerResource
     :: TF.Attr s (P.NonEmpty (TF.Attr s (ActionsSetting s))) -- ^ @actions@ - 'P.actions'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -7676,6 +7753,7 @@ data GuarddutyDetectorResource s = GuarddutyDetectorResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_guardduty_detector@ resource value.
 guarddutyDetectorResource
     :: P.Resource (GuarddutyDetectorResource s)
 guarddutyDetectorResource =
@@ -7725,6 +7803,7 @@ data GuarddutyIpsetResource s = GuarddutyIpsetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_guardduty_ipset@ resource value.
 guarddutyIpsetResource
     :: TF.Attr s P.Bool -- ^ @activate@ - 'P.activate'
     -> TF.Attr s P.Text -- ^ @format@ - 'P.format'
@@ -7807,6 +7886,7 @@ data GuarddutyMemberResource s = GuarddutyMemberResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_guardduty_member@ resource value.
 guarddutyMemberResource
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
@@ -7894,6 +7974,7 @@ data GuarddutyThreatintelsetResource s = GuarddutyThreatintelsetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_guardduty_threatintelset@ resource value.
 guarddutyThreatintelsetResource
     :: TF.Attr s P.Bool -- ^ @activate@ - 'P.activate'
     -> TF.Attr s P.Text -- ^ @format@ - 'P.format'
@@ -7964,6 +8045,7 @@ data IamAccessKeyResource s = IamAccessKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_access_key@ resource value.
 iamAccessKeyResource
     :: TF.Attr s P.Text -- ^ @user@ - 'P.user'
     -> P.Resource (IamAccessKeyResource s)
@@ -8018,6 +8100,7 @@ data IamAccountAliasResource s = IamAccountAliasResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_account_alias@ resource value.
 iamAccountAliasResource
     :: TF.Attr s P.Text -- ^ @account_alias@ - 'P.accountAlias'
     -> P.Resource (IamAccountAliasResource s)
@@ -8056,6 +8139,7 @@ data IamAccountPasswordPolicyResource s = IamAccountPasswordPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_account_password_policy@ resource value.
 iamAccountPasswordPolicyResource
     :: P.Resource (IamAccountPasswordPolicyResource s)
 iamAccountPasswordPolicyResource =
@@ -8124,6 +8208,7 @@ data IamGroupResource s = IamGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_group@ resource value.
 iamGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (IamGroupResource s)
@@ -8178,6 +8263,7 @@ data IamGroupMembershipResource s = IamGroupMembershipResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_group_membership@ resource value.
 iamGroupMembershipResource
     :: TF.Attr s P.Text -- ^ @group@ - 'P.group'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -8235,6 +8321,7 @@ data IamGroupPolicyResource s = IamGroupPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_group_policy@ resource value.
 iamGroupPolicyResource
     :: TF.Attr s P.Text -- ^ @group@ - 'P.group'
     -> TF.Attr s P.Document -- ^ @policy@ - 'P.policy'
@@ -8291,6 +8378,7 @@ data IamGroupPolicyAttachmentResource s = IamGroupPolicyAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_group_policy_attachment@ resource value.
 iamGroupPolicyAttachmentResource
     :: TF.Attr s P.Text -- ^ @policy_arn@ - 'P.policyArn'
     -> TF.Attr s P.Text -- ^ @group@ - 'P.group'
@@ -8337,6 +8425,7 @@ data IamInstanceProfileResource s = IamInstanceProfileResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_instance_profile@ resource value.
 iamInstanceProfileResource
     :: P.Resource (IamInstanceProfileResource s)
 iamInstanceProfileResource =
@@ -8399,6 +8488,7 @@ data IamOpenidConnectProviderResource s = IamOpenidConnectProviderResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_openid_connect_provider@ resource value.
 iamOpenidConnectProviderResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @client_id_list@ - 'P.clientIdList'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @thumbprint_list@ - 'P.thumbprintList'
@@ -8462,6 +8552,7 @@ data IamPolicyResource s = IamPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_policy@ resource value.
 iamPolicyResource
     :: TF.Attr s P.Document -- ^ @policy@ - 'P.policy'
     -> P.Resource (IamPolicyResource s)
@@ -8536,6 +8627,7 @@ data IamPolicyAttachmentResource s = IamPolicyAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_policy_attachment@ resource value.
 iamPolicyAttachmentResource
     :: TF.Attr s P.Text -- ^ @policy_arn@ - 'P.policyArn'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -8618,6 +8710,7 @@ data IamRoleResource s = IamRoleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_role@ resource value.
 iamRoleResource
     :: TF.Attr s P.Document -- ^ @assume_role_policy@ - 'P.assumeRolePolicy'
     -> P.Resource (IamRoleResource s)
@@ -8713,6 +8806,7 @@ data IamRolePolicyResource s = IamRolePolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_role_policy@ resource value.
 iamRolePolicyResource
     :: TF.Attr s P.Document -- ^ @policy@ - 'P.policy'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
@@ -8769,6 +8863,7 @@ data IamRolePolicyAttachmentResource s = IamRolePolicyAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_role_policy_attachment@ resource value.
 iamRolePolicyAttachmentResource
     :: TF.Attr s P.Text -- ^ @policy_arn@ - 'P.policyArn'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
@@ -8815,6 +8910,7 @@ data IamSamlProviderResource s = IamSamlProviderResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_saml_provider@ resource value.
 iamSamlProviderResource
     :: TF.Attr s P.Text -- ^ @saml_metadata_document@ - 'P.samlMetadataDocument'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -8876,6 +8972,7 @@ data IamServerCertificateResource s = IamServerCertificateResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_server_certificate@ resource value.
 iamServerCertificateResource
     :: TF.Attr s P.Text -- ^ @certificate_body@ - 'P.certificateBody'
     -> TF.Attr s P.Text -- ^ @private_key@ - 'P.privateKey'
@@ -8952,6 +9049,7 @@ data IamServiceLinkedRoleResource s = IamServiceLinkedRoleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_service_linked_role@ resource value.
 iamServiceLinkedRoleResource
     :: TF.Attr s P.Text -- ^ @aws_service_name@ - 'P.awsServiceName'
     -> P.Resource (IamServiceLinkedRoleResource s)
@@ -9027,6 +9125,7 @@ data IamUserResource s = IamUserResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @aws_iam_user@ resource value.
 iamUserResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (IamUserResource s)
