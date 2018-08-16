@@ -19,27 +19,27 @@ module Terrafomo.OVH.Settings
     (
     -- ** action
       ActionSetting (..)
-    , actionSetting
+    , newActionSetting
 
     -- ** ip_pools
     , IpPoolsSetting (..)
-    , ipPoolsSetting
+    , newIpPoolsSetting
 
     -- ** orderable_zone
     , OrderableZoneSetting (..)
-    , orderableZoneSetting
+    , newOrderableZoneSetting
 
     -- ** probe
     , ProbeSetting (..)
-    , probeSetting
+    , newProbeSetting
 
     -- ** regions_status
     , RegionsStatusSetting (..)
-    , regionsStatusSetting
+    , newRegionsStatusSetting
 
     -- ** services
     , ServicesSetting (..)
-    , servicesSetting
+    , newServicesSetting
 
     ) where
 
@@ -78,10 +78,10 @@ data ActionSetting s = ActionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @action@ settings value.
-actionSetting
+newActionSetting
     :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> ActionSetting s
-actionSetting _type' =
+newActionSetting _type' =
     ActionSetting'
         { _status = TF.Nil
         , _target = TF.Nil
@@ -119,9 +119,9 @@ data IpPoolsSetting s = IpPoolsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ip_pools@ settings value.
-ipPoolsSetting
+newIpPoolsSetting
     :: IpPoolsSetting s
-ipPoolsSetting =
+newIpPoolsSetting =
     IpPoolsSetting'
 
 instance TF.IsValue  (IpPoolsSetting s)
@@ -151,9 +151,9 @@ data OrderableZoneSetting s = OrderableZoneSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @orderable_zone@ settings value.
-orderableZoneSetting
+newOrderableZoneSetting
     :: OrderableZoneSetting s
-orderableZoneSetting =
+newOrderableZoneSetting =
     OrderableZoneSetting'
 
 instance TF.IsValue  (OrderableZoneSetting s)
@@ -201,10 +201,10 @@ data ProbeSetting s = ProbeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @probe@ settings value.
-probeSetting
+newProbeSetting
     :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> ProbeSetting s
-probeSetting _type' =
+newProbeSetting _type' =
     ProbeSetting'
         { _forceSsl = TF.Nil
         , _interval = TF.value 30
@@ -287,10 +287,10 @@ data RegionsStatusSetting s = RegionsStatusSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @regions_status@ settings value.
-regionsStatusSetting
+newRegionsStatusSetting
     :: TF.Attr s P.Text -- ^ 'P._status': @status@
     -> RegionsStatusSetting s
-regionsStatusSetting _status =
+newRegionsStatusSetting _status =
     RegionsStatusSetting'
         { _status = _status
         }
@@ -317,9 +317,9 @@ data ServicesSetting s = ServicesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @services@ settings value.
-servicesSetting
+newServicesSetting
     :: ServicesSetting s
-servicesSetting =
+newServicesSetting =
     ServicesSetting'
 
 instance TF.IsValue  (ServicesSetting s)
