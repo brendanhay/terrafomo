@@ -82,7 +82,7 @@ escalationPolicyData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (EscalationPolicyData s)
 escalationPolicyData _name =
-    TF.unsafeDataSource "pagerduty_escalation_policy" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "pagerduty_escalation_policy" TF.validator $
         EscalationPolicyData'
             { _name = _name
             }
@@ -117,7 +117,7 @@ extensionSchemaData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ExtensionSchemaData s)
 extensionSchemaData _name =
-    TF.unsafeDataSource "pagerduty_extension_schema" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "pagerduty_extension_schema" TF.validator $
         ExtensionSchemaData'
             { _name = _name
             }
@@ -155,7 +155,7 @@ scheduleData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ScheduleData s)
 scheduleData _name =
-    TF.unsafeDataSource "pagerduty_schedule" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "pagerduty_schedule" TF.validator $
         ScheduleData'
             { _name = _name
             }
@@ -191,7 +191,7 @@ teamData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (TeamData s)
 teamData _name =
-    TF.unsafeDataSource "pagerduty_team" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "pagerduty_team" TF.validator $
         TeamData'
             { _name = _name
             }
@@ -229,7 +229,7 @@ userData
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> P.DataSource (UserData s)
 userData _email =
-    TF.unsafeDataSource "pagerduty_user" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "pagerduty_user" TF.validator $
         UserData'
             { _email = _email
             }
@@ -270,7 +270,7 @@ vendorData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (VendorData s)
 vendorData _name =
-    TF.unsafeDataSource "pagerduty_vendor" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "pagerduty_vendor" TF.validator $
         VendorData'
             { _name = _name
             , _nameRegex = TF.Nil

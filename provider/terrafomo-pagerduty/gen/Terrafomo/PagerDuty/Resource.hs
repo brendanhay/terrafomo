@@ -106,7 +106,7 @@ addonResource
     -> TF.Attr s P.Text -- ^ @src@ - 'P.src'
     -> P.Resource (AddonResource s)
 addonResource _name _src =
-    TF.unsafeResource "pagerduty_addon" P.defaultProvider TF.validator $
+    TF.unsafeResource "pagerduty_addon" TF.validator $
         AddonResource'
             { _name = _name
             , _src = _src
@@ -158,7 +158,7 @@ escalationPolicyResource
     -> TF.Attr s [TF.Attr s (RuleSetting s)] -- ^ @rule@ - 'P.rule'
     -> P.Resource (EscalationPolicyResource s)
 escalationPolicyResource _name _rule =
-    TF.unsafeResource "pagerduty_escalation_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "pagerduty_escalation_policy" TF.validator $
         EscalationPolicyResource'
             { _description = TF.value "Managed by Terraform"
             , _name = _name
@@ -225,7 +225,7 @@ extensionResource
     -> TF.Attr s P.Text -- ^ @extension_schema@ - 'P.extensionSchema'
     -> P.Resource (ExtensionResource s)
 extensionResource _extensionObjects _extensionSchema =
-    TF.unsafeResource "pagerduty_extension" P.defaultProvider TF.validator $
+    TF.unsafeResource "pagerduty_extension" TF.validator $
         ExtensionResource'
             { _endpointUrl = TF.Nil
             , _extensionObjects = _extensionObjects
@@ -288,7 +288,7 @@ maintenanceWindowResource
     -> TF.Attr s P.Text -- ^ @start_time@ - 'P.startTime'
     -> P.Resource (MaintenanceWindowResource s)
 maintenanceWindowResource _endTime _services _startTime =
-    TF.unsafeResource "pagerduty_maintenance_window" P.defaultProvider TF.validator $
+    TF.unsafeResource "pagerduty_maintenance_window" TF.validator $
         MaintenanceWindowResource'
             { _description = TF.value "Managed by Terraform"
             , _endTime = _endTime
@@ -354,7 +354,7 @@ scheduleResource
     -> TF.Attr s P.Text -- ^ @time_zone@ - 'P.timeZone'
     -> P.Resource (ScheduleResource s)
 scheduleResource _layer _timeZone =
-    TF.unsafeResource "pagerduty_schedule" P.defaultProvider TF.validator $
+    TF.unsafeResource "pagerduty_schedule" TF.validator $
         ScheduleResource'
             { _description = TF.value "Managed by Terraform"
             , _layer = _layer
@@ -435,7 +435,7 @@ serviceResource
     :: TF.Attr s P.Text -- ^ @escalation_policy@ - 'P.escalationPolicy'
     -> P.Resource (ServiceResource s)
 serviceResource _escalationPolicy =
-    TF.unsafeResource "pagerduty_service" P.defaultProvider TF.validator $
+    TF.unsafeResource "pagerduty_service" TF.validator $
         ServiceResource'
             { _acknowledgementTimeout = TF.value "1800"
             , _alertCreation = TF.value "create_incidents"
@@ -535,7 +535,7 @@ serviceIntegrationResource
     :: TF.Attr s P.Text -- ^ @service@ - 'P.service'
     -> P.Resource (ServiceIntegrationResource s)
 serviceIntegrationResource _service =
-    TF.unsafeResource "pagerduty_service_integration" P.defaultProvider TF.validator $
+    TF.unsafeResource "pagerduty_service_integration" TF.validator $
         ServiceIntegrationResource'
             { _name = TF.Nil
             , _service = _service
@@ -592,7 +592,7 @@ teamResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (TeamResource s)
 teamResource _name =
-    TF.unsafeResource "pagerduty_team" P.defaultProvider TF.validator $
+    TF.unsafeResource "pagerduty_team" TF.validator $
         TeamResource'
             { _description = TF.value "Managed by Terraform"
             , _name = _name
@@ -635,7 +635,7 @@ teamMembershipResource
     -> TF.Attr s P.Text -- ^ @user_id@ - 'P.userId'
     -> P.Resource (TeamMembershipResource s)
 teamMembershipResource _teamId _userId =
-    TF.unsafeResource "pagerduty_team_membership" P.defaultProvider TF.validator $
+    TF.unsafeResource "pagerduty_team_membership" TF.validator $
         TeamMembershipResource'
             { _teamId = _teamId
             , _userId = _userId
@@ -690,7 +690,7 @@ userResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (UserResource s)
 userResource _email _name =
-    TF.unsafeResource "pagerduty_user" P.defaultProvider TF.validator $
+    TF.unsafeResource "pagerduty_user" TF.validator $
         UserResource'
             { _description = TF.value "Managed by Terraform"
             , _email = _email
@@ -790,7 +790,7 @@ userContactMethodResource
     -> TF.Attr s P.Text -- ^ @user_id@ - 'P.userId'
     -> P.Resource (UserContactMethodResource s)
 userContactMethodResource _address _label _type' _userId =
-    TF.unsafeResource "pagerduty_user_contact_method" P.defaultProvider TF.validator $
+    TF.unsafeResource "pagerduty_user_contact_method" TF.validator $
         UserContactMethodResource'
             { _address = _address
             , _countryCode = TF.Nil
