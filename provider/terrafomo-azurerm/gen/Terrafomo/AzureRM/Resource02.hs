@@ -224,6 +224,9 @@ data RoleDefinitionResource s = RoleDefinitionResource'
     , _permissions      :: TF.Attr s [TF.Attr s (PermissionsSetting s)]
     -- ^ @permissions@ - (Required)
     --
+    , _roleDefinitionId :: TF.Attr s P.Text
+    -- ^ @role_definition_id@ - (Optional, Forces New)
+    --
     , _scope            :: TF.Attr s P.Text
     -- ^ @scope@ - (Required, Forces New)
     --
@@ -243,6 +246,7 @@ roleDefinitionResource _name _permissions _scope _assignableScopes =
             , _description = TF.Nil
             , _name = _name
             , _permissions = _permissions
+            , _roleDefinitionId = TF.Nil
             , _scope = _scope
             }
 
@@ -252,6 +256,7 @@ instance TF.IsObject (RoleDefinitionResource s) where
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "permissions" <$> TF.attribute _permissions
+        , TF.assign "role_definition_id" <$> TF.attribute _roleDefinitionId
         , TF.assign "scope" <$> TF.attribute _scope
         ]
 
@@ -278,6 +283,11 @@ instance P.HasPermissions (RoleDefinitionResource s) (TF.Attr s [TF.Attr s (Perm
         P.lens (_permissions :: RoleDefinitionResource s -> TF.Attr s [TF.Attr s (PermissionsSetting s)])
                (\s a -> s { _permissions = a } :: RoleDefinitionResource s)
 
+instance P.HasRoleDefinitionId (RoleDefinitionResource s) (TF.Attr s P.Text) where
+    roleDefinitionId =
+        P.lens (_roleDefinitionId :: RoleDefinitionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _roleDefinitionId = a } :: RoleDefinitionResource s)
+
 instance P.HasScope (RoleDefinitionResource s) (TF.Attr s P.Text) where
     scope =
         P.lens (_scope :: RoleDefinitionResource s -> TF.Attr s P.Text)
@@ -294,19 +304,22 @@ instance s ~ s' => P.HasComputedRoleDefinitionId (TF.Ref s' (RoleDefinitionResou
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/route.html terraform documentation>
 -- for more information.
 data RouteResource s = RouteResource'
-    { _addressPrefix     :: TF.Attr s P.Text
+    { _addressPrefix      :: TF.Attr s P.Text
     -- ^ @address_prefix@ - (Required)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name               :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _nextHopType       :: TF.Attr s P.Text
+    , _nextHopInIpAddress :: TF.Attr s P.Text
+    -- ^ @next_hop_in_ip_address@ - (Optional)
+    --
+    , _nextHopType        :: TF.Attr s P.Text
     -- ^ @next_hop_type@ - (Required)
     --
-    , _resourceGroupName :: TF.Attr s P.Text
+    , _resourceGroupName  :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _routeTableName    :: TF.Attr s P.Text
+    , _routeTableName     :: TF.Attr s P.Text
     -- ^ @route_table_name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -324,6 +337,7 @@ routeResource _name _resourceGroupName _routeTableName _addressPrefix _nextHopTy
         RouteResource'
             { _addressPrefix = _addressPrefix
             , _name = _name
+            , _nextHopInIpAddress = TF.Nil
             , _nextHopType = _nextHopType
             , _resourceGroupName = _resourceGroupName
             , _routeTableName = _routeTableName
@@ -333,6 +347,7 @@ instance TF.IsObject (RouteResource s) where
     toObject RouteResource'{..} = P.catMaybes
         [ TF.assign "address_prefix" <$> TF.attribute _addressPrefix
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "next_hop_in_ip_address" <$> TF.attribute _nextHopInIpAddress
         , TF.assign "next_hop_type" <$> TF.attribute _nextHopType
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
         , TF.assign "route_table_name" <$> TF.attribute _routeTableName
@@ -350,6 +365,11 @@ instance P.HasName (RouteResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RouteResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RouteResource s)
+
+instance P.HasNextHopInIpAddress (RouteResource s) (TF.Attr s P.Text) where
+    nextHopInIpAddress =
+        P.lens (_nextHopInIpAddress :: RouteResource s -> TF.Attr s P.Text)
+               (\s a -> s { _nextHopInIpAddress = a } :: RouteResource s)
 
 instance P.HasNextHopType (RouteResource s) (TF.Attr s P.Text) where
     nextHopType =
@@ -389,6 +409,12 @@ data RouteTableResource s = RouteTableResource'
     , _resourceGroupName          :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
+    , _route                      :: TF.Attr s [TF.Attr s (RouteSetting s)]
+    -- ^ @route@ - (Optional)
+    --
+    , _tags                       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @azurerm_route_table@ resource value.
@@ -404,6 +430,8 @@ routeTableResource _location _name _resourceGroupName =
             , _location = _location
             , _name = _name
             , _resourceGroupName = _resourceGroupName
+            , _route = TF.Nil
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (RouteTableResource s) where
@@ -412,6 +440,8 @@ instance TF.IsObject (RouteTableResource s) where
         , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "route" <$> TF.attribute _route
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (RouteTableResource s) where
@@ -436,6 +466,16 @@ instance P.HasResourceGroupName (RouteTableResource s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: RouteTableResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: RouteTableResource s)
+
+instance P.HasRoute (RouteTableResource s) (TF.Attr s [TF.Attr s (RouteSetting s)]) where
+    route =
+        P.lens (_route :: RouteTableResource s -> TF.Attr s [TF.Attr s (RouteSetting s)])
+               (\s a -> s { _route = a } :: RouteTableResource s)
+
+instance P.HasTags (RouteTableResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: RouteTableResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: RouteTableResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RouteTableResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -493,6 +533,12 @@ data SchedulerJobResource s = SchedulerJobResource'
     , _retry                   :: TF.Attr s (RetrySetting s)
     -- ^ @retry@ - (Optional)
     --
+    , _startTime               :: TF.Attr s P.Text
+    -- ^ @start_time@ - (Optional)
+    --
+    , _state                   :: TF.Attr s P.Text
+    -- ^ @state@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @azurerm_scheduler_job@ resource value.
@@ -513,6 +559,8 @@ schedulerJobResource _jobCollectionName _name _resourceGroupName =
             , _recurrence = TF.Nil
             , _resourceGroupName = _resourceGroupName
             , _retry = TF.Nil
+            , _startTime = TF.Nil
+            , _state = TF.Nil
             }
 
 instance TF.IsObject (SchedulerJobResource s) where
@@ -526,6 +574,8 @@ instance TF.IsObject (SchedulerJobResource s) where
         , TF.assign "recurrence" <$> TF.attribute _recurrence
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
         , TF.assign "retry" <$> TF.attribute _retry
+        , TF.assign "start_time" <$> TF.attribute _startTime
+        , TF.assign "state" <$> TF.attribute _state
         ]
 
 instance TF.IsValid (SchedulerJobResource s) where
@@ -621,6 +671,16 @@ instance P.HasRetry (SchedulerJobResource s) (TF.Attr s (RetrySetting s)) where
         P.lens (_retry :: SchedulerJobResource s -> TF.Attr s (RetrySetting s))
                (\s a -> s { _retry = a } :: SchedulerJobResource s)
 
+instance P.HasStartTime (SchedulerJobResource s) (TF.Attr s P.Text) where
+    startTime =
+        P.lens (_startTime :: SchedulerJobResource s -> TF.Attr s P.Text)
+               (\s a -> s { _startTime = a } :: SchedulerJobResource s)
+
+instance P.HasState (SchedulerJobResource s) (TF.Attr s P.Text) where
+    state =
+        P.lens (_state :: SchedulerJobResource s -> TF.Attr s P.Text)
+               (\s a -> s { _state = a } :: SchedulerJobResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SchedulerJobResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -653,6 +713,9 @@ data SchedulerJobCollectionResource s = SchedulerJobCollectionResource'
     , _state             :: TF.Attr s P.Text
     -- ^ @state@ - (Optional)
     --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @azurerm_scheduler_job_collection@ resource value.
@@ -671,6 +734,7 @@ schedulerJobCollectionResource _location _name _resourceGroupName _sku =
             , _resourceGroupName = _resourceGroupName
             , _sku = _sku
             , _state = TF.value "Enabled"
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (SchedulerJobCollectionResource s) where
@@ -681,6 +745,7 @@ instance TF.IsObject (SchedulerJobCollectionResource s) where
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
         , TF.assign "sku" <$> TF.attribute _sku
         , TF.assign "state" <$> TF.attribute _state
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (SchedulerJobCollectionResource s) where
@@ -720,6 +785,11 @@ instance P.HasState (SchedulerJobCollectionResource s) (TF.Attr s P.Text) where
         P.lens (_state :: SchedulerJobCollectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _state = a } :: SchedulerJobCollectionResource s)
 
+instance P.HasTags (SchedulerJobCollectionResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: SchedulerJobCollectionResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: SchedulerJobCollectionResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SchedulerJobCollectionResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -737,11 +807,20 @@ data SearchServiceResource s = SearchServiceResource'
     , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _partitionCount    :: TF.Attr s P.Int
+    -- ^ @partition_count@ - (Optional, Forces New)
+    --
+    , _replicaCount      :: TF.Attr s P.Int
+    -- ^ @replica_count@ - (Optional, Forces New)
+    --
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
     , _sku               :: TF.Attr s P.Text
     -- ^ @sku@ - (Required, Forces New)
+    --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -757,16 +836,22 @@ searchServiceResource _location _name _resourceGroupName _sku =
         SearchServiceResource'
             { _location = _location
             , _name = _name
+            , _partitionCount = TF.Nil
+            , _replicaCount = TF.Nil
             , _resourceGroupName = _resourceGroupName
             , _sku = _sku
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (SearchServiceResource s) where
     toObject SearchServiceResource'{..} = P.catMaybes
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "partition_count" <$> TF.attribute _partitionCount
+        , TF.assign "replica_count" <$> TF.attribute _replicaCount
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
         , TF.assign "sku" <$> TF.attribute _sku
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (SearchServiceResource s) where
@@ -782,6 +867,16 @@ instance P.HasName (SearchServiceResource s) (TF.Attr s P.Text) where
         P.lens (_name :: SearchServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SearchServiceResource s)
 
+instance P.HasPartitionCount (SearchServiceResource s) (TF.Attr s P.Int) where
+    partitionCount =
+        P.lens (_partitionCount :: SearchServiceResource s -> TF.Attr s P.Int)
+               (\s a -> s { _partitionCount = a } :: SearchServiceResource s)
+
+instance P.HasReplicaCount (SearchServiceResource s) (TF.Attr s P.Int) where
+    replicaCount =
+        P.lens (_replicaCount :: SearchServiceResource s -> TF.Attr s P.Int)
+               (\s a -> s { _replicaCount = a } :: SearchServiceResource s)
+
 instance P.HasResourceGroupName (SearchServiceResource s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: SearchServiceResource s -> TF.Attr s P.Text)
@@ -791,6 +886,11 @@ instance P.HasSku (SearchServiceResource s) (TF.Attr s P.Text) where
     sku =
         P.lens (_sku :: SearchServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _sku = a } :: SearchServiceResource s)
+
+instance P.HasTags (SearchServiceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: SearchServiceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: SearchServiceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SearchServiceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -842,6 +942,9 @@ data ServiceFabricClusterResource s = ServiceFabricClusterResource'
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     , _upgradeMode :: TF.Attr s P.Text
     -- ^ @upgrade_mode@ - (Required)
     --
@@ -875,6 +978,7 @@ serviceFabricClusterResource _managementEndpoint _vmImage _reliabilityLevel _loc
             , _nodeType = _nodeType
             , _reliabilityLevel = _reliabilityLevel
             , _resourceGroupName = _resourceGroupName
+            , _tags = TF.Nil
             , _upgradeMode = _upgradeMode
             , _vmImage = _vmImage
             }
@@ -892,6 +996,7 @@ instance TF.IsObject (ServiceFabricClusterResource s) where
         , TF.assign "node_type" <$> TF.attribute _nodeType
         , TF.assign "reliability_level" <$> TF.attribute _reliabilityLevel
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "upgrade_mode" <$> TF.attribute _upgradeMode
         , TF.assign "vm_image" <$> TF.attribute _vmImage
         ]
@@ -966,6 +1071,11 @@ instance P.HasResourceGroupName (ServiceFabricClusterResource s) (TF.Attr s P.Te
         P.lens (_resourceGroupName :: ServiceFabricClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: ServiceFabricClusterResource s)
 
+instance P.HasTags (ServiceFabricClusterResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: ServiceFabricClusterResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: ServiceFabricClusterResource s)
+
 instance P.HasUpgradeMode (ServiceFabricClusterResource s) (TF.Attr s P.Text) where
     upgradeMode =
         P.lens (_upgradeMode :: ServiceFabricClusterResource s -> TF.Attr s P.Text)
@@ -1005,6 +1115,9 @@ data ServicebusNamespaceResource s = ServicebusNamespaceResource'
     , _sku               :: TF.Attr s P.Text
     -- ^ @sku@ - (Required, Forces New)
     --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @azurerm_servicebus_namespace@ resource value.
@@ -1022,6 +1135,7 @@ servicebusNamespaceResource _location _name _resourceGroupName _sku =
             , _name = _name
             , _resourceGroupName = _resourceGroupName
             , _sku = _sku
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (ServicebusNamespaceResource s) where
@@ -1031,6 +1145,7 @@ instance TF.IsObject (ServicebusNamespaceResource s) where
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
         , TF.assign "sku" <$> TF.attribute _sku
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (ServicebusNamespaceResource s) where
@@ -1060,6 +1175,11 @@ instance P.HasSku (ServicebusNamespaceResource s) (TF.Attr s P.Text) where
     sku =
         P.lens (_sku :: ServicebusNamespaceResource s -> TF.Attr s P.Text)
                (\s a -> s { _sku = a } :: ServicebusNamespaceResource s)
+
+instance P.HasTags (ServicebusNamespaceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: ServicebusNamespaceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: ServicebusNamespaceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ServicebusNamespaceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1184,28 +1304,43 @@ instance s ~ s' => P.HasComputedSecondaryKey (TF.Ref s' (ServicebusNamespaceAuth
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/servicebus_queue.html terraform documentation>
 -- for more information.
 data ServicebusQueueResource s = ServicebusQueueResource'
-    { _deadLetteringOnMessageExpiration :: TF.Attr s P.Bool
+    { _autoDeleteOnIdle                    :: TF.Attr s P.Text
+    -- ^ @auto_delete_on_idle@ - (Optional)
+    --
+    , _deadLetteringOnMessageExpiration    :: TF.Attr s P.Bool
     -- ^ @dead_lettering_on_message_expiration@ - (Optional)
     --
-    , _enableExpress                    :: TF.Attr s P.Bool
+    , _defaultMessageTtl                   :: TF.Attr s P.Text
+    -- ^ @default_message_ttl@ - (Optional)
+    --
+    , _duplicateDetectionHistoryTimeWindow :: TF.Attr s P.Text
+    -- ^ @duplicate_detection_history_time_window@ - (Optional)
+    --
+    , _enableExpress                       :: TF.Attr s P.Bool
     -- ^ @enable_express@ - (Optional)
     --
-    , _enablePartitioning               :: TF.Attr s P.Bool
+    , _enablePartitioning                  :: TF.Attr s P.Bool
     -- ^ @enable_partitioning@ - (Optional, Forces New)
     --
-    , _name                             :: TF.Attr s P.Text
+    , _lockDuration                        :: TF.Attr s P.Text
+    -- ^ @lock_duration@ - (Optional)
+    --
+    , _maxSizeInMegabytes                  :: TF.Attr s P.Int
+    -- ^ @max_size_in_megabytes@ - (Optional)
+    --
+    , _name                                :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _namespaceName                    :: TF.Attr s P.Text
+    , _namespaceName                       :: TF.Attr s P.Text
     -- ^ @namespace_name@ - (Required, Forces New)
     --
-    , _requiresDuplicateDetection       :: TF.Attr s P.Bool
+    , _requiresDuplicateDetection          :: TF.Attr s P.Bool
     -- ^ @requires_duplicate_detection@ - (Optional, Forces New)
     --
-    , _requiresSession                  :: TF.Attr s P.Bool
+    , _requiresSession                     :: TF.Attr s P.Bool
     -- ^ @requires_session@ - (Optional, Forces New)
     --
-    , _resourceGroupName                :: TF.Attr s P.Text
+    , _resourceGroupName                   :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1219,9 +1354,14 @@ servicebusQueueResource
 servicebusQueueResource _name _namespaceName _resourceGroupName =
     TF.unsafeResource "azurerm_servicebus_queue" TF.validator $
         ServicebusQueueResource'
-            { _deadLetteringOnMessageExpiration = TF.value P.False
+            { _autoDeleteOnIdle = TF.Nil
+            , _deadLetteringOnMessageExpiration = TF.value P.False
+            , _defaultMessageTtl = TF.Nil
+            , _duplicateDetectionHistoryTimeWindow = TF.Nil
             , _enableExpress = TF.value P.False
             , _enablePartitioning = TF.value P.False
+            , _lockDuration = TF.Nil
+            , _maxSizeInMegabytes = TF.Nil
             , _name = _name
             , _namespaceName = _namespaceName
             , _requiresDuplicateDetection = TF.value P.False
@@ -1231,9 +1371,14 @@ servicebusQueueResource _name _namespaceName _resourceGroupName =
 
 instance TF.IsObject (ServicebusQueueResource s) where
     toObject ServicebusQueueResource'{..} = P.catMaybes
-        [ TF.assign "dead_lettering_on_message_expiration" <$> TF.attribute _deadLetteringOnMessageExpiration
+        [ TF.assign "auto_delete_on_idle" <$> TF.attribute _autoDeleteOnIdle
+        , TF.assign "dead_lettering_on_message_expiration" <$> TF.attribute _deadLetteringOnMessageExpiration
+        , TF.assign "default_message_ttl" <$> TF.attribute _defaultMessageTtl
+        , TF.assign "duplicate_detection_history_time_window" <$> TF.attribute _duplicateDetectionHistoryTimeWindow
         , TF.assign "enable_express" <$> TF.attribute _enableExpress
         , TF.assign "enable_partitioning" <$> TF.attribute _enablePartitioning
+        , TF.assign "lock_duration" <$> TF.attribute _lockDuration
+        , TF.assign "max_size_in_megabytes" <$> TF.attribute _maxSizeInMegabytes
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "namespace_name" <$> TF.attribute _namespaceName
         , TF.assign "requires_duplicate_detection" <$> TF.attribute _requiresDuplicateDetection
@@ -1244,10 +1389,25 @@ instance TF.IsObject (ServicebusQueueResource s) where
 instance TF.IsValid (ServicebusQueueResource s) where
     validator = P.mempty
 
+instance P.HasAutoDeleteOnIdle (ServicebusQueueResource s) (TF.Attr s P.Text) where
+    autoDeleteOnIdle =
+        P.lens (_autoDeleteOnIdle :: ServicebusQueueResource s -> TF.Attr s P.Text)
+               (\s a -> s { _autoDeleteOnIdle = a } :: ServicebusQueueResource s)
+
 instance P.HasDeadLetteringOnMessageExpiration (ServicebusQueueResource s) (TF.Attr s P.Bool) where
     deadLetteringOnMessageExpiration =
         P.lens (_deadLetteringOnMessageExpiration :: ServicebusQueueResource s -> TF.Attr s P.Bool)
                (\s a -> s { _deadLetteringOnMessageExpiration = a } :: ServicebusQueueResource s)
+
+instance P.HasDefaultMessageTtl (ServicebusQueueResource s) (TF.Attr s P.Text) where
+    defaultMessageTtl =
+        P.lens (_defaultMessageTtl :: ServicebusQueueResource s -> TF.Attr s P.Text)
+               (\s a -> s { _defaultMessageTtl = a } :: ServicebusQueueResource s)
+
+instance P.HasDuplicateDetectionHistoryTimeWindow (ServicebusQueueResource s) (TF.Attr s P.Text) where
+    duplicateDetectionHistoryTimeWindow =
+        P.lens (_duplicateDetectionHistoryTimeWindow :: ServicebusQueueResource s -> TF.Attr s P.Text)
+               (\s a -> s { _duplicateDetectionHistoryTimeWindow = a } :: ServicebusQueueResource s)
 
 instance P.HasEnableExpress (ServicebusQueueResource s) (TF.Attr s P.Bool) where
     enableExpress =
@@ -1258,6 +1418,16 @@ instance P.HasEnablePartitioning (ServicebusQueueResource s) (TF.Attr s P.Bool) 
     enablePartitioning =
         P.lens (_enablePartitioning :: ServicebusQueueResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enablePartitioning = a } :: ServicebusQueueResource s)
+
+instance P.HasLockDuration (ServicebusQueueResource s) (TF.Attr s P.Text) where
+    lockDuration =
+        P.lens (_lockDuration :: ServicebusQueueResource s -> TF.Attr s P.Text)
+               (\s a -> s { _lockDuration = a } :: ServicebusQueueResource s)
+
+instance P.HasMaxSizeInMegabytes (ServicebusQueueResource s) (TF.Attr s P.Int) where
+    maxSizeInMegabytes =
+        P.lens (_maxSizeInMegabytes :: ServicebusQueueResource s -> TF.Attr s P.Int)
+               (\s a -> s { _maxSizeInMegabytes = a } :: ServicebusQueueResource s)
 
 instance P.HasName (ServicebusQueueResource s) (TF.Attr s P.Text) where
     name =
@@ -1418,14 +1588,23 @@ instance s ~ s' => P.HasComputedSecondaryKey (TF.Ref s' (ServicebusQueueAuthoriz
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/servicebus_subscription.html terraform documentation>
 -- for more information.
 data ServicebusSubscriptionResource s = ServicebusSubscriptionResource'
-    { _deadLetteringOnMessageExpiration :: TF.Attr s P.Bool
+    { _autoDeleteOnIdle                 :: TF.Attr s P.Text
+    -- ^ @auto_delete_on_idle@ - (Optional)
+    --
+    , _deadLetteringOnMessageExpiration :: TF.Attr s P.Bool
     -- ^ @dead_lettering_on_message_expiration@ - (Optional)
+    --
+    , _defaultMessageTtl                :: TF.Attr s P.Text
+    -- ^ @default_message_ttl@ - (Optional)
     --
     , _enableBatchedOperations          :: TF.Attr s P.Bool
     -- ^ @enable_batched_operations@ - (Optional)
     --
     , _forwardTo                        :: TF.Attr s P.Text
     -- ^ @forward_to@ - (Optional)
+    --
+    , _lockDuration                     :: TF.Attr s P.Text
+    -- ^ @lock_duration@ - (Optional)
     --
     , _maxDeliveryCount                 :: TF.Attr s P.Int
     -- ^ @max_delivery_count@ - (Required)
@@ -1458,9 +1637,12 @@ servicebusSubscriptionResource
 servicebusSubscriptionResource _maxDeliveryCount _name _namespaceName _resourceGroupName _topicName =
     TF.unsafeResource "azurerm_servicebus_subscription" TF.validator $
         ServicebusSubscriptionResource'
-            { _deadLetteringOnMessageExpiration = TF.Nil
+            { _autoDeleteOnIdle = TF.Nil
+            , _deadLetteringOnMessageExpiration = TF.Nil
+            , _defaultMessageTtl = TF.Nil
             , _enableBatchedOperations = TF.Nil
             , _forwardTo = TF.Nil
+            , _lockDuration = TF.Nil
             , _maxDeliveryCount = _maxDeliveryCount
             , _name = _name
             , _namespaceName = _namespaceName
@@ -1471,9 +1653,12 @@ servicebusSubscriptionResource _maxDeliveryCount _name _namespaceName _resourceG
 
 instance TF.IsObject (ServicebusSubscriptionResource s) where
     toObject ServicebusSubscriptionResource'{..} = P.catMaybes
-        [ TF.assign "dead_lettering_on_message_expiration" <$> TF.attribute _deadLetteringOnMessageExpiration
+        [ TF.assign "auto_delete_on_idle" <$> TF.attribute _autoDeleteOnIdle
+        , TF.assign "dead_lettering_on_message_expiration" <$> TF.attribute _deadLetteringOnMessageExpiration
+        , TF.assign "default_message_ttl" <$> TF.attribute _defaultMessageTtl
         , TF.assign "enable_batched_operations" <$> TF.attribute _enableBatchedOperations
         , TF.assign "forward_to" <$> TF.attribute _forwardTo
+        , TF.assign "lock_duration" <$> TF.attribute _lockDuration
         , TF.assign "max_delivery_count" <$> TF.attribute _maxDeliveryCount
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "namespace_name" <$> TF.attribute _namespaceName
@@ -1485,10 +1670,20 @@ instance TF.IsObject (ServicebusSubscriptionResource s) where
 instance TF.IsValid (ServicebusSubscriptionResource s) where
     validator = P.mempty
 
+instance P.HasAutoDeleteOnIdle (ServicebusSubscriptionResource s) (TF.Attr s P.Text) where
+    autoDeleteOnIdle =
+        P.lens (_autoDeleteOnIdle :: ServicebusSubscriptionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _autoDeleteOnIdle = a } :: ServicebusSubscriptionResource s)
+
 instance P.HasDeadLetteringOnMessageExpiration (ServicebusSubscriptionResource s) (TF.Attr s P.Bool) where
     deadLetteringOnMessageExpiration =
         P.lens (_deadLetteringOnMessageExpiration :: ServicebusSubscriptionResource s -> TF.Attr s P.Bool)
                (\s a -> s { _deadLetteringOnMessageExpiration = a } :: ServicebusSubscriptionResource s)
+
+instance P.HasDefaultMessageTtl (ServicebusSubscriptionResource s) (TF.Attr s P.Text) where
+    defaultMessageTtl =
+        P.lens (_defaultMessageTtl :: ServicebusSubscriptionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _defaultMessageTtl = a } :: ServicebusSubscriptionResource s)
 
 instance P.HasEnableBatchedOperations (ServicebusSubscriptionResource s) (TF.Attr s P.Bool) where
     enableBatchedOperations =
@@ -1499,6 +1694,11 @@ instance P.HasForwardTo (ServicebusSubscriptionResource s) (TF.Attr s P.Text) wh
     forwardTo =
         P.lens (_forwardTo :: ServicebusSubscriptionResource s -> TF.Attr s P.Text)
                (\s a -> s { _forwardTo = a } :: ServicebusSubscriptionResource s)
+
+instance P.HasLockDuration (ServicebusSubscriptionResource s) (TF.Attr s P.Text) where
+    lockDuration =
+        P.lens (_lockDuration :: ServicebusSubscriptionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _lockDuration = a } :: ServicebusSubscriptionResource s)
 
 instance P.HasMaxDeliveryCount (ServicebusSubscriptionResource s) (TF.Attr s P.Int) where
     maxDeliveryCount =
@@ -1689,31 +1889,43 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ServicebusSubscriptionRuleResourc
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/servicebus_topic.html terraform documentation>
 -- for more information.
 data ServicebusTopicResource s = ServicebusTopicResource'
-    { _enableBatchedOperations    :: TF.Attr s P.Bool
+    { _autoDeleteOnIdle                    :: TF.Attr s P.Text
+    -- ^ @auto_delete_on_idle@ - (Optional)
+    --
+    , _defaultMessageTtl                   :: TF.Attr s P.Text
+    -- ^ @default_message_ttl@ - (Optional)
+    --
+    , _duplicateDetectionHistoryTimeWindow :: TF.Attr s P.Text
+    -- ^ @duplicate_detection_history_time_window@ - (Optional)
+    --
+    , _enableBatchedOperations             :: TF.Attr s P.Bool
     -- ^ @enable_batched_operations@ - (Optional)
     --
-    , _enableExpress              :: TF.Attr s P.Bool
+    , _enableExpress                       :: TF.Attr s P.Bool
     -- ^ @enable_express@ - (Optional)
     --
-    , _enablePartitioning         :: TF.Attr s P.Bool
+    , _enablePartitioning                  :: TF.Attr s P.Bool
     -- ^ @enable_partitioning@ - (Optional, Forces New)
     --
-    , _name                       :: TF.Attr s P.Text
+    , _maxSizeInMegabytes                  :: TF.Attr s P.Int
+    -- ^ @max_size_in_megabytes@ - (Optional)
+    --
+    , _name                                :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _namespaceName              :: TF.Attr s P.Text
+    , _namespaceName                       :: TF.Attr s P.Text
     -- ^ @namespace_name@ - (Required, Forces New)
     --
-    , _requiresDuplicateDetection :: TF.Attr s P.Bool
+    , _requiresDuplicateDetection          :: TF.Attr s P.Bool
     -- ^ @requires_duplicate_detection@ - (Optional, Forces New)
     --
-    , _resourceGroupName          :: TF.Attr s P.Text
+    , _resourceGroupName                   :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _status                     :: TF.Attr s P.Text
+    , _status                              :: TF.Attr s P.Text
     -- ^ @status@ - (Optional)
     --
-    , _supportOrdering            :: TF.Attr s P.Bool
+    , _supportOrdering                     :: TF.Attr s P.Bool
     -- ^ @support_ordering@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1727,9 +1939,13 @@ servicebusTopicResource
 servicebusTopicResource _name _namespaceName _resourceGroupName =
     TF.unsafeResource "azurerm_servicebus_topic" TF.validator $
         ServicebusTopicResource'
-            { _enableBatchedOperations = TF.Nil
+            { _autoDeleteOnIdle = TF.Nil
+            , _defaultMessageTtl = TF.Nil
+            , _duplicateDetectionHistoryTimeWindow = TF.Nil
+            , _enableBatchedOperations = TF.Nil
             , _enableExpress = TF.Nil
             , _enablePartitioning = TF.Nil
+            , _maxSizeInMegabytes = TF.Nil
             , _name = _name
             , _namespaceName = _namespaceName
             , _requiresDuplicateDetection = TF.Nil
@@ -1740,9 +1956,13 @@ servicebusTopicResource _name _namespaceName _resourceGroupName =
 
 instance TF.IsObject (ServicebusTopicResource s) where
     toObject ServicebusTopicResource'{..} = P.catMaybes
-        [ TF.assign "enable_batched_operations" <$> TF.attribute _enableBatchedOperations
+        [ TF.assign "auto_delete_on_idle" <$> TF.attribute _autoDeleteOnIdle
+        , TF.assign "default_message_ttl" <$> TF.attribute _defaultMessageTtl
+        , TF.assign "duplicate_detection_history_time_window" <$> TF.attribute _duplicateDetectionHistoryTimeWindow
+        , TF.assign "enable_batched_operations" <$> TF.attribute _enableBatchedOperations
         , TF.assign "enable_express" <$> TF.attribute _enableExpress
         , TF.assign "enable_partitioning" <$> TF.attribute _enablePartitioning
+        , TF.assign "max_size_in_megabytes" <$> TF.attribute _maxSizeInMegabytes
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "namespace_name" <$> TF.attribute _namespaceName
         , TF.assign "requires_duplicate_detection" <$> TF.attribute _requiresDuplicateDetection
@@ -1753,6 +1973,21 @@ instance TF.IsObject (ServicebusTopicResource s) where
 
 instance TF.IsValid (ServicebusTopicResource s) where
     validator = P.mempty
+
+instance P.HasAutoDeleteOnIdle (ServicebusTopicResource s) (TF.Attr s P.Text) where
+    autoDeleteOnIdle =
+        P.lens (_autoDeleteOnIdle :: ServicebusTopicResource s -> TF.Attr s P.Text)
+               (\s a -> s { _autoDeleteOnIdle = a } :: ServicebusTopicResource s)
+
+instance P.HasDefaultMessageTtl (ServicebusTopicResource s) (TF.Attr s P.Text) where
+    defaultMessageTtl =
+        P.lens (_defaultMessageTtl :: ServicebusTopicResource s -> TF.Attr s P.Text)
+               (\s a -> s { _defaultMessageTtl = a } :: ServicebusTopicResource s)
+
+instance P.HasDuplicateDetectionHistoryTimeWindow (ServicebusTopicResource s) (TF.Attr s P.Text) where
+    duplicateDetectionHistoryTimeWindow =
+        P.lens (_duplicateDetectionHistoryTimeWindow :: ServicebusTopicResource s -> TF.Attr s P.Text)
+               (\s a -> s { _duplicateDetectionHistoryTimeWindow = a } :: ServicebusTopicResource s)
 
 instance P.HasEnableBatchedOperations (ServicebusTopicResource s) (TF.Attr s P.Bool) where
     enableBatchedOperations =
@@ -1768,6 +2003,11 @@ instance P.HasEnablePartitioning (ServicebusTopicResource s) (TF.Attr s P.Bool) 
     enablePartitioning =
         P.lens (_enablePartitioning :: ServicebusTopicResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enablePartitioning = a } :: ServicebusTopicResource s)
+
+instance P.HasMaxSizeInMegabytes (ServicebusTopicResource s) (TF.Attr s P.Int) where
+    maxSizeInMegabytes =
+        P.lens (_maxSizeInMegabytes :: ServicebusTopicResource s -> TF.Attr s P.Int)
+               (\s a -> s { _maxSizeInMegabytes = a } :: ServicebusTopicResource s)
 
 instance P.HasName (ServicebusTopicResource s) (TF.Attr s P.Text) where
     name =
@@ -1933,6 +2173,9 @@ data SnapshotResource s = SnapshotResource'
     { _createOption       :: TF.Attr s P.Text
     -- ^ @create_option@ - (Required)
     --
+    , _diskSizeGb         :: TF.Attr s P.Int
+    -- ^ @disk_size_gb@ - (Optional)
+    --
     , _encryptionSettings :: TF.Attr s (EncryptionSettingsSetting s)
     -- ^ @encryption_settings@ - (Optional)
     --
@@ -1954,6 +2197,9 @@ data SnapshotResource s = SnapshotResource'
     , _storageAccountId   :: TF.Attr s P.Text
     -- ^ @storage_account_id@ - (Optional, Forces New)
     --
+    , _tags               :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @azurerm_snapshot@ resource value.
@@ -1967,6 +2213,7 @@ snapshotResource _location _name _resourceGroupName _createOption =
     TF.unsafeResource "azurerm_snapshot" TF.validator $
         SnapshotResource'
             { _createOption = _createOption
+            , _diskSizeGb = TF.Nil
             , _encryptionSettings = TF.Nil
             , _location = _location
             , _name = _name
@@ -1974,11 +2221,13 @@ snapshotResource _location _name _resourceGroupName _createOption =
             , _sourceResourceId = TF.Nil
             , _sourceUri = TF.Nil
             , _storageAccountId = TF.Nil
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (SnapshotResource s) where
     toObject SnapshotResource'{..} = P.catMaybes
         [ TF.assign "create_option" <$> TF.attribute _createOption
+        , TF.assign "disk_size_gb" <$> TF.attribute _diskSizeGb
         , TF.assign "encryption_settings" <$> TF.attribute _encryptionSettings
         , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
@@ -1986,6 +2235,7 @@ instance TF.IsObject (SnapshotResource s) where
         , TF.assign "source_resource_id" <$> TF.attribute _sourceResourceId
         , TF.assign "source_uri" <$> TF.attribute _sourceUri
         , TF.assign "storage_account_id" <$> TF.attribute _storageAccountId
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (SnapshotResource s) where
@@ -1999,6 +2249,11 @@ instance P.HasCreateOption (SnapshotResource s) (TF.Attr s P.Text) where
     createOption =
         P.lens (_createOption :: SnapshotResource s -> TF.Attr s P.Text)
                (\s a -> s { _createOption = a } :: SnapshotResource s)
+
+instance P.HasDiskSizeGb (SnapshotResource s) (TF.Attr s P.Int) where
+    diskSizeGb =
+        P.lens (_diskSizeGb :: SnapshotResource s -> TF.Attr s P.Int)
+               (\s a -> s { _diskSizeGb = a } :: SnapshotResource s)
 
 instance P.HasEncryptionSettings (SnapshotResource s) (TF.Attr s (EncryptionSettingsSetting s)) where
     encryptionSettings =
@@ -2034,6 +2289,11 @@ instance P.HasStorageAccountId (SnapshotResource s) (TF.Attr s P.Text) where
     storageAccountId =
         P.lens (_storageAccountId :: SnapshotResource s -> TF.Attr s P.Text)
                (\s a -> s { _storageAccountId = a } :: SnapshotResource s)
+
+instance P.HasTags (SnapshotResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: SnapshotResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: SnapshotResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SnapshotResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2129,23 +2389,53 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (SqlActiveDirectoryAdministratorRe
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/sql_database.html terraform documentation>
 -- for more information.
 data SqlDatabaseResource s = SqlDatabaseResource'
-    { _createMode        :: TF.Attr s P.Text
+    { _collation :: TF.Attr s P.Text
+    -- ^ @collation@ - (Optional, Forces New)
+    --
+    , _createMode :: TF.Attr s P.Text
     -- ^ @create_mode@ - (Optional)
     --
-    , _import'           :: TF.Attr s (ImportSetting s)
+    , _edition :: TF.Attr s P.Text
+    -- ^ @edition@ - (Optional)
+    --
+    , _elasticPoolName :: TF.Attr s P.Text
+    -- ^ @elastic_pool_name@ - (Optional)
+    --
+    , _import' :: TF.Attr s (ImportSetting s)
     -- ^ @import@ - (Optional)
     --
-    , _location          :: TF.Attr s P.Text
+    , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required, Forces New)
     --
-    , _name              :: TF.Attr s P.Text
+    , _maxSizeBytes :: TF.Attr s P.Text
+    -- ^ @max_size_bytes@ - (Optional)
+    --
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
+    --
+    , _requestedServiceObjectiveId :: TF.Attr s P.Text
+    -- ^ @requested_service_objective_id@ - (Optional)
+    --
+    , _requestedServiceObjectiveName :: TF.Attr s P.Text
+    -- ^ @requested_service_objective_name@ - (Optional)
     --
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _serverName        :: TF.Attr s P.Text
+    , _restorePointInTime :: TF.Attr s P.Text
+    -- ^ @restore_point_in_time@ - (Optional)
+    --
+    , _serverName :: TF.Attr s P.Text
     -- ^ @server_name@ - (Required, Forces New)
+    --
+    , _sourceDatabaseDeletionDate :: TF.Attr s P.Text
+    -- ^ @source_database_deletion_date@ - (Optional)
+    --
+    , _sourceDatabaseId :: TF.Attr s P.Text
+    -- ^ @source_database_id@ - (Optional)
+    --
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -2159,22 +2449,42 @@ sqlDatabaseResource
 sqlDatabaseResource _location _name _resourceGroupName _serverName =
     TF.unsafeResource "azurerm_sql_database" TF.validator $
         SqlDatabaseResource'
-            { _createMode = TF.value "Default"
+            { _collation = TF.Nil
+            , _createMode = TF.value "Default"
+            , _edition = TF.Nil
+            , _elasticPoolName = TF.Nil
             , _import' = TF.Nil
             , _location = _location
+            , _maxSizeBytes = TF.Nil
             , _name = _name
+            , _requestedServiceObjectiveId = TF.Nil
+            , _requestedServiceObjectiveName = TF.Nil
             , _resourceGroupName = _resourceGroupName
+            , _restorePointInTime = TF.Nil
             , _serverName = _serverName
+            , _sourceDatabaseDeletionDate = TF.Nil
+            , _sourceDatabaseId = TF.Nil
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (SqlDatabaseResource s) where
     toObject SqlDatabaseResource'{..} = P.catMaybes
-        [ TF.assign "create_mode" <$> TF.attribute _createMode
+        [ TF.assign "collation" <$> TF.attribute _collation
+        , TF.assign "create_mode" <$> TF.attribute _createMode
+        , TF.assign "edition" <$> TF.attribute _edition
+        , TF.assign "elastic_pool_name" <$> TF.attribute _elasticPoolName
         , TF.assign "import" <$> TF.attribute _import'
         , TF.assign "location" <$> TF.attribute _location
+        , TF.assign "max_size_bytes" <$> TF.attribute _maxSizeBytes
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "requested_service_objective_id" <$> TF.attribute _requestedServiceObjectiveId
+        , TF.assign "requested_service_objective_name" <$> TF.attribute _requestedServiceObjectiveName
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "restore_point_in_time" <$> TF.attribute _restorePointInTime
         , TF.assign "server_name" <$> TF.attribute _serverName
+        , TF.assign "source_database_deletion_date" <$> TF.attribute _sourceDatabaseDeletionDate
+        , TF.assign "source_database_id" <$> TF.attribute _sourceDatabaseId
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (SqlDatabaseResource s) where
@@ -2184,10 +2494,25 @@ instance TF.IsValid (SqlDatabaseResource s) where
                       :: SqlDatabaseResource s -> TF.Attr s (ImportSetting s))
                   TF.validator
 
+instance P.HasCollation (SqlDatabaseResource s) (TF.Attr s P.Text) where
+    collation =
+        P.lens (_collation :: SqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _collation = a } :: SqlDatabaseResource s)
+
 instance P.HasCreateMode (SqlDatabaseResource s) (TF.Attr s P.Text) where
     createMode =
         P.lens (_createMode :: SqlDatabaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _createMode = a } :: SqlDatabaseResource s)
+
+instance P.HasEdition (SqlDatabaseResource s) (TF.Attr s P.Text) where
+    edition =
+        P.lens (_edition :: SqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _edition = a } :: SqlDatabaseResource s)
+
+instance P.HasElasticPoolName (SqlDatabaseResource s) (TF.Attr s P.Text) where
+    elasticPoolName =
+        P.lens (_elasticPoolName :: SqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _elasticPoolName = a } :: SqlDatabaseResource s)
 
 instance P.HasImport' (SqlDatabaseResource s) (TF.Attr s (ImportSetting s)) where
     import' =
@@ -2199,20 +2524,55 @@ instance P.HasLocation (SqlDatabaseResource s) (TF.Attr s P.Text) where
         P.lens (_location :: SqlDatabaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _location = a } :: SqlDatabaseResource s)
 
+instance P.HasMaxSizeBytes (SqlDatabaseResource s) (TF.Attr s P.Text) where
+    maxSizeBytes =
+        P.lens (_maxSizeBytes :: SqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _maxSizeBytes = a } :: SqlDatabaseResource s)
+
 instance P.HasName (SqlDatabaseResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SqlDatabaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SqlDatabaseResource s)
+
+instance P.HasRequestedServiceObjectiveId (SqlDatabaseResource s) (TF.Attr s P.Text) where
+    requestedServiceObjectiveId =
+        P.lens (_requestedServiceObjectiveId :: SqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _requestedServiceObjectiveId = a } :: SqlDatabaseResource s)
+
+instance P.HasRequestedServiceObjectiveName (SqlDatabaseResource s) (TF.Attr s P.Text) where
+    requestedServiceObjectiveName =
+        P.lens (_requestedServiceObjectiveName :: SqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _requestedServiceObjectiveName = a } :: SqlDatabaseResource s)
 
 instance P.HasResourceGroupName (SqlDatabaseResource s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: SqlDatabaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: SqlDatabaseResource s)
 
+instance P.HasRestorePointInTime (SqlDatabaseResource s) (TF.Attr s P.Text) where
+    restorePointInTime =
+        P.lens (_restorePointInTime :: SqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _restorePointInTime = a } :: SqlDatabaseResource s)
+
 instance P.HasServerName (SqlDatabaseResource s) (TF.Attr s P.Text) where
     serverName =
         P.lens (_serverName :: SqlDatabaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _serverName = a } :: SqlDatabaseResource s)
+
+instance P.HasSourceDatabaseDeletionDate (SqlDatabaseResource s) (TF.Attr s P.Text) where
+    sourceDatabaseDeletionDate =
+        P.lens (_sourceDatabaseDeletionDate :: SqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceDatabaseDeletionDate = a } :: SqlDatabaseResource s)
+
+instance P.HasSourceDatabaseId (SqlDatabaseResource s) (TF.Attr s P.Text) where
+    sourceDatabaseId =
+        P.lens (_sourceDatabaseId :: SqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceDatabaseId = a } :: SqlDatabaseResource s)
+
+instance P.HasTags (SqlDatabaseResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: SqlDatabaseResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: SqlDatabaseResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SqlDatabaseResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2261,7 +2621,13 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (SqlDatabaseResource s)) (TF.Att
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/sql_elasticpool.html terraform documentation>
 -- for more information.
 data SqlElasticpoolResource s = SqlElasticpoolResource'
-    { _dtu               :: TF.Attr s P.Int
+    { _dbDtuMax          :: TF.Attr s P.Int
+    -- ^ @db_dtu_max@ - (Optional)
+    --
+    , _dbDtuMin          :: TF.Attr s P.Int
+    -- ^ @db_dtu_min@ - (Optional)
+    --
+    , _dtu               :: TF.Attr s P.Int
     -- ^ @dtu@ - (Required)
     --
     , _edition           :: TF.Attr s P.Text
@@ -2273,11 +2639,17 @@ data SqlElasticpoolResource s = SqlElasticpoolResource'
     , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _poolSize          :: TF.Attr s P.Int
+    -- ^ @pool_size@ - (Optional)
+    --
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
     , _serverName        :: TF.Attr s P.Text
     -- ^ @server_name@ - (Required, Forces New)
+    --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -2293,26 +2665,44 @@ sqlElasticpoolResource
 sqlElasticpoolResource _dtu _edition _location _name _resourceGroupName _serverName =
     TF.unsafeResource "azurerm_sql_elasticpool" TF.validator $
         SqlElasticpoolResource'
-            { _dtu = _dtu
+            { _dbDtuMax = TF.Nil
+            , _dbDtuMin = TF.Nil
+            , _dtu = _dtu
             , _edition = _edition
             , _location = _location
             , _name = _name
+            , _poolSize = TF.Nil
             , _resourceGroupName = _resourceGroupName
             , _serverName = _serverName
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (SqlElasticpoolResource s) where
     toObject SqlElasticpoolResource'{..} = P.catMaybes
-        [ TF.assign "dtu" <$> TF.attribute _dtu
+        [ TF.assign "db_dtu_max" <$> TF.attribute _dbDtuMax
+        , TF.assign "db_dtu_min" <$> TF.attribute _dbDtuMin
+        , TF.assign "dtu" <$> TF.attribute _dtu
         , TF.assign "edition" <$> TF.attribute _edition
         , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "pool_size" <$> TF.attribute _poolSize
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
         , TF.assign "server_name" <$> TF.attribute _serverName
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (SqlElasticpoolResource s) where
     validator = P.mempty
+
+instance P.HasDbDtuMax (SqlElasticpoolResource s) (TF.Attr s P.Int) where
+    dbDtuMax =
+        P.lens (_dbDtuMax :: SqlElasticpoolResource s -> TF.Attr s P.Int)
+               (\s a -> s { _dbDtuMax = a } :: SqlElasticpoolResource s)
+
+instance P.HasDbDtuMin (SqlElasticpoolResource s) (TF.Attr s P.Int) where
+    dbDtuMin =
+        P.lens (_dbDtuMin :: SqlElasticpoolResource s -> TF.Attr s P.Int)
+               (\s a -> s { _dbDtuMin = a } :: SqlElasticpoolResource s)
 
 instance P.HasDtu (SqlElasticpoolResource s) (TF.Attr s P.Int) where
     dtu =
@@ -2334,6 +2724,11 @@ instance P.HasName (SqlElasticpoolResource s) (TF.Attr s P.Text) where
         P.lens (_name :: SqlElasticpoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SqlElasticpoolResource s)
 
+instance P.HasPoolSize (SqlElasticpoolResource s) (TF.Attr s P.Int) where
+    poolSize =
+        P.lens (_poolSize :: SqlElasticpoolResource s -> TF.Attr s P.Int)
+               (\s a -> s { _poolSize = a } :: SqlElasticpoolResource s)
+
 instance P.HasResourceGroupName (SqlElasticpoolResource s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: SqlElasticpoolResource s -> TF.Attr s P.Text)
@@ -2343,6 +2738,11 @@ instance P.HasServerName (SqlElasticpoolResource s) (TF.Attr s P.Text) where
     serverName =
         P.lens (_serverName :: SqlElasticpoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _serverName = a } :: SqlElasticpoolResource s)
+
+instance P.HasTags (SqlElasticpoolResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: SqlElasticpoolResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: SqlElasticpoolResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SqlElasticpoolResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2462,6 +2862,9 @@ data SqlServerResource s = SqlServerResource'
     , _resourceGroupName          :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
+    , _tags                       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     , _version                    :: TF.Attr s P.Text
     -- ^ @version@ - (Required, Forces New)
     --
@@ -2484,6 +2887,7 @@ sqlServerResource _location _administratorLogin _name _resourceGroupName _admini
             , _location = _location
             , _name = _name
             , _resourceGroupName = _resourceGroupName
+            , _tags = TF.Nil
             , _version = _version
             }
 
@@ -2494,6 +2898,7 @@ instance TF.IsObject (SqlServerResource s) where
         , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "version" <$> TF.attribute _version
         ]
 
@@ -2524,6 +2929,11 @@ instance P.HasResourceGroupName (SqlServerResource s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: SqlServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: SqlServerResource s)
+
+instance P.HasTags (SqlServerResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: SqlServerResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: SqlServerResource s)
 
 instance P.HasVersion (SqlServerResource s) (TF.Attr s P.Text) where
     version =
@@ -2623,7 +3033,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (SqlVirtualNetworkRuleResource s))
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/storage_account.html terraform documentation>
 -- for more information.
 data StorageAccountResource s = StorageAccountResource'
-    { _accountEncryptionSource :: TF.Attr s P.Text
+    { _accessTier              :: TF.Attr s P.Text
+    -- ^ @access_tier@ - (Optional)
+    --
+    , _accountEncryptionSource :: TF.Attr s P.Text
     -- ^ @account_encryption_source@ - (Optional)
     --
     , _accountKind             :: TF.Attr s P.Text
@@ -2647,6 +3060,9 @@ data StorageAccountResource s = StorageAccountResource'
     , _enableHttpsTrafficOnly  :: TF.Attr s P.Bool
     -- ^ @enable_https_traffic_only@ - (Optional)
     --
+    , _identity                :: TF.Attr s (IdentitySetting s)
+    -- ^ @identity@ - (Optional)
+    --
     , _location                :: TF.Attr s P.Text
     -- ^ @location@ - (Required, Forces New)
     --
@@ -2658,6 +3074,9 @@ data StorageAccountResource s = StorageAccountResource'
     --
     , _resourceGroupName       :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _tags                    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -2672,7 +3091,8 @@ storageAccountResource
 storageAccountResource _location _name _resourceGroupName _accountTier _accountReplicationType =
     TF.unsafeResource "azurerm_storage_account" TF.validator $
         StorageAccountResource'
-            { _accountEncryptionSource = TF.value "Microsoft.Storage"
+            { _accessTier = TF.Nil
+            , _accountEncryptionSource = TF.value "Microsoft.Storage"
             , _accountKind = TF.value "Storage"
             , _accountReplicationType = _accountReplicationType
             , _accountTier = _accountTier
@@ -2680,15 +3100,18 @@ storageAccountResource _location _name _resourceGroupName _accountTier _accountR
             , _enableBlobEncryption = TF.value P.True
             , _enableFileEncryption = TF.value P.True
             , _enableHttpsTrafficOnly = TF.Nil
+            , _identity = TF.Nil
             , _location = _location
             , _name = _name
             , _networkRules = TF.Nil
             , _resourceGroupName = _resourceGroupName
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (StorageAccountResource s) where
     toObject StorageAccountResource'{..} = P.catMaybes
-        [ TF.assign "account_encryption_source" <$> TF.attribute _accountEncryptionSource
+        [ TF.assign "access_tier" <$> TF.attribute _accessTier
+        , TF.assign "account_encryption_source" <$> TF.attribute _accountEncryptionSource
         , TF.assign "account_kind" <$> TF.attribute _accountKind
         , TF.assign "account_replication_type" <$> TF.attribute _accountReplicationType
         , TF.assign "account_tier" <$> TF.attribute _accountTier
@@ -2696,10 +3119,12 @@ instance TF.IsObject (StorageAccountResource s) where
         , TF.assign "enable_blob_encryption" <$> TF.attribute _enableBlobEncryption
         , TF.assign "enable_file_encryption" <$> TF.attribute _enableFileEncryption
         , TF.assign "enable_https_traffic_only" <$> TF.attribute _enableHttpsTrafficOnly
+        , TF.assign "identity" <$> TF.attribute _identity
         , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network_rules" <$> TF.attribute _networkRules
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (StorageAccountResource s) where
@@ -2708,10 +3133,19 @@ instance TF.IsValid (StorageAccountResource s) where
                   (_customDomain
                       :: StorageAccountResource s -> TF.Attr s (CustomDomainSetting s))
                   TF.validator
+           P.<> TF.settingsValidator "_identity"
+                  (_identity
+                      :: StorageAccountResource s -> TF.Attr s (IdentitySetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_networkRules"
                   (_networkRules
                       :: StorageAccountResource s -> TF.Attr s (NetworkRulesSetting s))
                   TF.validator
+
+instance P.HasAccessTier (StorageAccountResource s) (TF.Attr s P.Text) where
+    accessTier =
+        P.lens (_accessTier :: StorageAccountResource s -> TF.Attr s P.Text)
+               (\s a -> s { _accessTier = a } :: StorageAccountResource s)
 
 instance P.HasAccountEncryptionSource (StorageAccountResource s) (TF.Attr s P.Text) where
     accountEncryptionSource =
@@ -2753,6 +3187,11 @@ instance P.HasEnableHttpsTrafficOnly (StorageAccountResource s) (TF.Attr s P.Boo
         P.lens (_enableHttpsTrafficOnly :: StorageAccountResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enableHttpsTrafficOnly = a } :: StorageAccountResource s)
 
+instance P.HasIdentity (StorageAccountResource s) (TF.Attr s (IdentitySetting s)) where
+    identity =
+        P.lens (_identity :: StorageAccountResource s -> TF.Attr s (IdentitySetting s))
+               (\s a -> s { _identity = a } :: StorageAccountResource s)
+
 instance P.HasLocation (StorageAccountResource s) (TF.Attr s P.Text) where
     location =
         P.lens (_location :: StorageAccountResource s -> TF.Attr s P.Text)
@@ -2772,6 +3211,11 @@ instance P.HasResourceGroupName (StorageAccountResource s) (TF.Attr s P.Text) wh
     resourceGroupName =
         P.lens (_resourceGroupName :: StorageAccountResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: StorageAccountResource s)
+
+instance P.HasTags (StorageAccountResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: StorageAccountResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: StorageAccountResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageAccountResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -3264,6 +3708,9 @@ data SubnetResource s = SubnetResource'
     { _addressPrefix          :: TF.Attr s P.Text
     -- ^ @address_prefix@ - (Required)
     --
+    , _ipConfigurations       :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @ip_configurations@ - (Optional)
+    --
     , _name                   :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
@@ -3295,6 +3742,7 @@ subnetResource _name _resourceGroupName _virtualNetworkName _addressPrefix =
     TF.unsafeResource "azurerm_subnet" TF.validator $
         SubnetResource'
             { _addressPrefix = _addressPrefix
+            , _ipConfigurations = TF.Nil
             , _name = _name
             , _networkSecurityGroupId = TF.Nil
             , _resourceGroupName = _resourceGroupName
@@ -3306,6 +3754,7 @@ subnetResource _name _resourceGroupName _virtualNetworkName _addressPrefix =
 instance TF.IsObject (SubnetResource s) where
     toObject SubnetResource'{..} = P.catMaybes
         [ TF.assign "address_prefix" <$> TF.attribute _addressPrefix
+        , TF.assign "ip_configurations" <$> TF.attribute _ipConfigurations
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network_security_group_id" <$> TF.attribute _networkSecurityGroupId
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
@@ -3321,6 +3770,11 @@ instance P.HasAddressPrefix (SubnetResource s) (TF.Attr s P.Text) where
     addressPrefix =
         P.lens (_addressPrefix :: SubnetResource s -> TF.Attr s P.Text)
                (\s a -> s { _addressPrefix = a } :: SubnetResource s)
+
+instance P.HasIpConfigurations (SubnetResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    ipConfigurations =
+        P.lens (_ipConfigurations :: SubnetResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _ipConfigurations = a } :: SubnetResource s)
 
 instance P.HasName (SubnetResource s) (TF.Attr s P.Text) where
     name =
@@ -3384,6 +3838,9 @@ data TemplateDeploymentResource s = TemplateDeploymentResource'
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
+    , _templateBody      :: TF.Attr s P.Text
+    -- ^ @template_body@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @azurerm_template_deployment@ resource value.
@@ -3400,6 +3857,7 @@ templateDeploymentResource _deploymentMode _name _resourceGroupName =
             , _parameters = TF.Nil
             , _parametersBody = TF.Nil
             , _resourceGroupName = _resourceGroupName
+            , _templateBody = TF.Nil
             }
 
 instance TF.IsObject (TemplateDeploymentResource s) where
@@ -3409,6 +3867,7 @@ instance TF.IsObject (TemplateDeploymentResource s) where
         , TF.assign "parameters" <$> TF.attribute _parameters
         , TF.assign "parameters_body" <$> TF.attribute _parametersBody
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "template_body" <$> TF.attribute _templateBody
         ]
 
 instance TF.IsValid (TemplateDeploymentResource s) where
@@ -3450,6 +3909,11 @@ instance P.HasResourceGroupName (TemplateDeploymentResource s) (TF.Attr s P.Text
         P.lens (_resourceGroupName :: TemplateDeploymentResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: TemplateDeploymentResource s)
 
+instance P.HasTemplateBody (TemplateDeploymentResource s) (TF.Attr s P.Text) where
+    templateBody =
+        P.lens (_templateBody :: TemplateDeploymentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _templateBody = a } :: TemplateDeploymentResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (TemplateDeploymentResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -3464,7 +3928,13 @@ instance s ~ s' => P.HasComputedTemplateBody (TF.Ref s' (TemplateDeploymentResou
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/traffic_manager_endpoint.html terraform documentation>
 -- for more information.
 data TrafficManagerEndpointResource s = TrafficManagerEndpointResource'
-    { _geoMappings       :: TF.Attr s [TF.Attr s P.Text]
+    { _endpointLocation  :: TF.Attr s P.Text
+    -- ^ @endpoint_location@ - (Optional)
+    --
+    , _endpointStatus    :: TF.Attr s P.Text
+    -- ^ @endpoint_status@ - (Optional)
+    --
+    , _geoMappings       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @geo_mappings@ - (Optional)
     --
     , _minChildEndpoints :: TF.Attr s P.Int
@@ -3473,17 +3943,26 @@ data TrafficManagerEndpointResource s = TrafficManagerEndpointResource'
     , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _priority          :: TF.Attr s P.Int
+    -- ^ @priority@ - (Optional)
+    --
     , _profileName       :: TF.Attr s P.Text
     -- ^ @profile_name@ - (Required, Forces New)
     --
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
+    , _target            :: TF.Attr s P.Text
+    -- ^ @target@ - (Optional)
+    --
     , _targetResourceId  :: TF.Attr s P.Text
     -- ^ @target_resource_id@ - (Optional)
     --
     , _type'             :: TF.Attr s P.Text
     -- ^ @type@ - (Required, Forces New)
+    --
+    , _weight            :: TF.Attr s P.Int
+    -- ^ @weight@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -3497,28 +3976,48 @@ trafficManagerEndpointResource
 trafficManagerEndpointResource _name _profileName _resourceGroupName _type' =
     TF.unsafeResource "azurerm_traffic_manager_endpoint" TF.validator $
         TrafficManagerEndpointResource'
-            { _geoMappings = TF.Nil
+            { _endpointLocation = TF.Nil
+            , _endpointStatus = TF.Nil
+            , _geoMappings = TF.Nil
             , _minChildEndpoints = TF.Nil
             , _name = _name
+            , _priority = TF.Nil
             , _profileName = _profileName
             , _resourceGroupName = _resourceGroupName
+            , _target = TF.Nil
             , _targetResourceId = TF.Nil
             , _type' = _type'
+            , _weight = TF.Nil
             }
 
 instance TF.IsObject (TrafficManagerEndpointResource s) where
     toObject TrafficManagerEndpointResource'{..} = P.catMaybes
-        [ TF.assign "geo_mappings" <$> TF.attribute _geoMappings
+        [ TF.assign "endpoint_location" <$> TF.attribute _endpointLocation
+        , TF.assign "endpoint_status" <$> TF.attribute _endpointStatus
+        , TF.assign "geo_mappings" <$> TF.attribute _geoMappings
         , TF.assign "min_child_endpoints" <$> TF.attribute _minChildEndpoints
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "priority" <$> TF.attribute _priority
         , TF.assign "profile_name" <$> TF.attribute _profileName
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "target" <$> TF.attribute _target
         , TF.assign "target_resource_id" <$> TF.attribute _targetResourceId
         , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "weight" <$> TF.attribute _weight
         ]
 
 instance TF.IsValid (TrafficManagerEndpointResource s) where
     validator = P.mempty
+
+instance P.HasEndpointLocation (TrafficManagerEndpointResource s) (TF.Attr s P.Text) where
+    endpointLocation =
+        P.lens (_endpointLocation :: TrafficManagerEndpointResource s -> TF.Attr s P.Text)
+               (\s a -> s { _endpointLocation = a } :: TrafficManagerEndpointResource s)
+
+instance P.HasEndpointStatus (TrafficManagerEndpointResource s) (TF.Attr s P.Text) where
+    endpointStatus =
+        P.lens (_endpointStatus :: TrafficManagerEndpointResource s -> TF.Attr s P.Text)
+               (\s a -> s { _endpointStatus = a } :: TrafficManagerEndpointResource s)
 
 instance P.HasGeoMappings (TrafficManagerEndpointResource s) (TF.Attr s [TF.Attr s P.Text]) where
     geoMappings =
@@ -3535,6 +4034,11 @@ instance P.HasName (TrafficManagerEndpointResource s) (TF.Attr s P.Text) where
         P.lens (_name :: TrafficManagerEndpointResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: TrafficManagerEndpointResource s)
 
+instance P.HasPriority (TrafficManagerEndpointResource s) (TF.Attr s P.Int) where
+    priority =
+        P.lens (_priority :: TrafficManagerEndpointResource s -> TF.Attr s P.Int)
+               (\s a -> s { _priority = a } :: TrafficManagerEndpointResource s)
+
 instance P.HasProfileName (TrafficManagerEndpointResource s) (TF.Attr s P.Text) where
     profileName =
         P.lens (_profileName :: TrafficManagerEndpointResource s -> TF.Attr s P.Text)
@@ -3545,6 +4049,11 @@ instance P.HasResourceGroupName (TrafficManagerEndpointResource s) (TF.Attr s P.
         P.lens (_resourceGroupName :: TrafficManagerEndpointResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: TrafficManagerEndpointResource s)
 
+instance P.HasTarget (TrafficManagerEndpointResource s) (TF.Attr s P.Text) where
+    target =
+        P.lens (_target :: TrafficManagerEndpointResource s -> TF.Attr s P.Text)
+               (\s a -> s { _target = a } :: TrafficManagerEndpointResource s)
+
 instance P.HasTargetResourceId (TrafficManagerEndpointResource s) (TF.Attr s P.Text) where
     targetResourceId =
         P.lens (_targetResourceId :: TrafficManagerEndpointResource s -> TF.Attr s P.Text)
@@ -3554,6 +4063,11 @@ instance P.HasType' (TrafficManagerEndpointResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: TrafficManagerEndpointResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: TrafficManagerEndpointResource s)
+
+instance P.HasWeight (TrafficManagerEndpointResource s) (TF.Attr s P.Int) where
+    weight =
+        P.lens (_weight :: TrafficManagerEndpointResource s -> TF.Attr s P.Int)
+               (\s a -> s { _weight = a } :: TrafficManagerEndpointResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (TrafficManagerEndpointResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -3590,8 +4104,14 @@ data TrafficManagerProfileResource s = TrafficManagerProfileResource'
     , _name                 :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _profileStatus        :: TF.Attr s P.Text
+    -- ^ @profile_status@ - (Optional)
+    --
     , _resourceGroupName    :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _tags                 :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
     --
     , _trafficRoutingMethod :: TF.Attr s P.Text
     -- ^ @traffic_routing_method@ - (Required)
@@ -3612,7 +4132,9 @@ trafficManagerProfileResource _dnsConfig _monitorConfig _trafficRoutingMethod _n
             { _dnsConfig = _dnsConfig
             , _monitorConfig = _monitorConfig
             , _name = _name
+            , _profileStatus = TF.Nil
             , _resourceGroupName = _resourceGroupName
+            , _tags = TF.Nil
             , _trafficRoutingMethod = _trafficRoutingMethod
             }
 
@@ -3621,7 +4143,9 @@ instance TF.IsObject (TrafficManagerProfileResource s) where
         [ TF.assign "dns_config" <$> TF.attribute _dnsConfig
         , TF.assign "monitor_config" <$> TF.attribute _monitorConfig
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "profile_status" <$> TF.attribute _profileStatus
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "traffic_routing_method" <$> TF.attribute _trafficRoutingMethod
         ]
 
@@ -3643,10 +4167,20 @@ instance P.HasName (TrafficManagerProfileResource s) (TF.Attr s P.Text) where
         P.lens (_name :: TrafficManagerProfileResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: TrafficManagerProfileResource s)
 
+instance P.HasProfileStatus (TrafficManagerProfileResource s) (TF.Attr s P.Text) where
+    profileStatus =
+        P.lens (_profileStatus :: TrafficManagerProfileResource s -> TF.Attr s P.Text)
+               (\s a -> s { _profileStatus = a } :: TrafficManagerProfileResource s)
+
 instance P.HasResourceGroupName (TrafficManagerProfileResource s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: TrafficManagerProfileResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: TrafficManagerProfileResource s)
+
+instance P.HasTags (TrafficManagerProfileResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: TrafficManagerProfileResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: TrafficManagerProfileResource s)
 
 instance P.HasTrafficRoutingMethod (TrafficManagerProfileResource s) (TF.Attr s P.Text) where
     trafficRoutingMethod =
@@ -3679,6 +4213,9 @@ data UserAssignedIdentityResource s = UserAssignedIdentityResource'
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @azurerm_user_assigned_identity@ resource value.
@@ -3693,6 +4230,7 @@ userAssignedIdentityResource _location _name _resourceGroupName =
             { _location = _location
             , _name = _name
             , _resourceGroupName = _resourceGroupName
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (UserAssignedIdentityResource s) where
@@ -3700,6 +4238,7 @@ instance TF.IsObject (UserAssignedIdentityResource s) where
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (UserAssignedIdentityResource s) where
@@ -3720,6 +4259,11 @@ instance P.HasResourceGroupName (UserAssignedIdentityResource s) (TF.Attr s P.Te
         P.lens (_resourceGroupName :: UserAssignedIdentityResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: UserAssignedIdentityResource s)
 
+instance P.HasTags (UserAssignedIdentityResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: UserAssignedIdentityResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: UserAssignedIdentityResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (UserAssignedIdentityResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -3734,7 +4278,10 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (UserAssignedIdentityResource s)
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/virtual_machine.html terraform documentation>
 -- for more information.
 data VirtualMachineResource s = VirtualMachineResource'
-    { _bootDiagnostics :: TF.Attr s (BootDiagnosticsSetting s)
+    { _availabilitySetId :: TF.Attr s P.Text
+    -- ^ @availability_set_id@ - (Optional, Forces New)
+    --
+    , _bootDiagnostics :: TF.Attr s (BootDiagnosticsSetting s)
     -- ^ @boot_diagnostics@ - (Optional)
     --
     , _deleteDataDisksOnTermination :: TF.Attr s P.Bool
@@ -3742,6 +4289,12 @@ data VirtualMachineResource s = VirtualMachineResource'
     --
     , _deleteOsDiskOnTermination :: TF.Attr s P.Bool
     -- ^ @delete_os_disk_on_termination@ - (Optional)
+    --
+    , _identity :: TF.Attr s (IdentitySetting s)
+    -- ^ @identity@ - (Optional)
+    --
+    , _licenseType :: TF.Attr s P.Text
+    -- ^ @license_type@ - (Optional)
     --
     , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required, Forces New)
@@ -3779,8 +4332,17 @@ data VirtualMachineResource s = VirtualMachineResource'
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
+    , _storageDataDisk :: TF.Attr s [TF.Attr s (StorageDataDiskSetting s)]
+    -- ^ @storage_data_disk@ - (Optional)
+    --
+    , _storageImageReference :: TF.Attr s (StorageImageReferenceSetting s)
+    -- ^ @storage_image_reference@ - (Optional, Forces New)
+    --
     , _storageOsDisk :: TF.Attr s (StorageOsDiskSetting s)
     -- ^ @storage_os_disk@ - (Required)
+    --
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
     --
     , _vmSize :: TF.Attr s P.Text
     -- ^ @vm_size@ - (Required)
@@ -3802,9 +4364,12 @@ virtualMachineResource
 virtualMachineResource _storageOsDisk _networkInterfaceIds _location _name _resourceGroupName _vmSize =
     TF.unsafeResource "azurerm_virtual_machine" TF.validator $
         VirtualMachineResource'
-            { _bootDiagnostics = TF.Nil
+            { _availabilitySetId = TF.Nil
+            , _bootDiagnostics = TF.Nil
             , _deleteDataDisksOnTermination = TF.value P.False
             , _deleteOsDiskOnTermination = TF.value P.False
+            , _identity = TF.Nil
+            , _licenseType = TF.Nil
             , _location = _location
             , _name = _name
             , _networkInterfaceIds = _networkInterfaceIds
@@ -3815,16 +4380,22 @@ virtualMachineResource _storageOsDisk _networkInterfaceIds _location _name _reso
             , _plan = TF.Nil
             , _primaryNetworkInterfaceId = TF.Nil
             , _resourceGroupName = _resourceGroupName
+            , _storageDataDisk = TF.Nil
+            , _storageImageReference = TF.Nil
             , _storageOsDisk = _storageOsDisk
+            , _tags = TF.Nil
             , _vmSize = _vmSize
             , _zones = TF.Nil
             }
 
 instance TF.IsObject (VirtualMachineResource s) where
     toObject VirtualMachineResource'{..} = P.catMaybes
-        [ TF.assign "boot_diagnostics" <$> TF.attribute _bootDiagnostics
+        [ TF.assign "availability_set_id" <$> TF.attribute _availabilitySetId
+        , TF.assign "boot_diagnostics" <$> TF.attribute _bootDiagnostics
         , TF.assign "delete_data_disks_on_termination" <$> TF.attribute _deleteDataDisksOnTermination
         , TF.assign "delete_os_disk_on_termination" <$> TF.attribute _deleteOsDiskOnTermination
+        , TF.assign "identity" <$> TF.attribute _identity
+        , TF.assign "license_type" <$> TF.attribute _licenseType
         , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network_interface_ids" <$> TF.attribute _networkInterfaceIds
@@ -3835,7 +4406,10 @@ instance TF.IsObject (VirtualMachineResource s) where
         , TF.assign "plan" <$> TF.attribute _plan
         , TF.assign "primary_network_interface_id" <$> TF.attribute _primaryNetworkInterfaceId
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "storage_data_disk" <$> TF.attribute _storageDataDisk
+        , TF.assign "storage_image_reference" <$> TF.attribute _storageImageReference
         , TF.assign "storage_os_disk" <$> TF.attribute _storageOsDisk
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "vm_size" <$> TF.attribute _vmSize
         , TF.assign "zones" <$> TF.attribute _zones
         ]
@@ -3857,6 +4431,10 @@ instance TF.IsValid (VirtualMachineResource s) where
                   (_bootDiagnostics
                       :: VirtualMachineResource s -> TF.Attr s (BootDiagnosticsSetting s))
                   TF.validator
+           P.<> TF.settingsValidator "_identity"
+                  (_identity
+                      :: VirtualMachineResource s -> TF.Attr s (IdentitySetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_osProfile"
                   (_osProfile
                       :: VirtualMachineResource s -> TF.Attr s (OsProfileSetting s))
@@ -3873,10 +4451,19 @@ instance TF.IsValid (VirtualMachineResource s) where
                   (_plan
                       :: VirtualMachineResource s -> TF.Attr s (PlanSetting s))
                   TF.validator
+           P.<> TF.settingsValidator "_storageImageReference"
+                  (_storageImageReference
+                      :: VirtualMachineResource s -> TF.Attr s (StorageImageReferenceSetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_storageOsDisk"
                   (_storageOsDisk
                       :: VirtualMachineResource s -> TF.Attr s (StorageOsDiskSetting s))
                   TF.validator
+
+instance P.HasAvailabilitySetId (VirtualMachineResource s) (TF.Attr s P.Text) where
+    availabilitySetId =
+        P.lens (_availabilitySetId :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _availabilitySetId = a } :: VirtualMachineResource s)
 
 instance P.HasBootDiagnostics (VirtualMachineResource s) (TF.Attr s (BootDiagnosticsSetting s)) where
     bootDiagnostics =
@@ -3892,6 +4479,16 @@ instance P.HasDeleteOsDiskOnTermination (VirtualMachineResource s) (TF.Attr s P.
     deleteOsDiskOnTermination =
         P.lens (_deleteOsDiskOnTermination :: VirtualMachineResource s -> TF.Attr s P.Bool)
                (\s a -> s { _deleteOsDiskOnTermination = a } :: VirtualMachineResource s)
+
+instance P.HasIdentity (VirtualMachineResource s) (TF.Attr s (IdentitySetting s)) where
+    identity =
+        P.lens (_identity :: VirtualMachineResource s -> TF.Attr s (IdentitySetting s))
+               (\s a -> s { _identity = a } :: VirtualMachineResource s)
+
+instance P.HasLicenseType (VirtualMachineResource s) (TF.Attr s P.Text) where
+    licenseType =
+        P.lens (_licenseType :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _licenseType = a } :: VirtualMachineResource s)
 
 instance P.HasLocation (VirtualMachineResource s) (TF.Attr s P.Text) where
     location =
@@ -3943,10 +4540,25 @@ instance P.HasResourceGroupName (VirtualMachineResource s) (TF.Attr s P.Text) wh
         P.lens (_resourceGroupName :: VirtualMachineResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: VirtualMachineResource s)
 
+instance P.HasStorageDataDisk (VirtualMachineResource s) (TF.Attr s [TF.Attr s (StorageDataDiskSetting s)]) where
+    storageDataDisk =
+        P.lens (_storageDataDisk :: VirtualMachineResource s -> TF.Attr s [TF.Attr s (StorageDataDiskSetting s)])
+               (\s a -> s { _storageDataDisk = a } :: VirtualMachineResource s)
+
+instance P.HasStorageImageReference (VirtualMachineResource s) (TF.Attr s (StorageImageReferenceSetting s)) where
+    storageImageReference =
+        P.lens (_storageImageReference :: VirtualMachineResource s -> TF.Attr s (StorageImageReferenceSetting s))
+               (\s a -> s { _storageImageReference = a } :: VirtualMachineResource s)
+
 instance P.HasStorageOsDisk (VirtualMachineResource s) (TF.Attr s (StorageOsDiskSetting s)) where
     storageOsDisk =
         P.lens (_storageOsDisk :: VirtualMachineResource s -> TF.Attr s (StorageOsDiskSetting s))
                (\s a -> s { _storageOsDisk = a } :: VirtualMachineResource s)
+
+instance P.HasTags (VirtualMachineResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: VirtualMachineResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: VirtualMachineResource s)
 
 instance P.HasVmSize (VirtualMachineResource s) (TF.Attr s P.Text) where
     vmSize =
@@ -4094,6 +4706,9 @@ data VirtualMachineExtensionResource s = VirtualMachineExtensionResource'
     , _settings                :: TF.Attr s P.Text
     -- ^ @settings@ - (Optional)
     --
+    , _tags                    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     , _type'                   :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
@@ -4125,6 +4740,7 @@ virtualMachineExtensionResource _location _name _resourceGroupName _virtualMachi
             , _publisher = _publisher
             , _resourceGroupName = _resourceGroupName
             , _settings = TF.Nil
+            , _tags = TF.Nil
             , _type' = _type'
             , _typeHandlerVersion = _typeHandlerVersion
             , _virtualMachineName = _virtualMachineName
@@ -4139,6 +4755,7 @@ instance TF.IsObject (VirtualMachineExtensionResource s) where
         , TF.assign "publisher" <$> TF.attribute _publisher
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
         , TF.assign "settings" <$> TF.attribute _settings
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "type" <$> TF.attribute _type'
         , TF.assign "type_handler_version" <$> TF.attribute _typeHandlerVersion
         , TF.assign "virtual_machine_name" <$> TF.attribute _virtualMachineName
@@ -4182,6 +4799,11 @@ instance P.HasSettings (VirtualMachineExtensionResource s) (TF.Attr s P.Text) wh
         P.lens (_settings :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
                (\s a -> s { _settings = a } :: VirtualMachineExtensionResource s)
 
+instance P.HasTags (VirtualMachineExtensionResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: VirtualMachineExtensionResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: VirtualMachineExtensionResource s)
+
 instance P.HasType' (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
@@ -4214,6 +4836,12 @@ data VirtualMachineScaleSetResource s = VirtualMachineScaleSetResource'
     , _extension :: TF.Attr s [TF.Attr s (ExtensionSetting s)]
     -- ^ @extension@ - (Optional)
     --
+    , _identity :: TF.Attr s (IdentitySetting s)
+    -- ^ @identity@ - (Optional)
+    --
+    , _licenseType :: TF.Attr s P.Text
+    -- ^ @license_type@ - (Optional)
+    --
     , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required, Forces New)
     --
@@ -4225,6 +4853,9 @@ data VirtualMachineScaleSetResource s = VirtualMachineScaleSetResource'
     --
     , _osProfile :: TF.Attr s (OsProfileSetting s)
     -- ^ @os_profile@ - (Required)
+    --
+    , _osProfileLinuxConfig :: TF.Attr s (OsProfileLinuxConfigSetting s)
+    -- ^ @os_profile_linux_config@ - (Optional)
     --
     , _osProfileSecrets :: TF.Attr s [TF.Attr s (OsProfileSecretsSetting s)]
     -- ^ @os_profile_secrets@ - (Optional)
@@ -4253,8 +4884,14 @@ data VirtualMachineScaleSetResource s = VirtualMachineScaleSetResource'
     , _storageProfileDataDisk :: TF.Attr s [TF.Attr s (StorageProfileDataDiskSetting s)]
     -- ^ @storage_profile_data_disk@ - (Optional)
     --
+    , _storageProfileImageReference :: TF.Attr s (StorageProfileImageReferenceSetting s)
+    -- ^ @storage_profile_image_reference@ - (Optional)
+    --
     , _storageProfileOsDisk :: TF.Attr s (StorageProfileOsDiskSetting s)
     -- ^ @storage_profile_os_disk@ - (Required)
+    --
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
     --
     , _upgradePolicyMode :: TF.Attr s P.Text
     -- ^ @upgrade_policy_mode@ - (Required)
@@ -4280,10 +4917,13 @@ virtualMachineScaleSetResource _storageProfileOsDisk _location _upgradePolicyMod
         VirtualMachineScaleSetResource'
             { _bootDiagnostics = TF.Nil
             , _extension = TF.Nil
+            , _identity = TF.Nil
+            , _licenseType = TF.Nil
             , _location = _location
             , _name = _name
             , _networkProfile = _networkProfile
             , _osProfile = _osProfile
+            , _osProfileLinuxConfig = TF.Nil
             , _osProfileSecrets = TF.Nil
             , _osProfileWindowsConfig = TF.Nil
             , _overprovision = TF.value P.True
@@ -4293,7 +4933,9 @@ virtualMachineScaleSetResource _storageProfileOsDisk _location _upgradePolicyMod
             , _singlePlacementGroup = TF.value P.True
             , _sku = _sku
             , _storageProfileDataDisk = TF.Nil
+            , _storageProfileImageReference = TF.Nil
             , _storageProfileOsDisk = _storageProfileOsDisk
+            , _tags = TF.Nil
             , _upgradePolicyMode = _upgradePolicyMode
             , _zones = TF.Nil
             }
@@ -4302,10 +4944,13 @@ instance TF.IsObject (VirtualMachineScaleSetResource s) where
     toObject VirtualMachineScaleSetResource'{..} = P.catMaybes
         [ TF.assign "boot_diagnostics" <$> TF.attribute _bootDiagnostics
         , TF.assign "extension" <$> TF.attribute _extension
+        , TF.assign "identity" <$> TF.attribute _identity
+        , TF.assign "license_type" <$> TF.attribute _licenseType
         , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network_profile" <$> TF.attribute _networkProfile
         , TF.assign "os_profile" <$> TF.attribute _osProfile
+        , TF.assign "os_profile_linux_config" <$> TF.attribute _osProfileLinuxConfig
         , TF.assign "os_profile_secrets" <$> TF.attribute _osProfileSecrets
         , TF.assign "os_profile_windows_config" <$> TF.attribute _osProfileWindowsConfig
         , TF.assign "overprovision" <$> TF.attribute _overprovision
@@ -4315,7 +4960,9 @@ instance TF.IsObject (VirtualMachineScaleSetResource s) where
         , TF.assign "single_placement_group" <$> TF.attribute _singlePlacementGroup
         , TF.assign "sku" <$> TF.attribute _sku
         , TF.assign "storage_profile_data_disk" <$> TF.attribute _storageProfileDataDisk
+        , TF.assign "storage_profile_image_reference" <$> TF.attribute _storageProfileImageReference
         , TF.assign "storage_profile_os_disk" <$> TF.attribute _storageProfileOsDisk
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "upgrade_policy_mode" <$> TF.attribute _upgradePolicyMode
         , TF.assign "zones" <$> TF.attribute _zones
         ]
@@ -4326,9 +4973,17 @@ instance TF.IsValid (VirtualMachineScaleSetResource s) where
                   (_bootDiagnostics
                       :: VirtualMachineScaleSetResource s -> TF.Attr s (BootDiagnosticsSetting s))
                   TF.validator
+           P.<> TF.settingsValidator "_identity"
+                  (_identity
+                      :: VirtualMachineScaleSetResource s -> TF.Attr s (IdentitySetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_osProfile"
                   (_osProfile
                       :: VirtualMachineScaleSetResource s -> TF.Attr s (OsProfileSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_osProfileLinuxConfig"
+                  (_osProfileLinuxConfig
+                      :: VirtualMachineScaleSetResource s -> TF.Attr s (OsProfileLinuxConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_osProfileWindowsConfig"
                   (_osProfileWindowsConfig
@@ -4341,6 +4996,10 @@ instance TF.IsValid (VirtualMachineScaleSetResource s) where
            P.<> TF.settingsValidator "_sku"
                   (_sku
                       :: VirtualMachineScaleSetResource s -> TF.Attr s (SkuSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_storageProfileImageReference"
+                  (_storageProfileImageReference
+                      :: VirtualMachineScaleSetResource s -> TF.Attr s (StorageProfileImageReferenceSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_storageProfileOsDisk"
                   (_storageProfileOsDisk
@@ -4356,6 +5015,16 @@ instance P.HasExtension (VirtualMachineScaleSetResource s) (TF.Attr s [TF.Attr s
     extension =
         P.lens (_extension :: VirtualMachineScaleSetResource s -> TF.Attr s [TF.Attr s (ExtensionSetting s)])
                (\s a -> s { _extension = a } :: VirtualMachineScaleSetResource s)
+
+instance P.HasIdentity (VirtualMachineScaleSetResource s) (TF.Attr s (IdentitySetting s)) where
+    identity =
+        P.lens (_identity :: VirtualMachineScaleSetResource s -> TF.Attr s (IdentitySetting s))
+               (\s a -> s { _identity = a } :: VirtualMachineScaleSetResource s)
+
+instance P.HasLicenseType (VirtualMachineScaleSetResource s) (TF.Attr s P.Text) where
+    licenseType =
+        P.lens (_licenseType :: VirtualMachineScaleSetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _licenseType = a } :: VirtualMachineScaleSetResource s)
 
 instance P.HasLocation (VirtualMachineScaleSetResource s) (TF.Attr s P.Text) where
     location =
@@ -4376,6 +5045,11 @@ instance P.HasOsProfile (VirtualMachineScaleSetResource s) (TF.Attr s (OsProfile
     osProfile =
         P.lens (_osProfile :: VirtualMachineScaleSetResource s -> TF.Attr s (OsProfileSetting s))
                (\s a -> s { _osProfile = a } :: VirtualMachineScaleSetResource s)
+
+instance P.HasOsProfileLinuxConfig (VirtualMachineScaleSetResource s) (TF.Attr s (OsProfileLinuxConfigSetting s)) where
+    osProfileLinuxConfig =
+        P.lens (_osProfileLinuxConfig :: VirtualMachineScaleSetResource s -> TF.Attr s (OsProfileLinuxConfigSetting s))
+               (\s a -> s { _osProfileLinuxConfig = a } :: VirtualMachineScaleSetResource s)
 
 instance P.HasOsProfileSecrets (VirtualMachineScaleSetResource s) (TF.Attr s [TF.Attr s (OsProfileSecretsSetting s)]) where
     osProfileSecrets =
@@ -4422,10 +5096,20 @@ instance P.HasStorageProfileDataDisk (VirtualMachineScaleSetResource s) (TF.Attr
         P.lens (_storageProfileDataDisk :: VirtualMachineScaleSetResource s -> TF.Attr s [TF.Attr s (StorageProfileDataDiskSetting s)])
                (\s a -> s { _storageProfileDataDisk = a } :: VirtualMachineScaleSetResource s)
 
+instance P.HasStorageProfileImageReference (VirtualMachineScaleSetResource s) (TF.Attr s (StorageProfileImageReferenceSetting s)) where
+    storageProfileImageReference =
+        P.lens (_storageProfileImageReference :: VirtualMachineScaleSetResource s -> TF.Attr s (StorageProfileImageReferenceSetting s))
+               (\s a -> s { _storageProfileImageReference = a } :: VirtualMachineScaleSetResource s)
+
 instance P.HasStorageProfileOsDisk (VirtualMachineScaleSetResource s) (TF.Attr s (StorageProfileOsDiskSetting s)) where
     storageProfileOsDisk =
         P.lens (_storageProfileOsDisk :: VirtualMachineScaleSetResource s -> TF.Attr s (StorageProfileOsDiskSetting s))
                (\s a -> s { _storageProfileOsDisk = a } :: VirtualMachineScaleSetResource s)
+
+instance P.HasTags (VirtualMachineScaleSetResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: VirtualMachineScaleSetResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: VirtualMachineScaleSetResource s)
 
 instance P.HasUpgradePolicyMode (VirtualMachineScaleSetResource s) (TF.Attr s P.Text) where
     upgradePolicyMode =
@@ -4475,6 +5159,12 @@ data VirtualNetworkResource s = VirtualNetworkResource'
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
+    , _subnet            :: TF.Attr s [TF.Attr s (SubnetSetting s)]
+    -- ^ @subnet@ - (Optional)
+    --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @azurerm_virtual_network@ resource value.
@@ -4492,6 +5182,8 @@ virtualNetworkResource _location _name _resourceGroupName _addressSpace =
             , _location = _location
             , _name = _name
             , _resourceGroupName = _resourceGroupName
+            , _subnet = TF.Nil
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (VirtualNetworkResource s) where
@@ -4501,6 +5193,8 @@ instance TF.IsObject (VirtualNetworkResource s) where
         , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "subnet" <$> TF.attribute _subnet
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (VirtualNetworkResource s) where
@@ -4531,6 +5225,16 @@ instance P.HasResourceGroupName (VirtualNetworkResource s) (TF.Attr s P.Text) wh
         P.lens (_resourceGroupName :: VirtualNetworkResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: VirtualNetworkResource s)
 
+instance P.HasSubnet (VirtualNetworkResource s) (TF.Attr s [TF.Attr s (SubnetSetting s)]) where
+    subnet =
+        P.lens (_subnet :: VirtualNetworkResource s -> TF.Attr s [TF.Attr s (SubnetSetting s)])
+               (\s a -> s { _subnet = a } :: VirtualNetworkResource s)
+
+instance P.HasTags (VirtualNetworkResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: VirtualNetworkResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: VirtualNetworkResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualNetworkResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -4545,8 +5249,17 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (VirtualNetworkResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/virtual_network_gateway.html terraform documentation>
 -- for more information.
 data VirtualNetworkGatewayResource s = VirtualNetworkGatewayResource'
-    { _defaultLocalNetworkGatewayId :: TF.Attr s P.Text
+    { _activeActive :: TF.Attr s P.Bool
+    -- ^ @active_active@ - (Optional)
+    --
+    , _bgpSettings :: TF.Attr s (BgpSettingsSetting s)
+    -- ^ @bgp_settings@ - (Optional)
+    --
+    , _defaultLocalNetworkGatewayId :: TF.Attr s P.Text
     -- ^ @default_local_network_gateway_id@ - (Optional)
+    --
+    , _enableBgp :: TF.Attr s P.Bool
+    -- ^ @enable_bgp@ - (Optional)
     --
     , _ipConfiguration :: TF.Attr s [TF.Attr s (IpConfigurationSetting s)]
     -- ^ @ip_configuration@ - (Required)
@@ -4562,6 +5275,9 @@ data VirtualNetworkGatewayResource s = VirtualNetworkGatewayResource'
     --
     , _sku :: TF.Attr s P.Text
     -- ^ @sku@ - (Required)
+    --
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
     --
     , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required, Forces New)
@@ -4586,12 +5302,16 @@ virtualNetworkGatewayResource
 virtualNetworkGatewayResource _ipConfiguration _location _name _resourceGroupName _sku _type' =
     TF.unsafeResource "azurerm_virtual_network_gateway" TF.validator $
         VirtualNetworkGatewayResource'
-            { _defaultLocalNetworkGatewayId = TF.Nil
+            { _activeActive = TF.Nil
+            , _bgpSettings = TF.Nil
+            , _defaultLocalNetworkGatewayId = TF.Nil
+            , _enableBgp = TF.Nil
             , _ipConfiguration = _ipConfiguration
             , _location = _location
             , _name = _name
             , _resourceGroupName = _resourceGroupName
             , _sku = _sku
+            , _tags = TF.Nil
             , _type' = _type'
             , _vpnClientConfiguration = TF.Nil
             , _vpnType = TF.value "RouteBased"
@@ -4599,12 +5319,16 @@ virtualNetworkGatewayResource _ipConfiguration _location _name _resourceGroupNam
 
 instance TF.IsObject (VirtualNetworkGatewayResource s) where
     toObject VirtualNetworkGatewayResource'{..} = P.catMaybes
-        [ TF.assign "default_local_network_gateway_id" <$> TF.attribute _defaultLocalNetworkGatewayId
+        [ TF.assign "active_active" <$> TF.attribute _activeActive
+        , TF.assign "bgp_settings" <$> TF.attribute _bgpSettings
+        , TF.assign "default_local_network_gateway_id" <$> TF.attribute _defaultLocalNetworkGatewayId
+        , TF.assign "enable_bgp" <$> TF.attribute _enableBgp
         , TF.assign "ip_configuration" <$> TF.attribute _ipConfiguration
         , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
         , TF.assign "sku" <$> TF.attribute _sku
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "type" <$> TF.attribute _type'
         , TF.assign "vpn_client_configuration" <$> TF.attribute _vpnClientConfiguration
         , TF.assign "vpn_type" <$> TF.attribute _vpnType
@@ -4612,15 +5336,34 @@ instance TF.IsObject (VirtualNetworkGatewayResource s) where
 
 instance TF.IsValid (VirtualNetworkGatewayResource s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_bgpSettings"
+                  (_bgpSettings
+                      :: VirtualNetworkGatewayResource s -> TF.Attr s (BgpSettingsSetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_vpnClientConfiguration"
                   (_vpnClientConfiguration
                       :: VirtualNetworkGatewayResource s -> TF.Attr s (VpnClientConfigurationSetting s))
                   TF.validator
 
+instance P.HasActiveActive (VirtualNetworkGatewayResource s) (TF.Attr s P.Bool) where
+    activeActive =
+        P.lens (_activeActive :: VirtualNetworkGatewayResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _activeActive = a } :: VirtualNetworkGatewayResource s)
+
+instance P.HasBgpSettings (VirtualNetworkGatewayResource s) (TF.Attr s (BgpSettingsSetting s)) where
+    bgpSettings =
+        P.lens (_bgpSettings :: VirtualNetworkGatewayResource s -> TF.Attr s (BgpSettingsSetting s))
+               (\s a -> s { _bgpSettings = a } :: VirtualNetworkGatewayResource s)
+
 instance P.HasDefaultLocalNetworkGatewayId (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
     defaultLocalNetworkGatewayId =
         P.lens (_defaultLocalNetworkGatewayId :: VirtualNetworkGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _defaultLocalNetworkGatewayId = a } :: VirtualNetworkGatewayResource s)
+
+instance P.HasEnableBgp (VirtualNetworkGatewayResource s) (TF.Attr s P.Bool) where
+    enableBgp =
+        P.lens (_enableBgp :: VirtualNetworkGatewayResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enableBgp = a } :: VirtualNetworkGatewayResource s)
 
 instance P.HasIpConfiguration (VirtualNetworkGatewayResource s) (TF.Attr s [TF.Attr s (IpConfigurationSetting s)]) where
     ipConfiguration =
@@ -4646,6 +5389,11 @@ instance P.HasSku (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
     sku =
         P.lens (_sku :: VirtualNetworkGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _sku = a } :: VirtualNetworkGatewayResource s)
+
+instance P.HasTags (VirtualNetworkGatewayResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: VirtualNetworkGatewayResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: VirtualNetworkGatewayResource s)
 
 instance P.HasType' (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
     type' =
@@ -4682,37 +5430,49 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (VirtualNetworkGatewayResource s
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/virtual_network_gateway_connection.html terraform documentation>
 -- for more information.
 data VirtualNetworkGatewayConnectionResource s = VirtualNetworkGatewayConnectionResource'
-    { _authorizationKey            :: TF.Attr s P.Text
+    { _authorizationKey :: TF.Attr s P.Text
     -- ^ @authorization_key@ - (Optional)
     --
-    , _expressRouteCircuitId       :: TF.Attr s P.Text
+    , _enableBgp :: TF.Attr s P.Bool
+    -- ^ @enable_bgp@ - (Optional)
+    --
+    , _expressRouteCircuitId :: TF.Attr s P.Text
     -- ^ @express_route_circuit_id@ - (Optional, Forces New)
     --
-    , _ipsecPolicy                 :: TF.Attr s (IpsecPolicySetting s)
+    , _ipsecPolicy :: TF.Attr s (IpsecPolicySetting s)
     -- ^ @ipsec_policy@ - (Optional)
     --
-    , _localNetworkGatewayId       :: TF.Attr s P.Text
+    , _localNetworkGatewayId :: TF.Attr s P.Text
     -- ^ @local_network_gateway_id@ - (Optional)
     --
-    , _location                    :: TF.Attr s P.Text
+    , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required, Forces New)
     --
-    , _name                        :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
     , _peerVirtualNetworkGatewayId :: TF.Attr s P.Text
     -- ^ @peer_virtual_network_gateway_id@ - (Optional, Forces New)
     --
-    , _resourceGroupName           :: TF.Attr s P.Text
+    , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _sharedKey                   :: TF.Attr s P.Text
+    , _routingWeight :: TF.Attr s P.Int
+    -- ^ @routing_weight@ - (Optional)
+    --
+    , _sharedKey :: TF.Attr s P.Text
     -- ^ @shared_key@ - (Optional)
     --
-    , _type'                       :: TF.Attr s P.Text
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required, Forces New)
     --
-    , _virtualNetworkGatewayId     :: TF.Attr s P.Text
+    , _usePolicyBasedTrafficSelectors :: TF.Attr s P.Bool
+    -- ^ @use_policy_based_traffic_selectors@ - (Optional)
+    --
+    , _virtualNetworkGatewayId :: TF.Attr s P.Text
     -- ^ @virtual_network_gateway_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -4729,6 +5489,7 @@ virtualNetworkGatewayConnectionResource _virtualNetworkGatewayId _location _name
     TF.unsafeResource "azurerm_virtual_network_gateway_connection" TF.validator $
         VirtualNetworkGatewayConnectionResource'
             { _authorizationKey = TF.Nil
+            , _enableBgp = TF.Nil
             , _expressRouteCircuitId = TF.Nil
             , _ipsecPolicy = TF.Nil
             , _localNetworkGatewayId = TF.Nil
@@ -4736,14 +5497,18 @@ virtualNetworkGatewayConnectionResource _virtualNetworkGatewayId _location _name
             , _name = _name
             , _peerVirtualNetworkGatewayId = TF.Nil
             , _resourceGroupName = _resourceGroupName
+            , _routingWeight = TF.Nil
             , _sharedKey = TF.Nil
+            , _tags = TF.Nil
             , _type' = _type'
+            , _usePolicyBasedTrafficSelectors = TF.Nil
             , _virtualNetworkGatewayId = _virtualNetworkGatewayId
             }
 
 instance TF.IsObject (VirtualNetworkGatewayConnectionResource s) where
     toObject VirtualNetworkGatewayConnectionResource'{..} = P.catMaybes
         [ TF.assign "authorization_key" <$> TF.attribute _authorizationKey
+        , TF.assign "enable_bgp" <$> TF.attribute _enableBgp
         , TF.assign "express_route_circuit_id" <$> TF.attribute _expressRouteCircuitId
         , TF.assign "ipsec_policy" <$> TF.attribute _ipsecPolicy
         , TF.assign "local_network_gateway_id" <$> TF.attribute _localNetworkGatewayId
@@ -4751,8 +5516,11 @@ instance TF.IsObject (VirtualNetworkGatewayConnectionResource s) where
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "peer_virtual_network_gateway_id" <$> TF.attribute _peerVirtualNetworkGatewayId
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "routing_weight" <$> TF.attribute _routingWeight
         , TF.assign "shared_key" <$> TF.attribute _sharedKey
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "use_policy_based_traffic_selectors" <$> TF.attribute _usePolicyBasedTrafficSelectors
         , TF.assign "virtual_network_gateway_id" <$> TF.attribute _virtualNetworkGatewayId
         ]
 
@@ -4767,6 +5535,11 @@ instance P.HasAuthorizationKey (VirtualNetworkGatewayConnectionResource s) (TF.A
     authorizationKey =
         P.lens (_authorizationKey :: VirtualNetworkGatewayConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _authorizationKey = a } :: VirtualNetworkGatewayConnectionResource s)
+
+instance P.HasEnableBgp (VirtualNetworkGatewayConnectionResource s) (TF.Attr s P.Bool) where
+    enableBgp =
+        P.lens (_enableBgp :: VirtualNetworkGatewayConnectionResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enableBgp = a } :: VirtualNetworkGatewayConnectionResource s)
 
 instance P.HasExpressRouteCircuitId (VirtualNetworkGatewayConnectionResource s) (TF.Attr s P.Text) where
     expressRouteCircuitId =
@@ -4803,15 +5576,30 @@ instance P.HasResourceGroupName (VirtualNetworkGatewayConnectionResource s) (TF.
         P.lens (_resourceGroupName :: VirtualNetworkGatewayConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: VirtualNetworkGatewayConnectionResource s)
 
+instance P.HasRoutingWeight (VirtualNetworkGatewayConnectionResource s) (TF.Attr s P.Int) where
+    routingWeight =
+        P.lens (_routingWeight :: VirtualNetworkGatewayConnectionResource s -> TF.Attr s P.Int)
+               (\s a -> s { _routingWeight = a } :: VirtualNetworkGatewayConnectionResource s)
+
 instance P.HasSharedKey (VirtualNetworkGatewayConnectionResource s) (TF.Attr s P.Text) where
     sharedKey =
         P.lens (_sharedKey :: VirtualNetworkGatewayConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _sharedKey = a } :: VirtualNetworkGatewayConnectionResource s)
 
+instance P.HasTags (VirtualNetworkGatewayConnectionResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: VirtualNetworkGatewayConnectionResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: VirtualNetworkGatewayConnectionResource s)
+
 instance P.HasType' (VirtualNetworkGatewayConnectionResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: VirtualNetworkGatewayConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: VirtualNetworkGatewayConnectionResource s)
+
+instance P.HasUsePolicyBasedTrafficSelectors (VirtualNetworkGatewayConnectionResource s) (TF.Attr s P.Bool) where
+    usePolicyBasedTrafficSelectors =
+        P.lens (_usePolicyBasedTrafficSelectors :: VirtualNetworkGatewayConnectionResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _usePolicyBasedTrafficSelectors = a } :: VirtualNetworkGatewayConnectionResource s)
 
 instance P.HasVirtualNetworkGatewayId (VirtualNetworkGatewayConnectionResource s) (TF.Attr s P.Text) where
     virtualNetworkGatewayId =
@@ -4838,16 +5626,28 @@ instance s ~ s' => P.HasComputedUsePolicyBasedTrafficSelectors (TF.Ref s' (Virtu
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html terraform documentation>
 -- for more information.
 data VirtualNetworkPeeringResource s = VirtualNetworkPeeringResource'
-    { _name                   :: TF.Attr s P.Text
+    { _allowForwardedTraffic     :: TF.Attr s P.Bool
+    -- ^ @allow_forwarded_traffic@ - (Optional)
+    --
+    , _allowGatewayTransit       :: TF.Attr s P.Bool
+    -- ^ @allow_gateway_transit@ - (Optional)
+    --
+    , _allowVirtualNetworkAccess :: TF.Attr s P.Bool
+    -- ^ @allow_virtual_network_access@ - (Optional)
+    --
+    , _name                      :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _remoteVirtualNetworkId :: TF.Attr s P.Text
+    , _remoteVirtualNetworkId    :: TF.Attr s P.Text
     -- ^ @remote_virtual_network_id@ - (Required, Forces New)
     --
-    , _resourceGroupName      :: TF.Attr s P.Text
+    , _resourceGroupName         :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _virtualNetworkName     :: TF.Attr s P.Text
+    , _useRemoteGateways         :: TF.Attr s P.Bool
+    -- ^ @use_remote_gateways@ - (Optional)
+    --
+    , _virtualNetworkName        :: TF.Attr s P.Text
     -- ^ @virtual_network_name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -4862,22 +5662,45 @@ virtualNetworkPeeringResource
 virtualNetworkPeeringResource _remoteVirtualNetworkId _name _resourceGroupName _virtualNetworkName =
     TF.unsafeResource "azurerm_virtual_network_peering" TF.validator $
         VirtualNetworkPeeringResource'
-            { _name = _name
+            { _allowForwardedTraffic = TF.Nil
+            , _allowGatewayTransit = TF.Nil
+            , _allowVirtualNetworkAccess = TF.Nil
+            , _name = _name
             , _remoteVirtualNetworkId = _remoteVirtualNetworkId
             , _resourceGroupName = _resourceGroupName
+            , _useRemoteGateways = TF.Nil
             , _virtualNetworkName = _virtualNetworkName
             }
 
 instance TF.IsObject (VirtualNetworkPeeringResource s) where
     toObject VirtualNetworkPeeringResource'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.assign "allow_forwarded_traffic" <$> TF.attribute _allowForwardedTraffic
+        , TF.assign "allow_gateway_transit" <$> TF.attribute _allowGatewayTransit
+        , TF.assign "allow_virtual_network_access" <$> TF.attribute _allowVirtualNetworkAccess
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "remote_virtual_network_id" <$> TF.attribute _remoteVirtualNetworkId
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "use_remote_gateways" <$> TF.attribute _useRemoteGateways
         , TF.assign "virtual_network_name" <$> TF.attribute _virtualNetworkName
         ]
 
 instance TF.IsValid (VirtualNetworkPeeringResource s) where
     validator = P.mempty
+
+instance P.HasAllowForwardedTraffic (VirtualNetworkPeeringResource s) (TF.Attr s P.Bool) where
+    allowForwardedTraffic =
+        P.lens (_allowForwardedTraffic :: VirtualNetworkPeeringResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowForwardedTraffic = a } :: VirtualNetworkPeeringResource s)
+
+instance P.HasAllowGatewayTransit (VirtualNetworkPeeringResource s) (TF.Attr s P.Bool) where
+    allowGatewayTransit =
+        P.lens (_allowGatewayTransit :: VirtualNetworkPeeringResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowGatewayTransit = a } :: VirtualNetworkPeeringResource s)
+
+instance P.HasAllowVirtualNetworkAccess (VirtualNetworkPeeringResource s) (TF.Attr s P.Bool) where
+    allowVirtualNetworkAccess =
+        P.lens (_allowVirtualNetworkAccess :: VirtualNetworkPeeringResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowVirtualNetworkAccess = a } :: VirtualNetworkPeeringResource s)
 
 instance P.HasName (VirtualNetworkPeeringResource s) (TF.Attr s P.Text) where
     name =
@@ -4893,6 +5716,11 @@ instance P.HasResourceGroupName (VirtualNetworkPeeringResource s) (TF.Attr s P.T
     resourceGroupName =
         P.lens (_resourceGroupName :: VirtualNetworkPeeringResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: VirtualNetworkPeeringResource s)
+
+instance P.HasUseRemoteGateways (VirtualNetworkPeeringResource s) (TF.Attr s P.Bool) where
+    useRemoteGateways =
+        P.lens (_useRemoteGateways :: VirtualNetworkPeeringResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _useRemoteGateways = a } :: VirtualNetworkPeeringResource s)
 
 instance P.HasVirtualNetworkName (VirtualNetworkPeeringResource s) (TF.Attr s P.Text) where
     virtualNetworkName =

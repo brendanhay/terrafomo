@@ -218,6 +218,9 @@ data AppServiceData s = AppServiceData'
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
+    , _siteConfig        :: TF.Attr s (SiteConfigSetting s)
+    -- ^ @site_config@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @azurerm_app_service@ datasource value.
@@ -230,16 +233,22 @@ appServiceData _name _resourceGroupName =
         AppServiceData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
+            , _siteConfig = TF.Nil
             }
 
 instance TF.IsObject (AppServiceData s) where
     toObject AppServiceData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "site_config" <$> TF.attribute _siteConfig
         ]
 
 instance TF.IsValid (AppServiceData s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_siteConfig"
+                  (_siteConfig
+                      :: AppServiceData s -> TF.Attr s (SiteConfigSetting s))
+                  TF.validator
 
 instance P.HasName (AppServiceData s) (TF.Attr s P.Text) where
     name =
@@ -250,6 +259,11 @@ instance P.HasResourceGroupName (AppServiceData s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: AppServiceData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: AppServiceData s)
+
+instance P.HasSiteConfig (AppServiceData s) (TF.Attr s (SiteConfigSetting s)) where
+    siteConfig =
+        P.lens (_siteConfig :: AppServiceData s -> TF.Attr s (SiteConfigSetting s))
+               (\s a -> s { _siteConfig = a } :: AppServiceData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -416,7 +430,19 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (ApplicationSecurityGroupData s)
 -- See the <https://www.terraform.io/docs/providers/azurerm/d/azuread_application.html terraform documentation>
 -- for more information.
 data AzureadApplicationData s = AzureadApplicationData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _name     :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'objectId'
+    , _objectId :: TF.Attr s P.Text
+    -- ^ @object_id@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'name'
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @azurerm_azuread_application@ datasource value.
 azureadApplicationData
@@ -424,12 +450,39 @@ azureadApplicationData
 azureadApplicationData =
     TF.unsafeDataSource "azurerm_azuread_application" TF.validator $
         AzureadApplicationData'
+            { _name = TF.Nil
+            , _objectId = TF.Nil
+            }
 
 instance TF.IsObject (AzureadApplicationData s) where
-    toObject _ = []
+    toObject AzureadApplicationData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "object_id" <$> TF.attribute _objectId
+        ]
 
 instance TF.IsValid (AzureadApplicationData s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\AzureadApplicationData'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_objectId"
+                            ])
+        , if (_objectId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_objectId",
+                            [ "_name"
+                            ])
+        ])
+
+instance P.HasName (AzureadApplicationData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: AzureadApplicationData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AzureadApplicationData s)
+
+instance P.HasObjectId (AzureadApplicationData s) (TF.Attr s P.Text) where
+    objectId =
+        P.lens (_objectId :: AzureadApplicationData s -> TF.Attr s P.Text)
+               (\s a -> s { _objectId = a } :: AzureadApplicationData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AzureadApplicationData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -463,7 +516,28 @@ instance s ~ s' => P.HasComputedReplyUrls (TF.Ref s' (AzureadApplicationData s))
 -- See the <https://www.terraform.io/docs/providers/azurerm/d/azuread_service_principal.html terraform documentation>
 -- for more information.
 data AzureadServicePrincipalData s = AzureadServicePrincipalData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _applicationId :: TF.Attr s P.Text
+    -- ^ @application_id@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'displayName'
+    -- * 'objectId'
+    , _displayName   :: TF.Attr s P.Text
+    -- ^ @display_name@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'applicationId'
+    -- * 'objectId'
+    , _objectId      :: TF.Attr s P.Text
+    -- ^ @object_id@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'applicationId'
+    -- * 'displayName'
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @azurerm_azuread_service_principal@ datasource value.
 azureadServicePrincipalData
@@ -471,12 +545,51 @@ azureadServicePrincipalData
 azureadServicePrincipalData =
     TF.unsafeDataSource "azurerm_azuread_service_principal" TF.validator $
         AzureadServicePrincipalData'
+            { _applicationId = TF.Nil
+            , _displayName = TF.Nil
+            , _objectId = TF.Nil
+            }
 
 instance TF.IsObject (AzureadServicePrincipalData s) where
-    toObject _ = []
+    toObject AzureadServicePrincipalData'{..} = P.catMaybes
+        [ TF.assign "application_id" <$> TF.attribute _applicationId
+        , TF.assign "display_name" <$> TF.attribute _displayName
+        , TF.assign "object_id" <$> TF.attribute _objectId
+        ]
 
 instance TF.IsValid (AzureadServicePrincipalData s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\AzureadServicePrincipalData'{..} -> Map.fromList $ P.catMaybes
+        [ if (_applicationId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_applicationId",
+                            [ "_displayName"                            , "_objectId"
+                            ])
+        , if (_displayName P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_displayName",
+                            [ "_applicationId"                            , "_objectId"
+                            ])
+        , if (_objectId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_objectId",
+                            [ "_applicationId"                            , "_displayName"
+                            ])
+        ])
+
+instance P.HasApplicationId (AzureadServicePrincipalData s) (TF.Attr s P.Text) where
+    applicationId =
+        P.lens (_applicationId :: AzureadServicePrincipalData s -> TF.Attr s P.Text)
+               (\s a -> s { _applicationId = a } :: AzureadServicePrincipalData s)
+
+instance P.HasDisplayName (AzureadServicePrincipalData s) (TF.Attr s P.Text) where
+    displayName =
+        P.lens (_displayName :: AzureadServicePrincipalData s -> TF.Attr s P.Text)
+               (\s a -> s { _displayName = a } :: AzureadServicePrincipalData s)
+
+instance P.HasObjectId (AzureadServicePrincipalData s) (TF.Attr s P.Text) where
+    objectId =
+        P.lens (_objectId :: AzureadServicePrincipalData s -> TF.Attr s P.Text)
+               (\s a -> s { _objectId = a } :: AzureadServicePrincipalData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AzureadServicePrincipalData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -868,8 +981,11 @@ instance s ~ s' => P.HasComputedTier (TF.Ref s' (DataLakeStoreData s)) (TF.Attr 
 -- See the <https://www.terraform.io/docs/providers/azurerm/d/dns_zone.html terraform documentation>
 -- for more information.
 data DnsZoneData s = DnsZoneData'
-    { _name :: TF.Attr s P.Text
+    { _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -881,11 +997,13 @@ dnsZoneData _name =
     TF.unsafeDataSource "azurerm_dns_zone" TF.validator $
         DnsZoneData'
             { _name = _name
+            , _resourceGroupName = TF.Nil
             }
 
 instance TF.IsObject (DnsZoneData s) where
     toObject DnsZoneData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
         ]
 
 instance TF.IsValid (DnsZoneData s) where
@@ -895,6 +1013,11 @@ instance P.HasName (DnsZoneData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DnsZoneData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DnsZoneData s)
+
+instance P.HasResourceGroupName (DnsZoneData s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: DnsZoneData s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: DnsZoneData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsZoneData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1432,6 +1555,12 @@ data ManagedDiskData s = ManagedDiskData'
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required)
     --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _zones             :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @zones@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @azurerm_managed_disk@ datasource value.
@@ -1444,12 +1573,16 @@ managedDiskData _name _resourceGroupName =
         ManagedDiskData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
+            , _tags = TF.Nil
+            , _zones = TF.Nil
             }
 
 instance TF.IsObject (ManagedDiskData s) where
     toObject ManagedDiskData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "zones" <$> TF.attribute _zones
         ]
 
 instance TF.IsValid (ManagedDiskData s) where
@@ -1464,6 +1597,16 @@ instance P.HasResourceGroupName (ManagedDiskData s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: ManagedDiskData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: ManagedDiskData s)
+
+instance P.HasTags (ManagedDiskData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: ManagedDiskData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: ManagedDiskData s)
+
+instance P.HasZones (ManagedDiskData s) (TF.Attr s [TF.Attr s P.Text]) where
+    zones =
+        P.lens (_zones :: ManagedDiskData s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _zones = a } :: ManagedDiskData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ManagedDiskData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1846,6 +1989,9 @@ data PublicIpData s = PublicIpData'
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required)
     --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @azurerm_public_ip@ datasource value.
@@ -1858,12 +2004,14 @@ publicIpData _name _resourceGroupName =
         PublicIpData'
             { _name = _name
             , _resourceGroupName = _resourceGroupName
+            , _tags = TF.Nil
             }
 
 instance TF.IsObject (PublicIpData s) where
     toObject PublicIpData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (PublicIpData s) where
@@ -1878,6 +2026,11 @@ instance P.HasResourceGroupName (PublicIpData s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: PublicIpData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: PublicIpData s)
+
+instance P.HasTags (PublicIpData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: PublicIpData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: PublicIpData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (PublicIpData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2634,7 +2787,10 @@ instance s ~ s' => P.HasComputedRouteTableId (TF.Ref s' (SubnetData s)) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/azurerm/d/subscription.html terraform documentation>
 -- for more information.
 data SubscriptionData s = SubscriptionData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _subscriptionId :: TF.Attr s P.Text
+    -- ^ @subscription_id@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @azurerm_subscription@ datasource value.
 subscriptionData
@@ -2642,12 +2798,21 @@ subscriptionData
 subscriptionData =
     TF.unsafeDataSource "azurerm_subscription" TF.validator $
         SubscriptionData'
+            { _subscriptionId = TF.Nil
+            }
 
 instance TF.IsObject (SubscriptionData s) where
-    toObject _ = []
+    toObject SubscriptionData'{..} = P.catMaybes
+        [ TF.assign "subscription_id" <$> TF.attribute _subscriptionId
+        ]
 
 instance TF.IsValid (SubscriptionData s) where
     validator = P.mempty
+
+instance P.HasSubscriptionId (SubscriptionData s) (TF.Attr s P.Text) where
+    subscriptionId =
+        P.lens (_subscriptionId :: SubscriptionData s -> TF.Attr s P.Text)
+               (\s a -> s { _subscriptionId = a } :: SubscriptionData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SubscriptionData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"

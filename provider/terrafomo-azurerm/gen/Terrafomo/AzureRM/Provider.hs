@@ -109,7 +109,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "azurerm"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "client_id" <$> _clientId
             , TF.assign "client_secret" <$> _clientSecret
