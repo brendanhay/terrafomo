@@ -467,7 +467,7 @@ acmCertificateData
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> P.DataSource (AcmCertificateData s)
 acmCertificateData _domain =
-    TF.unsafeDataSource "aws_acm_certificate" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_acm_certificate" TF.validator $
         AcmCertificateData'
             { _domain = _domain
             , _mostRecent = TF.value P.False
@@ -526,7 +526,7 @@ acmpcaCertificateAuthorityData
     :: TF.Attr s P.Text -- ^ @arn@ - 'P.arn'
     -> P.DataSource (AcmpcaCertificateAuthorityData s)
 acmpcaCertificateAuthorityData _arn =
-    TF.unsafeDataSource "aws_acmpca_certificate_authority" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_acmpca_certificate_authority" TF.validator $
         AcmpcaCertificateAuthorityData'
             { _arn = _arn
             }
@@ -587,7 +587,7 @@ data AlbData s = AlbData'
 albData
     :: P.DataSource (AlbData s)
 albData =
-    TF.unsafeDataSource "aws_alb" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_alb" TF.validator $
         AlbData'
 
 instance TF.IsObject (AlbData s) where
@@ -654,7 +654,7 @@ data AlbListenerData s = AlbListenerData'
 albListenerData
     :: P.DataSource (AlbListenerData s)
 albListenerData =
-    TF.unsafeDataSource "aws_alb_listener" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_alb_listener" TF.validator $
         AlbListenerData'
 
 instance TF.IsObject (AlbListenerData s) where
@@ -697,7 +697,7 @@ data AlbTargetGroupData s = AlbTargetGroupData'
 albTargetGroupData
     :: P.DataSource (AlbTargetGroupData s)
 albTargetGroupData =
-    TF.unsafeDataSource "aws_alb_target_group" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_alb_target_group" TF.validator $
         AlbTargetGroupData'
 
 instance TF.IsObject (AlbTargetGroupData s) where
@@ -767,7 +767,7 @@ data AmiData s = AmiData'
 amiData
     :: P.DataSource (AmiData s)
 amiData =
-    TF.unsafeDataSource "aws_ami" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_ami" TF.validator $
         AmiData'
             { _executableUsers = TF.Nil
             , _filter = TF.Nil
@@ -910,7 +910,7 @@ data AmiIdsData s = AmiIdsData'
 amiIdsData
     :: P.DataSource (AmiIdsData s)
 amiIdsData =
-    TF.unsafeDataSource "aws_ami_ids" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_ami_ids" TF.validator $
         AmiIdsData'
             { _executableUsers = TF.Nil
             , _filter = TF.Nil
@@ -969,7 +969,7 @@ apiGatewayRestApiData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ApiGatewayRestApiData s)
 apiGatewayRestApiData _name =
-    TF.unsafeDataSource "aws_api_gateway_rest_api" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_api_gateway_rest_api" TF.validator $
         ApiGatewayRestApiData'
             { _name = _name
             }
@@ -1007,7 +1007,7 @@ arnData
     :: TF.Attr s P.Text -- ^ @arn@ - 'P.arn'
     -> P.DataSource (ArnData s)
 arnData _arn =
-    TF.unsafeDataSource "aws_arn" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_arn" TF.validator $
         ArnData'
             { _arn = _arn
             }
@@ -1056,7 +1056,7 @@ data AutoscalingGroupsData s = AutoscalingGroupsData'
 autoscalingGroupsData
     :: P.DataSource (AutoscalingGroupsData s)
 autoscalingGroupsData =
-    TF.unsafeDataSource "aws_autoscaling_groups" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_autoscaling_groups" TF.validator $
         AutoscalingGroupsData'
             { _filter = TF.Nil
             }
@@ -1090,7 +1090,7 @@ data AvailabilityZoneData s = AvailabilityZoneData'
 availabilityZoneData
     :: P.DataSource (AvailabilityZoneData s)
 availabilityZoneData =
-    TF.unsafeDataSource "aws_availability_zone" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_availability_zone" TF.validator $
         AvailabilityZoneData'
 
 instance TF.IsObject (AvailabilityZoneData s) where
@@ -1127,7 +1127,7 @@ data AvailabilityZonesData s = AvailabilityZonesData'
 availabilityZonesData
     :: P.DataSource (AvailabilityZonesData s)
 availabilityZonesData =
-    TF.unsafeDataSource "aws_availability_zones" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_availability_zones" TF.validator $
         AvailabilityZonesData'
             { _state = TF.Nil
             }
@@ -1165,7 +1165,7 @@ batchComputeEnvironmentData
     :: TF.Attr s P.Text -- ^ @compute_environment_name@ - 'P.computeEnvironmentName'
     -> P.DataSource (BatchComputeEnvironmentData s)
 batchComputeEnvironmentData _computeEnvironmentName =
-    TF.unsafeDataSource "aws_batch_compute_environment" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_batch_compute_environment" TF.validator $
         BatchComputeEnvironmentData'
             { _computeEnvironmentName = _computeEnvironmentName
             }
@@ -1221,7 +1221,7 @@ batchJobQueueData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (BatchJobQueueData s)
 batchJobQueueData _name =
-    TF.unsafeDataSource "aws_batch_job_queue" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_batch_job_queue" TF.validator $
         BatchJobQueueData'
             { _name = _name
             }
@@ -1270,7 +1270,7 @@ data BillingServiceAccountData s = BillingServiceAccountData'
 billingServiceAccountData
     :: P.DataSource (BillingServiceAccountData s)
 billingServiceAccountData =
-    TF.unsafeDataSource "aws_billing_service_account" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_billing_service_account" TF.validator $
         BillingServiceAccountData'
 
 instance TF.IsObject (BillingServiceAccountData s) where
@@ -1295,7 +1295,7 @@ data CallerIdentityData s = CallerIdentityData'
 callerIdentityData
     :: P.DataSource (CallerIdentityData s)
 callerIdentityData =
-    TF.unsafeDataSource "aws_caller_identity" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_caller_identity" TF.validator $
         CallerIdentityData'
 
 instance TF.IsObject (CallerIdentityData s) where
@@ -1326,7 +1326,7 @@ data CanonicalUserIdData s = CanonicalUserIdData'
 canonicalUserIdData
     :: P.DataSource (CanonicalUserIdData s)
 canonicalUserIdData =
-    TF.unsafeDataSource "aws_canonical_user_id" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_canonical_user_id" TF.validator $
         CanonicalUserIdData'
 
 instance TF.IsObject (CanonicalUserIdData s) where
@@ -1355,7 +1355,7 @@ cloudformationExportData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CloudformationExportData s)
 cloudformationExportData _name =
-    TF.unsafeDataSource "aws_cloudformation_export" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_cloudformation_export" TF.validator $
         CloudformationExportData'
             { _name = _name
             }
@@ -1396,7 +1396,7 @@ cloudformationStackData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CloudformationStackData s)
 cloudformationStackData _name =
-    TF.unsafeDataSource "aws_cloudformation_stack" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_cloudformation_stack" TF.validator $
         CloudformationStackData'
             { _name = _name
             }
@@ -1460,7 +1460,7 @@ data CloudtrailServiceAccountData s = CloudtrailServiceAccountData'
 cloudtrailServiceAccountData
     :: P.DataSource (CloudtrailServiceAccountData s)
 cloudtrailServiceAccountData =
-    TF.unsafeDataSource "aws_cloudtrail_service_account" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_cloudtrail_service_account" TF.validator $
         CloudtrailServiceAccountData'
             { _region = TF.Nil
             }
@@ -1498,7 +1498,7 @@ cloudwatchLogGroupData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CloudwatchLogGroupData s)
 cloudwatchLogGroupData _name =
-    TF.unsafeDataSource "aws_cloudwatch_log_group" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_cloudwatch_log_group" TF.validator $
         CloudwatchLogGroupData'
             { _name = _name
             }
@@ -1539,7 +1539,7 @@ codecommitRepositoryData
     :: TF.Attr s P.Text -- ^ @repository_name@ - 'P.repositoryName'
     -> P.DataSource (CodecommitRepositoryData s)
 codecommitRepositoryData _repositoryName =
-    TF.unsafeDataSource "aws_codecommit_repository" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_codecommit_repository" TF.validator $
         CodecommitRepositoryData'
             { _repositoryName = _repositoryName
             }
@@ -1586,7 +1586,7 @@ cognitoUserPoolsData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CognitoUserPoolsData s)
 cognitoUserPoolsData _name =
-    TF.unsafeDataSource "aws_cognito_user_pools" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_cognito_user_pools" TF.validator $
         CognitoUserPoolsData'
             { _name = _name
             }
@@ -1641,7 +1641,7 @@ data DbClusterSnapshotData s = DbClusterSnapshotData'
 dbClusterSnapshotData
     :: P.DataSource (DbClusterSnapshotData s)
 dbClusterSnapshotData =
-    TF.unsafeDataSource "aws_db_cluster_snapshot" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_db_cluster_snapshot" TF.validator $
         DbClusterSnapshotData'
             { _dbClusterIdentifier = TF.Nil
             , _dbClusterSnapshotIdentifier = TF.Nil
@@ -1750,7 +1750,7 @@ dbInstanceData
     :: TF.Attr s P.Text -- ^ @db_instance_identifier@ - 'P.dbInstanceIdentifier'
     -> P.DataSource (DbInstanceData s)
 dbInstanceData _dbInstanceIdentifier =
-    TF.unsafeDataSource "aws_db_instance" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_db_instance" TF.validator $
         DbInstanceData'
             { _dbInstanceIdentifier = _dbInstanceIdentifier
             }
@@ -1904,7 +1904,7 @@ data DbSnapshotData s = DbSnapshotData'
 dbSnapshotData
     :: P.DataSource (DbSnapshotData s)
 dbSnapshotData =
-    TF.unsafeDataSource "aws_db_snapshot" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_db_snapshot" TF.validator $
         DbSnapshotData'
             { _dbInstanceIdentifier = TF.Nil
             , _dbSnapshotIdentifier = TF.Nil
@@ -2025,7 +2025,7 @@ dxGatewayData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DxGatewayData s)
 dxGatewayData _name =
-    TF.unsafeDataSource "aws_dx_gateway" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_dx_gateway" TF.validator $
         DxGatewayData'
             { _name = _name
             }
@@ -2063,7 +2063,7 @@ dynamodbTableData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DynamodbTableData s)
 dynamodbTableData _name =
-    TF.unsafeDataSource "aws_dynamodb_table" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_dynamodb_table" TF.validator $
         DynamodbTableData'
             { _name = _name
             }
@@ -2154,7 +2154,7 @@ data EbsSnapshotData s = EbsSnapshotData'
 ebsSnapshotData
     :: P.DataSource (EbsSnapshotData s)
 ebsSnapshotData =
-    TF.unsafeDataSource "aws_ebs_snapshot" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_ebs_snapshot" TF.validator $
         EbsSnapshotData'
             { _filter = TF.Nil
             , _mostRecent = TF.value P.False
@@ -2255,7 +2255,7 @@ data EbsSnapshotIdsData s = EbsSnapshotIdsData'
 ebsSnapshotIdsData
     :: P.DataSource (EbsSnapshotIdsData s)
 ebsSnapshotIdsData =
-    TF.unsafeDataSource "aws_ebs_snapshot_ids" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_ebs_snapshot_ids" TF.validator $
         EbsSnapshotIdsData'
             { _filter = TF.Nil
             , _owners = TF.Nil
@@ -2309,7 +2309,7 @@ data EbsVolumeData s = EbsVolumeData'
 ebsVolumeData
     :: P.DataSource (EbsVolumeData s)
 ebsVolumeData =
-    TF.unsafeDataSource "aws_ebs_volume" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_ebs_volume" TF.validator $
         EbsVolumeData'
             { _filter = TF.Nil
             , _mostRecent = TF.value P.False
@@ -2381,7 +2381,7 @@ ecrRepositoryData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (EcrRepositoryData s)
 ecrRepositoryData _name =
-    TF.unsafeDataSource "aws_ecr_repository" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_ecr_repository" TF.validator $
         EcrRepositoryData'
             { _name = _name
             }
@@ -2425,7 +2425,7 @@ ecsClusterData
     :: TF.Attr s P.Text -- ^ @cluster_name@ - 'P.clusterName'
     -> P.DataSource (EcsClusterData s)
 ecsClusterData _clusterName =
-    TF.unsafeDataSource "aws_ecs_cluster" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_ecs_cluster" TF.validator $
         EcsClusterData'
             { _clusterName = _clusterName
             }
@@ -2479,7 +2479,7 @@ ecsContainerDefinitionData
     -> TF.Attr s P.Text -- ^ @task_definition@ - 'P.taskDefinition'
     -> P.DataSource (EcsContainerDefinitionData s)
 ecsContainerDefinitionData _containerName _taskDefinition =
-    TF.unsafeDataSource "aws_ecs_container_definition" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_ecs_container_definition" TF.validator $
         EcsContainerDefinitionData'
             { _containerName = _containerName
             , _taskDefinition = _taskDefinition
@@ -2549,7 +2549,7 @@ ecsServiceData
     -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
     -> P.DataSource (EcsServiceData s)
 ecsServiceData _clusterArn _serviceName =
-    TF.unsafeDataSource "aws_ecs_service" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_ecs_service" TF.validator $
         EcsServiceData'
             { _clusterArn = _clusterArn
             , _serviceName = _serviceName
@@ -2606,7 +2606,7 @@ ecsTaskDefinitionData
     :: TF.Attr s P.Text -- ^ @task_definition@ - 'P.taskDefinition'
     -> P.DataSource (EcsTaskDefinitionData s)
 ecsTaskDefinitionData _taskDefinition =
-    TF.unsafeDataSource "aws_ecs_task_definition" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_ecs_task_definition" TF.validator $
         EcsTaskDefinitionData'
             { _taskDefinition = _taskDefinition
             }
@@ -2652,7 +2652,7 @@ data EfsFileSystemData s = EfsFileSystemData'
 efsFileSystemData
     :: P.DataSource (EfsFileSystemData s)
 efsFileSystemData =
-    TF.unsafeDataSource "aws_efs_file_system" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_efs_file_system" TF.validator $
         EfsFileSystemData'
 
 instance TF.IsObject (EfsFileSystemData s) where
@@ -2699,7 +2699,7 @@ efsMountTargetData
     :: TF.Attr s P.Text -- ^ @mount_target_id@ - 'P.mountTargetId'
     -> P.DataSource (EfsMountTargetData s)
 efsMountTargetData _mountTargetId =
-    TF.unsafeDataSource "aws_efs_mount_target" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_efs_mount_target" TF.validator $
         EfsMountTargetData'
             { _mountTargetId = _mountTargetId
             }
@@ -2748,7 +2748,7 @@ data EipData s = EipData'
 eipData
     :: P.DataSource (EipData s)
 eipData =
-    TF.unsafeDataSource "aws_eip" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_eip" TF.validator $
         EipData'
 
 instance TF.IsObject (EipData s) where
@@ -2777,7 +2777,7 @@ eksClusterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (EksClusterData s)
 eksClusterData _name =
-    TF.unsafeDataSource "aws_eks_cluster" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_eks_cluster" TF.validator $
         EksClusterData'
             { _name = _name
             }
@@ -2832,7 +2832,7 @@ data ElasticBeanstalkHostedZoneData s = ElasticBeanstalkHostedZoneData'
 elasticBeanstalkHostedZoneData
     :: P.DataSource (ElasticBeanstalkHostedZoneData s)
 elasticBeanstalkHostedZoneData =
-    TF.unsafeDataSource "aws_elastic_beanstalk_hosted_zone" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_elastic_beanstalk_hosted_zone" TF.validator $
         ElasticBeanstalkHostedZoneData'
             { _region = TF.Nil
             }
@@ -2870,7 +2870,7 @@ elasticBeanstalkSolutionStackData
     :: TF.Attr s P.Text -- ^ @name_regex@ - 'P.nameRegex'
     -> P.DataSource (ElasticBeanstalkSolutionStackData s)
 elasticBeanstalkSolutionStackData _nameRegex =
-    TF.unsafeDataSource "aws_elastic_beanstalk_solution_stack" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_elastic_beanstalk_solution_stack" TF.validator $
         ElasticBeanstalkSolutionStackData'
             { _mostRecent = TF.value P.False
             , _nameRegex = _nameRegex
@@ -2915,7 +2915,7 @@ elasticacheClusterData
     :: TF.Attr s P.Text -- ^ @cluster_id@ - 'P.clusterId'
     -> P.DataSource (ElasticacheClusterData s)
 elasticacheClusterData _clusterId =
-    TF.unsafeDataSource "aws_elasticache_cluster" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_elasticache_cluster" TF.validator $
         ElasticacheClusterData'
             { _clusterId = _clusterId
             }
@@ -3010,7 +3010,7 @@ elasticacheReplicationGroupData
     :: TF.Attr s P.Text -- ^ @replication_group_id@ - 'P.replicationGroupId'
     -> P.DataSource (ElasticacheReplicationGroupData s)
 elasticacheReplicationGroupData _replicationGroupId =
-    TF.unsafeDataSource "aws_elasticache_replication_group" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_elasticache_replication_group" TF.validator $
         ElasticacheReplicationGroupData'
             { _replicationGroupId = _replicationGroupId
             }
@@ -3078,7 +3078,7 @@ elbData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ElbData s)
 elbData _name =
-    TF.unsafeDataSource "aws_elb" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_elb" TF.validator $
         ElbData'
             { _name = _name
             }
@@ -3163,7 +3163,7 @@ data ElbHostedZoneIdData s = ElbHostedZoneIdData'
 elbHostedZoneIdData
     :: P.DataSource (ElbHostedZoneIdData s)
 elbHostedZoneIdData =
-    TF.unsafeDataSource "aws_elb_hosted_zone_id" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_elb_hosted_zone_id" TF.validator $
         ElbHostedZoneIdData'
             { _region = TF.Nil
             }
@@ -3197,7 +3197,7 @@ data ElbServiceAccountData s = ElbServiceAccountData'
 elbServiceAccountData
     :: P.DataSource (ElbServiceAccountData s)
 elbServiceAccountData =
-    TF.unsafeDataSource "aws_elb_service_account" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_elb_service_account" TF.validator $
         ElbServiceAccountData'
             { _region = TF.Nil
             }
@@ -3242,7 +3242,7 @@ glueScriptData
     -> TF.Attr s [TF.Attr s (DagNodeSetting s)] -- ^ @dag_node@ - 'P.dagNode'
     -> P.DataSource (GlueScriptData s)
 glueScriptData _dagEdge _dagNode =
-    TF.unsafeDataSource "aws_glue_script" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_glue_script" TF.validator $
         GlueScriptData'
             { _dagEdge = _dagEdge
             , _dagNode = _dagNode
@@ -3293,7 +3293,7 @@ data IamAccountAliasData s = IamAccountAliasData'
 iamAccountAliasData
     :: P.DataSource (IamAccountAliasData s)
 iamAccountAliasData =
-    TF.unsafeDataSource "aws_iam_account_alias" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_iam_account_alias" TF.validator $
         IamAccountAliasData'
 
 instance TF.IsObject (IamAccountAliasData s) where
@@ -3322,7 +3322,7 @@ iamGroupData
     :: TF.Attr s P.Text -- ^ @group_name@ - 'P.groupName'
     -> P.DataSource (IamGroupData s)
 iamGroupData _groupName =
-    TF.unsafeDataSource "aws_iam_group" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_iam_group" TF.validator $
         IamGroupData'
             { _groupName = _groupName
             }
@@ -3366,7 +3366,7 @@ iamInstanceProfileData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (IamInstanceProfileData s)
 iamInstanceProfileData _name =
-    TF.unsafeDataSource "aws_iam_instance_profile" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_iam_instance_profile" TF.validator $
         IamInstanceProfileData'
             { _name = _name
             }
@@ -3419,7 +3419,7 @@ iamPolicyData
     :: TF.Attr s P.Text -- ^ @arn@ - 'P.arn'
     -> P.DataSource (IamPolicyData s)
 iamPolicyData _arn =
-    TF.unsafeDataSource "aws_iam_policy" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_iam_policy" TF.validator $
         IamPolicyData'
             { _arn = _arn
             }
@@ -3475,7 +3475,7 @@ iamPolicyDocumentData
     :: TF.Attr s [TF.Attr s (StatementSetting s)] -- ^ @statement@ - 'P.statement'
     -> P.DataSource (IamPolicyDocumentData s)
 iamPolicyDocumentData _statement =
-    TF.unsafeDataSource "aws_iam_policy_document" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_iam_policy_document" TF.validator $
         IamPolicyDocumentData'
             { _overrideJson = TF.Nil
             , _policyId = TF.Nil
@@ -3533,7 +3533,7 @@ data IamRoleData s = IamRoleData'
 iamRoleData
     :: P.DataSource (IamRoleData s)
 iamRoleData =
-    TF.unsafeDataSource "aws_iam_role" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_iam_role" TF.validator $
         IamRoleData'
             { _name = TF.Nil
             }
@@ -3597,7 +3597,7 @@ data IamServerCertificateData s = IamServerCertificateData'
 iamServerCertificateData
     :: P.DataSource (IamServerCertificateData s)
 iamServerCertificateData =
-    TF.unsafeDataSource "aws_iam_server_certificate" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_iam_server_certificate" TF.validator $
         IamServerCertificateData'
             { _latest = TF.value P.False
             , _namePrefix = TF.Nil
@@ -3667,7 +3667,7 @@ iamUserData
     :: TF.Attr s P.Text -- ^ @user_name@ - 'P.userName'
     -> P.DataSource (IamUserData s)
 iamUserData _userName =
-    TF.unsafeDataSource "aws_iam_user" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_iam_user" TF.validator $
         IamUserData'
             { _userName = _userName
             }
@@ -3710,7 +3710,7 @@ data InspectorRulesPackagesData s = InspectorRulesPackagesData'
 inspectorRulesPackagesData
     :: P.DataSource (InspectorRulesPackagesData s)
 inspectorRulesPackagesData =
-    TF.unsafeDataSource "aws_inspector_rules_packages" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_inspector_rules_packages" TF.validator $
         InspectorRulesPackagesData'
 
 instance TF.IsObject (InspectorRulesPackagesData s) where
@@ -3744,7 +3744,7 @@ data InstanceData s = InstanceData'
 instanceData
     :: P.DataSource (InstanceData s)
 instanceData =
-    TF.unsafeDataSource "aws_instance" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_instance" TF.validator $
         InstanceData'
             { _filter = TF.Nil
             , _getPasswordData = TF.value P.False
@@ -3885,7 +3885,7 @@ data InstancesData s = InstancesData'
 instancesData
     :: P.DataSource (InstancesData s)
 instancesData =
-    TF.unsafeDataSource "aws_instances" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_instances" TF.validator $
         InstancesData'
             { _filter = TF.Nil
             , _instanceStateNames = TF.Nil
@@ -3938,7 +3938,7 @@ data InternetGatewayData s = InternetGatewayData'
 internetGatewayData
     :: P.DataSource (InternetGatewayData s)
 internetGatewayData =
-    TF.unsafeDataSource "aws_internet_gateway" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_internet_gateway" TF.validator $
         InternetGatewayData'
             { _filter = TF.Nil
             }
@@ -3978,7 +3978,7 @@ data IotEndpointData s = IotEndpointData'
 iotEndpointData
     :: P.DataSource (IotEndpointData s)
 iotEndpointData =
-    TF.unsafeDataSource "aws_iot_endpoint" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_iot_endpoint" TF.validator $
         IotEndpointData'
 
 instance TF.IsObject (IotEndpointData s) where
@@ -4010,7 +4010,7 @@ ipRangesData
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @services@ - 'P.services'
     -> P.DataSource (IpRangesData s)
 ipRangesData _services =
-    TF.unsafeDataSource "aws_ip_ranges" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_ip_ranges" TF.validator $
         IpRangesData'
             { _regions = TF.Nil
             , _services = _services
@@ -4061,7 +4061,7 @@ kinesisStreamData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (KinesisStreamData s)
 kinesisStreamData _name =
-    TF.unsafeDataSource "aws_kinesis_stream" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_kinesis_stream" TF.validator $
         KinesisStreamData'
             { _name = _name
             }
@@ -4120,7 +4120,7 @@ kmsAliasData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (KmsAliasData s)
 kmsAliasData _name =
-    TF.unsafeDataSource "aws_kms_alias" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_kms_alias" TF.validator $
         KmsAliasData'
             { _name = _name
             }
@@ -4171,7 +4171,7 @@ kmsCiphertextData
     -> TF.Attr s P.Text -- ^ @plaintext@ - 'P.plaintext'
     -> P.DataSource (KmsCiphertextData s)
 kmsCiphertextData _keyId _plaintext =
-    TF.unsafeDataSource "aws_kms_ciphertext" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_kms_ciphertext" TF.validator $
         KmsCiphertextData'
             { _context = TF.Nil
             , _keyId = _keyId
@@ -4226,7 +4226,7 @@ kmsKeyData
     :: TF.Attr s P.Text -- ^ @key_id@ - 'P.keyId'
     -> P.DataSource (KmsKeyData s)
 kmsKeyData _keyId =
-    TF.unsafeDataSource "aws_kms_key" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_kms_key" TF.validator $
         KmsKeyData'
             { _grantTokens = TF.Nil
             , _keyId = _keyId
@@ -4307,7 +4307,7 @@ kmsSecretData
     :: TF.Attr s [TF.Attr s (SecretSetting s)] -- ^ @secret@ - 'P.secret'
     -> P.DataSource (KmsSecretData s)
 kmsSecretData _secret =
-    TF.unsafeDataSource "aws_kms_secret" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_kms_secret" TF.validator $
         KmsSecretData'
             { _hasDynamicAttributes = TF.Nil
             , _secret = _secret
@@ -4349,7 +4349,7 @@ kmsSecretsData
     :: TF.Attr s [TF.Attr s (SecretSetting s)] -- ^ @secret@ - 'P.secret'
     -> P.DataSource (KmsSecretsData s)
 kmsSecretsData _secret =
-    TF.unsafeDataSource "aws_kms_secrets" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_kms_secrets" TF.validator $
         KmsSecretsData'
             { _secret = _secret
             }
@@ -4390,7 +4390,7 @@ lambdaFunctionData
     :: TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
     -> P.DataSource (LambdaFunctionData s)
 lambdaFunctionData _functionName =
-    TF.unsafeDataSource "aws_lambda_function" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_lambda_function" TF.validator $
         LambdaFunctionData'
             { _functionName = _functionName
             , _qualifier = TF.value "$LATEST"
@@ -4496,7 +4496,7 @@ lambdaInvocationData
     -> TF.Attr s P.Text -- ^ @input@ - 'P.input'
     -> P.DataSource (LambdaInvocationData s)
 lambdaInvocationData _functionName _input =
-    TF.unsafeDataSource "aws_lambda_invocation" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_lambda_invocation" TF.validator $
         LambdaInvocationData'
             { _functionName = _functionName
             , _input = _input
@@ -4551,7 +4551,7 @@ launchConfigurationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (LaunchConfigurationData s)
 launchConfigurationData _name =
-    TF.unsafeDataSource "aws_launch_configuration" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_launch_configuration" TF.validator $
         LaunchConfigurationData'
             { _name = _name
             }
@@ -4630,7 +4630,7 @@ data LbData s = LbData'
 lbData
     :: P.DataSource (LbData s)
 lbData =
-    TF.unsafeDataSource "aws_lb" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_lb" TF.validator $
         LbData'
 
 instance TF.IsObject (LbData s) where
@@ -4697,7 +4697,7 @@ data LbListenerData s = LbListenerData'
 lbListenerData
     :: P.DataSource (LbListenerData s)
 lbListenerData =
-    TF.unsafeDataSource "aws_lb_listener" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_lb_listener" TF.validator $
         LbListenerData'
 
 instance TF.IsObject (LbListenerData s) where
@@ -4740,7 +4740,7 @@ data LbTargetGroupData s = LbTargetGroupData'
 lbTargetGroupData
     :: P.DataSource (LbTargetGroupData s)
 lbTargetGroupData =
-    TF.unsafeDataSource "aws_lb_target_group" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_lb_target_group" TF.validator $
         LbTargetGroupData'
 
 instance TF.IsObject (LbTargetGroupData s) where
@@ -4795,7 +4795,7 @@ data MqBrokerData s = MqBrokerData'
 mqBrokerData
     :: P.DataSource (MqBrokerData s)
 mqBrokerData =
-    TF.unsafeDataSource "aws_mq_broker" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_mq_broker" TF.validator $
         MqBrokerData'
 
 instance TF.IsObject (MqBrokerData s) where
@@ -4865,7 +4865,7 @@ data NatGatewayData s = NatGatewayData'
 natGatewayData
     :: P.DataSource (NatGatewayData s)
 natGatewayData =
-    TF.unsafeDataSource "aws_nat_gateway" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_nat_gateway" TF.validator $
         NatGatewayData'
             { _filter = TF.Nil
             }
@@ -4926,7 +4926,7 @@ data NetworkAclsData s = NetworkAclsData'
 networkAclsData
     :: P.DataSource (NetworkAclsData s)
 networkAclsData =
-    TF.unsafeDataSource "aws_network_acls" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_network_acls" TF.validator $
         NetworkAclsData'
             { _filter = TF.Nil
             , _vpcId = TF.Nil
@@ -4973,7 +4973,7 @@ data NetworkInterfaceData s = NetworkInterfaceData'
 networkInterfaceData
     :: P.DataSource (NetworkInterfaceData s)
 networkInterfaceData =
-    TF.unsafeDataSource "aws_network_interface" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_network_interface" TF.validator $
         NetworkInterfaceData'
             { _filter = TF.Nil
             }
@@ -5055,7 +5055,7 @@ data NetworkInterfacesData s = NetworkInterfacesData'
 networkInterfacesData
     :: P.DataSource (NetworkInterfacesData s)
 networkInterfacesData =
-    TF.unsafeDataSource "aws_network_interfaces" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_network_interfaces" TF.validator $
         NetworkInterfacesData'
             { _filter = TF.Nil
             }
@@ -5092,7 +5092,7 @@ data PartitionData s = PartitionData'
 partitionData
     :: P.DataSource (PartitionData s)
 partitionData =
-    TF.unsafeDataSource "aws_partition" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_partition" TF.validator $
         PartitionData'
 
 instance TF.IsObject (PartitionData s) where
@@ -5120,7 +5120,7 @@ data PrefixListData s = PrefixListData'
 prefixListData
     :: P.DataSource (PrefixListData s)
 prefixListData =
-    TF.unsafeDataSource "aws_prefix_list" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_prefix_list" TF.validator $
         PrefixListData'
             { _prefixListId = TF.Nil
             }
@@ -5165,7 +5165,7 @@ pricingProductData
     -> TF.Attr s P.Text -- ^ @service_code@ - 'P.serviceCode'
     -> P.DataSource (PricingProductData s)
 pricingProductData _filters _serviceCode =
-    TF.unsafeDataSource "aws_pricing_product" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_pricing_product" TF.validator $
         PricingProductData'
             { _filters = _filters
             , _serviceCode = _serviceCode
@@ -5210,7 +5210,7 @@ rdsClusterData
     :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
     -> P.DataSource (RdsClusterData s)
 rdsClusterData _clusterIdentifier =
-    TF.unsafeDataSource "aws_rds_cluster" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_rds_cluster" TF.validator $
         RdsClusterData'
             { _clusterIdentifier = _clusterIdentifier
             }
@@ -5323,7 +5323,7 @@ redshiftClusterData
     :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
     -> P.DataSource (RedshiftClusterData s)
 redshiftClusterData _clusterIdentifier =
-    TF.unsafeDataSource "aws_redshift_cluster" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_redshift_cluster" TF.validator $
         RedshiftClusterData'
             { _clusterIdentifier = _clusterIdentifier
             , _tags = TF.Nil
@@ -5448,7 +5448,7 @@ data RedshiftServiceAccountData s = RedshiftServiceAccountData'
 redshiftServiceAccountData
     :: P.DataSource (RedshiftServiceAccountData s)
 redshiftServiceAccountData =
-    TF.unsafeDataSource "aws_redshift_service_account" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_redshift_service_account" TF.validator $
         RedshiftServiceAccountData'
             { _region = TF.Nil
             }
@@ -5482,7 +5482,7 @@ data RegionData s = RegionData'
 regionData
     :: P.DataSource (RegionData s)
 regionData =
-    TF.unsafeDataSource "aws_region" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_region" TF.validator $
         RegionData'
 
 instance TF.IsObject (RegionData s) where
@@ -5517,7 +5517,7 @@ routeData
     :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
     -> P.DataSource (RouteData s)
 routeData _routeTableId =
-    TF.unsafeDataSource "aws_route" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_route" TF.validator $
         RouteData'
             { _routeTableId = _routeTableId
             }
@@ -5575,7 +5575,7 @@ data Route53ZoneData s = Route53ZoneData'
 route53ZoneData
     :: P.DataSource (Route53ZoneData s)
 route53ZoneData =
-    TF.unsafeDataSource "aws_route53_zone" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_route53_zone" TF.validator $
         Route53ZoneData'
             { _privateZone = TF.value P.False
             }
@@ -5633,7 +5633,7 @@ data RouteTableData s = RouteTableData'
 routeTableData
     :: P.DataSource (RouteTableData s)
 routeTableData =
-    TF.unsafeDataSource "aws_route_table" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_route_table" TF.validator $
         RouteTableData'
             { _filter = TF.Nil
             }
@@ -5688,7 +5688,7 @@ data RouteTablesData s = RouteTablesData'
 routeTablesData
     :: P.DataSource (RouteTablesData s)
 routeTablesData =
-    TF.unsafeDataSource "aws_route_tables" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_route_tables" TF.validator $
         RouteTablesData'
             { _filter = TF.Nil
             , _vpcId = TF.Nil
@@ -5736,7 +5736,7 @@ s3BucketData
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> P.DataSource (S3BucketData s)
 s3BucketData _bucket =
-    TF.unsafeDataSource "aws_s3_bucket" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_s3_bucket" TF.validator $
         S3BucketData'
             { _bucket = _bucket
             }
@@ -5796,7 +5796,7 @@ s3BucketObjectData
     -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> P.DataSource (S3BucketObjectData s)
 s3BucketObjectData _bucket _key =
-    TF.unsafeDataSource "aws_s3_bucket_object" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_s3_bucket_object" TF.validator $
         S3BucketObjectData'
             { _bucket = _bucket
             , _key = _key
@@ -5895,7 +5895,7 @@ data SecretsmanagerSecretData s = SecretsmanagerSecretData'
 secretsmanagerSecretData
     :: P.DataSource (SecretsmanagerSecretData s)
 secretsmanagerSecretData =
-    TF.unsafeDataSource "aws_secretsmanager_secret" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_secretsmanager_secret" TF.validator $
         SecretsmanagerSecretData'
 
 instance TF.IsObject (SecretsmanagerSecretData s) where
@@ -5948,7 +5948,7 @@ secretsmanagerSecretVersionData
     :: TF.Attr s P.Text -- ^ @secret_id@ - 'P.secretId'
     -> P.DataSource (SecretsmanagerSecretVersionData s)
 secretsmanagerSecretVersionData _secretId =
-    TF.unsafeDataSource "aws_secretsmanager_secret_version" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_secretsmanager_secret_version" TF.validator $
         SecretsmanagerSecretVersionData'
             { _secretId = _secretId
             , _versionStage = TF.value "AWSCURRENT"
@@ -5998,7 +5998,7 @@ data SecurityGroupData s = SecurityGroupData'
 securityGroupData
     :: P.DataSource (SecurityGroupData s)
 securityGroupData =
-    TF.unsafeDataSource "aws_security_group" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_security_group" TF.validator $
         SecurityGroupData'
             { _filter = TF.Nil
             }
@@ -6047,7 +6047,7 @@ data SecurityGroupsData s = SecurityGroupsData'
 securityGroupsData
     :: P.DataSource (SecurityGroupsData s)
 securityGroupsData =
-    TF.unsafeDataSource "aws_security_groups" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_security_groups" TF.validator $
         SecurityGroupsData'
             { _filter = TF.Nil
             }
@@ -6091,7 +6091,7 @@ snsTopicData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SnsTopicData s)
 snsTopicData _name =
-    TF.unsafeDataSource "aws_sns_topic" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_sns_topic" TF.validator $
         SnsTopicData'
             { _name = _name
             }
@@ -6129,7 +6129,7 @@ sqsQueueData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SqsQueueData s)
 sqsQueueData _name =
-    TF.unsafeDataSource "aws_sqs_queue" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_sqs_queue" TF.validator $
         SqsQueueData'
             { _name = _name
             }
@@ -6173,7 +6173,7 @@ ssmParameterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SsmParameterData s)
 ssmParameterData _name =
-    TF.unsafeDataSource "aws_ssm_parameter" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_ssm_parameter" TF.validator $
         SsmParameterData'
             { _name = _name
             , _withDecryption = TF.value P.True
@@ -6228,7 +6228,7 @@ storagegatewayLocalDiskData
     -> TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
     -> P.DataSource (StoragegatewayLocalDiskData s)
 storagegatewayLocalDiskData _diskPath _gatewayArn =
-    TF.unsafeDataSource "aws_storagegateway_local_disk" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_storagegateway_local_disk" TF.validator $
         StoragegatewayLocalDiskData'
             { _diskPath = _diskPath
             , _gatewayArn = _gatewayArn

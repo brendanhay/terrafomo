@@ -93,7 +93,7 @@ data SubnetData s = SubnetData'
 subnetData
     :: P.DataSource (SubnetData s)
 subnetData =
-    TF.unsafeDataSource "aws_subnet" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_subnet" TF.validator $
         SubnetData'
             { _filter = TF.Nil
             }
@@ -161,7 +161,7 @@ subnetIdsData
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.DataSource (SubnetIdsData s)
 subnetIdsData _vpcId =
-    TF.unsafeDataSource "aws_subnet_ids" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_subnet_ids" TF.validator $
         SubnetIdsData'
             { _filter = TF.Nil
             , _vpcId = _vpcId
@@ -208,7 +208,7 @@ data VpcData s = VpcData'
 vpcData
     :: P.DataSource (VpcData s)
 vpcData =
-    TF.unsafeDataSource "aws_vpc" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_vpc" TF.validator $
         VpcData'
             { _filter = TF.Nil
             }
@@ -278,7 +278,7 @@ data VpcDhcpOptionsData s = VpcDhcpOptionsData'
 vpcDhcpOptionsData
     :: P.DataSource (VpcDhcpOptionsData s)
 vpcDhcpOptionsData =
-    TF.unsafeDataSource "aws_vpc_dhcp_options" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_vpc_dhcp_options" TF.validator $
         VpcDhcpOptionsData'
             { _filter = TF.Nil
             }
@@ -330,7 +330,7 @@ data VpcEndpointData s = VpcEndpointData'
 vpcEndpointData
     :: P.DataSource (VpcEndpointData s)
 vpcEndpointData =
-    TF.unsafeDataSource "aws_vpc_endpoint" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_vpc_endpoint" TF.validator $
         VpcEndpointData'
 
 instance TF.IsObject (VpcEndpointData s) where
@@ -394,7 +394,7 @@ data VpcEndpointServiceData s = VpcEndpointServiceData'
 vpcEndpointServiceData
     :: P.DataSource (VpcEndpointServiceData s)
 vpcEndpointServiceData =
-    TF.unsafeDataSource "aws_vpc_endpoint_service" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_vpc_endpoint_service" TF.validator $
         VpcEndpointServiceData'
             { _service = TF.Nil
             }
@@ -452,7 +452,7 @@ data VpcPeeringConnectionData s = VpcPeeringConnectionData'
 vpcPeeringConnectionData
     :: P.DataSource (VpcPeeringConnectionData s)
 vpcPeeringConnectionData =
-    TF.unsafeDataSource "aws_vpc_peering_connection" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_vpc_peering_connection" TF.validator $
         VpcPeeringConnectionData'
             { _filter = TF.Nil
             }
@@ -522,7 +522,7 @@ data VpcsData s = VpcsData'
 vpcsData
     :: P.DataSource (VpcsData s)
 vpcsData =
-    TF.unsafeDataSource "aws_vpcs" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_vpcs" TF.validator $
         VpcsData'
             { _filter = TF.Nil
             }
@@ -562,7 +562,7 @@ data VpnGatewayData s = VpnGatewayData'
 vpnGatewayData
     :: P.DataSource (VpnGatewayData s)
 vpnGatewayData =
-    TF.unsafeDataSource "aws_vpn_gateway" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "aws_vpn_gateway" TF.validator $
         VpnGatewayData'
             { _filter = TF.Nil
             }

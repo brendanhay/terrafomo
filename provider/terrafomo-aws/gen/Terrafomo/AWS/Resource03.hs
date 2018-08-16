@@ -462,7 +462,7 @@ iamUserGroupMembershipResource
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
     -> P.Resource (IamUserGroupMembershipResource s)
 iamUserGroupMembershipResource _groups _user =
-    TF.unsafeResource "aws_iam_user_group_membership" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_iam_user_group_membership" TF.validator $
         IamUserGroupMembershipResource'
             { _groups = _groups
             , _user = _user
@@ -511,7 +511,7 @@ iamUserLoginProfileResource
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
     -> P.Resource (IamUserLoginProfileResource s)
 iamUserLoginProfileResource _pgpKey _user =
-    TF.unsafeResource "aws_iam_user_login_profile" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_iam_user_login_profile" TF.validator $
         IamUserLoginProfileResource'
             { _passwordLength = TF.value 20
             , _passwordResetRequired = TF.value P.True
@@ -577,7 +577,7 @@ iamUserPolicyResource
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
     -> P.Resource (IamUserPolicyResource s)
 iamUserPolicyResource _policy _user =
-    TF.unsafeResource "aws_iam_user_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_iam_user_policy" TF.validator $
         IamUserPolicyResource'
             { _namePrefix = TF.Nil
             , _policy = _policy
@@ -630,7 +630,7 @@ iamUserPolicyAttachmentResource
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
     -> P.Resource (IamUserPolicyAttachmentResource s)
 iamUserPolicyAttachmentResource _policyArn _user =
-    TF.unsafeResource "aws_iam_user_policy_attachment" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_iam_user_policy_attachment" TF.validator $
         IamUserPolicyAttachmentResource'
             { _policyArn = _policyArn
             , _user = _user
@@ -677,7 +677,7 @@ iamUserSshKeyResource
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.Resource (IamUserSshKeyResource s)
 iamUserSshKeyResource _encoding _publicKey _username =
-    TF.unsafeResource "aws_iam_user_ssh_key" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_iam_user_ssh_key" TF.validator $
         IamUserSshKeyResource'
             { _encoding = _encoding
             , _publicKey = _publicKey
@@ -736,7 +736,7 @@ inspectorAssessmentTargetResource
     -> TF.Attr s P.Text -- ^ @resource_group_arn@ - 'P.resourceGroupArn'
     -> P.Resource (InspectorAssessmentTargetResource s)
 inspectorAssessmentTargetResource _name _resourceGroupArn =
-    TF.unsafeResource "aws_inspector_assessment_target" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_inspector_assessment_target" TF.validator $
         InspectorAssessmentTargetResource'
             { _name = _name
             , _resourceGroupArn = _resourceGroupArn
@@ -790,7 +790,7 @@ inspectorAssessmentTemplateResource
     -> TF.Attr s P.Text -- ^ @target_arn@ - 'P.targetArn'
     -> P.Resource (InspectorAssessmentTemplateResource s)
 inspectorAssessmentTemplateResource _duration _name _rulesPackageArns _targetArn =
-    TF.unsafeResource "aws_inspector_assessment_template" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_inspector_assessment_template" TF.validator $
         InspectorAssessmentTemplateResource'
             { _duration = _duration
             , _name = _name
@@ -846,7 +846,7 @@ inspectorResourceGroupResource
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @tags@ - 'P.tags'
     -> P.Resource (InspectorResourceGroupResource s)
 inspectorResourceGroupResource _tags =
-    TF.unsafeResource "aws_inspector_resource_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_inspector_resource_group" TF.validator $
         InspectorResourceGroupResource'
             { _tags = _tags
             }
@@ -927,7 +927,7 @@ instanceResource
     -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
     -> P.Resource (InstanceResource s)
 instanceResource _ami _instanceType =
-    TF.unsafeResource "aws_instance" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_instance" TF.validator $
         InstanceResource'
             { _ami = _ami
             , _blockDevice = TF.Nil
@@ -1142,7 +1142,7 @@ data InternetGatewayResource s = InternetGatewayResource'
 internetGatewayResource
     :: P.Resource (InternetGatewayResource s)
 internetGatewayResource =
-    TF.unsafeResource "aws_internet_gateway" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_internet_gateway" TF.validator $
         InternetGatewayResource'
             { _tags = TF.Nil
             , _vpcId = TF.Nil
@@ -1185,7 +1185,7 @@ iotCertificateResource
     -> TF.Attr s P.Text -- ^ @csr@ - 'P.csr'
     -> P.Resource (IotCertificateResource s)
 iotCertificateResource _active _csr =
-    TF.unsafeResource "aws_iot_certificate" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_iot_certificate" TF.validator $
         IotCertificateResource'
             { _active = _active
             , _csr = _csr
@@ -1231,7 +1231,7 @@ iotPolicyResource
     -> TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
     -> P.Resource (IotPolicyResource s)
 iotPolicyResource _name _policy =
-    TF.unsafeResource "aws_iot_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_iot_policy" TF.validator $
         IotPolicyResource'
             { _name = _name
             , _policy = _policy
@@ -1282,7 +1282,7 @@ iotThingResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (IotThingResource s)
 iotThingResource _name =
-    TF.unsafeResource "aws_iot_thing" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_iot_thing" TF.validator $
         IotThingResource'
             { _attributes = TF.Nil
             , _name = _name
@@ -1343,7 +1343,7 @@ iotThingTypeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (IotThingTypeResource s)
 iotThingTypeResource _name =
-    TF.unsafeResource "aws_iot_thing_type" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_iot_thing_type" TF.validator $
         IotThingTypeResource'
             { _deprecated = TF.value P.False
             , _name = _name
@@ -1444,7 +1444,7 @@ iotTopicRuleResource
     -> TF.Attr s P.Text -- ^ @sql_version@ - 'P.sqlVersion'
     -> P.Resource (IotTopicRuleResource s)
 iotTopicRuleResource _enabled _name _sql _sqlVersion =
-    TF.unsafeResource "aws_iot_topic_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_iot_topic_rule" TF.validator $
         IotTopicRuleResource'
             { _cloudwatchAlarm = TF.Nil
             , _cloudwatchMetric = TF.Nil
@@ -1587,7 +1587,7 @@ keyPairResource
     :: TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
     -> P.Resource (KeyPairResource s)
 keyPairResource _publicKey =
-    TF.unsafeResource "aws_key_pair" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_key_pair" TF.validator $
         KeyPairResource'
             { _keyNamePrefix = TF.Nil
             , _publicKey = _publicKey
@@ -1660,7 +1660,7 @@ kinesisFirehoseDeliveryStreamResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (KinesisFirehoseDeliveryStreamResource s)
 kinesisFirehoseDeliveryStreamResource _destination _name =
-    TF.unsafeResource "aws_kinesis_firehose_delivery_stream" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_kinesis_firehose_delivery_stream" TF.validator $
         KinesisFirehoseDeliveryStreamResource'
             { _destination = _destination
             , _elasticsearchConfiguration = TF.Nil
@@ -1804,7 +1804,7 @@ kinesisStreamResource
     -> TF.Attr s P.Int -- ^ @shard_count@ - 'P.shardCount'
     -> P.Resource (KinesisStreamResource s)
 kinesisStreamResource _name _shardCount =
-    TF.unsafeResource "aws_kinesis_stream" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_kinesis_stream" TF.validator $
         KinesisStreamResource'
             { _encryptionType = TF.value "NONE"
             , _kmsKeyId = TF.Nil
@@ -1893,7 +1893,7 @@ kmsAliasResource
     :: TF.Attr s P.Text -- ^ @target_key_id@ - 'P.targetKeyId'
     -> P.Resource (KmsAliasResource s)
 kmsAliasResource _targetKeyId =
-    TF.unsafeResource "aws_kms_alias" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_kms_alias" TF.validator $
         KmsAliasResource'
             { _name = TF.Nil
             , _namePrefix = TF.Nil
@@ -1979,7 +1979,7 @@ kmsGrantResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @operations@ - 'P.operations'
     -> P.Resource (KmsGrantResource s)
 kmsGrantResource _granteePrincipal _keyId _operations =
-    TF.unsafeResource "aws_kms_grant" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_kms_grant" TF.validator $
         KmsGrantResource'
             { _constraints = TF.Nil
             , _grantCreationTokens = TF.Nil
@@ -2074,7 +2074,7 @@ data KmsKeyResource s = KmsKeyResource'
 kmsKeyResource
     :: P.Resource (KmsKeyResource s)
 kmsKeyResource =
-    TF.unsafeResource "aws_kms_key" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_kms_key" TF.validator $
         KmsKeyResource'
             { _deletionWindowInDays = TF.Nil
             , _enableKeyRotation = TF.value P.False
@@ -2156,7 +2156,7 @@ lambdaAliasResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LambdaAliasResource s)
 lambdaAliasResource _functionName _functionVersion _name =
-    TF.unsafeResource "aws_lambda_alias" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_lambda_alias" TF.validator $
         LambdaAliasResource'
             { _description = TF.Nil
             , _functionName = _functionName
@@ -2236,7 +2236,7 @@ lambdaEventSourceMappingResource
     -> TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
     -> P.Resource (LambdaEventSourceMappingResource s)
 lambdaEventSourceMappingResource _eventSourceArn _functionName =
-    TF.unsafeResource "aws_lambda_event_source_mapping" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_lambda_event_source_mapping" TF.validator $
         LambdaEventSourceMappingResource'
             { _batchSize = TF.Nil
             , _enabled = TF.value P.True
@@ -2382,7 +2382,7 @@ lambdaFunctionResource
     -> TF.Attr s P.Text -- ^ @runtime@ - 'P.runtime'
     -> P.Resource (LambdaFunctionResource s)
 lambdaFunctionResource _functionName _handler _role _runtime =
-    TF.unsafeResource "aws_lambda_function" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_lambda_function" TF.validator $
         LambdaFunctionResource'
             { _deadLetterConfig = TF.Nil
             , _description = TF.Nil
@@ -2613,7 +2613,7 @@ lambdaPermissionResource
     -> TF.Attr s P.Text -- ^ @principal@ - 'P.principal'
     -> P.Resource (LambdaPermissionResource s)
 lambdaPermissionResource _action _functionName _principal =
-    TF.unsafeResource "aws_lambda_permission" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_lambda_permission" TF.validator $
         LambdaPermissionResource'
             { _action = _action
             , _eventSourceToken = TF.Nil
@@ -2743,7 +2743,7 @@ launchConfigurationResource
     -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
     -> P.Resource (LaunchConfigurationResource s)
 launchConfigurationResource _imageId _instanceType =
-    TF.unsafeResource "aws_launch_configuration" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_launch_configuration" TF.validator $
         LaunchConfigurationResource'
             { _associatePublicIpAddress = TF.value P.False
             , _enableMonitoring = TF.value P.True
@@ -2963,7 +2963,7 @@ data LaunchTemplateResource s = LaunchTemplateResource'
 launchTemplateResource
     :: P.Resource (LaunchTemplateResource s)
 launchTemplateResource =
-    TF.unsafeResource "aws_launch_template" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_launch_template" TF.validator $
         LaunchTemplateResource'
             { _blockDeviceMappings = TF.Nil
             , _creditSpecification = TF.Nil
@@ -3209,7 +3209,7 @@ data LbResource s = LbResource'
 lbResource
     :: P.Resource (LbResource s)
 lbResource =
-    TF.unsafeResource "aws_lb" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_lb" TF.validator $
         LbResource'
             { _enableCrossZoneLoadBalancing = TF.value P.False
             , _enableDeletionProtection = TF.value P.False
@@ -3330,7 +3330,7 @@ lbCookieStickinessPolicyResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LbCookieStickinessPolicyResource s)
 lbCookieStickinessPolicyResource _lbPort _loadBalancer _name =
-    TF.unsafeResource "aws_lb_cookie_stickiness_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_lb_cookie_stickiness_policy" TF.validator $
         LbCookieStickinessPolicyResource'
             { _cookieExpirationPeriod = TF.Nil
             , _lbPort = _lbPort
@@ -3397,7 +3397,7 @@ lbListenerResource
     -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
     -> P.Resource (LbListenerResource s)
 lbListenerResource _defaultAction _loadBalancerArn _port =
-    TF.unsafeResource "aws_lb_listener" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_lb_listener" TF.validator $
         LbListenerResource'
             { _certificateArn = TF.Nil
             , _defaultAction = _defaultAction
@@ -3467,7 +3467,7 @@ lbListenerCertificateResource
     -> TF.Attr s P.Text -- ^ @listener_arn@ - 'P.listenerArn'
     -> P.Resource (LbListenerCertificateResource s)
 lbListenerCertificateResource _certificateArn _listenerArn =
-    TF.unsafeResource "aws_lb_listener_certificate" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_lb_listener_certificate" TF.validator $
         LbListenerCertificateResource'
             { _certificateArn = _certificateArn
             , _listenerArn = _listenerArn
@@ -3514,7 +3514,7 @@ lbListenerRuleResource
     -> TF.Attr s P.Text -- ^ @listener_arn@ - 'P.listenerArn'
     -> P.Resource (LbListenerRuleResource s)
 lbListenerRuleResource _action _condition _listenerArn =
-    TF.unsafeResource "aws_lb_listener_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_lb_listener_rule" TF.validator $
         LbListenerRuleResource'
             { _action = _action
             , _condition = _condition
@@ -3577,7 +3577,7 @@ lbSslNegotiationPolicyResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LbSslNegotiationPolicyResource s)
 lbSslNegotiationPolicyResource _lbPort _loadBalancer _name =
-    TF.unsafeResource "aws_lb_ssl_negotiation_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_lb_ssl_negotiation_policy" TF.validator $
         LbSslNegotiationPolicyResource'
             { _attribute = TF.Nil
             , _lbPort = _lbPort
@@ -3656,7 +3656,7 @@ lbTargetGroupResource
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.Resource (LbTargetGroupResource s)
 lbTargetGroupResource _port _protocol _vpcId =
-    TF.unsafeResource "aws_lb_target_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_lb_target_group" TF.validator $
         LbTargetGroupResource'
             { _deregistrationDelay = TF.value 300
             , _namePrefix = TF.Nil
@@ -3769,7 +3769,7 @@ lbTargetGroupAttachmentResource
     -> TF.Attr s P.Text -- ^ @target_id@ - 'P.targetId'
     -> P.Resource (LbTargetGroupAttachmentResource s)
 lbTargetGroupAttachmentResource _targetGroupArn _targetId =
-    TF.unsafeResource "aws_lb_target_group_attachment" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_lb_target_group_attachment" TF.validator $
         LbTargetGroupAttachmentResource'
             { _availabilityZone = TF.Nil
             , _port = TF.Nil
@@ -3822,7 +3822,7 @@ lightsailDomainResource
     :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
     -> P.Resource (LightsailDomainResource s)
 lightsailDomainResource _domainName =
-    TF.unsafeResource "aws_lightsail_domain" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_lightsail_domain" TF.validator $
         LightsailDomainResource'
             { _domainName = _domainName
             }
@@ -3875,7 +3875,7 @@ lightsailInstanceResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LightsailInstanceResource s)
 lightsailInstanceResource _availabilityZone _blueprintId _bundleId _name =
-    TF.unsafeResource "aws_lightsail_instance" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_lightsail_instance" TF.validator $
         LightsailInstanceResource'
             { _availabilityZone = _availabilityZone
             , _blueprintId = _blueprintId
@@ -3971,7 +3971,7 @@ data LightsailKeyPairResource s = LightsailKeyPairResource'
 lightsailKeyPairResource
     :: P.Resource (LightsailKeyPairResource s)
 lightsailKeyPairResource =
-    TF.unsafeResource "aws_lightsail_key_pair" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_lightsail_key_pair" TF.validator $
         LightsailKeyPairResource'
             { _namePrefix = TF.Nil
             , _pgpKey = TF.Nil
@@ -4031,7 +4031,7 @@ lightsailStaticIpResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LightsailStaticIpResource s)
 lightsailStaticIpResource _name =
-    TF.unsafeResource "aws_lightsail_static_ip" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_lightsail_static_ip" TF.validator $
         LightsailStaticIpResource'
             { _name = _name
             }
@@ -4076,7 +4076,7 @@ lightsailStaticIpAttachmentResource
     -> TF.Attr s P.Text -- ^ @static_ip_name@ - 'P.staticIpName'
     -> P.Resource (LightsailStaticIpAttachmentResource s)
 lightsailStaticIpAttachmentResource _instanceName _staticIpName =
-    TF.unsafeResource "aws_lightsail_static_ip_attachment" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_lightsail_static_ip_attachment" TF.validator $
         LightsailStaticIpAttachmentResource'
             { _instanceName = _instanceName
             , _staticIpName = _staticIpName
@@ -4122,7 +4122,7 @@ loadBalancerBackendServerPolicyResource
     -> TF.Attr s P.Text -- ^ @load_balancer_name@ - 'P.loadBalancerName'
     -> P.Resource (LoadBalancerBackendServerPolicyResource s)
 loadBalancerBackendServerPolicyResource _instancePort _loadBalancerName =
-    TF.unsafeResource "aws_load_balancer_backend_server_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_load_balancer_backend_server_policy" TF.validator $
         LoadBalancerBackendServerPolicyResource'
             { _instancePort = _instancePort
             , _loadBalancerName = _loadBalancerName
@@ -4175,7 +4175,7 @@ loadBalancerListenerPolicyResource
     -> TF.Attr s P.Int -- ^ @load_balancer_port@ - 'P.loadBalancerPort'
     -> P.Resource (LoadBalancerListenerPolicyResource s)
 loadBalancerListenerPolicyResource _loadBalancerName _loadBalancerPort =
-    TF.unsafeResource "aws_load_balancer_listener_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_load_balancer_listener_policy" TF.validator $
         LoadBalancerListenerPolicyResource'
             { _loadBalancerName = _loadBalancerName
             , _loadBalancerPort = _loadBalancerPort
@@ -4232,7 +4232,7 @@ loadBalancerPolicyResource
     -> TF.Attr s P.Text -- ^ @policy_type_name@ - 'P.policyTypeName'
     -> P.Resource (LoadBalancerPolicyResource s)
 loadBalancerPolicyResource _loadBalancerName _policyName _policyTypeName =
-    TF.unsafeResource "aws_load_balancer_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_load_balancer_policy" TF.validator $
         LoadBalancerPolicyResource'
             { _loadBalancerName = _loadBalancerName
             , _policyAttribute = TF.Nil
@@ -4285,7 +4285,7 @@ macieMemberAccountAssociationResource
     :: TF.Attr s P.Text -- ^ @member_account_id@ - 'P.memberAccountId'
     -> P.Resource (MacieMemberAccountAssociationResource s)
 macieMemberAccountAssociationResource _memberAccountId =
-    TF.unsafeResource "aws_macie_member_account_association" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_macie_member_account_association" TF.validator $
         MacieMemberAccountAssociationResource'
             { _memberAccountId = _memberAccountId
             }
@@ -4323,7 +4323,7 @@ macieS3BucketAssociationResource
     :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
     -> P.Resource (MacieS3BucketAssociationResource s)
 macieS3BucketAssociationResource _bucketName =
-    TF.unsafeResource "aws_macie_s3_bucket_association" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_macie_s3_bucket_association" TF.validator $
         MacieS3BucketAssociationResource'
             { _bucketName = _bucketName
             , _memberAccountId = TF.Nil
@@ -4376,7 +4376,7 @@ mainRouteTableAssociationResource
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.Resource (MainRouteTableAssociationResource s)
 mainRouteTableAssociationResource _routeTableId _vpcId =
-    TF.unsafeResource "aws_main_route_table_association" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_main_route_table_association" TF.validator $
         MainRouteTableAssociationResource'
             { _routeTableId = _routeTableId
             , _vpcId = _vpcId
@@ -4418,7 +4418,7 @@ mediaStoreContainerResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (MediaStoreContainerResource s)
 mediaStoreContainerResource _name =
-    TF.unsafeResource "aws_media_store_container" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_media_store_container" TF.validator $
         MediaStoreContainerResource'
             { _name = _name
             }
@@ -4460,7 +4460,7 @@ mediaStoreContainerPolicyResource
     -> TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
     -> P.Resource (MediaStoreContainerPolicyResource s)
 mediaStoreContainerPolicyResource _containerName _policy =
-    TF.unsafeResource "aws_media_store_container_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_media_store_container_policy" TF.validator $
         MediaStoreContainerPolicyResource'
             { _containerName = _containerName
             , _policy = _policy
@@ -4531,7 +4531,7 @@ mqBrokerResource
     -> TF.Attr s [TF.Attr s (UserSetting s)] -- ^ @user@ - 'P.user'
     -> P.Resource (MqBrokerResource s)
 mqBrokerResource _brokerName _engineType _engineVersion _hostInstanceType _securityGroups _user =
-    TF.unsafeResource "aws_mq_broker" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_mq_broker" TF.validator $
         MqBrokerResource'
             { _applyImmediately = TF.value P.False
             , _autoMinorVersionUpgrade = TF.value P.False
@@ -4656,7 +4656,7 @@ mqConfigurationResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (MqConfigurationResource s)
 mqConfigurationResource _data' _engineType _engineVersion _name =
-    TF.unsafeResource "aws_mq_configuration" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_mq_configuration" TF.validator $
         MqConfigurationResource'
             { _data' = _data'
             , _description = TF.Nil
@@ -4729,7 +4729,7 @@ natGatewayResource
     -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> P.Resource (NatGatewayResource s)
 natGatewayResource _allocationId _subnetId =
-    TF.unsafeResource "aws_nat_gateway" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_nat_gateway" TF.validator $
         NatGatewayResource'
             { _allocationId = _allocationId
             , _subnetId = _subnetId
@@ -4816,7 +4816,7 @@ data NeptuneClusterResource s = NeptuneClusterResource'
 neptuneClusterResource
     :: P.Resource (NeptuneClusterResource s)
 neptuneClusterResource =
-    TF.unsafeResource "aws_neptune_cluster" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_neptune_cluster" TF.validator $
         NeptuneClusterResource'
             { _backupRetentionPeriod = TF.value 1
             , _engine = TF.value "neptune"
@@ -4998,7 +4998,7 @@ neptuneClusterInstanceResource
     -> TF.Attr s P.Text -- ^ @instance_class@ - 'P.instanceClass'
     -> P.Resource (NeptuneClusterInstanceResource s)
 neptuneClusterInstanceResource _clusterIdentifier _instanceClass =
-    TF.unsafeResource "aws_neptune_cluster_instance" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_neptune_cluster_instance" TF.validator $
         NeptuneClusterInstanceResource'
             { _autoMinorVersionUpgrade = TF.value P.True
             , _clusterIdentifier = _clusterIdentifier
@@ -5140,7 +5140,7 @@ neptuneClusterParameterGroupResource
     :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
     -> P.Resource (NeptuneClusterParameterGroupResource s)
 neptuneClusterParameterGroupResource _family' =
-    TF.unsafeResource "aws_neptune_cluster_parameter_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_neptune_cluster_parameter_group" TF.validator $
         NeptuneClusterParameterGroupResource'
             { _description = TF.value "Managed by Terraform"
             , _family' = _family'
@@ -5217,7 +5217,7 @@ neptuneEventSubscriptionResource
     :: TF.Attr s P.Text -- ^ @sns_topic_arn@ - 'P.snsTopicArn'
     -> P.Resource (NeptuneEventSubscriptionResource s)
 neptuneEventSubscriptionResource _snsTopicArn =
-    TF.unsafeResource "aws_neptune_event_subscription" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_neptune_event_subscription" TF.validator $
         NeptuneEventSubscriptionResource'
             { _enabled = TF.value P.True
             , _eventCategories = TF.Nil
@@ -5309,7 +5309,7 @@ neptuneParameterGroupResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NeptuneParameterGroupResource s)
 neptuneParameterGroupResource _family' _name =
-    TF.unsafeResource "aws_neptune_parameter_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_neptune_parameter_group" TF.validator $
         NeptuneParameterGroupResource'
             { _description = TF.value "Managed by Terraform"
             , _family' = _family'
@@ -5378,7 +5378,7 @@ neptuneSubnetGroupResource
     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @subnet_ids@ - 'P.subnetIds'
     -> P.Resource (NeptuneSubnetGroupResource s)
 neptuneSubnetGroupResource _subnetIds =
-    TF.unsafeResource "aws_neptune_subnet_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_neptune_subnet_group" TF.validator $
         NeptuneSubnetGroupResource'
             { _description = TF.value "Managed by Terraform"
             , _subnetIds = _subnetIds
@@ -5436,7 +5436,7 @@ networkAclResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.Resource (NetworkAclResource s)
 networkAclResource _vpcId =
-    TF.unsafeResource "aws_network_acl" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_network_acl" TF.validator $
         NetworkAclResource'
             { _tags = TF.Nil
             , _vpcId = _vpcId
@@ -5523,7 +5523,7 @@ networkAclRuleResource
     -> TF.Attr s P.Int -- ^ @rule_number@ - 'P.ruleNumber'
     -> P.Resource (NetworkAclRuleResource s)
 networkAclRuleResource _networkAclId _protocol _ruleAction _ruleNumber =
-    TF.unsafeResource "aws_network_acl_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_network_acl_rule" TF.validator $
         NetworkAclRuleResource'
             { _cidrBlock = TF.Nil
             , _egress = TF.value P.False
@@ -5645,7 +5645,7 @@ networkInterfaceResource
     :: TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> P.Resource (NetworkInterfaceResource s)
 networkInterfaceResource _subnetId =
-    TF.unsafeResource "aws_network_interface" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_network_interface" TF.validator $
         NetworkInterfaceResource'
             { _description = TF.Nil
             , _sourceDestCheck = TF.value P.True
@@ -5724,7 +5724,7 @@ networkInterfaceAttachmentResource
     -> TF.Attr s P.Text -- ^ @network_interface_id@ - 'P.networkInterfaceId'
     -> P.Resource (NetworkInterfaceAttachmentResource s)
 networkInterfaceAttachmentResource _deviceIndex _instanceId _networkInterfaceId =
-    TF.unsafeResource "aws_network_interface_attachment" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_network_interface_attachment" TF.validator $
         NetworkInterfaceAttachmentResource'
             { _deviceIndex = _deviceIndex
             , _instanceId = _instanceId
@@ -5780,7 +5780,7 @@ networkInterfaceSgAttachmentResource
     -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
     -> P.Resource (NetworkInterfaceSgAttachmentResource s)
 networkInterfaceSgAttachmentResource _networkInterfaceId _securityGroupId =
-    TF.unsafeResource "aws_network_interface_sg_attachment" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_network_interface_sg_attachment" TF.validator $
         NetworkInterfaceSgAttachmentResource'
             { _networkInterfaceId = _networkInterfaceId
             , _securityGroupId = _securityGroupId
@@ -5863,7 +5863,7 @@ opsworksApplicationResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (OpsworksApplicationResource s)
 opsworksApplicationResource _name _stackId _type' =
-    TF.unsafeResource "aws_opsworks_application" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_opsworks_application" TF.validator $
         OpsworksApplicationResource'
             { _autoBundleOnDeploy = TF.Nil
             , _awsFlowRubySettings = TF.Nil
@@ -6061,7 +6061,7 @@ opsworksCustomLayerResource
     -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksCustomLayerResource s)
 opsworksCustomLayerResource _name _shortName _stackId =
-    TF.unsafeResource "aws_opsworks_custom_layer" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_opsworks_custom_layer" TF.validator $
         OpsworksCustomLayerResource'
             { _autoAssignElasticIps = TF.value P.False
             , _autoAssignPublicIps = TF.value P.False
@@ -6300,7 +6300,7 @@ opsworksGangliaLayerResource
     -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksGangliaLayerResource s)
 opsworksGangliaLayerResource _password _stackId =
-    TF.unsafeResource "aws_opsworks_ganglia_layer" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_opsworks_ganglia_layer" TF.validator $
         OpsworksGangliaLayerResource'
             { _autoAssignElasticIps = TF.value P.False
             , _autoAssignPublicIps = TF.value P.False
@@ -6562,7 +6562,7 @@ opsworksHaproxyLayerResource
     -> TF.Attr s P.Text -- ^ @stats_password@ - 'P.statsPassword'
     -> P.Resource (OpsworksHaproxyLayerResource s)
 opsworksHaproxyLayerResource _stackId _statsPassword =
-    TF.unsafeResource "aws_opsworks_haproxy_layer" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_opsworks_haproxy_layer" TF.validator $
         OpsworksHaproxyLayerResource'
             { _autoAssignElasticIps = TF.value P.False
             , _autoAssignPublicIps = TF.value P.False
@@ -6800,7 +6800,7 @@ opsworksInstanceResource
     -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksInstanceResource s)
 opsworksInstanceResource _layerIds _stackId =
-    TF.unsafeResource "aws_opsworks_instance" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_opsworks_instance" TF.validator $
         OpsworksInstanceResource'
             { _agentVersion = TF.value "INHERIT"
             , _architecture = TF.value "x86_64"
@@ -7076,7 +7076,7 @@ opsworksJavaAppLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksJavaAppLayerResource s)
 opsworksJavaAppLayerResource _stackId =
-    TF.unsafeResource "aws_opsworks_java_app_layer" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_opsworks_java_app_layer" TF.validator $
         OpsworksJavaAppLayerResource'
             { _appServer = TF.value "tomcat"
             , _appServerVersion = TF.value "7"
@@ -7336,7 +7336,7 @@ opsworksMemcachedLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksMemcachedLayerResource s)
 opsworksMemcachedLayerResource _stackId =
-    TF.unsafeResource "aws_opsworks_memcached_layer" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_opsworks_memcached_layer" TF.validator $
         OpsworksMemcachedLayerResource'
             { _allocatedMemory = TF.value 512
             , _autoAssignElasticIps = TF.value P.False
@@ -7571,7 +7571,7 @@ opsworksMysqlLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksMysqlLayerResource s)
 opsworksMysqlLayerResource _stackId =
-    TF.unsafeResource "aws_opsworks_mysql_layer" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_opsworks_mysql_layer" TF.validator $
         OpsworksMysqlLayerResource'
             { _autoAssignElasticIps = TF.value P.False
             , _autoAssignPublicIps = TF.value P.False
@@ -7810,7 +7810,7 @@ opsworksNodejsAppLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksNodejsAppLayerResource s)
 opsworksNodejsAppLayerResource _stackId =
-    TF.unsafeResource "aws_opsworks_nodejs_app_layer" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_opsworks_nodejs_app_layer" TF.validator $
         OpsworksNodejsAppLayerResource'
             { _autoAssignElasticIps = TF.value P.False
             , _autoAssignPublicIps = TF.value P.False
@@ -7982,7 +7982,7 @@ opsworksPermissionResource
     :: TF.Attr s P.Text -- ^ @user_arn@ - 'P.userArn'
     -> P.Resource (OpsworksPermissionResource s)
 opsworksPermissionResource _userArn =
-    TF.unsafeResource "aws_opsworks_permission" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_opsworks_permission" TF.validator $
         OpsworksPermissionResource'
             { _userArn = _userArn
             }
@@ -8083,7 +8083,7 @@ opsworksPhpAppLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksPhpAppLayerResource s)
 opsworksPhpAppLayerResource _stackId =
-    TF.unsafeResource "aws_opsworks_php_app_layer" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_opsworks_php_app_layer" TF.validator $
         OpsworksPhpAppLayerResource'
             { _autoAssignElasticIps = TF.value P.False
             , _autoAssignPublicIps = TF.value P.False
@@ -8323,7 +8323,7 @@ opsworksRailsAppLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksRailsAppLayerResource s)
 opsworksRailsAppLayerResource _stackId =
-    TF.unsafeResource "aws_opsworks_rails_app_layer" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_opsworks_rails_app_layer" TF.validator $
         OpsworksRailsAppLayerResource'
             { _appServer = TF.value "apache_passenger"
             , _autoAssignElasticIps = TF.value P.False
@@ -8542,7 +8542,7 @@ opsworksRdsDbInstanceResource
     -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksRdsDbInstanceResource s)
 opsworksRdsDbInstanceResource _dbPassword _dbUser _rdsDbInstanceArn _stackId =
-    TF.unsafeResource "aws_opsworks_rds_db_instance" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_opsworks_rds_db_instance" TF.validator $
         OpsworksRdsDbInstanceResource'
             { _dbPassword = _dbPassword
             , _dbUser = _dbUser
@@ -8646,7 +8646,7 @@ opsworksStackResource
     -> TF.Attr s P.Text -- ^ @service_role_arn@ - 'P.serviceRoleArn'
     -> P.Resource (OpsworksStackResource s)
 opsworksStackResource _defaultInstanceProfileArn _name _region _serviceRoleArn =
-    TF.unsafeResource "aws_opsworks_stack" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_opsworks_stack" TF.validator $
         OpsworksStackResource'
             { _berkshelfVersion = TF.value "3.2.0"
             , _color = TF.Nil
@@ -8868,7 +8868,7 @@ opsworksStaticWebLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> P.Resource (OpsworksStaticWebLayerResource s)
 opsworksStaticWebLayerResource _stackId =
-    TF.unsafeResource "aws_opsworks_static_web_layer" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_opsworks_static_web_layer" TF.validator $
         OpsworksStaticWebLayerResource'
             { _autoAssignElasticIps = TF.value P.False
             , _autoAssignPublicIps = TF.value P.False
@@ -9043,7 +9043,7 @@ opsworksUserProfileResource
     -> TF.Attr s P.Text -- ^ @user_arn@ - 'P.userArn'
     -> P.Resource (OpsworksUserProfileResource s)
 opsworksUserProfileResource _sshUsername _userArn =
-    TF.unsafeResource "aws_opsworks_user_profile" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_opsworks_user_profile" TF.validator $
         OpsworksUserProfileResource'
             { _allowSelfManagement = TF.value P.False
             , _sshPublicKey = TF.Nil
@@ -9106,7 +9106,7 @@ organizationsAccountResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (OrganizationsAccountResource s)
 organizationsAccountResource _email _name =
-    TF.unsafeResource "aws_organizations_account" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_organizations_account" TF.validator $
         OrganizationsAccountResource'
             { _email = _email
             , _iamUserAccessToBilling = TF.Nil
@@ -9170,7 +9170,7 @@ data OrganizationsOrganizationResource s = OrganizationsOrganizationResource'
 organizationsOrganizationResource
     :: P.Resource (OrganizationsOrganizationResource s)
 organizationsOrganizationResource =
-    TF.unsafeResource "aws_organizations_organization" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_organizations_organization" TF.validator $
         OrganizationsOrganizationResource'
             { _featureSet = TF.value "ALL"
             }
@@ -9224,7 +9224,7 @@ organizationsPolicyResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (OrganizationsPolicyResource s)
 organizationsPolicyResource _content _name =
-    TF.unsafeResource "aws_organizations_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_organizations_policy" TF.validator $
         OrganizationsPolicyResource'
             { _content = _content
             , _description = TF.Nil
@@ -9284,7 +9284,7 @@ organizationsPolicyAttachmentResource
     -> TF.Attr s P.Text -- ^ @target_id@ - 'P.targetId'
     -> P.Resource (OrganizationsPolicyAttachmentResource s)
 organizationsPolicyAttachmentResource _policyId _targetId =
-    TF.unsafeResource "aws_organizations_policy_attachment" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_organizations_policy_attachment" TF.validator $
         OrganizationsPolicyAttachmentResource'
             { _policyId = _policyId
             , _targetId = _targetId
@@ -9327,7 +9327,7 @@ placementGroupResource
     -> TF.Attr s P.Text -- ^ @strategy@ - 'P.strategy'
     -> P.Resource (PlacementGroupResource s)
 placementGroupResource _name _strategy =
-    TF.unsafeResource "aws_placement_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_placement_group" TF.validator $
         PlacementGroupResource'
             { _name = _name
             , _strategy = _strategy
@@ -9370,7 +9370,7 @@ proxyProtocolPolicyResource
     -> TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> P.Resource (ProxyProtocolPolicyResource s)
 proxyProtocolPolicyResource _instancePorts _loadBalancer =
-    TF.unsafeResource "aws_proxy_protocol_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_proxy_protocol_policy" TF.validator $
         ProxyProtocolPolicyResource'
             { _instancePorts = _instancePorts
             , _loadBalancer = _loadBalancer
@@ -9456,7 +9456,7 @@ data RdsClusterResource s = RdsClusterResource'
 rdsClusterResource
     :: P.Resource (RdsClusterResource s)
 rdsClusterResource =
-    TF.unsafeResource "aws_rds_cluster" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_rds_cluster" TF.validator $
         RdsClusterResource'
             { _backtrackWindow = TF.Nil
             , _backupRetentionPeriod = TF.value 1
@@ -9683,7 +9683,7 @@ rdsClusterInstanceResource
     -> TF.Attr s P.Text -- ^ @instance_class@ - 'P.instanceClass'
     -> P.Resource (RdsClusterInstanceResource s)
 rdsClusterInstanceResource _clusterIdentifier _instanceClass =
-    TF.unsafeResource "aws_rds_cluster_instance" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_rds_cluster_instance" TF.validator $
         RdsClusterInstanceResource'
             { _autoMinorVersionUpgrade = TF.value P.True
             , _clusterIdentifier = _clusterIdentifier
@@ -9830,7 +9830,7 @@ rdsClusterParameterGroupResource
     :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
     -> P.Resource (RdsClusterParameterGroupResource s)
 rdsClusterParameterGroupResource _family' =
-    TF.unsafeResource "aws_rds_cluster_parameter_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_rds_cluster_parameter_group" TF.validator $
         RdsClusterParameterGroupResource'
             { _description = TF.value "Managed by Terraform"
             , _family' = _family'
@@ -9947,7 +9947,7 @@ redshiftClusterResource
     -> TF.Attr s P.Text -- ^ @node_type@ - 'P.nodeType'
     -> P.Resource (RedshiftClusterResource s)
 redshiftClusterResource _clusterIdentifier _nodeType =
-    TF.unsafeResource "aws_redshift_cluster" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_redshift_cluster" TF.validator $
         RedshiftClusterResource'
             { _allowVersionUpgrade = TF.value P.True
             , _automatedSnapshotRetentionPeriod = TF.value 1
@@ -10171,7 +10171,7 @@ redshiftParameterGroupResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RedshiftParameterGroupResource s)
 redshiftParameterGroupResource _family' _name =
-    TF.unsafeResource "aws_redshift_parameter_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_redshift_parameter_group" TF.validator $
         RedshiftParameterGroupResource'
             { _description = TF.value "Managed by Terraform"
             , _family' = _family'
@@ -10231,7 +10231,7 @@ redshiftSecurityGroupResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RedshiftSecurityGroupResource s)
 redshiftSecurityGroupResource _ingress _name =
-    TF.unsafeResource "aws_redshift_security_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_redshift_security_group" TF.validator $
         RedshiftSecurityGroupResource'
             { _description = TF.value "Managed by Terraform"
             , _ingress = _ingress
@@ -10287,7 +10287,7 @@ redshiftSubnetGroupResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @subnet_ids@ - 'P.subnetIds'
     -> P.Resource (RedshiftSubnetGroupResource s)
 redshiftSubnetGroupResource _name _subnetIds =
-    TF.unsafeResource "aws_redshift_subnet_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_redshift_subnet_group" TF.validator $
         RedshiftSubnetGroupResource'
             { _description = TF.value "Managed by Terraform"
             , _name = _name
@@ -10349,7 +10349,7 @@ routeResource
     :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
     -> P.Resource (RouteResource s)
 routeResource _routeTableId =
-    TF.unsafeResource "aws_route" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_route" TF.validator $
         RouteResource'
             { _destinationCidrBlock = TF.Nil
             , _destinationIpv6CidrBlock = TF.Nil
@@ -10428,7 +10428,7 @@ data Route53DelegationSetResource s = Route53DelegationSetResource'
 route53DelegationSetResource
     :: P.Resource (Route53DelegationSetResource s)
 route53DelegationSetResource =
-    TF.unsafeResource "aws_route53_delegation_set" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_route53_delegation_set" TF.validator $
         Route53DelegationSetResource'
             { _referenceName = TF.Nil
             }
@@ -10514,7 +10514,7 @@ route53HealthCheckResource
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (Route53HealthCheckResource s)
 route53HealthCheckResource _type' =
-    TF.unsafeResource "aws_route53_health_check" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_route53_health_check" TF.validator $
         Route53HealthCheckResource'
             { _childHealthThreshold = TF.Nil
             , _childHealthchecks = TF.Nil
@@ -10672,7 +10672,7 @@ route53QueryLogResource
     -> TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
     -> P.Resource (Route53QueryLogResource s)
 route53QueryLogResource _cloudwatchLogGroupArn _zoneId =
-    TF.unsafeResource "aws_route53_query_log" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_route53_query_log" TF.validator $
         Route53QueryLogResource'
             { _cloudwatchLogGroupArn = _cloudwatchLogGroupArn
             , _zoneId = _zoneId
@@ -10798,7 +10798,7 @@ route53RecordResource
     -> TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
     -> P.Resource (Route53RecordResource s)
 route53RecordResource _name _type' _zoneId =
-    TF.unsafeResource "aws_route53_record" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_route53_record" TF.validator $
         Route53RecordResource'
             { _alias = TF.Nil
             , _allowOverwrite = TF.value P.True
@@ -11000,7 +11000,7 @@ route53ZoneResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (Route53ZoneResource s)
 route53ZoneResource _name =
-    TF.unsafeResource "aws_route53_zone" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_route53_zone" TF.validator $
         Route53ZoneResource'
             { _comment = TF.value "Managed by Terraform"
             , _delegationSetId = TF.Nil
@@ -11091,7 +11091,7 @@ route53ZoneAssociationResource
     -> TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
     -> P.Resource (Route53ZoneAssociationResource s)
 route53ZoneAssociationResource _vpcId _zoneId =
-    TF.unsafeResource "aws_route53_zone_association" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_route53_zone_association" TF.validator $
         Route53ZoneAssociationResource'
             { _vpcId = _vpcId
             , _zoneId = _zoneId
@@ -11136,7 +11136,7 @@ routeTableResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.Resource (RouteTableResource s)
 routeTableResource _vpcId =
-    TF.unsafeResource "aws_route_table" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_route_table" TF.validator $
         RouteTableResource'
             { _tags = TF.Nil
             , _vpcId = _vpcId
@@ -11185,7 +11185,7 @@ routeTableAssociationResource
     -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> P.Resource (RouteTableAssociationResource s)
 routeTableAssociationResource _routeTableId _subnetId =
-    TF.unsafeResource "aws_route_table_association" P.defaultProvider TF.validator $
+    TF.unsafeResource "aws_route_table_association" TF.validator $
         RouteTableAssociationResource'
             { _routeTableId = _routeTableId
             , _subnetId = _subnetId
