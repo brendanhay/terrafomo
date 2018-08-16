@@ -1716,11 +1716,11 @@ data DatabaseSecretBackendRoleResource s = DatabaseSecretBackendRoleResource'
 
 databaseSecretBackendRoleResource
     :: TF.Attr s P.Text -- ^ @backend@ - 'P.backend'
-    -> TF.Attr s P.Text -- ^ @creation_statements@ - 'P.creationStatements'
     -> TF.Attr s P.Text -- ^ @db_name@ - 'P.dbName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @creation_statements@ - 'P.creationStatements'
     -> P.Resource (DatabaseSecretBackendRoleResource s)
-databaseSecretBackendRoleResource _backend _creationStatements _dbName _name =
+databaseSecretBackendRoleResource _backend _dbName _name _creationStatements =
     TF.unsafeResource "vault_database_secret_backend_role" TF.validator $
         DatabaseSecretBackendRoleResource'
             { _backend = _backend
