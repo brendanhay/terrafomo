@@ -117,6 +117,9 @@ instance P.HasName (ConfigResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ConfigResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ConfigResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ConfigResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @docker_container@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/docker/r/container.html terraform documentation>
@@ -474,6 +477,9 @@ instance P.HasVolumes (ContainerResource s) (TF.Attr s [TF.Attr s (VolumesSettin
         P.lens (_volumes :: ContainerResource s -> TF.Attr s [TF.Attr s (VolumesSetting s)])
                (\s a -> s { _volumes = a } :: ContainerResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedBridge (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
     computedBridge x = TF.compute (TF.refKey x) "bridge"
 
@@ -537,6 +543,9 @@ instance P.HasPullTriggers (ImageResource s) (TF.Attr s [TF.Attr s P.Text]) wher
     pullTriggers =
         P.lens (_pullTriggers :: ImageResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _pullTriggers = a } :: ImageResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedLatest (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
     computedLatest x = TF.compute (TF.refKey x) "latest"
@@ -603,6 +612,9 @@ instance P.HasName (NetworkResource s) (TF.Attr s P.Text) where
         P.lens (_name :: NetworkResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: NetworkResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDriver (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
     computedDriver x = TF.compute (TF.refKey x) "driver"
 
@@ -659,6 +671,9 @@ instance P.HasName (SecretResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SecretResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SecretResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecretResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @docker_service@ Resource.
 --
@@ -765,6 +780,9 @@ instance P.HasUpdateConfig (ServiceResource s) (TF.Attr s (UpdateConfigSetting s
         P.lens (_updateConfig :: ServiceResource s -> TF.Attr s (UpdateConfigSetting s))
                (\s a -> s { _updateConfig = a } :: ServiceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEndpointSpec (TF.Ref s' (ServiceResource s)) (TF.Attr s (EndpointSpecSetting s)) where
     computedEndpointSpec x = TF.compute (TF.refKey x) "endpoint_spec"
 
@@ -804,6 +822,9 @@ instance P.HasDriverOpts (VolumeResource s) (TF.Attr s (P.Map P.Text (TF.Attr s 
     driverOpts =
         P.lens (_driverOpts :: VolumeResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _driverOpts = a } :: VolumeResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDriver (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
     computedDriver x = TF.compute (TF.refKey x) "driver"
