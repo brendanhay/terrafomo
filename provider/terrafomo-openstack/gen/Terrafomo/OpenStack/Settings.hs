@@ -19,95 +19,95 @@ module Terrafomo.OpenStack.Settings
     (
     -- ** allocation_pools
       AllocationPoolsSetting (..)
-    , newAllocationPoolsSetting
+    , allocationPoolsSetting
 
     -- ** allowed_address_pairs
     , AllowedAddressPairsSetting (..)
-    , newAllowedAddressPairsSetting
+    , allowedAddressPairsSetting
 
     -- ** attachment
     , AttachmentSetting (..)
-    , newAttachmentSetting
+    , attachmentSetting
 
     -- ** block_device
     , BlockDeviceSetting (..)
-    , newBlockDeviceSetting
+    , blockDeviceSetting
 
     -- ** configuration
     , ConfigurationSetting (..)
-    , newConfigurationSetting
+    , configurationSetting
 
     -- ** database
     , DatabaseSetting (..)
-    , newDatabaseSetting
+    , databaseSetting
 
     -- ** datastore
     , DatastoreSetting (..)
-    , newDatastoreSetting
+    , datastoreSetting
 
     -- ** dpd
     , DpdSetting (..)
-    , newDpdSetting
+    , dpdSetting
 
     -- ** external_fixed_ip
     , ExternalFixedIpSetting (..)
-    , newExternalFixedIpSetting
+    , externalFixedIpSetting
 
     -- ** fixed_ip
     , FixedIpSetting (..)
-    , newFixedIpSetting
+    , fixedIpSetting
 
     -- ** host_routes
     , HostRoutesSetting (..)
-    , newHostRoutesSetting
+    , hostRoutesSetting
 
     -- ** lifetime
     , LifetimeSetting (..)
-    , newLifetimeSetting
+    , lifetimeSetting
 
     -- ** multi_factor_auth_rule
     , MultiFactorAuthRuleSetting (..)
-    , newMultiFactorAuthRuleSetting
+    , multiFactorAuthRuleSetting
 
     -- ** network
     , NetworkSetting (..)
-    , newNetworkSetting
+    , networkSetting
 
     -- ** persistence
     , PersistenceSetting (..)
-    , newPersistenceSetting
+    , persistenceSetting
 
     -- ** personality
     , PersonalitySetting (..)
-    , newPersonalitySetting
+    , personalitySetting
 
     -- ** roles
     , RolesSetting (..)
-    , newRolesSetting
+    , rolesSetting
 
     -- ** rule
     , RuleSetting (..)
-    , newRuleSetting
+    , ruleSetting
 
     -- ** scheduler_hints
     , SchedulerHintsSetting (..)
-    , newSchedulerHintsSetting
+    , schedulerHintsSetting
 
     -- ** segments
     , SegmentsSetting (..)
-    , newSegmentsSetting
+    , segmentsSetting
 
     -- ** user
     , UserSetting (..)
-    , newUserSetting
+    , userSetting
 
     -- ** vendor_options
     , VendorOptionsSetting (..)
-    , newVendorOptionsSetting
+    , vendorOptionsSetting
 
     -- ** volume
     , VolumeSetting (..)
-    , newVolumeSetting
+    , volumeSetting
 
     ) where
 
@@ -143,11 +143,11 @@ data AllocationPoolsSetting s = AllocationPoolsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @allocation_pools@ settings value.
-newAllocationPoolsSetting
+allocationPoolsSetting
     :: TF.Attr s P.Text -- ^ 'P._end': @end@
     -> TF.Attr s P.Text -- ^ 'P._start': @start@
     -> AllocationPoolsSetting s
-newAllocationPoolsSetting _end _start =
+allocationPoolsSetting _end _start =
     AllocationPoolsSetting'
         { _end = _end
         , _start = _start
@@ -190,10 +190,10 @@ data AllowedAddressPairsSetting s = AllowedAddressPairsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @allowed_address_pairs@ settings value.
-newAllowedAddressPairsSetting
+allowedAddressPairsSetting
     :: TF.Attr s P.Text -- ^ 'P._ipAddress': @ip_address@
     -> AllowedAddressPairsSetting s
-newAllowedAddressPairsSetting _ipAddress =
+allowedAddressPairsSetting _ipAddress =
     AllowedAddressPairsSetting'
         { _ipAddress = _ipAddress
         , _macAddress = TF.Nil
@@ -224,9 +224,9 @@ data AttachmentSetting s = AttachmentSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @attachment@ settings value.
-newAttachmentSetting
+attachmentSetting
     :: AttachmentSetting s
-newAttachmentSetting =
+attachmentSetting =
     AttachmentSetting'
 
 instance TF.IsValue  (AttachmentSetting s)
@@ -271,10 +271,10 @@ data BlockDeviceSetting s = BlockDeviceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @block_device@ settings value.
-newBlockDeviceSetting
+blockDeviceSetting
     :: TF.Attr s P.Text -- ^ 'P._sourceType': @source_type@
     -> BlockDeviceSetting s
-newBlockDeviceSetting _sourceType =
+blockDeviceSetting _sourceType =
     BlockDeviceSetting'
         { _bootIndex = TF.Nil
         , _deleteOnTermination = TF.value P.False
@@ -346,11 +346,11 @@ data ConfigurationSetting s = ConfigurationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @configuration@ settings value.
-newConfigurationSetting
+configurationSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> ConfigurationSetting s
-newConfigurationSetting _name _value =
+configurationSetting _name _value =
     ConfigurationSetting'
         { _name = _name
         , _value = _value
@@ -390,10 +390,10 @@ data DatabaseSetting s = DatabaseSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @database@ settings value.
-newDatabaseSetting
+databaseSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> DatabaseSetting s
-newDatabaseSetting _name =
+databaseSetting _name =
     DatabaseSetting'
         { _charset = TF.Nil
         , _collate = TF.Nil
@@ -437,11 +437,11 @@ data DatastoreSetting s = DatastoreSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @datastore@ settings value.
-newDatastoreSetting
+datastoreSetting
     :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> TF.Attr s P.Text -- ^ 'P._version': @version@
     -> DatastoreSetting s
-newDatastoreSetting _type' _version =
+datastoreSetting _type' _version =
     DatastoreSetting'
         { _type' = _type'
         , _version = _version
@@ -472,9 +472,9 @@ data DpdSetting s = DpdSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @dpd@ settings value.
-newDpdSetting
+dpdSetting
     :: DpdSetting s
-newDpdSetting =
+dpdSetting =
     DpdSetting'
 
 instance TF.IsValue  (DpdSetting s)
@@ -504,9 +504,9 @@ data ExternalFixedIpSetting s = ExternalFixedIpSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @external_fixed_ip@ settings value.
-newExternalFixedIpSetting
+externalFixedIpSetting
     :: ExternalFixedIpSetting s
-newExternalFixedIpSetting =
+externalFixedIpSetting =
     ExternalFixedIpSetting'
         { _ipAddress = TF.Nil
         , _subnetId = TF.Nil
@@ -543,10 +543,10 @@ data FixedIpSetting s = FixedIpSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @fixed_ip@ settings value.
-newFixedIpSetting
+fixedIpSetting
     :: TF.Attr s P.Text -- ^ 'P._subnetId': @subnet_id@
     -> FixedIpSetting s
-newFixedIpSetting _subnetId =
+fixedIpSetting _subnetId =
     FixedIpSetting'
         { _ipAddress = TF.Nil
         , _subnetId = _subnetId
@@ -583,11 +583,11 @@ data HostRoutesSetting s = HostRoutesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @host_routes@ settings value.
-newHostRoutesSetting
+hostRoutesSetting
     :: TF.Attr s P.Text -- ^ 'P._destinationCidr': @destination_cidr@
     -> TF.Attr s P.Text -- ^ 'P._nextHop': @next_hop@
     -> HostRoutesSetting s
-newHostRoutesSetting _destinationCidr _nextHop =
+hostRoutesSetting _destinationCidr _nextHop =
     HostRoutesSetting'
         { _destinationCidr = _destinationCidr
         , _nextHop = _nextHop
@@ -624,9 +624,9 @@ data LifetimeSetting s = LifetimeSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @lifetime@ settings value.
-newLifetimeSetting
+lifetimeSetting
     :: LifetimeSetting s
-newLifetimeSetting =
+lifetimeSetting =
     LifetimeSetting'
 
 instance TF.IsValue  (LifetimeSetting s)
@@ -650,10 +650,10 @@ data MultiFactorAuthRuleSetting s = MultiFactorAuthRuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @multi_factor_auth_rule@ settings value.
-newMultiFactorAuthRuleSetting
+multiFactorAuthRuleSetting
     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ 'P._rule': @rule@
     -> MultiFactorAuthRuleSetting s
-newMultiFactorAuthRuleSetting _rule =
+multiFactorAuthRuleSetting _rule =
     MultiFactorAuthRuleSetting'
         { _rule = _rule
         }
@@ -692,9 +692,9 @@ data NetworkSetting s = NetworkSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @network@ settings value.
-newNetworkSetting
+networkSetting
     :: NetworkSetting s
-newNetworkSetting =
+networkSetting =
     NetworkSetting'
         { _accessNetwork = TF.value P.False
         , _fixedIpV4 = TF.Nil
@@ -773,10 +773,10 @@ data PersistenceSetting s = PersistenceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @persistence@ settings value.
-newPersistenceSetting
+persistenceSetting
     :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> PersistenceSetting s
-newPersistenceSetting _type' =
+persistenceSetting _type' =
     PersistenceSetting'
         { _cookieName = TF.Nil
         , _type' = _type'
@@ -813,11 +813,11 @@ data PersonalitySetting s = PersonalitySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @personality@ settings value.
-newPersonalitySetting
+personalitySetting
     :: TF.Attr s P.Text -- ^ 'P._content': @content@
     -> TF.Attr s P.Text -- ^ 'P._file': @file@
     -> PersonalitySetting s
-newPersonalitySetting _content _file =
+personalitySetting _content _file =
     PersonalitySetting'
         { _content = _content
         , _file = _file
@@ -848,9 +848,9 @@ data RolesSetting s = RolesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @roles@ settings value.
-newRolesSetting
+rolesSetting
     :: RolesSetting s
-newRolesSetting =
+rolesSetting =
     RolesSetting'
 
 instance TF.IsValue  (RolesSetting s)
@@ -889,12 +889,12 @@ data RuleSetting s = RuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @rule@ settings value.
-newRuleSetting
+ruleSetting
     :: TF.Attr s P.Int -- ^ 'P._fromPort': @from_port@
     -> TF.Attr s P.Int -- ^ 'P._toPort': @to_port@
     -> TF.Attr s P.Text -- ^ 'P._ipProtocol': @ip_protocol@
     -> RuleSetting s
-newRuleSetting _fromPort _toPort _ipProtocol =
+ruleSetting _fromPort _toPort _ipProtocol =
     RuleSetting'
         { _cidr = TF.Nil
         , _fromGroupId = TF.Nil
@@ -977,9 +977,9 @@ data SchedulerHintsSetting s = SchedulerHintsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @scheduler_hints@ settings value.
-newSchedulerHintsSetting
+schedulerHintsSetting
     :: SchedulerHintsSetting s
-newSchedulerHintsSetting =
+schedulerHintsSetting =
     SchedulerHintsSetting'
         { _additionalProperties = TF.Nil
         , _buildNearHostIp = TF.Nil
@@ -1054,9 +1054,9 @@ data SegmentsSetting s = SegmentsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @segments@ settings value.
-newSegmentsSetting
+segmentsSetting
     :: SegmentsSetting s
-newSegmentsSetting =
+segmentsSetting =
     SegmentsSetting'
         { _networkType = TF.Nil
         , _physicalNetwork = TF.Nil
@@ -1106,10 +1106,10 @@ data UserSetting s = UserSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @user@ settings value.
-newUserSetting
+userSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> UserSetting s
-newUserSetting _name =
+userSetting _name =
     UserSetting'
         { _databases = TF.Nil
         , _host = TF.Nil
@@ -1157,9 +1157,9 @@ data VendorOptionsSetting s = VendorOptionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @vendor_options@ settings value.
-newVendorOptionsSetting
+vendorOptionsSetting
     :: VendorOptionsSetting s
-newVendorOptionsSetting =
+vendorOptionsSetting =
     VendorOptionsSetting'
         { _setRouterGatewayAfterCreate = TF.value P.False
         }
@@ -1186,10 +1186,10 @@ data VolumeSetting s = VolumeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @volume@ settings value.
-newVolumeSetting
+volumeSetting
     :: TF.Attr s P.Text -- ^ 'P._volumeId': @volume_id@
     -> VolumeSetting s
-newVolumeSetting _volumeId =
+volumeSetting _volumeId =
     VolumeSetting'
         { _volumeId = _volumeId
         }
