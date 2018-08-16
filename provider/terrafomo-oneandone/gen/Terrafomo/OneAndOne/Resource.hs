@@ -111,9 +111,9 @@ data BlockStorageResource s = BlockStorageResource'
 
 -- | Define a new @oneandone_block_storage@ resource value.
 blockStorageResource
-    :: TF.Attr s P.Text -- ^ @datacenter@ - 'P.datacenter'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
+    :: TF.Attr s P.Text -- ^ @datacenter@ ('P._datacenter', 'P.datacenter')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Int -- ^ @size@ ('P._size', 'P.size')
     -> P.Resource (BlockStorageResource s)
 blockStorageResource _datacenter _name _size =
     TF.unsafeResource "oneandone_block_storage" TF.validator $
@@ -183,8 +183,8 @@ data FirewallPolicyResource s = FirewallPolicyResource'
 
 -- | Define a new @oneandone_firewall_policy@ resource value.
 firewallPolicyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (RulesSetting s)] -- ^ @rules@ - 'P.rules'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s [TF.Attr s (RulesSetting s)] -- ^ @rules@ ('P._rules', 'P.rules')
     -> P.Resource (FirewallPolicyResource s)
 firewallPolicyResource _name _rules =
     TF.unsafeResource "oneandone_firewall_policy" TF.validator $
@@ -267,7 +267,7 @@ data ImageResource s = ImageResource'
 
 -- | Define a new @oneandone_image@ resource value.
 imageResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ImageResource s)
 imageResource _name =
     TF.unsafeResource "oneandone_image" TF.validator $
@@ -407,9 +407,9 @@ data LoadbalancerResource s = LoadbalancerResource'
 
 -- | Define a new @oneandone_loadbalancer@ resource value.
 loadbalancerResource
-    :: TF.Attr s P.Text -- ^ @method@ - 'P.method'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (RulesSetting s)] -- ^ @rules@ - 'P.rules'
+    :: TF.Attr s P.Text -- ^ @method@ ('P._method', 'P.method')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s [TF.Attr s (RulesSetting s)] -- ^ @rules@ ('P._rules', 'P.rules')
     -> P.Resource (LoadbalancerResource s)
 loadbalancerResource _method _name _rules =
     TF.unsafeResource "oneandone_loadbalancer" TF.validator $
@@ -533,9 +533,9 @@ data MonitoringPolicyResource s = MonitoringPolicyResource'
 
 -- | Define a new @oneandone_monitoring_policy@ resource value.
 monitoringPolicyResource
-    :: TF.Attr s P.Bool -- ^ @agent@ - 'P.agent'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (ThresholdsSetting s)] -- ^ @thresholds@ - 'P.thresholds'
+    :: TF.Attr s P.Bool -- ^ @agent@ ('P._agent', 'P.agent')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s [TF.Attr s (ThresholdsSetting s)] -- ^ @thresholds@ ('P._thresholds', 'P.thresholds')
     -> P.Resource (MonitoringPolicyResource s)
 monitoringPolicyResource _agent _name _thresholds =
     TF.unsafeResource "oneandone_monitoring_policy" TF.validator $
@@ -628,7 +628,7 @@ data PrivateNetworkResource s = PrivateNetworkResource'
 
 -- | Define a new @oneandone_private_network@ resource value.
 privateNetworkResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (PrivateNetworkResource s)
 privateNetworkResource _name =
     TF.unsafeResource "oneandone_private_network" TF.validator $
@@ -705,7 +705,7 @@ data PublicIpResource s = PublicIpResource'
 
 -- | Define a new @oneandone_public_ip@ resource value.
 publicIpResource
-    :: TF.Attr s P.Text -- ^ @ip_type@ - 'P.ipType'
+    :: TF.Attr s P.Text -- ^ @ip_type@ ('P._ipType', 'P.ipType')
     -> P.Resource (PublicIpResource s)
 publicIpResource _ipType =
     TF.unsafeResource "oneandone_public_ip" TF.validator $
@@ -824,8 +824,8 @@ data ServerResource s = ServerResource'
 
 -- | Define a new @oneandone_server@ resource value.
 serverResource
-    :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @image@ ('P._image', 'P.image')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ServerResource s)
 serverResource _image _name =
     TF.unsafeResource "oneandone_server" TF.validator $
@@ -1013,9 +1013,9 @@ data SharedStorageResource s = SharedStorageResource'
 
 -- | Define a new @oneandone_shared_storage@ resource value.
 sharedStorageResource
-    :: TF.Attr s P.Text -- ^ @datacenter@ - 'P.datacenter'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
+    :: TF.Attr s P.Text -- ^ @datacenter@ ('P._datacenter', 'P.datacenter')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Int -- ^ @size@ ('P._size', 'P.size')
     -> P.Resource (SharedStorageResource s)
 sharedStorageResource _datacenter _name _size =
     TF.unsafeResource "oneandone_shared_storage" TF.validator $
@@ -1082,7 +1082,7 @@ data SshKeyResource s = SshKeyResource'
 
 -- | Define a new @oneandone_ssh_key@ resource value.
 sshKeyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (SshKeyResource s)
 sshKeyResource _name =
     TF.unsafeResource "oneandone_ssh_key" TF.validator $
@@ -1140,7 +1140,7 @@ data VpnResource s = VpnResource'
 
 -- | Define a new @oneandone_vpn@ resource value.
 vpnResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (VpnResource s)
 vpnResource _name =
     TF.unsafeResource "oneandone_vpn" TF.validator $

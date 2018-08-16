@@ -112,8 +112,8 @@ data CpuSetting s = CpuSetting'
 
 -- | Construct a new @cpu@ settings value.
 newCpuSetting
-    :: TF.Attr s [TF.Attr s (CriticalSetting s)] -- ^ @critical@ - 'P.critical'
-    -> TF.Attr s [TF.Attr s (WarningSetting s)] -- ^ @warning@ - 'P.warning'
+    :: TF.Attr s [TF.Attr s (CriticalSetting s)] -- ^ 'P._critical': @critical@
+    -> TF.Attr s [TF.Attr s (WarningSetting s)] -- ^ 'P._warning': @warning@
     -> CpuSetting s
 newCpuSetting _critical _warning =
     CpuSetting'
@@ -153,8 +153,8 @@ data CriticalSetting s = CriticalSetting'
 
 -- | Construct a new @critical@ settings value.
 newCriticalSetting
-    :: TF.Attr s P.Bool -- ^ @alert@ - 'P.alert'
-    -> TF.Attr s P.Int -- ^ @value@ - 'P.value'
+    :: TF.Attr s P.Bool -- ^ 'P._alert': @alert@
+    -> TF.Attr s P.Int -- ^ 'P._value': @value@
     -> CriticalSetting s
 newCriticalSetting _alert _value =
     CriticalSetting'
@@ -194,8 +194,8 @@ data DiskSetting s = DiskSetting'
 
 -- | Construct a new @disk@ settings value.
 newDiskSetting
-    :: TF.Attr s [TF.Attr s (CriticalSetting s)] -- ^ @critical@ - 'P.critical'
-    -> TF.Attr s [TF.Attr s (WarningSetting s)] -- ^ @warning@ - 'P.warning'
+    :: TF.Attr s [TF.Attr s (CriticalSetting s)] -- ^ 'P._critical': @critical@
+    -> TF.Attr s [TF.Attr s (WarningSetting s)] -- ^ 'P._warning': @warning@
     -> DiskSetting s
 newDiskSetting _critical _warning =
     DiskSetting'
@@ -235,7 +235,7 @@ data HddsSetting s = HddsSetting'
 
 -- | Construct a new @hdds@ settings value.
 newHddsSetting
-    :: TF.Attr s P.Int -- ^ @disk_size@ - 'P.diskSize'
+    :: TF.Attr s P.Int -- ^ 'P._diskSize': @disk_size@
     -> HddsSetting s
 newHddsSetting _diskSize =
     HddsSetting'
@@ -278,8 +278,8 @@ data InternalPingSetting s = InternalPingSetting'
 
 -- | Construct a new @internal_ping@ settings value.
 newInternalPingSetting
-    :: TF.Attr s [TF.Attr s (CriticalSetting s)] -- ^ @critical@ - 'P.critical'
-    -> TF.Attr s [TF.Attr s (WarningSetting s)] -- ^ @warning@ - 'P.warning'
+    :: TF.Attr s [TF.Attr s (CriticalSetting s)] -- ^ 'P._critical': @critical@
+    -> TF.Attr s [TF.Attr s (WarningSetting s)] -- ^ 'P._warning': @warning@
     -> InternalPingSetting s
 newInternalPingSetting _critical _warning =
     InternalPingSetting'
@@ -360,8 +360,8 @@ data PortsSetting s = PortsSetting'
 
 -- | Construct a new @ports@ settings value.
 newPortsSetting
-    :: TF.Attr s P.Bool -- ^ @email_notification@ - 'P.emailNotification'
-    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
+    :: TF.Attr s P.Bool -- ^ 'P._emailNotification': @email_notification@
+    -> TF.Attr s P.Int -- ^ 'P._port': @port@
     -> PortsSetting s
 newPortsSetting _emailNotification _port =
     PortsSetting'
@@ -421,8 +421,8 @@ data ProcessesSetting s = ProcessesSetting'
 
 -- | Construct a new @processes@ settings value.
 newProcessesSetting
-    :: TF.Attr s P.Bool -- ^ @email_notification@ - 'P.emailNotification'
-    -> TF.Attr s P.Text -- ^ @process@ - 'P.process'
+    :: TF.Attr s P.Bool -- ^ 'P._emailNotification': @email_notification@
+    -> TF.Attr s P.Text -- ^ 'P._process': @process@
     -> ProcessesSetting s
 newProcessesSetting _emailNotification _process =
     ProcessesSetting'
@@ -472,8 +472,8 @@ data RamSetting s = RamSetting'
 
 -- | Construct a new @ram@ settings value.
 newRamSetting
-    :: TF.Attr s [TF.Attr s (CriticalSetting s)] -- ^ @critical@ - 'P.critical'
-    -> TF.Attr s [TF.Attr s (WarningSetting s)] -- ^ @warning@ - 'P.warning'
+    :: TF.Attr s [TF.Attr s (CriticalSetting s)] -- ^ 'P._critical': @critical@
+    -> TF.Attr s [TF.Attr s (WarningSetting s)] -- ^ 'P._warning': @warning@
     -> RamSetting s
 newRamSetting _critical _warning =
     RamSetting'
@@ -525,9 +525,9 @@ data RulesSetting s = RulesSetting'
 
 -- | Construct a new @rules@ settings value.
 newRulesSetting
-    :: TF.Attr s P.Int -- ^ @port_balancer@ - 'P.portBalancer'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
-    -> TF.Attr s P.Int -- ^ @port_server@ - 'P.portServer'
+    :: TF.Attr s P.Int -- ^ 'P._portBalancer': @port_balancer@
+    -> TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
+    -> TF.Attr s P.Int -- ^ 'P._portServer': @port_server@
     -> RulesSetting s
 newRulesSetting _portBalancer _protocol _portServer =
     RulesSetting'
@@ -598,8 +598,8 @@ data ServersSetting s = ServersSetting'
 
 -- | Construct a new @servers@ settings value.
 newServersSetting
-    :: TF.Attr s P.Text -- ^ @id@ - 'P.id'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._id': @id@
+    -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> ServersSetting s
 newServersSetting _id _name =
     ServersSetting'
@@ -639,8 +639,8 @@ data StorageServersSetting s = StorageServersSetting'
 
 -- | Construct a new @storage_servers@ settings value.
 newStorageServersSetting
-    :: TF.Attr s P.Text -- ^ @id@ - 'P.id'
-    -> TF.Attr s P.Text -- ^ @rights@ - 'P.rights'
+    :: TF.Attr s P.Text -- ^ 'P._id': @id@
+    -> TF.Attr s P.Text -- ^ 'P._rights': @rights@
     -> StorageServersSetting s
 newStorageServersSetting _id _rights =
     StorageServersSetting'
@@ -689,11 +689,11 @@ data ThresholdsSetting s = ThresholdsSetting'
 
 -- | Construct a new @thresholds@ settings value.
 newThresholdsSetting
-    :: TF.Attr s [TF.Attr s (CpuSetting s)] -- ^ @cpu@ - 'P.cpu'
-    -> TF.Attr s [TF.Attr s (DiskSetting s)] -- ^ @disk@ - 'P.disk'
-    -> TF.Attr s [TF.Attr s (InternalPingSetting s)] -- ^ @internal_ping@ - 'P.internalPing'
-    -> TF.Attr s [TF.Attr s (RamSetting s)] -- ^ @ram@ - 'P.ram'
-    -> TF.Attr s [TF.Attr s (TransferSetting s)] -- ^ @transfer@ - 'P.transfer'
+    :: TF.Attr s [TF.Attr s (CpuSetting s)] -- ^ 'P._cpu': @cpu@
+    -> TF.Attr s [TF.Attr s (DiskSetting s)] -- ^ 'P._disk': @disk@
+    -> TF.Attr s [TF.Attr s (InternalPingSetting s)] -- ^ 'P._internalPing': @internal_ping@
+    -> TF.Attr s [TF.Attr s (RamSetting s)] -- ^ 'P._ram': @ram@
+    -> TF.Attr s [TF.Attr s (TransferSetting s)] -- ^ 'P._transfer': @transfer@
     -> ThresholdsSetting s
 newThresholdsSetting _cpu _disk _internalPing _ram _transfer =
     ThresholdsSetting'
@@ -754,8 +754,8 @@ data TransferSetting s = TransferSetting'
 
 -- | Construct a new @transfer@ settings value.
 newTransferSetting
-    :: TF.Attr s [TF.Attr s (CriticalSetting s)] -- ^ @critical@ - 'P.critical'
-    -> TF.Attr s [TF.Attr s (WarningSetting s)] -- ^ @warning@ - 'P.warning'
+    :: TF.Attr s [TF.Attr s (CriticalSetting s)] -- ^ 'P._critical': @critical@
+    -> TF.Attr s [TF.Attr s (WarningSetting s)] -- ^ 'P._warning': @warning@
     -> TransferSetting s
 newTransferSetting _critical _warning =
     TransferSetting'
@@ -795,8 +795,8 @@ data WarningSetting s = WarningSetting'
 
 -- | Construct a new @warning@ settings value.
 newWarningSetting
-    :: TF.Attr s P.Bool -- ^ @alert@ - 'P.alert'
-    -> TF.Attr s P.Int -- ^ @value@ - 'P.value'
+    :: TF.Attr s P.Bool -- ^ 'P._alert': @alert@
+    -> TF.Attr s P.Int -- ^ 'P._value': @value@
     -> WarningSetting s
 newWarningSetting _alert _value =
     WarningSetting'
