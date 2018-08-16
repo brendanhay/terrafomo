@@ -406,7 +406,7 @@ data ContactGroupResource s = ContactGroupResource'
 
 -- | Define a new @circonus_contact_group@ resource value.
 contactGroupResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ContactGroupResource s)
 contactGroupResource _name =
     TF.unsafeResource "circonus_contact_group" TF.validator $
@@ -589,7 +589,7 @@ data GraphResource s = GraphResource'
 
 -- | Define a new @circonus_graph@ resource value.
 graphResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (GraphResource s)
 graphResource _name =
     TF.unsafeResource "circonus_graph" TF.validator $
@@ -705,8 +705,8 @@ data MetricResource s = MetricResource'
 
 -- | Define a new @circonus_metric@ resource value.
 metricResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (MetricResource s)
 metricResource _name _type' =
     TF.unsafeResource "circonus_metric" TF.validator $
@@ -779,7 +779,7 @@ data MetricClusterResource s = MetricClusterResource'
 
 -- | Define a new @circonus_metric_cluster@ resource value.
 metricClusterResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (MetricClusterResource s)
 metricClusterResource _name =
     TF.unsafeResource "circonus_metric_cluster" TF.validator $
@@ -849,9 +849,9 @@ data RuleSetResource s = RuleSetResource'
 
 -- | Define a new @circonus_rule_set@ resource value.
 ruleSetResource
-    :: TF.Attr s P.Text -- ^ @check@ - 'P.check'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (IfSetting s))) -- ^ @if@ - 'P.if''
-    -> TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
+    :: TF.Attr s P.Text -- ^ @check@ ('P._check', 'P.check')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (IfSetting s))) -- ^ @if@ ('P._if'', 'P.if'')
+    -> TF.Attr s P.Text -- ^ @metric_name@ ('P._metricName', 'P.metricName')
     -> P.Resource (RuleSetResource s)
 ruleSetResource _check _if' _metricName =
     TF.unsafeResource "circonus_rule_set" TF.validator $

@@ -17,10 +17,11 @@
 --
 module Terrafomo.Circonus.Provider
     (
+    -- * Circonus Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** Circonus Specific Aliases
+    -- * Circonus Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -75,7 +76,7 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @key@ - 'P.key'
+    :: P.Text -- ^ @key@ ('P._key', 'P.key')
     -> Provider
 newProvider _key =
     Provider'
@@ -88,7 +89,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "circonus"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "api_url" _apiUrl
             , P.Just $ TF.assign "auto_tag" _autoTag

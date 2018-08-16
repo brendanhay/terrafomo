@@ -182,7 +182,7 @@ data AlertOptionSetting s = AlertOptionSetting'
 
 -- | Construct a new @alert_option@ settings value.
 newAlertOptionSetting
-    :: TF.Attr s P.Int -- ^ @severity@ - 'P.severity'
+    :: TF.Attr s P.Int -- ^ 'P._severity': @severity@
     -> AlertOptionSetting s
 newAlertOptionSetting _severity =
     AlertOptionSetting'
@@ -234,7 +234,7 @@ data CaqlSetting s = CaqlSetting'
 
 -- | Construct a new @caql@ settings value.
 newCaqlSetting
-    :: TF.Attr s P.Text -- ^ @query@ - 'P.query'
+    :: TF.Attr s P.Text -- ^ 'P._query': @query@
     -> CaqlSetting s
 newCaqlSetting _query =
     CaqlSetting'
@@ -291,12 +291,12 @@ data CloudwatchSetting s = CloudwatchSetting'
 
 -- | Construct a new @cloudwatch@ settings value.
 newCloudwatchSetting
-    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @dimmensions@ - 'P.dimmensions'
-    -> TF.Attr s P.Text -- ^ @api_key@ - 'P.apiKey'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @metric@ - 'P.metric'
-    -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
-    -> TF.Attr s P.Text -- ^ @api_secret@ - 'P.apiSecret'
-    -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
+    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ 'P._dimmensions': @dimmensions@
+    -> TF.Attr s P.Text -- ^ 'P._apiKey': @api_key@
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ 'P._metric': @metric@
+    -> TF.Attr s P.Text -- ^ 'P._namespace': @namespace@
+    -> TF.Attr s P.Text -- ^ 'P._apiSecret': @api_secret@
+    -> TF.Attr s P.Text -- ^ 'P._url': @url@
     -> CloudwatchSetting s
 newCloudwatchSetting _dimmensions _apiKey _metric _namespace _apiSecret _url =
     CloudwatchSetting'
@@ -369,7 +369,7 @@ data CollectorSetting s = CollectorSetting'
 
 -- | Construct a new @collector@ settings value.
 newCollectorSetting
-    :: TF.Attr s P.Text -- ^ @id@ - 'P.id'
+    :: TF.Attr s P.Text -- ^ 'P._id': @id@
     -> CollectorSetting s
 newCollectorSetting _id =
     CollectorSetting'
@@ -792,8 +792,8 @@ data HttpSetting s = HttpSetting'
 
 -- | Construct a new @http@ settings value.
 newHttpSetting
-    :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
-    -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
+    :: TF.Attr s P.Text -- ^ 'P._address': @address@
+    -> TF.Attr s P.Text -- ^ 'P._url': @url@
     -> HttpSetting s
 newHttpSetting _address _url =
     HttpSetting'
@@ -1108,7 +1108,7 @@ data IrcSetting s = IrcSetting'
 
 -- | Construct a new @irc@ settings value.
 newIrcSetting
-    :: TF.Attr s P.Text -- ^ @user@ - 'P.user'
+    :: TF.Attr s P.Text -- ^ 'P._user': @user@
     -> IrcSetting s
 newIrcSetting _user =
     IrcSetting'
@@ -1194,7 +1194,7 @@ data JsonSetting s = JsonSetting'
 
 -- | Construct a new @json@ settings value.
 newJsonSetting
-    :: TF.Attr s P.Text -- ^ @url@ - 'P.url'
+    :: TF.Attr s P.Text -- ^ 'P._url': @url@
     -> JsonSetting s
 newJsonSetting _url =
     JsonSetting'
@@ -1372,9 +1372,9 @@ data MetricSetting s = MetricSetting'
 
 -- | Construct a new @metric@ settings value.
 newMetricSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @metric_type@ - 'P.metricType'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._metricType': @metric_type@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> MetricSetting s
 newMetricSetting _name _metricType _type' =
     MetricSetting'
@@ -1536,7 +1536,7 @@ data MetricClusterSetting s = MetricClusterSetting'
 
 -- | Construct a new @metric_cluster@ settings value.
 newMetricClusterSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> MetricClusterSetting s
 newMetricClusterSetting _name =
     MetricClusterSetting'
@@ -1606,8 +1606,8 @@ data MysqlSetting s = MysqlSetting'
 
 -- | Construct a new @mysql@ settings value.
 newMysqlSetting
-    :: TF.Attr s P.Text -- ^ @dsn@ - 'P.dsn'
-    -> TF.Attr s P.Text -- ^ @query@ - 'P.query'
+    :: TF.Attr s P.Text -- ^ 'P._dsn': @dsn@
+    -> TF.Attr s P.Text -- ^ 'P._query': @query@
     -> MysqlSetting s
 newMysqlSetting _dsn _query =
     MysqlSetting'
@@ -1691,8 +1691,8 @@ data PagerDutySetting s = PagerDutySetting'
 
 -- | Construct a new @pager_duty@ settings value.
 newPagerDutySetting
-    :: TF.Attr s P.Text -- ^ @service_key@ - 'P.serviceKey'
-    -> TF.Attr s P.Text -- ^ @webhook_url@ - 'P.webhookUrl'
+    :: TF.Attr s P.Text -- ^ 'P._serviceKey': @service_key@
+    -> TF.Attr s P.Text -- ^ 'P._webhookUrl': @webhook_url@
     -> PagerDutySetting s
 newPagerDutySetting _serviceKey _webhookUrl =
     PagerDutySetting'
@@ -1741,8 +1741,8 @@ data PostgresqlSetting s = PostgresqlSetting'
 
 -- | Construct a new @postgresql@ settings value.
 newPostgresqlSetting
-    :: TF.Attr s P.Text -- ^ @dsn@ - 'P.dsn'
-    -> TF.Attr s P.Text -- ^ @query@ - 'P.query'
+    :: TF.Attr s P.Text -- ^ 'P._dsn': @dsn@
+    -> TF.Attr s P.Text -- ^ 'P._query': @query@
     -> PostgresqlSetting s
 newPostgresqlSetting _dsn _query =
     PostgresqlSetting'
@@ -1784,8 +1784,8 @@ data QuerySetting s = QuerySetting'
 
 -- | Construct a new @query@ settings value.
 newQuerySetting
-    :: TF.Attr s P.Text -- ^ @definition@ - 'P.definition'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._definition': @definition@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> QuerySetting s
 newQuerySetting _definition _type' =
     QuerySetting'
@@ -1835,8 +1835,8 @@ data SlackSetting s = SlackSetting'
 
 -- | Construct a new @slack@ settings value.
 newSlackSetting
-    :: TF.Attr s P.Text -- ^ @channel@ - 'P.channel'
-    -> TF.Attr s P.Text -- ^ @team@ - 'P.team'
+    :: TF.Attr s P.Text -- ^ 'P._channel': @channel@
+    -> TF.Attr s P.Text -- ^ 'P._team': @team@
     -> SlackSetting s
 newSlackSetting _channel _team =
     SlackSetting'
@@ -1951,7 +1951,7 @@ data StatsdSetting s = StatsdSetting'
 
 -- | Construct a new @statsd@ settings value.
 newStatsdSetting
-    :: TF.Attr s P.Text -- ^ @source_ip@ - 'P.sourceIp'
+    :: TF.Attr s P.Text -- ^ 'P._sourceIp': @source_ip@
     -> StatsdSetting s
 newStatsdSetting _sourceIp =
     StatsdSetting'
@@ -2014,8 +2014,8 @@ data TcpSetting s = TcpSetting'
 
 -- | Construct a new @tcp@ settings value.
 newTcpSetting
-    :: TF.Attr s P.Text -- ^ @host@ - 'P.host'
-    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
+    :: TF.Attr s P.Text -- ^ 'P._host': @host@
+    -> TF.Attr s P.Int -- ^ 'P._port': @port@
     -> TcpSetting s
 newTcpSetting _host _port =
     TcpSetting'
@@ -2467,11 +2467,11 @@ data VictoropsSetting s = VictoropsSetting'
 
 -- | Construct a new @victorops@ settings value.
 newVictoropsSetting
-    :: TF.Attr s P.Int -- ^ @critical@ - 'P.critical'
-    -> TF.Attr s P.Int -- ^ @info@ - 'P.info'
-    -> TF.Attr s P.Text -- ^ @api_key@ - 'P.apiKey'
-    -> TF.Attr s P.Text -- ^ @team@ - 'P.team'
-    -> TF.Attr s P.Int -- ^ @warning@ - 'P.warning'
+    :: TF.Attr s P.Int -- ^ 'P._critical': @critical@
+    -> TF.Attr s P.Int -- ^ 'P._info': @info@
+    -> TF.Attr s P.Text -- ^ 'P._apiKey': @api_key@
+    -> TF.Attr s P.Text -- ^ 'P._team': @team@
+    -> TF.Attr s P.Int -- ^ 'P._warning': @warning@
     -> VictoropsSetting s
 newVictoropsSetting _critical _info _apiKey _team _warning =
     VictoropsSetting'
