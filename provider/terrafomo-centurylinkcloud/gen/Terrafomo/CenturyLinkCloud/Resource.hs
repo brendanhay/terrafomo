@@ -138,6 +138,9 @@ instance P.HasParent (GroupResource s) (TF.Attr s P.Text) where
         P.lens (_parent :: GroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _parent = a } :: GroupResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedParentGroupId (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
     computedParentGroupId x = TF.compute (TF.refKey x) "parent_group_id"
 
@@ -204,6 +207,9 @@ instance P.HasStatus (LoadBalancerResource s) (TF.Attr s P.Text) where
     status =
         P.lens (_status :: LoadBalancerResource s -> TF.Attr s P.Text)
                (\s a -> s { _status = a } :: LoadBalancerResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
@@ -293,6 +299,9 @@ instance P.HasPort (LoadBalancerPoolResource s) (TF.Attr s P.Int) where
         P.lens (_port :: LoadBalancerPoolResource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: LoadBalancerPoolResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @clc_public_ip@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/clc/r/public_ip.html terraform documentation>
@@ -345,6 +354,9 @@ instance P.HasSourceRestrictions (PublicIpResource s) (TF.Attr s [TF.Attr s (P.M
     sourceRestrictions =
         P.lens (_sourceRestrictions :: PublicIpResource s -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))])
                (\s a -> s { _sourceRestrictions = a } :: PublicIpResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedInternalIpAddress (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
     computedInternalIpAddress x = TF.compute (TF.refKey x) "internal_ip_address"
@@ -534,6 +546,9 @@ instance P.HasType' (ServerResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: ServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: ServerResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreatedDate (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedCreatedDate x = TF.compute (TF.refKey x) "created_date"

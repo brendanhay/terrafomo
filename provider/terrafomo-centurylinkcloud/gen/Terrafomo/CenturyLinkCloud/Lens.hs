@@ -50,6 +50,7 @@ module Terrafomo.CenturyLinkCloud.Lens
 
     -- ** Computed Attributes
     , HasComputedCreatedDate (..)
+    , HasComputedId (..)
     , HasComputedInternalIpAddress (..)
     , HasComputedIpAddress (..)
     , HasComputedModifiedDate (..)
@@ -260,6 +261,9 @@ instance HasUsername a b => HasUsername (TF.Schema l p a) b where
 
 class HasComputedCreatedDate a b | a -> b where
     computedCreatedDate :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedInternalIpAddress a b | a -> b where
     computedInternalIpAddress :: a -> b
