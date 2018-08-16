@@ -123,6 +123,9 @@ instance P.HasValue (RecordResource s) (TF.Attr s P.Text) where
         P.lens (_value :: RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _value = a } :: RecordResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedDomainId x = TF.compute (TF.refKey x) "domain_id"
 

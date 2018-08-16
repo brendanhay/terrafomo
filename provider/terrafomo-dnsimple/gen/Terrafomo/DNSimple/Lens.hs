@@ -27,6 +27,7 @@ module Terrafomo.DNSimple.Lens
     -- ** Computed Attributes
     , HasComputedDomainId (..)
     , HasComputedHostname (..)
+    , HasComputedId (..)
     , HasComputedPriority (..)
     ) where
 
@@ -88,6 +89,9 @@ class HasComputedDomainId a b | a -> b where
 
 class HasComputedHostname a b | a -> b where
     computedHostname :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedPriority a b | a -> b where
     computedPriority :: a -> b
