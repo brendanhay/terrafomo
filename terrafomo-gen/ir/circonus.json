@@ -305,44 +305,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_apiKey",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The AWS API Key"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"api_key\" <$> TF.attribute",
-                    "name": "_apiKey",
-                    "method": "apiKey",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasApiKey",
-                    "validate": false,
-                    "optional": false,
-                    "original": "api_key"
-                },
-                {
-                    "default": "_apiSecret",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The AWS API Secret"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"api_secret\" <$> TF.attribute",
-                    "name": "_apiSecret",
-                    "method": "apiSecret",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasApiSecret",
-                    "validate": false,
-                    "optional": false,
-                    "original": "api_secret"
-                },
-                {
                     "default": "_dimmensions",
                     "computed": false,
                     "required": true,
@@ -360,6 +322,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "dimmensions"
+                },
+                {
+                    "default": "_apiKey",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The AWS API Key"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"api_key\" <$> TF.attribute",
+                    "name": "_apiKey",
+                    "method": "apiKey",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasApiKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "api_key"
                 },
                 {
                     "default": "_metric",
@@ -398,6 +379,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "namespace"
+                },
+                {
+                    "default": "_apiSecret",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The AWS API Secret"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"api_secret\" <$> TF.attribute",
+                    "name": "_apiSecret",
+                    "method": "apiSecret",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasApiSecret",
+                    "validate": false,
+                    "optional": false,
+                    "original": "api_secret"
                 },
                 {
                     "default": "_url",
@@ -1562,6 +1562,23 @@
             "attributes": [],
             "parameters": [
                 {
+                    "default": "_address",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"address\" <$> TF.attribute",
+                    "name": "_address",
+                    "method": "address",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAddress",
+                    "validate": false,
+                    "optional": false,
+                    "original": "address"
+                },
+                {
                     "default": "_url",
                     "computed": false,
                     "required": true,
@@ -1579,23 +1596,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "url"
-                },
-                {
-                    "default": "_address",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"address\" <$> TF.attribute",
-                    "name": "_address",
-                    "method": "address",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAddress",
-                    "validate": false,
-                    "optional": false,
-                    "original": "address"
                 }
             ],
             "conflicts": [],
@@ -2527,6 +2527,23 @@
                     "original": "name"
                 },
                 {
+                    "default": "_metricType",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"metric_type\" <$> TF.attribute",
+                    "name": "_metricType",
+                    "method": "metricType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMetricType",
+                    "validate": false,
+                    "optional": false,
+                    "original": "metric_type"
+                },
+                {
                     "default": "_type'",
                     "computed": false,
                     "required": true,
@@ -2544,23 +2561,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "type"
-                },
-                {
-                    "default": "_metricType",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"metric_type\" <$> TF.attribute",
-                    "name": "_metricType",
-                    "method": "metricType",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasMetricType",
-                    "validate": false,
-                    "optional": false,
-                    "original": "metric_type"
                 }
             ],
             "conflicts": [
@@ -5092,23 +5092,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_apiKey",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"api_key\" <$> TF.attribute",
-                    "name": "_apiKey",
-                    "method": "apiKey",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasApiKey",
-                    "validate": false,
-                    "optional": false,
-                    "original": "api_key"
-                },
-                {
                     "default": "_critical",
                     "computed": false,
                     "required": true,
@@ -5141,6 +5124,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "info"
+                },
+                {
+                    "default": "_apiKey",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"api_key\" <$> TF.attribute",
+                    "name": "_apiKey",
+                    "method": "apiKey",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasApiKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "api_key"
                 },
                 {
                     "default": "_team",
