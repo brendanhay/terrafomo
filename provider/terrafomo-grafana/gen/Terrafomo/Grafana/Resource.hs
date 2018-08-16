@@ -84,7 +84,7 @@ alertNotificationResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (AlertNotificationResource s)
 alertNotificationResource _name _type' =
-    TF.unsafeResource "grafana_alert_notification" P.defaultProvider TF.validator $
+    TF.unsafeResource "grafana_alert_notification" TF.validator $
         AlertNotificationResource'
             { _isDefault = TF.value P.False
             , _name = _name
@@ -140,7 +140,7 @@ dashboardResource
     :: TF.Attr s P.Text -- ^ @config_json@ - 'P.configJson'
     -> P.Resource (DashboardResource s)
 dashboardResource _configJson =
-    TF.unsafeResource "grafana_dashboard" P.defaultProvider TF.validator $
+    TF.unsafeResource "grafana_dashboard" TF.validator $
         DashboardResource'
             { _configJson = _configJson
             }
@@ -212,7 +212,7 @@ dataSourceResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (DataSourceResource s)
 dataSourceResource _name _type' =
-    TF.unsafeResource "grafana_data_source" P.defaultProvider TF.validator $
+    TF.unsafeResource "grafana_data_source" TF.validator $
         DataSourceResource'
             { _accessMode = TF.value "proxy"
             , _basicAuthEnabled = TF.value P.False
@@ -346,7 +346,7 @@ organizationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (OrganizationResource s)
 organizationResource _name =
-    TF.unsafeResource "grafana_organization" P.defaultProvider TF.validator $
+    TF.unsafeResource "grafana_organization" TF.validator $
         OrganizationResource'
             { _adminUser = TF.value "admin"
             , _admins = TF.Nil
