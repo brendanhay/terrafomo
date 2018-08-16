@@ -251,6 +251,9 @@ data RepositoryResource s = RepositoryResource'
     , _scm         :: TF.Attr s P.Text
     -- ^ @scm@ - (Optional)
     --
+    , _slug        :: TF.Attr s P.Text
+    -- ^ @slug@ - (Optional)
+    --
     , _website     :: TF.Attr s P.Text
     -- ^ @website@ - (Optional)
     --
@@ -274,6 +277,7 @@ repositoryResource _name _owner =
             , _owner = _owner
             , _projectKey = TF.Nil
             , _scm = TF.value "git"
+            , _slug = TF.Nil
             , _website = TF.Nil
             }
 
@@ -289,6 +293,7 @@ instance TF.IsObject (RepositoryResource s) where
         , TF.assign "owner" <$> TF.attribute _owner
         , TF.assign "project_key" <$> TF.attribute _projectKey
         , TF.assign "scm" <$> TF.attribute _scm
+        , TF.assign "slug" <$> TF.attribute _slug
         , TF.assign "website" <$> TF.attribute _website
         ]
 
@@ -344,6 +349,11 @@ instance P.HasScm (RepositoryResource s) (TF.Attr s P.Text) where
     scm =
         P.lens (_scm :: RepositoryResource s -> TF.Attr s P.Text)
                (\s a -> s { _scm = a } :: RepositoryResource s)
+
+instance P.HasSlug (RepositoryResource s) (TF.Attr s P.Text) where
+    slug =
+        P.lens (_slug :: RepositoryResource s -> TF.Attr s P.Text)
+               (\s a -> s { _slug = a } :: RepositoryResource s)
 
 instance P.HasWebsite (RepositoryResource s) (TF.Attr s P.Text) where
     website =

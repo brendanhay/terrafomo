@@ -31,6 +31,7 @@ module Terrafomo.Bitbucket.Lens
     , HasReviewers (..)
     , HasScm (..)
     , HasSkipCertVerification (..)
+    , HasSlug (..)
     , HasUrl (..)
     , HasUsername (..)
     , HasWebsite (..)
@@ -143,6 +144,12 @@ class HasSkipCertVerification a b | a -> b where
 
 instance HasSkipCertVerification a b => HasSkipCertVerification (TF.Schema l p a) b where
     skipCertVerification = TF.configuration . skipCertVerification
+
+class HasSlug a b | a -> b where
+    slug :: P.Lens' a b
+
+instance HasSlug a b => HasSlug (TF.Schema l p a) b where
+    slug = TF.configuration . slug
 
 class HasUrl a b | a -> b where
     url :: P.Lens' a b
