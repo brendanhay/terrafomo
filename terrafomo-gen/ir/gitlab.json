@@ -406,6 +406,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "request_access_enabled"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"visibility_level\" <$> TF.attribute",
+                    "name": "_visibilityLevel",
+                    "method": "visibilityLevel",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVisibilityLevel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "visibility_level"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/gitlab/r/group.html",
@@ -444,7 +461,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVisibilityLevel",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "visibility_level"
                 }
             ],
@@ -739,6 +756,23 @@
                     "computed": false,
                     "required": false,
                     "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"namespace_id\" <$> TF.attribute",
+                    "name": "_namespaceId",
+                    "method": "namespaceId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasNamespaceId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "namespace_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"path\" <$> TF.attribute",
                     "name": "_path",
@@ -856,7 +890,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedNamespaceId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "namespace_id"
                 },
                 {
