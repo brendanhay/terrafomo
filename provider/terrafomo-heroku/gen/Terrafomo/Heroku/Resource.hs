@@ -188,6 +188,9 @@ data AddonAttachmentResource s = AddonAttachmentResource'
     , _appId   :: TF.Attr s P.Text
     -- ^ @app_id@ - (Required, Forces New)
     --
+    , _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @heroku_addon_attachment@ resource value.
@@ -200,12 +203,14 @@ addonAttachmentResource _addonId _appId =
         AddonAttachmentResource'
             { _addonId = _addonId
             , _appId = _appId
+            , _name = TF.Nil
             }
 
 instance TF.IsObject (AddonAttachmentResource s) where
     toObject AddonAttachmentResource'{..} = P.catMaybes
         [ TF.assign "addon_id" <$> TF.attribute _addonId
         , TF.assign "app_id" <$> TF.attribute _appId
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
 instance TF.IsValid (AddonAttachmentResource s) where
@@ -221,6 +226,11 @@ instance P.HasAppId (AddonAttachmentResource s) (TF.Attr s P.Text) where
         P.lens (_appId :: AddonAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _appId = a } :: AddonAttachmentResource s)
 
+instance P.HasName (AddonAttachmentResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: AddonAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AddonAttachmentResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AddonAttachmentResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -232,23 +242,32 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (AddonAttachmentResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/heroku/r/app.html terraform documentation>
 -- for more information.
 data AppResource s = AppResource'
-    { _acm          :: TF.Attr s P.Bool
+    { _acm :: TF.Attr s P.Bool
     -- ^ @acm@ - (Optional)
     --
-    , _buildpacks   :: TF.Attr s [TF.Attr s P.Text]
+    , _buildpacks :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @buildpacks@ - (Optional)
     --
-    , _name         :: TF.Attr s P.Text
+    , _configVars :: TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]
+    -- ^ @config_vars@ - (Optional)
+    --
+    , _internalRouting :: TF.Attr s P.Bool
+    -- ^ @internal_routing@ - (Optional, Forces New)
+    --
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _organization :: TF.Attr s [TF.Attr s (OrganizationSetting s)]
     -- ^ @organization@ - (Optional, Forces New)
     --
-    , _region       :: TF.Attr s P.Text
+    , _region :: TF.Attr s P.Text
     -- ^ @region@ - (Required, Forces New)
     --
-    , _space        :: TF.Attr s P.Text
+    , _space :: TF.Attr s P.Text
     -- ^ @space@ - (Optional, Forces New)
+    --
+    , _stack :: TF.Attr s P.Text
+    -- ^ @stack@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -262,20 +281,26 @@ appResource _name _region =
         AppResource'
             { _acm = TF.Nil
             , _buildpacks = TF.Nil
+            , _configVars = TF.Nil
+            , _internalRouting = TF.Nil
             , _name = _name
             , _organization = TF.Nil
             , _region = _region
             , _space = TF.Nil
+            , _stack = TF.Nil
             }
 
 instance TF.IsObject (AppResource s) where
     toObject AppResource'{..} = P.catMaybes
         [ TF.assign "acm" <$> TF.attribute _acm
         , TF.assign "buildpacks" <$> TF.attribute _buildpacks
+        , TF.assign "config_vars" <$> TF.attribute _configVars
+        , TF.assign "internal_routing" <$> TF.attribute _internalRouting
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "organization" <$> TF.attribute _organization
         , TF.assign "region" <$> TF.attribute _region
         , TF.assign "space" <$> TF.attribute _space
+        , TF.assign "stack" <$> TF.attribute _stack
         ]
 
 instance TF.IsValid (AppResource s) where
@@ -290,6 +315,16 @@ instance P.HasBuildpacks (AppResource s) (TF.Attr s [TF.Attr s P.Text]) where
     buildpacks =
         P.lens (_buildpacks :: AppResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _buildpacks = a } :: AppResource s)
+
+instance P.HasConfigVars (AppResource s) (TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]) where
+    configVars =
+        P.lens (_configVars :: AppResource s -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))])
+               (\s a -> s { _configVars = a } :: AppResource s)
+
+instance P.HasInternalRouting (AppResource s) (TF.Attr s P.Bool) where
+    internalRouting =
+        P.lens (_internalRouting :: AppResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _internalRouting = a } :: AppResource s)
 
 instance P.HasName (AppResource s) (TF.Attr s P.Text) where
     name =
@@ -310,6 +345,11 @@ instance P.HasSpace (AppResource s) (TF.Attr s P.Text) where
     space =
         P.lens (_space :: AppResource s -> TF.Attr s P.Text)
                (\s a -> s { _space = a } :: AppResource s)
+
+instance P.HasStack (AppResource s) (TF.Attr s P.Text) where
+    stack =
+        P.lens (_stack :: AppResource s -> TF.Attr s P.Text)
+               (\s a -> s { _stack = a } :: AppResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -397,10 +437,13 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (AppFeatureResource s)) (TF.Attr s
 -- See the <https://www.terraform.io/docs/providers/heroku/r/app_release.html terraform documentation>
 -- for more information.
 data AppReleaseResource s = AppReleaseResource'
-    { _app    :: TF.Attr s P.Text
+    { _app         :: TF.Attr s P.Text
     -- ^ @app@ - (Required, Forces New)
     --
-    , _slugId :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _slugId      :: TF.Attr s P.Text
     -- ^ @slug_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -414,12 +457,14 @@ appReleaseResource _app _slugId =
     TF.unsafeResource "heroku_app_release" TF.validator $
         AppReleaseResource'
             { _app = _app
+            , _description = TF.Nil
             , _slugId = _slugId
             }
 
 instance TF.IsObject (AppReleaseResource s) where
     toObject AppReleaseResource'{..} = P.catMaybes
         [ TF.assign "app" <$> TF.attribute _app
+        , TF.assign "description" <$> TF.attribute _description
         , TF.assign "slug_id" <$> TF.attribute _slugId
         ]
 
@@ -430,6 +475,11 @@ instance P.HasApp (AppReleaseResource s) (TF.Attr s P.Text) where
     app =
         P.lens (_app :: AppReleaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _app = a } :: AppReleaseResource s)
+
+instance P.HasDescription (AppReleaseResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: AppReleaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: AppReleaseResource s)
 
 instance P.HasSlugId (AppReleaseResource s) (TF.Attr s P.Text) where
     slugId =
@@ -1017,6 +1067,9 @@ data SpaceVpnConnectionResource s = SpaceVpnConnectionResource'
     , _space         :: TF.Attr s P.Text
     -- ^ @space@ - (Required, Forces New)
     --
+    , _tunnels       :: TF.Attr s [TF.Attr s (TunnelsSetting s)]
+    -- ^ @tunnels@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @heroku_space_vpn_connection@ resource value.
@@ -1033,6 +1086,7 @@ spaceVpnConnectionResource _routableCidrs _publicIp _name _space =
             , _publicIp = _publicIp
             , _routableCidrs = _routableCidrs
             , _space = _space
+            , _tunnels = TF.Nil
             }
 
 instance TF.IsObject (SpaceVpnConnectionResource s) where
@@ -1041,6 +1095,7 @@ instance TF.IsObject (SpaceVpnConnectionResource s) where
         , TF.assign "public_ip" <$> TF.attribute _publicIp
         , TF.assign "routable_cidrs" <$> TF.attribute _routableCidrs
         , TF.assign "space" <$> TF.attribute _space
+        , TF.assign "tunnels" <$> TF.attribute _tunnels
         ]
 
 instance TF.IsValid (SpaceVpnConnectionResource s) where
@@ -1065,6 +1120,11 @@ instance P.HasSpace (SpaceVpnConnectionResource s) (TF.Attr s P.Text) where
     space =
         P.lens (_space :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _space = a } :: SpaceVpnConnectionResource s)
+
+instance P.HasTunnels (SpaceVpnConnectionResource s) (TF.Attr s [TF.Attr s (TunnelsSetting s)]) where
+    tunnels =
+        P.lens (_tunnels :: SpaceVpnConnectionResource s -> TF.Attr s [TF.Attr s (TunnelsSetting s)])
+               (\s a -> s { _tunnels = a } :: SpaceVpnConnectionResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"

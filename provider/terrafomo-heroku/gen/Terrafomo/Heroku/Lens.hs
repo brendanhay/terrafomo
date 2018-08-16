@@ -24,10 +24,14 @@ module Terrafomo.Heroku.Lens
     , HasBuildpacks (..)
     , HasCertificateChain (..)
     , HasConfig (..)
+    , HasConfigVars (..)
+    , HasDescription (..)
     , HasEmail (..)
     , HasEnabled (..)
     , HasHeaders (..)
     , HasHostname (..)
+    , HasInternalRouting (..)
+    , HasIp (..)
     , HasLocked (..)
     , HasName (..)
     , HasOrganization (..)
@@ -35,6 +39,7 @@ module Terrafomo.Heroku.Lens
     , HasPersonal (..)
     , HasPipeline (..)
     , HasPlan (..)
+    , HasPreSharedKey (..)
     , HasPrivateKey (..)
     , HasPublicIp (..)
     , HasQuantity (..)
@@ -46,7 +51,9 @@ module Terrafomo.Heroku.Lens
     , HasSlugId (..)
     , HasSource (..)
     , HasSpace (..)
+    , HasStack (..)
     , HasStage (..)
+    , HasTunnels (..)
     , HasType' (..)
     , HasUrl (..)
     , HasVpcPeeringConnectionId (..)
@@ -151,6 +158,18 @@ class HasConfig a b | a -> b where
 instance HasConfig a b => HasConfig (TF.Schema l p a) b where
     config = TF.configuration . config
 
+class HasConfigVars a b | a -> b where
+    configVars :: P.Lens' a b
+
+instance HasConfigVars a b => HasConfigVars (TF.Schema l p a) b where
+    configVars = TF.configuration . configVars
+
+class HasDescription a b | a -> b where
+    description :: P.Lens' a b
+
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
+    description = TF.configuration . description
+
 class HasEmail a b | a -> b where
     email :: P.Lens' a b
 
@@ -174,6 +193,18 @@ class HasHostname a b | a -> b where
 
 instance HasHostname a b => HasHostname (TF.Schema l p a) b where
     hostname = TF.configuration . hostname
+
+class HasInternalRouting a b | a -> b where
+    internalRouting :: P.Lens' a b
+
+instance HasInternalRouting a b => HasInternalRouting (TF.Schema l p a) b where
+    internalRouting = TF.configuration . internalRouting
+
+class HasIp a b | a -> b where
+    ip :: P.Lens' a b
+
+instance HasIp a b => HasIp (TF.Schema l p a) b where
+    ip = TF.configuration . ip
 
 class HasLocked a b | a -> b where
     locked :: P.Lens' a b
@@ -216,6 +247,12 @@ class HasPlan a b | a -> b where
 
 instance HasPlan a b => HasPlan (TF.Schema l p a) b where
     plan = TF.configuration . plan
+
+class HasPreSharedKey a b | a -> b where
+    preSharedKey :: P.Lens' a b
+
+instance HasPreSharedKey a b => HasPreSharedKey (TF.Schema l p a) b where
+    preSharedKey = TF.configuration . preSharedKey
 
 class HasPrivateKey a b | a -> b where
     privateKey :: P.Lens' a b
@@ -283,11 +320,23 @@ class HasSpace a b | a -> b where
 instance HasSpace a b => HasSpace (TF.Schema l p a) b where
     space = TF.configuration . space
 
+class HasStack a b | a -> b where
+    stack :: P.Lens' a b
+
+instance HasStack a b => HasStack (TF.Schema l p a) b where
+    stack = TF.configuration . stack
+
 class HasStage a b | a -> b where
     stage :: P.Lens' a b
 
 instance HasStage a b => HasStage (TF.Schema l p a) b where
     stage = TF.configuration . stage
+
+class HasTunnels a b | a -> b where
+    tunnels :: P.Lens' a b
+
+instance HasTunnels a b => HasTunnels (TF.Schema l p a) b where
+    tunnels = TF.configuration . tunnels
 
 class HasType' a b | a -> b where
     type' :: P.Lens' a b

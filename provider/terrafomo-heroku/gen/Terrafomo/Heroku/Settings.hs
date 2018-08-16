@@ -154,20 +154,42 @@ instance P.HasSource (RuleSetting s) (TF.Attr s P.Text) where
 
 -- | @tunnels@ nested settings.
 data TunnelsSetting s = TunnelsSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _ip           :: TF.Attr s P.Text
+    -- ^ @ip@ - (Optional)
+    --
+    , _preSharedKey :: TF.Attr s P.Text
+    -- ^ @pre_shared_key@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @tunnels@ settings value.
 tunnelsSetting
     :: TunnelsSetting s
 tunnelsSetting =
     TunnelsSetting'
+        { _ip = TF.Nil
+        , _preSharedKey = TF.Nil
+        }
 
 instance TF.IsValue  (TunnelsSetting s)
 instance TF.IsObject (TunnelsSetting s) where
-    toObject TunnelsSetting' = []
+    toObject TunnelsSetting'{..} = P.catMaybes
+        [ TF.assign "ip" <$> TF.attribute _ip
+        , TF.assign "pre_shared_key" <$> TF.attribute _preSharedKey
+        ]
 
 instance TF.IsValid (TunnelsSetting s) where
     validator = P.mempty
+
+instance P.HasIp (TunnelsSetting s) (TF.Attr s P.Text) where
+    ip =
+        P.lens (_ip :: TunnelsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _ip = a } :: TunnelsSetting s)
+
+instance P.HasPreSharedKey (TunnelsSetting s) (TF.Attr s P.Text) where
+    preSharedKey =
+        P.lens (_preSharedKey :: TunnelsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _preSharedKey = a } :: TunnelsSetting s)
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (TunnelsSetting s)) (TF.Attr s P.Text) where
     computedIp x = TF.compute (TF.refKey x) "ip"
