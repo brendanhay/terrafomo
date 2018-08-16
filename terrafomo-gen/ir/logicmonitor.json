@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "filtersSetting",
+                "smart": "newFiltersSetting",
                 "name": "FiltersSetting'"
             },
             "arguments": [
