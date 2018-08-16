@@ -17,11 +17,10 @@
 --
 module Terrafomo.Heroku.Provider
     (
-    -- * Heroku Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * Heroku Specific Aliases
+    -- ** Heroku Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -84,7 +83,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "heroku"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "api_key" <$> _apiKey
             , TF.assign "email" <$> _email

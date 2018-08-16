@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Heroku
-    ( module Terrafomo.Heroku.DataSource
-    , module Terrafomo.Heroku.Lens
-    , module Terrafomo.Heroku.Provider
-    , module Terrafomo.Heroku.Resource
-    , module Terrafomo.Heroku.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Heroku.Provider
+
+    -- * Custom Types
     , module Terrafomo.Heroku.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.Heroku.DataSource
+
+    -- * Resources
+    , module Terrafomo.Heroku.Resource
+
+    -- * Settings
+    , module Terrafomo.Heroku.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Heroku.Lens
     ) where
 
 import Terrafomo.Heroku.DataSource

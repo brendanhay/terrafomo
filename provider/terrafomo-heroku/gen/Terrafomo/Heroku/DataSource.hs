@@ -17,7 +17,6 @@
 --
 module Terrafomo.Heroku.DataSource
     (
-    -- * DataSource Datatypes
     -- ** heroku_app
       AppData (..)
     , appData
@@ -66,6 +65,7 @@ data AppData s = AppData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_app@ datasource value.
 appData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (AppData s)
@@ -134,6 +134,7 @@ data SpaceData s = SpaceData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_space@ datasource value.
 spaceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SpaceData s)
@@ -187,6 +188,7 @@ data SpacePeeringInfoData s = SpacePeeringInfoData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_space_peering_info@ datasource value.
 spacePeeringInfoData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SpacePeeringInfoData s)

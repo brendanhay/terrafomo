@@ -17,7 +17,6 @@
 --
 module Terrafomo.Heroku.Resource
     (
-    -- * Resource Datatypes
     -- ** heroku_addon
       AddonResource (..)
     , addonResource
@@ -128,6 +127,7 @@ data AddonResource s = AddonResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_addon@ resource value.
 addonResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @plan@ - 'P.plan'
@@ -190,6 +190,7 @@ data AddonAttachmentResource s = AddonAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_addon_attachment@ resource value.
 addonAttachmentResource
     :: TF.Attr s P.Text -- ^ @addon_id@ - 'P.addonId'
     -> TF.Attr s P.Text -- ^ @app_id@ - 'P.appId'
@@ -251,6 +252,7 @@ data AppResource s = AppResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_app@ resource value.
 appResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
@@ -349,6 +351,7 @@ data AppFeatureResource s = AppFeatureResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_app_feature@ resource value.
 appFeatureResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -402,6 +405,7 @@ data AppReleaseResource s = AppReleaseResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_app_release@ resource value.
 appReleaseResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @slug_id@ - 'P.slugId'
@@ -454,6 +458,7 @@ data CertResource s = CertResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_cert@ resource value.
 certResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @certificate_chain@ - 'P.certificateChain'
@@ -514,6 +519,7 @@ data DomainResource s = DomainResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_domain@ resource value.
 domainResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
@@ -563,6 +569,7 @@ data DrainResource s = DrainResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_drain@ resource value.
 drainResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
@@ -618,6 +625,7 @@ data FormationResource s = FormationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_formation@ resource value.
 formationResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Int -- ^ @quantity@ - 'P.quantity'
@@ -677,6 +685,7 @@ data PipelineResource s = PipelineResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_pipeline@ resource value.
 pipelineResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (PipelineResource s)
@@ -718,6 +727,7 @@ data PipelineCouplingResource s = PipelineCouplingResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_pipeline_coupling@ resource value.
 pipelineCouplingResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @pipeline@ - 'P.pipeline'
@@ -781,6 +791,7 @@ data SpaceResource s = SpaceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_space@ resource value.
 spaceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @organization@ - 'P.organization'
@@ -847,6 +858,7 @@ data SpaceAppAccessResource s = SpaceAppAccessResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_space_app_access@ resource value.
 spaceAppAccessResource
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @permissions@ - 'P.permissions'
@@ -901,6 +913,7 @@ data SpaceInboundRulesetResource s = SpaceInboundRulesetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_space_inbound_ruleset@ resource value.
 spaceInboundRulesetResource
     :: TF.Attr s (P.NonEmpty (TF.Attr s (RuleSetting s))) -- ^ @rule@ - 'P.rule'
     -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
@@ -947,6 +960,7 @@ data SpacePeeringConnectionAccepterResource s = SpacePeeringConnectionAccepterRe
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_space_peering_connection_accepter@ resource value.
 spacePeeringConnectionAccepterResource
     :: TF.Attr s P.Text -- ^ @vpc_peering_connection_id@ - 'P.vpcPeeringConnectionId'
     -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
@@ -1005,6 +1019,7 @@ data SpaceVpnConnectionResource s = SpaceVpnConnectionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_space_vpn_connection@ resource value.
 spaceVpnConnectionResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @routable_cidrs@ - 'P.routableCidrs'
     -> TF.Attr s P.Text -- ^ @public_ip@ - 'P.publicIp'
@@ -1079,6 +1094,7 @@ data TeamCollaboratorResource s = TeamCollaboratorResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @heroku_team_collaborator@ resource value.
 teamCollaboratorResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @email@ - 'P.email'

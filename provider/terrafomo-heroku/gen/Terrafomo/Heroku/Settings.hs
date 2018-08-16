@@ -17,7 +17,6 @@
 --
 module Terrafomo.Heroku.Settings
     (
-    -- * Settings Datatypes
     -- ** organization
       OrganizationSetting (..)
     , newOrganizationSetting
@@ -66,6 +65,7 @@ data OrganizationSetting s = OrganizationSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @organization@ settings value.
 newOrganizationSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> OrganizationSetting s
@@ -121,6 +121,7 @@ data RuleSetting s = RuleSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @rule@ settings value.
 newRuleSetting
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @source@ - 'P.source'
@@ -155,6 +156,7 @@ instance P.HasSource (RuleSetting s) (TF.Attr s P.Text) where
 data TunnelsSetting s = TunnelsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @tunnels@ settings value.
 newTunnelsSetting
     :: TunnelsSetting s
 newTunnelsSetting =
