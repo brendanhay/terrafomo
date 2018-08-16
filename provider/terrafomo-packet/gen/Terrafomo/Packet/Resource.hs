@@ -223,6 +223,9 @@ instance P.HasUserData (DeviceResource s) (TF.Attr s P.Text) where
         P.lens (_userData :: DeviceResource s -> TF.Attr s P.Text)
                (\s a -> s { _userData = a } :: DeviceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAccessPrivateIpv4 (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
     computedAccessPrivateIpv4 x = TF.compute (TF.refKey x) "access_private_ipv4"
 
@@ -298,6 +301,9 @@ instance P.HasDeviceId (IpAttachmentResource s) (TF.Attr s P.Text) where
     deviceId =
         P.lens (_deviceId :: IpAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _deviceId = a } :: IpAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
@@ -398,6 +404,9 @@ instance P.HasWebsite (OrganizationResource s) (TF.Attr s P.Text) where
         P.lens (_website :: OrganizationResource s -> TF.Attr s P.Text)
                (\s a -> s { _website = a } :: OrganizationResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
     computedCreated x = TF.compute (TF.refKey x) "created"
 
@@ -435,6 +444,9 @@ instance P.HasName (ProjectResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ProjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ProjectResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedCreated x = TF.compute (TF.refKey x) "created"
@@ -501,6 +513,9 @@ instance P.HasQuantity (ReservedIpBlockResource s) (TF.Attr s P.Int) where
     quantity =
         P.lens (_quantity :: ReservedIpBlockResource s -> TF.Attr s P.Int)
                (\s a -> s { _quantity = a } :: ReservedIpBlockResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
@@ -574,6 +589,9 @@ instance P.HasPublicKey (SshKeyResource s) (TF.Attr s P.Text) where
     publicKey =
         P.lens (_publicKey :: SshKeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _publicKey = a } :: SshKeyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedCreated x = TF.compute (TF.refKey x) "created"
@@ -679,6 +697,9 @@ instance P.HasSnapshotPolicies (VolumeResource s) (TF.Attr s [TF.Attr s (Snapsho
         P.lens (_snapshotPolicies :: VolumeResource s -> TF.Attr s [TF.Attr s (SnapshotPoliciesSetting s)])
                (\s a -> s { _snapshotPolicies = a } :: VolumeResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAttachments (TF.Ref s' (VolumeResource s)) (TF.Attr s [TF.Attr s (AttachmentsSetting s)]) where
     computedAttachments x = TF.compute (TF.refKey x) "attachments"
 
@@ -739,3 +760,6 @@ instance P.HasVolumeId (VolumeAttachmentResource s) (TF.Attr s P.Text) where
     volumeId =
         P.lens (_volumeId :: VolumeAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _volumeId = a } :: VolumeAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
