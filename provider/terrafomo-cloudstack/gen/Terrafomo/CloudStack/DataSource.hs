@@ -55,6 +55,9 @@ data TemplateData s = TemplateData'
     { _filter         :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Required, Forces New)
     --
+    , _tags           :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     , _templateFilter :: TF.Attr s P.Text
     -- ^ @template_filter@ - (Required)
     --
@@ -69,12 +72,14 @@ templateData _filter _templateFilter =
     TF.unsafeDataSource "cloudstack_template" TF.validator $
         TemplateData'
             { _filter = _filter
+            , _tags = TF.Nil
             , _templateFilter = _templateFilter
             }
 
 instance TF.IsObject (TemplateData s) where
     toObject TemplateData'{..} = P.catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "template_filter" <$> TF.attribute _templateFilter
         ]
 
@@ -85,6 +90,11 @@ instance P.HasFilter (TemplateData s) (TF.Attr s [TF.Attr s (FilterSetting s)]) 
     filter =
         P.lens (_filter :: TemplateData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: TemplateData s)
+
+instance P.HasTags (TemplateData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: TemplateData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: TemplateData s)
 
 instance P.HasTemplateFilter (TemplateData s) (TF.Attr s P.Text) where
     templateFilter =

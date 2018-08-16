@@ -27,7 +27,14 @@ module Terrafomo.CloudStack.Lens
     , HasCidrList (..)
     , HasConfig (..)
     , HasCustomerGatewayId (..)
+    , HasDescription (..)
+    , HasDeviceId (..)
     , HasDiskOffering (..)
+    , HasDisplayName (..)
+    , HasDisplayText (..)
+    , HasDpd (..)
+    , HasEndip (..)
+    , HasEspLifetime (..)
     , HasEspPolicy (..)
     , HasExpunge (..)
     , HasFilter (..)
@@ -35,23 +42,34 @@ module Terrafomo.CloudStack.Lens
     , HasForward (..)
     , HasGateway (..)
     , HasGatewayId (..)
+    , HasGroup (..)
     , HasHttpGetOnly (..)
     , HasHypervisor (..)
+    , HasIcmpCode (..)
+    , HasIcmpType (..)
+    , HasIkeLifetime (..)
     , HasIkePolicy (..)
     , HasIpAddress (..)
     , HasIpAddressId (..)
     , HasIpsecPsk (..)
+    , HasIsDynamicallyScalable (..)
+    , HasIsExtractable (..)
+    , HasIsFeatured (..)
     , HasIsPortable (..)
+    , HasIsPublic (..)
     , HasIsReadyTimeout (..)
     , HasKeypair (..)
     , HasManaged (..)
     , HasMemberIds (..)
     , HasName (..)
     , HasNetmask (..)
+    , HasNetworkDomain (..)
     , HasNetworkId (..)
     , HasNetworkOffering (..)
+    , HasNicId (..)
     , HasOsType (..)
     , HasParallelism (..)
+    , HasPasswordEnabled (..)
     , HasPhysicalNetworkId (..)
     , HasPorts (..)
     , HasPrivatePort (..)
@@ -60,6 +78,7 @@ module Terrafomo.CloudStack.Lens
     , HasProtocol (..)
     , HasPublicKey (..)
     , HasPublicPort (..)
+    , HasRootDiskSize (..)
     , HasRule (..)
     , HasSecretKey (..)
     , HasSecurityGroupId (..)
@@ -67,6 +86,9 @@ module Terrafomo.CloudStack.Lens
     , HasSecurityGroupNames (..)
     , HasServiceOffering (..)
     , HasShrinkOk (..)
+    , HasSize (..)
+    , HasStartip (..)
+    , HasTags (..)
     , HasTemplate (..)
     , HasTemplateFilter (..)
     , HasTimeout (..)
@@ -206,11 +228,53 @@ class HasCustomerGatewayId a b | a -> b where
 instance HasCustomerGatewayId a b => HasCustomerGatewayId (TF.Schema l p a) b where
     customerGatewayId = TF.configuration . customerGatewayId
 
+class HasDescription a b | a -> b where
+    description :: P.Lens' a b
+
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
+    description = TF.configuration . description
+
+class HasDeviceId a b | a -> b where
+    deviceId :: P.Lens' a b
+
+instance HasDeviceId a b => HasDeviceId (TF.Schema l p a) b where
+    deviceId = TF.configuration . deviceId
+
 class HasDiskOffering a b | a -> b where
     diskOffering :: P.Lens' a b
 
 instance HasDiskOffering a b => HasDiskOffering (TF.Schema l p a) b where
     diskOffering = TF.configuration . diskOffering
+
+class HasDisplayName a b | a -> b where
+    displayName :: P.Lens' a b
+
+instance HasDisplayName a b => HasDisplayName (TF.Schema l p a) b where
+    displayName = TF.configuration . displayName
+
+class HasDisplayText a b | a -> b where
+    displayText :: P.Lens' a b
+
+instance HasDisplayText a b => HasDisplayText (TF.Schema l p a) b where
+    displayText = TF.configuration . displayText
+
+class HasDpd a b | a -> b where
+    dpd :: P.Lens' a b
+
+instance HasDpd a b => HasDpd (TF.Schema l p a) b where
+    dpd = TF.configuration . dpd
+
+class HasEndip a b | a -> b where
+    endip :: P.Lens' a b
+
+instance HasEndip a b => HasEndip (TF.Schema l p a) b where
+    endip = TF.configuration . endip
+
+class HasEspLifetime a b | a -> b where
+    espLifetime :: P.Lens' a b
+
+instance HasEspLifetime a b => HasEspLifetime (TF.Schema l p a) b where
+    espLifetime = TF.configuration . espLifetime
 
 class HasEspPolicy a b | a -> b where
     espPolicy :: P.Lens' a b
@@ -254,6 +318,12 @@ class HasGatewayId a b | a -> b where
 instance HasGatewayId a b => HasGatewayId (TF.Schema l p a) b where
     gatewayId = TF.configuration . gatewayId
 
+class HasGroup a b | a -> b where
+    group :: P.Lens' a b
+
+instance HasGroup a b => HasGroup (TF.Schema l p a) b where
+    group = TF.configuration . group
+
 class HasHttpGetOnly a b | a -> b where
     httpGetOnly :: P.Lens' a b
 
@@ -265,6 +335,24 @@ class HasHypervisor a b | a -> b where
 
 instance HasHypervisor a b => HasHypervisor (TF.Schema l p a) b where
     hypervisor = TF.configuration . hypervisor
+
+class HasIcmpCode a b | a -> b where
+    icmpCode :: P.Lens' a b
+
+instance HasIcmpCode a b => HasIcmpCode (TF.Schema l p a) b where
+    icmpCode = TF.configuration . icmpCode
+
+class HasIcmpType a b | a -> b where
+    icmpType :: P.Lens' a b
+
+instance HasIcmpType a b => HasIcmpType (TF.Schema l p a) b where
+    icmpType = TF.configuration . icmpType
+
+class HasIkeLifetime a b | a -> b where
+    ikeLifetime :: P.Lens' a b
+
+instance HasIkeLifetime a b => HasIkeLifetime (TF.Schema l p a) b where
+    ikeLifetime = TF.configuration . ikeLifetime
 
 class HasIkePolicy a b | a -> b where
     ikePolicy :: P.Lens' a b
@@ -290,11 +378,35 @@ class HasIpsecPsk a b | a -> b where
 instance HasIpsecPsk a b => HasIpsecPsk (TF.Schema l p a) b where
     ipsecPsk = TF.configuration . ipsecPsk
 
+class HasIsDynamicallyScalable a b | a -> b where
+    isDynamicallyScalable :: P.Lens' a b
+
+instance HasIsDynamicallyScalable a b => HasIsDynamicallyScalable (TF.Schema l p a) b where
+    isDynamicallyScalable = TF.configuration . isDynamicallyScalable
+
+class HasIsExtractable a b | a -> b where
+    isExtractable :: P.Lens' a b
+
+instance HasIsExtractable a b => HasIsExtractable (TF.Schema l p a) b where
+    isExtractable = TF.configuration . isExtractable
+
+class HasIsFeatured a b | a -> b where
+    isFeatured :: P.Lens' a b
+
+instance HasIsFeatured a b => HasIsFeatured (TF.Schema l p a) b where
+    isFeatured = TF.configuration . isFeatured
+
 class HasIsPortable a b | a -> b where
     isPortable :: P.Lens' a b
 
 instance HasIsPortable a b => HasIsPortable (TF.Schema l p a) b where
     isPortable = TF.configuration . isPortable
+
+class HasIsPublic a b | a -> b where
+    isPublic :: P.Lens' a b
+
+instance HasIsPublic a b => HasIsPublic (TF.Schema l p a) b where
+    isPublic = TF.configuration . isPublic
 
 class HasIsReadyTimeout a b | a -> b where
     isReadyTimeout :: P.Lens' a b
@@ -332,6 +444,12 @@ class HasNetmask a b | a -> b where
 instance HasNetmask a b => HasNetmask (TF.Schema l p a) b where
     netmask = TF.configuration . netmask
 
+class HasNetworkDomain a b | a -> b where
+    networkDomain :: P.Lens' a b
+
+instance HasNetworkDomain a b => HasNetworkDomain (TF.Schema l p a) b where
+    networkDomain = TF.configuration . networkDomain
+
 class HasNetworkId a b | a -> b where
     networkId :: P.Lens' a b
 
@@ -344,6 +462,12 @@ class HasNetworkOffering a b | a -> b where
 instance HasNetworkOffering a b => HasNetworkOffering (TF.Schema l p a) b where
     networkOffering = TF.configuration . networkOffering
 
+class HasNicId a b | a -> b where
+    nicId :: P.Lens' a b
+
+instance HasNicId a b => HasNicId (TF.Schema l p a) b where
+    nicId = TF.configuration . nicId
+
 class HasOsType a b | a -> b where
     osType :: P.Lens' a b
 
@@ -355,6 +479,12 @@ class HasParallelism a b | a -> b where
 
 instance HasParallelism a b => HasParallelism (TF.Schema l p a) b where
     parallelism = TF.configuration . parallelism
+
+class HasPasswordEnabled a b | a -> b where
+    passwordEnabled :: P.Lens' a b
+
+instance HasPasswordEnabled a b => HasPasswordEnabled (TF.Schema l p a) b where
+    passwordEnabled = TF.configuration . passwordEnabled
 
 class HasPhysicalNetworkId a b | a -> b where
     physicalNetworkId :: P.Lens' a b
@@ -404,6 +534,12 @@ class HasPublicPort a b | a -> b where
 instance HasPublicPort a b => HasPublicPort (TF.Schema l p a) b where
     publicPort = TF.configuration . publicPort
 
+class HasRootDiskSize a b | a -> b where
+    rootDiskSize :: P.Lens' a b
+
+instance HasRootDiskSize a b => HasRootDiskSize (TF.Schema l p a) b where
+    rootDiskSize = TF.configuration . rootDiskSize
+
 class HasRule a b | a -> b where
     rule :: P.Lens' a b
 
@@ -445,6 +581,24 @@ class HasShrinkOk a b | a -> b where
 
 instance HasShrinkOk a b => HasShrinkOk (TF.Schema l p a) b where
     shrinkOk = TF.configuration . shrinkOk
+
+class HasSize a b | a -> b where
+    size :: P.Lens' a b
+
+instance HasSize a b => HasSize (TF.Schema l p a) b where
+    size = TF.configuration . size
+
+class HasStartip a b | a -> b where
+    startip :: P.Lens' a b
+
+instance HasStartip a b => HasStartip (TF.Schema l p a) b where
+    startip = TF.configuration . startip
+
+class HasTags a b | a -> b where
+    tags :: P.Lens' a b
+
+instance HasTags a b => HasTags (TF.Schema l p a) b where
+    tags = TF.configuration . tags
 
 class HasTemplate a b | a -> b where
     template :: P.Lens' a b

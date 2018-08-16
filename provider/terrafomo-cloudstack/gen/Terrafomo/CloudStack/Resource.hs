@@ -144,13 +144,16 @@ import qualified Terrafomo.Validator           as TF
 -- See the <https://www.terraform.io/docs/providers/cloudstack/r/affinity_group.html terraform documentation>
 -- for more information.
 data AffinityGroupResource s = AffinityGroupResource'
-    { _name    :: TF.Attr s P.Text
+    { _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional, Forces New)
+    --
+    , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _project :: TF.Attr s P.Text
+    , _project     :: TF.Attr s P.Text
     -- ^ @project@ - (Optional, Forces New)
     --
-    , _type'   :: TF.Attr s P.Text
+    , _type'       :: TF.Attr s P.Text
     -- ^ @type@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -163,20 +166,27 @@ affinityGroupResource
 affinityGroupResource _name _type' =
     TF.unsafeResource "cloudstack_affinity_group" TF.validator $
         AffinityGroupResource'
-            { _name = _name
+            { _description = TF.Nil
+            , _name = _name
             , _project = TF.Nil
             , _type' = _type'
             }
 
 instance TF.IsObject (AffinityGroupResource s) where
     toObject AffinityGroupResource'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
 instance TF.IsValid (AffinityGroupResource s) where
     validator = P.mempty
+
+instance P.HasDescription (AffinityGroupResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: AffinityGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: AffinityGroupResource s)
 
 instance P.HasName (AffinityGroupResource s) (TF.Attr s P.Text) where
     name =
@@ -207,14 +217,26 @@ data DiskResource s = DiskResource'
     { _attach           :: TF.Attr s P.Bool
     -- ^ @attach@ - (Optional)
     --
+    , _deviceId         :: TF.Attr s P.Int
+    -- ^ @device_id@ - (Optional)
+    --
     , _diskOffering     :: TF.Attr s P.Text
     -- ^ @disk_offering@ - (Optional)
     --
     , _name             :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project          :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _shrinkOk         :: TF.Attr s P.Bool
     -- ^ @shrink_ok@ - (Optional)
+    --
+    , _size             :: TF.Attr s P.Int
+    -- ^ @size@ - (Optional)
+    --
+    , _tags             :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
     --
     , _virtualMachineId :: TF.Attr s P.Text
     -- ^ @virtual_machine_id@ - (Optional)
@@ -233,9 +255,13 @@ diskResource _name _zone =
     TF.unsafeResource "cloudstack_disk" TF.validator $
         DiskResource'
             { _attach = TF.value P.False
+            , _deviceId = TF.Nil
             , _diskOffering = TF.Nil
             , _name = _name
+            , _project = TF.Nil
             , _shrinkOk = TF.value P.False
+            , _size = TF.Nil
+            , _tags = TF.Nil
             , _virtualMachineId = TF.Nil
             , _zone = _zone
             }
@@ -243,9 +269,13 @@ diskResource _name _zone =
 instance TF.IsObject (DiskResource s) where
     toObject DiskResource'{..} = P.catMaybes
         [ TF.assign "attach" <$> TF.attribute _attach
+        , TF.assign "device_id" <$> TF.attribute _deviceId
         , TF.assign "disk_offering" <$> TF.attribute _diskOffering
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "shrink_ok" <$> TF.attribute _shrinkOk
+        , TF.assign "size" <$> TF.attribute _size
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "virtual_machine_id" <$> TF.attribute _virtualMachineId
         , TF.assign "zone" <$> TF.attribute _zone
         ]
@@ -258,6 +288,11 @@ instance P.HasAttach (DiskResource s) (TF.Attr s P.Bool) where
         P.lens (_attach :: DiskResource s -> TF.Attr s P.Bool)
                (\s a -> s { _attach = a } :: DiskResource s)
 
+instance P.HasDeviceId (DiskResource s) (TF.Attr s P.Int) where
+    deviceId =
+        P.lens (_deviceId :: DiskResource s -> TF.Attr s P.Int)
+               (\s a -> s { _deviceId = a } :: DiskResource s)
+
 instance P.HasDiskOffering (DiskResource s) (TF.Attr s P.Text) where
     diskOffering =
         P.lens (_diskOffering :: DiskResource s -> TF.Attr s P.Text)
@@ -268,10 +303,25 @@ instance P.HasName (DiskResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DiskResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DiskResource s)
 
+instance P.HasProject (DiskResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: DiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: DiskResource s)
+
 instance P.HasShrinkOk (DiskResource s) (TF.Attr s P.Bool) where
     shrinkOk =
         P.lens (_shrinkOk :: DiskResource s -> TF.Attr s P.Bool)
                (\s a -> s { _shrinkOk = a } :: DiskResource s)
+
+instance P.HasSize (DiskResource s) (TF.Attr s P.Int) where
+    size =
+        P.lens (_size :: DiskResource s -> TF.Attr s P.Int)
+               (\s a -> s { _size = a } :: DiskResource s)
+
+instance P.HasTags (DiskResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: DiskResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: DiskResource s)
 
 instance P.HasVirtualMachineId (DiskResource s) (TF.Attr s P.Text) where
     virtualMachineId =
@@ -447,11 +497,32 @@ data InstanceResource s = InstanceResource'
     -- Conflicts with:
     --
     -- * 'affinityGroupIds'
+    , _displayName        :: TF.Attr s P.Text
+    -- ^ @display_name@ - (Optional)
+    --
     , _expunge            :: TF.Attr s P.Bool
     -- ^ @expunge@ - (Optional)
     --
+    , _group              :: TF.Attr s P.Text
+    -- ^ @group@ - (Optional)
+    --
+    , _ipAddress          :: TF.Attr s P.Text
+    -- ^ @ip_address@ - (Optional, Forces New)
+    --
     , _keypair            :: TF.Attr s P.Text
     -- ^ @keypair@ - (Optional)
+    --
+    , _name               :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _networkId          :: TF.Attr s P.Text
+    -- ^ @network_id@ - (Optional, Forces New)
+    --
+    , _project            :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _rootDiskSize       :: TF.Attr s P.Int
+    -- ^ @root_disk_size@ - (Optional, Forces New)
     --
     , _securityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @security_group_ids@ - (Optional, Forces New)
@@ -467,6 +538,9 @@ data InstanceResource s = InstanceResource'
     -- * 'securityGroupIds'
     , _serviceOffering    :: TF.Attr s P.Text
     -- ^ @service_offering@ - (Required)
+    --
+    , _tags               :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
     --
     , _template           :: TF.Attr s P.Text
     -- ^ @template@ - (Required, Forces New)
@@ -490,11 +564,19 @@ instanceResource _serviceOffering _template _zone =
         InstanceResource'
             { _affinityGroupIds = TF.Nil
             , _affinityGroupNames = TF.Nil
+            , _displayName = TF.Nil
             , _expunge = TF.value P.False
+            , _group = TF.Nil
+            , _ipAddress = TF.Nil
             , _keypair = TF.Nil
+            , _name = TF.Nil
+            , _networkId = TF.Nil
+            , _project = TF.Nil
+            , _rootDiskSize = TF.Nil
             , _securityGroupIds = TF.Nil
             , _securityGroupNames = TF.Nil
             , _serviceOffering = _serviceOffering
+            , _tags = TF.Nil
             , _template = _template
             , _userData = TF.Nil
             , _zone = _zone
@@ -504,11 +586,19 @@ instance TF.IsObject (InstanceResource s) where
     toObject InstanceResource'{..} = P.catMaybes
         [ TF.assign "affinity_group_ids" <$> TF.attribute _affinityGroupIds
         , TF.assign "affinity_group_names" <$> TF.attribute _affinityGroupNames
+        , TF.assign "display_name" <$> TF.attribute _displayName
         , TF.assign "expunge" <$> TF.attribute _expunge
+        , TF.assign "group" <$> TF.attribute _group
+        , TF.assign "ip_address" <$> TF.attribute _ipAddress
         , TF.assign "keypair" <$> TF.attribute _keypair
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_id" <$> TF.attribute _networkId
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "root_disk_size" <$> TF.attribute _rootDiskSize
         , TF.assign "security_group_ids" <$> TF.attribute _securityGroupIds
         , TF.assign "security_group_names" <$> TF.attribute _securityGroupNames
         , TF.assign "service_offering" <$> TF.attribute _serviceOffering
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "template" <$> TF.attribute _template
         , TF.assign "user_data" <$> TF.attribute _userData
         , TF.assign "zone" <$> TF.attribute _zone
@@ -548,15 +638,50 @@ instance P.HasAffinityGroupNames (InstanceResource s) (TF.Attr s [TF.Attr s P.Te
         P.lens (_affinityGroupNames :: InstanceResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _affinityGroupNames = a } :: InstanceResource s)
 
+instance P.HasDisplayName (InstanceResource s) (TF.Attr s P.Text) where
+    displayName =
+        P.lens (_displayName :: InstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _displayName = a } :: InstanceResource s)
+
 instance P.HasExpunge (InstanceResource s) (TF.Attr s P.Bool) where
     expunge =
         P.lens (_expunge :: InstanceResource s -> TF.Attr s P.Bool)
                (\s a -> s { _expunge = a } :: InstanceResource s)
 
+instance P.HasGroup (InstanceResource s) (TF.Attr s P.Text) where
+    group =
+        P.lens (_group :: InstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _group = a } :: InstanceResource s)
+
+instance P.HasIpAddress (InstanceResource s) (TF.Attr s P.Text) where
+    ipAddress =
+        P.lens (_ipAddress :: InstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ipAddress = a } :: InstanceResource s)
+
 instance P.HasKeypair (InstanceResource s) (TF.Attr s P.Text) where
     keypair =
         P.lens (_keypair :: InstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _keypair = a } :: InstanceResource s)
+
+instance P.HasName (InstanceResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: InstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: InstanceResource s)
+
+instance P.HasNetworkId (InstanceResource s) (TF.Attr s P.Text) where
+    networkId =
+        P.lens (_networkId :: InstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _networkId = a } :: InstanceResource s)
+
+instance P.HasProject (InstanceResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: InstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: InstanceResource s)
+
+instance P.HasRootDiskSize (InstanceResource s) (TF.Attr s P.Int) where
+    rootDiskSize =
+        P.lens (_rootDiskSize :: InstanceResource s -> TF.Attr s P.Int)
+               (\s a -> s { _rootDiskSize = a } :: InstanceResource s)
 
 instance P.HasSecurityGroupIds (InstanceResource s) (TF.Attr s [TF.Attr s P.Text]) where
     securityGroupIds =
@@ -572,6 +697,11 @@ instance P.HasServiceOffering (InstanceResource s) (TF.Attr s P.Text) where
     serviceOffering =
         P.lens (_serviceOffering :: InstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _serviceOffering = a } :: InstanceResource s)
+
+instance P.HasTags (InstanceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: InstanceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: InstanceResource s)
 
 instance P.HasTemplate (InstanceResource s) (TF.Attr s P.Text) where
     template =
@@ -626,6 +756,12 @@ data IpaddressResource s = IpaddressResource'
     , _networkId  :: TF.Attr s P.Text
     -- ^ @network_id@ - (Optional, Forces New)
     --
+    , _project    :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _tags       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
     , _vpcId      :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Optional, Forces New)
     --
@@ -642,6 +778,8 @@ ipaddressResource =
         IpaddressResource'
             { _isPortable = TF.value P.False
             , _networkId = TF.Nil
+            , _project = TF.Nil
+            , _tags = TF.Nil
             , _vpcId = TF.Nil
             , _zone = TF.Nil
             }
@@ -650,6 +788,8 @@ instance TF.IsObject (IpaddressResource s) where
     toObject IpaddressResource'{..} = P.catMaybes
         [ TF.assign "is_portable" <$> TF.attribute _isPortable
         , TF.assign "network_id" <$> TF.attribute _networkId
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "vpc_id" <$> TF.attribute _vpcId
         , TF.assign "zone" <$> TF.attribute _zone
         ]
@@ -666,6 +806,16 @@ instance P.HasNetworkId (IpaddressResource s) (TF.Attr s P.Text) where
     networkId =
         P.lens (_networkId :: IpaddressResource s -> TF.Attr s P.Text)
                (\s a -> s { _networkId = a } :: IpaddressResource s)
+
+instance P.HasProject (IpaddressResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: IpaddressResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: IpaddressResource s)
+
+instance P.HasTags (IpaddressResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: IpaddressResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: IpaddressResource s)
 
 instance P.HasVpcId (IpaddressResource s) (TF.Attr s P.Text) where
     vpcId =
@@ -697,6 +847,9 @@ data LoadbalancerRuleResource s = LoadbalancerRuleResource'
     { _algorithm   :: TF.Attr s P.Text
     -- ^ @algorithm@ - (Required)
     --
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
     , _ipAddressId :: TF.Attr s P.Text
     -- ^ @ip_address_id@ - (Required, Forces New)
     --
@@ -711,6 +864,12 @@ data LoadbalancerRuleResource s = LoadbalancerRuleResource'
     --
     , _privatePort :: TF.Attr s P.Int
     -- ^ @private_port@ - (Required, Forces New)
+    --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _protocol    :: TF.Attr s P.Text
+    -- ^ @protocol@ - (Optional, Forces New)
     --
     , _publicPort  :: TF.Attr s P.Int
     -- ^ @public_port@ - (Required, Forces New)
@@ -730,22 +889,28 @@ loadbalancerRuleResource _algorithm _ipAddressId _memberIds _name _privatePort _
     TF.unsafeResource "cloudstack_loadbalancer_rule" TF.validator $
         LoadbalancerRuleResource'
             { _algorithm = _algorithm
+            , _description = TF.Nil
             , _ipAddressId = _ipAddressId
             , _memberIds = _memberIds
             , _name = _name
             , _networkId = TF.Nil
             , _privatePort = _privatePort
+            , _project = TF.Nil
+            , _protocol = TF.Nil
             , _publicPort = _publicPort
             }
 
 instance TF.IsObject (LoadbalancerRuleResource s) where
     toObject LoadbalancerRuleResource'{..} = P.catMaybes
         [ TF.assign "algorithm" <$> TF.attribute _algorithm
+        , TF.assign "description" <$> TF.attribute _description
         , TF.assign "ip_address_id" <$> TF.attribute _ipAddressId
         , TF.assign "member_ids" <$> TF.attribute _memberIds
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network_id" <$> TF.attribute _networkId
         , TF.assign "private_port" <$> TF.attribute _privatePort
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "protocol" <$> TF.attribute _protocol
         , TF.assign "public_port" <$> TF.attribute _publicPort
         ]
 
@@ -756,6 +921,11 @@ instance P.HasAlgorithm (LoadbalancerRuleResource s) (TF.Attr s P.Text) where
     algorithm =
         P.lens (_algorithm :: LoadbalancerRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _algorithm = a } :: LoadbalancerRuleResource s)
+
+instance P.HasDescription (LoadbalancerRuleResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: LoadbalancerRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: LoadbalancerRuleResource s)
 
 instance P.HasIpAddressId (LoadbalancerRuleResource s) (TF.Attr s P.Text) where
     ipAddressId =
@@ -781,6 +951,16 @@ instance P.HasPrivatePort (LoadbalancerRuleResource s) (TF.Attr s P.Int) where
     privatePort =
         P.lens (_privatePort :: LoadbalancerRuleResource s -> TF.Attr s P.Int)
                (\s a -> s { _privatePort = a } :: LoadbalancerRuleResource s)
+
+instance P.HasProject (LoadbalancerRuleResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: LoadbalancerRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: LoadbalancerRuleResource s)
+
+instance P.HasProtocol (LoadbalancerRuleResource s) (TF.Attr s P.Text) where
+    protocol =
+        P.lens (_protocol :: LoadbalancerRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: LoadbalancerRuleResource s)
 
 instance P.HasPublicPort (LoadbalancerRuleResource s) (TF.Attr s P.Int) where
     publicPort =
@@ -810,11 +990,32 @@ data NetworkResource s = NetworkResource'
     , _cidr            :: TF.Attr s P.Text
     -- ^ @cidr@ - (Required, Forces New)
     --
+    , _displayText     :: TF.Attr s P.Text
+    -- ^ @display_text@ - (Optional)
+    --
+    , _endip           :: TF.Attr s P.Text
+    -- ^ @endip@ - (Optional, Forces New)
+    --
+    , _gateway         :: TF.Attr s P.Text
+    -- ^ @gateway@ - (Optional, Forces New)
+    --
     , _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
+    , _networkDomain   :: TF.Attr s P.Text
+    -- ^ @network_domain@ - (Optional)
+    --
     , _networkOffering :: TF.Attr s P.Text
     -- ^ @network_offering@ - (Required)
+    --
+    , _project         :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _startip         :: TF.Attr s P.Text
+    -- ^ @startip@ - (Optional, Forces New)
+    --
+    , _tags            :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
     --
     , _vlan            :: TF.Attr s P.Int
     -- ^ @vlan@ - (Optional, Forces New)
@@ -839,8 +1040,15 @@ networkResource _cidr _name _networkOffering _zone =
         NetworkResource'
             { _aclId = TF.value "none"
             , _cidr = _cidr
+            , _displayText = TF.Nil
+            , _endip = TF.Nil
+            , _gateway = TF.Nil
             , _name = _name
+            , _networkDomain = TF.Nil
             , _networkOffering = _networkOffering
+            , _project = TF.Nil
+            , _startip = TF.Nil
+            , _tags = TF.Nil
             , _vlan = TF.Nil
             , _vpcId = TF.Nil
             , _zone = _zone
@@ -850,8 +1058,15 @@ instance TF.IsObject (NetworkResource s) where
     toObject NetworkResource'{..} = P.catMaybes
         [ TF.assign "acl_id" <$> TF.attribute _aclId
         , TF.assign "cidr" <$> TF.attribute _cidr
+        , TF.assign "display_text" <$> TF.attribute _displayText
+        , TF.assign "endip" <$> TF.attribute _endip
+        , TF.assign "gateway" <$> TF.attribute _gateway
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_domain" <$> TF.attribute _networkDomain
         , TF.assign "network_offering" <$> TF.attribute _networkOffering
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "startip" <$> TF.attribute _startip
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "vlan" <$> TF.attribute _vlan
         , TF.assign "vpc_id" <$> TF.attribute _vpcId
         , TF.assign "zone" <$> TF.attribute _zone
@@ -870,15 +1085,50 @@ instance P.HasCidr (NetworkResource s) (TF.Attr s P.Text) where
         P.lens (_cidr :: NetworkResource s -> TF.Attr s P.Text)
                (\s a -> s { _cidr = a } :: NetworkResource s)
 
+instance P.HasDisplayText (NetworkResource s) (TF.Attr s P.Text) where
+    displayText =
+        P.lens (_displayText :: NetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _displayText = a } :: NetworkResource s)
+
+instance P.HasEndip (NetworkResource s) (TF.Attr s P.Text) where
+    endip =
+        P.lens (_endip :: NetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _endip = a } :: NetworkResource s)
+
+instance P.HasGateway (NetworkResource s) (TF.Attr s P.Text) where
+    gateway =
+        P.lens (_gateway :: NetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _gateway = a } :: NetworkResource s)
+
 instance P.HasName (NetworkResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: NetworkResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: NetworkResource s)
 
+instance P.HasNetworkDomain (NetworkResource s) (TF.Attr s P.Text) where
+    networkDomain =
+        P.lens (_networkDomain :: NetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _networkDomain = a } :: NetworkResource s)
+
 instance P.HasNetworkOffering (NetworkResource s) (TF.Attr s P.Text) where
     networkOffering =
         P.lens (_networkOffering :: NetworkResource s -> TF.Attr s P.Text)
                (\s a -> s { _networkOffering = a } :: NetworkResource s)
+
+instance P.HasProject (NetworkResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: NetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: NetworkResource s)
+
+instance P.HasStartip (NetworkResource s) (TF.Attr s P.Text) where
+    startip =
+        P.lens (_startip :: NetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _startip = a } :: NetworkResource s)
+
+instance P.HasTags (NetworkResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: NetworkResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: NetworkResource s)
 
 instance P.HasVlan (NetworkResource s) (TF.Attr s P.Int) where
     vlan =
@@ -924,13 +1174,16 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkResource s)) (TF.Attr s 
 -- See the <https://www.terraform.io/docs/providers/cloudstack/r/network_acl.html terraform documentation>
 -- for more information.
 data NetworkAclResource s = NetworkAclResource'
-    { _name    :: TF.Attr s P.Text
+    { _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional, Forces New)
+    --
+    , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _project :: TF.Attr s P.Text
+    , _project     :: TF.Attr s P.Text
     -- ^ @project@ - (Optional, Forces New)
     --
-    , _vpcId   :: TF.Attr s P.Text
+    , _vpcId       :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -943,20 +1196,27 @@ networkAclResource
 networkAclResource _vpcId _name =
     TF.unsafeResource "cloudstack_network_acl" TF.validator $
         NetworkAclResource'
-            { _name = _name
+            { _description = TF.Nil
+            , _name = _name
             , _project = TF.Nil
             , _vpcId = _vpcId
             }
 
 instance TF.IsObject (NetworkAclResource s) where
     toObject NetworkAclResource'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
 
 instance TF.IsValid (NetworkAclResource s) where
     validator = P.mempty
+
+instance P.HasDescription (NetworkAclResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: NetworkAclResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: NetworkAclResource s)
 
 instance P.HasName (NetworkAclResource s) (TF.Attr s P.Text) where
     name =
@@ -1060,7 +1320,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkAclRuleResource s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/cloudstack/r/nic.html terraform documentation>
 -- for more information.
 data NicResource s = NicResource'
-    { _networkId        :: TF.Attr s P.Text
+    { _ipAddress        :: TF.Attr s P.Text
+    -- ^ @ip_address@ - (Optional, Forces New)
+    --
+    , _networkId        :: TF.Attr s P.Text
     -- ^ @network_id@ - (Required, Forces New)
     --
     , _virtualMachineId :: TF.Attr s P.Text
@@ -1076,18 +1339,25 @@ nicResource
 nicResource _networkId _virtualMachineId =
     TF.unsafeResource "cloudstack_nic" TF.validator $
         NicResource'
-            { _networkId = _networkId
+            { _ipAddress = TF.Nil
+            , _networkId = _networkId
             , _virtualMachineId = _virtualMachineId
             }
 
 instance TF.IsObject (NicResource s) where
     toObject NicResource'{..} = P.catMaybes
-        [ TF.assign "network_id" <$> TF.attribute _networkId
+        [ TF.assign "ip_address" <$> TF.attribute _ipAddress
+        , TF.assign "network_id" <$> TF.attribute _networkId
         , TF.assign "virtual_machine_id" <$> TF.attribute _virtualMachineId
         ]
 
 instance TF.IsValid (NicResource s) where
     validator = P.mempty
+
+instance P.HasIpAddress (NicResource s) (TF.Attr s P.Text) where
+    ipAddress =
+        P.lens (_ipAddress :: NicResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ipAddress = a } :: NicResource s)
 
 instance P.HasNetworkId (NicResource s) (TF.Attr s P.Text) where
     networkId =
@@ -1288,7 +1558,13 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (PrivateGatewayResource s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/cloudstack/r/secondary_ipaddress.html terraform documentation>
 -- for more information.
 data SecondaryIpaddressResource s = SecondaryIpaddressResource'
-    { _virtualMachineId :: TF.Attr s P.Text
+    { _ipAddress        :: TF.Attr s P.Text
+    -- ^ @ip_address@ - (Optional, Forces New)
+    --
+    , _nicId            :: TF.Attr s P.Text
+    -- ^ @nic_id@ - (Optional, Forces New)
+    --
+    , _virtualMachineId :: TF.Attr s P.Text
     -- ^ @virtual_machine_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1300,16 +1576,30 @@ secondaryIpaddressResource
 secondaryIpaddressResource _virtualMachineId =
     TF.unsafeResource "cloudstack_secondary_ipaddress" TF.validator $
         SecondaryIpaddressResource'
-            { _virtualMachineId = _virtualMachineId
+            { _ipAddress = TF.Nil
+            , _nicId = TF.Nil
+            , _virtualMachineId = _virtualMachineId
             }
 
 instance TF.IsObject (SecondaryIpaddressResource s) where
     toObject SecondaryIpaddressResource'{..} = P.catMaybes
-        [ TF.assign "virtual_machine_id" <$> TF.attribute _virtualMachineId
+        [ TF.assign "ip_address" <$> TF.attribute _ipAddress
+        , TF.assign "nic_id" <$> TF.attribute _nicId
+        , TF.assign "virtual_machine_id" <$> TF.attribute _virtualMachineId
         ]
 
 instance TF.IsValid (SecondaryIpaddressResource s) where
     validator = P.mempty
+
+instance P.HasIpAddress (SecondaryIpaddressResource s) (TF.Attr s P.Text) where
+    ipAddress =
+        P.lens (_ipAddress :: SecondaryIpaddressResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ipAddress = a } :: SecondaryIpaddressResource s)
+
+instance P.HasNicId (SecondaryIpaddressResource s) (TF.Attr s P.Text) where
+    nicId =
+        P.lens (_nicId :: SecondaryIpaddressResource s -> TF.Attr s P.Text)
+               (\s a -> s { _nicId = a } :: SecondaryIpaddressResource s)
 
 instance P.HasVirtualMachineId (SecondaryIpaddressResource s) (TF.Attr s P.Text) where
     virtualMachineId =
@@ -1330,8 +1620,14 @@ instance s ~ s' => P.HasComputedNicId (TF.Ref s' (SecondaryIpaddressResource s))
 -- See the <https://www.terraform.io/docs/providers/cloudstack/r/security_group.html terraform documentation>
 -- for more information.
 data SecurityGroupResource s = SecurityGroupResource'
-    { _name :: TF.Attr s P.Text
+    { _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional, Forces New)
+    --
+    , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
+    --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1342,21 +1638,35 @@ securityGroupResource
 securityGroupResource _name =
     TF.unsafeResource "cloudstack_security_group" TF.validator $
         SecurityGroupResource'
-            { _name = _name
+            { _description = TF.Nil
+            , _name = _name
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (SecurityGroupResource s) where
     toObject SecurityGroupResource'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (SecurityGroupResource s) where
     validator = P.mempty
 
+instance P.HasDescription (SecurityGroupResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: SecurityGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: SecurityGroupResource s)
+
 instance P.HasName (SecurityGroupResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SecurityGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SecurityGroupResource s)
+
+instance P.HasProject (SecurityGroupResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: SecurityGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: SecurityGroupResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1504,8 +1814,14 @@ data StaticNatResource s = StaticNatResource'
     { _ipAddressId      :: TF.Attr s P.Text
     -- ^ @ip_address_id@ - (Required, Forces New)
     --
+    , _project          :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _virtualMachineId :: TF.Attr s P.Text
     -- ^ @virtual_machine_id@ - (Required, Forces New)
+    --
+    , _vmGuestIp        :: TF.Attr s P.Text
+    -- ^ @vm_guest_ip@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1518,13 +1834,17 @@ staticNatResource _ipAddressId _virtualMachineId =
     TF.unsafeResource "cloudstack_static_nat" TF.validator $
         StaticNatResource'
             { _ipAddressId = _ipAddressId
+            , _project = TF.Nil
             , _virtualMachineId = _virtualMachineId
+            , _vmGuestIp = TF.Nil
             }
 
 instance TF.IsObject (StaticNatResource s) where
     toObject StaticNatResource'{..} = P.catMaybes
         [ TF.assign "ip_address_id" <$> TF.attribute _ipAddressId
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "virtual_machine_id" <$> TF.attribute _virtualMachineId
+        , TF.assign "vm_guest_ip" <$> TF.attribute _vmGuestIp
         ]
 
 instance TF.IsValid (StaticNatResource s) where
@@ -1535,10 +1855,20 @@ instance P.HasIpAddressId (StaticNatResource s) (TF.Attr s P.Text) where
         P.lens (_ipAddressId :: StaticNatResource s -> TF.Attr s P.Text)
                (\s a -> s { _ipAddressId = a } :: StaticNatResource s)
 
+instance P.HasProject (StaticNatResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: StaticNatResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: StaticNatResource s)
+
 instance P.HasVirtualMachineId (StaticNatResource s) (TF.Attr s P.Text) where
     virtualMachineId =
         P.lens (_virtualMachineId :: StaticNatResource s -> TF.Attr s P.Text)
                (\s a -> s { _virtualMachineId = a } :: StaticNatResource s)
+
+instance P.HasVmGuestIp (StaticNatResource s) (TF.Attr s P.Text) where
+    vmGuestIp =
+        P.lens (_vmGuestIp :: StaticNatResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vmGuestIp = a } :: StaticNatResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (StaticNatResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1601,25 +1931,49 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (StaticRouteResource s)) (TF.Attr 
 -- See the <https://www.terraform.io/docs/providers/cloudstack/r/template.html terraform documentation>
 -- for more information.
 data TemplateResource s = TemplateResource'
-    { _format         :: TF.Attr s P.Text
+    { _displayText           :: TF.Attr s P.Text
+    -- ^ @display_text@ - (Optional)
+    --
+    , _format                :: TF.Attr s P.Text
     -- ^ @format@ - (Required)
     --
-    , _hypervisor     :: TF.Attr s P.Text
+    , _hypervisor            :: TF.Attr s P.Text
     -- ^ @hypervisor@ - (Required, Forces New)
     --
-    , _isReadyTimeout :: TF.Attr s P.Int
+    , _isDynamicallyScalable :: TF.Attr s P.Bool
+    -- ^ @is_dynamically_scalable@ - (Optional)
+    --
+    , _isExtractable         :: TF.Attr s P.Bool
+    -- ^ @is_extractable@ - (Optional, Forces New)
+    --
+    , _isFeatured            :: TF.Attr s P.Bool
+    -- ^ @is_featured@ - (Optional, Forces New)
+    --
+    , _isPublic              :: TF.Attr s P.Bool
+    -- ^ @is_public@ - (Optional)
+    --
+    , _isReadyTimeout        :: TF.Attr s P.Int
     -- ^ @is_ready_timeout@ - (Optional)
     --
-    , _name           :: TF.Attr s P.Text
+    , _name                  :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _osType         :: TF.Attr s P.Text
+    , _osType                :: TF.Attr s P.Text
     -- ^ @os_type@ - (Required)
     --
-    , _url            :: TF.Attr s P.Text
+    , _passwordEnabled       :: TF.Attr s P.Bool
+    -- ^ @password_enabled@ - (Optional)
+    --
+    , _project               :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _tags                  :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _url                   :: TF.Attr s P.Text
     -- ^ @url@ - (Required, Forces New)
     --
-    , _zone           :: TF.Attr s P.Text
+    , _zone                  :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1636,28 +1990,49 @@ templateResource
 templateResource _format _hypervisor _name _osType _url _zone =
     TF.unsafeResource "cloudstack_template" TF.validator $
         TemplateResource'
-            { _format = _format
+            { _displayText = TF.Nil
+            , _format = _format
             , _hypervisor = _hypervisor
+            , _isDynamicallyScalable = TF.Nil
+            , _isExtractable = TF.Nil
+            , _isFeatured = TF.Nil
+            , _isPublic = TF.Nil
             , _isReadyTimeout = TF.value 300
             , _name = _name
             , _osType = _osType
+            , _passwordEnabled = TF.Nil
+            , _project = TF.Nil
+            , _tags = TF.Nil
             , _url = _url
             , _zone = _zone
             }
 
 instance TF.IsObject (TemplateResource s) where
     toObject TemplateResource'{..} = P.catMaybes
-        [ TF.assign "format" <$> TF.attribute _format
+        [ TF.assign "display_text" <$> TF.attribute _displayText
+        , TF.assign "format" <$> TF.attribute _format
         , TF.assign "hypervisor" <$> TF.attribute _hypervisor
+        , TF.assign "is_dynamically_scalable" <$> TF.attribute _isDynamicallyScalable
+        , TF.assign "is_extractable" <$> TF.attribute _isExtractable
+        , TF.assign "is_featured" <$> TF.attribute _isFeatured
+        , TF.assign "is_public" <$> TF.attribute _isPublic
         , TF.assign "is_ready_timeout" <$> TF.attribute _isReadyTimeout
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "os_type" <$> TF.attribute _osType
+        , TF.assign "password_enabled" <$> TF.attribute _passwordEnabled
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "url" <$> TF.attribute _url
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
 instance TF.IsValid (TemplateResource s) where
     validator = P.mempty
+
+instance P.HasDisplayText (TemplateResource s) (TF.Attr s P.Text) where
+    displayText =
+        P.lens (_displayText :: TemplateResource s -> TF.Attr s P.Text)
+               (\s a -> s { _displayText = a } :: TemplateResource s)
 
 instance P.HasFormat (TemplateResource s) (TF.Attr s P.Text) where
     format =
@@ -1668,6 +2043,26 @@ instance P.HasHypervisor (TemplateResource s) (TF.Attr s P.Text) where
     hypervisor =
         P.lens (_hypervisor :: TemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _hypervisor = a } :: TemplateResource s)
+
+instance P.HasIsDynamicallyScalable (TemplateResource s) (TF.Attr s P.Bool) where
+    isDynamicallyScalable =
+        P.lens (_isDynamicallyScalable :: TemplateResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _isDynamicallyScalable = a } :: TemplateResource s)
+
+instance P.HasIsExtractable (TemplateResource s) (TF.Attr s P.Bool) where
+    isExtractable =
+        P.lens (_isExtractable :: TemplateResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _isExtractable = a } :: TemplateResource s)
+
+instance P.HasIsFeatured (TemplateResource s) (TF.Attr s P.Bool) where
+    isFeatured =
+        P.lens (_isFeatured :: TemplateResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _isFeatured = a } :: TemplateResource s)
+
+instance P.HasIsPublic (TemplateResource s) (TF.Attr s P.Bool) where
+    isPublic =
+        P.lens (_isPublic :: TemplateResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _isPublic = a } :: TemplateResource s)
 
 instance P.HasIsReadyTimeout (TemplateResource s) (TF.Attr s P.Int) where
     isReadyTimeout =
@@ -1683,6 +2078,21 @@ instance P.HasOsType (TemplateResource s) (TF.Attr s P.Text) where
     osType =
         P.lens (_osType :: TemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _osType = a } :: TemplateResource s)
+
+instance P.HasPasswordEnabled (TemplateResource s) (TF.Attr s P.Bool) where
+    passwordEnabled =
+        P.lens (_passwordEnabled :: TemplateResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _passwordEnabled = a } :: TemplateResource s)
+
+instance P.HasProject (TemplateResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: TemplateResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: TemplateResource s)
+
+instance P.HasTags (TemplateResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: TemplateResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: TemplateResource s)
 
 instance P.HasUrl (TemplateResource s) (TF.Attr s P.Text) where
     url =
@@ -1729,16 +2139,28 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (TemplateResource s)) (TF.Attr s
 -- See the <https://www.terraform.io/docs/providers/cloudstack/r/vpc.html terraform documentation>
 -- for more information.
 data VpcResource s = VpcResource'
-    { _cidr        :: TF.Attr s P.Text
+    { _cidr          :: TF.Attr s P.Text
     -- ^ @cidr@ - (Required, Forces New)
     --
-    , _name        :: TF.Attr s P.Text
+    , _displayText   :: TF.Attr s P.Text
+    -- ^ @display_text@ - (Optional)
+    --
+    , _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _vpcOffering :: TF.Attr s P.Text
+    , _networkDomain :: TF.Attr s P.Text
+    -- ^ @network_domain@ - (Optional, Forces New)
+    --
+    , _project       :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _tags          :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _vpcOffering   :: TF.Attr s P.Text
     -- ^ @vpc_offering@ - (Required, Forces New)
     --
-    , _zone        :: TF.Attr s P.Text
+    , _zone          :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1754,7 +2176,11 @@ vpcResource _cidr _name _vpcOffering _zone =
     TF.unsafeResource "cloudstack_vpc" TF.validator $
         VpcResource'
             { _cidr = _cidr
+            , _displayText = TF.Nil
             , _name = _name
+            , _networkDomain = TF.Nil
+            , _project = TF.Nil
+            , _tags = TF.Nil
             , _vpcOffering = _vpcOffering
             , _zone = _zone
             }
@@ -1762,7 +2188,11 @@ vpcResource _cidr _name _vpcOffering _zone =
 instance TF.IsObject (VpcResource s) where
     toObject VpcResource'{..} = P.catMaybes
         [ TF.assign "cidr" <$> TF.attribute _cidr
+        , TF.assign "display_text" <$> TF.attribute _displayText
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_domain" <$> TF.attribute _networkDomain
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "vpc_offering" <$> TF.attribute _vpcOffering
         , TF.assign "zone" <$> TF.attribute _zone
         ]
@@ -1775,10 +2205,30 @@ instance P.HasCidr (VpcResource s) (TF.Attr s P.Text) where
         P.lens (_cidr :: VpcResource s -> TF.Attr s P.Text)
                (\s a -> s { _cidr = a } :: VpcResource s)
 
+instance P.HasDisplayText (VpcResource s) (TF.Attr s P.Text) where
+    displayText =
+        P.lens (_displayText :: VpcResource s -> TF.Attr s P.Text)
+               (\s a -> s { _displayText = a } :: VpcResource s)
+
 instance P.HasName (VpcResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: VpcResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: VpcResource s)
+
+instance P.HasNetworkDomain (VpcResource s) (TF.Attr s P.Text) where
+    networkDomain =
+        P.lens (_networkDomain :: VpcResource s -> TF.Attr s P.Text)
+               (\s a -> s { _networkDomain = a } :: VpcResource s)
+
+instance P.HasProject (VpcResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: VpcResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: VpcResource s)
+
+instance P.HasTags (VpcResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: VpcResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: VpcResource s)
 
 instance P.HasVpcOffering (VpcResource s) (TF.Attr s P.Text) where
     vpcOffering =
@@ -1860,23 +2310,35 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VpnConnectionResource s)) (TF.Att
 -- See the <https://www.terraform.io/docs/providers/cloudstack/r/vpn_customer_gateway.html terraform documentation>
 -- for more information.
 data VpnCustomerGatewayResource s = VpnCustomerGatewayResource'
-    { _cidr      :: TF.Attr s P.Text
+    { _cidr        :: TF.Attr s P.Text
     -- ^ @cidr@ - (Required)
     --
-    , _espPolicy :: TF.Attr s P.Text
+    , _dpd         :: TF.Attr s P.Bool
+    -- ^ @dpd@ - (Optional)
+    --
+    , _espLifetime :: TF.Attr s P.Int
+    -- ^ @esp_lifetime@ - (Optional)
+    --
+    , _espPolicy   :: TF.Attr s P.Text
     -- ^ @esp_policy@ - (Required)
     --
-    , _gateway   :: TF.Attr s P.Text
+    , _gateway     :: TF.Attr s P.Text
     -- ^ @gateway@ - (Required)
     --
-    , _ikePolicy :: TF.Attr s P.Text
+    , _ikeLifetime :: TF.Attr s P.Int
+    -- ^ @ike_lifetime@ - (Optional)
+    --
+    , _ikePolicy   :: TF.Attr s P.Text
     -- ^ @ike_policy@ - (Required)
     --
-    , _ipsecPsk  :: TF.Attr s P.Text
+    , _ipsecPsk    :: TF.Attr s P.Text
     -- ^ @ipsec_psk@ - (Required)
     --
-    , _name      :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
+    --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1893,21 +2355,29 @@ vpnCustomerGatewayResource _cidr _gateway _name _espPolicy _ikePolicy _ipsecPsk 
     TF.unsafeResource "cloudstack_vpn_customer_gateway" TF.validator $
         VpnCustomerGatewayResource'
             { _cidr = _cidr
+            , _dpd = TF.Nil
+            , _espLifetime = TF.Nil
             , _espPolicy = _espPolicy
             , _gateway = _gateway
+            , _ikeLifetime = TF.Nil
             , _ikePolicy = _ikePolicy
             , _ipsecPsk = _ipsecPsk
             , _name = _name
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (VpnCustomerGatewayResource s) where
     toObject VpnCustomerGatewayResource'{..} = P.catMaybes
         [ TF.assign "cidr" <$> TF.attribute _cidr
+        , TF.assign "dpd" <$> TF.attribute _dpd
+        , TF.assign "esp_lifetime" <$> TF.attribute _espLifetime
         , TF.assign "esp_policy" <$> TF.attribute _espPolicy
         , TF.assign "gateway" <$> TF.attribute _gateway
+        , TF.assign "ike_lifetime" <$> TF.attribute _ikeLifetime
         , TF.assign "ike_policy" <$> TF.attribute _ikePolicy
         , TF.assign "ipsec_psk" <$> TF.attribute _ipsecPsk
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (VpnCustomerGatewayResource s) where
@@ -1918,6 +2388,16 @@ instance P.HasCidr (VpnCustomerGatewayResource s) (TF.Attr s P.Text) where
         P.lens (_cidr :: VpnCustomerGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _cidr = a } :: VpnCustomerGatewayResource s)
 
+instance P.HasDpd (VpnCustomerGatewayResource s) (TF.Attr s P.Bool) where
+    dpd =
+        P.lens (_dpd :: VpnCustomerGatewayResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dpd = a } :: VpnCustomerGatewayResource s)
+
+instance P.HasEspLifetime (VpnCustomerGatewayResource s) (TF.Attr s P.Int) where
+    espLifetime =
+        P.lens (_espLifetime :: VpnCustomerGatewayResource s -> TF.Attr s P.Int)
+               (\s a -> s { _espLifetime = a } :: VpnCustomerGatewayResource s)
+
 instance P.HasEspPolicy (VpnCustomerGatewayResource s) (TF.Attr s P.Text) where
     espPolicy =
         P.lens (_espPolicy :: VpnCustomerGatewayResource s -> TF.Attr s P.Text)
@@ -1927,6 +2407,11 @@ instance P.HasGateway (VpnCustomerGatewayResource s) (TF.Attr s P.Text) where
     gateway =
         P.lens (_gateway :: VpnCustomerGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _gateway = a } :: VpnCustomerGatewayResource s)
+
+instance P.HasIkeLifetime (VpnCustomerGatewayResource s) (TF.Attr s P.Int) where
+    ikeLifetime =
+        P.lens (_ikeLifetime :: VpnCustomerGatewayResource s -> TF.Attr s P.Int)
+               (\s a -> s { _ikeLifetime = a } :: VpnCustomerGatewayResource s)
 
 instance P.HasIkePolicy (VpnCustomerGatewayResource s) (TF.Attr s P.Text) where
     ikePolicy =
@@ -1942,6 +2427,11 @@ instance P.HasName (VpnCustomerGatewayResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: VpnCustomerGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: VpnCustomerGatewayResource s)
+
+instance P.HasProject (VpnCustomerGatewayResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: VpnCustomerGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: VpnCustomerGatewayResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VpnCustomerGatewayResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"

@@ -174,6 +174,12 @@ data RuleSetting s = RuleSetting'
     { _cidrList              :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @cidr_list@ - (Required)
     --
+    , _icmpCode              :: TF.Attr s P.Int
+    -- ^ @icmp_code@ - (Optional)
+    --
+    , _icmpType              :: TF.Attr s P.Int
+    -- ^ @icmp_type@ - (Optional)
+    --
     , _ports                 :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @ports@ - (Optional)
     --
@@ -199,6 +205,8 @@ ruleSetting
 ruleSetting _cidrList _protocol =
     RuleSetting'
         { _cidrList = _cidrList
+        , _icmpCode = TF.Nil
+        , _icmpType = TF.Nil
         , _ports = TF.Nil
         , _protocol = _protocol
         , _action = TF.value "allow"
@@ -210,6 +218,8 @@ instance TF.IsValue  (RuleSetting s)
 instance TF.IsObject (RuleSetting s) where
     toObject RuleSetting'{..} = P.catMaybes
         [ TF.assign "cidr_list" <$> TF.attribute _cidrList
+        , TF.assign "icmp_code" <$> TF.attribute _icmpCode
+        , TF.assign "icmp_type" <$> TF.attribute _icmpType
         , TF.assign "ports" <$> TF.attribute _ports
         , TF.assign "protocol" <$> TF.attribute _protocol
         , TF.assign "action" <$> TF.attribute _action
@@ -224,6 +234,16 @@ instance P.HasCidrList (RuleSetting s) (TF.Attr s [TF.Attr s P.Text]) where
     cidrList =
         P.lens (_cidrList :: RuleSetting s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _cidrList = a } :: RuleSetting s)
+
+instance P.HasIcmpCode (RuleSetting s) (TF.Attr s P.Int) where
+    icmpCode =
+        P.lens (_icmpCode :: RuleSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _icmpCode = a } :: RuleSetting s)
+
+instance P.HasIcmpType (RuleSetting s) (TF.Attr s P.Int) where
+    icmpType =
+        P.lens (_icmpType :: RuleSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _icmpType = a } :: RuleSetting s)
 
 instance P.HasPorts (RuleSetting s) (TF.Attr s [TF.Attr s P.Text]) where
     ports =
