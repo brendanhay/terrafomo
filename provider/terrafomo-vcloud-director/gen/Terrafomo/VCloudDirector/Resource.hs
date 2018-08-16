@@ -191,17 +191,17 @@ data EdgegatewayVpnResource s = EdgegatewayVpnResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 edgegatewayVpnResource
-    :: TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
-    -> TF.Attr s P.Text -- ^ @encryption_protocol@ - 'P.encryptionProtocol'
+    :: TF.Attr s P.Text -- ^ @local_ip_address@ - 'P.localIpAddress'
+    -> TF.Attr s P.Text -- ^ @peer_ip_address@ - 'P.peerIpAddress'
+    -> TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
     -> TF.Attr s P.Text -- ^ @local_id@ - 'P.localId'
-    -> TF.Attr s P.Text -- ^ @local_ip_address@ - 'P.localIpAddress'
+    -> TF.Attr s P.Text -- ^ @peer_id@ - 'P.peerId'
     -> TF.Attr s P.Int -- ^ @mtu@ - 'P.mtu'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @peer_id@ - 'P.peerId'
-    -> TF.Attr s P.Text -- ^ @peer_ip_address@ - 'P.peerIpAddress'
+    -> TF.Attr s P.Text -- ^ @encryption_protocol@ - 'P.encryptionProtocol'
     -> TF.Attr s P.Text -- ^ @shared_secret@ - 'P.sharedSecret'
     -> P.Resource (EdgegatewayVpnResource s)
-edgegatewayVpnResource _edgeGateway _encryptionProtocol _localId _localIpAddress _mtu _name _peerId _peerIpAddress _sharedSecret =
+edgegatewayVpnResource _localIpAddress _peerIpAddress _edgeGateway _localId _peerId _mtu _name _encryptionProtocol _sharedSecret =
     TF.unsafeResource "vcd_edgegateway_vpn" TF.validator $
         EdgegatewayVpnResource'
             { _description = TF.Nil

@@ -251,13 +251,13 @@ data RuleSetting s = RuleSetting'
 newRuleSetting
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @destination_ip@ - 'P.destinationIp'
-    -> TF.Attr s P.Text -- ^ @destination_port@ - 'P.destinationPort'
-    -> TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Text -- ^ @source_ip@ - 'P.sourceIp'
+    -> TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
+    -> TF.Attr s P.Text -- ^ @destination_port@ - 'P.destinationPort'
     -> TF.Attr s P.Text -- ^ @source_port@ - 'P.sourcePort'
+    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> RuleSetting s
-newRuleSetting _description _destinationIp _destinationPort _policy _protocol _sourceIp _sourcePort =
+newRuleSetting _description _destinationIp _sourceIp _policy _destinationPort _sourcePort _protocol =
     RuleSetting'
         { _description = _description
         , _destinationIp = _destinationIp
