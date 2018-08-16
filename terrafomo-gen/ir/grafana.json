@@ -81,23 +81,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_authType",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"auth_type\" <$> TF.attribute",
-                    "name": "_authType",
-                    "method": "authType",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAuthType",
-                    "validate": false,
-                    "optional": false,
-                    "original": "auth_type"
-                },
-                {
                     "default": "_defaultRegion",
                     "computed": false,
                     "required": true,
@@ -113,6 +96,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "default_region"
+                },
+                {
+                    "default": "_authType",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"auth_type\" <$> TF.attribute",
+                    "name": "_authType",
+                    "method": "authType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAuthType",
+                    "validate": false,
+                    "optional": false,
+                    "original": "auth_type"
                 }
             ],
             "conflicts": [],
