@@ -17,7 +17,6 @@
 --
 module Terrafomo.PagerDuty.Settings
     (
-    -- * Settings Datatypes
     -- ** at
       AtSetting (..)
     , newAtSetting
@@ -91,6 +90,7 @@ data AtSetting s = AtSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @at@ settings value.
 newAtSetting
     :: AtSetting s
 newAtSetting =
@@ -129,6 +129,7 @@ data DuringSupportHoursSetting s = DuringSupportHoursSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @during_support_hours@ settings value.
 newDuringSupportHoursSetting
     :: DuringSupportHoursSetting s
 newDuringSupportHoursSetting =
@@ -173,6 +174,7 @@ data IncidentUrgencyRuleSetting s = IncidentUrgencyRuleSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @incident_urgency_rule@ settings value.
 newIncidentUrgencyRuleSetting
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> IncidentUrgencyRuleSetting s
@@ -246,6 +248,7 @@ data LayerSetting s = LayerSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @layer@ settings value.
 newLayerSetting
     :: TF.Attr s P.Int -- ^ @rotation_turn_length_seconds@ - 'P.rotationTurnLengthSeconds'
     -> TF.Attr s P.Text -- ^ @rotation_virtual_start@ - 'P.rotationVirtualStart'
@@ -322,6 +325,7 @@ data OutsideSupportHoursSetting s = OutsideSupportHoursSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @outside_support_hours@ settings value.
 newOutsideSupportHoursSetting
     :: OutsideSupportHoursSetting s
 newOutsideSupportHoursSetting =
@@ -366,6 +370,7 @@ data RestrictionSetting s = RestrictionSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @restriction@ settings value.
 newRestrictionSetting
     :: TF.Attr s P.Text -- ^ @start_time_of_day@ - 'P.startTimeOfDay'
     -> TF.Attr s P.Int -- ^ @duration_seconds@ - 'P.durationSeconds'
@@ -421,6 +426,7 @@ data RuleSetting s = RuleSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @rule@ settings value.
 newRuleSetting
     :: TF.Attr s P.Int -- ^ @escalation_delay_in_minutes@ - 'P.escalationDelayInMinutes'
     -> TF.Attr s [TF.Attr s (TargetSetting s)] -- ^ @target@ - 'P.target'
@@ -467,6 +473,7 @@ data ScheduledActionsSetting s = ScheduledActionsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @scheduled_actions@ settings value.
 newScheduledActionsSetting
     :: ScheduledActionsSetting s
 newScheduledActionsSetting =
@@ -521,6 +528,7 @@ data SupportHoursSetting s = SupportHoursSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @support_hours@ settings value.
 newSupportHoursSetting
     :: SupportHoursSetting s
 newSupportHoursSetting =
@@ -580,6 +588,7 @@ data TargetSetting s = TargetSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @target@ settings value.
 newTargetSetting
     :: TF.Attr s P.Text -- ^ @id@ - 'P.id'
     -> TargetSetting s

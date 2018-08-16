@@ -17,7 +17,6 @@
 --
 module Terrafomo.PagerDuty.Resource
     (
-    -- * Resource Datatypes
     -- ** pagerduty_addon
       AddonResource (..)
     , addonResource
@@ -101,6 +100,7 @@ data AddonResource s = AddonResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @pagerduty_addon@ resource value.
 addonResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @src@ - 'P.src'
@@ -156,6 +156,7 @@ data EscalationPolicyResource s = EscalationPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @pagerduty_escalation_policy@ resource value.
 escalationPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s (RuleSetting s)] -- ^ @rule@ - 'P.rule'
@@ -226,6 +227,7 @@ data ExtensionResource s = ExtensionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @pagerduty_extension@ resource value.
 extensionResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @extension_objects@ - 'P.extensionObjects'
     -> TF.Attr s P.Text -- ^ @extension_schema@ - 'P.extensionSchema'
@@ -291,6 +293,7 @@ data MaintenanceWindowResource s = MaintenanceWindowResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @pagerduty_maintenance_window@ resource value.
 maintenanceWindowResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @services@ - 'P.services'
     -> TF.Attr s P.Text -- ^ @end_time@ - 'P.endTime'
@@ -361,6 +364,7 @@ data ScheduleResource s = ScheduleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @pagerduty_schedule@ resource value.
 scheduleResource
     :: TF.Attr s [TF.Attr s (LayerSetting s)] -- ^ @layer@ - 'P.layer'
     -> TF.Attr s P.Text -- ^ @time_zone@ - 'P.timeZone'
@@ -446,6 +450,7 @@ data ServiceResource s = ServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @pagerduty_service@ resource value.
 serviceResource
     :: TF.Attr s P.Text -- ^ @escalation_policy@ - 'P.escalationPolicy'
     -> P.Resource (ServiceResource s)
@@ -549,6 +554,7 @@ data ServiceIntegrationResource s = ServiceIntegrationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @pagerduty_service_integration@ resource value.
 serviceIntegrationResource
     :: TF.Attr s P.Text -- ^ @service@ - 'P.service'
     -> P.Resource (ServiceIntegrationResource s)
@@ -609,6 +615,7 @@ data TeamResource s = TeamResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @pagerduty_team@ resource value.
 teamResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (TeamResource s)
@@ -654,6 +661,7 @@ data TeamMembershipResource s = TeamMembershipResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @pagerduty_team_membership@ resource value.
 teamMembershipResource
     :: TF.Attr s P.Text -- ^ @team_id@ - 'P.teamId'
     -> TF.Attr s P.Text -- ^ @user_id@ - 'P.userId'
@@ -712,6 +720,7 @@ data UserResource s = UserResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @pagerduty_user@ resource value.
 userResource
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -813,6 +822,7 @@ data UserContactMethodResource s = UserContactMethodResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @pagerduty_user_contact_method@ resource value.
 userContactMethodResource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @user_id@ - 'P.userId'

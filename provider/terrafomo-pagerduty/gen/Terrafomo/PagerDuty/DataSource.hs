@@ -17,7 +17,6 @@
 --
 module Terrafomo.PagerDuty.DataSource
     (
-    -- * DataSource Datatypes
     -- ** pagerduty_escalation_policy
       EscalationPolicyData (..)
     , escalationPolicyData
@@ -78,6 +77,7 @@ data EscalationPolicyData s = EscalationPolicyData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @pagerduty_escalation_policy@ datasource value.
 escalationPolicyData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (EscalationPolicyData s)
@@ -113,6 +113,7 @@ data ExtensionSchemaData s = ExtensionSchemaData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @pagerduty_extension_schema@ datasource value.
 extensionSchemaData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ExtensionSchemaData s)
@@ -151,6 +152,7 @@ data ScheduleData s = ScheduleData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @pagerduty_schedule@ datasource value.
 scheduleData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ScheduleData s)
@@ -187,6 +189,7 @@ data TeamData s = TeamData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @pagerduty_team@ datasource value.
 teamData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (TeamData s)
@@ -225,6 +228,7 @@ data UserData s = UserData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @pagerduty_user@ datasource value.
 userData
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> P.DataSource (UserData s)
@@ -266,6 +270,7 @@ data VendorData s = VendorData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @pagerduty_vendor@ datasource value.
 vendorData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (VendorData s)
