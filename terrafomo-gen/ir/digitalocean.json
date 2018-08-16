@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newForwardingRuleSetting",
+                "smart": "forwardingRuleSetting",
                 "name": "ForwardingRuleSetting'"
             },
             "arguments": [
@@ -189,7 +189,7 @@
         },
         {
             "con": {
-                "smart": "newHealthcheckSetting",
+                "smart": "healthcheckSetting",
                 "name": "HealthcheckSetting'"
             },
             "arguments": [
@@ -359,7 +359,7 @@
         },
         {
             "con": {
-                "smart": "newInboundRuleSetting",
+                "smart": "inboundRuleSetting",
                 "name": "InboundRuleSetting'"
             },
             "arguments": [
@@ -477,7 +477,7 @@
         },
         {
             "con": {
-                "smart": "newOutboundRuleSetting",
+                "smart": "outboundRuleSetting",
                 "name": "OutboundRuleSetting'"
             },
             "arguments": [
@@ -595,7 +595,7 @@
         },
         {
             "con": {
-                "smart": "newPendingChangesSetting",
+                "smart": "pendingChangesSetting",
                 "name": "PendingChangesSetting'"
             },
             "arguments": [
@@ -662,7 +662,7 @@
         },
         {
             "con": {
-                "smart": "newStickySessionsSetting",
+                "smart": "stickySessionsSetting",
                 "name": "StickySessionsSetting'"
             },
             "arguments": [
