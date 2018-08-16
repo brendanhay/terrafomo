@@ -423,11 +423,11 @@ data BigqueryloggingSetting s = BigqueryloggingSetting'
 
 newBigqueryloggingSetting
     :: TF.Attr s P.Text -- ^ @dataset@ - 'P.dataset'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @table@ - 'P.table'
     -> BigqueryloggingSetting s
-newBigqueryloggingSetting _dataset _name _projectId _table =
+newBigqueryloggingSetting _dataset _projectId _name _table =
     BigqueryloggingSetting'
         { _dataset = _dataset
         , _email = TF.Nil
