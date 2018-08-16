@@ -20,6 +20,7 @@ module Terrafomo.VCloudDirector.Provider
     -- * VCloudDirector Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * VCloudDirector Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.VCloudDirector.Settings
 
-import qualified Data.Hashable                  as P
-import qualified Data.HashMap.Strict            as P
-import qualified Data.HashMap.Strict            as Map
 import qualified Data.List.NonEmpty             as P
+import qualified Data.Map.Strict                as P
+import qualified Data.Map.Strict                as Map
 import qualified Data.Maybe                     as P
 import qualified Data.Monoid                    as P
 import qualified Data.Text                      as P
@@ -65,7 +65,7 @@ data Provider = Provider'
     -- ^ @allow_unverified_ssl@ - (Optional)
     -- If set, VCDClient will permit unverifiable SSL certificates.
     --
-    , _maxRetryTimeout    :: P.Maybe P.Integer
+    , _maxRetryTimeout    :: P.Maybe P.Int
     -- ^ @max_retry_timeout@ - (Optional)
     -- Max num seconds to wait for successful response when operating on resources
     -- within vCloud (defaults to 60)
@@ -90,7 +90,7 @@ data Provider = Provider'
     -- ^ @vdc@ - (Optional)
     -- The name of the VDC to run operations on
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: P.Text -- ^ @org@ - 'P.org'
@@ -109,27 +109,24 @@ newProvider _org _password _url _user =
         , _vdc = P.Nothing
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
-                  , TF.assign "max_retry_timeout" <$> _maxRetryTimeout
-                  , P.Just $ TF.assign "org" _org
-                  , P.Just $ TF.assign "password" _password
-                  , P.Just $ TF.assign "url" _url
-                  , P.Just $ TF.assign "user" _user
-                  , TF.assign "vdc" <$> _vdc
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
+        ,  TF.assign "max_retry_timeout" <$> _maxRetryTimeout
+        ,  P.Just $ TF.assign "org" _org
+        ,  P.Just $ TF.assign "password" _password
+        ,  P.Just $ TF.assign "url" _url
+        ,  P.Just $ TF.assign "user" _user
+        ,  TF.assign "vdc" <$> _vdc
+        ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
@@ -139,9 +136,9 @@ instance P.HasAllowUnverifiedSsl (Provider) (P.Maybe P.Bool) where
         P.lens (_allowUnverifiedSsl :: Provider -> P.Maybe P.Bool)
                (\s a -> s { _allowUnverifiedSsl = a } :: Provider)
 
-instance P.HasMaxRetryTimeout (Provider) (P.Maybe P.Integer) where
+instance P.HasMaxRetryTimeout (Provider) (P.Maybe P.Int) where
     maxRetryTimeout =
-        P.lens (_maxRetryTimeout :: Provider -> P.Maybe P.Integer)
+        P.lens (_maxRetryTimeout :: Provider -> P.Maybe P.Int)
                (\s a -> s { _maxRetryTimeout = a } :: Provider)
 
 instance P.HasOrg (Provider) (P.Text) where
