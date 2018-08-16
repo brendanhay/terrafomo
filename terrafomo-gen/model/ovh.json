@@ -94,7 +94,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "cloud_network_private_regions",
+            "name": "regions",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -118,7 +118,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "cloud_network_private_regions_status",
+            "name": "regions_status",
             "schemas": [
               {
                 "name": "region",
@@ -250,7 +250,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "cloud_network_private_subnet_ip_pools",
+            "name": "ip_pools",
             "schemas": [
               {
                 "name": "dhcp",
@@ -649,7 +649,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "iploadbalancing_http_route_action",
+            "name": "action",
             "schemas": [
               {
                 "name": "status",
@@ -892,7 +892,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "iploadbalancing_tcp_farm_probe",
+            "name": "probe",
             "schemas": [
               {
                 "name": "force_ssl",
@@ -1260,7 +1260,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "publiccloud_private_network_regions",
+            "name": "regions",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1284,7 +1284,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "publiccloud_private_network_regions_status",
+            "name": "regions_status",
             "schemas": [
               {
                 "name": "region",
@@ -1416,7 +1416,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "publiccloud_private_network_subnet_ip_pools",
+            "name": "ip_pools",
             "schemas": [
               {
                 "name": "dhcp",
@@ -1794,7 +1794,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "cloud_region_services",
+            "name": "services",
             "schemas": [
               {
                 "name": "name",
@@ -1840,7 +1840,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "cloud_regions_names",
+            "name": "names",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1929,7 +1929,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "domain_zone_name_servers",
+            "name": "name_servers",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2030,7 +2030,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "iploadbalancing_orderable_zone",
+            "name": "orderable_zone",
             "schemas": [
               {
                 "name": "name",
@@ -2131,7 +2131,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "iploadbalancing_zone",
+            "name": "zone",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2289,7 +2289,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "me_paymentmean_creditcard_states",
+            "name": "states",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2418,7 +2418,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "publiccloud_region_services",
+            "name": "services",
             "schemas": [
               {
                 "name": "name",
@@ -2464,7 +2464,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "publiccloud_regions_names",
+            "name": "names",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
