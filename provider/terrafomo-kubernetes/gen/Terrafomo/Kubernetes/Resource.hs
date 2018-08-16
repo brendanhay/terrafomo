@@ -145,6 +145,9 @@ instance P.HasMetadata (ConfigMapResource s) (TF.Attr s (MetadataSetting s)) whe
         P.lens (_metadata :: ConfigMapResource s -> TF.Attr s (MetadataSetting s))
                (\s a -> s { _metadata = a } :: ConfigMapResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ConfigMapResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @kubernetes_horizontal_pod_autoscaler@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/kubernetes/r/horizontal_pod_autoscaler.html terraform documentation>
@@ -200,6 +203,9 @@ instance P.HasSpec (HorizontalPodAutoscalerResource s) (TF.Attr s (SpecSetting s
         P.lens (_spec :: HorizontalPodAutoscalerResource s -> TF.Attr s (SpecSetting s))
                (\s a -> s { _spec = a } :: HorizontalPodAutoscalerResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (HorizontalPodAutoscalerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @kubernetes_limit_range@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/kubernetes/r/limit_range.html terraform documentation>
@@ -254,6 +260,9 @@ instance P.HasSpec (LimitRangeResource s) (TF.Attr s (SpecSetting s)) where
         P.lens (_spec :: LimitRangeResource s -> TF.Attr s (SpecSetting s))
                (\s a -> s { _spec = a } :: LimitRangeResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LimitRangeResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @kubernetes_namespace@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/kubernetes/r/namespace.html terraform documentation>
@@ -291,6 +300,9 @@ instance P.HasMetadata (NamespaceResource s) (TF.Attr s (MetadataSetting s)) whe
     metadata =
         P.lens (_metadata :: NamespaceResource s -> TF.Attr s (MetadataSetting s))
                (\s a -> s { _metadata = a } :: NamespaceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NamespaceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @kubernetes_persistent_volume@ Resource.
 --
@@ -341,6 +353,9 @@ instance P.HasSpec (PersistentVolumeResource s) (TF.Attr s [TF.Attr s (SpecSetti
     spec =
         P.lens (_spec :: PersistentVolumeResource s -> TF.Attr s [TF.Attr s (SpecSetting s)])
                (\s a -> s { _spec = a } :: PersistentVolumeResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PersistentVolumeResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @kubernetes_persistent_volume_claim@ Resource.
 --
@@ -410,6 +425,9 @@ instance P.HasWaitUntilBound (PersistentVolumeClaimResource s) (TF.Attr s P.Bool
         P.lens (_waitUntilBound :: PersistentVolumeClaimResource s -> TF.Attr s P.Bool)
                (\s a -> s { _waitUntilBound = a } :: PersistentVolumeClaimResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PersistentVolumeClaimResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @kubernetes_pod@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/kubernetes/r/pod.html terraform documentation>
@@ -463,6 +481,9 @@ instance P.HasSpec (PodResource s) (TF.Attr s (SpecSetting s)) where
     spec =
         P.lens (_spec :: PodResource s -> TF.Attr s (SpecSetting s))
                (\s a -> s { _spec = a } :: PodResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PodResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @kubernetes_replication_controller@ Resource.
 --
@@ -520,6 +541,9 @@ instance P.HasSpec (ReplicationControllerResource s) (TF.Attr s (SpecSetting s))
         P.lens (_spec :: ReplicationControllerResource s -> TF.Attr s (SpecSetting s))
                (\s a -> s { _spec = a } :: ReplicationControllerResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ReplicationControllerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @kubernetes_resource_quota@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/kubernetes/r/resource_quota.html terraform documentation>
@@ -573,6 +597,9 @@ instance P.HasSpec (ResourceQuotaResource s) (TF.Attr s (SpecSetting s)) where
     spec =
         P.lens (_spec :: ResourceQuotaResource s -> TF.Attr s (SpecSetting s))
                (\s a -> s { _spec = a } :: ResourceQuotaResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceQuotaResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @kubernetes_secret@ Resource.
 --
@@ -634,6 +661,9 @@ instance P.HasType' (SecretResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: SecretResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: SecretResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecretResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @kubernetes_service@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/kubernetes/r/service.html terraform documentation>
@@ -688,6 +718,9 @@ instance P.HasSpec (ServiceResource s) (TF.Attr s (SpecSetting s)) where
     spec =
         P.lens (_spec :: ServiceResource s -> TF.Attr s (SpecSetting s))
                (\s a -> s { _spec = a } :: ServiceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedLoadBalancerIngress (TF.Ref s' (ServiceResource s)) (TF.Attr s [TF.Attr s (LoadBalancerIngressSetting s)]) where
     computedLoadBalancerIngress x = TF.compute (TF.refKey x) "load_balancer_ingress"
@@ -755,6 +788,9 @@ instance P.HasSecret (ServiceAccountResource s) (TF.Attr s [TF.Attr s (SecretSet
         P.lens (_secret :: ServiceAccountResource s -> TF.Attr s [TF.Attr s (SecretSetting s)])
                (\s a -> s { _secret = a } :: ServiceAccountResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDefaultSecretName (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
     computedDefaultSecretName x = TF.compute (TF.refKey x) "default_secret_name"
 
@@ -819,3 +855,6 @@ instance P.HasStorageProvisioner (StorageClassResource s) (TF.Attr s P.Text) whe
     storageProvisioner =
         P.lens (_storageProvisioner :: StorageClassResource s -> TF.Attr s P.Text)
                (\s a -> s { _storageProvisioner = a } :: StorageClassResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageClassResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
