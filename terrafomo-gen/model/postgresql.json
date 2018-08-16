@@ -581,7 +581,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "schema_policy",
+            "name": "policy",
             "schemas": [
               {
                 "name": "create",
@@ -628,7 +628,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "policy_role",
+                  "name": "role",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
