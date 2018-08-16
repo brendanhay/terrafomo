@@ -55,6 +55,9 @@ data RecordResource s = RecordResource'
     { _name  :: TF.Attr s P.Text
     -- ^ @name@ - (Optional, Forces New)
     --
+    , _ttl   :: TF.Attr s P.Text
+    -- ^ @ttl@ - (Optional)
+    --
     , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required, Forces New)
     --
@@ -76,6 +79,7 @@ recordResource _type' _value _zone =
     TF.unsafeResource "dyn_record" TF.validator $
         RecordResource'
             { _name = TF.Nil
+            , _ttl = TF.Nil
             , _type' = _type'
             , _value = _value
             , _zone = _zone
@@ -84,6 +88,7 @@ recordResource _type' _value _zone =
 instance TF.IsObject (RecordResource s) where
     toObject RecordResource'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "ttl" <$> TF.attribute _ttl
         , TF.assign "type" <$> TF.attribute _type'
         , TF.assign "value" <$> TF.attribute _value
         , TF.assign "zone" <$> TF.attribute _zone
@@ -96,6 +101,11 @@ instance P.HasName (RecordResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RecordResource s)
+
+instance P.HasTtl (RecordResource s) (TF.Attr s P.Text) where
+    ttl =
+        P.lens (_ttl :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ttl = a } :: RecordResource s)
 
 instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
     type' =

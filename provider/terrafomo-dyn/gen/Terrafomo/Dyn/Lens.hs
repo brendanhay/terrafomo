@@ -18,6 +18,7 @@ module Terrafomo.Dyn.Lens
       HasCustomerName (..)
     , HasName (..)
     , HasPassword (..)
+    , HasTtl (..)
     , HasType' (..)
     , HasUsername (..)
     , HasValue (..)
@@ -51,6 +52,12 @@ class HasPassword a b | a -> b where
 
 instance HasPassword a b => HasPassword (TF.Schema l p a) b where
     password = TF.configuration . password
+
+class HasTtl a b | a -> b where
+    ttl :: P.Lens' a b
+
+instance HasTtl a b => HasTtl (TF.Schema l p a) b where
+    ttl = TF.configuration . ttl
 
 class HasType' a b | a -> b where
     type' :: P.Lens' a b

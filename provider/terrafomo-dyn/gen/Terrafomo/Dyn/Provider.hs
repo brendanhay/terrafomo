@@ -90,7 +90,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "dyn"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "customer_name" _customerName
             , P.Just $ TF.assign "password" _password
