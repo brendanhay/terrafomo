@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newJsonDataSetting",
+                "smart": "jsonDataSetting",
                 "name": "JsonDataSetting'"
             },
             "arguments": [
@@ -121,7 +121,7 @@
         },
         {
             "con": {
-                "smart": "newSecureJsonDataSetting",
+                "smart": "secureJsonDataSetting",
                 "name": "SecureJsonDataSetting'"
             },
             "arguments": [
