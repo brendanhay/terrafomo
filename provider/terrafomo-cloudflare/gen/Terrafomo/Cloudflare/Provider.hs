@@ -20,7 +20,6 @@ module Terrafomo.Cloudflare.Provider
     -- * Cloudflare Provider Datatype
       Provider (..)
     , newProvider
-    , defaultProvider
 
     -- * Cloudflare Specific Aliases
     , DataSource
@@ -56,7 +55,7 @@ import qualified Terrafomo.Validator        as TF
 type DataSource a = TF.Schema ()               Provider a
 type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
 
--- | The @Cloudflare@ Terraform provider configuration.
+-- | The @cloudflare@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/cloudflare/index.html terraform documentation>
 -- for more information.
@@ -119,26 +118,27 @@ newProvider _email _token =
         , _useOrgFromZone = P.Nothing
         }
 
-defaultProvider :: TF.Provider (P.Maybe Provider)
-defaultProvider =
-    TF.Provider
-        { _providerType   = TF.Type P.Nothing "provider"
-        , _providerAlias  = P.Nothing
-        , _providerConfig = P.Nothing
-        }
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "cloudflare"
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} = P.catMaybes
-        [  TF.assign "api_client_logging" <$> _apiClientLogging
-        ,  P.Just $ TF.assign "email" _email
-        ,  TF.assign "max_backoff" <$> _maxBackoff
-        ,  TF.assign "min_backoff" <$> _minBackoff
-        ,  TF.assign "org_id" <$> _orgId
-        ,  TF.assign "retries" <$> _retries
-        ,  TF.assign "rps" <$> _rps
-        ,  P.Just $ TF.assign "token" _token
-        ,  TF.assign "use_org_from_zone" <$> _useOrgFromZone
-        ]
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy Provider)
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "api_client_logging" <$> _apiClientLogging
+                  , P.Just $ TF.assign "email" _email
+                  , TF.assign "max_backoff" <$> _maxBackoff
+                  , TF.assign "min_backoff" <$> _minBackoff
+                  , TF.assign "org_id" <$> _orgId
+                  , TF.assign "retries" <$> _retries
+                  , TF.assign "rps" <$> _rps
+                  , P.Just $ TF.assign "token" _token
+                  , TF.assign "use_org_from_zone" <$> _useOrgFromZone
+                  ])
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
