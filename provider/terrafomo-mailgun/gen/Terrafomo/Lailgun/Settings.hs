@@ -19,11 +19,11 @@ module Terrafomo.Lailgun.Settings
     (
     -- ** receiving_records
       ReceivingRecordsSetting (..)
-    , newReceivingRecordsSetting
+    , receivingRecordsSetting
 
     -- ** sending_records
     , SendingRecordsSetting (..)
-    , newSendingRecordsSetting
+    , sendingRecordsSetting
 
     ) where
 
@@ -53,9 +53,9 @@ data ReceivingRecordsSetting s = ReceivingRecordsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @receiving_records@ settings value.
-newReceivingRecordsSetting
+receivingRecordsSetting
     :: ReceivingRecordsSetting s
-newReceivingRecordsSetting =
+receivingRecordsSetting =
     ReceivingRecordsSetting'
 
 instance TF.IsValue  (ReceivingRecordsSetting s)
@@ -82,9 +82,9 @@ data SendingRecordsSetting s = SendingRecordsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @sending_records@ settings value.
-newSendingRecordsSetting
+sendingRecordsSetting
     :: SendingRecordsSetting s
-newSendingRecordsSetting =
+sendingRecordsSetting =
     SendingRecordsSetting'
 
 instance TF.IsValue  (SendingRecordsSetting s)
