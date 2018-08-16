@@ -160,6 +160,9 @@ instance P.HasServices (AlertResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_services :: AlertResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _services = a } :: AlertResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @librato_metric@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/librato/r/metric.html terraform documentation>
@@ -256,6 +259,9 @@ instance P.HasType' (MetricResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: MetricResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: MetricResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MetricResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @librato_service@ Resource.
 --
@@ -452,3 +458,6 @@ instance P.HasType' (SpaceChartResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: SpaceChartResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: SpaceChartResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceChartResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
