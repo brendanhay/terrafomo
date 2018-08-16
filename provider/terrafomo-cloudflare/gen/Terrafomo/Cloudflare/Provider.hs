@@ -121,24 +121,19 @@ newProvider _email _token =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "cloudflare"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "api_client_logging" <$> _apiClientLogging
-                  , P.Just $ TF.assign "email" _email
-                  , TF.assign "max_backoff" <$> _maxBackoff
-                  , TF.assign "min_backoff" <$> _minBackoff
-                  , TF.assign "org_id" <$> _orgId
-                  , TF.assign "retries" <$> _retries
-                  , TF.assign "rps" <$> _rps
-                  , P.Just $ TF.assign "token" _token
-                  , TF.assign "use_org_from_zone" <$> _useOrgFromZone
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ TF.assign "api_client_logging" <$> _apiClientLogging
+            , P.Just $ TF.assign "email" _email
+            , TF.assign "max_backoff" <$> _maxBackoff
+            , TF.assign "min_backoff" <$> _minBackoff
+            , TF.assign "org_id" <$> _orgId
+            , TF.assign "retries" <$> _retries
+            , TF.assign "rps" <$> _rps
+            , P.Just $ TF.assign "token" _token
+            , TF.assign "use_org_from_zone" <$> _useOrgFromZone
+            ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty

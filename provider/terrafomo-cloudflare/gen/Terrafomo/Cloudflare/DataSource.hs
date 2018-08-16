@@ -58,7 +58,7 @@ data IpRangesData s = IpRangesData'
 ipRangesData
     :: P.DataSource (IpRangesData s)
 ipRangesData =
-    TF.unsafeDataSource "cloudflare_ip_ranges" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "cloudflare_ip_ranges" TF.validator $
         IpRangesData'
 
 instance TF.IsObject (IpRangesData s) where
