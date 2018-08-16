@@ -72,7 +72,7 @@ teamResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (TeamResource s)
 teamResource _name =
-    TF.unsafeResource "opsgenie_team" P.defaultProvider TF.validator $
+    TF.unsafeResource "opsgenie_team" TF.validator $
         TeamResource'
             { _description = TF.Nil
             , _member = TF.Nil
@@ -132,7 +132,7 @@ userResource
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.Resource (UserResource s)
 userResource _fullName _role _username =
-    TF.unsafeResource "opsgenie_user" P.defaultProvider TF.validator $
+    TF.unsafeResource "opsgenie_user" TF.validator $
         UserResource'
             { _fullName = _fullName
             , _locale = TF.value "en_US"

@@ -62,7 +62,7 @@ userData
     :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.DataSource (UserData s)
 userData _username =
-    TF.unsafeDataSource "opsgenie_user" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "opsgenie_user" TF.validator $
         UserData'
             { _username = _username
             }
