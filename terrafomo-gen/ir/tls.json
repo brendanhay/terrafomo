@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newSubjectSetting",
+                "smart": "subjectSetting",
                 "name": "SubjectSetting'"
             },
             "arguments": [
