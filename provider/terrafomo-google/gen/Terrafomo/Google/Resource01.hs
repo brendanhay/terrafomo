@@ -526,6 +526,9 @@ instance P.HasLocation (BigqueryDatasetResource s) (TF.Attr s P.Text) where
         P.lens (_location :: BigqueryDatasetResource s -> TF.Attr s P.Text)
                (\s a -> s { _location = a } :: BigqueryDatasetResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Int) where
     computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
 
@@ -642,6 +645,9 @@ instance P.HasView (BigqueryTableResource s) (TF.Attr s (ViewSetting s)) where
         P.lens (_view :: BigqueryTableResource s -> TF.Attr s (ViewSetting s))
                (\s a -> s { _view = a } :: BigqueryTableResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Int) where
     computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
 
@@ -751,6 +757,9 @@ instance P.HasStorageType (BigtableInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_storageType :: BigtableInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _storageType = a } :: BigtableInstanceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (BigtableInstanceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (BigtableInstanceResource s)) (TF.Attr s P.Text) where
     computedDisplayName x = TF.compute (TF.refKey x) "display_name"
 
@@ -812,6 +821,9 @@ instance P.HasSplitKeys (BigtableTableResource s) (TF.Attr s [TF.Attr s P.Text])
     splitKeys =
         P.lens (_splitKeys :: BigtableTableResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _splitKeys = a } :: BigtableTableResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (BigtableTableResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (BigtableTableResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
@@ -912,6 +924,9 @@ instance P.HasTriggerTemplate (CloudbuildTriggerResource s) (TF.Attr s (TriggerT
     triggerTemplate =
         P.lens (_triggerTemplate :: CloudbuildTriggerResource s -> TF.Attr s (TriggerTemplateSetting s))
                (\s a -> s { _triggerTemplate = a } :: CloudbuildTriggerResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudbuildTriggerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (CloudbuildTriggerResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
@@ -1097,6 +1112,9 @@ instance P.HasTriggerTopic (CloudfunctionsFunctionResource s) (TF.Attr s P.Text)
         P.lens (_triggerTopic :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
                (\s a -> s { _triggerTopic = a } :: CloudfunctionsFunctionResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedHttpsTriggerUrl (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
     computedHttpsTriggerUrl x = TF.compute (TF.refKey x) "https_trigger_url"
 
@@ -1188,6 +1206,9 @@ instance P.HasStateNotificationConfig (CloudiotRegistryResource s) (TF.Attr s (P
         P.lens (_stateNotificationConfig :: CloudiotRegistryResource s -> TF.Attr s (P.Map P.Text (TF.Attr s (StateNotificationConfigSetting s))))
                (\s a -> s { _stateNotificationConfig = a } :: CloudiotRegistryResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudiotRegistryResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (CloudiotRegistryResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
@@ -1255,6 +1276,9 @@ instance P.HasName (ComputeAddressResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeAddressResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeAddressResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
@@ -1351,6 +1375,9 @@ instance P.HasTarget (ComputeAutoscalerResource s) (TF.Attr s P.Text) where
         P.lens (_target :: ComputeAutoscalerResource s -> TF.Attr s P.Text)
                (\s a -> s { _target = a } :: ComputeAutoscalerResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeAutoscalerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeAutoscalerResource s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
@@ -1425,6 +1452,9 @@ instance P.HasName (ComputeBackendBucketResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeBackendBucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeBackendBucketResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeBackendBucketResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeBackendBucketResource s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
@@ -1561,6 +1591,9 @@ instance P.HasSecurityPolicy (ComputeBackendServiceResource s) (TF.Attr s P.Text
     securityPolicy =
         P.lens (_securityPolicy :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _securityPolicy = a } :: ComputeBackendServiceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCdnPolicy (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s (CdnPolicySetting s)) where
     computedCdnPolicy x = TF.compute (TF.refKey x) "cdn_policy"
@@ -1709,6 +1742,9 @@ instance P.HasType' (ComputeDiskResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: ComputeDiskResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: ComputeDiskResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
@@ -1929,6 +1965,9 @@ instance P.HasTargetTags (ComputeFirewallResource s) (TF.Attr s [TF.Attr s P.Tex
         P.lens (_targetTags :: ComputeFirewallResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _targetTags = a } :: ComputeFirewallResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDestinationRanges (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedDestinationRanges x = TF.compute (TF.refKey x) "destination_ranges"
 
@@ -2066,6 +2105,9 @@ instance P.HasTarget (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
         P.lens (_target :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _target = a } :: ComputeForwardingRuleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
@@ -2160,6 +2202,9 @@ instance P.HasName (ComputeGlobalAddressResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeGlobalAddressResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeGlobalAddressResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeGlobalAddressResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ComputeGlobalAddressResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
@@ -2268,6 +2313,9 @@ instance P.HasTarget (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Text) 
     target =
         P.lens (_target :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _target = a } :: ComputeGlobalForwardingRuleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeGlobalForwardingRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeGlobalForwardingRuleResource s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
@@ -2463,6 +2511,9 @@ instance P.HasUnhealthyThreshold (ComputeHealthCheckResource s) (TF.Attr s P.Int
         P.lens (_unhealthyThreshold :: ComputeHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _unhealthyThreshold = a } :: ComputeHealthCheckResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeHealthCheckResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeHealthCheckResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
@@ -2580,6 +2631,9 @@ instance P.HasUnhealthyThreshold (ComputeHttpHealthCheckResource s) (TF.Attr s P
     unhealthyThreshold =
         P.lens (_unhealthyThreshold :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _unhealthyThreshold = a } :: ComputeHttpHealthCheckResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeHttpHealthCheckResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeHttpHealthCheckResource s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
@@ -2702,6 +2756,9 @@ instance P.HasUnhealthyThreshold (ComputeHttpsHealthCheckResource s) (TF.Attr s 
         P.lens (_unhealthyThreshold :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _unhealthyThreshold = a } :: ComputeHttpsHealthCheckResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeHttpsHealthCheckResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeHttpsHealthCheckResource s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
@@ -2796,6 +2853,9 @@ instance P.HasSourceDisk (ComputeImageResource s) (TF.Attr s P.Text) where
     sourceDisk =
         P.lens (_sourceDisk :: ComputeImageResource s -> TF.Attr s P.Text)
                (\s a -> s { _sourceDisk = a } :: ComputeImageResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeImageResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeImageResource s)) (TF.Attr s P.Text) where
     computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
@@ -3022,6 +3082,9 @@ instance P.HasTags (ComputeInstanceResource s) (TF.Attr s [TF.Attr s P.Text]) wh
         P.lens (_tags :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: ComputeInstanceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCpuPlatform (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedCpuPlatform x = TF.compute (TF.refKey x) "cpu_platform"
 
@@ -3094,6 +3157,9 @@ instance P.HasSourceInstanceTemplate (ComputeInstanceFromTemplateResource s) (TF
     sourceInstanceTemplate =
         P.lens (_sourceInstanceTemplate :: ComputeInstanceFromTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _sourceInstanceTemplate = a } :: ComputeInstanceFromTemplateResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAllowStoppingForUpdate (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Bool) where
     computedAllowStoppingForUpdate x = TF.compute (TF.refKey x) "allow_stopping_for_update"
@@ -3221,6 +3287,9 @@ instance P.HasNamedPort (ComputeInstanceGroupResource s) (TF.Attr s [TF.Attr s (
     namedPort =
         P.lens (_namedPort :: ComputeInstanceGroupResource s -> TF.Attr s [TF.Attr s (NamedPortSetting s)])
                (\s a -> s { _namedPort = a } :: ComputeInstanceGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedInstances x = TF.compute (TF.refKey x) "instances"
@@ -3370,6 +3439,9 @@ instance P.HasWaitForInstances (ComputeInstanceGroupManagerResource s) (TF.Attr 
     waitForInstances =
         P.lens (_waitForInstances :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Bool)
                (\s a -> s { _waitForInstances = a } :: ComputeInstanceGroupManagerResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
     computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
@@ -3569,6 +3641,9 @@ instance P.HasTags (ComputeInstanceTemplateResource s) (TF.Attr s [TF.Attr s P.T
         P.lens (_tags :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: ComputeInstanceTemplateResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedMetadataFingerprint (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
     computedMetadataFingerprint x = TF.compute (TF.refKey x) "metadata_fingerprint"
 
@@ -3644,6 +3719,9 @@ instance P.HasName (ComputeNetworkResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeNetworkResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeNetworkResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeNetworkResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedGatewayIpv4 (TF.Ref s' (ComputeNetworkResource s)) (TF.Attr s P.Text) where
     computedGatewayIpv4 x = TF.compute (TF.refKey x) "gateway_ipv4"
@@ -3721,6 +3799,9 @@ instance P.HasPeerNetwork (ComputeNetworkPeeringResource s) (TF.Attr s P.Text) w
         P.lens (_peerNetwork :: ComputeNetworkPeeringResource s -> TF.Attr s P.Text)
                (\s a -> s { _peerNetwork = a } :: ComputeNetworkPeeringResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeNetworkPeeringResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedState (TF.Ref s' (ComputeNetworkPeeringResource s)) (TF.Attr s P.Text) where
     computedState x = TF.compute (TF.refKey x) "state"
 
@@ -3758,6 +3839,9 @@ instance P.HasMetadata (ComputeProjectMetadataResource s) (TF.Attr s (P.Map P.Te
     metadata =
         P.lens (_metadata :: ComputeProjectMetadataResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _metadata = a } :: ComputeProjectMetadataResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeProjectMetadataResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeProjectMetadataResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
@@ -3804,6 +3888,9 @@ instance P.HasValue (ComputeProjectMetadataItemResource s) (TF.Attr s P.Text) wh
     value =
         P.lens (_value :: ComputeProjectMetadataItemResource s -> TF.Attr s P.Text)
                (\s a -> s { _value = a } :: ComputeProjectMetadataItemResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeProjectMetadataItemResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeProjectMetadataItemResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
@@ -3875,6 +3962,9 @@ instance P.HasTarget (ComputeRegionAutoscalerResource s) (TF.Attr s P.Text) wher
     target =
         P.lens (_target :: ComputeRegionAutoscalerResource s -> TF.Attr s P.Text)
                (\s a -> s { _target = a } :: ComputeRegionAutoscalerResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeRegionAutoscalerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeRegionAutoscalerResource s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
@@ -3960,6 +4050,9 @@ instance P.HasName (ComputeRegionBackendServiceResource s) (TF.Attr s P.Text) wh
     name =
         P.lens (_name :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeRegionBackendServiceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
     computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
@@ -4092,6 +4185,9 @@ instance P.HasType' (ComputeRegionDiskResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: ComputeRegionDiskResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: ComputeRegionDiskResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeRegionDiskResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeRegionDiskResource s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
@@ -4265,6 +4361,9 @@ instance P.HasWaitForInstances (ComputeRegionInstanceGroupManagerResource s) (TF
         P.lens (_waitForInstances :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Bool)
                (\s a -> s { _waitForInstances = a } :: ComputeRegionInstanceGroupManagerResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDistributionPolicyZones (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedDistributionPolicyZones x = TF.compute (TF.refKey x) "distribution_policy_zones"
 
@@ -4420,6 +4519,9 @@ instance P.HasTags (ComputeRouteResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_tags :: ComputeRouteResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: ComputeRouteResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedNextHopNetwork (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
     computedNextHopNetwork x = TF.compute (TF.refKey x) "next_hop_network"
 
@@ -4496,6 +4598,9 @@ instance P.HasNetwork (ComputeRouterResource s) (TF.Attr s P.Text) where
         P.lens (_network :: ComputeRouterResource s -> TF.Attr s P.Text)
                (\s a -> s { _network = a } :: ComputeRouterResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
@@ -4571,6 +4676,9 @@ instance P.HasVpnTunnel (ComputeRouterInterfaceResource s) (TF.Attr s P.Text) wh
     vpnTunnel =
         P.lens (_vpnTunnel :: ComputeRouterInterfaceResource s -> TF.Attr s P.Text)
                (\s a -> s { _vpnTunnel = a } :: ComputeRouterInterfaceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeRouterInterfaceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRouterInterfaceResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
@@ -4663,6 +4771,9 @@ instance P.HasRouter (ComputeRouterPeerResource s) (TF.Attr s P.Text) where
         P.lens (_router :: ComputeRouterPeerResource s -> TF.Attr s P.Text)
                (\s a -> s { _router = a } :: ComputeRouterPeerResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeRouterPeerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeRouterPeerResource s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
@@ -4714,6 +4825,9 @@ instance P.HasName (ComputeSecurityPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeSecurityPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeSecurityPolicyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSecurityPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeSecurityPolicyResource s)) (TF.Attr s P.Text) where
     computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
@@ -4758,6 +4872,9 @@ instance P.HasProject (ComputeSharedVpcHostProjectResource s) (TF.Attr s P.Text)
         P.lens (_project :: ComputeSharedVpcHostProjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _project = a } :: ComputeSharedVpcHostProjectResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSharedVpcHostProjectResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @google_compute_shared_vpc_service_project@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_shared_vpc_service_project.html terraform documentation>
@@ -4800,6 +4917,9 @@ instance P.HasServiceProject (ComputeSharedVpcServiceProjectResource s) (TF.Attr
     serviceProject =
         P.lens (_serviceProject :: ComputeSharedVpcServiceProjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _serviceProject = a } :: ComputeSharedVpcServiceProjectResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSharedVpcServiceProjectResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @google_compute_snapshot@ Resource.
 --
@@ -4874,6 +4994,9 @@ instance P.HasSourceDiskEncryptionKeyRaw (ComputeSnapshotResource s) (TF.Attr s 
         P.lens (_sourceDiskEncryptionKeyRaw :: ComputeSnapshotResource s -> TF.Attr s P.Text)
                (\s a -> s { _sourceDiskEncryptionKeyRaw = a } :: ComputeSnapshotResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
     computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
@@ -4947,6 +5070,9 @@ instance P.HasPrivateKey (ComputeSslCertificateResource s) (TF.Attr s P.Text) wh
     privateKey =
         P.lens (_privateKey :: ComputeSslCertificateResource s -> TF.Attr s P.Text)
                (\s a -> s { _privateKey = a } :: ComputeSslCertificateResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSslCertificateResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCertificateId (TF.Ref s' (ComputeSslCertificateResource s)) (TF.Attr s P.Text) where
     computedCertificateId x = TF.compute (TF.refKey x) "certificate_id"
@@ -5034,6 +5160,9 @@ instance P.HasProfile (ComputeSslPolicyResource s) (TF.Attr s P.Text) where
     profile =
         P.lens (_profile :: ComputeSslPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _profile = a } :: ComputeSslPolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSslPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeSslPolicyResource s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
@@ -5134,6 +5263,9 @@ instance P.HasPrivateIpGoogleAccess (ComputeSubnetworkResource s) (TF.Attr s P.B
         P.lens (_privateIpGoogleAccess :: ComputeSubnetworkResource s -> TF.Attr s P.Bool)
                (\s a -> s { _privateIpGoogleAccess = a } :: ComputeSubnetworkResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
@@ -5209,6 +5341,9 @@ instance P.HasSubnetwork (ComputeSubnetworkIamBindingResource s) (TF.Attr s P.Te
         P.lens (_subnetwork :: ComputeSubnetworkIamBindingResource s -> TF.Attr s P.Text)
                (\s a -> s { _subnetwork = a } :: ComputeSubnetworkIamBindingResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSubnetworkIamBindingResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ComputeSubnetworkIamBindingResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -5272,6 +5407,9 @@ instance P.HasSubnetwork (ComputeSubnetworkIamMemberResource s) (TF.Attr s P.Tex
         P.lens (_subnetwork :: ComputeSubnetworkIamMemberResource s -> TF.Attr s P.Text)
                (\s a -> s { _subnetwork = a } :: ComputeSubnetworkIamMemberResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSubnetworkIamMemberResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ComputeSubnetworkIamMemberResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -5323,6 +5461,9 @@ instance P.HasSubnetwork (ComputeSubnetworkIamPolicyResource s) (TF.Attr s P.Tex
     subnetwork =
         P.lens (_subnetwork :: ComputeSubnetworkIamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _subnetwork = a } :: ComputeSubnetworkIamPolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSubnetworkIamPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ComputeSubnetworkIamPolicyResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
@@ -5385,6 +5526,9 @@ instance P.HasUrlMap (ComputeTargetHttpProxyResource s) (TF.Attr s P.Text) where
     urlMap =
         P.lens (_urlMap :: ComputeTargetHttpProxyResource s -> TF.Attr s P.Text)
                (\s a -> s { _urlMap = a } :: ComputeTargetHttpProxyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeTargetHttpProxyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeTargetHttpProxyResource s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
@@ -5482,6 +5626,9 @@ instance P.HasUrlMap (ComputeTargetHttpsProxyResource s) (TF.Attr s P.Text) wher
         P.lens (_urlMap :: ComputeTargetHttpsProxyResource s -> TF.Attr s P.Text)
                (\s a -> s { _urlMap = a } :: ComputeTargetHttpsProxyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeTargetHttpsProxyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeTargetHttpsProxyResource s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
@@ -5575,6 +5722,9 @@ instance P.HasSessionAffinity (ComputeTargetPoolResource s) (TF.Attr s P.Text) w
     sessionAffinity =
         P.lens (_sessionAffinity :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _sessionAffinity = a } :: ComputeTargetPoolResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeTargetPoolResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeTargetPoolResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedInstances x = TF.compute (TF.refKey x) "instances"
@@ -5672,6 +5822,9 @@ instance P.HasSslPolicy (ComputeTargetSslProxyResource s) (TF.Attr s P.Text) whe
         P.lens (_sslPolicy :: ComputeTargetSslProxyResource s -> TF.Attr s P.Text)
                (\s a -> s { _sslPolicy = a } :: ComputeTargetSslProxyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeTargetSslProxyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeTargetSslProxyResource s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
@@ -5746,6 +5899,9 @@ instance P.HasProxyHeader (ComputeTargetTcpProxyResource s) (TF.Attr s P.Text) w
     proxyHeader =
         P.lens (_proxyHeader :: ComputeTargetTcpProxyResource s -> TF.Attr s P.Text)
                (\s a -> s { _proxyHeader = a } :: ComputeTargetTcpProxyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeTargetTcpProxyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeTargetTcpProxyResource s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
@@ -5842,6 +5998,9 @@ instance P.HasTest (ComputeUrlMapResource s) (TF.Attr s [TF.Attr s (TestSetting 
         P.lens (_test :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (TestSetting s)])
                (\s a -> s { _test = a } :: ComputeUrlMapResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeUrlMapResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeUrlMapResource s)) (TF.Attr s P.Text) where
     computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
@@ -5906,6 +6065,9 @@ instance P.HasNetwork (ComputeVpnGatewayResource s) (TF.Attr s P.Text) where
     network =
         P.lens (_network :: ComputeVpnGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _network = a } :: ComputeVpnGatewayResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeVpnGatewayResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeVpnGatewayResource s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
@@ -6023,6 +6185,9 @@ instance P.HasTargetVpnGateway (ComputeVpnTunnelResource s) (TF.Attr s P.Text) w
     targetVpnGateway =
         P.lens (_targetVpnGateway :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
                (\s a -> s { _targetVpnGateway = a } :: ComputeVpnTunnelResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
@@ -6239,6 +6404,9 @@ instance P.HasResourceLabels (ContainerClusterResource s) (TF.Attr s (P.Map P.Te
         P.lens (_resourceLabels :: ContainerClusterResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _resourceLabels = a } :: ContainerClusterResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAdditionalZones (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedAdditionalZones x = TF.compute (TF.refKey x) "additional_zones"
 
@@ -6345,6 +6513,9 @@ instance P.HasRegion (ContainerNodePoolResource s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: ContainerNodePoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: ContainerNodePoolResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedInitialNodeCount (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Int) where
     computedInitialNodeCount x = TF.compute (TF.refKey x) "initial_node_count"
@@ -6477,6 +6648,9 @@ instance P.HasZone (DataflowJobResource s) (TF.Attr s P.Text) where
         P.lens (_zone :: DataflowJobResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: DataflowJobResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataflowJobResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedState (TF.Ref s' (DataflowJobResource s)) (TF.Attr s P.Text) where
     computedState x = TF.compute (TF.refKey x) "state"
 
@@ -6521,6 +6695,9 @@ instance P.HasRegion (DataprocClusterResource s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: DataprocClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: DataprocClusterResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedClusterConfig (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s (ClusterConfigSetting s)) where
     computedClusterConfig x = TF.compute (TF.refKey x) "cluster_config"
@@ -6770,6 +6947,9 @@ instance P.HasSparksqlConfig (DataprocJobResource s) (TF.Attr s (SparksqlConfigS
         P.lens (_sparksqlConfig :: DataprocJobResource s -> TF.Attr s (SparksqlConfigSetting s))
                (\s a -> s { _sparksqlConfig = a } :: DataprocJobResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDriverControlsFilesUri (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
     computedDriverControlsFilesUri x = TF.compute (TF.refKey x) "driver_controls_files_uri"
 
@@ -6837,6 +7017,9 @@ instance P.HasName (DnsManagedZoneResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DnsManagedZoneResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DnsManagedZoneResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsManagedZoneResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (DnsManagedZoneResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedNameServers x = TF.compute (TF.refKey x) "name_servers"
@@ -6919,6 +7102,9 @@ instance P.HasType' (DnsRecordSetResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: DnsRecordSetResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: DnsRecordSetResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsRecordSetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (DnsRecordSetResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
@@ -7011,6 +7197,9 @@ instance P.HasServiceName (EndpointsServiceResource s) (TF.Attr s P.Text) where
         P.lens (_serviceName :: EndpointsServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _serviceName = a } :: EndpointsServiceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedApis (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s [TF.Attr s (ApisSetting s)]) where
     computedApis x = TF.compute (TF.refKey x) "apis"
 
@@ -7068,6 +7257,9 @@ instance P.HasParent (FolderResource s) (TF.Attr s P.Text) where
     parent =
         P.lens (_parent :: FolderResource s -> TF.Attr s P.Text)
                (\s a -> s { _parent = a } :: FolderResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FolderResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (FolderResource s)) (TF.Attr s P.Text) where
     computedCreateTime x = TF.compute (TF.refKey x) "create_time"
@@ -7132,6 +7324,9 @@ instance P.HasRole (FolderIamBindingResource s) (TF.Attr s P.Text) where
         P.lens (_role :: FolderIamBindingResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: FolderIamBindingResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FolderIamBindingResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (FolderIamBindingResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -7189,6 +7384,9 @@ instance P.HasRole (FolderIamMemberResource s) (TF.Attr s P.Text) where
         P.lens (_role :: FolderIamMemberResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: FolderIamMemberResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FolderIamMemberResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (FolderIamMemberResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -7234,6 +7432,9 @@ instance P.HasPolicyData (FolderIamPolicyResource s) (TF.Attr s P.Text) where
     policyData =
         P.lens (_policyData :: FolderIamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _policyData = a } :: FolderIamPolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FolderIamPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (FolderIamPolicyResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
@@ -7351,6 +7552,9 @@ instance P.HasRestorePolicy (FolderOrganizationPolicyResource s) (TF.Attr s (Res
         P.lens (_restorePolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (RestorePolicySetting s))
                (\s a -> s { _restorePolicy = a } :: FolderOrganizationPolicyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FolderOrganizationPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (FolderOrganizationPolicyResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -7413,6 +7617,9 @@ instance P.HasRotationPeriod (KmsCryptoKeyResource s) (TF.Attr s P.Text) where
         P.lens (_rotationPeriod :: KmsCryptoKeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _rotationPeriod = a } :: KmsCryptoKeyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KmsCryptoKeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @google_kms_crypto_key_iam_binding@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/google/r/kms_crypto_key_iam_binding.html terraform documentation>
@@ -7466,6 +7673,9 @@ instance P.HasRole (KmsCryptoKeyIamBindingResource s) (TF.Attr s P.Text) where
     role =
         P.lens (_role :: KmsCryptoKeyIamBindingResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: KmsCryptoKeyIamBindingResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KmsCryptoKeyIamBindingResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (KmsCryptoKeyIamBindingResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
@@ -7524,6 +7734,9 @@ instance P.HasRole (KmsCryptoKeyIamMemberResource s) (TF.Attr s P.Text) where
         P.lens (_role :: KmsCryptoKeyIamMemberResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: KmsCryptoKeyIamMemberResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KmsCryptoKeyIamMemberResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (KmsCryptoKeyIamMemberResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -7569,6 +7782,9 @@ instance P.HasName (KmsKeyRingResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: KmsKeyRingResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: KmsKeyRingResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KmsKeyRingResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (KmsKeyRingResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
@@ -7627,6 +7843,9 @@ instance P.HasRole (KmsKeyRingIamBindingResource s) (TF.Attr s P.Text) where
         P.lens (_role :: KmsKeyRingIamBindingResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: KmsKeyRingIamBindingResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KmsKeyRingIamBindingResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (KmsKeyRingIamBindingResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -7684,6 +7903,9 @@ instance P.HasRole (KmsKeyRingIamMemberResource s) (TF.Attr s P.Text) where
         P.lens (_role :: KmsKeyRingIamMemberResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: KmsKeyRingIamMemberResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KmsKeyRingIamMemberResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (KmsKeyRingIamMemberResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -7729,6 +7951,9 @@ instance P.HasPolicyData (KmsKeyRingIamPolicyResource s) (TF.Attr s P.Text) wher
     policyData =
         P.lens (_policyData :: KmsKeyRingIamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _policyData = a } :: KmsKeyRingIamPolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KmsKeyRingIamPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (KmsKeyRingIamPolicyResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
@@ -7807,6 +8032,9 @@ instance P.HasName (LoggingBillingAccountExclusionResource s) (TF.Attr s P.Text)
         P.lens (_name :: LoggingBillingAccountExclusionResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: LoggingBillingAccountExclusionResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoggingBillingAccountExclusionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @google_logging_billing_account_sink@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/google/r/logging_billing_account_sink.html terraform documentation>
@@ -7870,6 +8098,9 @@ instance P.HasName (LoggingBillingAccountSinkResource s) (TF.Attr s P.Text) wher
     name =
         P.lens (_name :: LoggingBillingAccountSinkResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: LoggingBillingAccountSinkResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoggingBillingAccountSinkResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedWriterIdentity (TF.Ref s' (LoggingBillingAccountSinkResource s)) (TF.Attr s P.Text) where
     computedWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
@@ -7948,6 +8179,9 @@ instance P.HasName (LoggingFolderExclusionResource s) (TF.Attr s P.Text) where
         P.lens (_name :: LoggingFolderExclusionResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: LoggingFolderExclusionResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoggingFolderExclusionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @google_logging_folder_sink@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/google/r/logging_folder_sink.html terraform documentation>
@@ -8021,6 +8255,9 @@ instance P.HasName (LoggingFolderSinkResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: LoggingFolderSinkResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: LoggingFolderSinkResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoggingFolderSinkResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedWriterIdentity (TF.Ref s' (LoggingFolderSinkResource s)) (TF.Attr s P.Text) where
     computedWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
@@ -8099,6 +8336,9 @@ instance P.HasOrgId (LoggingOrganizationExclusionResource s) (TF.Attr s P.Text) 
         P.lens (_orgId :: LoggingOrganizationExclusionResource s -> TF.Attr s P.Text)
                (\s a -> s { _orgId = a } :: LoggingOrganizationExclusionResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoggingOrganizationExclusionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @google_logging_organization_sink@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/google/r/logging_organization_sink.html terraform documentation>
@@ -8173,6 +8413,9 @@ instance P.HasOrgId (LoggingOrganizationSinkResource s) (TF.Attr s P.Text) where
         P.lens (_orgId :: LoggingOrganizationSinkResource s -> TF.Attr s P.Text)
                (\s a -> s { _orgId = a } :: LoggingOrganizationSinkResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoggingOrganizationSinkResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedWriterIdentity (TF.Ref s' (LoggingOrganizationSinkResource s)) (TF.Attr s P.Text) where
     computedWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
 
@@ -8238,6 +8481,9 @@ instance P.HasName (LoggingProjectExclusionResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: LoggingProjectExclusionResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: LoggingProjectExclusionResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoggingProjectExclusionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (LoggingProjectExclusionResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
@@ -8305,6 +8551,9 @@ instance P.HasUniqueWriterIdentity (LoggingProjectSinkResource s) (TF.Attr s P.B
         P.lens (_uniqueWriterIdentity :: LoggingProjectSinkResource s -> TF.Attr s P.Bool)
                (\s a -> s { _uniqueWriterIdentity = a } :: LoggingProjectSinkResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoggingProjectSinkResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (LoggingProjectSinkResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
@@ -8364,6 +8613,9 @@ instance P.HasRole (OrganizationIamBindingResource s) (TF.Attr s P.Text) where
     role =
         P.lens (_role :: OrganizationIamBindingResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: OrganizationIamBindingResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OrganizationIamBindingResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationIamBindingResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
@@ -8463,6 +8715,9 @@ instance P.HasTitle (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) whe
         P.lens (_title :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
                (\s a -> s { _title = a } :: OrganizationIamCustomRoleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OrganizationIamCustomRoleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @google_organization_iam_member@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/google/r/organization_iam_member.html terraform documentation>
@@ -8517,6 +8772,9 @@ instance P.HasRole (OrganizationIamMemberResource s) (TF.Attr s P.Text) where
         P.lens (_role :: OrganizationIamMemberResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: OrganizationIamMemberResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OrganizationIamMemberResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationIamMemberResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -8562,6 +8820,9 @@ instance P.HasPolicyData (OrganizationIamPolicyResource s) (TF.Attr s P.Text) wh
     policyData =
         P.lens (_policyData :: OrganizationIamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _policyData = a } :: OrganizationIamPolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OrganizationIamPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationIamPolicyResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
@@ -8679,6 +8940,9 @@ instance P.HasRestorePolicy (OrganizationPolicyResource s) (TF.Attr s (RestorePo
         P.lens (_restorePolicy :: OrganizationPolicyResource s -> TF.Attr s (RestorePolicySetting s))
                (\s a -> s { _restorePolicy = a } :: OrganizationPolicyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -8775,6 +9039,9 @@ instance P.HasProjectId (ProjectResource s) (TF.Attr s P.Text) where
         P.lens (_projectId :: ProjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _projectId = a } :: ProjectResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedFolderId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedFolderId x = TF.compute (TF.refKey x) "folder_id"
 
@@ -8845,6 +9112,9 @@ instance P.HasRole (ProjectIamBindingResource s) (TF.Attr s P.Text) where
     role =
         P.lens (_role :: ProjectIamBindingResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: ProjectIamBindingResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectIamBindingResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamBindingResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
@@ -8933,6 +9203,9 @@ instance P.HasTitle (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
         P.lens (_title :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
                (\s a -> s { _title = a } :: ProjectIamCustomRoleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectIamCustomRoleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectIamCustomRoleResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
@@ -8989,6 +9262,9 @@ instance P.HasRole (ProjectIamMemberResource s) (TF.Attr s P.Text) where
         P.lens (_role :: ProjectIamMemberResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: ProjectIamMemberResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectIamMemberResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamMemberResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -9023,6 +9299,9 @@ instance P.HasPolicyData (ProjectIamPolicyResource s) (TF.Attr s P.Text) where
     policyData =
         P.lens (_policyData :: ProjectIamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _policyData = a } :: ProjectIamPolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
@@ -9146,6 +9425,9 @@ instance P.HasRestorePolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (Re
         P.lens (_restorePolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (RestorePolicySetting s))
                (\s a -> s { _restorePolicy = a } :: ProjectOrganizationPolicyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectOrganizationPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectOrganizationPolicyResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -9197,6 +9479,9 @@ instance P.HasService (ProjectServiceResource s) (TF.Attr s P.Text) where
         P.lens (_service :: ProjectServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _service = a } :: ProjectServiceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectServiceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectServiceResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
@@ -9242,6 +9527,9 @@ instance P.HasServices (ProjectServicesResource s) (TF.Attr s [TF.Attr s P.Text]
         P.lens (_services :: ProjectServicesResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _services = a } :: ProjectServicesResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectServicesResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectServicesResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
@@ -9286,6 +9574,9 @@ instance P.HasPrefix (ProjectUsageExportBucketResource s) (TF.Attr s P.Text) whe
     prefix =
         P.lens (_prefix :: ProjectUsageExportBucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _prefix = a } :: ProjectUsageExportBucketResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectUsageExportBucketResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectUsageExportBucketResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
@@ -9346,6 +9637,9 @@ instance P.HasTopic (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
     topic =
         P.lens (_topic :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
                (\s a -> s { _topic = a } :: PubsubSubscriptionResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAckDeadlineSeconds (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Int) where
     computedAckDeadlineSeconds x = TF.compute (TF.refKey x) "ack_deadline_seconds"
@@ -9410,6 +9704,9 @@ instance P.HasSubscription (PubsubSubscriptionIamBindingResource s) (TF.Attr s P
         P.lens (_subscription :: PubsubSubscriptionIamBindingResource s -> TF.Attr s P.Text)
                (\s a -> s { _subscription = a } :: PubsubSubscriptionIamBindingResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PubsubSubscriptionIamBindingResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubSubscriptionIamBindingResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -9469,6 +9766,9 @@ instance P.HasSubscription (PubsubSubscriptionIamMemberResource s) (TF.Attr s P.
     subscription =
         P.lens (_subscription :: PubsubSubscriptionIamMemberResource s -> TF.Attr s P.Text)
                (\s a -> s { _subscription = a } :: PubsubSubscriptionIamMemberResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PubsubSubscriptionIamMemberResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubSubscriptionIamMemberResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"

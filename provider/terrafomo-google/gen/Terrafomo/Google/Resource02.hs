@@ -227,6 +227,9 @@ instance P.HasSubscription (PubsubSubscriptionIamPolicyResource s) (TF.Attr s P.
         P.lens (_subscription :: PubsubSubscriptionIamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _subscription = a } :: PubsubSubscriptionIamPolicyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PubsubSubscriptionIamPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubSubscriptionIamPolicyResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -264,6 +267,9 @@ instance P.HasName (PubsubTopicResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: PubsubTopicResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: PubsubTopicResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PubsubTopicResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubTopicResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
@@ -321,6 +327,9 @@ instance P.HasTopic (PubsubTopicIamBindingResource s) (TF.Attr s P.Text) where
     topic =
         P.lens (_topic :: PubsubTopicIamBindingResource s -> TF.Attr s P.Text)
                (\s a -> s { _topic = a } :: PubsubTopicIamBindingResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PubsubTopicIamBindingResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubTopicIamBindingResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
@@ -382,6 +391,9 @@ instance P.HasTopic (PubsubTopicIamMemberResource s) (TF.Attr s P.Text) where
         P.lens (_topic :: PubsubTopicIamMemberResource s -> TF.Attr s P.Text)
                (\s a -> s { _topic = a } :: PubsubTopicIamMemberResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PubsubTopicIamMemberResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubTopicIamMemberResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -430,6 +442,9 @@ instance P.HasTopic (PubsubTopicIamPolicyResource s) (TF.Attr s P.Text) where
     topic =
         P.lens (_topic :: PubsubTopicIamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _topic = a } :: PubsubTopicIamPolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PubsubTopicIamPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubTopicIamPolicyResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
@@ -519,6 +534,9 @@ instance P.HasTier (RedisInstanceResource s) (TF.Attr s P.Text) where
     tier =
         P.lens (_tier :: RedisInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _tier = a } :: RedisInstanceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAlternativeLocationId (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
     computedAlternativeLocationId x = TF.compute (TF.refKey x) "alternative_location_id"
@@ -618,6 +636,9 @@ instance P.HasRestrictions (ResourceManagerLienResource s) (TF.Attr s [TF.Attr s
         P.lens (_restrictions :: ResourceManagerLienResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _restrictions = a } :: ResourceManagerLienResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceManagerLienResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (ResourceManagerLienResource s)) (TF.Attr s P.Text) where
     computedCreateTime x = TF.compute (TF.refKey x) "create_time"
 
@@ -665,6 +686,9 @@ instance P.HasName (RuntimeconfigConfigResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RuntimeconfigConfigResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RuntimeconfigConfigResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RuntimeconfigConfigResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (RuntimeconfigConfigResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
@@ -749,6 +773,9 @@ instance P.HasValue (RuntimeconfigVariableResource s) (TF.Attr s P.Text) where
         P.lens (_value :: RuntimeconfigVariableResource s -> TF.Attr s P.Text)
                (\s a -> s { _value = a } :: RuntimeconfigVariableResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RuntimeconfigVariableResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (RuntimeconfigVariableResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
@@ -796,6 +823,9 @@ instance P.HasDisplayName (ServiceAccountResource s) (TF.Attr s P.Text) where
     displayName =
         P.lens (_displayName :: ServiceAccountResource s -> TF.Attr s P.Text)
                (\s a -> s { _displayName = a } :: ServiceAccountResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEmail (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
     computedEmail x = TF.compute (TF.refKey x) "email"
@@ -863,6 +893,9 @@ instance P.HasServiceAccountId (ServiceAccountIamBindingResource s) (TF.Attr s P
         P.lens (_serviceAccountId :: ServiceAccountIamBindingResource s -> TF.Attr s P.Text)
                (\s a -> s { _serviceAccountId = a } :: ServiceAccountIamBindingResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceAccountIamBindingResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ServiceAccountIamBindingResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -920,6 +953,9 @@ instance P.HasServiceAccountId (ServiceAccountIamMemberResource s) (TF.Attr s P.
         P.lens (_serviceAccountId :: ServiceAccountIamMemberResource s -> TF.Attr s P.Text)
                (\s a -> s { _serviceAccountId = a } :: ServiceAccountIamMemberResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceAccountIamMemberResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ServiceAccountIamMemberResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -965,6 +1001,9 @@ instance P.HasServiceAccountId (ServiceAccountIamPolicyResource s) (TF.Attr s P.
     serviceAccountId =
         P.lens (_serviceAccountId :: ServiceAccountIamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _serviceAccountId = a } :: ServiceAccountIamPolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceAccountIamPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ServiceAccountIamPolicyResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
@@ -1041,6 +1080,9 @@ instance P.HasServiceAccountId (ServiceAccountKeyResource s) (TF.Attr s P.Text) 
         P.lens (_serviceAccountId :: ServiceAccountKeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _serviceAccountId = a } :: ServiceAccountKeyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
@@ -1093,6 +1135,9 @@ instance P.HasName (SourcerepoRepositoryResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SourcerepoRepositoryResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SourcerepoRepositoryResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SourcerepoRepositoryResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SourcerepoRepositoryResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
@@ -1155,6 +1200,9 @@ instance P.HasName (SpannerDatabaseResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SpannerDatabaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SpannerDatabaseResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpannerDatabaseResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerDatabaseResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
@@ -1227,6 +1275,9 @@ instance P.HasRole (SpannerDatabaseIamBindingResource s) (TF.Attr s P.Text) wher
         P.lens (_role :: SpannerDatabaseIamBindingResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: SpannerDatabaseIamBindingResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpannerDatabaseIamBindingResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (SpannerDatabaseIamBindingResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -1298,6 +1349,9 @@ instance P.HasRole (SpannerDatabaseIamMemberResource s) (TF.Attr s P.Text) where
         P.lens (_role :: SpannerDatabaseIamMemberResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: SpannerDatabaseIamMemberResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpannerDatabaseIamMemberResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (SpannerDatabaseIamMemberResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -1357,6 +1411,9 @@ instance P.HasPolicyData (SpannerDatabaseIamPolicyResource s) (TF.Attr s P.Text)
     policyData =
         P.lens (_policyData :: SpannerDatabaseIamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _policyData = a } :: SpannerDatabaseIamPolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpannerDatabaseIamPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (SpannerDatabaseIamPolicyResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
@@ -1427,6 +1484,9 @@ instance P.HasNumNodes (SpannerInstanceResource s) (TF.Attr s P.Int) where
         P.lens (_numNodes :: SpannerInstanceResource s -> TF.Attr s P.Int)
                (\s a -> s { _numNodes = a } :: SpannerInstanceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpannerInstanceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedName (TF.Ref s' (SpannerInstanceResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
@@ -1490,6 +1550,9 @@ instance P.HasRole (SpannerInstanceIamBindingResource s) (TF.Attr s P.Text) wher
         P.lens (_role :: SpannerInstanceIamBindingResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: SpannerInstanceIamBindingResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpannerInstanceIamBindingResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (SpannerInstanceIamBindingResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -1550,6 +1613,9 @@ instance P.HasRole (SpannerInstanceIamMemberResource s) (TF.Attr s P.Text) where
         P.lens (_role :: SpannerInstanceIamMemberResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: SpannerInstanceIamMemberResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpannerInstanceIamMemberResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (SpannerInstanceIamMemberResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -1599,6 +1665,9 @@ instance P.HasPolicyData (SpannerInstanceIamPolicyResource s) (TF.Attr s P.Text)
         P.lens (_policyData :: SpannerInstanceIamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _policyData = a } :: SpannerInstanceIamPolicyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpannerInstanceIamPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (SpannerInstanceIamPolicyResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -1647,6 +1716,9 @@ instance P.HasName (SqlDatabaseResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SqlDatabaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SqlDatabaseResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SqlDatabaseResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCharset (TF.Ref s' (SqlDatabaseResource s)) (TF.Attr s P.Text) where
     computedCharset x = TF.compute (TF.refKey x) "charset"
@@ -1715,6 +1787,9 @@ instance P.HasSettings (SqlDatabaseInstanceResource s) (TF.Attr s (SettingsSetti
     settings =
         P.lens (_settings :: SqlDatabaseInstanceResource s -> TF.Attr s (SettingsSetting s))
                (\s a -> s { _settings = a } :: SqlDatabaseInstanceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedConnectionName (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
     computedConnectionName x = TF.compute (TF.refKey x) "connection_name"
@@ -1805,6 +1880,9 @@ instance P.HasPassword (SqlUserResource s) (TF.Attr s P.Text) where
     password =
         P.lens (_password :: SqlUserResource s -> TF.Attr s P.Text)
                (\s a -> s { _password = a } :: SqlUserResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SqlUserResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SqlUserResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
@@ -1949,6 +2027,9 @@ instance P.HasWebsite (StorageBucketResource s) (TF.Attr s [TF.Attr s (WebsiteSe
         P.lens (_website :: StorageBucketResource s -> TF.Attr s [TF.Attr s (WebsiteSetting s)])
                (\s a -> s { _website = a } :: StorageBucketResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
@@ -2010,6 +2091,9 @@ instance P.HasPredefinedAcl (StorageBucketAclResource s) (TF.Attr s P.Text) wher
         P.lens (_predefinedAcl :: StorageBucketAclResource s -> TF.Attr s P.Text)
                (\s a -> s { _predefinedAcl = a } :: StorageBucketAclResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageBucketAclResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedRoleEntity (TF.Ref s' (StorageBucketAclResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedRoleEntity x = TF.compute (TF.refKey x) "role_entity"
 
@@ -2066,6 +2150,9 @@ instance P.HasRole (StorageBucketIamBindingResource s) (TF.Attr s P.Text) where
     role =
         P.lens (_role :: StorageBucketIamBindingResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: StorageBucketIamBindingResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageBucketIamBindingResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (StorageBucketIamBindingResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
@@ -2124,6 +2211,9 @@ instance P.HasRole (StorageBucketIamMemberResource s) (TF.Attr s P.Text) where
         P.lens (_role :: StorageBucketIamMemberResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: StorageBucketIamMemberResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageBucketIamMemberResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (StorageBucketIamMemberResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
@@ -2169,6 +2259,9 @@ instance P.HasPolicyData (StorageBucketIamPolicyResource s) (TF.Attr s P.Text) w
     policyData =
         P.lens (_policyData :: StorageBucketIamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _policyData = a } :: StorageBucketIamPolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageBucketIamPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (StorageBucketIamPolicyResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
@@ -2313,6 +2406,9 @@ instance P.HasSource (StorageBucketObjectResource s) (TF.Attr s P.Text) where
         P.lens (_source :: StorageBucketObjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _source = a } :: StorageBucketObjectResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageBucketObjectResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedContentType (TF.Ref s' (StorageBucketObjectResource s)) (TF.Attr s P.Text) where
     computedContentType x = TF.compute (TF.refKey x) "content_type"
 
@@ -2356,6 +2452,9 @@ instance P.HasBucket (StorageDefaultObjectAclResource s) (TF.Attr s P.Text) wher
     bucket =
         P.lens (_bucket :: StorageDefaultObjectAclResource s -> TF.Attr s P.Text)
                (\s a -> s { _bucket = a } :: StorageDefaultObjectAclResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageDefaultObjectAclResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedRoleEntity (TF.Ref s' (StorageDefaultObjectAclResource s)) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     computedRoleEntity x = TF.compute (TF.refKey x) "role_entity"
@@ -2444,6 +2543,9 @@ instance P.HasTopic (StorageNotificationResource s) (TF.Attr s P.Text) where
         P.lens (_topic :: StorageNotificationResource s -> TF.Attr s P.Text)
                (\s a -> s { _topic = a } :: StorageNotificationResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
     computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
@@ -2499,6 +2601,9 @@ instance P.HasPredefinedAcl (StorageObjectAclResource s) (TF.Attr s P.Text) wher
     predefinedAcl =
         P.lens (_predefinedAcl :: StorageObjectAclResource s -> TF.Attr s P.Text)
                (\s a -> s { _predefinedAcl = a } :: StorageObjectAclResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageObjectAclResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedRoleEntity (TF.Ref s' (StorageObjectAclResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedRoleEntity x = TF.compute (TF.refKey x) "role_entity"
