@@ -912,6 +912,11 @@ data HeaderSetting s = HeaderSetting'
     -- ^ @priority@ - (Optional)
     -- Lower priorities execute first. (Default: 100.)
     --
+    , _regex             :: TF.Attr s P.Text
+    -- ^ @regex@ - (Optional)
+    -- Regular expression to use (Only applies to 'regex' and 'regex_repeat'
+    -- actions.)
+    --
     , _requestCondition  :: TF.Attr s P.Text
     -- ^ @request_condition@ - (Optional)
     -- Optional name of a request condition to apply.
@@ -919,6 +924,16 @@ data HeaderSetting s = HeaderSetting'
     , _responseCondition :: TF.Attr s P.Text
     -- ^ @response_condition@ - (Optional)
     -- Optional name of a response condition to apply.
+    --
+    , _source            :: TF.Attr s P.Text
+    -- ^ @source@ - (Optional)
+    -- Variable to be used as a source for the header content (Does not apply to
+    -- 'delete' action.)
+    --
+    , _substitution      :: TF.Attr s P.Text
+    -- ^ @substitution@ - (Optional)
+    -- Value to substitute in place of regular expression. (Only applies to 'regex'
+    -- and 'regex_repeat'.)
     --
     , _type'             :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
@@ -941,8 +956,11 @@ headerSetting _action _destination _name _type' =
         , _ignoreIfSet = TF.value P.False
         , _name = _name
         , _priority = TF.value 100
+        , _regex = TF.Nil
         , _requestCondition = TF.Nil
         , _responseCondition = TF.Nil
+        , _source = TF.Nil
+        , _substitution = TF.Nil
         , _type' = _type'
         }
 
@@ -955,8 +973,11 @@ instance TF.IsObject (HeaderSetting s) where
         , TF.assign "ignore_if_set" <$> TF.attribute _ignoreIfSet
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "priority" <$> TF.attribute _priority
+        , TF.assign "regex" <$> TF.attribute _regex
         , TF.assign "request_condition" <$> TF.attribute _requestCondition
         , TF.assign "response_condition" <$> TF.attribute _responseCondition
+        , TF.assign "source" <$> TF.attribute _source
+        , TF.assign "substitution" <$> TF.attribute _substitution
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
@@ -993,6 +1014,11 @@ instance P.HasPriority (HeaderSetting s) (TF.Attr s P.Int) where
         P.lens (_priority :: HeaderSetting s -> TF.Attr s P.Int)
                (\s a -> s { _priority = a } :: HeaderSetting s)
 
+instance P.HasRegex (HeaderSetting s) (TF.Attr s P.Text) where
+    regex =
+        P.lens (_regex :: HeaderSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _regex = a } :: HeaderSetting s)
+
 instance P.HasRequestCondition (HeaderSetting s) (TF.Attr s P.Text) where
     requestCondition =
         P.lens (_requestCondition :: HeaderSetting s -> TF.Attr s P.Text)
@@ -1002,6 +1028,16 @@ instance P.HasResponseCondition (HeaderSetting s) (TF.Attr s P.Text) where
     responseCondition =
         P.lens (_responseCondition :: HeaderSetting s -> TF.Attr s P.Text)
                (\s a -> s { _responseCondition = a } :: HeaderSetting s)
+
+instance P.HasSource (HeaderSetting s) (TF.Attr s P.Text) where
+    source =
+        P.lens (_source :: HeaderSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _source = a } :: HeaderSetting s)
+
+instance P.HasSubstitution (HeaderSetting s) (TF.Attr s P.Text) where
+    substitution =
+        P.lens (_substitution :: HeaderSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _substitution = a } :: HeaderSetting s)
 
 instance P.HasType' (HeaderSetting s) (TF.Attr s P.Text) where
     type' =

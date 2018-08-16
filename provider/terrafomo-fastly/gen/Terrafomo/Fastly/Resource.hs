@@ -64,6 +64,10 @@ data ServiceV1Resource s = ServiceV1Resource'
     , _condition       :: TF.Attr s [TF.Attr s (ConditionSetting s)]
     -- ^ @condition@ - (Optional)
     --
+    , _defaultHost     :: TF.Attr s P.Text
+    -- ^ @default_host@ - (Optional)
+    -- The default hostname for the version
+    --
     , _defaultTtl      :: TF.Attr s P.Int
     -- ^ @default_ttl@ - (Optional)
     -- The default Time-to-live (TTL) for the version
@@ -128,6 +132,7 @@ serviceV1Resource _domain _name =
             , _bigquerylogging = TF.Nil
             , _cacheSetting = TF.Nil
             , _condition = TF.Nil
+            , _defaultHost = TF.Nil
             , _defaultTtl = TF.value 3600
             , _domain = _domain
             , _forceDestroy = TF.Nil
@@ -152,6 +157,7 @@ instance TF.IsObject (ServiceV1Resource s) where
         , TF.assign "bigquerylogging" <$> TF.attribute _bigquerylogging
         , TF.assign "cache_setting" <$> TF.attribute _cacheSetting
         , TF.assign "condition" <$> TF.attribute _condition
+        , TF.assign "default_host" <$> TF.attribute _defaultHost
         , TF.assign "default_ttl" <$> TF.attribute _defaultTtl
         , TF.assign "domain" <$> TF.attribute _domain
         , TF.assign "force_destroy" <$> TF.attribute _forceDestroy
@@ -192,6 +198,11 @@ instance P.HasCondition (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ConditionSe
     condition =
         P.lens (_condition :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ConditionSetting s)])
                (\s a -> s { _condition = a } :: ServiceV1Resource s)
+
+instance P.HasDefaultHost (ServiceV1Resource s) (TF.Attr s P.Text) where
+    defaultHost =
+        P.lens (_defaultHost :: ServiceV1Resource s -> TF.Attr s P.Text)
+               (\s a -> s { _defaultHost = a } :: ServiceV1Resource s)
 
 instance P.HasDefaultTtl (ServiceV1Resource s) (TF.Attr s P.Int) where
     defaultTtl =

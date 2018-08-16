@@ -76,6 +76,7 @@ module Terrafomo.Fastly.Lens
     , HasPriority (..)
     , HasProjectId (..)
     , HasRedundancy (..)
+    , HasRegex (..)
     , HasRequestCondition (..)
     , HasRequestSetting (..)
     , HasResponse (..)
@@ -86,6 +87,7 @@ module Terrafomo.Fastly.Lens
     , HasS3logging (..)
     , HasSecretKey (..)
     , HasShield (..)
+    , HasSource (..)
     , HasSslCaCert (..)
     , HasSslCertHostname (..)
     , HasSslCheckCert (..)
@@ -96,6 +98,7 @@ module Terrafomo.Fastly.Lens
     , HasStaleTtl (..)
     , HasStatement (..)
     , HasStatus (..)
+    , HasSubstitution (..)
     , HasSumologic (..)
     , HasSyslog (..)
     , HasTable (..)
@@ -497,6 +500,12 @@ class HasRedundancy a b | a -> b where
 instance HasRedundancy a b => HasRedundancy (TF.Schema l p a) b where
     redundancy = TF.configuration . redundancy
 
+class HasRegex a b | a -> b where
+    regex :: P.Lens' a b
+
+instance HasRegex a b => HasRegex (TF.Schema l p a) b where
+    regex = TF.configuration . regex
+
 class HasRequestCondition a b | a -> b where
     requestCondition :: P.Lens' a b
 
@@ -557,6 +566,12 @@ class HasShield a b | a -> b where
 instance HasShield a b => HasShield (TF.Schema l p a) b where
     shield = TF.configuration . shield
 
+class HasSource a b | a -> b where
+    source :: P.Lens' a b
+
+instance HasSource a b => HasSource (TF.Schema l p a) b where
+    source = TF.configuration . source
+
 class HasSslCaCert a b | a -> b where
     sslCaCert :: P.Lens' a b
 
@@ -616,6 +631,12 @@ class HasStatus a b | a -> b where
 
 instance HasStatus a b => HasStatus (TF.Schema l p a) b where
     status = TF.configuration . status
+
+class HasSubstitution a b | a -> b where
+    substitution :: P.Lens' a b
+
+instance HasSubstitution a b => HasSubstitution (TF.Schema l p a) b where
+    substitution = TF.configuration . substitution
 
 class HasSumologic a b | a -> b where
     sumologic :: P.Lens' a b
