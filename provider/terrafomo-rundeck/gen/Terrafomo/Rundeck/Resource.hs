@@ -296,6 +296,9 @@ instance P.HasPath (PrivateKeyResource s) (TF.Attr s P.Text) where
         P.lens (_path :: PrivateKeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _path = a } :: PrivateKeyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PrivateKeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @rundeck_project@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/rundeck/r/project.html terraform documentation>
@@ -414,6 +417,9 @@ instance P.HasSshKeyStoragePath (ProjectResource s) (TF.Attr s P.Text) where
         P.lens (_sshKeyStoragePath :: ProjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _sshKeyStoragePath = a } :: ProjectResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedUiUrl (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedUiUrl x = TF.compute (TF.refKey x) "ui_url"
 
@@ -449,6 +455,9 @@ instance P.HasPath (PublicKeyResource s) (TF.Attr s P.Text) where
     path =
         P.lens (_path :: PublicKeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _path = a } :: PublicKeyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PublicKeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDelete (TF.Ref s' (PublicKeyResource s)) (TF.Attr s P.Bool) where
     computedDelete x = TF.compute (TF.refKey x) "delete"
