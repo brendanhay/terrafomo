@@ -579,23 +579,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_testType",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"test_type\" <$> TF.attribute",
-                    "name": "_testType",
-                    "method": "testType",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasTestType",
-                    "validate": false,
-                    "optional": false,
-                    "original": "test_type"
-                },
-                {
                     "default": "_websiteName",
                     "computed": false,
                     "required": true,
@@ -611,6 +594,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "website_name"
+                },
+                {
+                    "default": "_testType",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"test_type\" <$> TF.attribute",
+                    "name": "_testType",
+                    "method": "testType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTestType",
+                    "validate": false,
+                    "optional": false,
+                    "original": "test_type"
                 },
                 {
                     "default": "_websiteUrl",
