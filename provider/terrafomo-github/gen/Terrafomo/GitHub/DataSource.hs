@@ -42,10 +42,9 @@ import GHC.Base (($))
 
 import Terrafomo.GitHub.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
+import qualified Data.Map.Strict           as Map
 import qualified Data.Maybe                as P
 import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
@@ -66,12 +65,12 @@ import qualified Terrafomo.Validator       as TF
 -- See the <https://www.terraform.io/docs/providers/github/d/ip_ranges.html terraform documentation>
 -- for more information.
 data IpRangesData s = IpRangesData'
-    deriving (P.Show, P.Eq, P.Generic)
+    deriving (P.Show, P.Eq, P.Ord)
 
 ipRangesData
     :: P.DataSource (IpRangesData s)
 ipRangesData =
-    TF.newDataSource "github_ip_ranges" TF.validator $
+    TF.unsafeDataSource "github_ip_ranges" P.defaultProvider TF.validator $
         IpRangesData'
 
 instance TF.IsObject (IpRangesData s) where
@@ -112,12 +111,12 @@ data RepositoryData s = RepositoryData'
     -- Conflicts with:
     --
     -- * 'fullName'
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 repositoryData
     :: P.DataSource (RepositoryData s)
 repositoryData =
-    TF.newDataSource "github_repository" TF.validator $
+    TF.unsafeDataSource "github_repository" P.defaultProvider TF.validator $
         RepositoryData'
             { _fullName = TF.Nil
             , _name = TF.Nil
@@ -218,13 +217,13 @@ data TeamData s = TeamData'
     { _slug :: TF.Attr s P.Text
     -- ^ @slug@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 teamData
     :: TF.Attr s P.Text -- ^ @slug@ - 'P.slug'
     -> P.DataSource (TeamData s)
 teamData _slug =
-    TF.newDataSource "github_team" TF.validator $
+    TF.unsafeDataSource "github_team" P.defaultProvider TF.validator $
         TeamData'
             { _slug = _slug
             }
@@ -268,13 +267,13 @@ data UserData s = UserData'
     { _username :: TF.Attr s P.Text
     -- ^ @username@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 userData
     :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.DataSource (UserData s)
 userData _username =
-    TF.newDataSource "github_user" TF.validator $
+    TF.unsafeDataSource "github_user" P.defaultProvider TF.validator $
         UserData'
             { _username = _username
             }
@@ -313,10 +312,10 @@ instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (UserData s)) (TF.Attr s P.
 instance s ~ s' => P.HasComputedEmail (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
     computedEmail x = TF.compute (TF.refKey x) "email"
 
-instance s ~ s' => P.HasComputedFollowers (TF.Ref s' (UserData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedFollowers (TF.Ref s' (UserData s)) (TF.Attr s P.Int) where
     computedFollowers x = TF.compute (TF.refKey x) "followers"
 
-instance s ~ s' => P.HasComputedFollowing (TF.Ref s' (UserData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedFollowing (TF.Ref s' (UserData s)) (TF.Attr s P.Int) where
     computedFollowing x = TF.compute (TF.refKey x) "following"
 
 instance s ~ s' => P.HasComputedGpgKeys (TF.Ref s' (UserData s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -334,10 +333,10 @@ instance s ~ s' => P.HasComputedLogin (TF.Ref s' (UserData s)) (TF.Attr s P.Text
 instance s ~ s' => P.HasComputedName (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedPublicGists (TF.Ref s' (UserData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedPublicGists (TF.Ref s' (UserData s)) (TF.Attr s P.Int) where
     computedPublicGists x = TF.compute (TF.refKey x) "public_gists"
 
-instance s ~ s' => P.HasComputedPublicRepos (TF.Ref s' (UserData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedPublicRepos (TF.Ref s' (UserData s)) (TF.Attr s P.Int) where
     computedPublicRepos x = TF.compute (TF.refKey x) "public_repos"
 
 instance s ~ s' => P.HasComputedSiteAdmin (TF.Ref s' (UserData s)) (TF.Attr s P.Bool) where

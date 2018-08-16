@@ -86,10 +86,9 @@ import GHC.Base (($))
 
 import Terrafomo.GitHub.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
+import qualified Data.Map.Strict           as Map
 import qualified Data.Maybe                as P
 import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
@@ -119,23 +118,23 @@ data BranchProtectionResource s = BranchProtectionResource'
     , _repository :: TF.Attr s P.Text
     -- ^ @repository@ - (Required, Forces New)
     --
-    , _requiredPullRequestReviews :: TF.Attr s (BranchProtectionRequiredPullRequestReviews s)
+    , _requiredPullRequestReviews :: TF.Attr s (RequiredPullRequestReviewsSetting s)
     -- ^ @required_pull_request_reviews@ - (Optional)
     --
-    , _requiredStatusChecks :: TF.Attr s (BranchProtectionRequiredStatusChecks s)
+    , _requiredStatusChecks :: TF.Attr s (RequiredStatusChecksSetting s)
     -- ^ @required_status_checks@ - (Optional)
     --
-    , _restrictions :: TF.Attr s (BranchProtectionRestrictions s)
+    , _restrictions :: TF.Attr s (RestrictionsSetting s)
     -- ^ @restrictions@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 branchProtectionResource
     :: TF.Attr s P.Text -- ^ @branch@ - 'P.branch'
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> P.Resource (BranchProtectionResource s)
 branchProtectionResource _branch _repository =
-    TF.newResource "github_branch_protection" TF.validator $
+    TF.unsafeResource "github_branch_protection" P.defaultProvider TF.validator $
         BranchProtectionResource'
             { _branch = _branch
             , _enforceAdmins = TF.value P.False
@@ -159,15 +158,15 @@ instance TF.IsValid (BranchProtectionResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_requiredPullRequestReviews"
                   (_requiredPullRequestReviews
-                      :: BranchProtectionResource s -> TF.Attr s (BranchProtectionRequiredPullRequestReviews s))
+                      :: BranchProtectionResource s -> TF.Attr s (RequiredPullRequestReviewsSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_requiredStatusChecks"
                   (_requiredStatusChecks
-                      :: BranchProtectionResource s -> TF.Attr s (BranchProtectionRequiredStatusChecks s))
+                      :: BranchProtectionResource s -> TF.Attr s (RequiredStatusChecksSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_restrictions"
                   (_restrictions
-                      :: BranchProtectionResource s -> TF.Attr s (BranchProtectionRestrictions s))
+                      :: BranchProtectionResource s -> TF.Attr s (RestrictionsSetting s))
                   TF.validator
 
 instance P.HasBranch (BranchProtectionResource s) (TF.Attr s P.Text) where
@@ -185,19 +184,19 @@ instance P.HasRepository (BranchProtectionResource s) (TF.Attr s P.Text) where
         P.lens (_repository :: BranchProtectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _repository = a } :: BranchProtectionResource s)
 
-instance P.HasRequiredPullRequestReviews (BranchProtectionResource s) (TF.Attr s (BranchProtectionRequiredPullRequestReviews s)) where
+instance P.HasRequiredPullRequestReviews (BranchProtectionResource s) (TF.Attr s (RequiredPullRequestReviewsSetting s)) where
     requiredPullRequestReviews =
-        P.lens (_requiredPullRequestReviews :: BranchProtectionResource s -> TF.Attr s (BranchProtectionRequiredPullRequestReviews s))
+        P.lens (_requiredPullRequestReviews :: BranchProtectionResource s -> TF.Attr s (RequiredPullRequestReviewsSetting s))
                (\s a -> s { _requiredPullRequestReviews = a } :: BranchProtectionResource s)
 
-instance P.HasRequiredStatusChecks (BranchProtectionResource s) (TF.Attr s (BranchProtectionRequiredStatusChecks s)) where
+instance P.HasRequiredStatusChecks (BranchProtectionResource s) (TF.Attr s (RequiredStatusChecksSetting s)) where
     requiredStatusChecks =
-        P.lens (_requiredStatusChecks :: BranchProtectionResource s -> TF.Attr s (BranchProtectionRequiredStatusChecks s))
+        P.lens (_requiredStatusChecks :: BranchProtectionResource s -> TF.Attr s (RequiredStatusChecksSetting s))
                (\s a -> s { _requiredStatusChecks = a } :: BranchProtectionResource s)
 
-instance P.HasRestrictions (BranchProtectionResource s) (TF.Attr s (BranchProtectionRestrictions s)) where
+instance P.HasRestrictions (BranchProtectionResource s) (TF.Attr s (RestrictionsSetting s)) where
     restrictions =
-        P.lens (_restrictions :: BranchProtectionResource s -> TF.Attr s (BranchProtectionRestrictions s))
+        P.lens (_restrictions :: BranchProtectionResource s -> TF.Attr s (RestrictionsSetting s))
                (\s a -> s { _restrictions = a } :: BranchProtectionResource s)
 
 -- | @github_issue_label@ Resource.
@@ -217,7 +216,7 @@ data IssueLabelResource s = IssueLabelResource'
     , _repository  :: TF.Attr s P.Text
     -- ^ @repository@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 issueLabelResource
     :: TF.Attr s P.Text -- ^ @color@ - 'P.color'
@@ -225,7 +224,7 @@ issueLabelResource
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> P.Resource (IssueLabelResource s)
 issueLabelResource _color _name _repository =
-    TF.newResource "github_issue_label" TF.validator $
+    TF.unsafeResource "github_issue_label" P.defaultProvider TF.validator $
         IssueLabelResource'
             { _color = _color
             , _description = TF.Nil
@@ -278,13 +277,13 @@ data MembershipResource s = MembershipResource'
     , _username :: TF.Attr s P.Text
     -- ^ @username@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 membershipResource
     :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.Resource (MembershipResource s)
 membershipResource _username =
-    TF.newResource "github_membership" TF.validator $
+    TF.unsafeResource "github_membership" P.defaultProvider TF.validator $
         MembershipResource'
             { _role = TF.value "member"
             , _username = _username
@@ -320,13 +319,13 @@ data OrganizationProjectResource s = OrganizationProjectResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 organizationProjectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (OrganizationProjectResource s)
 organizationProjectResource _name =
-    TF.newResource "github_organization_project" TF.validator $
+    TF.unsafeResource "github_organization_project" P.defaultProvider TF.validator $
         OrganizationProjectResource'
             { _body = TF.Nil
             , _name = _name
@@ -362,7 +361,7 @@ data OrganizationWebhookResource s = OrganizationWebhookResource'
     { _active        :: TF.Attr s P.Bool
     -- ^ @active@ - (Optional)
     --
-    , _configuration :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _configuration :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @configuration@ - (Optional)
     --
     , _events        :: TF.Attr s [TF.Attr s P.Text]
@@ -371,14 +370,14 @@ data OrganizationWebhookResource s = OrganizationWebhookResource'
     , _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 organizationWebhookResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @events@ - 'P.events'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (OrganizationWebhookResource s)
 organizationWebhookResource _events _name =
-    TF.newResource "github_organization_webhook" TF.validator $
+    TF.unsafeResource "github_organization_webhook" P.defaultProvider TF.validator $
         OrganizationWebhookResource'
             { _active = TF.value P.True
             , _configuration = TF.Nil
@@ -402,9 +401,9 @@ instance P.HasActive (OrganizationWebhookResource s) (TF.Attr s P.Bool) where
         P.lens (_active :: OrganizationWebhookResource s -> TF.Attr s P.Bool)
                (\s a -> s { _active = a } :: OrganizationWebhookResource s)
 
-instance P.HasConfiguration (OrganizationWebhookResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasConfiguration (OrganizationWebhookResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     configuration =
-        P.lens (_configuration :: OrganizationWebhookResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_configuration :: OrganizationWebhookResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _configuration = a } :: OrganizationWebhookResource s)
 
 instance P.HasEvents (OrganizationWebhookResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -473,13 +472,13 @@ data RepositoryResource s = RepositoryResource'
     , _topics            :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @topics@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 repositoryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RepositoryResource s)
 repositoryResource _name =
-    TF.newResource "github_repository" TF.validator $
+    TF.unsafeResource "github_repository" P.defaultProvider TF.validator $
         RepositoryResource'
             { _allowMergeCommit = TF.value P.True
             , _allowRebaseMerge = TF.value P.True
@@ -637,14 +636,14 @@ data RepositoryCollaboratorResource s = RepositoryCollaboratorResource'
     , _username   :: TF.Attr s P.Text
     -- ^ @username@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 repositoryCollaboratorResource
     :: TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.Resource (RepositoryCollaboratorResource s)
 repositoryCollaboratorResource _repository _username =
-    TF.newResource "github_repository_collaborator" TF.validator $
+    TF.unsafeResource "github_repository_collaborator" P.defaultProvider TF.validator $
         RepositoryCollaboratorResource'
             { _permission = TF.value "push"
             , _repository = _repository
@@ -693,7 +692,7 @@ data RepositoryDeployKeyResource s = RepositoryDeployKeyResource'
     , _title      :: TF.Attr s P.Text
     -- ^ @title@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 repositoryDeployKeyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
@@ -701,7 +700,7 @@ repositoryDeployKeyResource
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
     -> P.Resource (RepositoryDeployKeyResource s)
 repositoryDeployKeyResource _key _repository _title =
-    TF.newResource "github_repository_deploy_key" TF.validator $
+    TF.unsafeResource "github_repository_deploy_key" P.defaultProvider TF.validator $
         RepositoryDeployKeyResource'
             { _key = _key
             , _readOnly = TF.value P.True
@@ -754,14 +753,14 @@ data RepositoryProjectResource s = RepositoryProjectResource'
     , _repository :: TF.Attr s P.Text
     -- ^ @repository@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 repositoryProjectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> P.Resource (RepositoryProjectResource s)
 repositoryProjectResource _name _repository =
-    TF.newResource "github_repository_project" TF.validator $
+    TF.unsafeResource "github_repository_project" P.defaultProvider TF.validator $
         RepositoryProjectResource'
             { _body = TF.Nil
             , _name = _name
@@ -804,7 +803,7 @@ data RepositoryWebhookResource s = RepositoryWebhookResource'
     { _active        :: TF.Attr s P.Bool
     -- ^ @active@ - (Optional)
     --
-    , _configuration :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _configuration :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @configuration@ - (Optional)
     --
     , _events        :: TF.Attr s [TF.Attr s P.Text]
@@ -816,7 +815,7 @@ data RepositoryWebhookResource s = RepositoryWebhookResource'
     , _repository    :: TF.Attr s P.Text
     -- ^ @repository@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 repositoryWebhookResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @events@ - 'P.events'
@@ -824,7 +823,7 @@ repositoryWebhookResource
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> P.Resource (RepositoryWebhookResource s)
 repositoryWebhookResource _events _name _repository =
-    TF.newResource "github_repository_webhook" TF.validator $
+    TF.unsafeResource "github_repository_webhook" P.defaultProvider TF.validator $
         RepositoryWebhookResource'
             { _active = TF.value P.True
             , _configuration = TF.Nil
@@ -850,9 +849,9 @@ instance P.HasActive (RepositoryWebhookResource s) (TF.Attr s P.Bool) where
         P.lens (_active :: RepositoryWebhookResource s -> TF.Attr s P.Bool)
                (\s a -> s { _active = a } :: RepositoryWebhookResource s)
 
-instance P.HasConfiguration (RepositoryWebhookResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasConfiguration (RepositoryWebhookResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     configuration =
-        P.lens (_configuration :: RepositoryWebhookResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_configuration :: RepositoryWebhookResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _configuration = a } :: RepositoryWebhookResource s)
 
 instance P.HasEvents (RepositoryWebhookResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -887,19 +886,19 @@ data TeamResource s = TeamResource'
     , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _parentTeamId :: TF.Attr s P.Integer
+    , _parentTeamId :: TF.Attr s P.Int
     -- ^ @parent_team_id@ - (Optional)
     --
     , _privacy      :: TF.Attr s P.Text
     -- ^ @privacy@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 teamResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (TeamResource s)
 teamResource _name =
-    TF.newResource "github_team" TF.validator $
+    TF.unsafeResource "github_team" P.defaultProvider TF.validator $
         TeamResource'
             { _description = TF.Nil
             , _ldapDn = TF.Nil
@@ -935,9 +934,9 @@ instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
         P.lens (_name :: TeamResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: TeamResource s)
 
-instance P.HasParentTeamId (TeamResource s) (TF.Attr s P.Integer) where
+instance P.HasParentTeamId (TeamResource s) (TF.Attr s P.Int) where
     parentTeamId =
-        P.lens (_parentTeamId :: TeamResource s -> TF.Attr s P.Integer)
+        P.lens (_parentTeamId :: TeamResource s -> TF.Attr s P.Int)
                (\s a -> s { _parentTeamId = a } :: TeamResource s)
 
 instance P.HasPrivacy (TeamResource s) (TF.Attr s P.Text) where
@@ -959,14 +958,14 @@ data TeamMembershipResource s = TeamMembershipResource'
     , _username :: TF.Attr s P.Text
     -- ^ @username@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 teamMembershipResource
     :: TF.Attr s P.Text -- ^ @team_id@ - 'P.teamId'
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.Resource (TeamMembershipResource s)
 teamMembershipResource _teamId _username =
-    TF.newResource "github_team_membership" TF.validator $
+    TF.unsafeResource "github_team_membership" P.defaultProvider TF.validator $
         TeamMembershipResource'
             { _role = TF.value "member"
             , _teamId = _teamId
@@ -1012,14 +1011,14 @@ data TeamRepositoryResource s = TeamRepositoryResource'
     , _teamId     :: TF.Attr s P.Text
     -- ^ @team_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 teamRepositoryResource
     :: TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> TF.Attr s P.Text -- ^ @team_id@ - 'P.teamId'
     -> P.Resource (TeamRepositoryResource s)
 teamRepositoryResource _repository _teamId =
-    TF.newResource "github_team_repository" TF.validator $
+    TF.unsafeResource "github_team_repository" P.defaultProvider TF.validator $
         TeamRepositoryResource'
             { _permission = TF.value "pull"
             , _repository = _repository
@@ -1059,13 +1058,13 @@ data UserGpgKeyResource s = UserGpgKeyResource'
     { _armoredPublicKey :: TF.Attr s P.Text
     -- ^ @armored_public_key@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 userGpgKeyResource
     :: TF.Attr s P.Text -- ^ @armored_public_key@ - 'P.armoredPublicKey'
     -> P.Resource (UserGpgKeyResource s)
 userGpgKeyResource _armoredPublicKey =
-    TF.newResource "github_user_gpg_key" TF.validator $
+    TF.unsafeResource "github_user_gpg_key" P.defaultProvider TF.validator $
         UserGpgKeyResource'
             { _armoredPublicKey = _armoredPublicKey
             }
@@ -1097,14 +1096,14 @@ data UserSshKeyResource s = UserSshKeyResource'
     , _title :: TF.Attr s P.Text
     -- ^ @title@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 userSshKeyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
     -> P.Resource (UserSshKeyResource s)
 userSshKeyResource _key _title =
-    TF.newResource "github_user_ssh_key" TF.validator $
+    TF.unsafeResource "github_user_ssh_key" P.defaultProvider TF.validator $
         UserSshKeyResource'
             { _key = _key
             , _title = _title

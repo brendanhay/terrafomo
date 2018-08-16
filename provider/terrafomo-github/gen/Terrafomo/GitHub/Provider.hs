@@ -20,6 +20,7 @@ module Terrafomo.GitHub.Provider
     -- * GitHub Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * GitHub Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.GitHub.Settings
 
-import qualified Data.Hashable          as P
-import qualified Data.HashMap.Strict    as P
-import qualified Data.HashMap.Strict    as Map
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Map.Strict        as P
+import qualified Data.Map.Strict        as Map
 import qualified Data.Maybe             as P
 import qualified Data.Monoid            as P
 import qualified Data.Text              as P
@@ -77,7 +77,7 @@ data Provider = Provider'
     -- ^ @token@ - (Required)
     -- The OAuth token used to connect to GitHub.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: P.Text -- ^ @organization@ - 'P.organization'
@@ -91,24 +91,21 @@ newProvider _organization _token =
         , _token = _token
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "base_url" <$> _baseUrl
-                  , P.Just $ TF.assign "insecure" _insecure
-                  , P.Just $ TF.assign "organization" _organization
-                  , P.Just $ TF.assign "token" _token
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  TF.assign "base_url" <$> _baseUrl
+        ,  P.Just $ TF.assign "insecure" _insecure
+        ,  P.Just $ TF.assign "organization" _organization
+        ,  P.Just $ TF.assign "token" _token
+        ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
