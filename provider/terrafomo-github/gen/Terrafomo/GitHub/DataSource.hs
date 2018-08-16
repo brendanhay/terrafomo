@@ -70,7 +70,7 @@ data IpRangesData s = IpRangesData'
 ipRangesData
     :: P.DataSource (IpRangesData s)
 ipRangesData =
-    TF.unsafeDataSource "github_ip_ranges" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "github_ip_ranges" TF.validator $
         IpRangesData'
 
 instance TF.IsObject (IpRangesData s) where
@@ -116,7 +116,7 @@ data RepositoryData s = RepositoryData'
 repositoryData
     :: P.DataSource (RepositoryData s)
 repositoryData =
-    TF.unsafeDataSource "github_repository" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "github_repository" TF.validator $
         RepositoryData'
             { _fullName = TF.Nil
             , _name = TF.Nil
@@ -223,7 +223,7 @@ teamData
     :: TF.Attr s P.Text -- ^ @slug@ - 'P.slug'
     -> P.DataSource (TeamData s)
 teamData _slug =
-    TF.unsafeDataSource "github_team" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "github_team" TF.validator $
         TeamData'
             { _slug = _slug
             }
@@ -273,7 +273,7 @@ userData
     :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.DataSource (UserData s)
 userData _username =
-    TF.unsafeDataSource "github_user" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "github_user" TF.validator $
         UserData'
             { _username = _username
             }

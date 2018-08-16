@@ -134,7 +134,7 @@ branchProtectionResource
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> P.Resource (BranchProtectionResource s)
 branchProtectionResource _branch _repository =
-    TF.unsafeResource "github_branch_protection" P.defaultProvider TF.validator $
+    TF.unsafeResource "github_branch_protection" TF.validator $
         BranchProtectionResource'
             { _branch = _branch
             , _enforceAdmins = TF.value P.False
@@ -224,7 +224,7 @@ issueLabelResource
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> P.Resource (IssueLabelResource s)
 issueLabelResource _color _name _repository =
-    TF.unsafeResource "github_issue_label" P.defaultProvider TF.validator $
+    TF.unsafeResource "github_issue_label" TF.validator $
         IssueLabelResource'
             { _color = _color
             , _description = TF.Nil
@@ -283,7 +283,7 @@ membershipResource
     :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.Resource (MembershipResource s)
 membershipResource _username =
-    TF.unsafeResource "github_membership" P.defaultProvider TF.validator $
+    TF.unsafeResource "github_membership" TF.validator $
         MembershipResource'
             { _role = TF.value "member"
             , _username = _username
@@ -325,7 +325,7 @@ organizationProjectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (OrganizationProjectResource s)
 organizationProjectResource _name =
-    TF.unsafeResource "github_organization_project" P.defaultProvider TF.validator $
+    TF.unsafeResource "github_organization_project" TF.validator $
         OrganizationProjectResource'
             { _body = TF.Nil
             , _name = _name
@@ -377,7 +377,7 @@ organizationWebhookResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (OrganizationWebhookResource s)
 organizationWebhookResource _events _name =
-    TF.unsafeResource "github_organization_webhook" P.defaultProvider TF.validator $
+    TF.unsafeResource "github_organization_webhook" TF.validator $
         OrganizationWebhookResource'
             { _active = TF.value P.True
             , _configuration = TF.Nil
@@ -478,7 +478,7 @@ repositoryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RepositoryResource s)
 repositoryResource _name =
-    TF.unsafeResource "github_repository" P.defaultProvider TF.validator $
+    TF.unsafeResource "github_repository" TF.validator $
         RepositoryResource'
             { _allowMergeCommit = TF.value P.True
             , _allowRebaseMerge = TF.value P.True
@@ -643,7 +643,7 @@ repositoryCollaboratorResource
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.Resource (RepositoryCollaboratorResource s)
 repositoryCollaboratorResource _repository _username =
-    TF.unsafeResource "github_repository_collaborator" P.defaultProvider TF.validator $
+    TF.unsafeResource "github_repository_collaborator" TF.validator $
         RepositoryCollaboratorResource'
             { _permission = TF.value "push"
             , _repository = _repository
@@ -700,7 +700,7 @@ repositoryDeployKeyResource
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
     -> P.Resource (RepositoryDeployKeyResource s)
 repositoryDeployKeyResource _key _repository _title =
-    TF.unsafeResource "github_repository_deploy_key" P.defaultProvider TF.validator $
+    TF.unsafeResource "github_repository_deploy_key" TF.validator $
         RepositoryDeployKeyResource'
             { _key = _key
             , _readOnly = TF.value P.True
@@ -760,7 +760,7 @@ repositoryProjectResource
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> P.Resource (RepositoryProjectResource s)
 repositoryProjectResource _name _repository =
-    TF.unsafeResource "github_repository_project" P.defaultProvider TF.validator $
+    TF.unsafeResource "github_repository_project" TF.validator $
         RepositoryProjectResource'
             { _body = TF.Nil
             , _name = _name
@@ -823,7 +823,7 @@ repositoryWebhookResource
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> P.Resource (RepositoryWebhookResource s)
 repositoryWebhookResource _events _name _repository =
-    TF.unsafeResource "github_repository_webhook" P.defaultProvider TF.validator $
+    TF.unsafeResource "github_repository_webhook" TF.validator $
         RepositoryWebhookResource'
             { _active = TF.value P.True
             , _configuration = TF.Nil
@@ -898,7 +898,7 @@ teamResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (TeamResource s)
 teamResource _name =
-    TF.unsafeResource "github_team" P.defaultProvider TF.validator $
+    TF.unsafeResource "github_team" TF.validator $
         TeamResource'
             { _description = TF.Nil
             , _ldapDn = TF.Nil
@@ -965,7 +965,7 @@ teamMembershipResource
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.Resource (TeamMembershipResource s)
 teamMembershipResource _teamId _username =
-    TF.unsafeResource "github_team_membership" P.defaultProvider TF.validator $
+    TF.unsafeResource "github_team_membership" TF.validator $
         TeamMembershipResource'
             { _role = TF.value "member"
             , _teamId = _teamId
@@ -1018,7 +1018,7 @@ teamRepositoryResource
     -> TF.Attr s P.Text -- ^ @team_id@ - 'P.teamId'
     -> P.Resource (TeamRepositoryResource s)
 teamRepositoryResource _repository _teamId =
-    TF.unsafeResource "github_team_repository" P.defaultProvider TF.validator $
+    TF.unsafeResource "github_team_repository" TF.validator $
         TeamRepositoryResource'
             { _permission = TF.value "pull"
             , _repository = _repository
@@ -1064,7 +1064,7 @@ userGpgKeyResource
     :: TF.Attr s P.Text -- ^ @armored_public_key@ - 'P.armoredPublicKey'
     -> P.Resource (UserGpgKeyResource s)
 userGpgKeyResource _armoredPublicKey =
-    TF.unsafeResource "github_user_gpg_key" P.defaultProvider TF.validator $
+    TF.unsafeResource "github_user_gpg_key" TF.validator $
         UserGpgKeyResource'
             { _armoredPublicKey = _armoredPublicKey
             }
@@ -1103,7 +1103,7 @@ userSshKeyResource
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
     -> P.Resource (UserSshKeyResource s)
 userSshKeyResource _key _title =
-    TF.unsafeResource "github_user_ssh_key" P.defaultProvider TF.validator $
+    TF.unsafeResource "github_user_ssh_key" TF.validator $
         UserSshKeyResource'
             { _key = _key
             , _title = _title
