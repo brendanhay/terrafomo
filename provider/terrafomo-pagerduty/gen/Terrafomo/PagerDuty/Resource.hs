@@ -131,6 +131,9 @@ instance P.HasSrc (AddonResource s) (TF.Attr s P.Text) where
         P.lens (_src :: AddonResource s -> TF.Attr s P.Text)
                (\s a -> s { _src = a } :: AddonResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AddonResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @pagerduty_escalation_policy@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/pagerduty/r/escalation_policy.html terraform documentation>
@@ -204,6 +207,9 @@ instance P.HasTeams (EscalationPolicyResource s) (TF.Attr s [TF.Attr s P.Text]) 
         P.lens (_teams :: EscalationPolicyResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _teams = a } :: EscalationPolicyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EscalationPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @pagerduty_extension@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/pagerduty/r/extension.html terraform documentation>
@@ -256,6 +262,9 @@ instance P.HasExtensionSchema (ExtensionResource s) (TF.Attr s P.Text) where
     extensionSchema =
         P.lens (_extensionSchema :: ExtensionResource s -> TF.Attr s P.Text)
                (\s a -> s { _extensionSchema = a } :: ExtensionResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
@@ -326,6 +335,9 @@ instance P.HasStartTime (MaintenanceWindowResource s) (TF.Attr s P.Text) where
     startTime =
         P.lens (_startTime :: MaintenanceWindowResource s -> TF.Attr s P.Text)
                (\s a -> s { _startTime = a } :: MaintenanceWindowResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MaintenanceWindowResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @pagerduty_schedule@ Resource.
 --
@@ -399,6 +411,9 @@ instance P.HasTimeZone (ScheduleResource s) (TF.Attr s P.Text) where
     timeZone =
         P.lens (_timeZone :: ScheduleResource s -> TF.Attr s P.Text)
                (\s a -> s { _timeZone = a } :: ScheduleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ScheduleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @pagerduty_service@ Resource.
 --
@@ -506,6 +521,9 @@ instance P.HasSupportHours (ServiceResource s) (TF.Attr s (SupportHoursSetting s
         P.lens (_supportHours :: ServiceResource s -> TF.Attr s (SupportHoursSetting s))
                (\s a -> s { _supportHours = a } :: ServiceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
@@ -559,6 +577,9 @@ instance P.HasService (ServiceIntegrationResource s) (TF.Attr s P.Text) where
     service =
         P.lens (_service :: ServiceIntegrationResource s -> TF.Attr s P.Text)
                (\s a -> s { _service = a } :: ServiceIntegrationResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedHtmlUrl (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
     computedHtmlUrl x = TF.compute (TF.refKey x) "html_url"
@@ -617,6 +638,9 @@ instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
         P.lens (_name :: TeamResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: TeamResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @pagerduty_team_membership@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/pagerduty/r/team_membership.html terraform documentation>
@@ -659,6 +683,9 @@ instance P.HasUserId (TeamMembershipResource s) (TF.Attr s P.Text) where
     userId =
         P.lens (_userId :: TeamMembershipResource s -> TF.Attr s P.Text)
                (\s a -> s { _userId = a } :: TeamMembershipResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamMembershipResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @pagerduty_user@ Resource.
 --
@@ -742,6 +769,9 @@ instance P.HasTeams (UserResource s) (TF.Attr s [TF.Attr s P.Text]) where
     teams =
         P.lens (_teams :: UserResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _teams = a } :: UserResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAvatarUrl (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedAvatarUrl x = TF.compute (TF.refKey x) "avatar_url"
@@ -842,6 +872,9 @@ instance P.HasUserId (UserContactMethodResource s) (TF.Attr s P.Text) where
     userId =
         P.lens (_userId :: UserContactMethodResource s -> TF.Attr s P.Text)
                (\s a -> s { _userId = a } :: UserContactMethodResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserContactMethodResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedBlacklisted (TF.Ref s' (UserContactMethodResource s)) (TF.Attr s P.Bool) where
     computedBlacklisted x = TF.compute (TF.refKey x) "blacklisted"
