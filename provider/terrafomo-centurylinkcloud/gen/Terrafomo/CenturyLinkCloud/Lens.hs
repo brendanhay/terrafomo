@@ -24,6 +24,7 @@ module Terrafomo.CenturyLinkCloud.Lens
     , HasDataCenter (..)
     , HasDescription (..)
     , HasGroupId (..)
+    , HasInternalIpAddress (..)
     , HasLoadBalancer (..)
     , HasLocationId (..)
     , HasMemoryMb (..)
@@ -40,6 +41,8 @@ module Terrafomo.CenturyLinkCloud.Lens
     , HasPersistence (..)
     , HasPort (..)
     , HasPorts (..)
+    , HasPowerState (..)
+    , HasPrivateIpAddress (..)
     , HasServerId (..)
     , HasSourceRestrictions (..)
     , HasSourceServerId (..)
@@ -120,6 +123,12 @@ class HasGroupId a b | a -> b where
 
 instance HasGroupId a b => HasGroupId (TF.Schema l p a) b where
     groupId = TF.configuration . groupId
+
+class HasInternalIpAddress a b | a -> b where
+    internalIpAddress :: P.Lens' a b
+
+instance HasInternalIpAddress a b => HasInternalIpAddress (TF.Schema l p a) b where
+    internalIpAddress = TF.configuration . internalIpAddress
 
 class HasLoadBalancer a b | a -> b where
     loadBalancer :: P.Lens' a b
@@ -216,6 +225,18 @@ class HasPorts a b | a -> b where
 
 instance HasPorts a b => HasPorts (TF.Schema l p a) b where
     ports = TF.configuration . ports
+
+class HasPowerState a b | a -> b where
+    powerState :: P.Lens' a b
+
+instance HasPowerState a b => HasPowerState (TF.Schema l p a) b where
+    powerState = TF.configuration . powerState
+
+class HasPrivateIpAddress a b | a -> b where
+    privateIpAddress :: P.Lens' a b
+
+instance HasPrivateIpAddress a b => HasPrivateIpAddress (TF.Schema l p a) b where
+    privateIpAddress = TF.configuration . privateIpAddress
 
 class HasServerId a b | a -> b where
     serverId :: P.Lens' a b

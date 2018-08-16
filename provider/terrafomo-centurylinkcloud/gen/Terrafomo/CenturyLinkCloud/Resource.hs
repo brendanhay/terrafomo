@@ -309,7 +309,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadBalancerPoolResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/clc/r/public_ip.html terraform documentation>
 -- for more information.
 data PublicIpResource s = PublicIpResource'
-    { _ports :: TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]
+    { _internalIpAddress :: TF.Attr s P.Text
+    -- ^ @internal_ip_address@ - (Optional)
+    --
+    , _ports :: TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]
     -- ^ @ports@ - (Required)
     --
     , _serverId :: TF.Attr s P.Text
@@ -328,20 +331,27 @@ publicIpResource
 publicIpResource _serverId _ports =
     TF.unsafeResource "clc_public_ip" TF.validator $
         PublicIpResource'
-            { _ports = _ports
+            { _internalIpAddress = TF.Nil
+            , _ports = _ports
             , _serverId = _serverId
             , _sourceRestrictions = TF.Nil
             }
 
 instance TF.IsObject (PublicIpResource s) where
     toObject PublicIpResource'{..} = P.catMaybes
-        [ TF.assign "ports" <$> TF.attribute _ports
+        [ TF.assign "internal_ip_address" <$> TF.attribute _internalIpAddress
+        , TF.assign "ports" <$> TF.attribute _ports
         , TF.assign "server_id" <$> TF.attribute _serverId
         , TF.assign "source_restrictions" <$> TF.attribute _sourceRestrictions
         ]
 
 instance TF.IsValid (PublicIpResource s) where
     validator = P.mempty
+
+instance P.HasInternalIpAddress (PublicIpResource s) (TF.Attr s P.Text) where
+    internalIpAddress =
+        P.lens (_internalIpAddress :: PublicIpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _internalIpAddress = a } :: PublicIpResource s)
 
 instance P.HasPorts (PublicIpResource s) (TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]) where
     ports =
@@ -408,6 +418,15 @@ data ServerResource s = ServerResource'
     , _packages :: TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]
     -- ^ @packages@ - (Optional)
     --
+    , _password :: TF.Attr s P.Text
+    -- ^ @password@ - (Optional)
+    --
+    , _powerState :: TF.Attr s P.Text
+    -- ^ @power_state@ - (Optional)
+    --
+    , _privateIpAddress :: TF.Attr s P.Text
+    -- ^ @private_ip_address@ - (Optional)
+    --
     , _sourceServerId :: TF.Attr s P.Text
     -- ^ @source_server_id@ - (Required, Forces New)
     --
@@ -443,6 +462,9 @@ serverResource _cpu _groupId _sourceServerId _memoryMb _nameTemplate =
             , _networkId = TF.Nil
             , _osType = TF.Nil
             , _packages = TF.Nil
+            , _password = TF.Nil
+            , _powerState = TF.Nil
+            , _privateIpAddress = TF.Nil
             , _sourceServerId = _sourceServerId
             , _storageType = TF.value "standard"
             , _type' = TF.value "standard"
@@ -463,6 +485,9 @@ instance TF.IsObject (ServerResource s) where
         , TF.assign "network_id" <$> TF.attribute _networkId
         , TF.assign "os_type" <$> TF.attribute _osType
         , TF.assign "packages" <$> TF.attribute _packages
+        , TF.assign "password" <$> TF.attribute _password
+        , TF.assign "power_state" <$> TF.attribute _powerState
+        , TF.assign "private_ip_address" <$> TF.attribute _privateIpAddress
         , TF.assign "source_server_id" <$> TF.attribute _sourceServerId
         , TF.assign "storage_type" <$> TF.attribute _storageType
         , TF.assign "type" <$> TF.attribute _type'
@@ -535,6 +560,21 @@ instance P.HasPackages (ServerResource s) (TF.Attr s [TF.Attr s (P.Map P.Text (T
     packages =
         P.lens (_packages :: ServerResource s -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))])
                (\s a -> s { _packages = a } :: ServerResource s)
+
+instance P.HasPassword (ServerResource s) (TF.Attr s P.Text) where
+    password =
+        P.lens (_password :: ServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _password = a } :: ServerResource s)
+
+instance P.HasPowerState (ServerResource s) (TF.Attr s P.Text) where
+    powerState =
+        P.lens (_powerState :: ServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _powerState = a } :: ServerResource s)
+
+instance P.HasPrivateIpAddress (ServerResource s) (TF.Attr s P.Text) where
+    privateIpAddress =
+        P.lens (_privateIpAddress :: ServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _privateIpAddress = a } :: ServerResource s)
 
 instance P.HasSourceServerId (ServerResource s) (TF.Attr s P.Text) where
     sourceServerId =
