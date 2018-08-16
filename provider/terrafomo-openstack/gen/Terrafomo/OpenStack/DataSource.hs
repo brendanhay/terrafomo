@@ -127,6 +127,9 @@ data ComputeFlavorV2Data s = ComputeFlavorV2Data'
     , _ram        :: TF.Attr s P.Int
     -- ^ @ram@ - (Optional, Forces New)
     --
+    , _region     :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
     , _rxTxFactor :: TF.Attr s P.Double
     -- ^ @rx_tx_factor@ - (Optional, Forces New)
     --
@@ -149,6 +152,7 @@ computeFlavorV2Data =
             , _minRam = TF.Nil
             , _name = TF.Nil
             , _ram = TF.Nil
+            , _region = TF.Nil
             , _rxTxFactor = TF.Nil
             , _swap = TF.Nil
             , _vcpus = TF.Nil
@@ -161,6 +165,7 @@ instance TF.IsObject (ComputeFlavorV2Data s) where
         , TF.assign "min_ram" <$> TF.attribute _minRam
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "ram" <$> TF.attribute _ram
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "rx_tx_factor" <$> TF.attribute _rxTxFactor
         , TF.assign "swap" <$> TF.attribute _swap
         , TF.assign "vcpus" <$> TF.attribute _vcpus
@@ -194,6 +199,11 @@ instance P.HasRam (ComputeFlavorV2Data s) (TF.Attr s P.Int) where
         P.lens (_ram :: ComputeFlavorV2Data s -> TF.Attr s P.Int)
                (\s a -> s { _ram = a } :: ComputeFlavorV2Data s)
 
+instance P.HasRegion (ComputeFlavorV2Data s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeFlavorV2Data s)
+
 instance P.HasRxTxFactor (ComputeFlavorV2Data s) (TF.Attr s P.Double) where
     rxTxFactor =
         P.lens (_rxTxFactor :: ComputeFlavorV2Data s -> TF.Attr s P.Double)
@@ -223,8 +233,11 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeFlavorV2Data s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/openstack/d/compute_keypair_v2.html terraform documentation>
 -- for more information.
 data ComputeKeypairV2Data s = ComputeKeypairV2Data'
-    { _name :: TF.Attr s P.Text
+    { _name   :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
+    --
+    , _region :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -236,11 +249,13 @@ computeKeypairV2Data _name =
     TF.unsafeDataSource "openstack_compute_keypair_v2" TF.validator $
         ComputeKeypairV2Data'
             { _name = _name
+            , _region = TF.Nil
             }
 
 instance TF.IsObject (ComputeKeypairV2Data s) where
     toObject ComputeKeypairV2Data'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
 instance TF.IsValid (ComputeKeypairV2Data s) where
@@ -250,6 +265,11 @@ instance P.HasName (ComputeKeypairV2Data s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeKeypairV2Data s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeKeypairV2Data s)
+
+instance P.HasRegion (ComputeKeypairV2Data s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeKeypairV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeKeypairV2Data s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeKeypairV2Data s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -265,23 +285,53 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeKeypairV2Data s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/openstack/d/dns_zone_v2.html terraform documentation>
 -- for more information.
 data DnsZoneV2Data s = DnsZoneV2Data'
-    { _description :: TF.Attr s P.Text
+    { _attributes    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @attributes@ - (Optional)
+    --
+    , _createdAt     :: TF.Attr s P.Text
+    -- ^ @created_at@ - (Optional)
+    --
+    , _description   :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _email       :: TF.Attr s P.Text
+    , _email         :: TF.Attr s P.Text
     -- ^ @email@ - (Optional)
     --
-    , _name        :: TF.Attr s P.Text
+    , _masters       :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @masters@ - (Optional)
+    --
+    , _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _status      :: TF.Attr s P.Text
+    , _poolId        :: TF.Attr s P.Text
+    -- ^ @pool_id@ - (Optional)
+    --
+    , _projectId     :: TF.Attr s P.Text
+    -- ^ @project_id@ - (Optional)
+    --
+    , _region        :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional)
+    --
+    , _serial        :: TF.Attr s P.Int
+    -- ^ @serial@ - (Optional)
+    --
+    , _status        :: TF.Attr s P.Text
     -- ^ @status@ - (Optional)
     --
-    , _ttl         :: TF.Attr s P.Int
+    , _transferredAt :: TF.Attr s P.Text
+    -- ^ @transferred_at@ - (Optional)
+    --
+    , _ttl           :: TF.Attr s P.Int
     -- ^ @ttl@ - (Optional)
     --
-    , _type'       :: TF.Attr s P.Text
+    , _type'         :: TF.Attr s P.Text
     -- ^ @type@ - (Optional)
+    --
+    , _updatedAt     :: TF.Attr s P.Text
+    -- ^ @updated_at@ - (Optional)
+    --
+    , _version       :: TF.Attr s P.Int
+    -- ^ @version@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -291,26 +341,56 @@ dnsZoneV2Data
 dnsZoneV2Data =
     TF.unsafeDataSource "openstack_dns_zone_v2" TF.validator $
         DnsZoneV2Data'
-            { _description = TF.Nil
+            { _attributes = TF.Nil
+            , _createdAt = TF.Nil
+            , _description = TF.Nil
             , _email = TF.Nil
+            , _masters = TF.Nil
             , _name = TF.Nil
+            , _poolId = TF.Nil
+            , _projectId = TF.Nil
+            , _region = TF.Nil
+            , _serial = TF.Nil
             , _status = TF.Nil
+            , _transferredAt = TF.Nil
             , _ttl = TF.Nil
             , _type' = TF.Nil
+            , _updatedAt = TF.Nil
+            , _version = TF.Nil
             }
 
 instance TF.IsObject (DnsZoneV2Data s) where
     toObject DnsZoneV2Data'{..} = P.catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
+        [ TF.assign "attributes" <$> TF.attribute _attributes
+        , TF.assign "created_at" <$> TF.attribute _createdAt
+        , TF.assign "description" <$> TF.attribute _description
         , TF.assign "email" <$> TF.attribute _email
+        , TF.assign "masters" <$> TF.attribute _masters
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "pool_id" <$> TF.attribute _poolId
+        , TF.assign "project_id" <$> TF.attribute _projectId
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "serial" <$> TF.attribute _serial
         , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "transferred_at" <$> TF.attribute _transferredAt
         , TF.assign "ttl" <$> TF.attribute _ttl
         , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "updated_at" <$> TF.attribute _updatedAt
+        , TF.assign "version" <$> TF.attribute _version
         ]
 
 instance TF.IsValid (DnsZoneV2Data s) where
     validator = P.mempty
+
+instance P.HasAttributes (DnsZoneV2Data s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    attributes =
+        P.lens (_attributes :: DnsZoneV2Data s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _attributes = a } :: DnsZoneV2Data s)
+
+instance P.HasCreatedAt (DnsZoneV2Data s) (TF.Attr s P.Text) where
+    createdAt =
+        P.lens (_createdAt :: DnsZoneV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _createdAt = a } :: DnsZoneV2Data s)
 
 instance P.HasDescription (DnsZoneV2Data s) (TF.Attr s P.Text) where
     description =
@@ -322,15 +402,45 @@ instance P.HasEmail (DnsZoneV2Data s) (TF.Attr s P.Text) where
         P.lens (_email :: DnsZoneV2Data s -> TF.Attr s P.Text)
                (\s a -> s { _email = a } :: DnsZoneV2Data s)
 
+instance P.HasMasters (DnsZoneV2Data s) (TF.Attr s [TF.Attr s P.Text]) where
+    masters =
+        P.lens (_masters :: DnsZoneV2Data s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _masters = a } :: DnsZoneV2Data s)
+
 instance P.HasName (DnsZoneV2Data s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DnsZoneV2Data s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DnsZoneV2Data s)
 
+instance P.HasPoolId (DnsZoneV2Data s) (TF.Attr s P.Text) where
+    poolId =
+        P.lens (_poolId :: DnsZoneV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _poolId = a } :: DnsZoneV2Data s)
+
+instance P.HasProjectId (DnsZoneV2Data s) (TF.Attr s P.Text) where
+    projectId =
+        P.lens (_projectId :: DnsZoneV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _projectId = a } :: DnsZoneV2Data s)
+
+instance P.HasRegion (DnsZoneV2Data s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: DnsZoneV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: DnsZoneV2Data s)
+
+instance P.HasSerial (DnsZoneV2Data s) (TF.Attr s P.Int) where
+    serial =
+        P.lens (_serial :: DnsZoneV2Data s -> TF.Attr s P.Int)
+               (\s a -> s { _serial = a } :: DnsZoneV2Data s)
+
 instance P.HasStatus (DnsZoneV2Data s) (TF.Attr s P.Text) where
     status =
         P.lens (_status :: DnsZoneV2Data s -> TF.Attr s P.Text)
                (\s a -> s { _status = a } :: DnsZoneV2Data s)
+
+instance P.HasTransferredAt (DnsZoneV2Data s) (TF.Attr s P.Text) where
+    transferredAt =
+        P.lens (_transferredAt :: DnsZoneV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _transferredAt = a } :: DnsZoneV2Data s)
 
 instance P.HasTtl (DnsZoneV2Data s) (TF.Attr s P.Int) where
     ttl =
@@ -341,6 +451,16 @@ instance P.HasType' (DnsZoneV2Data s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: DnsZoneV2Data s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: DnsZoneV2Data s)
+
+instance P.HasUpdatedAt (DnsZoneV2Data s) (TF.Attr s P.Text) where
+    updatedAt =
+        P.lens (_updatedAt :: DnsZoneV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _updatedAt = a } :: DnsZoneV2Data s)
+
+instance P.HasVersion (DnsZoneV2Data s) (TF.Attr s P.Int) where
+    version =
+        P.lens (_version :: DnsZoneV2Data s -> TF.Attr s P.Int)
+               (\s a -> s { _version = a } :: DnsZoneV2Data s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -386,6 +506,12 @@ data FwPolicyV1Data s = FwPolicyV1Data'
     , _policyId :: TF.Attr s P.Text
     -- ^ @policy_id@ - (Optional)
     --
+    , _region   :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
+    , _tenantId :: TF.Attr s P.Text
+    -- ^ @tenant_id@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @openstack_fw_policy_v1@ datasource value.
@@ -396,12 +522,16 @@ fwPolicyV1Data =
         FwPolicyV1Data'
             { _name = TF.Nil
             , _policyId = TF.Nil
+            , _region = TF.Nil
+            , _tenantId = TF.Nil
             }
 
 instance TF.IsObject (FwPolicyV1Data s) where
     toObject FwPolicyV1Data'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "policy_id" <$> TF.attribute _policyId
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "tenant_id" <$> TF.attribute _tenantId
         ]
 
 instance TF.IsValid (FwPolicyV1Data s) where
@@ -416,6 +546,16 @@ instance P.HasPolicyId (FwPolicyV1Data s) (TF.Attr s P.Text) where
     policyId =
         P.lens (_policyId :: FwPolicyV1Data s -> TF.Attr s P.Text)
                (\s a -> s { _policyId = a } :: FwPolicyV1Data s)
+
+instance P.HasRegion (FwPolicyV1Data s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: FwPolicyV1Data s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: FwPolicyV1Data s)
+
+instance P.HasTenantId (FwPolicyV1Data s) (TF.Attr s P.Text) where
+    tenantId =
+        P.lens (_tenantId :: FwPolicyV1Data s -> TF.Attr s P.Text)
+               (\s a -> s { _tenantId = a } :: FwPolicyV1Data s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (FwPolicyV1Data s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -443,8 +583,11 @@ instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (FwPolicyV1Data s)) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/openstack/d/identity_auth_scope_v3.html terraform documentation>
 -- for more information.
 data IdentityAuthScopeV3Data s = IdentityAuthScopeV3Data'
-    { _name :: TF.Attr s P.Text
+    { _name   :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
+    --
+    , _region :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -456,11 +599,13 @@ identityAuthScopeV3Data _name =
     TF.unsafeDataSource "openstack_identity_auth_scope_v3" TF.validator $
         IdentityAuthScopeV3Data'
             { _name = _name
+            , _region = TF.Nil
             }
 
 instance TF.IsObject (IdentityAuthScopeV3Data s) where
     toObject IdentityAuthScopeV3Data'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
 instance TF.IsValid (IdentityAuthScopeV3Data s) where
@@ -470,6 +615,11 @@ instance P.HasName (IdentityAuthScopeV3Data s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: IdentityAuthScopeV3Data s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: IdentityAuthScopeV3Data s)
+
+instance P.HasRegion (IdentityAuthScopeV3Data s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: IdentityAuthScopeV3Data s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: IdentityAuthScopeV3Data s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -512,6 +662,9 @@ data IdentityEndpointV3Data s = IdentityEndpointV3Data'
     { _interface   :: TF.Attr s P.Text
     -- ^ @interface@ - (Optional, Forces New)
     --
+    , _region      :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
     , _serviceId   :: TF.Attr s P.Text
     -- ^ @service_id@ - (Optional, Forces New)
     --
@@ -527,6 +680,7 @@ identityEndpointV3Data =
     TF.unsafeDataSource "openstack_identity_endpoint_v3" TF.validator $
         IdentityEndpointV3Data'
             { _interface = TF.value "public"
+            , _region = TF.Nil
             , _serviceId = TF.Nil
             , _serviceName = TF.Nil
             }
@@ -534,6 +688,7 @@ identityEndpointV3Data =
 instance TF.IsObject (IdentityEndpointV3Data s) where
     toObject IdentityEndpointV3Data'{..} = P.catMaybes
         [ TF.assign "interface" <$> TF.attribute _interface
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "service_id" <$> TF.attribute _serviceId
         , TF.assign "service_name" <$> TF.attribute _serviceName
         ]
@@ -545,6 +700,11 @@ instance P.HasInterface (IdentityEndpointV3Data s) (TF.Attr s P.Text) where
     interface =
         P.lens (_interface :: IdentityEndpointV3Data s -> TF.Attr s P.Text)
                (\s a -> s { _interface = a } :: IdentityEndpointV3Data s)
+
+instance P.HasRegion (IdentityEndpointV3Data s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: IdentityEndpointV3Data s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: IdentityEndpointV3Data s)
 
 instance P.HasServiceId (IdentityEndpointV3Data s) (TF.Attr s P.Text) where
     serviceId =
@@ -570,8 +730,14 @@ instance s ~ s' => P.HasComputedUrl (TF.Ref s' (IdentityEndpointV3Data s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/openstack/d/identity_group_v3.html terraform documentation>
 -- for more information.
 data IdentityGroupV3Data s = IdentityGroupV3Data'
-    { _name :: TF.Attr s P.Text
+    { _domainId :: TF.Attr s P.Text
+    -- ^ @domain_id@ - (Optional)
+    --
+    , _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
+    --
+    , _region   :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -582,21 +748,35 @@ identityGroupV3Data
 identityGroupV3Data _name =
     TF.unsafeDataSource "openstack_identity_group_v3" TF.validator $
         IdentityGroupV3Data'
-            { _name = _name
+            { _domainId = TF.Nil
+            , _name = _name
+            , _region = TF.Nil
             }
 
 instance TF.IsObject (IdentityGroupV3Data s) where
     toObject IdentityGroupV3Data'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.assign "domain_id" <$> TF.attribute _domainId
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
 instance TF.IsValid (IdentityGroupV3Data s) where
     validator = P.mempty
 
+instance P.HasDomainId (IdentityGroupV3Data s) (TF.Attr s P.Text) where
+    domainId =
+        P.lens (_domainId :: IdentityGroupV3Data s -> TF.Attr s P.Text)
+               (\s a -> s { _domainId = a } :: IdentityGroupV3Data s)
+
 instance P.HasName (IdentityGroupV3Data s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: IdentityGroupV3Data s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: IdentityGroupV3Data s)
+
+instance P.HasRegion (IdentityGroupV3Data s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: IdentityGroupV3Data s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: IdentityGroupV3Data s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (IdentityGroupV3Data s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -612,7 +792,10 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IdentityGroupV3Data s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/openstack/d/identity_project_v3.html terraform documentation>
 -- for more information.
 data IdentityProjectV3Data s = IdentityProjectV3Data'
-    { _enabled  :: TF.Attr s P.Bool
+    { _domainId :: TF.Attr s P.Text
+    -- ^ @domain_id@ - (Optional)
+    --
+    , _enabled  :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
     , _isDomain :: TF.Attr s P.Bool
@@ -624,6 +807,9 @@ data IdentityProjectV3Data s = IdentityProjectV3Data'
     , _parentId :: TF.Attr s P.Text
     -- ^ @parent_id@ - (Optional)
     --
+    , _region   :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @openstack_identity_project_v3@ datasource value.
@@ -632,22 +818,31 @@ identityProjectV3Data
 identityProjectV3Data =
     TF.unsafeDataSource "openstack_identity_project_v3" TF.validator $
         IdentityProjectV3Data'
-            { _enabled = TF.value P.True
+            { _domainId = TF.Nil
+            , _enabled = TF.value P.True
             , _isDomain = TF.value P.False
             , _name = TF.Nil
             , _parentId = TF.Nil
+            , _region = TF.Nil
             }
 
 instance TF.IsObject (IdentityProjectV3Data s) where
     toObject IdentityProjectV3Data'{..} = P.catMaybes
-        [ TF.assign "enabled" <$> TF.attribute _enabled
+        [ TF.assign "domain_id" <$> TF.attribute _domainId
+        , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "is_domain" <$> TF.attribute _isDomain
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "parent_id" <$> TF.attribute _parentId
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
 instance TF.IsValid (IdentityProjectV3Data s) where
     validator = P.mempty
+
+instance P.HasDomainId (IdentityProjectV3Data s) (TF.Attr s P.Text) where
+    domainId =
+        P.lens (_domainId :: IdentityProjectV3Data s -> TF.Attr s P.Text)
+               (\s a -> s { _domainId = a } :: IdentityProjectV3Data s)
 
 instance P.HasEnabled (IdentityProjectV3Data s) (TF.Attr s P.Bool) where
     enabled =
@@ -669,6 +864,11 @@ instance P.HasParentId (IdentityProjectV3Data s) (TF.Attr s P.Text) where
         P.lens (_parentId :: IdentityProjectV3Data s -> TF.Attr s P.Text)
                (\s a -> s { _parentId = a } :: IdentityProjectV3Data s)
 
+instance P.HasRegion (IdentityProjectV3Data s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: IdentityProjectV3Data s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: IdentityProjectV3Data s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (IdentityProjectV3Data s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -686,8 +886,14 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IdentityProjectV3Data s)) (TF
 -- See the <https://www.terraform.io/docs/providers/openstack/d/identity_role_v3.html terraform documentation>
 -- for more information.
 data IdentityRoleV3Data s = IdentityRoleV3Data'
-    { _name :: TF.Attr s P.Text
+    { _domainId :: TF.Attr s P.Text
+    -- ^ @domain_id@ - (Optional)
+    --
+    , _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
+    --
+    , _region   :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -698,21 +904,35 @@ identityRoleV3Data
 identityRoleV3Data _name =
     TF.unsafeDataSource "openstack_identity_role_v3" TF.validator $
         IdentityRoleV3Data'
-            { _name = _name
+            { _domainId = TF.Nil
+            , _name = _name
+            , _region = TF.Nil
             }
 
 instance TF.IsObject (IdentityRoleV3Data s) where
     toObject IdentityRoleV3Data'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.assign "domain_id" <$> TF.attribute _domainId
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
 instance TF.IsValid (IdentityRoleV3Data s) where
     validator = P.mempty
 
+instance P.HasDomainId (IdentityRoleV3Data s) (TF.Attr s P.Text) where
+    domainId =
+        P.lens (_domainId :: IdentityRoleV3Data s -> TF.Attr s P.Text)
+               (\s a -> s { _domainId = a } :: IdentityRoleV3Data s)
+
 instance P.HasName (IdentityRoleV3Data s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: IdentityRoleV3Data s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: IdentityRoleV3Data s)
+
+instance P.HasRegion (IdentityRoleV3Data s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: IdentityRoleV3Data s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: IdentityRoleV3Data s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (IdentityRoleV3Data s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -728,7 +948,10 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IdentityRoleV3Data s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/openstack/d/identity_user_v3.html terraform documentation>
 -- for more information.
 data IdentityUserV3Data s = IdentityUserV3Data'
-    { _enabled           :: TF.Attr s P.Bool
+    { _domainId          :: TF.Attr s P.Text
+    -- ^ @domain_id@ - (Optional)
+    --
+    , _enabled           :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
     , _idpId             :: TF.Attr s P.Text
@@ -743,6 +966,9 @@ data IdentityUserV3Data s = IdentityUserV3Data'
     , _protocolId        :: TF.Attr s P.Text
     -- ^ @protocol_id@ - (Optional)
     --
+    , _region            :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
     , _uniqueId          :: TF.Attr s P.Text
     -- ^ @unique_id@ - (Optional)
     --
@@ -754,26 +980,35 @@ identityUserV3Data
 identityUserV3Data =
     TF.unsafeDataSource "openstack_identity_user_v3" TF.validator $
         IdentityUserV3Data'
-            { _enabled = TF.value P.True
+            { _domainId = TF.Nil
+            , _enabled = TF.value P.True
             , _idpId = TF.Nil
             , _name = TF.Nil
             , _passwordExpiresAt = TF.Nil
             , _protocolId = TF.Nil
+            , _region = TF.Nil
             , _uniqueId = TF.Nil
             }
 
 instance TF.IsObject (IdentityUserV3Data s) where
     toObject IdentityUserV3Data'{..} = P.catMaybes
-        [ TF.assign "enabled" <$> TF.attribute _enabled
+        [ TF.assign "domain_id" <$> TF.attribute _domainId
+        , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "idp_id" <$> TF.attribute _idpId
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "password_expires_at" <$> TF.attribute _passwordExpiresAt
         , TF.assign "protocol_id" <$> TF.attribute _protocolId
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "unique_id" <$> TF.attribute _uniqueId
         ]
 
 instance TF.IsValid (IdentityUserV3Data s) where
     validator = P.mempty
+
+instance P.HasDomainId (IdentityUserV3Data s) (TF.Attr s P.Text) where
+    domainId =
+        P.lens (_domainId :: IdentityUserV3Data s -> TF.Attr s P.Text)
+               (\s a -> s { _domainId = a } :: IdentityUserV3Data s)
 
 instance P.HasEnabled (IdentityUserV3Data s) (TF.Attr s P.Bool) where
     enabled =
@@ -799,6 +1034,11 @@ instance P.HasProtocolId (IdentityUserV3Data s) (TF.Attr s P.Text) where
     protocolId =
         P.lens (_protocolId :: IdentityUserV3Data s -> TF.Attr s P.Text)
                (\s a -> s { _protocolId = a } :: IdentityUserV3Data s)
+
+instance P.HasRegion (IdentityUserV3Data s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: IdentityUserV3Data s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: IdentityUserV3Data s)
 
 instance P.HasUniqueId (IdentityUserV3Data s) (TF.Attr s P.Text) where
     uniqueId =
@@ -837,6 +1077,9 @@ data ImagesImageV2Data s = ImagesImageV2Data'
     , _properties    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @properties@ - (Optional, Forces New)
     --
+    , _region        :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
     , _sizeMax       :: TF.Attr s P.Int
     -- ^ @size_max@ - (Optional, Forces New)
     --
@@ -868,6 +1111,7 @@ imagesImageV2Data =
             , _name = TF.Nil
             , _owner = TF.Nil
             , _properties = TF.Nil
+            , _region = TF.Nil
             , _sizeMax = TF.Nil
             , _sizeMin = TF.Nil
             , _sortDirection = TF.value "asc"
@@ -883,6 +1127,7 @@ instance TF.IsObject (ImagesImageV2Data s) where
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "owner" <$> TF.attribute _owner
         , TF.assign "properties" <$> TF.attribute _properties
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "size_max" <$> TF.attribute _sizeMax
         , TF.assign "size_min" <$> TF.attribute _sizeMin
         , TF.assign "sort_direction" <$> TF.attribute _sortDirection
@@ -918,6 +1163,11 @@ instance P.HasProperties (ImagesImageV2Data s) (TF.Attr s (P.Map P.Text (TF.Attr
     properties =
         P.lens (_properties :: ImagesImageV2Data s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _properties = a } :: ImagesImageV2Data s)
+
+instance P.HasRegion (ImagesImageV2Data s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ImagesImageV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ImagesImageV2Data s)
 
 instance P.HasSizeMax (ImagesImageV2Data s) (TF.Attr s P.Int) where
     sizeMax =
@@ -1100,6 +1350,9 @@ data NetworkingNetworkV2Data s = NetworkingNetworkV2Data'
     , _networkId          :: TF.Attr s P.Text
     -- ^ @network_id@ - (Optional)
     --
+    , _region             :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
     , _status             :: TF.Attr s P.Text
     -- ^ @status@ - (Optional)
     --
@@ -1119,6 +1372,7 @@ networkingNetworkV2Data =
             , _matchingSubnetCidr = TF.Nil
             , _name = TF.Nil
             , _networkId = TF.Nil
+            , _region = TF.Nil
             , _status = TF.Nil
             , _tenantId = TF.Nil
             }
@@ -1129,6 +1383,7 @@ instance TF.IsObject (NetworkingNetworkV2Data s) where
         , TF.assign "matching_subnet_cidr" <$> TF.attribute _matchingSubnetCidr
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network_id" <$> TF.attribute _networkId
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "status" <$> TF.attribute _status
         , TF.assign "tenant_id" <$> TF.attribute _tenantId
         ]
@@ -1155,6 +1410,11 @@ instance P.HasNetworkId (NetworkingNetworkV2Data s) (TF.Attr s P.Text) where
     networkId =
         P.lens (_networkId :: NetworkingNetworkV2Data s -> TF.Attr s P.Text)
                (\s a -> s { _networkId = a } :: NetworkingNetworkV2Data s)
+
+instance P.HasRegion (NetworkingNetworkV2Data s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: NetworkingNetworkV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: NetworkingNetworkV2Data s)
 
 instance P.HasStatus (NetworkingNetworkV2Data s) (TF.Attr s P.Text) where
     status =
@@ -1189,8 +1449,14 @@ data NetworkingSecgroupV2Data s = NetworkingSecgroupV2Data'
     { _name       :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
+    , _region     :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
     , _secgroupId :: TF.Attr s P.Text
     -- ^ @secgroup_id@ - (Optional)
+    --
+    , _tenantId   :: TF.Attr s P.Text
+    -- ^ @tenant_id@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1201,13 +1467,17 @@ networkingSecgroupV2Data =
     TF.unsafeDataSource "openstack_networking_secgroup_v2" TF.validator $
         NetworkingSecgroupV2Data'
             { _name = TF.Nil
+            , _region = TF.Nil
             , _secgroupId = TF.Nil
+            , _tenantId = TF.Nil
             }
 
 instance TF.IsObject (NetworkingSecgroupV2Data s) where
     toObject NetworkingSecgroupV2Data'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "secgroup_id" <$> TF.attribute _secgroupId
+        , TF.assign "tenant_id" <$> TF.attribute _tenantId
         ]
 
 instance TF.IsValid (NetworkingSecgroupV2Data s) where
@@ -1218,10 +1488,20 @@ instance P.HasName (NetworkingSecgroupV2Data s) (TF.Attr s P.Text) where
         P.lens (_name :: NetworkingSecgroupV2Data s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: NetworkingSecgroupV2Data s)
 
+instance P.HasRegion (NetworkingSecgroupV2Data s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: NetworkingSecgroupV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: NetworkingSecgroupV2Data s)
+
 instance P.HasSecgroupId (NetworkingSecgroupV2Data s) (TF.Attr s P.Text) where
     secgroupId =
         P.lens (_secgroupId :: NetworkingSecgroupV2Data s -> TF.Attr s P.Text)
                (\s a -> s { _secgroupId = a } :: NetworkingSecgroupV2Data s)
+
+instance P.HasTenantId (NetworkingSecgroupV2Data s) (TF.Attr s P.Text) where
+    tenantId =
+        P.lens (_tenantId :: NetworkingSecgroupV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _tenantId = a } :: NetworkingSecgroupV2Data s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkingSecgroupV2Data s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1237,18 +1517,52 @@ instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (NetworkingSecgroupV2Data s)
 -- See the <https://www.terraform.io/docs/providers/openstack/d/networking_subnet_v2.html terraform documentation>
 -- for more information.
 data NetworkingSubnetV2Data s = NetworkingSubnetV2Data'
-    { _dhcpDisabled :: TF.Attr s P.Bool
+    { _cidr            :: TF.Attr s P.Text
+    -- ^ @cidr@ - (Optional)
+    --
+    , _dhcpDisabled    :: TF.Attr s P.Bool
     -- ^ @dhcp_disabled@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'dhcpEnabled'
-    , _dhcpEnabled  :: TF.Attr s P.Bool
+    , _dhcpEnabled     :: TF.Attr s P.Bool
     -- ^ @dhcp_enabled@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'dhcpDisabled'
+    , _gatewayIp       :: TF.Attr s P.Text
+    -- ^ @gateway_ip@ - (Optional)
+    --
+    , _ipVersion       :: TF.Attr s P.Int
+    -- ^ @ip_version@ - (Optional)
+    --
+    , _ipv6AddressMode :: TF.Attr s P.Text
+    -- ^ @ipv6_address_mode@ - (Optional, Forces New)
+    --
+    , _ipv6RaMode      :: TF.Attr s P.Text
+    -- ^ @ipv6_ra_mode@ - (Optional, Forces New)
+    --
+    , _name            :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _networkId       :: TF.Attr s P.Text
+    -- ^ @network_id@ - (Optional)
+    --
+    , _region          :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
+    , _subnetId        :: TF.Attr s P.Text
+    -- ^ @subnet_id@ - (Optional)
+    --
+    , _subnetpoolId    :: TF.Attr s P.Text
+    -- ^ @subnetpool_id@ - (Optional)
+    --
+    , _tenantId        :: TF.Attr s P.Text
+    -- ^ @tenant_id@ - (Optional)
+    -- The ID of the Tenant (Identity v2) or Project (Identity v3) to login with.
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @openstack_networking_subnet_v2@ datasource value.
@@ -1257,14 +1571,36 @@ networkingSubnetV2Data
 networkingSubnetV2Data =
     TF.unsafeDataSource "openstack_networking_subnet_v2" TF.validator $
         NetworkingSubnetV2Data'
-            { _dhcpDisabled = TF.Nil
+            { _cidr = TF.Nil
+            , _dhcpDisabled = TF.Nil
             , _dhcpEnabled = TF.Nil
+            , _gatewayIp = TF.Nil
+            , _ipVersion = TF.Nil
+            , _ipv6AddressMode = TF.Nil
+            , _ipv6RaMode = TF.Nil
+            , _name = TF.Nil
+            , _networkId = TF.Nil
+            , _region = TF.Nil
+            , _subnetId = TF.Nil
+            , _subnetpoolId = TF.Nil
+            , _tenantId = TF.Nil
             }
 
 instance TF.IsObject (NetworkingSubnetV2Data s) where
     toObject NetworkingSubnetV2Data'{..} = P.catMaybes
-        [ TF.assign "dhcp_disabled" <$> TF.attribute _dhcpDisabled
+        [ TF.assign "cidr" <$> TF.attribute _cidr
+        , TF.assign "dhcp_disabled" <$> TF.attribute _dhcpDisabled
         , TF.assign "dhcp_enabled" <$> TF.attribute _dhcpEnabled
+        , TF.assign "gateway_ip" <$> TF.attribute _gatewayIp
+        , TF.assign "ip_version" <$> TF.attribute _ipVersion
+        , TF.assign "ipv6_address_mode" <$> TF.attribute _ipv6AddressMode
+        , TF.assign "ipv6_ra_mode" <$> TF.attribute _ipv6RaMode
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_id" <$> TF.attribute _networkId
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "subnet_id" <$> TF.attribute _subnetId
+        , TF.assign "subnetpool_id" <$> TF.attribute _subnetpoolId
+        , TF.assign "tenant_id" <$> TF.attribute _tenantId
         ]
 
 instance TF.IsValid (NetworkingSubnetV2Data s) where
@@ -1281,6 +1617,11 @@ instance TF.IsValid (NetworkingSubnetV2Data s) where
                             ])
         ])
 
+instance P.HasCidr (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
+    cidr =
+        P.lens (_cidr :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _cidr = a } :: NetworkingSubnetV2Data s)
+
 instance P.HasDhcpDisabled (NetworkingSubnetV2Data s) (TF.Attr s P.Bool) where
     dhcpDisabled =
         P.lens (_dhcpDisabled :: NetworkingSubnetV2Data s -> TF.Attr s P.Bool)
@@ -1290,6 +1631,56 @@ instance P.HasDhcpEnabled (NetworkingSubnetV2Data s) (TF.Attr s P.Bool) where
     dhcpEnabled =
         P.lens (_dhcpEnabled :: NetworkingSubnetV2Data s -> TF.Attr s P.Bool)
                (\s a -> s { _dhcpEnabled = a } :: NetworkingSubnetV2Data s)
+
+instance P.HasGatewayIp (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
+    gatewayIp =
+        P.lens (_gatewayIp :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _gatewayIp = a } :: NetworkingSubnetV2Data s)
+
+instance P.HasIpVersion (NetworkingSubnetV2Data s) (TF.Attr s P.Int) where
+    ipVersion =
+        P.lens (_ipVersion :: NetworkingSubnetV2Data s -> TF.Attr s P.Int)
+               (\s a -> s { _ipVersion = a } :: NetworkingSubnetV2Data s)
+
+instance P.HasIpv6AddressMode (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
+    ipv6AddressMode =
+        P.lens (_ipv6AddressMode :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _ipv6AddressMode = a } :: NetworkingSubnetV2Data s)
+
+instance P.HasIpv6RaMode (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
+    ipv6RaMode =
+        P.lens (_ipv6RaMode :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _ipv6RaMode = a } :: NetworkingSubnetV2Data s)
+
+instance P.HasName (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: NetworkingSubnetV2Data s)
+
+instance P.HasNetworkId (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
+    networkId =
+        P.lens (_networkId :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _networkId = a } :: NetworkingSubnetV2Data s)
+
+instance P.HasRegion (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: NetworkingSubnetV2Data s)
+
+instance P.HasSubnetId (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
+    subnetId =
+        P.lens (_subnetId :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _subnetId = a } :: NetworkingSubnetV2Data s)
+
+instance P.HasSubnetpoolId (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
+    subnetpoolId =
+        P.lens (_subnetpoolId :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _subnetpoolId = a } :: NetworkingSubnetV2Data s)
+
+instance P.HasTenantId (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
+    tenantId =
+        P.lens (_tenantId :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _tenantId = a } :: NetworkingSubnetV2Data s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1344,7 +1735,43 @@ instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (NetworkingSubnetV2Data s)) 
 -- See the <https://www.terraform.io/docs/providers/openstack/d/networking_subnetpool_v2.html terraform documentation>
 -- for more information.
 data NetworkingSubnetpoolV2Data s = NetworkingSubnetpoolV2Data'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _addressScopeId   :: TF.Attr s P.Text
+    -- ^ @address_scope_id@ - (Optional)
+    --
+    , _defaultPrefixlen :: TF.Attr s P.Int
+    -- ^ @default_prefixlen@ - (Optional)
+    --
+    , _defaultQuota     :: TF.Attr s P.Int
+    -- ^ @default_quota@ - (Optional)
+    --
+    , _description      :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _ipVersion        :: TF.Attr s P.Int
+    -- ^ @ip_version@ - (Optional)
+    --
+    , _isDefault        :: TF.Attr s P.Bool
+    -- ^ @is_default@ - (Optional)
+    --
+    , _maxPrefixlen     :: TF.Attr s P.Int
+    -- ^ @max_prefixlen@ - (Optional)
+    --
+    , _minPrefixlen     :: TF.Attr s P.Int
+    -- ^ @min_prefixlen@ - (Optional)
+    --
+    , _name             :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _projectId        :: TF.Attr s P.Text
+    -- ^ @project_id@ - (Optional, Forces New)
+    --
+    , _region           :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
+    , _shared           :: TF.Attr s P.Bool
+    -- ^ @shared@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @openstack_networking_subnetpool_v2@ datasource value.
 networkingSubnetpoolV2Data
@@ -1352,12 +1779,98 @@ networkingSubnetpoolV2Data
 networkingSubnetpoolV2Data =
     TF.unsafeDataSource "openstack_networking_subnetpool_v2" TF.validator $
         NetworkingSubnetpoolV2Data'
+            { _addressScopeId = TF.Nil
+            , _defaultPrefixlen = TF.Nil
+            , _defaultQuota = TF.Nil
+            , _description = TF.Nil
+            , _ipVersion = TF.Nil
+            , _isDefault = TF.Nil
+            , _maxPrefixlen = TF.Nil
+            , _minPrefixlen = TF.Nil
+            , _name = TF.Nil
+            , _projectId = TF.Nil
+            , _region = TF.Nil
+            , _shared = TF.Nil
+            }
 
 instance TF.IsObject (NetworkingSubnetpoolV2Data s) where
-    toObject _ = []
+    toObject NetworkingSubnetpoolV2Data'{..} = P.catMaybes
+        [ TF.assign "address_scope_id" <$> TF.attribute _addressScopeId
+        , TF.assign "default_prefixlen" <$> TF.attribute _defaultPrefixlen
+        , TF.assign "default_quota" <$> TF.attribute _defaultQuota
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "ip_version" <$> TF.attribute _ipVersion
+        , TF.assign "is_default" <$> TF.attribute _isDefault
+        , TF.assign "max_prefixlen" <$> TF.attribute _maxPrefixlen
+        , TF.assign "min_prefixlen" <$> TF.attribute _minPrefixlen
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project_id" <$> TF.attribute _projectId
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "shared" <$> TF.attribute _shared
+        ]
 
 instance TF.IsValid (NetworkingSubnetpoolV2Data s) where
     validator = P.mempty
+
+instance P.HasAddressScopeId (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Text) where
+    addressScopeId =
+        P.lens (_addressScopeId :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _addressScopeId = a } :: NetworkingSubnetpoolV2Data s)
+
+instance P.HasDefaultPrefixlen (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Int) where
+    defaultPrefixlen =
+        P.lens (_defaultPrefixlen :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Int)
+               (\s a -> s { _defaultPrefixlen = a } :: NetworkingSubnetpoolV2Data s)
+
+instance P.HasDefaultQuota (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Int) where
+    defaultQuota =
+        P.lens (_defaultQuota :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Int)
+               (\s a -> s { _defaultQuota = a } :: NetworkingSubnetpoolV2Data s)
+
+instance P.HasDescription (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: NetworkingSubnetpoolV2Data s)
+
+instance P.HasIpVersion (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Int) where
+    ipVersion =
+        P.lens (_ipVersion :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Int)
+               (\s a -> s { _ipVersion = a } :: NetworkingSubnetpoolV2Data s)
+
+instance P.HasIsDefault (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Bool) where
+    isDefault =
+        P.lens (_isDefault :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Bool)
+               (\s a -> s { _isDefault = a } :: NetworkingSubnetpoolV2Data s)
+
+instance P.HasMaxPrefixlen (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Int) where
+    maxPrefixlen =
+        P.lens (_maxPrefixlen :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Int)
+               (\s a -> s { _maxPrefixlen = a } :: NetworkingSubnetpoolV2Data s)
+
+instance P.HasMinPrefixlen (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Int) where
+    minPrefixlen =
+        P.lens (_minPrefixlen :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Int)
+               (\s a -> s { _minPrefixlen = a } :: NetworkingSubnetpoolV2Data s)
+
+instance P.HasName (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: NetworkingSubnetpoolV2Data s)
+
+instance P.HasProjectId (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Text) where
+    projectId =
+        P.lens (_projectId :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _projectId = a } :: NetworkingSubnetpoolV2Data s)
+
+instance P.HasRegion (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: NetworkingSubnetpoolV2Data s)
+
+instance P.HasShared (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Bool) where
+    shared =
+        P.lens (_shared :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Bool)
+               (\s a -> s { _shared = a } :: NetworkingSubnetpoolV2Data s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"

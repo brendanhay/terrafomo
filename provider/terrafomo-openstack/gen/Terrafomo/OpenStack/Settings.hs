@@ -469,20 +469,52 @@ instance P.HasVersion (DatastoreSetting s) (TF.Attr s P.Text) where
 
 -- | @dpd@ nested settings.
 data DpdSetting s = DpdSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _action   :: TF.Attr s P.Text
+    -- ^ @action@ - (Optional)
+    --
+    , _interval :: TF.Attr s P.Int
+    -- ^ @interval@ - (Optional)
+    --
+    , _timeout  :: TF.Attr s P.Int
+    -- ^ @timeout@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @dpd@ settings value.
 dpdSetting
     :: DpdSetting s
 dpdSetting =
     DpdSetting'
+        { _action = TF.Nil
+        , _interval = TF.Nil
+        , _timeout = TF.Nil
+        }
 
 instance TF.IsValue  (DpdSetting s)
 instance TF.IsObject (DpdSetting s) where
-    toObject DpdSetting' = []
+    toObject DpdSetting'{..} = P.catMaybes
+        [ TF.assign "action" <$> TF.attribute _action
+        , TF.assign "interval" <$> TF.attribute _interval
+        , TF.assign "timeout" <$> TF.attribute _timeout
+        ]
 
 instance TF.IsValid (DpdSetting s) where
     validator = P.mempty
+
+instance P.HasAction (DpdSetting s) (TF.Attr s P.Text) where
+    action =
+        P.lens (_action :: DpdSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _action = a } :: DpdSetting s)
+
+instance P.HasInterval (DpdSetting s) (TF.Attr s P.Int) where
+    interval =
+        P.lens (_interval :: DpdSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _interval = a } :: DpdSetting s)
+
+instance P.HasTimeout (DpdSetting s) (TF.Attr s P.Int) where
+    timeout =
+        P.lens (_timeout :: DpdSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _timeout = a } :: DpdSetting s)
 
 instance s ~ s' => P.HasComputedAction (TF.Ref s' (DpdSetting s)) (TF.Attr s P.Text) where
     computedAction x = TF.compute (TF.refKey x) "action"
@@ -621,20 +653,42 @@ instance s ~ s' => P.HasComputedNextHop (TF.Ref s' (HostRoutesSetting s)) (TF.At
 
 -- | @lifetime@ nested settings.
 data LifetimeSetting s = LifetimeSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _units :: TF.Attr s P.Text
+    -- ^ @units@ - (Optional)
+    --
+    , _value :: TF.Attr s P.Int
+    -- ^ @value@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @lifetime@ settings value.
 lifetimeSetting
     :: LifetimeSetting s
 lifetimeSetting =
     LifetimeSetting'
+        { _units = TF.Nil
+        , _value = TF.Nil
+        }
 
 instance TF.IsValue  (LifetimeSetting s)
 instance TF.IsObject (LifetimeSetting s) where
-    toObject LifetimeSetting' = []
+    toObject LifetimeSetting'{..} = P.catMaybes
+        [ TF.assign "units" <$> TF.attribute _units
+        , TF.assign "value" <$> TF.attribute _value
+        ]
 
 instance TF.IsValid (LifetimeSetting s) where
     validator = P.mempty
+
+instance P.HasUnits (LifetimeSetting s) (TF.Attr s P.Text) where
+    units =
+        P.lens (_units :: LifetimeSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _units = a } :: LifetimeSetting s)
+
+instance P.HasValue (LifetimeSetting s) (TF.Attr s P.Int) where
+    value =
+        P.lens (_value :: LifetimeSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _value = a } :: LifetimeSetting s)
 
 instance s ~ s' => P.HasComputedUnits (TF.Ref s' (LifetimeSetting s)) (TF.Attr s P.Text) where
     computedUnits x = TF.compute (TF.refKey x) "units"
@@ -683,6 +737,12 @@ data NetworkSetting s = NetworkSetting'
     , _fixedIpV6     :: TF.Attr s P.Text
     -- ^ @fixed_ip_v6@ - (Optional, Forces New)
     --
+    , _floatingIp    :: TF.Attr s P.Text
+    -- ^ @floating_ip@ - (Optional)
+    --
+    , _name          :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
     , _port          :: TF.Attr s P.Text
     -- ^ @port@ - (Optional, Forces New)
     --
@@ -699,6 +759,8 @@ networkSetting =
         { _accessNetwork = TF.value P.False
         , _fixedIpV4 = TF.Nil
         , _fixedIpV6 = TF.Nil
+        , _floatingIp = TF.Nil
+        , _name = TF.Nil
         , _port = TF.Nil
         , _uuid = TF.Nil
         }
@@ -709,6 +771,8 @@ instance TF.IsObject (NetworkSetting s) where
         [ TF.assign "access_network" <$> TF.attribute _accessNetwork
         , TF.assign "fixed_ip_v4" <$> TF.attribute _fixedIpV4
         , TF.assign "fixed_ip_v6" <$> TF.attribute _fixedIpV6
+        , TF.assign "floating_ip" <$> TF.attribute _floatingIp
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "port" <$> TF.attribute _port
         , TF.assign "uuid" <$> TF.attribute _uuid
         ]
@@ -730,6 +794,16 @@ instance P.HasFixedIpV6 (NetworkSetting s) (TF.Attr s P.Text) where
     fixedIpV6 =
         P.lens (_fixedIpV6 :: NetworkSetting s -> TF.Attr s P.Text)
                (\s a -> s { _fixedIpV6 = a } :: NetworkSetting s)
+
+instance P.HasFloatingIp (NetworkSetting s) (TF.Attr s P.Text) where
+    floatingIp =
+        P.lens (_floatingIp :: NetworkSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _floatingIp = a } :: NetworkSetting s)
+
+instance P.HasName (NetworkSetting s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: NetworkSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: NetworkSetting s)
 
 instance P.HasPort (NetworkSetting s) (TF.Attr s P.Text) where
     port =
@@ -1180,7 +1254,13 @@ instance P.HasSetRouterGatewayAfterCreate (VendorOptionsSetting s) (TF.Attr s P.
 
 -- | @volume@ nested settings.
 data VolumeSetting s = VolumeSetting'
-    { _volumeId :: TF.Attr s P.Text
+    { _device   :: TF.Attr s P.Text
+    -- ^ @device@ - (Optional)
+    --
+    , _id       :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
+    , _volumeId :: TF.Attr s P.Text
     -- ^ @volume_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1191,17 +1271,31 @@ volumeSetting
     -> VolumeSetting s
 volumeSetting _volumeId =
     VolumeSetting'
-        { _volumeId = _volumeId
+        { _device = TF.Nil
+        , _id = TF.Nil
+        , _volumeId = _volumeId
         }
 
 instance TF.IsValue  (VolumeSetting s)
 instance TF.IsObject (VolumeSetting s) where
     toObject VolumeSetting'{..} = P.catMaybes
-        [ TF.assign "volume_id" <$> TF.attribute _volumeId
+        [ TF.assign "device" <$> TF.attribute _device
+        , TF.assign "id" <$> TF.attribute _id
+        , TF.assign "volume_id" <$> TF.attribute _volumeId
         ]
 
 instance TF.IsValid (VolumeSetting s) where
     validator = P.mempty
+
+instance P.HasDevice (VolumeSetting s) (TF.Attr s P.Text) where
+    device =
+        P.lens (_device :: VolumeSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _device = a } :: VolumeSetting s)
+
+instance P.HasId (VolumeSetting s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: VolumeSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: VolumeSetting s)
 
 instance P.HasVolumeId (VolumeSetting s) (TF.Attr s P.Text) where
     volumeId =
