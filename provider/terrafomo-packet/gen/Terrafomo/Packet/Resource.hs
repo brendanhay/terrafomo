@@ -17,7 +17,6 @@
 --
 module Terrafomo.Packet.Resource
     (
-    -- * Resource Datatypes
     -- ** packet_device
       DeviceResource (..)
     , deviceResource
@@ -119,6 +118,7 @@ data DeviceResource s = DeviceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @packet_device@ resource value.
 deviceResource
     :: TF.Attr s P.Text -- ^ @billing_cycle@ - 'P.billingCycle'
     -> TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
@@ -272,6 +272,7 @@ data IpAttachmentResource s = IpAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @packet_ip_attachment@ resource value.
 ipAttachmentResource
     :: TF.Attr s P.Text -- ^ @device_id@ - 'P.deviceId'
     -> TF.Attr s P.Text -- ^ @cidr_notation@ - 'P.cidrNotation'
@@ -354,6 +355,7 @@ data OrganizationResource s = OrganizationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @packet_organization@ resource value.
 organizationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (OrganizationResource s)
@@ -423,6 +425,7 @@ data ProjectResource s = ProjectResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @packet_project@ resource value.
 projectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ProjectResource s)
@@ -476,6 +479,7 @@ data ReservedIpBlockResource s = ReservedIpBlockResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @packet_reserved_ip_block@ resource value.
 reservedIpBlockResource
     :: TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
@@ -560,6 +564,7 @@ data SshKeyResource s = SshKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @packet_ssh_key@ resource value.
 sshKeyResource
     :: TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -630,6 +635,7 @@ data VolumeResource s = VolumeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @packet_volume@ resource value.
 volumeResource
     :: TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
@@ -731,6 +737,7 @@ data VolumeAttachmentResource s = VolumeAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @packet_volume_attachment@ resource value.
 volumeAttachmentResource
     :: TF.Attr s P.Text -- ^ @device_id@ - 'P.deviceId'
     -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'

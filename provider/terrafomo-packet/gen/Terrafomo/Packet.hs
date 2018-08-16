@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Packet
-    ( module Terrafomo.Packet.DataSource
-    , module Terrafomo.Packet.Lens
-    , module Terrafomo.Packet.Provider
-    , module Terrafomo.Packet.Resource
-    , module Terrafomo.Packet.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Packet.Provider
+
+    -- * Custom Types
     , module Terrafomo.Packet.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.Packet.DataSource
+
+    -- * Resources
+    , module Terrafomo.Packet.Resource
+
+    -- * Settings
+    , module Terrafomo.Packet.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Packet.Lens
     ) where
 
 import Terrafomo.Packet.DataSource

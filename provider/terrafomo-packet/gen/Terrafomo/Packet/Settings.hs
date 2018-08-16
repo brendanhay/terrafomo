@@ -17,7 +17,6 @@
 --
 module Terrafomo.Packet.Settings
     (
-    -- * Settings Datatypes
     -- ** attachments
       AttachmentsSetting (..)
     , newAttachmentsSetting
@@ -57,6 +56,7 @@ import qualified Terrafomo.Validator    as TF
 data AttachmentsSetting s = AttachmentsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @attachments@ settings value.
 newAttachmentsSetting
     :: AttachmentsSetting s
 newAttachmentsSetting =
@@ -76,6 +76,7 @@ instance s ~ s' => P.HasComputedHref (TF.Ref s' (AttachmentsSetting s)) (TF.Attr
 data NetworkSetting s = NetworkSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @network@ settings value.
 newNetworkSetting
     :: NetworkSetting s
 newNetworkSetting =
@@ -113,6 +114,7 @@ data SnapshotPoliciesSetting s = SnapshotPoliciesSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @snapshot_policies@ settings value.
 newSnapshotPoliciesSetting
     :: TF.Attr s P.Int -- ^ @snapshot_count@ - 'P.snapshotCount'
     -> TF.Attr s P.Text -- ^ @snapshot_frequency@ - 'P.snapshotFrequency'

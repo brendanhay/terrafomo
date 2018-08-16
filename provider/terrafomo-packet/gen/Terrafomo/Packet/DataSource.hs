@@ -17,7 +17,6 @@
 --
 module Terrafomo.Packet.DataSource
     (
-    -- * DataSource Datatypes
     -- ** packet_precreated_ip_block
       PrecreatedIpBlockData (..)
     , precreatedIpBlockData
@@ -67,6 +66,7 @@ data PrecreatedIpBlockData s = PrecreatedIpBlockData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @packet_precreated_ip_block@ datasource value.
 precreatedIpBlockData
     :: TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
     -> TF.Attr s P.Int -- ^ @address_family@ - 'P.addressFamily'
