@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newCloudinitConfigPart",
-                "name": "CloudinitConfigPart'"
+                "smart": "newPartSetting",
+                "name": "PartSetting'"
             },
             "arguments": [
                 {
@@ -15,6 +15,7 @@
                     "encoder": "TF.assign \"content\" <$> TF.attribute",
                     "name": "_content",
                     "method": "content",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasContent",
@@ -31,6 +32,7 @@
                     "encoder": "TF.assign \"content_type\" <$> TF.attribute",
                     "name": "_contentType",
                     "method": "contentType",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasContentType",
@@ -47,6 +49,7 @@
                     "encoder": "TF.assign \"filename\" <$> TF.attribute",
                     "name": "_filename",
                     "method": "filename",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFilename",
@@ -63,6 +66,7 @@
                     "encoder": "TF.assign \"merge_type\" <$> TF.attribute",
                     "name": "_mergeType",
                     "method": "mergeType",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasMergeType",
@@ -71,7 +75,8 @@
                     "original": "merge_type"
                 }
             ],
-            "name": "CloudinitConfigPart",
+            "key": "template_cloudinit_config.part",
+            "name": "PartSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -84,6 +89,7 @@
                     "encoder": "TF.assign \"content\" <$> TF.attribute",
                     "name": "_content",
                     "method": "content",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasContent",
@@ -93,8 +99,8 @@
                 }
             ],
             "conflicts": [],
-            "type": "CloudinitConfigPart s",
-            "original": "cloudinit_config_part"
+            "type": "PartSetting s",
+            "original": "part"
         }
     ],
     "url": "https://www.terraform.io/docs/providers/template/index.html",
@@ -114,6 +120,7 @@
                     "encoder": "TF.assign \"base64_encode\" <$> TF.attribute",
                     "name": "_base64Encode",
                     "method": "base64Encode",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasBase64Encode",
@@ -130,6 +137,7 @@
                     "encoder": "TF.assign \"gzip\" <$> TF.attribute",
                     "name": "_gzip",
                     "method": "gzip",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasGzip",
@@ -146,15 +154,17 @@
                     "encoder": "TF.assign \"part\" <$> TF.attribute",
                     "name": "_part",
                     "method": "part",
+                    "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (CloudinitConfigPart s)]",
+                    "type": "TF.Attr s [TF.Attr s (PartSetting s)]",
                     "class": "HasPart",
-                    "validate": true,
+                    "validate": false,
                     "optional": false,
                     "original": "part"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/template/d/cloudinit_config.html",
+            "key": "template_cloudinit_config",
             "name": "CloudinitConfigData",
             "threaded": true,
             "attributes": [
@@ -167,6 +177,7 @@
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
                     "name": "_computedId",
                     "method": "computedId",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
@@ -185,6 +196,7 @@
                     "encoder": "TF.assign \"rendered\" <$> TF.attribute",
                     "name": "_computedRendered",
                     "method": "computedRendered",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRendered",
@@ -203,10 +215,11 @@
                     "encoder": "TF.assign \"part\" <$> TF.attribute",
                     "name": "_part",
                     "method": "part",
+                    "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (CloudinitConfigPart s)]",
+                    "type": "TF.Attr s [TF.Attr s (PartSetting s)]",
                     "class": "HasPart",
-                    "validate": true,
+                    "validate": false,
                     "optional": false,
                     "original": "part"
                 }
@@ -232,6 +245,7 @@
                     "encoder": "TF.assign \"template\" <$> TF.attribute",
                     "name": "_template",
                     "method": "template",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTemplate",
@@ -250,8 +264,9 @@
                     "encoder": "TF.assign \"vars\" <$> TF.attribute",
                     "name": "_vars",
                     "method": "vars",
+                    "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
                     "class": "HasVars",
                     "validate": false,
                     "optional": true,
@@ -259,6 +274,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/template/d/file.html",
+            "key": "template_file",
             "name": "FileData",
             "threaded": true,
             "attributes": [
@@ -271,6 +287,7 @@
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
                     "name": "_computedId",
                     "method": "computedId",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
@@ -289,6 +306,7 @@
                     "encoder": "TF.assign \"rendered\" <$> TF.attribute",
                     "name": "_computedRendered",
                     "method": "computedRendered",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRendered",
@@ -319,6 +337,7 @@
                     "encoder": "TF.assign \"base64_encode\" <$> TF.attribute",
                     "name": "_base64Encode",
                     "method": "base64Encode",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasBase64Encode",
@@ -335,6 +354,7 @@
                     "encoder": "TF.assign \"gzip\" <$> TF.attribute",
                     "name": "_gzip",
                     "method": "gzip",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasGzip",
@@ -351,15 +371,17 @@
                     "encoder": "TF.assign \"part\" <$> TF.attribute",
                     "name": "_part",
                     "method": "part",
+                    "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (CloudinitConfigPart s)]",
+                    "type": "TF.Attr s [TF.Attr s (PartSetting s)]",
                     "class": "HasPart",
-                    "validate": true,
+                    "validate": false,
                     "optional": false,
                     "original": "part"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/template/r/cloudinit_config.html",
+            "key": "template_cloudinit_config",
             "name": "CloudinitConfigResource",
             "threaded": true,
             "attributes": [
@@ -374,6 +396,7 @@
                     "encoder": "TF.assign \"rendered\" <$> TF.attribute",
                     "name": "_computedRendered",
                     "method": "computedRendered",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRendered",
@@ -392,10 +415,11 @@
                     "encoder": "TF.assign \"part\" <$> TF.attribute",
                     "name": "_part",
                     "method": "part",
+                    "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (CloudinitConfigPart s)]",
+                    "type": "TF.Attr s [TF.Attr s (PartSetting s)]",
                     "class": "HasPart",
-                    "validate": true,
+                    "validate": false,
                     "optional": false,
                     "original": "part"
                 }
@@ -421,6 +445,7 @@
                     "encoder": "TF.assign \"destination_dir\" <$> TF.attribute",
                     "name": "_destinationDir",
                     "method": "destinationDir",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDestinationDir",
@@ -439,6 +464,7 @@
                     "encoder": "TF.assign \"source_dir\" <$> TF.attribute",
                     "name": "_sourceDir",
                     "method": "sourceDir",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSourceDir",
@@ -457,8 +483,9 @@
                     "encoder": "TF.assign \"vars\" <$> TF.attribute",
                     "name": "_vars",
                     "method": "vars",
+                    "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
                     "class": "HasVars",
                     "validate": false,
                     "optional": true,
@@ -466,6 +493,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/template/r/dir.html",
+            "key": "template_dir",
             "name": "DirResource",
             "threaded": true,
             "attributes": [],
@@ -481,6 +509,7 @@
                     "encoder": "TF.assign \"destination_dir\" <$> TF.attribute",
                     "name": "_destinationDir",
                     "method": "destinationDir",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDestinationDir",
@@ -499,6 +528,7 @@
                     "encoder": "TF.assign \"source_dir\" <$> TF.attribute",
                     "name": "_sourceDir",
                     "method": "sourceDir",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSourceDir",
@@ -528,6 +558,7 @@
                     "encoder": "TF.assign \"template\" <$> TF.attribute",
                     "name": "_template",
                     "method": "template",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTemplate",
@@ -546,8 +577,9 @@
                     "encoder": "TF.assign \"vars\" <$> TF.attribute",
                     "name": "_vars",
                     "method": "vars",
+                    "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
                     "class": "HasVars",
                     "validate": false,
                     "optional": true,
@@ -555,6 +587,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/template/r/file.html",
+            "key": "template_file",
             "name": "FileResource",
             "threaded": true,
             "attributes": [
@@ -569,6 +602,7 @@
                     "encoder": "TF.assign \"rendered\" <$> TF.attribute",
                     "name": "_computedRendered",
                     "method": "computedRendered",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRendered",
@@ -589,6 +623,7 @@
             "name": "Provider'"
         },
         "arguments": [],
+        "key": "provider",
         "name": "Provider",
         "threaded": false,
         "attributes": [],
@@ -598,14 +633,15 @@
         "original": "provider"
     },
     "dependencies": [
+        "aeson",
         "base",
-        "unordered-containers",
-        "text",
+        "containers",
+        "microlens",
         "terrafomo",
-        "hashable",
-        "microlens"
+        "text"
     ],
     "name": "Template",
     "package": "terrafomo-builtins",
+    "primitives": [],
     "original": "template"
 }
