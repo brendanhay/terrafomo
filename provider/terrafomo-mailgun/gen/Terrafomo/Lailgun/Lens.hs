@@ -20,6 +20,7 @@ module Terrafomo.Lailgun.Lens
     , HasSmtpPassword (..)
 
     -- ** Computed Attributes
+    , HasComputedId (..)
     , HasComputedName (..)
     , HasComputedPriority (..)
     , HasComputedReceivingRecords (..)
@@ -54,6 +55,9 @@ class HasSmtpPassword a b | a -> b where
 
 instance HasSmtpPassword a b => HasSmtpPassword (TF.Schema l p a) b where
     smtpPassword = TF.configuration . smtpPassword
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedName a b | a -> b where
     computedName :: a -> b

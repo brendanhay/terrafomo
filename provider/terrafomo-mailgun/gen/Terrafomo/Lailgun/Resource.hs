@@ -91,6 +91,9 @@ instance P.HasSmtpPassword (DomainResource s) (TF.Attr s P.Text) where
         P.lens (_smtpPassword :: DomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _smtpPassword = a } :: DomainResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedReceivingRecords (TF.Ref s' (DomainResource s)) (TF.Attr s [TF.Attr s (ReceivingRecordsSetting s)]) where
     computedReceivingRecords x = TF.compute (TF.refKey x) "receiving_records"
 
