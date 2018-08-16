@@ -171,10 +171,10 @@ data TermSetting s = TermSetting'
 
 newTermSetting
     :: TF.Attr s P.Int -- ^ @duration@ - 'P.duration'
-    -> TF.Attr s P.Double -- ^ @threshold@ - 'P.threshold'
     -> TF.Attr s P.Text -- ^ @time_function@ - 'P.timeFunction'
+    -> TF.Attr s P.Double -- ^ @threshold@ - 'P.threshold'
     -> TermSetting s
-newTermSetting _duration _threshold _timeFunction =
+newTermSetting _duration _timeFunction _threshold =
     TermSetting'
         { _duration = _duration
         , _operator = TF.value "equal"

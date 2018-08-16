@@ -171,13 +171,13 @@ data AlertConditionResource s = AlertConditionResource'
 
 alertConditionResource
     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Int)) -- ^ @entities@ - 'P.entities'
+    -> TF.Attr s P.Int -- ^ @policy_id@ - 'P.policyId'
     -> TF.Attr s P.Text -- ^ @metric@ - 'P.metric'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @policy_id@ - 'P.policyId'
     -> TF.Attr s (P.NonEmpty (TF.Attr s (TermSetting s))) -- ^ @term@ - 'P.term'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (AlertConditionResource s)
-alertConditionResource _entities _metric _name _policyId _term _type' =
+alertConditionResource _entities _policyId _metric _name _term _type' =
     TF.unsafeResource "newrelic_alert_condition" TF.validator $
         AlertConditionResource'
             { _conditionScope = TF.Nil
@@ -480,11 +480,11 @@ data InfraAlertConditionResource s = InfraAlertConditionResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 infraAlertConditionResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @policy_id@ - 'P.policyId'
+    :: TF.Attr s P.Int -- ^ @policy_id@ - 'P.policyId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (InfraAlertConditionResource s)
-infraAlertConditionResource _name _policyId _type' =
+infraAlertConditionResource _policyId _name _type' =
     TF.unsafeResource "newrelic_infra_alert_condition" TF.validator $
         InfraAlertConditionResource'
             { _comparison = TF.Nil
@@ -616,12 +616,12 @@ data NrqlAlertConditionResource s = NrqlAlertConditionResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 nrqlAlertConditionResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Int -- ^ @policy_id@ - 'P.policyId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (NrqlSetting s) -- ^ @nrql@ - 'P.nrql'
-    -> TF.Attr s P.Int -- ^ @policy_id@ - 'P.policyId'
     -> TF.Attr s (P.NonEmpty (TF.Attr s (TermSetting s))) -- ^ @term@ - 'P.term'
     -> P.Resource (NrqlAlertConditionResource s)
-nrqlAlertConditionResource _name _nrql _policyId _term =
+nrqlAlertConditionResource _policyId _name _nrql _term =
     TF.unsafeResource "newrelic_nrql_alert_condition" TF.validator $
         NrqlAlertConditionResource'
             { _enabled = TF.value P.True
