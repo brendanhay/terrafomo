@@ -154,7 +154,7 @@ data ImageData s = ImageData'
 
 -- | Define a new @scaleway_image@ datasource value.
 imageData
-    :: TF.Attr s P.Text -- ^ @architecture@ - 'P.architecture'
+    :: TF.Attr s P.Text -- ^ @architecture@ ('P._architecture', 'P.architecture')
     -> P.DataSource (ImageData s)
 imageData _architecture =
     TF.unsafeDataSource "scaleway_image" TF.validator $
@@ -228,7 +228,7 @@ data SecurityGroupData s = SecurityGroupData'
 
 -- | Define a new @scaleway_security_group@ datasource value.
 securityGroupData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (SecurityGroupData s)
 securityGroupData _name =
     TF.unsafeDataSource "scaleway_security_group" TF.validator $
@@ -271,7 +271,7 @@ data VolumeData s = VolumeData'
 
 -- | Define a new @scaleway_volume@ datasource value.
 volumeData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (VolumeData s)
 volumeData _name =
     TF.unsafeDataSource "scaleway_volume" TF.validator $

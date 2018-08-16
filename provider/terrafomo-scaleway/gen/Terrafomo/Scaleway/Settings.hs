@@ -56,8 +56,8 @@ data VolumeSetting s = VolumeSetting'
 
 -- | Construct a new @volume@ settings value.
 newVolumeSetting
-    :: TF.Attr s P.Int -- ^ @size_in_gb@ - 'P.sizeInGb'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Int -- ^ 'P._sizeInGb': @size_in_gb@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> VolumeSetting s
 newVolumeSetting _sizeInGb _type' =
     VolumeSetting'

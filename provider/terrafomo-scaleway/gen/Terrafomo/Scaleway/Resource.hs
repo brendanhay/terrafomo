@@ -142,8 +142,8 @@ data SecurityGroupResource s = SecurityGroupResource'
 
 -- | Define a new @scaleway_security_group@ resource value.
 securityGroupResource
-    :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (SecurityGroupResource s)
 securityGroupResource _description _name =
     TF.unsafeResource "scaleway_security_group" TF.validator $
@@ -215,11 +215,11 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
 
 -- | Define a new @scaleway_security_group_rule@ resource value.
 securityGroupRuleResource
-    :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
-    -> TF.Attr s P.Text -- ^ @direction@ - 'P.direction'
-    -> TF.Attr s P.Text -- ^ @security_group@ - 'P.securityGroup'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
-    -> TF.Attr s P.Text -- ^ @ip_range@ - 'P.ipRange'
+    :: TF.Attr s P.Text -- ^ @action@ ('P._action', 'P.action')
+    -> TF.Attr s P.Text -- ^ @direction@ ('P._direction', 'P.direction')
+    -> TF.Attr s P.Text -- ^ @security_group@ ('P._securityGroup', 'P.securityGroup')
+    -> TF.Attr s P.Text -- ^ @protocol@ ('P._protocol', 'P.protocol')
+    -> TF.Attr s P.Text -- ^ @ip_range@ ('P._ipRange', 'P.ipRange')
     -> P.Resource (SecurityGroupRuleResource s)
 securityGroupRuleResource _action _direction _securityGroup _protocol _ipRange =
     TF.unsafeResource "scaleway_security_group_rule" TF.validator $
@@ -323,9 +323,9 @@ data ServerResource s = ServerResource'
 
 -- | Define a new @scaleway_server@ resource value.
 serverResource
-    :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @image@ ('P._image', 'P.image')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (ServerResource s)
 serverResource _image _name _type' =
     TF.unsafeResource "scaleway_server" TF.validator $
@@ -436,7 +436,7 @@ data SshKeyResource s = SshKeyResource'
 
 -- | Define a new @scaleway_ssh_key@ resource value.
 sshKeyResource
-    :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
+    :: TF.Attr s P.Text -- ^ @key@ ('P._key', 'P.key')
     -> P.Resource (SshKeyResource s)
 sshKeyResource _key =
     TF.unsafeResource "scaleway_ssh_key" TF.validator $
@@ -557,9 +557,9 @@ data UserDataResource s = UserDataResource'
 
 -- | Define a new @scaleway_user_data@ resource value.
 userDataResource
-    :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.Attr s P.Text -- ^ @server@ - 'P.server'
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
+    :: TF.Attr s P.Text -- ^ @key@ ('P._key', 'P.key')
+    -> TF.Attr s P.Text -- ^ @server@ ('P._server', 'P.server')
+    -> TF.Attr s P.Text -- ^ @value@ ('P._value', 'P.value')
     -> P.Resource (UserDataResource s)
 userDataResource _key _server _value =
     TF.unsafeResource "scaleway_user_data" TF.validator $
@@ -618,9 +618,9 @@ data VolumeResource s = VolumeResource'
 
 -- | Define a new @scaleway_volume@ resource value.
 volumeResource
-    :: TF.Attr s P.Int -- ^ @size_in_gb@ - 'P.sizeInGb'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Int -- ^ @size_in_gb@ ('P._sizeInGb', 'P.sizeInGb')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (VolumeResource s)
 volumeResource _sizeInGb _name _type' =
     TF.unsafeResource "scaleway_volume" TF.validator $
@@ -678,8 +678,8 @@ data VolumeAttachmentResource s = VolumeAttachmentResource'
 
 -- | Define a new @scaleway_volume_attachment@ resource value.
 volumeAttachmentResource
-    :: TF.Attr s P.Text -- ^ @server@ - 'P.server'
-    -> TF.Attr s P.Text -- ^ @volume@ - 'P.volume'
+    :: TF.Attr s P.Text -- ^ @server@ ('P._server', 'P.server')
+    -> TF.Attr s P.Text -- ^ @volume@ ('P._volume', 'P.volume')
     -> P.Resource (VolumeAttachmentResource s)
 volumeAttachmentResource _server _volume =
     TF.unsafeResource "scaleway_volume_attachment" TF.validator $
