@@ -796,6 +796,9 @@ data ServerResource s = ServerResource'
     , _name               :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
+    , _password           :: TF.Attr s P.Text
+    -- ^ @password@ - (Optional)
+    --
     , _ram                :: TF.Attr s P.Double
     -- ^ @ram@ - (Optional)
     --
@@ -841,6 +844,7 @@ serverResource _image _name =
             , _loadbalancerId = TF.Nil
             , _monitoringPolicyId = TF.Nil
             , _name = _name
+            , _password = TF.Nil
             , _ram = TF.Nil
             , _sshKeyPath = TF.Nil
             , _sshKeyPublic = TF.Nil
@@ -860,6 +864,7 @@ instance TF.IsObject (ServerResource s) where
         , TF.assign "loadbalancer_id" <$> TF.attribute _loadbalancerId
         , TF.assign "monitoring_policy_id" <$> TF.attribute _monitoringPolicyId
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "password" <$> TF.attribute _password
         , TF.assign "ram" <$> TF.attribute _ram
         , TF.assign "ssh_key_path" <$> TF.attribute _sshKeyPath
         , TF.assign "ssh_key_public" <$> TF.attribute _sshKeyPublic
@@ -959,6 +964,11 @@ instance P.HasName (ServerResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ServerResource s)
+
+instance P.HasPassword (ServerResource s) (TF.Attr s P.Text) where
+    password =
+        P.lens (_password :: ServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _password = a } :: ServerResource s)
 
 instance P.HasRam (ServerResource s) (TF.Attr s P.Double) where
     ram =

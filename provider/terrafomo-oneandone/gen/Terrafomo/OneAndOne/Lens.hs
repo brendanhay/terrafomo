@@ -49,6 +49,7 @@ module Terrafomo.OneAndOne.Lens
     , HasNetworkAddress (..)
     , HasNumImages (..)
     , HasOsId (..)
+    , HasPassword (..)
     , HasPersistence (..)
     , HasPersistenceTime (..)
     , HasPort (..)
@@ -304,6 +305,12 @@ class HasOsId a b | a -> b where
 
 instance HasOsId a b => HasOsId (TF.Schema l p a) b where
     osId = TF.configuration . osId
+
+class HasPassword a b | a -> b where
+    password :: P.Lens' a b
+
+instance HasPassword a b => HasPassword (TF.Schema l p a) b where
+    password = TF.configuration . password
 
 class HasPersistence a b | a -> b where
     persistence :: P.Lens' a b
