@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "limitsSetting",
+                "smart": "newLimitsSetting",
                 "name": "LimitsSetting'"
             },
             "arguments": [
@@ -95,7 +95,7 @@
         },
         {
             "con": {
-                "smart": "regionLimitSetting",
+                "smart": "newRegionLimitSetting",
                 "name": "RegionLimitSetting'"
             },
             "arguments": [
