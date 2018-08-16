@@ -107,7 +107,7 @@ dirpoolResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (DirpoolResource s)
 dirpoolResource _description _name _rdata _type' _zone =
-    TF.unsafeResource "ultradns_dirpool" P.defaultProvider TF.validator $
+    TF.unsafeResource "ultradns_dirpool" TF.validator $
         DirpoolResource'
             { _conflictResolve = TF.value "GEO"
             , _description = _description
@@ -212,7 +212,7 @@ probeHttpResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (ProbeHttpResource s)
 probeHttpResource _agents _name _threshold _zone =
-    TF.unsafeResource "ultradns_probe_http" P.defaultProvider TF.validator $
+    TF.unsafeResource "ultradns_probe_http" TF.validator $
         ProbeHttpResource'
             { _agents = _agents
             , _httpProbe = TF.Nil
@@ -310,7 +310,7 @@ probePingResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (ProbePingResource s)
 probePingResource _agents _name _threshold _zone =
-    TF.unsafeResource "ultradns_probe_ping" P.defaultProvider TF.validator $
+    TF.unsafeResource "ultradns_probe_ping" TF.validator $
         ProbePingResource'
             { _agents = _agents
             , _interval = TF.value "FIVE_MINUTES"
@@ -404,7 +404,7 @@ rdpoolResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (RdpoolResource s)
 rdpoolResource _name _rdata _zone =
-    TF.unsafeResource "ultradns_rdpool" P.defaultProvider TF.validator $
+    TF.unsafeResource "ultradns_rdpool" TF.validator $
         RdpoolResource'
             { _description = TF.Nil
             , _name = _name
@@ -489,7 +489,7 @@ recordResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (RecordResource s)
 recordResource _name _rdata _type' _zone =
-    TF.unsafeResource "ultradns_record" P.defaultProvider TF.validator $
+    TF.unsafeResource "ultradns_record" TF.validator $
         RecordResource'
             { _name = _name
             , _rdata = _rdata
@@ -582,7 +582,7 @@ tcpoolResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (TcpoolResource s)
 tcpoolResource _description _name _rdata _zone =
-    TF.unsafeResource "ultradns_tcpool" P.defaultProvider TF.validator $
+    TF.unsafeResource "ultradns_tcpool" TF.validator $
         TcpoolResource'
             { _actOnProbes = TF.value P.True
             , _backupRecordFailoverDelay = TF.Nil
