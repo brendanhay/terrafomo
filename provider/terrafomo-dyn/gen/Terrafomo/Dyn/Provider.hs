@@ -17,10 +17,11 @@
 --
 module Terrafomo.Dyn.Provider
     (
+    -- * Dyn Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** Dyn Specific Aliases
+    -- * Dyn Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -74,9 +75,9 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @customer_name@ - 'P.customerName'
-    -> P.Text -- ^ @password@ - 'P.password'
-    -> P.Text -- ^ @username@ - 'P.username'
+    :: P.Text -- ^ @customer_name@ ('P._customerName', 'P.customerName')
+    -> P.Text -- ^ @password@ ('P._password', 'P.password')
+    -> P.Text -- ^ @username@ ('P._username', 'P.username')
     -> Provider
 newProvider _customerName _password _username =
     Provider'
@@ -89,7 +90,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "dyn"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "customer_name" _customerName
             , P.Just $ TF.assign "password" _password

@@ -68,9 +68,9 @@ data RecordResource s = RecordResource'
 
 -- | Define a new @dyn_record@ resource value.
 recordResource
-    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
-    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    :: TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    -> TF.Attr s P.Text -- ^ @value@ ('P._value', 'P.value')
+    -> TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
     -> P.Resource (RecordResource s)
 recordResource _type' _value _zone =
     TF.unsafeResource "dyn_record" TF.validator $
