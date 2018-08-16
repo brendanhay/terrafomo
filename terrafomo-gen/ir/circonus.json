@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newAlertOptionSetting",
+                "smart": "alertOptionSetting",
                 "name": "AlertOptionSetting'"
             },
             "arguments": [
@@ -104,7 +104,7 @@
         },
         {
             "con": {
-                "smart": "newCaqlSetting",
+                "smart": "caqlSetting",
                 "name": "CaqlSetting'"
             },
             "arguments": [
@@ -159,7 +159,7 @@
         },
         {
             "con": {
-                "smart": "newCloudwatchSetting",
+                "smart": "cloudwatchSetting",
                 "name": "CloudwatchSetting'"
             },
             "arguments": [
@@ -427,7 +427,7 @@
         },
         {
             "con": {
-                "smart": "newCollectorSetting",
+                "smart": "collectorSetting",
                 "name": "CollectorSetting'"
             },
             "arguments": [
@@ -482,7 +482,7 @@
         },
         {
             "con": {
-                "smart": "newConsulSetting",
+                "smart": "consulSetting",
                 "name": "ConsulSetting'"
             },
             "arguments": [
@@ -910,7 +910,7 @@
         },
         {
             "con": {
-                "smart": "newDetailsSetting",
+                "smart": "detailsSetting",
                 "name": "DetailsSetting'"
             },
             "arguments": [],
@@ -1096,7 +1096,7 @@
         },
         {
             "con": {
-                "smart": "newEmailSetting",
+                "smart": "emailSetting",
                 "name": "EmailSetting'"
             },
             "arguments": [
@@ -1205,7 +1205,7 @@
         },
         {
             "con": {
-                "smart": "newHttpSetting",
+                "smart": "httpSetting",
                 "name": "HttpSetting'"
             },
             "arguments": [
@@ -1604,7 +1604,7 @@
         },
         {
             "con": {
-                "smart": "newHttptrapSetting",
+                "smart": "httptrapSetting",
                 "name": "HttptrapSetting'"
             },
             "arguments": [
@@ -1657,7 +1657,7 @@
         },
         {
             "con": {
-                "smart": "newIcmpPingSetting",
+                "smart": "icmpPingSetting",
                 "name": "IcmpPingSetting'"
             },
             "arguments": [
@@ -1731,7 +1731,7 @@
         },
         {
             "con": {
-                "smart": "newIfSetting",
+                "smart": "ifSetting",
                 "name": "IfSetting'"
             },
             "arguments": [
@@ -1785,7 +1785,7 @@
         },
         {
             "con": {
-                "smart": "newInvitesSetting",
+                "smart": "invitesSetting",
                 "name": "InvitesSetting'"
             },
             "arguments": [],
@@ -1835,7 +1835,7 @@
         },
         {
             "con": {
-                "smart": "newIrcSetting",
+                "smart": "ircSetting",
                 "name": "IrcSetting'"
             },
             "arguments": [
@@ -1886,7 +1886,7 @@
         },
         {
             "con": {
-                "smart": "newJsonSetting",
+                "smart": "jsonSetting",
                 "name": "JsonSetting'"
             },
             "arguments": [
@@ -2191,7 +2191,7 @@
         },
         {
             "con": {
-                "smart": "newMetricSetting",
+                "smart": "metricSetting",
                 "name": "MetricSetting'"
             },
             "arguments": [
@@ -2644,7 +2644,7 @@
         },
         {
             "con": {
-                "smart": "newMetricClusterSetting",
+                "smart": "metricClusterSetting",
                 "name": "MetricClusterSetting'"
             },
             "arguments": [
@@ -2780,7 +2780,7 @@
         },
         {
             "con": {
-                "smart": "newMysqlSetting",
+                "smart": "mysqlSetting",
                 "name": "MysqlSetting'"
             },
             "arguments": [
@@ -2873,7 +2873,7 @@
         },
         {
             "con": {
-                "smart": "newOverSetting",
+                "smart": "overSetting",
                 "name": "OverSetting'"
             },
             "arguments": [
@@ -2927,7 +2927,7 @@
         },
         {
             "con": {
-                "smart": "newPagerDutySetting",
+                "smart": "pagerDutySetting",
                 "name": "PagerDutySetting'"
             },
             "arguments": [
@@ -3029,7 +3029,7 @@
         },
         {
             "con": {
-                "smart": "newPostgresqlSetting",
+                "smart": "postgresqlSetting",
                 "name": "PostgresqlSetting'"
             },
             "arguments": [
@@ -3122,7 +3122,7 @@
         },
         {
             "con": {
-                "smart": "newQuerySetting",
+                "smart": "querySetting",
                 "name": "QuerySetting'"
             },
             "arguments": [
@@ -3215,7 +3215,7 @@
         },
         {
             "con": {
-                "smart": "newSlackSetting",
+                "smart": "slackSetting",
                 "name": "SlackSetting'"
             },
             "arguments": [
@@ -3353,7 +3353,7 @@
         },
         {
             "con": {
-                "smart": "newSmsSetting",
+                "smart": "smsSetting",
                 "name": "SmsSetting'"
             },
             "arguments": [
@@ -3462,7 +3462,7 @@
         },
         {
             "con": {
-                "smart": "newStatsdSetting",
+                "smart": "statsdSetting",
                 "name": "StatsdSetting'"
             },
             "arguments": [
@@ -3517,7 +3517,7 @@
         },
         {
             "con": {
-                "smart": "newTcpSetting",
+                "smart": "tcpSetting",
                 "name": "TcpSetting'"
             },
             "arguments": [
@@ -3728,7 +3728,7 @@
         },
         {
             "con": {
-                "smart": "newThenSetting",
+                "smart": "thenSetting",
                 "name": "ThenSetting'"
             },
             "arguments": [
@@ -3803,7 +3803,7 @@
         },
         {
             "con": {
-                "smart": "newUsageSetting",
+                "smart": "usageSetting",
                 "name": "UsageSetting'"
             },
             "arguments": [],
@@ -3870,7 +3870,7 @@
         },
         {
             "con": {
-                "smart": "newUsersSetting",
+                "smart": "usersSetting",
                 "name": "UsersSetting'"
             },
             "arguments": [],
@@ -3920,7 +3920,7 @@
         },
         {
             "con": {
-                "smart": "newValueSetting",
+                "smart": "valueSetting",
                 "name": "ValueSetting'"
             },
             "arguments": [
@@ -4979,7 +4979,7 @@
         },
         {
             "con": {
-                "smart": "newVictoropsSetting",
+                "smart": "victoropsSetting",
                 "name": "VictoropsSetting'"
             },
             "arguments": [
@@ -5183,7 +5183,7 @@
         },
         {
             "con": {
-                "smart": "newXmppSetting",
+                "smart": "xmppSetting",
                 "name": "XmppSetting'"
             },
             "arguments": [
