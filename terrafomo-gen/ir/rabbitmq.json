@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newPermissionsSetting",
+                "smart": "permissionsSetting",
                 "name": "PermissionsSetting'"
             },
             "arguments": [
@@ -121,7 +121,7 @@
         },
         {
             "con": {
-                "smart": "newPolicySetting",
+                "smart": "policySetting",
                 "name": "PolicySetting'"
             },
             "arguments": [
@@ -274,7 +274,7 @@
         },
         {
             "con": {
-                "smart": "newSettingsSetting",
+                "smart": "settingsSetting",
                 "name": "SettingsSetting'"
             },
             "arguments": [
