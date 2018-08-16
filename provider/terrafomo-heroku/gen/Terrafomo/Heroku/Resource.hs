@@ -906,10 +906,10 @@ data SpacePeeringConnectionAccepterResource s = SpacePeeringConnectionAccepterRe
     } deriving (P.Show, P.Eq, P.Ord)
 
 spacePeeringConnectionAccepterResource
-    :: TF.Attr s P.Text -- ^ @space@ - 'P.space'
-    -> TF.Attr s P.Text -- ^ @vpc_peering_connection_id@ - 'P.vpcPeeringConnectionId'
+    :: TF.Attr s P.Text -- ^ @vpc_peering_connection_id@ - 'P.vpcPeeringConnectionId'
+    -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
     -> P.Resource (SpacePeeringConnectionAccepterResource s)
-spacePeeringConnectionAccepterResource _space _vpcPeeringConnectionId =
+spacePeeringConnectionAccepterResource _vpcPeeringConnectionId _space =
     TF.unsafeResource "heroku_space_peering_connection_accepter" TF.validator $
         SpacePeeringConnectionAccepterResource'
             { _space = _space
@@ -961,12 +961,12 @@ data SpaceVpnConnectionResource s = SpaceVpnConnectionResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 spaceVpnConnectionResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @routable_cidrs@ - 'P.routableCidrs'
     -> TF.Attr s P.Text -- ^ @public_ip@ - 'P.publicIp'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @routable_cidrs@ - 'P.routableCidrs'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
     -> P.Resource (SpaceVpnConnectionResource s)
-spaceVpnConnectionResource _name _publicIp _routableCidrs _space =
+spaceVpnConnectionResource _routableCidrs _publicIp _name _space =
     TF.unsafeResource "heroku_space_vpn_connection" TF.validator $
         SpaceVpnConnectionResource'
             { _name = _name
