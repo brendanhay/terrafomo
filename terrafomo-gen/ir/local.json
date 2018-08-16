@@ -19,6 +19,7 @@
                     "encoder": "TF.assign \"filename\" <$> TF.attribute",
                     "name": "_filename",
                     "method": "filename",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFilename",
@@ -28,6 +29,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/local/d/file.html",
+            "key": "local_file",
             "name": "FileData",
             "threaded": true,
             "attributes": [
@@ -40,6 +42,7 @@
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
                     "name": "_computedId",
                     "method": "computedId",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
@@ -56,6 +59,7 @@
                     "encoder": "TF.assign \"content\" <$> TF.attribute",
                     "name": "_computedContent",
                     "method": "computedContent",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedContent",
@@ -76,6 +80,7 @@
                     "encoder": "TF.assign \"filename\" <$> TF.attribute",
                     "name": "_filename",
                     "method": "filename",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFilename",
@@ -105,6 +110,7 @@
                     "encoder": "TF.assign \"content\" <$> TF.attribute",
                     "name": "_content",
                     "method": "content",
+                    "threaded": true,
                     "conflicts": [
                         {
                             "default": "TF.Nil",
@@ -129,6 +135,7 @@
                     "encoder": "TF.assign \"filename\" <$> TF.attribute",
                     "name": "_filename",
                     "method": "filename",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFilename",
@@ -145,6 +152,7 @@
                     "encoder": "TF.assign \"sensitive_content\" <$> TF.attribute",
                     "name": "_sensitiveContent",
                     "method": "sensitiveContent",
+                    "threaded": true,
                     "conflicts": [
                         {
                             "default": "TF.Nil",
@@ -160,6 +168,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/local/r/file.html",
+            "key": "local_file",
             "name": "FileResource",
             "threaded": true,
             "attributes": [],
@@ -175,6 +184,7 @@
                     "encoder": "TF.assign \"filename\" <$> TF.attribute",
                     "name": "_filename",
                     "method": "filename",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFilename",
@@ -193,6 +203,7 @@
                     "encoder": "TF.assign \"content\" <$> TF.attribute",
                     "name": "_content",
                     "method": "content",
+                    "threaded": true,
                     "conflicts": [
                         {
                             "default": "TF.Nil",
@@ -215,6 +226,7 @@
                     "encoder": "TF.assign \"sensitive_content\" <$> TF.attribute",
                     "name": "_sensitiveContent",
                     "method": "sensitiveContent",
+                    "threaded": true,
                     "conflicts": [
                         {
                             "default": "TF.Nil",
@@ -239,6 +251,7 @@
             "name": "Provider'"
         },
         "arguments": [],
+        "key": "provider",
         "name": "Provider",
         "threaded": false,
         "attributes": [],
@@ -248,14 +261,15 @@
         "original": "provider"
     },
     "dependencies": [
+        "aeson",
         "base",
-        "unordered-containers",
-        "text",
+        "containers",
+        "microlens",
         "terrafomo",
-        "hashable",
-        "microlens"
+        "text"
     ],
     "name": "Local",
     "package": "terrafomo-builtins",
+    "primitives": [],
     "original": "local"
 }
