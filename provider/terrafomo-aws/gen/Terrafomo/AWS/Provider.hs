@@ -17,10 +17,11 @@
 --
 module Terrafomo.AWS.Provider
     (
+    -- * AWS Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** AWS Specific Aliases
+    -- * AWS Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -160,7 +161,7 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Region -- ^ @region@ - 'P.region'
+    :: P.Region -- ^ @region@ ('P._region', 'P.region')
     -> Provider
 newProvider _region =
     Provider'
@@ -190,7 +191,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "aws"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ TF.assign "access_key" <$> _accessKey
             , TF.assign "allowed_account_ids" <$> _allowedAccountIds

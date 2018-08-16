@@ -464,7 +464,7 @@ data AcmCertificateData s = AcmCertificateData'
 
 -- | Define a new @aws_acm_certificate@ datasource value.
 acmCertificateData
-    :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
+    :: TF.Attr s P.Text -- ^ @domain@ ('P._domain', 'P.domain')
     -> P.DataSource (AcmCertificateData s)
 acmCertificateData _domain =
     TF.unsafeDataSource "aws_acm_certificate" TF.validator $
@@ -524,7 +524,7 @@ data AcmpcaCertificateAuthorityData s = AcmpcaCertificateAuthorityData'
 
 -- | Define a new @aws_acmpca_certificate_authority@ datasource value.
 acmpcaCertificateAuthorityData
-    :: TF.Attr s P.Text -- ^ @arn@ - 'P.arn'
+    :: TF.Attr s P.Text -- ^ @arn@ ('P._arn', 'P.arn')
     -> P.DataSource (AcmpcaCertificateAuthorityData s)
 acmpcaCertificateAuthorityData _arn =
     TF.unsafeDataSource "aws_acmpca_certificate_authority" TF.validator $
@@ -973,7 +973,7 @@ data ApiGatewayRestApiData s = ApiGatewayRestApiData'
 
 -- | Define a new @aws_api_gateway_rest_api@ datasource value.
 apiGatewayRestApiData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ApiGatewayRestApiData s)
 apiGatewayRestApiData _name =
     TF.unsafeDataSource "aws_api_gateway_rest_api" TF.validator $
@@ -1012,7 +1012,7 @@ data ArnData s = ArnData'
 
 -- | Define a new @aws_arn@ datasource value.
 arnData
-    :: TF.Attr s P.Text -- ^ @arn@ - 'P.arn'
+    :: TF.Attr s P.Text -- ^ @arn@ ('P._arn', 'P.arn')
     -> P.DataSource (ArnData s)
 arnData _arn =
     TF.unsafeDataSource "aws_arn" TF.validator $
@@ -1174,7 +1174,7 @@ data BatchComputeEnvironmentData s = BatchComputeEnvironmentData'
 
 -- | Define a new @aws_batch_compute_environment@ datasource value.
 batchComputeEnvironmentData
-    :: TF.Attr s P.Text -- ^ @compute_environment_name@ - 'P.computeEnvironmentName'
+    :: TF.Attr s P.Text -- ^ @compute_environment_name@ ('P._computeEnvironmentName', 'P.computeEnvironmentName')
     -> P.DataSource (BatchComputeEnvironmentData s)
 batchComputeEnvironmentData _computeEnvironmentName =
     TF.unsafeDataSource "aws_batch_compute_environment" TF.validator $
@@ -1231,7 +1231,7 @@ data BatchJobQueueData s = BatchJobQueueData'
 
 -- | Define a new @aws_batch_job_queue@ datasource value.
 batchJobQueueData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (BatchJobQueueData s)
 batchJobQueueData _name =
     TF.unsafeDataSource "aws_batch_job_queue" TF.validator $
@@ -1369,7 +1369,7 @@ data CloudformationExportData s = CloudformationExportData'
 
 -- | Define a new @aws_cloudformation_export@ datasource value.
 cloudformationExportData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (CloudformationExportData s)
 cloudformationExportData _name =
     TF.unsafeDataSource "aws_cloudformation_export" TF.validator $
@@ -1411,7 +1411,7 @@ data CloudformationStackData s = CloudformationStackData'
 
 -- | Define a new @aws_cloudformation_stack@ datasource value.
 cloudformationStackData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (CloudformationStackData s)
 cloudformationStackData _name =
     TF.unsafeDataSource "aws_cloudformation_stack" TF.validator $
@@ -1515,7 +1515,7 @@ data CloudwatchLogGroupData s = CloudwatchLogGroupData'
 
 -- | Define a new @aws_cloudwatch_log_group@ datasource value.
 cloudwatchLogGroupData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (CloudwatchLogGroupData s)
 cloudwatchLogGroupData _name =
     TF.unsafeDataSource "aws_cloudwatch_log_group" TF.validator $
@@ -1557,7 +1557,7 @@ data CodecommitRepositoryData s = CodecommitRepositoryData'
 
 -- | Define a new @aws_codecommit_repository@ datasource value.
 codecommitRepositoryData
-    :: TF.Attr s P.Text -- ^ @repository_name@ - 'P.repositoryName'
+    :: TF.Attr s P.Text -- ^ @repository_name@ ('P._repositoryName', 'P.repositoryName')
     -> P.DataSource (CodecommitRepositoryData s)
 codecommitRepositoryData _repositoryName =
     TF.unsafeDataSource "aws_codecommit_repository" TF.validator $
@@ -1605,7 +1605,7 @@ data CognitoUserPoolsData s = CognitoUserPoolsData'
 
 -- | Define a new @aws_cognito_user_pools@ datasource value.
 cognitoUserPoolsData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (CognitoUserPoolsData s)
 cognitoUserPoolsData _name =
     TF.unsafeDataSource "aws_cognito_user_pools" TF.validator $
@@ -1771,7 +1771,7 @@ data DbInstanceData s = DbInstanceData'
 
 -- | Define a new @aws_db_instance@ datasource value.
 dbInstanceData
-    :: TF.Attr s P.Text -- ^ @db_instance_identifier@ - 'P.dbInstanceIdentifier'
+    :: TF.Attr s P.Text -- ^ @db_instance_identifier@ ('P._dbInstanceIdentifier', 'P.dbInstanceIdentifier')
     -> P.DataSource (DbInstanceData s)
 dbInstanceData _dbInstanceIdentifier =
     TF.unsafeDataSource "aws_db_instance" TF.validator $
@@ -2048,7 +2048,7 @@ data DxGatewayData s = DxGatewayData'
 
 -- | Define a new @aws_dx_gateway@ datasource value.
 dxGatewayData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (DxGatewayData s)
 dxGatewayData _name =
     TF.unsafeDataSource "aws_dx_gateway" TF.validator $
@@ -2087,7 +2087,7 @@ data DynamodbTableData s = DynamodbTableData'
 
 -- | Define a new @aws_dynamodb_table@ datasource value.
 dynamodbTableData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (DynamodbTableData s)
 dynamodbTableData _name =
     TF.unsafeDataSource "aws_dynamodb_table" TF.validator $
@@ -2409,7 +2409,7 @@ data EcrRepositoryData s = EcrRepositoryData'
 
 -- | Define a new @aws_ecr_repository@ datasource value.
 ecrRepositoryData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (EcrRepositoryData s)
 ecrRepositoryData _name =
     TF.unsafeDataSource "aws_ecr_repository" TF.validator $
@@ -2454,7 +2454,7 @@ data EcsClusterData s = EcsClusterData'
 
 -- | Define a new @aws_ecs_cluster@ datasource value.
 ecsClusterData
-    :: TF.Attr s P.Text -- ^ @cluster_name@ - 'P.clusterName'
+    :: TF.Attr s P.Text -- ^ @cluster_name@ ('P._clusterName', 'P.clusterName')
     -> P.DataSource (EcsClusterData s)
 ecsClusterData _clusterName =
     TF.unsafeDataSource "aws_ecs_cluster" TF.validator $
@@ -2508,8 +2508,8 @@ data EcsContainerDefinitionData s = EcsContainerDefinitionData'
 
 -- | Define a new @aws_ecs_container_definition@ datasource value.
 ecsContainerDefinitionData
-    :: TF.Attr s P.Text -- ^ @task_definition@ - 'P.taskDefinition'
-    -> TF.Attr s P.Text -- ^ @container_name@ - 'P.containerName'
+    :: TF.Attr s P.Text -- ^ @task_definition@ ('P._taskDefinition', 'P.taskDefinition')
+    -> TF.Attr s P.Text -- ^ @container_name@ ('P._containerName', 'P.containerName')
     -> P.DataSource (EcsContainerDefinitionData s)
 ecsContainerDefinitionData _taskDefinition _containerName =
     TF.unsafeDataSource "aws_ecs_container_definition" TF.validator $
@@ -2579,8 +2579,8 @@ data EcsServiceData s = EcsServiceData'
 
 -- | Define a new @aws_ecs_service@ datasource value.
 ecsServiceData
-    :: TF.Attr s P.Text -- ^ @cluster_arn@ - 'P.clusterArn'
-    -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
+    :: TF.Attr s P.Text -- ^ @cluster_arn@ ('P._clusterArn', 'P.clusterArn')
+    -> TF.Attr s P.Text -- ^ @service_name@ ('P._serviceName', 'P.serviceName')
     -> P.DataSource (EcsServiceData s)
 ecsServiceData _clusterArn _serviceName =
     TF.unsafeDataSource "aws_ecs_service" TF.validator $
@@ -2638,7 +2638,7 @@ data EcsTaskDefinitionData s = EcsTaskDefinitionData'
 
 -- | Define a new @aws_ecs_task_definition@ datasource value.
 ecsTaskDefinitionData
-    :: TF.Attr s P.Text -- ^ @task_definition@ - 'P.taskDefinition'
+    :: TF.Attr s P.Text -- ^ @task_definition@ ('P._taskDefinition', 'P.taskDefinition')
     -> P.DataSource (EcsTaskDefinitionData s)
 ecsTaskDefinitionData _taskDefinition =
     TF.unsafeDataSource "aws_ecs_task_definition" TF.validator $
@@ -2733,7 +2733,7 @@ data EfsMountTargetData s = EfsMountTargetData'
 
 -- | Define a new @aws_efs_mount_target@ datasource value.
 efsMountTargetData
-    :: TF.Attr s P.Text -- ^ @mount_target_id@ - 'P.mountTargetId'
+    :: TF.Attr s P.Text -- ^ @mount_target_id@ ('P._mountTargetId', 'P.mountTargetId')
     -> P.DataSource (EfsMountTargetData s)
 efsMountTargetData _mountTargetId =
     TF.unsafeDataSource "aws_efs_mount_target" TF.validator $
@@ -2813,7 +2813,7 @@ data EksClusterData s = EksClusterData'
 
 -- | Define a new @aws_eks_cluster@ datasource value.
 eksClusterData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (EksClusterData s)
 eksClusterData _name =
     TF.unsafeDataSource "aws_eks_cluster" TF.validator $
@@ -2908,7 +2908,7 @@ data ElasticBeanstalkSolutionStackData s = ElasticBeanstalkSolutionStackData'
 
 -- | Define a new @aws_elastic_beanstalk_solution_stack@ datasource value.
 elasticBeanstalkSolutionStackData
-    :: TF.Attr s P.Text -- ^ @name_regex@ - 'P.nameRegex'
+    :: TF.Attr s P.Text -- ^ @name_regex@ ('P._nameRegex', 'P.nameRegex')
     -> P.DataSource (ElasticBeanstalkSolutionStackData s)
 elasticBeanstalkSolutionStackData _nameRegex =
     TF.unsafeDataSource "aws_elastic_beanstalk_solution_stack" TF.validator $
@@ -2954,7 +2954,7 @@ data ElasticacheClusterData s = ElasticacheClusterData'
 
 -- | Define a new @aws_elasticache_cluster@ datasource value.
 elasticacheClusterData
-    :: TF.Attr s P.Text -- ^ @cluster_id@ - 'P.clusterId'
+    :: TF.Attr s P.Text -- ^ @cluster_id@ ('P._clusterId', 'P.clusterId')
     -> P.DataSource (ElasticacheClusterData s)
 elasticacheClusterData _clusterId =
     TF.unsafeDataSource "aws_elasticache_cluster" TF.validator $
@@ -3050,7 +3050,7 @@ data ElasticacheReplicationGroupData s = ElasticacheReplicationGroupData'
 
 -- | Define a new @aws_elasticache_replication_group@ datasource value.
 elasticacheReplicationGroupData
-    :: TF.Attr s P.Text -- ^ @replication_group_id@ - 'P.replicationGroupId'
+    :: TF.Attr s P.Text -- ^ @replication_group_id@ ('P._replicationGroupId', 'P.replicationGroupId')
     -> P.DataSource (ElasticacheReplicationGroupData s)
 elasticacheReplicationGroupData _replicationGroupId =
     TF.unsafeDataSource "aws_elasticache_replication_group" TF.validator $
@@ -3119,7 +3119,7 @@ data ElbData s = ElbData'
 
 -- | Define a new @aws_elb@ datasource value.
 elbData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ElbData s)
 elbData _name =
     TF.unsafeDataSource "aws_elb" TF.validator $
@@ -3285,8 +3285,8 @@ data GlueScriptData s = GlueScriptData'
 
 -- | Define a new @aws_glue_script@ datasource value.
 glueScriptData
-    :: TF.Attr s [TF.Attr s (DagEdgeSetting s)] -- ^ @dag_edge@ - 'P.dagEdge'
-    -> TF.Attr s [TF.Attr s (DagNodeSetting s)] -- ^ @dag_node@ - 'P.dagNode'
+    :: TF.Attr s [TF.Attr s (DagEdgeSetting s)] -- ^ @dag_edge@ ('P._dagEdge', 'P.dagEdge')
+    -> TF.Attr s [TF.Attr s (DagNodeSetting s)] -- ^ @dag_node@ ('P._dagNode', 'P.dagNode')
     -> P.DataSource (GlueScriptData s)
 glueScriptData _dagEdge _dagNode =
     TF.unsafeDataSource "aws_glue_script" TF.validator $
@@ -3368,7 +3368,7 @@ data IamGroupData s = IamGroupData'
 
 -- | Define a new @aws_iam_group@ datasource value.
 iamGroupData
-    :: TF.Attr s P.Text -- ^ @group_name@ - 'P.groupName'
+    :: TF.Attr s P.Text -- ^ @group_name@ ('P._groupName', 'P.groupName')
     -> P.DataSource (IamGroupData s)
 iamGroupData _groupName =
     TF.unsafeDataSource "aws_iam_group" TF.validator $
@@ -3413,7 +3413,7 @@ data IamInstanceProfileData s = IamInstanceProfileData'
 
 -- | Define a new @aws_iam_instance_profile@ datasource value.
 iamInstanceProfileData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (IamInstanceProfileData s)
 iamInstanceProfileData _name =
     TF.unsafeDataSource "aws_iam_instance_profile" TF.validator $
@@ -3467,7 +3467,7 @@ data IamPolicyData s = IamPolicyData'
 
 -- | Define a new @aws_iam_policy@ datasource value.
 iamPolicyData
-    :: TF.Attr s P.Text -- ^ @arn@ - 'P.arn'
+    :: TF.Attr s P.Text -- ^ @arn@ ('P._arn', 'P.arn')
     -> P.DataSource (IamPolicyData s)
 iamPolicyData _arn =
     TF.unsafeDataSource "aws_iam_policy" TF.validator $
@@ -3524,7 +3524,7 @@ data IamPolicyDocumentData s = IamPolicyDocumentData'
 
 -- | Define a new @aws_iam_policy_document@ datasource value.
 iamPolicyDocumentData
-    :: TF.Attr s [TF.Attr s (StatementSetting s)] -- ^ @statement@ - 'P.statement'
+    :: TF.Attr s [TF.Attr s (StatementSetting s)] -- ^ @statement@ ('P._statement', 'P.statement')
     -> P.DataSource (IamPolicyDocumentData s)
 iamPolicyDocumentData _statement =
     TF.unsafeDataSource "aws_iam_policy_document" TF.validator $
@@ -3719,7 +3719,7 @@ data IamUserData s = IamUserData'
 
 -- | Define a new @aws_iam_user@ datasource value.
 iamUserData
-    :: TF.Attr s P.Text -- ^ @user_name@ - 'P.userName'
+    :: TF.Attr s P.Text -- ^ @user_name@ ('P._userName', 'P.userName')
     -> P.DataSource (IamUserData s)
 iamUserData _userName =
     TF.unsafeDataSource "aws_iam_user" TF.validator $
@@ -4068,7 +4068,7 @@ data IpRangesData s = IpRangesData'
 
 -- | Define a new @aws_ip_ranges@ datasource value.
 ipRangesData
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @services@ - 'P.services'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @services@ ('P._services', 'P.services')
     -> P.DataSource (IpRangesData s)
 ipRangesData _services =
     TF.unsafeDataSource "aws_ip_ranges" TF.validator $
@@ -4120,7 +4120,7 @@ data KinesisStreamData s = KinesisStreamData'
 
 -- | Define a new @aws_kinesis_stream@ datasource value.
 kinesisStreamData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (KinesisStreamData s)
 kinesisStreamData _name =
     TF.unsafeDataSource "aws_kinesis_stream" TF.validator $
@@ -4180,7 +4180,7 @@ data KmsAliasData s = KmsAliasData'
 
 -- | Define a new @aws_kms_alias@ datasource value.
 kmsAliasData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (KmsAliasData s)
 kmsAliasData _name =
     TF.unsafeDataSource "aws_kms_alias" TF.validator $
@@ -4231,8 +4231,8 @@ data KmsCiphertextData s = KmsCiphertextData'
 
 -- | Define a new @aws_kms_ciphertext@ datasource value.
 kmsCiphertextData
-    :: TF.Attr s P.Text -- ^ @key_id@ - 'P.keyId'
-    -> TF.Attr s P.Text -- ^ @plaintext@ - 'P.plaintext'
+    :: TF.Attr s P.Text -- ^ @key_id@ ('P._keyId', 'P.keyId')
+    -> TF.Attr s P.Text -- ^ @plaintext@ ('P._plaintext', 'P.plaintext')
     -> P.DataSource (KmsCiphertextData s)
 kmsCiphertextData _keyId _plaintext =
     TF.unsafeDataSource "aws_kms_ciphertext" TF.validator $
@@ -4288,7 +4288,7 @@ data KmsKeyData s = KmsKeyData'
 
 -- | Define a new @aws_kms_key@ datasource value.
 kmsKeyData
-    :: TF.Attr s P.Text -- ^ @key_id@ - 'P.keyId'
+    :: TF.Attr s P.Text -- ^ @key_id@ ('P._keyId', 'P.keyId')
     -> P.DataSource (KmsKeyData s)
 kmsKeyData _keyId =
     TF.unsafeDataSource "aws_kms_key" TF.validator $
@@ -4370,7 +4370,7 @@ data KmsSecretData s = KmsSecretData'
 
 -- | Define a new @aws_kms_secret@ datasource value.
 kmsSecretData
-    :: TF.Attr s [TF.Attr s (SecretSetting s)] -- ^ @secret@ - 'P.secret'
+    :: TF.Attr s [TF.Attr s (SecretSetting s)] -- ^ @secret@ ('P._secret', 'P.secret')
     -> P.DataSource (KmsSecretData s)
 kmsSecretData _secret =
     TF.unsafeDataSource "aws_kms_secret" TF.validator $
@@ -4413,7 +4413,7 @@ data KmsSecretsData s = KmsSecretsData'
 
 -- | Define a new @aws_kms_secrets@ datasource value.
 kmsSecretsData
-    :: TF.Attr s [TF.Attr s (SecretSetting s)] -- ^ @secret@ - 'P.secret'
+    :: TF.Attr s [TF.Attr s (SecretSetting s)] -- ^ @secret@ ('P._secret', 'P.secret')
     -> P.DataSource (KmsSecretsData s)
 kmsSecretsData _secret =
     TF.unsafeDataSource "aws_kms_secrets" TF.validator $
@@ -4455,7 +4455,7 @@ data LambdaFunctionData s = LambdaFunctionData'
 
 -- | Define a new @aws_lambda_function@ datasource value.
 lambdaFunctionData
-    :: TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
+    :: TF.Attr s P.Text -- ^ @function_name@ ('P._functionName', 'P.functionName')
     -> P.DataSource (LambdaFunctionData s)
 lambdaFunctionData _functionName =
     TF.unsafeDataSource "aws_lambda_function" TF.validator $
@@ -4561,8 +4561,8 @@ data LambdaInvocationData s = LambdaInvocationData'
 
 -- | Define a new @aws_lambda_invocation@ datasource value.
 lambdaInvocationData
-    :: TF.Attr s P.Text -- ^ @input@ - 'P.input'
-    -> TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
+    :: TF.Attr s P.Text -- ^ @input@ ('P._input', 'P.input')
+    -> TF.Attr s P.Text -- ^ @function_name@ ('P._functionName', 'P.functionName')
     -> P.DataSource (LambdaInvocationData s)
 lambdaInvocationData _input _functionName =
     TF.unsafeDataSource "aws_lambda_invocation" TF.validator $
@@ -4618,7 +4618,7 @@ data LaunchConfigurationData s = LaunchConfigurationData'
 
 -- | Define a new @aws_launch_configuration@ datasource value.
 launchConfigurationData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (LaunchConfigurationData s)
 launchConfigurationData _name =
     TF.unsafeDataSource "aws_launch_configuration" TF.validator $
@@ -5242,8 +5242,8 @@ data PricingProductData s = PricingProductData'
 
 -- | Define a new @aws_pricing_product@ datasource value.
 pricingProductData
-    :: TF.Attr s P.Text -- ^ @service_code@ - 'P.serviceCode'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (FiltersSetting s))) -- ^ @filters@ - 'P.filters'
+    :: TF.Attr s P.Text -- ^ @service_code@ ('P._serviceCode', 'P.serviceCode')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (FiltersSetting s))) -- ^ @filters@ ('P._filters', 'P.filters')
     -> P.DataSource (PricingProductData s)
 pricingProductData _serviceCode _filters =
     TF.unsafeDataSource "aws_pricing_product" TF.validator $
@@ -5289,7 +5289,7 @@ data RdsClusterData s = RdsClusterData'
 
 -- | Define a new @aws_rds_cluster@ datasource value.
 rdsClusterData
-    :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
+    :: TF.Attr s P.Text -- ^ @cluster_identifier@ ('P._clusterIdentifier', 'P.clusterIdentifier')
     -> P.DataSource (RdsClusterData s)
 rdsClusterData _clusterIdentifier =
     TF.unsafeDataSource "aws_rds_cluster" TF.validator $
@@ -5403,7 +5403,7 @@ data RedshiftClusterData s = RedshiftClusterData'
 
 -- | Define a new @aws_redshift_cluster@ datasource value.
 redshiftClusterData
-    :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
+    :: TF.Attr s P.Text -- ^ @cluster_identifier@ ('P._clusterIdentifier', 'P.clusterIdentifier')
     -> P.DataSource (RedshiftClusterData s)
 redshiftClusterData _clusterIdentifier =
     TF.unsafeDataSource "aws_redshift_cluster" TF.validator $
@@ -5600,7 +5600,7 @@ data RouteData s = RouteData'
 
 -- | Define a new @aws_route@ datasource value.
 routeData
-    :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
+    :: TF.Attr s P.Text -- ^ @route_table_id@ ('P._routeTableId', 'P.routeTableId')
     -> P.DataSource (RouteData s)
 routeData _routeTableId =
     TF.unsafeDataSource "aws_route" TF.validator $
@@ -5823,7 +5823,7 @@ data S3BucketData s = S3BucketData'
 
 -- | Define a new @aws_s3_bucket@ datasource value.
 s3BucketData
-    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
+    :: TF.Attr s P.Text -- ^ @bucket@ ('P._bucket', 'P.bucket')
     -> P.DataSource (S3BucketData s)
 s3BucketData _bucket =
     TF.unsafeDataSource "aws_s3_bucket" TF.validator $
@@ -5883,8 +5883,8 @@ data S3BucketObjectData s = S3BucketObjectData'
 
 -- | Define a new @aws_s3_bucket_object@ datasource value.
 s3BucketObjectData
-    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
-    -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
+    :: TF.Attr s P.Text -- ^ @bucket@ ('P._bucket', 'P.bucket')
+    -> TF.Attr s P.Text -- ^ @key@ ('P._key', 'P.key')
     -> P.DataSource (S3BucketObjectData s)
 s3BucketObjectData _bucket _key =
     TF.unsafeDataSource "aws_s3_bucket_object" TF.validator $
@@ -6038,7 +6038,7 @@ data SecretsmanagerSecretVersionData s = SecretsmanagerSecretVersionData'
 
 -- | Define a new @aws_secretsmanager_secret_version@ datasource value.
 secretsmanagerSecretVersionData
-    :: TF.Attr s P.Text -- ^ @secret_id@ - 'P.secretId'
+    :: TF.Attr s P.Text -- ^ @secret_id@ ('P._secretId', 'P.secretId')
     -> P.DataSource (SecretsmanagerSecretVersionData s)
 secretsmanagerSecretVersionData _secretId =
     TF.unsafeDataSource "aws_secretsmanager_secret_version" TF.validator $
@@ -6184,7 +6184,7 @@ data SnsTopicData s = SnsTopicData'
 
 -- | Define a new @aws_sns_topic@ datasource value.
 snsTopicData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (SnsTopicData s)
 snsTopicData _name =
     TF.unsafeDataSource "aws_sns_topic" TF.validator $
@@ -6223,7 +6223,7 @@ data SqsQueueData s = SqsQueueData'
 
 -- | Define a new @aws_sqs_queue@ datasource value.
 sqsQueueData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (SqsQueueData s)
 sqsQueueData _name =
     TF.unsafeDataSource "aws_sqs_queue" TF.validator $
@@ -6268,7 +6268,7 @@ data SsmParameterData s = SsmParameterData'
 
 -- | Define a new @aws_ssm_parameter@ datasource value.
 ssmParameterData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (SsmParameterData s)
 ssmParameterData _name =
     TF.unsafeDataSource "aws_ssm_parameter" TF.validator $
@@ -6323,8 +6323,8 @@ data StoragegatewayLocalDiskData s = StoragegatewayLocalDiskData'
 
 -- | Define a new @aws_storagegateway_local_disk@ datasource value.
 storagegatewayLocalDiskData
-    :: TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
-    -> TF.Attr s P.Text -- ^ @disk_path@ - 'P.diskPath'
+    :: TF.Attr s P.Text -- ^ @gateway_arn@ ('P._gatewayArn', 'P.gatewayArn')
+    -> TF.Attr s P.Text -- ^ @disk_path@ ('P._diskPath', 'P.diskPath')
     -> P.DataSource (StoragegatewayLocalDiskData s)
 storagegatewayLocalDiskData _gatewayArn _diskPath =
     TF.unsafeDataSource "aws_storagegateway_local_disk" TF.validator $

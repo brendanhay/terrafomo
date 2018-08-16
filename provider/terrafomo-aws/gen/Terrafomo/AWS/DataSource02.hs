@@ -159,7 +159,7 @@ data SubnetIdsData s = SubnetIdsData'
 
 -- | Define a new @aws_subnet_ids@ datasource value.
 subnetIdsData
-    :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    :: TF.Attr s P.Text -- ^ @vpc_id@ ('P._vpcId', 'P.vpcId')
     -> P.DataSource (SubnetIdsData s)
 subnetIdsData _vpcId =
     TF.unsafeDataSource "aws_subnet_ids" TF.validator $

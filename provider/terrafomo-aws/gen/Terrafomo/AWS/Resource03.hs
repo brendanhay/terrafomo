@@ -458,8 +458,8 @@ data IamUserGroupMembershipResource s = IamUserGroupMembershipResource'
 
 -- | Define a new @aws_iam_user_group_membership@ resource value.
 iamUserGroupMembershipResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @groups@ - 'P.groups'
-    -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @groups@ ('P._groups', 'P.groups')
+    -> TF.Attr s P.Text -- ^ @user@ ('P._user', 'P.user')
     -> P.Resource (IamUserGroupMembershipResource s)
 iamUserGroupMembershipResource _groups _user =
     TF.unsafeResource "aws_iam_user_group_membership" TF.validator $
@@ -511,8 +511,8 @@ data IamUserLoginProfileResource s = IamUserLoginProfileResource'
 
 -- | Define a new @aws_iam_user_login_profile@ resource value.
 iamUserLoginProfileResource
-    :: TF.Attr s P.Text -- ^ @pgp_key@ - 'P.pgpKey'
-    -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
+    :: TF.Attr s P.Text -- ^ @pgp_key@ ('P._pgpKey', 'P.pgpKey')
+    -> TF.Attr s P.Text -- ^ @user@ ('P._user', 'P.user')
     -> P.Resource (IamUserLoginProfileResource s)
 iamUserLoginProfileResource _pgpKey _user =
     TF.unsafeResource "aws_iam_user_login_profile" TF.validator $
@@ -581,8 +581,8 @@ data IamUserPolicyResource s = IamUserPolicyResource'
 
 -- | Define a new @aws_iam_user_policy@ resource value.
 iamUserPolicyResource
-    :: TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
-    -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
+    :: TF.Attr s P.Text -- ^ @policy@ ('P._policy', 'P.policy')
+    -> TF.Attr s P.Text -- ^ @user@ ('P._user', 'P.user')
     -> P.Resource (IamUserPolicyResource s)
 iamUserPolicyResource _policy _user =
     TF.unsafeResource "aws_iam_user_policy" TF.validator $
@@ -638,8 +638,8 @@ data IamUserPolicyAttachmentResource s = IamUserPolicyAttachmentResource'
 
 -- | Define a new @aws_iam_user_policy_attachment@ resource value.
 iamUserPolicyAttachmentResource
-    :: TF.Attr s P.Text -- ^ @policy_arn@ - 'P.policyArn'
-    -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
+    :: TF.Attr s P.Text -- ^ @policy_arn@ ('P._policyArn', 'P.policyArn')
+    -> TF.Attr s P.Text -- ^ @user@ ('P._user', 'P.user')
     -> P.Resource (IamUserPolicyAttachmentResource s)
 iamUserPolicyAttachmentResource _policyArn _user =
     TF.unsafeResource "aws_iam_user_policy_attachment" TF.validator $
@@ -688,9 +688,9 @@ data IamUserSshKeyResource s = IamUserSshKeyResource'
 
 -- | Define a new @aws_iam_user_ssh_key@ resource value.
 iamUserSshKeyResource
-    :: TF.Attr s P.Text -- ^ @encoding@ - 'P.encoding'
-    -> TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
-    -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
+    :: TF.Attr s P.Text -- ^ @encoding@ ('P._encoding', 'P.encoding')
+    -> TF.Attr s P.Text -- ^ @public_key@ ('P._publicKey', 'P.publicKey')
+    -> TF.Attr s P.Text -- ^ @username@ ('P._username', 'P.username')
     -> P.Resource (IamUserSshKeyResource s)
 iamUserSshKeyResource _encoding _publicKey _username =
     TF.unsafeResource "aws_iam_user_ssh_key" TF.validator $
@@ -752,8 +752,8 @@ data InspectorAssessmentTargetResource s = InspectorAssessmentTargetResource'
 
 -- | Define a new @aws_inspector_assessment_target@ resource value.
 inspectorAssessmentTargetResource
-    :: TF.Attr s P.Text -- ^ @resource_group_arn@ - 'P.resourceGroupArn'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @resource_group_arn@ ('P._resourceGroupArn', 'P.resourceGroupArn')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (InspectorAssessmentTargetResource s)
 inspectorAssessmentTargetResource _resourceGroupArn _name =
     TF.unsafeResource "aws_inspector_assessment_target" TF.validator $
@@ -808,10 +808,10 @@ data InspectorAssessmentTemplateResource s = InspectorAssessmentTemplateResource
 
 -- | Define a new @aws_inspector_assessment_template@ resource value.
 inspectorAssessmentTemplateResource
-    :: TF.Attr s P.Text -- ^ @target_arn@ - 'P.targetArn'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @rules_package_arns@ - 'P.rulesPackageArns'
-    -> TF.Attr s P.Int -- ^ @duration@ - 'P.duration'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @target_arn@ ('P._targetArn', 'P.targetArn')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @rules_package_arns@ ('P._rulesPackageArns', 'P.rulesPackageArns')
+    -> TF.Attr s P.Int -- ^ @duration@ ('P._duration', 'P.duration')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (InspectorAssessmentTemplateResource s)
 inspectorAssessmentTemplateResource _targetArn _rulesPackageArns _duration _name =
     TF.unsafeResource "aws_inspector_assessment_template" TF.validator $
@@ -871,7 +871,7 @@ data InspectorResourceGroupResource s = InspectorResourceGroupResource'
 
 -- | Define a new @aws_inspector_resource_group@ resource value.
 inspectorResourceGroupResource
-    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @tags@ - 'P.tags'
+    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @tags@ ('P._tags', 'P.tags')
     -> P.Resource (InspectorResourceGroupResource s)
 inspectorResourceGroupResource _tags =
     TF.unsafeResource "aws_inspector_resource_group" TF.validator $
@@ -955,8 +955,8 @@ data InstanceResource s = InstanceResource'
 
 -- | Define a new @aws_instance@ resource value.
 instanceResource
-    :: TF.Attr s P.Text -- ^ @ami@ - 'P.ami'
-    -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
+    :: TF.Attr s P.Text -- ^ @ami@ ('P._ami', 'P.ami')
+    -> TF.Attr s P.Text -- ^ @instance_type@ ('P._instanceType', 'P.instanceType')
     -> P.Resource (InstanceResource s)
 instanceResource _ami _instanceType =
     TF.unsafeResource "aws_instance" TF.validator $
@@ -1221,8 +1221,8 @@ data IotCertificateResource s = IotCertificateResource'
 
 -- | Define a new @aws_iot_certificate@ resource value.
 iotCertificateResource
-    :: TF.Attr s P.Bool -- ^ @active@ - 'P.active'
-    -> TF.Attr s P.Text -- ^ @csr@ - 'P.csr'
+    :: TF.Attr s P.Bool -- ^ @active@ ('P._active', 'P.active')
+    -> TF.Attr s P.Text -- ^ @csr@ ('P._csr', 'P.csr')
     -> P.Resource (IotCertificateResource s)
 iotCertificateResource _active _csr =
     TF.unsafeResource "aws_iot_certificate" TF.validator $
@@ -1271,8 +1271,8 @@ data IotPolicyResource s = IotPolicyResource'
 
 -- | Define a new @aws_iot_policy@ resource value.
 iotPolicyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @policy@ ('P._policy', 'P.policy')
     -> P.Resource (IotPolicyResource s)
 iotPolicyResource _name _policy =
     TF.unsafeResource "aws_iot_policy" TF.validator $
@@ -1327,7 +1327,7 @@ data IotThingResource s = IotThingResource'
 
 -- | Define a new @aws_iot_thing@ resource value.
 iotThingResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (IotThingResource s)
 iotThingResource _name =
     TF.unsafeResource "aws_iot_thing" TF.validator $
@@ -1392,7 +1392,7 @@ data IotThingTypeResource s = IotThingTypeResource'
 
 -- | Define a new @aws_iot_thing_type@ resource value.
 iotThingTypeResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (IotThingTypeResource s)
 iotThingTypeResource _name =
     TF.unsafeResource "aws_iot_thing_type" TF.validator $
@@ -1494,10 +1494,10 @@ data IotTopicRuleResource s = IotTopicRuleResource'
 
 -- | Define a new @aws_iot_topic_rule@ resource value.
 iotTopicRuleResource
-    :: TF.Attr s P.Bool -- ^ @enabled@ - 'P.enabled'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @sql@ - 'P.sql'
-    -> TF.Attr s P.Text -- ^ @sql_version@ - 'P.sqlVersion'
+    :: TF.Attr s P.Bool -- ^ @enabled@ ('P._enabled', 'P.enabled')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @sql@ ('P._sql', 'P.sql')
+    -> TF.Attr s P.Text -- ^ @sql_version@ ('P._sqlVersion', 'P.sqlVersion')
     -> P.Resource (IotTopicRuleResource s)
 iotTopicRuleResource _enabled _name _sql _sqlVersion =
     TF.unsafeResource "aws_iot_topic_rule" TF.validator $
@@ -1644,7 +1644,7 @@ data KeyPairResource s = KeyPairResource'
 
 -- | Define a new @aws_key_pair@ resource value.
 keyPairResource
-    :: TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
+    :: TF.Attr s P.Text -- ^ @public_key@ ('P._publicKey', 'P.publicKey')
     -> P.Resource (KeyPairResource s)
 keyPairResource _publicKey =
     TF.unsafeResource "aws_key_pair" TF.validator $
@@ -1720,8 +1720,8 @@ data KinesisFirehoseDeliveryStreamResource s = KinesisFirehoseDeliveryStreamReso
 
 -- | Define a new @aws_kinesis_firehose_delivery_stream@ resource value.
 kinesisFirehoseDeliveryStreamResource
-    :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @destination@ ('P._destination', 'P.destination')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (KinesisFirehoseDeliveryStreamResource s)
 kinesisFirehoseDeliveryStreamResource _destination _name =
     TF.unsafeResource "aws_kinesis_firehose_delivery_stream" TF.validator $
@@ -1868,8 +1868,8 @@ data KinesisStreamResource s = KinesisStreamResource'
 
 -- | Define a new @aws_kinesis_stream@ resource value.
 kinesisStreamResource
-    :: TF.Attr s P.Int -- ^ @shard_count@ - 'P.shardCount'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Int -- ^ @shard_count@ ('P._shardCount', 'P.shardCount')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (KinesisStreamResource s)
 kinesisStreamResource _shardCount _name =
     TF.unsafeResource "aws_kinesis_stream" TF.validator $
@@ -1962,7 +1962,7 @@ data KmsAliasResource s = KmsAliasResource'
 
 -- | Define a new @aws_kms_alias@ resource value.
 kmsAliasResource
-    :: TF.Attr s P.Text -- ^ @target_key_id@ - 'P.targetKeyId'
+    :: TF.Attr s P.Text -- ^ @target_key_id@ ('P._targetKeyId', 'P.targetKeyId')
     -> P.Resource (KmsAliasResource s)
 kmsAliasResource _targetKeyId =
     TF.unsafeResource "aws_kms_alias" TF.validator $
@@ -2050,9 +2050,9 @@ data KmsGrantResource s = KmsGrantResource'
 
 -- | Define a new @aws_kms_grant@ resource value.
 kmsGrantResource
-    :: TF.Attr s P.Text -- ^ @key_id@ - 'P.keyId'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @operations@ - 'P.operations'
-    -> TF.Attr s P.Text -- ^ @grantee_principal@ - 'P.granteePrincipal'
+    :: TF.Attr s P.Text -- ^ @key_id@ ('P._keyId', 'P.keyId')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @operations@ ('P._operations', 'P.operations')
+    -> TF.Attr s P.Text -- ^ @grantee_principal@ ('P._granteePrincipal', 'P.granteePrincipal')
     -> P.Resource (KmsGrantResource s)
 kmsGrantResource _keyId _operations _granteePrincipal =
     TF.unsafeResource "aws_kms_grant" TF.validator $
@@ -2235,9 +2235,9 @@ data LambdaAliasResource s = LambdaAliasResource'
 
 -- | Define a new @aws_lambda_alias@ resource value.
 lambdaAliasResource
-    :: TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @function_version@ - 'P.functionVersion'
+    :: TF.Attr s P.Text -- ^ @function_name@ ('P._functionName', 'P.functionName')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @function_version@ ('P._functionVersion', 'P.functionVersion')
     -> P.Resource (LambdaAliasResource s)
 lambdaAliasResource _functionName _name _functionVersion =
     TF.unsafeResource "aws_lambda_alias" TF.validator $
@@ -2320,8 +2320,8 @@ data LambdaEventSourceMappingResource s = LambdaEventSourceMappingResource'
 
 -- | Define a new @aws_lambda_event_source_mapping@ resource value.
 lambdaEventSourceMappingResource
-    :: TF.Attr s P.Text -- ^ @event_source_arn@ - 'P.eventSourceArn'
-    -> TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
+    :: TF.Attr s P.Text -- ^ @event_source_arn@ ('P._eventSourceArn', 'P.eventSourceArn')
+    -> TF.Attr s P.Text -- ^ @function_name@ ('P._functionName', 'P.functionName')
     -> P.Resource (LambdaEventSourceMappingResource s)
 lambdaEventSourceMappingResource _eventSourceArn _functionName =
     TF.unsafeResource "aws_lambda_event_source_mapping" TF.validator $
@@ -2468,10 +2468,10 @@ data LambdaFunctionResource s = LambdaFunctionResource'
 
 -- | Define a new @aws_lambda_function@ resource value.
 lambdaFunctionResource
-    :: TF.Attr s P.Text -- ^ @handler@ - 'P.handler'
-    -> TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Attr s P.Text -- ^ @runtime@ - 'P.runtime'
+    :: TF.Attr s P.Text -- ^ @handler@ ('P._handler', 'P.handler')
+    -> TF.Attr s P.Text -- ^ @function_name@ ('P._functionName', 'P.functionName')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
+    -> TF.Attr s P.Text -- ^ @runtime@ ('P._runtime', 'P.runtime')
     -> P.Resource (LambdaFunctionResource s)
 lambdaFunctionResource _handler _functionName _role _runtime =
     TF.unsafeResource "aws_lambda_function" TF.validator $
@@ -2704,9 +2704,9 @@ data LambdaPermissionResource s = LambdaPermissionResource'
 
 -- | Define a new @aws_lambda_permission@ resource value.
 lambdaPermissionResource
-    :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
-    -> TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
-    -> TF.Attr s P.Text -- ^ @principal@ - 'P.principal'
+    :: TF.Attr s P.Text -- ^ @action@ ('P._action', 'P.action')
+    -> TF.Attr s P.Text -- ^ @function_name@ ('P._functionName', 'P.functionName')
+    -> TF.Attr s P.Text -- ^ @principal@ ('P._principal', 'P.principal')
     -> P.Resource (LambdaPermissionResource s)
 lambdaPermissionResource _action _functionName _principal =
     TF.unsafeResource "aws_lambda_permission" TF.validator $
@@ -2839,8 +2839,8 @@ data LaunchConfigurationResource s = LaunchConfigurationResource'
 
 -- | Define a new @aws_launch_configuration@ resource value.
 launchConfigurationResource
-    :: TF.Attr s P.Text -- ^ @image_id@ - 'P.imageId'
-    -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
+    :: TF.Attr s P.Text -- ^ @image_id@ ('P._imageId', 'P.imageId')
+    -> TF.Attr s P.Text -- ^ @instance_type@ ('P._instanceType', 'P.instanceType')
     -> P.Resource (LaunchConfigurationResource s)
 launchConfigurationResource _imageId _instanceType =
     TF.unsafeResource "aws_launch_configuration" TF.validator $
@@ -3437,9 +3437,9 @@ data LbCookieStickinessPolicyResource s = LbCookieStickinessPolicyResource'
 
 -- | Define a new @aws_lb_cookie_stickiness_policy@ resource value.
 lbCookieStickinessPolicyResource
-    :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @lb_port@ - 'P.lbPort'
+    :: TF.Attr s P.Text -- ^ @load_balancer@ ('P._loadBalancer', 'P.loadBalancer')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Int -- ^ @lb_port@ ('P._lbPort', 'P.lbPort')
     -> P.Resource (LbCookieStickinessPolicyResource s)
 lbCookieStickinessPolicyResource _loadBalancer _name _lbPort =
     TF.unsafeResource "aws_lb_cookie_stickiness_policy" TF.validator $
@@ -3508,9 +3508,9 @@ data LbListenerResource s = LbListenerResource'
 
 -- | Define a new @aws_lb_listener@ resource value.
 lbListenerResource
-    :: TF.Attr s [TF.Attr s (DefaultActionSetting s)] -- ^ @default_action@ - 'P.defaultAction'
-    -> TF.Attr s P.Text -- ^ @load_balancer_arn@ - 'P.loadBalancerArn'
-    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
+    :: TF.Attr s [TF.Attr s (DefaultActionSetting s)] -- ^ @default_action@ ('P._defaultAction', 'P.defaultAction')
+    -> TF.Attr s P.Text -- ^ @load_balancer_arn@ ('P._loadBalancerArn', 'P.loadBalancerArn')
+    -> TF.Attr s P.Int -- ^ @port@ ('P._port', 'P.port')
     -> P.Resource (LbListenerResource s)
 lbListenerResource _defaultAction _loadBalancerArn _port =
     TF.unsafeResource "aws_lb_listener" TF.validator $
@@ -3583,8 +3583,8 @@ data LbListenerCertificateResource s = LbListenerCertificateResource'
 
 -- | Define a new @aws_lb_listener_certificate@ resource value.
 lbListenerCertificateResource
-    :: TF.Attr s P.Text -- ^ @certificate_arn@ - 'P.certificateArn'
-    -> TF.Attr s P.Text -- ^ @listener_arn@ - 'P.listenerArn'
+    :: TF.Attr s P.Text -- ^ @certificate_arn@ ('P._certificateArn', 'P.certificateArn')
+    -> TF.Attr s P.Text -- ^ @listener_arn@ ('P._listenerArn', 'P.listenerArn')
     -> P.Resource (LbListenerCertificateResource s)
 lbListenerCertificateResource _certificateArn _listenerArn =
     TF.unsafeResource "aws_lb_listener_certificate" TF.validator $
@@ -3633,9 +3633,9 @@ data LbListenerRuleResource s = LbListenerRuleResource'
 
 -- | Define a new @aws_lb_listener_rule@ resource value.
 lbListenerRuleResource
-    :: TF.Attr s [TF.Attr s (ActionSetting s)] -- ^ @action@ - 'P.action'
-    -> TF.Attr s P.Text -- ^ @listener_arn@ - 'P.listenerArn'
-    -> TF.Attr s [TF.Attr s (ConditionSetting s)] -- ^ @condition@ - 'P.condition'
+    :: TF.Attr s [TF.Attr s (ActionSetting s)] -- ^ @action@ ('P._action', 'P.action')
+    -> TF.Attr s P.Text -- ^ @listener_arn@ ('P._listenerArn', 'P.listenerArn')
+    -> TF.Attr s [TF.Attr s (ConditionSetting s)] -- ^ @condition@ ('P._condition', 'P.condition')
     -> P.Resource (LbListenerRuleResource s)
 lbListenerRuleResource _action _listenerArn _condition =
     TF.unsafeResource "aws_lb_listener_rule" TF.validator $
@@ -3700,9 +3700,9 @@ data LbSslNegotiationPolicyResource s = LbSslNegotiationPolicyResource'
 
 -- | Define a new @aws_lb_ssl_negotiation_policy@ resource value.
 lbSslNegotiationPolicyResource
-    :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @lb_port@ - 'P.lbPort'
+    :: TF.Attr s P.Text -- ^ @load_balancer@ ('P._loadBalancer', 'P.loadBalancer')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Int -- ^ @lb_port@ ('P._lbPort', 'P.lbPort')
     -> P.Resource (LbSslNegotiationPolicyResource s)
 lbSslNegotiationPolicyResource _loadBalancer _name _lbPort =
     TF.unsafeResource "aws_lb_ssl_negotiation_policy" TF.validator $
@@ -3783,9 +3783,9 @@ data LbTargetGroupResource s = LbTargetGroupResource'
 
 -- | Define a new @aws_lb_target_group@ resource value.
 lbTargetGroupResource
-    :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
-    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    :: TF.Attr s P.Text -- ^ @vpc_id@ ('P._vpcId', 'P.vpcId')
+    -> TF.Attr s P.Int -- ^ @port@ ('P._port', 'P.port')
+    -> TF.Attr s P.Text -- ^ @protocol@ ('P._protocol', 'P.protocol')
     -> P.Resource (LbTargetGroupResource s)
 lbTargetGroupResource _vpcId _port _protocol =
     TF.unsafeResource "aws_lb_target_group" TF.validator $
@@ -3901,8 +3901,8 @@ data LbTargetGroupAttachmentResource s = LbTargetGroupAttachmentResource'
 
 -- | Define a new @aws_lb_target_group_attachment@ resource value.
 lbTargetGroupAttachmentResource
-    :: TF.Attr s P.Text -- ^ @target_group_arn@ - 'P.targetGroupArn'
-    -> TF.Attr s P.Text -- ^ @target_id@ - 'P.targetId'
+    :: TF.Attr s P.Text -- ^ @target_group_arn@ ('P._targetGroupArn', 'P.targetGroupArn')
+    -> TF.Attr s P.Text -- ^ @target_id@ ('P._targetId', 'P.targetId')
     -> P.Resource (LbTargetGroupAttachmentResource s)
 lbTargetGroupAttachmentResource _targetGroupArn _targetId =
     TF.unsafeResource "aws_lb_target_group_attachment" TF.validator $
@@ -3959,7 +3959,7 @@ data LightsailDomainResource s = LightsailDomainResource'
 
 -- | Define a new @aws_lightsail_domain@ resource value.
 lightsailDomainResource
-    :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
+    :: TF.Attr s P.Text -- ^ @domain_name@ ('P._domainName', 'P.domainName')
     -> P.Resource (LightsailDomainResource s)
 lightsailDomainResource _domainName =
     TF.unsafeResource "aws_lightsail_domain" TF.validator $
@@ -4013,10 +4013,10 @@ data LightsailInstanceResource s = LightsailInstanceResource'
 
 -- | Define a new @aws_lightsail_instance@ resource value.
 lightsailInstanceResource
-    :: TF.Attr s P.Text -- ^ @blueprint_id@ - 'P.blueprintId'
-    -> TF.Attr s P.Text -- ^ @bundle_id@ - 'P.bundleId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @availability_zone@ - 'P.availabilityZone'
+    :: TF.Attr s P.Text -- ^ @blueprint_id@ ('P._blueprintId', 'P.blueprintId')
+    -> TF.Attr s P.Text -- ^ @bundle_id@ ('P._bundleId', 'P.bundleId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @availability_zone@ ('P._availabilityZone', 'P.availabilityZone')
     -> P.Resource (LightsailInstanceResource s)
 lightsailInstanceResource _blueprintId _bundleId _name _availabilityZone =
     TF.unsafeResource "aws_lightsail_instance" TF.validator $
@@ -4180,7 +4180,7 @@ data LightsailStaticIpResource s = LightsailStaticIpResource'
 
 -- | Define a new @aws_lightsail_static_ip@ resource value.
 lightsailStaticIpResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (LightsailStaticIpResource s)
 lightsailStaticIpResource _name =
     TF.unsafeResource "aws_lightsail_static_ip" TF.validator $
@@ -4228,8 +4228,8 @@ data LightsailStaticIpAttachmentResource s = LightsailStaticIpAttachmentResource
 
 -- | Define a new @aws_lightsail_static_ip_attachment@ resource value.
 lightsailStaticIpAttachmentResource
-    :: TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
-    -> TF.Attr s P.Text -- ^ @static_ip_name@ - 'P.staticIpName'
+    :: TF.Attr s P.Text -- ^ @instance_name@ ('P._instanceName', 'P.instanceName')
+    -> TF.Attr s P.Text -- ^ @static_ip_name@ ('P._staticIpName', 'P.staticIpName')
     -> P.Resource (LightsailStaticIpAttachmentResource s)
 lightsailStaticIpAttachmentResource _instanceName _staticIpName =
     TF.unsafeResource "aws_lightsail_static_ip_attachment" TF.validator $
@@ -4278,8 +4278,8 @@ data LoadBalancerBackendServerPolicyResource s = LoadBalancerBackendServerPolicy
 
 -- | Define a new @aws_load_balancer_backend_server_policy@ resource value.
 loadBalancerBackendServerPolicyResource
-    :: TF.Attr s P.Text -- ^ @load_balancer_name@ - 'P.loadBalancerName'
-    -> TF.Attr s P.Int -- ^ @instance_port@ - 'P.instancePort'
+    :: TF.Attr s P.Text -- ^ @load_balancer_name@ ('P._loadBalancerName', 'P.loadBalancerName')
+    -> TF.Attr s P.Int -- ^ @instance_port@ ('P._instancePort', 'P.instancePort')
     -> P.Resource (LoadBalancerBackendServerPolicyResource s)
 loadBalancerBackendServerPolicyResource _loadBalancerName _instancePort =
     TF.unsafeResource "aws_load_balancer_backend_server_policy" TF.validator $
@@ -4335,8 +4335,8 @@ data LoadBalancerListenerPolicyResource s = LoadBalancerListenerPolicyResource'
 
 -- | Define a new @aws_load_balancer_listener_policy@ resource value.
 loadBalancerListenerPolicyResource
-    :: TF.Attr s P.Text -- ^ @load_balancer_name@ - 'P.loadBalancerName'
-    -> TF.Attr s P.Int -- ^ @load_balancer_port@ - 'P.loadBalancerPort'
+    :: TF.Attr s P.Text -- ^ @load_balancer_name@ ('P._loadBalancerName', 'P.loadBalancerName')
+    -> TF.Attr s P.Int -- ^ @load_balancer_port@ ('P._loadBalancerPort', 'P.loadBalancerPort')
     -> P.Resource (LoadBalancerListenerPolicyResource s)
 loadBalancerListenerPolicyResource _loadBalancerName _loadBalancerPort =
     TF.unsafeResource "aws_load_balancer_listener_policy" TF.validator $
@@ -4395,9 +4395,9 @@ data LoadBalancerPolicyResource s = LoadBalancerPolicyResource'
 
 -- | Define a new @aws_load_balancer_policy@ resource value.
 loadBalancerPolicyResource
-    :: TF.Attr s P.Text -- ^ @load_balancer_name@ - 'P.loadBalancerName'
-    -> TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
-    -> TF.Attr s P.Text -- ^ @policy_type_name@ - 'P.policyTypeName'
+    :: TF.Attr s P.Text -- ^ @load_balancer_name@ ('P._loadBalancerName', 'P.loadBalancerName')
+    -> TF.Attr s P.Text -- ^ @policy_name@ ('P._policyName', 'P.policyName')
+    -> TF.Attr s P.Text -- ^ @policy_type_name@ ('P._policyTypeName', 'P.policyTypeName')
     -> P.Resource (LoadBalancerPolicyResource s)
 loadBalancerPolicyResource _loadBalancerName _policyName _policyTypeName =
     TF.unsafeResource "aws_load_balancer_policy" TF.validator $
@@ -4454,7 +4454,7 @@ data MacieMemberAccountAssociationResource s = MacieMemberAccountAssociationReso
 
 -- | Define a new @aws_macie_member_account_association@ resource value.
 macieMemberAccountAssociationResource
-    :: TF.Attr s P.Text -- ^ @member_account_id@ - 'P.memberAccountId'
+    :: TF.Attr s P.Text -- ^ @member_account_id@ ('P._memberAccountId', 'P.memberAccountId')
     -> P.Resource (MacieMemberAccountAssociationResource s)
 macieMemberAccountAssociationResource _memberAccountId =
     TF.unsafeResource "aws_macie_member_account_association" TF.validator $
@@ -4496,7 +4496,7 @@ data MacieS3BucketAssociationResource s = MacieS3BucketAssociationResource'
 
 -- | Define a new @aws_macie_s3_bucket_association@ resource value.
 macieS3BucketAssociationResource
-    :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
+    :: TF.Attr s P.Text -- ^ @bucket_name@ ('P._bucketName', 'P.bucketName')
     -> P.Resource (MacieS3BucketAssociationResource s)
 macieS3BucketAssociationResource _bucketName =
     TF.unsafeResource "aws_macie_s3_bucket_association" TF.validator $
@@ -4552,8 +4552,8 @@ data MainRouteTableAssociationResource s = MainRouteTableAssociationResource'
 
 -- | Define a new @aws_main_route_table_association@ resource value.
 mainRouteTableAssociationResource
-    :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
-    -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    :: TF.Attr s P.Text -- ^ @route_table_id@ ('P._routeTableId', 'P.routeTableId')
+    -> TF.Attr s P.Text -- ^ @vpc_id@ ('P._vpcId', 'P.vpcId')
     -> P.Resource (MainRouteTableAssociationResource s)
 mainRouteTableAssociationResource _routeTableId _vpcId =
     TF.unsafeResource "aws_main_route_table_association" TF.validator $
@@ -4599,7 +4599,7 @@ data MediaStoreContainerResource s = MediaStoreContainerResource'
 
 -- | Define a new @aws_media_store_container@ resource value.
 mediaStoreContainerResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (MediaStoreContainerResource s)
 mediaStoreContainerResource _name =
     TF.unsafeResource "aws_media_store_container" TF.validator $
@@ -4644,8 +4644,8 @@ data MediaStoreContainerPolicyResource s = MediaStoreContainerPolicyResource'
 
 -- | Define a new @aws_media_store_container_policy@ resource value.
 mediaStoreContainerPolicyResource
-    :: TF.Attr s P.Text -- ^ @container_name@ - 'P.containerName'
-    -> TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
+    :: TF.Attr s P.Text -- ^ @container_name@ ('P._containerName', 'P.containerName')
+    -> TF.Attr s P.Text -- ^ @policy@ ('P._policy', 'P.policy')
     -> P.Resource (MediaStoreContainerPolicyResource s)
 mediaStoreContainerPolicyResource _containerName _policy =
     TF.unsafeResource "aws_media_store_container_policy" TF.validator $
@@ -4715,12 +4715,12 @@ data MqBrokerResource s = MqBrokerResource'
 
 -- | Define a new @aws_mq_broker@ resource value.
 mqBrokerResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ - 'P.securityGroups'
-    -> TF.Attr s P.Text -- ^ @broker_name@ - 'P.brokerName'
-    -> TF.Attr s P.Text -- ^ @engine_type@ - 'P.engineType'
-    -> TF.Attr s P.Text -- ^ @host_instance_type@ - 'P.hostInstanceType'
-    -> TF.Attr s [TF.Attr s (UserSetting s)] -- ^ @user@ - 'P.user'
-    -> TF.Attr s P.Text -- ^ @engine_version@ - 'P.engineVersion'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ ('P._securityGroups', 'P.securityGroups')
+    -> TF.Attr s P.Text -- ^ @broker_name@ ('P._brokerName', 'P.brokerName')
+    -> TF.Attr s P.Text -- ^ @engine_type@ ('P._engineType', 'P.engineType')
+    -> TF.Attr s P.Text -- ^ @host_instance_type@ ('P._hostInstanceType', 'P.hostInstanceType')
+    -> TF.Attr s [TF.Attr s (UserSetting s)] -- ^ @user@ ('P._user', 'P.user')
+    -> TF.Attr s P.Text -- ^ @engine_version@ ('P._engineVersion', 'P.engineVersion')
     -> P.Resource (MqBrokerResource s)
 mqBrokerResource _securityGroups _brokerName _engineType _hostInstanceType _user _engineVersion =
     TF.unsafeResource "aws_mq_broker" TF.validator $
@@ -4846,10 +4846,10 @@ data MqConfigurationResource s = MqConfigurationResource'
 
 -- | Define a new @aws_mq_configuration@ resource value.
 mqConfigurationResource
-    :: TF.Attr s P.Text -- ^ @data@ - 'P.data''
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @engine_type@ - 'P.engineType'
-    -> TF.Attr s P.Text -- ^ @engine_version@ - 'P.engineVersion'
+    :: TF.Attr s P.Text -- ^ @data@ ('P._data'', 'P.data'')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @engine_type@ ('P._engineType', 'P.engineType')
+    -> TF.Attr s P.Text -- ^ @engine_version@ ('P._engineVersion', 'P.engineVersion')
     -> P.Resource (MqConfigurationResource s)
 mqConfigurationResource _data' _name _engineType _engineVersion =
     TF.unsafeResource "aws_mq_configuration" TF.validator $
@@ -4925,8 +4925,8 @@ data NatGatewayResource s = NatGatewayResource'
 
 -- | Define a new @aws_nat_gateway@ resource value.
 natGatewayResource
-    :: TF.Attr s P.Text -- ^ @allocation_id@ - 'P.allocationId'
-    -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
+    :: TF.Attr s P.Text -- ^ @allocation_id@ ('P._allocationId', 'P.allocationId')
+    -> TF.Attr s P.Text -- ^ @subnet_id@ ('P._subnetId', 'P.subnetId')
     -> P.Resource (NatGatewayResource s)
 natGatewayResource _allocationId _subnetId =
     TF.unsafeResource "aws_nat_gateway" TF.validator $
@@ -5202,8 +5202,8 @@ data NeptuneClusterInstanceResource s = NeptuneClusterInstanceResource'
 
 -- | Define a new @aws_neptune_cluster_instance@ resource value.
 neptuneClusterInstanceResource
-    :: TF.Attr s P.Text -- ^ @instance_class@ - 'P.instanceClass'
-    -> TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
+    :: TF.Attr s P.Text -- ^ @instance_class@ ('P._instanceClass', 'P.instanceClass')
+    -> TF.Attr s P.Text -- ^ @cluster_identifier@ ('P._clusterIdentifier', 'P.clusterIdentifier')
     -> P.Resource (NeptuneClusterInstanceResource s)
 neptuneClusterInstanceResource _instanceClass _clusterIdentifier =
     TF.unsafeResource "aws_neptune_cluster_instance" TF.validator $
@@ -5349,7 +5349,7 @@ data NeptuneClusterParameterGroupResource s = NeptuneClusterParameterGroupResour
 
 -- | Define a new @aws_neptune_cluster_parameter_group@ resource value.
 neptuneClusterParameterGroupResource
-    :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
+    :: TF.Attr s P.Text -- ^ @family@ ('P._family'', 'P.family'')
     -> P.Resource (NeptuneClusterParameterGroupResource s)
 neptuneClusterParameterGroupResource _family' =
     TF.unsafeResource "aws_neptune_cluster_parameter_group" TF.validator $
@@ -5430,7 +5430,7 @@ data NeptuneEventSubscriptionResource s = NeptuneEventSubscriptionResource'
 
 -- | Define a new @aws_neptune_event_subscription@ resource value.
 neptuneEventSubscriptionResource
-    :: TF.Attr s P.Text -- ^ @sns_topic_arn@ - 'P.snsTopicArn'
+    :: TF.Attr s P.Text -- ^ @sns_topic_arn@ ('P._snsTopicArn', 'P.snsTopicArn')
     -> P.Resource (NeptuneEventSubscriptionResource s)
 neptuneEventSubscriptionResource _snsTopicArn =
     TF.unsafeResource "aws_neptune_event_subscription" TF.validator $
@@ -5525,8 +5525,8 @@ data NeptuneParameterGroupResource s = NeptuneParameterGroupResource'
 
 -- | Define a new @aws_neptune_parameter_group@ resource value.
 neptuneParameterGroupResource
-    :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @family@ ('P._family'', 'P.family'')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (NeptuneParameterGroupResource s)
 neptuneParameterGroupResource _family' _name =
     TF.unsafeResource "aws_neptune_parameter_group" TF.validator $
@@ -5599,7 +5599,7 @@ data NeptuneSubnetGroupResource s = NeptuneSubnetGroupResource'
 
 -- | Define a new @aws_neptune_subnet_group@ resource value.
 neptuneSubnetGroupResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @subnet_ids@ - 'P.subnetIds'
+    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @subnet_ids@ ('P._subnetIds', 'P.subnetIds')
     -> P.Resource (NeptuneSubnetGroupResource s)
 neptuneSubnetGroupResource _subnetIds =
     TF.unsafeResource "aws_neptune_subnet_group" TF.validator $
@@ -5661,7 +5661,7 @@ data NetworkAclResource s = NetworkAclResource'
 
 -- | Define a new @aws_network_acl@ resource value.
 networkAclResource
-    :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    :: TF.Attr s P.Text -- ^ @vpc_id@ ('P._vpcId', 'P.vpcId')
     -> P.Resource (NetworkAclResource s)
 networkAclResource _vpcId =
     TF.unsafeResource "aws_network_acl" TF.validator $
@@ -5749,10 +5749,10 @@ data NetworkAclRuleResource s = NetworkAclRuleResource'
 
 -- | Define a new @aws_network_acl_rule@ resource value.
 networkAclRuleResource
-    :: TF.Attr s P.Text -- ^ @rule_action@ - 'P.ruleAction'
-    -> TF.Attr s P.Text -- ^ @network_acl_id@ - 'P.networkAclId'
-    -> TF.Attr s P.Int -- ^ @rule_number@ - 'P.ruleNumber'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    :: TF.Attr s P.Text -- ^ @rule_action@ ('P._ruleAction', 'P.ruleAction')
+    -> TF.Attr s P.Text -- ^ @network_acl_id@ ('P._networkAclId', 'P.networkAclId')
+    -> TF.Attr s P.Int -- ^ @rule_number@ ('P._ruleNumber', 'P.ruleNumber')
+    -> TF.Attr s P.Text -- ^ @protocol@ ('P._protocol', 'P.protocol')
     -> P.Resource (NetworkAclRuleResource s)
 networkAclRuleResource _ruleAction _networkAclId _ruleNumber _protocol =
     TF.unsafeResource "aws_network_acl_rule" TF.validator $
@@ -5878,7 +5878,7 @@ data NetworkInterfaceResource s = NetworkInterfaceResource'
 
 -- | Define a new @aws_network_interface@ resource value.
 networkInterfaceResource
-    :: TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
+    :: TF.Attr s P.Text -- ^ @subnet_id@ ('P._subnetId', 'P.subnetId')
     -> P.Resource (NetworkInterfaceResource s)
 networkInterfaceResource _subnetId =
     TF.unsafeResource "aws_network_interface" TF.validator $
@@ -5959,9 +5959,9 @@ data NetworkInterfaceAttachmentResource s = NetworkInterfaceAttachmentResource'
 
 -- | Define a new @aws_network_interface_attachment@ resource value.
 networkInterfaceAttachmentResource
-    :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
-    -> TF.Attr s P.Text -- ^ @network_interface_id@ - 'P.networkInterfaceId'
-    -> TF.Attr s P.Int -- ^ @device_index@ - 'P.deviceIndex'
+    :: TF.Attr s P.Text -- ^ @instance_id@ ('P._instanceId', 'P.instanceId')
+    -> TF.Attr s P.Text -- ^ @network_interface_id@ ('P._networkInterfaceId', 'P.networkInterfaceId')
+    -> TF.Attr s P.Int -- ^ @device_index@ ('P._deviceIndex', 'P.deviceIndex')
     -> P.Resource (NetworkInterfaceAttachmentResource s)
 networkInterfaceAttachmentResource _instanceId _networkInterfaceId _deviceIndex =
     TF.unsafeResource "aws_network_interface_attachment" TF.validator $
@@ -6020,8 +6020,8 @@ data NetworkInterfaceSgAttachmentResource s = NetworkInterfaceSgAttachmentResour
 
 -- | Define a new @aws_network_interface_sg_attachment@ resource value.
 networkInterfaceSgAttachmentResource
-    :: TF.Attr s P.Text -- ^ @network_interface_id@ - 'P.networkInterfaceId'
-    -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
+    :: TF.Attr s P.Text -- ^ @network_interface_id@ ('P._networkInterfaceId', 'P.networkInterfaceId')
+    -> TF.Attr s P.Text -- ^ @security_group_id@ ('P._securityGroupId', 'P.securityGroupId')
     -> P.Resource (NetworkInterfaceSgAttachmentResource s)
 networkInterfaceSgAttachmentResource _networkInterfaceId _securityGroupId =
     TF.unsafeResource "aws_network_interface_sg_attachment" TF.validator $
@@ -6106,9 +6106,9 @@ data OpsworksApplicationResource s = OpsworksApplicationResource'
 
 -- | Define a new @aws_opsworks_application@ resource value.
 opsworksApplicationResource
-    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @stack_id@ ('P._stackId', 'P.stackId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (OpsworksApplicationResource s)
 opsworksApplicationResource _stackId _name _type' =
     TF.unsafeResource "aws_opsworks_application" TF.validator $
@@ -6308,9 +6308,9 @@ data OpsworksCustomLayerResource s = OpsworksCustomLayerResource'
 
 -- | Define a new @aws_opsworks_custom_layer@ resource value.
 opsworksCustomLayerResource
-    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @short_name@ - 'P.shortName'
+    :: TF.Attr s P.Text -- ^ @stack_id@ ('P._stackId', 'P.stackId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @short_name@ ('P._shortName', 'P.shortName')
     -> P.Resource (OpsworksCustomLayerResource s)
 opsworksCustomLayerResource _stackId _name _shortName =
     TF.unsafeResource "aws_opsworks_custom_layer" TF.validator $
@@ -6552,8 +6552,8 @@ data OpsworksGangliaLayerResource s = OpsworksGangliaLayerResource'
 
 -- | Define a new @aws_opsworks_ganglia_layer@ resource value.
 opsworksGangliaLayerResource
-    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
-    -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
+    :: TF.Attr s P.Text -- ^ @stack_id@ ('P._stackId', 'P.stackId')
+    -> TF.Attr s P.Text -- ^ @password@ ('P._password', 'P.password')
     -> P.Resource (OpsworksGangliaLayerResource s)
 opsworksGangliaLayerResource _stackId _password =
     TF.unsafeResource "aws_opsworks_ganglia_layer" TF.validator $
@@ -6818,8 +6818,8 @@ data OpsworksHaproxyLayerResource s = OpsworksHaproxyLayerResource'
 
 -- | Define a new @aws_opsworks_haproxy_layer@ resource value.
 opsworksHaproxyLayerResource
-    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
-    -> TF.Attr s P.Text -- ^ @stats_password@ - 'P.statsPassword'
+    :: TF.Attr s P.Text -- ^ @stack_id@ ('P._stackId', 'P.stackId')
+    -> TF.Attr s P.Text -- ^ @stats_password@ ('P._statsPassword', 'P.statsPassword')
     -> P.Resource (OpsworksHaproxyLayerResource s)
 opsworksHaproxyLayerResource _stackId _statsPassword =
     TF.unsafeResource "aws_opsworks_haproxy_layer" TF.validator $
@@ -7060,8 +7060,8 @@ data OpsworksInstanceResource s = OpsworksInstanceResource'
 
 -- | Define a new @aws_opsworks_instance@ resource value.
 opsworksInstanceResource
-    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @layer_ids@ - 'P.layerIds'
+    :: TF.Attr s P.Text -- ^ @stack_id@ ('P._stackId', 'P.stackId')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @layer_ids@ ('P._layerIds', 'P.layerIds')
     -> P.Resource (OpsworksInstanceResource s)
 opsworksInstanceResource _stackId _layerIds =
     TF.unsafeResource "aws_opsworks_instance" TF.validator $
@@ -7341,7 +7341,7 @@ data OpsworksJavaAppLayerResource s = OpsworksJavaAppLayerResource'
 
 -- | Define a new @aws_opsworks_java_app_layer@ resource value.
 opsworksJavaAppLayerResource
-    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
+    :: TF.Attr s P.Text -- ^ @stack_id@ ('P._stackId', 'P.stackId')
     -> P.Resource (OpsworksJavaAppLayerResource s)
 opsworksJavaAppLayerResource _stackId =
     TF.unsafeResource "aws_opsworks_java_app_layer" TF.validator $
@@ -7605,7 +7605,7 @@ data OpsworksMemcachedLayerResource s = OpsworksMemcachedLayerResource'
 
 -- | Define a new @aws_opsworks_memcached_layer@ resource value.
 opsworksMemcachedLayerResource
-    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
+    :: TF.Attr s P.Text -- ^ @stack_id@ ('P._stackId', 'P.stackId')
     -> P.Resource (OpsworksMemcachedLayerResource s)
 opsworksMemcachedLayerResource _stackId =
     TF.unsafeResource "aws_opsworks_memcached_layer" TF.validator $
@@ -7844,7 +7844,7 @@ data OpsworksMysqlLayerResource s = OpsworksMysqlLayerResource'
 
 -- | Define a new @aws_opsworks_mysql_layer@ resource value.
 opsworksMysqlLayerResource
-    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
+    :: TF.Attr s P.Text -- ^ @stack_id@ ('P._stackId', 'P.stackId')
     -> P.Resource (OpsworksMysqlLayerResource s)
 opsworksMysqlLayerResource _stackId =
     TF.unsafeResource "aws_opsworks_mysql_layer" TF.validator $
@@ -8087,7 +8087,7 @@ data OpsworksNodejsAppLayerResource s = OpsworksNodejsAppLayerResource'
 
 -- | Define a new @aws_opsworks_nodejs_app_layer@ resource value.
 opsworksNodejsAppLayerResource
-    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
+    :: TF.Attr s P.Text -- ^ @stack_id@ ('P._stackId', 'P.stackId')
     -> P.Resource (OpsworksNodejsAppLayerResource s)
 opsworksNodejsAppLayerResource _stackId =
     TF.unsafeResource "aws_opsworks_nodejs_app_layer" TF.validator $
@@ -8263,7 +8263,7 @@ data OpsworksPermissionResource s = OpsworksPermissionResource'
 
 -- | Define a new @aws_opsworks_permission@ resource value.
 opsworksPermissionResource
-    :: TF.Attr s P.Text -- ^ @user_arn@ - 'P.userArn'
+    :: TF.Attr s P.Text -- ^ @user_arn@ ('P._userArn', 'P.userArn')
     -> P.Resource (OpsworksPermissionResource s)
 opsworksPermissionResource _userArn =
     TF.unsafeResource "aws_opsworks_permission" TF.validator $
@@ -8368,7 +8368,7 @@ data OpsworksPhpAppLayerResource s = OpsworksPhpAppLayerResource'
 
 -- | Define a new @aws_opsworks_php_app_layer@ resource value.
 opsworksPhpAppLayerResource
-    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
+    :: TF.Attr s P.Text -- ^ @stack_id@ ('P._stackId', 'P.stackId')
     -> P.Resource (OpsworksPhpAppLayerResource s)
 opsworksPhpAppLayerResource _stackId =
     TF.unsafeResource "aws_opsworks_php_app_layer" TF.validator $
@@ -8612,7 +8612,7 @@ data OpsworksRailsAppLayerResource s = OpsworksRailsAppLayerResource'
 
 -- | Define a new @aws_opsworks_rails_app_layer@ resource value.
 opsworksRailsAppLayerResource
-    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
+    :: TF.Attr s P.Text -- ^ @stack_id@ ('P._stackId', 'P.stackId')
     -> P.Resource (OpsworksRailsAppLayerResource s)
 opsworksRailsAppLayerResource _stackId =
     TF.unsafeResource "aws_opsworks_rails_app_layer" TF.validator $
@@ -8832,10 +8832,10 @@ data OpsworksRdsDbInstanceResource s = OpsworksRdsDbInstanceResource'
 
 -- | Define a new @aws_opsworks_rds_db_instance@ resource value.
 opsworksRdsDbInstanceResource
-    :: TF.Attr s P.Text -- ^ @rds_db_instance_arn@ - 'P.rdsDbInstanceArn'
-    -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
-    -> TF.Attr s P.Text -- ^ @db_password@ - 'P.dbPassword'
-    -> TF.Attr s P.Text -- ^ @db_user@ - 'P.dbUser'
+    :: TF.Attr s P.Text -- ^ @rds_db_instance_arn@ ('P._rdsDbInstanceArn', 'P.rdsDbInstanceArn')
+    -> TF.Attr s P.Text -- ^ @stack_id@ ('P._stackId', 'P.stackId')
+    -> TF.Attr s P.Text -- ^ @db_password@ ('P._dbPassword', 'P.dbPassword')
+    -> TF.Attr s P.Text -- ^ @db_user@ ('P._dbUser', 'P.dbUser')
     -> P.Resource (OpsworksRdsDbInstanceResource s)
 opsworksRdsDbInstanceResource _rdsDbInstanceArn _stackId _dbPassword _dbUser =
     TF.unsafeResource "aws_opsworks_rds_db_instance" TF.validator $
@@ -8940,10 +8940,10 @@ data OpsworksStackResource s = OpsworksStackResource'
 
 -- | Define a new @aws_opsworks_stack@ resource value.
 opsworksStackResource
-    :: TF.Attr s P.Text -- ^ @default_instance_profile_arn@ - 'P.defaultInstanceProfileArn'
-    -> TF.Attr s P.Text -- ^ @service_role_arn@ - 'P.serviceRoleArn'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
+    :: TF.Attr s P.Text -- ^ @default_instance_profile_arn@ ('P._defaultInstanceProfileArn', 'P.defaultInstanceProfileArn')
+    -> TF.Attr s P.Text -- ^ @service_role_arn@ ('P._serviceRoleArn', 'P.serviceRoleArn')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @region@ ('P._region', 'P.region')
     -> P.Resource (OpsworksStackResource s)
 opsworksStackResource _defaultInstanceProfileArn _serviceRoleArn _name _region =
     TF.unsafeResource "aws_opsworks_stack" TF.validator $
@@ -9169,7 +9169,7 @@ data OpsworksStaticWebLayerResource s = OpsworksStaticWebLayerResource'
 
 -- | Define a new @aws_opsworks_static_web_layer@ resource value.
 opsworksStaticWebLayerResource
-    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
+    :: TF.Attr s P.Text -- ^ @stack_id@ ('P._stackId', 'P.stackId')
     -> P.Resource (OpsworksStaticWebLayerResource s)
 opsworksStaticWebLayerResource _stackId =
     TF.unsafeResource "aws_opsworks_static_web_layer" TF.validator $
@@ -9347,8 +9347,8 @@ data OpsworksUserProfileResource s = OpsworksUserProfileResource'
 
 -- | Define a new @aws_opsworks_user_profile@ resource value.
 opsworksUserProfileResource
-    :: TF.Attr s P.Text -- ^ @user_arn@ - 'P.userArn'
-    -> TF.Attr s P.Text -- ^ @ssh_username@ - 'P.sshUsername'
+    :: TF.Attr s P.Text -- ^ @user_arn@ ('P._userArn', 'P.userArn')
+    -> TF.Attr s P.Text -- ^ @ssh_username@ ('P._sshUsername', 'P.sshUsername')
     -> P.Resource (OpsworksUserProfileResource s)
 opsworksUserProfileResource _userArn _sshUsername =
     TF.unsafeResource "aws_opsworks_user_profile" TF.validator $
@@ -9414,8 +9414,8 @@ data OrganizationsAccountResource s = OrganizationsAccountResource'
 
 -- | Define a new @aws_organizations_account@ resource value.
 organizationsAccountResource
-    :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @email@ ('P._email', 'P.email')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (OrganizationsAccountResource s)
 organizationsAccountResource _email _name =
     TF.unsafeResource "aws_organizations_account" TF.validator $
@@ -9540,8 +9540,8 @@ data OrganizationsPolicyResource s = OrganizationsPolicyResource'
 
 -- | Define a new @aws_organizations_policy@ resource value.
 organizationsPolicyResource
-    :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @content@ ('P._content', 'P.content')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (OrganizationsPolicyResource s)
 organizationsPolicyResource _content _name =
     TF.unsafeResource "aws_organizations_policy" TF.validator $
@@ -9604,8 +9604,8 @@ data OrganizationsPolicyAttachmentResource s = OrganizationsPolicyAttachmentReso
 
 -- | Define a new @aws_organizations_policy_attachment@ resource value.
 organizationsPolicyAttachmentResource
-    :: TF.Attr s P.Text -- ^ @policy_id@ - 'P.policyId'
-    -> TF.Attr s P.Text -- ^ @target_id@ - 'P.targetId'
+    :: TF.Attr s P.Text -- ^ @policy_id@ ('P._policyId', 'P.policyId')
+    -> TF.Attr s P.Text -- ^ @target_id@ ('P._targetId', 'P.targetId')
     -> P.Resource (OrganizationsPolicyAttachmentResource s)
 organizationsPolicyAttachmentResource _policyId _targetId =
     TF.unsafeResource "aws_organizations_policy_attachment" TF.validator $
@@ -9651,8 +9651,8 @@ data PlacementGroupResource s = PlacementGroupResource'
 
 -- | Define a new @aws_placement_group@ resource value.
 placementGroupResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @strategy@ - 'P.strategy'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @strategy@ ('P._strategy', 'P.strategy')
     -> P.Resource (PlacementGroupResource s)
 placementGroupResource _name _strategy =
     TF.unsafeResource "aws_placement_group" TF.validator $
@@ -9698,8 +9698,8 @@ data ProxyProtocolPolicyResource s = ProxyProtocolPolicyResource'
 
 -- | Define a new @aws_proxy_protocol_policy@ resource value.
 proxyProtocolPolicyResource
-    :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @instance_ports@ - 'P.instancePorts'
+    :: TF.Attr s P.Text -- ^ @load_balancer@ ('P._loadBalancer', 'P.loadBalancer')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @instance_ports@ ('P._instancePorts', 'P.instancePorts')
     -> P.Resource (ProxyProtocolPolicyResource s)
 proxyProtocolPolicyResource _loadBalancer _instancePorts =
     TF.unsafeResource "aws_proxy_protocol_policy" TF.validator $
@@ -10019,8 +10019,8 @@ data RdsClusterInstanceResource s = RdsClusterInstanceResource'
 
 -- | Define a new @aws_rds_cluster_instance@ resource value.
 rdsClusterInstanceResource
-    :: TF.Attr s P.Text -- ^ @instance_class@ - 'P.instanceClass'
-    -> TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
+    :: TF.Attr s P.Text -- ^ @instance_class@ ('P._instanceClass', 'P.instanceClass')
+    -> TF.Attr s P.Text -- ^ @cluster_identifier@ ('P._clusterIdentifier', 'P.clusterIdentifier')
     -> P.Resource (RdsClusterInstanceResource s)
 rdsClusterInstanceResource _instanceClass _clusterIdentifier =
     TF.unsafeResource "aws_rds_cluster_instance" TF.validator $
@@ -10171,7 +10171,7 @@ data RdsClusterParameterGroupResource s = RdsClusterParameterGroupResource'
 
 -- | Define a new @aws_rds_cluster_parameter_group@ resource value.
 rdsClusterParameterGroupResource
-    :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
+    :: TF.Attr s P.Text -- ^ @family@ ('P._family'', 'P.family'')
     -> P.Resource (RdsClusterParameterGroupResource s)
 rdsClusterParameterGroupResource _family' =
     TF.unsafeResource "aws_rds_cluster_parameter_group" TF.validator $
@@ -10291,8 +10291,8 @@ data RedshiftClusterResource s = RedshiftClusterResource'
 
 -- | Define a new @aws_redshift_cluster@ resource value.
 redshiftClusterResource
-    :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
-    -> TF.Attr s P.Text -- ^ @node_type@ - 'P.nodeType'
+    :: TF.Attr s P.Text -- ^ @cluster_identifier@ ('P._clusterIdentifier', 'P.clusterIdentifier')
+    -> TF.Attr s P.Text -- ^ @node_type@ ('P._nodeType', 'P.nodeType')
     -> P.Resource (RedshiftClusterResource s)
 redshiftClusterResource _clusterIdentifier _nodeType =
     TF.unsafeResource "aws_redshift_cluster" TF.validator $
@@ -10519,8 +10519,8 @@ data RedshiftParameterGroupResource s = RedshiftParameterGroupResource'
 
 -- | Define a new @aws_redshift_parameter_group@ resource value.
 redshiftParameterGroupResource
-    :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @family@ ('P._family'', 'P.family'')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (RedshiftParameterGroupResource s)
 redshiftParameterGroupResource _family' _name =
     TF.unsafeResource "aws_redshift_parameter_group" TF.validator $
@@ -10583,8 +10583,8 @@ data RedshiftSecurityGroupResource s = RedshiftSecurityGroupResource'
 
 -- | Define a new @aws_redshift_security_group@ resource value.
 redshiftSecurityGroupResource
-    :: TF.Attr s [TF.Attr s (IngressSetting s)] -- ^ @ingress@ - 'P.ingress'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s [TF.Attr s (IngressSetting s)] -- ^ @ingress@ ('P._ingress', 'P.ingress')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (RedshiftSecurityGroupResource s)
 redshiftSecurityGroupResource _ingress _name =
     TF.unsafeResource "aws_redshift_security_group" TF.validator $
@@ -10643,8 +10643,8 @@ data RedshiftSubnetGroupResource s = RedshiftSubnetGroupResource'
 
 -- | Define a new @aws_redshift_subnet_group@ resource value.
 redshiftSubnetGroupResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @subnet_ids@ - 'P.subnetIds'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @subnet_ids@ ('P._subnetIds', 'P.subnetIds')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (RedshiftSubnetGroupResource s)
 redshiftSubnetGroupResource _subnetIds _name =
     TF.unsafeResource "aws_redshift_subnet_group" TF.validator $
@@ -10710,7 +10710,7 @@ data RouteResource s = RouteResource'
 
 -- | Define a new @aws_route@ resource value.
 routeResource
-    :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
+    :: TF.Attr s P.Text -- ^ @route_table_id@ ('P._routeTableId', 'P.routeTableId')
     -> P.Resource (RouteResource s)
 routeResource _routeTableId =
     TF.unsafeResource "aws_route" TF.validator $
@@ -10883,7 +10883,7 @@ data Route53HealthCheckResource s = Route53HealthCheckResource'
 
 -- | Define a new @aws_route53_health_check@ resource value.
 route53HealthCheckResource
-    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (Route53HealthCheckResource s)
 route53HealthCheckResource _type' =
     TF.unsafeResource "aws_route53_health_check" TF.validator $
@@ -11044,8 +11044,8 @@ data Route53QueryLogResource s = Route53QueryLogResource'
 
 -- | Define a new @aws_route53_query_log@ resource value.
 route53QueryLogResource
-    :: TF.Attr s P.Text -- ^ @cloudwatch_log_group_arn@ - 'P.cloudwatchLogGroupArn'
-    -> TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
+    :: TF.Attr s P.Text -- ^ @cloudwatch_log_group_arn@ ('P._cloudwatchLogGroupArn', 'P.cloudwatchLogGroupArn')
+    -> TF.Attr s P.Text -- ^ @zone_id@ ('P._zoneId', 'P.zoneId')
     -> P.Resource (Route53QueryLogResource s)
 route53QueryLogResource _cloudwatchLogGroupArn _zoneId =
     TF.unsafeResource "aws_route53_query_log" TF.validator $
@@ -11173,9 +11173,9 @@ data Route53RecordResource s = Route53RecordResource'
 
 -- | Define a new @aws_route53_record@ resource value.
 route53RecordResource
-    :: TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @zone_id@ ('P._zoneId', 'P.zoneId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (Route53RecordResource s)
 route53RecordResource _zoneId _name _type' =
     TF.unsafeResource "aws_route53_record" TF.validator $
@@ -11381,7 +11381,7 @@ data Route53ZoneResource s = Route53ZoneResource'
 
 -- | Define a new @aws_route53_zone@ resource value.
 route53ZoneResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (Route53ZoneResource s)
 route53ZoneResource _name =
     TF.unsafeResource "aws_route53_zone" TF.validator $
@@ -11475,8 +11475,8 @@ data Route53ZoneAssociationResource s = Route53ZoneAssociationResource'
 
 -- | Define a new @aws_route53_zone_association@ resource value.
 route53ZoneAssociationResource
-    :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
-    -> TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
+    :: TF.Attr s P.Text -- ^ @vpc_id@ ('P._vpcId', 'P.vpcId')
+    -> TF.Attr s P.Text -- ^ @zone_id@ ('P._zoneId', 'P.zoneId')
     -> P.Resource (Route53ZoneAssociationResource s)
 route53ZoneAssociationResource _vpcId _zoneId =
     TF.unsafeResource "aws_route53_zone_association" TF.validator $
@@ -11525,7 +11525,7 @@ data RouteTableResource s = RouteTableResource'
 
 -- | Define a new @aws_route_table@ resource value.
 routeTableResource
-    :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    :: TF.Attr s P.Text -- ^ @vpc_id@ ('P._vpcId', 'P.vpcId')
     -> P.Resource (RouteTableResource s)
 routeTableResource _vpcId =
     TF.unsafeResource "aws_route_table" TF.validator $
@@ -11577,8 +11577,8 @@ data RouteTableAssociationResource s = RouteTableAssociationResource'
 
 -- | Define a new @aws_route_table_association@ resource value.
 routeTableAssociationResource
-    :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
-    -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
+    :: TF.Attr s P.Text -- ^ @route_table_id@ ('P._routeTableId', 'P.routeTableId')
+    -> TF.Attr s P.Text -- ^ @subnet_id@ ('P._subnetId', 'P.subnetId')
     -> P.Resource (RouteTableAssociationResource s)
 routeTableAssociationResource _routeTableId _subnetId =
     TF.unsafeResource "aws_route_table_association" TF.validator $
