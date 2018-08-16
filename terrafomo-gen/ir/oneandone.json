@@ -3303,6 +3303,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"password\" <$> TF.attribute",
+                    "name": "_password",
+                    "method": "password",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPassword",
+                    "validate": false,
+                    "optional": true,
+                    "original": "password"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"ram\" <$> TF.attribute",
                     "name": "_ram",
                     "method": "ram",
@@ -3443,7 +3460,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPassword",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "password"
                 }
             ],
