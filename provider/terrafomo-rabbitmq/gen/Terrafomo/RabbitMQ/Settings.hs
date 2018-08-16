@@ -19,15 +19,15 @@ module Terrafomo.RabbitMQ.Settings
     (
     -- ** permissions
       PermissionsSetting (..)
-    , permissionsSetting
+    , newPermissionsSetting
 
     -- ** policy
     , PolicySetting (..)
-    , policySetting
+    , newPolicySetting
 
     -- ** settings
-    , SettingsSetting (..)
-    , settingsSetting
+    , Settings (..)
+    , newSettings
 
     ) where
 
@@ -66,12 +66,12 @@ data PermissionsSetting s = PermissionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @permissions@ settings value.
-permissionsSetting
+newPermissionsSetting
     :: TF.Attr s P.Text -- ^ 'P._configure': @configure@
     -> TF.Attr s P.Text -- ^ 'P._read': @read@
     -> TF.Attr s P.Text -- ^ 'P._write': @write@
     -> PermissionsSetting s
-permissionsSetting _configure _read _write =
+newPermissionsSetting _configure _read _write =
     PermissionsSetting'
         { _configure = _configure
         , _read = _read
@@ -121,13 +121,13 @@ data PolicySetting s = PolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @policy@ settings value.
-policySetting
+newPolicySetting
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ 'P._definition': @definition@
     -> TF.Attr s P.Text -- ^ 'P._pattern'': @pattern@
     -> TF.Attr s P.Int -- ^ 'P._priority': @priority@
     -> TF.Attr s P.Text -- ^ 'P._applyTo': @apply_to@
     -> PolicySetting s
-policySetting _definition _pattern' _priority _applyTo =
+newPolicySetting _definition _pattern' _priority _applyTo =
     PolicySetting'
         { _applyTo = _applyTo
         , _definition = _definition
@@ -168,7 +168,7 @@ instance P.HasPriority (PolicySetting s) (TF.Attr s P.Int) where
                (\s a -> s { _priority = a } :: PolicySetting s)
 
 -- | @settings@ nested settings.
-data SettingsSetting s = SettingsSetting'
+data Settings s = Settings'
     { _arguments     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @arguments@ - (Optional)
     --
@@ -190,11 +190,11 @@ data SettingsSetting s = SettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @settings@ settings value.
-settingsSetting
+newSettings
     :: TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> SettingsSetting s
-settingsSetting _type' =
-    SettingsSetting'
+    -> Settings s
+newSettings _type' =
+    Settings'
         { _arguments = TF.Nil
         , _autoDelete = TF.value P.False
         , _durable = TF.value P.False
@@ -202,9 +202,9 @@ settingsSetting _type' =
         , _argumentsJson = TF.Nil
         }
 
-instance TF.IsValue  (SettingsSetting s)
-instance TF.IsObject (SettingsSetting s) where
-    toObject SettingsSetting'{..} = P.catMaybes
+instance TF.IsValue  (Settings s)
+instance TF.IsObject (Settings s) where
+    toObject Settings'{..} = P.catMaybes
         [ TF.assign "arguments" <$> TF.attribute _arguments
         , TF.assign "auto_delete" <$> TF.attribute _autoDelete
         , TF.assign "durable" <$> TF.attribute _durable
@@ -212,8 +212,8 @@ instance TF.IsObject (SettingsSetting s) where
         , TF.assign "arguments_json" <$> TF.attribute _argumentsJson
         ]
 
-instance TF.IsValid (SettingsSetting s) where
-    validator = TF.fieldsValidator (\SettingsSetting'{..} -> Map.fromList $ P.catMaybes
+instance TF.IsValid (Settings s) where
+    validator = TF.fieldsValidator (\Settings'{..} -> Map.fromList $ P.catMaybes
         [ if (_argumentsJson P.== TF.Nil)
               then P.Nothing
               else P.Just ("_argumentsJson",
@@ -221,27 +221,27 @@ instance TF.IsValid (SettingsSetting s) where
                             ])
         ])
 
-instance P.HasArguments (SettingsSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasArguments (Settings s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     arguments =
-        P.lens (_arguments :: SettingsSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _arguments = a } :: SettingsSetting s)
+        P.lens (_arguments :: Settings s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _arguments = a } :: Settings s)
 
-instance P.HasAutoDelete (SettingsSetting s) (TF.Attr s P.Bool) where
+instance P.HasAutoDelete (Settings s) (TF.Attr s P.Bool) where
     autoDelete =
-        P.lens (_autoDelete :: SettingsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoDelete = a } :: SettingsSetting s)
+        P.lens (_autoDelete :: Settings s -> TF.Attr s P.Bool)
+               (\s a -> s { _autoDelete = a } :: Settings s)
 
-instance P.HasDurable (SettingsSetting s) (TF.Attr s P.Bool) where
+instance P.HasDurable (Settings s) (TF.Attr s P.Bool) where
     durable =
-        P.lens (_durable :: SettingsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _durable = a } :: SettingsSetting s)
+        P.lens (_durable :: Settings s -> TF.Attr s P.Bool)
+               (\s a -> s { _durable = a } :: Settings s)
 
-instance P.HasType' (SettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasType' (Settings s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: SettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: SettingsSetting s)
+        P.lens (_type' :: Settings s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: Settings s)
 
-instance P.HasArgumentsJson (SettingsSetting s) (TF.Attr s P.Text) where
+instance P.HasArgumentsJson (Settings s) (TF.Attr s P.Text) where
     argumentsJson =
-        P.lens (_argumentsJson :: SettingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _argumentsJson = a } :: SettingsSetting s)
+        P.lens (_argumentsJson :: Settings s -> TF.Attr s P.Text)
+               (\s a -> s { _argumentsJson = a } :: Settings s)

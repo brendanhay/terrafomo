@@ -171,7 +171,7 @@ data ExchangeResource s = ExchangeResource'
     { _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _settings :: TF.Attr s (SettingsSetting s)
+    , _settings :: TF.Attr s (Settings s)
     -- ^ @settings@ - (Required, Forces New)
     --
     , _vhost    :: TF.Attr s P.Text
@@ -182,7 +182,7 @@ data ExchangeResource s = ExchangeResource'
 -- | Define a new @rabbitmq_exchange@ resource value.
 exchangeResource
     :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s (SettingsSetting s) -- ^ @settings@ ('P._settings', 'P.settings')
+    -> TF.Attr s (Settings s) -- ^ @settings@ ('P._settings', 'P.settings')
     -> P.Resource (ExchangeResource s)
 exchangeResource _name _settings =
     TF.unsafeResource "rabbitmq_exchange" TF.validator $
@@ -203,7 +203,7 @@ instance TF.IsValid (ExchangeResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_settings"
                   (_settings
-                      :: ExchangeResource s -> TF.Attr s (SettingsSetting s))
+                      :: ExchangeResource s -> TF.Attr s (Settings s))
                   TF.validator
 
 instance P.HasName (ExchangeResource s) (TF.Attr s P.Text) where
@@ -211,9 +211,9 @@ instance P.HasName (ExchangeResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ExchangeResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ExchangeResource s)
 
-instance P.HasSettings (ExchangeResource s) (TF.Attr s (SettingsSetting s)) where
+instance P.HasSettings (ExchangeResource s) (TF.Attr s (Settings s)) where
     settings =
-        P.lens (_settings :: ExchangeResource s -> TF.Attr s (SettingsSetting s))
+        P.lens (_settings :: ExchangeResource s -> TF.Attr s (Settings s))
                (\s a -> s { _settings = a } :: ExchangeResource s)
 
 instance P.HasVhost (ExchangeResource s) (TF.Attr s P.Text) where
@@ -355,7 +355,7 @@ data QueueResource s = QueueResource'
     { _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _settings :: TF.Attr s (SettingsSetting s)
+    , _settings :: TF.Attr s (Settings s)
     -- ^ @settings@ - (Required, Forces New)
     --
     , _vhost    :: TF.Attr s P.Text
@@ -366,7 +366,7 @@ data QueueResource s = QueueResource'
 -- | Define a new @rabbitmq_queue@ resource value.
 queueResource
     :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s (SettingsSetting s) -- ^ @settings@ ('P._settings', 'P.settings')
+    -> TF.Attr s (Settings s) -- ^ @settings@ ('P._settings', 'P.settings')
     -> P.Resource (QueueResource s)
 queueResource _name _settings =
     TF.unsafeResource "rabbitmq_queue" TF.validator $
@@ -387,7 +387,7 @@ instance TF.IsValid (QueueResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_settings"
                   (_settings
-                      :: QueueResource s -> TF.Attr s (SettingsSetting s))
+                      :: QueueResource s -> TF.Attr s (Settings s))
                   TF.validator
 
 instance P.HasName (QueueResource s) (TF.Attr s P.Text) where
@@ -395,9 +395,9 @@ instance P.HasName (QueueResource s) (TF.Attr s P.Text) where
         P.lens (_name :: QueueResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: QueueResource s)
 
-instance P.HasSettings (QueueResource s) (TF.Attr s (SettingsSetting s)) where
+instance P.HasSettings (QueueResource s) (TF.Attr s (Settings s)) where
     settings =
-        P.lens (_settings :: QueueResource s -> TF.Attr s (SettingsSetting s))
+        P.lens (_settings :: QueueResource s -> TF.Attr s (Settings s))
                (\s a -> s { _settings = a } :: QueueResource s)
 
 instance P.HasVhost (QueueResource s) (TF.Attr s P.Text) where
