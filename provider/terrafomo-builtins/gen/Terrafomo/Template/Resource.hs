@@ -108,6 +108,9 @@ instance P.HasPart (CloudinitConfigResource s) (TF.Attr s [TF.Attr s (PartSettin
         P.lens (_part :: CloudinitConfigResource s -> TF.Attr s [TF.Attr s (PartSetting s)])
                (\s a -> s { _part = a } :: CloudinitConfigResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudinitConfigResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedRendered (TF.Ref s' (CloudinitConfigResource s)) (TF.Attr s P.Text) where
     computedRendered x = TF.compute (TF.refKey x) "rendered"
 
@@ -167,6 +170,9 @@ instance P.HasVars (DirResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
         P.lens (_vars :: DirResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _vars = a } :: DirResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DirResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @template_file@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/template/r/file.html terraform documentation>
@@ -209,6 +215,9 @@ instance P.HasVars (FileResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     vars =
         P.lens (_vars :: FileResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _vars = a } :: FileResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedRendered (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
     computedRendered x = TF.compute (TF.refKey x) "rendered"

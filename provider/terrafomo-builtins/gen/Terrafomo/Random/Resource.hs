@@ -120,6 +120,9 @@ instance P.HasPrefix (IdResource s) (TF.Attr s P.Text) where
         P.lens (_prefix :: IdResource s -> TF.Attr s P.Text)
                (\s a -> s { _prefix = a } :: IdResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedB64Std (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
     computedB64Std x = TF.compute (TF.refKey x) "b64_std"
 
@@ -195,6 +198,9 @@ instance P.HasSeed (IntegerResource s) (TF.Attr s P.Text) where
         P.lens (_seed :: IntegerResource s -> TF.Attr s P.Text)
                (\s a -> s { _seed = a } :: IntegerResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IntegerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (IntegerResource s)) (TF.Attr s P.Int) where
     computedResult x = TF.compute (TF.refKey x) "result"
 
@@ -259,6 +265,9 @@ instance P.HasSeparator (PetResource s) (TF.Attr s P.Text) where
         P.lens (_separator :: PetResource s -> TF.Attr s P.Text)
                (\s a -> s { _separator = a } :: PetResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @random_shuffle@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/random/r/shuffle.html terraform documentation>
@@ -320,6 +329,9 @@ instance P.HasSeed (ShuffleResource s) (TF.Attr s P.Text) where
     seed =
         P.lens (_seed :: ShuffleResource s -> TF.Attr s P.Text)
                (\s a -> s { _seed = a } :: ShuffleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ShuffleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (ShuffleResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedResult x = TF.compute (TF.refKey x) "result"
@@ -456,6 +468,9 @@ instance P.HasUpper (StringResource s) (TF.Attr s P.Bool) where
         P.lens (_upper :: StringResource s -> TF.Attr s P.Bool)
                (\s a -> s { _upper = a } :: StringResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
     computedResult x = TF.compute (TF.refKey x) "result"
 
@@ -489,6 +504,9 @@ instance P.HasKeepers (UuidResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Tex
     keepers =
         P.lens (_keepers :: UuidResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _keepers = a } :: UuidResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UuidResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (UuidResource s)) (TF.Attr s P.Text) where
     computedResult x = TF.compute (TF.refKey x) "result"

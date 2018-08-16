@@ -40,6 +40,7 @@ module Terrafomo.Random.Lens
     , HasComputedB64Url (..)
     , HasComputedDec (..)
     , HasComputedHex (..)
+    , HasComputedId (..)
     , HasComputedResult (..)
     ) where
 
@@ -173,6 +174,9 @@ class HasComputedDec a b | a -> b where
 
 class HasComputedHex a b | a -> b where
     computedHex :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedResult a b | a -> b where
     computedResult :: a -> b

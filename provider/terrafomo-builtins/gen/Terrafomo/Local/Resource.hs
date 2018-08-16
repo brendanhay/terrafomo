@@ -117,3 +117,6 @@ instance P.HasSensitiveContent (FileResource s) (TF.Attr s P.Text) where
     sensitiveContent =
         P.lens (_sensitiveContent :: FileResource s -> TF.Attr s P.Text)
                (\s a -> s { _sensitiveContent = a } :: FileResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"

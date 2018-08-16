@@ -138,6 +138,9 @@ instance P.HasSubject (CertRequestResource s) (TF.Attr s [TF.Attr s (SubjectSett
         P.lens (_subject :: CertRequestResource s -> TF.Attr s [TF.Attr s (SubjectSetting s)])
                (\s a -> s { _subject = a } :: CertRequestResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CertRequestResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCertRequestPem (TF.Ref s' (CertRequestResource s)) (TF.Attr s P.Text) where
     computedCertRequestPem x = TF.compute (TF.refKey x) "cert_request_pem"
 
@@ -257,6 +260,9 @@ instance P.HasValidityPeriodHours (LocallySignedCertResource s) (TF.Attr s P.Int
         P.lens (_validityPeriodHours :: LocallySignedCertResource s -> TF.Attr s P.Int)
                (\s a -> s { _validityPeriodHours = a } :: LocallySignedCertResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LocallySignedCertResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCertPem (TF.Ref s' (LocallySignedCertResource s)) (TF.Attr s P.Text) where
     computedCertPem x = TF.compute (TF.refKey x) "cert_pem"
 
@@ -320,6 +326,9 @@ instance P.HasRsaBits (PrivateKeyResource s) (TF.Attr s P.Int) where
     rsaBits =
         P.lens (_rsaBits :: PrivateKeyResource s -> TF.Attr s P.Int)
                (\s a -> s { _rsaBits = a } :: PrivateKeyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PrivateKeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedPrivateKeyPem (TF.Ref s' (PrivateKeyResource s)) (TF.Attr s P.Text) where
     computedPrivateKeyPem x = TF.compute (TF.refKey x) "private_key_pem"
@@ -454,6 +463,9 @@ instance P.HasValidityPeriodHours (SelfSignedCertResource s) (TF.Attr s P.Int) w
     validityPeriodHours =
         P.lens (_validityPeriodHours :: SelfSignedCertResource s -> TF.Attr s P.Int)
                (\s a -> s { _validityPeriodHours = a } :: SelfSignedCertResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SelfSignedCertResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCertPem (TF.Ref s' (SelfSignedCertResource s)) (TF.Attr s P.Text) where
     computedCertPem x = TF.compute (TF.refKey x) "cert_pem"

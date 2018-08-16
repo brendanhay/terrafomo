@@ -193,6 +193,9 @@ instance P.HasType' (FileResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: FileResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: FileResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedOutputBase64sha256 (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
     computedOutputBase64sha256 x = TF.compute (TF.refKey x) "output_base64sha256"
 
