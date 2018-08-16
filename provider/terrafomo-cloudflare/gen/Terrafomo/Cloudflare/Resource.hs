@@ -705,7 +705,7 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (RateLimitResource s)) (TF.Att
 -- See the <https://www.terraform.io/docs/providers/cloudflare/r/record.html terraform documentation>
 -- for more information.
 data RecordResource s = RecordResource'
-    { _data'    :: TF.Attr s (P.Map P.Text (TF.Attr s (DataSetting s)))
+    { _data'    :: TF.Attr s (P.Map P.Text (TF.Attr s (Data'Setting s)))
     -- ^ @data@ - (Optional)
     --
     -- Conflicts with:
@@ -782,9 +782,9 @@ instance TF.IsValid (RecordResource s) where
                             ])
         ])
 
-instance P.HasData' (RecordResource s) (TF.Attr s (P.Map P.Text (TF.Attr s (DataSetting s)))) where
+instance P.HasData' (RecordResource s) (TF.Attr s (P.Map P.Text (TF.Attr s (Data'Setting s)))) where
     data' =
-        P.lens (_data' :: RecordResource s -> TF.Attr s (P.Map P.Text (TF.Attr s (DataSetting s))))
+        P.lens (_data' :: RecordResource s -> TF.Attr s (P.Map P.Text (TF.Attr s (Data'Setting s))))
                (\s a -> s { _data' = a } :: RecordResource s)
 
 instance P.HasDomain (RecordResource s) (TF.Attr s P.Text) where
@@ -921,7 +921,7 @@ data ZoneSettingsOverrideResource s = ZoneSettingsOverrideResource'
     { _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _settings :: TF.Attr s (SettingsSetting s)
+    , _settings :: TF.Attr s (Settings s)
     -- ^ @settings@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -947,7 +947,7 @@ instance TF.IsValid (ZoneSettingsOverrideResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_settings"
                   (_settings
-                      :: ZoneSettingsOverrideResource s -> TF.Attr s (SettingsSetting s))
+                      :: ZoneSettingsOverrideResource s -> TF.Attr s (Settings s))
                   TF.validator
 
 instance P.HasName (ZoneSettingsOverrideResource s) (TF.Attr s P.Text) where
@@ -955,15 +955,15 @@ instance P.HasName (ZoneSettingsOverrideResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ZoneSettingsOverrideResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ZoneSettingsOverrideResource s)
 
-instance P.HasSettings (ZoneSettingsOverrideResource s) (TF.Attr s (SettingsSetting s)) where
+instance P.HasSettings (ZoneSettingsOverrideResource s) (TF.Attr s (Settings s)) where
     settings =
-        P.lens (_settings :: ZoneSettingsOverrideResource s -> TF.Attr s (SettingsSetting s))
+        P.lens (_settings :: ZoneSettingsOverrideResource s -> TF.Attr s (Settings s))
                (\s a -> s { _settings = a } :: ZoneSettingsOverrideResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedInitialSettings (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s (InitialSettingsSetting s)) where
+instance s ~ s' => P.HasComputedInitialSettings (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s (InitialSettings s)) where
     computedInitialSettings x = TF.compute (TF.refKey x) "initial_settings"
 
 instance s ~ s' => P.HasComputedInitialSettingsReadAt (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s P.Text) where
@@ -972,7 +972,7 @@ instance s ~ s' => P.HasComputedInitialSettingsReadAt (TF.Ref s' (ZoneSettingsOv
 instance s ~ s' => P.HasComputedReadonlySettings (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedReadonlySettings x = TF.compute (TF.refKey x) "readonly_settings"
 
-instance s ~ s' => P.HasComputedSettings (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s (SettingsSetting s)) where
+instance s ~ s' => P.HasComputedSettings (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s (Settings s)) where
     computedSettings x = TF.compute (TF.refKey x) "settings"
 
 instance s ~ s' => P.HasComputedZoneStatus (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s P.Text) where
