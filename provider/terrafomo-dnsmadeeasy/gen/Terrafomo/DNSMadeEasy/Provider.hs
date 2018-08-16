@@ -17,10 +17,11 @@
 --
 module Terrafomo.DNSMadeEasy.Provider
     (
+    -- * DNSMadeEasy Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** DNSMadeEasy Specific Aliases
+    -- * DNSMadeEasy Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -74,9 +75,9 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @akey@ - 'P.akey'
-    -> P.Text -- ^ @skey@ - 'P.skey'
-    -> P.Bool -- ^ @usesandbox@ - 'P.usesandbox'
+    :: P.Text -- ^ @akey@ ('P._akey', 'P.akey')
+    -> P.Text -- ^ @skey@ ('P._skey', 'P.skey')
+    -> P.Bool -- ^ @usesandbox@ ('P._usesandbox', 'P.usesandbox')
     -> Provider
 newProvider _akey _skey _usesandbox =
     Provider'
@@ -89,7 +90,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "dme"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "akey" _akey
             , P.Just $ TF.assign "skey" _skey

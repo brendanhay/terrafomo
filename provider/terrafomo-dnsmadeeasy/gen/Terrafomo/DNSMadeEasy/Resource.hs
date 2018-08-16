@@ -101,10 +101,10 @@ data RecordResource s = RecordResource'
 
 -- | Define a new @dme_record@ resource value.
 recordResource
-    :: TF.Attr s P.Text -- ^ @domainid@ - 'P.domainid'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
+    :: TF.Attr s P.Text -- ^ @domainid@ ('P._domainid', 'P.domainid')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    -> TF.Attr s P.Text -- ^ @value@ ('P._value', 'P.value')
     -> P.Resource (RecordResource s)
 recordResource _domainid _name _type' _value =
     TF.unsafeResource "dme_record" TF.validator $
