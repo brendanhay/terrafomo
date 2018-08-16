@@ -25,6 +25,7 @@ module Terrafomo.Dyn.Lens
 
     -- ** Computed Attributes
     , HasComputedFqdn (..)
+    , HasComputedId (..)
     , HasComputedTtl (..)
     ) where
 
@@ -77,6 +78,9 @@ instance HasZone a b => HasZone (TF.Schema l p a) b where
 
 class HasComputedFqdn a b | a -> b where
     computedFqdn :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedTtl a b | a -> b where
     computedTtl :: a -> b

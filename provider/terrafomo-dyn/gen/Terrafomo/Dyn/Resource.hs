@@ -112,6 +112,9 @@ instance P.HasZone (RecordResource s) (TF.Attr s P.Text) where
         P.lens (_zone :: RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: RecordResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedFqdn x = TF.compute (TF.refKey x) "fqdn"
 
