@@ -17,11 +17,10 @@
 --
 module Terrafomo.Docker.Provider
     (
-    -- * Docker Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * Docker Specific Aliases
+    -- ** Docker Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -102,7 +101,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "docker"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "ca_material" <$> _caMaterial
             , TF.assign "cert_material" <$> _certMaterial

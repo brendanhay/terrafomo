@@ -17,7 +17,6 @@
 --
 module Terrafomo.Docker.DataSource
     (
-    -- * DataSource Datatypes
     -- ** docker_registry_image
       RegistryImageData (..)
     , registryImageData
@@ -58,6 +57,7 @@ data RegistryImageData s = RegistryImageData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @docker_registry_image@ datasource value.
 registryImageData
     :: P.DataSource (RegistryImageData s)
 registryImageData =

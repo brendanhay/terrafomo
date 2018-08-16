@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Docker
-    ( module Terrafomo.Docker.DataSource
-    , module Terrafomo.Docker.Lens
-    , module Terrafomo.Docker.Provider
-    , module Terrafomo.Docker.Resource
-    , module Terrafomo.Docker.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Docker.Provider
+
+    -- * Custom Types
     , module Terrafomo.Docker.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.Docker.DataSource
+
+    -- * Resources
+    , module Terrafomo.Docker.Resource
+
+    -- * Settings
+    , module Terrafomo.Docker.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Docker.Lens
     ) where
 
 import Terrafomo.Docker.DataSource

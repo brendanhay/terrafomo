@@ -17,7 +17,6 @@
 --
 module Terrafomo.Docker.Resource
     (
-    -- * Resource Datatypes
     -- ** docker_config
       ConfigResource (..)
     , configResource
@@ -87,6 +86,7 @@ data ConfigResource s = ConfigResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @docker_config@ resource value.
 configResource
     :: TF.Attr s P.Text -- ^ @data@ - 'P.data''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -226,6 +226,7 @@ data ContainerResource s = ContainerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @docker_container@ resource value.
 containerResource
     :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -508,6 +509,7 @@ data ImageResource s = ImageResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @docker_image@ resource value.
 imageResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ImageResource s)
@@ -569,6 +571,7 @@ data NetworkResource s = NetworkResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @docker_network@ resource value.
 networkResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NetworkResource s)
@@ -642,6 +645,7 @@ data SecretResource s = SecretResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @docker_secret@ resource value.
 secretResource
     :: TF.Attr s P.Text -- ^ @data@ - 'P.data''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -706,6 +710,7 @@ data ServiceResource s = ServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @docker_service@ resource value.
 serviceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (TaskSpecSetting s) -- ^ @task_spec@ - 'P.taskSpec'
@@ -802,6 +807,7 @@ data VolumeResource s = VolumeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @docker_volume@ resource value.
 volumeResource
     :: P.Resource (VolumeResource s)
 volumeResource =
