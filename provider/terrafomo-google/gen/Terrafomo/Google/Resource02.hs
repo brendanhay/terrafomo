@@ -202,7 +202,7 @@ pubsubSubscriptionIamPolicyResource
     -> TF.Attr s P.Text -- ^ @subscription@ - 'P.subscription'
     -> P.Resource (PubsubSubscriptionIamPolicyResource s)
 pubsubSubscriptionIamPolicyResource _policyData _subscription =
-    TF.unsafeResource "google_pubsub_subscription_iam_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_pubsub_subscription_iam_policy" TF.validator $
         PubsubSubscriptionIamPolicyResource'
             { _policyData = _policyData
             , _subscription = _subscription
@@ -247,7 +247,7 @@ pubsubTopicResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (PubsubTopicResource s)
 pubsubTopicResource _name =
-    TF.unsafeResource "google_pubsub_topic" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_pubsub_topic" TF.validator $
         PubsubTopicResource'
             { _name = _name
             }
@@ -290,7 +290,7 @@ pubsubTopicIamBindingResource
     -> TF.Attr s P.Text -- ^ @topic@ - 'P.topic'
     -> P.Resource (PubsubTopicIamBindingResource s)
 pubsubTopicIamBindingResource _members _role _topic =
-    TF.unsafeResource "google_pubsub_topic_iam_binding" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_pubsub_topic_iam_binding" TF.validator $
         PubsubTopicIamBindingResource'
             { _members = _members
             , _role = _role
@@ -350,7 +350,7 @@ pubsubTopicIamMemberResource
     -> TF.Attr s P.Text -- ^ @topic@ - 'P.topic'
     -> P.Resource (PubsubTopicIamMemberResource s)
 pubsubTopicIamMemberResource _member _role _topic =
-    TF.unsafeResource "google_pubsub_topic_iam_member" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_pubsub_topic_iam_member" TF.validator $
         PubsubTopicIamMemberResource'
             { _member = _member
             , _role = _role
@@ -406,7 +406,7 @@ pubsubTopicIamPolicyResource
     -> TF.Attr s P.Text -- ^ @topic@ - 'P.topic'
     -> P.Resource (PubsubTopicIamPolicyResource s)
 pubsubTopicIamPolicyResource _policyData _topic =
-    TF.unsafeResource "google_pubsub_topic_iam_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_pubsub_topic_iam_policy" TF.validator $
         PubsubTopicIamPolicyResource'
             { _policyData = _policyData
             , _topic = _topic
@@ -467,7 +467,7 @@ redisInstanceResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RedisInstanceResource s)
 redisInstanceResource _memorySizeGb _name =
-    TF.unsafeResource "google_redis_instance" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_redis_instance" TF.validator $
         RedisInstanceResource'
             { _displayName = TF.Nil
             , _labels = TF.Nil
@@ -579,7 +579,7 @@ resourceManagerLienResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @restrictions@ - 'P.restrictions'
     -> P.Resource (ResourceManagerLienResource s)
 resourceManagerLienResource _origin _parent _reason _restrictions =
-    TF.unsafeResource "google_resource_manager_lien" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_resource_manager_lien" TF.validator $
         ResourceManagerLienResource'
             { _origin = _origin
             , _parent = _parent
@@ -641,7 +641,7 @@ runtimeconfigConfigResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RuntimeconfigConfigResource s)
 runtimeconfigConfigResource _name =
-    TF.unsafeResource "google_runtimeconfig_config" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_runtimeconfig_config" TF.validator $
         RuntimeconfigConfigResource'
             { _description = TF.Nil
             , _name = _name
@@ -699,7 +699,7 @@ runtimeconfigVariableResource
     -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
     -> P.Resource (RuntimeconfigVariableResource s)
 runtimeconfigVariableResource _name _parent =
-    TF.unsafeResource "google_runtimeconfig_variable" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_runtimeconfig_variable" TF.validator $
         RuntimeconfigVariableResource'
             { _name = _name
             , _parent = _parent
@@ -772,7 +772,7 @@ serviceAccountResource
     :: TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
     -> P.Resource (ServiceAccountResource s)
 serviceAccountResource _accountId =
-    TF.unsafeResource "google_service_account" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_service_account" TF.validator $
         ServiceAccountResource'
             { _accountId = _accountId
             , _displayName = TF.Nil
@@ -831,7 +831,7 @@ serviceAccountIamBindingResource
     -> TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
     -> P.Resource (ServiceAccountIamBindingResource s)
 serviceAccountIamBindingResource _members _role _serviceAccountId =
-    TF.unsafeResource "google_service_account_iam_binding" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_service_account_iam_binding" TF.validator $
         ServiceAccountIamBindingResource'
             { _members = _members
             , _role = _role
@@ -888,7 +888,7 @@ serviceAccountIamMemberResource
     -> TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
     -> P.Resource (ServiceAccountIamMemberResource s)
 serviceAccountIamMemberResource _member _role _serviceAccountId =
-    TF.unsafeResource "google_service_account_iam_member" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_service_account_iam_member" TF.validator $
         ServiceAccountIamMemberResource'
             { _member = _member
             , _role = _role
@@ -941,7 +941,7 @@ serviceAccountIamPolicyResource
     -> TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
     -> P.Resource (ServiceAccountIamPolicyResource s)
 serviceAccountIamPolicyResource _policyData _serviceAccountId =
-    TF.unsafeResource "google_service_account_iam_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_service_account_iam_policy" TF.validator $
         ServiceAccountIamPolicyResource'
             { _policyData = _policyData
             , _serviceAccountId = _serviceAccountId
@@ -995,7 +995,7 @@ serviceAccountKeyResource
     :: TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
     -> P.Resource (ServiceAccountKeyResource s)
 serviceAccountKeyResource _serviceAccountId =
-    TF.unsafeResource "google_service_account_key" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_service_account_key" TF.validator $
         ServiceAccountKeyResource'
             { _keyAlgorithm = TF.value "KEY_ALG_RSA_2048"
             , _pgpKey = TF.Nil
@@ -1076,7 +1076,7 @@ sourcerepoRepositoryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SourcerepoRepositoryResource s)
 sourcerepoRepositoryResource _name =
-    TF.unsafeResource "google_sourcerepo_repository" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_sourcerepo_repository" TF.validator $
         SourcerepoRepositoryResource'
             { _name = _name
             }
@@ -1124,7 +1124,7 @@ spannerDatabaseResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SpannerDatabaseResource s)
 spannerDatabaseResource _instance' _name =
-    TF.unsafeResource "google_spanner_database" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_spanner_database" TF.validator $
         SpannerDatabaseResource'
             { _ddl = TF.Nil
             , _instance' = _instance'
@@ -1188,7 +1188,7 @@ spannerDatabaseIamBindingResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (SpannerDatabaseIamBindingResource s)
 spannerDatabaseIamBindingResource _database _instance' _members _role =
-    TF.unsafeResource "google_spanner_database_iam_binding" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_spanner_database_iam_binding" TF.validator $
         SpannerDatabaseIamBindingResource'
             { _database = _database
             , _instance' = _instance'
@@ -1259,7 +1259,7 @@ spannerDatabaseIamMemberResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (SpannerDatabaseIamMemberResource s)
 spannerDatabaseIamMemberResource _database _instance' _member _role =
-    TF.unsafeResource "google_spanner_database_iam_member" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_spanner_database_iam_member" TF.validator $
         SpannerDatabaseIamMemberResource'
             { _database = _database
             , _instance' = _instance'
@@ -1326,7 +1326,7 @@ spannerDatabaseIamPolicyResource
     -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> P.Resource (SpannerDatabaseIamPolicyResource s)
 spannerDatabaseIamPolicyResource _database _instance' _policyData =
-    TF.unsafeResource "google_spanner_database_iam_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_spanner_database_iam_policy" TF.validator $
         SpannerDatabaseIamPolicyResource'
             { _database = _database
             , _instance' = _instance'
@@ -1388,7 +1388,7 @@ spannerInstanceResource
     -> TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
     -> P.Resource (SpannerInstanceResource s)
 spannerInstanceResource _config _displayName =
-    TF.unsafeResource "google_spanner_instance" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_spanner_instance" TF.validator $
         SpannerInstanceResource'
             { _config = _config
             , _displayName = _displayName
@@ -1458,7 +1458,7 @@ spannerInstanceIamBindingResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (SpannerInstanceIamBindingResource s)
 spannerInstanceIamBindingResource _instance' _members _role =
-    TF.unsafeResource "google_spanner_instance_iam_binding" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_spanner_instance_iam_binding" TF.validator $
         SpannerInstanceIamBindingResource'
             { _instance' = _instance'
             , _members = _members
@@ -1518,7 +1518,7 @@ spannerInstanceIamMemberResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (SpannerInstanceIamMemberResource s)
 spannerInstanceIamMemberResource _instance' _member _role =
-    TF.unsafeResource "google_spanner_instance_iam_member" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_spanner_instance_iam_member" TF.validator $
         SpannerInstanceIamMemberResource'
             { _instance' = _instance'
             , _member = _member
@@ -1574,7 +1574,7 @@ spannerInstanceIamPolicyResource
     -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> P.Resource (SpannerInstanceIamPolicyResource s)
 spannerInstanceIamPolicyResource _instance' _policyData =
-    TF.unsafeResource "google_spanner_instance_iam_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_spanner_instance_iam_policy" TF.validator $
         SpannerInstanceIamPolicyResource'
             { _instance' = _instance'
             , _policyData = _policyData
@@ -1623,7 +1623,7 @@ sqlDatabaseResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SqlDatabaseResource s)
 sqlDatabaseResource _instance' _name =
-    TF.unsafeResource "google_sql_database" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_sql_database" TF.validator $
         SqlDatabaseResource'
             { _instance' = _instance'
             , _name = _name
@@ -1680,7 +1680,7 @@ sqlDatabaseInstanceResource
     :: TF.Attr s (SettingsSetting s) -- ^ @settings@ - 'P.settings'
     -> P.Resource (SqlDatabaseInstanceResource s)
 sqlDatabaseInstanceResource _settings =
-    TF.unsafeResource "google_sql_database_instance" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_sql_database_instance" TF.validator $
         SqlDatabaseInstanceResource'
             { _databaseVersion = TF.value "MYSQL_5_6"
             , _region = TF.Nil
@@ -1767,7 +1767,7 @@ sqlUserResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SqlUserResource s)
 sqlUserResource _instance' _name =
-    TF.unsafeResource "google_sql_user" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_sql_user" TF.validator $
         SqlUserResource'
             { _host = TF.Nil
             , _instance' = _instance'
@@ -1853,7 +1853,7 @@ storageBucketResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (StorageBucketResource s)
 storageBucketResource _name =
-    TF.unsafeResource "google_storage_bucket" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_storage_bucket" TF.validator $
         StorageBucketResource'
             { _cors = TF.Nil
             , _forceDestroy = TF.value P.False
@@ -1978,7 +1978,7 @@ storageBucketAclResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> P.Resource (StorageBucketAclResource s)
 storageBucketAclResource _bucket =
-    TF.unsafeResource "google_storage_bucket_acl" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_storage_bucket_acl" TF.validator $
         StorageBucketAclResource'
             { _bucket = _bucket
             , _defaultAcl = TF.Nil
@@ -2035,7 +2035,7 @@ storageBucketIamBindingResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (StorageBucketIamBindingResource s)
 storageBucketIamBindingResource _bucket _members _role =
-    TF.unsafeResource "google_storage_bucket_iam_binding" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_storage_bucket_iam_binding" TF.validator $
         StorageBucketIamBindingResource'
             { _bucket = _bucket
             , _members = _members
@@ -2092,7 +2092,7 @@ storageBucketIamMemberResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (StorageBucketIamMemberResource s)
 storageBucketIamMemberResource _bucket _member _role =
-    TF.unsafeResource "google_storage_bucket_iam_member" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_storage_bucket_iam_member" TF.validator $
         StorageBucketIamMemberResource'
             { _bucket = _bucket
             , _member = _member
@@ -2145,7 +2145,7 @@ storageBucketIamPolicyResource
     -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> P.Resource (StorageBucketIamPolicyResource s)
 storageBucketIamPolicyResource _bucket _policyData =
-    TF.unsafeResource "google_storage_bucket_iam_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_storage_bucket_iam_policy" TF.validator $
         StorageBucketIamPolicyResource'
             { _bucket = _bucket
             , _policyData = _policyData
@@ -2221,7 +2221,7 @@ storageBucketObjectResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (StorageBucketObjectResource s)
 storageBucketObjectResource _bucket _name =
-    TF.unsafeResource "google_storage_bucket_object" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_storage_bucket_object" TF.validator $
         StorageBucketObjectResource'
             { _bucket = _bucket
             , _cacheControl = TF.Nil
@@ -2339,7 +2339,7 @@ storageDefaultObjectAclResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> P.Resource (StorageDefaultObjectAclResource s)
 storageDefaultObjectAclResource _bucket =
-    TF.unsafeResource "google_storage_default_object_acl" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_storage_default_object_acl" TF.validator $
         StorageDefaultObjectAclResource'
             { _bucket = _bucket
             }
@@ -2391,7 +2391,7 @@ storageNotificationResource
     -> TF.Attr s P.Text -- ^ @topic@ - 'P.topic'
     -> P.Resource (StorageNotificationResource s)
 storageNotificationResource _bucket _payloadFormat _topic =
-    TF.unsafeResource "google_storage_notification" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_storage_notification" TF.validator $
         StorageNotificationResource'
             { _bucket = _bucket
             , _customAttributes = TF.Nil
@@ -2468,7 +2468,7 @@ storageObjectAclResource
     -> TF.Attr s P.Text -- ^ @object@ - 'P.object'
     -> P.Resource (StorageObjectAclResource s)
 storageObjectAclResource _bucket _object =
-    TF.unsafeResource "google_storage_object_acl" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_storage_object_acl" TF.validator $
         StorageObjectAclResource'
             { _bucket = _bucket
             , _object = _object

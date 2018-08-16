@@ -473,7 +473,7 @@ bigqueryDatasetResource
     :: TF.Attr s P.Text -- ^ @dataset_id@ - 'P.datasetId'
     -> P.Resource (BigqueryDatasetResource s)
 bigqueryDatasetResource _datasetId =
-    TF.unsafeResource "google_bigquery_dataset" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_bigquery_dataset" TF.validator $
         BigqueryDatasetResource'
             { _datasetId = _datasetId
             , _defaultTableExpirationMs = TF.Nil
@@ -574,7 +574,7 @@ bigqueryTableResource
     -> TF.Attr s P.Text -- ^ @table_id@ - 'P.tableId'
     -> P.Resource (BigqueryTableResource s)
 bigqueryTableResource _datasetId _tableId =
-    TF.unsafeResource "google_bigquery_table" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_bigquery_table" TF.validator $
         BigqueryTableResource'
             { _datasetId = _datasetId
             , _description = TF.Nil
@@ -705,7 +705,7 @@ bigtableInstanceResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (BigtableInstanceResource s)
 bigtableInstanceResource _clusterId _name =
-    TF.unsafeResource "google_bigtable_instance" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_bigtable_instance" TF.validator $
         BigtableInstanceResource'
             { _clusterId = _clusterId
             , _instanceType = TF.value "PRODUCTION"
@@ -781,7 +781,7 @@ bigtableTableResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (BigtableTableResource s)
 bigtableTableResource _instanceName _name =
-    TF.unsafeResource "google_bigtable_table" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_bigtable_table" TF.validator $
         BigtableTableResource'
             { _instanceName = _instanceName
             , _name = _name
@@ -848,7 +848,7 @@ data CloudbuildTriggerResource s = CloudbuildTriggerResource'
 cloudbuildTriggerResource
     :: P.Resource (CloudbuildTriggerResource s)
 cloudbuildTriggerResource =
-    TF.unsafeResource "google_cloudbuild_trigger" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_cloudbuild_trigger" TF.validator $
         CloudbuildTriggerResource'
             { _build = TF.Nil
             , _description = TF.Nil
@@ -981,7 +981,7 @@ cloudfunctionsFunctionResource
     -> TF.Attr s P.Text -- ^ @source_archive_object@ - 'P.sourceArchiveObject'
     -> P.Resource (CloudfunctionsFunctionResource s)
 cloudfunctionsFunctionResource _name _sourceArchiveBucket _sourceArchiveObject =
-    TF.unsafeResource "google_cloudfunctions_function" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_cloudfunctions_function" TF.validator $
         CloudfunctionsFunctionResource'
             { _availableMemoryMb = TF.value 256
             , _description = TF.Nil
@@ -1135,7 +1135,7 @@ cloudiotRegistryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (CloudiotRegistryResource s)
 cloudiotRegistryResource _name =
-    TF.unsafeResource "google_cloudiot_registry" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_cloudiot_registry" TF.validator $
         CloudiotRegistryResource'
             { _credentials = TF.Nil
             , _eventNotificationConfig = TF.Nil
@@ -1217,7 +1217,7 @@ computeAddressResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeAddressResource s)
 computeAddressResource _name =
-    TF.unsafeResource "google_compute_address" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_address" TF.validator $
         ComputeAddressResource'
             { _addressType = TF.value "EXTERNAL"
             , _description = TF.Nil
@@ -1308,7 +1308,7 @@ computeAutoscalerResource
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
     -> P.Resource (ComputeAutoscalerResource s)
 computeAutoscalerResource _autoscalingPolicy _name _target =
-    TF.unsafeResource "google_compute_autoscaler" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_autoscaler" TF.validator $
         ComputeAutoscalerResource'
             { _autoscalingPolicy = _autoscalingPolicy
             , _description = TF.Nil
@@ -1387,7 +1387,7 @@ computeBackendBucketResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeBackendBucketResource s)
 computeBackendBucketResource _bucketName _name =
-    TF.unsafeResource "google_compute_backend_bucket" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_backend_bucket" TF.validator $
         ComputeBackendBucketResource'
             { _bucketName = _bucketName
             , _description = TF.Nil
@@ -1477,7 +1477,7 @@ computeBackendServiceResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeBackendServiceResource s)
 computeBackendServiceResource _healthChecks _name =
-    TF.unsafeResource "google_compute_backend_service" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_backend_service" TF.validator $
         ComputeBackendServiceResource'
             { _backend = TF.Nil
             , _connectionDrainingTimeoutSec = TF.value 300
@@ -1624,7 +1624,7 @@ computeDiskResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeDiskResource s)
 computeDiskResource _name =
-    TF.unsafeResource "google_compute_disk" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_disk" TF.validator $
         ComputeDiskResource'
             { _description = TF.Nil
             , _diskEncryptionKey = TF.Nil
@@ -1810,7 +1810,7 @@ computeFirewallResource
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
     -> P.Resource (ComputeFirewallResource s)
 computeFirewallResource _name _network =
-    TF.unsafeResource "google_compute_firewall" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_firewall" TF.validator $
         ComputeFirewallResource'
             { _allow = TF.Nil
             , _deny = TF.Nil
@@ -1985,7 +1985,7 @@ computeForwardingRuleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeForwardingRuleResource s)
 computeForwardingRuleResource _name =
-    TF.unsafeResource "google_compute_forwarding_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_forwarding_rule" TF.validator $
         ComputeForwardingRuleResource'
             { _backendService = TF.Nil
             , _description = TF.Nil
@@ -2122,7 +2122,7 @@ computeGlobalAddressResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeGlobalAddressResource s)
 computeGlobalAddressResource _name =
-    TF.unsafeResource "google_compute_global_address" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_global_address" TF.validator $
         ComputeGlobalAddressResource'
             { _description = TF.Nil
             , _ipVersion = TF.Nil
@@ -2209,7 +2209,7 @@ computeGlobalForwardingRuleResource
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
     -> P.Resource (ComputeGlobalForwardingRuleResource s)
 computeGlobalForwardingRuleResource _name _target =
-    TF.unsafeResource "google_compute_global_forwarding_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_global_forwarding_rule" TF.validator $
         ComputeGlobalForwardingRuleResource'
             { _description = TF.Nil
             , _ipVersion = TF.Nil
@@ -2345,7 +2345,7 @@ computeHealthCheckResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeHealthCheckResource s)
 computeHealthCheckResource _name =
-    TF.unsafeResource "google_compute_health_check" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_health_check" TF.validator $
         ComputeHealthCheckResource'
             { _checkIntervalSec = TF.value 5
             , _description = TF.Nil
@@ -2507,7 +2507,7 @@ computeHttpHealthCheckResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeHttpHealthCheckResource s)
 computeHttpHealthCheckResource _name =
-    TF.unsafeResource "google_compute_http_health_check" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_http_health_check" TF.validator $
         ComputeHttpHealthCheckResource'
             { _checkIntervalSec = TF.value 5
             , _description = TF.Nil
@@ -2628,7 +2628,7 @@ computeHttpsHealthCheckResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeHttpsHealthCheckResource s)
 computeHttpsHealthCheckResource _name =
-    TF.unsafeResource "google_compute_https_health_check" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_https_health_check" TF.validator $
         ComputeHttpsHealthCheckResource'
             { _checkIntervalSec = TF.value 5
             , _description = TF.Nil
@@ -2740,7 +2740,7 @@ computeImageResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeImageResource s)
 computeImageResource _name =
-    TF.unsafeResource "google_compute_image" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_image" TF.validator $
         ComputeImageResource'
             { _description = TF.Nil
             , _family' = TF.Nil
@@ -2877,7 +2877,7 @@ computeInstanceResource
     -> TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)] -- ^ @network_interface@ - 'P.networkInterface'
     -> P.Resource (ComputeInstanceResource s)
 computeInstanceResource _bootDisk _machineType _name _networkInterface =
-    TF.unsafeResource "google_compute_instance" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_instance" TF.validator $
         ComputeInstanceResource'
             { _allowStoppingForUpdate = TF.Nil
             , _attachedDisk = TF.Nil
@@ -3070,7 +3070,7 @@ computeInstanceFromTemplateResource
     -> TF.Attr s P.Text -- ^ @source_instance_template@ - 'P.sourceInstanceTemplate'
     -> P.Resource (ComputeInstanceFromTemplateResource s)
 computeInstanceFromTemplateResource _name _sourceInstanceTemplate =
-    TF.unsafeResource "google_compute_instance_from_template" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_instance_from_template" TF.validator $
         ComputeInstanceFromTemplateResource'
             { _name = _name
             , _sourceInstanceTemplate = _sourceInstanceTemplate
@@ -3190,7 +3190,7 @@ computeInstanceGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeInstanceGroupResource s)
 computeInstanceGroupResource _name =
-    TF.unsafeResource "google_compute_instance_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_instance_group" TF.validator $
         ComputeInstanceGroupResource'
             { _description = TF.Nil
             , _name = _name
@@ -3282,7 +3282,7 @@ computeInstanceGroupManagerResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeInstanceGroupManagerResource s)
 computeInstanceGroupManagerResource _baseInstanceName _name =
-    TF.unsafeResource "google_compute_instance_group_manager" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_instance_group_manager" TF.validator $
         ComputeInstanceGroupManagerResource'
             { _autoHealingPolicies = TF.Nil
             , _baseInstanceName = _baseInstanceName
@@ -3449,7 +3449,7 @@ computeInstanceTemplateResource
     -> TF.Attr s P.Text -- ^ @machine_type@ - 'P.machineType'
     -> P.Resource (ComputeInstanceTemplateResource s)
 computeInstanceTemplateResource _disk _machineType =
-    TF.unsafeResource "google_compute_instance_template" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_instance_template" TF.validator $
         ComputeInstanceTemplateResource'
             { _automaticRestart = TF.Nil
             , _canIpForward = TF.value P.False
@@ -3613,7 +3613,7 @@ computeNetworkResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeNetworkResource s)
 computeNetworkResource _name =
-    TF.unsafeResource "google_compute_network" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_network" TF.validator $
         ComputeNetworkResource'
             { _autoCreateSubnetworks = TF.value P.True
             , _description = TF.Nil
@@ -3682,7 +3682,7 @@ computeNetworkPeeringResource
     -> TF.Attr s P.Text -- ^ @peer_network@ - 'P.peerNetwork'
     -> P.Resource (ComputeNetworkPeeringResource s)
 computeNetworkPeeringResource _name _network _peerNetwork =
-    TF.unsafeResource "google_compute_network_peering" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_network_peering" TF.validator $
         ComputeNetworkPeeringResource'
             { _autoCreateRoutes = TF.value P.True
             , _name = _name
@@ -3741,7 +3741,7 @@ computeProjectMetadataResource
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @metadata@ - 'P.metadata'
     -> P.Resource (ComputeProjectMetadataResource s)
 computeProjectMetadataResource _metadata =
-    TF.unsafeResource "google_compute_project_metadata" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_project_metadata" TF.validator $
         ComputeProjectMetadataResource'
             { _metadata = _metadata
             }
@@ -3780,7 +3780,7 @@ computeProjectMetadataItemResource
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> P.Resource (ComputeProjectMetadataItemResource s)
 computeProjectMetadataItemResource _key _value =
-    TF.unsafeResource "google_compute_project_metadata_item" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_project_metadata_item" TF.validator $
         ComputeProjectMetadataItemResource'
             { _key = _key
             , _value = _value
@@ -3833,7 +3833,7 @@ computeRegionAutoscalerResource
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
     -> P.Resource (ComputeRegionAutoscalerResource s)
 computeRegionAutoscalerResource _autoscalingPolicy _name _target =
-    TF.unsafeResource "google_compute_region_autoscaler" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_region_autoscaler" TF.validator $
         ComputeRegionAutoscalerResource'
             { _autoscalingPolicy = _autoscalingPolicy
             , _description = TF.Nil
@@ -3915,7 +3915,7 @@ computeRegionBackendServiceResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeRegionBackendServiceResource s)
 computeRegionBackendServiceResource _healthChecks _name =
-    TF.unsafeResource "google_compute_region_backend_service" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_region_backend_service" TF.validator $
         ComputeRegionBackendServiceResource'
             { _backend = TF.Nil
             , _connectionDrainingTimeoutSec = TF.value 0
@@ -4018,7 +4018,7 @@ computeRegionDiskResource
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @replica_zones@ - 'P.replicaZones'
     -> P.Resource (ComputeRegionDiskResource s)
 computeRegionDiskResource _name _replicaZones =
-    TF.unsafeResource "google_compute_region_disk" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_region_disk" TF.validator $
         ComputeRegionDiskResource'
             { _description = TF.Nil
             , _diskEncryptionKey = TF.Nil
@@ -4169,7 +4169,7 @@ computeRegionInstanceGroupManagerResource
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> P.Resource (ComputeRegionInstanceGroupManagerResource s)
 computeRegionInstanceGroupManagerResource _baseInstanceName _name _region =
-    TF.unsafeResource "google_compute_region_instance_group_manager" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_region_instance_group_manager" TF.validator $
         ComputeRegionInstanceGroupManagerResource'
             { _autoHealingPolicies = TF.Nil
             , _baseInstanceName = _baseInstanceName
@@ -4332,7 +4332,7 @@ computeRouteResource
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
     -> P.Resource (ComputeRouteResource s)
 computeRouteResource _destRange _name _network =
-    TF.unsafeResource "google_compute_route" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_route" TF.validator $
         ComputeRouteResource'
             { _description = TF.Nil
             , _destRange = _destRange
@@ -4453,7 +4453,7 @@ computeRouterResource
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
     -> P.Resource (ComputeRouterResource s)
 computeRouterResource _name _network =
-    TF.unsafeResource "google_compute_router" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_router" TF.validator $
         ComputeRouterResource'
             { _bgp = TF.Nil
             , _description = TF.Nil
@@ -4533,7 +4533,7 @@ computeRouterInterfaceResource
     -> TF.Attr s P.Text -- ^ @vpn_tunnel@ - 'P.vpnTunnel'
     -> P.Resource (ComputeRouterInterfaceResource s)
 computeRouterInterfaceResource _name _router _vpnTunnel =
-    TF.unsafeResource "google_compute_router_interface" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_router_interface" TF.validator $
         ComputeRouterInterfaceResource'
             { _ipRange = TF.Nil
             , _name = _name
@@ -4610,7 +4610,7 @@ computeRouterPeerResource
     -> TF.Attr s P.Text -- ^ @router@ - 'P.router'
     -> P.Resource (ComputeRouterPeerResource s)
 computeRouterPeerResource _interface _name _peerAsn _router =
-    TF.unsafeResource "google_compute_router_peer" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_router_peer" TF.validator $
         ComputeRouterPeerResource'
             { _advertisedRoutePriority = TF.Nil
             , _interface = _interface
@@ -4689,7 +4689,7 @@ computeSecurityPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSecurityPolicyResource s)
 computeSecurityPolicyResource _name =
-    TF.unsafeResource "google_compute_security_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_security_policy" TF.validator $
         ComputeSecurityPolicyResource'
             { _description = TF.Nil
             , _name = _name
@@ -4740,7 +4740,7 @@ computeSharedVpcHostProjectResource
     :: TF.Attr s P.Text -- ^ @project@ - 'P.project'
     -> P.Resource (ComputeSharedVpcHostProjectResource s)
 computeSharedVpcHostProjectResource _project =
-    TF.unsafeResource "google_compute_shared_vpc_host_project" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_shared_vpc_host_project" TF.validator $
         ComputeSharedVpcHostProjectResource'
             { _project = _project
             }
@@ -4776,7 +4776,7 @@ computeSharedVpcServiceProjectResource
     -> TF.Attr s P.Text -- ^ @service_project@ - 'P.serviceProject'
     -> P.Resource (ComputeSharedVpcServiceProjectResource s)
 computeSharedVpcServiceProjectResource _hostProject _serviceProject =
-    TF.unsafeResource "google_compute_shared_vpc_service_project" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_shared_vpc_service_project" TF.validator $
         ComputeSharedVpcServiceProjectResource'
             { _hostProject = _hostProject
             , _serviceProject = _serviceProject
@@ -4828,7 +4828,7 @@ computeSnapshotResource
     -> TF.Attr s P.Text -- ^ @source_disk@ - 'P.sourceDisk'
     -> P.Resource (ComputeSnapshotResource s)
 computeSnapshotResource _name _sourceDisk =
-    TF.unsafeResource "google_compute_snapshot" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_snapshot" TF.validator $
         ComputeSnapshotResource'
             { _labels = TF.Nil
             , _name = _name
@@ -4916,7 +4916,7 @@ computeSslCertificateResource
     -> TF.Attr s P.Text -- ^ @private_key@ - 'P.privateKey'
     -> P.Resource (ComputeSslCertificateResource s)
 computeSslCertificateResource _certificate _privateKey =
-    TF.unsafeResource "google_compute_ssl_certificate" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_ssl_certificate" TF.validator $
         ComputeSslCertificateResource'
             { _certificate = _certificate
             , _description = TF.Nil
@@ -4989,7 +4989,7 @@ computeSslPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSslPolicyResource s)
 computeSslPolicyResource _name =
-    TF.unsafeResource "google_compute_ssl_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_ssl_policy" TF.validator $
         ComputeSslPolicyResource'
             { _customFeatures = TF.Nil
             , _description = TF.Nil
@@ -5081,7 +5081,7 @@ computeSubnetworkResource
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
     -> P.Resource (ComputeSubnetworkResource s)
 computeSubnetworkResource _ipCidrRange _name _network =
-    TF.unsafeResource "google_compute_subnetwork" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_subnetwork" TF.validator $
         ComputeSubnetworkResource'
             { _description = TF.Nil
             , _enableFlowLogs = TF.Nil
@@ -5177,7 +5177,7 @@ computeSubnetworkIamBindingResource
     -> TF.Attr s P.Text -- ^ @subnetwork@ - 'P.subnetwork'
     -> P.Resource (ComputeSubnetworkIamBindingResource s)
 computeSubnetworkIamBindingResource _members _role _subnetwork =
-    TF.unsafeResource "google_compute_subnetwork_iam_binding" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_subnetwork_iam_binding" TF.validator $
         ComputeSubnetworkIamBindingResource'
             { _members = _members
             , _role = _role
@@ -5240,7 +5240,7 @@ computeSubnetworkIamMemberResource
     -> TF.Attr s P.Text -- ^ @subnetwork@ - 'P.subnetwork'
     -> P.Resource (ComputeSubnetworkIamMemberResource s)
 computeSubnetworkIamMemberResource _member _role _subnetwork =
-    TF.unsafeResource "google_compute_subnetwork_iam_member" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_subnetwork_iam_member" TF.validator $
         ComputeSubnetworkIamMemberResource'
             { _member = _member
             , _role = _role
@@ -5299,7 +5299,7 @@ computeSubnetworkIamPolicyResource
     -> TF.Attr s P.Text -- ^ @subnetwork@ - 'P.subnetwork'
     -> P.Resource (ComputeSubnetworkIamPolicyResource s)
 computeSubnetworkIamPolicyResource _policyData _subnetwork =
-    TF.unsafeResource "google_compute_subnetwork_iam_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_subnetwork_iam_policy" TF.validator $
         ComputeSubnetworkIamPolicyResource'
             { _policyData = _policyData
             , _subnetwork = _subnetwork
@@ -5354,7 +5354,7 @@ computeTargetHttpProxyResource
     -> TF.Attr s P.Text -- ^ @url_map@ - 'P.urlMap'
     -> P.Resource (ComputeTargetHttpProxyResource s)
 computeTargetHttpProxyResource _name _urlMap =
-    TF.unsafeResource "google_compute_target_http_proxy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_target_http_proxy" TF.validator $
         ComputeTargetHttpProxyResource'
             { _description = TF.Nil
             , _name = _name
@@ -5429,7 +5429,7 @@ computeTargetHttpsProxyResource
     -> TF.Attr s P.Text -- ^ @url_map@ - 'P.urlMap'
     -> P.Resource (ComputeTargetHttpsProxyResource s)
 computeTargetHttpsProxyResource _name _sslCertificates _urlMap =
-    TF.unsafeResource "google_compute_target_https_proxy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_target_https_proxy" TF.validator $
         ComputeTargetHttpsProxyResource'
             { _description = TF.Nil
             , _name = _name
@@ -5523,7 +5523,7 @@ computeTargetPoolResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeTargetPoolResource s)
 computeTargetPoolResource _name =
-    TF.unsafeResource "google_compute_target_pool" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_target_pool" TF.validator $
         ComputeTargetPoolResource'
             { _backupPool = TF.Nil
             , _description = TF.Nil
@@ -5619,7 +5619,7 @@ computeTargetSslProxyResource
     -> TF.Attr s P.Text -- ^ @ssl_certificates@ - 'P.sslCertificates'
     -> P.Resource (ComputeTargetSslProxyResource s)
 computeTargetSslProxyResource _backendService _name _sslCertificates =
-    TF.unsafeResource "google_compute_target_ssl_proxy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_target_ssl_proxy" TF.validator $
         ComputeTargetSslProxyResource'
             { _backendService = _backendService
             , _description = TF.Nil
@@ -5708,7 +5708,7 @@ computeTargetTcpProxyResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeTargetTcpProxyResource s)
 computeTargetTcpProxyResource _backendService _name =
-    TF.unsafeResource "google_compute_target_tcp_proxy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_target_tcp_proxy" TF.validator $
         ComputeTargetTcpProxyResource'
             { _backendService = _backendService
             , _description = TF.Nil
@@ -5789,7 +5789,7 @@ computeUrlMapResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeUrlMapResource s)
 computeUrlMapResource _defaultService _name =
-    TF.unsafeResource "google_compute_url_map" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_url_map" TF.validator $
         ComputeUrlMapResource'
             { _defaultService = _defaultService
             , _description = TF.Nil
@@ -5875,7 +5875,7 @@ computeVpnGatewayResource
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
     -> P.Resource (ComputeVpnGatewayResource s)
 computeVpnGatewayResource _name _network =
-    TF.unsafeResource "google_compute_vpn_gateway" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_vpn_gateway" TF.validator $
         ComputeVpnGatewayResource'
             { _description = TF.Nil
             , _name = _name
@@ -5957,7 +5957,7 @@ computeVpnTunnelResource
     -> TF.Attr s P.Text -- ^ @target_vpn_gateway@ - 'P.targetVpnGateway'
     -> P.Resource (ComputeVpnTunnelResource s)
 computeVpnTunnelResource _name _peerIp _sharedSecret _targetVpnGateway =
-    TF.unsafeResource "google_compute_vpn_tunnel" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_compute_vpn_tunnel" TF.validator $
         ComputeVpnTunnelResource'
             { _description = TF.Nil
             , _ikeVersion = TF.value 2
@@ -6107,7 +6107,7 @@ containerClusterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ContainerClusterResource s)
 containerClusterResource _name =
-    TF.unsafeResource "google_container_cluster" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_container_cluster" TF.validator $
         ContainerClusterResource'
             { _description = TF.Nil
             , _enableKubernetesAlpha = TF.value P.False
@@ -6310,7 +6310,7 @@ containerNodePoolResource
     :: TF.Attr s P.Text -- ^ @cluster@ - 'P.cluster'
     -> P.Resource (ContainerNodePoolResource s)
 containerNodePoolResource _cluster =
-    TF.unsafeResource "google_container_node_pool" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_container_node_pool" TF.validator $
         ContainerNodePoolResource'
             { _autoscaling = TF.Nil
             , _cluster = _cluster
@@ -6410,7 +6410,7 @@ dataflowJobResource
     -> TF.Attr s P.Text -- ^ @template_gcs_path@ - 'P.templateGcsPath'
     -> P.Resource (DataflowJobResource s)
 dataflowJobResource _name _tempGcsLocation _templateGcsPath =
-    TF.unsafeResource "google_dataflow_job" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_dataflow_job" TF.validator $
         DataflowJobResource'
             { _maxWorkers = TF.Nil
             , _name = _name
@@ -6497,7 +6497,7 @@ dataprocClusterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DataprocClusterResource s)
 dataprocClusterResource _name =
-    TF.unsafeResource "google_dataproc_cluster" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_dataproc_cluster" TF.validator $
         DataprocClusterResource'
             { _name = _name
             , _region = TF.value "global"
@@ -6619,7 +6619,7 @@ dataprocJobResource
     :: TF.Attr s (PlacementSetting s) -- ^ @placement@ - 'P.placement'
     -> P.Resource (DataprocJobResource s)
 dataprocJobResource _placement =
-    TF.unsafeResource "google_dataproc_job" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_dataproc_job" TF.validator $
         DataprocJobResource'
             { _forceDelete = TF.value P.False
             , _hadoopConfig = TF.Nil
@@ -6806,7 +6806,7 @@ dnsManagedZoneResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DnsManagedZoneResource s)
 dnsManagedZoneResource _dnsName _name =
-    TF.unsafeResource "google_dns_managed_zone" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_dns_managed_zone" TF.validator $
         DnsManagedZoneResource'
             { _description = TF.value "Managed by Terraform"
             , _dnsName = _dnsName
@@ -6874,7 +6874,7 @@ dnsRecordSetResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (DnsRecordSetResource s)
 dnsRecordSetResource _managedZone _name _rrdatas _ttl _type' =
-    TF.unsafeResource "google_dns_record_set" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_dns_record_set" TF.validator $
         DnsRecordSetResource'
             { _managedZone = _managedZone
             , _name = _name
@@ -6956,7 +6956,7 @@ endpointsServiceResource
     :: TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
     -> P.Resource (EndpointsServiceResource s)
 endpointsServiceResource _serviceName =
-    TF.unsafeResource "google_endpoints_service" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_endpoints_service" TF.validator $
         EndpointsServiceResource'
             { _grpcConfig = TF.Nil
             , _openapiConfig = TF.Nil
@@ -7044,7 +7044,7 @@ folderResource
     -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
     -> P.Resource (FolderResource s)
 folderResource _displayName _parent =
-    TF.unsafeResource "google_folder" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_folder" TF.validator $
         FolderResource'
             { _displayName = _displayName
             , _parent = _parent
@@ -7100,7 +7100,7 @@ folderIamBindingResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (FolderIamBindingResource s)
 folderIamBindingResource _folder _members _role =
-    TF.unsafeResource "google_folder_iam_binding" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_folder_iam_binding" TF.validator $
         FolderIamBindingResource'
             { _folder = _folder
             , _members = _members
@@ -7157,7 +7157,7 @@ folderIamMemberResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (FolderIamMemberResource s)
 folderIamMemberResource _folder _member _role =
-    TF.unsafeResource "google_folder_iam_member" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_folder_iam_member" TF.validator $
         FolderIamMemberResource'
             { _folder = _folder
             , _member = _member
@@ -7210,7 +7210,7 @@ folderIamPolicyResource
     -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> P.Resource (FolderIamPolicyResource s)
 folderIamPolicyResource _folder _policyData =
-    TF.unsafeResource "google_folder_iam_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_folder_iam_policy" TF.validator $
         FolderIamPolicyResource'
             { _folder = _folder
             , _policyData = _policyData
@@ -7277,7 +7277,7 @@ folderOrganizationPolicyResource
     -> TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
     -> P.Resource (FolderOrganizationPolicyResource s)
 folderOrganizationPolicyResource _constraint _folder =
-    TF.unsafeResource "google_folder_organization_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_folder_organization_policy" TF.validator $
         FolderOrganizationPolicyResource'
             { _booleanPolicy = TF.Nil
             , _constraint = _constraint
@@ -7381,7 +7381,7 @@ kmsCryptoKeyResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (KmsCryptoKeyResource s)
 kmsCryptoKeyResource _keyRing _name =
-    TF.unsafeResource "google_kms_crypto_key" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_kms_crypto_key" TF.validator $
         KmsCryptoKeyResource'
             { _keyRing = _keyRing
             , _name = _name
@@ -7435,7 +7435,7 @@ kmsCryptoKeyIamBindingResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (KmsCryptoKeyIamBindingResource s)
 kmsCryptoKeyIamBindingResource _cryptoKeyId _members _role =
-    TF.unsafeResource "google_kms_crypto_key_iam_binding" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_kms_crypto_key_iam_binding" TF.validator $
         KmsCryptoKeyIamBindingResource'
             { _cryptoKeyId = _cryptoKeyId
             , _members = _members
@@ -7492,7 +7492,7 @@ kmsCryptoKeyIamMemberResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (KmsCryptoKeyIamMemberResource s)
 kmsCryptoKeyIamMemberResource _cryptoKeyId _member _role =
-    TF.unsafeResource "google_kms_crypto_key_iam_member" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_kms_crypto_key_iam_member" TF.validator $
         KmsCryptoKeyIamMemberResource'
             { _cryptoKeyId = _cryptoKeyId
             , _member = _member
@@ -7545,7 +7545,7 @@ kmsKeyRingResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (KmsKeyRingResource s)
 kmsKeyRingResource _location _name =
-    TF.unsafeResource "google_kms_key_ring" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_kms_key_ring" TF.validator $
         KmsKeyRingResource'
             { _location = _location
             , _name = _name
@@ -7595,7 +7595,7 @@ kmsKeyRingIamBindingResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (KmsKeyRingIamBindingResource s)
 kmsKeyRingIamBindingResource _keyRingId _members _role =
-    TF.unsafeResource "google_kms_key_ring_iam_binding" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_kms_key_ring_iam_binding" TF.validator $
         KmsKeyRingIamBindingResource'
             { _keyRingId = _keyRingId
             , _members = _members
@@ -7652,7 +7652,7 @@ kmsKeyRingIamMemberResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (KmsKeyRingIamMemberResource s)
 kmsKeyRingIamMemberResource _keyRingId _member _role =
-    TF.unsafeResource "google_kms_key_ring_iam_member" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_kms_key_ring_iam_member" TF.validator $
         KmsKeyRingIamMemberResource'
             { _keyRingId = _keyRingId
             , _member = _member
@@ -7705,7 +7705,7 @@ kmsKeyRingIamPolicyResource
     -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> P.Resource (KmsKeyRingIamPolicyResource s)
 kmsKeyRingIamPolicyResource _keyRingId _policyData =
-    TF.unsafeResource "google_kms_key_ring_iam_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_kms_key_ring_iam_policy" TF.validator $
         KmsKeyRingIamPolicyResource'
             { _keyRingId = _keyRingId
             , _policyData = _policyData
@@ -7761,7 +7761,7 @@ loggingBillingAccountExclusionResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LoggingBillingAccountExclusionResource s)
 loggingBillingAccountExclusionResource _billingAccount _filter _name =
-    TF.unsafeResource "google_logging_billing_account_exclusion" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_logging_billing_account_exclusion" TF.validator $
         LoggingBillingAccountExclusionResource'
             { _billingAccount = _billingAccount
             , _description = TF.Nil
@@ -7832,7 +7832,7 @@ loggingBillingAccountSinkResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LoggingBillingAccountSinkResource s)
 loggingBillingAccountSinkResource _billingAccount _destination _name =
-    TF.unsafeResource "google_logging_billing_account_sink" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_logging_billing_account_sink" TF.validator $
         LoggingBillingAccountSinkResource'
             { _billingAccount = _billingAccount
             , _destination = _destination
@@ -7902,7 +7902,7 @@ loggingFolderExclusionResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LoggingFolderExclusionResource s)
 loggingFolderExclusionResource _filter _folder _name =
-    TF.unsafeResource "google_logging_folder_exclusion" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_logging_folder_exclusion" TF.validator $
         LoggingFolderExclusionResource'
             { _description = TF.Nil
             , _disabled = TF.Nil
@@ -7976,7 +7976,7 @@ loggingFolderSinkResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LoggingFolderSinkResource s)
 loggingFolderSinkResource _destination _folder _name =
-    TF.unsafeResource "google_logging_folder_sink" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_logging_folder_sink" TF.validator $
         LoggingFolderSinkResource'
             { _destination = _destination
             , _filter = TF.Nil
@@ -8053,7 +8053,7 @@ loggingOrganizationExclusionResource
     -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
     -> P.Resource (LoggingOrganizationExclusionResource s)
 loggingOrganizationExclusionResource _filter _name _orgId =
-    TF.unsafeResource "google_logging_organization_exclusion" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_logging_organization_exclusion" TF.validator $
         LoggingOrganizationExclusionResource'
             { _description = TF.Nil
             , _disabled = TF.Nil
@@ -8127,7 +8127,7 @@ loggingOrganizationSinkResource
     -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
     -> P.Resource (LoggingOrganizationSinkResource s)
 loggingOrganizationSinkResource _destination _name _orgId =
-    TF.unsafeResource "google_logging_organization_sink" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_logging_organization_sink" TF.validator $
         LoggingOrganizationSinkResource'
             { _destination = _destination
             , _filter = TF.Nil
@@ -8200,7 +8200,7 @@ loggingProjectExclusionResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LoggingProjectExclusionResource s)
 loggingProjectExclusionResource _filter _name =
-    TF.unsafeResource "google_logging_project_exclusion" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_logging_project_exclusion" TF.validator $
         LoggingProjectExclusionResource'
             { _description = TF.Nil
             , _disabled = TF.Nil
@@ -8266,7 +8266,7 @@ loggingProjectSinkResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LoggingProjectSinkResource s)
 loggingProjectSinkResource _destination _name =
-    TF.unsafeResource "google_logging_project_sink" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_logging_project_sink" TF.validator $
         LoggingProjectSinkResource'
             { _destination = _destination
             , _filter = TF.Nil
@@ -8333,7 +8333,7 @@ organizationIamBindingResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (OrganizationIamBindingResource s)
 organizationIamBindingResource _members _orgId _role =
-    TF.unsafeResource "google_organization_iam_binding" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_organization_iam_binding" TF.validator $
         OrganizationIamBindingResource'
             { _members = _members
             , _orgId = _orgId
@@ -8403,7 +8403,7 @@ organizationIamCustomRoleResource
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
     -> P.Resource (OrganizationIamCustomRoleResource s)
 organizationIamCustomRoleResource _orgId _permissions _roleId _title =
-    TF.unsafeResource "google_organization_iam_custom_role" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_organization_iam_custom_role" TF.validator $
         OrganizationIamCustomRoleResource'
             { _deleted = TF.value P.False
             , _description = TF.Nil
@@ -8485,7 +8485,7 @@ organizationIamMemberResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (OrganizationIamMemberResource s)
 organizationIamMemberResource _member _orgId _role =
-    TF.unsafeResource "google_organization_iam_member" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_organization_iam_member" TF.validator $
         OrganizationIamMemberResource'
             { _member = _member
             , _orgId = _orgId
@@ -8538,7 +8538,7 @@ organizationIamPolicyResource
     -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> P.Resource (OrganizationIamPolicyResource s)
 organizationIamPolicyResource _orgId _policyData =
-    TF.unsafeResource "google_organization_iam_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_organization_iam_policy" TF.validator $
         OrganizationIamPolicyResource'
             { _orgId = _orgId
             , _policyData = _policyData
@@ -8605,7 +8605,7 @@ organizationPolicyResource
     -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
     -> P.Resource (OrganizationPolicyResource s)
 organizationPolicyResource _constraint _orgId =
-    TF.unsafeResource "google_organization_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_organization_policy" TF.validator $
         OrganizationPolicyResource'
             { _booleanPolicy = TF.Nil
             , _constraint = _constraint
@@ -8718,7 +8718,7 @@ projectResource
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.Resource (ProjectResource s)
 projectResource _name _projectId =
-    TF.unsafeResource "google_project" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_project" TF.validator $
         ProjectResource'
             { _appEngine = TF.Nil
             , _autoCreateNetwork = TF.value P.True
@@ -8814,7 +8814,7 @@ projectIamBindingResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (ProjectIamBindingResource s)
 projectIamBindingResource _members _role =
-    TF.unsafeResource "google_project_iam_binding" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_project_iam_binding" TF.validator $
         ProjectIamBindingResource'
             { _members = _members
             , _project = TF.Nil
@@ -8880,7 +8880,7 @@ projectIamCustomRoleResource
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
     -> P.Resource (ProjectIamCustomRoleResource s)
 projectIamCustomRoleResource _permissions _roleId _title =
-    TF.unsafeResource "google_project_iam_custom_role" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_project_iam_custom_role" TF.validator $
         ProjectIamCustomRoleResource'
             { _deleted = TF.value P.False
             , _description = TF.Nil
@@ -8957,7 +8957,7 @@ projectIamMemberResource
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (ProjectIamMemberResource s)
 projectIamMemberResource _member _role =
-    TF.unsafeResource "google_project_iam_member" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_project_iam_member" TF.validator $
         ProjectIamMemberResource'
             { _member = _member
             , _project = TF.Nil
@@ -9006,7 +9006,7 @@ projectIamPolicyResource
     :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> P.Resource (ProjectIamPolicyResource s)
 projectIamPolicyResource _policyData =
-    TF.unsafeResource "google_project_iam_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_project_iam_policy" TF.validator $
         ProjectIamPolicyResource'
             { _policyData = _policyData
             }
@@ -9072,7 +9072,7 @@ projectOrganizationPolicyResource
     -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
     -> P.Resource (ProjectOrganizationPolicyResource s)
 projectOrganizationPolicyResource _constraint _project =
-    TF.unsafeResource "google_project_organization_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_project_organization_policy" TF.validator $
         ProjectOrganizationPolicyResource'
             { _booleanPolicy = TF.Nil
             , _constraint = _constraint
@@ -9172,7 +9172,7 @@ projectServiceResource
     :: TF.Attr s P.Text -- ^ @service@ - 'P.service'
     -> P.Resource (ProjectServiceResource s)
 projectServiceResource _service =
-    TF.unsafeResource "google_project_service" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_project_service" TF.validator $
         ProjectServiceResource'
             { _disableOnDestroy = TF.value P.True
             , _service = _service
@@ -9217,7 +9217,7 @@ projectServicesResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @services@ - 'P.services'
     -> P.Resource (ProjectServicesResource s)
 projectServicesResource _services =
-    TF.unsafeResource "google_project_services" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_project_services" TF.validator $
         ProjectServicesResource'
             { _disableOnDestroy = TF.value P.True
             , _services = _services
@@ -9262,7 +9262,7 @@ projectUsageExportBucketResource
     :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
     -> P.Resource (ProjectUsageExportBucketResource s)
 projectUsageExportBucketResource _bucketName =
-    TF.unsafeResource "google_project_usage_export_bucket" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_project_usage_export_bucket" TF.validator $
         ProjectUsageExportBucketResource'
             { _bucketName = _bucketName
             , _prefix = TF.Nil
@@ -9311,7 +9311,7 @@ pubsubSubscriptionResource
     -> TF.Attr s P.Text -- ^ @topic@ - 'P.topic'
     -> P.Resource (PubsubSubscriptionResource s)
 pubsubSubscriptionResource _name _topic =
-    TF.unsafeResource "google_pubsub_subscription" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_pubsub_subscription" TF.validator $
         PubsubSubscriptionResource'
             { _name = _name
             , _pushConfig = TF.Nil
@@ -9378,7 +9378,7 @@ pubsubSubscriptionIamBindingResource
     -> TF.Attr s P.Text -- ^ @subscription@ - 'P.subscription'
     -> P.Resource (PubsubSubscriptionIamBindingResource s)
 pubsubSubscriptionIamBindingResource _members _role _subscription =
-    TF.unsafeResource "google_pubsub_subscription_iam_binding" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_pubsub_subscription_iam_binding" TF.validator $
         PubsubSubscriptionIamBindingResource'
             { _members = _members
             , _role = _role
@@ -9438,7 +9438,7 @@ pubsubSubscriptionIamMemberResource
     -> TF.Attr s P.Text -- ^ @subscription@ - 'P.subscription'
     -> P.Resource (PubsubSubscriptionIamMemberResource s)
 pubsubSubscriptionIamMemberResource _member _role _subscription =
-    TF.unsafeResource "google_pubsub_subscription_iam_member" P.defaultProvider TF.validator $
+    TF.unsafeResource "google_pubsub_subscription_iam_member" TF.validator $
         PubsubSubscriptionIamMemberResource'
             { _member = _member
             , _role = _role

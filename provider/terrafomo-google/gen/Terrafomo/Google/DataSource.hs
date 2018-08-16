@@ -198,7 +198,7 @@ activeFolderData
     -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
     -> P.DataSource (ActiveFolderData s)
 activeFolderData _displayName _parent =
-    TF.unsafeDataSource "google_active_folder" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_active_folder" TF.validator $
         ActiveFolderData'
             { _displayName = _displayName
             , _parent = _parent
@@ -242,7 +242,7 @@ data BillingAccountData s = BillingAccountData'
 billingAccountData
     :: P.DataSource (BillingAccountData s)
 billingAccountData =
-    TF.unsafeDataSource "google_billing_account" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_billing_account" TF.validator $
         BillingAccountData'
             { _billingAccount = TF.Nil
             }
@@ -285,7 +285,7 @@ data ClientConfigData s = ClientConfigData'
 clientConfigData
     :: P.DataSource (ClientConfigData s)
 clientConfigData =
-    TF.unsafeDataSource "google_client_config" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_client_config" TF.validator $
         ClientConfigData'
 
 instance TF.IsObject (ClientConfigData s) where
@@ -326,7 +326,7 @@ cloudfunctionsFunctionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CloudfunctionsFunctionData s)
 cloudfunctionsFunctionData _name =
-    TF.unsafeDataSource "google_cloudfunctions_function" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_cloudfunctions_function" TF.validator $
         CloudfunctionsFunctionData'
             { _name = _name
             , _project = TF.Nil
@@ -411,7 +411,7 @@ computeAddressData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeAddressData s)
 computeAddressData _name =
-    TF.unsafeDataSource "google_compute_address" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_compute_address" TF.validator $
         ComputeAddressData'
             { _name = _name
             }
@@ -464,7 +464,7 @@ computeBackendServiceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeBackendServiceData s)
 computeBackendServiceData _name =
-    TF.unsafeDataSource "google_compute_backend_service" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_compute_backend_service" TF.validator $
         ComputeBackendServiceData'
             { _name = _name
             , _project = TF.Nil
@@ -550,7 +550,7 @@ data ComputeDefaultServiceAccountData s = ComputeDefaultServiceAccountData'
 computeDefaultServiceAccountData
     :: P.DataSource (ComputeDefaultServiceAccountData s)
 computeDefaultServiceAccountData =
-    TF.unsafeDataSource "google_compute_default_service_account" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_compute_default_service_account" TF.validator $
         ComputeDefaultServiceAccountData'
 
 instance TF.IsObject (ComputeDefaultServiceAccountData s) where
@@ -582,7 +582,7 @@ computeForwardingRuleData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeForwardingRuleData s)
 computeForwardingRuleData _name =
-    TF.unsafeDataSource "google_compute_forwarding_rule" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_compute_forwarding_rule" TF.validator $
         ComputeForwardingRuleData'
             { _name = _name
             }
@@ -656,7 +656,7 @@ computeGlobalAddressData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeGlobalAddressData s)
 computeGlobalAddressData _name =
-    TF.unsafeDataSource "google_compute_global_address" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_compute_global_address" TF.validator $
         ComputeGlobalAddressData'
             { _name = _name
             }
@@ -699,7 +699,7 @@ data ComputeImageData s = ComputeImageData'
 computeImageData
     :: P.DataSource (ComputeImageData s)
 computeImageData =
-    TF.unsafeDataSource "google_compute_image" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_compute_image" TF.validator $
         ComputeImageData'
 
 instance TF.IsObject (ComputeImageData s) where
@@ -778,7 +778,7 @@ data ComputeInstanceGroupData s = ComputeInstanceGroupData'
 computeInstanceGroupData
     :: P.DataSource (ComputeInstanceGroupData s)
 computeInstanceGroupData =
-    TF.unsafeDataSource "google_compute_instance_group" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_compute_instance_group" TF.validator $
         ComputeInstanceGroupData'
             { _name = TF.Nil
             }
@@ -833,7 +833,7 @@ data ComputeLbIpRangesData s = ComputeLbIpRangesData'
 computeLbIpRangesData
     :: P.DataSource (ComputeLbIpRangesData s)
 computeLbIpRangesData =
-    TF.unsafeDataSource "google_compute_lb_ip_ranges" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_compute_lb_ip_ranges" TF.validator $
         ComputeLbIpRangesData'
 
 instance TF.IsObject (ComputeLbIpRangesData s) where
@@ -868,7 +868,7 @@ computeNetworkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeNetworkData s)
 computeNetworkData _name =
-    TF.unsafeDataSource "google_compute_network" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_compute_network" TF.validator $
         ComputeNetworkData'
             { _name = _name
             , _project = TF.Nil
@@ -918,7 +918,7 @@ data ComputeRegionInstanceGroupData s = ComputeRegionInstanceGroupData'
 computeRegionInstanceGroupData
     :: P.DataSource (ComputeRegionInstanceGroupData s)
 computeRegionInstanceGroupData =
-    TF.unsafeDataSource "google_compute_region_instance_group" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_compute_region_instance_group" TF.validator $
         ComputeRegionInstanceGroupData'
 
 instance TF.IsObject (ComputeRegionInstanceGroupData s) where
@@ -961,7 +961,7 @@ data ComputeRegionsData s = ComputeRegionsData'
 computeRegionsData
     :: P.DataSource (ComputeRegionsData s)
 computeRegionsData =
-    TF.unsafeDataSource "google_compute_regions" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_compute_regions" TF.validator $
         ComputeRegionsData'
             { _status = TF.Nil
             }
@@ -1005,7 +1005,7 @@ computeSslPolicyData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeSslPolicyData s)
 computeSslPolicyData _name =
-    TF.unsafeDataSource "google_compute_ssl_policy" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_compute_ssl_policy" TF.validator $
         ComputeSslPolicyData'
             { _name = _name
             , _project = TF.Nil
@@ -1071,7 +1071,7 @@ computeSubnetworkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeSubnetworkData s)
 computeSubnetworkData _name =
-    TF.unsafeDataSource "google_compute_subnetwork" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_compute_subnetwork" TF.validator $
         ComputeSubnetworkData'
             { _name = _name
             }
@@ -1133,7 +1133,7 @@ computeVpnGatewayData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeVpnGatewayData s)
 computeVpnGatewayData _name =
-    TF.unsafeDataSource "google_compute_vpn_gateway" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_compute_vpn_gateway" TF.validator $
         ComputeVpnGatewayData'
             { _name = _name
             }
@@ -1185,7 +1185,7 @@ data ComputeZonesData s = ComputeZonesData'
 computeZonesData
     :: P.DataSource (ComputeZonesData s)
 computeZonesData =
-    TF.unsafeDataSource "google_compute_zones" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_compute_zones" TF.validator $
         ComputeZonesData'
             { _region = TF.Nil
             , _status = TF.Nil
@@ -1242,7 +1242,7 @@ containerClusterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ContainerClusterData s)
 containerClusterData _name =
-    TF.unsafeDataSource "google_container_cluster" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_container_cluster" TF.validator $
         ContainerClusterData'
             { _name = _name
             , _project = TF.Nil
@@ -1384,7 +1384,7 @@ data ContainerEngineVersionsData s = ContainerEngineVersionsData'
 containerEngineVersionsData
     :: P.DataSource (ContainerEngineVersionsData s)
 containerEngineVersionsData =
-    TF.unsafeDataSource "google_container_engine_versions" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_container_engine_versions" TF.validator $
         ContainerEngineVersionsData'
             { _project = TF.Nil
             , _zone = TF.Nil
@@ -1450,7 +1450,7 @@ containerRegistryImageData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ContainerRegistryImageData s)
 containerRegistryImageData _name =
-    TF.unsafeDataSource "google_container_registry_image" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_container_registry_image" TF.validator $
         ContainerRegistryImageData'
             { _digest = TF.Nil
             , _name = _name
@@ -1511,7 +1511,7 @@ data ContainerRegistryRepositoryData s = ContainerRegistryRepositoryData'
 containerRegistryRepositoryData
     :: P.DataSource (ContainerRegistryRepositoryData s)
 containerRegistryRepositoryData =
-    TF.unsafeDataSource "google_container_registry_repository" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_container_registry_repository" TF.validator $
         ContainerRegistryRepositoryData'
             { _region = TF.Nil
             }
@@ -1555,7 +1555,7 @@ dnsManagedZoneData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DnsManagedZoneData s)
 dnsManagedZoneData _name =
-    TF.unsafeDataSource "google_dns_managed_zone" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_dns_managed_zone" TF.validator $
         DnsManagedZoneData'
             { _name = _name
             , _project = TF.Nil
@@ -1609,7 +1609,7 @@ folderData
     :: TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
     -> P.DataSource (FolderData s)
 folderData _folder =
-    TF.unsafeDataSource "google_folder" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_folder" TF.validator $
         FolderData'
             { _folder = _folder
             , _lookupOrganization = TF.value P.False
@@ -1669,7 +1669,7 @@ iamPolicyData
     :: TF.Attr s [TF.Attr s (BindingSetting s)] -- ^ @binding@ - 'P.binding'
     -> P.DataSource (IamPolicyData s)
 iamPolicyData _binding =
-    TF.unsafeDataSource "google_iam_policy" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_iam_policy" TF.validator $
         IamPolicyData'
             { _binding = _binding
             }
@@ -1711,7 +1711,7 @@ kmsSecretData
     -> TF.Attr s P.Text -- ^ @crypto_key@ - 'P.cryptoKey'
     -> P.DataSource (KmsSecretData s)
 kmsSecretData _ciphertext _cryptoKey =
-    TF.unsafeDataSource "google_kms_secret" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_kms_secret" TF.validator $
         KmsSecretData'
             { _ciphertext = _ciphertext
             , _cryptoKey = _cryptoKey
@@ -1752,7 +1752,7 @@ data NetblockIpRangesData s = NetblockIpRangesData'
 netblockIpRangesData
     :: P.DataSource (NetblockIpRangesData s)
 netblockIpRangesData =
-    TF.unsafeDataSource "google_netblock_ip_ranges" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_netblock_ip_ranges" TF.validator $
         NetblockIpRangesData'
 
 instance TF.IsObject (NetblockIpRangesData s) where
@@ -1786,7 +1786,7 @@ data OrganizationData s = OrganizationData'
 organizationData
     :: P.DataSource (OrganizationData s)
 organizationData =
-    TF.unsafeDataSource "google_organization" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_organization" TF.validator $
         OrganizationData'
             { _organization = TF.Nil
             }
@@ -1835,7 +1835,7 @@ data ProjectData s = ProjectData'
 projectData
     :: P.DataSource (ProjectData s)
 projectData =
-    TF.unsafeDataSource "google_project" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_project" TF.validator $
         ProjectData'
             { _projectId = TF.Nil
             }
@@ -1906,7 +1906,7 @@ serviceAccountData
     :: TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
     -> P.DataSource (ServiceAccountData s)
 serviceAccountData _accountId =
-    TF.unsafeDataSource "google_service_account" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_service_account" TF.validator $
         ServiceAccountData'
             { _accountId = _accountId
             , _project = TF.Nil
@@ -1966,7 +1966,7 @@ serviceAccountKeyData
     :: TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
     -> P.DataSource (ServiceAccountKeyData s)
 serviceAccountKeyData _serviceAccountId =
-    TF.unsafeDataSource "google_service_account_key" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_service_account_key" TF.validator $
         ServiceAccountKeyData'
             { _project = TF.Nil
             , _publicKeyType = TF.value "TYPE_X509_PEM_FILE"
@@ -2046,7 +2046,7 @@ storageObjectSignedUrlData
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> P.DataSource (StorageObjectSignedUrlData s)
 storageObjectSignedUrlData _bucket _path =
-    TF.unsafeDataSource "google_storage_object_signed_url" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_storage_object_signed_url" TF.validator $
         StorageObjectSignedUrlData'
             { _bucket = _bucket
             , _contentMd5 = TF.Nil
@@ -2129,7 +2129,7 @@ data StorageProjectServiceAccountData s = StorageProjectServiceAccountData'
 storageProjectServiceAccountData
     :: P.DataSource (StorageProjectServiceAccountData s)
 storageProjectServiceAccountData =
-    TF.unsafeDataSource "google_storage_project_service_account" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "google_storage_project_service_account" TF.validator $
         StorageProjectServiceAccountData'
 
 instance TF.IsObject (StorageProjectServiceAccountData s) where
