@@ -102,7 +102,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "docker"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "ca_material" <$> _caMaterial
             , TF.assign "cert_material" <$> _certMaterial

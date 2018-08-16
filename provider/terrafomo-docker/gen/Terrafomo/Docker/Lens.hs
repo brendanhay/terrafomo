@@ -48,13 +48,16 @@ module Terrafomo.Docker.Lens
     , HasDisable (..)
     , HasDiscreteResourcesSpec (..)
     , HasDns (..)
+    , HasDnsConfig (..)
     , HasDnsOpts (..)
     , HasDnsSearch (..)
     , HasDomainname (..)
+    , HasDriver (..)
     , HasDriverName (..)
     , HasDriverOptions (..)
     , HasDriverOpts (..)
     , HasDrop (..)
+    , HasEndpointSpec (..)
     , HasEntrypoint (..)
     , HasEnv (..)
     , HasExecutable (..)
@@ -62,12 +65,14 @@ module Terrafomo.Docker.Lens
     , HasFailureAction (..)
     , HasFile (..)
     , HasFileName (..)
+    , HasForceUpdate (..)
     , HasFromContainer (..)
     , HasGateway (..)
     , HasGenericResources (..)
     , HasGlobal (..)
     , HasGroups (..)
     , HasHard (..)
+    , HasHealthcheck (..)
     , HasHost (..)
     , HasHostPath (..)
     , HasHostname (..)
@@ -111,6 +116,7 @@ module Terrafomo.Docker.Lens
     , HasParallelism (..)
     , HasPassword (..)
     , HasPermissions (..)
+    , HasPlacement (..)
     , HasPlatforms (..)
     , HasPorts (..)
     , HasPrefs (..)
@@ -126,11 +132,15 @@ module Terrafomo.Docker.Lens
     , HasRegistry (..)
     , HasRegistryAuth (..)
     , HasReplicas (..)
+    , HasReplicated (..)
     , HasReservation (..)
+    , HasResources (..)
     , HasRestart (..)
+    , HasRestartPolicy (..)
     , HasRetries (..)
     , HasRole (..)
     , HasRollbackConfig (..)
+    , HasRuntime (..)
     , HasSeLinuxContext (..)
     , HasSearch (..)
     , HasSecretId (..)
@@ -141,6 +151,7 @@ module Terrafomo.Docker.Lens
     , HasSoft (..)
     , HasSource (..)
     , HasStartPeriod (..)
+    , HasStopGracePeriod (..)
     , HasStopSignal (..)
     , HasSubnet (..)
     , HasTarget (..)
@@ -391,6 +402,12 @@ class HasDns a b | a -> b where
 instance HasDns a b => HasDns (TF.Schema l p a) b where
     dns = TF.configuration . dns
 
+class HasDnsConfig a b | a -> b where
+    dnsConfig :: P.Lens' a b
+
+instance HasDnsConfig a b => HasDnsConfig (TF.Schema l p a) b where
+    dnsConfig = TF.configuration . dnsConfig
+
 class HasDnsOpts a b | a -> b where
     dnsOpts :: P.Lens' a b
 
@@ -408,6 +425,12 @@ class HasDomainname a b | a -> b where
 
 instance HasDomainname a b => HasDomainname (TF.Schema l p a) b where
     domainname = TF.configuration . domainname
+
+class HasDriver a b | a -> b where
+    driver :: P.Lens' a b
+
+instance HasDriver a b => HasDriver (TF.Schema l p a) b where
+    driver = TF.configuration . driver
 
 class HasDriverName a b | a -> b where
     driverName :: P.Lens' a b
@@ -432,6 +455,12 @@ class HasDrop a b | a -> b where
 
 instance HasDrop a b => HasDrop (TF.Schema l p a) b where
     drop = TF.configuration . drop
+
+class HasEndpointSpec a b | a -> b where
+    endpointSpec :: P.Lens' a b
+
+instance HasEndpointSpec a b => HasEndpointSpec (TF.Schema l p a) b where
+    endpointSpec = TF.configuration . endpointSpec
 
 class HasEntrypoint a b | a -> b where
     entrypoint :: P.Lens' a b
@@ -475,6 +504,12 @@ class HasFileName a b | a -> b where
 instance HasFileName a b => HasFileName (TF.Schema l p a) b where
     fileName = TF.configuration . fileName
 
+class HasForceUpdate a b | a -> b where
+    forceUpdate :: P.Lens' a b
+
+instance HasForceUpdate a b => HasForceUpdate (TF.Schema l p a) b where
+    forceUpdate = TF.configuration . forceUpdate
+
 class HasFromContainer a b | a -> b where
     fromContainer :: P.Lens' a b
 
@@ -510,6 +545,12 @@ class HasHard a b | a -> b where
 
 instance HasHard a b => HasHard (TF.Schema l p a) b where
     hard = TF.configuration . hard
+
+class HasHealthcheck a b | a -> b where
+    healthcheck :: P.Lens' a b
+
+instance HasHealthcheck a b => HasHealthcheck (TF.Schema l p a) b where
+    healthcheck = TF.configuration . healthcheck
 
 class HasHost a b | a -> b where
     host :: P.Lens' a b
@@ -769,6 +810,12 @@ class HasPermissions a b | a -> b where
 instance HasPermissions a b => HasPermissions (TF.Schema l p a) b where
     permissions = TF.configuration . permissions
 
+class HasPlacement a b | a -> b where
+    placement :: P.Lens' a b
+
+instance HasPlacement a b => HasPlacement (TF.Schema l p a) b where
+    placement = TF.configuration . placement
+
 class HasPlatforms a b | a -> b where
     platforms :: P.Lens' a b
 
@@ -859,17 +906,35 @@ class HasReplicas a b | a -> b where
 instance HasReplicas a b => HasReplicas (TF.Schema l p a) b where
     replicas = TF.configuration . replicas
 
+class HasReplicated a b | a -> b where
+    replicated :: P.Lens' a b
+
+instance HasReplicated a b => HasReplicated (TF.Schema l p a) b where
+    replicated = TF.configuration . replicated
+
 class HasReservation a b | a -> b where
     reservation :: P.Lens' a b
 
 instance HasReservation a b => HasReservation (TF.Schema l p a) b where
     reservation = TF.configuration . reservation
 
+class HasResources a b | a -> b where
+    resources :: P.Lens' a b
+
+instance HasResources a b => HasResources (TF.Schema l p a) b where
+    resources = TF.configuration . resources
+
 class HasRestart a b | a -> b where
     restart :: P.Lens' a b
 
 instance HasRestart a b => HasRestart (TF.Schema l p a) b where
     restart = TF.configuration . restart
+
+class HasRestartPolicy a b | a -> b where
+    restartPolicy :: P.Lens' a b
+
+instance HasRestartPolicy a b => HasRestartPolicy (TF.Schema l p a) b where
+    restartPolicy = TF.configuration . restartPolicy
 
 class HasRetries a b | a -> b where
     retries :: P.Lens' a b
@@ -888,6 +953,12 @@ class HasRollbackConfig a b | a -> b where
 
 instance HasRollbackConfig a b => HasRollbackConfig (TF.Schema l p a) b where
     rollbackConfig = TF.configuration . rollbackConfig
+
+class HasRuntime a b | a -> b where
+    runtime :: P.Lens' a b
+
+instance HasRuntime a b => HasRuntime (TF.Schema l p a) b where
+    runtime = TF.configuration . runtime
 
 class HasSeLinuxContext a b | a -> b where
     seLinuxContext :: P.Lens' a b
@@ -948,6 +1019,12 @@ class HasStartPeriod a b | a -> b where
 
 instance HasStartPeriod a b => HasStartPeriod (TF.Schema l p a) b where
     startPeriod = TF.configuration . startPeriod
+
+class HasStopGracePeriod a b | a -> b where
+    stopGracePeriod :: P.Lens' a b
+
+instance HasStopGracePeriod a b => HasStopGracePeriod (TF.Schema l p a) b where
+    stopGracePeriod = TF.configuration . stopGracePeriod
 
 class HasStopSignal a b | a -> b where
     stopSignal :: P.Lens' a b

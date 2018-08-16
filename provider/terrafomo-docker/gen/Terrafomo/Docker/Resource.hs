@@ -560,6 +560,12 @@ data NetworkResource s = NetworkResource'
     { _checkDuplicate :: TF.Attr s P.Bool
     -- ^ @check_duplicate@ - (Optional, Forces New)
     --
+    , _driver         :: TF.Attr s P.Text
+    -- ^ @driver@ - (Optional, Forces New)
+    --
+    , _internal       :: TF.Attr s P.Bool
+    -- ^ @internal@ - (Optional, Forces New)
+    --
     , _ipamConfig     :: TF.Attr s [TF.Attr s (IpamConfigSetting s)]
     -- ^ @ipam_config@ - (Optional, Forces New)
     --
@@ -568,6 +574,9 @@ data NetworkResource s = NetworkResource'
     --
     , _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
+    --
+    , _options        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @options@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -579,17 +588,23 @@ networkResource _name =
     TF.unsafeResource "docker_network" TF.validator $
         NetworkResource'
             { _checkDuplicate = TF.Nil
+            , _driver = TF.Nil
+            , _internal = TF.Nil
             , _ipamConfig = TF.Nil
             , _ipamDriver = TF.Nil
             , _name = _name
+            , _options = TF.Nil
             }
 
 instance TF.IsObject (NetworkResource s) where
     toObject NetworkResource'{..} = P.catMaybes
         [ TF.assign "check_duplicate" <$> TF.attribute _checkDuplicate
+        , TF.assign "driver" <$> TF.attribute _driver
+        , TF.assign "internal" <$> TF.attribute _internal
         , TF.assign "ipam_config" <$> TF.attribute _ipamConfig
         , TF.assign "ipam_driver" <$> TF.attribute _ipamDriver
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "options" <$> TF.attribute _options
         ]
 
 instance TF.IsValid (NetworkResource s) where
@@ -599,6 +614,16 @@ instance P.HasCheckDuplicate (NetworkResource s) (TF.Attr s P.Bool) where
     checkDuplicate =
         P.lens (_checkDuplicate :: NetworkResource s -> TF.Attr s P.Bool)
                (\s a -> s { _checkDuplicate = a } :: NetworkResource s)
+
+instance P.HasDriver (NetworkResource s) (TF.Attr s P.Text) where
+    driver =
+        P.lens (_driver :: NetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _driver = a } :: NetworkResource s)
+
+instance P.HasInternal (NetworkResource s) (TF.Attr s P.Bool) where
+    internal =
+        P.lens (_internal :: NetworkResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _internal = a } :: NetworkResource s)
 
 instance P.HasIpamConfig (NetworkResource s) (TF.Attr s [TF.Attr s (IpamConfigSetting s)]) where
     ipamConfig =
@@ -614,6 +639,11 @@ instance P.HasName (NetworkResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: NetworkResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: NetworkResource s)
+
+instance P.HasOptions (NetworkResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    options =
+        P.lens (_options :: NetworkResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _options = a } :: NetworkResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -692,6 +722,18 @@ data ServiceResource s = ServiceResource'
     -- A configuration to ensure that a service converges aka reaches the desired
     -- that of all task up and running
     --
+    , _endpointSpec   :: TF.Attr s (EndpointSpecSetting s)
+    -- ^ @endpoint_spec@ - (Optional)
+    -- Properties that can be configured to access and load balance a service
+    --
+    , _labels         :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @labels@ - (Optional)
+    -- User-defined key/value metadata
+    --
+    , _mode           :: TF.Attr s (ModeSetting s)
+    -- ^ @mode@ - (Optional, Forces New)
+    -- Scheduling mode for the service
+    --
     , _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     -- Name of the service
@@ -720,6 +762,9 @@ serviceResource _name _taskSpec =
         ServiceResource'
             { _auth = TF.Nil
             , _convergeConfig = TF.Nil
+            , _endpointSpec = TF.Nil
+            , _labels = TF.Nil
+            , _mode = TF.Nil
             , _name = _name
             , _rollbackConfig = TF.Nil
             , _taskSpec = _taskSpec
@@ -730,6 +775,9 @@ instance TF.IsObject (ServiceResource s) where
     toObject ServiceResource'{..} = P.catMaybes
         [ TF.assign "auth" <$> TF.attribute _auth
         , TF.assign "converge_config" <$> TF.attribute _convergeConfig
+        , TF.assign "endpoint_spec" <$> TF.attribute _endpointSpec
+        , TF.assign "labels" <$> TF.attribute _labels
+        , TF.assign "mode" <$> TF.attribute _mode
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "rollback_config" <$> TF.attribute _rollbackConfig
         , TF.assign "task_spec" <$> TF.attribute _taskSpec
@@ -741,6 +789,14 @@ instance TF.IsValid (ServiceResource s) where
            P.<> TF.settingsValidator "_convergeConfig"
                   (_convergeConfig
                       :: ServiceResource s -> TF.Attr s (ConvergeConfigSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_endpointSpec"
+                  (_endpointSpec
+                      :: ServiceResource s -> TF.Attr s (EndpointSpecSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_mode"
+                  (_mode
+                      :: ServiceResource s -> TF.Attr s (ModeSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_rollbackConfig"
                   (_rollbackConfig
@@ -764,6 +820,21 @@ instance P.HasConvergeConfig (ServiceResource s) (TF.Attr s (ConvergeConfigSetti
     convergeConfig =
         P.lens (_convergeConfig :: ServiceResource s -> TF.Attr s (ConvergeConfigSetting s))
                (\s a -> s { _convergeConfig = a } :: ServiceResource s)
+
+instance P.HasEndpointSpec (ServiceResource s) (TF.Attr s (EndpointSpecSetting s)) where
+    endpointSpec =
+        P.lens (_endpointSpec :: ServiceResource s -> TF.Attr s (EndpointSpecSetting s))
+               (\s a -> s { _endpointSpec = a } :: ServiceResource s)
+
+instance P.HasLabels (ServiceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    labels =
+        P.lens (_labels :: ServiceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _labels = a } :: ServiceResource s)
+
+instance P.HasMode (ServiceResource s) (TF.Attr s (ModeSetting s)) where
+    mode =
+        P.lens (_mode :: ServiceResource s -> TF.Attr s (ModeSetting s))
+               (\s a -> s { _mode = a } :: ServiceResource s)
 
 instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
     name =
@@ -802,8 +873,14 @@ instance s ~ s' => P.HasComputedMode (TF.Ref s' (ServiceResource s)) (TF.Attr s 
 -- See the <https://www.terraform.io/docs/providers/docker/r/volume.html terraform documentation>
 -- for more information.
 data VolumeResource s = VolumeResource'
-    { _driverOpts :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    { _driver     :: TF.Attr s P.Text
+    -- ^ @driver@ - (Optional, Forces New)
+    --
+    , _driverOpts :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @driver_opts@ - (Optional, Forces New)
+    --
+    , _name       :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -813,21 +890,35 @@ volumeResource
 volumeResource =
     TF.unsafeResource "docker_volume" TF.validator $
         VolumeResource'
-            { _driverOpts = TF.Nil
+            { _driver = TF.Nil
+            , _driverOpts = TF.Nil
+            , _name = TF.Nil
             }
 
 instance TF.IsObject (VolumeResource s) where
     toObject VolumeResource'{..} = P.catMaybes
-        [ TF.assign "driver_opts" <$> TF.attribute _driverOpts
+        [ TF.assign "driver" <$> TF.attribute _driver
+        , TF.assign "driver_opts" <$> TF.attribute _driverOpts
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
 instance TF.IsValid (VolumeResource s) where
     validator = P.mempty
 
+instance P.HasDriver (VolumeResource s) (TF.Attr s P.Text) where
+    driver =
+        P.lens (_driver :: VolumeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _driver = a } :: VolumeResource s)
+
 instance P.HasDriverOpts (VolumeResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     driverOpts =
         P.lens (_driverOpts :: VolumeResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _driverOpts = a } :: VolumeResource s)
+
+instance P.HasName (VolumeResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: VolumeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: VolumeResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"

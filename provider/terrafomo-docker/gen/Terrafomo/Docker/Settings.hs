@@ -369,72 +369,86 @@ instance P.HasFileName (ConfigsSetting s) (TF.Attr s P.Text) where
 
 -- | @container_spec@ nested settings.
 data ContainerSpecSetting s = ContainerSpecSetting'
-    { _args       :: TF.Attr s [TF.Attr s P.Text]
+    { _args            :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @args@ - (Optional)
     -- Arguments to the command
     --
-    , _command    :: TF.Attr s [TF.Attr s P.Text]
+    , _command         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @command@ - (Optional)
     -- The command to be run in the image
     --
-    , _configs    :: TF.Attr s [TF.Attr s (ConfigsSetting s)]
+    , _configs         :: TF.Attr s [TF.Attr s (ConfigsSetting s)]
     -- ^ @configs@ - (Optional)
     -- References to zero or more configs that will be exposed to the service
     --
-    , _dir        :: TF.Attr s P.Text
+    , _dir             :: TF.Attr s P.Text
     -- ^ @dir@ - (Optional)
     -- The working directory for commands to run in
     --
-    , _env        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _dnsConfig       :: TF.Attr s (DnsConfigSetting s)
+    -- ^ @dns_config@ - (Optional)
+    -- Specification for DNS related configurations in resolver configuration file
+    -- (resolv.conf)
+    --
+    , _env             :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @env@ - (Optional)
     -- A list of environment variables in the form VAR="value"
     --
-    , _groups     :: TF.Attr s [TF.Attr s P.Text]
+    , _groups          :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @groups@ - (Optional)
     -- A list of additional groups that the container process will run as
     --
-    , _hostname   :: TF.Attr s P.Text
+    , _healthcheck     :: TF.Attr s (HealthcheckSetting s)
+    -- ^ @healthcheck@ - (Optional)
+    -- A test to perform to check that the container is healthy
+    --
+    , _hostname        :: TF.Attr s P.Text
     -- ^ @hostname@ - (Optional)
     -- The hostname to use for the container, as a valid RFC 1123 hostname
     --
-    , _hosts      :: TF.Attr s [TF.Attr s (HostsSetting s)]
+    , _hosts           :: TF.Attr s [TF.Attr s (HostsSetting s)]
     -- ^ @hosts@ - (Optional, Forces New)
     -- A list of hostname/IP mappings to add to the container's hosts file.
     --
-    , _image      :: TF.Attr s P.Text
+    , _image           :: TF.Attr s P.Text
     -- ^ @image@ - (Required)
     -- The image name to use for the containers of the service
     --
-    , _isolation  :: TF.Attr s P.Text
+    , _isolation       :: TF.Attr s P.Text
     -- ^ @isolation@ - (Optional)
     -- Isolation technology of the containers running the service. (Windows only)
     --
-    , _labels     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _labels          :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     -- User-defined key/value metadata
     --
-    , _mounts     :: TF.Attr s [TF.Attr s (MountsSetting s)]
+    , _mounts          :: TF.Attr s [TF.Attr s (MountsSetting s)]
     -- ^ @mounts@ - (Optional)
     -- Specification for mounts to be added to containers created as part of the
     -- service
     --
-    , _privileges :: TF.Attr s (PrivilegesSetting s)
+    , _privileges      :: TF.Attr s (PrivilegesSetting s)
     -- ^ @privileges@ - (Optional)
     -- Security options for the container
     --
-    , _readOnly   :: TF.Attr s P.Bool
+    , _readOnly        :: TF.Attr s P.Bool
     -- ^ @read_only@ - (Optional)
     -- Mount the container's root filesystem as read only
     --
-    , _secrets    :: TF.Attr s [TF.Attr s (SecretsSetting s)]
+    , _secrets         :: TF.Attr s [TF.Attr s (SecretsSetting s)]
     -- ^ @secrets@ - (Optional)
     -- References to zero or more secrets that will be exposed to the service
     --
-    , _stopSignal :: TF.Attr s P.Text
+    , _stopGracePeriod :: TF.Attr s P.Text
+    -- ^ @stop_grace_period@ - (Optional)
+    -- Amount of time to wait for the container to terminate before forcefully
+    -- removing it (ms|s|m|h)
+    --
+    , _stopSignal      :: TF.Attr s P.Text
     -- ^ @stop_signal@ - (Optional)
     -- Signal to stop the container
     --
-    , _user       :: TF.Attr s P.Text
+    , _user            :: TF.Attr s P.Text
     -- ^ @user@ - (Optional)
     -- The user inside the container
     --
@@ -450,8 +464,10 @@ containerSpecSetting _image =
         , _command = TF.Nil
         , _configs = TF.Nil
         , _dir = TF.Nil
+        , _dnsConfig = TF.Nil
         , _env = TF.Nil
         , _groups = TF.Nil
+        , _healthcheck = TF.Nil
         , _hostname = TF.Nil
         , _hosts = TF.Nil
         , _image = _image
@@ -461,6 +477,7 @@ containerSpecSetting _image =
         , _privileges = TF.Nil
         , _readOnly = TF.Nil
         , _secrets = TF.Nil
+        , _stopGracePeriod = TF.Nil
         , _stopSignal = TF.Nil
         , _user = TF.Nil
         }
@@ -472,8 +489,10 @@ instance TF.IsObject (ContainerSpecSetting s) where
         , TF.assign "command" <$> TF.attribute _command
         , TF.assign "configs" <$> TF.attribute _configs
         , TF.assign "dir" <$> TF.attribute _dir
+        , TF.assign "dns_config" <$> TF.attribute _dnsConfig
         , TF.assign "env" <$> TF.attribute _env
         , TF.assign "groups" <$> TF.attribute _groups
+        , TF.assign "healthcheck" <$> TF.attribute _healthcheck
         , TF.assign "hostname" <$> TF.attribute _hostname
         , TF.assign "hosts" <$> TF.attribute _hosts
         , TF.assign "image" <$> TF.attribute _image
@@ -483,12 +502,21 @@ instance TF.IsObject (ContainerSpecSetting s) where
         , TF.assign "privileges" <$> TF.attribute _privileges
         , TF.assign "read_only" <$> TF.attribute _readOnly
         , TF.assign "secrets" <$> TF.attribute _secrets
+        , TF.assign "stop_grace_period" <$> TF.attribute _stopGracePeriod
         , TF.assign "stop_signal" <$> TF.attribute _stopSignal
         , TF.assign "user" <$> TF.attribute _user
         ]
 
 instance TF.IsValid (ContainerSpecSetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_dnsConfig"
+                  (_dnsConfig
+                      :: ContainerSpecSetting s -> TF.Attr s (DnsConfigSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_healthcheck"
+                  (_healthcheck
+                      :: ContainerSpecSetting s -> TF.Attr s (HealthcheckSetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_privileges"
                   (_privileges
                       :: ContainerSpecSetting s -> TF.Attr s (PrivilegesSetting s))
@@ -514,6 +542,11 @@ instance P.HasDir (ContainerSpecSetting s) (TF.Attr s P.Text) where
         P.lens (_dir :: ContainerSpecSetting s -> TF.Attr s P.Text)
                (\s a -> s { _dir = a } :: ContainerSpecSetting s)
 
+instance P.HasDnsConfig (ContainerSpecSetting s) (TF.Attr s (DnsConfigSetting s)) where
+    dnsConfig =
+        P.lens (_dnsConfig :: ContainerSpecSetting s -> TF.Attr s (DnsConfigSetting s))
+               (\s a -> s { _dnsConfig = a } :: ContainerSpecSetting s)
+
 instance P.HasEnv (ContainerSpecSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     env =
         P.lens (_env :: ContainerSpecSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
@@ -523,6 +556,11 @@ instance P.HasGroups (ContainerSpecSetting s) (TF.Attr s [TF.Attr s P.Text]) whe
     groups =
         P.lens (_groups :: ContainerSpecSetting s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _groups = a } :: ContainerSpecSetting s)
+
+instance P.HasHealthcheck (ContainerSpecSetting s) (TF.Attr s (HealthcheckSetting s)) where
+    healthcheck =
+        P.lens (_healthcheck :: ContainerSpecSetting s -> TF.Attr s (HealthcheckSetting s))
+               (\s a -> s { _healthcheck = a } :: ContainerSpecSetting s)
 
 instance P.HasHostname (ContainerSpecSetting s) (TF.Attr s P.Text) where
     hostname =
@@ -568,6 +606,11 @@ instance P.HasSecrets (ContainerSpecSetting s) (TF.Attr s [TF.Attr s (SecretsSet
     secrets =
         P.lens (_secrets :: ContainerSpecSetting s -> TF.Attr s [TF.Attr s (SecretsSetting s)])
                (\s a -> s { _secrets = a } :: ContainerSpecSetting s)
+
+instance P.HasStopGracePeriod (ContainerSpecSetting s) (TF.Attr s P.Text) where
+    stopGracePeriod =
+        P.lens (_stopGracePeriod :: ContainerSpecSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _stopGracePeriod = a } :: ContainerSpecSetting s)
 
 instance P.HasStopSignal (ContainerSpecSetting s) (TF.Attr s P.Text) where
     stopSignal =
@@ -776,7 +819,11 @@ instance P.HasSearch (DnsConfigSetting s) (TF.Attr s [TF.Attr s P.Text]) where
 
 -- | @endpoint_spec@ nested settings.
 data EndpointSpecSetting s = EndpointSpecSetting'
-    { _ports :: TF.Attr s [TF.Attr s (PortsSetting s)]
+    { _mode  :: TF.Attr s P.Text
+    -- ^ @mode@ - (Optional)
+    -- The mode of resolution to use for internal load balancing between tasks
+    --
+    , _ports :: TF.Attr s [TF.Attr s (PortsSetting s)]
     -- ^ @ports@ - (Optional)
     -- List of exposed ports that this service is accessible on from the outside.
     -- Ports can only be provided if 'vip' resolution mode is used.
@@ -788,17 +835,24 @@ endpointSpecSetting
     :: EndpointSpecSetting s
 endpointSpecSetting =
     EndpointSpecSetting'
-        { _ports = TF.Nil
+        { _mode = TF.Nil
+        , _ports = TF.Nil
         }
 
 instance TF.IsValue  (EndpointSpecSetting s)
 instance TF.IsObject (EndpointSpecSetting s) where
     toObject EndpointSpecSetting'{..} = P.catMaybes
-        [ TF.assign "ports" <$> TF.attribute _ports
+        [ TF.assign "mode" <$> TF.attribute _mode
+        , TF.assign "ports" <$> TF.attribute _ports
         ]
 
 instance TF.IsValid (EndpointSpecSetting s) where
     validator = P.mempty
+
+instance P.HasMode (EndpointSpecSetting s) (TF.Attr s P.Text) where
+    mode =
+        P.lens (_mode :: EndpointSpecSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _mode = a } :: EndpointSpecSetting s)
 
 instance P.HasPorts (EndpointSpecSetting s) (TF.Attr s [TF.Attr s (PortsSetting s)]) where
     ports =
@@ -1169,10 +1223,20 @@ instance P.HasOptions (LogDriverSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P
 
 -- | @mode@ nested settings.
 data ModeSetting s = ModeSetting'
-    { _global :: TF.Attr s P.Bool
+    { _global     :: TF.Attr s P.Bool
     -- ^ @global@ - (Optional)
     -- The global service mode
     --
+    -- Conflicts with:
+    --
+    -- * 'replicated'
+    , _replicated :: TF.Attr s (ReplicatedSetting s)
+    -- ^ @replicated@ - (Optional)
+    -- The replicated service mode
+    --
+    -- Conflicts with:
+    --
+    -- * 'global'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @mode@ settings value.
@@ -1181,21 +1245,43 @@ modeSetting
 modeSetting =
     ModeSetting'
         { _global = TF.value P.False
+        , _replicated = TF.Nil
         }
 
 instance TF.IsValue  (ModeSetting s)
 instance TF.IsObject (ModeSetting s) where
     toObject ModeSetting'{..} = P.catMaybes
         [ TF.assign "global" <$> TF.attribute _global
+        , TF.assign "replicated" <$> TF.attribute _replicated
         ]
 
 instance TF.IsValid (ModeSetting s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\ModeSetting'{..} -> Map.fromList $ P.catMaybes
+        [ if (_global P.== TF.value P.False)
+              then P.Nothing
+              else P.Just ("_global",
+                            [ "_replicated"
+                            ])
+        , if (_replicated P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_replicated",
+                            [ "_global"
+                            ])
+        ])
+           P.<> TF.settingsValidator "_replicated"
+                  (_replicated
+                      :: ModeSetting s -> TF.Attr s (ReplicatedSetting s))
+                  TF.validator
 
 instance P.HasGlobal (ModeSetting s) (TF.Attr s P.Bool) where
     global =
         P.lens (_global :: ModeSetting s -> TF.Attr s P.Bool)
                (\s a -> s { _global = a } :: ModeSetting s)
+
+instance P.HasReplicated (ModeSetting s) (TF.Attr s (ReplicatedSetting s)) where
+    replicated =
+        P.lens (_replicated :: ModeSetting s -> TF.Attr s (ReplicatedSetting s))
+               (\s a -> s { _replicated = a } :: ModeSetting s)
 
 instance s ~ s' => P.HasComputedReplicated (TF.Ref s' (ModeSetting s)) (TF.Attr s (ReplicatedSetting s)) where
     computedReplicated x = TF.compute (TF.refKey x) "replicated"
@@ -2078,15 +2164,40 @@ data TaskSpecSetting s = TaskSpecSetting'
     -- ^ @container_spec@ - (Required)
     -- The spec for each container
     --
-    , _logDriver     :: TF.Attr s (LogDriverSetting s)
+    , _forceUpdate :: TF.Attr s P.Int
+    -- ^ @force_update@ - (Optional)
+    -- A counter that triggers an update even if no relevant parameters have been
+    -- changed. See
+    -- https://github.com/docker/swarmkit/blob/master/api/specs.proto#L126
+    --
+    , _logDriver :: TF.Attr s (LogDriverSetting s)
     -- ^ @log_driver@ - (Optional)
     -- Specifies the log driver to use for tasks created from this spec. If not
     -- present, the default one for the swarm will be used, finally falling back to
     -- the engine default if not specified
     --
-    , _networks      :: TF.Attr s [TF.Attr s P.Text]
+    , _networks :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @networks@ - (Optional)
     -- Ids of the networks in which the  container will be put in.
+    --
+    , _placement :: TF.Attr s (PlacementSetting s)
+    -- ^ @placement@ - (Optional)
+    -- The placement preferences
+    --
+    , _resources :: TF.Attr s (ResourcesSetting s)
+    -- ^ @resources@ - (Optional)
+    -- Resource requirements which apply to each individual container created as
+    -- part of the service
+    --
+    , _restartPolicy :: TF.Attr s (P.Map P.Text (TF.Attr s (RestartPolicySetting s)))
+    -- ^ @restart_policy@ - (Optional)
+    -- Specification for the restart policy which applies to containers created as
+    -- part of this service.
+    --
+    , _runtime :: TF.Attr s P.Text
+    -- ^ @runtime@ - (Optional)
+    -- Runtime is the type of runtime specified for the task executor. See
+    -- https://github.com/moby/moby/blob/master/api/types/swarm/runtime.go
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -2097,16 +2208,26 @@ taskSpecSetting
 taskSpecSetting _containerSpec =
     TaskSpecSetting'
         { _containerSpec = _containerSpec
+        , _forceUpdate = TF.Nil
         , _logDriver = TF.Nil
         , _networks = TF.Nil
+        , _placement = TF.Nil
+        , _resources = TF.Nil
+        , _restartPolicy = TF.Nil
+        , _runtime = TF.Nil
         }
 
 instance TF.IsValue  (TaskSpecSetting s)
 instance TF.IsObject (TaskSpecSetting s) where
     toObject TaskSpecSetting'{..} = P.catMaybes
         [ TF.assign "container_spec" <$> TF.attribute _containerSpec
+        , TF.assign "force_update" <$> TF.attribute _forceUpdate
         , TF.assign "log_driver" <$> TF.attribute _logDriver
         , TF.assign "networks" <$> TF.attribute _networks
+        , TF.assign "placement" <$> TF.attribute _placement
+        , TF.assign "resources" <$> TF.attribute _resources
+        , TF.assign "restart_policy" <$> TF.attribute _restartPolicy
+        , TF.assign "runtime" <$> TF.attribute _runtime
         ]
 
 instance TF.IsValid (TaskSpecSetting s) where
@@ -2119,11 +2240,24 @@ instance TF.IsValid (TaskSpecSetting s) where
                   (_logDriver
                       :: TaskSpecSetting s -> TF.Attr s (LogDriverSetting s))
                   TF.validator
+           P.<> TF.settingsValidator "_placement"
+                  (_placement
+                      :: TaskSpecSetting s -> TF.Attr s (PlacementSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_resources"
+                  (_resources
+                      :: TaskSpecSetting s -> TF.Attr s (ResourcesSetting s))
+                  TF.validator
 
 instance P.HasContainerSpec (TaskSpecSetting s) (TF.Attr s (ContainerSpecSetting s)) where
     containerSpec =
         P.lens (_containerSpec :: TaskSpecSetting s -> TF.Attr s (ContainerSpecSetting s))
                (\s a -> s { _containerSpec = a } :: TaskSpecSetting s)
+
+instance P.HasForceUpdate (TaskSpecSetting s) (TF.Attr s P.Int) where
+    forceUpdate =
+        P.lens (_forceUpdate :: TaskSpecSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _forceUpdate = a } :: TaskSpecSetting s)
 
 instance P.HasLogDriver (TaskSpecSetting s) (TF.Attr s (LogDriverSetting s)) where
     logDriver =
@@ -2134,6 +2268,26 @@ instance P.HasNetworks (TaskSpecSetting s) (TF.Attr s [TF.Attr s P.Text]) where
     networks =
         P.lens (_networks :: TaskSpecSetting s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _networks = a } :: TaskSpecSetting s)
+
+instance P.HasPlacement (TaskSpecSetting s) (TF.Attr s (PlacementSetting s)) where
+    placement =
+        P.lens (_placement :: TaskSpecSetting s -> TF.Attr s (PlacementSetting s))
+               (\s a -> s { _placement = a } :: TaskSpecSetting s)
+
+instance P.HasResources (TaskSpecSetting s) (TF.Attr s (ResourcesSetting s)) where
+    resources =
+        P.lens (_resources :: TaskSpecSetting s -> TF.Attr s (ResourcesSetting s))
+               (\s a -> s { _resources = a } :: TaskSpecSetting s)
+
+instance P.HasRestartPolicy (TaskSpecSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s (RestartPolicySetting s)))) where
+    restartPolicy =
+        P.lens (_restartPolicy :: TaskSpecSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s (RestartPolicySetting s))))
+               (\s a -> s { _restartPolicy = a } :: TaskSpecSetting s)
+
+instance P.HasRuntime (TaskSpecSetting s) (TF.Attr s P.Text) where
+    runtime =
+        P.lens (_runtime :: TaskSpecSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _runtime = a } :: TaskSpecSetting s)
 
 instance s ~ s' => P.HasComputedForceUpdate (TF.Ref s' (TaskSpecSetting s)) (TF.Attr s P.Int) where
     computedForceUpdate x = TF.compute (TF.refKey x) "force_update"
