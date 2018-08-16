@@ -82,7 +82,7 @@ logResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LogResource s)
 logResource _logsetId _name =
-    TF.unsafeResource "logentries_log" P.defaultProvider TF.validator $
+    TF.unsafeResource "logentries_log" TF.validator $
         LogResource'
             { _filename = TF.Nil
             , _logsetId = _logsetId
@@ -155,7 +155,7 @@ logsetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LogsetResource s)
 logsetResource _name =
-    TF.unsafeResource "logentries_logset" P.defaultProvider TF.validator $
+    TF.unsafeResource "logentries_logset" TF.validator $
         LogsetResource'
             { _location = TF.value "nonlocation"
             , _name = _name

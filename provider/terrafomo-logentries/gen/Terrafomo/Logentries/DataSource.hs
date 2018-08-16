@@ -65,7 +65,7 @@ logsetData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (LogsetData s)
 logsetData _name =
-    TF.unsafeDataSource "logentries_logset" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "logentries_logset" TF.validator $
         LogsetData'
             { _location = TF.value "nonlocation"
             , _name = _name
