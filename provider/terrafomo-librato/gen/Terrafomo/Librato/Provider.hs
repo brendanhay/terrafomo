@@ -84,7 +84,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "librato"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "email" _email
             , P.Just $ TF.assign "token" _token
