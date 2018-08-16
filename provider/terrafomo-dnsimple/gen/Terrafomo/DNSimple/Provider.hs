@@ -89,7 +89,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "dnsimple"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "account" _account
             , TF.assign "email" <$> _email

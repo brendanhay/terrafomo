@@ -19,6 +19,7 @@ module Terrafomo.DNSimple.Lens
     , HasDomain (..)
     , HasEmail (..)
     , HasName (..)
+    , HasPriority (..)
     , HasToken (..)
     , HasTtl (..)
     , HasType' (..)
@@ -59,6 +60,12 @@ class HasName a b | a -> b where
 
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
+
+class HasPriority a b | a -> b where
+    priority :: P.Lens' a b
+
+instance HasPriority a b => HasPriority (TF.Schema l p a) b where
+    priority = TF.configuration . priority
 
 class HasToken a b | a -> b where
     token :: P.Lens' a b

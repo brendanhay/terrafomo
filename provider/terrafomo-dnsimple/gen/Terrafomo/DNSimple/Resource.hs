@@ -52,19 +52,22 @@ import qualified Terrafomo.Validator         as TF
 -- See the <https://www.terraform.io/docs/providers/dnsimple/r/record.html terraform documentation>
 -- for more information.
 data RecordResource s = RecordResource'
-    { _domain :: TF.Attr s P.Text
+    { _domain   :: TF.Attr s P.Text
     -- ^ @domain@ - (Required, Forces New)
     --
-    , _name   :: TF.Attr s P.Text
+    , _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _ttl    :: TF.Attr s P.Text
+    , _priority :: TF.Attr s P.Text
+    -- ^ @priority@ - (Optional)
+    --
+    , _ttl      :: TF.Attr s P.Text
     -- ^ @ttl@ - (Optional)
     --
-    , _type'  :: TF.Attr s P.Text
+    , _type'    :: TF.Attr s P.Text
     -- ^ @type@ - (Required, Forces New)
     --
-    , _value  :: TF.Attr s P.Text
+    , _value    :: TF.Attr s P.Text
     -- ^ @value@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -81,6 +84,7 @@ recordResource _domain _name _type' _value =
         RecordResource'
             { _domain = _domain
             , _name = _name
+            , _priority = TF.Nil
             , _ttl = TF.value "3600"
             , _type' = _type'
             , _value = _value
@@ -90,6 +94,7 @@ instance TF.IsObject (RecordResource s) where
     toObject RecordResource'{..} = P.catMaybes
         [ TF.assign "domain" <$> TF.attribute _domain
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "priority" <$> TF.attribute _priority
         , TF.assign "ttl" <$> TF.attribute _ttl
         , TF.assign "type" <$> TF.attribute _type'
         , TF.assign "value" <$> TF.attribute _value
@@ -107,6 +112,11 @@ instance P.HasName (RecordResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RecordResource s)
+
+instance P.HasPriority (RecordResource s) (TF.Attr s P.Text) where
+    priority =
+        P.lens (_priority :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _priority = a } :: RecordResource s)
 
 instance P.HasTtl (RecordResource s) (TF.Attr s P.Text) where
     ttl =
