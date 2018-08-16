@@ -371,6 +371,26 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "Specification for DNS related configurations in resolver configuration file",
+                        "(resolv.conf)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"dns_config\" <$> TF.attribute",
+                    "name": "_dnsConfig",
+                    "method": "dnsConfig",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (DnsConfigSetting s)",
+                    "class": "HasDnsConfig",
+                    "validate": true,
+                    "optional": true,
+                    "original": "dns_config"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "A list of environment variables in the form VAR=\"value\""
                     ],
                     "forceNew": false,
@@ -403,6 +423,25 @@
                     "validate": false,
                     "optional": true,
                     "original": "groups"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "A test to perform to check that the container is healthy"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"healthcheck\" <$> TF.attribute",
+                    "name": "_healthcheck",
+                    "method": "healthcheck",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (HealthcheckSetting s)",
+                    "class": "HasHealthcheck",
+                    "validate": true,
+                    "optional": true,
+                    "original": "healthcheck"
                 },
                 {
                     "default": "TF.Nil",
@@ -581,6 +620,26 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "Amount of time to wait for the container to terminate before forcefully",
+                        "removing it (ms|s|m|h)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"stop_grace_period\" <$> TF.attribute",
+                    "name": "_stopGracePeriod",
+                    "method": "stopGracePeriod",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasStopGracePeriod",
+                    "validate": false,
+                    "optional": true,
+                    "original": "stop_grace_period"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "Signal to stop the container"
                     ],
                     "forceNew": false,
@@ -636,7 +695,7 @@
                     "type": "TF.Attr s (DnsConfigSetting s)",
                     "class": "HasComputedDnsConfig",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "dns_config"
                 },
                 {
@@ -655,7 +714,7 @@
                     "type": "TF.Attr s (HealthcheckSetting s)",
                     "class": "HasComputedHealthcheck",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "healthcheck"
                 },
                 {
@@ -675,7 +734,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedStopGracePeriod",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "stop_grace_period"
                 }
             ],
@@ -1002,6 +1061,25 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "The mode of resolution to use for internal load balancing between tasks"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"mode\" <$> TF.attribute",
+                    "name": "_mode",
+                    "method": "mode",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMode",
+                    "validate": false,
+                    "optional": true,
+                    "original": "mode"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "List of exposed ports that this service is accessible on from the outside.",
                         "Ports can only be provided if 'vip' resolution mode is used."
                     ],
@@ -1038,7 +1116,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMode",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "mode"
                 }
             ],
@@ -1656,12 +1734,43 @@
                     "name": "_global",
                     "method": "global",
                     "threaded": true,
-                    "conflicts": [],
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_replicated",
+                            "method": "replicated"
+                        }
+                    ],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasGlobal",
                     "validate": false,
                     "optional": true,
                     "original": "global"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The replicated service mode"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"replicated\" <$> TF.attribute",
+                    "name": "_replicated",
+                    "method": "replicated",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.value P.False",
+                            "name": "_global",
+                            "method": "global"
+                        }
+                    ],
+                    "type": "TF.Attr s (ReplicatedSetting s)",
+                    "class": "HasReplicated",
+                    "validate": true,
+                    "optional": true,
+                    "original": "replicated"
                 }
             ],
             "key": "docker_service.mode",
@@ -1686,12 +1795,63 @@
                     "type": "TF.Attr s (ReplicatedSetting s)",
                     "class": "HasComputedReplicated",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "replicated"
                 }
             ],
             "parameters": [],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The global service mode"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"global\" <$> TF.attribute",
+                    "name": "_global",
+                    "method": "global",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_replicated",
+                            "method": "replicated"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasGlobal",
+                    "validate": false,
+                    "optional": true,
+                    "original": "global"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The replicated service mode"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"replicated\" <$> TF.attribute",
+                    "name": "_replicated",
+                    "method": "replicated",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.value P.False",
+                            "name": "_global",
+                            "method": "global"
+                        }
+                    ],
+                    "type": "TF.Attr s (ReplicatedSetting s)",
+                    "class": "HasReplicated",
+                    "validate": true,
+                    "optional": true,
+                    "original": "replicated"
+                }
+            ],
             "type": "ModeSetting s",
             "original": "mode"
         },
@@ -3183,6 +3343,27 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "A counter that triggers an update even if no relevant parameters have been",
+                        "changed. See",
+                        "https://github.com/docker/swarmkit/blob/master/api/specs.proto#L126"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"force_update\" <$> TF.attribute",
+                    "name": "_forceUpdate",
+                    "method": "forceUpdate",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasForceUpdate",
+                    "validate": false,
+                    "optional": true,
+                    "original": "force_update"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "Specifies the log driver to use for tasks created from this spec. If not",
                         "present, the default one for the swarm will be used, finally falling back to",
                         "the engine default if not specified"
@@ -3217,6 +3398,85 @@
                     "validate": false,
                     "optional": true,
                     "original": "networks"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The placement preferences"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"placement\" <$> TF.attribute",
+                    "name": "_placement",
+                    "method": "placement",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (PlacementSetting s)",
+                    "class": "HasPlacement",
+                    "validate": true,
+                    "optional": true,
+                    "original": "placement"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Resource requirements which apply to each individual container created as",
+                        "part of the service"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"resources\" <$> TF.attribute",
+                    "name": "_resources",
+                    "method": "resources",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (ResourcesSetting s)",
+                    "class": "HasResources",
+                    "validate": true,
+                    "optional": true,
+                    "original": "resources"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Specification for the restart policy which applies to containers created as",
+                        "part of this service."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"restart_policy\" <$> TF.attribute",
+                    "name": "_restartPolicy",
+                    "method": "restartPolicy",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s (RestartPolicySetting s)))",
+                    "class": "HasRestartPolicy",
+                    "validate": false,
+                    "optional": true,
+                    "original": "restart_policy"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Runtime is the type of runtime specified for the task executor. See",
+                        "https://github.com/moby/moby/blob/master/api/types/swarm/runtime.go"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"runtime\" <$> TF.attribute",
+                    "name": "_runtime",
+                    "method": "runtime",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRuntime",
+                    "validate": false,
+                    "optional": true,
+                    "original": "runtime"
                 }
             ],
             "key": "docker_service.task_spec",
@@ -3241,7 +3501,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedForceUpdate",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "force_update"
                 },
                 {
@@ -3260,7 +3520,7 @@
                     "type": "TF.Attr s (PlacementSetting s)",
                     "class": "HasComputedPlacement",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "placement"
                 },
                 {
@@ -3280,7 +3540,7 @@
                     "type": "TF.Attr s (ResourcesSetting s)",
                     "class": "HasComputedResources",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "resources"
                 },
                 {
@@ -3300,7 +3560,7 @@
                     "type": "TF.Attr s (P.Map P.Text (TF.Attr s (RestartPolicySetting s)))",
                     "class": "HasComputedRestartPolicy",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "restart_policy"
                 },
                 {
@@ -3320,7 +3580,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRuntime",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "runtime"
                 }
             ],
@@ -4982,6 +5242,40 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
+                    "encoder": "TF.assign \"driver\" <$> TF.attribute",
+                    "name": "_driver",
+                    "method": "driver",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDriver",
+                    "validate": false,
+                    "optional": true,
+                    "original": "driver"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"internal\" <$> TF.attribute",
+                    "name": "_internal",
+                    "method": "internal",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasInternal",
+                    "validate": false,
+                    "optional": true,
+                    "original": "internal"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
                     "encoder": "TF.assign \"ipam_config\" <$> TF.attribute",
                     "name": "_ipamConfig",
                     "method": "ipamConfig",
@@ -5026,6 +5320,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"options\" <$> TF.attribute",
+                    "name": "_options",
+                    "method": "options",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
+                    "class": "HasOptions",
+                    "validate": false,
+                    "optional": true,
+                    "original": "options"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/docker/r/network.html",
@@ -5064,7 +5375,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDriver",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "driver"
                 },
                 {
@@ -5081,7 +5392,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedInternal",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "internal"
                 },
                 {
@@ -5098,7 +5409,7 @@
                     "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
                     "class": "HasComputedOptions",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "options"
                 },
                 {
@@ -5298,6 +5609,63 @@
                     "original": "converge_config"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Properties that can be configured to access and load balance a service"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"endpoint_spec\" <$> TF.attribute",
+                    "name": "_endpointSpec",
+                    "method": "endpointSpec",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (EndpointSpecSetting s)",
+                    "class": "HasEndpointSpec",
+                    "validate": true,
+                    "optional": true,
+                    "original": "endpoint_spec"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "User-defined key/value metadata"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"labels\" <$> TF.attribute",
+                    "name": "_labels",
+                    "method": "labels",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
+                    "class": "HasLabels",
+                    "validate": false,
+                    "optional": true,
+                    "original": "labels"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Scheduling mode for the service"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"mode\" <$> TF.attribute",
+                    "name": "_mode",
+                    "method": "mode",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (ModeSetting s)",
+                    "class": "HasMode",
+                    "validate": true,
+                    "optional": true,
+                    "original": "mode"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -5412,7 +5780,7 @@
                     "type": "TF.Attr s (EndpointSpecSetting s)",
                     "class": "HasComputedEndpointSpec",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "endpoint_spec"
                 },
                 {
@@ -5431,7 +5799,7 @@
                     "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
                     "class": "HasComputedLabels",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "labels"
                 },
                 {
@@ -5450,7 +5818,7 @@
                     "type": "TF.Attr s (ModeSetting s)",
                     "class": "HasComputedMode",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "mode"
                 }
             ],
@@ -5510,6 +5878,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
+                    "encoder": "TF.assign \"driver\" <$> TF.attribute",
+                    "name": "_driver",
+                    "method": "driver",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDriver",
+                    "validate": false,
+                    "optional": true,
+                    "original": "driver"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
                     "encoder": "TF.assign \"driver_opts\" <$> TF.attribute",
                     "name": "_driverOpts",
                     "method": "driverOpts",
@@ -5520,6 +5905,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "driver_opts"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/docker/r/volume.html",
@@ -5558,7 +5960,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDriver",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "driver"
                 },
                 {
@@ -5592,7 +5994,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 }
             ],
