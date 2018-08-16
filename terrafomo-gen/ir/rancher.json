@@ -1092,6 +1092,23 @@
                     "original": "description"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"member\" <$> TF.attribute",
+                    "name": "_member",
+                    "method": "member",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (MemberSetting s)]",
+                    "class": "HasMember",
+                    "validate": false,
+                    "optional": true,
+                    "original": "member"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -1107,6 +1124,52 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"orchestration\" <$> TF.attribute",
+                    "name": "_orchestration",
+                    "method": "orchestration",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_projectTemplateId",
+                            "method": "projectTemplateId"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOrchestration",
+                    "validate": false,
+                    "optional": true,
+                    "original": "orchestration"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"project_template_id\" <$> TF.attribute",
+                    "name": "_projectTemplateId",
+                    "method": "projectTemplateId",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_orchestration",
+                            "method": "orchestration"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProjectTemplateId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "project_template_id"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/environment.html",
@@ -1145,7 +1208,7 @@
                     "type": "TF.Attr s [TF.Attr s (MemberSetting s)]",
                     "class": "HasComputedMember",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "member"
                 },
                 {
@@ -1164,7 +1227,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOrchestration",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "orchestration"
                 },
                 {
@@ -1183,7 +1246,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedProjectTemplateId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "project_template_id"
                 }
             ],
@@ -1206,7 +1269,54 @@
                     "original": "name"
                 }
             ],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"orchestration\" <$> TF.attribute",
+                    "name": "_orchestration",
+                    "method": "orchestration",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_projectTemplateId",
+                            "method": "projectTemplateId"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOrchestration",
+                    "validate": false,
+                    "optional": true,
+                    "original": "orchestration"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"project_template_id\" <$> TF.attribute",
+                    "name": "_projectTemplateId",
+                    "method": "projectTemplateId",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_orchestration",
+                            "method": "orchestration"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProjectTemplateId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "project_template_id"
+                }
+            ],
             "type": "EnvironmentResource s",
             "original": "rancher_environment"
         },
@@ -2262,6 +2372,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "scope"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"start_on_create\" <$> TF.attribute",
+                    "name": "_startOnCreate",
+                    "method": "startOnCreate",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasStartOnCreate",
+                    "validate": false,
+                    "optional": true,
+                    "original": "start_on_create"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/stack.html",
@@ -2334,7 +2461,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedStartOnCreate",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "start_on_create"
                 }
             ],
