@@ -193,6 +193,9 @@ instance P.HasType' (AffinityGroupResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: AffinityGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: AffinityGroupResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AffinityGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (AffinityGroupResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
@@ -279,6 +282,9 @@ instance P.HasZone (DiskResource s) (TF.Attr s P.Text) where
         P.lens (_zone :: DiskResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: DiskResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDeviceId (TF.Ref s' (DiskResource s)) (TF.Attr s P.Int) where
     computedDeviceId x = TF.compute (TF.refKey x) "device_id"
 
@@ -353,6 +359,9 @@ instance P.HasRule (EgressFirewallResource s) (TF.Attr s [TF.Attr s (RuleSetting
         P.lens (_rule :: EgressFirewallResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
                (\s a -> s { _rule = a } :: EgressFirewallResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EgressFirewallResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @cloudstack_firewall@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/cloudstack/r/firewall.html terraform documentation>
@@ -414,6 +423,9 @@ instance P.HasRule (FirewallResource s) (TF.Attr s [TF.Attr s (RuleSetting s)]) 
     rule =
         P.lens (_rule :: FirewallResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
                (\s a -> s { _rule = a } :: FirewallResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @cloudstack_instance@ Resource.
 --
@@ -572,6 +584,9 @@ instance P.HasZone (InstanceResource s) (TF.Attr s P.Text) where
         P.lens (_zone :: InstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: InstanceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedDisplayName x = TF.compute (TF.refKey x) "display_name"
 
@@ -656,6 +671,9 @@ instance P.HasZone (IpaddressResource s) (TF.Attr s P.Text) where
     zone =
         P.lens (_zone :: IpaddressResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: IpaddressResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IpaddressResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (IpaddressResource s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
@@ -763,6 +781,9 @@ instance P.HasPublicPort (LoadbalancerRuleResource s) (TF.Attr s P.Int) where
         P.lens (_publicPort :: LoadbalancerRuleResource s -> TF.Attr s P.Int)
                (\s a -> s { _publicPort = a } :: LoadbalancerRuleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadbalancerRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (LoadbalancerRuleResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
@@ -867,6 +888,9 @@ instance P.HasZone (NetworkResource s) (TF.Attr s P.Text) where
         P.lens (_zone :: NetworkResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: NetworkResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDisplayText (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
     computedDisplayText x = TF.compute (TF.refKey x) "display_text"
 
@@ -940,6 +964,9 @@ instance P.HasVpcId (NetworkAclResource s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: NetworkAclResource s -> TF.Attr s P.Text)
                (\s a -> s { _vpcId = a } :: NetworkAclResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkAclResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (NetworkAclResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
@@ -1016,6 +1043,9 @@ instance P.HasRule (NetworkAclRuleResource s) (TF.Attr s [TF.Attr s (RuleSetting
         P.lens (_rule :: NetworkAclRuleResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
                (\s a -> s { _rule = a } :: NetworkAclRuleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkAclRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @cloudstack_nic@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/cloudstack/r/nic.html terraform documentation>
@@ -1058,6 +1088,9 @@ instance P.HasVirtualMachineId (NicResource s) (TF.Attr s P.Text) where
     virtualMachineId =
         P.lens (_virtualMachineId :: NicResource s -> TF.Attr s P.Text)
                (\s a -> s { _virtualMachineId = a } :: NicResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NicResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (NicResource s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
@@ -1124,6 +1157,9 @@ instance P.HasProject (PortForwardResource s) (TF.Attr s P.Text) where
     project =
         P.lens (_project :: PortForwardResource s -> TF.Attr s P.Text)
                (\s a -> s { _project = a } :: PortForwardResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PortForwardResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @cloudstack_private_gateway@ Resource.
 --
@@ -1232,6 +1268,9 @@ instance P.HasVpcId (PrivateGatewayResource s) (TF.Attr s P.Text) where
         P.lens (_vpcId :: PrivateGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _vpcId = a } :: PrivateGatewayResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PrivateGatewayResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @cloudstack_secondary_ipaddress@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/cloudstack/r/secondary_ipaddress.html terraform documentation>
@@ -1263,6 +1302,9 @@ instance P.HasVirtualMachineId (SecondaryIpaddressResource s) (TF.Attr s P.Text)
     virtualMachineId =
         P.lens (_virtualMachineId :: SecondaryIpaddressResource s -> TF.Attr s P.Text)
                (\s a -> s { _virtualMachineId = a } :: SecondaryIpaddressResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecondaryIpaddressResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (SecondaryIpaddressResource s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
@@ -1301,6 +1343,9 @@ instance P.HasName (SecurityGroupResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SecurityGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SecurityGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
@@ -1371,6 +1416,9 @@ instance P.HasSecurityGroupId (SecurityGroupRuleResource s) (TF.Attr s P.Text) w
         P.lens (_securityGroupId :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _securityGroupId = a } :: SecurityGroupRuleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @cloudstack_ssh_keypair@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/cloudstack/r/ssh_keypair.html terraform documentation>
@@ -1423,6 +1471,9 @@ instance P.HasPublicKey (SshKeypairResource s) (TF.Attr s P.Text) where
         P.lens (_publicKey :: SshKeypairResource s -> TF.Attr s P.Text)
                (\s a -> s { _publicKey = a } :: SshKeypairResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SshKeypairResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (SshKeypairResource s)) (TF.Attr s P.Text) where
     computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
@@ -1472,6 +1523,9 @@ instance P.HasVirtualMachineId (StaticNatResource s) (TF.Attr s P.Text) where
         P.lens (_virtualMachineId :: StaticNatResource s -> TF.Attr s P.Text)
                (\s a -> s { _virtualMachineId = a } :: StaticNatResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StaticNatResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (StaticNatResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
@@ -1520,6 +1574,9 @@ instance P.HasGatewayId (StaticRouteResource s) (TF.Attr s P.Text) where
     gatewayId =
         P.lens (_gatewayId :: StaticRouteResource s -> TF.Attr s P.Text)
                (\s a -> s { _gatewayId = a } :: StaticRouteResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StaticRouteResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @cloudstack_template@ Resource.
 --
@@ -1618,6 +1675,9 @@ instance P.HasZone (TemplateResource s) (TF.Attr s P.Text) where
         P.lens (_zone :: TemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: TemplateResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TemplateResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDisplayText (TF.Ref s' (TemplateResource s)) (TF.Attr s P.Text) where
     computedDisplayText x = TF.compute (TF.refKey x) "display_text"
 
@@ -1710,6 +1770,9 @@ instance P.HasZone (VpcResource s) (TF.Attr s P.Text) where
         P.lens (_zone :: VpcResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: VpcResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDisplayText (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
     computedDisplayText x = TF.compute (TF.refKey x) "display_text"
 
@@ -1767,6 +1830,9 @@ instance P.HasVpnGatewayId (VpnConnectionResource s) (TF.Attr s P.Text) where
     vpnGatewayId =
         P.lens (_vpnGatewayId :: VpnConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _vpnGatewayId = a } :: VpnConnectionResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VpnConnectionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @cloudstack_vpn_customer_gateway@ Resource.
 --
@@ -1855,6 +1921,9 @@ instance P.HasName (VpnCustomerGatewayResource s) (TF.Attr s P.Text) where
         P.lens (_name :: VpnCustomerGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: VpnCustomerGatewayResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VpnCustomerGatewayResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDpd (TF.Ref s' (VpnCustomerGatewayResource s)) (TF.Attr s P.Bool) where
     computedDpd x = TF.compute (TF.refKey x) "dpd"
 
@@ -1898,6 +1967,9 @@ instance P.HasVpcId (VpnGatewayResource s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: VpnGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _vpcId = a } :: VpnGatewayResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VpnGatewayResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (VpnGatewayResource s)) (TF.Attr s P.Text) where
     computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
