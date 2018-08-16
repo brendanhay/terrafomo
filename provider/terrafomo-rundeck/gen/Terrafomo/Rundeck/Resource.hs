@@ -42,10 +42,9 @@ import GHC.Base (($))
 
 import Terrafomo.Rundeck.Settings
 
-import qualified Data.Hashable              as P
-import qualified Data.HashMap.Strict        as P
-import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Map.Strict            as P
+import qualified Data.Map.Strict            as Map
 import qualified Data.Maybe                 as P
 import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
@@ -69,7 +68,7 @@ data JobResource s = JobResource'
     { _allowConcurrentExecutions   :: TF.Attr s P.Bool
     -- ^ @allow_concurrent_executions@ - (Optional)
     --
-    , _command                     :: TF.Attr s [TF.Attr s (JobCommand s)]
+    , _command                     :: TF.Attr s [TF.Attr s (CommandSetting s)]
     -- ^ @command@ - (Required)
     --
     , _commandOrderingStrategy     :: TF.Attr s P.Text
@@ -87,7 +86,7 @@ data JobResource s = JobResource'
     , _logLevel                    :: TF.Attr s P.Text
     -- ^ @log_level@ - (Optional)
     --
-    , _maxThreadCount              :: TF.Attr s P.Integer
+    , _maxThreadCount              :: TF.Attr s P.Int
     -- ^ @max_thread_count@ - (Optional)
     --
     , _name                        :: TF.Attr s P.Text
@@ -99,7 +98,7 @@ data JobResource s = JobResource'
     , _nodeFilterQuery             :: TF.Attr s P.Text
     -- ^ @node_filter_query@ - (Optional)
     --
-    , _option                      :: TF.Attr s [TF.Attr s (JobOption s)]
+    , _option                      :: TF.Attr s [TF.Attr s (OptionSetting s)]
     -- ^ @option@ - (Optional)
     --
     , _projectName                 :: TF.Attr s P.Text
@@ -114,16 +113,16 @@ data JobResource s = JobResource'
     , _schedule                    :: TF.Attr s P.Text
     -- ^ @schedule@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 jobResource
-    :: TF.Attr s [TF.Attr s (JobCommand s)] -- ^ @command@ - 'P.command'
+    :: TF.Attr s [TF.Attr s (CommandSetting s)] -- ^ @command@ - 'P.command'
     -> TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @project_name@ - 'P.projectName'
     -> P.Resource (JobResource s)
 jobResource _command _description _name _projectName =
-    TF.newResource "rundeck_job" TF.validator $
+    TF.unsafeResource "rundeck_job" P.defaultProvider TF.validator $
         JobResource'
             { _allowConcurrentExecutions = TF.Nil
             , _command = _command
@@ -165,23 +164,15 @@ instance TF.IsObject (JobResource s) where
 
 instance TF.IsValid (JobResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_command"
-                  (_command
-                      :: JobResource s -> TF.Attr s [TF.Attr s (JobCommand s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_option"
-                  (_option
-                      :: JobResource s -> TF.Attr s [TF.Attr s (JobOption s)])
-                  TF.validator
 
 instance P.HasAllowConcurrentExecutions (JobResource s) (TF.Attr s P.Bool) where
     allowConcurrentExecutions =
         P.lens (_allowConcurrentExecutions :: JobResource s -> TF.Attr s P.Bool)
                (\s a -> s { _allowConcurrentExecutions = a } :: JobResource s)
 
-instance P.HasCommand (JobResource s) (TF.Attr s [TF.Attr s (JobCommand s)]) where
+instance P.HasCommand (JobResource s) (TF.Attr s [TF.Attr s (CommandSetting s)]) where
     command =
-        P.lens (_command :: JobResource s -> TF.Attr s [TF.Attr s (JobCommand s)])
+        P.lens (_command :: JobResource s -> TF.Attr s [TF.Attr s (CommandSetting s)])
                (\s a -> s { _command = a } :: JobResource s)
 
 instance P.HasCommandOrderingStrategy (JobResource s) (TF.Attr s P.Text) where
@@ -209,9 +200,9 @@ instance P.HasLogLevel (JobResource s) (TF.Attr s P.Text) where
         P.lens (_logLevel :: JobResource s -> TF.Attr s P.Text)
                (\s a -> s { _logLevel = a } :: JobResource s)
 
-instance P.HasMaxThreadCount (JobResource s) (TF.Attr s P.Integer) where
+instance P.HasMaxThreadCount (JobResource s) (TF.Attr s P.Int) where
     maxThreadCount =
-        P.lens (_maxThreadCount :: JobResource s -> TF.Attr s P.Integer)
+        P.lens (_maxThreadCount :: JobResource s -> TF.Attr s P.Int)
                (\s a -> s { _maxThreadCount = a } :: JobResource s)
 
 instance P.HasName (JobResource s) (TF.Attr s P.Text) where
@@ -229,9 +220,9 @@ instance P.HasNodeFilterQuery (JobResource s) (TF.Attr s P.Text) where
         P.lens (_nodeFilterQuery :: JobResource s -> TF.Attr s P.Text)
                (\s a -> s { _nodeFilterQuery = a } :: JobResource s)
 
-instance P.HasOption (JobResource s) (TF.Attr s [TF.Attr s (JobOption s)]) where
+instance P.HasOption (JobResource s) (TF.Attr s [TF.Attr s (OptionSetting s)]) where
     option =
-        P.lens (_option :: JobResource s -> TF.Attr s [TF.Attr s (JobOption s)])
+        P.lens (_option :: JobResource s -> TF.Attr s [TF.Attr s (OptionSetting s)])
                (\s a -> s { _option = a } :: JobResource s)
 
 instance P.HasProjectName (JobResource s) (TF.Attr s P.Text) where
@@ -273,14 +264,14 @@ data PrivateKeyResource s = PrivateKeyResource'
     -- ^ @path@ - (Required, Forces New)
     -- Path to the key within the key store
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 privateKeyResource
     :: TF.Attr s P.Text -- ^ @key_material@ - 'P.keyMaterial'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> P.Resource (PrivateKeyResource s)
 privateKeyResource _keyMaterial _path =
-    TF.newResource "rundeck_private_key" TF.validator $
+    TF.unsafeResource "rundeck_private_key" P.defaultProvider TF.validator $
         PrivateKeyResource'
             { _keyMaterial = _keyMaterial
             , _path = _path
@@ -320,7 +311,7 @@ data ProjectResource s = ProjectResource'
     -- ^ @description@ - (Optional)
     -- Description of the project to be shown in the Rundeck UI
     --
-    , _extraConfig :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _extraConfig :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @extra_config@ - (Optional)
     -- Additional raw configuration parameters to include in the project
     -- configuration, with dots replaced with slashes in the key names due to
@@ -330,7 +321,7 @@ data ProjectResource s = ProjectResource'
     -- ^ @name@ - (Required, Forces New)
     -- Unique name for the project
     --
-    , _resourceModelSource :: TF.Attr s [TF.Attr s (ProjectResourceModelSource s)]
+    , _resourceModelSource :: TF.Attr s [TF.Attr s (ResourceModelSourceSetting s)]
     -- ^ @resource_model_source@ - (Required)
     --
     , _sshAuthenticationType :: TF.Attr s P.Text
@@ -342,14 +333,14 @@ data ProjectResource s = ProjectResource'
     , _sshKeyStoragePath :: TF.Attr s P.Text
     -- ^ @ssh_key_storage_path@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 projectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (ProjectResourceModelSource s)] -- ^ @resource_model_source@ - 'P.resourceModelSource'
+    -> TF.Attr s [TF.Attr s (ResourceModelSourceSetting s)] -- ^ @resource_model_source@ - 'P.resourceModelSource'
     -> P.Resource (ProjectResource s)
 projectResource _name _resourceModelSource =
-    TF.newResource "rundeck_project" TF.validator $
+    TF.unsafeResource "rundeck_project" P.defaultProvider TF.validator $
         ProjectResource'
             { _defaultNodeExecutorPlugin = TF.value "jsch-ssh"
             , _defaultNodeFileCopierPlugin = TF.value "jsch-scp"
@@ -377,10 +368,6 @@ instance TF.IsObject (ProjectResource s) where
 
 instance TF.IsValid (ProjectResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_resourceModelSource"
-                  (_resourceModelSource
-                      :: ProjectResource s -> TF.Attr s [TF.Attr s (ProjectResourceModelSource s)])
-                  TF.validator
 
 instance P.HasDefaultNodeExecutorPlugin (ProjectResource s) (TF.Attr s P.Text) where
     defaultNodeExecutorPlugin =
@@ -397,9 +384,9 @@ instance P.HasDescription (ProjectResource s) (TF.Attr s P.Text) where
         P.lens (_description :: ProjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ProjectResource s)
 
-instance P.HasExtraConfig (ProjectResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasExtraConfig (ProjectResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     extraConfig =
-        P.lens (_extraConfig :: ProjectResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_extraConfig :: ProjectResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _extraConfig = a } :: ProjectResource s)
 
 instance P.HasName (ProjectResource s) (TF.Attr s P.Text) where
@@ -407,9 +394,9 @@ instance P.HasName (ProjectResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ProjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ProjectResource s)
 
-instance P.HasResourceModelSource (ProjectResource s) (TF.Attr s [TF.Attr s (ProjectResourceModelSource s)]) where
+instance P.HasResourceModelSource (ProjectResource s) (TF.Attr s [TF.Attr s (ResourceModelSourceSetting s)]) where
     resourceModelSource =
-        P.lens (_resourceModelSource :: ProjectResource s -> TF.Attr s [TF.Attr s (ProjectResourceModelSource s)])
+        P.lens (_resourceModelSource :: ProjectResource s -> TF.Attr s [TF.Attr s (ResourceModelSourceSetting s)])
                (\s a -> s { _resourceModelSource = a } :: ProjectResource s)
 
 instance P.HasSshAuthenticationType (ProjectResource s) (TF.Attr s P.Text) where
@@ -439,13 +426,13 @@ data PublicKeyResource s = PublicKeyResource'
     -- ^ @path@ - (Required, Forces New)
     -- Path to the key within the key store
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 publicKeyResource
     :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> P.Resource (PublicKeyResource s)
 publicKeyResource _path =
-    TF.newResource "rundeck_public_key" TF.validator $
+    TF.unsafeResource "rundeck_public_key" P.defaultProvider TF.validator $
         PublicKeyResource'
             { _path = _path
             }

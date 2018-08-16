@@ -20,6 +20,7 @@ module Terrafomo.Rundeck.Provider
     -- * Rundeck Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * Rundeck Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.Rundeck.Settings
 
-import qualified Data.Hashable           as P
-import qualified Data.HashMap.Strict     as P
-import qualified Data.HashMap.Strict     as Map
 import qualified Data.List.NonEmpty      as P
+import qualified Data.Map.Strict         as P
+import qualified Data.Map.Strict         as Map
 import qualified Data.Maybe              as P
 import qualified Data.Monoid             as P
 import qualified Data.Text               as P
@@ -73,7 +73,7 @@ data Provider = Provider'
     -- ^ @url@ - (Required)
     -- URL of the root of the target Rundeck server.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: P.Text -- ^ @auth_token@ - 'P.authToken'
@@ -86,23 +86,20 @@ newProvider _authToken _url =
         , _url = _url
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
-                  , P.Just $ TF.assign "auth_token" _authToken
-                  , P.Just $ TF.assign "url" _url
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
+        ,  P.Just $ TF.assign "auth_token" _authToken
+        ,  P.Just $ TF.assign "url" _url
+        ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
