@@ -60,8 +60,8 @@ data GrantSetting s = GrantSetting'
 
 -- | Construct a new @grant@ settings value.
 newGrantSetting
-    :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
-    -> TF.Attr s P.Text -- ^ @privilege@ - 'P.privilege'
+    :: TF.Attr s P.Text -- ^ 'P._database': @database@
+    -> TF.Attr s P.Text -- ^ 'P._privilege': @privilege@
     -> GrantSetting s
 newGrantSetting _database _privilege =
     GrantSetting'
@@ -107,8 +107,8 @@ data RetentionPoliciesSetting s = RetentionPoliciesSetting'
 
 -- | Construct a new @retention_policies@ settings value.
 newRetentionPoliciesSetting
-    :: TF.Attr s P.Text -- ^ @duration@ - 'P.duration'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._duration': @duration@
+    -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> RetentionPoliciesSetting s
 newRetentionPoliciesSetting _duration _name =
     RetentionPoliciesSetting'
