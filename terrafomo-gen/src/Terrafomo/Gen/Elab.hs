@@ -6,19 +6,17 @@ module Terrafomo.Gen.Elab
     ) where
 
 import Control.Applicative        ((<|>))
-import Control.Monad              ((>=>))
 import Control.Monad.Except       (Except)
 import Control.Monad.Reader       (ReaderT)
 import Control.Monad.State.Strict (StateT)
 
-import Data.Bifunctor      (second)
-import Data.Function       (on)
-import Data.HashMap.Strict (HashMap)
-import Data.HashSet        (HashSet)
-import Data.Maybe          (fromMaybe, isNothing, mapMaybe)
-import Data.Semigroup      ((<>))
-import Data.Text           (Text)
-import Data.Traversable    (for)
+import Data.Function    (on)
+import Data.Map.Strict  (Map)
+import Data.Maybe       (fromMaybe, isNothing, mapMaybe)
+import Data.Semigroup   ((<>))
+import Data.Set         (Set)
+import Data.Text        (Text)
+import Data.Traversable (for)
 
 import Terrafomo.Gen.Config
 import Terrafomo.Gen.Haskell
@@ -31,56 +29,70 @@ import qualified Control.Monad.Except       as Except
 import qualified Control.Monad.Reader       as Reader
 import qualified Control.Monad.State.Strict as State
 import qualified Data.Foldable              as Fold
-import qualified Data.HashMap.Strict        as Map
-import qualified Data.HashSet               as Set
 import qualified Data.List                  as List
+import qualified Data.Map.Strict            as Map
+import qualified Data.Set                   as Set
 import qualified Data.Text                  as Text
 import qualified Data.Text.Read             as Text
 import qualified Terrafomo.Gen.Go           as Go
 import qualified Terrafomo.Gen.Name         as Name
-import qualified Terrafomo.Gen.Text         as Text
 import qualified Terrafomo.Gen.Type         as Type
 import qualified Terrafomo.Gen.URL          as URL
 
-type Elab = ReaderT (Config, Bool) (StateT (HashMap Text Settings) (Except String))
+data Env = Env
+    { _config :: !Config
+    , _key    :: ![Text]
+    , _thread :: !Bool
+    }
+
+data Result = Result
+    { _settings   :: !(Map Text     Settings)
+    , _primitives :: !(Map DataName (Primitive, Go.Type))
+    }
+
+type Elab = ReaderT Env (StateT Result (Except String))
 
 run :: Config -> Go.Provider -> Either String Provider
 run cfg provider =
-    Except.runExcept $
-        flip State.evalStateT mempty $
-            flip Reader.runReaderT (cfg, False) $ do
-                let original = Go.providerName provider
+   let original = Go.providerName provider
+       env      = Env cfg [] False
+       result   = Result mempty mempty
+    in Except.runExcept $
+       flip State.evalStateT result $
+           flip Reader.runReaderT env $ do
+               resources   <-
+                   for (Go.providerResources provider) $ \x ->
+                       elabResource original
+                           (Go.resourceName x) (Go.resourceSchemas x)
 
-                resources   <-
-                    for (Go.providerResources provider) $ \x ->
-                        elabResource original
-                            (Go.resourceName x) (Go.resourceSchemas x)
+               datasources <-
+                   for (Go.providerDataSources provider) $ \x ->
+                       elabDataSource original
+                           (Go.resourceName x) (Go.resourceSchemas x)
 
-                datasources <-
-                    for (Go.providerDataSources provider) $ \x ->
-                        elabDataSource original
-                            (Go.resourceName x) (Go.resourceSchemas x)
+               schema      <-
+                    elabSettings "provider"
+                        (Go.providerSchemas provider)
 
-                schema      <-
-                     elabSettings "provider"
-                         (Go.providerSchemas provider)
+               Result
+                   { _settings
+                   , _primitives
+                   } <- State.get
 
-                settings    <-
-                    State.gets (Map.elems . Map.delete "provider")
+               pure $! Provider'
+                   { providerName         = configProviderName cfg
+                   , providerPackage      = configPackage      cfg
+                   , providerDependencies = configDependencies cfg
+                   , providerOriginal     = original
+                   , providerUrl          = URL.provider original
+                   , providerResources    = resources
+                   , providerDataSources  = datasources
+                   , providerSettings     = Map.elems (Map.delete "provider" _settings)
+                   , providerPrimitives   = map fst (Map.elems _primitives)
+                   , providerSchema       = schema
+                   }
 
-                pure $! Provider'
-                    { providerName         = configProviderName cfg
-                    , providerPackage      = configPackage      cfg
-                    , providerDependencies = configDependencies cfg
-                    , providerOriginal     = original
-                    , providerUrl          = URL.provider original
-                    , providerResources    = resources
-                    , providerDataSources  = datasources
-                    , providerSettings     = settings
-                    , providerSchema       = schema
-                    }
-
-classes :: Provider -> (HashSet Class, HashSet Class)
+classes :: Provider -> (Set Class, Set Class)
 classes p = (lenses, getters)
   where
     lenses  = Set.fromList (map go args)
@@ -101,7 +113,7 @@ classes p = (lenses, getters)
 
 elabResource :: Text -> Text -> [Go.Schema] -> Elab Resource
 elabResource provider original schemas =
-    withThreaded $
+    withThreaded $ do
         Resource' (URL.resource provider original)
             <$> elabSchema original (Name.resourceNames original) schemas Nothing
 
@@ -114,15 +126,65 @@ elabDataSource provider original schemas =
 
 elabSettings :: Text -> [Go.Schema] -> Elab Settings
 elabSettings original schemas = do
-    y <- State.gets (Map.lookup original)
-    x <- Settings'
-             <$> elabSchema original (Name.settingsNames original) schemas
-                     (fmap fromSettings y)
+    old <- State.gets (Map.lookup original . _settings)
+    new <-
+        Settings'
+           <$> elabSchema original (Name.settingsNames original) schemas
+                   (fmap fromSettings old)
 
-    State.modify' $
-        Map.insert original x
+    State.modify' $ \r ->
+        r { _settings = Map.insert original new (_settings r)
+          }
 
-    pure x
+    pure new
+
+elabPrim :: Go.Schema -> Elab Primitive
+elabPrim schema = do
+    -- Experiment:
+    -- let name' = Go.schemaName schemaa
+    -- name <-
+    --          Reader.asks (Text.intercalate "_" . take 2 . (name' :) . reverse . _key)
+
+    let name                = Go.schemaName schema
+        (data_, con, smart) = Name.primNames name
+        gtype               = Go.schemaType schema
+        derive              = Type.derive gtype
+
+    State.gets (Map.lookup data_ . _primitives) >>= \case
+        Just (prim, gtype')
+            | gtype == gtype' -> pure prim
+            | otherwise       ->
+                elabPrim $
+                    schema { Go.schemaName = name <> "_" <> Go.hungarian gtype
+                           }
+
+        Nothing ->
+            withoutThreaded $ do
+                key  <- getCurrentKey
+                typ  <- elabData data_
+                args <- elabArguments
+                            [ schema { Go.schemaPrimitive = Just True }
+                            ]
+
+                let prim =
+                        Primitive' derive $
+                            Schema'
+                             { schemaName       = data_
+                             , schemaOriginal   = name
+                             , schemaKey        = key
+                             , schemaType       = typ
+                             , schemaCon        = Con con smart
+                             , schemaThreaded   = False
+                             , schemaArguments  = args
+                             , schemaAttributes = []
+                             }
+
+                State.modify' $ \r ->
+                    r { _primitives =
+                          Map.insert data_ (prim, gtype) (_primitives r)
+                      }
+
+                pure prim
 
 elabSchema
     :: Text
@@ -130,24 +192,27 @@ elabSchema
     -> [Go.Schema]
     -> Maybe (Schema Conflict)
     -> Elab (Schema Conflict)
-elabSchema original (data_, con, smart) schemas existing = do
-    thread <- isThreaded
-    args   <- elabArguments  original schemas
-    attrs  <- elabAttributes original schemas
-    typ    <- elabData data_
+elabSchema original (data_, con, smart) schemas existing =
+    descend original $ do
+        key    <- getCurrentKey
+        thread <- isThreaded
+        args   <- elabArguments  schemas
+        attrs  <- elabAttributes schemas
+        typ    <- elabData data_
+        cfg    <- Reader.asks _config
 
-    pure $! mergeSchema existing $
-        Schema'
-            { schemaName       = data_
-            , schemaOriginal   = original
-            , schemaType       = typ
-            , schemaCon        = Con con smart
-            , schemaThreaded   = thread
-            , schemaConflicts  = filterConflicts  args
-            , schemaParameters = filterParameters args
-            , schemaArguments  = args
-            , schemaAttributes = attrs
-            }
+        pure $! overrideSchema (configOverrides cfg)
+              $ mergeSchema existing
+              $ Schema'
+                { schemaName       = data_
+                , schemaOriginal   = original
+                , schemaKey        = key
+                , schemaType       = typ
+                , schemaCon        = Con con smart
+                , schemaThreaded   = thread
+                , schemaArguments  = args
+                , schemaAttributes = attrs
+                }
 
 mergeSchema
     :: Maybe (Schema Conflict)
@@ -173,8 +238,6 @@ mergeSchema (Just b) a
 
          in old { schemaArguments  = args
                 , schemaAttributes = attrs
-                , schemaConflicts  = filterConflicts  args
-                , schemaParameters = filterParameters args
                 }
 
             -- FIXME: revisit safe/saner merging strategies
@@ -193,43 +256,16 @@ mergeSchema (Just b) a
             --                            , "New => " ++ ppShow new
             --                            ]
 
-elabNestedSchema :: Go.Schema -> Elab Type
-elabNestedSchema schema
-    | Just x <- Go.schemaSchema schema   =
-        fieldType <$> elabField x
-
-    | Just x <- Go.schemaResource schema = do
-        schemaType . fromSettings <$>
-            elabSettings (Go.resourceName x) (Go.resourceSchemas x)
-
-    | otherwise                          =
-        Except.throwError $
-            unlines [ "Expected Schema or Resource for "
-                   ++ show (Go.schemaType schema)
-                    , ppShow schema
-                    ]
-
-filterParameters :: [Field a] -> [Field a]
-filterParameters =
-    filter $ \x ->
-        case fieldDefault x of
-            DefaultParam{} -> True
-            _              -> False
-
-filterConflicts :: [Field a] -> [Field a]
-filterConflicts =
-    filter (not . Set.null . fieldConflicts)
-
-elabArguments :: Text -> [Go.Schema] -> Elab [Field Conflict]
-elabArguments name =
+elabArguments :: [Go.Schema] -> Elab [Field Conflict]
+elabArguments =
     fmap applyConflicts
-        . traverse (elabField >=> applyRules name)
+        . traverse elabField
             . filter (not . Go.schemaComputed)
             . filter (isNothing . Go.schemaDeprecated)
 
-elabAttributes :: Text -> [Go.Schema] -> Elab [Field LabelName]
-elabAttributes name =
-    traverse (elabField >=> applyRules name)
+elabAttributes :: [Go.Schema] -> Elab [Field LabelName]
+elabAttributes =
+    traverse elabField
         . filter Go.schemaComputed
         . filter (isNothing . Go.schemaDeprecated)
 
@@ -253,6 +289,7 @@ elabIdAttribute schema =
                 , Go.schemaSensitive     = False
                 , Go.schemaMinItems      = 0
                 , Go.schemaMaxItems      = 0
+                , Go.schemaPrimitive     = Nothing
                 , Go.schemaDefault       = Nothing
                 , Go.schemaSchema        = Nothing
                 , Go.schemaResource      = Nothing
@@ -266,6 +303,38 @@ elabIdAttribute schema =
                     { schemaAttributes = field : attrs
                     }
 
+elabType :: Go.Schema -> Elab (Type, Maybe ConName)
+elabType schema
+    | Just x <- Go.schemaSchema schema =
+        fmap fieldType (elabField x)
+            >>= fmap (,Nothing) . elabAttr
+
+    | Just x <- Go.schemaResource schema =
+        fmap (schemaType . fromSettings)
+                 (elabSettings (Go.resourceName x) (Go.resourceSchemas x))
+            >>= fmap (,Nothing) . elabAttr
+
+    -- | Go.schemaComputed schema
+    --     || Go.schemaPrimitive schema == Just True =
+    | otherwise =
+             fmap (,Nothing) $
+                 case Go.schemaType schema of
+                     Go.TypeString -> elabAttr Type.Text
+                     Go.TypeInt    -> elabAttr Type.Integer
+                     Go.TypeFloat  -> elabAttr Type.Double
+                     Go.TypeBool   -> elabAttr Type.Bool
+                     typ           ->
+                         Except.throwError $
+                             unlines [ "Unable to elaborate primitive from "
+                                    ++ show typ
+                                     , ppShow schema
+                                     ]
+
+    -- | otherwise = do
+    --     prim <- elabPrim schema
+    --     (, Just . conName . schemaCon $ primitiveSchema prim)
+    --         <$> elabAttr (schemaType (primitiveSchema prim))
+
 elabField :: Go.Schema -> Elab (Field LabelName)
 elabField schema = do
     let original                = Go.schemaName schema
@@ -275,50 +344,48 @@ elabField schema = do
     thread   <- isThreaded
     default_ <- elabDefault label schema
 
-    let optional =
+    let primitive =
+            fromMaybe False (Go.schemaPrimitive schema)
+
+        optional  =
             case default_ of
                 DefaultNil{}
+                    | primitive  -> id
                     | not thread -> Type.typeMaybe
                 _                -> id
 
-        nonEmpty
+        repeated
             | Go.schemaMaxItems schema == 1 = id
             | Go.schemaMinItems schema > 0  = Type.typeList1
             | otherwise                     = Type.typeList
 
-        encoder  =
-            case default_ of
-                DefaultNil{}
-                   | not thread -> "TF.assign " <> Text.quotes original <> " <$>"
-                _  | thread     -> "TF.assign " <> Text.quotes original <> " <$> TF.attribute"
-                   | otherwise  -> "P.Just $ TF.assign " <> Text.quotes original
-
-    typ <-
+    (typ, typDefault) <-
         case Go.schemaType schema of
-            Go.TypeString -> elabAttr Type.Text
-            Go.TypeInt    -> elabAttr Type.Integer
-            Go.TypeFloat  -> elabAttr Type.Double
-            Go.TypeBool   -> elabAttr Type.Bool
+            Go.TypeString -> elabType schema
+            Go.TypeInt    -> elabType schema
+            Go.TypeFloat  -> elabType schema
+            Go.TypeBool   -> (,Nothing) <$> elabAttr Type.Bool
+
+            _ | primitive ->
+                  Except.throwError $
+                      "Unable to determine primitive from complex schema "
+                          ++ ppShow schema
 
             Go.TypeSet    -> do
-                s <- elabNestedSchema schema
+                (s, d) <- elabType schema
                 if Go.schemaMaxItems schema == 1
-                    then elabAttr s
-                    else elabAttr s >>= elabAttr . nonEmpty
+                    then pure (s, d)
+                    else (,d) <$> elabAttr (repeated s)
 
             Go.TypeList   -> do
-                s <- elabNestedSchema schema
-                elabAttr s >>= elabAttr . nonEmpty
+                (s, d) <- elabType schema
+                (,d) <$> elabAttr (repeated s)
 
-            Go.TypeMap    -> nested <|> primitive
-              where
-                nested = do
-                    s <- elabNestedSchema schema
-                    elabAttr (Type.typeMap s)
-
-                primitive = do
-                    v <- elabAttr Type.Text
-                    elabAttr (Type.typeMap v)
+            Go.TypeMap    ->
+                    (do (s, d) <- elabType schema
+                        (,d) <$> elabAttr (Type.typeMap s))
+                <|> (elabAttr Type.Text
+                        >>= fmap (,Nothing) . elabAttr . Type.typeMap)
 
     pure $! Field'
         { fieldName      = label
@@ -327,13 +394,13 @@ elabField schema = do
         , fieldClass     = class_
         , fieldMethod    = method
         , fieldType      = optional typ
+        , fieldThreaded  = thread
         , fieldOptional  = Go.schemaOptional schema
         , fieldRequired  = Go.schemaRequired schema
         , fieldComputed  = Go.schemaComputed schema
         , fieldForceNew  = Go.schemaForceNew schema
-        , fieldDefault   = default_
-        , fieldEncoder   = encoder
-        , fieldValidate  = Type.settings typ
+        , fieldDefault   =
+            maybe default_ (`DefaultPrim` default_) typDefault
         , fieldConflicts =
             Set.map Name.conflictName (Go.schemaConflictsWith schema)
         }
@@ -391,15 +458,24 @@ elabDefault label schema = do
 
 -- Overrides
 
-applyRules :: Text -> Field a -> Elab (Field a)
-applyRules name f = do
-    cfg <- Reader.asks fst
-    pure $! f
-        { fieldType =
-            case configApplyRules cfg name (fieldOriginal f) of
-                Nothing -> fieldType f
-                Just x  -> Type.Free x
-        }
+overrideSchema :: Map Key (Map Text Text) -> Schema a -> Schema a
+overrideSchema m x =
+    case Map.lookup (schemaKey x) m of
+        Nothing -> x
+        Just n  -> x
+            { schemaArguments  = overrideFields n (schemaArguments  x)
+            , schemaAttributes = overrideFields n (schemaAttributes x)
+            }
+
+overrideFields :: Map Text Text -> [Field a] -> [Field a]
+overrideFields m = map field
+  where
+    field x =
+        case Map.lookup (fieldOriginal x) m of
+            Nothing  -> x
+            Just typ -> x
+                { fieldType = Type.Free typ
+                }
 
 -- Conflicts
 
@@ -423,10 +499,10 @@ applyConflicts xs = map go xs
             }
 
 conflictIndex
-    :: (v -> HashSet LabelName)
+    :: (v -> Set LabelName)
     -> (LabelName -> v -> Conflict)
-    -> HashMap LabelName v
-    -> HashMap LabelName (HashSet Conflict)
+    -> Map LabelName v
+    -> Map LabelName (Set Conflict)
 conflictIndex conflicts mk xs =
     Fold.foldr' (Map.unionWith (<>)) mempty $ map (uncurry item) (Map.toList xs)
   where
@@ -450,10 +526,27 @@ elabAttr = \case
             False -> x
 
 elabData :: DataName -> Elab Type
-elabData x = Type.Data <$> isThreaded <*> pure x
+elabData x =
+    Type.Data <$> isThreaded <*> pure x
 
 isThreaded :: Elab Bool
-isThreaded = Reader.asks snd
+isThreaded =
+    Reader.asks _thread
+
+withoutThreaded :: Elab a -> Elab a
+withoutThreaded =
+    Reader.local (\env -> env { _thread = False })
 
 withThreaded :: Elab a -> Elab a
-withThreaded = Reader.local (second (const True))
+withThreaded =
+    Reader.local (\env -> env { _thread = True })
+
+-- Naming
+
+descend :: Text -> Elab a -> Elab a
+descend path =
+    Reader.local (\env -> env { _key = path : _key env })
+
+getCurrentKey :: Elab Key
+getCurrentKey =
+    Reader.asks (Key . reverse . _key)

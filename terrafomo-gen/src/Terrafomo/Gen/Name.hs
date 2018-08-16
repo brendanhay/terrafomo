@@ -1,6 +1,5 @@
 module Terrafomo.Gen.Name where
 
-import Data.Hashable  (Hashable)
 import Data.Semigroup (Semigroup ((<>)))
 import Data.Text      (Text)
 
@@ -11,7 +10,7 @@ import qualified Data.Text          as Text
 import qualified Terrafomo.Gen.Text as Text
 
 newtype Name (a :: Symbol) = Name { fromName :: Text }
-    deriving (Show, Eq, Ord, Hashable, JSON.ToJSON, JSON.ToJSONKey, JSON.FromJSON)
+    deriving (Show, Eq, Ord, JSON.ToJSON, JSON.ToJSONKey, JSON.FromJSON)
 
 unsafeRename :: (Text -> Text) -> Name a -> Name b
 unsafeRename f (Name x) = Name (f x)
@@ -23,15 +22,10 @@ type VarName  = Name "Var"
 type ProviderName = Name "Provider"
 type LabelName    = Name "Label"
 
-resourceNames :: Text -> (DataName, ConName, VarName)
-resourceNames x =
-    let name = Name (resourceName x <> "Resource")
-     in ( name
-        , unsafeRename (`Text.snoc` '\'') name
-        , unsafeRename (Text.unreserved . Text.lowerHead) name
-        )
+dataSourceNames, resourceNames, settingsNames, primNames
+    :: Text
+    -> (DataName, ConName, VarName)
 
-dataSourceNames :: Text -> (DataName, ConName, VarName)
 dataSourceNames x =
     let name = Name (resourceName x <> "Data")
      in ( name
@@ -39,12 +33,29 @@ dataSourceNames x =
         , unsafeRename (Text.unreserved . Text.lowerHead) name
         )
 
-settingsNames :: Text -> (DataName, ConName, VarName)
-settingsNames x =
+resourceNames x =
+    let name = Name (resourceName x <> "Resource")
+     in ( name
+        , unsafeRename (`Text.snoc` '\'') name
+        , unsafeRename (Text.unreserved . Text.lowerHead) name
+        )
+
+-- FIXME: avoid special casing provider
+settingsNames "provider" = (Name "Provider", Name "Provider'", Name "newProvider")
+settingsNames x          =
+    let name = dataName (x <> "Setting")
+     in ( name
+        , unsafeRename (`Text.snoc` '\'') name
+        , unsafeRename (mappend "new")    name
+        )
+
+-- FIXME: replace provider case with overrides
+primNames "provider" = primNames "provider_name"
+primNames x          =
     let name = dataName x
      in ( name
-        , unsafeRename (`Text.snoc` '\'')   name
-        , unsafeRename (mappend "new")      name
+        , unsafeRename (`Text.snoc` '\'') name
+        , unsafeRename (mappend "from")   name
         )
 
 fieldNames :: Bool -> Text -> (LabelName, DataName, VarName)

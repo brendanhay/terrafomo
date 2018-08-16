@@ -1,9 +1,8 @@
 module Terrafomo.Gen.Namespace where
 
-import Data.Hashable      (Hashable)
-import Data.HashSet       (HashSet)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Semigroup     (Semigroup ((<>)))
+import Data.Set           (Set)
 import Data.String        (IsString (fromString))
 import Data.Text          (Text)
 
@@ -13,14 +12,26 @@ import Text.Printf (printf)
 
 import qualified Data.Aeson.Types as JSON
 import qualified Data.Foldable    as Fold
-import qualified Data.HashSet     as Set
 import qualified Data.List.Split  as Split
+import qualified Data.Set         as Set
 import qualified Data.Text        as Text
 
 -- Haskell Namespaces
 
+prelude :: Set NS
+prelude = Set.fromList
+    [ "Data.Map.Strict"
+    , "Data.List.NonEmpty"
+    , "Data.Maybe"
+    , "Data.Monoid"
+    , "Data.Text"
+    , "GHC.Generics"
+    , "Lens.Micro"
+    , "Prelude"
+    ]
+
 newtype NS = NS (NonEmpty Text)
-    deriving (Show, Eq, Ord, Semigroup, Hashable)
+    deriving (Show, Eq, Ord, Semigroup)
 
 instance IsString NS where
     fromString x =
@@ -43,27 +54,13 @@ toPath = fromNS '/'
 
 -- Package Namespaces
 
-prelude :: HashSet NS
-prelude = Set.fromList
-    [ "Data.HashMap.Strict"
-    , "Data.Hashable"
-    , "Data.List.NonEmpty"
-    , "Data.Maybe"
-    , "Data.Monoid"
-    , "Data.Text"
-    , "GHC.Generics"
-    , "Lens.Micro"
-    , "Prelude"
-    ]
-
-provider :: ProviderName -> NS
-provider p = "Terrafomo" <> NS (pure (fromName p))
-
-types :: ProviderName -> NS
-types p = provider p <> "Types"
-
-lenses :: ProviderName -> NS
-lenses p = provider p <> "Lens"
+contents, provider, types, lenses, primitives, settings :: ProviderName -> NS
+contents   p = "Terrafomo" <> NS (pure (fromName p))
+provider   p = contents p  <> "Provider"
+types      p = contents p  <> "Types"
+lenses     p = contents p  <> "Lens"
+primitives p = contents p  <> "Primitives"
+settings   p = contents p  <> "Settings"
 
 partition :: Int -> ProviderName -> String -> [b] -> [(NS, [b])]
 partition maxlen p root xs
@@ -75,7 +72,7 @@ partition maxlen p root xs
                 $ Split.chunksOf maxlen xs
   where
     single =
-        (provider p <> fromString root, xs)
+        (contents p <> fromString root, xs)
 
     multiple (n :: Int) ys =
-        (provider p <> fromString (root ++ printf "%02d" n), ys)
+        (contents p <> fromString (root ++ printf "%02d" n), ys)

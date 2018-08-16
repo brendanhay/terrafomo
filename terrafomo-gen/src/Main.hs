@@ -93,19 +93,20 @@ main = do
         templates <-
             traverse (parseEDE . Path.combine (templateDir opts)) $
                 Templates
-                    { packageTemplate  = "package.ede"
-                    , providerTemplate = "provider.ede"
-                    , resourceTemplate = "resource.ede"
-                    , mainTemplate     = "main.ede"
-                    , typesTemplate    = "types.ede"
-                    , lensTemplate     = "lens.ede"
-                    , settingsTemplate = "settings.ede"
+                    { packageTemplate    = "package.ede"
+                    , providerTemplate   = "provider.ede"
+                    , resourceTemplate   = "resource.ede"
+                    , contentsTemplate   = "contents.ede"
+                    , typesTemplate      = "types.ede"
+                    , lensTemplate       = "lens.ede"
+--                    , primitivesTemplate = "primitives.ede"
+                    , settingsTemplate   = "settings.ede"
                     }
 
-        config    <-
+        config@Config'{configPackageYAML, configPartitionSize} <-
             parseYAML "Config" (configYAML opts)
 
-        provider@Provider'{providerName, providerOriginal}  <-
+        provider@Provider'{providerName, providerOriginal} <-
             parseJSON "Provider" (providerJSON opts)
                 >>= hoistEither . Elab.run config
 
@@ -120,22 +121,28 @@ main = do
             classes     =
                 Elab.classes provider
 
+            -- primitives  =
+            --     [ ( NS.primitives providerName
+            --       , providerPrimitives provider
+            --       )
+            --     ]
+
             settings    =
-                [ ( NS.provider providerName <> "Settings"
+                [ ( NS.settings providerName
                   , providerSettings provider
                   )
                 ]
 
             resources   =
-                NS.partition 80 providerName "Resource"
+                NS.partition configPartitionSize providerName "Resource"
                     (providerResources provider)
 
             datasources =
-                NS.partition 80 providerName "DataSource"
+                NS.partition configPartitionSize providerName "DataSource"
                     (providerDataSources provider)
 
             namespaces  =
-                map fst settings
+                map fst settings -- ++ map fst primitives
 
             render typ ns xs =
                 (Render.resources templates providerName
@@ -149,6 +156,10 @@ main = do
 
         hoistEither (Render.lenses templates providerName classes)
             >>= writeNS genDir
+
+        -- Fold.for_ primitives $ \(ns, xs) ->
+        --     hoistEither (Render.primitives templates providerName ns xs)
+        --         >>= writeNS genDir . (ns,)
 
         Fold.for_ settings $ \(ns, xs) ->
             hoistEither (Render.settings templates providerName ns xs)
@@ -165,11 +176,11 @@ main = do
         hoistEither (Render.provider templates provider namespaces)
             >>= writeNS genDir
 
-        when (configPackageYAML config) $
+        when configPackageYAML $
             hoistEither (Render.package templates provider)
                 >>= scriptIO . LText.writeFile packageFile
 
-        hoistEither (Render.main templates providerName
+        hoistEither (Render.contents templates providerName
              ( namespaces
            ++ map fst resources
            ++ map fst datasources

@@ -1,11 +1,13 @@
 module Terrafomo.Gen.JSON
    ( module Data.Aeson
+   , module Data.Aeson.Types
    , encodeFile
    , options
    ) where
 
 import Data.Aeson
 import Data.Aeson.Encode.Pretty (encodePretty)
+import Data.Aeson.Types
 import Data.Maybe               (fromMaybe)
 
 import qualified Data.ByteString.Lazy as LBS

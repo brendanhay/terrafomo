@@ -16,6 +16,10 @@ executables:
   terrafomo-gen:
     main: Main.hs
 
+    ghc-options:
+      - -threaded
+      - -rtsopts
+
     source-dirs:
       - src
 
@@ -24,11 +28,11 @@ executables:
       - aeson-pretty
       - base >= 4.9 && < 5
       - bytestring
+      - containers
       - directory
       - ede
       - errors
       - filepath
-      - hashable
       - mtl
       - optparse-applicative
       - pretty-show

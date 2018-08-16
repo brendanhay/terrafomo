@@ -2,9 +2,9 @@ module Terrafomo.Gen.Text where
 
 import Data.Text (Text)
 
-import qualified Data.Char    as Char
-import qualified Data.HashSet as Set
-import qualified Data.Text    as Text
+import qualified Data.Char as Char
+import qualified Data.Set  as Set
+import qualified Data.Text as Text
 
 upperHead :: Text -> Text
 upperHead x =
@@ -54,4 +54,6 @@ unreserved x
         , "do"
         , "pattern"
         , "where"
+        , "provider"
+        , "resource"
         ]

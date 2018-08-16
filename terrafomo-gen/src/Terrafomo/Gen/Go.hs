@@ -1,14 +1,15 @@
 -- | This is a mapping from @terraform-go/main.go@.
 module Terrafomo.Gen.Go
     ( Type     (..)
+    , hungarian
     , Provider (..)
     , Resource (..)
     , Timeouts (..)
     , Schema   (..)
     ) where
 
-import Data.HashSet (HashSet)
-import Data.Text    (Text)
+import Data.Set  (Set)
+import Data.Text (Text)
 
 import GHC.Generics (Generic)
 
@@ -37,6 +38,16 @@ instance JSON.FromJSON Type where
             "TypeMap"    -> pure TypeMap
             "TypeSet"    -> pure TypeSet
             err          -> fail $ "Unable to parse Type from " ++ show err
+
+hungarian :: Type -> Text
+hungarian = \case
+    TypeString -> "String"
+    TypeInt    -> "Int"
+    TypeFloat  -> "Float"
+    TypeBool   -> "Bool"
+    TypeList   -> "List"
+    TypeMap    -> "Map"
+    TypeSet    -> "Setting"
 
 data Provider = Provider
     { providerName        :: !Text
@@ -74,12 +85,13 @@ data Schema = Schema
     , schemaDescription   :: !(Maybe Text)
     , schemaDeprecated    :: !(Maybe Text)
     , schemaRemoved       :: !(Maybe Text)
-    , schemaConflictsWith :: !(HashSet Text)
+    , schemaConflictsWith :: !(Set Text)
     , schemaOptional      :: !Bool
     , schemaRequired      :: !Bool
     , schemaComputed      :: !Bool
     , schemaForceNew      :: !Bool
     , schemaSensitive     :: !Bool
+    , schemaPrimitive     :: !(Maybe Bool)
     , schemaMinItems      :: !Integer
     , schemaMaxItems      :: !Integer
     , schemaDefault       :: !(Maybe Text)

@@ -2,36 +2,34 @@
 
 module Terrafomo.Gen.Type where
 
-import Data.Hashable  (Hashable)
 import Data.Semigroup ((<>))
+import Data.Set       (Set)
 import Data.Text      (Text)
-
-import GHC.Generics (Generic)
 
 import Terrafomo.Gen.Name
 
+import qualified Data.Set           as Set
+import qualified Terrafomo.Gen.Go   as Go
 import qualified Terrafomo.Gen.JSON as JSON
 import qualified Terrafomo.Gen.Text as Text
 
 data Type
-    = Free   !Text
-    | Data   !Bool !DataName
-    | Attr   !Type
-    | App    !Type !Type
-      deriving (Show, Eq, Generic)
-
-instance Hashable Type
+    = Free !Text
+    | Data !Bool !DataName
+    | Attr !Type
+    | App  !Type !Type
+      deriving (Show, Eq, Ord)
 
 instance JSON.ToJSON Type where
     toJSON = JSON.String . typeName . reduce
 
 pattern Text    = Free "P.Text"
-pattern Integer = Free "P.Integer"
+pattern Integer = Free "P.Int"
 pattern Double  = Free "P.Double"
 pattern Bool    = Free "P.Bool"
 pattern List    = Free "P.[]"
 pattern List1   = Free "P.NonEmpty"
-pattern Map     = Free "P.HashMap"
+pattern Map     = Free "P.Map"
 pattern Maybe   = Free "P.Maybe"
 
 typeName :: Type -> Text
@@ -72,4 +70,24 @@ settings = \case
     Free {}  -> False
     Data {}  -> True
     Attr x   -> settings x
-    App  a b -> settings a || settings b
+    App  a b -> settings a && settings b
+
+derive :: Go.Type -> Set Text
+derive = Set.fromList . mappend base . \case
+    Go.TypeString -> ["P.IsString"]
+    Go.TypeInt    -> ["P.Bounded", "P.Enum", "P.Real", "P.Num", "P.Integral"]
+    Go.TypeFloat  -> ["P.Num", "P.Real", "P.Floating", "P.Fractional", "P.RealFloat", "P.RealFrac"]
+    Go.TypeBool   -> ["P.Enum"]
+    _             -> []
+  where
+    base =
+        [ "P.Eq"
+        , "P.Ord"
+        , "P.Show"
+        , "P.Read"
+        , "P.ToJSON"
+        , "P.ToJSONKey"
+        , "P.FromJSON"
+        , "P.FromJSONKey"
+        , "TF.IsValue"
+        ]
