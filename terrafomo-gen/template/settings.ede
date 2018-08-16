@@ -24,10 +24,14 @@ import Data.Functor ((<$>))
 
 import GHC.Base (($))
 
+{% for import in unqualified %}
+import {{ import.value }}
+{% endfor %}
+
 {% for import in qualified %}
 import qualified {{ import.value }} as P
 {% endfor %}
-import qualified Data.HashMap.Strict as Map
+import qualified Data.Map.Strict as Map
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL as TF
 import qualified Terrafomo.Name as TF
@@ -52,7 +56,6 @@ data {{ setting.value.type }} = {{ setting.value.con.name }}
         }{% endif %}
       {% endfor %}
 
-instance P.Hashable  ({{ setting.value.type }})
 instance TF.IsValue  ({{ setting.value.type }})
 instance TF.IsObject ({{ setting.value.type }}) where
   {% for field in setting.value.arguments %}

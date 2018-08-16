@@ -31,7 +31,7 @@ import {{ import.value }}
 {% for import in qualified %}
 import qualified {{ import.value }} as P
 {% endfor %}
-import qualified Data.HashMap.Strict as Map
+import qualified Data.Map.Strict as Map
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL as TF
 import qualified Terrafomo.Name as TF
@@ -54,7 +54,7 @@ data {{ resource.value.type }} = {{ resource.value.con.name }}
     :: P.{{ type }} ({{ resource.value.type }})
   {% endfor %}
 {{ resource.value.con.smart }}{% for param in resource.value.parameters %} {{ param.value.name }}{% endfor %} =
-    TF.new{{ type }} "{{ resource.value.original }}" TF.validator $
+    TF.unsafe{{ type }} "{{ resource.value.original }}" P.defaultProvider TF.validator $
         {{ resource.value.con.name }}
           {% for field in resource.value.arguments %}
             {% if field.first %}{ {% else %}, {% endif %}{{ field.value.name }} = {{ field.value.default }}{% if field.last %}

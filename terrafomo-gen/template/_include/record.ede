@@ -6,7 +6,7 @@
     -- Conflicts with:
     --{% endif %}
     -- * '{{ conflict.value.method }}'{% else %}--{% endfor %}{% if field.last %}
-    } deriving (P.Show, P.Eq, P.Generic){% endif %}
+    } deriving (P.Show, P.Eq, P.Ord){% endif %}
 {% else %}
-    deriving (P.Show, P.Eq, P.Generic)
+    deriving (P.Show, P.Eq, P.Ord)
 {% endfor %}
