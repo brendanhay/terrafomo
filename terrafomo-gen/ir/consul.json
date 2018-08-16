@@ -487,23 +487,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_path",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "_path",
-                    "method": "path",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPath",
-                    "validate": false,
-                    "optional": false,
-                    "original": "path"
-                },
-                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -519,6 +502,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "_path",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"path\" <$> TF.attribute",
+                    "name": "_path",
+                    "method": "path",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPath",
+                    "validate": false,
+                    "optional": false,
+                    "original": "path"
                 }
             ],
             "conflicts": [],
