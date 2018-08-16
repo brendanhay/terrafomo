@@ -110,6 +110,9 @@ instance P.HasReviewers (DefaultReviewersResource s) (TF.Attr s [TF.Attr s P.Tex
         P.lens (_reviewers :: DefaultReviewersResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _reviewers = a } :: DefaultReviewersResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DefaultReviewersResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @bitbucket_hook@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/bitbucket/r/hook.html terraform documentation>
@@ -205,6 +208,9 @@ instance P.HasUrl (HookResource s) (TF.Attr s P.Text) where
     url =
         P.lens (_url :: HookResource s -> TF.Attr s P.Text)
                (\s a -> s { _url = a } :: HookResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (HookResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedUuid (TF.Ref s' (HookResource s)) (TF.Attr s P.Text) where
     computedUuid x = TF.compute (TF.refKey x) "uuid"
@@ -341,6 +347,9 @@ instance P.HasWebsite (RepositoryResource s) (TF.Attr s P.Text) where
     website =
         P.lens (_website :: RepositoryResource s -> TF.Attr s P.Text)
                (\s a -> s { _website = a } :: RepositoryResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCloneHttps (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedCloneHttps x = TF.compute (TF.refKey x) "clone_https"

@@ -38,6 +38,7 @@ module Terrafomo.Bitbucket.Lens
     -- ** Computed Attributes
     , HasComputedCloneHttps (..)
     , HasComputedCloneSsh (..)
+    , HasComputedId (..)
     , HasComputedSlug (..)
     , HasComputedUuid (..)
     ) where
@@ -166,6 +167,9 @@ class HasComputedCloneHttps a b | a -> b where
 
 class HasComputedCloneSsh a b | a -> b where
     computedCloneSsh :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedSlug a b | a -> b where
     computedSlug :: a -> b
