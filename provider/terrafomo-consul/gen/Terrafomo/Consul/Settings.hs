@@ -19,75 +19,75 @@ module Terrafomo.Consul.Settings
     (
     -- ** addresses
       AddressesSetting (..)
-    , addressesSetting
+    , newAddressesSetting
 
     -- ** advertise_addrs
     , AdvertiseAddrsSetting (..)
-    , advertiseAddrsSetting
+    , newAdvertiseAddrsSetting
 
     -- ** dns
     , DnsSetting (..)
-    , dnsSetting
+    , newDnsSetting
 
     -- ** failover
     , FailoverSetting (..)
-    , failoverSetting
+    , newFailoverSetting
 
     -- ** key
     , KeySetting (..)
-    , keySetting
+    , newKeySetting
 
     -- ** nodes
     , NodesSetting (..)
-    , nodesSetting
+    , newNodesSetting
 
     -- ** performance
     , PerformanceSetting (..)
-    , performanceSetting
+    , newPerformanceSetting
 
     -- ** ports
     , PortsSetting (..)
-    , portsSetting
+    , newPortsSetting
 
     -- ** query_options
     , QueryOptionsSetting (..)
-    , queryOptionsSetting
+    , newQueryOptionsSetting
 
     -- ** retry_join_ec2
     , RetryJoinEc2Setting (..)
-    , retryJoinEc2Setting
+    , newRetryJoinEc2Setting
 
     -- ** retry_join_gce
     , RetryJoinGceSetting (..)
-    , retryJoinGceSetting
+    , newRetryJoinGceSetting
 
     -- ** service
     , ServiceSetting (..)
-    , serviceSetting
+    , newServiceSetting
 
     -- ** services
     , ServicesSetting (..)
-    , servicesSetting
+    , newServicesSetting
 
     -- ** subkey
     , SubkeySetting (..)
-    , subkeySetting
+    , newSubkeySetting
 
     -- ** tagged_addresses
     , TaggedAddressesSetting (..)
-    , taggedAddressesSetting
+    , newTaggedAddressesSetting
 
     -- ** telemetry
     , TelemetrySetting (..)
-    , telemetrySetting
+    , newTelemetrySetting
 
     -- ** template
     , TemplateSetting (..)
-    , templateSetting
+    , newTemplateSetting
 
     -- ** unix_sockets
     , UnixSocketsSetting (..)
-    , unixSocketsSetting
+    , newUnixSocketsSetting
 
     ) where
 
@@ -117,9 +117,9 @@ data AddressesSetting s = AddressesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @addresses@ settings value.
-addressesSetting
+newAddressesSetting
     :: AddressesSetting s
-addressesSetting =
+newAddressesSetting =
     AddressesSetting'
 
 instance TF.IsValue  (AddressesSetting s)
@@ -146,9 +146,9 @@ data AdvertiseAddrsSetting s = AdvertiseAddrsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @advertise_addrs@ settings value.
-advertiseAddrsSetting
+newAdvertiseAddrsSetting
     :: AdvertiseAddrsSetting s
-advertiseAddrsSetting =
+newAdvertiseAddrsSetting =
     AdvertiseAddrsSetting'
 
 instance TF.IsValue  (AdvertiseAddrsSetting s)
@@ -175,9 +175,9 @@ data DnsSetting s = DnsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @dns@ settings value.
-dnsSetting
+newDnsSetting
     :: DnsSetting s
-dnsSetting =
+newDnsSetting =
     DnsSetting'
         { _ttl = TF.Nil
         }
@@ -234,9 +234,9 @@ data FailoverSetting s = FailoverSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @failover@ settings value.
-failoverSetting
+newFailoverSetting
     :: FailoverSetting s
-failoverSetting =
+newFailoverSetting =
     FailoverSetting'
         { _datacenters = TF.Nil
         , _nearestN = TF.Nil
@@ -282,11 +282,11 @@ data KeySetting s = KeySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @key@ settings value.
-keySetting
+newKeySetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._path': @path@
     -> KeySetting s
-keySetting _name _path =
+newKeySetting _name _path =
     KeySetting'
         { _default' = TF.Nil
         , _delete = TF.value P.False
@@ -341,9 +341,9 @@ data NodesSetting s = NodesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @nodes@ settings value.
-nodesSetting
+newNodesSetting
     :: NodesSetting s
-nodesSetting =
+newNodesSetting =
     NodesSetting'
 
 instance TF.IsValue  (NodesSetting s)
@@ -373,9 +373,9 @@ data PerformanceSetting s = PerformanceSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @performance@ settings value.
-performanceSetting
+newPerformanceSetting
     :: PerformanceSetting s
-performanceSetting =
+newPerformanceSetting =
     PerformanceSetting'
 
 instance TF.IsValue  (PerformanceSetting s)
@@ -393,9 +393,9 @@ data PortsSetting s = PortsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ports@ settings value.
-portsSetting
+newPortsSetting
     :: PortsSetting s
-portsSetting =
+newPortsSetting =
     PortsSetting'
 
 instance TF.IsValue  (PortsSetting s)
@@ -455,9 +455,9 @@ data QueryOptionsSetting s = QueryOptionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @query_options@ settings value.
-queryOptionsSetting
+newQueryOptionsSetting
     :: QueryOptionsSetting s
-queryOptionsSetting =
+newQueryOptionsSetting =
     QueryOptionsSetting'
         { _allowStale = TF.value P.True
         , _datacenter = TF.Nil
@@ -530,9 +530,9 @@ data RetryJoinEc2Setting s = RetryJoinEc2Setting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @retry_join_ec2@ settings value.
-retryJoinEc2Setting
+newRetryJoinEc2Setting
     :: RetryJoinEc2Setting s
-retryJoinEc2Setting =
+newRetryJoinEc2Setting =
     RetryJoinEc2Setting'
 
 instance TF.IsValue  (RetryJoinEc2Setting s)
@@ -556,9 +556,9 @@ data RetryJoinGceSetting s = RetryJoinGceSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @retry_join_gce@ settings value.
-retryJoinGceSetting
+newRetryJoinGceSetting
     :: RetryJoinGceSetting s
-retryJoinGceSetting =
+newRetryJoinGceSetting =
     RetryJoinGceSetting'
 
 instance TF.IsValue  (RetryJoinGceSetting s)
@@ -600,10 +600,10 @@ data ServiceSetting s = ServiceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @service@ settings value.
-serviceSetting
+newServiceSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> ServiceSetting s
-serviceSetting _name =
+newServiceSetting _name =
     ServiceSetting'
         { _address = TF.Nil
         , _id = TF.Nil
@@ -694,9 +694,9 @@ data ServicesSetting s = ServicesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @services@ settings value.
-servicesSetting
+newServicesSetting
     :: ServicesSetting s
-servicesSetting =
+newServicesSetting =
     ServicesSetting'
 
 instance TF.IsValue  (ServicesSetting s)
@@ -723,11 +723,11 @@ data SubkeySetting s = SubkeySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @subkey@ settings value.
-subkeySetting
+newSubkeySetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._path': @path@
     -> SubkeySetting s
-subkeySetting _name _path =
+newSubkeySetting _name _path =
     SubkeySetting'
         { _default' = TF.Nil
         , _name = _name
@@ -765,9 +765,9 @@ data TaggedAddressesSetting s = TaggedAddressesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @tagged_addresses@ settings value.
-taggedAddressesSetting
+newTaggedAddressesSetting
     :: TaggedAddressesSetting s
-taggedAddressesSetting =
+newTaggedAddressesSetting =
     TaggedAddressesSetting'
 
 instance TF.IsValue  (TaggedAddressesSetting s)
@@ -788,9 +788,9 @@ data TelemetrySetting s = TelemetrySetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @telemetry@ settings value.
-telemetrySetting
+newTelemetrySetting
     :: TelemetrySetting s
-telemetrySetting =
+newTelemetrySetting =
     TelemetrySetting'
 
 instance TF.IsValue  (TelemetrySetting s)
@@ -868,11 +868,11 @@ data TemplateSetting s = TemplateSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @template@ settings value.
-templateSetting
+newTemplateSetting
     :: TF.Attr s P.Text -- ^ 'P._regexp': @regexp@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> TemplateSetting s
-templateSetting _regexp _type' =
+newTemplateSetting _regexp _type' =
     TemplateSetting'
         { _regexp = _regexp
         , _type' = _type'
@@ -903,9 +903,9 @@ data UnixSocketsSetting s = UnixSocketsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @unix_sockets@ settings value.
-unixSocketsSetting
+newUnixSocketsSetting
     :: UnixSocketsSetting s
-unixSocketsSetting =
+newUnixSocketsSetting =
     UnixSocketsSetting'
 
 instance TF.IsValue  (UnixSocketsSetting s)
