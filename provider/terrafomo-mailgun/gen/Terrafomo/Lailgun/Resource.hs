@@ -62,8 +62,8 @@ data DomainResource s = DomainResource'
 
 -- | Define a new @mailgun_domain@ resource value.
 domainResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @smtp_password@ - 'P.smtpPassword'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @smtp_password@ ('P._smtpPassword', 'P.smtpPassword')
     -> P.Resource (DomainResource s)
 domainResource _name _smtpPassword =
     TF.unsafeResource "mailgun_domain" TF.validator $
