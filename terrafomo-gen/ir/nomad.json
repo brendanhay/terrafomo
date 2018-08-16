@@ -51,25 +51,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_region",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Region in which this limit has affect."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"region\" <$> TF.attribute",
-                    "name": "_region",
-                    "method": "region",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasRegion",
-                    "validate": false,
-                    "optional": false,
-                    "original": "region"
-                },
-                {
                     "default": "_regionLimit",
                     "computed": false,
                     "required": true,
@@ -87,6 +68,25 @@
                     "validate": true,
                     "optional": false,
                     "original": "region_limit"
+                },
+                {
+                    "default": "_region",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Region in which this limit has affect."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"region\" <$> TF.attribute",
+                    "name": "_region",
+                    "method": "region",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRegion",
+                    "validate": false,
+                    "optional": false,
+                    "original": "region"
                 }
             ],
             "conflicts": [],
@@ -271,25 +271,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Unique name for this policy."
-                    ],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_rulesHcl",
                     "computed": false,
                     "required": true,
@@ -308,6 +289,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "rules_hcl"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Unique name for this policy."
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 }
             ],
             "conflicts": [],
