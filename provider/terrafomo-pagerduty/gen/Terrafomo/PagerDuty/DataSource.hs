@@ -50,10 +50,9 @@ import GHC.Base (($))
 
 import Terrafomo.PagerDuty.Settings
 
-import qualified Data.Hashable                as P
-import qualified Data.HashMap.Strict          as P
-import qualified Data.HashMap.Strict          as Map
 import qualified Data.List.NonEmpty           as P
+import qualified Data.Map.Strict              as P
+import qualified Data.Map.Strict              as Map
 import qualified Data.Maybe                   as P
 import qualified Data.Monoid                  as P
 import qualified Data.Text                    as P
@@ -77,13 +76,13 @@ data EscalationPolicyData s = EscalationPolicyData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 escalationPolicyData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (EscalationPolicyData s)
 escalationPolicyData _name =
-    TF.newDataSource "pagerduty_escalation_policy" TF.validator $
+    TF.unsafeDataSource "pagerduty_escalation_policy" P.defaultProvider TF.validator $
         EscalationPolicyData'
             { _name = _name
             }
@@ -112,13 +111,13 @@ data ExtensionSchemaData s = ExtensionSchemaData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 extensionSchemaData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ExtensionSchemaData s)
 extensionSchemaData _name =
-    TF.newDataSource "pagerduty_extension_schema" TF.validator $
+    TF.unsafeDataSource "pagerduty_extension_schema" P.defaultProvider TF.validator $
         ExtensionSchemaData'
             { _name = _name
             }
@@ -150,13 +149,13 @@ data ScheduleData s = ScheduleData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 scheduleData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ScheduleData s)
 scheduleData _name =
-    TF.newDataSource "pagerduty_schedule" TF.validator $
+    TF.unsafeDataSource "pagerduty_schedule" P.defaultProvider TF.validator $
         ScheduleData'
             { _name = _name
             }
@@ -186,13 +185,13 @@ data TeamData s = TeamData'
     -- ^ @name@ - (Required)
     -- The name of the team to find in the PagerDuty API
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 teamData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (TeamData s)
 teamData _name =
-    TF.newDataSource "pagerduty_team" TF.validator $
+    TF.unsafeDataSource "pagerduty_team" P.defaultProvider TF.validator $
         TeamData'
             { _name = _name
             }
@@ -224,13 +223,13 @@ data UserData s = UserData'
     { _email :: TF.Attr s P.Text
     -- ^ @email@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 userData
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> P.DataSource (UserData s)
 userData _email =
-    TF.newDataSource "pagerduty_user" TF.validator $
+    TF.unsafeDataSource "pagerduty_user" P.defaultProvider TF.validator $
         UserData'
             { _email = _email
             }
@@ -265,13 +264,13 @@ data VendorData s = VendorData'
     , _nameRegex :: TF.Attr s P.Text
     -- ^ @name_regex@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 vendorData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (VendorData s)
 vendorData _name =
-    TF.newDataSource "pagerduty_vendor" TF.validator $
+    TF.unsafeDataSource "pagerduty_vendor" P.defaultProvider TF.validator $
         VendorData'
             { _name = _name
             , _nameRegex = TF.Nil

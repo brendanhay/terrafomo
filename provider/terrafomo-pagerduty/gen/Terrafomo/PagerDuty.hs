@@ -12,12 +12,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.PagerDuty
-    ( module Terrafomo.PagerDuty.Provider
-    , module Terrafomo.PagerDuty.Resource
-    , module Terrafomo.PagerDuty.Types
+    ( module Terrafomo.PagerDuty.DataSource
     , module Terrafomo.PagerDuty.Lens
+    , module Terrafomo.PagerDuty.Provider
+    , module Terrafomo.PagerDuty.Resource
     , module Terrafomo.PagerDuty.Settings
-    , module Terrafomo.PagerDuty.DataSource
+    , module Terrafomo.PagerDuty.Types
     -- * Provider Aliases
     ) where
 

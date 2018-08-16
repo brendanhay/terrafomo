@@ -70,10 +70,9 @@ import GHC.Base (($))
 
 import Terrafomo.PagerDuty.Settings
 
-import qualified Data.Hashable                as P
-import qualified Data.HashMap.Strict          as P
-import qualified Data.HashMap.Strict          as Map
 import qualified Data.List.NonEmpty           as P
+import qualified Data.Map.Strict              as P
+import qualified Data.Map.Strict              as Map
 import qualified Data.Maybe                   as P
 import qualified Data.Monoid                  as P
 import qualified Data.Text                    as P
@@ -100,14 +99,14 @@ data AddonResource s = AddonResource'
     , _src  :: TF.Attr s P.Text
     -- ^ @src@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 addonResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @src@ - 'P.src'
     -> P.Resource (AddonResource s)
 addonResource _name _src =
-    TF.newResource "pagerduty_addon" TF.validator $
+    TF.unsafeResource "pagerduty_addon" P.defaultProvider TF.validator $
         AddonResource'
             { _name = _name
             , _src = _src
@@ -143,23 +142,23 @@ data EscalationPolicyResource s = EscalationPolicyResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _numLoops    :: TF.Attr s P.Integer
+    , _numLoops    :: TF.Attr s P.Int
     -- ^ @num_loops@ - (Optional)
     --
-    , _rule        :: TF.Attr s [TF.Attr s (EscalationPolicyRule s)]
+    , _rule        :: TF.Attr s [TF.Attr s (RuleSetting s)]
     -- ^ @rule@ - (Required)
     --
     , _teams       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @teams@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 escalationPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (EscalationPolicyRule s)] -- ^ @rule@ - 'P.rule'
+    -> TF.Attr s [TF.Attr s (RuleSetting s)] -- ^ @rule@ - 'P.rule'
     -> P.Resource (EscalationPolicyResource s)
 escalationPolicyResource _name _rule =
-    TF.newResource "pagerduty_escalation_policy" TF.validator $
+    TF.unsafeResource "pagerduty_escalation_policy" P.defaultProvider TF.validator $
         EscalationPolicyResource'
             { _description = TF.value "Managed by Terraform"
             , _name = _name
@@ -179,10 +178,6 @@ instance TF.IsObject (EscalationPolicyResource s) where
 
 instance TF.IsValid (EscalationPolicyResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_rule"
-                  (_rule
-                      :: EscalationPolicyResource s -> TF.Attr s [TF.Attr s (EscalationPolicyRule s)])
-                  TF.validator
 
 instance P.HasDescription (EscalationPolicyResource s) (TF.Attr s P.Text) where
     description =
@@ -194,14 +189,14 @@ instance P.HasName (EscalationPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_name :: EscalationPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: EscalationPolicyResource s)
 
-instance P.HasNumLoops (EscalationPolicyResource s) (TF.Attr s P.Integer) where
+instance P.HasNumLoops (EscalationPolicyResource s) (TF.Attr s P.Int) where
     numLoops =
-        P.lens (_numLoops :: EscalationPolicyResource s -> TF.Attr s P.Integer)
+        P.lens (_numLoops :: EscalationPolicyResource s -> TF.Attr s P.Int)
                (\s a -> s { _numLoops = a } :: EscalationPolicyResource s)
 
-instance P.HasRule (EscalationPolicyResource s) (TF.Attr s [TF.Attr s (EscalationPolicyRule s)]) where
+instance P.HasRule (EscalationPolicyResource s) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
     rule =
-        P.lens (_rule :: EscalationPolicyResource s -> TF.Attr s [TF.Attr s (EscalationPolicyRule s)])
+        P.lens (_rule :: EscalationPolicyResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
                (\s a -> s { _rule = a } :: EscalationPolicyResource s)
 
 instance P.HasTeams (EscalationPolicyResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -223,14 +218,14 @@ data ExtensionResource s = ExtensionResource'
     , _extensionSchema  :: TF.Attr s P.Text
     -- ^ @extension_schema@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 extensionResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @extension_objects@ - 'P.extensionObjects'
     -> TF.Attr s P.Text -- ^ @extension_schema@ - 'P.extensionSchema'
     -> P.Resource (ExtensionResource s)
 extensionResource _extensionObjects _extensionSchema =
-    TF.newResource "pagerduty_extension" TF.validator $
+    TF.unsafeResource "pagerduty_extension" P.defaultProvider TF.validator $
         ExtensionResource'
             { _endpointUrl = TF.Nil
             , _extensionObjects = _extensionObjects
@@ -285,7 +280,7 @@ data MaintenanceWindowResource s = MaintenanceWindowResource'
     , _startTime   :: TF.Attr s P.Text
     -- ^ @start_time@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 maintenanceWindowResource
     :: TF.Attr s P.Text -- ^ @end_time@ - 'P.endTime'
@@ -293,7 +288,7 @@ maintenanceWindowResource
     -> TF.Attr s P.Text -- ^ @start_time@ - 'P.startTime'
     -> P.Resource (MaintenanceWindowResource s)
 maintenanceWindowResource _endTime _services _startTime =
-    TF.newResource "pagerduty_maintenance_window" TF.validator $
+    TF.unsafeResource "pagerduty_maintenance_window" P.defaultProvider TF.validator $
         MaintenanceWindowResource'
             { _description = TF.value "Managed by Terraform"
             , _endTime = _endTime
@@ -340,7 +335,7 @@ data ScheduleResource s = ScheduleResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _layer       :: TF.Attr s [TF.Attr s (ScheduleLayer s)]
+    , _layer       :: TF.Attr s [TF.Attr s (LayerSetting s)]
     -- ^ @layer@ - (Required, Forces New)
     --
     , _name        :: TF.Attr s P.Text
@@ -352,14 +347,14 @@ data ScheduleResource s = ScheduleResource'
     , _timeZone    :: TF.Attr s P.Text
     -- ^ @time_zone@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 scheduleResource
-    :: TF.Attr s [TF.Attr s (ScheduleLayer s)] -- ^ @layer@ - 'P.layer'
+    :: TF.Attr s [TF.Attr s (LayerSetting s)] -- ^ @layer@ - 'P.layer'
     -> TF.Attr s P.Text -- ^ @time_zone@ - 'P.timeZone'
     -> P.Resource (ScheduleResource s)
 scheduleResource _layer _timeZone =
-    TF.newResource "pagerduty_schedule" TF.validator $
+    TF.unsafeResource "pagerduty_schedule" P.defaultProvider TF.validator $
         ScheduleResource'
             { _description = TF.value "Managed by Terraform"
             , _layer = _layer
@@ -379,19 +374,15 @@ instance TF.IsObject (ScheduleResource s) where
 
 instance TF.IsValid (ScheduleResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_layer"
-                  (_layer
-                      :: ScheduleResource s -> TF.Attr s [TF.Attr s (ScheduleLayer s)])
-                  TF.validator
 
 instance P.HasDescription (ScheduleResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: ScheduleResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ScheduleResource s)
 
-instance P.HasLayer (ScheduleResource s) (TF.Attr s [TF.Attr s (ScheduleLayer s)]) where
+instance P.HasLayer (ScheduleResource s) (TF.Attr s [TF.Attr s (LayerSetting s)]) where
     layer =
-        P.lens (_layer :: ScheduleResource s -> TF.Attr s [TF.Attr s (ScheduleLayer s)])
+        P.lens (_layer :: ScheduleResource s -> TF.Attr s [TF.Attr s (LayerSetting s)])
                (\s a -> s { _layer = a } :: ScheduleResource s)
 
 instance P.HasName (ScheduleResource s) (TF.Attr s P.Text) where
@@ -432,19 +423,19 @@ data ServiceResource s = ServiceResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _scheduledActions :: TF.Attr s [TF.Attr s (ServiceScheduledActions s)]
+    , _scheduledActions :: TF.Attr s [TF.Attr s (ScheduledActionsSetting s)]
     -- ^ @scheduled_actions@ - (Optional)
     --
-    , _supportHours :: TF.Attr s (ServiceSupportHours s)
+    , _supportHours :: TF.Attr s (SupportHoursSetting s)
     -- ^ @support_hours@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 serviceResource
     :: TF.Attr s P.Text -- ^ @escalation_policy@ - 'P.escalationPolicy'
     -> P.Resource (ServiceResource s)
 serviceResource _escalationPolicy =
-    TF.newResource "pagerduty_service" TF.validator $
+    TF.unsafeResource "pagerduty_service" P.defaultProvider TF.validator $
         ServiceResource'
             { _acknowledgementTimeout = TF.value "1800"
             , _alertCreation = TF.value "create_incidents"
@@ -470,13 +461,9 @@ instance TF.IsObject (ServiceResource s) where
 
 instance TF.IsValid (ServiceResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_scheduledActions"
-                  (_scheduledActions
-                      :: ServiceResource s -> TF.Attr s [TF.Attr s (ServiceScheduledActions s)])
-                  TF.validator
            P.<> TF.settingsValidator "_supportHours"
                   (_supportHours
-                      :: ServiceResource s -> TF.Attr s (ServiceSupportHours s))
+                      :: ServiceResource s -> TF.Attr s (SupportHoursSetting s))
                   TF.validator
 
 instance P.HasAcknowledgementTimeout (ServiceResource s) (TF.Attr s P.Text) where
@@ -509,20 +496,20 @@ instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ServiceResource s)
 
-instance P.HasScheduledActions (ServiceResource s) (TF.Attr s [TF.Attr s (ServiceScheduledActions s)]) where
+instance P.HasScheduledActions (ServiceResource s) (TF.Attr s [TF.Attr s (ScheduledActionsSetting s)]) where
     scheduledActions =
-        P.lens (_scheduledActions :: ServiceResource s -> TF.Attr s [TF.Attr s (ServiceScheduledActions s)])
+        P.lens (_scheduledActions :: ServiceResource s -> TF.Attr s [TF.Attr s (ScheduledActionsSetting s)])
                (\s a -> s { _scheduledActions = a } :: ServiceResource s)
 
-instance P.HasSupportHours (ServiceResource s) (TF.Attr s (ServiceSupportHours s)) where
+instance P.HasSupportHours (ServiceResource s) (TF.Attr s (SupportHoursSetting s)) where
     supportHours =
-        P.lens (_supportHours :: ServiceResource s -> TF.Attr s (ServiceSupportHours s))
+        P.lens (_supportHours :: ServiceResource s -> TF.Attr s (SupportHoursSetting s))
                (\s a -> s { _supportHours = a } :: ServiceResource s)
 
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance s ~ s' => P.HasComputedIncidentUrgencyRule (TF.Ref s' (ServiceResource s)) (TF.Attr s (ServiceIncidentUrgencyRule s)) where
+instance s ~ s' => P.HasComputedIncidentUrgencyRule (TF.Ref s' (ServiceResource s)) (TF.Attr s (IncidentUrgencyRuleSetting s)) where
     computedIncidentUrgencyRule x = TF.compute (TF.refKey x) "incident_urgency_rule"
 
 instance s ~ s' => P.HasComputedLastIncidentTimestamp (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
@@ -542,13 +529,13 @@ data ServiceIntegrationResource s = ServiceIntegrationResource'
     , _service :: TF.Attr s P.Text
     -- ^ @service@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 serviceIntegrationResource
     :: TF.Attr s P.Text -- ^ @service@ - 'P.service'
     -> P.Resource (ServiceIntegrationResource s)
 serviceIntegrationResource _service =
-    TF.newResource "pagerduty_service_integration" TF.validator $
+    TF.unsafeResource "pagerduty_service_integration" P.defaultProvider TF.validator $
         ServiceIntegrationResource'
             { _name = TF.Nil
             , _service = _service
@@ -599,13 +586,13 @@ data TeamResource s = TeamResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 teamResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (TeamResource s)
 teamResource _name =
-    TF.newResource "pagerduty_team" TF.validator $
+    TF.unsafeResource "pagerduty_team" P.defaultProvider TF.validator $
         TeamResource'
             { _description = TF.value "Managed by Terraform"
             , _name = _name
@@ -641,14 +628,14 @@ data TeamMembershipResource s = TeamMembershipResource'
     , _userId :: TF.Attr s P.Text
     -- ^ @user_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 teamMembershipResource
     :: TF.Attr s P.Text -- ^ @team_id@ - 'P.teamId'
     -> TF.Attr s P.Text -- ^ @user_id@ - 'P.userId'
     -> P.Resource (TeamMembershipResource s)
 teamMembershipResource _teamId _userId =
-    TF.newResource "pagerduty_team_membership" TF.validator $
+    TF.unsafeResource "pagerduty_team_membership" P.defaultProvider TF.validator $
         TeamMembershipResource'
             { _teamId = _teamId
             , _userId = _userId
@@ -696,14 +683,14 @@ data UserResource s = UserResource'
     , _teams       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @teams@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 userResource
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (UserResource s)
 userResource _email _name =
-    TF.newResource "pagerduty_user" TF.validator $
+    TF.unsafeResource "pagerduty_user" P.defaultProvider TF.validator $
         UserResource'
             { _description = TF.value "Managed by Terraform"
             , _email = _email
@@ -779,7 +766,7 @@ data UserContactMethodResource s = UserContactMethodResource'
     { _address        :: TF.Attr s P.Text
     -- ^ @address@ - (Required)
     --
-    , _countryCode    :: TF.Attr s P.Integer
+    , _countryCode    :: TF.Attr s P.Int
     -- ^ @country_code@ - (Optional)
     --
     , _label          :: TF.Attr s P.Text
@@ -794,7 +781,7 @@ data UserContactMethodResource s = UserContactMethodResource'
     , _userId         :: TF.Attr s P.Text
     -- ^ @user_id@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 userContactMethodResource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
@@ -803,7 +790,7 @@ userContactMethodResource
     -> TF.Attr s P.Text -- ^ @user_id@ - 'P.userId'
     -> P.Resource (UserContactMethodResource s)
 userContactMethodResource _address _label _type' _userId =
-    TF.newResource "pagerduty_user_contact_method" TF.validator $
+    TF.unsafeResource "pagerduty_user_contact_method" P.defaultProvider TF.validator $
         UserContactMethodResource'
             { _address = _address
             , _countryCode = TF.Nil
@@ -831,9 +818,9 @@ instance P.HasAddress (UserContactMethodResource s) (TF.Attr s P.Text) where
         P.lens (_address :: UserContactMethodResource s -> TF.Attr s P.Text)
                (\s a -> s { _address = a } :: UserContactMethodResource s)
 
-instance P.HasCountryCode (UserContactMethodResource s) (TF.Attr s P.Integer) where
+instance P.HasCountryCode (UserContactMethodResource s) (TF.Attr s P.Int) where
     countryCode =
-        P.lens (_countryCode :: UserContactMethodResource s -> TF.Attr s P.Integer)
+        P.lens (_countryCode :: UserContactMethodResource s -> TF.Attr s P.Int)
                (\s a -> s { _countryCode = a } :: UserContactMethodResource s)
 
 instance P.HasLabel (UserContactMethodResource s) (TF.Attr s P.Text) where
