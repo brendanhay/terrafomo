@@ -275,11 +275,11 @@ data HostResource s = HostResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 hostResource
-    :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
-    -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
+    :: TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
+    -> TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (HostResource s)
-hostResource _environmentId _hostname _name =
+hostResource _hostname _environmentId _name =
     TF.unsafeResource "rancher_host" TF.validator $
         HostResource'
             { _description = TF.Nil
@@ -437,11 +437,11 @@ data RegistryResource s = RegistryResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 registryResource
-    :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
+    :: TF.Attr s P.Text -- ^ @server_address@ - 'P.serverAddress'
+    -> TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @server_address@ - 'P.serverAddress'
     -> P.Resource (RegistryResource s)
-registryResource _environmentId _name _serverAddress =
+registryResource _serverAddress _environmentId _name =
     TF.unsafeResource "rancher_registry" TF.validator $
         RegistryResource'
             { _description = TF.Nil
@@ -507,12 +507,12 @@ data RegistryCredentialResource s = RegistryCredentialResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 registryCredentialResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @registry_id@ - 'P.registryId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @public_value@ - 'P.publicValue'
-    -> TF.Attr s P.Text -- ^ @registry_id@ - 'P.registryId'
     -> TF.Attr s P.Text -- ^ @secret_value@ - 'P.secretValue'
     -> P.Resource (RegistryCredentialResource s)
-registryCredentialResource _name _publicValue _registryId _secretValue =
+registryCredentialResource _registryId _name _publicValue _secretValue =
     TF.unsafeResource "rancher_registry_credential" TF.validator $
         RegistryCredentialResource'
             { _description = TF.Nil

@@ -60,10 +60,10 @@ data MemberSetting s = MemberSetting'
 
 newMemberSetting
     :: TF.Attr s P.Text -- ^ @external_id@ - 'P.externalId'
-    -> TF.Attr s P.Text -- ^ @external_id_type@ - 'P.externalIdType'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    -> TF.Attr s P.Text -- ^ @external_id_type@ - 'P.externalIdType'
     -> MemberSetting s
-newMemberSetting _externalId _externalIdType _role =
+newMemberSetting _externalId _role _externalIdType =
     MemberSetting'
         { _externalId = _externalId
         , _externalIdType = _externalIdType
