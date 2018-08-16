@@ -31,7 +31,7 @@ field-overrides:
     policy: 'TF.Attr s P.Document'
 
   SecurityGroupRuleResource:
-    type: 'TF.Attr s P.NetworkTraffic'
+    type': 'TF.Attr s P.NetworkTraffic'
     protocol: 'TF.Attr s P.NetworkProtocol'
 
   # Settings
