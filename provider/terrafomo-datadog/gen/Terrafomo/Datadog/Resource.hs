@@ -170,6 +170,9 @@ instance P.HasStart (DowntimeResource s) (TF.Attr s P.Int) where
         P.lens (_start :: DowntimeResource s -> TF.Attr s P.Int)
                (\s a -> s { _start = a } :: DowntimeResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DowntimeResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @datadog_metric_metadata@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/datadog/r/metric_metadata.html terraform documentation>
@@ -261,6 +264,9 @@ instance P.HasUnit (MetricMetadataResource s) (TF.Attr s P.Text) where
     unit =
         P.lens (_unit :: MetricMetadataResource s -> TF.Attr s P.Text)
                (\s a -> s { _unit = a } :: MetricMetadataResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MetricMetadataResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @datadog_monitor@ Resource.
 --
@@ -447,6 +453,9 @@ instance P.HasType' (MonitorResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: MonitorResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: MonitorResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MonitorResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEvaluationDelay (TF.Ref s' (MonitorResource s)) (TF.Attr s P.Int) where
     computedEvaluationDelay x = TF.compute (TF.refKey x) "evaluation_delay"
 
@@ -531,6 +540,9 @@ instance P.HasTitle (TimeboardResource s) (TF.Attr s P.Text) where
         P.lens (_title :: TimeboardResource s -> TF.Attr s P.Text)
                (\s a -> s { _title = a } :: TimeboardResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TimeboardResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @datadog_user@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/datadog/r/user.html terraform documentation>
@@ -604,6 +616,9 @@ instance P.HasName (UserResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: UserResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: UserResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedVerified (TF.Ref s' (UserResource s)) (TF.Attr s P.Bool) where
     computedVerified x = TF.compute (TF.refKey x) "verified"

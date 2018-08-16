@@ -97,6 +97,7 @@ module Terrafomo.Datadog.Lens
 
     -- ** Computed Attributes
     , HasComputedEvaluationDelay (..)
+    , HasComputedId (..)
     , HasComputedNewHostDelay (..)
     , HasComputedVerified (..)
     ) where
@@ -582,6 +583,9 @@ instance HasYaxis a b => HasYaxis (TF.Schema l p a) b where
 
 class HasComputedEvaluationDelay a b | a -> b where
     computedEvaluationDelay :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedNewHostDelay a b | a -> b where
     computedNewHostDelay :: a -> b
