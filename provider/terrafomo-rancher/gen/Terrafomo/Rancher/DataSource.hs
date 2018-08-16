@@ -74,7 +74,7 @@ certificateData
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CertificateData s)
 certificateData _environmentId _name =
-    TF.unsafeDataSource "rancher_certificate" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "rancher_certificate" TF.validator $
         CertificateData'
             { _environmentId = _environmentId
             , _name = _name
@@ -149,7 +149,7 @@ environmentData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (EnvironmentData s)
 environmentData _name =
-    TF.unsafeDataSource "rancher_environment" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "rancher_environment" TF.validator $
         EnvironmentData'
             { _name = _name
             }
@@ -196,7 +196,7 @@ settingData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SettingData s)
 settingData _name =
-    TF.unsafeDataSource "rancher_setting" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "rancher_setting" TF.validator $
         SettingData'
             { _name = _name
             }

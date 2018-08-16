@@ -112,7 +112,7 @@ certificateResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (CertificateResource s)
 certificateResource _cert _environmentId _key _name =
-    TF.unsafeResource "rancher_certificate" P.defaultProvider TF.validator $
+    TF.unsafeResource "rancher_certificate" TF.validator $
         CertificateResource'
             { _cert = _cert
             , _certChain = TF.Nil
@@ -215,7 +215,7 @@ environmentResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (EnvironmentResource s)
 environmentResource _name =
-    TF.unsafeResource "rancher_environment" P.defaultProvider TF.validator $
+    TF.unsafeResource "rancher_environment" TF.validator $
         EnvironmentResource'
             { _description = TF.Nil
             , _name = _name
@@ -280,7 +280,7 @@ hostResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (HostResource s)
 hostResource _environmentId _hostname _name =
-    TF.unsafeResource "rancher_host" P.defaultProvider TF.validator $
+    TF.unsafeResource "rancher_host" TF.validator $
         HostResource'
             { _description = TF.Nil
             , _environmentId = _environmentId
@@ -356,7 +356,7 @@ registrationTokenResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RegistrationTokenResource s)
 registrationTokenResource _environmentId _name =
-    TF.unsafeResource "rancher_registration_token" P.defaultProvider TF.validator $
+    TF.unsafeResource "rancher_registration_token" TF.validator $
         RegistrationTokenResource'
             { _agentIp = TF.Nil
             , _description = TF.Nil
@@ -442,7 +442,7 @@ registryResource
     -> TF.Attr s P.Text -- ^ @server_address@ - 'P.serverAddress'
     -> P.Resource (RegistryResource s)
 registryResource _environmentId _name _serverAddress =
-    TF.unsafeResource "rancher_registry" P.defaultProvider TF.validator $
+    TF.unsafeResource "rancher_registry" TF.validator $
         RegistryResource'
             { _description = TF.Nil
             , _environmentId = _environmentId
@@ -513,7 +513,7 @@ registryCredentialResource
     -> TF.Attr s P.Text -- ^ @secret_value@ - 'P.secretValue'
     -> P.Resource (RegistryCredentialResource s)
 registryCredentialResource _name _publicValue _registryId _secretValue =
-    TF.unsafeResource "rancher_registry_credential" P.defaultProvider TF.validator $
+    TF.unsafeResource "rancher_registry_credential" TF.validator $
         RegistryCredentialResource'
             { _description = TF.Nil
             , _name = _name
@@ -587,7 +587,7 @@ secretResource
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> P.Resource (SecretResource s)
 secretResource _environmentId _name _value =
-    TF.unsafeResource "rancher_secret" P.defaultProvider TF.validator $
+    TF.unsafeResource "rancher_secret" TF.validator $
         SecretResource'
             { _description = TF.Nil
             , _environmentId = _environmentId
@@ -668,7 +668,7 @@ stackResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (StackResource s)
 stackResource _environmentId _name =
-    TF.unsafeResource "rancher_stack" P.defaultProvider TF.validator $
+    TF.unsafeResource "rancher_stack" TF.validator $
         StackResource'
             { _catalogId = TF.Nil
             , _description = TF.Nil
@@ -779,7 +779,7 @@ volumeResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (VolumeResource s)
 volumeResource _driver _environmentId _name =
-    TF.unsafeResource "rancher_volume" P.defaultProvider TF.validator $
+    TF.unsafeResource "rancher_volume" TF.validator $
         VolumeResource'
             { _description = TF.Nil
             , _driver = _driver

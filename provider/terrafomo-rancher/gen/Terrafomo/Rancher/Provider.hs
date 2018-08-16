@@ -91,19 +91,14 @@ newProvider =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "rancher"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "access_key" <$> _accessKey
-                  , TF.assign "api_url" <$> _apiUrl
-                  , TF.assign "config" <$> _config
-                  , TF.assign "secret_key" <$> _secretKey
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ TF.assign "access_key" <$> _accessKey
+            , TF.assign "api_url" <$> _apiUrl
+            , TF.assign "config" <$> _config
+            , TF.assign "secret_key" <$> _secretKey
+            ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
