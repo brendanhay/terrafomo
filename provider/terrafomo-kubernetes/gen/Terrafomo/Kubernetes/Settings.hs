@@ -830,6 +830,12 @@ data ContainerSetting s = ContainerSetting'
     -- ^ @image@ - (Optional)
     -- Docker image name. More info: http://kubernetes.io/docs/user-guide/images
     --
+    , _imagePullPolicy        :: TF.Attr s P.Text
+    -- ^ @image_pull_policy@ - (Optional, Forces New)
+    -- Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if
+    -- :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More
+    -- info: http://kubernetes.io/docs/user-guide/images#updating-images
+    --
     , _lifecycle              :: TF.Attr s (LifecycleSetting s)
     -- ^ @lifecycle@ - (Optional, Forces New)
     -- Actions that the management system should take in response to container
@@ -860,6 +866,11 @@ data ContainerSetting s = ContainerSetting'
     -- Periodic probe of container service readiness. Container will be removed
     -- from service endpoints if the probe fails. Cannot be updated. More info:
     -- http://kubernetes.io/docs/user-guide/pod-states#container-probes
+    --
+    , _resources              :: TF.Attr s (ResourcesSetting s)
+    -- ^ @resources@ - (Optional, Forces New)
+    -- Compute Resources required by this container. Cannot be updated. More info:
+    -- http://kubernetes.io/docs/user-guide/persistent-volumes#resources
     --
     , _securityContext        :: TF.Attr s (SecurityContextSetting s)
     -- ^ @security_context@ - (Optional, Forces New)
@@ -916,11 +927,13 @@ containerSetting _name =
         , _command = TF.Nil
         , _env = TF.Nil
         , _image = TF.Nil
+        , _imagePullPolicy = TF.Nil
         , _lifecycle = TF.Nil
         , _livenessProbe = TF.Nil
         , _name = _name
         , _port = TF.Nil
         , _readinessProbe = TF.Nil
+        , _resources = TF.Nil
         , _securityContext = TF.Nil
         , _stdin = TF.value P.False
         , _stdinOnce = TF.value P.False
@@ -937,11 +950,13 @@ instance TF.IsObject (ContainerSetting s) where
         , TF.assign "command" <$> TF.attribute _command
         , TF.assign "env" <$> TF.attribute _env
         , TF.assign "image" <$> TF.attribute _image
+        , TF.assign "image_pull_policy" <$> TF.attribute _imagePullPolicy
         , TF.assign "lifecycle" <$> TF.attribute _lifecycle
         , TF.assign "liveness_probe" <$> TF.attribute _livenessProbe
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "port" <$> TF.attribute _port
         , TF.assign "readiness_probe" <$> TF.attribute _readinessProbe
+        , TF.assign "resources" <$> TF.attribute _resources
         , TF.assign "security_context" <$> TF.attribute _securityContext
         , TF.assign "stdin" <$> TF.attribute _stdin
         , TF.assign "stdin_once" <$> TF.attribute _stdinOnce
@@ -964,6 +979,10 @@ instance TF.IsValid (ContainerSetting s) where
            P.<> TF.settingsValidator "_readinessProbe"
                   (_readinessProbe
                       :: ContainerSetting s -> TF.Attr s (ReadinessProbeSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_resources"
+                  (_resources
+                      :: ContainerSetting s -> TF.Attr s (ResourcesSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_securityContext"
                   (_securityContext
@@ -990,6 +1009,11 @@ instance P.HasImage (ContainerSetting s) (TF.Attr s P.Text) where
         P.lens (_image :: ContainerSetting s -> TF.Attr s P.Text)
                (\s a -> s { _image = a } :: ContainerSetting s)
 
+instance P.HasImagePullPolicy (ContainerSetting s) (TF.Attr s P.Text) where
+    imagePullPolicy =
+        P.lens (_imagePullPolicy :: ContainerSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _imagePullPolicy = a } :: ContainerSetting s)
+
 instance P.HasLifecycle (ContainerSetting s) (TF.Attr s (LifecycleSetting s)) where
     lifecycle =
         P.lens (_lifecycle :: ContainerSetting s -> TF.Attr s (LifecycleSetting s))
@@ -1014,6 +1038,11 @@ instance P.HasReadinessProbe (ContainerSetting s) (TF.Attr s (ReadinessProbeSett
     readinessProbe =
         P.lens (_readinessProbe :: ContainerSetting s -> TF.Attr s (ReadinessProbeSetting s))
                (\s a -> s { _readinessProbe = a } :: ContainerSetting s)
+
+instance P.HasResources (ContainerSetting s) (TF.Attr s (ResourcesSetting s)) where
+    resources =
+        P.lens (_resources :: ContainerSetting s -> TF.Attr s (ResourcesSetting s))
+               (\s a -> s { _resources = a } :: ContainerSetting s)
 
 instance P.HasSecurityContext (ContainerSetting s) (TF.Attr s (SecurityContextSetting s)) where
     securityContext =
@@ -1902,6 +1931,12 @@ data InitContainerSetting s = InitContainerSetting'
     -- ^ @image@ - (Optional, Forces New)
     -- Docker image name. More info: http://kubernetes.io/docs/user-guide/images
     --
+    , _imagePullPolicy        :: TF.Attr s P.Text
+    -- ^ @image_pull_policy@ - (Optional, Forces New)
+    -- Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if
+    -- :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More
+    -- info: http://kubernetes.io/docs/user-guide/images#updating-images
+    --
     , _lifecycle              :: TF.Attr s (LifecycleSetting s)
     -- ^ @lifecycle@ - (Optional, Forces New)
     -- Actions that the management system should take in response to container
@@ -1932,6 +1967,11 @@ data InitContainerSetting s = InitContainerSetting'
     -- Periodic probe of container service readiness. Container will be removed
     -- from service endpoints if the probe fails. Cannot be updated. More info:
     -- http://kubernetes.io/docs/user-guide/pod-states#container-probes
+    --
+    , _resources              :: TF.Attr s (ResourcesSetting s)
+    -- ^ @resources@ - (Optional, Forces New)
+    -- Compute Resources required by this container. Cannot be updated. More info:
+    -- http://kubernetes.io/docs/user-guide/persistent-volumes#resources
     --
     , _securityContext        :: TF.Attr s (SecurityContextSetting s)
     -- ^ @security_context@ - (Optional, Forces New)
@@ -1988,11 +2028,13 @@ initContainerSetting _name =
         , _command = TF.Nil
         , _env = TF.Nil
         , _image = TF.Nil
+        , _imagePullPolicy = TF.Nil
         , _lifecycle = TF.Nil
         , _livenessProbe = TF.Nil
         , _name = _name
         , _port = TF.Nil
         , _readinessProbe = TF.Nil
+        , _resources = TF.Nil
         , _securityContext = TF.Nil
         , _stdin = TF.value P.False
         , _stdinOnce = TF.value P.False
@@ -2009,11 +2051,13 @@ instance TF.IsObject (InitContainerSetting s) where
         , TF.assign "command" <$> TF.attribute _command
         , TF.assign "env" <$> TF.attribute _env
         , TF.assign "image" <$> TF.attribute _image
+        , TF.assign "image_pull_policy" <$> TF.attribute _imagePullPolicy
         , TF.assign "lifecycle" <$> TF.attribute _lifecycle
         , TF.assign "liveness_probe" <$> TF.attribute _livenessProbe
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "port" <$> TF.attribute _port
         , TF.assign "readiness_probe" <$> TF.attribute _readinessProbe
+        , TF.assign "resources" <$> TF.attribute _resources
         , TF.assign "security_context" <$> TF.attribute _securityContext
         , TF.assign "stdin" <$> TF.attribute _stdin
         , TF.assign "stdin_once" <$> TF.attribute _stdinOnce
@@ -2036,6 +2080,10 @@ instance TF.IsValid (InitContainerSetting s) where
            P.<> TF.settingsValidator "_readinessProbe"
                   (_readinessProbe
                       :: InitContainerSetting s -> TF.Attr s (ReadinessProbeSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_resources"
+                  (_resources
+                      :: InitContainerSetting s -> TF.Attr s (ResourcesSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_securityContext"
                   (_securityContext
@@ -2062,6 +2110,11 @@ instance P.HasImage (InitContainerSetting s) (TF.Attr s P.Text) where
         P.lens (_image :: InitContainerSetting s -> TF.Attr s P.Text)
                (\s a -> s { _image = a } :: InitContainerSetting s)
 
+instance P.HasImagePullPolicy (InitContainerSetting s) (TF.Attr s P.Text) where
+    imagePullPolicy =
+        P.lens (_imagePullPolicy :: InitContainerSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _imagePullPolicy = a } :: InitContainerSetting s)
+
 instance P.HasLifecycle (InitContainerSetting s) (TF.Attr s (LifecycleSetting s)) where
     lifecycle =
         P.lens (_lifecycle :: InitContainerSetting s -> TF.Attr s (LifecycleSetting s))
@@ -2086,6 +2139,11 @@ instance P.HasReadinessProbe (InitContainerSetting s) (TF.Attr s (ReadinessProbe
     readinessProbe =
         P.lens (_readinessProbe :: InitContainerSetting s -> TF.Attr s (ReadinessProbeSetting s))
                (\s a -> s { _readinessProbe = a } :: InitContainerSetting s)
+
+instance P.HasResources (InitContainerSetting s) (TF.Attr s (ResourcesSetting s)) where
+    resources =
+        P.lens (_resources :: InitContainerSetting s -> TF.Attr s (ResourcesSetting s))
+               (\s a -> s { _resources = a } :: InitContainerSetting s)
 
 instance P.HasSecurityContext (InitContainerSetting s) (TF.Attr s (SecurityContextSetting s)) where
     securityContext =
@@ -2368,6 +2426,11 @@ data LimitSetting s = LimitSetting'
     -- Default resource requirement limit value by resource name if resource limit
     -- is omitted.
     --
+    , _defaultRequest       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @default_request@ - (Optional)
+    -- The default resource requirement request value by resource name if resource
+    -- request is omitted.
+    --
     , _max                  :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @max@ - (Optional)
     -- Max usage constraints on this kind by resource name.
@@ -2394,6 +2457,7 @@ limitSetting
 limitSetting =
     LimitSetting'
         { _default' = TF.Nil
+        , _defaultRequest = TF.Nil
         , _max = TF.Nil
         , _maxLimitRequestRatio = TF.Nil
         , _min = TF.Nil
@@ -2404,6 +2468,7 @@ instance TF.IsValue  (LimitSetting s)
 instance TF.IsObject (LimitSetting s) where
     toObject LimitSetting'{..} = P.catMaybes
         [ TF.assign "default" <$> TF.attribute _default'
+        , TF.assign "default_request" <$> TF.attribute _defaultRequest
         , TF.assign "max" <$> TF.attribute _max
         , TF.assign "max_limit_request_ratio" <$> TF.attribute _maxLimitRequestRatio
         , TF.assign "min" <$> TF.attribute _min
@@ -2417,6 +2482,11 @@ instance P.HasDefault' (LimitSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Te
     default' =
         P.lens (_default' :: LimitSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _default' = a } :: LimitSetting s)
+
+instance P.HasDefaultRequest (LimitSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    defaultRequest =
+        P.lens (_defaultRequest :: LimitSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _defaultRequest = a } :: LimitSetting s)
 
 instance P.HasMax (LimitSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     max =
@@ -2443,20 +2513,42 @@ instance s ~ s' => P.HasComputedDefaultRequest (TF.Ref s' (LimitSetting s)) (TF.
 
 -- | @limits@ nested settings.
 data LimitsSetting s = LimitsSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _cpu    :: TF.Attr s P.Text
+    -- ^ @cpu@ - (Optional)
+    --
+    , _memory :: TF.Attr s P.Text
+    -- ^ @memory@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @limits@ settings value.
 limitsSetting
     :: LimitsSetting s
 limitsSetting =
     LimitsSetting'
+        { _cpu = TF.Nil
+        , _memory = TF.Nil
+        }
 
 instance TF.IsValue  (LimitsSetting s)
 instance TF.IsObject (LimitsSetting s) where
-    toObject LimitsSetting' = []
+    toObject LimitsSetting'{..} = P.catMaybes
+        [ TF.assign "cpu" <$> TF.attribute _cpu
+        , TF.assign "memory" <$> TF.attribute _memory
+        ]
 
 instance TF.IsValid (LimitsSetting s) where
     validator = P.mempty
+
+instance P.HasCpu (LimitsSetting s) (TF.Attr s P.Text) where
+    cpu =
+        P.lens (_cpu :: LimitsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _cpu = a } :: LimitsSetting s)
+
+instance P.HasMemory (LimitsSetting s) (TF.Attr s P.Text) where
+    memory =
+        P.lens (_memory :: LimitsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _memory = a } :: LimitsSetting s)
 
 instance s ~ s' => P.HasComputedCpu (TF.Ref s' (LimitsSetting s)) (TF.Attr s P.Text) where
     computedCpu x = TF.compute (TF.refKey x) "cpu"
@@ -2679,6 +2771,9 @@ data MetadataSetting s = MetadataSetting'
     -- suffix. Read more:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#idempotency
     --
+    -- Conflicts with:
+    --
+    -- * 'name'
     , _labels       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     -- Map of string keys and values that can be used to organize and categorize
@@ -2686,6 +2781,14 @@ data MetadataSetting s = MetadataSetting'
     -- controllers and services. More info:
     -- http://kubernetes.io/docs/user-guide/labels
     --
+    , _name         :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    -- Name of the config map, must be unique. Cannot be updated. More info:
+    -- http://kubernetes.io/docs/user-guide/identifiers#names
+    --
+    -- Conflicts with:
+    --
+    -- * 'generateName'
     , _namespace    :: TF.Attr s P.Text
     -- ^ @namespace@ - (Optional, Forces New)
     -- Namespace defines the space within which name of the config map must be
@@ -2701,6 +2804,7 @@ metadataSetting =
         { _annotations = TF.Nil
         , _generateName = TF.Nil
         , _labels = TF.Nil
+        , _name = TF.Nil
         , _namespace = TF.value "default"
         }
 
@@ -2710,11 +2814,23 @@ instance TF.IsObject (MetadataSetting s) where
         [ TF.assign "annotations" <$> TF.attribute _annotations
         , TF.assign "generate_name" <$> TF.attribute _generateName
         , TF.assign "labels" <$> TF.attribute _labels
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "namespace" <$> TF.attribute _namespace
         ]
 
 instance TF.IsValid (MetadataSetting s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\MetadataSetting'{..} -> Map.fromList $ P.catMaybes
+        [ if (_generateName P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_generateName",
+                            [ "_name"
+                            ])
+        , if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_generateName"
+                            ])
+        ])
 
 instance P.HasAnnotations (MetadataSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     annotations =
@@ -2730,6 +2846,11 @@ instance P.HasLabels (MetadataSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.T
     labels =
         P.lens (_labels :: MetadataSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: MetadataSetting s)
+
+instance P.HasName (MetadataSetting s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: MetadataSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: MetadataSetting s)
 
 instance P.HasNamespace (MetadataSetting s) (TF.Attr s P.Text) where
     namespace =
@@ -3215,9 +3336,25 @@ data PortSetting s = PortSetting'
     -- ^ @protocol@ - (Optional)
     -- Protocol for port. Must be UDP or TCP. Defaults to "TCP".
     --
+    , _nodePort      :: TF.Attr s P.Int
+    -- ^ @node_port@ - (Optional)
+    -- The port on each node on which this service is exposed when `type` is
+    -- `NodePort` or `LoadBalancer`. Usually assigned by the system. If specified,
+    -- it will be allocated to the service if unused or else creation of the
+    -- service will fail. Default is to auto-allocate a port if the `type` of this
+    -- service requires one. More info:
+    -- http://kubernetes.io/docs/user-guide/services#type--nodeport
+    --
     , _port          :: TF.Attr s P.Int
     -- ^ @port@ - (Required)
     -- The port that will be exposed by this service.
+    --
+    , _targetPort    :: TF.Attr s P.Text
+    -- ^ @target_port@ - (Optional)
+    -- Number or name of the port to access on the pods targeted by the service.
+    -- Number must be in the range 1 to 65535. This field is ignored for services
+    -- with `cluster_ip = "None"`. More info:
+    -- http://kubernetes.io/docs/user-guide/services#defining-a-service
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -3233,7 +3370,9 @@ portSetting _containerPort _port =
         , _hostPort = TF.Nil
         , _name = TF.Nil
         , _protocol = TF.value "TCP"
+        , _nodePort = TF.Nil
         , _port = _port
+        , _targetPort = TF.Nil
         }
 
 instance TF.IsValue  (PortSetting s)
@@ -3244,7 +3383,9 @@ instance TF.IsObject (PortSetting s) where
         , TF.assign "host_port" <$> TF.attribute _hostPort
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "node_port" <$> TF.attribute _nodePort
         , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "target_port" <$> TF.attribute _targetPort
         ]
 
 instance TF.IsValid (PortSetting s) where
@@ -3275,10 +3416,20 @@ instance P.HasProtocol (PortSetting s) (TF.Attr s P.Text) where
         P.lens (_protocol :: PortSetting s -> TF.Attr s P.Text)
                (\s a -> s { _protocol = a } :: PortSetting s)
 
+instance P.HasNodePort (PortSetting s) (TF.Attr s P.Int) where
+    nodePort =
+        P.lens (_nodePort :: PortSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _nodePort = a } :: PortSetting s)
+
 instance P.HasPort (PortSetting s) (TF.Attr s P.Int) where
     port =
         P.lens (_port :: PortSetting s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: PortSetting s)
+
+instance P.HasTargetPort (PortSetting s) (TF.Attr s P.Text) where
+    targetPort =
+        P.lens (_targetPort :: PortSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _targetPort = a } :: PortSetting s)
 
 instance s ~ s' => P.HasComputedNodePort (TF.Ref s' (PortSetting s)) (TF.Attr s P.Int) where
     computedNodePort x = TF.compute (TF.refKey x) "node_port"
@@ -3511,6 +3662,12 @@ data RbdSetting s = RbdSetting'
     -- "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info:
     -- http://kubernetes.io/docs/user-guide/volumes#rbd
     --
+    , _keyring      :: TF.Attr s P.Text
+    -- ^ @keyring@ - (Optional)
+    -- Keyring is the path to key ring for RBDUser. Default is /etc/ceph/keyring.
+    -- More info:
+    -- http://releases.k8s.io/HEAD/examples/volumes/rbd/README.md#how-to-use-it
+    --
     , _radosUser    :: TF.Attr s P.Text
     -- ^ @rados_user@ - (Optional)
     -- The rados user name. Default is admin. More info:
@@ -3549,6 +3706,7 @@ rbdSetting _rbdImage _cephMonitors =
     RbdSetting'
         { _cephMonitors = _cephMonitors
         , _fsType = TF.Nil
+        , _keyring = TF.Nil
         , _radosUser = TF.value "admin"
         , _rbdImage = _rbdImage
         , _rbdPool = TF.value "rbd"
@@ -3561,6 +3719,7 @@ instance TF.IsObject (RbdSetting s) where
     toObject RbdSetting'{..} = P.catMaybes
         [ TF.assign "ceph_monitors" <$> TF.attribute _cephMonitors
         , TF.assign "fs_type" <$> TF.attribute _fsType
+        , TF.assign "keyring" <$> TF.attribute _keyring
         , TF.assign "rados_user" <$> TF.attribute _radosUser
         , TF.assign "rbd_image" <$> TF.attribute _rbdImage
         , TF.assign "rbd_pool" <$> TF.attribute _rbdPool
@@ -3584,6 +3743,11 @@ instance P.HasFsType (RbdSetting s) (TF.Attr s P.Text) where
     fsType =
         P.lens (_fsType :: RbdSetting s -> TF.Attr s P.Text)
                (\s a -> s { _fsType = a } :: RbdSetting s)
+
+instance P.HasKeyring (RbdSetting s) (TF.Attr s P.Text) where
+    keyring =
+        P.lens (_keyring :: RbdSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _keyring = a } :: RbdSetting s)
 
 instance P.HasRadosUser (RbdSetting s) (TF.Attr s P.Text) where
     radosUser =
@@ -3736,20 +3900,42 @@ instance P.HasTimeoutSeconds (ReadinessProbeSetting s) (TF.Attr s P.Int) where
 
 -- | @requests@ nested settings.
 data RequestsSetting s = RequestsSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _cpu    :: TF.Attr s P.Text
+    -- ^ @cpu@ - (Optional)
+    --
+    , _memory :: TF.Attr s P.Text
+    -- ^ @memory@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @requests@ settings value.
 requestsSetting
     :: RequestsSetting s
 requestsSetting =
     RequestsSetting'
+        { _cpu = TF.Nil
+        , _memory = TF.Nil
+        }
 
 instance TF.IsValue  (RequestsSetting s)
 instance TF.IsObject (RequestsSetting s) where
-    toObject RequestsSetting' = []
+    toObject RequestsSetting'{..} = P.catMaybes
+        [ TF.assign "cpu" <$> TF.attribute _cpu
+        , TF.assign "memory" <$> TF.attribute _memory
+        ]
 
 instance TF.IsValid (RequestsSetting s) where
     validator = P.mempty
+
+instance P.HasCpu (RequestsSetting s) (TF.Attr s P.Text) where
+    cpu =
+        P.lens (_cpu :: RequestsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _cpu = a } :: RequestsSetting s)
+
+instance P.HasMemory (RequestsSetting s) (TF.Attr s P.Text) where
+    memory =
+        P.lens (_memory :: RequestsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _memory = a } :: RequestsSetting s)
 
 instance s ~ s' => P.HasComputedCpu (TF.Ref s' (RequestsSetting s)) (TF.Attr s P.Text) where
     computedCpu x = TF.compute (TF.refKey x) "cpu"
@@ -4328,6 +4514,12 @@ data SpecSetting s = SpecSetting'
     -- ^ @scale_target_ref@ - (Required)
     -- Reference to scaled resource. e.g. Replication Controller
     --
+    , _targetCpuUtilizationPercentage :: TF.Attr s P.Int
+    -- ^ @target_cpu_utilization_percentage@ - (Optional)
+    -- Target average CPU utilization (represented as a percentage of requested
+    -- CPU) over all the pods. If not specified the default autoscaling policy will
+    -- be used.
+    --
     , _limit :: TF.Attr s [TF.Attr s (LimitSetting s)]
     -- ^ @limit@ - (Optional)
     -- Limits is the list of objects that are enforced.
@@ -4367,6 +4559,10 @@ data SpecSetting s = SpecSetting'
     -- ^ @selector@ - (Optional, Forces New)
     -- A label query over volumes to consider for binding.
     --
+    , _volumeName :: TF.Attr s P.Text
+    -- ^ @volume_name@ - (Optional, Forces New)
+    -- The binding reference to the PersistentVolume backing this claim.
+    --
     , _activeDeadlineSeconds :: TF.Attr s P.Int
     -- ^ @active_deadline_seconds@ - (Optional)
     -- Optional duration in seconds the pod may be active on the node relative to
@@ -4397,12 +4593,32 @@ data SpecSetting s = SpecSetting'
     -- ^ @host_pid@ - (Optional, Forces New)
     -- Use the host's pid namespace.
     --
+    , _hostname :: TF.Attr s P.Text
+    -- ^ @hostname@ - (Optional, Forces New)
+    -- Specifies the hostname of the Pod If not specified, the pod's hostname will
+    -- be set to a system-defined value.
+    --
+    , _imagePullSecrets :: TF.Attr s [TF.Attr s (ImagePullSecretsSetting s)]
+    -- ^ @image_pull_secrets@ - (Optional, Forces New)
+    -- ImagePullSecrets is an optional list of references to secrets in the same
+    -- namespace to use for pulling any of the images used by this PodSpec. If
+    -- specified, these secrets will be passed to individual puller implementations
+    -- for them to use. For example, in the case of docker, only DockerConfig type
+    -- secrets are honored. More info:
+    -- http://kubernetes.io/docs/user-guide/images#specifying-imagepullsecrets-on-a-pod
+    --
     , _initContainer :: TF.Attr s [TF.Attr s (InitContainerSetting s)]
     -- ^ @init_container@ - (Optional, Forces New)
     -- List of init containers belonging to the pod. Init containers always run to
     -- completion and each must complete succesfully before the next is started.
     -- More info:
     -- https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+    --
+    , _nodeName :: TF.Attr s P.Text
+    -- ^ @node_name@ - (Optional, Forces New)
+    -- NodeName is a request to schedule this pod onto a specific node. If it is
+    -- non-empty, the scheduler simply schedules this pod onto that node, assuming
+    -- that it fits resource requirements.
     --
     , _nodeSelector :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @node_selector@ - (Optional, Forces New)
@@ -4420,6 +4636,11 @@ data SpecSetting s = SpecSetting'
     -- ^ @security_context@ - (Optional, Forces New)
     -- SecurityContext holds pod-level security attributes and common container
     -- settings. Optional: Defaults to empty
+    --
+    , _serviceAccountName :: TF.Attr s P.Text
+    -- ^ @service_account_name@ - (Optional, Forces New)
+    -- ServiceAccountName is the name of the ServiceAccount to use to run this pod.
+    -- More info: http://releases.k8s.io/HEAD/docs/design/service_accounts.md.
     --
     , _subdomain :: TF.Attr s P.Text
     -- ^ @subdomain@ - (Optional, Forces New)
@@ -4467,6 +4688,15 @@ data SpecSetting s = SpecSetting'
     -- ^ @scopes@ - (Optional, Forces New)
     -- A collection of filters that must match each object tracked by a quota. If
     -- not specified, the quota matches all objects.
+    --
+    , _clusterIp :: TF.Attr s P.Text
+    -- ^ @cluster_ip@ - (Optional, Forces New)
+    -- The IP address of the service. It is usually assigned randomly by the
+    -- master. If an address is specified manually and is not in use by others, it
+    -- will be allocated to the service; otherwise, creation of the service will
+    -- fail. `None` can be specified for headless services when proxying is not
+    -- required. Ignored if type is `ExternalName`. More info:
+    -- http://kubernetes.io/docs/user-guide/services#virtual-ips-and-service-proxies
     --
     , _externalIps :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @external_ips@ - (Optional)
@@ -4533,6 +4763,7 @@ specSetting _capacity _accessModes _scaleTargetRef _maxReplicas _resources _pers
         { _maxReplicas = _maxReplicas
         , _minReplicas = TF.value 1
         , _scaleTargetRef = _scaleTargetRef
+        , _targetCpuUtilizationPercentage = TF.Nil
         , _limit = TF.Nil
         , _accessModes = _accessModes
         , _capacity = _capacity
@@ -4541,16 +4772,21 @@ specSetting _capacity _accessModes _scaleTargetRef _maxReplicas _resources _pers
         , _storageClassName = TF.Nil
         , _resources = _resources
         , _selector = TF.Nil
+        , _volumeName = TF.Nil
         , _activeDeadlineSeconds = TF.Nil
         , _container = TF.Nil
         , _dnsPolicy = TF.value "ClusterFirst"
         , _hostIpc = TF.value P.False
         , _hostNetwork = TF.value P.False
         , _hostPid = TF.value P.False
+        , _hostname = TF.Nil
+        , _imagePullSecrets = TF.Nil
         , _initContainer = TF.Nil
+        , _nodeName = TF.Nil
         , _nodeSelector = TF.Nil
         , _restartPolicy = TF.value "Always"
         , _securityContext = TF.Nil
+        , _serviceAccountName = TF.Nil
         , _subdomain = TF.Nil
         , _terminationGracePeriodSeconds = TF.value 30
         , _volume = TF.Nil
@@ -4559,6 +4795,7 @@ specSetting _capacity _accessModes _scaleTargetRef _maxReplicas _resources _pers
         , _template = _template
         , _hard = TF.Nil
         , _scopes = TF.Nil
+        , _clusterIp = TF.Nil
         , _externalIps = TF.Nil
         , _externalName = TF.Nil
         , _loadBalancerIp = TF.Nil
@@ -4574,6 +4811,7 @@ instance TF.IsObject (SpecSetting s) where
         [ TF.assign "max_replicas" <$> TF.attribute _maxReplicas
         , TF.assign "min_replicas" <$> TF.attribute _minReplicas
         , TF.assign "scale_target_ref" <$> TF.attribute _scaleTargetRef
+        , TF.assign "target_cpu_utilization_percentage" <$> TF.attribute _targetCpuUtilizationPercentage
         , TF.assign "limit" <$> TF.attribute _limit
         , TF.assign "access_modes" <$> TF.attribute _accessModes
         , TF.assign "capacity" <$> TF.attribute _capacity
@@ -4582,16 +4820,21 @@ instance TF.IsObject (SpecSetting s) where
         , TF.assign "storage_class_name" <$> TF.attribute _storageClassName
         , TF.assign "resources" <$> TF.attribute _resources
         , TF.assign "selector" <$> TF.attribute _selector
+        , TF.assign "volume_name" <$> TF.attribute _volumeName
         , TF.assign "active_deadline_seconds" <$> TF.attribute _activeDeadlineSeconds
         , TF.assign "container" <$> TF.attribute _container
         , TF.assign "dns_policy" <$> TF.attribute _dnsPolicy
         , TF.assign "host_ipc" <$> TF.attribute _hostIpc
         , TF.assign "host_network" <$> TF.attribute _hostNetwork
         , TF.assign "host_pid" <$> TF.attribute _hostPid
+        , TF.assign "hostname" <$> TF.attribute _hostname
+        , TF.assign "image_pull_secrets" <$> TF.attribute _imagePullSecrets
         , TF.assign "init_container" <$> TF.attribute _initContainer
+        , TF.assign "node_name" <$> TF.attribute _nodeName
         , TF.assign "node_selector" <$> TF.attribute _nodeSelector
         , TF.assign "restart_policy" <$> TF.attribute _restartPolicy
         , TF.assign "security_context" <$> TF.attribute _securityContext
+        , TF.assign "service_account_name" <$> TF.attribute _serviceAccountName
         , TF.assign "subdomain" <$> TF.attribute _subdomain
         , TF.assign "termination_grace_period_seconds" <$> TF.attribute _terminationGracePeriodSeconds
         , TF.assign "volume" <$> TF.attribute _volume
@@ -4600,6 +4843,7 @@ instance TF.IsObject (SpecSetting s) where
         , TF.assign "template" <$> TF.attribute _template
         , TF.assign "hard" <$> TF.attribute _hard
         , TF.assign "scopes" <$> TF.attribute _scopes
+        , TF.assign "cluster_ip" <$> TF.attribute _clusterIp
         , TF.assign "external_ips" <$> TF.attribute _externalIps
         , TF.assign "external_name" <$> TF.attribute _externalName
         , TF.assign "load_balancer_ip" <$> TF.attribute _loadBalancerIp
@@ -4651,6 +4895,11 @@ instance P.HasScaleTargetRef (SpecSetting s) (TF.Attr s (ScaleTargetRefSetting s
         P.lens (_scaleTargetRef :: SpecSetting s -> TF.Attr s (ScaleTargetRefSetting s))
                (\s a -> s { _scaleTargetRef = a } :: SpecSetting s)
 
+instance P.HasTargetCpuUtilizationPercentage (SpecSetting s) (TF.Attr s P.Int) where
+    targetCpuUtilizationPercentage =
+        P.lens (_targetCpuUtilizationPercentage :: SpecSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _targetCpuUtilizationPercentage = a } :: SpecSetting s)
+
 instance P.HasLimit (SpecSetting s) (TF.Attr s [TF.Attr s (LimitSetting s)]) where
     limit =
         P.lens (_limit :: SpecSetting s -> TF.Attr s [TF.Attr s (LimitSetting s)])
@@ -4691,6 +4940,11 @@ instance P.HasSelector (SpecSetting s) (TF.Attr s (SelectorSetting s)) where
         P.lens (_selector :: SpecSetting s -> TF.Attr s (SelectorSetting s))
                (\s a -> s { _selector = a } :: SpecSetting s)
 
+instance P.HasVolumeName (SpecSetting s) (TF.Attr s P.Text) where
+    volumeName =
+        P.lens (_volumeName :: SpecSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _volumeName = a } :: SpecSetting s)
+
 instance P.HasActiveDeadlineSeconds (SpecSetting s) (TF.Attr s P.Int) where
     activeDeadlineSeconds =
         P.lens (_activeDeadlineSeconds :: SpecSetting s -> TF.Attr s P.Int)
@@ -4721,10 +4975,25 @@ instance P.HasHostPid (SpecSetting s) (TF.Attr s P.Bool) where
         P.lens (_hostPid :: SpecSetting s -> TF.Attr s P.Bool)
                (\s a -> s { _hostPid = a } :: SpecSetting s)
 
+instance P.HasHostname (SpecSetting s) (TF.Attr s P.Text) where
+    hostname =
+        P.lens (_hostname :: SpecSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _hostname = a } :: SpecSetting s)
+
+instance P.HasImagePullSecrets (SpecSetting s) (TF.Attr s [TF.Attr s (ImagePullSecretsSetting s)]) where
+    imagePullSecrets =
+        P.lens (_imagePullSecrets :: SpecSetting s -> TF.Attr s [TF.Attr s (ImagePullSecretsSetting s)])
+               (\s a -> s { _imagePullSecrets = a } :: SpecSetting s)
+
 instance P.HasInitContainer (SpecSetting s) (TF.Attr s [TF.Attr s (InitContainerSetting s)]) where
     initContainer =
         P.lens (_initContainer :: SpecSetting s -> TF.Attr s [TF.Attr s (InitContainerSetting s)])
                (\s a -> s { _initContainer = a } :: SpecSetting s)
+
+instance P.HasNodeName (SpecSetting s) (TF.Attr s P.Text) where
+    nodeName =
+        P.lens (_nodeName :: SpecSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _nodeName = a } :: SpecSetting s)
 
 instance P.HasNodeSelector (SpecSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     nodeSelector =
@@ -4740,6 +5009,11 @@ instance P.HasSecurityContext (SpecSetting s) (TF.Attr s (SecurityContextSetting
     securityContext =
         P.lens (_securityContext :: SpecSetting s -> TF.Attr s (SecurityContextSetting s))
                (\s a -> s { _securityContext = a } :: SpecSetting s)
+
+instance P.HasServiceAccountName (SpecSetting s) (TF.Attr s P.Text) where
+    serviceAccountName =
+        P.lens (_serviceAccountName :: SpecSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _serviceAccountName = a } :: SpecSetting s)
 
 instance P.HasSubdomain (SpecSetting s) (TF.Attr s P.Text) where
     subdomain =
@@ -4780,6 +5054,11 @@ instance P.HasScopes (SpecSetting s) (TF.Attr s [TF.Attr s P.Text]) where
     scopes =
         P.lens (_scopes :: SpecSetting s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _scopes = a } :: SpecSetting s)
+
+instance P.HasClusterIp (SpecSetting s) (TF.Attr s P.Text) where
+    clusterIp =
+        P.lens (_clusterIp :: SpecSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _clusterIp = a } :: SpecSetting s)
 
 instance P.HasExternalIps (SpecSetting s) (TF.Attr s [TF.Attr s P.Text]) where
     externalIps =
@@ -4928,12 +5207,32 @@ data TemplateSetting s = TemplateSetting'
     -- ^ @host_pid@ - (Optional)
     -- Use the host's pid namespace.
     --
+    , _hostname :: TF.Attr s P.Text
+    -- ^ @hostname@ - (Optional)
+    -- Specifies the hostname of the Pod If not specified, the pod's hostname will
+    -- be set to a system-defined value.
+    --
+    , _imagePullSecrets :: TF.Attr s [TF.Attr s (ImagePullSecretsSetting s)]
+    -- ^ @image_pull_secrets@ - (Optional)
+    -- ImagePullSecrets is an optional list of references to secrets in the same
+    -- namespace to use for pulling any of the images used by this PodSpec. If
+    -- specified, these secrets will be passed to individual puller implementations
+    -- for them to use. For example, in the case of docker, only DockerConfig type
+    -- secrets are honored. More info:
+    -- http://kubernetes.io/docs/user-guide/images#specifying-imagepullsecrets-on-a-pod
+    --
     , _initContainer :: TF.Attr s [TF.Attr s (InitContainerSetting s)]
     -- ^ @init_container@ - (Optional, Forces New)
     -- List of init containers belonging to the pod. Init containers always run to
     -- completion and each must complete succesfully before the next is started.
     -- More info:
     -- https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+    --
+    , _nodeName :: TF.Attr s P.Text
+    -- ^ @node_name@ - (Optional)
+    -- NodeName is a request to schedule this pod onto a specific node. If it is
+    -- non-empty, the scheduler simply schedules this pod onto that node, assuming
+    -- that it fits resource requirements.
     --
     , _nodeSelector :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @node_selector@ - (Optional)
@@ -4951,6 +5250,11 @@ data TemplateSetting s = TemplateSetting'
     -- ^ @security_context@ - (Optional)
     -- SecurityContext holds pod-level security attributes and common container
     -- settings. Optional: Defaults to empty
+    --
+    , _serviceAccountName :: TF.Attr s P.Text
+    -- ^ @service_account_name@ - (Optional)
+    -- ServiceAccountName is the name of the ServiceAccount to use to run this pod.
+    -- More info: http://releases.k8s.io/HEAD/docs/design/service_accounts.md.
     --
     , _subdomain :: TF.Attr s P.Text
     -- ^ @subdomain@ - (Optional)
@@ -4985,10 +5289,14 @@ templateSetting =
         , _hostIpc = TF.value P.False
         , _hostNetwork = TF.value P.False
         , _hostPid = TF.value P.False
+        , _hostname = TF.Nil
+        , _imagePullSecrets = TF.Nil
         , _initContainer = TF.Nil
+        , _nodeName = TF.Nil
         , _nodeSelector = TF.Nil
         , _restartPolicy = TF.value "Always"
         , _securityContext = TF.Nil
+        , _serviceAccountName = TF.Nil
         , _subdomain = TF.Nil
         , _terminationGracePeriodSeconds = TF.value 30
         , _volume = TF.Nil
@@ -5003,10 +5311,14 @@ instance TF.IsObject (TemplateSetting s) where
         , TF.assign "host_ipc" <$> TF.attribute _hostIpc
         , TF.assign "host_network" <$> TF.attribute _hostNetwork
         , TF.assign "host_pid" <$> TF.attribute _hostPid
+        , TF.assign "hostname" <$> TF.attribute _hostname
+        , TF.assign "image_pull_secrets" <$> TF.attribute _imagePullSecrets
         , TF.assign "init_container" <$> TF.attribute _initContainer
+        , TF.assign "node_name" <$> TF.attribute _nodeName
         , TF.assign "node_selector" <$> TF.attribute _nodeSelector
         , TF.assign "restart_policy" <$> TF.attribute _restartPolicy
         , TF.assign "security_context" <$> TF.attribute _securityContext
+        , TF.assign "service_account_name" <$> TF.attribute _serviceAccountName
         , TF.assign "subdomain" <$> TF.attribute _subdomain
         , TF.assign "termination_grace_period_seconds" <$> TF.attribute _terminationGracePeriodSeconds
         , TF.assign "volume" <$> TF.attribute _volume
@@ -5049,10 +5361,25 @@ instance P.HasHostPid (TemplateSetting s) (TF.Attr s P.Bool) where
         P.lens (_hostPid :: TemplateSetting s -> TF.Attr s P.Bool)
                (\s a -> s { _hostPid = a } :: TemplateSetting s)
 
+instance P.HasHostname (TemplateSetting s) (TF.Attr s P.Text) where
+    hostname =
+        P.lens (_hostname :: TemplateSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _hostname = a } :: TemplateSetting s)
+
+instance P.HasImagePullSecrets (TemplateSetting s) (TF.Attr s [TF.Attr s (ImagePullSecretsSetting s)]) where
+    imagePullSecrets =
+        P.lens (_imagePullSecrets :: TemplateSetting s -> TF.Attr s [TF.Attr s (ImagePullSecretsSetting s)])
+               (\s a -> s { _imagePullSecrets = a } :: TemplateSetting s)
+
 instance P.HasInitContainer (TemplateSetting s) (TF.Attr s [TF.Attr s (InitContainerSetting s)]) where
     initContainer =
         P.lens (_initContainer :: TemplateSetting s -> TF.Attr s [TF.Attr s (InitContainerSetting s)])
                (\s a -> s { _initContainer = a } :: TemplateSetting s)
+
+instance P.HasNodeName (TemplateSetting s) (TF.Attr s P.Text) where
+    nodeName =
+        P.lens (_nodeName :: TemplateSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _nodeName = a } :: TemplateSetting s)
 
 instance P.HasNodeSelector (TemplateSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     nodeSelector =
@@ -5068,6 +5395,11 @@ instance P.HasSecurityContext (TemplateSetting s) (TF.Attr s (SecurityContextSet
     securityContext =
         P.lens (_securityContext :: TemplateSetting s -> TF.Attr s (SecurityContextSetting s))
                (\s a -> s { _securityContext = a } :: TemplateSetting s)
+
+instance P.HasServiceAccountName (TemplateSetting s) (TF.Attr s P.Text) where
+    serviceAccountName =
+        P.lens (_serviceAccountName :: TemplateSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _serviceAccountName = a } :: TemplateSetting s)
 
 instance P.HasSubdomain (TemplateSetting s) (TF.Attr s P.Text) where
     subdomain =

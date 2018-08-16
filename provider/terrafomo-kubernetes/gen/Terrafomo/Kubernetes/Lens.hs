@@ -34,6 +34,7 @@ module Terrafomo.Kubernetes.Lens
     , HasClientCertificate (..)
     , HasClientKey (..)
     , HasClusterCaCertificate (..)
+    , HasClusterIp (..)
     , HasCommand (..)
     , HasConfigContext (..)
     , HasConfigContextAuthInfo (..)
@@ -44,12 +45,14 @@ module Terrafomo.Kubernetes.Lens
     , HasContainer (..)
     , HasContainerName (..)
     , HasContainerPort (..)
+    , HasCpu (..)
     , HasData' (..)
     , HasDataDiskUri (..)
     , HasDatasetName (..)
     , HasDatasetUuid (..)
     , HasDefault' (..)
     , HasDefaultMode (..)
+    , HasDefaultRequest (..)
     , HasDirectory (..)
     , HasDiskName (..)
     , HasDnsPolicy (..)
@@ -83,10 +86,13 @@ module Terrafomo.Kubernetes.Lens
     , HasHostPath (..)
     , HasHostPid (..)
     , HasHostPort (..)
+    , HasHostname (..)
     , HasHttpGet (..)
     , HasHttpHeader (..)
     , HasImage (..)
+    , HasImagePullPolicy (..)
     , HasImagePullSecret (..)
+    , HasImagePullSecrets (..)
     , HasInitContainer (..)
     , HasInitialDelaySeconds (..)
     , HasInsecure (..)
@@ -95,6 +101,7 @@ module Terrafomo.Kubernetes.Lens
     , HasIscsiInterface (..)
     , HasItems (..)
     , HasKey (..)
+    , HasKeyring (..)
     , HasKind (..)
     , HasLabels (..)
     , HasLevel (..)
@@ -112,6 +119,7 @@ module Terrafomo.Kubernetes.Lens
     , HasMaxLimitRequestRatio (..)
     , HasMaxReplicas (..)
     , HasMedium (..)
+    , HasMemory (..)
     , HasMetadata (..)
     , HasMin (..)
     , HasMinReadySeconds (..)
@@ -122,6 +130,8 @@ module Terrafomo.Kubernetes.Lens
     , HasName (..)
     , HasNamespace (..)
     , HasNfs (..)
+    , HasNodeName (..)
+    , HasNodePort (..)
     , HasNodeSelector (..)
     , HasOperator (..)
     , HasOptional (..)
@@ -175,6 +185,7 @@ module Terrafomo.Kubernetes.Lens
     , HasSecurityContext (..)
     , HasSelector (..)
     , HasServer (..)
+    , HasServiceAccountName (..)
     , HasSessionAffinity (..)
     , HasShareName (..)
     , HasSpec (..)
@@ -186,6 +197,8 @@ module Terrafomo.Kubernetes.Lens
     , HasSubdomain (..)
     , HasSuccessThreshold (..)
     , HasSupplementalGroups (..)
+    , HasTargetCpuUtilizationPercentage (..)
+    , HasTargetPort (..)
     , HasTargetPortal (..)
     , HasTargetWwNs (..)
     , HasTcpSocket (..)
@@ -204,6 +217,7 @@ module Terrafomo.Kubernetes.Lens
     , HasVolume (..)
     , HasVolumeId (..)
     , HasVolumeMount (..)
+    , HasVolumeName (..)
     , HasVolumePath (..)
     , HasVsphereVolume (..)
     , HasWaitUntilBound (..)
@@ -370,6 +384,12 @@ class HasClusterCaCertificate a b | a -> b where
 instance HasClusterCaCertificate a b => HasClusterCaCertificate (TF.Schema l p a) b where
     clusterCaCertificate = TF.configuration . clusterCaCertificate
 
+class HasClusterIp a b | a -> b where
+    clusterIp :: P.Lens' a b
+
+instance HasClusterIp a b => HasClusterIp (TF.Schema l p a) b where
+    clusterIp = TF.configuration . clusterIp
+
 class HasCommand a b | a -> b where
     command :: P.Lens' a b
 
@@ -430,6 +450,12 @@ class HasContainerPort a b | a -> b where
 instance HasContainerPort a b => HasContainerPort (TF.Schema l p a) b where
     containerPort = TF.configuration . containerPort
 
+class HasCpu a b | a -> b where
+    cpu :: P.Lens' a b
+
+instance HasCpu a b => HasCpu (TF.Schema l p a) b where
+    cpu = TF.configuration . cpu
+
 class HasData' a b | a -> b where
     data' :: P.Lens' a b
 
@@ -465,6 +491,12 @@ class HasDefaultMode a b | a -> b where
 
 instance HasDefaultMode a b => HasDefaultMode (TF.Schema l p a) b where
     defaultMode = TF.configuration . defaultMode
+
+class HasDefaultRequest a b | a -> b where
+    defaultRequest :: P.Lens' a b
+
+instance HasDefaultRequest a b => HasDefaultRequest (TF.Schema l p a) b where
+    defaultRequest = TF.configuration . defaultRequest
 
 class HasDirectory a b | a -> b where
     directory :: P.Lens' a b
@@ -664,6 +696,12 @@ class HasHostPort a b | a -> b where
 instance HasHostPort a b => HasHostPort (TF.Schema l p a) b where
     hostPort = TF.configuration . hostPort
 
+class HasHostname a b | a -> b where
+    hostname :: P.Lens' a b
+
+instance HasHostname a b => HasHostname (TF.Schema l p a) b where
+    hostname = TF.configuration . hostname
+
 class HasHttpGet a b | a -> b where
     httpGet :: P.Lens' a b
 
@@ -682,11 +720,23 @@ class HasImage a b | a -> b where
 instance HasImage a b => HasImage (TF.Schema l p a) b where
     image = TF.configuration . image
 
+class HasImagePullPolicy a b | a -> b where
+    imagePullPolicy :: P.Lens' a b
+
+instance HasImagePullPolicy a b => HasImagePullPolicy (TF.Schema l p a) b where
+    imagePullPolicy = TF.configuration . imagePullPolicy
+
 class HasImagePullSecret a b | a -> b where
     imagePullSecret :: P.Lens' a b
 
 instance HasImagePullSecret a b => HasImagePullSecret (TF.Schema l p a) b where
     imagePullSecret = TF.configuration . imagePullSecret
+
+class HasImagePullSecrets a b | a -> b where
+    imagePullSecrets :: P.Lens' a b
+
+instance HasImagePullSecrets a b => HasImagePullSecrets (TF.Schema l p a) b where
+    imagePullSecrets = TF.configuration . imagePullSecrets
 
 class HasInitContainer a b | a -> b where
     initContainer :: P.Lens' a b
@@ -735,6 +785,12 @@ class HasKey a b | a -> b where
 
 instance HasKey a b => HasKey (TF.Schema l p a) b where
     key = TF.configuration . key
+
+class HasKeyring a b | a -> b where
+    keyring :: P.Lens' a b
+
+instance HasKeyring a b => HasKeyring (TF.Schema l p a) b where
+    keyring = TF.configuration . keyring
 
 class HasKind a b | a -> b where
     kind :: P.Lens' a b
@@ -838,6 +894,12 @@ class HasMedium a b | a -> b where
 instance HasMedium a b => HasMedium (TF.Schema l p a) b where
     medium = TF.configuration . medium
 
+class HasMemory a b | a -> b where
+    memory :: P.Lens' a b
+
+instance HasMemory a b => HasMemory (TF.Schema l p a) b where
+    memory = TF.configuration . memory
+
 class HasMetadata a b | a -> b where
     metadata :: P.Lens' a b
 
@@ -897,6 +959,18 @@ class HasNfs a b | a -> b where
 
 instance HasNfs a b => HasNfs (TF.Schema l p a) b where
     nfs = TF.configuration . nfs
+
+class HasNodeName a b | a -> b where
+    nodeName :: P.Lens' a b
+
+instance HasNodeName a b => HasNodeName (TF.Schema l p a) b where
+    nodeName = TF.configuration . nodeName
+
+class HasNodePort a b | a -> b where
+    nodePort :: P.Lens' a b
+
+instance HasNodePort a b => HasNodePort (TF.Schema l p a) b where
+    nodePort = TF.configuration . nodePort
 
 class HasNodeSelector a b | a -> b where
     nodeSelector :: P.Lens' a b
@@ -1216,6 +1290,12 @@ class HasServer a b | a -> b where
 instance HasServer a b => HasServer (TF.Schema l p a) b where
     server = TF.configuration . server
 
+class HasServiceAccountName a b | a -> b where
+    serviceAccountName :: P.Lens' a b
+
+instance HasServiceAccountName a b => HasServiceAccountName (TF.Schema l p a) b where
+    serviceAccountName = TF.configuration . serviceAccountName
+
 class HasSessionAffinity a b | a -> b where
     sessionAffinity :: P.Lens' a b
 
@@ -1281,6 +1361,18 @@ class HasSupplementalGroups a b | a -> b where
 
 instance HasSupplementalGroups a b => HasSupplementalGroups (TF.Schema l p a) b where
     supplementalGroups = TF.configuration . supplementalGroups
+
+class HasTargetCpuUtilizationPercentage a b | a -> b where
+    targetCpuUtilizationPercentage :: P.Lens' a b
+
+instance HasTargetCpuUtilizationPercentage a b => HasTargetCpuUtilizationPercentage (TF.Schema l p a) b where
+    targetCpuUtilizationPercentage = TF.configuration . targetCpuUtilizationPercentage
+
+class HasTargetPort a b | a -> b where
+    targetPort :: P.Lens' a b
+
+instance HasTargetPort a b => HasTargetPort (TF.Schema l p a) b where
+    targetPort = TF.configuration . targetPort
 
 class HasTargetPortal a b | a -> b where
     targetPortal :: P.Lens' a b
@@ -1389,6 +1481,12 @@ class HasVolumeMount a b | a -> b where
 
 instance HasVolumeMount a b => HasVolumeMount (TF.Schema l p a) b where
     volumeMount = TF.configuration . volumeMount
+
+class HasVolumeName a b | a -> b where
+    volumeName :: P.Lens' a b
+
+instance HasVolumeName a b => HasVolumeName (TF.Schema l p a) b where
+    volumeName = TF.configuration . volumeName
 
 class HasVolumePath a b | a -> b where
     volumePath :: P.Lens' a b
