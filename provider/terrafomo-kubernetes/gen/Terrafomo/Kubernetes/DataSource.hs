@@ -34,10 +34,9 @@ import GHC.Base (($))
 
 import Terrafomo.Kubernetes.Settings
 
-import qualified Data.Hashable                 as P
-import qualified Data.HashMap.Strict           as P
-import qualified Data.HashMap.Strict           as Map
 import qualified Data.List.NonEmpty            as P
+import qualified Data.Map.Strict               as P
+import qualified Data.Map.Strict               as Map
 import qualified Data.Maybe                    as P
 import qualified Data.Monoid                   as P
 import qualified Data.Text                     as P
@@ -58,18 +57,18 @@ import qualified Terrafomo.Validator           as TF
 -- See the <https://www.terraform.io/docs/providers/kubernetes/d/service.html terraform documentation>
 -- for more information.
 data ServiceData s = ServiceData'
-    { _metadata :: TF.Attr s (ServiceMetadata s)
+    { _metadata :: TF.Attr s (MetadataSetting s)
     -- ^ @metadata@ - (Required)
     -- Standard service's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 serviceData
-    :: TF.Attr s (ServiceMetadata s) -- ^ @metadata@ - 'P.metadata'
+    :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> P.DataSource (ServiceData s)
 serviceData _metadata =
-    TF.newDataSource "kubernetes_service" TF.validator $
+    TF.unsafeDataSource "kubernetes_service" P.defaultProvider TF.validator $
         ServiceData'
             { _metadata = _metadata
             }
@@ -83,21 +82,21 @@ instance TF.IsValid (ServiceData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_metadata"
                   (_metadata
-                      :: ServiceData s -> TF.Attr s (ServiceMetadata s))
+                      :: ServiceData s -> TF.Attr s (MetadataSetting s))
                   TF.validator
 
-instance P.HasMetadata (ServiceData s) (TF.Attr s (ServiceMetadata s)) where
+instance P.HasMetadata (ServiceData s) (TF.Attr s (MetadataSetting s)) where
     metadata =
-        P.lens (_metadata :: ServiceData s -> TF.Attr s (ServiceMetadata s))
+        P.lens (_metadata :: ServiceData s -> TF.Attr s (MetadataSetting s))
                (\s a -> s { _metadata = a } :: ServiceData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedLoadBalancerIngress (TF.Ref s' (ServiceData s)) (TF.Attr s [TF.Attr s (ServiceLoadBalancerIngress s)]) where
+instance s ~ s' => P.HasComputedLoadBalancerIngress (TF.Ref s' (ServiceData s)) (TF.Attr s [TF.Attr s (LoadBalancerIngressSetting s)]) where
     computedLoadBalancerIngress x = TF.compute (TF.refKey x) "load_balancer_ingress"
 
-instance s ~ s' => P.HasComputedSpec (TF.Ref s' (ServiceData s)) (TF.Attr s (ServiceSpec s)) where
+instance s ~ s' => P.HasComputedSpec (TF.Ref s' (ServiceData s)) (TF.Attr s (SpecSetting s)) where
     computedSpec x = TF.compute (TF.refKey x) "spec"
 
 -- | @kubernetes_storage_class@ DataSource.
@@ -105,18 +104,18 @@ instance s ~ s' => P.HasComputedSpec (TF.Ref s' (ServiceData s)) (TF.Attr s (Ser
 -- See the <https://www.terraform.io/docs/providers/kubernetes/d/storage_class.html terraform documentation>
 -- for more information.
 data StorageClassData s = StorageClassData'
-    { _metadata :: TF.Attr s (StorageClassMetadata s)
+    { _metadata :: TF.Attr s (MetadataSetting s)
     -- ^ @metadata@ - (Required)
     -- Standard storage class's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 storageClassData
-    :: TF.Attr s (StorageClassMetadata s) -- ^ @metadata@ - 'P.metadata'
+    :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> P.DataSource (StorageClassData s)
 storageClassData _metadata =
-    TF.newDataSource "kubernetes_storage_class" TF.validator $
+    TF.unsafeDataSource "kubernetes_storage_class" P.defaultProvider TF.validator $
         StorageClassData'
             { _metadata = _metadata
             }
@@ -130,18 +129,18 @@ instance TF.IsValid (StorageClassData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_metadata"
                   (_metadata
-                      :: StorageClassData s -> TF.Attr s (StorageClassMetadata s))
+                      :: StorageClassData s -> TF.Attr s (MetadataSetting s))
                   TF.validator
 
-instance P.HasMetadata (StorageClassData s) (TF.Attr s (StorageClassMetadata s)) where
+instance P.HasMetadata (StorageClassData s) (TF.Attr s (MetadataSetting s)) where
     metadata =
-        P.lens (_metadata :: StorageClassData s -> TF.Attr s (StorageClassMetadata s))
+        P.lens (_metadata :: StorageClassData s -> TF.Attr s (MetadataSetting s))
                (\s a -> s { _metadata = a } :: StorageClassData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageClassData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedParameters (TF.Ref s' (StorageClassData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedParameters (TF.Ref s' (StorageClassData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedParameters x = TF.compute (TF.refKey x) "parameters"
 
 instance s ~ s' => P.HasComputedStorageProvisioner (TF.Ref s' (StorageClassData s)) (TF.Attr s P.Text) where

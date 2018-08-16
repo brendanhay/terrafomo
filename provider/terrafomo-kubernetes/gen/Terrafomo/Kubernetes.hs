@@ -12,11 +12,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Kubernetes
-    ( module Terrafomo.Kubernetes.Settings
+    ( module Terrafomo.Kubernetes.DataSource
     , module Terrafomo.Kubernetes.Lens
-    , module Terrafomo.Kubernetes.Resource
     , module Terrafomo.Kubernetes.Provider
-    , module Terrafomo.Kubernetes.DataSource
+    , module Terrafomo.Kubernetes.Resource
+    , module Terrafomo.Kubernetes.Settings
     , module Terrafomo.Kubernetes.Types
     -- * Provider Aliases
     ) where
