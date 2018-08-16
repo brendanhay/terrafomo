@@ -263,8 +263,8 @@ data DirectoryData s = DirectoryData'
 
 -- | Define a new @ignition_directory@ datasource value.
 directoryData
-    :: TF.Attr s P.Text -- ^ @filesystem@ - 'P.filesystem'
-    -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
+    :: TF.Attr s P.Text -- ^ @filesystem@ ('P._filesystem', 'P.filesystem')
+    -> TF.Attr s P.Text -- ^ @path@ ('P._path', 'P.path')
     -> P.DataSource (DirectoryData s)
 directoryData _filesystem _path =
     TF.unsafeDataSource "ignition_directory" TF.validator $
@@ -334,7 +334,7 @@ data DiskData s = DiskData'
 
 -- | Define a new @ignition_disk@ datasource value.
 diskData
-    :: TF.Attr s P.Text -- ^ @device@ - 'P.device'
+    :: TF.Attr s P.Text -- ^ @device@ ('P._device', 'P.device')
     -> P.DataSource (DiskData s)
 diskData _device =
     TF.unsafeDataSource "ignition_disk" TF.validator $
@@ -402,8 +402,8 @@ data FileData s = FileData'
 
 -- | Define a new @ignition_file@ datasource value.
 fileData
-    :: TF.Attr s P.Text -- ^ @filesystem@ - 'P.filesystem'
-    -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
+    :: TF.Attr s P.Text -- ^ @filesystem@ ('P._filesystem', 'P.filesystem')
+    -> TF.Attr s P.Text -- ^ @path@ ('P._path', 'P.path')
     -> P.DataSource (FileData s)
 fileData _filesystem _path =
     TF.unsafeDataSource "ignition_file" TF.validator $
@@ -554,7 +554,7 @@ data GroupData s = GroupData'
 
 -- | Define a new @ignition_group@ datasource value.
 groupData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (GroupData s)
 groupData _name =
     TF.unsafeDataSource "ignition_group" TF.validator $
@@ -619,9 +619,9 @@ data LinkData s = LinkData'
 
 -- | Define a new @ignition_link@ datasource value.
 linkData
-    :: TF.Attr s P.Text -- ^ @filesystem@ - 'P.filesystem'
-    -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
-    -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
+    :: TF.Attr s P.Text -- ^ @filesystem@ ('P._filesystem', 'P.filesystem')
+    -> TF.Attr s P.Text -- ^ @path@ ('P._path', 'P.path')
+    -> TF.Attr s P.Text -- ^ @target@ ('P._target', 'P.target')
     -> P.DataSource (LinkData s)
 linkData _filesystem _path _target =
     TF.unsafeDataSource "ignition_link" TF.validator $
@@ -695,7 +695,7 @@ data NetworkdUnitData s = NetworkdUnitData'
 
 -- | Define a new @ignition_networkd_unit@ datasource value.
 networkdUnitData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (NetworkdUnitData s)
 networkdUnitData _name =
     TF.unsafeDataSource "ignition_networkd_unit" TF.validator $
@@ -747,8 +747,8 @@ data RaidData s = RaidData'
 
 -- | Define a new @ignition_raid@ datasource value.
 raidData
-    :: TF.Attr s P.Text -- ^ @level@ - 'P.level'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @level@ ('P._level', 'P.level')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (RaidData s)
 raidData _level _name =
     TF.unsafeDataSource "ignition_raid" TF.validator $
@@ -817,7 +817,7 @@ data SystemdUnitData s = SystemdUnitData'
 
 -- | Define a new @ignition_systemd_unit@ datasource value.
 systemdUnitData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (SystemdUnitData s)
 systemdUnitData _name =
     TF.unsafeDataSource "ignition_systemd_unit" TF.validator $
@@ -917,7 +917,7 @@ data UserData s = UserData'
 
 -- | Define a new @ignition_user@ datasource value.
 userData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (UserData s)
 userData _name =
     TF.unsafeDataSource "ignition_user" TF.validator $

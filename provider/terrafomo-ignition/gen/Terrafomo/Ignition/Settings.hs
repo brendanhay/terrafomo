@@ -80,7 +80,7 @@ data AppendSetting s = AppendSetting'
 
 -- | Construct a new @append@ settings value.
 newAppendSetting
-    :: TF.Attr s P.Text -- ^ @source@ - 'P.source'
+    :: TF.Attr s P.Text -- ^ 'P._source': @source@
     -> AppendSetting s
 newAppendSetting _source =
     AppendSetting'
@@ -120,7 +120,7 @@ data ContentSetting s = ContentSetting'
 
 -- | Construct a new @content@ settings value.
 newContentSetting
-    :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
+    :: TF.Attr s P.Text -- ^ 'P._content': @content@
     -> ContentSetting s
 newContentSetting _content =
     ContentSetting'
@@ -160,7 +160,7 @@ data DropinSetting s = DropinSetting'
 
 -- | Construct a new @dropin@ settings value.
 newDropinSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> DropinSetting s
 newDropinSetting _name =
     DropinSetting'
@@ -212,8 +212,8 @@ data MountSetting s = MountSetting'
 
 -- | Construct a new @mount@ settings value.
 newMountSetting
-    :: TF.Attr s P.Text -- ^ @device@ - 'P.device'
-    -> TF.Attr s P.Text -- ^ @format@ - 'P.format'
+    :: TF.Attr s P.Text -- ^ 'P._device': @device@
+    -> TF.Attr s P.Text -- ^ 'P._format': @format@
     -> MountSetting s
 newMountSetting _device _format =
     MountSetting'
@@ -350,7 +350,7 @@ data ReplaceSetting s = ReplaceSetting'
 
 -- | Construct a new @replace@ settings value.
 newReplaceSetting
-    :: TF.Attr s P.Text -- ^ @source@ - 'P.source'
+    :: TF.Attr s P.Text -- ^ 'P._source': @source@
     -> ReplaceSetting s
 newReplaceSetting _source =
     ReplaceSetting'
