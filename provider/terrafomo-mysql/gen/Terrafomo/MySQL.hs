@@ -12,11 +12,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.MySQL
-    ( module Terrafomo.MySQL.Types
-    , module Terrafomo.MySQL.Settings
-    , module Terrafomo.MySQL.Lens
-    , module Terrafomo.MySQL.Resource
+    ( module Terrafomo.MySQL.Lens
     , module Terrafomo.MySQL.Provider
+    , module Terrafomo.MySQL.Resource
+    , module Terrafomo.MySQL.Settings
+    , module Terrafomo.MySQL.Types
     -- * Provider Aliases
     ) where
 

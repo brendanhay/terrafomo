@@ -38,10 +38,9 @@ import GHC.Base (($))
 
 import Terrafomo.MySQL.Settings
 
-import qualified Data.Hashable            as P
-import qualified Data.HashMap.Strict      as P
-import qualified Data.HashMap.Strict      as Map
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Map.Strict          as P
+import qualified Data.Map.Strict          as Map
 import qualified Data.Maybe               as P
 import qualified Data.Monoid              as P
 import qualified Data.Text                as P
@@ -71,13 +70,13 @@ data DatabaseResource s = DatabaseResource'
     , _name                :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 databaseResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DatabaseResource s)
 databaseResource _name =
-    TF.newResource "mysql_database" TF.validator $
+    TF.unsafeResource "mysql_database" P.defaultProvider TF.validator $
         DatabaseResource'
             { _defaultCharacterSet = TF.value "utf8"
             , _defaultCollation = TF.value "utf8_general_ci"
@@ -129,7 +128,7 @@ data GrantResource s = GrantResource'
     , _user       :: TF.Attr s P.Text
     -- ^ @user@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 grantResource
     :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
@@ -137,7 +136,7 @@ grantResource
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
     -> P.Resource (GrantResource s)
 grantResource _database _privileges _user =
-    TF.newResource "mysql_grant" TF.validator $
+    TF.unsafeResource "mysql_grant" P.defaultProvider TF.validator $
         GrantResource'
             { _database = _database
             , _grant = TF.value P.False
@@ -206,13 +205,13 @@ data UserResource s = UserResource'
     , _user              :: TF.Attr s P.Text
     -- ^ @user@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 userResource
     :: TF.Attr s P.Text -- ^ @user@ - 'P.user'
     -> P.Resource (UserResource s)
 userResource _user =
-    TF.newResource "mysql_user" TF.validator $
+    TF.unsafeResource "mysql_user" P.defaultProvider TF.validator $
         UserResource'
             { _authPlugin = TF.Nil
             , _host = TF.value "localhost"
