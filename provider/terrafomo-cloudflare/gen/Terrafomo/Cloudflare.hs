@@ -13,11 +13,11 @@
 --
 module Terrafomo.Cloudflare
     ( module Terrafomo.Cloudflare.DataSource
+    , module Terrafomo.Cloudflare.Lens
     , module Terrafomo.Cloudflare.Provider
     , module Terrafomo.Cloudflare.Resource
-    , module Terrafomo.Cloudflare.Types
-    , module Terrafomo.Cloudflare.Lens
     , module Terrafomo.Cloudflare.Settings
+    , module Terrafomo.Cloudflare.Types
     -- * Provider Aliases
     ) where
 

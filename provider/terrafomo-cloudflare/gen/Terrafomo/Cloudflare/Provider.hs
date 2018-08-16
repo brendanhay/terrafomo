@@ -20,6 +20,7 @@ module Terrafomo.Cloudflare.Provider
     -- * Cloudflare Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * Cloudflare Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.Cloudflare.Settings
 
-import qualified Data.Hashable              as P
-import qualified Data.HashMap.Strict        as P
-import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Map.Strict            as P
+import qualified Data.Map.Strict            as Map
 import qualified Data.Maybe                 as P
 import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
@@ -70,11 +70,11 @@ data Provider = Provider'
     -- ^ @email@ - (Required)
     -- A registered Cloudflare email address.
     --
-    , _maxBackoff       :: P.Maybe P.Integer
+    , _maxBackoff       :: P.Maybe P.Int
     -- ^ @max_backoff@ - (Optional)
     -- Maximum backoff period in seconds after failed API calls
     --
-    , _minBackoff       :: P.Maybe P.Integer
+    , _minBackoff       :: P.Maybe P.Int
     -- ^ @min_backoff@ - (Optional)
     -- Minimum backoff period in seconds after failed API calls
     --
@@ -83,11 +83,11 @@ data Provider = Provider'
     -- Configure API client to always use that organization. If set this will
     -- override 'user_owner_from_zone'
     --
-    , _retries          :: P.Maybe P.Integer
+    , _retries          :: P.Maybe P.Int
     -- ^ @retries@ - (Optional)
     -- Maximum number of retries to perform when an API request fails
     --
-    , _rps              :: P.Maybe P.Integer
+    , _rps              :: P.Maybe P.Int
     -- ^ @rps@ - (Optional)
     -- RPS limit to apply when making calls to the API
     --
@@ -100,7 +100,7 @@ data Provider = Provider'
     -- If specified zone is owned by an organization, configure API client to
     -- always use that organization
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: P.Text -- ^ @email@ - 'P.email'
@@ -119,29 +119,26 @@ newProvider _email _token =
         , _useOrgFromZone = P.Nothing
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "api_client_logging" <$> _apiClientLogging
-                  , P.Just $ TF.assign "email" _email
-                  , TF.assign "max_backoff" <$> _maxBackoff
-                  , TF.assign "min_backoff" <$> _minBackoff
-                  , TF.assign "org_id" <$> _orgId
-                  , TF.assign "retries" <$> _retries
-                  , TF.assign "rps" <$> _rps
-                  , P.Just $ TF.assign "token" _token
-                  , TF.assign "use_org_from_zone" <$> _useOrgFromZone
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  TF.assign "api_client_logging" <$> _apiClientLogging
+        ,  P.Just $ TF.assign "email" _email
+        ,  TF.assign "max_backoff" <$> _maxBackoff
+        ,  TF.assign "min_backoff" <$> _minBackoff
+        ,  TF.assign "org_id" <$> _orgId
+        ,  TF.assign "retries" <$> _retries
+        ,  TF.assign "rps" <$> _rps
+        ,  P.Just $ TF.assign "token" _token
+        ,  TF.assign "use_org_from_zone" <$> _useOrgFromZone
+        ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
@@ -156,14 +153,14 @@ instance P.HasEmail (Provider) (P.Text) where
         P.lens (_email :: Provider -> P.Text)
                (\s a -> s { _email = a } :: Provider)
 
-instance P.HasMaxBackoff (Provider) (P.Maybe P.Integer) where
+instance P.HasMaxBackoff (Provider) (P.Maybe P.Int) where
     maxBackoff =
-        P.lens (_maxBackoff :: Provider -> P.Maybe P.Integer)
+        P.lens (_maxBackoff :: Provider -> P.Maybe P.Int)
                (\s a -> s { _maxBackoff = a } :: Provider)
 
-instance P.HasMinBackoff (Provider) (P.Maybe P.Integer) where
+instance P.HasMinBackoff (Provider) (P.Maybe P.Int) where
     minBackoff =
-        P.lens (_minBackoff :: Provider -> P.Maybe P.Integer)
+        P.lens (_minBackoff :: Provider -> P.Maybe P.Int)
                (\s a -> s { _minBackoff = a } :: Provider)
 
 instance P.HasOrgId (Provider) (P.Maybe P.Text) where
@@ -171,14 +168,14 @@ instance P.HasOrgId (Provider) (P.Maybe P.Text) where
         P.lens (_orgId :: Provider -> P.Maybe P.Text)
                (\s a -> s { _orgId = a } :: Provider)
 
-instance P.HasRetries (Provider) (P.Maybe P.Integer) where
+instance P.HasRetries (Provider) (P.Maybe P.Int) where
     retries =
-        P.lens (_retries :: Provider -> P.Maybe P.Integer)
+        P.lens (_retries :: Provider -> P.Maybe P.Int)
                (\s a -> s { _retries = a } :: Provider)
 
-instance P.HasRps (Provider) (P.Maybe P.Integer) where
+instance P.HasRps (Provider) (P.Maybe P.Int) where
     rps =
-        P.lens (_rps :: Provider -> P.Maybe P.Integer)
+        P.lens (_rps :: Provider -> P.Maybe P.Int)
                (\s a -> s { _rps = a } :: Provider)
 
 instance P.HasToken (Provider) (P.Text) where
