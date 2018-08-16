@@ -6312,10 +6312,10 @@ data SubnetResource s = SubnetResource'
     { _assignIpv6AddressOnCreation :: TF.Attr s P.Bool
     -- ^ @assign_ipv6_address_on_creation@ - (Optional)
     --
-    , _availabilityZone :: TF.Attr s P.Text
+    , _availabilityZone :: TF.Attr s P.Zone
     -- ^ @availability_zone@ - (Optional, Forces New)
     --
-    , _cidrBlock :: TF.Attr s P.Text
+    , _cidrBlock :: TF.Attr s P.IPRange
     -- ^ @cidr_block@ - (Required, Forces New)
     --
     , _ipv6CidrBlock :: TF.Attr s P.Text
@@ -6334,7 +6334,7 @@ data SubnetResource s = SubnetResource'
 
 -- | Define a new @aws_subnet@ resource value.
 subnetResource
-    :: TF.Attr s P.Text -- ^ @cidr_block@ ('P._cidrBlock', 'P.cidrBlock')
+    :: TF.Attr s P.IPRange -- ^ @cidr_block@ ('P._cidrBlock', 'P.cidrBlock')
     -> TF.Attr s P.Text -- ^ @vpc_id@ ('P._vpcId', 'P.vpcId')
     -> P.Resource (SubnetResource s)
 subnetResource _cidrBlock _vpcId =
@@ -6368,14 +6368,14 @@ instance P.HasAssignIpv6AddressOnCreation (SubnetResource s) (TF.Attr s P.Bool) 
         P.lens (_assignIpv6AddressOnCreation :: SubnetResource s -> TF.Attr s P.Bool)
                (\s a -> s { _assignIpv6AddressOnCreation = a } :: SubnetResource s)
 
-instance P.HasAvailabilityZone (SubnetResource s) (TF.Attr s P.Text) where
+instance P.HasAvailabilityZone (SubnetResource s) (TF.Attr s P.Zone) where
     availabilityZone =
-        P.lens (_availabilityZone :: SubnetResource s -> TF.Attr s P.Text)
+        P.lens (_availabilityZone :: SubnetResource s -> TF.Attr s P.Zone)
                (\s a -> s { _availabilityZone = a } :: SubnetResource s)
 
-instance P.HasCidrBlock (SubnetResource s) (TF.Attr s P.Text) where
+instance P.HasCidrBlock (SubnetResource s) (TF.Attr s P.IPRange) where
     cidrBlock =
-        P.lens (_cidrBlock :: SubnetResource s -> TF.Attr s P.Text)
+        P.lens (_cidrBlock :: SubnetResource s -> TF.Attr s P.IPRange)
                (\s a -> s { _cidrBlock = a } :: SubnetResource s)
 
 instance P.HasIpv6CidrBlock (SubnetResource s) (TF.Attr s P.Text) where
@@ -6582,7 +6582,7 @@ data VpcResource s = VpcResource'
     { _assignGeneratedIpv6CidrBlock :: TF.Attr s P.Bool
     -- ^ @assign_generated_ipv6_cidr_block@ - (Optional)
     --
-    , _cidrBlock :: TF.Attr s P.Text
+    , _cidrBlock :: TF.Attr s P.IPRange
     -- ^ @cidr_block@ - (Required, Forces New)
     --
     , _enableClassiclink :: TF.Attr s P.Bool
@@ -6607,7 +6607,7 @@ data VpcResource s = VpcResource'
 
 -- | Define a new @aws_vpc@ resource value.
 vpcResource
-    :: TF.Attr s P.Text -- ^ @cidr_block@ ('P._cidrBlock', 'P.cidrBlock')
+    :: TF.Attr s P.IPRange -- ^ @cidr_block@ ('P._cidrBlock', 'P.cidrBlock')
     -> P.Resource (VpcResource s)
 vpcResource _cidrBlock =
     TF.unsafeResource "aws_vpc" TF.validator $
@@ -6642,9 +6642,9 @@ instance P.HasAssignGeneratedIpv6CidrBlock (VpcResource s) (TF.Attr s P.Bool) wh
         P.lens (_assignGeneratedIpv6CidrBlock :: VpcResource s -> TF.Attr s P.Bool)
                (\s a -> s { _assignGeneratedIpv6CidrBlock = a } :: VpcResource s)
 
-instance P.HasCidrBlock (VpcResource s) (TF.Attr s P.Text) where
+instance P.HasCidrBlock (VpcResource s) (TF.Attr s P.IPRange) where
     cidrBlock =
-        P.lens (_cidrBlock :: VpcResource s -> TF.Attr s P.Text)
+        P.lens (_cidrBlock :: VpcResource s -> TF.Attr s P.IPRange)
                (\s a -> s { _cidrBlock = a } :: VpcResource s)
 
 instance P.HasEnableClassiclink (VpcResource s) (TF.Attr s P.Bool) where

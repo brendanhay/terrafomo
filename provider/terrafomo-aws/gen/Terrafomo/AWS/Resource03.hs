@@ -12858,10 +12858,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (RedshiftSubnetGroupResource s)) (
 -- See the <https://www.terraform.io/docs/providers/aws/r/route.html terraform documentation>
 -- for more information.
 data RouteResource s = RouteResource'
-    { _destinationCidrBlock     :: TF.Attr s P.Text
+    { _destinationCidrBlock     :: TF.Attr s P.IPRange
     -- ^ @destination_cidr_block@ - (Optional, Forces New)
     --
-    , _destinationIpv6CidrBlock :: TF.Attr s P.Text
+    , _destinationIpv6CidrBlock :: TF.Attr s P.IPRange
     -- ^ @destination_ipv6_cidr_block@ - (Optional, Forces New)
     --
     , _egressOnlyGatewayId      :: TF.Attr s P.Text
@@ -12921,14 +12921,14 @@ instance TF.IsObject (RouteResource s) where
 instance TF.IsValid (RouteResource s) where
     validator = P.mempty
 
-instance P.HasDestinationCidrBlock (RouteResource s) (TF.Attr s P.Text) where
+instance P.HasDestinationCidrBlock (RouteResource s) (TF.Attr s P.IPRange) where
     destinationCidrBlock =
-        P.lens (_destinationCidrBlock :: RouteResource s -> TF.Attr s P.Text)
+        P.lens (_destinationCidrBlock :: RouteResource s -> TF.Attr s P.IPRange)
                (\s a -> s { _destinationCidrBlock = a } :: RouteResource s)
 
-instance P.HasDestinationIpv6CidrBlock (RouteResource s) (TF.Attr s P.Text) where
+instance P.HasDestinationIpv6CidrBlock (RouteResource s) (TF.Attr s P.IPRange) where
     destinationIpv6CidrBlock =
-        P.lens (_destinationIpv6CidrBlock :: RouteResource s -> TF.Attr s P.Text)
+        P.lens (_destinationIpv6CidrBlock :: RouteResource s -> TF.Attr s P.IPRange)
                (\s a -> s { _destinationIpv6CidrBlock = a } :: RouteResource s)
 
 instance P.HasEgressOnlyGatewayId (RouteResource s) (TF.Attr s P.Text) where
