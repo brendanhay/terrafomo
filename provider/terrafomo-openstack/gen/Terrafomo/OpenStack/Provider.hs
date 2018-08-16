@@ -17,10 +17,11 @@
 --
 module Terrafomo.OpenStack.Provider
     (
+    -- * OpenStack Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** OpenStack Specific Aliases
+    -- * OpenStack Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -188,7 +189,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "openstack"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ TF.assign "auth_url" <$> _authUrl
             , TF.assign "cacert_file" <$> _cacertFile

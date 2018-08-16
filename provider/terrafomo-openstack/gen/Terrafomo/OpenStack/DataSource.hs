@@ -230,7 +230,7 @@ data ComputeKeypairV2Data s = ComputeKeypairV2Data'
 
 -- | Define a new @openstack_compute_keypair_v2@ datasource value.
 computeKeypairV2Data
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ComputeKeypairV2Data s)
 computeKeypairV2Data _name =
     TF.unsafeDataSource "openstack_compute_keypair_v2" TF.validator $
@@ -450,7 +450,7 @@ data IdentityAuthScopeV3Data s = IdentityAuthScopeV3Data'
 
 -- | Define a new @openstack_identity_auth_scope_v3@ datasource value.
 identityAuthScopeV3Data
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (IdentityAuthScopeV3Data s)
 identityAuthScopeV3Data _name =
     TF.unsafeDataSource "openstack_identity_auth_scope_v3" TF.validator $
@@ -577,7 +577,7 @@ data IdentityGroupV3Data s = IdentityGroupV3Data'
 
 -- | Define a new @openstack_identity_group_v3@ datasource value.
 identityGroupV3Data
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (IdentityGroupV3Data s)
 identityGroupV3Data _name =
     TF.unsafeDataSource "openstack_identity_group_v3" TF.validator $
@@ -693,7 +693,7 @@ data IdentityRoleV3Data s = IdentityRoleV3Data'
 
 -- | Define a new @openstack_identity_role_v3@ datasource value.
 identityRoleV3Data
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (IdentityRoleV3Data s)
 identityRoleV3Data _name =
     TF.unsafeDataSource "openstack_identity_role_v3" TF.validator $

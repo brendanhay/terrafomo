@@ -144,8 +144,8 @@ data AllocationPoolsSetting s = AllocationPoolsSetting'
 
 -- | Construct a new @allocation_pools@ settings value.
 newAllocationPoolsSetting
-    :: TF.Attr s P.Text -- ^ @end@ - 'P.end'
-    -> TF.Attr s P.Text -- ^ @start@ - 'P.start'
+    :: TF.Attr s P.Text -- ^ 'P._end': @end@
+    -> TF.Attr s P.Text -- ^ 'P._start': @start@
     -> AllocationPoolsSetting s
 newAllocationPoolsSetting _end _start =
     AllocationPoolsSetting'
@@ -191,7 +191,7 @@ data AllowedAddressPairsSetting s = AllowedAddressPairsSetting'
 
 -- | Construct a new @allowed_address_pairs@ settings value.
 newAllowedAddressPairsSetting
-    :: TF.Attr s P.Text -- ^ @ip_address@ - 'P.ipAddress'
+    :: TF.Attr s P.Text -- ^ 'P._ipAddress': @ip_address@
     -> AllowedAddressPairsSetting s
 newAllowedAddressPairsSetting _ipAddress =
     AllowedAddressPairsSetting'
@@ -272,7 +272,7 @@ data BlockDeviceSetting s = BlockDeviceSetting'
 
 -- | Construct a new @block_device@ settings value.
 newBlockDeviceSetting
-    :: TF.Attr s P.Text -- ^ @source_type@ - 'P.sourceType'
+    :: TF.Attr s P.Text -- ^ 'P._sourceType': @source_type@
     -> BlockDeviceSetting s
 newBlockDeviceSetting _sourceType =
     BlockDeviceSetting'
@@ -347,8 +347,8 @@ data ConfigurationSetting s = ConfigurationSetting'
 
 -- | Construct a new @configuration@ settings value.
 newConfigurationSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> ConfigurationSetting s
 newConfigurationSetting _name _value =
     ConfigurationSetting'
@@ -391,7 +391,7 @@ data DatabaseSetting s = DatabaseSetting'
 
 -- | Construct a new @database@ settings value.
 newDatabaseSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> DatabaseSetting s
 newDatabaseSetting _name =
     DatabaseSetting'
@@ -438,8 +438,8 @@ data DatastoreSetting s = DatastoreSetting'
 
 -- | Construct a new @datastore@ settings value.
 newDatastoreSetting
-    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Attr s P.Text -- ^ @version@ - 'P.version'
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
+    -> TF.Attr s P.Text -- ^ 'P._version': @version@
     -> DatastoreSetting s
 newDatastoreSetting _type' _version =
     DatastoreSetting'
@@ -544,7 +544,7 @@ data FixedIpSetting s = FixedIpSetting'
 
 -- | Construct a new @fixed_ip@ settings value.
 newFixedIpSetting
-    :: TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
+    :: TF.Attr s P.Text -- ^ 'P._subnetId': @subnet_id@
     -> FixedIpSetting s
 newFixedIpSetting _subnetId =
     FixedIpSetting'
@@ -584,8 +584,8 @@ data HostRoutesSetting s = HostRoutesSetting'
 
 -- | Construct a new @host_routes@ settings value.
 newHostRoutesSetting
-    :: TF.Attr s P.Text -- ^ @destination_cidr@ - 'P.destinationCidr'
-    -> TF.Attr s P.Text -- ^ @next_hop@ - 'P.nextHop'
+    :: TF.Attr s P.Text -- ^ 'P._destinationCidr': @destination_cidr@
+    -> TF.Attr s P.Text -- ^ 'P._nextHop': @next_hop@
     -> HostRoutesSetting s
 newHostRoutesSetting _destinationCidr _nextHop =
     HostRoutesSetting'
@@ -651,7 +651,7 @@ data MultiFactorAuthRuleSetting s = MultiFactorAuthRuleSetting'
 
 -- | Construct a new @multi_factor_auth_rule@ settings value.
 newMultiFactorAuthRuleSetting
-    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @rule@ - 'P.rule'
+    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ 'P._rule': @rule@
     -> MultiFactorAuthRuleSetting s
 newMultiFactorAuthRuleSetting _rule =
     MultiFactorAuthRuleSetting'
@@ -774,7 +774,7 @@ data PersistenceSetting s = PersistenceSetting'
 
 -- | Construct a new @persistence@ settings value.
 newPersistenceSetting
-    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> PersistenceSetting s
 newPersistenceSetting _type' =
     PersistenceSetting'
@@ -814,8 +814,8 @@ data PersonalitySetting s = PersonalitySetting'
 
 -- | Construct a new @personality@ settings value.
 newPersonalitySetting
-    :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
-    -> TF.Attr s P.Text -- ^ @file@ - 'P.file'
+    :: TF.Attr s P.Text -- ^ 'P._content': @content@
+    -> TF.Attr s P.Text -- ^ 'P._file': @file@
     -> PersonalitySetting s
 newPersonalitySetting _content _file =
     PersonalitySetting'
@@ -890,9 +890,9 @@ data RuleSetting s = RuleSetting'
 
 -- | Construct a new @rule@ settings value.
 newRuleSetting
-    :: TF.Attr s P.Int -- ^ @from_port@ - 'P.fromPort'
-    -> TF.Attr s P.Int -- ^ @to_port@ - 'P.toPort'
-    -> TF.Attr s P.Text -- ^ @ip_protocol@ - 'P.ipProtocol'
+    :: TF.Attr s P.Int -- ^ 'P._fromPort': @from_port@
+    -> TF.Attr s P.Int -- ^ 'P._toPort': @to_port@
+    -> TF.Attr s P.Text -- ^ 'P._ipProtocol': @ip_protocol@
     -> RuleSetting s
 newRuleSetting _fromPort _toPort _ipProtocol =
     RuleSetting'
@@ -1107,7 +1107,7 @@ data UserSetting s = UserSetting'
 
 -- | Construct a new @user@ settings value.
 newUserSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> UserSetting s
 newUserSetting _name =
     UserSetting'
@@ -1187,7 +1187,7 @@ data VolumeSetting s = VolumeSetting'
 
 -- | Construct a new @volume@ settings value.
 newVolumeSetting
-    :: TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
+    :: TF.Attr s P.Text -- ^ 'P._volumeId': @volume_id@
     -> VolumeSetting s
 newVolumeSetting _volumeId =
     VolumeSetting'

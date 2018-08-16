@@ -308,8 +308,8 @@ data BlockstorageVolumeAttachV2Resource s = BlockstorageVolumeAttachV2Resource'
 
 -- | Define a new @openstack_blockstorage_volume_attach_v2@ resource value.
 blockstorageVolumeAttachV2Resource
-    :: TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
-    -> TF.Attr s P.Text -- ^ @host_name@ - 'P.hostName'
+    :: TF.Attr s P.Text -- ^ @volume_id@ ('P._volumeId', 'P.volumeId')
+    -> TF.Attr s P.Text -- ^ @host_name@ ('P._hostName', 'P.hostName')
     -> P.Resource (BlockstorageVolumeAttachV2Resource s)
 blockstorageVolumeAttachV2Resource _volumeId _hostName =
     TF.unsafeResource "openstack_blockstorage_volume_attach_v2" TF.validator $
@@ -464,8 +464,8 @@ data BlockstorageVolumeAttachV3Resource s = BlockstorageVolumeAttachV3Resource'
 
 -- | Define a new @openstack_blockstorage_volume_attach_v3@ resource value.
 blockstorageVolumeAttachV3Resource
-    :: TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
-    -> TF.Attr s P.Text -- ^ @host_name@ - 'P.hostName'
+    :: TF.Attr s P.Text -- ^ @volume_id@ ('P._volumeId', 'P.volumeId')
+    -> TF.Attr s P.Text -- ^ @host_name@ ('P._hostName', 'P.hostName')
     -> P.Resource (BlockstorageVolumeAttachV3Resource s)
 blockstorageVolumeAttachV3Resource _volumeId _hostName =
     TF.unsafeResource "openstack_blockstorage_volume_attach_v3" TF.validator $
@@ -598,7 +598,7 @@ data BlockstorageVolumeV1Resource s = BlockstorageVolumeV1Resource'
 
 -- | Define a new @openstack_blockstorage_volume_v1@ resource value.
 blockstorageVolumeV1Resource
-    :: TF.Attr s P.Int -- ^ @size@ - 'P.size'
+    :: TF.Attr s P.Int -- ^ @size@ ('P._size', 'P.size')
     -> P.Resource (BlockstorageVolumeV1Resource s)
 blockstorageVolumeV1Resource _size =
     TF.unsafeResource "openstack_blockstorage_volume_v1" TF.validator $
@@ -705,7 +705,7 @@ data BlockstorageVolumeV2Resource s = BlockstorageVolumeV2Resource'
 
 -- | Define a new @openstack_blockstorage_volume_v2@ resource value.
 blockstorageVolumeV2Resource
-    :: TF.Attr s P.Int -- ^ @size@ - 'P.size'
+    :: TF.Attr s P.Int -- ^ @size@ ('P._size', 'P.size')
     -> P.Resource (BlockstorageVolumeV2Resource s)
 blockstorageVolumeV2Resource _size =
     TF.unsafeResource "openstack_blockstorage_volume_v2" TF.validator $
@@ -829,7 +829,7 @@ data BlockstorageVolumeV3Resource s = BlockstorageVolumeV3Resource'
 
 -- | Define a new @openstack_blockstorage_volume_v3@ resource value.
 blockstorageVolumeV3Resource
-    :: TF.Attr s P.Int -- ^ @size@ - 'P.size'
+    :: TF.Attr s P.Int -- ^ @size@ ('P._size', 'P.size')
     -> P.Resource (BlockstorageVolumeV3Resource s)
 blockstorageVolumeV3Resource _size =
     TF.unsafeResource "openstack_blockstorage_volume_v3" TF.validator $
@@ -957,10 +957,10 @@ data ComputeFlavorV2Resource s = ComputeFlavorV2Resource'
 
 -- | Define a new @openstack_compute_flavor_v2@ resource value.
 computeFlavorV2Resource
-    :: TF.Attr s P.Int -- ^ @disk@ - 'P.disk'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @ram@ - 'P.ram'
-    -> TF.Attr s P.Int -- ^ @vcpus@ - 'P.vcpus'
+    :: TF.Attr s P.Int -- ^ @disk@ ('P._disk', 'P.disk')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Int -- ^ @ram@ ('P._ram', 'P.ram')
+    -> TF.Attr s P.Int -- ^ @vcpus@ ('P._vcpus', 'P.vcpus')
     -> P.Resource (ComputeFlavorV2Resource s)
 computeFlavorV2Resource _disk _name _ram _vcpus =
     TF.unsafeResource "openstack_compute_flavor_v2" TF.validator $
@@ -1060,8 +1060,8 @@ data ComputeFloatingipAssociateV2Resource s = ComputeFloatingipAssociateV2Resour
 
 -- | Define a new @openstack_compute_floatingip_associate_v2@ resource value.
 computeFloatingipAssociateV2Resource
-    :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
-    -> TF.Attr s P.Text -- ^ @floating_ip@ - 'P.floatingIp'
+    :: TF.Attr s P.Text -- ^ @instance_id@ ('P._instanceId', 'P.instanceId')
+    -> TF.Attr s P.Text -- ^ @floating_ip@ ('P._floatingIp', 'P.floatingIp')
     -> P.Resource (ComputeFloatingipAssociateV2Resource s)
 computeFloatingipAssociateV2Resource _instanceId _floatingIp =
     TF.unsafeResource "openstack_compute_floatingip_associate_v2" TF.validator $
@@ -1121,7 +1121,7 @@ data ComputeFloatingipV2Resource s = ComputeFloatingipV2Resource'
 
 -- | Define a new @openstack_compute_floatingip_v2@ resource value.
 computeFloatingipV2Resource
-    :: TF.Attr s P.Text -- ^ @pool@ - 'P.pool'
+    :: TF.Attr s P.Text -- ^ @pool@ ('P._pool', 'P.pool')
     -> P.Resource (ComputeFloatingipV2Resource s)
 computeFloatingipV2Resource _pool =
     TF.unsafeResource "openstack_compute_floatingip_v2" TF.validator $
@@ -1208,7 +1208,7 @@ data ComputeInstanceV2Resource s = ComputeInstanceV2Resource'
 
 -- | Define a new @openstack_compute_instance_v2@ resource value.
 computeInstanceV2Resource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeInstanceV2Resource s)
 computeInstanceV2Resource _name =
     TF.unsafeResource "openstack_compute_instance_v2" TF.validator $
@@ -1371,7 +1371,7 @@ data ComputeKeypairV2Resource s = ComputeKeypairV2Resource'
 
 -- | Define a new @openstack_compute_keypair_v2@ resource value.
 computeKeypairV2Resource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeKeypairV2Resource s)
 computeKeypairV2Resource _name =
     TF.unsafeResource "openstack_compute_keypair_v2" TF.validator $
@@ -1429,8 +1429,8 @@ data ComputeSecgroupV2Resource s = ComputeSecgroupV2Resource'
 
 -- | Define a new @openstack_compute_secgroup_v2@ resource value.
 computeSecgroupV2Resource
-    :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeSecgroupV2Resource s)
 computeSecgroupV2Resource _description _name =
     TF.unsafeResource "openstack_compute_secgroup_v2" TF.validator $
@@ -1485,7 +1485,7 @@ data ComputeServergroupV2Resource s = ComputeServergroupV2Resource'
 
 -- | Define a new @openstack_compute_servergroup_v2@ resource value.
 computeServergroupV2Resource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeServergroupV2Resource s)
 computeServergroupV2Resource _name =
     TF.unsafeResource "openstack_compute_servergroup_v2" TF.validator $
@@ -1544,8 +1544,8 @@ data ComputeVolumeAttachV2Resource s = ComputeVolumeAttachV2Resource'
 
 -- | Define a new @openstack_compute_volume_attach_v2@ resource value.
 computeVolumeAttachV2Resource
-    :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
-    -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
+    :: TF.Attr s P.Text -- ^ @instance_id@ ('P._instanceId', 'P.instanceId')
+    -> TF.Attr s P.Text -- ^ @volume_id@ ('P._volumeId', 'P.volumeId')
     -> P.Resource (ComputeVolumeAttachV2Resource s)
 computeVolumeAttachV2Resource _instanceId _volumeId =
     TF.unsafeResource "openstack_compute_volume_attach_v2" TF.validator $
@@ -1606,10 +1606,10 @@ data DbConfigurationV1Resource s = DbConfigurationV1Resource'
 
 -- | Define a new @openstack_db_configuration_v1@ resource value.
 dbConfigurationV1Resource
-    :: TF.Attr s (DatastoreSetting s) -- ^ @datastore@ - 'P.datastore'
-    -> TF.Attr s P.Text -- ^ @description@ - 'P.description'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
+    :: TF.Attr s (DatastoreSetting s) -- ^ @datastore@ ('P._datastore', 'P.datastore')
+    -> TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @region@ ('P._region', 'P.region')
     -> P.Resource (DbConfigurationV1Resource s)
 dbConfigurationV1Resource _datastore _description _name _region =
     TF.unsafeResource "openstack_db_configuration_v1" TF.validator $
@@ -1683,8 +1683,8 @@ data DbDatabaseV1Resource s = DbDatabaseV1Resource'
 
 -- | Define a new @openstack_db_database_v1@ resource value.
 dbDatabaseV1Resource
-    :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @instance_id@ ('P._instanceId', 'P.instanceId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (DbDatabaseV1Resource s)
 dbDatabaseV1Resource _instanceId _name =
     TF.unsafeResource "openstack_db_database_v1" TF.validator $
@@ -1755,10 +1755,10 @@ data DbInstanceV1Resource s = DbInstanceV1Resource'
 
 -- | Define a new @openstack_db_instance_v1@ resource value.
 dbInstanceV1Resource
-    :: TF.Attr s (DatastoreSetting s) -- ^ @datastore@ - 'P.datastore'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
+    :: TF.Attr s (DatastoreSetting s) -- ^ @datastore@ ('P._datastore', 'P.datastore')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @region@ ('P._region', 'P.region')
+    -> TF.Attr s P.Int -- ^ @size@ ('P._size', 'P.size')
     -> P.Resource (DbInstanceV1Resource s)
 dbInstanceV1Resource _datastore _name _region _size =
     TF.unsafeResource "openstack_db_instance_v1" TF.validator $
@@ -1862,10 +1862,10 @@ data DbUserV1Resource s = DbUserV1Resource'
 
 -- | Define a new @openstack_db_user_v1@ resource value.
 dbUserV1Resource
-    :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
-    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
+    :: TF.Attr s P.Text -- ^ @instance_id@ ('P._instanceId', 'P.instanceId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @password@ ('P._password', 'P.password')
+    -> TF.Attr s P.Text -- ^ @region@ ('P._region', 'P.region')
     -> P.Resource (DbUserV1Resource s)
 dbUserV1Resource _instanceId _name _password _region =
     TF.unsafeResource "openstack_db_user_v1" TF.validator $
@@ -1944,8 +1944,8 @@ data DnsRecordsetV2Resource s = DnsRecordsetV2Resource'
 
 -- | Define a new @openstack_dns_recordset_v2@ resource value.
 dnsRecordsetV2Resource
-    :: TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @zone_id@ ('P._zoneId', 'P.zoneId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (DnsRecordsetV2Resource s)
 dnsRecordsetV2Resource _zoneId _name =
     TF.unsafeResource "openstack_dns_recordset_v2" TF.validator $
@@ -2033,7 +2033,7 @@ data DnsZoneV2Resource s = DnsZoneV2Resource'
 
 -- | Define a new @openstack_dns_zone_v2@ resource value.
 dnsZoneV2Resource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (DnsZoneV2Resource s)
 dnsZoneV2Resource _name =
     TF.unsafeResource "openstack_dns_zone_v2" TF.validator $
@@ -2128,7 +2128,7 @@ data FwFirewallV1Resource s = FwFirewallV1Resource'
 
 -- | Define a new @openstack_fw_firewall_v1@ resource value.
 fwFirewallV1Resource
-    :: TF.Attr s P.Text -- ^ @policy_id@ - 'P.policyId'
+    :: TF.Attr s P.Text -- ^ @policy_id@ ('P._policyId', 'P.policyId')
     -> P.Resource (FwFirewallV1Resource s)
 fwFirewallV1Resource _policyId =
     TF.unsafeResource "openstack_fw_firewall_v1" TF.validator $
@@ -2332,8 +2332,8 @@ data FwRuleV1Resource s = FwRuleV1Resource'
 
 -- | Define a new @openstack_fw_rule_v1@ resource value.
 fwRuleV1Resource
-    :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    :: TF.Attr s P.Text -- ^ @action@ ('P._action', 'P.action')
+    -> TF.Attr s P.Text -- ^ @protocol@ ('P._protocol', 'P.protocol')
     -> P.Resource (FwRuleV1Resource s)
 fwRuleV1Resource _action _protocol =
     TF.unsafeResource "openstack_fw_rule_v1" TF.validator $
@@ -2547,7 +2547,7 @@ data IdentityRoleAssignmentV3Resource s = IdentityRoleAssignmentV3Resource'
 
 -- | Define a new @openstack_identity_role_assignment_v3@ resource value.
 identityRoleAssignmentV3Resource
-    :: TF.Attr s P.Text -- ^ @role_id@ - 'P.roleId'
+    :: TF.Attr s P.Text -- ^ @role_id@ ('P._roleId', 'P.roleId')
     -> P.Resource (IdentityRoleAssignmentV3Resource s)
 identityRoleAssignmentV3Resource _roleId =
     TF.unsafeResource "openstack_identity_role_assignment_v3" TF.validator $
@@ -2632,7 +2632,7 @@ data IdentityRoleV3Resource s = IdentityRoleV3Resource'
 
 -- | Define a new @openstack_identity_role_v3@ resource value.
 identityRoleV3Resource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (IdentityRoleV3Resource s)
 identityRoleV3Resource _name =
     TF.unsafeResource "openstack_identity_role_v3" TF.validator $
@@ -2847,9 +2847,9 @@ data ImagesImageV2Resource s = ImagesImageV2Resource'
 
 -- | Define a new @openstack_images_image_v2@ resource value.
 imagesImageV2Resource
-    :: TF.Attr s P.Text -- ^ @container_format@ - 'P.containerFormat'
-    -> TF.Attr s P.Text -- ^ @disk_format@ - 'P.diskFormat'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @container_format@ ('P._containerFormat', 'P.containerFormat')
+    -> TF.Attr s P.Text -- ^ @disk_format@ ('P._diskFormat', 'P.diskFormat')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ImagesImageV2Resource s)
 imagesImageV2Resource _containerFormat _diskFormat _name =
     TF.unsafeResource "openstack_images_image_v2" TF.validator $
@@ -3024,9 +3024,9 @@ data LbListenerV2Resource s = LbListenerV2Resource'
 
 -- | Define a new @openstack_lb_listener_v2@ resource value.
 lbListenerV2Resource
-    :: TF.Attr s P.Text -- ^ @loadbalancer_id@ - 'P.loadbalancerId'
-    -> TF.Attr s P.Int -- ^ @protocol_port@ - 'P.protocolPort'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    :: TF.Attr s P.Text -- ^ @loadbalancer_id@ ('P._loadbalancerId', 'P.loadbalancerId')
+    -> TF.Attr s P.Int -- ^ @protocol_port@ ('P._protocolPort', 'P.protocolPort')
+    -> TF.Attr s P.Text -- ^ @protocol@ ('P._protocol', 'P.protocol')
     -> P.Resource (LbListenerV2Resource s)
 lbListenerV2Resource _loadbalancerId _protocolPort _protocol =
     TF.unsafeResource "openstack_lb_listener_v2" TF.validator $
@@ -3131,7 +3131,7 @@ data LbLoadbalancerV2Resource s = LbLoadbalancerV2Resource'
 
 -- | Define a new @openstack_lb_loadbalancer_v2@ resource value.
 lbLoadbalancerV2Resource
-    :: TF.Attr s P.Text -- ^ @vip_subnet_id@ - 'P.vipSubnetId'
+    :: TF.Attr s P.Text -- ^ @vip_subnet_id@ ('P._vipSubnetId', 'P.vipSubnetId')
     -> P.Resource (LbLoadbalancerV2Resource s)
 lbLoadbalancerV2Resource _vipSubnetId =
     TF.unsafeResource "openstack_lb_loadbalancer_v2" TF.validator $
@@ -3222,9 +3222,9 @@ data LbMemberV1Resource s = LbMemberV1Resource'
 
 -- | Define a new @openstack_lb_member_v1@ resource value.
 lbMemberV1Resource
-    :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
-    -> TF.Attr s P.Text -- ^ @pool_id@ - 'P.poolId'
-    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
+    :: TF.Attr s P.Text -- ^ @address@ ('P._address', 'P.address')
+    -> TF.Attr s P.Text -- ^ @pool_id@ ('P._poolId', 'P.poolId')
+    -> TF.Attr s P.Int -- ^ @port@ ('P._port', 'P.port')
     -> P.Resource (LbMemberV1Resource s)
 lbMemberV1Resource _address _poolId _port =
     TF.unsafeResource "openstack_lb_member_v1" TF.validator $
@@ -3305,9 +3305,9 @@ data LbMemberV2Resource s = LbMemberV2Resource'
 
 -- | Define a new @openstack_lb_member_v2@ resource value.
 lbMemberV2Resource
-    :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
-    -> TF.Attr s P.Text -- ^ @pool_id@ - 'P.poolId'
-    -> TF.Attr s P.Int -- ^ @protocol_port@ - 'P.protocolPort'
+    :: TF.Attr s P.Text -- ^ @address@ ('P._address', 'P.address')
+    -> TF.Attr s P.Text -- ^ @pool_id@ ('P._poolId', 'P.poolId')
+    -> TF.Attr s P.Int -- ^ @protocol_port@ ('P._protocolPort', 'P.protocolPort')
     -> P.Resource (LbMemberV2Resource s)
 lbMemberV2Resource _address _poolId _protocolPort =
     TF.unsafeResource "openstack_lb_member_v2" TF.validator $
@@ -3405,10 +3405,10 @@ data LbMonitorV1Resource s = LbMonitorV1Resource'
 
 -- | Define a new @openstack_lb_monitor_v1@ resource value.
 lbMonitorV1Resource
-    :: TF.Attr s P.Int -- ^ @delay@ - 'P.delay'
-    -> TF.Attr s P.Int -- ^ @max_retries@ - 'P.maxRetries'
-    -> TF.Attr s P.Int -- ^ @timeout@ - 'P.timeout'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Int -- ^ @delay@ ('P._delay', 'P.delay')
+    -> TF.Attr s P.Int -- ^ @max_retries@ ('P._maxRetries', 'P.maxRetries')
+    -> TF.Attr s P.Int -- ^ @timeout@ ('P._timeout', 'P.timeout')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (LbMonitorV1Resource s)
 lbMonitorV1Resource _delay _maxRetries _timeout _type' =
     TF.unsafeResource "openstack_lb_monitor_v1" TF.validator $
@@ -3513,11 +3513,11 @@ data LbMonitorV2Resource s = LbMonitorV2Resource'
 
 -- | Define a new @openstack_lb_monitor_v2@ resource value.
 lbMonitorV2Resource
-    :: TF.Attr s P.Int -- ^ @delay@ - 'P.delay'
-    -> TF.Attr s P.Text -- ^ @pool_id@ - 'P.poolId'
-    -> TF.Attr s P.Int -- ^ @max_retries@ - 'P.maxRetries'
-    -> TF.Attr s P.Int -- ^ @timeout@ - 'P.timeout'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Int -- ^ @delay@ ('P._delay', 'P.delay')
+    -> TF.Attr s P.Text -- ^ @pool_id@ ('P._poolId', 'P.poolId')
+    -> TF.Attr s P.Int -- ^ @max_retries@ ('P._maxRetries', 'P.maxRetries')
+    -> TF.Attr s P.Int -- ^ @timeout@ ('P._timeout', 'P.timeout')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (LbMonitorV2Resource s)
 lbMonitorV2Resource _delay _poolId _maxRetries _timeout _type' =
     TF.unsafeResource "openstack_lb_monitor_v2" TF.validator $
@@ -3625,10 +3625,10 @@ data LbPoolV1Resource s = LbPoolV1Resource'
 
 -- | Define a new @openstack_lb_pool_v1@ resource value.
 lbPoolV1Resource
-    :: TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
-    -> TF.Attr s P.Text -- ^ @lb_method@ - 'P.lbMethod'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    :: TF.Attr s P.Text -- ^ @subnet_id@ ('P._subnetId', 'P.subnetId')
+    -> TF.Attr s P.Text -- ^ @lb_method@ ('P._lbMethod', 'P.lbMethod')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @protocol@ ('P._protocol', 'P.protocol')
     -> P.Resource (LbPoolV1Resource s)
 lbPoolV1Resource _subnetId _lbMethod _name _protocol =
     TF.unsafeResource "openstack_lb_pool_v1" TF.validator $
@@ -3729,8 +3729,8 @@ data LbPoolV2Resource s = LbPoolV2Resource'
 
 -- | Define a new @openstack_lb_pool_v2@ resource value.
 lbPoolV2Resource
-    :: TF.Attr s P.Text -- ^ @lb_method@ - 'P.lbMethod'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    :: TF.Attr s P.Text -- ^ @lb_method@ ('P._lbMethod', 'P.lbMethod')
+    -> TF.Attr s P.Text -- ^ @protocol@ ('P._protocol', 'P.protocol')
     -> P.Resource (LbPoolV2Resource s)
 lbPoolV2Resource _lbMethod _protocol =
     TF.unsafeResource "openstack_lb_pool_v2" TF.validator $
@@ -3839,11 +3839,11 @@ data LbVipV1Resource s = LbVipV1Resource'
 
 -- | Define a new @openstack_lb_vip_v1@ resource value.
 lbVipV1Resource
-    :: TF.Attr s P.Text -- ^ @pool_id@ - 'P.poolId'
-    -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    :: TF.Attr s P.Text -- ^ @pool_id@ ('P._poolId', 'P.poolId')
+    -> TF.Attr s P.Text -- ^ @subnet_id@ ('P._subnetId', 'P.subnetId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Int -- ^ @port@ ('P._port', 'P.port')
+    -> TF.Attr s P.Text -- ^ @protocol@ ('P._protocol', 'P.protocol')
     -> P.Resource (LbVipV1Resource s)
 lbVipV1Resource _poolId _subnetId _name _port _protocol =
     TF.unsafeResource "openstack_lb_vip_v1" TF.validator $
@@ -3945,8 +3945,8 @@ data NetworkingFloatingipAssociateV2Resource s = NetworkingFloatingipAssociateV2
 
 -- | Define a new @openstack_networking_floatingip_associate_v2@ resource value.
 networkingFloatingipAssociateV2Resource
-    :: TF.Attr s P.Text -- ^ @port_id@ - 'P.portId'
-    -> TF.Attr s P.Text -- ^ @floating_ip@ - 'P.floatingIp'
+    :: TF.Attr s P.Text -- ^ @port_id@ ('P._portId', 'P.portId')
+    -> TF.Attr s P.Text -- ^ @floating_ip@ ('P._floatingIp', 'P.floatingIp')
     -> P.Resource (NetworkingFloatingipAssociateV2Resource s)
 networkingFloatingipAssociateV2Resource _portId _floatingIp =
     TF.unsafeResource "openstack_networking_floatingip_associate_v2" TF.validator $
@@ -3998,7 +3998,7 @@ data NetworkingFloatingipV2Resource s = NetworkingFloatingipV2Resource'
 
 -- | Define a new @openstack_networking_floatingip_v2@ resource value.
 networkingFloatingipV2Resource
-    :: TF.Attr s P.Text -- ^ @pool@ - 'P.pool'
+    :: TF.Attr s P.Text -- ^ @pool@ ('P._pool', 'P.pool')
     -> P.Resource (NetworkingFloatingipV2Resource s)
 networkingFloatingipV2Resource _pool =
     TF.unsafeResource "openstack_networking_floatingip_v2" TF.validator $
@@ -4154,7 +4154,7 @@ data NetworkingPortV2Resource s = NetworkingPortV2Resource'
 
 -- | Define a new @openstack_networking_port_v2@ resource value.
 networkingPortV2Resource
-    :: TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
+    :: TF.Attr s P.Text -- ^ @network_id@ ('P._networkId', 'P.networkId')
     -> P.Resource (NetworkingPortV2Resource s)
 networkingPortV2Resource _networkId =
     TF.unsafeResource "openstack_networking_port_v2" TF.validator $
@@ -4256,7 +4256,7 @@ data NetworkingRouterInterfaceV2Resource s = NetworkingRouterInterfaceV2Resource
 
 -- | Define a new @openstack_networking_router_interface_v2@ resource value.
 networkingRouterInterfaceV2Resource
-    :: TF.Attr s P.Text -- ^ @router_id@ - 'P.routerId'
+    :: TF.Attr s P.Text -- ^ @router_id@ ('P._routerId', 'P.routerId')
     -> P.Resource (NetworkingRouterInterfaceV2Resource s)
 networkingRouterInterfaceV2Resource _routerId =
     TF.unsafeResource "openstack_networking_router_interface_v2" TF.validator $
@@ -4307,9 +4307,9 @@ data NetworkingRouterRouteV2Resource s = NetworkingRouterRouteV2Resource'
 
 -- | Define a new @openstack_networking_router_route_v2@ resource value.
 networkingRouterRouteV2Resource
-    :: TF.Attr s P.Text -- ^ @destination_cidr@ - 'P.destinationCidr'
-    -> TF.Attr s P.Text -- ^ @next_hop@ - 'P.nextHop'
-    -> TF.Attr s P.Text -- ^ @router_id@ - 'P.routerId'
+    :: TF.Attr s P.Text -- ^ @destination_cidr@ ('P._destinationCidr', 'P.destinationCidr')
+    -> TF.Attr s P.Text -- ^ @next_hop@ ('P._nextHop', 'P.nextHop')
+    -> TF.Attr s P.Text -- ^ @router_id@ ('P._routerId', 'P.routerId')
     -> P.Resource (NetworkingRouterRouteV2Resource s)
 networkingRouterRouteV2Resource _destinationCidr _nextHop _routerId =
     TF.unsafeResource "openstack_networking_router_route_v2" TF.validator $
@@ -4451,9 +4451,9 @@ data NetworkingSecgroupRuleV2Resource s = NetworkingSecgroupRuleV2Resource'
 
 -- | Define a new @openstack_networking_secgroup_rule_v2@ resource value.
 networkingSecgroupRuleV2Resource
-    :: TF.Attr s P.Text -- ^ @direction@ - 'P.direction'
-    -> TF.Attr s P.Text -- ^ @ethertype@ - 'P.ethertype'
-    -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
+    :: TF.Attr s P.Text -- ^ @direction@ ('P._direction', 'P.direction')
+    -> TF.Attr s P.Text -- ^ @ethertype@ ('P._ethertype', 'P.ethertype')
+    -> TF.Attr s P.Text -- ^ @security_group_id@ ('P._securityGroupId', 'P.securityGroupId')
     -> P.Resource (NetworkingSecgroupRuleV2Resource s)
 networkingSecgroupRuleV2Resource _direction _ethertype _securityGroupId =
     TF.unsafeResource "openstack_networking_secgroup_rule_v2" TF.validator $
@@ -4527,7 +4527,7 @@ data NetworkingSecgroupV2Resource s = NetworkingSecgroupV2Resource'
 
 -- | Define a new @openstack_networking_secgroup_v2@ resource value.
 networkingSecgroupV2Resource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (NetworkingSecgroupV2Resource s)
 networkingSecgroupV2Resource _name =
     TF.unsafeResource "openstack_networking_secgroup_v2" TF.validator $
@@ -4585,9 +4585,9 @@ data NetworkingSubnetRouteV2Resource s = NetworkingSubnetRouteV2Resource'
 
 -- | Define a new @openstack_networking_subnet_route_v2@ resource value.
 networkingSubnetRouteV2Resource
-    :: TF.Attr s P.Text -- ^ @destination_cidr@ - 'P.destinationCidr'
-    -> TF.Attr s P.Text -- ^ @next_hop@ - 'P.nextHop'
-    -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
+    :: TF.Attr s P.Text -- ^ @destination_cidr@ ('P._destinationCidr', 'P.destinationCidr')
+    -> TF.Attr s P.Text -- ^ @next_hop@ ('P._nextHop', 'P.nextHop')
+    -> TF.Attr s P.Text -- ^ @subnet_id@ ('P._subnetId', 'P.subnetId')
     -> P.Resource (NetworkingSubnetRouteV2Resource s)
 networkingSubnetRouteV2Resource _destinationCidr _nextHop _subnetId =
     TF.unsafeResource "openstack_networking_subnet_route_v2" TF.validator $
@@ -4664,7 +4664,7 @@ data NetworkingSubnetV2Resource s = NetworkingSubnetV2Resource'
 
 -- | Define a new @openstack_networking_subnet_v2@ resource value.
 networkingSubnetV2Resource
-    :: TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
+    :: TF.Attr s P.Text -- ^ @network_id@ ('P._networkId', 'P.networkId')
     -> P.Resource (NetworkingSubnetV2Resource s)
 networkingSubnetV2Resource _networkId =
     TF.unsafeResource "openstack_networking_subnet_v2" TF.validator $
@@ -4798,8 +4798,8 @@ data NetworkingSubnetpoolV2Resource s = NetworkingSubnetpoolV2Resource'
 
 -- | Define a new @openstack_networking_subnetpool_v2@ resource value.
 networkingSubnetpoolV2Resource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @prefixes@ - 'P.prefixes'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @prefixes@ ('P._prefixes', 'P.prefixes')
     -> P.Resource (NetworkingSubnetpoolV2Resource s)
 networkingSubnetpoolV2Resource _name _prefixes =
     TF.unsafeResource "openstack_networking_subnetpool_v2" TF.validator $
@@ -4932,7 +4932,7 @@ data ObjectstorageContainerV1Resource s = ObjectstorageContainerV1Resource'
 
 -- | Define a new @openstack_objectstorage_container_v1@ resource value.
 objectstorageContainerV1Resource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ObjectstorageContainerV1Resource s)
 objectstorageContainerV1Resource _name =
     TF.unsafeResource "openstack_objectstorage_container_v1" TF.validator $
@@ -5053,8 +5053,8 @@ data ObjectstorageObjectV1Resource s = ObjectstorageObjectV1Resource'
 
 -- | Define a new @openstack_objectstorage_object_v1@ resource value.
 objectstorageObjectV1Resource
-    :: TF.Attr s P.Text -- ^ @container_name@ - 'P.containerName'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @container_name@ ('P._containerName', 'P.containerName')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ObjectstorageObjectV1Resource s)
 objectstorageObjectV1Resource _containerName _name =
     TF.unsafeResource "openstack_objectstorage_object_v1" TF.validator $
@@ -5470,7 +5470,7 @@ data VpnaasServiceV2Resource s = VpnaasServiceV2Resource'
 
 -- | Define a new @openstack_vpnaas_service_v2@ resource value.
 vpnaasServiceV2Resource
-    :: TF.Attr s P.Text -- ^ @router_id@ - 'P.routerId'
+    :: TF.Attr s P.Text -- ^ @router_id@ ('P._routerId', 'P.routerId')
     -> P.Resource (VpnaasServiceV2Resource s)
 vpnaasServiceV2Resource _routerId =
     TF.unsafeResource "openstack_vpnaas_service_v2" TF.validator $
@@ -5595,12 +5595,12 @@ data VpnaasSiteConnectionV2Resource s = VpnaasSiteConnectionV2Resource'
 
 -- | Define a new @openstack_vpnaas_site_connection_v2@ resource value.
 vpnaasSiteConnectionV2Resource
-    :: TF.Attr s P.Text -- ^ @peer_address@ - 'P.peerAddress'
-    -> TF.Attr s P.Text -- ^ @ikepolicy_id@ - 'P.ikepolicyId'
-    -> TF.Attr s P.Text -- ^ @ipsecpolicy_id@ - 'P.ipsecpolicyId'
-    -> TF.Attr s P.Text -- ^ @peer_id@ - 'P.peerId'
-    -> TF.Attr s P.Text -- ^ @vpnservice_id@ - 'P.vpnserviceId'
-    -> TF.Attr s P.Text -- ^ @psk@ - 'P.psk'
+    :: TF.Attr s P.Text -- ^ @peer_address@ ('P._peerAddress', 'P.peerAddress')
+    -> TF.Attr s P.Text -- ^ @ikepolicy_id@ ('P._ikepolicyId', 'P.ikepolicyId')
+    -> TF.Attr s P.Text -- ^ @ipsecpolicy_id@ ('P._ipsecpolicyId', 'P.ipsecpolicyId')
+    -> TF.Attr s P.Text -- ^ @peer_id@ ('P._peerId', 'P.peerId')
+    -> TF.Attr s P.Text -- ^ @vpnservice_id@ ('P._vpnserviceId', 'P.vpnserviceId')
+    -> TF.Attr s P.Text -- ^ @psk@ ('P._psk', 'P.psk')
     -> P.Resource (VpnaasSiteConnectionV2Resource s)
 vpnaasSiteConnectionV2Resource _peerAddress _ikepolicyId _ipsecpolicyId _peerId _vpnserviceId _psk =
     TF.unsafeResource "openstack_vpnaas_site_connection_v2" TF.validator $
