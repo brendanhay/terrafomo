@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newMemberSetting",
+                "smart": "memberSetting",
                 "name": "MemberSetting'"
             },
             "arguments": [
