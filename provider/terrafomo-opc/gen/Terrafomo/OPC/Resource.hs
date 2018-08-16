@@ -200,7 +200,7 @@ data ComputeAclResource s = ComputeAclResource'
 
 -- | Define a new @opc_compute_acl@ resource value.
 computeAclResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeAclResource s)
 computeAclResource _name =
     TF.unsafeResource "opc_compute_acl" TF.validator $
@@ -266,8 +266,8 @@ data ComputeImageListResource s = ComputeImageListResource'
 
 -- | Define a new @opc_compute_image_list@ resource value.
 computeImageListResource
-    :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeImageListResource s)
 computeImageListResource _description _name =
     TF.unsafeResource "opc_compute_image_list" TF.validator $
@@ -326,9 +326,9 @@ data ComputeImageListEntryResource s = ComputeImageListEntryResource'
 
 -- | Define a new @opc_compute_image_list_entry@ resource value.
 computeImageListEntryResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @machine_images@ - 'P.machineImages'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @version@ - 'P.version'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @machine_images@ ('P._machineImages', 'P.machineImages')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Int -- ^ @version@ ('P._version', 'P.version')
     -> P.Resource (ComputeImageListEntryResource s)
 computeImageListEntryResource _machineImages _name _version =
     TF.unsafeResource "opc_compute_image_list_entry" TF.validator $
@@ -415,8 +415,8 @@ data ComputeInstanceResource s = ComputeInstanceResource'
 
 -- | Define a new @opc_compute_instance@ resource value.
 computeInstanceResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @shape@ - 'P.shape'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @shape@ ('P._shape', 'P.shape')
     -> P.Resource (ComputeInstanceResource s)
 computeInstanceResource _name _shape =
     TF.unsafeResource "opc_compute_instance" TF.validator $
@@ -596,7 +596,7 @@ data ComputeIpAddressAssociationResource s = ComputeIpAddressAssociationResource
 
 -- | Define a new @opc_compute_ip_address_association@ resource value.
 computeIpAddressAssociationResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeIpAddressAssociationResource s)
 computeIpAddressAssociationResource _name =
     TF.unsafeResource "opc_compute_ip_address_association" TF.validator $
@@ -672,7 +672,7 @@ data ComputeIpAddressPrefixSetResource s = ComputeIpAddressPrefixSetResource'
 
 -- | Define a new @opc_compute_ip_address_prefix_set@ resource value.
 computeIpAddressPrefixSetResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeIpAddressPrefixSetResource s)
 computeIpAddressPrefixSetResource _name =
     TF.unsafeResource "opc_compute_ip_address_prefix_set" TF.validator $
@@ -741,8 +741,8 @@ data ComputeIpAddressReservationResource s = ComputeIpAddressReservationResource
 
 -- | Define a new @opc_compute_ip_address_reservation@ resource value.
 computeIpAddressReservationResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @ip_address_pool@ - 'P.ipAddressPool'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @ip_address_pool@ ('P._ipAddressPool', 'P.ipAddressPool')
     -> P.Resource (ComputeIpAddressReservationResource s)
 computeIpAddressReservationResource _name _ipAddressPool =
     TF.unsafeResource "opc_compute_ip_address_reservation" TF.validator $
@@ -808,8 +808,8 @@ data ComputeIpAssociationResource s = ComputeIpAssociationResource'
 
 -- | Define a new @opc_compute_ip_association@ resource value.
 computeIpAssociationResource
-    :: TF.Attr s P.Text -- ^ @parent_pool@ - 'P.parentPool'
-    -> TF.Attr s P.Text -- ^ @vcable@ - 'P.vcable'
+    :: TF.Attr s P.Text -- ^ @parent_pool@ ('P._parentPool', 'P.parentPool')
+    -> TF.Attr s P.Text -- ^ @vcable@ ('P._vcable', 'P.vcable')
     -> P.Resource (ComputeIpAssociationResource s)
 computeIpAssociationResource _parentPool _vcable =
     TF.unsafeResource "opc_compute_ip_association" TF.validator $
@@ -870,8 +870,8 @@ data ComputeIpNetworkResource s = ComputeIpNetworkResource'
 
 -- | Define a new @opc_compute_ip_network@ resource value.
 computeIpNetworkResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @ip_address_prefix@ - 'P.ipAddressPrefix'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @ip_address_prefix@ ('P._ipAddressPrefix', 'P.ipAddressPrefix')
     -> P.Resource (ComputeIpNetworkResource s)
 computeIpNetworkResource _name _ipAddressPrefix =
     TF.unsafeResource "opc_compute_ip_network" TF.validator $
@@ -951,7 +951,7 @@ data ComputeIpNetworkExchangeResource s = ComputeIpNetworkExchangeResource'
 
 -- | Define a new @opc_compute_ip_network_exchange@ resource value.
 computeIpNetworkExchangeResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeIpNetworkExchangeResource s)
 computeIpNetworkExchangeResource _name =
     TF.unsafeResource "opc_compute_ip_network_exchange" TF.validator $
@@ -1010,7 +1010,7 @@ data ComputeIpReservationResource s = ComputeIpReservationResource'
 
 -- | Define a new @opc_compute_ip_reservation@ resource value.
 computeIpReservationResource
-    :: TF.Attr s P.Bool -- ^ @permanent@ - 'P.permanent'
+    :: TF.Attr s P.Bool -- ^ @permanent@ ('P._permanent', 'P.permanent')
     -> P.Resource (ComputeIpReservationResource s)
 computeIpReservationResource _permanent =
     TF.unsafeResource "opc_compute_ip_reservation" TF.validator $
@@ -1081,9 +1081,9 @@ data ComputeMachineImageResource s = ComputeMachineImageResource'
 
 -- | Define a new @opc_compute_machine_image@ resource value.
 computeMachineImageResource
-    :: TF.Attr s P.Text -- ^ @account@ - 'P.account'
-    -> TF.Attr s P.Text -- ^ @file@ - 'P.file'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @account@ ('P._account', 'P.account')
+    -> TF.Attr s P.Text -- ^ @file@ ('P._file', 'P.file')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeMachineImageResource s)
 computeMachineImageResource _account _file _name =
     TF.unsafeResource "opc_compute_machine_image" TF.validator $
@@ -1180,9 +1180,9 @@ data ComputeOrchestratedInstanceResource s = ComputeOrchestratedInstanceResource
 
 -- | Define a new @opc_compute_orchestrated_instance@ resource value.
 computeOrchestratedInstanceResource
-    :: TF.Attr s [TF.Attr s (InstanceSetting s)] -- ^ @instance@ - 'P.instance''
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @desired_state@ - 'P.desiredState'
+    :: TF.Attr s [TF.Attr s (InstanceSetting s)] -- ^ @instance@ ('P._instance'', 'P.instance'')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @desired_state@ ('P._desiredState', 'P.desiredState')
     -> P.Resource (ComputeOrchestratedInstanceResource s)
 computeOrchestratedInstanceResource _instance' _name _desiredState =
     TF.unsafeResource "opc_compute_orchestrated_instance" TF.validator $
@@ -1264,9 +1264,9 @@ data ComputeRouteResource s = ComputeRouteResource'
 
 -- | Define a new @opc_compute_route@ resource value.
 computeRouteResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @ip_address_prefix@ - 'P.ipAddressPrefix'
-    -> TF.Attr s P.Text -- ^ @next_hop_vnic_set@ - 'P.nextHopVnicSet'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @ip_address_prefix@ ('P._ipAddressPrefix', 'P.ipAddressPrefix')
+    -> TF.Attr s P.Text -- ^ @next_hop_vnic_set@ ('P._nextHopVnicSet', 'P.nextHopVnicSet')
     -> P.Resource (ComputeRouteResource s)
 computeRouteResource _name _ipAddressPrefix _nextHopVnicSet =
     TF.unsafeResource "opc_compute_route" TF.validator $
@@ -1355,11 +1355,11 @@ data ComputeSecRuleResource s = ComputeSecRuleResource'
 
 -- | Define a new @opc_compute_sec_rule@ resource value.
 computeSecRuleResource
-    :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
-    -> TF.Attr s P.Text -- ^ @application@ - 'P.application'
-    -> TF.Attr s P.Text -- ^ @destination_list@ - 'P.destinationList'
-    -> TF.Attr s P.Text -- ^ @source_list@ - 'P.sourceList'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @action@ ('P._action', 'P.action')
+    -> TF.Attr s P.Text -- ^ @application@ ('P._application', 'P.application')
+    -> TF.Attr s P.Text -- ^ @destination_list@ ('P._destinationList', 'P.destinationList')
+    -> TF.Attr s P.Text -- ^ @source_list@ ('P._sourceList', 'P.sourceList')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeSecRuleResource s)
 computeSecRuleResource _action _application _destinationList _sourceList _name =
     TF.unsafeResource "opc_compute_sec_rule" TF.validator $
@@ -1452,8 +1452,8 @@ data ComputeSecurityApplicationResource s = ComputeSecurityApplicationResource'
 
 -- | Define a new @opc_compute_security_application@ resource value.
 computeSecurityApplicationResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @protocol@ ('P._protocol', 'P.protocol')
     -> P.Resource (ComputeSecurityApplicationResource s)
 computeSecurityApplicationResource _name _protocol =
     TF.unsafeResource "opc_compute_security_application" TF.validator $
@@ -1527,8 +1527,8 @@ data ComputeSecurityAssociationResource s = ComputeSecurityAssociationResource'
 
 -- | Define a new @opc_compute_security_association@ resource value.
 computeSecurityAssociationResource
-    :: TF.Attr s P.Text -- ^ @seclist@ - 'P.seclist'
-    -> TF.Attr s P.Text -- ^ @vcable@ - 'P.vcable'
+    :: TF.Attr s P.Text -- ^ @seclist@ ('P._seclist', 'P.seclist')
+    -> TF.Attr s P.Text -- ^ @vcable@ ('P._vcable', 'P.vcable')
     -> P.Resource (ComputeSecurityAssociationResource s)
 computeSecurityAssociationResource _seclist _vcable =
     TF.unsafeResource "opc_compute_security_association" TF.validator $
@@ -1580,8 +1580,8 @@ data ComputeSecurityIpListResource s = ComputeSecurityIpListResource'
 
 -- | Define a new @opc_compute_security_ip_list@ resource value.
 computeSecurityIpListResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @ip_entries@ - 'P.ipEntries'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @ip_entries@ ('P._ipEntries', 'P.ipEntries')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeSecurityIpListResource s)
 computeSecurityIpListResource _ipEntries _name =
     TF.unsafeResource "opc_compute_security_ip_list" TF.validator $
@@ -1640,7 +1640,7 @@ data ComputeSecurityListResource s = ComputeSecurityListResource'
 
 -- | Define a new @opc_compute_security_list@ resource value.
 computeSecurityListResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeSecurityListResource s)
 computeSecurityListResource _name =
     TF.unsafeResource "opc_compute_security_list" TF.validator $
@@ -1712,7 +1712,7 @@ data ComputeSecurityProtocolResource s = ComputeSecurityProtocolResource'
 
 -- | Define a new @opc_compute_security_protocol@ resource value.
 computeSecurityProtocolResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeSecurityProtocolResource s)
 computeSecurityProtocolResource _name =
     TF.unsafeResource "opc_compute_security_protocol" TF.validator $
@@ -1816,8 +1816,8 @@ data ComputeSecurityRuleResource s = ComputeSecurityRuleResource'
 
 -- | Define a new @opc_compute_security_rule@ resource value.
 computeSecurityRuleResource
-    :: TF.Attr s P.Text -- ^ @flow_direction@ - 'P.flowDirection'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @flow_direction@ ('P._flowDirection', 'P.flowDirection')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeSecurityRuleResource s)
 computeSecurityRuleResource _flowDirection _name =
     TF.unsafeResource "opc_compute_security_rule" TF.validator $
@@ -1929,7 +1929,7 @@ data ComputeSnapshotResource s = ComputeSnapshotResource'
 
 -- | Define a new @opc_compute_snapshot@ resource value.
 computeSnapshotResource
-    :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
+    :: TF.Attr s P.Text -- ^ @instance@ ('P._instance'', 'P.instance'')
     -> P.Resource (ComputeSnapshotResource s)
 computeSnapshotResource _instance' =
     TF.unsafeResource "opc_compute_snapshot" TF.validator $
@@ -1990,8 +1990,8 @@ data ComputeSshKeyResource s = ComputeSshKeyResource'
 
 -- | Define a new @opc_compute_ssh_key@ resource value.
 computeSshKeyResource
-    :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @key@ ('P._key', 'P.key')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeSshKeyResource s)
 computeSshKeyResource _key _name =
     TF.unsafeResource "opc_compute_ssh_key" TF.validator $
@@ -2047,9 +2047,9 @@ data ComputeStorageAttachmentResource s = ComputeStorageAttachmentResource'
 
 -- | Define a new @opc_compute_storage_attachment@ resource value.
 computeStorageAttachmentResource
-    :: TF.Attr s P.Int -- ^ @index@ - 'P.index'
-    -> TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
-    -> TF.Attr s P.Text -- ^ @storage_volume@ - 'P.storageVolume'
+    :: TF.Attr s P.Int -- ^ @index@ ('P._index', 'P.index')
+    -> TF.Attr s P.Text -- ^ @instance@ ('P._instance'', 'P.instance'')
+    -> TF.Attr s P.Text -- ^ @storage_volume@ ('P._storageVolume', 'P.storageVolume')
     -> P.Resource (ComputeStorageAttachmentResource s)
 computeStorageAttachmentResource _index _instance' _storageVolume =
     TF.unsafeResource "opc_compute_storage_attachment" TF.validator $
@@ -2120,8 +2120,8 @@ data ComputeStorageVolumeResource s = ComputeStorageVolumeResource'
 
 -- | Define a new @opc_compute_storage_volume@ resource value.
 computeStorageVolumeResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Int -- ^ @size@ ('P._size', 'P.size')
     -> P.Resource (ComputeStorageVolumeResource s)
 computeStorageVolumeResource _name _size =
     TF.unsafeResource "opc_compute_storage_volume" TF.validator $
@@ -2251,7 +2251,7 @@ data ComputeStorageVolumeSnapshotResource s = ComputeStorageVolumeSnapshotResour
 
 -- | Define a new @opc_compute_storage_volume_snapshot@ resource value.
 computeStorageVolumeSnapshotResource
-    :: TF.Attr s P.Text -- ^ @volume_name@ - 'P.volumeName'
+    :: TF.Attr s P.Text -- ^ @volume_name@ ('P._volumeName', 'P.volumeName')
     -> P.Resource (ComputeStorageVolumeSnapshotResource s)
 computeStorageVolumeSnapshotResource _volumeName =
     TF.unsafeResource "opc_compute_storage_volume_snapshot" TF.validator $
@@ -2363,7 +2363,7 @@ data ComputeVnicSetResource s = ComputeVnicSetResource'
 
 -- | Define a new @opc_compute_vnic_set@ resource value.
 computeVnicSetResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ComputeVnicSetResource s)
 computeVnicSetResource _name =
     TF.unsafeResource "opc_compute_vnic_set" TF.validator $
@@ -2435,9 +2435,9 @@ data LbaasCertificateResource s = LbaasCertificateResource'
 
 -- | Define a new @opc_lbaas_certificate@ resource value.
 lbaasCertificateResource
-    :: TF.Attr s P.Text -- ^ @certificate_body@ - 'P.certificateBody'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @certificate_body@ ('P._certificateBody', 'P.certificateBody')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (LbaasCertificateResource s)
 lbaasCertificateResource _certificateBody _name _type' =
     TF.unsafeResource "opc_lbaas_certificate" TF.validator $
@@ -2540,11 +2540,11 @@ data LbaasListenerResource s = LbaasListenerResource'
 
 -- | Define a new @opc_lbaas_listener@ resource value.
 lbaasListenerResource
-    :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
-    -> TF.Attr s P.Text -- ^ @balancer_protocol@ - 'P.balancerProtocol'
-    -> TF.Attr s P.Text -- ^ @server_protocol@ - 'P.serverProtocol'
+    :: TF.Attr s P.Text -- ^ @load_balancer@ ('P._loadBalancer', 'P.loadBalancer')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Int -- ^ @port@ ('P._port', 'P.port')
+    -> TF.Attr s P.Text -- ^ @balancer_protocol@ ('P._balancerProtocol', 'P.balancerProtocol')
+    -> TF.Attr s P.Text -- ^ @server_protocol@ ('P._serverProtocol', 'P.serverProtocol')
     -> P.Resource (LbaasListenerResource s)
 lbaasListenerResource _loadBalancer _name _port _balancerProtocol _serverProtocol =
     TF.unsafeResource "opc_lbaas_listener" TF.validator $
@@ -2699,9 +2699,9 @@ data LbaasLoadBalancerResource s = LbaasLoadBalancerResource'
 
 -- | Define a new @opc_lbaas_load_balancer@ resource value.
 lbaasLoadBalancerResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> TF.Attr s P.Text -- ^ @scheme@ - 'P.scheme'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @region@ ('P._region', 'P.region')
+    -> TF.Attr s P.Text -- ^ @scheme@ ('P._scheme', 'P.scheme')
     -> P.Resource (LbaasLoadBalancerResource s)
 lbaasLoadBalancerResource _name _region _scheme =
     TF.unsafeResource "opc_lbaas_load_balancer" TF.validator $
@@ -2965,8 +2965,8 @@ data LbaasPolicyResource s = LbaasPolicyResource'
 
 -- | Define a new @opc_lbaas_policy@ resource value.
 lbaasPolicyResource
-    :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @load_balancer@ ('P._loadBalancer', 'P.loadBalancer')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (LbaasPolicyResource s)
 lbaasPolicyResource _loadBalancer _name =
     TF.unsafeResource "opc_lbaas_policy" TF.validator $
@@ -3197,9 +3197,9 @@ data LbaasServerPoolResource s = LbaasServerPoolResource'
 
 -- | Define a new @opc_lbaas_server_pool@ resource value.
 lbaasServerPoolResource
-    :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @servers@ - 'P.servers'
+    :: TF.Attr s P.Text -- ^ @load_balancer@ ('P._loadBalancer', 'P.loadBalancer')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @servers@ ('P._servers', 'P.servers')
     -> P.Resource (LbaasServerPoolResource s)
 lbaasServerPoolResource _loadBalancer _name _servers =
     TF.unsafeResource "opc_lbaas_server_pool" TF.validator $
@@ -3314,7 +3314,7 @@ data StorageContainerResource s = StorageContainerResource'
 
 -- | Define a new @opc_storage_container@ resource value.
 storageContainerResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (StorageContainerResource s)
 storageContainerResource _name =
     TF.unsafeResource "opc_storage_container" TF.validator $
@@ -3445,8 +3445,8 @@ data StorageObjectResource s = StorageObjectResource'
 
 -- | Define a new @opc_storage_object@ resource value.
 storageObjectResource
-    :: TF.Attr s P.Text -- ^ @container@ - 'P.container'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @container@ ('P._container', 'P.container')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (StorageObjectResource s)
 storageObjectResource _container _name =
     TF.unsafeResource "opc_storage_object" TF.validator $

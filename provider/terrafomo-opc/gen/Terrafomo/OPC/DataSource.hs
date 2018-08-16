@@ -93,8 +93,8 @@ data ComputeImageListEntryData s = ComputeImageListEntryData'
 
 -- | Define a new @opc_compute_image_list_entry@ datasource value.
 computeImageListEntryData
-    :: TF.Attr s P.Text -- ^ @image_list@ - 'P.imageList'
-    -> TF.Attr s P.Int -- ^ @version@ - 'P.version'
+    :: TF.Attr s P.Text -- ^ @image_list@ ('P._imageList', 'P.imageList')
+    -> TF.Attr s P.Int -- ^ @version@ ('P._version', 'P.version')
     -> P.DataSource (ComputeImageListEntryData s)
 computeImageListEntryData _imageList _version =
     TF.unsafeDataSource "opc_compute_image_list_entry" TF.validator $
@@ -153,7 +153,7 @@ data ComputeIpAddressReservationData s = ComputeIpAddressReservationData'
 
 -- | Define a new @opc_compute_ip_address_reservation@ datasource value.
 computeIpAddressReservationData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ComputeIpAddressReservationData s)
 computeIpAddressReservationData _name =
     TF.unsafeDataSource "opc_compute_ip_address_reservation" TF.validator $
@@ -204,7 +204,7 @@ data ComputeIpReservationData s = ComputeIpReservationData'
 
 -- | Define a new @opc_compute_ip_reservation@ datasource value.
 computeIpReservationData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ComputeIpReservationData s)
 computeIpReservationData _name =
     TF.unsafeDataSource "opc_compute_ip_reservation" TF.validator $
@@ -258,8 +258,8 @@ data ComputeMachineImageData s = ComputeMachineImageData'
 
 -- | Define a new @opc_compute_machine_image@ datasource value.
 computeMachineImageData
-    :: TF.Attr s P.Text -- ^ @account@ - 'P.account'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @account@ ('P._account', 'P.account')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ComputeMachineImageData s)
 computeMachineImageData _account _name =
     TF.unsafeDataSource "opc_compute_machine_image" TF.validator $
@@ -341,9 +341,9 @@ data ComputeNetworkInterfaceData s = ComputeNetworkInterfaceData'
 
 -- | Define a new @opc_compute_network_interface@ datasource value.
 computeNetworkInterfaceData
-    :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
-    -> TF.Attr s P.Text -- ^ @interface@ - 'P.interface'
-    -> TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
+    :: TF.Attr s P.Text -- ^ @instance_id@ ('P._instanceId', 'P.instanceId')
+    -> TF.Attr s P.Text -- ^ @interface@ ('P._interface', 'P.interface')
+    -> TF.Attr s P.Text -- ^ @instance_name@ ('P._instanceName', 'P.instanceName')
     -> P.DataSource (ComputeNetworkInterfaceData s)
 computeNetworkInterfaceData _instanceId _interface _instanceName =
     TF.unsafeDataSource "opc_compute_network_interface" TF.validator $
@@ -432,7 +432,7 @@ data ComputeSshKeyData s = ComputeSshKeyData'
 
 -- | Define a new @opc_compute_ssh_key@ datasource value.
 computeSshKeyData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ComputeSshKeyData s)
 computeSshKeyData _name =
     TF.unsafeDataSource "opc_compute_ssh_key" TF.validator $
@@ -474,7 +474,7 @@ data ComputeStorageVolumeSnapshotData s = ComputeStorageVolumeSnapshotData'
 
 -- | Define a new @opc_compute_storage_volume_snapshot@ datasource value.
 computeStorageVolumeSnapshotData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ComputeStorageVolumeSnapshotData s)
 computeStorageVolumeSnapshotData _name =
     TF.unsafeDataSource "opc_compute_storage_volume_snapshot" TF.validator $
@@ -561,7 +561,7 @@ data ComputeVnicData s = ComputeVnicData'
 
 -- | Define a new @opc_compute_vnic@ datasource value.
 computeVnicData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ComputeVnicData s)
 computeVnicData _name =
     TF.unsafeDataSource "opc_compute_vnic" TF.validator $

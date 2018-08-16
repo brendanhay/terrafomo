@@ -17,10 +17,11 @@
 --
 module Terrafomo.OPC.Provider
     (
+    -- * OPC Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** OPC Specific Aliases
+    -- * OPC Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -100,9 +101,9 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @identity_domain@ - 'P.identityDomain'
-    -> P.Text -- ^ @password@ - 'P.password'
-    -> P.Text -- ^ @user@ - 'P.user'
+    :: P.Text -- ^ @identity_domain@ ('P._identityDomain', 'P.identityDomain')
+    -> P.Text -- ^ @password@ ('P._password', 'P.password')
+    -> P.Text -- ^ @user@ ('P._user', 'P.user')
     -> Provider
 newProvider _identityDomain _password _user =
     Provider'
@@ -121,7 +122,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "opc"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ TF.assign "endpoint" <$> _endpoint
             , P.Just $ TF.assign "identity_domain" _identityDomain

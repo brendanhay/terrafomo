@@ -105,7 +105,7 @@ data ApplicationCookieStickinessPolicySetting s = ApplicationCookieStickinessPol
 
 -- | Construct a new @application_cookie_stickiness_policy@ settings value.
 newApplicationCookieStickinessPolicySetting
-    :: TF.Attr s P.Text -- ^ @cookie_name@ - 'P.cookieName'
+    :: TF.Attr s P.Text -- ^ 'P._cookieName': @cookie_name@
     -> ApplicationCookieStickinessPolicySetting s
 newApplicationCookieStickinessPolicySetting _cookieName =
     ApplicationCookieStickinessPolicySetting'
@@ -144,7 +144,7 @@ data CloudgatePolicySetting s = CloudgatePolicySetting'
 
 -- | Construct a new @cloudgate_policy@ settings value.
 newCloudgatePolicySetting
-    :: TF.Attr s P.Text -- ^ @virtual_hostname_for_policy_attribution@ - 'P.virtualHostnameForPolicyAttribution'
+    :: TF.Attr s P.Text -- ^ 'P._virtualHostnameForPolicyAttribution': @virtual_hostname_for_policy_attribution@
     -> CloudgatePolicySetting s
 newCloudgatePolicySetting _virtualHostnameForPolicyAttribution =
     CloudgatePolicySetting'
@@ -311,8 +311,8 @@ data InstanceSetting s = InstanceSetting'
 
 -- | Construct a new @instance@ settings value.
 newInstanceSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @shape@ - 'P.shape'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._shape': @shape@
     -> InstanceSetting s
 newInstanceSetting _name _shape =
     InstanceSetting'
@@ -473,7 +473,7 @@ data LoadBalancerCookieStickinessPolicySetting s = LoadBalancerCookieStickinessP
 
 -- | Construct a new @load_balancer_cookie_stickiness_policy@ settings value.
 newLoadBalancerCookieStickinessPolicySetting
-    :: TF.Attr s P.Int -- ^ @cookie_expiration_period@ - 'P.cookieExpirationPeriod'
+    :: TF.Attr s P.Int -- ^ 'P._cookieExpirationPeriod': @cookie_expiration_period@
     -> LoadBalancerCookieStickinessPolicySetting s
 newLoadBalancerCookieStickinessPolicySetting _cookieExpirationPeriod =
     LoadBalancerCookieStickinessPolicySetting'
@@ -503,7 +503,7 @@ data LoadBalancingMechanismPolicySetting s = LoadBalancingMechanismPolicySetting
 
 -- | Construct a new @load_balancing_mechanism_policy@ settings value.
 newLoadBalancingMechanismPolicySetting
-    :: TF.Attr s P.Text -- ^ @load_balancing_mechanism@ - 'P.loadBalancingMechanism'
+    :: TF.Attr s P.Text -- ^ 'P._loadBalancingMechanism': @load_balancing_mechanism@
     -> LoadBalancingMechanismPolicySetting s
 newLoadBalancingMechanismPolicySetting _loadBalancingMechanism =
     LoadBalancingMechanismPolicySetting'
@@ -560,7 +560,7 @@ data NetworkingInfoSetting s = NetworkingInfoSetting'
 
 -- | Construct a new @networking_info@ settings value.
 newNetworkingInfoSetting
-    :: TF.Attr s P.Int -- ^ @index@ - 'P.index'
+    :: TF.Attr s P.Int -- ^ 'P._index': @index@
     -> NetworkingInfoSetting s
 newNetworkingInfoSetting _index =
     NetworkingInfoSetting'
@@ -683,10 +683,10 @@ data RateLimitingRequestPolicySetting s = RateLimitingRequestPolicySetting'
 
 -- | Construct a new @rate_limiting_request_policy@ settings value.
 newRateLimitingRequestPolicySetting
-    :: TF.Attr s P.Bool -- ^ @delay_excessive_requests@ - 'P.delayExcessiveRequests'
-    -> TF.Attr s P.Int -- ^ @requests_per_second@ - 'P.requestsPerSecond'
-    -> TF.Attr s P.Int -- ^ @burst_size@ - 'P.burstSize'
-    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    :: TF.Attr s P.Bool -- ^ 'P._delayExcessiveRequests': @delay_excessive_requests@
+    -> TF.Attr s P.Int -- ^ 'P._requestsPerSecond': @requests_per_second@
+    -> TF.Attr s P.Int -- ^ 'P._burstSize': @burst_size@
+    -> TF.Attr s P.Text -- ^ 'P._zone': @zone@
     -> RateLimitingRequestPolicySetting s
 newRateLimitingRequestPolicySetting _delayExcessiveRequests _requestsPerSecond _burstSize _zone =
     RateLimitingRequestPolicySetting'
@@ -768,8 +768,8 @@ data RedirectPolicySetting s = RedirectPolicySetting'
 
 -- | Construct a new @redirect_policy@ settings value.
 newRedirectPolicySetting
-    :: TF.Attr s P.Int -- ^ @response_code@ - 'P.responseCode'
-    -> TF.Attr s P.Text -- ^ @redirect_uri@ - 'P.redirectUri'
+    :: TF.Attr s P.Int -- ^ 'P._responseCode': @response_code@
+    -> TF.Attr s P.Text -- ^ 'P._redirectUri': @redirect_uri@
     -> RedirectPolicySetting s
 newRedirectPolicySetting _responseCode _redirectUri =
     RedirectPolicySetting'
@@ -812,7 +812,7 @@ data ResourceAccessControlPolicySetting s = ResourceAccessControlPolicySetting'
 
 -- | Construct a new @resource_access_control_policy@ settings value.
 newResourceAccessControlPolicySetting
-    :: TF.Attr s P.Text -- ^ @disposition@ - 'P.disposition'
+    :: TF.Attr s P.Text -- ^ 'P._disposition': @disposition@
     -> ResourceAccessControlPolicySetting s
 newResourceAccessControlPolicySetting _disposition =
     ResourceAccessControlPolicySetting'
@@ -868,7 +868,7 @@ data SetRequestHeaderPolicySetting s = SetRequestHeaderPolicySetting'
 
 -- | Construct a new @set_request_header_policy@ settings value.
 newSetRequestHeaderPolicySetting
-    :: TF.Attr s P.Text -- ^ @header_name@ - 'P.headerName'
+    :: TF.Attr s P.Text -- ^ 'P._headerName': @header_name@
     -> SetRequestHeaderPolicySetting s
 newSetRequestHeaderPolicySetting _headerName =
     SetRequestHeaderPolicySetting'
@@ -935,8 +935,8 @@ data SslNegotiationPolicySetting s = SslNegotiationPolicySetting'
 
 -- | Construct a new @ssl_negotiation_policy@ settings value.
 newSslNegotiationPolicySetting
-    :: TF.Attr s P.Int -- ^ @port@ - 'P.port'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @ssl_protocol@ - 'P.sslProtocol'
+    :: TF.Attr s P.Int -- ^ 'P._port': @port@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._sslProtocol': @ssl_protocol@
     -> SslNegotiationPolicySetting s
 newSslNegotiationPolicySetting _port _sslProtocol =
     SslNegotiationPolicySetting'
@@ -990,8 +990,8 @@ data StorageSetting s = StorageSetting'
 
 -- | Construct a new @storage@ settings value.
 newStorageSetting
-    :: TF.Attr s P.Int -- ^ @index@ - 'P.index'
-    -> TF.Attr s P.Text -- ^ @volume@ - 'P.volume'
+    :: TF.Attr s P.Int -- ^ 'P._index': @index@
+    -> TF.Attr s P.Text -- ^ 'P._volume': @volume@
     -> StorageSetting s
 newStorageSetting _index _volume =
     StorageSetting'
@@ -1031,7 +1031,7 @@ data TrustedCertificatePolicySetting s = TrustedCertificatePolicySetting'
 
 -- | Construct a new @trusted_certificate_policy@ settings value.
 newTrustedCertificatePolicySetting
-    :: TF.Attr s P.Text -- ^ @trusted_certificate@ - 'P.trustedCertificate'
+    :: TF.Attr s P.Text -- ^ 'P._trustedCertificate': @trusted_certificate@
     -> TrustedCertificatePolicySetting s
 newTrustedCertificatePolicySetting _trustedCertificate =
     TrustedCertificatePolicySetting'
