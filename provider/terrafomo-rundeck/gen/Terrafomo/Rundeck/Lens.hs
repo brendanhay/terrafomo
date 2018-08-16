@@ -44,6 +44,7 @@ module Terrafomo.Rundeck.Lens
     , HasObscureInput (..)
     , HasOption (..)
     , HasPath (..)
+    , HasPreserveOptionsOrder (..)
     , HasProjectName (..)
     , HasRankAttribute (..)
     , HasRankOrder (..)
@@ -252,6 +253,12 @@ class HasPath a b | a -> b where
 
 instance HasPath a b => HasPath (TF.Schema l p a) b where
     path = TF.configuration . path
+
+class HasPreserveOptionsOrder a b | a -> b where
+    preserveOptionsOrder :: P.Lens' a b
+
+instance HasPreserveOptionsOrder a b => HasPreserveOptionsOrder (TF.Schema l p a) b where
+    preserveOptionsOrder = TF.configuration . preserveOptionsOrder
 
 class HasProjectName a b | a -> b where
     projectName :: P.Lens' a b

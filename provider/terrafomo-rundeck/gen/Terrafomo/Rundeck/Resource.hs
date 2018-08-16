@@ -100,6 +100,9 @@ data JobResource s = JobResource'
     , _option                      :: TF.Attr s [TF.Attr s (OptionSetting s)]
     -- ^ @option@ - (Optional)
     --
+    , _preserveOptionsOrder        :: TF.Attr s P.Bool
+    -- ^ @preserve_options_order@ - (Optional)
+    --
     , _projectName                 :: TF.Attr s P.Text
     -- ^ @project_name@ - (Required, Forces New)
     --
@@ -136,6 +139,7 @@ jobResource _command _description _name _projectName =
             , _nodeFilterExcludePrecedence = TF.Nil
             , _nodeFilterQuery = TF.Nil
             , _option = TF.Nil
+            , _preserveOptionsOrder = TF.Nil
             , _projectName = _projectName
             , _rankAttribute = TF.Nil
             , _rankOrder = TF.value "ascending"
@@ -156,6 +160,7 @@ instance TF.IsObject (JobResource s) where
         , TF.assign "node_filter_exclude_precedence" <$> TF.attribute _nodeFilterExcludePrecedence
         , TF.assign "node_filter_query" <$> TF.attribute _nodeFilterQuery
         , TF.assign "option" <$> TF.attribute _option
+        , TF.assign "preserve_options_order" <$> TF.attribute _preserveOptionsOrder
         , TF.assign "project_name" <$> TF.attribute _projectName
         , TF.assign "rank_attribute" <$> TF.attribute _rankAttribute
         , TF.assign "rank_order" <$> TF.attribute _rankOrder
@@ -224,6 +229,11 @@ instance P.HasOption (JobResource s) (TF.Attr s [TF.Attr s (OptionSetting s)]) w
     option =
         P.lens (_option :: JobResource s -> TF.Attr s [TF.Attr s (OptionSetting s)])
                (\s a -> s { _option = a } :: JobResource s)
+
+instance P.HasPreserveOptionsOrder (JobResource s) (TF.Attr s P.Bool) where
+    preserveOptionsOrder =
+        P.lens (_preserveOptionsOrder :: JobResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _preserveOptionsOrder = a } :: JobResource s)
 
 instance P.HasProjectName (JobResource s) (TF.Attr s P.Text) where
     projectName =
@@ -430,7 +440,11 @@ instance s ~ s' => P.HasComputedUiUrl (TF.Ref s' (ProjectResource s)) (TF.Attr s
 -- See the <https://www.terraform.io/docs/providers/rundeck/r/public_key.html terraform documentation>
 -- for more information.
 data PublicKeyResource s = PublicKeyResource'
-    { _path :: TF.Attr s P.Text
+    { _keyMaterial :: TF.Attr s P.Text
+    -- ^ @key_material@ - (Optional)
+    -- The public key data to store, in the usual OpenSSH public key file format
+    --
+    , _path        :: TF.Attr s P.Text
     -- ^ @path@ - (Required, Forces New)
     -- Path to the key within the key store
     --
@@ -443,16 +457,23 @@ publicKeyResource
 publicKeyResource _path =
     TF.unsafeResource "rundeck_public_key" TF.validator $
         PublicKeyResource'
-            { _path = _path
+            { _keyMaterial = TF.Nil
+            , _path = _path
             }
 
 instance TF.IsObject (PublicKeyResource s) where
     toObject PublicKeyResource'{..} = P.catMaybes
-        [ TF.assign "path" <$> TF.attribute _path
+        [ TF.assign "key_material" <$> TF.attribute _keyMaterial
+        , TF.assign "path" <$> TF.attribute _path
         ]
 
 instance TF.IsValid (PublicKeyResource s) where
     validator = P.mempty
+
+instance P.HasKeyMaterial (PublicKeyResource s) (TF.Attr s P.Text) where
+    keyMaterial =
+        P.lens (_keyMaterial :: PublicKeyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _keyMaterial = a } :: PublicKeyResource s)
 
 instance P.HasPath (PublicKeyResource s) (TF.Attr s P.Text) where
     path =
