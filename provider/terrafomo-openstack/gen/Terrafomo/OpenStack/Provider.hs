@@ -20,7 +20,6 @@ module Terrafomo.OpenStack.Provider
     -- * OpenStack Provider Datatype
       Provider (..)
     , newProvider
-    , defaultProvider
 
     -- * OpenStack Specific Aliases
     , DataSource
@@ -56,7 +55,7 @@ import qualified Terrafomo.Validator       as TF
 type DataSource a = TF.Schema ()               Provider a
 type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
 
--- | The @OpenStack@ Terraform provider configuration.
+-- | The @openstack@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/openstack/index.html terraform documentation>
 -- for more information.
@@ -186,40 +185,41 @@ newProvider =
         , _userName = P.Nothing
         }
 
-defaultProvider :: TF.Provider (P.Maybe Provider)
-defaultProvider =
-    TF.Provider
-        { _providerType   = TF.Type P.Nothing "provider"
-        , _providerAlias  = P.Nothing
-        , _providerConfig = P.Nothing
-        }
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "openstack"
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} = P.catMaybes
-        [  TF.assign "auth_url" <$> _authUrl
-        ,  TF.assign "cacert_file" <$> _cacertFile
-        ,  TF.assign "cert" <$> _cert
-        ,  TF.assign "cloud" <$> _cloud
-        ,  TF.assign "default_domain" <$> _defaultDomain
-        ,  TF.assign "domain_id" <$> _domainId
-        ,  TF.assign "domain_name" <$> _domainName
-        ,  TF.assign "endpoint_type" <$> _endpointType
-        ,  TF.assign "insecure" <$> _insecure
-        ,  TF.assign "key" <$> _key
-        ,  TF.assign "password" <$> _password
-        ,  TF.assign "project_domain_id" <$> _projectDomainId
-        ,  TF.assign "project_domain_name" <$> _projectDomainName
-        ,  TF.assign "region" <$> _region
-        ,  TF.assign "swauth" <$> _swauth
-        ,  TF.assign "tenant_id" <$> _tenantId
-        ,  TF.assign "tenant_name" <$> _tenantName
-        ,  TF.assign "token" <$> _token
-        ,  TF.assign "use_octavia" <$> _useOctavia
-        ,  TF.assign "user_domain_id" <$> _userDomainId
-        ,  TF.assign "user_domain_name" <$> _userDomainName
-        ,  TF.assign "user_id" <$> _userId
-        ,  TF.assign "user_name" <$> _userName
-        ]
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy Provider)
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "auth_url" <$> _authUrl
+                  , TF.assign "cacert_file" <$> _cacertFile
+                  , TF.assign "cert" <$> _cert
+                  , TF.assign "cloud" <$> _cloud
+                  , TF.assign "default_domain" <$> _defaultDomain
+                  , TF.assign "domain_id" <$> _domainId
+                  , TF.assign "domain_name" <$> _domainName
+                  , TF.assign "endpoint_type" <$> _endpointType
+                  , TF.assign "insecure" <$> _insecure
+                  , TF.assign "key" <$> _key
+                  , TF.assign "password" <$> _password
+                  , TF.assign "project_domain_id" <$> _projectDomainId
+                  , TF.assign "project_domain_name" <$> _projectDomainName
+                  , TF.assign "region" <$> _region
+                  , TF.assign "swauth" <$> _swauth
+                  , TF.assign "tenant_id" <$> _tenantId
+                  , TF.assign "tenant_name" <$> _tenantName
+                  , TF.assign "token" <$> _token
+                  , TF.assign "use_octavia" <$> _useOctavia
+                  , TF.assign "user_domain_id" <$> _userDomainId
+                  , TF.assign "user_domain_name" <$> _userDomainName
+                  , TF.assign "user_id" <$> _userId
+                  , TF.assign "user_name" <$> _userName
+                  ])
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
