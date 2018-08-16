@@ -458,20 +458,20 @@ elabDefault label schema = do
 
 -- Overrides
 
-overrideSchema :: Map Key (Map Text Text) -> Schema a -> Schema a
+overrideSchema :: Map DataName (Map VarName Text) -> Schema a -> Schema a
 overrideSchema m x =
-    case Map.lookup (schemaKey x) m of
+    case Map.lookup (schemaName x) m of
         Nothing -> x
         Just n  -> x
             { schemaArguments  = overrideFields n (schemaArguments  x)
             , schemaAttributes = overrideFields n (schemaAttributes x)
             }
 
-overrideFields :: Map Text Text -> [Field a] -> [Field a]
+overrideFields :: Map VarName Text -> [Field a] -> [Field a]
 overrideFields m = map field
   where
     field x =
-        case Map.lookup (fieldOriginal x) m of
+        case Map.lookup (fieldMethod x) m of
             Nothing  -> x
             Just typ -> x
                 { fieldType = Type.Free typ

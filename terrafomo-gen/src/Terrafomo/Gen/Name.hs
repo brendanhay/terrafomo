@@ -10,7 +10,15 @@ import qualified Data.Text          as Text
 import qualified Terrafomo.Gen.Text as Text
 
 newtype Name (a :: Symbol) = Name { fromName :: Text }
-    deriving (Show, Eq, Ord, JSON.ToJSON, JSON.ToJSONKey, JSON.FromJSON)
+    deriving
+        ( Show
+        , Eq
+        , Ord
+        , JSON.ToJSON
+        , JSON.ToJSONKey
+        , JSON.FromJSON
+        , JSON.FromJSONKey
+        )
 
 unsafeRename :: (Text -> Text) -> Name a -> Name b
 unsafeRename f (Name x) = Name (f x)

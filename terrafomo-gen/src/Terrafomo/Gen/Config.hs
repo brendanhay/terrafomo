@@ -15,7 +15,7 @@ import GHC.Generics (Generic)
 
 import Terrafomo.Gen.Haskell (Key)
 import Terrafomo.Gen.JSON    ((.!=), (.:), (.:?))
-import Terrafomo.Gen.Name    (ProviderName)
+import Terrafomo.Gen.Name    (DataName, ProviderName, VarName)
 
 import qualified Data.Map.Strict    as Map
 import qualified Data.Set           as Set
@@ -85,7 +85,7 @@ data Config = Config'
     , configProviderName  :: !ProviderName
     , configPartitionSize :: !Int
     , configDependencies  :: !(Set Text)
-    , configOverrides     :: !(Map Key (Map Text Text))
+    , configOverrides     :: !(Map DataName (Map VarName Text))
     } deriving (Show, Eq)
 
 instance JSON.FromJSON Config where

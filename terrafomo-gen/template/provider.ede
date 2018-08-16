@@ -69,7 +69,7 @@ data Provider = {{ provider.schema.con.name }}
 defaultProvider :: TF.Provider (P.Maybe Provider)
 defaultProvider =
     TF.Provider
-        { _providerType   = TF.Type P.Nothing "{{ provider.schema.original }}"
+        { _providerType   = TF.Type P.Nothing "{{ provider.name }}"
         , _providerAlias  = P.Nothing
         , _providerConfig = P.Nothing
         }
