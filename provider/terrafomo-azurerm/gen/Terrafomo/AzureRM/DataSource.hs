@@ -222,8 +222,8 @@ data AppServiceData s = AppServiceData'
 
 -- | Define a new @azurerm_app_service@ datasource value.
 appServiceData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (AppServiceData s)
 appServiceData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_app_service" TF.validator $
@@ -308,8 +308,8 @@ data AppServicePlanData s = AppServicePlanData'
 
 -- | Define a new @azurerm_app_service_plan@ datasource value.
 appServicePlanData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (AppServicePlanData s)
 appServicePlanData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_app_service_plan" TF.validator $
@@ -373,8 +373,8 @@ data ApplicationSecurityGroupData s = ApplicationSecurityGroupData'
 
 -- | Define a new @azurerm_application_security_group@ datasource value.
 applicationSecurityGroupData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (ApplicationSecurityGroupData s)
 applicationSecurityGroupData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_application_security_group" TF.validator $
@@ -502,7 +502,7 @@ data BuiltinRoleDefinitionData s = BuiltinRoleDefinitionData'
 
 -- | Define a new @azurerm_builtin_role_definition@ datasource value.
 builtinRoleDefinitionData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (BuiltinRoleDefinitionData s)
 builtinRoleDefinitionData _name =
     TF.unsafeDataSource "azurerm_builtin_role_definition" TF.validator $
@@ -553,8 +553,8 @@ data CdnProfileData s = CdnProfileData'
 
 -- | Define a new @azurerm_cdn_profile@ datasource value.
 cdnProfileData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (CdnProfileData s)
 cdnProfileData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_cdn_profile" TF.validator $
@@ -647,8 +647,8 @@ data ContainerRegistryData s = ContainerRegistryData'
 
 -- | Define a new @azurerm_container_registry@ datasource value.
 containerRegistryData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (ContainerRegistryData s)
 containerRegistryData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_container_registry" TF.validator $
@@ -715,8 +715,8 @@ data CosmosdbAccountData s = CosmosdbAccountData'
 
 -- | Define a new @azurerm_cosmosdb_account@ datasource value.
 cosmosdbAccountData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (CosmosdbAccountData s)
 cosmosdbAccountData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_cosmosdb_account" TF.validator $
@@ -810,8 +810,8 @@ data DataLakeStoreData s = DataLakeStoreData'
 
 -- | Define a new @azurerm_data_lake_store@ datasource value.
 dataLakeStoreData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (DataLakeStoreData s)
 dataLakeStoreData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_data_lake_store" TF.validator $
@@ -875,7 +875,7 @@ data DnsZoneData s = DnsZoneData'
 
 -- | Define a new @azurerm_dns_zone@ datasource value.
 dnsZoneData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (DnsZoneData s)
 dnsZoneData _name =
     TF.unsafeDataSource "azurerm_dns_zone" TF.validator $
@@ -938,8 +938,8 @@ data EventhubNamespaceData s = EventhubNamespaceData'
 
 -- | Define a new @azurerm_eventhub_namespace@ datasource value.
 eventhubNamespaceData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (EventhubNamespaceData s)
 eventhubNamespaceData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_eventhub_namespace" TF.validator $
@@ -1027,7 +1027,7 @@ data ImageData s = ImageData'
 
 -- | Define a new @azurerm_image@ datasource value.
 imageData
-    :: TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (ImageData s)
 imageData _resourceGroupName =
     TF.unsafeDataSource "azurerm_image" TF.validator $
@@ -1110,8 +1110,8 @@ data KeyVaultData s = KeyVaultData'
 
 -- | Define a new @azurerm_key_vault@ datasource value.
 keyVaultData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (KeyVaultData s)
 keyVaultData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_key_vault" TF.validator $
@@ -1181,7 +1181,7 @@ data KeyVaultAccessPolicyData s = KeyVaultAccessPolicyData'
 
 -- | Define a new @azurerm_key_vault_access_policy@ datasource value.
 keyVaultAccessPolicyData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (KeyVaultAccessPolicyData s)
 keyVaultAccessPolicyData _name =
     TF.unsafeDataSource "azurerm_key_vault_access_policy" TF.validator $
@@ -1229,8 +1229,8 @@ data KeyVaultSecretData s = KeyVaultSecretData'
 
 -- | Define a new @azurerm_key_vault_secret@ datasource value.
 keyVaultSecretData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @vault_uri@ - 'P.vaultUri'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @vault_uri@ ('P._vaultUri', 'P.vaultUri')
     -> P.DataSource (KeyVaultSecretData s)
 keyVaultSecretData _name _vaultUri =
     TF.unsafeDataSource "azurerm_key_vault_secret" TF.validator $
@@ -1288,8 +1288,8 @@ data KubernetesClusterData s = KubernetesClusterData'
 
 -- | Define a new @azurerm_kubernetes_cluster@ datasource value.
 kubernetesClusterData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (KubernetesClusterData s)
 kubernetesClusterData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_kubernetes_cluster" TF.validator $
@@ -1371,8 +1371,8 @@ data LogicAppWorkflowData s = LogicAppWorkflowData'
 
 -- | Define a new @azurerm_logic_app_workflow@ datasource value.
 logicAppWorkflowData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (LogicAppWorkflowData s)
 logicAppWorkflowData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_logic_app_workflow" TF.validator $
@@ -1436,8 +1436,8 @@ data ManagedDiskData s = ManagedDiskData'
 
 -- | Define a new @azurerm_managed_disk@ datasource value.
 managedDiskData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (ManagedDiskData s)
 managedDiskData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_managed_disk" TF.validator $
@@ -1504,8 +1504,8 @@ data NetworkInterfaceData s = NetworkInterfaceData'
 
 -- | Define a new @azurerm_network_interface@ datasource value.
 networkInterfaceData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (NetworkInterfaceData s)
 networkInterfaceData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_network_interface" TF.validator $
@@ -1593,8 +1593,8 @@ data NetworkSecurityGroupData s = NetworkSecurityGroupData'
 
 -- | Define a new @azurerm_network_security_group@ datasource value.
 networkSecurityGroupData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (NetworkSecurityGroupData s)
 networkSecurityGroupData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_network_security_group" TF.validator $
@@ -1652,9 +1652,9 @@ data NotificationHubData s = NotificationHubData'
 
 -- | Define a new @azurerm_notification_hub@ datasource value.
 notificationHubData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @namespace_name@ ('P._namespaceName', 'P.namespaceName')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (NotificationHubData s)
 notificationHubData _name _namespaceName _resourceGroupName =
     TF.unsafeDataSource "azurerm_notification_hub" TF.validator $
@@ -1716,8 +1716,8 @@ data NotificationHubNamespaceData s = NotificationHubNamespaceData'
 
 -- | Define a new @azurerm_notification_hub_namespace@ datasource value.
 notificationHubNamespaceData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (NotificationHubNamespaceData s)
 notificationHubNamespaceData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_notification_hub_namespace" TF.validator $
@@ -1784,10 +1784,10 @@ data PlatformImageData s = PlatformImageData'
 
 -- | Define a new @azurerm_platform_image@ datasource value.
 platformImageData
-    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @offer@ - 'P.offer'
-    -> TF.Attr s P.Text -- ^ @publisher@ - 'P.publisher'
-    -> TF.Attr s P.Text -- ^ @sku@ - 'P.sku'
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @offer@ ('P._offer', 'P.offer')
+    -> TF.Attr s P.Text -- ^ @publisher@ ('P._publisher', 'P.publisher')
+    -> TF.Attr s P.Text -- ^ @sku@ ('P._sku', 'P.sku')
     -> P.DataSource (PlatformImageData s)
 platformImageData _location _offer _publisher _sku =
     TF.unsafeDataSource "azurerm_platform_image" TF.validator $
@@ -1850,8 +1850,8 @@ data PublicIpData s = PublicIpData'
 
 -- | Define a new @azurerm_public_ip@ datasource value.
 publicIpData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (PublicIpData s)
 publicIpData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_public_ip" TF.validator $
@@ -1918,7 +1918,7 @@ data PublicIpsData s = PublicIpsData'
 
 -- | Define a new @azurerm_public_ips@ datasource value.
 publicIpsData
-    :: TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (PublicIpsData s)
 publicIpsData _resourceGroupName =
     TF.unsafeDataSource "azurerm_public_ips" TF.validator $
@@ -1981,8 +1981,8 @@ data RecoveryServicesVaultData s = RecoveryServicesVaultData'
 
 -- | Define a new @azurerm_recovery_services_vault@ datasource value.
 recoveryServicesVaultData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (RecoveryServicesVaultData s)
 recoveryServicesVaultData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_recovery_services_vault" TF.validator $
@@ -2034,7 +2034,7 @@ data ResourceGroupData s = ResourceGroupData'
 
 -- | Define a new @azurerm_resource_group@ datasource value.
 resourceGroupData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ResourceGroupData s)
 resourceGroupData _name =
     TF.unsafeDataSource "azurerm_resource_group" TF.validator $
@@ -2079,8 +2079,8 @@ data RoleDefinitionData s = RoleDefinitionData'
 
 -- | Define a new @azurerm_role_definition@ datasource value.
 roleDefinitionData
-    :: TF.Attr s P.Text -- ^ @role_definition_id@ - 'P.roleDefinitionId'
-    -> TF.Attr s P.Text -- ^ @scope@ - 'P.scope'
+    :: TF.Attr s P.Text -- ^ @role_definition_id@ ('P._roleDefinitionId', 'P.roleDefinitionId')
+    -> TF.Attr s P.Text -- ^ @scope@ ('P._scope', 'P.scope')
     -> P.DataSource (RoleDefinitionData s)
 roleDefinitionData _roleDefinitionId _scope =
     TF.unsafeDataSource "azurerm_role_definition" TF.validator $
@@ -2141,8 +2141,8 @@ data RouteTableData s = RouteTableData'
 
 -- | Define a new @azurerm_route_table@ datasource value.
 routeTableData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (RouteTableData s)
 routeTableData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_route_table" TF.validator $
@@ -2200,8 +2200,8 @@ data SchedulerJobCollectionData s = SchedulerJobCollectionData'
 
 -- | Define a new @azurerm_scheduler_job_collection@ datasource value.
 schedulerJobCollectionData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (SchedulerJobCollectionData s)
 schedulerJobCollectionData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_scheduler_job_collection" TF.validator $
@@ -2262,8 +2262,8 @@ data SnapshotData s = SnapshotData'
 
 -- | Define a new @azurerm_snapshot@ datasource value.
 snapshotData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (SnapshotData s)
 snapshotData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_snapshot" TF.validator $
@@ -2333,8 +2333,8 @@ data StorageAccountData s = StorageAccountData'
 
 -- | Define a new @azurerm_storage_account@ datasource value.
 storageAccountData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (StorageAccountData s)
 storageAccountData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_storage_account" TF.validator $
@@ -2473,12 +2473,12 @@ data StorageAccountSasData s = StorageAccountSasData'
 
 -- | Define a new @azurerm_storage_account_sas@ datasource value.
 storageAccountSasData
-    :: TF.Attr s P.Text -- ^ @expiry@ - 'P.expiry'
-    -> TF.Attr s (PermissionsSetting s) -- ^ @permissions@ - 'P.permissions'
-    -> TF.Attr s (ServicesSetting s) -- ^ @services@ - 'P.services'
-    -> TF.Attr s P.Text -- ^ @start@ - 'P.start'
-    -> TF.Attr s P.Text -- ^ @connection_string@ - 'P.connectionString'
-    -> TF.Attr s (ResourceTypesSetting s) -- ^ @resource_types@ - 'P.resourceTypes'
+    :: TF.Attr s P.Text -- ^ @expiry@ ('P._expiry', 'P.expiry')
+    -> TF.Attr s (PermissionsSetting s) -- ^ @permissions@ ('P._permissions', 'P.permissions')
+    -> TF.Attr s (ServicesSetting s) -- ^ @services@ ('P._services', 'P.services')
+    -> TF.Attr s P.Text -- ^ @start@ ('P._start', 'P.start')
+    -> TF.Attr s P.Text -- ^ @connection_string@ ('P._connectionString', 'P.connectionString')
+    -> TF.Attr s (ResourceTypesSetting s) -- ^ @resource_types@ ('P._resourceTypes', 'P.resourceTypes')
     -> P.DataSource (StorageAccountSasData s)
 storageAccountSasData _expiry _permissions _services _start _connectionString _resourceTypes =
     TF.unsafeDataSource "azurerm_storage_account_sas" TF.validator $
@@ -2577,9 +2577,9 @@ data SubnetData s = SubnetData'
 
 -- | Define a new @azurerm_subnet@ datasource value.
 subnetData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @virtual_network_name@ - 'P.virtualNetworkName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @virtual_network_name@ ('P._virtualNetworkName', 'P.virtualNetworkName')
     -> P.DataSource (SubnetData s)
 subnetData _name _resourceGroupName _virtualNetworkName =
     TF.unsafeDataSource "azurerm_subnet" TF.validator $
@@ -2708,7 +2708,7 @@ data TrafficManagerGeographicalLocationData s = TrafficManagerGeographicalLocati
 
 -- | Define a new @azurerm_traffic_manager_geographical_location@ datasource value.
 trafficManagerGeographicalLocationData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (TrafficManagerGeographicalLocationData s)
 trafficManagerGeographicalLocationData _name =
     TF.unsafeDataSource "azurerm_traffic_manager_geographical_location" TF.validator $
@@ -2747,8 +2747,8 @@ data VirtualNetworkData s = VirtualNetworkData'
 
 -- | Define a new @azurerm_virtual_network@ datasource value.
 virtualNetworkData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (VirtualNetworkData s)
 virtualNetworkData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_virtual_network" TF.validator $
@@ -2806,8 +2806,8 @@ data VirtualNetworkGatewayData s = VirtualNetworkGatewayData'
 
 -- | Define a new @azurerm_virtual_network_gateway@ datasource value.
 virtualNetworkGatewayData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.DataSource (VirtualNetworkGatewayData s)
 virtualNetworkGatewayData _name _resourceGroupName =
     TF.unsafeDataSource "azurerm_virtual_network_gateway" TF.validator $

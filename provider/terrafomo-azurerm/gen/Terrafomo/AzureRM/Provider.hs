@@ -17,10 +17,11 @@
 --
 module Terrafomo.AzureRM.Provider
     (
+    -- * AzureRM Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** AzureRM Specific Aliases
+    -- * AzureRM Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -89,7 +90,7 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @environment@ - 'P.environment'
+    :: P.Text -- ^ @environment@ ('P._environment', 'P.environment')
     -> Provider
 newProvider _environment =
     Provider'
@@ -108,7 +109,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "azurerm"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ TF.assign "client_id" <$> _clientId
             , TF.assign "client_secret" <$> _clientSecret

@@ -231,10 +231,10 @@ data RoleDefinitionResource s = RoleDefinitionResource'
 
 -- | Define a new @azurerm_role_definition@ resource value.
 roleDefinitionResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (PermissionsSetting s)] -- ^ @permissions@ - 'P.permissions'
-    -> TF.Attr s P.Text -- ^ @scope@ - 'P.scope'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @assignable_scopes@ - 'P.assignableScopes'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s [TF.Attr s (PermissionsSetting s)] -- ^ @permissions@ ('P._permissions', 'P.permissions')
+    -> TF.Attr s P.Text -- ^ @scope@ ('P._scope', 'P.scope')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @assignable_scopes@ ('P._assignableScopes', 'P.assignableScopes')
     -> P.Resource (RoleDefinitionResource s)
 roleDefinitionResource _name _permissions _scope _assignableScopes =
     TF.unsafeResource "azurerm_role_definition" TF.validator $
@@ -313,11 +313,11 @@ data RouteResource s = RouteResource'
 
 -- | Define a new @azurerm_route@ resource value.
 routeResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @route_table_name@ - 'P.routeTableName'
-    -> TF.Attr s P.Text -- ^ @address_prefix@ - 'P.addressPrefix'
-    -> TF.Attr s P.Text -- ^ @next_hop_type@ - 'P.nextHopType'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @route_table_name@ ('P._routeTableName', 'P.routeTableName')
+    -> TF.Attr s P.Text -- ^ @address_prefix@ ('P._addressPrefix', 'P.addressPrefix')
+    -> TF.Attr s P.Text -- ^ @next_hop_type@ ('P._nextHopType', 'P.nextHopType')
     -> P.Resource (RouteResource s)
 routeResource _name _resourceGroupName _routeTableName _addressPrefix _nextHopType =
     TF.unsafeResource "azurerm_route" TF.validator $
@@ -393,9 +393,9 @@ data RouteTableResource s = RouteTableResource'
 
 -- | Define a new @azurerm_route_table@ resource value.
 routeTableResource
-    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.Resource (RouteTableResource s)
 routeTableResource _location _name _resourceGroupName =
     TF.unsafeResource "azurerm_route_table" TF.validator $
@@ -497,9 +497,9 @@ data SchedulerJobResource s = SchedulerJobResource'
 
 -- | Define a new @azurerm_scheduler_job@ resource value.
 schedulerJobResource
-    :: TF.Attr s P.Text -- ^ @job_collection_name@ - 'P.jobCollectionName'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @job_collection_name@ ('P._jobCollectionName', 'P.jobCollectionName')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.Resource (SchedulerJobResource s)
 schedulerJobResource _jobCollectionName _name _resourceGroupName =
     TF.unsafeResource "azurerm_scheduler_job" TF.validator $
@@ -657,10 +657,10 @@ data SchedulerJobCollectionResource s = SchedulerJobCollectionResource'
 
 -- | Define a new @azurerm_scheduler_job_collection@ resource value.
 schedulerJobCollectionResource
-    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @sku@ - 'P.sku'
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @sku@ ('P._sku', 'P.sku')
     -> P.Resource (SchedulerJobCollectionResource s)
 schedulerJobCollectionResource _location _name _resourceGroupName _sku =
     TF.unsafeResource "azurerm_scheduler_job_collection" TF.validator $
@@ -747,10 +747,10 @@ data SearchServiceResource s = SearchServiceResource'
 
 -- | Define a new @azurerm_search_service@ resource value.
 searchServiceResource
-    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @sku@ - 'P.sku'
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @sku@ ('P._sku', 'P.sku')
     -> P.Resource (SearchServiceResource s)
 searchServiceResource _location _name _resourceGroupName _sku =
     TF.unsafeResource "azurerm_search_service" TF.validator $
@@ -852,14 +852,14 @@ data ServiceFabricClusterResource s = ServiceFabricClusterResource'
 
 -- | Define a new @azurerm_service_fabric_cluster@ resource value.
 serviceFabricClusterResource
-    :: TF.Attr s P.Text -- ^ @management_endpoint@ - 'P.managementEndpoint'
-    -> TF.Attr s P.Text -- ^ @vm_image@ - 'P.vmImage'
-    -> TF.Attr s P.Text -- ^ @reliability_level@ - 'P.reliabilityLevel'
-    -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @upgrade_mode@ - 'P.upgradeMode'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s [TF.Attr s (NodeTypeSetting s)] -- ^ @node_type@ - 'P.nodeType'
+    :: TF.Attr s P.Text -- ^ @management_endpoint@ ('P._managementEndpoint', 'P.managementEndpoint')
+    -> TF.Attr s P.Text -- ^ @vm_image@ ('P._vmImage', 'P.vmImage')
+    -> TF.Attr s P.Text -- ^ @reliability_level@ ('P._reliabilityLevel', 'P.reliabilityLevel')
+    -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @upgrade_mode@ ('P._upgradeMode', 'P.upgradeMode')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s [TF.Attr s (NodeTypeSetting s)] -- ^ @node_type@ ('P._nodeType', 'P.nodeType')
     -> P.Resource (ServiceFabricClusterResource s)
 serviceFabricClusterResource _managementEndpoint _vmImage _reliabilityLevel _location _upgradeMode _name _resourceGroupName _nodeType =
     TF.unsafeResource "azurerm_service_fabric_cluster" TF.validator $
@@ -1009,10 +1009,10 @@ data ServicebusNamespaceResource s = ServicebusNamespaceResource'
 
 -- | Define a new @azurerm_servicebus_namespace@ resource value.
 servicebusNamespaceResource
-    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @sku@ - 'P.sku'
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @sku@ ('P._sku', 'P.sku')
     -> P.Resource (ServicebusNamespaceResource s)
 servicebusNamespaceResource _location _name _resourceGroupName _sku =
     TF.unsafeResource "azurerm_servicebus_namespace" TF.validator $
@@ -1106,9 +1106,9 @@ data ServicebusNamespaceAuthorizationRuleResource s = ServicebusNamespaceAuthori
 
 -- | Define a new @azurerm_servicebus_namespace_authorization_rule@ resource value.
 servicebusNamespaceAuthorizationRuleResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @namespace_name@ ('P._namespaceName', 'P.namespaceName')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.Resource (ServicebusNamespaceAuthorizationRuleResource s)
 servicebusNamespaceAuthorizationRuleResource _name _namespaceName _resourceGroupName =
     TF.unsafeResource "azurerm_servicebus_namespace_authorization_rule" TF.validator $
@@ -1212,9 +1212,9 @@ data ServicebusQueueResource s = ServicebusQueueResource'
 
 -- | Define a new @azurerm_servicebus_queue@ resource value.
 servicebusQueueResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @namespace_name@ ('P._namespaceName', 'P.namespaceName')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.Resource (ServicebusQueueResource s)
 servicebusQueueResource _name _namespaceName _resourceGroupName =
     TF.unsafeResource "azurerm_servicebus_queue" TF.validator $
@@ -1332,10 +1332,10 @@ data ServicebusQueueAuthorizationRuleResource s = ServicebusQueueAuthorizationRu
 
 -- | Define a new @azurerm_servicebus_queue_authorization_rule@ resource value.
 servicebusQueueAuthorizationRuleResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
-    -> TF.Attr s P.Text -- ^ @queue_name@ - 'P.queueName'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @namespace_name@ ('P._namespaceName', 'P.namespaceName')
+    -> TF.Attr s P.Text -- ^ @queue_name@ ('P._queueName', 'P.queueName')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.Resource (ServicebusQueueAuthorizationRuleResource s)
 servicebusQueueAuthorizationRuleResource _name _namespaceName _queueName _resourceGroupName =
     TF.unsafeResource "azurerm_servicebus_queue_authorization_rule" TF.validator $
@@ -1449,11 +1449,11 @@ data ServicebusSubscriptionResource s = ServicebusSubscriptionResource'
 
 -- | Define a new @azurerm_servicebus_subscription@ resource value.
 servicebusSubscriptionResource
-    :: TF.Attr s P.Int -- ^ @max_delivery_count@ - 'P.maxDeliveryCount'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @topic_name@ - 'P.topicName'
+    :: TF.Attr s P.Int -- ^ @max_delivery_count@ ('P._maxDeliveryCount', 'P.maxDeliveryCount')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @namespace_name@ ('P._namespaceName', 'P.namespaceName')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @topic_name@ ('P._topicName', 'P.topicName')
     -> P.Resource (ServicebusSubscriptionResource s)
 servicebusSubscriptionResource _maxDeliveryCount _name _namespaceName _resourceGroupName _topicName =
     TF.unsafeResource "azurerm_servicebus_subscription" TF.validator $
@@ -1584,12 +1584,12 @@ data ServicebusSubscriptionRuleResource s = ServicebusSubscriptionRuleResource'
 
 -- | Define a new @azurerm_servicebus_subscription_rule@ resource value.
 servicebusSubscriptionRuleResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @subscription_name@ - 'P.subscriptionName'
-    -> TF.Attr s P.Text -- ^ @topic_name@ - 'P.topicName'
-    -> TF.Attr s P.Text -- ^ @filter_type@ - 'P.filterType'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @namespace_name@ ('P._namespaceName', 'P.namespaceName')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @subscription_name@ ('P._subscriptionName', 'P.subscriptionName')
+    -> TF.Attr s P.Text -- ^ @topic_name@ ('P._topicName', 'P.topicName')
+    -> TF.Attr s P.Text -- ^ @filter_type@ ('P._filterType', 'P.filterType')
     -> P.Resource (ServicebusSubscriptionRuleResource s)
 servicebusSubscriptionRuleResource _name _namespaceName _resourceGroupName _subscriptionName _topicName _filterType =
     TF.unsafeResource "azurerm_servicebus_subscription_rule" TF.validator $
@@ -1720,9 +1720,9 @@ data ServicebusTopicResource s = ServicebusTopicResource'
 
 -- | Define a new @azurerm_servicebus_topic@ resource value.
 servicebusTopicResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @namespace_name@ ('P._namespaceName', 'P.namespaceName')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.Resource (ServicebusTopicResource s)
 servicebusTopicResource _name _namespaceName _resourceGroupName =
     TF.unsafeResource "azurerm_servicebus_topic" TF.validator $
@@ -1844,10 +1844,10 @@ data ServicebusTopicAuthorizationRuleResource s = ServicebusTopicAuthorizationRu
 
 -- | Define a new @azurerm_servicebus_topic_authorization_rule@ resource value.
 servicebusTopicAuthorizationRuleResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @topic_name@ - 'P.topicName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @namespace_name@ ('P._namespaceName', 'P.namespaceName')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @topic_name@ ('P._topicName', 'P.topicName')
     -> P.Resource (ServicebusTopicAuthorizationRuleResource s)
 servicebusTopicAuthorizationRuleResource _name _namespaceName _resourceGroupName _topicName =
     TF.unsafeResource "azurerm_servicebus_topic_authorization_rule" TF.validator $
@@ -1958,10 +1958,10 @@ data SnapshotResource s = SnapshotResource'
 
 -- | Define a new @azurerm_snapshot@ resource value.
 snapshotResource
-    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @create_option@ - 'P.createOption'
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @create_option@ ('P._createOption', 'P.createOption')
     -> P.Resource (SnapshotResource s)
 snapshotResource _location _name _resourceGroupName _createOption =
     TF.unsafeResource "azurerm_snapshot" TF.validator $
@@ -2068,11 +2068,11 @@ data SqlActiveDirectoryAdministratorResource s = SqlActiveDirectoryAdministrator
 
 -- | Define a new @azurerm_sql_active_directory_administrator@ resource value.
 sqlActiveDirectoryAdministratorResource
-    :: TF.Attr s P.Text -- ^ @object_id@ - 'P.objectId'
-    -> TF.Attr s P.Text -- ^ @tenant_id@ - 'P.tenantId'
-    -> TF.Attr s P.Text -- ^ @login@ - 'P.login'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @server_name@ - 'P.serverName'
+    :: TF.Attr s P.Text -- ^ @object_id@ ('P._objectId', 'P.objectId')
+    -> TF.Attr s P.Text -- ^ @tenant_id@ ('P._tenantId', 'P.tenantId')
+    -> TF.Attr s P.Text -- ^ @login@ ('P._login', 'P.login')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @server_name@ ('P._serverName', 'P.serverName')
     -> P.Resource (SqlActiveDirectoryAdministratorResource s)
 sqlActiveDirectoryAdministratorResource _objectId _tenantId _login _resourceGroupName _serverName =
     TF.unsafeResource "azurerm_sql_active_directory_administrator" TF.validator $
@@ -2151,10 +2151,10 @@ data SqlDatabaseResource s = SqlDatabaseResource'
 
 -- | Define a new @azurerm_sql_database@ resource value.
 sqlDatabaseResource
-    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @server_name@ - 'P.serverName'
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @server_name@ ('P._serverName', 'P.serverName')
     -> P.Resource (SqlDatabaseResource s)
 sqlDatabaseResource _location _name _resourceGroupName _serverName =
     TF.unsafeResource "azurerm_sql_database" TF.validator $
@@ -2283,12 +2283,12 @@ data SqlElasticpoolResource s = SqlElasticpoolResource'
 
 -- | Define a new @azurerm_sql_elasticpool@ resource value.
 sqlElasticpoolResource
-    :: TF.Attr s P.Int -- ^ @dtu@ - 'P.dtu'
-    -> TF.Attr s P.Text -- ^ @edition@ - 'P.edition'
-    -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @server_name@ - 'P.serverName'
+    :: TF.Attr s P.Int -- ^ @dtu@ ('P._dtu', 'P.dtu')
+    -> TF.Attr s P.Text -- ^ @edition@ ('P._edition', 'P.edition')
+    -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @server_name@ ('P._serverName', 'P.serverName')
     -> P.Resource (SqlElasticpoolResource s)
 sqlElasticpoolResource _dtu _edition _location _name _resourceGroupName _serverName =
     TF.unsafeResource "azurerm_sql_elasticpool" TF.validator $
@@ -2386,11 +2386,11 @@ data SqlFirewallRuleResource s = SqlFirewallRuleResource'
 
 -- | Define a new @azurerm_sql_firewall_rule@ resource value.
 sqlFirewallRuleResource
-    :: TF.Attr s P.Text -- ^ @end_ip_address@ - 'P.endIpAddress'
-    -> TF.Attr s P.Text -- ^ @start_ip_address@ - 'P.startIpAddress'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @server_name@ - 'P.serverName'
+    :: TF.Attr s P.Text -- ^ @end_ip_address@ ('P._endIpAddress', 'P.endIpAddress')
+    -> TF.Attr s P.Text -- ^ @start_ip_address@ ('P._startIpAddress', 'P.startIpAddress')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @server_name@ ('P._serverName', 'P.serverName')
     -> P.Resource (SqlFirewallRuleResource s)
 sqlFirewallRuleResource _endIpAddress _startIpAddress _name _resourceGroupName _serverName =
     TF.unsafeResource "azurerm_sql_firewall_rule" TF.validator $
@@ -2469,12 +2469,12 @@ data SqlServerResource s = SqlServerResource'
 
 -- | Define a new @azurerm_sql_server@ resource value.
 sqlServerResource
-    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @administrator_login@ - 'P.administratorLogin'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @administrator_login_password@ - 'P.administratorLoginPassword'
-    -> TF.Attr s P.Text -- ^ @version@ - 'P.version'
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @administrator_login@ ('P._administratorLogin', 'P.administratorLogin')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @administrator_login_password@ ('P._administratorLoginPassword', 'P.administratorLoginPassword')
+    -> TF.Attr s P.Text -- ^ @version@ ('P._version', 'P.version')
     -> P.Resource (SqlServerResource s)
 sqlServerResource _location _administratorLogin _name _resourceGroupName _administratorLoginPassword _version =
     TF.unsafeResource "azurerm_sql_server" TF.validator $
@@ -2563,10 +2563,10 @@ data SqlVirtualNetworkRuleResource s = SqlVirtualNetworkRuleResource'
 
 -- | Define a new @azurerm_sql_virtual_network_rule@ resource value.
 sqlVirtualNetworkRuleResource
-    :: TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @server_name@ - 'P.serverName'
+    :: TF.Attr s P.Text -- ^ @subnet_id@ ('P._subnetId', 'P.subnetId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @server_name@ ('P._serverName', 'P.serverName')
     -> P.Resource (SqlVirtualNetworkRuleResource s)
 sqlVirtualNetworkRuleResource _subnetId _name _resourceGroupName _serverName =
     TF.unsafeResource "azurerm_sql_virtual_network_rule" TF.validator $
@@ -2663,11 +2663,11 @@ data StorageAccountResource s = StorageAccountResource'
 
 -- | Define a new @azurerm_storage_account@ resource value.
 storageAccountResource
-    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @account_tier@ - 'P.accountTier'
-    -> TF.Attr s P.Text -- ^ @account_replication_type@ - 'P.accountReplicationType'
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @account_tier@ ('P._accountTier', 'P.accountTier')
+    -> TF.Attr s P.Text -- ^ @account_replication_type@ ('P._accountReplicationType', 'P.accountReplicationType')
     -> P.Resource (StorageAccountResource s)
 storageAccountResource _location _name _resourceGroupName _accountTier _accountReplicationType =
     TF.unsafeResource "azurerm_storage_account" TF.validator $
@@ -2882,10 +2882,10 @@ data StorageBlobResource s = StorageBlobResource'
 
 -- | Define a new @azurerm_storage_blob@ resource value.
 storageBlobResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @storage_account_name@ - 'P.storageAccountName'
-    -> TF.Attr s P.Text -- ^ @storage_container_name@ - 'P.storageContainerName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @storage_account_name@ ('P._storageAccountName', 'P.storageAccountName')
+    -> TF.Attr s P.Text -- ^ @storage_container_name@ ('P._storageContainerName', 'P.storageContainerName')
     -> P.Resource (StorageBlobResource s)
 storageBlobResource _name _resourceGroupName _storageAccountName _storageContainerName =
     TF.unsafeResource "azurerm_storage_blob" TF.validator $
@@ -3019,9 +3019,9 @@ data StorageContainerResource s = StorageContainerResource'
 
 -- | Define a new @azurerm_storage_container@ resource value.
 storageContainerResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @storage_account_name@ - 'P.storageAccountName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @storage_account_name@ ('P._storageAccountName', 'P.storageAccountName')
     -> P.Resource (StorageContainerResource s)
 storageContainerResource _name _resourceGroupName _storageAccountName =
     TF.unsafeResource "azurerm_storage_container" TF.validator $
@@ -3087,9 +3087,9 @@ data StorageQueueResource s = StorageQueueResource'
 
 -- | Define a new @azurerm_storage_queue@ resource value.
 storageQueueResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @storage_account_name@ - 'P.storageAccountName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @storage_account_name@ ('P._storageAccountName', 'P.storageAccountName')
     -> P.Resource (StorageQueueResource s)
 storageQueueResource _name _resourceGroupName _storageAccountName =
     TF.unsafeResource "azurerm_storage_queue" TF.validator $
@@ -3148,9 +3148,9 @@ data StorageShareResource s = StorageShareResource'
 
 -- | Define a new @azurerm_storage_share@ resource value.
 storageShareResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @storage_account_name@ - 'P.storageAccountName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @storage_account_name@ ('P._storageAccountName', 'P.storageAccountName')
     -> P.Resource (StorageShareResource s)
 storageShareResource _name _resourceGroupName _storageAccountName =
     TF.unsafeResource "azurerm_storage_share" TF.validator $
@@ -3216,9 +3216,9 @@ data StorageTableResource s = StorageTableResource'
 
 -- | Define a new @azurerm_storage_table@ resource value.
 storageTableResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @storage_account_name@ - 'P.storageAccountName'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @storage_account_name@ ('P._storageAccountName', 'P.storageAccountName')
     -> P.Resource (StorageTableResource s)
 storageTableResource _name _resourceGroupName _storageAccountName =
     TF.unsafeResource "azurerm_storage_table" TF.validator $
@@ -3286,10 +3286,10 @@ data SubnetResource s = SubnetResource'
 
 -- | Define a new @azurerm_subnet@ resource value.
 subnetResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @virtual_network_name@ - 'P.virtualNetworkName'
-    -> TF.Attr s P.Text -- ^ @address_prefix@ - 'P.addressPrefix'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @virtual_network_name@ ('P._virtualNetworkName', 'P.virtualNetworkName')
+    -> TF.Attr s P.Text -- ^ @address_prefix@ ('P._addressPrefix', 'P.addressPrefix')
     -> P.Resource (SubnetResource s)
 subnetResource _name _resourceGroupName _virtualNetworkName _addressPrefix =
     TF.unsafeResource "azurerm_subnet" TF.validator $
@@ -3388,9 +3388,9 @@ data TemplateDeploymentResource s = TemplateDeploymentResource'
 
 -- | Define a new @azurerm_template_deployment@ resource value.
 templateDeploymentResource
-    :: TF.Attr s P.Text -- ^ @deployment_mode@ - 'P.deploymentMode'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @deployment_mode@ ('P._deploymentMode', 'P.deploymentMode')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.Resource (TemplateDeploymentResource s)
 templateDeploymentResource _deploymentMode _name _resourceGroupName =
     TF.unsafeResource "azurerm_template_deployment" TF.validator $
@@ -3489,10 +3489,10 @@ data TrafficManagerEndpointResource s = TrafficManagerEndpointResource'
 
 -- | Define a new @azurerm_traffic_manager_endpoint@ resource value.
 trafficManagerEndpointResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @profile_name@ - 'P.profileName'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @profile_name@ ('P._profileName', 'P.profileName')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (TrafficManagerEndpointResource s)
 trafficManagerEndpointResource _name _profileName _resourceGroupName _type' =
     TF.unsafeResource "azurerm_traffic_manager_endpoint" TF.validator $
@@ -3600,11 +3600,11 @@ data TrafficManagerProfileResource s = TrafficManagerProfileResource'
 
 -- | Define a new @azurerm_traffic_manager_profile@ resource value.
 trafficManagerProfileResource
-    :: TF.Attr s [TF.Attr s (DnsConfigSetting s)] -- ^ @dns_config@ - 'P.dnsConfig'
-    -> TF.Attr s [TF.Attr s (MonitorConfigSetting s)] -- ^ @monitor_config@ - 'P.monitorConfig'
-    -> TF.Attr s P.Text -- ^ @traffic_routing_method@ - 'P.trafficRoutingMethod'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s [TF.Attr s (DnsConfigSetting s)] -- ^ @dns_config@ ('P._dnsConfig', 'P.dnsConfig')
+    -> TF.Attr s [TF.Attr s (MonitorConfigSetting s)] -- ^ @monitor_config@ ('P._monitorConfig', 'P.monitorConfig')
+    -> TF.Attr s P.Text -- ^ @traffic_routing_method@ ('P._trafficRoutingMethod', 'P.trafficRoutingMethod')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.Resource (TrafficManagerProfileResource s)
 trafficManagerProfileResource _dnsConfig _monitorConfig _trafficRoutingMethod _name _resourceGroupName =
     TF.unsafeResource "azurerm_traffic_manager_profile" TF.validator $
@@ -3683,9 +3683,9 @@ data UserAssignedIdentityResource s = UserAssignedIdentityResource'
 
 -- | Define a new @azurerm_user_assigned_identity@ resource value.
 userAssignedIdentityResource
-    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> P.Resource (UserAssignedIdentityResource s)
 userAssignedIdentityResource _location _name _resourceGroupName =
     TF.unsafeResource "azurerm_user_assigned_identity" TF.validator $
@@ -3792,12 +3792,12 @@ data VirtualMachineResource s = VirtualMachineResource'
 
 -- | Define a new @azurerm_virtual_machine@ resource value.
 virtualMachineResource
-    :: TF.Attr s (StorageOsDiskSetting s) -- ^ @storage_os_disk@ - 'P.storageOsDisk'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @network_interface_ids@ - 'P.networkInterfaceIds'
-    -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @vm_size@ - 'P.vmSize'
+    :: TF.Attr s (StorageOsDiskSetting s) -- ^ @storage_os_disk@ ('P._storageOsDisk', 'P.storageOsDisk')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @network_interface_ids@ ('P._networkInterfaceIds', 'P.networkInterfaceIds')
+    -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @vm_size@ ('P._vmSize', 'P.vmSize')
     -> P.Resource (VirtualMachineResource s)
 virtualMachineResource _storageOsDisk _networkInterfaceIds _location _name _resourceGroupName _vmSize =
     TF.unsafeResource "azurerm_virtual_machine" TF.validator $
@@ -4006,10 +4006,10 @@ data VirtualMachineDataDiskAttachmentResource s = VirtualMachineDataDiskAttachme
 
 -- | Define a new @azurerm_virtual_machine_data_disk_attachment@ resource value.
 virtualMachineDataDiskAttachmentResource
-    :: TF.Attr s P.Text -- ^ @caching@ - 'P.caching'
-    -> TF.Attr s P.Text -- ^ @managed_disk_id@ - 'P.managedDiskId'
-    -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
-    -> TF.Attr s P.Int -- ^ @lun@ - 'P.lun'
+    :: TF.Attr s P.Text -- ^ @caching@ ('P._caching', 'P.caching')
+    -> TF.Attr s P.Text -- ^ @managed_disk_id@ ('P._managedDiskId', 'P.managedDiskId')
+    -> TF.Attr s P.Text -- ^ @virtual_machine_id@ ('P._virtualMachineId', 'P.virtualMachineId')
+    -> TF.Attr s P.Int -- ^ @lun@ ('P._lun', 'P.lun')
     -> P.Resource (VirtualMachineDataDiskAttachmentResource s)
 virtualMachineDataDiskAttachmentResource _caching _managedDiskId _virtualMachineId _lun =
     TF.unsafeResource "azurerm_virtual_machine_data_disk_attachment" TF.validator $
@@ -4107,13 +4107,13 @@ data VirtualMachineExtensionResource s = VirtualMachineExtensionResource'
 
 -- | Define a new @azurerm_virtual_machine_extension@ resource value.
 virtualMachineExtensionResource
-    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @virtual_machine_name@ - 'P.virtualMachineName'
-    -> TF.Attr s P.Text -- ^ @publisher@ - 'P.publisher'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Attr s P.Text -- ^ @type_handler_version@ - 'P.typeHandlerVersion'
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @virtual_machine_name@ ('P._virtualMachineName', 'P.virtualMachineName')
+    -> TF.Attr s P.Text -- ^ @publisher@ ('P._publisher', 'P.publisher')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    -> TF.Attr s P.Text -- ^ @type_handler_version@ ('P._typeHandlerVersion', 'P.typeHandlerVersion')
     -> P.Resource (VirtualMachineExtensionResource s)
 virtualMachineExtensionResource _location _name _resourceGroupName _virtualMachineName _publisher _type' _typeHandlerVersion =
     TF.unsafeResource "azurerm_virtual_machine_extension" TF.validator $
@@ -4266,14 +4266,14 @@ data VirtualMachineScaleSetResource s = VirtualMachineScaleSetResource'
 
 -- | Define a new @azurerm_virtual_machine_scale_set@ resource value.
 virtualMachineScaleSetResource
-    :: TF.Attr s (StorageProfileOsDiskSetting s) -- ^ @storage_profile_os_disk@ - 'P.storageProfileOsDisk'
-    -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @upgrade_policy_mode@ - 'P.upgradePolicyMode'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s [TF.Attr s (NetworkProfileSetting s)] -- ^ @network_profile@ - 'P.networkProfile'
-    -> TF.Attr s (OsProfileSetting s) -- ^ @os_profile@ - 'P.osProfile'
-    -> TF.Attr s (SkuSetting s) -- ^ @sku@ - 'P.sku'
+    :: TF.Attr s (StorageProfileOsDiskSetting s) -- ^ @storage_profile_os_disk@ ('P._storageProfileOsDisk', 'P.storageProfileOsDisk')
+    -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @upgrade_policy_mode@ ('P._upgradePolicyMode', 'P.upgradePolicyMode')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s [TF.Attr s (NetworkProfileSetting s)] -- ^ @network_profile@ ('P._networkProfile', 'P.networkProfile')
+    -> TF.Attr s (OsProfileSetting s) -- ^ @os_profile@ ('P._osProfile', 'P.osProfile')
+    -> TF.Attr s (SkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
     -> P.Resource (VirtualMachineScaleSetResource s)
 virtualMachineScaleSetResource _storageProfileOsDisk _location _upgradePolicyMode _name _resourceGroupName _networkProfile _osProfile _sku =
     TF.unsafeResource "azurerm_virtual_machine_scale_set" TF.validator $
@@ -4479,10 +4479,10 @@ data VirtualNetworkResource s = VirtualNetworkResource'
 
 -- | Define a new @azurerm_virtual_network@ resource value.
 virtualNetworkResource
-    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @address_space@ - 'P.addressSpace'
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @address_space@ ('P._addressSpace', 'P.addressSpace')
     -> P.Resource (VirtualNetworkResource s)
 virtualNetworkResource _location _name _resourceGroupName _addressSpace =
     TF.unsafeResource "azurerm_virtual_network" TF.validator $
@@ -4576,12 +4576,12 @@ data VirtualNetworkGatewayResource s = VirtualNetworkGatewayResource'
 
 -- | Define a new @azurerm_virtual_network_gateway@ resource value.
 virtualNetworkGatewayResource
-    :: TF.Attr s [TF.Attr s (IpConfigurationSetting s)] -- ^ @ip_configuration@ - 'P.ipConfiguration'
-    -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @sku@ - 'P.sku'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s [TF.Attr s (IpConfigurationSetting s)] -- ^ @ip_configuration@ ('P._ipConfiguration', 'P.ipConfiguration')
+    -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @sku@ ('P._sku', 'P.sku')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (VirtualNetworkGatewayResource s)
 virtualNetworkGatewayResource _ipConfiguration _location _name _resourceGroupName _sku _type' =
     TF.unsafeResource "azurerm_virtual_network_gateway" TF.validator $
@@ -4719,11 +4719,11 @@ data VirtualNetworkGatewayConnectionResource s = VirtualNetworkGatewayConnection
 
 -- | Define a new @azurerm_virtual_network_gateway_connection@ resource value.
 virtualNetworkGatewayConnectionResource
-    :: TF.Attr s P.Text -- ^ @virtual_network_gateway_id@ - 'P.virtualNetworkGatewayId'
-    -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @virtual_network_gateway_id@ ('P._virtualNetworkGatewayId', 'P.virtualNetworkGatewayId')
+    -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (VirtualNetworkGatewayConnectionResource s)
 virtualNetworkGatewayConnectionResource _virtualNetworkGatewayId _location _name _resourceGroupName _type' =
     TF.unsafeResource "azurerm_virtual_network_gateway_connection" TF.validator $
@@ -4854,10 +4854,10 @@ data VirtualNetworkPeeringResource s = VirtualNetworkPeeringResource'
 
 -- | Define a new @azurerm_virtual_network_peering@ resource value.
 virtualNetworkPeeringResource
-    :: TF.Attr s P.Text -- ^ @remote_virtual_network_id@ - 'P.remoteVirtualNetworkId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Attr s P.Text -- ^ @virtual_network_name@ - 'P.virtualNetworkName'
+    :: TF.Attr s P.Text -- ^ @remote_virtual_network_id@ ('P._remoteVirtualNetworkId', 'P.remoteVirtualNetworkId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @virtual_network_name@ ('P._virtualNetworkName', 'P.virtualNetworkName')
     -> P.Resource (VirtualNetworkPeeringResource s)
 virtualNetworkPeeringResource _remoteVirtualNetworkId _name _resourceGroupName _virtualNetworkName =
     TF.unsafeResource "azurerm_virtual_network_peering" TF.validator $
