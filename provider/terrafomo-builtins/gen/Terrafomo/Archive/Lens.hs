@@ -15,21 +15,21 @@ module Terrafomo.Archive.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasSourceContentFilename (..)
-    , HasContent (..)
-    , HasType' (..)
-    , HasFilename (..)
-    , HasSourceContent (..)
+      HasContent (..)
     , HasExcludes (..)
+    , HasFilename (..)
+    , HasOutputPath (..)
+    , HasSourceContent (..)
+    , HasSourceContentFilename (..)
     , HasSourceDir (..)
     , HasSourceFile (..)
-    , HasOutputPath (..)
+    , HasType' (..)
 
     -- ** Computed Attributes
-    , HasComputedOutputBase64sha256 (..)
-    , HasComputedOutputSha (..)
     , HasComputedId (..)
+    , HasComputedOutputBase64sha256 (..)
     , HasComputedOutputMd5 (..)
+    , HasComputedOutputSha (..)
     , HasComputedOutputSize (..)
     , HasComputedSource (..)
     ) where
@@ -39,23 +39,17 @@ import GHC.Base ((.))
 import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
 
-class HasSourceContentFilename a b | a -> b where
-    sourceContentFilename :: P.Lens' a b
-
-instance HasSourceContentFilename a b => HasSourceContentFilename (TF.Schema l p a) b where
-    sourceContentFilename = TF.configuration . sourceContentFilename
-
 class HasContent a b | a -> b where
     content :: P.Lens' a b
 
 instance HasContent a b => HasContent (TF.Schema l p a) b where
     content = TF.configuration . content
 
-class HasType' a b | a -> b where
-    type' :: P.Lens' a b
+class HasExcludes a b | a -> b where
+    excludes :: P.Lens' a b
 
-instance HasType' a b => HasType' (TF.Schema l p a) b where
-    type' = TF.configuration . type'
+instance HasExcludes a b => HasExcludes (TF.Schema l p a) b where
+    excludes = TF.configuration . excludes
 
 class HasFilename a b | a -> b where
     filename :: P.Lens' a b
@@ -63,17 +57,23 @@ class HasFilename a b | a -> b where
 instance HasFilename a b => HasFilename (TF.Schema l p a) b where
     filename = TF.configuration . filename
 
+class HasOutputPath a b | a -> b where
+    outputPath :: P.Lens' a b
+
+instance HasOutputPath a b => HasOutputPath (TF.Schema l p a) b where
+    outputPath = TF.configuration . outputPath
+
 class HasSourceContent a b | a -> b where
     sourceContent :: P.Lens' a b
 
 instance HasSourceContent a b => HasSourceContent (TF.Schema l p a) b where
     sourceContent = TF.configuration . sourceContent
 
-class HasExcludes a b | a -> b where
-    excludes :: P.Lens' a b
+class HasSourceContentFilename a b | a -> b where
+    sourceContentFilename :: P.Lens' a b
 
-instance HasExcludes a b => HasExcludes (TF.Schema l p a) b where
-    excludes = TF.configuration . excludes
+instance HasSourceContentFilename a b => HasSourceContentFilename (TF.Schema l p a) b where
+    sourceContentFilename = TF.configuration . sourceContentFilename
 
 class HasSourceDir a b | a -> b where
     sourceDir :: P.Lens' a b
@@ -87,23 +87,23 @@ class HasSourceFile a b | a -> b where
 instance HasSourceFile a b => HasSourceFile (TF.Schema l p a) b where
     sourceFile = TF.configuration . sourceFile
 
-class HasOutputPath a b | a -> b where
-    outputPath :: P.Lens' a b
+class HasType' a b | a -> b where
+    type' :: P.Lens' a b
 
-instance HasOutputPath a b => HasOutputPath (TF.Schema l p a) b where
-    outputPath = TF.configuration . outputPath
-
-class HasComputedOutputBase64sha256 a b | a -> b where
-    computedOutputBase64sha256 :: a -> b
-
-class HasComputedOutputSha a b | a -> b where
-    computedOutputSha :: a -> b
+instance HasType' a b => HasType' (TF.Schema l p a) b where
+    type' = TF.configuration . type'
 
 class HasComputedId a b | a -> b where
     computedId :: a -> b
 
+class HasComputedOutputBase64sha256 a b | a -> b where
+    computedOutputBase64sha256 :: a -> b
+
 class HasComputedOutputMd5 a b | a -> b where
     computedOutputMd5 :: a -> b
+
+class HasComputedOutputSha a b | a -> b where
+    computedOutputSha :: a -> b
 
 class HasComputedOutputSize a b | a -> b where
     computedOutputSize :: a -> b

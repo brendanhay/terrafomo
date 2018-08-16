@@ -34,10 +34,9 @@ import GHC.Base (($))
 
 import Terrafomo.Template.Settings
 
-import qualified Data.Hashable               as P
-import qualified Data.HashMap.Strict         as P
-import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Map.Strict             as P
+import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
 import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
@@ -64,16 +63,16 @@ data CloudinitConfigData s = CloudinitConfigData'
     , _gzip         :: TF.Attr s P.Bool
     -- ^ @gzip@ - (Optional)
     --
-    , _part         :: TF.Attr s [TF.Attr s (CloudinitConfigPart s)]
+    , _part         :: TF.Attr s [TF.Attr s (PartSetting s)]
     -- ^ @part@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 cloudinitConfigData
-    :: TF.Attr s [TF.Attr s (CloudinitConfigPart s)] -- ^ @part@ - 'P.part'
+    :: TF.Attr s [TF.Attr s (PartSetting s)] -- ^ @part@ - 'P.part'
     -> P.DataSource (CloudinitConfigData s)
 cloudinitConfigData _part =
-    TF.newDataSource "template_cloudinit_config" TF.validator $
+    TF.unsafeDataSource "template_cloudinit_config" P.defaultProvider TF.validator $
         CloudinitConfigData'
             { _base64Encode = TF.value P.True
             , _gzip = TF.value P.True
@@ -89,10 +88,6 @@ instance TF.IsObject (CloudinitConfigData s) where
 
 instance TF.IsValid (CloudinitConfigData s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_part"
-                  (_part
-                      :: CloudinitConfigData s -> TF.Attr s [TF.Attr s (CloudinitConfigPart s)])
-                  TF.validator
 
 instance P.HasBase64Encode (CloudinitConfigData s) (TF.Attr s P.Bool) where
     base64Encode =
@@ -104,9 +99,9 @@ instance P.HasGzip (CloudinitConfigData s) (TF.Attr s P.Bool) where
         P.lens (_gzip :: CloudinitConfigData s -> TF.Attr s P.Bool)
                (\s a -> s { _gzip = a } :: CloudinitConfigData s)
 
-instance P.HasPart (CloudinitConfigData s) (TF.Attr s [TF.Attr s (CloudinitConfigPart s)]) where
+instance P.HasPart (CloudinitConfigData s) (TF.Attr s [TF.Attr s (PartSetting s)]) where
     part =
-        P.lens (_part :: CloudinitConfigData s -> TF.Attr s [TF.Attr s (CloudinitConfigPart s)])
+        P.lens (_part :: CloudinitConfigData s -> TF.Attr s [TF.Attr s (PartSetting s)])
                (\s a -> s { _part = a } :: CloudinitConfigData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudinitConfigData s)) (TF.Attr s P.Text) where
@@ -124,16 +119,16 @@ data FileData s = FileData'
     -- ^ @template@ - (Optional)
     -- Contents of the template
     --
-    , _vars     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _vars     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @vars@ - (Optional)
     -- Variables to substitute
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 fileData
     :: P.DataSource (FileData s)
 fileData =
-    TF.newDataSource "template_file" TF.validator $
+    TF.unsafeDataSource "template_file" P.defaultProvider TF.validator $
         FileData'
             { _template = TF.Nil
             , _vars = TF.Nil
@@ -153,9 +148,9 @@ instance P.HasTemplate (FileData s) (TF.Attr s P.Text) where
         P.lens (_template :: FileData s -> TF.Attr s P.Text)
                (\s a -> s { _template = a } :: FileData s)
 
-instance P.HasVars (FileData s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasVars (FileData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     vars =
-        P.lens (_vars :: FileData s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_vars :: FileData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _vars = a } :: FileData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where

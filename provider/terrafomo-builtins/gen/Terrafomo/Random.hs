@@ -13,10 +13,10 @@
 --
 module Terrafomo.Random
     ( module Terrafomo.Random.Lens
-    , module Terrafomo.Random.Settings
-    , module Terrafomo.Random.Resource
-    , module Terrafomo.Random.Types
     , module Terrafomo.Random.Provider
+    , module Terrafomo.Random.Resource
+    , module Terrafomo.Random.Settings
+    , module Terrafomo.Random.Types
     -- * Provider Aliases
     ) where
 

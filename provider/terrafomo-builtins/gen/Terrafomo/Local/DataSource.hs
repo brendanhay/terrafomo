@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.Local.Settings
 
-import qualified Data.Hashable            as P
-import qualified Data.HashMap.Strict      as P
-import qualified Data.HashMap.Strict      as Map
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Map.Strict          as P
+import qualified Data.Map.Strict          as Map
 import qualified Data.Maybe               as P
 import qualified Data.Monoid              as P
 import qualified Data.Text                as P
@@ -58,13 +57,13 @@ data FileData s = FileData'
     -- ^ @filename@ - (Required, Forces New)
     -- Path to the output file
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 fileData
     :: TF.Attr s P.Text -- ^ @filename@ - 'P.filename'
     -> P.DataSource (FileData s)
 fileData _filename =
-    TF.newDataSource "local_file" TF.validator $
+    TF.unsafeDataSource "local_file" P.defaultProvider TF.validator $
         FileData'
             { _filename = _filename
             }

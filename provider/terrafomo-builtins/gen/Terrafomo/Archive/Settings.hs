@@ -18,9 +18,9 @@
 module Terrafomo.Archive.Settings
     (
     -- * Settings Datatypes
-    -- ** file_source
-      FileSource (..)
-    , newFileSource
+    -- ** source
+      SourceSetting (..)
+    , newSourceSetting
 
     ) where
 
@@ -28,10 +28,10 @@ import Data.Functor ((<$>))
 
 import GHC.Base (($))
 
-import qualified Data.Hashable           as P
-import qualified Data.HashMap.Strict     as P
-import qualified Data.HashMap.Strict     as Map
+
 import qualified Data.List.NonEmpty      as P
+import qualified Data.Map.Strict         as P
+import qualified Data.Map.Strict         as Map
 import qualified Data.Maybe              as P
 import qualified Data.Monoid             as P
 import qualified Data.Text               as P
@@ -45,43 +45,42 @@ import qualified Terrafomo.HCL           as TF
 import qualified Terrafomo.Name          as TF
 import qualified Terrafomo.Validator     as TF
 
--- | @file_source@ nested settings.
-data FileSource s = FileSource'
+-- | @source@ nested settings.
+data SourceSetting s = SourceSetting'
     { _content  :: TF.Attr s P.Text
     -- ^ @content@ - (Required, Forces New)
     --
     , _filename :: TF.Attr s P.Text
     -- ^ @filename@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
-newFileSource
+newSourceSetting
     :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
     -> TF.Attr s P.Text -- ^ @filename@ - 'P.filename'
-    -> FileSource s
-newFileSource _content _filename =
-    FileSource'
+    -> SourceSetting s
+newSourceSetting _content _filename =
+    SourceSetting'
         { _content = _content
         , _filename = _filename
         }
 
-instance P.Hashable  (FileSource s)
-instance TF.IsValue  (FileSource s)
-instance TF.IsObject (FileSource s) where
-    toObject FileSource'{..} = P.catMaybes
+instance TF.IsValue  (SourceSetting s)
+instance TF.IsObject (SourceSetting s) where
+    toObject SourceSetting'{..} = P.catMaybes
         [ TF.assign "content" <$> TF.attribute _content
         , TF.assign "filename" <$> TF.attribute _filename
         ]
 
-instance TF.IsValid (FileSource s) where
+instance TF.IsValid (SourceSetting s) where
     validator = P.mempty
 
-instance P.HasContent (FileSource s) (TF.Attr s P.Text) where
+instance P.HasContent (SourceSetting s) (TF.Attr s P.Text) where
     content =
-        P.lens (_content :: FileSource s -> TF.Attr s P.Text)
-               (\s a -> s { _content = a } :: FileSource s)
+        P.lens (_content :: SourceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _content = a } :: SourceSetting s)
 
-instance P.HasFilename (FileSource s) (TF.Attr s P.Text) where
+instance P.HasFilename (SourceSetting s) (TF.Attr s P.Text) where
     filename =
-        P.lens (_filename :: FileSource s -> TF.Attr s P.Text)
-               (\s a -> s { _filename = a } :: FileSource s)
+        P.lens (_filename :: SourceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _filename = a } :: SourceSetting s)

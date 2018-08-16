@@ -15,14 +15,14 @@ module Terrafomo.Template.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasContent (..)
+      HasBase64Encode (..)
+    , HasContent (..)
     , HasContentType (..)
-    , HasBase64Encode (..)
-    , HasPart (..)
+    , HasDestinationDir (..)
     , HasFilename (..)
     , HasGzip (..)
-    , HasDestinationDir (..)
     , HasMergeType (..)
+    , HasPart (..)
     , HasSourceDir (..)
     , HasTemplate (..)
     , HasVars (..)
@@ -37,6 +37,12 @@ import GHC.Base ((.))
 import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
 
+class HasBase64Encode a b | a -> b where
+    base64Encode :: P.Lens' a b
+
+instance HasBase64Encode a b => HasBase64Encode (TF.Schema l p a) b where
+    base64Encode = TF.configuration . base64Encode
+
 class HasContent a b | a -> b where
     content :: P.Lens' a b
 
@@ -49,17 +55,11 @@ class HasContentType a b | a -> b where
 instance HasContentType a b => HasContentType (TF.Schema l p a) b where
     contentType = TF.configuration . contentType
 
-class HasBase64Encode a b | a -> b where
-    base64Encode :: P.Lens' a b
+class HasDestinationDir a b | a -> b where
+    destinationDir :: P.Lens' a b
 
-instance HasBase64Encode a b => HasBase64Encode (TF.Schema l p a) b where
-    base64Encode = TF.configuration . base64Encode
-
-class HasPart a b | a -> b where
-    part :: P.Lens' a b
-
-instance HasPart a b => HasPart (TF.Schema l p a) b where
-    part = TF.configuration . part
+instance HasDestinationDir a b => HasDestinationDir (TF.Schema l p a) b where
+    destinationDir = TF.configuration . destinationDir
 
 class HasFilename a b | a -> b where
     filename :: P.Lens' a b
@@ -73,17 +73,17 @@ class HasGzip a b | a -> b where
 instance HasGzip a b => HasGzip (TF.Schema l p a) b where
     gzip = TF.configuration . gzip
 
-class HasDestinationDir a b | a -> b where
-    destinationDir :: P.Lens' a b
-
-instance HasDestinationDir a b => HasDestinationDir (TF.Schema l p a) b where
-    destinationDir = TF.configuration . destinationDir
-
 class HasMergeType a b | a -> b where
     mergeType :: P.Lens' a b
 
 instance HasMergeType a b => HasMergeType (TF.Schema l p a) b where
     mergeType = TF.configuration . mergeType
+
+class HasPart a b | a -> b where
+    part :: P.Lens' a b
+
+instance HasPart a b => HasPart (TF.Schema l p a) b where
+    part = TF.configuration . part
 
 class HasSourceDir a b | a -> b where
     sourceDir :: P.Lens' a b

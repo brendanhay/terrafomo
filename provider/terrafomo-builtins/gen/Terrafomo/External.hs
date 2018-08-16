@@ -13,10 +13,10 @@
 --
 module Terrafomo.External
     ( module Terrafomo.External.DataSource
-    , module Terrafomo.External.Provider
-    , module Terrafomo.External.Types
     , module Terrafomo.External.Lens
+    , module Terrafomo.External.Provider
     , module Terrafomo.External.Settings
+    , module Terrafomo.External.Types
     -- * Provider Aliases
     ) where
 

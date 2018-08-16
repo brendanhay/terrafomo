@@ -12,11 +12,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Archive
-    ( module Terrafomo.Archive.Settings
+    ( module Terrafomo.Archive.DataSource
     , module Terrafomo.Archive.Lens
-    , module Terrafomo.Archive.Resource
     , module Terrafomo.Archive.Provider
-    , module Terrafomo.Archive.DataSource
+    , module Terrafomo.Archive.Resource
+    , module Terrafomo.Archive.Settings
     , module Terrafomo.Archive.Types
     -- * Provider Aliases
     ) where

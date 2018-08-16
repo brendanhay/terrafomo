@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.Archive.Settings
 
-import qualified Data.Hashable              as P
-import qualified Data.HashMap.Strict        as P
-import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Map.Strict            as P
+import qualified Data.Map.Strict            as Map
 import qualified Data.Maybe                 as P
 import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
@@ -59,9 +58,9 @@ data FileResource s = FileResource'
     --
     -- Conflicts with:
     --
-    -- * 'sourceFile'
     -- * 'sourceContent'
     -- * 'sourceContentFilename'
+    -- * 'sourceFile'
     , _outputPath            :: TF.Attr s P.Text
     -- ^ @output_path@ - (Required, Forces New)
     --
@@ -70,45 +69,45 @@ data FileResource s = FileResource'
     --
     -- Conflicts with:
     --
-    -- * 'sourceFile'
     -- * 'excludes'
     -- * 'sourceDir'
+    -- * 'sourceFile'
     , _sourceContentFilename :: TF.Attr s P.Text
     -- ^ @source_content_filename@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
-    -- * 'sourceFile'
     -- * 'excludes'
     -- * 'sourceDir'
+    -- * 'sourceFile'
     , _sourceDir             :: TF.Attr s P.Text
     -- ^ @source_dir@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
-    -- * 'sourceFile'
     -- * 'sourceContent'
     -- * 'sourceContentFilename'
+    -- * 'sourceFile'
     , _sourceFile            :: TF.Attr s P.Text
     -- ^ @source_file@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
-    -- * 'sourceContent'
     -- * 'excludes'
-    -- * 'sourceDir'
+    -- * 'sourceContent'
     -- * 'sourceContentFilename'
+    -- * 'sourceDir'
     , _type'                 :: TF.Attr s P.Text
     -- ^ @type@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 fileResource
     :: TF.Attr s P.Text -- ^ @output_path@ - 'P.outputPath'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (FileResource s)
 fileResource _outputPath _type' =
-    TF.newResource "archive_file" TF.validator $
+    TF.unsafeResource "archive_file" P.defaultProvider TF.validator $
         FileResource'
             { _excludes = TF.Nil
             , _outputPath = _outputPath
@@ -135,27 +134,27 @@ instance TF.IsValid (FileResource s) where
         [ if (_excludes P.== TF.Nil)
               then P.Nothing
               else P.Just ("_excludes",
-                            [ "_sourceFile"                            , "_sourceContent"                            , "_sourceContentFilename"
+                            [ "_sourceContent"                            , "_sourceContentFilename"                            , "_sourceFile"
                             ])
         , if (_sourceContent P.== TF.Nil)
               then P.Nothing
               else P.Just ("_sourceContent",
-                            [ "_sourceFile"                            , "_excludes"                            , "_sourceDir"
+                            [ "_excludes"                            , "_sourceDir"                            , "_sourceFile"
                             ])
         , if (_sourceContentFilename P.== TF.Nil)
               then P.Nothing
               else P.Just ("_sourceContentFilename",
-                            [ "_sourceFile"                            , "_excludes"                            , "_sourceDir"
+                            [ "_excludes"                            , "_sourceDir"                            , "_sourceFile"
                             ])
         , if (_sourceDir P.== TF.Nil)
               then P.Nothing
               else P.Just ("_sourceDir",
-                            [ "_sourceFile"                            , "_sourceContent"                            , "_sourceContentFilename"
+                            [ "_sourceContent"                            , "_sourceContentFilename"                            , "_sourceFile"
                             ])
         , if (_sourceFile P.== TF.Nil)
               then P.Nothing
               else P.Just ("_sourceFile",
-                            [ "_sourceContent"                            , "_excludes"                            , "_sourceDir"                            , "_sourceContentFilename"
+                            [ "_excludes"                            , "_sourceContent"                            , "_sourceContentFilename"                            , "_sourceDir"
                             ])
         ])
 
@@ -203,8 +202,8 @@ instance s ~ s' => P.HasComputedOutputMd5 (TF.Ref s' (FileResource s)) (TF.Attr 
 instance s ~ s' => P.HasComputedOutputSha (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
     computedOutputSha x = TF.compute (TF.refKey x) "output_sha"
 
-instance s ~ s' => P.HasComputedOutputSize (TF.Ref s' (FileResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedOutputSize (TF.Ref s' (FileResource s)) (TF.Attr s P.Int) where
     computedOutputSize x = TF.compute (TF.refKey x) "output_size"
 
-instance s ~ s' => P.HasComputedSource (TF.Ref s' (FileResource s)) (TF.Attr s [TF.Attr s (FileSource s)]) where
+instance s ~ s' => P.HasComputedSource (TF.Ref s' (FileResource s)) (TF.Attr s [TF.Attr s (SourceSetting s)]) where
     computedSource x = TF.compute (TF.refKey x) "source"

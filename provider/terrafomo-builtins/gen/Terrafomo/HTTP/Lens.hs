@@ -15,8 +15,8 @@ module Terrafomo.HTTP.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasUrl (..)
-    , HasRequestHeaders (..)
+      HasRequestHeaders (..)
+    , HasUrl (..)
 
     -- ** Computed Attributes
     , HasComputedBody (..)
@@ -28,17 +28,17 @@ import GHC.Base ((.))
 import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
 
-class HasUrl a b | a -> b where
-    url :: P.Lens' a b
-
-instance HasUrl a b => HasUrl (TF.Schema l p a) b where
-    url = TF.configuration . url
-
 class HasRequestHeaders a b | a -> b where
     requestHeaders :: P.Lens' a b
 
 instance HasRequestHeaders a b => HasRequestHeaders (TF.Schema l p a) b where
     requestHeaders = TF.configuration . requestHeaders
+
+class HasUrl a b | a -> b where
+    url :: P.Lens' a b
+
+instance HasUrl a b => HasUrl (TF.Schema l p a) b where
+    url = TF.configuration . url
 
 class HasComputedBody a b | a -> b where
     computedBody :: a -> b

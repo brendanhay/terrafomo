@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.HTTP.Settings
 
-import qualified Data.Hashable           as P
-import qualified Data.HashMap.Strict     as P
-import qualified Data.HashMap.Strict     as Map
 import qualified Data.List.NonEmpty      as P
+import qualified Data.Map.Strict         as P
+import qualified Data.Map.Strict         as Map
 import qualified Data.Maybe              as P
 import qualified Data.Monoid             as P
 import qualified Data.Text               as P
@@ -54,19 +53,19 @@ import qualified Terrafomo.Validator     as TF
 -- See the <https://www.terraform.io/docs/providers/http/d/.html terraform documentation>
 -- for more information.
 data Data s = Data'
-    { _requestHeaders :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _requestHeaders :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @request_headers@ - (Optional)
     --
     , _url            :: TF.Attr s P.Text
     -- ^ @url@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 data'
     :: TF.Attr s P.Text -- ^ @url@ - 'P.url'
     -> P.DataSource (Data s)
 data' _url =
-    TF.newDataSource "http" TF.validator $
+    TF.unsafeDataSource "http" P.defaultProvider TF.validator $
         Data'
             { _requestHeaders = TF.Nil
             , _url = _url
@@ -81,9 +80,9 @@ instance TF.IsObject (Data s) where
 instance TF.IsValid (Data s) where
     validator = P.mempty
 
-instance P.HasRequestHeaders (Data s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasRequestHeaders (Data s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     requestHeaders =
-        P.lens (_requestHeaders :: Data s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_requestHeaders :: Data s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _requestHeaders = a } :: Data s)
 
 instance P.HasUrl (Data s) (TF.Attr s P.Text) where

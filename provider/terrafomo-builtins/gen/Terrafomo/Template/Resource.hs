@@ -38,10 +38,9 @@ import GHC.Base (($))
 
 import Terrafomo.Template.Settings
 
-import qualified Data.Hashable               as P
-import qualified Data.HashMap.Strict         as P
-import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Map.Strict             as P
+import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
 import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
@@ -68,16 +67,16 @@ data CloudinitConfigResource s = CloudinitConfigResource'
     , _gzip         :: TF.Attr s P.Bool
     -- ^ @gzip@ - (Optional, Forces New)
     --
-    , _part         :: TF.Attr s [TF.Attr s (CloudinitConfigPart s)]
+    , _part         :: TF.Attr s [TF.Attr s (PartSetting s)]
     -- ^ @part@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 cloudinitConfigResource
-    :: TF.Attr s [TF.Attr s (CloudinitConfigPart s)] -- ^ @part@ - 'P.part'
+    :: TF.Attr s [TF.Attr s (PartSetting s)] -- ^ @part@ - 'P.part'
     -> P.Resource (CloudinitConfigResource s)
 cloudinitConfigResource _part =
-    TF.newResource "template_cloudinit_config" TF.validator $
+    TF.unsafeResource "template_cloudinit_config" P.defaultProvider TF.validator $
         CloudinitConfigResource'
             { _base64Encode = TF.value P.True
             , _gzip = TF.value P.True
@@ -93,10 +92,6 @@ instance TF.IsObject (CloudinitConfigResource s) where
 
 instance TF.IsValid (CloudinitConfigResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_part"
-                  (_part
-                      :: CloudinitConfigResource s -> TF.Attr s [TF.Attr s (CloudinitConfigPart s)])
-                  TF.validator
 
 instance P.HasBase64Encode (CloudinitConfigResource s) (TF.Attr s P.Bool) where
     base64Encode =
@@ -108,9 +103,9 @@ instance P.HasGzip (CloudinitConfigResource s) (TF.Attr s P.Bool) where
         P.lens (_gzip :: CloudinitConfigResource s -> TF.Attr s P.Bool)
                (\s a -> s { _gzip = a } :: CloudinitConfigResource s)
 
-instance P.HasPart (CloudinitConfigResource s) (TF.Attr s [TF.Attr s (CloudinitConfigPart s)]) where
+instance P.HasPart (CloudinitConfigResource s) (TF.Attr s [TF.Attr s (PartSetting s)]) where
     part =
-        P.lens (_part :: CloudinitConfigResource s -> TF.Attr s [TF.Attr s (CloudinitConfigPart s)])
+        P.lens (_part :: CloudinitConfigResource s -> TF.Attr s [TF.Attr s (PartSetting s)])
                (\s a -> s { _part = a } :: CloudinitConfigResource s)
 
 instance s ~ s' => P.HasComputedRendered (TF.Ref s' (CloudinitConfigResource s)) (TF.Attr s P.Text) where
@@ -129,18 +124,18 @@ data DirResource s = DirResource'
     -- ^ @source_dir@ - (Required, Forces New)
     -- Path to the directory where the files to template reside
     --
-    , _vars           :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _vars           :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @vars@ - (Optional, Forces New)
     -- Variables to substitute
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dirResource
     :: TF.Attr s P.Text -- ^ @destination_dir@ - 'P.destinationDir'
     -> TF.Attr s P.Text -- ^ @source_dir@ - 'P.sourceDir'
     -> P.Resource (DirResource s)
 dirResource _destinationDir _sourceDir =
-    TF.newResource "template_dir" TF.validator $
+    TF.unsafeResource "template_dir" P.defaultProvider TF.validator $
         DirResource'
             { _destinationDir = _destinationDir
             , _sourceDir = _sourceDir
@@ -167,9 +162,9 @@ instance P.HasSourceDir (DirResource s) (TF.Attr s P.Text) where
         P.lens (_sourceDir :: DirResource s -> TF.Attr s P.Text)
                (\s a -> s { _sourceDir = a } :: DirResource s)
 
-instance P.HasVars (DirResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasVars (DirResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     vars =
-        P.lens (_vars :: DirResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_vars :: DirResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _vars = a } :: DirResource s)
 
 -- | @template_file@ Resource.
@@ -181,16 +176,16 @@ data FileResource s = FileResource'
     -- ^ @template@ - (Optional, Forces New)
     -- Contents of the template
     --
-    , _vars     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _vars     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @vars@ - (Optional, Forces New)
     -- Variables to substitute
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 fileResource
     :: P.Resource (FileResource s)
 fileResource =
-    TF.newResource "template_file" TF.validator $
+    TF.unsafeResource "template_file" P.defaultProvider TF.validator $
         FileResource'
             { _template = TF.Nil
             , _vars = TF.Nil
@@ -210,9 +205,9 @@ instance P.HasTemplate (FileResource s) (TF.Attr s P.Text) where
         P.lens (_template :: FileResource s -> TF.Attr s P.Text)
                (\s a -> s { _template = a } :: FileResource s)
 
-instance P.HasVars (FileResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasVars (FileResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     vars =
-        P.lens (_vars :: FileResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_vars :: FileResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _vars = a } :: FileResource s)
 
 instance s ~ s' => P.HasComputedRendered (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where

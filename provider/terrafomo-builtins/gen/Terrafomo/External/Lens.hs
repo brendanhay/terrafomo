@@ -15,13 +15,13 @@ module Terrafomo.External.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasWorkingDir (..)
+      HasProgram (..)
     , HasQuery (..)
-    , HasProgram (..)
+    , HasWorkingDir (..)
 
     -- ** Computed Attributes
-    , HasComputedResult (..)
     , HasComputedId (..)
+    , HasComputedResult (..)
     ) where
 
 import GHC.Base ((.))
@@ -29,11 +29,11 @@ import GHC.Base ((.))
 import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
 
-class HasWorkingDir a b | a -> b where
-    workingDir :: P.Lens' a b
+class HasProgram a b | a -> b where
+    program :: P.Lens' a b
 
-instance HasWorkingDir a b => HasWorkingDir (TF.Schema l p a) b where
-    workingDir = TF.configuration . workingDir
+instance HasProgram a b => HasProgram (TF.Schema l p a) b where
+    program = TF.configuration . program
 
 class HasQuery a b | a -> b where
     query :: P.Lens' a b
@@ -41,14 +41,14 @@ class HasQuery a b | a -> b where
 instance HasQuery a b => HasQuery (TF.Schema l p a) b where
     query = TF.configuration . query
 
-class HasProgram a b | a -> b where
-    program :: P.Lens' a b
+class HasWorkingDir a b | a -> b where
+    workingDir :: P.Lens' a b
 
-instance HasProgram a b => HasProgram (TF.Schema l p a) b where
-    program = TF.configuration . program
-
-class HasComputedResult a b | a -> b where
-    computedResult :: a -> b
+instance HasWorkingDir a b => HasWorkingDir (TF.Schema l p a) b where
+    workingDir = TF.configuration . workingDir
 
 class HasComputedId a b | a -> b where
     computedId :: a -> b
+
+class HasComputedResult a b | a -> b where
+    computedResult :: a -> b

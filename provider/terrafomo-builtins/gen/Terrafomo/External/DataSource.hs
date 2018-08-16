@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.External.Settings
 
-import qualified Data.Hashable               as P
-import qualified Data.HashMap.Strict         as P
-import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Map.Strict             as P
+import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
 import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
@@ -57,19 +56,19 @@ data Data s = Data'
     { _program    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @program@ - (Required)
     --
-    , _query      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _query      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @query@ - (Optional)
     --
     , _workingDir :: TF.Attr s P.Text
     -- ^ @working_dir@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 data'
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @program@ - 'P.program'
     -> P.DataSource (Data s)
 data' _program =
-    TF.newDataSource "external" TF.validator $
+    TF.unsafeDataSource "external" P.defaultProvider TF.validator $
         Data'
             { _program = _program
             , _query = TF.Nil
@@ -91,9 +90,9 @@ instance P.HasProgram (Data s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_program :: Data s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _program = a } :: Data s)
 
-instance P.HasQuery (Data s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasQuery (Data s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     query =
-        P.lens (_query :: Data s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_query :: Data s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _query = a } :: Data s)
 
 instance P.HasWorkingDir (Data s) (TF.Attr s P.Text) where
@@ -104,5 +103,5 @@ instance P.HasWorkingDir (Data s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Data s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedResult (TF.Ref s' (Data s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedResult (TF.Ref s' (Data s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedResult x = TF.compute (TF.refKey x) "result"

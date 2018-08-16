@@ -12,12 +12,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.TLS
-    ( module Terrafomo.TLS.Lens
-    , module Terrafomo.TLS.Settings
-    , module Terrafomo.TLS.Resource
-    , module Terrafomo.TLS.Types
+    ( module Terrafomo.TLS.DataSource
+    , module Terrafomo.TLS.Lens
     , module Terrafomo.TLS.Provider
-    , module Terrafomo.TLS.DataSource
+    , module Terrafomo.TLS.Resource
+    , module Terrafomo.TLS.Settings
+    , module Terrafomo.TLS.Types
     -- * Provider Aliases
     ) where
 

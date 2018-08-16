@@ -9,11 +9,10 @@ name: terrafomo-builtins
 
 dependencies:
   - base
-  - hashable
+  - containers
   - microlens
   - terrafomo
   - text
-  - unordered-containers
 
 library:
   source-dirs:

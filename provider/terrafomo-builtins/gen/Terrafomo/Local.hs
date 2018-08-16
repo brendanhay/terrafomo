@@ -12,12 +12,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Local
-    ( module Terrafomo.Local.Provider
-    , module Terrafomo.Local.Resource
-    , module Terrafomo.Local.Types
+    ( module Terrafomo.Local.DataSource
     , module Terrafomo.Local.Lens
+    , module Terrafomo.Local.Provider
+    , module Terrafomo.Local.Resource
     , module Terrafomo.Local.Settings
-    , module Terrafomo.Local.DataSource
+    , module Terrafomo.Local.Types
     -- * Provider Aliases
     ) where
 

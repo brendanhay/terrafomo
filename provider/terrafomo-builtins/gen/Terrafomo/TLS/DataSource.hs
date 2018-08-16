@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.TLS.Settings
 
-import qualified Data.Hashable          as P
-import qualified Data.HashMap.Strict    as P
-import qualified Data.HashMap.Strict    as Map
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Map.Strict        as P
+import qualified Data.Map.Strict        as Map
 import qualified Data.Maybe             as P
 import qualified Data.Monoid            as P
 import qualified Data.Text              as P
@@ -58,13 +57,13 @@ data PublicKeyData s = PublicKeyData'
     -- ^ @private_key_pem@ - (Required)
     -- PEM formatted string to use as the private key
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 publicKeyData
     :: TF.Attr s P.Text -- ^ @private_key_pem@ - 'P.privateKeyPem'
     -> P.DataSource (PublicKeyData s)
 publicKeyData _privateKeyPem =
-    TF.newDataSource "tls_public_key" TF.validator $
+    TF.unsafeDataSource "tls_public_key" P.defaultProvider TF.validator $
         PublicKeyData'
             { _privateKeyPem = _privateKeyPem
             }

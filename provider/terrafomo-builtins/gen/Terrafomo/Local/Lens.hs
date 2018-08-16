@@ -16,12 +16,12 @@ module Terrafomo.Local.Lens
     -- * Overloaded Fields
     -- ** Arguments
       HasContent (..)
-    , HasSensitiveContent (..)
     , HasFilename (..)
+    , HasSensitiveContent (..)
 
     -- ** Computed Attributes
-    , HasComputedId (..)
     , HasComputedContent (..)
+    , HasComputedId (..)
     ) where
 
 import GHC.Base ((.))
@@ -35,20 +35,20 @@ class HasContent a b | a -> b where
 instance HasContent a b => HasContent (TF.Schema l p a) b where
     content = TF.configuration . content
 
-class HasSensitiveContent a b | a -> b where
-    sensitiveContent :: P.Lens' a b
-
-instance HasSensitiveContent a b => HasSensitiveContent (TF.Schema l p a) b where
-    sensitiveContent = TF.configuration . sensitiveContent
-
 class HasFilename a b | a -> b where
     filename :: P.Lens' a b
 
 instance HasFilename a b => HasFilename (TF.Schema l p a) b where
     filename = TF.configuration . filename
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasSensitiveContent a b | a -> b where
+    sensitiveContent :: P.Lens' a b
+
+instance HasSensitiveContent a b => HasSensitiveContent (TF.Schema l p a) b where
+    sensitiveContent = TF.configuration . sensitiveContent
 
 class HasComputedContent a b | a -> b where
     computedContent :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b

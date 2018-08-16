@@ -12,10 +12,10 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.HTTP
-    ( module Terrafomo.HTTP.Settings
+    ( module Terrafomo.HTTP.DataSource
     , module Terrafomo.HTTP.Lens
     , module Terrafomo.HTTP.Provider
-    , module Terrafomo.HTTP.DataSource
+    , module Terrafomo.HTTP.Settings
     , module Terrafomo.HTTP.Types
     -- * Provider Aliases
     ) where

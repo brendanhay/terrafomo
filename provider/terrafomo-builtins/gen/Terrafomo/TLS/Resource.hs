@@ -42,10 +42,9 @@ import GHC.Base (($))
 
 import Terrafomo.TLS.Settings
 
-import qualified Data.Hashable          as P
-import qualified Data.HashMap.Strict    as P
-import qualified Data.HashMap.Strict    as Map
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Map.Strict        as P
+import qualified Data.Map.Strict        as Map
 import qualified Data.Maybe             as P
 import qualified Data.Monoid            as P
 import qualified Data.Text              as P
@@ -82,18 +81,18 @@ data CertRequestResource s = CertRequestResource'
     -- ^ @private_key_pem@ - (Required, Forces New)
     -- PEM-encoded private key that the certificate will belong to
     --
-    , _subject       :: TF.Attr s [TF.Attr s (CertRequestSubject s)]
+    , _subject       :: TF.Attr s [TF.Attr s (SubjectSetting s)]
     -- ^ @subject@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 certRequestResource
     :: TF.Attr s P.Text -- ^ @key_algorithm@ - 'P.keyAlgorithm'
     -> TF.Attr s P.Text -- ^ @private_key_pem@ - 'P.privateKeyPem'
-    -> TF.Attr s [TF.Attr s (CertRequestSubject s)] -- ^ @subject@ - 'P.subject'
+    -> TF.Attr s [TF.Attr s (SubjectSetting s)] -- ^ @subject@ - 'P.subject'
     -> P.Resource (CertRequestResource s)
 certRequestResource _keyAlgorithm _privateKeyPem _subject =
-    TF.newResource "tls_cert_request" TF.validator $
+    TF.unsafeResource "tls_cert_request" P.defaultProvider TF.validator $
         CertRequestResource'
             { _dnsNames = TF.Nil
             , _ipAddresses = TF.Nil
@@ -113,10 +112,6 @@ instance TF.IsObject (CertRequestResource s) where
 
 instance TF.IsValid (CertRequestResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_subject"
-                  (_subject
-                      :: CertRequestResource s -> TF.Attr s [TF.Attr s (CertRequestSubject s)])
-                  TF.validator
 
 instance P.HasDnsNames (CertRequestResource s) (TF.Attr s [TF.Attr s P.Text]) where
     dnsNames =
@@ -138,9 +133,9 @@ instance P.HasPrivateKeyPem (CertRequestResource s) (TF.Attr s P.Text) where
         P.lens (_privateKeyPem :: CertRequestResource s -> TF.Attr s P.Text)
                (\s a -> s { _privateKeyPem = a } :: CertRequestResource s)
 
-instance P.HasSubject (CertRequestResource s) (TF.Attr s [TF.Attr s (CertRequestSubject s)]) where
+instance P.HasSubject (CertRequestResource s) (TF.Attr s [TF.Attr s (SubjectSetting s)]) where
     subject =
-        P.lens (_subject :: CertRequestResource s -> TF.Attr s [TF.Attr s (CertRequestSubject s)])
+        P.lens (_subject :: CertRequestResource s -> TF.Attr s [TF.Attr s (SubjectSetting s)])
                (\s a -> s { _subject = a } :: CertRequestResource s)
 
 instance s ~ s' => P.HasComputedCertRequestPem (TF.Ref s' (CertRequestResource s)) (TF.Attr s P.Text) where
@@ -171,7 +166,7 @@ data LocallySignedCertResource s = LocallySignedCertResource'
     -- ^ @cert_request_pem@ - (Required, Forces New)
     -- PEM-encoded certificate request
     --
-    , _earlyRenewalHours   :: TF.Attr s P.Integer
+    , _earlyRenewalHours   :: TF.Attr s P.Int
     -- ^ @early_renewal_hours@ - (Optional, Forces New)
     -- Number of hours before the certificates expiry when a new certificate will
     -- be generated
@@ -180,11 +175,11 @@ data LocallySignedCertResource s = LocallySignedCertResource'
     -- ^ @is_ca_certificate@ - (Optional, Forces New)
     -- Whether the generated certificate will be usable as a CA certificate
     --
-    , _validityPeriodHours :: TF.Attr s P.Integer
+    , _validityPeriodHours :: TF.Attr s P.Int
     -- ^ @validity_period_hours@ - (Required, Forces New)
     -- Number of hours that the certificate will remain valid for
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 locallySignedCertResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_uses@ - 'P.allowedUses'
@@ -192,10 +187,10 @@ locallySignedCertResource
     -> TF.Attr s P.Text -- ^ @ca_key_algorithm@ - 'P.caKeyAlgorithm'
     -> TF.Attr s P.Text -- ^ @ca_private_key_pem@ - 'P.caPrivateKeyPem'
     -> TF.Attr s P.Text -- ^ @cert_request_pem@ - 'P.certRequestPem'
-    -> TF.Attr s P.Integer -- ^ @validity_period_hours@ - 'P.validityPeriodHours'
+    -> TF.Attr s P.Int -- ^ @validity_period_hours@ - 'P.validityPeriodHours'
     -> P.Resource (LocallySignedCertResource s)
 locallySignedCertResource _allowedUses _caCertPem _caKeyAlgorithm _caPrivateKeyPem _certRequestPem _validityPeriodHours =
-    TF.newResource "tls_locally_signed_cert" TF.validator $
+    TF.unsafeResource "tls_locally_signed_cert" P.defaultProvider TF.validator $
         LocallySignedCertResource'
             { _allowedUses = _allowedUses
             , _caCertPem = _caCertPem
@@ -247,9 +242,9 @@ instance P.HasCertRequestPem (LocallySignedCertResource s) (TF.Attr s P.Text) wh
         P.lens (_certRequestPem :: LocallySignedCertResource s -> TF.Attr s P.Text)
                (\s a -> s { _certRequestPem = a } :: LocallySignedCertResource s)
 
-instance P.HasEarlyRenewalHours (LocallySignedCertResource s) (TF.Attr s P.Integer) where
+instance P.HasEarlyRenewalHours (LocallySignedCertResource s) (TF.Attr s P.Int) where
     earlyRenewalHours =
-        P.lens (_earlyRenewalHours :: LocallySignedCertResource s -> TF.Attr s P.Integer)
+        P.lens (_earlyRenewalHours :: LocallySignedCertResource s -> TF.Attr s P.Int)
                (\s a -> s { _earlyRenewalHours = a } :: LocallySignedCertResource s)
 
 instance P.HasIsCaCertificate (LocallySignedCertResource s) (TF.Attr s P.Bool) where
@@ -257,9 +252,9 @@ instance P.HasIsCaCertificate (LocallySignedCertResource s) (TF.Attr s P.Bool) w
         P.lens (_isCaCertificate :: LocallySignedCertResource s -> TF.Attr s P.Bool)
                (\s a -> s { _isCaCertificate = a } :: LocallySignedCertResource s)
 
-instance P.HasValidityPeriodHours (LocallySignedCertResource s) (TF.Attr s P.Integer) where
+instance P.HasValidityPeriodHours (LocallySignedCertResource s) (TF.Attr s P.Int) where
     validityPeriodHours =
-        P.lens (_validityPeriodHours :: LocallySignedCertResource s -> TF.Attr s P.Integer)
+        P.lens (_validityPeriodHours :: LocallySignedCertResource s -> TF.Attr s P.Int)
                (\s a -> s { _validityPeriodHours = a } :: LocallySignedCertResource s)
 
 instance s ~ s' => P.HasComputedCertPem (TF.Ref s' (LocallySignedCertResource s)) (TF.Attr s P.Text) where
@@ -284,17 +279,17 @@ data PrivateKeyResource s = PrivateKeyResource'
     -- ^ @ecdsa_curve@ - (Optional, Forces New)
     -- ECDSA curve to use when generating a key
     --
-    , _rsaBits    :: TF.Attr s P.Integer
+    , _rsaBits    :: TF.Attr s P.Int
     -- ^ @rsa_bits@ - (Optional, Forces New)
     -- Number of bits to use when generating an RSA key
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 privateKeyResource
     :: TF.Attr s P.Text -- ^ @algorithm@ - 'P.algorithm'
     -> P.Resource (PrivateKeyResource s)
 privateKeyResource _algorithm =
-    TF.newResource "tls_private_key" TF.validator $
+    TF.unsafeResource "tls_private_key" P.defaultProvider TF.validator $
         PrivateKeyResource'
             { _algorithm = _algorithm
             , _ecdsaCurve = TF.value "P224"
@@ -321,9 +316,9 @@ instance P.HasEcdsaCurve (PrivateKeyResource s) (TF.Attr s P.Text) where
         P.lens (_ecdsaCurve :: PrivateKeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _ecdsaCurve = a } :: PrivateKeyResource s)
 
-instance P.HasRsaBits (PrivateKeyResource s) (TF.Attr s P.Integer) where
+instance P.HasRsaBits (PrivateKeyResource s) (TF.Attr s P.Int) where
     rsaBits =
-        P.lens (_rsaBits :: PrivateKeyResource s -> TF.Attr s P.Integer)
+        P.lens (_rsaBits :: PrivateKeyResource s -> TF.Attr s P.Int)
                (\s a -> s { _rsaBits = a } :: PrivateKeyResource s)
 
 instance s ~ s' => P.HasComputedPrivateKeyPem (TF.Ref s' (PrivateKeyResource s)) (TF.Attr s P.Text) where
@@ -348,7 +343,7 @@ data SelfSignedCertResource s = SelfSignedCertResource'
     -- ^ @dns_names@ - (Optional, Forces New)
     -- List of DNS names to use as subjects of the certificate
     --
-    , _earlyRenewalHours   :: TF.Attr s P.Integer
+    , _earlyRenewalHours   :: TF.Attr s P.Int
     -- ^ @early_renewal_hours@ - (Optional, Forces New)
     -- Number of hours before the certificates expiry when a new certificate will
     -- be generated
@@ -369,24 +364,24 @@ data SelfSignedCertResource s = SelfSignedCertResource'
     -- ^ @private_key_pem@ - (Required, Forces New)
     -- PEM-encoded private key that the certificate will belong to
     --
-    , _subject             :: TF.Attr s [TF.Attr s (SelfSignedCertSubject s)]
+    , _subject             :: TF.Attr s [TF.Attr s (SubjectSetting s)]
     -- ^ @subject@ - (Required, Forces New)
     --
-    , _validityPeriodHours :: TF.Attr s P.Integer
+    , _validityPeriodHours :: TF.Attr s P.Int
     -- ^ @validity_period_hours@ - (Required, Forces New)
     -- Number of hours that the certificate will remain valid for
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 selfSignedCertResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_uses@ - 'P.allowedUses'
     -> TF.Attr s P.Text -- ^ @key_algorithm@ - 'P.keyAlgorithm'
     -> TF.Attr s P.Text -- ^ @private_key_pem@ - 'P.privateKeyPem'
-    -> TF.Attr s [TF.Attr s (SelfSignedCertSubject s)] -- ^ @subject@ - 'P.subject'
-    -> TF.Attr s P.Integer -- ^ @validity_period_hours@ - 'P.validityPeriodHours'
+    -> TF.Attr s [TF.Attr s (SubjectSetting s)] -- ^ @subject@ - 'P.subject'
+    -> TF.Attr s P.Int -- ^ @validity_period_hours@ - 'P.validityPeriodHours'
     -> P.Resource (SelfSignedCertResource s)
 selfSignedCertResource _allowedUses _keyAlgorithm _privateKeyPem _subject _validityPeriodHours =
-    TF.newResource "tls_self_signed_cert" TF.validator $
+    TF.unsafeResource "tls_self_signed_cert" P.defaultProvider TF.validator $
         SelfSignedCertResource'
             { _allowedUses = _allowedUses
             , _dnsNames = TF.Nil
@@ -414,10 +409,6 @@ instance TF.IsObject (SelfSignedCertResource s) where
 
 instance TF.IsValid (SelfSignedCertResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_subject"
-                  (_subject
-                      :: SelfSignedCertResource s -> TF.Attr s [TF.Attr s (SelfSignedCertSubject s)])
-                  TF.validator
 
 instance P.HasAllowedUses (SelfSignedCertResource s) (TF.Attr s [TF.Attr s P.Text]) where
     allowedUses =
@@ -429,9 +420,9 @@ instance P.HasDnsNames (SelfSignedCertResource s) (TF.Attr s [TF.Attr s P.Text])
         P.lens (_dnsNames :: SelfSignedCertResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _dnsNames = a } :: SelfSignedCertResource s)
 
-instance P.HasEarlyRenewalHours (SelfSignedCertResource s) (TF.Attr s P.Integer) where
+instance P.HasEarlyRenewalHours (SelfSignedCertResource s) (TF.Attr s P.Int) where
     earlyRenewalHours =
-        P.lens (_earlyRenewalHours :: SelfSignedCertResource s -> TF.Attr s P.Integer)
+        P.lens (_earlyRenewalHours :: SelfSignedCertResource s -> TF.Attr s P.Int)
                (\s a -> s { _earlyRenewalHours = a } :: SelfSignedCertResource s)
 
 instance P.HasIpAddresses (SelfSignedCertResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -454,14 +445,14 @@ instance P.HasPrivateKeyPem (SelfSignedCertResource s) (TF.Attr s P.Text) where
         P.lens (_privateKeyPem :: SelfSignedCertResource s -> TF.Attr s P.Text)
                (\s a -> s { _privateKeyPem = a } :: SelfSignedCertResource s)
 
-instance P.HasSubject (SelfSignedCertResource s) (TF.Attr s [TF.Attr s (SelfSignedCertSubject s)]) where
+instance P.HasSubject (SelfSignedCertResource s) (TF.Attr s [TF.Attr s (SubjectSetting s)]) where
     subject =
-        P.lens (_subject :: SelfSignedCertResource s -> TF.Attr s [TF.Attr s (SelfSignedCertSubject s)])
+        P.lens (_subject :: SelfSignedCertResource s -> TF.Attr s [TF.Attr s (SubjectSetting s)])
                (\s a -> s { _subject = a } :: SelfSignedCertResource s)
 
-instance P.HasValidityPeriodHours (SelfSignedCertResource s) (TF.Attr s P.Integer) where
+instance P.HasValidityPeriodHours (SelfSignedCertResource s) (TF.Attr s P.Int) where
     validityPeriodHours =
-        P.lens (_validityPeriodHours :: SelfSignedCertResource s -> TF.Attr s P.Integer)
+        P.lens (_validityPeriodHours :: SelfSignedCertResource s -> TF.Attr s P.Int)
                (\s a -> s { _validityPeriodHours = a } :: SelfSignedCertResource s)
 
 instance s ~ s' => P.HasComputedCertPem (TF.Ref s' (SelfSignedCertResource s)) (TF.Attr s P.Text) where
