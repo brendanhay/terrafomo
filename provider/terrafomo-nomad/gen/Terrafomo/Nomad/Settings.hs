@@ -62,8 +62,8 @@ data LimitsSetting s = LimitsSetting'
 
 -- | Construct a new @limits@ settings value.
 newLimitsSetting
-    :: TF.Attr s (RegionLimitSetting s) -- ^ @region_limit@ - 'P.regionLimit'
-    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
+    :: TF.Attr s (RegionLimitSetting s) -- ^ 'P._regionLimit': @region_limit@
+    -> TF.Attr s P.Text -- ^ 'P._region': @region@
     -> LimitsSetting s
 newLimitsSetting _regionLimit _region =
     LimitsSetting'

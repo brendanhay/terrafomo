@@ -17,10 +17,11 @@
 --
 module Terrafomo.Nomad.Provider
     (
+    -- * Nomad Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** Nomad Specific Aliases
+    -- * Nomad Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -92,7 +93,7 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @address@ - 'P.address'
+    :: P.Text -- ^ @address@ ('P._address', 'P.address')
     -> Provider
 newProvider _address =
     Provider'
@@ -109,7 +110,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "nomad"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "address" _address
             , TF.assign "ca_file" <$> _caFile

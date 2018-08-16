@@ -89,8 +89,8 @@ data AclPolicyResource s = AclPolicyResource'
 
 -- | Define a new @nomad_acl_policy@ resource value.
 aclPolicyResource
-    :: TF.Attr s P.Text -- ^ @rules_hcl@ - 'P.rulesHcl'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @rules_hcl@ ('P._rulesHcl', 'P.rulesHcl')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (AclPolicyResource s)
 aclPolicyResource _rulesHcl _name =
     TF.unsafeResource "nomad_acl_policy" TF.validator $
@@ -153,7 +153,7 @@ data AclTokenResource s = AclTokenResource'
 
 -- | Define a new @nomad_acl_token@ resource value.
 aclTokenResource
-    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (AclTokenResource s)
 aclTokenResource _type' =
     TF.unsafeResource "nomad_acl_token" TF.validator $
@@ -229,7 +229,7 @@ data JobResource s = JobResource'
 
 -- | Define a new @nomad_job@ resource value.
 jobResource
-    :: TF.Attr s P.Text -- ^ @jobspec@ - 'P.jobspec'
+    :: TF.Attr s P.Text -- ^ @jobspec@ ('P._jobspec', 'P.jobspec')
     -> P.Resource (JobResource s)
 jobResource _jobspec =
     TF.unsafeResource "nomad_job" TF.validator $
@@ -295,7 +295,7 @@ data NamespaceResource s = NamespaceResource'
 
 -- | Define a new @nomad_namespace@ resource value.
 namespaceResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (NamespaceResource s)
 namespaceResource _name =
     TF.unsafeResource "nomad_namespace" TF.validator $
@@ -354,8 +354,8 @@ data QuotaSpecificationResource s = QuotaSpecificationResource'
 
 -- | Define a new @nomad_quota_specification@ resource value.
 quotaSpecificationResource
-    :: TF.Attr s [TF.Attr s (LimitsSetting s)] -- ^ @limits@ - 'P.limits'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s [TF.Attr s (LimitsSetting s)] -- ^ @limits@ ('P._limits', 'P.limits')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (QuotaSpecificationResource s)
 quotaSpecificationResource _limits _name =
     TF.unsafeResource "nomad_quota_specification" TF.validator $
@@ -423,10 +423,10 @@ data SentinelPolicyResource s = SentinelPolicyResource'
 
 -- | Define a new @nomad_sentinel_policy@ resource value.
 sentinelPolicyResource
-    :: TF.Attr s P.Text -- ^ @enforcement_level@ - 'P.enforcementLevel'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
-    -> TF.Attr s P.Text -- ^ @scope@ - 'P.scope'
+    :: TF.Attr s P.Text -- ^ @enforcement_level@ ('P._enforcementLevel', 'P.enforcementLevel')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @policy@ ('P._policy', 'P.policy')
+    -> TF.Attr s P.Text -- ^ @scope@ ('P._scope', 'P.scope')
     -> P.Resource (SentinelPolicyResource s)
 sentinelPolicyResource _enforcementLevel _name _policy _scope =
     TF.unsafeResource "nomad_sentinel_policy" TF.validator $
