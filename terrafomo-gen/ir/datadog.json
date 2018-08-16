@@ -1626,6 +1626,23 @@
                     "original": "escalation_message"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"evaluation_delay\" <$> TF.attribute",
+                    "name": "_evaluationDelay",
+                    "method": "evaluationDelay",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasEvaluationDelay",
+                    "validate": false,
+                    "optional": true,
+                    "original": "evaluation_delay"
+                },
+                {
                     "default": "TF.value P.True",
                     "computed": false,
                     "required": false,
@@ -1692,6 +1709,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"new_host_delay\" <$> TF.attribute",
+                    "name": "_newHostDelay",
+                    "method": "newHostDelay",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasNewHostDelay",
+                    "validate": false,
+                    "optional": true,
+                    "original": "new_host_delay"
                 },
                 {
                     "default": "TF.Nil",
@@ -1917,7 +1951,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedEvaluationDelay",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "evaluation_delay"
                 },
                 {
@@ -1934,7 +1968,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedNewHostDelay",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "new_host_delay"
                 }
             ],
