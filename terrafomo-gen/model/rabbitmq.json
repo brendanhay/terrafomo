@@ -179,7 +179,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "exchange_settings",
+            "name": "settings",
             "schemas": [
               {
                 "name": "arguments",
@@ -264,7 +264,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "permissions_permissions",
+            "name": "permissions",
             "schemas": [
               {
                 "name": "configure",
@@ -359,7 +359,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "policy_policy",
+            "name": "policy",
             "schemas": [
               {
                 "name": "apply_to",
@@ -453,7 +453,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "queue_settings",
+            "name": "settings",
             "schemas": [
               {
                 "name": "arguments",
@@ -566,7 +566,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "user_tags",
+            "name": "tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
