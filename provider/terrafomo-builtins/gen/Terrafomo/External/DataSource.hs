@@ -65,7 +65,7 @@ data Data s = Data'
 
 -- | Define a new @external@ datasource value.
 data'
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @program@ - 'P.program'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @program@ ('P._program', 'P.program')
     -> P.DataSource (Data s)
 data' _program =
     TF.unsafeDataSource "external" TF.validator $

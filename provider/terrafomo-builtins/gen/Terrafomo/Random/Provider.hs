@@ -17,10 +17,11 @@
 --
 module Terrafomo.Random.Provider
     (
+    -- * Random Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** Random Specific Aliases
+    -- * Random Specific Aliases
     , DataSource
     , Resource
     ) where

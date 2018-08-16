@@ -17,10 +17,11 @@
 --
 module Terrafomo.TLS.Provider
     (
+    -- * TLS Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** TLS Specific Aliases
+    -- * TLS Specific Aliases
     , DataSource
     , Resource
     ) where

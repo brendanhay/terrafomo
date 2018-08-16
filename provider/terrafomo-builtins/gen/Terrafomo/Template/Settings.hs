@@ -62,7 +62,7 @@ data PartSetting s = PartSetting'
 
 -- | Construct a new @part@ settings value.
 newPartSetting
-    :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
+    :: TF.Attr s P.Text -- ^ 'P._content': @content@
     -> PartSetting s
 newPartSetting _content =
     PartSetting'

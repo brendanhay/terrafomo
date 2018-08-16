@@ -62,7 +62,7 @@ data Data s = Data'
 
 -- | Define a new @http@ datasource value.
 data'
-    :: TF.Attr s P.Text -- ^ @url@ - 'P.url'
+    :: TF.Attr s P.Text -- ^ @url@ ('P._url', 'P.url')
     -> P.DataSource (Data s)
 data' _url =
     TF.unsafeDataSource "http" TF.validator $

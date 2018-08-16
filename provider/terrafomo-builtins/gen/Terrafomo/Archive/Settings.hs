@@ -56,8 +56,8 @@ data SourceSetting s = SourceSetting'
 
 -- | Construct a new @source@ settings value.
 newSourceSetting
-    :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
-    -> TF.Attr s P.Text -- ^ @filename@ - 'P.filename'
+    :: TF.Attr s P.Text -- ^ 'P._content': @content@
+    -> TF.Attr s P.Text -- ^ 'P._filename': @filename@
     -> SourceSetting s
 newSourceSetting _content _filename =
     SourceSetting'

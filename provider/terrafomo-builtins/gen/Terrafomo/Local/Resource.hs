@@ -72,7 +72,7 @@ data FileResource s = FileResource'
 
 -- | Define a new @local_file@ resource value.
 fileResource
-    :: TF.Attr s P.Text -- ^ @filename@ - 'P.filename'
+    :: TF.Attr s P.Text -- ^ @filename@ ('P._filename', 'P.filename')
     -> P.Resource (FileResource s)
 fileResource _filename =
     TF.unsafeResource "local_file" TF.validator $

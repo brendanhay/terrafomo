@@ -69,7 +69,7 @@ data CloudinitConfigData s = CloudinitConfigData'
 
 -- | Define a new @template_cloudinit_config@ datasource value.
 cloudinitConfigData
-    :: TF.Attr s [TF.Attr s (PartSetting s)] -- ^ @part@ - 'P.part'
+    :: TF.Attr s [TF.Attr s (PartSetting s)] -- ^ @part@ ('P._part', 'P.part')
     -> P.DataSource (CloudinitConfigData s)
 cloudinitConfigData _part =
     TF.unsafeDataSource "template_cloudinit_config" TF.validator $

@@ -60,7 +60,7 @@ data FileData s = FileData'
 
 -- | Define a new @local_file@ datasource value.
 fileData
-    :: TF.Attr s P.Text -- ^ @filename@ - 'P.filename'
+    :: TF.Attr s P.Text -- ^ @filename@ ('P._filename', 'P.filename')
     -> P.DataSource (FileData s)
 fileData _filename =
     TF.unsafeDataSource "local_file" TF.validator $

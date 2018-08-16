@@ -60,7 +60,7 @@ data PublicKeyData s = PublicKeyData'
 
 -- | Define a new @tls_public_key@ datasource value.
 publicKeyData
-    :: TF.Attr s P.Text -- ^ @private_key_pem@ - 'P.privateKeyPem'
+    :: TF.Attr s P.Text -- ^ @private_key_pem@ ('P._privateKeyPem', 'P.privateKeyPem')
     -> P.DataSource (PublicKeyData s)
 publicKeyData _privateKeyPem =
     TF.unsafeDataSource "tls_public_key" TF.validator $

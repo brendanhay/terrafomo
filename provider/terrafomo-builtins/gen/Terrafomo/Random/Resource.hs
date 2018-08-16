@@ -85,7 +85,7 @@ data IdResource s = IdResource'
 
 -- | Define a new @random_id@ resource value.
 idResource
-    :: TF.Attr s P.Int -- ^ @byte_length@ - 'P.byteLength'
+    :: TF.Attr s P.Int -- ^ @byte_length@ ('P._byteLength', 'P.byteLength')
     -> P.Resource (IdResource s)
 idResource _byteLength =
     TF.unsafeResource "random_id" TF.validator $
@@ -156,8 +156,8 @@ data IntegerResource s = IntegerResource'
 
 -- | Define a new @random_integer@ resource value.
 integerResource
-    :: TF.Attr s P.Int -- ^ @max@ - 'P.max'
-    -> TF.Attr s P.Int -- ^ @min@ - 'P.min'
+    :: TF.Attr s P.Int -- ^ @max@ ('P._max', 'P.max')
+    -> TF.Attr s P.Int -- ^ @min@ ('P._min', 'P.min')
     -> P.Resource (IntegerResource s)
 integerResource _max _min =
     TF.unsafeResource "random_integer" TF.validator $
@@ -291,7 +291,7 @@ data ShuffleResource s = ShuffleResource'
 
 -- | Define a new @random_shuffle@ resource value.
 shuffleResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @input@ - 'P.input'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @input@ ('P._input', 'P.input')
     -> P.Resource (ShuffleResource s)
 shuffleResource _input =
     TF.unsafeResource "random_shuffle" TF.validator $
@@ -381,7 +381,7 @@ data StringResource s = StringResource'
 
 -- | Define a new @random_string@ resource value.
 stringResource
-    :: TF.Attr s P.Int -- ^ @length@ - 'P.length'
+    :: TF.Attr s P.Int -- ^ @length@ ('P._length', 'P.length')
     -> P.Resource (StringResource s)
 stringResource _length =
     TF.unsafeResource "random_string" TF.validator $

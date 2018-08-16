@@ -17,10 +17,11 @@
 --
 module Terrafomo.Local.Provider
     (
+    -- * Local Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** Local Specific Aliases
+    -- * Local Specific Aliases
     , DataSource
     , Resource
     ) where

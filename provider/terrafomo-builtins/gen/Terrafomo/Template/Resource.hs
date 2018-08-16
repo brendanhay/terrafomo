@@ -73,7 +73,7 @@ data CloudinitConfigResource s = CloudinitConfigResource'
 
 -- | Define a new @template_cloudinit_config@ resource value.
 cloudinitConfigResource
-    :: TF.Attr s [TF.Attr s (PartSetting s)] -- ^ @part@ - 'P.part'
+    :: TF.Attr s [TF.Attr s (PartSetting s)] -- ^ @part@ ('P._part', 'P.part')
     -> P.Resource (CloudinitConfigResource s)
 cloudinitConfigResource _part =
     TF.unsafeResource "template_cloudinit_config" TF.validator $
@@ -135,8 +135,8 @@ data DirResource s = DirResource'
 
 -- | Define a new @template_dir@ resource value.
 dirResource
-    :: TF.Attr s P.Text -- ^ @destination_dir@ - 'P.destinationDir'
-    -> TF.Attr s P.Text -- ^ @source_dir@ - 'P.sourceDir'
+    :: TF.Attr s P.Text -- ^ @destination_dir@ ('P._destinationDir', 'P.destinationDir')
+    -> TF.Attr s P.Text -- ^ @source_dir@ ('P._sourceDir', 'P.sourceDir')
     -> P.Resource (DirResource s)
 dirResource _destinationDir _sourceDir =
     TF.unsafeResource "template_dir" TF.validator $

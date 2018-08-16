@@ -103,8 +103,8 @@ data FileData s = FileData'
 
 -- | Define a new @archive_file@ datasource value.
 fileData
-    :: TF.Attr s P.Text -- ^ @output_path@ - 'P.outputPath'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @output_path@ ('P._outputPath', 'P.outputPath')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.DataSource (FileData s)
 fileData _outputPath _type' =
     TF.unsafeDataSource "archive_file" TF.validator $
