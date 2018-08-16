@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newGrantSetting",
+                "smart": "grantSetting",
                 "name": "GrantSetting'"
             },
             "arguments": [
@@ -87,7 +87,7 @@
         },
         {
             "con": {
-                "smart": "newRetentionPoliciesSetting",
+                "smart": "retentionPoliciesSetting",
                 "name": "RetentionPoliciesSetting'"
             },
             "arguments": [
