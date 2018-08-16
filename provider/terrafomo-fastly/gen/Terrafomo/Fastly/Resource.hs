@@ -58,7 +58,7 @@ data ServiceV1Resource s = ServiceV1Resource'
     , _bigquerylogging :: TF.Attr s [TF.Attr s (BigqueryloggingSetting s)]
     -- ^ @bigquerylogging@ - (Optional)
     --
-    , _cacheSetting    :: TF.Attr s [TF.Attr s (CacheSettingSetting s)]
+    , _cacheSetting    :: TF.Attr s [TF.Attr s (CacheSetting s)]
     -- ^ @cache_setting@ - (Optional)
     --
     , _condition       :: TF.Attr s [TF.Attr s (ConditionSetting s)]
@@ -100,7 +100,7 @@ data ServiceV1Resource s = ServiceV1Resource'
     , _papertrail      :: TF.Attr s [TF.Attr s (PapertrailSetting s)]
     -- ^ @papertrail@ - (Optional)
     --
-    , _requestSetting  :: TF.Attr s [TF.Attr s (RequestSettingSetting s)]
+    , _requestSetting  :: TF.Attr s [TF.Attr s (RequestSetting s)]
     -- ^ @request_setting@ - (Optional)
     --
     , _responseObject  :: TF.Attr s [TF.Attr s (ResponseObjectSetting s)]
@@ -189,9 +189,9 @@ instance P.HasBigquerylogging (ServiceV1Resource s) (TF.Attr s [TF.Attr s (Bigqu
         P.lens (_bigquerylogging :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (BigqueryloggingSetting s)])
                (\s a -> s { _bigquerylogging = a } :: ServiceV1Resource s)
 
-instance P.HasCacheSetting (ServiceV1Resource s) (TF.Attr s [TF.Attr s (CacheSettingSetting s)]) where
+instance P.HasCacheSetting (ServiceV1Resource s) (TF.Attr s [TF.Attr s (CacheSetting s)]) where
     cacheSetting =
-        P.lens (_cacheSetting :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (CacheSettingSetting s)])
+        P.lens (_cacheSetting :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (CacheSetting s)])
                (\s a -> s { _cacheSetting = a } :: ServiceV1Resource s)
 
 instance P.HasCondition (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ConditionSetting s)]) where
@@ -254,9 +254,9 @@ instance P.HasPapertrail (ServiceV1Resource s) (TF.Attr s [TF.Attr s (Papertrail
         P.lens (_papertrail :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (PapertrailSetting s)])
                (\s a -> s { _papertrail = a } :: ServiceV1Resource s)
 
-instance P.HasRequestSetting (ServiceV1Resource s) (TF.Attr s [TF.Attr s (RequestSettingSetting s)]) where
+instance P.HasRequestSetting (ServiceV1Resource s) (TF.Attr s [TF.Attr s (RequestSetting s)]) where
     requestSetting =
-        P.lens (_requestSetting :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (RequestSettingSetting s)])
+        P.lens (_requestSetting :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (RequestSetting s)])
                (\s a -> s { _requestSetting = a } :: ServiceV1Resource s)
 
 instance P.HasResponseObject (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ResponseObjectSetting s)]) where

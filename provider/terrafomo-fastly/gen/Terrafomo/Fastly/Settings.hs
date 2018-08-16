@@ -19,71 +19,71 @@ module Terrafomo.Fastly.Settings
     (
     -- ** backend
       BackendSetting (..)
-    , backendSetting
+    , newBackendSetting
 
     -- ** bigquerylogging
     , BigqueryloggingSetting (..)
-    , bigqueryloggingSetting
+    , newBigqueryloggingSetting
 
     -- ** cache_setting
-    , CacheSettingSetting (..)
-    , cacheSettingSetting
+    , CacheSetting (..)
+    , newCacheSetting
 
     -- ** condition
     , ConditionSetting (..)
-    , conditionSetting
+    , newConditionSetting
 
     -- ** domain
     , DomainSetting (..)
-    , domainSetting
+    , newDomainSetting
 
     -- ** gcslogging
     , GcsloggingSetting (..)
-    , gcsloggingSetting
+    , newGcsloggingSetting
 
     -- ** gzip
     , GzipSetting (..)
-    , gzipSetting
+    , newGzipSetting
 
     -- ** header
     , HeaderSetting (..)
-    , headerSetting
+    , newHeaderSetting
 
     -- ** healthcheck
     , HealthcheckSetting (..)
-    , healthcheckSetting
+    , newHealthcheckSetting
 
     -- ** logentries
     , LogentriesSetting (..)
-    , logentriesSetting
+    , newLogentriesSetting
 
     -- ** papertrail
     , PapertrailSetting (..)
-    , papertrailSetting
+    , newPapertrailSetting
 
     -- ** request_setting
-    , RequestSettingSetting (..)
-    , requestSettingSetting
+    , RequestSetting (..)
+    , newRequestSetting
 
     -- ** response_object
     , ResponseObjectSetting (..)
-    , responseObjectSetting
+    , newResponseObjectSetting
 
     -- ** s3logging
     , S3loggingSetting (..)
-    , s3loggingSetting
+    , newS3loggingSetting
 
     -- ** sumologic
     , SumologicSetting (..)
-    , sumologicSetting
+    , newSumologicSetting
 
     -- ** syslog
     , SyslogSetting (..)
-    , syslogSetting
+    , newSyslogSetting
 
     -- ** vcl
     , VclSetting (..)
-    , vclSetting
+    , newVclSetting
 
     ) where
 
@@ -207,11 +207,11 @@ data BackendSetting s = BackendSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @backend@ settings value.
-backendSetting
+newBackendSetting
     :: TF.Attr s P.Text -- ^ 'P._address': @address@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> BackendSetting s
-backendSetting _address _name =
+newBackendSetting _address _name =
     BackendSetting'
         { _address = _address
         , _autoLoadbalance = TF.value P.True
@@ -422,13 +422,13 @@ data BigqueryloggingSetting s = BigqueryloggingSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @bigquerylogging@ settings value.
-bigqueryloggingSetting
+newBigqueryloggingSetting
     :: TF.Attr s P.Text -- ^ 'P._dataset': @dataset@
     -> TF.Attr s P.Text -- ^ 'P._projectId': @project_id@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._table': @table@
     -> BigqueryloggingSetting s
-bigqueryloggingSetting _dataset _projectId _name _table =
+newBigqueryloggingSetting _dataset _projectId _name _table =
     BigqueryloggingSetting'
         { _dataset = _dataset
         , _email = TF.Nil
@@ -497,7 +497,7 @@ instance P.HasTable (BigqueryloggingSetting s) (TF.Attr s P.Text) where
                (\s a -> s { _table = a } :: BigqueryloggingSetting s)
 
 -- | @cache_setting@ nested settings.
-data CacheSettingSetting s = CacheSettingSetting'
+data CacheSetting s = CacheSetting'
     { _action         :: TF.Attr s P.Text
     -- ^ @action@ - (Optional)
     -- Action to take
@@ -521,11 +521,11 @@ data CacheSettingSetting s = CacheSettingSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @cache_setting@ settings value.
-cacheSettingSetting
+newCacheSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> CacheSettingSetting s
-cacheSettingSetting _name =
-    CacheSettingSetting'
+    -> CacheSetting s
+newCacheSetting _name =
+    CacheSetting'
         { _action = TF.Nil
         , _cacheCondition = TF.Nil
         , _name = _name
@@ -533,9 +533,9 @@ cacheSettingSetting _name =
         , _ttl = TF.Nil
         }
 
-instance TF.IsValue  (CacheSettingSetting s)
-instance TF.IsObject (CacheSettingSetting s) where
-    toObject CacheSettingSetting'{..} = P.catMaybes
+instance TF.IsValue  (CacheSetting s)
+instance TF.IsObject (CacheSetting s) where
+    toObject CacheSetting'{..} = P.catMaybes
         [ TF.assign "action" <$> TF.attribute _action
         , TF.assign "cache_condition" <$> TF.attribute _cacheCondition
         , TF.assign "name" <$> TF.attribute _name
@@ -543,33 +543,33 @@ instance TF.IsObject (CacheSettingSetting s) where
         , TF.assign "ttl" <$> TF.attribute _ttl
         ]
 
-instance TF.IsValid (CacheSettingSetting s) where
+instance TF.IsValid (CacheSetting s) where
     validator = P.mempty
 
-instance P.HasAction (CacheSettingSetting s) (TF.Attr s P.Text) where
+instance P.HasAction (CacheSetting s) (TF.Attr s P.Text) where
     action =
-        P.lens (_action :: CacheSettingSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _action = a } :: CacheSettingSetting s)
+        P.lens (_action :: CacheSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _action = a } :: CacheSetting s)
 
-instance P.HasCacheCondition (CacheSettingSetting s) (TF.Attr s P.Text) where
+instance P.HasCacheCondition (CacheSetting s) (TF.Attr s P.Text) where
     cacheCondition =
-        P.lens (_cacheCondition :: CacheSettingSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _cacheCondition = a } :: CacheSettingSetting s)
+        P.lens (_cacheCondition :: CacheSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _cacheCondition = a } :: CacheSetting s)
 
-instance P.HasName (CacheSettingSetting s) (TF.Attr s P.Text) where
+instance P.HasName (CacheSetting s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: CacheSettingSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: CacheSettingSetting s)
+        P.lens (_name :: CacheSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: CacheSetting s)
 
-instance P.HasStaleTtl (CacheSettingSetting s) (TF.Attr s P.Int) where
+instance P.HasStaleTtl (CacheSetting s) (TF.Attr s P.Int) where
     staleTtl =
-        P.lens (_staleTtl :: CacheSettingSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _staleTtl = a } :: CacheSettingSetting s)
+        P.lens (_staleTtl :: CacheSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _staleTtl = a } :: CacheSetting s)
 
-instance P.HasTtl (CacheSettingSetting s) (TF.Attr s P.Int) where
+instance P.HasTtl (CacheSetting s) (TF.Attr s P.Int) where
     ttl =
-        P.lens (_ttl :: CacheSettingSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _ttl = a } :: CacheSettingSetting s)
+        P.lens (_ttl :: CacheSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _ttl = a } :: CacheSetting s)
 
 -- | @condition@ nested settings.
 data ConditionSetting s = ConditionSetting'
@@ -592,12 +592,12 @@ data ConditionSetting s = ConditionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @condition@ settings value.
-conditionSetting
+newConditionSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._statement': @statement@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> ConditionSetting s
-conditionSetting _name _statement _type' =
+newConditionSetting _name _statement _type' =
     ConditionSetting'
         { _name = _name
         , _priority = TF.value 10
@@ -649,10 +649,10 @@ data DomainSetting s = DomainSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @domain@ settings value.
-domainSetting
+newDomainSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> DomainSetting s
-domainSetting _name =
+newDomainSetting _name =
     DomainSetting'
         { _comment = TF.Nil
         , _name = _name
@@ -728,11 +728,11 @@ data GcsloggingSetting s = GcsloggingSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @gcslogging@ settings value.
-gcsloggingSetting
+newGcsloggingSetting
     :: TF.Attr s P.Text -- ^ 'P._bucketName': @bucket_name@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> GcsloggingSetting s
-gcsloggingSetting _bucketName _name =
+newGcsloggingSetting _bucketName _name =
     GcsloggingSetting'
         { _bucketName = _bucketName
         , _email = TF.Nil
@@ -842,10 +842,10 @@ data GzipSetting s = GzipSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @gzip@ settings value.
-gzipSetting
+newGzipSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> GzipSetting s
-gzipSetting _name =
+newGzipSetting _name =
     GzipSetting'
         { _cacheCondition = TF.Nil
         , _contentTypes = TF.Nil
@@ -942,13 +942,13 @@ data HeaderSetting s = HeaderSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @header@ settings value.
-headerSetting
+newHeaderSetting
     :: TF.Attr s P.Text -- ^ 'P._action': @action@
     -> TF.Attr s P.Text -- ^ 'P._destination': @destination@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> HeaderSetting s
-headerSetting _action _destination _name _type' =
+newHeaderSetting _action _destination _name _type' =
     HeaderSetting'
         { _action = _action
         , _cacheCondition = TF.Nil
@@ -1102,12 +1102,12 @@ data HealthcheckSetting s = HealthcheckSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @healthcheck@ settings value.
-healthcheckSetting
+newHealthcheckSetting
     :: TF.Attr s P.Text -- ^ 'P._host': @host@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._path': @path@
     -> HealthcheckSetting s
-healthcheckSetting _host _name _path =
+newHealthcheckSetting _host _name _path =
     HealthcheckSetting'
         { _checkInterval = TF.value 5000
         , _expectedResponse = TF.value 200
@@ -1230,11 +1230,11 @@ data LogentriesSetting s = LogentriesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @logentries@ settings value.
-logentriesSetting
+newLogentriesSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._token': @token@
     -> LogentriesSetting s
-logentriesSetting _name _token =
+newLogentriesSetting _name _token =
     LogentriesSetting'
         { _format = TF.value "%h %l %u %t %r %>s"
         , _formatVersion = TF.value 1
@@ -1320,12 +1320,12 @@ data PapertrailSetting s = PapertrailSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @papertrail@ settings value.
-papertrailSetting
+newPapertrailSetting
     :: TF.Attr s P.Text -- ^ 'P._address': @address@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Int -- ^ 'P._port': @port@
     -> PapertrailSetting s
-papertrailSetting _address _name _port =
+newPapertrailSetting _address _name _port =
     PapertrailSetting'
         { _address = _address
         , _format = TF.value "%h %l %u %t %r %>s"
@@ -1373,7 +1373,7 @@ instance P.HasResponseCondition (PapertrailSetting s) (TF.Attr s P.Text) where
                (\s a -> s { _responseCondition = a } :: PapertrailSetting s)
 
 -- | @request_setting@ nested settings.
-data RequestSettingSetting s = RequestSettingSetting'
+data RequestSetting s = RequestSetting'
     { _action           :: TF.Attr s P.Text
     -- ^ @action@ - (Optional)
     -- Allows you to terminate request handling and immediately perform an action
@@ -1427,11 +1427,11 @@ data RequestSettingSetting s = RequestSettingSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @request_setting@ settings value.
-requestSettingSetting
+newRequestSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> RequestSettingSetting s
-requestSettingSetting _name =
-    RequestSettingSetting'
+    -> RequestSetting s
+newRequestSetting _name =
+    RequestSetting'
         { _action = TF.Nil
         , _bypassBusyWait = TF.Nil
         , _defaultHost = TF.Nil
@@ -1446,9 +1446,9 @@ requestSettingSetting _name =
         , _xff = TF.value "append"
         }
 
-instance TF.IsValue  (RequestSettingSetting s)
-instance TF.IsObject (RequestSettingSetting s) where
-    toObject RequestSettingSetting'{..} = P.catMaybes
+instance TF.IsValue  (RequestSetting s)
+instance TF.IsObject (RequestSetting s) where
+    toObject RequestSetting'{..} = P.catMaybes
         [ TF.assign "action" <$> TF.attribute _action
         , TF.assign "bypass_busy_wait" <$> TF.attribute _bypassBusyWait
         , TF.assign "default_host" <$> TF.attribute _defaultHost
@@ -1463,68 +1463,68 @@ instance TF.IsObject (RequestSettingSetting s) where
         , TF.assign "xff" <$> TF.attribute _xff
         ]
 
-instance TF.IsValid (RequestSettingSetting s) where
+instance TF.IsValid (RequestSetting s) where
     validator = P.mempty
 
-instance P.HasAction (RequestSettingSetting s) (TF.Attr s P.Text) where
+instance P.HasAction (RequestSetting s) (TF.Attr s P.Text) where
     action =
-        P.lens (_action :: RequestSettingSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _action = a } :: RequestSettingSetting s)
+        P.lens (_action :: RequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _action = a } :: RequestSetting s)
 
-instance P.HasBypassBusyWait (RequestSettingSetting s) (TF.Attr s P.Bool) where
+instance P.HasBypassBusyWait (RequestSetting s) (TF.Attr s P.Bool) where
     bypassBusyWait =
-        P.lens (_bypassBusyWait :: RequestSettingSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _bypassBusyWait = a } :: RequestSettingSetting s)
+        P.lens (_bypassBusyWait :: RequestSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _bypassBusyWait = a } :: RequestSetting s)
 
-instance P.HasDefaultHost (RequestSettingSetting s) (TF.Attr s P.Text) where
+instance P.HasDefaultHost (RequestSetting s) (TF.Attr s P.Text) where
     defaultHost =
-        P.lens (_defaultHost :: RequestSettingSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _defaultHost = a } :: RequestSettingSetting s)
+        P.lens (_defaultHost :: RequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _defaultHost = a } :: RequestSetting s)
 
-instance P.HasForceMiss (RequestSettingSetting s) (TF.Attr s P.Bool) where
+instance P.HasForceMiss (RequestSetting s) (TF.Attr s P.Bool) where
     forceMiss =
-        P.lens (_forceMiss :: RequestSettingSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _forceMiss = a } :: RequestSettingSetting s)
+        P.lens (_forceMiss :: RequestSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _forceMiss = a } :: RequestSetting s)
 
-instance P.HasForceSsl (RequestSettingSetting s) (TF.Attr s P.Bool) where
+instance P.HasForceSsl (RequestSetting s) (TF.Attr s P.Bool) where
     forceSsl =
-        P.lens (_forceSsl :: RequestSettingSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _forceSsl = a } :: RequestSettingSetting s)
+        P.lens (_forceSsl :: RequestSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _forceSsl = a } :: RequestSetting s)
 
-instance P.HasGeoHeaders (RequestSettingSetting s) (TF.Attr s P.Bool) where
+instance P.HasGeoHeaders (RequestSetting s) (TF.Attr s P.Bool) where
     geoHeaders =
-        P.lens (_geoHeaders :: RequestSettingSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _geoHeaders = a } :: RequestSettingSetting s)
+        P.lens (_geoHeaders :: RequestSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _geoHeaders = a } :: RequestSetting s)
 
-instance P.HasHashKeys (RequestSettingSetting s) (TF.Attr s P.Text) where
+instance P.HasHashKeys (RequestSetting s) (TF.Attr s P.Text) where
     hashKeys =
-        P.lens (_hashKeys :: RequestSettingSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _hashKeys = a } :: RequestSettingSetting s)
+        P.lens (_hashKeys :: RequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _hashKeys = a } :: RequestSetting s)
 
-instance P.HasMaxStaleAge (RequestSettingSetting s) (TF.Attr s P.Int) where
+instance P.HasMaxStaleAge (RequestSetting s) (TF.Attr s P.Int) where
     maxStaleAge =
-        P.lens (_maxStaleAge :: RequestSettingSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxStaleAge = a } :: RequestSettingSetting s)
+        P.lens (_maxStaleAge :: RequestSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _maxStaleAge = a } :: RequestSetting s)
 
-instance P.HasName (RequestSettingSetting s) (TF.Attr s P.Text) where
+instance P.HasName (RequestSetting s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: RequestSettingSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: RequestSettingSetting s)
+        P.lens (_name :: RequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: RequestSetting s)
 
-instance P.HasRequestCondition (RequestSettingSetting s) (TF.Attr s P.Text) where
+instance P.HasRequestCondition (RequestSetting s) (TF.Attr s P.Text) where
     requestCondition =
-        P.lens (_requestCondition :: RequestSettingSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _requestCondition = a } :: RequestSettingSetting s)
+        P.lens (_requestCondition :: RequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _requestCondition = a } :: RequestSetting s)
 
-instance P.HasTimerSupport (RequestSettingSetting s) (TF.Attr s P.Bool) where
+instance P.HasTimerSupport (RequestSetting s) (TF.Attr s P.Bool) where
     timerSupport =
-        P.lens (_timerSupport :: RequestSettingSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _timerSupport = a } :: RequestSettingSetting s)
+        P.lens (_timerSupport :: RequestSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _timerSupport = a } :: RequestSetting s)
 
-instance P.HasXff (RequestSettingSetting s) (TF.Attr s P.Text) where
+instance P.HasXff (RequestSetting s) (TF.Attr s P.Text) where
     xff =
-        P.lens (_xff :: RequestSettingSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _xff = a } :: RequestSettingSetting s)
+        P.lens (_xff :: RequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _xff = a } :: RequestSetting s)
 
 -- | @response_object@ nested settings.
 data ResponseObjectSetting s = ResponseObjectSetting'
@@ -1561,10 +1561,10 @@ data ResponseObjectSetting s = ResponseObjectSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @response_object@ settings value.
-responseObjectSetting
+newResponseObjectSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> ResponseObjectSetting s
-responseObjectSetting _name =
+newResponseObjectSetting _name =
     ResponseObjectSetting'
         { _cacheCondition = TF.Nil
         , _content = TF.Nil
@@ -1687,11 +1687,11 @@ data S3loggingSetting s = S3loggingSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @s3logging@ settings value.
-s3loggingSetting
+newS3loggingSetting
     :: TF.Attr s P.Text -- ^ 'P._bucketName': @bucket_name@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> S3loggingSetting s
-s3loggingSetting _bucketName _name =
+newS3loggingSetting _bucketName _name =
     S3loggingSetting'
         { _bucketName = _bucketName
         , _domain = TF.value "s3.amazonaws.com"
@@ -1831,11 +1831,11 @@ data SumologicSetting s = SumologicSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @sumologic@ settings value.
-sumologicSetting
+newSumologicSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._url': @url@
     -> SumologicSetting s
-sumologicSetting _name _url =
+newSumologicSetting _name _url =
     SumologicSetting'
         { _format = TF.value "%h %l %u %t %r %>s"
         , _formatVersion = TF.value 1
@@ -1938,11 +1938,11 @@ data SyslogSetting s = SyslogSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @syslog@ settings value.
-syslogSetting
+newSyslogSetting
     :: TF.Attr s P.Text -- ^ 'P._address': @address@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> SyslogSetting s
-syslogSetting _address _name =
+newSyslogSetting _address _name =
     SyslogSetting'
         { _address = _address
         , _format = TF.value "%h %l %u %t \"%r\" %>s %b"
@@ -2048,11 +2048,11 @@ data VclSetting s = VclSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @vcl@ settings value.
-vclSetting
+newVclSetting
     :: TF.Attr s P.Text -- ^ 'P._content': @content@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> VclSetting s
-vclSetting _content _name =
+newVclSetting _content _name =
     VclSetting'
         { _content = _content
         , _main = TF.value P.False
