@@ -17,7 +17,6 @@
 --
 module Terrafomo.DigitalOcean.Settings
     (
-    -- * Settings Datatypes
     -- ** forwarding_rule
       ForwardingRuleSetting (..)
     , newForwardingRuleSetting
@@ -87,6 +86,7 @@ data ForwardingRuleSetting s = ForwardingRuleSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @forwarding_rule@ settings value.
 newForwardingRuleSetting
     :: TF.Attr s P.Int -- ^ @entry_port@ - 'P.entryPort'
     -> TF.Attr s P.Int -- ^ @target_port@ - 'P.targetPort'
@@ -172,6 +172,7 @@ data HealthcheckSetting s = HealthcheckSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @healthcheck@ settings value.
 newHealthcheckSetting
     :: TF.Attr s P.Int -- ^ @port@ - 'P.port'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
@@ -259,6 +260,7 @@ data InboundRuleSetting s = InboundRuleSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @inbound_rule@ settings value.
 newInboundRuleSetting
     :: InboundRuleSetting s
 newInboundRuleSetting =
@@ -337,6 +339,7 @@ data OutboundRuleSetting s = OutboundRuleSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @outbound_rule@ settings value.
 newOutboundRuleSetting
     :: OutboundRuleSetting s
 newOutboundRuleSetting =
@@ -406,6 +409,7 @@ data PendingChangesSetting s = PendingChangesSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @pending_changes@ settings value.
 newPendingChangesSetting
     :: PendingChangesSetting s
 newPendingChangesSetting =
@@ -454,6 +458,7 @@ data StickySessionsSetting s = StickySessionsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @sticky_sessions@ settings value.
 newStickySessionsSetting
     :: StickySessionsSetting s
 newStickySessionsSetting =

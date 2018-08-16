@@ -17,7 +17,6 @@
 --
 module Terrafomo.DigitalOcean.Resource
     (
-    -- * Resource Datatypes
     -- ** digitalocean_certificate
       CertificateResource (..)
     , certificateResource
@@ -103,6 +102,7 @@ data CertificateResource s = CertificateResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @digitalocean_certificate@ resource value.
 certificateResource
     :: TF.Attr s P.Text -- ^ @leaf_certificate@ - 'P.leafCertificate'
     -> TF.Attr s P.Text -- ^ @private_key@ - 'P.privateKey'
@@ -170,6 +170,7 @@ data DomainResource s = DomainResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @digitalocean_domain@ resource value.
 domainResource
     :: TF.Attr s P.Text -- ^ @ip_address@ - 'P.ipAddress'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -249,6 +250,7 @@ data DropletResource s = DropletResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @digitalocean_droplet@ resource value.
 dropletResource
     :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -413,6 +415,7 @@ data FirewallResource s = FirewallResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @digitalocean_firewall@ resource value.
 firewallResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (FirewallResource s)
@@ -488,6 +491,7 @@ data FloatingIpResource s = FloatingIpResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @digitalocean_floating_ip@ resource value.
 floatingIpResource
     :: TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> P.Resource (FloatingIpResource s)
@@ -554,6 +558,7 @@ data LoadbalancerResource s = LoadbalancerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @digitalocean_loadbalancer@ resource value.
 loadbalancerResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
@@ -659,6 +664,7 @@ data RecordResource s = RecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @digitalocean_record@ resource value.
 recordResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -740,6 +746,7 @@ data SshKeyResource s = SshKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @digitalocean_ssh_key@ resource value.
 sshKeyResource
     :: TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -786,6 +793,7 @@ data TagResource s = TagResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @digitalocean_tag@ resource value.
 tagResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (TagResource s)
@@ -833,6 +841,7 @@ data VolumeResource s = VolumeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @digitalocean_volume@ resource value.
 volumeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'

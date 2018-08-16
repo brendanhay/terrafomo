@@ -17,7 +17,6 @@
 --
 module Terrafomo.DigitalOcean.DataSource
     (
-    -- * DataSource Datatypes
     -- ** digitalocean_domain
       DomainData (..)
     , domainData
@@ -67,6 +66,7 @@ data DomainData s = DomainData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @digitalocean_domain@ datasource value.
 domainData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DomainData s)
@@ -109,6 +109,7 @@ data ImageData s = ImageData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @digitalocean_image@ datasource value.
 imageData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ImageData s)
@@ -164,6 +165,7 @@ data RecordData s = RecordData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @digitalocean_record@ datasource value.
 recordData
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
