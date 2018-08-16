@@ -12,10 +12,10 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.DNSMadeEasy
-    ( module Terrafomo.DNSMadeEasy.Settings
-    , module Terrafomo.DNSMadeEasy.Lens
-    , module Terrafomo.DNSMadeEasy.Resource
+    ( module Terrafomo.DNSMadeEasy.Lens
     , module Terrafomo.DNSMadeEasy.Provider
+    , module Terrafomo.DNSMadeEasy.Resource
+    , module Terrafomo.DNSMadeEasy.Settings
     , module Terrafomo.DNSMadeEasy.Types
     -- * Provider Aliases
     ) where

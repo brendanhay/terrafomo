@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.DNSMadeEasy.Settings
 
-import qualified Data.Hashable                  as P
-import qualified Data.HashMap.Strict            as P
-import qualified Data.HashMap.Strict            as Map
 import qualified Data.List.NonEmpty             as P
+import qualified Data.Map.Strict                as P
+import qualified Data.Map.Strict                as Map
 import qualified Data.Maybe                     as P
 import qualified Data.Monoid                    as P
 import qualified Data.Text                      as P
@@ -69,16 +68,16 @@ data RecordResource s = RecordResource'
     , _keywords     :: TF.Attr s P.Text
     -- ^ @keywords@ - (Optional)
     --
-    , _mxLevel      :: TF.Attr s P.Integer
+    , _mxLevel      :: TF.Attr s P.Int
     -- ^ @mxLevel@ - (Optional)
     --
     , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _port         :: TF.Attr s P.Integer
+    , _port         :: TF.Attr s P.Int
     -- ^ @port@ - (Optional)
     --
-    , _priority     :: TF.Attr s P.Integer
+    , _priority     :: TF.Attr s P.Int
     -- ^ @priority@ - (Optional)
     --
     , _redirectType :: TF.Attr s P.Text
@@ -87,7 +86,7 @@ data RecordResource s = RecordResource'
     , _title        :: TF.Attr s P.Text
     -- ^ @title@ - (Optional)
     --
-    , _ttl          :: TF.Attr s P.Integer
+    , _ttl          :: TF.Attr s P.Int
     -- ^ @ttl@ - (Optional)
     --
     , _type'        :: TF.Attr s P.Text
@@ -96,10 +95,10 @@ data RecordResource s = RecordResource'
     , _value        :: TF.Attr s P.Text
     -- ^ @value@ - (Required)
     --
-    , _weight       :: TF.Attr s P.Integer
+    , _weight       :: TF.Attr s P.Int
     -- ^ @weight@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 recordResource
     :: TF.Attr s P.Text -- ^ @domainid@ - 'P.domainid'
@@ -108,7 +107,7 @@ recordResource
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> P.Resource (RecordResource s)
 recordResource _domainid _name _type' _value =
-    TF.newResource "dme_record" TF.validator $
+    TF.unsafeResource "dme_record" P.defaultProvider TF.validator $
         RecordResource'
             { _description = TF.Nil
             , _domainid = _domainid
@@ -174,9 +173,9 @@ instance P.HasKeywords (RecordResource s) (TF.Attr s P.Text) where
         P.lens (_keywords :: RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _keywords = a } :: RecordResource s)
 
-instance P.HasMxLevel (RecordResource s) (TF.Attr s P.Integer) where
+instance P.HasMxLevel (RecordResource s) (TF.Attr s P.Int) where
     mxLevel =
-        P.lens (_mxLevel :: RecordResource s -> TF.Attr s P.Integer)
+        P.lens (_mxLevel :: RecordResource s -> TF.Attr s P.Int)
                (\s a -> s { _mxLevel = a } :: RecordResource s)
 
 instance P.HasName (RecordResource s) (TF.Attr s P.Text) where
@@ -184,14 +183,14 @@ instance P.HasName (RecordResource s) (TF.Attr s P.Text) where
         P.lens (_name :: RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RecordResource s)
 
-instance P.HasPort (RecordResource s) (TF.Attr s P.Integer) where
+instance P.HasPort (RecordResource s) (TF.Attr s P.Int) where
     port =
-        P.lens (_port :: RecordResource s -> TF.Attr s P.Integer)
+        P.lens (_port :: RecordResource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: RecordResource s)
 
-instance P.HasPriority (RecordResource s) (TF.Attr s P.Integer) where
+instance P.HasPriority (RecordResource s) (TF.Attr s P.Int) where
     priority =
-        P.lens (_priority :: RecordResource s -> TF.Attr s P.Integer)
+        P.lens (_priority :: RecordResource s -> TF.Attr s P.Int)
                (\s a -> s { _priority = a } :: RecordResource s)
 
 instance P.HasRedirectType (RecordResource s) (TF.Attr s P.Text) where
@@ -204,9 +203,9 @@ instance P.HasTitle (RecordResource s) (TF.Attr s P.Text) where
         P.lens (_title :: RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _title = a } :: RecordResource s)
 
-instance P.HasTtl (RecordResource s) (TF.Attr s P.Integer) where
+instance P.HasTtl (RecordResource s) (TF.Attr s P.Int) where
     ttl =
-        P.lens (_ttl :: RecordResource s -> TF.Attr s P.Integer)
+        P.lens (_ttl :: RecordResource s -> TF.Attr s P.Int)
                (\s a -> s { _ttl = a } :: RecordResource s)
 
 instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
@@ -219,7 +218,7 @@ instance P.HasValue (RecordResource s) (TF.Attr s P.Text) where
         P.lens (_value :: RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _value = a } :: RecordResource s)
 
-instance P.HasWeight (RecordResource s) (TF.Attr s P.Integer) where
+instance P.HasWeight (RecordResource s) (TF.Attr s P.Int) where
     weight =
-        P.lens (_weight :: RecordResource s -> TF.Attr s P.Integer)
+        P.lens (_weight :: RecordResource s -> TF.Attr s P.Int)
                (\s a -> s { _weight = a } :: RecordResource s)
