@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newCriticalSetting",
+                "smart": "criticalSetting",
                 "name": "CriticalSetting'"
             },
             "arguments": [
@@ -87,7 +87,7 @@
         },
         {
             "con": {
-                "smart": "newNrqlSetting",
+                "smart": "nrqlSetting",
                 "name": "NrqlSetting'"
             },
             "arguments": [
@@ -172,7 +172,7 @@
         },
         {
             "con": {
-                "smart": "newTermSetting",
+                "smart": "termSetting",
                 "name": "TermSetting'"
             },
             "arguments": [
@@ -325,7 +325,7 @@
         },
         {
             "con": {
-                "smart": "newWarningSetting",
+                "smart": "warningSetting",
                 "name": "WarningSetting'"
             },
             "arguments": [
@@ -410,7 +410,7 @@
         },
         {
             "con": {
-                "smart": "newWidgetSetting",
+                "smart": "widgetSetting",
                 "name": "WidgetSetting'"
             },
             "arguments": [
