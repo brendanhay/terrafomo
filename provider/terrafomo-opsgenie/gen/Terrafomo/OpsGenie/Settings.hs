@@ -19,7 +19,7 @@ module Terrafomo.OpsGenie.Settings
     (
     -- ** member
       MemberSetting (..)
-    , newMemberSetting
+    , memberSetting
 
     ) where
 
@@ -55,10 +55,10 @@ data MemberSetting s = MemberSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @member@ settings value.
-newMemberSetting
+memberSetting
     :: TF.Attr s P.Text -- ^ 'P._username': @username@
     -> MemberSetting s
-newMemberSetting _username =
+memberSetting _username =
     MemberSetting'
         { _role = TF.value "user"
         , _username = _username
