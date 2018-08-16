@@ -64,8 +64,8 @@ data FilterSetting s = FilterSetting'
 
 -- | Construct a new @filter@ settings value.
 newFilterSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> FilterSetting s
 newFilterSetting _name _value =
     FilterSetting'
@@ -114,10 +114,10 @@ data ForwardSetting s = ForwardSetting'
 
 -- | Construct a new @forward@ settings value.
 newForwardSetting
-    :: TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
-    -> TF.Attr s P.Int -- ^ @private_port@ - 'P.privatePort'
-    -> TF.Attr s P.Int -- ^ @public_port@ - 'P.publicPort'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    :: TF.Attr s P.Text -- ^ 'P._virtualMachineId': @virtual_machine_id@
+    -> TF.Attr s P.Int -- ^ 'P._privatePort': @private_port@
+    -> TF.Attr s P.Int -- ^ 'P._publicPort': @public_port@
+    -> TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
     -> ForwardSetting s
 newForwardSetting _virtualMachineId _privatePort _publicPort _protocol =
     ForwardSetting'
@@ -193,8 +193,8 @@ data RuleSetting s = RuleSetting'
 
 -- | Construct a new @rule@ settings value.
 newRuleSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @cidr_list@ - 'P.cidrList'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._cidrList': @cidr_list@
+    -> TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
     -> RuleSetting s
 newRuleSetting _cidrList _protocol =
     RuleSetting'

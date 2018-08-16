@@ -62,8 +62,8 @@ data TemplateData s = TemplateData'
 
 -- | Define a new @cloudstack_template@ datasource value.
 templateData
-    :: TF.Attr s [TF.Attr s (FilterSetting s)] -- ^ @filter@ - 'P.filter'
-    -> TF.Attr s P.Text -- ^ @template_filter@ - 'P.templateFilter'
+    :: TF.Attr s [TF.Attr s (FilterSetting s)] -- ^ @filter@ ('P._filter', 'P.filter')
+    -> TF.Attr s P.Text -- ^ @template_filter@ ('P._templateFilter', 'P.templateFilter')
     -> P.DataSource (TemplateData s)
 templateData _filter _templateFilter =
     TF.unsafeDataSource "cloudstack_template" TF.validator $

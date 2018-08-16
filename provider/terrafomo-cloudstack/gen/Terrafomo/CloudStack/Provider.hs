@@ -17,10 +17,11 @@
 --
 module Terrafomo.CloudStack.Provider
     (
+    -- * CloudStack Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** CloudStack Specific Aliases
+    -- * CloudStack Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -105,8 +106,8 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Bool -- ^ @http_get_only@ - 'P.httpGetOnly'
-    -> P.Int -- ^ @timeout@ - 'P.timeout'
+    :: P.Bool -- ^ @http_get_only@ ('P._httpGetOnly', 'P.httpGetOnly')
+    -> P.Int -- ^ @timeout@ ('P._timeout', 'P.timeout')
     -> Provider
 newProvider _httpGetOnly _timeout =
     Provider'
@@ -123,7 +124,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "cloudstack"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ TF.assign "api_key" <$> _apiKey
             , TF.assign "api_url" <$> _apiUrl
