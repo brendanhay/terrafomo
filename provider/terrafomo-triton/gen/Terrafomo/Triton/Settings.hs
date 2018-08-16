@@ -17,7 +17,6 @@
 --
 module Terrafomo.Triton.Settings
     (
-    -- * Settings Datatypes
     -- ** cns
       CnsSetting (..)
     , newCnsSetting
@@ -65,6 +64,7 @@ data CnsSetting s = CnsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @cns@ settings value.
 newCnsSetting
     :: CnsSetting s
 newCnsSetting =
@@ -121,6 +121,7 @@ data FilterSetting s = FilterSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @filter@ settings value.
 newFilterSetting
     :: FilterSetting s
 newFilterSetting =
@@ -199,6 +200,7 @@ data NicSetting s = NicSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @nic@ settings value.
 newNicSetting
     :: TF.Attr s P.Text -- ^ @network@ - 'P.network'
     -> NicSetting s

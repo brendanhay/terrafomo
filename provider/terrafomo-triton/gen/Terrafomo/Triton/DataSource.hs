@@ -17,7 +17,6 @@
 --
 module Terrafomo.Triton.DataSource
     (
-    -- * DataSource Datatypes
     -- ** triton_account
       AccountData (..)
     , accountData
@@ -79,6 +78,7 @@ import qualified Terrafomo.Validator       as TF
 data AccountData s = AccountData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @triton_account@ datasource value.
 accountData
     :: P.DataSource (AccountData s)
 accountData =
@@ -110,6 +110,7 @@ instance s ~ s' => P.HasComputedLogin (TF.Ref s' (AccountData s)) (TF.Attr s P.T
 data DatacenterData s = DatacenterData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @triton_datacenter@ datasource value.
 datacenterData
     :: P.DataSource (DatacenterData s)
 datacenterData =
@@ -144,6 +145,7 @@ data FabricNetworkData s = FabricNetworkData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @triton_fabric_network@ datasource value.
 fabricNetworkData
     :: TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -223,6 +225,7 @@ data FabricVlanData s = FabricVlanData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @triton_fabric_vlan@ datasource value.
 fabricVlanData
     :: P.DataSource (FabricVlanData s)
 fabricVlanData =
@@ -292,6 +295,7 @@ data ImageData s = ImageData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @triton_image@ datasource value.
 imageData
     :: P.DataSource (ImageData s)
 imageData =
@@ -375,6 +379,7 @@ data NetworkData s = NetworkData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @triton_network@ datasource value.
 networkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (NetworkData s)
@@ -416,6 +421,7 @@ data PackageData s = PackageData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @triton_package@ datasource value.
 packageData
     :: TF.Attr s [TF.Attr s (FilterSetting s)] -- ^ @filter@ - 'P.filter'
     -> P.DataSource (PackageData s)

@@ -17,7 +17,6 @@
 --
 module Terrafomo.Triton.Resource
     (
-    -- * Resource Datatypes
     -- ** triton_fabric
       FabricResource (..)
     , fabricResource
@@ -115,6 +114,7 @@ data FabricResource s = FabricResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @triton_fabric@ resource value.
 fabricResource
     :: TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
     -> TF.Attr s P.Text -- ^ @provision_end_ip@ - 'P.provisionEndIp'
@@ -224,6 +224,7 @@ data FirewallRuleResource s = FirewallRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @triton_firewall_rule@ resource value.
 firewallRuleResource
     :: TF.Attr s P.Text -- ^ @rule@ - 'P.rule'
     -> P.Resource (FirewallRuleResource s)
@@ -289,6 +290,7 @@ data InstanceTemplateResource s = InstanceTemplateResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @triton_instance_template@ resource value.
 instanceTemplateResource
     :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
     -> TF.Attr s P.Text -- ^ @template_name@ - 'P.templateName'
@@ -360,6 +362,7 @@ data KeyResource s = KeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @triton_key@ resource value.
 keyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> P.Resource (KeyResource s)
@@ -447,6 +450,7 @@ data MachineResource s = MachineResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @triton_machine@ resource value.
 machineResource
     :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
     -> TF.Attr s P.Text -- ^ @package@ - 'P.package'
@@ -615,6 +619,7 @@ data ServiceGroupResource s = ServiceGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @triton_service_group@ resource value.
 serviceGroupResource
     :: TF.Attr s P.Text -- ^ @group_name@ - 'P.groupName'
     -> TF.Attr s P.Text -- ^ @template@ - 'P.template'
@@ -664,6 +669,7 @@ data SnapshotResource s = SnapshotResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @triton_snapshot@ resource value.
 snapshotResource
     :: TF.Attr s P.Text -- ^ @machine_id@ - 'P.machineId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -719,6 +725,7 @@ data VlanResource s = VlanResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @triton_vlan@ resource value.
 vlanResource
     :: TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
