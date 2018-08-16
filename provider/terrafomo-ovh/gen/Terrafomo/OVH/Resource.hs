@@ -117,10 +117,10 @@ data CloudNetworkPrivateResource s = CloudNetworkPrivateResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 cloudNetworkPrivateResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (CloudNetworkPrivateResource s)
-cloudNetworkPrivateResource _name _projectId =
+cloudNetworkPrivateResource _projectId _name =
     TF.unsafeResource "ovh_cloud_network_private" TF.validator $
         CloudNetworkPrivateResource'
             { _name = _name
@@ -198,13 +198,13 @@ data CloudNetworkPrivateSubnetResource s = CloudNetworkPrivateSubnetResource'
 
 cloudNetworkPrivateSubnetResource
     :: TF.Attr s P.Text -- ^ @end@ - 'P.end'
-    -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
     -> TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> TF.Attr s P.Text -- ^ @start@ - 'P.start'
     -> P.Resource (CloudNetworkPrivateSubnetResource s)
-cloudNetworkPrivateSubnetResource _end _network _networkId _projectId _region _start =
+cloudNetworkPrivateSubnetResource _end _networkId _projectId _network _region _start =
     TF.unsafeResource "ovh_cloud_network_private_subnet" TF.validator $
         CloudNetworkPrivateSubnetResource'
             { _dhcp = TF.value P.False
@@ -605,11 +605,11 @@ data IploadbalancingHttpRouteRuleResource s = IploadbalancingHttpRouteRuleResour
 
 iploadbalancingHttpRouteRuleResource
     :: TF.Attr s P.Text -- ^ @field@ - 'P.field'
-    -> TF.Attr s P.Text -- ^ @match@ - 'P.match'
     -> TF.Attr s P.Text -- ^ @route_id@ - 'P.routeId'
+    -> TF.Attr s P.Text -- ^ @match@ - 'P.match'
     -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
     -> P.Resource (IploadbalancingHttpRouteRuleResource s)
-iploadbalancingHttpRouteRuleResource _field _match _routeId _serviceName =
+iploadbalancingHttpRouteRuleResource _field _routeId _match _serviceName =
     TF.unsafeResource "ovh_iploadbalancing_http_route_rule" TF.validator $
         IploadbalancingHttpRouteRuleResource'
             { _displayName = TF.Nil
@@ -945,10 +945,10 @@ data PubliccloudPrivateNetworkResource s = PubliccloudPrivateNetworkResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 publiccloudPrivateNetworkResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (PubliccloudPrivateNetworkResource s)
-publiccloudPrivateNetworkResource _name _projectId =
+publiccloudPrivateNetworkResource _projectId _name =
     TF.unsafeResource "ovh_publiccloud_private_network" TF.validator $
         PubliccloudPrivateNetworkResource'
             { _name = _name
@@ -1026,13 +1026,13 @@ data PubliccloudPrivateNetworkSubnetResource s = PubliccloudPrivateNetworkSubnet
 
 publiccloudPrivateNetworkSubnetResource
     :: TF.Attr s P.Text -- ^ @end@ - 'P.end'
-    -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
     -> TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> TF.Attr s P.Text -- ^ @start@ - 'P.start'
     -> P.Resource (PubliccloudPrivateNetworkSubnetResource s)
-publiccloudPrivateNetworkSubnetResource _end _network _networkId _projectId _region _start =
+publiccloudPrivateNetworkSubnetResource _end _networkId _projectId _network _region _start =
     TF.unsafeResource "ovh_publiccloud_private_network_subnet" TF.validator $
         PubliccloudPrivateNetworkSubnetResource'
             { _dhcp = TF.value P.False

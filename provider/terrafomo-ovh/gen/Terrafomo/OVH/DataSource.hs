@@ -90,10 +90,10 @@ data CloudRegionData s = CloudRegionData'
     } deriving (P.Show, P.Eq, P.Ord)
 
 cloudRegionData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CloudRegionData s)
-cloudRegionData _name _projectId =
+cloudRegionData _projectId _name =
     TF.unsafeDataSource "ovh_cloud_region" TF.validator $
         CloudRegionData'
             { _name = _name
@@ -427,10 +427,10 @@ data PubliccloudRegionData s = PubliccloudRegionData'
     } deriving (P.Show, P.Eq, P.Ord)
 
 publiccloudRegionData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (PubliccloudRegionData s)
-publiccloudRegionData _name _projectId =
+publiccloudRegionData _projectId _name =
     TF.unsafeDataSource "ovh_publiccloud_region" TF.validator $
         PubliccloudRegionData'
             { _name = _name
