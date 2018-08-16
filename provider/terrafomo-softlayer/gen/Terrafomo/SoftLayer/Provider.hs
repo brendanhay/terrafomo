@@ -84,7 +84,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "softlayer"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "api_key" _apiKey
             , P.Just $ TF.assign "username" _username
