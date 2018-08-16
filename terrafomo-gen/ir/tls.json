@@ -704,23 +704,42 @@
             ],
             "parameters": [
                 {
-                    "default": "_allowedUses",
+                    "default": "_caKeyAlgorithm",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "Uses that are allowed for the certificate"
+                        "Name of the algorithm used to generate the certificate's private key"
                     ],
                     "forceNew": true,
-                    "encoder": "TF.assign \"allowed_uses\" <$> TF.attribute",
-                    "name": "_allowedUses",
-                    "method": "allowedUses",
+                    "encoder": "TF.assign \"ca_key_algorithm\" <$> TF.attribute",
+                    "name": "_caKeyAlgorithm",
+                    "method": "caKeyAlgorithm",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasAllowedUses",
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCaKeyAlgorithm",
                     "validate": false,
                     "optional": false,
-                    "original": "allowed_uses"
+                    "original": "ca_key_algorithm"
+                },
+                {
+                    "default": "_validityPeriodHours",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Number of hours that the certificate will remain valid for"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"validity_period_hours\" <$> TF.attribute",
+                    "name": "_validityPeriodHours",
+                    "method": "validityPeriodHours",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasValidityPeriodHours",
+                    "validate": false,
+                    "optional": false,
+                    "original": "validity_period_hours"
                 },
                 {
                     "default": "_caCertPem",
@@ -740,25 +759,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "ca_cert_pem"
-                },
-                {
-                    "default": "_caKeyAlgorithm",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Name of the algorithm used to generate the certificate's private key"
-                    ],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"ca_key_algorithm\" <$> TF.attribute",
-                    "name": "_caKeyAlgorithm",
-                    "method": "caKeyAlgorithm",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCaKeyAlgorithm",
-                    "validate": false,
-                    "optional": false,
-                    "original": "ca_key_algorithm"
                 },
                 {
                     "default": "_caPrivateKeyPem",
@@ -799,23 +799,23 @@
                     "original": "cert_request_pem"
                 },
                 {
-                    "default": "_validityPeriodHours",
+                    "default": "_allowedUses",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "Number of hours that the certificate will remain valid for"
+                        "Uses that are allowed for the certificate"
                     ],
                     "forceNew": true,
-                    "encoder": "TF.assign \"validity_period_hours\" <$> TF.attribute",
-                    "name": "_validityPeriodHours",
-                    "method": "validityPeriodHours",
+                    "encoder": "TF.assign \"allowed_uses\" <$> TF.attribute",
+                    "name": "_allowedUses",
+                    "method": "allowedUses",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasValidityPeriodHours",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasAllowedUses",
                     "validate": false,
                     "optional": false,
-                    "original": "validity_period_hours"
+                    "original": "allowed_uses"
                 }
             ],
             "conflicts": [],
@@ -1204,25 +1204,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_allowedUses",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Uses that are allowed for the certificate"
-                    ],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"allowed_uses\" <$> TF.attribute",
-                    "name": "_allowedUses",
-                    "method": "allowedUses",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasAllowedUses",
-                    "validate": false,
-                    "optional": false,
-                    "original": "allowed_uses"
-                },
-                {
                     "default": "_keyAlgorithm",
                     "computed": false,
                     "required": true,
@@ -1240,6 +1221,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "key_algorithm"
+                },
+                {
+                    "default": "_validityPeriodHours",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Number of hours that the certificate will remain valid for"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"validity_period_hours\" <$> TF.attribute",
+                    "name": "_validityPeriodHours",
+                    "method": "validityPeriodHours",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasValidityPeriodHours",
+                    "validate": false,
+                    "optional": false,
+                    "original": "validity_period_hours"
                 },
                 {
                     "default": "_privateKeyPem",
@@ -1278,23 +1278,23 @@
                     "original": "subject"
                 },
                 {
-                    "default": "_validityPeriodHours",
+                    "default": "_allowedUses",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "Number of hours that the certificate will remain valid for"
+                        "Uses that are allowed for the certificate"
                     ],
                     "forceNew": true,
-                    "encoder": "TF.assign \"validity_period_hours\" <$> TF.attribute",
-                    "name": "_validityPeriodHours",
-                    "method": "validityPeriodHours",
+                    "encoder": "TF.assign \"allowed_uses\" <$> TF.attribute",
+                    "name": "_allowedUses",
+                    "method": "allowedUses",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasValidityPeriodHours",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasAllowedUses",
                     "validate": false,
                     "optional": false,
-                    "original": "validity_period_hours"
+                    "original": "allowed_uses"
                 }
             ],
             "conflicts": [],
