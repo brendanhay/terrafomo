@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newAllocationPoolsSetting",
+                "smart": "allocationPoolsSetting",
                 "name": "AllocationPoolsSetting'"
             },
             "arguments": [
@@ -122,7 +122,7 @@
         },
         {
             "con": {
-                "smart": "newAllowedAddressPairsSetting",
+                "smart": "allowedAddressPairsSetting",
                 "name": "AllowedAddressPairsSetting'"
             },
             "arguments": [
@@ -190,7 +190,7 @@
         },
         {
             "con": {
-                "smart": "newAttachmentSetting",
+                "smart": "attachmentSetting",
                 "name": "AttachmentSetting'"
             },
             "arguments": [],
@@ -257,7 +257,7 @@
         },
         {
             "con": {
-                "smart": "newBlockDeviceSetting",
+                "smart": "blockDeviceSetting",
                 "name": "BlockDeviceSetting'"
             },
             "arguments": [
@@ -410,7 +410,7 @@
         },
         {
             "con": {
-                "smart": "newConfigurationSetting",
+                "smart": "configurationSetting",
                 "name": "ConfigurationSetting'"
             },
             "arguments": [
@@ -495,7 +495,7 @@
         },
         {
             "con": {
-                "smart": "newDatabaseSetting",
+                "smart": "databaseSetting",
                 "name": "DatabaseSetting'"
             },
             "arguments": [
@@ -580,7 +580,7 @@
         },
         {
             "con": {
-                "smart": "newDatastoreSetting",
+                "smart": "datastoreSetting",
                 "name": "DatastoreSetting'"
             },
             "arguments": [
@@ -665,7 +665,7 @@
         },
         {
             "con": {
-                "smart": "newDpdSetting",
+                "smart": "dpdSetting",
                 "name": "DpdSetting'"
             },
             "arguments": [],
@@ -732,7 +732,7 @@
         },
         {
             "con": {
-                "smart": "newExternalFixedIpSetting",
+                "smart": "externalFixedIpSetting",
                 "name": "ExternalFixedIpSetting'"
             },
             "arguments": [
@@ -782,7 +782,7 @@
         },
         {
             "con": {
-                "smart": "newFixedIpSetting",
+                "smart": "fixedIpSetting",
                 "name": "FixedIpSetting'"
             },
             "arguments": [
@@ -850,7 +850,7 @@
         },
         {
             "con": {
-                "smart": "newHostRoutesSetting",
+                "smart": "hostRoutesSetting",
                 "name": "HostRoutesSetting'"
             },
             "arguments": [
@@ -970,7 +970,7 @@
         },
         {
             "con": {
-                "smart": "newLifetimeSetting",
+                "smart": "lifetimeSetting",
                 "name": "LifetimeSetting'"
             },
             "arguments": [],
@@ -1020,7 +1020,7 @@
         },
         {
             "con": {
-                "smart": "newMultiFactorAuthRuleSetting",
+                "smart": "multiFactorAuthRuleSetting",
                 "name": "MultiFactorAuthRuleSetting'"
             },
             "arguments": [
@@ -1071,7 +1071,7 @@
         },
         {
             "con": {
-                "smart": "newNetworkSetting",
+                "smart": "networkSetting",
                 "name": "NetworkSetting'"
             },
             "arguments": [
@@ -1292,7 +1292,7 @@
         },
         {
             "con": {
-                "smart": "newPersistenceSetting",
+                "smart": "persistenceSetting",
                 "name": "PersistenceSetting'"
             },
             "arguments": [
@@ -1360,7 +1360,7 @@
         },
         {
             "con": {
-                "smart": "newPersonalitySetting",
+                "smart": "personalitySetting",
                 "name": "PersonalitySetting'"
             },
             "arguments": [
@@ -1445,7 +1445,7 @@
         },
         {
             "con": {
-                "smart": "newRolesSetting",
+                "smart": "rolesSetting",
                 "name": "RolesSetting'"
             },
             "arguments": [],
@@ -1495,7 +1495,7 @@
         },
         {
             "con": {
-                "smart": "newRuleSetting",
+                "smart": "ruleSetting",
                 "name": "RuleSetting'"
             },
             "arguments": [
@@ -1683,7 +1683,7 @@
         },
         {
             "con": {
-                "smart": "newSchedulerHintsSetting",
+                "smart": "schedulerHintsSetting",
                 "name": "SchedulerHintsSetting'"
             },
             "arguments": [
@@ -1818,7 +1818,7 @@
         },
         {
             "con": {
-                "smart": "newSegmentsSetting",
+                "smart": "segmentsSetting",
                 "name": "SegmentsSetting'"
             },
             "arguments": [
@@ -1885,7 +1885,7 @@
         },
         {
             "con": {
-                "smart": "newUserSetting",
+                "smart": "userSetting",
                 "name": "UserSetting'"
             },
             "arguments": [
@@ -1987,7 +1987,7 @@
         },
         {
             "con": {
-                "smart": "newVendorOptionsSetting",
+                "smart": "vendorOptionsSetting",
                 "name": "VendorOptionsSetting'"
             },
             "arguments": [
@@ -2020,7 +2020,7 @@
         },
         {
             "con": {
-                "smart": "newVolumeSetting",
+                "smart": "volumeSetting",
                 "name": "VolumeSetting'"
             },
             "arguments": [
