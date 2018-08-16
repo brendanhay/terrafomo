@@ -12,12 +12,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Librato
-    ( module Terrafomo.Librato.Lens
-    , module Terrafomo.Librato.Provider
-    , module Terrafomo.Librato.Resource
-    , module Terrafomo.Librato.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Librato.Provider
+
+    -- * Custom Types
     , module Terrafomo.Librato.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+
+    -- * Resources
+    , module Terrafomo.Librato.Resource
+
+    -- * Settings
+    , module Terrafomo.Librato.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Librato.Lens
     ) where
 
 import Terrafomo.Librato.Lens

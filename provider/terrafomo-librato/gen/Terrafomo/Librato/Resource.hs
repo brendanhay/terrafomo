@@ -17,7 +17,6 @@
 --
 module Terrafomo.Librato.Resource
     (
-    -- * Resource Datatypes
     -- ** librato_alert
       AlertResource (..)
     , alertResource
@@ -92,6 +91,7 @@ data AlertResource s = AlertResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @librato_alert@ resource value.
 alertResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (AlertResource s)
@@ -191,6 +191,7 @@ data MetricResource s = MetricResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @librato_metric@ resource value.
 metricResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -279,6 +280,7 @@ data ServiceResource s = ServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @librato_service@ resource value.
 serviceResource
     :: TF.Attr s P.Text -- ^ @settings@ - 'P.settings'
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
@@ -330,6 +332,7 @@ data SpaceResource s = SpaceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @librato_space@ resource value.
 spaceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SpaceResource s)
@@ -386,6 +389,7 @@ data SpaceChartResource s = SpaceChartResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @librato_space_chart@ resource value.
 spaceChartResource
     :: TF.Attr s P.Int -- ^ @space_id@ - 'P.spaceId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'

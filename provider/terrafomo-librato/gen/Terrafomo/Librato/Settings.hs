@@ -17,7 +17,6 @@
 --
 module Terrafomo.Librato.Settings
     (
-    -- * Settings Datatypes
     -- ** attributes
       AttributesSetting (..)
     , newAttributesSetting
@@ -84,6 +83,7 @@ data AttributesSetting s = AttributesSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @attributes@ settings value.
 newAttributesSetting
     :: AttributesSetting s
 newAttributesSetting =
@@ -189,6 +189,7 @@ data ConditionSetting s = ConditionSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @condition@ settings value.
 newConditionSetting
     :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -311,6 +312,7 @@ data StreamSetting s = StreamSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @stream@ settings value.
 newStreamSetting
     :: StreamSetting s
 newStreamSetting =
