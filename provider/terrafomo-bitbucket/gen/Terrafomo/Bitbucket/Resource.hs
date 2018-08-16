@@ -78,7 +78,7 @@ defaultReviewersResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @reviewers@ - 'P.reviewers'
     -> P.Resource (DefaultReviewersResource s)
 defaultReviewersResource _owner _repository _reviewers =
-    TF.unsafeResource "bitbucket_default_reviewers" P.defaultProvider TF.validator $
+    TF.unsafeResource "bitbucket_default_reviewers" TF.validator $
         DefaultReviewersResource'
             { _owner = _owner
             , _repository = _repository
@@ -146,7 +146,7 @@ hookResource
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
     -> P.Resource (HookResource s)
 hookResource _description _events _owner _repository _url =
-    TF.unsafeResource "bitbucket_hook" P.defaultProvider TF.validator $
+    TF.unsafeResource "bitbucket_hook" TF.validator $
         HookResource'
             { _active = TF.value P.True
             , _description = _description
@@ -254,7 +254,7 @@ repositoryResource
     -> TF.Attr s P.Text -- ^ @owner@ - 'P.owner'
     -> P.Resource (RepositoryResource s)
 repositoryResource _name _owner =
-    TF.unsafeResource "bitbucket_repository" P.defaultProvider TF.validator $
+    TF.unsafeResource "bitbucket_repository" TF.validator $
         RepositoryResource'
             { _description = TF.Nil
             , _forkPolicy = TF.value "allow_forks"
