@@ -525,7 +525,10 @@ instance s ~ s' => P.HasComputedServices (TF.Ref s' (CatalogServicesData s)) (TF
 -- See the <https://www.terraform.io/docs/providers/consul/d/key_prefix.html terraform documentation>
 -- for more information.
 data KeyPrefixData s = KeyPrefixData'
-    { _pathPrefix :: TF.Attr s P.Text
+    { _datacenter :: TF.Attr s P.Text
+    -- ^ @datacenter@ - (Optional, Forces New)
+    --
+    , _pathPrefix :: TF.Attr s P.Text
     -- ^ @path_prefix@ - (Required)
     --
     , _subkey     :: TF.Attr s [TF.Attr s (SubkeySetting s)]
@@ -543,20 +546,27 @@ keyPrefixData
 keyPrefixData _pathPrefix =
     TF.unsafeDataSource "consul_key_prefix" TF.validator $
         KeyPrefixData'
-            { _pathPrefix = _pathPrefix
+            { _datacenter = TF.Nil
+            , _pathPrefix = _pathPrefix
             , _subkey = TF.Nil
             , _token = TF.Nil
             }
 
 instance TF.IsObject (KeyPrefixData s) where
     toObject KeyPrefixData'{..} = P.catMaybes
-        [ TF.assign "path_prefix" <$> TF.attribute _pathPrefix
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "path_prefix" <$> TF.attribute _pathPrefix
         , TF.assign "subkey" <$> TF.attribute _subkey
         , TF.assign "token" <$> TF.attribute _token
         ]
 
 instance TF.IsValid (KeyPrefixData s) where
     validator = P.mempty
+
+instance P.HasDatacenter (KeyPrefixData s) (TF.Attr s P.Text) where
+    datacenter =
+        P.lens (_datacenter :: KeyPrefixData s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenter = a } :: KeyPrefixData s)
 
 instance P.HasPathPrefix (KeyPrefixData s) (TF.Attr s P.Text) where
     pathPrefix =
@@ -590,10 +600,13 @@ instance s ~ s' => P.HasComputedVar (TF.Ref s' (KeyPrefixData s)) (TF.Attr s (P.
 -- See the <https://www.terraform.io/docs/providers/consul/d/keys.html terraform documentation>
 -- for more information.
 data KeysData s = KeysData'
-    { _key   :: TF.Attr s [TF.Attr s (KeySetting s)]
+    { _datacenter :: TF.Attr s P.Text
+    -- ^ @datacenter@ - (Optional, Forces New)
+    --
+    , _key        :: TF.Attr s [TF.Attr s (KeySetting s)]
     -- ^ @key@ - (Optional)
     --
-    , _token :: TF.Attr s P.Text
+    , _token      :: TF.Attr s P.Text
     -- ^ @token@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -604,18 +617,25 @@ keysData
 keysData =
     TF.unsafeDataSource "consul_keys" TF.validator $
         KeysData'
-            { _key = TF.Nil
+            { _datacenter = TF.Nil
+            , _key = TF.Nil
             , _token = TF.Nil
             }
 
 instance TF.IsObject (KeysData s) where
     toObject KeysData'{..} = P.catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "key" <$> TF.attribute _key
         , TF.assign "token" <$> TF.attribute _token
         ]
 
 instance TF.IsValid (KeysData s) where
     validator = P.mempty
+
+instance P.HasDatacenter (KeysData s) (TF.Attr s P.Text) where
+    datacenter =
+        P.lens (_datacenter :: KeysData s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenter = a } :: KeysData s)
 
 instance P.HasKey (KeysData s) (TF.Attr s [TF.Attr s (KeySetting s)]) where
     key =

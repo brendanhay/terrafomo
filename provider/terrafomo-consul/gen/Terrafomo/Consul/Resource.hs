@@ -80,13 +80,16 @@ import qualified Terrafomo.Validator       as TF
 -- See the <https://www.terraform.io/docs/providers/consul/r/agent_service.html terraform documentation>
 -- for more information.
 data AgentServiceResource s = AgentServiceResource'
-    { _name :: TF.Attr s P.Text
+    { _address :: TF.Attr s P.Text
+    -- ^ @address@ - (Optional, Forces New)
+    --
+    , _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _port :: TF.Attr s P.Int
+    , _port    :: TF.Attr s P.Int
     -- ^ @port@ - (Optional, Forces New)
     --
-    , _tags :: TF.Attr s [TF.Attr s P.Text]
+    , _tags    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -98,20 +101,27 @@ agentServiceResource
 agentServiceResource _name =
     TF.unsafeResource "consul_agent_service" TF.validator $
         AgentServiceResource'
-            { _name = _name
+            { _address = TF.Nil
+            , _name = _name
             , _port = TF.Nil
             , _tags = TF.Nil
             }
 
 instance TF.IsObject (AgentServiceResource s) where
     toObject AgentServiceResource'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "port" <$> TF.attribute _port
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (AgentServiceResource s) where
     validator = P.mempty
+
+instance P.HasAddress (AgentServiceResource s) (TF.Attr s P.Text) where
+    address =
+        P.lens (_address :: AgentServiceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _address = a } :: AgentServiceResource s)
 
 instance P.HasName (AgentServiceResource s) (TF.Attr s P.Text) where
     name =
@@ -139,16 +149,19 @@ instance s ~ s' => P.HasComputedAddress (TF.Ref s' (AgentServiceResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/consul/r/catalog_entry.html terraform documentation>
 -- for more information.
 data CatalogEntryResource s = CatalogEntryResource'
-    { _address :: TF.Attr s P.Text
+    { _address    :: TF.Attr s P.Text
     -- ^ @address@ - (Required, Forces New)
     --
-    , _node    :: TF.Attr s P.Text
+    , _datacenter :: TF.Attr s P.Text
+    -- ^ @datacenter@ - (Optional, Forces New)
+    --
+    , _node       :: TF.Attr s P.Text
     -- ^ @node@ - (Required, Forces New)
     --
-    , _service :: TF.Attr s [TF.Attr s (ServiceSetting s)]
+    , _service    :: TF.Attr s [TF.Attr s (ServiceSetting s)]
     -- ^ @service@ - (Optional, Forces New)
     --
-    , _token   :: TF.Attr s P.Text
+    , _token      :: TF.Attr s P.Text
     -- ^ @token@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -162,6 +175,7 @@ catalogEntryResource _address _node =
     TF.unsafeResource "consul_catalog_entry" TF.validator $
         CatalogEntryResource'
             { _address = _address
+            , _datacenter = TF.Nil
             , _node = _node
             , _service = TF.Nil
             , _token = TF.Nil
@@ -170,6 +184,7 @@ catalogEntryResource _address _node =
 instance TF.IsObject (CatalogEntryResource s) where
     toObject CatalogEntryResource'{..} = P.catMaybes
         [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "node" <$> TF.attribute _node
         , TF.assign "service" <$> TF.attribute _service
         , TF.assign "token" <$> TF.attribute _token
@@ -182,6 +197,11 @@ instance P.HasAddress (CatalogEntryResource s) (TF.Attr s P.Text) where
     address =
         P.lens (_address :: CatalogEntryResource s -> TF.Attr s P.Text)
                (\s a -> s { _address = a } :: CatalogEntryResource s)
+
+instance P.HasDatacenter (CatalogEntryResource s) (TF.Attr s P.Text) where
+    datacenter =
+        P.lens (_datacenter :: CatalogEntryResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenter = a } :: CatalogEntryResource s)
 
 instance P.HasNode (CatalogEntryResource s) (TF.Attr s P.Text) where
     node =
@@ -287,7 +307,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (IntentionResource s)) (TF.Attr s 
 -- See the <https://www.terraform.io/docs/providers/consul/r/key_prefix.html terraform documentation>
 -- for more information.
 data KeyPrefixResource s = KeyPrefixResource'
-    { _pathPrefix :: TF.Attr s P.Text
+    { _datacenter :: TF.Attr s P.Text
+    -- ^ @datacenter@ - (Optional, Forces New)
+    --
+    , _pathPrefix :: TF.Attr s P.Text
     -- ^ @path_prefix@ - (Required, Forces New)
     --
     , _subkeys    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -306,20 +329,27 @@ keyPrefixResource
 keyPrefixResource _pathPrefix _subkeys =
     TF.unsafeResource "consul_key_prefix" TF.validator $
         KeyPrefixResource'
-            { _pathPrefix = _pathPrefix
+            { _datacenter = TF.Nil
+            , _pathPrefix = _pathPrefix
             , _subkeys = _subkeys
             , _token = TF.Nil
             }
 
 instance TF.IsObject (KeyPrefixResource s) where
     toObject KeyPrefixResource'{..} = P.catMaybes
-        [ TF.assign "path_prefix" <$> TF.attribute _pathPrefix
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "path_prefix" <$> TF.attribute _pathPrefix
         , TF.assign "subkeys" <$> TF.attribute _subkeys
         , TF.assign "token" <$> TF.attribute _token
         ]
 
 instance TF.IsValid (KeyPrefixResource s) where
     validator = P.mempty
+
+instance P.HasDatacenter (KeyPrefixResource s) (TF.Attr s P.Text) where
+    datacenter =
+        P.lens (_datacenter :: KeyPrefixResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenter = a } :: KeyPrefixResource s)
 
 instance P.HasPathPrefix (KeyPrefixResource s) (TF.Attr s P.Text) where
     pathPrefix =
@@ -347,10 +377,13 @@ instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeyPrefixResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/consul/r/keys.html terraform documentation>
 -- for more information.
 data KeysResource s = KeysResource'
-    { _key   :: TF.Attr s [TF.Attr s (KeySetting s)]
+    { _datacenter :: TF.Attr s P.Text
+    -- ^ @datacenter@ - (Optional, Forces New)
+    --
+    , _key        :: TF.Attr s [TF.Attr s (KeySetting s)]
     -- ^ @key@ - (Optional)
     --
-    , _token :: TF.Attr s P.Text
+    , _token      :: TF.Attr s P.Text
     -- ^ @token@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -361,18 +394,25 @@ keysResource
 keysResource =
     TF.unsafeResource "consul_keys" TF.validator $
         KeysResource'
-            { _key = TF.Nil
+            { _datacenter = TF.Nil
+            , _key = TF.Nil
             , _token = TF.Nil
             }
 
 instance TF.IsObject (KeysResource s) where
     toObject KeysResource'{..} = P.catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "key" <$> TF.attribute _key
         , TF.assign "token" <$> TF.attribute _token
         ]
 
 instance TF.IsValid (KeysResource s) where
     validator = P.mempty
+
+instance P.HasDatacenter (KeysResource s) (TF.Attr s P.Text) where
+    datacenter =
+        P.lens (_datacenter :: KeysResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenter = a } :: KeysResource s)
 
 instance P.HasKey (KeysResource s) (TF.Attr s [TF.Attr s (KeySetting s)]) where
     key =
@@ -398,13 +438,16 @@ instance s ~ s' => P.HasComputedVar (TF.Ref s' (KeysResource s)) (TF.Attr s (P.M
 -- See the <https://www.terraform.io/docs/providers/consul/r/node.html terraform documentation>
 -- for more information.
 data NodeResource s = NodeResource'
-    { _address :: TF.Attr s P.Text
+    { _address    :: TF.Attr s P.Text
     -- ^ @address@ - (Required, Forces New)
     --
-    , _name    :: TF.Attr s P.Text
+    , _datacenter :: TF.Attr s P.Text
+    -- ^ @datacenter@ - (Optional, Forces New)
+    --
+    , _name       :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _token   :: TF.Attr s P.Text
+    , _token      :: TF.Attr s P.Text
     -- ^ @token@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -418,6 +461,7 @@ nodeResource _address _name =
     TF.unsafeResource "consul_node" TF.validator $
         NodeResource'
             { _address = _address
+            , _datacenter = TF.Nil
             , _name = _name
             , _token = TF.Nil
             }
@@ -425,6 +469,7 @@ nodeResource _address _name =
 instance TF.IsObject (NodeResource s) where
     toObject NodeResource'{..} = P.catMaybes
         [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "token" <$> TF.attribute _token
         ]
@@ -436,6 +481,11 @@ instance P.HasAddress (NodeResource s) (TF.Attr s P.Text) where
     address =
         P.lens (_address :: NodeResource s -> TF.Attr s P.Text)
                (\s a -> s { _address = a } :: NodeResource s)
+
+instance P.HasDatacenter (NodeResource s) (TF.Attr s P.Text) where
+    datacenter =
+        P.lens (_datacenter :: NodeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenter = a } :: NodeResource s)
 
 instance P.HasName (NodeResource s) (TF.Attr s P.Text) where
     name =
@@ -617,16 +667,25 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (PreparedQueryResource s)) (TF.Att
 -- See the <https://www.terraform.io/docs/providers/consul/r/service.html terraform documentation>
 -- for more information.
 data ServiceResource s = ServiceResource'
-    { _name :: TF.Attr s P.Text
+    { _address    :: TF.Attr s P.Text
+    -- ^ @address@ - (Optional)
+    --
+    , _datacenter :: TF.Attr s P.Text
+    -- ^ @datacenter@ - (Optional, Forces New)
+    --
+    , _name       :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _node :: TF.Attr s P.Text
+    , _node       :: TF.Attr s P.Text
     -- ^ @node@ - (Required, Forces New)
     --
-    , _port :: TF.Attr s P.Int
+    , _port       :: TF.Attr s P.Int
     -- ^ @port@ - (Optional)
     --
-    , _tags :: TF.Attr s [TF.Attr s P.Text]
+    , _serviceId  :: TF.Attr s P.Text
+    -- ^ @service_id@ - (Optional, Forces New)
+    --
+    , _tags       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -639,22 +698,38 @@ serviceResource
 serviceResource _name _node =
     TF.unsafeResource "consul_service" TF.validator $
         ServiceResource'
-            { _name = _name
+            { _address = TF.Nil
+            , _datacenter = TF.Nil
+            , _name = _name
             , _node = _node
             , _port = TF.Nil
+            , _serviceId = TF.Nil
             , _tags = TF.Nil
             }
 
 instance TF.IsObject (ServiceResource s) where
     toObject ServiceResource'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "node" <$> TF.attribute _node
         , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "service_id" <$> TF.attribute _serviceId
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (ServiceResource s) where
     validator = P.mempty
+
+instance P.HasAddress (ServiceResource s) (TF.Attr s P.Text) where
+    address =
+        P.lens (_address :: ServiceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _address = a } :: ServiceResource s)
+
+instance P.HasDatacenter (ServiceResource s) (TF.Attr s P.Text) where
+    datacenter =
+        P.lens (_datacenter :: ServiceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenter = a } :: ServiceResource s)
 
 instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
     name =
@@ -670,6 +745,11 @@ instance P.HasPort (ServiceResource s) (TF.Attr s P.Int) where
     port =
         P.lens (_port :: ServiceResource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: ServiceResource s)
+
+instance P.HasServiceId (ServiceResource s) (TF.Attr s P.Text) where
+    serviceId =
+        P.lens (_serviceId :: ServiceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _serviceId = a } :: ServiceResource s)
 
 instance P.HasTags (ServiceResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =

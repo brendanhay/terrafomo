@@ -273,6 +273,9 @@ data KeySetting s = KeySetting'
     , _path     :: TF.Attr s P.Text
     -- ^ @path@ - (Required)
     --
+    , _value    :: TF.Attr s P.Text
+    -- ^ @value@ - (Optional)
+    --
     , _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
@@ -288,6 +291,7 @@ keySetting _name _path =
         { _default' = TF.Nil
         , _delete = TF.value P.False
         , _path = _path
+        , _value = TF.Nil
         , _name = _name
         }
 
@@ -297,6 +301,7 @@ instance TF.IsObject (KeySetting s) where
         [ TF.assign "default" <$> TF.attribute _default'
         , TF.assign "delete" <$> TF.attribute _delete
         , TF.assign "path" <$> TF.attribute _path
+        , TF.assign "value" <$> TF.attribute _value
         , TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -317,6 +322,11 @@ instance P.HasPath (KeySetting s) (TF.Attr s P.Text) where
     path =
         P.lens (_path :: KeySetting s -> TF.Attr s P.Text)
                (\s a -> s { _path = a } :: KeySetting s)
+
+instance P.HasValue (KeySetting s) (TF.Attr s P.Text) where
+    value =
+        P.lens (_value :: KeySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: KeySetting s)
 
 instance P.HasName (KeySetting s) (TF.Attr s P.Text) where
     name =
@@ -575,6 +585,9 @@ data ServiceSetting s = ServiceSetting'
     { _address :: TF.Attr s P.Text
     -- ^ @address@ - (Optional, Forces New)
     --
+    , _id      :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional, Forces New)
+    --
     , _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
@@ -593,6 +606,7 @@ serviceSetting
 serviceSetting _name =
     ServiceSetting'
         { _address = TF.Nil
+        , _id = TF.Nil
         , _name = _name
         , _port = TF.Nil
         , _tags = TF.Nil
@@ -602,6 +616,7 @@ instance TF.IsValue  (ServiceSetting s)
 instance TF.IsObject (ServiceSetting s) where
     toObject ServiceSetting'{..} = P.catMaybes
         [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "id" <$> TF.attribute _id
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "port" <$> TF.attribute _port
         , TF.assign "tags" <$> TF.attribute _tags
@@ -614,6 +629,11 @@ instance P.HasAddress (ServiceSetting s) (TF.Attr s P.Text) where
     address =
         P.lens (_address :: ServiceSetting s -> TF.Attr s P.Text)
                (\s a -> s { _address = a } :: ServiceSetting s)
+
+instance P.HasId (ServiceSetting s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: ServiceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: ServiceSetting s)
 
 instance P.HasName (ServiceSetting s) (TF.Attr s P.Text) where
     name =

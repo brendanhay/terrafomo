@@ -29,6 +29,7 @@ module Terrafomo.Consul.Lens
     , HasDns (..)
     , HasFailover (..)
     , HasHttpAuth (..)
+    , HasId (..)
     , HasInsecureHttps (..)
     , HasKey (..)
     , HasKeyFile (..)
@@ -47,6 +48,7 @@ module Terrafomo.Consul.Lens
     , HasRequireConsistent (..)
     , HasScheme (..)
     , HasService (..)
+    , HasServiceId (..)
     , HasSession (..)
     , HasSourceName (..)
     , HasStoredToken (..)
@@ -58,6 +60,7 @@ module Terrafomo.Consul.Lens
     , HasToken (..)
     , HasTtl (..)
     , HasType' (..)
+    , HasValue (..)
     , HasWaitIndex (..)
     , HasWaitTime (..)
 
@@ -293,6 +296,12 @@ class HasHttpAuth a b | a -> b where
 instance HasHttpAuth a b => HasHttpAuth (TF.Schema l p a) b where
     httpAuth = TF.configuration . httpAuth
 
+class HasId a b | a -> b where
+    id :: P.Lens' a b
+
+instance HasId a b => HasId (TF.Schema l p a) b where
+    id = TF.configuration . id
+
 class HasInsecureHttps a b | a -> b where
     insecureHttps :: P.Lens' a b
 
@@ -401,6 +410,12 @@ class HasService a b | a -> b where
 instance HasService a b => HasService (TF.Schema l p a) b where
     service = TF.configuration . service
 
+class HasServiceId a b | a -> b where
+    serviceId :: P.Lens' a b
+
+instance HasServiceId a b => HasServiceId (TF.Schema l p a) b where
+    serviceId = TF.configuration . serviceId
+
 class HasSession a b | a -> b where
     session :: P.Lens' a b
 
@@ -466,6 +481,12 @@ class HasType' a b | a -> b where
 
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
+
+class HasValue a b | a -> b where
+    value :: P.Lens' a b
+
+instance HasValue a b => HasValue (TF.Schema l p a) b where
+    value = TF.configuration . value
 
 class HasWaitIndex a b | a -> b where
     waitIndex :: P.Lens' a b
