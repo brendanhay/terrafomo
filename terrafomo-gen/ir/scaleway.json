@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newVolumeSetting",
+                "smart": "volumeSetting",
                 "name": "VolumeSetting'"
             },
             "arguments": [
