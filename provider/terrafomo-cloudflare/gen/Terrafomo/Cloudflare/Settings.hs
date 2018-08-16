@@ -1028,20 +1028,464 @@ instance P.HasValues (HeaderSetting s) (TF.Attr s [TF.Attr s P.Text]) where
 
 -- | @initial_settings@ nested settings.
 data InitialSettingsSetting s = InitialSettingsSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _advancedDdos            :: TF.Attr s P.Text
+    -- ^ @advanced_ddos@ - (Optional)
+    --
+    , _alwaysOnline            :: TF.Attr s P.Text
+    -- ^ @always_online@ - (Optional)
+    --
+    , _alwaysUseHttps          :: TF.Attr s P.Text
+    -- ^ @always_use_https@ - (Optional)
+    --
+    , _automaticHttpsRewrites  :: TF.Attr s P.Text
+    -- ^ @automatic_https_rewrites@ - (Optional)
+    --
+    , _brotli                  :: TF.Attr s P.Text
+    -- ^ @brotli@ - (Optional)
+    --
+    , _browserCacheTtl         :: TF.Attr s P.Int
+    -- ^ @browser_cache_ttl@ - (Optional)
+    --
+    , _browserCheck            :: TF.Attr s P.Text
+    -- ^ @browser_check@ - (Optional)
+    --
+    , _cacheLevel              :: TF.Attr s P.Text
+    -- ^ @cache_level@ - (Optional)
+    --
+    , _challengeTtl            :: TF.Attr s P.Int
+    -- ^ @challenge_ttl@ - (Optional)
+    --
+    , _cnameFlattening         :: TF.Attr s P.Text
+    -- ^ @cname_flattening@ - (Optional)
+    --
+    , _developmentMode         :: TF.Attr s P.Text
+    -- ^ @development_mode@ - (Optional)
+    --
+    , _edgeCacheTtl            :: TF.Attr s P.Int
+    -- ^ @edge_cache_ttl@ - (Optional)
+    --
+    , _emailObfuscation        :: TF.Attr s P.Text
+    -- ^ @email_obfuscation@ - (Optional)
+    --
+    , _hotlinkProtection       :: TF.Attr s P.Text
+    -- ^ @hotlink_protection@ - (Optional)
+    --
+    , _http2                   :: TF.Attr s P.Text
+    -- ^ @http2@ - (Optional)
+    --
+    , _ipGeolocation           :: TF.Attr s P.Text
+    -- ^ @ip_geolocation@ - (Optional)
+    --
+    , _ipv6                    :: TF.Attr s P.Text
+    -- ^ @ipv6@ - (Optional)
+    --
+    , _maxUpload               :: TF.Attr s P.Int
+    -- ^ @max_upload@ - (Optional)
+    --
+    , _minTlsVersion           :: TF.Attr s P.Text
+    -- ^ @min_tls_version@ - (Optional)
+    --
+    , _minify                  :: TF.Attr s (MinifySetting s)
+    -- ^ @minify@ - (Optional)
+    --
+    , _mirage                  :: TF.Attr s P.Text
+    -- ^ @mirage@ - (Optional)
+    --
+    , _mobileRedirect          :: TF.Attr s (MobileRedirectSetting s)
+    -- ^ @mobile_redirect@ - (Optional)
+    --
+    , _opportunisticEncryption :: TF.Attr s P.Text
+    -- ^ @opportunistic_encryption@ - (Optional)
+    --
+    , _originErrorPagePassThru :: TF.Attr s P.Text
+    -- ^ @origin_error_page_pass_thru@ - (Optional)
+    --
+    , _polish                  :: TF.Attr s P.Text
+    -- ^ @polish@ - (Optional)
+    --
+    , _prefetchPreload         :: TF.Attr s P.Text
+    -- ^ @prefetch_preload@ - (Optional)
+    --
+    , _privacyPass             :: TF.Attr s P.Text
+    -- ^ @privacy_pass@ - (Optional)
+    --
+    , _pseudoIpv4              :: TF.Attr s P.Text
+    -- ^ @pseudo_ipv4@ - (Optional)
+    --
+    , _responseBuffering       :: TF.Attr s P.Text
+    -- ^ @response_buffering@ - (Optional)
+    --
+    , _rocketLoader            :: TF.Attr s P.Text
+    -- ^ @rocket_loader@ - (Optional)
+    --
+    , _securityHeader          :: TF.Attr s (SecurityHeaderSetting s)
+    -- ^ @security_header@ - (Optional)
+    --
+    , _securityLevel           :: TF.Attr s P.Text
+    -- ^ @security_level@ - (Optional)
+    --
+    , _serverSideExclude       :: TF.Attr s P.Text
+    -- ^ @server_side_exclude@ - (Optional)
+    --
+    , _sha1Support             :: TF.Attr s P.Text
+    -- ^ @sha1_support@ - (Optional)
+    --
+    , _sortQueryStringForCache :: TF.Attr s P.Text
+    -- ^ @sort_query_string_for_cache@ - (Optional)
+    --
+    , _ssl                     :: TF.Attr s P.Text
+    -- ^ @ssl@ - (Optional)
+    --
+    , _tls12Only               :: TF.Attr s P.Text
+    -- ^ @tls_1_2_only@ - (Optional)
+    --
+    , _tls13                   :: TF.Attr s P.Text
+    -- ^ @tls_1_3@ - (Optional)
+    --
+    , _tlsClientAuth           :: TF.Attr s P.Text
+    -- ^ @tls_client_auth@ - (Optional)
+    --
+    , _trueClientIpHeader      :: TF.Attr s P.Text
+    -- ^ @true_client_ip_header@ - (Optional)
+    --
+    , _waf                     :: TF.Attr s P.Text
+    -- ^ @waf@ - (Optional)
+    --
+    , _webp                    :: TF.Attr s P.Text
+    -- ^ @webp@ - (Optional)
+    --
+    , _websockets              :: TF.Attr s P.Text
+    -- ^ @websockets@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @initial_settings@ settings value.
 initialSettingsSetting
     :: InitialSettingsSetting s
 initialSettingsSetting =
     InitialSettingsSetting'
+        { _advancedDdos = TF.Nil
+        , _alwaysOnline = TF.Nil
+        , _alwaysUseHttps = TF.Nil
+        , _automaticHttpsRewrites = TF.Nil
+        , _brotli = TF.Nil
+        , _browserCacheTtl = TF.Nil
+        , _browserCheck = TF.Nil
+        , _cacheLevel = TF.Nil
+        , _challengeTtl = TF.Nil
+        , _cnameFlattening = TF.Nil
+        , _developmentMode = TF.Nil
+        , _edgeCacheTtl = TF.Nil
+        , _emailObfuscation = TF.Nil
+        , _hotlinkProtection = TF.Nil
+        , _http2 = TF.Nil
+        , _ipGeolocation = TF.Nil
+        , _ipv6 = TF.Nil
+        , _maxUpload = TF.Nil
+        , _minTlsVersion = TF.Nil
+        , _minify = TF.Nil
+        , _mirage = TF.Nil
+        , _mobileRedirect = TF.Nil
+        , _opportunisticEncryption = TF.Nil
+        , _originErrorPagePassThru = TF.Nil
+        , _polish = TF.Nil
+        , _prefetchPreload = TF.Nil
+        , _privacyPass = TF.Nil
+        , _pseudoIpv4 = TF.Nil
+        , _responseBuffering = TF.Nil
+        , _rocketLoader = TF.Nil
+        , _securityHeader = TF.Nil
+        , _securityLevel = TF.Nil
+        , _serverSideExclude = TF.Nil
+        , _sha1Support = TF.Nil
+        , _sortQueryStringForCache = TF.Nil
+        , _ssl = TF.Nil
+        , _tls12Only = TF.Nil
+        , _tls13 = TF.Nil
+        , _tlsClientAuth = TF.Nil
+        , _trueClientIpHeader = TF.Nil
+        , _waf = TF.Nil
+        , _webp = TF.Nil
+        , _websockets = TF.Nil
+        }
 
 instance TF.IsValue  (InitialSettingsSetting s)
 instance TF.IsObject (InitialSettingsSetting s) where
-    toObject InitialSettingsSetting' = []
+    toObject InitialSettingsSetting'{..} = P.catMaybes
+        [ TF.assign "advanced_ddos" <$> TF.attribute _advancedDdos
+        , TF.assign "always_online" <$> TF.attribute _alwaysOnline
+        , TF.assign "always_use_https" <$> TF.attribute _alwaysUseHttps
+        , TF.assign "automatic_https_rewrites" <$> TF.attribute _automaticHttpsRewrites
+        , TF.assign "brotli" <$> TF.attribute _brotli
+        , TF.assign "browser_cache_ttl" <$> TF.attribute _browserCacheTtl
+        , TF.assign "browser_check" <$> TF.attribute _browserCheck
+        , TF.assign "cache_level" <$> TF.attribute _cacheLevel
+        , TF.assign "challenge_ttl" <$> TF.attribute _challengeTtl
+        , TF.assign "cname_flattening" <$> TF.attribute _cnameFlattening
+        , TF.assign "development_mode" <$> TF.attribute _developmentMode
+        , TF.assign "edge_cache_ttl" <$> TF.attribute _edgeCacheTtl
+        , TF.assign "email_obfuscation" <$> TF.attribute _emailObfuscation
+        , TF.assign "hotlink_protection" <$> TF.attribute _hotlinkProtection
+        , TF.assign "http2" <$> TF.attribute _http2
+        , TF.assign "ip_geolocation" <$> TF.attribute _ipGeolocation
+        , TF.assign "ipv6" <$> TF.attribute _ipv6
+        , TF.assign "max_upload" <$> TF.attribute _maxUpload
+        , TF.assign "min_tls_version" <$> TF.attribute _minTlsVersion
+        , TF.assign "minify" <$> TF.attribute _minify
+        , TF.assign "mirage" <$> TF.attribute _mirage
+        , TF.assign "mobile_redirect" <$> TF.attribute _mobileRedirect
+        , TF.assign "opportunistic_encryption" <$> TF.attribute _opportunisticEncryption
+        , TF.assign "origin_error_page_pass_thru" <$> TF.attribute _originErrorPagePassThru
+        , TF.assign "polish" <$> TF.attribute _polish
+        , TF.assign "prefetch_preload" <$> TF.attribute _prefetchPreload
+        , TF.assign "privacy_pass" <$> TF.attribute _privacyPass
+        , TF.assign "pseudo_ipv4" <$> TF.attribute _pseudoIpv4
+        , TF.assign "response_buffering" <$> TF.attribute _responseBuffering
+        , TF.assign "rocket_loader" <$> TF.attribute _rocketLoader
+        , TF.assign "security_header" <$> TF.attribute _securityHeader
+        , TF.assign "security_level" <$> TF.attribute _securityLevel
+        , TF.assign "server_side_exclude" <$> TF.attribute _serverSideExclude
+        , TF.assign "sha1_support" <$> TF.attribute _sha1Support
+        , TF.assign "sort_query_string_for_cache" <$> TF.attribute _sortQueryStringForCache
+        , TF.assign "ssl" <$> TF.attribute _ssl
+        , TF.assign "tls_1_2_only" <$> TF.attribute _tls12Only
+        , TF.assign "tls_1_3" <$> TF.attribute _tls13
+        , TF.assign "tls_client_auth" <$> TF.attribute _tlsClientAuth
+        , TF.assign "true_client_ip_header" <$> TF.attribute _trueClientIpHeader
+        , TF.assign "waf" <$> TF.attribute _waf
+        , TF.assign "webp" <$> TF.attribute _webp
+        , TF.assign "websockets" <$> TF.attribute _websockets
+        ]
 
 instance TF.IsValid (InitialSettingsSetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_minify"
+                  (_minify
+                      :: InitialSettingsSetting s -> TF.Attr s (MinifySetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_mobileRedirect"
+                  (_mobileRedirect
+                      :: InitialSettingsSetting s -> TF.Attr s (MobileRedirectSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_securityHeader"
+                  (_securityHeader
+                      :: InitialSettingsSetting s -> TF.Attr s (SecurityHeaderSetting s))
+                  TF.validator
+
+instance P.HasAdvancedDdos (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    advancedDdos =
+        P.lens (_advancedDdos :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _advancedDdos = a } :: InitialSettingsSetting s)
+
+instance P.HasAlwaysOnline (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    alwaysOnline =
+        P.lens (_alwaysOnline :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _alwaysOnline = a } :: InitialSettingsSetting s)
+
+instance P.HasAlwaysUseHttps (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    alwaysUseHttps =
+        P.lens (_alwaysUseHttps :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _alwaysUseHttps = a } :: InitialSettingsSetting s)
+
+instance P.HasAutomaticHttpsRewrites (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    automaticHttpsRewrites =
+        P.lens (_automaticHttpsRewrites :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _automaticHttpsRewrites = a } :: InitialSettingsSetting s)
+
+instance P.HasBrotli (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    brotli =
+        P.lens (_brotli :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _brotli = a } :: InitialSettingsSetting s)
+
+instance P.HasBrowserCacheTtl (InitialSettingsSetting s) (TF.Attr s P.Int) where
+    browserCacheTtl =
+        P.lens (_browserCacheTtl :: InitialSettingsSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _browserCacheTtl = a } :: InitialSettingsSetting s)
+
+instance P.HasBrowserCheck (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    browserCheck =
+        P.lens (_browserCheck :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _browserCheck = a } :: InitialSettingsSetting s)
+
+instance P.HasCacheLevel (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    cacheLevel =
+        P.lens (_cacheLevel :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _cacheLevel = a } :: InitialSettingsSetting s)
+
+instance P.HasChallengeTtl (InitialSettingsSetting s) (TF.Attr s P.Int) where
+    challengeTtl =
+        P.lens (_challengeTtl :: InitialSettingsSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _challengeTtl = a } :: InitialSettingsSetting s)
+
+instance P.HasCnameFlattening (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    cnameFlattening =
+        P.lens (_cnameFlattening :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _cnameFlattening = a } :: InitialSettingsSetting s)
+
+instance P.HasDevelopmentMode (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    developmentMode =
+        P.lens (_developmentMode :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _developmentMode = a } :: InitialSettingsSetting s)
+
+instance P.HasEdgeCacheTtl (InitialSettingsSetting s) (TF.Attr s P.Int) where
+    edgeCacheTtl =
+        P.lens (_edgeCacheTtl :: InitialSettingsSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _edgeCacheTtl = a } :: InitialSettingsSetting s)
+
+instance P.HasEmailObfuscation (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    emailObfuscation =
+        P.lens (_emailObfuscation :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _emailObfuscation = a } :: InitialSettingsSetting s)
+
+instance P.HasHotlinkProtection (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    hotlinkProtection =
+        P.lens (_hotlinkProtection :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _hotlinkProtection = a } :: InitialSettingsSetting s)
+
+instance P.HasHttp2 (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    http2 =
+        P.lens (_http2 :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _http2 = a } :: InitialSettingsSetting s)
+
+instance P.HasIpGeolocation (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    ipGeolocation =
+        P.lens (_ipGeolocation :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _ipGeolocation = a } :: InitialSettingsSetting s)
+
+instance P.HasIpv6 (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    ipv6 =
+        P.lens (_ipv6 :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _ipv6 = a } :: InitialSettingsSetting s)
+
+instance P.HasMaxUpload (InitialSettingsSetting s) (TF.Attr s P.Int) where
+    maxUpload =
+        P.lens (_maxUpload :: InitialSettingsSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _maxUpload = a } :: InitialSettingsSetting s)
+
+instance P.HasMinTlsVersion (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    minTlsVersion =
+        P.lens (_minTlsVersion :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _minTlsVersion = a } :: InitialSettingsSetting s)
+
+instance P.HasMinify (InitialSettingsSetting s) (TF.Attr s (MinifySetting s)) where
+    minify =
+        P.lens (_minify :: InitialSettingsSetting s -> TF.Attr s (MinifySetting s))
+               (\s a -> s { _minify = a } :: InitialSettingsSetting s)
+
+instance P.HasMirage (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    mirage =
+        P.lens (_mirage :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _mirage = a } :: InitialSettingsSetting s)
+
+instance P.HasMobileRedirect (InitialSettingsSetting s) (TF.Attr s (MobileRedirectSetting s)) where
+    mobileRedirect =
+        P.lens (_mobileRedirect :: InitialSettingsSetting s -> TF.Attr s (MobileRedirectSetting s))
+               (\s a -> s { _mobileRedirect = a } :: InitialSettingsSetting s)
+
+instance P.HasOpportunisticEncryption (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    opportunisticEncryption =
+        P.lens (_opportunisticEncryption :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _opportunisticEncryption = a } :: InitialSettingsSetting s)
+
+instance P.HasOriginErrorPagePassThru (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    originErrorPagePassThru =
+        P.lens (_originErrorPagePassThru :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _originErrorPagePassThru = a } :: InitialSettingsSetting s)
+
+instance P.HasPolish (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    polish =
+        P.lens (_polish :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _polish = a } :: InitialSettingsSetting s)
+
+instance P.HasPrefetchPreload (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    prefetchPreload =
+        P.lens (_prefetchPreload :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _prefetchPreload = a } :: InitialSettingsSetting s)
+
+instance P.HasPrivacyPass (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    privacyPass =
+        P.lens (_privacyPass :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _privacyPass = a } :: InitialSettingsSetting s)
+
+instance P.HasPseudoIpv4 (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    pseudoIpv4 =
+        P.lens (_pseudoIpv4 :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _pseudoIpv4 = a } :: InitialSettingsSetting s)
+
+instance P.HasResponseBuffering (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    responseBuffering =
+        P.lens (_responseBuffering :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _responseBuffering = a } :: InitialSettingsSetting s)
+
+instance P.HasRocketLoader (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    rocketLoader =
+        P.lens (_rocketLoader :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _rocketLoader = a } :: InitialSettingsSetting s)
+
+instance P.HasSecurityHeader (InitialSettingsSetting s) (TF.Attr s (SecurityHeaderSetting s)) where
+    securityHeader =
+        P.lens (_securityHeader :: InitialSettingsSetting s -> TF.Attr s (SecurityHeaderSetting s))
+               (\s a -> s { _securityHeader = a } :: InitialSettingsSetting s)
+
+instance P.HasSecurityLevel (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    securityLevel =
+        P.lens (_securityLevel :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _securityLevel = a } :: InitialSettingsSetting s)
+
+instance P.HasServerSideExclude (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    serverSideExclude =
+        P.lens (_serverSideExclude :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _serverSideExclude = a } :: InitialSettingsSetting s)
+
+instance P.HasSha1Support (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    sha1Support =
+        P.lens (_sha1Support :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _sha1Support = a } :: InitialSettingsSetting s)
+
+instance P.HasSortQueryStringForCache (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    sortQueryStringForCache =
+        P.lens (_sortQueryStringForCache :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _sortQueryStringForCache = a } :: InitialSettingsSetting s)
+
+instance P.HasSsl (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    ssl =
+        P.lens (_ssl :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _ssl = a } :: InitialSettingsSetting s)
+
+instance P.HasTls12Only (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    tls12Only =
+        P.lens (_tls12Only :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _tls12Only = a } :: InitialSettingsSetting s)
+
+instance P.HasTls13 (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    tls13 =
+        P.lens (_tls13 :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _tls13 = a } :: InitialSettingsSetting s)
+
+instance P.HasTlsClientAuth (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    tlsClientAuth =
+        P.lens (_tlsClientAuth :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _tlsClientAuth = a } :: InitialSettingsSetting s)
+
+instance P.HasTrueClientIpHeader (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    trueClientIpHeader =
+        P.lens (_trueClientIpHeader :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _trueClientIpHeader = a } :: InitialSettingsSetting s)
+
+instance P.HasWaf (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    waf =
+        P.lens (_waf :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _waf = a } :: InitialSettingsSetting s)
+
+instance P.HasWebp (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    webp =
+        P.lens (_webp :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _webp = a } :: InitialSettingsSetting s)
+
+instance P.HasWebsockets (InitialSettingsSetting s) (TF.Attr s P.Text) where
+    websockets =
+        P.lens (_websockets :: InitialSettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _websockets = a } :: InitialSettingsSetting s)
 
 instance s ~ s' => P.HasComputedAdvancedDdos (TF.Ref s' (InitialSettingsSetting s)) (TF.Attr s P.Text) where
     computedAdvancedDdos x = TF.compute (TF.refKey x) "advanced_ddos"
@@ -1174,20 +1618,50 @@ instance s ~ s' => P.HasComputedWebsockets (TF.Ref s' (InitialSettingsSetting s)
 
 -- | @match@ nested settings.
 data MatchSetting s = MatchSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _request  :: TF.Attr s (RequestSetting s)
+    -- ^ @request@ - (Optional)
+    --
+    , _response :: TF.Attr s (ResponseSetting s)
+    -- ^ @response@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @match@ settings value.
 matchSetting
     :: MatchSetting s
 matchSetting =
     MatchSetting'
+        { _request = TF.Nil
+        , _response = TF.Nil
+        }
 
 instance TF.IsValue  (MatchSetting s)
 instance TF.IsObject (MatchSetting s) where
-    toObject MatchSetting' = []
+    toObject MatchSetting'{..} = P.catMaybes
+        [ TF.assign "request" <$> TF.attribute _request
+        , TF.assign "response" <$> TF.attribute _response
+        ]
 
 instance TF.IsValid (MatchSetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_request"
+                  (_request
+                      :: MatchSetting s -> TF.Attr s (RequestSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_response"
+                  (_response
+                      :: MatchSetting s -> TF.Attr s (ResponseSetting s))
+                  TF.validator
+
+instance P.HasRequest (MatchSetting s) (TF.Attr s (RequestSetting s)) where
+    request =
+        P.lens (_request :: MatchSetting s -> TF.Attr s (RequestSetting s))
+               (\s a -> s { _request = a } :: MatchSetting s)
+
+instance P.HasResponse (MatchSetting s) (TF.Attr s (ResponseSetting s)) where
+    response =
+        P.lens (_response :: MatchSetting s -> TF.Attr s (ResponseSetting s))
+               (\s a -> s { _response = a } :: MatchSetting s)
 
 instance s ~ s' => P.HasComputedRequest (TF.Ref s' (MatchSetting s)) (TF.Attr s (RequestSetting s)) where
     computedRequest x = TF.compute (TF.refKey x) "request"
@@ -1434,20 +1908,52 @@ instance P.HasRegion (RegionPoolsSetting s) (TF.Attr s P.Text) where
 
 -- | @request@ nested settings.
 data RequestSetting s = RequestSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _methods    :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @methods@ - (Optional)
+    --
+    , _schemes    :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @schemes@ - (Optional)
+    --
+    , _urlPattern :: TF.Attr s P.Text
+    -- ^ @url_pattern@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @request@ settings value.
 requestSetting
     :: RequestSetting s
 requestSetting =
     RequestSetting'
+        { _methods = TF.Nil
+        , _schemes = TF.Nil
+        , _urlPattern = TF.Nil
+        }
 
 instance TF.IsValue  (RequestSetting s)
 instance TF.IsObject (RequestSetting s) where
-    toObject RequestSetting' = []
+    toObject RequestSetting'{..} = P.catMaybes
+        [ TF.assign "methods" <$> TF.attribute _methods
+        , TF.assign "schemes" <$> TF.attribute _schemes
+        , TF.assign "url_pattern" <$> TF.attribute _urlPattern
+        ]
 
 instance TF.IsValid (RequestSetting s) where
     validator = P.mempty
+
+instance P.HasMethods (RequestSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+    methods =
+        P.lens (_methods :: RequestSetting s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _methods = a } :: RequestSetting s)
+
+instance P.HasSchemes (RequestSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+    schemes =
+        P.lens (_schemes :: RequestSetting s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _schemes = a } :: RequestSetting s)
+
+instance P.HasUrlPattern (RequestSetting s) (TF.Attr s P.Text) where
+    urlPattern =
+        P.lens (_urlPattern :: RequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _urlPattern = a } :: RequestSetting s)
 
 instance s ~ s' => P.HasComputedMethods (TF.Ref s' (RequestSetting s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedMethods x = TF.compute (TF.refKey x) "methods"
@@ -1460,11 +1966,17 @@ instance s ~ s' => P.HasComputedUrlPattern (TF.Ref s' (RequestSetting s)) (TF.At
 
 -- | @response@ nested settings.
 data ResponseSetting s = ResponseSetting'
-    { _body        :: TF.Attr s P.Text
+    { _body          :: TF.Attr s P.Text
     -- ^ @body@ - (Required)
     --
-    , _contentType :: TF.Attr s P.Text
+    , _contentType   :: TF.Attr s P.Text
     -- ^ @content_type@ - (Required)
+    --
+    , _originTraffic :: TF.Attr s P.Bool
+    -- ^ @origin_traffic@ - (Optional)
+    --
+    , _statuses      :: TF.Attr s [TF.Attr s P.Int]
+    -- ^ @statuses@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1477,6 +1989,8 @@ responseSetting _body _contentType =
     ResponseSetting'
         { _body = _body
         , _contentType = _contentType
+        , _originTraffic = TF.Nil
+        , _statuses = TF.Nil
         }
 
 instance TF.IsValue  (ResponseSetting s)
@@ -1484,6 +1998,8 @@ instance TF.IsObject (ResponseSetting s) where
     toObject ResponseSetting'{..} = P.catMaybes
         [ TF.assign "body" <$> TF.attribute _body
         , TF.assign "content_type" <$> TF.attribute _contentType
+        , TF.assign "origin_traffic" <$> TF.attribute _originTraffic
+        , TF.assign "statuses" <$> TF.attribute _statuses
         ]
 
 instance TF.IsValid (ResponseSetting s) where
@@ -1499,6 +2015,16 @@ instance P.HasContentType (ResponseSetting s) (TF.Attr s P.Text) where
         P.lens (_contentType :: ResponseSetting s -> TF.Attr s P.Text)
                (\s a -> s { _contentType = a } :: ResponseSetting s)
 
+instance P.HasOriginTraffic (ResponseSetting s) (TF.Attr s P.Bool) where
+    originTraffic =
+        P.lens (_originTraffic :: ResponseSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _originTraffic = a } :: ResponseSetting s)
+
+instance P.HasStatuses (ResponseSetting s) (TF.Attr s [TF.Attr s P.Int]) where
+    statuses =
+        P.lens (_statuses :: ResponseSetting s -> TF.Attr s [TF.Attr s P.Int])
+               (\s a -> s { _statuses = a } :: ResponseSetting s)
+
 instance s ~ s' => P.HasComputedOriginTraffic (TF.Ref s' (ResponseSetting s)) (TF.Attr s P.Bool) where
     computedOriginTraffic x = TF.compute (TF.refKey x) "origin_traffic"
 
@@ -1507,20 +2033,72 @@ instance s ~ s' => P.HasComputedStatuses (TF.Ref s' (ResponseSetting s)) (TF.Att
 
 -- | @security_header@ nested settings.
 data SecurityHeaderSetting s = SecurityHeaderSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _enabled           :: TF.Attr s P.Bool
+    -- ^ @enabled@ - (Optional)
+    --
+    , _includeSubdomains :: TF.Attr s P.Bool
+    -- ^ @include_subdomains@ - (Optional)
+    --
+    , _maxAge            :: TF.Attr s P.Int
+    -- ^ @max_age@ - (Optional)
+    --
+    , _nosniff           :: TF.Attr s P.Bool
+    -- ^ @nosniff@ - (Optional)
+    --
+    , _preload           :: TF.Attr s P.Bool
+    -- ^ @preload@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @security_header@ settings value.
 securityHeaderSetting
     :: SecurityHeaderSetting s
 securityHeaderSetting =
     SecurityHeaderSetting'
+        { _enabled = TF.Nil
+        , _includeSubdomains = TF.Nil
+        , _maxAge = TF.Nil
+        , _nosniff = TF.Nil
+        , _preload = TF.Nil
+        }
 
 instance TF.IsValue  (SecurityHeaderSetting s)
 instance TF.IsObject (SecurityHeaderSetting s) where
-    toObject SecurityHeaderSetting' = []
+    toObject SecurityHeaderSetting'{..} = P.catMaybes
+        [ TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "include_subdomains" <$> TF.attribute _includeSubdomains
+        , TF.assign "max_age" <$> TF.attribute _maxAge
+        , TF.assign "nosniff" <$> TF.attribute _nosniff
+        , TF.assign "preload" <$> TF.attribute _preload
+        ]
 
 instance TF.IsValid (SecurityHeaderSetting s) where
     validator = P.mempty
+
+instance P.HasEnabled (SecurityHeaderSetting s) (TF.Attr s P.Bool) where
+    enabled =
+        P.lens (_enabled :: SecurityHeaderSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _enabled = a } :: SecurityHeaderSetting s)
+
+instance P.HasIncludeSubdomains (SecurityHeaderSetting s) (TF.Attr s P.Bool) where
+    includeSubdomains =
+        P.lens (_includeSubdomains :: SecurityHeaderSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _includeSubdomains = a } :: SecurityHeaderSetting s)
+
+instance P.HasMaxAge (SecurityHeaderSetting s) (TF.Attr s P.Int) where
+    maxAge =
+        P.lens (_maxAge :: SecurityHeaderSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _maxAge = a } :: SecurityHeaderSetting s)
+
+instance P.HasNosniff (SecurityHeaderSetting s) (TF.Attr s P.Bool) where
+    nosniff =
+        P.lens (_nosniff :: SecurityHeaderSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _nosniff = a } :: SecurityHeaderSetting s)
+
+instance P.HasPreload (SecurityHeaderSetting s) (TF.Attr s P.Bool) where
+    preload =
+        P.lens (_preload :: SecurityHeaderSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _preload = a } :: SecurityHeaderSetting s)
 
 instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (SecurityHeaderSetting s)) (TF.Attr s P.Bool) where
     computedEnabled x = TF.compute (TF.refKey x) "enabled"
@@ -1539,20 +2117,464 @@ instance s ~ s' => P.HasComputedPreload (TF.Ref s' (SecurityHeaderSetting s)) (T
 
 -- | @settings@ nested settings.
 data SettingsSetting s = SettingsSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _advancedDdos            :: TF.Attr s P.Text
+    -- ^ @advanced_ddos@ - (Optional)
+    --
+    , _alwaysOnline            :: TF.Attr s P.Text
+    -- ^ @always_online@ - (Optional)
+    --
+    , _alwaysUseHttps          :: TF.Attr s P.Text
+    -- ^ @always_use_https@ - (Optional)
+    --
+    , _automaticHttpsRewrites  :: TF.Attr s P.Text
+    -- ^ @automatic_https_rewrites@ - (Optional)
+    --
+    , _brotli                  :: TF.Attr s P.Text
+    -- ^ @brotli@ - (Optional)
+    --
+    , _browserCacheTtl         :: TF.Attr s P.Int
+    -- ^ @browser_cache_ttl@ - (Optional)
+    --
+    , _browserCheck            :: TF.Attr s P.Text
+    -- ^ @browser_check@ - (Optional)
+    --
+    , _cacheLevel              :: TF.Attr s P.Text
+    -- ^ @cache_level@ - (Optional)
+    --
+    , _challengeTtl            :: TF.Attr s P.Int
+    -- ^ @challenge_ttl@ - (Optional)
+    --
+    , _cnameFlattening         :: TF.Attr s P.Text
+    -- ^ @cname_flattening@ - (Optional)
+    --
+    , _developmentMode         :: TF.Attr s P.Text
+    -- ^ @development_mode@ - (Optional)
+    --
+    , _edgeCacheTtl            :: TF.Attr s P.Int
+    -- ^ @edge_cache_ttl@ - (Optional)
+    --
+    , _emailObfuscation        :: TF.Attr s P.Text
+    -- ^ @email_obfuscation@ - (Optional)
+    --
+    , _hotlinkProtection       :: TF.Attr s P.Text
+    -- ^ @hotlink_protection@ - (Optional)
+    --
+    , _http2                   :: TF.Attr s P.Text
+    -- ^ @http2@ - (Optional)
+    --
+    , _ipGeolocation           :: TF.Attr s P.Text
+    -- ^ @ip_geolocation@ - (Optional)
+    --
+    , _ipv6                    :: TF.Attr s P.Text
+    -- ^ @ipv6@ - (Optional)
+    --
+    , _maxUpload               :: TF.Attr s P.Int
+    -- ^ @max_upload@ - (Optional)
+    --
+    , _minTlsVersion           :: TF.Attr s P.Text
+    -- ^ @min_tls_version@ - (Optional)
+    --
+    , _minify                  :: TF.Attr s (MinifySetting s)
+    -- ^ @minify@ - (Optional)
+    --
+    , _mirage                  :: TF.Attr s P.Text
+    -- ^ @mirage@ - (Optional)
+    --
+    , _mobileRedirect          :: TF.Attr s (MobileRedirectSetting s)
+    -- ^ @mobile_redirect@ - (Optional)
+    --
+    , _opportunisticEncryption :: TF.Attr s P.Text
+    -- ^ @opportunistic_encryption@ - (Optional)
+    --
+    , _originErrorPagePassThru :: TF.Attr s P.Text
+    -- ^ @origin_error_page_pass_thru@ - (Optional)
+    --
+    , _polish                  :: TF.Attr s P.Text
+    -- ^ @polish@ - (Optional)
+    --
+    , _prefetchPreload         :: TF.Attr s P.Text
+    -- ^ @prefetch_preload@ - (Optional)
+    --
+    , _privacyPass             :: TF.Attr s P.Text
+    -- ^ @privacy_pass@ - (Optional)
+    --
+    , _pseudoIpv4              :: TF.Attr s P.Text
+    -- ^ @pseudo_ipv4@ - (Optional)
+    --
+    , _responseBuffering       :: TF.Attr s P.Text
+    -- ^ @response_buffering@ - (Optional)
+    --
+    , _rocketLoader            :: TF.Attr s P.Text
+    -- ^ @rocket_loader@ - (Optional)
+    --
+    , _securityHeader          :: TF.Attr s (SecurityHeaderSetting s)
+    -- ^ @security_header@ - (Optional)
+    --
+    , _securityLevel           :: TF.Attr s P.Text
+    -- ^ @security_level@ - (Optional)
+    --
+    , _serverSideExclude       :: TF.Attr s P.Text
+    -- ^ @server_side_exclude@ - (Optional)
+    --
+    , _sha1Support             :: TF.Attr s P.Text
+    -- ^ @sha1_support@ - (Optional)
+    --
+    , _sortQueryStringForCache :: TF.Attr s P.Text
+    -- ^ @sort_query_string_for_cache@ - (Optional)
+    --
+    , _ssl                     :: TF.Attr s P.Text
+    -- ^ @ssl@ - (Optional)
+    --
+    , _tls12Only               :: TF.Attr s P.Text
+    -- ^ @tls_1_2_only@ - (Optional)
+    --
+    , _tls13                   :: TF.Attr s P.Text
+    -- ^ @tls_1_3@ - (Optional)
+    --
+    , _tlsClientAuth           :: TF.Attr s P.Text
+    -- ^ @tls_client_auth@ - (Optional)
+    --
+    , _trueClientIpHeader      :: TF.Attr s P.Text
+    -- ^ @true_client_ip_header@ - (Optional)
+    --
+    , _waf                     :: TF.Attr s P.Text
+    -- ^ @waf@ - (Optional)
+    --
+    , _webp                    :: TF.Attr s P.Text
+    -- ^ @webp@ - (Optional)
+    --
+    , _websockets              :: TF.Attr s P.Text
+    -- ^ @websockets@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @settings@ settings value.
 settingsSetting
     :: SettingsSetting s
 settingsSetting =
     SettingsSetting'
+        { _advancedDdos = TF.Nil
+        , _alwaysOnline = TF.Nil
+        , _alwaysUseHttps = TF.Nil
+        , _automaticHttpsRewrites = TF.Nil
+        , _brotli = TF.Nil
+        , _browserCacheTtl = TF.Nil
+        , _browserCheck = TF.Nil
+        , _cacheLevel = TF.Nil
+        , _challengeTtl = TF.Nil
+        , _cnameFlattening = TF.Nil
+        , _developmentMode = TF.Nil
+        , _edgeCacheTtl = TF.Nil
+        , _emailObfuscation = TF.Nil
+        , _hotlinkProtection = TF.Nil
+        , _http2 = TF.Nil
+        , _ipGeolocation = TF.Nil
+        , _ipv6 = TF.Nil
+        , _maxUpload = TF.Nil
+        , _minTlsVersion = TF.Nil
+        , _minify = TF.Nil
+        , _mirage = TF.Nil
+        , _mobileRedirect = TF.Nil
+        , _opportunisticEncryption = TF.Nil
+        , _originErrorPagePassThru = TF.Nil
+        , _polish = TF.Nil
+        , _prefetchPreload = TF.Nil
+        , _privacyPass = TF.Nil
+        , _pseudoIpv4 = TF.Nil
+        , _responseBuffering = TF.Nil
+        , _rocketLoader = TF.Nil
+        , _securityHeader = TF.Nil
+        , _securityLevel = TF.Nil
+        , _serverSideExclude = TF.Nil
+        , _sha1Support = TF.Nil
+        , _sortQueryStringForCache = TF.Nil
+        , _ssl = TF.Nil
+        , _tls12Only = TF.Nil
+        , _tls13 = TF.Nil
+        , _tlsClientAuth = TF.Nil
+        , _trueClientIpHeader = TF.Nil
+        , _waf = TF.Nil
+        , _webp = TF.Nil
+        , _websockets = TF.Nil
+        }
 
 instance TF.IsValue  (SettingsSetting s)
 instance TF.IsObject (SettingsSetting s) where
-    toObject SettingsSetting' = []
+    toObject SettingsSetting'{..} = P.catMaybes
+        [ TF.assign "advanced_ddos" <$> TF.attribute _advancedDdos
+        , TF.assign "always_online" <$> TF.attribute _alwaysOnline
+        , TF.assign "always_use_https" <$> TF.attribute _alwaysUseHttps
+        , TF.assign "automatic_https_rewrites" <$> TF.attribute _automaticHttpsRewrites
+        , TF.assign "brotli" <$> TF.attribute _brotli
+        , TF.assign "browser_cache_ttl" <$> TF.attribute _browserCacheTtl
+        , TF.assign "browser_check" <$> TF.attribute _browserCheck
+        , TF.assign "cache_level" <$> TF.attribute _cacheLevel
+        , TF.assign "challenge_ttl" <$> TF.attribute _challengeTtl
+        , TF.assign "cname_flattening" <$> TF.attribute _cnameFlattening
+        , TF.assign "development_mode" <$> TF.attribute _developmentMode
+        , TF.assign "edge_cache_ttl" <$> TF.attribute _edgeCacheTtl
+        , TF.assign "email_obfuscation" <$> TF.attribute _emailObfuscation
+        , TF.assign "hotlink_protection" <$> TF.attribute _hotlinkProtection
+        , TF.assign "http2" <$> TF.attribute _http2
+        , TF.assign "ip_geolocation" <$> TF.attribute _ipGeolocation
+        , TF.assign "ipv6" <$> TF.attribute _ipv6
+        , TF.assign "max_upload" <$> TF.attribute _maxUpload
+        , TF.assign "min_tls_version" <$> TF.attribute _minTlsVersion
+        , TF.assign "minify" <$> TF.attribute _minify
+        , TF.assign "mirage" <$> TF.attribute _mirage
+        , TF.assign "mobile_redirect" <$> TF.attribute _mobileRedirect
+        , TF.assign "opportunistic_encryption" <$> TF.attribute _opportunisticEncryption
+        , TF.assign "origin_error_page_pass_thru" <$> TF.attribute _originErrorPagePassThru
+        , TF.assign "polish" <$> TF.attribute _polish
+        , TF.assign "prefetch_preload" <$> TF.attribute _prefetchPreload
+        , TF.assign "privacy_pass" <$> TF.attribute _privacyPass
+        , TF.assign "pseudo_ipv4" <$> TF.attribute _pseudoIpv4
+        , TF.assign "response_buffering" <$> TF.attribute _responseBuffering
+        , TF.assign "rocket_loader" <$> TF.attribute _rocketLoader
+        , TF.assign "security_header" <$> TF.attribute _securityHeader
+        , TF.assign "security_level" <$> TF.attribute _securityLevel
+        , TF.assign "server_side_exclude" <$> TF.attribute _serverSideExclude
+        , TF.assign "sha1_support" <$> TF.attribute _sha1Support
+        , TF.assign "sort_query_string_for_cache" <$> TF.attribute _sortQueryStringForCache
+        , TF.assign "ssl" <$> TF.attribute _ssl
+        , TF.assign "tls_1_2_only" <$> TF.attribute _tls12Only
+        , TF.assign "tls_1_3" <$> TF.attribute _tls13
+        , TF.assign "tls_client_auth" <$> TF.attribute _tlsClientAuth
+        , TF.assign "true_client_ip_header" <$> TF.attribute _trueClientIpHeader
+        , TF.assign "waf" <$> TF.attribute _waf
+        , TF.assign "webp" <$> TF.attribute _webp
+        , TF.assign "websockets" <$> TF.attribute _websockets
+        ]
 
 instance TF.IsValid (SettingsSetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_minify"
+                  (_minify
+                      :: SettingsSetting s -> TF.Attr s (MinifySetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_mobileRedirect"
+                  (_mobileRedirect
+                      :: SettingsSetting s -> TF.Attr s (MobileRedirectSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_securityHeader"
+                  (_securityHeader
+                      :: SettingsSetting s -> TF.Attr s (SecurityHeaderSetting s))
+                  TF.validator
+
+instance P.HasAdvancedDdos (SettingsSetting s) (TF.Attr s P.Text) where
+    advancedDdos =
+        P.lens (_advancedDdos :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _advancedDdos = a } :: SettingsSetting s)
+
+instance P.HasAlwaysOnline (SettingsSetting s) (TF.Attr s P.Text) where
+    alwaysOnline =
+        P.lens (_alwaysOnline :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _alwaysOnline = a } :: SettingsSetting s)
+
+instance P.HasAlwaysUseHttps (SettingsSetting s) (TF.Attr s P.Text) where
+    alwaysUseHttps =
+        P.lens (_alwaysUseHttps :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _alwaysUseHttps = a } :: SettingsSetting s)
+
+instance P.HasAutomaticHttpsRewrites (SettingsSetting s) (TF.Attr s P.Text) where
+    automaticHttpsRewrites =
+        P.lens (_automaticHttpsRewrites :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _automaticHttpsRewrites = a } :: SettingsSetting s)
+
+instance P.HasBrotli (SettingsSetting s) (TF.Attr s P.Text) where
+    brotli =
+        P.lens (_brotli :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _brotli = a } :: SettingsSetting s)
+
+instance P.HasBrowserCacheTtl (SettingsSetting s) (TF.Attr s P.Int) where
+    browserCacheTtl =
+        P.lens (_browserCacheTtl :: SettingsSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _browserCacheTtl = a } :: SettingsSetting s)
+
+instance P.HasBrowserCheck (SettingsSetting s) (TF.Attr s P.Text) where
+    browserCheck =
+        P.lens (_browserCheck :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _browserCheck = a } :: SettingsSetting s)
+
+instance P.HasCacheLevel (SettingsSetting s) (TF.Attr s P.Text) where
+    cacheLevel =
+        P.lens (_cacheLevel :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _cacheLevel = a } :: SettingsSetting s)
+
+instance P.HasChallengeTtl (SettingsSetting s) (TF.Attr s P.Int) where
+    challengeTtl =
+        P.lens (_challengeTtl :: SettingsSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _challengeTtl = a } :: SettingsSetting s)
+
+instance P.HasCnameFlattening (SettingsSetting s) (TF.Attr s P.Text) where
+    cnameFlattening =
+        P.lens (_cnameFlattening :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _cnameFlattening = a } :: SettingsSetting s)
+
+instance P.HasDevelopmentMode (SettingsSetting s) (TF.Attr s P.Text) where
+    developmentMode =
+        P.lens (_developmentMode :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _developmentMode = a } :: SettingsSetting s)
+
+instance P.HasEdgeCacheTtl (SettingsSetting s) (TF.Attr s P.Int) where
+    edgeCacheTtl =
+        P.lens (_edgeCacheTtl :: SettingsSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _edgeCacheTtl = a } :: SettingsSetting s)
+
+instance P.HasEmailObfuscation (SettingsSetting s) (TF.Attr s P.Text) where
+    emailObfuscation =
+        P.lens (_emailObfuscation :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _emailObfuscation = a } :: SettingsSetting s)
+
+instance P.HasHotlinkProtection (SettingsSetting s) (TF.Attr s P.Text) where
+    hotlinkProtection =
+        P.lens (_hotlinkProtection :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _hotlinkProtection = a } :: SettingsSetting s)
+
+instance P.HasHttp2 (SettingsSetting s) (TF.Attr s P.Text) where
+    http2 =
+        P.lens (_http2 :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _http2 = a } :: SettingsSetting s)
+
+instance P.HasIpGeolocation (SettingsSetting s) (TF.Attr s P.Text) where
+    ipGeolocation =
+        P.lens (_ipGeolocation :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _ipGeolocation = a } :: SettingsSetting s)
+
+instance P.HasIpv6 (SettingsSetting s) (TF.Attr s P.Text) where
+    ipv6 =
+        P.lens (_ipv6 :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _ipv6 = a } :: SettingsSetting s)
+
+instance P.HasMaxUpload (SettingsSetting s) (TF.Attr s P.Int) where
+    maxUpload =
+        P.lens (_maxUpload :: SettingsSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _maxUpload = a } :: SettingsSetting s)
+
+instance P.HasMinTlsVersion (SettingsSetting s) (TF.Attr s P.Text) where
+    minTlsVersion =
+        P.lens (_minTlsVersion :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _minTlsVersion = a } :: SettingsSetting s)
+
+instance P.HasMinify (SettingsSetting s) (TF.Attr s (MinifySetting s)) where
+    minify =
+        P.lens (_minify :: SettingsSetting s -> TF.Attr s (MinifySetting s))
+               (\s a -> s { _minify = a } :: SettingsSetting s)
+
+instance P.HasMirage (SettingsSetting s) (TF.Attr s P.Text) where
+    mirage =
+        P.lens (_mirage :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _mirage = a } :: SettingsSetting s)
+
+instance P.HasMobileRedirect (SettingsSetting s) (TF.Attr s (MobileRedirectSetting s)) where
+    mobileRedirect =
+        P.lens (_mobileRedirect :: SettingsSetting s -> TF.Attr s (MobileRedirectSetting s))
+               (\s a -> s { _mobileRedirect = a } :: SettingsSetting s)
+
+instance P.HasOpportunisticEncryption (SettingsSetting s) (TF.Attr s P.Text) where
+    opportunisticEncryption =
+        P.lens (_opportunisticEncryption :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _opportunisticEncryption = a } :: SettingsSetting s)
+
+instance P.HasOriginErrorPagePassThru (SettingsSetting s) (TF.Attr s P.Text) where
+    originErrorPagePassThru =
+        P.lens (_originErrorPagePassThru :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _originErrorPagePassThru = a } :: SettingsSetting s)
+
+instance P.HasPolish (SettingsSetting s) (TF.Attr s P.Text) where
+    polish =
+        P.lens (_polish :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _polish = a } :: SettingsSetting s)
+
+instance P.HasPrefetchPreload (SettingsSetting s) (TF.Attr s P.Text) where
+    prefetchPreload =
+        P.lens (_prefetchPreload :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _prefetchPreload = a } :: SettingsSetting s)
+
+instance P.HasPrivacyPass (SettingsSetting s) (TF.Attr s P.Text) where
+    privacyPass =
+        P.lens (_privacyPass :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _privacyPass = a } :: SettingsSetting s)
+
+instance P.HasPseudoIpv4 (SettingsSetting s) (TF.Attr s P.Text) where
+    pseudoIpv4 =
+        P.lens (_pseudoIpv4 :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _pseudoIpv4 = a } :: SettingsSetting s)
+
+instance P.HasResponseBuffering (SettingsSetting s) (TF.Attr s P.Text) where
+    responseBuffering =
+        P.lens (_responseBuffering :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _responseBuffering = a } :: SettingsSetting s)
+
+instance P.HasRocketLoader (SettingsSetting s) (TF.Attr s P.Text) where
+    rocketLoader =
+        P.lens (_rocketLoader :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _rocketLoader = a } :: SettingsSetting s)
+
+instance P.HasSecurityHeader (SettingsSetting s) (TF.Attr s (SecurityHeaderSetting s)) where
+    securityHeader =
+        P.lens (_securityHeader :: SettingsSetting s -> TF.Attr s (SecurityHeaderSetting s))
+               (\s a -> s { _securityHeader = a } :: SettingsSetting s)
+
+instance P.HasSecurityLevel (SettingsSetting s) (TF.Attr s P.Text) where
+    securityLevel =
+        P.lens (_securityLevel :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _securityLevel = a } :: SettingsSetting s)
+
+instance P.HasServerSideExclude (SettingsSetting s) (TF.Attr s P.Text) where
+    serverSideExclude =
+        P.lens (_serverSideExclude :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _serverSideExclude = a } :: SettingsSetting s)
+
+instance P.HasSha1Support (SettingsSetting s) (TF.Attr s P.Text) where
+    sha1Support =
+        P.lens (_sha1Support :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _sha1Support = a } :: SettingsSetting s)
+
+instance P.HasSortQueryStringForCache (SettingsSetting s) (TF.Attr s P.Text) where
+    sortQueryStringForCache =
+        P.lens (_sortQueryStringForCache :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _sortQueryStringForCache = a } :: SettingsSetting s)
+
+instance P.HasSsl (SettingsSetting s) (TF.Attr s P.Text) where
+    ssl =
+        P.lens (_ssl :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _ssl = a } :: SettingsSetting s)
+
+instance P.HasTls12Only (SettingsSetting s) (TF.Attr s P.Text) where
+    tls12Only =
+        P.lens (_tls12Only :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _tls12Only = a } :: SettingsSetting s)
+
+instance P.HasTls13 (SettingsSetting s) (TF.Attr s P.Text) where
+    tls13 =
+        P.lens (_tls13 :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _tls13 = a } :: SettingsSetting s)
+
+instance P.HasTlsClientAuth (SettingsSetting s) (TF.Attr s P.Text) where
+    tlsClientAuth =
+        P.lens (_tlsClientAuth :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _tlsClientAuth = a } :: SettingsSetting s)
+
+instance P.HasTrueClientIpHeader (SettingsSetting s) (TF.Attr s P.Text) where
+    trueClientIpHeader =
+        P.lens (_trueClientIpHeader :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _trueClientIpHeader = a } :: SettingsSetting s)
+
+instance P.HasWaf (SettingsSetting s) (TF.Attr s P.Text) where
+    waf =
+        P.lens (_waf :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _waf = a } :: SettingsSetting s)
+
+instance P.HasWebp (SettingsSetting s) (TF.Attr s P.Text) where
+    webp =
+        P.lens (_webp :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _webp = a } :: SettingsSetting s)
+
+instance P.HasWebsockets (SettingsSetting s) (TF.Attr s P.Text) where
+    websockets =
+        P.lens (_websockets :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _websockets = a } :: SettingsSetting s)
 
 instance s ~ s' => P.HasComputedAdvancedDdos (TF.Ref s' (SettingsSetting s)) (TF.Attr s P.Text) where
     computedAdvancedDdos x = TF.compute (TF.refKey x) "advanced_ddos"

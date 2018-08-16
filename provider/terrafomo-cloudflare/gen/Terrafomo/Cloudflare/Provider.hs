@@ -122,7 +122,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "cloudflare"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "api_client_logging" <$> _apiClientLogging
             , P.Just $ TF.assign "email" _email

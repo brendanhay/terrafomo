@@ -18,6 +18,7 @@ module Terrafomo.Cloudflare.Lens
       HasAction (..)
     , HasActions (..)
     , HasAddress (..)
+    , HasAdvancedDdos (..)
     , HasAlgorithm (..)
     , HasAltitude (..)
     , HasAlwaysOnline (..)
@@ -25,6 +26,7 @@ module Terrafomo.Cloudflare.Lens
     , HasApiClientLogging (..)
     , HasAutomaticHttpsRewrites (..)
     , HasBody (..)
+    , HasBrotli (..)
     , HasBrowserCacheTtl (..)
     , HasBrowserCheck (..)
     , HasBy (..)
@@ -35,6 +37,9 @@ module Terrafomo.Cloudflare.Lens
     , HasCacheLevel (..)
     , HasCacheOnCookie (..)
     , HasCertificate (..)
+    , HasChallengeTtl (..)
+    , HasCheckRegions (..)
+    , HasCnameFlattening (..)
     , HasContent (..)
     , HasContentType (..)
     , HasCorrelate (..)
@@ -42,6 +47,7 @@ module Terrafomo.Cloudflare.Lens
     , HasData' (..)
     , HasDefaultPoolIds (..)
     , HasDescription (..)
+    , HasDevelopmentMode (..)
     , HasDigest (..)
     , HasDigestType (..)
     , HasDisableApps (..)
@@ -63,9 +69,13 @@ module Terrafomo.Cloudflare.Lens
     , HasForwardingUrl (..)
     , HasHeader (..)
     , HasHostHeaderOverride (..)
+    , HasHotlinkProtection (..)
     , HasHtml (..)
+    , HasHttp2 (..)
+    , HasIncludeSubdomains (..)
     , HasInterval (..)
     , HasIpGeolocation (..)
+    , HasIpv6 (..)
     , HasJs (..)
     , HasKeyTag (..)
     , HasLatDegrees (..)
@@ -76,39 +86,55 @@ module Terrafomo.Cloudflare.Lens
     , HasLongDirection (..)
     , HasLongMinutes (..)
     , HasLongSeconds (..)
+    , HasMatch (..)
     , HasMatchingType (..)
+    , HasMaxAge (..)
     , HasMaxBackoff (..)
+    , HasMaxUpload (..)
     , HasMethod (..)
+    , HasMethods (..)
     , HasMinBackoff (..)
+    , HasMinTlsVersion (..)
+    , HasMinify (..)
     , HasMinimumOrigins (..)
     , HasMirage (..)
+    , HasMobileRedirect (..)
     , HasMobileSubdomain (..)
     , HasMode (..)
     , HasMonitor (..)
     , HasName (..)
+    , HasNosniff (..)
     , HasNotificationEmail (..)
     , HasOpportunisticEncryption (..)
     , HasOrder (..)
     , HasOrgId (..)
     , HasOriginErrorPagePassThru (..)
+    , HasOriginTraffic (..)
     , HasOrigins (..)
     , HasPath (..)
     , HasPeriod (..)
     , HasPolish (..)
     , HasPoolIds (..)
     , HasPop (..)
+    , HasPopPools (..)
     , HasPort (..)
     , HasPrecisionHorz (..)
     , HasPrecisionVert (..)
     , HasPreference (..)
+    , HasPrefetchPreload (..)
+    , HasPreload (..)
     , HasPriority (..)
+    , HasPrivacyPass (..)
     , HasProto (..)
     , HasProtocol (..)
     , HasProxied (..)
+    , HasPseudoIpv4 (..)
     , HasPublicKey (..)
     , HasRegex (..)
     , HasRegion (..)
+    , HasRegionPools (..)
     , HasReplacement (..)
+    , HasRequest (..)
     , HasResolveOverride (..)
     , HasRespectStrongEtag (..)
     , HasResponse (..)
@@ -117,27 +143,40 @@ module Terrafomo.Cloudflare.Lens
     , HasRocketLoader (..)
     , HasRps (..)
     , HasRuleId (..)
+    , HasSchemes (..)
+    , HasSecurityHeader (..)
     , HasSecurityLevel (..)
     , HasSelector (..)
     , HasServerSideExclude (..)
     , HasService (..)
+    , HasSettings (..)
+    , HasSha1Support (..)
     , HasSize (..)
     , HasSortQueryStringForCache (..)
     , HasSsl (..)
     , HasStatus (..)
     , HasStatusCode (..)
+    , HasStatuses (..)
     , HasStripUri (..)
     , HasTarget (..)
     , HasThreshold (..)
     , HasTimeout (..)
+    , HasTls12Only (..)
+    , HasTls13 (..)
+    , HasTlsClientAuth (..)
     , HasToken (..)
     , HasTrueClientIpHeader (..)
+    , HasTtl (..)
     , HasType' (..)
     , HasUrl (..)
+    , HasUrlPattern (..)
     , HasUsage (..)
     , HasUseOrgFromZone (..)
+    , HasValue (..)
     , HasValues (..)
     , HasWaf (..)
+    , HasWebp (..)
+    , HasWebsockets (..)
     , HasWeight (..)
     , HasZone (..)
 
@@ -245,6 +284,12 @@ class HasAddress a b | a -> b where
 instance HasAddress a b => HasAddress (TF.Schema l p a) b where
     address = TF.configuration . address
 
+class HasAdvancedDdos a b | a -> b where
+    advancedDdos :: P.Lens' a b
+
+instance HasAdvancedDdos a b => HasAdvancedDdos (TF.Schema l p a) b where
+    advancedDdos = TF.configuration . advancedDdos
+
 class HasAlgorithm a b | a -> b where
     algorithm :: P.Lens' a b
 
@@ -286,6 +331,12 @@ class HasBody a b | a -> b where
 
 instance HasBody a b => HasBody (TF.Schema l p a) b where
     body = TF.configuration . body
+
+class HasBrotli a b | a -> b where
+    brotli :: P.Lens' a b
+
+instance HasBrotli a b => HasBrotli (TF.Schema l p a) b where
+    brotli = TF.configuration . brotli
 
 class HasBrowserCacheTtl a b | a -> b where
     browserCacheTtl :: P.Lens' a b
@@ -347,6 +398,24 @@ class HasCertificate a b | a -> b where
 instance HasCertificate a b => HasCertificate (TF.Schema l p a) b where
     certificate = TF.configuration . certificate
 
+class HasChallengeTtl a b | a -> b where
+    challengeTtl :: P.Lens' a b
+
+instance HasChallengeTtl a b => HasChallengeTtl (TF.Schema l p a) b where
+    challengeTtl = TF.configuration . challengeTtl
+
+class HasCheckRegions a b | a -> b where
+    checkRegions :: P.Lens' a b
+
+instance HasCheckRegions a b => HasCheckRegions (TF.Schema l p a) b where
+    checkRegions = TF.configuration . checkRegions
+
+class HasCnameFlattening a b | a -> b where
+    cnameFlattening :: P.Lens' a b
+
+instance HasCnameFlattening a b => HasCnameFlattening (TF.Schema l p a) b where
+    cnameFlattening = TF.configuration . cnameFlattening
+
 class HasContent a b | a -> b where
     content :: P.Lens' a b
 
@@ -388,6 +457,12 @@ class HasDescription a b | a -> b where
 
 instance HasDescription a b => HasDescription (TF.Schema l p a) b where
     description = TF.configuration . description
+
+class HasDevelopmentMode a b | a -> b where
+    developmentMode :: P.Lens' a b
+
+instance HasDevelopmentMode a b => HasDevelopmentMode (TF.Schema l p a) b where
+    developmentMode = TF.configuration . developmentMode
 
 class HasDigest a b | a -> b where
     digest :: P.Lens' a b
@@ -515,11 +590,29 @@ class HasHostHeaderOverride a b | a -> b where
 instance HasHostHeaderOverride a b => HasHostHeaderOverride (TF.Schema l p a) b where
     hostHeaderOverride = TF.configuration . hostHeaderOverride
 
+class HasHotlinkProtection a b | a -> b where
+    hotlinkProtection :: P.Lens' a b
+
+instance HasHotlinkProtection a b => HasHotlinkProtection (TF.Schema l p a) b where
+    hotlinkProtection = TF.configuration . hotlinkProtection
+
 class HasHtml a b | a -> b where
     html :: P.Lens' a b
 
 instance HasHtml a b => HasHtml (TF.Schema l p a) b where
     html = TF.configuration . html
+
+class HasHttp2 a b | a -> b where
+    http2 :: P.Lens' a b
+
+instance HasHttp2 a b => HasHttp2 (TF.Schema l p a) b where
+    http2 = TF.configuration . http2
+
+class HasIncludeSubdomains a b | a -> b where
+    includeSubdomains :: P.Lens' a b
+
+instance HasIncludeSubdomains a b => HasIncludeSubdomains (TF.Schema l p a) b where
+    includeSubdomains = TF.configuration . includeSubdomains
 
 class HasInterval a b | a -> b where
     interval :: P.Lens' a b
@@ -532,6 +625,12 @@ class HasIpGeolocation a b | a -> b where
 
 instance HasIpGeolocation a b => HasIpGeolocation (TF.Schema l p a) b where
     ipGeolocation = TF.configuration . ipGeolocation
+
+class HasIpv6 a b | a -> b where
+    ipv6 :: P.Lens' a b
+
+instance HasIpv6 a b => HasIpv6 (TF.Schema l p a) b where
+    ipv6 = TF.configuration . ipv6
 
 class HasJs a b | a -> b where
     js :: P.Lens' a b
@@ -593,11 +692,23 @@ class HasLongSeconds a b | a -> b where
 instance HasLongSeconds a b => HasLongSeconds (TF.Schema l p a) b where
     longSeconds = TF.configuration . longSeconds
 
+class HasMatch a b | a -> b where
+    match :: P.Lens' a b
+
+instance HasMatch a b => HasMatch (TF.Schema l p a) b where
+    match = TF.configuration . match
+
 class HasMatchingType a b | a -> b where
     matchingType :: P.Lens' a b
 
 instance HasMatchingType a b => HasMatchingType (TF.Schema l p a) b where
     matchingType = TF.configuration . matchingType
+
+class HasMaxAge a b | a -> b where
+    maxAge :: P.Lens' a b
+
+instance HasMaxAge a b => HasMaxAge (TF.Schema l p a) b where
+    maxAge = TF.configuration . maxAge
 
 class HasMaxBackoff a b | a -> b where
     maxBackoff :: P.Lens' a b
@@ -605,17 +716,41 @@ class HasMaxBackoff a b | a -> b where
 instance HasMaxBackoff a b => HasMaxBackoff (TF.Schema l p a) b where
     maxBackoff = TF.configuration . maxBackoff
 
+class HasMaxUpload a b | a -> b where
+    maxUpload :: P.Lens' a b
+
+instance HasMaxUpload a b => HasMaxUpload (TF.Schema l p a) b where
+    maxUpload = TF.configuration . maxUpload
+
 class HasMethod a b | a -> b where
     method :: P.Lens' a b
 
 instance HasMethod a b => HasMethod (TF.Schema l p a) b where
     method = TF.configuration . method
 
+class HasMethods a b | a -> b where
+    methods :: P.Lens' a b
+
+instance HasMethods a b => HasMethods (TF.Schema l p a) b where
+    methods = TF.configuration . methods
+
 class HasMinBackoff a b | a -> b where
     minBackoff :: P.Lens' a b
 
 instance HasMinBackoff a b => HasMinBackoff (TF.Schema l p a) b where
     minBackoff = TF.configuration . minBackoff
+
+class HasMinTlsVersion a b | a -> b where
+    minTlsVersion :: P.Lens' a b
+
+instance HasMinTlsVersion a b => HasMinTlsVersion (TF.Schema l p a) b where
+    minTlsVersion = TF.configuration . minTlsVersion
+
+class HasMinify a b | a -> b where
+    minify :: P.Lens' a b
+
+instance HasMinify a b => HasMinify (TF.Schema l p a) b where
+    minify = TF.configuration . minify
 
 class HasMinimumOrigins a b | a -> b where
     minimumOrigins :: P.Lens' a b
@@ -628,6 +763,12 @@ class HasMirage a b | a -> b where
 
 instance HasMirage a b => HasMirage (TF.Schema l p a) b where
     mirage = TF.configuration . mirage
+
+class HasMobileRedirect a b | a -> b where
+    mobileRedirect :: P.Lens' a b
+
+instance HasMobileRedirect a b => HasMobileRedirect (TF.Schema l p a) b where
+    mobileRedirect = TF.configuration . mobileRedirect
 
 class HasMobileSubdomain a b | a -> b where
     mobileSubdomain :: P.Lens' a b
@@ -652,6 +793,12 @@ class HasName a b | a -> b where
 
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
+
+class HasNosniff a b | a -> b where
+    nosniff :: P.Lens' a b
+
+instance HasNosniff a b => HasNosniff (TF.Schema l p a) b where
+    nosniff = TF.configuration . nosniff
 
 class HasNotificationEmail a b | a -> b where
     notificationEmail :: P.Lens' a b
@@ -682,6 +829,12 @@ class HasOriginErrorPagePassThru a b | a -> b where
 
 instance HasOriginErrorPagePassThru a b => HasOriginErrorPagePassThru (TF.Schema l p a) b where
     originErrorPagePassThru = TF.configuration . originErrorPagePassThru
+
+class HasOriginTraffic a b | a -> b where
+    originTraffic :: P.Lens' a b
+
+instance HasOriginTraffic a b => HasOriginTraffic (TF.Schema l p a) b where
+    originTraffic = TF.configuration . originTraffic
 
 class HasOrigins a b | a -> b where
     origins :: P.Lens' a b
@@ -719,6 +872,12 @@ class HasPop a b | a -> b where
 instance HasPop a b => HasPop (TF.Schema l p a) b where
     pop = TF.configuration . pop
 
+class HasPopPools a b | a -> b where
+    popPools :: P.Lens' a b
+
+instance HasPopPools a b => HasPopPools (TF.Schema l p a) b where
+    popPools = TF.configuration . popPools
+
 class HasPort a b | a -> b where
     port :: P.Lens' a b
 
@@ -743,11 +902,29 @@ class HasPreference a b | a -> b where
 instance HasPreference a b => HasPreference (TF.Schema l p a) b where
     preference = TF.configuration . preference
 
+class HasPrefetchPreload a b | a -> b where
+    prefetchPreload :: P.Lens' a b
+
+instance HasPrefetchPreload a b => HasPrefetchPreload (TF.Schema l p a) b where
+    prefetchPreload = TF.configuration . prefetchPreload
+
+class HasPreload a b | a -> b where
+    preload :: P.Lens' a b
+
+instance HasPreload a b => HasPreload (TF.Schema l p a) b where
+    preload = TF.configuration . preload
+
 class HasPriority a b | a -> b where
     priority :: P.Lens' a b
 
 instance HasPriority a b => HasPriority (TF.Schema l p a) b where
     priority = TF.configuration . priority
+
+class HasPrivacyPass a b | a -> b where
+    privacyPass :: P.Lens' a b
+
+instance HasPrivacyPass a b => HasPrivacyPass (TF.Schema l p a) b where
+    privacyPass = TF.configuration . privacyPass
 
 class HasProto a b | a -> b where
     proto :: P.Lens' a b
@@ -767,6 +944,12 @@ class HasProxied a b | a -> b where
 instance HasProxied a b => HasProxied (TF.Schema l p a) b where
     proxied = TF.configuration . proxied
 
+class HasPseudoIpv4 a b | a -> b where
+    pseudoIpv4 :: P.Lens' a b
+
+instance HasPseudoIpv4 a b => HasPseudoIpv4 (TF.Schema l p a) b where
+    pseudoIpv4 = TF.configuration . pseudoIpv4
+
 class HasPublicKey a b | a -> b where
     publicKey :: P.Lens' a b
 
@@ -785,11 +968,23 @@ class HasRegion a b | a -> b where
 instance HasRegion a b => HasRegion (TF.Schema l p a) b where
     region = TF.configuration . region
 
+class HasRegionPools a b | a -> b where
+    regionPools :: P.Lens' a b
+
+instance HasRegionPools a b => HasRegionPools (TF.Schema l p a) b where
+    regionPools = TF.configuration . regionPools
+
 class HasReplacement a b | a -> b where
     replacement :: P.Lens' a b
 
 instance HasReplacement a b => HasReplacement (TF.Schema l p a) b where
     replacement = TF.configuration . replacement
+
+class HasRequest a b | a -> b where
+    request :: P.Lens' a b
+
+instance HasRequest a b => HasRequest (TF.Schema l p a) b where
+    request = TF.configuration . request
 
 class HasResolveOverride a b | a -> b where
     resolveOverride :: P.Lens' a b
@@ -839,6 +1034,18 @@ class HasRuleId a b | a -> b where
 instance HasRuleId a b => HasRuleId (TF.Schema l p a) b where
     ruleId = TF.configuration . ruleId
 
+class HasSchemes a b | a -> b where
+    schemes :: P.Lens' a b
+
+instance HasSchemes a b => HasSchemes (TF.Schema l p a) b where
+    schemes = TF.configuration . schemes
+
+class HasSecurityHeader a b | a -> b where
+    securityHeader :: P.Lens' a b
+
+instance HasSecurityHeader a b => HasSecurityHeader (TF.Schema l p a) b where
+    securityHeader = TF.configuration . securityHeader
+
 class HasSecurityLevel a b | a -> b where
     securityLevel :: P.Lens' a b
 
@@ -862,6 +1069,18 @@ class HasService a b | a -> b where
 
 instance HasService a b => HasService (TF.Schema l p a) b where
     service = TF.configuration . service
+
+class HasSettings a b | a -> b where
+    settings :: P.Lens' a b
+
+instance HasSettings a b => HasSettings (TF.Schema l p a) b where
+    settings = TF.configuration . settings
+
+class HasSha1Support a b | a -> b where
+    sha1Support :: P.Lens' a b
+
+instance HasSha1Support a b => HasSha1Support (TF.Schema l p a) b where
+    sha1Support = TF.configuration . sha1Support
 
 class HasSize a b | a -> b where
     size :: P.Lens' a b
@@ -893,6 +1112,12 @@ class HasStatusCode a b | a -> b where
 instance HasStatusCode a b => HasStatusCode (TF.Schema l p a) b where
     statusCode = TF.configuration . statusCode
 
+class HasStatuses a b | a -> b where
+    statuses :: P.Lens' a b
+
+instance HasStatuses a b => HasStatuses (TF.Schema l p a) b where
+    statuses = TF.configuration . statuses
+
 class HasStripUri a b | a -> b where
     stripUri :: P.Lens' a b
 
@@ -917,6 +1142,24 @@ class HasTimeout a b | a -> b where
 instance HasTimeout a b => HasTimeout (TF.Schema l p a) b where
     timeout = TF.configuration . timeout
 
+class HasTls12Only a b | a -> b where
+    tls12Only :: P.Lens' a b
+
+instance HasTls12Only a b => HasTls12Only (TF.Schema l p a) b where
+    tls12Only = TF.configuration . tls12Only
+
+class HasTls13 a b | a -> b where
+    tls13 :: P.Lens' a b
+
+instance HasTls13 a b => HasTls13 (TF.Schema l p a) b where
+    tls13 = TF.configuration . tls13
+
+class HasTlsClientAuth a b | a -> b where
+    tlsClientAuth :: P.Lens' a b
+
+instance HasTlsClientAuth a b => HasTlsClientAuth (TF.Schema l p a) b where
+    tlsClientAuth = TF.configuration . tlsClientAuth
+
 class HasToken a b | a -> b where
     token :: P.Lens' a b
 
@@ -928,6 +1171,12 @@ class HasTrueClientIpHeader a b | a -> b where
 
 instance HasTrueClientIpHeader a b => HasTrueClientIpHeader (TF.Schema l p a) b where
     trueClientIpHeader = TF.configuration . trueClientIpHeader
+
+class HasTtl a b | a -> b where
+    ttl :: P.Lens' a b
+
+instance HasTtl a b => HasTtl (TF.Schema l p a) b where
+    ttl = TF.configuration . ttl
 
 class HasType' a b | a -> b where
     type' :: P.Lens' a b
@@ -941,6 +1190,12 @@ class HasUrl a b | a -> b where
 instance HasUrl a b => HasUrl (TF.Schema l p a) b where
     url = TF.configuration . url
 
+class HasUrlPattern a b | a -> b where
+    urlPattern :: P.Lens' a b
+
+instance HasUrlPattern a b => HasUrlPattern (TF.Schema l p a) b where
+    urlPattern = TF.configuration . urlPattern
+
 class HasUsage a b | a -> b where
     usage :: P.Lens' a b
 
@@ -953,6 +1208,12 @@ class HasUseOrgFromZone a b | a -> b where
 instance HasUseOrgFromZone a b => HasUseOrgFromZone (TF.Schema l p a) b where
     useOrgFromZone = TF.configuration . useOrgFromZone
 
+class HasValue a b | a -> b where
+    value :: P.Lens' a b
+
+instance HasValue a b => HasValue (TF.Schema l p a) b where
+    value = TF.configuration . value
+
 class HasValues a b | a -> b where
     values :: P.Lens' a b
 
@@ -964,6 +1225,18 @@ class HasWaf a b | a -> b where
 
 instance HasWaf a b => HasWaf (TF.Schema l p a) b where
     waf = TF.configuration . waf
+
+class HasWebp a b | a -> b where
+    webp :: P.Lens' a b
+
+instance HasWebp a b => HasWebp (TF.Schema l p a) b where
+    webp = TF.configuration . webp
+
+class HasWebsockets a b | a -> b where
+    websockets :: P.Lens' a b
+
+instance HasWebsockets a b => HasWebsockets (TF.Schema l p a) b where
+    websockets = TF.configuration . websockets
 
 class HasWeight a b | a -> b where
     weight :: P.Lens' a b

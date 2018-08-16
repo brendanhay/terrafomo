@@ -92,9 +92,24 @@ data LoadBalancerResource s = LoadBalancerResource'
     , _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
+    , _popPools       :: TF.Attr s [TF.Attr s (PopPoolsSetting s)]
+    -- ^ @pop_pools@ - (Optional)
+    --
     , _proxied        :: TF.Attr s P.Bool
     -- ^ @proxied@ - (Optional)
     --
+    -- Conflicts with:
+    --
+    -- * 'ttl'
+    , _regionPools    :: TF.Attr s [TF.Attr s (RegionPoolsSetting s)]
+    -- ^ @region_pools@ - (Optional)
+    --
+    , _ttl            :: TF.Attr s P.Int
+    -- ^ @ttl@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'proxied'
     , _zone           :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
     --
@@ -114,7 +129,10 @@ loadBalancerResource _fallbackPoolId _defaultPoolIds _name _zone =
             , _description = TF.Nil
             , _fallbackPoolId = _fallbackPoolId
             , _name = _name
+            , _popPools = TF.Nil
             , _proxied = TF.value P.False
+            , _regionPools = TF.Nil
+            , _ttl = TF.Nil
             , _zone = _zone
             }
 
@@ -124,12 +142,26 @@ instance TF.IsObject (LoadBalancerResource s) where
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "fallback_pool_id" <$> TF.attribute _fallbackPoolId
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "pop_pools" <$> TF.attribute _popPools
         , TF.assign "proxied" <$> TF.attribute _proxied
+        , TF.assign "region_pools" <$> TF.attribute _regionPools
+        , TF.assign "ttl" <$> TF.attribute _ttl
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
 instance TF.IsValid (LoadBalancerResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\LoadBalancerResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_proxied P.== TF.value P.False)
+              then P.Nothing
+              else P.Just ("_proxied",
+                            [ "_ttl"
+                            ])
+        , if (_ttl P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_ttl",
+                            [ "_proxied"
+                            ])
+        ])
 
 instance P.HasDefaultPoolIds (LoadBalancerResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     defaultPoolIds =
@@ -151,10 +183,25 @@ instance P.HasName (LoadBalancerResource s) (TF.Attr s P.Text) where
         P.lens (_name :: LoadBalancerResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: LoadBalancerResource s)
 
+instance P.HasPopPools (LoadBalancerResource s) (TF.Attr s [TF.Attr s (PopPoolsSetting s)]) where
+    popPools =
+        P.lens (_popPools :: LoadBalancerResource s -> TF.Attr s [TF.Attr s (PopPoolsSetting s)])
+               (\s a -> s { _popPools = a } :: LoadBalancerResource s)
+
 instance P.HasProxied (LoadBalancerResource s) (TF.Attr s P.Bool) where
     proxied =
         P.lens (_proxied :: LoadBalancerResource s -> TF.Attr s P.Bool)
                (\s a -> s { _proxied = a } :: LoadBalancerResource s)
+
+instance P.HasRegionPools (LoadBalancerResource s) (TF.Attr s [TF.Attr s (RegionPoolsSetting s)]) where
+    regionPools =
+        P.lens (_regionPools :: LoadBalancerResource s -> TF.Attr s [TF.Attr s (RegionPoolsSetting s)])
+               (\s a -> s { _regionPools = a } :: LoadBalancerResource s)
+
+instance P.HasTtl (LoadBalancerResource s) (TF.Attr s P.Int) where
+    ttl =
+        P.lens (_ttl :: LoadBalancerResource s -> TF.Attr s P.Int)
+               (\s a -> s { _ttl = a } :: LoadBalancerResource s)
 
 instance P.HasZone (LoadBalancerResource s) (TF.Attr s P.Text) where
     zone =
@@ -320,7 +367,10 @@ instance s ~ s' => P.HasComputedModifiedOn (TF.Ref s' (LoadBalancerMonitorResour
 -- See the <https://www.terraform.io/docs/providers/cloudflare/r/load_balancer_pool.html terraform documentation>
 -- for more information.
 data LoadBalancerPoolResource s = LoadBalancerPoolResource'
-    { _description       :: TF.Attr s P.Text
+    { _checkRegions      :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @check_regions@ - (Optional, Forces New)
+    --
+    , _description       :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
     , _enabled           :: TF.Attr s P.Bool
@@ -351,7 +401,8 @@ loadBalancerPoolResource
 loadBalancerPoolResource _name _origins =
     TF.unsafeResource "cloudflare_load_balancer_pool" TF.validator $
         LoadBalancerPoolResource'
-            { _description = TF.Nil
+            { _checkRegions = TF.Nil
+            , _description = TF.Nil
             , _enabled = TF.value P.True
             , _minimumOrigins = TF.value 1
             , _monitor = TF.Nil
@@ -362,7 +413,8 @@ loadBalancerPoolResource _name _origins =
 
 instance TF.IsObject (LoadBalancerPoolResource s) where
     toObject LoadBalancerPoolResource'{..} = P.catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
+        [ TF.assign "check_regions" <$> TF.attribute _checkRegions
+        , TF.assign "description" <$> TF.attribute _description
         , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "minimum_origins" <$> TF.attribute _minimumOrigins
         , TF.assign "monitor" <$> TF.attribute _monitor
@@ -373,6 +425,11 @@ instance TF.IsObject (LoadBalancerPoolResource s) where
 
 instance TF.IsValid (LoadBalancerPoolResource s) where
     validator = P.mempty
+
+instance P.HasCheckRegions (LoadBalancerPoolResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    checkRegions =
+        P.lens (_checkRegions :: LoadBalancerPoolResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _checkRegions = a } :: LoadBalancerPoolResource s)
 
 instance P.HasDescription (LoadBalancerPoolResource s) (TF.Attr s P.Text) where
     description =
@@ -526,6 +583,9 @@ data RateLimitResource s = RateLimitResource'
     , _disabled          :: TF.Attr s P.Bool
     -- ^ @disabled@ - (Optional)
     --
+    , _match             :: TF.Attr s (MatchSetting s)
+    -- ^ @match@ - (Optional)
+    --
     , _period            :: TF.Attr s P.Int
     -- ^ @period@ - (Required)
     --
@@ -552,6 +612,7 @@ rateLimitResource _action _period _threshold _zone =
             , _correlate = TF.Nil
             , _description = TF.Nil
             , _disabled = TF.value P.False
+            , _match = TF.Nil
             , _period = _period
             , _threshold = _threshold
             , _zone = _zone
@@ -564,6 +625,7 @@ instance TF.IsObject (RateLimitResource s) where
         , TF.assign "correlate" <$> TF.attribute _correlate
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "disabled" <$> TF.attribute _disabled
+        , TF.assign "match" <$> TF.attribute _match
         , TF.assign "period" <$> TF.attribute _period
         , TF.assign "threshold" <$> TF.attribute _threshold
         , TF.assign "zone" <$> TF.attribute _zone
@@ -578,6 +640,10 @@ instance TF.IsValid (RateLimitResource s) where
            P.<> TF.settingsValidator "_correlate"
                   (_correlate
                       :: RateLimitResource s -> TF.Attr s (CorrelateSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_match"
+                  (_match
+                      :: RateLimitResource s -> TF.Attr s (MatchSetting s))
                   TF.validator
 
 instance P.HasAction (RateLimitResource s) (TF.Attr s (ActionSetting s)) where
@@ -604,6 +670,11 @@ instance P.HasDisabled (RateLimitResource s) (TF.Attr s P.Bool) where
     disabled =
         P.lens (_disabled :: RateLimitResource s -> TF.Attr s P.Bool)
                (\s a -> s { _disabled = a } :: RateLimitResource s)
+
+instance P.HasMatch (RateLimitResource s) (TF.Attr s (MatchSetting s)) where
+    match =
+        P.lens (_match :: RateLimitResource s -> TF.Attr s (MatchSetting s))
+               (\s a -> s { _match = a } :: RateLimitResource s)
 
 instance P.HasPeriod (RateLimitResource s) (TF.Attr s P.Int) where
     period =
@@ -637,6 +708,9 @@ data RecordResource s = RecordResource'
     { _data'    :: TF.Attr s (P.Map P.Text (TF.Attr s (DataSetting s)))
     -- ^ @data@ - (Optional)
     --
+    -- Conflicts with:
+    --
+    -- * 'value'
     , _domain   :: TF.Attr s P.Text
     -- ^ @domain@ - (Required, Forces New)
     --
@@ -649,9 +723,18 @@ data RecordResource s = RecordResource'
     , _proxied  :: TF.Attr s P.Bool
     -- ^ @proxied@ - (Optional)
     --
+    , _ttl      :: TF.Attr s P.Int
+    -- ^ @ttl@ - (Optional)
+    --
     , _type'    :: TF.Attr s P.Text
     -- ^ @type@ - (Required, Forces New)
     --
+    , _value    :: TF.Attr s P.Text
+    -- ^ @value@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'data''
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @cloudflare_record@ resource value.
@@ -668,7 +751,9 @@ recordResource _domain _name _type' =
             , _name = _name
             , _priority = TF.Nil
             , _proxied = TF.value P.False
+            , _ttl = TF.Nil
             , _type' = _type'
+            , _value = TF.Nil
             }
 
 instance TF.IsObject (RecordResource s) where
@@ -678,11 +763,24 @@ instance TF.IsObject (RecordResource s) where
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "priority" <$> TF.attribute _priority
         , TF.assign "proxied" <$> TF.attribute _proxied
+        , TF.assign "ttl" <$> TF.attribute _ttl
         , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "value" <$> TF.attribute _value
         ]
 
 instance TF.IsValid (RecordResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\RecordResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_data' P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_data'",
+                            [ "_value"
+                            ])
+        , if (_value P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_value",
+                            [ "_data'"
+                            ])
+        ])
 
 instance P.HasData' (RecordResource s) (TF.Attr s (P.Map P.Text (TF.Attr s (DataSetting s)))) where
     data' =
@@ -709,10 +807,20 @@ instance P.HasProxied (RecordResource s) (TF.Attr s P.Bool) where
         P.lens (_proxied :: RecordResource s -> TF.Attr s P.Bool)
                (\s a -> s { _proxied = a } :: RecordResource s)
 
+instance P.HasTtl (RecordResource s) (TF.Attr s P.Int) where
+    ttl =
+        P.lens (_ttl :: RecordResource s -> TF.Attr s P.Int)
+               (\s a -> s { _ttl = a } :: RecordResource s)
+
 instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: RecordResource s)
+
+instance P.HasValue (RecordResource s) (TF.Attr s P.Text) where
+    value =
+        P.lens (_value :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: RecordResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -810,8 +918,11 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (WafRuleResource s)) (TF.Attr 
 -- See the <https://www.terraform.io/docs/providers/cloudflare/r/zone_settings_override.html terraform documentation>
 -- for more information.
 data ZoneSettingsOverrideResource s = ZoneSettingsOverrideResource'
-    { _name :: TF.Attr s P.Text
+    { _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
+    --
+    , _settings :: TF.Attr s (SettingsSetting s)
+    -- ^ @settings@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -823,20 +934,31 @@ zoneSettingsOverrideResource _name =
     TF.unsafeResource "cloudflare_zone_settings_override" TF.validator $
         ZoneSettingsOverrideResource'
             { _name = _name
+            , _settings = TF.Nil
             }
 
 instance TF.IsObject (ZoneSettingsOverrideResource s) where
     toObject ZoneSettingsOverrideResource'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "settings" <$> TF.attribute _settings
         ]
 
 instance TF.IsValid (ZoneSettingsOverrideResource s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_settings"
+                  (_settings
+                      :: ZoneSettingsOverrideResource s -> TF.Attr s (SettingsSetting s))
+                  TF.validator
 
 instance P.HasName (ZoneSettingsOverrideResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ZoneSettingsOverrideResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ZoneSettingsOverrideResource s)
+
+instance P.HasSettings (ZoneSettingsOverrideResource s) (TF.Attr s (SettingsSetting s)) where
+    settings =
+        P.lens (_settings :: ZoneSettingsOverrideResource s -> TF.Attr s (SettingsSetting s))
+               (\s a -> s { _settings = a } :: ZoneSettingsOverrideResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
