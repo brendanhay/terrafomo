@@ -570,11 +570,11 @@ data ProjectMembershipResource s = ProjectMembershipResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 projectMembershipResource
-    :: TF.Attr s P.Text -- ^ @access_level@ - 'P.accessLevel'
-    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Int -- ^ @user_id@ - 'P.userId'
+    -> TF.Attr s P.Text -- ^ @access_level@ - 'P.accessLevel'
     -> P.Resource (ProjectMembershipResource s)
-projectMembershipResource _accessLevel _projectId _userId =
+projectMembershipResource _projectId _userId _accessLevel =
     TF.unsafeResource "gitlab_project_membership" TF.validator $
         ProjectMembershipResource'
             { _accessLevel = _accessLevel
