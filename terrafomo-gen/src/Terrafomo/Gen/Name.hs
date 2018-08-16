@@ -62,7 +62,12 @@ resourceNames   x = datatypeNames (Name (resourceName x <> "Resource"))
 settingsNames :: Text -> (DataName, ConName, VarName)
 settingsNames = \case
     "provider" -> (Name "Provider", Name "Provider'", Name "newProvider")
-    x          -> datatypeNames (rename x)
+    x          ->
+        let name = rename x
+         in ( name
+            , unsafeRename (`Text.snoc` '\'') name
+            , unsafeRename (mappend "new")    name
+            )
   where
     rename =
         unsafeRename suffix . dataName
