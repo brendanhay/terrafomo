@@ -227,8 +227,8 @@ data ClientAuthSetting = ClientAuthSetting'
 
 -- | Construct a new @client_auth@ settings value.
 newClientAuthSetting
-    :: P.Text -- ^ @cert_file@ - 'P.certFile'
-    -> P.Text -- ^ @key_file@ - 'P.keyFile'
+    :: P.Text -- ^ 'P._certFile': @cert_file@
+    -> P.Text -- ^ 'P._keyFile': @key_file@
     -> ClientAuthSetting
 newClientAuthSetting _certFile _keyFile =
     ClientAuthSetting'
@@ -270,8 +270,8 @@ data GroupSetting s = GroupSetting'
 
 -- | Construct a new @group@ settings value.
 newGroupSetting
-    :: TF.Attr s P.Text -- ^ @group_name@ - 'P.groupName'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @policies@ - 'P.policies'
+    :: TF.Attr s P.Text -- ^ 'P._groupName': @group_name@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._policies': @policies@
     -> GroupSetting s
 newGroupSetting _groupName _policies =
     GroupSetting'
@@ -662,8 +662,8 @@ data UserSetting s = UserSetting'
 
 -- | Construct a new @user@ settings value.
 newUserSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @groups@ - 'P.groups'
-    -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._groups': @groups@
+    -> TF.Attr s P.Text -- ^ 'P._username': @username@
     -> UserSetting s
 newUserSetting _groups _username =
     UserSetting'

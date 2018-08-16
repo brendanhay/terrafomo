@@ -17,10 +17,11 @@
 --
 module Terrafomo.Vault.Provider
     (
+    -- * Vault Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** Vault Specific Aliases
+    -- * Vault Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -92,8 +93,8 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @address@ - 'P.address'
-    -> P.Text -- ^ @token@ - 'P.token'
+    :: P.Text -- ^ @address@ ('P._address', 'P.address')
+    -> P.Text -- ^ @token@ ('P._token', 'P.token')
     -> Provider
 newProvider _address _token =
     Provider'
@@ -110,7 +111,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "vault"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "address" _address
             , TF.assign "ca_cert_dir" <$> _caCertDir
