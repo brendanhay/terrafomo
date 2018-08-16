@@ -80,7 +80,7 @@ data DatabaseResource s = DatabaseResource'
 
 -- | Define a new @postgresql_database@ resource value.
 databaseResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (DatabaseResource s)
 databaseResource _name =
     TF.unsafeResource "postgresql_database" TF.validator $
@@ -151,7 +151,7 @@ data ExtensionResource s = ExtensionResource'
 
 -- | Define a new @postgresql_extension@ resource value.
 extensionResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ExtensionResource s)
 extensionResource _name =
     TF.unsafeResource "postgresql_extension" TF.validator $
@@ -246,7 +246,7 @@ data RoleResource s = RoleResource'
 
 -- | Define a new @postgresql_role@ resource value.
 roleResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (RoleResource s)
 roleResource _name =
     TF.unsafeResource "postgresql_role" TF.validator $
@@ -374,7 +374,7 @@ data SchemaResource s = SchemaResource'
 
 -- | Define a new @postgresql_schema@ resource value.
 schemaResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (SchemaResource s)
 schemaResource _name =
     TF.unsafeResource "postgresql_schema" TF.validator $
