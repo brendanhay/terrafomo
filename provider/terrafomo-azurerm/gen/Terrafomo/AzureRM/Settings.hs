@@ -19,547 +19,547 @@ module Terrafomo.AzureRM.Settings
     (
     -- ** access_policy
       AccessPolicySetting (..)
-    , newAccessPolicySetting
+    , accessPolicySetting
 
     -- ** action
     , ActionSetting (..)
-    , newActionSetting
+    , actionSetting
 
     -- ** action_storage_queue
     , ActionStorageQueueSetting (..)
-    , newActionStorageQueueSetting
+    , actionStorageQueueSetting
 
     -- ** action_web
     , ActionWebSetting (..)
-    , newActionWebSetting
+    , actionWebSetting
 
     -- ** additional_unattend_config
     , AdditionalUnattendConfigSetting (..)
-    , newAdditionalUnattendConfigSetting
+    , additionalUnattendConfigSetting
 
     -- ** agent_pool_profile
     , AgentPoolProfileSetting (..)
-    , newAgentPoolProfileSetting
+    , agentPoolProfileSetting
 
     -- ** apns_credential
     , ApnsCredentialSetting (..)
-    , newApnsCredentialSetting
+    , apnsCredentialSetting
 
     -- ** application_ports
     , ApplicationPortsSetting (..)
-    , newApplicationPortsSetting
+    , applicationPortsSetting
 
     -- ** authentication_active_directory
     , AuthenticationActiveDirectorySetting (..)
-    , newAuthenticationActiveDirectorySetting
+    , authenticationActiveDirectorySetting
 
     -- ** authentication_basic
     , AuthenticationBasicSetting (..)
-    , newAuthenticationBasicSetting
+    , authenticationBasicSetting
 
     -- ** authentication_certificate
     , AuthenticationCertificateSetting (..)
-    , newAuthenticationCertificateSetting
+    , authenticationCertificateSetting
 
     -- ** backend_address_pool
     , BackendAddressPoolSetting (..)
-    , newBackendAddressPoolSetting
+    , backendAddressPoolSetting
 
     -- ** backend_http_settings
     , BackendHttpSettingsSetting (..)
-    , newBackendHttpSettingsSetting
+    , backendHttpSettingsSetting
 
     -- ** bgp_settings
     , BgpSettingsSetting (..)
-    , newBgpSettingsSetting
+    , bgpSettingsSetting
 
     -- ** boot_diagnostics
     , BootDiagnosticsSetting (..)
-    , newBootDiagnosticsSetting
+    , bootDiagnosticsSetting
 
     -- ** capabilities
     , CapabilitiesSetting (..)
-    , newCapabilitiesSetting
+    , capabilitiesSetting
 
     -- ** capacity
     , CapacitySetting (..)
-    , newCapacitySetting
+    , capacitySetting
 
     -- ** capture_description
     , CaptureDescriptionSetting (..)
-    , newCaptureDescriptionSetting
+    , captureDescriptionSetting
 
     -- ** certificate
     , CertificateSetting (..)
-    , newCertificateSetting
+    , certificateSetting
 
     -- ** certificate_policy
     , CertificatePolicySetting (..)
-    , newCertificatePolicySetting
+    , certificatePolicySetting
 
     -- ** client_certificate_thumbprint
     , ClientCertificateThumbprintSetting (..)
-    , newClientCertificateThumbprintSetting
+    , clientCertificateThumbprintSetting
 
     -- ** connection_string
     , ConnectionStringSetting (..)
-    , newConnectionStringSetting
+    , connectionStringSetting
 
     -- ** consistency_policy
     , ConsistencyPolicySetting (..)
-    , newConsistencyPolicySetting
+    , consistencyPolicySetting
 
     -- ** container
     , ContainerSetting (..)
-    , newContainerSetting
+    , containerSetting
 
     -- ** correlation_filter
     , CorrelationFilterSetting (..)
-    , newCorrelationFilterSetting
+    , correlationFilterSetting
 
     -- ** custom_domain
     , CustomDomainSetting (..)
-    , newCustomDomainSetting
+    , customDomainSetting
 
     -- ** data_disk
     , DataDiskSetting (..)
-    , newDataDiskSetting
+    , dataDiskSetting
 
     -- ** destination
     , DestinationSetting (..)
-    , newDestinationSetting
+    , destinationSetting
 
     -- ** diagnostics_config
     , DiagnosticsConfigSetting (..)
-    , newDiagnosticsConfigSetting
+    , diagnosticsConfigSetting
 
     -- ** diagnostics_profile
     , DiagnosticsProfileSetting (..)
-    , newDiagnosticsProfileSetting
+    , diagnosticsProfileSetting
 
     -- ** disk_encryption_key
     , DiskEncryptionKeySetting (..)
-    , newDiskEncryptionKeySetting
+    , diskEncryptionKeySetting
 
     -- ** dns_config
     , DnsConfigSetting (..)
-    , newDnsConfigSetting
+    , dnsConfigSetting
 
     -- ** dns_settings
     , DnsSettingsSetting (..)
-    , newDnsSettingsSetting
+    , dnsSettingsSetting
 
     -- ** email
     , EmailSetting (..)
-    , newEmailSetting
+    , emailSetting
 
     -- ** email_action
     , EmailActionSetting (..)
-    , newEmailActionSetting
+    , emailActionSetting
 
     -- ** email_receiver
     , EmailReceiverSetting (..)
-    , newEmailReceiverSetting
+    , emailReceiverSetting
 
     -- ** encryption_settings
     , EncryptionSettingsSetting (..)
-    , newEncryptionSettingsSetting
+    , encryptionSettingsSetting
 
     -- ** ephemeral_ports
     , EphemeralPortsSetting (..)
-    , newEphemeralPortsSetting
+    , ephemeralPortsSetting
 
     -- ** error_action_storage_queue
     , ErrorActionStorageQueueSetting (..)
-    , newErrorActionStorageQueueSetting
+    , errorActionStorageQueueSetting
 
     -- ** error_action_web
     , ErrorActionWebSetting (..)
-    , newErrorActionWebSetting
+    , errorActionWebSetting
 
     -- ** extension
     , ExtensionSetting (..)
-    , newExtensionSetting
+    , extensionSetting
 
     -- ** fabric_settings
     , FabricSettingsSetting (..)
-    , newFabricSettingsSetting
+    , fabricSettingsSetting
 
     -- ** filter
     , FilterSetting (..)
-    , newFilterSetting
+    , filterSetting
 
     -- ** fixed_date
     , FixedDateSetting (..)
-    , newFixedDateSetting
+    , fixedDateSetting
 
     -- ** frontend_ip_configuration
     , FrontendIpConfigurationSetting (..)
-    , newFrontendIpConfigurationSetting
+    , frontendIpConfigurationSetting
 
     -- ** frontend_port
     , FrontendPortSetting (..)
-    , newFrontendPortSetting
+    , frontendPortSetting
 
     -- ** gateway_ip_configuration
     , GatewayIpConfigurationSetting (..)
-    , newGatewayIpConfigurationSetting
+    , gatewayIpConfigurationSetting
 
     -- ** gcm_credential
     , GcmCredentialSetting (..)
-    , newGcmCredentialSetting
+    , gcmCredentialSetting
 
     -- ** geo_filter
     , GeoFilterSetting (..)
-    , newGeoFilterSetting
+    , geoFilterSetting
 
     -- ** geo_location
     , GeoLocationSetting (..)
-    , newGeoLocationSetting
+    , geoLocationSetting
 
     -- ** hash
     , HashSetting (..)
-    , newHashSetting
+    , hashSetting
 
     -- ** http_listener
     , HttpListenerSetting (..)
-    , newHttpListenerSetting
+    , httpListenerSetting
 
     -- ** identity
     , IdentitySetting (..)
-    , newIdentitySetting
+    , identitySetting
 
     -- ** image_registry_credential
     , ImageRegistryCredentialSetting (..)
-    , newImageRegistryCredentialSetting
+    , imageRegistryCredentialSetting
 
     -- ** import
     , ImportSetting (..)
-    , newImportSetting
+    , importSetting
 
     -- ** ip_configuration
     , IpConfigurationSetting (..)
-    , newIpConfigurationSetting
+    , ipConfigurationSetting
 
     -- ** ip_restriction
     , IpRestrictionSetting (..)
-    , newIpRestrictionSetting
+    , ipRestrictionSetting
 
     -- ** ipsec_policy
     , IpsecPolicySetting (..)
-    , newIpsecPolicySetting
+    , ipsecPolicySetting
 
     -- ** issuer_parameters
     , IssuerParametersSetting (..)
-    , newIssuerParametersSetting
+    , issuerParametersSetting
 
     -- ** key_encryption_key
     , KeyEncryptionKeySetting (..)
-    , newKeyEncryptionKeySetting
+    , keyEncryptionKeySetting
 
     -- ** key_properties
     , KeyPropertiesSetting (..)
-    , newKeyPropertiesSetting
+    , keyPropertiesSetting
 
     -- ** kube_config
     , KubeConfigSetting (..)
-    , newKubeConfigSetting
+    , kubeConfigSetting
 
     -- ** lifetime_action
     , LifetimeActionSetting (..)
-    , newLifetimeActionSetting
+    , lifetimeActionSetting
 
     -- ** linux_profile
     , LinuxProfileSetting (..)
-    , newLinuxProfileSetting
+    , linuxProfileSetting
 
     -- ** master_profile
     , MasterProfileSetting (..)
-    , newMasterProfileSetting
+    , masterProfileSetting
 
     -- ** match
     , MatchSetting (..)
-    , newMatchSetting
+    , matchSetting
 
     -- ** metric_trigger
     , MetricTriggerSetting (..)
-    , newMetricTriggerSetting
+    , metricTriggerSetting
 
     -- ** microsoft_peering_config
     , MicrosoftPeeringConfigSetting (..)
-    , newMicrosoftPeeringConfigSetting
+    , microsoftPeeringConfigSetting
 
     -- ** monitor_config
     , MonitorConfigSetting (..)
-    , newMonitorConfigSetting
+    , monitorConfigSetting
 
     -- ** monthly_occurrences
     , MonthlyOccurrencesSetting (..)
-    , newMonthlyOccurrencesSetting
+    , monthlyOccurrencesSetting
 
     -- ** network_profile
     , NetworkProfileSetting (..)
-    , newNetworkProfileSetting
+    , networkProfileSetting
 
     -- ** network_rules
     , NetworkRulesSetting (..)
-    , newNetworkRulesSetting
+    , networkRulesSetting
 
     -- ** node_type
     , NodeTypeSetting (..)
-    , newNodeTypeSetting
+    , nodeTypeSetting
 
     -- ** notification
     , NotificationSetting (..)
-    , newNotificationSetting
+    , notificationSetting
 
     -- ** origin
     , OriginSetting (..)
-    , newOriginSetting
+    , originSetting
 
     -- ** os_disk
     , OsDiskSetting (..)
-    , newOsDiskSetting
+    , osDiskSetting
 
     -- ** os_profile
     , OsProfileSetting (..)
-    , newOsProfileSetting
+    , osProfileSetting
 
     -- ** os_profile_linux_config
     , OsProfileLinuxConfigSetting (..)
-    , newOsProfileLinuxConfigSetting
+    , osProfileLinuxConfigSetting
 
     -- ** os_profile_secrets
     , OsProfileSecretsSetting (..)
-    , newOsProfileSecretsSetting
+    , osProfileSecretsSetting
 
     -- ** os_profile_windows_config
     , OsProfileWindowsConfigSetting (..)
-    , newOsProfileWindowsConfigSetting
+    , osProfileWindowsConfigSetting
 
     -- ** patch_schedule
     , PatchScheduleSetting (..)
-    , newPatchScheduleSetting
+    , patchScheduleSetting
 
     -- ** path_rule
     , PathRuleSetting (..)
-    , newPathRuleSetting
+    , pathRuleSetting
 
     -- ** permissions
     , PermissionsSetting (..)
-    , newPermissionsSetting
+    , permissionsSetting
 
     -- ** plan
     , PlanSetting (..)
-    , newPlanSetting
+    , planSetting
 
     -- ** probe
     , ProbeSetting (..)
-    , newProbeSetting
+    , probeSetting
 
     -- ** profile
     , ProfileSetting (..)
-    , newProfileSetting
+    , profileSetting
 
     -- ** properties
     , PropertiesSetting (..)
-    , newPropertiesSetting
+    , propertiesSetting
 
     -- ** public_ip_address_configuration
     , PublicIpAddressConfigurationSetting (..)
-    , newPublicIpAddressConfigurationSetting
+    , publicIpAddressConfigurationSetting
 
     -- ** public_ips
     , PublicIpsSetting (..)
-    , newPublicIpsSetting
+    , publicIpsSetting
 
     -- ** publish_content_link
     , PublishContentLinkSetting (..)
-    , newPublishContentLinkSetting
+    , publishContentLinkSetting
 
     -- ** quota
     , QuotaSetting (..)
-    , newQuotaSetting
+    , quotaSetting
 
     -- ** record
     , RecordSetting (..)
-    , newRecordSetting
+    , recordSetting
 
     -- ** recurrence
     , RecurrenceSetting (..)
-    , newRecurrenceSetting
+    , recurrenceSetting
 
     -- ** redis_configuration
     , RedisConfigurationSetting (..)
-    , newRedisConfigurationSetting
+    , redisConfigurationSetting
 
     -- ** request_routing_rule
     , RequestRoutingRuleSetting (..)
-    , newRequestRoutingRuleSetting
+    , requestRoutingRuleSetting
 
     -- ** resource_types
     , ResourceTypesSetting (..)
-    , newResourceTypesSetting
+    , resourceTypesSetting
 
     -- ** retry
     , RetrySetting (..)
-    , newRetrySetting
+    , retrySetting
 
     -- ** revoked_certificate
     , RevokedCertificateSetting (..)
-    , newRevokedCertificateSetting
+    , revokedCertificateSetting
 
     -- ** root_certificate
     , RootCertificateSetting (..)
-    , newRootCertificateSetting
+    , rootCertificateSetting
 
     -- ** route
     , RouteSetting (..)
-    , newRouteSetting
+    , routeSetting
 
     -- ** rule
     , RuleSetting (..)
-    , newRuleSetting
+    , ruleSetting
 
     -- ** scale_action
     , ScaleActionSetting (..)
-    , newScaleActionSetting
+    , scaleActionSetting
 
     -- ** secret_properties
     , SecretPropertiesSetting (..)
-    , newSecretPropertiesSetting
+    , secretPropertiesSetting
 
     -- ** security_rule
     , SecurityRuleSetting (..)
-    , newSecurityRuleSetting
+    , securityRuleSetting
 
     -- ** service_principal
     , ServicePrincipalSetting (..)
-    , newServicePrincipalSetting
+    , servicePrincipalSetting
 
     -- ** services
     , ServicesSetting (..)
-    , newServicesSetting
+    , servicesSetting
 
     -- ** shared_access_policy
     , SharedAccessPolicySetting (..)
-    , newSharedAccessPolicySetting
+    , sharedAccessPolicySetting
 
     -- ** site_config
     , SiteConfigSetting (..)
-    , newSiteConfigSetting
+    , siteConfigSetting
 
     -- ** site_credential
     , SiteCredentialSetting (..)
-    , newSiteCredentialSetting
+    , siteCredentialSetting
 
     -- ** sku
     , SkuSetting (..)
-    , newSkuSetting
+    , skuSetting
 
     -- ** sms_receiver
     , SmsReceiverSetting (..)
-    , newSmsReceiverSetting
+    , smsReceiverSetting
 
     -- ** source_control
     , SourceControlSetting (..)
-    , newSourceControlSetting
+    , sourceControlSetting
 
     -- ** ssh_key
     , SshKeySetting (..)
-    , newSshKeySetting
+    , sshKeySetting
 
     -- ** ssh_keys
     , SshKeysSetting (..)
-    , newSshKeysSetting
+    , sshKeysSetting
 
     -- ** ssl_certificate
     , SslCertificateSetting (..)
-    , newSslCertificateSetting
+    , sslCertificateSetting
 
     -- ** storage_data_disk
     , StorageDataDiskSetting (..)
-    , newStorageDataDiskSetting
+    , storageDataDiskSetting
 
     -- ** storage_image_reference
     , StorageImageReferenceSetting (..)
-    , newStorageImageReferenceSetting
+    , storageImageReferenceSetting
 
     -- ** storage_location
     , StorageLocationSetting (..)
-    , newStorageLocationSetting
+    , storageLocationSetting
 
     -- ** storage_os_disk
     , StorageOsDiskSetting (..)
-    , newStorageOsDiskSetting
+    , storageOsDiskSetting
 
     -- ** storage_profile
     , StorageProfileSetting (..)
-    , newStorageProfileSetting
+    , storageProfileSetting
 
     -- ** storage_profile_data_disk
     , StorageProfileDataDiskSetting (..)
-    , newStorageProfileDataDiskSetting
+    , storageProfileDataDiskSetting
 
     -- ** storage_profile_image_reference
     , StorageProfileImageReferenceSetting (..)
-    , newStorageProfileImageReferenceSetting
+    , storageProfileImageReferenceSetting
 
     -- ** storage_profile_os_disk
     , StorageProfileOsDiskSetting (..)
-    , newStorageProfileOsDiskSetting
+    , storageProfileOsDiskSetting
 
     -- ** subnet
     , SubnetSetting (..)
-    , newSubnetSetting
+    , subnetSetting
 
     -- ** subscriptions
     , SubscriptionsSetting (..)
-    , newSubscriptionsSetting
+    , subscriptionsSetting
 
     -- ** trigger
     , TriggerSetting (..)
-    , newTriggerSetting
+    , triggerSetting
 
     -- ** url_path_map
     , UrlPathMapSetting (..)
-    , newUrlPathMapSetting
+    , urlPathMapSetting
 
     -- ** vault_certificates
     , VaultCertificatesSetting (..)
-    , newVaultCertificatesSetting
+    , vaultCertificatesSetting
 
     -- ** volume
     , VolumeSetting (..)
-    , newVolumeSetting
+    , volumeSetting
 
     -- ** vpn_client_configuration
     , VpnClientConfigurationSetting (..)
-    , newVpnClientConfigurationSetting
+    , vpnClientConfigurationSetting
 
     -- ** waf_configuration
     , WafConfigurationSetting (..)
-    , newWafConfigurationSetting
+    , wafConfigurationSetting
 
     -- ** webhook
     , WebhookSetting (..)
-    , newWebhookSetting
+    , webhookSetting
 
     -- ** webhook_action
     , WebhookActionSetting (..)
-    , newWebhookActionSetting
+    , webhookActionSetting
 
     -- ** webhook_receiver
     , WebhookReceiverSetting (..)
-    , newWebhookReceiverSetting
+    , webhookReceiverSetting
 
     -- ** winrm
     , WinrmSetting (..)
-    , newWinrmSetting
+    , winrmSetting
 
     -- ** x509_certificate_properties
     , X509CertificatePropertiesSetting (..)
-    , newX509CertificatePropertiesSetting
+    , x509CertificatePropertiesSetting
 
     ) where
 
@@ -607,13 +607,13 @@ data AccessPolicySetting s = AccessPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @access_policy@ settings value.
-newAccessPolicySetting
+accessPolicySetting
     :: TF.Attr s P.Text -- ^ 'P._objectId': @object_id@
     -> TF.Attr s P.Text -- ^ 'P._tenantId': @tenant_id@
     -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._keyPermissions': @key_permissions@
     -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._secretPermissions': @secret_permissions@
     -> AccessPolicySetting s
-newAccessPolicySetting _objectId _tenantId _keyPermissions _secretPermissions =
+accessPolicySetting _objectId _tenantId _keyPermissions _secretPermissions =
     AccessPolicySetting'
         { _applicationId = TF.Nil
         , _certificatePermissions = TF.Nil
@@ -693,10 +693,10 @@ data ActionSetting s = ActionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @action@ settings value.
-newActionSetting
+actionSetting
     :: TF.Attr s P.Text -- ^ 'P._actionType': @action_type@
     -> ActionSetting s
-newActionSetting _actionType =
+actionSetting _actionType =
     ActionSetting'
         { _actionType = _actionType
         }
@@ -732,13 +732,13 @@ data ActionStorageQueueSetting s = ActionStorageQueueSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @action_storage_queue@ settings value.
-newActionStorageQueueSetting
+actionStorageQueueSetting
     :: TF.Attr s P.Text -- ^ 'P._message': @message@
     -> TF.Attr s P.Text -- ^ 'P._storageAccountName': @storage_account_name@
     -> TF.Attr s P.Text -- ^ 'P._storageQueueName': @storage_queue_name@
     -> TF.Attr s P.Text -- ^ 'P._sasToken': @sas_token@
     -> ActionStorageQueueSetting s
-newActionStorageQueueSetting _message _storageAccountName _storageQueueName _sasToken =
+actionStorageQueueSetting _message _storageAccountName _storageQueueName _sasToken =
     ActionStorageQueueSetting'
         { _message = _message
         , _sasToken = _sasToken
@@ -816,11 +816,11 @@ data ActionWebSetting s = ActionWebSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @action_web@ settings value.
-newActionWebSetting
+actionWebSetting
     :: TF.Attr s P.Text -- ^ 'P._method': @method@
     -> TF.Attr s P.Text -- ^ 'P._url': @url@
     -> ActionWebSetting s
-newActionWebSetting _method _url =
+actionWebSetting _method _url =
     ActionWebSetting'
         { _authenticationActiveDirectory = TF.Nil
         , _authenticationBasic = TF.Nil
@@ -926,13 +926,13 @@ data AdditionalUnattendConfigSetting s = AdditionalUnattendConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @additional_unattend_config@ settings value.
-newAdditionalUnattendConfigSetting
+additionalUnattendConfigSetting
     :: TF.Attr s P.Text -- ^ 'P._component': @component@
     -> TF.Attr s P.Text -- ^ 'P._content': @content@
     -> TF.Attr s P.Text -- ^ 'P._settingName': @setting_name@
     -> TF.Attr s P.Text -- ^ 'P._pass': @pass@
     -> AdditionalUnattendConfigSetting s
-newAdditionalUnattendConfigSetting _component _content _settingName _pass =
+additionalUnattendConfigSetting _component _content _settingName _pass =
     AdditionalUnattendConfigSetting'
         { _component = _component
         , _content = _content
@@ -998,12 +998,12 @@ data AgentPoolProfileSetting s = AgentPoolProfileSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @agent_pool_profile@ settings value.
-newAgentPoolProfileSetting
+agentPoolProfileSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._dnsPrefix': @dns_prefix@
     -> TF.Attr s P.Text -- ^ 'P._vmSize': @vm_size@
     -> AgentPoolProfileSetting s
-newAgentPoolProfileSetting _name _dnsPrefix _vmSize =
+agentPoolProfileSetting _name _dnsPrefix _vmSize =
     AgentPoolProfileSetting'
         { _count = TF.value 1
         , _dnsPrefix = _dnsPrefix
@@ -1108,14 +1108,14 @@ data ApnsCredentialSetting s = ApnsCredentialSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @apns_credential@ settings value.
-newApnsCredentialSetting
+apnsCredentialSetting
     :: TF.Attr s P.Text -- ^ 'P._bundleId': @bundle_id@
     -> TF.Attr s P.Text -- ^ 'P._keyId': @key_id@
     -> TF.Attr s P.Text -- ^ 'P._teamId': @team_id@
     -> TF.Attr s P.Text -- ^ 'P._applicationMode': @application_mode@
     -> TF.Attr s P.Text -- ^ 'P._token': @token@
     -> ApnsCredentialSetting s
-newApnsCredentialSetting _bundleId _keyId _teamId _applicationMode _token =
+apnsCredentialSetting _bundleId _keyId _teamId _applicationMode _token =
     ApnsCredentialSetting'
         { _applicationMode = _applicationMode
         , _bundleId = _bundleId
@@ -1188,11 +1188,11 @@ data ApplicationPortsSetting s = ApplicationPortsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @application_ports@ settings value.
-newApplicationPortsSetting
+applicationPortsSetting
     :: TF.Attr s P.Int -- ^ 'P._endPort': @end_port@
     -> TF.Attr s P.Int -- ^ 'P._startPort': @start_port@
     -> ApplicationPortsSetting s
-newApplicationPortsSetting _endPort _startPort =
+applicationPortsSetting _endPort _startPort =
     ApplicationPortsSetting'
         { _endPort = _endPort
         , _startPort = _startPort
@@ -1232,12 +1232,12 @@ data AuthenticationActiveDirectorySetting s = AuthenticationActiveDirectorySetti
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @authentication_active_directory@ settings value.
-newAuthenticationActiveDirectorySetting
+authenticationActiveDirectorySetting
     :: TF.Attr s P.Text -- ^ 'P._clientId': @client_id@
     -> TF.Attr s P.Text -- ^ 'P._tenantId': @tenant_id@
     -> TF.Attr s P.Text -- ^ 'P._secret': @secret@
     -> AuthenticationActiveDirectorySetting s
-newAuthenticationActiveDirectorySetting _clientId _tenantId _secret =
+authenticationActiveDirectorySetting _clientId _tenantId _secret =
     AuthenticationActiveDirectorySetting'
         { _clientId = _clientId
         , _secret = _secret
@@ -1284,11 +1284,11 @@ data AuthenticationBasicSetting s = AuthenticationBasicSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @authentication_basic@ settings value.
-newAuthenticationBasicSetting
+authenticationBasicSetting
     :: TF.Attr s P.Text -- ^ 'P._password': @password@
     -> TF.Attr s P.Text -- ^ 'P._username': @username@
     -> AuthenticationBasicSetting s
-newAuthenticationBasicSetting _password _username =
+authenticationBasicSetting _password _username =
     AuthenticationBasicSetting'
         { _password = _password
         , _username = _username
@@ -1331,13 +1331,13 @@ data AuthenticationCertificateSetting s = AuthenticationCertificateSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @authentication_certificate@ settings value.
-newAuthenticationCertificateSetting
+authenticationCertificateSetting
     :: TF.Attr s P.Text -- ^ 'P._data'': @data@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._password': @password@
     -> TF.Attr s P.Text -- ^ 'P._pfx': @pfx@
     -> AuthenticationCertificateSetting s
-newAuthenticationCertificateSetting _data' _name _password _pfx =
+authenticationCertificateSetting _data' _name _password _pfx =
     AuthenticationCertificateSetting'
         { _data' = _data'
         , _name = _name
@@ -1403,10 +1403,10 @@ data BackendAddressPoolSetting s = BackendAddressPoolSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @backend_address_pool@ settings value.
-newBackendAddressPoolSetting
+backendAddressPoolSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> BackendAddressPoolSetting s
-newBackendAddressPoolSetting _name =
+backendAddressPoolSetting _name =
     BackendAddressPoolSetting'
         { _fqdnList = TF.Nil
         , _ipAddressList = TF.Nil
@@ -1468,13 +1468,13 @@ data BackendHttpSettingsSetting s = BackendHttpSettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @backend_http_settings@ settings value.
-newBackendHttpSettingsSetting
+backendHttpSettingsSetting
     :: TF.Attr s P.Text -- ^ 'P._cookieBasedAffinity': @cookie_based_affinity@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Int -- ^ 'P._port': @port@
     -> TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
     -> BackendHttpSettingsSetting s
-newBackendHttpSettingsSetting _cookieBasedAffinity _name _port _protocol =
+backendHttpSettingsSetting _cookieBasedAffinity _name _port _protocol =
     BackendHttpSettingsSetting'
         { _authenticationCertificate = TF.Nil
         , _cookieBasedAffinity = _cookieBasedAffinity
@@ -1555,11 +1555,11 @@ data BgpSettingsSetting s = BgpSettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @bgp_settings@ settings value.
-newBgpSettingsSetting
+bgpSettingsSetting
     :: TF.Attr s P.Text -- ^ 'P._bgpPeeringAddress': @bgp_peering_address@
     -> TF.Attr s P.Int -- ^ 'P._asn': @asn@
     -> BgpSettingsSetting s
-newBgpSettingsSetting _bgpPeeringAddress _asn =
+bgpSettingsSetting _bgpPeeringAddress _asn =
     BgpSettingsSetting'
         { _asn = _asn
         , _bgpPeeringAddress = _bgpPeeringAddress
@@ -1612,11 +1612,11 @@ data BootDiagnosticsSetting s = BootDiagnosticsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @boot_diagnostics@ settings value.
-newBootDiagnosticsSetting
+bootDiagnosticsSetting
     :: TF.Attr s P.Bool -- ^ 'P._enabled': @enabled@
     -> TF.Attr s P.Text -- ^ 'P._storageUri': @storage_uri@
     -> BootDiagnosticsSetting s
-newBootDiagnosticsSetting _enabled _storageUri =
+bootDiagnosticsSetting _enabled _storageUri =
     BootDiagnosticsSetting'
         { _enabled = _enabled
         , _storageUri = _storageUri
@@ -1650,10 +1650,10 @@ data CapabilitiesSetting s = CapabilitiesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @capabilities@ settings value.
-newCapabilitiesSetting
+capabilitiesSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> CapabilitiesSetting s
-newCapabilitiesSetting _name =
+capabilitiesSetting _name =
     CapabilitiesSetting'
         { _name = _name
         }
@@ -1689,12 +1689,12 @@ data CapacitySetting s = CapacitySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @capacity@ settings value.
-newCapacitySetting
+capacitySetting
     :: TF.Attr s P.Int -- ^ 'P._default'': @default@
     -> TF.Attr s P.Int -- ^ 'P._maximum': @maximum@
     -> TF.Attr s P.Int -- ^ 'P._minimum': @minimum@
     -> CapacitySetting s
-newCapacitySetting _default' _maximum _minimum =
+capacitySetting _default' _maximum _minimum =
     CapacitySetting'
         { _default' = _default'
         , _maximum = _maximum
@@ -1747,12 +1747,12 @@ data CaptureDescriptionSetting s = CaptureDescriptionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @capture_description@ settings value.
-newCaptureDescriptionSetting
+captureDescriptionSetting
     :: TF.Attr s (DestinationSetting s) -- ^ 'P._destination': @destination@
     -> TF.Attr s P.Bool -- ^ 'P._enabled': @enabled@
     -> TF.Attr s P.Text -- ^ 'P._encoding': @encoding@
     -> CaptureDescriptionSetting s
-newCaptureDescriptionSetting _destination _enabled _encoding =
+captureDescriptionSetting _destination _enabled _encoding =
     CaptureDescriptionSetting'
         { _destination = _destination
         , _enabled = _enabled
@@ -1823,12 +1823,12 @@ data CertificateSetting s = CertificateSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @certificate@ settings value.
-newCertificateSetting
+certificateSetting
     :: TF.Attr s P.Text -- ^ 'P._contents': @contents@
     -> TF.Attr s P.Text -- ^ 'P._x509StoreName': @x509_store_name@
     -> TF.Attr s P.Text -- ^ 'P._thumbprint': @thumbprint@
     -> CertificateSetting s
-newCertificateSetting _contents _x509StoreName _thumbprint =
+certificateSetting _contents _x509StoreName _thumbprint =
     CertificateSetting'
         { _contents = _contents
         , _password = TF.Nil
@@ -1892,12 +1892,12 @@ data CertificatePolicySetting s = CertificatePolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @certificate_policy@ settings value.
-newCertificatePolicySetting
+certificatePolicySetting
     :: TF.Attr s (IssuerParametersSetting s) -- ^ 'P._issuerParameters': @issuer_parameters@
     -> TF.Attr s (KeyPropertiesSetting s) -- ^ 'P._keyProperties': @key_properties@
     -> TF.Attr s (SecretPropertiesSetting s) -- ^ 'P._secretProperties': @secret_properties@
     -> CertificatePolicySetting s
-newCertificatePolicySetting _issuerParameters _keyProperties _secretProperties =
+certificatePolicySetting _issuerParameters _keyProperties _secretProperties =
     CertificatePolicySetting'
         { _issuerParameters = _issuerParameters
         , _keyProperties = _keyProperties
@@ -1963,11 +1963,11 @@ data ClientCertificateThumbprintSetting s = ClientCertificateThumbprintSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @client_certificate_thumbprint@ settings value.
-newClientCertificateThumbprintSetting
+clientCertificateThumbprintSetting
     :: TF.Attr s P.Bool -- ^ 'P._isAdmin': @is_admin@
     -> TF.Attr s P.Text -- ^ 'P._thumbprint': @thumbprint@
     -> ClientCertificateThumbprintSetting s
-newClientCertificateThumbprintSetting _isAdmin _thumbprint =
+clientCertificateThumbprintSetting _isAdmin _thumbprint =
     ClientCertificateThumbprintSetting'
         { _isAdmin = _isAdmin
         , _thumbprint = _thumbprint
@@ -2007,12 +2007,12 @@ data ConnectionStringSetting s = ConnectionStringSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @connection_string@ settings value.
-newConnectionStringSetting
+connectionStringSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> ConnectionStringSetting s
-newConnectionStringSetting _name _type' _value =
+connectionStringSetting _name _type' _value =
     ConnectionStringSetting'
         { _name = _name
         , _type' = _type'
@@ -2068,10 +2068,10 @@ data ConsistencyPolicySetting s = ConsistencyPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @consistency_policy@ settings value.
-newConsistencyPolicySetting
+consistencyPolicySetting
     :: TF.Attr s P.Text -- ^ 'P._consistencyLevel': @consistency_level@
     -> ConsistencyPolicySetting s
-newConsistencyPolicySetting _consistencyLevel =
+consistencyPolicySetting _consistencyLevel =
     ConsistencyPolicySetting'
         { _consistencyLevel = _consistencyLevel
         , _maxIntervalInSeconds = TF.value 5
@@ -2142,13 +2142,13 @@ data ContainerSetting s = ContainerSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @container@ settings value.
-newContainerSetting
+containerSetting
     :: TF.Attr s P.Double -- ^ 'P._cpu': @cpu@
     -> TF.Attr s P.Text -- ^ 'P._image': @image@
     -> TF.Attr s P.Double -- ^ 'P._memory': @memory@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> ContainerSetting s
-newContainerSetting _cpu _image _memory _name =
+containerSetting _cpu _image _memory _name =
     ContainerSetting'
         { _cpu = _cpu
         , _environmentVariables = TF.Nil
@@ -2248,9 +2248,9 @@ data CorrelationFilterSetting s = CorrelationFilterSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @correlation_filter@ settings value.
-newCorrelationFilterSetting
+correlationFilterSetting
     :: CorrelationFilterSetting s
-newCorrelationFilterSetting =
+correlationFilterSetting =
     CorrelationFilterSetting'
         { _contentType = TF.Nil
         , _correlationId = TF.Nil
@@ -2329,10 +2329,10 @@ data CustomDomainSetting s = CustomDomainSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @custom_domain@ settings value.
-newCustomDomainSetting
+customDomainSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> CustomDomainSetting s
-newCustomDomainSetting _name =
+customDomainSetting _name =
     CustomDomainSetting'
         { _name = _name
         , _useSubdomain = TF.value P.False
@@ -2375,9 +2375,9 @@ data DataDiskSetting s = DataDiskSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @data_disk@ settings value.
-newDataDiskSetting
+dataDiskSetting
     :: DataDiskSetting s
-newDataDiskSetting =
+dataDiskSetting =
     DataDiskSetting'
         { _caching = TF.value "None"
         , _lun = TF.Nil
@@ -2442,13 +2442,13 @@ data DestinationSetting s = DestinationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @destination@ settings value.
-newDestinationSetting
+destinationSetting
     :: TF.Attr s P.Text -- ^ 'P._archiveNameFormat': @archive_name_format@
     -> TF.Attr s P.Text -- ^ 'P._storageAccountId': @storage_account_id@
     -> TF.Attr s P.Text -- ^ 'P._blobContainerName': @blob_container_name@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> DestinationSetting s
-newDestinationSetting _archiveNameFormat _storageAccountId _blobContainerName _name =
+destinationSetting _archiveNameFormat _storageAccountId _blobContainerName _name =
     DestinationSetting'
         { _archiveNameFormat = _archiveNameFormat
         , _blobContainerName = _blobContainerName
@@ -2508,14 +2508,14 @@ data DiagnosticsConfigSetting s = DiagnosticsConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @diagnostics_config@ settings value.
-newDiagnosticsConfigSetting
+diagnosticsConfigSetting
     :: TF.Attr s P.Text -- ^ 'P._blobEndpoint': @blob_endpoint@
     -> TF.Attr s P.Text -- ^ 'P._queueEndpoint': @queue_endpoint@
     -> TF.Attr s P.Text -- ^ 'P._tableEndpoint': @table_endpoint@
     -> TF.Attr s P.Text -- ^ 'P._protectedAccountKeyName': @protected_account_key_name@
     -> TF.Attr s P.Text -- ^ 'P._storageAccountName': @storage_account_name@
     -> DiagnosticsConfigSetting s
-newDiagnosticsConfigSetting _blobEndpoint _queueEndpoint _tableEndpoint _protectedAccountKeyName _storageAccountName =
+diagnosticsConfigSetting _blobEndpoint _queueEndpoint _tableEndpoint _protectedAccountKeyName _storageAccountName =
     DiagnosticsConfigSetting'
         { _blobEndpoint = _blobEndpoint
         , _protectedAccountKeyName = _protectedAccountKeyName
@@ -2570,10 +2570,10 @@ data DiagnosticsProfileSetting s = DiagnosticsProfileSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @diagnostics_profile@ settings value.
-newDiagnosticsProfileSetting
+diagnosticsProfileSetting
     :: TF.Attr s P.Bool -- ^ 'P._enabled': @enabled@
     -> DiagnosticsProfileSetting s
-newDiagnosticsProfileSetting _enabled =
+diagnosticsProfileSetting _enabled =
     DiagnosticsProfileSetting'
         { _enabled = _enabled
         }
@@ -2606,11 +2606,11 @@ data DiskEncryptionKeySetting s = DiskEncryptionKeySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @disk_encryption_key@ settings value.
-newDiskEncryptionKeySetting
+diskEncryptionKeySetting
     :: TF.Attr s P.Text -- ^ 'P._sourceVaultId': @source_vault_id@
     -> TF.Attr s P.Text -- ^ 'P._secretUrl': @secret_url@
     -> DiskEncryptionKeySetting s
-newDiskEncryptionKeySetting _sourceVaultId _secretUrl =
+diskEncryptionKeySetting _sourceVaultId _secretUrl =
     DiskEncryptionKeySetting'
         { _secretUrl = _secretUrl
         , _sourceVaultId = _sourceVaultId
@@ -2653,11 +2653,11 @@ data DnsConfigSetting s = DnsConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @dns_config@ settings value.
-newDnsConfigSetting
+dnsConfigSetting
     :: TF.Attr s P.Text -- ^ 'P._relativeName': @relative_name@
     -> TF.Attr s P.Int -- ^ 'P._ttl': @ttl@
     -> DnsConfigSetting s
-newDnsConfigSetting _relativeName _ttl =
+dnsConfigSetting _relativeName _ttl =
     DnsConfigSetting'
         { _relativeName = _relativeName
         , _ttl = _ttl
@@ -2691,10 +2691,10 @@ data DnsSettingsSetting s = DnsSettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @dns_settings@ settings value.
-newDnsSettingsSetting
+dnsSettingsSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._dnsServers': @dns_servers@
     -> DnsSettingsSetting s
-newDnsSettingsSetting _dnsServers =
+dnsSettingsSetting _dnsServers =
     DnsSettingsSetting'
         { _dnsServers = _dnsServers
         }
@@ -2727,9 +2727,9 @@ data EmailSetting s = EmailSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @email@ settings value.
-newEmailSetting
+emailSetting
     :: EmailSetting s
-newEmailSetting =
+emailSetting =
     EmailSetting'
         { _customEmails = TF.Nil
         , _sendToSubscriptionAdministrator = TF.value P.False
@@ -2767,9 +2767,9 @@ data EmailActionSetting s = EmailActionSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @email_action@ settings value.
-newEmailActionSetting
+emailActionSetting
     :: EmailActionSetting s
-newEmailActionSetting =
+emailActionSetting =
     EmailActionSetting'
 
 instance TF.IsValue  (EmailActionSetting s)
@@ -2796,11 +2796,11 @@ data EmailReceiverSetting s = EmailReceiverSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @email_receiver@ settings value.
-newEmailReceiverSetting
+emailReceiverSetting
     :: TF.Attr s P.Text -- ^ 'P._emailAddress': @email_address@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> EmailReceiverSetting s
-newEmailReceiverSetting _emailAddress _name =
+emailReceiverSetting _emailAddress _name =
     EmailReceiverSetting'
         { _emailAddress = _emailAddress
         , _name = _name
@@ -2840,10 +2840,10 @@ data EncryptionSettingsSetting s = EncryptionSettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @encryption_settings@ settings value.
-newEncryptionSettingsSetting
+encryptionSettingsSetting
     :: TF.Attr s P.Bool -- ^ 'P._enabled': @enabled@
     -> EncryptionSettingsSetting s
-newEncryptionSettingsSetting _enabled =
+encryptionSettingsSetting _enabled =
     EncryptionSettingsSetting'
         { _diskEncryptionKey = TF.Nil
         , _enabled = _enabled
@@ -2904,11 +2904,11 @@ data EphemeralPortsSetting s = EphemeralPortsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ephemeral_ports@ settings value.
-newEphemeralPortsSetting
+ephemeralPortsSetting
     :: TF.Attr s P.Int -- ^ 'P._endPort': @end_port@
     -> TF.Attr s P.Int -- ^ 'P._startPort': @start_port@
     -> EphemeralPortsSetting s
-newEphemeralPortsSetting _endPort _startPort =
+ephemeralPortsSetting _endPort _startPort =
     EphemeralPortsSetting'
         { _endPort = _endPort
         , _startPort = _startPort
@@ -2951,13 +2951,13 @@ data ErrorActionStorageQueueSetting s = ErrorActionStorageQueueSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @error_action_storage_queue@ settings value.
-newErrorActionStorageQueueSetting
+errorActionStorageQueueSetting
     :: TF.Attr s P.Text -- ^ 'P._message': @message@
     -> TF.Attr s P.Text -- ^ 'P._storageAccountName': @storage_account_name@
     -> TF.Attr s P.Text -- ^ 'P._storageQueueName': @storage_queue_name@
     -> TF.Attr s P.Text -- ^ 'P._sasToken': @sas_token@
     -> ErrorActionStorageQueueSetting s
-newErrorActionStorageQueueSetting _message _storageAccountName _storageQueueName _sasToken =
+errorActionStorageQueueSetting _message _storageAccountName _storageQueueName _sasToken =
     ErrorActionStorageQueueSetting'
         { _message = _message
         , _sasToken = _sasToken
@@ -3035,11 +3035,11 @@ data ErrorActionWebSetting s = ErrorActionWebSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @error_action_web@ settings value.
-newErrorActionWebSetting
+errorActionWebSetting
     :: TF.Attr s P.Text -- ^ 'P._method': @method@
     -> TF.Attr s P.Text -- ^ 'P._url': @url@
     -> ErrorActionWebSetting s
-newErrorActionWebSetting _method _url =
+errorActionWebSetting _method _url =
     ErrorActionWebSetting'
         { _authenticationActiveDirectory = TF.Nil
         , _authenticationBasic = TF.Nil
@@ -3154,13 +3154,13 @@ data ExtensionSetting s = ExtensionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @extension@ settings value.
-newExtensionSetting
+extensionSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._publisher': @publisher@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> TF.Attr s P.Text -- ^ 'P._typeHandlerVersion': @type_handler_version@
     -> ExtensionSetting s
-newExtensionSetting _name _publisher _type' _typeHandlerVersion =
+extensionSetting _name _publisher _type' _typeHandlerVersion =
     ExtensionSetting'
         { _autoUpgradeMinorVersion = TF.Nil
         , _name = _name
@@ -3232,10 +3232,10 @@ data FabricSettingsSetting s = FabricSettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @fabric_settings@ settings value.
-newFabricSettingsSetting
+fabricSettingsSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> FabricSettingsSetting s
-newFabricSettingsSetting _name =
+fabricSettingsSetting _name =
     FabricSettingsSetting'
         { _name = _name
         , _parameters = TF.Nil
@@ -3281,10 +3281,10 @@ data FilterSetting s = FilterSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @filter@ settings value.
-newFilterSetting
+filterSetting
     :: TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
     -> FilterSetting s
-newFilterSetting _protocol =
+filterSetting _protocol =
     FilterSetting'
         { _localIpAddress = TF.Nil
         , _localPort = TF.Nil
@@ -3345,11 +3345,11 @@ data FixedDateSetting s = FixedDateSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @fixed_date@ settings value.
-newFixedDateSetting
+fixedDateSetting
     :: TF.Attr s P.Text -- ^ 'P._end': @end@
     -> TF.Attr s P.Text -- ^ 'P._start': @start@
     -> FixedDateSetting s
-newFixedDateSetting _end _start =
+fixedDateSetting _end _start =
     FixedDateSetting'
         { _end = _end
         , _start = _start
@@ -3393,10 +3393,10 @@ data FrontendIpConfigurationSetting s = FrontendIpConfigurationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @frontend_ip_configuration@ settings value.
-newFrontendIpConfigurationSetting
+frontendIpConfigurationSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> FrontendIpConfigurationSetting s
-newFrontendIpConfigurationSetting _name =
+frontendIpConfigurationSetting _name =
     FrontendIpConfigurationSetting'
         { _name = _name
         , _zones = TF.Nil
@@ -3454,11 +3454,11 @@ data FrontendPortSetting s = FrontendPortSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @frontend_port@ settings value.
-newFrontendPortSetting
+frontendPortSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Int -- ^ 'P._port': @port@
     -> FrontendPortSetting s
-newFrontendPortSetting _name _port =
+frontendPortSetting _name _port =
     FrontendPortSetting'
         { _name = _name
         , _port = _port
@@ -3498,11 +3498,11 @@ data GatewayIpConfigurationSetting s = GatewayIpConfigurationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @gateway_ip_configuration@ settings value.
-newGatewayIpConfigurationSetting
+gatewayIpConfigurationSetting
     :: TF.Attr s P.Text -- ^ 'P._subnetId': @subnet_id@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> GatewayIpConfigurationSetting s
-newGatewayIpConfigurationSetting _subnetId _name =
+gatewayIpConfigurationSetting _subnetId _name =
     GatewayIpConfigurationSetting'
         { _name = _name
         , _subnetId = _subnetId
@@ -3539,10 +3539,10 @@ data GcmCredentialSetting s = GcmCredentialSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @gcm_credential@ settings value.
-newGcmCredentialSetting
+gcmCredentialSetting
     :: TF.Attr s P.Text -- ^ 'P._apiKey': @api_key@
     -> GcmCredentialSetting s
-newGcmCredentialSetting _apiKey =
+gcmCredentialSetting _apiKey =
     GcmCredentialSetting'
         { _apiKey = _apiKey
         }
@@ -3578,12 +3578,12 @@ data GeoFilterSetting s = GeoFilterSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @geo_filter@ settings value.
-newGeoFilterSetting
+geoFilterSetting
     :: TF.Attr s P.Text -- ^ 'P._action': @action@
     -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._countryCodes': @country_codes@
     -> TF.Attr s P.Text -- ^ 'P._relativePath': @relative_path@
     -> GeoFilterSetting s
-newGeoFilterSetting _action _countryCodes _relativePath =
+geoFilterSetting _action _countryCodes _relativePath =
     GeoFilterSetting'
         { _action = _action
         , _countryCodes = _countryCodes
@@ -3630,11 +3630,11 @@ data GeoLocationSetting s = GeoLocationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @geo_location@ settings value.
-newGeoLocationSetting
+geoLocationSetting
     :: TF.Attr s P.Text -- ^ 'P._location': @location@
     -> TF.Attr s P.Int -- ^ 'P._failoverPriority': @failover_priority@
     -> GeoLocationSetting s
-newGeoLocationSetting _location _failoverPriority =
+geoLocationSetting _location _failoverPriority =
     GeoLocationSetting'
         { _failoverPriority = _failoverPriority
         , _location = _location
@@ -3687,11 +3687,11 @@ data HashSetting s = HashSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @hash@ settings value.
-newHashSetting
+hashSetting
     :: TF.Attr s P.Text -- ^ 'P._algorithm': @algorithm@
     -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> HashSetting s
-newHashSetting _algorithm _value =
+hashSetting _algorithm _value =
     HashSetting'
         { _algorithm = _algorithm
         , _value = _value
@@ -3743,13 +3743,13 @@ data HttpListenerSetting s = HttpListenerSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @http_listener@ settings value.
-newHttpListenerSetting
+httpListenerSetting
     :: TF.Attr s P.Text -- ^ 'P._frontendIpConfigurationName': @frontend_ip_configuration_name@
     -> TF.Attr s P.Text -- ^ 'P._frontendPortName': @frontend_port_name@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
     -> HttpListenerSetting s
-newHttpListenerSetting _frontendIpConfigurationName _frontendPortName _name _protocol =
+httpListenerSetting _frontendIpConfigurationName _frontendPortName _name _protocol =
     HttpListenerSetting'
         { _frontendIpConfigurationName = _frontendIpConfigurationName
         , _frontendPortName = _frontendPortName
@@ -3833,10 +3833,10 @@ data IdentitySetting s = IdentitySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @identity@ settings value.
-newIdentitySetting
+identitySetting
     :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> IdentitySetting s
-newIdentitySetting _type' =
+identitySetting _type' =
     IdentitySetting'
         { _type' = _type'
         , _identityIds = TF.Nil
@@ -3882,12 +3882,12 @@ data ImageRegistryCredentialSetting s = ImageRegistryCredentialSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @image_registry_credential@ settings value.
-newImageRegistryCredentialSetting
+imageRegistryCredentialSetting
     :: TF.Attr s P.Text -- ^ 'P._password': @password@
     -> TF.Attr s P.Text -- ^ 'P._server': @server@
     -> TF.Attr s P.Text -- ^ 'P._username': @username@
     -> ImageRegistryCredentialSetting s
-newImageRegistryCredentialSetting _password _server _username =
+imageRegistryCredentialSetting _password _server _username =
     ImageRegistryCredentialSetting'
         { _password = _password
         , _server = _server
@@ -3946,7 +3946,7 @@ data ImportSetting s = ImportSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @import@ settings value.
-newImportSetting
+importSetting
     :: TF.Attr s P.Text -- ^ 'P._storageKey': @storage_key@
     -> TF.Attr s P.Text -- ^ 'P._administratorLogin': @administrator_login@
     -> TF.Attr s P.Text -- ^ 'P._administratorLoginPassword': @administrator_login_password@
@@ -3954,7 +3954,7 @@ newImportSetting
     -> TF.Attr s P.Text -- ^ 'P._storageKeyType': @storage_key_type@
     -> TF.Attr s P.Text -- ^ 'P._storageUri': @storage_uri@
     -> ImportSetting s
-newImportSetting _storageKey _administratorLogin _administratorLoginPassword _authenticationType _storageKeyType _storageUri =
+importSetting _storageKey _administratorLogin _administratorLoginPassword _authenticationType _storageKeyType _storageUri =
     ImportSetting'
         { _administratorLogin = _administratorLogin
         , _administratorLoginPassword = _administratorLoginPassword
@@ -4047,12 +4047,12 @@ data IpConfigurationSetting s = IpConfigurationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ip_configuration@ settings value.
-newIpConfigurationSetting
+ipConfigurationSetting
     :: TF.Attr s P.Text -- ^ 'P._privateIpAddressAllocation': @private_ip_address_allocation@
     -> TF.Attr s P.Text -- ^ 'P._subnetId': @subnet_id@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> IpConfigurationSetting s
-newIpConfigurationSetting _privateIpAddressAllocation _subnetId _name =
+ipConfigurationSetting _privateIpAddressAllocation _subnetId _name =
     IpConfigurationSetting'
         { _name = _name
         , _privateIpAddress = TF.Nil
@@ -4172,10 +4172,10 @@ data IpRestrictionSetting s = IpRestrictionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ip_restriction@ settings value.
-newIpRestrictionSetting
+ipRestrictionSetting
     :: TF.Attr s P.Text -- ^ 'P._ipAddress': @ip_address@
     -> IpRestrictionSetting s
-newIpRestrictionSetting _ipAddress =
+ipRestrictionSetting _ipAddress =
     IpRestrictionSetting'
         { _ipAddress = _ipAddress
         , _subnetMask = TF.value "255.255.255.255"
@@ -4224,7 +4224,7 @@ data IpsecPolicySetting s = IpsecPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ipsec_policy@ settings value.
-newIpsecPolicySetting
+ipsecPolicySetting
     :: TF.Attr s P.Text -- ^ 'P._ikeEncryption': @ike_encryption@
     -> TF.Attr s P.Text -- ^ 'P._ipsecEncryption': @ipsec_encryption@
     -> TF.Attr s P.Text -- ^ 'P._dhGroup': @dh_group@
@@ -4232,7 +4232,7 @@ newIpsecPolicySetting
     -> TF.Attr s P.Text -- ^ 'P._ikeIntegrity': @ike_integrity@
     -> TF.Attr s P.Text -- ^ 'P._ipsecIntegrity': @ipsec_integrity@
     -> IpsecPolicySetting s
-newIpsecPolicySetting _ikeEncryption _ipsecEncryption _dhGroup _pfsGroup _ikeIntegrity _ipsecIntegrity =
+ipsecPolicySetting _ikeEncryption _ipsecEncryption _dhGroup _pfsGroup _ikeIntegrity _ipsecIntegrity =
     IpsecPolicySetting'
         { _dhGroup = _dhGroup
         , _ikeEncryption = _ikeEncryption
@@ -4300,10 +4300,10 @@ data IssuerParametersSetting s = IssuerParametersSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @issuer_parameters@ settings value.
-newIssuerParametersSetting
+issuerParametersSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> IssuerParametersSetting s
-newIssuerParametersSetting _name =
+issuerParametersSetting _name =
     IssuerParametersSetting'
         { _name = _name
         }
@@ -4333,11 +4333,11 @@ data KeyEncryptionKeySetting s = KeyEncryptionKeySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @key_encryption_key@ settings value.
-newKeyEncryptionKeySetting
+keyEncryptionKeySetting
     :: TF.Attr s P.Text -- ^ 'P._sourceVaultId': @source_vault_id@
     -> TF.Attr s P.Text -- ^ 'P._keyUrl': @key_url@
     -> KeyEncryptionKeySetting s
-newKeyEncryptionKeySetting _sourceVaultId _keyUrl =
+keyEncryptionKeySetting _sourceVaultId _keyUrl =
     KeyEncryptionKeySetting'
         { _keyUrl = _keyUrl
         , _sourceVaultId = _sourceVaultId
@@ -4386,13 +4386,13 @@ data KeyPropertiesSetting s = KeyPropertiesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @key_properties@ settings value.
-newKeyPropertiesSetting
+keyPropertiesSetting
     :: TF.Attr s P.Bool -- ^ 'P._exportable': @exportable@
     -> TF.Attr s P.Bool -- ^ 'P._reuseKey': @reuse_key@
     -> TF.Attr s P.Int -- ^ 'P._keySize': @key_size@
     -> TF.Attr s P.Text -- ^ 'P._keyType': @key_type@
     -> KeyPropertiesSetting s
-newKeyPropertiesSetting _exportable _reuseKey _keySize _keyType =
+keyPropertiesSetting _exportable _reuseKey _keySize _keyType =
     KeyPropertiesSetting'
         { _exportable = _exportable
         , _keySize = _keySize
@@ -4437,9 +4437,9 @@ data KubeConfigSetting s = KubeConfigSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @kube_config@ settings value.
-newKubeConfigSetting
+kubeConfigSetting
     :: KubeConfigSetting s
-newKubeConfigSetting =
+kubeConfigSetting =
     KubeConfigSetting'
 
 instance TF.IsValue  (KubeConfigSetting s)
@@ -4478,11 +4478,11 @@ data LifetimeActionSetting s = LifetimeActionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @lifetime_action@ settings value.
-newLifetimeActionSetting
+lifetimeActionSetting
     :: TF.Attr s (ActionSetting s) -- ^ 'P._action': @action@
     -> TF.Attr s (TriggerSetting s) -- ^ 'P._trigger': @trigger@
     -> LifetimeActionSetting s
-newLifetimeActionSetting _action _trigger =
+lifetimeActionSetting _action _trigger =
     LifetimeActionSetting'
         { _action = _action
         , _trigger = _trigger
@@ -4527,11 +4527,11 @@ data LinuxProfileSetting s = LinuxProfileSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @linux_profile@ settings value.
-newLinuxProfileSetting
+linuxProfileSetting
     :: TF.Attr s (SshKeySetting s) -- ^ 'P._sshKey': @ssh_key@
     -> TF.Attr s P.Text -- ^ 'P._adminUsername': @admin_username@
     -> LinuxProfileSetting s
-newLinuxProfileSetting _sshKey _adminUsername =
+linuxProfileSetting _sshKey _adminUsername =
     LinuxProfileSetting'
         { _adminUsername = _adminUsername
         , _sshKey = _sshKey
@@ -4578,10 +4578,10 @@ data MasterProfileSetting s = MasterProfileSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @master_profile@ settings value.
-newMasterProfileSetting
+masterProfileSetting
     :: TF.Attr s P.Text -- ^ 'P._dnsPrefix': @dns_prefix@
     -> MasterProfileSetting s
-newMasterProfileSetting _dnsPrefix =
+masterProfileSetting _dnsPrefix =
     MasterProfileSetting'
         { _count = TF.value 1
         , _dnsPrefix = _dnsPrefix
@@ -4621,9 +4621,9 @@ data MatchSetting s = MatchSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @match@ settings value.
-newMatchSetting
+matchSetting
     :: MatchSetting s
-newMatchSetting =
+matchSetting =
     MatchSetting'
         { _body = TF.value "*"
         , _statusCode = TF.Nil
@@ -4678,7 +4678,7 @@ data MetricTriggerSetting s = MetricTriggerSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @metric_trigger@ settings value.
-newMetricTriggerSetting
+metricTriggerSetting
     :: TF.Attr s P.Text -- ^ 'P._timeAggregation': @time_aggregation@
     -> TF.Attr s P.Text -- ^ 'P._timeGrain': @time_grain@
     -> TF.Attr s P.Text -- ^ 'P._metricResourceId': @metric_resource_id@
@@ -4688,7 +4688,7 @@ newMetricTriggerSetting
     -> TF.Attr s P.Double -- ^ 'P._threshold': @threshold@
     -> TF.Attr s P.Text -- ^ 'P._timeWindow': @time_window@
     -> MetricTriggerSetting s
-newMetricTriggerSetting _timeAggregation _timeGrain _metricResourceId _metricName _operator _statistic _threshold _timeWindow =
+metricTriggerSetting _timeAggregation _timeGrain _metricResourceId _metricName _operator _statistic _threshold _timeWindow =
     MetricTriggerSetting'
         { _metricName = _metricName
         , _metricResourceId = _metricResourceId
@@ -4764,10 +4764,10 @@ data MicrosoftPeeringConfigSetting s = MicrosoftPeeringConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @microsoft_peering_config@ settings value.
-newMicrosoftPeeringConfigSetting
+microsoftPeeringConfigSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._advertisedPublicPrefixes': @advertised_public_prefixes@
     -> MicrosoftPeeringConfigSetting s
-newMicrosoftPeeringConfigSetting _advertisedPublicPrefixes =
+microsoftPeeringConfigSetting _advertisedPublicPrefixes =
     MicrosoftPeeringConfigSetting'
         { _advertisedPublicPrefixes = _advertisedPublicPrefixes
         }
@@ -4800,11 +4800,11 @@ data MonitorConfigSetting s = MonitorConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @monitor_config@ settings value.
-newMonitorConfigSetting
+monitorConfigSetting
     :: TF.Attr s P.Int -- ^ 'P._port': @port@
     -> TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
     -> MonitorConfigSetting s
-newMonitorConfigSetting _port _protocol =
+monitorConfigSetting _port _protocol =
     MonitorConfigSetting'
         { _path = TF.Nil
         , _port = _port
@@ -4848,11 +4848,11 @@ data MonthlyOccurrencesSetting s = MonthlyOccurrencesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @monthly_occurrences@ settings value.
-newMonthlyOccurrencesSetting
+monthlyOccurrencesSetting
     :: TF.Attr s P.Text -- ^ 'P._day': @day@
     -> TF.Attr s P.Int -- ^ 'P._occurrence': @occurrence@
     -> MonthlyOccurrencesSetting s
-newMonthlyOccurrencesSetting _day _occurrence =
+monthlyOccurrencesSetting _day _occurrence =
     MonthlyOccurrencesSetting'
         { _day = _day
         , _occurrence = _occurrence
@@ -4907,13 +4907,13 @@ data NetworkProfileSetting s = NetworkProfileSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @network_profile@ settings value.
-newNetworkProfileSetting
+networkProfileSetting
     :: TF.Attr s [TF.Attr s (IpConfigurationSetting s)] -- ^ 'P._ipConfiguration': @ip_configuration@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._networkPlugin': @network_plugin@
     -> TF.Attr s P.Bool -- ^ 'P._primary': @primary@
     -> NetworkProfileSetting s
-newNetworkProfileSetting _ipConfiguration _name _networkPlugin _primary =
+networkProfileSetting _ipConfiguration _name _networkPlugin _primary =
     NetworkProfileSetting'
         { _networkPlugin = _networkPlugin
         , _acceleratedNetworking = TF.Nil
@@ -5011,9 +5011,9 @@ data NetworkRulesSetting s = NetworkRulesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @network_rules@ settings value.
-newNetworkRulesSetting
+networkRulesSetting
     :: NetworkRulesSetting s
-newNetworkRulesSetting =
+networkRulesSetting =
     NetworkRulesSetting'
         { _ipRules = TF.Nil
         , _virtualNetworkSubnetIds = TF.Nil
@@ -5065,14 +5065,14 @@ data NodeTypeSetting s = NodeTypeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @node_type@ settings value.
-newNodeTypeSetting
+nodeTypeSetting
     :: TF.Attr s P.Int -- ^ 'P._instanceCount': @instance_count@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Int -- ^ 'P._clientEndpointPort': @client_endpoint_port@
     -> TF.Attr s P.Int -- ^ 'P._httpEndpointPort': @http_endpoint_port@
     -> TF.Attr s P.Bool -- ^ 'P._isPrimary': @is_primary@
     -> NodeTypeSetting s
-newNodeTypeSetting _instanceCount _name _clientEndpointPort _httpEndpointPort _isPrimary =
+nodeTypeSetting _instanceCount _name _clientEndpointPort _httpEndpointPort _isPrimary =
     NodeTypeSetting'
         { _clientEndpointPort = _clientEndpointPort
         , _durabilityLevel = TF.value "Bronze"
@@ -5143,9 +5143,9 @@ data NotificationSetting s = NotificationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @notification@ settings value.
-newNotificationSetting
+notificationSetting
     :: NotificationSetting s
-newNotificationSetting =
+notificationSetting =
     NotificationSetting'
         { _email = TF.Nil
         , _webhook = TF.Nil
@@ -5192,11 +5192,11 @@ data OriginSetting s = OriginSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @origin@ settings value.
-newOriginSetting
+originSetting
     :: TF.Attr s P.Text -- ^ 'P._hostName': @host_name@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> OriginSetting s
-newOriginSetting _hostName _name =
+originSetting _hostName _name =
     OriginSetting'
         { _hostName = _hostName
         , _httpPort = TF.value 80
@@ -5250,9 +5250,9 @@ data OsDiskSetting s = OsDiskSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @os_disk@ settings value.
-newOsDiskSetting
+osDiskSetting
     :: OsDiskSetting s
-newOsDiskSetting =
+osDiskSetting =
     OsDiskSetting'
         { _caching = TF.value "None"
         , _osState = TF.Nil
@@ -5323,12 +5323,12 @@ data OsProfileSetting s = OsProfileSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @os_profile@ settings value.
-newOsProfileSetting
+osProfileSetting
     :: TF.Attr s P.Text -- ^ 'P._computerName': @computer_name@
     -> TF.Attr s P.Text -- ^ 'P._computerNamePrefix': @computer_name_prefix@
     -> TF.Attr s P.Text -- ^ 'P._adminUsername': @admin_username@
     -> OsProfileSetting s
-newOsProfileSetting _computerName _computerNamePrefix _adminUsername =
+osProfileSetting _computerName _computerNamePrefix _adminUsername =
     OsProfileSetting'
         { _adminPassword = TF.Nil
         , _adminUsername = _adminUsername
@@ -5389,10 +5389,10 @@ data OsProfileLinuxConfigSetting s = OsProfileLinuxConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @os_profile_linux_config@ settings value.
-newOsProfileLinuxConfigSetting
+osProfileLinuxConfigSetting
     :: TF.Attr s P.Bool -- ^ 'P._disablePasswordAuthentication': @disable_password_authentication@
     -> OsProfileLinuxConfigSetting s
-newOsProfileLinuxConfigSetting _disablePasswordAuthentication =
+osProfileLinuxConfigSetting _disablePasswordAuthentication =
     OsProfileLinuxConfigSetting'
         { _disablePasswordAuthentication = _disablePasswordAuthentication
         , _sshKeys = TF.Nil
@@ -5429,10 +5429,10 @@ data OsProfileSecretsSetting s = OsProfileSecretsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @os_profile_secrets@ settings value.
-newOsProfileSecretsSetting
+osProfileSecretsSetting
     :: TF.Attr s P.Text -- ^ 'P._sourceVaultId': @source_vault_id@
     -> OsProfileSecretsSetting s
-newOsProfileSecretsSetting _sourceVaultId =
+osProfileSecretsSetting _sourceVaultId =
     OsProfileSecretsSetting'
         { _sourceVaultId = _sourceVaultId
         , _vaultCertificates = TF.Nil
@@ -5478,9 +5478,9 @@ data OsProfileWindowsConfigSetting s = OsProfileWindowsConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @os_profile_windows_config@ settings value.
-newOsProfileWindowsConfigSetting
+osProfileWindowsConfigSetting
     :: OsProfileWindowsConfigSetting s
-newOsProfileWindowsConfigSetting =
+osProfileWindowsConfigSetting =
     OsProfileWindowsConfigSetting'
         { _additionalUnattendConfig = TF.Nil
         , _enableAutomaticUpgrades = TF.value P.False
@@ -5538,10 +5538,10 @@ data PatchScheduleSetting s = PatchScheduleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @patch_schedule@ settings value.
-newPatchScheduleSetting
+patchScheduleSetting
     :: TF.Attr s P.Text -- ^ 'P._dayOfWeek': @day_of_week@
     -> PatchScheduleSetting s
-newPatchScheduleSetting _dayOfWeek =
+patchScheduleSetting _dayOfWeek =
     PatchScheduleSetting'
         { _dayOfWeek = _dayOfWeek
         , _startHourUtc = TF.Nil
@@ -5584,13 +5584,13 @@ data PathRuleSetting s = PathRuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @path_rule@ settings value.
-newPathRuleSetting
+pathRuleSetting
     :: TF.Attr s P.Text -- ^ 'P._backendAddressPoolName': @backend_address_pool_name@
     -> TF.Attr s P.Text -- ^ 'P._backendHttpSettingsName': @backend_http_settings_name@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._paths': @paths@
     -> PathRuleSetting s
-newPathRuleSetting _backendAddressPoolName _backendHttpSettingsName _name _paths =
+pathRuleSetting _backendAddressPoolName _backendHttpSettingsName _name _paths =
     PathRuleSetting'
         { _backendAddressPoolName = _backendAddressPoolName
         , _backendHttpSettingsName = _backendHttpSettingsName
@@ -5674,7 +5674,7 @@ data PermissionsSetting s = PermissionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @permissions@ settings value.
-newPermissionsSetting
+permissionsSetting
     :: TF.Attr s P.Bool -- ^ 'P._add': @add@
     -> TF.Attr s P.Bool -- ^ 'P._create': @create@
     -> TF.Attr s P.Bool -- ^ 'P._delete': @delete@
@@ -5684,7 +5684,7 @@ newPermissionsSetting
     -> TF.Attr s P.Bool -- ^ 'P._update': @update@
     -> TF.Attr s P.Bool -- ^ 'P._write': @write@
     -> PermissionsSetting s
-newPermissionsSetting _add _create _delete _list _process _read _update _write =
+permissionsSetting _add _create _delete _list _process _read _update _write =
     PermissionsSetting'
         { _actions = TF.Nil
         , _notActions = TF.Nil
@@ -5789,12 +5789,12 @@ data PlanSetting s = PlanSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @plan@ settings value.
-newPlanSetting
+planSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._product': @product@
     -> TF.Attr s P.Text -- ^ 'P._publisher': @publisher@
     -> PlanSetting s
-newPlanSetting _name _product _publisher =
+planSetting _name _product _publisher =
     PlanSetting'
         { _product = _product
         , _promotionCode = TF.Nil
@@ -5869,7 +5869,7 @@ data ProbeSetting s = ProbeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @probe@ settings value.
-newProbeSetting
+probeSetting
     :: TF.Attr s P.Text -- ^ 'P._host': @host@
     -> TF.Attr s P.Int -- ^ 'P._interval': @interval@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
@@ -5878,7 +5878,7 @@ newProbeSetting
     -> TF.Attr s P.Int -- ^ 'P._unhealthyThreshold': @unhealthy_threshold@
     -> TF.Attr s P.Int -- ^ 'P._timeout': @timeout@
     -> ProbeSetting s
-newProbeSetting _host _interval _name _path _protocol _unhealthyThreshold _timeout =
+probeSetting _host _interval _name _path _protocol _unhealthyThreshold _timeout =
     ProbeSetting'
         { _host = _host
         , _interval = _interval
@@ -5980,11 +5980,11 @@ data ProfileSetting s = ProfileSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @profile@ settings value.
-newProfileSetting
+profileSetting
     :: TF.Attr s (CapacitySetting s) -- ^ 'P._capacity': @capacity@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> ProfileSetting s
-newProfileSetting _capacity _name =
+profileSetting _capacity _name =
     ProfileSetting'
         { _capacity = _capacity
         , _fixedDate = TF.Nil
@@ -6057,9 +6057,9 @@ data PropertiesSetting s = PropertiesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @properties@ settings value.
-newPropertiesSetting
+propertiesSetting
     :: PropertiesSetting s
-newPropertiesSetting =
+propertiesSetting =
     PropertiesSetting'
         { _appServiceEnvironmentId = TF.Nil
         , _perSiteScaling = TF.value P.False
@@ -6115,12 +6115,12 @@ data PublicIpAddressConfigurationSetting s = PublicIpAddressConfigurationSetting
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @public_ip_address_configuration@ settings value.
-newPublicIpAddressConfigurationSetting
+publicIpAddressConfigurationSetting
     :: TF.Attr s P.Text -- ^ 'P._domainNameLabel': @domain_name_label@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Int -- ^ 'P._idleTimeout': @idle_timeout@
     -> PublicIpAddressConfigurationSetting s
-newPublicIpAddressConfigurationSetting _domainNameLabel _name _idleTimeout =
+publicIpAddressConfigurationSetting _domainNameLabel _name _idleTimeout =
     PublicIpAddressConfigurationSetting'
         { _domainNameLabel = _domainNameLabel
         , _idleTimeout = _idleTimeout
@@ -6158,9 +6158,9 @@ data PublicIpsSetting s = PublicIpsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @public_ips@ settings value.
-newPublicIpsSetting
+publicIpsSetting
     :: PublicIpsSetting s
-newPublicIpsSetting =
+publicIpsSetting =
     PublicIpsSetting'
 
 instance TF.IsValue  (PublicIpsSetting s)
@@ -6199,10 +6199,10 @@ data PublishContentLinkSetting s = PublishContentLinkSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @publish_content_link@ settings value.
-newPublishContentLinkSetting
+publishContentLinkSetting
     :: TF.Attr s P.Text -- ^ 'P._uri': @uri@
     -> PublishContentLinkSetting s
-newPublishContentLinkSetting _uri =
+publishContentLinkSetting _uri =
     PublishContentLinkSetting'
         { _hash = TF.Nil
         , _uri = _uri
@@ -6253,10 +6253,10 @@ data QuotaSetting s = QuotaSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @quota@ settings value.
-newQuotaSetting
+quotaSetting
     :: TF.Attr s P.Text -- ^ 'P._maxRecurrenceFrequency': @max_recurrence_frequency@
     -> QuotaSetting s
-newQuotaSetting _maxRecurrenceFrequency =
+quotaSetting _maxRecurrenceFrequency =
     QuotaSetting'
         { _maxJobCount = TF.Nil
         , _maxRecurrenceFrequency = _maxRecurrenceFrequency
@@ -6330,7 +6330,7 @@ data RecordSetting s = RecordSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @record@ settings value.
-newRecordSetting
+recordSetting
     :: TF.Attr s P.Text -- ^ 'P._exchange': @exchange@
     -> TF.Attr s P.Int -- ^ 'P._flags': @flags@
     -> TF.Attr s P.Int -- ^ 'P._port': @port@
@@ -6341,7 +6341,7 @@ newRecordSetting
     -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> TF.Attr s P.Int -- ^ 'P._weight': @weight@
     -> RecordSetting s
-newRecordSetting _exchange _flags _port _preference _priority _tag _target _value _weight =
+recordSetting _exchange _flags _port _preference _priority _tag _target _value _weight =
     RecordSetting'
         { _flags = _flags
         , _tag = _tag
@@ -6463,13 +6463,13 @@ data RecurrenceSetting s = RecurrenceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @recurrence@ settings value.
-newRecurrenceSetting
+recurrenceSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._days': @days@
     -> TF.Attr s P.Text -- ^ 'P._frequency': @frequency@
     -> TF.Attr s P.Int -- ^ 'P._hours': @hours@
     -> TF.Attr s P.Int -- ^ 'P._minutes': @minutes@
     -> RecurrenceSetting s
-newRecurrenceSetting _days _frequency _hours _minutes =
+recurrenceSetting _days _frequency _hours _minutes =
     RecurrenceSetting'
         { _days = _days
         , _hours = _hours
@@ -6593,9 +6593,9 @@ data RedisConfigurationSetting s = RedisConfigurationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @redis_configuration@ settings value.
-newRedisConfigurationSetting
+redisConfigurationSetting
     :: RedisConfigurationSetting s
-newRedisConfigurationSetting =
+redisConfigurationSetting =
     RedisConfigurationSetting'
         { _maxmemoryPolicy = TF.value "volatile-lru"
         , _notifyKeyspaceEvents = TF.Nil
@@ -6681,12 +6681,12 @@ data RequestRoutingRuleSetting s = RequestRoutingRuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @request_routing_rule@ settings value.
-newRequestRoutingRuleSetting
+requestRoutingRuleSetting
     :: TF.Attr s P.Text -- ^ 'P._httpListenerName': @http_listener_name@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._ruleType': @rule_type@
     -> RequestRoutingRuleSetting s
-newRequestRoutingRuleSetting _httpListenerName _name _ruleType =
+requestRoutingRuleSetting _httpListenerName _name _ruleType =
     RequestRoutingRuleSetting'
         { _backendAddressPoolName = TF.Nil
         , _backendHttpSettingsName = TF.Nil
@@ -6769,12 +6769,12 @@ data ResourceTypesSetting s = ResourceTypesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @resource_types@ settings value.
-newResourceTypesSetting
+resourceTypesSetting
     :: TF.Attr s P.Bool -- ^ 'P._container': @container@
     -> TF.Attr s P.Bool -- ^ 'P._object': @object@
     -> TF.Attr s P.Bool -- ^ 'P._service': @service@
     -> ResourceTypesSetting s
-newResourceTypesSetting _container _object _service =
+resourceTypesSetting _container _object _service =
     ResourceTypesSetting'
         { _container = _container
         , _object = _object
@@ -6818,9 +6818,9 @@ data RetrySetting s = RetrySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @retry@ settings value.
-newRetrySetting
+retrySetting
     :: RetrySetting s
-newRetrySetting =
+retrySetting =
     RetrySetting'
         { _count = TF.value 4
         , _interval = TF.value "00:00:30"
@@ -6857,11 +6857,11 @@ data RevokedCertificateSetting s = RevokedCertificateSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @revoked_certificate@ settings value.
-newRevokedCertificateSetting
+revokedCertificateSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._thumbprint': @thumbprint@
     -> RevokedCertificateSetting s
-newRevokedCertificateSetting _name _thumbprint =
+revokedCertificateSetting _name _thumbprint =
     RevokedCertificateSetting'
         { _name = _name
         , _thumbprint = _thumbprint
@@ -6904,11 +6904,11 @@ data RootCertificateSetting s = RootCertificateSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @root_certificate@ settings value.
-newRootCertificateSetting
+rootCertificateSetting
     :: TF.Attr s P.Text -- ^ 'P._publicCertData': @public_cert_data@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> RootCertificateSetting s
-newRootCertificateSetting _publicCertData _name =
+rootCertificateSetting _publicCertData _name =
     RootCertificateSetting'
         { _name = _name
         , _publicCertData = _publicCertData
@@ -6954,12 +6954,12 @@ data RouteSetting s = RouteSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @route@ settings value.
-newRouteSetting
+routeSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._addressPrefix': @address_prefix@
     -> TF.Attr s P.Text -- ^ 'P._nextHopType': @next_hop_type@
     -> RouteSetting s
-newRouteSetting _name _addressPrefix _nextHopType =
+routeSetting _name _addressPrefix _nextHopType =
     RouteSetting'
         { _addressPrefix = _addressPrefix
         , _name = _name
@@ -7015,11 +7015,11 @@ data RuleSetting s = RuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @rule@ settings value.
-newRuleSetting
+ruleSetting
     :: TF.Attr s (ScaleActionSetting s) -- ^ 'P._scaleAction': @scale_action@
     -> TF.Attr s (MetricTriggerSetting s) -- ^ 'P._metricTrigger': @metric_trigger@
     -> RuleSetting s
-newRuleSetting _scaleAction _metricTrigger =
+ruleSetting _scaleAction _metricTrigger =
     RuleSetting'
         { _metricTrigger = _metricTrigger
         , _scaleAction = _scaleAction
@@ -7070,13 +7070,13 @@ data ScaleActionSetting s = ScaleActionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @scale_action@ settings value.
-newScaleActionSetting
+scaleActionSetting
     :: TF.Attr s P.Text -- ^ 'P._cooldown': @cooldown@
     -> TF.Attr s P.Text -- ^ 'P._direction': @direction@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> TF.Attr s P.Int -- ^ 'P._value': @value@
     -> ScaleActionSetting s
-newScaleActionSetting _cooldown _direction _type' _value =
+scaleActionSetting _cooldown _direction _type' _value =
     ScaleActionSetting'
         { _cooldown = _cooldown
         , _direction = _direction
@@ -7124,10 +7124,10 @@ data SecretPropertiesSetting s = SecretPropertiesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @secret_properties@ settings value.
-newSecretPropertiesSetting
+secretPropertiesSetting
     :: TF.Attr s P.Text -- ^ 'P._contentType': @content_type@
     -> SecretPropertiesSetting s
-newSecretPropertiesSetting _contentType =
+secretPropertiesSetting _contentType =
     SecretPropertiesSetting'
         { _contentType = _contentType
         }
@@ -7199,14 +7199,14 @@ data SecurityRuleSetting s = SecurityRuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @security_rule@ settings value.
-newSecurityRuleSetting
+securityRuleSetting
     :: TF.Attr s P.Text -- ^ 'P._access': @access@
     -> TF.Attr s P.Text -- ^ 'P._direction': @direction@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Int -- ^ 'P._priority': @priority@
     -> TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
     -> SecurityRuleSetting s
-newSecurityRuleSetting _access _direction _name _priority _protocol =
+securityRuleSetting _access _direction _name _priority _protocol =
     SecurityRuleSetting'
         { _access = _access
         , _description = TF.Nil
@@ -7383,11 +7383,11 @@ data ServicePrincipalSetting s = ServicePrincipalSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @service_principal@ settings value.
-newServicePrincipalSetting
+servicePrincipalSetting
     :: TF.Attr s P.Text -- ^ 'P._clientId': @client_id@
     -> TF.Attr s P.Text -- ^ 'P._clientSecret': @client_secret@
     -> ServicePrincipalSetting s
-newServicePrincipalSetting _clientId _clientSecret =
+servicePrincipalSetting _clientId _clientSecret =
     ServicePrincipalSetting'
         { _clientId = _clientId
         , _clientSecret = _clientSecret
@@ -7433,13 +7433,13 @@ data ServicesSetting s = ServicesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @services@ settings value.
-newServicesSetting
+servicesSetting
     :: TF.Attr s P.Bool -- ^ 'P._blob': @blob@
     -> TF.Attr s P.Bool -- ^ 'P._file': @file@
     -> TF.Attr s P.Bool -- ^ 'P._queue': @queue@
     -> TF.Attr s P.Bool -- ^ 'P._table': @table@
     -> ServicesSetting s
-newServicesSetting _blob _file _queue _table =
+servicesSetting _blob _file _queue _table =
     ServicesSetting'
         { _blob = _blob
         , _file = _file
@@ -7484,9 +7484,9 @@ data SharedAccessPolicySetting s = SharedAccessPolicySetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @shared_access_policy@ settings value.
-newSharedAccessPolicySetting
+sharedAccessPolicySetting
     :: SharedAccessPolicySetting s
-newSharedAccessPolicySetting =
+sharedAccessPolicySetting =
     SharedAccessPolicySetting'
 
 instance TF.IsValue  (SharedAccessPolicySetting s)
@@ -7552,9 +7552,9 @@ data SiteConfigSetting s = SiteConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @site_config@ settings value.
-newSiteConfigSetting
+siteConfigSetting
     :: SiteConfigSetting s
-newSiteConfigSetting =
+siteConfigSetting =
     SiteConfigSetting'
         { _alwaysOn = TF.value P.False
         , _defaultDocuments = TF.Nil
@@ -7689,9 +7689,9 @@ data SiteCredentialSetting s = SiteCredentialSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @site_credential@ settings value.
-newSiteCredentialSetting
+siteCredentialSetting
     :: SiteCredentialSetting s
-newSiteCredentialSetting =
+siteCredentialSetting =
     SiteCredentialSetting'
 
 instance TF.IsValue  (SiteCredentialSetting s)
@@ -7727,14 +7727,14 @@ data SkuSetting s = SkuSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @sku@ settings value.
-newSkuSetting
+skuSetting
     :: TF.Attr s P.Int -- ^ 'P._capacity': @capacity@
     -> TF.Attr s P.Text -- ^ 'P._family'': @family@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._size': @size@
     -> TF.Attr s P.Text -- ^ 'P._tier': @tier@
     -> SkuSetting s
-newSkuSetting _capacity _family' _name _size _tier =
+skuSetting _capacity _family' _name _size _tier =
     SkuSetting'
         { _size = _size
         , _tier = _tier
@@ -7807,12 +7807,12 @@ data SmsReceiverSetting s = SmsReceiverSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @sms_receiver@ settings value.
-newSmsReceiverSetting
+smsReceiverSetting
     :: TF.Attr s P.Text -- ^ 'P._countryCode': @country_code@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._phoneNumber': @phone_number@
     -> SmsReceiverSetting s
-newSmsReceiverSetting _countryCode _name _phoneNumber =
+smsReceiverSetting _countryCode _name _phoneNumber =
     SmsReceiverSetting'
         { _countryCode = _countryCode
         , _name = _name
@@ -7850,9 +7850,9 @@ data SourceControlSetting s = SourceControlSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @source_control@ settings value.
-newSourceControlSetting
+sourceControlSetting
     :: SourceControlSetting s
-newSourceControlSetting =
+sourceControlSetting =
     SourceControlSetting'
 
 instance TF.IsValue  (SourceControlSetting s)
@@ -7876,10 +7876,10 @@ data SshKeySetting s = SshKeySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ssh_key@ settings value.
-newSshKeySetting
+sshKeySetting
     :: TF.Attr s P.Text -- ^ 'P._keyData': @key_data@
     -> SshKeySetting s
-newSshKeySetting _keyData =
+sshKeySetting _keyData =
     SshKeySetting'
         { _keyData = _keyData
         }
@@ -7912,11 +7912,11 @@ data SshKeysSetting s = SshKeysSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ssh_keys@ settings value.
-newSshKeysSetting
+sshKeysSetting
     :: TF.Attr s P.Text -- ^ 'P._keyData': @key_data@
     -> TF.Attr s P.Text -- ^ 'P._path': @path@
     -> SshKeysSetting s
-newSshKeysSetting _keyData _path =
+sshKeysSetting _keyData _path =
     SshKeysSetting'
         { _keyData = _keyData
         , _path = _path
@@ -7956,12 +7956,12 @@ data SslCertificateSetting s = SslCertificateSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ssl_certificate@ settings value.
-newSslCertificateSetting
+sslCertificateSetting
     :: TF.Attr s P.Text -- ^ 'P._data'': @data@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._password': @password@
     -> SslCertificateSetting s
-newSslCertificateSetting _data' _name _password =
+sslCertificateSetting _data' _name _password =
     SslCertificateSetting'
         { _data' = _data'
         , _name = _name
@@ -8020,12 +8020,12 @@ data StorageDataDiskSetting s = StorageDataDiskSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @storage_data_disk@ settings value.
-newStorageDataDiskSetting
+storageDataDiskSetting
     :: TF.Attr s P.Int -- ^ 'P._lun': @lun@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._createOption': @create_option@
     -> StorageDataDiskSetting s
-newStorageDataDiskSetting _lun _name _createOption =
+storageDataDiskSetting _lun _name _createOption =
     StorageDataDiskSetting'
         { _createOption = _createOption
         , _lun = _lun
@@ -8101,9 +8101,9 @@ data StorageImageReferenceSetting s = StorageImageReferenceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @storage_image_reference@ settings value.
-newStorageImageReferenceSetting
+storageImageReferenceSetting
     :: StorageImageReferenceSetting s
-newStorageImageReferenceSetting =
+storageImageReferenceSetting =
     StorageImageReferenceSetting'
         { _id = TF.Nil
         , _offer = TF.Nil
@@ -8157,9 +8157,9 @@ data StorageLocationSetting s = StorageLocationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @storage_location@ settings value.
-newStorageLocationSetting
+storageLocationSetting
     :: StorageLocationSetting s
-newStorageLocationSetting =
+storageLocationSetting =
     StorageLocationSetting'
         { _filePath = TF.Nil
         , _storageAccountId = TF.Nil
@@ -8208,11 +8208,11 @@ data StorageOsDiskSetting s = StorageOsDiskSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @storage_os_disk@ settings value.
-newStorageOsDiskSetting
+storageOsDiskSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._createOption': @create_option@
     -> StorageOsDiskSetting s
-newStorageOsDiskSetting _name _createOption =
+storageOsDiskSetting _name _createOption =
     StorageOsDiskSetting'
         { _createOption = _createOption
         , _imageUri = TF.Nil
@@ -8288,10 +8288,10 @@ data StorageProfileSetting s = StorageProfileSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @storage_profile@ settings value.
-newStorageProfileSetting
+storageProfileSetting
     :: TF.Attr s P.Int -- ^ 'P._storageMb': @storage_mb@
     -> StorageProfileSetting s
-newStorageProfileSetting _storageMb =
+storageProfileSetting _storageMb =
     StorageProfileSetting'
         { _backupRetentionDays = TF.Nil
         , _geoRedundantBackup = TF.Nil
@@ -8335,11 +8335,11 @@ data StorageProfileDataDiskSetting s = StorageProfileDataDiskSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @storage_profile_data_disk@ settings value.
-newStorageProfileDataDiskSetting
+storageProfileDataDiskSetting
     :: TF.Attr s P.Int -- ^ 'P._lun': @lun@
     -> TF.Attr s P.Text -- ^ 'P._createOption': @create_option@
     -> StorageProfileDataDiskSetting s
-newStorageProfileDataDiskSetting _lun _createOption =
+storageProfileDataDiskSetting _lun _createOption =
     StorageProfileDataDiskSetting'
         { _createOption = _createOption
         , _lun = _lun
@@ -8394,9 +8394,9 @@ data StorageProfileImageReferenceSetting s = StorageProfileImageReferenceSetting
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @storage_profile_image_reference@ settings value.
-newStorageProfileImageReferenceSetting
+storageProfileImageReferenceSetting
     :: StorageProfileImageReferenceSetting s
-newStorageProfileImageReferenceSetting =
+storageProfileImageReferenceSetting =
     StorageProfileImageReferenceSetting'
         { _id = TF.Nil
         , _offer = TF.Nil
@@ -8463,10 +8463,10 @@ data StorageProfileOsDiskSetting s = StorageProfileOsDiskSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @storage_profile_os_disk@ settings value.
-newStorageProfileOsDiskSetting
+storageProfileOsDiskSetting
     :: TF.Attr s P.Text -- ^ 'P._createOption': @create_option@
     -> StorageProfileOsDiskSetting s
-newStorageProfileOsDiskSetting _createOption =
+storageProfileOsDiskSetting _createOption =
     StorageProfileOsDiskSetting'
         { _createOption = _createOption
         , _image = TF.Nil
@@ -8533,11 +8533,11 @@ data SubnetSetting s = SubnetSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @subnet@ settings value.
-newSubnetSetting
+subnetSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._addressPrefix': @address_prefix@
     -> SubnetSetting s
-newSubnetSetting _name _addressPrefix =
+subnetSetting _name _addressPrefix =
     SubnetSetting'
         { _addressPrefix = _addressPrefix
         , _name = _name
@@ -8575,9 +8575,9 @@ data SubscriptionsSetting s = SubscriptionsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @subscriptions@ settings value.
-newSubscriptionsSetting
+subscriptionsSetting
     :: SubscriptionsSetting s
-newSubscriptionsSetting =
+subscriptionsSetting =
     SubscriptionsSetting'
 
 instance TF.IsValue  (SubscriptionsSetting s)
@@ -8622,9 +8622,9 @@ data TriggerSetting s = TriggerSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @trigger@ settings value.
-newTriggerSetting
+triggerSetting
     :: TriggerSetting s
-newTriggerSetting =
+triggerSetting =
     TriggerSetting'
         { _daysBeforeExpiry = TF.Nil
         , _lifetimePercentage = TF.Nil
@@ -8678,13 +8678,13 @@ data UrlPathMapSetting s = UrlPathMapSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @url_path_map@ settings value.
-newUrlPathMapSetting
+urlPathMapSetting
     :: TF.Attr s P.Text -- ^ 'P._defaultBackendAddressPoolName': @default_backend_address_pool_name@
     -> TF.Attr s P.Text -- ^ 'P._defaultBackendHttpSettingsName': @default_backend_http_settings_name@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s [TF.Attr s (PathRuleSetting s)] -- ^ 'P._pathRule': @path_rule@
     -> UrlPathMapSetting s
-newUrlPathMapSetting _defaultBackendAddressPoolName _defaultBackendHttpSettingsName _name _pathRule =
+urlPathMapSetting _defaultBackendAddressPoolName _defaultBackendHttpSettingsName _name _pathRule =
     UrlPathMapSetting'
         { _defaultBackendAddressPoolName = _defaultBackendAddressPoolName
         , _defaultBackendHttpSettingsName = _defaultBackendHttpSettingsName
@@ -8744,10 +8744,10 @@ data VaultCertificatesSetting s = VaultCertificatesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @vault_certificates@ settings value.
-newVaultCertificatesSetting
+vaultCertificatesSetting
     :: TF.Attr s P.Text -- ^ 'P._certificateUrl': @certificate_url@
     -> VaultCertificatesSetting s
-newVaultCertificatesSetting _certificateUrl =
+vaultCertificatesSetting _certificateUrl =
     VaultCertificatesSetting'
         { _certificateStore = TF.Nil
         , _certificateUrl = _certificateUrl
@@ -8796,14 +8796,14 @@ data VolumeSetting s = VolumeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @volume@ settings value.
-newVolumeSetting
+volumeSetting
     :: TF.Attr s P.Text -- ^ 'P._storageAccountKey': @storage_account_key@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._shareName': @share_name@
     -> TF.Attr s P.Text -- ^ 'P._storageAccountName': @storage_account_name@
     -> TF.Attr s P.Text -- ^ 'P._mountPath': @mount_path@
     -> VolumeSetting s
-newVolumeSetting _storageAccountKey _name _shareName _storageAccountName _mountPath =
+volumeSetting _storageAccountKey _name _shareName _storageAccountName _mountPath =
     VolumeSetting'
         { _mountPath = _mountPath
         , _name = _name
@@ -8896,10 +8896,10 @@ data VpnClientConfigurationSetting s = VpnClientConfigurationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @vpn_client_configuration@ settings value.
-newVpnClientConfigurationSetting
+vpnClientConfigurationSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._addressSpace': @address_space@
     -> VpnClientConfigurationSetting s
-newVpnClientConfigurationSetting _addressSpace =
+vpnClientConfigurationSetting _addressSpace =
     VpnClientConfigurationSetting'
         { _addressSpace = _addressSpace
         , _radiusServerAddress = TF.Nil
@@ -9009,12 +9009,12 @@ data WafConfigurationSetting s = WafConfigurationSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @waf_configuration@ settings value.
-newWafConfigurationSetting
+wafConfigurationSetting
     :: TF.Attr s P.Bool -- ^ 'P._enabled': @enabled@
     -> TF.Attr s P.Text -- ^ 'P._firewallMode': @firewall_mode@
     -> TF.Attr s P.Text -- ^ 'P._ruleSetVersion': @rule_set_version@
     -> WafConfigurationSetting s
-newWafConfigurationSetting _enabled _firewallMode _ruleSetVersion =
+wafConfigurationSetting _enabled _firewallMode _ruleSetVersion =
     WafConfigurationSetting'
         { _enabled = _enabled
         , _firewallMode = _firewallMode
@@ -9065,10 +9065,10 @@ data WebhookSetting s = WebhookSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @webhook@ settings value.
-newWebhookSetting
+webhookSetting
     :: TF.Attr s P.Text -- ^ 'P._serviceUri': @service_uri@
     -> WebhookSetting s
-newWebhookSetting _serviceUri =
+webhookSetting _serviceUri =
     WebhookSetting'
         { _properties = TF.Nil
         , _serviceUri = _serviceUri
@@ -9102,10 +9102,10 @@ data WebhookActionSetting s = WebhookActionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @webhook_action@ settings value.
-newWebhookActionSetting
+webhookActionSetting
     :: TF.Attr s P.Text -- ^ 'P._serviceUri': @service_uri@
     -> WebhookActionSetting s
-newWebhookActionSetting _serviceUri =
+webhookActionSetting _serviceUri =
     WebhookActionSetting'
         { _serviceUri = _serviceUri
         }
@@ -9138,11 +9138,11 @@ data WebhookReceiverSetting s = WebhookReceiverSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @webhook_receiver@ settings value.
-newWebhookReceiverSetting
+webhookReceiverSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._serviceUri': @service_uri@
     -> WebhookReceiverSetting s
-newWebhookReceiverSetting _name _serviceUri =
+webhookReceiverSetting _name _serviceUri =
     WebhookReceiverSetting'
         { _name = _name
         , _serviceUri = _serviceUri
@@ -9179,10 +9179,10 @@ data WinrmSetting s = WinrmSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @winrm@ settings value.
-newWinrmSetting
+winrmSetting
     :: TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
     -> WinrmSetting s
-newWinrmSetting _protocol =
+winrmSetting _protocol =
     WinrmSetting'
         { _certificateUrl = TF.Nil
         , _protocol = _protocol
@@ -9222,12 +9222,12 @@ data X509CertificatePropertiesSetting s = X509CertificatePropertiesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @x509_certificate_properties@ settings value.
-newX509CertificatePropertiesSetting
+x509CertificatePropertiesSetting
     :: TF.Attr s P.Int -- ^ 'P._validityInMonths': @validity_in_months@
     -> TF.Attr s P.Text -- ^ 'P._subject': @subject@
     -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._keyUsage': @key_usage@
     -> X509CertificatePropertiesSetting s
-newX509CertificatePropertiesSetting _validityInMonths _subject _keyUsage =
+x509CertificatePropertiesSetting _validityInMonths _subject _keyUsage =
     X509CertificatePropertiesSetting'
         { _keyUsage = _keyUsage
         , _subject = _subject
