@@ -123,11 +123,11 @@ deviceResource
     :: TF.Attr s P.Text -- ^ @billing_cycle@ - 'P.billingCycle'
     -> TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
-    -> TF.Attr s P.Text -- ^ @operating_system@ - 'P.operatingSystem'
-    -> TF.Attr s P.Text -- ^ @plan@ - 'P.plan'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> TF.Attr s P.Text -- ^ @plan@ - 'P.plan'
+    -> TF.Attr s P.Text -- ^ @operating_system@ - 'P.operatingSystem'
     -> P.Resource (DeviceResource s)
-deviceResource _billingCycle _facility _hostname _operatingSystem _plan _projectId =
+deviceResource _billingCycle _facility _hostname _projectId _plan _operatingSystem =
     TF.unsafeResource "packet_device" TF.validator $
         DeviceResource'
             { _alwaysPxe = TF.value P.False
@@ -270,10 +270,10 @@ data IpAttachmentResource s = IpAttachmentResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 ipAttachmentResource
-    :: TF.Attr s P.Text -- ^ @cidr_notation@ - 'P.cidrNotation'
-    -> TF.Attr s P.Text -- ^ @device_id@ - 'P.deviceId'
+    :: TF.Attr s P.Text -- ^ @device_id@ - 'P.deviceId'
+    -> TF.Attr s P.Text -- ^ @cidr_notation@ - 'P.cidrNotation'
     -> P.Resource (IpAttachmentResource s)
-ipAttachmentResource _cidrNotation _deviceId =
+ipAttachmentResource _deviceId _cidrNotation =
     TF.unsafeResource "packet_ip_attachment" TF.validator $
         IpAttachmentResource'
             { _cidrNotation = _cidrNotation
@@ -546,10 +546,10 @@ data SshKeyResource s = SshKeyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 sshKeyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
+    :: TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SshKeyResource s)
-sshKeyResource _name _publicKey =
+sshKeyResource _publicKey _name =
     TF.unsafeResource "packet_ssh_key" TF.validator $
         SshKeyResource'
             { _name = _name
@@ -614,11 +614,11 @@ data VolumeResource s = VolumeResource'
 
 volumeResource
     :: TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
-    -> TF.Attr s P.Text -- ^ @plan@ - 'P.plan'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> TF.Attr s P.Text -- ^ @plan@ - 'P.plan'
     -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (VolumeResource s)
-volumeResource _facility _plan _projectId _size =
+volumeResource _facility _projectId _plan _size =
     TF.unsafeResource "packet_volume" TF.validator $
         VolumeResource'
             { _description = TF.Nil

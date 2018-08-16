@@ -68,12 +68,12 @@ data PrecreatedIpBlockData s = PrecreatedIpBlockData'
     } deriving (P.Show, P.Eq, P.Ord)
 
 precreatedIpBlockData
-    :: TF.Attr s P.Int -- ^ @address_family@ - 'P.addressFamily'
-    -> TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
+    :: TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
+    -> TF.Attr s P.Int -- ^ @address_family@ - 'P.addressFamily'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Bool -- ^ @public@ - 'P.public'
     -> P.DataSource (PrecreatedIpBlockData s)
-precreatedIpBlockData _addressFamily _facility _projectId _public =
+precreatedIpBlockData _facility _addressFamily _projectId _public =
     TF.unsafeDataSource "packet_precreated_ip_block" TF.validator $
         PrecreatedIpBlockData'
             { _addressFamily = _addressFamily
