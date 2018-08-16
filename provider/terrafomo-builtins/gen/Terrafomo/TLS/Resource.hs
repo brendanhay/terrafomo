@@ -182,14 +182,14 @@ data LocallySignedCertResource s = LocallySignedCertResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 locallySignedCertResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_uses@ - 'P.allowedUses'
+    :: TF.Attr s P.Text -- ^ @ca_key_algorithm@ - 'P.caKeyAlgorithm'
+    -> TF.Attr s P.Int -- ^ @validity_period_hours@ - 'P.validityPeriodHours'
     -> TF.Attr s P.Text -- ^ @ca_cert_pem@ - 'P.caCertPem'
-    -> TF.Attr s P.Text -- ^ @ca_key_algorithm@ - 'P.caKeyAlgorithm'
     -> TF.Attr s P.Text -- ^ @ca_private_key_pem@ - 'P.caPrivateKeyPem'
     -> TF.Attr s P.Text -- ^ @cert_request_pem@ - 'P.certRequestPem'
-    -> TF.Attr s P.Int -- ^ @validity_period_hours@ - 'P.validityPeriodHours'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_uses@ - 'P.allowedUses'
     -> P.Resource (LocallySignedCertResource s)
-locallySignedCertResource _allowedUses _caCertPem _caKeyAlgorithm _caPrivateKeyPem _certRequestPem _validityPeriodHours =
+locallySignedCertResource _caKeyAlgorithm _validityPeriodHours _caCertPem _caPrivateKeyPem _certRequestPem _allowedUses =
     TF.unsafeResource "tls_locally_signed_cert" TF.validator $
         LocallySignedCertResource'
             { _allowedUses = _allowedUses
@@ -374,13 +374,13 @@ data SelfSignedCertResource s = SelfSignedCertResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 selfSignedCertResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_uses@ - 'P.allowedUses'
-    -> TF.Attr s P.Text -- ^ @key_algorithm@ - 'P.keyAlgorithm'
+    :: TF.Attr s P.Text -- ^ @key_algorithm@ - 'P.keyAlgorithm'
+    -> TF.Attr s P.Int -- ^ @validity_period_hours@ - 'P.validityPeriodHours'
     -> TF.Attr s P.Text -- ^ @private_key_pem@ - 'P.privateKeyPem'
     -> TF.Attr s [TF.Attr s (SubjectSetting s)] -- ^ @subject@ - 'P.subject'
-    -> TF.Attr s P.Int -- ^ @validity_period_hours@ - 'P.validityPeriodHours'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_uses@ - 'P.allowedUses'
     -> P.Resource (SelfSignedCertResource s)
-selfSignedCertResource _allowedUses _keyAlgorithm _privateKeyPem _subject _validityPeriodHours =
+selfSignedCertResource _keyAlgorithm _validityPeriodHours _privateKeyPem _subject _allowedUses =
     TF.unsafeResource "tls_self_signed_cert" TF.validator $
         SelfSignedCertResource'
             { _allowedUses = _allowedUses
