@@ -319,6 +319,9 @@ instance P.HasUserData (VirtualGuestResource s) (TF.Attr s P.Text) where
         P.lens (_userData :: VirtualGuestResource s -> TF.Attr s P.Text)
                (\s a -> s { _userData = a } :: VirtualGuestResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedIpv4Address (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedIpv4Address x = TF.compute (TF.refKey x) "ipv4_address"
 
