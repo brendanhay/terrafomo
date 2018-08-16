@@ -20,6 +20,7 @@ module Terrafomo.PagerDuty.Lens
     , HasAlertCreation (..)
     , HasAt (..)
     , HasAutoResolveTimeout (..)
+    , HasColor (..)
     , HasCountryCode (..)
     , HasDaysOfWeek (..)
     , HasDescription (..)
@@ -34,6 +35,9 @@ module Terrafomo.PagerDuty.Lens
     , HasExtensionObjects (..)
     , HasExtensionSchema (..)
     , HasId (..)
+    , HasIncidentUrgencyRule (..)
+    , HasIntegrationEmail (..)
+    , HasIntegrationKey (..)
     , HasJobTitle (..)
     , HasLabel (..)
     , HasLayer (..)
@@ -68,6 +72,7 @@ module Terrafomo.PagerDuty.Lens
     , HasUrgency (..)
     , HasUserId (..)
     , HasUsers (..)
+    , HasVendor (..)
 
     -- ** Computed Attributes
     , HasComputedAvatarUrl (..)
@@ -124,6 +129,12 @@ class HasAutoResolveTimeout a b | a -> b where
 
 instance HasAutoResolveTimeout a b => HasAutoResolveTimeout (TF.Schema l p a) b where
     autoResolveTimeout = TF.configuration . autoResolveTimeout
+
+class HasColor a b | a -> b where
+    color :: P.Lens' a b
+
+instance HasColor a b => HasColor (TF.Schema l p a) b where
+    color = TF.configuration . color
 
 class HasCountryCode a b | a -> b where
     countryCode :: P.Lens' a b
@@ -208,6 +219,24 @@ class HasId a b | a -> b where
 
 instance HasId a b => HasId (TF.Schema l p a) b where
     id = TF.configuration . id
+
+class HasIncidentUrgencyRule a b | a -> b where
+    incidentUrgencyRule :: P.Lens' a b
+
+instance HasIncidentUrgencyRule a b => HasIncidentUrgencyRule (TF.Schema l p a) b where
+    incidentUrgencyRule = TF.configuration . incidentUrgencyRule
+
+class HasIntegrationEmail a b | a -> b where
+    integrationEmail :: P.Lens' a b
+
+instance HasIntegrationEmail a b => HasIntegrationEmail (TF.Schema l p a) b where
+    integrationEmail = TF.configuration . integrationEmail
+
+class HasIntegrationKey a b | a -> b where
+    integrationKey :: P.Lens' a b
+
+instance HasIntegrationKey a b => HasIntegrationKey (TF.Schema l p a) b where
+    integrationKey = TF.configuration . integrationKey
 
 class HasJobTitle a b | a -> b where
     jobTitle :: P.Lens' a b
@@ -412,6 +441,12 @@ class HasUsers a b | a -> b where
 
 instance HasUsers a b => HasUsers (TF.Schema l p a) b where
     users = TF.configuration . users
+
+class HasVendor a b | a -> b where
+    vendor :: P.Lens' a b
+
+instance HasVendor a b => HasVendor (TF.Schema l p a) b where
+    vendor = TF.configuration . vendor
 
 class HasComputedAvatarUrl a b | a -> b where
     computedAvatarUrl :: a -> b

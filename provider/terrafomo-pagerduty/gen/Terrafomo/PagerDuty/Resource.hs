@@ -225,6 +225,12 @@ data ExtensionResource s = ExtensionResource'
     , _extensionSchema  :: TF.Attr s P.Text
     -- ^ @extension_schema@ - (Required, Forces New)
     --
+    , _name             :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _type'            :: TF.Attr s P.Text
+    -- ^ @type@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @pagerduty_extension@ resource value.
@@ -238,6 +244,8 @@ extensionResource _extensionObjects _extensionSchema =
             { _endpointUrl = TF.Nil
             , _extensionObjects = _extensionObjects
             , _extensionSchema = _extensionSchema
+            , _name = TF.Nil
+            , _type' = TF.Nil
             }
 
 instance TF.IsObject (ExtensionResource s) where
@@ -245,6 +253,8 @@ instance TF.IsObject (ExtensionResource s) where
         [ TF.assign "endpoint_url" <$> TF.attribute _endpointUrl
         , TF.assign "extension_objects" <$> TF.attribute _extensionObjects
         , TF.assign "extension_schema" <$> TF.attribute _extensionSchema
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "type" <$> TF.attribute _type'
         ]
 
 instance TF.IsValid (ExtensionResource s) where
@@ -264,6 +274,16 @@ instance P.HasExtensionSchema (ExtensionResource s) (TF.Attr s P.Text) where
     extensionSchema =
         P.lens (_extensionSchema :: ExtensionResource s -> TF.Attr s P.Text)
                (\s a -> s { _extensionSchema = a } :: ExtensionResource s)
+
+instance P.HasName (ExtensionResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ExtensionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ExtensionResource s)
+
+instance P.HasType' (ExtensionResource s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: ExtensionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: ExtensionResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -439,6 +459,9 @@ data ServiceResource s = ServiceResource'
     , _escalationPolicy :: TF.Attr s P.Text
     -- ^ @escalation_policy@ - (Required)
     --
+    , _incidentUrgencyRule :: TF.Attr s (IncidentUrgencyRuleSetting s)
+    -- ^ @incident_urgency_rule@ - (Optional)
+    --
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
@@ -462,6 +485,7 @@ serviceResource _escalationPolicy =
             , _autoResolveTimeout = TF.value "14400"
             , _description = TF.value "Managed by Terraform"
             , _escalationPolicy = _escalationPolicy
+            , _incidentUrgencyRule = TF.Nil
             , _name = TF.Nil
             , _scheduledActions = TF.Nil
             , _supportHours = TF.Nil
@@ -474,6 +498,7 @@ instance TF.IsObject (ServiceResource s) where
         , TF.assign "auto_resolve_timeout" <$> TF.attribute _autoResolveTimeout
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "escalation_policy" <$> TF.attribute _escalationPolicy
+        , TF.assign "incident_urgency_rule" <$> TF.attribute _incidentUrgencyRule
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "scheduled_actions" <$> TF.attribute _scheduledActions
         , TF.assign "support_hours" <$> TF.attribute _supportHours
@@ -481,6 +506,10 @@ instance TF.IsObject (ServiceResource s) where
 
 instance TF.IsValid (ServiceResource s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_incidentUrgencyRule"
+                  (_incidentUrgencyRule
+                      :: ServiceResource s -> TF.Attr s (IncidentUrgencyRuleSetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_supportHours"
                   (_supportHours
                       :: ServiceResource s -> TF.Attr s (SupportHoursSetting s))
@@ -510,6 +539,11 @@ instance P.HasEscalationPolicy (ServiceResource s) (TF.Attr s P.Text) where
     escalationPolicy =
         P.lens (_escalationPolicy :: ServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _escalationPolicy = a } :: ServiceResource s)
+
+instance P.HasIncidentUrgencyRule (ServiceResource s) (TF.Attr s (IncidentUrgencyRuleSetting s)) where
+    incidentUrgencyRule =
+        P.lens (_incidentUrgencyRule :: ServiceResource s -> TF.Attr s (IncidentUrgencyRuleSetting s))
+               (\s a -> s { _incidentUrgencyRule = a } :: ServiceResource s)
 
 instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
     name =
@@ -546,12 +580,30 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ServiceResource s)) (TF.Attr 
 -- See the <https://www.terraform.io/docs/providers/pagerduty/r/service_integration.html terraform documentation>
 -- for more information.
 data ServiceIntegrationResource s = ServiceIntegrationResource'
-    { _name    :: TF.Attr s P.Text
+    { _integrationEmail :: TF.Attr s P.Text
+    -- ^ @integration_email@ - (Optional)
+    --
+    , _integrationKey   :: TF.Attr s P.Text
+    -- ^ @integration_key@ - (Optional)
+    --
+    , _name             :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _service :: TF.Attr s P.Text
+    , _service          :: TF.Attr s P.Text
     -- ^ @service@ - (Required)
     --
+    , _type'            :: TF.Attr s P.Text
+    -- ^ @type@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'vendor'
+    , _vendor           :: TF.Attr s P.Text
+    -- ^ @vendor@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'type''
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @pagerduty_service_integration@ resource value.
@@ -561,18 +613,47 @@ serviceIntegrationResource
 serviceIntegrationResource _service =
     TF.unsafeResource "pagerduty_service_integration" TF.validator $
         ServiceIntegrationResource'
-            { _name = TF.Nil
+            { _integrationEmail = TF.Nil
+            , _integrationKey = TF.Nil
+            , _name = TF.Nil
             , _service = _service
+            , _type' = TF.Nil
+            , _vendor = TF.Nil
             }
 
 instance TF.IsObject (ServiceIntegrationResource s) where
     toObject ServiceIntegrationResource'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.assign "integration_email" <$> TF.attribute _integrationEmail
+        , TF.assign "integration_key" <$> TF.attribute _integrationKey
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "service" <$> TF.attribute _service
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "vendor" <$> TF.attribute _vendor
         ]
 
 instance TF.IsValid (ServiceIntegrationResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\ServiceIntegrationResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_type' P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_type'",
+                            [ "_vendor"
+                            ])
+        , if (_vendor P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_vendor",
+                            [ "_type'"
+                            ])
+        ])
+
+instance P.HasIntegrationEmail (ServiceIntegrationResource s) (TF.Attr s P.Text) where
+    integrationEmail =
+        P.lens (_integrationEmail :: ServiceIntegrationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _integrationEmail = a } :: ServiceIntegrationResource s)
+
+instance P.HasIntegrationKey (ServiceIntegrationResource s) (TF.Attr s P.Text) where
+    integrationKey =
+        P.lens (_integrationKey :: ServiceIntegrationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _integrationKey = a } :: ServiceIntegrationResource s)
 
 instance P.HasName (ServiceIntegrationResource s) (TF.Attr s P.Text) where
     name =
@@ -583,6 +664,16 @@ instance P.HasService (ServiceIntegrationResource s) (TF.Attr s P.Text) where
     service =
         P.lens (_service :: ServiceIntegrationResource s -> TF.Attr s P.Text)
                (\s a -> s { _service = a } :: ServiceIntegrationResource s)
+
+instance P.HasType' (ServiceIntegrationResource s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: ServiceIntegrationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: ServiceIntegrationResource s)
+
+instance P.HasVendor (ServiceIntegrationResource s) (TF.Attr s P.Text) where
+    vendor =
+        P.lens (_vendor :: ServiceIntegrationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vendor = a } :: ServiceIntegrationResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -700,7 +791,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamMembershipResource s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/pagerduty/r/user.html terraform documentation>
 -- for more information.
 data UserResource s = UserResource'
-    { _description :: TF.Attr s P.Text
+    { _color       :: TF.Attr s P.Text
+    -- ^ @color@ - (Optional)
+    --
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _email       :: TF.Attr s P.Text
@@ -718,6 +812,9 @@ data UserResource s = UserResource'
     , _teams       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @teams@ - (Optional)
     --
+    , _timeZone    :: TF.Attr s P.Text
+    -- ^ @time_zone@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @pagerduty_user@ resource value.
@@ -728,26 +825,35 @@ userResource
 userResource _email _name =
     TF.unsafeResource "pagerduty_user" TF.validator $
         UserResource'
-            { _description = TF.value "Managed by Terraform"
+            { _color = TF.Nil
+            , _description = TF.value "Managed by Terraform"
             , _email = _email
             , _jobTitle = TF.Nil
             , _name = _name
             , _role = TF.value "user"
             , _teams = TF.Nil
+            , _timeZone = TF.Nil
             }
 
 instance TF.IsObject (UserResource s) where
     toObject UserResource'{..} = P.catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
+        [ TF.assign "color" <$> TF.attribute _color
+        , TF.assign "description" <$> TF.attribute _description
         , TF.assign "email" <$> TF.attribute _email
         , TF.assign "job_title" <$> TF.attribute _jobTitle
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "role" <$> TF.attribute _role
         , TF.assign "teams" <$> TF.attribute _teams
+        , TF.assign "time_zone" <$> TF.attribute _timeZone
         ]
 
 instance TF.IsValid (UserResource s) where
     validator = P.mempty
+
+instance P.HasColor (UserResource s) (TF.Attr s P.Text) where
+    color =
+        P.lens (_color :: UserResource s -> TF.Attr s P.Text)
+               (\s a -> s { _color = a } :: UserResource s)
 
 instance P.HasDescription (UserResource s) (TF.Attr s P.Text) where
     description =
@@ -778,6 +884,11 @@ instance P.HasTeams (UserResource s) (TF.Attr s [TF.Attr s P.Text]) where
     teams =
         P.lens (_teams :: UserResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _teams = a } :: UserResource s)
+
+instance P.HasTimeZone (UserResource s) (TF.Attr s P.Text) where
+    timeZone =
+        P.lens (_timeZone :: UserResource s -> TF.Attr s P.Text)
+               (\s a -> s { _timeZone = a } :: UserResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"

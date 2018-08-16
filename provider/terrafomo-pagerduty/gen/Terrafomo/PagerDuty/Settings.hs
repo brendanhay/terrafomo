@@ -231,6 +231,9 @@ data LayerSetting s = LayerSetting'
     { _end                       :: TF.Attr s P.Text
     -- ^ @end@ - (Optional)
     --
+    , _name                      :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
     , _restriction               :: TF.Attr s [TF.Attr s (RestrictionSetting s)]
     -- ^ @restriction@ - (Optional)
     --
@@ -258,6 +261,7 @@ layerSetting
 layerSetting _rotationTurnLengthSeconds _rotationVirtualStart _start _users =
     LayerSetting'
         { _end = TF.Nil
+        , _name = TF.Nil
         , _restriction = TF.Nil
         , _rotationTurnLengthSeconds = _rotationTurnLengthSeconds
         , _rotationVirtualStart = _rotationVirtualStart
@@ -269,6 +273,7 @@ instance TF.IsValue  (LayerSetting s)
 instance TF.IsObject (LayerSetting s) where
     toObject LayerSetting'{..} = P.catMaybes
         [ TF.assign "end" <$> TF.attribute _end
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "restriction" <$> TF.attribute _restriction
         , TF.assign "rotation_turn_length_seconds" <$> TF.attribute _rotationTurnLengthSeconds
         , TF.assign "rotation_virtual_start" <$> TF.attribute _rotationVirtualStart
@@ -283,6 +288,11 @@ instance P.HasEnd (LayerSetting s) (TF.Attr s P.Text) where
     end =
         P.lens (_end :: LayerSetting s -> TF.Attr s P.Text)
                (\s a -> s { _end = a } :: LayerSetting s)
+
+instance P.HasName (LayerSetting s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LayerSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LayerSetting s)
 
 instance P.HasRestriction (LayerSetting s) (TF.Attr s [TF.Attr s (RestrictionSetting s)]) where
     restriction =
