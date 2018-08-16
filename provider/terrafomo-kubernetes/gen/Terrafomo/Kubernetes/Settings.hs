@@ -390,10 +390,10 @@ data AzureDiskSetting s = AzureDiskSetting'
 
 newAzureDiskSetting
     :: TF.Attr s P.Text -- ^ @caching_mode@ - 'P.cachingMode'
-    -> TF.Attr s P.Text -- ^ @data_disk_uri@ - 'P.dataDiskUri'
     -> TF.Attr s P.Text -- ^ @disk_name@ - 'P.diskName'
+    -> TF.Attr s P.Text -- ^ @data_disk_uri@ - 'P.dataDiskUri'
     -> AzureDiskSetting s
-newAzureDiskSetting _cachingMode _dataDiskUri _diskName =
+newAzureDiskSetting _cachingMode _diskName _dataDiskUri =
     AzureDiskSetting'
         { _cachingMode = _cachingMode
         , _dataDiskUri = _dataDiskUri
@@ -3499,10 +3499,10 @@ data RbdSetting s = RbdSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newRbdSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @ceph_monitors@ - 'P.cephMonitors'
-    -> TF.Attr s P.Text -- ^ @rbd_image@ - 'P.rbdImage'
+    :: TF.Attr s P.Text -- ^ @rbd_image@ - 'P.rbdImage'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @ceph_monitors@ - 'P.cephMonitors'
     -> RbdSetting s
-newRbdSetting _cephMonitors _rbdImage =
+newRbdSetting _rbdImage _cephMonitors =
     RbdSetting'
         { _cephMonitors = _cephMonitors
         , _fsType = TF.Nil
@@ -4465,15 +4465,15 @@ data SpecSetting s = SpecSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newSpecSetting
-    :: TF.Attr s P.Int -- ^ @max_replicas@ - 'P.maxReplicas'
-    -> TF.Attr s (ScaleTargetRefSetting s) -- ^ @scale_target_ref@ - 'P.scaleTargetRef'
+    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @capacity@ - 'P.capacity'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @access_modes@ - 'P.accessModes'
-    -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @capacity@ - 'P.capacity'
-    -> TF.Attr s (PersistentVolumeSourceSetting s) -- ^ @persistent_volume_source@ - 'P.persistentVolumeSource'
+    -> TF.Attr s (ScaleTargetRefSetting s) -- ^ @scale_target_ref@ - 'P.scaleTargetRef'
+    -> TF.Attr s P.Int -- ^ @max_replicas@ - 'P.maxReplicas'
     -> TF.Attr s (ResourcesSetting s) -- ^ @resources@ - 'P.resources'
+    -> TF.Attr s (PersistentVolumeSourceSetting s) -- ^ @persistent_volume_source@ - 'P.persistentVolumeSource'
     -> TF.Attr s (TemplateSetting s) -- ^ @template@ - 'P.template'
     -> SpecSetting s
-newSpecSetting _maxReplicas _scaleTargetRef _accessModes _capacity _persistentVolumeSource _resources _template =
+newSpecSetting _capacity _accessModes _scaleTargetRef _maxReplicas _resources _persistentVolumeSource _template =
     SpecSetting'
         { _maxReplicas = _maxReplicas
         , _minReplicas = TF.value 1
@@ -5545,10 +5545,10 @@ data VolumeMountSetting s = VolumeMountSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newVolumeMountSetting
-    :: TF.Attr s P.Text -- ^ @mount_path@ - 'P.mountPath'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @mount_path@ - 'P.mountPath'
     -> VolumeMountSetting s
-newVolumeMountSetting _mountPath _name =
+newVolumeMountSetting _name _mountPath =
     VolumeMountSetting'
         { _mountPath = _mountPath
         , _name = _name
