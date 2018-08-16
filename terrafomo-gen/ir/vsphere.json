@@ -5123,25 +5123,6 @@
                     "original": "compute_cluster_id"
                 },
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The unique name of the virtual machine group in the cluster."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_virtualMachineIds",
                     "computed": false,
                     "required": true,
@@ -5159,6 +5140,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "virtual_machine_ids"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The unique name of the virtual machine group in the cluster."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 }
             ],
             "conflicts": [],
@@ -5294,25 +5294,6 @@
                     "original": "compute_cluster_id"
                 },
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The unique name of the virtual machine group in the cluster."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_virtualMachineIds",
                     "computed": false,
                     "required": true,
@@ -5330,6 +5311,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "virtual_machine_ids"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The unique name of the virtual machine group in the cluster."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 }
             ],
             "conflicts": [],
@@ -6824,25 +6824,6 @@
                     "original": "datastore_cluster_id"
                 },
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The unique name of the virtual machine group in the cluster."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_virtualMachineIds",
                     "computed": false,
                     "required": true,
@@ -6861,6 +6842,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "virtual_machine_ids"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The unique name of the virtual machine group in the cluster."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 }
             ],
             "conflicts": [],
@@ -7828,25 +7828,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_distributedVirtualSwitchUuid",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The UUID of the DVS to attach this port group to."
-                    ],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"distributed_virtual_switch_uuid\" <$> TF.attribute",
-                    "name": "_distributedVirtualSwitchUuid",
-                    "method": "distributedVirtualSwitchUuid",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDistributedVirtualSwitchUuid",
-                    "validate": false,
-                    "optional": false,
-                    "original": "distributed_virtual_switch_uuid"
-                },
-                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -7864,6 +7845,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "_distributedVirtualSwitchUuid",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The UUID of the DVS to attach this port group to."
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"distributed_virtual_switch_uuid\" <$> TF.attribute",
+                    "name": "_distributedVirtualSwitchUuid",
+                    "method": "distributedVirtualSwitchUuid",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDistributedVirtualSwitchUuid",
+                    "validate": false,
+                    "optional": false,
+                    "original": "distributed_virtual_switch_uuid"
                 }
             ],
             "conflicts": [],
@@ -11547,23 +11547,23 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_activeNics",
+                    "default": "_networkAdapters",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "List of active network adapters used for load balancing."
+                        "The list of network adapters to bind to this virtual switch."
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"active_nics\" <$> TF.attribute",
-                    "name": "_activeNics",
-                    "method": "activeNics",
+                    "encoder": "TF.assign \"network_adapters\" <$> TF.attribute",
+                    "name": "_networkAdapters",
+                    "method": "networkAdapters",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasActiveNics",
+                    "class": "HasNetworkAdapters",
                     "validate": false,
                     "optional": false,
-                    "original": "active_nics"
+                    "original": "network_adapters"
                 },
                 {
                     "default": "_hostSystemId",
@@ -11604,23 +11604,23 @@
                     "original": "name"
                 },
                 {
-                    "default": "_networkAdapters",
+                    "default": "_activeNics",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "The list of network adapters to bind to this virtual switch."
+                        "List of active network adapters used for load balancing."
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"network_adapters\" <$> TF.attribute",
-                    "name": "_networkAdapters",
-                    "method": "networkAdapters",
+                    "encoder": "TF.assign \"active_nics\" <$> TF.attribute",
+                    "name": "_activeNics",
+                    "method": "activeNics",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasNetworkAdapters",
+                    "class": "HasActiveNics",
                     "validate": false,
                     "optional": false,
-                    "original": "network_adapters"
+                    "original": "active_nics"
                 },
                 {
                     "default": "_standbyNics",
@@ -12179,6 +12179,27 @@
             ],
             "parameters": [
                 {
+                    "default": "_remoteHosts",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The hostnames or IP addresses of the remote server or servers. Only one",
+                        "element should be present for NFS v3 but multiple can be present for NFS",
+                        "v4.1."
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"remote_hosts\" <$> TF.attribute",
+                    "name": "_remoteHosts",
+                    "method": "remoteHosts",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s P.Text))",
+                    "class": "HasRemoteHosts",
+                    "validate": false,
+                    "optional": false,
+                    "original": "remote_hosts"
+                },
+                {
                     "default": "_hostSystemIds",
                     "computed": false,
                     "required": true,
@@ -12215,27 +12236,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
-                },
-                {
-                    "default": "_remoteHosts",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The hostnames or IP addresses of the remote server or servers. Only one",
-                        "element should be present for NFS v3 but multiple can be present for NFS",
-                        "v4.1."
-                    ],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"remote_hosts\" <$> TF.attribute",
-                    "name": "_remoteHosts",
-                    "method": "remoteHosts",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s P.Text))",
-                    "class": "HasRemoteHosts",
-                    "validate": false,
-                    "optional": false,
-                    "original": "remote_hosts"
                 },
                 {
                     "default": "_remotePath",
@@ -12605,25 +12605,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Name of resource pool."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_parentResourcePoolId",
                     "computed": false,
                     "required": true,
@@ -12642,6 +12623,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "parent_resource_pool_id"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name of resource pool."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 }
             ],
             "conflicts": [],
@@ -13006,25 +13006,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_associableTypes",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Object types to which this category's tags can be attached."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"associable_types\" <$> TF.attribute",
-                    "name": "_associableTypes",
-                    "method": "associableTypes",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasAssociableTypes",
-                    "validate": false,
-                    "optional": false,
-                    "original": "associable_types"
-                },
-                {
                     "default": "_cardinality",
                     "computed": false,
                     "required": true,
@@ -13063,6 +13044,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "_associableTypes",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Object types to which this category's tags can be attached."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"associable_types\" <$> TF.attribute",
+                    "name": "_associableTypes",
+                    "method": "associableTypes",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasAssociableTypes",
+                    "validate": false,
+                    "optional": false,
+                    "original": "associable_types"
                 }
             ],
             "conflicts": [],
@@ -13381,25 +13381,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The name of the vApp container."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_parentResourcePoolId",
                     "computed": false,
                     "required": true,
@@ -13418,6 +13399,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "parent_resource_pool_id"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The name of the vApp container."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 }
             ],
             "conflicts": [],
@@ -13557,23 +13557,6 @@
                     "original": "datastore"
                 },
                 {
-                    "default": "_size",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"size\" <$> TF.attribute",
-                    "name": "_size",
-                    "method": "size",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasSize",
-                    "validate": false,
-                    "optional": false,
-                    "original": "size"
-                },
-                {
                     "default": "_vmdkPath",
                     "computed": false,
                     "required": true,
@@ -13589,6 +13572,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "vmdk_path"
+                },
+                {
+                    "default": "_size",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"size\" <$> TF.attribute",
+                    "name": "_size",
+                    "method": "size",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasSize",
+                    "validate": false,
+                    "optional": false,
+                    "original": "size"
                 }
             ],
             "conflicts": [],
@@ -14949,23 +14949,23 @@
             ],
             "parameters": [
                 {
-                    "default": "_name",
+                    "default": "_resourcePoolId",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "The name of this virtual machine."
+                        "The ID of a resource pool to put the virtual machine in."
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
+                    "encoder": "TF.assign \"resource_pool_id\" <$> TF.attribute",
+                    "name": "_resourcePoolId",
+                    "method": "resourcePoolId",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasName",
+                    "class": "HasResourcePoolId",
                     "validate": false,
                     "optional": false,
-                    "original": "name"
+                    "original": "resource_pool_id"
                 },
                 {
                     "default": "_networkInterface",
@@ -14987,23 +14987,23 @@
                     "original": "network_interface"
                 },
                 {
-                    "default": "_resourcePoolId",
+                    "default": "_name",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "The ID of a resource pool to put the virtual machine in."
+                        "The name of this virtual machine."
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"resource_pool_id\" <$> TF.attribute",
-                    "name": "_resourcePoolId",
-                    "method": "resourcePoolId",
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasResourcePoolId",
+                    "class": "HasName",
                     "validate": false,
                     "optional": false,
-                    "original": "resource_pool_id"
+                    "original": "name"
                 }
             ],
             "conflicts": [],
@@ -15177,23 +15177,6 @@
                     "original": "memory"
                 },
                 {
-                    "default": "_quiesce",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"quiesce\" <$> TF.attribute",
-                    "name": "_quiesce",
-                    "method": "quiesce",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasQuiesce",
-                    "validate": false,
-                    "optional": false,
-                    "original": "quiesce"
-                },
-                {
                     "default": "_snapshotName",
                     "computed": false,
                     "required": true,
@@ -15209,6 +15192,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "snapshot_name"
+                },
+                {
+                    "default": "_quiesce",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"quiesce\" <$> TF.attribute",
+                    "name": "_quiesce",
+                    "method": "quiesce",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasQuiesce",
+                    "validate": false,
+                    "optional": false,
+                    "original": "quiesce"
                 },
                 {
                     "default": "_virtualMachineUuid",
