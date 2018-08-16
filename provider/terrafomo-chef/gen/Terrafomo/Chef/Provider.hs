@@ -92,19 +92,14 @@ newProvider _clientName _serverUrl =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "chef"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
-                  , P.Just $ TF.assign "client_name" _clientName
-                  , TF.assign "key_material" <$> _keyMaterial
-                  , P.Just $ TF.assign "server_url" _serverUrl
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
+            , P.Just $ TF.assign "client_name" _clientName
+            , TF.assign "key_material" <$> _keyMaterial
+            , P.Just $ TF.assign "server_url" _serverUrl
+            ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty

@@ -78,7 +78,7 @@ dataBagResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DataBagResource s)
 dataBagResource _name =
-    TF.unsafeResource "chef_data_bag" P.defaultProvider TF.validator $
+    TF.unsafeResource "chef_data_bag" TF.validator $
         DataBagResource'
             { _name = _name
             }
@@ -117,7 +117,7 @@ dataBagItemResource
     -> TF.Attr s P.Text -- ^ @data_bag_name@ - 'P.dataBagName'
     -> P.Resource (DataBagItemResource s)
 dataBagItemResource _contentJson _dataBagName =
-    TF.unsafeResource "chef_data_bag_item" P.defaultProvider TF.validator $
+    TF.unsafeResource "chef_data_bag_item" TF.validator $
         DataBagItemResource'
             { _contentJson = _contentJson
             , _dataBagName = _dataBagName
@@ -171,7 +171,7 @@ environmentResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (EnvironmentResource s)
 environmentResource _name =
-    TF.unsafeResource "chef_environment" P.defaultProvider TF.validator $
+    TF.unsafeResource "chef_environment" TF.validator $
         EnvironmentResource'
             { _cookbookConstraints = TF.Nil
             , _defaultAttributesJson = TF.value "{}"
@@ -249,7 +249,7 @@ nodeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NodeResource s)
 nodeResource _name =
-    TF.unsafeResource "chef_node" P.defaultProvider TF.validator $
+    TF.unsafeResource "chef_node" TF.validator $
         NodeResource'
             { _automaticAttributesJson = TF.value "{}"
             , _defaultAttributesJson = TF.value "{}"
@@ -335,7 +335,7 @@ roleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RoleResource s)
 roleResource _name =
-    TF.unsafeResource "chef_role" P.defaultProvider TF.validator $
+    TF.unsafeResource "chef_role" TF.validator $
         RoleResource'
             { _defaultAttributesJson = TF.value "{}"
             , _description = TF.value "Managed by Terraform"
