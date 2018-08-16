@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "interfaceSetting",
+                "smart": "newInterfaceSetting",
                 "name": "InterfaceSetting'"
             },
             "arguments": [
