@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.OPC
-    ( module Terrafomo.OPC.DataSource
-    , module Terrafomo.OPC.Lens
-    , module Terrafomo.OPC.Provider
-    , module Terrafomo.OPC.Resource
-    , module Terrafomo.OPC.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.OPC.Provider
+
+    -- * Custom Types
     , module Terrafomo.OPC.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.OPC.DataSource
+
+    -- * Resources
+    , module Terrafomo.OPC.Resource
+
+    -- * Settings
+    , module Terrafomo.OPC.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.OPC.Lens
     ) where
 
 import Terrafomo.OPC.DataSource

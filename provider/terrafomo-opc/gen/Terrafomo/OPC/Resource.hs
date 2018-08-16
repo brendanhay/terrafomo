@@ -17,7 +17,6 @@
 --
 module Terrafomo.OPC.Resource
     (
-    -- * Resource Datatypes
     -- ** opc_compute_acl
       ComputeAclResource (..)
     , computeAclResource
@@ -199,6 +198,7 @@ data ComputeAclResource s = ComputeAclResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_acl@ resource value.
 computeAclResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeAclResource s)
@@ -264,6 +264,7 @@ data ComputeImageListResource s = ComputeImageListResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_image_list@ resource value.
 computeImageListResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -323,6 +324,7 @@ data ComputeImageListEntryResource s = ComputeImageListEntryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_image_list_entry@ resource value.
 computeImageListEntryResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @machine_images@ - 'P.machineImages'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -411,6 +413,7 @@ data ComputeInstanceResource s = ComputeInstanceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_instance@ resource value.
 computeInstanceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @shape@ - 'P.shape'
@@ -591,6 +594,7 @@ data ComputeIpAddressAssociationResource s = ComputeIpAddressAssociationResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_ip_address_association@ resource value.
 computeIpAddressAssociationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeIpAddressAssociationResource s)
@@ -666,6 +670,7 @@ data ComputeIpAddressPrefixSetResource s = ComputeIpAddressPrefixSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_ip_address_prefix_set@ resource value.
 computeIpAddressPrefixSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeIpAddressPrefixSetResource s)
@@ -734,6 +739,7 @@ data ComputeIpAddressReservationResource s = ComputeIpAddressReservationResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_ip_address_reservation@ resource value.
 computeIpAddressReservationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @ip_address_pool@ - 'P.ipAddressPool'
@@ -800,6 +806,7 @@ data ComputeIpAssociationResource s = ComputeIpAssociationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_ip_association@ resource value.
 computeIpAssociationResource
     :: TF.Attr s P.Text -- ^ @parent_pool@ - 'P.parentPool'
     -> TF.Attr s P.Text -- ^ @vcable@ - 'P.vcable'
@@ -861,6 +868,7 @@ data ComputeIpNetworkResource s = ComputeIpNetworkResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_ip_network@ resource value.
 computeIpNetworkResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @ip_address_prefix@ - 'P.ipAddressPrefix'
@@ -941,6 +949,7 @@ data ComputeIpNetworkExchangeResource s = ComputeIpNetworkExchangeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_ip_network_exchange@ resource value.
 computeIpNetworkExchangeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeIpNetworkExchangeResource s)
@@ -999,6 +1008,7 @@ data ComputeIpReservationResource s = ComputeIpReservationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_ip_reservation@ resource value.
 computeIpReservationResource
     :: TF.Attr s P.Bool -- ^ @permanent@ - 'P.permanent'
     -> P.Resource (ComputeIpReservationResource s)
@@ -1069,6 +1079,7 @@ data ComputeMachineImageResource s = ComputeMachineImageResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_machine_image@ resource value.
 computeMachineImageResource
     :: TF.Attr s P.Text -- ^ @account@ - 'P.account'
     -> TF.Attr s P.Text -- ^ @file@ - 'P.file'
@@ -1167,6 +1178,7 @@ data ComputeOrchestratedInstanceResource s = ComputeOrchestratedInstanceResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_orchestrated_instance@ resource value.
 computeOrchestratedInstanceResource
     :: TF.Attr s [TF.Attr s (InstanceSetting s)] -- ^ @instance@ - 'P.instance''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1250,6 +1262,7 @@ data ComputeRouteResource s = ComputeRouteResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_route@ resource value.
 computeRouteResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @ip_address_prefix@ - 'P.ipAddressPrefix'
@@ -1340,6 +1353,7 @@ data ComputeSecRuleResource s = ComputeSecRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_sec_rule@ resource value.
 computeSecRuleResource
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @application@ - 'P.application'
@@ -1436,6 +1450,7 @@ data ComputeSecurityApplicationResource s = ComputeSecurityApplicationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_security_application@ resource value.
 computeSecurityApplicationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
@@ -1510,6 +1525,7 @@ data ComputeSecurityAssociationResource s = ComputeSecurityAssociationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_security_association@ resource value.
 computeSecurityAssociationResource
     :: TF.Attr s P.Text -- ^ @seclist@ - 'P.seclist'
     -> TF.Attr s P.Text -- ^ @vcable@ - 'P.vcable'
@@ -1562,6 +1578,7 @@ data ComputeSecurityIpListResource s = ComputeSecurityIpListResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_security_ip_list@ resource value.
 computeSecurityIpListResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @ip_entries@ - 'P.ipEntries'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1621,6 +1638,7 @@ data ComputeSecurityListResource s = ComputeSecurityListResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_security_list@ resource value.
 computeSecurityListResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSecurityListResource s)
@@ -1692,6 +1710,7 @@ data ComputeSecurityProtocolResource s = ComputeSecurityProtocolResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_security_protocol@ resource value.
 computeSecurityProtocolResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSecurityProtocolResource s)
@@ -1795,6 +1814,7 @@ data ComputeSecurityRuleResource s = ComputeSecurityRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_security_rule@ resource value.
 computeSecurityRuleResource
     :: TF.Attr s P.Text -- ^ @flow_direction@ - 'P.flowDirection'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1907,6 +1927,7 @@ data ComputeSnapshotResource s = ComputeSnapshotResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_snapshot@ resource value.
 computeSnapshotResource
     :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
     -> P.Resource (ComputeSnapshotResource s)
@@ -1967,6 +1988,7 @@ data ComputeSshKeyResource s = ComputeSshKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_ssh_key@ resource value.
 computeSshKeyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2023,6 +2045,7 @@ data ComputeStorageAttachmentResource s = ComputeStorageAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_storage_attachment@ resource value.
 computeStorageAttachmentResource
     :: TF.Attr s P.Int -- ^ @index@ - 'P.index'
     -> TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
@@ -2095,6 +2118,7 @@ data ComputeStorageVolumeResource s = ComputeStorageVolumeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_storage_volume@ resource value.
 computeStorageVolumeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
@@ -2225,6 +2249,7 @@ data ComputeStorageVolumeSnapshotResource s = ComputeStorageVolumeSnapshotResour
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_storage_volume_snapshot@ resource value.
 computeStorageVolumeSnapshotResource
     :: TF.Attr s P.Text -- ^ @volume_name@ - 'P.volumeName'
     -> P.Resource (ComputeStorageVolumeSnapshotResource s)
@@ -2336,6 +2361,7 @@ data ComputeVnicSetResource s = ComputeVnicSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_vnic_set@ resource value.
 computeVnicSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeVnicSetResource s)
@@ -2407,6 +2433,7 @@ data LbaasCertificateResource s = LbaasCertificateResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_lbaas_certificate@ resource value.
 lbaasCertificateResource
     :: TF.Attr s P.Text -- ^ @certificate_body@ - 'P.certificateBody'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2511,6 +2538,7 @@ data LbaasListenerResource s = LbaasListenerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_lbaas_listener@ resource value.
 lbaasListenerResource
     :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2669,6 +2697,7 @@ data LbaasLoadBalancerResource s = LbaasLoadBalancerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_lbaas_load_balancer@ resource value.
 lbaasLoadBalancerResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
@@ -2934,6 +2963,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     -- * 'sslNegotiationPolicy'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_lbaas_policy@ resource value.
 lbaasPolicyResource
     :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -3165,6 +3195,7 @@ data LbaasServerPoolResource s = LbaasServerPoolResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_lbaas_server_pool@ resource value.
 lbaasServerPoolResource
     :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -3281,6 +3312,7 @@ data StorageContainerResource s = StorageContainerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_storage_container@ resource value.
 storageContainerResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (StorageContainerResource s)
@@ -3411,6 +3443,7 @@ data StorageObjectResource s = StorageObjectResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_storage_object@ resource value.
 storageObjectResource
     :: TF.Attr s P.Text -- ^ @container@ - 'P.container'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'

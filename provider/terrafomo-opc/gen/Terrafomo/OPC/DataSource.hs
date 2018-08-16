@@ -17,7 +17,6 @@
 --
 module Terrafomo.OPC.DataSource
     (
-    -- * DataSource Datatypes
     -- ** opc_compute_image_list_entry
       ComputeImageListEntryData (..)
     , computeImageListEntryData
@@ -92,6 +91,7 @@ data ComputeImageListEntryData s = ComputeImageListEntryData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_image_list_entry@ datasource value.
 computeImageListEntryData
     :: TF.Attr s P.Text -- ^ @image_list@ - 'P.imageList'
     -> TF.Attr s P.Int -- ^ @version@ - 'P.version'
@@ -151,6 +151,7 @@ data ComputeIpAddressReservationData s = ComputeIpAddressReservationData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_ip_address_reservation@ datasource value.
 computeIpAddressReservationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeIpAddressReservationData s)
@@ -201,6 +202,7 @@ data ComputeIpReservationData s = ComputeIpReservationData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_ip_reservation@ datasource value.
 computeIpReservationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeIpReservationData s)
@@ -254,6 +256,7 @@ data ComputeMachineImageData s = ComputeMachineImageData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_machine_image@ datasource value.
 computeMachineImageData
     :: TF.Attr s P.Text -- ^ @account@ - 'P.account'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -336,6 +339,7 @@ data ComputeNetworkInterfaceData s = ComputeNetworkInterfaceData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_network_interface@ datasource value.
 computeNetworkInterfaceData
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> TF.Attr s P.Text -- ^ @interface@ - 'P.interface'
@@ -426,6 +430,7 @@ data ComputeSshKeyData s = ComputeSshKeyData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_ssh_key@ datasource value.
 computeSshKeyData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeSshKeyData s)
@@ -467,6 +472,7 @@ data ComputeStorageVolumeSnapshotData s = ComputeStorageVolumeSnapshotData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_storage_volume_snapshot@ datasource value.
 computeStorageVolumeSnapshotData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeStorageVolumeSnapshotData s)
@@ -553,6 +559,7 @@ data ComputeVnicData s = ComputeVnicData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opc_compute_vnic@ datasource value.
 computeVnicData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeVnicData s)

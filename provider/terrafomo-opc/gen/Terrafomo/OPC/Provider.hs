@@ -17,11 +17,10 @@
 --
 module Terrafomo.OPC.Provider
     (
-    -- * OPC Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * OPC Specific Aliases
+    -- ** OPC Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -122,7 +121,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "opc"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "endpoint" <$> _endpoint
             , P.Just $ TF.assign "identity_domain" _identityDomain
