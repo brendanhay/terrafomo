@@ -8,12 +8,12 @@ name: terrafomo-ultradns
 <<: *extensions
 
 dependencies:
+  - aeson
   - base
-  - unordered-containers
-  - text
-  - terrafomo
-  - hashable
+  - containers
   - microlens
+  - terrafomo
+  - text
 
 library:
   source-dirs:

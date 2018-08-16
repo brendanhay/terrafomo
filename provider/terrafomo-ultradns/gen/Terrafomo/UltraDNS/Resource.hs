@@ -50,10 +50,9 @@ import GHC.Base (($))
 
 import Terrafomo.UltraDNS.Settings
 
-import qualified Data.Hashable               as P
-import qualified Data.HashMap.Strict         as P
-import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Map.Strict             as P
+import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
 import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
@@ -83,13 +82,13 @@ data DirpoolResource s = DirpoolResource'
     , _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _noResponse      :: TF.Attr s [TF.Attr s (DirpoolNoResponse s)]
+    , _noResponse      :: TF.Attr s [TF.Attr s (NoResponseSetting s)]
     -- ^ @no_response@ - (Optional)
     --
-    , _rdata           :: TF.Attr s [TF.Attr s (DirpoolRdata s)]
+    , _rdata           :: TF.Attr s [TF.Attr s (RdataSetting s)]
     -- ^ @rdata@ - (Required)
     --
-    , _ttl             :: TF.Attr s P.Integer
+    , _ttl             :: TF.Attr s P.Int
     -- ^ @ttl@ - (Optional)
     --
     , _type'           :: TF.Attr s P.Text
@@ -98,17 +97,17 @@ data DirpoolResource s = DirpoolResource'
     , _zone            :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dirpoolResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (DirpoolRdata s)] -- ^ @rdata@ - 'P.rdata'
+    -> TF.Attr s [TF.Attr s (RdataSetting s)] -- ^ @rdata@ - 'P.rdata'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (DirpoolResource s)
 dirpoolResource _description _name _rdata _type' _zone =
-    TF.newResource "ultradns_dirpool" TF.validator $
+    TF.unsafeResource "ultradns_dirpool" P.defaultProvider TF.validator $
         DirpoolResource'
             { _conflictResolve = TF.value "GEO"
             , _description = _description
@@ -134,14 +133,6 @@ instance TF.IsObject (DirpoolResource s) where
 
 instance TF.IsValid (DirpoolResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_noResponse"
-                  (_noResponse
-                      :: DirpoolResource s -> TF.Attr s [TF.Attr s (DirpoolNoResponse s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_rdata"
-                  (_rdata
-                      :: DirpoolResource s -> TF.Attr s [TF.Attr s (DirpoolRdata s)])
-                  TF.validator
 
 instance P.HasConflictResolve (DirpoolResource s) (TF.Attr s P.Text) where
     conflictResolve =
@@ -158,19 +149,19 @@ instance P.HasName (DirpoolResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DirpoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DirpoolResource s)
 
-instance P.HasNoResponse (DirpoolResource s) (TF.Attr s [TF.Attr s (DirpoolNoResponse s)]) where
+instance P.HasNoResponse (DirpoolResource s) (TF.Attr s [TF.Attr s (NoResponseSetting s)]) where
     noResponse =
-        P.lens (_noResponse :: DirpoolResource s -> TF.Attr s [TF.Attr s (DirpoolNoResponse s)])
+        P.lens (_noResponse :: DirpoolResource s -> TF.Attr s [TF.Attr s (NoResponseSetting s)])
                (\s a -> s { _noResponse = a } :: DirpoolResource s)
 
-instance P.HasRdata (DirpoolResource s) (TF.Attr s [TF.Attr s (DirpoolRdata s)]) where
+instance P.HasRdata (DirpoolResource s) (TF.Attr s [TF.Attr s (RdataSetting s)]) where
     rdata =
-        P.lens (_rdata :: DirpoolResource s -> TF.Attr s [TF.Attr s (DirpoolRdata s)])
+        P.lens (_rdata :: DirpoolResource s -> TF.Attr s [TF.Attr s (RdataSetting s)])
                (\s a -> s { _rdata = a } :: DirpoolResource s)
 
-instance P.HasTtl (DirpoolResource s) (TF.Attr s P.Integer) where
+instance P.HasTtl (DirpoolResource s) (TF.Attr s P.Int) where
     ttl =
-        P.lens (_ttl :: DirpoolResource s -> TF.Attr s P.Integer)
+        P.lens (_ttl :: DirpoolResource s -> TF.Attr s P.Int)
                (\s a -> s { _ttl = a } :: DirpoolResource s)
 
 instance P.HasType' (DirpoolResource s) (TF.Attr s P.Text) where
@@ -194,7 +185,7 @@ data ProbeHttpResource s = ProbeHttpResource'
     { _agents     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @agents@ - (Required)
     --
-    , _httpProbe  :: TF.Attr s [TF.Attr s (ProbeHttpHttpProbe s)]
+    , _httpProbe  :: TF.Attr s [TF.Attr s (HttpProbeSetting s)]
     -- ^ @http_probe@ - (Optional)
     --
     , _interval   :: TF.Attr s P.Text
@@ -206,22 +197,22 @@ data ProbeHttpResource s = ProbeHttpResource'
     , _poolRecord :: TF.Attr s P.Text
     -- ^ @pool_record@ - (Optional, Forces New)
     --
-    , _threshold  :: TF.Attr s P.Integer
+    , _threshold  :: TF.Attr s P.Int
     -- ^ @threshold@ - (Required)
     --
     , _zone       :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 probeHttpResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @agents@ - 'P.agents'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Integer -- ^ @threshold@ - 'P.threshold'
+    -> TF.Attr s P.Int -- ^ @threshold@ - 'P.threshold'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (ProbeHttpResource s)
 probeHttpResource _agents _name _threshold _zone =
-    TF.newResource "ultradns_probe_http" TF.validator $
+    TF.unsafeResource "ultradns_probe_http" P.defaultProvider TF.validator $
         ProbeHttpResource'
             { _agents = _agents
             , _httpProbe = TF.Nil
@@ -245,19 +236,15 @@ instance TF.IsObject (ProbeHttpResource s) where
 
 instance TF.IsValid (ProbeHttpResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_httpProbe"
-                  (_httpProbe
-                      :: ProbeHttpResource s -> TF.Attr s [TF.Attr s (ProbeHttpHttpProbe s)])
-                  TF.validator
 
 instance P.HasAgents (ProbeHttpResource s) (TF.Attr s [TF.Attr s P.Text]) where
     agents =
         P.lens (_agents :: ProbeHttpResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _agents = a } :: ProbeHttpResource s)
 
-instance P.HasHttpProbe (ProbeHttpResource s) (TF.Attr s [TF.Attr s (ProbeHttpHttpProbe s)]) where
+instance P.HasHttpProbe (ProbeHttpResource s) (TF.Attr s [TF.Attr s (HttpProbeSetting s)]) where
     httpProbe =
-        P.lens (_httpProbe :: ProbeHttpResource s -> TF.Attr s [TF.Attr s (ProbeHttpHttpProbe s)])
+        P.lens (_httpProbe :: ProbeHttpResource s -> TF.Attr s [TF.Attr s (HttpProbeSetting s)])
                (\s a -> s { _httpProbe = a } :: ProbeHttpResource s)
 
 instance P.HasInterval (ProbeHttpResource s) (TF.Attr s P.Text) where
@@ -275,9 +262,9 @@ instance P.HasPoolRecord (ProbeHttpResource s) (TF.Attr s P.Text) where
         P.lens (_poolRecord :: ProbeHttpResource s -> TF.Attr s P.Text)
                (\s a -> s { _poolRecord = a } :: ProbeHttpResource s)
 
-instance P.HasThreshold (ProbeHttpResource s) (TF.Attr s P.Integer) where
+instance P.HasThreshold (ProbeHttpResource s) (TF.Attr s P.Int) where
     threshold =
-        P.lens (_threshold :: ProbeHttpResource s -> TF.Attr s P.Integer)
+        P.lens (_threshold :: ProbeHttpResource s -> TF.Attr s P.Int)
                (\s a -> s { _threshold = a } :: ProbeHttpResource s)
 
 instance P.HasZone (ProbeHttpResource s) (TF.Attr s P.Text) where
@@ -302,28 +289,28 @@ data ProbePingResource s = ProbePingResource'
     , _name       :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _pingProbe  :: TF.Attr s [TF.Attr s (ProbePingPingProbe s)]
+    , _pingProbe  :: TF.Attr s [TF.Attr s (PingProbeSetting s)]
     -- ^ @ping_probe@ - (Optional)
     --
     , _poolRecord :: TF.Attr s P.Text
     -- ^ @pool_record@ - (Optional, Forces New)
     --
-    , _threshold  :: TF.Attr s P.Integer
+    , _threshold  :: TF.Attr s P.Int
     -- ^ @threshold@ - (Required)
     --
     , _zone       :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 probePingResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @agents@ - 'P.agents'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Integer -- ^ @threshold@ - 'P.threshold'
+    -> TF.Attr s P.Int -- ^ @threshold@ - 'P.threshold'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (ProbePingResource s)
 probePingResource _agents _name _threshold _zone =
-    TF.newResource "ultradns_probe_ping" TF.validator $
+    TF.unsafeResource "ultradns_probe_ping" P.defaultProvider TF.validator $
         ProbePingResource'
             { _agents = _agents
             , _interval = TF.value "FIVE_MINUTES"
@@ -347,10 +334,6 @@ instance TF.IsObject (ProbePingResource s) where
 
 instance TF.IsValid (ProbePingResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_pingProbe"
-                  (_pingProbe
-                      :: ProbePingResource s -> TF.Attr s [TF.Attr s (ProbePingPingProbe s)])
-                  TF.validator
 
 instance P.HasAgents (ProbePingResource s) (TF.Attr s [TF.Attr s P.Text]) where
     agents =
@@ -367,9 +350,9 @@ instance P.HasName (ProbePingResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ProbePingResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ProbePingResource s)
 
-instance P.HasPingProbe (ProbePingResource s) (TF.Attr s [TF.Attr s (ProbePingPingProbe s)]) where
+instance P.HasPingProbe (ProbePingResource s) (TF.Attr s [TF.Attr s (PingProbeSetting s)]) where
     pingProbe =
-        P.lens (_pingProbe :: ProbePingResource s -> TF.Attr s [TF.Attr s (ProbePingPingProbe s)])
+        P.lens (_pingProbe :: ProbePingResource s -> TF.Attr s [TF.Attr s (PingProbeSetting s)])
                (\s a -> s { _pingProbe = a } :: ProbePingResource s)
 
 instance P.HasPoolRecord (ProbePingResource s) (TF.Attr s P.Text) where
@@ -377,9 +360,9 @@ instance P.HasPoolRecord (ProbePingResource s) (TF.Attr s P.Text) where
         P.lens (_poolRecord :: ProbePingResource s -> TF.Attr s P.Text)
                (\s a -> s { _poolRecord = a } :: ProbePingResource s)
 
-instance P.HasThreshold (ProbePingResource s) (TF.Attr s P.Integer) where
+instance P.HasThreshold (ProbePingResource s) (TF.Attr s P.Int) where
     threshold =
-        P.lens (_threshold :: ProbePingResource s -> TF.Attr s P.Integer)
+        P.lens (_threshold :: ProbePingResource s -> TF.Attr s P.Int)
                (\s a -> s { _threshold = a } :: ProbePingResource s)
 
 instance P.HasZone (ProbePingResource s) (TF.Attr s P.Text) where
@@ -407,13 +390,13 @@ data RdpoolResource s = RdpoolResource'
     , _rdata       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @rdata@ - (Required)
     --
-    , _ttl         :: TF.Attr s P.Integer
+    , _ttl         :: TF.Attr s P.Int
     -- ^ @ttl@ - (Optional)
     --
     , _zone        :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 rdpoolResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -421,7 +404,7 @@ rdpoolResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (RdpoolResource s)
 rdpoolResource _name _rdata _zone =
-    TF.newResource "ultradns_rdpool" TF.validator $
+    TF.unsafeResource "ultradns_rdpool" P.defaultProvider TF.validator $
         RdpoolResource'
             { _description = TF.Nil
             , _name = _name
@@ -464,9 +447,9 @@ instance P.HasRdata (RdpoolResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_rdata :: RdpoolResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _rdata = a } :: RdpoolResource s)
 
-instance P.HasTtl (RdpoolResource s) (TF.Attr s P.Integer) where
+instance P.HasTtl (RdpoolResource s) (TF.Attr s P.Int) where
     ttl =
-        P.lens (_ttl :: RdpoolResource s -> TF.Attr s P.Integer)
+        P.lens (_ttl :: RdpoolResource s -> TF.Attr s P.Int)
                (\s a -> s { _ttl = a } :: RdpoolResource s)
 
 instance P.HasZone (RdpoolResource s) (TF.Attr s P.Text) where
@@ -497,7 +480,7 @@ data RecordResource s = RecordResource'
     , _zone  :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 recordResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -506,7 +489,7 @@ recordResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (RecordResource s)
 recordResource _name _rdata _type' _zone =
-    TF.newResource "ultradns_record" TF.validator $
+    TF.unsafeResource "ultradns_record" P.defaultProvider TF.validator $
         RecordResource'
             { _name = _name
             , _rdata = _rdata
@@ -563,7 +546,7 @@ data TcpoolResource s = TcpoolResource'
     { _actOnProbes               :: TF.Attr s P.Bool
     -- ^ @act_on_probes@ - (Optional)
     --
-    , _backupRecordFailoverDelay :: TF.Attr s P.Integer
+    , _backupRecordFailoverDelay :: TF.Attr s P.Int
     -- ^ @backup_record_failover_delay@ - (Optional)
     --
     , _backupRecordRdata         :: TF.Attr s P.Text
@@ -572,34 +555,34 @@ data TcpoolResource s = TcpoolResource'
     , _description               :: TF.Attr s P.Text
     -- ^ @description@ - (Required)
     --
-    , _maxToLb                   :: TF.Attr s P.Integer
+    , _maxToLb                   :: TF.Attr s P.Int
     -- ^ @max_to_lb@ - (Optional)
     --
     , _name                      :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _rdata                     :: TF.Attr s [TF.Attr s (TcpoolRdata s)]
+    , _rdata                     :: TF.Attr s [TF.Attr s (RdataSetting s)]
     -- ^ @rdata@ - (Required)
     --
     , _runProbes                 :: TF.Attr s P.Bool
     -- ^ @run_probes@ - (Optional)
     --
-    , _ttl                       :: TF.Attr s P.Integer
+    , _ttl                       :: TF.Attr s P.Int
     -- ^ @ttl@ - (Optional)
     --
     , _zone                      :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 tcpoolResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (TcpoolRdata s)] -- ^ @rdata@ - 'P.rdata'
+    -> TF.Attr s [TF.Attr s (RdataSetting s)] -- ^ @rdata@ - 'P.rdata'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (TcpoolResource s)
 tcpoolResource _description _name _rdata _zone =
-    TF.newResource "ultradns_tcpool" TF.validator $
+    TF.unsafeResource "ultradns_tcpool" P.defaultProvider TF.validator $
         TcpoolResource'
             { _actOnProbes = TF.value P.True
             , _backupRecordFailoverDelay = TF.Nil
@@ -629,19 +612,15 @@ instance TF.IsObject (TcpoolResource s) where
 
 instance TF.IsValid (TcpoolResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_rdata"
-                  (_rdata
-                      :: TcpoolResource s -> TF.Attr s [TF.Attr s (TcpoolRdata s)])
-                  TF.validator
 
 instance P.HasActOnProbes (TcpoolResource s) (TF.Attr s P.Bool) where
     actOnProbes =
         P.lens (_actOnProbes :: TcpoolResource s -> TF.Attr s P.Bool)
                (\s a -> s { _actOnProbes = a } :: TcpoolResource s)
 
-instance P.HasBackupRecordFailoverDelay (TcpoolResource s) (TF.Attr s P.Integer) where
+instance P.HasBackupRecordFailoverDelay (TcpoolResource s) (TF.Attr s P.Int) where
     backupRecordFailoverDelay =
-        P.lens (_backupRecordFailoverDelay :: TcpoolResource s -> TF.Attr s P.Integer)
+        P.lens (_backupRecordFailoverDelay :: TcpoolResource s -> TF.Attr s P.Int)
                (\s a -> s { _backupRecordFailoverDelay = a } :: TcpoolResource s)
 
 instance P.HasBackupRecordRdata (TcpoolResource s) (TF.Attr s P.Text) where
@@ -654,9 +633,9 @@ instance P.HasDescription (TcpoolResource s) (TF.Attr s P.Text) where
         P.lens (_description :: TcpoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: TcpoolResource s)
 
-instance P.HasMaxToLb (TcpoolResource s) (TF.Attr s P.Integer) where
+instance P.HasMaxToLb (TcpoolResource s) (TF.Attr s P.Int) where
     maxToLb =
-        P.lens (_maxToLb :: TcpoolResource s -> TF.Attr s P.Integer)
+        P.lens (_maxToLb :: TcpoolResource s -> TF.Attr s P.Int)
                (\s a -> s { _maxToLb = a } :: TcpoolResource s)
 
 instance P.HasName (TcpoolResource s) (TF.Attr s P.Text) where
@@ -664,9 +643,9 @@ instance P.HasName (TcpoolResource s) (TF.Attr s P.Text) where
         P.lens (_name :: TcpoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: TcpoolResource s)
 
-instance P.HasRdata (TcpoolResource s) (TF.Attr s [TF.Attr s (TcpoolRdata s)]) where
+instance P.HasRdata (TcpoolResource s) (TF.Attr s [TF.Attr s (RdataSetting s)]) where
     rdata =
-        P.lens (_rdata :: TcpoolResource s -> TF.Attr s [TF.Attr s (TcpoolRdata s)])
+        P.lens (_rdata :: TcpoolResource s -> TF.Attr s [TF.Attr s (RdataSetting s)])
                (\s a -> s { _rdata = a } :: TcpoolResource s)
 
 instance P.HasRunProbes (TcpoolResource s) (TF.Attr s P.Bool) where
@@ -674,9 +653,9 @@ instance P.HasRunProbes (TcpoolResource s) (TF.Attr s P.Bool) where
         P.lens (_runProbes :: TcpoolResource s -> TF.Attr s P.Bool)
                (\s a -> s { _runProbes = a } :: TcpoolResource s)
 
-instance P.HasTtl (TcpoolResource s) (TF.Attr s P.Integer) where
+instance P.HasTtl (TcpoolResource s) (TF.Attr s P.Int) where
     ttl =
-        P.lens (_ttl :: TcpoolResource s -> TF.Attr s P.Integer)
+        P.lens (_ttl :: TcpoolResource s -> TF.Attr s P.Int)
                (\s a -> s { _ttl = a } :: TcpoolResource s)
 
 instance P.HasZone (TcpoolResource s) (TF.Attr s P.Text) where
