@@ -104,9 +104,9 @@ data CertificateResource s = CertificateResource'
 
 -- | Define a new @digitalocean_certificate@ resource value.
 certificateResource
-    :: TF.Attr s P.Text -- ^ @leaf_certificate@ - 'P.leafCertificate'
-    -> TF.Attr s P.Text -- ^ @private_key@ - 'P.privateKey'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @leaf_certificate@ ('P._leafCertificate', 'P.leafCertificate')
+    -> TF.Attr s P.Text -- ^ @private_key@ ('P._privateKey', 'P.privateKey')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (CertificateResource s)
 certificateResource _leafCertificate _privateKey _name =
     TF.unsafeResource "digitalocean_certificate" TF.validator $
@@ -172,8 +172,8 @@ data DomainResource s = DomainResource'
 
 -- | Define a new @digitalocean_domain@ resource value.
 domainResource
-    :: TF.Attr s P.Text -- ^ @ip_address@ - 'P.ipAddress'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @ip_address@ ('P._ipAddress', 'P.ipAddress')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (DomainResource s)
 domainResource _ipAddress _name =
     TF.unsafeResource "digitalocean_domain" TF.validator $
@@ -252,10 +252,10 @@ data DropletResource s = DropletResource'
 
 -- | Define a new @digitalocean_droplet@ resource value.
 dropletResource
-    :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> TF.Attr s P.Text -- ^ @size@ - 'P.size'
+    :: TF.Attr s P.Text -- ^ @image@ ('P._image', 'P.image')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @region@ ('P._region', 'P.region')
+    -> TF.Attr s P.Text -- ^ @size@ ('P._size', 'P.size')
     -> P.Resource (DropletResource s)
 dropletResource _image _name _region _size =
     TF.unsafeResource "digitalocean_droplet" TF.validator $
@@ -417,7 +417,7 @@ data FirewallResource s = FirewallResource'
 
 -- | Define a new @digitalocean_firewall@ resource value.
 firewallResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (FirewallResource s)
 firewallResource _name =
     TF.unsafeResource "digitalocean_firewall" TF.validator $
@@ -493,7 +493,7 @@ data FloatingIpResource s = FloatingIpResource'
 
 -- | Define a new @digitalocean_floating_ip@ resource value.
 floatingIpResource
-    :: TF.Attr s P.Text -- ^ @region@ - 'P.region'
+    :: TF.Attr s P.Text -- ^ @region@ ('P._region', 'P.region')
     -> P.Resource (FloatingIpResource s)
 floatingIpResource _region =
     TF.unsafeResource "digitalocean_floating_ip" TF.validator $
@@ -560,9 +560,9 @@ data LoadbalancerResource s = LoadbalancerResource'
 
 -- | Define a new @digitalocean_loadbalancer@ resource value.
 loadbalancerResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRuleSetting s))) -- ^ @forwarding_rule@ - 'P.forwardingRule'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @region@ ('P._region', 'P.region')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRuleSetting s))) -- ^ @forwarding_rule@ ('P._forwardingRule', 'P.forwardingRule')
     -> P.Resource (LoadbalancerResource s)
 loadbalancerResource _name _region _forwardingRule =
     TF.unsafeResource "digitalocean_loadbalancer" TF.validator $
@@ -666,8 +666,8 @@ data RecordResource s = RecordResource'
 
 -- | Define a new @digitalocean_record@ resource value.
 recordResource
-    :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @domain@ ('P._domain', 'P.domain')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (RecordResource s)
 recordResource _domain _type' =
     TF.unsafeResource "digitalocean_record" TF.validator $
@@ -748,8 +748,8 @@ data SshKeyResource s = SshKeyResource'
 
 -- | Define a new @digitalocean_ssh_key@ resource value.
 sshKeyResource
-    :: TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @public_key@ ('P._publicKey', 'P.publicKey')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (SshKeyResource s)
 sshKeyResource _publicKey _name =
     TF.unsafeResource "digitalocean_ssh_key" TF.validator $
@@ -795,7 +795,7 @@ data TagResource s = TagResource'
 
 -- | Define a new @digitalocean_tag@ resource value.
 tagResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (TagResource s)
 tagResource _name =
     TF.unsafeResource "digitalocean_tag" TF.validator $
@@ -843,9 +843,9 @@ data VolumeResource s = VolumeResource'
 
 -- | Define a new @digitalocean_volume@ resource value.
 volumeResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @region@ ('P._region', 'P.region')
+    -> TF.Attr s P.Int -- ^ @size@ ('P._size', 'P.size')
     -> P.Resource (VolumeResource s)
 volumeResource _name _region _size =
     TF.unsafeResource "digitalocean_volume" TF.validator $

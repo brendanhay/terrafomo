@@ -88,10 +88,10 @@ data ForwardingRuleSetting s = ForwardingRuleSetting'
 
 -- | Construct a new @forwarding_rule@ settings value.
 newForwardingRuleSetting
-    :: TF.Attr s P.Int -- ^ @entry_port@ - 'P.entryPort'
-    -> TF.Attr s P.Int -- ^ @target_port@ - 'P.targetPort'
-    -> TF.Attr s P.Text -- ^ @entry_protocol@ - 'P.entryProtocol'
-    -> TF.Attr s P.Text -- ^ @target_protocol@ - 'P.targetProtocol'
+    :: TF.Attr s P.Int -- ^ 'P._entryPort': @entry_port@
+    -> TF.Attr s P.Int -- ^ 'P._targetPort': @target_port@
+    -> TF.Attr s P.Text -- ^ 'P._entryProtocol': @entry_protocol@
+    -> TF.Attr s P.Text -- ^ 'P._targetProtocol': @target_protocol@
     -> ForwardingRuleSetting s
 newForwardingRuleSetting _entryPort _targetPort _entryProtocol _targetProtocol =
     ForwardingRuleSetting'
@@ -174,8 +174,8 @@ data HealthcheckSetting s = HealthcheckSetting'
 
 -- | Construct a new @healthcheck@ settings value.
 newHealthcheckSetting
-    :: TF.Attr s P.Int -- ^ @port@ - 'P.port'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    :: TF.Attr s P.Int -- ^ 'P._port': @port@
+    -> TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
     -> HealthcheckSetting s
 newHealthcheckSetting _port _protocol =
     HealthcheckSetting'

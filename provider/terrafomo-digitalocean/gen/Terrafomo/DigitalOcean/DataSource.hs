@@ -68,7 +68,7 @@ data DomainData s = DomainData'
 
 -- | Define a new @digitalocean_domain@ datasource value.
 domainData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (DomainData s)
 domainData _name =
     TF.unsafeDataSource "digitalocean_domain" TF.validator $
@@ -111,7 +111,7 @@ data ImageData s = ImageData'
 
 -- | Define a new @digitalocean_image@ datasource value.
 imageData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ImageData s)
 imageData _name =
     TF.unsafeDataSource "digitalocean_image" TF.validator $
@@ -167,8 +167,8 @@ data RecordData s = RecordData'
 
 -- | Define a new @digitalocean_record@ datasource value.
 recordData
-    :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @domain@ ('P._domain', 'P.domain')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (RecordData s)
 recordData _domain _name =
     TF.unsafeDataSource "digitalocean_record" TF.validator $

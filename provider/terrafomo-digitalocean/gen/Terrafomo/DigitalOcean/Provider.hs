@@ -17,10 +17,11 @@
 --
 module Terrafomo.DigitalOcean.Provider
     (
+    -- * DigitalOcean Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** DigitalOcean Specific Aliases
+    -- * DigitalOcean Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -66,7 +67,7 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @token@ - 'P.token'
+    :: P.Text -- ^ @token@ ('P._token', 'P.token')
     -> Provider
 newProvider _token =
     Provider'
@@ -77,7 +78,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "digitalocean"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "token" _token
             ]
