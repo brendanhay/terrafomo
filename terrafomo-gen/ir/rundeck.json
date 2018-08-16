@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newCommandSetting",
+                "smart": "commandSetting",
                 "name": "CommandSetting'"
             },
             "arguments": [
@@ -154,7 +154,7 @@
         },
         {
             "con": {
-                "smart": "newJobSetting",
+                "smart": "jobSetting",
                 "name": "JobSetting'"
             },
             "arguments": [
@@ -256,7 +256,7 @@
         },
         {
             "con": {
-                "smart": "newNodeStepPluginSetting",
+                "smart": "nodeStepPluginSetting",
                 "name": "NodeStepPluginSetting'"
             },
             "arguments": [
@@ -324,7 +324,7 @@
         },
         {
             "con": {
-                "smart": "newOptionSetting",
+                "smart": "optionSetting",
                 "name": "OptionSetting'"
             },
             "arguments": [
@@ -562,7 +562,7 @@
         },
         {
             "con": {
-                "smart": "newResourceModelSourceSetting",
+                "smart": "resourceModelSourceSetting",
                 "name": "ResourceModelSourceSetting'"
             },
             "arguments": [
@@ -655,7 +655,7 @@
         },
         {
             "con": {
-                "smart": "newStepPluginSetting",
+                "smart": "stepPluginSetting",
                 "name": "StepPluginSetting'"
             },
             "arguments": [
