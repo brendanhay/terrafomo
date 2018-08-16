@@ -41,6 +41,7 @@ module Terrafomo.NS1.Lens
     , HasDomain (..)
     , HasEmail (..)
     , HasEndpoint (..)
+    , HasExpiry (..)
     , HasFilter (..)
     , HasFilters (..)
     , HasFrequency (..)
@@ -62,15 +63,19 @@ module Terrafomo.NS1.Lens
     , HasNotifyList (..)
     , HasNotifyRegional (..)
     , HasNotifyRepeat (..)
+    , HasNxTtl (..)
     , HasPolicy (..)
     , HasPrimary (..)
     , HasRapidRecheck (..)
+    , HasRefresh (..)
     , HasRegion (..)
     , HasRegions (..)
+    , HasRetry (..)
     , HasRules (..)
     , HasSourceId (..)
     , HasSourcetype (..)
     , HasTeams (..)
+    , HasTtl (..)
     , HasType' (..)
     , HasUseClientSubnet (..)
     , HasUsername (..)
@@ -250,6 +255,12 @@ class HasEndpoint a b | a -> b where
 instance HasEndpoint a b => HasEndpoint (TF.Schema l p a) b where
     endpoint = TF.configuration . endpoint
 
+class HasExpiry a b | a -> b where
+    expiry :: P.Lens' a b
+
+instance HasExpiry a b => HasExpiry (TF.Schema l p a) b where
+    expiry = TF.configuration . expiry
+
 class HasFilter a b | a -> b where
     filter :: P.Lens' a b
 
@@ -376,6 +387,12 @@ class HasNotifyRepeat a b | a -> b where
 instance HasNotifyRepeat a b => HasNotifyRepeat (TF.Schema l p a) b where
     notifyRepeat = TF.configuration . notifyRepeat
 
+class HasNxTtl a b | a -> b where
+    nxTtl :: P.Lens' a b
+
+instance HasNxTtl a b => HasNxTtl (TF.Schema l p a) b where
+    nxTtl = TF.configuration . nxTtl
+
 class HasPolicy a b | a -> b where
     policy :: P.Lens' a b
 
@@ -394,6 +411,12 @@ class HasRapidRecheck a b | a -> b where
 instance HasRapidRecheck a b => HasRapidRecheck (TF.Schema l p a) b where
     rapidRecheck = TF.configuration . rapidRecheck
 
+class HasRefresh a b | a -> b where
+    refresh :: P.Lens' a b
+
+instance HasRefresh a b => HasRefresh (TF.Schema l p a) b where
+    refresh = TF.configuration . refresh
+
 class HasRegion a b | a -> b where
     region :: P.Lens' a b
 
@@ -405,6 +428,12 @@ class HasRegions a b | a -> b where
 
 instance HasRegions a b => HasRegions (TF.Schema l p a) b where
     regions = TF.configuration . regions
+
+class HasRetry a b | a -> b where
+    retry :: P.Lens' a b
+
+instance HasRetry a b => HasRetry (TF.Schema l p a) b where
+    retry = TF.configuration . retry
 
 class HasRules a b | a -> b where
     rules :: P.Lens' a b
@@ -429,6 +458,12 @@ class HasTeams a b | a -> b where
 
 instance HasTeams a b => HasTeams (TF.Schema l p a) b where
     teams = TF.configuration . teams
+
+class HasTtl a b | a -> b where
+    ttl :: P.Lens' a b
+
+instance HasTtl a b => HasTtl (TF.Schema l p a) b where
+    ttl = TF.configuration . ttl
 
 class HasType' a b | a -> b where
     type' :: P.Lens' a b

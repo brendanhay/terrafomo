@@ -85,7 +85,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "ns1"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "apikey" <$> _apikey
             , TF.assign "endpoint" <$> _endpoint

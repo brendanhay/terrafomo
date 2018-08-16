@@ -681,6 +681,9 @@ data RecordResource s = RecordResource'
     , _regions         :: TF.Attr s [TF.Attr s (RegionsSetting s)]
     -- ^ @regions@ - (Optional)
     --
+    , _ttl             :: TF.Attr s P.Int
+    -- ^ @ttl@ - (Optional)
+    --
     , _type'           :: TF.Attr s P.Text
     -- ^ @type@ - (Required, Forces New)
     --
@@ -707,6 +710,7 @@ recordResource _domain _type' _zone =
             , _link = TF.Nil
             , _meta = TF.Nil
             , _regions = TF.Nil
+            , _ttl = TF.Nil
             , _type' = _type'
             , _useClientSubnet = TF.value P.True
             , _zone = _zone
@@ -720,6 +724,7 @@ instance TF.IsObject (RecordResource s) where
         , TF.assign "link" <$> TF.attribute _link
         , TF.assign "meta" <$> TF.attribute _meta
         , TF.assign "regions" <$> TF.attribute _regions
+        , TF.assign "ttl" <$> TF.attribute _ttl
         , TF.assign "type" <$> TF.attribute _type'
         , TF.assign "use_client_subnet" <$> TF.attribute _useClientSubnet
         , TF.assign "zone" <$> TF.attribute _zone
@@ -757,6 +762,11 @@ instance P.HasRegions (RecordResource s) (TF.Attr s [TF.Attr s (RegionsSetting s
     regions =
         P.lens (_regions :: RecordResource s -> TF.Attr s [TF.Attr s (RegionsSetting s)])
                (\s a -> s { _regions = a } :: RecordResource s)
+
+instance P.HasTtl (RecordResource s) (TF.Attr s P.Int) where
+    ttl =
+        P.lens (_ttl :: RecordResource s -> TF.Attr s P.Int)
+               (\s a -> s { _ttl = a } :: RecordResource s)
 
 instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
     type' =
@@ -1278,14 +1288,29 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Attr s P.Tex
 -- See the <https://www.terraform.io/docs/providers/ns1/r/zone.html terraform documentation>
 -- for more information.
 data ZoneResource s = ZoneResource'
-    { _link     :: TF.Attr s P.Text
+    { _expiry   :: TF.Attr s P.Int
+    -- ^ @expiry@ - (Optional)
+    --
+    , _link     :: TF.Attr s P.Text
     -- ^ @link@ - (Optional, Forces New)
     --
     , _networks :: TF.Attr s [TF.Attr s P.Int]
     -- ^ @networks@ - (Optional)
     --
+    , _nxTtl    :: TF.Attr s P.Int
+    -- ^ @nx_ttl@ - (Optional)
+    --
     , _primary  :: TF.Attr s P.Text
     -- ^ @primary@ - (Optional, Forces New)
+    --
+    , _refresh  :: TF.Attr s P.Int
+    -- ^ @refresh@ - (Optional)
+    --
+    , _retry    :: TF.Attr s P.Int
+    -- ^ @retry@ - (Optional)
+    --
+    , _ttl      :: TF.Attr s P.Int
+    -- ^ @ttl@ - (Optional)
     --
     , _zone     :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
@@ -1299,22 +1324,37 @@ zoneResource
 zoneResource _zone =
     TF.unsafeResource "ns1_zone" TF.validator $
         ZoneResource'
-            { _link = TF.Nil
+            { _expiry = TF.Nil
+            , _link = TF.Nil
             , _networks = TF.Nil
+            , _nxTtl = TF.Nil
             , _primary = TF.Nil
+            , _refresh = TF.Nil
+            , _retry = TF.Nil
+            , _ttl = TF.Nil
             , _zone = _zone
             }
 
 instance TF.IsObject (ZoneResource s) where
     toObject ZoneResource'{..} = P.catMaybes
-        [ TF.assign "link" <$> TF.attribute _link
+        [ TF.assign "expiry" <$> TF.attribute _expiry
+        , TF.assign "link" <$> TF.attribute _link
         , TF.assign "networks" <$> TF.attribute _networks
+        , TF.assign "nx_ttl" <$> TF.attribute _nxTtl
         , TF.assign "primary" <$> TF.attribute _primary
+        , TF.assign "refresh" <$> TF.attribute _refresh
+        , TF.assign "retry" <$> TF.attribute _retry
+        , TF.assign "ttl" <$> TF.attribute _ttl
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
 instance TF.IsValid (ZoneResource s) where
     validator = P.mempty
+
+instance P.HasExpiry (ZoneResource s) (TF.Attr s P.Int) where
+    expiry =
+        P.lens (_expiry :: ZoneResource s -> TF.Attr s P.Int)
+               (\s a -> s { _expiry = a } :: ZoneResource s)
 
 instance P.HasLink (ZoneResource s) (TF.Attr s P.Text) where
     link =
@@ -1326,10 +1366,30 @@ instance P.HasNetworks (ZoneResource s) (TF.Attr s [TF.Attr s P.Int]) where
         P.lens (_networks :: ZoneResource s -> TF.Attr s [TF.Attr s P.Int])
                (\s a -> s { _networks = a } :: ZoneResource s)
 
+instance P.HasNxTtl (ZoneResource s) (TF.Attr s P.Int) where
+    nxTtl =
+        P.lens (_nxTtl :: ZoneResource s -> TF.Attr s P.Int)
+               (\s a -> s { _nxTtl = a } :: ZoneResource s)
+
 instance P.HasPrimary (ZoneResource s) (TF.Attr s P.Text) where
     primary =
         P.lens (_primary :: ZoneResource s -> TF.Attr s P.Text)
                (\s a -> s { _primary = a } :: ZoneResource s)
+
+instance P.HasRefresh (ZoneResource s) (TF.Attr s P.Int) where
+    refresh =
+        P.lens (_refresh :: ZoneResource s -> TF.Attr s P.Int)
+               (\s a -> s { _refresh = a } :: ZoneResource s)
+
+instance P.HasRetry (ZoneResource s) (TF.Attr s P.Int) where
+    retry =
+        P.lens (_retry :: ZoneResource s -> TF.Attr s P.Int)
+               (\s a -> s { _retry = a } :: ZoneResource s)
+
+instance P.HasTtl (ZoneResource s) (TF.Attr s P.Int) where
+    ttl =
+        P.lens (_ttl :: ZoneResource s -> TF.Attr s P.Int)
+               (\s a -> s { _ttl = a } :: ZoneResource s)
 
 instance P.HasZone (ZoneResource s) (TF.Attr s P.Text) where
     zone =
