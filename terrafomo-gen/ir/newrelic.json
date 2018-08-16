@@ -285,23 +285,6 @@
                     "original": "duration"
                 },
                 {
-                    "default": "_threshold",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"threshold\" <$> TF.attribute",
-                    "name": "_threshold",
-                    "method": "threshold",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Double",
-                    "class": "HasThreshold",
-                    "validate": false,
-                    "optional": false,
-                    "original": "threshold"
-                },
-                {
                     "default": "_timeFunction",
                     "computed": false,
                     "required": true,
@@ -317,6 +300,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "time_function"
+                },
+                {
+                    "default": "_threshold",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"threshold\" <$> TF.attribute",
+                    "name": "_threshold",
+                    "method": "threshold",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Double",
+                    "class": "HasThreshold",
+                    "validate": false,
+                    "optional": false,
+                    "original": "threshold"
                 }
             ],
             "conflicts": [],
@@ -1163,6 +1163,23 @@
                     "original": "entities"
                 },
                 {
+                    "default": "_policyId",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"policy_id\" <$> TF.attribute",
+                    "name": "_policyId",
+                    "method": "policyId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasPolicyId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "policy_id"
+                },
+                {
                     "default": "_metric",
                     "computed": false,
                     "required": true,
@@ -1195,23 +1212,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
-                },
-                {
-                    "default": "_policyId",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"policy_id\" <$> TF.attribute",
-                    "name": "_policyId",
-                    "method": "policyId",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasPolicyId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "policy_id"
                 },
                 {
                     "default": "_term",
@@ -1816,23 +1816,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_policyId",
                     "computed": false,
                     "required": true,
@@ -1848,6 +1831,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "policy_id"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 },
                 {
                     "default": "_type'",
@@ -2004,6 +2004,23 @@
             "attributes": [],
             "parameters": [
                 {
+                    "default": "_policyId",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"policy_id\" <$> TF.attribute",
+                    "name": "_policyId",
+                    "method": "policyId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasPolicyId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "policy_id"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -2036,23 +2053,6 @@
                     "validate": true,
                     "optional": false,
                     "original": "nrql"
-                },
-                {
-                    "default": "_policyId",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"policy_id\" <$> TF.attribute",
-                    "name": "_policyId",
-                    "method": "policyId",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasPolicyId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "policy_id"
                 },
                 {
                     "default": "_term",
