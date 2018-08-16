@@ -162,6 +162,9 @@ data GroupResource s = GroupResource'
     , _requestAccessEnabled :: TF.Attr s P.Bool
     -- ^ @request_access_enabled@ - (Optional)
     --
+    , _visibilityLevel      :: TF.Attr s P.Text
+    -- ^ @visibility_level@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @gitlab_group@ resource value.
@@ -178,6 +181,7 @@ groupResource _name _path =
             , _parentId = TF.value 0
             , _path = _path
             , _requestAccessEnabled = TF.value P.False
+            , _visibilityLevel = TF.Nil
             }
 
 instance TF.IsObject (GroupResource s) where
@@ -188,6 +192,7 @@ instance TF.IsObject (GroupResource s) where
         , TF.assign "parent_id" <$> TF.attribute _parentId
         , TF.assign "path" <$> TF.attribute _path
         , TF.assign "request_access_enabled" <$> TF.attribute _requestAccessEnabled
+        , TF.assign "visibility_level" <$> TF.attribute _visibilityLevel
         ]
 
 instance TF.IsValid (GroupResource s) where
@@ -222,6 +227,11 @@ instance P.HasRequestAccessEnabled (GroupResource s) (TF.Attr s P.Bool) where
     requestAccessEnabled =
         P.lens (_requestAccessEnabled :: GroupResource s -> TF.Attr s P.Bool)
                (\s a -> s { _requestAccessEnabled = a } :: GroupResource s)
+
+instance P.HasVisibilityLevel (GroupResource s) (TF.Attr s P.Text) where
+    visibilityLevel =
+        P.lens (_visibilityLevel :: GroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _visibilityLevel = a } :: GroupResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -317,6 +327,9 @@ data ProjectResource s = ProjectResource'
     , _name                 :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
+    , _namespaceId          :: TF.Attr s P.Int
+    -- ^ @namespace_id@ - (Optional, Forces New)
+    --
     , _path                 :: TF.Attr s P.Text
     -- ^ @path@ - (Optional)
     --
@@ -343,6 +356,7 @@ projectResource _name =
             , _issuesEnabled = TF.value P.True
             , _mergeRequestsEnabled = TF.value P.True
             , _name = _name
+            , _namespaceId = TF.Nil
             , _path = TF.Nil
             , _snippetsEnabled = TF.value P.True
             , _visibilityLevel = TF.value "private"
@@ -356,6 +370,7 @@ instance TF.IsObject (ProjectResource s) where
         , TF.assign "issues_enabled" <$> TF.attribute _issuesEnabled
         , TF.assign "merge_requests_enabled" <$> TF.attribute _mergeRequestsEnabled
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "namespace_id" <$> TF.attribute _namespaceId
         , TF.assign "path" <$> TF.attribute _path
         , TF.assign "snippets_enabled" <$> TF.attribute _snippetsEnabled
         , TF.assign "visibility_level" <$> TF.attribute _visibilityLevel
@@ -389,6 +404,11 @@ instance P.HasName (ProjectResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ProjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ProjectResource s)
+
+instance P.HasNamespaceId (ProjectResource s) (TF.Attr s P.Int) where
+    namespaceId =
+        P.lens (_namespaceId :: ProjectResource s -> TF.Attr s P.Int)
+               (\s a -> s { _namespaceId = a } :: ProjectResource s)
 
 instance P.HasPath (ProjectResource s) (TF.Attr s P.Text) where
     path =

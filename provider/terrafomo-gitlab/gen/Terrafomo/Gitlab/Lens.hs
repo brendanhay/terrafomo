@@ -37,6 +37,7 @@ module Terrafomo.Gitlab.Lens
     , HasMergeRequestsEnabled (..)
     , HasMergeRequestsEvents (..)
     , HasName (..)
+    , HasNamespaceId (..)
     , HasNoteEvents (..)
     , HasParentId (..)
     , HasPassword (..)
@@ -204,6 +205,12 @@ class HasName a b | a -> b where
 
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
+
+class HasNamespaceId a b | a -> b where
+    namespaceId :: P.Lens' a b
+
+instance HasNamespaceId a b => HasNamespaceId (TF.Schema l p a) b where
+    namespaceId = TF.configuration . namespaceId
 
 class HasNoteEvents a b | a -> b where
     noteEvents :: P.Lens' a b
