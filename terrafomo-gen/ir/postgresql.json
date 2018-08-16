@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "policySetting",
+                "smart": "newPolicySetting",
                 "name": "PolicySetting'"
             },
             "arguments": [
