@@ -89,11 +89,11 @@ data ForwardingRuleSetting s = ForwardingRuleSetting'
 
 newForwardingRuleSetting
     :: TF.Attr s P.Int -- ^ @entry_port@ - 'P.entryPort'
-    -> TF.Attr s P.Text -- ^ @entry_protocol@ - 'P.entryProtocol'
     -> TF.Attr s P.Int -- ^ @target_port@ - 'P.targetPort'
+    -> TF.Attr s P.Text -- ^ @entry_protocol@ - 'P.entryProtocol'
     -> TF.Attr s P.Text -- ^ @target_protocol@ - 'P.targetProtocol'
     -> ForwardingRuleSetting s
-newForwardingRuleSetting _entryPort _entryProtocol _targetPort _targetProtocol =
+newForwardingRuleSetting _entryPort _targetPort _entryProtocol _targetProtocol =
     ForwardingRuleSetting'
         { _certificateId = TF.Nil
         , _entryPort = _entryPort

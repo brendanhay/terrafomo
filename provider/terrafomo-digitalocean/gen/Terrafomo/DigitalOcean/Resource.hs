@@ -105,10 +105,10 @@ data CertificateResource s = CertificateResource'
 
 certificateResource
     :: TF.Attr s P.Text -- ^ @leaf_certificate@ - 'P.leafCertificate'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @private_key@ - 'P.privateKey'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (CertificateResource s)
-certificateResource _leafCertificate _name _privateKey =
+certificateResource _leafCertificate _privateKey _name =
     TF.unsafeResource "digitalocean_certificate" TF.validator $
         CertificateResource'
             { _certificateChain = TF.Nil
@@ -540,11 +540,11 @@ data LoadbalancerResource s = LoadbalancerResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 loadbalancerResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRuleSetting s))) -- ^ @forwarding_rule@ - 'P.forwardingRule'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRuleSetting s))) -- ^ @forwarding_rule@ - 'P.forwardingRule'
     -> P.Resource (LoadbalancerResource s)
-loadbalancerResource _forwardingRule _name _region =
+loadbalancerResource _name _region _forwardingRule =
     TF.unsafeResource "digitalocean_loadbalancer" TF.validator $
         LoadbalancerResource'
             { _algorithm = TF.value "round_robin"
@@ -720,10 +720,10 @@ data SshKeyResource s = SshKeyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 sshKeyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
+    :: TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SshKeyResource s)
-sshKeyResource _name _publicKey =
+sshKeyResource _publicKey _name =
     TF.unsafeResource "digitalocean_ssh_key" TF.validator $
         SshKeyResource'
             { _name = _name
