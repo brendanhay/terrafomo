@@ -17,10 +17,11 @@
 --
 module Terrafomo.PagerDuty.Provider
     (
+    -- * PagerDuty Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** PagerDuty Specific Aliases
+    -- * PagerDuty Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -68,7 +69,7 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @token@ - 'P.token'
+    :: P.Text -- ^ @token@ ('P._token', 'P.token')
     -> Provider
 newProvider _token =
     Provider'
@@ -80,7 +81,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "pagerduty"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "skip_credentials_validation" _skipCredentialsValidation
             , P.Just $ TF.assign "token" _token

@@ -176,7 +176,7 @@ data IncidentUrgencyRuleSetting s = IncidentUrgencyRuleSetting'
 
 -- | Construct a new @incident_urgency_rule@ settings value.
 newIncidentUrgencyRuleSetting
-    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> IncidentUrgencyRuleSetting s
 newIncidentUrgencyRuleSetting _type' =
     IncidentUrgencyRuleSetting'
@@ -250,10 +250,10 @@ data LayerSetting s = LayerSetting'
 
 -- | Construct a new @layer@ settings value.
 newLayerSetting
-    :: TF.Attr s P.Int -- ^ @rotation_turn_length_seconds@ - 'P.rotationTurnLengthSeconds'
-    -> TF.Attr s P.Text -- ^ @rotation_virtual_start@ - 'P.rotationVirtualStart'
-    -> TF.Attr s P.Text -- ^ @start@ - 'P.start'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @users@ - 'P.users'
+    :: TF.Attr s P.Int -- ^ 'P._rotationTurnLengthSeconds': @rotation_turn_length_seconds@
+    -> TF.Attr s P.Text -- ^ 'P._rotationVirtualStart': @rotation_virtual_start@
+    -> TF.Attr s P.Text -- ^ 'P._start': @start@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._users': @users@
     -> LayerSetting s
 newLayerSetting _rotationTurnLengthSeconds _rotationVirtualStart _start _users =
     LayerSetting'
@@ -372,9 +372,9 @@ data RestrictionSetting s = RestrictionSetting'
 
 -- | Construct a new @restriction@ settings value.
 newRestrictionSetting
-    :: TF.Attr s P.Text -- ^ @start_time_of_day@ - 'P.startTimeOfDay'
-    -> TF.Attr s P.Int -- ^ @duration_seconds@ - 'P.durationSeconds'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._startTimeOfDay': @start_time_of_day@
+    -> TF.Attr s P.Int -- ^ 'P._durationSeconds': @duration_seconds@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> RestrictionSetting s
 newRestrictionSetting _startTimeOfDay _durationSeconds _type' =
     RestrictionSetting'
@@ -428,8 +428,8 @@ data RuleSetting s = RuleSetting'
 
 -- | Construct a new @rule@ settings value.
 newRuleSetting
-    :: TF.Attr s P.Int -- ^ @escalation_delay_in_minutes@ - 'P.escalationDelayInMinutes'
-    -> TF.Attr s [TF.Attr s (TargetSetting s)] -- ^ @target@ - 'P.target'
+    :: TF.Attr s P.Int -- ^ 'P._escalationDelayInMinutes': @escalation_delay_in_minutes@
+    -> TF.Attr s [TF.Attr s (TargetSetting s)] -- ^ 'P._target': @target@
     -> RuleSetting s
 newRuleSetting _escalationDelayInMinutes _target =
     RuleSetting'
@@ -590,7 +590,7 @@ data TargetSetting s = TargetSetting'
 
 -- | Construct a new @target@ settings value.
 newTargetSetting
-    :: TF.Attr s P.Text -- ^ @id@ - 'P.id'
+    :: TF.Attr s P.Text -- ^ 'P._id': @id@
     -> TargetSetting s
 newTargetSetting _id =
     TargetSetting'

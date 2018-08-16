@@ -79,7 +79,7 @@ data EscalationPolicyData s = EscalationPolicyData'
 
 -- | Define a new @pagerduty_escalation_policy@ datasource value.
 escalationPolicyData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (EscalationPolicyData s)
 escalationPolicyData _name =
     TF.unsafeDataSource "pagerduty_escalation_policy" TF.validator $
@@ -115,7 +115,7 @@ data ExtensionSchemaData s = ExtensionSchemaData'
 
 -- | Define a new @pagerduty_extension_schema@ datasource value.
 extensionSchemaData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ExtensionSchemaData s)
 extensionSchemaData _name =
     TF.unsafeDataSource "pagerduty_extension_schema" TF.validator $
@@ -154,7 +154,7 @@ data ScheduleData s = ScheduleData'
 
 -- | Define a new @pagerduty_schedule@ datasource value.
 scheduleData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ScheduleData s)
 scheduleData _name =
     TF.unsafeDataSource "pagerduty_schedule" TF.validator $
@@ -191,7 +191,7 @@ data TeamData s = TeamData'
 
 -- | Define a new @pagerduty_team@ datasource value.
 teamData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (TeamData s)
 teamData _name =
     TF.unsafeDataSource "pagerduty_team" TF.validator $
@@ -230,7 +230,7 @@ data UserData s = UserData'
 
 -- | Define a new @pagerduty_user@ datasource value.
 userData
-    :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
+    :: TF.Attr s P.Text -- ^ @email@ ('P._email', 'P.email')
     -> P.DataSource (UserData s)
 userData _email =
     TF.unsafeDataSource "pagerduty_user" TF.validator $
@@ -272,7 +272,7 @@ data VendorData s = VendorData'
 
 -- | Define a new @pagerduty_vendor@ datasource value.
 vendorData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (VendorData s)
 vendorData _name =
     TF.unsafeDataSource "pagerduty_vendor" TF.validator $

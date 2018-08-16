@@ -102,8 +102,8 @@ data AddonResource s = AddonResource'
 
 -- | Define a new @pagerduty_addon@ resource value.
 addonResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @src@ - 'P.src'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @src@ ('P._src', 'P.src')
     -> P.Resource (AddonResource s)
 addonResource _name _src =
     TF.unsafeResource "pagerduty_addon" TF.validator $
@@ -158,8 +158,8 @@ data EscalationPolicyResource s = EscalationPolicyResource'
 
 -- | Define a new @pagerduty_escalation_policy@ resource value.
 escalationPolicyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (RuleSetting s)] -- ^ @rule@ - 'P.rule'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s [TF.Attr s (RuleSetting s)] -- ^ @rule@ ('P._rule', 'P.rule')
     -> P.Resource (EscalationPolicyResource s)
 escalationPolicyResource _name _rule =
     TF.unsafeResource "pagerduty_escalation_policy" TF.validator $
@@ -229,8 +229,8 @@ data ExtensionResource s = ExtensionResource'
 
 -- | Define a new @pagerduty_extension@ resource value.
 extensionResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @extension_objects@ - 'P.extensionObjects'
-    -> TF.Attr s P.Text -- ^ @extension_schema@ - 'P.extensionSchema'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @extension_objects@ ('P._extensionObjects', 'P.extensionObjects')
+    -> TF.Attr s P.Text -- ^ @extension_schema@ ('P._extensionSchema', 'P.extensionSchema')
     -> P.Resource (ExtensionResource s)
 extensionResource _extensionObjects _extensionSchema =
     TF.unsafeResource "pagerduty_extension" TF.validator $
@@ -295,9 +295,9 @@ data MaintenanceWindowResource s = MaintenanceWindowResource'
 
 -- | Define a new @pagerduty_maintenance_window@ resource value.
 maintenanceWindowResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @services@ - 'P.services'
-    -> TF.Attr s P.Text -- ^ @end_time@ - 'P.endTime'
-    -> TF.Attr s P.Text -- ^ @start_time@ - 'P.startTime'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @services@ ('P._services', 'P.services')
+    -> TF.Attr s P.Text -- ^ @end_time@ ('P._endTime', 'P.endTime')
+    -> TF.Attr s P.Text -- ^ @start_time@ ('P._startTime', 'P.startTime')
     -> P.Resource (MaintenanceWindowResource s)
 maintenanceWindowResource _services _endTime _startTime =
     TF.unsafeResource "pagerduty_maintenance_window" TF.validator $
@@ -366,8 +366,8 @@ data ScheduleResource s = ScheduleResource'
 
 -- | Define a new @pagerduty_schedule@ resource value.
 scheduleResource
-    :: TF.Attr s [TF.Attr s (LayerSetting s)] -- ^ @layer@ - 'P.layer'
-    -> TF.Attr s P.Text -- ^ @time_zone@ - 'P.timeZone'
+    :: TF.Attr s [TF.Attr s (LayerSetting s)] -- ^ @layer@ ('P._layer', 'P.layer')
+    -> TF.Attr s P.Text -- ^ @time_zone@ ('P._timeZone', 'P.timeZone')
     -> P.Resource (ScheduleResource s)
 scheduleResource _layer _timeZone =
     TF.unsafeResource "pagerduty_schedule" TF.validator $
@@ -452,7 +452,7 @@ data ServiceResource s = ServiceResource'
 
 -- | Define a new @pagerduty_service@ resource value.
 serviceResource
-    :: TF.Attr s P.Text -- ^ @escalation_policy@ - 'P.escalationPolicy'
+    :: TF.Attr s P.Text -- ^ @escalation_policy@ ('P._escalationPolicy', 'P.escalationPolicy')
     -> P.Resource (ServiceResource s)
 serviceResource _escalationPolicy =
     TF.unsafeResource "pagerduty_service" TF.validator $
@@ -556,7 +556,7 @@ data ServiceIntegrationResource s = ServiceIntegrationResource'
 
 -- | Define a new @pagerduty_service_integration@ resource value.
 serviceIntegrationResource
-    :: TF.Attr s P.Text -- ^ @service@ - 'P.service'
+    :: TF.Attr s P.Text -- ^ @service@ ('P._service', 'P.service')
     -> P.Resource (ServiceIntegrationResource s)
 serviceIntegrationResource _service =
     TF.unsafeResource "pagerduty_service_integration" TF.validator $
@@ -617,7 +617,7 @@ data TeamResource s = TeamResource'
 
 -- | Define a new @pagerduty_team@ resource value.
 teamResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (TeamResource s)
 teamResource _name =
     TF.unsafeResource "pagerduty_team" TF.validator $
@@ -663,8 +663,8 @@ data TeamMembershipResource s = TeamMembershipResource'
 
 -- | Define a new @pagerduty_team_membership@ resource value.
 teamMembershipResource
-    :: TF.Attr s P.Text -- ^ @team_id@ - 'P.teamId'
-    -> TF.Attr s P.Text -- ^ @user_id@ - 'P.userId'
+    :: TF.Attr s P.Text -- ^ @team_id@ ('P._teamId', 'P.teamId')
+    -> TF.Attr s P.Text -- ^ @user_id@ ('P._userId', 'P.userId')
     -> P.Resource (TeamMembershipResource s)
 teamMembershipResource _teamId _userId =
     TF.unsafeResource "pagerduty_team_membership" TF.validator $
@@ -722,8 +722,8 @@ data UserResource s = UserResource'
 
 -- | Define a new @pagerduty_user@ resource value.
 userResource
-    :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @email@ ('P._email', 'P.email')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (UserResource s)
 userResource _email _name =
     TF.unsafeResource "pagerduty_user" TF.validator $
@@ -824,10 +824,10 @@ data UserContactMethodResource s = UserContactMethodResource'
 
 -- | Define a new @pagerduty_user_contact_method@ resource value.
 userContactMethodResource
-    :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
-    -> TF.Attr s P.Text -- ^ @user_id@ - 'P.userId'
-    -> TF.Attr s P.Text -- ^ @label@ - 'P.label'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @address@ ('P._address', 'P.address')
+    -> TF.Attr s P.Text -- ^ @user_id@ ('P._userId', 'P.userId')
+    -> TF.Attr s P.Text -- ^ @label@ ('P._label', 'P.label')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (UserContactMethodResource s)
 userContactMethodResource _address _userId _label _type' =
     TF.unsafeResource "pagerduty_user_contact_method" TF.validator $
