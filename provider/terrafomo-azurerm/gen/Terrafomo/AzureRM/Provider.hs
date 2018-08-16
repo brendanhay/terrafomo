@@ -20,6 +20,7 @@ module Terrafomo.AzureRM.Provider
     -- * AzureRM Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * AzureRM Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.AzureRM.Settings
 
-import qualified Data.Hashable           as P
-import qualified Data.HashMap.Strict     as P
-import qualified Data.HashMap.Strict     as Map
 import qualified Data.List.NonEmpty      as P
+import qualified Data.Map.Strict         as P
+import qualified Data.Map.Strict         as Map
 import qualified Data.Maybe              as P
 import qualified Data.Monoid             as P
 import qualified Data.Text               as P
@@ -88,7 +88,7 @@ data Provider = Provider'
     , _useMsi                    :: P.Maybe P.Bool
     -- ^ @use_msi@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: P.Text -- ^ @environment@ - 'P.environment'
@@ -106,29 +106,26 @@ newProvider _environment =
         , _useMsi = P.Nothing
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "client_id" <$> _clientId
-                  , TF.assign "client_secret" <$> _clientSecret
-                  , P.Just $ TF.assign "environment" _environment
-                  , TF.assign "msi_endpoint" <$> _msiEndpoint
-                  , TF.assign "skip_credentials_validation" <$> _skipCredentialsValidation
-                  , TF.assign "skip_provider_registration" <$> _skipProviderRegistration
-                  , TF.assign "subscription_id" <$> _subscriptionId
-                  , TF.assign "tenant_id" <$> _tenantId
-                  , TF.assign "use_msi" <$> _useMsi
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  TF.assign "client_id" <$> _clientId
+        ,  TF.assign "client_secret" <$> _clientSecret
+        ,  P.Just $ TF.assign "environment" _environment
+        ,  TF.assign "msi_endpoint" <$> _msiEndpoint
+        ,  TF.assign "skip_credentials_validation" <$> _skipCredentialsValidation
+        ,  TF.assign "skip_provider_registration" <$> _skipProviderRegistration
+        ,  TF.assign "subscription_id" <$> _subscriptionId
+        ,  TF.assign "tenant_id" <$> _tenantId
+        ,  TF.assign "use_msi" <$> _useMsi
+        ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
