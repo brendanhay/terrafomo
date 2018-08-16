@@ -676,6 +676,9 @@ instance P.HasTags (DbInstanceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.
         P.lens (_tags :: DbInstanceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: DbInstanceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
 
@@ -845,6 +848,9 @@ instance P.HasTags (DbOptionGroupResource s) (TF.Attr s (P.Map P.Text (TF.Attr s
         P.lens (_tags :: DbOptionGroupResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: DbOptionGroupResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbOptionGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DbOptionGroupResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -915,6 +921,9 @@ instance P.HasTags (DbParameterGroupResource s) (TF.Attr s (P.Map P.Text (TF.Att
     tags =
         P.lens (_tags :: DbParameterGroupResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: DbParameterGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbParameterGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DbParameterGroupResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -988,6 +997,9 @@ instance P.HasTags (DbSecurityGroupResource s) (TF.Attr s (P.Map P.Text (TF.Attr
         P.lens (_tags :: DbSecurityGroupResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: DbSecurityGroupResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbSecurityGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DbSecurityGroupResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -1033,6 +1045,9 @@ instance P.HasDbSnapshotIdentifier (DbSnapshotResource s) (TF.Attr s P.Text) whe
     dbSnapshotIdentifier =
         P.lens (_dbSnapshotIdentifier :: DbSnapshotResource s -> TF.Attr s P.Text)
                (\s a -> s { _dbSnapshotIdentifier = a } :: DbSnapshotResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAllocatedStorage (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Int) where
     computedAllocatedStorage x = TF.compute (TF.refKey x) "allocated_storage"
@@ -1137,6 +1152,9 @@ instance P.HasTags (DbSubnetGroupResource s) (TF.Attr s (P.Map P.Text (TF.Attr s
         P.lens (_tags :: DbSubnetGroupResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: DbSubnetGroupResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbSubnetGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DbSubnetGroupResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -1218,6 +1236,9 @@ instance P.HasTags (DefaultNetworkAclResource s) (TF.Attr s (P.Map P.Text (TF.At
         P.lens (_tags :: DefaultNetworkAclResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: DefaultNetworkAclResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DefaultNetworkAclResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (DefaultNetworkAclResource s)) (TF.Attr s P.Text) where
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
@@ -1272,6 +1293,9 @@ instance P.HasTags (DefaultRouteTableResource s) (TF.Attr s (P.Map P.Text (TF.At
     tags =
         P.lens (_tags :: DefaultRouteTableResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: DefaultRouteTableResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DefaultRouteTableResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedRoute (TF.Ref s' (DefaultRouteTableResource s)) (TF.Attr s [TF.Attr s (RouteSetting s)]) where
     computedRoute x = TF.compute (TF.refKey x) "route"
@@ -1340,6 +1364,9 @@ instance P.HasTags (DefaultSecurityGroupResource s) (TF.Attr s (P.Map P.Text (TF
         P.lens (_tags :: DefaultSecurityGroupResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: DefaultSecurityGroupResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DefaultSecurityGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DefaultSecurityGroupResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -1393,6 +1420,9 @@ instance P.HasTags (DefaultSubnetResource s) (TF.Attr s (P.Map P.Text (TF.Attr s
     tags =
         P.lens (_tags :: DefaultSubnetResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: DefaultSubnetResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DefaultSubnetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAssignIpv6AddressOnCreation (TF.Ref s' (DefaultSubnetResource s)) (TF.Attr s P.Bool) where
     computedAssignIpv6AddressOnCreation x = TF.compute (TF.refKey x) "assign_ipv6_address_on_creation"
@@ -1452,6 +1482,9 @@ instance P.HasTags (DefaultVpcResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.
     tags =
         P.lens (_tags :: DefaultVpcResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: DefaultVpcResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -1546,6 +1579,9 @@ instance P.HasTags (DefaultVpcDhcpOptionsResource s) (TF.Attr s (P.Map P.Text (T
         P.lens (_tags :: DefaultVpcDhcpOptionsResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: DefaultVpcDhcpOptionsResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DefaultVpcDhcpOptionsResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDomainName (TF.Ref s' (DefaultVpcDhcpOptionsResource s)) (TF.Attr s P.Text) where
     computedDomainName x = TF.compute (TF.refKey x) "domain_name"
 
@@ -1586,6 +1622,9 @@ instance P.HasName (DevicefarmProjectResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DevicefarmProjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DevicefarmProjectResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DevicefarmProjectResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DevicefarmProjectResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -1643,6 +1682,9 @@ instance P.HasRemoteDomainName (DirectoryServiceConditionalForwarderResource s) 
     remoteDomainName =
         P.lens (_remoteDomainName :: DirectoryServiceConditionalForwarderResource s -> TF.Attr s P.Text)
                (\s a -> s { _remoteDomainName = a } :: DirectoryServiceConditionalForwarderResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DirectoryServiceConditionalForwarderResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @aws_directory_service_directory@ Resource.
 --
@@ -1755,6 +1797,9 @@ instance P.HasVpcSettings (DirectoryServiceDirectoryResource s) (TF.Attr s (VpcS
         P.lens (_vpcSettings :: DirectoryServiceDirectoryResource s -> TF.Attr s (VpcSettingsSetting s))
                (\s a -> s { _vpcSettings = a } :: DirectoryServiceDirectoryResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DirectoryServiceDirectoryResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAccessUrl (TF.Ref s' (DirectoryServiceDirectoryResource s)) (TF.Attr s P.Text) where
     computedAccessUrl x = TF.compute (TF.refKey x) "access_url"
 
@@ -1827,6 +1872,9 @@ instance P.HasCertificateWallet (DmsCertificateResource s) (TF.Attr s P.Text) wh
     certificateWallet =
         P.lens (_certificateWallet :: DmsCertificateResource s -> TF.Attr s P.Text)
                (\s a -> s { _certificateWallet = a } :: DmsCertificateResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DmsCertificateResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCertificateArn (TF.Ref s' (DmsCertificateResource s)) (TF.Attr s P.Text) where
     computedCertificateArn x = TF.compute (TF.refKey x) "certificate_arn"
@@ -1983,6 +2031,9 @@ instance P.HasUsername (DmsEndpointResource s) (TF.Attr s P.Text) where
         P.lens (_username :: DmsEndpointResource s -> TF.Attr s P.Text)
                (\s a -> s { _username = a } :: DmsEndpointResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DmsEndpointResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCertificateArn (TF.Ref s' (DmsEndpointResource s)) (TF.Attr s P.Text) where
     computedCertificateArn x = TF.compute (TF.refKey x) "certificate_arn"
 
@@ -2060,6 +2111,9 @@ instance P.HasTags (DmsReplicationInstanceResource s) (TF.Attr s (P.Map P.Text (
     tags =
         P.lens (_tags :: DmsReplicationInstanceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: DmsReplicationInstanceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DmsReplicationInstanceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAllocatedStorage (TF.Ref s' (DmsReplicationInstanceResource s)) (TF.Attr s P.Int) where
     computedAllocatedStorage x = TF.compute (TF.refKey x) "allocated_storage"
@@ -2163,6 +2217,9 @@ instance P.HasTags (DmsReplicationSubnetGroupResource s) (TF.Attr s (P.Map P.Tex
     tags =
         P.lens (_tags :: DmsReplicationSubnetGroupResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: DmsReplicationSubnetGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DmsReplicationSubnetGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedReplicationSubnetGroupArn (TF.Ref s' (DmsReplicationSubnetGroupResource s)) (TF.Attr s P.Text) where
     computedReplicationSubnetGroupArn x = TF.compute (TF.refKey x) "replication_subnet_group_arn"
@@ -2287,6 +2344,9 @@ instance P.HasTargetEndpointArn (DmsReplicationTaskResource s) (TF.Attr s P.Text
         P.lens (_targetEndpointArn :: DmsReplicationTaskResource s -> TF.Attr s P.Text)
                (\s a -> s { _targetEndpointArn = a } :: DmsReplicationTaskResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DmsReplicationTaskResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedReplicationTaskArn (TF.Ref s' (DmsReplicationTaskResource s)) (TF.Attr s P.Text) where
     computedReplicationTaskArn x = TF.compute (TF.refKey x) "replication_task_arn"
 
@@ -2354,6 +2414,9 @@ instance P.HasTags (DxConnectionResource s) (TF.Attr s (P.Map P.Text (TF.Attr s 
         P.lens (_tags :: DxConnectionResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: DxConnectionResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DxConnectionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DxConnectionResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -2400,6 +2463,9 @@ instance P.HasLagId (DxConnectionAssociationResource s) (TF.Attr s P.Text) where
         P.lens (_lagId :: DxConnectionAssociationResource s -> TF.Attr s P.Text)
                (\s a -> s { _lagId = a } :: DxConnectionAssociationResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DxConnectionAssociationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @aws_dx_gateway@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/dx_gateway.html terraform documentation>
@@ -2443,6 +2509,9 @@ instance P.HasName (DxGatewayResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DxGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DxGatewayResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DxGatewayResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @aws_dx_gateway_association@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/dx_gateway_association.html terraform documentation>
@@ -2485,6 +2554,9 @@ instance P.HasVpnGatewayId (DxGatewayAssociationResource s) (TF.Attr s P.Text) w
     vpnGatewayId =
         P.lens (_vpnGatewayId :: DxGatewayAssociationResource s -> TF.Attr s P.Text)
                (\s a -> s { _vpnGatewayId = a } :: DxGatewayAssociationResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DxGatewayAssociationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @aws_dx_hosted_private_virtual_interface@ Resource.
 --
@@ -2572,6 +2644,9 @@ instance P.HasVlan (DxHostedPrivateVirtualInterfaceResource s) (TF.Attr s P.Int)
     vlan =
         P.lens (_vlan :: DxHostedPrivateVirtualInterfaceResource s -> TF.Attr s P.Int)
                (\s a -> s { _vlan = a } :: DxHostedPrivateVirtualInterfaceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DxHostedPrivateVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAmazonAddress (TF.Ref s' (DxHostedPrivateVirtualInterfaceResource s)) (TF.Attr s P.Text) where
     computedAmazonAddress x = TF.compute (TF.refKey x) "amazon_address"
@@ -2663,6 +2738,9 @@ instance P.HasVpnGatewayId (DxHostedPrivateVirtualInterfaceAccepterResource s) (
     vpnGatewayId =
         P.lens (_vpnGatewayId :: DxHostedPrivateVirtualInterfaceAccepterResource s -> TF.Attr s P.Text)
                (\s a -> s { _vpnGatewayId = a } :: DxHostedPrivateVirtualInterfaceAccepterResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DxHostedPrivateVirtualInterfaceAccepterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DxHostedPrivateVirtualInterfaceAccepterResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -2765,6 +2843,9 @@ instance P.HasVlan (DxHostedPublicVirtualInterfaceResource s) (TF.Attr s P.Int) 
         P.lens (_vlan :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Int)
                (\s a -> s { _vlan = a } :: DxHostedPublicVirtualInterfaceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DxHostedPublicVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAmazonAddress (TF.Ref s' (DxHostedPublicVirtualInterfaceResource s)) (TF.Attr s P.Text) where
     computedAmazonAddress x = TF.compute (TF.refKey x) "amazon_address"
 
@@ -2818,6 +2899,9 @@ instance P.HasVirtualInterfaceId (DxHostedPublicVirtualInterfaceAccepterResource
     virtualInterfaceId =
         P.lens (_virtualInterfaceId :: DxHostedPublicVirtualInterfaceAccepterResource s -> TF.Attr s P.Text)
                (\s a -> s { _virtualInterfaceId = a } :: DxHostedPublicVirtualInterfaceAccepterResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DxHostedPublicVirtualInterfaceAccepterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DxHostedPublicVirtualInterfaceAccepterResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -2895,6 +2979,9 @@ instance P.HasTags (DxLagResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text)
     tags =
         P.lens (_tags :: DxLagResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: DxLagResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DxLagResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DxLagResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -3022,6 +3109,9 @@ instance P.HasVpnGatewayId (DxPrivateVirtualInterfaceResource s) (TF.Attr s P.Te
         P.lens (_vpnGatewayId :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
                (\s a -> s { _vpnGatewayId = a } :: DxPrivateVirtualInterfaceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DxPrivateVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAmazonAddress (TF.Ref s' (DxPrivateVirtualInterfaceResource s)) (TF.Attr s P.Text) where
     computedAmazonAddress x = TF.compute (TF.refKey x) "amazon_address"
 
@@ -3131,6 +3221,9 @@ instance P.HasVlan (DxPublicVirtualInterfaceResource s) (TF.Attr s P.Int) where
         P.lens (_vlan :: DxPublicVirtualInterfaceResource s -> TF.Attr s P.Int)
                (\s a -> s { _vlan = a } :: DxPublicVirtualInterfaceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DxPublicVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAmazonAddress (TF.Ref s' (DxPublicVirtualInterfaceResource s)) (TF.Attr s P.Text) where
     computedAmazonAddress x = TF.compute (TF.refKey x) "amazon_address"
 
@@ -3185,6 +3278,9 @@ instance P.HasReplica (DynamodbGlobalTableResource s) (TF.Attr s [TF.Attr s (Rep
     replica =
         P.lens (_replica :: DynamodbGlobalTableResource s -> TF.Attr s [TF.Attr s (ReplicaSetting s)])
                (\s a -> s { _replica = a } :: DynamodbGlobalTableResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DynamodbGlobalTableResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DynamodbGlobalTableResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -3329,6 +3425,9 @@ instance P.HasWriteCapacity (DynamodbTableResource s) (TF.Attr s P.Int) where
         P.lens (_writeCapacity :: DynamodbTableResource s -> TF.Attr s P.Int)
                (\s a -> s { _writeCapacity = a } :: DynamodbTableResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DynamodbTableResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DynamodbTableResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -3411,6 +3510,9 @@ instance P.HasTableName (DynamodbTableItemResource s) (TF.Attr s P.Text) where
         P.lens (_tableName :: DynamodbTableItemResource s -> TF.Attr s P.Text)
                (\s a -> s { _tableName = a } :: DynamodbTableItemResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DynamodbTableItemResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @aws_ebs_snapshot@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/ebs_snapshot.html terraform documentation>
@@ -3462,6 +3564,9 @@ instance P.HasVolumeId (EbsSnapshotResource s) (TF.Attr s P.Text) where
     volumeId =
         P.lens (_volumeId :: EbsSnapshotResource s -> TF.Attr s P.Text)
                (\s a -> s { _volumeId = a } :: EbsSnapshotResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EbsSnapshotResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDataEncryptionKeyId (TF.Ref s' (EbsSnapshotResource s)) (TF.Attr s P.Text) where
     computedDataEncryptionKeyId x = TF.compute (TF.refKey x) "data_encryption_key_id"
@@ -3522,6 +3627,9 @@ instance P.HasTags (EbsVolumeResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.T
     tags =
         P.lens (_tags :: EbsVolumeResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: EbsVolumeResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EbsVolumeResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (EbsVolumeResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -3587,6 +3695,9 @@ instance P.HasRepository (EcrLifecyclePolicyResource s) (TF.Attr s P.Text) where
         P.lens (_repository :: EcrLifecyclePolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _repository = a } :: EcrLifecyclePolicyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EcrLifecyclePolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedRegistryId (TF.Ref s' (EcrLifecyclePolicyResource s)) (TF.Attr s P.Text) where
     computedRegistryId x = TF.compute (TF.refKey x) "registry_id"
 
@@ -3621,6 +3732,9 @@ instance P.HasName (EcrRepositoryResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: EcrRepositoryResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: EcrRepositoryResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EcrRepositoryResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (EcrRepositoryResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -3674,6 +3788,9 @@ instance P.HasRepository (EcrRepositoryPolicyResource s) (TF.Attr s P.Text) wher
         P.lens (_repository :: EcrRepositoryPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _repository = a } :: EcrRepositoryPolicyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EcrRepositoryPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedRegistryId (TF.Ref s' (EcrRepositoryPolicyResource s)) (TF.Attr s P.Text) where
     computedRegistryId x = TF.compute (TF.refKey x) "registry_id"
 
@@ -3708,6 +3825,9 @@ instance P.HasName (EcsClusterResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: EcsClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: EcsClusterResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EcsClusterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (EcsClusterResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -3877,6 +3997,9 @@ instance P.HasTaskDefinition (EcsServiceResource s) (TF.Attr s P.Text) where
         P.lens (_taskDefinition :: EcsServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _taskDefinition = a } :: EcsServiceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EcsServiceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCluster (TF.Ref s' (EcsServiceResource s)) (TF.Attr s P.Text) where
     computedCluster x = TF.compute (TF.refKey x) "cluster"
 
@@ -3996,6 +4119,9 @@ instance P.HasVolume (EcsTaskDefinitionResource s) (TF.Attr s [TF.Attr s (Volume
         P.lens (_volume :: EcsTaskDefinitionResource s -> TF.Attr s [TF.Attr s (VolumeSetting s)])
                (\s a -> s { _volume = a } :: EcsTaskDefinitionResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EcsTaskDefinitionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (EcsTaskDefinitionResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -4056,6 +4182,9 @@ instance P.HasThroughputMode (EfsFileSystemResource s) (TF.Attr s P.Text) where
         P.lens (_throughputMode :: EfsFileSystemResource s -> TF.Attr s P.Text)
                (\s a -> s { _throughputMode = a } :: EfsFileSystemResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EfsFileSystemResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreationToken (TF.Ref s' (EfsFileSystemResource s)) (TF.Attr s P.Text) where
     computedCreationToken x = TF.compute (TF.refKey x) "creation_token"
 
@@ -4114,6 +4243,9 @@ instance P.HasSubnetId (EfsMountTargetResource s) (TF.Attr s P.Text) where
         P.lens (_subnetId :: EfsMountTargetResource s -> TF.Attr s P.Text)
                (\s a -> s { _subnetId = a } :: EfsMountTargetResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EfsMountTargetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDnsName (TF.Ref s' (EfsMountTargetResource s)) (TF.Attr s P.Text) where
     computedDnsName x = TF.compute (TF.refKey x) "dns_name"
 
@@ -4158,6 +4290,9 @@ instance P.HasVpcId (EgressOnlyInternetGatewayResource s) (TF.Attr s P.Text) whe
         P.lens (_vpcId :: EgressOnlyInternetGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _vpcId = a } :: EgressOnlyInternetGatewayResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EgressOnlyInternetGatewayResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @aws_eip@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/eip.html terraform documentation>
@@ -4198,6 +4333,9 @@ instance P.HasTags (EipResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
     tags =
         P.lens (_tags :: EipResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: EipResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAllocationId (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
     computedAllocationId x = TF.compute (TF.refKey x) "allocation_id"
@@ -4253,6 +4391,9 @@ instance P.HasAllowReassociation (EipAssociationResource s) (TF.Attr s P.Bool) w
     allowReassociation =
         P.lens (_allowReassociation :: EipAssociationResource s -> TF.Attr s P.Bool)
                (\s a -> s { _allowReassociation = a } :: EipAssociationResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EipAssociationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAllocationId (TF.Ref s' (EipAssociationResource s)) (TF.Attr s P.Text) where
     computedAllocationId x = TF.compute (TF.refKey x) "allocation_id"
@@ -4327,6 +4468,9 @@ instance P.HasVpcConfig (EksClusterResource s) (TF.Attr s (VpcConfigSetting s)) 
         P.lens (_vpcConfig :: EksClusterResource s -> TF.Attr s (VpcConfigSetting s))
                (\s a -> s { _vpcConfig = a } :: EksClusterResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EksClusterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (EksClusterResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -4397,6 +4541,9 @@ instance P.HasName (ElasticBeanstalkApplicationResource s) (TF.Attr s P.Text) wh
     name =
         P.lens (_name :: ElasticBeanstalkApplicationResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ElasticBeanstalkApplicationResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticBeanstalkApplicationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @aws_elastic_beanstalk_application_version@ Resource.
 --
@@ -4483,6 +4630,9 @@ instance P.HasName (ElasticBeanstalkApplicationVersionResource s) (TF.Attr s P.T
         P.lens (_name :: ElasticBeanstalkApplicationVersionResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ElasticBeanstalkApplicationVersionResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticBeanstalkApplicationVersionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @aws_elastic_beanstalk_configuration_template@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/elastic_beanstalk_configuration_template.html terraform documentation>
@@ -4555,6 +4705,9 @@ instance P.HasSolutionStackName (ElasticBeanstalkConfigurationTemplateResource s
     solutionStackName =
         P.lens (_solutionStackName :: ElasticBeanstalkConfigurationTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _solutionStackName = a } :: ElasticBeanstalkConfigurationTemplateResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticBeanstalkConfigurationTemplateResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedSetting (TF.Ref s' (ElasticBeanstalkConfigurationTemplateResource s)) (TF.Attr s [TF.Attr s (SettingSetting s)]) where
     computedSetting x = TF.compute (TF.refKey x) "setting"
@@ -4671,6 +4824,9 @@ instance P.HasWaitForReadyTimeout (ElasticBeanstalkEnvironmentResource s) (TF.At
     waitForReadyTimeout =
         P.lens (_waitForReadyTimeout :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _waitForReadyTimeout = a } :: ElasticBeanstalkEnvironmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAllSettings (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s [TF.Attr s (AllSettingsSetting s)]) where
     computedAllSettings x = TF.compute (TF.refKey x) "all_settings"
@@ -4810,6 +4966,9 @@ instance P.HasTags (ElasticacheClusterResource s) (TF.Attr s (P.Map P.Text (TF.A
         P.lens (_tags :: ElasticacheClusterResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: ElasticacheClusterResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticacheClusterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedApplyImmediately (TF.Ref s' (ElasticacheClusterResource s)) (TF.Attr s P.Bool) where
     computedApplyImmediately x = TF.compute (TF.refKey x) "apply_immediately"
 
@@ -4923,6 +5082,9 @@ instance P.HasParameter (ElasticacheParameterGroupResource s) (TF.Attr s [TF.Att
     parameter =
         P.lens (_parameter :: ElasticacheParameterGroupResource s -> TF.Attr s [TF.Attr s (ParameterSetting s)])
                (\s a -> s { _parameter = a } :: ElasticacheParameterGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticacheParameterGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @aws_elasticache_replication_group@ Resource.
 --
@@ -5097,6 +5259,9 @@ instance P.HasTransitEncryptionEnabled (ElasticacheReplicationGroupResource s) (
         P.lens (_transitEncryptionEnabled :: ElasticacheReplicationGroupResource s -> TF.Attr s P.Bool)
                (\s a -> s { _transitEncryptionEnabled = a } :: ElasticacheReplicationGroupResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticacheReplicationGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedApplyImmediately (TF.Ref s' (ElasticacheReplicationGroupResource s)) (TF.Attr s P.Bool) where
     computedApplyImmediately x = TF.compute (TF.refKey x) "apply_immediately"
 
@@ -5192,6 +5357,9 @@ instance P.HasSecurityGroupNames (ElasticacheSecurityGroupResource s) (TF.Attr s
         P.lens (_securityGroupNames :: ElasticacheSecurityGroupResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _securityGroupNames = a } :: ElasticacheSecurityGroupResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticacheSecurityGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @aws_elasticache_subnet_group@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/elasticache_subnet_group.html terraform documentation>
@@ -5244,6 +5412,9 @@ instance P.HasSubnetIds (ElasticacheSubnetGroupResource s) (TF.Attr s [TF.Attr s
     subnetIds =
         P.lens (_subnetIds :: ElasticacheSubnetGroupResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _subnetIds = a } :: ElasticacheSubnetGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticacheSubnetGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @aws_elasticsearch_domain@ Resource.
 --
@@ -5345,6 +5516,9 @@ instance P.HasVpcOptions (ElasticsearchDomainResource s) (TF.Attr s (VpcOptionsS
         P.lens (_vpcOptions :: ElasticsearchDomainResource s -> TF.Attr s (VpcOptionsSetting s))
                (\s a -> s { _vpcOptions = a } :: ElasticsearchDomainResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticsearchDomainResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAccessPolicies (TF.Ref s' (ElasticsearchDomainResource s)) (TF.Attr s P.Text) where
     computedAccessPolicies x = TF.compute (TF.refKey x) "access_policies"
 
@@ -5414,6 +5588,9 @@ instance P.HasDomainName (ElasticsearchDomainPolicyResource s) (TF.Attr s P.Text
     domainName =
         P.lens (_domainName :: ElasticsearchDomainPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _domainName = a } :: ElasticsearchDomainPolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticsearchDomainPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @aws_elastictranscoder_pipeline@ Resource.
 --
@@ -5501,6 +5678,9 @@ instance P.HasThumbnailConfigPermissions (ElastictranscoderPipelineResource s) (
     thumbnailConfigPermissions =
         P.lens (_thumbnailConfigPermissions :: ElastictranscoderPipelineResource s -> TF.Attr s [TF.Attr s (ThumbnailConfigPermissionsSetting s)])
                (\s a -> s { _thumbnailConfigPermissions = a } :: ElastictranscoderPipelineResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ElastictranscoderPipelineResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (ElastictranscoderPipelineResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -5635,6 +5815,9 @@ instance P.HasVideoWatermarks (ElastictranscoderPresetResource s) (TF.Attr s [TF
         P.lens (_videoWatermarks :: ElastictranscoderPresetResource s -> TF.Attr s [TF.Attr s (VideoWatermarksSetting s)])
                (\s a -> s { _videoWatermarks = a } :: ElastictranscoderPresetResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ElastictranscoderPresetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (ElastictranscoderPresetResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -5750,6 +5933,9 @@ instance P.HasTags (ElbResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
         P.lens (_tags :: ElbResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: ElbResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ElbResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (ElbResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -5828,6 +6014,9 @@ instance P.HasInstance' (ElbAttachmentResource s) (TF.Attr s P.Text) where
     instance' =
         P.lens (_instance' :: ElbAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _instance' = a } :: ElbAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ElbAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @aws_emr_cluster@ Resource.
 --
@@ -6078,6 +6267,9 @@ instance P.HasVisibleToAllUsers (EmrClusterResource s) (TF.Attr s P.Bool) where
         P.lens (_visibleToAllUsers :: EmrClusterResource s -> TF.Attr s P.Bool)
                (\s a -> s { _visibleToAllUsers = a } :: EmrClusterResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedClusterState (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
     computedClusterState x = TF.compute (TF.refKey x) "cluster_state"
 
@@ -6182,6 +6374,9 @@ instance P.HasName (EmrInstanceGroupResource s) (TF.Attr s P.Text) where
         P.lens (_name :: EmrInstanceGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: EmrInstanceGroupResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EmrInstanceGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedRunningInstanceCount (TF.Ref s' (EmrInstanceGroupResource s)) (TF.Attr s P.Int) where
     computedRunningInstanceCount x = TF.compute (TF.refKey x) "running_instance_count"
 
@@ -6229,6 +6424,9 @@ instance P.HasNamePrefix (EmrSecurityConfigurationResource s) (TF.Attr s P.Text)
     namePrefix =
         P.lens (_namePrefix :: EmrSecurityConfigurationResource s -> TF.Attr s P.Text)
                (\s a -> s { _namePrefix = a } :: EmrSecurityConfigurationResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EmrSecurityConfigurationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (EmrSecurityConfigurationResource s)) (TF.Attr s P.Text) where
     computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
@@ -6348,6 +6546,9 @@ instance P.HasVpcId (FlowLogResource s) (TF.Attr s P.Text) where
         P.lens (_vpcId :: FlowLogResource s -> TF.Attr s P.Text)
                (\s a -> s { _vpcId = a } :: FlowLogResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FlowLogResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @aws_gamelift_alias@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/gamelift_alias.html terraform documentation>
@@ -6404,6 +6605,9 @@ instance P.HasRoutingStrategy (GameliftAliasResource s) (TF.Attr s (RoutingStrat
     routingStrategy =
         P.lens (_routingStrategy :: GameliftAliasResource s -> TF.Attr s (RoutingStrategySetting s))
                (\s a -> s { _routingStrategy = a } :: GameliftAliasResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GameliftAliasResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (GameliftAliasResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -6475,6 +6679,9 @@ instance P.HasVersion (GameliftBuildResource s) (TF.Attr s P.Text) where
     version =
         P.lens (_version :: GameliftBuildResource s -> TF.Attr s P.Text)
                (\s a -> s { _version = a } :: GameliftBuildResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GameliftBuildResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @aws_gamelift_fleet@ Resource.
 --
@@ -6588,6 +6795,9 @@ instance P.HasRuntimeConfiguration (GameliftFleetResource s) (TF.Attr s (Runtime
         P.lens (_runtimeConfiguration :: GameliftFleetResource s -> TF.Attr s (RuntimeConfigurationSetting s))
                (\s a -> s { _runtimeConfiguration = a } :: GameliftFleetResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -6662,6 +6872,9 @@ instance P.HasTags (GlacierVaultResource s) (TF.Attr s (P.Map P.Text (TF.Attr s 
         P.lens (_tags :: GlacierVaultResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: GlacierVaultResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GlacierVaultResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (GlacierVaultResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -6729,6 +6942,9 @@ instance P.HasParameters (GlueCatalogDatabaseResource s) (TF.Attr s (P.Map P.Tex
     parameters =
         P.lens (_parameters :: GlueCatalogDatabaseResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _parameters = a } :: GlueCatalogDatabaseResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GlueCatalogDatabaseResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCatalogId (TF.Ref s' (GlueCatalogDatabaseResource s)) (TF.Attr s P.Text) where
     computedCatalogId x = TF.compute (TF.refKey x) "catalog_id"
@@ -6870,6 +7086,9 @@ instance P.HasViewOriginalText (GlueCatalogTableResource s) (TF.Attr s P.Text) w
         P.lens (_viewOriginalText :: GlueCatalogTableResource s -> TF.Attr s P.Text)
                (\s a -> s { _viewOriginalText = a } :: GlueCatalogTableResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GlueCatalogTableResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCatalogId (TF.Ref s' (GlueCatalogTableResource s)) (TF.Attr s P.Text) where
     computedCatalogId x = TF.compute (TF.refKey x) "catalog_id"
 
@@ -6975,6 +7194,9 @@ instance P.HasXmlClassifier (GlueClassifierResource s) (TF.Attr s (XmlClassifier
         P.lens (_xmlClassifier :: GlueClassifierResource s -> TF.Attr s (XmlClassifierSetting s))
                (\s a -> s { _xmlClassifier = a } :: GlueClassifierResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GlueClassifierResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @aws_glue_connection@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/glue_connection.html terraform documentation>
@@ -7061,6 +7283,9 @@ instance P.HasPhysicalConnectionRequirements (GlueConnectionResource s) (TF.Attr
     physicalConnectionRequirements =
         P.lens (_physicalConnectionRequirements :: GlueConnectionResource s -> TF.Attr s (PhysicalConnectionRequirementsSetting s))
                (\s a -> s { _physicalConnectionRequirements = a } :: GlueConnectionResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GlueConnectionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCatalogId (TF.Ref s' (GlueConnectionResource s)) (TF.Attr s P.Text) where
     computedCatalogId x = TF.compute (TF.refKey x) "catalog_id"
@@ -7213,6 +7438,9 @@ instance P.HasTablePrefix (GlueCrawlerResource s) (TF.Attr s P.Text) where
         P.lens (_tablePrefix :: GlueCrawlerResource s -> TF.Attr s P.Text)
                (\s a -> s { _tablePrefix = a } :: GlueCrawlerResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GlueCrawlerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @aws_glue_job@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/glue_job.html terraform documentation>
@@ -7331,6 +7559,9 @@ instance P.HasTimeout (GlueJobResource s) (TF.Attr s P.Int) where
         P.lens (_timeout :: GlueJobResource s -> TF.Attr s P.Int)
                (\s a -> s { _timeout = a } :: GlueJobResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GlueJobResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedExecutionProperty (TF.Ref s' (GlueJobResource s)) (TF.Attr s (ExecutionPropertySetting s)) where
     computedExecutionProperty x = TF.compute (TF.refKey x) "execution_property"
 
@@ -7432,6 +7663,9 @@ instance P.HasType' (GlueTriggerResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: GlueTriggerResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: GlueTriggerResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GlueTriggerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @aws_guardduty_detector@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/guardduty_detector.html terraform documentation>
@@ -7462,6 +7696,9 @@ instance P.HasEnable (GuarddutyDetectorResource s) (TF.Attr s P.Bool) where
     enable =
         P.lens (_enable :: GuarddutyDetectorResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enable = a } :: GuarddutyDetectorResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GuarddutyDetectorResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAccountId (TF.Ref s' (GuarddutyDetectorResource s)) (TF.Attr s P.Text) where
     computedAccountId x = TF.compute (TF.refKey x) "account_id"
@@ -7541,6 +7778,9 @@ instance P.HasName (GuarddutyIpsetResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: GuarddutyIpsetResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: GuarddutyIpsetResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GuarddutyIpsetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @aws_guardduty_member@ Resource.
 --
@@ -7626,6 +7866,9 @@ instance P.HasInvite (GuarddutyMemberResource s) (TF.Attr s P.Bool) where
         P.lens (_invite :: GuarddutyMemberResource s -> TF.Attr s P.Bool)
                (\s a -> s { _invite = a } :: GuarddutyMemberResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GuarddutyMemberResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedRelationshipStatus (TF.Ref s' (GuarddutyMemberResource s)) (TF.Attr s P.Text) where
     computedRelationshipStatus x = TF.compute (TF.refKey x) "relationship_status"
 
@@ -7705,6 +7948,9 @@ instance P.HasName (GuarddutyThreatintelsetResource s) (TF.Attr s P.Text) where
         P.lens (_name :: GuarddutyThreatintelsetResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: GuarddutyThreatintelsetResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GuarddutyThreatintelsetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @aws_iam_access_key@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/iam_access_key.html terraform documentation>
@@ -7746,6 +7992,9 @@ instance P.HasUser (IamAccessKeyResource s) (TF.Attr s P.Text) where
     user =
         P.lens (_user :: IamAccessKeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _user = a } :: IamAccessKeyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamAccessKeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEncryptedSecret (TF.Ref s' (IamAccessKeyResource s)) (TF.Attr s P.Text) where
     computedEncryptedSecret x = TF.compute (TF.refKey x) "encrypted_secret"
@@ -7791,6 +8040,9 @@ instance P.HasAccountAlias (IamAccountAliasResource s) (TF.Attr s P.Text) where
         P.lens (_accountAlias :: IamAccountAliasResource s -> TF.Attr s P.Text)
                (\s a -> s { _accountAlias = a } :: IamAccountAliasResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamAccountAliasResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @aws_iam_account_password_policy@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/iam_account_password_policy.html terraform documentation>
@@ -7831,6 +8083,9 @@ instance P.HasMinimumPasswordLength (IamAccountPasswordPolicyResource s) (TF.Att
     minimumPasswordLength =
         P.lens (_minimumPasswordLength :: IamAccountPasswordPolicyResource s -> TF.Attr s P.Int)
                (\s a -> s { _minimumPasswordLength = a } :: IamAccountPasswordPolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamAccountPasswordPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedExpirePasswords (TF.Ref s' (IamAccountPasswordPolicyResource s)) (TF.Attr s P.Bool) where
     computedExpirePasswords x = TF.compute (TF.refKey x) "expire_passwords"
@@ -7898,6 +8153,9 @@ instance P.HasPath (IamGroupResource s) (TF.Attr s P.Text) where
         P.lens (_path :: IamGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _path = a } :: IamGroupResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamGroupResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -7958,6 +8216,9 @@ instance P.HasUsers (IamGroupMembershipResource s) (TF.Attr s [TF.Attr s P.Text]
         P.lens (_users :: IamGroupMembershipResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _users = a } :: IamGroupMembershipResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamGroupMembershipResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @aws_iam_group_policy@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/iam_group_policy.html terraform documentation>
@@ -8011,6 +8272,9 @@ instance P.HasPolicy (IamGroupPolicyResource s) (TF.Attr s P.Document) where
         P.lens (_policy :: IamGroupPolicyResource s -> TF.Attr s P.Document)
                (\s a -> s { _policy = a } :: IamGroupPolicyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamGroupPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedName (TF.Ref s' (IamGroupPolicyResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
@@ -8057,6 +8321,9 @@ instance P.HasPolicyArn (IamGroupPolicyAttachmentResource s) (TF.Attr s P.Text) 
         P.lens (_policyArn :: IamGroupPolicyAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _policyArn = a } :: IamGroupPolicyAttachmentResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamGroupPolicyAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @aws_iam_instance_profile@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/iam_instance_profile.html terraform documentation>
@@ -8097,6 +8364,9 @@ instance P.HasPath (IamInstanceProfileResource s) (TF.Attr s P.Text) where
     path =
         P.lens (_path :: IamInstanceProfileResource s -> TF.Attr s P.Text)
                (\s a -> s { _path = a } :: IamInstanceProfileResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamInstanceProfileResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamInstanceProfileResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -8167,6 +8437,9 @@ instance P.HasUrl (IamOpenidConnectProviderResource s) (TF.Attr s P.Text) where
         P.lens (_url :: IamOpenidConnectProviderResource s -> TF.Attr s P.Text)
                (\s a -> s { _url = a } :: IamOpenidConnectProviderResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamOpenidConnectProviderResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamOpenidConnectProviderResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -8231,6 +8504,9 @@ instance P.HasPolicy (IamPolicyResource s) (TF.Attr s P.Document) where
     policy =
         P.lens (_policy :: IamPolicyResource s -> TF.Attr s P.Document)
                (\s a -> s { _policy = a } :: IamPolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamPolicyResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -8310,6 +8586,9 @@ instance P.HasUsers (IamPolicyAttachmentResource s) (TF.Attr s [TF.Attr s P.Text
     users =
         P.lens (_users :: IamPolicyAttachmentResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _users = a } :: IamPolicyAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamPolicyAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @aws_iam_role@ Resource.
 --
@@ -8403,6 +8682,9 @@ instance P.HasPermissionsBoundary (IamRoleResource s) (TF.Attr s P.Text) where
         P.lens (_permissionsBoundary :: IamRoleResource s -> TF.Attr s P.Text)
                (\s a -> s { _permissionsBoundary = a } :: IamRoleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamRoleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamRoleResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -8468,6 +8750,9 @@ instance P.HasRole (IamRolePolicyResource s) (TF.Attr s P.Text) where
         P.lens (_role :: IamRolePolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: IamRolePolicyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamRolePolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedName (TF.Ref s' (IamRolePolicyResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
@@ -8514,6 +8799,9 @@ instance P.HasRole (IamRolePolicyAttachmentResource s) (TF.Attr s P.Text) where
         P.lens (_role :: IamRolePolicyAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: IamRolePolicyAttachmentResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamRolePolicyAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @aws_iam_saml_provider@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/iam_saml_provider.html terraform documentation>
@@ -8556,6 +8844,9 @@ instance P.HasSamlMetadataDocument (IamSamlProviderResource s) (TF.Attr s P.Text
     samlMetadataDocument =
         P.lens (_samlMetadataDocument :: IamSamlProviderResource s -> TF.Attr s P.Text)
                (\s a -> s { _samlMetadataDocument = a } :: IamSamlProviderResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamSamlProviderResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamSamlProviderResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -8636,6 +8927,9 @@ instance P.HasPrivateKey (IamServerCertificateResource s) (TF.Attr s P.Text) whe
         P.lens (_privateKey :: IamServerCertificateResource s -> TF.Attr s P.Text)
                (\s a -> s { _privateKey = a } :: IamServerCertificateResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamServerCertificateResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamServerCertificateResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -8693,6 +8987,9 @@ instance P.HasDescription (IamServiceLinkedRoleResource s) (TF.Attr s P.Text) wh
     description =
         P.lens (_description :: IamServiceLinkedRoleResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: IamServiceLinkedRoleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamServiceLinkedRoleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamServiceLinkedRoleResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -8772,6 +9069,9 @@ instance P.HasPermissionsBoundary (IamUserResource s) (TF.Attr s P.Text) where
     permissionsBoundary =
         P.lens (_permissionsBoundary :: IamUserResource s -> TF.Attr s P.Text)
                (\s a -> s { _permissionsBoundary = a } :: IamUserResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamUserResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamUserResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"

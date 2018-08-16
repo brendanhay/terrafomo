@@ -95,6 +95,9 @@ instance P.HasWebAclId (WafregionalWebAclAssociationResource s) (TF.Attr s P.Tex
         P.lens (_webAclId :: WafregionalWebAclAssociationResource s -> TF.Attr s P.Text)
                (\s a -> s { _webAclId = a } :: WafregionalWebAclAssociationResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (WafregionalWebAclAssociationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @aws_wafregional_xss_match_set@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/wafregional_xss_match_set.html terraform documentation>
@@ -136,3 +139,6 @@ instance P.HasXssMatchTuple (WafregionalXssMatchSetResource s) (TF.Attr s [TF.At
     xssMatchTuple =
         P.lens (_xssMatchTuple :: WafregionalXssMatchSetResource s -> TF.Attr s [TF.Attr s (XssMatchTupleSetting s)])
                (\s a -> s { _xssMatchTuple = a } :: WafregionalXssMatchSetResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (WafregionalXssMatchSetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
