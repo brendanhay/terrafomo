@@ -516,11 +516,11 @@ data RulesSetting s = RulesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newRulesSetting
-    :: TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
-    -> TF.Attr s P.Int -- ^ @port_balancer@ - 'P.portBalancer'
+    :: TF.Attr s P.Int -- ^ @port_balancer@ - 'P.portBalancer'
+    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Int -- ^ @port_server@ - 'P.portServer'
     -> RulesSetting s
-newRulesSetting _protocol _portBalancer _portServer =
+newRulesSetting _portBalancer _protocol _portServer =
     RulesSetting'
         { _portFrom = TF.Nil
         , _portTo = TF.Nil
