@@ -17,7 +17,6 @@
 --
 module Terrafomo.UltraDNS.Resource
     (
-    -- * Resource Datatypes
     -- ** ultradns_dirpool
       DirpoolResource (..)
     , dirpoolResource
@@ -99,6 +98,7 @@ data DirpoolResource s = DirpoolResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ultradns_dirpool@ resource value.
 dirpoolResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -208,6 +208,7 @@ data ProbeHttpResource s = ProbeHttpResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ultradns_probe_http@ resource value.
 probeHttpResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @agents@ - 'P.agents'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -306,6 +307,7 @@ data ProbePingResource s = ProbePingResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ultradns_probe_ping@ resource value.
 probePingResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @agents@ - 'P.agents'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -401,6 +403,7 @@ data RdpoolResource s = RdpoolResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ultradns_rdpool@ resource value.
 rdpoolResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @rdata@ - 'P.rdata'
@@ -488,6 +491,7 @@ data RecordResource s = RecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ultradns_record@ resource value.
 recordResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @rdata@ - 'P.rdata'
@@ -584,6 +588,7 @@ data TcpoolResource s = TcpoolResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ultradns_tcpool@ resource value.
 tcpoolResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'

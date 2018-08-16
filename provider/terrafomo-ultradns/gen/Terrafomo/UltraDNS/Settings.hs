@@ -17,7 +17,6 @@
 --
 module Terrafomo.UltraDNS.Settings
     (
-    -- * Settings Datatypes
     -- ** geo_info
       GeoInfoSetting (..)
     , newGeoInfoSetting
@@ -94,6 +93,7 @@ data GeoInfoSetting s = GeoInfoSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @geo_info@ settings value.
 newGeoInfoSetting
     :: GeoInfoSetting s
 newGeoInfoSetting =
@@ -139,6 +139,7 @@ data HttpProbeSetting s = HttpProbeSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @http_probe@ settings value.
 newHttpProbeSetting
     :: HttpProbeSetting s
 newHttpProbeSetting =
@@ -180,6 +181,7 @@ data IpInfoSetting s = IpInfoSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @ip_info@ settings value.
 newIpInfoSetting
     :: IpInfoSetting s
 newIpInfoSetting =
@@ -231,6 +233,7 @@ data IpsSetting s = IpsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @ips@ settings value.
 newIpsSetting
     :: IpsSetting s
 newIpsSetting =
@@ -289,6 +292,7 @@ data LimitSetting s = LimitSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @limit@ settings value.
 newLimitSetting
     :: TF.Attr s P.Int -- ^ @critical@ - 'P.critical'
     -> TF.Attr s P.Int -- ^ @fail@ - 'P.fail'
@@ -348,6 +352,7 @@ data NoResponseSetting s = NoResponseSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @no_response@ settings value.
 newNoResponseSetting
     :: NoResponseSetting s
 newNoResponseSetting =
@@ -396,6 +401,7 @@ data PingProbeSetting s = PingProbeSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @ping_probe@ settings value.
 newPingProbeSetting
     :: PingProbeSetting s
 newPingProbeSetting =
@@ -465,6 +471,7 @@ data RdataSetting s = RdataSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @rdata@ settings value.
 newRdataSetting
     :: TF.Attr s P.Text -- ^ @host@ - 'P.host'
     -> RdataSetting s
@@ -563,6 +570,7 @@ data TotalLimitsSetting s = TotalLimitsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @total_limits@ settings value.
 newTotalLimitsSetting
     :: TotalLimitsSetting s
 newTotalLimitsSetting =
@@ -617,6 +625,7 @@ data TransactionSetting s = TransactionSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @transaction@ settings value.
 newTransactionSetting
     :: TF.Attr s P.Text -- ^ @method@ - 'P.method'
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
