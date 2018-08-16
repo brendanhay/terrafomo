@@ -17,7 +17,6 @@
 --
 module Terrafomo.NS1.Resource
     (
-    -- * Resource Datatypes
     -- ** ns1_apikey
       ApikeyResource (..)
     , apikeyResource
@@ -150,6 +149,7 @@ data ApikeyResource s = ApikeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ns1_apikey@ resource value.
 apikeyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ApikeyResource s)
@@ -334,6 +334,7 @@ data DatafeedResource s = DatafeedResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ns1_datafeed@ resource value.
 datafeedResource
     :: TF.Attr s P.Text -- ^ @source_id@ - 'P.sourceId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -390,6 +391,7 @@ data DatasourceResource s = DatasourceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ns1_datasource@ resource value.
 datasourceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @sourcetype@ - 'P.sourcetype'
@@ -482,6 +484,7 @@ data MonitoringjobResource s = MonitoringjobResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ns1_monitoringjob@ resource value.
 monitoringjobResource
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @config@ - 'P.config'
     -> TF.Attr s P.Int -- ^ @frequency@ - 'P.frequency'
@@ -622,6 +625,7 @@ data NotifylistResource s = NotifylistResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ns1_notifylist@ resource value.
 notifylistResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NotifylistResource s)
@@ -688,6 +692,7 @@ data RecordResource s = RecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ns1_record@ resource value.
 recordResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -841,6 +846,7 @@ data TeamResource s = TeamResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ns1_team@ resource value.
 teamResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (TeamResource s)
@@ -1078,6 +1084,7 @@ data UserResource s = UserResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ns1_user@ resource value.
 userResource
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1285,6 +1292,7 @@ data ZoneResource s = ZoneResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ns1_zone@ resource value.
 zoneResource
     :: TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (ZoneResource s)

@@ -17,7 +17,6 @@
 --
 module Terrafomo.NS1.Settings
     (
-    -- * Settings Datatypes
     -- ** answers
       AnswersSetting (..)
     , newAnswersSetting
@@ -74,6 +73,7 @@ data AnswersSetting s = AnswersSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @answers@ settings value.
 newAnswersSetting
     :: AnswersSetting s
 newAnswersSetting =
@@ -122,6 +122,7 @@ data FiltersSetting s = FiltersSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @filters@ settings value.
 newFiltersSetting
     :: TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
     -> FiltersSetting s
@@ -168,6 +169,7 @@ data NotificationsSetting s = NotificationsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @notifications@ settings value.
 newNotificationsSetting
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @config@ - 'P.config'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -208,6 +210,7 @@ data RegionsSetting s = RegionsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @regions@ settings value.
 newRegionsSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> RegionsSetting s
@@ -250,6 +253,7 @@ data RulesSetting s = RulesSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @rules@ settings value.
 newRulesSetting
     :: TF.Attr s P.Text -- ^ @comparison@ - 'P.comparison'
     -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
