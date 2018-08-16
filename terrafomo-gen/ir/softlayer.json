@@ -103,23 +103,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_publicKey",
                     "computed": false,
                     "required": true,
@@ -135,6 +118,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "public_key"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 }
             ],
             "conflicts": [],
@@ -496,40 +496,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_cpu",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"cpu\" <$> TF.attribute",
-                    "name": "_cpu",
-                    "method": "cpu",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasCpu",
-                    "validate": false,
-                    "optional": false,
-                    "original": "cpu"
-                },
-                {
-                    "default": "_domain",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"domain\" <$> TF.attribute",
-                    "name": "_domain",
-                    "method": "domain",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDomain",
-                    "validate": false,
-                    "optional": false,
-                    "original": "domain"
-                },
-                {
                     "default": "_hourlyBilling",
                     "computed": false,
                     "required": true,
@@ -547,6 +513,23 @@
                     "original": "hourly_billing"
                 },
                 {
+                    "default": "_cpu",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"cpu\" <$> TF.attribute",
+                    "name": "_cpu",
+                    "method": "cpu",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasCpu",
+                    "validate": false,
+                    "optional": false,
+                    "original": "cpu"
+                },
+                {
                     "default": "_localDisk",
                     "computed": false,
                     "required": true,
@@ -562,6 +545,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "local_disk"
+                },
+                {
+                    "default": "_domain",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"domain\" <$> TF.attribute",
+                    "name": "_domain",
+                    "method": "domain",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDomain",
+                    "validate": false,
+                    "optional": false,
+                    "original": "domain"
                 },
                 {
                     "default": "_name",
