@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newAddressesSetting",
+                "smart": "addressesSetting",
                 "name": "AddressesSetting'"
             },
             "arguments": [],
@@ -86,7 +86,7 @@
         },
         {
             "con": {
-                "smart": "newAdvertiseAddrsSetting",
+                "smart": "advertiseAddrsSetting",
                 "name": "AdvertiseAddrsSetting'"
             },
             "arguments": [],
@@ -153,7 +153,7 @@
         },
         {
             "con": {
-                "smart": "newDnsSetting",
+                "smart": "dnsSetting",
                 "name": "DnsSetting'"
             },
             "arguments": [
@@ -340,7 +340,7 @@
         },
         {
             "con": {
-                "smart": "newFailoverSetting",
+                "smart": "failoverSetting",
                 "name": "FailoverSetting'"
             },
             "arguments": [
@@ -390,7 +390,7 @@
         },
         {
             "con": {
-                "smart": "newKeySetting",
+                "smart": "keySetting",
                 "name": "KeySetting'"
             },
             "arguments": [
@@ -527,7 +527,7 @@
         },
         {
             "con": {
-                "smart": "newNodesSetting",
+                "smart": "nodesSetting",
                 "name": "NodesSetting'"
             },
             "arguments": [],
@@ -628,7 +628,7 @@
         },
         {
             "con": {
-                "smart": "newPerformanceSetting",
+                "smart": "performanceSetting",
                 "name": "PerformanceSetting'"
             },
             "arguments": [],
@@ -661,7 +661,7 @@
         },
         {
             "con": {
-                "smart": "newPortsSetting",
+                "smart": "portsSetting",
                 "name": "PortsSetting'"
             },
             "arguments": [],
@@ -796,7 +796,7 @@
         },
         {
             "con": {
-                "smart": "newQueryOptionsSetting",
+                "smart": "queryOptionsSetting",
                 "name": "QueryOptionsSetting'"
             },
             "arguments": [
@@ -948,7 +948,7 @@
         },
         {
             "con": {
-                "smart": "newRetryJoinEc2Setting",
+                "smart": "retryJoinEc2Setting",
                 "name": "RetryJoinEc2Setting'"
             },
             "arguments": [],
@@ -1015,7 +1015,7 @@
         },
         {
             "con": {
-                "smart": "newRetryJoinGceSetting",
+                "smart": "retryJoinGceSetting",
                 "name": "RetryJoinGceSetting'"
             },
             "arguments": [],
@@ -1099,7 +1099,7 @@
         },
         {
             "con": {
-                "smart": "newServiceSetting",
+                "smart": "serviceSetting",
                 "name": "ServiceSetting'"
             },
             "arguments": [
@@ -1423,7 +1423,7 @@
         },
         {
             "con": {
-                "smart": "newServicesSetting",
+                "smart": "servicesSetting",
                 "name": "ServicesSetting'"
             },
             "arguments": [],
@@ -1456,7 +1456,7 @@
         },
         {
             "con": {
-                "smart": "newSubkeySetting",
+                "smart": "subkeySetting",
                 "name": "SubkeySetting'"
             },
             "arguments": [
@@ -1558,7 +1558,7 @@
         },
         {
             "con": {
-                "smart": "newTaggedAddressesSetting",
+                "smart": "taggedAddressesSetting",
                 "name": "TaggedAddressesSetting'"
             },
             "arguments": [],
@@ -1608,7 +1608,7 @@
         },
         {
             "con": {
-                "smart": "newTelemetrySetting",
+                "smart": "telemetrySetting",
                 "name": "TelemetrySetting'"
             },
             "arguments": [],
@@ -1947,7 +1947,7 @@
         },
         {
             "con": {
-                "smart": "newTemplateSetting",
+                "smart": "templateSetting",
                 "name": "TemplateSetting'"
             },
             "arguments": [
@@ -2032,7 +2032,7 @@
         },
         {
             "con": {
-                "smart": "newUnixSocketsSetting",
+                "smart": "unixSocketsSetting",
                 "name": "UnixSocketsSetting'"
             },
             "arguments": [],
