@@ -89,18 +89,13 @@ newProvider _akey _skey _usesandbox =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "dme"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , P.Just $ TF.assign "akey" _akey
-                  , P.Just $ TF.assign "skey" _skey
-                  , P.Just $ TF.assign "usesandbox" _usesandbox
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ P.Just $ TF.assign "akey" _akey
+            , P.Just $ TF.assign "skey" _skey
+            , P.Just $ TF.assign "usesandbox" _usesandbox
+            ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
