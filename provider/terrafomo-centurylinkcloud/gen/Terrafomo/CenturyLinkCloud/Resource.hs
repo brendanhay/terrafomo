@@ -234,12 +234,12 @@ data LoadBalancerPoolResource s = LoadBalancerPoolResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 loadBalancerPoolResource
-    :: TF.Attr s P.Text -- ^ @data_center@ - 'P.dataCenter'
-    -> TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
+    :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
+    -> TF.Attr s P.Text -- ^ @data_center@ - 'P.dataCenter'
     -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))] -- ^ @nodes@ - 'P.nodes'
     -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
     -> P.Resource (LoadBalancerPoolResource s)
-loadBalancerPoolResource _dataCenter _loadBalancer _nodes _port =
+loadBalancerPoolResource _loadBalancer _dataCenter _nodes _port =
     TF.unsafeResource "clc_load_balancer_pool" TF.validator $
         LoadBalancerPoolResource'
             { _dataCenter = _dataCenter
@@ -310,10 +310,10 @@ data PublicIpResource s = PublicIpResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 publicIpResource
-    :: TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))] -- ^ @ports@ - 'P.ports'
-    -> TF.Attr s P.Text -- ^ @server_id@ - 'P.serverId'
+    :: TF.Attr s P.Text -- ^ @server_id@ - 'P.serverId'
+    -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))] -- ^ @ports@ - 'P.ports'
     -> P.Resource (PublicIpResource s)
-publicIpResource _ports _serverId =
+publicIpResource _serverId _ports =
     TF.unsafeResource "clc_public_ip" TF.validator $
         PublicIpResource'
             { _ports = _ports
@@ -407,11 +407,11 @@ data ServerResource s = ServerResource'
 serverResource
     :: TF.Attr s P.Int -- ^ @cpu@ - 'P.cpu'
     -> TF.Attr s P.Text -- ^ @group_id@ - 'P.groupId'
+    -> TF.Attr s P.Text -- ^ @source_server_id@ - 'P.sourceServerId'
     -> TF.Attr s P.Int -- ^ @memory_mb@ - 'P.memoryMb'
     -> TF.Attr s P.Text -- ^ @name_template@ - 'P.nameTemplate'
-    -> TF.Attr s P.Text -- ^ @source_server_id@ - 'P.sourceServerId'
     -> P.Resource (ServerResource s)
-serverResource _cpu _groupId _memoryMb _nameTemplate _sourceServerId =
+serverResource _cpu _groupId _sourceServerId _memoryMb _nameTemplate =
     TF.unsafeResource "clc_server" TF.validator $
         ServerResource'
             { _aaPolicyId = TF.Nil
