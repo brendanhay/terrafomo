@@ -59,7 +59,7 @@ data UserData s = UserData'
 
 -- | Define a new @opsgenie_user@ datasource value.
 userData
-    :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
+    :: TF.Attr s P.Text -- ^ @username@ ('P._username', 'P.username')
     -> P.DataSource (UserData s)
 userData _username =
     TF.unsafeDataSource "opsgenie_user" TF.validator $

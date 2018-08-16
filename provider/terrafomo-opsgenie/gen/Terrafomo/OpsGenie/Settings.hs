@@ -56,7 +56,7 @@ data MemberSetting s = MemberSetting'
 
 -- | Construct a new @member@ settings value.
 newMemberSetting
-    :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
+    :: TF.Attr s P.Text -- ^ 'P._username': @username@
     -> MemberSetting s
 newMemberSetting _username =
     MemberSetting'

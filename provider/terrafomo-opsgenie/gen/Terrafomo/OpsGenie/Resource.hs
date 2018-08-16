@@ -69,7 +69,7 @@ data TeamResource s = TeamResource'
 
 -- | Define a new @opsgenie_team@ resource value.
 teamResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (TeamResource s)
 teamResource _name =
     TF.unsafeResource "opsgenie_team" TF.validator $
@@ -131,9 +131,9 @@ data UserResource s = UserResource'
 
 -- | Define a new @opsgenie_user@ resource value.
 userResource
-    :: TF.Attr s P.Text -- ^ @full_name@ - 'P.fullName'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
+    :: TF.Attr s P.Text -- ^ @full_name@ ('P._fullName', 'P.fullName')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
+    -> TF.Attr s P.Text -- ^ @username@ ('P._username', 'P.username')
     -> P.Resource (UserResource s)
 userResource _fullName _role _username =
     TF.unsafeResource "opsgenie_user" TF.validator $
