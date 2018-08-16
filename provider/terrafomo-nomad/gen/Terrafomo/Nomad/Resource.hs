@@ -89,10 +89,10 @@ data AclPolicyResource s = AclPolicyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 aclPolicyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @rules_hcl@ - 'P.rulesHcl'
+    :: TF.Attr s P.Text -- ^ @rules_hcl@ - 'P.rulesHcl'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (AclPolicyResource s)
-aclPolicyResource _name _rulesHcl =
+aclPolicyResource _rulesHcl _name =
     TF.unsafeResource "nomad_acl_policy" TF.validator $
         AclPolicyResource'
             { _description = TF.Nil

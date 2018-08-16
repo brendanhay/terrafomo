@@ -62,10 +62,10 @@ data LimitsSetting s = LimitsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newLimitsSetting
-    :: TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> TF.Attr s (RegionLimitSetting s) -- ^ @region_limit@ - 'P.regionLimit'
+    :: TF.Attr s (RegionLimitSetting s) -- ^ @region_limit@ - 'P.regionLimit'
+    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> LimitsSetting s
-newLimitsSetting _region _regionLimit =
+newLimitsSetting _regionLimit _region =
     LimitsSetting'
         { _region = _region
         , _regionLimit = _regionLimit
