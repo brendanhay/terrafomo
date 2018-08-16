@@ -17,7 +17,6 @@
 --
 module Terrafomo.OpenStack.Resource
     (
-    -- * Resource Datatypes
     -- ** openstack_blockstorage_volume_attach_v2
       BlockstorageVolumeAttachV2Resource (..)
     , blockstorageVolumeAttachV2Resource
@@ -307,6 +306,7 @@ data BlockstorageVolumeAttachV2Resource s = BlockstorageVolumeAttachV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_blockstorage_volume_attach_v2@ resource value.
 blockstorageVolumeAttachV2Resource
     :: TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
     -> TF.Attr s P.Text -- ^ @host_name@ - 'P.hostName'
@@ -462,6 +462,7 @@ data BlockstorageVolumeAttachV3Resource s = BlockstorageVolumeAttachV3Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_blockstorage_volume_attach_v3@ resource value.
 blockstorageVolumeAttachV3Resource
     :: TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
     -> TF.Attr s P.Text -- ^ @host_name@ - 'P.hostName'
@@ -595,6 +596,7 @@ data BlockstorageVolumeV1Resource s = BlockstorageVolumeV1Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_blockstorage_volume_v1@ resource value.
 blockstorageVolumeV1Resource
     :: TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (BlockstorageVolumeV1Resource s)
@@ -701,6 +703,7 @@ data BlockstorageVolumeV2Resource s = BlockstorageVolumeV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_blockstorage_volume_v2@ resource value.
 blockstorageVolumeV2Resource
     :: TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (BlockstorageVolumeV2Resource s)
@@ -824,6 +827,7 @@ data BlockstorageVolumeV3Resource s = BlockstorageVolumeV3Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_blockstorage_volume_v3@ resource value.
 blockstorageVolumeV3Resource
     :: TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (BlockstorageVolumeV3Resource s)
@@ -951,6 +955,7 @@ data ComputeFlavorV2Resource s = ComputeFlavorV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_compute_flavor_v2@ resource value.
 computeFlavorV2Resource
     :: TF.Attr s P.Int -- ^ @disk@ - 'P.disk'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1053,6 +1058,7 @@ data ComputeFloatingipAssociateV2Resource s = ComputeFloatingipAssociateV2Resour
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_compute_floatingip_associate_v2@ resource value.
 computeFloatingipAssociateV2Resource
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> TF.Attr s P.Text -- ^ @floating_ip@ - 'P.floatingIp'
@@ -1113,6 +1119,7 @@ data ComputeFloatingipV2Resource s = ComputeFloatingipV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_compute_floatingip_v2@ resource value.
 computeFloatingipV2Resource
     :: TF.Attr s P.Text -- ^ @pool@ - 'P.pool'
     -> P.Resource (ComputeFloatingipV2Resource s)
@@ -1199,6 +1206,7 @@ data ComputeInstanceV2Resource s = ComputeInstanceV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_compute_instance_v2@ resource value.
 computeInstanceV2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeInstanceV2Resource s)
@@ -1361,6 +1369,7 @@ data ComputeKeypairV2Resource s = ComputeKeypairV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_compute_keypair_v2@ resource value.
 computeKeypairV2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeKeypairV2Resource s)
@@ -1418,6 +1427,7 @@ data ComputeSecgroupV2Resource s = ComputeSecgroupV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_compute_secgroup_v2@ resource value.
 computeSecgroupV2Resource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1473,6 +1483,7 @@ data ComputeServergroupV2Resource s = ComputeServergroupV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_compute_servergroup_v2@ resource value.
 computeServergroupV2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeServergroupV2Resource s)
@@ -1531,6 +1542,7 @@ data ComputeVolumeAttachV2Resource s = ComputeVolumeAttachV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_compute_volume_attach_v2@ resource value.
 computeVolumeAttachV2Resource
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
@@ -1592,6 +1604,7 @@ data DbConfigurationV1Resource s = DbConfigurationV1Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_db_configuration_v1@ resource value.
 dbConfigurationV1Resource
     :: TF.Attr s (DatastoreSetting s) -- ^ @datastore@ - 'P.datastore'
     -> TF.Attr s P.Text -- ^ @description@ - 'P.description'
@@ -1668,6 +1681,7 @@ data DbDatabaseV1Resource s = DbDatabaseV1Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_db_database_v1@ resource value.
 dbDatabaseV1Resource
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1739,6 +1753,7 @@ data DbInstanceV1Resource s = DbInstanceV1Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_db_instance_v1@ resource value.
 dbInstanceV1Resource
     :: TF.Attr s (DatastoreSetting s) -- ^ @datastore@ - 'P.datastore'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1845,6 +1860,7 @@ data DbUserV1Resource s = DbUserV1Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_db_user_v1@ resource value.
 dbUserV1Resource
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1926,6 +1942,7 @@ data DnsRecordsetV2Resource s = DnsRecordsetV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_dns_recordset_v2@ resource value.
 dnsRecordsetV2Resource
     :: TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2014,6 +2031,7 @@ data DnsZoneV2Resource s = DnsZoneV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_dns_zone_v2@ resource value.
 dnsZoneV2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DnsZoneV2Resource s)
@@ -2108,6 +2126,7 @@ data FwFirewallV1Resource s = FwFirewallV1Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_fw_firewall_v1@ resource value.
 fwFirewallV1Resource
     :: TF.Attr s P.Text -- ^ @policy_id@ - 'P.policyId'
     -> P.Resource (FwFirewallV1Resource s)
@@ -2202,6 +2221,7 @@ data FwPolicyV1Resource s = FwPolicyV1Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_fw_policy_v1@ resource value.
 fwPolicyV1Resource
     :: P.Resource (FwPolicyV1Resource s)
 fwPolicyV1Resource =
@@ -2310,6 +2330,7 @@ data FwRuleV1Resource s = FwRuleV1Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_fw_rule_v1@ resource value.
 fwRuleV1Resource
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
@@ -2435,6 +2456,7 @@ data IdentityProjectV3Resource s = IdentityProjectV3Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_identity_project_v3@ resource value.
 identityProjectV3Resource
     :: P.Resource (IdentityProjectV3Resource s)
 identityProjectV3Resource =
@@ -2523,6 +2545,7 @@ data IdentityRoleAssignmentV3Resource s = IdentityRoleAssignmentV3Resource'
     -- * 'groupId'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_identity_role_assignment_v3@ resource value.
 identityRoleAssignmentV3Resource
     :: TF.Attr s P.Text -- ^ @role_id@ - 'P.roleId'
     -> P.Resource (IdentityRoleAssignmentV3Resource s)
@@ -2607,6 +2630,7 @@ data IdentityRoleV3Resource s = IdentityRoleV3Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_identity_role_v3@ resource value.
 identityRoleV3Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (IdentityRoleV3Resource s)
@@ -2675,6 +2699,7 @@ data IdentityUserV3Resource s = IdentityUserV3Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_identity_user_v3@ resource value.
 identityUserV3Resource
     :: P.Resource (IdentityUserV3Resource s)
 identityUserV3Resource =
@@ -2820,6 +2845,7 @@ data ImagesImageV2Resource s = ImagesImageV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_images_image_v2@ resource value.
 imagesImageV2Resource
     :: TF.Attr s P.Text -- ^ @container_format@ - 'P.containerFormat'
     -> TF.Attr s P.Text -- ^ @disk_format@ - 'P.diskFormat'
@@ -2996,6 +3022,7 @@ data LbListenerV2Resource s = LbListenerV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_lb_listener_v2@ resource value.
 lbListenerV2Resource
     :: TF.Attr s P.Text -- ^ @loadbalancer_id@ - 'P.loadbalancerId'
     -> TF.Attr s P.Int -- ^ @protocol_port@ - 'P.protocolPort'
@@ -3102,6 +3129,7 @@ data LbLoadbalancerV2Resource s = LbLoadbalancerV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_lb_loadbalancer_v2@ resource value.
 lbLoadbalancerV2Resource
     :: TF.Attr s P.Text -- ^ @vip_subnet_id@ - 'P.vipSubnetId'
     -> P.Resource (LbLoadbalancerV2Resource s)
@@ -3192,6 +3220,7 @@ data LbMemberV1Resource s = LbMemberV1Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_lb_member_v1@ resource value.
 lbMemberV1Resource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @pool_id@ - 'P.poolId'
@@ -3274,6 +3303,7 @@ data LbMemberV2Resource s = LbMemberV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_lb_member_v2@ resource value.
 lbMemberV2Resource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @pool_id@ - 'P.poolId'
@@ -3373,6 +3403,7 @@ data LbMonitorV1Resource s = LbMonitorV1Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_lb_monitor_v1@ resource value.
 lbMonitorV1Resource
     :: TF.Attr s P.Int -- ^ @delay@ - 'P.delay'
     -> TF.Attr s P.Int -- ^ @max_retries@ - 'P.maxRetries'
@@ -3480,6 +3511,7 @@ data LbMonitorV2Resource s = LbMonitorV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_lb_monitor_v2@ resource value.
 lbMonitorV2Resource
     :: TF.Attr s P.Int -- ^ @delay@ - 'P.delay'
     -> TF.Attr s P.Text -- ^ @pool_id@ - 'P.poolId'
@@ -3591,6 +3623,7 @@ data LbPoolV1Resource s = LbPoolV1Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_lb_pool_v1@ resource value.
 lbPoolV1Resource
     :: TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> TF.Attr s P.Text -- ^ @lb_method@ - 'P.lbMethod'
@@ -3694,6 +3727,7 @@ data LbPoolV2Resource s = LbPoolV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_lb_pool_v2@ resource value.
 lbPoolV2Resource
     :: TF.Attr s P.Text -- ^ @lb_method@ - 'P.lbMethod'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
@@ -3803,6 +3837,7 @@ data LbVipV1Resource s = LbVipV1Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_lb_vip_v1@ resource value.
 lbVipV1Resource
     :: TF.Attr s P.Text -- ^ @pool_id@ - 'P.poolId'
     -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
@@ -3908,6 +3943,7 @@ data NetworkingFloatingipAssociateV2Resource s = NetworkingFloatingipAssociateV2
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_networking_floatingip_associate_v2@ resource value.
 networkingFloatingipAssociateV2Resource
     :: TF.Attr s P.Text -- ^ @port_id@ - 'P.portId'
     -> TF.Attr s P.Text -- ^ @floating_ip@ - 'P.floatingIp'
@@ -3960,6 +3996,7 @@ data NetworkingFloatingipV2Resource s = NetworkingFloatingipV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_networking_floatingip_v2@ resource value.
 networkingFloatingipV2Resource
     :: TF.Attr s P.Text -- ^ @pool@ - 'P.pool'
     -> P.Resource (NetworkingFloatingipV2Resource s)
@@ -4030,6 +4067,7 @@ data NetworkingNetworkV2Resource s = NetworkingNetworkV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_networking_network_v2@ resource value.
 networkingNetworkV2Resource
     :: P.Resource (NetworkingNetworkV2Resource s)
 networkingNetworkV2Resource =
@@ -4114,6 +4152,7 @@ data NetworkingPortV2Resource s = NetworkingPortV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_networking_port_v2@ resource value.
 networkingPortV2Resource
     :: TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
     -> P.Resource (NetworkingPortV2Resource s)
@@ -4215,6 +4254,7 @@ data NetworkingRouterInterfaceV2Resource s = NetworkingRouterInterfaceV2Resource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_networking_router_interface_v2@ resource value.
 networkingRouterInterfaceV2Resource
     :: TF.Attr s P.Text -- ^ @router_id@ - 'P.routerId'
     -> P.Resource (NetworkingRouterInterfaceV2Resource s)
@@ -4265,6 +4305,7 @@ data NetworkingRouterRouteV2Resource s = NetworkingRouterRouteV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_networking_router_route_v2@ resource value.
 networkingRouterRouteV2Resource
     :: TF.Attr s P.Text -- ^ @destination_cidr@ - 'P.destinationCidr'
     -> TF.Attr s P.Text -- ^ @next_hop@ - 'P.nextHop'
@@ -4325,6 +4366,7 @@ data NetworkingRouterV2Resource s = NetworkingRouterV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_networking_router_v2@ resource value.
 networkingRouterV2Resource
     :: P.Resource (NetworkingRouterV2Resource s)
 networkingRouterV2Resource =
@@ -4407,6 +4449,7 @@ data NetworkingSecgroupRuleV2Resource s = NetworkingSecgroupRuleV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_networking_secgroup_rule_v2@ resource value.
 networkingSecgroupRuleV2Resource
     :: TF.Attr s P.Text -- ^ @direction@ - 'P.direction'
     -> TF.Attr s P.Text -- ^ @ethertype@ - 'P.ethertype'
@@ -4482,6 +4525,7 @@ data NetworkingSecgroupV2Resource s = NetworkingSecgroupV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_networking_secgroup_v2@ resource value.
 networkingSecgroupV2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NetworkingSecgroupV2Resource s)
@@ -4539,6 +4583,7 @@ data NetworkingSubnetRouteV2Resource s = NetworkingSubnetRouteV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_networking_subnet_route_v2@ resource value.
 networkingSubnetRouteV2Resource
     :: TF.Attr s P.Text -- ^ @destination_cidr@ - 'P.destinationCidr'
     -> TF.Attr s P.Text -- ^ @next_hop@ - 'P.nextHop'
@@ -4617,6 +4662,7 @@ data NetworkingSubnetV2Resource s = NetworkingSubnetV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_networking_subnet_v2@ resource value.
 networkingSubnetV2Resource
     :: TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
     -> P.Resource (NetworkingSubnetV2Resource s)
@@ -4750,6 +4796,7 @@ data NetworkingSubnetpoolV2Resource s = NetworkingSubnetpoolV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_networking_subnetpool_v2@ resource value.
 networkingSubnetpoolV2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @prefixes@ - 'P.prefixes'
@@ -4883,6 +4930,7 @@ data ObjectstorageContainerV1Resource s = ObjectstorageContainerV1Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_objectstorage_container_v1@ resource value.
 objectstorageContainerV1Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ObjectstorageContainerV1Resource s)
@@ -5003,6 +5051,7 @@ data ObjectstorageObjectV1Resource s = ObjectstorageObjectV1Resource'
     -- * 'copyFrom'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_objectstorage_object_v1@ resource value.
 objectstorageObjectV1Resource
     :: TF.Attr s P.Text -- ^ @container_name@ - 'P.containerName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -5146,6 +5195,7 @@ data VpnaasEndpointGroupV2Resource s = VpnaasEndpointGroupV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_vpnaas_endpoint_group_v2@ resource value.
 vpnaasEndpointGroupV2Resource
     :: P.Resource (VpnaasEndpointGroupV2Resource s)
 vpnaasEndpointGroupV2Resource =
@@ -5231,6 +5281,7 @@ data VpnaasIkePolicyV2Resource s = VpnaasIkePolicyV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_vpnaas_ike_policy_v2@ resource value.
 vpnaasIkePolicyV2Resource
     :: P.Resource (VpnaasIkePolicyV2Resource s)
 vpnaasIkePolicyV2Resource =
@@ -5329,6 +5380,7 @@ data VpnaasIpsecPolicyV2Resource s = VpnaasIpsecPolicyV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_vpnaas_ipsec_policy_v2@ resource value.
 vpnaasIpsecPolicyV2Resource
     :: P.Resource (VpnaasIpsecPolicyV2Resource s)
 vpnaasIpsecPolicyV2Resource =
@@ -5416,6 +5468,7 @@ data VpnaasServiceV2Resource s = VpnaasServiceV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_vpnaas_service_v2@ resource value.
 vpnaasServiceV2Resource
     :: TF.Attr s P.Text -- ^ @router_id@ - 'P.routerId'
     -> P.Resource (VpnaasServiceV2Resource s)
@@ -5540,6 +5593,7 @@ data VpnaasSiteConnectionV2Resource s = VpnaasSiteConnectionV2Resource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_vpnaas_site_connection_v2@ resource value.
 vpnaasSiteConnectionV2Resource
     :: TF.Attr s P.Text -- ^ @peer_address@ - 'P.peerAddress'
     -> TF.Attr s P.Text -- ^ @ikepolicy_id@ - 'P.ikepolicyId'

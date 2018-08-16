@@ -17,7 +17,6 @@
 --
 module Terrafomo.OpenStack.Settings
     (
-    -- * Settings Datatypes
     -- ** allocation_pools
       AllocationPoolsSetting (..)
     , newAllocationPoolsSetting
@@ -143,6 +142,7 @@ data AllocationPoolsSetting s = AllocationPoolsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @allocation_pools@ settings value.
 newAllocationPoolsSetting
     :: TF.Attr s P.Text -- ^ @end@ - 'P.end'
     -> TF.Attr s P.Text -- ^ @start@ - 'P.start'
@@ -189,6 +189,7 @@ data AllowedAddressPairsSetting s = AllowedAddressPairsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @allowed_address_pairs@ settings value.
 newAllowedAddressPairsSetting
     :: TF.Attr s P.Text -- ^ @ip_address@ - 'P.ipAddress'
     -> AllowedAddressPairsSetting s
@@ -222,6 +223,7 @@ instance P.HasMacAddress (AllowedAddressPairsSetting s) (TF.Attr s P.Text) where
 data AttachmentSetting s = AttachmentSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @attachment@ settings value.
 newAttachmentSetting
     :: AttachmentSetting s
 newAttachmentSetting =
@@ -268,6 +270,7 @@ data BlockDeviceSetting s = BlockDeviceSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @block_device@ settings value.
 newBlockDeviceSetting
     :: TF.Attr s P.Text -- ^ @source_type@ - 'P.sourceType'
     -> BlockDeviceSetting s
@@ -342,6 +345,7 @@ data ConfigurationSetting s = ConfigurationSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @configuration@ settings value.
 newConfigurationSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
@@ -385,6 +389,7 @@ data DatabaseSetting s = DatabaseSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @database@ settings value.
 newDatabaseSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> DatabaseSetting s
@@ -431,6 +436,7 @@ data DatastoreSetting s = DatastoreSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @datastore@ settings value.
 newDatastoreSetting
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @version@ - 'P.version'
@@ -465,6 +471,7 @@ instance P.HasVersion (DatastoreSetting s) (TF.Attr s P.Text) where
 data DpdSetting s = DpdSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @dpd@ settings value.
 newDpdSetting
     :: DpdSetting s
 newDpdSetting =
@@ -496,6 +503,7 @@ data ExternalFixedIpSetting s = ExternalFixedIpSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @external_fixed_ip@ settings value.
 newExternalFixedIpSetting
     :: ExternalFixedIpSetting s
 newExternalFixedIpSetting =
@@ -534,6 +542,7 @@ data FixedIpSetting s = FixedIpSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @fixed_ip@ settings value.
 newFixedIpSetting
     :: TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> FixedIpSetting s
@@ -573,6 +582,7 @@ data HostRoutesSetting s = HostRoutesSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @host_routes@ settings value.
 newHostRoutesSetting
     :: TF.Attr s P.Text -- ^ @destination_cidr@ - 'P.destinationCidr'
     -> TF.Attr s P.Text -- ^ @next_hop@ - 'P.nextHop'
@@ -613,6 +623,7 @@ instance s ~ s' => P.HasComputedNextHop (TF.Ref s' (HostRoutesSetting s)) (TF.At
 data LifetimeSetting s = LifetimeSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @lifetime@ settings value.
 newLifetimeSetting
     :: LifetimeSetting s
 newLifetimeSetting =
@@ -638,6 +649,7 @@ data MultiFactorAuthRuleSetting s = MultiFactorAuthRuleSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @multi_factor_auth_rule@ settings value.
 newMultiFactorAuthRuleSetting
     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @rule@ - 'P.rule'
     -> MultiFactorAuthRuleSetting s
@@ -679,6 +691,7 @@ data NetworkSetting s = NetworkSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @network@ settings value.
 newNetworkSetting
     :: NetworkSetting s
 newNetworkSetting =
@@ -759,6 +772,7 @@ data PersistenceSetting s = PersistenceSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @persistence@ settings value.
 newPersistenceSetting
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> PersistenceSetting s
@@ -798,6 +812,7 @@ data PersonalitySetting s = PersonalitySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @personality@ settings value.
 newPersonalitySetting
     :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
     -> TF.Attr s P.Text -- ^ @file@ - 'P.file'
@@ -832,6 +847,7 @@ instance P.HasFile (PersonalitySetting s) (TF.Attr s P.Text) where
 data RolesSetting s = RolesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @roles@ settings value.
 newRolesSetting
     :: RolesSetting s
 newRolesSetting =
@@ -872,6 +888,7 @@ data RuleSetting s = RuleSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @rule@ settings value.
 newRuleSetting
     :: TF.Attr s P.Int -- ^ @from_port@ - 'P.fromPort'
     -> TF.Attr s P.Int -- ^ @to_port@ - 'P.toPort'
@@ -959,6 +976,7 @@ data SchedulerHintsSetting s = SchedulerHintsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @scheduler_hints@ settings value.
 newSchedulerHintsSetting
     :: SchedulerHintsSetting s
 newSchedulerHintsSetting =
@@ -1035,6 +1053,7 @@ data SegmentsSetting s = SegmentsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @segments@ settings value.
 newSegmentsSetting
     :: SegmentsSetting s
 newSegmentsSetting =
@@ -1086,6 +1105,7 @@ data UserSetting s = UserSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @user@ settings value.
 newUserSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> UserSetting s
@@ -1136,6 +1156,7 @@ data VendorOptionsSetting s = VendorOptionsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @vendor_options@ settings value.
 newVendorOptionsSetting
     :: VendorOptionsSetting s
 newVendorOptionsSetting =
@@ -1164,6 +1185,7 @@ data VolumeSetting s = VolumeSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @volume@ settings value.
 newVolumeSetting
     :: TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
     -> VolumeSetting s

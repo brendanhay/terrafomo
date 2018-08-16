@@ -17,7 +17,6 @@
 --
 module Terrafomo.OpenStack.DataSource
     (
-    -- * DataSource Datatypes
     -- ** openstack_compute_flavor_v2
       ComputeFlavorV2Data (..)
     , computeFlavorV2Data
@@ -139,6 +138,7 @@ data ComputeFlavorV2Data s = ComputeFlavorV2Data'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_compute_flavor_v2@ datasource value.
 computeFlavorV2Data
     :: P.DataSource (ComputeFlavorV2Data s)
 computeFlavorV2Data =
@@ -228,6 +228,7 @@ data ComputeKeypairV2Data s = ComputeKeypairV2Data'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_compute_keypair_v2@ datasource value.
 computeKeypairV2Data
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeKeypairV2Data s)
@@ -284,6 +285,7 @@ data DnsZoneV2Data s = DnsZoneV2Data'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_dns_zone_v2@ datasource value.
 dnsZoneV2Data
     :: P.DataSource (DnsZoneV2Data s)
 dnsZoneV2Data =
@@ -386,6 +388,7 @@ data FwPolicyV1Data s = FwPolicyV1Data'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_fw_policy_v1@ datasource value.
 fwPolicyV1Data
     :: P.DataSource (FwPolicyV1Data s)
 fwPolicyV1Data =
@@ -445,6 +448,7 @@ data IdentityAuthScopeV3Data s = IdentityAuthScopeV3Data'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_identity_auth_scope_v3@ datasource value.
 identityAuthScopeV3Data
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (IdentityAuthScopeV3Data s)
@@ -516,6 +520,7 @@ data IdentityEndpointV3Data s = IdentityEndpointV3Data'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_identity_endpoint_v3@ datasource value.
 identityEndpointV3Data
     :: P.DataSource (IdentityEndpointV3Data s)
 identityEndpointV3Data =
@@ -570,6 +575,7 @@ data IdentityGroupV3Data s = IdentityGroupV3Data'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_identity_group_v3@ datasource value.
 identityGroupV3Data
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (IdentityGroupV3Data s)
@@ -620,6 +626,7 @@ data IdentityProjectV3Data s = IdentityProjectV3Data'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_identity_project_v3@ datasource value.
 identityProjectV3Data
     :: P.DataSource (IdentityProjectV3Data s)
 identityProjectV3Data =
@@ -684,6 +691,7 @@ data IdentityRoleV3Data s = IdentityRoleV3Data'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_identity_role_v3@ datasource value.
 identityRoleV3Data
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (IdentityRoleV3Data s)
@@ -740,6 +748,7 @@ data IdentityUserV3Data s = IdentityUserV3Data'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_identity_user_v3@ datasource value.
 identityUserV3Data
     :: P.DataSource (IdentityUserV3Data s)
 identityUserV3Data =
@@ -848,6 +857,7 @@ data ImagesImageV2Data s = ImagesImageV2Data'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_images_image_v2@ datasource value.
 imagesImageV2Data
     :: P.DataSource (ImagesImageV2Data s)
 imagesImageV2Data =
@@ -1006,6 +1016,7 @@ data NetworkingFloatingipV2Data s = NetworkingFloatingipV2Data'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_networking_floatingip_v2@ datasource value.
 networkingFloatingipV2Data
     :: P.DataSource (NetworkingFloatingipV2Data s)
 networkingFloatingipV2Data =
@@ -1098,6 +1109,7 @@ data NetworkingNetworkV2Data s = NetworkingNetworkV2Data'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_networking_network_v2@ datasource value.
 networkingNetworkV2Data
     :: P.DataSource (NetworkingNetworkV2Data s)
 networkingNetworkV2Data =
@@ -1182,6 +1194,7 @@ data NetworkingSecgroupV2Data s = NetworkingSecgroupV2Data'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_networking_secgroup_v2@ datasource value.
 networkingSecgroupV2Data
     :: P.DataSource (NetworkingSecgroupV2Data s)
 networkingSecgroupV2Data =
@@ -1238,6 +1251,7 @@ data NetworkingSubnetV2Data s = NetworkingSubnetV2Data'
     -- * 'dhcpDisabled'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_networking_subnet_v2@ datasource value.
 networkingSubnetV2Data
     :: P.DataSource (NetworkingSubnetV2Data s)
 networkingSubnetV2Data =
@@ -1332,6 +1346,7 @@ instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (NetworkingSubnetV2Data s)) 
 data NetworkingSubnetpoolV2Data s = NetworkingSubnetpoolV2Data'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @openstack_networking_subnetpool_v2@ datasource value.
 networkingSubnetpoolV2Data
     :: P.DataSource (NetworkingSubnetpoolV2Data s)
 networkingSubnetpoolV2Data =
