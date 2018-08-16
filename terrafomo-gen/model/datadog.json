@@ -102,7 +102,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "downtime_recurrence",
+            "name": "recurrence",
             "schemas": [
               {
                 "name": "period",
@@ -168,7 +168,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "recurrence_week_days",
+                  "name": "week_days",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -195,7 +195,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "downtime_scope",
+            "name": "scope",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -496,7 +496,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "monitor_tags",
+            "name": "tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -520,7 +520,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "monitor_thresholds",
+            "name": "thresholds",
             "schemas": [
               {
                 "name": "critical",
@@ -652,7 +652,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "timeboard_graph",
+            "name": "graph",
             "schemas": [
               {
                 "name": "autoscale",
@@ -693,7 +693,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "graph_events",
+                  "name": "events",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -718,7 +718,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "graph_group",
+                  "name": "group",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -768,7 +768,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "graph_marker",
+                  "name": "marker",
                   "schemas": [
                     {
                       "name": "label",
@@ -834,7 +834,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "graph_request",
+                  "name": "request",
                   "schemas": [
                     {
                       "name": "aggregator",
@@ -887,7 +887,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "request_conditional_format",
+                        "name": "conditional_format",
                         "schemas": [
                           {
                             "name": "comparator",
@@ -1075,7 +1075,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "graph_scope",
+                  "name": "scope",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1178,7 +1178,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "timeboard_template_variable",
+            "name": "template_variable",
             "schemas": [
               {
                 "name": "default",
