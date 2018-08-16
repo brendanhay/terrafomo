@@ -17,7 +17,6 @@
 --
 module Terrafomo.Rundeck.Settings
     (
-    -- * Settings Datatypes
     -- ** command
       CommandSetting (..)
     , newCommandSetting
@@ -93,6 +92,7 @@ data CommandSetting s = CommandSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @command@ settings value.
 newCommandSetting
     :: CommandSetting s
 newCommandSetting =
@@ -179,6 +179,7 @@ data JobSetting s = JobSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @job@ settings value.
 newJobSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> JobSetting s
@@ -232,6 +233,7 @@ data NodeStepPluginSetting s = NodeStepPluginSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @node_step_plugin@ settings value.
 newNodeStepPluginSetting
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> NodeStepPluginSetting s
@@ -301,6 +303,7 @@ data OptionSetting s = OptionSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @option@ settings value.
 newOptionSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> OptionSetting s
@@ -412,6 +415,7 @@ data ResourceModelSourceSetting s = ResourceModelSourceSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @resource_model_source@ settings value.
 newResourceModelSourceSetting
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @config@ - 'P.config'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -452,6 +456,7 @@ data StepPluginSetting s = StepPluginSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @step_plugin@ settings value.
 newStepPluginSetting
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> StepPluginSetting s

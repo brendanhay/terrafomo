@@ -17,7 +17,6 @@
 --
 module Terrafomo.Rundeck.Resource
     (
-    -- * Resource Datatypes
     -- ** rundeck_job
       JobResource (..)
     , jobResource
@@ -115,6 +114,7 @@ data JobResource s = JobResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rundeck_job@ resource value.
 jobResource
     :: TF.Attr s [TF.Attr s (CommandSetting s)] -- ^ @command@ - 'P.command'
     -> TF.Attr s P.Text -- ^ @description@ - 'P.description'
@@ -266,6 +266,7 @@ data PrivateKeyResource s = PrivateKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rundeck_private_key@ resource value.
 privateKeyResource
     :: TF.Attr s P.Text -- ^ @key_material@ - 'P.keyMaterial'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
@@ -338,6 +339,7 @@ data ProjectResource s = ProjectResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rundeck_project@ resource value.
 projectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s (ResourceModelSourceSetting s)] -- ^ @resource_model_source@ - 'P.resourceModelSource'
@@ -434,6 +436,7 @@ data PublicKeyResource s = PublicKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rundeck_public_key@ resource value.
 publicKeyResource
     :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> P.Resource (PublicKeyResource s)

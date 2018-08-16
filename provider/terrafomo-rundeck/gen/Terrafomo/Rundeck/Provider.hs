@@ -17,11 +17,10 @@
 --
 module Terrafomo.Rundeck.Provider
     (
-    -- * Rundeck Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * Rundeck Specific Aliases
+    -- ** Rundeck Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -89,7 +88,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "rundeck"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
             , P.Just $ TF.assign "auth_token" _authToken

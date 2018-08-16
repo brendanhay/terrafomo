@@ -12,12 +12,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Rundeck
-    ( module Terrafomo.Rundeck.Lens
-    , module Terrafomo.Rundeck.Provider
-    , module Terrafomo.Rundeck.Resource
-    , module Terrafomo.Rundeck.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Rundeck.Provider
+
+    -- * Custom Types
     , module Terrafomo.Rundeck.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+
+    -- * Resources
+    , module Terrafomo.Rundeck.Resource
+
+    -- * Settings
+    , module Terrafomo.Rundeck.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Rundeck.Lens
     ) where
 
 import Terrafomo.Rundeck.Lens
