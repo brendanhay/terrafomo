@@ -1615,7 +1615,7 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SecurityGroupResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/aws/r/security_group_rule.html terraform documentation>
 -- for more information.
 data SecurityGroupRuleResource s = SecurityGroupRuleResource'
-    { _cidrBlocks            :: TF.Attr s [TF.Attr s P.Text]
+    { _cidrBlocks            :: TF.Attr s [TF.Attr s P.IPRange]
     -- ^ @cidr_blocks@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -1627,7 +1627,7 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
     , _fromPort              :: TF.Attr s P.Int
     -- ^ @from_port@ - (Required, Forces New)
     --
-    , _ipv6CidrBlocks        :: TF.Attr s [TF.Attr s P.Text]
+    , _ipv6CidrBlocks        :: TF.Attr s [TF.Attr s P.IPRange]
     -- ^ @ipv6_cidr_blocks@ - (Optional, Forces New)
     --
     , _prefixListIds         :: TF.Attr s [TF.Attr s P.Text]
@@ -1719,9 +1719,9 @@ instance TF.IsValid (SecurityGroupRuleResource s) where
                             ])
         ])
 
-instance P.HasCidrBlocks (SecurityGroupRuleResource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasCidrBlocks (SecurityGroupRuleResource s) (TF.Attr s [TF.Attr s P.IPRange]) where
     cidrBlocks =
-        P.lens (_cidrBlocks :: SecurityGroupRuleResource s -> TF.Attr s [TF.Attr s P.Text])
+        P.lens (_cidrBlocks :: SecurityGroupRuleResource s -> TF.Attr s [TF.Attr s P.IPRange])
                (\s a -> s { _cidrBlocks = a } :: SecurityGroupRuleResource s)
 
 instance P.HasDescription (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
@@ -1734,9 +1734,9 @@ instance P.HasFromPort (SecurityGroupRuleResource s) (TF.Attr s P.Int) where
         P.lens (_fromPort :: SecurityGroupRuleResource s -> TF.Attr s P.Int)
                (\s a -> s { _fromPort = a } :: SecurityGroupRuleResource s)
 
-instance P.HasIpv6CidrBlocks (SecurityGroupRuleResource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasIpv6CidrBlocks (SecurityGroupRuleResource s) (TF.Attr s [TF.Attr s P.IPRange]) where
     ipv6CidrBlocks =
-        P.lens (_ipv6CidrBlocks :: SecurityGroupRuleResource s -> TF.Attr s [TF.Attr s P.Text])
+        P.lens (_ipv6CidrBlocks :: SecurityGroupRuleResource s -> TF.Attr s [TF.Attr s P.IPRange])
                (\s a -> s { _ipv6CidrBlocks = a } :: SecurityGroupRuleResource s)
 
 instance P.HasPrefixListIds (SecurityGroupRuleResource s) (TF.Attr s [TF.Attr s P.Text]) where
