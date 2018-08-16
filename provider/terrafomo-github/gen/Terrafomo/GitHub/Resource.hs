@@ -199,6 +199,9 @@ instance P.HasRestrictions (BranchProtectionResource s) (TF.Attr s (Restrictions
         P.lens (_restrictions :: BranchProtectionResource s -> TF.Attr s (RestrictionsSetting s))
                (\s a -> s { _restrictions = a } :: BranchProtectionResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (BranchProtectionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @github_issue_label@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/github/r/issue_label.html terraform documentation>
@@ -263,6 +266,9 @@ instance P.HasRepository (IssueLabelResource s) (TF.Attr s P.Text) where
         P.lens (_repository :: IssueLabelResource s -> TF.Attr s P.Text)
                (\s a -> s { _repository = a } :: IssueLabelResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IssueLabelResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (IssueLabelResource s)) (TF.Attr s P.Text) where
     computedUrl x = TF.compute (TF.refKey x) "url"
 
@@ -308,6 +314,9 @@ instance P.HasUsername (MembershipResource s) (TF.Attr s P.Text) where
         P.lens (_username :: MembershipResource s -> TF.Attr s P.Text)
                (\s a -> s { _username = a } :: MembershipResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MembershipResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @github_organization_project@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/github/r/organization_project.html terraform documentation>
@@ -349,6 +358,9 @@ instance P.HasName (OrganizationProjectResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: OrganizationProjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: OrganizationProjectResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OrganizationProjectResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (OrganizationProjectResource s)) (TF.Attr s P.Text) where
     computedUrl x = TF.compute (TF.refKey x) "url"
@@ -415,6 +427,9 @@ instance P.HasName (OrganizationWebhookResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: OrganizationWebhookResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: OrganizationWebhookResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OrganizationWebhookResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (OrganizationWebhookResource s)) (TF.Attr s P.Text) where
     computedUrl x = TF.compute (TF.refKey x) "url"
@@ -601,6 +616,9 @@ instance P.HasTopics (RepositoryResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_topics :: RepositoryResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _topics = a } :: RepositoryResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDefaultBranch (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedDefaultBranch x = TF.compute (TF.refKey x) "default_branch"
 
@@ -675,6 +693,9 @@ instance P.HasUsername (RepositoryCollaboratorResource s) (TF.Attr s P.Text) whe
         P.lens (_username :: RepositoryCollaboratorResource s -> TF.Attr s P.Text)
                (\s a -> s { _username = a } :: RepositoryCollaboratorResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RepositoryCollaboratorResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @github_repository_deploy_key@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/github/r/repository_deploy_key.html terraform documentation>
@@ -739,6 +760,9 @@ instance P.HasTitle (RepositoryDeployKeyResource s) (TF.Attr s P.Text) where
         P.lens (_title :: RepositoryDeployKeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _title = a } :: RepositoryDeployKeyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RepositoryDeployKeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @github_repository_project@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/github/r/repository_project.html terraform documentation>
@@ -791,6 +815,9 @@ instance P.HasRepository (RepositoryProjectResource s) (TF.Attr s P.Text) where
     repository =
         P.lens (_repository :: RepositoryProjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _repository = a } :: RepositoryProjectResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RepositoryProjectResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (RepositoryProjectResource s)) (TF.Attr s P.Text) where
     computedUrl x = TF.compute (TF.refKey x) "url"
@@ -869,6 +896,9 @@ instance P.HasRepository (RepositoryWebhookResource s) (TF.Attr s P.Text) where
         P.lens (_repository :: RepositoryWebhookResource s -> TF.Attr s P.Text)
                (\s a -> s { _repository = a } :: RepositoryWebhookResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RepositoryWebhookResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (RepositoryWebhookResource s)) (TF.Attr s P.Text) where
     computedUrl x = TF.compute (TF.refKey x) "url"
 
@@ -944,6 +974,9 @@ instance P.HasPrivacy (TeamResource s) (TF.Attr s P.Text) where
         P.lens (_privacy :: TeamResource s -> TF.Attr s P.Text)
                (\s a -> s { _privacy = a } :: TeamResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @github_team_membership@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/github/r/team_membership.html terraform documentation>
@@ -996,6 +1029,9 @@ instance P.HasUsername (TeamMembershipResource s) (TF.Attr s P.Text) where
     username =
         P.lens (_username :: TeamMembershipResource s -> TF.Attr s P.Text)
                (\s a -> s { _username = a } :: TeamMembershipResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamMembershipResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @github_team_repository@ Resource.
 --
@@ -1050,6 +1086,9 @@ instance P.HasTeamId (TeamRepositoryResource s) (TF.Attr s P.Text) where
         P.lens (_teamId :: TeamRepositoryResource s -> TF.Attr s P.Text)
                (\s a -> s { _teamId = a } :: TeamRepositoryResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamRepositoryResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @github_user_gpg_key@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/github/r/user_gpg_key.html terraform documentation>
@@ -1081,6 +1120,9 @@ instance P.HasArmoredPublicKey (UserGpgKeyResource s) (TF.Attr s P.Text) where
     armoredPublicKey =
         P.lens (_armoredPublicKey :: UserGpgKeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _armoredPublicKey = a } :: UserGpgKeyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserGpgKeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedKeyId (TF.Ref s' (UserGpgKeyResource s)) (TF.Attr s P.Text) where
     computedKeyId x = TF.compute (TF.refKey x) "key_id"
@@ -1127,6 +1169,9 @@ instance P.HasTitle (UserSshKeyResource s) (TF.Attr s P.Text) where
     title =
         P.lens (_title :: UserSshKeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _title = a } :: UserSshKeyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserSshKeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (UserSshKeyResource s)) (TF.Attr s P.Text) where
     computedUrl x = TF.compute (TF.refKey x) "url"
