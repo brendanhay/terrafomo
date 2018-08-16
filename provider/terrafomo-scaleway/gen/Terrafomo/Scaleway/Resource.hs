@@ -112,6 +112,9 @@ instance P.HasReverse (IpResource s) (TF.Attr s P.Text) where
         P.lens (_reverse :: IpResource s -> TF.Attr s P.Text)
                (\s a -> s { _reverse = a } :: IpResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
     computedIp x = TF.compute (TF.refKey x) "ip"
 
@@ -173,6 +176,9 @@ instance P.HasName (SecurityGroupResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SecurityGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SecurityGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @scaleway_security_group_rule@ Resource.
 --
@@ -266,6 +272,9 @@ instance P.HasSecurityGroup (SecurityGroupRuleResource s) (TF.Attr s P.Text) whe
     securityGroup =
         P.lens (_securityGroup :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _securityGroup = a } :: SecurityGroupRuleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @scaleway_server@ Resource.
 --
@@ -390,6 +399,9 @@ instance P.HasVolume (ServerResource s) (TF.Attr s [TF.Attr s (VolumeSetting s)]
         P.lens (_volume :: ServerResource s -> TF.Attr s [TF.Attr s (VolumeSetting s)])
                (\s a -> s { _volume = a } :: ServerResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedBootType (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedBootType x = TF.compute (TF.refKey x) "boot_type"
 
@@ -440,6 +452,9 @@ instance P.HasKey (SshKeyResource s) (TF.Attr s P.Text) where
     key =
         P.lens (_key :: SshKeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _key = a } :: SshKeyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @scaleway_token@ Resource.
 --
@@ -494,6 +509,9 @@ instance P.HasPassword (TokenResource s) (TF.Attr s P.Text) where
     password =
         P.lens (_password :: TokenResource s -> TF.Attr s P.Text)
                (\s a -> s { _password = a } :: TokenResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAccessKey (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
     computedAccessKey x = TF.compute (TF.refKey x) "access_key"
@@ -570,6 +588,9 @@ instance P.HasValue (UserDataResource s) (TF.Attr s P.Text) where
         P.lens (_value :: UserDataResource s -> TF.Attr s P.Text)
                (\s a -> s { _value = a } :: UserDataResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserDataResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @scaleway_volume@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/scaleway/r/volume.html terraform documentation>
@@ -627,6 +648,9 @@ instance P.HasType' (VolumeResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: VolumeResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: VolumeResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedServer (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
     computedServer x = TF.compute (TF.refKey x) "server"
 
@@ -674,3 +698,6 @@ instance P.HasVolume (VolumeAttachmentResource s) (TF.Attr s P.Text) where
     volume =
         P.lens (_volume :: VolumeAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _volume = a } :: VolumeAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
