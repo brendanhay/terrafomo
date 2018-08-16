@@ -19,15 +19,15 @@ module Terrafomo.RabbitMQ.Settings
     (
     -- ** permissions
       PermissionsSetting (..)
-    , newPermissionsSetting
+    , permissionsSetting
 
     -- ** policy
     , PolicySetting (..)
-    , newPolicySetting
+    , policySetting
 
     -- ** settings
     , SettingsSetting (..)
-    , newSettingsSetting
+    , settingsSetting
 
     ) where
 
@@ -66,12 +66,12 @@ data PermissionsSetting s = PermissionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @permissions@ settings value.
-newPermissionsSetting
+permissionsSetting
     :: TF.Attr s P.Text -- ^ 'P._configure': @configure@
     -> TF.Attr s P.Text -- ^ 'P._read': @read@
     -> TF.Attr s P.Text -- ^ 'P._write': @write@
     -> PermissionsSetting s
-newPermissionsSetting _configure _read _write =
+permissionsSetting _configure _read _write =
     PermissionsSetting'
         { _configure = _configure
         , _read = _read
@@ -121,13 +121,13 @@ data PolicySetting s = PolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @policy@ settings value.
-newPolicySetting
+policySetting
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ 'P._definition': @definition@
     -> TF.Attr s P.Text -- ^ 'P._pattern'': @pattern@
     -> TF.Attr s P.Int -- ^ 'P._priority': @priority@
     -> TF.Attr s P.Text -- ^ 'P._applyTo': @apply_to@
     -> PolicySetting s
-newPolicySetting _definition _pattern' _priority _applyTo =
+policySetting _definition _pattern' _priority _applyTo =
     PolicySetting'
         { _applyTo = _applyTo
         , _definition = _definition
@@ -190,10 +190,10 @@ data SettingsSetting s = SettingsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @settings@ settings value.
-newSettingsSetting
+settingsSetting
     :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> SettingsSetting s
-newSettingsSetting _type' =
+settingsSetting _type' =
     SettingsSetting'
         { _arguments = TF.Nil
         , _autoDelete = TF.value P.False
