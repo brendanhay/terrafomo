@@ -76,7 +76,7 @@ databaseResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DatabaseResource s)
 databaseResource _name =
-    TF.unsafeResource "mysql_database" P.defaultProvider TF.validator $
+    TF.unsafeResource "mysql_database" TF.validator $
         DatabaseResource'
             { _defaultCharacterSet = TF.value "utf8"
             , _defaultCollation = TF.value "utf8_general_ci"
@@ -136,7 +136,7 @@ grantResource
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
     -> P.Resource (GrantResource s)
 grantResource _database _privileges _user =
-    TF.unsafeResource "mysql_grant" P.defaultProvider TF.validator $
+    TF.unsafeResource "mysql_grant" TF.validator $
         GrantResource'
             { _database = _database
             , _grant = TF.value P.False
@@ -211,7 +211,7 @@ userResource
     :: TF.Attr s P.Text -- ^ @user@ - 'P.user'
     -> P.Resource (UserResource s)
 userResource _user =
-    TF.unsafeResource "mysql_user" P.defaultProvider TF.validator $
+    TF.unsafeResource "mysql_user" TF.validator $
         UserResource'
             { _authPlugin = TF.Nil
             , _host = TF.value "localhost"
