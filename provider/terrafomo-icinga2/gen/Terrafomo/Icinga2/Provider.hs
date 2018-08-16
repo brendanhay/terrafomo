@@ -95,7 +95,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "icinga2"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "api_password" _apiPassword
             , P.Just $ TF.assign "api_url" _apiUrl
