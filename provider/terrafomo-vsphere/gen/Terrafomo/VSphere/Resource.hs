@@ -465,7 +465,7 @@ computeClusterResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeClusterResource s)
 computeClusterResource _datacenterId _name =
-    TF.unsafeResource "vsphere_compute_cluster" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_compute_cluster" TF.validator $
         ComputeClusterResource'
             { _customAttributes = TF.Nil
             , _datacenterId = _datacenterId
@@ -867,7 +867,7 @@ computeClusterHostGroupResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeClusterHostGroupResource s)
 computeClusterHostGroupResource _computeClusterId _name =
-    TF.unsafeResource "vsphere_compute_cluster_host_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_compute_cluster_host_group" TF.validator $
         ComputeClusterHostGroupResource'
             { _computeClusterId = _computeClusterId
             , _hostSystemIds = TF.Nil
@@ -933,7 +933,7 @@ computeClusterVmAffinityRuleResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @virtual_machine_ids@ - 'P.virtualMachineIds'
     -> P.Resource (ComputeClusterVmAffinityRuleResource s)
 computeClusterVmAffinityRuleResource _computeClusterId _name _virtualMachineIds =
-    TF.unsafeResource "vsphere_compute_cluster_vm_affinity_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_compute_cluster_vm_affinity_rule" TF.validator $
         ComputeClusterVmAffinityRuleResource'
             { _computeClusterId = _computeClusterId
             , _enabled = TF.value P.True
@@ -1013,7 +1013,7 @@ computeClusterVmAntiAffinityRuleResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @virtual_machine_ids@ - 'P.virtualMachineIds'
     -> P.Resource (ComputeClusterVmAntiAffinityRuleResource s)
 computeClusterVmAntiAffinityRuleResource _computeClusterId _name _virtualMachineIds =
-    TF.unsafeResource "vsphere_compute_cluster_vm_anti_affinity_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_compute_cluster_vm_anti_affinity_rule" TF.validator $
         ComputeClusterVmAntiAffinityRuleResource'
             { _computeClusterId = _computeClusterId
             , _enabled = TF.value P.True
@@ -1102,7 +1102,7 @@ computeClusterVmDependencyRuleResource
     -> TF.Attr s P.Text -- ^ @vm_group_name@ - 'P.vmGroupName'
     -> P.Resource (ComputeClusterVmDependencyRuleResource s)
 computeClusterVmDependencyRuleResource _computeClusterId _dependencyVmGroupName _name _vmGroupName =
-    TF.unsafeResource "vsphere_compute_cluster_vm_dependency_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_compute_cluster_vm_dependency_rule" TF.validator $
         ComputeClusterVmDependencyRuleResource'
             { _computeClusterId = _computeClusterId
             , _dependencyVmGroupName = _dependencyVmGroupName
@@ -1179,7 +1179,7 @@ computeClusterVmGroupResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeClusterVmGroupResource s)
 computeClusterVmGroupResource _computeClusterId _name =
-    TF.unsafeResource "vsphere_compute_cluster_vm_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_compute_cluster_vm_group" TF.validator $
         ComputeClusterVmGroupResource'
             { _computeClusterId = _computeClusterId
             , _name = _name
@@ -1261,7 +1261,7 @@ computeClusterVmHostRuleResource
     -> TF.Attr s P.Text -- ^ @vm_group_name@ - 'P.vmGroupName'
     -> P.Resource (ComputeClusterVmHostRuleResource s)
 computeClusterVmHostRuleResource _computeClusterId _name _vmGroupName =
-    TF.unsafeResource "vsphere_compute_cluster_vm_host_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_compute_cluster_vm_host_rule" TF.validator $
         ComputeClusterVmHostRuleResource'
             { _affinityHostGroupName = TF.Nil
             , _antiAffinityHostGroupName = TF.Nil
@@ -1352,7 +1352,7 @@ customAttributeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (CustomAttributeResource s)
 customAttributeResource _name =
-    TF.unsafeResource "vsphere_custom_attribute" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_custom_attribute" TF.validator $
         CustomAttributeResource'
             { _managedObjectType = TF.Nil
             , _name = _name
@@ -1402,7 +1402,7 @@ datacenterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DatacenterResource s)
 datacenterResource _name =
-    TF.unsafeResource "vsphere_datacenter" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_datacenter" TF.validator $
         DatacenterResource'
             { _customAttributes = TF.Nil
             , _folder = TF.Nil
@@ -1574,7 +1574,7 @@ datastoreClusterResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DatastoreClusterResource s)
 datastoreClusterResource _datacenterId _name =
-    TF.unsafeResource "vsphere_datastore_cluster" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_datastore_cluster" TF.validator $
         DatastoreClusterResource'
             { _customAttributes = TF.Nil
             , _datacenterId = _datacenterId
@@ -1795,7 +1795,7 @@ datastoreClusterVmAntiAffinityRuleResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @virtual_machine_ids@ - 'P.virtualMachineIds'
     -> P.Resource (DatastoreClusterVmAntiAffinityRuleResource s)
 datastoreClusterVmAntiAffinityRuleResource _datastoreClusterId _name _virtualMachineIds =
-    TF.unsafeResource "vsphere_datastore_cluster_vm_anti_affinity_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_datastore_cluster_vm_anti_affinity_rule" TF.validator $
         DatastoreClusterVmAntiAffinityRuleResource'
             { _datastoreClusterId = _datastoreClusterId
             , _enabled = TF.value P.True
@@ -1937,7 +1937,7 @@ distributedPortGroupResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DistributedPortGroupResource s)
 distributedPortGroupResource _distributedVirtualSwitchUuid _name =
-    TF.unsafeResource "vsphere_distributed_port_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_distributed_port_group" TF.validator $
         DistributedPortGroupResource'
             { _autoExpand = TF.value P.True
             , _blockOverrideAllowed = TF.Nil
@@ -2269,7 +2269,7 @@ distributedVirtualSwitchResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DistributedVirtualSwitchResource s)
 distributedVirtualSwitchResource _datacenterId _name =
-    TF.unsafeResource "vsphere_distributed_virtual_switch" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_distributed_virtual_switch" TF.validator $
         DistributedVirtualSwitchResource'
             { _contactDetail = TF.Nil
             , _contactName = TF.Nil
@@ -2656,7 +2656,7 @@ dpmHostOverrideResource
     -> TF.Attr s P.Text -- ^ @host_system_id@ - 'P.hostSystemId'
     -> P.Resource (DpmHostOverrideResource s)
 dpmHostOverrideResource _computeClusterId _hostSystemId =
-    TF.unsafeResource "vsphere_dpm_host_override" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_dpm_host_override" TF.validator $
         DpmHostOverrideResource'
             { _computeClusterId = _computeClusterId
             , _dpmAutomationLevel = TF.value "manual"
@@ -2724,7 +2724,7 @@ drsVmOverrideResource
     -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
     -> P.Resource (DrsVmOverrideResource s)
 drsVmOverrideResource _computeClusterId _virtualMachineId =
-    TF.unsafeResource "vsphere_drs_vm_override" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_drs_vm_override" TF.validator $
         DrsVmOverrideResource'
             { _computeClusterId = _computeClusterId
             , _drsAutomationLevel = TF.value "manual"
@@ -2797,7 +2797,7 @@ fileResource
     -> TF.Attr s P.Text -- ^ @source_file@ - 'P.sourceFile'
     -> P.Resource (FileResource s)
 fileResource _datastore _destinationFile _sourceFile =
-    TF.unsafeResource "vsphere_file" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_file" TF.validator $
         FileResource'
             { _createDirectories = TF.Nil
             , _datacenter = TF.Nil
@@ -2891,7 +2891,7 @@ folderResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (FolderResource s)
 folderResource _path _type' =
-    TF.unsafeResource "vsphere_folder" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_folder" TF.validator $
         FolderResource'
             { _customAttributes = TF.Nil
             , _datacenterId = TF.Nil
@@ -3034,7 +3034,7 @@ haVmOverrideResource
     -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
     -> P.Resource (HaVmOverrideResource s)
 haVmOverrideResource _computeClusterId _virtualMachineId =
-    TF.unsafeResource "vsphere_ha_vm_override" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_ha_vm_override" TF.validator $
         HaVmOverrideResource'
             { _computeClusterId = _computeClusterId
             , _haDatastoreApdRecoveryAction = TF.value "useClusterDefault"
@@ -3241,7 +3241,7 @@ hostPortGroupResource
     -> TF.Attr s P.Text -- ^ @virtual_switch_name@ - 'P.virtualSwitchName'
     -> P.Resource (HostPortGroupResource s)
 hostPortGroupResource _hostSystemId _name _virtualSwitchName =
-    TF.unsafeResource "vsphere_host_port_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_host_port_group" TF.validator $
         HostPortGroupResource'
             { _activeNics = TF.Nil
             , _allowForgedTransmits = TF.Nil
@@ -3489,7 +3489,7 @@ hostVirtualSwitchResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @standby_nics@ - 'P.standbyNics'
     -> P.Resource (HostVirtualSwitchResource s)
 hostVirtualSwitchResource _activeNics _hostSystemId _name _networkAdapters _standbyNics =
-    TF.unsafeResource "vsphere_host_virtual_switch" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_host_virtual_switch" TF.validator $
         HostVirtualSwitchResource'
             { _activeNics = _activeNics
             , _allowForgedTransmits = TF.value P.True
@@ -3664,7 +3664,7 @@ licenseResource
     :: TF.Attr s P.Text -- ^ @license_key@ - 'P.licenseKey'
     -> P.Resource (LicenseResource s)
 licenseResource _licenseKey =
-    TF.unsafeResource "vsphere_license" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_license" TF.validator $
         LicenseResource'
             { _labels = TF.Nil
             , _licenseKey = _licenseKey
@@ -3768,7 +3768,7 @@ nasDatastoreResource
     -> TF.Attr s P.Text -- ^ @remote_path@ - 'P.remotePath'
     -> P.Resource (NasDatastoreResource s)
 nasDatastoreResource _hostSystemIds _name _remoteHosts _remotePath =
-    TF.unsafeResource "vsphere_nas_datastore" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_nas_datastore" TF.validator $
         NasDatastoreResource'
             { _accessMode = TF.value "readWrite"
             , _customAttributes = TF.Nil
@@ -3960,7 +3960,7 @@ resourcePoolResource
     -> TF.Attr s P.Text -- ^ @parent_resource_pool_id@ - 'P.parentResourcePoolId'
     -> P.Resource (ResourcePoolResource s)
 resourcePoolResource _name _parentResourcePoolId =
-    TF.unsafeResource "vsphere_resource_pool" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_resource_pool" TF.validator $
         ResourcePoolResource'
             { _cpuExpandable = TF.value P.True
             , _cpuLimit = TF.value (-1)
@@ -4093,7 +4093,7 @@ storageDrsVmOverrideResource
     -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
     -> P.Resource (StorageDrsVmOverrideResource s)
 storageDrsVmOverrideResource _datastoreClusterId _virtualMachineId =
-    TF.unsafeResource "vsphere_storage_drs_vm_override" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_storage_drs_vm_override" TF.validator $
         StorageDrsVmOverrideResource'
             { _datastoreClusterId = _datastoreClusterId
             , _sdrsAutomationLevel = TF.Nil
@@ -4164,7 +4164,7 @@ tagResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (TagResource s)
 tagResource _categoryId _name =
-    TF.unsafeResource "vsphere_tag" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_tag" TF.validator $
         TagResource'
             { _categoryId = _categoryId
             , _description = TF.Nil
@@ -4227,7 +4227,7 @@ tagCategoryResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (TagCategoryResource s)
 tagCategoryResource _associableTypes _cardinality _name =
-    TF.unsafeResource "vsphere_tag_category" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_tag_category" TF.validator $
         TagCategoryResource'
             { _associableTypes = _associableTypes
             , _cardinality = _cardinality
@@ -4339,7 +4339,7 @@ vappContainerResource
     -> TF.Attr s P.Text -- ^ @parent_resource_pool_id@ - 'P.parentResourcePoolId'
     -> P.Resource (VappContainerResource s)
 vappContainerResource _name _parentResourcePoolId =
-    TF.unsafeResource "vsphere_vapp_container" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_vapp_container" TF.validator $
         VappContainerResource'
             { _cpuExpandable = TF.value P.True
             , _cpuLimit = TF.value (-1)
@@ -4478,7 +4478,7 @@ virtualDiskResource
     -> TF.Attr s P.Text -- ^ @vmdk_path@ - 'P.vmdkPath'
     -> P.Resource (VirtualDiskResource s)
 virtualDiskResource _datastore _size _vmdkPath =
-    TF.unsafeResource "vsphere_virtual_disk" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_virtual_disk" TF.validator $
         VirtualDiskResource'
             { _createDirectories = TF.Nil
             , _datacenter = TF.Nil
@@ -4794,7 +4794,7 @@ virtualMachineResource
     -> TF.Attr s P.Text -- ^ @resource_pool_id@ - 'P.resourcePoolId'
     -> P.Resource (VirtualMachineResource s)
 virtualMachineResource _name _networkInterface _resourcePoolId =
-    TF.unsafeResource "vsphere_virtual_machine" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_virtual_machine" TF.validator $
         VirtualMachineResource'
             { _alternateGuestName = TF.Nil
             , _annotation = TF.Nil
@@ -5269,7 +5269,7 @@ virtualMachineSnapshotResource
     -> TF.Attr s P.Text -- ^ @virtual_machine_uuid@ - 'P.virtualMachineUuid'
     -> P.Resource (VirtualMachineSnapshotResource s)
 virtualMachineSnapshotResource _description _memory _quiesce _snapshotName _virtualMachineUuid =
-    TF.unsafeResource "vsphere_virtual_machine_snapshot" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_virtual_machine_snapshot" TF.validator $
         VirtualMachineSnapshotResource'
             { _consolidate = TF.Nil
             , _description = _description
@@ -5376,7 +5376,7 @@ vmfsDatastoreResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (VmfsDatastoreResource s)
 vmfsDatastoreResource _disks _hostSystemId _name =
-    TF.unsafeResource "vsphere_vmfs_datastore" P.defaultProvider TF.validator $
+    TF.unsafeResource "vsphere_vmfs_datastore" TF.validator $
         VmfsDatastoreResource'
             { _customAttributes = TF.Nil
             , _datastoreClusterId = TF.Nil

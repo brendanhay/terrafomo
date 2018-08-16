@@ -116,7 +116,7 @@ computeClusterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeClusterData s)
 computeClusterData _name =
-    TF.unsafeDataSource "vsphere_compute_cluster" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "vsphere_compute_cluster" TF.validator $
         ComputeClusterData'
             { _datacenterId = TF.Nil
             , _name = _name
@@ -162,7 +162,7 @@ customAttributeData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CustomAttributeData s)
 customAttributeData _name =
-    TF.unsafeDataSource "vsphere_custom_attribute" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "vsphere_custom_attribute" TF.validator $
         CustomAttributeData'
             { _name = _name
             }
@@ -201,7 +201,7 @@ data DatacenterData s = DatacenterData'
 datacenterData
     :: P.DataSource (DatacenterData s)
 datacenterData =
-    TF.unsafeDataSource "vsphere_datacenter" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "vsphere_datacenter" TF.validator $
         DatacenterData'
             { _name = TF.Nil
             }
@@ -243,7 +243,7 @@ datastoreData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DatastoreData s)
 datastoreData _name =
-    TF.unsafeDataSource "vsphere_datastore" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "vsphere_datastore" TF.validator $
         DatastoreData'
             { _datacenterId = TF.Nil
             , _name = _name
@@ -291,7 +291,7 @@ datastoreClusterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DatastoreClusterData s)
 datastoreClusterData _name =
-    TF.unsafeDataSource "vsphere_datastore_cluster" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "vsphere_datastore_cluster" TF.validator $
         DatastoreClusterData'
             { _datacenterId = TF.Nil
             , _name = _name
@@ -340,7 +340,7 @@ distributedVirtualSwitchData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DistributedVirtualSwitchData s)
 distributedVirtualSwitchData _name =
-    TF.unsafeDataSource "vsphere_distributed_virtual_switch" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "vsphere_distributed_virtual_switch" TF.validator $
         DistributedVirtualSwitchData'
             { _datacenterId = TF.Nil
             , _name = _name
@@ -391,7 +391,7 @@ hostData
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> P.DataSource (HostData s)
 hostData _datacenterId =
-    TF.unsafeDataSource "vsphere_host" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "vsphere_host" TF.validator $
         HostData'
             { _datacenterId = _datacenterId
             , _name = TF.Nil
@@ -443,7 +443,7 @@ networkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (NetworkData s)
 networkData _name =
-    TF.unsafeDataSource "vsphere_network" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "vsphere_network" TF.validator $
         NetworkData'
             { _datacenterId = TF.Nil
             , _name = _name
@@ -494,7 +494,7 @@ data ResourcePoolData s = ResourcePoolData'
 resourcePoolData
     :: P.DataSource (ResourcePoolData s)
 resourcePoolData =
-    TF.unsafeDataSource "vsphere_resource_pool" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "vsphere_resource_pool" TF.validator $
         ResourcePoolData'
             { _datacenterId = TF.Nil
             , _name = TF.Nil
@@ -542,7 +542,7 @@ tagData
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (TagData s)
 tagData _categoryId _name =
-    TF.unsafeDataSource "vsphere_tag" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "vsphere_tag" TF.validator $
         TagData'
             { _categoryId = _categoryId
             , _name = _name
@@ -588,7 +588,7 @@ tagCategoryData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (TagCategoryData s)
 tagCategoryData _name =
-    TF.unsafeDataSource "vsphere_tag_category" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "vsphere_tag_category" TF.validator $
         TagCategoryData'
             { _name = _name
             }
@@ -644,7 +644,7 @@ virtualMachineData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (VirtualMachineData s)
 virtualMachineData _name =
-    TF.unsafeDataSource "vsphere_virtual_machine" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "vsphere_virtual_machine" TF.validator $
         VirtualMachineData'
             { _datacenterId = TF.Nil
             , _name = _name
@@ -725,7 +725,7 @@ vmfsDisksData
     :: TF.Attr s P.Text -- ^ @host_system_id@ - 'P.hostSystemId'
     -> P.DataSource (VmfsDisksData s)
 vmfsDisksData _hostSystemId =
-    TF.unsafeDataSource "vsphere_vmfs_disks" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "vsphere_vmfs_disks" TF.validator $
         VmfsDisksData'
             { _filter = TF.Nil
             , _hostSystemId = _hostSystemId

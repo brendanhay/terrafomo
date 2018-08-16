@@ -123,25 +123,20 @@ newProvider _password _user =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "vsphere"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
-                  , TF.assign "client_debug" <$> _clientDebug
-                  , TF.assign "client_debug_path" <$> _clientDebugPath
-                  , TF.assign "client_debug_path_run" <$> _clientDebugPathRun
-                  , P.Just $ TF.assign "password" _password
-                  , TF.assign "persist_session" <$> _persistSession
-                  , TF.assign "rest_session_path" <$> _restSessionPath
-                  , P.Just $ TF.assign "user" _user
-                  , TF.assign "vim_session_path" <$> _vimSessionPath
-                  , TF.assign "vsphere_server" <$> _vsphereServer
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
+            , TF.assign "client_debug" <$> _clientDebug
+            , TF.assign "client_debug_path" <$> _clientDebugPath
+            , TF.assign "client_debug_path_run" <$> _clientDebugPathRun
+            , P.Just $ TF.assign "password" _password
+            , TF.assign "persist_session" <$> _persistSession
+            , TF.assign "rest_session_path" <$> _restSessionPath
+            , P.Just $ TF.assign "user" _user
+            , TF.assign "vim_session_path" <$> _vimSessionPath
+            , TF.assign "vsphere_server" <$> _vsphereServer
+            ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
