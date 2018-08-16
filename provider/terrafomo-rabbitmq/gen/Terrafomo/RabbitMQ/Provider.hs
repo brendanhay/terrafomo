@@ -94,20 +94,15 @@ newProvider _endpoint _password _username =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "rabbitmq"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "cacert_file" <$> _cacertFile
-                  , P.Just $ TF.assign "endpoint" _endpoint
-                  , TF.assign "insecure" <$> _insecure
-                  , P.Just $ TF.assign "password" _password
-                  , P.Just $ TF.assign "username" _username
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ TF.assign "cacert_file" <$> _cacertFile
+            , P.Just $ TF.assign "endpoint" _endpoint
+            , TF.assign "insecure" <$> _insecure
+            , P.Just $ TF.assign "password" _password
+            , P.Just $ TF.assign "username" _username
+            ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
