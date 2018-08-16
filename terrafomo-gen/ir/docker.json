@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "authSetting",
+                "smart": "newAuthSetting",
                 "name": "AuthSetting'"
             },
             "arguments": [
@@ -87,7 +87,7 @@
         },
         {
             "con": {
-                "smart": "bindOptionsSetting",
+                "smart": "newBindOptionsSetting",
                 "name": "BindOptionsSetting'"
             },
             "arguments": [
@@ -122,7 +122,7 @@
         },
         {
             "con": {
-                "smart": "capabilitiesSetting",
+                "smart": "newCapabilitiesSetting",
                 "name": "CapabilitiesSetting'"
             },
             "arguments": [
@@ -172,7 +172,7 @@
         },
         {
             "con": {
-                "smart": "configsSetting",
+                "smart": "newConfigsSetting",
                 "name": "ConfigsSetting'"
             },
             "arguments": [
@@ -286,7 +286,7 @@
         },
         {
             "con": {
-                "smart": "containerSpecSetting",
+                "smart": "newContainerSpecSetting",
                 "name": "ContainerSpecSetting'"
             },
             "arguments": [
@@ -765,7 +765,7 @@
         },
         {
             "con": {
-                "smart": "convergeConfigSetting",
+                "smart": "newConvergeConfigSetting",
                 "name": "ConvergeConfigSetting'"
             },
             "arguments": [
@@ -819,7 +819,7 @@
         },
         {
             "con": {
-                "smart": "credentialSpecSetting",
+                "smart": "newCredentialSpecSetting",
                 "name": "CredentialSpecSetting'"
             },
             "arguments": [
@@ -873,7 +873,7 @@
         },
         {
             "con": {
-                "smart": "devicesSetting",
+                "smart": "newDevicesSetting",
                 "name": "DevicesSetting'"
             },
             "arguments": [
@@ -958,7 +958,7 @@
         },
         {
             "con": {
-                "smart": "dnsConfigSetting",
+                "smart": "newDnsConfigSetting",
                 "name": "DnsConfigSetting'"
             },
             "arguments": [
@@ -1052,7 +1052,7 @@
         },
         {
             "con": {
-                "smart": "endpointSpecSetting",
+                "smart": "newEndpointSpecSetting",
                 "name": "EndpointSpecSetting'"
             },
             "arguments": [
@@ -1127,7 +1127,7 @@
         },
         {
             "con": {
-                "smart": "genericResourcesSetting",
+                "smart": "newGenericResourcesSetting",
                 "name": "GenericResourcesSetting'"
             },
             "arguments": [
@@ -1181,7 +1181,7 @@
         },
         {
             "con": {
-                "smart": "healthcheckSetting",
+                "smart": "newHealthcheckSetting",
                 "name": "HealthcheckSetting'"
             },
             "arguments": [
@@ -1313,7 +1313,7 @@
         },
         {
             "con": {
-                "smart": "hostSetting",
+                "smart": "newHostSetting",
                 "name": "HostSetting'"
             },
             "arguments": [
@@ -1398,7 +1398,7 @@
         },
         {
             "con": {
-                "smart": "hostsSetting",
+                "smart": "newHostsSetting",
                 "name": "HostsSetting'"
             },
             "arguments": [
@@ -1483,7 +1483,7 @@
         },
         {
             "con": {
-                "smart": "ipamConfigSetting",
+                "smart": "newIpamConfigSetting",
                 "name": "IpamConfigSetting'"
             },
             "arguments": [
@@ -1567,7 +1567,7 @@
         },
         {
             "con": {
-                "smart": "limitsSetting",
+                "smart": "newLimitsSetting",
                 "name": "LimitsSetting'"
             },
             "arguments": [
@@ -1642,7 +1642,7 @@
         },
         {
             "con": {
-                "smart": "logDriverSetting",
+                "smart": "newLogDriverSetting",
                 "name": "LogDriverSetting'"
             },
             "arguments": [
@@ -1718,7 +1718,7 @@
         },
         {
             "con": {
-                "smart": "modeSetting",
+                "smart": "newModeSetting",
                 "name": "ModeSetting'"
             },
             "arguments": [
@@ -1857,7 +1857,7 @@
         },
         {
             "con": {
-                "smart": "mountsSetting",
+                "smart": "newMountsSetting",
                 "name": "MountsSetting'"
             },
             "arguments": [
@@ -2064,7 +2064,7 @@
         },
         {
             "con": {
-                "smart": "placementSetting",
+                "smart": "newPlacementSetting",
                 "name": "PlacementSetting'"
             },
             "arguments": [
@@ -2139,7 +2139,7 @@
         },
         {
             "con": {
-                "smart": "platformsSetting",
+                "smart": "newPlatformsSetting",
                 "name": "PlatformsSetting'"
             },
             "arguments": [
@@ -2232,7 +2232,7 @@
         },
         {
             "con": {
-                "smart": "portsSetting",
+                "smart": "newPortsSetting",
                 "name": "PortsSetting'"
             },
             "arguments": [
@@ -2430,7 +2430,7 @@
         },
         {
             "con": {
-                "smart": "privilegesSetting",
+                "smart": "newPrivilegesSetting",
                 "name": "PrivilegesSetting'"
             },
             "arguments": [
@@ -2484,7 +2484,7 @@
         },
         {
             "con": {
-                "smart": "registryAuthSetting",
+                "smart": "newRegistryAuthSetting",
                 "name": "RegistryAuthSetting'"
             },
             "arguments": [
@@ -2700,7 +2700,7 @@
         },
         {
             "con": {
-                "smart": "replicatedSetting",
+                "smart": "newReplicatedSetting",
                 "name": "ReplicatedSetting'"
             },
             "arguments": [
@@ -2735,7 +2735,7 @@
         },
         {
             "con": {
-                "smart": "reservationSetting",
+                "smart": "newReservationSetting",
                 "name": "ReservationSetting'"
             },
             "arguments": [
@@ -2810,7 +2810,7 @@
         },
         {
             "con": {
-                "smart": "resourcesSetting",
+                "smart": "newResourcesSetting",
                 "name": "ResourcesSetting'"
             },
             "arguments": [
@@ -2866,7 +2866,7 @@
         },
         {
             "con": {
-                "smart": "restartPolicySetting",
+                "smart": "newRestartPolicySetting",
                 "name": "RestartPolicySetting'"
             },
             "arguments": [
@@ -2960,7 +2960,7 @@
         },
         {
             "con": {
-                "smart": "rollbackConfigSetting",
+                "smart": "newRollbackConfigSetting",
                 "name": "RollbackConfigSetting'"
             },
             "arguments": [
@@ -3090,7 +3090,7 @@
         },
         {
             "con": {
-                "smart": "seLinuxContextSetting",
+                "smart": "newSeLinuxContextSetting",
                 "name": "SeLinuxContextSetting'"
             },
             "arguments": [
@@ -3201,7 +3201,7 @@
         },
         {
             "con": {
-                "smart": "secretsSetting",
+                "smart": "newSecretsSetting",
                 "name": "SecretsSetting'"
             },
             "arguments": [
@@ -3315,7 +3315,7 @@
         },
         {
             "con": {
-                "smart": "taskSpecSetting",
+                "smart": "newTaskSpecSetting",
                 "name": "TaskSpecSetting'"
             },
             "arguments": [
@@ -3611,7 +3611,7 @@
         },
         {
             "con": {
-                "smart": "tmpfsOptionsSetting",
+                "smart": "newTmpfsOptionsSetting",
                 "name": "TmpfsOptionsSetting'"
             },
             "arguments": [
@@ -3665,7 +3665,7 @@
         },
         {
             "con": {
-                "smart": "ulimitSetting",
+                "smart": "newUlimitSetting",
                 "name": "UlimitSetting'"
             },
             "arguments": [
@@ -3784,7 +3784,7 @@
         },
         {
             "con": {
-                "smart": "updateConfigSetting",
+                "smart": "newUpdateConfigSetting",
                 "name": "UpdateConfigSetting'"
             },
             "arguments": [
@@ -3914,7 +3914,7 @@
         },
         {
             "con": {
-                "smart": "uploadSetting",
+                "smart": "newUploadSetting",
                 "name": "UploadSetting'"
             },
             "arguments": [
@@ -4016,7 +4016,7 @@
         },
         {
             "con": {
-                "smart": "volumeOptionsSetting",
+                "smart": "newVolumeOptionsSetting",
                 "name": "VolumeOptionsSetting'"
             },
             "arguments": [
@@ -4108,7 +4108,7 @@
         },
         {
             "con": {
-                "smart": "volumesSetting",
+                "smart": "newVolumesSetting",
                 "name": "VolumesSetting'"
             },
             "arguments": [
