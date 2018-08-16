@@ -89,9 +89,9 @@ data CheckcommandResource s = CheckcommandResource'
 
 -- | Define a new @icinga2_checkcommand@ resource value.
 checkcommandResource
-    :: TF.Attr s P.Text -- ^ @command@ - 'P.command'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @templates@ - 'P.templates'
+    :: TF.Attr s P.Text -- ^ @command@ ('P._command', 'P.command')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @templates@ ('P._templates', 'P.templates')
     -> P.Resource (CheckcommandResource s)
 checkcommandResource _command _name _templates =
     TF.unsafeResource "icinga2_checkcommand" TF.validator $
@@ -164,9 +164,9 @@ data HostResource s = HostResource'
 
 -- | Define a new @icinga2_host@ resource value.
 hostResource
-    :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
-    -> TF.Attr s P.Text -- ^ @check_command@ - 'P.checkCommand'
-    -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
+    :: TF.Attr s P.Text -- ^ @address@ ('P._address', 'P.address')
+    -> TF.Attr s P.Text -- ^ @check_command@ ('P._checkCommand', 'P.checkCommand')
+    -> TF.Attr s P.Text -- ^ @hostname@ ('P._hostname', 'P.hostname')
     -> P.Resource (HostResource s)
 hostResource _address _checkCommand _hostname =
     TF.unsafeResource "icinga2_host" TF.validator $
@@ -242,8 +242,8 @@ data HostgroupResource s = HostgroupResource'
 
 -- | Define a new @icinga2_hostgroup@ resource value.
 hostgroupResource
-    :: TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @display_name@ ('P._displayName', 'P.displayName')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (HostgroupResource s)
 hostgroupResource _displayName _name =
     TF.unsafeResource "icinga2_hostgroup" TF.validator $
@@ -304,8 +304,8 @@ data NotificationResource s = NotificationResource'
 
 -- | Define a new @icinga2_notification@ resource value.
 notificationResource
-    :: TF.Attr s P.Text -- ^ @command@ - 'P.command'
-    -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
+    :: TF.Attr s P.Text -- ^ @command@ ('P._command', 'P.command')
+    -> TF.Attr s P.Text -- ^ @hostname@ ('P._hostname', 'P.hostname')
     -> P.Resource (NotificationResource s)
 notificationResource _command _hostname =
     TF.unsafeResource "icinga2_notification" TF.validator $
@@ -392,9 +392,9 @@ data ServiceResource s = ServiceResource'
 
 -- | Define a new @icinga2_service@ resource value.
 serviceResource
-    :: TF.Attr s P.Text -- ^ @check_command@ - 'P.checkCommand'
-    -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @check_command@ ('P._checkCommand', 'P.checkCommand')
+    -> TF.Attr s P.Text -- ^ @hostname@ ('P._hostname', 'P.hostname')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ServiceResource s)
 serviceResource _checkCommand _hostname _name =
     TF.unsafeResource "icinga2_service" TF.validator $
@@ -448,7 +448,7 @@ data UserResource s = UserResource'
 
 -- | Define a new @icinga2_user@ resource value.
 userResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (UserResource s)
 userResource _name =
     TF.unsafeResource "icinga2_user" TF.validator $
