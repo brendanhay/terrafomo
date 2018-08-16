@@ -1549,7 +1549,739 @@
                 "smart": "initialSettingsSetting",
                 "name": "InitialSettingsSetting'"
             },
-            "arguments": [],
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"advanced_ddos\" <$> TF.attribute",
+                    "name": "_advancedDdos",
+                    "method": "advancedDdos",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAdvancedDdos",
+                    "validate": false,
+                    "optional": true,
+                    "original": "advanced_ddos"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"always_online\" <$> TF.attribute",
+                    "name": "_alwaysOnline",
+                    "method": "alwaysOnline",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAlwaysOnline",
+                    "validate": false,
+                    "optional": true,
+                    "original": "always_online"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"always_use_https\" <$> TF.attribute",
+                    "name": "_alwaysUseHttps",
+                    "method": "alwaysUseHttps",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAlwaysUseHttps",
+                    "validate": false,
+                    "optional": true,
+                    "original": "always_use_https"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"automatic_https_rewrites\" <$> TF.attribute",
+                    "name": "_automaticHttpsRewrites",
+                    "method": "automaticHttpsRewrites",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAutomaticHttpsRewrites",
+                    "validate": false,
+                    "optional": true,
+                    "original": "automatic_https_rewrites"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"brotli\" <$> TF.attribute",
+                    "name": "_brotli",
+                    "method": "brotli",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasBrotli",
+                    "validate": false,
+                    "optional": true,
+                    "original": "brotli"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"browser_cache_ttl\" <$> TF.attribute",
+                    "name": "_browserCacheTtl",
+                    "method": "browserCacheTtl",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasBrowserCacheTtl",
+                    "validate": false,
+                    "optional": true,
+                    "original": "browser_cache_ttl"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"browser_check\" <$> TF.attribute",
+                    "name": "_browserCheck",
+                    "method": "browserCheck",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasBrowserCheck",
+                    "validate": false,
+                    "optional": true,
+                    "original": "browser_check"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cache_level\" <$> TF.attribute",
+                    "name": "_cacheLevel",
+                    "method": "cacheLevel",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCacheLevel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cache_level"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"challenge_ttl\" <$> TF.attribute",
+                    "name": "_challengeTtl",
+                    "method": "challengeTtl",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasChallengeTtl",
+                    "validate": false,
+                    "optional": true,
+                    "original": "challenge_ttl"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cname_flattening\" <$> TF.attribute",
+                    "name": "_cnameFlattening",
+                    "method": "cnameFlattening",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCnameFlattening",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cname_flattening"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"development_mode\" <$> TF.attribute",
+                    "name": "_developmentMode",
+                    "method": "developmentMode",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDevelopmentMode",
+                    "validate": false,
+                    "optional": true,
+                    "original": "development_mode"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"edge_cache_ttl\" <$> TF.attribute",
+                    "name": "_edgeCacheTtl",
+                    "method": "edgeCacheTtl",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasEdgeCacheTtl",
+                    "validate": false,
+                    "optional": true,
+                    "original": "edge_cache_ttl"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"email_obfuscation\" <$> TF.attribute",
+                    "name": "_emailObfuscation",
+                    "method": "emailObfuscation",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEmailObfuscation",
+                    "validate": false,
+                    "optional": true,
+                    "original": "email_obfuscation"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"hotlink_protection\" <$> TF.attribute",
+                    "name": "_hotlinkProtection",
+                    "method": "hotlinkProtection",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHotlinkProtection",
+                    "validate": false,
+                    "optional": true,
+                    "original": "hotlink_protection"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"http2\" <$> TF.attribute",
+                    "name": "_http2",
+                    "method": "http2",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHttp2",
+                    "validate": false,
+                    "optional": true,
+                    "original": "http2"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip_geolocation\" <$> TF.attribute",
+                    "name": "_ipGeolocation",
+                    "method": "ipGeolocation",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpGeolocation",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ip_geolocation"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ipv6\" <$> TF.attribute",
+                    "name": "_ipv6",
+                    "method": "ipv6",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpv6",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ipv6"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_upload\" <$> TF.attribute",
+                    "name": "_maxUpload",
+                    "method": "maxUpload",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMaxUpload",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_upload"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"min_tls_version\" <$> TF.attribute",
+                    "name": "_minTlsVersion",
+                    "method": "minTlsVersion",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMinTlsVersion",
+                    "validate": false,
+                    "optional": true,
+                    "original": "min_tls_version"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"minify\" <$> TF.attribute",
+                    "name": "_minify",
+                    "method": "minify",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (MinifySetting s)",
+                    "class": "HasMinify",
+                    "validate": true,
+                    "optional": true,
+                    "original": "minify"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"mirage\" <$> TF.attribute",
+                    "name": "_mirage",
+                    "method": "mirage",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMirage",
+                    "validate": false,
+                    "optional": true,
+                    "original": "mirage"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"mobile_redirect\" <$> TF.attribute",
+                    "name": "_mobileRedirect",
+                    "method": "mobileRedirect",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (MobileRedirectSetting s)",
+                    "class": "HasMobileRedirect",
+                    "validate": true,
+                    "optional": true,
+                    "original": "mobile_redirect"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"opportunistic_encryption\" <$> TF.attribute",
+                    "name": "_opportunisticEncryption",
+                    "method": "opportunisticEncryption",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOpportunisticEncryption",
+                    "validate": false,
+                    "optional": true,
+                    "original": "opportunistic_encryption"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"origin_error_page_pass_thru\" <$> TF.attribute",
+                    "name": "_originErrorPagePassThru",
+                    "method": "originErrorPagePassThru",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOriginErrorPagePassThru",
+                    "validate": false,
+                    "optional": true,
+                    "original": "origin_error_page_pass_thru"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"polish\" <$> TF.attribute",
+                    "name": "_polish",
+                    "method": "polish",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPolish",
+                    "validate": false,
+                    "optional": true,
+                    "original": "polish"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"prefetch_preload\" <$> TF.attribute",
+                    "name": "_prefetchPreload",
+                    "method": "prefetchPreload",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrefetchPreload",
+                    "validate": false,
+                    "optional": true,
+                    "original": "prefetch_preload"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"privacy_pass\" <$> TF.attribute",
+                    "name": "_privacyPass",
+                    "method": "privacyPass",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrivacyPass",
+                    "validate": false,
+                    "optional": true,
+                    "original": "privacy_pass"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"pseudo_ipv4\" <$> TF.attribute",
+                    "name": "_pseudoIpv4",
+                    "method": "pseudoIpv4",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPseudoIpv4",
+                    "validate": false,
+                    "optional": true,
+                    "original": "pseudo_ipv4"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"response_buffering\" <$> TF.attribute",
+                    "name": "_responseBuffering",
+                    "method": "responseBuffering",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasResponseBuffering",
+                    "validate": false,
+                    "optional": true,
+                    "original": "response_buffering"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"rocket_loader\" <$> TF.attribute",
+                    "name": "_rocketLoader",
+                    "method": "rocketLoader",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRocketLoader",
+                    "validate": false,
+                    "optional": true,
+                    "original": "rocket_loader"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"security_header\" <$> TF.attribute",
+                    "name": "_securityHeader",
+                    "method": "securityHeader",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (SecurityHeaderSetting s)",
+                    "class": "HasSecurityHeader",
+                    "validate": true,
+                    "optional": true,
+                    "original": "security_header"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"security_level\" <$> TF.attribute",
+                    "name": "_securityLevel",
+                    "method": "securityLevel",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSecurityLevel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "security_level"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"server_side_exclude\" <$> TF.attribute",
+                    "name": "_serverSideExclude",
+                    "method": "serverSideExclude",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasServerSideExclude",
+                    "validate": false,
+                    "optional": true,
+                    "original": "server_side_exclude"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"sha1_support\" <$> TF.attribute",
+                    "name": "_sha1Support",
+                    "method": "sha1Support",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSha1Support",
+                    "validate": false,
+                    "optional": true,
+                    "original": "sha1_support"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"sort_query_string_for_cache\" <$> TF.attribute",
+                    "name": "_sortQueryStringForCache",
+                    "method": "sortQueryStringForCache",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSortQueryStringForCache",
+                    "validate": false,
+                    "optional": true,
+                    "original": "sort_query_string_for_cache"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ssl\" <$> TF.attribute",
+                    "name": "_ssl",
+                    "method": "ssl",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSsl",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ssl"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"tls_1_2_only\" <$> TF.attribute",
+                    "name": "_tls12Only",
+                    "method": "tls12Only",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTls12Only",
+                    "validate": false,
+                    "optional": true,
+                    "original": "tls_1_2_only"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"tls_1_3\" <$> TF.attribute",
+                    "name": "_tls13",
+                    "method": "tls13",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTls13",
+                    "validate": false,
+                    "optional": true,
+                    "original": "tls_1_3"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"tls_client_auth\" <$> TF.attribute",
+                    "name": "_tlsClientAuth",
+                    "method": "tlsClientAuth",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTlsClientAuth",
+                    "validate": false,
+                    "optional": true,
+                    "original": "tls_client_auth"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"true_client_ip_header\" <$> TF.attribute",
+                    "name": "_trueClientIpHeader",
+                    "method": "trueClientIpHeader",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTrueClientIpHeader",
+                    "validate": false,
+                    "optional": true,
+                    "original": "true_client_ip_header"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"waf\" <$> TF.attribute",
+                    "name": "_waf",
+                    "method": "waf",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasWaf",
+                    "validate": false,
+                    "optional": true,
+                    "original": "waf"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"webp\" <$> TF.attribute",
+                    "name": "_webp",
+                    "method": "webp",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasWebp",
+                    "validate": false,
+                    "optional": true,
+                    "original": "webp"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"websockets\" <$> TF.attribute",
+                    "name": "_websockets",
+                    "method": "websockets",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasWebsockets",
+                    "validate": false,
+                    "optional": true,
+                    "original": "websockets"
+                }
+            ],
             "key": "cloudflare_zone_settings_override.initial_settings",
             "name": "InitialSettingsSetting",
             "threaded": true,
@@ -1568,7 +2300,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAdvancedDdos",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "advanced_ddos"
                 },
                 {
@@ -1585,7 +2317,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAlwaysOnline",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "always_online"
                 },
                 {
@@ -1602,7 +2334,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAlwaysUseHttps",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "always_use_https"
                 },
                 {
@@ -1619,7 +2351,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAutomaticHttpsRewrites",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "automatic_https_rewrites"
                 },
                 {
@@ -1636,7 +2368,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBrotli",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "brotli"
                 },
                 {
@@ -1653,7 +2385,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedBrowserCacheTtl",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "browser_cache_ttl"
                 },
                 {
@@ -1670,7 +2402,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBrowserCheck",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "browser_check"
                 },
                 {
@@ -1687,7 +2419,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCacheLevel",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "cache_level"
                 },
                 {
@@ -1704,7 +2436,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedChallengeTtl",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "challenge_ttl"
                 },
                 {
@@ -1721,7 +2453,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCnameFlattening",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "cname_flattening"
                 },
                 {
@@ -1738,7 +2470,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDevelopmentMode",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "development_mode"
                 },
                 {
@@ -1755,7 +2487,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedEdgeCacheTtl",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "edge_cache_ttl"
                 },
                 {
@@ -1772,7 +2504,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedEmailObfuscation",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "email_obfuscation"
                 },
                 {
@@ -1789,7 +2521,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHotlinkProtection",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "hotlink_protection"
                 },
                 {
@@ -1806,7 +2538,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHttp2",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "http2"
                 },
                 {
@@ -1823,7 +2555,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpGeolocation",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ip_geolocation"
                 },
                 {
@@ -1840,7 +2572,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpv6",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ipv6"
                 },
                 {
@@ -1857,7 +2589,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedMaxUpload",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "max_upload"
                 },
                 {
@@ -1874,7 +2606,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMinTlsVersion",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "min_tls_version"
                 },
                 {
@@ -1891,7 +2623,7 @@
                     "type": "TF.Attr s (MinifySetting s)",
                     "class": "HasComputedMinify",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "minify"
                 },
                 {
@@ -1908,7 +2640,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMirage",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "mirage"
                 },
                 {
@@ -1925,7 +2657,7 @@
                     "type": "TF.Attr s (MobileRedirectSetting s)",
                     "class": "HasComputedMobileRedirect",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "mobile_redirect"
                 },
                 {
@@ -1942,7 +2674,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOpportunisticEncryption",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "opportunistic_encryption"
                 },
                 {
@@ -1959,7 +2691,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOriginErrorPagePassThru",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "origin_error_page_pass_thru"
                 },
                 {
@@ -1976,7 +2708,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPolish",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "polish"
                 },
                 {
@@ -1993,7 +2725,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPrefetchPreload",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "prefetch_preload"
                 },
                 {
@@ -2010,7 +2742,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPrivacyPass",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "privacy_pass"
                 },
                 {
@@ -2027,7 +2759,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPseudoIpv4",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "pseudo_ipv4"
                 },
                 {
@@ -2044,7 +2776,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedResponseBuffering",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "response_buffering"
                 },
                 {
@@ -2061,7 +2793,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRocketLoader",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "rocket_loader"
                 },
                 {
@@ -2078,7 +2810,7 @@
                     "type": "TF.Attr s (SecurityHeaderSetting s)",
                     "class": "HasComputedSecurityHeader",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "security_header"
                 },
                 {
@@ -2095,7 +2827,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSecurityLevel",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "security_level"
                 },
                 {
@@ -2112,7 +2844,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedServerSideExclude",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "server_side_exclude"
                 },
                 {
@@ -2129,7 +2861,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSha1Support",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "sha1_support"
                 },
                 {
@@ -2146,7 +2878,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSortQueryStringForCache",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "sort_query_string_for_cache"
                 },
                 {
@@ -2163,7 +2895,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSsl",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ssl"
                 },
                 {
@@ -2180,7 +2912,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTls12Only",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "tls_1_2_only"
                 },
                 {
@@ -2197,7 +2929,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTls13",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "tls_1_3"
                 },
                 {
@@ -2214,7 +2946,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTlsClientAuth",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "tls_client_auth"
                 },
                 {
@@ -2231,7 +2963,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTrueClientIpHeader",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "true_client_ip_header"
                 },
                 {
@@ -2248,7 +2980,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedWaf",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "waf"
                 },
                 {
@@ -2265,7 +2997,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedWebp",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "webp"
                 },
                 {
@@ -2282,7 +3014,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedWebsockets",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "websockets"
                 }
             ],
@@ -2296,7 +3028,42 @@
                 "smart": "matchSetting",
                 "name": "MatchSetting'"
             },
-            "arguments": [],
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"request\" <$> TF.attribute",
+                    "name": "_request",
+                    "method": "request",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (RequestSetting s)",
+                    "class": "HasRequest",
+                    "validate": true,
+                    "optional": true,
+                    "original": "request"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"response\" <$> TF.attribute",
+                    "name": "_response",
+                    "method": "response",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (ResponseSetting s)",
+                    "class": "HasResponse",
+                    "validate": true,
+                    "optional": true,
+                    "original": "response"
+                }
+            ],
             "key": "cloudflare_rate_limit.match",
             "name": "MatchSetting",
             "threaded": true,
@@ -2315,7 +3082,7 @@
                     "type": "TF.Attr s (RequestSetting s)",
                     "class": "HasComputedRequest",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "request"
                 },
                 {
@@ -2332,7 +3099,7 @@
                     "type": "TF.Attr s (ResponseSetting s)",
                     "class": "HasComputedResponse",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "response"
                 }
             ],
@@ -2399,7 +3166,7 @@
                     "original": "js"
                 }
             ],
-            "key": "cloudflare_zone_settings_override.initial_settings.minify",
+            "key": "cloudflare_zone_settings_override.settings.minify",
             "name": "MinifySetting",
             "threaded": true,
             "attributes": [],
@@ -2518,7 +3285,7 @@
                     "original": "strip_uri"
                 }
             ],
-            "key": "cloudflare_zone_settings_override.initial_settings.mobile_redirect",
+            "key": "cloudflare_zone_settings_override.settings.mobile_redirect",
             "name": "MobileRedirectSetting",
             "threaded": true,
             "attributes": [],
@@ -2856,7 +3623,59 @@
                 "smart": "requestSetting",
                 "name": "RequestSetting'"
             },
-            "arguments": [],
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"methods\" <$> TF.attribute",
+                    "name": "_methods",
+                    "method": "methods",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasMethods",
+                    "validate": false,
+                    "optional": true,
+                    "original": "methods"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"schemes\" <$> TF.attribute",
+                    "name": "_schemes",
+                    "method": "schemes",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasSchemes",
+                    "validate": false,
+                    "optional": true,
+                    "original": "schemes"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"url_pattern\" <$> TF.attribute",
+                    "name": "_urlPattern",
+                    "method": "urlPattern",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUrlPattern",
+                    "validate": false,
+                    "optional": true,
+                    "original": "url_pattern"
+                }
+            ],
             "key": "cloudflare_rate_limit.match.request",
             "name": "RequestSetting",
             "threaded": true,
@@ -2875,7 +3694,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedMethods",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "methods"
                 },
                 {
@@ -2892,7 +3711,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedSchemes",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "schemes"
                 },
                 {
@@ -2909,7 +3728,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedUrlPattern",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "url_pattern"
                 }
             ],
@@ -2957,6 +3776,40 @@
                     "validate": false,
                     "optional": false,
                     "original": "content_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"origin_traffic\" <$> TF.attribute",
+                    "name": "_originTraffic",
+                    "method": "originTraffic",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasOriginTraffic",
+                    "validate": false,
+                    "optional": true,
+                    "original": "origin_traffic"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"statuses\" <$> TF.attribute",
+                    "name": "_statuses",
+                    "method": "statuses",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Int]",
+                    "class": "HasStatuses",
+                    "validate": false,
+                    "optional": true,
+                    "original": "statuses"
                 }
             ],
             "key": "cloudflare_rate_limit.action.response",
@@ -2977,7 +3830,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedOriginTraffic",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "origin_traffic"
                 },
                 {
@@ -2994,7 +3847,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Int]",
                     "class": "HasComputedStatuses",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "statuses"
                 }
             ],
@@ -3043,8 +3896,94 @@
                 "smart": "securityHeaderSetting",
                 "name": "SecurityHeaderSetting'"
             },
-            "arguments": [],
-            "key": "cloudflare_zone_settings_override.initial_settings.security_header",
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"enabled\" <$> TF.attribute",
+                    "name": "_enabled",
+                    "method": "enabled",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasEnabled",
+                    "validate": false,
+                    "optional": true,
+                    "original": "enabled"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"include_subdomains\" <$> TF.attribute",
+                    "name": "_includeSubdomains",
+                    "method": "includeSubdomains",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasIncludeSubdomains",
+                    "validate": false,
+                    "optional": true,
+                    "original": "include_subdomains"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_age\" <$> TF.attribute",
+                    "name": "_maxAge",
+                    "method": "maxAge",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMaxAge",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_age"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"nosniff\" <$> TF.attribute",
+                    "name": "_nosniff",
+                    "method": "nosniff",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasNosniff",
+                    "validate": false,
+                    "optional": true,
+                    "original": "nosniff"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"preload\" <$> TF.attribute",
+                    "name": "_preload",
+                    "method": "preload",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasPreload",
+                    "validate": false,
+                    "optional": true,
+                    "original": "preload"
+                }
+            ],
+            "key": "cloudflare_zone_settings_override.settings.security_header",
             "name": "SecurityHeaderSetting",
             "threaded": true,
             "attributes": [
@@ -3062,7 +4001,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedEnabled",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "enabled"
                 },
                 {
@@ -3079,7 +4018,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedIncludeSubdomains",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "include_subdomains"
                 },
                 {
@@ -3096,7 +4035,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedMaxAge",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "max_age"
                 },
                 {
@@ -3113,7 +4052,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedNosniff",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "nosniff"
                 },
                 {
@@ -3130,7 +4069,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedPreload",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "preload"
                 }
             ],
@@ -3144,7 +4083,739 @@
                 "smart": "settingsSetting",
                 "name": "SettingsSetting'"
             },
-            "arguments": [],
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"advanced_ddos\" <$> TF.attribute",
+                    "name": "_advancedDdos",
+                    "method": "advancedDdos",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAdvancedDdos",
+                    "validate": false,
+                    "optional": true,
+                    "original": "advanced_ddos"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"always_online\" <$> TF.attribute",
+                    "name": "_alwaysOnline",
+                    "method": "alwaysOnline",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAlwaysOnline",
+                    "validate": false,
+                    "optional": true,
+                    "original": "always_online"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"always_use_https\" <$> TF.attribute",
+                    "name": "_alwaysUseHttps",
+                    "method": "alwaysUseHttps",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAlwaysUseHttps",
+                    "validate": false,
+                    "optional": true,
+                    "original": "always_use_https"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"automatic_https_rewrites\" <$> TF.attribute",
+                    "name": "_automaticHttpsRewrites",
+                    "method": "automaticHttpsRewrites",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAutomaticHttpsRewrites",
+                    "validate": false,
+                    "optional": true,
+                    "original": "automatic_https_rewrites"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"brotli\" <$> TF.attribute",
+                    "name": "_brotli",
+                    "method": "brotli",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasBrotli",
+                    "validate": false,
+                    "optional": true,
+                    "original": "brotli"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"browser_cache_ttl\" <$> TF.attribute",
+                    "name": "_browserCacheTtl",
+                    "method": "browserCacheTtl",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasBrowserCacheTtl",
+                    "validate": false,
+                    "optional": true,
+                    "original": "browser_cache_ttl"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"browser_check\" <$> TF.attribute",
+                    "name": "_browserCheck",
+                    "method": "browserCheck",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasBrowserCheck",
+                    "validate": false,
+                    "optional": true,
+                    "original": "browser_check"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cache_level\" <$> TF.attribute",
+                    "name": "_cacheLevel",
+                    "method": "cacheLevel",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCacheLevel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cache_level"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"challenge_ttl\" <$> TF.attribute",
+                    "name": "_challengeTtl",
+                    "method": "challengeTtl",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasChallengeTtl",
+                    "validate": false,
+                    "optional": true,
+                    "original": "challenge_ttl"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cname_flattening\" <$> TF.attribute",
+                    "name": "_cnameFlattening",
+                    "method": "cnameFlattening",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCnameFlattening",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cname_flattening"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"development_mode\" <$> TF.attribute",
+                    "name": "_developmentMode",
+                    "method": "developmentMode",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDevelopmentMode",
+                    "validate": false,
+                    "optional": true,
+                    "original": "development_mode"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"edge_cache_ttl\" <$> TF.attribute",
+                    "name": "_edgeCacheTtl",
+                    "method": "edgeCacheTtl",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasEdgeCacheTtl",
+                    "validate": false,
+                    "optional": true,
+                    "original": "edge_cache_ttl"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"email_obfuscation\" <$> TF.attribute",
+                    "name": "_emailObfuscation",
+                    "method": "emailObfuscation",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEmailObfuscation",
+                    "validate": false,
+                    "optional": true,
+                    "original": "email_obfuscation"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"hotlink_protection\" <$> TF.attribute",
+                    "name": "_hotlinkProtection",
+                    "method": "hotlinkProtection",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHotlinkProtection",
+                    "validate": false,
+                    "optional": true,
+                    "original": "hotlink_protection"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"http2\" <$> TF.attribute",
+                    "name": "_http2",
+                    "method": "http2",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHttp2",
+                    "validate": false,
+                    "optional": true,
+                    "original": "http2"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip_geolocation\" <$> TF.attribute",
+                    "name": "_ipGeolocation",
+                    "method": "ipGeolocation",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpGeolocation",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ip_geolocation"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ipv6\" <$> TF.attribute",
+                    "name": "_ipv6",
+                    "method": "ipv6",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpv6",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ipv6"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_upload\" <$> TF.attribute",
+                    "name": "_maxUpload",
+                    "method": "maxUpload",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMaxUpload",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_upload"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"min_tls_version\" <$> TF.attribute",
+                    "name": "_minTlsVersion",
+                    "method": "minTlsVersion",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMinTlsVersion",
+                    "validate": false,
+                    "optional": true,
+                    "original": "min_tls_version"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"minify\" <$> TF.attribute",
+                    "name": "_minify",
+                    "method": "minify",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (MinifySetting s)",
+                    "class": "HasMinify",
+                    "validate": true,
+                    "optional": true,
+                    "original": "minify"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"mirage\" <$> TF.attribute",
+                    "name": "_mirage",
+                    "method": "mirage",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMirage",
+                    "validate": false,
+                    "optional": true,
+                    "original": "mirage"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"mobile_redirect\" <$> TF.attribute",
+                    "name": "_mobileRedirect",
+                    "method": "mobileRedirect",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (MobileRedirectSetting s)",
+                    "class": "HasMobileRedirect",
+                    "validate": true,
+                    "optional": true,
+                    "original": "mobile_redirect"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"opportunistic_encryption\" <$> TF.attribute",
+                    "name": "_opportunisticEncryption",
+                    "method": "opportunisticEncryption",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOpportunisticEncryption",
+                    "validate": false,
+                    "optional": true,
+                    "original": "opportunistic_encryption"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"origin_error_page_pass_thru\" <$> TF.attribute",
+                    "name": "_originErrorPagePassThru",
+                    "method": "originErrorPagePassThru",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOriginErrorPagePassThru",
+                    "validate": false,
+                    "optional": true,
+                    "original": "origin_error_page_pass_thru"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"polish\" <$> TF.attribute",
+                    "name": "_polish",
+                    "method": "polish",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPolish",
+                    "validate": false,
+                    "optional": true,
+                    "original": "polish"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"prefetch_preload\" <$> TF.attribute",
+                    "name": "_prefetchPreload",
+                    "method": "prefetchPreload",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrefetchPreload",
+                    "validate": false,
+                    "optional": true,
+                    "original": "prefetch_preload"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"privacy_pass\" <$> TF.attribute",
+                    "name": "_privacyPass",
+                    "method": "privacyPass",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrivacyPass",
+                    "validate": false,
+                    "optional": true,
+                    "original": "privacy_pass"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"pseudo_ipv4\" <$> TF.attribute",
+                    "name": "_pseudoIpv4",
+                    "method": "pseudoIpv4",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPseudoIpv4",
+                    "validate": false,
+                    "optional": true,
+                    "original": "pseudo_ipv4"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"response_buffering\" <$> TF.attribute",
+                    "name": "_responseBuffering",
+                    "method": "responseBuffering",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasResponseBuffering",
+                    "validate": false,
+                    "optional": true,
+                    "original": "response_buffering"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"rocket_loader\" <$> TF.attribute",
+                    "name": "_rocketLoader",
+                    "method": "rocketLoader",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRocketLoader",
+                    "validate": false,
+                    "optional": true,
+                    "original": "rocket_loader"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"security_header\" <$> TF.attribute",
+                    "name": "_securityHeader",
+                    "method": "securityHeader",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (SecurityHeaderSetting s)",
+                    "class": "HasSecurityHeader",
+                    "validate": true,
+                    "optional": true,
+                    "original": "security_header"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"security_level\" <$> TF.attribute",
+                    "name": "_securityLevel",
+                    "method": "securityLevel",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSecurityLevel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "security_level"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"server_side_exclude\" <$> TF.attribute",
+                    "name": "_serverSideExclude",
+                    "method": "serverSideExclude",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasServerSideExclude",
+                    "validate": false,
+                    "optional": true,
+                    "original": "server_side_exclude"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"sha1_support\" <$> TF.attribute",
+                    "name": "_sha1Support",
+                    "method": "sha1Support",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSha1Support",
+                    "validate": false,
+                    "optional": true,
+                    "original": "sha1_support"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"sort_query_string_for_cache\" <$> TF.attribute",
+                    "name": "_sortQueryStringForCache",
+                    "method": "sortQueryStringForCache",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSortQueryStringForCache",
+                    "validate": false,
+                    "optional": true,
+                    "original": "sort_query_string_for_cache"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ssl\" <$> TF.attribute",
+                    "name": "_ssl",
+                    "method": "ssl",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSsl",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ssl"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"tls_1_2_only\" <$> TF.attribute",
+                    "name": "_tls12Only",
+                    "method": "tls12Only",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTls12Only",
+                    "validate": false,
+                    "optional": true,
+                    "original": "tls_1_2_only"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"tls_1_3\" <$> TF.attribute",
+                    "name": "_tls13",
+                    "method": "tls13",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTls13",
+                    "validate": false,
+                    "optional": true,
+                    "original": "tls_1_3"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"tls_client_auth\" <$> TF.attribute",
+                    "name": "_tlsClientAuth",
+                    "method": "tlsClientAuth",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTlsClientAuth",
+                    "validate": false,
+                    "optional": true,
+                    "original": "tls_client_auth"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"true_client_ip_header\" <$> TF.attribute",
+                    "name": "_trueClientIpHeader",
+                    "method": "trueClientIpHeader",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTrueClientIpHeader",
+                    "validate": false,
+                    "optional": true,
+                    "original": "true_client_ip_header"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"waf\" <$> TF.attribute",
+                    "name": "_waf",
+                    "method": "waf",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasWaf",
+                    "validate": false,
+                    "optional": true,
+                    "original": "waf"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"webp\" <$> TF.attribute",
+                    "name": "_webp",
+                    "method": "webp",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasWebp",
+                    "validate": false,
+                    "optional": true,
+                    "original": "webp"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"websockets\" <$> TF.attribute",
+                    "name": "_websockets",
+                    "method": "websockets",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasWebsockets",
+                    "validate": false,
+                    "optional": true,
+                    "original": "websockets"
+                }
+            ],
             "key": "cloudflare_zone_settings_override.settings",
             "name": "SettingsSetting",
             "threaded": true,
@@ -3163,7 +4834,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAdvancedDdos",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "advanced_ddos"
                 },
                 {
@@ -3180,7 +4851,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAlwaysOnline",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "always_online"
                 },
                 {
@@ -3197,7 +4868,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAlwaysUseHttps",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "always_use_https"
                 },
                 {
@@ -3214,7 +4885,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAutomaticHttpsRewrites",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "automatic_https_rewrites"
                 },
                 {
@@ -3231,7 +4902,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBrotli",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "brotli"
                 },
                 {
@@ -3248,7 +4919,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedBrowserCacheTtl",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "browser_cache_ttl"
                 },
                 {
@@ -3265,7 +4936,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBrowserCheck",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "browser_check"
                 },
                 {
@@ -3282,7 +4953,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCacheLevel",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "cache_level"
                 },
                 {
@@ -3299,7 +4970,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedChallengeTtl",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "challenge_ttl"
                 },
                 {
@@ -3316,7 +4987,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCnameFlattening",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "cname_flattening"
                 },
                 {
@@ -3333,7 +5004,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDevelopmentMode",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "development_mode"
                 },
                 {
@@ -3350,7 +5021,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedEdgeCacheTtl",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "edge_cache_ttl"
                 },
                 {
@@ -3367,7 +5038,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedEmailObfuscation",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "email_obfuscation"
                 },
                 {
@@ -3384,7 +5055,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHotlinkProtection",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "hotlink_protection"
                 },
                 {
@@ -3401,7 +5072,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHttp2",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "http2"
                 },
                 {
@@ -3418,7 +5089,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpGeolocation",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ip_geolocation"
                 },
                 {
@@ -3435,7 +5106,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpv6",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ipv6"
                 },
                 {
@@ -3452,7 +5123,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedMaxUpload",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "max_upload"
                 },
                 {
@@ -3469,7 +5140,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMinTlsVersion",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "min_tls_version"
                 },
                 {
@@ -3486,7 +5157,7 @@
                     "type": "TF.Attr s (MinifySetting s)",
                     "class": "HasComputedMinify",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "minify"
                 },
                 {
@@ -3503,7 +5174,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMirage",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "mirage"
                 },
                 {
@@ -3520,7 +5191,7 @@
                     "type": "TF.Attr s (MobileRedirectSetting s)",
                     "class": "HasComputedMobileRedirect",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "mobile_redirect"
                 },
                 {
@@ -3537,7 +5208,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOpportunisticEncryption",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "opportunistic_encryption"
                 },
                 {
@@ -3554,7 +5225,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOriginErrorPagePassThru",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "origin_error_page_pass_thru"
                 },
                 {
@@ -3571,7 +5242,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPolish",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "polish"
                 },
                 {
@@ -3588,7 +5259,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPrefetchPreload",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "prefetch_preload"
                 },
                 {
@@ -3605,7 +5276,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPrivacyPass",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "privacy_pass"
                 },
                 {
@@ -3622,7 +5293,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPseudoIpv4",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "pseudo_ipv4"
                 },
                 {
@@ -3639,7 +5310,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedResponseBuffering",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "response_buffering"
                 },
                 {
@@ -3656,7 +5327,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRocketLoader",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "rocket_loader"
                 },
                 {
@@ -3673,7 +5344,7 @@
                     "type": "TF.Attr s (SecurityHeaderSetting s)",
                     "class": "HasComputedSecurityHeader",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "security_header"
                 },
                 {
@@ -3690,7 +5361,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSecurityLevel",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "security_level"
                 },
                 {
@@ -3707,7 +5378,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedServerSideExclude",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "server_side_exclude"
                 },
                 {
@@ -3724,7 +5395,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSha1Support",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "sha1_support"
                 },
                 {
@@ -3741,7 +5412,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSortQueryStringForCache",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "sort_query_string_for_cache"
                 },
                 {
@@ -3758,7 +5429,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSsl",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ssl"
                 },
                 {
@@ -3775,7 +5446,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTls12Only",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "tls_1_2_only"
                 },
                 {
@@ -3792,7 +5463,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTls13",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "tls_1_3"
                 },
                 {
@@ -3809,7 +5480,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTlsClientAuth",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "tls_client_auth"
                 },
                 {
@@ -3826,7 +5497,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTrueClientIpHeader",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "true_client_ip_header"
                 },
                 {
@@ -3843,7 +5514,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedWaf",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "waf"
                 },
                 {
@@ -3860,7 +5531,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedWebp",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "webp"
                 },
                 {
@@ -3877,7 +5548,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedWebsockets",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "websockets"
                 }
             ],
@@ -4051,6 +5722,23 @@
                     "original": "name"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"pop_pools\" <$> TF.attribute",
+                    "name": "_popPools",
+                    "method": "popPools",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (PopPoolsSetting s)]",
+                    "class": "HasPopPools",
+                    "validate": false,
+                    "optional": true,
+                    "original": "pop_pools"
+                },
+                {
                     "default": "TF.value P.False",
                     "computed": false,
                     "required": false,
@@ -4060,12 +5748,58 @@
                     "name": "_proxied",
                     "method": "proxied",
                     "threaded": true,
-                    "conflicts": [],
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_ttl",
+                            "method": "ttl"
+                        }
+                    ],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasProxied",
                     "validate": false,
                     "optional": true,
                     "original": "proxied"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"region_pools\" <$> TF.attribute",
+                    "name": "_regionPools",
+                    "method": "regionPools",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (RegionPoolsSetting s)]",
+                    "class": "HasRegionPools",
+                    "validate": false,
+                    "optional": true,
+                    "original": "region_pools"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ttl\" <$> TF.attribute",
+                    "name": "_ttl",
+                    "method": "ttl",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.value P.False",
+                            "name": "_proxied",
+                            "method": "proxied"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasTtl",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ttl"
                 },
                 {
                     "default": "_zone",
@@ -4155,7 +5889,7 @@
                     "type": "TF.Attr s [TF.Attr s (PopPoolsSetting s)]",
                     "class": "HasComputedPopPools",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "pop_pools"
                 },
                 {
@@ -4172,7 +5906,7 @@
                     "type": "TF.Attr s [TF.Attr s (RegionPoolsSetting s)]",
                     "class": "HasComputedRegionPools",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "region_pools"
                 },
                 {
@@ -4191,7 +5925,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedTtl",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ttl"
                 },
                 {
@@ -4282,7 +6016,54 @@
                     "original": "zone"
                 }
             ],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"proxied\" <$> TF.attribute",
+                    "name": "_proxied",
+                    "method": "proxied",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_ttl",
+                            "method": "ttl"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasProxied",
+                    "validate": false,
+                    "optional": true,
+                    "original": "proxied"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ttl\" <$> TF.attribute",
+                    "name": "_ttl",
+                    "method": "ttl",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.value P.False",
+                            "name": "_proxied",
+                            "method": "proxied"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasTtl",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ttl"
+                }
+            ],
             "type": "LoadBalancerResource s",
             "original": "cloudflare_load_balancer"
         },
@@ -4572,6 +6353,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
+                    "encoder": "TF.assign \"check_regions\" <$> TF.attribute",
+                    "name": "_checkRegions",
+                    "method": "checkRegions",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasCheckRegions",
+                    "validate": false,
+                    "optional": true,
+                    "original": "check_regions"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
                     "name": "_description",
                     "method": "description",
@@ -4722,7 +6520,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedCheckRegions",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "check_regions"
                 },
                 {
@@ -5081,6 +6879,23 @@
                     "original": "disabled"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"match\" <$> TF.attribute",
+                    "name": "_match",
+                    "method": "match",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (MatchSetting s)",
+                    "class": "HasMatch",
+                    "validate": true,
+                    "optional": true,
+                    "original": "match"
+                },
+                {
                     "default": "_period",
                     "computed": false,
                     "required": true,
@@ -5168,7 +6983,7 @@
                     "type": "TF.Attr s (MatchSetting s)",
                     "class": "HasComputedMatch",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "match"
                 },
                 {
@@ -5279,7 +7094,13 @@
                     "name": "_data'",
                     "method": "data'",
                     "threaded": true,
-                    "conflicts": [],
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_value",
+                            "method": "value"
+                        }
+                    ],
                     "type": "TF.Attr s (P.Map P.Text (TF.Attr s (DataSetting s)))",
                     "class": "HasData'",
                     "validate": false,
@@ -5355,6 +7176,23 @@
                     "original": "proxied"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ttl\" <$> TF.attribute",
+                    "name": "_ttl",
+                    "method": "ttl",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasTtl",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ttl"
+                },
+                {
                     "default": "_type'",
                     "computed": false,
                     "required": true,
@@ -5370,6 +7208,29 @@
                     "validate": false,
                     "optional": false,
                     "original": "type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_data'",
+                            "method": "data'"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": true,
+                    "original": "value"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudflare/r/record.html",
@@ -5493,7 +7354,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedTtl",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ttl"
                 },
                 {
@@ -5512,7 +7373,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedValue",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "value"
                 },
                 {
@@ -5586,7 +7447,54 @@
                     "original": "type"
                 }
             ],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"data\" <$> TF.attribute",
+                    "name": "_data'",
+                    "method": "data'",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_value",
+                            "method": "value"
+                        }
+                    ],
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s (DataSetting s)))",
+                    "class": "HasData'",
+                    "validate": false,
+                    "optional": true,
+                    "original": "data"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_data'",
+                            "method": "data'"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": true,
+                    "original": "value"
+                }
+            ],
             "type": "RecordResource s",
             "original": "cloudflare_record"
         },
@@ -5784,6 +7692,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"settings\" <$> TF.attribute",
+                    "name": "_settings",
+                    "method": "settings",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (SettingsSetting s)",
+                    "class": "HasSettings",
+                    "validate": true,
+                    "optional": true,
+                    "original": "settings"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudflare/r/zone_settings_override.html",
@@ -5873,7 +7798,7 @@
                     "type": "TF.Attr s (SettingsSetting s)",
                     "class": "HasComputedSettings",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "settings"
                 },
                 {
