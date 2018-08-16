@@ -24,6 +24,40 @@
                     "original": "auth_type"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"master_key\" <$> TF.attribute",
+                    "name": "_masterKey",
+                    "method": "masterKey",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMasterKey",
+                    "validate": false,
+                    "optional": true,
+                    "original": "master_key"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"slave_key\" <$> TF.attribute",
+                    "name": "_slaveKey",
+                    "method": "slaveKey",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSlaveKey",
+                    "validate": false,
+                    "optional": true,
+                    "original": "slave_key"
+                },
+                {
                     "default": "TF.value 1800",
                     "computed": false,
                     "required": false,
@@ -59,7 +93,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMasterKey",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "master_key"
                 },
                 {
@@ -76,7 +110,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSlaveKey",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "slave_key"
                 }
             ],
@@ -3056,6 +3090,23 @@
                     "original": "expiration"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_id",
+                    "method": "id",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "id"
+                },
+                {
                     "default": "_prefix",
                     "computed": false,
                     "required": true,
@@ -3091,7 +3142,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "id"
                 }
             ],
@@ -3630,6 +3681,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "enable"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"hash_key_args\" <$> TF.attribute",
+                    "name": "_hashKeyArgs",
+                    "method": "hashKeyArgs",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasHashKeyArgs",
+                    "validate": false,
+                    "optional": true,
+                    "original": "hash_key_args"
                 }
             ],
             "key": "alicloud_cdn_domain.parameter_filter_config",
@@ -3650,7 +3718,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedHashKeyArgs",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "hash_key_args"
                 }
             ],
@@ -7465,6 +7533,23 @@
                     "computed": false,
                     "required": false,
                     "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"finger_print\" <$> TF.attribute",
+                    "name": "_fingerPrint",
+                    "method": "fingerPrint",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasFingerPrint",
+                    "validate": false,
+                    "optional": true,
+                    "original": "finger_print"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name_regex\" <$> TF.attribute",
                     "name": "_nameRegex",
@@ -7531,7 +7616,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedFingerPrint",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "finger_print"
                 },
                 {
@@ -8375,6 +8460,40 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"current\" <$> TF.attribute",
+                    "name": "_current",
+                    "method": "current",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasCurrent",
+                    "validate": false,
+                    "optional": true,
+                    "original": "current"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"output_file\" <$> TF.attribute",
                     "name": "_outputFile",
                     "method": "outputFile",
@@ -8423,7 +8542,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedCurrent",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "current"
                 },
                 {
@@ -8440,7 +8559,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 },
                 {
@@ -9484,6 +9603,23 @@
                     "original": "refer_config"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"scope\" <$> TF.attribute",
+                    "name": "_scope",
+                    "method": "scope",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasScope",
+                    "validate": false,
+                    "optional": true,
+                    "original": "scope"
+                },
+                {
                     "default": "TF.value 80",
                     "computed": false,
                     "required": false,
@@ -9588,7 +9724,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedScope",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "scope"
                 }
             ],
@@ -10151,6 +10287,29 @@
                     "original": "is_outdated"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.value \"Terraform-Creation\"",
+                            "name": "_namePrefix",
+                            "method": "namePrefix"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
                     "default": "TF.value \"Terraform-Creation\"",
                     "computed": false,
                     "required": false,
@@ -10160,7 +10319,13 @@
                     "name": "_namePrefix",
                     "method": "namePrefix",
                     "threaded": true,
-                    "conflicts": [],
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_name",
+                            "method": "name"
+                        }
+                    ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasNamePrefix",
                     "validate": false,
@@ -10291,7 +10456,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 },
                 {
@@ -10433,7 +10598,54 @@
                     "original": "instance_type"
                 }
             ],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.value \"Terraform-Creation\"",
+                            "name": "_namePrefix",
+                            "method": "namePrefix"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.value \"Terraform-Creation\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name_prefix\" <$> TF.attribute",
+                    "name": "_namePrefix",
+                    "method": "namePrefix",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_name",
+                            "method": "name"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNamePrefix",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name_prefix"
+                }
+            ],
             "type": "ContainerClusterResource s",
             "original": "alicloud_container_cluster"
         },
@@ -10722,6 +10934,23 @@
                     "computed": false,
                     "required": false,
                     "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"availability_zone\" <$> TF.attribute",
+                    "name": "_availabilityZone",
+                    "method": "availabilityZone",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAvailabilityZone",
+                    "validate": false,
+                    "optional": true,
+                    "original": "availability_zone"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"client_cert\" <$> TF.attribute",
                     "name": "_clientCert",
@@ -10888,6 +11117,29 @@
                     "original": "master_instance_type"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.value \"Terraform-Creation\"",
+                            "name": "_namePrefix",
+                            "method": "namePrefix"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
                     "default": "TF.value \"Terraform-Creation\"",
                     "computed": false,
                     "required": false,
@@ -10897,7 +11149,13 @@
                     "name": "_namePrefix",
                     "method": "namePrefix",
                     "threaded": true,
-                    "conflicts": [],
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_name",
+                            "method": "name"
+                        }
+                    ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasNamePrefix",
                     "validate": false,
@@ -10988,6 +11246,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "version"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"vswitch_id\" <$> TF.attribute",
+                    "name": "_vswitchId",
+                    "method": "vswitchId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVswitchId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vswitch_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -11094,7 +11369,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAvailabilityZone",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "availability_zone"
                 },
                 {
@@ -11164,7 +11439,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 },
                 {
@@ -11266,7 +11541,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVswitchId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vswitch_id"
                 },
                 {
@@ -11340,7 +11615,54 @@
                     "original": "worker_instance_type"
                 }
             ],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.value \"Terraform-Creation\"",
+                            "name": "_namePrefix",
+                            "method": "namePrefix"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.value \"Terraform-Creation\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name_prefix\" <$> TF.attribute",
+                    "name": "_namePrefix",
+                    "method": "namePrefix",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_name",
+                            "method": "name"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNamePrefix",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name_prefix"
+                }
+            ],
             "type": "CsKubernetesResource s",
             "original": "alicloud_cs_kubernetes"
         },
@@ -11453,6 +11775,29 @@
                     "original": "is_outdated"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.value \"Terraform-Creation\"",
+                            "name": "_namePrefix",
+                            "method": "namePrefix"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
                     "default": "TF.value \"Terraform-Creation\"",
                     "computed": false,
                     "required": false,
@@ -11462,7 +11807,13 @@
                     "name": "_namePrefix",
                     "method": "namePrefix",
                     "threaded": true,
-                    "conflicts": [],
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_name",
+                            "method": "name"
+                        }
+                    ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasNamePrefix",
                     "validate": false,
@@ -11593,7 +11944,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 },
                 {
@@ -11735,7 +12086,54 @@
                     "original": "instance_type"
                 }
             ],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.value \"Terraform-Creation\"",
+                            "name": "_namePrefix",
+                            "method": "namePrefix"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.value \"Terraform-Creation\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name_prefix\" <$> TF.attribute",
+                    "name": "_namePrefix",
+                    "method": "namePrefix",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_name",
+                            "method": "name"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNamePrefix",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name_prefix"
+                }
+            ],
             "type": "CsSwarmResource s",
             "original": "alicloud_cs_swarm"
         },
@@ -12073,6 +12471,23 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"backup_period\" <$> TF.attribute",
+                    "name": "_backupPeriod",
+                    "method": "backupPeriod",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasBackupPeriod",
+                    "validate": false,
+                    "optional": true,
+                    "original": "backup_period"
+                },
+                {
                     "default": "TF.value \"02:00Z-03:00Z\"",
                     "computed": false,
                     "required": false,
@@ -12194,7 +12609,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedBackupPeriod",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "backup_period"
                 }
             ],
@@ -12227,6 +12642,23 @@
                 "name": "DbConnectionResource'"
             },
             "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"connection_prefix\" <$> TF.attribute",
+                    "name": "_connectionPrefix",
+                    "method": "connectionPrefix",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasConnectionPrefix",
+                    "validate": false,
+                    "optional": true,
+                    "original": "connection_prefix"
+                },
                 {
                     "default": "_instanceId",
                     "computed": false,
@@ -12298,7 +12730,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedConnectionPrefix",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "connection_prefix"
                 },
                 {
@@ -12627,6 +13059,23 @@
                     "computed": false,
                     "required": false,
                     "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"security_ips\" <$> TF.attribute",
+                    "name": "_securityIps",
+                    "method": "securityIps",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasSecurityIps",
+                    "validate": false,
+                    "optional": true,
+                    "original": "security_ips"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"vswitch_id\" <$> TF.attribute",
                     "name": "_vswitchId",
@@ -12638,6 +13087,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "vswitch_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"zone_id\" <$> TF.attribute",
+                    "name": "_zoneId",
+                    "method": "zoneId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasZoneId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "zone_id"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/db_instance.html",
@@ -12710,7 +13176,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedSecurityIps",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "security_ips"
                 },
                 {
@@ -12727,7 +13193,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedZoneId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "zone_id"
                 }
             ],
@@ -13556,6 +14022,23 @@
                     "computed": false,
                     "required": false,
                     "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"instance\" <$> TF.attribute",
+                    "name": "_instance'",
+                    "method": "instance'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasInstance'",
+                    "validate": false,
+                    "optional": true,
+                    "original": "instance"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"instance_charge_type\" <$> TF.attribute",
                     "name": "_instanceChargeType",
@@ -13656,7 +14139,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedInstance",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "instance"
                 },
                 {
@@ -13704,7 +14187,42 @@
                 "smart": "eipAssociationResource",
                 "name": "EipAssociationResource'"
             },
-            "arguments": [],
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"allocation_id\" <$> TF.attribute",
+                    "name": "_allocationId",
+                    "method": "allocationId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAllocationId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "allocation_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"instance_id\" <$> TF.attribute",
+                    "name": "_instanceId",
+                    "method": "instanceId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasInstanceId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "instance_id"
+                }
+            ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/eip_association.html",
             "key": "alicloud_eip_association",
             "name": "EipAssociationResource",
@@ -13741,7 +14259,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAllocationId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "allocation_id"
                 },
                 {
@@ -13758,7 +14276,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedInstanceId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "instance_id"
                 }
             ],
@@ -13899,6 +14417,23 @@
                     "computed": false,
                     "required": false,
                     "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"active\" <$> TF.attribute",
+                    "name": "_active",
+                    "method": "active",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasActive",
+                    "validate": false,
+                    "optional": true,
+                    "original": "active"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"data_disk\" <$> TF.attribute",
                     "name": "_dataDisk",
@@ -14019,6 +14554,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
+                    "encoder": "TF.assign \"internet_max_bandwidth_in\" <$> TF.attribute",
+                    "name": "_internetMaxBandwidthIn",
+                    "method": "internetMaxBandwidthIn",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasInternetMaxBandwidthIn",
+                    "validate": false,
+                    "optional": true,
+                    "original": "internet_max_bandwidth_in"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
                     "encoder": "TF.assign \"internet_max_bandwidth_out\" <$> TF.attribute",
                     "name": "_internetMaxBandwidthOut",
                     "method": "internetMaxBandwidthOut",
@@ -14082,6 +14634,23 @@
                     "original": "role_name"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"scaling_configuration_name\" <$> TF.attribute",
+                    "name": "_scalingConfigurationName",
+                    "method": "scalingConfigurationName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasScalingConfigurationName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "scaling_configuration_name"
+                },
+                {
                     "default": "_scalingGroupId",
                     "computed": false,
                     "required": true,
@@ -14114,6 +14683,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "security_group_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"substitute\" <$> TF.attribute",
+                    "name": "_substitute",
+                    "method": "substitute",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSubstitute",
+                    "validate": false,
+                    "optional": true,
+                    "original": "substitute"
                 },
                 {
                     "default": "TF.Nil",
@@ -14203,7 +14789,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedActive",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "active"
                 },
                 {
@@ -14220,7 +14806,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedInternetMaxBandwidthIn",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "internet_max_bandwidth_in"
                 },
                 {
@@ -14237,7 +14823,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedScalingConfigurationName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "scaling_configuration_name"
                 },
                 {
@@ -14254,7 +14840,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSubstitute",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "substitute"
                 }
             ],
@@ -14611,6 +15197,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "scaling_group_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"scaling_rule_name\" <$> TF.attribute",
+                    "name": "_scalingRuleName",
+                    "method": "scalingRuleName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasScalingRuleName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "scaling_rule_name"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_rule.html",
@@ -14666,7 +15269,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedScalingRuleName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "scaling_rule_name"
                 }
             ],
@@ -14734,6 +15337,23 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "_description",
+                    "method": "description",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "validate": false,
+                    "optional": true,
+                    "original": "description"
+                },
+                {
                     "default": "TF.value 600",
                     "computed": false,
                     "required": false,
@@ -14766,6 +15386,57 @@
                     "validate": false,
                     "optional": false,
                     "original": "launch_time"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"recurrence_end_time\" <$> TF.attribute",
+                    "name": "_recurrenceEndTime",
+                    "method": "recurrenceEndTime",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRecurrenceEndTime",
+                    "validate": false,
+                    "optional": true,
+                    "original": "recurrence_end_time"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"recurrence_type\" <$> TF.attribute",
+                    "name": "_recurrenceType",
+                    "method": "recurrenceType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRecurrenceType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "recurrence_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"recurrence_value\" <$> TF.attribute",
+                    "name": "_recurrenceValue",
+                    "method": "recurrenceValue",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRecurrenceValue",
+                    "validate": false,
+                    "optional": true,
+                    "original": "recurrence_value"
                 },
                 {
                     "default": "_scheduledAction",
@@ -14855,7 +15526,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDescription",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "description"
                 },
                 {
@@ -14872,7 +15543,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRecurrenceEndTime",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "recurrence_end_time"
                 },
                 {
@@ -14889,7 +15560,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRecurrenceType",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "recurrence_type"
                 },
                 {
@@ -14906,7 +15577,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRecurrenceValue",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "recurrence_value"
                 }
             ],
@@ -15041,11 +15712,40 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_namePrefix",
+                            "method": "namePrefix"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
                     "encoder": "TF.assign \"name_prefix\" <$> TF.attribute",
                     "name": "_namePrefix",
                     "method": "namePrefix",
                     "threaded": true,
-                    "conflicts": [],
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_name",
+                            "method": "name"
+                        }
+                    ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasNamePrefix",
                     "validate": false,
@@ -15205,7 +15905,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 }
             ],
@@ -15290,6 +15990,52 @@
                     "validate": false,
                     "optional": true,
                     "original": "filename"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_namePrefix",
+                            "method": "namePrefix"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name_prefix\" <$> TF.attribute",
+                    "name": "_namePrefix",
+                    "method": "namePrefix",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_name",
+                            "method": "name"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNamePrefix",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name_prefix"
                 },
                 {
                     "default": "TF.Nil",
@@ -15404,11 +16150,40 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_namePrefix",
+                            "method": "namePrefix"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
                     "encoder": "TF.assign \"name_prefix\" <$> TF.attribute",
                     "name": "_namePrefix",
                     "method": "namePrefix",
                     "threaded": true,
-                    "conflicts": [],
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_name",
+                            "method": "name"
+                        }
+                    ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasNamePrefix",
                     "validate": false,
@@ -15505,12 +16280,59 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 }
             ],
             "parameters": [],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_namePrefix",
+                            "method": "namePrefix"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name_prefix\" <$> TF.attribute",
+                    "name": "_namePrefix",
+                    "method": "namePrefix",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_name",
+                            "method": "name"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNamePrefix",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name_prefix"
+                }
+            ],
             "type": "FcServiceResource s",
             "original": "alicloud_fc_service"
         },
@@ -15560,11 +16382,40 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_namePrefix",
+                            "method": "namePrefix"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
                     "encoder": "TF.assign \"name_prefix\" <$> TF.attribute",
                     "name": "_namePrefix",
                     "method": "namePrefix",
                     "threaded": true,
-                    "conflicts": [],
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_name",
+                            "method": "name"
+                        }
+                    ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasNamePrefix",
                     "validate": false,
@@ -15695,7 +16546,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 }
             ],
@@ -15769,7 +16620,54 @@
                     "original": "type"
                 }
             ],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_namePrefix",
+                            "method": "namePrefix"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name_prefix\" <$> TF.attribute",
+                    "name": "_namePrefix",
+                    "method": "namePrefix",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_name",
+                            "method": "name"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNamePrefix",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name_prefix"
+                }
+            ],
             "type": "FcTriggerResource s",
             "original": "alicloud_fc_trigger"
         },
@@ -16041,6 +16939,23 @@
                     "computed": false,
                     "required": false,
                     "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"availability_zone\" <$> TF.attribute",
+                    "name": "_availabilityZone",
+                    "method": "availabilityZone",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAvailabilityZone",
+                    "validate": false,
+                    "optional": true,
+                    "original": "availability_zone"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
                     "name": "_description",
@@ -16069,6 +16984,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "dry_run"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"host_name\" <$> TF.attribute",
+                    "name": "_hostName",
+                    "method": "hostName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHostName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "host_name"
                 },
                 {
                     "default": "_imageId",
@@ -16173,6 +17105,23 @@
                     "original": "internet_charge_type"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"internet_max_bandwidth_in\" <$> TF.attribute",
+                    "name": "_internetMaxBandwidthIn",
+                    "method": "internetMaxBandwidthIn",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasInternetMaxBandwidthIn",
+                    "validate": false,
+                    "optional": true,
+                    "original": "internet_max_bandwidth_in"
+                },
+                {
                     "default": "TF.value 0",
                     "computed": false,
                     "required": false,
@@ -16205,6 +17154,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "is_outdated"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"key_name\" <$> TF.attribute",
+                    "name": "_keyName",
+                    "method": "keyName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKeyName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "key_name"
                 },
                 {
                     "default": "TF.Nil",
@@ -16263,6 +17229,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"private_ip\" <$> TF.attribute",
+                    "name": "_privateIp",
+                    "method": "privateIp",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrivateIp",
+                    "validate": false,
+                    "optional": true,
+                    "original": "private_ip"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"renewal_status\" <$> TF.attribute",
                     "name": "_renewalStatus",
                     "method": "renewalStatus",
@@ -16273,6 +17256,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "renewal_status"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"role_name\" <$> TF.attribute",
+                    "name": "_roleName",
+                    "method": "roleName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRoleName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "role_name"
                 },
                 {
                     "default": "_securityGroups",
@@ -16324,6 +17324,29 @@
                     "validate": false,
                     "optional": true,
                     "original": "spot_strategy"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"subnet_id\" <$> TF.attribute",
+                    "name": "_subnetId",
+                    "method": "subnetId",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vswitchId",
+                            "method": "vswitchId"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSubnetId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "subnet_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -16403,7 +17426,13 @@
                     "name": "_vswitchId",
                     "method": "vswitchId",
                     "threaded": true,
-                    "conflicts": [],
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_subnetId",
+                            "method": "subnetId"
+                        }
+                    ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasVswitchId",
                     "validate": false,
@@ -16447,7 +17476,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAvailabilityZone",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "availability_zone"
                 },
                 {
@@ -16464,7 +17493,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHostName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "host_name"
                 },
                 {
@@ -16481,7 +17510,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedInternetMaxBandwidthIn",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "internet_max_bandwidth_in"
                 },
                 {
@@ -16498,7 +17527,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKeyName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "key_name"
                 },
                 {
@@ -16515,7 +17544,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPrivateIp",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "private_ip"
                 },
                 {
@@ -16549,7 +17578,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRoleName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "role_name"
                 },
                 {
@@ -16585,7 +17614,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSubnetId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "subnet_id"
                 }
             ],
@@ -16642,7 +17671,54 @@
                     "original": "instance_type"
                 }
             ],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"subnet_id\" <$> TF.attribute",
+                    "name": "_subnetId",
+                    "method": "subnetId",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vswitchId",
+                            "method": "vswitchId"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSubnetId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "subnet_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vswitch_id\" <$> TF.attribute",
+                    "name": "_vswitchId",
+                    "method": "vswitchId",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_subnetId",
+                            "method": "subnetId"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVswitchId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vswitch_id"
+                }
+            ],
             "type": "InstanceResource s",
             "original": "alicloud_instance"
         },
@@ -16675,11 +17751,40 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
+                    "encoder": "TF.assign \"key_name\" <$> TF.attribute",
+                    "name": "_keyName",
+                    "method": "keyName",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_keyNamePrefix",
+                            "method": "keyNamePrefix"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKeyName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "key_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
                     "encoder": "TF.assign \"key_name_prefix\" <$> TF.attribute",
                     "name": "_keyNamePrefix",
                     "method": "keyNamePrefix",
                     "threaded": true,
-                    "conflicts": [],
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_keyName",
+                            "method": "keyName"
+                        }
+                    ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasKeyNamePrefix",
                     "validate": false,
@@ -16759,12 +17864,59 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKeyName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "key_name"
                 }
             ],
             "parameters": [],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"key_name\" <$> TF.attribute",
+                    "name": "_keyName",
+                    "method": "keyName",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_keyNamePrefix",
+                            "method": "keyNamePrefix"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKeyName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "key_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"key_name_prefix\" <$> TF.attribute",
+                    "name": "_keyNamePrefix",
+                    "method": "keyNamePrefix",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_keyName",
+                            "method": "keyName"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKeyNamePrefix",
+                    "validate": false,
+                    "optional": true,
+                    "original": "key_name_prefix"
+                }
+            ],
             "type": "KeyPairResource s",
             "original": "alicloud_key_pair"
         },
@@ -17573,6 +18725,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"specification\" <$> TF.attribute",
                     "name": "_specification",
                     "method": "specification",
@@ -17672,7 +18841,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 },
                 {
@@ -17830,6 +18999,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"referer_config\" <$> TF.attribute",
+                    "name": "_refererConfig",
+                    "method": "refererConfig",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (RefererConfigSetting s)",
+                    "class": "HasRefererConfig",
+                    "validate": true,
+                    "optional": true,
+                    "original": "referer_config"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"website\" <$> TF.attribute",
                     "name": "_website",
                     "method": "website",
@@ -17963,7 +19149,7 @@
                     "type": "TF.Attr s (RefererConfigSetting s)",
                     "class": "HasComputedRefererConfig",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "referer_config"
                 },
                 {
@@ -18126,6 +19312,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"content_type\" <$> TF.attribute",
+                    "name": "_contentType",
+                    "method": "contentType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasContentType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "content_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"expires\" <$> TF.attribute",
                     "name": "_expires",
                     "method": "expires",
@@ -18153,6 +19356,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "key"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"server_side_encryption\" <$> TF.attribute",
+                    "name": "_serverSideEncryption",
+                    "method": "serverSideEncryption",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasServerSideEncryption",
+                    "validate": false,
+                    "optional": true,
+                    "original": "server_side_encryption"
                 },
                 {
                     "default": "TF.Nil",
@@ -18231,7 +19451,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedContentType",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "content_type"
                 },
                 {
@@ -18265,7 +19485,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedServerSideEncryption",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "server_side_encryption"
                 }
             ],
@@ -19606,6 +20826,34 @@
                     "original": "description"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"document\" <$> TF.attribute",
+                    "name": "_document",
+                    "method": "document",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_statement",
+                            "method": "statement"
+                        },
+                        {
+                            "default": "TF.value \"1\"",
+                            "name": "_version",
+                            "method": "version"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDocument",
+                    "validate": false,
+                    "optional": true,
+                    "original": "document"
+                },
+                {
                     "default": "TF.value P.False",
                     "computed": false,
                     "required": false,
@@ -19640,6 +20888,29 @@
                     "original": "name"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"statement\" <$> TF.attribute",
+                    "name": "_statement",
+                    "method": "statement",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_document",
+                            "method": "document"
+                        }
+                    ],
+                    "type": "TF.Attr s [TF.Attr s (StatementSetting s)]",
+                    "class": "HasStatement",
+                    "validate": false,
+                    "optional": true,
+                    "original": "statement"
+                },
+                {
                     "default": "TF.value \"1\"",
                     "computed": false,
                     "required": false,
@@ -19649,7 +20920,13 @@
                     "name": "_version",
                     "method": "version",
                     "threaded": true,
-                    "conflicts": [],
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_document",
+                            "method": "document"
+                        }
+                    ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasVersion",
                     "validate": false,
@@ -19713,7 +20990,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDocument",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "document"
                 },
                 {
@@ -19732,7 +21009,7 @@
                     "type": "TF.Attr s [TF.Attr s (StatementSetting s)]",
                     "class": "HasComputedStatement",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "statement"
                 },
                 {
@@ -19772,7 +21049,82 @@
                     "original": "name"
                 }
             ],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"document\" <$> TF.attribute",
+                    "name": "_document",
+                    "method": "document",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_statement",
+                            "method": "statement"
+                        },
+                        {
+                            "default": "TF.value \"1\"",
+                            "name": "_version",
+                            "method": "version"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDocument",
+                    "validate": false,
+                    "optional": true,
+                    "original": "document"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"statement\" <$> TF.attribute",
+                    "name": "_statement",
+                    "method": "statement",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_document",
+                            "method": "document"
+                        }
+                    ],
+                    "type": "TF.Attr s [TF.Attr s (StatementSetting s)]",
+                    "class": "HasStatement",
+                    "validate": false,
+                    "optional": true,
+                    "original": "statement"
+                },
+                {
+                    "default": "TF.value \"1\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"version\" <$> TF.attribute",
+                    "name": "_version",
+                    "method": "version",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_document",
+                            "method": "document"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVersion",
+                    "validate": false,
+                    "optional": true,
+                    "original": "version"
+                }
+            ],
             "type": "RamPolicyResource s",
             "original": "alicloud_ram_policy"
         },
@@ -19798,6 +21150,39 @@
                     "validate": false,
                     "optional": true,
                     "original": "description"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"document\" <$> TF.attribute",
+                    "name": "_document",
+                    "method": "document",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_ramUsers",
+                            "method": "ramUsers"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_services",
+                            "method": "services"
+                        },
+                        {
+                            "default": "TF.value \"1\"",
+                            "name": "_version",
+                            "method": "version"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDocument",
+                    "validate": false,
+                    "optional": true,
+                    "original": "document"
                 },
                 {
                     "default": "TF.value P.False",
@@ -19834,6 +21219,52 @@
                     "original": "name"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ram_users\" <$> TF.attribute",
+                    "name": "_ramUsers",
+                    "method": "ramUsers",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_document",
+                            "method": "document"
+                        }
+                    ],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasRamUsers",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ram_users"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"services\" <$> TF.attribute",
+                    "name": "_services",
+                    "method": "services",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_document",
+                            "method": "document"
+                        }
+                    ],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasServices",
+                    "validate": false,
+                    "optional": true,
+                    "original": "services"
+                },
+                {
                     "default": "TF.value \"1\"",
                     "computed": false,
                     "required": false,
@@ -19843,7 +21274,13 @@
                     "name": "_version",
                     "method": "version",
                     "threaded": true,
-                    "conflicts": [],
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_document",
+                            "method": "document"
+                        }
+                    ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasVersion",
                     "validate": false,
@@ -19908,7 +21345,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDocument",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "document"
                 },
                 {
@@ -19927,7 +21364,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedRamUsers",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ram_users"
                 },
                 {
@@ -19946,7 +21383,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedServices",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "services"
                 }
             ],
@@ -19969,7 +21406,110 @@
                     "original": "name"
                 }
             ],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"document\" <$> TF.attribute",
+                    "name": "_document",
+                    "method": "document",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_ramUsers",
+                            "method": "ramUsers"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_services",
+                            "method": "services"
+                        },
+                        {
+                            "default": "TF.value \"1\"",
+                            "name": "_version",
+                            "method": "version"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDocument",
+                    "validate": false,
+                    "optional": true,
+                    "original": "document"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ram_users\" <$> TF.attribute",
+                    "name": "_ramUsers",
+                    "method": "ramUsers",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_document",
+                            "method": "document"
+                        }
+                    ],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasRamUsers",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ram_users"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"services\" <$> TF.attribute",
+                    "name": "_services",
+                    "method": "services",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_document",
+                            "method": "document"
+                        }
+                    ],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasServices",
+                    "validate": false,
+                    "optional": true,
+                    "original": "services"
+                },
+                {
+                    "default": "TF.value \"1\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"version\" <$> TF.attribute",
+                    "name": "_version",
+                    "method": "version",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_document",
+                            "method": "document"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVersion",
+                    "validate": false,
+                    "optional": true,
+                    "original": "version"
+                }
+            ],
             "type": "RamRoleResource s",
             "original": "alicloud_ram_role"
         },
@@ -20932,6 +22472,40 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
+                    "encoder": "TF.assign \"opposite_interface_owner_id\" <$> TF.attribute",
+                    "name": "_oppositeInterfaceOwnerId",
+                    "method": "oppositeInterfaceOwnerId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOppositeInterfaceOwnerId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "opposite_interface_owner_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"opposite_router_id\" <$> TF.attribute",
+                    "name": "_oppositeRouterId",
+                    "method": "oppositeRouterId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOppositeRouterId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "opposite_router_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
                     "encoder": "TF.assign \"opposite_router_type\" <$> TF.attribute",
                     "name": "_oppositeRouterType",
                     "method": "oppositeRouterType",
@@ -20980,7 +22554,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOppositeInterfaceOwnerId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "opposite_interface_owner_id"
                 },
                 {
@@ -20997,7 +22571,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOppositeRouterId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "opposite_router_id"
                 }
             ],
@@ -21196,6 +22770,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
+                    "encoder": "TF.assign \"nic_type\" <$> TF.attribute",
+                    "name": "_nicType",
+                    "method": "nicType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNicType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "nic_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
                     "encoder": "TF.assign \"policy\" <$> TF.attribute",
                     "name": "_policy",
                     "method": "policy",
@@ -21354,7 +22945,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedNicType",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "nic_type"
                 }
             ],
@@ -21625,6 +23216,23 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"backend_servers\" <$> TF.attribute",
+                    "name": "_backendServers",
+                    "method": "backendServers",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasBackendServers",
+                    "validate": false,
+                    "optional": true,
+                    "original": "backend_servers"
+                },
+                {
                     "default": "_instanceIds",
                     "computed": false,
                     "required": true,
@@ -21712,7 +23320,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBackendServers",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "backend_servers"
                 }
             ],
@@ -21863,6 +23471,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "health_check"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"health_check_connect_port\" <$> TF.attribute",
+                    "name": "_healthCheckConnectPort",
+                    "method": "healthCheckConnectPort",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasHealthCheckConnectPort",
+                    "validate": false,
+                    "optional": true,
+                    "original": "health_check_connect_port"
                 },
                 {
                     "default": "TF.Nil",
@@ -22173,7 +23798,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedHealthCheckConnectPort",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "health_check_connect_port"
                 }
             ],
