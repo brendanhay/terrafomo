@@ -58,10 +58,9 @@ import GHC.Base (($))
 
 import Terrafomo.Triton.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
+import qualified Data.Map.Strict           as Map
 import qualified Data.Maybe                as P
 import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
@@ -110,21 +109,21 @@ data FabricResource s = FabricResource'
     -- ^ @subnet@ - (Required, Forces New)
     -- CIDR formatted string describing network address space
     --
-    , _vlanId           :: TF.Attr s P.Integer
+    , _vlanId           :: TF.Attr s P.Int
     -- ^ @vlan_id@ - (Required, Forces New)
     -- VLAN on which the network exists
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 fabricResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @provision_end_ip@ - 'P.provisionEndIp'
     -> TF.Attr s P.Text -- ^ @provision_start_ip@ - 'P.provisionStartIp'
     -> TF.Attr s P.Text -- ^ @subnet@ - 'P.subnet'
-    -> TF.Attr s P.Integer -- ^ @vlan_id@ - 'P.vlanId'
+    -> TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
     -> P.Resource (FabricResource s)
 fabricResource _name _provisionEndIp _provisionStartIp _subnet _vlanId =
-    TF.newResource "triton_fabric" TF.validator $
+    TF.unsafeResource "triton_fabric" P.defaultProvider TF.validator $
         FabricResource'
             { _description = TF.Nil
             , _gateway = TF.Nil
@@ -186,9 +185,9 @@ instance P.HasSubnet (FabricResource s) (TF.Attr s P.Text) where
         P.lens (_subnet :: FabricResource s -> TF.Attr s P.Text)
                (\s a -> s { _subnet = a } :: FabricResource s)
 
-instance P.HasVlanId (FabricResource s) (TF.Attr s P.Integer) where
+instance P.HasVlanId (FabricResource s) (TF.Attr s P.Int) where
     vlanId =
-        P.lens (_vlanId :: FabricResource s -> TF.Attr s P.Integer)
+        P.lens (_vlanId :: FabricResource s -> TF.Attr s P.Int)
                (\s a -> s { _vlanId = a } :: FabricResource s)
 
 instance s ~ s' => P.HasComputedFabric (TF.Ref s' (FabricResource s)) (TF.Attr s P.Bool) where
@@ -200,7 +199,7 @@ instance s ~ s' => P.HasComputedPublic (TF.Ref s' (FabricResource s)) (TF.Attr s
 instance s ~ s' => P.HasComputedResolvers (TF.Ref s' (FabricResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedResolvers x = TF.compute (TF.refKey x) "resolvers"
 
-instance s ~ s' => P.HasComputedRoutes (TF.Ref s' (FabricResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedRoutes (TF.Ref s' (FabricResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedRoutes x = TF.compute (TF.refKey x) "routes"
 
 -- | @triton_firewall_rule@ Resource.
@@ -220,13 +219,13 @@ data FirewallRuleResource s = FirewallRuleResource'
     -- ^ @rule@ - (Required)
     -- Firewall rule text
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 firewallRuleResource
     :: TF.Attr s P.Text -- ^ @rule@ - 'P.rule'
     -> P.Resource (FirewallRuleResource s)
 firewallRuleResource _rule =
-    TF.newResource "triton_firewall_rule" TF.validator $
+    TF.unsafeResource "triton_firewall_rule" P.defaultProvider TF.validator $
         FirewallRuleResource'
             { _description = TF.Nil
             , _enabled = TF.value P.False
@@ -282,7 +281,7 @@ data InstanceTemplateResource s = InstanceTemplateResource'
     -- ^ @template_name@ - (Required, Forces New)
     -- Friendly name for the instance template
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 instanceTemplateResource
     :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
@@ -290,7 +289,7 @@ instanceTemplateResource
     -> TF.Attr s P.Text -- ^ @template_name@ - 'P.templateName'
     -> P.Resource (InstanceTemplateResource s)
 instanceTemplateResource _image _package _templateName =
-    TF.newResource "triton_instance_template" TF.validator $
+    TF.unsafeResource "triton_instance_template" P.defaultProvider TF.validator $
         InstanceTemplateResource'
             { _firewallEnabled = TF.value P.False
             , _image = _image
@@ -329,13 +328,13 @@ instance P.HasTemplateName (InstanceTemplateResource s) (TF.Attr s P.Text) where
         P.lens (_templateName :: InstanceTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _templateName = a } :: InstanceTemplateResource s)
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedMetadata x = TF.compute (TF.refKey x) "metadata"
 
 instance s ~ s' => P.HasComputedNetworks (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedNetworks x = TF.compute (TF.refKey x) "networks"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedUserdata (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s P.Text) where
@@ -350,13 +349,13 @@ data KeyResource s = KeyResource'
     -- ^ @key@ - (Required, Forces New)
     -- Content of public key from disk in OpenSSH format
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 keyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> P.Resource (KeyResource s)
 keyResource _key =
-    TF.newResource "triton_key" TF.validator $
+    TF.unsafeResource "triton_key" P.defaultProvider TF.validator $
         KeyResource'
             { _key = _key
             }
@@ -382,19 +381,19 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (KeyResource s)) (TF.Attr s P.Te
 -- See the <https://www.terraform.io/docs/providers/triton/r/machine.html terraform documentation>
 -- for more information.
 data MachineResource s = MachineResource'
-    { _administratorPw :: TF.Attr s P.Text
+    { _administratorPw           :: TF.Attr s P.Text
     -- ^ @administrator_pw@ - (Optional, Forces New)
     -- Administrator's initial password (Windows only)
     --
-    , _affinity :: TF.Attr s [TF.Attr s P.Text]
+    , _affinity                  :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @affinity@ - (Optional, Forces New)
     -- Label based affinity rules for assisting instance placement
     --
-    , _cloudConfig :: TF.Attr s P.Text
+    , _cloudConfig               :: TF.Attr s P.Text
     -- ^ @cloud_config@ - (Optional, Forces New)
     -- Copied to machine on boot
     --
-    , _cns :: TF.Attr s (MachineCns s)
+    , _cns                       :: TF.Attr s (CnsSetting s)
     -- ^ @cns@ - (Optional)
     -- Container Name Service
     --
@@ -402,46 +401,46 @@ data MachineResource s = MachineResource'
     -- ^ @deletion_protection_enabled@ - (Optional)
     -- Whether to enable deletion protection for this machine
     --
-    , _firewallEnabled :: TF.Attr s P.Bool
+    , _firewallEnabled           :: TF.Attr s P.Bool
     -- ^ @firewall_enabled@ - (Optional)
     -- Whether to enable the firewall for this machine
     --
-    , _image :: TF.Attr s P.Text
+    , _image                     :: TF.Attr s P.Text
     -- ^ @image@ - (Required, Forces New)
     -- UUID of the image
     --
-    , _metadata :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _metadata                  :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @metadata@ - (Optional)
     -- Machine metadata
     --
-    , _networks :: TF.Attr s [TF.Attr s P.Text]
+    , _networks                  :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @networks@ - (Optional)
     -- Desired network IDs
     --
-    , _package :: TF.Attr s P.Text
+    , _package                   :: TF.Attr s P.Text
     -- ^ @package@ - (Required)
     -- The package for use for provisioning
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags                      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     -- Machine tags
     --
-    , _userData :: TF.Attr s P.Text
+    , _userData                  :: TF.Attr s P.Text
     -- ^ @user_data@ - (Optional, Forces New)
     -- Data copied to machine on boot
     --
-    , _userScript :: TF.Attr s P.Text
+    , _userScript                :: TF.Attr s P.Text
     -- ^ @user_script@ - (Optional, Forces New)
     -- User script to run on boot (every boot on SmartMachines)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 machineResource
     :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
     -> TF.Attr s P.Text -- ^ @package@ - 'P.package'
     -> P.Resource (MachineResource s)
 machineResource _image _package =
-    TF.newResource "triton_machine" TF.validator $
+    TF.unsafeResource "triton_machine" P.defaultProvider TF.validator $
         MachineResource'
             { _administratorPw = TF.Nil
             , _affinity = TF.Nil
@@ -479,7 +478,7 @@ instance TF.IsValid (MachineResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_cns"
                   (_cns
-                      :: MachineResource s -> TF.Attr s (MachineCns s))
+                      :: MachineResource s -> TF.Attr s (CnsSetting s))
                   TF.validator
 
 instance P.HasAdministratorPw (MachineResource s) (TF.Attr s P.Text) where
@@ -497,9 +496,9 @@ instance P.HasCloudConfig (MachineResource s) (TF.Attr s P.Text) where
         P.lens (_cloudConfig :: MachineResource s -> TF.Attr s P.Text)
                (\s a -> s { _cloudConfig = a } :: MachineResource s)
 
-instance P.HasCns (MachineResource s) (TF.Attr s (MachineCns s)) where
+instance P.HasCns (MachineResource s) (TF.Attr s (CnsSetting s)) where
     cns =
-        P.lens (_cns :: MachineResource s -> TF.Attr s (MachineCns s))
+        P.lens (_cns :: MachineResource s -> TF.Attr s (CnsSetting s))
                (\s a -> s { _cns = a } :: MachineResource s)
 
 instance P.HasDeletionProtectionEnabled (MachineResource s) (TF.Attr s P.Bool) where
@@ -517,9 +516,9 @@ instance P.HasImage (MachineResource s) (TF.Attr s P.Text) where
         P.lens (_image :: MachineResource s -> TF.Attr s P.Text)
                (\s a -> s { _image = a } :: MachineResource s)
 
-instance P.HasMetadata (MachineResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasMetadata (MachineResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     metadata =
-        P.lens (_metadata :: MachineResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_metadata :: MachineResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _metadata = a } :: MachineResource s)
 
 instance P.HasNetworks (MachineResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -532,9 +531,9 @@ instance P.HasPackage (MachineResource s) (TF.Attr s P.Text) where
         P.lens (_package :: MachineResource s -> TF.Attr s P.Text)
                (\s a -> s { _package = a } :: MachineResource s)
 
-instance P.HasTags (MachineResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasTags (MachineResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     tags =
-        P.lens (_tags :: MachineResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_tags :: MachineResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: MachineResource s)
 
 instance P.HasUserData (MachineResource s) (TF.Attr s P.Text) where
@@ -556,7 +555,7 @@ instance s ~ s' => P.HasComputedCreated (TF.Ref s' (MachineResource s)) (TF.Attr
 instance s ~ s' => P.HasComputedDataset (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
     computedDataset x = TF.compute (TF.refKey x) "dataset"
 
-instance s ~ s' => P.HasComputedDisk (TF.Ref s' (MachineResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedDisk (TF.Ref s' (MachineResource s)) (TF.Attr s P.Int) where
     computedDisk x = TF.compute (TF.refKey x) "disk"
 
 instance s ~ s' => P.HasComputedDomainNames (TF.Ref s' (MachineResource s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -565,13 +564,13 @@ instance s ~ s' => P.HasComputedDomainNames (TF.Ref s' (MachineResource s)) (TF.
 instance s ~ s' => P.HasComputedIps (TF.Ref s' (MachineResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedIps x = TF.compute (TF.refKey x) "ips"
 
-instance s ~ s' => P.HasComputedMemory (TF.Ref s' (MachineResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedMemory (TF.Ref s' (MachineResource s)) (TF.Attr s P.Int) where
     computedMemory x = TF.compute (TF.refKey x) "memory"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedNic (TF.Ref s' (MachineResource s)) (TF.Attr s [TF.Attr s (MachineNic s)]) where
+instance s ~ s' => P.HasComputedNic (TF.Ref s' (MachineResource s)) (TF.Attr s [TF.Attr s (NicSetting s)]) where
     computedNic x = TF.compute (TF.refKey x) "nic"
 
 instance s ~ s' => P.HasComputedPrimaryip (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
@@ -599,14 +598,14 @@ data ServiceGroupResource s = ServiceGroupResource'
     -- ^ @template@ - (Required)
     -- Identifier of an instance template
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 serviceGroupResource
     :: TF.Attr s P.Text -- ^ @group_name@ - 'P.groupName'
     -> TF.Attr s P.Text -- ^ @template@ - 'P.template'
     -> P.Resource (ServiceGroupResource s)
 serviceGroupResource _groupName _template =
-    TF.newResource "triton_service_group" TF.validator $
+    TF.unsafeResource "triton_service_group" P.defaultProvider TF.validator $
         ServiceGroupResource'
             { _groupName = _groupName
             , _template = _template
@@ -631,7 +630,7 @@ instance P.HasTemplate (ServiceGroupResource s) (TF.Attr s P.Text) where
         P.lens (_template :: ServiceGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _template = a } :: ServiceGroupResource s)
 
-instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (ServiceGroupResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (ServiceGroupResource s)) (TF.Attr s P.Int) where
     computedCapacity x = TF.compute (TF.refKey x) "capacity"
 
 -- | @triton_snapshot@ Resource.
@@ -645,14 +644,14 @@ data SnapshotResource s = SnapshotResource'
     , _name      :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 snapshotResource
     :: TF.Attr s P.Text -- ^ @machine_id@ - 'P.machineId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SnapshotResource s)
 snapshotResource _machineId _name =
-    TF.newResource "triton_snapshot" TF.validator $
+    TF.unsafeResource "triton_snapshot" P.defaultProvider TF.validator $
         SnapshotResource'
             { _machineId = _machineId
             , _name = _name
@@ -693,18 +692,18 @@ data VlanResource s = VlanResource'
     -- ^ @name@ - (Required)
     -- Unique name to identify VLAN
     --
-    , _vlanId      :: TF.Attr s P.Integer
+    , _vlanId      :: TF.Attr s P.Int
     -- ^ @vlan_id@ - (Required, Forces New)
     -- Number between 0-4095 indicating VLAN ID
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 vlanResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Integer -- ^ @vlan_id@ - 'P.vlanId'
+    -> TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
     -> P.Resource (VlanResource s)
 vlanResource _name _vlanId =
-    TF.newResource "triton_vlan" TF.validator $
+    TF.unsafeResource "triton_vlan" P.defaultProvider TF.validator $
         VlanResource'
             { _description = TF.Nil
             , _name = _name
@@ -731,7 +730,7 @@ instance P.HasName (VlanResource s) (TF.Attr s P.Text) where
         P.lens (_name :: VlanResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: VlanResource s)
 
-instance P.HasVlanId (VlanResource s) (TF.Attr s P.Integer) where
+instance P.HasVlanId (VlanResource s) (TF.Attr s P.Int) where
     vlanId =
-        P.lens (_vlanId :: VlanResource s -> TF.Attr s P.Integer)
+        P.lens (_vlanId :: VlanResource s -> TF.Attr s P.Int)
                (\s a -> s { _vlanId = a } :: VlanResource s)

@@ -12,11 +12,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Triton
-    ( module Terrafomo.Triton.Settings
+    ( module Terrafomo.Triton.DataSource
     , module Terrafomo.Triton.Lens
-    , module Terrafomo.Triton.Resource
     , module Terrafomo.Triton.Provider
-    , module Terrafomo.Triton.DataSource
+    , module Terrafomo.Triton.Resource
+    , module Terrafomo.Triton.Settings
     , module Terrafomo.Triton.Types
     -- * Provider Aliases
     ) where

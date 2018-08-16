@@ -54,10 +54,9 @@ import GHC.Base (($))
 
 import Terrafomo.Triton.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
+import qualified Data.Map.Strict           as Map
 import qualified Data.Maybe                as P
 import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
@@ -78,12 +77,12 @@ import qualified Terrafomo.Validator       as TF
 -- See the <https://www.terraform.io/docs/providers/triton/d/account.html terraform documentation>
 -- for more information.
 data AccountData s = AccountData'
-    deriving (P.Show, P.Eq, P.Generic)
+    deriving (P.Show, P.Eq, P.Ord)
 
 accountData
     :: P.DataSource (AccountData s)
 accountData =
-    TF.newDataSource "triton_account" TF.validator $
+    TF.unsafeDataSource "triton_account" P.defaultProvider TF.validator $
         AccountData'
 
 instance TF.IsObject (AccountData s) where
@@ -109,12 +108,12 @@ instance s ~ s' => P.HasComputedLogin (TF.Ref s' (AccountData s)) (TF.Attr s P.T
 -- See the <https://www.terraform.io/docs/providers/triton/d/datacenter.html terraform documentation>
 -- for more information.
 data DatacenterData s = DatacenterData'
-    deriving (P.Show, P.Eq, P.Generic)
+    deriving (P.Show, P.Eq, P.Ord)
 
 datacenterData
     :: P.DataSource (DatacenterData s)
 datacenterData =
-    TF.newDataSource "triton_datacenter" TF.validator $
+    TF.unsafeDataSource "triton_datacenter" P.defaultProvider TF.validator $
         DatacenterData'
 
 instance TF.IsObject (DatacenterData s) where
@@ -140,17 +139,17 @@ data FabricNetworkData s = FabricNetworkData'
     { _name   :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _vlanId :: TF.Attr s P.Integer
+    , _vlanId :: TF.Attr s P.Int
     -- ^ @vlan_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 fabricNetworkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Integer -- ^ @vlan_id@ - 'P.vlanId'
+    -> TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
     -> P.DataSource (FabricNetworkData s)
 fabricNetworkData _name _vlanId =
-    TF.newDataSource "triton_fabric_network" TF.validator $
+    TF.unsafeDataSource "triton_fabric_network" P.defaultProvider TF.validator $
         FabricNetworkData'
             { _name = _name
             , _vlanId = _vlanId
@@ -170,9 +169,9 @@ instance P.HasName (FabricNetworkData s) (TF.Attr s P.Text) where
         P.lens (_name :: FabricNetworkData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: FabricNetworkData s)
 
-instance P.HasVlanId (FabricNetworkData s) (TF.Attr s P.Integer) where
+instance P.HasVlanId (FabricNetworkData s) (TF.Attr s P.Int) where
     vlanId =
-        P.lens (_vlanId :: FabricNetworkData s -> TF.Attr s P.Integer)
+        P.lens (_vlanId :: FabricNetworkData s -> TF.Attr s P.Int)
                (\s a -> s { _vlanId = a } :: FabricNetworkData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
@@ -202,7 +201,7 @@ instance s ~ s' => P.HasComputedPublic (TF.Ref s' (FabricNetworkData s)) (TF.Att
 instance s ~ s' => P.HasComputedResolvers (TF.Ref s' (FabricNetworkData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedResolvers x = TF.compute (TF.refKey x) "resolvers"
 
-instance s ~ s' => P.HasComputedRoutes (TF.Ref s' (FabricNetworkData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedRoutes (TF.Ref s' (FabricNetworkData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedRoutes x = TF.compute (TF.refKey x) "routes"
 
 instance s ~ s' => P.HasComputedSubnet (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
@@ -219,15 +218,15 @@ data FabricVlanData s = FabricVlanData'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Optional, Forces New)
     --
-    , _vlanId      :: TF.Attr s P.Integer
+    , _vlanId      :: TF.Attr s P.Int
     -- ^ @vlan_id@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 fabricVlanData
     :: P.DataSource (FabricVlanData s)
 fabricVlanData =
-    TF.newDataSource "triton_fabric_vlan" TF.validator $
+    TF.unsafeDataSource "triton_fabric_vlan" P.defaultProvider TF.validator $
         FabricVlanData'
             { _description = TF.Nil
             , _name = TF.Nil
@@ -254,9 +253,9 @@ instance P.HasName (FabricVlanData s) (TF.Attr s P.Text) where
         P.lens (_name :: FabricVlanData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: FabricVlanData s)
 
-instance P.HasVlanId (FabricVlanData s) (TF.Attr s P.Integer) where
+instance P.HasVlanId (FabricVlanData s) (TF.Attr s P.Int) where
     vlanId =
-        P.lens (_vlanId :: FabricVlanData s -> TF.Attr s P.Integer)
+        P.lens (_vlanId :: FabricVlanData s -> TF.Attr s P.Int)
                (\s a -> s { _vlanId = a } :: FabricVlanData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (FabricVlanData s)) (TF.Attr s P.Text) where
@@ -291,12 +290,12 @@ data ImageData s = ImageData'
     , _version    :: TF.Attr s P.Text
     -- ^ @version@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 imageData
     :: P.DataSource (ImageData s)
 imageData =
-    TF.newDataSource "triton_image" TF.validator $
+    TF.unsafeDataSource "triton_image" P.defaultProvider TF.validator $
         ImageData'
             { _mostRecent = TF.value P.False
             , _name = TF.Nil
@@ -374,13 +373,13 @@ data NetworkData s = NetworkData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (NetworkData s)
 networkData _name =
-    TF.newDataSource "triton_network" TF.validator $
+    TF.unsafeDataSource "triton_network" P.defaultProvider TF.validator $
         NetworkData'
             { _name = _name
             }
@@ -412,16 +411,16 @@ instance s ~ s' => P.HasComputedPublic (TF.Ref s' (NetworkData s)) (TF.Attr s P.
 -- See the <https://www.terraform.io/docs/providers/triton/d/package.html terraform documentation>
 -- for more information.
 data PackageData s = PackageData'
-    { _filter :: TF.Attr s [TF.Attr s (PackageFilter s)]
+    { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
     -- ^ @filter@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 packageData
-    :: TF.Attr s [TF.Attr s (PackageFilter s)] -- ^ @filter@ - 'P.filter'
+    :: TF.Attr s [TF.Attr s (FilterSetting s)] -- ^ @filter@ - 'P.filter'
     -> P.DataSource (PackageData s)
 packageData _filter =
-    TF.newDataSource "triton_package" TF.validator $
+    TF.unsafeDataSource "triton_package" P.defaultProvider TF.validator $
         PackageData'
             { _filter = _filter
             }
@@ -433,38 +432,34 @@ instance TF.IsObject (PackageData s) where
 
 instance TF.IsValid (PackageData s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_filter"
-                  (_filter
-                      :: PackageData s -> TF.Attr s [TF.Attr s (PackageFilter s)])
-                  TF.validator
 
-instance P.HasFilter (PackageData s) (TF.Attr s [TF.Attr s (PackageFilter s)]) where
+instance P.HasFilter (PackageData s) (TF.Attr s [TF.Attr s (FilterSetting s)]) where
     filter =
-        P.lens (_filter :: PackageData s -> TF.Attr s [TF.Attr s (PackageFilter s)])
+        P.lens (_filter :: PackageData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
                (\s a -> s { _filter = a } :: PackageData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (PackageData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedDisk (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedDisk (TF.Ref s' (PackageData s)) (TF.Attr s P.Int) where
     computedDisk x = TF.compute (TF.refKey x) "disk"
 
 instance s ~ s' => P.HasComputedGroup (TF.Ref s' (PackageData s)) (TF.Attr s P.Text) where
     computedGroup x = TF.compute (TF.refKey x) "group"
 
-instance s ~ s' => P.HasComputedLwps (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedLwps (TF.Ref s' (PackageData s)) (TF.Attr s P.Int) where
     computedLwps x = TF.compute (TF.refKey x) "lwps"
 
-instance s ~ s' => P.HasComputedMemory (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedMemory (TF.Ref s' (PackageData s)) (TF.Attr s P.Int) where
     computedMemory x = TF.compute (TF.refKey x) "memory"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (PackageData s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedSwap (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedSwap (TF.Ref s' (PackageData s)) (TF.Attr s P.Int) where
     computedSwap x = TF.compute (TF.refKey x) "swap"
 
-instance s ~ s' => P.HasComputedVcpus (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedVcpus (TF.Ref s' (PackageData s)) (TF.Attr s P.Int) where
     computedVcpus x = TF.compute (TF.refKey x) "vcpus"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (PackageData s)) (TF.Attr s P.Text) where
