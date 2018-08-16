@@ -244,15 +244,15 @@ data ElastigroupAwsResource s = ElastigroupAwsResource'
 
 elastigroupAwsResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ - 'P.securityGroups'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Bool -- ^ @fallback_to_ondemand@ - 'P.fallbackToOndemand'
     -> TF.Attr s P.Text -- ^ @instance_types_ondemand@ - 'P.instanceTypesOndemand'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @instance_types_spot@ - 'P.instanceTypesSpot'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @orientation@ - 'P.orientation'
     -> TF.Attr s P.Text -- ^ @product@ - 'P.product'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ - 'P.securityGroups'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @instance_types_spot@ - 'P.instanceTypesSpot'
     -> P.Resource (ElastigroupAwsResource s)
-elastigroupAwsResource _description _fallbackToOndemand _instanceTypesOndemand _instanceTypesSpot _name _orientation _product _securityGroups =
+elastigroupAwsResource _description _securityGroups _name _fallbackToOndemand _instanceTypesOndemand _orientation _product _instanceTypesSpot =
     TF.unsafeResource "spotinst_elastigroup_aws" TF.validator $
         ElastigroupAwsResource'
             { _availabilityZones = TF.Nil
@@ -764,11 +764,11 @@ data SubscriptionResource s = SubscriptionResource'
 
 subscriptionResource
     :: TF.Attr s P.Text -- ^ @endpoint@ - 'P.endpoint'
-    -> TF.Attr s P.Text -- ^ @event_type@ - 'P.eventType'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
+    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    -> TF.Attr s P.Text -- ^ @event_type@ - 'P.eventType'
     -> P.Resource (SubscriptionResource s)
-subscriptionResource _endpoint _eventType _protocol _resourceId =
+subscriptionResource _endpoint _resourceId _protocol _eventType =
     TF.unsafeResource "spotinst_subscription" TF.validator $
         SubscriptionResource'
             { _endpoint = _endpoint

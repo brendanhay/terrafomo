@@ -570,10 +570,10 @@ data IntegrationCodedeploySetting s = IntegrationCodedeploySetting'
 
 newIntegrationCodedeploySetting
     :: TF.Attr s P.Bool -- ^ @cleanup_on_failure@ - 'P.cleanupOnFailure'
-    -> TF.Attr s [TF.Attr s (DeploymentGroupsSetting s)] -- ^ @deployment_groups@ - 'P.deploymentGroups'
     -> TF.Attr s P.Bool -- ^ @terminate_instance_on_failure@ - 'P.terminateInstanceOnFailure'
+    -> TF.Attr s [TF.Attr s (DeploymentGroupsSetting s)] -- ^ @deployment_groups@ - 'P.deploymentGroups'
     -> IntegrationCodedeploySetting s
-newIntegrationCodedeploySetting _cleanupOnFailure _deploymentGroups _terminateInstanceOnFailure =
+newIntegrationCodedeploySetting _cleanupOnFailure _terminateInstanceOnFailure _deploymentGroups =
     IntegrationCodedeploySetting'
         { _cleanupOnFailure = _cleanupOnFailure
         , _deploymentGroups = _deploymentGroups
@@ -1041,11 +1041,11 @@ data IntegrationRancherSetting s = IntegrationRancherSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newIntegrationRancherSetting
-    :: TF.Attr s P.Text -- ^ @access_key@ - 'P.accessKey'
-    -> TF.Attr s P.Text -- ^ @master_host@ - 'P.masterHost'
+    :: TF.Attr s P.Text -- ^ @master_host@ - 'P.masterHost'
+    -> TF.Attr s P.Text -- ^ @access_key@ - 'P.accessKey'
     -> TF.Attr s P.Text -- ^ @secret_key@ - 'P.secretKey'
     -> IntegrationRancherSetting s
-newIntegrationRancherSetting _accessKey _masterHost _secretKey =
+newIntegrationRancherSetting _masterHost _accessKey _secretKey =
     IntegrationRancherSetting'
         { _accessKey = _accessKey
         , _masterHost = _masterHost
@@ -1362,12 +1362,12 @@ data ScalingDownPolicySetting s = ScalingDownPolicySetting'
 
 newScalingDownPolicySetting
     :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
-    -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
     -> TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
+    -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
     -> TF.Attr s P.Double -- ^ @threshold@ - 'P.threshold'
     -> TF.Attr s P.Text -- ^ @unit@ - 'P.unit'
     -> ScalingDownPolicySetting s
-newScalingDownPolicySetting _metricName _namespace _policyName _threshold _unit =
+newScalingDownPolicySetting _metricName _policyName _namespace _threshold _unit =
     ScalingDownPolicySetting'
         { _actionType = TF.Nil
         , _adjustment = TF.Nil
@@ -1512,12 +1512,12 @@ data ScalingTargetPolicySetting s = ScalingTargetPolicySetting'
 
 newScalingTargetPolicySetting
     :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
-    -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
     -> TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
+    -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
     -> TF.Attr s P.Double -- ^ @target@ - 'P.target'
     -> TF.Attr s P.Text -- ^ @unit@ - 'P.unit'
     -> ScalingTargetPolicySetting s
-newScalingTargetPolicySetting _metricName _namespace _policyName _target _unit =
+newScalingTargetPolicySetting _metricName _policyName _namespace _target _unit =
     ScalingTargetPolicySetting'
         { _dimensions = TF.Nil
         , _metricName = _metricName
@@ -1625,12 +1625,12 @@ data ScalingUpPolicySetting s = ScalingUpPolicySetting'
 
 newScalingUpPolicySetting
     :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
-    -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
     -> TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
+    -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
     -> TF.Attr s P.Double -- ^ @threshold@ - 'P.threshold'
     -> TF.Attr s P.Text -- ^ @unit@ - 'P.unit'
     -> ScalingUpPolicySetting s
-newScalingUpPolicySetting _metricName _namespace _policyName _threshold _unit =
+newScalingUpPolicySetting _metricName _policyName _namespace _threshold _unit =
     ScalingUpPolicySetting'
         { _actionType = TF.Nil
         , _adjustment = TF.Nil
@@ -2051,10 +2051,10 @@ data UpdatePolicySetting s = UpdatePolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newUpdatePolicySetting
-    :: TF.Attr s P.Bool -- ^ @should_resume_stateful@ - 'P.shouldResumeStateful'
-    -> TF.Attr s P.Bool -- ^ @should_roll@ - 'P.shouldRoll'
+    :: TF.Attr s P.Bool -- ^ @should_roll@ - 'P.shouldRoll'
+    -> TF.Attr s P.Bool -- ^ @should_resume_stateful@ - 'P.shouldResumeStateful'
     -> UpdatePolicySetting s
-newUpdatePolicySetting _shouldResumeStateful _shouldRoll =
+newUpdatePolicySetting _shouldRoll _shouldResumeStateful =
     UpdatePolicySetting'
         { _rollConfig = TF.Nil
         , _shouldResumeStateful = _shouldResumeStateful
