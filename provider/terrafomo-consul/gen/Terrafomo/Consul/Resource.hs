@@ -128,6 +128,9 @@ instance P.HasTags (AgentServiceResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_tags :: AgentServiceResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: AgentServiceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AgentServiceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (AgentServiceResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
 
@@ -193,6 +196,9 @@ instance P.HasToken (CatalogEntryResource s) (TF.Attr s P.Text) where
     token =
         P.lens (_token :: CatalogEntryResource s -> TF.Attr s P.Text)
                (\s a -> s { _token = a } :: CatalogEntryResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CatalogEntryResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (CatalogEntryResource s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
@@ -271,6 +277,9 @@ instance P.HasSourceName (IntentionResource s) (TF.Attr s P.Text) where
         P.lens (_sourceName :: IntentionResource s -> TF.Attr s P.Text)
                (\s a -> s { _sourceName = a } :: IntentionResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IntentionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @consul_key_prefix@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/consul/r/key_prefix.html terraform documentation>
@@ -324,6 +333,9 @@ instance P.HasToken (KeyPrefixResource s) (TF.Attr s P.Text) where
         P.lens (_token :: KeyPrefixResource s -> TF.Attr s P.Text)
                (\s a -> s { _token = a } :: KeyPrefixResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyPrefixResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeyPrefixResource s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
@@ -367,6 +379,9 @@ instance P.HasToken (KeysResource s) (TF.Attr s P.Text) where
     token =
         P.lens (_token :: KeysResource s -> TF.Attr s P.Text)
                (\s a -> s { _token = a } :: KeysResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeysResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeysResource s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
@@ -426,6 +441,9 @@ instance P.HasToken (NodeResource s) (TF.Attr s P.Text) where
     token =
         P.lens (_token :: NodeResource s -> TF.Attr s P.Text)
                (\s a -> s { _token = a } :: NodeResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
@@ -585,6 +603,9 @@ instance P.HasToken (PreparedQueryResource s) (TF.Attr s P.Text) where
         P.lens (_token :: PreparedQueryResource s -> TF.Attr s P.Text)
                (\s a -> s { _token = a } :: PreparedQueryResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PreparedQueryResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @consul_service@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/consul/r/service.html terraform documentation>
@@ -647,6 +668,9 @@ instance P.HasTags (ServiceResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
         P.lens (_tags :: ServiceResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: ServiceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
