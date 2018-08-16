@@ -768,23 +768,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_vlanId",
                     "computed": false,
                     "required": true,
@@ -800,6 +783,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "vlan_id"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 }
             ],
             "conflicts": [],
@@ -1618,23 +1618,23 @@
             ],
             "parameters": [
                 {
-                    "default": "_name",
+                    "default": "_vlanId",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "Network name"
+                        "VLAN on which the network exists"
                     ],
                     "forceNew": true,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
+                    "encoder": "TF.assign \"vlan_id\" <$> TF.attribute",
+                    "name": "_vlanId",
+                    "method": "vlanId",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasVlanId",
                     "validate": false,
                     "optional": false,
-                    "original": "name"
+                    "original": "vlan_id"
                 },
                 {
                     "default": "_provisionEndIp",
@@ -1675,6 +1675,25 @@
                     "original": "provision_start_ip"
                 },
                 {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Network name"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
                     "default": "_subnet",
                     "computed": false,
                     "required": true,
@@ -1692,25 +1711,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "subnet"
-                },
-                {
-                    "default": "_vlanId",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "VLAN on which the network exists"
-                    ],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"vlan_id\" <$> TF.attribute",
-                    "name": "_vlanId",
-                    "method": "vlanId",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasVlanId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "vlan_id"
                 }
             ],
             "conflicts": [],
@@ -2017,25 +2017,6 @@
                     "original": "image"
                 },
                 {
-                    "default": "_package",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Package name used for provisioning"
-                    ],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"package\" <$> TF.attribute",
-                    "name": "_package",
-                    "method": "package",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPackage",
-                    "validate": false,
-                    "optional": false,
-                    "original": "package"
-                },
-                {
                     "default": "_templateName",
                     "computed": false,
                     "required": true,
@@ -2053,6 +2034,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "template_name"
+                },
+                {
+                    "default": "_package",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Package name used for provisioning"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"package\" <$> TF.attribute",
+                    "name": "_package",
+                    "method": "package",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPackage",
+                    "validate": false,
+                    "optional": false,
+                    "original": "package"
                 }
             ],
             "conflicts": [],
@@ -2975,25 +2975,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Unique name to identify VLAN"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_vlanId",
                     "computed": false,
                     "required": true,
@@ -3011,6 +2992,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "vlan_id"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Unique name to identify VLAN"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 }
             ],
             "conflicts": [],
