@@ -959,6 +959,27 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if",
+                        ":latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More",
+                        "info: http://kubernetes.io/docs/user-guide/images#updating-images"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"image_pull_policy\" <$> TF.attribute",
+                    "name": "_imagePullPolicy",
+                    "method": "imagePullPolicy",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasImagePullPolicy",
+                    "validate": false,
+                    "optional": true,
+                    "original": "image_pull_policy"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "Actions that the management system should take in response to container",
                         "lifecycle events"
                     ],
@@ -1059,6 +1080,26 @@
                     "validate": true,
                     "optional": true,
                     "original": "readiness_probe"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Compute Resources required by this container. Cannot be updated. More info:",
+                        "http://kubernetes.io/docs/user-guide/persistent-volumes#resources"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"resources\" <$> TF.attribute",
+                    "name": "_resources",
+                    "method": "resources",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (ResourcesSetting s)",
+                    "class": "HasResources",
+                    "validate": true,
+                    "optional": true,
+                    "original": "resources"
                 },
                 {
                     "default": "TF.Nil",
@@ -1231,7 +1272,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedImagePullPolicy",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "image_pull_policy"
                 },
                 {
@@ -1251,7 +1292,7 @@
                     "type": "TF.Attr s (ResourcesSetting s)",
                     "class": "HasComputedResources",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "resources"
                 }
             ],
@@ -2614,6 +2655,27 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if",
+                        ":latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More",
+                        "info: http://kubernetes.io/docs/user-guide/images#updating-images"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"image_pull_policy\" <$> TF.attribute",
+                    "name": "_imagePullPolicy",
+                    "method": "imagePullPolicy",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasImagePullPolicy",
+                    "validate": false,
+                    "optional": true,
+                    "original": "image_pull_policy"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "Actions that the management system should take in response to container",
                         "lifecycle events"
                     ],
@@ -2714,6 +2776,26 @@
                     "validate": true,
                     "optional": true,
                     "original": "readiness_probe"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Compute Resources required by this container. Cannot be updated. More info:",
+                        "http://kubernetes.io/docs/user-guide/persistent-volumes#resources"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"resources\" <$> TF.attribute",
+                    "name": "_resources",
+                    "method": "resources",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (ResourcesSetting s)",
+                    "class": "HasResources",
+                    "validate": true,
+                    "optional": true,
+                    "original": "resources"
                 },
                 {
                     "default": "TF.Nil",
@@ -2886,7 +2968,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedImagePullPolicy",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "image_pull_policy"
                 },
                 {
@@ -2906,7 +2988,7 @@
                     "type": "TF.Attr s (ResourcesSetting s)",
                     "class": "HasComputedResources",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "resources"
                 }
             ],
@@ -3345,6 +3427,26 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "The default resource requirement request value by resource name if resource",
+                        "request is omitted."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"default_request\" <$> TF.attribute",
+                    "name": "_defaultRequest",
+                    "method": "defaultRequest",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
+                    "class": "HasDefaultRequest",
+                    "validate": false,
+                    "optional": true,
+                    "original": "default_request"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "Max usage constraints on this kind by resource name."
                     ],
                     "forceNew": false,
@@ -3440,7 +3542,7 @@
                     "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
                     "class": "HasComputedDefaultRequest",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "default_request"
                 }
             ],
@@ -3454,7 +3556,42 @@
                 "smart": "limitsSetting",
                 "name": "LimitsSetting'"
             },
-            "arguments": [],
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cpu\" <$> TF.attribute",
+                    "name": "_cpu",
+                    "method": "cpu",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCpu",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cpu"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"memory\" <$> TF.attribute",
+                    "name": "_memory",
+                    "method": "memory",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMemory",
+                    "validate": false,
+                    "optional": true,
+                    "original": "memory"
+                }
+            ],
             "key": "kubernetes_pod.spec.container.resources.limits",
             "name": "LimitsSetting",
             "threaded": true,
@@ -3473,7 +3610,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCpu",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "cpu"
                 },
                 {
@@ -3490,7 +3627,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMemory",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "memory"
                 }
             ],
@@ -3842,7 +3979,13 @@
                     "name": "_generateName",
                     "method": "generateName",
                     "threaded": true,
-                    "conflicts": [],
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_name",
+                            "method": "name"
+                        }
+                    ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasGenerateName",
                     "validate": false,
@@ -3870,6 +4013,32 @@
                     "validate": false,
                     "optional": true,
                     "original": "labels"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Name of the config map, must be unique. Cannot be updated. More info:",
+                        "http://kubernetes.io/docs/user-guide/identifiers#names"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_generateName",
+                            "method": "generateName"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
                 },
                 {
                     "default": "TF.value \"default\"",
@@ -3934,7 +4103,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 },
                 {
@@ -3999,7 +4168,62 @@
                 }
             ],
             "parameters": [],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Prefix, used by the server, to generate a unique name ONLY IF the `name`",
+                        "field has not been provided. This value will also be combined with a unique",
+                        "suffix. Read more:",
+                        "https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#idempotency"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"generate_name\" <$> TF.attribute",
+                    "name": "_generateName",
+                    "method": "generateName",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_name",
+                            "method": "name"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasGenerateName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "generate_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Name of the config map, must be unique. Cannot be updated. More info:",
+                        "http://kubernetes.io/docs/user-guide/identifiers#names"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_generateName",
+                            "method": "generateName"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                }
+            ],
             "type": "MetadataSetting s",
             "original": "metadata"
         },
@@ -4717,6 +4941,30 @@
                     "original": "protocol"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The port on each node on which this service is exposed when `type` is",
+                        "`NodePort` or `LoadBalancer`. Usually assigned by the system. If specified,",
+                        "it will be allocated to the service if unused or else creation of the",
+                        "service will fail. Default is to auto-allocate a port if the `type` of this",
+                        "service requires one. More info:",
+                        "http://kubernetes.io/docs/user-guide/services#type--nodeport"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"node_port\" <$> TF.attribute",
+                    "name": "_nodePort",
+                    "method": "nodePort",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasNodePort",
+                    "validate": false,
+                    "optional": true,
+                    "original": "node_port"
+                },
+                {
                     "default": "_port",
                     "computed": false,
                     "required": true,
@@ -4734,6 +4982,28 @@
                     "validate": false,
                     "optional": false,
                     "original": "port"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Number or name of the port to access on the pods targeted by the service.",
+                        "Number must be in the range 1 to 65535. This field is ignored for services",
+                        "with `cluster_ip = \"None\"`. More info:",
+                        "http://kubernetes.io/docs/user-guide/services#defining-a-service"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"target_port\" <$> TF.attribute",
+                    "name": "_targetPort",
+                    "method": "targetPort",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTargetPort",
+                    "validate": false,
+                    "optional": true,
+                    "original": "target_port"
                 }
             ],
             "key": "kubernetes_pod.spec.container.port",
@@ -4761,7 +5031,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedNodePort",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "node_port"
                 },
                 {
@@ -4783,7 +5053,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTargetPort",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "target_port"
                 },
                 {
@@ -5245,6 +5515,27 @@
                     "original": "fs_type"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Keyring is the path to key ring for RBDUser. Default is /etc/ceph/keyring.",
+                        "More info:",
+                        "http://releases.k8s.io/HEAD/examples/volumes/rbd/README.md#how-to-use-it"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"keyring\" <$> TF.attribute",
+                    "name": "_keyring",
+                    "method": "keyring",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKeyring",
+                    "validate": false,
+                    "optional": true,
+                    "original": "keyring"
+                },
+                {
                     "default": "TF.value \"admin\"",
                     "computed": false,
                     "required": false,
@@ -5369,7 +5660,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKeyring",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "keyring"
                 }
             ],
@@ -5598,7 +5889,42 @@
                 "smart": "requestsSetting",
                 "name": "RequestsSetting'"
             },
-            "arguments": [],
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cpu\" <$> TF.attribute",
+                    "name": "_cpu",
+                    "method": "cpu",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCpu",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cpu"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"memory\" <$> TF.attribute",
+                    "name": "_memory",
+                    "method": "memory",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMemory",
+                    "validate": false,
+                    "optional": true,
+                    "original": "memory"
+                }
+            ],
             "key": "kubernetes_pod.spec.container.resources.requests",
             "name": "RequestsSetting",
             "threaded": true,
@@ -5617,7 +5943,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCpu",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "cpu"
                 },
                 {
@@ -5634,7 +5960,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMemory",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "memory"
                 }
             ],
@@ -5802,7 +6128,7 @@
                     "type": "TF.Attr s (LimitsSetting s)",
                     "class": "HasComputedLimits",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "limits"
                 },
                 {
@@ -5819,7 +6145,7 @@
                     "type": "TF.Attr s (RequestsSetting s)",
                     "class": "HasComputedRequests",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "requests"
                 }
             ],
@@ -6561,6 +6887,27 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "Target average CPU utilization (represented as a percentage of requested",
+                        "CPU) over all the pods. If not specified the default autoscaling policy will",
+                        "be used."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"target_cpu_utilization_percentage\" <$> TF.attribute",
+                    "name": "_targetCpuUtilizationPercentage",
+                    "method": "targetCpuUtilizationPercentage",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasTargetCpuUtilizationPercentage",
+                    "validate": false,
+                    "optional": true,
+                    "original": "target_cpu_utilization_percentage"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "Limits is the list of objects that are enforced."
                     ],
                     "forceNew": false,
@@ -6720,6 +7067,25 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "The binding reference to the PersistentVolume backing this claim."
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"volume_name\" <$> TF.attribute",
+                    "name": "_volumeName",
+                    "method": "volumeName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVolumeName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "volume_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "Optional duration in seconds the pod may be active on the node relative to",
                         "StartTime before the system will actively try to mark it failed and kill",
                         "associated containers. Value must be a positive integer."
@@ -6840,6 +7206,50 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "Specifies the hostname of the Pod If not specified, the pod's hostname will",
+                        "be set to a system-defined value."
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"hostname\" <$> TF.attribute",
+                    "name": "_hostname",
+                    "method": "hostname",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHostname",
+                    "validate": false,
+                    "optional": true,
+                    "original": "hostname"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "ImagePullSecrets is an optional list of references to secrets in the same",
+                        "namespace to use for pulling any of the images used by this PodSpec. If",
+                        "specified, these secrets will be passed to individual puller implementations",
+                        "for them to use. For example, in the case of docker, only DockerConfig type",
+                        "secrets are honored. More info:",
+                        "http://kubernetes.io/docs/user-guide/images#specifying-imagepullsecrets-on-a-pod"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"image_pull_secrets\" <$> TF.attribute",
+                    "name": "_imagePullSecrets",
+                    "method": "imagePullSecrets",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (ImagePullSecretsSetting s)]",
+                    "class": "HasImagePullSecrets",
+                    "validate": false,
+                    "optional": true,
+                    "original": "image_pull_secrets"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "List of init containers belonging to the pod. Init containers always run to",
                         "completion and each must complete succesfully before the next is started.",
                         "More info:",
@@ -6856,6 +7266,27 @@
                     "validate": false,
                     "optional": true,
                     "original": "init_container"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "NodeName is a request to schedule this pod onto a specific node. If it is",
+                        "non-empty, the scheduler simply schedules this pod onto that node, assuming",
+                        "that it fits resource requirements."
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"node_name\" <$> TF.attribute",
+                    "name": "_nodeName",
+                    "method": "nodeName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNodeName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "node_name"
                 },
                 {
                     "default": "TF.Nil",
@@ -6918,6 +7349,26 @@
                     "validate": true,
                     "optional": true,
                     "original": "security_context"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "ServiceAccountName is the name of the ServiceAccount to use to run this pod.",
+                        "More info: http://releases.k8s.io/HEAD/docs/design/service_accounts.md."
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"service_account_name\" <$> TF.attribute",
+                    "name": "_serviceAccountName",
+                    "method": "serviceAccountName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasServiceAccountName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "service_account_name"
                 },
                 {
                     "default": "TF.Nil",
@@ -7085,6 +7536,30 @@
                     "validate": false,
                     "optional": true,
                     "original": "scopes"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The IP address of the service. It is usually assigned randomly by the",
+                        "master. If an address is specified manually and is not in use by others, it",
+                        "will be allocated to the service; otherwise, creation of the service will",
+                        "fail. `None` can be specified for headless services when proxying is not",
+                        "required. Ignored if type is `ExternalName`. More info:",
+                        "http://kubernetes.io/docs/user-guide/services#virtual-ips-and-service-proxies"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"cluster_ip\" <$> TF.attribute",
+                    "name": "_clusterIp",
+                    "method": "clusterIp",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasClusterIp",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cluster_ip"
                 },
                 {
                     "default": "TF.Nil",
@@ -7262,7 +7737,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedTargetCpuUtilizationPercentage",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "target_cpu_utilization_percentage"
                 },
                 {
@@ -7281,7 +7756,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedStorageClassName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "storage_class_name"
                 },
                 {
@@ -7300,7 +7775,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVolumeName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "volume_name"
                 },
                 {
@@ -7320,7 +7795,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHostname",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "hostname"
                 },
                 {
@@ -7344,7 +7819,7 @@
                     "type": "TF.Attr s [TF.Attr s (ImagePullSecretsSetting s)]",
                     "class": "HasComputedImagePullSecrets",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "image_pull_secrets"
                 },
                 {
@@ -7365,7 +7840,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedNodeName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "node_name"
                 },
                 {
@@ -7385,7 +7860,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedServiceAccountName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "service_account_name"
                 },
                 {
@@ -7409,7 +7884,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedClusterIp",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "cluster_ip"
                 },
                 {
@@ -7919,6 +8394,50 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "Specifies the hostname of the Pod If not specified, the pod's hostname will",
+                        "be set to a system-defined value."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"hostname\" <$> TF.attribute",
+                    "name": "_hostname",
+                    "method": "hostname",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHostname",
+                    "validate": false,
+                    "optional": true,
+                    "original": "hostname"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "ImagePullSecrets is an optional list of references to secrets in the same",
+                        "namespace to use for pulling any of the images used by this PodSpec. If",
+                        "specified, these secrets will be passed to individual puller implementations",
+                        "for them to use. For example, in the case of docker, only DockerConfig type",
+                        "secrets are honored. More info:",
+                        "http://kubernetes.io/docs/user-guide/images#specifying-imagepullsecrets-on-a-pod"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"image_pull_secrets\" <$> TF.attribute",
+                    "name": "_imagePullSecrets",
+                    "method": "imagePullSecrets",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (ImagePullSecretsSetting s)]",
+                    "class": "HasImagePullSecrets",
+                    "validate": false,
+                    "optional": true,
+                    "original": "image_pull_secrets"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "List of init containers belonging to the pod. Init containers always run to",
                         "completion and each must complete succesfully before the next is started.",
                         "More info:",
@@ -7935,6 +8454,27 @@
                     "validate": false,
                     "optional": true,
                     "original": "init_container"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "NodeName is a request to schedule this pod onto a specific node. If it is",
+                        "non-empty, the scheduler simply schedules this pod onto that node, assuming",
+                        "that it fits resource requirements."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"node_name\" <$> TF.attribute",
+                    "name": "_nodeName",
+                    "method": "nodeName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNodeName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "node_name"
                 },
                 {
                     "default": "TF.Nil",
@@ -7997,6 +8537,26 @@
                     "validate": true,
                     "optional": true,
                     "original": "security_context"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "ServiceAccountName is the name of the ServiceAccount to use to run this pod.",
+                        "More info: http://releases.k8s.io/HEAD/docs/design/service_accounts.md."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"service_account_name\" <$> TF.attribute",
+                    "name": "_serviceAccountName",
+                    "method": "serviceAccountName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasServiceAccountName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "service_account_name"
                 },
                 {
                     "default": "TF.Nil",
@@ -8085,7 +8645,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHostname",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "hostname"
                 },
                 {
@@ -8109,7 +8669,7 @@
                     "type": "TF.Attr s [TF.Attr s (ImagePullSecretsSetting s)]",
                     "class": "HasComputedImagePullSecrets",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "image_pull_secrets"
                 },
                 {
@@ -8130,7 +8690,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedNodeName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "node_name"
                 },
                 {
@@ -8150,7 +8710,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedServiceAccountName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "service_account_name"
                 }
             ],
