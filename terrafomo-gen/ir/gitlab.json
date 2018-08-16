@@ -1168,23 +1168,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_accessLevel",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"access_level\" <$> TF.attribute",
-                    "name": "_accessLevel",
-                    "method": "accessLevel",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAccessLevel",
-                    "validate": false,
-                    "optional": false,
-                    "original": "access_level"
-                },
-                {
                     "default": "_projectId",
                     "computed": false,
                     "required": true,
@@ -1217,6 +1200,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "user_id"
+                },
+                {
+                    "default": "_accessLevel",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"access_level\" <$> TF.attribute",
+                    "name": "_accessLevel",
+                    "method": "accessLevel",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAccessLevel",
+                    "validate": false,
+                    "optional": false,
+                    "original": "access_level"
                 }
             ],
             "conflicts": [],
