@@ -253,7 +253,7 @@ elastigroupAwsResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ - 'P.securityGroups'
     -> P.Resource (ElastigroupAwsResource s)
 elastigroupAwsResource _description _fallbackToOndemand _instanceTypesOndemand _instanceTypesSpot _name _orientation _product _securityGroups =
-    TF.unsafeResource "spotinst_elastigroup_aws" P.defaultProvider TF.validator $
+    TF.unsafeResource "spotinst_elastigroup_aws" TF.validator $
         ElastigroupAwsResource'
             { _availabilityZones = TF.Nil
             , _blockDevicesMode = TF.Nil
@@ -769,7 +769,7 @@ subscriptionResource
     -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
     -> P.Resource (SubscriptionResource s)
 subscriptionResource _endpoint _eventType _protocol _resourceId =
-    TF.unsafeResource "spotinst_subscription" P.defaultProvider TF.validator $
+    TF.unsafeResource "spotinst_subscription" TF.validator $
         SubscriptionResource'
             { _endpoint = _endpoint
             , _eventType = _eventType
