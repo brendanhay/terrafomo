@@ -188,10 +188,10 @@ data FirewallResource s = FirewallResource'
 firewallResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> TF.Attr s P.Text -- ^ @nic_id@ - 'P.nicId'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Text -- ^ @server_id@ - 'P.serverId'
+    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> P.Resource (FirewallResource s)
-firewallResource _datacenterId _nicId _protocol _serverId =
+firewallResource _datacenterId _nicId _serverId _protocol =
     TF.unsafeResource "profitbricks_firewall" TF.validator $
         FirewallResource'
             { _datacenterId = _datacenterId
@@ -449,11 +449,11 @@ data IpfailoverResource s = IpfailoverResource'
 
 ipfailoverResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
-    -> TF.Attr s P.Text -- ^ @ip@ - 'P.ip'
     -> TF.Attr s P.Text -- ^ @lan_id@ - 'P.lanId'
+    -> TF.Attr s P.Text -- ^ @ip@ - 'P.ip'
     -> TF.Attr s P.Text -- ^ @nicuuid@ - 'P.nicuuid'
     -> P.Resource (IpfailoverResource s)
-ipfailoverResource _datacenterId _ip _lanId _nicuuid =
+ipfailoverResource _datacenterId _lanId _ip _nicuuid =
     TF.unsafeResource "profitbricks_ipfailover" TF.validator $
         IpfailoverResource'
             { _datacenterId = _datacenterId
@@ -570,10 +570,10 @@ data LoadbalancerResource s = LoadbalancerResource'
 
 loadbalancerResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @nic_ids@ - 'P.nicIds'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LoadbalancerResource s)
-loadbalancerResource _datacenterId _name _nicIds =
+loadbalancerResource _datacenterId _nicIds _name =
     TF.unsafeResource "profitbricks_loadbalancer" TF.validator $
         LoadbalancerResource'
             { _datacenterId = _datacenterId
@@ -653,10 +653,10 @@ data NicResource s = NicResource'
 
 nicResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
-    -> TF.Attr s P.Int -- ^ @lan@ - 'P.lan'
     -> TF.Attr s P.Text -- ^ @server_id@ - 'P.serverId'
+    -> TF.Attr s P.Int -- ^ @lan@ - 'P.lan'
     -> P.Resource (NicResource s)
-nicResource _datacenterId _lan _serverId =
+nicResource _datacenterId _serverId _lan =
     TF.unsafeResource "profitbricks_nic" TF.validator $
         NicResource'
             { _datacenterId = _datacenterId
@@ -879,12 +879,12 @@ data ShareResource s = ShareResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 shareResource
-    :: TF.Attr s P.Bool -- ^ @edit_privilege@ - 'P.editPrivilege'
-    -> TF.Attr s P.Text -- ^ @group_id@ - 'P.groupId'
+    :: TF.Attr s P.Text -- ^ @group_id@ - 'P.groupId'
     -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
+    -> TF.Attr s P.Bool -- ^ @edit_privilege@ - 'P.editPrivilege'
     -> TF.Attr s P.Bool -- ^ @share_privilege@ - 'P.sharePrivilege'
     -> P.Resource (ShareResource s)
-shareResource _editPrivilege _groupId _resourceId _sharePrivilege =
+shareResource _groupId _resourceId _editPrivilege _sharePrivilege =
     TF.unsafeResource "profitbricks_share" TF.validator $
         ShareResource'
             { _editPrivilege = _editPrivilege
@@ -942,10 +942,10 @@ data SnapshotResource s = SnapshotResource'
 
 snapshotResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SnapshotResource s)
-snapshotResource _datacenterId _name _volumeId =
+snapshotResource _datacenterId _volumeId _name =
     TF.unsafeResource "profitbricks_snapshot" TF.validator $
         SnapshotResource'
             { _datacenterId = _datacenterId
@@ -1005,13 +1005,13 @@ data UserResource s = UserResource'
 
 userResource
     :: TF.Attr s P.Bool -- ^ @administrator@ - 'P.administrator'
+    -> TF.Attr s P.Bool -- ^ @force_sec_auth@ - 'P.forceSecAuth'
     -> TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> TF.Attr s P.Text -- ^ @first_name@ - 'P.firstName'
-    -> TF.Attr s P.Bool -- ^ @force_sec_auth@ - 'P.forceSecAuth'
     -> TF.Attr s P.Text -- ^ @last_name@ - 'P.lastName'
     -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
     -> P.Resource (UserResource s)
-userResource _administrator _email _firstName _forceSecAuth _lastName _password =
+userResource _administrator _forceSecAuth _email _firstName _lastName _password =
     TF.unsafeResource "profitbricks_user" TF.validator $
         UserResource'
             { _administrator = _administrator
@@ -1107,11 +1107,11 @@ data VolumeResource s = VolumeResource'
 
 volumeResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
-    -> TF.Attr s P.Text -- ^ @disk_type@ - 'P.diskType'
     -> TF.Attr s P.Text -- ^ @server_id@ - 'P.serverId'
     -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
+    -> TF.Attr s P.Text -- ^ @disk_type@ - 'P.diskType'
     -> P.Resource (VolumeResource s)
-volumeResource _datacenterId _diskType _serverId _size =
+volumeResource _datacenterId _serverId _size _diskType =
     TF.unsafeResource "profitbricks_volume" TF.validator $
         VolumeResource'
             { _availabilityZone = TF.Nil

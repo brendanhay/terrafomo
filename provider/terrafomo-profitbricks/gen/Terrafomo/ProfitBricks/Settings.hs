@@ -344,11 +344,11 @@ data VolumeSetting s = VolumeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newVolumeSetting
-    :: TF.Attr s P.Text -- ^ @disk_type@ - 'P.diskType'
-    -> TF.Attr s P.Text -- ^ @image_name@ - 'P.imageName'
+    :: TF.Attr s P.Text -- ^ @image_name@ - 'P.imageName'
     -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
+    -> TF.Attr s P.Text -- ^ @disk_type@ - 'P.diskType'
     -> VolumeSetting s
-newVolumeSetting _diskType _imageName _size =
+newVolumeSetting _imageName _size _diskType =
     VolumeSetting'
         { _availabilityZone = TF.Nil
         , _bus = TF.Nil
