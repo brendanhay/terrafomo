@@ -82,10 +82,9 @@ import GHC.Base (($))
 
 import Terrafomo.OVH.Settings
 
-import qualified Data.Hashable          as P
-import qualified Data.HashMap.Strict    as P
-import qualified Data.HashMap.Strict    as Map
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Map.Strict        as P
+import qualified Data.Map.Strict        as Map
 import qualified Data.Maybe             as P
 import qualified Data.Monoid            as P
 import qualified Data.Text              as P
@@ -112,17 +111,17 @@ data CloudNetworkPrivateResource s = CloudNetworkPrivateResource'
     , _projectId :: TF.Attr s P.Text
     -- ^ @project_id@ - (Required, Forces New)
     --
-    , _vlanId    :: TF.Attr s P.Integer
+    , _vlanId    :: TF.Attr s P.Int
     -- ^ @vlan_id@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 cloudNetworkPrivateResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.Resource (CloudNetworkPrivateResource s)
 cloudNetworkPrivateResource _name _projectId =
-    TF.newResource "ovh_cloud_network_private" TF.validator $
+    TF.unsafeResource "ovh_cloud_network_private" P.defaultProvider TF.validator $
         CloudNetworkPrivateResource'
             { _name = _name
             , _projectId = _projectId
@@ -149,15 +148,15 @@ instance P.HasProjectId (CloudNetworkPrivateResource s) (TF.Attr s P.Text) where
         P.lens (_projectId :: CloudNetworkPrivateResource s -> TF.Attr s P.Text)
                (\s a -> s { _projectId = a } :: CloudNetworkPrivateResource s)
 
-instance P.HasVlanId (CloudNetworkPrivateResource s) (TF.Attr s P.Integer) where
+instance P.HasVlanId (CloudNetworkPrivateResource s) (TF.Attr s P.Int) where
     vlanId =
-        P.lens (_vlanId :: CloudNetworkPrivateResource s -> TF.Attr s P.Integer)
+        P.lens (_vlanId :: CloudNetworkPrivateResource s -> TF.Attr s P.Int)
                (\s a -> s { _vlanId = a } :: CloudNetworkPrivateResource s)
 
 instance s ~ s' => P.HasComputedRegions (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedRegions x = TF.compute (TF.refKey x) "regions"
 
-instance s ~ s' => P.HasComputedRegionsStatus (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s [TF.Attr s (CloudNetworkPrivateRegionsStatus s)]) where
+instance s ~ s' => P.HasComputedRegionsStatus (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s [TF.Attr s (RegionsStatusSetting s)]) where
     computedRegionsStatus x = TF.compute (TF.refKey x) "regions_status"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s P.Text) where
@@ -195,7 +194,7 @@ data CloudNetworkPrivateSubnetResource s = CloudNetworkPrivateSubnetResource'
     , _start     :: TF.Attr s P.Text
     -- ^ @start@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 cloudNetworkPrivateSubnetResource
     :: TF.Attr s P.Text -- ^ @end@ - 'P.end'
@@ -206,7 +205,7 @@ cloudNetworkPrivateSubnetResource
     -> TF.Attr s P.Text -- ^ @start@ - 'P.start'
     -> P.Resource (CloudNetworkPrivateSubnetResource s)
 cloudNetworkPrivateSubnetResource _end _network _networkId _projectId _region _start =
-    TF.newResource "ovh_cloud_network_private_subnet" TF.validator $
+    TF.unsafeResource "ovh_cloud_network_private_subnet" P.defaultProvider TF.validator $
         CloudNetworkPrivateSubnetResource'
             { _dhcp = TF.value P.False
             , _end = _end
@@ -279,7 +278,7 @@ instance s ~ s' => P.HasComputedCidr (TF.Ref s' (CloudNetworkPrivateSubnetResour
 instance s ~ s' => P.HasComputedGatewayIp (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s P.Text) where
     computedGatewayIp x = TF.compute (TF.refKey x) "gateway_ip"
 
-instance s ~ s' => P.HasComputedIpPools (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s [TF.Attr s (CloudNetworkPrivateSubnetIpPools s)]) where
+instance s ~ s' => P.HasComputedIpPools (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s [TF.Attr s (IpPoolsSetting s)]) where
     computedIpPools x = TF.compute (TF.refKey x) "ip_pools"
 
 -- | @ovh_cloud_user@ Resource.
@@ -293,13 +292,13 @@ data CloudUserResource s = CloudUserResource'
     , _projectId   :: TF.Attr s P.Text
     -- ^ @project_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 cloudUserResource
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.Resource (CloudUserResource s)
 cloudUserResource _projectId =
-    TF.newResource "ovh_cloud_user" TF.validator $
+    TF.unsafeResource "ovh_cloud_user" P.defaultProvider TF.validator $
         CloudUserResource'
             { _description = TF.Nil
             , _projectId = _projectId
@@ -327,7 +326,7 @@ instance P.HasProjectId (CloudUserResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (CloudUserResource s)) (TF.Attr s P.Text) where
     computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
 
-instance s ~ s' => P.HasComputedOpenstackRc (TF.Ref s' (CloudUserResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedOpenstackRc (TF.Ref s' (CloudUserResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedOpenstackRc x = TF.compute (TF.refKey x) "openstack_rc"
 
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (CloudUserResource s)) (TF.Attr s P.Text) where
@@ -353,13 +352,13 @@ data DomainZoneRecordResource s = DomainZoneRecordResource'
     , _target    :: TF.Attr s P.Text
     -- ^ @target@ - (Required)
     --
-    , _ttl       :: TF.Attr s P.Integer
+    , _ttl       :: TF.Attr s P.Int
     -- ^ @ttl@ - (Optional)
     --
     , _zone      :: TF.Attr s P.Text
     -- ^ @zone@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 domainZoneRecordResource
     :: TF.Attr s P.Text -- ^ @fieldtype@ - 'P.fieldtype'
@@ -367,7 +366,7 @@ domainZoneRecordResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (DomainZoneRecordResource s)
 domainZoneRecordResource _fieldtype _target _zone =
-    TF.newResource "ovh_domain_zone_record" TF.validator $
+    TF.unsafeResource "ovh_domain_zone_record" P.defaultProvider TF.validator $
         DomainZoneRecordResource'
             { _fieldtype = _fieldtype
             , _subdomain = TF.Nil
@@ -403,9 +402,9 @@ instance P.HasTarget (DomainZoneRecordResource s) (TF.Attr s P.Text) where
         P.lens (_target :: DomainZoneRecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _target = a } :: DomainZoneRecordResource s)
 
-instance P.HasTtl (DomainZoneRecordResource s) (TF.Attr s P.Integer) where
+instance P.HasTtl (DomainZoneRecordResource s) (TF.Attr s P.Int) where
     ttl =
-        P.lens (_ttl :: DomainZoneRecordResource s -> TF.Attr s P.Integer)
+        P.lens (_ttl :: DomainZoneRecordResource s -> TF.Attr s P.Int)
                (\s a -> s { _ttl = a } :: DomainZoneRecordResource s)
 
 instance P.HasZone (DomainZoneRecordResource s) (TF.Attr s P.Text) where
@@ -439,7 +438,7 @@ data DomainZoneRedirectionResource s = DomainZoneRedirectionResource'
     , _zone        :: TF.Attr s P.Text
     -- ^ @zone@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 domainZoneRedirectionResource
     :: TF.Attr s P.Text -- ^ @target@ - 'P.target'
@@ -447,7 +446,7 @@ domainZoneRedirectionResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (DomainZoneRedirectionResource s)
 domainZoneRedirectionResource _target _type' _zone =
-    TF.newResource "ovh_domain_zone_redirection" TF.validator $
+    TF.unsafeResource "ovh_domain_zone_redirection" P.defaultProvider TF.validator $
         DomainZoneRedirectionResource'
             { _description = TF.Nil
             , _keywords = TF.Nil
@@ -512,7 +511,7 @@ instance P.HasZone (DomainZoneRedirectionResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/ovh/r/iploadbalancing_http_route.html terraform documentation>
 -- for more information.
 data IploadbalancingHttpRouteResource s = IploadbalancingHttpRouteResource'
-    { _action      :: TF.Attr s [TF.Attr s (IploadbalancingHttpRouteAction s)]
+    { _action      :: TF.Attr s [TF.Attr s (ActionSetting s)]
     -- ^ @action@ - (Required)
     --
     , _displayName :: TF.Attr s P.Text
@@ -521,17 +520,17 @@ data IploadbalancingHttpRouteResource s = IploadbalancingHttpRouteResource'
     , _serviceName :: TF.Attr s P.Text
     -- ^ @service_name@ - (Required, Forces New)
     --
-    , _weight      :: TF.Attr s P.Integer
+    , _weight      :: TF.Attr s P.Int
     -- ^ @weight@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 iploadbalancingHttpRouteResource
-    :: TF.Attr s [TF.Attr s (IploadbalancingHttpRouteAction s)] -- ^ @action@ - 'P.action'
+    :: TF.Attr s [TF.Attr s (ActionSetting s)] -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
     -> P.Resource (IploadbalancingHttpRouteResource s)
 iploadbalancingHttpRouteResource _action _serviceName =
-    TF.newResource "ovh_iploadbalancing_http_route" TF.validator $
+    TF.unsafeResource "ovh_iploadbalancing_http_route" P.defaultProvider TF.validator $
         IploadbalancingHttpRouteResource'
             { _action = _action
             , _displayName = TF.Nil
@@ -549,14 +548,10 @@ instance TF.IsObject (IploadbalancingHttpRouteResource s) where
 
 instance TF.IsValid (IploadbalancingHttpRouteResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_action"
-                  (_action
-                      :: IploadbalancingHttpRouteResource s -> TF.Attr s [TF.Attr s (IploadbalancingHttpRouteAction s)])
-                  TF.validator
 
-instance P.HasAction (IploadbalancingHttpRouteResource s) (TF.Attr s [TF.Attr s (IploadbalancingHttpRouteAction s)]) where
+instance P.HasAction (IploadbalancingHttpRouteResource s) (TF.Attr s [TF.Attr s (ActionSetting s)]) where
     action =
-        P.lens (_action :: IploadbalancingHttpRouteResource s -> TF.Attr s [TF.Attr s (IploadbalancingHttpRouteAction s)])
+        P.lens (_action :: IploadbalancingHttpRouteResource s -> TF.Attr s [TF.Attr s (ActionSetting s)])
                (\s a -> s { _action = a } :: IploadbalancingHttpRouteResource s)
 
 instance P.HasDisplayName (IploadbalancingHttpRouteResource s) (TF.Attr s P.Text) where
@@ -569,12 +564,12 @@ instance P.HasServiceName (IploadbalancingHttpRouteResource s) (TF.Attr s P.Text
         P.lens (_serviceName :: IploadbalancingHttpRouteResource s -> TF.Attr s P.Text)
                (\s a -> s { _serviceName = a } :: IploadbalancingHttpRouteResource s)
 
-instance P.HasWeight (IploadbalancingHttpRouteResource s) (TF.Attr s P.Integer) where
+instance P.HasWeight (IploadbalancingHttpRouteResource s) (TF.Attr s P.Int) where
     weight =
-        P.lens (_weight :: IploadbalancingHttpRouteResource s -> TF.Attr s P.Integer)
+        P.lens (_weight :: IploadbalancingHttpRouteResource s -> TF.Attr s P.Int)
                (\s a -> s { _weight = a } :: IploadbalancingHttpRouteResource s)
 
-instance s ~ s' => P.HasComputedFrontendId (TF.Ref s' (IploadbalancingHttpRouteResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedFrontendId (TF.Ref s' (IploadbalancingHttpRouteResource s)) (TF.Attr s P.Int) where
     computedFrontendId x = TF.compute (TF.refKey x) "frontend_id"
 
 -- | @ovh_iploadbalancing_http_route_rule@ Resource.
@@ -606,7 +601,7 @@ data IploadbalancingHttpRouteRuleResource s = IploadbalancingHttpRouteRuleResour
     , _subField    :: TF.Attr s P.Text
     -- ^ @sub_field@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 iploadbalancingHttpRouteRuleResource
     :: TF.Attr s P.Text -- ^ @field@ - 'P.field'
@@ -615,7 +610,7 @@ iploadbalancingHttpRouteRuleResource
     -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
     -> P.Resource (IploadbalancingHttpRouteRuleResource s)
 iploadbalancingHttpRouteRuleResource _field _match _routeId _serviceName =
-    TF.newResource "ovh_iploadbalancing_http_route_rule" TF.validator $
+    TF.unsafeResource "ovh_iploadbalancing_http_route_rule" P.defaultProvider TF.validator $
         IploadbalancingHttpRouteRuleResource'
             { _displayName = TF.Nil
             , _field = _field
@@ -693,10 +688,10 @@ data IploadbalancingTcpFarmResource s = IploadbalancingTcpFarmResource'
     , _displayName    :: TF.Attr s P.Text
     -- ^ @display_name@ - (Optional)
     --
-    , _port           :: TF.Attr s P.Integer
+    , _port           :: TF.Attr s P.Int
     -- ^ @port@ - (Optional)
     --
-    , _probe          :: TF.Attr s [TF.Attr s (IploadbalancingTcpFarmProbe s)]
+    , _probe          :: TF.Attr s [TF.Attr s (ProbeSetting s)]
     -- ^ @probe@ - (Optional)
     --
     , _serviceName    :: TF.Attr s P.Text
@@ -705,20 +700,20 @@ data IploadbalancingTcpFarmResource s = IploadbalancingTcpFarmResource'
     , _stickiness     :: TF.Attr s P.Text
     -- ^ @stickiness@ - (Optional)
     --
-    , _vrackNetworkId :: TF.Attr s P.Integer
+    , _vrackNetworkId :: TF.Attr s P.Int
     -- ^ @vrack_network_id@ - (Optional)
     --
     , _zone           :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 iploadbalancingTcpFarmResource
     :: TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (IploadbalancingTcpFarmResource s)
 iploadbalancingTcpFarmResource _serviceName _zone =
-    TF.newResource "ovh_iploadbalancing_tcp_farm" TF.validator $
+    TF.unsafeResource "ovh_iploadbalancing_tcp_farm" P.defaultProvider TF.validator $
         IploadbalancingTcpFarmResource'
             { _balance = TF.Nil
             , _displayName = TF.Nil
@@ -744,10 +739,6 @@ instance TF.IsObject (IploadbalancingTcpFarmResource s) where
 
 instance TF.IsValid (IploadbalancingTcpFarmResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_probe"
-                  (_probe
-                      :: IploadbalancingTcpFarmResource s -> TF.Attr s [TF.Attr s (IploadbalancingTcpFarmProbe s)])
-                  TF.validator
 
 instance P.HasBalance (IploadbalancingTcpFarmResource s) (TF.Attr s P.Text) where
     balance =
@@ -759,14 +750,14 @@ instance P.HasDisplayName (IploadbalancingTcpFarmResource s) (TF.Attr s P.Text) 
         P.lens (_displayName :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Text)
                (\s a -> s { _displayName = a } :: IploadbalancingTcpFarmResource s)
 
-instance P.HasPort (IploadbalancingTcpFarmResource s) (TF.Attr s P.Integer) where
+instance P.HasPort (IploadbalancingTcpFarmResource s) (TF.Attr s P.Int) where
     port =
-        P.lens (_port :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Integer)
+        P.lens (_port :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: IploadbalancingTcpFarmResource s)
 
-instance P.HasProbe (IploadbalancingTcpFarmResource s) (TF.Attr s [TF.Attr s (IploadbalancingTcpFarmProbe s)]) where
+instance P.HasProbe (IploadbalancingTcpFarmResource s) (TF.Attr s [TF.Attr s (ProbeSetting s)]) where
     probe =
-        P.lens (_probe :: IploadbalancingTcpFarmResource s -> TF.Attr s [TF.Attr s (IploadbalancingTcpFarmProbe s)])
+        P.lens (_probe :: IploadbalancingTcpFarmResource s -> TF.Attr s [TF.Attr s (ProbeSetting s)])
                (\s a -> s { _probe = a } :: IploadbalancingTcpFarmResource s)
 
 instance P.HasServiceName (IploadbalancingTcpFarmResource s) (TF.Attr s P.Text) where
@@ -779,9 +770,9 @@ instance P.HasStickiness (IploadbalancingTcpFarmResource s) (TF.Attr s P.Text) w
         P.lens (_stickiness :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Text)
                (\s a -> s { _stickiness = a } :: IploadbalancingTcpFarmResource s)
 
-instance P.HasVrackNetworkId (IploadbalancingTcpFarmResource s) (TF.Attr s P.Integer) where
+instance P.HasVrackNetworkId (IploadbalancingTcpFarmResource s) (TF.Attr s P.Int) where
     vrackNetworkId =
-        P.lens (_vrackNetworkId :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Integer)
+        P.lens (_vrackNetworkId :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Int)
                (\s a -> s { _vrackNetworkId = a } :: IploadbalancingTcpFarmResource s)
 
 instance P.HasZone (IploadbalancingTcpFarmResource s) (TF.Attr s P.Text) where
@@ -806,10 +797,10 @@ data IploadbalancingTcpFarmServerResource s = IploadbalancingTcpFarmServerResour
     , _displayName          :: TF.Attr s P.Text
     -- ^ @display_name@ - (Optional)
     --
-    , _farmId               :: TF.Attr s P.Integer
+    , _farmId               :: TF.Attr s P.Int
     -- ^ @farm_id@ - (Required, Forces New)
     --
-    , _port                 :: TF.Attr s P.Integer
+    , _port                 :: TF.Attr s P.Int
     -- ^ @port@ - (Optional)
     --
     , _probe                :: TF.Attr s P.Bool
@@ -827,19 +818,19 @@ data IploadbalancingTcpFarmServerResource s = IploadbalancingTcpFarmServerResour
     , _status               :: TF.Attr s P.Text
     -- ^ @status@ - (Required)
     --
-    , _weight               :: TF.Attr s P.Integer
+    , _weight               :: TF.Attr s P.Int
     -- ^ @weight@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 iploadbalancingTcpFarmServerResource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
-    -> TF.Attr s P.Integer -- ^ @farm_id@ - 'P.farmId'
+    -> TF.Attr s P.Int -- ^ @farm_id@ - 'P.farmId'
     -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
     -> TF.Attr s P.Text -- ^ @status@ - 'P.status'
     -> P.Resource (IploadbalancingTcpFarmServerResource s)
 iploadbalancingTcpFarmServerResource _address _farmId _serviceName _status =
-    TF.newResource "ovh_iploadbalancing_tcp_farm_server" TF.validator $
+    TF.unsafeResource "ovh_iploadbalancing_tcp_farm_server" P.defaultProvider TF.validator $
         IploadbalancingTcpFarmServerResource'
             { _address = _address
             , _backup = TF.value P.False
@@ -894,14 +885,14 @@ instance P.HasDisplayName (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.
         P.lens (_displayName :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _displayName = a } :: IploadbalancingTcpFarmServerResource s)
 
-instance P.HasFarmId (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Integer) where
+instance P.HasFarmId (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Int) where
     farmId =
-        P.lens (_farmId :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Integer)
+        P.lens (_farmId :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Int)
                (\s a -> s { _farmId = a } :: IploadbalancingTcpFarmServerResource s)
 
-instance P.HasPort (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Integer) where
+instance P.HasPort (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Int) where
     port =
-        P.lens (_port :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Integer)
+        P.lens (_port :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: IploadbalancingTcpFarmServerResource s)
 
 instance P.HasProbe (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Bool) where
@@ -929,9 +920,9 @@ instance P.HasStatus (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text)
         P.lens (_status :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _status = a } :: IploadbalancingTcpFarmServerResource s)
 
-instance P.HasWeight (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Integer) where
+instance P.HasWeight (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Int) where
     weight =
-        P.lens (_weight :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Integer)
+        P.lens (_weight :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Int)
                (\s a -> s { _weight = a } :: IploadbalancingTcpFarmServerResource s)
 
 instance s ~ s' => P.HasComputedCookie (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
@@ -948,17 +939,17 @@ data PubliccloudPrivateNetworkResource s = PubliccloudPrivateNetworkResource'
     , _projectId :: TF.Attr s P.Text
     -- ^ @project_id@ - (Required, Forces New)
     --
-    , _vlanId    :: TF.Attr s P.Integer
+    , _vlanId    :: TF.Attr s P.Int
     -- ^ @vlan_id@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 publiccloudPrivateNetworkResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.Resource (PubliccloudPrivateNetworkResource s)
 publiccloudPrivateNetworkResource _name _projectId =
-    TF.newResource "ovh_publiccloud_private_network" TF.validator $
+    TF.unsafeResource "ovh_publiccloud_private_network" P.defaultProvider TF.validator $
         PubliccloudPrivateNetworkResource'
             { _name = _name
             , _projectId = _projectId
@@ -985,15 +976,15 @@ instance P.HasProjectId (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Text)
         P.lens (_projectId :: PubliccloudPrivateNetworkResource s -> TF.Attr s P.Text)
                (\s a -> s { _projectId = a } :: PubliccloudPrivateNetworkResource s)
 
-instance P.HasVlanId (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Integer) where
+instance P.HasVlanId (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Int) where
     vlanId =
-        P.lens (_vlanId :: PubliccloudPrivateNetworkResource s -> TF.Attr s P.Integer)
+        P.lens (_vlanId :: PubliccloudPrivateNetworkResource s -> TF.Attr s P.Int)
                (\s a -> s { _vlanId = a } :: PubliccloudPrivateNetworkResource s)
 
 instance s ~ s' => P.HasComputedRegions (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedRegions x = TF.compute (TF.refKey x) "regions"
 
-instance s ~ s' => P.HasComputedRegionsStatus (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s [TF.Attr s (PubliccloudPrivateNetworkRegionsStatus s)]) where
+instance s ~ s' => P.HasComputedRegionsStatus (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s [TF.Attr s (RegionsStatusSetting s)]) where
     computedRegionsStatus x = TF.compute (TF.refKey x) "regions_status"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
@@ -1031,7 +1022,7 @@ data PubliccloudPrivateNetworkSubnetResource s = PubliccloudPrivateNetworkSubnet
     , _start     :: TF.Attr s P.Text
     -- ^ @start@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 publiccloudPrivateNetworkSubnetResource
     :: TF.Attr s P.Text -- ^ @end@ - 'P.end'
@@ -1042,7 +1033,7 @@ publiccloudPrivateNetworkSubnetResource
     -> TF.Attr s P.Text -- ^ @start@ - 'P.start'
     -> P.Resource (PubliccloudPrivateNetworkSubnetResource s)
 publiccloudPrivateNetworkSubnetResource _end _network _networkId _projectId _region _start =
-    TF.newResource "ovh_publiccloud_private_network_subnet" TF.validator $
+    TF.unsafeResource "ovh_publiccloud_private_network_subnet" P.defaultProvider TF.validator $
         PubliccloudPrivateNetworkSubnetResource'
             { _dhcp = TF.value P.False
             , _end = _end
@@ -1115,7 +1106,7 @@ instance s ~ s' => P.HasComputedCidr (TF.Ref s' (PubliccloudPrivateNetworkSubnet
 instance s ~ s' => P.HasComputedGatewayIp (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
     computedGatewayIp x = TF.compute (TF.refKey x) "gateway_ip"
 
-instance s ~ s' => P.HasComputedIpPools (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s [TF.Attr s (PubliccloudPrivateNetworkSubnetIpPools s)]) where
+instance s ~ s' => P.HasComputedIpPools (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s [TF.Attr s (IpPoolsSetting s)]) where
     computedIpPools x = TF.compute (TF.refKey x) "ip_pools"
 
 -- | @ovh_publiccloud_user@ Resource.
@@ -1129,13 +1120,13 @@ data PubliccloudUserResource s = PubliccloudUserResource'
     , _projectId   :: TF.Attr s P.Text
     -- ^ @project_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 publiccloudUserResource
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.Resource (PubliccloudUserResource s)
 publiccloudUserResource _projectId =
-    TF.newResource "ovh_publiccloud_user" TF.validator $
+    TF.unsafeResource "ovh_publiccloud_user" P.defaultProvider TF.validator $
         PubliccloudUserResource'
             { _description = TF.Nil
             , _projectId = _projectId
@@ -1163,7 +1154,7 @@ instance P.HasProjectId (PubliccloudUserResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
     computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
 
-instance s ~ s' => P.HasComputedOpenstackRc (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedOpenstackRc (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedOpenstackRc x = TF.compute (TF.refKey x) "openstack_rc"
 
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
@@ -1186,14 +1177,14 @@ data VrackCloudprojectResource s = VrackCloudprojectResource'
     , _vrackId   :: TF.Attr s P.Text
     -- ^ @vrack_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 vrackCloudprojectResource
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Text -- ^ @vrack_id@ - 'P.vrackId'
     -> P.Resource (VrackCloudprojectResource s)
 vrackCloudprojectResource _projectId _vrackId =
-    TF.newResource "ovh_vrack_cloudproject" TF.validator $
+    TF.unsafeResource "ovh_vrack_cloudproject" P.defaultProvider TF.validator $
         VrackCloudprojectResource'
             { _projectId = _projectId
             , _vrackId = _vrackId
@@ -1229,14 +1220,14 @@ data VrackPubliccloudAttachmentResource s = VrackPubliccloudAttachmentResource'
     , _vrackId   :: TF.Attr s P.Text
     -- ^ @vrack_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 vrackPubliccloudAttachmentResource
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Text -- ^ @vrack_id@ - 'P.vrackId'
     -> P.Resource (VrackPubliccloudAttachmentResource s)
 vrackPubliccloudAttachmentResource _projectId _vrackId =
-    TF.newResource "ovh_vrack_publiccloud_attachment" TF.validator $
+    TF.unsafeResource "ovh_vrack_publiccloud_attachment" P.defaultProvider TF.validator $
         VrackPubliccloudAttachmentResource'
             { _projectId = _projectId
             , _vrackId = _vrackId

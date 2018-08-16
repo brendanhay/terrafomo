@@ -58,10 +58,9 @@ import GHC.Base (($))
 
 import Terrafomo.OVH.Settings
 
-import qualified Data.Hashable          as P
-import qualified Data.HashMap.Strict    as P
-import qualified Data.HashMap.Strict    as Map
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Map.Strict        as P
+import qualified Data.Map.Strict        as Map
 import qualified Data.Maybe             as P
 import qualified Data.Monoid            as P
 import qualified Data.Text              as P
@@ -88,14 +87,14 @@ data CloudRegionData s = CloudRegionData'
     , _projectId :: TF.Attr s P.Text
     -- ^ @project_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 cloudRegionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.DataSource (CloudRegionData s)
 cloudRegionData _name _projectId =
-    TF.newDataSource "ovh_cloud_region" TF.validator $
+    TF.unsafeDataSource "ovh_cloud_region" P.defaultProvider TF.validator $
         CloudRegionData'
             { _name = _name
             , _projectId = _projectId
@@ -129,7 +128,7 @@ instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (CloudRegionData s)) (T
 instance s ~ s' => P.HasComputedDatacenterLocation (TF.Ref s' (CloudRegionData s)) (TF.Attr s P.Text) where
     computedDatacenterLocation x = TF.compute (TF.refKey x) "datacenter_location"
 
-instance s ~ s' => P.HasComputedServices (TF.Ref s' (CloudRegionData s)) (TF.Attr s [TF.Attr s (CloudRegionServices s)]) where
+instance s ~ s' => P.HasComputedServices (TF.Ref s' (CloudRegionData s)) (TF.Attr s [TF.Attr s (ServicesSetting s)]) where
     computedServices x = TF.compute (TF.refKey x) "services"
 
 -- | @ovh_cloud_regions@ DataSource.
@@ -140,13 +139,13 @@ data CloudRegionsData s = CloudRegionsData'
     { _projectId :: TF.Attr s P.Text
     -- ^ @project_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 cloudRegionsData
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.DataSource (CloudRegionsData s)
 cloudRegionsData _projectId =
-    TF.newDataSource "ovh_cloud_regions" TF.validator $
+    TF.unsafeDataSource "ovh_cloud_regions" P.defaultProvider TF.validator $
         CloudRegionsData'
             { _projectId = _projectId
             }
@@ -178,13 +177,13 @@ data DomainZoneData s = DomainZoneData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 domainZoneData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DomainZoneData s)
 domainZoneData _name =
-    TF.newDataSource "ovh_domain_zone" TF.validator $
+    TF.unsafeDataSource "ovh_domain_zone" P.defaultProvider TF.validator $
         DomainZoneData'
             { _name = _name
             }
@@ -222,12 +221,12 @@ instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (DomainZoneData s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/ovh/d/iploadbalancing.html terraform documentation>
 -- for more information.
 data IploadbalancingData s = IploadbalancingData'
-    deriving (P.Show, P.Eq, P.Generic)
+    deriving (P.Show, P.Eq, P.Ord)
 
 iploadbalancingData
     :: P.DataSource (IploadbalancingData s)
 iploadbalancingData =
-    TF.newDataSource "ovh_iploadbalancing" TF.validator $
+    TF.unsafeDataSource "ovh_iploadbalancing" P.defaultProvider TF.validator $
         IploadbalancingData'
 
 instance TF.IsObject (IploadbalancingData s) where
@@ -257,7 +256,7 @@ instance s ~ s' => P.HasComputedMetricsToken (TF.Ref s' (IploadbalancingData s))
 instance s ~ s' => P.HasComputedOffer (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
     computedOffer x = TF.compute (TF.refKey x) "offer"
 
-instance s ~ s' => P.HasComputedOrderableZone (TF.Ref s' (IploadbalancingData s)) (TF.Attr s [TF.Attr s (IploadbalancingOrderableZone s)]) where
+instance s ~ s' => P.HasComputedOrderableZone (TF.Ref s' (IploadbalancingData s)) (TF.Attr s [TF.Attr s (OrderableZoneSetting s)]) where
     computedOrderableZone x = TF.compute (TF.refKey x) "orderable_zone"
 
 instance s ~ s' => P.HasComputedServiceName (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
@@ -292,12 +291,12 @@ data MePaymentmeanBankaccountData s = MePaymentmeanBankaccountData'
     , _useOldest         :: TF.Attr s P.Bool
     -- ^ @use_oldest@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 mePaymentmeanBankaccountData
     :: P.DataSource (MePaymentmeanBankaccountData s)
 mePaymentmeanBankaccountData =
-    TF.newDataSource "ovh_me_paymentmean_bankaccount" TF.validator $
+    TF.unsafeDataSource "ovh_me_paymentmean_bankaccount" P.defaultProvider TF.validator $
         MePaymentmeanBankaccountData'
             { _descriptionRegexp = TF.value ".*"
             , _useDefault = TF.value P.False
@@ -358,12 +357,12 @@ data MePaymentmeanCreditcardData s = MePaymentmeanCreditcardData'
     , _useLastToExpire   :: TF.Attr s P.Bool
     -- ^ @use_last_to_expire@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 mePaymentmeanCreditcardData
     :: P.DataSource (MePaymentmeanCreditcardData s)
 mePaymentmeanCreditcardData =
-    TF.newDataSource "ovh_me_paymentmean_creditcard" TF.validator $
+    TF.unsafeDataSource "ovh_me_paymentmean_creditcard" P.defaultProvider TF.validator $
         MePaymentmeanCreditcardData'
             { _descriptionRegexp = TF.value ".*"
             , _states = TF.Nil
@@ -425,14 +424,14 @@ data PubliccloudRegionData s = PubliccloudRegionData'
     , _projectId :: TF.Attr s P.Text
     -- ^ @project_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 publiccloudRegionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.DataSource (PubliccloudRegionData s)
 publiccloudRegionData _name _projectId =
-    TF.newDataSource "ovh_publiccloud_region" TF.validator $
+    TF.unsafeDataSource "ovh_publiccloud_region" P.defaultProvider TF.validator $
         PubliccloudRegionData'
             { _name = _name
             , _projectId = _projectId
@@ -466,7 +465,7 @@ instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (PubliccloudRegionData 
 instance s ~ s' => P.HasComputedDatacenterLocation (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s P.Text) where
     computedDatacenterLocation x = TF.compute (TF.refKey x) "datacenter_location"
 
-instance s ~ s' => P.HasComputedServices (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s [TF.Attr s (PubliccloudRegionServices s)]) where
+instance s ~ s' => P.HasComputedServices (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s [TF.Attr s (ServicesSetting s)]) where
     computedServices x = TF.compute (TF.refKey x) "services"
 
 -- | @ovh_publiccloud_regions@ DataSource.
@@ -477,13 +476,13 @@ data PubliccloudRegionsData s = PubliccloudRegionsData'
     { _projectId :: TF.Attr s P.Text
     -- ^ @project_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 publiccloudRegionsData
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.DataSource (PubliccloudRegionsData s)
 publiccloudRegionsData _projectId =
-    TF.newDataSource "ovh_publiccloud_regions" TF.validator $
+    TF.unsafeDataSource "ovh_publiccloud_regions" P.defaultProvider TF.validator $
         PubliccloudRegionsData'
             { _projectId = _projectId
             }

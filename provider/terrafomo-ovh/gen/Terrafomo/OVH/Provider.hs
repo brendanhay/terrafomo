@@ -20,6 +20,7 @@ module Terrafomo.OVH.Provider
     -- * OVH Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * OVH Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.OVH.Settings
 
-import qualified Data.Hashable       as P
-import qualified Data.HashMap.Strict as P
-import qualified Data.HashMap.Strict as Map
 import qualified Data.List.NonEmpty  as P
+import qualified Data.Map.Strict     as P
+import qualified Data.Map.Strict     as Map
 import qualified Data.Maybe          as P
 import qualified Data.Monoid         as P
 import qualified Data.Text           as P
@@ -77,7 +77,7 @@ data Provider = Provider'
     -- ^ @endpoint@ - (Required)
     -- The OVH API endpoint to target (ex: "ovh-eu").
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: P.Text -- ^ @endpoint@ - 'P.endpoint'
@@ -90,24 +90,21 @@ newProvider _endpoint =
         , _endpoint = _endpoint
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "application_key" <$> _applicationKey
-                  , TF.assign "application_secret" <$> _applicationSecret
-                  , TF.assign "consumer_key" <$> _consumerKey
-                  , P.Just $ TF.assign "endpoint" _endpoint
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  TF.assign "application_key" <$> _applicationKey
+        ,  TF.assign "application_secret" <$> _applicationSecret
+        ,  TF.assign "consumer_key" <$> _consumerKey
+        ,  P.Just $ TF.assign "endpoint" _endpoint
+        ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty

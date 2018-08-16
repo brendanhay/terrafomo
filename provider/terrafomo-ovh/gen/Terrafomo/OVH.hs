@@ -14,9 +14,9 @@
 module Terrafomo.OVH
     ( module Terrafomo.OVH.DataSource
     , module Terrafomo.OVH.Lens
-    , module Terrafomo.OVH.Settings
     , module Terrafomo.OVH.Provider
     , module Terrafomo.OVH.Resource
+    , module Terrafomo.OVH.Settings
     , module Terrafomo.OVH.Types
     -- * Provider Aliases
     ) where
