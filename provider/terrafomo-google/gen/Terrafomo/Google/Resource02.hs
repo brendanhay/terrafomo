@@ -2058,14 +2058,14 @@ data SqlDatabaseInstanceResource s = SqlDatabaseInstanceResource'
     , _replicaConfiguration :: TF.Attr s (ReplicaConfigurationSetting s)
     -- ^ @replica_configuration@ - (Optional)
     --
-    , _settings             :: TF.Attr s (SettingsSetting s)
+    , _settings             :: TF.Attr s (Settings s)
     -- ^ @settings@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_sql_database_instance@ resource value.
 sqlDatabaseInstanceResource
-    :: TF.Attr s (SettingsSetting s) -- ^ @settings@ ('P._settings', 'P.settings')
+    :: TF.Attr s (Settings s) -- ^ @settings@ ('P._settings', 'P.settings')
     -> P.Resource (SqlDatabaseInstanceResource s)
 sqlDatabaseInstanceResource _settings =
     TF.unsafeResource "google_sql_database_instance" TF.validator $
@@ -2098,7 +2098,7 @@ instance TF.IsValid (SqlDatabaseInstanceResource s) where
                   TF.validator
            P.<> TF.settingsValidator "_settings"
                   (_settings
-                      :: SqlDatabaseInstanceResource s -> TF.Attr s (SettingsSetting s))
+                      :: SqlDatabaseInstanceResource s -> TF.Attr s (Settings s))
                   TF.validator
 
 instance P.HasDatabaseVersion (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
@@ -2131,9 +2131,9 @@ instance P.HasReplicaConfiguration (SqlDatabaseInstanceResource s) (TF.Attr s (R
         P.lens (_replicaConfiguration :: SqlDatabaseInstanceResource s -> TF.Attr s (ReplicaConfigurationSetting s))
                (\s a -> s { _replicaConfiguration = a } :: SqlDatabaseInstanceResource s)
 
-instance P.HasSettings (SqlDatabaseInstanceResource s) (TF.Attr s (SettingsSetting s)) where
+instance P.HasSettings (SqlDatabaseInstanceResource s) (TF.Attr s (Settings s)) where
     settings =
-        P.lens (_settings :: SqlDatabaseInstanceResource s -> TF.Attr s (SettingsSetting s))
+        P.lens (_settings :: SqlDatabaseInstanceResource s -> TF.Attr s (Settings s))
                (\s a -> s { _settings = a } :: SqlDatabaseInstanceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
