@@ -8,27 +8,33 @@ extra-deps:
   - amazonka-iam-policy >= 0.0.4
 
 field-overrides:
-  provider:
+  # Provider
+
+  Provider:
     region: 'P.Region'
 
-  provider.assume_role:
+  AssumeRoleSetting:
     policy: 'P.Maybe P.Document'
 
-  aws_iam_role:
-    assume_role_policy: 'TF.Attr s P.Document'
+  # Resources
 
-  aws_iam_role_policy:
+  IamRoleResource:
+    assumeRolePolicy: 'TF.Attr s P.Document'
+
+  IamRolePolicyResource:
     policy: 'TF.Attr s P.Document'
 
-  aws_iam_policy:
+  IamPolicyResource:
     policy: 'TF.Attr s P.Document'
 
-  aws_iam_group_policy:
+  IamGroupPolicyResource:
     policy: 'TF.Attr s P.Document'
 
-  aws_security_group_rule:
+  SecurityGroupRuleResource:
     type: 'TF.Attr s P.NetworkTraffic'
     protocol: 'TF.Attr s P.NetworkProtocol'
 
-  aws_dynamodb_table.attribute:
+  # Settings
+
+  AttributeSetting:
     type: 'TF.Attr s P.TableAttributeType'
