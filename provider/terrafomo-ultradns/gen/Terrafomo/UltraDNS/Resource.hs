@@ -174,6 +174,9 @@ instance P.HasZone (DirpoolResource s) (TF.Attr s P.Text) where
         P.lens (_zone :: DirpoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: DirpoolResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DirpoolResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (DirpoolResource s)) (TF.Attr s P.Text) where
     computedHostname x = TF.compute (TF.refKey x) "hostname"
 
@@ -457,6 +460,9 @@ instance P.HasZone (RdpoolResource s) (TF.Attr s P.Text) where
         P.lens (_zone :: RdpoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: RdpoolResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RdpoolResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (RdpoolResource s)) (TF.Attr s P.Text) where
     computedHostname x = TF.compute (TF.refKey x) "hostname"
 
@@ -534,6 +540,9 @@ instance P.HasZone (RecordResource s) (TF.Attr s P.Text) where
     zone =
         P.lens (_zone :: RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: RecordResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedHostname x = TF.compute (TF.refKey x) "hostname"
@@ -662,6 +671,9 @@ instance P.HasZone (TcpoolResource s) (TF.Attr s P.Text) where
     zone =
         P.lens (_zone :: TcpoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: TcpoolResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TcpoolResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (TcpoolResource s)) (TF.Attr s P.Text) where
     computedHostname x = TF.compute (TF.refKey x) "hostname"
