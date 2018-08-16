@@ -401,7 +401,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "server_tags",
+            "name": "tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -439,7 +439,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "server_volume",
+            "name": "volume",
             "schemas": [
               {
                 "name": "size_in_gb",
