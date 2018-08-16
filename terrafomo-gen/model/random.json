@@ -239,7 +239,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "shuffle_input",
+            "name": "input",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -275,7 +275,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "shuffle_result",
+            "name": "result",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
