@@ -93,7 +93,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "chef"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
             , P.Just $ TF.assign "client_name" _clientName
