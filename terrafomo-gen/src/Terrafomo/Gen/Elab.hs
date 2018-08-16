@@ -114,8 +114,9 @@ classes p = (lenses, getters)
 elabResource :: Text -> Text -> [Go.Schema] -> Elab Resource
 elabResource provider original schemas =
     withThreaded $ do
+        x <- elabSchema original (Name.resourceNames original) schemas Nothing
         Resource' (URL.resource provider original)
-            <$> elabSchema original (Name.resourceNames original) schemas Nothing
+            <$> elabIdAttribute x
 
 elabDataSource :: Text -> Text -> [Go.Schema] -> Elab Resource
 elabDataSource provider original schemas =
