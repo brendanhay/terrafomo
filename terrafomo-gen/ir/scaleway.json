@@ -117,6 +117,25 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "Architecture of the desired bootscript"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"architecture\" <$> TF.attribute",
+                    "name": "_architecture",
+                    "method": "architecture",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasArchitecture",
+                    "validate": false,
+                    "optional": true,
+                    "original": "architecture"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "Exact name of the desired bootscript"
                     ],
                     "forceNew": true,
@@ -189,7 +208,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedArchitecture",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "architecture"
                 },
                 {
@@ -367,6 +386,25 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "Exact name of the desired image"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "Partial name of the desired image to filter with"
                     ],
                     "forceNew": true,
@@ -445,7 +483,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 },
                 {
@@ -826,6 +864,25 @@
                     "validate": false,
                     "optional": true,
                     "original": "reverse"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The server associated with the ip"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"server\" <$> TF.attribute",
+                    "name": "_server",
+                    "method": "server",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasServer",
+                    "validate": false,
+                    "optional": true,
+                    "original": "server"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/scaleway/r/ip.html",
@@ -885,7 +942,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedServer",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "server"
                 }
             ],
@@ -1283,6 +1340,25 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "The boot_type of the server"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"boot_type\" <$> TF.attribute",
+                    "name": "_bootType",
+                    "method": "bootType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasBootType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "boot_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "The boot configuration of the server"
                     ],
                     "forceNew": false,
@@ -1378,6 +1454,25 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "The public IPv4 address of the server"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"public_ip\" <$> TF.attribute",
+                    "name": "_publicIp",
+                    "method": "publicIp",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPublicIp",
+                    "validate": false,
+                    "optional": true,
+                    "original": "public_ip"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "The security group the server is attached to"
                     ],
                     "forceNew": false,
@@ -1391,6 +1486,25 @@
                     "validate": false,
                     "optional": true,
                     "original": "security_group"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The server state (running, stopped)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"state\" <$> TF.attribute",
+                    "name": "_state",
+                    "method": "state",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasState",
+                    "validate": false,
+                    "optional": true,
+                    "original": "state"
                 },
                 {
                     "default": "TF.Nil",
@@ -1488,7 +1602,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBootType",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "boot_type"
                 },
                 {
@@ -1526,7 +1640,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPublicIp",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "public_ip"
                 },
                 {
@@ -1564,7 +1678,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedState",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "state"
                 },
                 {
@@ -1750,6 +1864,25 @@
                     "original": "description"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The account email. Defaults to registered user."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"email\" <$> TF.attribute",
+                    "name": "_email",
+                    "method": "email",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEmail",
+                    "validate": false,
+                    "optional": true,
+                    "original": "email"
+                },
+                {
                     "default": "TF.value P.False",
                     "computed": false,
                     "required": false,
@@ -1864,7 +1997,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedEmail",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "email"
                 },
                 {
