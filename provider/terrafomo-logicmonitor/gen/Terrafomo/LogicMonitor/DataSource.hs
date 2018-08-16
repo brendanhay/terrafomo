@@ -17,7 +17,6 @@
 --
 module Terrafomo.LogicMonitor.DataSource
     (
-    -- * DataSource Datatypes
     -- ** logicmonitor_collectors
       CollectorsData (..)
     , collectorsData
@@ -71,6 +70,7 @@ data CollectorsData s = CollectorsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @logicmonitor_collectors@ datasource value.
 collectorsData
     :: P.DataSource (CollectorsData s)
 collectorsData =
@@ -132,6 +132,7 @@ data DeviceGroupData s = DeviceGroupData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @logicmonitor_device_group@ datasource value.
 deviceGroupData
     :: P.DataSource (DeviceGroupData s)
 deviceGroupData =

@@ -17,11 +17,10 @@
 --
 module Terrafomo.LogicMonitor.Provider
     (
-    -- * LogicMonitor Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * LogicMonitor Specific Aliases
+    -- ** LogicMonitor Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -87,7 +86,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "logicmonitor"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "api_id" _apiId
             , P.Just $ TF.assign "api_key" _apiKey

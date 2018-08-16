@@ -17,7 +17,6 @@
 --
 module Terrafomo.LogicMonitor.Resource
     (
-    -- * Resource Datatypes
     -- ** logicmonitor_collector
       CollectorResource (..)
     , collectorResource
@@ -91,6 +90,7 @@ data CollectorResource s = CollectorResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @logicmonitor_collector@ resource value.
 collectorResource
     :: P.Resource (CollectorResource s)
 collectorResource =
@@ -177,6 +177,7 @@ data CollectorGroupResource s = CollectorGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @logicmonitor_collector_group@ resource value.
 collectorGroupResource
     :: P.Resource (CollectorGroupResource s)
 collectorGroupResource =
@@ -236,6 +237,7 @@ data DeviceResource s = DeviceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @logicmonitor_device@ resource value.
 deviceResource
     :: TF.Attr s P.Text -- ^ @ip_addr@ - 'P.ipAddr'
     -> TF.Attr s P.Int -- ^ @collector@ - 'P.collector'
@@ -329,6 +331,7 @@ data DeviceGroupResource s = DeviceGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @logicmonitor_device_group@ resource value.
 deviceGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DeviceGroupResource s)
