@@ -89,9 +89,9 @@ data AlertChannelResource s = AlertChannelResource'
 
 -- | Define a new @newrelic_alert_channel@ resource value.
 alertChannelResource
-    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @configuration@ - 'P.configuration'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @configuration@ ('P._configuration', 'P.configuration')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (AlertChannelResource s)
 alertChannelResource _configuration _name _type' =
     TF.unsafeResource "newrelic_alert_channel" TF.validator $
@@ -174,12 +174,12 @@ data AlertConditionResource s = AlertConditionResource'
 
 -- | Define a new @newrelic_alert_condition@ resource value.
 alertConditionResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Int)) -- ^ @entities@ - 'P.entities'
-    -> TF.Attr s P.Int -- ^ @policy_id@ - 'P.policyId'
-    -> TF.Attr s P.Text -- ^ @metric@ - 'P.metric'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (TermSetting s))) -- ^ @term@ - 'P.term'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Int)) -- ^ @entities@ ('P._entities', 'P.entities')
+    -> TF.Attr s P.Int -- ^ @policy_id@ ('P._policyId', 'P.policyId')
+    -> TF.Attr s P.Text -- ^ @metric@ ('P._metric', 'P.metric')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (TermSetting s))) -- ^ @term@ ('P._term', 'P.term')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (AlertConditionResource s)
 alertConditionResource _entities _policyId _metric _name _term _type' =
     TF.unsafeResource "newrelic_alert_condition" TF.validator $
@@ -295,7 +295,7 @@ data AlertPolicyResource s = AlertPolicyResource'
 
 -- | Define a new @newrelic_alert_policy@ resource value.
 alertPolicyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (AlertPolicyResource s)
 alertPolicyResource _name =
     TF.unsafeResource "newrelic_alert_policy" TF.validator $
@@ -347,8 +347,8 @@ data AlertPolicyChannelResource s = AlertPolicyChannelResource'
 
 -- | Define a new @newrelic_alert_policy_channel@ resource value.
 alertPolicyChannelResource
-    :: TF.Attr s P.Int -- ^ @channel_id@ - 'P.channelId'
-    -> TF.Attr s P.Int -- ^ @policy_id@ - 'P.policyId'
+    :: TF.Attr s P.Int -- ^ @channel_id@ ('P._channelId', 'P.channelId')
+    -> TF.Attr s P.Int -- ^ @policy_id@ ('P._policyId', 'P.policyId')
     -> P.Resource (AlertPolicyChannelResource s)
 alertPolicyChannelResource _channelId _policyId =
     TF.unsafeResource "newrelic_alert_policy_channel" TF.validator $
@@ -403,7 +403,7 @@ data DashboardResource s = DashboardResource'
 
 -- | Define a new @newrelic_dashboard@ resource value.
 dashboardResource
-    :: TF.Attr s P.Text -- ^ @title@ - 'P.title'
+    :: TF.Attr s P.Text -- ^ @title@ ('P._title', 'P.title')
     -> P.Resource (DashboardResource s)
 dashboardResource _title =
     TF.unsafeResource "newrelic_dashboard" TF.validator $
@@ -500,9 +500,9 @@ data InfraAlertConditionResource s = InfraAlertConditionResource'
 
 -- | Define a new @newrelic_infra_alert_condition@ resource value.
 infraAlertConditionResource
-    :: TF.Attr s P.Int -- ^ @policy_id@ - 'P.policyId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Int -- ^ @policy_id@ ('P._policyId', 'P.policyId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (InfraAlertConditionResource s)
 infraAlertConditionResource _policyId _name _type' =
     TF.unsafeResource "newrelic_infra_alert_condition" TF.validator $
@@ -640,10 +640,10 @@ data NrqlAlertConditionResource s = NrqlAlertConditionResource'
 
 -- | Define a new @newrelic_nrql_alert_condition@ resource value.
 nrqlAlertConditionResource
-    :: TF.Attr s P.Int -- ^ @policy_id@ - 'P.policyId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (NrqlSetting s) -- ^ @nrql@ - 'P.nrql'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (TermSetting s))) -- ^ @term@ - 'P.term'
+    :: TF.Attr s P.Int -- ^ @policy_id@ ('P._policyId', 'P.policyId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s (NrqlSetting s) -- ^ @nrql@ ('P._nrql', 'P.nrql')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (TermSetting s))) -- ^ @term@ ('P._term', 'P.term')
     -> P.Resource (NrqlAlertConditionResource s)
 nrqlAlertConditionResource _policyId _name _nrql _term =
     TF.unsafeResource "newrelic_nrql_alert_condition" TF.validator $

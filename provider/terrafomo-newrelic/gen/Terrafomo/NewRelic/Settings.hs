@@ -75,7 +75,7 @@ data CriticalSetting s = CriticalSetting'
 
 -- | Construct a new @critical@ settings value.
 newCriticalSetting
-    :: TF.Attr s P.Int -- ^ @duration@ - 'P.duration'
+    :: TF.Attr s P.Int -- ^ 'P._duration': @duration@
     -> CriticalSetting s
 newCriticalSetting _duration =
     CriticalSetting'
@@ -122,8 +122,8 @@ data NrqlSetting s = NrqlSetting'
 
 -- | Construct a new @nrql@ settings value.
 newNrqlSetting
-    :: TF.Attr s P.Text -- ^ @query@ - 'P.query'
-    -> TF.Attr s P.Text -- ^ @since_value@ - 'P.sinceValue'
+    :: TF.Attr s P.Text -- ^ 'P._query': @query@
+    -> TF.Attr s P.Text -- ^ 'P._sinceValue': @since_value@
     -> NrqlSetting s
 newNrqlSetting _query _sinceValue =
     NrqlSetting'
@@ -172,9 +172,9 @@ data TermSetting s = TermSetting'
 
 -- | Construct a new @term@ settings value.
 newTermSetting
-    :: TF.Attr s P.Int -- ^ @duration@ - 'P.duration'
-    -> TF.Attr s P.Text -- ^ @time_function@ - 'P.timeFunction'
-    -> TF.Attr s P.Double -- ^ @threshold@ - 'P.threshold'
+    :: TF.Attr s P.Int -- ^ 'P._duration': @duration@
+    -> TF.Attr s P.Text -- ^ 'P._timeFunction': @time_function@
+    -> TF.Attr s P.Double -- ^ 'P._threshold': @threshold@
     -> TermSetting s
 newTermSetting _duration _timeFunction _threshold =
     TermSetting'
@@ -238,7 +238,7 @@ data WarningSetting s = WarningSetting'
 
 -- | Construct a new @warning@ settings value.
 newWarningSetting
-    :: TF.Attr s P.Int -- ^ @duration@ - 'P.duration'
+    :: TF.Attr s P.Int -- ^ 'P._duration': @duration@
     -> WarningSetting s
 newWarningSetting _duration =
     WarningSetting'
@@ -303,10 +303,10 @@ data WidgetSetting s = WidgetSetting'
 
 -- | Construct a new @widget@ settings value.
 newWidgetSetting
-    :: TF.Attr s P.Int -- ^ @column@ - 'P.column'
-    -> TF.Attr s P.Int -- ^ @row@ - 'P.row'
-    -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
-    -> TF.Attr s P.Text -- ^ @visualization@ - 'P.visualization'
+    :: TF.Attr s P.Int -- ^ 'P._column': @column@
+    -> TF.Attr s P.Int -- ^ 'P._row': @row@
+    -> TF.Attr s P.Text -- ^ 'P._title': @title@
+    -> TF.Attr s P.Text -- ^ 'P._visualization': @visualization@
     -> WidgetSetting s
 newWidgetSetting _column _row _title _visualization =
     WidgetSetting'

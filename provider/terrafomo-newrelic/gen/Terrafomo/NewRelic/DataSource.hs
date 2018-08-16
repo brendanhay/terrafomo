@@ -63,7 +63,7 @@ data ApplicationData s = ApplicationData'
 
 -- | Define a new @newrelic_application@ datasource value.
 applicationData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ApplicationData s)
 applicationData _name =
     TF.unsafeDataSource "newrelic_application" TF.validator $
@@ -105,7 +105,7 @@ data KeyTransactionData s = KeyTransactionData'
 
 -- | Define a new @newrelic_key_transaction@ datasource value.
 keyTransactionData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (KeyTransactionData s)
 keyTransactionData _name =
     TF.unsafeDataSource "newrelic_key_transaction" TF.validator $
