@@ -17,7 +17,6 @@
 --
 module Terrafomo.CloudStack.Settings
     (
-    -- * Settings Datatypes
     -- ** filter
       FilterSetting (..)
     , newFilterSetting
@@ -63,6 +62,7 @@ data FilterSetting s = FilterSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @filter@ settings value.
 newFilterSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
@@ -112,6 +112,7 @@ data ForwardSetting s = ForwardSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @forward@ settings value.
 newForwardSetting
     :: TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
     -> TF.Attr s P.Int -- ^ @private_port@ - 'P.privatePort'
@@ -190,6 +191,7 @@ data RuleSetting s = RuleSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @rule@ settings value.
 newRuleSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @cidr_list@ - 'P.cidrList'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'

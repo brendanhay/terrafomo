@@ -17,7 +17,6 @@
 --
 module Terrafomo.CloudStack.Resource
     (
-    -- * Resource Datatypes
     -- ** cloudstack_affinity_group
       AffinityGroupResource (..)
     , affinityGroupResource
@@ -156,6 +155,7 @@ data AffinityGroupResource s = AffinityGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_affinity_group@ resource value.
 affinityGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -224,6 +224,7 @@ data DiskResource s = DiskResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_disk@ resource value.
 diskResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
@@ -316,6 +317,7 @@ data EgressFirewallResource s = EgressFirewallResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_egress_firewall@ resource value.
 egressFirewallResource
     :: TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
     -> P.Resource (EgressFirewallResource s)
@@ -381,6 +383,7 @@ data FirewallResource s = FirewallResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_firewall@ resource value.
 firewallResource
     :: TF.Attr s P.Text -- ^ @ip_address_id@ - 'P.ipAddressId'
     -> P.Resource (FirewallResource s)
@@ -476,6 +479,7 @@ data InstanceResource s = InstanceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_instance@ resource value.
 instanceResource
     :: TF.Attr s P.Text -- ^ @service_offering@ - 'P.serviceOffering'
     -> TF.Attr s P.Text -- ^ @template@ - 'P.template'
@@ -630,6 +634,7 @@ data IpaddressResource s = IpaddressResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_ipaddress@ resource value.
 ipaddressResource
     :: P.Resource (IpaddressResource s)
 ipaddressResource =
@@ -712,6 +717,7 @@ data LoadbalancerRuleResource s = LoadbalancerRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_loadbalancer_rule@ resource value.
 loadbalancerRuleResource
     :: TF.Attr s P.Text -- ^ @algorithm@ - 'P.algorithm'
     -> TF.Attr s P.Text -- ^ @ip_address_id@ - 'P.ipAddressId'
@@ -821,6 +827,7 @@ data NetworkResource s = NetworkResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_network@ resource value.
 networkResource
     :: TF.Attr s P.Text -- ^ @cidr@ - 'P.cidr'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -928,6 +935,7 @@ data NetworkAclResource s = NetworkAclResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_network_acl@ resource value.
 networkAclResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -993,6 +1001,7 @@ data NetworkAclRuleResource s = NetworkAclRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_network_acl_rule@ resource value.
 networkAclRuleResource
     :: TF.Attr s P.Text -- ^ @acl_id@ - 'P.aclId'
     -> P.Resource (NetworkAclRuleResource s)
@@ -1059,6 +1068,7 @@ data NicResource s = NicResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_nic@ resource value.
 nicResource
     :: TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
     -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
@@ -1114,6 +1124,7 @@ data PortForwardResource s = PortForwardResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_port_forward@ resource value.
 portForwardResource
     :: TF.Attr s [TF.Attr s (ForwardSetting s)] -- ^ @forward@ - 'P.forward'
     -> TF.Attr s P.Text -- ^ @ip_address_id@ - 'P.ipAddressId'
@@ -1192,6 +1203,7 @@ data PrivateGatewayResource s = PrivateGatewayResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_private_gateway@ resource value.
 privateGatewayResource
     :: TF.Attr s P.Text -- ^ @ip_address@ - 'P.ipAddress'
     -> TF.Attr s P.Text -- ^ @gateway@ - 'P.gateway'
@@ -1281,6 +1293,7 @@ data SecondaryIpaddressResource s = SecondaryIpaddressResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_secondary_ipaddress@ resource value.
 secondaryIpaddressResource
     :: TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
     -> P.Resource (SecondaryIpaddressResource s)
@@ -1322,6 +1335,7 @@ data SecurityGroupResource s = SecurityGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_security_group@ resource value.
 securityGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SecurityGroupResource s)
@@ -1372,6 +1386,7 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_security_group_rule@ resource value.
 securityGroupRuleResource
     :: TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
     -> TF.Attr s [TF.Attr s (RuleSetting s)] -- ^ @rule@ - 'P.rule'
@@ -1435,6 +1450,7 @@ data SshKeypairResource s = SshKeypairResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_ssh_keypair@ resource value.
 sshKeypairResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SshKeypairResource s)
@@ -1493,6 +1509,7 @@ data StaticNatResource s = StaticNatResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_static_nat@ resource value.
 staticNatResource
     :: TF.Attr s P.Text -- ^ @ip_address_id@ - 'P.ipAddressId'
     -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
@@ -1545,6 +1562,7 @@ data StaticRouteResource s = StaticRouteResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_static_route@ resource value.
 staticRouteResource
     :: TF.Attr s P.Text -- ^ @cidr@ - 'P.cidr'
     -> TF.Attr s P.Text -- ^ @gateway_id@ - 'P.gatewayId'
@@ -1606,6 +1624,7 @@ data TemplateResource s = TemplateResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_template@ resource value.
 templateResource
     :: TF.Attr s P.Text -- ^ @format@ - 'P.format'
     -> TF.Attr s P.Text -- ^ @hypervisor@ - 'P.hypervisor'
@@ -1724,6 +1743,7 @@ data VpcResource s = VpcResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_vpc@ resource value.
 vpcResource
     :: TF.Attr s P.Text -- ^ @cidr@ - 'P.cidr'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1801,6 +1821,7 @@ data VpnConnectionResource s = VpnConnectionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_vpn_connection@ resource value.
 vpnConnectionResource
     :: TF.Attr s P.Text -- ^ @customer_gateway_id@ - 'P.customerGatewayId'
     -> TF.Attr s P.Text -- ^ @vpn_gateway_id@ - 'P.vpnGatewayId'
@@ -1859,6 +1880,7 @@ data VpnCustomerGatewayResource s = VpnCustomerGatewayResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_vpn_customer_gateway@ resource value.
 vpnCustomerGatewayResource
     :: TF.Attr s P.Text -- ^ @cidr@ - 'P.cidr'
     -> TF.Attr s P.Text -- ^ @gateway@ - 'P.gateway'
@@ -1946,6 +1968,7 @@ data VpnGatewayResource s = VpnGatewayResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_vpn_gateway@ resource value.
 vpnGatewayResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.Resource (VpnGatewayResource s)

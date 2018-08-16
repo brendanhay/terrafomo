@@ -17,11 +17,10 @@
 --
 module Terrafomo.CloudStack.Provider
     (
-    -- * CloudStack Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * CloudStack Specific Aliases
+    -- ** CloudStack Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -124,7 +123,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "cloudstack"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "api_key" <$> _apiKey
             , TF.assign "api_url" <$> _apiUrl

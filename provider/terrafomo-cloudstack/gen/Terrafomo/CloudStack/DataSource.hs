@@ -17,7 +17,6 @@
 --
 module Terrafomo.CloudStack.DataSource
     (
-    -- * DataSource Datatypes
     -- ** cloudstack_template
       TemplateData (..)
     , templateData
@@ -61,6 +60,7 @@ data TemplateData s = TemplateData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudstack_template@ datasource value.
 templateData
     :: TF.Attr s [TF.Attr s (FilterSetting s)] -- ^ @filter@ - 'P.filter'
     -> TF.Attr s P.Text -- ^ @template_filter@ - 'P.templateFilter'
