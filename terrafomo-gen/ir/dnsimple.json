@@ -44,6 +44,23 @@
                     "original": "name"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"priority\" <$> TF.attribute",
+                    "name": "_priority",
+                    "method": "priority",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPriority",
+                    "validate": false,
+                    "optional": true,
+                    "original": "priority"
+                },
+                {
                     "default": "TF.value \"3600\"",
                     "computed": false,
                     "required": false,
@@ -165,7 +182,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPriority",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "priority"
                 }
             ],
