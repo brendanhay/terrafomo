@@ -717,10 +717,10 @@ data ComputeIpAddressReservationResource s = ComputeIpAddressReservationResource
     } deriving (P.Show, P.Eq, P.Ord)
 
 computeIpAddressReservationResource
-    :: TF.Attr s P.Text -- ^ @ip_address_pool@ - 'P.ipAddressPool'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @ip_address_pool@ - 'P.ipAddressPool'
     -> P.Resource (ComputeIpAddressReservationResource s)
-computeIpAddressReservationResource _ipAddressPool _name =
+computeIpAddressReservationResource _name _ipAddressPool =
     TF.unsafeResource "opc_compute_ip_address_reservation" TF.validator $
         ComputeIpAddressReservationResource'
             { _description = TF.Nil
@@ -838,10 +838,10 @@ data ComputeIpNetworkResource s = ComputeIpNetworkResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 computeIpNetworkResource
-    :: TF.Attr s P.Text -- ^ @ip_address_prefix@ - 'P.ipAddressPrefix'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @ip_address_prefix@ - 'P.ipAddressPrefix'
     -> P.Resource (ComputeIpNetworkResource s)
-computeIpNetworkResource _ipAddressPrefix _name =
+computeIpNetworkResource _name _ipAddressPrefix =
     TF.unsafeResource "opc_compute_ip_network" TF.validator $
         ComputeIpNetworkResource'
             { _description = TF.Nil
@@ -1132,11 +1132,11 @@ data ComputeOrchestratedInstanceResource s = ComputeOrchestratedInstanceResource
     } deriving (P.Show, P.Eq, P.Ord)
 
 computeOrchestratedInstanceResource
-    :: TF.Attr s P.Text -- ^ @desired_state@ - 'P.desiredState'
-    -> TF.Attr s [TF.Attr s (InstanceSetting s)] -- ^ @instance@ - 'P.instance''
+    :: TF.Attr s [TF.Attr s (InstanceSetting s)] -- ^ @instance@ - 'P.instance''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @desired_state@ - 'P.desiredState'
     -> P.Resource (ComputeOrchestratedInstanceResource s)
-computeOrchestratedInstanceResource _desiredState _instance' _name =
+computeOrchestratedInstanceResource _instance' _name _desiredState =
     TF.unsafeResource "opc_compute_orchestrated_instance" TF.validator $
         ComputeOrchestratedInstanceResource'
             { _description = TF.Nil
@@ -1212,11 +1212,11 @@ data ComputeRouteResource s = ComputeRouteResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 computeRouteResource
-    :: TF.Attr s P.Text -- ^ @ip_address_prefix@ - 'P.ipAddressPrefix'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @ip_address_prefix@ - 'P.ipAddressPrefix'
     -> TF.Attr s P.Text -- ^ @next_hop_vnic_set@ - 'P.nextHopVnicSet'
     -> P.Resource (ComputeRouteResource s)
-computeRouteResource _ipAddressPrefix _name _nextHopVnicSet =
+computeRouteResource _name _ipAddressPrefix _nextHopVnicSet =
     TF.unsafeResource "opc_compute_route" TF.validator $
         ComputeRouteResource'
             { _adminDistance = TF.Nil
@@ -1302,10 +1302,10 @@ computeSecRuleResource
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @application@ - 'P.application'
     -> TF.Attr s P.Text -- ^ @destination_list@ - 'P.destinationList'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @source_list@ - 'P.sourceList'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSecRuleResource s)
-computeSecRuleResource _action _application _destinationList _name _sourceList =
+computeSecRuleResource _action _application _destinationList _sourceList _name =
     TF.unsafeResource "opc_compute_sec_rule" TF.validator $
         ComputeSecRuleResource'
             { _action = _action
@@ -2428,13 +2428,13 @@ data LbaasListenerResource s = LbaasListenerResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 lbaasListenerResource
-    :: TF.Attr s P.Text -- ^ @balancer_protocol@ - 'P.balancerProtocol'
-    -> TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
+    :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
+    -> TF.Attr s P.Text -- ^ @balancer_protocol@ - 'P.balancerProtocol'
     -> TF.Attr s P.Text -- ^ @server_protocol@ - 'P.serverProtocol'
     -> P.Resource (LbaasListenerResource s)
-lbaasListenerResource _balancerProtocol _loadBalancer _name _port _serverProtocol =
+lbaasListenerResource _loadBalancer _name _port _balancerProtocol _serverProtocol =
     TF.unsafeResource "opc_lbaas_listener" TF.validator $
         LbaasListenerResource'
             { _balancerProtocol = _balancerProtocol

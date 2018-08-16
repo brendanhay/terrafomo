@@ -676,12 +676,12 @@ data RateLimitingRequestPolicySetting s = RateLimitingRequestPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newRateLimitingRequestPolicySetting
-    :: TF.Attr s P.Int -- ^ @burst_size@ - 'P.burstSize'
-    -> TF.Attr s P.Bool -- ^ @delay_excessive_requests@ - 'P.delayExcessiveRequests'
+    :: TF.Attr s P.Bool -- ^ @delay_excessive_requests@ - 'P.delayExcessiveRequests'
     -> TF.Attr s P.Int -- ^ @requests_per_second@ - 'P.requestsPerSecond'
+    -> TF.Attr s P.Int -- ^ @burst_size@ - 'P.burstSize'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> RateLimitingRequestPolicySetting s
-newRateLimitingRequestPolicySetting _burstSize _delayExcessiveRequests _requestsPerSecond _zone =
+newRateLimitingRequestPolicySetting _delayExcessiveRequests _requestsPerSecond _burstSize _zone =
     RateLimitingRequestPolicySetting'
         { _burstSize = _burstSize
         , _delayExcessiveRequests = _delayExcessiveRequests
@@ -760,10 +760,10 @@ data RedirectPolicySetting s = RedirectPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newRedirectPolicySetting
-    :: TF.Attr s P.Text -- ^ @redirect_uri@ - 'P.redirectUri'
-    -> TF.Attr s P.Int -- ^ @response_code@ - 'P.responseCode'
+    :: TF.Attr s P.Int -- ^ @response_code@ - 'P.responseCode'
+    -> TF.Attr s P.Text -- ^ @redirect_uri@ - 'P.redirectUri'
     -> RedirectPolicySetting s
-newRedirectPolicySetting _redirectUri _responseCode =
+newRedirectPolicySetting _responseCode _redirectUri =
     RedirectPolicySetting'
         { _redirectUri = _redirectUri
         , _responseCode = _responseCode

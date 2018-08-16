@@ -338,10 +338,10 @@ data ComputeNetworkInterfaceData s = ComputeNetworkInterfaceData'
 
 computeNetworkInterfaceData
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
-    -> TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
     -> TF.Attr s P.Text -- ^ @interface@ - 'P.interface'
+    -> TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
     -> P.DataSource (ComputeNetworkInterfaceData s)
-computeNetworkInterfaceData _instanceId _instanceName _interface =
+computeNetworkInterfaceData _instanceId _interface _instanceName =
     TF.unsafeDataSource "opc_compute_network_interface" TF.validator $
         ComputeNetworkInterfaceData'
             { _instanceId = _instanceId
