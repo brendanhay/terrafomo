@@ -153,6 +153,9 @@ instance P.HasVlanId (CloudNetworkPrivateResource s) (TF.Attr s P.Int) where
         P.lens (_vlanId :: CloudNetworkPrivateResource s -> TF.Attr s P.Int)
                (\s a -> s { _vlanId = a } :: CloudNetworkPrivateResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedRegions (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedRegions x = TF.compute (TF.refKey x) "regions"
 
@@ -272,6 +275,9 @@ instance P.HasStart (CloudNetworkPrivateSubnetResource s) (TF.Attr s P.Text) whe
         P.lens (_start :: CloudNetworkPrivateSubnetResource s -> TF.Attr s P.Text)
                (\s a -> s { _start = a } :: CloudNetworkPrivateSubnetResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCidr (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s P.Text) where
     computedCidr x = TF.compute (TF.refKey x) "cidr"
 
@@ -322,6 +328,9 @@ instance P.HasProjectId (CloudUserResource s) (TF.Attr s P.Text) where
     projectId =
         P.lens (_projectId :: CloudUserResource s -> TF.Attr s P.Text)
                (\s a -> s { _projectId = a } :: CloudUserResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudUserResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (CloudUserResource s)) (TF.Attr s P.Text) where
     computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
@@ -411,6 +420,9 @@ instance P.HasZone (DomainZoneRecordResource s) (TF.Attr s P.Text) where
     zone =
         P.lens (_zone :: DomainZoneRecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: DomainZoneRecordResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DomainZoneRecordResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @ovh_domain_zone_redirection@ Resource.
 --
@@ -506,6 +518,9 @@ instance P.HasZone (DomainZoneRedirectionResource s) (TF.Attr s P.Text) where
         P.lens (_zone :: DomainZoneRedirectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: DomainZoneRedirectionResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DomainZoneRedirectionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @ovh_iploadbalancing_http_route@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/ovh/r/iploadbalancing_http_route.html terraform documentation>
@@ -568,6 +583,9 @@ instance P.HasWeight (IploadbalancingHttpRouteResource s) (TF.Attr s P.Int) wher
     weight =
         P.lens (_weight :: IploadbalancingHttpRouteResource s -> TF.Attr s P.Int)
                (\s a -> s { _weight = a } :: IploadbalancingHttpRouteResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IploadbalancingHttpRouteResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedFrontendId (TF.Ref s' (IploadbalancingHttpRouteResource s)) (TF.Attr s P.Int) where
     computedFrontendId x = TF.compute (TF.refKey x) "frontend_id"
@@ -677,6 +695,9 @@ instance P.HasSubField (IploadbalancingHttpRouteRuleResource s) (TF.Attr s P.Tex
         P.lens (_subField :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _subField = a } :: IploadbalancingHttpRouteRuleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IploadbalancingHttpRouteRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @ovh_iploadbalancing_tcp_farm@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/ovh/r/iploadbalancing_tcp_farm.html terraform documentation>
@@ -779,6 +800,9 @@ instance P.HasZone (IploadbalancingTcpFarmResource s) (TF.Attr s P.Text) where
     zone =
         P.lens (_zone :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: IploadbalancingTcpFarmResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IploadbalancingTcpFarmResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @ovh_iploadbalancing_tcp_farm_server@ Resource.
 --
@@ -925,6 +949,9 @@ instance P.HasWeight (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Int) 
         P.lens (_weight :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Int)
                (\s a -> s { _weight = a } :: IploadbalancingTcpFarmServerResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCookie (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
     computedCookie x = TF.compute (TF.refKey x) "cookie"
 
@@ -980,6 +1007,9 @@ instance P.HasVlanId (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Int) whe
     vlanId =
         P.lens (_vlanId :: PubliccloudPrivateNetworkResource s -> TF.Attr s P.Int)
                (\s a -> s { _vlanId = a } :: PubliccloudPrivateNetworkResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedRegions (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedRegions x = TF.compute (TF.refKey x) "regions"
@@ -1100,6 +1130,9 @@ instance P.HasStart (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Tex
         P.lens (_start :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s P.Text)
                (\s a -> s { _start = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCidr (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
     computedCidr x = TF.compute (TF.refKey x) "cidr"
 
@@ -1150,6 +1183,9 @@ instance P.HasProjectId (PubliccloudUserResource s) (TF.Attr s P.Text) where
     projectId =
         P.lens (_projectId :: PubliccloudUserResource s -> TF.Attr s P.Text)
                (\s a -> s { _projectId = a } :: PubliccloudUserResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
     computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
@@ -1209,6 +1245,9 @@ instance P.HasVrackId (VrackCloudprojectResource s) (TF.Attr s P.Text) where
         P.lens (_vrackId :: VrackCloudprojectResource s -> TF.Attr s P.Text)
                (\s a -> s { _vrackId = a } :: VrackCloudprojectResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VrackCloudprojectResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @ovh_vrack_publiccloud_attachment@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/ovh/r/vrack_publiccloud_attachment.html terraform documentation>
@@ -1251,3 +1290,6 @@ instance P.HasVrackId (VrackPubliccloudAttachmentResource s) (TF.Attr s P.Text) 
     vrackId =
         P.lens (_vrackId :: VrackPubliccloudAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _vrackId = a } :: VrackPubliccloudAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VrackPubliccloudAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
