@@ -46,10 +46,9 @@ import GHC.Base (($))
 
 import Terrafomo.Chef.Settings
 
-import qualified Data.Hashable           as P
-import qualified Data.HashMap.Strict     as P
-import qualified Data.HashMap.Strict     as Map
 import qualified Data.List.NonEmpty      as P
+import qualified Data.Map.Strict         as P
+import qualified Data.Map.Strict         as Map
 import qualified Data.Maybe              as P
 import qualified Data.Monoid             as P
 import qualified Data.Text               as P
@@ -73,13 +72,13 @@ data DataBagResource s = DataBagResource'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dataBagResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DataBagResource s)
 dataBagResource _name =
-    TF.newResource "chef_data_bag" TF.validator $
+    TF.unsafeResource "chef_data_bag" P.defaultProvider TF.validator $
         DataBagResource'
             { _name = _name
             }
@@ -111,14 +110,14 @@ data DataBagItemResource s = DataBagItemResource'
     , _dataBagName :: TF.Attr s P.Text
     -- ^ @data_bag_name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dataBagItemResource
     :: TF.Attr s P.Text -- ^ @content_json@ - 'P.contentJson'
     -> TF.Attr s P.Text -- ^ @data_bag_name@ - 'P.dataBagName'
     -> P.Resource (DataBagItemResource s)
 dataBagItemResource _contentJson _dataBagName =
-    TF.newResource "chef_data_bag_item" TF.validator $
+    TF.unsafeResource "chef_data_bag_item" P.defaultProvider TF.validator $
         DataBagItemResource'
             { _contentJson = _contentJson
             , _dataBagName = _dataBagName
@@ -151,7 +150,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (DataBagItemResource s)) (TF.Attr 
 -- See the <https://www.terraform.io/docs/providers/chef/r/environment.html terraform documentation>
 -- for more information.
 data EnvironmentResource s = EnvironmentResource'
-    { _cookbookConstraints    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _cookbookConstraints    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @cookbook_constraints@ - (Optional)
     --
     , _defaultAttributesJson  :: TF.Attr s P.Text
@@ -166,13 +165,13 @@ data EnvironmentResource s = EnvironmentResource'
     , _overrideAttributesJson :: TF.Attr s P.Text
     -- ^ @override_attributes_json@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 environmentResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (EnvironmentResource s)
 environmentResource _name =
-    TF.newResource "chef_environment" TF.validator $
+    TF.unsafeResource "chef_environment" P.defaultProvider TF.validator $
         EnvironmentResource'
             { _cookbookConstraints = TF.Nil
             , _defaultAttributesJson = TF.value "{}"
@@ -193,9 +192,9 @@ instance TF.IsObject (EnvironmentResource s) where
 instance TF.IsValid (EnvironmentResource s) where
     validator = P.mempty
 
-instance P.HasCookbookConstraints (EnvironmentResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasCookbookConstraints (EnvironmentResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     cookbookConstraints =
-        P.lens (_cookbookConstraints :: EnvironmentResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_cookbookConstraints :: EnvironmentResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _cookbookConstraints = a } :: EnvironmentResource s)
 
 instance P.HasDefaultAttributesJson (EnvironmentResource s) (TF.Attr s P.Text) where
@@ -244,13 +243,13 @@ data NodeResource s = NodeResource'
     , _runList                 :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @run_list@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 nodeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NodeResource s)
 nodeResource _name =
-    TF.newResource "chef_node" TF.validator $
+    TF.unsafeResource "chef_node" P.defaultProvider TF.validator $
         NodeResource'
             { _automaticAttributesJson = TF.value "{}"
             , _defaultAttributesJson = TF.value "{}"
@@ -330,13 +329,13 @@ data RoleResource s = RoleResource'
     , _runList                :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @run_list@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 roleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RoleResource s)
 roleResource _name =
-    TF.newResource "chef_role" TF.validator $
+    TF.unsafeResource "chef_role" P.defaultProvider TF.validator $
         RoleResource'
             { _defaultAttributesJson = TF.value "{}"
             , _description = TF.value "Managed by Terraform"

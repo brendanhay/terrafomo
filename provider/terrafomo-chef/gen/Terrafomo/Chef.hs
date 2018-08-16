@@ -12,10 +12,10 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Chef
-    ( module Terrafomo.Chef.Settings
-    , module Terrafomo.Chef.Lens
+    ( module Terrafomo.Chef.Lens
     , module Terrafomo.Chef.Provider
     , module Terrafomo.Chef.Resource
+    , module Terrafomo.Chef.Settings
     , module Terrafomo.Chef.Types
     -- * Provider Aliases
     ) where
