@@ -19,31 +19,31 @@ module Terrafomo.Datadog.Settings
     (
     -- ** conditional_format
       ConditionalFormatSetting (..)
-    , conditionalFormatSetting
+    , newConditionalFormatSetting
 
     -- ** graph
     , GraphSetting (..)
-    , graphSetting
+    , newGraphSetting
 
     -- ** marker
     , MarkerSetting (..)
-    , markerSetting
+    , newMarkerSetting
 
     -- ** recurrence
     , RecurrenceSetting (..)
-    , recurrenceSetting
+    , newRecurrenceSetting
 
     -- ** request
     , RequestSetting (..)
-    , requestSetting
+    , newRequestSetting
 
     -- ** template_variable
     , TemplateVariableSetting (..)
-    , templateVariableSetting
+    , newTemplateVariableSetting
 
     -- ** thresholds
     , ThresholdsSetting (..)
-    , thresholdsSetting
+    , newThresholdsSetting
 
     ) where
 
@@ -93,10 +93,10 @@ data ConditionalFormatSetting s = ConditionalFormatSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @conditional_format@ settings value.
-conditionalFormatSetting
+newConditionalFormatSetting
     :: TF.Attr s P.Text -- ^ 'P._comparator': @comparator@
     -> ConditionalFormatSetting s
-conditionalFormatSetting _comparator =
+newConditionalFormatSetting _comparator =
     ConditionalFormatSetting'
         { _comparator = _comparator
         , _customBgColor = TF.Nil
@@ -203,12 +203,12 @@ data GraphSetting s = GraphSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @graph@ settings value.
-graphSetting
+newGraphSetting
     :: TF.Attr s [TF.Attr s (RequestSetting s)] -- ^ 'P._request': @request@
     -> TF.Attr s P.Text -- ^ 'P._title': @title@
     -> TF.Attr s P.Text -- ^ 'P._viz': @viz@
     -> GraphSetting s
-graphSetting _request _title _viz =
+newGraphSetting _request _title _viz =
     GraphSetting'
         { _autoscale = TF.Nil
         , _customUnit = TF.Nil
@@ -339,11 +339,11 @@ data MarkerSetting s = MarkerSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @marker@ settings value.
-markerSetting
+newMarkerSetting
     :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> MarkerSetting s
-markerSetting _type' _value =
+newMarkerSetting _type' _value =
     MarkerSetting'
         { _label = TF.Nil
         , _type' = _type'
@@ -402,11 +402,11 @@ data RecurrenceSetting s = RecurrenceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @recurrence@ settings value.
-recurrenceSetting
+newRecurrenceSetting
     :: TF.Attr s P.Int -- ^ 'P._period': @period@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> RecurrenceSetting s
-recurrenceSetting _period _type' =
+newRecurrenceSetting _period _type' =
     RecurrenceSetting'
         { _period = _period
         , _type' = _type'
@@ -512,10 +512,10 @@ data RequestSetting s = RequestSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @request@ settings value.
-requestSetting
+newRequestSetting
     :: TF.Attr s P.Text -- ^ 'P._q': @q@
     -> RequestSetting s
-requestSetting _q =
+newRequestSetting _q =
     RequestSetting'
         { _aggregator = TF.Nil
         , _changeType = TF.Nil
@@ -629,10 +629,10 @@ data TemplateVariableSetting s = TemplateVariableSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @template_variable@ settings value.
-templateVariableSetting
+newTemplateVariableSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TemplateVariableSetting s
-templateVariableSetting _name =
+newTemplateVariableSetting _name =
     TemplateVariableSetting'
         { _default' = TF.Nil
         , _name = _name
@@ -688,9 +688,9 @@ data ThresholdsSetting s = ThresholdsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @thresholds@ settings value.
-thresholdsSetting
+newThresholdsSetting
     :: ThresholdsSetting s
-thresholdsSetting =
+newThresholdsSetting =
     ThresholdsSetting'
         { _critical = TF.Nil
         , _criticalRecovery = TF.Nil
