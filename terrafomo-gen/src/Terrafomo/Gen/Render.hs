@@ -49,18 +49,18 @@ contents
     :: Templates EDE.Template
     -> ProviderName
     -> [NS]
+    -> [NS]
     -> Either String (NS, LText.Text)
-contents tmpls p namespaces =
+contents tmpls p rs ds =
     let ns = NS.contents p
      in second (ns,) $ render (contentsTemplate tmpls)
-        [ "namespace"  .= ns
-        , "provider"   .= p
-        , "reexports"  .=
-            Set.fromList
-                ([ NS.lenses   p
-                 , NS.provider p
-                 , NS.types    p
-                 ] ++ namespaces)
+        [ "namespace"   .= ns
+        , "provider"    .= NS.provider p
+        , "types"       .= NS.types    p
+        , "settings"    .= NS.settings p
+        , "lenses"      .= NS.lenses   p
+        , "datasources" .= ds
+        , "resources"   .= rs
         ]
 
 types

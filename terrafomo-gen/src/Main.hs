@@ -181,10 +181,9 @@ main = do
                 >>= scriptIO . LText.writeFile packageFile
 
         hoistEither (Render.contents templates providerName
-             ( namespaces
-           ++ map fst resources
-           ++ map fst datasources
-             )) >>= writeNS genDir
+           (map fst resources)
+           (map fst datasources))
+               >>= writeNS genDir
 
         typesExists <- scriptIO (Dir.doesFileExist typesFile)
         echo "Types" (typesFile ++ " == " ++ show typesExists)

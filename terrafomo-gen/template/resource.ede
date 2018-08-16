@@ -11,7 +11,6 @@
 --
 module {{ namespace }}
     (
-    -- * {{ type }} Datatypes
     {% for resource in resources %}
     -- ** {{ resource.value.original }}
     {% if resource.first %} {% else %},{% endif %} {{ resource.value.name }} (..)
@@ -46,9 +45,10 @@ import qualified Terrafomo.Validator as TF
 data {{ resource.value.type }} = {{ resource.value.con.name }}
 {% include "_include/record.ede" with arguments = resource.value.arguments %}
 
+-- | Define a new @{{ resource.value.original }}@ {{ type | toLower }} value.
 {{ resource.value.con.smart }}
   {% for param in resource.value.parameters %}
-    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{ param.value.original }}@ - 'P.{{ param.value.method }}'{% if param.last %}
+    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{ param.value.original }}@ ('P.{{ param.value.name }}', 'P.{{ param.value.method }}'){% if param.last %}
     -> P.{{ type }} ({{ resource.value.type }}){% endif %}
   {% else %}
     :: P.{{ type }} ({{ resource.value.type }})

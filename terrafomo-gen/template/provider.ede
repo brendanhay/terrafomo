@@ -53,7 +53,7 @@ data Provider = {{ provider.schema.con.name }}
 
 {{ provider.schema.con.smart }}
   {% for param in provider.schema.parameters %}
-    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{ param.value.original }}@ - 'P.{{ param.value.method }}'{% if param.last %}
+    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{ param.value.original }}@ ('P.{{ param.value.name }}', 'P.{{ param.value.method }}'){% if param.last %}
     -> Provider{% endif %}
   {% else %}
     :: Provider
@@ -72,7 +72,7 @@ instance TF.IsObject Provider where
   {% if provider.schema.arguments | empty %}
     toObject {{ provider.schema.con.name }} = []
   {% else %}
-    toObject {{ provider.schema.con.name }}{..} =
+    toObject x@{{ provider.schema.con.name }}{..} =
         P.catMaybes
           {% for field in provider.schema.arguments %}
             {% if field.first %}[ {% else %}, {% endif %}{{ field.value.encoder }} {{ field.value.name }}{% if field.last %}

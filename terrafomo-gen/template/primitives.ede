@@ -9,7 +9,6 @@
 --
 module {{ namespace }}
     (
-    -- * Primitive Types
     {% for primitive in primitives %}
     -- ** {{ primitive.value.original }}
     {% if primitive.first %} {% else %},{% endif %} {{ primitive.value.name }} (..)

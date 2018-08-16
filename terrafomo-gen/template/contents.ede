@@ -6,12 +6,37 @@
 {% include "_include/license.ede" %}
 --
 module {{ namespace }}
-  {% for export in reexports %}
-    {% if export.first %}({% else %},{% endif %} module {{ export.value }}
+    (
+    -- * Provider Datatype
+      module {{ provider }}
+
+    -- * Custom Types
+    , module {{ types }}
+
+    -- * DataSources
+  {% for export in datasources %}
+    , module {{ export.value }}
   {% endfor %}
-    -- * Provider Aliases
+
+    -- * Resources
+  {% for export in resources %}
+    , module {{ export.value }}
+  {% endfor %}
+
+    -- * Settings
+    , module {{ settings }}
+
+    -- * Overloaded Lenses
+    , module {{ lenses }}
     ) where
 
-{% for export in reexports %}
+import {{ provider }}
+import {{ types }}
+{% for export in datasources %}
 import {{ export.value }}
 {% endfor %}
+{% for export in resources %}
+import {{ export.value }}
+{% endfor %}
+import {{ settings }}
+import {{ lenses }}

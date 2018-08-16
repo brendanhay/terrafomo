@@ -11,7 +11,6 @@
 --
 module {{ namespace }}
     (
-    -- * Settings Datatypes
     {% for setting in settings %}
     -- ** {{ setting.value.original }}
     {% if setting.first %} {% else %},{% endif %} {{ setting.value.name }} (..)
@@ -42,9 +41,10 @@ import qualified Terrafomo.Validator as TF
 data {{ setting.value.type }} = {{ setting.value.con.name }}
 {% include "_include/record.ede" with arguments = setting.value.arguments %}
 
+-- | Construct a new @{{ setting.value.original }}@ settings value.
 {{ setting.value.con.smart }}
   {% for param in setting.value.parameters %}
-    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{ param.value.original }}@ - 'P.{{ param.value.method }}'{% if param.last %}
+    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ 'P.{{ param.value.name }}': @{{ param.value.original }}@{% if param.last %}
     -> {{ setting.value.type }}{% endif %}
   {% else %}
     :: {{ setting.value.type }}
