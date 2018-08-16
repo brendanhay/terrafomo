@@ -86,7 +86,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "mysql"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "endpoint" _endpoint
             , TF.assign "password" <$> _password
