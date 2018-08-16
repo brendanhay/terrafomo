@@ -108,6 +108,9 @@ instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DatabaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DatabaseResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @mysql_grant@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/mysql/r/grant.html terraform documentation>
@@ -181,6 +184,9 @@ instance P.HasUser (GrantResource s) (TF.Attr s P.Text) where
     user =
         P.lens (_user :: GrantResource s -> TF.Attr s P.Text)
                (\s a -> s { _user = a } :: GrantResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GrantResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @mysql_user@ Resource.
 --
@@ -260,3 +266,6 @@ instance P.HasUser (UserResource s) (TF.Attr s P.Text) where
     user =
         P.lens (_user :: UserResource s -> TF.Attr s P.Text)
                (\s a -> s { _user = a } :: UserResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"

@@ -30,6 +30,7 @@ module Terrafomo.MySQL.Lens
     , HasUsername (..)
 
     -- ** Computed Attributes
+    , HasComputedId (..)
     ) where
 
 import GHC.Base ((.))
@@ -114,3 +115,6 @@ class HasUsername a b | a -> b where
 
 instance HasUsername a b => HasUsername (TF.Schema l p a) b where
     username = TF.configuration . username
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
