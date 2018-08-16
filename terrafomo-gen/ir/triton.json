@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newCnsSetting",
+                "smart": "cnsSetting",
                 "name": "CnsSetting'"
             },
             "arguments": [
@@ -56,7 +56,7 @@
         },
         {
             "con": {
-                "smart": "newFilterSetting",
+                "smart": "filterSetting",
                 "name": "FilterSetting'"
             },
             "arguments": [
@@ -208,7 +208,7 @@
         },
         {
             "con": {
-                "smart": "newNicSetting",
+                "smart": "nicSetting",
                 "name": "NicSetting'"
             },
             "arguments": [
