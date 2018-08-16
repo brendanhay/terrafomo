@@ -65,7 +65,25 @@
             "key": "bitbucket_default_reviewers",
             "name": "DefaultReviewersResource",
             "threaded": true,
-            "attributes": [],
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
             "parameters": [
                 {
                     "default": "_owner",
@@ -254,6 +272,23 @@
             "name": "HookResource",
             "threaded": true,
             "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": true,
@@ -562,6 +597,23 @@
             "name": "RepositoryResource",
             "threaded": true,
             "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": true,
