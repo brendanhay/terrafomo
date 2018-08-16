@@ -19,59 +19,59 @@ module Terrafomo.OPC.Settings
     (
     -- ** application_cookie_stickiness_policy
       ApplicationCookieStickinessPolicySetting (..)
-    , newApplicationCookieStickinessPolicySetting
+    , applicationCookieStickinessPolicySetting
 
     -- ** cloudgate_policy
     , CloudgatePolicySetting (..)
-    , newCloudgatePolicySetting
+    , cloudgatePolicySetting
 
     -- ** health_check
     , HealthCheckSetting (..)
-    , newHealthCheckSetting
+    , healthCheckSetting
 
     -- ** instance
     , InstanceSetting (..)
-    , newInstanceSetting
+    , instanceSetting
 
     -- ** load_balancer_cookie_stickiness_policy
     , LoadBalancerCookieStickinessPolicySetting (..)
-    , newLoadBalancerCookieStickinessPolicySetting
+    , loadBalancerCookieStickinessPolicySetting
 
     -- ** load_balancing_mechanism_policy
     , LoadBalancingMechanismPolicySetting (..)
-    , newLoadBalancingMechanismPolicySetting
+    , loadBalancingMechanismPolicySetting
 
     -- ** networking_info
     , NetworkingInfoSetting (..)
-    , newNetworkingInfoSetting
+    , networkingInfoSetting
 
     -- ** rate_limiting_request_policy
     , RateLimitingRequestPolicySetting (..)
-    , newRateLimitingRequestPolicySetting
+    , rateLimitingRequestPolicySetting
 
     -- ** redirect_policy
     , RedirectPolicySetting (..)
-    , newRedirectPolicySetting
+    , redirectPolicySetting
 
     -- ** resource_access_control_policy
     , ResourceAccessControlPolicySetting (..)
-    , newResourceAccessControlPolicySetting
+    , resourceAccessControlPolicySetting
 
     -- ** set_request_header_policy
     , SetRequestHeaderPolicySetting (..)
-    , newSetRequestHeaderPolicySetting
+    , setRequestHeaderPolicySetting
 
     -- ** ssl_negotiation_policy
     , SslNegotiationPolicySetting (..)
-    , newSslNegotiationPolicySetting
+    , sslNegotiationPolicySetting
 
     -- ** storage
     , StorageSetting (..)
-    , newStorageSetting
+    , storageSetting
 
     -- ** trusted_certificate_policy
     , TrustedCertificatePolicySetting (..)
-    , newTrustedCertificatePolicySetting
+    , trustedCertificatePolicySetting
 
     ) where
 
@@ -104,10 +104,10 @@ data ApplicationCookieStickinessPolicySetting s = ApplicationCookieStickinessPol
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @application_cookie_stickiness_policy@ settings value.
-newApplicationCookieStickinessPolicySetting
+applicationCookieStickinessPolicySetting
     :: TF.Attr s P.Text -- ^ 'P._cookieName': @cookie_name@
     -> ApplicationCookieStickinessPolicySetting s
-newApplicationCookieStickinessPolicySetting _cookieName =
+applicationCookieStickinessPolicySetting _cookieName =
     ApplicationCookieStickinessPolicySetting'
         { _cookieName = _cookieName
         }
@@ -143,10 +143,10 @@ data CloudgatePolicySetting s = CloudgatePolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @cloudgate_policy@ settings value.
-newCloudgatePolicySetting
+cloudgatePolicySetting
     :: TF.Attr s P.Text -- ^ 'P._virtualHostnameForPolicyAttribution': @virtual_hostname_for_policy_attribution@
     -> CloudgatePolicySetting s
-newCloudgatePolicySetting _virtualHostnameForPolicyAttribution =
+cloudgatePolicySetting _virtualHostnameForPolicyAttribution =
     CloudgatePolicySetting'
         { _cloudgateApplication = TF.Nil
         , _cloudgatePolicyName = TF.Nil
@@ -212,9 +212,9 @@ data HealthCheckSetting s = HealthCheckSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @health_check@ settings value.
-newHealthCheckSetting
+healthCheckSetting
     :: HealthCheckSetting s
-newHealthCheckSetting =
+healthCheckSetting =
     HealthCheckSetting'
         { _enabled = TF.value P.True
         , _healthyThreshold = TF.value 5
@@ -310,11 +310,11 @@ data InstanceSetting s = InstanceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @instance@ settings value.
-newInstanceSetting
+instanceSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._shape': @shape@
     -> InstanceSetting s
-newInstanceSetting _name _shape =
+instanceSetting _name _shape =
     InstanceSetting'
         { _bootOrder = TF.Nil
         , _imageList = TF.Nil
@@ -472,10 +472,10 @@ data LoadBalancerCookieStickinessPolicySetting s = LoadBalancerCookieStickinessP
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @load_balancer_cookie_stickiness_policy@ settings value.
-newLoadBalancerCookieStickinessPolicySetting
+loadBalancerCookieStickinessPolicySetting
     :: TF.Attr s P.Int -- ^ 'P._cookieExpirationPeriod': @cookie_expiration_period@
     -> LoadBalancerCookieStickinessPolicySetting s
-newLoadBalancerCookieStickinessPolicySetting _cookieExpirationPeriod =
+loadBalancerCookieStickinessPolicySetting _cookieExpirationPeriod =
     LoadBalancerCookieStickinessPolicySetting'
         { _cookieExpirationPeriod = _cookieExpirationPeriod
         }
@@ -502,10 +502,10 @@ data LoadBalancingMechanismPolicySetting s = LoadBalancingMechanismPolicySetting
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @load_balancing_mechanism_policy@ settings value.
-newLoadBalancingMechanismPolicySetting
+loadBalancingMechanismPolicySetting
     :: TF.Attr s P.Text -- ^ 'P._loadBalancingMechanism': @load_balancing_mechanism@
     -> LoadBalancingMechanismPolicySetting s
-newLoadBalancingMechanismPolicySetting _loadBalancingMechanism =
+loadBalancingMechanismPolicySetting _loadBalancingMechanism =
     LoadBalancingMechanismPolicySetting'
         { _loadBalancingMechanism = _loadBalancingMechanism
         }
@@ -559,10 +559,10 @@ data NetworkingInfoSetting s = NetworkingInfoSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @networking_info@ settings value.
-newNetworkingInfoSetting
+networkingInfoSetting
     :: TF.Attr s P.Int -- ^ 'P._index': @index@
     -> NetworkingInfoSetting s
-newNetworkingInfoSetting _index =
+networkingInfoSetting _index =
     NetworkingInfoSetting'
         { _index = _index
         , _ipAddress = TF.Nil
@@ -682,13 +682,13 @@ data RateLimitingRequestPolicySetting s = RateLimitingRequestPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @rate_limiting_request_policy@ settings value.
-newRateLimitingRequestPolicySetting
+rateLimitingRequestPolicySetting
     :: TF.Attr s P.Bool -- ^ 'P._delayExcessiveRequests': @delay_excessive_requests@
     -> TF.Attr s P.Int -- ^ 'P._requestsPerSecond': @requests_per_second@
     -> TF.Attr s P.Int -- ^ 'P._burstSize': @burst_size@
     -> TF.Attr s P.Text -- ^ 'P._zone': @zone@
     -> RateLimitingRequestPolicySetting s
-newRateLimitingRequestPolicySetting _delayExcessiveRequests _requestsPerSecond _burstSize _zone =
+rateLimitingRequestPolicySetting _delayExcessiveRequests _requestsPerSecond _burstSize _zone =
     RateLimitingRequestPolicySetting'
         { _burstSize = _burstSize
         , _delayExcessiveRequests = _delayExcessiveRequests
@@ -767,11 +767,11 @@ data RedirectPolicySetting s = RedirectPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @redirect_policy@ settings value.
-newRedirectPolicySetting
+redirectPolicySetting
     :: TF.Attr s P.Int -- ^ 'P._responseCode': @response_code@
     -> TF.Attr s P.Text -- ^ 'P._redirectUri': @redirect_uri@
     -> RedirectPolicySetting s
-newRedirectPolicySetting _responseCode _redirectUri =
+redirectPolicySetting _responseCode _redirectUri =
     RedirectPolicySetting'
         { _redirectUri = _redirectUri
         , _responseCode = _responseCode
@@ -811,10 +811,10 @@ data ResourceAccessControlPolicySetting s = ResourceAccessControlPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @resource_access_control_policy@ settings value.
-newResourceAccessControlPolicySetting
+resourceAccessControlPolicySetting
     :: TF.Attr s P.Text -- ^ 'P._disposition': @disposition@
     -> ResourceAccessControlPolicySetting s
-newResourceAccessControlPolicySetting _disposition =
+resourceAccessControlPolicySetting _disposition =
     ResourceAccessControlPolicySetting'
         { _deniedClients = TF.Nil
         , _disposition = _disposition
@@ -867,10 +867,10 @@ data SetRequestHeaderPolicySetting s = SetRequestHeaderPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @set_request_header_policy@ settings value.
-newSetRequestHeaderPolicySetting
+setRequestHeaderPolicySetting
     :: TF.Attr s P.Text -- ^ 'P._headerName': @header_name@
     -> SetRequestHeaderPolicySetting s
-newSetRequestHeaderPolicySetting _headerName =
+setRequestHeaderPolicySetting _headerName =
     SetRequestHeaderPolicySetting'
         { _actionWhenHeaderExists = TF.Nil
         , _actionWhenHeaderValueIs = TF.Nil
@@ -934,11 +934,11 @@ data SslNegotiationPolicySetting s = SslNegotiationPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ssl_negotiation_policy@ settings value.
-newSslNegotiationPolicySetting
+sslNegotiationPolicySetting
     :: TF.Attr s P.Int -- ^ 'P._port': @port@
     -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._sslProtocol': @ssl_protocol@
     -> SslNegotiationPolicySetting s
-newSslNegotiationPolicySetting _port _sslProtocol =
+sslNegotiationPolicySetting _port _sslProtocol =
     SslNegotiationPolicySetting'
         { _port = _port
         , _serverOrderPreference = TF.Nil
@@ -989,11 +989,11 @@ data StorageSetting s = StorageSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @storage@ settings value.
-newStorageSetting
+storageSetting
     :: TF.Attr s P.Int -- ^ 'P._index': @index@
     -> TF.Attr s P.Text -- ^ 'P._volume': @volume@
     -> StorageSetting s
-newStorageSetting _index _volume =
+storageSetting _index _volume =
     StorageSetting'
         { _index = _index
         , _volume = _volume
@@ -1030,10 +1030,10 @@ data TrustedCertificatePolicySetting s = TrustedCertificatePolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @trusted_certificate_policy@ settings value.
-newTrustedCertificatePolicySetting
+trustedCertificatePolicySetting
     :: TF.Attr s P.Text -- ^ 'P._trustedCertificate': @trusted_certificate@
     -> TrustedCertificatePolicySetting s
-newTrustedCertificatePolicySetting _trustedCertificate =
+trustedCertificatePolicySetting _trustedCertificate =
     TrustedCertificatePolicySetting'
         { _trustedCertificate = _trustedCertificate
         }
