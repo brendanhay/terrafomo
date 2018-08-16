@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.OVH
-    ( module Terrafomo.OVH.DataSource
-    , module Terrafomo.OVH.Lens
-    , module Terrafomo.OVH.Provider
-    , module Terrafomo.OVH.Resource
-    , module Terrafomo.OVH.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.OVH.Provider
+
+    -- * Custom Types
     , module Terrafomo.OVH.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.OVH.DataSource
+
+    -- * Resources
+    , module Terrafomo.OVH.Resource
+
+    -- * Settings
+    , module Terrafomo.OVH.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.OVH.Lens
     ) where
 
 import Terrafomo.OVH.DataSource

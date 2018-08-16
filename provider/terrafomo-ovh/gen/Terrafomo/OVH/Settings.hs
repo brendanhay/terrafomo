@@ -17,7 +17,6 @@
 --
 module Terrafomo.OVH.Settings
     (
-    -- * Settings Datatypes
     -- ** action
       ActionSetting (..)
     , newActionSetting
@@ -78,6 +77,7 @@ data ActionSetting s = ActionSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @action@ settings value.
 newActionSetting
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> ActionSetting s
@@ -118,6 +118,7 @@ instance P.HasType' (ActionSetting s) (TF.Attr s P.Text) where
 data IpPoolsSetting s = IpPoolsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @ip_pools@ settings value.
 newIpPoolsSetting
     :: IpPoolsSetting s
 newIpPoolsSetting =
@@ -149,6 +150,7 @@ instance s ~ s' => P.HasComputedStart (TF.Ref s' (IpPoolsSetting s)) (TF.Attr s 
 data OrderableZoneSetting s = OrderableZoneSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @orderable_zone@ settings value.
 newOrderableZoneSetting
     :: OrderableZoneSetting s
 newOrderableZoneSetting =
@@ -198,6 +200,7 @@ data ProbeSetting s = ProbeSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @probe@ settings value.
 newProbeSetting
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> ProbeSetting s
@@ -283,6 +286,7 @@ data RegionsStatusSetting s = RegionsStatusSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @regions_status@ settings value.
 newRegionsStatusSetting
     :: TF.Attr s P.Text -- ^ @status@ - 'P.status'
     -> RegionsStatusSetting s
@@ -312,6 +316,7 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (RegionsStatusSetting s)) (TF.
 data ServicesSetting s = ServicesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @services@ settings value.
 newServicesSetting
     :: ServicesSetting s
 newServicesSetting =

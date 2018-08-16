@@ -17,7 +17,6 @@
 --
 module Terrafomo.OVH.Resource
     (
-    -- * Resource Datatypes
     -- ** ovh_cloud_network_private
       CloudNetworkPrivateResource (..)
     , cloudNetworkPrivateResource
@@ -116,6 +115,7 @@ data CloudNetworkPrivateResource s = CloudNetworkPrivateResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_cloud_network_private@ resource value.
 cloudNetworkPrivateResource
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -199,6 +199,7 @@ data CloudNetworkPrivateSubnetResource s = CloudNetworkPrivateSubnetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_cloud_network_private_subnet@ resource value.
 cloudNetworkPrivateSubnetResource
     :: TF.Attr s P.Text -- ^ @end@ - 'P.end'
     -> TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
@@ -300,6 +301,7 @@ data CloudUserResource s = CloudUserResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_cloud_user@ resource value.
 cloudUserResource
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.Resource (CloudUserResource s)
@@ -369,6 +371,7 @@ data DomainZoneRecordResource s = DomainZoneRecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_domain_zone_record@ resource value.
 domainZoneRecordResource
     :: TF.Attr s P.Text -- ^ @fieldtype@ - 'P.fieldtype'
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
@@ -452,6 +455,7 @@ data DomainZoneRedirectionResource s = DomainZoneRedirectionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_domain_zone_redirection@ resource value.
 domainZoneRedirectionResource
     :: TF.Attr s P.Text -- ^ @target@ - 'P.target'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -540,6 +544,7 @@ data IploadbalancingHttpRouteResource s = IploadbalancingHttpRouteResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_iploadbalancing_http_route@ resource value.
 iploadbalancingHttpRouteResource
     :: TF.Attr s [TF.Attr s (ActionSetting s)] -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
@@ -621,6 +626,7 @@ data IploadbalancingHttpRouteRuleResource s = IploadbalancingHttpRouteRuleResour
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_iploadbalancing_http_route_rule@ resource value.
 iploadbalancingHttpRouteRuleResource
     :: TF.Attr s P.Text -- ^ @field@ - 'P.field'
     -> TF.Attr s P.Text -- ^ @route_id@ - 'P.routeId'
@@ -729,6 +735,7 @@ data IploadbalancingTcpFarmResource s = IploadbalancingTcpFarmResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_iploadbalancing_tcp_farm@ resource value.
 iploadbalancingTcpFarmResource
     :: TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
@@ -847,6 +854,7 @@ data IploadbalancingTcpFarmServerResource s = IploadbalancingTcpFarmServerResour
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_iploadbalancing_tcp_farm_server@ resource value.
 iploadbalancingTcpFarmServerResource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Int -- ^ @farm_id@ - 'P.farmId'
@@ -971,6 +979,7 @@ data PubliccloudPrivateNetworkResource s = PubliccloudPrivateNetworkResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_publiccloud_private_network@ resource value.
 publiccloudPrivateNetworkResource
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1054,6 +1063,7 @@ data PubliccloudPrivateNetworkSubnetResource s = PubliccloudPrivateNetworkSubnet
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_publiccloud_private_network_subnet@ resource value.
 publiccloudPrivateNetworkSubnetResource
     :: TF.Attr s P.Text -- ^ @end@ - 'P.end'
     -> TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
@@ -1155,6 +1165,7 @@ data PubliccloudUserResource s = PubliccloudUserResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_publiccloud_user@ resource value.
 publiccloudUserResource
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.Resource (PubliccloudUserResource s)
@@ -1215,6 +1226,7 @@ data VrackCloudprojectResource s = VrackCloudprojectResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_vrack_cloudproject@ resource value.
 vrackCloudprojectResource
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Text -- ^ @vrack_id@ - 'P.vrackId'
@@ -1261,6 +1273,7 @@ data VrackPubliccloudAttachmentResource s = VrackPubliccloudAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_vrack_publiccloud_attachment@ resource value.
 vrackPubliccloudAttachmentResource
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Text -- ^ @vrack_id@ - 'P.vrackId'

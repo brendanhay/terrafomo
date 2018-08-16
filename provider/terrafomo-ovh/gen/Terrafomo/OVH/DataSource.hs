@@ -17,7 +17,6 @@
 --
 module Terrafomo.OVH.DataSource
     (
-    -- * DataSource Datatypes
     -- ** ovh_cloud_region
       CloudRegionData (..)
     , cloudRegionData
@@ -89,6 +88,7 @@ data CloudRegionData s = CloudRegionData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_cloud_region@ datasource value.
 cloudRegionData
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -141,6 +141,7 @@ data CloudRegionsData s = CloudRegionsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_cloud_regions@ datasource value.
 cloudRegionsData
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.DataSource (CloudRegionsData s)
@@ -179,6 +180,7 @@ data DomainZoneData s = DomainZoneData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_domain_zone@ datasource value.
 domainZoneData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DomainZoneData s)
@@ -223,6 +225,7 @@ instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (DomainZoneData s)) (TF.A
 data IploadbalancingData s = IploadbalancingData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_iploadbalancing@ datasource value.
 iploadbalancingData
     :: P.DataSource (IploadbalancingData s)
 iploadbalancingData =
@@ -293,6 +296,7 @@ data MePaymentmeanBankaccountData s = MePaymentmeanBankaccountData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_me_paymentmean_bankaccount@ datasource value.
 mePaymentmeanBankaccountData
     :: P.DataSource (MePaymentmeanBankaccountData s)
 mePaymentmeanBankaccountData =
@@ -359,6 +363,7 @@ data MePaymentmeanCreditcardData s = MePaymentmeanCreditcardData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_me_paymentmean_creditcard@ datasource value.
 mePaymentmeanCreditcardData
     :: P.DataSource (MePaymentmeanCreditcardData s)
 mePaymentmeanCreditcardData =
@@ -426,6 +431,7 @@ data PubliccloudRegionData s = PubliccloudRegionData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_publiccloud_region@ datasource value.
 publiccloudRegionData
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -478,6 +484,7 @@ data PubliccloudRegionsData s = PubliccloudRegionsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ovh_publiccloud_regions@ datasource value.
 publiccloudRegionsData
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.DataSource (PubliccloudRegionsData s)
