@@ -94,7 +94,7 @@ data CollectorResource s = CollectorResource'
 collectorResource
     :: P.Resource (CollectorResource s)
 collectorResource =
-    TF.unsafeResource "logicmonitor_collector" P.defaultProvider TF.validator $
+    TF.unsafeResource "logicmonitor_collector" TF.validator $
         CollectorResource'
             { _backupCollectorId = TF.Nil
             , _collectorGroupId = TF.value 1
@@ -177,7 +177,7 @@ data CollectorGroupResource s = CollectorGroupResource'
 collectorGroupResource
     :: P.Resource (CollectorGroupResource s)
 collectorGroupResource =
-    TF.unsafeResource "logicmonitor_collector_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "logicmonitor_collector_group" TF.validator $
         CollectorGroupResource'
             { _description = TF.Nil
             , _name = TF.Nil
@@ -235,7 +235,7 @@ deviceResource
     -> TF.Attr s P.Text -- ^ @ip_addr@ - 'P.ipAddr'
     -> P.Resource (DeviceResource s)
 deviceResource _collector _ipAddr =
-    TF.unsafeResource "logicmonitor_device" P.defaultProvider TF.validator $
+    TF.unsafeResource "logicmonitor_device" TF.validator $
         DeviceResource'
             { _collector = _collector
             , _description = TF.Nil
@@ -324,7 +324,7 @@ deviceGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DeviceGroupResource s)
 deviceGroupResource _name =
-    TF.unsafeResource "logicmonitor_device_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "logicmonitor_device_group" TF.validator $
         DeviceGroupResource'
             { _appliesTo = TF.Nil
             , _description = TF.Nil

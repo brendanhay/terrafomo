@@ -74,7 +74,7 @@ data CollectorsData s = CollectorsData'
 collectorsData
     :: P.DataSource (CollectorsData s)
 collectorsData =
-    TF.unsafeDataSource "logicmonitor_collectors" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "logicmonitor_collectors" TF.validator $
         CollectorsData'
             { _filters = TF.Nil
             , _mostRecent = TF.value P.False
@@ -135,7 +135,7 @@ data DeviceGroupData s = DeviceGroupData'
 deviceGroupData
     :: P.DataSource (DeviceGroupData s)
 deviceGroupData =
-    TF.unsafeDataSource "logicmonitor_device_group" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "logicmonitor_device_group" TF.validator $
         DeviceGroupData'
             { _filters = TF.Nil
             , _offset = TF.value 0
