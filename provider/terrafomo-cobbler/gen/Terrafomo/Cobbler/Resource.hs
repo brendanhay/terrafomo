@@ -98,7 +98,7 @@ distroResource
     -> TF.Attr s P.Text -- ^ @os_version@ - 'P.osVersion'
     -> P.Resource (DistroResource s)
 distroResource _breed _initrd _kernel _name _osVersion =
-    TF.unsafeResource "cobbler_distro" P.defaultProvider TF.validator $
+    TF.unsafeResource "cobbler_distro" TF.validator $
         DistroResource'
             { _breed = _breed
             , _initrd = _initrd
@@ -195,7 +195,7 @@ kickstartFileResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (KickstartFileResource s)
 kickstartFileResource _body _name =
-    TF.unsafeResource "cobbler_kickstart_file" P.defaultProvider TF.validator $
+    TF.unsafeResource "cobbler_kickstart_file" TF.validator $
         KickstartFileResource'
             { _body = _body
             , _name = _name
@@ -238,7 +238,7 @@ profileResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ProfileResource s)
 profileResource _distro _name =
-    TF.unsafeResource "cobbler_profile" P.defaultProvider TF.validator $
+    TF.unsafeResource "cobbler_profile" TF.validator $
         ProfileResource'
             { _distro = _distro
             , _name = _name
@@ -375,7 +375,7 @@ repoResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RepoResource s)
 repoResource _breed _mirror _name =
-    TF.unsafeResource "cobbler_repo" P.defaultProvider TF.validator $
+    TF.unsafeResource "cobbler_repo" TF.validator $
         RepoResource'
             { _breed = _breed
             , _mirror = _mirror
@@ -458,7 +458,7 @@ snippetResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SnippetResource s)
 snippetResource _body _name =
-    TF.unsafeResource "cobbler_snippet" P.defaultProvider TF.validator $
+    TF.unsafeResource "cobbler_snippet" TF.validator $
         SnippetResource'
             { _body = _body
             , _name = _name
@@ -501,7 +501,7 @@ systemResource
     -> TF.Attr s P.Text -- ^ @profile@ - 'P.profile'
     -> P.Resource (SystemResource s)
 systemResource _name _profile =
-    TF.unsafeResource "cobbler_system" P.defaultProvider TF.validator $
+    TF.unsafeResource "cobbler_system" TF.validator $
         SystemResource'
             { _name = _name
             , _profile = _profile
