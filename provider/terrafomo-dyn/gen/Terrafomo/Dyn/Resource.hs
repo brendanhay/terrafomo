@@ -73,7 +73,7 @@ recordResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (RecordResource s)
 recordResource _type' _value _zone =
-    TF.unsafeResource "dyn_record" P.defaultProvider TF.validator $
+    TF.unsafeResource "dyn_record" TF.validator $
         RecordResource'
             { _name = TF.Nil
             , _type' = _type'
