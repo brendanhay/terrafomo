@@ -24,6 +24,7 @@ module Terrafomo.PowerDNS.Lens
     , HasZone (..)
 
     -- ** Computed Attributes
+    , HasComputedId (..)
     ) where
 
 import GHC.Base ((.))
@@ -72,3 +73,6 @@ class HasZone a b | a -> b where
 
 instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
