@@ -2,8 +2,93 @@
     "settings": [
         {
             "con": {
-                "smart": "newDatabaseRetentionPolicies",
-                "name": "DatabaseRetentionPolicies'"
+                "smart": "newGrantSetting",
+                "name": "GrantSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_database",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"database\" <$> TF.attribute",
+                    "name": "_database",
+                    "method": "database",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatabase",
+                    "validate": false,
+                    "optional": false,
+                    "original": "database"
+                },
+                {
+                    "default": "_privilege",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"privilege\" <$> TF.attribute",
+                    "name": "_privilege",
+                    "method": "privilege",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrivilege",
+                    "validate": false,
+                    "optional": false,
+                    "original": "privilege"
+                }
+            ],
+            "key": "influxdb_user.grant",
+            "name": "GrantSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_database",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"database\" <$> TF.attribute",
+                    "name": "_database",
+                    "method": "database",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatabase",
+                    "validate": false,
+                    "optional": false,
+                    "original": "database"
+                },
+                {
+                    "default": "_privilege",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"privilege\" <$> TF.attribute",
+                    "name": "_privilege",
+                    "method": "privilege",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrivilege",
+                    "validate": false,
+                    "optional": false,
+                    "original": "privilege"
+                }
+            ],
+            "conflicts": [],
+            "type": "GrantSetting s",
+            "original": "grant"
+        },
+        {
+            "con": {
+                "smart": "newRetentionPoliciesSetting",
+                "name": "RetentionPoliciesSetting'"
             },
             "arguments": [
                 {
@@ -15,6 +100,7 @@
                     "encoder": "TF.assign \"default\" <$> TF.attribute",
                     "name": "_default'",
                     "method": "default'",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasDefault'",
@@ -31,6 +117,7 @@
                     "encoder": "TF.assign \"duration\" <$> TF.attribute",
                     "name": "_duration",
                     "method": "duration",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDuration",
@@ -47,6 +134,7 @@
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
@@ -63,15 +151,17 @@
                     "encoder": "TF.assign \"replication\" <$> TF.attribute",
                     "name": "_replication",
                     "method": "replication",
+                    "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
+                    "type": "TF.Attr s P.Int",
                     "class": "HasReplication",
                     "validate": false,
                     "optional": true,
                     "original": "replication"
                 }
             ],
-            "name": "DatabaseRetentionPolicies",
+            "key": "influxdb_database.retention_policies",
+            "name": "RetentionPoliciesSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -84,6 +174,7 @@
                     "encoder": "TF.assign \"duration\" <$> TF.attribute",
                     "name": "_duration",
                     "method": "duration",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDuration",
@@ -100,6 +191,7 @@
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
@@ -109,88 +201,8 @@
                 }
             ],
             "conflicts": [],
-            "type": "DatabaseRetentionPolicies s",
-            "original": "database_retention_policies"
-        },
-        {
-            "con": {
-                "smart": "newUserGrant",
-                "name": "UserGrant'"
-            },
-            "arguments": [
-                {
-                    "default": "_database",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"database\" <$> TF.attribute",
-                    "name": "_database",
-                    "method": "database",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDatabase",
-                    "validate": false,
-                    "optional": false,
-                    "original": "database"
-                },
-                {
-                    "default": "_privilege",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"privilege\" <$> TF.attribute",
-                    "name": "_privilege",
-                    "method": "privilege",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPrivilege",
-                    "validate": false,
-                    "optional": false,
-                    "original": "privilege"
-                }
-            ],
-            "name": "UserGrant",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_database",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"database\" <$> TF.attribute",
-                    "name": "_database",
-                    "method": "database",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDatabase",
-                    "validate": false,
-                    "optional": false,
-                    "original": "database"
-                },
-                {
-                    "default": "_privilege",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"privilege\" <$> TF.attribute",
-                    "name": "_privilege",
-                    "method": "privilege",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPrivilege",
-                    "validate": false,
-                    "optional": false,
-                    "original": "privilege"
-                }
-            ],
-            "conflicts": [],
-            "type": "UserGrant s",
-            "original": "user_grant"
+            "type": "RetentionPoliciesSetting s",
+            "original": "retention_policies"
         }
     ],
     "url": "https://www.terraform.io/docs/providers/influxdb/index.html",
@@ -211,6 +223,7 @@
                     "encoder": "TF.assign \"database\" <$> TF.attribute",
                     "name": "_database",
                     "method": "database",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDatabase",
@@ -227,6 +240,7 @@
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
@@ -243,6 +257,7 @@
                     "encoder": "TF.assign \"query\" <$> TF.attribute",
                     "name": "_query",
                     "method": "query",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasQuery",
@@ -252,6 +267,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/influxdb/r/continuous_query.html",
+            "key": "influxdb_continuous_query",
             "name": "ContinuousQueryResource",
             "threaded": true,
             "attributes": [],
@@ -265,6 +281,7 @@
                     "encoder": "TF.assign \"database\" <$> TF.attribute",
                     "name": "_database",
                     "method": "database",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDatabase",
@@ -281,6 +298,7 @@
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
@@ -297,6 +315,7 @@
                     "encoder": "TF.assign \"query\" <$> TF.attribute",
                     "name": "_query",
                     "method": "query",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasQuery",
@@ -324,6 +343,7 @@
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
@@ -340,15 +360,17 @@
                     "encoder": "TF.assign \"retention_policies\" <$> TF.attribute",
                     "name": "_retentionPolicies",
                     "method": "retentionPolicies",
+                    "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (DatabaseRetentionPolicies s)]",
+                    "type": "TF.Attr s [TF.Attr s (RetentionPoliciesSetting s)]",
                     "class": "HasRetentionPolicies",
-                    "validate": true,
+                    "validate": false,
                     "optional": true,
                     "original": "retention_policies"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/influxdb/r/database.html",
+            "key": "influxdb_database",
             "name": "DatabaseResource",
             "threaded": true,
             "attributes": [],
@@ -362,6 +384,7 @@
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
@@ -389,10 +412,11 @@
                     "encoder": "TF.assign \"grant\" <$> TF.attribute",
                     "name": "_grant",
                     "method": "grant",
+                    "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (UserGrant s)]",
+                    "type": "TF.Attr s [TF.Attr s (GrantSetting s)]",
                     "class": "HasGrant",
-                    "validate": true,
+                    "validate": false,
                     "optional": true,
                     "original": "grant"
                 },
@@ -405,6 +429,7 @@
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
@@ -421,6 +446,7 @@
                     "encoder": "TF.assign \"password\" <$> TF.attribute",
                     "name": "_password",
                     "method": "password",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPassword",
@@ -430,6 +456,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/influxdb/r/user.html",
+            "key": "influxdb_user",
             "name": "UserResource",
             "threaded": true,
             "attributes": [
@@ -442,6 +469,7 @@
                     "encoder": "TF.assign \"admin\" <$> TF.attribute",
                     "name": "_computedAdmin",
                     "method": "computedAdmin",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedAdmin",
@@ -460,6 +488,7 @@
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
@@ -476,6 +505,7 @@
                     "encoder": "TF.assign \"password\" <$> TF.attribute",
                     "name": "_password",
                     "method": "password",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPassword",
@@ -504,6 +534,7 @@
                 "encoder": "TF.assign \"password\" <$>",
                 "name": "_password",
                 "method": "password",
+                "threaded": false,
                 "conflicts": [],
                 "type": "P.Maybe P.Text",
                 "class": "HasPassword",
@@ -520,6 +551,7 @@
                 "encoder": "TF.assign \"url\" <$>",
                 "name": "_url",
                 "method": "url",
+                "threaded": false,
                 "conflicts": [],
                 "type": "P.Maybe P.Text",
                 "class": "HasUrl",
@@ -536,6 +568,7 @@
                 "encoder": "TF.assign \"username\" <$>",
                 "name": "_username",
                 "method": "username",
+                "threaded": false,
                 "conflicts": [],
                 "type": "P.Maybe P.Text",
                 "class": "HasUsername",
@@ -544,6 +577,7 @@
                 "original": "username"
             }
         ],
+        "key": "provider",
         "name": "Provider",
         "threaded": false,
         "attributes": [],
@@ -553,14 +587,15 @@
         "original": "provider"
     },
     "dependencies": [
+        "aeson",
         "base",
-        "unordered-containers",
-        "text",
+        "containers",
+        "microlens",
         "terrafomo",
-        "hashable",
-        "microlens"
+        "text"
     ],
     "name": "InfluxDB",
     "package": "terrafomo-influxdb",
+    "primitives": [],
     "original": "influxdb"
 }
