@@ -134,7 +134,7 @@ data ConfigData s = ConfigData'
 configData
     :: P.DataSource (ConfigData s)
 configData =
-    TF.unsafeDataSource "ignition_config" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ignition_config" TF.validator $
         ConfigData'
             { _append = TF.Nil
             , _arrays = TF.Nil
@@ -266,7 +266,7 @@ directoryData
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> P.DataSource (DirectoryData s)
 directoryData _filesystem _path =
-    TF.unsafeDataSource "ignition_directory" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ignition_directory" TF.validator $
         DirectoryData'
             { _filesystem = _filesystem
             , _gid = TF.Nil
@@ -335,7 +335,7 @@ diskData
     :: TF.Attr s P.Text -- ^ @device@ - 'P.device'
     -> P.DataSource (DiskData s)
 diskData _device =
-    TF.unsafeDataSource "ignition_disk" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ignition_disk" TF.validator $
         DiskData'
             { _device = _device
             , _partition = TF.Nil
@@ -403,7 +403,7 @@ fileData
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> P.DataSource (FileData s)
 fileData _filesystem _path =
-    TF.unsafeDataSource "ignition_file" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ignition_file" TF.validator $
         FileData'
             { _content = TF.Nil
             , _filesystem = _filesystem
@@ -493,7 +493,7 @@ data FilesystemData s = FilesystemData'
 filesystemData
     :: P.DataSource (FilesystemData s)
 filesystemData =
-    TF.unsafeDataSource "ignition_filesystem" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ignition_filesystem" TF.validator $
         FilesystemData'
             { _mount = TF.Nil
             , _name = TF.Nil
@@ -552,7 +552,7 @@ groupData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (GroupData s)
 groupData _name =
-    TF.unsafeDataSource "ignition_group" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ignition_group" TF.validator $
         GroupData'
             { _gid = TF.Nil
             , _name = _name
@@ -618,7 +618,7 @@ linkData
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
     -> P.DataSource (LinkData s)
 linkData _filesystem _path _target =
-    TF.unsafeDataSource "ignition_link" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ignition_link" TF.validator $
         LinkData'
             { _filesystem = _filesystem
             , _gid = TF.Nil
@@ -691,7 +691,7 @@ networkdUnitData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (NetworkdUnitData s)
 networkdUnitData _name =
-    TF.unsafeDataSource "ignition_networkd_unit" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ignition_networkd_unit" TF.validator $
         NetworkdUnitData'
             { _content = TF.Nil
             , _name = _name
@@ -743,7 +743,7 @@ raidData
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (RaidData s)
 raidData _level _name =
-    TF.unsafeDataSource "ignition_raid" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ignition_raid" TF.validator $
         RaidData'
             { _devices = TF.Nil
             , _level = _level
@@ -811,7 +811,7 @@ systemdUnitData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SystemdUnitData s)
 systemdUnitData _name =
-    TF.unsafeDataSource "ignition_systemd_unit" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ignition_systemd_unit" TF.validator $
         SystemdUnitData'
             { _content = TF.Nil
             , _dropin = TF.Nil
@@ -910,7 +910,7 @@ userData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (UserData s)
 userData _name =
-    TF.unsafeDataSource "ignition_user" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ignition_user" TF.validator $
         UserData'
             { _gecos = TF.Nil
             , _groups = TF.Nil
