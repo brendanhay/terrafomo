@@ -6519,7 +6519,7 @@ slbResource =
             { _bandwidth = TF.value 1
             , _internet = TF.value P.False
             , _internetChargeType = TF.Nil
-            , _name = TF.value "tf-lb-20180816123712262900000001"
+            , _name = TF.value "tf-lb-20180816164626761600000001"
             , _specification = TF.Nil
             , _vswitchId = TF.Nil
             }
