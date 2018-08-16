@@ -19,127 +19,127 @@ module Terrafomo.Circonus.Settings
     (
     -- ** alert_option
       AlertOptionSetting (..)
-    , alertOptionSetting
+    , newAlertOptionSetting
 
     -- ** caql
     , CaqlSetting (..)
-    , caqlSetting
+    , newCaqlSetting
 
     -- ** cloudwatch
     , CloudwatchSetting (..)
-    , cloudwatchSetting
+    , newCloudwatchSetting
 
     -- ** collector
     , CollectorSetting (..)
-    , collectorSetting
+    , newCollectorSetting
 
     -- ** consul
     , ConsulSetting (..)
-    , consulSetting
+    , newConsulSetting
 
     -- ** details
     , DetailsSetting (..)
-    , detailsSetting
+    , newDetailsSetting
 
     -- ** email
     , EmailSetting (..)
-    , emailSetting
+    , newEmailSetting
 
     -- ** http
     , HttpSetting (..)
-    , httpSetting
+    , newHttpSetting
 
     -- ** httptrap
     , HttptrapSetting (..)
-    , httptrapSetting
+    , newHttptrapSetting
 
     -- ** icmp_ping
     , IcmpPingSetting (..)
-    , icmpPingSetting
+    , newIcmpPingSetting
 
     -- ** if
-    , IfSetting (..)
-    , ifSetting
+    , If'Setting (..)
+    , newIf'Setting
 
     -- ** invites
     , InvitesSetting (..)
-    , invitesSetting
+    , newInvitesSetting
 
     -- ** irc
     , IrcSetting (..)
-    , ircSetting
+    , newIrcSetting
 
     -- ** json
     , JsonSetting (..)
-    , jsonSetting
+    , newJsonSetting
 
     -- ** metric
     , MetricSetting (..)
-    , metricSetting
+    , newMetricSetting
 
     -- ** metric_cluster
     , MetricClusterSetting (..)
-    , metricClusterSetting
+    , newMetricClusterSetting
 
     -- ** mysql
     , MysqlSetting (..)
-    , mysqlSetting
+    , newMysqlSetting
 
     -- ** over
     , OverSetting (..)
-    , overSetting
+    , newOverSetting
 
     -- ** pager_duty
     , PagerDutySetting (..)
-    , pagerDutySetting
+    , newPagerDutySetting
 
     -- ** postgresql
     , PostgresqlSetting (..)
-    , postgresqlSetting
+    , newPostgresqlSetting
 
     -- ** query
     , QuerySetting (..)
-    , querySetting
+    , newQuerySetting
 
     -- ** slack
     , SlackSetting (..)
-    , slackSetting
+    , newSlackSetting
 
     -- ** sms
     , SmsSetting (..)
-    , smsSetting
+    , newSmsSetting
 
     -- ** statsd
     , StatsdSetting (..)
-    , statsdSetting
+    , newStatsdSetting
 
     -- ** tcp
     , TcpSetting (..)
-    , tcpSetting
+    , newTcpSetting
 
     -- ** then
-    , ThenSetting (..)
-    , thenSetting
+    , Then'Setting (..)
+    , newThen'Setting
 
     -- ** usage
     , UsageSetting (..)
-    , usageSetting
+    , newUsageSetting
 
     -- ** users
     , UsersSetting (..)
-    , usersSetting
+    , newUsersSetting
 
     -- ** value
     , ValueSetting (..)
-    , valueSetting
+    , newValueSetting
 
     -- ** victorops
     , VictoropsSetting (..)
-    , victoropsSetting
+    , newVictoropsSetting
 
     -- ** xmpp
     , XmppSetting (..)
-    , xmppSetting
+    , newXmppSetting
 
     ) where
 
@@ -181,10 +181,10 @@ data AlertOptionSetting s = AlertOptionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @alert_option@ settings value.
-alertOptionSetting
+newAlertOptionSetting
     :: TF.Attr s P.Int -- ^ 'P._severity': @severity@
     -> AlertOptionSetting s
-alertOptionSetting _severity =
+newAlertOptionSetting _severity =
     AlertOptionSetting'
         { _escalateAfter = TF.Nil
         , _escalateTo = TF.Nil
@@ -233,10 +233,10 @@ data CaqlSetting s = CaqlSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @caql@ settings value.
-caqlSetting
+newCaqlSetting
     :: TF.Attr s P.Text -- ^ 'P._query': @query@
     -> CaqlSetting s
-caqlSetting _query =
+newCaqlSetting _query =
     CaqlSetting'
         { _query = _query
         }
@@ -290,7 +290,7 @@ data CloudwatchSetting s = CloudwatchSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @cloudwatch@ settings value.
-cloudwatchSetting
+newCloudwatchSetting
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ 'P._dimmensions': @dimmensions@
     -> TF.Attr s P.Text -- ^ 'P._apiKey': @api_key@
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ 'P._metric': @metric@
@@ -298,7 +298,7 @@ cloudwatchSetting
     -> TF.Attr s P.Text -- ^ 'P._apiSecret': @api_secret@
     -> TF.Attr s P.Text -- ^ 'P._url': @url@
     -> CloudwatchSetting s
-cloudwatchSetting _dimmensions _apiKey _metric _namespace _apiSecret _url =
+newCloudwatchSetting _dimmensions _apiKey _metric _namespace _apiSecret _url =
     CloudwatchSetting'
         { _apiKey = _apiKey
         , _apiSecret = _apiSecret
@@ -368,10 +368,10 @@ data CollectorSetting s = CollectorSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @collector@ settings value.
-collectorSetting
+newCollectorSetting
     :: TF.Attr s P.Text -- ^ 'P._id': @id@
     -> CollectorSetting s
-collectorSetting _id =
+newCollectorSetting _id =
     CollectorSetting'
         { _id = _id
         }
@@ -470,9 +470,9 @@ data ConsulSetting s = ConsulSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @consul@ settings value.
-consulSetting
+newConsulSetting
     :: ConsulSetting s
-consulSetting =
+newConsulSetting =
     ConsulSetting'
         { _aclToken = TF.Nil
         , _allowStale = TF.value P.True
@@ -610,9 +610,9 @@ data DetailsSetting s = DetailsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @details@ settings value.
-detailsSetting
+newDetailsSetting
     :: DetailsSetting s
-detailsSetting =
+newDetailsSetting =
     DetailsSetting'
 
 instance TF.IsValue  (DetailsSetting s)
@@ -669,9 +669,9 @@ data EmailSetting s = EmailSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @email@ settings value.
-emailSetting
+newEmailSetting
     :: EmailSetting s
-emailSetting =
+newEmailSetting =
     EmailSetting'
         { _address = TF.Nil
         , _user = TF.Nil
@@ -791,11 +791,11 @@ data HttpSetting s = HttpSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @http@ settings value.
-httpSetting
+newHttpSetting
     :: TF.Attr s P.Text -- ^ 'P._address': @address@
     -> TF.Attr s P.Text -- ^ 'P._url': @url@
     -> HttpSetting s
-httpSetting _address _url =
+newHttpSetting _address _url =
     HttpSetting'
         { _authMethod = TF.Nil
         , _authPassword = TF.Nil
@@ -946,9 +946,9 @@ data HttptrapSetting s = HttptrapSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @httptrap@ settings value.
-httptrapSetting
+newHttptrapSetting
     :: HttptrapSetting s
-httptrapSetting =
+newHttptrapSetting =
     HttptrapSetting'
         { _asyncMetrics = TF.value P.False
         , _secret = TF.Nil
@@ -992,9 +992,9 @@ data IcmpPingSetting s = IcmpPingSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @icmp_ping@ settings value.
-icmpPingSetting
+newIcmpPingSetting
     :: IcmpPingSetting s
-icmpPingSetting =
+newIcmpPingSetting =
     IcmpPingSetting'
         { _availability = TF.value 100.0
         , _count = TF.value 5
@@ -1028,8 +1028,8 @@ instance P.HasInterval (IcmpPingSetting s) (TF.Attr s P.Text) where
                (\s a -> s { _interval = a } :: IcmpPingSetting s)
 
 -- | @if@ nested settings.
-data IfSetting s = IfSetting'
-    { _then' :: TF.Attr s (ThenSetting s)
+data If'Setting s = If'Setting'
+    { _then' :: TF.Attr s (Then'Setting s)
     -- ^ @then@ - (Optional)
     -- Description of the action(s) to take when this rule set is active
     --
@@ -1040,50 +1040,50 @@ data IfSetting s = IfSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @if@ settings value.
-ifSetting
-    :: IfSetting s
-ifSetting =
-    IfSetting'
+newIf'Setting
+    :: If'Setting s
+newIf'Setting =
+    If'Setting'
         { _then' = TF.Nil
         , _value = TF.Nil
         }
 
-instance TF.IsValue  (IfSetting s)
-instance TF.IsObject (IfSetting s) where
-    toObject IfSetting'{..} = P.catMaybes
+instance TF.IsValue  (If'Setting s)
+instance TF.IsObject (If'Setting s) where
+    toObject If'Setting'{..} = P.catMaybes
         [ TF.assign "then" <$> TF.attribute _then'
         , TF.assign "value" <$> TF.attribute _value
         ]
 
-instance TF.IsValid (IfSetting s) where
+instance TF.IsValid (If'Setting s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_then'"
                   (_then'
-                      :: IfSetting s -> TF.Attr s (ThenSetting s))
+                      :: If'Setting s -> TF.Attr s (Then'Setting s))
                   TF.validator
            P.<> TF.settingsValidator "_value"
                   (_value
-                      :: IfSetting s -> TF.Attr s (ValueSetting s))
+                      :: If'Setting s -> TF.Attr s (ValueSetting s))
                   TF.validator
 
-instance P.HasThen' (IfSetting s) (TF.Attr s (ThenSetting s)) where
+instance P.HasThen' (If'Setting s) (TF.Attr s (Then'Setting s)) where
     then' =
-        P.lens (_then' :: IfSetting s -> TF.Attr s (ThenSetting s))
-               (\s a -> s { _then' = a } :: IfSetting s)
+        P.lens (_then' :: If'Setting s -> TF.Attr s (Then'Setting s))
+               (\s a -> s { _then' = a } :: If'Setting s)
 
-instance P.HasValue (IfSetting s) (TF.Attr s (ValueSetting s)) where
+instance P.HasValue (If'Setting s) (TF.Attr s (ValueSetting s)) where
     value =
-        P.lens (_value :: IfSetting s -> TF.Attr s (ValueSetting s))
-               (\s a -> s { _value = a } :: IfSetting s)
+        P.lens (_value :: If'Setting s -> TF.Attr s (ValueSetting s))
+               (\s a -> s { _value = a } :: If'Setting s)
 
 -- | @invites@ nested settings.
 data InvitesSetting s = InvitesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @invites@ settings value.
-invitesSetting
+newInvitesSetting
     :: InvitesSetting s
-invitesSetting =
+newInvitesSetting =
     InvitesSetting'
 
 instance TF.IsValue  (InvitesSetting s)
@@ -1107,10 +1107,10 @@ data IrcSetting s = IrcSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @irc@ settings value.
-ircSetting
+newIrcSetting
     :: TF.Attr s P.Text -- ^ 'P._user': @user@
     -> IrcSetting s
-ircSetting _user =
+newIrcSetting _user =
     IrcSetting'
         { _user = _user
         }
@@ -1193,10 +1193,10 @@ data JsonSetting s = JsonSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @json@ settings value.
-jsonSetting
+newJsonSetting
     :: TF.Attr s P.Text -- ^ 'P._url': @url@
     -> JsonSetting s
-jsonSetting _url =
+newJsonSetting _url =
     JsonSetting'
         { _authMethod = TF.Nil
         , _authPassword = TF.Nil
@@ -1374,12 +1374,12 @@ data MetricSetting s = MetricSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @metric@ settings value.
-metricSetting
+newMetricSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._metricType': @metric_type@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> MetricSetting s
-metricSetting _name _metricType _type' =
+newMetricSetting _name _metricType _type' =
     MetricSetting'
         { _active = TF.value P.True
         , _name = _name
@@ -1545,10 +1545,10 @@ data MetricClusterSetting s = MetricClusterSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @metric_cluster@ settings value.
-metricClusterSetting
+newMetricClusterSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> MetricClusterSetting s
-metricClusterSetting _name =
+newMetricClusterSetting _name =
     MetricClusterSetting'
         { _active = TF.value P.True
         , _aggregate = TF.value "none"
@@ -1615,11 +1615,11 @@ data MysqlSetting s = MysqlSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @mysql@ settings value.
-mysqlSetting
+newMysqlSetting
     :: TF.Attr s P.Text -- ^ 'P._dsn': @dsn@
     -> TF.Attr s P.Text -- ^ 'P._query': @query@
     -> MysqlSetting s
-mysqlSetting _dsn _query =
+newMysqlSetting _dsn _query =
     MysqlSetting'
         { _dsn = _dsn
         , _query = _query
@@ -1658,9 +1658,9 @@ data OverSetting s = OverSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @over@ settings value.
-overSetting
+newOverSetting
     :: OverSetting s
-overSetting =
+newOverSetting =
     OverSetting'
         { _last = TF.value "300s"
         , _using = TF.value "average"
@@ -1700,11 +1700,11 @@ data PagerDutySetting s = PagerDutySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @pager_duty@ settings value.
-pagerDutySetting
+newPagerDutySetting
     :: TF.Attr s P.Text -- ^ 'P._serviceKey': @service_key@
     -> TF.Attr s P.Text -- ^ 'P._webhookUrl': @webhook_url@
     -> PagerDutySetting s
-pagerDutySetting _serviceKey _webhookUrl =
+newPagerDutySetting _serviceKey _webhookUrl =
     PagerDutySetting'
         { _contactGroupFallback = TF.Nil
         , _serviceKey = _serviceKey
@@ -1750,11 +1750,11 @@ data PostgresqlSetting s = PostgresqlSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @postgresql@ settings value.
-postgresqlSetting
+newPostgresqlSetting
     :: TF.Attr s P.Text -- ^ 'P._dsn': @dsn@
     -> TF.Attr s P.Text -- ^ 'P._query': @query@
     -> PostgresqlSetting s
-postgresqlSetting _dsn _query =
+newPostgresqlSetting _dsn _query =
     PostgresqlSetting'
         { _dsn = _dsn
         , _query = _query
@@ -1793,11 +1793,11 @@ data QuerySetting s = QuerySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @query@ settings value.
-querySetting
+newQuerySetting
     :: TF.Attr s P.Text -- ^ 'P._definition': @definition@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> QuerySetting s
-querySetting _definition _type' =
+newQuerySetting _definition _type' =
     QuerySetting'
         { _definition = _definition
         , _type' = _type'
@@ -1844,11 +1844,11 @@ data SlackSetting s = SlackSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @slack@ settings value.
-slackSetting
+newSlackSetting
     :: TF.Attr s P.Text -- ^ 'P._channel': @channel@
     -> TF.Attr s P.Text -- ^ 'P._team': @team@
     -> SlackSetting s
-slackSetting _channel _team =
+newSlackSetting _channel _team =
     SlackSetting'
         { _buttons = TF.value P.True
         , _channel = _channel
@@ -1912,9 +1912,9 @@ data SmsSetting s = SmsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @sms@ settings value.
-smsSetting
+newSmsSetting
     :: SmsSetting s
-smsSetting =
+newSmsSetting =
     SmsSetting'
         { _address = TF.Nil
         , _user = TF.Nil
@@ -1960,10 +1960,10 @@ data StatsdSetting s = StatsdSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @statsd@ settings value.
-statsdSetting
+newStatsdSetting
     :: TF.Attr s P.Text -- ^ 'P._sourceIp': @source_ip@
     -> StatsdSetting s
-statsdSetting _sourceIp =
+newStatsdSetting _sourceIp =
     StatsdSetting'
         { _sourceIp = _sourceIp
         }
@@ -2023,11 +2023,11 @@ data TcpSetting s = TcpSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @tcp@ settings value.
-tcpSetting
+newTcpSetting
     :: TF.Attr s P.Text -- ^ 'P._host': @host@
     -> TF.Attr s P.Int -- ^ 'P._port': @port@
     -> TcpSetting s
-tcpSetting _host _port =
+newTcpSetting _host _port =
     TcpSetting'
         { _bannerRegexp = TF.Nil
         , _caChain = TF.Nil
@@ -2096,7 +2096,7 @@ instance P.HasTls (TcpSetting s) (TF.Attr s P.Bool) where
                (\s a -> s { _tls = a } :: TcpSetting s)
 
 -- | @then@ nested settings.
-data ThenSetting s = ThenSetting'
+data Then'Setting s = Then'Setting'
     { _after    :: TF.Attr s P.Text
     -- ^ @after@ - (Optional)
     -- The length of time we should wait before contacting the contact groups after
@@ -2114,49 +2114,49 @@ data ThenSetting s = ThenSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @then@ settings value.
-thenSetting
-    :: ThenSetting s
-thenSetting =
-    ThenSetting'
+newThen'Setting
+    :: Then'Setting s
+newThen'Setting =
+    Then'Setting'
         { _after = TF.Nil
         , _notify = TF.Nil
         , _severity = TF.value 1
         }
 
-instance TF.IsValue  (ThenSetting s)
-instance TF.IsObject (ThenSetting s) where
-    toObject ThenSetting'{..} = P.catMaybes
+instance TF.IsValue  (Then'Setting s)
+instance TF.IsObject (Then'Setting s) where
+    toObject Then'Setting'{..} = P.catMaybes
         [ TF.assign "after" <$> TF.attribute _after
         , TF.assign "notify" <$> TF.attribute _notify
         , TF.assign "severity" <$> TF.attribute _severity
         ]
 
-instance TF.IsValid (ThenSetting s) where
+instance TF.IsValid (Then'Setting s) where
     validator = P.mempty
 
-instance P.HasAfter (ThenSetting s) (TF.Attr s P.Text) where
+instance P.HasAfter (Then'Setting s) (TF.Attr s P.Text) where
     after =
-        P.lens (_after :: ThenSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _after = a } :: ThenSetting s)
+        P.lens (_after :: Then'Setting s -> TF.Attr s P.Text)
+               (\s a -> s { _after = a } :: Then'Setting s)
 
-instance P.HasNotify (ThenSetting s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
+instance P.HasNotify (Then'Setting s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     notify =
-        P.lens (_notify :: ThenSetting s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
-               (\s a -> s { _notify = a } :: ThenSetting s)
+        P.lens (_notify :: Then'Setting s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
+               (\s a -> s { _notify = a } :: Then'Setting s)
 
-instance P.HasSeverity (ThenSetting s) (TF.Attr s P.Int) where
+instance P.HasSeverity (Then'Setting s) (TF.Attr s P.Int) where
     severity =
-        P.lens (_severity :: ThenSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _severity = a } :: ThenSetting s)
+        P.lens (_severity :: Then'Setting s -> TF.Attr s P.Int)
+               (\s a -> s { _severity = a } :: Then'Setting s)
 
 -- | @usage@ nested settings.
 data UsageSetting s = UsageSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @usage@ settings value.
-usageSetting
+newUsageSetting
     :: UsageSetting s
-usageSetting =
+newUsageSetting =
     UsageSetting'
 
 instance TF.IsValue  (UsageSetting s)
@@ -2180,9 +2180,9 @@ data UsersSetting s = UsersSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @users@ settings value.
-usersSetting
+newUsersSetting
     :: UsersSetting s
-usersSetting =
+newUsersSetting =
     UsersSetting'
 
 instance TF.IsValue  (UsersSetting s)
@@ -2326,9 +2326,9 @@ data ValueSetting s = ValueSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @value@ settings value.
-valueSetting
+newValueSetting
     :: ValueSetting s
-valueSetting =
+newValueSetting =
     ValueSetting'
         { _absent = TF.Nil
         , _changed = TF.Nil
@@ -2476,14 +2476,14 @@ data VictoropsSetting s = VictoropsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @victorops@ settings value.
-victoropsSetting
+newVictoropsSetting
     :: TF.Attr s P.Int -- ^ 'P._critical': @critical@
     -> TF.Attr s P.Int -- ^ 'P._info': @info@
     -> TF.Attr s P.Text -- ^ 'P._apiKey': @api_key@
     -> TF.Attr s P.Text -- ^ 'P._team': @team@
     -> TF.Attr s P.Int -- ^ 'P._warning': @warning@
     -> VictoropsSetting s
-victoropsSetting _critical _info _apiKey _team _warning =
+newVictoropsSetting _critical _info _apiKey _team _warning =
     VictoropsSetting'
         { _apiKey = _apiKey
         , _contactGroupFallback = TF.Nil
@@ -2554,9 +2554,9 @@ data XmppSetting s = XmppSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @xmpp@ settings value.
-xmppSetting
+newXmppSetting
     :: XmppSetting s
-xmppSetting =
+newXmppSetting =
     XmppSetting'
         { _address = TF.Nil
         , _user = TF.Nil

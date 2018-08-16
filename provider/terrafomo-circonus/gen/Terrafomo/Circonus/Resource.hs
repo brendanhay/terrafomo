@@ -920,7 +920,7 @@ data RuleSetResource s = RuleSetResource'
     -- ^ @check@ - (Required, Forces New)
     -- The CID of the check that contains the metric for this rule set
     --
-    , _if'        :: TF.Attr s (P.NonEmpty (TF.Attr s (IfSetting s)))
+    , _if'        :: TF.Attr s (P.NonEmpty (TF.Attr s (If'Setting s)))
     -- ^ @if@ - (Required)
     -- A rule to execute for this rule set
     --
@@ -953,7 +953,7 @@ data RuleSetResource s = RuleSetResource'
 -- | Define a new @circonus_rule_set@ resource value.
 ruleSetResource
     :: TF.Attr s P.Text -- ^ @check@ ('P._check', 'P.check')
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (IfSetting s))) -- ^ @if@ ('P._if'', 'P.if'')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (If'Setting s))) -- ^ @if@ ('P._if'', 'P.if'')
     -> TF.Attr s P.Text -- ^ @metric_name@ ('P._metricName', 'P.metricName')
     -> P.Resource (RuleSetResource s)
 ruleSetResource _check _if' _metricName =
@@ -989,9 +989,9 @@ instance P.HasCheck (RuleSetResource s) (TF.Attr s P.Text) where
         P.lens (_check :: RuleSetResource s -> TF.Attr s P.Text)
                (\s a -> s { _check = a } :: RuleSetResource s)
 
-instance P.HasIf' (RuleSetResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (IfSetting s)))) where
+instance P.HasIf' (RuleSetResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (If'Setting s)))) where
     if' =
-        P.lens (_if' :: RuleSetResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (IfSetting s))))
+        P.lens (_if' :: RuleSetResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (If'Setting s))))
                (\s a -> s { _if' = a } :: RuleSetResource s)
 
 instance P.HasLink (RuleSetResource s) (TF.Attr s P.Text) where
