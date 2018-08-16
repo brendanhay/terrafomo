@@ -17,7 +17,6 @@
 --
 module Terrafomo.Datadog.Settings
     (
-    -- * Settings Datatypes
     -- ** conditional_format
       ConditionalFormatSetting (..)
     , newConditionalFormatSetting
@@ -93,6 +92,7 @@ data ConditionalFormatSetting s = ConditionalFormatSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @conditional_format@ settings value.
 newConditionalFormatSetting
     :: TF.Attr s P.Text -- ^ @comparator@ - 'P.comparator'
     -> ConditionalFormatSetting s
@@ -202,6 +202,7 @@ data GraphSetting s = GraphSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @graph@ settings value.
 newGraphSetting
     :: TF.Attr s [TF.Attr s (RequestSetting s)] -- ^ @request@ - 'P.request'
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
@@ -337,6 +338,7 @@ data MarkerSetting s = MarkerSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @marker@ settings value.
 newMarkerSetting
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
@@ -399,6 +401,7 @@ data RecurrenceSetting s = RecurrenceSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @recurrence@ settings value.
 newRecurrenceSetting
     :: TF.Attr s P.Int -- ^ @period@ - 'P.period'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -508,6 +511,7 @@ data RequestSetting s = RequestSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @request@ settings value.
 newRequestSetting
     :: TF.Attr s P.Text -- ^ @q@ - 'P.q'
     -> RequestSetting s
@@ -624,6 +628,7 @@ data TemplateVariableSetting s = TemplateVariableSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @template_variable@ settings value.
 newTemplateVariableSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TemplateVariableSetting s
@@ -682,6 +687,7 @@ data ThresholdsSetting s = ThresholdsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @thresholds@ settings value.
 newThresholdsSetting
     :: ThresholdsSetting s
 newThresholdsSetting =

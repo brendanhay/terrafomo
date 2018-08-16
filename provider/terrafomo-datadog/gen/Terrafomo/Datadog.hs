@@ -12,12 +12,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Datadog
-    ( module Terrafomo.Datadog.Lens
-    , module Terrafomo.Datadog.Provider
-    , module Terrafomo.Datadog.Resource
-    , module Terrafomo.Datadog.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Datadog.Provider
+
+    -- * Custom Types
     , module Terrafomo.Datadog.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+
+    -- * Resources
+    , module Terrafomo.Datadog.Resource
+
+    -- * Settings
+    , module Terrafomo.Datadog.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Datadog.Lens
     ) where
 
 import Terrafomo.Datadog.Lens

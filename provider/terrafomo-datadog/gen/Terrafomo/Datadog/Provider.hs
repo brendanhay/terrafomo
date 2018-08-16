@@ -17,11 +17,10 @@
 --
 module Terrafomo.Datadog.Provider
     (
-    -- * Datadog Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * Datadog Specific Aliases
+    -- ** Datadog Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -82,7 +81,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "datadog"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "api_key" _apiKey
             , P.Just $ TF.assign "app_key" _appKey

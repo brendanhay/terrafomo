@@ -17,7 +17,6 @@
 --
 module Terrafomo.Datadog.Resource
     (
-    -- * Resource Datatypes
     -- ** datadog_downtime
       DowntimeResource (..)
     , downtimeResource
@@ -95,6 +94,7 @@ data DowntimeResource s = DowntimeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @datadog_downtime@ resource value.
 downtimeResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @scope@ - 'P.scope'
     -> P.Resource (DowntimeResource s)
@@ -201,6 +201,7 @@ data MetricMetadataResource s = MetricMetadataResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @datadog_metric_metadata@ resource value.
 metricMetadataResource
     :: TF.Attr s P.Text -- ^ @metric@ - 'P.metric'
     -> P.Resource (MetricMetadataResource s)
@@ -323,6 +324,7 @@ data MonitorResource s = MonitorResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @datadog_monitor@ resource value.
 monitorResource
     :: TF.Attr s P.Text -- ^ @message@ - 'P.message'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -488,6 +490,7 @@ data TimeboardResource s = TimeboardResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @datadog_timeboard@ resource value.
 timeboardResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s [TF.Attr s (GraphSetting s)] -- ^ @graph@ - 'P.graph'
@@ -565,6 +568,7 @@ data UserResource s = UserResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @datadog_user@ resource value.
 userResource
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> TF.Attr s P.Text -- ^ @handle@ - 'P.handle'
