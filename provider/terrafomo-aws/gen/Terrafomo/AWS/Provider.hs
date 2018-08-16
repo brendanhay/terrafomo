@@ -56,7 +56,7 @@ import qualified Terrafomo.Validator as TF
 type DataSource a = TF.Schema ()               Provider a
 type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
 
--- | The @AWS@ Terraform provider configuration.
+-- | The @aws@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/index.html terraform documentation>
 -- for more information.
@@ -191,7 +191,7 @@ newProvider _region =
 defaultProvider :: TF.Provider (P.Maybe Provider)
 defaultProvider =
     TF.Provider
-        { _providerType   = TF.Type P.Nothing "provider"
+        { _providerType   = TF.Type P.Nothing "aws"
         , _providerAlias  = P.Nothing
         , _providerConfig = P.Nothing
         }
