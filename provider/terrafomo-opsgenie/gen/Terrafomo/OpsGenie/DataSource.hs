@@ -17,7 +17,6 @@
 --
 module Terrafomo.OpsGenie.DataSource
     (
-    -- * DataSource Datatypes
     -- ** opsgenie_user
       UserData (..)
     , userData
@@ -58,6 +57,7 @@ data UserData s = UserData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opsgenie_user@ datasource value.
 userData
     :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.DataSource (UserData s)

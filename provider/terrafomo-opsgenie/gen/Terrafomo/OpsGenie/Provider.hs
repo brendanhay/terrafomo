@@ -17,11 +17,10 @@
 --
 module Terrafomo.OpsGenie.Provider
     (
-    -- * OpsGenie Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * OpsGenie Specific Aliases
+    -- ** OpsGenie Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -77,7 +76,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "opsgenie"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "api_key" _apiKey
             ]

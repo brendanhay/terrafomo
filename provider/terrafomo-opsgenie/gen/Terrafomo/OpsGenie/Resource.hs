@@ -17,7 +17,6 @@
 --
 module Terrafomo.OpsGenie.Resource
     (
-    -- * Resource Datatypes
     -- ** opsgenie_team
       TeamResource (..)
     , teamResource
@@ -68,6 +67,7 @@ data TeamResource s = TeamResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opsgenie_team@ resource value.
 teamResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (TeamResource s)
@@ -129,6 +129,7 @@ data UserResource s = UserResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @opsgenie_user@ resource value.
 userResource
     :: TF.Attr s P.Text -- ^ @full_name@ - 'P.fullName'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'

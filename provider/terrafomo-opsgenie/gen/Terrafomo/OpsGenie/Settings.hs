@@ -17,7 +17,6 @@
 --
 module Terrafomo.OpsGenie.Settings
     (
-    -- * Settings Datatypes
     -- ** member
       MemberSetting (..)
     , newMemberSetting
@@ -55,6 +54,7 @@ data MemberSetting s = MemberSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @member@ settings value.
 newMemberSetting
     :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> MemberSetting s

@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.OpsGenie
-    ( module Terrafomo.OpsGenie.DataSource
-    , module Terrafomo.OpsGenie.Lens
-    , module Terrafomo.OpsGenie.Provider
-    , module Terrafomo.OpsGenie.Resource
-    , module Terrafomo.OpsGenie.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.OpsGenie.Provider
+
+    -- * Custom Types
     , module Terrafomo.OpsGenie.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.OpsGenie.DataSource
+
+    -- * Resources
+    , module Terrafomo.OpsGenie.Resource
+
+    -- * Settings
+    , module Terrafomo.OpsGenie.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.OpsGenie.Lens
     ) where
 
 import Terrafomo.OpsGenie.DataSource
