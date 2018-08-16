@@ -43,7 +43,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "cloudinit_config_part",
+            "name": "part",
             "schemas": [
               {
                 "name": "content",
@@ -260,7 +260,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "cloudinit_config_part",
+            "name": "part",
             "schemas": [
               {
                 "name": "content",
