@@ -13,11 +13,11 @@
 --
 module Terrafomo.VSphere
     ( module Terrafomo.VSphere.DataSource
-    , module Terrafomo.VSphere.Resource
-    , module Terrafomo.VSphere.Types
-    , module Terrafomo.VSphere.Provider
     , module Terrafomo.VSphere.Lens
+    , module Terrafomo.VSphere.Provider
+    , module Terrafomo.VSphere.Resource
     , module Terrafomo.VSphere.Settings
+    , module Terrafomo.VSphere.Types
     -- * Provider Aliases
     ) where
 

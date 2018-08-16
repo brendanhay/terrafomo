@@ -78,10 +78,9 @@ import GHC.Base (($))
 
 import Terrafomo.VSphere.Settings
 
-import qualified Data.Hashable              as P
-import qualified Data.HashMap.Strict        as P
-import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Map.Strict            as P
+import qualified Data.Map.Strict            as Map
 import qualified Data.Maybe                 as P
 import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
@@ -111,13 +110,13 @@ data ComputeClusterData s = ComputeClusterData'
     -- ^ @name@ - (Required)
     -- The name or absolute path to the cluster.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 computeClusterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeClusterData s)
 computeClusterData _name =
-    TF.newDataSource "vsphere_compute_cluster" TF.validator $
+    TF.unsafeDataSource "vsphere_compute_cluster" P.defaultProvider TF.validator $
         ComputeClusterData'
             { _datacenterId = TF.Nil
             , _name = _name
@@ -157,13 +156,13 @@ data CustomAttributeData s = CustomAttributeData'
     -- ^ @name@ - (Required)
     -- The display name of the custom attribute.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 customAttributeData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CustomAttributeData s)
 customAttributeData _name =
-    TF.newDataSource "vsphere_custom_attribute" TF.validator $
+    TF.unsafeDataSource "vsphere_custom_attribute" P.defaultProvider TF.validator $
         CustomAttributeData'
             { _name = _name
             }
@@ -197,12 +196,12 @@ data DatacenterData s = DatacenterData'
     -- The name of the datacenter. This can be a name or path.	Can be omitted if
     -- there is only one datacenter in your inventory.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 datacenterData
     :: P.DataSource (DatacenterData s)
 datacenterData =
-    TF.newDataSource "vsphere_datacenter" TF.validator $
+    TF.unsafeDataSource "vsphere_datacenter" P.defaultProvider TF.validator $
         DatacenterData'
             { _name = TF.Nil
             }
@@ -238,13 +237,13 @@ data DatastoreData s = DatastoreData'
     -- ^ @name@ - (Required)
     -- The name or path of the datastore.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 datastoreData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DatastoreData s)
 datastoreData _name =
-    TF.newDataSource "vsphere_datastore" TF.validator $
+    TF.unsafeDataSource "vsphere_datastore" P.defaultProvider TF.validator $
         DatastoreData'
             { _datacenterId = TF.Nil
             , _name = _name
@@ -286,13 +285,13 @@ data DatastoreClusterData s = DatastoreClusterData'
     -- ^ @name@ - (Required)
     -- The name or absolute path to the datastore cluster.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 datastoreClusterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DatastoreClusterData s)
 datastoreClusterData _name =
-    TF.newDataSource "vsphere_datastore_cluster" TF.validator $
+    TF.unsafeDataSource "vsphere_datastore_cluster" P.defaultProvider TF.validator $
         DatastoreClusterData'
             { _datacenterId = TF.Nil
             , _name = _name
@@ -335,13 +334,13 @@ data DistributedVirtualSwitchData s = DistributedVirtualSwitchData'
     -- ^ @name@ - (Required)
     -- The name of the distributed virtual switch. This can be a name or path.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 distributedVirtualSwitchData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DistributedVirtualSwitchData s)
 distributedVirtualSwitchData _name =
-    TF.newDataSource "vsphere_distributed_virtual_switch" TF.validator $
+    TF.unsafeDataSource "vsphere_distributed_virtual_switch" P.defaultProvider TF.validator $
         DistributedVirtualSwitchData'
             { _datacenterId = TF.Nil
             , _name = _name
@@ -386,13 +385,13 @@ data HostData s = HostData'
     -- The name of the host. This can be a name or path.	If not provided, the
     -- default host is used.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 hostData
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> P.DataSource (HostData s)
 hostData _datacenterId =
-    TF.newDataSource "vsphere_host" TF.validator $
+    TF.unsafeDataSource "vsphere_host" P.defaultProvider TF.validator $
         HostData'
             { _datacenterId = _datacenterId
             , _name = TF.Nil
@@ -438,13 +437,13 @@ data NetworkData s = NetworkData'
     -- ^ @name@ - (Required)
     -- The name or path of the network.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (NetworkData s)
 networkData _name =
-    TF.newDataSource "vsphere_network" TF.validator $
+    TF.unsafeDataSource "vsphere_network" P.defaultProvider TF.validator $
         NetworkData'
             { _datacenterId = TF.Nil
             , _name = _name
@@ -490,12 +489,12 @@ data ResourcePoolData s = ResourcePoolData'
     -- ^ @name@ - (Optional)
     -- The name or path of the resource pool.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 resourcePoolData
     :: P.DataSource (ResourcePoolData s)
 resourcePoolData =
-    TF.newDataSource "vsphere_resource_pool" TF.validator $
+    TF.unsafeDataSource "vsphere_resource_pool" P.defaultProvider TF.validator $
         ResourcePoolData'
             { _datacenterId = TF.Nil
             , _name = TF.Nil
@@ -536,14 +535,14 @@ data TagData s = TagData'
     -- ^ @name@ - (Required)
     -- The display name of the tag.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 tagData
     :: TF.Attr s P.Text -- ^ @category_id@ - 'P.categoryId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (TagData s)
 tagData _categoryId _name =
-    TF.newDataSource "vsphere_tag" TF.validator $
+    TF.unsafeDataSource "vsphere_tag" P.defaultProvider TF.validator $
         TagData'
             { _categoryId = _categoryId
             , _name = _name
@@ -583,13 +582,13 @@ data TagCategoryData s = TagCategoryData'
     -- ^ @name@ - (Required)
     -- The display name of the category.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 tagCategoryData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (TagCategoryData s)
 tagCategoryData _name =
-    TF.newDataSource "vsphere_tag_category" TF.validator $
+    TF.unsafeDataSource "vsphere_tag_category" P.defaultProvider TF.validator $
         TagCategoryData'
             { _name = _name
             }
@@ -634,18 +633,18 @@ data VirtualMachineData s = VirtualMachineData'
     -- ^ @name@ - (Required)
     -- The name or path of the virtual machine.
     --
-    , _scsiControllerScanCount :: TF.Attr s P.Integer
+    , _scsiControllerScanCount :: TF.Attr s P.Int
     -- ^ @scsi_controller_scan_count@ - (Optional)
     -- The number of SCSI controllers to scan for disk sizes and controller types
     -- on.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 virtualMachineData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (VirtualMachineData s)
 virtualMachineData _name =
-    TF.newDataSource "vsphere_virtual_machine" TF.validator $
+    TF.unsafeDataSource "vsphere_virtual_machine" P.defaultProvider TF.validator $
         VirtualMachineData'
             { _datacenterId = TF.Nil
             , _name = _name
@@ -672,9 +671,9 @@ instance P.HasName (VirtualMachineData s) (TF.Attr s P.Text) where
         P.lens (_name :: VirtualMachineData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: VirtualMachineData s)
 
-instance P.HasScsiControllerScanCount (VirtualMachineData s) (TF.Attr s P.Integer) where
+instance P.HasScsiControllerScanCount (VirtualMachineData s) (TF.Attr s P.Int) where
     scsiControllerScanCount =
-        P.lens (_scsiControllerScanCount :: VirtualMachineData s -> TF.Attr s P.Integer)
+        P.lens (_scsiControllerScanCount :: VirtualMachineData s -> TF.Attr s P.Int)
                (\s a -> s { _scsiControllerScanCount = a } :: VirtualMachineData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
@@ -683,7 +682,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualMachineData s)) (TF.Attr s
 instance s ~ s' => P.HasComputedAlternateGuestName (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
     computedAlternateGuestName x = TF.compute (TF.refKey x) "alternate_guest_name"
 
-instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VirtualMachineData s)) (TF.Attr s [TF.Attr s (VirtualMachineDisks s)]) where
+instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VirtualMachineData s)) (TF.Attr s [TF.Attr s (DisksSetting s)]) where
     computedDisks x = TF.compute (TF.refKey x) "disks"
 
 instance s ~ s' => P.HasComputedFirmware (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
@@ -720,13 +719,13 @@ data VmfsDisksData s = VmfsDisksData'
     -- Rescan the system for disks before querying. This may lengthen the time it
     -- takes to gather information.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 vmfsDisksData
     :: TF.Attr s P.Text -- ^ @host_system_id@ - 'P.hostSystemId'
     -> P.DataSource (VmfsDisksData s)
 vmfsDisksData _hostSystemId =
-    TF.newDataSource "vsphere_vmfs_disks" TF.validator $
+    TF.unsafeDataSource "vsphere_vmfs_disks" P.defaultProvider TF.validator $
         VmfsDisksData'
             { _filter = TF.Nil
             , _hostSystemId = _hostSystemId

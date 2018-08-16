@@ -20,6 +20,7 @@ module Terrafomo.VSphere.Provider
     -- * VSphere Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * VSphere Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.VSphere.Settings
 
-import qualified Data.Hashable           as P
-import qualified Data.HashMap.Strict     as P
-import qualified Data.HashMap.Strict     as Map
 import qualified Data.List.NonEmpty      as P
+import qualified Data.Map.Strict         as P
+import qualified Data.Map.Strict         as Map
 import qualified Data.Maybe              as P
 import qualified Data.Monoid             as P
 import qualified Data.Text               as P
@@ -101,7 +101,7 @@ data Provider = Provider'
     -- ^ @vsphere_server@ - (Optional)
     -- The vSphere Server name for vSphere API operations.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: P.Text -- ^ @password@ - 'P.password'
@@ -121,30 +121,27 @@ newProvider _password _user =
         , _vsphereServer = P.Nothing
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
-                  , TF.assign "client_debug" <$> _clientDebug
-                  , TF.assign "client_debug_path" <$> _clientDebugPath
-                  , TF.assign "client_debug_path_run" <$> _clientDebugPathRun
-                  , P.Just $ TF.assign "password" _password
-                  , TF.assign "persist_session" <$> _persistSession
-                  , TF.assign "rest_session_path" <$> _restSessionPath
-                  , P.Just $ TF.assign "user" _user
-                  , TF.assign "vim_session_path" <$> _vimSessionPath
-                  , TF.assign "vsphere_server" <$> _vsphereServer
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
+        ,  TF.assign "client_debug" <$> _clientDebug
+        ,  TF.assign "client_debug_path" <$> _clientDebugPath
+        ,  TF.assign "client_debug_path_run" <$> _clientDebugPathRun
+        ,  P.Just $ TF.assign "password" _password
+        ,  TF.assign "persist_session" <$> _persistSession
+        ,  TF.assign "rest_session_path" <$> _restSessionPath
+        ,  P.Just $ TF.assign "user" _user
+        ,  TF.assign "vim_session_path" <$> _vimSessionPath
+        ,  TF.assign "vsphere_server" <$> _vsphereServer
+        ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
