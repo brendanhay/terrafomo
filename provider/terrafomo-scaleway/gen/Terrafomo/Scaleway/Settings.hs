@@ -19,7 +19,7 @@ module Terrafomo.Scaleway.Settings
     (
     -- ** volume
       VolumeSetting (..)
-    , newVolumeSetting
+    , volumeSetting
 
     ) where
 
@@ -55,11 +55,11 @@ data VolumeSetting s = VolumeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @volume@ settings value.
-newVolumeSetting
+volumeSetting
     :: TF.Attr s P.Int -- ^ 'P._sizeInGb': @size_in_gb@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> VolumeSetting s
-newVolumeSetting _sizeInGb _type' =
+volumeSetting _sizeInGb _type' =
     VolumeSetting'
         { _sizeInGb = _sizeInGb
         , _type' = _type'
