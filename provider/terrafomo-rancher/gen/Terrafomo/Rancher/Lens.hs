@@ -34,7 +34,10 @@ module Terrafomo.Rancher.Lens
     , HasHostname (..)
     , HasKey (..)
     , HasLabels (..)
+    , HasMember (..)
     , HasName (..)
+    , HasOrchestration (..)
+    , HasProjectTemplateId (..)
     , HasPublicValue (..)
     , HasRancherCompose (..)
     , HasRegistryId (..)
@@ -43,6 +46,7 @@ module Terrafomo.Rancher.Lens
     , HasSecretKey (..)
     , HasSecretValue (..)
     , HasServerAddress (..)
+    , HasStartOnCreate (..)
     , HasValue (..)
 
     -- ** Computed Attributes
@@ -193,11 +197,29 @@ class HasLabels a b | a -> b where
 instance HasLabels a b => HasLabels (TF.Schema l p a) b where
     labels = TF.configuration . labels
 
+class HasMember a b | a -> b where
+    member :: P.Lens' a b
+
+instance HasMember a b => HasMember (TF.Schema l p a) b where
+    member = TF.configuration . member
+
 class HasName a b | a -> b where
     name :: P.Lens' a b
 
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
+
+class HasOrchestration a b | a -> b where
+    orchestration :: P.Lens' a b
+
+instance HasOrchestration a b => HasOrchestration (TF.Schema l p a) b where
+    orchestration = TF.configuration . orchestration
+
+class HasProjectTemplateId a b | a -> b where
+    projectTemplateId :: P.Lens' a b
+
+instance HasProjectTemplateId a b => HasProjectTemplateId (TF.Schema l p a) b where
+    projectTemplateId = TF.configuration . projectTemplateId
 
 class HasPublicValue a b | a -> b where
     publicValue :: P.Lens' a b
@@ -246,6 +268,12 @@ class HasServerAddress a b | a -> b where
 
 instance HasServerAddress a b => HasServerAddress (TF.Schema l p a) b where
     serverAddress = TF.configuration . serverAddress
+
+class HasStartOnCreate a b | a -> b where
+    startOnCreate :: P.Lens' a b
+
+instance HasStartOnCreate a b => HasStartOnCreate (TF.Schema l p a) b where
+    startOnCreate = TF.configuration . startOnCreate
 
 class HasValue a b | a -> b where
     value :: P.Lens' a b

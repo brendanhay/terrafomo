@@ -203,12 +203,27 @@ instance s ~ s' => P.HasComputedVersion (TF.Ref s' (CertificateResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/rancher/r/environment.html terraform documentation>
 -- for more information.
 data EnvironmentResource s = EnvironmentResource'
-    { _description :: TF.Attr s P.Text
+    { _description       :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name        :: TF.Attr s P.Text
+    , _member            :: TF.Attr s [TF.Attr s (MemberSetting s)]
+    -- ^ @member@ - (Optional)
+    --
+    , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
+    , _orchestration     :: TF.Attr s P.Text
+    -- ^ @orchestration@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'projectTemplateId'
+    , _projectTemplateId :: TF.Attr s P.Text
+    -- ^ @project_template_id@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'orchestration'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @rancher_environment@ resource value.
@@ -219,27 +234,59 @@ environmentResource _name =
     TF.unsafeResource "rancher_environment" TF.validator $
         EnvironmentResource'
             { _description = TF.Nil
+            , _member = TF.Nil
             , _name = _name
+            , _orchestration = TF.Nil
+            , _projectTemplateId = TF.Nil
             }
 
 instance TF.IsObject (EnvironmentResource s) where
     toObject EnvironmentResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "member" <$> TF.attribute _member
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "orchestration" <$> TF.attribute _orchestration
+        , TF.assign "project_template_id" <$> TF.attribute _projectTemplateId
         ]
 
 instance TF.IsValid (EnvironmentResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\EnvironmentResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_orchestration P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_orchestration",
+                            [ "_projectTemplateId"
+                            ])
+        , if (_projectTemplateId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_projectTemplateId",
+                            [ "_orchestration"
+                            ])
+        ])
 
 instance P.HasDescription (EnvironmentResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: EnvironmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: EnvironmentResource s)
 
+instance P.HasMember (EnvironmentResource s) (TF.Attr s [TF.Attr s (MemberSetting s)]) where
+    member =
+        P.lens (_member :: EnvironmentResource s -> TF.Attr s [TF.Attr s (MemberSetting s)])
+               (\s a -> s { _member = a } :: EnvironmentResource s)
+
 instance P.HasName (EnvironmentResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: EnvironmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: EnvironmentResource s)
+
+instance P.HasOrchestration (EnvironmentResource s) (TF.Attr s P.Text) where
+    orchestration =
+        P.lens (_orchestration :: EnvironmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _orchestration = a } :: EnvironmentResource s)
+
+instance P.HasProjectTemplateId (EnvironmentResource s) (TF.Attr s P.Text) where
+    projectTemplateId =
+        P.lens (_projectTemplateId :: EnvironmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _projectTemplateId = a } :: EnvironmentResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -667,6 +714,9 @@ data StackResource s = StackResource'
     , _scope          :: TF.Attr s P.Text
     -- ^ @scope@ - (Optional)
     --
+    , _startOnCreate  :: TF.Attr s P.Bool
+    -- ^ @start_on_create@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @rancher_stack@ resource value.
@@ -686,6 +736,7 @@ stackResource _environmentId _name =
             , _name = _name
             , _rancherCompose = TF.Nil
             , _scope = TF.value "user"
+            , _startOnCreate = TF.Nil
             }
 
 instance TF.IsObject (StackResource s) where
@@ -699,6 +750,7 @@ instance TF.IsObject (StackResource s) where
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "rancher_compose" <$> TF.attribute _rancherCompose
         , TF.assign "scope" <$> TF.attribute _scope
+        , TF.assign "start_on_create" <$> TF.attribute _startOnCreate
         ]
 
 instance TF.IsValid (StackResource s) where
@@ -748,6 +800,11 @@ instance P.HasScope (StackResource s) (TF.Attr s P.Text) where
     scope =
         P.lens (_scope :: StackResource s -> TF.Attr s P.Text)
                (\s a -> s { _scope = a } :: StackResource s)
+
+instance P.HasStartOnCreate (StackResource s) (TF.Attr s P.Bool) where
+    startOnCreate =
+        P.lens (_startOnCreate :: StackResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _startOnCreate = a } :: StackResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
