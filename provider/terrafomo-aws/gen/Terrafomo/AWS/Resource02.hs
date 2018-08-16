@@ -7969,14 +7969,14 @@ data IamGroupPolicyResource s = IamGroupPolicyResource'
     , _namePrefix :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
     --
-    , _policy     :: TF.Attr s P.Text
+    , _policy     :: TF.Attr s P.Document
     -- ^ @policy@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 iamGroupPolicyResource
     :: TF.Attr s P.Text -- ^ @group@ - 'P.group'
-    -> TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
+    -> TF.Attr s P.Document -- ^ @policy@ - 'P.policy'
     -> P.Resource (IamGroupPolicyResource s)
 iamGroupPolicyResource _group _policy =
     TF.unsafeResource "aws_iam_group_policy" P.defaultProvider TF.validator $
@@ -8006,9 +8006,9 @@ instance P.HasNamePrefix (IamGroupPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_namePrefix :: IamGroupPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _namePrefix = a } :: IamGroupPolicyResource s)
 
-instance P.HasPolicy (IamGroupPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasPolicy (IamGroupPolicyResource s) (TF.Attr s P.Document) where
     policy =
-        P.lens (_policy :: IamGroupPolicyResource s -> TF.Attr s P.Text)
+        P.lens (_policy :: IamGroupPolicyResource s -> TF.Attr s P.Document)
                (\s a -> s { _policy = a } :: IamGroupPolicyResource s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (IamGroupPolicyResource s)) (TF.Attr s P.Text) where
@@ -8184,13 +8184,13 @@ data IamPolicyResource s = IamPolicyResource'
     , _path        :: TF.Attr s P.Text
     -- ^ @path@ - (Optional, Forces New)
     --
-    , _policy      :: TF.Attr s P.Text
+    , _policy      :: TF.Attr s P.Document
     -- ^ @policy@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 iamPolicyResource
-    :: TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
+    :: TF.Attr s P.Document -- ^ @policy@ - 'P.policy'
     -> P.Resource (IamPolicyResource s)
 iamPolicyResource _policy =
     TF.unsafeResource "aws_iam_policy" P.defaultProvider TF.validator $
@@ -8227,9 +8227,9 @@ instance P.HasPath (IamPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_path :: IamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _path = a } :: IamPolicyResource s)
 
-instance P.HasPolicy (IamPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasPolicy (IamPolicyResource s) (TF.Attr s P.Document) where
     policy =
-        P.lens (_policy :: IamPolicyResource s -> TF.Attr s P.Text)
+        P.lens (_policy :: IamPolicyResource s -> TF.Attr s P.Document)
                (\s a -> s { _policy = a } :: IamPolicyResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamPolicyResource s)) (TF.Attr s P.Text) where
@@ -8316,7 +8316,7 @@ instance P.HasUsers (IamPolicyAttachmentResource s) (TF.Attr s [TF.Attr s P.Text
 -- See the <https://www.terraform.io/docs/providers/aws/r/iam_role.html terraform documentation>
 -- for more information.
 data IamRoleResource s = IamRoleResource'
-    { _assumeRolePolicy    :: TF.Attr s P.Text
+    { _assumeRolePolicy    :: TF.Attr s P.Document
     -- ^ @assume_role_policy@ - (Required)
     --
     , _description         :: TF.Attr s P.Text
@@ -8340,7 +8340,7 @@ data IamRoleResource s = IamRoleResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 iamRoleResource
-    :: TF.Attr s P.Text -- ^ @assume_role_policy@ - 'P.assumeRolePolicy'
+    :: TF.Attr s P.Document -- ^ @assume_role_policy@ - 'P.assumeRolePolicy'
     -> P.Resource (IamRoleResource s)
 iamRoleResource _assumeRolePolicy =
     TF.unsafeResource "aws_iam_role" P.defaultProvider TF.validator $
@@ -8368,9 +8368,9 @@ instance TF.IsObject (IamRoleResource s) where
 instance TF.IsValid (IamRoleResource s) where
     validator = P.mempty
 
-instance P.HasAssumeRolePolicy (IamRoleResource s) (TF.Attr s P.Text) where
+instance P.HasAssumeRolePolicy (IamRoleResource s) (TF.Attr s P.Document) where
     assumeRolePolicy =
-        P.lens (_assumeRolePolicy :: IamRoleResource s -> TF.Attr s P.Text)
+        P.lens (_assumeRolePolicy :: IamRoleResource s -> TF.Attr s P.Document)
                (\s a -> s { _assumeRolePolicy = a } :: IamRoleResource s)
 
 instance P.HasDescription (IamRoleResource s) (TF.Attr s P.Text) where
@@ -8423,7 +8423,7 @@ data IamRolePolicyResource s = IamRolePolicyResource'
     { _namePrefix :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
     --
-    , _policy     :: TF.Attr s P.Text
+    , _policy     :: TF.Attr s P.Document
     -- ^ @policy@ - (Required)
     --
     , _role       :: TF.Attr s P.Text
@@ -8432,7 +8432,7 @@ data IamRolePolicyResource s = IamRolePolicyResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 iamRolePolicyResource
-    :: TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
+    :: TF.Attr s P.Document -- ^ @policy@ - 'P.policy'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.Resource (IamRolePolicyResource s)
 iamRolePolicyResource _policy _role =
@@ -8458,9 +8458,9 @@ instance P.HasNamePrefix (IamRolePolicyResource s) (TF.Attr s P.Text) where
         P.lens (_namePrefix :: IamRolePolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _namePrefix = a } :: IamRolePolicyResource s)
 
-instance P.HasPolicy (IamRolePolicyResource s) (TF.Attr s P.Text) where
+instance P.HasPolicy (IamRolePolicyResource s) (TF.Attr s P.Document) where
     policy =
-        P.lens (_policy :: IamRolePolicyResource s -> TF.Attr s P.Text)
+        P.lens (_policy :: IamRolePolicyResource s -> TF.Attr s P.Document)
                (\s a -> s { _policy = a } :: IamRolePolicyResource s)
 
 instance P.HasRole (IamRolePolicyResource s) (TF.Attr s P.Text) where
