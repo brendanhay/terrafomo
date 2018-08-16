@@ -12,12 +12,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Scaleway
-    ( module Terrafomo.Scaleway.Resource
-    , module Terrafomo.Scaleway.Types
-    , module Terrafomo.Scaleway.Provider
+    ( module Terrafomo.Scaleway.DataSource
     , module Terrafomo.Scaleway.Lens
+    , module Terrafomo.Scaleway.Provider
+    , module Terrafomo.Scaleway.Resource
     , module Terrafomo.Scaleway.Settings
-    , module Terrafomo.Scaleway.DataSource
+    , module Terrafomo.Scaleway.Types
     -- * Provider Aliases
     ) where
 

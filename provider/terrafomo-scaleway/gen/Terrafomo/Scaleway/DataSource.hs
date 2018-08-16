@@ -42,10 +42,9 @@ import GHC.Base (($))
 
 import Terrafomo.Scaleway.Settings
 
-import qualified Data.Hashable               as P
-import qualified Data.HashMap.Strict         as P
-import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Map.Strict             as P
+import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
 import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
@@ -74,12 +73,12 @@ data BootscriptData s = BootscriptData'
     -- ^ @name_filter@ - (Optional, Forces New)
     -- Partial name of the desired bootscript to filter with
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 bootscriptData
     :: P.DataSource (BootscriptData s)
 bootscriptData =
-    TF.newDataSource "scaleway_bootscript" TF.validator $
+    TF.unsafeDataSource "scaleway_bootscript" P.defaultProvider TF.validator $
         BootscriptData'
             { _name = TF.Nil
             , _nameFilter = TF.Nil
@@ -151,13 +150,13 @@ data ImageData s = ImageData'
     -- Conflicts with:
     --
     -- * 'mostRecent'
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 imageData
     :: TF.Attr s P.Text -- ^ @architecture@ - 'P.architecture'
     -> P.DataSource (ImageData s)
 imageData _architecture =
-    TF.newDataSource "scaleway_image" TF.validator $
+    TF.unsafeDataSource "scaleway_image" P.defaultProvider TF.validator $
         ImageData'
             { _architecture = _architecture
             , _mostRecent = TF.Nil
@@ -224,13 +223,13 @@ data SecurityGroupData s = SecurityGroupData'
     -- ^ @name@ - (Required)
     -- The name of the security group
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 securityGroupData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SecurityGroupData s)
 securityGroupData _name =
-    TF.newDataSource "scaleway_security_group" TF.validator $
+    TF.unsafeDataSource "scaleway_security_group" P.defaultProvider TF.validator $
         SecurityGroupData'
             { _name = _name
             }
@@ -266,13 +265,13 @@ data VolumeData s = VolumeData'
     -- ^ @name@ - (Required)
     -- The name of the volume
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 volumeData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (VolumeData s)
 volumeData _name =
-    TF.newDataSource "scaleway_volume" TF.validator $
+    TF.unsafeDataSource "scaleway_volume" P.defaultProvider TF.validator $
         VolumeData'
             { _name = _name
             }
@@ -296,7 +295,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeData s)) (TF.Attr s P.Text)
 instance s ~ s' => P.HasComputedServer (TF.Ref s' (VolumeData s)) (TF.Attr s P.Text) where
     computedServer x = TF.compute (TF.refKey x) "server"
 
-instance s ~ s' => P.HasComputedSizeInGb (TF.Ref s' (VolumeData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedSizeInGb (TF.Ref s' (VolumeData s)) (TF.Attr s P.Int) where
     computedSizeInGb x = TF.compute (TF.refKey x) "size_in_gb"
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (VolumeData s)) (TF.Attr s P.Text) where

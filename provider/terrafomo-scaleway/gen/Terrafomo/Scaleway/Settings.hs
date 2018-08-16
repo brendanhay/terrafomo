@@ -18,9 +18,9 @@
 module Terrafomo.Scaleway.Settings
     (
     -- * Settings Datatypes
-    -- ** server_volume
-      ServerVolume (..)
-    , newServerVolume
+    -- ** volume
+      VolumeSetting (..)
+    , newVolumeSetting
 
     ) where
 
@@ -28,10 +28,10 @@ import Data.Functor ((<$>))
 
 import GHC.Base (($))
 
-import qualified Data.Hashable            as P
-import qualified Data.HashMap.Strict      as P
-import qualified Data.HashMap.Strict      as Map
+
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Map.Strict          as P
+import qualified Data.Map.Strict          as Map
 import qualified Data.Maybe               as P
 import qualified Data.Monoid              as P
 import qualified Data.Text                as P
@@ -45,46 +45,45 @@ import qualified Terrafomo.Scaleway.Lens  as P
 import qualified Terrafomo.Scaleway.Types as P
 import qualified Terrafomo.Validator      as TF
 
--- | @server_volume@ nested settings.
-data ServerVolume s = ServerVolume'
-    { _sizeInGb :: TF.Attr s P.Integer
+-- | @volume@ nested settings.
+data VolumeSetting s = VolumeSetting'
+    { _sizeInGb :: TF.Attr s P.Int
     -- ^ @size_in_gb@ - (Required)
     --
     , _type'    :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
-newServerVolume
-    :: TF.Attr s P.Integer -- ^ @size_in_gb@ - 'P.sizeInGb'
+newVolumeSetting
+    :: TF.Attr s P.Int -- ^ @size_in_gb@ - 'P.sizeInGb'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> ServerVolume s
-newServerVolume _sizeInGb _type' =
-    ServerVolume'
+    -> VolumeSetting s
+newVolumeSetting _sizeInGb _type' =
+    VolumeSetting'
         { _sizeInGb = _sizeInGb
         , _type' = _type'
         }
 
-instance P.Hashable  (ServerVolume s)
-instance TF.IsValue  (ServerVolume s)
-instance TF.IsObject (ServerVolume s) where
-    toObject ServerVolume'{..} = P.catMaybes
+instance TF.IsValue  (VolumeSetting s)
+instance TF.IsObject (VolumeSetting s) where
+    toObject VolumeSetting'{..} = P.catMaybes
         [ TF.assign "size_in_gb" <$> TF.attribute _sizeInGb
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance TF.IsValid (ServerVolume s) where
+instance TF.IsValid (VolumeSetting s) where
     validator = P.mempty
 
-instance P.HasSizeInGb (ServerVolume s) (TF.Attr s P.Integer) where
+instance P.HasSizeInGb (VolumeSetting s) (TF.Attr s P.Int) where
     sizeInGb =
-        P.lens (_sizeInGb :: ServerVolume s -> TF.Attr s P.Integer)
-               (\s a -> s { _sizeInGb = a } :: ServerVolume s)
+        P.lens (_sizeInGb :: VolumeSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _sizeInGb = a } :: VolumeSetting s)
 
-instance P.HasType' (ServerVolume s) (TF.Attr s P.Text) where
+instance P.HasType' (VolumeSetting s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: ServerVolume s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: ServerVolume s)
+        P.lens (_type' :: VolumeSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: VolumeSetting s)
 
-instance s ~ s' => P.HasComputedVolumeId (TF.Ref s' (ServerVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVolumeId (TF.Ref s' (VolumeSetting s)) (TF.Attr s P.Text) where
     computedVolumeId x = TF.compute (TF.refKey x) "volume_id"
