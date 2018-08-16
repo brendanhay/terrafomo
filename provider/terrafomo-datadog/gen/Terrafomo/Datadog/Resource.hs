@@ -277,6 +277,9 @@ data MonitorResource s = MonitorResource'
     { _escalationMessage :: TF.Attr s P.Text
     -- ^ @escalation_message@ - (Optional)
     --
+    , _evaluationDelay :: TF.Attr s P.Int
+    -- ^ @evaluation_delay@ - (Optional)
+    --
     , _includeTags :: TF.Attr s P.Bool
     -- ^ @include_tags@ - (Optional)
     --
@@ -288,6 +291,9 @@ data MonitorResource s = MonitorResource'
     --
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
+    --
+    , _newHostDelay :: TF.Attr s P.Int
+    -- ^ @new_host_delay@ - (Optional)
     --
     , _noDataTimeframe :: TF.Attr s P.Int
     -- ^ @no_data_timeframe@ - (Optional)
@@ -335,10 +341,12 @@ monitorResource _message _name _query _type' =
     TF.unsafeResource "datadog_monitor" TF.validator $
         MonitorResource'
             { _escalationMessage = TF.Nil
+            , _evaluationDelay = TF.Nil
             , _includeTags = TF.value P.True
             , _locked = TF.Nil
             , _message = _message
             , _name = _name
+            , _newHostDelay = TF.Nil
             , _noDataTimeframe = TF.Nil
             , _notifyAudit = TF.Nil
             , _notifyNoData = TF.value P.False
@@ -355,10 +363,12 @@ monitorResource _message _name _query _type' =
 instance TF.IsObject (MonitorResource s) where
     toObject MonitorResource'{..} = P.catMaybes
         [ TF.assign "escalation_message" <$> TF.attribute _escalationMessage
+        , TF.assign "evaluation_delay" <$> TF.attribute _evaluationDelay
         , TF.assign "include_tags" <$> TF.attribute _includeTags
         , TF.assign "locked" <$> TF.attribute _locked
         , TF.assign "message" <$> TF.attribute _message
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "new_host_delay" <$> TF.attribute _newHostDelay
         , TF.assign "no_data_timeframe" <$> TF.attribute _noDataTimeframe
         , TF.assign "notify_audit" <$> TF.attribute _notifyAudit
         , TF.assign "notify_no_data" <$> TF.attribute _notifyNoData
@@ -380,6 +390,11 @@ instance P.HasEscalationMessage (MonitorResource s) (TF.Attr s P.Text) where
         P.lens (_escalationMessage :: MonitorResource s -> TF.Attr s P.Text)
                (\s a -> s { _escalationMessage = a } :: MonitorResource s)
 
+instance P.HasEvaluationDelay (MonitorResource s) (TF.Attr s P.Int) where
+    evaluationDelay =
+        P.lens (_evaluationDelay :: MonitorResource s -> TF.Attr s P.Int)
+               (\s a -> s { _evaluationDelay = a } :: MonitorResource s)
+
 instance P.HasIncludeTags (MonitorResource s) (TF.Attr s P.Bool) where
     includeTags =
         P.lens (_includeTags :: MonitorResource s -> TF.Attr s P.Bool)
@@ -399,6 +414,11 @@ instance P.HasName (MonitorResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: MonitorResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: MonitorResource s)
+
+instance P.HasNewHostDelay (MonitorResource s) (TF.Attr s P.Int) where
+    newHostDelay =
+        P.lens (_newHostDelay :: MonitorResource s -> TF.Attr s P.Int)
+               (\s a -> s { _newHostDelay = a } :: MonitorResource s)
 
 instance P.HasNoDataTimeframe (MonitorResource s) (TF.Attr s P.Int) where
     noDataTimeframe =

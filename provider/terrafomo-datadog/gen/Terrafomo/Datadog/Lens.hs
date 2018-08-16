@@ -35,6 +35,7 @@ module Terrafomo.Datadog.Lens
     , HasEmail (..)
     , HasEnd (..)
     , HasEscalationMessage (..)
+    , HasEvaluationDelay (..)
     , HasEvents (..)
     , HasExtraCol (..)
     , HasGraph (..)
@@ -52,6 +53,7 @@ module Terrafomo.Datadog.Lens
     , HasMetric (..)
     , HasMonitorId (..)
     , HasName (..)
+    , HasNewHostDelay (..)
     , HasNoDataTimeframe (..)
     , HasNotifyAudit (..)
     , HasNotifyNoData (..)
@@ -227,6 +229,12 @@ class HasEscalationMessage a b | a -> b where
 instance HasEscalationMessage a b => HasEscalationMessage (TF.Schema l p a) b where
     escalationMessage = TF.configuration . escalationMessage
 
+class HasEvaluationDelay a b | a -> b where
+    evaluationDelay :: P.Lens' a b
+
+instance HasEvaluationDelay a b => HasEvaluationDelay (TF.Schema l p a) b where
+    evaluationDelay = TF.configuration . evaluationDelay
+
 class HasEvents a b | a -> b where
     events :: P.Lens' a b
 
@@ -328,6 +336,12 @@ class HasName a b | a -> b where
 
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
+
+class HasNewHostDelay a b | a -> b where
+    newHostDelay :: P.Lens' a b
+
+instance HasNewHostDelay a b => HasNewHostDelay (TF.Schema l p a) b where
+    newHostDelay = TF.configuration . newHostDelay
 
 class HasNoDataTimeframe a b | a -> b where
     noDataTimeframe :: P.Lens' a b
