@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newOrganizationSetting",
+                "smart": "organizationSetting",
                 "name": "OrganizationSetting'"
             },
             "arguments": [
@@ -139,7 +139,7 @@
         },
         {
             "con": {
-                "smart": "newRuleSetting",
+                "smart": "ruleSetting",
                 "name": "RuleSetting'"
             },
             "arguments": [
@@ -224,7 +224,7 @@
         },
         {
             "con": {
-                "smart": "newTunnelsSetting",
+                "smart": "tunnelsSetting",
                 "name": "TunnelsSetting'"
             },
             "arguments": [],
