@@ -280,8 +280,8 @@ data KeySetting s = KeySetting'
 
 -- | Construct a new @key@ settings value.
 newKeySetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._path': @path@
     -> KeySetting s
 newKeySetting _name _path =
     KeySetting'
@@ -588,7 +588,7 @@ data ServiceSetting s = ServiceSetting'
 
 -- | Construct a new @service@ settings value.
 newServiceSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> ServiceSetting s
 newServiceSetting _name =
     ServiceSetting'
@@ -704,8 +704,8 @@ data SubkeySetting s = SubkeySetting'
 
 -- | Construct a new @subkey@ settings value.
 newSubkeySetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._path': @path@
     -> SubkeySetting s
 newSubkeySetting _name _path =
     SubkeySetting'
@@ -849,8 +849,8 @@ data TemplateSetting s = TemplateSetting'
 
 -- | Construct a new @template@ settings value.
 newTemplateSetting
-    :: TF.Attr s P.Text -- ^ @regexp@ - 'P.regexp'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._regexp': @regexp@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> TemplateSetting s
 newTemplateSetting _regexp _type' =
     TemplateSetting'

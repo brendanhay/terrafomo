@@ -93,7 +93,7 @@ data AgentServiceResource s = AgentServiceResource'
 
 -- | Define a new @consul_agent_service@ resource value.
 agentServiceResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (AgentServiceResource s)
 agentServiceResource _name =
     TF.unsafeResource "consul_agent_service" TF.validator $
@@ -155,8 +155,8 @@ data CatalogEntryResource s = CatalogEntryResource'
 
 -- | Define a new @consul_catalog_entry@ resource value.
 catalogEntryResource
-    :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
-    -> TF.Attr s P.Text -- ^ @node@ - 'P.node'
+    :: TF.Attr s P.Text -- ^ @address@ ('P._address', 'P.address')
+    -> TF.Attr s P.Text -- ^ @node@ ('P._node', 'P.node')
     -> P.Resource (CatalogEntryResource s)
 catalogEntryResource _address _node =
     TF.unsafeResource "consul_catalog_entry" TF.validator $
@@ -228,9 +228,9 @@ data IntentionResource s = IntentionResource'
 
 -- | Define a new @consul_intention@ resource value.
 intentionResource
-    :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
-    -> TF.Attr s P.Text -- ^ @destination_name@ - 'P.destinationName'
-    -> TF.Attr s P.Text -- ^ @source_name@ - 'P.sourceName'
+    :: TF.Attr s P.Text -- ^ @action@ ('P._action', 'P.action')
+    -> TF.Attr s P.Text -- ^ @destination_name@ ('P._destinationName', 'P.destinationName')
+    -> TF.Attr s P.Text -- ^ @source_name@ ('P._sourceName', 'P.sourceName')
     -> P.Resource (IntentionResource s)
 intentionResource _action _destinationName _sourceName =
     TF.unsafeResource "consul_intention" TF.validator $
@@ -300,8 +300,8 @@ data KeyPrefixResource s = KeyPrefixResource'
 
 -- | Define a new @consul_key_prefix@ resource value.
 keyPrefixResource
-    :: TF.Attr s P.Text -- ^ @path_prefix@ - 'P.pathPrefix'
-    -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @subkeys@ - 'P.subkeys'
+    :: TF.Attr s P.Text -- ^ @path_prefix@ ('P._pathPrefix', 'P.pathPrefix')
+    -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @subkeys@ ('P._subkeys', 'P.subkeys')
     -> P.Resource (KeyPrefixResource s)
 keyPrefixResource _pathPrefix _subkeys =
     TF.unsafeResource "consul_key_prefix" TF.validator $
@@ -411,8 +411,8 @@ data NodeResource s = NodeResource'
 
 -- | Define a new @consul_node@ resource value.
 nodeResource
-    :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @address@ ('P._address', 'P.address')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (NodeResource s)
 nodeResource _address _name =
     TF.unsafeResource "consul_node" TF.validator $
@@ -498,8 +498,8 @@ data PreparedQueryResource s = PreparedQueryResource'
 
 -- | Define a new @consul_prepared_query@ resource value.
 preparedQueryResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @service@ - 'P.service'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @service@ ('P._service', 'P.service')
     -> P.Resource (PreparedQueryResource s)
 preparedQueryResource _name _service =
     TF.unsafeResource "consul_prepared_query" TF.validator $
@@ -633,8 +633,8 @@ data ServiceResource s = ServiceResource'
 
 -- | Define a new @consul_service@ resource value.
 serviceResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @node@ - 'P.node'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @node@ ('P._node', 'P.node')
     -> P.Resource (ServiceResource s)
 serviceResource _name _node =
     TF.unsafeResource "consul_service" TF.validator $

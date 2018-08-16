@@ -428,7 +428,7 @@ data CatalogServiceData s = CatalogServiceData'
 
 -- | Define a new @consul_catalog_service@ datasource value.
 catalogServiceData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (CatalogServiceData s)
 catalogServiceData _name =
     TF.unsafeDataSource "consul_catalog_service" TF.validator $
@@ -538,7 +538,7 @@ data KeyPrefixData s = KeyPrefixData'
 
 -- | Define a new @consul_key_prefix@ datasource value.
 keyPrefixData
-    :: TF.Attr s P.Text -- ^ @path_prefix@ - 'P.pathPrefix'
+    :: TF.Attr s P.Text -- ^ @path_prefix@ ('P._pathPrefix', 'P.pathPrefix')
     -> P.DataSource (KeyPrefixData s)
 keyPrefixData _pathPrefix =
     TF.unsafeDataSource "consul_key_prefix" TF.validator $
@@ -704,7 +704,7 @@ data ServiceData s = ServiceData'
 
 -- | Define a new @consul_service@ datasource value.
 serviceData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ServiceData s)
 serviceData _name =
     TF.unsafeDataSource "consul_service" TF.validator $
