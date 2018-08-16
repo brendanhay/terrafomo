@@ -19,15 +19,15 @@ module Terrafomo.Packet.Settings
     (
     -- ** attachments
       AttachmentsSetting (..)
-    , attachmentsSetting
+    , newAttachmentsSetting
 
     -- ** network
     , NetworkSetting (..)
-    , networkSetting
+    , newNetworkSetting
 
     -- ** snapshot_policies
     , SnapshotPoliciesSetting (..)
-    , snapshotPoliciesSetting
+    , newSnapshotPoliciesSetting
 
     ) where
 
@@ -57,9 +57,9 @@ data AttachmentsSetting s = AttachmentsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @attachments@ settings value.
-attachmentsSetting
+newAttachmentsSetting
     :: AttachmentsSetting s
-attachmentsSetting =
+newAttachmentsSetting =
     AttachmentsSetting'
 
 instance TF.IsValue  (AttachmentsSetting s)
@@ -77,9 +77,9 @@ data NetworkSetting s = NetworkSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @network@ settings value.
-networkSetting
+newNetworkSetting
     :: NetworkSetting s
-networkSetting =
+newNetworkSetting =
     NetworkSetting'
 
 instance TF.IsValue  (NetworkSetting s)
@@ -115,11 +115,11 @@ data SnapshotPoliciesSetting s = SnapshotPoliciesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @snapshot_policies@ settings value.
-snapshotPoliciesSetting
+newSnapshotPoliciesSetting
     :: TF.Attr s P.Int -- ^ 'P._snapshotCount': @snapshot_count@
     -> TF.Attr s P.Text -- ^ 'P._snapshotFrequency': @snapshot_frequency@
     -> SnapshotPoliciesSetting s
-snapshotPoliciesSetting _snapshotCount _snapshotFrequency =
+newSnapshotPoliciesSetting _snapshotCount _snapshotFrequency =
     SnapshotPoliciesSetting'
         { _snapshotCount = _snapshotCount
         , _snapshotFrequency = _snapshotFrequency
