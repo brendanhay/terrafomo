@@ -62,7 +62,7 @@ data AccountData s = AccountData'
 accountData
     :: P.DataSource (AccountData s)
 accountData =
-    TF.unsafeDataSource "circonus_account" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "circonus_account" TF.validator $
         AccountData'
 
 instance TF.IsObject (AccountData s) where
@@ -135,7 +135,7 @@ data CollectorData s = CollectorData'
 collectorData
     :: P.DataSource (CollectorData s)
 collectorData =
-    TF.unsafeDataSource "circonus_collector" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "circonus_collector" TF.validator $
         CollectorData'
             { _tags = TF.Nil
             }

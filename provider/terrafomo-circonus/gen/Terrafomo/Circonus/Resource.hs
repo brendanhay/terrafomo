@@ -138,7 +138,7 @@ data CheckResource s = CheckResource'
 checkResource
     :: P.Resource (CheckResource s)
 checkResource =
-    TF.unsafeResource "circonus_check" P.defaultProvider TF.validator $
+    TF.unsafeResource "circonus_check" TF.validator $
         CheckResource'
             { _active = TF.value P.True
             , _caql = TF.Nil
@@ -405,7 +405,7 @@ contactGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ContactGroupResource s)
 contactGroupResource _name =
-    TF.unsafeResource "circonus_contact_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "circonus_contact_group" TF.validator $
         ContactGroupResource'
             { _aggregationWindow = TF.value "300s"
             , _alertOption = TF.Nil
@@ -584,7 +584,7 @@ graphResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (GraphResource s)
 graphResource _name =
-    TF.unsafeResource "circonus_graph" P.defaultProvider TF.validator $
+    TF.unsafeResource "circonus_graph" TF.validator $
         GraphResource'
             { _description = TF.Nil
             , _graphStyle = TF.value "line"
@@ -697,7 +697,7 @@ metricResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (MetricResource s)
 metricResource _name _type' =
-    TF.unsafeResource "circonus_metric" P.defaultProvider TF.validator $
+    TF.unsafeResource "circonus_metric" TF.validator $
         MetricResource'
             { _active = TF.value P.True
             , _name = _name
@@ -766,7 +766,7 @@ metricClusterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (MetricClusterResource s)
 metricClusterResource _name =
-    TF.unsafeResource "circonus_metric_cluster" P.defaultProvider TF.validator $
+    TF.unsafeResource "circonus_metric_cluster" TF.validator $
         MetricClusterResource'
             { _name = _name
             , _query = TF.Nil
@@ -837,7 +837,7 @@ ruleSetResource
     -> TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
     -> P.Resource (RuleSetResource s)
 ruleSetResource _check _if' _metricName =
-    TF.unsafeResource "circonus_rule_set" P.defaultProvider TF.validator $
+    TF.unsafeResource "circonus_rule_set" TF.validator $
         RuleSetResource'
             { _check = _check
             , _if' = _if'

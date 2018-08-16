@@ -88,18 +88,13 @@ newProvider _key =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "circonus"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , P.Just $ TF.assign "api_url" _apiUrl
-                  , P.Just $ TF.assign "auto_tag" _autoTag
-                  , P.Just $ TF.assign "key" _key
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ P.Just $ TF.assign "api_url" _apiUrl
+            , P.Just $ TF.assign "auto_tag" _autoTag
+            , P.Just $ TF.assign "key" _key
+            ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
