@@ -17,7 +17,10 @@ module Terrafomo.Lailgun.Lens
     -- ** Arguments
       HasApiKey (..)
     , HasName (..)
+    , HasSmtpLogin (..)
     , HasSmtpPassword (..)
+    , HasSpamAction (..)
+    , HasWildcard (..)
 
     -- ** Computed Attributes
     , HasComputedId (..)
@@ -50,11 +53,29 @@ class HasName a b | a -> b where
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
+class HasSmtpLogin a b | a -> b where
+    smtpLogin :: P.Lens' a b
+
+instance HasSmtpLogin a b => HasSmtpLogin (TF.Schema l p a) b where
+    smtpLogin = TF.configuration . smtpLogin
+
 class HasSmtpPassword a b | a -> b where
     smtpPassword :: P.Lens' a b
 
 instance HasSmtpPassword a b => HasSmtpPassword (TF.Schema l p a) b where
     smtpPassword = TF.configuration . smtpPassword
+
+class HasSpamAction a b | a -> b where
+    spamAction :: P.Lens' a b
+
+instance HasSpamAction a b => HasSpamAction (TF.Schema l p a) b where
+    spamAction = TF.configuration . spamAction
+
+class HasWildcard a b | a -> b where
+    wildcard :: P.Lens' a b
+
+instance HasWildcard a b => HasWildcard (TF.Schema l p a) b where
+    wildcard = TF.configuration . wildcard
 
 class HasComputedId a b | a -> b where
     computedId :: a -> b

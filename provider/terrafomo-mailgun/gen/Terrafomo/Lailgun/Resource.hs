@@ -55,8 +55,17 @@ data DomainResource s = DomainResource'
     { _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _smtpLogin    :: TF.Attr s P.Text
+    -- ^ @smtp_login@ - (Optional)
+    --
     , _smtpPassword :: TF.Attr s P.Text
     -- ^ @smtp_password@ - (Required, Forces New)
+    --
+    , _spamAction   :: TF.Attr s P.Text
+    -- ^ @spam_action@ - (Optional, Forces New)
+    --
+    , _wildcard     :: TF.Attr s P.Bool
+    -- ^ @wildcard@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -69,13 +78,19 @@ domainResource _name _smtpPassword =
     TF.unsafeResource "mailgun_domain" TF.validator $
         DomainResource'
             { _name = _name
+            , _smtpLogin = TF.Nil
             , _smtpPassword = _smtpPassword
+            , _spamAction = TF.Nil
+            , _wildcard = TF.Nil
             }
 
 instance TF.IsObject (DomainResource s) where
     toObject DomainResource'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "smtp_login" <$> TF.attribute _smtpLogin
         , TF.assign "smtp_password" <$> TF.attribute _smtpPassword
+        , TF.assign "spam_action" <$> TF.attribute _spamAction
+        , TF.assign "wildcard" <$> TF.attribute _wildcard
         ]
 
 instance TF.IsValid (DomainResource s) where
@@ -86,10 +101,25 @@ instance P.HasName (DomainResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DomainResource s)
 
+instance P.HasSmtpLogin (DomainResource s) (TF.Attr s P.Text) where
+    smtpLogin =
+        P.lens (_smtpLogin :: DomainResource s -> TF.Attr s P.Text)
+               (\s a -> s { _smtpLogin = a } :: DomainResource s)
+
 instance P.HasSmtpPassword (DomainResource s) (TF.Attr s P.Text) where
     smtpPassword =
         P.lens (_smtpPassword :: DomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _smtpPassword = a } :: DomainResource s)
+
+instance P.HasSpamAction (DomainResource s) (TF.Attr s P.Text) where
+    spamAction =
+        P.lens (_spamAction :: DomainResource s -> TF.Attr s P.Text)
+               (\s a -> s { _spamAction = a } :: DomainResource s)
+
+instance P.HasWildcard (DomainResource s) (TF.Attr s P.Bool) where
+    wildcard =
+        P.lens (_wildcard :: DomainResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _wildcard = a } :: DomainResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
