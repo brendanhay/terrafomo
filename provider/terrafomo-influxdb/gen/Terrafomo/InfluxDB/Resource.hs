@@ -110,6 +110,9 @@ instance P.HasQuery (ContinuousQueryResource s) (TF.Attr s P.Text) where
         P.lens (_query :: ContinuousQueryResource s -> TF.Attr s P.Text)
                (\s a -> s { _query = a } :: ContinuousQueryResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ContinuousQueryResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @influxdb_database@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/influxdb/r/database.html terraform documentation>
@@ -151,6 +154,9 @@ instance P.HasRetentionPolicies (DatabaseResource s) (TF.Attr s [TF.Attr s (Rete
     retentionPolicies =
         P.lens (_retentionPolicies :: DatabaseResource s -> TF.Attr s [TF.Attr s (RetentionPoliciesSetting s)])
                (\s a -> s { _retentionPolicies = a } :: DatabaseResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @influxdb_user@ Resource.
 --
@@ -204,6 +210,9 @@ instance P.HasPassword (UserResource s) (TF.Attr s P.Text) where
     password =
         P.lens (_password :: UserResource s -> TF.Attr s P.Text)
                (\s a -> s { _password = a } :: UserResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAdmin (TF.Ref s' (UserResource s)) (TF.Attr s P.Bool) where
     computedAdmin x = TF.compute (TF.refKey x) "admin"

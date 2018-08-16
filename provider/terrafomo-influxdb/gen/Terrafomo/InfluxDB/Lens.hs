@@ -30,6 +30,7 @@ module Terrafomo.InfluxDB.Lens
 
     -- ** Computed Attributes
     , HasComputedAdmin (..)
+    , HasComputedId (..)
     ) where
 
 import GHC.Base ((.))
@@ -111,3 +112,6 @@ instance HasUsername a b => HasUsername (TF.Schema l p a) b where
 
 class HasComputedAdmin a b | a -> b where
     computedAdmin :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
