@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newReceivingRecordsSetting",
+                "smart": "receivingRecordsSetting",
                 "name": "ReceivingRecordsSetting'"
             },
             "arguments": [],
@@ -86,7 +86,7 @@
         },
         {
             "con": {
-                "smart": "newSendingRecordsSetting",
+                "smart": "sendingRecordsSetting",
                 "name": "SendingRecordsSetting'"
             },
             "arguments": [],
