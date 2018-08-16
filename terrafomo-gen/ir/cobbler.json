@@ -7,6 +7,278 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"bonding_opts\" <$> TF.attribute",
+                    "name": "_bondingOpts",
+                    "method": "bondingOpts",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasBondingOpts",
+                    "validate": false,
+                    "optional": true,
+                    "original": "bonding_opts"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"bridge_opts\" <$> TF.attribute",
+                    "name": "_bridgeOpts",
+                    "method": "bridgeOpts",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasBridgeOpts",
+                    "validate": false,
+                    "optional": true,
+                    "original": "bridge_opts"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cnames\" <$> TF.attribute",
+                    "name": "_cnames",
+                    "method": "cnames",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasCnames",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cnames"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"dhcp_tag\" <$> TF.attribute",
+                    "name": "_dhcpTag",
+                    "method": "dhcpTag",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDhcpTag",
+                    "validate": false,
+                    "optional": true,
+                    "original": "dhcp_tag"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"dns_name\" <$> TF.attribute",
+                    "name": "_dnsName",
+                    "method": "dnsName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDnsName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "dns_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"gateway\" <$> TF.attribute",
+                    "name": "_gateway",
+                    "method": "gateway",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasGateway",
+                    "validate": false,
+                    "optional": true,
+                    "original": "gateway"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"interface_master\" <$> TF.attribute",
+                    "name": "_interfaceMaster",
+                    "method": "interfaceMaster",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasInterfaceMaster",
+                    "validate": false,
+                    "optional": true,
+                    "original": "interface_master"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"interface_type\" <$> TF.attribute",
+                    "name": "_interfaceType",
+                    "method": "interfaceType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasInterfaceType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "interface_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip_address\" <$> TF.attribute",
+                    "name": "_ipAddress",
+                    "method": "ipAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ip_address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ipv6_address\" <$> TF.attribute",
+                    "name": "_ipv6Address",
+                    "method": "ipv6Address",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpv6Address",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ipv6_address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ipv6_default_gateway\" <$> TF.attribute",
+                    "name": "_ipv6DefaultGateway",
+                    "method": "ipv6DefaultGateway",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpv6DefaultGateway",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ipv6_default_gateway"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ipv6_mtu\" <$> TF.attribute",
+                    "name": "_ipv6Mtu",
+                    "method": "ipv6Mtu",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpv6Mtu",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ipv6_mtu"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ipv6_secondaries\" <$> TF.attribute",
+                    "name": "_ipv6Secondaries",
+                    "method": "ipv6Secondaries",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasIpv6Secondaries",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ipv6_secondaries"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ipv6_static_routes\" <$> TF.attribute",
+                    "name": "_ipv6StaticRoutes",
+                    "method": "ipv6StaticRoutes",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasIpv6StaticRoutes",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ipv6_static_routes"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"mac_address\" <$> TF.attribute",
+                    "name": "_macAddress",
+                    "method": "macAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMacAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "mac_address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"management\" <$> TF.attribute",
+                    "name": "_management",
+                    "method": "management",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasManagement",
+                    "validate": false,
+                    "optional": true,
+                    "original": "management"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -22,6 +294,74 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"netmask\" <$> TF.attribute",
+                    "name": "_netmask",
+                    "method": "netmask",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNetmask",
+                    "validate": false,
+                    "optional": true,
+                    "original": "netmask"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"static\" <$> TF.attribute",
+                    "name": "_static",
+                    "method": "static",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasStatic",
+                    "validate": false,
+                    "optional": true,
+                    "original": "static"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"static_routes\" <$> TF.attribute",
+                    "name": "_staticRoutes",
+                    "method": "staticRoutes",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasStaticRoutes",
+                    "validate": false,
+                    "optional": true,
+                    "original": "static_routes"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virt_bridge\" <$> TF.attribute",
+                    "name": "_virtBridge",
+                    "method": "virtBridge",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtBridge",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virt_bridge"
                 }
             ],
             "key": "cobbler_system.interface",
@@ -42,7 +382,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBondingOpts",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "bonding_opts"
                 },
                 {
@@ -59,7 +399,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBridgeOpts",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "bridge_opts"
                 },
                 {
@@ -76,7 +416,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedCnames",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "cnames"
                 },
                 {
@@ -93,7 +433,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDhcpTag",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "dhcp_tag"
                 },
                 {
@@ -110,7 +450,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDnsName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "dns_name"
                 },
                 {
@@ -127,7 +467,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedGateway",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "gateway"
                 },
                 {
@@ -144,7 +484,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedInterfaceMaster",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "interface_master"
                 },
                 {
@@ -161,7 +501,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedInterfaceType",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "interface_type"
                 },
                 {
@@ -178,7 +518,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpAddress",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ip_address"
                 },
                 {
@@ -195,7 +535,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpv6Address",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ipv6_address"
                 },
                 {
@@ -212,7 +552,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpv6DefaultGateway",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ipv6_default_gateway"
                 },
                 {
@@ -229,7 +569,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpv6Mtu",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ipv6_mtu"
                 },
                 {
@@ -246,7 +586,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedIpv6Secondaries",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ipv6_secondaries"
                 },
                 {
@@ -263,7 +603,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedIpv6StaticRoutes",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ipv6_static_routes"
                 },
                 {
@@ -280,7 +620,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMacAddress",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "mac_address"
                 },
                 {
@@ -297,7 +637,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedManagement",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "management"
                 },
                 {
@@ -314,7 +654,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedNetmask",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "netmask"
                 },
                 {
@@ -331,7 +671,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedStatic",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "static"
                 },
                 {
@@ -348,7 +688,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedStaticRoutes",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "static_routes"
                 },
                 {
@@ -365,7 +705,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtBridge",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virt_bridge"
                 }
             ],
@@ -403,6 +743,40 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"arch\" <$> TF.attribute",
+                    "name": "_arch",
+                    "method": "arch",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasArch",
+                    "validate": false,
+                    "optional": true,
+                    "original": "arch"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"boot_files\" <$> TF.attribute",
+                    "name": "_bootFiles",
+                    "method": "bootFiles",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasBootFiles",
+                    "validate": false,
+                    "optional": true,
+                    "original": "boot_files"
+                },
+                {
                     "default": "_breed",
                     "computed": false,
                     "required": true,
@@ -418,6 +792,40 @@
                     "validate": false,
                     "optional": false,
                     "original": "breed"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"comment\" <$> TF.attribute",
+                    "name": "_comment",
+                    "method": "comment",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComment",
+                    "validate": false,
+                    "optional": true,
+                    "original": "comment"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"fetchable_files\" <$> TF.attribute",
+                    "name": "_fetchableFiles",
+                    "method": "fetchableFiles",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFetchableFiles",
+                    "validate": false,
+                    "optional": true,
+                    "original": "fetchable_files"
                 },
                 {
                     "default": "_initrd",
@@ -454,6 +862,57 @@
                     "original": "kernel"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"kernel_options\" <$> TF.attribute",
+                    "name": "_kernelOptions",
+                    "method": "kernelOptions",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKernelOptions",
+                    "validate": false,
+                    "optional": true,
+                    "original": "kernel_options"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"kernel_options_post\" <$> TF.attribute",
+                    "name": "_kernelOptionsPost",
+                    "method": "kernelOptionsPost",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKernelOptionsPost",
+                    "validate": false,
+                    "optional": true,
+                    "original": "kernel_options_post"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"mgmt_classes\" <$> TF.attribute",
+                    "name": "_mgmtClasses",
+                    "method": "mgmtClasses",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasMgmtClasses",
+                    "validate": false,
+                    "optional": true,
+                    "original": "mgmt_classes"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -486,6 +945,74 @@
                     "validate": false,
                     "optional": false,
                     "original": "os_version"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"owners\" <$> TF.attribute",
+                    "name": "_owners",
+                    "method": "owners",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasOwners",
+                    "validate": false,
+                    "optional": true,
+                    "original": "owners"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"redhat_management_key\" <$> TF.attribute",
+                    "name": "_redhatManagementKey",
+                    "method": "redhatManagementKey",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRedhatManagementKey",
+                    "validate": false,
+                    "optional": true,
+                    "original": "redhat_management_key"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"redhat_management_server\" <$> TF.attribute",
+                    "name": "_redhatManagementServer",
+                    "method": "redhatManagementServer",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRedhatManagementServer",
+                    "validate": false,
+                    "optional": true,
+                    "original": "redhat_management_server"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"template_files\" <$> TF.attribute",
+                    "name": "_templateFiles",
+                    "method": "templateFiles",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTemplateFiles",
+                    "validate": false,
+                    "optional": true,
+                    "original": "template_files"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cobbler/r/distro.html",
@@ -524,7 +1051,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedArch",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "arch"
                 },
                 {
@@ -541,7 +1068,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBootFiles",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "boot_files"
                 },
                 {
@@ -558,7 +1085,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedComment",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "comment"
                 },
                 {
@@ -575,7 +1102,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedFetchableFiles",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "fetchable_files"
                 },
                 {
@@ -592,7 +1119,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKernelOptions",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "kernel_options"
                 },
                 {
@@ -609,7 +1136,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKernelOptionsPost",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "kernel_options_post"
                 },
                 {
@@ -626,7 +1153,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedMgmtClasses",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "mgmt_classes"
                 },
                 {
@@ -643,7 +1170,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedOwners",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "owners"
                 },
                 {
@@ -660,7 +1187,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRedhatManagementKey",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "redhat_management_key"
                 },
                 {
@@ -677,7 +1204,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRedhatManagementServer",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "redhat_management_server"
                 },
                 {
@@ -694,7 +1221,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTemplateFiles",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "template_files"
                 }
             ],
@@ -900,6 +1427,40 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"boot_files\" <$> TF.attribute",
+                    "name": "_bootFiles",
+                    "method": "bootFiles",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasBootFiles",
+                    "validate": false,
+                    "optional": true,
+                    "original": "boot_files"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"comment\" <$> TF.attribute",
+                    "name": "_comment",
+                    "method": "comment",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComment",
+                    "validate": false,
+                    "optional": true,
+                    "original": "comment"
+                },
+                {
                     "default": "_distro",
                     "computed": false,
                     "required": true,
@@ -917,6 +1478,159 @@
                     "original": "distro"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"enable_gpxe\" <$> TF.attribute",
+                    "name": "_enableGpxe",
+                    "method": "enableGpxe",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasEnableGpxe",
+                    "validate": false,
+                    "optional": true,
+                    "original": "enable_gpxe"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"enable_menu\" <$> TF.attribute",
+                    "name": "_enableMenu",
+                    "method": "enableMenu",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasEnableMenu",
+                    "validate": false,
+                    "optional": true,
+                    "original": "enable_menu"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"fetchable_files\" <$> TF.attribute",
+                    "name": "_fetchableFiles",
+                    "method": "fetchableFiles",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFetchableFiles",
+                    "validate": false,
+                    "optional": true,
+                    "original": "fetchable_files"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"kernel_options\" <$> TF.attribute",
+                    "name": "_kernelOptions",
+                    "method": "kernelOptions",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKernelOptions",
+                    "validate": false,
+                    "optional": true,
+                    "original": "kernel_options"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"kernel_options_post\" <$> TF.attribute",
+                    "name": "_kernelOptionsPost",
+                    "method": "kernelOptionsPost",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKernelOptionsPost",
+                    "validate": false,
+                    "optional": true,
+                    "original": "kernel_options_post"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"kickstart\" <$> TF.attribute",
+                    "name": "_kickstart",
+                    "method": "kickstart",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKickstart",
+                    "validate": false,
+                    "optional": true,
+                    "original": "kickstart"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ks_meta\" <$> TF.attribute",
+                    "name": "_ksMeta",
+                    "method": "ksMeta",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKsMeta",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ks_meta"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"mgmt_classes\" <$> TF.attribute",
+                    "name": "_mgmtClasses",
+                    "method": "mgmtClasses",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasMgmtClasses",
+                    "validate": false,
+                    "optional": true,
+                    "original": "mgmt_classes"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"mgmt_parameters\" <$> TF.attribute",
+                    "name": "_mgmtParameters",
+                    "method": "mgmtParameters",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMgmtParameters",
+                    "validate": false,
+                    "optional": true,
+                    "original": "mgmt_parameters"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -932,6 +1646,329 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name_servers\" <$> TF.attribute",
+                    "name": "_nameServers",
+                    "method": "nameServers",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasNameServers",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name_servers"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name_servers_search\" <$> TF.attribute",
+                    "name": "_nameServersSearch",
+                    "method": "nameServersSearch",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasNameServersSearch",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name_servers_search"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"owners\" <$> TF.attribute",
+                    "name": "_owners",
+                    "method": "owners",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasOwners",
+                    "validate": false,
+                    "optional": true,
+                    "original": "owners"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"parent\" <$> TF.attribute",
+                    "name": "_parent",
+                    "method": "parent",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasParent",
+                    "validate": false,
+                    "optional": true,
+                    "original": "parent"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"proxy\" <$> TF.attribute",
+                    "name": "_proxy",
+                    "method": "proxy",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProxy",
+                    "validate": false,
+                    "optional": true,
+                    "original": "proxy"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"redhat_management_key\" <$> TF.attribute",
+                    "name": "_redhatManagementKey",
+                    "method": "redhatManagementKey",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRedhatManagementKey",
+                    "validate": false,
+                    "optional": true,
+                    "original": "redhat_management_key"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"redhat_management_server\" <$> TF.attribute",
+                    "name": "_redhatManagementServer",
+                    "method": "redhatManagementServer",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRedhatManagementServer",
+                    "validate": false,
+                    "optional": true,
+                    "original": "redhat_management_server"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"repos\" <$> TF.attribute",
+                    "name": "_repos",
+                    "method": "repos",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasRepos",
+                    "validate": false,
+                    "optional": true,
+                    "original": "repos"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"server\" <$> TF.attribute",
+                    "name": "_server",
+                    "method": "server",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasServer",
+                    "validate": false,
+                    "optional": true,
+                    "original": "server"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"template_files\" <$> TF.attribute",
+                    "name": "_templateFiles",
+                    "method": "templateFiles",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTemplateFiles",
+                    "validate": false,
+                    "optional": true,
+                    "original": "template_files"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"template_remote_kickstarts\" <$> TF.attribute",
+                    "name": "_templateRemoteKickstarts",
+                    "method": "templateRemoteKickstarts",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasTemplateRemoteKickstarts",
+                    "validate": false,
+                    "optional": true,
+                    "original": "template_remote_kickstarts"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virt_auto_boot\" <$> TF.attribute",
+                    "name": "_virtAutoBoot",
+                    "method": "virtAutoBoot",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtAutoBoot",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virt_auto_boot"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virt_bridge\" <$> TF.attribute",
+                    "name": "_virtBridge",
+                    "method": "virtBridge",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtBridge",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virt_bridge"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virt_cpus\" <$> TF.attribute",
+                    "name": "_virtCpus",
+                    "method": "virtCpus",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtCpus",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virt_cpus"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virt_disk_driver\" <$> TF.attribute",
+                    "name": "_virtDiskDriver",
+                    "method": "virtDiskDriver",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtDiskDriver",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virt_disk_driver"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virt_file_size\" <$> TF.attribute",
+                    "name": "_virtFileSize",
+                    "method": "virtFileSize",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtFileSize",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virt_file_size"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virt_path\" <$> TF.attribute",
+                    "name": "_virtPath",
+                    "method": "virtPath",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtPath",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virt_path"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virt_ram\" <$> TF.attribute",
+                    "name": "_virtRam",
+                    "method": "virtRam",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtRam",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virt_ram"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virt_type\" <$> TF.attribute",
+                    "name": "_virtType",
+                    "method": "virtType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virt_type"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cobbler/r/profile.html",
@@ -970,7 +2007,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBootFiles",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "boot_files"
                 },
                 {
@@ -987,7 +2024,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedComment",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "comment"
                 },
                 {
@@ -1004,7 +2041,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedEnableGpxe",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "enable_gpxe"
                 },
                 {
@@ -1021,7 +2058,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedEnableMenu",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "enable_menu"
                 },
                 {
@@ -1038,7 +2075,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedFetchableFiles",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "fetchable_files"
                 },
                 {
@@ -1055,7 +2092,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKernelOptions",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "kernel_options"
                 },
                 {
@@ -1072,7 +2109,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKernelOptionsPost",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "kernel_options_post"
                 },
                 {
@@ -1089,7 +2126,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKickstart",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "kickstart"
                 },
                 {
@@ -1106,7 +2143,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKsMeta",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ks_meta"
                 },
                 {
@@ -1123,7 +2160,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedMgmtClasses",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "mgmt_classes"
                 },
                 {
@@ -1140,7 +2177,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMgmtParameters",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "mgmt_parameters"
                 },
                 {
@@ -1157,7 +2194,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedNameServers",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name_servers"
                 },
                 {
@@ -1174,7 +2211,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedNameServersSearch",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name_servers_search"
                 },
                 {
@@ -1191,7 +2228,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedOwners",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "owners"
                 },
                 {
@@ -1208,7 +2245,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedParent",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "parent"
                 },
                 {
@@ -1225,7 +2262,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedProxy",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "proxy"
                 },
                 {
@@ -1242,7 +2279,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRedhatManagementKey",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "redhat_management_key"
                 },
                 {
@@ -1259,7 +2296,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRedhatManagementServer",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "redhat_management_server"
                 },
                 {
@@ -1276,7 +2313,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedRepos",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "repos"
                 },
                 {
@@ -1293,7 +2330,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedServer",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "server"
                 },
                 {
@@ -1310,7 +2347,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTemplateFiles",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "template_files"
                 },
                 {
@@ -1327,7 +2364,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedTemplateRemoteKickstarts",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "template_remote_kickstarts"
                 },
                 {
@@ -1344,7 +2381,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtAutoBoot",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virt_auto_boot"
                 },
                 {
@@ -1361,7 +2398,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtBridge",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virt_bridge"
                 },
                 {
@@ -1378,7 +2415,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtCpus",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virt_cpus"
                 },
                 {
@@ -1395,7 +2432,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtDiskDriver",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virt_disk_driver"
                 },
                 {
@@ -1412,7 +2449,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtFileSize",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virt_file_size"
                 },
                 {
@@ -1429,7 +2466,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtPath",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virt_path"
                 },
                 {
@@ -1446,7 +2483,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtRam",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virt_ram"
                 },
                 {
@@ -1463,7 +2500,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtType",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virt_type"
                 }
             ],
@@ -1514,6 +2551,57 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"apt_components\" <$> TF.attribute",
+                    "name": "_aptComponents",
+                    "method": "aptComponents",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasAptComponents",
+                    "validate": false,
+                    "optional": true,
+                    "original": "apt_components"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"apt_dists\" <$> TF.attribute",
+                    "name": "_aptDists",
+                    "method": "aptDists",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasAptDists",
+                    "validate": false,
+                    "optional": true,
+                    "original": "apt_dists"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"arch\" <$> TF.attribute",
+                    "name": "_arch",
+                    "method": "arch",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasArch",
+                    "validate": false,
+                    "optional": true,
+                    "original": "arch"
+                },
+                {
                     "default": "_breed",
                     "computed": false,
                     "required": true,
@@ -1529,6 +2617,74 @@
                     "validate": false,
                     "optional": false,
                     "original": "breed"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"comment\" <$> TF.attribute",
+                    "name": "_comment",
+                    "method": "comment",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComment",
+                    "validate": false,
+                    "optional": true,
+                    "original": "comment"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"createrepo_flags\" <$> TF.attribute",
+                    "name": "_createrepoFlags",
+                    "method": "createrepoFlags",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCreaterepoFlags",
+                    "validate": false,
+                    "optional": true,
+                    "original": "createrepo_flags"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"environment\" <$> TF.attribute",
+                    "name": "_environment",
+                    "method": "environment",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEnvironment",
+                    "validate": false,
+                    "optional": true,
+                    "original": "environment"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"keep_updated\" <$> TF.attribute",
+                    "name": "_keepUpdated",
+                    "method": "keepUpdated",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasKeepUpdated",
+                    "validate": false,
+                    "optional": true,
+                    "original": "keep_updated"
                 },
                 {
                     "default": "_mirror",
@@ -1548,6 +2704,23 @@
                     "original": "mirror"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"mirror_locally\" <$> TF.attribute",
+                    "name": "_mirrorLocally",
+                    "method": "mirrorLocally",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasMirrorLocally",
+                    "validate": false,
+                    "optional": true,
+                    "original": "mirror_locally"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -1563,6 +2736,57 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"owners\" <$> TF.attribute",
+                    "name": "_owners",
+                    "method": "owners",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasOwners",
+                    "validate": false,
+                    "optional": true,
+                    "original": "owners"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"proxy\" <$> TF.attribute",
+                    "name": "_proxy",
+                    "method": "proxy",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProxy",
+                    "validate": false,
+                    "optional": true,
+                    "original": "proxy"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"rpm_list\" <$> TF.attribute",
+                    "name": "_rpmList",
+                    "method": "rpmList",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasRpmList",
+                    "validate": false,
+                    "optional": true,
+                    "original": "rpm_list"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cobbler/r/repo.html",
@@ -1601,7 +2825,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedAptComponents",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "apt_components"
                 },
                 {
@@ -1618,7 +2842,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedAptDists",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "apt_dists"
                 },
                 {
@@ -1635,7 +2859,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedArch",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "arch"
                 },
                 {
@@ -1652,7 +2876,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedComment",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "comment"
                 },
                 {
@@ -1669,7 +2893,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCreaterepoFlags",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "createrepo_flags"
                 },
                 {
@@ -1686,7 +2910,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedEnvironment",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "environment"
                 },
                 {
@@ -1703,7 +2927,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedKeepUpdated",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "keep_updated"
                 },
                 {
@@ -1720,7 +2944,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedMirrorLocally",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "mirror_locally"
                 },
                 {
@@ -1737,7 +2961,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedOwners",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "owners"
                 },
                 {
@@ -1754,7 +2978,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedProxy",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "proxy"
                 },
                 {
@@ -1771,7 +2995,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedRpmList",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "rpm_list"
                 }
             ],
@@ -1943,6 +3167,312 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"boot_files\" <$> TF.attribute",
+                    "name": "_bootFiles",
+                    "method": "bootFiles",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasBootFiles",
+                    "validate": false,
+                    "optional": true,
+                    "original": "boot_files"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"comment\" <$> TF.attribute",
+                    "name": "_comment",
+                    "method": "comment",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComment",
+                    "validate": false,
+                    "optional": true,
+                    "original": "comment"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"enable_gpxe\" <$> TF.attribute",
+                    "name": "_enableGpxe",
+                    "method": "enableGpxe",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasEnableGpxe",
+                    "validate": false,
+                    "optional": true,
+                    "original": "enable_gpxe"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"fetchable_files\" <$> TF.attribute",
+                    "name": "_fetchableFiles",
+                    "method": "fetchableFiles",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFetchableFiles",
+                    "validate": false,
+                    "optional": true,
+                    "original": "fetchable_files"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"gateway\" <$> TF.attribute",
+                    "name": "_gateway",
+                    "method": "gateway",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasGateway",
+                    "validate": false,
+                    "optional": true,
+                    "original": "gateway"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"hostname\" <$> TF.attribute",
+                    "name": "_hostname",
+                    "method": "hostname",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHostname",
+                    "validate": false,
+                    "optional": true,
+                    "original": "hostname"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"image\" <$> TF.attribute",
+                    "name": "_image",
+                    "method": "image",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasImage",
+                    "validate": false,
+                    "optional": true,
+                    "original": "image"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"interface\" <$> TF.attribute",
+                    "name": "_interface",
+                    "method": "interface",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (InterfaceSetting s)]",
+                    "class": "HasInterface",
+                    "validate": false,
+                    "optional": true,
+                    "original": "interface"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ipv6_default_device\" <$> TF.attribute",
+                    "name": "_ipv6DefaultDevice",
+                    "method": "ipv6DefaultDevice",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpv6DefaultDevice",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ipv6_default_device"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"kernel_options\" <$> TF.attribute",
+                    "name": "_kernelOptions",
+                    "method": "kernelOptions",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKernelOptions",
+                    "validate": false,
+                    "optional": true,
+                    "original": "kernel_options"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"kernel_options_post\" <$> TF.attribute",
+                    "name": "_kernelOptionsPost",
+                    "method": "kernelOptionsPost",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKernelOptionsPost",
+                    "validate": false,
+                    "optional": true,
+                    "original": "kernel_options_post"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"kickstart\" <$> TF.attribute",
+                    "name": "_kickstart",
+                    "method": "kickstart",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKickstart",
+                    "validate": false,
+                    "optional": true,
+                    "original": "kickstart"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ks_meta\" <$> TF.attribute",
+                    "name": "_ksMeta",
+                    "method": "ksMeta",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKsMeta",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ks_meta"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ldap_enabled\" <$> TF.attribute",
+                    "name": "_ldapEnabled",
+                    "method": "ldapEnabled",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasLdapEnabled",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ldap_enabled"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ldap_type\" <$> TF.attribute",
+                    "name": "_ldapType",
+                    "method": "ldapType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLdapType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ldap_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"mgmt_classes\" <$> TF.attribute",
+                    "name": "_mgmtClasses",
+                    "method": "mgmtClasses",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasMgmtClasses",
+                    "validate": false,
+                    "optional": true,
+                    "original": "mgmt_classes"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"mgmt_parameters\" <$> TF.attribute",
+                    "name": "_mgmtParameters",
+                    "method": "mgmtParameters",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMgmtParameters",
+                    "validate": false,
+                    "optional": true,
+                    "original": "mgmt_parameters"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"monit_enabled\" <$> TF.attribute",
+                    "name": "_monitEnabled",
+                    "method": "monitEnabled",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasMonitEnabled",
+                    "validate": false,
+                    "optional": true,
+                    "original": "monit_enabled"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -1960,6 +3490,159 @@
                     "original": "name"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name_servers\" <$> TF.attribute",
+                    "name": "_nameServers",
+                    "method": "nameServers",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasNameServers",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name_servers"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name_servers_search\" <$> TF.attribute",
+                    "name": "_nameServersSearch",
+                    "method": "nameServersSearch",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasNameServersSearch",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name_servers_search"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"netboot_enabled\" <$> TF.attribute",
+                    "name": "_netbootEnabled",
+                    "method": "netbootEnabled",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasNetbootEnabled",
+                    "validate": false,
+                    "optional": true,
+                    "original": "netboot_enabled"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"owners\" <$> TF.attribute",
+                    "name": "_owners",
+                    "method": "owners",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasOwners",
+                    "validate": false,
+                    "optional": true,
+                    "original": "owners"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"power_address\" <$> TF.attribute",
+                    "name": "_powerAddress",
+                    "method": "powerAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPowerAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "power_address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"power_id\" <$> TF.attribute",
+                    "name": "_powerId",
+                    "method": "powerId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPowerId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "power_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"power_pass\" <$> TF.attribute",
+                    "name": "_powerPass",
+                    "method": "powerPass",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPowerPass",
+                    "validate": false,
+                    "optional": true,
+                    "original": "power_pass"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"power_type\" <$> TF.attribute",
+                    "name": "_powerType",
+                    "method": "powerType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPowerType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "power_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"power_user\" <$> TF.attribute",
+                    "name": "_powerUser",
+                    "method": "powerUser",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPowerUser",
+                    "validate": false,
+                    "optional": true,
+                    "original": "power_user"
+                },
+                {
                     "default": "_profile",
                     "computed": false,
                     "required": true,
@@ -1975,6 +3658,244 @@
                     "validate": false,
                     "optional": false,
                     "original": "profile"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"proxy\" <$> TF.attribute",
+                    "name": "_proxy",
+                    "method": "proxy",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProxy",
+                    "validate": false,
+                    "optional": true,
+                    "original": "proxy"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"redhat_management_key\" <$> TF.attribute",
+                    "name": "_redhatManagementKey",
+                    "method": "redhatManagementKey",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRedhatManagementKey",
+                    "validate": false,
+                    "optional": true,
+                    "original": "redhat_management_key"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"redhat_management_server\" <$> TF.attribute",
+                    "name": "_redhatManagementServer",
+                    "method": "redhatManagementServer",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRedhatManagementServer",
+                    "validate": false,
+                    "optional": true,
+                    "original": "redhat_management_server"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"status\" <$> TF.attribute",
+                    "name": "_status",
+                    "method": "status",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasStatus",
+                    "validate": false,
+                    "optional": true,
+                    "original": "status"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"template_files\" <$> TF.attribute",
+                    "name": "_templateFiles",
+                    "method": "templateFiles",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTemplateFiles",
+                    "validate": false,
+                    "optional": true,
+                    "original": "template_files"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"template_remote_kickstarts\" <$> TF.attribute",
+                    "name": "_templateRemoteKickstarts",
+                    "method": "templateRemoteKickstarts",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasTemplateRemoteKickstarts",
+                    "validate": false,
+                    "optional": true,
+                    "original": "template_remote_kickstarts"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virt_auto_boot\" <$> TF.attribute",
+                    "name": "_virtAutoBoot",
+                    "method": "virtAutoBoot",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtAutoBoot",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virt_auto_boot"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virt_cpus\" <$> TF.attribute",
+                    "name": "_virtCpus",
+                    "method": "virtCpus",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtCpus",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virt_cpus"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virt_disk_driver\" <$> TF.attribute",
+                    "name": "_virtDiskDriver",
+                    "method": "virtDiskDriver",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtDiskDriver",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virt_disk_driver"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virt_file_size\" <$> TF.attribute",
+                    "name": "_virtFileSize",
+                    "method": "virtFileSize",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtFileSize",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virt_file_size"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virt_path\" <$> TF.attribute",
+                    "name": "_virtPath",
+                    "method": "virtPath",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtPath",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virt_path"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virt_pxe_boot\" <$> TF.attribute",
+                    "name": "_virtPxeBoot",
+                    "method": "virtPxeBoot",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasVirtPxeBoot",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virt_pxe_boot"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virt_ram\" <$> TF.attribute",
+                    "name": "_virtRam",
+                    "method": "virtRam",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtRam",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virt_ram"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"virt_type\" <$> TF.attribute",
+                    "name": "_virtType",
+                    "method": "virtType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "virt_type"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cobbler/r/system.html",
@@ -2013,7 +3934,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBootFiles",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "boot_files"
                 },
                 {
@@ -2030,7 +3951,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedComment",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "comment"
                 },
                 {
@@ -2047,7 +3968,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedEnableGpxe",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "enable_gpxe"
                 },
                 {
@@ -2064,7 +3985,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedFetchableFiles",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "fetchable_files"
                 },
                 {
@@ -2081,7 +4002,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedGateway",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "gateway"
                 },
                 {
@@ -2098,7 +4019,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHostname",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "hostname"
                 },
                 {
@@ -2115,7 +4036,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedImage",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "image"
                 },
                 {
@@ -2132,7 +4053,7 @@
                     "type": "TF.Attr s [TF.Attr s (InterfaceSetting s)]",
                     "class": "HasComputedInterface",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "interface"
                 },
                 {
@@ -2149,7 +4070,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpv6DefaultDevice",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ipv6_default_device"
                 },
                 {
@@ -2166,7 +4087,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKernelOptions",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "kernel_options"
                 },
                 {
@@ -2183,7 +4104,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKernelOptionsPost",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "kernel_options_post"
                 },
                 {
@@ -2200,7 +4121,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKickstart",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "kickstart"
                 },
                 {
@@ -2217,7 +4138,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKsMeta",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ks_meta"
                 },
                 {
@@ -2234,7 +4155,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedLdapEnabled",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ldap_enabled"
                 },
                 {
@@ -2251,7 +4172,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedLdapType",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ldap_type"
                 },
                 {
@@ -2268,7 +4189,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedMgmtClasses",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "mgmt_classes"
                 },
                 {
@@ -2285,7 +4206,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMgmtParameters",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "mgmt_parameters"
                 },
                 {
@@ -2302,7 +4223,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedMonitEnabled",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "monit_enabled"
                 },
                 {
@@ -2319,7 +4240,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedNameServers",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name_servers"
                 },
                 {
@@ -2336,7 +4257,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedNameServersSearch",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name_servers_search"
                 },
                 {
@@ -2353,7 +4274,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedNetbootEnabled",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "netboot_enabled"
                 },
                 {
@@ -2370,7 +4291,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedOwners",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "owners"
                 },
                 {
@@ -2387,7 +4308,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPowerAddress",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "power_address"
                 },
                 {
@@ -2404,7 +4325,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPowerId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "power_id"
                 },
                 {
@@ -2421,7 +4342,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPowerPass",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "power_pass"
                 },
                 {
@@ -2438,7 +4359,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPowerType",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "power_type"
                 },
                 {
@@ -2455,7 +4376,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPowerUser",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "power_user"
                 },
                 {
@@ -2472,7 +4393,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedProxy",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "proxy"
                 },
                 {
@@ -2489,7 +4410,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRedhatManagementKey",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "redhat_management_key"
                 },
                 {
@@ -2506,7 +4427,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRedhatManagementServer",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "redhat_management_server"
                 },
                 {
@@ -2523,7 +4444,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedStatus",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "status"
                 },
                 {
@@ -2540,7 +4461,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTemplateFiles",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "template_files"
                 },
                 {
@@ -2557,7 +4478,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedTemplateRemoteKickstarts",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "template_remote_kickstarts"
                 },
                 {
@@ -2574,7 +4495,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtAutoBoot",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virt_auto_boot"
                 },
                 {
@@ -2591,7 +4512,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtCpus",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virt_cpus"
                 },
                 {
@@ -2608,7 +4529,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtDiskDriver",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virt_disk_driver"
                 },
                 {
@@ -2625,7 +4546,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtFileSize",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virt_file_size"
                 },
                 {
@@ -2642,7 +4563,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtPath",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virt_path"
                 },
                 {
@@ -2659,7 +4580,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedVirtPxeBoot",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virt_pxe_boot"
                 },
                 {
@@ -2676,7 +4597,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtRam",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virt_ram"
                 },
                 {
@@ -2693,7 +4614,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtType",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "virt_type"
                 }
             ],
