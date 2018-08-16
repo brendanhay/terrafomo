@@ -94,7 +94,7 @@ checkcommandResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @templates@ - 'P.templates'
     -> P.Resource (CheckcommandResource s)
 checkcommandResource _command _name _templates =
-    TF.unsafeResource "icinga2_checkcommand" P.defaultProvider TF.validator $
+    TF.unsafeResource "icinga2_checkcommand" TF.validator $
         CheckcommandResource'
             { _arguments = TF.Nil
             , _command = _command
@@ -165,7 +165,7 @@ hostResource
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
     -> P.Resource (HostResource s)
 hostResource _address _checkCommand _hostname =
-    TF.unsafeResource "icinga2_host" P.defaultProvider TF.validator $
+    TF.unsafeResource "icinga2_host" TF.validator $
         HostResource'
             { _address = _address
             , _checkCommand = _checkCommand
@@ -238,7 +238,7 @@ hostgroupResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (HostgroupResource s)
 hostgroupResource _displayName _name =
-    TF.unsafeResource "icinga2_hostgroup" P.defaultProvider TF.validator $
+    TF.unsafeResource "icinga2_hostgroup" TF.validator $
         HostgroupResource'
             { _displayName = _displayName
             , _name = _name
@@ -296,7 +296,7 @@ notificationResource
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
     -> P.Resource (NotificationResource s)
 notificationResource _command _hostname =
-    TF.unsafeResource "icinga2_notification" P.defaultProvider TF.validator $
+    TF.unsafeResource "icinga2_notification" TF.validator $
         NotificationResource'
             { _command = _command
             , _hostname = _hostname
@@ -381,7 +381,7 @@ serviceResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ServiceResource s)
 serviceResource _checkCommand _hostname _name =
-    TF.unsafeResource "icinga2_service" P.defaultProvider TF.validator $
+    TF.unsafeResource "icinga2_service" TF.validator $
         ServiceResource'
             { _checkCommand = _checkCommand
             , _hostname = _hostname
@@ -431,7 +431,7 @@ userResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (UserResource s)
 userResource _name =
-    TF.unsafeResource "icinga2_user" P.defaultProvider TF.validator $
+    TF.unsafeResource "icinga2_user" TF.validator $
         UserResource'
             { _email = TF.Nil
             , _name = _name

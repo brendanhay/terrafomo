@@ -94,19 +94,14 @@ newProvider _apiPassword _apiUrl _apiUser =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "icinga2"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , P.Just $ TF.assign "api_password" _apiPassword
-                  , P.Just $ TF.assign "api_url" _apiUrl
-                  , P.Just $ TF.assign "api_user" _apiUser
-                  , TF.assign "insecure_skip_tls_verify" <$> _insecureSkipTlsVerify
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ P.Just $ TF.assign "api_password" _apiPassword
+            , P.Just $ TF.assign "api_url" _apiUrl
+            , P.Just $ TF.assign "api_user" _apiUser
+            , TF.assign "insecure_skip_tls_verify" <$> _insecureSkipTlsVerify
+            ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
