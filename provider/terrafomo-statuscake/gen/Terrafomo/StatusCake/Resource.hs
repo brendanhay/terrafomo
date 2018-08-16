@@ -151,7 +151,7 @@ testResource
     -> TF.Attr s P.Text -- ^ @website_url@ - 'P.websiteUrl'
     -> P.Resource (TestResource s)
 testResource _testType _websiteName _websiteUrl =
-    TF.unsafeResource "statuscake_test" P.defaultProvider TF.validator $
+    TF.unsafeResource "statuscake_test" TF.validator $
         TestResource'
             { _basicPass = TF.Nil
             , _basicUser = TF.Nil
