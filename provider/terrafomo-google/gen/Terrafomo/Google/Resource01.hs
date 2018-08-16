@@ -17,7 +17,6 @@
 --
 module Terrafomo.Google.Resource01
     (
-    -- * Resource Datatypes
     -- ** google_bigquery_dataset
       BigqueryDatasetResource (..)
     , bigqueryDatasetResource
@@ -469,6 +468,7 @@ data BigqueryDatasetResource s = BigqueryDatasetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_bigquery_dataset@ resource value.
 bigqueryDatasetResource
     :: TF.Attr s P.Text -- ^ @dataset_id@ - 'P.datasetId'
     -> P.Resource (BigqueryDatasetResource s)
@@ -572,6 +572,7 @@ data BigqueryTableResource s = BigqueryTableResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_bigquery_table@ resource value.
 bigqueryTableResource
     :: TF.Attr s P.Text -- ^ @dataset_id@ - 'P.datasetId'
     -> TF.Attr s P.Text -- ^ @table_id@ - 'P.tableId'
@@ -706,6 +707,7 @@ data BigtableInstanceResource s = BigtableInstanceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_bigtable_instance@ resource value.
 bigtableInstanceResource
     :: TF.Attr s P.Text -- ^ @cluster_id@ - 'P.clusterId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -785,6 +787,7 @@ data BigtableTableResource s = BigtableTableResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_bigtable_table@ resource value.
 bigtableTableResource
     :: TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -857,6 +860,7 @@ data CloudbuildTriggerResource s = CloudbuildTriggerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_cloudbuild_trigger@ resource value.
 cloudbuildTriggerResource
     :: P.Resource (CloudbuildTriggerResource s)
 cloudbuildTriggerResource =
@@ -990,6 +994,7 @@ data CloudfunctionsFunctionResource s = CloudfunctionsFunctionResource'
     -- * 'triggerHttp'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_cloudfunctions_function@ resource value.
 cloudfunctionsFunctionResource
     :: TF.Attr s P.Text -- ^ @source_archive_bucket@ - 'P.sourceArchiveBucket'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1149,6 +1154,7 @@ data CloudiotRegistryResource s = CloudiotRegistryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_cloudiot_registry@ resource value.
 cloudiotRegistryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (CloudiotRegistryResource s)
@@ -1234,6 +1240,7 @@ data ComputeAddressResource s = ComputeAddressResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_address@ resource value.
 computeAddressResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeAddressResource s)
@@ -1326,6 +1333,7 @@ data ComputeAutoscalerResource s = ComputeAutoscalerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_autoscaler@ resource value.
 computeAutoscalerResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (AutoscalingPolicySetting s) -- ^ @autoscaling_policy@ - 'P.autoscalingPolicy'
@@ -1409,6 +1417,7 @@ data ComputeBackendBucketResource s = ComputeBackendBucketResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_backend_bucket@ resource value.
 computeBackendBucketResource
     :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1502,6 +1511,7 @@ data ComputeBackendServiceResource s = ComputeBackendServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_backend_service@ resource value.
 computeBackendServiceResource
     :: TF.Attr s P.Text -- ^ @health_checks@ - 'P.healthChecks'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1653,6 +1663,7 @@ data ComputeDiskResource s = ComputeDiskResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_disk@ resource value.
 computeDiskResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeDiskResource s)
@@ -1841,6 +1852,7 @@ data ComputeFirewallResource s = ComputeFirewallResource'
     -- * 'targetServiceAccounts'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_firewall@ resource value.
 computeFirewallResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
@@ -2020,6 +2032,7 @@ data ComputeForwardingRuleResource s = ComputeForwardingRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_forwarding_rule@ resource value.
 computeForwardingRuleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeForwardingRuleResource s)
@@ -2160,6 +2173,7 @@ data ComputeGlobalAddressResource s = ComputeGlobalAddressResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_global_address@ resource value.
 computeGlobalAddressResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeGlobalAddressResource s)
@@ -2249,6 +2263,7 @@ data ComputeGlobalForwardingRuleResource s = ComputeGlobalForwardingRuleResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_global_forwarding_rule@ resource value.
 computeGlobalForwardingRuleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
@@ -2389,6 +2404,7 @@ data ComputeHealthCheckResource s = ComputeHealthCheckResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_health_check@ resource value.
 computeHealthCheckResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeHealthCheckResource s)
@@ -2554,6 +2570,7 @@ data ComputeHttpHealthCheckResource s = ComputeHttpHealthCheckResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_http_health_check@ resource value.
 computeHttpHealthCheckResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeHttpHealthCheckResource s)
@@ -2678,6 +2695,7 @@ data ComputeHttpsHealthCheckResource s = ComputeHttpsHealthCheckResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_https_health_check@ resource value.
 computeHttpsHealthCheckResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeHttpsHealthCheckResource s)
@@ -2793,6 +2811,7 @@ data ComputeImageResource s = ComputeImageResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_image@ resource value.
 computeImageResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeImageResource s)
@@ -2930,6 +2949,7 @@ data ComputeInstanceResource s = ComputeInstanceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_instance@ resource value.
 computeInstanceResource
     :: TF.Attr s (BootDiskSetting s) -- ^ @boot_disk@ - 'P.bootDisk'
     -> TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)] -- ^ @network_interface@ - 'P.networkInterface'
@@ -3128,6 +3148,7 @@ data ComputeInstanceFromTemplateResource s = ComputeInstanceFromTemplateResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_instance_from_template@ resource value.
 computeInstanceFromTemplateResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @source_instance_template@ - 'P.sourceInstanceTemplate'
@@ -3252,6 +3273,7 @@ data ComputeInstanceGroupResource s = ComputeInstanceGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_instance_group@ resource value.
 computeInstanceGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeInstanceGroupResource s)
@@ -3346,6 +3368,7 @@ data ComputeInstanceGroupManagerResource s = ComputeInstanceGroupManagerResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_instance_group_manager@ resource value.
 computeInstanceGroupManagerResource
     :: TF.Attr s P.Text -- ^ @base_instance_name@ - 'P.baseInstanceName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -3516,6 +3539,7 @@ data ComputeInstanceTemplateResource s = ComputeInstanceTemplateResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_instance_template@ resource value.
 computeInstanceTemplateResource
     :: TF.Attr s [TF.Attr s (DiskSetting s)] -- ^ @disk@ - 'P.disk'
     -> TF.Attr s P.Text -- ^ @machine_type@ - 'P.machineType'
@@ -3684,6 +3708,7 @@ data ComputeNetworkResource s = ComputeNetworkResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_network@ resource value.
 computeNetworkResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeNetworkResource s)
@@ -3754,6 +3779,7 @@ data ComputeNetworkPeeringResource s = ComputeNetworkPeeringResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_network_peering@ resource value.
 computeNetworkPeeringResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
@@ -3818,6 +3844,7 @@ data ComputeProjectMetadataResource s = ComputeProjectMetadataResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_project_metadata@ resource value.
 computeProjectMetadataResource
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @metadata@ - 'P.metadata'
     -> P.Resource (ComputeProjectMetadataResource s)
@@ -3859,6 +3886,7 @@ data ComputeProjectMetadataItemResource s = ComputeProjectMetadataItemResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_project_metadata_item@ resource value.
 computeProjectMetadataItemResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
@@ -3914,6 +3942,7 @@ data ComputeRegionAutoscalerResource s = ComputeRegionAutoscalerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_region_autoscaler@ resource value.
 computeRegionAutoscalerResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (AutoscalingPolicySetting s) -- ^ @autoscaling_policy@ - 'P.autoscalingPolicy'
@@ -4000,6 +4029,7 @@ data ComputeRegionBackendServiceResource s = ComputeRegionBackendServiceResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_region_backend_service@ resource value.
 computeRegionBackendServiceResource
     :: TF.Attr s P.Text -- ^ @health_checks@ - 'P.healthChecks'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4106,6 +4136,7 @@ data ComputeRegionDiskResource s = ComputeRegionDiskResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_region_disk@ resource value.
 computeRegionDiskResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @replica_zones@ - 'P.replicaZones'
@@ -4259,6 +4290,7 @@ data ComputeRegionInstanceGroupManagerResource s = ComputeRegionInstanceGroupMan
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_region_instance_group_manager@ resource value.
 computeRegionInstanceGroupManagerResource
     :: TF.Attr s P.Text -- ^ @base_instance_name@ - 'P.baseInstanceName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4425,6 +4457,7 @@ data ComputeRouteResource s = ComputeRouteResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_route@ resource value.
 computeRouteResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
@@ -4550,6 +4583,7 @@ data ComputeRouterResource s = ComputeRouterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_router@ resource value.
 computeRouterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
@@ -4632,6 +4666,7 @@ data ComputeRouterInterfaceResource s = ComputeRouterInterfaceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_router_interface@ resource value.
 computeRouterInterfaceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @router@ - 'P.router'
@@ -4711,6 +4746,7 @@ data ComputeRouterPeerResource s = ComputeRouterPeerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_router_peer@ resource value.
 computeRouterPeerResource
     :: TF.Attr s P.Int -- ^ @peer_asn@ - 'P.peerAsn'
     -> TF.Attr s P.Text -- ^ @interface@ - 'P.interface'
@@ -4796,6 +4832,7 @@ data ComputeSecurityPolicyResource s = ComputeSecurityPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_security_policy@ resource value.
 computeSecurityPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSecurityPolicyResource s)
@@ -4850,6 +4887,7 @@ data ComputeSharedVpcHostProjectResource s = ComputeSharedVpcHostProjectResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_shared_vpc_host_project@ resource value.
 computeSharedVpcHostProjectResource
     :: TF.Attr s P.Text -- ^ @project@ - 'P.project'
     -> P.Resource (ComputeSharedVpcHostProjectResource s)
@@ -4888,6 +4926,7 @@ data ComputeSharedVpcServiceProjectResource s = ComputeSharedVpcServiceProjectRe
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_shared_vpc_service_project@ resource value.
 computeSharedVpcServiceProjectResource
     :: TF.Attr s P.Text -- ^ @host_project@ - 'P.hostProject'
     -> TF.Attr s P.Text -- ^ @service_project@ - 'P.serviceProject'
@@ -4943,6 +4982,7 @@ data ComputeSnapshotResource s = ComputeSnapshotResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_snapshot@ resource value.
 computeSnapshotResource
     :: TF.Attr s P.Text -- ^ @source_disk@ - 'P.sourceDisk'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -5034,6 +5074,7 @@ data ComputeSslCertificateResource s = ComputeSslCertificateResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_ssl_certificate@ resource value.
 computeSslCertificateResource
     :: TF.Attr s P.Text -- ^ @certificate@ - 'P.certificate'
     -> TF.Attr s P.Text -- ^ @private_key@ - 'P.privateKey'
@@ -5111,6 +5152,7 @@ data ComputeSslPolicyResource s = ComputeSslPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_ssl_policy@ resource value.
 computeSslPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSslPolicyResource s)
@@ -5204,6 +5246,7 @@ data ComputeSubnetworkResource s = ComputeSubnetworkResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_subnetwork@ resource value.
 computeSubnetworkResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
@@ -5303,6 +5346,7 @@ data ComputeSubnetworkIamBindingResource s = ComputeSubnetworkIamBindingResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_subnetwork_iam_binding@ resource value.
 computeSubnetworkIamBindingResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
@@ -5369,6 +5413,7 @@ data ComputeSubnetworkIamMemberResource s = ComputeSubnetworkIamMemberResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_subnetwork_iam_member@ resource value.
 computeSubnetworkIamMemberResource
     :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
@@ -5432,6 +5477,7 @@ data ComputeSubnetworkIamPolicyResource s = ComputeSubnetworkIamPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_subnetwork_iam_policy@ resource value.
 computeSubnetworkIamPolicyResource
     :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> TF.Attr s P.Text -- ^ @subnetwork@ - 'P.subnetwork'
@@ -5490,6 +5536,7 @@ data ComputeTargetHttpProxyResource s = ComputeTargetHttpProxyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_target_http_proxy@ resource value.
 computeTargetHttpProxyResource
     :: TF.Attr s P.Text -- ^ @url_map@ - 'P.urlMap'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -5567,6 +5614,7 @@ data ComputeTargetHttpsProxyResource s = ComputeTargetHttpsProxyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_target_https_proxy@ resource value.
 computeTargetHttpsProxyResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @ssl_certificates@ - 'P.sslCertificates'
     -> TF.Attr s P.Text -- ^ @url_map@ - 'P.urlMap'
@@ -5666,6 +5714,7 @@ data ComputeTargetPoolResource s = ComputeTargetPoolResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_target_pool@ resource value.
 computeTargetPoolResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeTargetPoolResource s)
@@ -5763,6 +5812,7 @@ data ComputeTargetSslProxyResource s = ComputeTargetSslProxyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_target_ssl_proxy@ resource value.
 computeTargetSslProxyResource
     :: TF.Attr s P.Text -- ^ @ssl_certificates@ - 'P.sslCertificates'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -5856,6 +5906,7 @@ data ComputeTargetTcpProxyResource s = ComputeTargetTcpProxyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_target_tcp_proxy@ resource value.
 computeTargetTcpProxyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @backend_service@ - 'P.backendService'
@@ -5940,6 +5991,7 @@ data ComputeUrlMapResource s = ComputeUrlMapResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_url_map@ resource value.
 computeUrlMapResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @default_service@ - 'P.defaultService'
@@ -6029,6 +6081,7 @@ data ComputeVpnGatewayResource s = ComputeVpnGatewayResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_vpn_gateway@ resource value.
 computeVpnGatewayResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
@@ -6112,6 +6165,7 @@ data ComputeVpnTunnelResource s = ComputeVpnTunnelResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_vpn_tunnel@ resource value.
 computeVpnTunnelResource
     :: TF.Attr s P.Text -- ^ @target_vpn_gateway@ - 'P.targetVpnGateway'
     -> TF.Attr s P.Text -- ^ @peer_ip@ - 'P.peerIp'
@@ -6268,6 +6322,7 @@ data ContainerClusterResource s = ContainerClusterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_container_cluster@ resource value.
 containerClusterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ContainerClusterResource s)
@@ -6474,6 +6529,7 @@ data ContainerNodePoolResource s = ContainerNodePoolResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_container_node_pool@ resource value.
 containerNodePoolResource
     :: TF.Attr s P.Text -- ^ @cluster@ - 'P.cluster'
     -> P.Resource (ContainerNodePoolResource s)
@@ -6575,6 +6631,7 @@ data DataflowJobResource s = DataflowJobResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_dataflow_job@ resource value.
 dataflowJobResource
     :: TF.Attr s P.Text -- ^ @temp_gcs_location@ - 'P.tempGcsLocation'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -6667,6 +6724,7 @@ data DataprocClusterResource s = DataprocClusterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_dataproc_cluster@ resource value.
 dataprocClusterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DataprocClusterResource s)
@@ -6792,6 +6850,7 @@ data DataprocJobResource s = DataprocJobResource'
     -- * 'sparkConfig'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_dataproc_job@ resource value.
 dataprocJobResource
     :: TF.Attr s (PlacementSetting s) -- ^ @placement@ - 'P.placement'
     -> P.Resource (DataprocJobResource s)
@@ -6981,6 +7040,7 @@ data DnsManagedZoneResource s = DnsManagedZoneResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_dns_managed_zone@ resource value.
 dnsManagedZoneResource
     :: TF.Attr s P.Text -- ^ @dns_name@ - 'P.dnsName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -7049,6 +7109,7 @@ data DnsRecordSetResource s = DnsRecordSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_dns_record_set@ resource value.
 dnsRecordSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @rrdatas@ - 'P.rrdatas'
@@ -7138,6 +7199,7 @@ data EndpointsServiceResource s = EndpointsServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_endpoints_service@ resource value.
 endpointsServiceResource
     :: TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
     -> P.Resource (EndpointsServiceResource s)
@@ -7228,6 +7290,7 @@ data FolderResource s = FolderResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_folder@ resource value.
 folderResource
     :: TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
     -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
@@ -7286,6 +7349,7 @@ data FolderIamBindingResource s = FolderIamBindingResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_folder_iam_binding@ resource value.
 folderIamBindingResource
     :: TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
@@ -7346,6 +7410,7 @@ data FolderIamMemberResource s = FolderIamMemberResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_folder_iam_member@ resource value.
 folderIamMemberResource
     :: TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
     -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
@@ -7403,6 +7468,7 @@ data FolderIamPolicyResource s = FolderIamPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_folder_iam_policy@ resource value.
 folderIamPolicyResource
     :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
@@ -7473,6 +7539,7 @@ data FolderOrganizationPolicyResource s = FolderOrganizationPolicyResource'
     -- * 'listPolicy'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_folder_organization_policy@ resource value.
 folderOrganizationPolicyResource
     :: TF.Attr s P.Text -- ^ @constraint@ - 'P.constraint'
     -> TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
@@ -7580,6 +7647,7 @@ data KmsCryptoKeyResource s = KmsCryptoKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_kms_crypto_key@ resource value.
 kmsCryptoKeyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @key_ring@ - 'P.keyRing'
@@ -7636,6 +7704,7 @@ data KmsCryptoKeyIamBindingResource s = KmsCryptoKeyIamBindingResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_kms_crypto_key_iam_binding@ resource value.
 kmsCryptoKeyIamBindingResource
     :: TF.Attr s P.Text -- ^ @crypto_key_id@ - 'P.cryptoKeyId'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
@@ -7696,6 +7765,7 @@ data KmsCryptoKeyIamMemberResource s = KmsCryptoKeyIamMemberResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_kms_crypto_key_iam_member@ resource value.
 kmsCryptoKeyIamMemberResource
     :: TF.Attr s P.Text -- ^ @crypto_key_id@ - 'P.cryptoKeyId'
     -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
@@ -7753,6 +7823,7 @@ data KmsKeyRingResource s = KmsKeyRingResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_kms_key_ring@ resource value.
 kmsKeyRingResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -7805,6 +7876,7 @@ data KmsKeyRingIamBindingResource s = KmsKeyRingIamBindingResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_kms_key_ring_iam_binding@ resource value.
 kmsKeyRingIamBindingResource
     :: TF.Attr s P.Text -- ^ @key_ring_id@ - 'P.keyRingId'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
@@ -7865,6 +7937,7 @@ data KmsKeyRingIamMemberResource s = KmsKeyRingIamMemberResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_kms_key_ring_iam_member@ resource value.
 kmsKeyRingIamMemberResource
     :: TF.Attr s P.Text -- ^ @key_ring_id@ - 'P.keyRingId'
     -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
@@ -7922,6 +7995,7 @@ data KmsKeyRingIamPolicyResource s = KmsKeyRingIamPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_kms_key_ring_iam_policy@ resource value.
 kmsKeyRingIamPolicyResource
     :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> TF.Attr s P.Text -- ^ @key_ring_id@ - 'P.keyRingId'
@@ -7980,6 +8054,7 @@ data LoggingBillingAccountExclusionResource s = LoggingBillingAccountExclusionRe
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_logging_billing_account_exclusion@ resource value.
 loggingBillingAccountExclusionResource
     :: TF.Attr s P.Text -- ^ @billing_account@ - 'P.billingAccount'
     -> TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
@@ -8054,6 +8129,7 @@ data LoggingBillingAccountSinkResource s = LoggingBillingAccountSinkResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_logging_billing_account_sink@ resource value.
 loggingBillingAccountSinkResource
     :: TF.Attr s P.Text -- ^ @billing_account@ - 'P.billingAccount'
     -> TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
@@ -8127,6 +8203,7 @@ data LoggingFolderExclusionResource s = LoggingFolderExclusionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_logging_folder_exclusion@ resource value.
 loggingFolderExclusionResource
     :: TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
     -> TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
@@ -8204,6 +8281,7 @@ data LoggingFolderSinkResource s = LoggingFolderSinkResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_logging_folder_sink@ resource value.
 loggingFolderSinkResource
     :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
     -> TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
@@ -8284,6 +8362,7 @@ data LoggingOrganizationExclusionResource s = LoggingOrganizationExclusionResour
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_logging_organization_exclusion@ resource value.
 loggingOrganizationExclusionResource
     :: TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
     -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
@@ -8361,6 +8440,7 @@ data LoggingOrganizationSinkResource s = LoggingOrganizationSinkResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_logging_organization_sink@ resource value.
 loggingOrganizationSinkResource
     :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
     -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
@@ -8438,6 +8518,7 @@ data LoggingProjectExclusionResource s = LoggingProjectExclusionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_logging_project_exclusion@ resource value.
 loggingProjectExclusionResource
     :: TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -8507,6 +8588,7 @@ data LoggingProjectSinkResource s = LoggingProjectSinkResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_logging_project_sink@ resource value.
 loggingProjectSinkResource
     :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -8576,6 +8658,7 @@ data OrganizationIamBindingResource s = OrganizationIamBindingResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_organization_iam_binding@ resource value.
 organizationIamBindingResource
     :: TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
@@ -8648,6 +8731,7 @@ data OrganizationIamCustomRoleResource s = OrganizationIamCustomRoleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_organization_iam_custom_role@ resource value.
 organizationIamCustomRoleResource
     :: TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
     -> TF.Attr s P.Text -- ^ @role_id@ - 'P.roleId'
@@ -8734,6 +8818,7 @@ data OrganizationIamMemberResource s = OrganizationIamMemberResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_organization_iam_member@ resource value.
 organizationIamMemberResource
     :: TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
     -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
@@ -8791,6 +8876,7 @@ data OrganizationIamPolicyResource s = OrganizationIamPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_organization_iam_policy@ resource value.
 organizationIamPolicyResource
     :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
@@ -8861,6 +8947,7 @@ data OrganizationPolicyResource s = OrganizationPolicyResource'
     -- * 'listPolicy'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_organization_policy@ resource value.
 organizationPolicyResource
     :: TF.Attr s P.Text -- ^ @constraint@ - 'P.constraint'
     -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
@@ -8977,6 +9064,7 @@ data ProjectResource s = ProjectResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_project@ resource value.
 projectResource
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -9076,6 +9164,7 @@ data ProjectIamBindingResource s = ProjectIamBindingResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_project_iam_binding@ resource value.
 projectIamBindingResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
@@ -9144,6 +9233,7 @@ data ProjectIamCustomRoleResource s = ProjectIamCustomRoleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_project_iam_custom_role@ resource value.
 projectIamCustomRoleResource
     :: TF.Attr s P.Text -- ^ @role_id@ - 'P.roleId'
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ - 'P.permissions'
@@ -9225,6 +9315,7 @@ data ProjectIamMemberResource s = ProjectIamMemberResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_project_iam_member@ resource value.
 projectIamMemberResource
     :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
@@ -9278,6 +9369,7 @@ data ProjectIamPolicyResource s = ProjectIamPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_project_iam_policy@ resource value.
 projectIamPolicyResource
     :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> P.Resource (ProjectIamPolicyResource s)
@@ -9346,6 +9438,7 @@ data ProjectOrganizationPolicyResource s = ProjectOrganizationPolicyResource'
     -- * 'listPolicy'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_project_organization_policy@ resource value.
 projectOrganizationPolicyResource
     :: TF.Attr s P.Text -- ^ @constraint@ - 'P.constraint'
     -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
@@ -9450,6 +9543,7 @@ data ProjectServiceResource s = ProjectServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_project_service@ resource value.
 projectServiceResource
     :: TF.Attr s P.Text -- ^ @service@ - 'P.service'
     -> P.Resource (ProjectServiceResource s)
@@ -9498,6 +9592,7 @@ data ProjectServicesResource s = ProjectServicesResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_project_services@ resource value.
 projectServicesResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @services@ - 'P.services'
     -> P.Resource (ProjectServicesResource s)
@@ -9546,6 +9641,7 @@ data ProjectUsageExportBucketResource s = ProjectUsageExportBucketResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_project_usage_export_bucket@ resource value.
 projectUsageExportBucketResource
     :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
     -> P.Resource (ProjectUsageExportBucketResource s)
@@ -9597,6 +9693,7 @@ data PubsubSubscriptionResource s = PubsubSubscriptionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_pubsub_subscription@ resource value.
 pubsubSubscriptionResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @topic@ - 'P.topic'
@@ -9666,6 +9763,7 @@ data PubsubSubscriptionIamBindingResource s = PubsubSubscriptionIamBindingResour
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_pubsub_subscription_iam_binding@ resource value.
 pubsubSubscriptionIamBindingResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
@@ -9729,6 +9827,7 @@ data PubsubSubscriptionIamMemberResource s = PubsubSubscriptionIamMemberResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_pubsub_subscription_iam_member@ resource value.
 pubsubSubscriptionIamMemberResource
     :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'

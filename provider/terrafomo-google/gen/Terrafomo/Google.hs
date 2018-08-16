@@ -12,14 +12,25 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Google
-    ( module Terrafomo.Google.DataSource
-    , module Terrafomo.Google.Lens
-    , module Terrafomo.Google.Provider
+    (
+    -- * Provider Datatype
+      module Terrafomo.Google.Provider
+
+    -- * Custom Types
+    , module Terrafomo.Google.Types
+
+    -- * DataSources
+    , module Terrafomo.Google.DataSource
+
+    -- * Resources
     , module Terrafomo.Google.Resource01
     , module Terrafomo.Google.Resource02
+
+    -- * Settings
     , module Terrafomo.Google.Settings
-    , module Terrafomo.Google.Types
-    -- * Provider Aliases
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Google.Lens
     ) where
 
 import Terrafomo.Google.DataSource

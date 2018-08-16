@@ -17,7 +17,6 @@
 --
 module Terrafomo.Google.DataSource
     (
-    -- * DataSource Datatypes
     -- ** google_active_folder
       ActiveFolderData (..)
     , activeFolderData
@@ -193,6 +192,7 @@ data ActiveFolderData s = ActiveFolderData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_active_folder@ datasource value.
 activeFolderData
     :: TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
     -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
@@ -239,6 +239,7 @@ data BillingAccountData s = BillingAccountData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_billing_account@ datasource value.
 billingAccountData
     :: P.DataSource (BillingAccountData s)
 billingAccountData =
@@ -282,6 +283,7 @@ instance s ~ s' => P.HasComputedProjectIds (TF.Ref s' (BillingAccountData s)) (T
 data ClientConfigData s = ClientConfigData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_client_config@ datasource value.
 clientConfigData
     :: P.DataSource (ClientConfigData s)
 clientConfigData =
@@ -322,6 +324,7 @@ data CloudfunctionsFunctionData s = CloudfunctionsFunctionData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_cloudfunctions_function@ datasource value.
 cloudfunctionsFunctionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CloudfunctionsFunctionData s)
@@ -407,6 +410,7 @@ data ComputeAddressData s = ComputeAddressData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_address@ datasource value.
 computeAddressData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeAddressData s)
@@ -460,6 +464,7 @@ data ComputeBackendServiceData s = ComputeBackendServiceData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_backend_service@ datasource value.
 computeBackendServiceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeBackendServiceData s)
@@ -547,6 +552,7 @@ instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeBackendServiceData
 data ComputeDefaultServiceAccountData s = ComputeDefaultServiceAccountData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_default_service_account@ datasource value.
 computeDefaultServiceAccountData
     :: P.DataSource (ComputeDefaultServiceAccountData s)
 computeDefaultServiceAccountData =
@@ -578,6 +584,7 @@ data ComputeForwardingRuleData s = ComputeForwardingRuleData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_forwarding_rule@ datasource value.
 computeForwardingRuleData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeForwardingRuleData s)
@@ -652,6 +659,7 @@ data ComputeGlobalAddressData s = ComputeGlobalAddressData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_global_address@ datasource value.
 computeGlobalAddressData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeGlobalAddressData s)
@@ -696,6 +704,7 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ComputeGlobalAddressData s)) 
 data ComputeImageData s = ComputeImageData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_image@ datasource value.
 computeImageData
     :: P.DataSource (ComputeImageData s)
 computeImageData =
@@ -775,6 +784,7 @@ data ComputeInstanceGroupData s = ComputeInstanceGroupData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_instance_group@ datasource value.
 computeInstanceGroupData
     :: P.DataSource (ComputeInstanceGroupData s)
 computeInstanceGroupData =
@@ -830,6 +840,7 @@ instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeInstanceGroupData s)) (T
 data ComputeLbIpRangesData s = ComputeLbIpRangesData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_lb_ip_ranges@ datasource value.
 computeLbIpRangesData
     :: P.DataSource (ComputeLbIpRangesData s)
 computeLbIpRangesData =
@@ -864,6 +875,7 @@ data ComputeNetworkData s = ComputeNetworkData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_network@ datasource value.
 computeNetworkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeNetworkData s)
@@ -915,6 +927,7 @@ instance s ~ s' => P.HasComputedSubnetworksSelfLinks (TF.Ref s' (ComputeNetworkD
 data ComputeRegionInstanceGroupData s = ComputeRegionInstanceGroupData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_region_instance_group@ datasource value.
 computeRegionInstanceGroupData
     :: P.DataSource (ComputeRegionInstanceGroupData s)
 computeRegionInstanceGroupData =
@@ -958,6 +971,7 @@ data ComputeRegionsData s = ComputeRegionsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_regions@ datasource value.
 computeRegionsData
     :: P.DataSource (ComputeRegionsData s)
 computeRegionsData =
@@ -1001,6 +1015,7 @@ data ComputeSslPolicyData s = ComputeSslPolicyData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_ssl_policy@ datasource value.
 computeSslPolicyData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeSslPolicyData s)
@@ -1067,6 +1082,7 @@ data ComputeSubnetworkData s = ComputeSubnetworkData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_subnetwork@ datasource value.
 computeSubnetworkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeSubnetworkData s)
@@ -1129,6 +1145,7 @@ data ComputeVpnGatewayData s = ComputeVpnGatewayData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_vpn_gateway@ datasource value.
 computeVpnGatewayData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeVpnGatewayData s)
@@ -1182,6 +1199,7 @@ data ComputeZonesData s = ComputeZonesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_compute_zones@ datasource value.
 computeZonesData
     :: P.DataSource (ComputeZonesData s)
 computeZonesData =
@@ -1238,6 +1256,7 @@ data ContainerClusterData s = ContainerClusterData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_container_cluster@ datasource value.
 containerClusterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ContainerClusterData s)
@@ -1381,6 +1400,7 @@ data ContainerEngineVersionsData s = ContainerEngineVersionsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_container_engine_versions@ datasource value.
 containerEngineVersionsData
     :: P.DataSource (ContainerEngineVersionsData s)
 containerEngineVersionsData =
@@ -1446,6 +1466,7 @@ data ContainerRegistryImageData s = ContainerRegistryImageData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_container_registry_image@ datasource value.
 containerRegistryImageData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ContainerRegistryImageData s)
@@ -1508,6 +1529,7 @@ data ContainerRegistryRepositoryData s = ContainerRegistryRepositoryData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_container_registry_repository@ datasource value.
 containerRegistryRepositoryData
     :: P.DataSource (ContainerRegistryRepositoryData s)
 containerRegistryRepositoryData =
@@ -1551,6 +1573,7 @@ data DnsManagedZoneData s = DnsManagedZoneData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_dns_managed_zone@ datasource value.
 dnsManagedZoneData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DnsManagedZoneData s)
@@ -1605,6 +1628,7 @@ data FolderData s = FolderData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_folder@ datasource value.
 folderData
     :: TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
     -> P.DataSource (FolderData s)
@@ -1665,6 +1689,7 @@ data IamPolicyData s = IamPolicyData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_iam_policy@ datasource value.
 iamPolicyData
     :: TF.Attr s [TF.Attr s (BindingSetting s)] -- ^ @binding@ - 'P.binding'
     -> P.DataSource (IamPolicyData s)
@@ -1706,6 +1731,7 @@ data KmsSecretData s = KmsSecretData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_kms_secret@ datasource value.
 kmsSecretData
     :: TF.Attr s P.Text -- ^ @ciphertext@ - 'P.ciphertext'
     -> TF.Attr s P.Text -- ^ @crypto_key@ - 'P.cryptoKey'
@@ -1749,6 +1775,7 @@ instance s ~ s' => P.HasComputedPlaintext (TF.Ref s' (KmsSecretData s)) (TF.Attr
 data NetblockIpRangesData s = NetblockIpRangesData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_netblock_ip_ranges@ datasource value.
 netblockIpRangesData
     :: P.DataSource (NetblockIpRangesData s)
 netblockIpRangesData =
@@ -1783,6 +1810,7 @@ data OrganizationData s = OrganizationData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_organization@ datasource value.
 organizationData
     :: P.DataSource (OrganizationData s)
 organizationData =
@@ -1832,6 +1860,7 @@ data ProjectData s = ProjectData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_project@ datasource value.
 projectData
     :: P.DataSource (ProjectData s)
 projectData =
@@ -1902,6 +1931,7 @@ data ServiceAccountData s = ServiceAccountData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_service_account@ datasource value.
 serviceAccountData
     :: TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
     -> P.DataSource (ServiceAccountData s)
@@ -1962,6 +1992,7 @@ data ServiceAccountKeyData s = ServiceAccountKeyData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_service_account_key@ datasource value.
 serviceAccountKeyData
     :: TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
     -> P.DataSource (ServiceAccountKeyData s)
@@ -2041,6 +2072,7 @@ data StorageObjectSignedUrlData s = StorageObjectSignedUrlData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_storage_object_signed_url@ datasource value.
 storageObjectSignedUrlData
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
@@ -2126,6 +2158,7 @@ instance s ~ s' => P.HasComputedSignedUrl (TF.Ref s' (StorageObjectSignedUrlData
 data StorageProjectServiceAccountData s = StorageProjectServiceAccountData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_storage_project_service_account@ datasource value.
 storageProjectServiceAccountData
     :: P.DataSource (StorageProjectServiceAccountData s)
 storageProjectServiceAccountData =

@@ -17,7 +17,6 @@
 --
 module Terrafomo.Google.Resource02
     (
-    -- * Resource Datatypes
     -- ** google_pubsub_subscription_iam_policy
       PubsubSubscriptionIamPolicyResource (..)
     , pubsubSubscriptionIamPolicyResource
@@ -197,6 +196,7 @@ data PubsubSubscriptionIamPolicyResource s = PubsubSubscriptionIamPolicyResource
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_pubsub_subscription_iam_policy@ resource value.
 pubsubSubscriptionIamPolicyResource
     :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> TF.Attr s P.Text -- ^ @subscription@ - 'P.subscription'
@@ -246,6 +246,7 @@ data PubsubTopicResource s = PubsubTopicResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_pubsub_topic@ resource value.
 pubsubTopicResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (PubsubTopicResource s)
@@ -290,6 +291,7 @@ data PubsubTopicIamBindingResource s = PubsubTopicIamBindingResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_pubsub_topic_iam_binding@ resource value.
 pubsubTopicIamBindingResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
@@ -353,6 +355,7 @@ data PubsubTopicIamMemberResource s = PubsubTopicIamMemberResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_pubsub_topic_iam_member@ resource value.
 pubsubTopicIamMemberResource
     :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
@@ -413,6 +416,7 @@ data PubsubTopicIamPolicyResource s = PubsubTopicIamPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_pubsub_topic_iam_policy@ resource value.
 pubsubTopicIamPolicyResource
     :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> TF.Attr s P.Text -- ^ @topic@ - 'P.topic'
@@ -477,6 +481,7 @@ data RedisInstanceResource s = RedisInstanceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_redis_instance@ resource value.
 redisInstanceResource
     :: TF.Attr s P.Int -- ^ @memory_size_gb@ - 'P.memorySizeGb'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -590,6 +595,7 @@ data ResourceManagerLienResource s = ResourceManagerLienResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_resource_manager_lien@ resource value.
 resourceManagerLienResource
     :: TF.Attr s P.Text -- ^ @origin@ - 'P.origin'
     -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
@@ -658,6 +664,7 @@ data RuntimeconfigConfigResource s = RuntimeconfigConfigResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_runtimeconfig_config@ resource value.
 runtimeconfigConfigResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RuntimeconfigConfigResource s)
@@ -718,6 +725,7 @@ data RuntimeconfigVariableResource s = RuntimeconfigVariableResource'
     -- * 'text'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_runtimeconfig_variable@ resource value.
 runtimeconfigVariableResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
@@ -795,6 +803,7 @@ data ServiceAccountResource s = ServiceAccountResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_service_account@ resource value.
 serviceAccountResource
     :: TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
     -> P.Resource (ServiceAccountResource s)
@@ -855,6 +864,7 @@ data ServiceAccountIamBindingResource s = ServiceAccountIamBindingResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_service_account_iam_binding@ resource value.
 serviceAccountIamBindingResource
     :: TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
@@ -915,6 +925,7 @@ data ServiceAccountIamMemberResource s = ServiceAccountIamMemberResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_service_account_iam_member@ resource value.
 serviceAccountIamMemberResource
     :: TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
     -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
@@ -972,6 +983,7 @@ data ServiceAccountIamPolicyResource s = ServiceAccountIamPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_service_account_iam_policy@ resource value.
 serviceAccountIamPolicyResource
     :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
@@ -1030,6 +1042,7 @@ data ServiceAccountKeyResource s = ServiceAccountKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_service_account_key@ resource value.
 serviceAccountKeyResource
     :: TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
     -> P.Resource (ServiceAccountKeyResource s)
@@ -1114,6 +1127,7 @@ data SourcerepoRepositoryResource s = SourcerepoRepositoryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_sourcerepo_repository@ resource value.
 sourcerepoRepositoryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SourcerepoRepositoryResource s)
@@ -1164,6 +1178,7 @@ data SpannerDatabaseResource s = SpannerDatabaseResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_spanner_database@ resource value.
 spannerDatabaseResource
     :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1229,6 +1244,7 @@ data SpannerDatabaseIamBindingResource s = SpannerDatabaseIamBindingResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_spanner_database_iam_binding@ resource value.
 spannerDatabaseIamBindingResource
     :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
     -> TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
@@ -1303,6 +1319,7 @@ data SpannerDatabaseIamMemberResource s = SpannerDatabaseIamMemberResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_spanner_database_iam_member@ resource value.
 spannerDatabaseIamMemberResource
     :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
     -> TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
@@ -1374,6 +1391,7 @@ data SpannerDatabaseIamPolicyResource s = SpannerDatabaseIamPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_spanner_database_iam_policy@ resource value.
 spannerDatabaseIamPolicyResource
     :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> TF.Attr s P.Text -- ^ @database@ - 'P.database'
@@ -1440,6 +1458,7 @@ data SpannerInstanceResource s = SpannerInstanceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_spanner_instance@ resource value.
 spannerInstanceResource
     :: TF.Attr s P.Text -- ^ @config@ - 'P.config'
     -> TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
@@ -1512,6 +1531,7 @@ data SpannerInstanceIamBindingResource s = SpannerInstanceIamBindingResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_spanner_instance_iam_binding@ resource value.
 spannerInstanceIamBindingResource
     :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
@@ -1575,6 +1595,7 @@ data SpannerInstanceIamMemberResource s = SpannerInstanceIamMemberResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_spanner_instance_iam_member@ resource value.
 spannerInstanceIamMemberResource
     :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
     -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
@@ -1635,6 +1656,7 @@ data SpannerInstanceIamPolicyResource s = SpannerInstanceIamPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_spanner_instance_iam_policy@ resource value.
 spannerInstanceIamPolicyResource
     :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
@@ -1687,6 +1709,7 @@ data SqlDatabaseResource s = SqlDatabaseResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_sql_database@ resource value.
 sqlDatabaseResource
     :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1748,6 +1771,7 @@ data SqlDatabaseInstanceResource s = SqlDatabaseInstanceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_sql_database_instance@ resource value.
 sqlDatabaseInstanceResource
     :: TF.Attr s (SettingsSetting s) -- ^ @settings@ - 'P.settings'
     -> P.Resource (SqlDatabaseInstanceResource s)
@@ -1837,6 +1861,7 @@ data SqlUserResource s = SqlUserResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_sql_user@ resource value.
 sqlUserResource
     :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1927,6 +1952,7 @@ data StorageBucketResource s = StorageBucketResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_storage_bucket@ resource value.
 storageBucketResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (StorageBucketResource s)
@@ -2055,6 +2081,7 @@ data StorageBucketAclResource s = StorageBucketAclResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_storage_bucket_acl@ resource value.
 storageBucketAclResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> P.Resource (StorageBucketAclResource s)
@@ -2113,6 +2140,7 @@ data StorageBucketIamBindingResource s = StorageBucketIamBindingResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_storage_bucket_iam_binding@ resource value.
 storageBucketIamBindingResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
@@ -2173,6 +2201,7 @@ data StorageBucketIamMemberResource s = StorageBucketIamMemberResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_storage_bucket_iam_member@ resource value.
 storageBucketIamMemberResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
@@ -2230,6 +2259,7 @@ data StorageBucketIamPolicyResource s = StorageBucketIamPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_storage_bucket_iam_policy@ resource value.
 storageBucketIamPolicyResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
@@ -2309,6 +2339,7 @@ data StorageBucketObjectResource s = StorageBucketObjectResource'
     -- * 'content'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_storage_bucket_object@ resource value.
 storageBucketObjectResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2431,6 +2462,7 @@ data StorageDefaultObjectAclResource s = StorageDefaultObjectAclResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_storage_default_object_acl@ resource value.
 storageDefaultObjectAclResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> P.Resource (StorageDefaultObjectAclResource s)
@@ -2484,6 +2516,7 @@ data StorageNotificationResource s = StorageNotificationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_storage_notification@ resource value.
 storageNotificationResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @payload_format@ - 'P.payloadFormat'
@@ -2565,6 +2598,7 @@ data StorageObjectAclResource s = StorageObjectAclResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @google_storage_object_acl@ resource value.
 storageObjectAclResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @object@ - 'P.object'

@@ -17,7 +17,6 @@
 --
 module Terrafomo.Google.Settings
     (
-    -- * Settings Datatypes
     -- ** access_config
       AccessConfigSetting (..)
     , newAccessConfigSetting
@@ -544,6 +543,7 @@ data AccessConfigSetting s = AccessConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @access_config@ settings value.
 newAccessConfigSetting
     :: AccessConfigSetting s
 newAccessConfigSetting =
@@ -587,6 +587,7 @@ data ActionSetting s = ActionSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @action@ settings value.
 newActionSetting
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> ActionSetting s
@@ -620,6 +621,7 @@ instance P.HasType' (ActionSetting s) (TF.Attr s P.Text) where
 data AddonsConfigSetting s = AddonsConfigSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @addons_config@ settings value.
 newAddonsConfigSetting
     :: AddonsConfigSetting s
 newAddonsConfigSetting =
@@ -654,6 +656,7 @@ data AdvertisedIpRangesSetting s = AdvertisedIpRangesSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @advertised_ip_ranges@ settings value.
 newAdvertisedIpRangesSetting
     :: AdvertisedIpRangesSetting s
 newAdvertisedIpRangesSetting =
@@ -692,6 +695,7 @@ data AliasIpRangeSetting s = AliasIpRangeSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @alias_ip_range@ settings value.
 newAliasIpRangeSetting
     :: TF.Attr s P.Text -- ^ @ip_cidr_range@ - 'P.ipCidrRange'
     -> AliasIpRangeSetting s
@@ -746,6 +750,7 @@ data AllowSetting s = AllowSetting'
     -- * 'all'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @allow@ settings value.
 newAllowSetting
     :: TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> AllowSetting s
@@ -804,6 +809,7 @@ instance P.HasValues (AllowSetting s) (TF.Attr s [TF.Attr s P.Text]) where
 data ApisSetting s = ApisSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @apis@ settings value.
 newApisSetting
     :: ApisSetting s
 newApisSetting =
@@ -832,6 +838,7 @@ instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ApisSetting s)) (TF.Attr s P
 data AppEngineSetting s = AppEngineSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @app_engine@ settings value.
 newAppEngineSetting
     :: AppEngineSetting s
 newAppEngineSetting =
@@ -887,6 +894,7 @@ data AttachedDiskSetting s = AttachedDiskSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @attached_disk@ settings value.
 newAttachedDiskSetting
     :: TF.Attr s P.Text -- ^ @source@ - 'P.source'
     -> AttachedDiskSetting s
@@ -948,6 +956,7 @@ data AuthorizedNetworksSetting s = AuthorizedNetworksSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @authorized_networks@ settings value.
 newAuthorizedNetworksSetting
     :: AuthorizedNetworksSetting s
 newAuthorizedNetworksSetting =
@@ -993,6 +1002,7 @@ data AutoHealingPoliciesSetting s = AutoHealingPoliciesSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @auto_healing_policies@ settings value.
 newAutoHealingPoliciesSetting
     :: TF.Attr s P.Text -- ^ @health_check@ - 'P.healthCheck'
     -> TF.Attr s P.Int -- ^ @initial_delay_sec@ - 'P.initialDelaySec'
@@ -1033,6 +1043,7 @@ data AutoscalingSetting s = AutoscalingSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @autoscaling@ settings value.
 newAutoscalingSetting
     :: TF.Attr s P.Int -- ^ @max_node_count@ - 'P.maxNodeCount'
     -> TF.Attr s P.Int -- ^ @min_node_count@ - 'P.minNodeCount'
@@ -1088,6 +1099,7 @@ data AutoscalingPolicySetting s = AutoscalingPolicySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @autoscaling_policy@ settings value.
 newAutoscalingPolicySetting
     :: TF.Attr s P.Int -- ^ @max_replicas@ - 'P.maxReplicas'
     -> TF.Attr s P.Int -- ^ @min_replicas@ - 'P.minReplicas'
@@ -1177,6 +1189,7 @@ data BackendSetting s = BackendSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @backend@ settings value.
 newBackendSetting
     :: BackendSetting s
 newBackendSetting =
@@ -1291,6 +1304,7 @@ data BackupConfigurationSetting s = BackupConfigurationSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @backup_configuration@ settings value.
 newBackupConfigurationSetting
     :: BackupConfigurationSetting s
 newBackupConfigurationSetting =
@@ -1338,6 +1352,7 @@ data BgpSetting s = BgpSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @bgp@ settings value.
 newBgpSetting
     :: TF.Attr s P.Int -- ^ @asn@ - 'P.asn'
     -> BgpSetting s
@@ -1391,6 +1406,7 @@ data BindingSetting s = BindingSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @binding@ settings value.
 newBindingSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
@@ -1428,6 +1444,7 @@ data BooleanPolicySetting s = BooleanPolicySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @boolean_policy@ settings value.
 newBooleanPolicySetting
     :: TF.Attr s P.Bool -- ^ @enforced@ - 'P.enforced'
     -> BooleanPolicySetting s
@@ -1460,6 +1477,7 @@ data BootDiskSetting s = BootDiskSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @boot_disk@ settings value.
 newBootDiskSetting
     :: BootDiskSetting s
 newBootDiskSetting =
@@ -1519,6 +1537,7 @@ data BuildSetting s = BuildSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @build@ settings value.
 newBuildSetting
     :: BuildSetting s
 newBuildSetting =
@@ -1579,6 +1598,7 @@ data CacheKeyPolicySetting s = CacheKeyPolicySetting'
     -- * 'queryStringBlacklist'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @cache_key_policy@ settings value.
 newCacheKeyPolicySetting
     :: CacheKeyPolicySetting s
 newCacheKeyPolicySetting =
@@ -1661,6 +1681,7 @@ data CdnPolicySetting s = CdnPolicySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @cdn_policy@ settings value.
 newCdnPolicySetting
     :: CdnPolicySetting s
 newCdnPolicySetting =
@@ -1699,6 +1720,7 @@ data CidrBlocksSetting s = CidrBlocksSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @cidr_blocks@ settings value.
 newCidrBlocksSetting
     :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
     -> CidrBlocksSetting s
@@ -1741,6 +1763,7 @@ data ClientCertificateConfigSetting s = ClientCertificateConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @client_certificate_config@ settings value.
 newClientCertificateConfigSetting
     :: TF.Attr s P.Bool -- ^ @issue_client_certificate@ - 'P.issueClientCertificate'
     -> ClientCertificateConfigSetting s
@@ -1776,6 +1799,7 @@ data ClusterConfigSetting s = ClusterConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @cluster_config@ settings value.
 newClusterConfigSetting
     :: ClusterConfigSetting s
 newClusterConfigSetting =
@@ -1841,6 +1865,7 @@ data ConditionSetting s = ConditionSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @condition@ settings value.
 newConditionSetting
     :: ConditionSetting s
 newConditionSetting =
@@ -1897,6 +1922,7 @@ data ConfigSetting s = ConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @config@ settings value.
 newConfigSetting
     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @src_ip_ranges@ - 'P.srcIpRanges'
     -> ConfigSetting s
@@ -1935,6 +1961,7 @@ data CorsSetting s = CorsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @cors@ settings value.
 newCorsSetting
     :: CorsSetting s
 newCorsSetting =
@@ -1984,6 +2011,7 @@ data CpuUtilizationSetting s = CpuUtilizationSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @cpu_utilization@ settings value.
 newCpuUtilizationSetting
     :: TF.Attr s P.Double -- ^ @target@ - 'P.target'
     -> CpuUtilizationSetting s
@@ -2013,6 +2041,7 @@ data CredentialsSetting s = CredentialsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @credentials@ settings value.
 newCredentialsSetting
     :: CredentialsSetting s
 newCredentialsSetting =
@@ -2041,6 +2070,7 @@ data DailyMaintenanceWindowSetting s = DailyMaintenanceWindowSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @daily_maintenance_window@ settings value.
 newDailyMaintenanceWindowSetting
     :: TF.Attr s P.Text -- ^ @start_time@ - 'P.startTime'
     -> DailyMaintenanceWindowSetting s
@@ -2079,6 +2109,7 @@ data DatabaseFlagsSetting s = DatabaseFlagsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @database_flags@ settings value.
 newDatabaseFlagsSetting
     :: DatabaseFlagsSetting s
 newDatabaseFlagsSetting =
@@ -2129,6 +2160,7 @@ data DenySetting s = DenySetting'
     -- * 'all'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @deny@ settings value.
 newDenySetting
     :: TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> DenySetting s
@@ -2223,6 +2255,7 @@ data DiskSetting s = DiskSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @disk@ settings value.
 newDiskSetting
     :: DiskSetting s
 newDiskSetting =
@@ -2346,6 +2379,7 @@ instance s ~ s' => P.HasComputedType (TF.Ref s' (DiskSetting s)) (TF.Attr s P.Te
 data DiskConfigSetting s = DiskConfigSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @disk_config@ settings value.
 newDiskConfigSetting
     :: DiskConfigSetting s
 newDiskConfigSetting =
@@ -2371,6 +2405,7 @@ data DiskEncryptionKeySetting s = DiskEncryptionKeySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @disk_encryption_key@ settings value.
 newDiskEncryptionKeySetting
     :: DiskEncryptionKeySetting s
 newDiskEncryptionKeySetting =
@@ -2399,6 +2434,7 @@ instance s ~ s' => P.HasComputedSha256 (TF.Ref s' (DiskEncryptionKeySetting s)) 
 data EndpointsSetting s = EndpointsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @endpoints@ settings value.
 newEndpointsSetting
     :: EndpointsSetting s
 newEndpointsSetting =
@@ -2424,6 +2460,7 @@ data EventNotificationConfigSetting s = EventNotificationConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @event_notification_config@ settings value.
 newEventNotificationConfigSetting
     :: TF.Attr s P.Text -- ^ @pubsub_topic_name@ - 'P.pubsubTopicName'
     -> EventNotificationConfigSetting s
@@ -2453,6 +2490,7 @@ data FeatureSettingsSetting s = FeatureSettingsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @feature_settings@ settings value.
 newFeatureSettingsSetting
     :: FeatureSettingsSetting s
 newFeatureSettingsSetting =
@@ -2496,6 +2534,7 @@ data GceClusterConfigSetting s = GceClusterConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @gce_cluster_config@ settings value.
 newGceClusterConfigSetting
     :: GceClusterConfigSetting s
 newGceClusterConfigSetting =
@@ -2564,6 +2603,7 @@ data GuestAcceleratorSetting s = GuestAcceleratorSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @guest_accelerator@ settings value.
 newGuestAcceleratorSetting
     :: TF.Attr s P.Int -- ^ @count@ - 'P.count'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -2631,6 +2671,7 @@ data HadoopConfigSetting s = HadoopConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @hadoop_config@ settings value.
 newHadoopConfigSetting
     :: HadoopConfigSetting s
 newHadoopConfigSetting =
@@ -2736,6 +2777,7 @@ data HiveConfigSetting s = HiveConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @hive_config@ settings value.
 newHiveConfigSetting
     :: HiveConfigSetting s
 newHiveConfigSetting =
@@ -2810,6 +2852,7 @@ data HorizontalPodAutoscalingSetting s = HorizontalPodAutoscalingSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @horizontal_pod_autoscaling@ settings value.
 newHorizontalPodAutoscalingSetting
     :: HorizontalPodAutoscalingSetting s
 newHorizontalPodAutoscalingSetting =
@@ -2847,6 +2890,7 @@ data HostRuleSetting s = HostRuleSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @host_rule@ settings value.
 newHostRuleSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @hosts@ - 'P.hosts'
     -> TF.Attr s P.Text -- ^ @path_matcher@ - 'P.pathMatcher'
@@ -2891,6 +2935,7 @@ data HttpConfigSetting s = HttpConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @http_config@ settings value.
 newHttpConfigSetting
     :: TF.Attr s P.Text -- ^ @http_enabled_state@ - 'P.httpEnabledState'
     -> HttpConfigSetting s
@@ -2929,6 +2974,7 @@ data HttpHealthCheckSetting s = HttpHealthCheckSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @http_health_check@ settings value.
 newHttpHealthCheckSetting
     :: HttpHealthCheckSetting s
 newHttpHealthCheckSetting =
@@ -2978,6 +3024,7 @@ data HttpLoadBalancingSetting s = HttpLoadBalancingSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @http_load_balancing@ settings value.
 newHttpLoadBalancingSetting
     :: HttpLoadBalancingSetting s
 newHttpLoadBalancingSetting =
@@ -3018,6 +3065,7 @@ data HttpsHealthCheckSetting s = HttpsHealthCheckSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @https_health_check@ settings value.
 newHttpsHealthCheckSetting
     :: HttpsHealthCheckSetting s
 newHttpsHealthCheckSetting =
@@ -3070,6 +3118,7 @@ data IapSetting s = IapSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @iap@ settings value.
 newIapSetting
     :: TF.Attr s P.Text -- ^ @oauth2_client_id@ - 'P.oauth2ClientId'
     -> TF.Attr s P.Text -- ^ @oauth2_client_secret@ - 'P.oauth2ClientSecret'
@@ -3116,6 +3165,7 @@ data InitializationActionSetting s = InitializationActionSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @initialization_action@ settings value.
 newInitializationActionSetting
     :: TF.Attr s P.Text -- ^ @script@ - 'P.script'
     -> InitializationActionSetting s
@@ -3149,6 +3199,7 @@ instance P.HasTimeoutSec (InitializationActionSetting s) (TF.Attr s P.Int) where
 data InitializeParamsSetting s = InitializeParamsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @initialize_params@ settings value.
 newInitializeParamsSetting
     :: InitializeParamsSetting s
 newInitializeParamsSetting =
@@ -3180,6 +3231,7 @@ data InstancesSetting s = InstancesSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @instances@ settings value.
 newInstancesSetting
     :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
     -> TF.Attr s P.Text -- ^ @status@ - 'P.status'
@@ -3217,6 +3269,7 @@ instance s ~ s' => P.HasComputedNamedPorts (TF.Ref s' (InstancesSetting s)) (TF.
 data IpAddressSetting s = IpAddressSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @ip_address@ settings value.
 newIpAddressSetting
     :: IpAddressSetting s
 newIpAddressSetting =
@@ -3245,6 +3298,7 @@ data IpAllocationPolicySetting s = IpAllocationPolicySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @ip_allocation_policy@ settings value.
 newIpAllocationPolicySetting
     :: IpAllocationPolicySetting s
 newIpAllocationPolicySetting =
@@ -3289,6 +3343,7 @@ data IpConfigurationSetting s = IpConfigurationSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @ip_configuration@ settings value.
 newIpConfigurationSetting
     :: IpConfigurationSetting s
 newIpConfigurationSetting =
@@ -3327,6 +3382,7 @@ data KubernetesDashboardSetting s = KubernetesDashboardSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @kubernetes_dashboard@ settings value.
 newKubernetesDashboardSetting
     :: KubernetesDashboardSetting s
 newKubernetesDashboardSetting =
@@ -3361,6 +3417,7 @@ data LifecycleRuleSetting s = LifecycleRuleSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @lifecycle_rule@ settings value.
 newLifecycleRuleSetting
     :: TF.Attr s (ActionSetting s) -- ^ @action@ - 'P.action'
     -> TF.Attr s (ConditionSetting s) -- ^ @condition@ - 'P.condition'
@@ -3415,6 +3472,7 @@ data ListPolicySetting s = ListPolicySetting'
     -- * 'allow'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @list_policy@ settings value.
 newListPolicySetting
     :: ListPolicySetting s
 newListPolicySetting =
@@ -3472,6 +3530,7 @@ data LoadBalancingUtilizationSetting s = LoadBalancingUtilizationSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @load_balancing_utilization@ settings value.
 newLoadBalancingUtilizationSetting
     :: TF.Attr s P.Double -- ^ @target@ - 'P.target'
     -> LoadBalancingUtilizationSetting s
@@ -3504,6 +3563,7 @@ data LocationPreferenceSetting s = LocationPreferenceSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @location_preference@ settings value.
 newLocationPreferenceSetting
     :: LocationPreferenceSetting s
 newLocationPreferenceSetting =
@@ -3539,6 +3599,7 @@ data LoggingSetting s = LoggingSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @logging@ settings value.
 newLoggingSetting
     :: TF.Attr s P.Text -- ^ @log_bucket@ - 'P.logBucket'
     -> LoggingSetting s
@@ -3574,6 +3635,7 @@ data LoggingConfigSetting s = LoggingConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @logging_config@ settings value.
 newLoggingConfigSetting
     :: LoggingConfigSetting s
 newLoggingConfigSetting =
@@ -3602,6 +3664,7 @@ data MaintenancePolicySetting s = MaintenancePolicySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @maintenance_policy@ settings value.
 newMaintenancePolicySetting
     :: TF.Attr s (DailyMaintenanceWindowSetting s) -- ^ @daily_maintenance_window@ - 'P.dailyMaintenanceWindow'
     -> MaintenancePolicySetting s
@@ -3644,6 +3707,7 @@ data MaintenanceWindowSetting s = MaintenanceWindowSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @maintenance_window@ settings value.
 newMaintenanceWindowSetting
     :: MaintenanceWindowSetting s
 newMaintenanceWindowSetting =
@@ -3689,6 +3753,7 @@ data ManagementSetting s = ManagementSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @management@ settings value.
 newManagementSetting
     :: ManagementSetting s
 newManagementSetting =
@@ -3736,6 +3801,7 @@ data MasterAuthSetting s = MasterAuthSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @master_auth@ settings value.
 newMasterAuthSetting
     :: TF.Attr s P.Text -- ^ @password@ - 'P.password'
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
@@ -3799,6 +3865,7 @@ instance s ~ s' => P.HasComputedUsername (TF.Ref s' (MasterAuthSetting s)) (TF.A
 data MasterAuthorizedNetworksConfigSetting s = MasterAuthorizedNetworksConfigSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @master_authorized_networks_config@ settings value.
 newMasterAuthorizedNetworksConfigSetting
     :: MasterAuthorizedNetworksConfigSetting s
 newMasterAuthorizedNetworksConfigSetting =
@@ -3818,6 +3885,7 @@ instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (MasterAuthorizedNetworksC
 data MasterConfigSetting s = MasterConfigSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @master_config@ settings value.
 newMasterConfigSetting
     :: MasterConfigSetting s
 newMasterConfigSetting =
@@ -3852,6 +3920,7 @@ data MatchSetting s = MatchSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @match@ settings value.
 newMatchSetting
     :: TF.Attr s (ConfigSetting s) -- ^ @config@ - 'P.config'
     -> TF.Attr s P.Text -- ^ @versioned_expr@ - 'P.versionedExpr'
@@ -3890,6 +3959,7 @@ instance P.HasVersionedExpr (MatchSetting s) (TF.Attr s P.Text) where
 data MethodsSetting s = MethodsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @methods@ settings value.
 newMethodsSetting
     :: MethodsSetting s
 newMethodsSetting =
@@ -3927,6 +3997,7 @@ data MetricSetting s = MetricSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @metric@ settings value.
 newMetricSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Double -- ^ @target@ - 'P.target'
@@ -3972,6 +4043,7 @@ data MqttConfigSetting s = MqttConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @mqtt_config@ settings value.
 newMqttConfigSetting
     :: TF.Attr s P.Text -- ^ @mqtt_enabled_state@ - 'P.mqttEnabledState'
     -> MqttConfigSetting s
@@ -4004,6 +4076,7 @@ data NamedPortSetting s = NamedPortSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @named_port@ settings value.
 newNamedPortSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
@@ -4050,6 +4123,7 @@ data NamedPortsSetting s = NamedPortsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @named_ports@ settings value.
 newNamedPortsSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
@@ -4090,6 +4164,7 @@ data NetworkSetting s = NetworkSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @network@ settings value.
 newNetworkSetting
     :: TF.Attr s P.Text -- ^ @source@ - 'P.source'
     -> NetworkSetting s
@@ -4138,6 +4213,7 @@ data NetworkInterfaceSetting s = NetworkInterfaceSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @network_interface@ settings value.
 newNetworkInterfaceSetting
     :: NetworkInterfaceSetting s
 newNetworkInterfaceSetting =
@@ -4201,6 +4277,7 @@ data NetworkPolicySetting s = NetworkPolicySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @network_policy@ settings value.
 newNetworkPolicySetting
     :: NetworkPolicySetting s
 newNetworkPolicySetting =
@@ -4242,6 +4319,7 @@ data NetworkPolicyConfigSetting s = NetworkPolicyConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @network_policy_config@ settings value.
 newNetworkPolicyConfigSetting
     :: NetworkPolicyConfigSetting s
 newNetworkPolicyConfigSetting =
@@ -4291,6 +4369,7 @@ data NodeConfigSetting s = NodeConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @node_config@ settings value.
 newNodeConfigSetting
     :: NodeConfigSetting s
 newNodeConfigSetting =
@@ -4410,6 +4489,7 @@ data NodePoolSetting s = NodePoolSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @node_pool@ settings value.
 newNodePoolSetting
     :: NodePoolSetting s
 newNodePoolSetting =
@@ -4478,6 +4558,7 @@ data PathMatcherSetting s = PathMatcherSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @path_matcher@ settings value.
 newPathMatcherSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @default_service@ - 'P.defaultService'
@@ -4532,6 +4613,7 @@ data PathRuleSetting s = PathRuleSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @path_rule@ settings value.
 newPathRuleSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @paths@ - 'P.paths'
     -> TF.Attr s P.Text -- ^ @service@ - 'P.service'
@@ -4590,6 +4672,7 @@ data PigConfigSetting s = PigConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @pig_config@ settings value.
 newPigConfigSetting
     :: PigConfigSetting s
 newPigConfigSetting =
@@ -4668,6 +4751,7 @@ data PlacementSetting s = PlacementSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @placement@ settings value.
 newPlacementSetting
     :: TF.Attr s P.Text -- ^ @cluster_name@ - 'P.clusterName'
     -> PlacementSetting s
@@ -4700,6 +4784,7 @@ data PodSecurityPolicyConfigSetting s = PodSecurityPolicyConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @pod_security_policy_config@ settings value.
 newPodSecurityPolicyConfigSetting
     :: TF.Attr s P.Bool -- ^ @enabled@ - 'P.enabled'
     -> PodSecurityPolicyConfigSetting s
@@ -4729,6 +4814,7 @@ instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (PodSecurityPolicyConfigSetti
 data PreemptibleWorkerConfigSetting s = PreemptibleWorkerConfigSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @preemptible_worker_config@ settings value.
 newPreemptibleWorkerConfigSetting
     :: PreemptibleWorkerConfigSetting s
 newPreemptibleWorkerConfigSetting =
@@ -4760,6 +4846,7 @@ data PublicKeyCertificateSetting s = PublicKeyCertificateSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @public_key_certificate@ settings value.
 newPublicKeyCertificateSetting
     :: TF.Attr s P.Text -- ^ @certificate@ - 'P.certificate'
     -> TF.Attr s P.Text -- ^ @format@ - 'P.format'
@@ -4800,6 +4887,7 @@ data PushConfigSetting s = PushConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @push_config@ settings value.
 newPushConfigSetting
     :: TF.Attr s P.Text -- ^ @push_endpoint@ - 'P.pushEndpoint'
     -> PushConfigSetting s
@@ -4871,6 +4959,7 @@ data PysparkConfigSetting s = PysparkConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @pyspark_config@ settings value.
 newPysparkConfigSetting
     :: TF.Attr s P.Text -- ^ @main_python_file_uri@ - 'P.mainPythonFileUri'
     -> PysparkConfigSetting s
@@ -4951,6 +5040,7 @@ data RawDiskSetting s = RawDiskSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @raw_disk@ settings value.
 newRawDiskSetting
     :: TF.Attr s P.Text -- ^ @source@ - 'P.source'
     -> RawDiskSetting s
@@ -4991,6 +5081,7 @@ instance P.HasSource (RawDiskSetting s) (TF.Attr s P.Text) where
 data ReferenceSetting s = ReferenceSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @reference@ settings value.
 newReferenceSetting
     :: ReferenceSetting s
 newReferenceSetting =
@@ -5043,6 +5134,7 @@ data ReplicaConfigurationSetting s = ReplicaConfigurationSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @replica_configuration@ settings value.
 newReplicaConfigurationSetting
     :: ReplicaConfigurationSetting s
 newReplicaConfigurationSetting =
@@ -5141,6 +5233,7 @@ data RestorePolicySetting s = RestorePolicySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @restore_policy@ settings value.
 newRestorePolicySetting
     :: TF.Attr s P.Bool -- ^ @default@ - 'P.default''
     -> RestorePolicySetting s
@@ -5200,6 +5293,7 @@ data RollingUpdatePolicySetting s = RollingUpdatePolicySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @rolling_update_policy@ settings value.
 newRollingUpdatePolicySetting
     :: TF.Attr s P.Text -- ^ @minimal_action@ - 'P.minimalAction'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -5305,6 +5399,7 @@ data RuleSetting s = RuleSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @rule@ settings value.
 newRuleSetting
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
     -> TF.Attr s (MatchSetting s) -- ^ @match@ - 'P.match'
@@ -5376,6 +5471,7 @@ data SchedulingSetting s = SchedulingSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @scheduling@ settings value.
 newSchedulingSetting
     :: SchedulingSetting s
 newSchedulingSetting =
@@ -5427,6 +5523,7 @@ data ScratchDiskSetting s = ScratchDiskSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @scratch_disk@ settings value.
 newScratchDiskSetting
     :: ScratchDiskSetting s
 newScratchDiskSetting =
@@ -5461,6 +5558,7 @@ data SecondaryIpRangeSetting s = SecondaryIpRangeSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @secondary_ip_range@ settings value.
 newSecondaryIpRangeSetting
     :: TF.Attr s P.Text -- ^ @range_name@ - 'P.rangeName'
     -> TF.Attr s P.Text -- ^ @ip_cidr_range@ - 'P.ipCidrRange'
@@ -5501,6 +5599,7 @@ instance s ~ s' => P.HasComputedRangeName (TF.Ref s' (SecondaryIpRangeSetting s)
 data ServerCaCertSetting s = ServerCaCertSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @server_ca_cert@ settings value.
 newServerCaCertSetting
     :: ServerCaCertSetting s
 newServerCaCertSetting =
@@ -5535,6 +5634,7 @@ data ServiceAccountSetting s = ServiceAccountSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @service_account@ settings value.
 newServiceAccountSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @scopes@ - 'P.scopes'
     -> ServiceAccountSetting s
@@ -5588,6 +5688,7 @@ data SettingsSetting s = SettingsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @settings@ settings value.
 newSettingsSetting
     :: TF.Attr s P.Text -- ^ @tier@ - 'P.tier'
     -> SettingsSetting s
@@ -5697,6 +5798,7 @@ data SoftwareConfigSetting s = SoftwareConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @software_config@ settings value.
 newSoftwareConfigSetting
     :: SoftwareConfigSetting s
 newSoftwareConfigSetting =
@@ -5731,6 +5833,7 @@ data SourceImageEncryptionKeySetting s = SourceImageEncryptionKeySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @source_image_encryption_key@ settings value.
 newSourceImageEncryptionKeySetting
     :: SourceImageEncryptionKeySetting s
 newSourceImageEncryptionKeySetting =
@@ -5762,6 +5865,7 @@ data SourceSnapshotEncryptionKeySetting s = SourceSnapshotEncryptionKeySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @source_snapshot_encryption_key@ settings value.
 newSourceSnapshotEncryptionKeySetting
     :: SourceSnapshotEncryptionKeySetting s
 newSourceSnapshotEncryptionKeySetting =
@@ -5817,6 +5921,7 @@ data SparkConfigSetting s = SparkConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @spark_config@ settings value.
 newSparkConfigSetting
     :: SparkConfigSetting s
 newSparkConfigSetting =
@@ -5919,6 +6024,7 @@ data SparksqlConfigSetting s = SparksqlConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @sparksql_config@ settings value.
 newSparksqlConfigSetting
     :: SparksqlConfigSetting s
 newSparksqlConfigSetting =
@@ -5998,6 +6104,7 @@ data SslHealthCheckSetting s = SslHealthCheckSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @ssl_health_check@ settings value.
 newSslHealthCheckSetting
     :: SslHealthCheckSetting s
 newSslHealthCheckSetting =
@@ -6047,6 +6154,7 @@ data StateNotificationConfigSetting s = StateNotificationConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @state_notification_config@ settings value.
 newStateNotificationConfigSetting
     :: TF.Attr s P.Text -- ^ @pubsub_topic_name@ - 'P.pubsubTopicName'
     -> StateNotificationConfigSetting s
@@ -6073,6 +6181,7 @@ instance P.HasPubsubTopicName (StateNotificationConfigSetting s) (TF.Attr s P.Te
 data StatusSetting s = StatusSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @status@ settings value.
 newStatusSetting
     :: StatusSetting s
 newStatusSetting =
@@ -6107,6 +6216,7 @@ data StepSetting s = StepSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @step@ settings value.
 newStepSetting
     :: StepSetting s
 newStepSetting =
@@ -6148,6 +6258,7 @@ data TaintSetting s = TaintSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @taint@ settings value.
 newTaintSetting
     :: TF.Attr s P.Text -- ^ @effect@ - 'P.effect'
     -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
@@ -6205,6 +6316,7 @@ data TargetSizeSetting s = TargetSizeSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @target_size@ settings value.
 newTargetSizeSetting
     :: TargetSizeSetting s
 newTargetSizeSetting =
@@ -6249,6 +6361,7 @@ data TcpHealthCheckSetting s = TcpHealthCheckSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @tcp_health_check@ settings value.
 newTcpHealthCheckSetting
     :: TcpHealthCheckSetting s
 newTcpHealthCheckSetting =
@@ -6307,6 +6420,7 @@ data TestSetting s = TestSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @test@ settings value.
 newTestSetting
     :: TF.Attr s P.Text -- ^ @host@ - 'P.host'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
@@ -6365,6 +6479,7 @@ data TimePartitioningSetting s = TimePartitioningSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @time_partitioning@ settings value.
 newTimePartitioningSetting
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TimePartitioningSetting s
@@ -6423,6 +6538,7 @@ data TriggerTemplateSetting s = TriggerTemplateSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @trigger_template@ settings value.
 newTriggerTemplateSetting
     :: TriggerTemplateSetting s
 newTriggerTemplateSetting =
@@ -6483,6 +6599,7 @@ instance P.HasTagName (TriggerTemplateSetting s) (TF.Attr s P.Text) where
 data UrlDispatchRuleSetting s = UrlDispatchRuleSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @url_dispatch_rule@ settings value.
 newUrlDispatchRuleSetting
     :: UrlDispatchRuleSetting s
 newUrlDispatchRuleSetting =
@@ -6517,6 +6634,7 @@ data VersionSetting s = VersionSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @version@ settings value.
 newVersionSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @instance_template@ - 'P.instanceTemplate'
@@ -6565,6 +6683,7 @@ data VersioningSetting s = VersioningSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @versioning@ settings value.
 newVersioningSetting
     :: VersioningSetting s
 newVersioningSetting =
@@ -6596,6 +6715,7 @@ data ViewSetting s = ViewSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @view@ settings value.
 newViewSetting
     :: TF.Attr s P.Text -- ^ @query@ - 'P.query'
     -> ViewSetting s
@@ -6635,6 +6755,7 @@ data WebsiteSetting s = WebsiteSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @website@ settings value.
 newWebsiteSetting
     :: WebsiteSetting s
 newWebsiteSetting =
@@ -6667,6 +6788,7 @@ instance P.HasNotFoundPage (WebsiteSetting s) (TF.Attr s P.Text) where
 data WorkerConfigSetting s = WorkerConfigSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @worker_config@ settings value.
 newWorkerConfigSetting
     :: WorkerConfigSetting s
 newWorkerConfigSetting =
@@ -6698,6 +6820,7 @@ data WorkloadMetadataConfigSetting s = WorkloadMetadataConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @workload_metadata_config@ settings value.
 newWorkloadMetadataConfigSetting
     :: TF.Attr s P.Text -- ^ @node_metadata@ - 'P.nodeMetadata'
     -> WorkloadMetadataConfigSetting s
