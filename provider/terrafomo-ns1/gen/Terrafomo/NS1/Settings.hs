@@ -19,23 +19,23 @@ module Terrafomo.NS1.Settings
     (
     -- ** answers
       AnswersSetting (..)
-    , answersSetting
+    , newAnswersSetting
 
     -- ** filters
     , FiltersSetting (..)
-    , filtersSetting
+    , newFiltersSetting
 
     -- ** notifications
     , NotificationsSetting (..)
-    , notificationsSetting
+    , newNotificationsSetting
 
     -- ** regions
     , RegionsSetting (..)
-    , regionsSetting
+    , newRegionsSetting
 
     -- ** rules
     , RulesSetting (..)
-    , rulesSetting
+    , newRulesSetting
 
     ) where
 
@@ -74,9 +74,9 @@ data AnswersSetting s = AnswersSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @answers@ settings value.
-answersSetting
+newAnswersSetting
     :: AnswersSetting s
-answersSetting =
+newAnswersSetting =
     AnswersSetting'
         { _answer = TF.Nil
         , _meta = TF.Nil
@@ -123,10 +123,10 @@ data FiltersSetting s = FiltersSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @filters@ settings value.
-filtersSetting
+newFiltersSetting
     :: TF.Attr s P.Text -- ^ 'P._filter': @filter@
     -> FiltersSetting s
-filtersSetting _filter =
+newFiltersSetting _filter =
     FiltersSetting'
         { _config = TF.Nil
         , _disabled = TF.Nil
@@ -170,11 +170,11 @@ data NotificationsSetting s = NotificationsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @notifications@ settings value.
-notificationsSetting
+newNotificationsSetting
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ 'P._config': @config@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> NotificationsSetting s
-notificationsSetting _config _type' =
+newNotificationsSetting _config _type' =
     NotificationsSetting'
         { _config = _config
         , _type' = _type'
@@ -211,10 +211,10 @@ data RegionsSetting s = RegionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @regions@ settings value.
-regionsSetting
+newRegionsSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> RegionsSetting s
-regionsSetting _name =
+newRegionsSetting _name =
     RegionsSetting'
         { _meta = TF.Nil
         , _name = _name
@@ -254,12 +254,12 @@ data RulesSetting s = RulesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @rules@ settings value.
-rulesSetting
+newRulesSetting
     :: TF.Attr s P.Text -- ^ 'P._comparison': @comparison@
     -> TF.Attr s P.Text -- ^ 'P._key': @key@
     -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> RulesSetting s
-rulesSetting _comparison _key _value =
+newRulesSetting _comparison _key _value =
     RulesSetting'
         { _comparison = _comparison
         , _key = _key
