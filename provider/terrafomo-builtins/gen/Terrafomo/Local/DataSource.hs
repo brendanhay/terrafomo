@@ -63,7 +63,7 @@ fileData
     :: TF.Attr s P.Text -- ^ @filename@ - 'P.filename'
     -> P.DataSource (FileData s)
 fileData _filename =
-    TF.unsafeDataSource "local_file" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "local_file" TF.validator $
         FileData'
             { _filename = _filename
             }

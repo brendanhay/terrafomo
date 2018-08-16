@@ -88,7 +88,7 @@ idResource
     :: TF.Attr s P.Int -- ^ @byte_length@ - 'P.byteLength'
     -> P.Resource (IdResource s)
 idResource _byteLength =
-    TF.unsafeResource "random_id" P.defaultProvider TF.validator $
+    TF.unsafeResource "random_id" TF.validator $
         IdResource'
             { _byteLength = _byteLength
             , _keepers = TF.Nil
@@ -156,7 +156,7 @@ integerResource
     -> TF.Attr s P.Int -- ^ @min@ - 'P.min'
     -> P.Resource (IntegerResource s)
 integerResource _max _min =
-    TF.unsafeResource "random_integer" P.defaultProvider TF.validator $
+    TF.unsafeResource "random_integer" TF.validator $
         IntegerResource'
             { _keepers = TF.Nil
             , _max = _max
@@ -220,7 +220,7 @@ data PetResource s = PetResource'
 petResource
     :: P.Resource (PetResource s)
 petResource =
-    TF.unsafeResource "random_pet" P.defaultProvider TF.validator $
+    TF.unsafeResource "random_pet" TF.validator $
         PetResource'
             { _keepers = TF.Nil
             , _length = TF.value 2
@@ -282,7 +282,7 @@ shuffleResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @input@ - 'P.input'
     -> P.Resource (ShuffleResource s)
 shuffleResource _input =
-    TF.unsafeResource "random_shuffle" P.defaultProvider TF.validator $
+    TF.unsafeResource "random_shuffle" TF.validator $
         ShuffleResource'
             { _input = _input
             , _keepers = TF.Nil
@@ -368,7 +368,7 @@ stringResource
     :: TF.Attr s P.Int -- ^ @length@ - 'P.length'
     -> P.Resource (StringResource s)
 stringResource _length =
-    TF.unsafeResource "random_string" P.defaultProvider TF.validator $
+    TF.unsafeResource "random_string" TF.validator $
         StringResource'
             { _keepers = TF.Nil
             , _length = _length
@@ -472,7 +472,7 @@ data UuidResource s = UuidResource'
 uuidResource
     :: P.Resource (UuidResource s)
 uuidResource =
-    TF.unsafeResource "random_uuid" P.defaultProvider TF.validator $
+    TF.unsafeResource "random_uuid" TF.validator $
         UuidResource'
             { _keepers = TF.Nil
             }

@@ -107,7 +107,7 @@ fileResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (FileResource s)
 fileResource _outputPath _type' =
-    TF.unsafeResource "archive_file" P.defaultProvider TF.validator $
+    TF.unsafeResource "archive_file" TF.validator $
         FileResource'
             { _excludes = TF.Nil
             , _outputPath = _outputPath

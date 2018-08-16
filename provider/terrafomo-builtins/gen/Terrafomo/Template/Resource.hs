@@ -76,7 +76,7 @@ cloudinitConfigResource
     :: TF.Attr s [TF.Attr s (PartSetting s)] -- ^ @part@ - 'P.part'
     -> P.Resource (CloudinitConfigResource s)
 cloudinitConfigResource _part =
-    TF.unsafeResource "template_cloudinit_config" P.defaultProvider TF.validator $
+    TF.unsafeResource "template_cloudinit_config" TF.validator $
         CloudinitConfigResource'
             { _base64Encode = TF.value P.True
             , _gzip = TF.value P.True
@@ -135,7 +135,7 @@ dirResource
     -> TF.Attr s P.Text -- ^ @source_dir@ - 'P.sourceDir'
     -> P.Resource (DirResource s)
 dirResource _destinationDir _sourceDir =
-    TF.unsafeResource "template_dir" P.defaultProvider TF.validator $
+    TF.unsafeResource "template_dir" TF.validator $
         DirResource'
             { _destinationDir = _destinationDir
             , _sourceDir = _sourceDir
@@ -185,7 +185,7 @@ data FileResource s = FileResource'
 fileResource
     :: P.Resource (FileResource s)
 fileResource =
-    TF.unsafeResource "template_file" P.defaultProvider TF.validator $
+    TF.unsafeResource "template_file" TF.validator $
         FileResource'
             { _template = TF.Nil
             , _vars = TF.Nil

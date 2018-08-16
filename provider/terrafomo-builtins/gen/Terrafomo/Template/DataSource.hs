@@ -72,7 +72,7 @@ cloudinitConfigData
     :: TF.Attr s [TF.Attr s (PartSetting s)] -- ^ @part@ - 'P.part'
     -> P.DataSource (CloudinitConfigData s)
 cloudinitConfigData _part =
-    TF.unsafeDataSource "template_cloudinit_config" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "template_cloudinit_config" TF.validator $
         CloudinitConfigData'
             { _base64Encode = TF.value P.True
             , _gzip = TF.value P.True
@@ -128,7 +128,7 @@ data FileData s = FileData'
 fileData
     :: P.DataSource (FileData s)
 fileData =
-    TF.unsafeDataSource "template_file" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "template_file" TF.validator $
         FileData'
             { _template = TF.Nil
             , _vars = TF.Nil

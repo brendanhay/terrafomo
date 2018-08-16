@@ -68,7 +68,7 @@ data'
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @program@ - 'P.program'
     -> P.DataSource (Data s)
 data' _program =
-    TF.unsafeDataSource "external" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "external" TF.validator $
         Data'
             { _program = _program
             , _query = TF.Nil

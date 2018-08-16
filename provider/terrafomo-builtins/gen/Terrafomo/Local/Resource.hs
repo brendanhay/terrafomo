@@ -75,7 +75,7 @@ fileResource
     :: TF.Attr s P.Text -- ^ @filename@ - 'P.filename'
     -> P.Resource (FileResource s)
 fileResource _filename =
-    TF.unsafeResource "local_file" P.defaultProvider TF.validator $
+    TF.unsafeResource "local_file" TF.validator $
         FileResource'
             { _content = TF.Nil
             , _filename = _filename

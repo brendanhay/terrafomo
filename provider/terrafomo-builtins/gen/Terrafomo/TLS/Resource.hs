@@ -92,7 +92,7 @@ certRequestResource
     -> TF.Attr s [TF.Attr s (SubjectSetting s)] -- ^ @subject@ - 'P.subject'
     -> P.Resource (CertRequestResource s)
 certRequestResource _keyAlgorithm _privateKeyPem _subject =
-    TF.unsafeResource "tls_cert_request" P.defaultProvider TF.validator $
+    TF.unsafeResource "tls_cert_request" TF.validator $
         CertRequestResource'
             { _dnsNames = TF.Nil
             , _ipAddresses = TF.Nil
@@ -190,7 +190,7 @@ locallySignedCertResource
     -> TF.Attr s P.Int -- ^ @validity_period_hours@ - 'P.validityPeriodHours'
     -> P.Resource (LocallySignedCertResource s)
 locallySignedCertResource _allowedUses _caCertPem _caKeyAlgorithm _caPrivateKeyPem _certRequestPem _validityPeriodHours =
-    TF.unsafeResource "tls_locally_signed_cert" P.defaultProvider TF.validator $
+    TF.unsafeResource "tls_locally_signed_cert" TF.validator $
         LocallySignedCertResource'
             { _allowedUses = _allowedUses
             , _caCertPem = _caCertPem
@@ -289,7 +289,7 @@ privateKeyResource
     :: TF.Attr s P.Text -- ^ @algorithm@ - 'P.algorithm'
     -> P.Resource (PrivateKeyResource s)
 privateKeyResource _algorithm =
-    TF.unsafeResource "tls_private_key" P.defaultProvider TF.validator $
+    TF.unsafeResource "tls_private_key" TF.validator $
         PrivateKeyResource'
             { _algorithm = _algorithm
             , _ecdsaCurve = TF.value "P224"
@@ -381,7 +381,7 @@ selfSignedCertResource
     -> TF.Attr s P.Int -- ^ @validity_period_hours@ - 'P.validityPeriodHours'
     -> P.Resource (SelfSignedCertResource s)
 selfSignedCertResource _allowedUses _keyAlgorithm _privateKeyPem _subject _validityPeriodHours =
-    TF.unsafeResource "tls_self_signed_cert" P.defaultProvider TF.validator $
+    TF.unsafeResource "tls_self_signed_cert" TF.validator $
         SelfSignedCertResource'
             { _allowedUses = _allowedUses
             , _dnsNames = TF.Nil

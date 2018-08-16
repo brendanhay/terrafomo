@@ -107,7 +107,7 @@ fileData
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.DataSource (FileData s)
 fileData _outputPath _type' =
-    TF.unsafeDataSource "archive_file" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "archive_file" TF.validator $
         FileData'
             { _excludes = TF.Nil
             , _outputPath = _outputPath

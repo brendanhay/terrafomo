@@ -63,7 +63,7 @@ publicKeyData
     :: TF.Attr s P.Text -- ^ @private_key_pem@ - 'P.privateKeyPem'
     -> P.DataSource (PublicKeyData s)
 publicKeyData _privateKeyPem =
-    TF.unsafeDataSource "tls_public_key" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "tls_public_key" TF.validator $
         PublicKeyData'
             { _privateKeyPem = _privateKeyPem
             }

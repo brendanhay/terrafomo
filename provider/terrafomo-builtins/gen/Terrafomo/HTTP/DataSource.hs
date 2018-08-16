@@ -65,7 +65,7 @@ data'
     :: TF.Attr s P.Text -- ^ @url@ - 'P.url'
     -> P.DataSource (Data s)
 data' _url =
-    TF.unsafeDataSource "http" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "http" TF.validator $
         Data'
             { _requestHeaders = TF.Nil
             , _url = _url

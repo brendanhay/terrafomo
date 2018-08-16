@@ -70,15 +70,8 @@ newProvider =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "local"
 
-instance TF.IsSection Provider where
-    toSection x@Provider' =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  ])
+instance TF.IsObject Provider where
+    toObject Provider' = []
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
