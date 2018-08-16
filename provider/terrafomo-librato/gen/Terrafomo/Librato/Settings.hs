@@ -191,8 +191,8 @@ data ConditionSetting s = ConditionSetting'
 
 -- | Construct a new @condition@ settings value.
 newConditionSetting
-    :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._metricName': @metric_name@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> ConditionSetting s
 newConditionSetting _metricName _type' =
     ConditionSetting'

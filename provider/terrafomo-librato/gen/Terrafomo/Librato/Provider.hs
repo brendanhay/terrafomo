@@ -17,10 +17,11 @@
 --
 module Terrafomo.Librato.Provider
     (
+    -- * Librato Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** Librato Specific Aliases
+    -- * Librato Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -70,8 +71,8 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @email@ - 'P.email'
-    -> P.Text -- ^ @token@ - 'P.token'
+    :: P.Text -- ^ @email@ ('P._email', 'P.email')
+    -> P.Text -- ^ @token@ ('P._token', 'P.token')
     -> Provider
 newProvider _email _token =
     Provider'
@@ -83,7 +84,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "librato"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "email" _email
             , P.Just $ TF.assign "token" _token

@@ -93,7 +93,7 @@ data AlertResource s = AlertResource'
 
 -- | Define a new @librato_alert@ resource value.
 alertResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (AlertResource s)
 alertResource _name =
     TF.unsafeResource "librato_alert" TF.validator $
@@ -193,8 +193,8 @@ data MetricResource s = MetricResource'
 
 -- | Define a new @librato_metric@ resource value.
 metricResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (MetricResource s)
 metricResource _name _type' =
     TF.unsafeResource "librato_metric" TF.validator $
@@ -282,9 +282,9 @@ data ServiceResource s = ServiceResource'
 
 -- | Define a new @librato_service@ resource value.
 serviceResource
-    :: TF.Attr s P.Text -- ^ @settings@ - 'P.settings'
-    -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @settings@ ('P._settings', 'P.settings')
+    -> TF.Attr s P.Text -- ^ @title@ ('P._title', 'P.title')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (ServiceResource s)
 serviceResource _settings _title _type' =
     TF.unsafeResource "librato_service" TF.validator $
@@ -334,7 +334,7 @@ data SpaceResource s = SpaceResource'
 
 -- | Define a new @librato_space@ resource value.
 spaceResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (SpaceResource s)
 spaceResource _name =
     TF.unsafeResource "librato_space" TF.validator $
@@ -391,9 +391,9 @@ data SpaceChartResource s = SpaceChartResource'
 
 -- | Define a new @librato_space_chart@ resource value.
 spaceChartResource
-    :: TF.Attr s P.Int -- ^ @space_id@ - 'P.spaceId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Int -- ^ @space_id@ ('P._spaceId', 'P.spaceId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (SpaceChartResource s)
 spaceChartResource _spaceId _name _type' =
     TF.unsafeResource "librato_space_chart" TF.validator $
