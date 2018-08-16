@@ -580,6 +580,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"slug\" <$> TF.attribute",
+                    "name": "_slug",
+                    "method": "slug",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSlug",
+                    "validate": false,
+                    "optional": true,
+                    "original": "slug"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"website\" <$> TF.attribute",
                     "name": "_website",
                     "method": "website",
@@ -662,7 +679,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSlug",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "slug"
                 }
             ],
