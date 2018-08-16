@@ -8,16 +8,16 @@ name: terrafomo-aws
 <<: *extensions
 
 dependencies:
-  - base
-  - unordered-containers
-  - text
-  - terrafomo
-  - amazonka-iam-policy >= 0.0.4
-  - formatting
+  - aeson
   - amazonka-core
-  - hashable
+  - amazonka-iam-policy >= 0.0.4
+  - base
+  - containers
+  - formatting
   - iproute
   - microlens
+  - terrafomo
+  - text
 
 library:
   source-dirs:

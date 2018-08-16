@@ -20,6 +20,7 @@ module Terrafomo.AWS.Provider
     -- * AWS Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * AWS Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.AWS.Settings
 
-import qualified Data.Hashable       as P
-import qualified Data.HashMap.Strict as P
-import qualified Data.HashMap.Strict as Map
 import qualified Data.List.NonEmpty  as P
+import qualified Data.Map.Strict     as P
+import qualified Data.Map.Strict     as Map
 import qualified Data.Maybe          as P
 import qualified Data.Monoid         as P
 import qualified Data.Text           as P
@@ -72,7 +72,7 @@ data Provider = Provider'
     -- Conflicts with:
     --
     -- * 'forbiddenAccountIds'
-    , _assumeRole                :: P.Maybe AssumeRole
+    , _assumeRole                :: P.Maybe AssumeRoleSetting
     -- ^ @assume_role@ - (Optional)
     --
     , _dynamodbEndpoint          :: P.Maybe P.Text
@@ -80,7 +80,7 @@ data Provider = Provider'
     -- Use this to override the default endpoint URL constructed from the `region`.
     -- It's typically used to connect to dynamodb-local.
     --
-    , _endpoints                 :: P.Maybe [Endpoints]
+    , _endpoints                 :: P.Maybe [EndpointsSetting]
     -- ^ @endpoints@ - (Optional)
     --
     , _forbiddenAccountIds       :: P.Maybe [P.Text]
@@ -99,7 +99,7 @@ data Provider = Provider'
     -- Use this to override the default endpoint URL constructed from the `region`.
     -- It's typically used to connect to kinesalite.
     --
-    , _maxRetries                :: P.Integer
+    , _maxRetries                :: P.Int
     -- ^ @max_retries@ - (Optional)
     -- The maximum number of times an AWS API request is being executed. If the API
     -- request still fails, an error is thrown.
@@ -159,7 +159,7 @@ data Provider = Provider'
     -- Session token. A session token is only required if you are using temporary
     -- security credentials.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: P.Region -- ^ @region@ - 'P.region'
@@ -188,40 +188,37 @@ newProvider _region =
         , _token = P.Nothing
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "access_key" <$> _accessKey
-                  , TF.assign "allowed_account_ids" <$> _allowedAccountIds
-                  , TF.assign "assume_role" <$> _assumeRole
-                  , TF.assign "dynamodb_endpoint" <$> _dynamodbEndpoint
-                  , TF.assign "endpoints" <$> _endpoints
-                  , TF.assign "forbidden_account_ids" <$> _forbiddenAccountIds
-                  , P.Just $ TF.assign "insecure" _insecure
-                  , TF.assign "kinesis_endpoint" <$> _kinesisEndpoint
-                  , P.Just $ TF.assign "max_retries" _maxRetries
-                  , TF.assign "profile" <$> _profile
-                  , P.Just $ TF.assign "region" _region
-                  , P.Just $ TF.assign "s3_force_path_style" _s3ForcePathStyle
-                  , TF.assign "secret_key" <$> _secretKey
-                  , TF.assign "shared_credentials_file" <$> _sharedCredentialsFile
-                  , P.Just $ TF.assign "skip_credentials_validation" _skipCredentialsValidation
-                  , P.Just $ TF.assign "skip_get_ec2_platforms" _skipGetEc2Platforms
-                  , P.Just $ TF.assign "skip_metadata_api_check" _skipMetadataApiCheck
-                  , P.Just $ TF.assign "skip_region_validation" _skipRegionValidation
-                  , P.Just $ TF.assign "skip_requesting_account_id" _skipRequestingAccountId
-                  , TF.assign "token" <$> _token
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  TF.assign "access_key" <$> _accessKey
+        ,  TF.assign "allowed_account_ids" <$> _allowedAccountIds
+        ,  TF.assign "assume_role" <$> _assumeRole
+        ,  TF.assign "dynamodb_endpoint" <$> _dynamodbEndpoint
+        ,  TF.assign "endpoints" <$> _endpoints
+        ,  TF.assign "forbidden_account_ids" <$> _forbiddenAccountIds
+        ,  P.Just $ TF.assign "insecure" _insecure
+        ,  TF.assign "kinesis_endpoint" <$> _kinesisEndpoint
+        ,  P.Just $ TF.assign "max_retries" _maxRetries
+        ,  TF.assign "profile" <$> _profile
+        ,  P.Just $ TF.assign "region" _region
+        ,  P.Just $ TF.assign "s3_force_path_style" _s3ForcePathStyle
+        ,  TF.assign "secret_key" <$> _secretKey
+        ,  TF.assign "shared_credentials_file" <$> _sharedCredentialsFile
+        ,  P.Just $ TF.assign "skip_credentials_validation" _skipCredentialsValidation
+        ,  P.Just $ TF.assign "skip_get_ec2_platforms" _skipGetEc2Platforms
+        ,  P.Just $ TF.assign "skip_metadata_api_check" _skipMetadataApiCheck
+        ,  P.Just $ TF.assign "skip_region_validation" _skipRegionValidation
+        ,  P.Just $ TF.assign "skip_requesting_account_id" _skipRequestingAccountId
+        ,  TF.assign "token" <$> _token
+        ]
 
 instance TF.IsValid (Provider) where
     validator = TF.fieldsValidator (\Provider'{..} -> Map.fromList $ P.catMaybes
@@ -236,14 +233,6 @@ instance TF.IsValid (Provider) where
                             [ "_allowedAccountIds"
                             ])
         ])
-           P.<> TF.settingsValidator "_assumeRole"
-                  (_assumeRole
-                      :: Provider -> P.Maybe AssumeRole)
-                  TF.validator
-           P.<> TF.settingsValidator "_endpoints"
-                  (_endpoints
-                      :: Provider -> P.Maybe [Endpoints])
-                  TF.validator
 
 instance P.HasAccessKey (Provider) (P.Maybe P.Text) where
     accessKey =
@@ -255,9 +244,9 @@ instance P.HasAllowedAccountIds (Provider) (P.Maybe [P.Text]) where
         P.lens (_allowedAccountIds :: Provider -> P.Maybe [P.Text])
                (\s a -> s { _allowedAccountIds = a } :: Provider)
 
-instance P.HasAssumeRole (Provider) (P.Maybe AssumeRole) where
+instance P.HasAssumeRole (Provider) (P.Maybe AssumeRoleSetting) where
     assumeRole =
-        P.lens (_assumeRole :: Provider -> P.Maybe AssumeRole)
+        P.lens (_assumeRole :: Provider -> P.Maybe AssumeRoleSetting)
                (\s a -> s { _assumeRole = a } :: Provider)
 
 instance P.HasDynamodbEndpoint (Provider) (P.Maybe P.Text) where
@@ -265,9 +254,9 @@ instance P.HasDynamodbEndpoint (Provider) (P.Maybe P.Text) where
         P.lens (_dynamodbEndpoint :: Provider -> P.Maybe P.Text)
                (\s a -> s { _dynamodbEndpoint = a } :: Provider)
 
-instance P.HasEndpoints (Provider) (P.Maybe [Endpoints]) where
+instance P.HasEndpoints (Provider) (P.Maybe [EndpointsSetting]) where
     endpoints =
-        P.lens (_endpoints :: Provider -> P.Maybe [Endpoints])
+        P.lens (_endpoints :: Provider -> P.Maybe [EndpointsSetting])
                (\s a -> s { _endpoints = a } :: Provider)
 
 instance P.HasForbiddenAccountIds (Provider) (P.Maybe [P.Text]) where
@@ -285,9 +274,9 @@ instance P.HasKinesisEndpoint (Provider) (P.Maybe P.Text) where
         P.lens (_kinesisEndpoint :: Provider -> P.Maybe P.Text)
                (\s a -> s { _kinesisEndpoint = a } :: Provider)
 
-instance P.HasMaxRetries (Provider) (P.Integer) where
+instance P.HasMaxRetries (Provider) (P.Int) where
     maxRetries =
-        P.lens (_maxRetries :: Provider -> P.Integer)
+        P.lens (_maxRetries :: Provider -> P.Int)
                (\s a -> s { _maxRetries = a } :: Provider)
 
 instance P.HasProfile (Provider) (P.Maybe P.Text) where
