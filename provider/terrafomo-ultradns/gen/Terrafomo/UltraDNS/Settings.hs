@@ -19,43 +19,43 @@ module Terrafomo.UltraDNS.Settings
     (
     -- ** geo_info
       GeoInfoSetting (..)
-    , geoInfoSetting
+    , newGeoInfoSetting
 
     -- ** http_probe
     , HttpProbeSetting (..)
-    , httpProbeSetting
+    , newHttpProbeSetting
 
     -- ** ip_info
     , IpInfoSetting (..)
-    , ipInfoSetting
+    , newIpInfoSetting
 
     -- ** ips
     , IpsSetting (..)
-    , ipsSetting
+    , newIpsSetting
 
     -- ** limit
     , LimitSetting (..)
-    , limitSetting
+    , newLimitSetting
 
     -- ** no_response
     , NoResponseSetting (..)
-    , noResponseSetting
+    , newNoResponseSetting
 
     -- ** ping_probe
     , PingProbeSetting (..)
-    , pingProbeSetting
+    , newPingProbeSetting
 
     -- ** rdata
     , RdataSetting (..)
-    , rdataSetting
+    , newRdataSetting
 
     -- ** total_limits
     , TotalLimitsSetting (..)
-    , totalLimitsSetting
+    , newTotalLimitsSetting
 
     -- ** transaction
     , TransactionSetting (..)
-    , transactionSetting
+    , newTransactionSetting
 
     ) where
 
@@ -94,9 +94,9 @@ data GeoInfoSetting s = GeoInfoSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @geo_info@ settings value.
-geoInfoSetting
+newGeoInfoSetting
     :: GeoInfoSetting s
-geoInfoSetting =
+newGeoInfoSetting =
     GeoInfoSetting'
         { _codes = TF.Nil
         , _isAccountLevel = TF.value P.False
@@ -140,9 +140,9 @@ data HttpProbeSetting s = HttpProbeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @http_probe@ settings value.
-httpProbeSetting
+newHttpProbeSetting
     :: HttpProbeSetting s
-httpProbeSetting =
+newHttpProbeSetting =
     HttpProbeSetting'
         { _totalLimits = TF.Nil
         , _transaction = TF.Nil
@@ -182,9 +182,9 @@ data IpInfoSetting s = IpInfoSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ip_info@ settings value.
-ipInfoSetting
+newIpInfoSetting
     :: IpInfoSetting s
-ipInfoSetting =
+newIpInfoSetting =
     IpInfoSetting'
         { _ips = TF.Nil
         , _isAccountLevel = TF.value P.False
@@ -234,9 +234,9 @@ data IpsSetting s = IpsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ips@ settings value.
-ipsSetting
+newIpsSetting
     :: IpsSetting s
-ipsSetting =
+newIpsSetting =
     IpsSetting'
         { _address = TF.Nil
         , _cidr = TF.Nil
@@ -293,13 +293,13 @@ data LimitSetting s = LimitSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @limit@ settings value.
-limitSetting
+newLimitSetting
     :: TF.Attr s P.Int -- ^ 'P._critical': @critical@
     -> TF.Attr s P.Int -- ^ 'P._fail': @fail@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Int -- ^ 'P._warning': @warning@
     -> LimitSetting s
-limitSetting _critical _fail _name _warning =
+newLimitSetting _critical _fail _name _warning =
     LimitSetting'
         { _critical = _critical
         , _fail = _fail
@@ -353,9 +353,9 @@ data NoResponseSetting s = NoResponseSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @no_response@ settings value.
-noResponseSetting
+newNoResponseSetting
     :: NoResponseSetting s
-noResponseSetting =
+newNoResponseSetting =
     NoResponseSetting'
         { _allNonConfigured = TF.value P.False
         , _geoInfo = TF.Nil
@@ -402,9 +402,9 @@ data PingProbeSetting s = PingProbeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ping_probe@ settings value.
-pingProbeSetting
+newPingProbeSetting
     :: PingProbeSetting s
-pingProbeSetting =
+newPingProbeSetting =
     PingProbeSetting'
         { _limit = TF.Nil
         , _packetSize = TF.value 56
@@ -472,10 +472,10 @@ data RdataSetting s = RdataSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @rdata@ settings value.
-rdataSetting
+newRdataSetting
     :: TF.Attr s P.Text -- ^ 'P._host': @host@
     -> RdataSetting s
-rdataSetting _host =
+newRdataSetting _host =
     RdataSetting'
         { _allNonConfigured = TF.value P.False
         , _geoInfo = TF.Nil
@@ -571,9 +571,9 @@ data TotalLimitsSetting s = TotalLimitsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @total_limits@ settings value.
-totalLimitsSetting
+newTotalLimitsSetting
     :: TotalLimitsSetting s
-totalLimitsSetting =
+newTotalLimitsSetting =
     TotalLimitsSetting'
         { _critical = TF.Nil
         , _fail = TF.Nil
@@ -626,11 +626,11 @@ data TransactionSetting s = TransactionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @transaction@ settings value.
-transactionSetting
+newTransactionSetting
     :: TF.Attr s P.Text -- ^ 'P._method': @method@
     -> TF.Attr s P.Text -- ^ 'P._url': @url@
     -> TransactionSetting s
-transactionSetting _method _url =
+newTransactionSetting _method _url =
     TransactionSetting'
         { _followRedirects = TF.value P.False
         , _limit = TF.Nil
