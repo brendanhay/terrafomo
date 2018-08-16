@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newActionSetting",
+                "smart": "actionSetting",
                 "name": "ActionSetting'"
             },
             "arguments": [
@@ -104,7 +104,7 @@
         },
         {
             "con": {
-                "smart": "newActionsSetting",
+                "smart": "actionsSetting",
                 "name": "ActionsSetting'"
             },
             "arguments": [
@@ -698,7 +698,7 @@
         },
         {
             "con": {
-                "smart": "newCorrelateSetting",
+                "smart": "correlateSetting",
                 "name": "CorrelateSetting'"
             },
             "arguments": [
@@ -731,7 +731,7 @@
         },
         {
             "con": {
-                "smart": "newDataSetting",
+                "smart": "dataSetting",
                 "name": "DataSetting'"
             },
             "arguments": [
@@ -1376,7 +1376,7 @@
         },
         {
             "con": {
-                "smart": "newForwardingUrlSetting",
+                "smart": "forwardingUrlSetting",
                 "name": "ForwardingUrlSetting'"
             },
             "arguments": [
@@ -1461,7 +1461,7 @@
         },
         {
             "con": {
-                "smart": "newHeaderSetting",
+                "smart": "headerSetting",
                 "name": "HeaderSetting'"
             },
             "arguments": [
@@ -1546,7 +1546,7 @@
         },
         {
             "con": {
-                "smart": "newInitialSettingsSetting",
+                "smart": "initialSettingsSetting",
                 "name": "InitialSettingsSetting'"
             },
             "arguments": [],
@@ -2293,7 +2293,7 @@
         },
         {
             "con": {
-                "smart": "newMatchSetting",
+                "smart": "matchSetting",
                 "name": "MatchSetting'"
             },
             "arguments": [],
@@ -2343,7 +2343,7 @@
         },
         {
             "con": {
-                "smart": "newMinifySetting",
+                "smart": "minifySetting",
                 "name": "MinifySetting'"
             },
             "arguments": [
@@ -2462,7 +2462,7 @@
         },
         {
             "con": {
-                "smart": "newMobileRedirectSetting",
+                "smart": "mobileRedirectSetting",
                 "name": "MobileRedirectSetting'"
             },
             "arguments": [
@@ -2581,7 +2581,7 @@
         },
         {
             "con": {
-                "smart": "newOriginsSetting",
+                "smart": "originsSetting",
                 "name": "OriginsSetting'"
             },
             "arguments": [
@@ -2683,7 +2683,7 @@
         },
         {
             "con": {
-                "smart": "newPopPoolsSetting",
+                "smart": "popPoolsSetting",
                 "name": "PopPoolsSetting'"
             },
             "arguments": [
@@ -2768,7 +2768,7 @@
         },
         {
             "con": {
-                "smart": "newRegionPoolsSetting",
+                "smart": "regionPoolsSetting",
                 "name": "RegionPoolsSetting'"
             },
             "arguments": [
@@ -2853,7 +2853,7 @@
         },
         {
             "con": {
-                "smart": "newRequestSetting",
+                "smart": "requestSetting",
                 "name": "RequestSetting'"
             },
             "arguments": [],
@@ -2920,7 +2920,7 @@
         },
         {
             "con": {
-                "smart": "newResponseSetting",
+                "smart": "responseSetting",
                 "name": "ResponseSetting'"
             },
             "arguments": [
@@ -3040,7 +3040,7 @@
         },
         {
             "con": {
-                "smart": "newSecurityHeaderSetting",
+                "smart": "securityHeaderSetting",
                 "name": "SecurityHeaderSetting'"
             },
             "arguments": [],
@@ -3141,7 +3141,7 @@
         },
         {
             "con": {
-                "smart": "newSettingsSetting",
+                "smart": "settingsSetting",
                 "name": "SettingsSetting'"
             },
             "arguments": [],
