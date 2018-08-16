@@ -2752,23 +2752,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_space",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"space\" <$> TF.attribute",
-                    "name": "_space",
-                    "method": "space",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasSpace",
-                    "validate": false,
-                    "optional": false,
-                    "original": "space"
-                },
-                {
                     "default": "_vpcPeeringConnectionId",
                     "computed": false,
                     "required": true,
@@ -2784,6 +2767,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "vpc_peering_connection_id"
+                },
+                {
+                    "default": "_space",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"space\" <$> TF.attribute",
+                    "name": "_space",
+                    "method": "space",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSpace",
+                    "validate": false,
+                    "optional": false,
+                    "original": "space"
                 }
             ],
             "conflicts": [],
@@ -2924,21 +2924,21 @@
             ],
             "parameters": [
                 {
-                    "default": "_name",
+                    "default": "_routableCidrs",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": true,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
+                    "encoder": "TF.assign \"routable_cidrs\" <$> TF.attribute",
+                    "name": "_routableCidrs",
+                    "method": "routableCidrs",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasRoutableCidrs",
                     "validate": false,
                     "optional": false,
-                    "original": "name"
+                    "original": "routable_cidrs"
                 },
                 {
                     "default": "_publicIp",
@@ -2958,21 +2958,21 @@
                     "original": "public_ip"
                 },
                 {
-                    "default": "_routableCidrs",
+                    "default": "_name",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": true,
-                    "encoder": "TF.assign \"routable_cidrs\" <$> TF.attribute",
-                    "name": "_routableCidrs",
-                    "method": "routableCidrs",
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasRoutableCidrs",
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
                     "validate": false,
                     "optional": false,
-                    "original": "routable_cidrs"
+                    "original": "name"
                 },
                 {
                     "default": "_space",
