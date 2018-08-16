@@ -172,8 +172,8 @@ data AutoscaleAttributesSetting s = AutoscaleAttributesSetting'
 
 -- | Construct a new @autoscale_attributes@ settings value.
 newAutoscaleAttributesSetting
-    :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
+    :: TF.Attr s P.Text -- ^ 'P._key': @key@
+    -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> AutoscaleAttributesSetting s
 newAutoscaleAttributesSetting _key _value =
     AutoscaleAttributesSetting'
@@ -213,8 +213,8 @@ data AutoscaleConstraintsSetting s = AutoscaleConstraintsSetting'
 
 -- | Construct a new @autoscale_constraints@ settings value.
 newAutoscaleConstraintsSetting
-    :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
+    :: TF.Attr s P.Text -- ^ 'P._key': @key@
+    -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> AutoscaleConstraintsSetting s
 newAutoscaleConstraintsSetting _key _value =
     AutoscaleConstraintsSetting'
@@ -332,8 +332,8 @@ data AutoscaleLabelsSetting s = AutoscaleLabelsSetting'
 
 -- | Construct a new @autoscale_labels@ settings value.
 newAutoscaleLabelsSetting
-    :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
+    :: TF.Attr s P.Text -- ^ 'P._key': @key@
+    -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> AutoscaleLabelsSetting s
 newAutoscaleLabelsSetting _key _value =
     AutoscaleLabelsSetting'
@@ -373,8 +373,8 @@ data DeploymentGroupsSetting s = DeploymentGroupsSetting'
 
 -- | Construct a new @deployment_groups@ settings value.
 newDeploymentGroupsSetting
-    :: TF.Attr s P.Text -- ^ @application_name@ - 'P.applicationName'
-    -> TF.Attr s P.Text -- ^ @deployment_group_name@ - 'P.deploymentGroupName'
+    :: TF.Attr s P.Text -- ^ 'P._applicationName': @application_name@
+    -> TF.Attr s P.Text -- ^ 'P._deploymentGroupName': @deployment_group_name@
     -> DeploymentGroupsSetting s
 newDeploymentGroupsSetting _applicationName _deploymentGroupName =
     DeploymentGroupsSetting'
@@ -423,7 +423,7 @@ data EbsBlockDeviceSetting s = EbsBlockDeviceSetting'
 
 -- | Construct a new @ebs_block_device@ settings value.
 newEbsBlockDeviceSetting
-    :: TF.Attr s P.Text -- ^ @device_name@ - 'P.deviceName'
+    :: TF.Attr s P.Text -- ^ 'P._deviceName': @device_name@
     -> EbsBlockDeviceSetting s
 newEbsBlockDeviceSetting _deviceName =
     EbsBlockDeviceSetting'
@@ -493,8 +493,8 @@ data EphemeralBlockDeviceSetting s = EphemeralBlockDeviceSetting'
 
 -- | Construct a new @ephemeral_block_device@ settings value.
 newEphemeralBlockDeviceSetting
-    :: TF.Attr s P.Text -- ^ @device_name@ - 'P.deviceName'
-    -> TF.Attr s P.Text -- ^ @virtual_name@ - 'P.virtualName'
+    :: TF.Attr s P.Text -- ^ 'P._deviceName': @device_name@
+    -> TF.Attr s P.Text -- ^ 'P._virtualName': @virtual_name@
     -> EphemeralBlockDeviceSetting s
 newEphemeralBlockDeviceSetting _deviceName _virtualName =
     EphemeralBlockDeviceSetting'
@@ -534,8 +534,8 @@ data InstanceTypesWeightsSetting s = InstanceTypesWeightsSetting'
 
 -- | Construct a new @instance_types_weights@ settings value.
 newInstanceTypesWeightsSetting
-    :: TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
-    -> TF.Attr s P.Int -- ^ @weight@ - 'P.weight'
+    :: TF.Attr s P.Text -- ^ 'P._instanceType': @instance_type@
+    -> TF.Attr s P.Int -- ^ 'P._weight': @weight@
     -> InstanceTypesWeightsSetting s
 newInstanceTypesWeightsSetting _instanceType _weight =
     InstanceTypesWeightsSetting'
@@ -578,9 +578,9 @@ data IntegrationCodedeploySetting s = IntegrationCodedeploySetting'
 
 -- | Construct a new @integration_codedeploy@ settings value.
 newIntegrationCodedeploySetting
-    :: TF.Attr s P.Bool -- ^ @cleanup_on_failure@ - 'P.cleanupOnFailure'
-    -> TF.Attr s P.Bool -- ^ @terminate_instance_on_failure@ - 'P.terminateInstanceOnFailure'
-    -> TF.Attr s [TF.Attr s (DeploymentGroupsSetting s)] -- ^ @deployment_groups@ - 'P.deploymentGroups'
+    :: TF.Attr s P.Bool -- ^ 'P._cleanupOnFailure': @cleanup_on_failure@
+    -> TF.Attr s P.Bool -- ^ 'P._terminateInstanceOnFailure': @terminate_instance_on_failure@
+    -> TF.Attr s [TF.Attr s (DeploymentGroupsSetting s)] -- ^ 'P._deploymentGroups': @deployment_groups@
     -> IntegrationCodedeploySetting s
 newIntegrationCodedeploySetting _cleanupOnFailure _terminateInstanceOnFailure _deploymentGroups =
     IntegrationCodedeploySetting'
@@ -642,7 +642,7 @@ data IntegrationEcsSetting s = IntegrationEcsSetting'
 
 -- | Construct a new @integration_ecs@ settings value.
 newIntegrationEcsSetting
-    :: TF.Attr s P.Text -- ^ @cluster_name@ - 'P.clusterName'
+    :: TF.Attr s P.Text -- ^ 'P._clusterName': @cluster_name@
     -> IntegrationEcsSetting s
 newIntegrationEcsSetting _clusterName =
     IntegrationEcsSetting'
@@ -882,7 +882,7 @@ data IntegrationMesosphereSetting s = IntegrationMesosphereSetting'
 
 -- | Construct a new @integration_mesosphere@ settings value.
 newIntegrationMesosphereSetting
-    :: TF.Attr s P.Text -- ^ @api_server@ - 'P.apiServer'
+    :: TF.Attr s P.Text -- ^ 'P._apiServer': @api_server@
     -> IntegrationMesosphereSetting s
 newIntegrationMesosphereSetting _apiServer =
     IntegrationMesosphereSetting'
@@ -912,7 +912,7 @@ data IntegrationMultaiRuntimeSetting s = IntegrationMultaiRuntimeSetting'
 
 -- | Construct a new @integration_multai_runtime@ settings value.
 newIntegrationMultaiRuntimeSetting
-    :: TF.Attr s P.Text -- ^ @deployment_id@ - 'P.deploymentId'
+    :: TF.Attr s P.Text -- ^ 'P._deploymentId': @deployment_id@
     -> IntegrationMultaiRuntimeSetting s
 newIntegrationMultaiRuntimeSetting _deploymentId =
     IntegrationMultaiRuntimeSetting'
@@ -963,8 +963,8 @@ data IntegrationNomadSetting s = IntegrationNomadSetting'
 
 -- | Construct a new @integration_nomad@ settings value.
 newIntegrationNomadSetting
-    :: TF.Attr s P.Text -- ^ @master_host@ - 'P.masterHost'
-    -> TF.Attr s P.Int -- ^ @master_port@ - 'P.masterPort'
+    :: TF.Attr s P.Text -- ^ 'P._masterHost': @master_host@
+    -> TF.Attr s P.Int -- ^ 'P._masterPort': @master_port@
     -> IntegrationNomadSetting s
 newIntegrationNomadSetting _masterHost _masterPort =
     IntegrationNomadSetting'
@@ -1057,9 +1057,9 @@ data IntegrationRancherSetting s = IntegrationRancherSetting'
 
 -- | Construct a new @integration_rancher@ settings value.
 newIntegrationRancherSetting
-    :: TF.Attr s P.Text -- ^ @master_host@ - 'P.masterHost'
-    -> TF.Attr s P.Text -- ^ @access_key@ - 'P.accessKey'
-    -> TF.Attr s P.Text -- ^ @secret_key@ - 'P.secretKey'
+    :: TF.Attr s P.Text -- ^ 'P._masterHost': @master_host@
+    -> TF.Attr s P.Text -- ^ 'P._accessKey': @access_key@
+    -> TF.Attr s P.Text -- ^ 'P._secretKey': @secret_key@
     -> IntegrationRancherSetting s
 newIntegrationRancherSetting _masterHost _accessKey _secretKey =
     IntegrationRancherSetting'
@@ -1106,8 +1106,8 @@ data MultaiTargetSetsSetting s = MultaiTargetSetsSetting'
 
 -- | Construct a new @multai_target_sets@ settings value.
 newMultaiTargetSetsSetting
-    :: TF.Attr s P.Text -- ^ @balancer_id@ - 'P.balancerId'
-    -> TF.Attr s P.Text -- ^ @target_set_id@ - 'P.targetSetId'
+    :: TF.Attr s P.Text -- ^ 'P._balancerId': @balancer_id@
+    -> TF.Attr s P.Text -- ^ 'P._targetSetId': @target_set_id@
     -> MultaiTargetSetsSetting s
 newMultaiTargetSetsSetting _balancerId _targetSetId =
     MultaiTargetSetsSetting'
@@ -1159,8 +1159,8 @@ data NetworkInterfaceSetting s = NetworkInterfaceSetting'
 
 -- | Construct a new @network_interface@ settings value.
 newNetworkInterfaceSetting
-    :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
-    -> TF.Attr s P.Text -- ^ @device_index@ - 'P.deviceIndex'
+    :: TF.Attr s P.Text -- ^ 'P._description': @description@
+    -> TF.Attr s P.Text -- ^ 'P._deviceIndex': @device_index@
     -> NetworkInterfaceSetting s
 newNetworkInterfaceSetting _description _deviceIndex =
     NetworkInterfaceSetting'
@@ -1231,7 +1231,7 @@ data RevertToSpotSetting s = RevertToSpotSetting'
 
 -- | Construct a new @revert_to_spot@ settings value.
 newRevertToSpotSetting
-    :: TF.Attr s P.Text -- ^ @perform_at@ - 'P.performAt'
+    :: TF.Attr s P.Text -- ^ 'P._performAt': @perform_at@
     -> RevertToSpotSetting s
 newRevertToSpotSetting _performAt =
     RevertToSpotSetting'
@@ -1274,7 +1274,7 @@ data RollConfigSetting s = RollConfigSetting'
 
 -- | Construct a new @roll_config@ settings value.
 newRollConfigSetting
-    :: TF.Attr s P.Int -- ^ @batch_size_percentage@ - 'P.batchSizePercentage'
+    :: TF.Attr s P.Int -- ^ 'P._batchSizePercentage': @batch_size_percentage@
     -> RollConfigSetting s
 newRollConfigSetting _batchSizePercentage =
     RollConfigSetting'
@@ -1383,11 +1383,11 @@ data ScalingDownPolicySetting s = ScalingDownPolicySetting'
 
 -- | Construct a new @scaling_down_policy@ settings value.
 newScalingDownPolicySetting
-    :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
-    -> TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
-    -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
-    -> TF.Attr s P.Double -- ^ @threshold@ - 'P.threshold'
-    -> TF.Attr s P.Text -- ^ @unit@ - 'P.unit'
+    :: TF.Attr s P.Text -- ^ 'P._metricName': @metric_name@
+    -> TF.Attr s P.Text -- ^ 'P._policyName': @policy_name@
+    -> TF.Attr s P.Text -- ^ 'P._namespace': @namespace@
+    -> TF.Attr s P.Double -- ^ 'P._threshold': @threshold@
+    -> TF.Attr s P.Text -- ^ 'P._unit': @unit@
     -> ScalingDownPolicySetting s
 newScalingDownPolicySetting _metricName _policyName _namespace _threshold _unit =
     ScalingDownPolicySetting'
@@ -1534,11 +1534,11 @@ data ScalingTargetPolicySetting s = ScalingTargetPolicySetting'
 
 -- | Construct a new @scaling_target_policy@ settings value.
 newScalingTargetPolicySetting
-    :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
-    -> TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
-    -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
-    -> TF.Attr s P.Double -- ^ @target@ - 'P.target'
-    -> TF.Attr s P.Text -- ^ @unit@ - 'P.unit'
+    :: TF.Attr s P.Text -- ^ 'P._metricName': @metric_name@
+    -> TF.Attr s P.Text -- ^ 'P._policyName': @policy_name@
+    -> TF.Attr s P.Text -- ^ 'P._namespace': @namespace@
+    -> TF.Attr s P.Double -- ^ 'P._target': @target@
+    -> TF.Attr s P.Text -- ^ 'P._unit': @unit@
     -> ScalingTargetPolicySetting s
 newScalingTargetPolicySetting _metricName _policyName _namespace _target _unit =
     ScalingTargetPolicySetting'
@@ -1648,11 +1648,11 @@ data ScalingUpPolicySetting s = ScalingUpPolicySetting'
 
 -- | Construct a new @scaling_up_policy@ settings value.
 newScalingUpPolicySetting
-    :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
-    -> TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
-    -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
-    -> TF.Attr s P.Double -- ^ @threshold@ - 'P.threshold'
-    -> TF.Attr s P.Text -- ^ @unit@ - 'P.unit'
+    :: TF.Attr s P.Text -- ^ 'P._metricName': @metric_name@
+    -> TF.Attr s P.Text -- ^ 'P._policyName': @policy_name@
+    -> TF.Attr s P.Text -- ^ 'P._namespace': @namespace@
+    -> TF.Attr s P.Double -- ^ 'P._threshold': @threshold@
+    -> TF.Attr s P.Text -- ^ 'P._unit': @unit@
     -> ScalingUpPolicySetting s
 newScalingUpPolicySetting _metricName _policyName _namespace _threshold _unit =
     ScalingUpPolicySetting'
@@ -1820,7 +1820,7 @@ data ScheduledTaskSetting s = ScheduledTaskSetting'
 
 -- | Construct a new @scheduled_task@ settings value.
 newScheduledTaskSetting
-    :: TF.Attr s P.Text -- ^ @task_type@ - 'P.taskType'
+    :: TF.Attr s P.Text -- ^ 'P._taskType': @task_type@
     -> ScheduledTaskSetting s
 newScheduledTaskSetting _taskType =
     ScheduledTaskSetting'
@@ -1937,7 +1937,7 @@ data SignalSetting s = SignalSetting'
 
 -- | Construct a new @signal@ settings value.
 newSignalSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> SignalSetting s
 newSignalSetting _name =
     SignalSetting'
@@ -2036,8 +2036,8 @@ data TagsSetting s = TagsSetting'
 
 -- | Construct a new @tags@ settings value.
 newTagsSetting
-    :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
+    :: TF.Attr s P.Text -- ^ 'P._key': @key@
+    -> TF.Attr s P.Text -- ^ 'P._value': @value@
     -> TagsSetting s
 newTagsSetting _key _value =
     TagsSetting'
@@ -2080,8 +2080,8 @@ data UpdatePolicySetting s = UpdatePolicySetting'
 
 -- | Construct a new @update_policy@ settings value.
 newUpdatePolicySetting
-    :: TF.Attr s P.Bool -- ^ @should_roll@ - 'P.shouldRoll'
-    -> TF.Attr s P.Bool -- ^ @should_resume_stateful@ - 'P.shouldResumeStateful'
+    :: TF.Attr s P.Bool -- ^ 'P._shouldRoll': @should_roll@
+    -> TF.Attr s P.Bool -- ^ 'P._shouldResumeStateful': @should_resume_stateful@
     -> UpdatePolicySetting s
 newUpdatePolicySetting _shouldRoll _shouldResumeStateful =
     UpdatePolicySetting'

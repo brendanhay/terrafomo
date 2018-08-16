@@ -243,14 +243,14 @@ data ElastigroupAwsResource s = ElastigroupAwsResource'
 
 -- | Define a new @spotinst_elastigroup_aws@ resource value.
 elastigroupAwsResource
-    :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ - 'P.securityGroups'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Bool -- ^ @fallback_to_ondemand@ - 'P.fallbackToOndemand'
-    -> TF.Attr s P.Text -- ^ @instance_types_ondemand@ - 'P.instanceTypesOndemand'
-    -> TF.Attr s P.Text -- ^ @orientation@ - 'P.orientation'
-    -> TF.Attr s P.Text -- ^ @product@ - 'P.product'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @instance_types_spot@ - 'P.instanceTypesSpot'
+    :: TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ ('P._securityGroups', 'P.securityGroups')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Bool -- ^ @fallback_to_ondemand@ ('P._fallbackToOndemand', 'P.fallbackToOndemand')
+    -> TF.Attr s P.Text -- ^ @instance_types_ondemand@ ('P._instanceTypesOndemand', 'P.instanceTypesOndemand')
+    -> TF.Attr s P.Text -- ^ @orientation@ ('P._orientation', 'P.orientation')
+    -> TF.Attr s P.Text -- ^ @product@ ('P._product', 'P.product')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @instance_types_spot@ ('P._instanceTypesSpot', 'P.instanceTypesSpot')
     -> P.Resource (ElastigroupAwsResource s)
 elastigroupAwsResource _description _securityGroups _name _fallbackToOndemand _instanceTypesOndemand _orientation _product _instanceTypesSpot =
     TF.unsafeResource "spotinst_elastigroup_aws" TF.validator $
@@ -767,10 +767,10 @@ data SubscriptionResource s = SubscriptionResource'
 
 -- | Define a new @spotinst_subscription@ resource value.
 subscriptionResource
-    :: TF.Attr s P.Text -- ^ @endpoint@ - 'P.endpoint'
-    -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
-    -> TF.Attr s P.Text -- ^ @event_type@ - 'P.eventType'
+    :: TF.Attr s P.Text -- ^ @endpoint@ ('P._endpoint', 'P.endpoint')
+    -> TF.Attr s P.Text -- ^ @resource_id@ ('P._resourceId', 'P.resourceId')
+    -> TF.Attr s P.Text -- ^ @protocol@ ('P._protocol', 'P.protocol')
+    -> TF.Attr s P.Text -- ^ @event_type@ ('P._eventType', 'P.eventType')
     -> P.Resource (SubscriptionResource s)
 subscriptionResource _endpoint _resourceId _protocol _eventType =
     TF.unsafeResource "spotinst_subscription" TF.validator $
