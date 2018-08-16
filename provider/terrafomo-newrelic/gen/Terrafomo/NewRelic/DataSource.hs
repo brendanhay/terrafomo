@@ -17,7 +17,6 @@
 --
 module Terrafomo.NewRelic.DataSource
     (
-    -- * DataSource Datatypes
     -- ** newrelic_application
       ApplicationData (..)
     , applicationData
@@ -62,6 +61,7 @@ data ApplicationData s = ApplicationData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @newrelic_application@ datasource value.
 applicationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ApplicationData s)
@@ -103,6 +103,7 @@ data KeyTransactionData s = KeyTransactionData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @newrelic_key_transaction@ datasource value.
 keyTransactionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (KeyTransactionData s)

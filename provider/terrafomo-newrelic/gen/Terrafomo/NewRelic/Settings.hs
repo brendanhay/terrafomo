@@ -17,7 +17,6 @@
 --
 module Terrafomo.NewRelic.Settings
     (
-    -- * Settings Datatypes
     -- ** critical
       CriticalSetting (..)
     , newCriticalSetting
@@ -74,6 +73,7 @@ data CriticalSetting s = CriticalSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @critical@ settings value.
 newCriticalSetting
     :: TF.Attr s P.Int -- ^ @duration@ - 'P.duration'
     -> CriticalSetting s
@@ -120,6 +120,7 @@ data NrqlSetting s = NrqlSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @nrql@ settings value.
 newNrqlSetting
     :: TF.Attr s P.Text -- ^ @query@ - 'P.query'
     -> TF.Attr s P.Text -- ^ @since_value@ - 'P.sinceValue'
@@ -169,6 +170,7 @@ data TermSetting s = TermSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @term@ settings value.
 newTermSetting
     :: TF.Attr s P.Int -- ^ @duration@ - 'P.duration'
     -> TF.Attr s P.Text -- ^ @time_function@ - 'P.timeFunction'
@@ -234,6 +236,7 @@ data WarningSetting s = WarningSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @warning@ settings value.
 newWarningSetting
     :: TF.Attr s P.Int -- ^ @duration@ - 'P.duration'
     -> WarningSetting s
@@ -298,6 +301,7 @@ data WidgetSetting s = WidgetSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @widget@ settings value.
 newWidgetSetting
     :: TF.Attr s P.Int -- ^ @column@ - 'P.column'
     -> TF.Attr s P.Int -- ^ @row@ - 'P.row'

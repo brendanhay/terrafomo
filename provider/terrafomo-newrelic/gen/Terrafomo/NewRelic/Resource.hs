@@ -17,7 +17,6 @@
 --
 module Terrafomo.NewRelic.Resource
     (
-    -- * Resource Datatypes
     -- ** newrelic_alert_channel
       AlertChannelResource (..)
     , alertChannelResource
@@ -88,6 +87,7 @@ data AlertChannelResource s = AlertChannelResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @newrelic_alert_channel@ resource value.
 alertChannelResource
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @configuration@ - 'P.configuration'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -172,6 +172,7 @@ data AlertConditionResource s = AlertConditionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @newrelic_alert_condition@ resource value.
 alertConditionResource
     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Int)) -- ^ @entities@ - 'P.entities'
     -> TF.Attr s P.Int -- ^ @policy_id@ - 'P.policyId'
@@ -292,6 +293,7 @@ data AlertPolicyResource s = AlertPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @newrelic_alert_policy@ resource value.
 alertPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (AlertPolicyResource s)
@@ -343,6 +345,7 @@ data AlertPolicyChannelResource s = AlertPolicyChannelResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @newrelic_alert_policy_channel@ resource value.
 alertPolicyChannelResource
     :: TF.Attr s P.Int -- ^ @channel_id@ - 'P.channelId'
     -> TF.Attr s P.Int -- ^ @policy_id@ - 'P.policyId'
@@ -398,6 +401,7 @@ data DashboardResource s = DashboardResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @newrelic_dashboard@ resource value.
 dashboardResource
     :: TF.Attr s P.Text -- ^ @title@ - 'P.title'
     -> P.Resource (DashboardResource s)
@@ -494,6 +498,7 @@ data InfraAlertConditionResource s = InfraAlertConditionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @newrelic_infra_alert_condition@ resource value.
 infraAlertConditionResource
     :: TF.Attr s P.Int -- ^ @policy_id@ - 'P.policyId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -633,6 +638,7 @@ data NrqlAlertConditionResource s = NrqlAlertConditionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @newrelic_nrql_alert_condition@ resource value.
 nrqlAlertConditionResource
     :: TF.Attr s P.Int -- ^ @policy_id@ - 'P.policyId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
