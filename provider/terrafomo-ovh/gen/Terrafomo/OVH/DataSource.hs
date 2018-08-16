@@ -94,7 +94,7 @@ cloudRegionData
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.DataSource (CloudRegionData s)
 cloudRegionData _name _projectId =
-    TF.unsafeDataSource "ovh_cloud_region" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ovh_cloud_region" TF.validator $
         CloudRegionData'
             { _name = _name
             , _projectId = _projectId
@@ -145,7 +145,7 @@ cloudRegionsData
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.DataSource (CloudRegionsData s)
 cloudRegionsData _projectId =
-    TF.unsafeDataSource "ovh_cloud_regions" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ovh_cloud_regions" TF.validator $
         CloudRegionsData'
             { _projectId = _projectId
             }
@@ -183,7 +183,7 @@ domainZoneData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DomainZoneData s)
 domainZoneData _name =
-    TF.unsafeDataSource "ovh_domain_zone" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ovh_domain_zone" TF.validator $
         DomainZoneData'
             { _name = _name
             }
@@ -226,7 +226,7 @@ data IploadbalancingData s = IploadbalancingData'
 iploadbalancingData
     :: P.DataSource (IploadbalancingData s)
 iploadbalancingData =
-    TF.unsafeDataSource "ovh_iploadbalancing" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ovh_iploadbalancing" TF.validator $
         IploadbalancingData'
 
 instance TF.IsObject (IploadbalancingData s) where
@@ -296,7 +296,7 @@ data MePaymentmeanBankaccountData s = MePaymentmeanBankaccountData'
 mePaymentmeanBankaccountData
     :: P.DataSource (MePaymentmeanBankaccountData s)
 mePaymentmeanBankaccountData =
-    TF.unsafeDataSource "ovh_me_paymentmean_bankaccount" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ovh_me_paymentmean_bankaccount" TF.validator $
         MePaymentmeanBankaccountData'
             { _descriptionRegexp = TF.value ".*"
             , _useDefault = TF.value P.False
@@ -362,7 +362,7 @@ data MePaymentmeanCreditcardData s = MePaymentmeanCreditcardData'
 mePaymentmeanCreditcardData
     :: P.DataSource (MePaymentmeanCreditcardData s)
 mePaymentmeanCreditcardData =
-    TF.unsafeDataSource "ovh_me_paymentmean_creditcard" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ovh_me_paymentmean_creditcard" TF.validator $
         MePaymentmeanCreditcardData'
             { _descriptionRegexp = TF.value ".*"
             , _states = TF.Nil
@@ -431,7 +431,7 @@ publiccloudRegionData
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.DataSource (PubliccloudRegionData s)
 publiccloudRegionData _name _projectId =
-    TF.unsafeDataSource "ovh_publiccloud_region" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ovh_publiccloud_region" TF.validator $
         PubliccloudRegionData'
             { _name = _name
             , _projectId = _projectId
@@ -482,7 +482,7 @@ publiccloudRegionsData
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.DataSource (PubliccloudRegionsData s)
 publiccloudRegionsData _projectId =
-    TF.unsafeDataSource "ovh_publiccloud_regions" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "ovh_publiccloud_regions" TF.validator $
         PubliccloudRegionsData'
             { _projectId = _projectId
             }

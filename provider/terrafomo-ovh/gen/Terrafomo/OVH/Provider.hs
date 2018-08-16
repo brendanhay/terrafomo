@@ -92,19 +92,14 @@ newProvider _endpoint =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "ovh"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "application_key" <$> _applicationKey
-                  , TF.assign "application_secret" <$> _applicationSecret
-                  , TF.assign "consumer_key" <$> _consumerKey
-                  , P.Just $ TF.assign "endpoint" _endpoint
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ TF.assign "application_key" <$> _applicationKey
+            , TF.assign "application_secret" <$> _applicationSecret
+            , TF.assign "consumer_key" <$> _consumerKey
+            , P.Just $ TF.assign "endpoint" _endpoint
+            ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty

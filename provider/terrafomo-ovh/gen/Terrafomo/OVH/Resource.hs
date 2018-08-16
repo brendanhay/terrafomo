@@ -121,7 +121,7 @@ cloudNetworkPrivateResource
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.Resource (CloudNetworkPrivateResource s)
 cloudNetworkPrivateResource _name _projectId =
-    TF.unsafeResource "ovh_cloud_network_private" P.defaultProvider TF.validator $
+    TF.unsafeResource "ovh_cloud_network_private" TF.validator $
         CloudNetworkPrivateResource'
             { _name = _name
             , _projectId = _projectId
@@ -205,7 +205,7 @@ cloudNetworkPrivateSubnetResource
     -> TF.Attr s P.Text -- ^ @start@ - 'P.start'
     -> P.Resource (CloudNetworkPrivateSubnetResource s)
 cloudNetworkPrivateSubnetResource _end _network _networkId _projectId _region _start =
-    TF.unsafeResource "ovh_cloud_network_private_subnet" P.defaultProvider TF.validator $
+    TF.unsafeResource "ovh_cloud_network_private_subnet" TF.validator $
         CloudNetworkPrivateSubnetResource'
             { _dhcp = TF.value P.False
             , _end = _end
@@ -298,7 +298,7 @@ cloudUserResource
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.Resource (CloudUserResource s)
 cloudUserResource _projectId =
-    TF.unsafeResource "ovh_cloud_user" P.defaultProvider TF.validator $
+    TF.unsafeResource "ovh_cloud_user" TF.validator $
         CloudUserResource'
             { _description = TF.Nil
             , _projectId = _projectId
@@ -366,7 +366,7 @@ domainZoneRecordResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (DomainZoneRecordResource s)
 domainZoneRecordResource _fieldtype _target _zone =
-    TF.unsafeResource "ovh_domain_zone_record" P.defaultProvider TF.validator $
+    TF.unsafeResource "ovh_domain_zone_record" TF.validator $
         DomainZoneRecordResource'
             { _fieldtype = _fieldtype
             , _subdomain = TF.Nil
@@ -446,7 +446,7 @@ domainZoneRedirectionResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (DomainZoneRedirectionResource s)
 domainZoneRedirectionResource _target _type' _zone =
-    TF.unsafeResource "ovh_domain_zone_redirection" P.defaultProvider TF.validator $
+    TF.unsafeResource "ovh_domain_zone_redirection" TF.validator $
         DomainZoneRedirectionResource'
             { _description = TF.Nil
             , _keywords = TF.Nil
@@ -530,7 +530,7 @@ iploadbalancingHttpRouteResource
     -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
     -> P.Resource (IploadbalancingHttpRouteResource s)
 iploadbalancingHttpRouteResource _action _serviceName =
-    TF.unsafeResource "ovh_iploadbalancing_http_route" P.defaultProvider TF.validator $
+    TF.unsafeResource "ovh_iploadbalancing_http_route" TF.validator $
         IploadbalancingHttpRouteResource'
             { _action = _action
             , _displayName = TF.Nil
@@ -610,7 +610,7 @@ iploadbalancingHttpRouteRuleResource
     -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
     -> P.Resource (IploadbalancingHttpRouteRuleResource s)
 iploadbalancingHttpRouteRuleResource _field _match _routeId _serviceName =
-    TF.unsafeResource "ovh_iploadbalancing_http_route_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "ovh_iploadbalancing_http_route_rule" TF.validator $
         IploadbalancingHttpRouteRuleResource'
             { _displayName = TF.Nil
             , _field = _field
@@ -713,7 +713,7 @@ iploadbalancingTcpFarmResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (IploadbalancingTcpFarmResource s)
 iploadbalancingTcpFarmResource _serviceName _zone =
-    TF.unsafeResource "ovh_iploadbalancing_tcp_farm" P.defaultProvider TF.validator $
+    TF.unsafeResource "ovh_iploadbalancing_tcp_farm" TF.validator $
         IploadbalancingTcpFarmResource'
             { _balance = TF.Nil
             , _displayName = TF.Nil
@@ -830,7 +830,7 @@ iploadbalancingTcpFarmServerResource
     -> TF.Attr s P.Text -- ^ @status@ - 'P.status'
     -> P.Resource (IploadbalancingTcpFarmServerResource s)
 iploadbalancingTcpFarmServerResource _address _farmId _serviceName _status =
-    TF.unsafeResource "ovh_iploadbalancing_tcp_farm_server" P.defaultProvider TF.validator $
+    TF.unsafeResource "ovh_iploadbalancing_tcp_farm_server" TF.validator $
         IploadbalancingTcpFarmServerResource'
             { _address = _address
             , _backup = TF.value P.False
@@ -949,7 +949,7 @@ publiccloudPrivateNetworkResource
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.Resource (PubliccloudPrivateNetworkResource s)
 publiccloudPrivateNetworkResource _name _projectId =
-    TF.unsafeResource "ovh_publiccloud_private_network" P.defaultProvider TF.validator $
+    TF.unsafeResource "ovh_publiccloud_private_network" TF.validator $
         PubliccloudPrivateNetworkResource'
             { _name = _name
             , _projectId = _projectId
@@ -1033,7 +1033,7 @@ publiccloudPrivateNetworkSubnetResource
     -> TF.Attr s P.Text -- ^ @start@ - 'P.start'
     -> P.Resource (PubliccloudPrivateNetworkSubnetResource s)
 publiccloudPrivateNetworkSubnetResource _end _network _networkId _projectId _region _start =
-    TF.unsafeResource "ovh_publiccloud_private_network_subnet" P.defaultProvider TF.validator $
+    TF.unsafeResource "ovh_publiccloud_private_network_subnet" TF.validator $
         PubliccloudPrivateNetworkSubnetResource'
             { _dhcp = TF.value P.False
             , _end = _end
@@ -1126,7 +1126,7 @@ publiccloudUserResource
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.Resource (PubliccloudUserResource s)
 publiccloudUserResource _projectId =
-    TF.unsafeResource "ovh_publiccloud_user" P.defaultProvider TF.validator $
+    TF.unsafeResource "ovh_publiccloud_user" TF.validator $
         PubliccloudUserResource'
             { _description = TF.Nil
             , _projectId = _projectId
@@ -1184,7 +1184,7 @@ vrackCloudprojectResource
     -> TF.Attr s P.Text -- ^ @vrack_id@ - 'P.vrackId'
     -> P.Resource (VrackCloudprojectResource s)
 vrackCloudprojectResource _projectId _vrackId =
-    TF.unsafeResource "ovh_vrack_cloudproject" P.defaultProvider TF.validator $
+    TF.unsafeResource "ovh_vrack_cloudproject" TF.validator $
         VrackCloudprojectResource'
             { _projectId = _projectId
             , _vrackId = _vrackId
@@ -1227,7 +1227,7 @@ vrackPubliccloudAttachmentResource
     -> TF.Attr s P.Text -- ^ @vrack_id@ - 'P.vrackId'
     -> P.Resource (VrackPubliccloudAttachmentResource s)
 vrackPubliccloudAttachmentResource _projectId _vrackId =
-    TF.unsafeResource "ovh_vrack_publiccloud_attachment" P.defaultProvider TF.validator $
+    TF.unsafeResource "ovh_vrack_publiccloud_attachment" TF.validator $
         VrackPubliccloudAttachmentResource'
             { _projectId = _projectId
             , _vrackId = _vrackId
