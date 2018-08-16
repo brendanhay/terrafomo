@@ -222,7 +222,7 @@ data TeamData s = TeamData'
 
 -- | Define a new @github_team@ datasource value.
 teamData
-    :: TF.Attr s P.Text -- ^ @slug@ - 'P.slug'
+    :: TF.Attr s P.Text -- ^ @slug@ ('P._slug', 'P.slug')
     -> P.DataSource (TeamData s)
 teamData _slug =
     TF.unsafeDataSource "github_team" TF.validator $
@@ -273,7 +273,7 @@ data UserData s = UserData'
 
 -- | Define a new @github_user@ datasource value.
 userData
-    :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
+    :: TF.Attr s P.Text -- ^ @username@ ('P._username', 'P.username')
     -> P.DataSource (UserData s)
 userData _username =
     TF.unsafeDataSource "github_user" TF.validator $

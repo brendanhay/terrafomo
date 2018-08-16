@@ -17,10 +17,11 @@
 --
 module Terrafomo.GitHub.Provider
     (
+    -- * GitHub Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** GitHub Specific Aliases
+    -- * GitHub Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -78,8 +79,8 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @organization@ - 'P.organization'
-    -> P.Text -- ^ @token@ - 'P.token'
+    :: P.Text -- ^ @organization@ ('P._organization', 'P.organization')
+    -> P.Text -- ^ @token@ ('P._token', 'P.token')
     -> Provider
 newProvider _organization _token =
     Provider'
@@ -93,7 +94,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "github"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ TF.assign "base_url" <$> _baseUrl
             , P.Just $ TF.assign "insecure" _insecure
