@@ -313,10 +313,10 @@ data CacheConfigSetting s = CacheConfigSetting'
 
 newCacheConfigSetting
     :: TF.Attr s P.Text -- ^ @cache_content@ - 'P.cacheContent'
-    -> TF.Attr s P.Text -- ^ @cache_type@ - 'P.cacheType'
     -> TF.Attr s P.Int -- ^ @ttl@ - 'P.ttl'
+    -> TF.Attr s P.Text -- ^ @cache_type@ - 'P.cacheType'
     -> CacheConfigSetting s
-newCacheConfigSetting _cacheContent _cacheType _ttl =
+newCacheConfigSetting _cacheContent _ttl _cacheType =
     CacheConfigSetting'
         { _cacheContent = _cacheContent
         , _cacheType = _cacheType
@@ -1871,10 +1871,10 @@ data ServersSetting s = ServersSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newServersSetting
-    :: TF.Attr s P.Int -- ^ @port@ - 'P.port'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @server_ids@ - 'P.serverIds'
+    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @server_ids@ - 'P.serverIds'
+    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
     -> ServersSetting s
-newServersSetting _port _serverIds =
+newServersSetting _serverIds _port =
     ServersSetting'
         { _port = _port
         , _serverIds = _serverIds

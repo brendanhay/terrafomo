@@ -376,10 +376,10 @@ data CdnDomainResource s = CdnDomainResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 cdnDomainResource
-    :: TF.Attr s P.Text -- ^ @cdn_type@ - 'P.cdnType'
-    -> TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
+    :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
+    -> TF.Attr s P.Text -- ^ @cdn_type@ - 'P.cdnType'
     -> P.Resource (CdnDomainResource s)
-cdnDomainResource _cdnType _domainName =
+cdnDomainResource _domainName _cdnType =
     TF.unsafeResource "alicloud_cdn_domain" TF.validator $
         CdnDomainResource'
             { _authConfig = TF.Nil
@@ -575,14 +575,14 @@ data CmsAlarmResource s = CmsAlarmResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 cmsAlarmResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @contact_groups@ - 'P.contactGroups'
-    -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @dimensions@ - 'P.dimensions'
+    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @dimensions@ - 'P.dimensions'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @contact_groups@ - 'P.contactGroups'
     -> TF.Attr s P.Text -- ^ @metric@ - 'P.metric'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
     -> TF.Attr s P.Text -- ^ @threshold@ - 'P.threshold'
     -> P.Resource (CmsAlarmResource s)
-cmsAlarmResource _contactGroups _dimensions _metric _name _project _threshold =
+cmsAlarmResource _dimensions _contactGroups _metric _name _project _threshold =
     TF.unsafeResource "alicloud_cms_alarm" TF.validator $
         CmsAlarmResource'
             { _contactGroups = _contactGroups
@@ -744,11 +744,11 @@ data ContainerClusterResource s = ContainerClusterResource'
 
 containerClusterResource
     :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
-    -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
-    -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
     -> TF.Attr s P.Text -- ^ @vswitch_id@ - 'P.vswitchId'
+    -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
+    -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
     -> P.Resource (ContainerClusterResource s)
-containerClusterResource _cidrBlock _instanceType _password _vswitchId =
+containerClusterResource _cidrBlock _vswitchId _password _instanceType =
     TF.unsafeResource "alicloud_container_cluster" TF.validator $
         ContainerClusterResource'
             { _cidrBlock = _cidrBlock
@@ -1043,11 +1043,11 @@ data CsKubernetesResource s = CsKubernetesResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 csKubernetesResource
-    :: TF.Attr s P.Text -- ^ @master_instance_type@ - 'P.masterInstanceType'
-    -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
+    :: TF.Attr s P.Text -- ^ @password@ - 'P.password'
+    -> TF.Attr s P.Text -- ^ @master_instance_type@ - 'P.masterInstanceType'
     -> TF.Attr s P.Text -- ^ @worker_instance_type@ - 'P.workerInstanceType'
     -> P.Resource (CsKubernetesResource s)
-csKubernetesResource _masterInstanceType _password _workerInstanceType =
+csKubernetesResource _password _masterInstanceType _workerInstanceType =
     TF.unsafeResource "alicloud_cs_kubernetes" TF.validator $
         CsKubernetesResource'
             { _clientCert = TF.Nil
@@ -1277,11 +1277,11 @@ data CsSwarmResource s = CsSwarmResource'
 
 csSwarmResource
     :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
-    -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
-    -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
     -> TF.Attr s P.Text -- ^ @vswitch_id@ - 'P.vswitchId'
+    -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
+    -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
     -> P.Resource (CsSwarmResource s)
-csSwarmResource _cidrBlock _instanceType _password _vswitchId =
+csSwarmResource _cidrBlock _vswitchId _password _instanceType =
     TF.unsafeResource "alicloud_cs_swarm" TF.validator $
         CsSwarmResource'
             { _cidrBlock = _cidrBlock
@@ -1482,11 +1482,11 @@ data DbAccountPrivilegeResource s = DbAccountPrivilegeResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 dbAccountPrivilegeResource
-    :: TF.Attr s P.Text -- ^ @account_name@ - 'P.accountName'
+    :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
+    -> TF.Attr s P.Text -- ^ @account_name@ - 'P.accountName'
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @db_names@ - 'P.dbNames'
-    -> TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> P.Resource (DbAccountPrivilegeResource s)
-dbAccountPrivilegeResource _accountName _dbNames _instanceId =
+dbAccountPrivilegeResource _instanceId _accountName _dbNames =
     TF.unsafeResource "alicloud_db_account_privilege" TF.validator $
         DbAccountPrivilegeResource'
             { _accountName = _accountName
@@ -1748,11 +1748,11 @@ data DbInstanceResource s = DbInstanceResource'
 
 dbInstanceResource
     :: TF.Attr s P.Text -- ^ @engine@ - 'P.engine'
-    -> TF.Attr s P.Text -- ^ @engine_version@ - 'P.engineVersion'
     -> TF.Attr s P.Int -- ^ @instance_storage@ - 'P.instanceStorage'
     -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
+    -> TF.Attr s P.Text -- ^ @engine_version@ - 'P.engineVersion'
     -> P.Resource (DbInstanceResource s)
-dbInstanceResource _engine _engineVersion _instanceStorage _instanceType =
+dbInstanceResource _engine _instanceStorage _instanceType _engineVersion =
     TF.unsafeResource "alicloud_db_instance" TF.validator $
         DbInstanceResource'
             { _engine = _engine
@@ -2084,12 +2084,12 @@ data DnsRecordResource s = DnsRecordResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 dnsRecordResource
-    :: TF.Attr s P.Text -- ^ @host_record@ - 'P.hostRecord'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @host_record@ - 'P.hostRecord'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> P.Resource (DnsRecordResource s)
-dnsRecordResource _hostRecord _name _type' _value =
+dnsRecordResource _name _hostRecord _type' _value =
     TF.unsafeResource "alicloud_dns_record" TF.validator $
         DnsRecordResource'
             { _hostRecord = _hostRecord
@@ -2288,10 +2288,10 @@ data EssAttachmentResource s = EssAttachmentResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 essAttachmentResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @instance_ids@ - 'P.instanceIds'
-    -> TF.Attr s P.Text -- ^ @scaling_group_id@ - 'P.scalingGroupId'
+    :: TF.Attr s P.Text -- ^ @scaling_group_id@ - 'P.scalingGroupId'
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @instance_ids@ - 'P.instanceIds'
     -> P.Resource (EssAttachmentResource s)
-essAttachmentResource _instanceIds _scalingGroupId =
+essAttachmentResource _scalingGroupId _instanceIds =
     TF.unsafeResource "alicloud_ess_attachment" TF.validator $
         EssAttachmentResource'
             { _force = TF.value P.False
@@ -2381,11 +2381,11 @@ data EssScalingConfigurationResource s = EssScalingConfigurationResource'
 
 essScalingConfigurationResource
     :: TF.Attr s P.Text -- ^ @image_id@ - 'P.imageId'
-    -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
     -> TF.Attr s P.Text -- ^ @scaling_group_id@ - 'P.scalingGroupId'
     -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
+    -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
     -> P.Resource (EssScalingConfigurationResource s)
-essScalingConfigurationResource _imageId _instanceType _scalingGroupId _securityGroupId =
+essScalingConfigurationResource _imageId _scalingGroupId _securityGroupId _instanceType =
     TF.unsafeResource "alicloud_ess_scaling_configuration" TF.validator $
         EssScalingConfigurationResource'
             { _dataDisk = TF.Nil
@@ -2644,11 +2644,11 @@ data EssScalingRuleResource s = EssScalingRuleResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 essScalingRuleResource
-    :: TF.Attr s P.Text -- ^ @adjustment_type@ - 'P.adjustmentType'
+    :: TF.Attr s P.Text -- ^ @scaling_group_id@ - 'P.scalingGroupId'
+    -> TF.Attr s P.Text -- ^ @adjustment_type@ - 'P.adjustmentType'
     -> TF.Attr s P.Int -- ^ @adjustment_value@ - 'P.adjustmentValue'
-    -> TF.Attr s P.Text -- ^ @scaling_group_id@ - 'P.scalingGroupId'
     -> P.Resource (EssScalingRuleResource s)
-essScalingRuleResource _adjustmentType _adjustmentValue _scalingGroupId =
+essScalingRuleResource _scalingGroupId _adjustmentType _adjustmentValue =
     TF.unsafeResource "alicloud_ess_scaling_rule" TF.validator $
         EssScalingRuleResource'
             { _adjustmentType = _adjustmentType
@@ -2717,10 +2717,10 @@ data EssScheduleResource s = EssScheduleResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 essScheduleResource
-    :: TF.Attr s P.Text -- ^ @launch_time@ - 'P.launchTime'
-    -> TF.Attr s P.Text -- ^ @scheduled_action@ - 'P.scheduledAction'
+    :: TF.Attr s P.Text -- ^ @scheduled_action@ - 'P.scheduledAction'
+    -> TF.Attr s P.Text -- ^ @launch_time@ - 'P.launchTime'
     -> P.Resource (EssScheduleResource s)
-essScheduleResource _launchTime _scheduledAction =
+essScheduleResource _scheduledAction _launchTime =
     TF.unsafeResource "alicloud_ess_schedule" TF.validator $
         EssScheduleResource'
             { _launchExpirationTime = TF.value 600
@@ -3157,14 +3157,14 @@ data ForwardEntryResource s = ForwardEntryResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 forwardEntryResource
-    :: TF.Attr s P.Text -- ^ @external_ip@ - 'P.externalIp'
-    -> TF.Attr s P.Text -- ^ @external_port@ - 'P.externalPort'
-    -> TF.Attr s P.Text -- ^ @forward_table_id@ - 'P.forwardTableId'
+    :: TF.Attr s P.Text -- ^ @forward_table_id@ - 'P.forwardTableId'
+    -> TF.Attr s P.Text -- ^ @external_ip@ - 'P.externalIp'
     -> TF.Attr s P.Text -- ^ @internal_ip@ - 'P.internalIp'
+    -> TF.Attr s P.Text -- ^ @external_port@ - 'P.externalPort'
     -> TF.Attr s P.Text -- ^ @internal_port@ - 'P.internalPort'
     -> TF.Attr s P.Text -- ^ @ip_protocol@ - 'P.ipProtocol'
     -> P.Resource (ForwardEntryResource s)
-forwardEntryResource _externalIp _externalPort _forwardTableId _internalIp _internalPort _ipProtocol =
+forwardEntryResource _forwardTableId _externalIp _internalIp _externalPort _internalPort _ipProtocol =
     TF.unsafeResource "alicloud_forward_entry" TF.validator $
         ForwardEntryResource'
             { _externalIp = _externalIp
@@ -3295,11 +3295,11 @@ data InstanceResource s = InstanceResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 instanceResource
-    :: TF.Attr s P.Text -- ^ @image_id@ - 'P.imageId'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ - 'P.securityGroups'
+    -> TF.Attr s P.Text -- ^ @image_id@ - 'P.imageId'
     -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ - 'P.securityGroups'
     -> P.Resource (InstanceResource s)
-instanceResource _imageId _instanceType _securityGroups =
+instanceResource _securityGroups _imageId _instanceType =
     TF.unsafeResource "alicloud_instance" TF.validator $
         InstanceResource'
             { _autoRenewPeriod = TF.value 1
@@ -4338,11 +4338,11 @@ data OtsInstanceAttachmentResource s = OtsInstanceAttachmentResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 otsInstanceAttachmentResource
-    :: TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
+    :: TF.Attr s P.Text -- ^ @vswitch_id@ - 'P.vswitchId'
+    -> TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
     -> TF.Attr s P.Text -- ^ @vpc_name@ - 'P.vpcName'
-    -> TF.Attr s P.Text -- ^ @vswitch_id@ - 'P.vswitchId'
     -> P.Resource (OtsInstanceAttachmentResource s)
-otsInstanceAttachmentResource _instanceName _vpcName _vswitchId =
+otsInstanceAttachmentResource _vswitchId _instanceName _vpcName =
     TF.unsafeResource "alicloud_ots_instance_attachment" TF.validator $
         OtsInstanceAttachmentResource'
             { _instanceName = _instanceName
@@ -4401,13 +4401,13 @@ data OtsTableResource s = OtsTableResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 otsTableResource
-    :: TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
-    -> TF.Attr s P.Int -- ^ @max_version@ - 'P.maxVersion'
-    -> TF.Attr s [TF.Attr s (PrimaryKeySetting s)] -- ^ @primary_key@ - 'P.primaryKey'
-    -> TF.Attr s P.Text -- ^ @table_name@ - 'P.tableName'
+    :: TF.Attr s [TF.Attr s (PrimaryKeySetting s)] -- ^ @primary_key@ - 'P.primaryKey'
     -> TF.Attr s P.Int -- ^ @time_to_live@ - 'P.timeToLive'
+    -> TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
+    -> TF.Attr s P.Text -- ^ @table_name@ - 'P.tableName'
+    -> TF.Attr s P.Int -- ^ @max_version@ - 'P.maxVersion'
     -> P.Resource (OtsTableResource s)
-otsTableResource _instanceName _maxVersion _primaryKey _tableName _timeToLive =
+otsTableResource _primaryKey _timeToLive _instanceName _tableName _maxVersion =
     TF.unsafeResource "alicloud_ots_table" TF.validator $
         OtsTableResource'
             { _instanceName = _instanceName
@@ -4738,10 +4738,10 @@ data RamLoginProfileResource s = RamLoginProfileResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 ramLoginProfileResource
-    :: TF.Attr s P.Text -- ^ @password@ - 'P.password'
-    -> TF.Attr s P.Text -- ^ @user_name@ - 'P.userName'
+    :: TF.Attr s P.Text -- ^ @user_name@ - 'P.userName'
+    -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
     -> P.Resource (RamLoginProfileResource s)
-ramLoginProfileResource _password _userName =
+ramLoginProfileResource _userName _password =
     TF.unsafeResource "alicloud_ram_login_profile" TF.validator $
         RamLoginProfileResource'
             { _mfaBindRequired = TF.value P.False
@@ -4990,10 +4990,10 @@ data RamRolePolicyAttachmentResource s = RamRolePolicyAttachmentResource'
 
 ramRolePolicyAttachmentResource
     :: TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
-    -> TF.Attr s P.Text -- ^ @policy_type@ - 'P.policyType'
     -> TF.Attr s P.Text -- ^ @role_name@ - 'P.roleName'
+    -> TF.Attr s P.Text -- ^ @policy_type@ - 'P.policyType'
     -> P.Resource (RamRolePolicyAttachmentResource s)
-ramRolePolicyAttachmentResource _policyName _policyType _roleName =
+ramRolePolicyAttachmentResource _policyName _roleName _policyType =
     TF.unsafeResource "alicloud_ram_role_policy_attachment" TF.validator $
         RamRolePolicyAttachmentResource'
             { _policyName = _policyName
@@ -5126,10 +5126,10 @@ data RamUserPolicyAttachmentResource s = RamUserPolicyAttachmentResource'
 
 ramUserPolicyAttachmentResource
     :: TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
-    -> TF.Attr s P.Text -- ^ @policy_type@ - 'P.policyType'
     -> TF.Attr s P.Text -- ^ @user_name@ - 'P.userName'
+    -> TF.Attr s P.Text -- ^ @policy_type@ - 'P.policyType'
     -> P.Resource (RamUserPolicyAttachmentResource s)
-ramUserPolicyAttachmentResource _policyName _policyType _userName =
+ramUserPolicyAttachmentResource _policyName _userName _policyType =
     TF.unsafeResource "alicloud_ram_user_policy_attachment" TF.validator $
         RamUserPolicyAttachmentResource'
             { _policyName = _policyName
@@ -5259,12 +5259,12 @@ data RouterInterfaceResource s = RouterInterfaceResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 routerInterfaceResource
-    :: TF.Attr s P.Text -- ^ @opposite_region@ - 'P.oppositeRegion'
+    :: TF.Attr s P.Text -- ^ @router_id@ - 'P.routerId'
+    -> TF.Attr s P.Text -- ^ @opposite_region@ - 'P.oppositeRegion'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Attr s P.Text -- ^ @router_id@ - 'P.routerId'
     -> TF.Attr s P.Text -- ^ @router_type@ - 'P.routerType'
     -> P.Resource (RouterInterfaceResource s)
-routerInterfaceResource _oppositeRegion _role _routerId _routerType =
+routerInterfaceResource _routerId _oppositeRegion _role _routerType =
     TF.unsafeResource "alicloud_router_interface" TF.validator $
         RouterInterfaceResource'
             { _description = TF.Nil
@@ -5501,11 +5501,11 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 securityGroupRuleResource
-    :: TF.Attr s P.Text -- ^ @ip_protocol@ - 'P.ipProtocol'
-    -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
+    :: TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
+    -> TF.Attr s P.Text -- ^ @ip_protocol@ - 'P.ipProtocol'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (SecurityGroupRuleResource s)
-securityGroupRuleResource _ipProtocol _securityGroupId _type' =
+securityGroupRuleResource _securityGroupId _ipProtocol _type' =
     TF.unsafeResource "alicloud_security_group_rule" TF.validator $
         SecurityGroupRuleResource'
             { _cidrIp = TF.Nil
@@ -5627,7 +5627,7 @@ slbResource =
             { _bandwidth = TF.value 1
             , _internet = TF.value P.False
             , _internetChargeType = TF.Nil
-            , _name = TF.value "tf-lb-20180816114146062100000001"
+            , _name = TF.value "tf-lb-20180816123712262900000001"
             , _specification = TF.Nil
             , _vswitchId = TF.Nil
             }
@@ -5695,10 +5695,10 @@ data SlbAttachmentResource s = SlbAttachmentResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 slbAttachmentResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @instance_ids@ - 'P.instanceIds'
-    -> TF.Attr s P.Text -- ^ @load_balancer_id@ - 'P.loadBalancerId'
+    :: TF.Attr s P.Text -- ^ @load_balancer_id@ - 'P.loadBalancerId'
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @instance_ids@ - 'P.instanceIds'
     -> P.Resource (SlbAttachmentResource s)
-slbAttachmentResource _instanceIds _loadBalancerId =
+slbAttachmentResource _loadBalancerId _instanceIds =
     TF.unsafeResource "alicloud_slb_attachment" TF.validator $
         SlbAttachmentResource'
             { _instanceIds = _instanceIds
@@ -5808,13 +5808,13 @@ data SlbListenerResource s = SlbListenerResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 slbListenerResource
-    :: TF.Attr s P.Int -- ^ @backend_port@ - 'P.backendPort'
-    -> TF.Attr s P.Int -- ^ @bandwidth@ - 'P.bandwidth'
-    -> TF.Attr s P.Int -- ^ @frontend_port@ - 'P.frontendPort'
+    :: TF.Attr s P.Int -- ^ @bandwidth@ - 'P.bandwidth'
     -> TF.Attr s P.Text -- ^ @load_balancer_id@ - 'P.loadBalancerId'
+    -> TF.Attr s P.Int -- ^ @backend_port@ - 'P.backendPort'
+    -> TF.Attr s P.Int -- ^ @frontend_port@ - 'P.frontendPort'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> P.Resource (SlbListenerResource s)
-slbListenerResource _backendPort _bandwidth _frontendPort _loadBalancerId _protocol =
+slbListenerResource _bandwidth _loadBalancerId _backendPort _frontendPort _protocol =
     TF.unsafeResource "alicloud_slb_listener" TF.validator $
         SlbListenerResource'
             { _backendPort = _backendPort
@@ -6009,11 +6009,11 @@ data SlbRuleResource s = SlbRuleResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 slbRuleResource
-    :: TF.Attr s P.Int -- ^ @frontend_port@ - 'P.frontendPort'
-    -> TF.Attr s P.Text -- ^ @load_balancer_id@ - 'P.loadBalancerId'
+    :: TF.Attr s P.Text -- ^ @load_balancer_id@ - 'P.loadBalancerId'
     -> TF.Attr s P.Text -- ^ @server_group_id@ - 'P.serverGroupId'
+    -> TF.Attr s P.Int -- ^ @frontend_port@ - 'P.frontendPort'
     -> P.Resource (SlbRuleResource s)
-slbRuleResource _frontendPort _loadBalancerId _serverGroupId =
+slbRuleResource _loadBalancerId _serverGroupId _frontendPort =
     TF.unsafeResource "alicloud_slb_rule" TF.validator $
         SlbRuleResource'
             { _domain = TF.Nil
@@ -6137,11 +6137,11 @@ data SnatEntryResource s = SnatEntryResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 snatEntryResource
-    :: TF.Attr s P.Text -- ^ @snat_ip@ - 'P.snatIp'
-    -> TF.Attr s P.Text -- ^ @snat_table_id@ - 'P.snatTableId'
+    :: TF.Attr s P.Text -- ^ @snat_table_id@ - 'P.snatTableId'
     -> TF.Attr s P.Text -- ^ @source_vswitch_id@ - 'P.sourceVswitchId'
+    -> TF.Attr s P.Text -- ^ @snat_ip@ - 'P.snatIp'
     -> P.Resource (SnatEntryResource s)
-snatEntryResource _snatIp _snatTableId _sourceVswitchId =
+snatEntryResource _snatTableId _sourceVswitchId _snatIp =
     TF.unsafeResource "alicloud_snat_entry" TF.validator $
         SnatEntryResource'
             { _snatIp = _snatIp
@@ -6197,11 +6197,11 @@ data SubnetResource s = SubnetResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 subnetResource
-    :: TF.Attr s P.Text -- ^ @availability_zone@ - 'P.availabilityZone'
-    -> TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
+    :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    -> TF.Attr s P.Text -- ^ @availability_zone@ - 'P.availabilityZone'
     -> P.Resource (SubnetResource s)
-subnetResource _availabilityZone _cidrBlock _vpcId =
+subnetResource _cidrBlock _vpcId _availabilityZone =
     TF.unsafeResource "alicloud_subnet" TF.validator $
         SubnetResource'
             { _availabilityZone = _availabilityZone
@@ -6329,11 +6329,11 @@ data VswitchResource s = VswitchResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 vswitchResource
-    :: TF.Attr s P.Text -- ^ @availability_zone@ - 'P.availabilityZone'
-    -> TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
+    :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    -> TF.Attr s P.Text -- ^ @availability_zone@ - 'P.availabilityZone'
     -> P.Resource (VswitchResource s)
-vswitchResource _availabilityZone _cidrBlock _vpcId =
+vswitchResource _cidrBlock _vpcId _availabilityZone =
     TF.unsafeResource "alicloud_vswitch" TF.validator $
         VswitchResource'
             { _availabilityZone = _availabilityZone

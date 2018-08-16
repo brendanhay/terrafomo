@@ -92,10 +92,10 @@ data Provider = Provider'
 
 newProvider
     :: P.Text -- ^ @access_key@ - 'P.accessKey'
-    -> P.Text -- ^ @region@ - 'P.region'
     -> P.Text -- ^ @secret_key@ - 'P.secretKey'
+    -> P.Text -- ^ @region@ - 'P.region'
     -> Provider
-newProvider _accessKey _region _secretKey =
+newProvider _accessKey _secretKey _region =
     Provider'
         { _accessKey = _accessKey
         , _accountId = P.Nothing
