@@ -17,7 +17,6 @@
 --
 module Terrafomo.Circonus.Resource
     (
-    -- * Resource Datatypes
     -- ** circonus_check
       CheckResource (..)
     , checkResource
@@ -135,6 +134,7 @@ data CheckResource s = CheckResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @circonus_check@ resource value.
 checkResource
     :: P.Resource (CheckResource s)
 checkResource =
@@ -404,6 +404,7 @@ data ContactGroupResource s = ContactGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @circonus_contact_group@ resource value.
 contactGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ContactGroupResource s)
@@ -586,6 +587,7 @@ data GraphResource s = GraphResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @circonus_graph@ resource value.
 graphResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (GraphResource s)
@@ -701,6 +703,7 @@ data MetricResource s = MetricResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @circonus_metric@ resource value.
 metricResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -774,6 +777,7 @@ data MetricClusterResource s = MetricClusterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @circonus_metric_cluster@ resource value.
 metricClusterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (MetricClusterResource s)
@@ -843,6 +847,7 @@ data RuleSetResource s = RuleSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @circonus_rule_set@ resource value.
 ruleSetResource
     :: TF.Attr s P.Text -- ^ @check@ - 'P.check'
     -> TF.Attr s (P.NonEmpty (TF.Attr s (IfSetting s))) -- ^ @if@ - 'P.if''

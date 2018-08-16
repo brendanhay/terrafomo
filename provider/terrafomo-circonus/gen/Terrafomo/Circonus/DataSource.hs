@@ -17,7 +17,6 @@
 --
 module Terrafomo.Circonus.DataSource
     (
-    -- * DataSource Datatypes
     -- ** circonus_account
       AccountData (..)
     , accountData
@@ -59,6 +58,7 @@ import qualified Terrafomo.Validator         as TF
 data AccountData s = AccountData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @circonus_account@ datasource value.
 accountData
     :: P.DataSource (AccountData s)
 accountData =
@@ -132,6 +132,7 @@ data CollectorData s = CollectorData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @circonus_collector@ datasource value.
 collectorData
     :: P.DataSource (CollectorData s)
 collectorData =

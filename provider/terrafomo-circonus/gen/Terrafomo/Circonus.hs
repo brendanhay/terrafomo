@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Circonus
-    ( module Terrafomo.Circonus.DataSource
-    , module Terrafomo.Circonus.Lens
-    , module Terrafomo.Circonus.Provider
-    , module Terrafomo.Circonus.Resource
-    , module Terrafomo.Circonus.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Circonus.Provider
+
+    -- * Custom Types
     , module Terrafomo.Circonus.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.Circonus.DataSource
+
+    -- * Resources
+    , module Terrafomo.Circonus.Resource
+
+    -- * Settings
+    , module Terrafomo.Circonus.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Circonus.Lens
     ) where
 
 import Terrafomo.Circonus.DataSource

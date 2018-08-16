@@ -17,7 +17,6 @@
 --
 module Terrafomo.Circonus.Settings
     (
-    -- * Settings Datatypes
     -- ** alert_option
       AlertOptionSetting (..)
     , newAlertOptionSetting
@@ -181,6 +180,7 @@ data AlertOptionSetting s = AlertOptionSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @alert_option@ settings value.
 newAlertOptionSetting
     :: TF.Attr s P.Int -- ^ @severity@ - 'P.severity'
     -> AlertOptionSetting s
@@ -232,6 +232,7 @@ data CaqlSetting s = CaqlSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @caql@ settings value.
 newCaqlSetting
     :: TF.Attr s P.Text -- ^ @query@ - 'P.query'
     -> CaqlSetting s
@@ -288,6 +289,7 @@ data CloudwatchSetting s = CloudwatchSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @cloudwatch@ settings value.
 newCloudwatchSetting
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @dimmensions@ - 'P.dimmensions'
     -> TF.Attr s P.Text -- ^ @api_key@ - 'P.apiKey'
@@ -365,6 +367,7 @@ data CollectorSetting s = CollectorSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @collector@ settings value.
 newCollectorSetting
     :: TF.Attr s P.Text -- ^ @id@ - 'P.id'
     -> CollectorSetting s
@@ -466,6 +469,7 @@ data ConsulSetting s = ConsulSetting'
     -- * 'service'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @consul@ settings value.
 newConsulSetting
     :: ConsulSetting s
 newConsulSetting =
@@ -605,6 +609,7 @@ instance P.HasState (ConsulSetting s) (TF.Attr s P.Text) where
 data DetailsSetting s = DetailsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @details@ settings value.
 newDetailsSetting
     :: DetailsSetting s
 newDetailsSetting =
@@ -663,6 +668,7 @@ data EmailSetting s = EmailSetting'
     -- * 'address'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @email@ settings value.
 newEmailSetting
     :: EmailSetting s
 newEmailSetting =
@@ -784,6 +790,7 @@ data HttpSetting s = HttpSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @http@ settings value.
 newHttpSetting
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
@@ -938,6 +945,7 @@ data HttptrapSetting s = HttptrapSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @httptrap@ settings value.
 newHttptrapSetting
     :: HttptrapSetting s
 newHttptrapSetting =
@@ -983,6 +991,7 @@ data IcmpPingSetting s = IcmpPingSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @icmp_ping@ settings value.
 newIcmpPingSetting
     :: IcmpPingSetting s
 newIcmpPingSetting =
@@ -1030,6 +1039,7 @@ data IfSetting s = IfSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @if@ settings value.
 newIfSetting
     :: IfSetting s
 newIfSetting =
@@ -1070,6 +1080,7 @@ instance P.HasValue (IfSetting s) (TF.Attr s (ValueSetting s)) where
 data InvitesSetting s = InvitesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @invites@ settings value.
 newInvitesSetting
     :: InvitesSetting s
 newInvitesSetting =
@@ -1095,6 +1106,7 @@ data IrcSetting s = IrcSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @irc@ settings value.
 newIrcSetting
     :: TF.Attr s P.Text -- ^ @user@ - 'P.user'
     -> IrcSetting s
@@ -1180,6 +1192,7 @@ data JsonSetting s = JsonSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @json@ settings value.
 newJsonSetting
     :: TF.Attr s P.Text -- ^ @url@ - 'P.url'
     -> JsonSetting s
@@ -1357,6 +1370,7 @@ data MetricSetting s = MetricSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @metric@ settings value.
 newMetricSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @metric_type@ - 'P.metricType'
@@ -1520,6 +1534,7 @@ data MetricClusterSetting s = MetricClusterSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @metric_cluster@ settings value.
 newMetricClusterSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> MetricClusterSetting s
@@ -1589,6 +1604,7 @@ data MysqlSetting s = MysqlSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @mysql@ settings value.
 newMysqlSetting
     :: TF.Attr s P.Text -- ^ @dsn@ - 'P.dsn'
     -> TF.Attr s P.Text -- ^ @query@ - 'P.query'
@@ -1631,6 +1647,7 @@ data OverSetting s = OverSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @over@ settings value.
 newOverSetting
     :: OverSetting s
 newOverSetting =
@@ -1672,6 +1689,7 @@ data PagerDutySetting s = PagerDutySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @pager_duty@ settings value.
 newPagerDutySetting
     :: TF.Attr s P.Text -- ^ @service_key@ - 'P.serviceKey'
     -> TF.Attr s P.Text -- ^ @webhook_url@ - 'P.webhookUrl'
@@ -1721,6 +1739,7 @@ data PostgresqlSetting s = PostgresqlSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @postgresql@ settings value.
 newPostgresqlSetting
     :: TF.Attr s P.Text -- ^ @dsn@ - 'P.dsn'
     -> TF.Attr s P.Text -- ^ @query@ - 'P.query'
@@ -1763,6 +1782,7 @@ data QuerySetting s = QuerySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @query@ settings value.
 newQuerySetting
     :: TF.Attr s P.Text -- ^ @definition@ - 'P.definition'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -1813,6 +1833,7 @@ data SlackSetting s = SlackSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @slack@ settings value.
 newSlackSetting
     :: TF.Attr s P.Text -- ^ @channel@ - 'P.channel'
     -> TF.Attr s P.Text -- ^ @team@ - 'P.team'
@@ -1880,6 +1901,7 @@ data SmsSetting s = SmsSetting'
     -- * 'address'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @sms@ settings value.
 newSmsSetting
     :: SmsSetting s
 newSmsSetting =
@@ -1927,6 +1949,7 @@ data StatsdSetting s = StatsdSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @statsd@ settings value.
 newStatsdSetting
     :: TF.Attr s P.Text -- ^ @source_ip@ - 'P.sourceIp'
     -> StatsdSetting s
@@ -1989,6 +2012,7 @@ data TcpSetting s = TcpSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @tcp@ settings value.
 newTcpSetting
     :: TF.Attr s P.Text -- ^ @host@ - 'P.host'
     -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
@@ -2079,6 +2103,7 @@ data ThenSetting s = ThenSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @then@ settings value.
 newThenSetting
     :: ThenSetting s
 newThenSetting =
@@ -2118,6 +2143,7 @@ instance P.HasSeverity (ThenSetting s) (TF.Attr s P.Int) where
 data UsageSetting s = UsageSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @usage@ settings value.
 newUsageSetting
     :: UsageSetting s
 newUsageSetting =
@@ -2143,6 +2169,7 @@ instance s ~ s' => P.HasComputedUsed (TF.Ref s' (UsageSetting s)) (TF.Attr s P.I
 data UsersSetting s = UsersSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @users@ settings value.
 newUsersSetting
     :: UsersSetting s
 newUsersSetting =
@@ -2288,6 +2315,7 @@ data ValueSetting s = ValueSetting'
     -- * 'notMatch'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @value@ settings value.
 newValueSetting
     :: ValueSetting s
 newValueSetting =
@@ -2437,6 +2465,7 @@ data VictoropsSetting s = VictoropsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @victorops@ settings value.
 newVictoropsSetting
     :: TF.Attr s P.Int -- ^ @critical@ - 'P.critical'
     -> TF.Attr s P.Int -- ^ @info@ - 'P.info'
@@ -2514,6 +2543,7 @@ data XmppSetting s = XmppSetting'
     -- * 'address'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @xmpp@ settings value.
 newXmppSetting
     :: XmppSetting s
 newXmppSetting =
