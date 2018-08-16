@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "backendSetting",
+                "smart": "newBackendSetting",
                 "name": "BackendSetting'"
             },
             "arguments": [
@@ -496,7 +496,7 @@
         },
         {
             "con": {
-                "smart": "bigqueryloggingSetting",
+                "smart": "newBigqueryloggingSetting",
                 "name": "BigqueryloggingSetting'"
             },
             "arguments": [
@@ -742,8 +742,8 @@
         },
         {
             "con": {
-                "smart": "cacheSettingSetting",
-                "name": "CacheSettingSetting'"
+                "smart": "newCacheSetting",
+                "name": "CacheSetting'"
             },
             "arguments": [
                 {
@@ -843,7 +843,7 @@
                 }
             ],
             "key": "fastly_service_v1.cache_setting",
-            "name": "CacheSettingSetting",
+            "name": "CacheSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -868,12 +868,12 @@
                 }
             ],
             "conflicts": [],
-            "type": "CacheSettingSetting s",
+            "type": "CacheSetting s",
             "original": "cache_setting"
         },
         {
             "con": {
-                "smart": "conditionSetting",
+                "smart": "newConditionSetting",
                 "name": "ConditionSetting'"
             },
             "arguments": [
@@ -1020,7 +1020,7 @@
         },
         {
             "con": {
-                "smart": "domainSetting",
+                "smart": "newDomainSetting",
                 "name": "DomainSetting'"
             },
             "arguments": [
@@ -1092,7 +1092,7 @@
         },
         {
             "con": {
-                "smart": "gcsloggingSetting",
+                "smart": "newGcsloggingSetting",
                 "name": "GcsloggingSetting'"
             },
             "arguments": [
@@ -1357,7 +1357,7 @@
         },
         {
             "con": {
-                "smart": "gzipSetting",
+                "smart": "newGzipSetting",
                 "name": "GzipSetting'"
             },
             "arguments": [
@@ -1469,7 +1469,7 @@
         },
         {
             "con": {
-                "smart": "headerSetting",
+                "smart": "newHeaderSetting",
                 "name": "HeaderSetting'"
             },
             "arguments": [
@@ -1855,7 +1855,7 @@
         },
         {
             "con": {
-                "smart": "healthcheckSetting",
+                "smart": "newHealthcheckSetting",
                 "name": "HealthcheckSetting'"
             },
             "arguments": [
@@ -2138,7 +2138,7 @@
         },
         {
             "con": {
-                "smart": "logentriesSetting",
+                "smart": "newLogentriesSetting",
                 "name": "LogentriesSetting'"
             },
             "arguments": [
@@ -2327,7 +2327,7 @@
         },
         {
             "con": {
-                "smart": "papertrailSetting",
+                "smart": "newPapertrailSetting",
                 "name": "PapertrailSetting'"
             },
             "arguments": [
@@ -2496,8 +2496,8 @@
         },
         {
             "con": {
-                "smart": "requestSettingSetting",
-                "name": "RequestSettingSetting'"
+                "smart": "newRequestSetting",
+                "name": "RequestSetting'"
             },
             "arguments": [
                 {
@@ -2732,7 +2732,7 @@
                 }
             ],
             "key": "fastly_service_v1.request_setting",
-            "name": "RequestSettingSetting",
+            "name": "RequestSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -2757,12 +2757,12 @@
                 }
             ],
             "conflicts": [],
-            "type": "RequestSettingSetting s",
+            "type": "RequestSetting s",
             "original": "request_setting"
         },
         {
             "con": {
-                "smart": "responseObjectSetting",
+                "smart": "newResponseObjectSetting",
                 "name": "ResponseObjectSetting'"
             },
             "arguments": [
@@ -2933,7 +2933,7 @@
         },
         {
             "con": {
-                "smart": "s3loggingSetting",
+                "smart": "newS3loggingSetting",
                 "name": "S3loggingSetting'"
             },
             "arguments": [
@@ -3255,7 +3255,7 @@
         },
         {
             "con": {
-                "smart": "sumologicSetting",
+                "smart": "newSumologicSetting",
                 "name": "SumologicSetting'"
             },
             "arguments": [
@@ -3425,7 +3425,7 @@
         },
         {
             "con": {
-                "smart": "syslogSetting",
+                "smart": "newSyslogSetting",
                 "name": "SyslogSetting'"
             },
             "arguments": [
@@ -3689,7 +3689,7 @@
         },
         {
             "con": {
-                "smart": "vclSetting",
+                "smart": "newVclSetting",
                 "name": "VclSetting'"
             },
             "arguments": [
@@ -3906,7 +3906,7 @@
                     "method": "cacheSetting",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (CacheSettingSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (CacheSetting s)]",
                     "class": "HasCacheSetting",
                     "validate": false,
                     "optional": true,
@@ -4133,7 +4133,7 @@
                     "method": "requestSetting",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RequestSettingSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (RequestSetting s)]",
                     "class": "HasRequestSetting",
                     "validate": false,
                     "optional": true,
