@@ -54,10 +54,9 @@ import GHC.Base (($))
 
 import Terrafomo.Docker.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
+import qualified Data.Map.Strict           as Map
 import qualified Data.Maybe                as P
 import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
@@ -86,14 +85,14 @@ data ConfigResource s = ConfigResource'
     -- ^ @name@ - (Required, Forces New)
     -- User-defined name of the config
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 configResource
     :: TF.Attr s P.Text -- ^ @data@ - 'P.data''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ConfigResource s)
 configResource _data' _name =
-    TF.newResource "docker_config" TF.validator $
+    TF.unsafeResource "docker_config" P.defaultProvider TF.validator $
         ConfigResource'
             { _data' = _data'
             , _name = _name
@@ -123,19 +122,19 @@ instance P.HasName (ConfigResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/docker/r/container.html terraform documentation>
 -- for more information.
 data ContainerResource s = ContainerResource'
-    { _capabilities        :: TF.Attr s (ContainerCapabilities s)
+    { _capabilities        :: TF.Attr s (CapabilitiesSetting s)
     -- ^ @capabilities@ - (Optional, Forces New)
     --
     , _command             :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @command@ - (Optional, Forces New)
     --
-    , _cpuShares           :: TF.Attr s P.Integer
+    , _cpuShares           :: TF.Attr s P.Int
     -- ^ @cpu_shares@ - (Optional, Forces New)
     --
-    , _destroyGraceSeconds :: TF.Attr s P.Integer
+    , _destroyGraceSeconds :: TF.Attr s P.Int
     -- ^ @destroy_grace_seconds@ - (Optional)
     --
-    , _devices             :: TF.Attr s [TF.Attr s (ContainerDevices s)]
+    , _devices             :: TF.Attr s [TF.Attr s (DevicesSetting s)]
     -- ^ @devices@ - (Optional, Forces New)
     --
     , _dns                 :: TF.Attr s [TF.Attr s P.Text]
@@ -156,7 +155,7 @@ data ContainerResource s = ContainerResource'
     , _env                 :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @env@ - (Optional, Forces New)
     --
-    , _host                :: TF.Attr s [TF.Attr s (ContainerHost s)]
+    , _host                :: TF.Attr s [TF.Attr s (HostSetting s)]
     -- ^ @host@ - (Optional, Forces New)
     --
     , _hostname            :: TF.Attr s P.Text
@@ -165,22 +164,22 @@ data ContainerResource s = ContainerResource'
     , _image               :: TF.Attr s P.Text
     -- ^ @image@ - (Required, Forces New)
     --
-    , _labels              :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional, Forces New)
     --
     , _logDriver           :: TF.Attr s P.Text
     -- ^ @log_driver@ - (Optional, Forces New)
     --
-    , _logOpts             :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _logOpts             :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @log_opts@ - (Optional, Forces New)
     --
-    , _maxRetryCount       :: TF.Attr s P.Integer
+    , _maxRetryCount       :: TF.Attr s P.Int
     -- ^ @max_retry_count@ - (Optional, Forces New)
     --
-    , _memory              :: TF.Attr s P.Integer
+    , _memory              :: TF.Attr s P.Int
     -- ^ @memory@ - (Optional, Forces New)
     --
-    , _memorySwap          :: TF.Attr s P.Integer
+    , _memorySwap          :: TF.Attr s P.Int
     -- ^ @memory_swap@ - (Optional, Forces New)
     --
     , _mustRun             :: TF.Attr s P.Bool
@@ -198,7 +197,7 @@ data ContainerResource s = ContainerResource'
     , _networks            :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @networks@ - (Optional, Forces New)
     --
-    , _ports               :: TF.Attr s [TF.Attr s (ContainerPorts s)]
+    , _ports               :: TF.Attr s [TF.Attr s (PortsSetting s)]
     -- ^ @ports@ - (Optional, Forces New)
     --
     , _privileged          :: TF.Attr s P.Bool
@@ -210,26 +209,26 @@ data ContainerResource s = ContainerResource'
     , _restart             :: TF.Attr s P.Text
     -- ^ @restart@ - (Optional, Forces New)
     --
-    , _ulimit              :: TF.Attr s [TF.Attr s (ContainerUlimit s)]
+    , _ulimit              :: TF.Attr s [TF.Attr s (UlimitSetting s)]
     -- ^ @ulimit@ - (Optional, Forces New)
     --
-    , _upload              :: TF.Attr s [TF.Attr s (ContainerUpload s)]
+    , _upload              :: TF.Attr s [TF.Attr s (UploadSetting s)]
     -- ^ @upload@ - (Optional, Forces New)
     --
     , _user                :: TF.Attr s P.Text
     -- ^ @user@ - (Optional, Forces New)
     --
-    , _volumes             :: TF.Attr s [TF.Attr s (ContainerVolumes s)]
+    , _volumes             :: TF.Attr s [TF.Attr s (VolumesSetting s)]
     -- ^ @volumes@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 containerResource
     :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ContainerResource s)
 containerResource _image _name =
-    TF.newResource "docker_container" TF.validator $
+    TF.unsafeResource "docker_container" P.defaultProvider TF.validator $
         ContainerResource'
             { _capabilities = TF.Nil
             , _command = TF.Nil
@@ -307,36 +306,12 @@ instance TF.IsValid (ContainerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_capabilities"
                   (_capabilities
-                      :: ContainerResource s -> TF.Attr s (ContainerCapabilities s))
-                  TF.validator
-           P.<> TF.settingsValidator "_devices"
-                  (_devices
-                      :: ContainerResource s -> TF.Attr s [TF.Attr s (ContainerDevices s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_host"
-                  (_host
-                      :: ContainerResource s -> TF.Attr s [TF.Attr s (ContainerHost s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_ports"
-                  (_ports
-                      :: ContainerResource s -> TF.Attr s [TF.Attr s (ContainerPorts s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_ulimit"
-                  (_ulimit
-                      :: ContainerResource s -> TF.Attr s [TF.Attr s (ContainerUlimit s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_upload"
-                  (_upload
-                      :: ContainerResource s -> TF.Attr s [TF.Attr s (ContainerUpload s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_volumes"
-                  (_volumes
-                      :: ContainerResource s -> TF.Attr s [TF.Attr s (ContainerVolumes s)])
+                      :: ContainerResource s -> TF.Attr s (CapabilitiesSetting s))
                   TF.validator
 
-instance P.HasCapabilities (ContainerResource s) (TF.Attr s (ContainerCapabilities s)) where
+instance P.HasCapabilities (ContainerResource s) (TF.Attr s (CapabilitiesSetting s)) where
     capabilities =
-        P.lens (_capabilities :: ContainerResource s -> TF.Attr s (ContainerCapabilities s))
+        P.lens (_capabilities :: ContainerResource s -> TF.Attr s (CapabilitiesSetting s))
                (\s a -> s { _capabilities = a } :: ContainerResource s)
 
 instance P.HasCommand (ContainerResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -344,19 +319,19 @@ instance P.HasCommand (ContainerResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_command :: ContainerResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _command = a } :: ContainerResource s)
 
-instance P.HasCpuShares (ContainerResource s) (TF.Attr s P.Integer) where
+instance P.HasCpuShares (ContainerResource s) (TF.Attr s P.Int) where
     cpuShares =
-        P.lens (_cpuShares :: ContainerResource s -> TF.Attr s P.Integer)
+        P.lens (_cpuShares :: ContainerResource s -> TF.Attr s P.Int)
                (\s a -> s { _cpuShares = a } :: ContainerResource s)
 
-instance P.HasDestroyGraceSeconds (ContainerResource s) (TF.Attr s P.Integer) where
+instance P.HasDestroyGraceSeconds (ContainerResource s) (TF.Attr s P.Int) where
     destroyGraceSeconds =
-        P.lens (_destroyGraceSeconds :: ContainerResource s -> TF.Attr s P.Integer)
+        P.lens (_destroyGraceSeconds :: ContainerResource s -> TF.Attr s P.Int)
                (\s a -> s { _destroyGraceSeconds = a } :: ContainerResource s)
 
-instance P.HasDevices (ContainerResource s) (TF.Attr s [TF.Attr s (ContainerDevices s)]) where
+instance P.HasDevices (ContainerResource s) (TF.Attr s [TF.Attr s (DevicesSetting s)]) where
     devices =
-        P.lens (_devices :: ContainerResource s -> TF.Attr s [TF.Attr s (ContainerDevices s)])
+        P.lens (_devices :: ContainerResource s -> TF.Attr s [TF.Attr s (DevicesSetting s)])
                (\s a -> s { _devices = a } :: ContainerResource s)
 
 instance P.HasDns (ContainerResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -389,9 +364,9 @@ instance P.HasEnv (ContainerResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_env :: ContainerResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _env = a } :: ContainerResource s)
 
-instance P.HasHost (ContainerResource s) (TF.Attr s [TF.Attr s (ContainerHost s)]) where
+instance P.HasHost (ContainerResource s) (TF.Attr s [TF.Attr s (HostSetting s)]) where
     host =
-        P.lens (_host :: ContainerResource s -> TF.Attr s [TF.Attr s (ContainerHost s)])
+        P.lens (_host :: ContainerResource s -> TF.Attr s [TF.Attr s (HostSetting s)])
                (\s a -> s { _host = a } :: ContainerResource s)
 
 instance P.HasHostname (ContainerResource s) (TF.Attr s P.Text) where
@@ -404,9 +379,9 @@ instance P.HasImage (ContainerResource s) (TF.Attr s P.Text) where
         P.lens (_image :: ContainerResource s -> TF.Attr s P.Text)
                (\s a -> s { _image = a } :: ContainerResource s)
 
-instance P.HasLabels (ContainerResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (ContainerResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
-        P.lens (_labels :: ContainerResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_labels :: ContainerResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: ContainerResource s)
 
 instance P.HasLogDriver (ContainerResource s) (TF.Attr s P.Text) where
@@ -414,24 +389,24 @@ instance P.HasLogDriver (ContainerResource s) (TF.Attr s P.Text) where
         P.lens (_logDriver :: ContainerResource s -> TF.Attr s P.Text)
                (\s a -> s { _logDriver = a } :: ContainerResource s)
 
-instance P.HasLogOpts (ContainerResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasLogOpts (ContainerResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     logOpts =
-        P.lens (_logOpts :: ContainerResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_logOpts :: ContainerResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _logOpts = a } :: ContainerResource s)
 
-instance P.HasMaxRetryCount (ContainerResource s) (TF.Attr s P.Integer) where
+instance P.HasMaxRetryCount (ContainerResource s) (TF.Attr s P.Int) where
     maxRetryCount =
-        P.lens (_maxRetryCount :: ContainerResource s -> TF.Attr s P.Integer)
+        P.lens (_maxRetryCount :: ContainerResource s -> TF.Attr s P.Int)
                (\s a -> s { _maxRetryCount = a } :: ContainerResource s)
 
-instance P.HasMemory (ContainerResource s) (TF.Attr s P.Integer) where
+instance P.HasMemory (ContainerResource s) (TF.Attr s P.Int) where
     memory =
-        P.lens (_memory :: ContainerResource s -> TF.Attr s P.Integer)
+        P.lens (_memory :: ContainerResource s -> TF.Attr s P.Int)
                (\s a -> s { _memory = a } :: ContainerResource s)
 
-instance P.HasMemorySwap (ContainerResource s) (TF.Attr s P.Integer) where
+instance P.HasMemorySwap (ContainerResource s) (TF.Attr s P.Int) where
     memorySwap =
-        P.lens (_memorySwap :: ContainerResource s -> TF.Attr s P.Integer)
+        P.lens (_memorySwap :: ContainerResource s -> TF.Attr s P.Int)
                (\s a -> s { _memorySwap = a } :: ContainerResource s)
 
 instance P.HasMustRun (ContainerResource s) (TF.Attr s P.Bool) where
@@ -459,9 +434,9 @@ instance P.HasNetworks (ContainerResource s) (TF.Attr s [TF.Attr s P.Text]) wher
         P.lens (_networks :: ContainerResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _networks = a } :: ContainerResource s)
 
-instance P.HasPorts (ContainerResource s) (TF.Attr s [TF.Attr s (ContainerPorts s)]) where
+instance P.HasPorts (ContainerResource s) (TF.Attr s [TF.Attr s (PortsSetting s)]) where
     ports =
-        P.lens (_ports :: ContainerResource s -> TF.Attr s [TF.Attr s (ContainerPorts s)])
+        P.lens (_ports :: ContainerResource s -> TF.Attr s [TF.Attr s (PortsSetting s)])
                (\s a -> s { _ports = a } :: ContainerResource s)
 
 instance P.HasPrivileged (ContainerResource s) (TF.Attr s P.Bool) where
@@ -479,14 +454,14 @@ instance P.HasRestart (ContainerResource s) (TF.Attr s P.Text) where
         P.lens (_restart :: ContainerResource s -> TF.Attr s P.Text)
                (\s a -> s { _restart = a } :: ContainerResource s)
 
-instance P.HasUlimit (ContainerResource s) (TF.Attr s [TF.Attr s (ContainerUlimit s)]) where
+instance P.HasUlimit (ContainerResource s) (TF.Attr s [TF.Attr s (UlimitSetting s)]) where
     ulimit =
-        P.lens (_ulimit :: ContainerResource s -> TF.Attr s [TF.Attr s (ContainerUlimit s)])
+        P.lens (_ulimit :: ContainerResource s -> TF.Attr s [TF.Attr s (UlimitSetting s)])
                (\s a -> s { _ulimit = a } :: ContainerResource s)
 
-instance P.HasUpload (ContainerResource s) (TF.Attr s [TF.Attr s (ContainerUpload s)]) where
+instance P.HasUpload (ContainerResource s) (TF.Attr s [TF.Attr s (UploadSetting s)]) where
     upload =
-        P.lens (_upload :: ContainerResource s -> TF.Attr s [TF.Attr s (ContainerUpload s)])
+        P.lens (_upload :: ContainerResource s -> TF.Attr s [TF.Attr s (UploadSetting s)])
                (\s a -> s { _upload = a } :: ContainerResource s)
 
 instance P.HasUser (ContainerResource s) (TF.Attr s P.Text) where
@@ -494,9 +469,9 @@ instance P.HasUser (ContainerResource s) (TF.Attr s P.Text) where
         P.lens (_user :: ContainerResource s -> TF.Attr s P.Text)
                (\s a -> s { _user = a } :: ContainerResource s)
 
-instance P.HasVolumes (ContainerResource s) (TF.Attr s [TF.Attr s (ContainerVolumes s)]) where
+instance P.HasVolumes (ContainerResource s) (TF.Attr s [TF.Attr s (VolumesSetting s)]) where
     volumes =
-        P.lens (_volumes :: ContainerResource s -> TF.Attr s [TF.Attr s (ContainerVolumes s)])
+        P.lens (_volumes :: ContainerResource s -> TF.Attr s [TF.Attr s (VolumesSetting s)])
                (\s a -> s { _volumes = a } :: ContainerResource s)
 
 instance s ~ s' => P.HasComputedBridge (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
@@ -508,7 +483,7 @@ instance s ~ s' => P.HasComputedGateway (TF.Ref s' (ContainerResource s)) (TF.At
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
-instance s ~ s' => P.HasComputedIpPrefixLength (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedIpPrefixLength (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Int) where
     computedIpPrefixLength x = TF.compute (TF.refKey x) "ip_prefix_length"
 
 -- | @docker_image@ Resource.
@@ -525,13 +500,13 @@ data ImageResource s = ImageResource'
     , _pullTriggers :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @pull_triggers@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 imageResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ImageResource s)
 imageResource _name =
-    TF.newResource "docker_image" TF.validator $
+    TF.unsafeResource "docker_image" P.defaultProvider TF.validator $
         ImageResource'
             { _keepLocally = TF.Nil
             , _name = _name
@@ -574,7 +549,7 @@ data NetworkResource s = NetworkResource'
     { _checkDuplicate :: TF.Attr s P.Bool
     -- ^ @check_duplicate@ - (Optional, Forces New)
     --
-    , _ipamConfig     :: TF.Attr s [TF.Attr s (NetworkIpamConfig s)]
+    , _ipamConfig     :: TF.Attr s [TF.Attr s (IpamConfigSetting s)]
     -- ^ @ipam_config@ - (Optional, Forces New)
     --
     , _ipamDriver     :: TF.Attr s P.Text
@@ -583,13 +558,13 @@ data NetworkResource s = NetworkResource'
     , _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NetworkResource s)
 networkResource _name =
-    TF.newResource "docker_network" TF.validator $
+    TF.unsafeResource "docker_network" P.defaultProvider TF.validator $
         NetworkResource'
             { _checkDuplicate = TF.Nil
             , _ipamConfig = TF.Nil
@@ -607,19 +582,15 @@ instance TF.IsObject (NetworkResource s) where
 
 instance TF.IsValid (NetworkResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_ipamConfig"
-                  (_ipamConfig
-                      :: NetworkResource s -> TF.Attr s [TF.Attr s (NetworkIpamConfig s)])
-                  TF.validator
 
 instance P.HasCheckDuplicate (NetworkResource s) (TF.Attr s P.Bool) where
     checkDuplicate =
         P.lens (_checkDuplicate :: NetworkResource s -> TF.Attr s P.Bool)
                (\s a -> s { _checkDuplicate = a } :: NetworkResource s)
 
-instance P.HasIpamConfig (NetworkResource s) (TF.Attr s [TF.Attr s (NetworkIpamConfig s)]) where
+instance P.HasIpamConfig (NetworkResource s) (TF.Attr s [TF.Attr s (IpamConfigSetting s)]) where
     ipamConfig =
-        P.lens (_ipamConfig :: NetworkResource s -> TF.Attr s [TF.Attr s (NetworkIpamConfig s)])
+        P.lens (_ipamConfig :: NetworkResource s -> TF.Attr s [TF.Attr s (IpamConfigSetting s)])
                (\s a -> s { _ipamConfig = a } :: NetworkResource s)
 
 instance P.HasIpamDriver (NetworkResource s) (TF.Attr s P.Text) where
@@ -638,7 +609,7 @@ instance s ~ s' => P.HasComputedDriver (TF.Ref s' (NetworkResource s)) (TF.Attr 
 instance s ~ s' => P.HasComputedInternal (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Bool) where
     computedInternal x = TF.compute (TF.refKey x) "internal"
 
-instance s ~ s' => P.HasComputedOptions (TF.Ref s' (NetworkResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedOptions (TF.Ref s' (NetworkResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedOptions x = TF.compute (TF.refKey x) "options"
 
 instance s ~ s' => P.HasComputedScope (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
@@ -657,14 +628,14 @@ data SecretResource s = SecretResource'
     -- ^ @name@ - (Required, Forces New)
     -- User-defined name of the secret
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 secretResource
     :: TF.Attr s P.Text -- ^ @data@ - 'P.data''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SecretResource s)
 secretResource _data' _name =
-    TF.newResource "docker_secret" TF.validator $
+    TF.unsafeResource "docker_secret" P.defaultProvider TF.validator $
         SecretResource'
             { _data' = _data'
             , _name = _name
@@ -694,10 +665,10 @@ instance P.HasName (SecretResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/docker/r/service.html terraform documentation>
 -- for more information.
 data ServiceResource s = ServiceResource'
-    { _auth           :: TF.Attr s (P.HashMap P.Text (ServiceAuth s))
+    { _auth           :: TF.Attr s (P.Map P.Text (TF.Attr s (AuthSetting s)))
     -- ^ @auth@ - (Optional, Forces New)
     --
-    , _convergeConfig :: TF.Attr s (ServiceConvergeConfig s)
+    , _convergeConfig :: TF.Attr s (ConvergeConfigSetting s)
     -- ^ @converge_config@ - (Optional)
     -- A configuration to ensure that a service converges aka reaches the desired
     -- that of all task up and running
@@ -706,26 +677,26 @@ data ServiceResource s = ServiceResource'
     -- ^ @name@ - (Required, Forces New)
     -- Name of the service
     --
-    , _rollbackConfig :: TF.Attr s (ServiceRollbackConfig s)
+    , _rollbackConfig :: TF.Attr s (RollbackConfigSetting s)
     -- ^ @rollback_config@ - (Optional)
     -- Specification for the rollback strategy of the service
     --
-    , _taskSpec       :: TF.Attr s (ServiceTaskSpec s)
+    , _taskSpec       :: TF.Attr s (TaskSpecSetting s)
     -- ^ @task_spec@ - (Required)
     -- User modifiable task configuration
     --
-    , _updateConfig   :: TF.Attr s (ServiceUpdateConfig s)
+    , _updateConfig   :: TF.Attr s (UpdateConfigSetting s)
     -- ^ @update_config@ - (Optional)
     -- Specification for the update strategy of the service
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 serviceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (ServiceTaskSpec s) -- ^ @task_spec@ - 'P.taskSpec'
+    -> TF.Attr s (TaskSpecSetting s) -- ^ @task_spec@ - 'P.taskSpec'
     -> P.Resource (ServiceResource s)
 serviceResource _name _taskSpec =
-    TF.newResource "docker_service" TF.validator $
+    TF.unsafeResource "docker_service" P.defaultProvider TF.validator $
         ServiceResource'
             { _auth = TF.Nil
             , _convergeConfig = TF.Nil
@@ -747,35 +718,31 @@ instance TF.IsObject (ServiceResource s) where
 
 instance TF.IsValid (ServiceResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_auth"
-                  (_auth
-                      :: ServiceResource s -> TF.Attr s (P.HashMap P.Text (ServiceAuth s)))
-                  TF.validator
            P.<> TF.settingsValidator "_convergeConfig"
                   (_convergeConfig
-                      :: ServiceResource s -> TF.Attr s (ServiceConvergeConfig s))
+                      :: ServiceResource s -> TF.Attr s (ConvergeConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_rollbackConfig"
                   (_rollbackConfig
-                      :: ServiceResource s -> TF.Attr s (ServiceRollbackConfig s))
+                      :: ServiceResource s -> TF.Attr s (RollbackConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_taskSpec"
                   (_taskSpec
-                      :: ServiceResource s -> TF.Attr s (ServiceTaskSpec s))
+                      :: ServiceResource s -> TF.Attr s (TaskSpecSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_updateConfig"
                   (_updateConfig
-                      :: ServiceResource s -> TF.Attr s (ServiceUpdateConfig s))
+                      :: ServiceResource s -> TF.Attr s (UpdateConfigSetting s))
                   TF.validator
 
-instance P.HasAuth (ServiceResource s) (TF.Attr s (P.HashMap P.Text (ServiceAuth s))) where
+instance P.HasAuth (ServiceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s (AuthSetting s)))) where
     auth =
-        P.lens (_auth :: ServiceResource s -> TF.Attr s (P.HashMap P.Text (ServiceAuth s)))
+        P.lens (_auth :: ServiceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s (AuthSetting s))))
                (\s a -> s { _auth = a } :: ServiceResource s)
 
-instance P.HasConvergeConfig (ServiceResource s) (TF.Attr s (ServiceConvergeConfig s)) where
+instance P.HasConvergeConfig (ServiceResource s) (TF.Attr s (ConvergeConfigSetting s)) where
     convergeConfig =
-        P.lens (_convergeConfig :: ServiceResource s -> TF.Attr s (ServiceConvergeConfig s))
+        P.lens (_convergeConfig :: ServiceResource s -> TF.Attr s (ConvergeConfigSetting s))
                (\s a -> s { _convergeConfig = a } :: ServiceResource s)
 
 instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
@@ -783,28 +750,28 @@ instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ServiceResource s)
 
-instance P.HasRollbackConfig (ServiceResource s) (TF.Attr s (ServiceRollbackConfig s)) where
+instance P.HasRollbackConfig (ServiceResource s) (TF.Attr s (RollbackConfigSetting s)) where
     rollbackConfig =
-        P.lens (_rollbackConfig :: ServiceResource s -> TF.Attr s (ServiceRollbackConfig s))
+        P.lens (_rollbackConfig :: ServiceResource s -> TF.Attr s (RollbackConfigSetting s))
                (\s a -> s { _rollbackConfig = a } :: ServiceResource s)
 
-instance P.HasTaskSpec (ServiceResource s) (TF.Attr s (ServiceTaskSpec s)) where
+instance P.HasTaskSpec (ServiceResource s) (TF.Attr s (TaskSpecSetting s)) where
     taskSpec =
-        P.lens (_taskSpec :: ServiceResource s -> TF.Attr s (ServiceTaskSpec s))
+        P.lens (_taskSpec :: ServiceResource s -> TF.Attr s (TaskSpecSetting s))
                (\s a -> s { _taskSpec = a } :: ServiceResource s)
 
-instance P.HasUpdateConfig (ServiceResource s) (TF.Attr s (ServiceUpdateConfig s)) where
+instance P.HasUpdateConfig (ServiceResource s) (TF.Attr s (UpdateConfigSetting s)) where
     updateConfig =
-        P.lens (_updateConfig :: ServiceResource s -> TF.Attr s (ServiceUpdateConfig s))
+        P.lens (_updateConfig :: ServiceResource s -> TF.Attr s (UpdateConfigSetting s))
                (\s a -> s { _updateConfig = a } :: ServiceResource s)
 
-instance s ~ s' => P.HasComputedEndpointSpec (TF.Ref s' (ServiceResource s)) (TF.Attr s (ServiceEndpointSpec s)) where
+instance s ~ s' => P.HasComputedEndpointSpec (TF.Ref s' (ServiceResource s)) (TF.Attr s (EndpointSpecSetting s)) where
     computedEndpointSpec x = TF.compute (TF.refKey x) "endpoint_spec"
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ServiceResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ServiceResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedLabels x = TF.compute (TF.refKey x) "labels"
 
-instance s ~ s' => P.HasComputedMode (TF.Ref s' (ServiceResource s)) (TF.Attr s (ServiceMode s)) where
+instance s ~ s' => P.HasComputedMode (TF.Ref s' (ServiceResource s)) (TF.Attr s (ModeSetting s)) where
     computedMode x = TF.compute (TF.refKey x) "mode"
 
 -- | @docker_volume@ Resource.
@@ -812,15 +779,15 @@ instance s ~ s' => P.HasComputedMode (TF.Ref s' (ServiceResource s)) (TF.Attr s 
 -- See the <https://www.terraform.io/docs/providers/docker/r/volume.html terraform documentation>
 -- for more information.
 data VolumeResource s = VolumeResource'
-    { _driverOpts :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _driverOpts :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @driver_opts@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 volumeResource
     :: P.Resource (VolumeResource s)
 volumeResource =
-    TF.newResource "docker_volume" TF.validator $
+    TF.unsafeResource "docker_volume" P.defaultProvider TF.validator $
         VolumeResource'
             { _driverOpts = TF.Nil
             }
@@ -833,9 +800,9 @@ instance TF.IsObject (VolumeResource s) where
 instance TF.IsValid (VolumeResource s) where
     validator = P.mempty
 
-instance P.HasDriverOpts (VolumeResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasDriverOpts (VolumeResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     driverOpts =
-        P.lens (_driverOpts :: VolumeResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_driverOpts :: VolumeResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _driverOpts = a } :: VolumeResource s)
 
 instance s ~ s' => P.HasComputedDriver (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where

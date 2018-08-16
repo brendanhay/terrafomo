@@ -20,6 +20,7 @@ module Terrafomo.Docker.Provider
     -- * Docker Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * Docker Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.Docker.Settings
 
-import qualified Data.Hashable          as P
-import qualified Data.HashMap.Strict    as P
-import qualified Data.HashMap.Strict    as Map
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Map.Strict        as P
+import qualified Data.Map.Strict        as Map
 import qualified Data.Maybe             as P
 import qualified Data.Monoid            as P
 import qualified Data.Text              as P
@@ -81,10 +81,10 @@ data Provider = Provider'
     -- ^ @key_material@ - (Optional)
     -- PEM-encoded content of Docker client private key
     --
-    , _registryAuth :: P.Maybe [RegistryAuth]
+    , _registryAuth :: P.Maybe [RegistryAuthSetting]
     -- ^ @registry_auth@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: P.Text -- ^ @host@ - 'P.host'
@@ -99,33 +99,26 @@ newProvider _host =
         , _registryAuth = P.Nothing
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "ca_material" <$> _caMaterial
-                  , TF.assign "cert_material" <$> _certMaterial
-                  , TF.assign "cert_path" <$> _certPath
-                  , P.Just $ TF.assign "host" _host
-                  , TF.assign "key_material" <$> _keyMaterial
-                  , TF.assign "registry_auth" <$> _registryAuth
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  TF.assign "ca_material" <$> _caMaterial
+        ,  TF.assign "cert_material" <$> _certMaterial
+        ,  TF.assign "cert_path" <$> _certPath
+        ,  P.Just $ TF.assign "host" _host
+        ,  TF.assign "key_material" <$> _keyMaterial
+        ,  TF.assign "registry_auth" <$> _registryAuth
+        ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_registryAuth"
-                  (_registryAuth
-                      :: Provider -> P.Maybe [RegistryAuth])
-                  TF.validator
 
 instance P.HasCaMaterial (Provider) (P.Maybe P.Text) where
     caMaterial =
@@ -152,7 +145,7 @@ instance P.HasKeyMaterial (Provider) (P.Maybe P.Text) where
         P.lens (_keyMaterial :: Provider -> P.Maybe P.Text)
                (\s a -> s { _keyMaterial = a } :: Provider)
 
-instance P.HasRegistryAuth (Provider) (P.Maybe [RegistryAuth]) where
+instance P.HasRegistryAuth (Provider) (P.Maybe [RegistryAuthSetting]) where
     registryAuth =
-        P.lens (_registryAuth :: Provider -> P.Maybe [RegistryAuth])
+        P.lens (_registryAuth :: Provider -> P.Maybe [RegistryAuthSetting])
                (\s a -> s { _registryAuth = a } :: Provider)

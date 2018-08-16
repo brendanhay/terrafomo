@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.Docker.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
+import qualified Data.Map.Strict           as Map
 import qualified Data.Maybe                as P
 import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
@@ -57,12 +56,12 @@ data RegistryImageData s = RegistryImageData'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 registryImageData
     :: P.DataSource (RegistryImageData s)
 registryImageData =
-    TF.newDataSource "docker_registry_image" TF.validator $
+    TF.unsafeDataSource "docker_registry_image" P.defaultProvider TF.validator $
         RegistryImageData'
             { _name = TF.Nil
             }
