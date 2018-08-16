@@ -10,7 +10,6 @@ import Terrafomo.Gen.JSON ((.!=), (.:), (.:?))
 import Terrafomo.Gen.Name (DataName, ProviderName, VarName)
 
 import qualified Data.Set           as Set
-import qualified Data.Text          as Text
 import qualified Terrafomo.Gen.JSON as JSON
 
 data Config = Config'

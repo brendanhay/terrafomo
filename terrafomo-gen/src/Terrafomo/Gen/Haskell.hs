@@ -26,27 +26,6 @@ import qualified Terrafomo.Gen.Text               as Text
 import qualified Terrafomo.Gen.Type               as Type
 import qualified Text.Wrap                        as Wrap
 
-newtype Key = Key [Text]
-    deriving (Show, Eq, Ord)
-
-fromKey :: Char -> Key -> Text
-fromKey sep (Key xs) = Text.intercalate (Text.singleton sep) xs
-
-toKey :: Char -> Text -> Key
-toKey sep = Key . Text.split (== sep)
-
-instance JSON.ToJSONKey Key where
-    toJSONKey = JSON.toJSONKeyText (fromKey '.')
-
-instance JSON.FromJSONKey Key where
-    fromJSONKey = JSON.FromJSONKeyText (toKey '.')
-
-instance JSON.ToJSON Key where
-    toJSON = JSON.toJSON . fromKey '.'
-
-instance JSON.FromJSON Key where
-    parseJSON = fmap (toKey '.') . JSON.parseJSON
-
 data Provider = Provider'
     { providerName         :: !ProviderName
     , providerPackage      :: !Text

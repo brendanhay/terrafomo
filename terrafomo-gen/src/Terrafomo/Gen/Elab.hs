@@ -20,7 +20,7 @@ import Data.Traversable (for)
 
 import Terrafomo.Gen.Config
 import Terrafomo.Gen.Haskell
-import Terrafomo.Gen.Name    (ConName, DataName, LabelName, VarName)
+import Terrafomo.Gen.Name    (ConName, DataName, Key (Key), LabelName, VarName)
 import Terrafomo.Gen.Type    (Type)
 
 import Text.Show.Pretty (ppShow)
@@ -38,6 +38,8 @@ import qualified Terrafomo.Gen.Go           as Go
 import qualified Terrafomo.Gen.Name         as Name
 import qualified Terrafomo.Gen.Type         as Type
 import qualified Terrafomo.Gen.URL          as URL
+
+import Debug.Trace (trace)
 
 data Env = Env
     { _config :: !Config
@@ -127,11 +129,10 @@ elabDataSource provider original schemas =
 
 elabSettings :: Text -> [Go.Schema] -> Elab Settings
 elabSettings original schemas = do
-    old <- State.gets (Map.lookup original . _settings)
+    old <- State.gets (fmap fromSettings . Map.lookup original . _settings)
     new <-
         Settings'
-           <$> elabSchema original (Name.settingsNames original) schemas
-                   (fmap fromSettings old)
+            <$> elabSchema original (Name.settingsNames original) schemas old
 
     State.modify' $ \r ->
         r { _settings = Map.insert original new (_settings r)
@@ -141,13 +142,8 @@ elabSettings original schemas = do
 
 elabPrim :: Go.Schema -> Elab Primitive
 elabPrim schema = do
-    -- Experiment:
-    -- let name' = Go.schemaName schemaa
-    -- name <-
-    --          Reader.asks (Text.intercalate "_" . take 2 . (name' :) . reverse . _key)
-
     let name                = Go.schemaName schema
-        (data_, con, smart) = Name.primNames name
+        (data_, con, smart) = Name.primitiveNames name
         gtype               = Go.schemaType schema
         derive              = Type.derive gtype
 
@@ -221,7 +217,7 @@ mergeSchema
     -> Schema Conflict
 mergeSchema Nothing  a = a
 mergeSchema (Just b) a
-    | a == b    = b
+    | a == b    = a
     | otherwise = merge b a
   where
     merge old new =
@@ -259,16 +255,23 @@ mergeSchema (Just b) a
 
 elabArguments :: [Go.Schema] -> Elab [Field Conflict]
 elabArguments =
-    fmap applyConflicts
-        . traverse elabField
-            . filter (not . Go.schemaComputed)
-            . filter (isNothing . Go.schemaDeprecated)
+    let unAttribute x =
+            x { Go.schemaComputed = False
+              }
+     in fmap applyConflicts
+      . traverse (elabField . unAttribute)
+      . filter Go.schemaArgument
+      . filter (isNothing . Go.schemaDeprecated)
 
 elabAttributes :: [Go.Schema] -> Elab [Field LabelName]
 elabAttributes =
-    traverse elabField
-        . filter Go.schemaComputed
-        . filter (isNothing . Go.schemaDeprecated)
+    let unArgument x =
+           x { Go.schemaRequired = False
+             , Go.schemaOptional = False
+             }
+     in traverse (elabField . unArgument)
+      . filter Go.schemaComputed
+      . filter (isNothing . Go.schemaDeprecated)
 
 elabIdAttribute :: Schema Conflict -> Elab (Schema Conflict)
 elabIdAttribute schema =
@@ -315,7 +318,7 @@ elabType schema
                  (elabSettings (Go.resourceName x) (Go.resourceSchemas x))
             >>= fmap (,Nothing) . elabAttr
 
-    -- | Go.schemaComputed schema
+    -- | Go.schemaArgument schema
     --     || Go.schemaPrimitive schema == Just True =
     | otherwise =
              fmap (,Nothing) $
@@ -380,7 +383,10 @@ elabField schema = do
 
             Go.TypeList   -> do
                 (s, d) <- elabType schema
-                (,d) <$> elabAttr (repeated s)
+
+                if original == "logging"
+                    then (,d) <$> elabAttr (trace (ppShow (repeated s)) (repeated s))
+                    else (,d) <$> elabAttr (repeated s)
 
             Go.TypeMap    ->
                     (do (s, d) <- elabType schema

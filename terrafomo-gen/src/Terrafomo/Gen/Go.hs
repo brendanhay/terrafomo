@@ -6,6 +6,7 @@ module Terrafomo.Gen.Go
     , Resource (..)
     , Timeouts (..)
     , Schema   (..)
+    , schemaArgument
     ) where
 
 import Data.Set  (Set)
@@ -101,3 +102,16 @@ data Schema = Schema
 
 instance JSON.FromJSON Schema where
     parseJSON = JSON.genericParseJSON (JSON.options "schema")
+
+-- Taken from terraform/helper/schema.go:
+--
+-- // If one of these is set, then this item can come from the configuration.
+-- // Both cannot be set. If Optional is set, the value is optional. If
+-- // Required is set, the value is required.
+-- //
+-- // One of these must be set if the value is not computed. That is:
+-- // value either comes from the config, is computed, or is both.
+-- Optional bool
+-- Required bool
+schemaArgument :: Schema -> Bool
+schemaArgument x = schemaRequired x || schemaOptional x
