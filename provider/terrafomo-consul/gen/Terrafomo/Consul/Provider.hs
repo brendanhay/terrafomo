@@ -107,24 +107,19 @@ newProvider =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "consul"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "address" <$> _address
-                  , TF.assign "ca_file" <$> _caFile
-                  , TF.assign "cert_file" <$> _certFile
-                  , TF.assign "datacenter" <$> _datacenter
-                  , TF.assign "http_auth" <$> _httpAuth
-                  , P.Just $ TF.assign "insecure_https" _insecureHttps
-                  , TF.assign "key_file" <$> _keyFile
-                  , TF.assign "scheme" <$> _scheme
-                  , TF.assign "token" <$> _token
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ TF.assign "address" <$> _address
+            , TF.assign "ca_file" <$> _caFile
+            , TF.assign "cert_file" <$> _certFile
+            , TF.assign "datacenter" <$> _datacenter
+            , TF.assign "http_auth" <$> _httpAuth
+            , P.Just $ TF.assign "insecure_https" _insecureHttps
+            , TF.assign "key_file" <$> _keyFile
+            , TF.assign "scheme" <$> _scheme
+            , TF.assign "token" <$> _token
+            ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty

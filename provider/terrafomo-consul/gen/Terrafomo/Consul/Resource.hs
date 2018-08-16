@@ -96,7 +96,7 @@ agentServiceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (AgentServiceResource s)
 agentServiceResource _name =
-    TF.unsafeResource "consul_agent_service" P.defaultProvider TF.validator $
+    TF.unsafeResource "consul_agent_service" TF.validator $
         AgentServiceResource'
             { _name = _name
             , _port = TF.Nil
@@ -155,7 +155,7 @@ catalogEntryResource
     -> TF.Attr s P.Text -- ^ @node@ - 'P.node'
     -> P.Resource (CatalogEntryResource s)
 catalogEntryResource _address _node =
-    TF.unsafeResource "consul_catalog_entry" P.defaultProvider TF.validator $
+    TF.unsafeResource "consul_catalog_entry" TF.validator $
         CatalogEntryResource'
             { _address = _address
             , _node = _node
@@ -225,7 +225,7 @@ intentionResource
     -> TF.Attr s P.Text -- ^ @source_name@ - 'P.sourceName'
     -> P.Resource (IntentionResource s)
 intentionResource _action _destinationName _sourceName =
-    TF.unsafeResource "consul_intention" P.defaultProvider TF.validator $
+    TF.unsafeResource "consul_intention" TF.validator $
         IntentionResource'
             { _action = _action
             , _description = TF.Nil
@@ -292,7 +292,7 @@ keyPrefixResource
     -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @subkeys@ - 'P.subkeys'
     -> P.Resource (KeyPrefixResource s)
 keyPrefixResource _pathPrefix _subkeys =
-    TF.unsafeResource "consul_key_prefix" P.defaultProvider TF.validator $
+    TF.unsafeResource "consul_key_prefix" TF.validator $
         KeyPrefixResource'
             { _pathPrefix = _pathPrefix
             , _subkeys = _subkeys
@@ -343,7 +343,7 @@ data KeysResource s = KeysResource'
 keysResource
     :: P.Resource (KeysResource s)
 keysResource =
-    TF.unsafeResource "consul_keys" P.defaultProvider TF.validator $
+    TF.unsafeResource "consul_keys" TF.validator $
         KeysResource'
             { _key = TF.Nil
             , _token = TF.Nil
@@ -395,7 +395,7 @@ nodeResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NodeResource s)
 nodeResource _address _name =
-    TF.unsafeResource "consul_node" P.defaultProvider TF.validator $
+    TF.unsafeResource "consul_node" TF.validator $
         NodeResource'
             { _address = _address
             , _name = _name
@@ -478,7 +478,7 @@ preparedQueryResource
     -> TF.Attr s P.Text -- ^ @service@ - 'P.service'
     -> P.Resource (PreparedQueryResource s)
 preparedQueryResource _name _service =
-    TF.unsafeResource "consul_prepared_query" P.defaultProvider TF.validator $
+    TF.unsafeResource "consul_prepared_query" TF.validator $
         PreparedQueryResource'
             { _datacenter = TF.Nil
             , _dns = TF.Nil
@@ -609,7 +609,7 @@ serviceResource
     -> TF.Attr s P.Text -- ^ @node@ - 'P.node'
     -> P.Resource (ServiceResource s)
 serviceResource _name _node =
-    TF.unsafeResource "consul_service" P.defaultProvider TF.validator $
+    TF.unsafeResource "consul_service" TF.validator $
         ServiceResource'
             { _name = _name
             , _node = _node

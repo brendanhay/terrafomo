@@ -94,7 +94,7 @@ data AgentConfigData s = AgentConfigData'
 agentConfigData
     :: P.DataSource (AgentConfigData s)
 agentConfigData =
-    TF.unsafeDataSource "consul_agent_config" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "consul_agent_config" TF.validator $
         AgentConfigData'
 
 instance TF.IsObject (AgentConfigData s) where
@@ -134,7 +134,7 @@ data AgentSelfData s = AgentSelfData'
 agentSelfData
     :: P.DataSource (AgentSelfData s)
 agentSelfData =
-    TF.unsafeDataSource "consul_agent_self" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "consul_agent_self" TF.validator $
         AgentSelfData'
 
 instance TF.IsObject (AgentSelfData s) where
@@ -372,7 +372,7 @@ data CatalogNodesData s = CatalogNodesData'
 catalogNodesData
     :: P.DataSource (CatalogNodesData s)
 catalogNodesData =
-    TF.unsafeDataSource "consul_catalog_nodes" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "consul_catalog_nodes" TF.validator $
         CatalogNodesData'
             { _queryOptions = TF.Nil
             }
@@ -428,7 +428,7 @@ catalogServiceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CatalogServiceData s)
 catalogServiceData _name =
-    TF.unsafeDataSource "consul_catalog_service" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "consul_catalog_service" TF.validator $
         CatalogServiceData'
             { _datacenter = TF.Nil
             , _name = _name
@@ -486,7 +486,7 @@ data CatalogServicesData s = CatalogServicesData'
 catalogServicesData
     :: P.DataSource (CatalogServicesData s)
 catalogServicesData =
-    TF.unsafeDataSource "consul_catalog_services" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "consul_catalog_services" TF.validator $
         CatalogServicesData'
             { _queryOptions = TF.Nil
             }
@@ -536,7 +536,7 @@ keyPrefixData
     :: TF.Attr s P.Text -- ^ @path_prefix@ - 'P.pathPrefix'
     -> P.DataSource (KeyPrefixData s)
 keyPrefixData _pathPrefix =
-    TF.unsafeDataSource "consul_key_prefix" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "consul_key_prefix" TF.validator $
         KeyPrefixData'
             { _pathPrefix = _pathPrefix
             , _subkey = TF.Nil
@@ -596,7 +596,7 @@ data KeysData s = KeysData'
 keysData
     :: P.DataSource (KeysData s)
 keysData =
-    TF.unsafeDataSource "consul_keys" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "consul_keys" TF.validator $
         KeysData'
             { _key = TF.Nil
             , _token = TF.Nil
@@ -643,7 +643,7 @@ data NodesData s = NodesData'
 nodesData
     :: P.DataSource (NodesData s)
 nodesData =
-    TF.unsafeDataSource "consul_nodes" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "consul_nodes" TF.validator $
         NodesData'
             { _queryOptions = TF.Nil
             }
@@ -699,7 +699,7 @@ serviceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ServiceData s)
 serviceData _name =
-    TF.unsafeDataSource "consul_service" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "consul_service" TF.validator $
         ServiceData'
             { _datacenter = TF.Nil
             , _name = _name
@@ -757,7 +757,7 @@ data ServicesData s = ServicesData'
 servicesData
     :: P.DataSource (ServicesData s)
 servicesData =
-    TF.unsafeDataSource "consul_services" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "consul_services" TF.validator $
         ServicesData'
             { _queryOptions = TF.Nil
             }
