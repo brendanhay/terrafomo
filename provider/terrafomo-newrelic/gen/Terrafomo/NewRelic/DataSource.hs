@@ -66,7 +66,7 @@ applicationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ApplicationData s)
 applicationData _name =
-    TF.unsafeDataSource "newrelic_application" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "newrelic_application" TF.validator $
         ApplicationData'
             { _name = _name
             }
@@ -107,7 +107,7 @@ keyTransactionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (KeyTransactionData s)
 keyTransactionData _name =
-    TF.unsafeDataSource "newrelic_key_transaction" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "newrelic_key_transaction" TF.validator $
         KeyTransactionData'
             { _name = _name
             }

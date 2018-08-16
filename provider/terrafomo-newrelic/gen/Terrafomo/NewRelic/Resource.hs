@@ -94,7 +94,7 @@ alertChannelResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (AlertChannelResource s)
 alertChannelResource _configuration _name _type' =
-    TF.unsafeResource "newrelic_alert_channel" P.defaultProvider TF.validator $
+    TF.unsafeResource "newrelic_alert_channel" TF.validator $
         AlertChannelResource'
             { _configuration = _configuration
             , _name = _name
@@ -178,7 +178,7 @@ alertConditionResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (AlertConditionResource s)
 alertConditionResource _entities _metric _name _policyId _term _type' =
-    TF.unsafeResource "newrelic_alert_condition" P.defaultProvider TF.validator $
+    TF.unsafeResource "newrelic_alert_condition" TF.validator $
         AlertConditionResource'
             { _conditionScope = TF.Nil
             , _entities = _entities
@@ -290,7 +290,7 @@ alertPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (AlertPolicyResource s)
 alertPolicyResource _name =
-    TF.unsafeResource "newrelic_alert_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "newrelic_alert_policy" TF.validator $
         AlertPolicyResource'
             { _incidentPreference = TF.value "PER_POLICY"
             , _name = _name
@@ -339,7 +339,7 @@ alertPolicyChannelResource
     -> TF.Attr s P.Int -- ^ @policy_id@ - 'P.policyId'
     -> P.Resource (AlertPolicyChannelResource s)
 alertPolicyChannelResource _channelId _policyId =
-    TF.unsafeResource "newrelic_alert_policy_channel" P.defaultProvider TF.validator $
+    TF.unsafeResource "newrelic_alert_policy_channel" TF.validator $
         AlertPolicyChannelResource'
             { _channelId = _channelId
             , _policyId = _policyId
@@ -390,7 +390,7 @@ dashboardResource
     :: TF.Attr s P.Text -- ^ @title@ - 'P.title'
     -> P.Resource (DashboardResource s)
 dashboardResource _title =
-    TF.unsafeResource "newrelic_dashboard" P.defaultProvider TF.validator $
+    TF.unsafeResource "newrelic_dashboard" TF.validator $
         DashboardResource'
             { _editable = TF.value "editable_by_all"
             , _icon = TF.value "bar-chart"
@@ -485,7 +485,7 @@ infraAlertConditionResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (InfraAlertConditionResource s)
 infraAlertConditionResource _name _policyId _type' =
-    TF.unsafeResource "newrelic_infra_alert_condition" P.defaultProvider TF.validator $
+    TF.unsafeResource "newrelic_infra_alert_condition" TF.validator $
         InfraAlertConditionResource'
             { _comparison = TF.Nil
             , _critical = TF.Nil
@@ -622,7 +622,7 @@ nrqlAlertConditionResource
     -> TF.Attr s (P.NonEmpty (TF.Attr s (TermSetting s))) -- ^ @term@ - 'P.term'
     -> P.Resource (NrqlAlertConditionResource s)
 nrqlAlertConditionResource _name _nrql _policyId _term =
-    TF.unsafeResource "newrelic_nrql_alert_condition" P.defaultProvider TF.validator $
+    TF.unsafeResource "newrelic_nrql_alert_condition" TF.validator $
         NrqlAlertConditionResource'
             { _enabled = TF.value P.True
             , _name = _name
