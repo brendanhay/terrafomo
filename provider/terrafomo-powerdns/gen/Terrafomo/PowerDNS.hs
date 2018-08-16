@@ -12,12 +12,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.PowerDNS
-    ( module Terrafomo.PowerDNS.Lens
-    , module Terrafomo.PowerDNS.Provider
-    , module Terrafomo.PowerDNS.Resource
-    , module Terrafomo.PowerDNS.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.PowerDNS.Provider
+
+    -- * Custom Types
     , module Terrafomo.PowerDNS.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+
+    -- * Resources
+    , module Terrafomo.PowerDNS.Resource
+
+    -- * Settings
+    , module Terrafomo.PowerDNS.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.PowerDNS.Lens
     ) where
 
 import Terrafomo.PowerDNS.Lens

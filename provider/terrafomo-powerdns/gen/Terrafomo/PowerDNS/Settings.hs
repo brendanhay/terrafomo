@@ -17,7 +17,6 @@
 --
 module Terrafomo.PowerDNS.Settings
     (
-    -- * Settings Datatypes
     ) where
 
 import Data.Functor ((<$>))

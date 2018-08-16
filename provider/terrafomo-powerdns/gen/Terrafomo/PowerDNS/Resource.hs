@@ -17,7 +17,6 @@
 --
 module Terrafomo.PowerDNS.Resource
     (
-    -- * Resource Datatypes
     -- ** powerdns_record
       RecordResource (..)
     , recordResource
@@ -70,6 +69,7 @@ data RecordResource s = RecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @powerdns_record@ resource value.
 recordResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @records@ - 'P.records'
