@@ -46,10 +46,9 @@ import GHC.Base (($))
 
 import Terrafomo.Datadog.Settings
 
-import qualified Data.Hashable              as P
-import qualified Data.HashMap.Strict        as P
-import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Map.Strict            as P
+import qualified Data.Map.Strict            as Map
 import qualified Data.Maybe                 as P
 import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
@@ -76,31 +75,31 @@ data DowntimeResource s = DowntimeResource'
     , _disabled   :: TF.Attr s P.Bool
     -- ^ @disabled@ - (Optional)
     --
-    , _end        :: TF.Attr s P.Integer
+    , _end        :: TF.Attr s P.Int
     -- ^ @end@ - (Optional)
     --
     , _message    :: TF.Attr s P.Text
     -- ^ @message@ - (Optional)
     --
-    , _monitorId  :: TF.Attr s P.Integer
+    , _monitorId  :: TF.Attr s P.Int
     -- ^ @monitor_id@ - (Optional)
     --
-    , _recurrence :: TF.Attr s (DowntimeRecurrence s)
+    , _recurrence :: TF.Attr s (RecurrenceSetting s)
     -- ^ @recurrence@ - (Optional)
     --
     , _scope      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @scope@ - (Required)
     --
-    , _start      :: TF.Attr s P.Integer
+    , _start      :: TF.Attr s P.Int
     -- ^ @start@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 downtimeResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @scope@ - 'P.scope'
     -> P.Resource (DowntimeResource s)
 downtimeResource _scope =
-    TF.newResource "datadog_downtime" TF.validator $
+    TF.unsafeResource "datadog_downtime" P.defaultProvider TF.validator $
         DowntimeResource'
             { _active = TF.Nil
             , _disabled = TF.Nil
@@ -128,7 +127,7 @@ instance TF.IsValid (DowntimeResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_recurrence"
                   (_recurrence
-                      :: DowntimeResource s -> TF.Attr s (DowntimeRecurrence s))
+                      :: DowntimeResource s -> TF.Attr s (RecurrenceSetting s))
                   TF.validator
 
 instance P.HasActive (DowntimeResource s) (TF.Attr s P.Bool) where
@@ -141,9 +140,9 @@ instance P.HasDisabled (DowntimeResource s) (TF.Attr s P.Bool) where
         P.lens (_disabled :: DowntimeResource s -> TF.Attr s P.Bool)
                (\s a -> s { _disabled = a } :: DowntimeResource s)
 
-instance P.HasEnd (DowntimeResource s) (TF.Attr s P.Integer) where
+instance P.HasEnd (DowntimeResource s) (TF.Attr s P.Int) where
     end =
-        P.lens (_end :: DowntimeResource s -> TF.Attr s P.Integer)
+        P.lens (_end :: DowntimeResource s -> TF.Attr s P.Int)
                (\s a -> s { _end = a } :: DowntimeResource s)
 
 instance P.HasMessage (DowntimeResource s) (TF.Attr s P.Text) where
@@ -151,14 +150,14 @@ instance P.HasMessage (DowntimeResource s) (TF.Attr s P.Text) where
         P.lens (_message :: DowntimeResource s -> TF.Attr s P.Text)
                (\s a -> s { _message = a } :: DowntimeResource s)
 
-instance P.HasMonitorId (DowntimeResource s) (TF.Attr s P.Integer) where
+instance P.HasMonitorId (DowntimeResource s) (TF.Attr s P.Int) where
     monitorId =
-        P.lens (_monitorId :: DowntimeResource s -> TF.Attr s P.Integer)
+        P.lens (_monitorId :: DowntimeResource s -> TF.Attr s P.Int)
                (\s a -> s { _monitorId = a } :: DowntimeResource s)
 
-instance P.HasRecurrence (DowntimeResource s) (TF.Attr s (DowntimeRecurrence s)) where
+instance P.HasRecurrence (DowntimeResource s) (TF.Attr s (RecurrenceSetting s)) where
     recurrence =
-        P.lens (_recurrence :: DowntimeResource s -> TF.Attr s (DowntimeRecurrence s))
+        P.lens (_recurrence :: DowntimeResource s -> TF.Attr s (RecurrenceSetting s))
                (\s a -> s { _recurrence = a } :: DowntimeResource s)
 
 instance P.HasScope (DowntimeResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -166,9 +165,9 @@ instance P.HasScope (DowntimeResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_scope :: DowntimeResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _scope = a } :: DowntimeResource s)
 
-instance P.HasStart (DowntimeResource s) (TF.Attr s P.Integer) where
+instance P.HasStart (DowntimeResource s) (TF.Attr s P.Int) where
     start =
-        P.lens (_start :: DowntimeResource s -> TF.Attr s P.Integer)
+        P.lens (_start :: DowntimeResource s -> TF.Attr s P.Int)
                (\s a -> s { _start = a } :: DowntimeResource s)
 
 -- | @datadog_metric_metadata@ Resource.
@@ -188,7 +187,7 @@ data MetricMetadataResource s = MetricMetadataResource'
     , _shortName      :: TF.Attr s P.Text
     -- ^ @short_name@ - (Optional)
     --
-    , _statsdInterval :: TF.Attr s P.Integer
+    , _statsdInterval :: TF.Attr s P.Int
     -- ^ @statsd_interval@ - (Optional)
     --
     , _type'          :: TF.Attr s P.Text
@@ -197,13 +196,13 @@ data MetricMetadataResource s = MetricMetadataResource'
     , _unit           :: TF.Attr s P.Text
     -- ^ @unit@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 metricMetadataResource
     :: TF.Attr s P.Text -- ^ @metric@ - 'P.metric'
     -> P.Resource (MetricMetadataResource s)
 metricMetadataResource _metric =
-    TF.newResource "datadog_metric_metadata" TF.validator $
+    TF.unsafeResource "datadog_metric_metadata" P.defaultProvider TF.validator $
         MetricMetadataResource'
             { _description = TF.Nil
             , _metric = _metric
@@ -248,9 +247,9 @@ instance P.HasShortName (MetricMetadataResource s) (TF.Attr s P.Text) where
         P.lens (_shortName :: MetricMetadataResource s -> TF.Attr s P.Text)
                (\s a -> s { _shortName = a } :: MetricMetadataResource s)
 
-instance P.HasStatsdInterval (MetricMetadataResource s) (TF.Attr s P.Integer) where
+instance P.HasStatsdInterval (MetricMetadataResource s) (TF.Attr s P.Int) where
     statsdInterval =
-        P.lens (_statsdInterval :: MetricMetadataResource s -> TF.Attr s P.Integer)
+        P.lens (_statsdInterval :: MetricMetadataResource s -> TF.Attr s P.Int)
                (\s a -> s { _statsdInterval = a } :: MetricMetadataResource s)
 
 instance P.HasType' (MetricMetadataResource s) (TF.Attr s P.Text) where
@@ -271,52 +270,52 @@ data MonitorResource s = MonitorResource'
     { _escalationMessage :: TF.Attr s P.Text
     -- ^ @escalation_message@ - (Optional)
     --
-    , _includeTags       :: TF.Attr s P.Bool
+    , _includeTags :: TF.Attr s P.Bool
     -- ^ @include_tags@ - (Optional)
     --
-    , _locked            :: TF.Attr s P.Bool
+    , _locked :: TF.Attr s P.Bool
     -- ^ @locked@ - (Optional)
     --
-    , _message           :: TF.Attr s P.Text
+    , _message :: TF.Attr s P.Text
     -- ^ @message@ - (Required)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _noDataTimeframe   :: TF.Attr s P.Integer
+    , _noDataTimeframe :: TF.Attr s P.Int
     -- ^ @no_data_timeframe@ - (Optional)
     --
-    , _notifyAudit       :: TF.Attr s P.Bool
+    , _notifyAudit :: TF.Attr s P.Bool
     -- ^ @notify_audit@ - (Optional)
     --
-    , _notifyNoData      :: TF.Attr s P.Bool
+    , _notifyNoData :: TF.Attr s P.Bool
     -- ^ @notify_no_data@ - (Optional)
     --
-    , _query             :: TF.Attr s P.Text
+    , _query :: TF.Attr s P.Text
     -- ^ @query@ - (Required)
     --
-    , _renotifyInterval  :: TF.Attr s P.Integer
+    , _renotifyInterval :: TF.Attr s P.Int
     -- ^ @renotify_interval@ - (Optional)
     --
     , _requireFullWindow :: TF.Attr s P.Bool
     -- ^ @require_full_window@ - (Optional)
     --
-    , _silenced          :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _silenced :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @silenced@ - (Optional)
     --
-    , _tags              :: TF.Attr s [TF.Attr s P.Text]
+    , _tags :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    , _thresholds        :: TF.Attr s (P.HashMap P.Text (MonitorThresholds s))
+    , _thresholds :: TF.Attr s (P.Map P.Text (TF.Attr s (ThresholdsSetting s)))
     -- ^ @thresholds@ - (Optional)
     --
-    , _timeoutH          :: TF.Attr s P.Integer
+    , _timeoutH :: TF.Attr s P.Int
     -- ^ @timeout_h@ - (Optional)
     --
-    , _type'             :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 monitorResource
     :: TF.Attr s P.Text -- ^ @message@ - 'P.message'
@@ -325,7 +324,7 @@ monitorResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (MonitorResource s)
 monitorResource _message _name _query _type' =
-    TF.newResource "datadog_monitor" TF.validator $
+    TF.unsafeResource "datadog_monitor" P.defaultProvider TF.validator $
         MonitorResource'
             { _escalationMessage = TF.Nil
             , _includeTags = TF.value P.True
@@ -367,10 +366,6 @@ instance TF.IsObject (MonitorResource s) where
 
 instance TF.IsValid (MonitorResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_thresholds"
-                  (_thresholds
-                      :: MonitorResource s -> TF.Attr s (P.HashMap P.Text (MonitorThresholds s)))
-                  TF.validator
 
 instance P.HasEscalationMessage (MonitorResource s) (TF.Attr s P.Text) where
     escalationMessage =
@@ -397,9 +392,9 @@ instance P.HasName (MonitorResource s) (TF.Attr s P.Text) where
         P.lens (_name :: MonitorResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: MonitorResource s)
 
-instance P.HasNoDataTimeframe (MonitorResource s) (TF.Attr s P.Integer) where
+instance P.HasNoDataTimeframe (MonitorResource s) (TF.Attr s P.Int) where
     noDataTimeframe =
-        P.lens (_noDataTimeframe :: MonitorResource s -> TF.Attr s P.Integer)
+        P.lens (_noDataTimeframe :: MonitorResource s -> TF.Attr s P.Int)
                (\s a -> s { _noDataTimeframe = a } :: MonitorResource s)
 
 instance P.HasNotifyAudit (MonitorResource s) (TF.Attr s P.Bool) where
@@ -417,9 +412,9 @@ instance P.HasQuery (MonitorResource s) (TF.Attr s P.Text) where
         P.lens (_query :: MonitorResource s -> TF.Attr s P.Text)
                (\s a -> s { _query = a } :: MonitorResource s)
 
-instance P.HasRenotifyInterval (MonitorResource s) (TF.Attr s P.Integer) where
+instance P.HasRenotifyInterval (MonitorResource s) (TF.Attr s P.Int) where
     renotifyInterval =
-        P.lens (_renotifyInterval :: MonitorResource s -> TF.Attr s P.Integer)
+        P.lens (_renotifyInterval :: MonitorResource s -> TF.Attr s P.Int)
                (\s a -> s { _renotifyInterval = a } :: MonitorResource s)
 
 instance P.HasRequireFullWindow (MonitorResource s) (TF.Attr s P.Bool) where
@@ -427,9 +422,9 @@ instance P.HasRequireFullWindow (MonitorResource s) (TF.Attr s P.Bool) where
         P.lens (_requireFullWindow :: MonitorResource s -> TF.Attr s P.Bool)
                (\s a -> s { _requireFullWindow = a } :: MonitorResource s)
 
-instance P.HasSilenced (MonitorResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasSilenced (MonitorResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     silenced =
-        P.lens (_silenced :: MonitorResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_silenced :: MonitorResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _silenced = a } :: MonitorResource s)
 
 instance P.HasTags (MonitorResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -437,14 +432,14 @@ instance P.HasTags (MonitorResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_tags :: MonitorResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: MonitorResource s)
 
-instance P.HasThresholds (MonitorResource s) (TF.Attr s (P.HashMap P.Text (MonitorThresholds s))) where
+instance P.HasThresholds (MonitorResource s) (TF.Attr s (P.Map P.Text (TF.Attr s (ThresholdsSetting s)))) where
     thresholds =
-        P.lens (_thresholds :: MonitorResource s -> TF.Attr s (P.HashMap P.Text (MonitorThresholds s)))
+        P.lens (_thresholds :: MonitorResource s -> TF.Attr s (P.Map P.Text (TF.Attr s (ThresholdsSetting s))))
                (\s a -> s { _thresholds = a } :: MonitorResource s)
 
-instance P.HasTimeoutH (MonitorResource s) (TF.Attr s P.Integer) where
+instance P.HasTimeoutH (MonitorResource s) (TF.Attr s P.Int) where
     timeoutH =
-        P.lens (_timeoutH :: MonitorResource s -> TF.Attr s P.Integer)
+        P.lens (_timeoutH :: MonitorResource s -> TF.Attr s P.Int)
                (\s a -> s { _timeoutH = a } :: MonitorResource s)
 
 instance P.HasType' (MonitorResource s) (TF.Attr s P.Text) where
@@ -452,10 +447,10 @@ instance P.HasType' (MonitorResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: MonitorResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: MonitorResource s)
 
-instance s ~ s' => P.HasComputedEvaluationDelay (TF.Ref s' (MonitorResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedEvaluationDelay (TF.Ref s' (MonitorResource s)) (TF.Attr s P.Int) where
     computedEvaluationDelay x = TF.compute (TF.refKey x) "evaluation_delay"
 
-instance s ~ s' => P.HasComputedNewHostDelay (TF.Ref s' (MonitorResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedNewHostDelay (TF.Ref s' (MonitorResource s)) (TF.Attr s P.Int) where
     computedNewHostDelay x = TF.compute (TF.refKey x) "new_host_delay"
 
 -- | @datadog_timeboard@ Resource.
@@ -467,14 +462,14 @@ data TimeboardResource s = TimeboardResource'
     -- ^ @description@ - (Required)
     -- A description of the dashboard's content.
     --
-    , _graph            :: TF.Attr s [TF.Attr s (TimeboardGraph s)]
+    , _graph            :: TF.Attr s [TF.Attr s (GraphSetting s)]
     -- ^ @graph@ - (Required)
     -- A list of graph definitions.
     --
     , _readOnly         :: TF.Attr s P.Bool
     -- ^ @read_only@ - (Optional)
     --
-    , _templateVariable :: TF.Attr s [TF.Attr s (TimeboardTemplateVariable s)]
+    , _templateVariable :: TF.Attr s [TF.Attr s (TemplateVariableSetting s)]
     -- ^ @template_variable@ - (Optional)
     -- A list of template variables for using Dashboard templating.
     --
@@ -482,15 +477,15 @@ data TimeboardResource s = TimeboardResource'
     -- ^ @title@ - (Required)
     -- The name of the dashboard.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 timeboardResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
-    -> TF.Attr s [TF.Attr s (TimeboardGraph s)] -- ^ @graph@ - 'P.graph'
+    -> TF.Attr s [TF.Attr s (GraphSetting s)] -- ^ @graph@ - 'P.graph'
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
     -> P.Resource (TimeboardResource s)
 timeboardResource _description _graph _title =
-    TF.newResource "datadog_timeboard" TF.validator $
+    TF.unsafeResource "datadog_timeboard" P.defaultProvider TF.validator $
         TimeboardResource'
             { _description = _description
             , _graph = _graph
@@ -510,23 +505,15 @@ instance TF.IsObject (TimeboardResource s) where
 
 instance TF.IsValid (TimeboardResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_graph"
-                  (_graph
-                      :: TimeboardResource s -> TF.Attr s [TF.Attr s (TimeboardGraph s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_templateVariable"
-                  (_templateVariable
-                      :: TimeboardResource s -> TF.Attr s [TF.Attr s (TimeboardTemplateVariable s)])
-                  TF.validator
 
 instance P.HasDescription (TimeboardResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: TimeboardResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: TimeboardResource s)
 
-instance P.HasGraph (TimeboardResource s) (TF.Attr s [TF.Attr s (TimeboardGraph s)]) where
+instance P.HasGraph (TimeboardResource s) (TF.Attr s [TF.Attr s (GraphSetting s)]) where
     graph =
-        P.lens (_graph :: TimeboardResource s -> TF.Attr s [TF.Attr s (TimeboardGraph s)])
+        P.lens (_graph :: TimeboardResource s -> TF.Attr s [TF.Attr s (GraphSetting s)])
                (\s a -> s { _graph = a } :: TimeboardResource s)
 
 instance P.HasReadOnly (TimeboardResource s) (TF.Attr s P.Bool) where
@@ -534,9 +521,9 @@ instance P.HasReadOnly (TimeboardResource s) (TF.Attr s P.Bool) where
         P.lens (_readOnly :: TimeboardResource s -> TF.Attr s P.Bool)
                (\s a -> s { _readOnly = a } :: TimeboardResource s)
 
-instance P.HasTemplateVariable (TimeboardResource s) (TF.Attr s [TF.Attr s (TimeboardTemplateVariable s)]) where
+instance P.HasTemplateVariable (TimeboardResource s) (TF.Attr s [TF.Attr s (TemplateVariableSetting s)]) where
     templateVariable =
-        P.lens (_templateVariable :: TimeboardResource s -> TF.Attr s [TF.Attr s (TimeboardTemplateVariable s)])
+        P.lens (_templateVariable :: TimeboardResource s -> TF.Attr s [TF.Attr s (TemplateVariableSetting s)])
                (\s a -> s { _templateVariable = a } :: TimeboardResource s)
 
 instance P.HasTitle (TimeboardResource s) (TF.Attr s P.Text) where
@@ -564,7 +551,7 @@ data UserResource s = UserResource'
     , _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 userResource
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
@@ -572,7 +559,7 @@ userResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (UserResource s)
 userResource _email _handle _name =
-    TF.newResource "datadog_user" TF.validator $
+    TF.unsafeResource "datadog_user" P.defaultProvider TF.validator $
         UserResource'
             { _disabled = TF.value P.False
             , _email = _email
