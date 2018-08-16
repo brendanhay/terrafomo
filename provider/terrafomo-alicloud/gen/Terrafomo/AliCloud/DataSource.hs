@@ -17,7 +17,6 @@
 --
 module Terrafomo.AliCloud.DataSource
     (
-    -- * DataSource Datatypes
     -- ** alicloud_db_instances
       DbInstancesData (..)
     , dbInstancesData
@@ -174,6 +173,7 @@ data DbInstancesData s = DbInstancesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_db_instances@ datasource value.
 dbInstancesData
     :: P.DataSource (DbInstancesData s)
 dbInstancesData =
@@ -270,6 +270,7 @@ data DnsDomainGroupsData s = DnsDomainGroupsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_dns_domain_groups@ datasource value.
 dnsDomainGroupsData
     :: P.DataSource (DnsDomainGroupsData s)
 dnsDomainGroupsData =
@@ -335,6 +336,7 @@ data DnsDomainRecordsData s = DnsDomainRecordsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_dns_domain_records@ datasource value.
 dnsDomainRecordsData
     :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
     -> P.DataSource (DnsDomainRecordsData s)
@@ -437,6 +439,7 @@ data DnsDomainsData s = DnsDomainsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_dns_domains@ datasource value.
 dnsDomainsData
     :: P.DataSource (DnsDomainsData s)
 dnsDomainsData =
@@ -512,6 +515,7 @@ data DnsGroupsData s = DnsGroupsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_dns_groups@ datasource value.
 dnsGroupsData
     :: P.DataSource (DnsGroupsData s)
 dnsGroupsData =
@@ -577,6 +581,7 @@ data DnsRecordsData s = DnsRecordsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_dns_records@ datasource value.
 dnsRecordsData
     :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
     -> P.DataSource (DnsRecordsData s)
@@ -670,6 +675,7 @@ data EipsData s = EipsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_eips@ datasource value.
 eipsData
     :: P.DataSource (EipsData s)
 eipsData =
@@ -730,6 +736,7 @@ data ImagesData s = ImagesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_images@ datasource value.
 imagesData
     :: P.DataSource (ImagesData s)
 imagesData =
@@ -812,6 +819,7 @@ data InstanceTypesData s = InstanceTypesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_instance_types@ datasource value.
 instanceTypesData
     :: P.DataSource (InstanceTypesData s)
 instanceTypesData =
@@ -929,6 +937,7 @@ data InstancesData s = InstancesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_instances@ datasource value.
 instancesData
     :: P.DataSource (InstancesData s)
 instancesData =
@@ -1025,6 +1034,7 @@ data KeyPairsData s = KeyPairsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_key_pairs@ datasource value.
 keyPairsData
     :: P.DataSource (KeyPairsData s)
 keyPairsData =
@@ -1081,6 +1091,7 @@ data KmsKeysData s = KmsKeysData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_kms_keys@ datasource value.
 kmsKeysData
     :: P.DataSource (KmsKeysData s)
 kmsKeysData =
@@ -1139,6 +1150,7 @@ data RamAccountAliasData s = RamAccountAliasData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_account_alias@ datasource value.
 ramAccountAliasData
     :: P.DataSource (RamAccountAliasData s)
 ramAccountAliasData =
@@ -1176,6 +1188,7 @@ data RamAccountAliasesData s = RamAccountAliasesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_account_aliases@ datasource value.
 ramAccountAliasesData
     :: P.DataSource (RamAccountAliasesData s)
 ramAccountAliasesData =
@@ -1225,6 +1238,7 @@ data RamGroupsData s = RamGroupsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_groups@ datasource value.
 ramGroupsData
     :: P.DataSource (RamGroupsData s)
 ramGroupsData =
@@ -1305,6 +1319,7 @@ data RamPoliciesData s = RamPoliciesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_policies@ datasource value.
 ramPoliciesData
     :: P.DataSource (RamPoliciesData s)
 ramPoliciesData =
@@ -1386,6 +1401,7 @@ data RamRolesData s = RamRolesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_roles@ datasource value.
 ramRolesData
     :: P.DataSource (RamRolesData s)
 ramRolesData =
@@ -1456,6 +1472,7 @@ data RamUsersData s = RamUsersData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_users@ datasource value.
 ramUsersData
     :: P.DataSource (RamUsersData s)
 ramUsersData =
@@ -1521,6 +1538,7 @@ data RegionsData s = RegionsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_regions@ datasource value.
 regionsData
     :: P.DataSource (RegionsData s)
 regionsData =
@@ -1579,6 +1597,7 @@ data SecurityGroupRulesData s = SecurityGroupRulesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_security_group_rules@ datasource value.
 securityGroupRulesData
     :: TF.Attr s P.Text -- ^ @group_id@ - 'P.groupId'
     -> P.DataSource (SecurityGroupRulesData s)
@@ -1664,6 +1683,7 @@ data SecurityGroupsData s = SecurityGroupsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_security_groups@ datasource value.
 securityGroupsData
     :: P.DataSource (SecurityGroupsData s)
 securityGroupsData =
@@ -1730,6 +1750,7 @@ data VpcsData s = VpcsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_vpcs@ datasource value.
 vpcsData
     :: P.DataSource (VpcsData s)
 vpcsData =
@@ -1817,6 +1838,7 @@ data VswitchesData s = VswitchesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_vswitches@ datasource value.
 vswitchesData
     :: P.DataSource (VswitchesData s)
 vswitchesData =
@@ -1910,6 +1932,7 @@ data ZonesData s = ZonesData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_zones@ datasource value.
 zonesData
     :: P.DataSource (ZonesData s)
 zonesData =

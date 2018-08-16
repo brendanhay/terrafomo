@@ -17,7 +17,6 @@
 --
 module Terrafomo.AliCloud.Resource
     (
-    -- * Resource Datatypes
     -- ** alicloud_cdn_domain
       CdnDomainResource (..)
     , cdnDomainResource
@@ -375,6 +374,7 @@ data CdnDomainResource s = CdnDomainResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_cdn_domain@ resource value.
 cdnDomainResource
     :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
     -> TF.Attr s P.Text -- ^ @cdn_type@ - 'P.cdnType'
@@ -577,6 +577,7 @@ data CmsAlarmResource s = CmsAlarmResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_cms_alarm@ resource value.
 cmsAlarmResource
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @dimensions@ - 'P.dimensions'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @contact_groups@ - 'P.contactGroups'
@@ -748,6 +749,7 @@ data ContainerClusterResource s = ContainerClusterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_container_cluster@ resource value.
 containerClusterResource
     :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
     -> TF.Attr s P.Text -- ^ @vswitch_id@ - 'P.vswitchId'
@@ -898,6 +900,7 @@ data CsApplicationResource s = CsApplicationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_cs_application@ resource value.
 csApplicationResource
     :: TF.Attr s P.Text -- ^ @cluster_name@ - 'P.clusterName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1054,6 +1057,7 @@ data CsKubernetesResource s = CsKubernetesResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_cs_kubernetes@ resource value.
 csKubernetesResource
     :: TF.Attr s P.Text -- ^ @password@ - 'P.password'
     -> TF.Attr s P.Text -- ^ @master_instance_type@ - 'P.masterInstanceType'
@@ -1290,6 +1294,7 @@ data CsSwarmResource s = CsSwarmResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_cs_swarm@ resource value.
 csSwarmResource
     :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
     -> TF.Attr s P.Text -- ^ @vswitch_id@ - 'P.vswitchId'
@@ -1428,6 +1433,7 @@ data DbAccountResource s = DbAccountResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_db_account@ resource value.
 dbAccountResource
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1502,6 +1508,7 @@ data DbAccountPrivilegeResource s = DbAccountPrivilegeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_db_account_privilege@ resource value.
 dbAccountPrivilegeResource
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> TF.Attr s P.Text -- ^ @account_name@ - 'P.accountName'
@@ -1572,6 +1579,7 @@ data DbBackupPolicyResource s = DbBackupPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_db_backup_policy@ resource value.
 dbBackupPolicyResource
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> P.Resource (DbBackupPolicyResource s)
@@ -1641,6 +1649,7 @@ data DbConnectionResource s = DbConnectionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_db_connection@ resource value.
 dbConnectionResource
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> P.Resource (DbConnectionResource s)
@@ -1701,6 +1710,7 @@ data DbDatabaseResource s = DbDatabaseResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_db_database@ resource value.
 dbDatabaseResource
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1779,6 +1789,7 @@ data DbInstanceResource s = DbInstanceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_db_instance@ resource value.
 dbInstanceResource
     :: TF.Attr s P.Text -- ^ @engine@ - 'P.engine'
     -> TF.Attr s P.Int -- ^ @instance_storage@ - 'P.instanceStorage'
@@ -1899,6 +1910,7 @@ data DiskResource s = DiskResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_disk@ resource value.
 diskResource
     :: TF.Attr s P.Text -- ^ @availability_zone@ - 'P.availabilityZone'
     -> P.Resource (DiskResource s)
@@ -1989,6 +2001,7 @@ data DiskAttachmentResource s = DiskAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_disk_attachment@ resource value.
 diskAttachmentResource
     :: P.Resource (DiskAttachmentResource s)
 diskAttachmentResource =
@@ -2033,6 +2046,7 @@ data DnsResource s = DnsResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_dns@ resource value.
 dnsResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DnsResource s)
@@ -2078,6 +2092,7 @@ data DnsGroupResource s = DnsGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_dns_group@ resource value.
 dnsGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DnsGroupResource s)
@@ -2131,6 +2146,7 @@ data DnsRecordResource s = DnsRecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_dns_record@ resource value.
 dnsRecordResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @host_record@ - 'P.hostRecord'
@@ -2232,6 +2248,7 @@ data EipResource s = EipResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_eip@ resource value.
 eipResource
     :: P.Resource (EipResource s)
 eipResource =
@@ -2307,6 +2324,7 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (EipResource s)) (TF.Attr s P.
 data EipAssociationResource s = EipAssociationResource'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_eip_association@ resource value.
 eipAssociationResource
     :: P.Resource (EipAssociationResource s)
 eipAssociationResource =
@@ -2344,6 +2362,7 @@ data EssAttachmentResource s = EssAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ess_attachment@ resource value.
 essAttachmentResource
     :: TF.Attr s P.Text -- ^ @scaling_group_id@ - 'P.scalingGroupId'
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @instance_ids@ - 'P.instanceIds'
@@ -2439,6 +2458,7 @@ data EssScalingConfigurationResource s = EssScalingConfigurationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ess_scaling_configuration@ resource value.
 essScalingConfigurationResource
     :: TF.Attr s P.Text -- ^ @image_id@ - 'P.imageId'
     -> TF.Attr s P.Text -- ^ @scaling_group_id@ - 'P.scalingGroupId'
@@ -2615,6 +2635,7 @@ data EssScalingGroupResource s = EssScalingGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ess_scaling_group@ resource value.
 essScalingGroupResource
     :: TF.Attr s P.Int -- ^ @max_size@ - 'P.maxSize'
     -> TF.Attr s P.Int -- ^ @min_size@ - 'P.minSize'
@@ -2709,6 +2730,7 @@ data EssScalingRuleResource s = EssScalingRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ess_scaling_rule@ resource value.
 essScalingRuleResource
     :: TF.Attr s P.Text -- ^ @scaling_group_id@ - 'P.scalingGroupId'
     -> TF.Attr s P.Text -- ^ @adjustment_type@ - 'P.adjustmentType'
@@ -2785,6 +2807,7 @@ data EssScheduleResource s = EssScheduleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ess_schedule@ resource value.
 essScheduleResource
     :: TF.Attr s P.Text -- ^ @scheduled_action@ - 'P.scheduledAction'
     -> TF.Attr s P.Text -- ^ @launch_time@ - 'P.launchTime'
@@ -2898,6 +2921,7 @@ data FcFunctionResource s = FcFunctionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_fc_function@ resource value.
 fcFunctionResource
     :: TF.Attr s P.Text -- ^ @handler@ - 'P.handler'
     -> TF.Attr s P.Text -- ^ @runtime@ - 'P.runtime'
@@ -3035,6 +3059,7 @@ data FcServiceResource s = FcServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_fc_service@ resource value.
 fcServiceResource
     :: P.Resource (FcServiceResource s)
 fcServiceResource =
@@ -3136,6 +3161,7 @@ data FcTriggerResource s = FcTriggerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_fc_trigger@ resource value.
 fcTriggerResource
     :: TF.Attr s P.Text -- ^ @config@ - 'P.config'
     -> TF.Attr s P.Text -- ^ @function@ - 'P.function'
@@ -3237,6 +3263,7 @@ data ForwardEntryResource s = ForwardEntryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_forward_entry@ resource value.
 forwardEntryResource
     :: TF.Attr s P.Text -- ^ @forward_table_id@ - 'P.forwardTableId'
     -> TF.Attr s P.Text -- ^ @external_ip@ - 'P.externalIp'
@@ -3378,6 +3405,7 @@ data InstanceResource s = InstanceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_instance@ resource value.
 instanceResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ - 'P.securityGroups'
     -> TF.Attr s P.Text -- ^ @image_id@ - 'P.imageId'
@@ -3602,6 +3630,7 @@ data KeyPairResource s = KeyPairResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_key_pair@ resource value.
 keyPairResource
     :: P.Resource (KeyPairResource s)
 keyPairResource =
@@ -3659,6 +3688,7 @@ data KeyPairAttachmentResource s = KeyPairAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_key_pair_attachment@ resource value.
 keyPairAttachmentResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @instance_ids@ - 'P.instanceIds'
     -> TF.Attr s P.Text -- ^ @key_name@ - 'P.keyName'
@@ -3711,6 +3741,7 @@ data KmsKeyResource s = KmsKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_kms_key@ resource value.
 kmsKeyResource
     :: P.Resource (KmsKeyResource s)
 kmsKeyResource =
@@ -3781,6 +3812,7 @@ data LogMachineGroupResource s = LogMachineGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_log_machine_group@ resource value.
 logMachineGroupResource
     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @identify_list@ - 'P.identifyList'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -3849,6 +3881,7 @@ data LogProjectResource s = LogProjectResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_log_project@ resource value.
 logProjectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LogProjectResource s)
@@ -3900,6 +3933,7 @@ data LogStoreResource s = LogStoreResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_log_store@ resource value.
 logStoreResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
@@ -3969,6 +4003,7 @@ data LogStoreIndexResource s = LogStoreIndexResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_log_store_index@ resource value.
 logStoreIndexResource
     :: TF.Attr s P.Text -- ^ @logstore@ - 'P.logstore'
     -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
@@ -4036,6 +4071,7 @@ data NatGatewayResource s = NatGatewayResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_nat_gateway@ resource value.
 natGatewayResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> P.Resource (NatGatewayResource s)
@@ -4115,6 +4151,7 @@ data OssBucketResource s = OssBucketResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_oss_bucket@ resource value.
 ossBucketResource
     :: P.Resource (OssBucketResource s)
 ossBucketResource =
@@ -4253,6 +4290,7 @@ data OssBucketObjectResource s = OssBucketObjectResource'
     -- * 'content'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_oss_bucket_object@ resource value.
 ossBucketObjectResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
@@ -4387,6 +4425,7 @@ data OtsInstanceResource s = OtsInstanceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ots_instance@ resource value.
 otsInstanceResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4457,6 +4496,7 @@ data OtsInstanceAttachmentResource s = OtsInstanceAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ots_instance_attachment@ resource value.
 otsInstanceAttachmentResource
     :: TF.Attr s P.Text -- ^ @vswitch_id@ - 'P.vswitchId'
     -> TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
@@ -4523,6 +4563,7 @@ data OtsTableResource s = OtsTableResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ots_table@ resource value.
 otsTableResource
     :: TF.Attr s [TF.Attr s (PrimaryKeySetting s)] -- ^ @primary_key@ - 'P.primaryKey'
     -> TF.Attr s P.Int -- ^ @time_to_live@ - 'P.timeToLive'
@@ -4596,6 +4637,7 @@ data RamAccessKeyResource s = RamAccessKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_access_key@ resource value.
 ramAccessKeyResource
     :: P.Resource (RamAccessKeyResource s)
 ramAccessKeyResource =
@@ -4644,6 +4686,7 @@ data RamAccountAliasResource s = RamAccountAliasResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_account_alias@ resource value.
 ramAccountAliasResource
     :: TF.Attr s P.Text -- ^ @account_alias@ - 'P.accountAlias'
     -> P.Resource (RamAccountAliasResource s)
@@ -4679,6 +4722,7 @@ data RamAliasResource s = RamAliasResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_alias@ resource value.
 ramAliasResource
     :: TF.Attr s P.Text -- ^ @account_alias@ - 'P.accountAlias'
     -> P.Resource (RamAliasResource s)
@@ -4720,6 +4764,7 @@ data RamGroupResource s = RamGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_group@ resource value.
 ramGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RamGroupResource s)
@@ -4772,6 +4817,7 @@ data RamGroupMembershipResource s = RamGroupMembershipResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_group_membership@ resource value.
 ramGroupMembershipResource
     :: TF.Attr s P.Text -- ^ @group_name@ - 'P.groupName'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @user_names@ - 'P.userNames'
@@ -4821,6 +4867,7 @@ data RamGroupPolicyAttachmentResource s = RamGroupPolicyAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_group_policy_attachment@ resource value.
 ramGroupPolicyAttachmentResource
     :: TF.Attr s P.Text -- ^ @group_name@ - 'P.groupName'
     -> TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
@@ -4881,6 +4928,7 @@ data RamLoginProfileResource s = RamLoginProfileResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_login_profile@ resource value.
 ramLoginProfileResource
     :: TF.Attr s P.Text -- ^ @user_name@ - 'P.userName'
     -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
@@ -4947,6 +4995,7 @@ data RamPolicyResource s = RamPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_policy@ resource value.
 ramPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RamPolicyResource s)
@@ -5024,6 +5073,7 @@ data RamRoleResource s = RamRoleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_role@ resource value.
 ramRoleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RamRoleResource s)
@@ -5095,6 +5145,7 @@ data RamRoleAttachmentResource s = RamRoleAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_role_attachment@ resource value.
 ramRoleAttachmentResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @instance_ids@ - 'P.instanceIds'
     -> TF.Attr s P.Text -- ^ @role_name@ - 'P.roleName'
@@ -5144,6 +5195,7 @@ data RamRolePolicyAttachmentResource s = RamRolePolicyAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_role_policy_attachment@ resource value.
 ramRolePolicyAttachmentResource
     :: TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
     -> TF.Attr s P.Text -- ^ @role_name@ - 'P.roleName'
@@ -5210,6 +5262,7 @@ data RamUserResource s = RamUserResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_user@ resource value.
 ramUserResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RamUserResource s)
@@ -5286,6 +5339,7 @@ data RamUserPolicyAttachmentResource s = RamUserPolicyAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_ram_user_policy_attachment@ resource value.
 ramUserPolicyAttachmentResource
     :: TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
     -> TF.Attr s P.Text -- ^ @user_name@ - 'P.userName'
@@ -5346,6 +5400,7 @@ data RouteEntryResource s = RouteEntryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_route_entry@ resource value.
 routeEntryResource
     :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
     -> P.Resource (RouteEntryResource s)
@@ -5426,6 +5481,7 @@ data RouterInterfaceResource s = RouterInterfaceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_router_interface@ resource value.
 routerInterfaceResource
     :: TF.Attr s P.Text -- ^ @router_id@ - 'P.routerId'
     -> TF.Attr s P.Text -- ^ @opposite_region@ - 'P.oppositeRegion'
@@ -5526,6 +5582,7 @@ data RouterInterfaceConnectionResource s = RouterInterfaceConnectionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_router_interface_connection@ resource value.
 routerInterfaceConnectionResource
     :: TF.Attr s P.Text -- ^ @interface_id@ - 'P.interfaceId'
     -> TF.Attr s P.Text -- ^ @opposite_interface_id@ - 'P.oppositeInterfaceId'
@@ -5591,6 +5648,7 @@ data SecurityGroupResource s = SecurityGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_security_group@ resource value.
 securityGroupResource
     :: P.Resource (SecurityGroupResource s)
 securityGroupResource =
@@ -5677,6 +5735,7 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_security_group_rule@ resource value.
 securityGroupRuleResource
     :: TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
     -> TF.Attr s P.Text -- ^ @ip_protocol@ - 'P.ipProtocol'
@@ -5799,6 +5858,7 @@ data SlbResource s = SlbResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_slb@ resource value.
 slbResource
     :: P.Resource (SlbResource s)
 slbResource =
@@ -5877,6 +5937,7 @@ data SlbAttachmentResource s = SlbAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_slb_attachment@ resource value.
 slbAttachmentResource
     :: TF.Attr s P.Text -- ^ @load_balancer_id@ - 'P.loadBalancerId'
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @instance_ids@ - 'P.instanceIds'
@@ -5993,6 +6054,7 @@ data SlbListenerResource s = SlbListenerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_slb_listener@ resource value.
 slbListenerResource
     :: TF.Attr s P.Int -- ^ @bandwidth@ - 'P.bandwidth'
     -> TF.Attr s P.Text -- ^ @load_balancer_id@ - 'P.loadBalancerId'
@@ -6197,6 +6259,7 @@ data SlbRuleResource s = SlbRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_slb_rule@ resource value.
 slbRuleResource
     :: TF.Attr s P.Text -- ^ @load_balancer_id@ - 'P.loadBalancerId'
     -> TF.Attr s P.Text -- ^ @server_group_id@ - 'P.serverGroupId'
@@ -6275,6 +6338,7 @@ data SlbServerGroupResource s = SlbServerGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_slb_server_group@ resource value.
 slbServerGroupResource
     :: TF.Attr s P.Text -- ^ @load_balancer_id@ - 'P.loadBalancerId'
     -> TF.Attr s (P.NonEmpty (TF.Attr s (ServersSetting s))) -- ^ @servers@ - 'P.servers'
@@ -6331,6 +6395,7 @@ data SnatEntryResource s = SnatEntryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_snat_entry@ resource value.
 snatEntryResource
     :: TF.Attr s P.Text -- ^ @snat_table_id@ - 'P.snatTableId'
     -> TF.Attr s P.Text -- ^ @source_vswitch_id@ - 'P.sourceVswitchId'
@@ -6394,6 +6459,7 @@ data SubnetResource s = SubnetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_subnet@ resource value.
 subnetResource
     :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
@@ -6465,6 +6531,7 @@ data VpcResource s = VpcResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_vpc@ resource value.
 vpcResource
     :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
     -> P.Resource (VpcResource s)
@@ -6532,6 +6599,7 @@ data VswitchResource s = VswitchResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @alicloud_vswitch@ resource value.
 vswitchResource
     :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'

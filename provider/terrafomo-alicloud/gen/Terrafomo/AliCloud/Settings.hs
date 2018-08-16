@@ -17,7 +17,6 @@
 --
 module Terrafomo.AliCloud.Settings
     (
-    -- * Settings Datatypes
     -- ** auth_config
       AuthConfigSetting (..)
     , newAuthConfigSetting
@@ -239,6 +238,7 @@ data AuthConfigSetting s = AuthConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @auth_config@ settings value.
 newAuthConfigSetting
     :: AuthConfigSetting s
 newAuthConfigSetting =
@@ -277,6 +277,7 @@ instance s ~ s' => P.HasComputedSlaveKey (TF.Ref s' (AuthConfigSetting s)) (TF.A
 data BurstableInstanceSetting s = BurstableInstanceSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @burstable_instance@ settings value.
 newBurstableInstanceSetting
     :: BurstableInstanceSetting s
 newBurstableInstanceSetting =
@@ -311,6 +312,7 @@ data CacheConfigSetting s = CacheConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @cache_config@ settings value.
 newCacheConfigSetting
     :: TF.Attr s P.Text -- ^ @cache_content@ - 'P.cacheContent'
     -> TF.Attr s P.Int -- ^ @ttl@ - 'P.ttl'
@@ -363,6 +365,7 @@ instance s ~ s' => P.HasComputedCacheId (TF.Ref s' (CacheConfigSetting s)) (TF.A
 data ConnectionsSetting s = ConnectionsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @connections@ settings value.
 newConnectionsSetting
     :: ConnectionsSetting s
 newConnectionsSetting =
@@ -406,6 +409,7 @@ data CorsRuleSetting s = CorsRuleSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @cors_rule@ settings value.
 newCorsRuleSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_methods@ - 'P.allowedMethods'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_origins@ - 'P.allowedOrigins'
@@ -470,6 +474,7 @@ data DataDiskSetting s = DataDiskSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @data_disk@ settings value.
 newDataDiskSetting
     :: DataDiskSetting s
 newDataDiskSetting =
@@ -509,6 +514,7 @@ instance P.HasSnapshotId (DataDiskSetting s) (TF.Attr s P.Text) where
 data DiskDeviceMappingsSetting s = DiskDeviceMappingsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @disk_device_mappings@ settings value.
 newDiskDeviceMappingsSetting
     :: DiskDeviceMappingsSetting s
 newDiskDeviceMappingsSetting =
@@ -540,6 +546,7 @@ instance s ~ s' => P.HasComputedType (TF.Ref s' (DiskDeviceMappingsSetting s)) (
 data DomainsSetting s = DomainsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @domains@ settings value.
 newDomainsSetting
     :: DomainsSetting s
 newDomainsSetting =
@@ -583,6 +590,7 @@ instance s ~ s' => P.HasComputedVersionCode (TF.Ref s' (DomainsSetting s)) (TF.A
 data EipsSetting s = EipsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @eips@ settings value.
 newEipsSetting
     :: EipsSetting s
 newEipsSetting =
@@ -629,6 +637,7 @@ data ExpirationSetting s = ExpirationSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @expiration@ settings value.
 newExpirationSetting
     :: ExpirationSetting s
 newExpirationSetting =
@@ -682,6 +691,7 @@ data FieldSearchSetting s = FieldSearchSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @field_search@ settings value.
 newFieldSearchSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> FieldSearchSetting s
@@ -759,6 +769,7 @@ data FullTextSetting s = FullTextSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @full_text@ settings value.
 newFullTextSetting
     :: FullTextSetting s
 newFullTextSetting =
@@ -798,6 +809,7 @@ instance P.HasToken (FullTextSetting s) (TF.Attr s P.Text) where
 data GpuSetting s = GpuSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @gpu@ settings value.
 newGpuSetting
     :: GpuSetting s
 newGpuSetting =
@@ -820,6 +832,7 @@ instance s ~ s' => P.HasComputedCategory (TF.Ref s' (GpuSetting s)) (TF.Attr s P
 data GroupsSetting s = GroupsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @groups@ settings value.
 newGroupsSetting
     :: GroupsSetting s
 newGroupsSetting =
@@ -869,6 +882,7 @@ data HttpHeaderConfigSetting s = HttpHeaderConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @http_header_config@ settings value.
 newHttpHeaderConfigSetting
     :: TF.Attr s P.Text -- ^ @header_key@ - 'P.headerKey'
     -> TF.Attr s P.Text -- ^ @header_value@ - 'P.headerValue'
@@ -909,6 +923,7 @@ data ImagesSetting s = ImagesSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @images@ settings value.
 newImagesSetting
     :: ImagesSetting s
 newImagesSetting =
@@ -1000,6 +1015,7 @@ instance s ~ s' => P.HasComputedUsage (TF.Ref s' (ImagesSetting s)) (TF.Attr s P
 data InstanceTypesSetting s = InstanceTypesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @instance_types@ settings value.
 newInstanceTypesSetting
     :: InstanceTypesSetting s
 newInstanceTypesSetting =
@@ -1046,6 +1062,7 @@ data InstancesSetting s = InstancesSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @instances@ settings value.
 newInstancesSetting
     :: InstancesSetting s
 newInstancesSetting =
@@ -1176,6 +1193,7 @@ instance s ~ s' => P.HasComputedInstanceName (TF.Ref s' (InstancesSetting s)) (T
 data KeyPairsSetting s = KeyPairsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @key_pairs@ settings value.
 newKeyPairsSetting
     :: KeyPairsSetting s
 newKeyPairsSetting =
@@ -1204,6 +1222,7 @@ instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (KeyPairsSetting s)) (TF.Attr
 data KeysSetting s = KeysSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @keys@ settings value.
 newKeysSetting
     :: KeysSetting s
 newKeysSetting =
@@ -1250,6 +1269,7 @@ data LifecycleRuleSetting s = LifecycleRuleSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @lifecycle_rule@ settings value.
 newLifecycleRuleSetting
     :: TF.Attr s P.Bool -- ^ @enabled@ - 'P.enabled'
     -> TF.Attr s [TF.Attr s (ExpirationSetting s)] -- ^ @expiration@ - 'P.expiration'
@@ -1295,6 +1315,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (LifecycleRuleSetting s)) (TF.Attr
 data LocalStorageSetting s = LocalStorageSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @local_storage@ settings value.
 newLocalStorageSetting
     :: LocalStorageSetting s
 newLocalStorageSetting =
@@ -1326,6 +1347,7 @@ data LogConfigSetting s = LogConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @log_config@ settings value.
 newLogConfigSetting
     :: TF.Attr s P.Text -- ^ @logstore@ - 'P.logstore'
     -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
@@ -1366,6 +1388,7 @@ data LoggingSetting s = LoggingSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @logging@ settings value.
 newLoggingSetting
     :: TF.Attr s P.Text -- ^ @target_bucket@ - 'P.targetBucket'
     -> LoggingSetting s
@@ -1399,6 +1422,7 @@ instance P.HasTargetPrefix (LoggingSetting s) (TF.Attr s P.Text) where
 data MasterNodesSetting s = MasterNodesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @master_nodes@ settings value.
 newMasterNodesSetting
     :: MasterNodesSetting s
 newMasterNodesSetting =
@@ -1424,6 +1448,7 @@ instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (MasterNodesSetting s)) (TF
 data NodesSetting s = NodesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @nodes@ settings value.
 newNodesSetting
     :: NodesSetting s
 newNodesSetting =
@@ -1461,6 +1486,7 @@ data Page404ConfigSetting s = Page404ConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @page_404_config@ settings value.
 newPage404ConfigSetting
     :: Page404ConfigSetting s
 newPage404ConfigSetting =
@@ -1499,6 +1525,7 @@ data ParameterFilterConfigSetting s = ParameterFilterConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @parameter_filter_config@ settings value.
 newParameterFilterConfigSetting
     :: ParameterFilterConfigSetting s
 newParameterFilterConfigSetting =
@@ -1527,6 +1554,7 @@ instance s ~ s' => P.HasComputedHashKeyArgs (TF.Ref s' (ParameterFilterConfigSet
 data PoliciesSetting s = PoliciesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @policies@ settings value.
 newPoliciesSetting
     :: PoliciesSetting s
 newPoliciesSetting =
@@ -1573,6 +1601,7 @@ data PrimaryKeySetting s = PrimaryKeySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @primary_key@ settings value.
 newPrimaryKeySetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -1607,6 +1636,7 @@ instance P.HasType' (PrimaryKeySetting s) (TF.Attr s P.Text) where
 data RecordsSetting s = RecordsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @records@ settings value.
 newRecordsSetting
     :: RecordsSetting s
 newRecordsSetting =
@@ -1662,6 +1692,7 @@ data ReferConfigSetting s = ReferConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @refer_config@ settings value.
 newReferConfigSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @refer_list@ - 'P.referList'
     -> ReferConfigSetting s
@@ -1708,6 +1739,7 @@ data RefererConfigSetting s = RefererConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @referer_config@ settings value.
 newRefererConfigSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @referers@ - 'P.referers'
     -> RefererConfigSetting s
@@ -1741,6 +1773,7 @@ instance P.HasReferers (RefererConfigSetting s) (TF.Attr s [TF.Attr s P.Text]) w
 data RegionsSetting s = RegionsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @regions@ settings value.
 newRegionsSetting
     :: RegionsSetting s
 newRegionsSetting =
@@ -1766,6 +1799,7 @@ instance s ~ s' => P.HasComputedRegionId (TF.Ref s' (RegionsSetting s)) (TF.Attr
 data RolesSetting s = RolesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @roles@ settings value.
 newRolesSetting
     :: RolesSetting s
 newRolesSetting =
@@ -1806,6 +1840,7 @@ instance s ~ s' => P.HasComputedUpdateDate (TF.Ref s' (RolesSetting s)) (TF.Attr
 data RulesSetting s = RulesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @rules@ settings value.
 newRulesSetting
     :: RulesSetting s
 newRulesSetting =
@@ -1870,6 +1905,7 @@ data ServersSetting s = ServersSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @servers@ settings value.
 newServersSetting
     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @server_ids@ - 'P.serverIds'
     -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
@@ -1911,6 +1947,7 @@ instance P.HasWeight (ServersSetting s) (TF.Attr s P.Int) where
 data ServicesSetting s = ServicesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @services@ settings value.
 newServicesSetting
     :: ServicesSetting s
 newServicesSetting =
@@ -1939,6 +1976,7 @@ instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ServicesSetting s)) (TF.Attr
 data ShardsSetting s = ShardsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @shards@ settings value.
 newShardsSetting
     :: ShardsSetting s
 newShardsSetting =
@@ -1976,6 +2014,7 @@ data StatementSetting s = StatementSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @statement@ settings value.
 newStatementSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @effect@ - 'P.effect'
@@ -2018,6 +2057,7 @@ instance P.HasResource' (StatementSetting s) (TF.Attr s [TF.Attr s P.Text]) wher
 data UsersSetting s = UsersSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @users@ settings value.
 newUsersSetting
     :: UsersSetting s
 newUsersSetting =
@@ -2052,6 +2092,7 @@ data VpcConfigSetting s = VpcConfigSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @vpc_config@ settings value.
 newVpcConfigSetting
     :: TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @vswitch_ids@ - 'P.vswitchIds'
@@ -2089,6 +2130,7 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcConfigSetting s)) (TF.Attr 
 data VpcsSetting s = VpcsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @vpcs@ settings value.
 newVpcsSetting
     :: VpcsSetting s
 newVpcsSetting =
@@ -2138,6 +2180,7 @@ instance s ~ s' => P.HasComputedVswitchIds (TF.Ref s' (VpcsSetting s)) (TF.Attr 
 data VswitchesSetting s = VswitchesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @vswitches@ settings value.
 newVswitchesSetting
     :: VswitchesSetting s
 newVswitchesSetting =
@@ -2187,6 +2230,7 @@ data WebsiteSetting s = WebsiteSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @website@ settings value.
 newWebsiteSetting
     :: TF.Attr s P.Text -- ^ @index_document@ - 'P.indexDocument'
     -> WebsiteSetting s
@@ -2220,6 +2264,7 @@ instance P.HasIndexDocument (WebsiteSetting s) (TF.Attr s P.Text) where
 data WorkerNodesSetting s = WorkerNodesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @worker_nodes@ settings value.
 newWorkerNodesSetting
     :: WorkerNodesSetting s
 newWorkerNodesSetting =
@@ -2245,6 +2290,7 @@ instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (WorkerNodesSetting s)) (TF
 data ZonesSetting s = ZonesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @zones@ settings value.
 newZonesSetting
     :: ZonesSetting s
 newZonesSetting =

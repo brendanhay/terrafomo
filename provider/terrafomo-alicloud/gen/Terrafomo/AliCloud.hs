@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.AliCloud
-    ( module Terrafomo.AliCloud.DataSource
-    , module Terrafomo.AliCloud.Lens
-    , module Terrafomo.AliCloud.Provider
-    , module Terrafomo.AliCloud.Resource
-    , module Terrafomo.AliCloud.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.AliCloud.Provider
+
+    -- * Custom Types
     , module Terrafomo.AliCloud.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.AliCloud.DataSource
+
+    -- * Resources
+    , module Terrafomo.AliCloud.Resource
+
+    -- * Settings
+    , module Terrafomo.AliCloud.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.AliCloud.Lens
     ) where
 
 import Terrafomo.AliCloud.DataSource
