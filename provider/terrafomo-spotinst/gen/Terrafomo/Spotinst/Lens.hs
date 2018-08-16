@@ -36,11 +36,14 @@ module Terrafomo.Spotinst.Lens
     , HasBalancerId (..)
     , HasBatchSizePercentage (..)
     , HasBlockDevicesMode (..)
+    , HasCapacityUnit (..)
     , HasCleanupOnFailure (..)
     , HasClusterIdentifier (..)
     , HasClusterName (..)
+    , HasCooldown (..)
     , HasCpuPerUnit (..)
     , HasCronExpression (..)
+    , HasDeleteOnTermination (..)
     , HasDeploymentGroupName (..)
     , HasDeploymentGroups (..)
     , HasDeploymentId (..)
@@ -51,9 +54,11 @@ module Terrafomo.Spotinst.Lens
     , HasDimensions (..)
     , HasDrainingTimeout (..)
     , HasEbsBlockDevice (..)
+    , HasEbsOptimized (..)
     , HasElasticIps (..)
     , HasElasticLoadBalancers (..)
     , HasEnableMonitoring (..)
+    , HasEncrypted (..)
     , HasEndpoint (..)
     , HasEphemeralBlockDevice (..)
     , HasEvaluationPeriods (..)
@@ -89,11 +94,13 @@ module Terrafomo.Spotinst.Lens
     , HasMasterHost (..)
     , HasMasterPort (..)
     , HasMaxCapacity (..)
+    , HasMaxSize (..)
     , HasMaxTargetCapacity (..)
     , HasMaximum (..)
     , HasMemoryPerUnit (..)
     , HasMetricName (..)
     , HasMinCapacity (..)
+    , HasMinSize (..)
     , HasMinTargetCapacity (..)
     , HasMinimum (..)
     , HasMultaiTargetSets (..)
@@ -103,8 +110,10 @@ module Terrafomo.Spotinst.Lens
     , HasNetworkInterfaceId (..)
     , HasNumOfUnits (..)
     , HasOndemandCount (..)
+    , HasOperator (..)
     , HasOrientation (..)
     , HasPerformAt (..)
+    , HasPeriod (..)
     , HasPersistBlockDevices (..)
     , HasPersistPrivateIp (..)
     , HasPersistRootDevice (..)
@@ -138,9 +147,11 @@ module Terrafomo.Spotinst.Lens
     , HasShouldRoll (..)
     , HasSignal (..)
     , HasSnapshotId (..)
+    , HasSource (..)
     , HasSpotPercentage (..)
     , HasStartTime (..)
     , HasStatefulDeallocation (..)
+    , HasStatistic (..)
     , HasSubnetIds (..)
     , HasTags (..)
     , HasTarget (..)
@@ -160,6 +171,7 @@ module Terrafomo.Spotinst.Lens
     , HasValue (..)
     , HasVirtualName (..)
     , HasVolumeSize (..)
+    , HasVolumeType (..)
     , HasWeight (..)
 
     -- ** Computed Attributes
@@ -310,6 +322,12 @@ class HasBlockDevicesMode a b | a -> b where
 instance HasBlockDevicesMode a b => HasBlockDevicesMode (TF.Schema l p a) b where
     blockDevicesMode = TF.configuration . blockDevicesMode
 
+class HasCapacityUnit a b | a -> b where
+    capacityUnit :: P.Lens' a b
+
+instance HasCapacityUnit a b => HasCapacityUnit (TF.Schema l p a) b where
+    capacityUnit = TF.configuration . capacityUnit
+
 class HasCleanupOnFailure a b | a -> b where
     cleanupOnFailure :: P.Lens' a b
 
@@ -328,6 +346,12 @@ class HasClusterName a b | a -> b where
 instance HasClusterName a b => HasClusterName (TF.Schema l p a) b where
     clusterName = TF.configuration . clusterName
 
+class HasCooldown a b | a -> b where
+    cooldown :: P.Lens' a b
+
+instance HasCooldown a b => HasCooldown (TF.Schema l p a) b where
+    cooldown = TF.configuration . cooldown
+
 class HasCpuPerUnit a b | a -> b where
     cpuPerUnit :: P.Lens' a b
 
@@ -339,6 +363,12 @@ class HasCronExpression a b | a -> b where
 
 instance HasCronExpression a b => HasCronExpression (TF.Schema l p a) b where
     cronExpression = TF.configuration . cronExpression
+
+class HasDeleteOnTermination a b | a -> b where
+    deleteOnTermination :: P.Lens' a b
+
+instance HasDeleteOnTermination a b => HasDeleteOnTermination (TF.Schema l p a) b where
+    deleteOnTermination = TF.configuration . deleteOnTermination
 
 class HasDeploymentGroupName a b | a -> b where
     deploymentGroupName :: P.Lens' a b
@@ -400,6 +430,12 @@ class HasEbsBlockDevice a b | a -> b where
 instance HasEbsBlockDevice a b => HasEbsBlockDevice (TF.Schema l p a) b where
     ebsBlockDevice = TF.configuration . ebsBlockDevice
 
+class HasEbsOptimized a b | a -> b where
+    ebsOptimized :: P.Lens' a b
+
+instance HasEbsOptimized a b => HasEbsOptimized (TF.Schema l p a) b where
+    ebsOptimized = TF.configuration . ebsOptimized
+
 class HasElasticIps a b | a -> b where
     elasticIps :: P.Lens' a b
 
@@ -417,6 +453,12 @@ class HasEnableMonitoring a b | a -> b where
 
 instance HasEnableMonitoring a b => HasEnableMonitoring (TF.Schema l p a) b where
     enableMonitoring = TF.configuration . enableMonitoring
+
+class HasEncrypted a b | a -> b where
+    encrypted :: P.Lens' a b
+
+instance HasEncrypted a b => HasEncrypted (TF.Schema l p a) b where
+    encrypted = TF.configuration . encrypted
 
 class HasEndpoint a b | a -> b where
     endpoint :: P.Lens' a b
@@ -628,6 +670,12 @@ class HasMaxCapacity a b | a -> b where
 instance HasMaxCapacity a b => HasMaxCapacity (TF.Schema l p a) b where
     maxCapacity = TF.configuration . maxCapacity
 
+class HasMaxSize a b | a -> b where
+    maxSize :: P.Lens' a b
+
+instance HasMaxSize a b => HasMaxSize (TF.Schema l p a) b where
+    maxSize = TF.configuration . maxSize
+
 class HasMaxTargetCapacity a b | a -> b where
     maxTargetCapacity :: P.Lens' a b
 
@@ -657,6 +705,12 @@ class HasMinCapacity a b | a -> b where
 
 instance HasMinCapacity a b => HasMinCapacity (TF.Schema l p a) b where
     minCapacity = TF.configuration . minCapacity
+
+class HasMinSize a b | a -> b where
+    minSize :: P.Lens' a b
+
+instance HasMinSize a b => HasMinSize (TF.Schema l p a) b where
+    minSize = TF.configuration . minSize
 
 class HasMinTargetCapacity a b | a -> b where
     minTargetCapacity :: P.Lens' a b
@@ -712,6 +766,12 @@ class HasOndemandCount a b | a -> b where
 instance HasOndemandCount a b => HasOndemandCount (TF.Schema l p a) b where
     ondemandCount = TF.configuration . ondemandCount
 
+class HasOperator a b | a -> b where
+    operator :: P.Lens' a b
+
+instance HasOperator a b => HasOperator (TF.Schema l p a) b where
+    operator = TF.configuration . operator
+
 class HasOrientation a b | a -> b where
     orientation :: P.Lens' a b
 
@@ -723,6 +783,12 @@ class HasPerformAt a b | a -> b where
 
 instance HasPerformAt a b => HasPerformAt (TF.Schema l p a) b where
     performAt = TF.configuration . performAt
+
+class HasPeriod a b | a -> b where
+    period :: P.Lens' a b
+
+instance HasPeriod a b => HasPeriod (TF.Schema l p a) b where
+    period = TF.configuration . period
 
 class HasPersistBlockDevices a b | a -> b where
     persistBlockDevices :: P.Lens' a b
@@ -922,6 +988,12 @@ class HasSnapshotId a b | a -> b where
 instance HasSnapshotId a b => HasSnapshotId (TF.Schema l p a) b where
     snapshotId = TF.configuration . snapshotId
 
+class HasSource a b | a -> b where
+    source :: P.Lens' a b
+
+instance HasSource a b => HasSource (TF.Schema l p a) b where
+    source = TF.configuration . source
+
 class HasSpotPercentage a b | a -> b where
     spotPercentage :: P.Lens' a b
 
@@ -939,6 +1011,12 @@ class HasStatefulDeallocation a b | a -> b where
 
 instance HasStatefulDeallocation a b => HasStatefulDeallocation (TF.Schema l p a) b where
     statefulDeallocation = TF.configuration . statefulDeallocation
+
+class HasStatistic a b | a -> b where
+    statistic :: P.Lens' a b
+
+instance HasStatistic a b => HasStatistic (TF.Schema l p a) b where
+    statistic = TF.configuration . statistic
 
 class HasSubnetIds a b | a -> b where
     subnetIds :: P.Lens' a b
@@ -1053,6 +1131,12 @@ class HasVolumeSize a b | a -> b where
 
 instance HasVolumeSize a b => HasVolumeSize (TF.Schema l p a) b where
     volumeSize = TF.configuration . volumeSize
+
+class HasVolumeType a b | a -> b where
+    volumeType :: P.Lens' a b
+
+instance HasVolumeType a b => HasVolumeType (TF.Schema l p a) b where
+    volumeType = TF.configuration . volumeType
 
 class HasWeight a b | a -> b where
     weight :: P.Lens' a b

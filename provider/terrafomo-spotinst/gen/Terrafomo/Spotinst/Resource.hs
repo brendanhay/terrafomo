@@ -65,6 +65,9 @@ data ElastigroupAwsResource s = ElastigroupAwsResource'
     , _blockDevicesMode :: TF.Attr s P.Text
     -- ^ @block_devices_mode@ - (Optional)
     --
+    , _capacityUnit :: TF.Attr s P.Text
+    -- ^ @capacity_unit@ - (Optional)
+    --
     , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Required)
     --
@@ -76,6 +79,9 @@ data ElastigroupAwsResource s = ElastigroupAwsResource'
     --
     , _ebsBlockDevice :: TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)]
     -- ^ @ebs_block_device@ - (Optional)
+    --
+    , _ebsOptimized :: TF.Attr s P.Bool
+    -- ^ @ebs_optimized@ - (Optional)
     --
     , _elasticIps :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @elastic_ips@ - (Optional)
@@ -145,6 +151,12 @@ data ElastigroupAwsResource s = ElastigroupAwsResource'
     --
     , _lifetimePeriod :: TF.Attr s P.Text
     -- ^ @lifetime_period@ - (Optional)
+    --
+    , _maxSize :: TF.Attr s P.Int
+    -- ^ @max_size@ - (Optional)
+    --
+    , _minSize :: TF.Attr s P.Int
+    -- ^ @min_size@ - (Optional)
     --
     , _multaiTargetSets :: TF.Attr s [TF.Attr s (MultaiTargetSetsSetting s)]
     -- ^ @multai_target_sets@ - (Optional)
@@ -257,10 +269,12 @@ elastigroupAwsResource _description _securityGroups _name _fallbackToOndemand _i
         ElastigroupAwsResource'
             { _availabilityZones = TF.Nil
             , _blockDevicesMode = TF.Nil
+            , _capacityUnit = TF.Nil
             , _description = _description
             , _desiredCapacity = TF.Nil
             , _drainingTimeout = TF.Nil
             , _ebsBlockDevice = TF.Nil
+            , _ebsOptimized = TF.Nil
             , _elasticIps = TF.Nil
             , _elasticLoadBalancers = TF.Nil
             , _enableMonitoring = TF.value P.False
@@ -284,6 +298,8 @@ elastigroupAwsResource _description _securityGroups _name _fallbackToOndemand _i
             , _integrationRancher = TF.Nil
             , _keyName = TF.Nil
             , _lifetimePeriod = TF.Nil
+            , _maxSize = TF.Nil
+            , _minSize = TF.Nil
             , _multaiTargetSets = TF.Nil
             , _name = _name
             , _networkInterface = TF.Nil
@@ -318,10 +334,12 @@ instance TF.IsObject (ElastigroupAwsResource s) where
     toObject ElastigroupAwsResource'{..} = P.catMaybes
         [ TF.assign "availability_zones" <$> TF.attribute _availabilityZones
         , TF.assign "block_devices_mode" <$> TF.attribute _blockDevicesMode
+        , TF.assign "capacity_unit" <$> TF.attribute _capacityUnit
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "desired_capacity" <$> TF.attribute _desiredCapacity
         , TF.assign "draining_timeout" <$> TF.attribute _drainingTimeout
         , TF.assign "ebs_block_device" <$> TF.attribute _ebsBlockDevice
+        , TF.assign "ebs_optimized" <$> TF.attribute _ebsOptimized
         , TF.assign "elastic_ips" <$> TF.attribute _elasticIps
         , TF.assign "elastic_load_balancers" <$> TF.attribute _elasticLoadBalancers
         , TF.assign "enable_monitoring" <$> TF.attribute _enableMonitoring
@@ -345,6 +363,8 @@ instance TF.IsObject (ElastigroupAwsResource s) where
         , TF.assign "integration_rancher" <$> TF.attribute _integrationRancher
         , TF.assign "key_name" <$> TF.attribute _keyName
         , TF.assign "lifetime_period" <$> TF.attribute _lifetimePeriod
+        , TF.assign "max_size" <$> TF.attribute _maxSize
+        , TF.assign "min_size" <$> TF.attribute _minSize
         , TF.assign "multai_target_sets" <$> TF.attribute _multaiTargetSets
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network_interface" <$> TF.attribute _networkInterface
@@ -453,6 +473,11 @@ instance P.HasBlockDevicesMode (ElastigroupAwsResource s) (TF.Attr s P.Text) whe
         P.lens (_blockDevicesMode :: ElastigroupAwsResource s -> TF.Attr s P.Text)
                (\s a -> s { _blockDevicesMode = a } :: ElastigroupAwsResource s)
 
+instance P.HasCapacityUnit (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+    capacityUnit =
+        P.lens (_capacityUnit :: ElastigroupAwsResource s -> TF.Attr s P.Text)
+               (\s a -> s { _capacityUnit = a } :: ElastigroupAwsResource s)
+
 instance P.HasDescription (ElastigroupAwsResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: ElastigroupAwsResource s -> TF.Attr s P.Text)
@@ -472,6 +497,11 @@ instance P.HasEbsBlockDevice (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (E
     ebsBlockDevice =
         P.lens (_ebsBlockDevice :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)])
                (\s a -> s { _ebsBlockDevice = a } :: ElastigroupAwsResource s)
+
+instance P.HasEbsOptimized (ElastigroupAwsResource s) (TF.Attr s P.Bool) where
+    ebsOptimized =
+        P.lens (_ebsOptimized :: ElastigroupAwsResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _ebsOptimized = a } :: ElastigroupAwsResource s)
 
 instance P.HasElasticIps (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s P.Text]) where
     elasticIps =
@@ -587,6 +617,16 @@ instance P.HasLifetimePeriod (ElastigroupAwsResource s) (TF.Attr s P.Text) where
     lifetimePeriod =
         P.lens (_lifetimePeriod :: ElastigroupAwsResource s -> TF.Attr s P.Text)
                (\s a -> s { _lifetimePeriod = a } :: ElastigroupAwsResource s)
+
+instance P.HasMaxSize (ElastigroupAwsResource s) (TF.Attr s P.Int) where
+    maxSize =
+        P.lens (_maxSize :: ElastigroupAwsResource s -> TF.Attr s P.Int)
+               (\s a -> s { _maxSize = a } :: ElastigroupAwsResource s)
+
+instance P.HasMinSize (ElastigroupAwsResource s) (TF.Attr s P.Int) where
+    minSize =
+        P.lens (_minSize :: ElastigroupAwsResource s -> TF.Attr s P.Int)
+               (\s a -> s { _minSize = a } :: ElastigroupAwsResource s)
 
 instance P.HasMultaiTargetSets (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (MultaiTargetSetsSetting s)]) where
     multaiTargetSets =

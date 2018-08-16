@@ -404,20 +404,29 @@ instance P.HasDeploymentGroupName (DeploymentGroupsSetting s) (TF.Attr s P.Text)
 
 -- | @ebs_block_device@ nested settings.
 data EbsBlockDeviceSetting s = EbsBlockDeviceSetting'
-    { _deviceName :: TF.Attr s P.Text
+    { _deleteOnTermination :: TF.Attr s P.Bool
+    -- ^ @delete_on_termination@ - (Optional)
+    --
+    , _deviceName          :: TF.Attr s P.Text
     -- ^ @device_name@ - (Required)
     --
-    , _iops       :: TF.Attr s P.Int
+    , _encrypted           :: TF.Attr s P.Bool
+    -- ^ @encrypted@ - (Optional)
+    --
+    , _iops                :: TF.Attr s P.Int
     -- ^ @iops@ - (Optional)
     --
-    , _kmsKeyId   :: TF.Attr s P.Text
+    , _kmsKeyId            :: TF.Attr s P.Text
     -- ^ @kms_key_id@ - (Optional)
     --
-    , _snapshotId :: TF.Attr s P.Text
+    , _snapshotId          :: TF.Attr s P.Text
     -- ^ @snapshot_id@ - (Optional)
     --
-    , _volumeSize :: TF.Attr s P.Int
+    , _volumeSize          :: TF.Attr s P.Int
     -- ^ @volume_size@ - (Optional)
+    --
+    , _volumeType          :: TF.Attr s P.Text
+    -- ^ @volume_type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -427,30 +436,46 @@ ebsBlockDeviceSetting
     -> EbsBlockDeviceSetting s
 ebsBlockDeviceSetting _deviceName =
     EbsBlockDeviceSetting'
-        { _deviceName = _deviceName
+        { _deleteOnTermination = TF.Nil
+        , _deviceName = _deviceName
+        , _encrypted = TF.Nil
         , _iops = TF.Nil
         , _kmsKeyId = TF.Nil
         , _snapshotId = TF.Nil
         , _volumeSize = TF.Nil
+        , _volumeType = TF.Nil
         }
 
 instance TF.IsValue  (EbsBlockDeviceSetting s)
 instance TF.IsObject (EbsBlockDeviceSetting s) where
     toObject EbsBlockDeviceSetting'{..} = P.catMaybes
-        [ TF.assign "device_name" <$> TF.attribute _deviceName
+        [ TF.assign "delete_on_termination" <$> TF.attribute _deleteOnTermination
+        , TF.assign "device_name" <$> TF.attribute _deviceName
+        , TF.assign "encrypted" <$> TF.attribute _encrypted
         , TF.assign "iops" <$> TF.attribute _iops
         , TF.assign "kms_key_id" <$> TF.attribute _kmsKeyId
         , TF.assign "snapshot_id" <$> TF.attribute _snapshotId
         , TF.assign "volume_size" <$> TF.attribute _volumeSize
+        , TF.assign "volume_type" <$> TF.attribute _volumeType
         ]
 
 instance TF.IsValid (EbsBlockDeviceSetting s) where
     validator = P.mempty
 
+instance P.HasDeleteOnTermination (EbsBlockDeviceSetting s) (TF.Attr s P.Bool) where
+    deleteOnTermination =
+        P.lens (_deleteOnTermination :: EbsBlockDeviceSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _deleteOnTermination = a } :: EbsBlockDeviceSetting s)
+
 instance P.HasDeviceName (EbsBlockDeviceSetting s) (TF.Attr s P.Text) where
     deviceName =
         P.lens (_deviceName :: EbsBlockDeviceSetting s -> TF.Attr s P.Text)
                (\s a -> s { _deviceName = a } :: EbsBlockDeviceSetting s)
+
+instance P.HasEncrypted (EbsBlockDeviceSetting s) (TF.Attr s P.Bool) where
+    encrypted =
+        P.lens (_encrypted :: EbsBlockDeviceSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _encrypted = a } :: EbsBlockDeviceSetting s)
 
 instance P.HasIops (EbsBlockDeviceSetting s) (TF.Attr s P.Int) where
     iops =
@@ -471,6 +496,11 @@ instance P.HasVolumeSize (EbsBlockDeviceSetting s) (TF.Attr s P.Int) where
     volumeSize =
         P.lens (_volumeSize :: EbsBlockDeviceSetting s -> TF.Attr s P.Int)
                (\s a -> s { _volumeSize = a } :: EbsBlockDeviceSetting s)
+
+instance P.HasVolumeType (EbsBlockDeviceSetting s) (TF.Attr s P.Text) where
+    volumeType =
+        P.lens (_volumeType :: EbsBlockDeviceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _volumeType = a } :: EbsBlockDeviceSetting s)
 
 instance s ~ s' => P.HasComputedDeleteOnTermination (TF.Ref s' (EbsBlockDeviceSetting s)) (TF.Attr s P.Bool) where
     computedDeleteOnTermination x = TF.compute (TF.refKey x) "delete_on_termination"
@@ -1140,6 +1170,9 @@ data NetworkInterfaceSetting s = NetworkInterfaceSetting'
     { _associatePublicIpAddress       :: TF.Attr s P.Bool
     -- ^ @associate_public_ip_address@ - (Optional)
     --
+    , _deleteOnTermination            :: TF.Attr s P.Bool
+    -- ^ @delete_on_termination@ - (Optional)
+    --
     , _description                    :: TF.Attr s P.Text
     -- ^ @description@ - (Required)
     --
@@ -1165,6 +1198,7 @@ networkInterfaceSetting
 networkInterfaceSetting _description _deviceIndex =
     NetworkInterfaceSetting'
         { _associatePublicIpAddress = TF.Nil
+        , _deleteOnTermination = TF.Nil
         , _description = _description
         , _deviceIndex = _deviceIndex
         , _networkInterfaceId = TF.Nil
@@ -1176,6 +1210,7 @@ instance TF.IsValue  (NetworkInterfaceSetting s)
 instance TF.IsObject (NetworkInterfaceSetting s) where
     toObject NetworkInterfaceSetting'{..} = P.catMaybes
         [ TF.assign "associate_public_ip_address" <$> TF.attribute _associatePublicIpAddress
+        , TF.assign "delete_on_termination" <$> TF.attribute _deleteOnTermination
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "device_index" <$> TF.attribute _deviceIndex
         , TF.assign "network_interface_id" <$> TF.attribute _networkInterfaceId
@@ -1190,6 +1225,11 @@ instance P.HasAssociatePublicIpAddress (NetworkInterfaceSetting s) (TF.Attr s P.
     associatePublicIpAddress =
         P.lens (_associatePublicIpAddress :: NetworkInterfaceSetting s -> TF.Attr s P.Bool)
                (\s a -> s { _associatePublicIpAddress = a } :: NetworkInterfaceSetting s)
+
+instance P.HasDeleteOnTermination (NetworkInterfaceSetting s) (TF.Attr s P.Bool) where
+    deleteOnTermination =
+        P.lens (_deleteOnTermination :: NetworkInterfaceSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _deleteOnTermination = a } :: NetworkInterfaceSetting s)
 
 instance P.HasDescription (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
     description =
@@ -1346,8 +1386,14 @@ data ScalingDownPolicySetting s = ScalingDownPolicySetting'
     , _adjustment        :: TF.Attr s P.Text
     -- ^ @adjustment@ - (Optional)
     --
+    , _cooldown          :: TF.Attr s P.Int
+    -- ^ @cooldown@ - (Optional)
+    --
     , _dimensions        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @dimensions@ - (Optional)
+    --
+    , _evaluationPeriods :: TF.Attr s P.Int
+    -- ^ @evaluation_periods@ - (Optional)
     --
     , _maxTargetCapacity :: TF.Attr s P.Text
     -- ^ @max_target_capacity@ - (Optional)
@@ -1367,8 +1413,20 @@ data ScalingDownPolicySetting s = ScalingDownPolicySetting'
     , _namespace         :: TF.Attr s P.Text
     -- ^ @namespace@ - (Required)
     --
+    , _operator          :: TF.Attr s P.Text
+    -- ^ @operator@ - (Optional)
+    --
+    , _period            :: TF.Attr s P.Int
+    -- ^ @period@ - (Optional)
+    --
     , _policyName        :: TF.Attr s P.Text
     -- ^ @policy_name@ - (Required)
+    --
+    , _source            :: TF.Attr s P.Text
+    -- ^ @source@ - (Optional)
+    --
+    , _statistic         :: TF.Attr s P.Text
+    -- ^ @statistic@ - (Optional)
     --
     , _target            :: TF.Attr s P.Text
     -- ^ @target@ - (Optional)
@@ -1393,14 +1451,20 @@ scalingDownPolicySetting _metricName _policyName _namespace _threshold _unit =
     ScalingDownPolicySetting'
         { _actionType = TF.Nil
         , _adjustment = TF.Nil
+        , _cooldown = TF.Nil
         , _dimensions = TF.Nil
+        , _evaluationPeriods = TF.Nil
         , _maxTargetCapacity = TF.Nil
         , _maximum = TF.Nil
         , _metricName = _metricName
         , _minTargetCapacity = TF.Nil
         , _minimum = TF.Nil
         , _namespace = _namespace
+        , _operator = TF.Nil
+        , _period = TF.Nil
         , _policyName = _policyName
+        , _source = TF.Nil
+        , _statistic = TF.Nil
         , _target = TF.Nil
         , _threshold = _threshold
         , _unit = _unit
@@ -1411,14 +1475,20 @@ instance TF.IsObject (ScalingDownPolicySetting s) where
     toObject ScalingDownPolicySetting'{..} = P.catMaybes
         [ TF.assign "action_type" <$> TF.attribute _actionType
         , TF.assign "adjustment" <$> TF.attribute _adjustment
+        , TF.assign "cooldown" <$> TF.attribute _cooldown
         , TF.assign "dimensions" <$> TF.attribute _dimensions
+        , TF.assign "evaluation_periods" <$> TF.attribute _evaluationPeriods
         , TF.assign "max_target_capacity" <$> TF.attribute _maxTargetCapacity
         , TF.assign "maximum" <$> TF.attribute _maximum
         , TF.assign "metric_name" <$> TF.attribute _metricName
         , TF.assign "min_target_capacity" <$> TF.attribute _minTargetCapacity
         , TF.assign "minimum" <$> TF.attribute _minimum
         , TF.assign "namespace" <$> TF.attribute _namespace
+        , TF.assign "operator" <$> TF.attribute _operator
+        , TF.assign "period" <$> TF.attribute _period
         , TF.assign "policy_name" <$> TF.attribute _policyName
+        , TF.assign "source" <$> TF.attribute _source
+        , TF.assign "statistic" <$> TF.attribute _statistic
         , TF.assign "target" <$> TF.attribute _target
         , TF.assign "threshold" <$> TF.attribute _threshold
         , TF.assign "unit" <$> TF.attribute _unit
@@ -1437,10 +1507,20 @@ instance P.HasAdjustment (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
         P.lens (_adjustment :: ScalingDownPolicySetting s -> TF.Attr s P.Text)
                (\s a -> s { _adjustment = a } :: ScalingDownPolicySetting s)
 
+instance P.HasCooldown (ScalingDownPolicySetting s) (TF.Attr s P.Int) where
+    cooldown =
+        P.lens (_cooldown :: ScalingDownPolicySetting s -> TF.Attr s P.Int)
+               (\s a -> s { _cooldown = a } :: ScalingDownPolicySetting s)
+
 instance P.HasDimensions (ScalingDownPolicySetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     dimensions =
         P.lens (_dimensions :: ScalingDownPolicySetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _dimensions = a } :: ScalingDownPolicySetting s)
+
+instance P.HasEvaluationPeriods (ScalingDownPolicySetting s) (TF.Attr s P.Int) where
+    evaluationPeriods =
+        P.lens (_evaluationPeriods :: ScalingDownPolicySetting s -> TF.Attr s P.Int)
+               (\s a -> s { _evaluationPeriods = a } :: ScalingDownPolicySetting s)
 
 instance P.HasMaxTargetCapacity (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
     maxTargetCapacity =
@@ -1472,10 +1552,30 @@ instance P.HasNamespace (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
         P.lens (_namespace :: ScalingDownPolicySetting s -> TF.Attr s P.Text)
                (\s a -> s { _namespace = a } :: ScalingDownPolicySetting s)
 
+instance P.HasOperator (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
+    operator =
+        P.lens (_operator :: ScalingDownPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _operator = a } :: ScalingDownPolicySetting s)
+
+instance P.HasPeriod (ScalingDownPolicySetting s) (TF.Attr s P.Int) where
+    period =
+        P.lens (_period :: ScalingDownPolicySetting s -> TF.Attr s P.Int)
+               (\s a -> s { _period = a } :: ScalingDownPolicySetting s)
+
 instance P.HasPolicyName (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
     policyName =
         P.lens (_policyName :: ScalingDownPolicySetting s -> TF.Attr s P.Text)
                (\s a -> s { _policyName = a } :: ScalingDownPolicySetting s)
+
+instance P.HasSource (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
+    source =
+        P.lens (_source :: ScalingDownPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _source = a } :: ScalingDownPolicySetting s)
+
+instance P.HasStatistic (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
+    statistic =
+        P.lens (_statistic :: ScalingDownPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _statistic = a } :: ScalingDownPolicySetting s)
 
 instance P.HasTarget (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
     target =
@@ -1512,7 +1612,10 @@ instance s ~ s' => P.HasComputedStatistic (TF.Ref s' (ScalingDownPolicySetting s
 
 -- | @scaling_target_policy@ nested settings.
 data ScalingTargetPolicySetting s = ScalingTargetPolicySetting'
-    { _dimensions :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    { _cooldown   :: TF.Attr s P.Int
+    -- ^ @cooldown@ - (Optional)
+    --
+    , _dimensions :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @dimensions@ - (Optional)
     --
     , _metricName :: TF.Attr s P.Text
@@ -1523,6 +1626,12 @@ data ScalingTargetPolicySetting s = ScalingTargetPolicySetting'
     --
     , _policyName :: TF.Attr s P.Text
     -- ^ @policy_name@ - (Required)
+    --
+    , _source     :: TF.Attr s P.Text
+    -- ^ @source@ - (Optional)
+    --
+    , _statistic  :: TF.Attr s P.Text
+    -- ^ @statistic@ - (Optional)
     --
     , _target     :: TF.Attr s P.Double
     -- ^ @target@ - (Required)
@@ -1542,10 +1651,13 @@ scalingTargetPolicySetting
     -> ScalingTargetPolicySetting s
 scalingTargetPolicySetting _metricName _policyName _namespace _target _unit =
     ScalingTargetPolicySetting'
-        { _dimensions = TF.Nil
+        { _cooldown = TF.Nil
+        , _dimensions = TF.Nil
         , _metricName = _metricName
         , _namespace = _namespace
         , _policyName = _policyName
+        , _source = TF.Nil
+        , _statistic = TF.Nil
         , _target = _target
         , _unit = _unit
         }
@@ -1553,16 +1665,24 @@ scalingTargetPolicySetting _metricName _policyName _namespace _target _unit =
 instance TF.IsValue  (ScalingTargetPolicySetting s)
 instance TF.IsObject (ScalingTargetPolicySetting s) where
     toObject ScalingTargetPolicySetting'{..} = P.catMaybes
-        [ TF.assign "dimensions" <$> TF.attribute _dimensions
+        [ TF.assign "cooldown" <$> TF.attribute _cooldown
+        , TF.assign "dimensions" <$> TF.attribute _dimensions
         , TF.assign "metric_name" <$> TF.attribute _metricName
         , TF.assign "namespace" <$> TF.attribute _namespace
         , TF.assign "policy_name" <$> TF.attribute _policyName
+        , TF.assign "source" <$> TF.attribute _source
+        , TF.assign "statistic" <$> TF.attribute _statistic
         , TF.assign "target" <$> TF.attribute _target
         , TF.assign "unit" <$> TF.attribute _unit
         ]
 
 instance TF.IsValid (ScalingTargetPolicySetting s) where
     validator = P.mempty
+
+instance P.HasCooldown (ScalingTargetPolicySetting s) (TF.Attr s P.Int) where
+    cooldown =
+        P.lens (_cooldown :: ScalingTargetPolicySetting s -> TF.Attr s P.Int)
+               (\s a -> s { _cooldown = a } :: ScalingTargetPolicySetting s)
 
 instance P.HasDimensions (ScalingTargetPolicySetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     dimensions =
@@ -1583,6 +1703,16 @@ instance P.HasPolicyName (ScalingTargetPolicySetting s) (TF.Attr s P.Text) where
     policyName =
         P.lens (_policyName :: ScalingTargetPolicySetting s -> TF.Attr s P.Text)
                (\s a -> s { _policyName = a } :: ScalingTargetPolicySetting s)
+
+instance P.HasSource (ScalingTargetPolicySetting s) (TF.Attr s P.Text) where
+    source =
+        P.lens (_source :: ScalingTargetPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _source = a } :: ScalingTargetPolicySetting s)
+
+instance P.HasStatistic (ScalingTargetPolicySetting s) (TF.Attr s P.Text) where
+    statistic =
+        P.lens (_statistic :: ScalingTargetPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _statistic = a } :: ScalingTargetPolicySetting s)
 
 instance P.HasTarget (ScalingTargetPolicySetting s) (TF.Attr s P.Double) where
     target =
@@ -1611,8 +1741,14 @@ data ScalingUpPolicySetting s = ScalingUpPolicySetting'
     , _adjustment        :: TF.Attr s P.Text
     -- ^ @adjustment@ - (Optional)
     --
+    , _cooldown          :: TF.Attr s P.Int
+    -- ^ @cooldown@ - (Optional)
+    --
     , _dimensions        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @dimensions@ - (Optional)
+    --
+    , _evaluationPeriods :: TF.Attr s P.Int
+    -- ^ @evaluation_periods@ - (Optional)
     --
     , _maxTargetCapacity :: TF.Attr s P.Text
     -- ^ @max_target_capacity@ - (Optional)
@@ -1632,8 +1768,20 @@ data ScalingUpPolicySetting s = ScalingUpPolicySetting'
     , _namespace         :: TF.Attr s P.Text
     -- ^ @namespace@ - (Required)
     --
+    , _operator          :: TF.Attr s P.Text
+    -- ^ @operator@ - (Optional)
+    --
+    , _period            :: TF.Attr s P.Int
+    -- ^ @period@ - (Optional)
+    --
     , _policyName        :: TF.Attr s P.Text
     -- ^ @policy_name@ - (Required)
+    --
+    , _source            :: TF.Attr s P.Text
+    -- ^ @source@ - (Optional)
+    --
+    , _statistic         :: TF.Attr s P.Text
+    -- ^ @statistic@ - (Optional)
     --
     , _target            :: TF.Attr s P.Text
     -- ^ @target@ - (Optional)
@@ -1658,14 +1806,20 @@ scalingUpPolicySetting _metricName _policyName _namespace _threshold _unit =
     ScalingUpPolicySetting'
         { _actionType = TF.Nil
         , _adjustment = TF.Nil
+        , _cooldown = TF.Nil
         , _dimensions = TF.Nil
+        , _evaluationPeriods = TF.Nil
         , _maxTargetCapacity = TF.Nil
         , _maximum = TF.Nil
         , _metricName = _metricName
         , _minTargetCapacity = TF.Nil
         , _minimum = TF.Nil
         , _namespace = _namespace
+        , _operator = TF.Nil
+        , _period = TF.Nil
         , _policyName = _policyName
+        , _source = TF.Nil
+        , _statistic = TF.Nil
         , _target = TF.Nil
         , _threshold = _threshold
         , _unit = _unit
@@ -1676,14 +1830,20 @@ instance TF.IsObject (ScalingUpPolicySetting s) where
     toObject ScalingUpPolicySetting'{..} = P.catMaybes
         [ TF.assign "action_type" <$> TF.attribute _actionType
         , TF.assign "adjustment" <$> TF.attribute _adjustment
+        , TF.assign "cooldown" <$> TF.attribute _cooldown
         , TF.assign "dimensions" <$> TF.attribute _dimensions
+        , TF.assign "evaluation_periods" <$> TF.attribute _evaluationPeriods
         , TF.assign "max_target_capacity" <$> TF.attribute _maxTargetCapacity
         , TF.assign "maximum" <$> TF.attribute _maximum
         , TF.assign "metric_name" <$> TF.attribute _metricName
         , TF.assign "min_target_capacity" <$> TF.attribute _minTargetCapacity
         , TF.assign "minimum" <$> TF.attribute _minimum
         , TF.assign "namespace" <$> TF.attribute _namespace
+        , TF.assign "operator" <$> TF.attribute _operator
+        , TF.assign "period" <$> TF.attribute _period
         , TF.assign "policy_name" <$> TF.attribute _policyName
+        , TF.assign "source" <$> TF.attribute _source
+        , TF.assign "statistic" <$> TF.attribute _statistic
         , TF.assign "target" <$> TF.attribute _target
         , TF.assign "threshold" <$> TF.attribute _threshold
         , TF.assign "unit" <$> TF.attribute _unit
@@ -1702,10 +1862,20 @@ instance P.HasAdjustment (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
         P.lens (_adjustment :: ScalingUpPolicySetting s -> TF.Attr s P.Text)
                (\s a -> s { _adjustment = a } :: ScalingUpPolicySetting s)
 
+instance P.HasCooldown (ScalingUpPolicySetting s) (TF.Attr s P.Int) where
+    cooldown =
+        P.lens (_cooldown :: ScalingUpPolicySetting s -> TF.Attr s P.Int)
+               (\s a -> s { _cooldown = a } :: ScalingUpPolicySetting s)
+
 instance P.HasDimensions (ScalingUpPolicySetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     dimensions =
         P.lens (_dimensions :: ScalingUpPolicySetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _dimensions = a } :: ScalingUpPolicySetting s)
+
+instance P.HasEvaluationPeriods (ScalingUpPolicySetting s) (TF.Attr s P.Int) where
+    evaluationPeriods =
+        P.lens (_evaluationPeriods :: ScalingUpPolicySetting s -> TF.Attr s P.Int)
+               (\s a -> s { _evaluationPeriods = a } :: ScalingUpPolicySetting s)
 
 instance P.HasMaxTargetCapacity (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
     maxTargetCapacity =
@@ -1737,10 +1907,30 @@ instance P.HasNamespace (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
         P.lens (_namespace :: ScalingUpPolicySetting s -> TF.Attr s P.Text)
                (\s a -> s { _namespace = a } :: ScalingUpPolicySetting s)
 
+instance P.HasOperator (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
+    operator =
+        P.lens (_operator :: ScalingUpPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _operator = a } :: ScalingUpPolicySetting s)
+
+instance P.HasPeriod (ScalingUpPolicySetting s) (TF.Attr s P.Int) where
+    period =
+        P.lens (_period :: ScalingUpPolicySetting s -> TF.Attr s P.Int)
+               (\s a -> s { _period = a } :: ScalingUpPolicySetting s)
+
 instance P.HasPolicyName (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
     policyName =
         P.lens (_policyName :: ScalingUpPolicySetting s -> TF.Attr s P.Text)
                (\s a -> s { _policyName = a } :: ScalingUpPolicySetting s)
+
+instance P.HasSource (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
+    source =
+        P.lens (_source :: ScalingUpPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _source = a } :: ScalingUpPolicySetting s)
+
+instance P.HasStatistic (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
+    statistic =
+        P.lens (_statistic :: ScalingUpPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _statistic = a } :: ScalingUpPolicySetting s)
 
 instance P.HasTarget (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
     target =
