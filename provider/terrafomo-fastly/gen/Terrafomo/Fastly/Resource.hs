@@ -122,7 +122,7 @@ serviceV1Resource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ServiceV1Resource s)
 serviceV1Resource _domain _name =
-    TF.unsafeResource "fastly_service_v1" P.defaultProvider TF.validator $
+    TF.unsafeResource "fastly_service_v1" TF.validator $
         ServiceV1Resource'
             { _backend = TF.Nil
             , _bigquerylogging = TF.Nil
