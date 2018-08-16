@@ -1593,6 +1593,26 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "Regular expression to use (Only applies to 'regex' and 'regex_repeat'",
+                        "actions.)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"regex\" <$> TF.attribute",
+                    "name": "_regex",
+                    "method": "regex",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRegex",
+                    "validate": false,
+                    "optional": true,
+                    "original": "regex"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "Optional name of a request condition to apply."
                     ],
                     "forceNew": false,
@@ -1625,6 +1645,46 @@
                     "validate": false,
                     "optional": true,
                     "original": "response_condition"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Variable to be used as a source for the header content (Does not apply to",
+                        "'delete' action.)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"source\" <$> TF.attribute",
+                    "name": "_source",
+                    "method": "source",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSource",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Value to substitute in place of regular expression. (Only applies to 'regex'",
+                        "and 'regex_repeat'.)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"substitution\" <$> TF.attribute",
+                    "name": "_substitution",
+                    "method": "substitution",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSubstitution",
+                    "validate": false,
+                    "optional": true,
+                    "original": "substitution"
                 },
                 {
                     "default": "_type'",
@@ -1667,7 +1727,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRegex",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "regex"
                 },
                 {
@@ -1687,7 +1747,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSource",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "source"
                 },
                 {
@@ -1707,7 +1767,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSubstitution",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "substitution"
                 }
             ],
@@ -3870,6 +3930,25 @@
                     "original": "condition"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The default hostname for the version"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"default_host\" <$> TF.attribute",
+                    "name": "_defaultHost",
+                    "method": "defaultHost",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDefaultHost",
+                    "validate": false,
+                    "optional": true,
+                    "original": "default_host"
+                },
+                {
                     "default": "TF.value 3600",
                     "computed": false,
                     "required": false,
@@ -4201,7 +4280,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDefaultHost",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "default_host"
                 }
             ],
