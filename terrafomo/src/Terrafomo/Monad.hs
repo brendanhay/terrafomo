@@ -272,9 +272,9 @@ insertProvider = \case
             MTL.asks (Map.lookup (providerType (Proxy @p)) . aliases)
 
     Just p  -> do
-        let value = HCL.toSection p
+        key <- providerKey p <$> hashSection (providerSection Nothing p)
 
-        key <- providerKey p <$> hashSection value
+        let value = providerSection (Just (keyName key)) p
 
         void $ insertValue key value providers (\s w -> w { providers = s })
 

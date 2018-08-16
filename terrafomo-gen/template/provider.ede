@@ -68,18 +68,17 @@ data Provider = {{ provider.schema.con.name }}
 instance TF.IsProvider Provider where
     type ProviderType {{ provider.schema.name }} = "{{ provider.original }}"
 
-instance TF.IsSection Provider where
-    toSection x@{{ provider.schema.con.name }}{% if !(provider.schema.arguments | empty) %}{..}{% endif %} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                {% for field in provider.schema.arguments %}
-                  , {{ field.value.encoder }} {{ field.value.name }}
-                {% endfor %}
-                  ])
+instance TF.IsObject Provider where
+  {% if provider.schema.arguments | empty %}
+    toObject {{ provider.schema.con.name }} = []
+  {% else %}
+    toObject x@{{ provider.schema.con.name }}{..} =
+        P.catMaybes
+          {% for field in provider.schema.arguments %}
+            {% if field.first %}[ {% else %}, {% endif %}{{ field.value.encoder }} {{ field.value.name }}{% if field.last %}
+            ]{% endif %}
+          {% endfor %}
+  {% endif %}
 
 {% include "_include/validator.ede" with schema = provider.schema %}
 {% include "_include/lenses.ede" with schema = provider.schema %}

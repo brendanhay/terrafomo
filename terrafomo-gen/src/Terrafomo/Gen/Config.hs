@@ -1,3 +1,5 @@
+{-# LANGUAGE RecordWildCards #-}
+
 module Terrafomo.Gen.Config where
 
 import Data.Map.Strict (Map)
