@@ -17,10 +17,11 @@
 --
 module Terrafomo.OVH.Provider
     (
+    -- * OVH Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** OVH Specific Aliases
+    -- * OVH Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -78,7 +79,7 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @endpoint@ - 'P.endpoint'
+    :: P.Text -- ^ @endpoint@ ('P._endpoint', 'P.endpoint')
     -> Provider
 newProvider _endpoint =
     Provider'
@@ -92,7 +93,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "ovh"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ TF.assign "application_key" <$> _applicationKey
             , TF.assign "application_secret" <$> _applicationSecret

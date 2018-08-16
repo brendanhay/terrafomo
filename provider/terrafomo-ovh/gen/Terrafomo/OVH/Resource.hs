@@ -117,8 +117,8 @@ data CloudNetworkPrivateResource s = CloudNetworkPrivateResource'
 
 -- | Define a new @ovh_cloud_network_private@ resource value.
 cloudNetworkPrivateResource
-    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @project_id@ ('P._projectId', 'P.projectId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (CloudNetworkPrivateResource s)
 cloudNetworkPrivateResource _projectId _name =
     TF.unsafeResource "ovh_cloud_network_private" TF.validator $
@@ -201,12 +201,12 @@ data CloudNetworkPrivateSubnetResource s = CloudNetworkPrivateSubnetResource'
 
 -- | Define a new @ovh_cloud_network_private_subnet@ resource value.
 cloudNetworkPrivateSubnetResource
-    :: TF.Attr s P.Text -- ^ @end@ - 'P.end'
-    -> TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
-    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
-    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> TF.Attr s P.Text -- ^ @start@ - 'P.start'
+    :: TF.Attr s P.Text -- ^ @end@ ('P._end', 'P.end')
+    -> TF.Attr s P.Text -- ^ @network_id@ ('P._networkId', 'P.networkId')
+    -> TF.Attr s P.Text -- ^ @project_id@ ('P._projectId', 'P.projectId')
+    -> TF.Attr s P.Text -- ^ @network@ ('P._network', 'P.network')
+    -> TF.Attr s P.Text -- ^ @region@ ('P._region', 'P.region')
+    -> TF.Attr s P.Text -- ^ @start@ ('P._start', 'P.start')
     -> P.Resource (CloudNetworkPrivateSubnetResource s)
 cloudNetworkPrivateSubnetResource _end _networkId _projectId _network _region _start =
     TF.unsafeResource "ovh_cloud_network_private_subnet" TF.validator $
@@ -303,7 +303,7 @@ data CloudUserResource s = CloudUserResource'
 
 -- | Define a new @ovh_cloud_user@ resource value.
 cloudUserResource
-    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    :: TF.Attr s P.Text -- ^ @project_id@ ('P._projectId', 'P.projectId')
     -> P.Resource (CloudUserResource s)
 cloudUserResource _projectId =
     TF.unsafeResource "ovh_cloud_user" TF.validator $
@@ -373,9 +373,9 @@ data DomainZoneRecordResource s = DomainZoneRecordResource'
 
 -- | Define a new @ovh_domain_zone_record@ resource value.
 domainZoneRecordResource
-    :: TF.Attr s P.Text -- ^ @fieldtype@ - 'P.fieldtype'
-    -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
-    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    :: TF.Attr s P.Text -- ^ @fieldtype@ ('P._fieldtype', 'P.fieldtype')
+    -> TF.Attr s P.Text -- ^ @target@ ('P._target', 'P.target')
+    -> TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
     -> P.Resource (DomainZoneRecordResource s)
 domainZoneRecordResource _fieldtype _target _zone =
     TF.unsafeResource "ovh_domain_zone_record" TF.validator $
@@ -457,9 +457,9 @@ data DomainZoneRedirectionResource s = DomainZoneRedirectionResource'
 
 -- | Define a new @ovh_domain_zone_redirection@ resource value.
 domainZoneRedirectionResource
-    :: TF.Attr s P.Text -- ^ @target@ - 'P.target'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    :: TF.Attr s P.Text -- ^ @target@ ('P._target', 'P.target')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    -> TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
     -> P.Resource (DomainZoneRedirectionResource s)
 domainZoneRedirectionResource _target _type' _zone =
     TF.unsafeResource "ovh_domain_zone_redirection" TF.validator $
@@ -546,8 +546,8 @@ data IploadbalancingHttpRouteResource s = IploadbalancingHttpRouteResource'
 
 -- | Define a new @ovh_iploadbalancing_http_route@ resource value.
 iploadbalancingHttpRouteResource
-    :: TF.Attr s [TF.Attr s (ActionSetting s)] -- ^ @action@ - 'P.action'
-    -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
+    :: TF.Attr s [TF.Attr s (ActionSetting s)] -- ^ @action@ ('P._action', 'P.action')
+    -> TF.Attr s P.Text -- ^ @service_name@ ('P._serviceName', 'P.serviceName')
     -> P.Resource (IploadbalancingHttpRouteResource s)
 iploadbalancingHttpRouteResource _action _serviceName =
     TF.unsafeResource "ovh_iploadbalancing_http_route" TF.validator $
@@ -628,10 +628,10 @@ data IploadbalancingHttpRouteRuleResource s = IploadbalancingHttpRouteRuleResour
 
 -- | Define a new @ovh_iploadbalancing_http_route_rule@ resource value.
 iploadbalancingHttpRouteRuleResource
-    :: TF.Attr s P.Text -- ^ @field@ - 'P.field'
-    -> TF.Attr s P.Text -- ^ @route_id@ - 'P.routeId'
-    -> TF.Attr s P.Text -- ^ @match@ - 'P.match'
-    -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
+    :: TF.Attr s P.Text -- ^ @field@ ('P._field', 'P.field')
+    -> TF.Attr s P.Text -- ^ @route_id@ ('P._routeId', 'P.routeId')
+    -> TF.Attr s P.Text -- ^ @match@ ('P._match', 'P.match')
+    -> TF.Attr s P.Text -- ^ @service_name@ ('P._serviceName', 'P.serviceName')
     -> P.Resource (IploadbalancingHttpRouteRuleResource s)
 iploadbalancingHttpRouteRuleResource _field _routeId _match _serviceName =
     TF.unsafeResource "ovh_iploadbalancing_http_route_rule" TF.validator $
@@ -737,8 +737,8 @@ data IploadbalancingTcpFarmResource s = IploadbalancingTcpFarmResource'
 
 -- | Define a new @ovh_iploadbalancing_tcp_farm@ resource value.
 iploadbalancingTcpFarmResource
-    :: TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
-    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    :: TF.Attr s P.Text -- ^ @service_name@ ('P._serviceName', 'P.serviceName')
+    -> TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
     -> P.Resource (IploadbalancingTcpFarmResource s)
 iploadbalancingTcpFarmResource _serviceName _zone =
     TF.unsafeResource "ovh_iploadbalancing_tcp_farm" TF.validator $
@@ -856,10 +856,10 @@ data IploadbalancingTcpFarmServerResource s = IploadbalancingTcpFarmServerResour
 
 -- | Define a new @ovh_iploadbalancing_tcp_farm_server@ resource value.
 iploadbalancingTcpFarmServerResource
-    :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
-    -> TF.Attr s P.Int -- ^ @farm_id@ - 'P.farmId'
-    -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
-    -> TF.Attr s P.Text -- ^ @status@ - 'P.status'
+    :: TF.Attr s P.Text -- ^ @address@ ('P._address', 'P.address')
+    -> TF.Attr s P.Int -- ^ @farm_id@ ('P._farmId', 'P.farmId')
+    -> TF.Attr s P.Text -- ^ @service_name@ ('P._serviceName', 'P.serviceName')
+    -> TF.Attr s P.Text -- ^ @status@ ('P._status', 'P.status')
     -> P.Resource (IploadbalancingTcpFarmServerResource s)
 iploadbalancingTcpFarmServerResource _address _farmId _serviceName _status =
     TF.unsafeResource "ovh_iploadbalancing_tcp_farm_server" TF.validator $
@@ -981,8 +981,8 @@ data PubliccloudPrivateNetworkResource s = PubliccloudPrivateNetworkResource'
 
 -- | Define a new @ovh_publiccloud_private_network@ resource value.
 publiccloudPrivateNetworkResource
-    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @project_id@ ('P._projectId', 'P.projectId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (PubliccloudPrivateNetworkResource s)
 publiccloudPrivateNetworkResource _projectId _name =
     TF.unsafeResource "ovh_publiccloud_private_network" TF.validator $
@@ -1065,12 +1065,12 @@ data PubliccloudPrivateNetworkSubnetResource s = PubliccloudPrivateNetworkSubnet
 
 -- | Define a new @ovh_publiccloud_private_network_subnet@ resource value.
 publiccloudPrivateNetworkSubnetResource
-    :: TF.Attr s P.Text -- ^ @end@ - 'P.end'
-    -> TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
-    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
-    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> TF.Attr s P.Text -- ^ @start@ - 'P.start'
+    :: TF.Attr s P.Text -- ^ @end@ ('P._end', 'P.end')
+    -> TF.Attr s P.Text -- ^ @network_id@ ('P._networkId', 'P.networkId')
+    -> TF.Attr s P.Text -- ^ @project_id@ ('P._projectId', 'P.projectId')
+    -> TF.Attr s P.Text -- ^ @network@ ('P._network', 'P.network')
+    -> TF.Attr s P.Text -- ^ @region@ ('P._region', 'P.region')
+    -> TF.Attr s P.Text -- ^ @start@ ('P._start', 'P.start')
     -> P.Resource (PubliccloudPrivateNetworkSubnetResource s)
 publiccloudPrivateNetworkSubnetResource _end _networkId _projectId _network _region _start =
     TF.unsafeResource "ovh_publiccloud_private_network_subnet" TF.validator $
@@ -1167,7 +1167,7 @@ data PubliccloudUserResource s = PubliccloudUserResource'
 
 -- | Define a new @ovh_publiccloud_user@ resource value.
 publiccloudUserResource
-    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    :: TF.Attr s P.Text -- ^ @project_id@ ('P._projectId', 'P.projectId')
     -> P.Resource (PubliccloudUserResource s)
 publiccloudUserResource _projectId =
     TF.unsafeResource "ovh_publiccloud_user" TF.validator $
@@ -1228,8 +1228,8 @@ data VrackCloudprojectResource s = VrackCloudprojectResource'
 
 -- | Define a new @ovh_vrack_cloudproject@ resource value.
 vrackCloudprojectResource
-    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Attr s P.Text -- ^ @vrack_id@ - 'P.vrackId'
+    :: TF.Attr s P.Text -- ^ @project_id@ ('P._projectId', 'P.projectId')
+    -> TF.Attr s P.Text -- ^ @vrack_id@ ('P._vrackId', 'P.vrackId')
     -> P.Resource (VrackCloudprojectResource s)
 vrackCloudprojectResource _projectId _vrackId =
     TF.unsafeResource "ovh_vrack_cloudproject" TF.validator $
@@ -1275,8 +1275,8 @@ data VrackPubliccloudAttachmentResource s = VrackPubliccloudAttachmentResource'
 
 -- | Define a new @ovh_vrack_publiccloud_attachment@ resource value.
 vrackPubliccloudAttachmentResource
-    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Attr s P.Text -- ^ @vrack_id@ - 'P.vrackId'
+    :: TF.Attr s P.Text -- ^ @project_id@ ('P._projectId', 'P.projectId')
+    -> TF.Attr s P.Text -- ^ @vrack_id@ ('P._vrackId', 'P.vrackId')
     -> P.Resource (VrackPubliccloudAttachmentResource s)
 vrackPubliccloudAttachmentResource _projectId _vrackId =
     TF.unsafeResource "ovh_vrack_publiccloud_attachment" TF.validator $

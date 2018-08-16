@@ -90,8 +90,8 @@ data CloudRegionData s = CloudRegionData'
 
 -- | Define a new @ovh_cloud_region@ datasource value.
 cloudRegionData
-    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @project_id@ ('P._projectId', 'P.projectId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (CloudRegionData s)
 cloudRegionData _projectId _name =
     TF.unsafeDataSource "ovh_cloud_region" TF.validator $
@@ -143,7 +143,7 @@ data CloudRegionsData s = CloudRegionsData'
 
 -- | Define a new @ovh_cloud_regions@ datasource value.
 cloudRegionsData
-    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    :: TF.Attr s P.Text -- ^ @project_id@ ('P._projectId', 'P.projectId')
     -> P.DataSource (CloudRegionsData s)
 cloudRegionsData _projectId =
     TF.unsafeDataSource "ovh_cloud_regions" TF.validator $
@@ -182,7 +182,7 @@ data DomainZoneData s = DomainZoneData'
 
 -- | Define a new @ovh_domain_zone@ datasource value.
 domainZoneData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (DomainZoneData s)
 domainZoneData _name =
     TF.unsafeDataSource "ovh_domain_zone" TF.validator $
@@ -433,8 +433,8 @@ data PubliccloudRegionData s = PubliccloudRegionData'
 
 -- | Define a new @ovh_publiccloud_region@ datasource value.
 publiccloudRegionData
-    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @project_id@ ('P._projectId', 'P.projectId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (PubliccloudRegionData s)
 publiccloudRegionData _projectId _name =
     TF.unsafeDataSource "ovh_publiccloud_region" TF.validator $
@@ -486,7 +486,7 @@ data PubliccloudRegionsData s = PubliccloudRegionsData'
 
 -- | Define a new @ovh_publiccloud_regions@ datasource value.
 publiccloudRegionsData
-    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    :: TF.Attr s P.Text -- ^ @project_id@ ('P._projectId', 'P.projectId')
     -> P.DataSource (PubliccloudRegionsData s)
 publiccloudRegionsData _projectId =
     TF.unsafeDataSource "ovh_publiccloud_regions" TF.validator $

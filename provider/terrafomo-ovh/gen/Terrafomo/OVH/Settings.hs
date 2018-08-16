@@ -79,7 +79,7 @@ data ActionSetting s = ActionSetting'
 
 -- | Construct a new @action@ settings value.
 newActionSetting
-    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> ActionSetting s
 newActionSetting _type' =
     ActionSetting'
@@ -202,7 +202,7 @@ data ProbeSetting s = ProbeSetting'
 
 -- | Construct a new @probe@ settings value.
 newProbeSetting
-    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> ProbeSetting s
 newProbeSetting _type' =
     ProbeSetting'
@@ -288,7 +288,7 @@ data RegionsStatusSetting s = RegionsStatusSetting'
 
 -- | Construct a new @regions_status@ settings value.
 newRegionsStatusSetting
-    :: TF.Attr s P.Text -- ^ @status@ - 'P.status'
+    :: TF.Attr s P.Text -- ^ 'P._status': @status@
     -> RegionsStatusSetting s
 newRegionsStatusSetting _status =
     RegionsStatusSetting'
