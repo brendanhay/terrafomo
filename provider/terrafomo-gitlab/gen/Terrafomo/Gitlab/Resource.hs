@@ -136,6 +136,9 @@ instance P.HasTitle (DeployKeyResource s) (TF.Attr s P.Text) where
         P.lens (_title :: DeployKeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _title = a } :: DeployKeyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DeployKeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @gitlab_group@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/gitlab/r/group.html terraform documentation>
@@ -219,6 +222,9 @@ instance P.HasRequestAccessEnabled (GroupResource s) (TF.Attr s P.Bool) where
         P.lens (_requestAccessEnabled :: GroupResource s -> TF.Attr s P.Bool)
                (\s a -> s { _requestAccessEnabled = a } :: GroupResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedVisibilityLevel (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
     computedVisibilityLevel x = TF.compute (TF.refKey x) "visibility_level"
 
@@ -285,6 +291,9 @@ instance P.HasProject (LabelResource s) (TF.Attr s P.Text) where
     project =
         P.lens (_project :: LabelResource s -> TF.Attr s P.Text)
                (\s a -> s { _project = a } :: LabelResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LabelResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @gitlab_project@ Resource.
 --
@@ -397,6 +406,9 @@ instance P.HasWikiEnabled (ProjectResource s) (TF.Attr s P.Bool) where
     wikiEnabled =
         P.lens (_wikiEnabled :: ProjectResource s -> TF.Attr s P.Bool)
                (\s a -> s { _wikiEnabled = a } :: ProjectResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedHttpUrlToRepo (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedHttpUrlToRepo x = TF.compute (TF.refKey x) "http_url_to_repo"
@@ -553,6 +565,9 @@ instance P.HasWikiPageEvents (ProjectHookResource s) (TF.Attr s P.Bool) where
         P.lens (_wikiPageEvents :: ProjectHookResource s -> TF.Attr s P.Bool)
                (\s a -> s { _wikiPageEvents = a } :: ProjectHookResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectHookResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @gitlab_project_membership@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/gitlab/r/project_membership.html terraform documentation>
@@ -606,6 +621,9 @@ instance P.HasUserId (ProjectMembershipResource s) (TF.Attr s P.Int) where
     userId =
         P.lens (_userId :: ProjectMembershipResource s -> TF.Attr s P.Int)
                (\s a -> s { _userId = a } :: ProjectMembershipResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectMembershipResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @gitlab_user@ Resource.
 --
@@ -721,3 +739,6 @@ instance P.HasUsername (UserResource s) (TF.Attr s P.Text) where
     username =
         P.lens (_username :: UserResource s -> TF.Attr s P.Text)
                (\s a -> s { _username = a } :: UserResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
