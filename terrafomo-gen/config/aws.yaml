@@ -1,6 +1,5 @@
 package-name: terrafomo-aws
 provider-name: AWS
-partition-size: 80
 
 extra-deps:
   - amazonka-core
@@ -8,26 +7,16 @@ extra-deps:
   - iproute
   - amazonka-iam-policy >= 0.0.4
 
-global-field-overrides:
-  - exact: assume_role_policy
-    type: 'TF.Attr s P.Document'
-
-  - exact: policy
-    type: 'TF.Attr s P.Document'
-
-  - exact: availability_zone
-    type: 'TF.Attr s P.Zone'
-
-datatype-field-overrides:
+field-overrides:
   provider:
     region: 'P.Region'
 
-  assume_role:
+  provider.assume_role:
     policy: 'P.Maybe P.Document'
-
-  dynamodb_table_attribute:
-    type: 'TF.Attr s P.DynamodbTableAttributeType'
 
   aws_security_group_rule:
     type: 'TF.Attr s P.NetworkTraffic'
     protocol: 'TF.Attr s P.NetworkProtocol'
+
+  aws_dynamodb_table.attribute:
+    type: 'TF.Attr s P.TableAttributeType'
