@@ -19,43 +19,43 @@ module Terrafomo.Vault.Settings
     (
     -- ** cassandra
       CassandraSetting (..)
-    , newCassandraSetting
+    , cassandraSetting
 
     -- ** client_auth
     , ClientAuthSetting (..)
-    , newClientAuthSetting
+    , clientAuthSetting
 
     -- ** group
     , GroupSetting (..)
-    , newGroupSetting
+    , groupSetting
 
     -- ** hana
     , HanaSetting (..)
-    , newHanaSetting
+    , hanaSetting
 
     -- ** mongodb
     , MongodbSetting (..)
-    , newMongodbSetting
+    , mongodbSetting
 
     -- ** mssql
     , MssqlSetting (..)
-    , newMssqlSetting
+    , mssqlSetting
 
     -- ** mysql
     , MysqlSetting (..)
-    , newMysqlSetting
+    , mysqlSetting
 
     -- ** oracle
     , OracleSetting (..)
-    , newOracleSetting
+    , oracleSetting
 
     -- ** postgresql
     , PostgresqlSetting (..)
-    , newPostgresqlSetting
+    , postgresqlSetting
 
     -- ** user
     , UserSetting (..)
-    , newUserSetting
+    , userSetting
 
     ) where
 
@@ -128,9 +128,9 @@ data CassandraSetting s = CassandraSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @cassandra@ settings value.
-newCassandraSetting
+cassandraSetting
     :: CassandraSetting s
-newCassandraSetting =
+cassandraSetting =
     CassandraSetting'
         { _connectTimeout = TF.value 5
         , _hosts = TF.Nil
@@ -226,11 +226,11 @@ data ClientAuthSetting = ClientAuthSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @client_auth@ settings value.
-newClientAuthSetting
+clientAuthSetting
     :: P.Text -- ^ 'P._certFile': @cert_file@
     -> P.Text -- ^ 'P._keyFile': @key_file@
     -> ClientAuthSetting
-newClientAuthSetting _certFile _keyFile =
+clientAuthSetting _certFile _keyFile =
     ClientAuthSetting'
         { _certFile = _certFile
         , _keyFile = _keyFile
@@ -269,11 +269,11 @@ data GroupSetting s = GroupSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @group@ settings value.
-newGroupSetting
+groupSetting
     :: TF.Attr s P.Text -- ^ 'P._groupName': @group_name@
     -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._policies': @policies@
     -> GroupSetting s
-newGroupSetting _groupName _policies =
+groupSetting _groupName _policies =
     GroupSetting'
         { _groupName = _groupName
         , _policies = _policies
@@ -320,9 +320,9 @@ data HanaSetting s = HanaSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @hana@ settings value.
-newHanaSetting
+hanaSetting
     :: HanaSetting s
-newHanaSetting =
+hanaSetting =
     HanaSetting'
         { _connectionUrl = TF.Nil
         , _maxConnectionLifetime = TF.Nil
@@ -371,9 +371,9 @@ data MongodbSetting s = MongodbSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @mongodb@ settings value.
-newMongodbSetting
+mongodbSetting
     :: MongodbSetting s
-newMongodbSetting =
+mongodbSetting =
     MongodbSetting'
         { _connectionUrl = TF.Nil
         }
@@ -413,9 +413,9 @@ data MssqlSetting s = MssqlSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @mssql@ settings value.
-newMssqlSetting
+mssqlSetting
     :: MssqlSetting s
-newMssqlSetting =
+mssqlSetting =
     MssqlSetting'
         { _connectionUrl = TF.Nil
         , _maxConnectionLifetime = TF.Nil
@@ -476,9 +476,9 @@ data MysqlSetting s = MysqlSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @mysql@ settings value.
-newMysqlSetting
+mysqlSetting
     :: MysqlSetting s
-newMysqlSetting =
+mysqlSetting =
     MysqlSetting'
         { _connectionUrl = TF.Nil
         , _maxConnectionLifetime = TF.Nil
@@ -539,9 +539,9 @@ data OracleSetting s = OracleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @oracle@ settings value.
-newOracleSetting
+oracleSetting
     :: OracleSetting s
-newOracleSetting =
+oracleSetting =
     OracleSetting'
         { _connectionUrl = TF.Nil
         , _maxConnectionLifetime = TF.Nil
@@ -602,9 +602,9 @@ data PostgresqlSetting s = PostgresqlSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @postgresql@ settings value.
-newPostgresqlSetting
+postgresqlSetting
     :: PostgresqlSetting s
-newPostgresqlSetting =
+postgresqlSetting =
     PostgresqlSetting'
         { _connectionUrl = TF.Nil
         , _maxConnectionLifetime = TF.Nil
@@ -661,11 +661,11 @@ data UserSetting s = UserSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @user@ settings value.
-newUserSetting
+userSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._groups': @groups@
     -> TF.Attr s P.Text -- ^ 'P._username': @username@
     -> UserSetting s
-newUserSetting _groups _username =
+userSetting _groups _username =
     UserSetting'
         { _groups = _groups
         , _policies = TF.Nil
