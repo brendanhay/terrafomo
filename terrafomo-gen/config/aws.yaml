@@ -30,6 +30,9 @@ field-overrides:
   IamGroupPolicyResource:
     policy: 'TF.Attr s P.Document'
 
+  S3BucketResource:
+    region: 'TF.Attr s P.Region'
+
   SecurityGroupRuleResource:
     type': 'TF.Attr s P.NetworkTraffic'
     protocol: 'TF.Attr s P.NetworkProtocol'
