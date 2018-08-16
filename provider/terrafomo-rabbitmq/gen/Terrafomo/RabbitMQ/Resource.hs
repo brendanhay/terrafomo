@@ -98,10 +98,10 @@ data BindingResource s = BindingResource'
 
 -- | Define a new @rabbitmq_binding@ resource value.
 bindingResource
-    :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
-    -> TF.Attr s P.Text -- ^ @source@ - 'P.source'
-    -> TF.Attr s P.Text -- ^ @destination_type@ - 'P.destinationType'
-    -> TF.Attr s P.Text -- ^ @vhost@ - 'P.vhost'
+    :: TF.Attr s P.Text -- ^ @destination@ ('P._destination', 'P.destination')
+    -> TF.Attr s P.Text -- ^ @source@ ('P._source', 'P.source')
+    -> TF.Attr s P.Text -- ^ @destination_type@ ('P._destinationType', 'P.destinationType')
+    -> TF.Attr s P.Text -- ^ @vhost@ ('P._vhost', 'P.vhost')
     -> P.Resource (BindingResource s)
 bindingResource _destination _source _destinationType _vhost =
     TF.unsafeResource "rabbitmq_binding" TF.validator $
@@ -181,8 +181,8 @@ data ExchangeResource s = ExchangeResource'
 
 -- | Define a new @rabbitmq_exchange@ resource value.
 exchangeResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (SettingsSetting s) -- ^ @settings@ - 'P.settings'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s (SettingsSetting s) -- ^ @settings@ ('P._settings', 'P.settings')
     -> P.Resource (ExchangeResource s)
 exchangeResource _name _settings =
     TF.unsafeResource "rabbitmq_exchange" TF.validator $
@@ -242,8 +242,8 @@ data PermissionsResource s = PermissionsResource'
 
 -- | Define a new @rabbitmq_permissions@ resource value.
 permissionsResource
-    :: TF.Attr s (PermissionsSetting s) -- ^ @permissions@ - 'P.permissions'
-    -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
+    :: TF.Attr s (PermissionsSetting s) -- ^ @permissions@ ('P._permissions', 'P.permissions')
+    -> TF.Attr s P.Text -- ^ @user@ ('P._user', 'P.user')
     -> P.Resource (PermissionsResource s)
 permissionsResource _permissions _user =
     TF.unsafeResource "rabbitmq_permissions" TF.validator $
@@ -303,9 +303,9 @@ data PolicyResource s = PolicyResource'
 
 -- | Define a new @rabbitmq_policy@ resource value.
 policyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (PolicySetting s) -- ^ @policy@ - 'P.policy'
-    -> TF.Attr s P.Text -- ^ @vhost@ - 'P.vhost'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s (PolicySetting s) -- ^ @policy@ ('P._policy', 'P.policy')
+    -> TF.Attr s P.Text -- ^ @vhost@ ('P._vhost', 'P.vhost')
     -> P.Resource (PolicyResource s)
 policyResource _name _policy _vhost =
     TF.unsafeResource "rabbitmq_policy" TF.validator $
@@ -365,8 +365,8 @@ data QueueResource s = QueueResource'
 
 -- | Define a new @rabbitmq_queue@ resource value.
 queueResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (SettingsSetting s) -- ^ @settings@ - 'P.settings'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s (SettingsSetting s) -- ^ @settings@ ('P._settings', 'P.settings')
     -> P.Resource (QueueResource s)
 queueResource _name _settings =
     TF.unsafeResource "rabbitmq_queue" TF.validator $
@@ -426,8 +426,8 @@ data UserResource s = UserResource'
 
 -- | Define a new @rabbitmq_user@ resource value.
 userResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @password@ ('P._password', 'P.password')
     -> P.Resource (UserResource s)
 userResource _name _password =
     TF.unsafeResource "rabbitmq_user" TF.validator $
@@ -477,7 +477,7 @@ data VhostResource s = VhostResource'
 
 -- | Define a new @rabbitmq_vhost@ resource value.
 vhostResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (VhostResource s)
 vhostResource _name =
     TF.unsafeResource "rabbitmq_vhost" TF.validator $

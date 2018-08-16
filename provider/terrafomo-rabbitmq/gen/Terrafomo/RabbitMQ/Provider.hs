@@ -17,10 +17,11 @@
 --
 module Terrafomo.RabbitMQ.Provider
     (
+    -- * RabbitMQ Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** RabbitMQ Specific Aliases
+    -- * RabbitMQ Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -77,9 +78,9 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @endpoint@ - 'P.endpoint'
-    -> P.Text -- ^ @password@ - 'P.password'
-    -> P.Text -- ^ @username@ - 'P.username'
+    :: P.Text -- ^ @endpoint@ ('P._endpoint', 'P.endpoint')
+    -> P.Text -- ^ @password@ ('P._password', 'P.password')
+    -> P.Text -- ^ @username@ ('P._username', 'P.username')
     -> Provider
 newProvider _endpoint _password _username =
     Provider'
@@ -94,7 +95,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "rabbitmq"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ TF.assign "cacert_file" <$> _cacertFile
             , P.Just $ TF.assign "endpoint" _endpoint

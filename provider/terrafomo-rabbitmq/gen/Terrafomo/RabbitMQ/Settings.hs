@@ -67,9 +67,9 @@ data PermissionsSetting s = PermissionsSetting'
 
 -- | Construct a new @permissions@ settings value.
 newPermissionsSetting
-    :: TF.Attr s P.Text -- ^ @configure@ - 'P.configure'
-    -> TF.Attr s P.Text -- ^ @read@ - 'P.read'
-    -> TF.Attr s P.Text -- ^ @write@ - 'P.write'
+    :: TF.Attr s P.Text -- ^ 'P._configure': @configure@
+    -> TF.Attr s P.Text -- ^ 'P._read': @read@
+    -> TF.Attr s P.Text -- ^ 'P._write': @write@
     -> PermissionsSetting s
 newPermissionsSetting _configure _read _write =
     PermissionsSetting'
@@ -122,10 +122,10 @@ data PolicySetting s = PolicySetting'
 
 -- | Construct a new @policy@ settings value.
 newPolicySetting
-    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @definition@ - 'P.definition'
-    -> TF.Attr s P.Text -- ^ @pattern@ - 'P.pattern''
-    -> TF.Attr s P.Int -- ^ @priority@ - 'P.priority'
-    -> TF.Attr s P.Text -- ^ @apply_to@ - 'P.applyTo'
+    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ 'P._definition': @definition@
+    -> TF.Attr s P.Text -- ^ 'P._pattern'': @pattern@
+    -> TF.Attr s P.Int -- ^ 'P._priority': @priority@
+    -> TF.Attr s P.Text -- ^ 'P._applyTo': @apply_to@
     -> PolicySetting s
 newPolicySetting _definition _pattern' _priority _applyTo =
     PolicySetting'
@@ -191,7 +191,7 @@ data SettingsSetting s = SettingsSetting'
 
 -- | Construct a new @settings@ settings value.
 newSettingsSetting
-    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> SettingsSetting s
 newSettingsSetting _type' =
     SettingsSetting'
