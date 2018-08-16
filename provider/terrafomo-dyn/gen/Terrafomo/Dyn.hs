@@ -12,12 +12,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Dyn
-    ( module Terrafomo.Dyn.Lens
-    , module Terrafomo.Dyn.Provider
-    , module Terrafomo.Dyn.Resource
-    , module Terrafomo.Dyn.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Dyn.Provider
+
+    -- * Custom Types
     , module Terrafomo.Dyn.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+
+    -- * Resources
+    , module Terrafomo.Dyn.Resource
+
+    -- * Settings
+    , module Terrafomo.Dyn.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Dyn.Lens
     ) where
 
 import Terrafomo.Dyn.Lens

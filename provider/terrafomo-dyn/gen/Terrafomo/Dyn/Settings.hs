@@ -17,7 +17,6 @@
 --
 module Terrafomo.Dyn.Settings
     (
-    -- * Settings Datatypes
     ) where
 
 import Data.Functor ((<$>))

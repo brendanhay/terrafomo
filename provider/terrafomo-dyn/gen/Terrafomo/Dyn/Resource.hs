@@ -17,7 +17,6 @@
 --
 module Terrafomo.Dyn.Resource
     (
-    -- * Resource Datatypes
     -- ** dyn_record
       RecordResource (..)
     , recordResource
@@ -67,6 +66,7 @@ data RecordResource s = RecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @dyn_record@ resource value.
 recordResource
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
