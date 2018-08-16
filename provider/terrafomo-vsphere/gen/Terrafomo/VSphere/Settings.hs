@@ -170,7 +170,7 @@ data CloneSetting s = CloneSetting'
 
 -- | Construct a new @clone@ settings value.
 newCloneSetting
-    :: TF.Attr s P.Text -- ^ @template_uuid@ - 'P.templateUuid'
+    :: TF.Attr s P.Text -- ^ 'P._templateUuid': @template_uuid@
     -> CloneSetting s
 newCloneSetting _templateUuid =
     CloneSetting'
@@ -626,8 +626,8 @@ data HostSetting s = HostSetting'
 
 -- | Construct a new @host@ settings value.
 newHostSetting
-    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @devices@ - 'P.devices'
-    -> TF.Attr s P.Text -- ^ @host_system_id@ - 'P.hostSystemId'
+    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ 'P._devices': @devices@
+    -> TF.Attr s P.Text -- ^ 'P._hostSystemId': @host_system_id@
     -> HostSetting s
 newHostSetting _devices _hostSystemId =
     HostSetting'
@@ -678,8 +678,8 @@ data LinuxOptionsSetting s = LinuxOptionsSetting'
 
 -- | Construct a new @linux_options@ settings value.
 newLinuxOptionsSetting
-    :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
-    -> TF.Attr s P.Text -- ^ @host_name@ - 'P.hostName'
+    :: TF.Attr s P.Text -- ^ 'P._domain': @domain@
+    -> TF.Attr s P.Text -- ^ 'P._hostName': @host_name@
     -> LinuxOptionsSetting s
 newLinuxOptionsSetting _domain _hostName =
     LinuxOptionsSetting'
@@ -782,7 +782,7 @@ data NetworkInterfaceSetting s = NetworkInterfaceSetting'
 
 -- | Construct a new @network_interface@ settings value.
 newNetworkInterfaceSetting
-    :: TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
+    :: TF.Attr s P.Text -- ^ 'P._networkId': @network_id@
     -> NetworkInterfaceSetting s
 newNetworkInterfaceSetting _networkId =
     NetworkInterfaceSetting'
@@ -963,8 +963,8 @@ data VlanRangeSetting s = VlanRangeSetting'
 
 -- | Construct a new @vlan_range@ settings value.
 newVlanRangeSetting
-    :: TF.Attr s P.Int -- ^ @max_vlan@ - 'P.maxVlan'
-    -> TF.Attr s P.Int -- ^ @min_vlan@ - 'P.minVlan'
+    :: TF.Attr s P.Int -- ^ 'P._maxVlan': @max_vlan@
+    -> TF.Attr s P.Int -- ^ 'P._minVlan': @min_vlan@
     -> VlanRangeSetting s
 newVlanRangeSetting _maxVlan _minVlan =
     VlanRangeSetting'
@@ -1068,7 +1068,7 @@ data WindowsOptionsSetting s = WindowsOptionsSetting'
 
 -- | Construct a new @windows_options@ settings value.
 newWindowsOptionsSetting
-    :: TF.Attr s P.Text -- ^ @computer_name@ - 'P.computerName'
+    :: TF.Attr s P.Text -- ^ 'P._computerName': @computer_name@
     -> WindowsOptionsSetting s
 newWindowsOptionsSetting _computerName =
     WindowsOptionsSetting'

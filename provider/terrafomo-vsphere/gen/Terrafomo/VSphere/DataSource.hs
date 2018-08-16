@@ -113,7 +113,7 @@ data ComputeClusterData s = ComputeClusterData'
 
 -- | Define a new @vsphere_compute_cluster@ datasource value.
 computeClusterData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (ComputeClusterData s)
 computeClusterData _name =
     TF.unsafeDataSource "vsphere_compute_cluster" TF.validator $
@@ -160,7 +160,7 @@ data CustomAttributeData s = CustomAttributeData'
 
 -- | Define a new @vsphere_custom_attribute@ datasource value.
 customAttributeData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (CustomAttributeData s)
 customAttributeData _name =
     TF.unsafeDataSource "vsphere_custom_attribute" TF.validator $
@@ -243,7 +243,7 @@ data DatastoreData s = DatastoreData'
 
 -- | Define a new @vsphere_datastore@ datasource value.
 datastoreData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (DatastoreData s)
 datastoreData _name =
     TF.unsafeDataSource "vsphere_datastore" TF.validator $
@@ -292,7 +292,7 @@ data DatastoreClusterData s = DatastoreClusterData'
 
 -- | Define a new @vsphere_datastore_cluster@ datasource value.
 datastoreClusterData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (DatastoreClusterData s)
 datastoreClusterData _name =
     TF.unsafeDataSource "vsphere_datastore_cluster" TF.validator $
@@ -342,7 +342,7 @@ data DistributedVirtualSwitchData s = DistributedVirtualSwitchData'
 
 -- | Define a new @vsphere_distributed_virtual_switch@ datasource value.
 distributedVirtualSwitchData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (DistributedVirtualSwitchData s)
 distributedVirtualSwitchData _name =
     TF.unsafeDataSource "vsphere_distributed_virtual_switch" TF.validator $
@@ -394,7 +394,7 @@ data HostData s = HostData'
 
 -- | Define a new @vsphere_host@ datasource value.
 hostData
-    :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
+    :: TF.Attr s P.Text -- ^ @datacenter_id@ ('P._datacenterId', 'P.datacenterId')
     -> P.DataSource (HostData s)
 hostData _datacenterId =
     TF.unsafeDataSource "vsphere_host" TF.validator $
@@ -447,7 +447,7 @@ data NetworkData s = NetworkData'
 
 -- | Define a new @vsphere_network@ datasource value.
 networkData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (NetworkData s)
 networkData _name =
     TF.unsafeDataSource "vsphere_network" TF.validator $
@@ -547,8 +547,8 @@ data TagData s = TagData'
 
 -- | Define a new @vsphere_tag@ datasource value.
 tagData
-    :: TF.Attr s P.Text -- ^ @category_id@ - 'P.categoryId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @category_id@ ('P._categoryId', 'P.categoryId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (TagData s)
 tagData _categoryId _name =
     TF.unsafeDataSource "vsphere_tag" TF.validator $
@@ -595,7 +595,7 @@ data TagCategoryData s = TagCategoryData'
 
 -- | Define a new @vsphere_tag_category@ datasource value.
 tagCategoryData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (TagCategoryData s)
 tagCategoryData _name =
     TF.unsafeDataSource "vsphere_tag_category" TF.validator $
@@ -652,7 +652,7 @@ data VirtualMachineData s = VirtualMachineData'
 
 -- | Define a new @vsphere_virtual_machine@ datasource value.
 virtualMachineData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (VirtualMachineData s)
 virtualMachineData _name =
     TF.unsafeDataSource "vsphere_virtual_machine" TF.validator $
@@ -734,7 +734,7 @@ data VmfsDisksData s = VmfsDisksData'
 
 -- | Define a new @vsphere_vmfs_disks@ datasource value.
 vmfsDisksData
-    :: TF.Attr s P.Text -- ^ @host_system_id@ - 'P.hostSystemId'
+    :: TF.Attr s P.Text -- ^ @host_system_id@ ('P._hostSystemId', 'P.hostSystemId')
     -> P.DataSource (VmfsDisksData s)
 vmfsDisksData _hostSystemId =
     TF.unsafeDataSource "vsphere_vmfs_disks" TF.validator $

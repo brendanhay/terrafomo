@@ -17,10 +17,11 @@
 --
 module Terrafomo.VSphere.Provider
     (
+    -- * VSphere Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** VSphere Specific Aliases
+    -- * VSphere Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -102,8 +103,8 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @password@ - 'P.password'
-    -> P.Text -- ^ @user@ - 'P.user'
+    :: P.Text -- ^ @password@ ('P._password', 'P.password')
+    -> P.Text -- ^ @user@ ('P._user', 'P.user')
     -> Provider
 newProvider _password _user =
     Provider'
@@ -123,7 +124,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "vsphere"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
             , TF.assign "client_debug" <$> _clientDebug
