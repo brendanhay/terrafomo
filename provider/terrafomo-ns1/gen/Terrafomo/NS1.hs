@@ -12,10 +12,10 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.NS1
-    ( module Terrafomo.NS1.Provider
+    ( module Terrafomo.NS1.Lens
+    , module Terrafomo.NS1.Provider
     , module Terrafomo.NS1.Resource
     , module Terrafomo.NS1.Settings
-    , module Terrafomo.NS1.Lens
     , module Terrafomo.NS1.Types
     -- * Provider Aliases
     ) where
