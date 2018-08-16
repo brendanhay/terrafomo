@@ -808,6 +808,23 @@
                     "computed": true,
                     "required": false,
                     "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
                     "name": "_computedDescription",
@@ -975,6 +992,23 @@
             "name": "DiskResource",
             "threaded": true,
             "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": true,
@@ -1163,7 +1197,25 @@
             "key": "cloudstack_egress_firewall",
             "name": "EgressFirewallResource",
             "threaded": true,
-            "attributes": [],
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
             "parameters": [
                 {
                     "default": "_networkId",
@@ -1266,7 +1318,25 @@
             "key": "cloudstack_firewall",
             "name": "FirewallResource",
             "threaded": true,
-            "attributes": [],
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
             "parameters": [
                 {
                     "default": "_ipAddressId",
@@ -1496,6 +1566,23 @@
             "name": "InstanceResource",
             "threaded": true,
             "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": true,
@@ -1869,6 +1956,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"ip_address\" <$> TF.attribute",
                     "name": "_computedIpAddress",
                     "method": "computedIpAddress",
@@ -2051,6 +2155,23 @@
             "name": "LoadbalancerRuleResource",
             "threaded": true,
             "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": true,
@@ -2348,6 +2469,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"display_text\" <$> TF.attribute",
                     "name": "_computedDisplayText",
                     "method": "computedDisplayText",
@@ -2604,6 +2742,23 @@
                     "computed": true,
                     "required": false,
                     "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
                     "name": "_computedDescription",
@@ -2753,7 +2908,25 @@
             "key": "cloudstack_network_acl_rule",
             "name": "NetworkAclRuleResource",
             "threaded": true,
-            "attributes": [],
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
             "parameters": [
                 {
                     "default": "_aclId",
@@ -2823,6 +2996,23 @@
             "name": "NicResource",
             "threaded": true,
             "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": true,
@@ -2960,7 +3150,25 @@
             "key": "cloudstack_port_forward",
             "name": "PortForwardResource",
             "threaded": true,
-            "attributes": [],
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
             "parameters": [
                 {
                     "default": "_forward",
@@ -3148,7 +3356,25 @@
             "key": "cloudstack_private_gateway",
             "name": "PrivateGatewayResource",
             "threaded": true,
-            "attributes": [],
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
             "parameters": [
                 {
                     "default": "_ipAddress",
@@ -3291,6 +3517,23 @@
                     "computed": true,
                     "required": false,
                     "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"ip_address\" <$> TF.attribute",
                     "name": "_computedIpAddress",
@@ -3373,6 +3616,23 @@
             "name": "SecurityGroupResource",
             "threaded": true,
             "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": true,
@@ -3510,7 +3770,25 @@
             "key": "cloudstack_security_group_rule",
             "name": "SecurityGroupRuleResource",
             "threaded": true,
-            "attributes": [],
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
             "parameters": [
                 {
                     "default": "_securityGroupId",
@@ -3620,6 +3898,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"fingerprint\" <$> TF.attribute",
                     "name": "_computedFingerprint",
                     "method": "computedFingerprint",
@@ -3718,6 +4013,23 @@
             "name": "StaticNatResource",
             "threaded": true,
             "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": true,
@@ -3838,7 +4150,25 @@
             "key": "cloudstack_static_route",
             "name": "StaticRouteResource",
             "threaded": true,
-            "attributes": [],
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
             "parameters": [
                 {
                     "default": "_cidr",
@@ -4010,6 +4340,23 @@
             "name": "TemplateResource",
             "threaded": true,
             "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": true,
@@ -4358,6 +4705,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"display_text\" <$> TF.attribute",
                     "name": "_computedDisplayText",
                     "method": "computedDisplayText",
@@ -4557,7 +4921,25 @@
             "key": "cloudstack_vpn_connection",
             "name": "VpnConnectionResource",
             "threaded": true,
-            "attributes": [],
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
             "parameters": [
                 {
                     "default": "_customerGatewayId",
@@ -4712,6 +5094,23 @@
             "name": "VpnCustomerGatewayResource",
             "threaded": true,
             "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": true,
@@ -4918,6 +5317,23 @@
             "name": "VpnGatewayResource",
             "threaded": true,
             "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": true,
