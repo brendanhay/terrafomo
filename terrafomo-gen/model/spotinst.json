@@ -44,7 +44,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "elastigroup_aws_availability_zones",
+            "name": "availability_zones",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -128,7 +128,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "elastigroup_aws_ebs_block_device",
+            "name": "ebs_block_device",
             "schemas": [
               {
                 "name": "delete_on_termination",
@@ -253,7 +253,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "elastigroup_aws_elastic_ips",
+            "name": "elastic_ips",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -277,7 +277,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "elastigroup_aws_elastic_load_balancers",
+            "name": "elastic_load_balancers",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -314,7 +314,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "elastigroup_aws_ephemeral_block_device",
+            "name": "ephemeral_block_device",
             "schemas": [
               {
                 "name": "device_name",
@@ -439,7 +439,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "elastigroup_aws_instance_types_spot",
+            "name": "instance_types_spot",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -463,7 +463,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "elastigroup_aws_instance_types_weights",
+            "name": "instance_types_weights",
             "schemas": [
               {
                 "name": "instance_type",
@@ -504,7 +504,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "elastigroup_aws_integration_codedeploy",
+            "name": "integration_codedeploy",
             "schemas": [
               {
                 "name": "cleanup_on_failure",
@@ -530,7 +530,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "integration_codedeploy_deployment_groups",
+                  "name": "deployment_groups",
                   "schemas": [
                     {
                       "name": "application_name",
@@ -586,7 +586,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "elastigroup_aws_integration_ecs",
+            "name": "integration_ecs",
             "schemas": [
               {
                 "name": "autoscale_attributes",
@@ -600,7 +600,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "integration_ecs_autoscale_attributes",
+                  "name": "autoscale_attributes",
                   "schemas": [
                     {
                       "name": "key",
@@ -653,7 +653,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "integration_ecs_autoscale_down",
+                  "name": "autoscale_down",
                   "schemas": [
                     {
                       "name": "evaluation_periods",
@@ -682,7 +682,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "integration_ecs_autoscale_headroom",
+                  "name": "autoscale_headroom",
                   "schemas": [
                     {
                       "name": "cpu_per_unit",
@@ -774,7 +774,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "elastigroup_aws_integration_gitlab",
+            "name": "integration_gitlab",
             "schemas": [
               {
                 "name": "runner",
@@ -788,7 +788,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "integration_gitlab_runner",
+                  "name": "runner",
                   "schemas": [
                     {
                       "name": "is_enabled",
@@ -820,7 +820,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "elastigroup_aws_integration_kubernetes",
+            "name": "integration_kubernetes",
             "schemas": [
               {
                 "name": "api_server",
@@ -858,7 +858,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "integration_kubernetes_autoscale_down",
+                  "name": "autoscale_down",
                   "schemas": [
                     {
                       "name": "evaluation_periods",
@@ -887,7 +887,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "integration_kubernetes_autoscale_headroom",
+                  "name": "autoscale_headroom",
                   "schemas": [
                     {
                       "name": "cpu_per_unit",
@@ -964,7 +964,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "integration_kubernetes_autoscale_labels",
+                  "name": "autoscale_labels",
                   "schemas": [
                     {
                       "name": "key",
@@ -1044,7 +1044,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "elastigroup_aws_integration_mesosphere",
+            "name": "integration_mesosphere",
             "schemas": [
               {
                 "name": "api_server",
@@ -1073,7 +1073,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "elastigroup_aws_integration_multai_runtime",
+            "name": "integration_multai_runtime",
             "schemas": [
               {
                 "name": "deployment_id",
@@ -1102,7 +1102,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "elastigroup_aws_integration_nomad",
+            "name": "integration_nomad",
             "schemas": [
               {
                 "name": "acl_token",
@@ -1128,7 +1128,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "integration_nomad_autoscale_constraints",
+                  "name": "autoscale_constraints",
                   "schemas": [
                     {
                       "name": "key",
@@ -1181,7 +1181,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "integration_nomad_autoscale_down",
+                  "name": "autoscale_down",
                   "schemas": [
                     {
                       "name": "evaluation_periods",
@@ -1210,7 +1210,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "integration_nomad_autoscale_headroom",
+                  "name": "autoscale_headroom",
                   "schemas": [
                     {
                       "name": "cpu_per_unit",
@@ -1302,7 +1302,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "elastigroup_aws_integration_rancher",
+            "name": "integration_rancher",
             "schemas": [
               {
                 "name": "access_key",
@@ -1403,7 +1403,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "elastigroup_aws_multai_target_sets",
+            "name": "multai_target_sets",
             "schemas": [
               {
                 "name": "balancer_id",
@@ -1456,7 +1456,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "elastigroup_aws_network_interface",
+            "name": "network_interface",
             "schemas": [
               {
                 "name": "associate_public_ip_address",
@@ -1631,7 +1631,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "elastigroup_aws_preferred_availability_zones",
+            "name": "preferred_availability_zones",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1655,7 +1655,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "elastigroup_aws_private_ips",
+            "name": "private_ips",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1703,7 +1703,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "elastigroup_aws_revert_to_spot",
+            "name": "revert_to_spot",
             "schemas": [
               {
                 "name": "perform_at",
@@ -1729,7 +1729,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "revert_to_spot_time_windows",
+                  "name": "time_windows",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1756,7 +1756,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "elastigroup_aws_scaling_down_policy",
+            "name": "scaling_down_policy",
             "schemas": [
               {
                 "name": "action_type",
@@ -2001,7 +2001,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "elastigroup_aws_scaling_target_policy",
+            "name": "scaling_target_policy",
             "schemas": [
               {
                 "name": "cooldown",
@@ -2126,7 +2126,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "elastigroup_aws_scaling_up_policy",
+            "name": "scaling_up_policy",
             "schemas": [
               {
                 "name": "action_type",
@@ -2371,7 +2371,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "elastigroup_aws_scheduled_task",
+            "name": "scheduled_task",
             "schemas": [
               {
                 "name": "batch_size_percentage",
@@ -2545,7 +2545,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "elastigroup_aws_security_groups",
+            "name": "security_groups",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2569,7 +2569,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "elastigroup_aws_signal",
+            "name": "signal",
             "schemas": [
               {
                 "name": "name",
@@ -2624,7 +2624,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "elastigroup_aws_stateful_deallocation",
+            "name": "stateful_deallocation",
             "schemas": [
               {
                 "name": "should_delete_images",
@@ -2691,7 +2691,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "elastigroup_aws_subnet_ids",
+            "name": "subnet_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2715,7 +2715,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "elastigroup_aws_tags",
+            "name": "tags",
             "schemas": [
               {
                 "name": "key",
@@ -2756,7 +2756,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "elastigroup_aws_target_group_arns",
+            "name": "target_group_arns",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2780,7 +2780,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "elastigroup_aws_update_policy",
+            "name": "update_policy",
             "schemas": [
               {
                 "name": "roll_config",
@@ -2794,7 +2794,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "update_policy_roll_config",
+                  "name": "roll_config",
                   "schemas": [
                     {
                       "name": "batch_size_percentage",
