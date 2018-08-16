@@ -69,7 +69,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "job_command",
+            "name": "command",
             "schemas": [
               {
                 "name": "description",
@@ -107,7 +107,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "command_job",
+                  "name": "job",
                   "schemas": [
                     {
                       "name": "args",
@@ -172,7 +172,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "command_node_step_plugin",
+                  "name": "node_step_plugin",
                   "schemas": [
                     {
                       "name": "config",
@@ -249,7 +249,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "command_step_plugin",
+                  "name": "step_plugin",
                   "schemas": [
                     {
                       "name": "config",
@@ -416,7 +416,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "job_option",
+            "name": "option",
             "schemas": [
               {
                 "name": "allow_multiple_values",
@@ -550,7 +550,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "option_value_choices",
+                  "name": "value_choices",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -752,7 +752,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "project_resource_model_source",
+            "name": "resource_model_source",
             "schemas": [
               {
                 "name": "config",
