@@ -89,7 +89,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "ultradns"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "baseurl" _baseurl
             , P.Just $ TF.assign "password" _password
