@@ -20,7 +20,6 @@ module Terrafomo.Google.Provider
     -- * Google Provider Datatype
       Provider (..)
     , newProvider
-    , defaultProvider
 
     -- * Google Specific Aliases
     , DataSource
@@ -56,7 +55,7 @@ import qualified Terrafomo.Validator    as TF
 type DataSource a = TF.Schema ()               Provider a
 type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
 
--- | The @Google@ Terraform provider configuration.
+-- | The @google@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/google/index.html terraform documentation>
 -- for more information.
@@ -85,21 +84,22 @@ newProvider =
         , _zone = P.Nothing
         }
 
-defaultProvider :: TF.Provider (P.Maybe Provider)
-defaultProvider =
-    TF.Provider
-        { _providerType   = TF.Type P.Nothing "provider"
-        , _providerAlias  = P.Nothing
-        , _providerConfig = P.Nothing
-        }
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "google"
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} = P.catMaybes
-        [  TF.assign "credentials" <$> _credentials
-        ,  TF.assign "project" <$> _project
-        ,  TF.assign "region" <$> _region
-        ,  TF.assign "zone" <$> _zone
-        ]
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy Provider)
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "credentials" <$> _credentials
+                  , TF.assign "project" <$> _project
+                  , TF.assign "region" <$> _region
+                  , TF.assign "zone" <$> _zone
+                  ])
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
