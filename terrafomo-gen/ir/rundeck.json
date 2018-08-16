@@ -936,6 +936,23 @@
                     "original": "option"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"preserve_options_order\" <$> TF.attribute",
+                    "name": "_preserveOptionsOrder",
+                    "method": "preserveOptionsOrder",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasPreserveOptionsOrder",
+                    "validate": false,
+                    "optional": true,
+                    "original": "preserve_options_order"
+                },
+                {
                     "default": "_projectName",
                     "computed": false,
                     "required": true,
@@ -1040,7 +1057,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedPreserveOptionsOrder",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "preserve_options_order"
                 }
             ],
@@ -1487,6 +1504,25 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The public key data to store, in the usual OpenSSH public key file format"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"key_material\" <$> TF.attribute",
+                    "name": "_keyMaterial",
+                    "method": "keyMaterial",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKeyMaterial",
+                    "validate": false,
+                    "optional": true,
+                    "original": "key_material"
+                },
+                {
                     "default": "_path",
                     "computed": false,
                     "required": true,
@@ -1564,7 +1600,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKeyMaterial",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "key_material"
                 },
                 {
