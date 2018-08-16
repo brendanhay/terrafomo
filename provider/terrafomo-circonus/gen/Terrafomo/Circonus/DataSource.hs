@@ -34,10 +34,9 @@ import GHC.Base (($))
 
 import Terrafomo.Circonus.Settings
 
-import qualified Data.Hashable               as P
-import qualified Data.HashMap.Strict         as P
-import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Map.Strict             as P
+import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
 import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
@@ -58,12 +57,12 @@ import qualified Terrafomo.Validator         as TF
 -- See the <https://www.terraform.io/docs/providers/circonus/d/account.html terraform documentation>
 -- for more information.
 data AccountData s = AccountData'
-    deriving (P.Show, P.Eq, P.Generic)
+    deriving (P.Show, P.Eq, P.Ord)
 
 accountData
     :: P.DataSource (AccountData s)
 accountData =
-    TF.newDataSource "circonus_account" TF.validator $
+    TF.unsafeDataSource "circonus_account" P.defaultProvider TF.validator $
         AccountData'
 
 instance TF.IsObject (AccountData s) where
@@ -99,7 +98,7 @@ instance s ~ s' => P.HasComputedDescription (TF.Ref s' (AccountData s)) (TF.Attr
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedInvites (TF.Ref s' (AccountData s)) (TF.Attr s [TF.Attr s (AccountInvites s)]) where
+instance s ~ s' => P.HasComputedInvites (TF.Ref s' (AccountData s)) (TF.Attr s [TF.Attr s (InvitesSetting s)]) where
     computedInvites x = TF.compute (TF.refKey x) "invites"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
@@ -117,10 +116,10 @@ instance s ~ s' => P.HasComputedTimezone (TF.Ref s' (AccountData s)) (TF.Attr s 
 instance s ~ s' => P.HasComputedUiBaseUrl (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
     computedUiBaseUrl x = TF.compute (TF.refKey x) "ui_base_url"
 
-instance s ~ s' => P.HasComputedUsage (TF.Ref s' (AccountData s)) (TF.Attr s [TF.Attr s (AccountUsage s)]) where
+instance s ~ s' => P.HasComputedUsage (TF.Ref s' (AccountData s)) (TF.Attr s [TF.Attr s (UsageSetting s)]) where
     computedUsage x = TF.compute (TF.refKey x) "usage"
 
-instance s ~ s' => P.HasComputedUsers (TF.Ref s' (AccountData s)) (TF.Attr s [TF.Attr s (AccountUsers s)]) where
+instance s ~ s' => P.HasComputedUsers (TF.Ref s' (AccountData s)) (TF.Attr s [TF.Attr s (UsersSetting s)]) where
     computedUsers x = TF.compute (TF.refKey x) "users"
 
 -- | @circonus_collector@ DataSource.
@@ -131,12 +130,12 @@ data CollectorData s = CollectorData'
     { _tags :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 collectorData
     :: P.DataSource (CollectorData s)
 collectorData =
-    TF.newDataSource "circonus_collector" TF.validator $
+    TF.unsafeDataSource "circonus_collector" P.defaultProvider TF.validator $
         CollectorData'
             { _tags = TF.Nil
             }
@@ -154,7 +153,7 @@ instance P.HasTags (CollectorData s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_tags :: CollectorData s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: CollectorData s)
 
-instance s ~ s' => P.HasComputedDetails (TF.Ref s' (CollectorData s)) (TF.Attr s [TF.Attr s (CollectorDetails s)]) where
+instance s ~ s' => P.HasComputedDetails (TF.Ref s' (CollectorData s)) (TF.Attr s [TF.Attr s (DetailsSetting s)]) where
     computedDetails x = TF.compute (TF.refKey x) "details"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CollectorData s)) (TF.Attr s P.Text) where

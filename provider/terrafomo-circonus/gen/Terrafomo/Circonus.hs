@@ -12,12 +12,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Circonus
-    ( module Terrafomo.Circonus.Types
-    , module Terrafomo.Circonus.DataSource
+    ( module Terrafomo.Circonus.DataSource
+    , module Terrafomo.Circonus.Lens
     , module Terrafomo.Circonus.Provider
     , module Terrafomo.Circonus.Resource
     , module Terrafomo.Circonus.Settings
-    , module Terrafomo.Circonus.Lens
+    , module Terrafomo.Circonus.Types
     -- * Provider Aliases
     ) where
 

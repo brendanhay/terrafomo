@@ -20,6 +20,7 @@ module Terrafomo.Circonus.Provider
     -- * Circonus Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * Circonus Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.Circonus.Settings
 
-import qualified Data.Hashable            as P
-import qualified Data.HashMap.Strict      as P
-import qualified Data.HashMap.Strict      as Map
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Map.Strict          as P
+import qualified Data.Map.Strict          as Map
 import qualified Data.Maybe               as P
 import qualified Data.Monoid              as P
 import qualified Data.Text                as P
@@ -74,7 +74,7 @@ data Provider = Provider'
     -- ^ @key@ - (Required)
     -- API token used to authenticate with the Circonus API
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: P.Text -- ^ @key@ - 'P.key'
@@ -86,23 +86,20 @@ newProvider _key =
         , _key = _key
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , P.Just $ TF.assign "api_url" _apiUrl
-                  , P.Just $ TF.assign "auto_tag" _autoTag
-                  , P.Just $ TF.assign "key" _key
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  P.Just $ TF.assign "api_url" _apiUrl
+        ,  P.Just $ TF.assign "auto_tag" _autoTag
+        ,  P.Just $ TF.assign "key" _key
+        ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
