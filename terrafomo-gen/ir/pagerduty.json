@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newAtSetting",
+                "smart": "atSetting",
                 "name": "AtSetting'"
             },
             "arguments": [
@@ -52,7 +52,7 @@
         },
         {
             "con": {
-                "smart": "newDuringSupportHoursSetting",
+                "smart": "duringSupportHoursSetting",
                 "name": "DuringSupportHoursSetting'"
             },
             "arguments": [
@@ -102,7 +102,7 @@
         },
         {
             "con": {
-                "smart": "newIncidentUrgencyRuleSetting",
+                "smart": "incidentUrgencyRuleSetting",
                 "name": "IncidentUrgencyRuleSetting'"
             },
             "arguments": [
@@ -204,7 +204,7 @@
         },
         {
             "con": {
-                "smart": "newLayerSetting",
+                "smart": "layerSetting",
                 "name": "LayerSetting'"
             },
             "arguments": [
@@ -426,7 +426,7 @@
         },
         {
             "con": {
-                "smart": "newOutsideSupportHoursSetting",
+                "smart": "outsideSupportHoursSetting",
                 "name": "OutsideSupportHoursSetting'"
             },
             "arguments": [
@@ -476,7 +476,7 @@
         },
         {
             "con": {
-                "smart": "newRestrictionSetting",
+                "smart": "restrictionSetting",
                 "name": "RestrictionSetting'"
             },
             "arguments": [
@@ -612,7 +612,7 @@
         },
         {
             "con": {
-                "smart": "newRuleSetting",
+                "smart": "ruleSetting",
                 "name": "RuleSetting'"
             },
             "arguments": [
@@ -715,7 +715,7 @@
         },
         {
             "con": {
-                "smart": "newScheduledActionsSetting",
+                "smart": "scheduledActionsSetting",
                 "name": "ScheduledActionsSetting'"
             },
             "arguments": [
@@ -782,7 +782,7 @@
         },
         {
             "con": {
-                "smart": "newSupportHoursSetting",
+                "smart": "supportHoursSetting",
                 "name": "SupportHoursSetting'"
             },
             "arguments": [
@@ -883,7 +883,7 @@
         },
         {
             "con": {
-                "smart": "newTargetSetting",
+                "smart": "targetSetting",
                 "name": "TargetSetting'"
             },
             "arguments": [
