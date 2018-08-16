@@ -20,7 +20,6 @@ module Terrafomo.Kubernetes.Provider
     -- * Kubernetes Provider Datatype
       Provider (..)
     , newProvider
-    , defaultProvider
 
     -- * Kubernetes Specific Aliases
     , DataSource
@@ -56,7 +55,7 @@ import qualified Terrafomo.Validator        as TF
 type DataSource a = TF.Schema ()               Provider a
 type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
 
--- | The @Kubernetes@ Terraform provider configuration.
+-- | The @kubernetes@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/kubernetes/index.html terraform documentation>
 -- for more information.
@@ -133,30 +132,31 @@ newProvider =
         , _username = P.Nothing
         }
 
-defaultProvider :: TF.Provider (P.Maybe Provider)
-defaultProvider =
-    TF.Provider
-        { _providerType   = TF.Type P.Nothing "provider"
-        , _providerAlias  = P.Nothing
-        , _providerConfig = P.Nothing
-        }
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "kubernetes"
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} = P.catMaybes
-        [  TF.assign "client_certificate" <$> _clientCertificate
-        ,  TF.assign "client_key" <$> _clientKey
-        ,  TF.assign "cluster_ca_certificate" <$> _clusterCaCertificate
-        ,  TF.assign "config_context" <$> _configContext
-        ,  TF.assign "config_context_auth_info" <$> _configContextAuthInfo
-        ,  TF.assign "config_context_cluster" <$> _configContextCluster
-        ,  TF.assign "config_path" <$> _configPath
-        ,  TF.assign "host" <$> _host
-        ,  TF.assign "insecure" <$> _insecure
-        ,  TF.assign "load_config_file" <$> _loadConfigFile
-        ,  TF.assign "password" <$> _password
-        ,  TF.assign "token" <$> _token
-        ,  TF.assign "username" <$> _username
-        ]
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy Provider)
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "client_certificate" <$> _clientCertificate
+                  , TF.assign "client_key" <$> _clientKey
+                  , TF.assign "cluster_ca_certificate" <$> _clusterCaCertificate
+                  , TF.assign "config_context" <$> _configContext
+                  , TF.assign "config_context_auth_info" <$> _configContextAuthInfo
+                  , TF.assign "config_context_cluster" <$> _configContextCluster
+                  , TF.assign "config_path" <$> _configPath
+                  , TF.assign "host" <$> _host
+                  , TF.assign "insecure" <$> _insecure
+                  , TF.assign "load_config_file" <$> _loadConfigFile
+                  , TF.assign "password" <$> _password
+                  , TF.assign "token" <$> _token
+                  , TF.assign "username" <$> _username
+                  ])
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
