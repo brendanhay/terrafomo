@@ -17,7 +17,6 @@
 --
 module Terrafomo.AzureRM.Resource01
     (
-    -- * Resource Datatypes
     -- ** azurerm_app_service
       AppServiceResource (..)
     , appServiceResource
@@ -469,6 +468,7 @@ data AppServiceResource s = AppServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_app_service@ resource value.
 appServiceResource
     :: TF.Attr s P.Text -- ^ @app_service_plan_id@ - 'P.appServicePlanId'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
@@ -578,6 +578,7 @@ data AppServiceActiveSlotResource s = AppServiceActiveSlotResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_app_service_active_slot@ resource value.
 appServiceActiveSlotResource
     :: TF.Attr s P.Text -- ^ @app_service_name@ - 'P.appServiceName'
     -> TF.Attr s P.Text -- ^ @app_service_slot_name@ - 'P.appServiceSlotName'
@@ -635,6 +636,7 @@ data AppServiceCustomHostnameBindingResource s = AppServiceCustomHostnameBinding
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_app_service_custom_hostname_binding@ resource value.
 appServiceCustomHostnameBindingResource
     :: TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
     -> TF.Attr s P.Text -- ^ @app_service_name@ - 'P.appServiceName'
@@ -698,6 +700,7 @@ data AppServicePlanResource s = AppServicePlanResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_app_service_plan@ resource value.
 appServicePlanResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -798,6 +801,7 @@ data AppServiceSlotResource s = AppServiceSlotResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_app_service_slot@ resource value.
 appServiceSlotResource
     :: TF.Attr s P.Text -- ^ @app_service_plan_id@ - 'P.appServicePlanId'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
@@ -956,6 +960,7 @@ data ApplicationGatewayResource s = ApplicationGatewayResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_application_gateway@ resource value.
 applicationGatewayResource
     :: TF.Attr s (P.NonEmpty (TF.Attr s (FrontendIpConfigurationSetting s))) -- ^ @frontend_ip_configuration@ - 'P.frontendIpConfiguration'
     -> TF.Attr s [TF.Attr s (GatewayIpConfigurationSetting s)] -- ^ @gateway_ip_configuration@ - 'P.gatewayIpConfiguration'
@@ -1133,6 +1138,7 @@ data ApplicationInsightsResource s = ApplicationInsightsResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_application_insights@ resource value.
 applicationInsightsResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1207,6 +1213,7 @@ data ApplicationSecurityGroupResource s = ApplicationSecurityGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_application_security_group@ resource value.
 applicationSecurityGroupResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1270,6 +1277,7 @@ data AutomationAccountResource s = AutomationAccountResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_automation_account@ resource value.
 automationAccountResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1351,6 +1359,7 @@ data AutomationCredentialResource s = AutomationCredentialResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_automation_credential@ resource value.
 automationCredentialResource
     :: TF.Attr s P.Text -- ^ @account_name@ - 'P.accountName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1449,6 +1458,7 @@ data AutomationRunbookResource s = AutomationRunbookResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_automation_runbook@ resource value.
 automationRunbookResource
     :: TF.Attr s (PublishContentLinkSetting s) -- ^ @publish_content_link@ - 'P.publishContentLink'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
@@ -1566,6 +1576,7 @@ data AutomationScheduleResource s = AutomationScheduleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_automation_schedule@ resource value.
 automationScheduleResource
     :: TF.Attr s P.Text -- ^ @frequency@ - 'P.frequency'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1661,6 +1672,7 @@ data AutoscaleSettingResource s = AutoscaleSettingResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_autoscale_setting@ resource value.
 autoscaleSettingResource
     :: TF.Attr s P.Text -- ^ @target_resource_id@ - 'P.targetResourceId'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
@@ -1764,6 +1776,7 @@ data AvailabilitySetResource s = AvailabilitySetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_availability_set@ resource value.
 availabilitySetResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1845,6 +1858,7 @@ data AzureadApplicationResource s = AzureadApplicationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_azuread_application@ resource value.
 azureadApplicationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (AzureadApplicationResource s)
@@ -1906,6 +1920,7 @@ data AzureadServicePrincipalResource s = AzureadServicePrincipalResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_azuread_service_principal@ resource value.
 azureadServicePrincipalResource
     :: TF.Attr s P.Text -- ^ @application_id@ - 'P.applicationId'
     -> P.Resource (AzureadServicePrincipalResource s)
@@ -1950,6 +1965,7 @@ data AzureadServicePrincipalPasswordResource s = AzureadServicePrincipalPassword
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_azuread_service_principal_password@ resource value.
 azureadServicePrincipalPasswordResource
     :: TF.Attr s P.Text -- ^ @end_date@ - 'P.endDate'
     -> TF.Attr s P.Text -- ^ @service_principal_id@ - 'P.servicePrincipalId'
@@ -2037,6 +2053,7 @@ data CdnEndpointResource s = CdnEndpointResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_cdn_endpoint@ resource value.
 cdnEndpointResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2173,6 +2190,7 @@ data CdnProfileResource s = CdnProfileResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_cdn_profile@ resource value.
 cdnProfileResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2259,6 +2277,7 @@ data ContainerGroupResource s = ContainerGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_container_group@ resource value.
 containerGroupResource
     :: TF.Attr s [TF.Attr s (ContainerSetting s)] -- ^ @container@ - 'P.container'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
@@ -2378,6 +2397,7 @@ data ContainerRegistryResource s = ContainerRegistryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_container_registry@ resource value.
 containerRegistryResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2486,6 +2506,7 @@ data ContainerServiceResource s = ContainerServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_container_service@ resource value.
 containerServiceResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2631,6 +2652,7 @@ data CosmosdbAccountResource s = CosmosdbAccountResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_cosmosdb_account@ resource value.
 cosmosdbAccountResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2772,6 +2794,7 @@ data DataLakeAnalyticsAccountResource s = DataLakeAnalyticsAccountResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_data_lake_analytics_account@ resource value.
 dataLakeAnalyticsAccountResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @default_store_account_name@ - 'P.defaultStoreAccountName'
@@ -2853,6 +2876,7 @@ data DataLakeAnalyticsFirewallRuleResource s = DataLakeAnalyticsFirewallRuleReso
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_data_lake_analytics_firewall_rule@ resource value.
 dataLakeAnalyticsFirewallRuleResource
     :: TF.Attr s P.Text -- ^ @end_ip_address@ - 'P.endIpAddress'
     -> TF.Attr s P.Text -- ^ @start_ip_address@ - 'P.startIpAddress'
@@ -2938,6 +2962,7 @@ data DataLakeStoreResource s = DataLakeStoreResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_data_lake_store@ resource value.
 dataLakeStoreResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -3029,6 +3054,7 @@ data DataLakeStoreFileResource s = DataLakeStoreFileResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_data_lake_store_file@ resource value.
 dataLakeStoreFileResource
     :: TF.Attr s P.Text -- ^ @account_name@ - 'P.accountName'
     -> TF.Attr s P.Text -- ^ @local_file_path@ - 'P.localFilePath'
@@ -3092,6 +3118,7 @@ data DataLakeStoreFirewallRuleResource s = DataLakeStoreFirewallRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_data_lake_store_firewall_rule@ resource value.
 dataLakeStoreFirewallRuleResource
     :: TF.Attr s P.Text -- ^ @end_ip_address@ - 'P.endIpAddress'
     -> TF.Attr s P.Text -- ^ @start_ip_address@ - 'P.startIpAddress'
@@ -3171,6 +3198,7 @@ data DnsARecordResource s = DnsARecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_dns_a_record@ resource value.
 dnsARecordResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -3253,6 +3281,7 @@ data DnsAaaaRecordResource s = DnsAaaaRecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_dns_aaaa_record@ resource value.
 dnsAaaaRecordResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -3335,6 +3364,7 @@ data DnsCaaRecordResource s = DnsCaaRecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_dns_caa_record@ resource value.
 dnsCaaRecordResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -3420,6 +3450,7 @@ data DnsCnameRecordResource s = DnsCnameRecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_dns_cname_record@ resource value.
 dnsCnameRecordResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -3509,6 +3540,7 @@ data DnsMxRecordResource s = DnsMxRecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_dns_mx_record@ resource value.
 dnsMxRecordResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -3588,6 +3620,7 @@ data DnsNsRecordResource s = DnsNsRecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_dns_ns_record@ resource value.
 dnsNsRecordResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -3665,6 +3698,7 @@ data DnsPtrRecordResource s = DnsPtrRecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_dns_ptr_record@ resource value.
 dnsPtrRecordResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -3747,6 +3781,7 @@ data DnsSrvRecordResource s = DnsSrvRecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_dns_srv_record@ resource value.
 dnsSrvRecordResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -3829,6 +3864,7 @@ data DnsTxtRecordResource s = DnsTxtRecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_dns_txt_record@ resource value.
 dnsTxtRecordResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -3911,6 +3947,7 @@ data DnsZoneResource s = DnsZoneResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_dns_zone@ resource value.
 dnsZoneResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -3993,6 +4030,7 @@ data EventgridTopicResource s = EventgridTopicResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_eventgrid_topic@ resource value.
 eventgridTopicResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4071,6 +4109,7 @@ data EventhubResource s = EventhubResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_eventhub@ resource value.
 eventhubResource
     :: TF.Attr s P.Int -- ^ @partition_count@ - 'P.partitionCount'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4170,6 +4209,7 @@ data EventhubAuthorizationRuleResource s = EventhubAuthorizationRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_eventhub_authorization_rule@ resource value.
 eventhubAuthorizationRuleResource
     :: TF.Attr s P.Text -- ^ @eventhub_name@ - 'P.eventhubName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4274,6 +4314,7 @@ data EventhubConsumerGroupResource s = EventhubConsumerGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_eventhub_consumer_group@ resource value.
 eventhubConsumerGroupResource
     :: TF.Attr s P.Text -- ^ @eventhub_name@ - 'P.eventhubName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4355,6 +4396,7 @@ data EventhubNamespaceResource s = EventhubNamespaceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_eventhub_namespace@ resource value.
 eventhubNamespaceResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4461,6 +4503,7 @@ data EventhubNamespaceAuthorizationRuleResource s = EventhubNamespaceAuthorizati
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_eventhub_namespace_authorization_rule@ resource value.
 eventhubNamespaceAuthorizationRuleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
@@ -4566,6 +4609,7 @@ data ExpressRouteCircuitResource s = ExpressRouteCircuitResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_express_route_circuit@ resource value.
 expressRouteCircuitResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @peering_location@ - 'P.peeringLocation'
@@ -4675,6 +4719,7 @@ data ExpressRouteCircuitAuthorizationResource s = ExpressRouteCircuitAuthorizati
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_express_route_circuit_authorization@ resource value.
 expressRouteCircuitAuthorizationResource
     :: TF.Attr s P.Text -- ^ @express_route_circuit_name@ - 'P.expressRouteCircuitName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4753,6 +4798,7 @@ data ExpressRouteCircuitPeeringResource s = ExpressRouteCircuitPeeringResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_express_route_circuit_peering@ resource value.
 expressRouteCircuitPeeringResource
     :: TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
     -> TF.Attr s P.Text -- ^ @express_route_circuit_name@ - 'P.expressRouteCircuitName'
@@ -4882,6 +4928,7 @@ data FunctionAppResource s = FunctionAppResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_function_app@ resource value.
 functionAppResource
     :: TF.Attr s P.Text -- ^ @app_service_plan_id@ - 'P.appServicePlanId'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
@@ -5016,6 +5063,7 @@ data ImageResource s = ImageResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_image@ resource value.
 imageResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -5104,6 +5152,7 @@ data IothubResource s = IothubResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_iothub@ resource value.
 iothubResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -5200,6 +5249,7 @@ data KeyVaultResource s = KeyVaultResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_key_vault@ resource value.
 keyVaultResource
     :: TF.Attr s P.Text -- ^ @tenant_id@ - 'P.tenantId'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
@@ -5318,6 +5368,7 @@ data KeyVaultAccessPolicyResource s = KeyVaultAccessPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_key_vault_access_policy@ resource value.
 keyVaultAccessPolicyResource
     :: TF.Attr s P.Text -- ^ @object_id@ - 'P.objectId'
     -> TF.Attr s P.Text -- ^ @tenant_id@ - 'P.tenantId'
@@ -5416,6 +5467,7 @@ data KeyVaultCertificateResource s = KeyVaultCertificateResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_key_vault_certificate@ resource value.
 keyVaultCertificateResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (CertificatePolicySetting s) -- ^ @certificate_policy@ - 'P.certificatePolicy'
@@ -5506,6 +5558,7 @@ data KeyVaultKeyResource s = KeyVaultKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_key_vault_key@ resource value.
 keyVaultKeyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @key_opts@ - 'P.keyOpts'
@@ -5594,6 +5647,7 @@ data KeyVaultSecretResource s = KeyVaultSecretResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_key_vault_secret@ resource value.
 keyVaultSecretResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @vault_uri@ - 'P.vaultUri'
@@ -5676,6 +5730,7 @@ data KubernetesClusterResource s = KubernetesClusterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_kubernetes_cluster@ resource value.
 kubernetesClusterResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -5804,6 +5859,7 @@ data LbResource s = LbResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_lb@ resource value.
 lbResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -5884,6 +5940,7 @@ data LbBackendAddressPoolResource s = LbBackendAddressPoolResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_lb_backend_address_pool@ resource value.
 lbBackendAddressPoolResource
     :: TF.Attr s P.Text -- ^ @loadbalancer_id@ - 'P.loadbalancerId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -5962,6 +6019,7 @@ data LbNatPoolResource s = LbNatPoolResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_lb_nat_pool@ resource value.
 lbNatPoolResource
     :: TF.Attr s P.Int -- ^ @frontend_port_end@ - 'P.frontendPortEnd'
     -> TF.Attr s P.Text -- ^ @loadbalancer_id@ - 'P.loadbalancerId'
@@ -6074,6 +6132,7 @@ data LbNatRuleResource s = LbNatRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_lb_nat_rule@ resource value.
 lbNatRuleResource
     :: TF.Attr s P.Text -- ^ @loadbalancer_id@ - 'P.loadbalancerId'
     -> TF.Attr s P.Text -- ^ @frontend_ip_configuration_name@ - 'P.frontendIpConfigurationName'
@@ -6184,6 +6243,7 @@ data LbProbeResource s = LbProbeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_lb_probe@ resource value.
 lbProbeResource
     :: TF.Attr s P.Text -- ^ @loadbalancer_id@ - 'P.loadbalancerId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -6291,6 +6351,7 @@ data LbRuleResource s = LbRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_lb_rule@ resource value.
 lbRuleResource
     :: TF.Attr s P.Text -- ^ @loadbalancer_id@ - 'P.loadbalancerId'
     -> TF.Attr s P.Text -- ^ @frontend_ip_configuration_name@ - 'P.frontendIpConfigurationName'
@@ -6411,6 +6472,7 @@ data LocalNetworkGatewayResource s = LocalNetworkGatewayResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_local_network_gateway@ resource value.
 localNetworkGatewayResource
     :: TF.Attr s P.Text -- ^ @gateway_address@ - 'P.gatewayAddress'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
@@ -6507,6 +6569,7 @@ data LogAnalyticsSolutionResource s = LogAnalyticsSolutionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_log_analytics_solution@ resource value.
 logAnalyticsSolutionResource
     :: TF.Attr s P.Text -- ^ @workspace_resource_id@ - 'P.workspaceResourceId'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
@@ -6595,6 +6658,7 @@ data LogAnalyticsWorkspaceResource s = LogAnalyticsWorkspaceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_log_analytics_workspace@ resource value.
 logAnalyticsWorkspaceResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -6678,6 +6742,7 @@ data LogicAppActionCustomResource s = LogicAppActionCustomResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_logic_app_action_custom@ resource value.
 logicAppActionCustomResource
     :: TF.Attr s P.Text -- ^ @body@ - 'P.body'
     -> TF.Attr s P.Text -- ^ @logic_app_id@ - 'P.logicAppId'
@@ -6744,6 +6809,7 @@ data LogicAppActionHttpResource s = LogicAppActionHttpResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_logic_app_action_http@ resource value.
 logicAppActionHttpResource
     :: TF.Attr s P.Text -- ^ @logic_app_id@ - 'P.logicAppId'
     -> TF.Attr s P.Text -- ^ @method@ - 'P.method'
@@ -6823,6 +6889,7 @@ data LogicAppTriggerCustomResource s = LogicAppTriggerCustomResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_logic_app_trigger_custom@ resource value.
 logicAppTriggerCustomResource
     :: TF.Attr s P.Text -- ^ @body@ - 'P.body'
     -> TF.Attr s P.Text -- ^ @logic_app_id@ - 'P.logicAppId'
@@ -6886,6 +6953,7 @@ data LogicAppTriggerHttpRequestResource s = LogicAppTriggerHttpRequestResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_logic_app_trigger_http_request@ resource value.
 logicAppTriggerHttpRequestResource
     :: TF.Attr s P.Text -- ^ @logic_app_id@ - 'P.logicAppId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -6960,6 +7028,7 @@ data LogicAppTriggerRecurrenceResource s = LogicAppTriggerRecurrenceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_logic_app_trigger_recurrence@ resource value.
 logicAppTriggerRecurrenceResource
     :: TF.Attr s P.Text -- ^ @frequency@ - 'P.frequency'
     -> TF.Attr s P.Text -- ^ @logic_app_id@ - 'P.logicAppId'
@@ -7034,6 +7103,7 @@ data LogicAppWorkflowResource s = LogicAppWorkflowResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_logic_app_workflow@ resource value.
 logicAppWorkflowResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -7139,6 +7209,7 @@ data ManagedDiskResource s = ManagedDiskResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_managed_disk@ resource value.
 managedDiskResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -7263,6 +7334,7 @@ data ManagementLockResource s = ManagementLockResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_management_lock@ resource value.
 managementLockResource
     :: TF.Attr s P.Text -- ^ @lock_level@ - 'P.lockLevel'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -7348,6 +7420,7 @@ data MetricAlertruleResource s = MetricAlertruleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_metric_alertrule@ resource value.
 metricAlertruleResource
     :: TF.Attr s P.Text -- ^ @aggregation@ - 'P.aggregation'
     -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
@@ -7484,6 +7557,7 @@ data MonitorActionGroupResource s = MonitorActionGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_monitor_action_group@ resource value.
 monitorActionGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -7575,6 +7649,7 @@ data MysqlConfigurationResource s = MysqlConfigurationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_mysql_configuration@ resource value.
 mysqlConfigurationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -7646,6 +7721,7 @@ data MysqlDatabaseResource s = MysqlDatabaseResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_mysql_database@ resource value.
 mysqlDatabaseResource
     :: TF.Attr s P.Text -- ^ @charset@ - 'P.charset'
     -> TF.Attr s P.Text -- ^ @collation@ - 'P.collation'
@@ -7725,6 +7801,7 @@ data MysqlFirewallRuleResource s = MysqlFirewallRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_mysql_firewall_rule@ resource value.
 mysqlFirewallRuleResource
     :: TF.Attr s P.Text -- ^ @end_ip_address@ - 'P.endIpAddress'
     -> TF.Attr s P.Text -- ^ @start_ip_address@ - 'P.startIpAddress'
@@ -7816,6 +7893,7 @@ data MysqlServerResource s = MysqlServerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_mysql_server@ resource value.
 mysqlServerResource
     :: TF.Attr s P.Text -- ^ @ssl_enforcement@ - 'P.sslEnforcement'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
@@ -7947,6 +8025,7 @@ data NetworkInterfaceResource s = NetworkInterfaceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_network_interface@ resource value.
 networkInterfaceResource
     :: TF.Attr s [TF.Attr s (IpConfigurationSetting s)] -- ^ @ip_configuration@ - 'P.ipConfiguration'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
@@ -8060,6 +8139,7 @@ data NetworkSecurityGroupResource s = NetworkSecurityGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_network_security_group@ resource value.
 networkSecurityGroupResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -8192,6 +8272,7 @@ data NetworkSecurityRuleResource s = NetworkSecurityRuleResource'
     -- * 'sourcePortRange'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_network_security_rule@ resource value.
 networkSecurityRuleResource
     :: TF.Attr s P.Text -- ^ @access@ - 'P.access'
     -> TF.Attr s P.Text -- ^ @direction@ - 'P.direction'
@@ -8399,6 +8480,7 @@ data NetworkWatcherResource s = NetworkWatcherResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_network_watcher@ resource value.
 networkWatcherResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -8468,6 +8550,7 @@ data NotificationHubResource s = NotificationHubResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_notification_hub@ resource value.
 notificationHubResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -8567,6 +8650,7 @@ data NotificationHubAuthorizationRuleResource s = NotificationHubAuthorizationRu
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_notification_hub_authorization_rule@ resource value.
 notificationHubAuthorizationRuleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
@@ -8668,6 +8752,7 @@ data NotificationHubNamespaceResource s = NotificationHubNamespaceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_notification_hub_namespace@ resource value.
 notificationHubNamespaceResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -8773,6 +8858,7 @@ data PacketCaptureResource s = PacketCaptureResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_packet_capture@ resource value.
 packetCaptureResource
     :: TF.Attr s P.Text -- ^ @target_resource_id@ - 'P.targetResourceId'
     -> TF.Attr s (StorageLocationSetting s) -- ^ @storage_location@ - 'P.storageLocation'
@@ -8887,6 +8973,7 @@ data PolicyAssignmentResource s = PolicyAssignmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_policy_assignment@ resource value.
 policyAssignmentResource
     :: TF.Attr s P.Text -- ^ @policy_definition_id@ - 'P.policyDefinitionId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -8980,6 +9067,7 @@ data PolicyDefinitionResource s = PolicyDefinitionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_policy_definition@ resource value.
 policyDefinitionResource
     :: TF.Attr s P.Text -- ^ @mode@ - 'P.mode'
     -> TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
@@ -9076,6 +9164,7 @@ data PostgresqlConfigurationResource s = PostgresqlConfigurationResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_postgresql_configuration@ resource value.
 postgresqlConfigurationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -9147,6 +9236,7 @@ data PostgresqlDatabaseResource s = PostgresqlDatabaseResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_postgresql_database@ resource value.
 postgresqlDatabaseResource
     :: TF.Attr s P.Text -- ^ @charset@ - 'P.charset'
     -> TF.Attr s P.Text -- ^ @collation@ - 'P.collation'
@@ -9226,6 +9316,7 @@ data PostgresqlFirewallRuleResource s = PostgresqlFirewallRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_postgresql_firewall_rule@ resource value.
 postgresqlFirewallRuleResource
     :: TF.Attr s P.Text -- ^ @end_ip_address@ - 'P.endIpAddress'
     -> TF.Attr s P.Text -- ^ @start_ip_address@ - 'P.startIpAddress'
@@ -9317,6 +9408,7 @@ data PostgresqlServerResource s = PostgresqlServerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_postgresql_server@ resource value.
 postgresqlServerResource
     :: TF.Attr s P.Text -- ^ @ssl_enforcement@ - 'P.sslEnforcement'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
@@ -9454,6 +9546,7 @@ data PublicIpResource s = PublicIpResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_public_ip@ resource value.
 publicIpResource
     :: TF.Attr s P.Text -- ^ @public_ip_address_allocation@ - 'P.publicIpAddressAllocation'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
@@ -9566,6 +9659,7 @@ data RecoveryServicesVaultResource s = RecoveryServicesVaultResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_recovery_services_vault@ resource value.
 recoveryServicesVaultResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -9658,6 +9752,7 @@ data RedisCacheResource s = RedisCacheResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_redis_cache@ resource value.
 redisCacheResource
     :: TF.Attr s P.Int -- ^ @capacity@ - 'P.capacity'
     -> TF.Attr s (RedisConfigurationSetting s) -- ^ @redis_configuration@ - 'P.redisConfiguration'
@@ -9806,6 +9901,7 @@ data RedisFirewallRuleResource s = RedisFirewallRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_redis_firewall_rule@ resource value.
 redisFirewallRuleResource
     :: TF.Attr s P.Text -- ^ @end_ip@ - 'P.endIp'
     -> TF.Attr s P.Text -- ^ @start_ip@ - 'P.startIp'
@@ -9882,6 +9978,7 @@ data RelayNamespaceResource s = RelayNamespaceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_relay_namespace@ resource value.
 relayNamespaceResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -9966,6 +10063,7 @@ data ResourceGroupResource s = ResourceGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_resource_group@ resource value.
 resourceGroupResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -10018,6 +10116,7 @@ data RoleAssignmentResource s = RoleAssignmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_role_assignment@ resource value.
 roleAssignmentResource
     :: TF.Attr s P.Text -- ^ @principal_id@ - 'P.principalId'
     -> TF.Attr s P.Text -- ^ @scope@ - 'P.scope'

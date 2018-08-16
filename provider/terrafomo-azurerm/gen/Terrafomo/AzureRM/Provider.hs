@@ -17,11 +17,10 @@
 --
 module Terrafomo.AzureRM.Provider
     (
-    -- * AzureRM Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * AzureRM Specific Aliases
+    -- ** AzureRM Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -109,7 +108,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "azurerm"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "client_id" <$> _clientId
             , TF.assign "client_secret" <$> _clientSecret

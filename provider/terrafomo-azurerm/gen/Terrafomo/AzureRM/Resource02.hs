@@ -17,7 +17,6 @@
 --
 module Terrafomo.AzureRM.Resource02
     (
-    -- * Resource Datatypes
     -- ** azurerm_role_definition
       RoleDefinitionResource (..)
     , roleDefinitionResource
@@ -230,6 +229,7 @@ data RoleDefinitionResource s = RoleDefinitionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_role_definition@ resource value.
 roleDefinitionResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s (PermissionsSetting s)] -- ^ @permissions@ - 'P.permissions'
@@ -311,6 +311,7 @@ data RouteResource s = RouteResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_route@ resource value.
 routeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -390,6 +391,7 @@ data RouteTableResource s = RouteTableResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_route_table@ resource value.
 routeTableResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -493,6 +495,7 @@ data SchedulerJobResource s = SchedulerJobResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_scheduler_job@ resource value.
 schedulerJobResource
     :: TF.Attr s P.Text -- ^ @job_collection_name@ - 'P.jobCollectionName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -652,6 +655,7 @@ data SchedulerJobCollectionResource s = SchedulerJobCollectionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_scheduler_job_collection@ resource value.
 schedulerJobCollectionResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -741,6 +745,7 @@ data SearchServiceResource s = SearchServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_search_service@ resource value.
 searchServiceResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -845,6 +850,7 @@ data ServiceFabricClusterResource s = ServiceFabricClusterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_service_fabric_cluster@ resource value.
 serviceFabricClusterResource
     :: TF.Attr s P.Text -- ^ @management_endpoint@ - 'P.managementEndpoint'
     -> TF.Attr s P.Text -- ^ @vm_image@ - 'P.vmImage'
@@ -1001,6 +1007,7 @@ data ServicebusNamespaceResource s = ServicebusNamespaceResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_servicebus_namespace@ resource value.
 servicebusNamespaceResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1097,6 +1104,7 @@ data ServicebusNamespaceAuthorizationRuleResource s = ServicebusNamespaceAuthori
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_servicebus_namespace_authorization_rule@ resource value.
 servicebusNamespaceAuthorizationRuleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
@@ -1202,6 +1210,7 @@ data ServicebusQueueResource s = ServicebusQueueResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_servicebus_queue@ resource value.
 servicebusQueueResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
@@ -1321,6 +1330,7 @@ data ServicebusQueueAuthorizationRuleResource s = ServicebusQueueAuthorizationRu
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_servicebus_queue_authorization_rule@ resource value.
 servicebusQueueAuthorizationRuleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
@@ -1437,6 +1447,7 @@ data ServicebusSubscriptionResource s = ServicebusSubscriptionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_servicebus_subscription@ resource value.
 servicebusSubscriptionResource
     :: TF.Attr s P.Int -- ^ @max_delivery_count@ - 'P.maxDeliveryCount'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1571,6 +1582,7 @@ data ServicebusSubscriptionRuleResource s = ServicebusSubscriptionRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_servicebus_subscription_rule@ resource value.
 servicebusSubscriptionRuleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
@@ -1706,6 +1718,7 @@ data ServicebusTopicResource s = ServicebusTopicResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_servicebus_topic@ resource value.
 servicebusTopicResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
@@ -1829,6 +1842,7 @@ data ServicebusTopicAuthorizationRuleResource s = ServicebusTopicAuthorizationRu
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_servicebus_topic_authorization_rule@ resource value.
 servicebusTopicAuthorizationRuleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
@@ -1942,6 +1956,7 @@ data SnapshotResource s = SnapshotResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_snapshot@ resource value.
 snapshotResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2051,6 +2066,7 @@ data SqlActiveDirectoryAdministratorResource s = SqlActiveDirectoryAdministrator
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_sql_active_directory_administrator@ resource value.
 sqlActiveDirectoryAdministratorResource
     :: TF.Attr s P.Text -- ^ @object_id@ - 'P.objectId'
     -> TF.Attr s P.Text -- ^ @tenant_id@ - 'P.tenantId'
@@ -2133,6 +2149,7 @@ data SqlDatabaseResource s = SqlDatabaseResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_sql_database@ resource value.
 sqlDatabaseResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2264,6 +2281,7 @@ data SqlElasticpoolResource s = SqlElasticpoolResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_sql_elasticpool@ resource value.
 sqlElasticpoolResource
     :: TF.Attr s P.Int -- ^ @dtu@ - 'P.dtu'
     -> TF.Attr s P.Text -- ^ @edition@ - 'P.edition'
@@ -2366,6 +2384,7 @@ data SqlFirewallRuleResource s = SqlFirewallRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_sql_firewall_rule@ resource value.
 sqlFirewallRuleResource
     :: TF.Attr s P.Text -- ^ @end_ip_address@ - 'P.endIpAddress'
     -> TF.Attr s P.Text -- ^ @start_ip_address@ - 'P.startIpAddress'
@@ -2448,6 +2467,7 @@ data SqlServerResource s = SqlServerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_sql_server@ resource value.
 sqlServerResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @administrator_login@ - 'P.administratorLogin'
@@ -2541,6 +2561,7 @@ data SqlVirtualNetworkRuleResource s = SqlVirtualNetworkRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_sql_virtual_network_rule@ resource value.
 sqlVirtualNetworkRuleResource
     :: TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2640,6 +2661,7 @@ data StorageAccountResource s = StorageAccountResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_storage_account@ resource value.
 storageAccountResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2858,6 +2880,7 @@ data StorageBlobResource s = StorageBlobResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_storage_blob@ resource value.
 storageBlobResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -2994,6 +3017,7 @@ data StorageContainerResource s = StorageContainerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_storage_container@ resource value.
 storageContainerResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -3061,6 +3085,7 @@ data StorageQueueResource s = StorageQueueResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_storage_queue@ resource value.
 storageQueueResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -3121,6 +3146,7 @@ data StorageShareResource s = StorageShareResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_storage_share@ resource value.
 storageShareResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -3188,6 +3214,7 @@ data StorageTableResource s = StorageTableResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_storage_table@ resource value.
 storageTableResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -3257,6 +3284,7 @@ data SubnetResource s = SubnetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_subnet@ resource value.
 subnetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -3358,6 +3386,7 @@ data TemplateDeploymentResource s = TemplateDeploymentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_template_deployment@ resource value.
 templateDeploymentResource
     :: TF.Attr s P.Text -- ^ @deployment_mode@ - 'P.deploymentMode'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -3458,6 +3487,7 @@ data TrafficManagerEndpointResource s = TrafficManagerEndpointResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_traffic_manager_endpoint@ resource value.
 trafficManagerEndpointResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @profile_name@ - 'P.profileName'
@@ -3568,6 +3598,7 @@ data TrafficManagerProfileResource s = TrafficManagerProfileResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_traffic_manager_profile@ resource value.
 trafficManagerProfileResource
     :: TF.Attr s [TF.Attr s (DnsConfigSetting s)] -- ^ @dns_config@ - 'P.dnsConfig'
     -> TF.Attr s [TF.Attr s (MonitorConfigSetting s)] -- ^ @monitor_config@ - 'P.monitorConfig'
@@ -3650,6 +3681,7 @@ data UserAssignedIdentityResource s = UserAssignedIdentityResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_user_assigned_identity@ resource value.
 userAssignedIdentityResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -3758,6 +3790,7 @@ data VirtualMachineResource s = VirtualMachineResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_virtual_machine@ resource value.
 virtualMachineResource
     :: TF.Attr s (StorageOsDiskSetting s) -- ^ @storage_os_disk@ - 'P.storageOsDisk'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @network_interface_ids@ - 'P.networkInterfaceIds'
@@ -3971,6 +4004,7 @@ data VirtualMachineDataDiskAttachmentResource s = VirtualMachineDataDiskAttachme
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_virtual_machine_data_disk_attachment@ resource value.
 virtualMachineDataDiskAttachmentResource
     :: TF.Attr s P.Text -- ^ @caching@ - 'P.caching'
     -> TF.Attr s P.Text -- ^ @managed_disk_id@ - 'P.managedDiskId'
@@ -4071,6 +4105,7 @@ data VirtualMachineExtensionResource s = VirtualMachineExtensionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_virtual_machine_extension@ resource value.
 virtualMachineExtensionResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4229,6 +4264,7 @@ data VirtualMachineScaleSetResource s = VirtualMachineScaleSetResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_virtual_machine_scale_set@ resource value.
 virtualMachineScaleSetResource
     :: TF.Attr s (StorageProfileOsDiskSetting s) -- ^ @storage_profile_os_disk@ - 'P.storageProfileOsDisk'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
@@ -4441,6 +4477,7 @@ data VirtualNetworkResource s = VirtualNetworkResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_virtual_network@ resource value.
 virtualNetworkResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4537,6 +4574,7 @@ data VirtualNetworkGatewayResource s = VirtualNetworkGatewayResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_virtual_network_gateway@ resource value.
 virtualNetworkGatewayResource
     :: TF.Attr s [TF.Attr s (IpConfigurationSetting s)] -- ^ @ip_configuration@ - 'P.ipConfiguration'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
@@ -4679,6 +4717,7 @@ data VirtualNetworkGatewayConnectionResource s = VirtualNetworkGatewayConnection
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_virtual_network_gateway_connection@ resource value.
 virtualNetworkGatewayConnectionResource
     :: TF.Attr s P.Text -- ^ @virtual_network_gateway_id@ - 'P.virtualNetworkGatewayId'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
@@ -4813,6 +4852,7 @@ data VirtualNetworkPeeringResource s = VirtualNetworkPeeringResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_virtual_network_peering@ resource value.
 virtualNetworkPeeringResource
     :: TF.Attr s P.Text -- ^ @remote_virtual_network_id@ - 'P.remoteVirtualNetworkId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'

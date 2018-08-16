@@ -17,7 +17,6 @@
 --
 module Terrafomo.AzureRM.DataSource
     (
-    -- * DataSource Datatypes
     -- ** azurerm_app_service
       AppServiceData (..)
     , appServiceData
@@ -221,6 +220,7 @@ data AppServiceData s = AppServiceData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_app_service@ datasource value.
 appServiceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -306,6 +306,7 @@ data AppServicePlanData s = AppServicePlanData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_app_service_plan@ datasource value.
 appServicePlanData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -370,6 +371,7 @@ data ApplicationSecurityGroupData s = ApplicationSecurityGroupData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_application_security_group@ datasource value.
 applicationSecurityGroupData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -416,6 +418,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (ApplicationSecurityGroupData s)
 data AzureadApplicationData s = AzureadApplicationData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_azuread_application@ datasource value.
 azureadApplicationData
     :: P.DataSource (AzureadApplicationData s)
 azureadApplicationData =
@@ -462,6 +465,7 @@ instance s ~ s' => P.HasComputedReplyUrls (TF.Ref s' (AzureadApplicationData s))
 data AzureadServicePrincipalData s = AzureadServicePrincipalData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_azuread_service_principal@ datasource value.
 azureadServicePrincipalData
     :: P.DataSource (AzureadServicePrincipalData s)
 azureadServicePrincipalData =
@@ -496,6 +500,7 @@ data BuiltinRoleDefinitionData s = BuiltinRoleDefinitionData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_builtin_role_definition@ datasource value.
 builtinRoleDefinitionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (BuiltinRoleDefinitionData s)
@@ -546,6 +551,7 @@ data CdnProfileData s = CdnProfileData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_cdn_profile@ datasource value.
 cdnProfileData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -595,6 +601,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (CdnProfileData s)) (TF.Attr s (
 data ClientConfigData s = ClientConfigData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_client_config@ datasource value.
 clientConfigData
     :: P.DataSource (ClientConfigData s)
 clientConfigData =
@@ -638,6 +645,7 @@ data ContainerRegistryData s = ContainerRegistryData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_container_registry@ datasource value.
 containerRegistryData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -705,6 +713,7 @@ data CosmosdbAccountData s = CosmosdbAccountData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_cosmosdb_account@ datasource value.
 cosmosdbAccountData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -799,6 +808,7 @@ data DataLakeStoreData s = DataLakeStoreData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_data_lake_store@ datasource value.
 dataLakeStoreData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -863,6 +873,7 @@ data DnsZoneData s = DnsZoneData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_dns_zone@ datasource value.
 dnsZoneData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DnsZoneData s)
@@ -925,6 +936,7 @@ data EventhubNamespaceData s = EventhubNamespaceData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_eventhub_namespace@ datasource value.
 eventhubNamespaceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -1013,6 +1025,7 @@ data ImageData s = ImageData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_image@ datasource value.
 imageData
     :: TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (ImageData s)
@@ -1095,6 +1108,7 @@ data KeyVaultData s = KeyVaultData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_key_vault@ datasource value.
 keyVaultData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -1165,6 +1179,7 @@ data KeyVaultAccessPolicyData s = KeyVaultAccessPolicyData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_key_vault_access_policy@ datasource value.
 keyVaultAccessPolicyData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (KeyVaultAccessPolicyData s)
@@ -1212,6 +1227,7 @@ data KeyVaultSecretData s = KeyVaultSecretData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_key_vault_secret@ datasource value.
 keyVaultSecretData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @vault_uri@ - 'P.vaultUri'
@@ -1270,6 +1286,7 @@ data KubernetesClusterData s = KubernetesClusterData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_kubernetes_cluster@ datasource value.
 kubernetesClusterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -1352,6 +1369,7 @@ data LogicAppWorkflowData s = LogicAppWorkflowData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_logic_app_workflow@ datasource value.
 logicAppWorkflowData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -1416,6 +1434,7 @@ data ManagedDiskData s = ManagedDiskData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_managed_disk@ datasource value.
 managedDiskData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -1483,6 +1502,7 @@ data NetworkInterfaceData s = NetworkInterfaceData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_network_interface@ datasource value.
 networkInterfaceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -1571,6 +1591,7 @@ data NetworkSecurityGroupData s = NetworkSecurityGroupData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_network_security_group@ datasource value.
 networkSecurityGroupData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -1629,6 +1650,7 @@ data NotificationHubData s = NotificationHubData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_notification_hub@ datasource value.
 notificationHubData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
@@ -1692,6 +1714,7 @@ data NotificationHubNamespaceData s = NotificationHubNamespaceData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_notification_hub_namespace@ datasource value.
 notificationHubNamespaceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -1759,6 +1782,7 @@ data PlatformImageData s = PlatformImageData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_platform_image@ datasource value.
 platformImageData
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @offer@ - 'P.offer'
@@ -1824,6 +1848,7 @@ data PublicIpData s = PublicIpData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_public_ip@ datasource value.
 publicIpData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -1891,6 +1916,7 @@ data PublicIpsData s = PublicIpsData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_public_ips@ datasource value.
 publicIpsData
     :: TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> P.DataSource (PublicIpsData s)
@@ -1953,6 +1979,7 @@ data RecoveryServicesVaultData s = RecoveryServicesVaultData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_recovery_services_vault@ datasource value.
 recoveryServicesVaultData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -2005,6 +2032,7 @@ data ResourceGroupData s = ResourceGroupData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_resource_group@ datasource value.
 resourceGroupData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ResourceGroupData s)
@@ -2049,6 +2077,7 @@ data RoleDefinitionData s = RoleDefinitionData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_role_definition@ datasource value.
 roleDefinitionData
     :: TF.Attr s P.Text -- ^ @role_definition_id@ - 'P.roleDefinitionId'
     -> TF.Attr s P.Text -- ^ @scope@ - 'P.scope'
@@ -2110,6 +2139,7 @@ data RouteTableData s = RouteTableData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_route_table@ datasource value.
 routeTableData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -2168,6 +2198,7 @@ data SchedulerJobCollectionData s = SchedulerJobCollectionData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_scheduler_job_collection@ datasource value.
 schedulerJobCollectionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -2229,6 +2260,7 @@ data SnapshotData s = SnapshotData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_snapshot@ datasource value.
 snapshotData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -2299,6 +2331,7 @@ data StorageAccountData s = StorageAccountData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_storage_account@ datasource value.
 storageAccountData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -2438,6 +2471,7 @@ data StorageAccountSasData s = StorageAccountSasData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_storage_account_sas@ datasource value.
 storageAccountSasData
     :: TF.Attr s P.Text -- ^ @expiry@ - 'P.expiry'
     -> TF.Attr s (PermissionsSetting s) -- ^ @permissions@ - 'P.permissions'
@@ -2541,6 +2575,7 @@ data SubnetData s = SubnetData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_subnet@ datasource value.
 subnetData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -2601,6 +2636,7 @@ instance s ~ s' => P.HasComputedRouteTableId (TF.Ref s' (SubnetData s)) (TF.Attr
 data SubscriptionData s = SubscriptionData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_subscription@ datasource value.
 subscriptionData
     :: P.DataSource (SubscriptionData s)
 subscriptionData =
@@ -2641,6 +2677,7 @@ instance s ~ s' => P.HasComputedSubscriptionId (TF.Ref s' (SubscriptionData s)) 
 data SubscriptionsData s = SubscriptionsData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_subscriptions@ datasource value.
 subscriptionsData
     :: P.DataSource (SubscriptionsData s)
 subscriptionsData =
@@ -2669,6 +2706,7 @@ data TrafficManagerGeographicalLocationData s = TrafficManagerGeographicalLocati
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_traffic_manager_geographical_location@ datasource value.
 trafficManagerGeographicalLocationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (TrafficManagerGeographicalLocationData s)
@@ -2707,6 +2745,7 @@ data VirtualNetworkData s = VirtualNetworkData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_virtual_network@ datasource value.
 virtualNetworkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
@@ -2765,6 +2804,7 @@ data VirtualNetworkGatewayData s = VirtualNetworkGatewayData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @azurerm_virtual_network_gateway@ datasource value.
 virtualNetworkGatewayData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'

@@ -12,14 +12,25 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.AzureRM
-    ( module Terrafomo.AzureRM.DataSource
-    , module Terrafomo.AzureRM.Lens
-    , module Terrafomo.AzureRM.Provider
+    (
+    -- * Provider Datatype
+      module Terrafomo.AzureRM.Provider
+
+    -- * Custom Types
+    , module Terrafomo.AzureRM.Types
+
+    -- * DataSources
+    , module Terrafomo.AzureRM.DataSource
+
+    -- * Resources
     , module Terrafomo.AzureRM.Resource01
     , module Terrafomo.AzureRM.Resource02
+
+    -- * Settings
     , module Terrafomo.AzureRM.Settings
-    , module Terrafomo.AzureRM.Types
-    -- * Provider Aliases
+
+    -- * Overloaded Lenses
+    , module Terrafomo.AzureRM.Lens
     ) where
 
 import Terrafomo.AzureRM.DataSource
