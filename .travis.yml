@@ -1,6 +1,9 @@
 sudo: false
 
-language: generic
+language: nix
+
+git:
+  depth: 1
 
 cache:
   directories:
