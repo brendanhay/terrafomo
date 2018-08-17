@@ -22,244 +22,244 @@ script:
 matrix:
   include:
 # GENERATED
-    - env: PACKAGE=terrafomo GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=terrafomo STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=terrafomo-gen GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=terrafomo-gen STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-alicloud GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-alicloud STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-aws GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-aws STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-azurerm GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-azurerm STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-bitbucket GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-bitbucket STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-builtins GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-builtins STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-centurylinkcloud GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-centurylinkcloud STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-chef GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-chef STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-circonus GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-circonus STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-cloudflare GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-cloudflare STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-cloudstack GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-cloudstack STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-cobbler GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-cobbler STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-consul GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-consul STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-datadog GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-datadog STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-digitalocean GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-digitalocean STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-dnsimple GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-dnsimple STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-dnsmadeeasy GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-dnsmadeeasy STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-docker GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-docker STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-dyn GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-dyn STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-fastly GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-fastly STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-github GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-github STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-gitlab GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-gitlab STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-google GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-google STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-grafana GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-grafana STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-heroku GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-heroku STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-icinga2 GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-icinga2 STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-ignition GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-ignition STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-influxdb GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-influxdb STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-kubernetes GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-kubernetes STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-librato GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-librato STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-logentries GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-logentries STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-logicmonitor GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-logicmonitor STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-mailgun GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-mailgun STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-mysql GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-mysql STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-newrelic GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-newrelic STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-nomad GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-nomad STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-ns1 GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-ns1 STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-oneandone GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-oneandone STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-opc GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-opc STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-openstack GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-openstack STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-opsgenie GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-opsgenie STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-ovh GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-ovh STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-packet GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-packet STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-pagerduty GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-pagerduty STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-postgresql GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-postgresql STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-powerdns GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-powerdns STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-profitbricks GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-profitbricks STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-rabbitmq GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-rabbitmq STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-rancher GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-rancher STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-rundeck GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-rundeck STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-scaleway GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-scaleway STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-softlayer GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-softlayer STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-spotinst GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-spotinst STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-statuscake GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-statuscake STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-triton GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-triton STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-ultradns GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-ultradns STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-vault GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-vault STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-vcloud-director GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-vcloud-director STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: PACKAGE=provider/terrafomo-vsphere GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
-      compiler: ": #stack 8.2.2"
+    - env: PACKAGE=provider/terrafomo-vsphere STACK_YAML=stack-8.4.3.yaml
+      compiler: ": #stack 8.4.3"
       addons: {apt: {packages: [libgmp-dev]}}
 
 # END GENERATED

@@ -14,7 +14,7 @@ entry() {
     local pkg="$2"
 
 cat <<-ENTRY
-    - env: PACKAGE=${pkg} GHCVER=${ver} STACK_YAML=stack-${ver}.yaml
+    - env: PACKAGE=${pkg} STACK_YAML=stack-${ver}.yaml
       compiler: ": #stack ${ver}"
       addons: {apt: {packages: [libgmp-dev]}}
 
@@ -32,7 +32,7 @@ matrix() {
     done
 }
 
-ghc_822=( 8.2.2 )
+ghc_843=( 8.4.3 )
 
 if [ ${#packages[@]} -ne 0 ]; then
     echo "Updating ${config}"
@@ -40,8 +40,8 @@ if [ ${#packages[@]} -ne 0 ]; then
     sed -i -e '/# GENERATED/,/# END GENERATED/d' "${config}"
 
     echo "# GENERATED"            >> "${config}"
-    matrix ghc_822[@] core[@]     >> "${config}"
-    matrix ghc_822[@] packages[@] >> "${config}"
+    matrix ghc_843[@] core[@]     >> "${config}"
+    matrix ghc_843[@] packages[@] >> "${config}"
     echo "# END GENERATED"        >> "${config}"
 fi
 
