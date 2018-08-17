@@ -12,8 +12,9 @@ nix:
   packages: [stdenv, zlib]
 
 extra-deps:
-  - ede-0.2.9
   - amazonka-iam-policy-0.0.4
+  - ede-0.2.9
+  - text-format-0.3.2
 
 packages:
   - terrafomo
