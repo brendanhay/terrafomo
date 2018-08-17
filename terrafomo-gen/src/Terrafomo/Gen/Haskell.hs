@@ -11,8 +11,10 @@ import GHC.Generics (Generic)
 
 import Terrafomo.Gen.JSON ((.=))
 import Terrafomo.Gen.Name
+import Terrafomo.Gen.NS   (NS)
 import Terrafomo.Gen.Type (Type)
 
+import qualified Data.Foldable                    as Fold
 import qualified Data.HashMap.Strict              as HashMap
 import qualified Data.List                        as List
 import qualified Data.Set                         as Set
@@ -21,7 +23,9 @@ import qualified Data.Text.Lazy                   as LText
 import qualified Data.Text.Lazy.Builder           as Build
 import qualified Data.Text.Lazy.Builder.Int       as Build
 import qualified Data.Text.Lazy.Builder.RealFloat as Build
+import qualified Terrafomo.Gen.Graph              as Graph
 import qualified Terrafomo.Gen.JSON               as JSON
+import qualified Terrafomo.Gen.NS                 as NS
 import qualified Terrafomo.Gen.Text               as Text
 import qualified Terrafomo.Gen.Type               as Type
 import qualified Text.Wrap                        as Wrap
@@ -106,16 +110,17 @@ data Schema a = Schema'
 instance JSON.ToJSON a => JSON.ToJSON (Schema a) where
     toJSON x@Schema'{..} =
         JSON.object
-            [ "name"       .= schemaName
-            , "original"   .= schemaOriginal
-            , "key"        .= schemaKey
-            , "type"       .= schemaType
-            , "con"        .= schemaCon
-            , "threaded"   .= schemaThreaded
-            , "arguments"  .= schemaArguments
-            , "attributes" .= schemaAttributes
-            , "parameters" .= schemaParameters x
-            , "conflicts"  .= schemaConflicts  x
+            [ "name"         .= schemaName
+            , "original"     .= schemaOriginal
+            , "key"          .= schemaKey
+            , "type"         .= schemaType
+            , "con"          .= schemaCon
+            , "threaded"     .= schemaThreaded
+            , "dependencies" .= schemaDependencies x
+            , "arguments"    .= schemaArguments
+            , "attributes"   .= schemaAttributes
+            , "parameters"   .= schemaParameters x
+            , "conflicts"    .= schemaConflicts  x
             ]
 
 schemaParameters :: Schema a -> [Field a]
@@ -136,6 +141,24 @@ schemaParameters = sort . filter (go . fieldDefault) . schemaArguments
 
 schemaConflicts :: Schema a -> [Field a]
 schemaConflicts = filter (not . Set.null . fieldConflicts) . schemaArguments
+
+schemaDependencies :: Schema a -> [DataName]
+schemaDependencies x =
+    let go = concatMap (Fold.toList . fieldType)
+     in go (schemaArguments  x)
+     ++ go (schemaAttributes x)
+
+partitionSchemas
+    :: Int
+    -> ProviderName
+    -> String
+    -> (a -> Schema Conflict)
+    -> [a]
+    -> [(NS, [a])]
+partitionSchemas c provider name f =
+    NS.assign provider name
+        . Graph.partition c
+        . Graph.new (schemaName . f) (schemaDependencies . f)
 
 data Field a = Field'
     { fieldName      :: !LabelName

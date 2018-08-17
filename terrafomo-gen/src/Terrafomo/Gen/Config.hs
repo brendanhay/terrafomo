@@ -13,21 +13,21 @@ import qualified Data.Set           as Set
 import qualified Terrafomo.Gen.JSON as JSON
 
 data Config = Config'
-    { configPackage       :: !Text
-    , configPackageYAML   :: !Bool
-    , configProviderName  :: !ProviderName
-    , configPartitionSize :: !Int
-    , configDependencies  :: !(Set Text)
-    , configOverrides     :: !(Map DataName (Map VarName Text))
+    { configPackage      :: !Text
+    , configPackageYAML  :: !Bool
+    , configProviderName :: !ProviderName
+    , configBinCapacity  :: !Int
+    , configDependencies :: !(Set Text)
+    , configOverrides    :: !(Map DataName (Map VarName Text))
     } deriving (Show, Eq)
 
 instance JSON.FromJSON Config where
     parseJSON = JSON.withObject "Config" $ \o -> do
-        configPackage       <- o .:  "package-name"
-        configPackageYAML   <- o .:? "package-yaml"    .!= True
-        configProviderName  <- o .:  "provider-name"
-        configPartitionSize <- o .:? "partition-size"  .!= 100
-        configOverrides     <- o .:? "field-overrides" .!= mempty
+        configPackage      <- o .:  "package-name"
+        configPackageYAML  <- o .:? "package-yaml"    .!= True
+        configProviderName <- o .:  "provider-name"
+        configBinCapacity  <- o .:? "bin-capacity"    .!= 100
+        configOverrides    <- o .:? "field-overrides" .!= mempty
 
         configDependencies  <-
             mappend dependencies

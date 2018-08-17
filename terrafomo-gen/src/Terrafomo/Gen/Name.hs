@@ -1,8 +1,5 @@
 module Terrafomo.Gen.Name where
 
-import Control.Applicative ((<|>))
-
-import Data.Maybe     (fromMaybe)
 import Data.Semigroup (Semigroup ((<>)))
 import Data.Text      (Text)
 

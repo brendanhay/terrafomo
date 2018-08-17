@@ -1,4 +1,4 @@
-module Terrafomo.Gen.Namespace where
+module Terrafomo.Gen.NS where
 
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Semigroup     (Semigroup ((<>)))
@@ -12,7 +12,6 @@ import Text.Printf (printf)
 
 import qualified Data.Aeson.Types as JSON
 import qualified Data.Foldable    as Fold
-import qualified Data.List.Split  as Split
 import qualified Data.Set         as Set
 import qualified Data.Text        as Text
 
@@ -54,25 +53,18 @@ toPath = fromNS '/'
 
 -- Package Namespaces
 
-contents, provider, types, lenses, primitives, settings :: ProviderName -> NS
-contents   p = "Terrafomo" <> NS (pure (fromName p))
-provider   p = contents p  <> "Provider"
-types      p = contents p  <> "Types"
-lenses     p = contents p  <> "Lens"
-primitives p = contents p  <> "Primitives"
-settings   p = contents p  <> "Settings"
+contents, provider, datasources, resources, settings, primitives, types, lenses
+  :: ProviderName -> NS
+contents    p = "Terrafomo" <> NS (pure (fromName p))
+provider    p = contents p  <> "Provider"
+datasources p = contents p  <> "DataSources"
+resources   p = contents p  <> "Resources"
+settings    p = contents p  <> "Settings"
+primitives  p = contents p  <> "Primitives"
+types       p = contents p  <> "Types"
+lenses      p = contents p  <> "Lens"
 
-partition :: Int -> ProviderName -> String -> [b] -> [(NS, [b])]
-partition maxlen p root xs
-    | null   xs           = []
-    | length xs <= maxlen = [single]
-    | otherwise           =
-        zipWith multiple [1..]
-            . filter (not . null)
-                $ Split.chunksOf maxlen xs
+assign :: ProviderName -> String -> [a] -> [(NS, a)]
+assign (contents -> ns) name = zipWith go [1 :: Int ..]
   where
-    single =
-        (contents p <> fromString root, xs)
-
-    multiple (n :: Int) ys =
-        (contents p <> fromString (root ++ printf "%02d" n), ys)
+    go n x = (ns <> fromString (printf "%s%02d" name n), x)
