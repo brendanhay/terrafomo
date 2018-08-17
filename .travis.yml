@@ -5,7 +5,6 @@ language: generic
 cache:
   directories:
     - $HOME/.ghc
-    - $HOME/.cabal
     - $HOME/.stack
 
 before_install:
