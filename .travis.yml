@@ -22,6 +22,14 @@ script:
 matrix:
   include:
 # GENERATED
+    - env: PACKAGE=terrafomo GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
+      compiler: ": #stack 8.2.2"
+      addons: {apt: {packages: [libgmp-dev]}}
+
+    - env: PACKAGE=terrafomo-gen GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
+      compiler: ": #stack 8.2.2"
+      addons: {apt: {packages: [libgmp-dev]}}
+
     - env: PACKAGE=provider/terrafomo-alicloud GHCVER=8.2.2 STACK_YAML=stack-8.2.2.yaml
       compiler: ": #stack 8.2.2"
       addons: {apt: {packages: [libgmp-dev]}}
