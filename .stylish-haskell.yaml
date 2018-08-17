@@ -247,6 +247,7 @@ language_extensions:
   - RankNTypes
   - ScopedTypeVariables
   - StandaloneDeriving
+  - TemplateHaskell
   - TupleSections
   - TypeApplications
   - TypeFamilies
