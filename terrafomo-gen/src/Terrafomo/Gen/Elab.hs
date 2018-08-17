@@ -2,7 +2,6 @@
 
 module Terrafomo.Gen.Elab
     ( run
-    , classes
     ) where
 
 import Control.Applicative        ((<|>))
@@ -93,25 +92,6 @@ run cfg provider =
                    , providerPrimitives   = map fst (Map.elems _primitives)
                    , providerSchema       = schema
                    }
-
-classes :: Provider -> (Set Class, Set Class)
-classes p = (lenses, getters)
-  where
-    lenses  = Set.fromList (map go args)
-    getters = Set.fromList (map go attrs)
-
-    go x =
-        Class' { className   = fieldClass  x
-               , classMethod = fieldMethod x
-               }
-
-    args =  concatMap schemaArguments  schemas
-    attrs = concatMap schemaAttributes schemas
-
-    schemas =
-           map resourceSchema (providerResources   p)
-        ++ map resourceSchema (providerDataSources p)
-        ++ map fromSettings   (providerSchema p : providerSettings p)
 
 elabResource :: Text -> Text -> [Go.Schema] -> Elab Resource
 elabResource provider original schemas =

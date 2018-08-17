@@ -11,7 +11,6 @@ import GHC.Generics (Generic)
 
 import Terrafomo.Gen.JSON ((.=))
 import Terrafomo.Gen.Name
-import Terrafomo.Gen.NS   (NS)
 import Terrafomo.Gen.Type (Type)
 
 import qualified Data.Foldable                    as Fold
@@ -25,7 +24,6 @@ import qualified Data.Text.Lazy.Builder.Int       as Build
 import qualified Data.Text.Lazy.Builder.RealFloat as Build
 import qualified Terrafomo.Gen.Graph              as Graph
 import qualified Terrafomo.Gen.JSON               as JSON
-import qualified Terrafomo.Gen.NS                 as NS
 import qualified Terrafomo.Gen.Text               as Text
 import qualified Terrafomo.Gen.Type               as Type
 import qualified Text.Wrap                        as Wrap
@@ -144,21 +142,9 @@ schemaConflicts = filter (not . Set.null . fieldConflicts) . schemaArguments
 
 schemaDependencies :: Schema a -> [DataName]
 schemaDependencies x =
-    let go = concatMap (Fold.toList . fieldType)
-     in go (schemaArguments  x)
-     ++ go (schemaAttributes x)
-
-partitionSchemas
-    :: Int
-    -> ProviderName
-    -> String
-    -> (a -> Schema Conflict)
-    -> [a]
-    -> [(NS, [a])]
-partitionSchemas c provider name f =
-    NS.assign provider name
-        . Graph.partition c
-        . Graph.new (schemaName . f) (schemaDependencies . f)
+        let go = concatMap (Fold.toList . fieldType)
+         in go (schemaArguments  x)
+         ++ go (schemaAttributes x)
 
 data Field a = Field'
     { fieldName      :: !LabelName
@@ -279,8 +265,9 @@ instance JSON.ToJSON Default where
         build = LText.toStrict . Build.toLazyText
 
 data Class = Class'
-    { className   :: !DataName
-    , classMethod :: !VarName
+    { className     :: !DataName
+    , classMethod   :: !VarName
+    , classComputed :: !Bool
     } deriving (Show, Eq, Ord, Generic)
 
 instance JSON.ToJSON Class where

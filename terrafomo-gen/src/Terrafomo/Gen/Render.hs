@@ -28,7 +28,7 @@ data Templates a = Templates
     , resourceTemplate :: !a -- ^ DataSource/Resource types
     , settingsTemplate :: !a -- ^ Settings types
     , typesTemplate    :: !a -- ^ Skeleton src/*/Types.hs
-    , lensTemplate     :: !a -- ^ Overloaded lens classes
+    , lensesTemplate   :: !a -- ^ Overloaded lens classes
 --    , primitivesTemplate :: !a
     } deriving (Show, Functor, Foldable, Traversable)
 
@@ -123,23 +123,20 @@ resources
     :: Templates EDE.Template
     -> ProviderName
     -> Text
-    -> (Set Class, Set Class)
     -> NS
     -> [Resource]
     -> Either String LText.Text
-resources tmpls p typ (args, attrs) ns xs =
+resources tmpls p typ ns xs =
     render (resourceTemplate tmpls)
-        [ "namespace"        .= ns
-        , "provider"         .= p
-        , "type"             .= typ
-        , "resources"        .= xs
-        , "argumentClasses"  .= args
-        , "attributeClasses" .= attrs
-        , "unqualified"      .=
+        [ "namespace"   .= ns
+        , "provider"    .= p
+        , "type"        .= typ
+        , "resources"   .= xs
+        , "unqualified" .=
             (Set.fromList
                 [ NS.settings p
                 ])
-        , "qualified"        .=
+        , "qualified"   .=
             (Set.fromList
                 [ NS.lenses     p
 --                , NS.primitives p
@@ -166,6 +163,18 @@ settings tmpls p ns xs =
                 ] <> NS.prelude)
         ]
 
+lenses
+    :: Templates EDE.Template
+    -> NS
+    -> (Set Class, Set Class)
+    -> Either String LText.Text
+lenses tmpls ns (args, attrs) =
+    render (lensesTemplate tmpls)
+        [ "namespace"  .= ns
+        , "arguments"  .= args
+        , "attributes" .= attrs
+        ]
+
 types
     :: Templates EDE.Template
     -> ProviderName
@@ -175,19 +184,6 @@ types tmpls p =
      in second (ns,) $ render (typesTemplate tmpls)
         [ "namespace"   .= ns
         , "unqualified" .= [NS.lenses p]
-        ]
-
-lenses
-    :: Templates EDE.Template
-    -> ProviderName
-    -> (Set Class, Set Class)
-    -> Either String (NS, LText.Text)
-lenses tmpls p (args, attrs) =
-    let ns = NS.lenses p
-     in second (ns,) $ render (lensTemplate tmpls)
-        [ "namespace"        .= ns
-        , "argumentClasses"  .= args
-        , "attributeClasses" .= attrs
         ]
 
 render :: EDE.Template -> [JSON.Pair] -> Either String LText.Text

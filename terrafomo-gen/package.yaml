@@ -36,7 +36,6 @@ executables:
       - mtl
       - optparse-applicative
       - pretty-show
-      - split
       - text
       - unordered-containers
       - word-wrap

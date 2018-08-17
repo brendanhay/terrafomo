@@ -53,8 +53,14 @@ toPath = fromNS '/'
 
 -- Package Namespaces
 
-contents, provider, datasources, resources, settings, primitives, types, lenses
-  :: ProviderName -> NS
+contents
+  , provider
+  , datasources
+  , resources
+  , settings
+  , primitives
+  , types
+  , lenses :: ProviderName -> NS
 contents    p = "Terrafomo" <> NS (pure (fromName p))
 provider    p = contents p  <> "Provider"
 datasources p = contents p  <> "DataSources"

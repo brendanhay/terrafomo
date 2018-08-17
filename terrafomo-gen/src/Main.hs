@@ -14,8 +14,8 @@ import System.FilePath ((<.>), (</>))
 
 import Terrafomo.Gen.Config
 import Terrafomo.Gen.Haskell
-import Terrafomo.Gen.Namespace (NS)
-import Terrafomo.Gen.Render    (Templates (Templates))
+import Terrafomo.Gen.NS      (NS)
+import Terrafomo.Gen.Render  (Templates (Templates))
 
 import qualified Control.Error           as Error
 import qualified Data.ByteString         as BS
@@ -30,9 +30,11 @@ import qualified System.FilePath         as Path
 import qualified System.IO               as IO
 import qualified Terrafomo.Gen.Elab      as Elab
 import qualified Terrafomo.Gen.JSON      as JSON
-import qualified Terrafomo.Gen.Namespace as NS
+import qualified Terrafomo.Gen.NS        as NS
+import qualified Terrafomo.Gen.Partition as Partition
 import qualified Terrafomo.Gen.Render    as Render
 import qualified Text.EDE                as EDE
+
 
 -- Options Parsing
 
@@ -94,16 +96,17 @@ main = do
             traverse (parseEDE . Path.combine (templateDir opts)) $
                 Templates
                     { packageTemplate    = "package.ede"
+                    , preludeTemplate    = "prelude.ede"
                     , providerTemplate   = "provider.ede"
-                    , resourceTemplate   = "resource.ede"
                     , contentsTemplate   = "contents.ede"
-                    , typesTemplate      = "types.ede"
-                    , lensTemplate       = "lens.ede"
---                    , primitivesTemplate = "primitives.ede"
+                    , resourceTemplate   = "resource.ede"
                     , settingsTemplate   = "settings.ede"
+                    , typesTemplate      = "types.ede"
+                    , lensesTemplate     = "lenses.ede"
+--                    , primitivesTemplate = "primitives.ede"
                     }
 
-        config@Config'{configPackageYAML, configPartitionSize} <-
+        config@Config'{configPackageYAML, configBinCapacity} <-
             parseYAML "Config" (configYAML opts)
 
         provider@Provider'{providerName, providerOriginal} <-
@@ -114,39 +117,28 @@ main = do
             genDir      = providerDir </> "gen"
             srcDir      = providerDir </> "src"
 
-        let irFile      = irDir opts  </> Text.unpack providerOriginal <.> "json"
+            irFile      = irDir opts  </> Text.unpack providerOriginal <.> "json"
             packageFile = providerDir </> "package" <.> "yaml"
             typesFile   = srcDir      </> NS.toPath (NS.types providerName) <.> "hs"
 
-            classes     =
-                Elab.classes provider
-
-            -- primitives  =
-            --     [ ( NS.primitives providerName
-            --       , providerPrimitives provider
-            --       )
-            --     ]
-
-            settings    =
-                [ ( NS.settings providerName
-                  , providerSettings provider
-                  )
-                ]
+            lenses      =
+                Partition.lenses provider
 
             resources   =
-                NS.partition configPartitionSize providerName "Resource"
-                    (providerResources provider)
+                Partition.schemas configBinCapacity providerName "Resource"
+                    resourceSchema (providerResources provider)
 
             datasources =
-                NS.partition configPartitionSize providerName "DataSource"
-                    (providerDataSources provider)
+                Partition.schemas configBinCapacity providerName "DataSource"
+                    resourceSchema (providerDataSources provider)
 
-            namespaces  =
-                map fst settings -- ++ map fst primitives
+            settings    =
+                Partition.schemas configBinCapacity providerName "Settings"
+                    fromSettings (providerSettings provider)
 
-            render typ ns xs =
-                (Render.resources templates providerName
-                    classes namespaces ns typ xs)
+            renderContents name ns namespaces =
+                hoistEither (Render.contents templates name ns namespaces)
+                    >>= writeNS genDir . (ns,)
 
         createDirectory (irDir opts)
         createDirectory providerDir
@@ -154,42 +146,57 @@ main = do
         echo "IR" irFile
         scriptIO (JSON.encodeFile irFile provider)
 
-        hoistEither (Render.lenses templates providerName classes)
-            >>= writeNS genDir
-
         -- Fold.for_ primitives $ \(ns, xs) ->
         --     hoistEither (Render.primitives templates providerName ns xs)
         --         >>= writeNS genDir . (ns,)
+
+        hoistEither (Render.provider templates provider)
+            >>= writeNS genDir
+
+        Fold.for_ resources $ \(ns, xs) ->
+            hoistEither (Render.resources templates providerName "Resource" ns xs)
+                >>= writeNS genDir . (ns,)
+
+        renderContents "Resources"
+            (NS.resources providerName)
+            (map fst resources)
+
+        Fold.for_ datasources $ \(ns, xs) ->
+            hoistEither (Render.resources templates providerName "DataSource" ns xs)
+                >>= writeNS genDir . (ns,)
+
+        renderContents "DataSources"
+            (NS.datasources providerName)
+            (map fst datasources)
 
         Fold.for_ settings $ \(ns, xs) ->
             hoistEither (Render.settings templates providerName ns xs)
                 >>= writeNS genDir . (ns,)
 
-        Fold.for_ resources $ \(ns, xs) ->
-            hoistEither (render "Resource" ns xs)
+        renderContents "Settings"
+            (NS.settings providerName)
+            (map fst settings)
+
+        Fold.for_ lenses $ \(ns, xs) ->
+            hoistEither (Render.lenses templates ns xs)
                 >>= writeNS genDir . (ns,)
 
-        Fold.for_ datasources $ \(ns, xs) ->
-            hoistEither (render "DataSource" ns xs)
-                >>= writeNS genDir . (ns,)
-
-        hoistEither (Render.provider templates provider namespaces)
-            >>= writeNS genDir
-
-        when configPackageYAML $
-            hoistEither (Render.package templates provider)
-                >>= scriptIO . LText.writeFile packageFile
-
-        hoistEither (Render.contents templates providerName
-           (map fst resources)
-           (map fst datasources))
-               >>= writeNS genDir
+        renderContents "Lenses"
+            (NS.lenses providerName)
+            (map fst lenses)
 
         typesExists <- scriptIO (Dir.doesFileExist typesFile)
         echo "Types" (typesFile ++ " == " ++ show typesExists)
         unless typesExists $
             hoistEither (Render.types templates providerName)
                 >>= writeNS srcDir
+
+        hoistEither (Render.prelude templates providerName)
+            >>= writeNS genDir
+
+        when configPackageYAML $
+            hoistEither (Render.package templates provider)
+                >>= scriptIO . LText.writeFile packageFile
 
         echo "Program" "Done."
 
