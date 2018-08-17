@@ -7,23 +7,25 @@
 --
 module {{ namespace }}
     (
-    -- * Overloaded Fields
+{% if !(arguments | empty) %}
     -- ** Arguments
-  {% for class in argumentClasses %}
+  {% for class in arguments %}
     {% if class.first %}  {% else %}, {% endif %}{{ class.value.name }} (..)
   {% endfor %}
-
-    -- ** Computed Attributes
-  {% for class in attributeClasses %}
-    , {{ class.value.name }} (..)
+{% elif !(attributes | empty) %}
+    -- ** Attributes
+  {% for class in attributes %}
+    {% if class.first %}  {% else %}, {% endif %}{{ class.value.name }} (..)
   {% endfor %}
+{% endif %}
     ) where
-
+{% for class in arguments %}
+  {% if class.first %}
 import GHC.Base ((.))
 
 import qualified Lens.Micro as P
 import qualified Terrafomo.Schema as TF
-{% for class in argumentClasses %}
+  {% endif %}
 
 class {{ class.value.name }} a b | a -> b where
     {{ class.value.method }} :: P.Lens' a b
@@ -31,7 +33,7 @@ class {{ class.value.name }} a b | a -> b where
 instance {{ class.value.name }} a b => {{ class.value.name }} (TF.Schema l p a) b where
     {{ class.value.method }} = TF.configuration . {{ class.value.method }}
 {% endfor %}
-{% for class in attributeClasses %}
+{% for class in attributes %}
 
 class {{ class.value.name }} a b | a -> b where
     {{ class.value.method }} :: a -> b
