@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+config=".travis.yml"
+
+cores=( terrafomo terrafomo-gen )
+packages=( $(${dir}/list-packages) )
+
+entry() {
+    local ver="$1"
+    local pkg="$2"
+
+cat <<-ENTRY
+    - env: PACKAGE=${pkg} GHCVER=${ver} STACK_YAML=stack-${ver}.yaml
+      compiler: ": #stack ${ver}"
+      addons: {apt: {packages: [libgmp-dev]}}
+
+ENTRY
+}
+
+matrix() {
+    declare -a versions=("${!1}")
+    declare -a selected=("${!2}")
+
+    for lib in ${selected[@]}; do
+        for ver in ${versions[@]}; do
+            entry $ver $lib
+        done
+    done
+}
+
+ghc_822=( 8.2.2 )
+
+if [ ${#packages[@]} -ne 0 ]; then
+    echo "Updating ${config}"
+
+    sed -i -e '/# GENERATED/,/# END GENERATED/d' "${config}"
+
+    echo "# GENERATED"            >> "${config}"
+    matrix ghc_822[@] packages[@] >> "${config}"
+    echo "# END GENERATED"        >> "${config}"
+fi
+
+echo "Done."
