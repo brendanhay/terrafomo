@@ -106,12 +106,17 @@ main = do
 --                    , primitivesTemplate = "primitives.ede"
                     }
 
-        config@Config'{configPackageYAML, configBinCapacity} <-
-            parseYAML "Config" (configYAML opts)
+        config@Config'
+            { configPackageYAML
+            , configTypesBinCapacity
+            , configLensesBinCapacity
+            } <- parseYAML "Config" (configYAML opts)
 
-        provider@Provider'{providerName, providerOriginal} <-
-            parseJSON "Provider" (providerJSON opts)
-                >>= hoistEither . Elab.run config
+        provider@Provider'
+            { providerName
+            , providerOriginal
+            } <- parseJSON "Provider" (providerJSON opts)
+                     >>= hoistEither . Elab.run config
 
         let providerDir = "provider"  </> Text.unpack (providerPackage provider)
             genDir      = providerDir </> "gen"
@@ -122,18 +127,18 @@ main = do
             typesFile   = srcDir      </> NS.toPath (NS.types providerName) <.> "hs"
 
             lenses      =
-                Partition.lenses provider
+                Partition.lenses configLensesBinCapacity provider
 
             resources   =
-                Partition.schemas configBinCapacity providerName "Resource"
+                Partition.schemas configTypesBinCapacity providerName "Resource"
                     resourceSchema (providerResources provider)
 
             datasources =
-                Partition.schemas configBinCapacity providerName "DataSource"
+                Partition.schemas configTypesBinCapacity providerName "DataSource"
                     resourceSchema (providerDataSources provider)
 
             settings    =
-                Partition.schemas configBinCapacity providerName "Settings"
+                Partition.schemas configTypesBinCapacity providerName "Settings"
                     fromSettings (providerSettings provider)
 
             renderContents name ns namespaces =

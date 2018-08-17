@@ -1,6 +1,8 @@
 package-name: terrafomo-aws
 provider-name: AWS
 
+bin-capacity: 60
+
 extra-deps:
   - amazonka-core
   - formatting

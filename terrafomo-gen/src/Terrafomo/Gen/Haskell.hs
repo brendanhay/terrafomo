@@ -22,7 +22,6 @@ import qualified Data.Text.Lazy                   as LText
 import qualified Data.Text.Lazy.Builder           as Build
 import qualified Data.Text.Lazy.Builder.Int       as Build
 import qualified Data.Text.Lazy.Builder.RealFloat as Build
-import qualified Terrafomo.Gen.Graph              as Graph
 import qualified Terrafomo.Gen.JSON               as JSON
 import qualified Terrafomo.Gen.Text               as Text
 import qualified Terrafomo.Gen.Type               as Type
