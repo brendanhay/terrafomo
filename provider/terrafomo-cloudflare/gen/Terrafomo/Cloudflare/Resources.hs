@@ -1,17 +1,17 @@
 -- This module is auto-generated.
 
 -- |
--- Module      : Terrafomo.Cloudflare.Settings
+-- Module      : Terrafomo.Cloudflare.Resources
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Cloudflare.Settings
+module Terrafomo.Cloudflare.Resources
     (
-    -- * Settings
-      module Terrafomo.Cloudflare.Settings01
+    -- * Resources
+      module Terrafomo.Cloudflare.Resource01
     ) where
 
-import Terrafomo.Cloudflare.Settings01
+import Terrafomo.Cloudflare.Resource01

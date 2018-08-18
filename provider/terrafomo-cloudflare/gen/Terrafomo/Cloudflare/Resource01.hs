@@ -8,26 +8,26 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Cloudflare.Resource
+-- Module      : Terrafomo.Cloudflare.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Cloudflare.Resource
+module Terrafomo.Cloudflare.Resource01
     (
-    -- ** cloudflare_load_balancer
-      LoadBalancerResource (..)
-    , loadBalancerResource
-
     -- ** cloudflare_load_balancer_monitor
-    , LoadBalancerMonitorResource (..)
+      LoadBalancerMonitorResource (..)
     , loadBalancerMonitorResource
 
     -- ** cloudflare_load_balancer_pool
     , LoadBalancerPoolResource (..)
     , loadBalancerPoolResource
+
+    -- ** cloudflare_load_balancer
+    , LoadBalancerResource (..)
+    , loadBalancerResource
 
     -- ** cloudflare_page_rule
     , PageRuleResource (..)
@@ -74,160 +74,6 @@ import qualified Terrafomo.HCL                 as TF
 import qualified Terrafomo.Name                as TF
 import qualified Terrafomo.Schema              as TF
 import qualified Terrafomo.Validator           as TF
-
--- | @cloudflare_load_balancer@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/cloudflare/r/load_balancer.html terraform documentation>
--- for more information.
-data LoadBalancerResource s = LoadBalancerResource'
-    { _defaultPoolIds :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
-    -- ^ @default_pool_ids@ - (Required)
-    --
-    , _description    :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
-    --
-    , _fallbackPoolId :: TF.Attr s P.Text
-    -- ^ @fallback_pool_id@ - (Required)
-    --
-    , _name           :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _popPools       :: TF.Attr s [TF.Attr s (PopPoolsSetting s)]
-    -- ^ @pop_pools@ - (Optional)
-    --
-    , _proxied        :: TF.Attr s P.Bool
-    -- ^ @proxied@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'ttl'
-    , _regionPools    :: TF.Attr s [TF.Attr s (RegionPoolsSetting s)]
-    -- ^ @region_pools@ - (Optional)
-    --
-    , _ttl            :: TF.Attr s P.Int
-    -- ^ @ttl@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'proxied'
-    , _zone           :: TF.Attr s P.Text
-    -- ^ @zone@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @cloudflare_load_balancer@ resource value.
-loadBalancerResource
-    :: TF.Attr s P.Text -- ^ @fallback_pool_id@ ('P._fallbackPoolId', 'P.fallbackPoolId')
-    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @default_pool_ids@ ('P._defaultPoolIds', 'P.defaultPoolIds')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
-    -> P.Resource (LoadBalancerResource s)
-loadBalancerResource _fallbackPoolId _defaultPoolIds _name _zone =
-    TF.unsafeResource "cloudflare_load_balancer" TF.validator $
-        LoadBalancerResource'
-            { _defaultPoolIds = _defaultPoolIds
-            , _description = TF.Nil
-            , _fallbackPoolId = _fallbackPoolId
-            , _name = _name
-            , _popPools = TF.Nil
-            , _proxied = TF.value P.False
-            , _regionPools = TF.Nil
-            , _ttl = TF.Nil
-            , _zone = _zone
-            }
-
-instance TF.IsObject (LoadBalancerResource s) where
-    toObject LoadBalancerResource'{..} = P.catMaybes
-        [ TF.assign "default_pool_ids" <$> TF.attribute _defaultPoolIds
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "fallback_pool_id" <$> TF.attribute _fallbackPoolId
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "pop_pools" <$> TF.attribute _popPools
-        , TF.assign "proxied" <$> TF.attribute _proxied
-        , TF.assign "region_pools" <$> TF.attribute _regionPools
-        , TF.assign "ttl" <$> TF.attribute _ttl
-        , TF.assign "zone" <$> TF.attribute _zone
-        ]
-
-instance TF.IsValid (LoadBalancerResource s) where
-    validator = TF.fieldsValidator (\LoadBalancerResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_proxied P.== TF.value P.False)
-              then P.Nothing
-              else P.Just ("_proxied",
-                            [ "_ttl"
-                            ])
-        , if (_ttl P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_ttl",
-                            [ "_proxied"
-                            ])
-        ])
-
-instance P.HasDefaultPoolIds (LoadBalancerResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
-    defaultPoolIds =
-        P.lens (_defaultPoolIds :: LoadBalancerResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
-               (\s a -> s { _defaultPoolIds = a } :: LoadBalancerResource s)
-
-instance P.HasDescription (LoadBalancerResource s) (TF.Attr s P.Text) where
-    description =
-        P.lens (_description :: LoadBalancerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: LoadBalancerResource s)
-
-instance P.HasFallbackPoolId (LoadBalancerResource s) (TF.Attr s P.Text) where
-    fallbackPoolId =
-        P.lens (_fallbackPoolId :: LoadBalancerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _fallbackPoolId = a } :: LoadBalancerResource s)
-
-instance P.HasName (LoadBalancerResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: LoadBalancerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: LoadBalancerResource s)
-
-instance P.HasPopPools (LoadBalancerResource s) (TF.Attr s [TF.Attr s (PopPoolsSetting s)]) where
-    popPools =
-        P.lens (_popPools :: LoadBalancerResource s -> TF.Attr s [TF.Attr s (PopPoolsSetting s)])
-               (\s a -> s { _popPools = a } :: LoadBalancerResource s)
-
-instance P.HasProxied (LoadBalancerResource s) (TF.Attr s P.Bool) where
-    proxied =
-        P.lens (_proxied :: LoadBalancerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _proxied = a } :: LoadBalancerResource s)
-
-instance P.HasRegionPools (LoadBalancerResource s) (TF.Attr s [TF.Attr s (RegionPoolsSetting s)]) where
-    regionPools =
-        P.lens (_regionPools :: LoadBalancerResource s -> TF.Attr s [TF.Attr s (RegionPoolsSetting s)])
-               (\s a -> s { _regionPools = a } :: LoadBalancerResource s)
-
-instance P.HasTtl (LoadBalancerResource s) (TF.Attr s P.Int) where
-    ttl =
-        P.lens (_ttl :: LoadBalancerResource s -> TF.Attr s P.Int)
-               (\s a -> s { _ttl = a } :: LoadBalancerResource s)
-
-instance P.HasZone (LoadBalancerResource s) (TF.Attr s P.Text) where
-    zone =
-        P.lens (_zone :: LoadBalancerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _zone = a } :: LoadBalancerResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedCreatedOn (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedCreatedOn x = TF.compute (TF.refKey x) "created_on"
-
-instance s ~ s' => P.HasComputedModifiedOn (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedModifiedOn x = TF.compute (TF.refKey x) "modified_on"
-
-instance s ~ s' => P.HasComputedPopPools (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s [TF.Attr s (PopPoolsSetting s)]) where
-    computedPopPools x = TF.compute (TF.refKey x) "pop_pools"
-
-instance s ~ s' => P.HasComputedRegionPools (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s [TF.Attr s (RegionPoolsSetting s)]) where
-    computedRegionPools x = TF.compute (TF.refKey x) "region_pools"
-
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Int) where
-    computedTtl x = TF.compute (TF.refKey x) "ttl"
-
-instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedZoneId x = TF.compute (TF.refKey x) "zone_id"
 
 -- | @cloudflare_load_balancer_monitor@ Resource.
 --
@@ -477,6 +323,160 @@ instance s ~ s' => P.HasComputedCreatedOn (TF.Ref s' (LoadBalancerPoolResource s
 
 instance s ~ s' => P.HasComputedModifiedOn (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
     computedModifiedOn x = TF.compute (TF.refKey x) "modified_on"
+
+-- | @cloudflare_load_balancer@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/cloudflare/r/load_balancer.html terraform documentation>
+-- for more information.
+data LoadBalancerResource s = LoadBalancerResource'
+    { _defaultPoolIds :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    -- ^ @default_pool_ids@ - (Required)
+    --
+    , _description    :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _fallbackPoolId :: TF.Attr s P.Text
+    -- ^ @fallback_pool_id@ - (Required)
+    --
+    , _name           :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _popPools       :: TF.Attr s [TF.Attr s (PopPoolsSetting s)]
+    -- ^ @pop_pools@ - (Optional)
+    --
+    , _proxied        :: TF.Attr s P.Bool
+    -- ^ @proxied@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'ttl'
+    , _regionPools    :: TF.Attr s [TF.Attr s (RegionPoolsSetting s)]
+    -- ^ @region_pools@ - (Optional)
+    --
+    , _ttl            :: TF.Attr s P.Int
+    -- ^ @ttl@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'proxied'
+    , _zone           :: TF.Attr s P.Text
+    -- ^ @zone@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @cloudflare_load_balancer@ resource value.
+loadBalancerResource
+    :: TF.Attr s P.Text -- ^ @fallback_pool_id@ ('P._fallbackPoolId', 'P.fallbackPoolId')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @default_pool_ids@ ('P._defaultPoolIds', 'P.defaultPoolIds')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
+    -> P.Resource (LoadBalancerResource s)
+loadBalancerResource _fallbackPoolId _defaultPoolIds _name _zone =
+    TF.unsafeResource "cloudflare_load_balancer" TF.validator $
+        LoadBalancerResource'
+            { _defaultPoolIds = _defaultPoolIds
+            , _description = TF.Nil
+            , _fallbackPoolId = _fallbackPoolId
+            , _name = _name
+            , _popPools = TF.Nil
+            , _proxied = TF.value P.False
+            , _regionPools = TF.Nil
+            , _ttl = TF.Nil
+            , _zone = _zone
+            }
+
+instance TF.IsObject (LoadBalancerResource s) where
+    toObject LoadBalancerResource'{..} = P.catMaybes
+        [ TF.assign "default_pool_ids" <$> TF.attribute _defaultPoolIds
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "fallback_pool_id" <$> TF.attribute _fallbackPoolId
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "pop_pools" <$> TF.attribute _popPools
+        , TF.assign "proxied" <$> TF.attribute _proxied
+        , TF.assign "region_pools" <$> TF.attribute _regionPools
+        , TF.assign "ttl" <$> TF.attribute _ttl
+        , TF.assign "zone" <$> TF.attribute _zone
+        ]
+
+instance TF.IsValid (LoadBalancerResource s) where
+    validator = TF.fieldsValidator (\LoadBalancerResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_proxied P.== TF.value P.False)
+              then P.Nothing
+              else P.Just ("_proxied",
+                            [ "_ttl"
+                            ])
+        , if (_ttl P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_ttl",
+                            [ "_proxied"
+                            ])
+        ])
+
+instance P.HasDefaultPoolIds (LoadBalancerResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
+    defaultPoolIds =
+        P.lens (_defaultPoolIds :: LoadBalancerResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
+               (\s a -> s { _defaultPoolIds = a } :: LoadBalancerResource s)
+
+instance P.HasDescription (LoadBalancerResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: LoadBalancerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: LoadBalancerResource s)
+
+instance P.HasFallbackPoolId (LoadBalancerResource s) (TF.Attr s P.Text) where
+    fallbackPoolId =
+        P.lens (_fallbackPoolId :: LoadBalancerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _fallbackPoolId = a } :: LoadBalancerResource s)
+
+instance P.HasName (LoadBalancerResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LoadBalancerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LoadBalancerResource s)
+
+instance P.HasPopPools (LoadBalancerResource s) (TF.Attr s [TF.Attr s (PopPoolsSetting s)]) where
+    popPools =
+        P.lens (_popPools :: LoadBalancerResource s -> TF.Attr s [TF.Attr s (PopPoolsSetting s)])
+               (\s a -> s { _popPools = a } :: LoadBalancerResource s)
+
+instance P.HasProxied (LoadBalancerResource s) (TF.Attr s P.Bool) where
+    proxied =
+        P.lens (_proxied :: LoadBalancerResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _proxied = a } :: LoadBalancerResource s)
+
+instance P.HasRegionPools (LoadBalancerResource s) (TF.Attr s [TF.Attr s (RegionPoolsSetting s)]) where
+    regionPools =
+        P.lens (_regionPools :: LoadBalancerResource s -> TF.Attr s [TF.Attr s (RegionPoolsSetting s)])
+               (\s a -> s { _regionPools = a } :: LoadBalancerResource s)
+
+instance P.HasTtl (LoadBalancerResource s) (TF.Attr s P.Int) where
+    ttl =
+        P.lens (_ttl :: LoadBalancerResource s -> TF.Attr s P.Int)
+               (\s a -> s { _ttl = a } :: LoadBalancerResource s)
+
+instance P.HasZone (LoadBalancerResource s) (TF.Attr s P.Text) where
+    zone =
+        P.lens (_zone :: LoadBalancerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: LoadBalancerResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedCreatedOn (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
+    computedCreatedOn x = TF.compute (TF.refKey x) "created_on"
+
+instance s ~ s' => P.HasComputedModifiedOn (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
+    computedModifiedOn x = TF.compute (TF.refKey x) "modified_on"
+
+instance s ~ s' => P.HasComputedPopPools (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s [TF.Attr s (PopPoolsSetting s)]) where
+    computedPopPools x = TF.compute (TF.refKey x) "pop_pools"
+
+instance s ~ s' => P.HasComputedRegionPools (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s [TF.Attr s (RegionPoolsSetting s)]) where
+    computedRegionPools x = TF.compute (TF.refKey x) "region_pools"
+
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Int) where
+    computedTtl x = TF.compute (TF.refKey x) "ttl"
+
+instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
+    computedZoneId x = TF.compute (TF.refKey x) "zone_id"
 
 -- | @cloudflare_page_rule@ Resource.
 --

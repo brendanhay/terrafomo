@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Cloudflare
+    - Terrafomo.Cloudflare.DataSources
+    - Terrafomo.Cloudflare.Lens
+    - Terrafomo.Cloudflare.Provider
+    - Terrafomo.Cloudflare.Resources
+    - Terrafomo.Cloudflare.Settings
+    - Terrafomo.Cloudflare.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

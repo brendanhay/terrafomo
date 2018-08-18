@@ -13,17 +13,17 @@
 --
 module Terrafomo.Cloudflare
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Cloudflare.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Cloudflare.Types
 
-    -- * DataSources
-    , module Terrafomo.Cloudflare.DataSource
-
     -- * Resources
-    , module Terrafomo.Cloudflare.Resource
+    , module Terrafomo.Cloudflare.Resources
+
+    -- * DataSources
+    , module Terrafomo.Cloudflare.DataSources
 
     -- * Settings
     , module Terrafomo.Cloudflare.Settings
@@ -32,9 +32,9 @@ module Terrafomo.Cloudflare
     , module Terrafomo.Cloudflare.Lens
     ) where
 
-import Terrafomo.Cloudflare.DataSource
+import Terrafomo.Cloudflare.DataSources
 import Terrafomo.Cloudflare.Lens
 import Terrafomo.Cloudflare.Provider
-import Terrafomo.Cloudflare.Resource
+import Terrafomo.Cloudflare.Resources
 import Terrafomo.Cloudflare.Settings
 import Terrafomo.Cloudflare.Types
