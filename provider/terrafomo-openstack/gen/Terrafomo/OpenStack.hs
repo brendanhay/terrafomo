@@ -13,17 +13,17 @@
 --
 module Terrafomo.OpenStack
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.OpenStack.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.OpenStack.Types
 
-    -- * DataSources
-    , module Terrafomo.OpenStack.DataSource
-
     -- * Resources
-    , module Terrafomo.OpenStack.Resource
+    , module Terrafomo.OpenStack.Resources
+
+    -- * DataSources
+    , module Terrafomo.OpenStack.DataSources
 
     -- * Settings
     , module Terrafomo.OpenStack.Settings
@@ -32,9 +32,9 @@ module Terrafomo.OpenStack
     , module Terrafomo.OpenStack.Lens
     ) where
 
-import Terrafomo.OpenStack.DataSource
+import Terrafomo.OpenStack.DataSources
 import Terrafomo.OpenStack.Lens
 import Terrafomo.OpenStack.Provider
-import Terrafomo.OpenStack.Resource
+import Terrafomo.OpenStack.Resources
 import Terrafomo.OpenStack.Settings
 import Terrafomo.OpenStack.Types

@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.OpenStack.DataSource
+-- Module      : Terrafomo.OpenStack.DataSource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.OpenStack.DataSource
+module Terrafomo.OpenStack.DataSource01
     (
     -- ** openstack_compute_flavor_v2
       ComputeFlavorV2Data (..)
