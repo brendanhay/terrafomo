@@ -129,6 +129,7 @@
                     "original": "usage_with_grant"
                 }
             ],
+            "dependencies": [],
             "key": "postgresql_schema.policy",
             "name": "PolicySetting",
             "threaded": true,
@@ -445,6 +446,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/postgresql/r/database.html",
+            "dependencies": [],
             "key": "postgresql_database",
             "name": "DatabaseResource",
             "threaded": true,
@@ -689,6 +691,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/postgresql/r/extension.html",
+            "dependencies": [],
             "key": "postgresql_extension",
             "name": "ExtensionResource",
             "threaded": true,
@@ -1050,6 +1053,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/postgresql/r/role.html",
+            "dependencies": [],
             "key": "postgresql_role",
             "name": "RoleResource",
             "threaded": true,
@@ -1198,6 +1202,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/postgresql/r/schema.html",
+            "dependencies": [
+                "PolicySetting",
+                "PolicySetting"
+            ],
             "key": "postgresql_schema",
             "name": "SchemaResource",
             "threaded": true,
@@ -1465,6 +1473,7 @@
                 "original": "username"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
