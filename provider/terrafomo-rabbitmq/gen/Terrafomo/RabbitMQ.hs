@@ -13,16 +13,17 @@
 --
 module Terrafomo.RabbitMQ
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.RabbitMQ.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.RabbitMQ.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.RabbitMQ.Resource
+    , module Terrafomo.RabbitMQ.Resources
+
+    -- * DataSources
+    , module Terrafomo.RabbitMQ.DataSources
 
     -- * Settings
     , module Terrafomo.RabbitMQ.Settings
@@ -31,8 +32,9 @@ module Terrafomo.RabbitMQ
     , module Terrafomo.RabbitMQ.Lens
     ) where
 
+import Terrafomo.RabbitMQ.DataSources
 import Terrafomo.RabbitMQ.Lens
 import Terrafomo.RabbitMQ.Provider
-import Terrafomo.RabbitMQ.Resource
+import Terrafomo.RabbitMQ.Resources
 import Terrafomo.RabbitMQ.Settings
 import Terrafomo.RabbitMQ.Types

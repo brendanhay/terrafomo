@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.RabbitMQ
+    - Terrafomo.RabbitMQ.DataSources
+    - Terrafomo.RabbitMQ.Lens
+    - Terrafomo.RabbitMQ.Provider
+    - Terrafomo.RabbitMQ.Resources
+    - Terrafomo.RabbitMQ.Settings
+    - Terrafomo.RabbitMQ.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,
