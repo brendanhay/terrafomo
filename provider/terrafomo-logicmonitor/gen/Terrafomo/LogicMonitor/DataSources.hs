@@ -1,19 +1,17 @@
 -- This module is auto-generated.
 
 -- |
--- Module      : Terrafomo.LogicMonitor.Lens
+-- Module      : Terrafomo.LogicMonitor.DataSources
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.LogicMonitor.Lens
+module Terrafomo.LogicMonitor.DataSources
     (
-    -- * Lenses
-      module Terrafomo.LogicMonitor.Arguments01
-    , module Terrafomo.LogicMonitor.Attributes01
+    -- * DataSources
+      module Terrafomo.LogicMonitor.DataSource01
     ) where
 
-import Terrafomo.LogicMonitor.Arguments01
-import Terrafomo.LogicMonitor.Attributes01
+import Terrafomo.LogicMonitor.DataSource01

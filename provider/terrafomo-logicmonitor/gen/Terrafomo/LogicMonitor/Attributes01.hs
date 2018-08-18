@@ -1,19 +1,21 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE UndecidableInstances #-}
+
 -- |
--- Module      : Terrafomo.LogicMonitor.Lens
+-- Module      : Terrafomo.LogicMonitor.Attributes01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.LogicMonitor.Lens
+module Terrafomo.LogicMonitor.Attributes01
     (
-    -- * Lenses
-      module Terrafomo.LogicMonitor.Arguments01
-    , module Terrafomo.LogicMonitor.Attributes01
+    -- ** Attributes
+      HasComputedId (..)
     ) where
 
-import Terrafomo.LogicMonitor.Arguments01
-import Terrafomo.LogicMonitor.Attributes01
+class HasComputedId a b | a -> b where
+    computedId :: a -> b

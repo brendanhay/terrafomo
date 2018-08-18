@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.LogicMonitor
+    - Terrafomo.LogicMonitor.DataSources
+    - Terrafomo.LogicMonitor.Lens
+    - Terrafomo.LogicMonitor.Provider
+    - Terrafomo.LogicMonitor.Resources
+    - Terrafomo.LogicMonitor.Settings
+    - Terrafomo.LogicMonitor.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

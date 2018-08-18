@@ -8,30 +8,30 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.LogicMonitor.Resource
+-- Module      : Terrafomo.LogicMonitor.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.LogicMonitor.Resource
+module Terrafomo.LogicMonitor.Resource01
     (
-    -- ** logicmonitor_collector
-      CollectorResource (..)
-    , collectorResource
-
     -- ** logicmonitor_collector_group
-    , CollectorGroupResource (..)
+      CollectorGroupResource (..)
     , collectorGroupResource
 
-    -- ** logicmonitor_device
-    , DeviceResource (..)
-    , deviceResource
+    -- ** logicmonitor_collector
+    , CollectorResource (..)
+    , collectorResource
 
     -- ** logicmonitor_device_group
     , DeviceGroupResource (..)
     , deviceGroupResource
+
+    -- ** logicmonitor_device
+    , DeviceResource (..)
+    , deviceResource
 
     ) where
 
@@ -58,6 +58,51 @@ import qualified Terrafomo.LogicMonitor.Types    as P
 import qualified Terrafomo.Name                  as TF
 import qualified Terrafomo.Schema                as TF
 import qualified Terrafomo.Validator             as TF
+
+-- | @logicmonitor_collector_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/logicmonitor/r/collector_group.html terraform documentation>
+-- for more information.
+data CollectorGroupResource s = CollectorGroupResource'
+    { _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @logicmonitor_collector_group@ resource value.
+collectorGroupResource
+    :: P.Resource (CollectorGroupResource s)
+collectorGroupResource =
+    TF.unsafeResource "logicmonitor_collector_group" TF.validator $
+        CollectorGroupResource'
+            { _description = TF.Nil
+            , _name = TF.Nil
+            }
+
+instance TF.IsObject (CollectorGroupResource s) where
+    toObject CollectorGroupResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (CollectorGroupResource s) where
+    validator = P.mempty
+
+instance P.HasDescription (CollectorGroupResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: CollectorGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: CollectorGroupResource s)
+
+instance P.HasName (CollectorGroupResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: CollectorGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: CollectorGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CollectorGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @logicmonitor_collector@ Resource.
 --
@@ -164,49 +209,90 @@ instance P.HasSuppressAlertClear (CollectorResource s) (TF.Attr s P.Bool) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CollectorResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
--- | @logicmonitor_collector_group@ Resource.
+-- | @logicmonitor_device_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/logicmonitor/r/collector_group.html terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/logicmonitor/r/device_group.html terraform documentation>
 -- for more information.
-data CollectorGroupResource s = CollectorGroupResource'
-    { _description :: TF.Attr s P.Text
+data DeviceGroupResource s = DeviceGroupResource'
+    { _appliesTo       :: TF.Attr s P.Text
+    -- ^ @applies_to@ - (Optional)
+    --
+    , _description     :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Optional)
+    , _disableAlerting :: TF.Attr s P.Bool
+    -- ^ @disable_alerting@ - (Optional)
+    --
+    , _name            :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _parentId        :: TF.Attr s P.Int
+    -- ^ @parent_id@ - (Optional)
+    --
+    , _properties      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @properties@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
--- | Define a new @logicmonitor_collector_group@ resource value.
-collectorGroupResource
-    :: P.Resource (CollectorGroupResource s)
-collectorGroupResource =
-    TF.unsafeResource "logicmonitor_collector_group" TF.validator $
-        CollectorGroupResource'
-            { _description = TF.Nil
-            , _name = TF.Nil
+-- | Define a new @logicmonitor_device_group@ resource value.
+deviceGroupResource
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (DeviceGroupResource s)
+deviceGroupResource _name =
+    TF.unsafeResource "logicmonitor_device_group" TF.validator $
+        DeviceGroupResource'
+            { _appliesTo = TF.Nil
+            , _description = TF.Nil
+            , _disableAlerting = TF.value P.True
+            , _name = _name
+            , _parentId = TF.Nil
+            , _properties = TF.Nil
             }
 
-instance TF.IsObject (CollectorGroupResource s) where
-    toObject CollectorGroupResource'{..} = P.catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
+instance TF.IsObject (DeviceGroupResource s) where
+    toObject DeviceGroupResource'{..} = P.catMaybes
+        [ TF.assign "applies_to" <$> TF.attribute _appliesTo
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "disable_alerting" <$> TF.attribute _disableAlerting
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parent_id" <$> TF.attribute _parentId
+        , TF.assign "properties" <$> TF.attribute _properties
         ]
 
-instance TF.IsValid (CollectorGroupResource s) where
+instance TF.IsValid (DeviceGroupResource s) where
     validator = P.mempty
 
-instance P.HasDescription (CollectorGroupResource s) (TF.Attr s P.Text) where
+instance P.HasAppliesTo (DeviceGroupResource s) (TF.Attr s P.Text) where
+    appliesTo =
+        P.lens (_appliesTo :: DeviceGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _appliesTo = a } :: DeviceGroupResource s)
+
+instance P.HasDescription (DeviceGroupResource s) (TF.Attr s P.Text) where
     description =
-        P.lens (_description :: CollectorGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: CollectorGroupResource s)
+        P.lens (_description :: DeviceGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: DeviceGroupResource s)
 
-instance P.HasName (CollectorGroupResource s) (TF.Attr s P.Text) where
+instance P.HasDisableAlerting (DeviceGroupResource s) (TF.Attr s P.Bool) where
+    disableAlerting =
+        P.lens (_disableAlerting :: DeviceGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _disableAlerting = a } :: DeviceGroupResource s)
+
+instance P.HasName (DeviceGroupResource s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: CollectorGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: CollectorGroupResource s)
+        P.lens (_name :: DeviceGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DeviceGroupResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (CollectorGroupResource s)) (TF.Attr s P.Text) where
+instance P.HasParentId (DeviceGroupResource s) (TF.Attr s P.Int) where
+    parentId =
+        P.lens (_parentId :: DeviceGroupResource s -> TF.Attr s P.Int)
+               (\s a -> s { _parentId = a } :: DeviceGroupResource s)
+
+instance P.HasProperties (DeviceGroupResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    properties =
+        P.lens (_properties :: DeviceGroupResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _properties = a } :: DeviceGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DeviceGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @logicmonitor_device@ Resource.
@@ -304,90 +390,4 @@ instance P.HasProperties (DeviceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s 
                (\s a -> s { _properties = a } :: DeviceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
--- | @logicmonitor_device_group@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/logicmonitor/r/device_group.html terraform documentation>
--- for more information.
-data DeviceGroupResource s = DeviceGroupResource'
-    { _appliesTo       :: TF.Attr s P.Text
-    -- ^ @applies_to@ - (Optional)
-    --
-    , _description     :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
-    --
-    , _disableAlerting :: TF.Attr s P.Bool
-    -- ^ @disable_alerting@ - (Optional)
-    --
-    , _name            :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _parentId        :: TF.Attr s P.Int
-    -- ^ @parent_id@ - (Optional)
-    --
-    , _properties      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @properties@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @logicmonitor_device_group@ resource value.
-deviceGroupResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> P.Resource (DeviceGroupResource s)
-deviceGroupResource _name =
-    TF.unsafeResource "logicmonitor_device_group" TF.validator $
-        DeviceGroupResource'
-            { _appliesTo = TF.Nil
-            , _description = TF.Nil
-            , _disableAlerting = TF.value P.True
-            , _name = _name
-            , _parentId = TF.Nil
-            , _properties = TF.Nil
-            }
-
-instance TF.IsObject (DeviceGroupResource s) where
-    toObject DeviceGroupResource'{..} = P.catMaybes
-        [ TF.assign "applies_to" <$> TF.attribute _appliesTo
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "disable_alerting" <$> TF.attribute _disableAlerting
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "parent_id" <$> TF.attribute _parentId
-        , TF.assign "properties" <$> TF.attribute _properties
-        ]
-
-instance TF.IsValid (DeviceGroupResource s) where
-    validator = P.mempty
-
-instance P.HasAppliesTo (DeviceGroupResource s) (TF.Attr s P.Text) where
-    appliesTo =
-        P.lens (_appliesTo :: DeviceGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _appliesTo = a } :: DeviceGroupResource s)
-
-instance P.HasDescription (DeviceGroupResource s) (TF.Attr s P.Text) where
-    description =
-        P.lens (_description :: DeviceGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: DeviceGroupResource s)
-
-instance P.HasDisableAlerting (DeviceGroupResource s) (TF.Attr s P.Bool) where
-    disableAlerting =
-        P.lens (_disableAlerting :: DeviceGroupResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _disableAlerting = a } :: DeviceGroupResource s)
-
-instance P.HasName (DeviceGroupResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: DeviceGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: DeviceGroupResource s)
-
-instance P.HasParentId (DeviceGroupResource s) (TF.Attr s P.Int) where
-    parentId =
-        P.lens (_parentId :: DeviceGroupResource s -> TF.Attr s P.Int)
-               (\s a -> s { _parentId = a } :: DeviceGroupResource s)
-
-instance P.HasProperties (DeviceGroupResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    properties =
-        P.lens (_properties :: DeviceGroupResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _properties = a } :: DeviceGroupResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DeviceGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"

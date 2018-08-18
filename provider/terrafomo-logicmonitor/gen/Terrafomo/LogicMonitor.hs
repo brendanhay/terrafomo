@@ -13,17 +13,17 @@
 --
 module Terrafomo.LogicMonitor
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.LogicMonitor.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.LogicMonitor.Types
 
-    -- * DataSources
-    , module Terrafomo.LogicMonitor.DataSource
-
     -- * Resources
-    , module Terrafomo.LogicMonitor.Resource
+    , module Terrafomo.LogicMonitor.Resources
+
+    -- * DataSources
+    , module Terrafomo.LogicMonitor.DataSources
 
     -- * Settings
     , module Terrafomo.LogicMonitor.Settings
@@ -32,9 +32,9 @@ module Terrafomo.LogicMonitor
     , module Terrafomo.LogicMonitor.Lens
     ) where
 
-import Terrafomo.LogicMonitor.DataSource
+import Terrafomo.LogicMonitor.DataSources
 import Terrafomo.LogicMonitor.Lens
 import Terrafomo.LogicMonitor.Provider
-import Terrafomo.LogicMonitor.Resource
+import Terrafomo.LogicMonitor.Resources
 import Terrafomo.LogicMonitor.Settings
 import Terrafomo.LogicMonitor.Types
