@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Dyn.Resource
+-- Module      : Terrafomo.Dyn.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Dyn.Resource
+module Terrafomo.Dyn.Resource01
     (
     -- ** dyn_record
       RecordResource (..)

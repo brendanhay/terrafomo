@@ -13,16 +13,17 @@
 --
 module Terrafomo.Dyn
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Dyn.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Dyn.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.Dyn.Resource
+    , module Terrafomo.Dyn.Resources
+
+    -- * DataSources
+    , module Terrafomo.Dyn.DataSources
 
     -- * Settings
     , module Terrafomo.Dyn.Settings
@@ -31,8 +32,9 @@ module Terrafomo.Dyn
     , module Terrafomo.Dyn.Lens
     ) where
 
+import Terrafomo.Dyn.DataSources
 import Terrafomo.Dyn.Lens
 import Terrafomo.Dyn.Provider
-import Terrafomo.Dyn.Resource
+import Terrafomo.Dyn.Resources
 import Terrafomo.Dyn.Settings
 import Terrafomo.Dyn.Types
