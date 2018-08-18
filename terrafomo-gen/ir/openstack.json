@@ -41,6 +41,7 @@
                     "original": "start"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_networking_subnet_v2.allocation_pools",
             "name": "AllocationPoolsSetting",
             "threaded": true,
@@ -161,6 +162,7 @@
                     "original": "mac_address"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_networking_port_v2.allowed_address_pairs",
             "name": "AllowedAddressPairsSetting",
             "threaded": true,
@@ -194,6 +196,7 @@
                 "name": "AttachmentSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "openstack_blockstorage_volume_v1.attachment",
             "name": "AttachmentSetting",
             "threaded": true,
@@ -381,6 +384,7 @@
                     "original": "volume_size"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_compute_instance_v2.block_device",
             "name": "BlockDeviceSetting",
             "threaded": true,
@@ -449,6 +453,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_db_configuration_v1.configuration",
             "name": "ConfigurationSetting",
             "threaded": true,
@@ -551,6 +556,7 @@
                     "original": "name"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_db_instance_v1.database",
             "name": "DatabaseSetting",
             "threaded": true,
@@ -619,6 +625,7 @@
                     "original": "version"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_db_configuration_v1.datastore",
             "name": "DatastoreSetting",
             "threaded": true,
@@ -721,6 +728,7 @@
                     "original": "timeout"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_vpnaas_site_connection_v2.dpd",
             "name": "DpdSetting",
             "threaded": true,
@@ -823,6 +831,7 @@
                     "original": "subnet_id"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_networking_router_v2.external_fixed_ip",
             "name": "ExternalFixedIpSetting",
             "threaded": true,
@@ -873,6 +882,7 @@
                     "original": "subnet_id"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_networking_port_v2.fixed_ip",
             "name": "FixedIpSetting",
             "threaded": true,
@@ -941,6 +951,7 @@
                     "original": "next_hop"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_networking_subnet_v2.host_routes",
             "name": "HostRoutesSetting",
             "threaded": true,
@@ -1061,6 +1072,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_vpnaas_ike_policy_v2.lifetime",
             "name": "LifetimeSetting",
             "threaded": true,
@@ -1129,6 +1141,7 @@
                     "original": "rule"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_identity_user_v3.multi_factor_auth_rule",
             "name": "MultiFactorAuthRuleSetting",
             "threaded": true,
@@ -1282,6 +1295,7 @@
                     "original": "uuid"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_compute_instance_v2.network",
             "name": "NetworkSetting",
             "threaded": true,
@@ -1452,6 +1466,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_lb_pool_v2.persistence",
             "name": "PersistenceSetting",
             "threaded": true,
@@ -1520,6 +1535,7 @@
                     "original": "file"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_compute_instance_v2.personality",
             "name": "PersonalitySetting",
             "threaded": true,
@@ -1570,6 +1586,7 @@
                 "name": "RolesSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "openstack_identity_auth_scope_v3.roles",
             "name": "RolesSetting",
             "threaded": true,
@@ -1723,6 +1740,7 @@
                     "original": "to_port"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_compute_secgroup_v2.rule",
             "name": "RuleSetting",
             "threaded": true,
@@ -1928,6 +1946,7 @@
                     "original": "target_cell"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_compute_instance_v2.scheduler_hints",
             "name": "SchedulerHintsSetting",
             "threaded": true,
@@ -1995,6 +2014,7 @@
                     "original": "segmentation_id"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_networking_network_v2.segments",
             "name": "SegmentsSetting",
             "threaded": true,
@@ -2079,6 +2099,7 @@
                     "original": "password"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_db_instance_v1.user",
             "name": "UserSetting",
             "threaded": true,
@@ -2130,6 +2151,7 @@
                     "original": "set_router_gateway_after_create"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_networking_router_v2.vendor_options",
             "name": "VendorOptionsSetting",
             "threaded": true,
@@ -2197,6 +2219,7 @@
                     "original": "volume_id"
                 }
             ],
+            "dependencies": [],
             "key": "openstack_compute_instance_v2.volume",
             "name": "VolumeSetting",
             "threaded": true,
@@ -2423,6 +2446,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/compute_flavor_v2.html",
+            "dependencies": [],
             "key": "openstack_compute_flavor_v2",
             "name": "ComputeFlavorV2Data",
             "threaded": true,
@@ -2526,6 +2550,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/compute_keypair_v2.html",
+            "dependencies": [],
             "key": "openstack_compute_keypair_v2",
             "name": "ComputeKeypairV2Data",
             "threaded": true,
@@ -2885,6 +2910,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/dns_zone_v2.html",
+            "dependencies": [],
             "key": "openstack_dns_zone_v2",
             "name": "DnsZoneV2Data",
             "threaded": true,
@@ -3158,6 +3184,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/fw_policy_v1.html",
+            "dependencies": [],
             "key": "openstack_fw_policy_v1",
             "name": "FwPolicyV1Data",
             "threaded": true,
@@ -3329,6 +3356,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/identity_auth_scope_v3.html",
+            "dependencies": [
+                "RolesSetting"
+            ],
             "key": "openstack_identity_auth_scope_v3",
             "name": "IdentityAuthScopeV3Data",
             "threaded": true,
@@ -3620,6 +3650,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/identity_endpoint_v3.html",
+            "dependencies": [],
             "key": "openstack_identity_endpoint_v3",
             "name": "IdentityEndpointV3Data",
             "threaded": true,
@@ -3740,6 +3771,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/identity_group_v3.html",
+            "dependencies": [],
             "key": "openstack_identity_group_v3",
             "name": "IdentityGroupV3Data",
             "threaded": true,
@@ -3929,6 +3961,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/identity_project_v3.html",
+            "dependencies": [],
             "key": "openstack_identity_project_v3",
             "name": "IdentityProjectV3Data",
             "threaded": true,
@@ -4066,6 +4099,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/identity_role_v3.html",
+            "dependencies": [],
             "key": "openstack_identity_role_v3",
             "name": "IdentityRoleV3Data",
             "threaded": true,
@@ -4289,6 +4323,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/identity_user_v3.html",
+            "dependencies": [],
             "key": "openstack_identity_user_v3",
             "name": "IdentityUserV3Data",
             "threaded": true,
@@ -4579,6 +4614,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/images_image_v2.html",
+            "dependencies": [],
             "key": "openstack_images_image_v2",
             "name": "ImagesImageV2Data",
             "threaded": true,
@@ -4937,6 +4973,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/networking_floatingip_v2.html",
+            "dependencies": [],
             "key": "openstack_networking_floatingip_v2",
             "name": "NetworkingFloatingipV2Data",
             "threaded": true,
@@ -5093,6 +5130,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/networking_network_v2.html",
+            "dependencies": [],
             "key": "openstack_networking_network_v2",
             "name": "NetworkingNetworkV2Data",
             "threaded": true,
@@ -5264,6 +5302,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/networking_secgroup_v2.html",
+            "dependencies": [],
             "key": "openstack_networking_secgroup_v2",
             "name": "NetworkingSecgroupV2Data",
             "threaded": true,
@@ -5568,6 +5607,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/networking_subnet_v2.html",
+            "dependencies": [
+                "AllocationPoolsSetting",
+                "HostRoutesSetting"
+            ],
             "key": "openstack_networking_subnet_v2",
             "name": "NetworkingSubnetV2Data",
             "threaded": true,
@@ -6111,6 +6154,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/networking_subnetpool_v2.html",
+            "dependencies": [],
             "key": "openstack_networking_subnetpool_v2",
             "name": "NetworkingSubnetpoolV2Data",
             "threaded": true,
@@ -6641,6 +6685,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/blockstorage_volume_attach_v2.html",
+            "dependencies": [],
             "key": "openstack_blockstorage_volume_attach_v2",
             "name": "BlockstorageVolumeAttachV2Resource",
             "threaded": true,
@@ -6983,6 +7028,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/blockstorage_volume_attach_v3.html",
+            "dependencies": [],
             "key": "openstack_blockstorage_volume_attach_v3",
             "name": "BlockstorageVolumeAttachV3Resource",
             "threaded": true,
@@ -7291,6 +7337,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/blockstorage_volume_v1.html",
+            "dependencies": [
+                "AttachmentSetting"
+            ],
             "key": "openstack_blockstorage_volume_v1",
             "name": "BlockstorageVolumeV1Resource",
             "threaded": true,
@@ -7633,6 +7682,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/blockstorage_volume_v2.html",
+            "dependencies": [
+                "AttachmentSetting"
+            ],
             "key": "openstack_blockstorage_volume_v2",
             "name": "BlockstorageVolumeV2Resource",
             "threaded": true,
@@ -7992,6 +8044,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/blockstorage_volume_v3.html",
+            "dependencies": [
+                "AttachmentSetting"
+            ],
             "key": "openstack_blockstorage_volume_v3",
             "name": "BlockstorageVolumeV3Resource",
             "threaded": true,
@@ -8300,6 +8355,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/compute_flavor_v2.html",
+            "dependencies": [],
             "key": "openstack_compute_flavor_v2",
             "name": "ComputeFlavorV2Resource",
             "threaded": true,
@@ -8523,6 +8579,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/compute_floatingip_associate_v2.html",
+            "dependencies": [],
             "key": "openstack_compute_floatingip_associate_v2",
             "name": "ComputeFloatingipAssociateV2Resource",
             "threaded": true,
@@ -8644,6 +8701,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/compute_floatingip_v2.html",
+            "dependencies": [],
             "key": "openstack_compute_floatingip_v2",
             "name": "ComputeFloatingipV2Resource",
             "threaded": true,
@@ -9173,6 +9231,14 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/compute_instance_v2.html",
+            "dependencies": [
+                "BlockDeviceSetting",
+                "NetworkSetting",
+                "PersonalitySetting",
+                "SchedulerHintsSetting",
+                "VolumeSetting",
+                "NetworkSetting"
+            ],
             "key": "openstack_compute_instance_v2",
             "name": "ComputeInstanceV2Resource",
             "threaded": true,
@@ -9481,6 +9547,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/compute_keypair_v2.html",
+            "dependencies": [],
             "key": "openstack_compute_keypair_v2",
             "name": "ComputeKeypairV2Resource",
             "threaded": true,
@@ -9670,6 +9737,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/compute_secgroup_v2.html",
+            "dependencies": [
+                "RuleSetting",
+                "RuleSetting"
+            ],
             "key": "openstack_compute_secgroup_v2",
             "name": "ComputeSecgroupV2Resource",
             "threaded": true,
@@ -9842,6 +9913,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/compute_servergroup_v2.html",
+            "dependencies": [],
             "key": "openstack_compute_servergroup_v2",
             "name": "ComputeServergroupV2Resource",
             "threaded": true,
@@ -9997,6 +10069,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/compute_volume_attach_v2.html",
+            "dependencies": [],
             "key": "openstack_compute_volume_attach_v2",
             "name": "ComputeVolumeAttachV2Resource",
             "threaded": true,
@@ -10186,6 +10259,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/db_configuration_v1.html",
+            "dependencies": [
+                "ConfigurationSetting",
+                "DatastoreSetting"
+            ],
             "key": "openstack_db_configuration_v1",
             "name": "DbConfigurationV1Resource",
             "threaded": true,
@@ -10341,6 +10418,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/db_database_v1.html",
+            "dependencies": [],
             "key": "openstack_db_database_v1",
             "name": "DbDatabaseV1Resource",
             "threaded": true,
@@ -10564,6 +10642,12 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/db_instance_v1.html",
+            "dependencies": [
+                "DatabaseSetting",
+                "DatastoreSetting",
+                "NetworkSetting",
+                "UserSetting"
+            ],
             "key": "openstack_db_instance_v1",
             "name": "DbInstanceV1Resource",
             "threaded": true,
@@ -10787,6 +10871,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/db_user_v1.html",
+            "dependencies": [],
             "key": "openstack_db_user_v1",
             "name": "DbUserV1Resource",
             "threaded": true,
@@ -11044,6 +11129,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/dns_recordset_v2.html",
+            "dependencies": [],
             "key": "openstack_dns_recordset_v2",
             "name": "DnsRecordsetV2Resource",
             "threaded": true,
@@ -11318,6 +11404,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/dns_zone_v2.html",
+            "dependencies": [],
             "key": "openstack_dns_zone_v2",
             "name": "DnsZoneV2Resource",
             "threaded": true,
@@ -11587,6 +11674,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/fw_firewall_v1.html",
+            "dependencies": [],
             "key": "openstack_fw_firewall_v1",
             "name": "FwFirewallV1Resource",
             "threaded": true,
@@ -11876,6 +11964,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/fw_policy_v1.html",
+            "dependencies": [],
             "key": "openstack_fw_policy_v1",
             "name": "FwPolicyV1Resource",
             "threaded": true,
@@ -12166,6 +12255,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/fw_rule_v1.html",
+            "dependencies": [],
             "key": "openstack_fw_rule_v1",
             "name": "FwRuleV1Resource",
             "threaded": true,
@@ -12372,6 +12462,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/identity_project_v3.html",
+            "dependencies": [],
             "key": "openstack_identity_project_v3",
             "name": "IdentityProjectV3Resource",
             "threaded": true,
@@ -12567,6 +12658,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/identity_role_assignment_v3.html",
+            "dependencies": [],
             "key": "openstack_identity_role_assignment_v3",
             "name": "IdentityRoleAssignmentV3Resource",
             "threaded": true,
@@ -12764,6 +12856,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/identity_role_v3.html",
+            "dependencies": [],
             "key": "openstack_identity_role_v3",
             "name": "IdentityRoleV3Resource",
             "threaded": true,
@@ -13072,6 +13165,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/identity_user_v3.html",
+            "dependencies": [
+                "MultiFactorAuthRuleSetting"
+            ],
             "key": "openstack_identity_user_v3",
             "name": "IdentityUserV3Resource",
             "threaded": true,
@@ -13408,6 +13504,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/images_image_v2.html",
+            "dependencies": [],
             "key": "openstack_images_image_v2",
             "name": "ImagesImageV2Resource",
             "threaded": true,
@@ -13933,6 +14030,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/lb_listener_v2.html",
+            "dependencies": [],
             "key": "openstack_lb_listener_v2",
             "name": "LbListenerV2Resource",
             "threaded": true,
@@ -14275,6 +14373,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/lb_loadbalancer_v2.html",
+            "dependencies": [],
             "key": "openstack_lb_loadbalancer_v2",
             "name": "LbLoadbalancerV2Resource",
             "threaded": true,
@@ -14549,6 +14648,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/lb_member_v1.html",
+            "dependencies": [],
             "key": "openstack_lb_member_v1",
             "name": "LbMemberV1Resource",
             "threaded": true,
@@ -14840,6 +14940,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/lb_member_v2.html",
+            "dependencies": [],
             "key": "openstack_lb_member_v2",
             "name": "LbMemberV2Resource",
             "threaded": true,
@@ -15148,6 +15249,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/lb_monitor_v1.html",
+            "dependencies": [],
             "key": "openstack_lb_monitor_v1",
             "name": "LbMonitorV1Resource",
             "threaded": true,
@@ -15507,6 +15609,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/lb_monitor_v2.html",
+            "dependencies": [],
             "key": "openstack_lb_monitor_v2",
             "name": "LbMonitorV2Resource",
             "threaded": true,
@@ -15866,6 +15969,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/lb_pool_v1.html",
+            "dependencies": [],
             "key": "openstack_lb_pool_v1",
             "name": "LbPoolV1Resource",
             "threaded": true,
@@ -16191,6 +16295,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/lb_pool_v2.html",
+            "dependencies": [
+                "PersistenceSetting"
+            ],
             "key": "openstack_lb_pool_v2",
             "name": "LbPoolV2Resource",
             "threaded": true,
@@ -16516,6 +16623,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/lb_vip_v1.html",
+            "dependencies": [],
             "key": "openstack_lb_vip_v1",
             "name": "LbVipV1Resource",
             "threaded": true,
@@ -16807,6 +16915,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_floatingip_associate_v2.html",
+            "dependencies": [],
             "key": "openstack_networking_floatingip_associate_v2",
             "name": "NetworkingFloatingipAssociateV2Resource",
             "threaded": true,
@@ -17030,6 +17139,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_floatingip_v2.html",
+            "dependencies": [],
             "key": "openstack_networking_floatingip_v2",
             "name": "NetworkingFloatingipV2Resource",
             "threaded": true,
@@ -17321,6 +17431,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_network_v2.html",
+            "dependencies": [
+                "SegmentsSetting"
+            ],
             "key": "openstack_networking_network_v2",
             "name": "NetworkingNetworkV2Resource",
             "threaded": true,
@@ -17679,6 +17792,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_port_v2.html",
+            "dependencies": [
+                "AllowedAddressPairsSetting",
+                "FixedIpSetting"
+            ],
             "key": "openstack_networking_port_v2",
             "name": "NetworkingPortV2Resource",
             "threaded": true,
@@ -17936,6 +18053,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_router_interface_v2.html",
+            "dependencies": [],
             "key": "openstack_networking_router_interface_v2",
             "name": "NetworkingRouterInterfaceV2Resource",
             "threaded": true,
@@ -18108,6 +18226,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_router_route_v2.html",
+            "dependencies": [],
             "key": "openstack_networking_router_route_v2",
             "name": "NetworkingRouterRouteV2Resource",
             "threaded": true,
@@ -18399,6 +18518,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_router_v2.html",
+            "dependencies": [
+                "ExternalFixedIpSetting",
+                "VendorOptionsSetting",
+                "ExternalFixedIpSetting"
+            ],
             "key": "openstack_networking_router_v2",
             "name": "NetworkingRouterV2Resource",
             "threaded": true,
@@ -18742,6 +18866,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_secgroup_rule_v2.html",
+            "dependencies": [],
             "key": "openstack_networking_secgroup_rule_v2",
             "name": "NetworkingSecgroupRuleV2Resource",
             "threaded": true,
@@ -19033,6 +19158,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_secgroup_v2.html",
+            "dependencies": [],
             "key": "openstack_networking_secgroup_v2",
             "name": "NetworkingSecgroupV2Resource",
             "threaded": true,
@@ -19205,6 +19331,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_subnet_route_v2.html",
+            "dependencies": [],
             "key": "openstack_networking_subnet_route_v2",
             "name": "NetworkingSubnetRouteV2Resource",
             "threaded": true,
@@ -19593,6 +19720,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_subnet_v2.html",
+            "dependencies": [
+                "AllocationPoolsSetting",
+                "HostRoutesSetting",
+                "AllocationPoolsSetting"
+            ],
             "key": "openstack_networking_subnet_v2",
             "name": "NetworkingSubnetV2Resource",
             "threaded": true,
@@ -20052,6 +20184,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_subnetpool_v2.html",
+            "dependencies": [],
             "key": "openstack_networking_subnetpool_v2",
             "name": "NetworkingSubnetpoolV2Resource",
             "threaded": true,
@@ -20428,6 +20561,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/objectstorage_container_v1.html",
+            "dependencies": [],
             "key": "openstack_objectstorage_container_v1",
             "name": "ObjectstorageContainerV1Resource",
             "threaded": true,
@@ -20850,6 +20984,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/objectstorage_object_v1.html",
+            "dependencies": [],
             "key": "openstack_objectstorage_object_v1",
             "name": "ObjectstorageObjectV1Resource",
             "threaded": true,
@@ -21453,6 +21588,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/vpnaas_endpoint_group_v2.html",
+            "dependencies": [],
             "key": "openstack_vpnaas_endpoint_group_v2",
             "name": "VpnaasEndpointGroupV2Resource",
             "threaded": true,
@@ -21726,6 +21862,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/vpnaas_ike_policy_v2.html",
+            "dependencies": [
+                "LifetimeSetting",
+                "LifetimeSetting"
+            ],
             "key": "openstack_vpnaas_ike_policy_v2",
             "name": "VpnaasIkePolicyV2Resource",
             "threaded": true,
@@ -21999,6 +22139,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/vpnaas_ipsec_policy_v2.html",
+            "dependencies": [
+                "LifetimeSetting",
+                "LifetimeSetting"
+            ],
             "key": "openstack_vpnaas_ipsec_policy_v2",
             "name": "VpnaasIpsecPolicyV2Resource",
             "threaded": true,
@@ -22306,6 +22450,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/vpnaas_service_v2.html",
+            "dependencies": [],
             "key": "openstack_vpnaas_service_v2",
             "name": "VpnaasServiceV2Resource",
             "threaded": true,
@@ -22767,6 +22912,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/vpnaas_site_connection_v2.html",
+            "dependencies": [
+                "DpdSetting",
+                "DpdSetting"
+            ],
             "key": "openstack_vpnaas_site_connection_v2",
             "name": "VpnaasSiteConnectionV2Resource",
             "threaded": true,
@@ -23428,6 +23577,7 @@
                 "original": "user_name"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
