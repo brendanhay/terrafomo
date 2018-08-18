@@ -13,16 +13,17 @@
 --
 module Terrafomo.SoftLayer
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.SoftLayer.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.SoftLayer.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.SoftLayer.Resource
+    , module Terrafomo.SoftLayer.Resources
+
+    -- * DataSources
+    , module Terrafomo.SoftLayer.DataSources
 
     -- * Settings
     , module Terrafomo.SoftLayer.Settings
@@ -31,8 +32,9 @@ module Terrafomo.SoftLayer
     , module Terrafomo.SoftLayer.Lens
     ) where
 
+import Terrafomo.SoftLayer.DataSources
 import Terrafomo.SoftLayer.Lens
 import Terrafomo.SoftLayer.Provider
-import Terrafomo.SoftLayer.Resource
+import Terrafomo.SoftLayer.Resources
 import Terrafomo.SoftLayer.Settings
 import Terrafomo.SoftLayer.Types
