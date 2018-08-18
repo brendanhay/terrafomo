@@ -13,16 +13,17 @@
 --
 module Terrafomo.Spotinst
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Spotinst.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Spotinst.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.Spotinst.Resource
+    , module Terrafomo.Spotinst.Resources
+
+    -- * DataSources
+    , module Terrafomo.Spotinst.DataSources
 
     -- * Settings
     , module Terrafomo.Spotinst.Settings
@@ -31,8 +32,9 @@ module Terrafomo.Spotinst
     , module Terrafomo.Spotinst.Lens
     ) where
 
+import Terrafomo.Spotinst.DataSources
 import Terrafomo.Spotinst.Lens
 import Terrafomo.Spotinst.Provider
-import Terrafomo.Spotinst.Resource
+import Terrafomo.Spotinst.Resources
 import Terrafomo.Spotinst.Settings
 import Terrafomo.Spotinst.Types

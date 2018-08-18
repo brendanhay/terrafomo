@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Spotinst
+    - Terrafomo.Spotinst.DataSources
+    - Terrafomo.Spotinst.Lens
+    - Terrafomo.Spotinst.Provider
+    - Terrafomo.Spotinst.Resources
+    - Terrafomo.Spotinst.Settings
+    - Terrafomo.Spotinst.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,
