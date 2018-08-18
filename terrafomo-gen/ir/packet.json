@@ -6,6 +6,7 @@
                 "name": "AttachmentsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "packet_volume.attachments",
             "name": "AttachmentsSetting",
             "threaded": true,
@@ -39,6 +40,7 @@
                 "name": "NetworkSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "packet_device.network",
             "name": "NetworkSetting",
             "threaded": true,
@@ -175,6 +177,7 @@
                     "original": "snapshot_frequency"
                 }
             ],
+            "dependencies": [],
             "key": "packet_volume.snapshot_policies",
             "name": "SnapshotPoliciesSetting",
             "threaded": true,
@@ -298,6 +301,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/packet/d/precreated_ip_block.html",
+            "dependencies": [],
             "key": "packet_precreated_ip_block",
             "name": "PrecreatedIpBlockData",
             "threaded": true,
@@ -795,6 +799,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/packet/r/device.html",
+            "dependencies": [
+                "NetworkSetting"
+            ],
             "key": "packet_device",
             "name": "DeviceResource",
             "threaded": true,
@@ -1154,6 +1161,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/packet/r/ip_attachment.html",
+            "dependencies": [],
             "key": "packet_ip_attachment",
             "name": "IpAttachmentResource",
             "threaded": true,
@@ -1462,6 +1470,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/packet/r/organization.html",
+            "dependencies": [],
             "key": "packet_organization",
             "name": "OrganizationResource",
             "threaded": true,
@@ -1600,6 +1609,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/packet/r/project.html",
+            "dependencies": [],
             "key": "packet_project",
             "name": "ProjectResource",
             "threaded": true,
@@ -1772,6 +1782,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/packet/r/reserved_ip_block.html",
+            "dependencies": [],
             "key": "packet_reserved_ip_block",
             "name": "ReservedIpBlockResource",
             "threaded": true,
@@ -2063,6 +2074,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/packet/r/ssh_key.html",
+            "dependencies": [],
             "key": "packet_ssh_key",
             "name": "SshKeyResource",
             "threaded": true,
@@ -2320,6 +2332,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/packet/r/volume.html",
+            "dependencies": [
+                "SnapshotPoliciesSetting",
+                "AttachmentsSetting"
+            ],
             "key": "packet_volume",
             "name": "VolumeResource",
             "threaded": true,
@@ -2560,6 +2576,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/packet/r/volume_attachment.html",
+            "dependencies": [],
             "key": "packet_volume_attachment",
             "name": "VolumeAttachmentResource",
             "threaded": true,
@@ -2649,6 +2666,7 @@
                 "original": "auth_token"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
