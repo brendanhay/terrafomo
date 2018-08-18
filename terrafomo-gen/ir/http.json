@@ -44,6 +44,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/http/d/.html",
+            "dependencies": [],
             "key": "http",
             "name": "Data",
             "threaded": true,
@@ -114,6 +115,7 @@
             "name": "Provider'"
         },
         "arguments": [],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
