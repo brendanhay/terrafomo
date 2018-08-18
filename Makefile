@@ -53,7 +53,6 @@ define provider
 .PHONY: $1
 
 $1: format-$1
-	@script/generate
 	stack build --fast $(call package,$1)
 
 generate-$1: $(GENERATE) $(GO_VENDOR)-$1 $(MODEL_DIR)/$1.json
