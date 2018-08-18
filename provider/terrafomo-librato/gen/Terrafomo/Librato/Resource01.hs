@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Librato.Resource
+-- Module      : Terrafomo.Librato.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Librato.Resource
+module Terrafomo.Librato.Resource01
     (
     -- ** librato_alert
       AlertResource (..)
@@ -29,13 +29,13 @@ module Terrafomo.Librato.Resource
     , ServiceResource (..)
     , serviceResource
 
-    -- ** librato_space
-    , SpaceResource (..)
-    , spaceResource
-
     -- ** librato_space_chart
     , SpaceChartResource (..)
     , spaceChartResource
+
+    -- ** librato_space
+    , SpaceResource (..)
+    , spaceResource
 
     ) where
 
@@ -322,42 +322,6 @@ instance P.HasType' (ServiceResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Int) where
     computedId x = TF.compute (TF.refKey x) "id"
 
--- | @librato_space@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/librato/r/space.html terraform documentation>
--- for more information.
-data SpaceResource s = SpaceResource'
-    { _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @librato_space@ resource value.
-spaceResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> P.Resource (SpaceResource s)
-spaceResource _name =
-    TF.unsafeResource "librato_space" TF.validator $
-        SpaceResource'
-            { _name = _name
-            }
-
-instance TF.IsObject (SpaceResource s) where
-    toObject SpaceResource'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance TF.IsValid (SpaceResource s) where
-    validator = P.mempty
-
-instance P.HasName (SpaceResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: SpaceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SpaceResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Int) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
 -- | @librato_space_chart@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/librato/r/space_chart.html terraform documentation>
@@ -464,4 +428,40 @@ instance P.HasType' (SpaceChartResource s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: SpaceChartResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceChartResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @librato_space@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/librato/r/space.html terraform documentation>
+-- for more information.
+data SpaceResource s = SpaceResource'
+    { _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @librato_space@ resource value.
+spaceResource
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (SpaceResource s)
+spaceResource _name =
+    TF.unsafeResource "librato_space" TF.validator $
+        SpaceResource'
+            { _name = _name
+            }
+
+instance TF.IsObject (SpaceResource s) where
+    toObject SpaceResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (SpaceResource s) where
+    validator = P.mempty
+
+instance P.HasName (SpaceResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: SpaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SpaceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Int) where
     computedId x = TF.compute (TF.refKey x) "id"

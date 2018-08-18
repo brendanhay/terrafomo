@@ -13,16 +13,17 @@
 --
 module Terrafomo.Librato
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Librato.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Librato.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.Librato.Resource
+    , module Terrafomo.Librato.Resources
+
+    -- * DataSources
+    , module Terrafomo.Librato.DataSources
 
     -- * Settings
     , module Terrafomo.Librato.Settings
@@ -31,8 +32,9 @@ module Terrafomo.Librato
     , module Terrafomo.Librato.Lens
     ) where
 
+import Terrafomo.Librato.DataSources
 import Terrafomo.Librato.Lens
 import Terrafomo.Librato.Provider
-import Terrafomo.Librato.Resource
+import Terrafomo.Librato.Resources
 import Terrafomo.Librato.Settings
 import Terrafomo.Librato.Types
