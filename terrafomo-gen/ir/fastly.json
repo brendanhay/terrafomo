@@ -446,6 +446,7 @@
                     "original": "weight"
                 }
             ],
+            "dependencies": [],
             "key": "fastly_service_v1.backend",
             "name": "BackendSetting",
             "threaded": true,
@@ -654,6 +655,7 @@
                     "original": "table"
                 }
             ],
+            "dependencies": [],
             "key": "fastly_service_v1.bigquerylogging",
             "name": "BigqueryloggingSetting",
             "threaded": true,
@@ -842,6 +844,7 @@
                     "original": "ttl"
                 }
             ],
+            "dependencies": [],
             "key": "fastly_service_v1.cache_setting",
             "name": "CacheSetting",
             "threaded": true,
@@ -953,6 +956,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "fastly_service_v1.condition",
             "name": "ConditionSetting",
             "threaded": true,
@@ -1061,6 +1065,7 @@
                     "original": "name"
                 }
             ],
+            "dependencies": [],
             "key": "fastly_service_v1.domain",
             "name": "DomainSetting",
             "threaded": true,
@@ -1307,6 +1312,7 @@
                     "original": "timestamp_format"
                 }
             ],
+            "dependencies": [],
             "key": "fastly_service_v1.gcslogging",
             "name": "GcsloggingSetting",
             "threaded": true,
@@ -1438,6 +1444,7 @@
                     "original": "name"
                 }
             ],
+            "dependencies": [],
             "key": "fastly_service_v1.gzip",
             "name": "GzipSetting",
             "threaded": true,
@@ -1706,6 +1713,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "fastly_service_v1.header",
             "name": "HeaderSetting",
             "threaded": true,
@@ -2069,6 +2077,7 @@
                     "original": "window"
                 }
             ],
+            "dependencies": [],
             "key": "fastly_service_v1.healthcheck",
             "name": "HealthcheckSetting",
             "threaded": true,
@@ -2277,6 +2286,7 @@
                     "original": "use_tls"
                 }
             ],
+            "dependencies": [],
             "key": "fastly_service_v1.logentries",
             "name": "LogentriesSetting",
             "threaded": true,
@@ -2427,6 +2437,7 @@
                     "original": "response_condition"
                 }
             ],
+            "dependencies": [],
             "key": "fastly_service_v1.papertrail",
             "name": "PapertrailSetting",
             "threaded": true,
@@ -2731,6 +2742,7 @@
                     "original": "xff"
                 }
             ],
+            "dependencies": [],
             "key": "fastly_service_v1.request_setting",
             "name": "RequestSetting",
             "threaded": true,
@@ -2902,6 +2914,7 @@
                     "original": "status"
                 }
             ],
+            "dependencies": [],
             "key": "fastly_service_v1.response_object",
             "name": "ResponseObjectSetting",
             "threaded": true,
@@ -3205,6 +3218,7 @@
                     "original": "timestamp_format"
                 }
             ],
+            "dependencies": [],
             "key": "fastly_service_v1.s3logging",
             "name": "S3loggingSetting",
             "threaded": true,
@@ -3375,6 +3389,7 @@
                     "original": "url"
                 }
             ],
+            "dependencies": [],
             "key": "fastly_service_v1.sumologic",
             "name": "SumologicSetting",
             "threaded": true,
@@ -3639,6 +3654,7 @@
                     "original": "use_tls"
                 }
             ],
+            "dependencies": [],
             "key": "fastly_service_v1.syslog",
             "name": "SyslogSetting",
             "threaded": true,
@@ -3751,6 +3767,7 @@
                     "original": "name"
                 }
             ],
+            "dependencies": [],
             "key": "fastly_service_v1.vcl",
             "name": "VclSetting",
             "threaded": true,
@@ -3809,6 +3826,7 @@
             },
             "arguments": [],
             "url": "https://www.terraform.io/docs/providers/fastly/d/ip_ranges.html",
+            "dependencies": [],
             "key": "fastly_ip_ranges",
             "name": "IpRangesData",
             "threaded": true,
@@ -4226,6 +4244,25 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/fastly/r/service_v1.html",
+            "dependencies": [
+                "BackendSetting",
+                "BigqueryloggingSetting",
+                "CacheSetting",
+                "ConditionSetting",
+                "DomainSetting",
+                "GcsloggingSetting",
+                "GzipSetting",
+                "HeaderSetting",
+                "HealthcheckSetting",
+                "LogentriesSetting",
+                "PapertrailSetting",
+                "RequestSetting",
+                "ResponseObjectSetting",
+                "S3loggingSetting",
+                "SumologicSetting",
+                "SyslogSetting",
+                "VclSetting"
+            ],
             "key": "fastly_service_v1",
             "name": "ServiceV1Resource",
             "threaded": true,
@@ -4372,6 +4409,7 @@
                 "original": "base_url"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
