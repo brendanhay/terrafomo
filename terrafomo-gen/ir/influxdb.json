@@ -41,6 +41,7 @@
                     "original": "privilege"
                 }
             ],
+            "dependencies": [],
             "key": "influxdb_user.grant",
             "name": "GrantSetting",
             "threaded": true,
@@ -160,6 +161,7 @@
                     "original": "replication"
                 }
             ],
+            "dependencies": [],
             "key": "influxdb_database.retention_policies",
             "name": "RetentionPoliciesSetting",
             "threaded": true,
@@ -267,6 +269,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/influxdb/r/continuous_query.html",
+            "dependencies": [],
             "key": "influxdb_continuous_query",
             "name": "ContinuousQueryResource",
             "threaded": true,
@@ -388,6 +391,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/influxdb/r/database.html",
+            "dependencies": [
+                "RetentionPoliciesSetting"
+            ],
             "key": "influxdb_database",
             "name": "DatabaseResource",
             "threaded": true,
@@ -509,6 +515,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/influxdb/r/user.html",
+            "dependencies": [
+                "GrantSetting"
+            ],
             "key": "influxdb_user",
             "name": "UserResource",
             "threaded": true,
@@ -647,6 +656,7 @@
                 "original": "username"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
