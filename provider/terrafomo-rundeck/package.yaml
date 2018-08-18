@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Rundeck
+    - Terrafomo.Rundeck.DataSources
+    - Terrafomo.Rundeck.Lens
+    - Terrafomo.Rundeck.Provider
+    - Terrafomo.Rundeck.Resources
+    - Terrafomo.Rundeck.Settings
+    - Terrafomo.Rundeck.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

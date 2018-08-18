@@ -13,16 +13,17 @@
 --
 module Terrafomo.Rundeck
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Rundeck.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Rundeck.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.Rundeck.Resource
+    , module Terrafomo.Rundeck.Resources
+
+    -- * DataSources
+    , module Terrafomo.Rundeck.DataSources
 
     -- * Settings
     , module Terrafomo.Rundeck.Settings
@@ -31,8 +32,9 @@ module Terrafomo.Rundeck
     , module Terrafomo.Rundeck.Lens
     ) where
 
+import Terrafomo.Rundeck.DataSources
 import Terrafomo.Rundeck.Lens
 import Terrafomo.Rundeck.Provider
-import Terrafomo.Rundeck.Resource
+import Terrafomo.Rundeck.Resources
 import Terrafomo.Rundeck.Settings
 import Terrafomo.Rundeck.Types

@@ -1,17 +1,17 @@
 -- This module is auto-generated.
 
 -- |
--- Module      : Terrafomo.Rundeck.Settings
+-- Module      : Terrafomo.Rundeck.Resources
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Rundeck.Settings
+module Terrafomo.Rundeck.Resources
     (
-    -- * Settings
-      module Terrafomo.Rundeck.Settings01
+    -- * Resources
+      module Terrafomo.Rundeck.Resource01
     ) where
 
-import Terrafomo.Rundeck.Settings01
+import Terrafomo.Rundeck.Resource01
