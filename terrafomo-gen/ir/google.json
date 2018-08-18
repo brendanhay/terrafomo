@@ -58,6 +58,7 @@
                     "original": "public_ptr_domain_name"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_instance.network_interface.access_config",
             "name": "AccessConfigSetting",
             "threaded": true,
@@ -177,6 +178,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "google_storage_bucket.lifecycle_rule.action",
             "name": "ActionSetting",
             "threaded": true,
@@ -278,6 +280,16 @@
                     "optional": true,
                     "original": "network_policy_config"
                 }
+            ],
+            "dependencies": [
+                "HorizontalPodAutoscalingSetting",
+                "HttpLoadBalancingSetting",
+                "KubernetesDashboardSetting",
+                "NetworkPolicyConfigSetting",
+                "HorizontalPodAutoscalingSetting",
+                "HttpLoadBalancingSetting",
+                "KubernetesDashboardSetting",
+                "NetworkPolicyConfigSetting"
             ],
             "key": "google_container_cluster.addons_config",
             "name": "AddonsConfigSetting",
@@ -398,6 +410,7 @@
                     "original": "range"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_router.bgp.advertised_ip_ranges",
             "name": "AdvertisedIpRangesSetting",
             "threaded": true,
@@ -448,6 +461,7 @@
                     "original": "subnetwork_range_name"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_instance.network_interface.alias_ip_range",
             "name": "AliasIpRangeSetting",
             "threaded": true,
@@ -580,6 +594,7 @@
                     "original": "values"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_firewall.allow",
             "name": "AllowSetting",
             "threaded": true,
@@ -660,6 +675,9 @@
                 "name": "ApisSetting'"
             },
             "arguments": [],
+            "dependencies": [
+                "MethodsSetting"
+            ],
             "key": "google_endpoints_service.apis",
             "name": "ApisSetting",
             "threaded": true,
@@ -812,6 +830,11 @@
                     "optional": true,
                     "original": "serving_status"
                 }
+            ],
+            "dependencies": [
+                "FeatureSettings",
+                "FeatureSettings",
+                "UrlDispatchRuleSetting"
             ],
             "key": "google_project.app_engine",
             "name": "AppEngineSetting",
@@ -1068,6 +1091,7 @@
                     "original": "source"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_instance.attached_disk",
             "name": "AttachedDiskSetting",
             "threaded": true,
@@ -1222,6 +1246,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "google_sql_database_instance.settings.ip_configuration.authorized_networks",
             "name": "AuthorizedNetworksSetting",
             "threaded": true,
@@ -1272,6 +1297,7 @@
                     "original": "initial_delay_sec"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_instance_group_manager.auto_healing_policies",
             "name": "AutoHealingPoliciesSetting",
             "threaded": true,
@@ -1357,6 +1383,7 @@
                     "original": "min_node_count"
                 }
             ],
+            "dependencies": [],
             "key": "google_container_cluster.node_pool.autoscaling",
             "name": "AutoscalingSetting",
             "threaded": true,
@@ -1544,6 +1571,12 @@
                     "optional": false,
                     "original": "min_replicas"
                 }
+            ],
+            "dependencies": [
+                "CpuUtilizationSetting",
+                "LoadBalancingUtilizationSetting",
+                "MetricSetting",
+                "CpuUtilizationSetting"
             ],
             "key": "google_compute_autoscaler.autoscaling_policy",
             "name": "AutoscalingPolicySetting",
@@ -1767,6 +1800,7 @@
                     "original": "max_utilization"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_backend_service.backend",
             "name": "BackendSetting",
             "threaded": true,
@@ -1988,6 +2022,7 @@
                     "original": "start_time"
                 }
             ],
+            "dependencies": [],
             "key": "google_sql_database_instance.settings.backup_configuration",
             "name": "BackupConfigurationSetting",
             "threaded": true,
@@ -2090,6 +2125,9 @@
                     "original": "asn"
                 }
             ],
+            "dependencies": [
+                "AdvertisedIpRangesSetting"
+            ],
             "key": "google_compute_router.bgp",
             "name": "BgpSetting",
             "threaded": true,
@@ -2158,6 +2196,7 @@
                     "original": "role"
                 }
             ],
+            "dependencies": [],
             "key": "google_iam_policy.binding",
             "name": "BindingSetting",
             "threaded": true,
@@ -2226,6 +2265,7 @@
                     "original": "enforced"
                 }
             ],
+            "dependencies": [],
             "key": "google_folder_organization_policy.boolean_policy",
             "name": "BooleanPolicySetting",
             "threaded": true,
@@ -2356,6 +2396,10 @@
                     "optional": true,
                     "original": "source"
                 }
+            ],
+            "dependencies": [
+                "InitializeParamsSetting",
+                "InitializeParamsSetting"
             ],
             "key": "google_compute_instance.boot_disk",
             "name": "BootDiskSetting",
@@ -2576,6 +2620,9 @@
                     "original": "tags"
                 }
             ],
+            "dependencies": [
+                "StepSetting"
+            ],
             "key": "google_cloudbuild_trigger.build",
             "name": "BuildSetting",
             "threaded": true,
@@ -2689,6 +2736,7 @@
                     "original": "query_string_whitelist"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_backend_service.cdn_policy.cache_key_policy",
             "name": "CacheKeyPolicySetting",
             "threaded": true,
@@ -2855,6 +2903,10 @@
                     "original": "cache_key_policy"
                 }
             ],
+            "dependencies": [
+                "CacheKeyPolicySetting",
+                "CacheKeyPolicySetting"
+            ],
             "key": "google_compute_backend_service.cdn_policy",
             "name": "CdnPolicySetting",
             "threaded": true,
@@ -2923,6 +2975,7 @@
                     "original": "display_name"
                 }
             ],
+            "dependencies": [],
             "key": "google_container_cluster.master_authorized_networks_config.cidr_blocks",
             "name": "CidrBlocksSetting",
             "threaded": true,
@@ -3009,6 +3062,7 @@
                     "original": "issue_client_certificate"
                 }
             ],
+            "dependencies": [],
             "key": "google_container_cluster.master_auth.client_certificate_config",
             "name": "ClientCertificateConfigSetting",
             "threaded": true,
@@ -3179,6 +3233,19 @@
                     "optional": true,
                     "original": "worker_config"
                 }
+            ],
+            "dependencies": [
+                "GceClusterConfigSetting",
+                "InitializationActionSetting",
+                "MasterConfigSetting",
+                "PreemptibleWorkerConfigSetting",
+                "SoftwareConfigSetting",
+                "WorkerConfigSetting",
+                "GceClusterConfigSetting",
+                "MasterConfigSetting",
+                "PreemptibleWorkerConfigSetting",
+                "SoftwareConfigSetting",
+                "WorkerConfigSetting"
             ],
             "key": "google_dataproc_cluster.cluster_config",
             "name": "ClusterConfigSetting",
@@ -3384,6 +3451,7 @@
                     "original": "num_newer_versions"
                 }
             ],
+            "dependencies": [],
             "key": "google_storage_bucket.lifecycle_rule.condition",
             "name": "ConditionSetting",
             "threaded": true,
@@ -3417,6 +3485,7 @@
                     "original": "src_ip_ranges"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_security_policy.rule.match.config",
             "name": "ConfigSetting",
             "threaded": true,
@@ -3519,6 +3588,7 @@
                     "original": "response_header"
                 }
             ],
+            "dependencies": [],
             "key": "google_storage_bucket.cors",
             "name": "CorsSetting",
             "threaded": true,
@@ -3552,6 +3622,7 @@
                     "original": "target"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_autoscaler.autoscaling_policy.cpu_utilization",
             "name": "CpuUtilizationSetting",
             "threaded": true,
@@ -3603,6 +3674,9 @@
                     "original": "public_key_certificate"
                 }
             ],
+            "dependencies": [
+                "PublicKeyCertificateSetting"
+            ],
             "key": "google_cloudiot_registry.credentials",
             "name": "CredentialsSetting",
             "threaded": true,
@@ -3636,6 +3710,7 @@
                     "original": "start_time"
                 }
             ],
+            "dependencies": [],
             "key": "google_container_cluster.maintenance_policy.daily_maintenance_window",
             "name": "DailyMaintenanceWindowSetting",
             "threaded": true,
@@ -3739,6 +3814,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "google_sql_database_instance.settings.database_flags",
             "name": "DatabaseFlagsSetting",
             "threaded": true,
@@ -3835,6 +3911,7 @@
                     "original": "values"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_firewall.deny",
             "name": "DenySetting",
             "threaded": true,
@@ -4188,6 +4265,7 @@
                     "original": "source_image"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_instance.disk",
             "name": "DiskSetting",
             "threaded": true,
@@ -4358,6 +4436,7 @@
                     "original": "num_local_ssds"
                 }
             ],
+            "dependencies": [],
             "key": "google_dataproc_cluster.cluster_config.master_config.disk_config",
             "name": "DiskConfigSetting",
             "threaded": true,
@@ -4426,6 +4505,7 @@
                     "original": "raw_key"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_disk.disk_encryption_key",
             "name": "DiskEncryptionKeySetting",
             "threaded": true,
@@ -4459,6 +4539,7 @@
                 "name": "EndpointsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "google_endpoints_service.endpoints",
             "name": "EndpointsSetting",
             "threaded": true,
@@ -4527,6 +4608,7 @@
                     "original": "pubsub_topic_name"
                 }
             ],
+            "dependencies": [],
             "key": "google_cloudiot_registry.event_notification_config",
             "name": "EventNotificationConfigSetting",
             "threaded": true,
@@ -4578,6 +4660,7 @@
                     "original": "split_health_checks"
                 }
             ],
+            "dependencies": [],
             "key": "google_project.app_engine.feature_settings",
             "name": "FeatureSettings",
             "threaded": true,
@@ -4760,6 +4843,7 @@
                     "original": "zone"
                 }
             ],
+            "dependencies": [],
             "key": "google_dataproc_cluster.cluster_config.gce_cluster_config",
             "name": "GceClusterConfigSetting",
             "threaded": true,
@@ -4911,6 +4995,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_instance.guest_accelerator",
             "name": "GuestAcceleratorSetting",
             "threaded": true,
@@ -5147,6 +5232,10 @@
                     "original": "properties"
                 }
             ],
+            "dependencies": [
+                "LoggingConfigSetting",
+                "LoggingConfigSetting"
+            ],
             "key": "google_dataproc_job.hadoop_config",
             "name": "HadoopConfigSetting",
             "threaded": true,
@@ -5344,6 +5433,7 @@
                     "original": "script_variables"
                 }
             ],
+            "dependencies": [],
             "key": "google_dataproc_job.hive_config",
             "name": "HiveConfigSetting",
             "threaded": true,
@@ -5424,6 +5514,7 @@
                     "original": "disabled"
                 }
             ],
+            "dependencies": [],
             "key": "google_container_cluster.addons_config.horizontal_pod_autoscaling",
             "name": "HorizontalPodAutoscalingSetting",
             "threaded": true,
@@ -5509,6 +5600,7 @@
                     "original": "path_matcher"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_url_map.host_rule",
             "name": "HostRuleSetting",
             "threaded": true,
@@ -5577,6 +5669,7 @@
                     "original": "http_enabled_state"
                 }
             ],
+            "dependencies": [],
             "key": "google_cloudiot_registry.http_config",
             "name": "HttpConfigSetting",
             "threaded": true,
@@ -5679,6 +5772,7 @@
                     "original": "request_path"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_health_check.http_health_check",
             "name": "HttpHealthCheckSetting",
             "threaded": true,
@@ -5712,6 +5806,7 @@
                     "original": "disabled"
                 }
             ],
+            "dependencies": [],
             "key": "google_container_cluster.addons_config.http_load_balancing",
             "name": "HttpLoadBalancingSetting",
             "threaded": true,
@@ -5814,6 +5909,7 @@
                     "original": "request_path"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_health_check.https_health_check",
             "name": "HttpsHealthCheckSetting",
             "threaded": true,
@@ -5864,6 +5960,7 @@
                     "original": "oauth2_client_secret"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_backend_service.iap",
             "name": "IapSetting",
             "threaded": true,
@@ -5984,6 +6081,7 @@
                     "original": "timeout_sec"
                 }
             ],
+            "dependencies": [],
             "key": "google_dataproc_cluster.cluster_config.initialization_action",
             "name": "InitializationActionSetting",
             "threaded": true,
@@ -6069,6 +6167,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_instance.boot_disk.initialize_params",
             "name": "InitializeParamsSetting",
             "threaded": true,
@@ -6171,6 +6270,9 @@
                     "original": "status"
                 }
             ],
+            "dependencies": [
+                "NamedPortsSetting"
+            ],
             "key": "google_compute_region_instance_group.instances",
             "name": "InstancesSetting",
             "threaded": true,
@@ -6257,6 +6359,7 @@
                     "original": "time_to_retire"
                 }
             ],
+            "dependencies": [],
             "key": "google_sql_database_instance.ip_address",
             "name": "IpAddressSetting",
             "threaded": true,
@@ -6342,6 +6445,7 @@
                     "original": "services_secondary_range_name"
                 }
             ],
+            "dependencies": [],
             "key": "google_container_cluster.ip_allocation_policy",
             "name": "IpAllocationPolicySetting",
             "threaded": true,
@@ -6444,6 +6548,9 @@
                     "original": "require_ssl"
                 }
             ],
+            "dependencies": [
+                "AuthorizedNetworksSetting"
+            ],
             "key": "google_sql_database_instance.settings.ip_configuration",
             "name": "IpConfigurationSetting",
             "threaded": true,
@@ -6495,6 +6602,7 @@
                     "original": "disabled"
                 }
             ],
+            "dependencies": [],
             "key": "google_container_cluster.addons_config.kubernetes_dashboard",
             "name": "KubernetesDashboardSetting",
             "threaded": true,
@@ -6562,6 +6670,10 @@
                     "optional": false,
                     "original": "condition"
                 }
+            ],
+            "dependencies": [
+                "ActionSetting",
+                "ConditionSetting"
             ],
             "key": "google_storage_bucket.lifecycle_rule",
             "name": "LifecycleRuleSetting",
@@ -6677,6 +6789,10 @@
                     "original": "suggested_value"
                 }
             ],
+            "dependencies": [
+                "AllowSetting",
+                "DenySetting"
+            ],
             "key": "google_folder_organization_policy.list_policy",
             "name": "ListPolicySetting",
             "threaded": true,
@@ -6775,6 +6891,7 @@
                     "original": "target"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_autoscaler.autoscaling_policy.load_balancing_utilization",
             "name": "LoadBalancingUtilizationSetting",
             "threaded": true,
@@ -6843,6 +6960,7 @@
                     "original": "zone"
                 }
             ],
+            "dependencies": [],
             "key": "google_sql_database_instance.settings.location_preference",
             "name": "LocationPreferenceSetting",
             "threaded": true,
@@ -6893,6 +7011,7 @@
                     "original": "log_object_prefix"
                 }
             ],
+            "dependencies": [],
             "key": "google_storage_bucket.logging",
             "name": "LoggingSetting",
             "threaded": true,
@@ -6966,6 +7085,7 @@
                     "original": "driver_log_levels"
                 }
             ],
+            "dependencies": [],
             "key": "google_dataproc_job.hadoop_config.logging_config",
             "name": "LoggingConfigSetting",
             "threaded": true,
@@ -6998,6 +7118,10 @@
                     "optional": false,
                     "original": "daily_maintenance_window"
                 }
+            ],
+            "dependencies": [
+                "DailyMaintenanceWindowSetting",
+                "DailyMaintenanceWindowSetting"
             ],
             "key": "google_container_cluster.maintenance_policy",
             "name": "MaintenancePolicySetting",
@@ -7102,6 +7226,7 @@
                     "original": "update_track"
                 }
             ],
+            "dependencies": [],
             "key": "google_sql_database_instance.settings.maintenance_window",
             "name": "MaintenanceWindowSetting",
             "threaded": true,
@@ -7152,6 +7277,7 @@
                     "original": "auto_upgrade"
                 }
             ],
+            "dependencies": [],
             "key": "google_container_cluster.node_pool.management",
             "name": "ManagementSetting",
             "threaded": true,
@@ -7253,6 +7379,10 @@
                     "optional": false,
                     "original": "username"
                 }
+            ],
+            "dependencies": [
+                "ClientCertificateConfigSetting",
+                "ClientCertificateConfigSetting"
             ],
             "key": "google_container_cluster.master_auth",
             "name": "MasterAuthSetting",
@@ -7425,6 +7555,10 @@
                     "original": "cidr_blocks"
                 }
             ],
+            "dependencies": [
+                "CidrBlocksSetting",
+                "CidrBlocksSetting"
+            ],
             "key": "google_container_cluster.master_authorized_networks_config",
             "name": "MasterAuthorizedNetworksConfigSetting",
             "threaded": true,
@@ -7509,6 +7643,10 @@
                     "optional": true,
                     "original": "num_instances"
                 }
+            ],
+            "dependencies": [
+                "DiskConfigSetting",
+                "DiskConfigSetting"
             ],
             "key": "google_dataproc_cluster.cluster_config.master_config",
             "name": "MasterConfigSetting",
@@ -7629,6 +7767,9 @@
                     "original": "versioned_expr"
                 }
             ],
+            "dependencies": [
+                "ConfigSetting"
+            ],
             "key": "google_compute_security_policy.rule.match",
             "name": "MatchSetting",
             "threaded": true,
@@ -7679,6 +7820,7 @@
                 "name": "MethodsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "google_endpoints_service.apis.methods",
             "name": "MethodsSetting",
             "threaded": true,
@@ -7815,6 +7957,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_autoscaler.autoscaling_policy.metric",
             "name": "MetricSetting",
             "threaded": true,
@@ -7900,6 +8043,7 @@
                     "original": "mqtt_enabled_state"
                 }
             ],
+            "dependencies": [],
             "key": "google_cloudiot_registry.mqtt_config",
             "name": "MqttConfigSetting",
             "threaded": true,
@@ -7968,6 +8112,7 @@
                     "original": "port"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_instance_group.named_port",
             "name": "NamedPortSetting",
             "threaded": true,
@@ -8088,6 +8233,7 @@
                     "original": "port"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_region_instance_group.instances.named_ports",
             "name": "NamedPortsSetting",
             "threaded": true,
@@ -8173,6 +8319,7 @@
                     "original": "source"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_instance.network",
             "name": "NetworkSetting",
             "threaded": true,
@@ -8361,6 +8508,12 @@
                     "original": "subnetwork_project"
                 }
             ],
+            "dependencies": [
+                "AccessConfigSetting",
+                "AliasIpRangeSetting",
+                "AccessConfigSetting",
+                "AliasIpRangeSetting"
+            ],
             "key": "google_compute_instance.network_interface",
             "name": "NetworkInterfaceSetting",
             "threaded": true,
@@ -8531,6 +8684,7 @@
                     "original": "provider"
                 }
             ],
+            "dependencies": [],
             "key": "google_container_cluster.network_policy",
             "name": "NetworkPolicySetting",
             "threaded": true,
@@ -8599,6 +8753,7 @@
                     "original": "disabled"
                 }
             ],
+            "dependencies": [],
             "key": "google_container_cluster.addons_config.network_policy_config",
             "name": "NetworkPolicyConfigSetting",
             "threaded": true,
@@ -8887,6 +9042,14 @@
                     "optional": true,
                     "original": "workload_metadata_config"
                 }
+            ],
+            "dependencies": [
+                "GuestAcceleratorSetting",
+                "TaintSetting",
+                "WorkloadMetadataConfigSetting",
+                "GuestAcceleratorSetting",
+                "TaintSetting",
+                "WorkloadMetadataConfigSetting"
             ],
             "key": "google_container_cluster.node_config",
             "name": "NodeConfigSetting",
@@ -9279,6 +9442,14 @@
                     "original": "version"
                 }
             ],
+            "dependencies": [
+                "AutoscalingSetting",
+                "ManagementSetting",
+                "NodeConfigSetting",
+                "ManagementSetting",
+                "NodeConfigSetting",
+                "AutoscalingSetting"
+            ],
             "key": "google_container_cluster.node_pool",
             "name": "NodePoolSetting",
             "threaded": true,
@@ -9517,6 +9688,9 @@
                     "original": "path_rule"
                 }
             ],
+            "dependencies": [
+                "PathRuleSetting"
+            ],
             "key": "google_compute_url_map.path_matcher",
             "name": "PathMatcherSetting",
             "threaded": true,
@@ -9602,6 +9776,7 @@
                     "original": "service"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_url_map.path_matcher.path_rule",
             "name": "PathRuleSetting",
             "threaded": true,
@@ -9786,6 +9961,10 @@
                     "original": "script_variables"
                 }
             ],
+            "dependencies": [
+                "LoggingConfigSetting",
+                "LoggingConfigSetting"
+            ],
             "key": "google_dataproc_job.pig_config",
             "name": "PigConfigSetting",
             "threaded": true,
@@ -9888,6 +10067,7 @@
                     "original": "cluster_name"
                 }
             ],
+            "dependencies": [],
             "key": "google_dataproc_job.placement",
             "name": "PlacementSetting",
             "threaded": true,
@@ -9962,6 +10142,7 @@
                     "original": "enabled"
                 }
             ],
+            "dependencies": [],
             "key": "google_container_cluster.pod_security_policy_config",
             "name": "PodSecurityPolicyConfigSetting",
             "threaded": true,
@@ -10047,6 +10228,10 @@
                     "optional": true,
                     "original": "num_instances"
                 }
+            ],
+            "dependencies": [
+                "DiskConfigSetting",
+                "DiskConfigSetting"
             ],
             "key": "google_dataproc_cluster.cluster_config.preemptible_worker_config",
             "name": "PreemptibleWorkerConfigSetting",
@@ -10150,6 +10335,7 @@
                     "original": "format"
                 }
             ],
+            "dependencies": [],
             "key": "google_cloudiot_registry.credentials.public_key_certificate",
             "name": "PublicKeyCertificateSetting",
             "threaded": true,
@@ -10235,6 +10421,7 @@
                     "original": "push_endpoint"
                 }
             ],
+            "dependencies": [],
             "key": "google_pubsub_subscription.push_config",
             "name": "PushConfigSetting",
             "threaded": true,
@@ -10431,6 +10618,10 @@
                     "original": "python_file_uris"
                 }
             ],
+            "dependencies": [
+                "LoggingConfigSetting",
+                "LoggingConfigSetting"
+            ],
             "key": "google_dataproc_job.pyspark_config",
             "name": "PysparkConfigSetting",
             "threaded": true,
@@ -10539,6 +10730,7 @@
                     "original": "source"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_image.raw_disk",
             "name": "RawDiskSetting",
             "threaded": true,
@@ -10594,6 +10786,7 @@
                     "original": "job_id"
                 }
             ],
+            "dependencies": [],
             "key": "google_dataproc_job.reference",
             "name": "ReferenceSetting",
             "threaded": true,
@@ -10819,6 +11012,7 @@
                     "original": "verify_server_certificate"
                 }
             ],
+            "dependencies": [],
             "key": "google_sql_database_instance.replica_configuration",
             "name": "ReplicaConfigurationSetting",
             "threaded": true,
@@ -10852,6 +11046,7 @@
                     "original": "default"
                 }
             ],
+            "dependencies": [],
             "key": "google_folder_organization_policy.restore_policy",
             "name": "RestorePolicySetting",
             "threaded": true,
@@ -11029,6 +11224,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_instance_group_manager.rolling_update_policy",
             "name": "RollingUpdatePolicySetting",
             "threaded": true,
@@ -11258,6 +11454,9 @@
                     "original": "priority"
                 }
             ],
+            "dependencies": [
+                "MatchSetting"
+            ],
             "key": "google_compute_security_policy.rule",
             "name": "RuleSetting",
             "threaded": true,
@@ -11397,6 +11596,7 @@
                     "original": "max_failures_per_hour"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_instance.scheduling",
             "name": "SchedulingSetting",
             "threaded": true,
@@ -11482,6 +11682,7 @@
                     "original": "interface"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_instance.scratch_disk",
             "name": "ScratchDiskSetting",
             "threaded": true,
@@ -11550,6 +11751,7 @@
                     "original": "range_name"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_subnetwork.secondary_ip_range",
             "name": "SecondaryIpRangeSetting",
             "threaded": true,
@@ -11635,6 +11837,7 @@
                 "name": "ServerCaCertSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "google_sql_database_instance.server_ca_cert",
             "name": "ServerCaCertSetting",
             "threaded": true,
@@ -11771,6 +11974,7 @@
                     "original": "scopes"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_instance.service_account",
             "name": "ServiceAccountSetting",
             "threaded": true,
@@ -12095,6 +12299,16 @@
                     "original": "user_labels"
                 }
             ],
+            "dependencies": [
+                "BackupConfigurationSetting",
+                "DatabaseFlagsSetting",
+                "IpConfigurationSetting",
+                "LocationPreferenceSetting",
+                "MaintenanceWindowSetting",
+                "BackupConfigurationSetting",
+                "IpConfigurationSetting",
+                "LocationPreferenceSetting"
+            ],
             "key": "google_sql_database_instance.settings",
             "name": "Settings",
             "threaded": true,
@@ -12317,6 +12531,7 @@
                     "original": "override_properties"
                 }
             ],
+            "dependencies": [],
             "key": "google_dataproc_cluster.cluster_config.software_config",
             "name": "SoftwareConfigSetting",
             "threaded": true,
@@ -12385,6 +12600,7 @@
                     "original": "raw_key"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_disk.source_image_encryption_key",
             "name": "SourceImageEncryptionKeySetting",
             "threaded": true,
@@ -12436,6 +12652,7 @@
                     "original": "raw_key"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_disk.source_snapshot_encryption_key",
             "name": "SourceSnapshotEncryptionKeySetting",
             "threaded": true,
@@ -12619,6 +12836,10 @@
                     "optional": true,
                     "original": "properties"
                 }
+            ],
+            "dependencies": [
+                "LoggingConfigSetting",
+                "LoggingConfigSetting"
             ],
             "key": "google_dataproc_job.spark_config",
             "name": "SparkConfigSetting",
@@ -12819,6 +13040,10 @@
                     "original": "script_variables"
                 }
             ],
+            "dependencies": [
+                "LoggingConfigSetting",
+                "LoggingConfigSetting"
+            ],
             "key": "google_dataproc_job.sparksql_config",
             "name": "SparksqlConfigSetting",
             "threaded": true,
@@ -12970,6 +13195,7 @@
                     "original": "response"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_health_check.ssl_health_check",
             "name": "SslHealthCheckSetting",
             "threaded": true,
@@ -13003,6 +13229,7 @@
                     "original": "pubsub_topic_name"
                 }
             ],
+            "dependencies": [],
             "key": "google_cloudiot_registry.state_notification_config",
             "name": "StateNotificationConfigSetting",
             "threaded": true,
@@ -13036,6 +13263,7 @@
                 "name": "StatusSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "google_dataproc_job.status",
             "name": "StatusSetting",
             "threaded": true,
@@ -13165,6 +13393,7 @@
                     "original": "name"
                 }
             ],
+            "dependencies": [],
             "key": "google_cloudbuild_trigger.build.step",
             "name": "StepSetting",
             "threaded": true,
@@ -13232,6 +13461,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "google_container_cluster.node_config.taint",
             "name": "TaintSetting",
             "threaded": true,
@@ -13386,6 +13616,7 @@
                     "original": "percent"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_instance_group_manager.version.target_size",
             "name": "TargetSizeSetting",
             "threaded": true,
@@ -13470,6 +13701,7 @@
                     "original": "response"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_health_check.tcp_health_check",
             "name": "TcpHealthCheckSetting",
             "threaded": true,
@@ -13554,6 +13786,7 @@
                     "original": "service"
                 }
             ],
+            "dependencies": [],
             "key": "google_compute_url_map.test",
             "name": "TestSetting",
             "threaded": true,
@@ -13673,6 +13906,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "google_bigquery_table.time_partitioning",
             "name": "TimePartitioningSetting",
             "threaded": true,
@@ -13809,6 +14043,7 @@
                     "original": "tag_name"
                 }
             ],
+            "dependencies": [],
             "key": "google_cloudbuild_trigger.trigger_template",
             "name": "TriggerTemplateSetting",
             "threaded": true,
@@ -13824,6 +14059,7 @@
                 "name": "UrlDispatchRuleSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "google_project.app_engine.url_dispatch_rule",
             "name": "UrlDispatchRuleSetting",
             "threaded": true,
@@ -13943,6 +14179,9 @@
                     "original": "target_size"
                 }
             ],
+            "dependencies": [
+                "TargetSizeSetting"
+            ],
             "key": "google_compute_instance_group_manager.version",
             "name": "VersionSetting",
             "threaded": true,
@@ -14011,6 +14250,7 @@
                     "original": "enabled"
                 }
             ],
+            "dependencies": [],
             "key": "google_storage_bucket.versioning",
             "name": "VersioningSetting",
             "threaded": true,
@@ -14061,6 +14301,7 @@
                     "original": "use_legacy_sql"
                 }
             ],
+            "dependencies": [],
             "key": "google_bigquery_table.view",
             "name": "ViewSetting",
             "threaded": true,
@@ -14129,6 +14370,7 @@
                     "original": "not_found_page"
                 }
             ],
+            "dependencies": [],
             "key": "google_storage_bucket.website",
             "name": "WebsiteSetting",
             "threaded": true,
@@ -14195,6 +14437,10 @@
                     "optional": true,
                     "original": "num_instances"
                 }
+            ],
+            "dependencies": [
+                "DiskConfigSetting",
+                "DiskConfigSetting"
             ],
             "key": "google_dataproc_cluster.cluster_config.worker_config",
             "name": "WorkerConfigSetting",
@@ -14298,6 +14544,7 @@
                     "original": "node_metadata"
                 }
             ],
+            "dependencies": [],
             "key": "google_container_cluster.node_config.workload_metadata_config",
             "name": "WorkloadMetadataConfigSetting",
             "threaded": true,
@@ -14388,6 +14635,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/active_folder.html",
+            "dependencies": [],
             "key": "google_active_folder",
             "name": "ActiveFolderData",
             "threaded": true,
@@ -14538,6 +14786,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/billing_account.html",
+            "dependencies": [],
             "key": "google_billing_account",
             "name": "BillingAccountData",
             "threaded": true,
@@ -14689,6 +14938,7 @@
             },
             "arguments": [],
             "url": "https://www.terraform.io/docs/providers/google/d/client_config.html",
+            "dependencies": [],
             "key": "google_client_config",
             "name": "ClientConfigData",
             "threaded": true,
@@ -14826,6 +15076,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/cloudfunctions_function.html",
+            "dependencies": [],
             "key": "google_cloudfunctions_function",
             "name": "CloudfunctionsFunctionData",
             "threaded": true,
@@ -15134,6 +15385,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/compute_address.html",
+            "dependencies": [],
             "key": "google_compute_address",
             "name": "ComputeAddressData",
             "threaded": true,
@@ -15306,6 +15558,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/compute_backend_service.html",
+            "dependencies": [
+                "BackendSetting",
+                "CdnPolicySetting",
+                "IapSetting"
+            ],
             "key": "google_compute_backend_service",
             "name": "ComputeBackendServiceData",
             "threaded": true,
@@ -15648,6 +15905,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/compute_default_service_account.html",
+            "dependencies": [],
             "key": "google_compute_default_service_account",
             "name": "ComputeDefaultServiceAccountData",
             "threaded": true,
@@ -15768,6 +16026,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/compute_forwarding_rule.html",
+            "dependencies": [],
             "key": "google_compute_forwarding_rule",
             "name": "ComputeForwardingRuleData",
             "threaded": true,
@@ -16076,6 +16335,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/compute_global_address.html",
+            "dependencies": [],
             "key": "google_compute_global_address",
             "name": "ComputeGlobalAddressData",
             "threaded": true,
@@ -16260,6 +16520,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/compute_image.html",
+            "dependencies": [],
             "key": "google_compute_image",
             "name": "ComputeImageData",
             "threaded": true,
@@ -16743,6 +17004,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/compute_instance_group.html",
+            "dependencies": [
+                "NamedPortSetting"
+            ],
             "key": "google_compute_instance_group",
             "name": "ComputeInstanceGroupData",
             "threaded": true,
@@ -16993,6 +17257,7 @@
             },
             "arguments": [],
             "url": "https://www.terraform.io/docs/providers/google/d/compute_lb_ip_ranges.html",
+            "dependencies": [],
             "key": "google_compute_lb_ip_ranges",
             "name": "ComputeLbIpRangesData",
             "threaded": true,
@@ -17096,6 +17361,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/compute_network.html",
+            "dependencies": [],
             "key": "google_compute_network",
             "name": "ComputeNetworkData",
             "threaded": true,
@@ -17285,6 +17551,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/compute_region_instance_group.html",
+            "dependencies": [
+                "InstancesSetting"
+            ],
             "key": "google_compute_region_instance_group",
             "name": "ComputeRegionInstanceGroupData",
             "threaded": true,
@@ -17456,6 +17725,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/compute_regions.html",
+            "dependencies": [],
             "key": "google_compute_regions",
             "name": "ComputeRegionsData",
             "threaded": true,
@@ -17559,6 +17829,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/compute_ssl_policy.html",
+            "dependencies": [],
             "key": "google_compute_ssl_policy",
             "name": "ComputeSslPolicyData",
             "threaded": true,
@@ -17799,6 +18070,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/compute_subnetwork.html",
+            "dependencies": [
+                "SecondaryIpRangeSetting"
+            ],
             "key": "google_compute_subnetwork",
             "name": "ComputeSubnetworkData",
             "threaded": true,
@@ -18056,6 +18330,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/compute_vpn_gateway.html",
+            "dependencies": [],
             "key": "google_compute_vpn_gateway",
             "name": "ComputeVpnGatewayData",
             "threaded": true,
@@ -18245,6 +18520,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/compute_zones.html",
+            "dependencies": [],
             "key": "google_compute_zones",
             "name": "ComputeZonesData",
             "threaded": true,
@@ -18382,6 +18658,17 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/container_cluster.html",
+            "dependencies": [
+                "AddonsConfigSetting",
+                "IpAllocationPolicySetting",
+                "MaintenancePolicySetting",
+                "MasterAuthSetting",
+                "MasterAuthorizedNetworksConfigSetting",
+                "NetworkPolicySetting",
+                "NodeConfigSetting",
+                "NodePoolSetting",
+                "PodSecurityPolicyConfigSetting"
+            ],
             "key": "google_container_cluster",
             "name": "ContainerClusterData",
             "threaded": true,
@@ -18945,6 +19232,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/container_engine_versions.html",
+            "dependencies": [],
             "key": "google_container_engine_versions",
             "name": "ContainerEngineVersionsData",
             "threaded": true,
@@ -19150,6 +19438,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/container_registry_image.html",
+            "dependencies": [],
             "key": "google_container_registry_image",
             "name": "ContainerRegistryImageData",
             "threaded": true,
@@ -19271,6 +19560,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/container_registry_repository.html",
+            "dependencies": [],
             "key": "google_container_registry_repository",
             "name": "ContainerRegistryRepositoryData",
             "threaded": true,
@@ -19374,6 +19664,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/dns_managed_zone.html",
+            "dependencies": [],
             "key": "google_dns_managed_zone",
             "name": "DnsManagedZoneData",
             "threaded": true,
@@ -19512,6 +19803,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/folder.html",
+            "dependencies": [],
             "key": "google_folder",
             "name": "FolderData",
             "threaded": true,
@@ -19684,6 +19976,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/iam_policy.html",
+            "dependencies": [
+                "BindingSetting"
+            ],
             "key": "google_iam_policy",
             "name": "IamPolicyData",
             "threaded": true,
@@ -19788,6 +20083,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/kms_secret.html",
+            "dependencies": [],
             "key": "google_kms_secret",
             "name": "KmsSecretData",
             "threaded": true,
@@ -19874,6 +20170,7 @@
             },
             "arguments": [],
             "url": "https://www.terraform.io/docs/providers/google/d/netblock_ip_ranges.html",
+            "dependencies": [],
             "key": "google_netblock_ip_ranges",
             "name": "NetblockIpRangesData",
             "threaded": true,
@@ -20006,6 +20303,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/organization.html",
+            "dependencies": [],
             "key": "google_organization",
             "name": "OrganizationData",
             "threaded": true,
@@ -20192,6 +20490,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/project.html",
+            "dependencies": [
+                "AppEngineSetting"
+            ],
             "key": "google_project",
             "name": "ProjectData",
             "threaded": true,
@@ -20448,6 +20749,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/service_account.html",
+            "dependencies": [],
             "key": "google_service_account",
             "name": "ServiceAccountData",
             "threaded": true,
@@ -20620,6 +20922,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/service_account_key.html",
+            "dependencies": [],
             "key": "google_service_account_key",
             "name": "ServiceAccountKeyData",
             "threaded": true,
@@ -20860,6 +21163,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/storage_object_signed_url.html",
+            "dependencies": [],
             "key": "google_storage_object_signed_url",
             "name": "StorageObjectSignedUrlData",
             "threaded": true,
@@ -20964,6 +21268,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/d/storage_project_service_account.html",
+            "dependencies": [],
             "key": "google_storage_project_service_account",
             "name": "StorageProjectServiceAccountData",
             "threaded": true,
@@ -21137,6 +21442,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/bigquery_dataset.html",
+            "dependencies": [],
             "key": "google_bigquery_dataset",
             "name": "BigqueryDatasetResource",
             "threaded": true,
@@ -21445,6 +21751,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/bigquery_table.html",
+            "dependencies": [
+                "TimePartitioningSetting",
+                "ViewSetting"
+            ],
             "key": "google_bigquery_table",
             "name": "BigqueryTableResource",
             "threaded": true,
@@ -21855,6 +22165,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/bigtable_instance.html",
+            "dependencies": [],
             "key": "google_bigtable_instance",
             "name": "BigtableInstanceResource",
             "threaded": true,
@@ -22044,6 +22355,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/bigtable_table.html",
+            "dependencies": [],
             "key": "google_bigtable_table",
             "name": "BigtableTableResource",
             "threaded": true,
@@ -22247,6 +22559,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/cloudbuild_trigger.html",
+            "dependencies": [
+                "BuildSetting",
+                "TriggerTemplateSetting"
+            ],
             "key": "google_cloudbuild_trigger",
             "name": "CloudbuildTriggerResource",
             "threaded": true,
@@ -22647,6 +22963,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/cloudfunctions_function.html",
+            "dependencies": [],
             "key": "google_cloudfunctions_function",
             "name": "CloudfunctionsFunctionResource",
             "threaded": true,
@@ -23034,6 +23351,13 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/cloudiot_registry.html",
+            "dependencies": [
+                "CredentialsSetting",
+                "EventNotificationConfigSetting",
+                "HttpConfigSetting",
+                "MqttConfigSetting",
+                "StateNotificationConfigSetting"
+            ],
             "key": "google_cloudiot_registry",
             "name": "CloudiotRegistryResource",
             "threaded": true,
@@ -23274,6 +23598,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_address.html",
+            "dependencies": [],
             "key": "google_compute_address",
             "name": "ComputeAddressResource",
             "threaded": true,
@@ -23582,6 +23907,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_autoscaler.html",
+            "dependencies": [
+                "AutoscalingPolicySetting"
+            ],
             "key": "google_compute_autoscaler",
             "name": "ComputeAutoscalerResource",
             "threaded": true,
@@ -23822,6 +24150,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_backend_bucket.html",
+            "dependencies": [],
             "key": "google_compute_backend_bucket",
             "name": "ComputeBackendBucketResource",
             "threaded": true,
@@ -24215,6 +24544,12 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_backend_service.html",
+            "dependencies": [
+                "BackendSetting",
+                "CdnPolicySetting",
+                "IapSetting",
+                "CdnPolicySetting"
+            ],
             "key": "google_compute_backend_service",
             "name": "ComputeBackendServiceResource",
             "threaded": true,
@@ -24625,6 +24960,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_disk.html",
+            "dependencies": [
+                "DiskEncryptionKeySetting",
+                "SourceImageEncryptionKeySetting",
+                "SourceSnapshotEncryptionKeySetting"
+            ],
             "key": "google_compute_disk",
             "name": "ComputeDiskResource",
             "threaded": true,
@@ -25198,6 +25538,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_firewall.html",
+            "dependencies": [
+                "AllowSetting",
+                "DenySetting"
+            ],
             "key": "google_compute_firewall",
             "name": "ComputeFirewallResource",
             "threaded": true,
@@ -25860,6 +26204,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_forwarding_rule.html",
+            "dependencies": [],
             "key": "google_compute_forwarding_rule",
             "name": "ComputeForwardingRuleResource",
             "threaded": true,
@@ -26185,6 +26530,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_global_address.html",
+            "dependencies": [],
             "key": "google_compute_global_address",
             "name": "ComputeGlobalAddressResource",
             "threaded": true,
@@ -26493,6 +26839,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_global_forwarding_rule.html",
+            "dependencies": [],
             "key": "google_compute_global_forwarding_rule",
             "name": "ComputeGlobalForwardingRuleResource",
             "threaded": true,
@@ -26899,6 +27246,12 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_health_check.html",
+            "dependencies": [
+                "HttpHealthCheckSetting",
+                "HttpsHealthCheckSetting",
+                "SslHealthCheckSetting",
+                "TcpHealthCheckSetting"
+            ],
             "key": "google_compute_health_check",
             "name": "ComputeHealthCheckResource",
             "threaded": true,
@@ -27289,6 +27642,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_http_health_check.html",
+            "dependencies": [],
             "key": "google_compute_http_health_check",
             "name": "ComputeHttpHealthCheckResource",
             "threaded": true,
@@ -27563,6 +27917,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_https_health_check.html",
+            "dependencies": [],
             "key": "google_compute_https_health_check",
             "name": "ComputeHttpsHealthCheckResource",
             "threaded": true,
@@ -27803,6 +28158,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_image.html",
+            "dependencies": [
+                "RawDiskSetting"
+            ],
             "key": "google_compute_image",
             "name": "ComputeImageResource",
             "threaded": true,
@@ -28298,6 +28656,19 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_instance.html",
+            "dependencies": [
+                "AttachedDiskSetting",
+                "BootDiskSetting",
+                "DiskSetting",
+                "GuestAcceleratorSetting",
+                "NetworkSetting",
+                "NetworkInterfaceSetting",
+                "SchedulingSetting",
+                "ScratchDiskSetting",
+                "ServiceAccountSetting",
+                "GuestAcceleratorSetting",
+                "SchedulingSetting"
+            ],
             "key": "google_compute_instance",
             "name": "ComputeInstanceResource",
             "threaded": true,
@@ -28878,6 +29249,20 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_instance_from_template.html",
+            "dependencies": [
+                "AttachedDiskSetting",
+                "GuestAcceleratorSetting",
+                "SchedulingSetting",
+                "ScratchDiskSetting",
+                "ServiceAccountSetting",
+                "AttachedDiskSetting",
+                "BootDiskSetting",
+                "GuestAcceleratorSetting",
+                "NetworkInterfaceSetting",
+                "SchedulingSetting",
+                "ScratchDiskSetting",
+                "ServiceAccountSetting"
+            ],
             "key": "google_compute_instance_from_template",
             "name": "ComputeInstanceFromTemplateResource",
             "threaded": true,
@@ -29492,6 +29877,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_instance_group.html",
+            "dependencies": [
+                "NamedPortSetting"
+            ],
             "key": "google_compute_instance_group",
             "name": "ComputeInstanceGroupResource",
             "threaded": true,
@@ -29885,6 +30273,13 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_instance_group_manager.html",
+            "dependencies": [
+                "AutoHealingPoliciesSetting",
+                "NamedPortSetting",
+                "RollingUpdatePolicySetting",
+                "VersionSetting",
+                "VersionSetting"
+            ],
             "key": "google_compute_instance_group_manager",
             "name": "ComputeInstanceGroupManagerResource",
             "threaded": true,
@@ -30426,6 +30821,14 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_instance_template.html",
+            "dependencies": [
+                "DiskSetting",
+                "GuestAcceleratorSetting",
+                "NetworkInterfaceSetting",
+                "SchedulingSetting",
+                "ServiceAccountSetting",
+                "SchedulingSetting"
+            ],
             "key": "google_compute_instance_template",
             "name": "ComputeInstanceTemplateResource",
             "threaded": true,
@@ -30766,6 +31169,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_network.html",
+            "dependencies": [],
             "key": "google_compute_network",
             "name": "ComputeNetworkResource",
             "threaded": true,
@@ -30955,6 +31359,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_network_peering.html",
+            "dependencies": [],
             "key": "google_compute_network_peering",
             "name": "ComputeNetworkPeeringResource",
             "threaded": true,
@@ -31110,6 +31515,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_project_metadata.html",
+            "dependencies": [],
             "key": "google_compute_project_metadata",
             "name": "ComputeProjectMetadataResource",
             "threaded": true,
@@ -31231,6 +31637,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_project_metadata_item.html",
+            "dependencies": [],
             "key": "google_compute_project_metadata_item",
             "name": "ComputeProjectMetadataItemResource",
             "threaded": true,
@@ -31420,6 +31827,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_region_autoscaler.html",
+            "dependencies": [
+                "AutoscalingPolicySetting"
+            ],
             "key": "google_compute_region_autoscaler",
             "name": "ComputeRegionAutoscalerResource",
             "threaded": true,
@@ -31745,6 +32155,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_region_backend_service.html",
+            "dependencies": [
+                "BackendSetting"
+            ],
             "key": "google_compute_region_backend_service",
             "name": "ComputeRegionBackendServiceResource",
             "threaded": true,
@@ -32121,6 +32534,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_region_disk.html",
+            "dependencies": [
+                "DiskEncryptionKeySetting",
+                "SourceSnapshotEncryptionKeySetting"
+            ],
             "key": "google_compute_region_disk",
             "name": "ComputeRegionDiskResource",
             "threaded": true,
@@ -32616,6 +33033,13 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_region_instance_group_manager.html",
+            "dependencies": [
+                "AutoHealingPoliciesSetting",
+                "NamedPortSetting",
+                "RollingUpdatePolicySetting",
+                "VersionSetting",
+                "VersionSetting"
+            ],
             "key": "google_compute_region_instance_group_manager",
             "name": "ComputeRegionInstanceGroupManagerResource",
             "threaded": true,
@@ -33026,6 +33450,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_route.html",
+            "dependencies": [],
             "key": "google_compute_route",
             "name": "ComputeRouteResource",
             "threaded": true,
@@ -33266,6 +33691,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_router.html",
+            "dependencies": [
+                "BgpSetting"
+            ],
             "key": "google_compute_router",
             "name": "ComputeRouterResource",
             "threaded": true,
@@ -33506,6 +33934,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_router_interface.html",
+            "dependencies": [],
             "key": "google_compute_router_interface",
             "name": "ComputeRouterInterfaceResource",
             "threaded": true,
@@ -33763,6 +34192,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_router_peer.html",
+            "dependencies": [],
             "key": "google_compute_router_peer",
             "name": "ComputeRouterPeerResource",
             "threaded": true,
@@ -33986,6 +34416,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_security_policy.html",
+            "dependencies": [
+                "RuleSetting",
+                "RuleSetting"
+            ],
             "key": "google_compute_security_policy",
             "name": "ComputeSecurityPolicyResource",
             "threaded": true,
@@ -34124,6 +34558,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_shared_vpc_host_project.html",
+            "dependencies": [],
             "key": "google_compute_shared_vpc_host_project",
             "name": "ComputeSharedVpcHostProjectResource",
             "threaded": true,
@@ -34211,6 +34646,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_shared_vpc_service_project.html",
+            "dependencies": [],
             "key": "google_compute_shared_vpc_service_project",
             "name": "ComputeSharedVpcServiceProjectResource",
             "threaded": true,
@@ -34400,6 +34836,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_snapshot.html",
+            "dependencies": [],
             "key": "google_compute_snapshot",
             "name": "ComputeSnapshotResource",
             "threaded": true,
@@ -34703,6 +35140,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_ssl_certificate.html",
+            "dependencies": [],
             "key": "google_compute_ssl_certificate",
             "name": "ComputeSslCertificateResource",
             "threaded": true,
@@ -35011,6 +35449,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_ssl_policy.html",
+            "dependencies": [],
             "key": "google_compute_ssl_policy",
             "name": "ComputeSslPolicyResource",
             "threaded": true,
@@ -35302,6 +35741,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_subnetwork.html",
+            "dependencies": [
+                "SecondaryIpRangeSetting",
+                "SecondaryIpRangeSetting"
+            ],
             "key": "google_compute_subnetwork",
             "name": "ComputeSubnetworkResource",
             "threaded": true,
@@ -35593,6 +36036,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_subnetwork_iam_binding.html",
+            "dependencies": [],
             "key": "google_compute_subnetwork_iam_binding",
             "name": "ComputeSubnetworkIamBindingResource",
             "threaded": true,
@@ -35816,6 +36260,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_subnetwork_iam_member.html",
+            "dependencies": [],
             "key": "google_compute_subnetwork_iam_member",
             "name": "ComputeSubnetworkIamMemberResource",
             "threaded": true,
@@ -36022,6 +36467,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_subnetwork_iam_policy.html",
+            "dependencies": [],
             "key": "google_compute_subnetwork_iam_policy",
             "name": "ComputeSubnetworkIamPolicyResource",
             "threaded": true,
@@ -36211,6 +36657,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_target_http_proxy.html",
+            "dependencies": [],
             "key": "google_compute_target_http_proxy",
             "name": "ComputeTargetHttpProxyResource",
             "threaded": true,
@@ -36468,6 +36915,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_target_https_proxy.html",
+            "dependencies": [],
             "key": "google_compute_target_https_proxy",
             "name": "ComputeTargetHttpsProxyResource",
             "threaded": true,
@@ -36776,6 +37224,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_target_pool.html",
+            "dependencies": [],
             "key": "google_compute_target_pool",
             "name": "ComputeTargetPoolResource",
             "threaded": true,
@@ -37016,6 +37465,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_target_ssl_proxy.html",
+            "dependencies": [],
             "key": "google_compute_target_ssl_proxy",
             "name": "ComputeTargetSslProxyResource",
             "threaded": true,
@@ -37256,6 +37706,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_target_tcp_proxy.html",
+            "dependencies": [],
             "key": "google_compute_target_tcp_proxy",
             "name": "ComputeTargetTcpProxyResource",
             "threaded": true,
@@ -37513,6 +37964,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_url_map.html",
+            "dependencies": [
+                "HostRuleSetting",
+                "PathMatcherSetting",
+                "TestSetting"
+            ],
             "key": "google_compute_url_map",
             "name": "ComputeUrlMapResource",
             "threaded": true,
@@ -37736,6 +38192,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_vpn_gateway.html",
+            "dependencies": [],
             "key": "google_compute_vpn_gateway",
             "name": "ComputeVpnGatewayResource",
             "threaded": true,
@@ -38078,6 +38535,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/compute_vpn_tunnel.html",
+            "dependencies": [],
             "key": "google_compute_vpn_tunnel",
             "name": "ComputeVpnTunnelResource",
             "threaded": true,
@@ -38840,6 +39298,22 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/container_cluster.html",
+            "dependencies": [
+                "AddonsConfigSetting",
+                "IpAllocationPolicySetting",
+                "MaintenancePolicySetting",
+                "MasterAuthSetting",
+                "MasterAuthorizedNetworksConfigSetting",
+                "NetworkPolicySetting",
+                "NodeConfigSetting",
+                "NodePoolSetting",
+                "PodSecurityPolicyConfigSetting",
+                "AddonsConfigSetting",
+                "MasterAuthSetting",
+                "NetworkPolicySetting",
+                "NodeConfigSetting",
+                "NodePoolSetting"
+            ],
             "key": "google_container_cluster",
             "name": "ContainerClusterResource",
             "threaded": true,
@@ -39420,6 +39894,13 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/container_node_pool.html",
+            "dependencies": [
+                "AutoscalingSetting",
+                "ManagementSetting",
+                "NodeConfigSetting",
+                "ManagementSetting",
+                "NodeConfigSetting"
+            ],
             "key": "google_container_node_pool",
             "name": "ContainerNodePoolResource",
             "threaded": true,
@@ -39762,6 +40243,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/dataflow_job.html",
+            "dependencies": [],
             "key": "google_dataflow_job",
             "name": "DataflowJobResource",
             "threaded": true,
@@ -39951,6 +40433,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/dataproc_cluster.html",
+            "dependencies": [
+                "ClusterConfigSetting",
+                "ClusterConfigSetting"
+            ],
             "key": "google_dataproc_cluster",
             "name": "DataprocClusterResource",
             "threaded": true,
@@ -40436,6 +40922,19 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/dataproc_job.html",
+            "dependencies": [
+                "HadoopConfigSetting",
+                "HiveConfigSetting",
+                "PigConfigSetting",
+                "PlacementSetting",
+                "PysparkConfigSetting",
+                "ReferenceSetting",
+                "SchedulingSetting",
+                "SparkConfigSetting",
+                "SparksqlConfigSetting",
+                "ReferenceSetting",
+                "StatusSetting"
+            ],
             "key": "google_dataproc_job",
             "name": "DataprocJobResource",
             "threaded": true,
@@ -40908,6 +41407,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/dns_managed_zone.html",
+            "dependencies": [],
             "key": "google_dns_managed_zone",
             "name": "DnsManagedZoneResource",
             "threaded": true,
@@ -41114,6 +41614,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/dns_record_set.html",
+            "dependencies": [],
             "key": "google_dns_record_set",
             "name": "DnsRecordSetResource",
             "threaded": true,
@@ -41360,6 +41861,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/endpoints_service.html",
+            "dependencies": [
+                "ApisSetting",
+                "EndpointsSetting"
+            ],
             "key": "google_endpoints_service",
             "name": "EndpointsServiceResource",
             "threaded": true,
@@ -41607,6 +42112,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/folder.html",
+            "dependencies": [],
             "key": "google_folder",
             "name": "FolderResource",
             "threaded": true,
@@ -41779,6 +42285,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/folder_iam_binding.html",
+            "dependencies": [],
             "key": "google_folder_iam_binding",
             "name": "FolderIamBindingResource",
             "threaded": true,
@@ -41934,6 +42441,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/folder_iam_member.html",
+            "dependencies": [],
             "key": "google_folder_iam_member",
             "name": "FolderIamMemberResource",
             "threaded": true,
@@ -42072,6 +42580,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/folder_iam_policy.html",
+            "dependencies": [],
             "key": "google_folder_iam_policy",
             "name": "FolderIamPolicyResource",
             "threaded": true,
@@ -42294,6 +42803,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/folder_organization_policy.html",
+            "dependencies": [
+                "BooleanPolicySetting",
+                "ListPolicySetting",
+                "RestorePolicySetting"
+            ],
             "key": "google_folder_organization_policy",
             "name": "FolderOrganizationPolicyResource",
             "threaded": true,
@@ -42551,6 +43065,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/kms_crypto_key.html",
+            "dependencies": [],
             "key": "google_kms_crypto_key",
             "name": "KmsCryptoKeyResource",
             "threaded": true,
@@ -42672,6 +43187,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/kms_crypto_key_iam_binding.html",
+            "dependencies": [],
             "key": "google_kms_crypto_key_iam_binding",
             "name": "KmsCryptoKeyIamBindingResource",
             "threaded": true,
@@ -42827,6 +43343,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/kms_crypto_key_iam_member.html",
+            "dependencies": [],
             "key": "google_kms_crypto_key_iam_member",
             "name": "KmsCryptoKeyIamMemberResource",
             "threaded": true,
@@ -42982,6 +43499,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/kms_key_ring.html",
+            "dependencies": [],
             "key": "google_kms_key_ring",
             "name": "KmsKeyRingResource",
             "threaded": true,
@@ -43120,6 +43638,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/kms_key_ring_iam_binding.html",
+            "dependencies": [],
             "key": "google_kms_key_ring_iam_binding",
             "name": "KmsKeyRingIamBindingResource",
             "threaded": true,
@@ -43275,6 +43794,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/kms_key_ring_iam_member.html",
+            "dependencies": [],
             "key": "google_kms_key_ring_iam_member",
             "name": "KmsKeyRingIamMemberResource",
             "threaded": true,
@@ -43413,6 +43933,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/kms_key_ring_iam_policy.html",
+            "dependencies": [],
             "key": "google_kms_key_ring_iam_policy",
             "name": "KmsKeyRingIamPolicyResource",
             "threaded": true,
@@ -43585,6 +44106,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/logging_billing_account_exclusion.html",
+            "dependencies": [],
             "key": "google_logging_billing_account_exclusion",
             "name": "LoggingBillingAccountExclusionResource",
             "threaded": true,
@@ -43740,6 +44262,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/logging_billing_account_sink.html",
+            "dependencies": [],
             "key": "google_logging_billing_account_sink",
             "name": "LoggingBillingAccountSinkResource",
             "threaded": true,
@@ -43929,6 +44452,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/logging_folder_exclusion.html",
+            "dependencies": [],
             "key": "google_logging_folder_exclusion",
             "name": "LoggingFolderExclusionResource",
             "threaded": true,
@@ -44101,6 +44625,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/logging_folder_sink.html",
+            "dependencies": [],
             "key": "google_logging_folder_sink",
             "name": "LoggingFolderSinkResource",
             "threaded": true,
@@ -44290,6 +44815,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/logging_organization_exclusion.html",
+            "dependencies": [],
             "key": "google_logging_organization_exclusion",
             "name": "LoggingOrganizationExclusionResource",
             "threaded": true,
@@ -44462,6 +44988,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/logging_organization_sink.html",
+            "dependencies": [],
             "key": "google_logging_organization_sink",
             "name": "LoggingOrganizationSinkResource",
             "threaded": true,
@@ -44651,6 +45178,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/logging_project_exclusion.html",
+            "dependencies": [],
             "key": "google_logging_project_exclusion",
             "name": "LoggingProjectExclusionResource",
             "threaded": true,
@@ -44823,6 +45351,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/logging_project_sink.html",
+            "dependencies": [],
             "key": "google_logging_project_sink",
             "name": "LoggingProjectSinkResource",
             "threaded": true,
@@ -44978,6 +45507,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/organization_iam_binding.html",
+            "dependencies": [],
             "key": "google_organization_iam_binding",
             "name": "OrganizationIamBindingResource",
             "threaded": true,
@@ -45201,6 +45731,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/organization_iam_custom_role.html",
+            "dependencies": [],
             "key": "google_organization_iam_custom_role",
             "name": "OrganizationIamCustomRoleResource",
             "threaded": true,
@@ -45356,6 +45887,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/organization_iam_member.html",
+            "dependencies": [],
             "key": "google_organization_iam_member",
             "name": "OrganizationIamMemberResource",
             "threaded": true,
@@ -45494,6 +46026,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/organization_iam_policy.html",
+            "dependencies": [],
             "key": "google_organization_iam_policy",
             "name": "OrganizationIamPolicyResource",
             "threaded": true,
@@ -45716,6 +46249,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/organization_policy.html",
+            "dependencies": [
+                "BooleanPolicySetting",
+                "ListPolicySetting",
+                "RestorePolicySetting"
+            ],
             "key": "google_organization_policy",
             "name": "OrganizationPolicyResource",
             "threaded": true,
@@ -46092,6 +46630,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/project.html",
+            "dependencies": [
+                "AppEngineSetting"
+            ],
             "key": "google_project",
             "name": "ProjectResource",
             "threaded": true,
@@ -46315,6 +46856,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/project_iam_binding.html",
+            "dependencies": [],
             "key": "google_project_iam_binding",
             "name": "ProjectIamBindingResource",
             "threaded": true,
@@ -46521,6 +47063,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/project_iam_custom_role.html",
+            "dependencies": [],
             "key": "google_project_iam_custom_role",
             "name": "ProjectIamCustomRoleResource",
             "threaded": true,
@@ -46676,6 +47219,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/project_iam_member.html",
+            "dependencies": [],
             "key": "google_project_iam_member",
             "name": "ProjectIamMemberResource",
             "threaded": true,
@@ -46797,6 +47341,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/project_iam_policy.html",
+            "dependencies": [],
             "key": "google_project_iam_policy",
             "name": "ProjectIamPolicyResource",
             "threaded": true,
@@ -47036,6 +47581,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/project_organization_policy.html",
+            "dependencies": [
+                "BooleanPolicySetting",
+                "ListPolicySetting",
+                "RestorePolicySetting"
+            ],
             "key": "google_project_organization_policy",
             "name": "ProjectOrganizationPolicyResource",
             "threaded": true,
@@ -47293,6 +47843,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/project_service.html",
+            "dependencies": [],
             "key": "google_project_service",
             "name": "ProjectServiceResource",
             "threaded": true,
@@ -47414,6 +47965,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/project_services.html",
+            "dependencies": [],
             "key": "google_project_services",
             "name": "ProjectServicesResource",
             "threaded": true,
@@ -47535,6 +48087,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/project_usage_export_bucket.html",
+            "dependencies": [],
             "key": "google_project_usage_export_bucket",
             "name": "ProjectUsageExportBucketResource",
             "threaded": true,
@@ -47690,6 +48243,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/pubsub_subscription.html",
+            "dependencies": [
+                "PushConfigSetting"
+            ],
             "key": "google_pubsub_subscription",
             "name": "PubsubSubscriptionResource",
             "threaded": true,
@@ -47879,6 +48435,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/pubsub_subscription_iam_binding.html",
+            "dependencies": [],
             "key": "google_pubsub_subscription_iam_binding",
             "name": "PubsubSubscriptionIamBindingResource",
             "threaded": true,
@@ -48068,6 +48625,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/pubsub_subscription_iam_member.html",
+            "dependencies": [],
             "key": "google_pubsub_subscription_iam_member",
             "name": "PubsubSubscriptionIamMemberResource",
             "threaded": true,
@@ -48240,6 +48798,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/pubsub_subscription_iam_policy.html",
+            "dependencies": [],
             "key": "google_pubsub_subscription_iam_policy",
             "name": "PubsubSubscriptionIamPolicyResource",
             "threaded": true,
@@ -48378,6 +48937,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/pubsub_topic.html",
+            "dependencies": [],
             "key": "google_pubsub_topic",
             "name": "PubsubTopicResource",
             "threaded": true,
@@ -48516,6 +49076,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/pubsub_topic_iam_binding.html",
+            "dependencies": [],
             "key": "google_pubsub_topic_iam_binding",
             "name": "PubsubTopicIamBindingResource",
             "threaded": true,
@@ -48705,6 +49266,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/pubsub_topic_iam_member.html",
+            "dependencies": [],
             "key": "google_pubsub_topic_iam_member",
             "name": "PubsubTopicIamMemberResource",
             "threaded": true,
@@ -48877,6 +49439,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/pubsub_topic_iam_policy.html",
+            "dependencies": [],
             "key": "google_pubsub_topic_iam_policy",
             "name": "PubsubTopicIamPolicyResource",
             "threaded": true,
@@ -49202,6 +49765,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/redis_instance.html",
+            "dependencies": [],
             "key": "google_redis_instance",
             "name": "RedisInstanceResource",
             "threaded": true,
@@ -49527,6 +50091,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/resource_manager_lien.html",
+            "dependencies": [],
             "key": "google_resource_manager_lien",
             "name": "ResourceManagerLienResource",
             "threaded": true,
@@ -49716,6 +50281,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/runtimeconfig_config.html",
+            "dependencies": [],
             "key": "google_runtimeconfig_config",
             "name": "RuntimeconfigConfigResource",
             "threaded": true,
@@ -49883,6 +50449,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/runtimeconfig_variable.html",
+            "dependencies": [],
             "key": "google_runtimeconfig_variable",
             "name": "RuntimeconfigVariableResource",
             "threaded": true,
@@ -50085,6 +50652,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/service_account.html",
+            "dependencies": [],
             "key": "google_service_account",
             "name": "ServiceAccountResource",
             "threaded": true,
@@ -50257,6 +50825,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/service_account_iam_binding.html",
+            "dependencies": [],
             "key": "google_service_account_iam_binding",
             "name": "ServiceAccountIamBindingResource",
             "threaded": true,
@@ -50412,6 +50981,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/service_account_iam_member.html",
+            "dependencies": [],
             "key": "google_service_account_iam_member",
             "name": "ServiceAccountIamMemberResource",
             "threaded": true,
@@ -50550,6 +51120,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/service_account_iam_policy.html",
+            "dependencies": [],
             "key": "google_service_account_iam_policy",
             "name": "ServiceAccountIamPolicyResource",
             "threaded": true,
@@ -50722,6 +51293,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/service_account_key.html",
+            "dependencies": [],
             "key": "google_service_account_key",
             "name": "ServiceAccountKeyResource",
             "threaded": true,
@@ -50928,6 +51500,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/sourcerepo_repository.html",
+            "dependencies": [],
             "key": "google_sourcerepo_repository",
             "name": "SourcerepoRepositoryResource",
             "threaded": true,
@@ -51100,6 +51673,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/spanner_database.html",
+            "dependencies": [],
             "key": "google_spanner_database",
             "name": "SpannerDatabaseResource",
             "threaded": true,
@@ -51289,6 +51863,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/spanner_database_iam_binding.html",
+            "dependencies": [],
             "key": "google_spanner_database_iam_binding",
             "name": "SpannerDatabaseIamBindingResource",
             "threaded": true,
@@ -51512,6 +52087,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/spanner_database_iam_member.html",
+            "dependencies": [],
             "key": "google_spanner_database_iam_member",
             "name": "SpannerDatabaseIamMemberResource",
             "threaded": true,
@@ -51718,6 +52294,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/spanner_database_iam_policy.html",
+            "dependencies": [],
             "key": "google_spanner_database_iam_policy",
             "name": "SpannerDatabaseIamPolicyResource",
             "threaded": true,
@@ -51941,6 +52518,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/spanner_instance.html",
+            "dependencies": [],
             "key": "google_spanner_instance",
             "name": "SpannerInstanceResource",
             "threaded": true,
@@ -52130,6 +52708,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/spanner_instance_iam_binding.html",
+            "dependencies": [],
             "key": "google_spanner_instance_iam_binding",
             "name": "SpannerInstanceIamBindingResource",
             "threaded": true,
@@ -52319,6 +52898,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/spanner_instance_iam_member.html",
+            "dependencies": [],
             "key": "google_spanner_instance_iam_member",
             "name": "SpannerInstanceIamMemberResource",
             "threaded": true,
@@ -52491,6 +53071,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/spanner_instance_iam_policy.html",
+            "dependencies": [],
             "key": "google_spanner_instance_iam_policy",
             "name": "SpannerInstanceIamPolicyResource",
             "threaded": true,
@@ -52680,6 +53261,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/sql_database.html",
+            "dependencies": [],
             "key": "google_sql_database",
             "name": "SqlDatabaseResource",
             "threaded": true,
@@ -52937,6 +53519,13 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/sql_database_instance.html",
+            "dependencies": [
+                "ReplicaConfigurationSetting",
+                "Settings",
+                "IpAddressSetting",
+                "ReplicaConfigurationSetting",
+                "ServerCaCertSetting"
+            ],
             "key": "google_sql_database_instance",
             "name": "SqlDatabaseInstanceResource",
             "threaded": true,
@@ -53228,6 +53817,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/sql_user.html",
+            "dependencies": [],
             "key": "google_sql_user",
             "name": "SqlUserResource",
             "threaded": true,
@@ -53519,6 +54109,13 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/storage_bucket.html",
+            "dependencies": [
+                "CorsSetting",
+                "LifecycleRuleSetting",
+                "LoggingSetting",
+                "VersioningSetting",
+                "WebsiteSetting"
+            ],
             "key": "google_storage_bucket",
             "name": "StorageBucketResource",
             "threaded": true,
@@ -53703,6 +54300,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/storage_bucket_acl.html",
+            "dependencies": [],
             "key": "google_storage_bucket_acl",
             "name": "StorageBucketAclResource",
             "threaded": true,
@@ -53873,6 +54471,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/storage_bucket_iam_binding.html",
+            "dependencies": [],
             "key": "google_storage_bucket_iam_binding",
             "name": "StorageBucketIamBindingResource",
             "threaded": true,
@@ -54028,6 +54627,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/storage_bucket_iam_member.html",
+            "dependencies": [],
             "key": "google_storage_bucket_iam_member",
             "name": "StorageBucketIamMemberResource",
             "threaded": true,
@@ -54166,6 +54766,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/storage_bucket_iam_policy.html",
+            "dependencies": [],
             "key": "google_storage_bucket_iam_policy",
             "name": "StorageBucketIamPolicyResource",
             "threaded": true,
@@ -54469,6 +55070,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/storage_bucket_object.html",
+            "dependencies": [],
             "key": "google_storage_bucket_object",
             "name": "StorageBucketObjectResource",
             "threaded": true,
@@ -54688,6 +55290,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/storage_default_object_acl.html",
+            "dependencies": [],
             "key": "google_storage_default_object_acl",
             "name": "StorageDefaultObjectAclResource",
             "threaded": true,
@@ -54860,6 +55463,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/storage_notification.html",
+            "dependencies": [],
             "key": "google_storage_notification",
             "name": "StorageNotificationResource",
             "threaded": true,
@@ -55032,6 +55636,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/google/r/storage_object_acl.html",
+            "dependencies": [],
             "key": "google_storage_object_acl",
             "name": "StorageObjectAclResource",
             "threaded": true,
@@ -55187,6 +55792,7 @@
                 "original": "zone"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
