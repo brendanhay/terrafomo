@@ -58,6 +58,7 @@
                     "original": "name"
                 }
             ],
+            "dependencies": [],
             "key": "ultradns_dirpool.no_response.geo_info",
             "name": "GeoInfoSetting",
             "threaded": true,
@@ -107,6 +108,10 @@
                     "optional": true,
                     "original": "transaction"
                 }
+            ],
+            "dependencies": [
+                "TotalLimitsSetting",
+                "TransactionSetting"
             ],
             "key": "ultradns_probe_http.http_probe",
             "name": "HttpProbeSetting",
@@ -174,6 +179,9 @@
                     "optional": true,
                     "original": "name"
                 }
+            ],
+            "dependencies": [
+                "IpsSetting"
             ],
             "key": "ultradns_dirpool.no_response.ip_info",
             "name": "IpInfoSetting",
@@ -259,6 +267,7 @@
                     "original": "start"
                 }
             ],
+            "dependencies": [],
             "key": "ultradns_dirpool.no_response.ip_info.ips",
             "name": "IpsSetting",
             "threaded": true,
@@ -343,6 +352,7 @@
                     "original": "warning"
                 }
             ],
+            "dependencies": [],
             "key": "ultradns_probe_http.http_probe.transaction.limit",
             "name": "LimitSetting",
             "threaded": true,
@@ -479,6 +489,10 @@
                     "original": "ip_info"
                 }
             ],
+            "dependencies": [
+                "GeoInfoSetting",
+                "IpInfoSetting"
+            ],
             "key": "ultradns_dirpool.no_response",
             "name": "NoResponseSetting",
             "threaded": true,
@@ -545,6 +559,9 @@
                     "optional": true,
                     "original": "packets"
                 }
+            ],
+            "dependencies": [
+                "LimitSetting"
             ],
             "key": "ultradns_probe_ping.ping_probe",
             "name": "PingProbeSetting",
@@ -732,6 +749,10 @@
                     "original": "weight"
                 }
             ],
+            "dependencies": [
+                "GeoInfoSetting",
+                "IpInfoSetting"
+            ],
             "key": "ultradns_dirpool.rdata",
             "name": "RdataSetting",
             "threaded": true,
@@ -817,6 +838,7 @@
                     "original": "warning"
                 }
             ],
+            "dependencies": [],
             "key": "ultradns_probe_http.http_probe.total_limits",
             "name": "TotalLimitsSetting",
             "threaded": true,
@@ -917,6 +939,9 @@
                     "optional": false,
                     "original": "url"
                 }
+            ],
+            "dependencies": [
+                "LimitSetting"
             ],
             "key": "ultradns_probe_http.http_probe.transaction",
             "name": "TransactionSetting",
@@ -1110,6 +1135,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ultradns/r/dirpool.html",
+            "dependencies": [
+                "NoResponseSetting",
+                "RdataSetting"
+            ],
             "key": "ultradns_dirpool",
             "name": "DirpoolResource",
             "threaded": true,
@@ -1367,6 +1396,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ultradns/r/probe_http.html",
+            "dependencies": [
+                "HttpProbeSetting"
+            ],
             "key": "ultradns_probe_http",
             "name": "ProbeHttpResource",
             "threaded": true,
@@ -1590,6 +1622,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ultradns/r/probe_ping.html",
+            "dependencies": [
+                "PingProbeSetting"
+            ],
             "key": "ultradns_probe_ping",
             "name": "ProbePingResource",
             "threaded": true,
@@ -1796,6 +1831,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ultradns/r/rdpool.html",
+            "dependencies": [],
             "key": "ultradns_rdpool",
             "name": "RdpoolResource",
             "threaded": true,
@@ -1985,6 +2021,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ultradns/r/record.html",
+            "dependencies": [],
             "key": "ultradns_record",
             "name": "RecordResource",
             "threaded": true,
@@ -2276,6 +2313,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ultradns/r/tcpool.html",
+            "dependencies": [
+                "RdataSetting"
+            ],
             "key": "ultradns_tcpool",
             "name": "TcpoolResource",
             "threaded": true,
@@ -2454,6 +2494,7 @@
                 "original": "username"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
