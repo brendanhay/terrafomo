@@ -62,6 +62,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/random/r/id.html",
+            "dependencies": [],
             "key": "random_id",
             "name": "IdResource",
             "threaded": true,
@@ -251,6 +252,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/random/r/integer.html",
+            "dependencies": [],
             "key": "random_integer",
             "name": "IntegerResource",
             "threaded": true,
@@ -406,6 +408,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/random/r/pet.html",
+            "dependencies": [],
             "key": "random_pet",
             "name": "PetResource",
             "threaded": true,
@@ -509,6 +512,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/random/r/shuffle.html",
+            "dependencies": [],
             "key": "random_shuffle",
             "name": "ShuffleResource",
             "threaded": true,
@@ -766,6 +770,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/random/r/string.html",
+            "dependencies": [],
             "key": "random_string",
             "name": "StringResource",
             "threaded": true,
@@ -853,6 +858,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/random/r/uuid.html",
+            "dependencies": [],
             "key": "random_uuid",
             "name": "UuidResource",
             "threaded": true,
@@ -904,6 +910,7 @@
             "name": "Provider'"
         },
         "arguments": [],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
