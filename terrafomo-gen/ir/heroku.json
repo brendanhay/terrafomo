@@ -58,6 +58,7 @@
                     "original": "personal"
                 }
             ],
+            "dependencies": [],
             "key": "heroku_app.organization",
             "name": "OrganizationSetting",
             "threaded": true,
@@ -178,6 +179,7 @@
                     "original": "source"
                 }
             ],
+            "dependencies": [],
             "key": "heroku_space_inbound_ruleset.rule",
             "name": "RuleSetting",
             "threaded": true,
@@ -263,6 +265,7 @@
                     "original": "pre_shared_key"
                 }
             ],
+            "dependencies": [],
             "key": "heroku_space_vpn_connection.tunnels",
             "name": "TunnelsSetting",
             "threaded": true,
@@ -335,6 +338,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/d/app.html",
+            "dependencies": [
+                "OrganizationSetting"
+            ],
             "key": "heroku_app",
             "name": "AppData",
             "threaded": true,
@@ -592,6 +598,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/d/space.html",
+            "dependencies": [],
             "key": "heroku_space",
             "name": "SpaceData",
             "threaded": true,
@@ -764,6 +771,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/d/space_peering_info.html",
+            "dependencies": [],
             "key": "heroku_space_peering_info",
             "name": "SpacePeeringInfoData",
             "threaded": true,
@@ -972,6 +980,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/addon.html",
+            "dependencies": [],
             "key": "heroku_addon",
             "name": "AddonResource",
             "threaded": true,
@@ -1144,6 +1153,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/addon_attachment.html",
+            "dependencies": [],
             "key": "heroku_addon_attachment",
             "name": "AddonAttachmentResource",
             "threaded": true,
@@ -1384,6 +1394,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/app.html",
+            "dependencies": [
+                "OrganizationSetting"
+            ],
             "key": "heroku_app",
             "name": "AppResource",
             "threaded": true,
@@ -1624,6 +1637,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/app_feature.html",
+            "dependencies": [],
             "key": "heroku_app_feature",
             "name": "AppFeatureResource",
             "threaded": true,
@@ -1745,6 +1759,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/app_release.html",
+            "dependencies": [],
             "key": "heroku_app_release",
             "name": "AppReleaseResource",
             "threaded": true,
@@ -1883,6 +1898,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/cert.html",
+            "dependencies": [],
             "key": "heroku_cert",
             "name": "CertResource",
             "threaded": true,
@@ -2038,6 +2054,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/domain.html",
+            "dependencies": [],
             "key": "heroku_domain",
             "name": "DomainResource",
             "threaded": true,
@@ -2159,6 +2176,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/drain.html",
+            "dependencies": [],
             "key": "heroku_drain",
             "name": "DrainResource",
             "threaded": true,
@@ -2314,6 +2332,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/formation.html",
+            "dependencies": [],
             "key": "heroku_formation",
             "name": "FormationResource",
             "threaded": true,
@@ -2435,6 +2454,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/pipeline.html",
+            "dependencies": [],
             "key": "heroku_pipeline",
             "name": "PipelineResource",
             "threaded": true,
@@ -2539,6 +2559,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/pipeline_coupling.html",
+            "dependencies": [],
             "key": "heroku_pipeline_coupling",
             "name": "PipelineCouplingResource",
             "threaded": true,
@@ -2711,6 +2732,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/space.html",
+            "dependencies": [],
             "key": "heroku_space",
             "name": "SpaceResource",
             "threaded": true,
@@ -2849,6 +2871,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/space_app_access.html",
+            "dependencies": [],
             "key": "heroku_space_app_access",
             "name": "SpaceAppAccessResource",
             "threaded": true,
@@ -2970,6 +2993,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/space_inbound_ruleset.html",
+            "dependencies": [
+                "RuleSetting"
+            ],
             "key": "heroku_space_inbound_ruleset",
             "name": "SpaceInboundRulesetResource",
             "threaded": true,
@@ -3074,6 +3100,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/space_peering_connection_accepter.html",
+            "dependencies": [],
             "key": "heroku_space_peering_connection_accepter",
             "name": "SpacePeeringConnectionAccepterResource",
             "threaded": true,
@@ -3263,6 +3290,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/space_vpn_connection.html",
+            "dependencies": [
+                "TunnelsSetting",
+                "TunnelsSetting"
+            ],
             "key": "heroku_space_vpn_connection",
             "name": "SpaceVpnConnectionResource",
             "threaded": true,
@@ -3469,6 +3500,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/team_collaborator.html",
+            "dependencies": [],
             "key": "heroku_team_collaborator",
             "name": "TeamCollaboratorResource",
             "threaded": true,
@@ -3607,6 +3639,7 @@
                 "original": "headers"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
