@@ -13,17 +13,17 @@
 --
 module Terrafomo.Logentries
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Logentries.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Logentries.Types
 
-    -- * DataSources
-    , module Terrafomo.Logentries.DataSource
-
     -- * Resources
-    , module Terrafomo.Logentries.Resource
+    , module Terrafomo.Logentries.Resources
+
+    -- * DataSources
+    , module Terrafomo.Logentries.DataSources
 
     -- * Settings
     , module Terrafomo.Logentries.Settings
@@ -32,9 +32,9 @@ module Terrafomo.Logentries
     , module Terrafomo.Logentries.Lens
     ) where
 
-import Terrafomo.Logentries.DataSource
+import Terrafomo.Logentries.DataSources
 import Terrafomo.Logentries.Lens
 import Terrafomo.Logentries.Provider
-import Terrafomo.Logentries.Resource
+import Terrafomo.Logentries.Resources
 import Terrafomo.Logentries.Settings
 import Terrafomo.Logentries.Types

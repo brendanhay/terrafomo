@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Logentries
+    - Terrafomo.Logentries.DataSources
+    - Terrafomo.Logentries.Lens
+    - Terrafomo.Logentries.Provider
+    - Terrafomo.Logentries.Resources
+    - Terrafomo.Logentries.Settings
+    - Terrafomo.Logentries.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,
