@@ -1,17 +1,17 @@
 -- This module is auto-generated.
 
 -- |
--- Module      : Terrafomo.Docker.Settings
+-- Module      : Terrafomo.Docker.Resources
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Docker.Settings
+module Terrafomo.Docker.Resources
     (
-    -- * Settings
-      module Terrafomo.Docker.Settings01
+    -- * Resources
+      module Terrafomo.Docker.Resource01
     ) where
 
-import Terrafomo.Docker.Settings01
+import Terrafomo.Docker.Resource01

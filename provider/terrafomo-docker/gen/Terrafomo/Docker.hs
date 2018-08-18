@@ -13,17 +13,17 @@
 --
 module Terrafomo.Docker
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Docker.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Docker.Types
 
-    -- * DataSources
-    , module Terrafomo.Docker.DataSource
-
     -- * Resources
-    , module Terrafomo.Docker.Resource
+    , module Terrafomo.Docker.Resources
+
+    -- * DataSources
+    , module Terrafomo.Docker.DataSources
 
     -- * Settings
     , module Terrafomo.Docker.Settings
@@ -32,9 +32,9 @@ module Terrafomo.Docker
     , module Terrafomo.Docker.Lens
     ) where
 
-import Terrafomo.Docker.DataSource
+import Terrafomo.Docker.DataSources
 import Terrafomo.Docker.Lens
 import Terrafomo.Docker.Provider
-import Terrafomo.Docker.Resource
+import Terrafomo.Docker.Resources
 import Terrafomo.Docker.Settings
 import Terrafomo.Docker.Types
