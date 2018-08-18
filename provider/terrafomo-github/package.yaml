@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.GitHub
+    - Terrafomo.GitHub.DataSources
+    - Terrafomo.GitHub.Lens
+    - Terrafomo.GitHub.Provider
+    - Terrafomo.GitHub.Resources
+    - Terrafomo.GitHub.Settings
+    - Terrafomo.GitHub.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

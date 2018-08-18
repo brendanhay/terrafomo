@@ -13,17 +13,17 @@
 --
 module Terrafomo.GitHub
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.GitHub.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.GitHub.Types
 
-    -- * DataSources
-    , module Terrafomo.GitHub.DataSource
-
     -- * Resources
-    , module Terrafomo.GitHub.Resource
+    , module Terrafomo.GitHub.Resources
+
+    -- * DataSources
+    , module Terrafomo.GitHub.DataSources
 
     -- * Settings
     , module Terrafomo.GitHub.Settings
@@ -32,9 +32,9 @@ module Terrafomo.GitHub
     , module Terrafomo.GitHub.Lens
     ) where
 
-import Terrafomo.GitHub.DataSource
+import Terrafomo.GitHub.DataSources
 import Terrafomo.GitHub.Lens
 import Terrafomo.GitHub.Provider
-import Terrafomo.GitHub.Resource
+import Terrafomo.GitHub.Resources
 import Terrafomo.GitHub.Settings
 import Terrafomo.GitHub.Types

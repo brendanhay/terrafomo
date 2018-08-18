@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.GitHub.Resource
+-- Module      : Terrafomo.GitHub.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.GitHub.Resource
+module Terrafomo.GitHub.Resource01
     (
     -- ** github_branch_protection
       BranchProtectionResource (..)
@@ -37,10 +37,6 @@ module Terrafomo.GitHub.Resource
     , OrganizationWebhookResource (..)
     , organizationWebhookResource
 
-    -- ** github_repository
-    , RepositoryResource (..)
-    , repositoryResource
-
     -- ** github_repository_collaborator
     , RepositoryCollaboratorResource (..)
     , repositoryCollaboratorResource
@@ -53,13 +49,13 @@ module Terrafomo.GitHub.Resource
     , RepositoryProjectResource (..)
     , repositoryProjectResource
 
+    -- ** github_repository
+    , RepositoryResource (..)
+    , repositoryResource
+
     -- ** github_repository_webhook
     , RepositoryWebhookResource (..)
     , repositoryWebhookResource
-
-    -- ** github_team
-    , TeamResource (..)
-    , teamResource
 
     -- ** github_team_membership
     , TeamMembershipResource (..)
@@ -68,6 +64,10 @@ module Terrafomo.GitHub.Resource
     -- ** github_team_repository
     , TeamRepositoryResource (..)
     , teamRepositoryResource
+
+    -- ** github_team
+    , TeamResource (..)
+    , teamResource
 
     -- ** github_user_gpg_key
     , UserGpgKeyResource (..)
@@ -438,6 +438,191 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (OrganizationWebhookResource s)) (
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (OrganizationWebhookResource s)) (TF.Attr s P.Text) where
     computedUrl x = TF.compute (TF.refKey x) "url"
 
+-- | @github_repository_collaborator@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/github/r/repository_collaborator.html terraform documentation>
+-- for more information.
+data RepositoryCollaboratorResource s = RepositoryCollaboratorResource'
+    { _permission :: TF.Attr s P.Text
+    -- ^ @permission@ - (Optional, Forces New)
+    --
+    , _repository :: TF.Attr s P.Text
+    -- ^ @repository@ - (Required, Forces New)
+    --
+    , _username   :: TF.Attr s P.Text
+    -- ^ @username@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @github_repository_collaborator@ resource value.
+repositoryCollaboratorResource
+    :: TF.Attr s P.Text -- ^ @repository@ ('P._repository', 'P.repository')
+    -> TF.Attr s P.Text -- ^ @username@ ('P._username', 'P.username')
+    -> P.Resource (RepositoryCollaboratorResource s)
+repositoryCollaboratorResource _repository _username =
+    TF.unsafeResource "github_repository_collaborator" TF.validator $
+        RepositoryCollaboratorResource'
+            { _permission = TF.value "push"
+            , _repository = _repository
+            , _username = _username
+            }
+
+instance TF.IsObject (RepositoryCollaboratorResource s) where
+    toObject RepositoryCollaboratorResource'{..} = P.catMaybes
+        [ TF.assign "permission" <$> TF.attribute _permission
+        , TF.assign "repository" <$> TF.attribute _repository
+        , TF.assign "username" <$> TF.attribute _username
+        ]
+
+instance TF.IsValid (RepositoryCollaboratorResource s) where
+    validator = P.mempty
+
+instance P.HasPermission (RepositoryCollaboratorResource s) (TF.Attr s P.Text) where
+    permission =
+        P.lens (_permission :: RepositoryCollaboratorResource s -> TF.Attr s P.Text)
+               (\s a -> s { _permission = a } :: RepositoryCollaboratorResource s)
+
+instance P.HasRepository (RepositoryCollaboratorResource s) (TF.Attr s P.Text) where
+    repository =
+        P.lens (_repository :: RepositoryCollaboratorResource s -> TF.Attr s P.Text)
+               (\s a -> s { _repository = a } :: RepositoryCollaboratorResource s)
+
+instance P.HasUsername (RepositoryCollaboratorResource s) (TF.Attr s P.Text) where
+    username =
+        P.lens (_username :: RepositoryCollaboratorResource s -> TF.Attr s P.Text)
+               (\s a -> s { _username = a } :: RepositoryCollaboratorResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RepositoryCollaboratorResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @github_repository_deploy_key@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/github/r/repository_deploy_key.html terraform documentation>
+-- for more information.
+data RepositoryDeployKeyResource s = RepositoryDeployKeyResource'
+    { _key        :: TF.Attr s P.Text
+    -- ^ @key@ - (Required, Forces New)
+    --
+    , _readOnly   :: TF.Attr s P.Bool
+    -- ^ @read_only@ - (Optional, Forces New)
+    --
+    , _repository :: TF.Attr s P.Text
+    -- ^ @repository@ - (Required, Forces New)
+    --
+    , _title      :: TF.Attr s P.Text
+    -- ^ @title@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @github_repository_deploy_key@ resource value.
+repositoryDeployKeyResource
+    :: TF.Attr s P.Text -- ^ @key@ ('P._key', 'P.key')
+    -> TF.Attr s P.Text -- ^ @repository@ ('P._repository', 'P.repository')
+    -> TF.Attr s P.Text -- ^ @title@ ('P._title', 'P.title')
+    -> P.Resource (RepositoryDeployKeyResource s)
+repositoryDeployKeyResource _key _repository _title =
+    TF.unsafeResource "github_repository_deploy_key" TF.validator $
+        RepositoryDeployKeyResource'
+            { _key = _key
+            , _readOnly = TF.value P.True
+            , _repository = _repository
+            , _title = _title
+            }
+
+instance TF.IsObject (RepositoryDeployKeyResource s) where
+    toObject RepositoryDeployKeyResource'{..} = P.catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "read_only" <$> TF.attribute _readOnly
+        , TF.assign "repository" <$> TF.attribute _repository
+        , TF.assign "title" <$> TF.attribute _title
+        ]
+
+instance TF.IsValid (RepositoryDeployKeyResource s) where
+    validator = P.mempty
+
+instance P.HasKey (RepositoryDeployKeyResource s) (TF.Attr s P.Text) where
+    key =
+        P.lens (_key :: RepositoryDeployKeyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _key = a } :: RepositoryDeployKeyResource s)
+
+instance P.HasReadOnly (RepositoryDeployKeyResource s) (TF.Attr s P.Bool) where
+    readOnly =
+        P.lens (_readOnly :: RepositoryDeployKeyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _readOnly = a } :: RepositoryDeployKeyResource s)
+
+instance P.HasRepository (RepositoryDeployKeyResource s) (TF.Attr s P.Text) where
+    repository =
+        P.lens (_repository :: RepositoryDeployKeyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _repository = a } :: RepositoryDeployKeyResource s)
+
+instance P.HasTitle (RepositoryDeployKeyResource s) (TF.Attr s P.Text) where
+    title =
+        P.lens (_title :: RepositoryDeployKeyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _title = a } :: RepositoryDeployKeyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RepositoryDeployKeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @github_repository_project@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/github/r/repository_project.html terraform documentation>
+-- for more information.
+data RepositoryProjectResource s = RepositoryProjectResource'
+    { _body       :: TF.Attr s P.Text
+    -- ^ @body@ - (Optional)
+    --
+    , _name       :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _repository :: TF.Attr s P.Text
+    -- ^ @repository@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @github_repository_project@ resource value.
+repositoryProjectResource
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @repository@ ('P._repository', 'P.repository')
+    -> P.Resource (RepositoryProjectResource s)
+repositoryProjectResource _name _repository =
+    TF.unsafeResource "github_repository_project" TF.validator $
+        RepositoryProjectResource'
+            { _body = TF.Nil
+            , _name = _name
+            , _repository = _repository
+            }
+
+instance TF.IsObject (RepositoryProjectResource s) where
+    toObject RepositoryProjectResource'{..} = P.catMaybes
+        [ TF.assign "body" <$> TF.attribute _body
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "repository" <$> TF.attribute _repository
+        ]
+
+instance TF.IsValid (RepositoryProjectResource s) where
+    validator = P.mempty
+
+instance P.HasBody (RepositoryProjectResource s) (TF.Attr s P.Text) where
+    body =
+        P.lens (_body :: RepositoryProjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _body = a } :: RepositoryProjectResource s)
+
+instance P.HasName (RepositoryProjectResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: RepositoryProjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: RepositoryProjectResource s)
+
+instance P.HasRepository (RepositoryProjectResource s) (TF.Attr s P.Text) where
+    repository =
+        P.lens (_repository :: RepositoryProjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _repository = a } :: RepositoryProjectResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RepositoryProjectResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedUrl (TF.Ref s' (RepositoryProjectResource s)) (TF.Attr s P.Text) where
+    computedUrl x = TF.compute (TF.refKey x) "url"
+
 -- | @github_repository@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/github/r/repository.html terraform documentation>
@@ -657,191 +842,6 @@ instance s ~ s' => P.HasComputedSshCloneUrl (TF.Ref s' (RepositoryResource s)) (
 instance s ~ s' => P.HasComputedSvnUrl (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedSvnUrl x = TF.compute (TF.refKey x) "svn_url"
 
--- | @github_repository_collaborator@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/github/r/repository_collaborator.html terraform documentation>
--- for more information.
-data RepositoryCollaboratorResource s = RepositoryCollaboratorResource'
-    { _permission :: TF.Attr s P.Text
-    -- ^ @permission@ - (Optional, Forces New)
-    --
-    , _repository :: TF.Attr s P.Text
-    -- ^ @repository@ - (Required, Forces New)
-    --
-    , _username   :: TF.Attr s P.Text
-    -- ^ @username@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @github_repository_collaborator@ resource value.
-repositoryCollaboratorResource
-    :: TF.Attr s P.Text -- ^ @repository@ ('P._repository', 'P.repository')
-    -> TF.Attr s P.Text -- ^ @username@ ('P._username', 'P.username')
-    -> P.Resource (RepositoryCollaboratorResource s)
-repositoryCollaboratorResource _repository _username =
-    TF.unsafeResource "github_repository_collaborator" TF.validator $
-        RepositoryCollaboratorResource'
-            { _permission = TF.value "push"
-            , _repository = _repository
-            , _username = _username
-            }
-
-instance TF.IsObject (RepositoryCollaboratorResource s) where
-    toObject RepositoryCollaboratorResource'{..} = P.catMaybes
-        [ TF.assign "permission" <$> TF.attribute _permission
-        , TF.assign "repository" <$> TF.attribute _repository
-        , TF.assign "username" <$> TF.attribute _username
-        ]
-
-instance TF.IsValid (RepositoryCollaboratorResource s) where
-    validator = P.mempty
-
-instance P.HasPermission (RepositoryCollaboratorResource s) (TF.Attr s P.Text) where
-    permission =
-        P.lens (_permission :: RepositoryCollaboratorResource s -> TF.Attr s P.Text)
-               (\s a -> s { _permission = a } :: RepositoryCollaboratorResource s)
-
-instance P.HasRepository (RepositoryCollaboratorResource s) (TF.Attr s P.Text) where
-    repository =
-        P.lens (_repository :: RepositoryCollaboratorResource s -> TF.Attr s P.Text)
-               (\s a -> s { _repository = a } :: RepositoryCollaboratorResource s)
-
-instance P.HasUsername (RepositoryCollaboratorResource s) (TF.Attr s P.Text) where
-    username =
-        P.lens (_username :: RepositoryCollaboratorResource s -> TF.Attr s P.Text)
-               (\s a -> s { _username = a } :: RepositoryCollaboratorResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RepositoryCollaboratorResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
--- | @github_repository_deploy_key@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/github/r/repository_deploy_key.html terraform documentation>
--- for more information.
-data RepositoryDeployKeyResource s = RepositoryDeployKeyResource'
-    { _key        :: TF.Attr s P.Text
-    -- ^ @key@ - (Required, Forces New)
-    --
-    , _readOnly   :: TF.Attr s P.Bool
-    -- ^ @read_only@ - (Optional, Forces New)
-    --
-    , _repository :: TF.Attr s P.Text
-    -- ^ @repository@ - (Required, Forces New)
-    --
-    , _title      :: TF.Attr s P.Text
-    -- ^ @title@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @github_repository_deploy_key@ resource value.
-repositoryDeployKeyResource
-    :: TF.Attr s P.Text -- ^ @key@ ('P._key', 'P.key')
-    -> TF.Attr s P.Text -- ^ @repository@ ('P._repository', 'P.repository')
-    -> TF.Attr s P.Text -- ^ @title@ ('P._title', 'P.title')
-    -> P.Resource (RepositoryDeployKeyResource s)
-repositoryDeployKeyResource _key _repository _title =
-    TF.unsafeResource "github_repository_deploy_key" TF.validator $
-        RepositoryDeployKeyResource'
-            { _key = _key
-            , _readOnly = TF.value P.True
-            , _repository = _repository
-            , _title = _title
-            }
-
-instance TF.IsObject (RepositoryDeployKeyResource s) where
-    toObject RepositoryDeployKeyResource'{..} = P.catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
-        , TF.assign "read_only" <$> TF.attribute _readOnly
-        , TF.assign "repository" <$> TF.attribute _repository
-        , TF.assign "title" <$> TF.attribute _title
-        ]
-
-instance TF.IsValid (RepositoryDeployKeyResource s) where
-    validator = P.mempty
-
-instance P.HasKey (RepositoryDeployKeyResource s) (TF.Attr s P.Text) where
-    key =
-        P.lens (_key :: RepositoryDeployKeyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a } :: RepositoryDeployKeyResource s)
-
-instance P.HasReadOnly (RepositoryDeployKeyResource s) (TF.Attr s P.Bool) where
-    readOnly =
-        P.lens (_readOnly :: RepositoryDeployKeyResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a } :: RepositoryDeployKeyResource s)
-
-instance P.HasRepository (RepositoryDeployKeyResource s) (TF.Attr s P.Text) where
-    repository =
-        P.lens (_repository :: RepositoryDeployKeyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _repository = a } :: RepositoryDeployKeyResource s)
-
-instance P.HasTitle (RepositoryDeployKeyResource s) (TF.Attr s P.Text) where
-    title =
-        P.lens (_title :: RepositoryDeployKeyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _title = a } :: RepositoryDeployKeyResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RepositoryDeployKeyResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
--- | @github_repository_project@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/github/r/repository_project.html terraform documentation>
--- for more information.
-data RepositoryProjectResource s = RepositoryProjectResource'
-    { _body       :: TF.Attr s P.Text
-    -- ^ @body@ - (Optional)
-    --
-    , _name       :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _repository :: TF.Attr s P.Text
-    -- ^ @repository@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @github_repository_project@ resource value.
-repositoryProjectResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s P.Text -- ^ @repository@ ('P._repository', 'P.repository')
-    -> P.Resource (RepositoryProjectResource s)
-repositoryProjectResource _name _repository =
-    TF.unsafeResource "github_repository_project" TF.validator $
-        RepositoryProjectResource'
-            { _body = TF.Nil
-            , _name = _name
-            , _repository = _repository
-            }
-
-instance TF.IsObject (RepositoryProjectResource s) where
-    toObject RepositoryProjectResource'{..} = P.catMaybes
-        [ TF.assign "body" <$> TF.attribute _body
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "repository" <$> TF.attribute _repository
-        ]
-
-instance TF.IsValid (RepositoryProjectResource s) where
-    validator = P.mempty
-
-instance P.HasBody (RepositoryProjectResource s) (TF.Attr s P.Text) where
-    body =
-        P.lens (_body :: RepositoryProjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _body = a } :: RepositoryProjectResource s)
-
-instance P.HasName (RepositoryProjectResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: RepositoryProjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: RepositoryProjectResource s)
-
-instance P.HasRepository (RepositoryProjectResource s) (TF.Attr s P.Text) where
-    repository =
-        P.lens (_repository :: RepositoryProjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _repository = a } :: RepositoryProjectResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RepositoryProjectResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedUrl (TF.Ref s' (RepositoryProjectResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "url"
-
 -- | @github_repository_webhook@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/github/r/repository_webhook.html terraform documentation>
@@ -922,82 +922,6 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (RepositoryWebhookResource s)) (TF
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (RepositoryWebhookResource s)) (TF.Attr s P.Text) where
     computedUrl x = TF.compute (TF.refKey x) "url"
-
--- | @github_team@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/github/r/team.html terraform documentation>
--- for more information.
-data TeamResource s = TeamResource'
-    { _description  :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
-    --
-    , _ldapDn       :: TF.Attr s P.Text
-    -- ^ @ldap_dn@ - (Optional)
-    --
-    , _name         :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _parentTeamId :: TF.Attr s P.Int
-    -- ^ @parent_team_id@ - (Optional)
-    --
-    , _privacy      :: TF.Attr s P.Text
-    -- ^ @privacy@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @github_team@ resource value.
-teamResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> P.Resource (TeamResource s)
-teamResource _name =
-    TF.unsafeResource "github_team" TF.validator $
-        TeamResource'
-            { _description = TF.Nil
-            , _ldapDn = TF.Nil
-            , _name = _name
-            , _parentTeamId = TF.Nil
-            , _privacy = TF.value "secret"
-            }
-
-instance TF.IsObject (TeamResource s) where
-    toObject TeamResource'{..} = P.catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "ldap_dn" <$> TF.attribute _ldapDn
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "parent_team_id" <$> TF.attribute _parentTeamId
-        , TF.assign "privacy" <$> TF.attribute _privacy
-        ]
-
-instance TF.IsValid (TeamResource s) where
-    validator = P.mempty
-
-instance P.HasDescription (TeamResource s) (TF.Attr s P.Text) where
-    description =
-        P.lens (_description :: TeamResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: TeamResource s)
-
-instance P.HasLdapDn (TeamResource s) (TF.Attr s P.Text) where
-    ldapDn =
-        P.lens (_ldapDn :: TeamResource s -> TF.Attr s P.Text)
-               (\s a -> s { _ldapDn = a } :: TeamResource s)
-
-instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: TeamResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: TeamResource s)
-
-instance P.HasParentTeamId (TeamResource s) (TF.Attr s P.Int) where
-    parentTeamId =
-        P.lens (_parentTeamId :: TeamResource s -> TF.Attr s P.Int)
-               (\s a -> s { _parentTeamId = a } :: TeamResource s)
-
-instance P.HasPrivacy (TeamResource s) (TF.Attr s P.Text) where
-    privacy =
-        P.lens (_privacy :: TeamResource s -> TF.Attr s P.Text)
-               (\s a -> s { _privacy = a } :: TeamResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @github_team_membership@ Resource.
 --
@@ -1111,6 +1035,82 @@ instance P.HasTeamId (TeamRepositoryResource s) (TF.Attr s P.Text) where
                (\s a -> s { _teamId = a } :: TeamRepositoryResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamRepositoryResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @github_team@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/github/r/team.html terraform documentation>
+-- for more information.
+data TeamResource s = TeamResource'
+    { _description  :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _ldapDn       :: TF.Attr s P.Text
+    -- ^ @ldap_dn@ - (Optional)
+    --
+    , _name         :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _parentTeamId :: TF.Attr s P.Int
+    -- ^ @parent_team_id@ - (Optional)
+    --
+    , _privacy      :: TF.Attr s P.Text
+    -- ^ @privacy@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @github_team@ resource value.
+teamResource
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (TeamResource s)
+teamResource _name =
+    TF.unsafeResource "github_team" TF.validator $
+        TeamResource'
+            { _description = TF.Nil
+            , _ldapDn = TF.Nil
+            , _name = _name
+            , _parentTeamId = TF.Nil
+            , _privacy = TF.value "secret"
+            }
+
+instance TF.IsObject (TeamResource s) where
+    toObject TeamResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "ldap_dn" <$> TF.attribute _ldapDn
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parent_team_id" <$> TF.attribute _parentTeamId
+        , TF.assign "privacy" <$> TF.attribute _privacy
+        ]
+
+instance TF.IsValid (TeamResource s) where
+    validator = P.mempty
+
+instance P.HasDescription (TeamResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: TeamResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: TeamResource s)
+
+instance P.HasLdapDn (TeamResource s) (TF.Attr s P.Text) where
+    ldapDn =
+        P.lens (_ldapDn :: TeamResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ldapDn = a } :: TeamResource s)
+
+instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: TeamResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: TeamResource s)
+
+instance P.HasParentTeamId (TeamResource s) (TF.Attr s P.Int) where
+    parentTeamId =
+        P.lens (_parentTeamId :: TeamResource s -> TF.Attr s P.Int)
+               (\s a -> s { _parentTeamId = a } :: TeamResource s)
+
+instance P.HasPrivacy (TeamResource s) (TF.Attr s P.Text) where
+    privacy =
+        P.lens (_privacy :: TeamResource s -> TF.Attr s P.Text)
+               (\s a -> s { _privacy = a } :: TeamResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @github_user_gpg_key@ Resource.
