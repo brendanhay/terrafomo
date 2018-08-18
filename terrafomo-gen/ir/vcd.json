@@ -75,6 +75,7 @@
                     "original": "start_address"
                 }
             ],
+            "dependencies": [],
             "key": "vcd_network.dhcp_pool",
             "name": "DhcpPoolSetting",
             "threaded": true,
@@ -177,6 +178,7 @@
                     "original": "local_subnet_name"
                 }
             ],
+            "dependencies": [],
             "key": "vcd_edgegateway_vpn.local_subnets",
             "name": "LocalSubnetsSetting",
             "threaded": true,
@@ -296,6 +298,7 @@
                     "original": "peer_subnet_name"
                 }
             ],
+            "dependencies": [],
             "key": "vcd_edgegateway_vpn.peer_subnets",
             "name": "PeerSubnetsSetting",
             "threaded": true,
@@ -500,6 +503,7 @@
                     "original": "source_port"
                 }
             ],
+            "dependencies": [],
             "key": "vcd_firewall_rules.rule",
             "name": "RuleSetting",
             "threaded": true,
@@ -688,6 +692,7 @@
                     "original": "start_address"
                 }
             ],
+            "dependencies": [],
             "key": "vcd_network.static_ip_pool",
             "name": "StaticIpPoolSetting",
             "threaded": true,
@@ -829,6 +834,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vcd/r/dnat.html",
+            "dependencies": [],
             "key": "vcd_dnat",
             "name": "DnatResource",
             "threaded": true,
@@ -1137,6 +1143,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vcd/r/edgegateway_vpn.html",
+            "dependencies": [
+                "LocalSubnetsSetting",
+                "PeerSubnetsSetting"
+            ],
             "key": "vcd_edgegateway_vpn",
             "name": "EdgegatewayVpnResource",
             "threaded": true,
@@ -1377,6 +1387,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vcd/r/firewall_rules.html",
+            "dependencies": [
+                "RuleSetting"
+            ],
             "key": "vcd_firewall_rules",
             "name": "FirewallRulesResource",
             "threaded": true,
@@ -1651,6 +1664,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vcd/r/network.html",
+            "dependencies": [
+                "DhcpPoolSetting",
+                "StaticIpPoolSetting"
+            ],
             "key": "vcd_network",
             "name": "NetworkResource",
             "threaded": true,
@@ -1806,6 +1823,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vcd/r/snat.html",
+            "dependencies": [],
             "key": "vcd_snat",
             "name": "SnatResource",
             "threaded": true,
@@ -2131,6 +2149,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vcd/r/vapp.html",
+            "dependencies": [],
             "key": "vcd_vapp",
             "name": "VappResource",
             "threaded": true,
@@ -2422,6 +2441,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vcd/r/vapp_vm.html",
+            "dependencies": [],
             "key": "vcd_vapp_vm",
             "name": "VappVmResource",
             "threaded": true,
@@ -2694,6 +2714,7 @@
                 "original": "vdc"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
