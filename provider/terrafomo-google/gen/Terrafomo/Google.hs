@@ -13,18 +13,17 @@
 --
 module Terrafomo.Google
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Google.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Google.Types
 
-    -- * DataSources
-    , module Terrafomo.Google.DataSource
-
     -- * Resources
-    , module Terrafomo.Google.Resource01
-    , module Terrafomo.Google.Resource02
+    , module Terrafomo.Google.Resources
+
+    -- * DataSources
+    , module Terrafomo.Google.DataSources
 
     -- * Settings
     , module Terrafomo.Google.Settings
@@ -33,10 +32,9 @@ module Terrafomo.Google
     , module Terrafomo.Google.Lens
     ) where
 
-import Terrafomo.Google.DataSource
+import Terrafomo.Google.DataSources
 import Terrafomo.Google.Lens
 import Terrafomo.Google.Provider
-import Terrafomo.Google.Resource01
-import Terrafomo.Google.Resource02
+import Terrafomo.Google.Resources
 import Terrafomo.Google.Settings
 import Terrafomo.Google.Types

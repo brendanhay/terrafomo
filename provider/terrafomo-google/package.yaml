@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Google
+    - Terrafomo.Google.DataSources
+    - Terrafomo.Google.Lens
+    - Terrafomo.Google.Provider
+    - Terrafomo.Google.Resources
+    - Terrafomo.Google.Settings
+    - Terrafomo.Google.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,
