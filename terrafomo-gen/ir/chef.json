@@ -28,6 +28,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/chef/r/data_bag.html",
+            "dependencies": [],
             "key": "chef_data_bag",
             "name": "DataBagResource",
             "threaded": true,
@@ -132,6 +133,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/chef/r/data_bag_item.html",
+            "dependencies": [],
             "key": "chef_data_bag_item",
             "name": "DataBagItemResource",
             "threaded": true,
@@ -287,6 +289,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/chef/r/environment.html",
+            "dependencies": [],
             "key": "chef_environment",
             "name": "EnvironmentResource",
             "threaded": true,
@@ -459,6 +462,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/chef/r/node.html",
+            "dependencies": [],
             "key": "chef_node",
             "name": "NodeResource",
             "threaded": true,
@@ -597,6 +601,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/chef/r/role.html",
+            "dependencies": [],
             "key": "chef_role",
             "name": "RoleResource",
             "threaded": true,
@@ -724,6 +729,7 @@
                 "original": "server_url"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
