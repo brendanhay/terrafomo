@@ -1,17 +1,17 @@
 -- This module is auto-generated.
 
 -- |
--- Module      : Terrafomo.Rancher.Settings
+-- Module      : Terrafomo.Rancher.DataSources
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Rancher.Settings
+module Terrafomo.Rancher.DataSources
     (
-    -- * Settings
-      module Terrafomo.Rancher.Settings01
+    -- * DataSources
+      module Terrafomo.Rancher.DataSource01
     ) where
 
-import Terrafomo.Rancher.Settings01
+import Terrafomo.Rancher.DataSource01

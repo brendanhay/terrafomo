@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Rancher.Resource
+-- Module      : Terrafomo.Rancher.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Rancher.Resource
+module Terrafomo.Rancher.Resource01
     (
     -- ** rancher_certificate
       CertificateResource (..)
@@ -33,13 +33,13 @@ module Terrafomo.Rancher.Resource
     , RegistrationTokenResource (..)
     , registrationTokenResource
 
-    -- ** rancher_registry
-    , RegistryResource (..)
-    , registryResource
-
     -- ** rancher_registry_credential
     , RegistryCredentialResource (..)
     , registryCredentialResource
+
+    -- ** rancher_registry
+    , RegistryResource (..)
+    , registryResource
 
     -- ** rancher_secret
     , SecretResource (..)
@@ -467,74 +467,6 @@ instance s ~ s' => P.HasComputedRegistrationUrl (TF.Ref s' (RegistrationTokenRes
 instance s ~ s' => P.HasComputedToken (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
     computedToken x = TF.compute (TF.refKey x) "token"
 
--- | @rancher_registry@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/rancher/r/registry.html terraform documentation>
--- for more information.
-data RegistryResource s = RegistryResource'
-    { _description   :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
-    --
-    , _environmentId :: TF.Attr s P.Text
-    -- ^ @environment_id@ - (Required, Forces New)
-    --
-    , _name          :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _serverAddress :: TF.Attr s P.Text
-    -- ^ @server_address@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @rancher_registry@ resource value.
-registryResource
-    :: TF.Attr s P.Text -- ^ @server_address@ ('P._serverAddress', 'P.serverAddress')
-    -> TF.Attr s P.Text -- ^ @environment_id@ ('P._environmentId', 'P.environmentId')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> P.Resource (RegistryResource s)
-registryResource _serverAddress _environmentId _name =
-    TF.unsafeResource "rancher_registry" TF.validator $
-        RegistryResource'
-            { _description = TF.Nil
-            , _environmentId = _environmentId
-            , _name = _name
-            , _serverAddress = _serverAddress
-            }
-
-instance TF.IsObject (RegistryResource s) where
-    toObject RegistryResource'{..} = P.catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "environment_id" <$> TF.attribute _environmentId
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "server_address" <$> TF.attribute _serverAddress
-        ]
-
-instance TF.IsValid (RegistryResource s) where
-    validator = P.mempty
-
-instance P.HasDescription (RegistryResource s) (TF.Attr s P.Text) where
-    description =
-        P.lens (_description :: RegistryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: RegistryResource s)
-
-instance P.HasEnvironmentId (RegistryResource s) (TF.Attr s P.Text) where
-    environmentId =
-        P.lens (_environmentId :: RegistryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _environmentId = a } :: RegistryResource s)
-
-instance P.HasName (RegistryResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: RegistryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: RegistryResource s)
-
-instance P.HasServerAddress (RegistryResource s) (TF.Attr s P.Text) where
-    serverAddress =
-        P.lens (_serverAddress :: RegistryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _serverAddress = a } :: RegistryResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RegistryResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
 -- | @rancher_registry_credential@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/rancher/r/registry_credential.html terraform documentation>
@@ -612,6 +544,74 @@ instance P.HasSecretValue (RegistryCredentialResource s) (TF.Attr s P.Text) wher
                (\s a -> s { _secretValue = a } :: RegistryCredentialResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RegistryCredentialResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @rancher_registry@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/rancher/r/registry.html terraform documentation>
+-- for more information.
+data RegistryResource s = RegistryResource'
+    { _description   :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _environmentId :: TF.Attr s P.Text
+    -- ^ @environment_id@ - (Required, Forces New)
+    --
+    , _name          :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _serverAddress :: TF.Attr s P.Text
+    -- ^ @server_address@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @rancher_registry@ resource value.
+registryResource
+    :: TF.Attr s P.Text -- ^ @server_address@ ('P._serverAddress', 'P.serverAddress')
+    -> TF.Attr s P.Text -- ^ @environment_id@ ('P._environmentId', 'P.environmentId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (RegistryResource s)
+registryResource _serverAddress _environmentId _name =
+    TF.unsafeResource "rancher_registry" TF.validator $
+        RegistryResource'
+            { _description = TF.Nil
+            , _environmentId = _environmentId
+            , _name = _name
+            , _serverAddress = _serverAddress
+            }
+
+instance TF.IsObject (RegistryResource s) where
+    toObject RegistryResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "environment_id" <$> TF.attribute _environmentId
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "server_address" <$> TF.attribute _serverAddress
+        ]
+
+instance TF.IsValid (RegistryResource s) where
+    validator = P.mempty
+
+instance P.HasDescription (RegistryResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: RegistryResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: RegistryResource s)
+
+instance P.HasEnvironmentId (RegistryResource s) (TF.Attr s P.Text) where
+    environmentId =
+        P.lens (_environmentId :: RegistryResource s -> TF.Attr s P.Text)
+               (\s a -> s { _environmentId = a } :: RegistryResource s)
+
+instance P.HasName (RegistryResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: RegistryResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: RegistryResource s)
+
+instance P.HasServerAddress (RegistryResource s) (TF.Attr s P.Text) where
+    serverAddress =
+        P.lens (_serverAddress :: RegistryResource s -> TF.Attr s P.Text)
+               (\s a -> s { _serverAddress = a } :: RegistryResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RegistryResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @rancher_secret@ Resource.

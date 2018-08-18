@@ -13,17 +13,17 @@
 --
 module Terrafomo.Rancher
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Rancher.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Rancher.Types
 
-    -- * DataSources
-    , module Terrafomo.Rancher.DataSource
-
     -- * Resources
-    , module Terrafomo.Rancher.Resource
+    , module Terrafomo.Rancher.Resources
+
+    -- * DataSources
+    , module Terrafomo.Rancher.DataSources
 
     -- * Settings
     , module Terrafomo.Rancher.Settings
@@ -32,9 +32,9 @@ module Terrafomo.Rancher
     , module Terrafomo.Rancher.Lens
     ) where
 
-import Terrafomo.Rancher.DataSource
+import Terrafomo.Rancher.DataSources
 import Terrafomo.Rancher.Lens
 import Terrafomo.Rancher.Provider
-import Terrafomo.Rancher.Resource
+import Terrafomo.Rancher.Resources
 import Terrafomo.Rancher.Settings
 import Terrafomo.Rancher.Types
