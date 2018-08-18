@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.UltraDNS
+    - Terrafomo.UltraDNS.DataSources
+    - Terrafomo.UltraDNS.Lens
+    - Terrafomo.UltraDNS.Provider
+    - Terrafomo.UltraDNS.Resources
+    - Terrafomo.UltraDNS.Settings
+    - Terrafomo.UltraDNS.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

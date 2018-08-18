@@ -13,16 +13,17 @@
 --
 module Terrafomo.UltraDNS
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.UltraDNS.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.UltraDNS.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.UltraDNS.Resource
+    , module Terrafomo.UltraDNS.Resources
+
+    -- * DataSources
+    , module Terrafomo.UltraDNS.DataSources
 
     -- * Settings
     , module Terrafomo.UltraDNS.Settings
@@ -31,8 +32,9 @@ module Terrafomo.UltraDNS
     , module Terrafomo.UltraDNS.Lens
     ) where
 
+import Terrafomo.UltraDNS.DataSources
 import Terrafomo.UltraDNS.Lens
 import Terrafomo.UltraDNS.Provider
-import Terrafomo.UltraDNS.Resource
+import Terrafomo.UltraDNS.Resources
 import Terrafomo.UltraDNS.Settings
 import Terrafomo.UltraDNS.Types
