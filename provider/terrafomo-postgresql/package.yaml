@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.PostgreSQL
+    - Terrafomo.PostgreSQL.DataSources
+    - Terrafomo.PostgreSQL.Lens
+    - Terrafomo.PostgreSQL.Provider
+    - Terrafomo.PostgreSQL.Resources
+    - Terrafomo.PostgreSQL.Settings
+    - Terrafomo.PostgreSQL.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

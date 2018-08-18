@@ -13,16 +13,17 @@
 --
 module Terrafomo.PostgreSQL
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.PostgreSQL.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.PostgreSQL.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.PostgreSQL.Resource
+    , module Terrafomo.PostgreSQL.Resources
+
+    -- * DataSources
+    , module Terrafomo.PostgreSQL.DataSources
 
     -- * Settings
     , module Terrafomo.PostgreSQL.Settings
@@ -31,8 +32,9 @@ module Terrafomo.PostgreSQL
     , module Terrafomo.PostgreSQL.Lens
     ) where
 
+import Terrafomo.PostgreSQL.DataSources
 import Terrafomo.PostgreSQL.Lens
 import Terrafomo.PostgreSQL.Provider
-import Terrafomo.PostgreSQL.Resource
+import Terrafomo.PostgreSQL.Resources
 import Terrafomo.PostgreSQL.Settings
 import Terrafomo.PostgreSQL.Types
