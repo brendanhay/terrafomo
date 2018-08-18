@@ -75,6 +75,7 @@
                     "original": "default_region"
                 }
             ],
+            "dependencies": [],
             "key": "grafana_data_source.json_data",
             "name": "JsonDataSetting",
             "threaded": true,
@@ -160,6 +161,7 @@
                     "original": "secret_key"
                 }
             ],
+            "dependencies": [],
             "key": "grafana_data_source.secure_json_data",
             "name": "SecureJsonDataSetting",
             "threaded": true,
@@ -284,6 +286,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/grafana/r/alert_notification.html",
+            "dependencies": [],
             "key": "grafana_alert_notification",
             "name": "AlertNotificationResource",
             "threaded": true,
@@ -371,6 +374,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/grafana/r/dashboard.html",
+            "dependencies": [],
             "key": "grafana_dashboard",
             "name": "DashboardResource",
             "threaded": true,
@@ -662,6 +666,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/grafana/r/data_source.html",
+            "dependencies": [
+                "JsonDataSetting",
+                "SecureJsonDataSetting"
+            ],
             "key": "grafana_data_source",
             "name": "DataSourceResource",
             "threaded": true,
@@ -834,6 +842,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/grafana/r/organization.html",
+            "dependencies": [],
             "key": "grafana_organization",
             "name": "OrganizationResource",
             "threaded": true,
@@ -942,6 +951,7 @@
                 "original": "url"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
