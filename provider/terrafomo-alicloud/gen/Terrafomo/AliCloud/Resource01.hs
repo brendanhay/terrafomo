@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.AliCloud.Resource
+-- Module      : Terrafomo.AliCloud.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.AliCloud.Resource
+module Terrafomo.AliCloud.Resource01
     (
     -- ** alicloud_cdn_domain
       CdnDomainResource (..)
@@ -41,13 +41,13 @@ module Terrafomo.AliCloud.Resource
     , CsSwarmResource (..)
     , csSwarmResource
 
-    -- ** alicloud_db_account
-    , DbAccountResource (..)
-    , dbAccountResource
-
     -- ** alicloud_db_account_privilege
     , DbAccountPrivilegeResource (..)
     , dbAccountPrivilegeResource
+
+    -- ** alicloud_db_account
+    , DbAccountResource (..)
+    , dbAccountResource
 
     -- ** alicloud_db_backup_policy
     , DbBackupPolicyResource (..)
@@ -65,17 +65,13 @@ module Terrafomo.AliCloud.Resource
     , DbInstanceResource (..)
     , dbInstanceResource
 
-    -- ** alicloud_disk
-    , DiskResource (..)
-    , diskResource
-
     -- ** alicloud_disk_attachment
     , DiskAttachmentResource (..)
     , diskAttachmentResource
 
-    -- ** alicloud_dns
-    , DnsResource (..)
-    , dnsResource
+    -- ** alicloud_disk
+    , DiskResource (..)
+    , diskResource
 
     -- ** alicloud_dns_group
     , DnsGroupResource (..)
@@ -85,13 +81,17 @@ module Terrafomo.AliCloud.Resource
     , DnsRecordResource (..)
     , dnsRecordResource
 
-    -- ** alicloud_eip
-    , EipResource (..)
-    , eipResource
+    -- ** alicloud_dns
+    , DnsResource (..)
+    , dnsResource
 
     -- ** alicloud_eip_association
     , EipAssociationResource (..)
     , eipAssociationResource
+
+    -- ** alicloud_eip
+    , EipResource (..)
+    , eipResource
 
     -- ** alicloud_ess_attachment
     , EssAttachmentResource (..)
@@ -133,13 +133,13 @@ module Terrafomo.AliCloud.Resource
     , InstanceResource (..)
     , instanceResource
 
-    -- ** alicloud_key_pair
-    , KeyPairResource (..)
-    , keyPairResource
-
     -- ** alicloud_key_pair_attachment
     , KeyPairAttachmentResource (..)
     , keyPairAttachmentResource
+
+    -- ** alicloud_key_pair
+    , KeyPairResource (..)
+    , keyPairResource
 
     -- ** alicloud_kms_key
     , KmsKeyResource (..)
@@ -153,33 +153,33 @@ module Terrafomo.AliCloud.Resource
     , LogProjectResource (..)
     , logProjectResource
 
-    -- ** alicloud_log_store
-    , LogStoreResource (..)
-    , logStoreResource
-
     -- ** alicloud_log_store_index
     , LogStoreIndexResource (..)
     , logStoreIndexResource
+
+    -- ** alicloud_log_store
+    , LogStoreResource (..)
+    , logStoreResource
 
     -- ** alicloud_nat_gateway
     , NatGatewayResource (..)
     , natGatewayResource
 
-    -- ** alicloud_oss_bucket
-    , OssBucketResource (..)
-    , ossBucketResource
-
     -- ** alicloud_oss_bucket_object
     , OssBucketObjectResource (..)
     , ossBucketObjectResource
 
-    -- ** alicloud_ots_instance
-    , OtsInstanceResource (..)
-    , otsInstanceResource
+    -- ** alicloud_oss_bucket
+    , OssBucketResource (..)
+    , ossBucketResource
 
     -- ** alicloud_ots_instance_attachment
     , OtsInstanceAttachmentResource (..)
     , otsInstanceAttachmentResource
+
+    -- ** alicloud_ots_instance
+    , OtsInstanceResource (..)
+    , otsInstanceResource
 
     -- ** alicloud_ots_table
     , OtsTableResource (..)
@@ -197,10 +197,6 @@ module Terrafomo.AliCloud.Resource
     , RamAliasResource (..)
     , ramAliasResource
 
-    -- ** alicloud_ram_group
-    , RamGroupResource (..)
-    , ramGroupResource
-
     -- ** alicloud_ram_group_membership
     , RamGroupMembershipResource (..)
     , ramGroupMembershipResource
@@ -208,6 +204,10 @@ module Terrafomo.AliCloud.Resource
     -- ** alicloud_ram_group_policy_attachment
     , RamGroupPolicyAttachmentResource (..)
     , ramGroupPolicyAttachmentResource
+
+    -- ** alicloud_ram_group
+    , RamGroupResource (..)
+    , ramGroupResource
 
     -- ** alicloud_ram_login_profile
     , RamLoginProfileResource (..)
@@ -217,10 +217,6 @@ module Terrafomo.AliCloud.Resource
     , RamPolicyResource (..)
     , ramPolicyResource
 
-    -- ** alicloud_ram_role
-    , RamRoleResource (..)
-    , ramRoleResource
-
     -- ** alicloud_ram_role_attachment
     , RamRoleAttachmentResource (..)
     , ramRoleAttachmentResource
@@ -229,25 +225,29 @@ module Terrafomo.AliCloud.Resource
     , RamRolePolicyAttachmentResource (..)
     , ramRolePolicyAttachmentResource
 
-    -- ** alicloud_ram_user
-    , RamUserResource (..)
-    , ramUserResource
+    -- ** alicloud_ram_role
+    , RamRoleResource (..)
+    , ramRoleResource
 
     -- ** alicloud_ram_user_policy_attachment
     , RamUserPolicyAttachmentResource (..)
     , ramUserPolicyAttachmentResource
 
+    -- ** alicloud_ram_user
+    , RamUserResource (..)
+    , ramUserResource
+
     -- ** alicloud_route_entry
     , RouteEntryResource (..)
     , routeEntryResource
 
-    -- ** alicloud_router_interface
-    , RouterInterfaceResource (..)
-    , routerInterfaceResource
-
     -- ** alicloud_router_interface_connection
     , RouterInterfaceConnectionResource (..)
     , routerInterfaceConnectionResource
+
+    -- ** alicloud_router_interface
+    , RouterInterfaceResource (..)
+    , routerInterfaceResource
 
     -- ** alicloud_security_group
     , SecurityGroupResource (..)
@@ -257,10 +257,6 @@ module Terrafomo.AliCloud.Resource
     , SecurityGroupRuleResource (..)
     , securityGroupRuleResource
 
-    -- ** alicloud_slb
-    , SlbResource (..)
-    , slbResource
-
     -- ** alicloud_slb_attachment
     , SlbAttachmentResource (..)
     , slbAttachmentResource
@@ -268,6 +264,10 @@ module Terrafomo.AliCloud.Resource
     -- ** alicloud_slb_listener
     , SlbListenerResource (..)
     , slbListenerResource
+
+    -- ** alicloud_slb
+    , SlbResource (..)
+    , slbResource
 
     -- ** alicloud_slb_rule
     , SlbRuleResource (..)
@@ -1522,6 +1522,74 @@ instance s ~ s' => P.HasComputedSlbId (TF.Ref s' (CsSwarmResource s)) (TF.Attr s
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
+-- | @alicloud_db_account_privilege@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/db_account_privilege.html terraform documentation>
+-- for more information.
+data DbAccountPrivilegeResource s = DbAccountPrivilegeResource'
+    { _accountName :: TF.Attr s P.Text
+    -- ^ @account_name@ - (Required, Forces New)
+    --
+    , _dbNames     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    -- ^ @db_names@ - (Required)
+    --
+    , _instanceId  :: TF.Attr s P.Text
+    -- ^ @instance_id@ - (Required, Forces New)
+    --
+    , _privilege   :: TF.Attr s P.Text
+    -- ^ @privilege@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @alicloud_db_account_privilege@ resource value.
+dbAccountPrivilegeResource
+    :: TF.Attr s P.Text -- ^ @instance_id@ ('P._instanceId', 'P.instanceId')
+    -> TF.Attr s P.Text -- ^ @account_name@ ('P._accountName', 'P.accountName')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @db_names@ ('P._dbNames', 'P.dbNames')
+    -> P.Resource (DbAccountPrivilegeResource s)
+dbAccountPrivilegeResource _instanceId _accountName _dbNames =
+    TF.unsafeResource "alicloud_db_account_privilege" TF.validator $
+        DbAccountPrivilegeResource'
+            { _accountName = _accountName
+            , _dbNames = _dbNames
+            , _instanceId = _instanceId
+            , _privilege = TF.Nil
+            }
+
+instance TF.IsObject (DbAccountPrivilegeResource s) where
+    toObject DbAccountPrivilegeResource'{..} = P.catMaybes
+        [ TF.assign "account_name" <$> TF.attribute _accountName
+        , TF.assign "db_names" <$> TF.attribute _dbNames
+        , TF.assign "instance_id" <$> TF.attribute _instanceId
+        , TF.assign "privilege" <$> TF.attribute _privilege
+        ]
+
+instance TF.IsValid (DbAccountPrivilegeResource s) where
+    validator = P.mempty
+
+instance P.HasAccountName (DbAccountPrivilegeResource s) (TF.Attr s P.Text) where
+    accountName =
+        P.lens (_accountName :: DbAccountPrivilegeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _accountName = a } :: DbAccountPrivilegeResource s)
+
+instance P.HasDbNames (DbAccountPrivilegeResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
+    dbNames =
+        P.lens (_dbNames :: DbAccountPrivilegeResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
+               (\s a -> s { _dbNames = a } :: DbAccountPrivilegeResource s)
+
+instance P.HasInstanceId (DbAccountPrivilegeResource s) (TF.Attr s P.Text) where
+    instanceId =
+        P.lens (_instanceId :: DbAccountPrivilegeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _instanceId = a } :: DbAccountPrivilegeResource s)
+
+instance P.HasPrivilege (DbAccountPrivilegeResource s) (TF.Attr s P.Text) where
+    privilege =
+        P.lens (_privilege :: DbAccountPrivilegeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _privilege = a } :: DbAccountPrivilegeResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbAccountPrivilegeResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_db_account@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/db_account.html terraform documentation>
@@ -1598,74 +1666,6 @@ instance P.HasType' (DbAccountResource s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: DbAccountResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DbAccountResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
--- | @alicloud_db_account_privilege@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/alicloud/r/db_account_privilege.html terraform documentation>
--- for more information.
-data DbAccountPrivilegeResource s = DbAccountPrivilegeResource'
-    { _accountName :: TF.Attr s P.Text
-    -- ^ @account_name@ - (Required, Forces New)
-    --
-    , _dbNames     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
-    -- ^ @db_names@ - (Required)
-    --
-    , _instanceId  :: TF.Attr s P.Text
-    -- ^ @instance_id@ - (Required, Forces New)
-    --
-    , _privilege   :: TF.Attr s P.Text
-    -- ^ @privilege@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @alicloud_db_account_privilege@ resource value.
-dbAccountPrivilegeResource
-    :: TF.Attr s P.Text -- ^ @instance_id@ ('P._instanceId', 'P.instanceId')
-    -> TF.Attr s P.Text -- ^ @account_name@ ('P._accountName', 'P.accountName')
-    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @db_names@ ('P._dbNames', 'P.dbNames')
-    -> P.Resource (DbAccountPrivilegeResource s)
-dbAccountPrivilegeResource _instanceId _accountName _dbNames =
-    TF.unsafeResource "alicloud_db_account_privilege" TF.validator $
-        DbAccountPrivilegeResource'
-            { _accountName = _accountName
-            , _dbNames = _dbNames
-            , _instanceId = _instanceId
-            , _privilege = TF.Nil
-            }
-
-instance TF.IsObject (DbAccountPrivilegeResource s) where
-    toObject DbAccountPrivilegeResource'{..} = P.catMaybes
-        [ TF.assign "account_name" <$> TF.attribute _accountName
-        , TF.assign "db_names" <$> TF.attribute _dbNames
-        , TF.assign "instance_id" <$> TF.attribute _instanceId
-        , TF.assign "privilege" <$> TF.attribute _privilege
-        ]
-
-instance TF.IsValid (DbAccountPrivilegeResource s) where
-    validator = P.mempty
-
-instance P.HasAccountName (DbAccountPrivilegeResource s) (TF.Attr s P.Text) where
-    accountName =
-        P.lens (_accountName :: DbAccountPrivilegeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _accountName = a } :: DbAccountPrivilegeResource s)
-
-instance P.HasDbNames (DbAccountPrivilegeResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
-    dbNames =
-        P.lens (_dbNames :: DbAccountPrivilegeResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
-               (\s a -> s { _dbNames = a } :: DbAccountPrivilegeResource s)
-
-instance P.HasInstanceId (DbAccountPrivilegeResource s) (TF.Attr s P.Text) where
-    instanceId =
-        P.lens (_instanceId :: DbAccountPrivilegeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceId = a } :: DbAccountPrivilegeResource s)
-
-instance P.HasPrivilege (DbAccountPrivilegeResource s) (TF.Attr s P.Text) where
-    privilege =
-        P.lens (_privilege :: DbAccountPrivilegeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _privilege = a } :: DbAccountPrivilegeResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DbAccountPrivilegeResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_db_backup_policy@ Resource.
@@ -2030,6 +2030,51 @@ instance s ~ s' => P.HasComputedSecurityIps (TF.Ref s' (DbInstanceResource s)) (
 instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedZoneId x = TF.compute (TF.refKey x) "zone_id"
 
+-- | @alicloud_disk_attachment@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/disk_attachment.html terraform documentation>
+-- for more information.
+data DiskAttachmentResource s = DiskAttachmentResource'
+    { _diskId     :: TF.Attr s P.Text
+    -- ^ @disk_id@ - (Optional, Forces New)
+    --
+    , _instanceId :: TF.Attr s P.Text
+    -- ^ @instance_id@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @alicloud_disk_attachment@ resource value.
+diskAttachmentResource
+    :: P.Resource (DiskAttachmentResource s)
+diskAttachmentResource =
+    TF.unsafeResource "alicloud_disk_attachment" TF.validator $
+        DiskAttachmentResource'
+            { _diskId = TF.Nil
+            , _instanceId = TF.Nil
+            }
+
+instance TF.IsObject (DiskAttachmentResource s) where
+    toObject DiskAttachmentResource'{..} = P.catMaybes
+        [ TF.assign "disk_id" <$> TF.attribute _diskId
+        , TF.assign "instance_id" <$> TF.attribute _instanceId
+        ]
+
+instance TF.IsValid (DiskAttachmentResource s) where
+    validator = P.mempty
+
+instance P.HasDiskId (DiskAttachmentResource s) (TF.Attr s P.Text) where
+    diskId =
+        P.lens (_diskId :: DiskAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _diskId = a } :: DiskAttachmentResource s)
+
+instance P.HasInstanceId (DiskAttachmentResource s) (TF.Attr s P.Text) where
+    instanceId =
+        P.lens (_instanceId :: DiskAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _instanceId = a } :: DiskAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DiskAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_disk@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/disk.html terraform documentation>
@@ -2138,100 +2183,6 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (DiskResource s)) (TF.Attr s P.Tex
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
-
--- | @alicloud_disk_attachment@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/alicloud/r/disk_attachment.html terraform documentation>
--- for more information.
-data DiskAttachmentResource s = DiskAttachmentResource'
-    { _diskId     :: TF.Attr s P.Text
-    -- ^ @disk_id@ - (Optional, Forces New)
-    --
-    , _instanceId :: TF.Attr s P.Text
-    -- ^ @instance_id@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @alicloud_disk_attachment@ resource value.
-diskAttachmentResource
-    :: P.Resource (DiskAttachmentResource s)
-diskAttachmentResource =
-    TF.unsafeResource "alicloud_disk_attachment" TF.validator $
-        DiskAttachmentResource'
-            { _diskId = TF.Nil
-            , _instanceId = TF.Nil
-            }
-
-instance TF.IsObject (DiskAttachmentResource s) where
-    toObject DiskAttachmentResource'{..} = P.catMaybes
-        [ TF.assign "disk_id" <$> TF.attribute _diskId
-        , TF.assign "instance_id" <$> TF.attribute _instanceId
-        ]
-
-instance TF.IsValid (DiskAttachmentResource s) where
-    validator = P.mempty
-
-instance P.HasDiskId (DiskAttachmentResource s) (TF.Attr s P.Text) where
-    diskId =
-        P.lens (_diskId :: DiskAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _diskId = a } :: DiskAttachmentResource s)
-
-instance P.HasInstanceId (DiskAttachmentResource s) (TF.Attr s P.Text) where
-    instanceId =
-        P.lens (_instanceId :: DiskAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceId = a } :: DiskAttachmentResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DiskAttachmentResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
--- | @alicloud_dns@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/alicloud/r/dns.html terraform documentation>
--- for more information.
-data DnsResource s = DnsResource'
-    { _groupId :: TF.Attr s P.Text
-    -- ^ @group_id@ - (Optional)
-    --
-    , _name    :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @alicloud_dns@ resource value.
-dnsResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> P.Resource (DnsResource s)
-dnsResource _name =
-    TF.unsafeResource "alicloud_dns" TF.validator $
-        DnsResource'
-            { _groupId = TF.Nil
-            , _name = _name
-            }
-
-instance TF.IsObject (DnsResource s) where
-    toObject DnsResource'{..} = P.catMaybes
-        [ TF.assign "group_id" <$> TF.attribute _groupId
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance TF.IsValid (DnsResource s) where
-    validator = P.mempty
-
-instance P.HasGroupId (DnsResource s) (TF.Attr s P.Text) where
-    groupId =
-        P.lens (_groupId :: DnsResource s -> TF.Attr s P.Text)
-               (\s a -> s { _groupId = a } :: DnsResource s)
-
-instance P.HasName (DnsResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: DnsResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: DnsResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedDnsServer (TF.Ref s' (DnsResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDnsServer x = TF.compute (TF.refKey x) "dns_server"
 
 -- | @alicloud_dns_group@ Resource.
 --
@@ -2374,6 +2325,106 @@ instance s ~ s' => P.HasComputedLocked (TF.Ref s' (DnsRecordResource s)) (TF.Att
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DnsRecordResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
+-- | @alicloud_dns@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/dns.html terraform documentation>
+-- for more information.
+data DnsResource s = DnsResource'
+    { _groupId :: TF.Attr s P.Text
+    -- ^ @group_id@ - (Optional)
+    --
+    , _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @alicloud_dns@ resource value.
+dnsResource
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (DnsResource s)
+dnsResource _name =
+    TF.unsafeResource "alicloud_dns" TF.validator $
+        DnsResource'
+            { _groupId = TF.Nil
+            , _name = _name
+            }
+
+instance TF.IsObject (DnsResource s) where
+    toObject DnsResource'{..} = P.catMaybes
+        [ TF.assign "group_id" <$> TF.attribute _groupId
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (DnsResource s) where
+    validator = P.mempty
+
+instance P.HasGroupId (DnsResource s) (TF.Attr s P.Text) where
+    groupId =
+        P.lens (_groupId :: DnsResource s -> TF.Attr s P.Text)
+               (\s a -> s { _groupId = a } :: DnsResource s)
+
+instance P.HasName (DnsResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: DnsResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DnsResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedDnsServer (TF.Ref s' (DnsResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedDnsServer x = TF.compute (TF.refKey x) "dns_server"
+
+-- | @alicloud_eip_association@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/eip_association.html terraform documentation>
+-- for more information.
+data EipAssociationResource s = EipAssociationResource'
+    { _allocationId :: TF.Attr s P.Text
+    -- ^ @allocation_id@ - (Optional, Forces New)
+    --
+    , _instanceId   :: TF.Attr s P.Text
+    -- ^ @instance_id@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @alicloud_eip_association@ resource value.
+eipAssociationResource
+    :: P.Resource (EipAssociationResource s)
+eipAssociationResource =
+    TF.unsafeResource "alicloud_eip_association" TF.validator $
+        EipAssociationResource'
+            { _allocationId = TF.Nil
+            , _instanceId = TF.Nil
+            }
+
+instance TF.IsObject (EipAssociationResource s) where
+    toObject EipAssociationResource'{..} = P.catMaybes
+        [ TF.assign "allocation_id" <$> TF.attribute _allocationId
+        , TF.assign "instance_id" <$> TF.attribute _instanceId
+        ]
+
+instance TF.IsValid (EipAssociationResource s) where
+    validator = P.mempty
+
+instance P.HasAllocationId (EipAssociationResource s) (TF.Attr s P.Text) where
+    allocationId =
+        P.lens (_allocationId :: EipAssociationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _allocationId = a } :: EipAssociationResource s)
+
+instance P.HasInstanceId (EipAssociationResource s) (TF.Attr s P.Text) where
+    instanceId =
+        P.lens (_instanceId :: EipAssociationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _instanceId = a } :: EipAssociationResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EipAssociationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedAllocationId (TF.Ref s' (EipAssociationResource s)) (TF.Attr s P.Text) where
+    computedAllocationId x = TF.compute (TF.refKey x) "allocation_id"
+
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (EipAssociationResource s)) (TF.Attr s P.Text) where
+    computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
+
 -- | @alicloud_eip@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/eip.html terraform documentation>
@@ -2477,57 +2528,6 @@ instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (EipResource s)) (TF.Attr s
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
-
--- | @alicloud_eip_association@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/alicloud/r/eip_association.html terraform documentation>
--- for more information.
-data EipAssociationResource s = EipAssociationResource'
-    { _allocationId :: TF.Attr s P.Text
-    -- ^ @allocation_id@ - (Optional, Forces New)
-    --
-    , _instanceId   :: TF.Attr s P.Text
-    -- ^ @instance_id@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @alicloud_eip_association@ resource value.
-eipAssociationResource
-    :: P.Resource (EipAssociationResource s)
-eipAssociationResource =
-    TF.unsafeResource "alicloud_eip_association" TF.validator $
-        EipAssociationResource'
-            { _allocationId = TF.Nil
-            , _instanceId = TF.Nil
-            }
-
-instance TF.IsObject (EipAssociationResource s) where
-    toObject EipAssociationResource'{..} = P.catMaybes
-        [ TF.assign "allocation_id" <$> TF.attribute _allocationId
-        , TF.assign "instance_id" <$> TF.attribute _instanceId
-        ]
-
-instance TF.IsValid (EipAssociationResource s) where
-    validator = P.mempty
-
-instance P.HasAllocationId (EipAssociationResource s) (TF.Attr s P.Text) where
-    allocationId =
-        P.lens (_allocationId :: EipAssociationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _allocationId = a } :: EipAssociationResource s)
-
-instance P.HasInstanceId (EipAssociationResource s) (TF.Attr s P.Text) where
-    instanceId =
-        P.lens (_instanceId :: EipAssociationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceId = a } :: EipAssociationResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (EipAssociationResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedAllocationId (TF.Ref s' (EipAssociationResource s)) (TF.Attr s P.Text) where
-    computedAllocationId x = TF.compute (TF.refKey x) "allocation_id"
-
-instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (EipAssociationResource s)) (TF.Attr s P.Text) where
-    computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
 
 -- | @alicloud_ess_attachment@ Resource.
 --
@@ -4054,6 +4054,53 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (InstanceResource s)) (TF.Attr
 instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedSubnetId x = TF.compute (TF.refKey x) "subnet_id"
 
+-- | @alicloud_key_pair_attachment@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/key_pair_attachment.html terraform documentation>
+-- for more information.
+data KeyPairAttachmentResource s = KeyPairAttachmentResource'
+    { _instanceIds :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @instance_ids@ - (Required, Forces New)
+    --
+    , _keyName     :: TF.Attr s P.Text
+    -- ^ @key_name@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @alicloud_key_pair_attachment@ resource value.
+keyPairAttachmentResource
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @instance_ids@ ('P._instanceIds', 'P.instanceIds')
+    -> TF.Attr s P.Text -- ^ @key_name@ ('P._keyName', 'P.keyName')
+    -> P.Resource (KeyPairAttachmentResource s)
+keyPairAttachmentResource _instanceIds _keyName =
+    TF.unsafeResource "alicloud_key_pair_attachment" TF.validator $
+        KeyPairAttachmentResource'
+            { _instanceIds = _instanceIds
+            , _keyName = _keyName
+            }
+
+instance TF.IsObject (KeyPairAttachmentResource s) where
+    toObject KeyPairAttachmentResource'{..} = P.catMaybes
+        [ TF.assign "instance_ids" <$> TF.attribute _instanceIds
+        , TF.assign "key_name" <$> TF.attribute _keyName
+        ]
+
+instance TF.IsValid (KeyPairAttachmentResource s) where
+    validator = P.mempty
+
+instance P.HasInstanceIds (KeyPairAttachmentResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    instanceIds =
+        P.lens (_instanceIds :: KeyPairAttachmentResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _instanceIds = a } :: KeyPairAttachmentResource s)
+
+instance P.HasKeyName (KeyPairAttachmentResource s) (TF.Attr s P.Text) where
+    keyName =
+        P.lens (_keyName :: KeyPairAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _keyName = a } :: KeyPairAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyPairAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_key_pair@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/key_pair.html terraform documentation>
@@ -4141,53 +4188,6 @@ instance s ~ s' => P.HasComputedFingerPrint (TF.Ref s' (KeyPairResource s)) (TF.
 
 instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (KeyPairResource s)) (TF.Attr s P.Text) where
     computedKeyName x = TF.compute (TF.refKey x) "key_name"
-
--- | @alicloud_key_pair_attachment@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/alicloud/r/key_pair_attachment.html terraform documentation>
--- for more information.
-data KeyPairAttachmentResource s = KeyPairAttachmentResource'
-    { _instanceIds :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @instance_ids@ - (Required, Forces New)
-    --
-    , _keyName     :: TF.Attr s P.Text
-    -- ^ @key_name@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @alicloud_key_pair_attachment@ resource value.
-keyPairAttachmentResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @instance_ids@ ('P._instanceIds', 'P.instanceIds')
-    -> TF.Attr s P.Text -- ^ @key_name@ ('P._keyName', 'P.keyName')
-    -> P.Resource (KeyPairAttachmentResource s)
-keyPairAttachmentResource _instanceIds _keyName =
-    TF.unsafeResource "alicloud_key_pair_attachment" TF.validator $
-        KeyPairAttachmentResource'
-            { _instanceIds = _instanceIds
-            , _keyName = _keyName
-            }
-
-instance TF.IsObject (KeyPairAttachmentResource s) where
-    toObject KeyPairAttachmentResource'{..} = P.catMaybes
-        [ TF.assign "instance_ids" <$> TF.attribute _instanceIds
-        , TF.assign "key_name" <$> TF.attribute _keyName
-        ]
-
-instance TF.IsValid (KeyPairAttachmentResource s) where
-    validator = P.mempty
-
-instance P.HasInstanceIds (KeyPairAttachmentResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    instanceIds =
-        P.lens (_instanceIds :: KeyPairAttachmentResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _instanceIds = a } :: KeyPairAttachmentResource s)
-
-instance P.HasKeyName (KeyPairAttachmentResource s) (TF.Attr s P.Text) where
-    keyName =
-        P.lens (_keyName :: KeyPairAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _keyName = a } :: KeyPairAttachmentResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyPairAttachmentResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_kms_key@ Resource.
 --
@@ -4381,76 +4381,6 @@ instance P.HasName (LogProjectResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (LogProjectResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
--- | @alicloud_log_store@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/alicloud/r/log_store.html terraform documentation>
--- for more information.
-data LogStoreResource s = LogStoreResource'
-    { _name            :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    , _project         :: TF.Attr s P.Text
-    -- ^ @project@ - (Required, Forces New)
-    --
-    , _retentionPeriod :: TF.Attr s P.Int
-    -- ^ @retention_period@ - (Optional)
-    --
-    , _shardCount      :: TF.Attr s P.Int
-    -- ^ @shard_count@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @alicloud_log_store@ resource value.
-logStoreResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s P.Text -- ^ @project@ ('P._project', 'P.project')
-    -> P.Resource (LogStoreResource s)
-logStoreResource _name _project =
-    TF.unsafeResource "alicloud_log_store" TF.validator $
-        LogStoreResource'
-            { _name = _name
-            , _project = _project
-            , _retentionPeriod = TF.value 30
-            , _shardCount = TF.value 2
-            }
-
-instance TF.IsObject (LogStoreResource s) where
-    toObject LogStoreResource'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "retention_period" <$> TF.attribute _retentionPeriod
-        , TF.assign "shard_count" <$> TF.attribute _shardCount
-        ]
-
-instance TF.IsValid (LogStoreResource s) where
-    validator = P.mempty
-
-instance P.HasName (LogStoreResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: LogStoreResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: LogStoreResource s)
-
-instance P.HasProject (LogStoreResource s) (TF.Attr s P.Text) where
-    project =
-        P.lens (_project :: LogStoreResource s -> TF.Attr s P.Text)
-               (\s a -> s { _project = a } :: LogStoreResource s)
-
-instance P.HasRetentionPeriod (LogStoreResource s) (TF.Attr s P.Int) where
-    retentionPeriod =
-        P.lens (_retentionPeriod :: LogStoreResource s -> TF.Attr s P.Int)
-               (\s a -> s { _retentionPeriod = a } :: LogStoreResource s)
-
-instance P.HasShardCount (LogStoreResource s) (TF.Attr s P.Int) where
-    shardCount =
-        P.lens (_shardCount :: LogStoreResource s -> TF.Attr s P.Int)
-               (\s a -> s { _shardCount = a } :: LogStoreResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (LogStoreResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedShards (TF.Ref s' (LogStoreResource s)) (TF.Attr s [TF.Attr s (ShardsSetting s)]) where
-    computedShards x = TF.compute (TF.refKey x) "shards"
-
 -- | @alicloud_log_store_index@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/log_store_index.html terraform documentation>
@@ -4521,6 +4451,76 @@ instance P.HasProject (LogStoreIndexResource s) (TF.Attr s P.Text) where
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (LogStoreIndexResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @alicloud_log_store@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/log_store.html terraform documentation>
+-- for more information.
+data LogStoreResource s = LogStoreResource'
+    { _name            :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _project         :: TF.Attr s P.Text
+    -- ^ @project@ - (Required, Forces New)
+    --
+    , _retentionPeriod :: TF.Attr s P.Int
+    -- ^ @retention_period@ - (Optional)
+    --
+    , _shardCount      :: TF.Attr s P.Int
+    -- ^ @shard_count@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @alicloud_log_store@ resource value.
+logStoreResource
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @project@ ('P._project', 'P.project')
+    -> P.Resource (LogStoreResource s)
+logStoreResource _name _project =
+    TF.unsafeResource "alicloud_log_store" TF.validator $
+        LogStoreResource'
+            { _name = _name
+            , _project = _project
+            , _retentionPeriod = TF.value 30
+            , _shardCount = TF.value 2
+            }
+
+instance TF.IsObject (LogStoreResource s) where
+    toObject LogStoreResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "retention_period" <$> TF.attribute _retentionPeriod
+        , TF.assign "shard_count" <$> TF.attribute _shardCount
+        ]
+
+instance TF.IsValid (LogStoreResource s) where
+    validator = P.mempty
+
+instance P.HasName (LogStoreResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LogStoreResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LogStoreResource s)
+
+instance P.HasProject (LogStoreResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: LogStoreResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: LogStoreResource s)
+
+instance P.HasRetentionPeriod (LogStoreResource s) (TF.Attr s P.Int) where
+    retentionPeriod =
+        P.lens (_retentionPeriod :: LogStoreResource s -> TF.Attr s P.Int)
+               (\s a -> s { _retentionPeriod = a } :: LogStoreResource s)
+
+instance P.HasShardCount (LogStoreResource s) (TF.Attr s P.Int) where
+    shardCount =
+        P.lens (_shardCount :: LogStoreResource s -> TF.Attr s P.Int)
+               (\s a -> s { _shardCount = a } :: LogStoreResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogStoreResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedShards (TF.Ref s' (LogStoreResource s)) (TF.Attr s [TF.Attr s (ShardsSetting s)]) where
+    computedShards x = TF.compute (TF.refKey x) "shards"
 
 -- | @alicloud_nat_gateway@ Resource.
 --
@@ -4599,144 +4599,6 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (NatGatewayResource s)) (TF.Attr
 
 instance s ~ s' => P.HasComputedSnatTableIds (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
     computedSnatTableIds x = TF.compute (TF.refKey x) "snat_table_ids"
-
--- | @alicloud_oss_bucket@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/alicloud/r/oss_bucket.html terraform documentation>
--- for more information.
-data OssBucketResource s = OssBucketResource'
-    { _acl             :: TF.Attr s P.Text
-    -- ^ @acl@ - (Optional)
-    --
-    , _bucket          :: TF.Attr s P.Text
-    -- ^ @bucket@ - (Optional, Forces New)
-    --
-    , _corsRule        :: TF.Attr s [TF.Attr s (CorsRuleSetting s)]
-    -- ^ @cors_rule@ - (Optional)
-    --
-    , _lifecycleRule   :: TF.Attr s [TF.Attr s (LifecycleRuleSetting s)]
-    -- ^ @lifecycle_rule@ - (Optional)
-    --
-    , _logging         :: TF.Attr s (LoggingSetting s)
-    -- ^ @logging@ - (Optional)
-    --
-    , _loggingIsenable :: TF.Attr s P.Bool
-    -- ^ @logging_isenable@ - (Optional)
-    --
-    , _refererConfig   :: TF.Attr s (RefererConfigSetting s)
-    -- ^ @referer_config@ - (Optional)
-    --
-    , _website         :: TF.Attr s (WebsiteSetting s)
-    -- ^ @website@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @alicloud_oss_bucket@ resource value.
-ossBucketResource
-    :: P.Resource (OssBucketResource s)
-ossBucketResource =
-    TF.unsafeResource "alicloud_oss_bucket" TF.validator $
-        OssBucketResource'
-            { _acl = TF.Nil
-            , _bucket = TF.Nil
-            , _corsRule = TF.Nil
-            , _lifecycleRule = TF.Nil
-            , _logging = TF.Nil
-            , _loggingIsenable = TF.value P.True
-            , _refererConfig = TF.Nil
-            , _website = TF.Nil
-            }
-
-instance TF.IsObject (OssBucketResource s) where
-    toObject OssBucketResource'{..} = P.catMaybes
-        [ TF.assign "acl" <$> TF.attribute _acl
-        , TF.assign "bucket" <$> TF.attribute _bucket
-        , TF.assign "cors_rule" <$> TF.attribute _corsRule
-        , TF.assign "lifecycle_rule" <$> TF.attribute _lifecycleRule
-        , TF.assign "logging" <$> TF.attribute _logging
-        , TF.assign "logging_isenable" <$> TF.attribute _loggingIsenable
-        , TF.assign "referer_config" <$> TF.attribute _refererConfig
-        , TF.assign "website" <$> TF.attribute _website
-        ]
-
-instance TF.IsValid (OssBucketResource s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_logging"
-                  (_logging
-                      :: OssBucketResource s -> TF.Attr s (LoggingSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_refererConfig"
-                  (_refererConfig
-                      :: OssBucketResource s -> TF.Attr s (RefererConfigSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_website"
-                  (_website
-                      :: OssBucketResource s -> TF.Attr s (WebsiteSetting s))
-                  TF.validator
-
-instance P.HasAcl (OssBucketResource s) (TF.Attr s P.Text) where
-    acl =
-        P.lens (_acl :: OssBucketResource s -> TF.Attr s P.Text)
-               (\s a -> s { _acl = a } :: OssBucketResource s)
-
-instance P.HasBucket (OssBucketResource s) (TF.Attr s P.Text) where
-    bucket =
-        P.lens (_bucket :: OssBucketResource s -> TF.Attr s P.Text)
-               (\s a -> s { _bucket = a } :: OssBucketResource s)
-
-instance P.HasCorsRule (OssBucketResource s) (TF.Attr s [TF.Attr s (CorsRuleSetting s)]) where
-    corsRule =
-        P.lens (_corsRule :: OssBucketResource s -> TF.Attr s [TF.Attr s (CorsRuleSetting s)])
-               (\s a -> s { _corsRule = a } :: OssBucketResource s)
-
-instance P.HasLifecycleRule (OssBucketResource s) (TF.Attr s [TF.Attr s (LifecycleRuleSetting s)]) where
-    lifecycleRule =
-        P.lens (_lifecycleRule :: OssBucketResource s -> TF.Attr s [TF.Attr s (LifecycleRuleSetting s)])
-               (\s a -> s { _lifecycleRule = a } :: OssBucketResource s)
-
-instance P.HasLogging (OssBucketResource s) (TF.Attr s (LoggingSetting s)) where
-    logging =
-        P.lens (_logging :: OssBucketResource s -> TF.Attr s (LoggingSetting s))
-               (\s a -> s { _logging = a } :: OssBucketResource s)
-
-instance P.HasLoggingIsenable (OssBucketResource s) (TF.Attr s P.Bool) where
-    loggingIsenable =
-        P.lens (_loggingIsenable :: OssBucketResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _loggingIsenable = a } :: OssBucketResource s)
-
-instance P.HasRefererConfig (OssBucketResource s) (TF.Attr s (RefererConfigSetting s)) where
-    refererConfig =
-        P.lens (_refererConfig :: OssBucketResource s -> TF.Attr s (RefererConfigSetting s))
-               (\s a -> s { _refererConfig = a } :: OssBucketResource s)
-
-instance P.HasWebsite (OssBucketResource s) (TF.Attr s (WebsiteSetting s)) where
-    website =
-        P.lens (_website :: OssBucketResource s -> TF.Attr s (WebsiteSetting s))
-               (\s a -> s { _website = a } :: OssBucketResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
-    computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
-
-instance s ~ s' => P.HasComputedExtranetEndpoint (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
-    computedExtranetEndpoint x = TF.compute (TF.refKey x) "extranet_endpoint"
-
-instance s ~ s' => P.HasComputedIntranetEndpoint (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
-    computedIntranetEndpoint x = TF.compute (TF.refKey x) "intranet_endpoint"
-
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
-    computedLocation x = TF.compute (TF.refKey x) "location"
-
-instance s ~ s' => P.HasComputedOwner (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
-    computedOwner x = TF.compute (TF.refKey x) "owner"
-
-instance s ~ s' => P.HasComputedRefererConfig (TF.Ref s' (OssBucketResource s)) (TF.Attr s (RefererConfigSetting s)) where
-    computedRefererConfig x = TF.compute (TF.refKey x) "referer_config"
-
-instance s ~ s' => P.HasComputedStorageClass (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
-    computedStorageClass x = TF.compute (TF.refKey x) "storage_class"
 
 -- | @alicloud_oss_bucket_object@ Resource.
 --
@@ -4914,6 +4776,205 @@ instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OssBucketObjectResource s)) (TF
 instance s ~ s' => P.HasComputedServerSideEncryption (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
     computedServerSideEncryption x = TF.compute (TF.refKey x) "server_side_encryption"
 
+-- | @alicloud_oss_bucket@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/oss_bucket.html terraform documentation>
+-- for more information.
+data OssBucketResource s = OssBucketResource'
+    { _acl             :: TF.Attr s P.Text
+    -- ^ @acl@ - (Optional)
+    --
+    , _bucket          :: TF.Attr s P.Text
+    -- ^ @bucket@ - (Optional, Forces New)
+    --
+    , _corsRule        :: TF.Attr s [TF.Attr s (CorsRuleSetting s)]
+    -- ^ @cors_rule@ - (Optional)
+    --
+    , _lifecycleRule   :: TF.Attr s [TF.Attr s (LifecycleRuleSetting s)]
+    -- ^ @lifecycle_rule@ - (Optional)
+    --
+    , _logging         :: TF.Attr s (LoggingSetting s)
+    -- ^ @logging@ - (Optional)
+    --
+    , _loggingIsenable :: TF.Attr s P.Bool
+    -- ^ @logging_isenable@ - (Optional)
+    --
+    , _refererConfig   :: TF.Attr s (RefererConfigSetting s)
+    -- ^ @referer_config@ - (Optional)
+    --
+    , _website         :: TF.Attr s (WebsiteSetting s)
+    -- ^ @website@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @alicloud_oss_bucket@ resource value.
+ossBucketResource
+    :: P.Resource (OssBucketResource s)
+ossBucketResource =
+    TF.unsafeResource "alicloud_oss_bucket" TF.validator $
+        OssBucketResource'
+            { _acl = TF.Nil
+            , _bucket = TF.Nil
+            , _corsRule = TF.Nil
+            , _lifecycleRule = TF.Nil
+            , _logging = TF.Nil
+            , _loggingIsenable = TF.value P.True
+            , _refererConfig = TF.Nil
+            , _website = TF.Nil
+            }
+
+instance TF.IsObject (OssBucketResource s) where
+    toObject OssBucketResource'{..} = P.catMaybes
+        [ TF.assign "acl" <$> TF.attribute _acl
+        , TF.assign "bucket" <$> TF.attribute _bucket
+        , TF.assign "cors_rule" <$> TF.attribute _corsRule
+        , TF.assign "lifecycle_rule" <$> TF.attribute _lifecycleRule
+        , TF.assign "logging" <$> TF.attribute _logging
+        , TF.assign "logging_isenable" <$> TF.attribute _loggingIsenable
+        , TF.assign "referer_config" <$> TF.attribute _refererConfig
+        , TF.assign "website" <$> TF.attribute _website
+        ]
+
+instance TF.IsValid (OssBucketResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_logging"
+                  (_logging
+                      :: OssBucketResource s -> TF.Attr s (LoggingSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_refererConfig"
+                  (_refererConfig
+                      :: OssBucketResource s -> TF.Attr s (RefererConfigSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_website"
+                  (_website
+                      :: OssBucketResource s -> TF.Attr s (WebsiteSetting s))
+                  TF.validator
+
+instance P.HasAcl (OssBucketResource s) (TF.Attr s P.Text) where
+    acl =
+        P.lens (_acl :: OssBucketResource s -> TF.Attr s P.Text)
+               (\s a -> s { _acl = a } :: OssBucketResource s)
+
+instance P.HasBucket (OssBucketResource s) (TF.Attr s P.Text) where
+    bucket =
+        P.lens (_bucket :: OssBucketResource s -> TF.Attr s P.Text)
+               (\s a -> s { _bucket = a } :: OssBucketResource s)
+
+instance P.HasCorsRule (OssBucketResource s) (TF.Attr s [TF.Attr s (CorsRuleSetting s)]) where
+    corsRule =
+        P.lens (_corsRule :: OssBucketResource s -> TF.Attr s [TF.Attr s (CorsRuleSetting s)])
+               (\s a -> s { _corsRule = a } :: OssBucketResource s)
+
+instance P.HasLifecycleRule (OssBucketResource s) (TF.Attr s [TF.Attr s (LifecycleRuleSetting s)]) where
+    lifecycleRule =
+        P.lens (_lifecycleRule :: OssBucketResource s -> TF.Attr s [TF.Attr s (LifecycleRuleSetting s)])
+               (\s a -> s { _lifecycleRule = a } :: OssBucketResource s)
+
+instance P.HasLogging (OssBucketResource s) (TF.Attr s (LoggingSetting s)) where
+    logging =
+        P.lens (_logging :: OssBucketResource s -> TF.Attr s (LoggingSetting s))
+               (\s a -> s { _logging = a } :: OssBucketResource s)
+
+instance P.HasLoggingIsenable (OssBucketResource s) (TF.Attr s P.Bool) where
+    loggingIsenable =
+        P.lens (_loggingIsenable :: OssBucketResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _loggingIsenable = a } :: OssBucketResource s)
+
+instance P.HasRefererConfig (OssBucketResource s) (TF.Attr s (RefererConfigSetting s)) where
+    refererConfig =
+        P.lens (_refererConfig :: OssBucketResource s -> TF.Attr s (RefererConfigSetting s))
+               (\s a -> s { _refererConfig = a } :: OssBucketResource s)
+
+instance P.HasWebsite (OssBucketResource s) (TF.Attr s (WebsiteSetting s)) where
+    website =
+        P.lens (_website :: OssBucketResource s -> TF.Attr s (WebsiteSetting s))
+               (\s a -> s { _website = a } :: OssBucketResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
+    computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
+
+instance s ~ s' => P.HasComputedExtranetEndpoint (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
+    computedExtranetEndpoint x = TF.compute (TF.refKey x) "extranet_endpoint"
+
+instance s ~ s' => P.HasComputedIntranetEndpoint (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
+    computedIntranetEndpoint x = TF.compute (TF.refKey x) "intranet_endpoint"
+
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
+    computedLocation x = TF.compute (TF.refKey x) "location"
+
+instance s ~ s' => P.HasComputedOwner (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
+    computedOwner x = TF.compute (TF.refKey x) "owner"
+
+instance s ~ s' => P.HasComputedRefererConfig (TF.Ref s' (OssBucketResource s)) (TF.Attr s (RefererConfigSetting s)) where
+    computedRefererConfig x = TF.compute (TF.refKey x) "referer_config"
+
+instance s ~ s' => P.HasComputedStorageClass (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
+    computedStorageClass x = TF.compute (TF.refKey x) "storage_class"
+
+-- | @alicloud_ots_instance_attachment@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ots_instance_attachment.html terraform documentation>
+-- for more information.
+data OtsInstanceAttachmentResource s = OtsInstanceAttachmentResource'
+    { _instanceName :: TF.Attr s P.Text
+    -- ^ @instance_name@ - (Required, Forces New)
+    --
+    , _vpcName      :: TF.Attr s P.Text
+    -- ^ @vpc_name@ - (Required, Forces New)
+    --
+    , _vswitchId    :: TF.Attr s P.Text
+    -- ^ @vswitch_id@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @alicloud_ots_instance_attachment@ resource value.
+otsInstanceAttachmentResource
+    :: TF.Attr s P.Text -- ^ @vswitch_id@ ('P._vswitchId', 'P.vswitchId')
+    -> TF.Attr s P.Text -- ^ @instance_name@ ('P._instanceName', 'P.instanceName')
+    -> TF.Attr s P.Text -- ^ @vpc_name@ ('P._vpcName', 'P.vpcName')
+    -> P.Resource (OtsInstanceAttachmentResource s)
+otsInstanceAttachmentResource _vswitchId _instanceName _vpcName =
+    TF.unsafeResource "alicloud_ots_instance_attachment" TF.validator $
+        OtsInstanceAttachmentResource'
+            { _instanceName = _instanceName
+            , _vpcName = _vpcName
+            , _vswitchId = _vswitchId
+            }
+
+instance TF.IsObject (OtsInstanceAttachmentResource s) where
+    toObject OtsInstanceAttachmentResource'{..} = P.catMaybes
+        [ TF.assign "instance_name" <$> TF.attribute _instanceName
+        , TF.assign "vpc_name" <$> TF.attribute _vpcName
+        , TF.assign "vswitch_id" <$> TF.attribute _vswitchId
+        ]
+
+instance TF.IsValid (OtsInstanceAttachmentResource s) where
+    validator = P.mempty
+
+instance P.HasInstanceName (OtsInstanceAttachmentResource s) (TF.Attr s P.Text) where
+    instanceName =
+        P.lens (_instanceName :: OtsInstanceAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _instanceName = a } :: OtsInstanceAttachmentResource s)
+
+instance P.HasVpcName (OtsInstanceAttachmentResource s) (TF.Attr s P.Text) where
+    vpcName =
+        P.lens (_vpcName :: OtsInstanceAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vpcName = a } :: OtsInstanceAttachmentResource s)
+
+instance P.HasVswitchId (OtsInstanceAttachmentResource s) (TF.Attr s P.Text) where
+    vswitchId =
+        P.lens (_vswitchId :: OtsInstanceAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vswitchId = a } :: OtsInstanceAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OtsInstanceAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (OtsInstanceAttachmentResource s)) (TF.Attr s P.Text) where
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
+
 -- | @alicloud_ots_instance@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/ots_instance.html terraform documentation>
@@ -4990,67 +5051,6 @@ instance P.HasTags (OtsInstanceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (OtsInstanceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
-
--- | @alicloud_ots_instance_attachment@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/alicloud/r/ots_instance_attachment.html terraform documentation>
--- for more information.
-data OtsInstanceAttachmentResource s = OtsInstanceAttachmentResource'
-    { _instanceName :: TF.Attr s P.Text
-    -- ^ @instance_name@ - (Required, Forces New)
-    --
-    , _vpcName      :: TF.Attr s P.Text
-    -- ^ @vpc_name@ - (Required, Forces New)
-    --
-    , _vswitchId    :: TF.Attr s P.Text
-    -- ^ @vswitch_id@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @alicloud_ots_instance_attachment@ resource value.
-otsInstanceAttachmentResource
-    :: TF.Attr s P.Text -- ^ @vswitch_id@ ('P._vswitchId', 'P.vswitchId')
-    -> TF.Attr s P.Text -- ^ @instance_name@ ('P._instanceName', 'P.instanceName')
-    -> TF.Attr s P.Text -- ^ @vpc_name@ ('P._vpcName', 'P.vpcName')
-    -> P.Resource (OtsInstanceAttachmentResource s)
-otsInstanceAttachmentResource _vswitchId _instanceName _vpcName =
-    TF.unsafeResource "alicloud_ots_instance_attachment" TF.validator $
-        OtsInstanceAttachmentResource'
-            { _instanceName = _instanceName
-            , _vpcName = _vpcName
-            , _vswitchId = _vswitchId
-            }
-
-instance TF.IsObject (OtsInstanceAttachmentResource s) where
-    toObject OtsInstanceAttachmentResource'{..} = P.catMaybes
-        [ TF.assign "instance_name" <$> TF.attribute _instanceName
-        , TF.assign "vpc_name" <$> TF.attribute _vpcName
-        , TF.assign "vswitch_id" <$> TF.attribute _vswitchId
-        ]
-
-instance TF.IsValid (OtsInstanceAttachmentResource s) where
-    validator = P.mempty
-
-instance P.HasInstanceName (OtsInstanceAttachmentResource s) (TF.Attr s P.Text) where
-    instanceName =
-        P.lens (_instanceName :: OtsInstanceAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceName = a } :: OtsInstanceAttachmentResource s)
-
-instance P.HasVpcName (OtsInstanceAttachmentResource s) (TF.Attr s P.Text) where
-    vpcName =
-        P.lens (_vpcName :: OtsInstanceAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _vpcName = a } :: OtsInstanceAttachmentResource s)
-
-instance P.HasVswitchId (OtsInstanceAttachmentResource s) (TF.Attr s P.Text) where
-    vswitchId =
-        P.lens (_vswitchId :: OtsInstanceAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _vswitchId = a } :: OtsInstanceAttachmentResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (OtsInstanceAttachmentResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (OtsInstanceAttachmentResource s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @alicloud_ots_table@ Resource.
 --
@@ -5259,62 +5259,6 @@ instance P.HasAccountAlias (RamAliasResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RamAliasResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
--- | @alicloud_ram_group@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_group.html terraform documentation>
--- for more information.
-data RamGroupResource s = RamGroupResource'
-    { _comments :: TF.Attr s P.Text
-    -- ^ @comments@ - (Optional)
-    --
-    , _force    :: TF.Attr s P.Bool
-    -- ^ @force@ - (Optional)
-    --
-    , _name     :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @alicloud_ram_group@ resource value.
-ramGroupResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> P.Resource (RamGroupResource s)
-ramGroupResource _name =
-    TF.unsafeResource "alicloud_ram_group" TF.validator $
-        RamGroupResource'
-            { _comments = TF.Nil
-            , _force = TF.value P.False
-            , _name = _name
-            }
-
-instance TF.IsObject (RamGroupResource s) where
-    toObject RamGroupResource'{..} = P.catMaybes
-        [ TF.assign "comments" <$> TF.attribute _comments
-        , TF.assign "force" <$> TF.attribute _force
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance TF.IsValid (RamGroupResource s) where
-    validator = P.mempty
-
-instance P.HasComments (RamGroupResource s) (TF.Attr s P.Text) where
-    comments =
-        P.lens (_comments :: RamGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _comments = a } :: RamGroupResource s)
-
-instance P.HasForce (RamGroupResource s) (TF.Attr s P.Bool) where
-    force =
-        P.lens (_force :: RamGroupResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _force = a } :: RamGroupResource s)
-
-instance P.HasName (RamGroupResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: RamGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: RamGroupResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RamGroupResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
 -- | @alicloud_ram_group_membership@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_group_membership.html terraform documentation>
@@ -5418,6 +5362,62 @@ instance P.HasPolicyType (RamGroupPolicyAttachmentResource s) (TF.Attr s P.Text)
                (\s a -> s { _policyType = a } :: RamGroupPolicyAttachmentResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RamGroupPolicyAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @alicloud_ram_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_group.html terraform documentation>
+-- for more information.
+data RamGroupResource s = RamGroupResource'
+    { _comments :: TF.Attr s P.Text
+    -- ^ @comments@ - (Optional)
+    --
+    , _force    :: TF.Attr s P.Bool
+    -- ^ @force@ - (Optional)
+    --
+    , _name     :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @alicloud_ram_group@ resource value.
+ramGroupResource
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (RamGroupResource s)
+ramGroupResource _name =
+    TF.unsafeResource "alicloud_ram_group" TF.validator $
+        RamGroupResource'
+            { _comments = TF.Nil
+            , _force = TF.value P.False
+            , _name = _name
+            }
+
+instance TF.IsObject (RamGroupResource s) where
+    toObject RamGroupResource'{..} = P.catMaybes
+        [ TF.assign "comments" <$> TF.attribute _comments
+        , TF.assign "force" <$> TF.attribute _force
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (RamGroupResource s) where
+    validator = P.mempty
+
+instance P.HasComments (RamGroupResource s) (TF.Attr s P.Text) where
+    comments =
+        P.lens (_comments :: RamGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _comments = a } :: RamGroupResource s)
+
+instance P.HasForce (RamGroupResource s) (TF.Attr s P.Bool) where
+    force =
+        P.lens (_force :: RamGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _force = a } :: RamGroupResource s)
+
+instance P.HasName (RamGroupResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: RamGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: RamGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_ram_login_profile@ Resource.
@@ -5611,6 +5611,111 @@ instance s ~ s' => P.HasComputedStatement (TF.Ref s' (RamPolicyResource s)) (TF.
 instance s ~ s' => P.HasComputedType (TF.Ref s' (RamPolicyResource s)) (TF.Attr s P.Text) where
     computedType x = TF.compute (TF.refKey x) "type"
 
+-- | @alicloud_ram_role_attachment@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_role_attachment.html terraform documentation>
+-- for more information.
+data RamRoleAttachmentResource s = RamRoleAttachmentResource'
+    { _instanceIds :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @instance_ids@ - (Required, Forces New)
+    --
+    , _roleName    :: TF.Attr s P.Text
+    -- ^ @role_name@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @alicloud_ram_role_attachment@ resource value.
+ramRoleAttachmentResource
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @instance_ids@ ('P._instanceIds', 'P.instanceIds')
+    -> TF.Attr s P.Text -- ^ @role_name@ ('P._roleName', 'P.roleName')
+    -> P.Resource (RamRoleAttachmentResource s)
+ramRoleAttachmentResource _instanceIds _roleName =
+    TF.unsafeResource "alicloud_ram_role_attachment" TF.validator $
+        RamRoleAttachmentResource'
+            { _instanceIds = _instanceIds
+            , _roleName = _roleName
+            }
+
+instance TF.IsObject (RamRoleAttachmentResource s) where
+    toObject RamRoleAttachmentResource'{..} = P.catMaybes
+        [ TF.assign "instance_ids" <$> TF.attribute _instanceIds
+        , TF.assign "role_name" <$> TF.attribute _roleName
+        ]
+
+instance TF.IsValid (RamRoleAttachmentResource s) where
+    validator = P.mempty
+
+instance P.HasInstanceIds (RamRoleAttachmentResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    instanceIds =
+        P.lens (_instanceIds :: RamRoleAttachmentResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _instanceIds = a } :: RamRoleAttachmentResource s)
+
+instance P.HasRoleName (RamRoleAttachmentResource s) (TF.Attr s P.Text) where
+    roleName =
+        P.lens (_roleName :: RamRoleAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _roleName = a } :: RamRoleAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamRoleAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @alicloud_ram_role_policy_attachment@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_role_policy_attachment.html terraform documentation>
+-- for more information.
+data RamRolePolicyAttachmentResource s = RamRolePolicyAttachmentResource'
+    { _policyName :: TF.Attr s P.Text
+    -- ^ @policy_name@ - (Required, Forces New)
+    --
+    , _policyType :: TF.Attr s P.Text
+    -- ^ @policy_type@ - (Required, Forces New)
+    --
+    , _roleName   :: TF.Attr s P.Text
+    -- ^ @role_name@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @alicloud_ram_role_policy_attachment@ resource value.
+ramRolePolicyAttachmentResource
+    :: TF.Attr s P.Text -- ^ @policy_name@ ('P._policyName', 'P.policyName')
+    -> TF.Attr s P.Text -- ^ @role_name@ ('P._roleName', 'P.roleName')
+    -> TF.Attr s P.Text -- ^ @policy_type@ ('P._policyType', 'P.policyType')
+    -> P.Resource (RamRolePolicyAttachmentResource s)
+ramRolePolicyAttachmentResource _policyName _roleName _policyType =
+    TF.unsafeResource "alicloud_ram_role_policy_attachment" TF.validator $
+        RamRolePolicyAttachmentResource'
+            { _policyName = _policyName
+            , _policyType = _policyType
+            , _roleName = _roleName
+            }
+
+instance TF.IsObject (RamRolePolicyAttachmentResource s) where
+    toObject RamRolePolicyAttachmentResource'{..} = P.catMaybes
+        [ TF.assign "policy_name" <$> TF.attribute _policyName
+        , TF.assign "policy_type" <$> TF.attribute _policyType
+        , TF.assign "role_name" <$> TF.attribute _roleName
+        ]
+
+instance TF.IsValid (RamRolePolicyAttachmentResource s) where
+    validator = P.mempty
+
+instance P.HasPolicyName (RamRolePolicyAttachmentResource s) (TF.Attr s P.Text) where
+    policyName =
+        P.lens (_policyName :: RamRolePolicyAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _policyName = a } :: RamRolePolicyAttachmentResource s)
+
+instance P.HasPolicyType (RamRolePolicyAttachmentResource s) (TF.Attr s P.Text) where
+    policyType =
+        P.lens (_policyType :: RamRolePolicyAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _policyType = a } :: RamRolePolicyAttachmentResource s)
+
+instance P.HasRoleName (RamRolePolicyAttachmentResource s) (TF.Attr s P.Text) where
+    roleName =
+        P.lens (_roleName :: RamRolePolicyAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _roleName = a } :: RamRolePolicyAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamRolePolicyAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_ram_role@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_role.html terraform documentation>
@@ -5754,109 +5859,62 @@ instance s ~ s' => P.HasComputedRamUsers (TF.Ref s' (RamRoleResource s)) (TF.Att
 instance s ~ s' => P.HasComputedServices (TF.Ref s' (RamRoleResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedServices x = TF.compute (TF.refKey x) "services"
 
--- | @alicloud_ram_role_attachment@ Resource.
+-- | @alicloud_ram_user_policy_attachment@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_role_attachment.html terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_user_policy_attachment.html terraform documentation>
 -- for more information.
-data RamRoleAttachmentResource s = RamRoleAttachmentResource'
-    { _instanceIds :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @instance_ids@ - (Required, Forces New)
-    --
-    , _roleName    :: TF.Attr s P.Text
-    -- ^ @role_name@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @alicloud_ram_role_attachment@ resource value.
-ramRoleAttachmentResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @instance_ids@ ('P._instanceIds', 'P.instanceIds')
-    -> TF.Attr s P.Text -- ^ @role_name@ ('P._roleName', 'P.roleName')
-    -> P.Resource (RamRoleAttachmentResource s)
-ramRoleAttachmentResource _instanceIds _roleName =
-    TF.unsafeResource "alicloud_ram_role_attachment" TF.validator $
-        RamRoleAttachmentResource'
-            { _instanceIds = _instanceIds
-            , _roleName = _roleName
-            }
-
-instance TF.IsObject (RamRoleAttachmentResource s) where
-    toObject RamRoleAttachmentResource'{..} = P.catMaybes
-        [ TF.assign "instance_ids" <$> TF.attribute _instanceIds
-        , TF.assign "role_name" <$> TF.attribute _roleName
-        ]
-
-instance TF.IsValid (RamRoleAttachmentResource s) where
-    validator = P.mempty
-
-instance P.HasInstanceIds (RamRoleAttachmentResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    instanceIds =
-        P.lens (_instanceIds :: RamRoleAttachmentResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _instanceIds = a } :: RamRoleAttachmentResource s)
-
-instance P.HasRoleName (RamRoleAttachmentResource s) (TF.Attr s P.Text) where
-    roleName =
-        P.lens (_roleName :: RamRoleAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _roleName = a } :: RamRoleAttachmentResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RamRoleAttachmentResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
--- | @alicloud_ram_role_policy_attachment@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_role_policy_attachment.html terraform documentation>
--- for more information.
-data RamRolePolicyAttachmentResource s = RamRolePolicyAttachmentResource'
+data RamUserPolicyAttachmentResource s = RamUserPolicyAttachmentResource'
     { _policyName :: TF.Attr s P.Text
     -- ^ @policy_name@ - (Required, Forces New)
     --
     , _policyType :: TF.Attr s P.Text
     -- ^ @policy_type@ - (Required, Forces New)
     --
-    , _roleName   :: TF.Attr s P.Text
-    -- ^ @role_name@ - (Required, Forces New)
+    , _userName   :: TF.Attr s P.Text
+    -- ^ @user_name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
--- | Define a new @alicloud_ram_role_policy_attachment@ resource value.
-ramRolePolicyAttachmentResource
+-- | Define a new @alicloud_ram_user_policy_attachment@ resource value.
+ramUserPolicyAttachmentResource
     :: TF.Attr s P.Text -- ^ @policy_name@ ('P._policyName', 'P.policyName')
-    -> TF.Attr s P.Text -- ^ @role_name@ ('P._roleName', 'P.roleName')
+    -> TF.Attr s P.Text -- ^ @user_name@ ('P._userName', 'P.userName')
     -> TF.Attr s P.Text -- ^ @policy_type@ ('P._policyType', 'P.policyType')
-    -> P.Resource (RamRolePolicyAttachmentResource s)
-ramRolePolicyAttachmentResource _policyName _roleName _policyType =
-    TF.unsafeResource "alicloud_ram_role_policy_attachment" TF.validator $
-        RamRolePolicyAttachmentResource'
+    -> P.Resource (RamUserPolicyAttachmentResource s)
+ramUserPolicyAttachmentResource _policyName _userName _policyType =
+    TF.unsafeResource "alicloud_ram_user_policy_attachment" TF.validator $
+        RamUserPolicyAttachmentResource'
             { _policyName = _policyName
             , _policyType = _policyType
-            , _roleName = _roleName
+            , _userName = _userName
             }
 
-instance TF.IsObject (RamRolePolicyAttachmentResource s) where
-    toObject RamRolePolicyAttachmentResource'{..} = P.catMaybes
+instance TF.IsObject (RamUserPolicyAttachmentResource s) where
+    toObject RamUserPolicyAttachmentResource'{..} = P.catMaybes
         [ TF.assign "policy_name" <$> TF.attribute _policyName
         , TF.assign "policy_type" <$> TF.attribute _policyType
-        , TF.assign "role_name" <$> TF.attribute _roleName
+        , TF.assign "user_name" <$> TF.attribute _userName
         ]
 
-instance TF.IsValid (RamRolePolicyAttachmentResource s) where
+instance TF.IsValid (RamUserPolicyAttachmentResource s) where
     validator = P.mempty
 
-instance P.HasPolicyName (RamRolePolicyAttachmentResource s) (TF.Attr s P.Text) where
+instance P.HasPolicyName (RamUserPolicyAttachmentResource s) (TF.Attr s P.Text) where
     policyName =
-        P.lens (_policyName :: RamRolePolicyAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _policyName = a } :: RamRolePolicyAttachmentResource s)
+        P.lens (_policyName :: RamUserPolicyAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _policyName = a } :: RamUserPolicyAttachmentResource s)
 
-instance P.HasPolicyType (RamRolePolicyAttachmentResource s) (TF.Attr s P.Text) where
+instance P.HasPolicyType (RamUserPolicyAttachmentResource s) (TF.Attr s P.Text) where
     policyType =
-        P.lens (_policyType :: RamRolePolicyAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _policyType = a } :: RamRolePolicyAttachmentResource s)
+        P.lens (_policyType :: RamUserPolicyAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _policyType = a } :: RamUserPolicyAttachmentResource s)
 
-instance P.HasRoleName (RamRolePolicyAttachmentResource s) (TF.Attr s P.Text) where
-    roleName =
-        P.lens (_roleName :: RamRolePolicyAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _roleName = a } :: RamRolePolicyAttachmentResource s)
+instance P.HasUserName (RamUserPolicyAttachmentResource s) (TF.Attr s P.Text) where
+    userName =
+        P.lens (_userName :: RamUserPolicyAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _userName = a } :: RamUserPolicyAttachmentResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RamRolePolicyAttachmentResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamUserPolicyAttachmentResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_ram_user@ Resource.
@@ -5945,64 +6003,6 @@ instance P.HasName (RamUserResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RamUserResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
--- | @alicloud_ram_user_policy_attachment@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_user_policy_attachment.html terraform documentation>
--- for more information.
-data RamUserPolicyAttachmentResource s = RamUserPolicyAttachmentResource'
-    { _policyName :: TF.Attr s P.Text
-    -- ^ @policy_name@ - (Required, Forces New)
-    --
-    , _policyType :: TF.Attr s P.Text
-    -- ^ @policy_type@ - (Required, Forces New)
-    --
-    , _userName   :: TF.Attr s P.Text
-    -- ^ @user_name@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @alicloud_ram_user_policy_attachment@ resource value.
-ramUserPolicyAttachmentResource
-    :: TF.Attr s P.Text -- ^ @policy_name@ ('P._policyName', 'P.policyName')
-    -> TF.Attr s P.Text -- ^ @user_name@ ('P._userName', 'P.userName')
-    -> TF.Attr s P.Text -- ^ @policy_type@ ('P._policyType', 'P.policyType')
-    -> P.Resource (RamUserPolicyAttachmentResource s)
-ramUserPolicyAttachmentResource _policyName _userName _policyType =
-    TF.unsafeResource "alicloud_ram_user_policy_attachment" TF.validator $
-        RamUserPolicyAttachmentResource'
-            { _policyName = _policyName
-            , _policyType = _policyType
-            , _userName = _userName
-            }
-
-instance TF.IsObject (RamUserPolicyAttachmentResource s) where
-    toObject RamUserPolicyAttachmentResource'{..} = P.catMaybes
-        [ TF.assign "policy_name" <$> TF.attribute _policyName
-        , TF.assign "policy_type" <$> TF.attribute _policyType
-        , TF.assign "user_name" <$> TF.attribute _userName
-        ]
-
-instance TF.IsValid (RamUserPolicyAttachmentResource s) where
-    validator = P.mempty
-
-instance P.HasPolicyName (RamUserPolicyAttachmentResource s) (TF.Attr s P.Text) where
-    policyName =
-        P.lens (_policyName :: RamUserPolicyAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _policyName = a } :: RamUserPolicyAttachmentResource s)
-
-instance P.HasPolicyType (RamUserPolicyAttachmentResource s) (TF.Attr s P.Text) where
-    policyType =
-        P.lens (_policyType :: RamUserPolicyAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _policyType = a } :: RamUserPolicyAttachmentResource s)
-
-instance P.HasUserName (RamUserPolicyAttachmentResource s) (TF.Attr s P.Text) where
-    userName =
-        P.lens (_userName :: RamUserPolicyAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _userName = a } :: RamUserPolicyAttachmentResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RamUserPolicyAttachmentResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
 -- | @alicloud_route_entry@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/route_entry.html terraform documentation>
@@ -6068,6 +6068,89 @@ instance P.HasRouteTableId (RouteEntryResource s) (TF.Attr s P.Text) where
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RouteEntryResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @alicloud_router_interface_connection@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/router_interface_connection.html terraform documentation>
+-- for more information.
+data RouterInterfaceConnectionResource s = RouterInterfaceConnectionResource'
+    { _interfaceId              :: TF.Attr s P.Text
+    -- ^ @interface_id@ - (Required, Forces New)
+    --
+    , _oppositeInterfaceId      :: TF.Attr s P.Text
+    -- ^ @opposite_interface_id@ - (Required, Forces New)
+    --
+    , _oppositeInterfaceOwnerId :: TF.Attr s P.Text
+    -- ^ @opposite_interface_owner_id@ - (Optional, Forces New)
+    --
+    , _oppositeRouterId         :: TF.Attr s P.Text
+    -- ^ @opposite_router_id@ - (Optional, Forces New)
+    --
+    , _oppositeRouterType       :: TF.Attr s P.Text
+    -- ^ @opposite_router_type@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @alicloud_router_interface_connection@ resource value.
+routerInterfaceConnectionResource
+    :: TF.Attr s P.Text -- ^ @interface_id@ ('P._interfaceId', 'P.interfaceId')
+    -> TF.Attr s P.Text -- ^ @opposite_interface_id@ ('P._oppositeInterfaceId', 'P.oppositeInterfaceId')
+    -> P.Resource (RouterInterfaceConnectionResource s)
+routerInterfaceConnectionResource _interfaceId _oppositeInterfaceId =
+    TF.unsafeResource "alicloud_router_interface_connection" TF.validator $
+        RouterInterfaceConnectionResource'
+            { _interfaceId = _interfaceId
+            , _oppositeInterfaceId = _oppositeInterfaceId
+            , _oppositeInterfaceOwnerId = TF.Nil
+            , _oppositeRouterId = TF.Nil
+            , _oppositeRouterType = TF.Nil
+            }
+
+instance TF.IsObject (RouterInterfaceConnectionResource s) where
+    toObject RouterInterfaceConnectionResource'{..} = P.catMaybes
+        [ TF.assign "interface_id" <$> TF.attribute _interfaceId
+        , TF.assign "opposite_interface_id" <$> TF.attribute _oppositeInterfaceId
+        , TF.assign "opposite_interface_owner_id" <$> TF.attribute _oppositeInterfaceOwnerId
+        , TF.assign "opposite_router_id" <$> TF.attribute _oppositeRouterId
+        , TF.assign "opposite_router_type" <$> TF.attribute _oppositeRouterType
+        ]
+
+instance TF.IsValid (RouterInterfaceConnectionResource s) where
+    validator = P.mempty
+
+instance P.HasInterfaceId (RouterInterfaceConnectionResource s) (TF.Attr s P.Text) where
+    interfaceId =
+        P.lens (_interfaceId :: RouterInterfaceConnectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _interfaceId = a } :: RouterInterfaceConnectionResource s)
+
+instance P.HasOppositeInterfaceId (RouterInterfaceConnectionResource s) (TF.Attr s P.Text) where
+    oppositeInterfaceId =
+        P.lens (_oppositeInterfaceId :: RouterInterfaceConnectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _oppositeInterfaceId = a } :: RouterInterfaceConnectionResource s)
+
+instance P.HasOppositeInterfaceOwnerId (RouterInterfaceConnectionResource s) (TF.Attr s P.Text) where
+    oppositeInterfaceOwnerId =
+        P.lens (_oppositeInterfaceOwnerId :: RouterInterfaceConnectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _oppositeInterfaceOwnerId = a } :: RouterInterfaceConnectionResource s)
+
+instance P.HasOppositeRouterId (RouterInterfaceConnectionResource s) (TF.Attr s P.Text) where
+    oppositeRouterId =
+        P.lens (_oppositeRouterId :: RouterInterfaceConnectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _oppositeRouterId = a } :: RouterInterfaceConnectionResource s)
+
+instance P.HasOppositeRouterType (RouterInterfaceConnectionResource s) (TF.Attr s P.Text) where
+    oppositeRouterType =
+        P.lens (_oppositeRouterType :: RouterInterfaceConnectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _oppositeRouterType = a } :: RouterInterfaceConnectionResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RouterInterfaceConnectionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedOppositeInterfaceOwnerId (TF.Ref s' (RouterInterfaceConnectionResource s)) (TF.Attr s P.Text) where
+    computedOppositeInterfaceOwnerId x = TF.compute (TF.refKey x) "opposite_interface_owner_id"
+
+instance s ~ s' => P.HasComputedOppositeRouterId (TF.Ref s' (RouterInterfaceConnectionResource s)) (TF.Attr s P.Text) where
+    computedOppositeRouterId x = TF.compute (TF.refKey x) "opposite_router_id"
 
 -- | @alicloud_router_interface@ Resource.
 --
@@ -6187,89 +6270,6 @@ instance P.HasSpecification (RouterInterfaceResource s) (TF.Attr s P.Text) where
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
-
--- | @alicloud_router_interface_connection@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/alicloud/r/router_interface_connection.html terraform documentation>
--- for more information.
-data RouterInterfaceConnectionResource s = RouterInterfaceConnectionResource'
-    { _interfaceId              :: TF.Attr s P.Text
-    -- ^ @interface_id@ - (Required, Forces New)
-    --
-    , _oppositeInterfaceId      :: TF.Attr s P.Text
-    -- ^ @opposite_interface_id@ - (Required, Forces New)
-    --
-    , _oppositeInterfaceOwnerId :: TF.Attr s P.Text
-    -- ^ @opposite_interface_owner_id@ - (Optional, Forces New)
-    --
-    , _oppositeRouterId         :: TF.Attr s P.Text
-    -- ^ @opposite_router_id@ - (Optional, Forces New)
-    --
-    , _oppositeRouterType       :: TF.Attr s P.Text
-    -- ^ @opposite_router_type@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @alicloud_router_interface_connection@ resource value.
-routerInterfaceConnectionResource
-    :: TF.Attr s P.Text -- ^ @interface_id@ ('P._interfaceId', 'P.interfaceId')
-    -> TF.Attr s P.Text -- ^ @opposite_interface_id@ ('P._oppositeInterfaceId', 'P.oppositeInterfaceId')
-    -> P.Resource (RouterInterfaceConnectionResource s)
-routerInterfaceConnectionResource _interfaceId _oppositeInterfaceId =
-    TF.unsafeResource "alicloud_router_interface_connection" TF.validator $
-        RouterInterfaceConnectionResource'
-            { _interfaceId = _interfaceId
-            , _oppositeInterfaceId = _oppositeInterfaceId
-            , _oppositeInterfaceOwnerId = TF.Nil
-            , _oppositeRouterId = TF.Nil
-            , _oppositeRouterType = TF.Nil
-            }
-
-instance TF.IsObject (RouterInterfaceConnectionResource s) where
-    toObject RouterInterfaceConnectionResource'{..} = P.catMaybes
-        [ TF.assign "interface_id" <$> TF.attribute _interfaceId
-        , TF.assign "opposite_interface_id" <$> TF.attribute _oppositeInterfaceId
-        , TF.assign "opposite_interface_owner_id" <$> TF.attribute _oppositeInterfaceOwnerId
-        , TF.assign "opposite_router_id" <$> TF.attribute _oppositeRouterId
-        , TF.assign "opposite_router_type" <$> TF.attribute _oppositeRouterType
-        ]
-
-instance TF.IsValid (RouterInterfaceConnectionResource s) where
-    validator = P.mempty
-
-instance P.HasInterfaceId (RouterInterfaceConnectionResource s) (TF.Attr s P.Text) where
-    interfaceId =
-        P.lens (_interfaceId :: RouterInterfaceConnectionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _interfaceId = a } :: RouterInterfaceConnectionResource s)
-
-instance P.HasOppositeInterfaceId (RouterInterfaceConnectionResource s) (TF.Attr s P.Text) where
-    oppositeInterfaceId =
-        P.lens (_oppositeInterfaceId :: RouterInterfaceConnectionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _oppositeInterfaceId = a } :: RouterInterfaceConnectionResource s)
-
-instance P.HasOppositeInterfaceOwnerId (RouterInterfaceConnectionResource s) (TF.Attr s P.Text) where
-    oppositeInterfaceOwnerId =
-        P.lens (_oppositeInterfaceOwnerId :: RouterInterfaceConnectionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _oppositeInterfaceOwnerId = a } :: RouterInterfaceConnectionResource s)
-
-instance P.HasOppositeRouterId (RouterInterfaceConnectionResource s) (TF.Attr s P.Text) where
-    oppositeRouterId =
-        P.lens (_oppositeRouterId :: RouterInterfaceConnectionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _oppositeRouterId = a } :: RouterInterfaceConnectionResource s)
-
-instance P.HasOppositeRouterType (RouterInterfaceConnectionResource s) (TF.Attr s P.Text) where
-    oppositeRouterType =
-        P.lens (_oppositeRouterType :: RouterInterfaceConnectionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _oppositeRouterType = a } :: RouterInterfaceConnectionResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RouterInterfaceConnectionResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedOppositeInterfaceOwnerId (TF.Ref s' (RouterInterfaceConnectionResource s)) (TF.Attr s P.Text) where
-    computedOppositeInterfaceOwnerId x = TF.compute (TF.refKey x) "opposite_interface_owner_id"
-
-instance s ~ s' => P.HasComputedOppositeRouterId (TF.Ref s' (RouterInterfaceConnectionResource s)) (TF.Attr s P.Text) where
-    computedOppositeRouterId x = TF.compute (TF.refKey x) "opposite_router_id"
 
 -- | @alicloud_security_group@ Resource.
 --
@@ -6484,94 +6484,6 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupRuleResource s)) (TF
 
 instance s ~ s' => P.HasComputedNicType (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
     computedNicType x = TF.compute (TF.refKey x) "nic_type"
-
--- | @alicloud_slb@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/alicloud/r/slb.html terraform documentation>
--- for more information.
-data SlbResource s = SlbResource'
-    { _bandwidth          :: TF.Attr s P.Int
-    -- ^ @bandwidth@ - (Optional)
-    --
-    , _internet           :: TF.Attr s P.Bool
-    -- ^ @internet@ - (Optional, Forces New)
-    --
-    , _internetChargeType :: TF.Attr s P.Text
-    -- ^ @internet_charge_type@ - (Optional)
-    --
-    , _name               :: TF.Attr s P.Text
-    -- ^ @name@ - (Optional)
-    --
-    , _specification      :: TF.Attr s P.Text
-    -- ^ @specification@ - (Optional)
-    --
-    , _vswitchId          :: TF.Attr s P.Text
-    -- ^ @vswitch_id@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @alicloud_slb@ resource value.
-slbResource
-    :: P.Resource (SlbResource s)
-slbResource =
-    TF.unsafeResource "alicloud_slb" TF.validator $
-        SlbResource'
-            { _bandwidth = TF.value 1
-            , _internet = TF.value P.False
-            , _internetChargeType = TF.Nil
-            , _name = TF.value "tf-lb-20180816164626761600000001"
-            , _specification = TF.Nil
-            , _vswitchId = TF.Nil
-            }
-
-instance TF.IsObject (SlbResource s) where
-    toObject SlbResource'{..} = P.catMaybes
-        [ TF.assign "bandwidth" <$> TF.attribute _bandwidth
-        , TF.assign "internet" <$> TF.attribute _internet
-        , TF.assign "internet_charge_type" <$> TF.attribute _internetChargeType
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "specification" <$> TF.attribute _specification
-        , TF.assign "vswitch_id" <$> TF.attribute _vswitchId
-        ]
-
-instance TF.IsValid (SlbResource s) where
-    validator = P.mempty
-
-instance P.HasBandwidth (SlbResource s) (TF.Attr s P.Int) where
-    bandwidth =
-        P.lens (_bandwidth :: SlbResource s -> TF.Attr s P.Int)
-               (\s a -> s { _bandwidth = a } :: SlbResource s)
-
-instance P.HasInternet (SlbResource s) (TF.Attr s P.Bool) where
-    internet =
-        P.lens (_internet :: SlbResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _internet = a } :: SlbResource s)
-
-instance P.HasInternetChargeType (SlbResource s) (TF.Attr s P.Text) where
-    internetChargeType =
-        P.lens (_internetChargeType :: SlbResource s -> TF.Attr s P.Text)
-               (\s a -> s { _internetChargeType = a } :: SlbResource s)
-
-instance P.HasName (SlbResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: SlbResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SlbResource s)
-
-instance P.HasSpecification (SlbResource s) (TF.Attr s P.Text) where
-    specification =
-        P.lens (_specification :: SlbResource s -> TF.Attr s P.Text)
-               (\s a -> s { _specification = a } :: SlbResource s)
-
-instance P.HasVswitchId (SlbResource s) (TF.Attr s P.Text) where
-    vswitchId =
-        P.lens (_vswitchId :: SlbResource s -> TF.Attr s P.Text)
-               (\s a -> s { _vswitchId = a } :: SlbResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (SlbResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedAddress (TF.Ref s' (SlbResource s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "address"
 
 -- | @alicloud_slb_attachment@ Resource.
 --
@@ -6905,6 +6817,94 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (SlbListenerResource s)) (TF.Attr 
 
 instance s ~ s' => P.HasComputedHealthCheckConnectPort (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Int) where
     computedHealthCheckConnectPort x = TF.compute (TF.refKey x) "health_check_connect_port"
+
+-- | @alicloud_slb@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/slb.html terraform documentation>
+-- for more information.
+data SlbResource s = SlbResource'
+    { _bandwidth          :: TF.Attr s P.Int
+    -- ^ @bandwidth@ - (Optional)
+    --
+    , _internet           :: TF.Attr s P.Bool
+    -- ^ @internet@ - (Optional, Forces New)
+    --
+    , _internetChargeType :: TF.Attr s P.Text
+    -- ^ @internet_charge_type@ - (Optional)
+    --
+    , _name               :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _specification      :: TF.Attr s P.Text
+    -- ^ @specification@ - (Optional)
+    --
+    , _vswitchId          :: TF.Attr s P.Text
+    -- ^ @vswitch_id@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @alicloud_slb@ resource value.
+slbResource
+    :: P.Resource (SlbResource s)
+slbResource =
+    TF.unsafeResource "alicloud_slb" TF.validator $
+        SlbResource'
+            { _bandwidth = TF.value 1
+            , _internet = TF.value P.False
+            , _internetChargeType = TF.Nil
+            , _name = TF.value "tf-lb-20180818133848976200000001"
+            , _specification = TF.Nil
+            , _vswitchId = TF.Nil
+            }
+
+instance TF.IsObject (SlbResource s) where
+    toObject SlbResource'{..} = P.catMaybes
+        [ TF.assign "bandwidth" <$> TF.attribute _bandwidth
+        , TF.assign "internet" <$> TF.attribute _internet
+        , TF.assign "internet_charge_type" <$> TF.attribute _internetChargeType
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "specification" <$> TF.attribute _specification
+        , TF.assign "vswitch_id" <$> TF.attribute _vswitchId
+        ]
+
+instance TF.IsValid (SlbResource s) where
+    validator = P.mempty
+
+instance P.HasBandwidth (SlbResource s) (TF.Attr s P.Int) where
+    bandwidth =
+        P.lens (_bandwidth :: SlbResource s -> TF.Attr s P.Int)
+               (\s a -> s { _bandwidth = a } :: SlbResource s)
+
+instance P.HasInternet (SlbResource s) (TF.Attr s P.Bool) where
+    internet =
+        P.lens (_internet :: SlbResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _internet = a } :: SlbResource s)
+
+instance P.HasInternetChargeType (SlbResource s) (TF.Attr s P.Text) where
+    internetChargeType =
+        P.lens (_internetChargeType :: SlbResource s -> TF.Attr s P.Text)
+               (\s a -> s { _internetChargeType = a } :: SlbResource s)
+
+instance P.HasName (SlbResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: SlbResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SlbResource s)
+
+instance P.HasSpecification (SlbResource s) (TF.Attr s P.Text) where
+    specification =
+        P.lens (_specification :: SlbResource s -> TF.Attr s P.Text)
+               (\s a -> s { _specification = a } :: SlbResource s)
+
+instance P.HasVswitchId (SlbResource s) (TF.Attr s P.Text) where
+    vswitchId =
+        P.lens (_vswitchId :: SlbResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vswitchId = a } :: SlbResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SlbResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedAddress (TF.Ref s' (SlbResource s)) (TF.Attr s P.Text) where
+    computedAddress x = TF.compute (TF.refKey x) "address"
 
 -- | @alicloud_slb_rule@ Resource.
 --

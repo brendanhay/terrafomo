@@ -1,19 +1,17 @@
 -- This module is auto-generated.
 
 -- |
--- Module      : Terrafomo.AliCloud.Lens
+-- Module      : Terrafomo.AliCloud.Resources
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.AliCloud.Lens
+module Terrafomo.AliCloud.Resources
     (
-    -- * Lenses
-      module Terrafomo.AliCloud.Arguments01
-    , module Terrafomo.AliCloud.Attributes01
+    -- * Resources
+      module Terrafomo.AliCloud.Resource01
     ) where
 
-import Terrafomo.AliCloud.Arguments01
-import Terrafomo.AliCloud.Attributes01
+import Terrafomo.AliCloud.Resource01

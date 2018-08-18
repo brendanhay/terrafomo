@@ -13,17 +13,17 @@
 --
 module Terrafomo.AliCloud
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.AliCloud.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.AliCloud.Types
 
-    -- * DataSources
-    , module Terrafomo.AliCloud.DataSource
-
     -- * Resources
-    , module Terrafomo.AliCloud.Resource
+    , module Terrafomo.AliCloud.Resources
+
+    -- * DataSources
+    , module Terrafomo.AliCloud.DataSources
 
     -- * Settings
     , module Terrafomo.AliCloud.Settings
@@ -32,9 +32,9 @@ module Terrafomo.AliCloud
     , module Terrafomo.AliCloud.Lens
     ) where
 
-import Terrafomo.AliCloud.DataSource
+import Terrafomo.AliCloud.DataSources
 import Terrafomo.AliCloud.Lens
 import Terrafomo.AliCloud.Provider
-import Terrafomo.AliCloud.Resource
+import Terrafomo.AliCloud.Resources
 import Terrafomo.AliCloud.Settings
 import Terrafomo.AliCloud.Types
