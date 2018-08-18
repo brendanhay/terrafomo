@@ -64,6 +64,7 @@
                     "original": "path"
                 }
             ],
+            "dependencies": [],
             "key": "vsphere_virtual_machine.cdrom",
             "name": "CdromSetting",
             "threaded": true,
@@ -197,6 +198,9 @@
                     "optional": true,
                     "original": "timeout"
                 }
+            ],
+            "dependencies": [
+                "CustomizeSetting"
             ],
             "key": "vsphere_virtual_machine.clone",
             "name": "CloneSetting",
@@ -445,6 +449,11 @@
                     "optional": true,
                     "original": "windows_sysprep_text"
                 }
+            ],
+            "dependencies": [
+                "LinuxOptionsSetting",
+                "NetworkInterfaceSetting",
+                "WindowsOptionsSetting"
             ],
             "key": "vsphere_virtual_machine.clone.customize",
             "name": "CustomizeSetting",
@@ -870,6 +879,7 @@
                     "original": "write_through"
                 }
             ],
+            "dependencies": [],
             "key": "vsphere_virtual_machine.disk",
             "name": "DiskSetting",
             "threaded": true,
@@ -966,6 +976,7 @@
                 "name": "DisksSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "vsphere_virtual_machine.disks",
             "name": "DisksSetting",
             "threaded": true,
@@ -1072,6 +1083,7 @@
                     "original": "host_system_id"
                 }
             ],
+            "dependencies": [],
             "key": "vsphere_distributed_virtual_switch.host",
             "name": "HostSetting",
             "threaded": true,
@@ -1204,6 +1216,7 @@
                     "original": "time_zone"
                 }
             ],
+            "dependencies": [],
             "key": "vsphere_virtual_machine.clone.customize.linux_options",
             "name": "LinuxOptionsSetting",
             "threaded": true,
@@ -1533,6 +1546,7 @@
                     "original": "use_static_mac"
                 }
             ],
+            "dependencies": [],
             "key": "vsphere_virtual_machine.clone.customize.network_interface",
             "name": "NetworkInterfaceSetting",
             "threaded": true,
@@ -1647,6 +1661,7 @@
                 "name": "PortsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "vsphere_host_port_group.ports",
             "name": "PortsSetting",
             "threaded": true,
@@ -1743,6 +1758,7 @@
                     "original": "properties"
                 }
             ],
+            "dependencies": [],
             "key": "vsphere_virtual_machine.vapp",
             "name": "VappSetting",
             "threaded": true,
@@ -1797,6 +1813,7 @@
                     "original": "min_vlan"
                 }
             ],
+            "dependencies": [],
             "key": "vsphere_distributed_port_group.vlan_range",
             "name": "VlanRangeSetting",
             "threaded": true,
@@ -2137,6 +2154,7 @@
                     "original": "workgroup"
                 }
             ],
+            "dependencies": [],
             "key": "vsphere_virtual_machine.clone.customize.windows_options",
             "name": "WindowsOptionsSetting",
             "threaded": true,
@@ -2329,6 +2347,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/compute_cluster.html",
+            "dependencies": [],
             "key": "vsphere_compute_cluster",
             "name": "ComputeClusterData",
             "threaded": true,
@@ -2422,6 +2441,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/custom_attribute.html",
+            "dependencies": [],
             "key": "vsphere_custom_attribute",
             "name": "CustomAttributeData",
             "threaded": true,
@@ -2517,6 +2537,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/datacenter.html",
+            "dependencies": [],
             "key": "vsphere_datacenter",
             "name": "DatacenterData",
             "threaded": true,
@@ -2592,6 +2613,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/datastore.html",
+            "dependencies": [],
             "key": "vsphere_datastore",
             "name": "DatastoreData",
             "threaded": true,
@@ -2686,6 +2708,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/datastore_cluster.html",
+            "dependencies": [],
             "key": "vsphere_datastore_cluster",
             "name": "DatastoreClusterData",
             "threaded": true,
@@ -2781,6 +2804,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/distributed_virtual_switch.html",
+            "dependencies": [],
             "key": "vsphere_distributed_virtual_switch",
             "name": "DistributedVirtualSwitchData",
             "threaded": true,
@@ -2894,6 +2918,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/host.html",
+            "dependencies": [],
             "key": "vsphere_host",
             "name": "HostData",
             "threaded": true,
@@ -3008,6 +3033,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/network.html",
+            "dependencies": [],
             "key": "vsphere_network",
             "name": "NetworkData",
             "threaded": true,
@@ -3122,6 +3148,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/resource_pool.html",
+            "dependencies": [],
             "key": "vsphere_resource_pool",
             "name": "ResourcePoolData",
             "threaded": true,
@@ -3195,6 +3222,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/tag.html",
+            "dependencies": [],
             "key": "vsphere_tag",
             "name": "TagData",
             "threaded": true,
@@ -3307,6 +3335,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/tag_category.html",
+            "dependencies": [],
             "key": "vsphere_tag_category",
             "name": "TagCategoryData",
             "threaded": true,
@@ -3481,6 +3510,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/virtual_machine.html",
+            "dependencies": [
+                "DisksSetting"
+            ],
             "key": "vsphere_virtual_machine",
             "name": "VirtualMachineData",
             "threaded": true,
@@ -3731,6 +3763,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/vmfs_disks.html",
+            "dependencies": [],
             "key": "vsphere_vmfs_disks",
             "name": "VmfsDisksData",
             "threaded": true,
@@ -4872,6 +4905,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/compute_cluster.html",
+            "dependencies": [],
             "key": "vsphere_compute_cluster",
             "name": "ComputeClusterResource",
             "threaded": true,
@@ -5022,6 +5056,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_host_group.html",
+            "dependencies": [],
             "key": "vsphere_compute_cluster_host_group",
             "name": "ComputeClusterHostGroupResource",
             "threaded": true,
@@ -5192,6 +5227,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_vm_affinity_rule.html",
+            "dependencies": [],
             "key": "vsphere_compute_cluster_vm_affinity_rule",
             "name": "ComputeClusterVmAffinityRuleResource",
             "threaded": true,
@@ -5381,6 +5417,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_vm_anti_affinity_rule.html",
+            "dependencies": [],
             "key": "vsphere_compute_cluster_vm_anti_affinity_rule",
             "name": "ComputeClusterVmAntiAffinityRuleResource",
             "threaded": true,
@@ -5593,6 +5630,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_vm_dependency_rule.html",
+            "dependencies": [],
             "key": "vsphere_compute_cluster_vm_dependency_rule",
             "name": "ComputeClusterVmDependencyRuleResource",
             "threaded": true,
@@ -5766,6 +5804,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_vm_group.html",
+            "dependencies": [],
             "key": "vsphere_compute_cluster_vm_group",
             "name": "ComputeClusterVmGroupResource",
             "threaded": true,
@@ -5988,6 +6027,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_vm_host_rule.html",
+            "dependencies": [],
             "key": "vsphere_compute_cluster_vm_host_rule",
             "name": "ComputeClusterVmHostRuleResource",
             "threaded": true,
@@ -6173,6 +6213,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/custom_attribute.html",
+            "dependencies": [],
             "key": "vsphere_custom_attribute",
             "name": "CustomAttributeResource",
             "threaded": true,
@@ -6300,6 +6341,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/datacenter.html",
+            "dependencies": [],
             "key": "vsphere_datacenter",
             "name": "DatacenterResource",
             "threaded": true,
@@ -6865,6 +6907,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/datastore_cluster.html",
+            "dependencies": [],
             "key": "vsphere_datastore_cluster",
             "name": "DatastoreClusterResource",
             "threaded": true,
@@ -7036,6 +7079,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/datastore_cluster_vm_anti_affinity_rule.html",
+            "dependencies": [],
             "key": "vsphere_datastore_cluster_vm_anti_affinity_rule",
             "name": "DatastoreClusterVmAntiAffinityRuleResource",
             "threaded": true,
@@ -8062,6 +8106,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/distributed_port_group.html",
+            "dependencies": [
+                "VlanRangeSetting",
+                "VlanRangeSetting"
+            ],
             "key": "vsphere_distributed_port_group",
             "name": "DistributedPortGroupResource",
             "threaded": true,
@@ -10563,6 +10611,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/distributed_virtual_switch.html",
+            "dependencies": [
+                "HostSetting",
+                "VlanRangeSetting",
+                "VlanRangeSetting"
+            ],
             "key": "vsphere_distributed_virtual_switch",
             "name": "DistributedVirtualSwitchResource",
             "threaded": true,
@@ -12171,6 +12224,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/dpm_host_override.html",
+            "dependencies": [],
             "key": "vsphere_dpm_host_override",
             "name": "DpmHostOverrideResource",
             "threaded": true,
@@ -12322,6 +12376,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/drs_vm_override.html",
+            "dependencies": [],
             "key": "vsphere_drs_vm_override",
             "name": "DrsVmOverrideResource",
             "threaded": true,
@@ -12515,6 +12570,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/file.html",
+            "dependencies": [],
             "key": "vsphere_file",
             "name": "FileResource",
             "threaded": true,
@@ -12699,6 +12755,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/folder.html",
+            "dependencies": [],
             "key": "vsphere_folder",
             "name": "FolderResource",
             "threaded": true,
@@ -13084,6 +13141,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/ha_vm_override.html",
+            "dependencies": [],
             "key": "vsphere_ha_vm_override",
             "name": "HaVmOverrideResource",
             "threaded": true,
@@ -13491,6 +13549,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/host_port_group.html",
+            "dependencies": [
+                "PortsSetting"
+            ],
             "key": "vsphere_host_port_group",
             "name": "HostPortGroupResource",
             "threaded": true,
@@ -14052,6 +14113,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/host_virtual_switch.html",
+            "dependencies": [],
             "key": "vsphere_host_virtual_switch",
             "name": "HostVirtualSwitchResource",
             "threaded": true,
@@ -14217,6 +14279,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/license.html",
+            "dependencies": [],
             "key": "vsphere_license",
             "name": "LicenseResource",
             "threaded": true,
@@ -14562,6 +14625,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/nas_datastore.html",
+            "dependencies": [],
             "key": "vsphere_nas_datastore",
             "name": "NasDatastoreResource",
             "threaded": true,
@@ -15161,6 +15225,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/resource_pool.html",
+            "dependencies": [],
             "key": "vsphere_resource_pool",
             "name": "ResourcePoolResource",
             "threaded": true,
@@ -15372,6 +15437,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/storage_drs_vm_override.html",
+            "dependencies": [],
             "key": "vsphere_storage_drs_vm_override",
             "name": "StorageDrsVmOverrideResource",
             "threaded": true,
@@ -15504,6 +15570,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/tag.html",
+            "dependencies": [],
             "key": "vsphere_tag",
             "name": "TagResource",
             "threaded": true,
@@ -15657,6 +15724,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/tag_category.html",
+            "dependencies": [],
             "key": "vsphere_tag_category",
             "name": "TagCategoryResource",
             "threaded": true,
@@ -16049,6 +16117,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/vapp_container.html",
+            "dependencies": [],
             "key": "vsphere_vapp_container",
             "name": "VappContainerResource",
             "threaded": true,
@@ -16267,6 +16336,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/virtual_disk.html",
+            "dependencies": [],
             "key": "vsphere_virtual_disk",
             "name": "VirtualDiskResource",
             "threaded": true,
@@ -17508,6 +17578,14 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/virtual_machine.html",
+            "dependencies": [
+                "CdromSetting",
+                "CloneSetting",
+                "DiskSetting",
+                "NetworkInterfaceSetting",
+                "VappSetting",
+                "DiskSetting"
+            ],
             "key": "vsphere_virtual_machine",
             "name": "VirtualMachineResource",
             "threaded": true,
@@ -18067,6 +18145,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/virtual_machine_snapshot.html",
+            "dependencies": [],
             "key": "vsphere_virtual_machine_snapshot",
             "name": "VirtualMachineSnapshotResource",
             "threaded": true,
@@ -18333,6 +18412,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/vmfs_datastore.html",
+            "dependencies": [],
             "key": "vsphere_vmfs_datastore",
             "name": "VmfsDatastoreResource",
             "threaded": true,
@@ -18803,6 +18883,7 @@
                 "original": "vsphere_server"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
