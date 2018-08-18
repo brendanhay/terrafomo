@@ -1,19 +1,17 @@
 -- This module is auto-generated.
 
 -- |
--- Module      : Terrafomo.OpsGenie.Lens
+-- Module      : Terrafomo.OpsGenie.Resources
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.OpsGenie.Lens
+module Terrafomo.OpsGenie.Resources
     (
-    -- * Lenses
-      module Terrafomo.OpsGenie.Arguments01
-    , module Terrafomo.OpsGenie.Attributes01
+    -- * Resources
+      module Terrafomo.OpsGenie.Resource01
     ) where
 
-import Terrafomo.OpsGenie.Arguments01
-import Terrafomo.OpsGenie.Attributes01
+import Terrafomo.OpsGenie.Resource01

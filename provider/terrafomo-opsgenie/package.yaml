@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.OpsGenie
+    - Terrafomo.OpsGenie.DataSources
+    - Terrafomo.OpsGenie.Lens
+    - Terrafomo.OpsGenie.Provider
+    - Terrafomo.OpsGenie.Resources
+    - Terrafomo.OpsGenie.Settings
+    - Terrafomo.OpsGenie.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

@@ -13,17 +13,17 @@
 --
 module Terrafomo.OpsGenie
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.OpsGenie.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.OpsGenie.Types
 
-    -- * DataSources
-    , module Terrafomo.OpsGenie.DataSource
-
     -- * Resources
-    , module Terrafomo.OpsGenie.Resource
+    , module Terrafomo.OpsGenie.Resources
+
+    -- * DataSources
+    , module Terrafomo.OpsGenie.DataSources
 
     -- * Settings
     , module Terrafomo.OpsGenie.Settings
@@ -32,9 +32,9 @@ module Terrafomo.OpsGenie
     , module Terrafomo.OpsGenie.Lens
     ) where
 
-import Terrafomo.OpsGenie.DataSource
+import Terrafomo.OpsGenie.DataSources
 import Terrafomo.OpsGenie.Lens
 import Terrafomo.OpsGenie.Provider
-import Terrafomo.OpsGenie.Resource
+import Terrafomo.OpsGenie.Resources
 import Terrafomo.OpsGenie.Settings
 import Terrafomo.OpsGenie.Types
