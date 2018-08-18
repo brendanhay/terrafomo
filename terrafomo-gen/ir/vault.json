@@ -200,6 +200,7 @@
                     "original": "username"
                 }
             ],
+            "dependencies": [],
             "key": "vault_database_secret_backend_connection.cassandra",
             "name": "CassandraSetting",
             "threaded": true,
@@ -255,6 +256,7 @@
                     "original": "key_file"
                 }
             ],
+            "dependencies": [],
             "key": "provider.client_auth",
             "name": "ClientAuthSetting",
             "threaded": false,
@@ -349,6 +351,7 @@
                     "original": "policies"
                 }
             ],
+            "dependencies": [],
             "key": "vault_okta_auth_backend.group",
             "name": "GroupSetting",
             "threaded": true,
@@ -480,6 +483,7 @@
                     "original": "max_open_connections"
                 }
             ],
+            "dependencies": [],
             "key": "vault_database_secret_backend_connection.hana",
             "name": "HanaSetting",
             "threaded": true,
@@ -515,6 +519,7 @@
                     "original": "connection_url"
                 }
             ],
+            "dependencies": [],
             "key": "vault_database_secret_backend_connection.mongodb",
             "name": "MongodbSetting",
             "threaded": true,
@@ -607,6 +612,7 @@
                     "original": "max_open_connections"
                 }
             ],
+            "dependencies": [],
             "key": "vault_database_secret_backend_connection.mssql",
             "name": "MssqlSetting",
             "threaded": true,
@@ -699,6 +705,7 @@
                     "original": "max_open_connections"
                 }
             ],
+            "dependencies": [],
             "key": "vault_database_secret_backend_connection.mysql",
             "name": "MysqlSetting",
             "threaded": true,
@@ -791,6 +798,7 @@
                     "original": "max_open_connections"
                 }
             ],
+            "dependencies": [],
             "key": "vault_database_secret_backend_connection.oracle",
             "name": "OracleSetting",
             "threaded": true,
@@ -883,6 +891,7 @@
                     "original": "max_open_connections"
                 }
             ],
+            "dependencies": [],
             "key": "vault_database_secret_backend_connection.postgresql",
             "name": "PostgresqlSetting",
             "threaded": true,
@@ -956,6 +965,7 @@
                     "original": "username"
                 }
             ],
+            "dependencies": [],
             "key": "vault_okta_auth_backend.user",
             "name": "UserSetting",
             "threaded": true,
@@ -1053,6 +1063,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/d/approle_auth_backend_role_id.html",
+            "dependencies": [],
             "key": "vault_approle_auth_backend_role_id",
             "name": "ApproleAuthBackendRoleIdData",
             "threaded": true,
@@ -1185,6 +1196,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/d/aws_access_credentials.html",
+            "dependencies": [],
             "key": "vault_aws_access_credentials",
             "name": "AwsAccessCredentialsData",
             "threaded": true,
@@ -1412,6 +1424,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/d/generic_secret.html",
+            "dependencies": [],
             "key": "vault_generic_secret",
             "name": "GenericSecretData",
             "threaded": true,
@@ -1641,6 +1654,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/approle_auth_backend_login.html",
+            "dependencies": [],
             "key": "vault_approle_auth_backend_login",
             "name": "ApproleAuthBackendLoginResource",
             "threaded": true,
@@ -2065,6 +2079,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/approle_auth_backend_role.html",
+            "dependencies": [],
             "key": "vault_approle_auth_backend_role",
             "name": "ApproleAuthBackendRoleResource",
             "threaded": true,
@@ -2234,6 +2249,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/approle_auth_backend_role_secret_id.html",
+            "dependencies": [],
             "key": "vault_approle_auth_backend_role_secret_id",
             "name": "ApproleAuthBackendRoleSecretIdResource",
             "threaded": true,
@@ -2384,6 +2400,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/auth_backend.html",
+            "dependencies": [],
             "key": "vault_auth_backend",
             "name": "AuthBackendResource",
             "threaded": true,
@@ -2536,6 +2553,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_cert.html",
+            "dependencies": [],
             "key": "vault_aws_auth_backend_cert",
             "name": "AwsAuthBackendCertResource",
             "threaded": true,
@@ -2745,6 +2763,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_client.html",
+            "dependencies": [],
             "key": "vault_aws_auth_backend_client",
             "name": "AwsAuthBackendClientResource",
             "threaded": true,
@@ -2838,6 +2857,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_identity_whitelist.html",
+            "dependencies": [],
             "key": "vault_aws_auth_backend_identity_whitelist",
             "name": "AwsAuthBackendIdentityWhitelistResource",
             "threaded": true,
@@ -3066,6 +3086,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_login.html",
+            "dependencies": [],
             "key": "vault_aws_auth_backend_login",
             "name": "AwsAuthBackendLoginResource",
             "threaded": true,
@@ -3700,6 +3721,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_role.html",
+            "dependencies": [],
             "key": "vault_aws_auth_backend_role",
             "name": "AwsAuthBackendRoleResource",
             "threaded": true,
@@ -3931,6 +3953,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_role_tag.html",
+            "dependencies": [],
             "key": "vault_aws_auth_backend_role_tag",
             "name": "AwsAuthBackendRoleTagResource",
             "threaded": true,
@@ -4078,6 +4101,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_sts_role.html",
+            "dependencies": [],
             "key": "vault_aws_auth_backend_sts_role",
             "name": "AwsAuthBackendStsRoleResource",
             "threaded": true,
@@ -4286,6 +4310,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/aws_secret_backend.html",
+            "dependencies": [],
             "key": "vault_aws_secret_backend",
             "name": "AwsSecretBackendResource",
             "threaded": true,
@@ -4505,6 +4530,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/aws_secret_backend_role.html",
+            "dependencies": [],
             "key": "vault_aws_secret_backend_role",
             "name": "AwsSecretBackendRoleResource",
             "threaded": true,
@@ -5056,6 +5082,15 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/database_secret_backend_connection.html",
+            "dependencies": [
+                "CassandraSetting",
+                "HanaSetting",
+                "MongodbSetting",
+                "MssqlSetting",
+                "MysqlSetting",
+                "OracleSetting",
+                "PostgresqlSetting"
+            ],
             "key": "vault_database_secret_backend_connection",
             "name": "DatabaseSecretBackendConnectionResource",
             "threaded": true,
@@ -5653,6 +5688,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/database_secret_backend_role.html",
+            "dependencies": [],
             "key": "vault_database_secret_backend_role",
             "name": "DatabaseSecretBackendRoleResource",
             "threaded": true,
@@ -5822,6 +5858,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/generic_secret.html",
+            "dependencies": [],
             "key": "vault_generic_secret",
             "name": "GenericSecretResource",
             "threaded": true,
@@ -5991,6 +6028,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/mount.html",
+            "dependencies": [],
             "key": "vault_mount",
             "name": "MountResource",
             "threaded": true,
@@ -6273,6 +6311,12 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/okta_auth_backend.html",
+            "dependencies": [
+                "GroupSetting",
+                "UserSetting",
+                "GroupSetting",
+                "UserSetting"
+            ],
             "key": "vault_okta_auth_backend",
             "name": "OktaAuthBackendResource",
             "threaded": true,
@@ -6420,6 +6464,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/okta_auth_backend_group.html",
+            "dependencies": [],
             "key": "vault_okta_auth_backend_group",
             "name": "OktaAuthBackendGroupResource",
             "threaded": true,
@@ -6570,6 +6615,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/okta_auth_backend_user.html",
+            "dependencies": [],
             "key": "vault_okta_auth_backend_user",
             "name": "OktaAuthBackendUserResource",
             "threaded": true,
@@ -6682,6 +6728,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/policy.html",
+            "dependencies": [],
             "key": "vault_policy",
             "name": "PolicyResource",
             "threaded": true,
@@ -6890,6 +6937,9 @@
                 "optional": false,
                 "original": "token"
             }
+        ],
+        "dependencies": [
+            "ClientAuthSetting"
         ],
         "key": "provider",
         "name": "Provider",
