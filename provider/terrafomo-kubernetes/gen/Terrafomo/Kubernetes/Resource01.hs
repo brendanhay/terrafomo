@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Kubernetes.Resource
+-- Module      : Terrafomo.Kubernetes.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Kubernetes.Resource
+module Terrafomo.Kubernetes.Resource01
     (
     -- ** kubernetes_config_map
       ConfigMapResource (..)
@@ -33,13 +33,13 @@ module Terrafomo.Kubernetes.Resource
     , NamespaceResource (..)
     , namespaceResource
 
-    -- ** kubernetes_persistent_volume
-    , PersistentVolumeResource (..)
-    , persistentVolumeResource
-
     -- ** kubernetes_persistent_volume_claim
     , PersistentVolumeClaimResource (..)
     , persistentVolumeClaimResource
+
+    -- ** kubernetes_persistent_volume
+    , PersistentVolumeResource (..)
+    , persistentVolumeResource
 
     -- ** kubernetes_pod
     , PodResource (..)
@@ -57,13 +57,13 @@ module Terrafomo.Kubernetes.Resource
     , SecretResource (..)
     , secretResource
 
-    -- ** kubernetes_service
-    , ServiceResource (..)
-    , serviceResource
-
     -- ** kubernetes_service_account
     , ServiceAccountResource (..)
     , serviceAccountResource
+
+    -- ** kubernetes_service
+    , ServiceResource (..)
+    , serviceResource
 
     -- ** kubernetes_storage_class
     , StorageClassResource (..)
@@ -307,60 +307,6 @@ instance P.HasMetadata (NamespaceResource s) (TF.Attr s (MetadataSetting s)) whe
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NamespaceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
--- | @kubernetes_persistent_volume@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/kubernetes/r/persistent_volume.html terraform documentation>
--- for more information.
-data PersistentVolumeResource s = PersistentVolumeResource'
-    { _metadata :: TF.Attr s (MetadataSetting s)
-    -- ^ @metadata@ - (Required)
-    -- Standard persistent volume's metadata. More info:
-    -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
-    --
-    , _spec     :: TF.Attr s [TF.Attr s (SpecSetting s)]
-    -- ^ @spec@ - (Required)
-    -- Spec of the persistent volume owned by the cluster
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @kubernetes_persistent_volume@ resource value.
-persistentVolumeResource
-    :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ ('P._metadata', 'P.metadata')
-    -> TF.Attr s [TF.Attr s (SpecSetting s)] -- ^ @spec@ ('P._spec', 'P.spec')
-    -> P.Resource (PersistentVolumeResource s)
-persistentVolumeResource _metadata _spec =
-    TF.unsafeResource "kubernetes_persistent_volume" TF.validator $
-        PersistentVolumeResource'
-            { _metadata = _metadata
-            , _spec = _spec
-            }
-
-instance TF.IsObject (PersistentVolumeResource s) where
-    toObject PersistentVolumeResource'{..} = P.catMaybes
-        [ TF.assign "metadata" <$> TF.attribute _metadata
-        , TF.assign "spec" <$> TF.attribute _spec
-        ]
-
-instance TF.IsValid (PersistentVolumeResource s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_metadata"
-                  (_metadata
-                      :: PersistentVolumeResource s -> TF.Attr s (MetadataSetting s))
-                  TF.validator
-
-instance P.HasMetadata (PersistentVolumeResource s) (TF.Attr s (MetadataSetting s)) where
-    metadata =
-        P.lens (_metadata :: PersistentVolumeResource s -> TF.Attr s (MetadataSetting s))
-               (\s a -> s { _metadata = a } :: PersistentVolumeResource s)
-
-instance P.HasSpec (PersistentVolumeResource s) (TF.Attr s [TF.Attr s (SpecSetting s)]) where
-    spec =
-        P.lens (_spec :: PersistentVolumeResource s -> TF.Attr s [TF.Attr s (SpecSetting s)])
-               (\s a -> s { _spec = a } :: PersistentVolumeResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (PersistentVolumeResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
 -- | @kubernetes_persistent_volume_claim@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/kubernetes/r/persistent_volume_claim.html terraform documentation>
@@ -431,6 +377,60 @@ instance P.HasWaitUntilBound (PersistentVolumeClaimResource s) (TF.Attr s P.Bool
                (\s a -> s { _waitUntilBound = a } :: PersistentVolumeClaimResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (PersistentVolumeClaimResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @kubernetes_persistent_volume@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/kubernetes/r/persistent_volume.html terraform documentation>
+-- for more information.
+data PersistentVolumeResource s = PersistentVolumeResource'
+    { _metadata :: TF.Attr s (MetadataSetting s)
+    -- ^ @metadata@ - (Required)
+    -- Standard persistent volume's metadata. More info:
+    -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
+    --
+    , _spec     :: TF.Attr s [TF.Attr s (SpecSetting s)]
+    -- ^ @spec@ - (Required)
+    -- Spec of the persistent volume owned by the cluster
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @kubernetes_persistent_volume@ resource value.
+persistentVolumeResource
+    :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ ('P._metadata', 'P.metadata')
+    -> TF.Attr s [TF.Attr s (SpecSetting s)] -- ^ @spec@ ('P._spec', 'P.spec')
+    -> P.Resource (PersistentVolumeResource s)
+persistentVolumeResource _metadata _spec =
+    TF.unsafeResource "kubernetes_persistent_volume" TF.validator $
+        PersistentVolumeResource'
+            { _metadata = _metadata
+            , _spec = _spec
+            }
+
+instance TF.IsObject (PersistentVolumeResource s) where
+    toObject PersistentVolumeResource'{..} = P.catMaybes
+        [ TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "spec" <$> TF.attribute _spec
+        ]
+
+instance TF.IsValid (PersistentVolumeResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_metadata"
+                  (_metadata
+                      :: PersistentVolumeResource s -> TF.Attr s (MetadataSetting s))
+                  TF.validator
+
+instance P.HasMetadata (PersistentVolumeResource s) (TF.Attr s (MetadataSetting s)) where
+    metadata =
+        P.lens (_metadata :: PersistentVolumeResource s -> TF.Attr s (MetadataSetting s))
+               (\s a -> s { _metadata = a } :: PersistentVolumeResource s)
+
+instance P.HasSpec (PersistentVolumeResource s) (TF.Attr s [TF.Attr s (SpecSetting s)]) where
+    spec =
+        P.lens (_spec :: PersistentVolumeResource s -> TF.Attr s [TF.Attr s (SpecSetting s)])
+               (\s a -> s { _spec = a } :: PersistentVolumeResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PersistentVolumeResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @kubernetes_pod@ Resource.
@@ -673,68 +673,6 @@ instance P.HasType' (SecretResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SecretResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
--- | @kubernetes_service@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/kubernetes/r/service.html terraform documentation>
--- for more information.
-data ServiceResource s = ServiceResource'
-    { _metadata :: TF.Attr s (MetadataSetting s)
-    -- ^ @metadata@ - (Required)
-    -- Standard service's metadata. More info:
-    -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
-    --
-    , _spec     :: TF.Attr s (SpecSetting s)
-    -- ^ @spec@ - (Required)
-    -- Spec defines the behavior of a service.
-    -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @kubernetes_service@ resource value.
-serviceResource
-    :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ ('P._metadata', 'P.metadata')
-    -> TF.Attr s (SpecSetting s) -- ^ @spec@ ('P._spec', 'P.spec')
-    -> P.Resource (ServiceResource s)
-serviceResource _metadata _spec =
-    TF.unsafeResource "kubernetes_service" TF.validator $
-        ServiceResource'
-            { _metadata = _metadata
-            , _spec = _spec
-            }
-
-instance TF.IsObject (ServiceResource s) where
-    toObject ServiceResource'{..} = P.catMaybes
-        [ TF.assign "metadata" <$> TF.attribute _metadata
-        , TF.assign "spec" <$> TF.attribute _spec
-        ]
-
-instance TF.IsValid (ServiceResource s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_metadata"
-                  (_metadata
-                      :: ServiceResource s -> TF.Attr s (MetadataSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_spec"
-                  (_spec
-                      :: ServiceResource s -> TF.Attr s (SpecSetting s))
-                  TF.validator
-
-instance P.HasMetadata (ServiceResource s) (TF.Attr s (MetadataSetting s)) where
-    metadata =
-        P.lens (_metadata :: ServiceResource s -> TF.Attr s (MetadataSetting s))
-               (\s a -> s { _metadata = a } :: ServiceResource s)
-
-instance P.HasSpec (ServiceResource s) (TF.Attr s (SpecSetting s)) where
-    spec =
-        P.lens (_spec :: ServiceResource s -> TF.Attr s (SpecSetting s))
-               (\s a -> s { _spec = a } :: ServiceResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedLoadBalancerIngress (TF.Ref s' (ServiceResource s)) (TF.Attr s [TF.Attr s (LoadBalancerIngressSetting s)]) where
-    computedLoadBalancerIngress x = TF.compute (TF.refKey x) "load_balancer_ingress"
-
 -- | @kubernetes_service_account@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/kubernetes/r/service_account.html terraform documentation>
@@ -804,6 +742,68 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceAccountResource s)) (TF.At
 
 instance s ~ s' => P.HasComputedDefaultSecretName (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
     computedDefaultSecretName x = TF.compute (TF.refKey x) "default_secret_name"
+
+-- | @kubernetes_service@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/kubernetes/r/service.html terraform documentation>
+-- for more information.
+data ServiceResource s = ServiceResource'
+    { _metadata :: TF.Attr s (MetadataSetting s)
+    -- ^ @metadata@ - (Required)
+    -- Standard service's metadata. More info:
+    -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
+    --
+    , _spec     :: TF.Attr s (SpecSetting s)
+    -- ^ @spec@ - (Required)
+    -- Spec defines the behavior of a service.
+    -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @kubernetes_service@ resource value.
+serviceResource
+    :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ ('P._metadata', 'P.metadata')
+    -> TF.Attr s (SpecSetting s) -- ^ @spec@ ('P._spec', 'P.spec')
+    -> P.Resource (ServiceResource s)
+serviceResource _metadata _spec =
+    TF.unsafeResource "kubernetes_service" TF.validator $
+        ServiceResource'
+            { _metadata = _metadata
+            , _spec = _spec
+            }
+
+instance TF.IsObject (ServiceResource s) where
+    toObject ServiceResource'{..} = P.catMaybes
+        [ TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "spec" <$> TF.attribute _spec
+        ]
+
+instance TF.IsValid (ServiceResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_metadata"
+                  (_metadata
+                      :: ServiceResource s -> TF.Attr s (MetadataSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_spec"
+                  (_spec
+                      :: ServiceResource s -> TF.Attr s (SpecSetting s))
+                  TF.validator
+
+instance P.HasMetadata (ServiceResource s) (TF.Attr s (MetadataSetting s)) where
+    metadata =
+        P.lens (_metadata :: ServiceResource s -> TF.Attr s (MetadataSetting s))
+               (\s a -> s { _metadata = a } :: ServiceResource s)
+
+instance P.HasSpec (ServiceResource s) (TF.Attr s (SpecSetting s)) where
+    spec =
+        P.lens (_spec :: ServiceResource s -> TF.Attr s (SpecSetting s))
+               (\s a -> s { _spec = a } :: ServiceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLoadBalancerIngress (TF.Ref s' (ServiceResource s)) (TF.Attr s [TF.Attr s (LoadBalancerIngressSetting s)]) where
+    computedLoadBalancerIngress x = TF.compute (TF.refKey x) "load_balancer_ingress"
 
 -- | @kubernetes_storage_class@ Resource.
 --

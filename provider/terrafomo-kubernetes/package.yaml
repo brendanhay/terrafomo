@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Kubernetes
+    - Terrafomo.Kubernetes.DataSources
+    - Terrafomo.Kubernetes.Lens
+    - Terrafomo.Kubernetes.Provider
+    - Terrafomo.Kubernetes.Resources
+    - Terrafomo.Kubernetes.Settings
+    - Terrafomo.Kubernetes.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

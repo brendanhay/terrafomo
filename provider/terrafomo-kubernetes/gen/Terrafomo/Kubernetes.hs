@@ -13,17 +13,17 @@
 --
 module Terrafomo.Kubernetes
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Kubernetes.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Kubernetes.Types
 
-    -- * DataSources
-    , module Terrafomo.Kubernetes.DataSource
-
     -- * Resources
-    , module Terrafomo.Kubernetes.Resource
+    , module Terrafomo.Kubernetes.Resources
+
+    -- * DataSources
+    , module Terrafomo.Kubernetes.DataSources
 
     -- * Settings
     , module Terrafomo.Kubernetes.Settings
@@ -32,9 +32,9 @@ module Terrafomo.Kubernetes
     , module Terrafomo.Kubernetes.Lens
     ) where
 
-import Terrafomo.Kubernetes.DataSource
+import Terrafomo.Kubernetes.DataSources
 import Terrafomo.Kubernetes.Lens
 import Terrafomo.Kubernetes.Provider
-import Terrafomo.Kubernetes.Resource
+import Terrafomo.Kubernetes.Resources
 import Terrafomo.Kubernetes.Settings
 import Terrafomo.Kubernetes.Types
