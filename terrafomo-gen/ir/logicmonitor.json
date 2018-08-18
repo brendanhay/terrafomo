@@ -92,6 +92,7 @@
                     "original": "custom_property_value"
                 }
             ],
+            "dependencies": [],
             "key": "logicmonitor_collectors.filters",
             "name": "FiltersSetting",
             "threaded": true,
@@ -180,6 +181,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/logicmonitor/d/collectors.html",
+            "dependencies": [
+                "FiltersSetting"
+            ],
             "key": "logicmonitor_collectors",
             "name": "CollectorsData",
             "threaded": true,
@@ -266,6 +270,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/logicmonitor/d/device_group.html",
+            "dependencies": [
+                "FiltersSetting"
+            ],
             "key": "logicmonitor_device_group",
             "name": "DeviceGroupData",
             "threaded": true,
@@ -439,6 +446,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/logicmonitor/r/collector.html",
+            "dependencies": [],
             "key": "logicmonitor_collector",
             "name": "CollectorResource",
             "threaded": true,
@@ -508,6 +516,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/logicmonitor/r/collector_group.html",
+            "dependencies": [],
             "key": "logicmonitor_collector_group",
             "name": "CollectorGroupResource",
             "threaded": true,
@@ -662,6 +671,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/logicmonitor/r/device.html",
+            "dependencies": [],
             "key": "logicmonitor_device",
             "name": "DeviceResource",
             "threaded": true,
@@ -834,6 +844,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/logicmonitor/r/device_group.html",
+            "dependencies": [],
             "key": "logicmonitor_device_group",
             "name": "DeviceGroupResource",
             "threaded": true,
@@ -938,6 +949,7 @@
                 "original": "company"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
