@@ -13,17 +13,17 @@
 --
 module Terrafomo.Scaleway
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Scaleway.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Scaleway.Types
 
-    -- * DataSources
-    , module Terrafomo.Scaleway.DataSource
-
     -- * Resources
-    , module Terrafomo.Scaleway.Resource
+    , module Terrafomo.Scaleway.Resources
+
+    -- * DataSources
+    , module Terrafomo.Scaleway.DataSources
 
     -- * Settings
     , module Terrafomo.Scaleway.Settings
@@ -32,9 +32,9 @@ module Terrafomo.Scaleway
     , module Terrafomo.Scaleway.Lens
     ) where
 
-import Terrafomo.Scaleway.DataSource
+import Terrafomo.Scaleway.DataSources
 import Terrafomo.Scaleway.Lens
 import Terrafomo.Scaleway.Provider
-import Terrafomo.Scaleway.Resource
+import Terrafomo.Scaleway.Resources
 import Terrafomo.Scaleway.Settings
 import Terrafomo.Scaleway.Types

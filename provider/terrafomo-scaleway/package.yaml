@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Scaleway
+    - Terrafomo.Scaleway.DataSources
+    - Terrafomo.Scaleway.Lens
+    - Terrafomo.Scaleway.Provider
+    - Terrafomo.Scaleway.Resources
+    - Terrafomo.Scaleway.Settings
+    - Terrafomo.Scaleway.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

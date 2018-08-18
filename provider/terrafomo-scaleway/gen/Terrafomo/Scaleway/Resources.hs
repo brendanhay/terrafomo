@@ -1,17 +1,17 @@
 -- This module is auto-generated.
 
 -- |
--- Module      : Terrafomo.Scaleway.Settings
+-- Module      : Terrafomo.Scaleway.Resources
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Scaleway.Settings
+module Terrafomo.Scaleway.Resources
     (
-    -- * Settings
-      module Terrafomo.Scaleway.Settings01
+    -- * Resources
+      module Terrafomo.Scaleway.Resource01
     ) where
 
-import Terrafomo.Scaleway.Settings01
+import Terrafomo.Scaleway.Resource01

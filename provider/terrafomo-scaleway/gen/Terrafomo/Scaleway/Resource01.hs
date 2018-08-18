@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Scaleway.Resource
+-- Module      : Terrafomo.Scaleway.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Scaleway.Resource
+module Terrafomo.Scaleway.Resource01
     (
     -- ** scaleway_ip
       IpResource (..)
@@ -45,13 +45,13 @@ module Terrafomo.Scaleway.Resource
     , UserDataResource (..)
     , userDataResource
 
-    -- ** scaleway_volume
-    , VolumeResource (..)
-    , volumeResource
-
     -- ** scaleway_volume_attachment
     , VolumeAttachmentResource (..)
     , volumeAttachmentResource
+
+    -- ** scaleway_volume
+    , VolumeResource (..)
+    , volumeResource
 
     ) where
 
@@ -652,6 +652,55 @@ instance P.HasValue (UserDataResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (UserDataResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
+-- | @scaleway_volume_attachment@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/scaleway/r/volume_attachment.html terraform documentation>
+-- for more information.
+data VolumeAttachmentResource s = VolumeAttachmentResource'
+    { _server :: TF.Attr s P.Text
+    -- ^ @server@ - (Required, Forces New)
+    -- The server a volume should be attached to
+    --
+    , _volume :: TF.Attr s P.Text
+    -- ^ @volume@ - (Required, Forces New)
+    -- The volume to attach
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @scaleway_volume_attachment@ resource value.
+volumeAttachmentResource
+    :: TF.Attr s P.Text -- ^ @server@ ('P._server', 'P.server')
+    -> TF.Attr s P.Text -- ^ @volume@ ('P._volume', 'P.volume')
+    -> P.Resource (VolumeAttachmentResource s)
+volumeAttachmentResource _server _volume =
+    TF.unsafeResource "scaleway_volume_attachment" TF.validator $
+        VolumeAttachmentResource'
+            { _server = _server
+            , _volume = _volume
+            }
+
+instance TF.IsObject (VolumeAttachmentResource s) where
+    toObject VolumeAttachmentResource'{..} = P.catMaybes
+        [ TF.assign "server" <$> TF.attribute _server
+        , TF.assign "volume" <$> TF.attribute _volume
+        ]
+
+instance TF.IsValid (VolumeAttachmentResource s) where
+    validator = P.mempty
+
+instance P.HasServer (VolumeAttachmentResource s) (TF.Attr s P.Text) where
+    server =
+        P.lens (_server :: VolumeAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _server = a } :: VolumeAttachmentResource s)
+
+instance P.HasVolume (VolumeAttachmentResource s) (TF.Attr s P.Text) where
+    volume =
+        P.lens (_volume :: VolumeAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _volume = a } :: VolumeAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @scaleway_volume@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/scaleway/r/volume.html terraform documentation>
@@ -715,52 +764,3 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeResource s)) (TF.Attr s P.T
 
 instance s ~ s' => P.HasComputedServer (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
     computedServer x = TF.compute (TF.refKey x) "server"
-
--- | @scaleway_volume_attachment@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/scaleway/r/volume_attachment.html terraform documentation>
--- for more information.
-data VolumeAttachmentResource s = VolumeAttachmentResource'
-    { _server :: TF.Attr s P.Text
-    -- ^ @server@ - (Required, Forces New)
-    -- The server a volume should be attached to
-    --
-    , _volume :: TF.Attr s P.Text
-    -- ^ @volume@ - (Required, Forces New)
-    -- The volume to attach
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @scaleway_volume_attachment@ resource value.
-volumeAttachmentResource
-    :: TF.Attr s P.Text -- ^ @server@ ('P._server', 'P.server')
-    -> TF.Attr s P.Text -- ^ @volume@ ('P._volume', 'P.volume')
-    -> P.Resource (VolumeAttachmentResource s)
-volumeAttachmentResource _server _volume =
-    TF.unsafeResource "scaleway_volume_attachment" TF.validator $
-        VolumeAttachmentResource'
-            { _server = _server
-            , _volume = _volume
-            }
-
-instance TF.IsObject (VolumeAttachmentResource s) where
-    toObject VolumeAttachmentResource'{..} = P.catMaybes
-        [ TF.assign "server" <$> TF.attribute _server
-        , TF.assign "volume" <$> TF.attribute _volume
-        ]
-
-instance TF.IsValid (VolumeAttachmentResource s) where
-    validator = P.mempty
-
-instance P.HasServer (VolumeAttachmentResource s) (TF.Attr s P.Text) where
-    server =
-        P.lens (_server :: VolumeAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _server = a } :: VolumeAttachmentResource s)
-
-instance P.HasVolume (VolumeAttachmentResource s) (TF.Attr s P.Text) where
-    volume =
-        P.lens (_volume :: VolumeAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _volume = a } :: VolumeAttachmentResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeAttachmentResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
