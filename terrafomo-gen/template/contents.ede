@@ -1,42 +1,15 @@
 -- This module is auto-generated.
 
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
-{-# OPTIONS_GHC -fno-warn-dodgy-exports  #-}
-
 {% include "_include/license.ede" %}
 --
 module {{ namespace }}
     (
-    -- * Provider Datatype
-      module {{ provider }}
-
-    -- * Custom Types
-    , module {{ types }}
-
-    -- * DataSources
-  {% for export in datasources %}
-    , module {{ export.value }}
-  {% endfor %}
-
-    -- * Resources
-  {% for export in resources %}
-    , module {{ export.value }}
-  {% endfor %}
-
-    -- * Settings
-    , module {{ settings }}
-
-    -- * Overloaded Lenses
-    , module {{ lenses }}
+    -- * {{ heading }}
+    {% for export in exports %}
+    {% if export.first %}  {% else %}, {% endif %}module {{ export.value }}
+    {% endfor %}
     ) where
 
-import {{ provider }}
-import {{ types }}
-{% for export in datasources %}
+{% for export in exports %}
 import {{ export.value }}
 {% endfor %}
-{% for export in resources %}
-import {{ export.value }}
-{% endfor %}
-import {{ settings }}
-import {{ lenses }}

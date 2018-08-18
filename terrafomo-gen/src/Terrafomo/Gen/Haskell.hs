@@ -13,6 +13,7 @@ import Terrafomo.Gen.JSON ((.=))
 import Terrafomo.Gen.Name
 import Terrafomo.Gen.Type (Type)
 
+import qualified Data.Foldable                    as Fold
 import qualified Data.HashMap.Strict              as HashMap
 import qualified Data.List                        as List
 import qualified Data.Set                         as Set
@@ -106,16 +107,17 @@ data Schema a = Schema'
 instance JSON.ToJSON a => JSON.ToJSON (Schema a) where
     toJSON x@Schema'{..} =
         JSON.object
-            [ "name"       .= schemaName
-            , "original"   .= schemaOriginal
-            , "key"        .= schemaKey
-            , "type"       .= schemaType
-            , "con"        .= schemaCon
-            , "threaded"   .= schemaThreaded
-            , "arguments"  .= schemaArguments
-            , "attributes" .= schemaAttributes
-            , "parameters" .= schemaParameters x
-            , "conflicts"  .= schemaConflicts  x
+            [ "name"         .= schemaName
+            , "original"     .= schemaOriginal
+            , "key"          .= schemaKey
+            , "type"         .= schemaType
+            , "con"          .= schemaCon
+            , "threaded"     .= schemaThreaded
+            , "dependencies" .= schemaDependencies x
+            , "arguments"    .= schemaArguments
+            , "attributes"   .= schemaAttributes
+            , "parameters"   .= schemaParameters x
+            , "conflicts"    .= schemaConflicts  x
             ]
 
 schemaParameters :: Schema a -> [Field a]
@@ -136,6 +138,12 @@ schemaParameters = sort . filter (go . fieldDefault) . schemaArguments
 
 schemaConflicts :: Schema a -> [Field a]
 schemaConflicts = filter (not . Set.null . fieldConflicts) . schemaArguments
+
+schemaDependencies :: Schema a -> [DataName]
+schemaDependencies x =
+        let go = concatMap (Fold.toList . fieldType)
+         in go (schemaArguments  x)
+         ++ go (schemaAttributes x)
 
 data Field a = Field'
     { fieldName      :: !LabelName
@@ -256,8 +264,9 @@ instance JSON.ToJSON Default where
         build = LText.toStrict . Build.toLazyText
 
 data Class = Class'
-    { className   :: !DataName
-    , classMethod :: !VarName
+    { className     :: !DataName
+    , classMethod   :: !VarName
+    , classComputed :: !Bool
     } deriving (Show, Eq, Ord, Generic)
 
 instance JSON.ToJSON Class where

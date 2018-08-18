@@ -13,12 +13,14 @@ import qualified Terrafomo.Gen.Go   as Go
 import qualified Terrafomo.Gen.JSON as JSON
 import qualified Terrafomo.Gen.Text as Text
 
-data Type
+data TypeF a
     = Free !Text
-    | Data !Bool !DataName
-    | Attr !Type
-    | App  !Type !Type
-      deriving (Show, Eq, Ord)
+    | Data !Bool !a
+    | Attr !(TypeF a)
+    | App  !(TypeF a) !(TypeF a)
+      deriving (Show, Eq, Ord, Functor, Foldable, Traversable)
+
+type Type = TypeF DataName
 
 instance JSON.ToJSON Type where
     toJSON = JSON.String . typeName . reduce

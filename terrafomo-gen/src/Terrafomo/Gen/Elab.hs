@@ -2,10 +2,10 @@
 
 module Terrafomo.Gen.Elab
     ( run
-    , classes
     ) where
 
 import Control.Applicative        ((<|>))
+import Control.Monad              (unless)
 import Control.Monad.Except       (Except)
 import Control.Monad.Reader       (ReaderT)
 import Control.Monad.State.Strict (StateT)
@@ -81,7 +81,7 @@ run cfg provider =
                    , _primitives
                    } <- State.get
 
-               pure $! Provider'
+               validate provider $ Provider'
                    { providerName         = configProviderName cfg
                    , providerPackage      = configPackage      cfg
                    , providerDependencies = configDependencies cfg
@@ -94,24 +94,34 @@ run cfg provider =
                    , providerSchema       = schema
                    }
 
-classes :: Provider -> (Set Class, Set Class)
-classes p = (lenses, getters)
-  where
-    lenses  = Set.fromList (map go args)
-    getters = Set.fromList (map go attrs)
+validate :: Go.Provider -> Provider -> Elab Provider
+validate a b = do
+    let name        =
+            schemaOriginal . resourceSchema
 
-    go x =
-        Class' { className   = fieldClass  x
-               , classMethod = fieldMethod x
-               }
+        resources   =
+            Set.fromList (map Go.resourceName (Go.providerResources a))
+                `Set.difference`
+                    Set.fromList (map name (providerResources b))
 
-    args =  concatMap schemaArguments  schemas
-    attrs = concatMap schemaAttributes schemas
+        datasources =
+            Set.fromList (map Go.resourceName (Go.providerDataSources a))
+                `Set.difference`
+                    Set.fromList (map name (providerDataSources b))
 
-    schemas =
-           map resourceSchema (providerResources   p)
-        ++ map resourceSchema (providerDataSources p)
-        ++ map fromSettings   (providerSchema p : providerSettings p)
+    unless (Set.null resources) $
+        Except.throwError $
+            unlines [ "Missing resources:"
+                    , ppShow resources
+                    ]
+
+    unless (Set.null datasources) $
+        Except.throwError $
+            unlines [ "Missing datasources:"
+                    , ppShow datasources
+                    ]
+
+    pure b
 
 elabResource :: Text -> Text -> [Go.Schema] -> Elab Resource
 elabResource provider original schemas =

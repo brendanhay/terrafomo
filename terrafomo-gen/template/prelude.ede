@@ -1,0 +1,34 @@
+-- This module is auto-generated.
+
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-dodgy-exports  #-}
+
+{% include "_include/license.ede" %}
+--
+module {{ namespace }}
+    (
+    -- * Provider
+      module {{ provider }}
+
+    -- * Types
+    , module {{ types }}
+
+    -- * Resources
+    , module {{ resources }}
+
+    -- * DataSources
+    , module {{ datasources }}
+
+    -- * Settings
+    , module {{ settings }}
+
+    -- * Overloaded Lenses
+    , module {{ lenses }}
+    ) where
+
+import {{ provider }}
+import {{ types }}
+import {{ resources }}
+import {{ datasources }}
+import {{ settings }}
+import {{ lenses }}
