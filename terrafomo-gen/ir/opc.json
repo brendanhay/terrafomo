@@ -24,6 +24,7 @@
                     "original": "cookie_name"
                 }
             ],
+            "dependencies": [],
             "key": "opc_lbaas_policy.application_cookie_stickiness_policy",
             "name": "ApplicationCookieStickinessPolicySetting",
             "threaded": true,
@@ -126,6 +127,7 @@
                     "original": "virtual_hostname_for_policy_attribution"
                 }
             ],
+            "dependencies": [],
             "key": "opc_lbaas_policy.cloudgate_policy",
             "name": "CloudgatePolicySetting",
             "threaded": true,
@@ -296,6 +298,7 @@
                     "original": "unhealthy_threshold"
                 }
             ],
+            "dependencies": [],
             "key": "opc_lbaas_server_pool.health_check",
             "name": "HealthCheckSetting",
             "threaded": true,
@@ -533,6 +536,11 @@
                     "optional": true,
                     "original": "tags"
                 }
+            ],
+            "dependencies": [
+                "NetworkingInfoSetting",
+                "StorageSetting",
+                "NetworkingInfoSetting"
             ],
             "key": "opc_compute_orchestrated_instance.instance",
             "name": "Instance'Setting",
@@ -1028,6 +1036,7 @@
                     "original": "cookie_expiration_period"
                 }
             ],
+            "dependencies": [],
             "key": "opc_lbaas_policy.load_balancer_cookie_stickiness_policy",
             "name": "LoadBalancerCookieStickinessPolicySetting",
             "threaded": true,
@@ -1079,6 +1088,7 @@
                     "original": "load_balancing_mechanism"
                 }
             ],
+            "dependencies": [],
             "key": "opc_lbaas_policy.load_balancing_mechanism_policy",
             "name": "LoadBalancingMechanismPolicySetting",
             "threaded": true,
@@ -1334,6 +1344,7 @@
                     "original": "vnic_sets"
                 }
             ],
+            "dependencies": [],
             "key": "opc_compute_instance.networking_info",
             "name": "NetworkingInfoSetting",
             "threaded": true,
@@ -1556,6 +1567,7 @@
                     "original": "zone_memory_size"
                 }
             ],
+            "dependencies": [],
             "key": "opc_lbaas_policy.rate_limiting_request_policy",
             "name": "RateLimitingRequestPolicySetting",
             "threaded": true,
@@ -1675,6 +1687,7 @@
                     "original": "response_code"
                 }
             ],
+            "dependencies": [],
             "key": "opc_lbaas_policy.redirect_policy",
             "name": "RedirectPolicySetting",
             "threaded": true,
@@ -1777,6 +1790,7 @@
                     "original": "permitted_clients"
                 }
             ],
+            "dependencies": [],
             "key": "opc_lbaas_policy.resource_access_control_policy",
             "name": "ResourceAccessControlPolicySetting",
             "threaded": true,
@@ -1896,6 +1910,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "opc_lbaas_policy.set_request_header_policy",
             "name": "SetRequestHeaderPolicySetting",
             "threaded": true,
@@ -1998,6 +2013,7 @@
                     "original": "ssl_protocol"
                 }
             ],
+            "dependencies": [],
             "key": "opc_lbaas_policy.ssl_negotiation_policy",
             "name": "SslNegotiationPolicySetting",
             "threaded": true,
@@ -2083,6 +2099,7 @@
                     "original": "volume"
                 }
             ],
+            "dependencies": [],
             "key": "opc_compute_instance.storage",
             "name": "StorageSetting",
             "threaded": true,
@@ -2169,6 +2186,7 @@
                     "original": "trusted_certificate"
                 }
             ],
+            "dependencies": [],
             "key": "opc_lbaas_policy.trusted_certificate_policy",
             "name": "TrustedCertificatePolicySetting",
             "threaded": true,
@@ -2258,6 +2276,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/d/compute_image_list_entry.html",
+            "dependencies": [],
             "key": "opc_compute_image_list_entry",
             "name": "ComputeImageListEntryData",
             "threaded": true,
@@ -2396,6 +2415,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/d/compute_ip_address_reservation.html",
+            "dependencies": [],
             "key": "opc_compute_ip_address_reservation",
             "name": "ComputeIpAddressReservationData",
             "threaded": true,
@@ -2551,6 +2571,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/d/compute_ip_reservation.html",
+            "dependencies": [],
             "key": "opc_compute_ip_reservation",
             "name": "ComputeIpReservationData",
             "threaded": true,
@@ -2723,6 +2744,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/d/compute_machine_image.html",
+            "dependencies": [],
             "key": "opc_compute_machine_image",
             "name": "ComputeMachineImageData",
             "threaded": true,
@@ -3031,6 +3053,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/d/compute_network_interface.html",
+            "dependencies": [],
             "key": "opc_compute_network_interface",
             "name": "ComputeNetworkInterfaceData",
             "threaded": true,
@@ -3356,6 +3379,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/d/compute_ssh_key.html",
+            "dependencies": [],
             "key": "opc_compute_ssh_key",
             "name": "ComputeSshKeyData",
             "threaded": true,
@@ -3460,6 +3484,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/d/compute_storage_volume_snapshot.html",
+            "dependencies": [],
             "key": "opc_compute_storage_volume_snapshot",
             "name": "ComputeStorageVolumeSnapshotData",
             "threaded": true,
@@ -3819,6 +3844,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/d/compute_vnic.html",
+            "dependencies": [],
             "key": "opc_compute_vnic",
             "name": "ComputeVnicData",
             "threaded": true,
@@ -4027,6 +4053,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_acl.html",
+            "dependencies": [],
             "key": "opc_compute_acl",
             "name": "ComputeAclResource",
             "threaded": true,
@@ -4148,6 +4175,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_image_list.html",
+            "dependencies": [],
             "key": "opc_compute_image_list",
             "name": "ComputeImageListResource",
             "threaded": true,
@@ -4286,6 +4314,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_image_list_entry.html",
+            "dependencies": [],
             "key": "opc_compute_image_list_entry",
             "name": "ComputeImageListEntryResource",
             "threaded": true,
@@ -4611,6 +4640,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_instance.html",
+            "dependencies": [
+                "NetworkingInfoSetting",
+                "StorageSetting",
+                "NetworkingInfoSetting"
+            ],
             "key": "opc_compute_instance",
             "name": "ComputeInstanceResource",
             "threaded": true,
@@ -5157,6 +5191,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_ip_address_association.html",
+            "dependencies": [],
             "key": "opc_compute_ip_address_association",
             "name": "ComputeIpAddressAssociationResource",
             "threaded": true,
@@ -5295,6 +5330,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_ip_address_prefix_set.html",
+            "dependencies": [],
             "key": "opc_compute_ip_address_prefix_set",
             "name": "ComputeIpAddressPrefixSetResource",
             "threaded": true,
@@ -5433,6 +5469,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_ip_address_reservation.html",
+            "dependencies": [],
             "key": "opc_compute_ip_address_reservation",
             "name": "ComputeIpAddressReservationResource",
             "threaded": true,
@@ -5588,6 +5625,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_ip_association.html",
+            "dependencies": [],
             "key": "opc_compute_ip_association",
             "name": "ComputeIpAssociationResource",
             "threaded": true,
@@ -5777,6 +5815,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_ip_network.html",
+            "dependencies": [],
             "key": "opc_compute_ip_network",
             "name": "ComputeIpNetworkResource",
             "threaded": true,
@@ -5915,6 +5954,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_ip_network_exchange.html",
+            "dependencies": [],
             "key": "opc_compute_ip_network_exchange",
             "name": "ComputeIpNetworkExchangeResource",
             "threaded": true,
@@ -6053,6 +6093,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_ip_reservation.html",
+            "dependencies": [],
             "key": "opc_compute_ip_reservation",
             "name": "ComputeIpReservationResource",
             "threaded": true,
@@ -6242,6 +6283,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_machine_image.html",
+            "dependencies": [],
             "key": "opc_compute_machine_image",
             "name": "ComputeMachineImageResource",
             "threaded": true,
@@ -6533,6 +6575,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_orchestrated_instance.html",
+            "dependencies": [
+                "Instance'Setting"
+            ],
             "key": "opc_compute_orchestrated_instance",
             "name": "ComputeOrchestratedInstanceResource",
             "threaded": true,
@@ -6739,6 +6784,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_route.html",
+            "dependencies": [],
             "key": "opc_compute_route",
             "name": "ComputeRouteResource",
             "threaded": true,
@@ -6945,6 +6991,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_sec_rule.html",
+            "dependencies": [],
             "key": "opc_compute_sec_rule",
             "name": "ComputeSecRuleResource",
             "threaded": true,
@@ -7168,6 +7215,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_security_application.html",
+            "dependencies": [],
             "key": "opc_compute_security_application",
             "name": "ComputeSecurityApplicationResource",
             "threaded": true,
@@ -7289,6 +7337,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_security_association.html",
+            "dependencies": [],
             "key": "opc_compute_security_association",
             "name": "ComputeSecurityAssociationResource",
             "threaded": true,
@@ -7427,6 +7476,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_security_ip_list.html",
+            "dependencies": [],
             "key": "opc_compute_security_ip_list",
             "name": "ComputeSecurityIpListResource",
             "threaded": true,
@@ -7565,6 +7615,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_security_list.html",
+            "dependencies": [],
             "key": "opc_compute_security_list",
             "name": "ComputeSecurityListResource",
             "threaded": true,
@@ -7720,6 +7771,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_security_protocol.html",
+            "dependencies": [],
             "key": "opc_compute_security_protocol",
             "name": "ComputeSecurityProtocolResource",
             "threaded": true,
@@ -7977,6 +8029,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_security_rule.html",
+            "dependencies": [],
             "key": "opc_compute_security_rule",
             "name": "ComputeSecurityRuleResource",
             "threaded": true,
@@ -8115,6 +8168,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_snapshot.html",
+            "dependencies": [],
             "key": "opc_compute_snapshot",
             "name": "ComputeSnapshotResource",
             "threaded": true,
@@ -8287,6 +8341,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_ssh_key.html",
+            "dependencies": [],
             "key": "opc_compute_ssh_key",
             "name": "ComputeSshKeyResource",
             "threaded": true,
@@ -8408,6 +8463,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_storage_attachment.html",
+            "dependencies": [],
             "key": "opc_compute_storage_attachment",
             "name": "ComputeStorageAttachmentResource",
             "threaded": true,
@@ -8818,6 +8874,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_storage_volume.html",
+            "dependencies": [],
             "key": "opc_compute_storage_volume",
             "name": "ComputeStorageVolumeResource",
             "threaded": true,
@@ -9177,6 +9234,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_storage_volume_snapshot.html",
+            "dependencies": [],
             "key": "opc_compute_storage_volume_snapshot",
             "name": "ComputeStorageVolumeSnapshotResource",
             "threaded": true,
@@ -9536,6 +9594,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_vnic_set.html",
+            "dependencies": [],
             "key": "opc_compute_vnic_set",
             "name": "ComputeVnicSetResource",
             "threaded": true,
@@ -9691,6 +9750,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/lbaas_certificate.html",
+            "dependencies": [],
             "key": "opc_lbaas_certificate",
             "name": "LbaasCertificateResource",
             "threaded": true,
@@ -10016,6 +10076,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/lbaas_listener.html",
+            "dependencies": [],
             "key": "opc_lbaas_listener",
             "name": "LbaasListenerResource",
             "threaded": true,
@@ -10409,6 +10470,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/lbaas_load_balancer.html",
+            "dependencies": [],
             "key": "opc_lbaas_load_balancer",
             "name": "LbaasLoadBalancerResource",
             "threaded": true,
@@ -11245,6 +11307,18 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/lbaas_policy.html",
+            "dependencies": [
+                "ApplicationCookieStickinessPolicySetting",
+                "CloudgatePolicySetting",
+                "LoadBalancerCookieStickinessPolicySetting",
+                "LoadBalancingMechanismPolicySetting",
+                "RateLimitingRequestPolicySetting",
+                "RedirectPolicySetting",
+                "ResourceAccessControlPolicySetting",
+                "SetRequestHeaderPolicySetting",
+                "SslNegotiationPolicySetting",
+                "TrustedCertificatePolicySetting"
+            ],
             "key": "opc_lbaas_policy",
             "name": "LbaasPolicyResource",
             "threaded": true,
@@ -12116,6 +12190,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/lbaas_server_pool.html",
+            "dependencies": [
+                "HealthCheckSetting"
+            ],
             "key": "opc_lbaas_server_pool",
             "name": "LbaasServerPoolResource",
             "threaded": true,
@@ -12475,6 +12552,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/storage_container.html",
+            "dependencies": [],
             "key": "opc_storage_container",
             "name": "StorageContainerResource",
             "threaded": true,
@@ -12857,6 +12935,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/storage_object.html",
+            "dependencies": [],
             "key": "opc_storage_object",
             "name": "StorageObjectResource",
             "threaded": true,
@@ -13385,6 +13464,7 @@
                 "original": "user"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
