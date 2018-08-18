@@ -109,6 +109,7 @@
                     "original": "tenant_id"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_key_vault.access_policy",
             "name": "AccessPolicySetting",
             "threaded": true,
@@ -314,6 +315,7 @@
                     "original": "action_type"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_key_vault_certificate.certificate_policy.lifetime_action.action",
             "name": "ActionSetting",
             "threaded": true,
@@ -416,6 +418,7 @@
                     "original": "storage_queue_name"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_scheduler_job.action_storage_queue",
             "name": "ActionStorageQueueSetting",
             "threaded": true,
@@ -653,6 +656,11 @@
                     "original": "url"
                 }
             ],
+            "dependencies": [
+                "AuthenticationActiveDirectorySetting",
+                "AuthenticationBasicSetting",
+                "AuthenticationCertificateSetting"
+            ],
             "key": "azurerm_scheduler_job.action_web",
             "name": "ActionWebSetting",
             "threaded": true,
@@ -857,6 +865,7 @@
                     "original": "setting_name"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_machine.os_profile_windows_config.additional_unattend_config",
             "name": "AdditionalUnattendConfigSetting",
             "threaded": true,
@@ -1061,6 +1070,7 @@
                     "original": "vnet_subnet_id"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_container_service.agent_pool_profile",
             "name": "AgentPoolProfileSetting",
             "threaded": true,
@@ -1351,6 +1361,7 @@
                     "original": "token"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_notification_hub.apns_credential",
             "name": "ApnsCredentialSetting",
             "threaded": true,
@@ -1573,6 +1584,7 @@
                     "original": "start_port"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_service_fabric_cluster.node_type.application_ports",
             "name": "ApplicationPortsSetting",
             "threaded": true,
@@ -1692,6 +1704,7 @@
                     "original": "tenant_id"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_scheduler_job.action_web.authentication_active_directory",
             "name": "AuthenticationActiveDirectorySetting",
             "threaded": true,
@@ -1812,6 +1825,7 @@
                     "original": "username"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_scheduler_job.action_web.authentication_basic",
             "name": "AuthenticationBasicSetting",
             "threaded": true,
@@ -1931,6 +1945,7 @@
                     "original": "pfx"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_application_gateway.authentication_certificate",
             "name": "AuthenticationCertificateSetting",
             "threaded": true,
@@ -2136,6 +2151,7 @@
                     "original": "name"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_application_gateway.backend_address_pool",
             "name": "BackendAddressPoolSetting",
             "threaded": true,
@@ -2306,6 +2322,9 @@
                     "optional": true,
                     "original": "request_timeout"
                 }
+            ],
+            "dependencies": [
+                "AuthenticationCertificateSetting"
             ],
             "key": "azurerm_application_gateway.backend_http_settings",
             "name": "BackendHttpSettings",
@@ -2495,6 +2514,7 @@
                     "original": "peering_address"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_local_network_gateway.bgp_settings",
             "name": "BgpSettings",
             "threaded": true,
@@ -2632,6 +2652,7 @@
                     "original": "storage_uri"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_machine.boot_diagnostics",
             "name": "BootDiagnosticsSetting",
             "threaded": true,
@@ -2700,6 +2721,7 @@
                     "original": "name"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_cosmosdb_account.capabilities",
             "name": "CapabilitiesSetting",
             "threaded": true,
@@ -2803,6 +2825,7 @@
                     "original": "minimum"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_autoscale_setting.profile.capacity",
             "name": "CapacitySetting",
             "threaded": true,
@@ -2955,6 +2978,9 @@
                     "optional": true,
                     "original": "size_limit_in_bytes"
                 }
+            ],
+            "dependencies": [
+                "DestinationSetting"
             ],
             "key": "azurerm_eventhub.capture_description",
             "name": "CaptureDescriptionSetting",
@@ -3109,6 +3135,7 @@
                     "original": "x509_store_name"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_key_vault_certificate.certificate",
             "name": "CertificateSetting",
             "threaded": true,
@@ -3262,6 +3289,14 @@
                     "original": "x509_certificate_properties"
                 }
             ],
+            "dependencies": [
+                "IssuerParametersSetting",
+                "KeyPropertiesSetting",
+                "LifetimeActionSetting",
+                "SecretPropertiesSetting",
+                "X509CertificatePropertiesSetting",
+                "X509CertificatePropertiesSetting"
+            ],
             "key": "azurerm_key_vault_certificate.certificate_policy",
             "name": "CertificatePolicySetting",
             "threaded": true,
@@ -3382,6 +3417,7 @@
                     "original": "thumbprint"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_service_fabric_cluster.client_certificate_thumbprint",
             "name": "ClientCertificateThumbprintSetting",
             "threaded": true,
@@ -3484,6 +3520,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_app_service.connection_string",
             "name": "ConnectionStringSetting",
             "threaded": true,
@@ -3655,6 +3692,7 @@
                     "original": "max_staleness_prefix"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_cosmosdb_account.consistency_policy",
             "name": "ConsistencyPolicySetting",
             "threaded": true,
@@ -3893,6 +3931,9 @@
                     "optional": true,
                     "original": "volume"
                 }
+            ],
+            "dependencies": [
+                "VolumeSetting"
             ],
             "key": "azurerm_container_group.container",
             "name": "ContainerSetting",
@@ -4133,6 +4174,7 @@
                     "original": "to"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_servicebus_subscription_rule.correlation_filter",
             "name": "CorrelationFilterSetting",
             "threaded": true,
@@ -4183,6 +4225,7 @@
                     "original": "use_subdomain"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_storage_account.custom_domain",
             "name": "CustomDomainSetting",
             "threaded": true,
@@ -4320,6 +4363,7 @@
                     "original": "size_gb"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_image.data_disk",
             "name": "DataDiskSetting",
             "threaded": true,
@@ -4490,6 +4534,7 @@
                     "original": "storage_account_id"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_eventhub.capture_description.destination",
             "name": "DestinationSetting",
             "threaded": true,
@@ -4660,6 +4705,7 @@
                     "original": "table_endpoint"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_service_fabric_cluster.diagnostics_config",
             "name": "DiagnosticsConfigSetting",
             "threaded": true,
@@ -4779,6 +4825,7 @@
                     "original": "enabled"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_container_service.diagnostics_profile",
             "name": "DiagnosticsProfileSetting",
             "threaded": true,
@@ -4865,6 +4912,7 @@
                     "original": "source_vault_id"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_managed_disk.encryption_settings.disk_encryption_key",
             "name": "DiskEncryptionKeySetting",
             "threaded": true,
@@ -4985,6 +5033,7 @@
                     "original": "ttl"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_traffic_manager_profile.dns_config",
             "name": "DnsConfigSetting",
             "threaded": true,
@@ -5053,6 +5102,7 @@
                     "original": "dns_servers"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_machine_scale_set.network_profile.dns_settings",
             "name": "DnsSettings",
             "threaded": true,
@@ -5138,6 +5188,7 @@
                     "original": "send_to_subscription_co_administrator"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_autoscale_setting.notification.email",
             "name": "EmailSetting",
             "threaded": true,
@@ -5188,6 +5239,7 @@
                     "original": "send_to_service_owners"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_metric_alertrule.email_action",
             "name": "EmailActionSetting",
             "threaded": true,
@@ -5273,6 +5325,7 @@
                     "original": "name"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_monitor_action_group.email_receiver",
             "name": "EmailReceiverSetting",
             "threaded": true,
@@ -5374,6 +5427,12 @@
                     "optional": true,
                     "original": "key_encryption_key"
                 }
+            ],
+            "dependencies": [
+                "DiskEncryptionKeySetting",
+                "KeyEncryptionKeySetting",
+                "DiskEncryptionKeySetting",
+                "KeyEncryptionKeySetting"
             ],
             "key": "azurerm_managed_disk.encryption_settings",
             "name": "EncryptionSettings",
@@ -5495,6 +5554,7 @@
                     "original": "start_port"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_service_fabric_cluster.node_type.ephemeral_ports",
             "name": "EphemeralPortsSetting",
             "threaded": true,
@@ -5614,6 +5674,7 @@
                     "original": "storage_queue_name"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_scheduler_job.error_action_storage_queue",
             "name": "ErrorActionStorageQueueSetting",
             "threaded": true,
@@ -5850,6 +5911,11 @@
                     "optional": false,
                     "original": "url"
                 }
+            ],
+            "dependencies": [
+                "AuthenticationActiveDirectorySetting",
+                "AuthenticationBasicSetting",
+                "AuthenticationCertificateSetting"
             ],
             "key": "azurerm_scheduler_job.error_action_web",
             "name": "ErrorActionWebSetting",
@@ -6106,6 +6172,7 @@
                     "original": "type_handler_version"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_machine_scale_set.extension",
             "name": "ExtensionSetting",
             "threaded": true,
@@ -6225,6 +6292,7 @@
                     "original": "parameters"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_service_fabric_cluster.fabric_settings",
             "name": "FabricSettings",
             "threaded": true,
@@ -6344,6 +6412,7 @@
                     "original": "remote_port"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_packet_capture.filter",
             "name": "FilterSetting",
             "threaded": true,
@@ -6429,6 +6498,7 @@
                     "original": "timezone"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_autoscale_setting.profile.fixed_date",
             "name": "FixedDateSetting",
             "threaded": true,
@@ -6582,6 +6652,7 @@
                     "original": "zones"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_application_gateway.frontend_ip_configuration",
             "name": "FrontendIpConfigurationSetting",
             "threaded": true,
@@ -6770,6 +6841,7 @@
                     "original": "port"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_application_gateway.frontend_port",
             "name": "FrontendPortSetting",
             "threaded": true,
@@ -6873,6 +6945,7 @@
                     "original": "subnet_id"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_application_gateway.gateway_ip_configuration",
             "name": "GatewayIpConfigurationSetting",
             "threaded": true,
@@ -6959,6 +7032,7 @@
                     "original": "api_key"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_notification_hub.gcm_credential",
             "name": "GcmCredentialSetting",
             "threaded": true,
@@ -7062,6 +7136,7 @@
                     "original": "relative_path"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_cdn_endpoint.geo_filter",
             "name": "GeoFilterSetting",
             "threaded": true,
@@ -7181,6 +7256,7 @@
                     "original": "prefix"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_cosmosdb_account.geo_location",
             "name": "GeoLocationSetting",
             "threaded": true,
@@ -7318,6 +7394,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_automation_runbook.publish_content_link.hash",
             "name": "HashSetting",
             "threaded": true,
@@ -7488,6 +7565,7 @@
                     "original": "ssl_certificate_name"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_application_gateway.http_listener",
             "name": "HttpListenerSetting",
             "threaded": true,
@@ -7676,6 +7754,7 @@
                     "original": "identity_ids"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_app_service.identity",
             "name": "IdentitySetting",
             "threaded": true,
@@ -7796,6 +7875,7 @@
                     "original": "username"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_container_group.image_registry_credential",
             "name": "ImageRegistryCredentialSetting",
             "threaded": true,
@@ -7983,6 +8063,7 @@
                     "original": "storage_uri"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_sql_database.import",
             "name": "Import'Setting",
             "threaded": true,
@@ -8323,6 +8404,9 @@
                     "original": "public_ip_address_configuration"
                 }
             ],
+            "dependencies": [
+                "PublicIpAddressConfigurationSetting"
+            ],
             "key": "azurerm_network_interface.ip_configuration",
             "name": "IpConfigurationSetting",
             "threaded": true,
@@ -8596,6 +8680,7 @@
                     "original": "subnet_mask"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_app_service.site_config.ip_restriction",
             "name": "IpRestrictionSetting",
             "threaded": true,
@@ -8766,6 +8851,7 @@
                     "original": "sa_lifetime"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_network_gateway_connection.ipsec_policy",
             "name": "IpsecPolicySetting",
             "threaded": true,
@@ -8937,6 +9023,7 @@
                     "original": "name"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_key_vault_certificate.certificate_policy.issuer_parameters",
             "name": "IssuerParametersSetting",
             "threaded": true,
@@ -9005,6 +9092,7 @@
                     "original": "source_vault_id"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_managed_disk.encryption_settings.key_encryption_key",
             "name": "KeyEncryptionKeySetting",
             "threaded": true,
@@ -9159,6 +9247,7 @@
                     "original": "reuse_key"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_key_vault_certificate.certificate_policy.key_properties",
             "name": "KeyPropertiesSetting",
             "threaded": true,
@@ -9243,6 +9332,7 @@
                 "name": "KubeConfigSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "azurerm_kubernetes_cluster.kube_config",
             "name": "KubeConfigSetting",
             "threaded": true,
@@ -9396,6 +9486,10 @@
                     "original": "trigger"
                 }
             ],
+            "dependencies": [
+                "ActionSetting",
+                "TriggerSetting"
+            ],
             "key": "azurerm_key_vault_certificate.certificate_policy.lifetime_action",
             "name": "LifetimeActionSetting",
             "threaded": true,
@@ -9480,6 +9574,10 @@
                     "optional": false,
                     "original": "ssh_key"
                 }
+            ],
+            "dependencies": [
+                "SshKeySetting",
+                "SshKeySetting"
             ],
             "key": "azurerm_container_service.linux_profile",
             "name": "LinuxProfileSetting",
@@ -9601,6 +9699,7 @@
                     "original": "dns_prefix"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_container_service.master_profile",
             "name": "MasterProfileSetting",
             "threaded": true,
@@ -9687,6 +9786,7 @@
                     "original": "status_code"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_application_gateway.probe.match",
             "name": "MatchSetting",
             "threaded": true,
@@ -9839,6 +9939,7 @@
                     "original": "time_window"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_autoscale_setting.profile.rule.metric_trigger",
             "name": "MetricTriggerSetting",
             "threaded": true,
@@ -10009,6 +10110,7 @@
                     "original": "advertised_public_prefixes"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_express_route_circuit_peering.microsoft_peering_config",
             "name": "MicrosoftPeeringConfigSetting",
             "threaded": true,
@@ -10094,6 +10196,7 @@
                     "original": "protocol"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_traffic_manager_profile.monitor_config",
             "name": "MonitorConfigSetting",
             "threaded": true,
@@ -10179,6 +10282,7 @@
                     "original": "occurrence"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_scheduler_job.recurrence.monthly_occurrences",
             "name": "MonthlyOccurrencesSetting",
             "threaded": true,
@@ -10434,6 +10538,10 @@
                     "original": "primary"
                 }
             ],
+            "dependencies": [
+                "DnsSettings",
+                "IpConfigurationSetting"
+            ],
             "key": "azurerm_kubernetes_cluster.network_profile",
             "name": "NetworkProfileSetting",
             "threaded": true,
@@ -10656,6 +10764,7 @@
                     "original": "virtual_network_subnet_ids"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_storage_account.network_rules",
             "name": "NetworkRulesSetting",
             "threaded": true,
@@ -10825,6 +10934,12 @@
                     "optional": false,
                     "original": "name"
                 }
+            ],
+            "dependencies": [
+                "ApplicationPortsSetting",
+                "EphemeralPortsSetting",
+                "ApplicationPortsSetting",
+                "EphemeralPortsSetting"
             ],
             "key": "azurerm_service_fabric_cluster.node_type",
             "name": "NodeTypeSetting",
@@ -10997,6 +11112,10 @@
                     "original": "webhook"
                 }
             ],
+            "dependencies": [
+                "EmailSetting",
+                "WebhookSetting"
+            ],
             "key": "azurerm_autoscale_setting.notification",
             "name": "NotificationSetting",
             "threaded": true,
@@ -11081,6 +11200,7 @@
                     "original": "name"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_cdn_endpoint.origin",
             "name": "OriginSetting",
             "threaded": true,
@@ -11234,6 +11354,7 @@
                     "original": "size_gb"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_image.os_disk",
             "name": "OsDiskSetting",
             "threaded": true,
@@ -11438,6 +11559,7 @@
                     "original": "computer_name_prefix"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_machine.os_profile",
             "name": "OsProfileSetting",
             "threaded": true,
@@ -11558,6 +11680,9 @@
                     "original": "ssh_keys"
                 }
             ],
+            "dependencies": [
+                "SshKeysSetting"
+            ],
             "key": "azurerm_virtual_machine.os_profile_linux_config",
             "name": "OsProfileLinuxConfigSetting",
             "threaded": true,
@@ -11625,6 +11750,9 @@
                     "optional": true,
                     "original": "vault_certificates"
                 }
+            ],
+            "dependencies": [
+                "VaultCertificatesSetting"
             ],
             "key": "azurerm_virtual_machine.os_profile_secrets",
             "name": "OsProfileSecretsSetting",
@@ -11745,6 +11873,10 @@
                     "original": "winrm"
                 }
             ],
+            "dependencies": [
+                "AdditionalUnattendConfigSetting",
+                "WinrmSetting"
+            ],
             "key": "azurerm_virtual_machine.os_profile_windows_config",
             "name": "OsProfileWindowsConfigSetting",
             "threaded": true,
@@ -11795,6 +11927,7 @@
                     "original": "start_hour_utc"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_redis_cache.patch_schedule",
             "name": "PatchScheduleSetting",
             "threaded": true,
@@ -11897,6 +12030,7 @@
                     "original": "paths"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_application_gateway.url_path_map.path_rule",
             "name": "PathRuleSetting",
             "threaded": true,
@@ -12204,6 +12338,7 @@
                     "original": "write"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_role_definition.permissions",
             "name": "PermissionsSetting",
             "threaded": true,
@@ -12460,6 +12595,7 @@
                     "original": "name"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_log_analytics_solution.plan",
             "name": "PlanSetting",
             "threaded": true,
@@ -12698,6 +12834,9 @@
                     "optional": false,
                     "original": "unhealthy_threshold"
                 }
+            ],
+            "dependencies": [
+                "MatchSetting"
             ],
             "key": "azurerm_application_gateway.probe",
             "name": "ProbeSetting",
@@ -12938,6 +13077,12 @@
                     "original": "rule"
                 }
             ],
+            "dependencies": [
+                "CapacitySetting",
+                "FixedDateSetting",
+                "RecurrenceSetting",
+                "RuleSetting"
+            ],
             "key": "azurerm_autoscale_setting.profile",
             "name": "ProfileSetting",
             "threaded": true,
@@ -13040,6 +13185,7 @@
                     "original": "reserved"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_app_service_plan.properties",
             "name": "PropertiesSetting",
             "threaded": true,
@@ -13159,6 +13305,7 @@
                     "original": "name"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_machine_scale_set.network_profile.ip_configuration.public_ip_address_configuration",
             "name": "PublicIpAddressConfigurationSetting",
             "threaded": true,
@@ -13226,6 +13373,7 @@
                 "name": "PublicIpsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "azurerm_public_ips.public_ips",
             "name": "PublicIpsSetting",
             "threaded": true,
@@ -13379,6 +13527,9 @@
                     "original": "version"
                 }
             ],
+            "dependencies": [
+                "HashSetting"
+            ],
             "key": "azurerm_automation_runbook.publish_content_link",
             "name": "PublishContentLinkSetting",
             "threaded": true,
@@ -13464,6 +13615,7 @@
                     "original": "max_recurrence_interval"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_scheduler_job_collection.quota",
             "name": "QuotaSetting",
             "threaded": true,
@@ -13703,6 +13855,7 @@
                     "original": "weight"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_dns_caa_record.record",
             "name": "RecordSetting",
             "threaded": true,
@@ -14093,6 +14246,9 @@
                     "original": "week_days"
                 }
             ],
+            "dependencies": [
+                "MonthlyOccurrencesSetting"
+            ],
             "key": "azurerm_autoscale_setting.profile.recurrence",
             "name": "RecurrenceSetting",
             "threaded": true,
@@ -14417,6 +14573,7 @@
                     "original": "rdb_storage_connection_string"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_redis_cache.redis_configuration",
             "name": "RedisConfigurationSetting",
             "threaded": true,
@@ -14587,6 +14744,7 @@
                     "original": "url_path_map_name"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_application_gateway.request_routing_rule",
             "name": "RequestRoutingRuleSetting",
             "threaded": true,
@@ -14792,6 +14950,7 @@
                     "original": "service"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_storage_account_sas.resource_types",
             "name": "ResourceTypesSetting",
             "threaded": true,
@@ -14894,6 +15053,7 @@
                     "original": "interval"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_scheduler_job.retry",
             "name": "RetrySetting",
             "threaded": true,
@@ -14944,6 +15104,7 @@
                     "original": "thumbprint"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_network_gateway.vpn_client_configuration.revoked_certificate",
             "name": "RevokedCertificateSetting",
             "threaded": true,
@@ -15064,6 +15225,7 @@
                     "original": "public_cert_data"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_network_gateway.vpn_client_configuration.root_certificate",
             "name": "RootCertificateSetting",
             "threaded": true,
@@ -15218,6 +15380,7 @@
                     "original": "next_hop_type"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_route_table.route",
             "name": "RouteSetting",
             "threaded": true,
@@ -15389,6 +15552,10 @@
                     "original": "scale_action"
                 }
             ],
+            "dependencies": [
+                "MetricTriggerSetting",
+                "ScaleActionSetting"
+            ],
             "key": "azurerm_autoscale_setting.profile.rule",
             "name": "RuleSetting",
             "threaded": true,
@@ -15508,6 +15675,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_autoscale_setting.profile.rule.scale_action",
             "name": "ScaleActionSetting",
             "threaded": true,
@@ -15610,6 +15778,7 @@
                     "original": "content_type"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_key_vault_certificate.certificate_policy.secret_properties",
             "name": "SecretPropertiesSetting",
             "threaded": true,
@@ -15916,6 +16085,7 @@
                     "original": "source_port_ranges"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_network_security_group.security_rule",
             "name": "SecurityRuleSetting",
             "threaded": true,
@@ -16291,6 +16461,7 @@
                     "original": "client_secret"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_container_service.service_principal",
             "name": "ServicePrincipalSetting",
             "threaded": true,
@@ -16428,6 +16599,7 @@
                     "original": "table"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_storage_account_sas.services",
             "name": "ServicesSetting",
             "threaded": true,
@@ -16512,6 +16684,7 @@
                 "name": "SharedAccessPolicySetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "azurerm_iothub.shared_access_policy",
             "name": "SharedAccessPolicySetting",
             "threaded": true,
@@ -16937,6 +17110,10 @@
                     "original": "websockets_enabled"
                 }
             ],
+            "dependencies": [
+                "IpRestrictionSetting",
+                "IpRestrictionSetting"
+            ],
             "key": "azurerm_app_service.site_config",
             "name": "SiteConfigSetting",
             "threaded": true,
@@ -17106,6 +17283,7 @@
                 "name": "SiteCredentialSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "azurerm_app_service.site_credential",
             "name": "SiteCredentialSetting",
             "threaded": true,
@@ -17242,6 +17420,7 @@
                     "original": "family"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_app_service_plan.sku",
             "name": "SkuSetting",
             "threaded": true,
@@ -17447,6 +17626,7 @@
                     "original": "phone_number"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_monitor_action_group.sms_receiver",
             "name": "SmsReceiverSetting",
             "threaded": true,
@@ -17514,6 +17694,7 @@
                 "name": "SourceControlSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "azurerm_app_service.source_control",
             "name": "SourceControlSetting",
             "threaded": true,
@@ -17582,6 +17763,7 @@
                     "original": "key_data"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_container_service.linux_profile.ssh_key",
             "name": "SshKeySetting",
             "threaded": true,
@@ -17668,6 +17850,7 @@
                     "original": "path"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_machine.os_profile_linux_config.ssh_keys",
             "name": "SshKeysSetting",
             "threaded": true,
@@ -17770,6 +17953,7 @@
                     "original": "password"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_application_gateway.ssl_certificate",
             "name": "SslCertificateSetting",
             "threaded": true,
@@ -18026,6 +18210,7 @@
                     "original": "write_accelerator_enabled"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_machine.storage_data_disk",
             "name": "StorageDataDiskSetting",
             "threaded": true,
@@ -18248,6 +18433,7 @@
                     "original": "version"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_machine.storage_image_reference",
             "name": "StorageImageReferenceSetting",
             "threaded": true,
@@ -18316,6 +18502,7 @@
                     "original": "storage_account_id"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_packet_capture.storage_location",
             "name": "StorageLocationSetting",
             "threaded": true,
@@ -18543,6 +18730,7 @@
                     "original": "write_accelerator_enabled"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_machine.storage_os_disk",
             "name": "StorageOsDiskSetting",
             "threaded": true,
@@ -18810,6 +18998,7 @@
                     "original": "storage_mb"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_mysql_server.storage_profile",
             "name": "StorageProfileSetting",
             "threaded": true,
@@ -18929,6 +19118,7 @@
                     "original": "managed_disk_type"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_machine_scale_set.storage_profile_data_disk",
             "name": "StorageProfileDataDiskSetting",
             "threaded": true,
@@ -19117,6 +19307,7 @@
                     "original": "version"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_machine_scale_set.storage_profile_image_reference",
             "name": "StorageProfileImageReferenceSetting",
             "threaded": true,
@@ -19264,6 +19455,7 @@
                     "original": "vhd_containers"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_machine_scale_set.storage_profile_os_disk",
             "name": "StorageProfileOsDiskSetting",
             "threaded": true,
@@ -19433,6 +19625,7 @@
                     "original": "security_group"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_network.subnet",
             "name": "SubnetSetting",
             "threaded": true,
@@ -19483,6 +19676,7 @@
                 "name": "SubscriptionsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "azurerm_subscriptions.subscriptions",
             "name": "SubscriptionsSetting",
             "threaded": true,
@@ -19648,6 +19842,7 @@
                     "original": "lifetime_percentage"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_key_vault_certificate.certificate_policy.lifetime_action.trigger",
             "name": "TriggerSetting",
             "threaded": true,
@@ -19778,6 +19973,9 @@
                     "optional": false,
                     "original": "path_rule"
                 }
+            ],
+            "dependencies": [
+                "PathRuleSetting"
             ],
             "key": "azurerm_application_gateway.url_path_map",
             "name": "UrlPathMapSetting",
@@ -19950,6 +20148,7 @@
                     "original": "certificate_url"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_machine.os_profile_secrets.vault_certificates",
             "name": "VaultCertificatesSetting",
             "threaded": true,
@@ -20086,6 +20285,7 @@
                     "original": "storage_account_name"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_container_group.container.volume",
             "name": "VolumeSetting",
             "threaded": true,
@@ -20333,6 +20533,12 @@
                     "optional": true,
                     "original": "vpn_client_protocols"
                 }
+            ],
+            "dependencies": [
+                "RevokedCertificateSetting",
+                "RootCertificateSetting",
+                "RevokedCertificateSetting",
+                "RootCertificateSetting"
             ],
             "key": "azurerm_virtual_network_gateway.vpn_client_configuration",
             "name": "VpnClientConfigurationSetting",
@@ -20652,6 +20858,7 @@
                     "original": "rule_set_version"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_application_gateway.waf_configuration",
             "name": "WafConfigurationSetting",
             "threaded": true,
@@ -20754,6 +20961,7 @@
                     "original": "service_uri"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_autoscale_setting.notification.webhook",
             "name": "WebhookSetting",
             "threaded": true,
@@ -20822,6 +21030,7 @@
                     "original": "service_uri"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_metric_alertrule.webhook_action",
             "name": "WebhookActionSetting",
             "threaded": true,
@@ -20908,6 +21117,7 @@
                     "original": "service_uri"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_monitor_action_group.webhook_receiver",
             "name": "WebhookReceiverSetting",
             "threaded": true,
@@ -20993,6 +21203,7 @@
                     "original": "protocol"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_virtual_machine.os_profile_windows_config.winrm",
             "name": "WinrmSetting",
             "threaded": true,
@@ -21078,6 +21289,7 @@
                     "original": "validity_in_months"
                 }
             ],
+            "dependencies": [],
             "key": "azurerm_key_vault_certificate.certificate_policy.x509_certificate_properties",
             "name": "X509CertificatePropertiesSetting",
             "threaded": true,
@@ -21201,6 +21413,13 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/app_service.html",
+            "dependencies": [
+                "SiteConfigSetting",
+                "ConnectionStringSetting",
+                "SiteConfigSetting",
+                "SiteCredentialSetting",
+                "SourceControlSetting"
+            ],
             "key": "azurerm_app_service",
             "name": "AppServiceData",
             "threaded": true,
@@ -21526,6 +21745,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/app_service_plan.html",
+            "dependencies": [
+                "PropertiesSetting",
+                "SkuSetting"
+            ],
             "key": "azurerm_app_service_plan",
             "name": "AppServicePlanData",
             "threaded": true,
@@ -21732,6 +21955,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/application_security_group.html",
+            "dependencies": [],
             "key": "azurerm_application_security_group",
             "name": "ApplicationSecurityGroupData",
             "threaded": true,
@@ -21882,6 +22106,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/azuread_application.html",
+            "dependencies": [],
             "key": "azurerm_azuread_application",
             "name": "AzureadApplicationData",
             "threaded": true,
@@ -22188,6 +22413,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/azuread_service_principal.html",
+            "dependencies": [],
             "key": "azurerm_azuread_service_principal",
             "name": "AzureadServicePrincipalData",
             "threaded": true,
@@ -22385,6 +22611,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/builtin_role_definition.html",
+            "dependencies": [
+                "PermissionsSetting"
+            ],
             "key": "azurerm_builtin_role_definition",
             "name": "BuiltinRoleDefinitionData",
             "threaded": true,
@@ -22540,6 +22769,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/cdn_profile.html",
+            "dependencies": [],
             "key": "azurerm_cdn_profile",
             "name": "CdnProfileData",
             "threaded": true,
@@ -22660,6 +22890,7 @@
             },
             "arguments": [],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/client_config.html",
+            "dependencies": [],
             "key": "azurerm_client_config",
             "name": "ClientConfigData",
             "threaded": true,
@@ -22814,6 +23045,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/container_registry.html",
+            "dependencies": [],
             "key": "azurerm_container_registry",
             "name": "ContainerRegistryData",
             "threaded": true,
@@ -23037,6 +23269,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/cosmosdb_account.html",
+            "dependencies": [
+                "CapabilitiesSetting",
+                "ConsistencyPolicySetting",
+                "GeoLocationSetting"
+            ],
             "key": "azurerm_cosmosdb_account",
             "name": "CosmosdbAccountData",
             "threaded": true,
@@ -23413,6 +23650,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/data_lake_store.html",
+            "dependencies": [],
             "key": "azurerm_data_lake_store",
             "name": "DataLakeStoreData",
             "threaded": true,
@@ -23636,6 +23874,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/dns_zone.html",
+            "dependencies": [],
             "key": "azurerm_dns_zone",
             "name": "DnsZoneData",
             "threaded": true,
@@ -23859,6 +24098,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/eventhub_namespace.html",
+            "dependencies": [],
             "key": "azurerm_eventhub_namespace",
             "name": "EventhubNamespaceData",
             "threaded": true,
@@ -24179,6 +24419,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/image.html",
+            "dependencies": [
+                "DataDiskSetting",
+                "OsDiskSetting"
+            ],
             "key": "azurerm_image",
             "name": "ImageData",
             "threaded": true,
@@ -24381,6 +24625,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/key_vault.html",
+            "dependencies": [
+                "AccessPolicySetting",
+                "SkuSetting"
+            ],
             "key": "azurerm_key_vault",
             "name": "KeyVaultData",
             "threaded": true,
@@ -24621,6 +24869,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/key_vault_access_policy.html",
+            "dependencies": [],
             "key": "azurerm_key_vault_access_policy",
             "name": "KeyVaultAccessPolicyData",
             "threaded": true,
@@ -24759,6 +25008,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/key_vault_secret.html",
+            "dependencies": [],
             "key": "azurerm_key_vault_secret",
             "name": "KeyVaultSecretData",
             "threaded": true,
@@ -24931,6 +25181,13 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/kubernetes_cluster.html",
+            "dependencies": [
+                "AgentPoolProfileSetting",
+                "KubeConfigSetting",
+                "LinuxProfileSetting",
+                "NetworkProfileSetting",
+                "ServicePrincipalSetting"
+            ],
             "key": "azurerm_kubernetes_cluster",
             "name": "KubernetesClusterData",
             "threaded": true,
@@ -25239,6 +25496,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/logic_app_workflow.html",
+            "dependencies": [],
             "key": "azurerm_logic_app_workflow",
             "name": "LogicAppWorkflowData",
             "threaded": true,
@@ -25479,6 +25737,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/managed_disk.html",
+            "dependencies": [],
             "key": "azurerm_managed_disk",
             "name": "ManagedDiskData",
             "threaded": true,
@@ -25702,6 +25961,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/network_interface.html",
+            "dependencies": [
+                "IpConfigurationSetting"
+            ],
             "key": "azurerm_network_interface",
             "name": "NetworkInterfaceData",
             "threaded": true,
@@ -26044,6 +26306,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/network_security_group.html",
+            "dependencies": [
+                "SecurityRuleSetting"
+            ],
             "key": "azurerm_network_security_group",
             "name": "NetworkSecurityGroupData",
             "threaded": true,
@@ -26216,6 +26481,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/notification_hub.html",
+            "dependencies": [
+                "ApnsCredentialSetting",
+                "GcmCredentialSetting"
+            ],
             "key": "azurerm_notification_hub",
             "name": "NotificationHubData",
             "threaded": true,
@@ -26388,6 +26657,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/notification_hub_namespace.html",
+            "dependencies": [
+                "SkuSetting"
+            ],
             "key": "azurerm_notification_hub_namespace",
             "name": "NotificationHubNamespaceData",
             "threaded": true,
@@ -26611,6 +26883,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/platform_image.html",
+            "dependencies": [],
             "key": "azurerm_platform_image",
             "name": "PlatformImageData",
             "threaded": true,
@@ -26783,6 +27056,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/public_ip.html",
+            "dependencies": [],
             "key": "azurerm_public_ip",
             "name": "PublicIpData",
             "threaded": true,
@@ -27006,6 +27280,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/public_ips.html",
+            "dependencies": [
+                "PublicIpsSetting"
+            ],
             "key": "azurerm_public_ips",
             "name": "PublicIpsData",
             "threaded": true,
@@ -27110,6 +27387,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/recovery_services_vault.html",
+            "dependencies": [],
             "key": "azurerm_recovery_services_vault",
             "name": "RecoveryServicesVaultData",
             "threaded": true,
@@ -27248,6 +27526,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/resource_group.html",
+            "dependencies": [],
             "key": "azurerm_resource_group",
             "name": "ResourceGroupData",
             "threaded": true,
@@ -27369,6 +27648,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/role_definition.html",
+            "dependencies": [
+                "PermissionsSetting"
+            ],
             "key": "azurerm_role_definition",
             "name": "RoleDefinitionData",
             "threaded": true,
@@ -27558,6 +27840,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/route_table.html",
+            "dependencies": [
+                "RouteSetting"
+            ],
             "key": "azurerm_route_table",
             "name": "RouteTableData",
             "threaded": true,
@@ -27730,6 +28015,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/scheduler_job_collection.html",
+            "dependencies": [
+                "QuotaSetting"
+            ],
             "key": "azurerm_scheduler_job_collection",
             "name": "SchedulerJobCollectionData",
             "threaded": true,
@@ -27919,6 +28207,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/snapshot.html",
+            "dependencies": [
+                "EncryptionSettings"
+            ],
             "key": "azurerm_snapshot",
             "name": "SnapshotData",
             "threaded": true,
@@ -28159,6 +28450,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/storage_account.html",
+            "dependencies": [
+                "CustomDomainSetting"
+            ],
             "key": "azurerm_storage_account",
             "name": "StorageAccountData",
             "threaded": true,
@@ -28790,6 +29084,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/storage_account_sas.html",
+            "dependencies": [
+                "PermissionsSetting",
+                "ResourceTypesSetting",
+                "ServicesSetting"
+            ],
             "key": "azurerm_storage_account_sas",
             "name": "StorageAccountSasData",
             "threaded": true,
@@ -28996,6 +29295,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/subnet.html",
+            "dependencies": [],
             "key": "azurerm_subnet",
             "name": "SubnetData",
             "threaded": true,
@@ -29168,6 +29468,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/subscription.html",
+            "dependencies": [],
             "key": "azurerm_subscription",
             "name": "SubscriptionData",
             "threaded": true,
@@ -29304,6 +29605,9 @@
             },
             "arguments": [],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/subscriptions.html",
+            "dependencies": [
+                "SubscriptionsSetting"
+            ],
             "key": "azurerm_subscriptions",
             "name": "SubscriptionsData",
             "threaded": true,
@@ -29373,6 +29677,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/traffic_manager_geographical_location.html",
+            "dependencies": [],
             "key": "azurerm_traffic_manager_geographical_location",
             "name": "TrafficManagerGeographicalLocationData",
             "threaded": true,
@@ -29460,6 +29765,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/virtual_network.html",
+            "dependencies": [],
             "key": "azurerm_virtual_network",
             "name": "VirtualNetworkData",
             "threaded": true,
@@ -29632,6 +29938,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/d/virtual_network_gateway.html",
+            "dependencies": [
+                "BgpSettings",
+                "IpConfigurationSetting",
+                "VpnClientConfigurationSetting"
+            ],
             "key": "azurerm_virtual_network_gateway",
             "name": "VirtualNetworkGatewayData",
             "threaded": true,
@@ -30095,6 +30406,16 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/app_service.html",
+            "dependencies": [
+                "ConnectionStringSetting",
+                "IdentitySetting",
+                "SiteConfigSetting",
+                "ConnectionStringSetting",
+                "IdentitySetting",
+                "SiteConfigSetting",
+                "SiteCredentialSetting",
+                "SourceControlSetting"
+            ],
             "key": "azurerm_app_service",
             "name": "AppServiceResource",
             "threaded": true,
@@ -30420,6 +30741,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/app_service_active_slot.html",
+            "dependencies": [],
             "key": "azurerm_app_service_active_slot",
             "name": "AppServiceActiveSlotResource",
             "threaded": true,
@@ -30558,6 +30880,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/app_service_custom_hostname_binding.html",
+            "dependencies": [],
             "key": "azurerm_app_service_custom_hostname_binding",
             "name": "AppServiceCustomHostnameBindingResource",
             "threaded": true,
@@ -30764,6 +31087,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/app_service_plan.html",
+            "dependencies": [
+                "PropertiesSetting",
+                "SkuSetting",
+                "PropertiesSetting"
+            ],
             "key": "azurerm_app_service_plan",
             "name": "AppServicePlanResource",
             "threaded": true,
@@ -31140,6 +31468,13 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/app_service_slot.html",
+            "dependencies": [
+                "ConnectionStringSetting",
+                "IdentitySetting",
+                "SiteConfigSetting",
+                "ConnectionStringSetting",
+                "SiteConfigSetting"
+            ],
             "key": "azurerm_app_service_slot",
             "name": "AppServiceSlotResource",
             "threaded": true,
@@ -31669,6 +32004,21 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/application_gateway.html",
+            "dependencies": [
+                "AuthenticationCertificateSetting",
+                "BackendAddressPoolSetting",
+                "BackendHttpSettings",
+                "FrontendIpConfigurationSetting",
+                "FrontendPortSetting",
+                "GatewayIpConfigurationSetting",
+                "HttpListenerSetting",
+                "ProbeSetting",
+                "RequestRoutingRuleSetting",
+                "SkuSetting",
+                "SslCertificateSetting",
+                "UrlPathMapSetting",
+                "WafConfigurationSetting"
+            ],
             "key": "azurerm_application_gateway",
             "name": "ApplicationGatewayResource",
             "threaded": true,
@@ -31994,6 +32344,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/application_insights.html",
+            "dependencies": [],
             "key": "azurerm_application_insights",
             "name": "ApplicationInsightsResource",
             "threaded": true,
@@ -32217,6 +32568,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/application_security_group.html",
+            "dependencies": [],
             "key": "azurerm_application_security_group",
             "name": "ApplicationSecurityGroupResource",
             "threaded": true,
@@ -32406,6 +32758,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/automation_account.html",
+            "dependencies": [
+                "SkuSetting"
+            ],
             "key": "azurerm_automation_account",
             "name": "AutomationAccountResource",
             "threaded": true,
@@ -32629,6 +32984,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/automation_credential.html",
+            "dependencies": [],
             "key": "azurerm_automation_credential",
             "name": "AutomationCredentialResource",
             "threaded": true,
@@ -32920,6 +33276,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/automation_runbook.html",
+            "dependencies": [
+                "PublishContentLinkSetting"
+            ],
             "key": "azurerm_automation_runbook",
             "name": "AutomationRunbookResource",
             "threaded": true,
@@ -33262,6 +33621,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/automation_schedule.html",
+            "dependencies": [],
             "key": "azurerm_automation_schedule",
             "name": "AutomationScheduleResource",
             "threaded": true,
@@ -33555,6 +33915,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/autoscale_setting.html",
+            "dependencies": [
+                "NotificationSetting",
+                "ProfileSetting"
+            ],
             "key": "azurerm_autoscale_setting",
             "name": "AutoscaleSettingResource",
             "threaded": true,
@@ -33812,6 +34176,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/availability_set.html",
+            "dependencies": [],
             "key": "azurerm_availability_set",
             "name": "AvailabilitySetResource",
             "threaded": true,
@@ -34018,6 +34383,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/azuread_application.html",
+            "dependencies": [],
             "key": "azurerm_azuread_application",
             "name": "AzureadApplicationResource",
             "threaded": true,
@@ -34156,6 +34522,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/azuread_service_principal.html",
+            "dependencies": [],
             "key": "azurerm_azuread_service_principal",
             "name": "AzureadServicePrincipalResource",
             "threaded": true,
@@ -34311,6 +34678,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/azuread_service_principal_password.html",
+            "dependencies": [],
             "key": "azurerm_azuread_service_principal_password",
             "name": "AzureadServicePrincipalPasswordResource",
             "threaded": true,
@@ -34704,6 +35072,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/cdn_endpoint.html",
+            "dependencies": [
+                "GeoFilterSetting",
+                "OriginSetting"
+            ],
             "key": "azurerm_cdn_endpoint",
             "name": "CdnEndpointResource",
             "threaded": true,
@@ -35012,6 +35384,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/cdn_profile.html",
+            "dependencies": [],
             "key": "azurerm_cdn_profile",
             "name": "CdnProfileResource",
             "threaded": true,
@@ -35303,6 +35676,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/container_group.html",
+            "dependencies": [
+                "ContainerSetting",
+                "ImageRegistryCredentialSetting"
+            ],
             "key": "azurerm_container_group",
             "name": "ContainerGroupResource",
             "threaded": true,
@@ -35594,6 +35971,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/container_registry.html",
+            "dependencies": [],
             "key": "azurerm_container_registry",
             "name": "ContainerRegistryResource",
             "threaded": true,
@@ -35919,6 +36297,13 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/container_service.html",
+            "dependencies": [
+                "AgentPoolProfileSetting",
+                "DiagnosticsProfileSetting",
+                "LinuxProfileSetting",
+                "MasterProfileSetting",
+                "ServicePrincipalSetting"
+            ],
             "key": "azurerm_container_service",
             "name": "ContainerServiceResource",
             "threaded": true,
@@ -36295,6 +36680,12 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/cosmosdb_account.html",
+            "dependencies": [
+                "CapabilitiesSetting",
+                "ConsistencyPolicySetting",
+                "GeoLocationSetting",
+                "GeoLocationSetting"
+            ],
             "key": "azurerm_cosmosdb_account",
             "name": "CosmosdbAccountResource",
             "threaded": true,
@@ -36690,6 +37081,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/data_lake_analytics_account.html",
+            "dependencies": [],
             "key": "azurerm_data_lake_analytics_account",
             "name": "DataLakeAnalyticsAccountResource",
             "threaded": true,
@@ -36896,6 +37288,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/data_lake_analytics_firewall_rule.html",
+            "dependencies": [],
             "key": "azurerm_data_lake_analytics_firewall_rule",
             "name": "DataLakeAnalyticsFirewallRuleResource",
             "threaded": true,
@@ -37170,6 +37563,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/data_lake_store.html",
+            "dependencies": [],
             "key": "azurerm_data_lake_store",
             "name": "DataLakeStoreResource",
             "threaded": true,
@@ -37342,6 +37736,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/data_lake_store_file.html",
+            "dependencies": [],
             "key": "azurerm_data_lake_store_file",
             "name": "DataLakeStoreFileResource",
             "threaded": true,
@@ -37514,6 +37909,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/data_lake_store_firewall_rule.html",
+            "dependencies": [],
             "key": "azurerm_data_lake_store_firewall_rule",
             "name": "DataLakeStoreFirewallRuleResource",
             "threaded": true,
@@ -37737,6 +38133,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/dns_a_record.html",
+            "dependencies": [],
             "key": "azurerm_dns_a_record",
             "name": "DnsARecordResource",
             "threaded": true,
@@ -37977,6 +38374,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/dns_aaaa_record.html",
+            "dependencies": [],
             "key": "azurerm_dns_aaaa_record",
             "name": "DnsAaaaRecordResource",
             "threaded": true,
@@ -38217,6 +38615,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/dns_caa_record.html",
+            "dependencies": [
+                "RecordSetting"
+            ],
             "key": "azurerm_dns_caa_record",
             "name": "DnsCaaRecordResource",
             "threaded": true,
@@ -38474,6 +38875,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/dns_cname_record.html",
+            "dependencies": [],
             "key": "azurerm_dns_cname_record",
             "name": "DnsCnameRecordResource",
             "threaded": true,
@@ -38714,6 +39116,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/dns_mx_record.html",
+            "dependencies": [
+                "RecordSetting"
+            ],
             "key": "azurerm_dns_mx_record",
             "name": "DnsMxRecordResource",
             "threaded": true,
@@ -38954,6 +39359,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/dns_ns_record.html",
+            "dependencies": [],
             "key": "azurerm_dns_ns_record",
             "name": "DnsNsRecordResource",
             "threaded": true,
@@ -39196,6 +39602,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/dns_ptr_record.html",
+            "dependencies": [],
             "key": "azurerm_dns_ptr_record",
             "name": "DnsPtrRecordResource",
             "threaded": true,
@@ -39436,6 +39843,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/dns_srv_record.html",
+            "dependencies": [
+                "RecordSetting"
+            ],
             "key": "azurerm_dns_srv_record",
             "name": "DnsSrvRecordResource",
             "threaded": true,
@@ -39676,6 +40086,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/dns_txt_record.html",
+            "dependencies": [
+                "RecordSetting"
+            ],
             "key": "azurerm_dns_txt_record",
             "name": "DnsTxtRecordResource",
             "threaded": true,
@@ -39916,6 +40329,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/dns_zone.html",
+            "dependencies": [],
             "key": "azurerm_dns_zone",
             "name": "DnsZoneResource",
             "threaded": true,
@@ -40122,6 +40536,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/eventgrid_topic.html",
+            "dependencies": [],
             "key": "azurerm_eventgrid_topic",
             "name": "EventgridTopicResource",
             "threaded": true,
@@ -40379,6 +40794,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/eventhub.html",
+            "dependencies": [
+                "CaptureDescriptionSetting"
+            ],
             "key": "azurerm_eventhub",
             "name": "EventhubResource",
             "threaded": true,
@@ -40636,6 +41054,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/eventhub_authorization_rule.html",
+            "dependencies": [],
             "key": "azurerm_eventhub_authorization_rule",
             "name": "EventhubAuthorizationRuleResource",
             "threaded": true,
@@ -40893,6 +41312,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/eventhub_consumer_group.html",
+            "dependencies": [],
             "key": "azurerm_eventhub_consumer_group",
             "name": "EventhubConsumerGroupResource",
             "threaded": true,
@@ -41133,6 +41553,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/eventhub_namespace.html",
+            "dependencies": [],
             "key": "azurerm_eventhub_namespace",
             "name": "EventhubNamespaceResource",
             "threaded": true,
@@ -41441,6 +41862,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/eventhub_namespace_authorization_rule.html",
+            "dependencies": [],
             "key": "azurerm_eventhub_namespace_authorization_rule",
             "name": "EventhubNamespaceAuthorizationRuleResource",
             "threaded": true,
@@ -41749,6 +42171,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/express_route_circuit.html",
+            "dependencies": [
+                "SkuSetting"
+            ],
             "key": "azurerm_express_route_circuit",
             "name": "ExpressRouteCircuitResource",
             "threaded": true,
@@ -42006,6 +42431,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/express_route_circuit_authorization.html",
+            "dependencies": [],
             "key": "azurerm_express_route_circuit_authorization",
             "name": "ExpressRouteCircuitAuthorizationResource",
             "threaded": true,
@@ -42280,6 +42706,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/express_route_circuit_peering.html",
+            "dependencies": [
+                "MicrosoftPeeringConfigSetting"
+            ],
             "key": "azurerm_express_route_circuit_peering",
             "name": "ExpressRouteCircuitPeeringResource",
             "threaded": true,
@@ -42724,6 +43153,15 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/function_app.html",
+            "dependencies": [
+                "ConnectionStringSetting",
+                "IdentitySetting",
+                "SiteConfigSetting",
+                "ConnectionStringSetting",
+                "IdentitySetting",
+                "SiteConfigSetting",
+                "SiteCredentialSetting"
+            ],
             "key": "azurerm_function_app",
             "name": "FunctionAppResource",
             "threaded": true,
@@ -43100,6 +43538,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/image.html",
+            "dependencies": [
+                "DataDiskSetting",
+                "OsDiskSetting"
+            ],
             "key": "azurerm_image",
             "name": "ImageResource",
             "threaded": true,
@@ -43289,6 +43731,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/iothub.html",
+            "dependencies": [
+                "SkuSetting",
+                "SharedAccessPolicySetting"
+            ],
             "key": "azurerm_iothub",
             "name": "IothubResource",
             "threaded": true,
@@ -43631,6 +44077,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/key_vault.html",
+            "dependencies": [
+                "AccessPolicySetting",
+                "SkuSetting",
+                "AccessPolicySetting"
+            ],
             "key": "azurerm_key_vault",
             "name": "KeyVaultResource",
             "threaded": true,
@@ -43939,6 +44390,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/key_vault_access_policy.html",
+            "dependencies": [],
             "key": "azurerm_key_vault_access_policy",
             "name": "KeyVaultAccessPolicyResource",
             "threaded": true,
@@ -44162,6 +44614,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/key_vault_certificate.html",
+            "dependencies": [
+                "CertificateSetting",
+                "CertificatePolicySetting"
+            ],
             "key": "azurerm_key_vault_certificate",
             "name": "KeyVaultCertificateResource",
             "threaded": true,
@@ -44419,6 +44875,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/key_vault_key.html",
+            "dependencies": [],
             "key": "azurerm_key_vault_key",
             "name": "KeyVaultKeyResource",
             "threaded": true,
@@ -44693,6 +45150,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/key_vault_secret.html",
+            "dependencies": [],
             "key": "azurerm_key_vault_secret",
             "name": "KeyVaultSecretResource",
             "threaded": true,
@@ -44984,6 +45442,14 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html",
+            "dependencies": [
+                "AgentPoolProfileSetting",
+                "LinuxProfileSetting",
+                "NetworkProfileSetting",
+                "ServicePrincipalSetting",
+                "KubeConfigSetting",
+                "NetworkProfileSetting"
+            ],
             "key": "azurerm_kubernetes_cluster",
             "name": "KubernetesClusterResource",
             "threaded": true,
@@ -45360,6 +45826,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/lb.html",
+            "dependencies": [
+                "FrontendIpConfigurationSetting"
+            ],
             "key": "azurerm_lb",
             "name": "LbResource",
             "threaded": true,
@@ -45549,6 +46018,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/lb_backend_address_pool.html",
+            "dependencies": [],
             "key": "azurerm_lb_backend_address_pool",
             "name": "LbBackendAddressPoolResource",
             "threaded": true,
@@ -45806,6 +46276,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/lb_nat_pool.html",
+            "dependencies": [],
             "key": "azurerm_lb_nat_pool",
             "name": "LbNatPoolResource",
             "threaded": true,
@@ -46131,6 +46602,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/lb_nat_rule.html",
+            "dependencies": [],
             "key": "azurerm_lb_nat_rule",
             "name": "LbNatRuleResource",
             "threaded": true,
@@ -46473,6 +46945,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/lb_probe.html",
+            "dependencies": [],
             "key": "azurerm_lb_probe",
             "name": "LbProbeResource",
             "threaded": true,
@@ -46815,6 +47288,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/lb_rule.html",
+            "dependencies": [],
             "key": "azurerm_lb_rule",
             "name": "LbRuleResource",
             "threaded": true,
@@ -47174,6 +47648,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/local_network_gateway.html",
+            "dependencies": [
+                "BgpSettings"
+            ],
             "key": "azurerm_local_network_gateway",
             "name": "LocalNetworkGatewayResource",
             "threaded": true,
@@ -47414,6 +47891,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/log_analytics_solution.html",
+            "dependencies": [
+                "PlanSetting"
+            ],
             "key": "azurerm_log_analytics_solution",
             "name": "LogAnalyticsSolutionResource",
             "threaded": true,
@@ -47654,6 +48134,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/log_analytics_workspace.html",
+            "dependencies": [],
             "key": "azurerm_log_analytics_workspace",
             "name": "LogAnalyticsWorkspaceResource",
             "threaded": true,
@@ -47911,6 +48392,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/logic_app_action_custom.html",
+            "dependencies": [],
             "key": "azurerm_logic_app_action_custom",
             "name": "LogicAppActionCustomResource",
             "threaded": true,
@@ -48100,6 +48582,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/logic_app_action_http.html",
+            "dependencies": [],
             "key": "azurerm_logic_app_action_http",
             "name": "LogicAppActionHttpResource",
             "threaded": true,
@@ -48255,6 +48738,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/logic_app_trigger_custom.html",
+            "dependencies": [],
             "key": "azurerm_logic_app_trigger_custom",
             "name": "LogicAppTriggerCustomResource",
             "threaded": true,
@@ -48427,6 +48911,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/logic_app_trigger_http_request.html",
+            "dependencies": [],
             "key": "azurerm_logic_app_trigger_http_request",
             "name": "LogicAppTriggerHttpRequestResource",
             "threaded": true,
@@ -48582,6 +49067,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/logic_app_trigger_recurrence.html",
+            "dependencies": [],
             "key": "azurerm_logic_app_trigger_recurrence",
             "name": "LogicAppTriggerRecurrenceResource",
             "threaded": true,
@@ -48805,6 +49291,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/logic_app_workflow.html",
+            "dependencies": [],
             "key": "azurerm_logic_app_workflow",
             "name": "LogicAppWorkflowResource",
             "threaded": true,
@@ -49147,6 +49634,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/managed_disk.html",
+            "dependencies": [
+                "EncryptionSettings"
+            ],
             "key": "azurerm_managed_disk",
             "name": "ManagedDiskResource",
             "threaded": true,
@@ -49387,6 +49877,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/management_lock.html",
+            "dependencies": [],
             "key": "azurerm_management_lock",
             "name": "ManagementLockResource",
             "threaded": true,
@@ -49712,6 +50203,12 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/metric_alertrule.html",
+            "dependencies": [
+                "EmailActionSetting",
+                "WebhookActionSetting",
+                "EmailActionSetting",
+                "WebhookActionSetting"
+            ],
             "key": "azurerm_metric_alertrule",
             "name": "MetricAlertruleResource",
             "threaded": true,
@@ -50105,6 +50602,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/monitor_action_group.html",
+            "dependencies": [
+                "EmailReceiverSetting",
+                "SmsReceiverSetting",
+                "WebhookReceiverSetting"
+            ],
             "key": "azurerm_monitor_action_group",
             "name": "MonitorActionGroupResource",
             "threaded": true,
@@ -50277,6 +50779,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/mysql_configuration.html",
+            "dependencies": [],
             "key": "azurerm_mysql_configuration",
             "name": "MysqlConfigurationResource",
             "threaded": true,
@@ -50466,6 +50969,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/mysql_database.html",
+            "dependencies": [],
             "key": "azurerm_mysql_database",
             "name": "MysqlDatabaseResource",
             "threaded": true,
@@ -50672,6 +51176,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/mysql_firewall_rule.html",
+            "dependencies": [],
             "key": "azurerm_mysql_firewall_rule",
             "name": "MysqlFirewallRuleResource",
             "threaded": true,
@@ -50963,6 +51468,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/mysql_server.html",
+            "dependencies": [
+                "SkuSetting",
+                "StorageProfileSetting"
+            ],
             "key": "azurerm_mysql_server",
             "name": "MysqlServerResource",
             "threaded": true,
@@ -51424,6 +51933,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/network_interface.html",
+            "dependencies": [
+                "IpConfigurationSetting"
+            ],
             "key": "azurerm_network_interface",
             "name": "NetworkInterfaceResource",
             "threaded": true,
@@ -51766,6 +52278,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/network_security_group.html",
+            "dependencies": [
+                "SecurityRuleSetting",
+                "SecurityRuleSetting"
+            ],
             "key": "azurerm_network_security_group",
             "name": "NetworkSecurityGroupResource",
             "threaded": true,
@@ -52241,6 +52757,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/network_security_rule.html",
+            "dependencies": [],
             "key": "azurerm_network_security_rule",
             "name": "NetworkSecurityRuleResource",
             "threaded": true,
@@ -52649,6 +53166,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/network_watcher.html",
+            "dependencies": [],
             "key": "azurerm_network_watcher",
             "name": "NetworkWatcherResource",
             "threaded": true,
@@ -52855,6 +53373,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/notification_hub.html",
+            "dependencies": [
+                "ApnsCredentialSetting",
+                "GcmCredentialSetting"
+            ],
             "key": "azurerm_notification_hub",
             "name": "NotificationHubResource",
             "threaded": true,
@@ -53078,6 +53600,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/notification_hub_authorization_rule.html",
+            "dependencies": [],
             "key": "azurerm_notification_hub_authorization_rule",
             "name": "NotificationHubAuthorizationRuleResource",
             "threaded": true,
@@ -53318,6 +53841,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/notification_hub_namespace.html",
+            "dependencies": [
+                "SkuSetting"
+            ],
             "key": "azurerm_notification_hub_namespace",
             "name": "NotificationHubNamespaceResource",
             "threaded": true,
@@ -53609,6 +54135,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/packet_capture.html",
+            "dependencies": [
+                "FilterSetting",
+                "StorageLocationSetting"
+            ],
             "key": "azurerm_packet_capture",
             "name": "PacketCaptureResource",
             "threaded": true,
@@ -53832,6 +54362,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/policy_assignment.html",
+            "dependencies": [],
             "key": "azurerm_policy_assignment",
             "name": "PolicyAssignmentResource",
             "threaded": true,
@@ -54055,6 +54586,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/policy_definition.html",
+            "dependencies": [],
             "key": "azurerm_policy_definition",
             "name": "PolicyDefinitionResource",
             "threaded": true,
@@ -54227,6 +54759,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/postgresql_configuration.html",
+            "dependencies": [],
             "key": "azurerm_postgresql_configuration",
             "name": "PostgresqlConfigurationResource",
             "threaded": true,
@@ -54416,6 +54949,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/postgresql_database.html",
+            "dependencies": [],
             "key": "azurerm_postgresql_database",
             "name": "PostgresqlDatabaseResource",
             "threaded": true,
@@ -54622,6 +55156,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/postgresql_firewall_rule.html",
+            "dependencies": [],
             "key": "azurerm_postgresql_firewall_rule",
             "name": "PostgresqlFirewallRuleResource",
             "threaded": true,
@@ -54913,6 +55448,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/postgresql_server.html",
+            "dependencies": [
+                "SkuSetting",
+                "StorageProfileSetting"
+            ],
             "key": "azurerm_postgresql_server",
             "name": "PostgresqlServerResource",
             "threaded": true,
@@ -55306,6 +55845,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/public_ip.html",
+            "dependencies": [],
             "key": "azurerm_public_ip",
             "name": "PublicIpResource",
             "threaded": true,
@@ -55546,6 +56086,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/recovery_services_vault.html",
+            "dependencies": [],
             "key": "azurerm_recovery_services_vault",
             "name": "RecoveryServicesVaultResource",
             "threaded": true,
@@ -55888,6 +56429,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/redis_cache.html",
+            "dependencies": [
+                "PatchScheduleSetting",
+                "RedisConfigurationSetting"
+            ],
             "key": "azurerm_redis_cache",
             "name": "RedisCacheResource",
             "threaded": true,
@@ -56247,6 +56792,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/redis_firewall_rule.html",
+            "dependencies": [],
             "key": "azurerm_redis_firewall_rule",
             "name": "RedisFirewallRuleResource",
             "threaded": true,
@@ -56453,6 +56999,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/relay_namespace.html",
+            "dependencies": [
+                "SkuSetting"
+            ],
             "key": "azurerm_relay_namespace",
             "name": "RelayNamespaceResource",
             "threaded": true,
@@ -56710,6 +57259,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/resource_group.html",
+            "dependencies": [],
             "key": "azurerm_resource_group",
             "name": "ResourceGroupResource",
             "threaded": true,
@@ -56894,6 +57444,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/role_assignment.html",
+            "dependencies": [],
             "key": "azurerm_role_assignment",
             "name": "RoleAssignmentResource",
             "threaded": true,
@@ -57149,6 +57700,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/role_definition.html",
+            "dependencies": [
+                "PermissionsSetting"
+            ],
             "key": "azurerm_role_definition",
             "name": "RoleDefinitionResource",
             "threaded": true,
@@ -57372,6 +57926,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/route.html",
+            "dependencies": [],
             "key": "azurerm_route",
             "name": "RouteResource",
             "threaded": true,
@@ -57612,6 +58167,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/route_table.html",
+            "dependencies": [
+                "RouteSetting",
+                "RouteSetting"
+            ],
             "key": "azurerm_route_table",
             "name": "RouteTableResource",
             "threaded": true,
@@ -57961,6 +58520,14 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/scheduler_job.html",
+            "dependencies": [
+                "ActionStorageQueueSetting",
+                "ActionWebSetting",
+                "ErrorActionStorageQueueSetting",
+                "ErrorActionWebSetting",
+                "RecurrenceSetting",
+                "RetrySetting"
+            ],
             "key": "azurerm_scheduler_job",
             "name": "SchedulerJobResource",
             "threaded": true,
@@ -58294,6 +58861,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/scheduler_job_collection.html",
+            "dependencies": [
+                "QuotaSetting"
+            ],
             "key": "azurerm_scheduler_job_collection",
             "name": "SchedulerJobCollectionResource",
             "threaded": true,
@@ -58534,6 +59104,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/search_service.html",
+            "dependencies": [],
             "key": "azurerm_search_service",
             "name": "SearchServiceResource",
             "threaded": true,
@@ -58927,6 +59498,13 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/service_fabric_cluster.html",
+            "dependencies": [
+                "CertificateSetting",
+                "ClientCertificateThumbprintSetting",
+                "DiagnosticsConfigSetting",
+                "FabricSettings",
+                "NodeTypeSetting"
+            ],
             "key": "azurerm_service_fabric_cluster",
             "name": "ServiceFabricClusterResource",
             "threaded": true,
@@ -59235,6 +59813,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/servicebus_namespace.html",
+            "dependencies": [],
             "key": "azurerm_servicebus_namespace",
             "name": "ServicebusNamespaceResource",
             "threaded": true,
@@ -59526,6 +60105,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/servicebus_namespace_authorization_rule.html",
+            "dependencies": [],
             "key": "azurerm_servicebus_namespace_authorization_rule",
             "name": "ServicebusNamespaceAuthorizationRuleResource",
             "threaded": true,
@@ -59902,6 +60482,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/servicebus_queue.html",
+            "dependencies": [],
             "key": "azurerm_servicebus_queue",
             "name": "ServicebusQueueResource",
             "threaded": true,
@@ -60193,6 +60774,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/servicebus_queue_authorization_rule.html",
+            "dependencies": [],
             "key": "azurerm_servicebus_queue_authorization_rule",
             "name": "ServicebusQueueAuthorizationRuleResource",
             "threaded": true,
@@ -60569,6 +61151,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/servicebus_subscription.html",
+            "dependencies": [],
             "key": "azurerm_servicebus_subscription",
             "name": "ServicebusSubscriptionResource",
             "threaded": true,
@@ -60906,6 +61489,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/servicebus_subscription_rule.html",
+            "dependencies": [
+                "CorrelationFilterSetting"
+            ],
             "key": "azurerm_servicebus_subscription_rule",
             "name": "ServicebusSubscriptionRuleResource",
             "threaded": true,
@@ -61312,6 +61898,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/servicebus_topic.html",
+            "dependencies": [],
             "key": "azurerm_servicebus_topic",
             "name": "ServicebusTopicResource",
             "threaded": true,
@@ -61586,6 +62173,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/servicebus_topic_authorization_rule.html",
+            "dependencies": [],
             "key": "azurerm_servicebus_topic_authorization_rule",
             "name": "ServicebusTopicAuthorizationRuleResource",
             "threaded": true,
@@ -61928,6 +62516,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/snapshot.html",
+            "dependencies": [
+                "EncryptionSettings"
+            ],
             "key": "azurerm_snapshot",
             "name": "SnapshotResource",
             "threaded": true,
@@ -62151,6 +62742,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/sql_active_directory_administrator.html",
+            "dependencies": [],
             "key": "azurerm_sql_active_directory_administrator",
             "name": "SqlActiveDirectoryAdministratorResource",
             "threaded": true,
@@ -62544,6 +63136,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/sql_database.html",
+            "dependencies": [
+                "Import'Setting"
+            ],
             "key": "azurerm_sql_database",
             "name": "SqlDatabaseResource",
             "threaded": true,
@@ -63039,6 +63634,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/sql_elasticpool.html",
+            "dependencies": [],
             "key": "azurerm_sql_elasticpool",
             "name": "SqlElasticpoolResource",
             "threaded": true,
@@ -63347,6 +63943,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/sql_firewall_rule.html",
+            "dependencies": [],
             "key": "azurerm_sql_firewall_rule",
             "name": "SqlFirewallRuleResource",
             "threaded": true,
@@ -63587,6 +64184,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/sql_server.html",
+            "dependencies": [],
             "key": "azurerm_sql_server",
             "name": "SqlServerResource",
             "threaded": true,
@@ -63844,6 +64442,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/sql_virtual_network_rule.html",
+            "dependencies": [],
             "key": "azurerm_sql_virtual_network_rule",
             "name": "SqlVirtualNetworkRuleResource",
             "threaded": true,
@@ -64203,6 +64802,12 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/storage_account.html",
+            "dependencies": [
+                "CustomDomainSetting",
+                "IdentitySetting",
+                "NetworkRulesSetting",
+                "IdentitySetting"
+            ],
             "key": "azurerm_storage_account",
             "name": "StorageAccountResource",
             "threaded": true,
@@ -64840,6 +65445,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/storage_blob.html",
+            "dependencies": [],
             "key": "azurerm_storage_blob",
             "name": "StorageBlobResource",
             "threaded": true,
@@ -65104,6 +65710,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/storage_container.html",
+            "dependencies": [],
             "key": "azurerm_storage_container",
             "name": "StorageContainerResource",
             "threaded": true,
@@ -65259,6 +65866,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/storage_queue.html",
+            "dependencies": [],
             "key": "azurerm_storage_queue",
             "name": "StorageQueueResource",
             "threaded": true,
@@ -65414,6 +66022,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/storage_share.html",
+            "dependencies": [],
             "key": "azurerm_storage_share",
             "name": "StorageShareResource",
             "threaded": true,
@@ -65569,6 +66178,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/storage_table.html",
+            "dependencies": [],
             "key": "azurerm_storage_table",
             "name": "StorageTableResource",
             "threaded": true,
@@ -65792,6 +66402,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/subnet.html",
+            "dependencies": [],
             "key": "azurerm_subnet",
             "name": "SubnetResource",
             "threaded": true,
@@ -66027,6 +66638,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/template_deployment.html",
+            "dependencies": [],
             "key": "azurerm_template_deployment",
             "name": "TemplateDeploymentResource",
             "threaded": true,
@@ -66399,6 +67011,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/traffic_manager_endpoint.html",
+            "dependencies": [],
             "key": "azurerm_traffic_manager_endpoint",
             "name": "TrafficManagerEndpointResource",
             "threaded": true,
@@ -66724,6 +67337,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/traffic_manager_profile.html",
+            "dependencies": [
+                "DnsConfigSetting",
+                "MonitorConfigSetting"
+            ],
             "key": "azurerm_traffic_manager_profile",
             "name": "TrafficManagerProfileResource",
             "threaded": true,
@@ -66964,6 +67581,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/user_assigned_identity.html",
+            "dependencies": [],
             "key": "azurerm_user_assigned_identity",
             "name": "UserAssignedIdentityResource",
             "threaded": true,
@@ -67471,6 +68089,21 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/virtual_machine.html",
+            "dependencies": [
+                "BootDiagnosticsSetting",
+                "IdentitySetting",
+                "OsProfileSetting",
+                "OsProfileLinuxConfigSetting",
+                "OsProfileSecretsSetting",
+                "OsProfileWindowsConfigSetting",
+                "PlanSetting",
+                "StorageDataDiskSetting",
+                "StorageImageReferenceSetting",
+                "StorageOsDiskSetting",
+                "IdentitySetting",
+                "StorageDataDiskSetting",
+                "StorageImageReferenceSetting"
+            ],
             "key": "azurerm_virtual_machine",
             "name": "VirtualMachineResource",
             "threaded": true,
@@ -67860,6 +68493,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/virtual_machine_data_disk_attachment.html",
+            "dependencies": [],
             "key": "azurerm_virtual_machine_data_disk_attachment",
             "name": "VirtualMachineDataDiskAttachmentResource",
             "threaded": true,
@@ -68151,6 +68785,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/virtual_machine_extension.html",
+            "dependencies": [],
             "key": "azurerm_virtual_machine_extension",
             "name": "VirtualMachineExtensionResource",
             "threaded": true,
@@ -68714,6 +69349,24 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/virtual_machine_scale_set.html",
+            "dependencies": [
+                "BootDiagnosticsSetting",
+                "ExtensionSetting",
+                "IdentitySetting",
+                "NetworkProfileSetting",
+                "OsProfileSetting",
+                "OsProfileLinuxConfigSetting",
+                "OsProfileSecretsSetting",
+                "OsProfileWindowsConfigSetting",
+                "PlanSetting",
+                "SkuSetting",
+                "StorageProfileDataDiskSetting",
+                "StorageProfileImageReferenceSetting",
+                "StorageProfileOsDiskSetting",
+                "IdentitySetting",
+                "OsProfileLinuxConfigSetting",
+                "StorageProfileImageReferenceSetting"
+            ],
             "key": "azurerm_virtual_machine_scale_set",
             "name": "VirtualMachineScaleSetResource",
             "threaded": true,
@@ -69090,6 +69743,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/virtual_network.html",
+            "dependencies": [
+                "SubnetSetting",
+                "SubnetSetting"
+            ],
             "key": "azurerm_virtual_network",
             "name": "VirtualNetworkResource",
             "threaded": true,
@@ -69449,6 +70106,12 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/virtual_network_gateway.html",
+            "dependencies": [
+                "BgpSettings",
+                "IpConfigurationSetting",
+                "VpnClientConfigurationSetting",
+                "BgpSettings"
+            ],
             "key": "azurerm_virtual_network_gateway",
             "name": "VirtualNetworkGatewayResource",
             "threaded": true,
@@ -69910,6 +70573,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/virtual_network_gateway_connection.html",
+            "dependencies": [
+                "IpsecPolicySetting"
+            ],
             "key": "azurerm_virtual_network_gateway_connection",
             "name": "VirtualNetworkGatewayConnectionResource",
             "threaded": true,
@@ -70235,6 +70901,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html",
+            "dependencies": [],
             "key": "azurerm_virtual_network_peering",
             "name": "VirtualNetworkPeeringResource",
             "threaded": true,
@@ -70560,6 +71227,7 @@
                 "original": "use_msi"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
