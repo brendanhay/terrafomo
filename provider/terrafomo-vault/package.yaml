@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Vault
+    - Terrafomo.Vault.DataSources
+    - Terrafomo.Vault.Lens
+    - Terrafomo.Vault.Provider
+    - Terrafomo.Vault.Resources
+    - Terrafomo.Vault.Settings
+    - Terrafomo.Vault.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

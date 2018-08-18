@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Vault.Resource
+-- Module      : Terrafomo.Vault.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Vault.Resource
+module Terrafomo.Vault.Resource01
     (
     -- ** vault_approle_auth_backend_login
       ApproleAuthBackendLoginResource (..)
@@ -85,13 +85,13 @@ module Terrafomo.Vault.Resource
     , MountResource (..)
     , mountResource
 
-    -- ** vault_okta_auth_backend
-    , OktaAuthBackendResource (..)
-    , oktaAuthBackendResource
-
     -- ** vault_okta_auth_backend_group
     , OktaAuthBackendGroupResource (..)
     , oktaAuthBackendGroupResource
+
+    -- ** vault_okta_auth_backend
+    , OktaAuthBackendResource (..)
+    , oktaAuthBackendResource
 
     -- ** vault_okta_auth_backend_user
     , OktaAuthBackendUserResource (..)
@@ -2116,6 +2116,66 @@ instance s ~ s' => P.HasComputedDefaultLeaseTtlSeconds (TF.Ref s' (MountResource
 instance s ~ s' => P.HasComputedMaxLeaseTtlSeconds (TF.Ref s' (MountResource s)) (TF.Attr s P.Int) where
     computedMaxLeaseTtlSeconds x = TF.compute (TF.refKey x) "max_lease_ttl_seconds"
 
+-- | @vault_okta_auth_backend_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/vault/r/okta_auth_backend_group.html terraform documentation>
+-- for more information.
+data OktaAuthBackendGroupResource s = OktaAuthBackendGroupResource'
+    { _groupName :: TF.Attr s P.Text
+    -- ^ @group_name@ - (Required, Forces New)
+    -- Name of the Okta group
+    --
+    , _path      :: TF.Attr s P.Text
+    -- ^ @path@ - (Required, Forces New)
+    -- Path to the Okta auth backend
+    --
+    , _policies  :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @policies@ - (Optional)
+    -- Policies to associate with this group
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @vault_okta_auth_backend_group@ resource value.
+oktaAuthBackendGroupResource
+    :: TF.Attr s P.Text -- ^ @group_name@ ('P._groupName', 'P.groupName')
+    -> TF.Attr s P.Text -- ^ @path@ ('P._path', 'P.path')
+    -> P.Resource (OktaAuthBackendGroupResource s)
+oktaAuthBackendGroupResource _groupName _path =
+    TF.unsafeResource "vault_okta_auth_backend_group" TF.validator $
+        OktaAuthBackendGroupResource'
+            { _groupName = _groupName
+            , _path = _path
+            , _policies = TF.Nil
+            }
+
+instance TF.IsObject (OktaAuthBackendGroupResource s) where
+    toObject OktaAuthBackendGroupResource'{..} = P.catMaybes
+        [ TF.assign "group_name" <$> TF.attribute _groupName
+        , TF.assign "path" <$> TF.attribute _path
+        , TF.assign "policies" <$> TF.attribute _policies
+        ]
+
+instance TF.IsValid (OktaAuthBackendGroupResource s) where
+    validator = P.mempty
+
+instance P.HasGroupName (OktaAuthBackendGroupResource s) (TF.Attr s P.Text) where
+    groupName =
+        P.lens (_groupName :: OktaAuthBackendGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _groupName = a } :: OktaAuthBackendGroupResource s)
+
+instance P.HasPath (OktaAuthBackendGroupResource s) (TF.Attr s P.Text) where
+    path =
+        P.lens (_path :: OktaAuthBackendGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _path = a } :: OktaAuthBackendGroupResource s)
+
+instance P.HasPolicies (OktaAuthBackendGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    policies =
+        P.lens (_policies :: OktaAuthBackendGroupResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _policies = a } :: OktaAuthBackendGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OktaAuthBackendGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @vault_okta_auth_backend@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/vault/r/okta_auth_backend.html terraform documentation>
@@ -2247,66 +2307,6 @@ instance s ~ s' => P.HasComputedGroup (TF.Ref s' (OktaAuthBackendResource s)) (T
 
 instance s ~ s' => P.HasComputedUser (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s [TF.Attr s (UserSetting s)]) where
     computedUser x = TF.compute (TF.refKey x) "user"
-
--- | @vault_okta_auth_backend_group@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/vault/r/okta_auth_backend_group.html terraform documentation>
--- for more information.
-data OktaAuthBackendGroupResource s = OktaAuthBackendGroupResource'
-    { _groupName :: TF.Attr s P.Text
-    -- ^ @group_name@ - (Required, Forces New)
-    -- Name of the Okta group
-    --
-    , _path      :: TF.Attr s P.Text
-    -- ^ @path@ - (Required, Forces New)
-    -- Path to the Okta auth backend
-    --
-    , _policies  :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @policies@ - (Optional)
-    -- Policies to associate with this group
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @vault_okta_auth_backend_group@ resource value.
-oktaAuthBackendGroupResource
-    :: TF.Attr s P.Text -- ^ @group_name@ ('P._groupName', 'P.groupName')
-    -> TF.Attr s P.Text -- ^ @path@ ('P._path', 'P.path')
-    -> P.Resource (OktaAuthBackendGroupResource s)
-oktaAuthBackendGroupResource _groupName _path =
-    TF.unsafeResource "vault_okta_auth_backend_group" TF.validator $
-        OktaAuthBackendGroupResource'
-            { _groupName = _groupName
-            , _path = _path
-            , _policies = TF.Nil
-            }
-
-instance TF.IsObject (OktaAuthBackendGroupResource s) where
-    toObject OktaAuthBackendGroupResource'{..} = P.catMaybes
-        [ TF.assign "group_name" <$> TF.attribute _groupName
-        , TF.assign "path" <$> TF.attribute _path
-        , TF.assign "policies" <$> TF.attribute _policies
-        ]
-
-instance TF.IsValid (OktaAuthBackendGroupResource s) where
-    validator = P.mempty
-
-instance P.HasGroupName (OktaAuthBackendGroupResource s) (TF.Attr s P.Text) where
-    groupName =
-        P.lens (_groupName :: OktaAuthBackendGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _groupName = a } :: OktaAuthBackendGroupResource s)
-
-instance P.HasPath (OktaAuthBackendGroupResource s) (TF.Attr s P.Text) where
-    path =
-        P.lens (_path :: OktaAuthBackendGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a } :: OktaAuthBackendGroupResource s)
-
-instance P.HasPolicies (OktaAuthBackendGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    policies =
-        P.lens (_policies :: OktaAuthBackendGroupResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _policies = a } :: OktaAuthBackendGroupResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (OktaAuthBackendGroupResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vault_okta_auth_backend_user@ Resource.
 --

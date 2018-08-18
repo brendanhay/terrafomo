@@ -13,17 +13,17 @@
 --
 module Terrafomo.Vault
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Vault.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Vault.Types
 
-    -- * DataSources
-    , module Terrafomo.Vault.DataSource
-
     -- * Resources
-    , module Terrafomo.Vault.Resource
+    , module Terrafomo.Vault.Resources
+
+    -- * DataSources
+    , module Terrafomo.Vault.DataSources
 
     -- * Settings
     , module Terrafomo.Vault.Settings
@@ -32,9 +32,9 @@ module Terrafomo.Vault
     , module Terrafomo.Vault.Lens
     ) where
 
-import Terrafomo.Vault.DataSource
+import Terrafomo.Vault.DataSources
 import Terrafomo.Vault.Lens
 import Terrafomo.Vault.Provider
-import Terrafomo.Vault.Resource
+import Terrafomo.Vault.Resources
 import Terrafomo.Vault.Settings
 import Terrafomo.Vault.Types
