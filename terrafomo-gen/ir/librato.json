@@ -160,6 +160,7 @@
                     "original": "gap_detection"
                 }
             ],
+            "dependencies": [],
             "key": "librato_alert.attributes",
             "name": "AttributesSetting",
             "threaded": true,
@@ -313,6 +314,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "librato_alert.condition",
             "name": "ConditionSetting",
             "threaded": true,
@@ -619,6 +621,7 @@
                     "original": "units_short"
                 }
             ],
+            "dependencies": [],
             "key": "librato_space_chart.stream",
             "name": "StreamSetting",
             "threaded": true,
@@ -862,6 +865,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/librato/r/alert.html",
+            "dependencies": [
+                "AttributesSetting",
+                "ConditionSetting"
+            ],
             "key": "librato_alert",
             "name": "AlertResource",
             "threaded": true,
@@ -1034,6 +1041,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/librato/r/metric.html",
+            "dependencies": [
+                "AttributesSetting"
+            ],
             "key": "librato_metric",
             "name": "MetricResource",
             "threaded": true,
@@ -1155,6 +1165,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/librato/r/service.html",
+            "dependencies": [],
             "key": "librato_service",
             "name": "ServiceResource",
             "threaded": true,
@@ -1259,6 +1270,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/librato/r/space.html",
+            "dependencies": [],
             "key": "librato_space",
             "name": "SpaceResource",
             "threaded": true,
@@ -1448,6 +1460,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/librato/r/space_chart.html",
+            "dependencies": [
+                "StreamSetting"
+            ],
             "key": "librato_space_chart",
             "name": "SpaceChartResource",
             "threaded": true,
@@ -1573,6 +1588,7 @@
                 "original": "token"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
