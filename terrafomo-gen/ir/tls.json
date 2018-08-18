@@ -160,6 +160,7 @@
                     "original": "street_address"
                 }
             ],
+            "dependencies": [],
             "key": "tls_cert_request.subject",
             "name": "SubjectSetting",
             "threaded": true,
@@ -199,6 +200,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/tls/d/public_key.html",
+            "dependencies": [],
             "key": "tls_public_key",
             "name": "PublicKeyData",
             "threaded": true,
@@ -402,6 +404,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/tls/r/cert_request.html",
+            "dependencies": [
+                "SubjectSetting"
+            ],
             "key": "tls_cert_request",
             "name": "CertRequestResource",
             "threaded": true,
@@ -663,6 +668,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/tls/r/locally_signed_cert.html",
+            "dependencies": [],
             "key": "tls_locally_signed_cert",
             "name": "LocallySignedCertResource",
             "threaded": true,
@@ -921,6 +927,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/tls/r/private_key.html",
+            "dependencies": [],
             "key": "tls_private_key",
             "name": "PrivateKeyResource",
             "threaded": true,
@@ -1197,6 +1204,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/tls/r/self_signed_cert.html",
+            "dependencies": [
+                "SubjectSetting"
+            ],
             "key": "tls_self_signed_cert",
             "name": "SelfSignedCertResource",
             "threaded": true,
@@ -1376,6 +1386,7 @@
             "name": "Provider'"
         },
         "arguments": [],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
