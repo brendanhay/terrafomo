@@ -194,6 +194,7 @@
                     "original": "target_ip"
                 }
             ],
+            "dependencies": [],
             "key": "profitbricks_server.nic.firewall",
             "name": "FirewallSetting",
             "threaded": true,
@@ -347,6 +348,9 @@
                     "original": "nat"
                 }
             ],
+            "dependencies": [
+                "FirewallSetting"
+            ],
             "key": "profitbricks_server.nic",
             "name": "NicSetting",
             "threaded": true,
@@ -398,6 +402,7 @@
                 "name": "UsersSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "profitbricks_group.users",
             "name": "UsersSetting",
             "threaded": true,
@@ -670,6 +675,7 @@
                     "original": "ssh_key_path"
                 }
             ],
+            "dependencies": [],
             "key": "profitbricks_server.volume",
             "name": "VolumeSetting",
             "threaded": true,
@@ -776,6 +782,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/d/datacenter.html",
+            "dependencies": [],
             "key": "profitbricks_datacenter",
             "name": "DatacenterData",
             "threaded": true,
@@ -897,6 +904,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/d/image.html",
+            "dependencies": [],
             "key": "profitbricks_image",
             "name": "ImageData",
             "threaded": true,
@@ -966,6 +974,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/d/location.html",
+            "dependencies": [],
             "key": "profitbricks_location",
             "name": "LocationData",
             "threaded": true,
@@ -1035,6 +1044,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/d/resource.html",
+            "dependencies": [],
             "key": "profitbricks_resource",
             "name": "ResourceData",
             "threaded": true,
@@ -1121,6 +1131,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/d/snapshot.html",
+            "dependencies": [],
             "key": "profitbricks_snapshot",
             "name": "SnapshotData",
             "threaded": true,
@@ -1227,6 +1238,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/datacenter.html",
+            "dependencies": [],
             "key": "profitbricks_datacenter",
             "name": "DatacenterResource",
             "threaded": true,
@@ -1518,6 +1530,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/firewall.html",
+            "dependencies": [],
             "key": "profitbricks_firewall",
             "name": "FirewallResource",
             "threaded": true,
@@ -1724,6 +1737,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/group.html",
+            "dependencies": [
+                "UsersSetting"
+            ],
             "key": "profitbricks_group",
             "name": "GroupResource",
             "threaded": true,
@@ -1845,6 +1861,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/ipblock.html",
+            "dependencies": [],
             "key": "profitbricks_ipblock",
             "name": "IpblockResource",
             "threaded": true,
@@ -2000,6 +2017,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/ipfailover.html",
+            "dependencies": [],
             "key": "profitbricks_ipfailover",
             "name": "IpfailoverResource",
             "threaded": true,
@@ -2155,6 +2173,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/lan.html",
+            "dependencies": [],
             "key": "profitbricks_lan",
             "name": "LanResource",
             "threaded": true,
@@ -2310,6 +2329,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/loadbalancer.html",
+            "dependencies": [],
             "key": "profitbricks_loadbalancer",
             "name": "LoadbalancerResource",
             "threaded": true,
@@ -2533,6 +2553,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/nic.html",
+            "dependencies": [],
             "key": "profitbricks_nic",
             "name": "NicResource",
             "threaded": true,
@@ -2790,6 +2811,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/server.html",
+            "dependencies": [
+                "NicSetting",
+                "VolumeSetting"
+            ],
             "key": "profitbricks_server",
             "name": "ServerResource",
             "threaded": true,
@@ -3081,6 +3106,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/share.html",
+            "dependencies": [],
             "key": "profitbricks_share",
             "name": "ShareResource",
             "threaded": true,
@@ -3236,6 +3262,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/snapshot.html",
+            "dependencies": [],
             "key": "profitbricks_snapshot",
             "name": "SnapshotResource",
             "threaded": true,
@@ -3425,6 +3452,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/user.html",
+            "dependencies": [],
             "key": "profitbricks_user",
             "name": "UserResource",
             "threaded": true,
@@ -3750,6 +3778,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/volume.html",
+            "dependencies": [],
             "key": "profitbricks_volume",
             "name": "VolumeResource",
             "threaded": true,
@@ -3928,6 +3957,7 @@
                 "original": "username"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
