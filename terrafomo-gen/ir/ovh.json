@@ -58,6 +58,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "ovh_iploadbalancing_http_route.action",
             "name": "ActionSetting",
             "threaded": true,
@@ -91,6 +92,7 @@
                 "name": "IpPoolsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "ovh_cloud_network_private_subnet.ip_pools",
             "name": "IpPoolsSetting",
             "threaded": true,
@@ -192,6 +194,7 @@
                 "name": "OrderableZoneSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "ovh_iploadbalancing.orderable_zone",
             "name": "OrderableZoneSetting",
             "threaded": true,
@@ -396,6 +399,7 @@
                     "original": "url"
                 }
             ],
+            "dependencies": [],
             "key": "ovh_iploadbalancing_tcp_farm.probe",
             "name": "ProbeSetting",
             "threaded": true,
@@ -447,6 +451,7 @@
                     "original": "status"
                 }
             ],
+            "dependencies": [],
             "key": "ovh_cloud_network_private.regions_status",
             "name": "RegionsStatusSetting",
             "threaded": true,
@@ -498,6 +503,7 @@
                 "name": "ServicesSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "ovh_cloud_region.services",
             "name": "ServicesSetting",
             "threaded": true,
@@ -587,6 +593,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/d/cloud_region.html",
+            "dependencies": [
+                "ServicesSetting"
+            ],
             "key": "ovh_cloud_region",
             "name": "CloudRegionData",
             "threaded": true,
@@ -725,6 +734,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/d/cloud_regions.html",
+            "dependencies": [],
             "key": "ovh_cloud_regions",
             "name": "CloudRegionsData",
             "threaded": true,
@@ -812,6 +822,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/d/domain_zone.html",
+            "dependencies": [],
             "key": "ovh_domain_zone",
             "name": "DomainZoneData",
             "threaded": true,
@@ -1120,6 +1131,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/d/iploadbalancing.html",
+            "dependencies": [
+                "OrderableZoneSetting"
+            ],
             "key": "ovh_iploadbalancing",
             "name": "IploadbalancingData",
             "threaded": true,
@@ -1444,6 +1458,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/d/me_paymentmean_bankaccount.html",
+            "dependencies": [],
             "key": "ovh_me_paymentmean_bankaccount",
             "name": "MePaymentmeanBankaccountData",
             "threaded": true,
@@ -1598,6 +1613,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/d/me_paymentmean_creditcard.html",
+            "dependencies": [],
             "key": "ovh_me_paymentmean_creditcard",
             "name": "MePaymentmeanCreditcardData",
             "threaded": true,
@@ -1718,6 +1734,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/d/publiccloud_region.html",
+            "dependencies": [
+                "ServicesSetting"
+            ],
             "key": "ovh_publiccloud_region",
             "name": "PubliccloudRegionData",
             "threaded": true,
@@ -1856,6 +1875,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/d/publiccloud_regions.html",
+            "dependencies": [],
             "key": "ovh_publiccloud_regions",
             "name": "PubliccloudRegionsData",
             "threaded": true,
@@ -1996,6 +2016,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/cloud_network_private.html",
+            "dependencies": [
+                "RegionsStatusSetting"
+            ],
             "key": "ovh_cloud_network_private",
             "name": "CloudNetworkPrivateResource",
             "threaded": true,
@@ -2270,6 +2293,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/cloud_network_private_subnet.html",
+            "dependencies": [
+                "IpPoolsSetting"
+            ],
             "key": "ovh_cloud_network_private_subnet",
             "name": "CloudNetworkPrivateSubnetResource",
             "threaded": true,
@@ -2510,6 +2536,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/cloud_user.html",
+            "dependencies": [],
             "key": "ovh_cloud_user",
             "name": "CloudUserResource",
             "threaded": true,
@@ -2733,6 +2760,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/domain_zone_record.html",
+            "dependencies": [],
             "key": "ovh_domain_zone_record",
             "name": "DomainZoneRecordResource",
             "threaded": true,
@@ -2939,6 +2967,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/domain_zone_redirection.html",
+            "dependencies": [],
             "key": "ovh_domain_zone_redirection",
             "name": "DomainZoneRedirectionResource",
             "threaded": true,
@@ -3111,6 +3140,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/iploadbalancing_http_route.html",
+            "dependencies": [
+                "ActionSetting"
+            ],
             "key": "ovh_iploadbalancing_http_route",
             "name": "IploadbalancingHttpRouteResource",
             "threaded": true,
@@ -3334,6 +3366,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/iploadbalancing_http_route_rule.html",
+            "dependencies": [],
             "key": "ovh_iploadbalancing_http_route_rule",
             "name": "IploadbalancingHttpRouteRuleResource",
             "threaded": true,
@@ -3574,6 +3607,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/iploadbalancing_tcp_farm.html",
+            "dependencies": [
+                "ProbeSetting"
+            ],
             "key": "ovh_iploadbalancing_tcp_farm",
             "name": "IploadbalancingTcpFarmResource",
             "threaded": true,
@@ -3848,6 +3884,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/iploadbalancing_tcp_farm_server.html",
+            "dependencies": [],
             "key": "ovh_iploadbalancing_tcp_farm_server",
             "name": "IploadbalancingTcpFarmServerResource",
             "threaded": true,
@@ -4037,6 +4074,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/publiccloud_private_network.html",
+            "dependencies": [
+                "RegionsStatusSetting"
+            ],
             "key": "ovh_publiccloud_private_network",
             "name": "PubliccloudPrivateNetworkResource",
             "threaded": true,
@@ -4311,6 +4351,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/publiccloud_private_network_subnet.html",
+            "dependencies": [
+                "IpPoolsSetting"
+            ],
             "key": "ovh_publiccloud_private_network_subnet",
             "name": "PubliccloudPrivateNetworkSubnetResource",
             "threaded": true,
@@ -4551,6 +4594,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/publiccloud_user.html",
+            "dependencies": [],
             "key": "ovh_publiccloud_user",
             "name": "PubliccloudUserResource",
             "threaded": true,
@@ -4723,6 +4767,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/vrack_cloudproject.html",
+            "dependencies": [],
             "key": "ovh_vrack_cloudproject",
             "name": "VrackCloudprojectResource",
             "threaded": true,
@@ -4827,6 +4872,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/vrack_publiccloud_attachment.html",
+            "dependencies": [],
             "key": "ovh_vrack_publiccloud_attachment",
             "name": "VrackPubliccloudAttachmentResource",
             "threaded": true,
@@ -4973,6 +5019,7 @@
                 "original": "endpoint"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
