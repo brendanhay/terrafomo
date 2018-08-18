@@ -6,6 +6,7 @@
                 "name": "AddressesSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "consul_agent_self.addresses",
             "name": "AddressesSetting",
             "threaded": true,
@@ -90,6 +91,7 @@
                 "name": "AdvertiseAddrsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "consul_agent_self.advertise_addrs",
             "name": "AdvertiseAddrsSetting",
             "threaded": true,
@@ -175,6 +177,7 @@
                     "original": "ttl"
                 }
             ],
+            "dependencies": [],
             "key": "consul_prepared_query.dns",
             "name": "DnsSetting",
             "threaded": true,
@@ -379,6 +382,7 @@
                     "original": "nearest_n"
                 }
             ],
+            "dependencies": [],
             "key": "consul_prepared_query.failover",
             "name": "FailoverSetting",
             "threaded": true,
@@ -480,6 +484,7 @@
                     "original": "name"
                 }
             ],
+            "dependencies": [],
             "key": "consul_keys.key",
             "name": "KeySetting",
             "threaded": true,
@@ -548,6 +553,9 @@
                 "name": "NodesSetting'"
             },
             "arguments": [],
+            "dependencies": [
+                "TaggedAddressesSetting"
+            ],
             "key": "consul_catalog_nodes.nodes",
             "name": "NodesSetting",
             "threaded": true,
@@ -649,6 +657,7 @@
                 "name": "PerformanceSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "consul_agent_self.performance",
             "name": "PerformanceSetting",
             "threaded": true,
@@ -682,6 +691,7 @@
                 "name": "PortsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "consul_agent_self.ports",
             "name": "PortsSetting",
             "threaded": true,
@@ -954,6 +964,7 @@
                     "original": "wait_time"
                 }
             ],
+            "dependencies": [],
             "key": "consul_catalog_nodes.query_options",
             "name": "QueryOptionsSetting",
             "threaded": true,
@@ -969,6 +980,7 @@
                 "name": "RetryJoinEc2Setting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "consul_agent_self.retry_join_ec2",
             "name": "RetryJoinEc2Setting",
             "threaded": true,
@@ -1036,6 +1048,7 @@
                 "name": "RetryJoinGceSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "consul_agent_self.retry_join_gce",
             "name": "RetryJoinGceSetting",
             "threaded": true,
@@ -1205,6 +1218,9 @@
                     "optional": true,
                     "original": "tags"
                 }
+            ],
+            "dependencies": [
+                "TaggedAddressesSetting"
             ],
             "key": "consul_catalog_entry.service",
             "name": "ServiceSetting",
@@ -1461,6 +1477,7 @@
                 "name": "ServicesSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "consul_catalog_services.services",
             "name": "ServicesSetting",
             "threaded": true,
@@ -1546,6 +1563,7 @@
                     "original": "path"
                 }
             ],
+            "dependencies": [],
             "key": "consul_key_prefix.subkey",
             "name": "SubkeySetting",
             "threaded": true,
@@ -1596,6 +1614,7 @@
                 "name": "TaggedAddressesSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "consul_agent_self.tagged_addresses",
             "name": "TaggedAddressesSetting",
             "threaded": true,
@@ -1646,6 +1665,7 @@
                 "name": "TelemetrySetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "consul_agent_self.telemetry",
             "name": "TelemetrySetting",
             "threaded": true,
@@ -2020,6 +2040,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "consul_prepared_query.template",
             "name": "TemplateSetting",
             "threaded": true,
@@ -2070,6 +2091,7 @@
                 "name": "UnixSocketsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "consul_agent_self.unix_sockets",
             "name": "UnixSocketsSetting",
             "threaded": true,
@@ -2141,6 +2163,7 @@
             },
             "arguments": [],
             "url": "https://www.terraform.io/docs/providers/consul/d/agent_config.html",
+            "dependencies": [],
             "key": "consul_agent_config",
             "name": "AgentConfigData",
             "threaded": true,
@@ -2289,6 +2312,18 @@
             },
             "arguments": [],
             "url": "https://www.terraform.io/docs/providers/consul/d/agent_self.html",
+            "dependencies": [
+                "AddressesSetting",
+                "AdvertiseAddrsSetting",
+                "DnsSetting",
+                "PerformanceSetting",
+                "PortsSetting",
+                "RetryJoinEc2Setting",
+                "RetryJoinGceSetting",
+                "TaggedAddressesSetting",
+                "TelemetrySetting",
+                "UnixSocketsSetting"
+            ],
             "key": "consul_agent_self",
             "name": "AgentSelfData",
             "threaded": true,
@@ -3548,6 +3583,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/consul/d/catalog_nodes.html",
+            "dependencies": [
+                "QueryOptionsSetting",
+                "NodesSetting"
+            ],
             "key": "consul_catalog_nodes",
             "name": "CatalogNodesData",
             "threaded": true,
@@ -3719,6 +3758,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/consul/d/catalog_service.html",
+            "dependencies": [
+                "QueryOptionsSetting",
+                "ServiceSetting"
+            ],
             "key": "consul_catalog_service",
             "name": "CatalogServiceData",
             "threaded": true,
@@ -3806,6 +3849,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/consul/d/catalog_services.html",
+            "dependencies": [
+                "QueryOptionsSetting",
+                "ServicesSetting"
+            ],
             "key": "consul_catalog_services",
             "name": "CatalogServicesData",
             "threaded": true,
@@ -3960,6 +4007,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/consul/d/key_prefix.html",
+            "dependencies": [
+                "SubkeySetting"
+            ],
             "key": "consul_key_prefix",
             "name": "KeyPrefixData",
             "threaded": true,
@@ -4115,6 +4165,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/consul/d/keys.html",
+            "dependencies": [
+                "KeySetting"
+            ],
             "key": "consul_keys",
             "name": "KeysData",
             "threaded": true,
@@ -4201,6 +4254,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/consul/d/nodes.html",
+            "dependencies": [
+                "QueryOptionsSetting",
+                "NodesSetting"
+            ],
             "key": "consul_nodes",
             "name": "NodesData",
             "threaded": true,
@@ -4372,6 +4429,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/consul/d/service.html",
+            "dependencies": [
+                "QueryOptionsSetting",
+                "ServiceSetting"
+            ],
             "key": "consul_service",
             "name": "ServiceData",
             "threaded": true,
@@ -4459,6 +4520,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/consul/d/services.html",
+            "dependencies": [
+                "QueryOptionsSetting",
+                "ServicesSetting"
+            ],
             "key": "consul_services",
             "name": "ServicesData",
             "threaded": true,
@@ -4615,6 +4680,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/consul/r/agent_service.html",
+            "dependencies": [],
             "key": "consul_agent_service",
             "name": "AgentServiceResource",
             "threaded": true,
@@ -4770,6 +4836,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/consul/r/catalog_entry.html",
+            "dependencies": [
+                "ServiceSetting"
+            ],
             "key": "consul_catalog_entry",
             "name": "CatalogEntryResource",
             "threaded": true,
@@ -4942,6 +5011,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/consul/r/intention.html",
+            "dependencies": [],
             "key": "consul_intention",
             "name": "IntentionResource",
             "threaded": true,
@@ -5097,6 +5167,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/consul/r/key_prefix.html",
+            "dependencies": [],
             "key": "consul_key_prefix",
             "name": "KeyPrefixResource",
             "threaded": true,
@@ -5235,6 +5306,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/consul/r/keys.html",
+            "dependencies": [
+                "KeySetting"
+            ],
             "key": "consul_keys",
             "name": "KeysResource",
             "threaded": true,
@@ -5372,6 +5446,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/consul/r/node.html",
+            "dependencies": [],
             "key": "consul_node",
             "name": "NodeResource",
             "threaded": true,
@@ -5663,6 +5738,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/consul/r/prepared_query.html",
+            "dependencies": [
+                "DnsSetting",
+                "FailoverSetting",
+                "TemplateSetting"
+            ],
             "key": "consul_prepared_query",
             "name": "PreparedQueryResource",
             "threaded": true,
@@ -5852,6 +5932,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/consul/r/service.html",
+            "dependencies": [],
             "key": "consul_service",
             "name": "ServiceResource",
             "threaded": true,
@@ -6126,6 +6207,7 @@
                 "original": "token"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
