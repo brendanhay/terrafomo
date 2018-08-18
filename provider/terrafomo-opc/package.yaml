@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.OPC
+    - Terrafomo.OPC.DataSources
+    - Terrafomo.OPC.Lens
+    - Terrafomo.OPC.Provider
+    - Terrafomo.OPC.Resources
+    - Terrafomo.OPC.Settings
+    - Terrafomo.OPC.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

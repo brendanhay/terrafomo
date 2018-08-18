@@ -8,26 +8,26 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.OPC.Resource
+-- Module      : Terrafomo.OPC.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.OPC.Resource
+module Terrafomo.OPC.Resource01
     (
     -- ** opc_compute_acl
       ComputeAclResource (..)
     , computeAclResource
 
-    -- ** opc_compute_image_list
-    , ComputeImageListResource (..)
-    , computeImageListResource
-
     -- ** opc_compute_image_list_entry
     , ComputeImageListEntryResource (..)
     , computeImageListEntryResource
+
+    -- ** opc_compute_image_list
+    , ComputeImageListResource (..)
+    , computeImageListResource
 
     -- ** opc_compute_instance
     , ComputeInstanceResource (..)
@@ -49,13 +49,13 @@ module Terrafomo.OPC.Resource
     , ComputeIpAssociationResource (..)
     , computeIpAssociationResource
 
-    -- ** opc_compute_ip_network
-    , ComputeIpNetworkResource (..)
-    , computeIpNetworkResource
-
     -- ** opc_compute_ip_network_exchange
     , ComputeIpNetworkExchangeResource (..)
     , computeIpNetworkExchangeResource
+
+    -- ** opc_compute_ip_network
+    , ComputeIpNetworkResource (..)
+    , computeIpNetworkResource
 
     -- ** opc_compute_ip_reservation
     , ComputeIpReservationResource (..)
@@ -248,63 +248,6 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeAclResource s)) (TF.Attr s
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeAclResource s)) (TF.Attr s P.Text) where
     computedUri x = TF.compute (TF.refKey x) "uri"
 
--- | @opc_compute_image_list@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/opc/r/compute_image_list.html terraform documentation>
--- for more information.
-data ComputeImageListResource s = ComputeImageListResource'
-    { _default'    :: TF.Attr s P.Int
-    -- ^ @default@ - (Optional)
-    --
-    , _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Required)
-    --
-    , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @opc_compute_image_list@ resource value.
-computeImageListResource
-    :: TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> P.Resource (ComputeImageListResource s)
-computeImageListResource _description _name =
-    TF.unsafeResource "opc_compute_image_list" TF.validator $
-        ComputeImageListResource'
-            { _default' = TF.value 1
-            , _description = _description
-            , _name = _name
-            }
-
-instance TF.IsObject (ComputeImageListResource s) where
-    toObject ComputeImageListResource'{..} = P.catMaybes
-        [ TF.assign "default" <$> TF.attribute _default'
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance TF.IsValid (ComputeImageListResource s) where
-    validator = P.mempty
-
-instance P.HasDefault' (ComputeImageListResource s) (TF.Attr s P.Int) where
-    default' =
-        P.lens (_default' :: ComputeImageListResource s -> TF.Attr s P.Int)
-               (\s a -> s { _default' = a } :: ComputeImageListResource s)
-
-instance P.HasDescription (ComputeImageListResource s) (TF.Attr s P.Text) where
-    description =
-        P.lens (_description :: ComputeImageListResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: ComputeImageListResource s)
-
-instance P.HasName (ComputeImageListResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: ComputeImageListResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ComputeImageListResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeImageListResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
 -- | @opc_compute_image_list_entry@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/opc/r/compute_image_list_entry.html terraform documentation>
@@ -375,6 +318,63 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeImageListEntryResource s))
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeImageListEntryResource s)) (TF.Attr s P.Text) where
     computedUri x = TF.compute (TF.refKey x) "uri"
+
+-- | @opc_compute_image_list@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/opc/r/compute_image_list.html terraform documentation>
+-- for more information.
+data ComputeImageListResource s = ComputeImageListResource'
+    { _default'    :: TF.Attr s P.Int
+    -- ^ @default@ - (Optional)
+    --
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Required)
+    --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @opc_compute_image_list@ resource value.
+computeImageListResource
+    :: TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (ComputeImageListResource s)
+computeImageListResource _description _name =
+    TF.unsafeResource "opc_compute_image_list" TF.validator $
+        ComputeImageListResource'
+            { _default' = TF.value 1
+            , _description = _description
+            , _name = _name
+            }
+
+instance TF.IsObject (ComputeImageListResource s) where
+    toObject ComputeImageListResource'{..} = P.catMaybes
+        [ TF.assign "default" <$> TF.attribute _default'
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ComputeImageListResource s) where
+    validator = P.mempty
+
+instance P.HasDefault' (ComputeImageListResource s) (TF.Attr s P.Int) where
+    default' =
+        P.lens (_default' :: ComputeImageListResource s -> TF.Attr s P.Int)
+               (\s a -> s { _default' = a } :: ComputeImageListResource s)
+
+instance P.HasDescription (ComputeImageListResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: ComputeImageListResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: ComputeImageListResource s)
+
+instance P.HasName (ComputeImageListResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ComputeImageListResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeImageListResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeImageListResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @opc_compute_instance@ Resource.
 --
@@ -883,6 +883,65 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeIpAssociationResource s)) 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeIpAssociationResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
+-- | @opc_compute_ip_network_exchange@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/opc/r/compute_ip_network_exchange.html terraform documentation>
+-- for more information.
+data ComputeIpNetworkExchangeResource s = ComputeIpNetworkExchangeResource'
+    { _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional, Forces New)
+    --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _tags        :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @tags@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @opc_compute_ip_network_exchange@ resource value.
+computeIpNetworkExchangeResource
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (ComputeIpNetworkExchangeResource s)
+computeIpNetworkExchangeResource _name =
+    TF.unsafeResource "opc_compute_ip_network_exchange" TF.validator $
+        ComputeIpNetworkExchangeResource'
+            { _description = TF.Nil
+            , _name = _name
+            , _tags = TF.Nil
+            }
+
+instance TF.IsObject (ComputeIpNetworkExchangeResource s) where
+    toObject ComputeIpNetworkExchangeResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance TF.IsValid (ComputeIpNetworkExchangeResource s) where
+    validator = P.mempty
+
+instance P.HasDescription (ComputeIpNetworkExchangeResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: ComputeIpNetworkExchangeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: ComputeIpNetworkExchangeResource s)
+
+instance P.HasName (ComputeIpNetworkExchangeResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ComputeIpNetworkExchangeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeIpNetworkExchangeResource s)
+
+instance P.HasTags (ComputeIpNetworkExchangeResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    tags =
+        P.lens (_tags :: ComputeIpNetworkExchangeResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _tags = a } :: ComputeIpNetworkExchangeResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeIpNetworkExchangeResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeIpNetworkExchangeResource s)) (TF.Attr s P.Text) where
+    computedUri x = TF.compute (TF.refKey x) "uri"
+
 -- | @opc_compute_ip_network@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/opc/r/compute_ip_network.html terraform documentation>
@@ -971,65 +1030,6 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeIpNetworkResource s)) (TF.
     computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeIpNetworkResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
-
--- | @opc_compute_ip_network_exchange@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/opc/r/compute_ip_network_exchange.html terraform documentation>
--- for more information.
-data ComputeIpNetworkExchangeResource s = ComputeIpNetworkExchangeResource'
-    { _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional, Forces New)
-    --
-    , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    , _tags        :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @tags@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @opc_compute_ip_network_exchange@ resource value.
-computeIpNetworkExchangeResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> P.Resource (ComputeIpNetworkExchangeResource s)
-computeIpNetworkExchangeResource _name =
-    TF.unsafeResource "opc_compute_ip_network_exchange" TF.validator $
-        ComputeIpNetworkExchangeResource'
-            { _description = TF.Nil
-            , _name = _name
-            , _tags = TF.Nil
-            }
-
-instance TF.IsObject (ComputeIpNetworkExchangeResource s) where
-    toObject ComputeIpNetworkExchangeResource'{..} = P.catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "tags" <$> TF.attribute _tags
-        ]
-
-instance TF.IsValid (ComputeIpNetworkExchangeResource s) where
-    validator = P.mempty
-
-instance P.HasDescription (ComputeIpNetworkExchangeResource s) (TF.Attr s P.Text) where
-    description =
-        P.lens (_description :: ComputeIpNetworkExchangeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: ComputeIpNetworkExchangeResource s)
-
-instance P.HasName (ComputeIpNetworkExchangeResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: ComputeIpNetworkExchangeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ComputeIpNetworkExchangeResource s)
-
-instance P.HasTags (ComputeIpNetworkExchangeResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    tags =
-        P.lens (_tags :: ComputeIpNetworkExchangeResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _tags = a } :: ComputeIpNetworkExchangeResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeIpNetworkExchangeResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeIpNetworkExchangeResource s)) (TF.Attr s P.Text) where
     computedUri x = TF.compute (TF.refKey x) "uri"
 
 -- | @opc_compute_ip_reservation@ Resource.

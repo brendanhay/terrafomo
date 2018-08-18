@@ -13,17 +13,17 @@
 --
 module Terrafomo.OPC
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.OPC.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.OPC.Types
 
-    -- * DataSources
-    , module Terrafomo.OPC.DataSource
-
     -- * Resources
-    , module Terrafomo.OPC.Resource
+    , module Terrafomo.OPC.Resources
+
+    -- * DataSources
+    , module Terrafomo.OPC.DataSources
 
     -- * Settings
     , module Terrafomo.OPC.Settings
@@ -32,9 +32,9 @@ module Terrafomo.OPC
     , module Terrafomo.OPC.Lens
     ) where
 
-import Terrafomo.OPC.DataSource
+import Terrafomo.OPC.DataSources
 import Terrafomo.OPC.Lens
 import Terrafomo.OPC.Provider
-import Terrafomo.OPC.Resource
+import Terrafomo.OPC.Resources
 import Terrafomo.OPC.Settings
 import Terrafomo.OPC.Types
