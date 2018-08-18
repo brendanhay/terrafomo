@@ -33,7 +33,7 @@ clean: $(addprefix clean-,$(PROVIDERS))
 	script/generate
 
 commit:
-	@script/commit-packages $(PROVIDERS)
+	@script/commit-packages
 
 .PHONY: $(GENERATE)
 
