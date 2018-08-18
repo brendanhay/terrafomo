@@ -41,6 +41,7 @@
                     "original": "verification"
                 }
             ],
+            "dependencies": [],
             "key": "ignition_config.append",
             "name": "AppendSetting",
             "threaded": true,
@@ -109,6 +110,7 @@
                     "original": "mime"
                 }
             ],
+            "dependencies": [],
             "key": "ignition_file.content",
             "name": "ContentSetting",
             "threaded": true,
@@ -177,6 +179,7 @@
                     "original": "name"
                 }
             ],
+            "dependencies": [],
             "key": "ignition_systemd_unit.dropin",
             "name": "DropinSetting",
             "threaded": true,
@@ -313,6 +316,7 @@
                     "original": "wipe_filesystem"
                 }
             ],
+            "dependencies": [],
             "key": "ignition_filesystem.mount",
             "name": "MountSetting",
             "threaded": true,
@@ -449,6 +453,7 @@
                     "original": "type_guid"
                 }
             ],
+            "dependencies": [],
             "key": "ignition_disk.partition",
             "name": "PartitionSetting",
             "threaded": true,
@@ -499,6 +504,7 @@
                     "original": "verification"
                 }
             ],
+            "dependencies": [],
             "key": "ignition_config.replace",
             "name": "ReplaceSetting",
             "threaded": true,
@@ -584,6 +590,7 @@
                     "original": "verification"
                 }
             ],
+            "dependencies": [],
             "key": "ignition_file.source",
             "name": "SourceSetting",
             "threaded": true,
@@ -808,6 +815,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/config.html",
+            "dependencies": [
+                "AppendSetting",
+                "ReplaceSetting"
+            ],
             "key": "ignition_config",
             "name": "ConfigData",
             "threaded": true,
@@ -945,6 +956,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/directory.html",
+            "dependencies": [],
             "key": "ignition_directory",
             "name": "DirectoryData",
             "threaded": true,
@@ -1066,6 +1078,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/disk.html",
+            "dependencies": [
+                "PartitionSetting"
+            ],
             "key": "ignition_disk",
             "name": "DiskData",
             "threaded": true,
@@ -1238,6 +1253,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/file.html",
+            "dependencies": [
+                "ContentSetting",
+                "SourceSetting"
+            ],
             "key": "ignition_file",
             "name": "FileData",
             "threaded": true,
@@ -1359,6 +1378,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/filesystem.html",
+            "dependencies": [
+                "MountSetting"
+            ],
             "key": "ignition_filesystem",
             "name": "FilesystemData",
             "threaded": true,
@@ -1445,6 +1467,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/group.html",
+            "dependencies": [],
             "key": "ignition_group",
             "name": "GroupData",
             "threaded": true,
@@ -1600,6 +1623,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/link.html",
+            "dependencies": [],
             "key": "ignition_link",
             "name": "LinkData",
             "threaded": true,
@@ -1721,6 +1745,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/networkd_unit.html",
+            "dependencies": [],
             "key": "ignition_networkd_unit",
             "name": "NetworkdUnitData",
             "threaded": true,
@@ -1842,6 +1867,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/raid.html",
+            "dependencies": [],
             "key": "ignition_raid",
             "name": "RaidData",
             "threaded": true,
@@ -1997,6 +2023,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/systemd_unit.html",
+            "dependencies": [
+                "DropinSetting"
+            ],
             "key": "ignition_systemd_unit",
             "name": "SystemdUnitData",
             "threaded": true,
@@ -2271,6 +2300,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/user.html",
+            "dependencies": [],
             "key": "ignition_user",
             "name": "UserData",
             "threaded": true,
@@ -2324,6 +2354,7 @@
             "name": "Provider'"
         },
         "arguments": [],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
