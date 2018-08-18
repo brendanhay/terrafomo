@@ -13,17 +13,17 @@
 --
 module Terrafomo.Triton
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Triton.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Triton.Types
 
-    -- * DataSources
-    , module Terrafomo.Triton.DataSource
-
     -- * Resources
-    , module Terrafomo.Triton.Resource
+    , module Terrafomo.Triton.Resources
+
+    -- * DataSources
+    , module Terrafomo.Triton.DataSources
 
     -- * Settings
     , module Terrafomo.Triton.Settings
@@ -32,9 +32,9 @@ module Terrafomo.Triton
     , module Terrafomo.Triton.Lens
     ) where
 
-import Terrafomo.Triton.DataSource
+import Terrafomo.Triton.DataSources
 import Terrafomo.Triton.Lens
 import Terrafomo.Triton.Provider
-import Terrafomo.Triton.Resource
+import Terrafomo.Triton.Resources
 import Terrafomo.Triton.Settings
 import Terrafomo.Triton.Types

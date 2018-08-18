@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Triton
+    - Terrafomo.Triton.DataSources
+    - Terrafomo.Triton.Lens
+    - Terrafomo.Triton.Provider
+    - Terrafomo.Triton.Resources
+    - Terrafomo.Triton.Settings
+    - Terrafomo.Triton.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,
