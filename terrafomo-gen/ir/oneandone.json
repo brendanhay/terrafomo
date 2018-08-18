@@ -41,6 +41,10 @@
                     "original": "warning"
                 }
             ],
+            "dependencies": [
+                "CriticalSetting",
+                "WarningSetting"
+            ],
             "key": "oneandone_monitoring_policy.thresholds.cpu",
             "name": "CpuSetting",
             "threaded": true,
@@ -126,6 +130,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "oneandone_monitoring_policy.thresholds.cpu.critical",
             "name": "CriticalSetting",
             "threaded": true,
@@ -210,6 +215,10 @@
                     "optional": false,
                     "original": "warning"
                 }
+            ],
+            "dependencies": [
+                "CriticalSetting",
+                "WarningSetting"
             ],
             "key": "oneandone_monitoring_policy.thresholds.disk",
             "name": "DiskSetting",
@@ -296,6 +305,7 @@
                     "original": "is_main"
                 }
             ],
+            "dependencies": [],
             "key": "oneandone_server.hdds",
             "name": "HddsSetting",
             "threaded": true,
@@ -382,6 +392,10 @@
                     "original": "warning"
                 }
             ],
+            "dependencies": [
+                "CriticalSetting",
+                "WarningSetting"
+            ],
             "key": "oneandone_monitoring_policy.thresholds.internal_ping",
             "name": "InternalPingSetting",
             "threaded": true,
@@ -450,6 +464,7 @@
                     "original": "firewall_policy_id"
                 }
             ],
+            "dependencies": [],
             "key": "oneandone_server.ips",
             "name": "IpsSetting",
             "threaded": true,
@@ -569,6 +584,7 @@
                     "original": "protocol"
                 }
             ],
+            "dependencies": [],
             "key": "oneandone_monitoring_policy.ports",
             "name": "PortsSetting",
             "threaded": true,
@@ -689,6 +705,7 @@
                     "original": "process"
                 }
             ],
+            "dependencies": [],
             "key": "oneandone_monitoring_policy.processes",
             "name": "ProcessesSetting",
             "threaded": true,
@@ -791,6 +808,10 @@
                     "optional": false,
                     "original": "warning"
                 }
+            ],
+            "dependencies": [
+                "CriticalSetting",
+                "WarningSetting"
             ],
             "key": "oneandone_monitoring_policy.thresholds.ram",
             "name": "RamSetting",
@@ -945,6 +966,7 @@
                     "original": "port_server"
                 }
             ],
+            "dependencies": [],
             "key": "oneandone_firewall_policy.rules",
             "name": "RulesSetting",
             "threaded": true,
@@ -1065,6 +1087,7 @@
                     "original": "name"
                 }
             ],
+            "dependencies": [],
             "key": "oneandone_ssh_key.servers",
             "name": "ServersSetting",
             "threaded": true,
@@ -1150,6 +1173,7 @@
                     "original": "rights"
                 }
             ],
+            "dependencies": [],
             "key": "oneandone_shared_storage.storage_servers",
             "name": "StorageServersSetting",
             "threaded": true,
@@ -1285,6 +1309,13 @@
                     "optional": false,
                     "original": "transfer"
                 }
+            ],
+            "dependencies": [
+                "CpuSetting",
+                "DiskSetting",
+                "InternalPingSetting",
+                "RamSetting",
+                "TransferSetting"
             ],
             "key": "oneandone_monitoring_policy.thresholds",
             "name": "ThresholdsSetting",
@@ -1422,6 +1453,10 @@
                     "original": "warning"
                 }
             ],
+            "dependencies": [
+                "CriticalSetting",
+                "WarningSetting"
+            ],
             "key": "oneandone_monitoring_policy.thresholds.transfer",
             "name": "TransferSetting",
             "threaded": true,
@@ -1507,6 +1542,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "oneandone_monitoring_policy.thresholds.cpu.warning",
             "name": "WarningSetting",
             "threaded": true,
@@ -1636,6 +1672,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/oneandone/d/instance_size.html",
+            "dependencies": [],
             "key": "oneandone_instance_size",
             "name": "InstanceSizeData",
             "threaded": true,
@@ -1833,6 +1870,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/oneandone/r/block_storage.html",
+            "dependencies": [],
             "key": "oneandone_block_storage",
             "name": "BlockStorageResource",
             "threaded": true,
@@ -1971,6 +2009,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/oneandone/r/firewall_policy.html",
+            "dependencies": [
+                "RulesSetting"
+            ],
             "key": "oneandone_firewall_policy",
             "name": "FirewallPolicyResource",
             "threaded": true,
@@ -2223,6 +2264,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/oneandone/r/image.html",
+            "dependencies": [],
             "key": "oneandone_image",
             "name": "ImageResource",
             "threaded": true,
@@ -2510,6 +2552,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/oneandone/r/loadbalancer.html",
+            "dependencies": [
+                "RulesSetting"
+            ],
             "key": "oneandone_loadbalancer",
             "name": "LoadbalancerResource",
             "threaded": true,
@@ -2716,6 +2761,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/oneandone/r/monitoring_policy.html",
+            "dependencies": [
+                "PortsSetting",
+                "ProcessesSetting",
+                "ThresholdsSetting"
+            ],
             "key": "oneandone_monitoring_policy",
             "name": "MonitoringPolicyResource",
             "threaded": true,
@@ -2905,6 +2955,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/oneandone/r/private_network.html",
+            "dependencies": [],
             "key": "oneandone_private_network",
             "name": "PrivateNetworkResource",
             "threaded": true,
@@ -3009,6 +3060,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/oneandone/r/public_ip.html",
+            "dependencies": [],
             "key": "oneandone_public_ip",
             "name": "PublicIpResource",
             "threaded": true,
@@ -3408,6 +3460,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/oneandone/r/server.html",
+            "dependencies": [
+                "HddsSetting",
+                "IpsSetting"
+            ],
             "key": "oneandone_server",
             "name": "ServerResource",
             "threaded": true,
@@ -3774,6 +3830,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/oneandone/r/shared_storage.html",
+            "dependencies": [
+                "StorageServersSetting"
+            ],
             "key": "oneandone_shared_storage",
             "name": "SharedStorageResource",
             "threaded": true,
@@ -3895,6 +3954,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/oneandone/r/ssh_key.html",
+            "dependencies": [
+                "ServersSetting"
+            ],
             "key": "oneandone_ssh_key",
             "name": "SshKeyResource",
             "threaded": true,
@@ -4050,6 +4112,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/oneandone/r/vpn.html",
+            "dependencies": [],
             "key": "oneandone_vpn",
             "name": "VpnResource",
             "threaded": true,
@@ -4190,6 +4253,7 @@
                 "original": "token"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
