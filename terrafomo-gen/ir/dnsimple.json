@@ -113,6 +113,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/dnsimple/r/record.html",
+            "dependencies": [],
             "key": "dnsimple_record",
             "name": "RecordResource",
             "threaded": true,
@@ -325,6 +326,7 @@
                 "original": "token"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
