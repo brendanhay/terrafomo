@@ -13,17 +13,17 @@
 --
 module Terrafomo.OneAndOne
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.OneAndOne.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.OneAndOne.Types
 
-    -- * DataSources
-    , module Terrafomo.OneAndOne.DataSource
-
     -- * Resources
-    , module Terrafomo.OneAndOne.Resource
+    , module Terrafomo.OneAndOne.Resources
+
+    -- * DataSources
+    , module Terrafomo.OneAndOne.DataSources
 
     -- * Settings
     , module Terrafomo.OneAndOne.Settings
@@ -32,9 +32,9 @@ module Terrafomo.OneAndOne
     , module Terrafomo.OneAndOne.Lens
     ) where
 
-import Terrafomo.OneAndOne.DataSource
+import Terrafomo.OneAndOne.DataSources
 import Terrafomo.OneAndOne.Lens
 import Terrafomo.OneAndOne.Provider
-import Terrafomo.OneAndOne.Resource
+import Terrafomo.OneAndOne.Resources
 import Terrafomo.OneAndOne.Settings
 import Terrafomo.OneAndOne.Types

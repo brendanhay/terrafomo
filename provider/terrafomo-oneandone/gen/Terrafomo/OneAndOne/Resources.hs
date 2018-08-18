@@ -1,17 +1,17 @@
 -- This module is auto-generated.
 
 -- |
--- Module      : Terrafomo.OneAndOne.Settings
+-- Module      : Terrafomo.OneAndOne.Resources
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.OneAndOne.Settings
+module Terrafomo.OneAndOne.Resources
     (
-    -- * Settings
-      module Terrafomo.OneAndOne.Settings01
+    -- * Resources
+      module Terrafomo.OneAndOne.Resource01
     ) where
 
-import Terrafomo.OneAndOne.Settings01
+import Terrafomo.OneAndOne.Resource01

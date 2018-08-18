@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.OneAndOne
+    - Terrafomo.OneAndOne.DataSources
+    - Terrafomo.OneAndOne.Lens
+    - Terrafomo.OneAndOne.Provider
+    - Terrafomo.OneAndOne.Resources
+    - Terrafomo.OneAndOne.Settings
+    - Terrafomo.OneAndOne.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,
