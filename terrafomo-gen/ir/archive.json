@@ -41,6 +41,7 @@
                     "original": "filename"
                 }
             ],
+            "dependencies": [],
             "key": "archive_file.source",
             "name": "SourceSetting",
             "threaded": true,
@@ -358,6 +359,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/archive/d/file.html",
+            "dependencies": [
+                "SourceSetting",
+                "SourceSetting"
+            ],
             "key": "archive_file",
             "name": "FileData",
             "threaded": true,
@@ -1017,6 +1022,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/archive/r/file.html",
+            "dependencies": [
+                "SourceSetting",
+                "SourceSetting"
+            ],
             "key": "archive_file",
             "name": "FileResource",
             "threaded": true,
@@ -1411,6 +1420,7 @@
             "name": "Provider'"
         },
         "arguments": [],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
