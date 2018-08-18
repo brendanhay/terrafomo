@@ -75,6 +75,7 @@
                     "original": "merge_type"
                 }
             ],
+            "dependencies": [],
             "key": "template_cloudinit_config.part",
             "name": "PartSetting",
             "threaded": true,
@@ -164,6 +165,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/template/d/cloudinit_config.html",
+            "dependencies": [
+                "PartSetting"
+            ],
             "key": "template_cloudinit_config",
             "name": "CloudinitConfigData",
             "threaded": true,
@@ -274,6 +278,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/template/d/file.html",
+            "dependencies": [],
             "key": "template_file",
             "name": "FileData",
             "threaded": true,
@@ -381,6 +386,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/template/r/cloudinit_config.html",
+            "dependencies": [
+                "PartSetting"
+            ],
             "key": "template_cloudinit_config",
             "name": "CloudinitConfigResource",
             "threaded": true,
@@ -510,6 +518,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/template/r/dir.html",
+            "dependencies": [],
             "key": "template_dir",
             "name": "DirResource",
             "threaded": true,
@@ -622,6 +631,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/template/r/file.html",
+            "dependencies": [],
             "key": "template_file",
             "name": "FileResource",
             "threaded": true,
@@ -675,6 +685,7 @@
             "name": "Provider'"
         },
         "arguments": [],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
