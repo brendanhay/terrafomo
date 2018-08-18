@@ -62,6 +62,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/mysql/r/database.html",
+            "dependencies": [],
             "key": "mysql_database",
             "name": "DatabaseResource",
             "threaded": true,
@@ -200,6 +201,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/mysql/r/grant.html",
+            "dependencies": [],
             "key": "mysql_grant",
             "name": "GrantResource",
             "threaded": true,
@@ -367,6 +369,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/mysql/r/user.html",
+            "dependencies": [],
             "key": "mysql_user",
             "name": "UserResource",
             "threaded": true,
@@ -518,6 +521,7 @@
                 "original": "username"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
