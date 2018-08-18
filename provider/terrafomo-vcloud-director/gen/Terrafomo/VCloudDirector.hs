@@ -13,16 +13,17 @@
 --
 module Terrafomo.VCloudDirector
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.VCloudDirector.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.VCloudDirector.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.VCloudDirector.Resource
+    , module Terrafomo.VCloudDirector.Resources
+
+    -- * DataSources
+    , module Terrafomo.VCloudDirector.DataSources
 
     -- * Settings
     , module Terrafomo.VCloudDirector.Settings
@@ -31,8 +32,9 @@ module Terrafomo.VCloudDirector
     , module Terrafomo.VCloudDirector.Lens
     ) where
 
+import Terrafomo.VCloudDirector.DataSources
 import Terrafomo.VCloudDirector.Lens
 import Terrafomo.VCloudDirector.Provider
-import Terrafomo.VCloudDirector.Resource
+import Terrafomo.VCloudDirector.Resources
 import Terrafomo.VCloudDirector.Settings
 import Terrafomo.VCloudDirector.Types

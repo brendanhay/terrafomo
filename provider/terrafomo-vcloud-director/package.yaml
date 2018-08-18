@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.VCloudDirector
+    - Terrafomo.VCloudDirector.DataSources
+    - Terrafomo.VCloudDirector.Lens
+    - Terrafomo.VCloudDirector.Provider
+    - Terrafomo.VCloudDirector.Resources
+    - Terrafomo.VCloudDirector.Settings
+    - Terrafomo.VCloudDirector.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,
