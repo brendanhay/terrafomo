@@ -13,16 +13,17 @@
 --
 module Terrafomo.PowerDNS
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.PowerDNS.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.PowerDNS.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.PowerDNS.Resource
+    , module Terrafomo.PowerDNS.Resources
+
+    -- * DataSources
+    , module Terrafomo.PowerDNS.DataSources
 
     -- * Settings
     , module Terrafomo.PowerDNS.Settings
@@ -31,8 +32,9 @@ module Terrafomo.PowerDNS
     , module Terrafomo.PowerDNS.Lens
     ) where
 
+import Terrafomo.PowerDNS.DataSources
 import Terrafomo.PowerDNS.Lens
 import Terrafomo.PowerDNS.Provider
-import Terrafomo.PowerDNS.Resource
+import Terrafomo.PowerDNS.Resources
 import Terrafomo.PowerDNS.Settings
 import Terrafomo.PowerDNS.Types

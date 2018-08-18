@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.PowerDNS
+    - Terrafomo.PowerDNS.DataSources
+    - Terrafomo.PowerDNS.Lens
+    - Terrafomo.PowerDNS.Provider
+    - Terrafomo.PowerDNS.Resources
+    - Terrafomo.PowerDNS.Settings
+    - Terrafomo.PowerDNS.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,
