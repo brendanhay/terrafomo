@@ -13,22 +13,17 @@
 --
 module Terrafomo.AWS
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.AWS.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.AWS.Types
 
-    -- * DataSources
-    , module Terrafomo.AWS.DataSource01
-    , module Terrafomo.AWS.DataSource02
-
     -- * Resources
-    , module Terrafomo.AWS.Resource01
-    , module Terrafomo.AWS.Resource02
-    , module Terrafomo.AWS.Resource03
-    , module Terrafomo.AWS.Resource04
-    , module Terrafomo.AWS.Resource05
+    , module Terrafomo.AWS.Resources
+
+    -- * DataSources
+    , module Terrafomo.AWS.DataSources
 
     -- * Settings
     , module Terrafomo.AWS.Settings
@@ -37,14 +32,9 @@ module Terrafomo.AWS
     , module Terrafomo.AWS.Lens
     ) where
 
-import Terrafomo.AWS.DataSource01
-import Terrafomo.AWS.DataSource02
+import Terrafomo.AWS.DataSources
 import Terrafomo.AWS.Lens
 import Terrafomo.AWS.Provider
-import Terrafomo.AWS.Resource01
-import Terrafomo.AWS.Resource02
-import Terrafomo.AWS.Resource03
-import Terrafomo.AWS.Resource04
-import Terrafomo.AWS.Resource05
+import Terrafomo.AWS.Resources
 import Terrafomo.AWS.Settings
 import Terrafomo.AWS.Types

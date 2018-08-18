@@ -26,6 +26,12 @@ library:
 
   exposed-modules:
     - Terrafomo.AWS
+    - Terrafomo.AWS.DataSources
+    - Terrafomo.AWS.Lens
+    - Terrafomo.AWS.Provider
+    - Terrafomo.AWS.Resources
+    - Terrafomo.AWS.Settings
+    - Terrafomo.AWS.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,
