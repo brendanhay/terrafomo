@@ -13,16 +13,17 @@
 --
 module Terrafomo.Cobbler
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Cobbler.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Cobbler.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.Cobbler.Resource
+    , module Terrafomo.Cobbler.Resources
+
+    -- * DataSources
+    , module Terrafomo.Cobbler.DataSources
 
     -- * Settings
     , module Terrafomo.Cobbler.Settings
@@ -31,8 +32,9 @@ module Terrafomo.Cobbler
     , module Terrafomo.Cobbler.Lens
     ) where
 
+import Terrafomo.Cobbler.DataSources
 import Terrafomo.Cobbler.Lens
 import Terrafomo.Cobbler.Provider
-import Terrafomo.Cobbler.Resource
+import Terrafomo.Cobbler.Resources
 import Terrafomo.Cobbler.Settings
 import Terrafomo.Cobbler.Types

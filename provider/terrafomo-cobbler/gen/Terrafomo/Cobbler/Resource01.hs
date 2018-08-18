@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Cobbler.Resource
+-- Module      : Terrafomo.Cobbler.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Cobbler.Resource
+module Terrafomo.Cobbler.Resource01
     (
     -- ** cobbler_distro
       DistroResource (..)
