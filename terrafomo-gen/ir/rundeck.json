@@ -143,6 +143,11 @@
                     "original": "step_plugin"
                 }
             ],
+            "dependencies": [
+                "JobSetting",
+                "NodeStepPluginSetting",
+                "StepPluginSetting"
+            ],
             "key": "rundeck_job.command",
             "name": "CommandSetting",
             "threaded": true,
@@ -227,6 +232,7 @@
                     "original": "run_for_each_node"
                 }
             ],
+            "dependencies": [],
             "key": "rundeck_job.command.job",
             "name": "JobSetting",
             "threaded": true,
@@ -295,6 +301,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "rundeck_job.command.node_step_plugin",
             "name": "NodeStepPluginSetting",
             "threaded": true,
@@ -533,6 +540,7 @@
                     "original": "value_choices_url"
                 }
             ],
+            "dependencies": [],
             "key": "rundeck_job.option",
             "name": "OptionSetting",
             "threaded": true,
@@ -605,6 +613,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "rundeck_project.resource_model_source",
             "name": "ResourceModelSourceSetting",
             "threaded": true,
@@ -694,6 +703,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "rundeck_job.command.step_plugin",
             "name": "StepPluginSetting",
             "threaded": true,
@@ -1022,6 +1032,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rundeck/r/job.html",
+            "dependencies": [
+                "CommandSetting",
+                "OptionSetting"
+            ],
             "key": "rundeck_job",
             "name": "JobResource",
             "threaded": true,
@@ -1181,6 +1195,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rundeck/r/private_key.html",
+            "dependencies": [],
             "key": "rundeck_private_key",
             "name": "PrivateKeyResource",
             "threaded": true,
@@ -1416,6 +1431,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rundeck/r/project.html",
+            "dependencies": [
+                "ResourceModelSourceSetting"
+            ],
             "key": "rundeck_project",
             "name": "ProjectResource",
             "threaded": true,
@@ -1543,6 +1561,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rundeck/r/public_key.html",
+            "dependencies": [],
             "key": "rundeck_public_key",
             "name": "PublicKeyResource",
             "threaded": true,
@@ -1713,6 +1732,7 @@
                 "original": "url"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
