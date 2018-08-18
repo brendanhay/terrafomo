@@ -364,6 +364,7 @@
                     "original": "virt_bridge"
                 }
             ],
+            "dependencies": [],
             "key": "cobbler_system.interface",
             "name": "InterfaceSetting",
             "threaded": true,
@@ -1016,6 +1017,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cobbler/r/distro.html",
+            "dependencies": [],
             "key": "cobbler_distro",
             "name": "DistroResource",
             "threaded": true,
@@ -1358,6 +1360,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cobbler/r/kickstart_file.html",
+            "dependencies": [],
             "key": "cobbler_kickstart_file",
             "name": "KickstartFileResource",
             "threaded": true,
@@ -1972,6 +1975,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cobbler/r/profile.html",
+            "dependencies": [],
             "key": "cobbler_profile",
             "name": "ProfileResource",
             "threaded": true,
@@ -2790,6 +2794,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cobbler/r/repo.html",
+            "dependencies": [],
             "key": "cobbler_repo",
             "name": "RepoResource",
             "threaded": true,
@@ -3098,6 +3103,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cobbler/r/snippet.html",
+            "dependencies": [],
             "key": "cobbler_snippet",
             "name": "SnippetResource",
             "threaded": true,
@@ -3899,6 +3905,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cobbler/r/system.html",
+            "dependencies": [
+                "InterfaceSetting",
+                "InterfaceSetting"
+            ],
             "key": "cobbler_system",
             "name": "SystemResource",
             "threaded": true,
@@ -4761,6 +4771,7 @@
                 "original": "username"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
