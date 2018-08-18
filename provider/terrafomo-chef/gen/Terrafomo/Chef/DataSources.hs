@@ -1,19 +1,15 @@
 -- This module is auto-generated.
 
 -- |
--- Module      : Terrafomo.Chef.Lens
+-- Module      : Terrafomo.Chef.DataSources
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Chef.Lens
+module Terrafomo.Chef.DataSources
     (
-    -- * Lenses
-      module Terrafomo.Chef.Arguments01
-    , module Terrafomo.Chef.Attributes01
+    -- * DataSources
     ) where
 
-import Terrafomo.Chef.Arguments01
-import Terrafomo.Chef.Attributes01

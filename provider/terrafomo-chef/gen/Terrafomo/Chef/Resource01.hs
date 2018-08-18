@@ -8,22 +8,22 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Chef.Resource
+-- Module      : Terrafomo.Chef.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Chef.Resource
+module Terrafomo.Chef.Resource01
     (
-    -- ** chef_data_bag
-      DataBagResource (..)
-    , dataBagResource
-
     -- ** chef_data_bag_item
-    , DataBagItemResource (..)
+      DataBagItemResource (..)
     , dataBagItemResource
+
+    -- ** chef_data_bag
+    , DataBagResource (..)
+    , dataBagResource
 
     -- ** chef_environment
     , EnvironmentResource (..)
@@ -62,45 +62,6 @@ import qualified Terrafomo.HCL           as TF
 import qualified Terrafomo.Name          as TF
 import qualified Terrafomo.Schema        as TF
 import qualified Terrafomo.Validator     as TF
-
--- | @chef_data_bag@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/chef/r/data_bag.html terraform documentation>
--- for more information.
-data DataBagResource s = DataBagResource'
-    { _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @chef_data_bag@ resource value.
-dataBagResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> P.Resource (DataBagResource s)
-dataBagResource _name =
-    TF.unsafeResource "chef_data_bag" TF.validator $
-        DataBagResource'
-            { _name = _name
-            }
-
-instance TF.IsObject (DataBagResource s) where
-    toObject DataBagResource'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance TF.IsValid (DataBagResource s) where
-    validator = P.mempty
-
-instance P.HasName (DataBagResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: DataBagResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: DataBagResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataBagResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedApiUri (TF.Ref s' (DataBagResource s)) (TF.Attr s P.Text) where
-    computedApiUri x = TF.compute (TF.refKey x) "api_uri"
 
 -- | @chef_data_bag_item@ Resource.
 --
@@ -148,6 +109,45 @@ instance P.HasDataBagName (DataBagItemResource s) (TF.Attr s P.Text) where
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DataBagItemResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @chef_data_bag@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/chef/r/data_bag.html terraform documentation>
+-- for more information.
+data DataBagResource s = DataBagResource'
+    { _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @chef_data_bag@ resource value.
+dataBagResource
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (DataBagResource s)
+dataBagResource _name =
+    TF.unsafeResource "chef_data_bag" TF.validator $
+        DataBagResource'
+            { _name = _name
+            }
+
+instance TF.IsObject (DataBagResource s) where
+    toObject DataBagResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (DataBagResource s) where
+    validator = P.mempty
+
+instance P.HasName (DataBagResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: DataBagResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DataBagResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataBagResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedApiUri (TF.Ref s' (DataBagResource s)) (TF.Attr s P.Text) where
+    computedApiUri x = TF.compute (TF.refKey x) "api_uri"
 
 -- | @chef_environment@ Resource.
 --

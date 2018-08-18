@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Chef
+    - Terrafomo.Chef.DataSources
+    - Terrafomo.Chef.Lens
+    - Terrafomo.Chef.Provider
+    - Terrafomo.Chef.Resources
+    - Terrafomo.Chef.Settings
+    - Terrafomo.Chef.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

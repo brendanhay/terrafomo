@@ -13,16 +13,17 @@
 --
 module Terrafomo.Chef
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Chef.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Chef.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.Chef.Resource
+    , module Terrafomo.Chef.Resources
+
+    -- * DataSources
+    , module Terrafomo.Chef.DataSources
 
     -- * Settings
     , module Terrafomo.Chef.Settings
@@ -31,8 +32,9 @@ module Terrafomo.Chef
     , module Terrafomo.Chef.Lens
     ) where
 
+import Terrafomo.Chef.DataSources
 import Terrafomo.Chef.Lens
 import Terrafomo.Chef.Provider
-import Terrafomo.Chef.Resource
+import Terrafomo.Chef.Resources
 import Terrafomo.Chef.Settings
 import Terrafomo.Chef.Types
