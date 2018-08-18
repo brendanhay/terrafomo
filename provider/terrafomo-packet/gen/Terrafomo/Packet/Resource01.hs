@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Packet.Resource
+-- Module      : Terrafomo.Packet.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Packet.Resource
+module Terrafomo.Packet.Resource01
     (
     -- ** packet_device
       DeviceResource (..)
@@ -41,13 +41,13 @@ module Terrafomo.Packet.Resource
     , SshKeyResource (..)
     , sshKeyResource
 
-    -- ** packet_volume
-    , VolumeResource (..)
-    , volumeResource
-
     -- ** packet_volume_attachment
     , VolumeAttachmentResource (..)
     , volumeAttachmentResource
+
+    -- ** packet_volume
+    , VolumeResource (..)
+    , volumeResource
 
     ) where
 
@@ -647,6 +647,53 @@ instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (SshKeyResource s)) (TF.A
 instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedUpdated x = TF.compute (TF.refKey x) "updated"
 
+-- | @packet_volume_attachment@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/packet/r/volume_attachment.html terraform documentation>
+-- for more information.
+data VolumeAttachmentResource s = VolumeAttachmentResource'
+    { _deviceId :: TF.Attr s P.Text
+    -- ^ @device_id@ - (Required, Forces New)
+    --
+    , _volumeId :: TF.Attr s P.Text
+    -- ^ @volume_id@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @packet_volume_attachment@ resource value.
+volumeAttachmentResource
+    :: TF.Attr s P.Text -- ^ @device_id@ ('P._deviceId', 'P.deviceId')
+    -> TF.Attr s P.Text -- ^ @volume_id@ ('P._volumeId', 'P.volumeId')
+    -> P.Resource (VolumeAttachmentResource s)
+volumeAttachmentResource _deviceId _volumeId =
+    TF.unsafeResource "packet_volume_attachment" TF.validator $
+        VolumeAttachmentResource'
+            { _deviceId = _deviceId
+            , _volumeId = _volumeId
+            }
+
+instance TF.IsObject (VolumeAttachmentResource s) where
+    toObject VolumeAttachmentResource'{..} = P.catMaybes
+        [ TF.assign "device_id" <$> TF.attribute _deviceId
+        , TF.assign "volume_id" <$> TF.attribute _volumeId
+        ]
+
+instance TF.IsValid (VolumeAttachmentResource s) where
+    validator = P.mempty
+
+instance P.HasDeviceId (VolumeAttachmentResource s) (TF.Attr s P.Text) where
+    deviceId =
+        P.lens (_deviceId :: VolumeAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _deviceId = a } :: VolumeAttachmentResource s)
+
+instance P.HasVolumeId (VolumeAttachmentResource s) (TF.Attr s P.Text) where
+    volumeId =
+        P.lens (_volumeId :: VolumeAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _volumeId = a } :: VolumeAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @packet_volume@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/packet/r/volume.html terraform documentation>
@@ -773,50 +820,3 @@ instance s ~ s' => P.HasComputedState (TF.Ref s' (VolumeResource s)) (TF.Attr s 
 
 instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
     computedUpdated x = TF.compute (TF.refKey x) "updated"
-
--- | @packet_volume_attachment@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/packet/r/volume_attachment.html terraform documentation>
--- for more information.
-data VolumeAttachmentResource s = VolumeAttachmentResource'
-    { _deviceId :: TF.Attr s P.Text
-    -- ^ @device_id@ - (Required, Forces New)
-    --
-    , _volumeId :: TF.Attr s P.Text
-    -- ^ @volume_id@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @packet_volume_attachment@ resource value.
-volumeAttachmentResource
-    :: TF.Attr s P.Text -- ^ @device_id@ ('P._deviceId', 'P.deviceId')
-    -> TF.Attr s P.Text -- ^ @volume_id@ ('P._volumeId', 'P.volumeId')
-    -> P.Resource (VolumeAttachmentResource s)
-volumeAttachmentResource _deviceId _volumeId =
-    TF.unsafeResource "packet_volume_attachment" TF.validator $
-        VolumeAttachmentResource'
-            { _deviceId = _deviceId
-            , _volumeId = _volumeId
-            }
-
-instance TF.IsObject (VolumeAttachmentResource s) where
-    toObject VolumeAttachmentResource'{..} = P.catMaybes
-        [ TF.assign "device_id" <$> TF.attribute _deviceId
-        , TF.assign "volume_id" <$> TF.attribute _volumeId
-        ]
-
-instance TF.IsValid (VolumeAttachmentResource s) where
-    validator = P.mempty
-
-instance P.HasDeviceId (VolumeAttachmentResource s) (TF.Attr s P.Text) where
-    deviceId =
-        P.lens (_deviceId :: VolumeAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _deviceId = a } :: VolumeAttachmentResource s)
-
-instance P.HasVolumeId (VolumeAttachmentResource s) (TF.Attr s P.Text) where
-    volumeId =
-        P.lens (_volumeId :: VolumeAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _volumeId = a } :: VolumeAttachmentResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeAttachmentResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"

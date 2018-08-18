@@ -13,17 +13,17 @@
 --
 module Terrafomo.Packet
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Packet.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Packet.Types
 
-    -- * DataSources
-    , module Terrafomo.Packet.DataSource
-
     -- * Resources
-    , module Terrafomo.Packet.Resource
+    , module Terrafomo.Packet.Resources
+
+    -- * DataSources
+    , module Terrafomo.Packet.DataSources
 
     -- * Settings
     , module Terrafomo.Packet.Settings
@@ -32,9 +32,9 @@ module Terrafomo.Packet
     , module Terrafomo.Packet.Lens
     ) where
 
-import Terrafomo.Packet.DataSource
+import Terrafomo.Packet.DataSources
 import Terrafomo.Packet.Lens
 import Terrafomo.Packet.Provider
-import Terrafomo.Packet.Resource
+import Terrafomo.Packet.Resources
 import Terrafomo.Packet.Settings
 import Terrafomo.Packet.Types
