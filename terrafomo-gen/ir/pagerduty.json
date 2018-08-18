@@ -41,6 +41,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "pagerduty_service.scheduled_actions.at",
             "name": "AtSetting",
             "threaded": true,
@@ -91,6 +92,7 @@
                     "original": "urgency"
                 }
             ],
+            "dependencies": [],
             "key": "pagerduty_service.incident_urgency_rule.during_support_hours",
             "name": "DuringSupportHoursSetting",
             "threaded": true,
@@ -174,6 +176,10 @@
                     "optional": true,
                     "original": "urgency"
                 }
+            ],
+            "dependencies": [
+                "DuringSupportHoursSetting",
+                "OutsideSupportHoursSetting"
             ],
             "key": "pagerduty_service.incident_urgency_rule",
             "name": "IncidentUrgencyRuleSetting",
@@ -327,6 +333,9 @@
                     "optional": false,
                     "original": "users"
                 }
+            ],
+            "dependencies": [
+                "RestrictionSetting"
             ],
             "key": "pagerduty_schedule.layer",
             "name": "LayerSetting",
@@ -482,6 +491,7 @@
                     "original": "urgency"
                 }
             ],
+            "dependencies": [],
             "key": "pagerduty_service.incident_urgency_rule.outside_support_hours",
             "name": "OutsideSupportHoursSetting",
             "threaded": true,
@@ -566,6 +576,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "pagerduty_schedule.layer.restriction",
             "name": "RestrictionSetting",
             "threaded": true,
@@ -667,6 +678,9 @@
                     "optional": false,
                     "original": "target"
                 }
+            ],
+            "dependencies": [
+                "TargetSetting"
             ],
             "key": "pagerduty_escalation_policy.rule",
             "name": "RuleSetting",
@@ -788,6 +802,9 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [
+                "AtSetting"
+            ],
             "key": "pagerduty_service.scheduled_actions",
             "name": "ScheduledActionsSetting",
             "threaded": true,
@@ -889,6 +906,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "pagerduty_service.support_hours",
             "name": "SupportHoursSetting",
             "threaded": true,
@@ -939,6 +957,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "pagerduty_escalation_policy.rule.target",
             "name": "TargetSetting",
             "threaded": true,
@@ -994,6 +1013,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/d/escalation_policy.html",
+            "dependencies": [],
             "key": "pagerduty_escalation_policy",
             "name": "EscalationPolicyData",
             "threaded": true,
@@ -1064,6 +1084,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/d/extension_schema.html",
+            "dependencies": [],
             "key": "pagerduty_extension_schema",
             "name": "ExtensionSchemaData",
             "threaded": true,
@@ -1151,6 +1172,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/d/schedule.html",
+            "dependencies": [],
             "key": "pagerduty_schedule",
             "name": "ScheduleData",
             "threaded": true,
@@ -1223,6 +1245,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/d/team.html",
+            "dependencies": [],
             "key": "pagerduty_team",
             "name": "TeamData",
             "threaded": true,
@@ -1312,6 +1335,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/d/user.html",
+            "dependencies": [],
             "key": "pagerduty_user",
             "name": "UserData",
             "threaded": true,
@@ -1416,6 +1440,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/d/vendor.html",
+            "dependencies": [],
             "key": "pagerduty_vendor",
             "name": "VendorData",
             "threaded": true,
@@ -1522,6 +1547,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/addon.html",
+            "dependencies": [],
             "key": "pagerduty_addon",
             "name": "AddonResource",
             "threaded": true,
@@ -1677,6 +1703,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/escalation_policy.html",
+            "dependencies": [
+                "RuleSetting"
+            ],
             "key": "pagerduty_escalation_policy",
             "name": "EscalationPolicyResource",
             "threaded": true,
@@ -1832,6 +1861,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/extension.html",
+            "dependencies": [],
             "key": "pagerduty_extension",
             "name": "ExtensionResource",
             "threaded": true,
@@ -2004,6 +2034,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/maintenance_window.html",
+            "dependencies": [],
             "key": "pagerduty_maintenance_window",
             "name": "MaintenanceWindowResource",
             "threaded": true,
@@ -2176,6 +2207,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/schedule.html",
+            "dependencies": [
+                "LayerSetting"
+            ],
             "key": "pagerduty_schedule",
             "name": "ScheduleResource",
             "threaded": true,
@@ -2399,6 +2433,12 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/service.html",
+            "dependencies": [
+                "IncidentUrgencyRuleSetting",
+                "ScheduledActionsSetting",
+                "SupportHoursSetting",
+                "IncidentUrgencyRuleSetting"
+            ],
             "key": "pagerduty_service",
             "name": "ServiceResource",
             "threaded": true,
@@ -2634,6 +2674,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/service_integration.html",
+            "dependencies": [],
             "key": "pagerduty_service_integration",
             "name": "ServiceIntegrationResource",
             "threaded": true,
@@ -2857,6 +2898,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/team.html",
+            "dependencies": [],
             "key": "pagerduty_team",
             "name": "TeamResource",
             "threaded": true,
@@ -2944,6 +2986,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/team_membership.html",
+            "dependencies": [],
             "key": "pagerduty_team_membership",
             "name": "TeamMembershipResource",
             "threaded": true,
@@ -3150,6 +3193,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/user.html",
+            "dependencies": [],
             "key": "pagerduty_user",
             "name": "UserResource",
             "threaded": true,
@@ -3407,6 +3451,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/user_contact_method.html",
+            "dependencies": [],
             "key": "pagerduty_user_contact_method",
             "name": "UserContactMethodResource",
             "threaded": true,
@@ -3579,6 +3624,7 @@
                 "original": "token"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
