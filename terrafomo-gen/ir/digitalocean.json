@@ -109,6 +109,7 @@
                     "original": "tls_passthrough"
                 }
             ],
+            "dependencies": [],
             "key": "digitalocean_loadbalancer.forwarding_rule",
             "name": "ForwardingRuleSetting",
             "threaded": true,
@@ -313,6 +314,7 @@
                     "original": "unhealthy_threshold"
                 }
             ],
+            "dependencies": [],
             "key": "digitalocean_loadbalancer.healthcheck",
             "name": "HealthcheckSetting",
             "threaded": true,
@@ -466,6 +468,7 @@
                     "original": "source_tags"
                 }
             ],
+            "dependencies": [],
             "key": "digitalocean_firewall.inbound_rule",
             "name": "InboundRuleSetting",
             "threaded": true,
@@ -584,6 +587,7 @@
                     "original": "protocol"
                 }
             ],
+            "dependencies": [],
             "key": "digitalocean_firewall.outbound_rule",
             "name": "OutboundRuleSetting",
             "threaded": true,
@@ -651,6 +655,7 @@
                     "original": "status"
                 }
             ],
+            "dependencies": [],
             "key": "digitalocean_firewall.pending_changes",
             "name": "PendingChangesSetting",
             "threaded": true,
@@ -718,6 +723,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "digitalocean_loadbalancer.sticky_sessions",
             "name": "StickySessionsSetting",
             "threaded": true,
@@ -757,6 +763,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/digitalocean/d/domain.html",
+            "dependencies": [],
             "key": "digitalocean_domain",
             "name": "DomainData",
             "threaded": true,
@@ -869,6 +876,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/digitalocean/d/image.html",
+            "dependencies": [],
             "key": "digitalocean_image",
             "name": "ImageData",
             "threaded": true,
@@ -1057,6 +1065,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/digitalocean/d/record.html",
+            "dependencies": [],
             "key": "digitalocean_record",
             "name": "RecordData",
             "threaded": true,
@@ -1355,6 +1364,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/digitalocean/r/certificate.html",
+            "dependencies": [],
             "key": "digitalocean_certificate",
             "name": "CertificateResource",
             "threaded": true,
@@ -1510,6 +1520,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/digitalocean/r/domain.html",
+            "dependencies": [],
             "key": "digitalocean_domain",
             "name": "DomainResource",
             "threaded": true,
@@ -1801,6 +1812,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/digitalocean/r/droplet.html",
+            "dependencies": [],
             "key": "digitalocean_droplet",
             "name": "DropletResource",
             "threaded": true,
@@ -2160,6 +2172,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/digitalocean/r/firewall.html",
+            "dependencies": [
+                "InboundRuleSetting",
+                "OutboundRuleSetting",
+                "PendingChangesSetting"
+            ],
             "key": "digitalocean_firewall",
             "name": "FirewallResource",
             "threaded": true,
@@ -2315,6 +2332,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/digitalocean/r/floating_ip.html",
+            "dependencies": [],
             "key": "digitalocean_floating_ip",
             "name": "FloatingIpResource",
             "threaded": true,
@@ -2538,6 +2556,12 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/digitalocean/r/loadbalancer.html",
+            "dependencies": [
+                "ForwardingRuleSetting",
+                "HealthcheckSetting",
+                "StickySessionsSetting",
+                "StickySessionsSetting"
+            ],
             "key": "digitalocean_loadbalancer",
             "name": "LoadbalancerResource",
             "threaded": true,
@@ -2829,6 +2853,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/digitalocean/r/record.html",
+            "dependencies": [],
             "key": "digitalocean_record",
             "name": "RecordResource",
             "threaded": true,
@@ -3052,6 +3077,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/digitalocean/r/ssh_key.html",
+            "dependencies": [],
             "key": "digitalocean_ssh_key",
             "name": "SshKeyResource",
             "threaded": true,
@@ -3156,6 +3182,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/digitalocean/r/tag.html",
+            "dependencies": [],
             "key": "digitalocean_tag",
             "name": "TagResource",
             "threaded": true,
@@ -3294,6 +3321,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/digitalocean/r/volume.html",
+            "dependencies": [],
             "key": "digitalocean_volume",
             "name": "VolumeResource",
             "threaded": true,
@@ -3417,6 +3445,7 @@
                 "original": "token"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
