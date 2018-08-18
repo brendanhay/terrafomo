@@ -75,6 +75,7 @@
                     "original": "timeout"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_cdn_domain.auth_config",
             "name": "AuthConfigSetting",
             "threaded": true,
@@ -125,6 +126,7 @@
                 "name": "BurstableInstanceSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_instance_types.instance_types.burstable_instance",
             "name": "BurstableInstanceSetting",
             "threaded": true,
@@ -244,6 +246,7 @@
                     "original": "weight"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_cdn_domain.cache_config",
             "name": "CacheConfigSetting",
             "threaded": true,
@@ -329,6 +332,7 @@
                 "name": "ConnectionsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_cs_kubernetes.connections",
             "name": "ConnectionsSetting",
             "threaded": true,
@@ -499,6 +503,7 @@
                     "original": "max_age_seconds"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_oss_bucket.cors_rule",
             "name": "CorsRuleSetting",
             "threaded": true,
@@ -601,6 +606,7 @@
                     "original": "snapshot_id"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_ess_scaling_configuration.data_disk",
             "name": "DataDiskSetting",
             "threaded": true,
@@ -616,6 +622,7 @@
                 "name": "DiskDeviceMappingsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_images.images.disk_device_mappings",
             "name": "DiskDeviceMappingsSetting",
             "threaded": true,
@@ -717,6 +724,7 @@
                 "name": "DomainsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_dns_domains.domains",
             "name": "DomainsSetting",
             "threaded": true,
@@ -886,6 +894,7 @@
                 "name": "EipsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_eips.eips",
             "name": "EipsSetting",
             "threaded": true,
@@ -1073,6 +1082,7 @@
                     "original": "days"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_oss_bucket.lifecycle_rule.expiration",
             "name": "ExpirationSetting",
             "threaded": true,
@@ -1208,6 +1218,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_log_store_index.field_search",
             "name": "FieldSearchSetting",
             "threaded": true,
@@ -1293,6 +1304,7 @@
                     "original": "token"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_log_store_index.full_text",
             "name": "FullTextSetting",
             "threaded": true,
@@ -1308,6 +1320,7 @@
                 "name": "GpuSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_instance_types.instance_types.gpu",
             "name": "GpuSetting",
             "threaded": true,
@@ -1358,6 +1371,7 @@
                 "name": "GroupsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_dns_domain_groups.groups",
             "name": "GroupsSetting",
             "threaded": true,
@@ -1562,6 +1576,7 @@
                     "original": "header_value"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_cdn_domain.http_header_config",
             "name": "HttpHeaderConfigSetting",
             "threaded": true,
@@ -1647,6 +1662,9 @@
                     "optional": true,
                     "original": "tags"
                 }
+            ],
+            "dependencies": [
+                "DiskDeviceMappingsSetting"
             ],
             "key": "alicloud_images.images",
             "name": "ImagesSetting",
@@ -2038,6 +2056,11 @@
                 "name": "InstanceTypesSetting'"
             },
             "arguments": [],
+            "dependencies": [
+                "BurstableInstanceSetting",
+                "GpuSetting",
+                "LocalStorageSetting"
+            ],
             "key": "alicloud_instance_types.instance_types",
             "name": "InstanceTypesSetting",
             "threaded": true,
@@ -2224,6 +2247,9 @@
                     "optional": true,
                     "original": "tags"
                 }
+            ],
+            "dependencies": [
+                "DiskDeviceMappingsSetting"
             ],
             "key": "alicloud_db_instances.instances",
             "name": "InstancesSetting",
@@ -2836,6 +2862,9 @@
                 "name": "KeyPairsSetting'"
             },
             "arguments": [],
+            "dependencies": [
+                "InstancesSetting"
+            ],
             "key": "alicloud_key_pairs.key_pairs",
             "name": "KeyPairsSetting",
             "threaded": true,
@@ -2920,6 +2949,7 @@
                 "name": "KeysSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_kms_keys.keys",
             "name": "KeysSetting",
             "threaded": true,
@@ -3124,6 +3154,9 @@
                     "original": "prefix"
                 }
             ],
+            "dependencies": [
+                "ExpirationSetting"
+            ],
             "key": "alicloud_oss_bucket.lifecycle_rule",
             "name": "LifecycleRuleSetting",
             "threaded": true,
@@ -3209,6 +3242,7 @@
                 "name": "LocalStorageSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_instance_types.instance_types.local_storage",
             "name": "LocalStorageSetting",
             "threaded": true,
@@ -3311,6 +3345,7 @@
                     "original": "project"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_fc_service.log_config",
             "name": "LogConfigSetting",
             "threaded": true,
@@ -3396,6 +3431,7 @@
                     "original": "target_prefix"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_oss_bucket.logging",
             "name": "LoggingSetting",
             "threaded": true,
@@ -3429,6 +3465,7 @@
                 "name": "MasterNodesSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_cs_kubernetes.master_nodes",
             "name": "MasterNodesSetting",
             "threaded": true,
@@ -3496,6 +3533,7 @@
                 "name": "NodesSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_container_cluster.nodes",
             "name": "NodesSetting",
             "threaded": true,
@@ -3632,6 +3670,7 @@
                     "original": "page_type"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_cdn_domain.page_404_config",
             "name": "Page404ConfigSetting",
             "threaded": true,
@@ -3700,6 +3739,7 @@
                     "original": "hash_key_args"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_cdn_domain.parameter_filter_config",
             "name": "ParameterFilterConfigSetting",
             "threaded": true,
@@ -3733,6 +3773,7 @@
                 "name": "PoliciesSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_ram_policies.policies",
             "name": "PoliciesSetting",
             "threaded": true,
@@ -3920,6 +3961,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_ots_table.primary_key",
             "name": "PrimaryKeySetting",
             "threaded": true,
@@ -3970,6 +4012,7 @@
                 "name": "RecordsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_dns_domain_records.records",
             "name": "RecordsSetting",
             "threaded": true,
@@ -4208,6 +4251,7 @@
                     "original": "refer_type"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_cdn_domain.refer_config",
             "name": "ReferConfigSetting",
             "threaded": true,
@@ -4276,6 +4320,7 @@
                     "original": "referers"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_oss_bucket.referer_config",
             "name": "RefererConfigSetting",
             "threaded": true,
@@ -4309,6 +4354,7 @@
                 "name": "RegionsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_regions.regions",
             "name": "RegionsSetting",
             "threaded": true,
@@ -4376,6 +4422,7 @@
                 "name": "RolesSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_ram_roles.roles",
             "name": "RolesSetting",
             "threaded": true,
@@ -4528,6 +4575,7 @@
                 "name": "RulesSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_security_group_rules.rules",
             "name": "RulesSetting",
             "threaded": true,
@@ -4817,6 +4865,7 @@
                     "original": "weight"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_slb_server_group.servers",
             "name": "ServersSetting",
             "threaded": true,
@@ -4867,6 +4916,7 @@
                 "name": "ServicesSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_cs_application.services",
             "name": "ServicesSetting",
             "threaded": true,
@@ -4951,6 +5001,7 @@
                 "name": "ShardsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_log_store.shards",
             "name": "ShardsSetting",
             "threaded": true,
@@ -5087,6 +5138,7 @@
                     "original": "resource"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_ram_policy.statement",
             "name": "StatementSetting",
             "threaded": true,
@@ -5154,6 +5206,7 @@
                 "name": "UsersSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_ram_users.users",
             "name": "UsersSetting",
             "threaded": true,
@@ -5273,6 +5326,7 @@
                     "original": "vswitch_ids"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_fc_service.vpc_config",
             "name": "VpcConfigSetting",
             "threaded": true,
@@ -5341,6 +5395,7 @@
                 "name": "VpcsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_vpcs.vpcs",
             "name": "VpcsSetting",
             "threaded": true,
@@ -5544,6 +5599,7 @@
                 "name": "VswitchesSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_vswitches.vswitches",
             "name": "VswitchesSetting",
             "threaded": true,
@@ -5748,6 +5804,7 @@
                     "original": "index_document"
                 }
             ],
+            "dependencies": [],
             "key": "alicloud_oss_bucket.website",
             "name": "WebsiteSetting",
             "threaded": true,
@@ -5781,6 +5838,7 @@
                 "name": "WorkerNodesSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_cs_kubernetes.worker_nodes",
             "name": "WorkerNodesSetting",
             "threaded": true,
@@ -5848,6 +5906,7 @@
                 "name": "ZonesSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "alicloud_zones.zones",
             "name": "ZonesSetting",
             "threaded": true,
@@ -6107,6 +6166,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/db_instances.html",
+            "dependencies": [
+                "InstancesSetting"
+            ],
             "key": "alicloud_db_instances",
             "name": "DbInstancesData",
             "threaded": true,
@@ -6193,6 +6255,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/dns_domain_groups.html",
+            "dependencies": [
+                "GroupsSetting"
+            ],
             "key": "alicloud_dns_domain_groups",
             "name": "DnsDomainGroupsData",
             "threaded": true,
@@ -6381,6 +6446,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/dns_domain_records.html",
+            "dependencies": [
+                "RecordsSetting"
+            ],
             "key": "alicloud_dns_domain_records",
             "name": "DnsDomainRecordsData",
             "threaded": true,
@@ -6553,6 +6621,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/dns_domains.html",
+            "dependencies": [
+                "DomainsSetting"
+            ],
             "key": "alicloud_dns_domains",
             "name": "DnsDomainsData",
             "threaded": true,
@@ -6639,6 +6710,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/dns_groups.html",
+            "dependencies": [
+                "GroupsSetting"
+            ],
             "key": "alicloud_dns_groups",
             "name": "DnsGroupsData",
             "threaded": true,
@@ -6827,6 +6901,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/dns_records.html",
+            "dependencies": [
+                "RecordsSetting"
+            ],
             "key": "alicloud_dns_records",
             "name": "DnsRecordsData",
             "threaded": true,
@@ -6948,6 +7025,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/eips.html",
+            "dependencies": [
+                "EipsSetting"
+            ],
             "key": "alicloud_eips",
             "name": "EipsData",
             "threaded": true,
@@ -7068,6 +7148,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/images.html",
+            "dependencies": [
+                "ImagesSetting"
+            ],
             "key": "alicloud_images",
             "name": "ImagesData",
             "threaded": true,
@@ -7273,6 +7356,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/instance_types.html",
+            "dependencies": [
+                "InstanceTypesSetting"
+            ],
             "key": "alicloud_instance_types",
             "name": "InstanceTypesData",
             "threaded": true,
@@ -7478,6 +7564,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/instances.html",
+            "dependencies": [
+                "InstancesSetting"
+            ],
             "key": "alicloud_instances",
             "name": "InstancesData",
             "threaded": true,
@@ -7581,6 +7670,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/key_pairs.html",
+            "dependencies": [
+                "KeyPairsSetting"
+            ],
             "key": "alicloud_key_pairs",
             "name": "KeyPairsData",
             "threaded": true,
@@ -7718,6 +7810,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/kms_keys.html",
+            "dependencies": [
+                "KeysSetting"
+            ],
             "key": "alicloud_kms_keys",
             "name": "KmsKeysData",
             "threaded": true,
@@ -7787,6 +7882,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/ram_account_alias.html",
+            "dependencies": [],
             "key": "alicloud_ram_account_alias",
             "name": "RamAccountAliasData",
             "threaded": true,
@@ -7856,6 +7952,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/ram_account_aliases.html",
+            "dependencies": [],
             "key": "alicloud_ram_account_aliases",
             "name": "RamAccountAliasesData",
             "threaded": true,
@@ -7993,6 +8090,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/ram_groups.html",
+            "dependencies": [
+                "GroupsSetting"
+            ],
             "key": "alicloud_ram_groups",
             "name": "RamGroupsData",
             "threaded": true,
@@ -8147,6 +8247,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/ram_policies.html",
+            "dependencies": [
+                "PoliciesSetting"
+            ],
             "key": "alicloud_ram_policies",
             "name": "RamPoliciesData",
             "threaded": true,
@@ -8267,6 +8370,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/ram_roles.html",
+            "dependencies": [
+                "RolesSetting"
+            ],
             "key": "alicloud_ram_roles",
             "name": "RamRolesData",
             "threaded": true,
@@ -8404,6 +8510,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/ram_users.html",
+            "dependencies": [
+                "UsersSetting"
+            ],
             "key": "alicloud_ram_users",
             "name": "RamUsersData",
             "threaded": true,
@@ -8507,6 +8616,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/regions.html",
+            "dependencies": [
+                "RegionsSetting"
+            ],
             "key": "alicloud_regions",
             "name": "RegionsData",
             "threaded": true,
@@ -8695,6 +8807,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/security_group_rules.html",
+            "dependencies": [
+                "RulesSetting"
+            ],
             "key": "alicloud_security_group_rules",
             "name": "SecurityGroupRulesData",
             "threaded": true,
@@ -8850,6 +8965,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/security_groups.html",
+            "dependencies": [
+                "GroupsSetting"
+            ],
             "key": "alicloud_security_groups",
             "name": "SecurityGroupsData",
             "threaded": true,
@@ -9004,6 +9122,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/vpcs.html",
+            "dependencies": [
+                "VpcsSetting"
+            ],
             "key": "alicloud_vpcs",
             "name": "VpcsData",
             "threaded": true,
@@ -9158,6 +9279,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/vswitches.html",
+            "dependencies": [
+                "VswitchesSetting"
+            ],
             "key": "alicloud_vswitches",
             "name": "VswitchesData",
             "threaded": true,
@@ -9346,6 +9470,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/d/zones.html",
+            "dependencies": [
+                "ZonesSetting"
+            ],
             "key": "alicloud_zones",
             "name": "ZonesData",
             "threaded": true,
@@ -9689,6 +9816,14 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/cdn_domain.html",
+            "dependencies": [
+                "AuthConfigSetting",
+                "CacheConfigSetting",
+                "HttpHeaderConfigSetting",
+                "Page404ConfigSetting",
+                "ParameterFilterConfigSetting",
+                "ReferConfigSetting"
+            ],
             "key": "alicloud_cdn_domain",
             "name": "CdnDomainResource",
             "threaded": true,
@@ -10031,6 +10166,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/cms_alarm.html",
+            "dependencies": [],
             "key": "alicloud_cms_alarm",
             "name": "CmsAlarmResource",
             "threaded": true,
@@ -10402,6 +10538,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/container_cluster.html",
+            "dependencies": [
+                "NodesSetting"
+            ],
             "key": "alicloud_container_cluster",
             "name": "ContainerClusterResource",
             "threaded": true,
@@ -10810,6 +10949,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/cs_application.html",
+            "dependencies": [
+                "ServicesSetting"
+            ],
             "key": "alicloud_cs_application",
             "name": "CsApplicationResource",
             "threaded": true,
@@ -11334,6 +11476,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/cs_kubernetes.html",
+            "dependencies": [
+                "ConnectionsSetting",
+                "MasterNodesSetting",
+                "WorkerNodesSetting"
+            ],
             "key": "alicloud_cs_kubernetes",
             "name": "CsKubernetesResource",
             "threaded": true,
@@ -11890,6 +12037,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/cs_swarm.html",
+            "dependencies": [
+                "NodesSetting"
+            ],
             "key": "alicloud_cs_swarm",
             "name": "CsSwarmResource",
             "threaded": true,
@@ -12230,6 +12380,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/db_account.html",
+            "dependencies": [],
             "key": "alicloud_db_account",
             "name": "DbAccountResource",
             "threaded": true,
@@ -12385,6 +12536,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/db_account_privilege.html",
+            "dependencies": [],
             "key": "alicloud_db_account_privilege",
             "name": "DbAccountPrivilegeResource",
             "threaded": true,
@@ -12574,6 +12726,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/db_backup_policy.html",
+            "dependencies": [],
             "key": "alicloud_db_backup_policy",
             "name": "DbBackupPolicyResource",
             "threaded": true,
@@ -12695,6 +12848,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/db_connection.html",
+            "dependencies": [],
             "key": "alicloud_db_connection",
             "name": "DbConnectionResource",
             "threaded": true,
@@ -12867,6 +13021,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/db_database.html",
+            "dependencies": [],
             "key": "alicloud_db_database",
             "name": "DbDatabaseResource",
             "threaded": true,
@@ -13107,6 +13262,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/db_instance.html",
+            "dependencies": [],
             "key": "alicloud_db_instance",
             "name": "DbInstanceResource",
             "threaded": true,
@@ -13415,6 +13571,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/disk.html",
+            "dependencies": [],
             "key": "alicloud_disk",
             "name": "DiskResource",
             "threaded": true,
@@ -13519,6 +13676,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/disk_attachment.html",
+            "dependencies": [],
             "key": "alicloud_disk_attachment",
             "name": "DiskAttachmentResource",
             "threaded": true,
@@ -13588,6 +13746,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/dns.html",
+            "dependencies": [],
             "key": "alicloud_dns",
             "name": "DnsResource",
             "threaded": true,
@@ -13675,6 +13834,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/dns_group.html",
+            "dependencies": [],
             "key": "alicloud_dns_group",
             "name": "DnsGroupResource",
             "threaded": true,
@@ -13847,6 +14007,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/dns_record.html",
+            "dependencies": [],
             "key": "alicloud_dns_record",
             "name": "DnsRecordResource",
             "threaded": true,
@@ -14104,6 +14265,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/eip.html",
+            "dependencies": [],
             "key": "alicloud_eip",
             "name": "EipResource",
             "threaded": true,
@@ -14224,6 +14386,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/eip_association.html",
+            "dependencies": [],
             "key": "alicloud_eip_association",
             "name": "EipAssociationResource",
             "threaded": true,
@@ -14344,6 +14507,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ess_attachment.html",
+            "dependencies": [],
             "key": "alicloud_ess_attachment",
             "name": "EssAttachmentResource",
             "threaded": true,
@@ -14754,6 +14918,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_configuration.html",
+            "dependencies": [
+                "DataDiskSetting"
+            ],
             "key": "alicloud_ess_scaling_configuration",
             "name": "EssScalingConfigurationResource",
             "threaded": true,
@@ -15062,6 +15229,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_group.html",
+            "dependencies": [],
             "key": "alicloud_ess_scaling_group",
             "name": "EssScalingGroupResource",
             "threaded": true,
@@ -15217,6 +15385,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_rule.html",
+            "dependencies": [],
             "key": "alicloud_ess_scaling_rule",
             "name": "EssScalingRuleResource",
             "threaded": true,
@@ -15491,6 +15660,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ess_schedule.html",
+            "dependencies": [],
             "key": "alicloud_ess_schedule",
             "name": "EssScheduleResource",
             "threaded": true,
@@ -15851,6 +16021,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/fc_function.html",
+            "dependencies": [],
             "key": "alicloud_fc_function",
             "name": "FcFunctionResource",
             "threaded": true,
@@ -16226,6 +16397,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/fc_service.html",
+            "dependencies": [
+                "LogConfigSetting",
+                "VpcConfigSetting"
+            ],
             "key": "alicloud_fc_service",
             "name": "FcServiceResource",
             "threaded": true,
@@ -16492,6 +16667,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/fc_trigger.html",
+            "dependencies": [],
             "key": "alicloud_fc_trigger",
             "name": "FcTriggerResource",
             "threaded": true,
@@ -16781,6 +16957,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/forward_entry.html",
+            "dependencies": [],
             "key": "alicloud_forward_entry",
             "name": "ForwardEntryResource",
             "threaded": true,
@@ -17441,6 +17618,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/instance.html",
+            "dependencies": [],
             "key": "alicloud_instance",
             "name": "InstanceResource",
             "threaded": true,
@@ -17810,6 +17988,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/key_pair.html",
+            "dependencies": [],
             "key": "alicloud_key_pair",
             "name": "KeyPairResource",
             "threaded": true,
@@ -17962,6 +18141,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/key_pair_attachment.html",
+            "dependencies": [],
             "key": "alicloud_key_pair_attachment",
             "name": "KeyPairAttachmentResource",
             "threaded": true,
@@ -18100,6 +18280,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/kms_key.html",
+            "dependencies": [],
             "key": "alicloud_kms_key",
             "name": "KmsKeyResource",
             "threaded": true,
@@ -18237,6 +18418,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/log_machine_group.html",
+            "dependencies": [],
             "key": "alicloud_log_machine_group",
             "name": "LogMachineGroupResource",
             "threaded": true,
@@ -18358,6 +18540,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/log_project.html",
+            "dependencies": [],
             "key": "alicloud_log_project",
             "name": "LogProjectResource",
             "threaded": true,
@@ -18479,6 +18662,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/log_store.html",
+            "dependencies": [
+                "ShardsSetting"
+            ],
             "key": "alicloud_log_store",
             "name": "LogStoreResource",
             "threaded": true,
@@ -18634,6 +18820,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/log_store_index.html",
+            "dependencies": [
+                "FieldSearchSetting",
+                "FullTextSetting"
+            ],
             "key": "alicloud_log_store_index",
             "name": "LogStoreIndexResource",
             "threaded": true,
@@ -18772,6 +18962,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/nat_gateway.html",
+            "dependencies": [],
             "key": "alicloud_nat_gateway",
             "name": "NatGatewayResource",
             "threaded": true,
@@ -19029,6 +19220,14 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/oss_bucket.html",
+            "dependencies": [
+                "CorsRuleSetting",
+                "LifecycleRuleSetting",
+                "LoggingSetting",
+                "RefererConfigSetting",
+                "WebsiteSetting",
+                "RefererConfigSetting"
+            ],
             "key": "alicloud_oss_bucket",
             "name": "OssBucketResource",
             "threaded": true,
@@ -19399,6 +19598,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/oss_bucket_object.html",
+            "dependencies": [],
             "key": "alicloud_oss_bucket_object",
             "name": "OssBucketObjectResource",
             "threaded": true,
@@ -19669,6 +19869,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ots_instance.html",
+            "dependencies": [],
             "key": "alicloud_ots_instance",
             "name": "OtsInstanceResource",
             "threaded": true,
@@ -19790,6 +19991,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ots_instance_attachment.html",
+            "dependencies": [],
             "key": "alicloud_ots_instance_attachment",
             "name": "OtsInstanceAttachmentResource",
             "threaded": true,
@@ -19979,6 +20181,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ots_table.html",
+            "dependencies": [
+                "PrimaryKeySetting"
+            ],
             "key": "alicloud_ots_table",
             "name": "OtsTableResource",
             "threaded": true,
@@ -20151,6 +20356,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ram_access_key.html",
+            "dependencies": [],
             "key": "alicloud_ram_access_key",
             "name": "RamAccessKeyResource",
             "threaded": true,
@@ -20203,6 +20409,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ram_account_alias.html",
+            "dependencies": [],
             "key": "alicloud_ram_account_alias",
             "name": "RamAccountAliasResource",
             "threaded": true,
@@ -20273,6 +20480,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ram_alias.html",
+            "dependencies": [],
             "key": "alicloud_ram_alias",
             "name": "RamAliasResource",
             "threaded": true,
@@ -20377,6 +20585,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ram_group.html",
+            "dependencies": [],
             "key": "alicloud_ram_group",
             "name": "RamGroupResource",
             "threaded": true,
@@ -20464,6 +20673,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ram_group_membership.html",
+            "dependencies": [],
             "key": "alicloud_ram_group_membership",
             "name": "RamGroupMembershipResource",
             "threaded": true,
@@ -20585,6 +20795,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ram_group_policy_attachment.html",
+            "dependencies": [],
             "key": "alicloud_ram_group_policy_attachment",
             "name": "RamGroupPolicyAttachmentResource",
             "threaded": true,
@@ -20740,6 +20951,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ram_login_profile.html",
+            "dependencies": [],
             "key": "alicloud_ram_login_profile",
             "name": "RamLoginProfileResource",
             "threaded": true,
@@ -20935,6 +21147,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ram_policy.html",
+            "dependencies": [
+                "StatementSetting",
+                "StatementSetting"
+            ],
             "key": "alicloud_ram_policy",
             "name": "RamPolicyResource",
             "threaded": true,
@@ -21289,6 +21505,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ram_role.html",
+            "dependencies": [],
             "key": "alicloud_ram_role",
             "name": "RamRoleResource",
             "threaded": true,
@@ -21555,6 +21772,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ram_role_attachment.html",
+            "dependencies": [],
             "key": "alicloud_ram_role_attachment",
             "name": "RamRoleAttachmentResource",
             "threaded": true,
@@ -21676,6 +21894,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ram_role_policy_attachment.html",
+            "dependencies": [],
             "key": "alicloud_ram_role_policy_attachment",
             "name": "RamRolePolicyAttachmentResource",
             "threaded": true,
@@ -21865,6 +22084,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ram_user.html",
+            "dependencies": [],
             "key": "alicloud_ram_user",
             "name": "RamUserResource",
             "threaded": true,
@@ -21969,6 +22189,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/ram_user_policy_attachment.html",
+            "dependencies": [],
             "key": "alicloud_ram_user_policy_attachment",
             "name": "RamUserPolicyAttachmentResource",
             "threaded": true,
@@ -22124,6 +22345,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/route_entry.html",
+            "dependencies": [],
             "key": "alicloud_route_entry",
             "name": "RouteEntryResource",
             "threaded": true,
@@ -22330,6 +22552,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/router_interface.html",
+            "dependencies": [],
             "key": "alicloud_router_interface",
             "name": "RouterInterfaceResource",
             "threaded": true,
@@ -22519,6 +22742,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/router_interface_connection.html",
+            "dependencies": [],
             "key": "alicloud_router_interface_connection",
             "name": "RouterInterfaceConnectionResource",
             "threaded": true,
@@ -22691,6 +22915,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/security_group.html",
+            "dependencies": [],
             "key": "alicloud_security_group",
             "name": "SecurityGroupResource",
             "threaded": true,
@@ -22910,6 +23135,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/security_group_rule.html",
+            "dependencies": [],
             "key": "alicloud_security_group_rule",
             "name": "SecurityGroupRuleResource",
             "threaded": true,
@@ -23113,7 +23339,7 @@
                     "original": "internet_charge_type"
                 },
                 {
-                    "default": "TF.value \"tf-lb-20180816164626761600000001\"",
+                    "default": "TF.value \"tf-lb-20180818133848976200000001\"",
                     "computed": false,
                     "required": false,
                     "help": [],
@@ -23165,6 +23391,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/slb.html",
+            "dependencies": [],
             "key": "alicloud_slb",
             "name": "SlbResource",
             "threaded": true,
@@ -23285,6 +23512,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/slb_attachment.html",
+            "dependencies": [],
             "key": "alicloud_slb_attachment",
             "name": "SlbAttachmentResource",
             "threaded": true,
@@ -23763,6 +23991,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/slb_listener.html",
+            "dependencies": [],
             "key": "alicloud_slb_listener",
             "name": "SlbListenerResource",
             "threaded": true,
@@ -24003,6 +24232,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/slb_rule.html",
+            "dependencies": [],
             "key": "alicloud_slb_rule",
             "name": "SlbRuleResource",
             "threaded": true,
@@ -24141,6 +24371,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/slb_server_group.html",
+            "dependencies": [
+                "ServersSetting"
+            ],
             "key": "alicloud_slb_server_group",
             "name": "SlbServerGroupResource",
             "threaded": true,
@@ -24262,6 +24495,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/snat_entry.html",
+            "dependencies": [],
             "key": "alicloud_snat_entry",
             "name": "SnatEntryResource",
             "threaded": true,
@@ -24434,6 +24668,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/subnet.html",
+            "dependencies": [],
             "key": "alicloud_subnet",
             "name": "SubnetResource",
             "threaded": true,
@@ -24572,6 +24807,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/vpc.html",
+            "dependencies": [],
             "key": "alicloud_vpc",
             "name": "VpcResource",
             "threaded": true,
@@ -24744,6 +24980,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/alicloud/r/vswitch.html",
+            "dependencies": [],
             "key": "alicloud_vswitch",
             "name": "VswitchResource",
             "threaded": true,
@@ -24964,6 +25201,7 @@
                 "original": "security_token"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
