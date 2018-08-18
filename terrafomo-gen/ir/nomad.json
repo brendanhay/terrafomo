@@ -45,6 +45,9 @@
                     "original": "region_limit"
                 }
             ],
+            "dependencies": [
+                "RegionLimitSetting"
+            ],
             "key": "nomad_quota_specification.limits",
             "name": "LimitsSetting",
             "threaded": true,
@@ -134,6 +137,7 @@
                     "original": "memory_mb"
                 }
             ],
+            "dependencies": [],
             "key": "nomad_quota_specification.limits.region_limit",
             "name": "RegionLimitSetting",
             "threaded": true,
@@ -153,6 +157,7 @@
             },
             "arguments": [],
             "url": "https://www.terraform.io/docs/providers/nomad/d/regions.html",
+            "dependencies": [],
             "key": "nomad_regions",
             "name": "RegionsData",
             "threaded": true,
@@ -265,6 +270,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/nomad/r/acl_policy.html",
+            "dependencies": [],
             "key": "nomad_acl_policy",
             "name": "AclPolicyResource",
             "threaded": true,
@@ -416,6 +422,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/nomad/r/acl_token.html",
+            "dependencies": [],
             "key": "nomad_acl_token",
             "name": "AclTokenResource",
             "threaded": true,
@@ -585,6 +592,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/nomad/r/job.html",
+            "dependencies": [],
             "key": "nomad_job",
             "name": "JobResource",
             "threaded": true,
@@ -697,6 +705,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/nomad/r/namespace.html",
+            "dependencies": [],
             "key": "nomad_namespace",
             "name": "NamespaceResource",
             "threaded": true,
@@ -809,6 +818,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/nomad/r/quota_specification.html",
+            "dependencies": [
+                "LimitsSetting"
+            ],
             "key": "nomad_quota_specification",
             "name": "QuotaSpecificationResource",
             "threaded": true,
@@ -979,6 +991,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/nomad/r/sentinel_policy.html",
+            "dependencies": [],
             "key": "nomad_sentinel_policy",
             "name": "SentinelPolicyResource",
             "threaded": true,
@@ -1227,6 +1240,7 @@
                 "original": "vault_token"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
