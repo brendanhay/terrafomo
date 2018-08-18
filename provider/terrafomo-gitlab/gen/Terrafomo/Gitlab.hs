@@ -13,17 +13,17 @@
 --
 module Terrafomo.Gitlab
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Gitlab.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Gitlab.Types
 
-    -- * DataSources
-    , module Terrafomo.Gitlab.DataSource
-
     -- * Resources
-    , module Terrafomo.Gitlab.Resource
+    , module Terrafomo.Gitlab.Resources
+
+    -- * DataSources
+    , module Terrafomo.Gitlab.DataSources
 
     -- * Settings
     , module Terrafomo.Gitlab.Settings
@@ -32,9 +32,9 @@ module Terrafomo.Gitlab
     , module Terrafomo.Gitlab.Lens
     ) where
 
-import Terrafomo.Gitlab.DataSource
+import Terrafomo.Gitlab.DataSources
 import Terrafomo.Gitlab.Lens
 import Terrafomo.Gitlab.Provider
-import Terrafomo.Gitlab.Resource
+import Terrafomo.Gitlab.Resources
 import Terrafomo.Gitlab.Settings
 import Terrafomo.Gitlab.Types

@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Gitlab.Resource
+-- Module      : Terrafomo.Gitlab.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Gitlab.Resource
+module Terrafomo.Gitlab.Resource01
     (
     -- ** gitlab_deploy_key
       DeployKeyResource (..)
@@ -29,10 +29,6 @@ module Terrafomo.Gitlab.Resource
     , LabelResource (..)
     , labelResource
 
-    -- ** gitlab_project
-    , ProjectResource (..)
-    , projectResource
-
     -- ** gitlab_project_hook
     , ProjectHookResource (..)
     , projectHookResource
@@ -40,6 +36,10 @@ module Terrafomo.Gitlab.Resource
     -- ** gitlab_project_membership
     , ProjectMembershipResource (..)
     , projectMembershipResource
+
+    -- ** gitlab_project
+    , ProjectResource (..)
+    , projectResource
 
     -- ** gitlab_user
     , UserResource (..)
@@ -307,144 +307,6 @@ instance P.HasProject (LabelResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (LabelResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
--- | @gitlab_project@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/gitlab/r/project.html terraform documentation>
--- for more information.
-data ProjectResource s = ProjectResource'
-    { _defaultBranch        :: TF.Attr s P.Text
-    -- ^ @default_branch@ - (Optional)
-    --
-    , _description          :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
-    --
-    , _issuesEnabled        :: TF.Attr s P.Bool
-    -- ^ @issues_enabled@ - (Optional)
-    --
-    , _mergeRequestsEnabled :: TF.Attr s P.Bool
-    -- ^ @merge_requests_enabled@ - (Optional)
-    --
-    , _name                 :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _namespaceId          :: TF.Attr s P.Int
-    -- ^ @namespace_id@ - (Optional, Forces New)
-    --
-    , _path                 :: TF.Attr s P.Text
-    -- ^ @path@ - (Optional)
-    --
-    , _snippetsEnabled      :: TF.Attr s P.Bool
-    -- ^ @snippets_enabled@ - (Optional)
-    --
-    , _visibilityLevel      :: TF.Attr s P.Text
-    -- ^ @visibility_level@ - (Optional)
-    --
-    , _wikiEnabled          :: TF.Attr s P.Bool
-    -- ^ @wiki_enabled@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @gitlab_project@ resource value.
-projectResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> P.Resource (ProjectResource s)
-projectResource _name =
-    TF.unsafeResource "gitlab_project" TF.validator $
-        ProjectResource'
-            { _defaultBranch = TF.Nil
-            , _description = TF.Nil
-            , _issuesEnabled = TF.value P.True
-            , _mergeRequestsEnabled = TF.value P.True
-            , _name = _name
-            , _namespaceId = TF.Nil
-            , _path = TF.Nil
-            , _snippetsEnabled = TF.value P.True
-            , _visibilityLevel = TF.value "private"
-            , _wikiEnabled = TF.value P.True
-            }
-
-instance TF.IsObject (ProjectResource s) where
-    toObject ProjectResource'{..} = P.catMaybes
-        [ TF.assign "default_branch" <$> TF.attribute _defaultBranch
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "issues_enabled" <$> TF.attribute _issuesEnabled
-        , TF.assign "merge_requests_enabled" <$> TF.attribute _mergeRequestsEnabled
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "namespace_id" <$> TF.attribute _namespaceId
-        , TF.assign "path" <$> TF.attribute _path
-        , TF.assign "snippets_enabled" <$> TF.attribute _snippetsEnabled
-        , TF.assign "visibility_level" <$> TF.attribute _visibilityLevel
-        , TF.assign "wiki_enabled" <$> TF.attribute _wikiEnabled
-        ]
-
-instance TF.IsValid (ProjectResource s) where
-    validator = P.mempty
-
-instance P.HasDefaultBranch (ProjectResource s) (TF.Attr s P.Text) where
-    defaultBranch =
-        P.lens (_defaultBranch :: ProjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _defaultBranch = a } :: ProjectResource s)
-
-instance P.HasDescription (ProjectResource s) (TF.Attr s P.Text) where
-    description =
-        P.lens (_description :: ProjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: ProjectResource s)
-
-instance P.HasIssuesEnabled (ProjectResource s) (TF.Attr s P.Bool) where
-    issuesEnabled =
-        P.lens (_issuesEnabled :: ProjectResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _issuesEnabled = a } :: ProjectResource s)
-
-instance P.HasMergeRequestsEnabled (ProjectResource s) (TF.Attr s P.Bool) where
-    mergeRequestsEnabled =
-        P.lens (_mergeRequestsEnabled :: ProjectResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _mergeRequestsEnabled = a } :: ProjectResource s)
-
-instance P.HasName (ProjectResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: ProjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ProjectResource s)
-
-instance P.HasNamespaceId (ProjectResource s) (TF.Attr s P.Int) where
-    namespaceId =
-        P.lens (_namespaceId :: ProjectResource s -> TF.Attr s P.Int)
-               (\s a -> s { _namespaceId = a } :: ProjectResource s)
-
-instance P.HasPath (ProjectResource s) (TF.Attr s P.Text) where
-    path =
-        P.lens (_path :: ProjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a } :: ProjectResource s)
-
-instance P.HasSnippetsEnabled (ProjectResource s) (TF.Attr s P.Bool) where
-    snippetsEnabled =
-        P.lens (_snippetsEnabled :: ProjectResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _snippetsEnabled = a } :: ProjectResource s)
-
-instance P.HasVisibilityLevel (ProjectResource s) (TF.Attr s P.Text) where
-    visibilityLevel =
-        P.lens (_visibilityLevel :: ProjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _visibilityLevel = a } :: ProjectResource s)
-
-instance P.HasWikiEnabled (ProjectResource s) (TF.Attr s P.Bool) where
-    wikiEnabled =
-        P.lens (_wikiEnabled :: ProjectResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _wikiEnabled = a } :: ProjectResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedHttpUrlToRepo (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedHttpUrlToRepo x = TF.compute (TF.refKey x) "http_url_to_repo"
-
-instance s ~ s' => P.HasComputedNamespaceId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Int) where
-    computedNamespaceId x = TF.compute (TF.refKey x) "namespace_id"
-
-instance s ~ s' => P.HasComputedSshUrlToRepo (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedSshUrlToRepo x = TF.compute (TF.refKey x) "ssh_url_to_repo"
-
-instance s ~ s' => P.HasComputedWebUrl (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedWebUrl x = TF.compute (TF.refKey x) "web_url"
-
 -- | @gitlab_project_hook@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/gitlab/r/project_hook.html terraform documentation>
@@ -649,6 +511,144 @@ instance P.HasUserId (ProjectMembershipResource s) (TF.Attr s P.Int) where
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectMembershipResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @gitlab_project@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/gitlab/r/project.html terraform documentation>
+-- for more information.
+data ProjectResource s = ProjectResource'
+    { _defaultBranch        :: TF.Attr s P.Text
+    -- ^ @default_branch@ - (Optional)
+    --
+    , _description          :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _issuesEnabled        :: TF.Attr s P.Bool
+    -- ^ @issues_enabled@ - (Optional)
+    --
+    , _mergeRequestsEnabled :: TF.Attr s P.Bool
+    -- ^ @merge_requests_enabled@ - (Optional)
+    --
+    , _name                 :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _namespaceId          :: TF.Attr s P.Int
+    -- ^ @namespace_id@ - (Optional, Forces New)
+    --
+    , _path                 :: TF.Attr s P.Text
+    -- ^ @path@ - (Optional)
+    --
+    , _snippetsEnabled      :: TF.Attr s P.Bool
+    -- ^ @snippets_enabled@ - (Optional)
+    --
+    , _visibilityLevel      :: TF.Attr s P.Text
+    -- ^ @visibility_level@ - (Optional)
+    --
+    , _wikiEnabled          :: TF.Attr s P.Bool
+    -- ^ @wiki_enabled@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @gitlab_project@ resource value.
+projectResource
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (ProjectResource s)
+projectResource _name =
+    TF.unsafeResource "gitlab_project" TF.validator $
+        ProjectResource'
+            { _defaultBranch = TF.Nil
+            , _description = TF.Nil
+            , _issuesEnabled = TF.value P.True
+            , _mergeRequestsEnabled = TF.value P.True
+            , _name = _name
+            , _namespaceId = TF.Nil
+            , _path = TF.Nil
+            , _snippetsEnabled = TF.value P.True
+            , _visibilityLevel = TF.value "private"
+            , _wikiEnabled = TF.value P.True
+            }
+
+instance TF.IsObject (ProjectResource s) where
+    toObject ProjectResource'{..} = P.catMaybes
+        [ TF.assign "default_branch" <$> TF.attribute _defaultBranch
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "issues_enabled" <$> TF.attribute _issuesEnabled
+        , TF.assign "merge_requests_enabled" <$> TF.attribute _mergeRequestsEnabled
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "namespace_id" <$> TF.attribute _namespaceId
+        , TF.assign "path" <$> TF.attribute _path
+        , TF.assign "snippets_enabled" <$> TF.attribute _snippetsEnabled
+        , TF.assign "visibility_level" <$> TF.attribute _visibilityLevel
+        , TF.assign "wiki_enabled" <$> TF.attribute _wikiEnabled
+        ]
+
+instance TF.IsValid (ProjectResource s) where
+    validator = P.mempty
+
+instance P.HasDefaultBranch (ProjectResource s) (TF.Attr s P.Text) where
+    defaultBranch =
+        P.lens (_defaultBranch :: ProjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _defaultBranch = a } :: ProjectResource s)
+
+instance P.HasDescription (ProjectResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: ProjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: ProjectResource s)
+
+instance P.HasIssuesEnabled (ProjectResource s) (TF.Attr s P.Bool) where
+    issuesEnabled =
+        P.lens (_issuesEnabled :: ProjectResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _issuesEnabled = a } :: ProjectResource s)
+
+instance P.HasMergeRequestsEnabled (ProjectResource s) (TF.Attr s P.Bool) where
+    mergeRequestsEnabled =
+        P.lens (_mergeRequestsEnabled :: ProjectResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _mergeRequestsEnabled = a } :: ProjectResource s)
+
+instance P.HasName (ProjectResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ProjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ProjectResource s)
+
+instance P.HasNamespaceId (ProjectResource s) (TF.Attr s P.Int) where
+    namespaceId =
+        P.lens (_namespaceId :: ProjectResource s -> TF.Attr s P.Int)
+               (\s a -> s { _namespaceId = a } :: ProjectResource s)
+
+instance P.HasPath (ProjectResource s) (TF.Attr s P.Text) where
+    path =
+        P.lens (_path :: ProjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _path = a } :: ProjectResource s)
+
+instance P.HasSnippetsEnabled (ProjectResource s) (TF.Attr s P.Bool) where
+    snippetsEnabled =
+        P.lens (_snippetsEnabled :: ProjectResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _snippetsEnabled = a } :: ProjectResource s)
+
+instance P.HasVisibilityLevel (ProjectResource s) (TF.Attr s P.Text) where
+    visibilityLevel =
+        P.lens (_visibilityLevel :: ProjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _visibilityLevel = a } :: ProjectResource s)
+
+instance P.HasWikiEnabled (ProjectResource s) (TF.Attr s P.Bool) where
+    wikiEnabled =
+        P.lens (_wikiEnabled :: ProjectResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _wikiEnabled = a } :: ProjectResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedHttpUrlToRepo (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
+    computedHttpUrlToRepo x = TF.compute (TF.refKey x) "http_url_to_repo"
+
+instance s ~ s' => P.HasComputedNamespaceId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Int) where
+    computedNamespaceId x = TF.compute (TF.refKey x) "namespace_id"
+
+instance s ~ s' => P.HasComputedSshUrlToRepo (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
+    computedSshUrlToRepo x = TF.compute (TF.refKey x) "ssh_url_to_repo"
+
+instance s ~ s' => P.HasComputedWebUrl (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
+    computedWebUrl x = TF.compute (TF.refKey x) "web_url"
 
 -- | @gitlab_user@ Resource.
 --

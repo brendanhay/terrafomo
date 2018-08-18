@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Gitlab
+    - Terrafomo.Gitlab.DataSources
+    - Terrafomo.Gitlab.Lens
+    - Terrafomo.Gitlab.Provider
+    - Terrafomo.Gitlab.Resources
+    - Terrafomo.Gitlab.Settings
+    - Terrafomo.Gitlab.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,
