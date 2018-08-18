@@ -29,6 +29,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/local/d/file.html",
+            "dependencies": [],
             "key": "local_file",
             "name": "FileData",
             "threaded": true,
@@ -168,6 +169,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/local/r/file.html",
+            "dependencies": [],
             "key": "local_file",
             "name": "FileResource",
             "threaded": true,
@@ -269,6 +271,7 @@
             "name": "Provider'"
         },
         "arguments": [],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
