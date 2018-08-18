@@ -266,6 +266,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/dme/r/record.html",
+            "dependencies": [],
             "key": "dme_record",
             "name": "RecordResource",
             "threaded": true,
@@ -427,6 +428,7 @@
                 "original": "usesandbox"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
