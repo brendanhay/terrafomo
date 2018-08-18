@@ -13,16 +13,17 @@
 --
 module Terrafomo.Ignition
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Ignition.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Ignition.Types
 
-    -- * DataSources
-    , module Terrafomo.Ignition.DataSource
-
     -- * Resources
+    , module Terrafomo.Ignition.Resources
+
+    -- * DataSources
+    , module Terrafomo.Ignition.DataSources
 
     -- * Settings
     , module Terrafomo.Ignition.Settings
@@ -31,8 +32,9 @@ module Terrafomo.Ignition
     , module Terrafomo.Ignition.Lens
     ) where
 
-import Terrafomo.Ignition.DataSource
+import Terrafomo.Ignition.DataSources
 import Terrafomo.Ignition.Lens
 import Terrafomo.Ignition.Provider
+import Terrafomo.Ignition.Resources
 import Terrafomo.Ignition.Settings
 import Terrafomo.Ignition.Types

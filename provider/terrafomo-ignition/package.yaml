@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Ignition
+    - Terrafomo.Ignition.DataSources
+    - Terrafomo.Ignition.Lens
+    - Terrafomo.Ignition.Provider
+    - Terrafomo.Ignition.Resources
+    - Terrafomo.Ignition.Settings
+    - Terrafomo.Ignition.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,
