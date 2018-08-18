@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Lailgun
+    - Terrafomo.Lailgun.DataSources
+    - Terrafomo.Lailgun.Lens
+    - Terrafomo.Lailgun.Provider
+    - Terrafomo.Lailgun.Resources
+    - Terrafomo.Lailgun.Settings
+    - Terrafomo.Lailgun.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

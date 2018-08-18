@@ -13,16 +13,17 @@
 --
 module Terrafomo.Lailgun
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Lailgun.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Lailgun.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.Lailgun.Resource
+    , module Terrafomo.Lailgun.Resources
+
+    -- * DataSources
+    , module Terrafomo.Lailgun.DataSources
 
     -- * Settings
     , module Terrafomo.Lailgun.Settings
@@ -31,8 +32,9 @@ module Terrafomo.Lailgun
     , module Terrafomo.Lailgun.Lens
     ) where
 
+import Terrafomo.Lailgun.DataSources
 import Terrafomo.Lailgun.Lens
 import Terrafomo.Lailgun.Provider
-import Terrafomo.Lailgun.Resource
+import Terrafomo.Lailgun.Resources
 import Terrafomo.Lailgun.Settings
 import Terrafomo.Lailgun.Types
