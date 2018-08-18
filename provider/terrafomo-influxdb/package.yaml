@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.InfluxDB
+    - Terrafomo.InfluxDB.DataSources
+    - Terrafomo.InfluxDB.Lens
+    - Terrafomo.InfluxDB.Provider
+    - Terrafomo.InfluxDB.Resources
+    - Terrafomo.InfluxDB.Settings
+    - Terrafomo.InfluxDB.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

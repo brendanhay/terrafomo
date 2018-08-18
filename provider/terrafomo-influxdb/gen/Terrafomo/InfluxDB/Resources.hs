@@ -1,17 +1,17 @@
 -- This module is auto-generated.
 
 -- |
--- Module      : Terrafomo.InfluxDB.Settings
+-- Module      : Terrafomo.InfluxDB.Resources
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.InfluxDB.Settings
+module Terrafomo.InfluxDB.Resources
     (
-    -- * Settings
-      module Terrafomo.InfluxDB.Settings01
+    -- * Resources
+      module Terrafomo.InfluxDB.Resource01
     ) where
 
-import Terrafomo.InfluxDB.Settings01
+import Terrafomo.InfluxDB.Resource01

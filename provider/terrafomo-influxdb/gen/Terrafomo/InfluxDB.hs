@@ -13,16 +13,17 @@
 --
 module Terrafomo.InfluxDB
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.InfluxDB.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.InfluxDB.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.InfluxDB.Resource
+    , module Terrafomo.InfluxDB.Resources
+
+    -- * DataSources
+    , module Terrafomo.InfluxDB.DataSources
 
     -- * Settings
     , module Terrafomo.InfluxDB.Settings
@@ -31,8 +32,9 @@ module Terrafomo.InfluxDB
     , module Terrafomo.InfluxDB.Lens
     ) where
 
+import Terrafomo.InfluxDB.DataSources
 import Terrafomo.InfluxDB.Lens
 import Terrafomo.InfluxDB.Provider
-import Terrafomo.InfluxDB.Resource
+import Terrafomo.InfluxDB.Resources
 import Terrafomo.InfluxDB.Settings
 import Terrafomo.InfluxDB.Types

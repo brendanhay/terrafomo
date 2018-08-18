@@ -1,17 +1,15 @@
 -- This module is auto-generated.
 
 -- |
--- Module      : Terrafomo.InfluxDB.Settings
+-- Module      : Terrafomo.InfluxDB.DataSources
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.InfluxDB.Settings
+module Terrafomo.InfluxDB.DataSources
     (
-    -- * Settings
-      module Terrafomo.InfluxDB.Settings01
+    -- * DataSources
     ) where
 
-import Terrafomo.InfluxDB.Settings01
