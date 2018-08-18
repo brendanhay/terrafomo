@@ -13,17 +13,17 @@
 --
 module Terrafomo.Nomad
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Nomad.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Nomad.Types
 
-    -- * DataSources
-    , module Terrafomo.Nomad.DataSource
-
     -- * Resources
-    , module Terrafomo.Nomad.Resource
+    , module Terrafomo.Nomad.Resources
+
+    -- * DataSources
+    , module Terrafomo.Nomad.DataSources
 
     -- * Settings
     , module Terrafomo.Nomad.Settings
@@ -32,9 +32,9 @@ module Terrafomo.Nomad
     , module Terrafomo.Nomad.Lens
     ) where
 
-import Terrafomo.Nomad.DataSource
+import Terrafomo.Nomad.DataSources
 import Terrafomo.Nomad.Lens
 import Terrafomo.Nomad.Provider
-import Terrafomo.Nomad.Resource
+import Terrafomo.Nomad.Resources
 import Terrafomo.Nomad.Settings
 import Terrafomo.Nomad.Types
