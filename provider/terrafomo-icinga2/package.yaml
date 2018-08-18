@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Icinga2
+    - Terrafomo.Icinga2.DataSources
+    - Terrafomo.Icinga2.Lens
+    - Terrafomo.Icinga2.Provider
+    - Terrafomo.Icinga2.Resources
+    - Terrafomo.Icinga2.Settings
+    - Terrafomo.Icinga2.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

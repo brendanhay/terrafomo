@@ -13,16 +13,17 @@
 --
 module Terrafomo.Icinga2
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Icinga2.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Icinga2.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.Icinga2.Resource
+    , module Terrafomo.Icinga2.Resources
+
+    -- * DataSources
+    , module Terrafomo.Icinga2.DataSources
 
     -- * Settings
     , module Terrafomo.Icinga2.Settings
@@ -31,8 +32,9 @@ module Terrafomo.Icinga2
     , module Terrafomo.Icinga2.Lens
     ) where
 
+import Terrafomo.Icinga2.DataSources
 import Terrafomo.Icinga2.Lens
 import Terrafomo.Icinga2.Provider
-import Terrafomo.Icinga2.Resource
+import Terrafomo.Icinga2.Resources
 import Terrafomo.Icinga2.Settings
 import Terrafomo.Icinga2.Types
