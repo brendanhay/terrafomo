@@ -13,16 +13,17 @@
 --
 module Terrafomo.Grafana
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Grafana.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Grafana.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.Grafana.Resource
+    , module Terrafomo.Grafana.Resources
+
+    -- * DataSources
+    , module Terrafomo.Grafana.DataSources
 
     -- * Settings
     , module Terrafomo.Grafana.Settings
@@ -31,8 +32,9 @@ module Terrafomo.Grafana
     , module Terrafomo.Grafana.Lens
     ) where
 
+import Terrafomo.Grafana.DataSources
 import Terrafomo.Grafana.Lens
 import Terrafomo.Grafana.Provider
-import Terrafomo.Grafana.Resource
+import Terrafomo.Grafana.Resources
 import Terrafomo.Grafana.Settings
 import Terrafomo.Grafana.Types

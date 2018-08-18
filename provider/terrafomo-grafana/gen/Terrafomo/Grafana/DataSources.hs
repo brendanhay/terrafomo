@@ -1,19 +1,15 @@
 -- This module is auto-generated.
 
 -- |
--- Module      : Terrafomo.Grafana.Lens
+-- Module      : Terrafomo.Grafana.DataSources
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Grafana.Lens
+module Terrafomo.Grafana.DataSources
     (
-    -- * Lenses
-      module Terrafomo.Grafana.Arguments01
-    , module Terrafomo.Grafana.Attributes01
+    -- * DataSources
     ) where
 
-import Terrafomo.Grafana.Arguments01
-import Terrafomo.Grafana.Attributes01

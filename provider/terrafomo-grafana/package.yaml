@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Grafana
+    - Terrafomo.Grafana.DataSources
+    - Terrafomo.Grafana.Lens
+    - Terrafomo.Grafana.Provider
+    - Terrafomo.Grafana.Resources
+    - Terrafomo.Grafana.Settings
+    - Terrafomo.Grafana.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,
