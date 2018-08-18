@@ -5,6 +5,7 @@ module Terrafomo.Gen.Elab
     ) where
 
 import Control.Applicative        ((<|>))
+import Control.Monad              (unless)
 import Control.Monad.Except       (Except)
 import Control.Monad.Reader       (ReaderT)
 import Control.Monad.State.Strict (StateT)
@@ -80,7 +81,7 @@ run cfg provider =
                    , _primitives
                    } <- State.get
 
-               pure $! Provider'
+               validate provider $ Provider'
                    { providerName         = configProviderName cfg
                    , providerPackage      = configPackage      cfg
                    , providerDependencies = configDependencies cfg
@@ -92,6 +93,35 @@ run cfg provider =
                    , providerPrimitives   = map fst (Map.elems _primitives)
                    , providerSchema       = schema
                    }
+
+validate :: Go.Provider -> Provider -> Elab Provider
+validate a b = do
+    let name        =
+            schemaOriginal . resourceSchema
+
+        resources   =
+            Set.fromList (map Go.resourceName (Go.providerResources a))
+                `Set.difference`
+                    Set.fromList (map name (providerResources b))
+
+        datasources =
+            Set.fromList (map Go.resourceName (Go.providerDataSources a))
+                `Set.difference`
+                    Set.fromList (map name (providerDataSources b))
+
+    unless (Set.null resources) $
+        Except.throwError $
+            unlines [ "Missing resources:"
+                    , ppShow resources
+                    ]
+
+    unless (Set.null datasources) $
+        Except.throwError $
+            unlines [ "Missing datasources:"
+                    , ppShow datasources
+                    ]
+
+    pure b
 
 elabResource :: Text -> Text -> [Go.Schema] -> Elab Resource
 elabResource provider original schemas =
