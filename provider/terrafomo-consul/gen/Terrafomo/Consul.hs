@@ -13,17 +13,17 @@
 --
 module Terrafomo.Consul
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Consul.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Consul.Types
 
-    -- * DataSources
-    , module Terrafomo.Consul.DataSource
-
     -- * Resources
-    , module Terrafomo.Consul.Resource
+    , module Terrafomo.Consul.Resources
+
+    -- * DataSources
+    , module Terrafomo.Consul.DataSources
 
     -- * Settings
     , module Terrafomo.Consul.Settings
@@ -32,9 +32,9 @@ module Terrafomo.Consul
     , module Terrafomo.Consul.Lens
     ) where
 
-import Terrafomo.Consul.DataSource
+import Terrafomo.Consul.DataSources
 import Terrafomo.Consul.Lens
 import Terrafomo.Consul.Provider
-import Terrafomo.Consul.Resource
+import Terrafomo.Consul.Resources
 import Terrafomo.Consul.Settings
 import Terrafomo.Consul.Types

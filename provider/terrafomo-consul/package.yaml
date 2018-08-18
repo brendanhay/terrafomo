@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Consul
+    - Terrafomo.Consul.DataSources
+    - Terrafomo.Consul.Lens
+    - Terrafomo.Consul.Provider
+    - Terrafomo.Consul.Resources
+    - Terrafomo.Consul.Settings
+    - Terrafomo.Consul.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,
