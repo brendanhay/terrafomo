@@ -13,18 +13,17 @@
 --
 module Terrafomo.AzureRM
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.AzureRM.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.AzureRM.Types
 
-    -- * DataSources
-    , module Terrafomo.AzureRM.DataSource
-
     -- * Resources
-    , module Terrafomo.AzureRM.Resource01
-    , module Terrafomo.AzureRM.Resource02
+    , module Terrafomo.AzureRM.Resources
+
+    -- * DataSources
+    , module Terrafomo.AzureRM.DataSources
 
     -- * Settings
     , module Terrafomo.AzureRM.Settings
@@ -33,10 +32,9 @@ module Terrafomo.AzureRM
     , module Terrafomo.AzureRM.Lens
     ) where
 
-import Terrafomo.AzureRM.DataSource
+import Terrafomo.AzureRM.DataSources
 import Terrafomo.AzureRM.Lens
 import Terrafomo.AzureRM.Provider
-import Terrafomo.AzureRM.Resource01
-import Terrafomo.AzureRM.Resource02
+import Terrafomo.AzureRM.Resources
 import Terrafomo.AzureRM.Settings
 import Terrafomo.AzureRM.Types

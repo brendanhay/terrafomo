@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.AzureRM.DataSource
+-- Module      : Terrafomo.AzureRM.DataSource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.AzureRM.DataSource
+module Terrafomo.AzureRM.DataSource01
     (
     -- ** azurerm_app_service
       AppServiceData (..)
@@ -73,13 +73,13 @@ module Terrafomo.AzureRM.DataSource
     , ImageData (..)
     , imageData
 
-    -- ** azurerm_key_vault
-    , KeyVaultData (..)
-    , keyVaultData
-
     -- ** azurerm_key_vault_access_policy
     , KeyVaultAccessPolicyData (..)
     , keyVaultAccessPolicyData
+
+    -- ** azurerm_key_vault
+    , KeyVaultData (..)
+    , keyVaultData
 
     -- ** azurerm_key_vault_secret
     , KeyVaultSecretData (..)
@@ -1218,6 +1218,51 @@ instance s ~ s' => P.HasComputedOsDisk (TF.Ref s' (ImageData s)) (TF.Attr s [TF.
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (ImageData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
+-- | @azurerm_key_vault_access_policy@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/d/key_vault_access_policy.html terraform documentation>
+-- for more information.
+data KeyVaultAccessPolicyData s = KeyVaultAccessPolicyData'
+    { _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_key_vault_access_policy@ datasource value.
+keyVaultAccessPolicyData
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.DataSource (KeyVaultAccessPolicyData s)
+keyVaultAccessPolicyData _name =
+    TF.unsafeDataSource "azurerm_key_vault_access_policy" TF.validator $
+        KeyVaultAccessPolicyData'
+            { _name = _name
+            }
+
+instance TF.IsObject (KeyVaultAccessPolicyData s) where
+    toObject KeyVaultAccessPolicyData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (KeyVaultAccessPolicyData s) where
+    validator = P.mempty
+
+instance P.HasName (KeyVaultAccessPolicyData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: KeyVaultAccessPolicyData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: KeyVaultAccessPolicyData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyVaultAccessPolicyData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedCertificatePermissions (TF.Ref s' (KeyVaultAccessPolicyData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedCertificatePermissions x = TF.compute (TF.refKey x) "certificate_permissions"
+
+instance s ~ s' => P.HasComputedKeyPermissions (TF.Ref s' (KeyVaultAccessPolicyData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedKeyPermissions x = TF.compute (TF.refKey x) "key_permissions"
+
+instance s ~ s' => P.HasComputedSecretPermissions (TF.Ref s' (KeyVaultAccessPolicyData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedSecretPermissions x = TF.compute (TF.refKey x) "secret_permissions"
+
 -- | @azurerm_key_vault@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/azurerm/d/key_vault.html terraform documentation>
@@ -1291,51 +1336,6 @@ instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (KeyVaultData s)) (TF.Attr s
 
 instance s ~ s' => P.HasComputedVaultUri (TF.Ref s' (KeyVaultData s)) (TF.Attr s P.Text) where
     computedVaultUri x = TF.compute (TF.refKey x) "vault_uri"
-
--- | @azurerm_key_vault_access_policy@ DataSource.
---
--- See the <https://www.terraform.io/docs/providers/azurerm/d/key_vault_access_policy.html terraform documentation>
--- for more information.
-data KeyVaultAccessPolicyData s = KeyVaultAccessPolicyData'
-    { _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @azurerm_key_vault_access_policy@ datasource value.
-keyVaultAccessPolicyData
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> P.DataSource (KeyVaultAccessPolicyData s)
-keyVaultAccessPolicyData _name =
-    TF.unsafeDataSource "azurerm_key_vault_access_policy" TF.validator $
-        KeyVaultAccessPolicyData'
-            { _name = _name
-            }
-
-instance TF.IsObject (KeyVaultAccessPolicyData s) where
-    toObject KeyVaultAccessPolicyData'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance TF.IsValid (KeyVaultAccessPolicyData s) where
-    validator = P.mempty
-
-instance P.HasName (KeyVaultAccessPolicyData s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: KeyVaultAccessPolicyData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: KeyVaultAccessPolicyData s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyVaultAccessPolicyData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedCertificatePermissions (TF.Ref s' (KeyVaultAccessPolicyData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedCertificatePermissions x = TF.compute (TF.refKey x) "certificate_permissions"
-
-instance s ~ s' => P.HasComputedKeyPermissions (TF.Ref s' (KeyVaultAccessPolicyData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedKeyPermissions x = TF.compute (TF.refKey x) "key_permissions"
-
-instance s ~ s' => P.HasComputedSecretPermissions (TF.Ref s' (KeyVaultAccessPolicyData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSecretPermissions x = TF.compute (TF.refKey x) "secret_permissions"
 
 -- | @azurerm_key_vault_secret@ DataSource.
 --

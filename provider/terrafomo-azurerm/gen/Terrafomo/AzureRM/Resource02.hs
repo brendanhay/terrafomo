@@ -17,8 +17,164 @@
 --
 module Terrafomo.AzureRM.Resource02
     (
+    -- ** azurerm_lb_rule
+      LbRuleResource (..)
+    , lbRuleResource
+
+    -- ** azurerm_local_network_gateway
+    , LocalNetworkGatewayResource (..)
+    , localNetworkGatewayResource
+
+    -- ** azurerm_log_analytics_solution
+    , LogAnalyticsSolutionResource (..)
+    , logAnalyticsSolutionResource
+
+    -- ** azurerm_log_analytics_workspace
+    , LogAnalyticsWorkspaceResource (..)
+    , logAnalyticsWorkspaceResource
+
+    -- ** azurerm_logic_app_action_custom
+    , LogicAppActionCustomResource (..)
+    , logicAppActionCustomResource
+
+    -- ** azurerm_logic_app_action_http
+    , LogicAppActionHttpResource (..)
+    , logicAppActionHttpResource
+
+    -- ** azurerm_logic_app_trigger_custom
+    , LogicAppTriggerCustomResource (..)
+    , logicAppTriggerCustomResource
+
+    -- ** azurerm_logic_app_trigger_http_request
+    , LogicAppTriggerHttpRequestResource (..)
+    , logicAppTriggerHttpRequestResource
+
+    -- ** azurerm_logic_app_trigger_recurrence
+    , LogicAppTriggerRecurrenceResource (..)
+    , logicAppTriggerRecurrenceResource
+
+    -- ** azurerm_logic_app_workflow
+    , LogicAppWorkflowResource (..)
+    , logicAppWorkflowResource
+
+    -- ** azurerm_managed_disk
+    , ManagedDiskResource (..)
+    , managedDiskResource
+
+    -- ** azurerm_management_lock
+    , ManagementLockResource (..)
+    , managementLockResource
+
+    -- ** azurerm_metric_alertrule
+    , MetricAlertruleResource (..)
+    , metricAlertruleResource
+
+    -- ** azurerm_monitor_action_group
+    , MonitorActionGroupResource (..)
+    , monitorActionGroupResource
+
+    -- ** azurerm_mysql_configuration
+    , MysqlConfigurationResource (..)
+    , mysqlConfigurationResource
+
+    -- ** azurerm_mysql_database
+    , MysqlDatabaseResource (..)
+    , mysqlDatabaseResource
+
+    -- ** azurerm_mysql_firewall_rule
+    , MysqlFirewallRuleResource (..)
+    , mysqlFirewallRuleResource
+
+    -- ** azurerm_mysql_server
+    , MysqlServerResource (..)
+    , mysqlServerResource
+
+    -- ** azurerm_network_interface
+    , NetworkInterfaceResource (..)
+    , networkInterfaceResource
+
+    -- ** azurerm_network_security_group
+    , NetworkSecurityGroupResource (..)
+    , networkSecurityGroupResource
+
+    -- ** azurerm_network_security_rule
+    , NetworkSecurityRuleResource (..)
+    , networkSecurityRuleResource
+
+    -- ** azurerm_network_watcher
+    , NetworkWatcherResource (..)
+    , networkWatcherResource
+
+    -- ** azurerm_notification_hub_authorization_rule
+    , NotificationHubAuthorizationRuleResource (..)
+    , notificationHubAuthorizationRuleResource
+
+    -- ** azurerm_notification_hub_namespace
+    , NotificationHubNamespaceResource (..)
+    , notificationHubNamespaceResource
+
+    -- ** azurerm_notification_hub
+    , NotificationHubResource (..)
+    , notificationHubResource
+
+    -- ** azurerm_packet_capture
+    , PacketCaptureResource (..)
+    , packetCaptureResource
+
+    -- ** azurerm_policy_assignment
+    , PolicyAssignmentResource (..)
+    , policyAssignmentResource
+
+    -- ** azurerm_policy_definition
+    , PolicyDefinitionResource (..)
+    , policyDefinitionResource
+
+    -- ** azurerm_postgresql_configuration
+    , PostgresqlConfigurationResource (..)
+    , postgresqlConfigurationResource
+
+    -- ** azurerm_postgresql_database
+    , PostgresqlDatabaseResource (..)
+    , postgresqlDatabaseResource
+
+    -- ** azurerm_postgresql_firewall_rule
+    , PostgresqlFirewallRuleResource (..)
+    , postgresqlFirewallRuleResource
+
+    -- ** azurerm_postgresql_server
+    , PostgresqlServerResource (..)
+    , postgresqlServerResource
+
+    -- ** azurerm_public_ip
+    , PublicIpResource (..)
+    , publicIpResource
+
+    -- ** azurerm_recovery_services_vault
+    , RecoveryServicesVaultResource (..)
+    , recoveryServicesVaultResource
+
+    -- ** azurerm_redis_cache
+    , RedisCacheResource (..)
+    , redisCacheResource
+
+    -- ** azurerm_redis_firewall_rule
+    , RedisFirewallRuleResource (..)
+    , redisFirewallRuleResource
+
+    -- ** azurerm_relay_namespace
+    , RelayNamespaceResource (..)
+    , relayNamespaceResource
+
+    -- ** azurerm_resource_group
+    , ResourceGroupResource (..)
+    , resourceGroupResource
+
+    -- ** azurerm_role_assignment
+    , RoleAssignmentResource (..)
+    , roleAssignmentResource
+
     -- ** azurerm_role_definition
-      RoleDefinitionResource (..)
+    , RoleDefinitionResource (..)
     , roleDefinitionResource
 
     -- ** azurerm_route
@@ -29,13 +185,13 @@ module Terrafomo.AzureRM.Resource02
     , RouteTableResource (..)
     , routeTableResource
 
-    -- ** azurerm_scheduler_job
-    , SchedulerJobResource (..)
-    , schedulerJobResource
-
     -- ** azurerm_scheduler_job_collection
     , SchedulerJobCollectionResource (..)
     , schedulerJobCollectionResource
+
+    -- ** azurerm_scheduler_job
+    , SchedulerJobResource (..)
+    , schedulerJobResource
 
     -- ** azurerm_search_service
     , SearchServiceResource (..)
@@ -45,21 +201,21 @@ module Terrafomo.AzureRM.Resource02
     , ServiceFabricClusterResource (..)
     , serviceFabricClusterResource
 
-    -- ** azurerm_servicebus_namespace
-    , ServicebusNamespaceResource (..)
-    , servicebusNamespaceResource
-
     -- ** azurerm_servicebus_namespace_authorization_rule
     , ServicebusNamespaceAuthorizationRuleResource (..)
     , servicebusNamespaceAuthorizationRuleResource
 
-    -- ** azurerm_servicebus_queue
-    , ServicebusQueueResource (..)
-    , servicebusQueueResource
+    -- ** azurerm_servicebus_namespace
+    , ServicebusNamespaceResource (..)
+    , servicebusNamespaceResource
 
     -- ** azurerm_servicebus_queue_authorization_rule
     , ServicebusQueueAuthorizationRuleResource (..)
     , servicebusQueueAuthorizationRuleResource
+
+    -- ** azurerm_servicebus_queue
+    , ServicebusQueueResource (..)
+    , servicebusQueueResource
 
     -- ** azurerm_servicebus_subscription
     , ServicebusSubscriptionResource (..)
@@ -69,13 +225,13 @@ module Terrafomo.AzureRM.Resource02
     , ServicebusSubscriptionRuleResource (..)
     , servicebusSubscriptionRuleResource
 
-    -- ** azurerm_servicebus_topic
-    , ServicebusTopicResource (..)
-    , servicebusTopicResource
-
     -- ** azurerm_servicebus_topic_authorization_rule
     , ServicebusTopicAuthorizationRuleResource (..)
     , servicebusTopicAuthorizationRuleResource
+
+    -- ** azurerm_servicebus_topic
+    , ServicebusTopicResource (..)
+    , servicebusTopicResource
 
     -- ** azurerm_snapshot
     , SnapshotResource (..)
@@ -149,10 +305,6 @@ module Terrafomo.AzureRM.Resource02
     , UserAssignedIdentityResource (..)
     , userAssignedIdentityResource
 
-    -- ** azurerm_virtual_machine
-    , VirtualMachineResource (..)
-    , virtualMachineResource
-
     -- ** azurerm_virtual_machine_data_disk_attachment
     , VirtualMachineDataDiskAttachmentResource (..)
     , virtualMachineDataDiskAttachmentResource
@@ -161,25 +313,29 @@ module Terrafomo.AzureRM.Resource02
     , VirtualMachineExtensionResource (..)
     , virtualMachineExtensionResource
 
+    -- ** azurerm_virtual_machine
+    , VirtualMachineResource (..)
+    , virtualMachineResource
+
     -- ** azurerm_virtual_machine_scale_set
     , VirtualMachineScaleSetResource (..)
     , virtualMachineScaleSetResource
-
-    -- ** azurerm_virtual_network
-    , VirtualNetworkResource (..)
-    , virtualNetworkResource
-
-    -- ** azurerm_virtual_network_gateway
-    , VirtualNetworkGatewayResource (..)
-    , virtualNetworkGatewayResource
 
     -- ** azurerm_virtual_network_gateway_connection
     , VirtualNetworkGatewayConnectionResource (..)
     , virtualNetworkGatewayConnectionResource
 
+    -- ** azurerm_virtual_network_gateway
+    , VirtualNetworkGatewayResource (..)
+    , virtualNetworkGatewayResource
+
     -- ** azurerm_virtual_network_peering
     , VirtualNetworkPeeringResource (..)
     , virtualNetworkPeeringResource
+
+    -- ** azurerm_virtual_network
+    , VirtualNetworkResource (..)
+    , virtualNetworkResource
 
     ) where
 
@@ -206,6 +362,4234 @@ import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.Name             as TF
 import qualified Terrafomo.Schema           as TF
 import qualified Terrafomo.Validator        as TF
+
+-- | @azurerm_lb_rule@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/lb_rule.html terraform documentation>
+-- for more information.
+data LbRuleResource s = LbRuleResource'
+    { _backendAddressPoolId        :: TF.Attr s P.Text
+    -- ^ @backend_address_pool_id@ - (Optional)
+    --
+    , _backendPort                 :: TF.Attr s P.Int
+    -- ^ @backend_port@ - (Required)
+    --
+    , _enableFloatingIp            :: TF.Attr s P.Bool
+    -- ^ @enable_floating_ip@ - (Optional)
+    --
+    , _frontendIpConfigurationName :: TF.Attr s P.Text
+    -- ^ @frontend_ip_configuration_name@ - (Required)
+    --
+    , _frontendPort                :: TF.Attr s P.Int
+    -- ^ @frontend_port@ - (Required)
+    --
+    , _idleTimeoutInMinutes        :: TF.Attr s P.Int
+    -- ^ @idle_timeout_in_minutes@ - (Optional)
+    --
+    , _loadDistribution            :: TF.Attr s P.Text
+    -- ^ @load_distribution@ - (Optional)
+    --
+    , _loadbalancerId              :: TF.Attr s P.Text
+    -- ^ @loadbalancer_id@ - (Required, Forces New)
+    --
+    , _name                        :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _probeId                     :: TF.Attr s P.Text
+    -- ^ @probe_id@ - (Optional)
+    --
+    , _protocol                    :: TF.Attr s P.Text
+    -- ^ @protocol@ - (Required)
+    --
+    , _resourceGroupName           :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_lb_rule@ resource value.
+lbRuleResource
+    :: TF.Attr s P.Text -- ^ @loadbalancer_id@ ('P._loadbalancerId', 'P.loadbalancerId')
+    -> TF.Attr s P.Text -- ^ @frontend_ip_configuration_name@ ('P._frontendIpConfigurationName', 'P.frontendIpConfigurationName')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Int -- ^ @backend_port@ ('P._backendPort', 'P.backendPort')
+    -> TF.Attr s P.Int -- ^ @frontend_port@ ('P._frontendPort', 'P.frontendPort')
+    -> TF.Attr s P.Text -- ^ @protocol@ ('P._protocol', 'P.protocol')
+    -> P.Resource (LbRuleResource s)
+lbRuleResource _loadbalancerId _frontendIpConfigurationName _name _resourceGroupName _backendPort _frontendPort _protocol =
+    TF.unsafeResource "azurerm_lb_rule" TF.validator $
+        LbRuleResource'
+            { _backendAddressPoolId = TF.Nil
+            , _backendPort = _backendPort
+            , _enableFloatingIp = TF.value P.False
+            , _frontendIpConfigurationName = _frontendIpConfigurationName
+            , _frontendPort = _frontendPort
+            , _idleTimeoutInMinutes = TF.Nil
+            , _loadDistribution = TF.Nil
+            , _loadbalancerId = _loadbalancerId
+            , _name = _name
+            , _probeId = TF.Nil
+            , _protocol = _protocol
+            , _resourceGroupName = _resourceGroupName
+            }
+
+instance TF.IsObject (LbRuleResource s) where
+    toObject LbRuleResource'{..} = P.catMaybes
+        [ TF.assign "backend_address_pool_id" <$> TF.attribute _backendAddressPoolId
+        , TF.assign "backend_port" <$> TF.attribute _backendPort
+        , TF.assign "enable_floating_ip" <$> TF.attribute _enableFloatingIp
+        , TF.assign "frontend_ip_configuration_name" <$> TF.attribute _frontendIpConfigurationName
+        , TF.assign "frontend_port" <$> TF.attribute _frontendPort
+        , TF.assign "idle_timeout_in_minutes" <$> TF.attribute _idleTimeoutInMinutes
+        , TF.assign "load_distribution" <$> TF.attribute _loadDistribution
+        , TF.assign "loadbalancer_id" <$> TF.attribute _loadbalancerId
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "probe_id" <$> TF.attribute _probeId
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        ]
+
+instance TF.IsValid (LbRuleResource s) where
+    validator = P.mempty
+
+instance P.HasBackendAddressPoolId (LbRuleResource s) (TF.Attr s P.Text) where
+    backendAddressPoolId =
+        P.lens (_backendAddressPoolId :: LbRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _backendAddressPoolId = a } :: LbRuleResource s)
+
+instance P.HasBackendPort (LbRuleResource s) (TF.Attr s P.Int) where
+    backendPort =
+        P.lens (_backendPort :: LbRuleResource s -> TF.Attr s P.Int)
+               (\s a -> s { _backendPort = a } :: LbRuleResource s)
+
+instance P.HasEnableFloatingIp (LbRuleResource s) (TF.Attr s P.Bool) where
+    enableFloatingIp =
+        P.lens (_enableFloatingIp :: LbRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enableFloatingIp = a } :: LbRuleResource s)
+
+instance P.HasFrontendIpConfigurationName (LbRuleResource s) (TF.Attr s P.Text) where
+    frontendIpConfigurationName =
+        P.lens (_frontendIpConfigurationName :: LbRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _frontendIpConfigurationName = a } :: LbRuleResource s)
+
+instance P.HasFrontendPort (LbRuleResource s) (TF.Attr s P.Int) where
+    frontendPort =
+        P.lens (_frontendPort :: LbRuleResource s -> TF.Attr s P.Int)
+               (\s a -> s { _frontendPort = a } :: LbRuleResource s)
+
+instance P.HasIdleTimeoutInMinutes (LbRuleResource s) (TF.Attr s P.Int) where
+    idleTimeoutInMinutes =
+        P.lens (_idleTimeoutInMinutes :: LbRuleResource s -> TF.Attr s P.Int)
+               (\s a -> s { _idleTimeoutInMinutes = a } :: LbRuleResource s)
+
+instance P.HasLoadDistribution (LbRuleResource s) (TF.Attr s P.Text) where
+    loadDistribution =
+        P.lens (_loadDistribution :: LbRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _loadDistribution = a } :: LbRuleResource s)
+
+instance P.HasLoadbalancerId (LbRuleResource s) (TF.Attr s P.Text) where
+    loadbalancerId =
+        P.lens (_loadbalancerId :: LbRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _loadbalancerId = a } :: LbRuleResource s)
+
+instance P.HasName (LbRuleResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LbRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LbRuleResource s)
+
+instance P.HasProbeId (LbRuleResource s) (TF.Attr s P.Text) where
+    probeId =
+        P.lens (_probeId :: LbRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _probeId = a } :: LbRuleResource s)
+
+instance P.HasProtocol (LbRuleResource s) (TF.Attr s P.Text) where
+    protocol =
+        P.lens (_protocol :: LbRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: LbRuleResource s)
+
+instance P.HasResourceGroupName (LbRuleResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: LbRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: LbRuleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LbRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedBackendAddressPoolId (TF.Ref s' (LbRuleResource s)) (TF.Attr s P.Text) where
+    computedBackendAddressPoolId x = TF.compute (TF.refKey x) "backend_address_pool_id"
+
+instance s ~ s' => P.HasComputedFrontendIpConfigurationId (TF.Ref s' (LbRuleResource s)) (TF.Attr s P.Text) where
+    computedFrontendIpConfigurationId x = TF.compute (TF.refKey x) "frontend_ip_configuration_id"
+
+instance s ~ s' => P.HasComputedIdleTimeoutInMinutes (TF.Ref s' (LbRuleResource s)) (TF.Attr s P.Int) where
+    computedIdleTimeoutInMinutes x = TF.compute (TF.refKey x) "idle_timeout_in_minutes"
+
+instance s ~ s' => P.HasComputedLoadDistribution (TF.Ref s' (LbRuleResource s)) (TF.Attr s P.Text) where
+    computedLoadDistribution x = TF.compute (TF.refKey x) "load_distribution"
+
+instance s ~ s' => P.HasComputedProbeId (TF.Ref s' (LbRuleResource s)) (TF.Attr s P.Text) where
+    computedProbeId x = TF.compute (TF.refKey x) "probe_id"
+
+-- | @azurerm_local_network_gateway@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/local_network_gateway.html terraform documentation>
+-- for more information.
+data LocalNetworkGatewayResource s = LocalNetworkGatewayResource'
+    { _addressSpace      :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @address_space@ - (Required)
+    --
+    , _bgpSettings       :: TF.Attr s (BgpSettings s)
+    -- ^ @bgp_settings@ - (Optional)
+    --
+    , _gatewayAddress    :: TF.Attr s P.Text
+    -- ^ @gateway_address@ - (Required)
+    --
+    , _location          :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_local_network_gateway@ resource value.
+localNetworkGatewayResource
+    :: TF.Attr s P.Text -- ^ @gateway_address@ ('P._gatewayAddress', 'P.gatewayAddress')
+    -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @address_space@ ('P._addressSpace', 'P.addressSpace')
+    -> P.Resource (LocalNetworkGatewayResource s)
+localNetworkGatewayResource _gatewayAddress _location _name _resourceGroupName _addressSpace =
+    TF.unsafeResource "azurerm_local_network_gateway" TF.validator $
+        LocalNetworkGatewayResource'
+            { _addressSpace = _addressSpace
+            , _bgpSettings = TF.Nil
+            , _gatewayAddress = _gatewayAddress
+            , _location = _location
+            , _name = _name
+            , _resourceGroupName = _resourceGroupName
+            , _tags = TF.Nil
+            }
+
+instance TF.IsObject (LocalNetworkGatewayResource s) where
+    toObject LocalNetworkGatewayResource'{..} = P.catMaybes
+        [ TF.assign "address_space" <$> TF.attribute _addressSpace
+        , TF.assign "bgp_settings" <$> TF.attribute _bgpSettings
+        , TF.assign "gateway_address" <$> TF.attribute _gatewayAddress
+        , TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance TF.IsValid (LocalNetworkGatewayResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_bgpSettings"
+                  (_bgpSettings
+                      :: LocalNetworkGatewayResource s -> TF.Attr s (BgpSettings s))
+                  TF.validator
+
+instance P.HasAddressSpace (LocalNetworkGatewayResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    addressSpace =
+        P.lens (_addressSpace :: LocalNetworkGatewayResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _addressSpace = a } :: LocalNetworkGatewayResource s)
+
+instance P.HasBgpSettings (LocalNetworkGatewayResource s) (TF.Attr s (BgpSettings s)) where
+    bgpSettings =
+        P.lens (_bgpSettings :: LocalNetworkGatewayResource s -> TF.Attr s (BgpSettings s))
+               (\s a -> s { _bgpSettings = a } :: LocalNetworkGatewayResource s)
+
+instance P.HasGatewayAddress (LocalNetworkGatewayResource s) (TF.Attr s P.Text) where
+    gatewayAddress =
+        P.lens (_gatewayAddress :: LocalNetworkGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _gatewayAddress = a } :: LocalNetworkGatewayResource s)
+
+instance P.HasLocation (LocalNetworkGatewayResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: LocalNetworkGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: LocalNetworkGatewayResource s)
+
+instance P.HasName (LocalNetworkGatewayResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LocalNetworkGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LocalNetworkGatewayResource s)
+
+instance P.HasResourceGroupName (LocalNetworkGatewayResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: LocalNetworkGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: LocalNetworkGatewayResource s)
+
+instance P.HasTags (LocalNetworkGatewayResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: LocalNetworkGatewayResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: LocalNetworkGatewayResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LocalNetworkGatewayResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (LocalNetworkGatewayResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+-- | @azurerm_log_analytics_solution@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/log_analytics_solution.html terraform documentation>
+-- for more information.
+data LogAnalyticsSolutionResource s = LogAnalyticsSolutionResource'
+    { _location            :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _plan                :: TF.Attr s (PlanSetting s)
+    -- ^ @plan@ - (Required)
+    --
+    , _resourceGroupName   :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _solutionName        :: TF.Attr s P.Text
+    -- ^ @solution_name@ - (Required, Forces New)
+    --
+    , _workspaceName       :: TF.Attr s P.Text
+    -- ^ @workspace_name@ - (Required, Forces New)
+    --
+    , _workspaceResourceId :: TF.Attr s P.Text
+    -- ^ @workspace_resource_id@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_log_analytics_solution@ resource value.
+logAnalyticsSolutionResource
+    :: TF.Attr s P.Text -- ^ @workspace_resource_id@ ('P._workspaceResourceId', 'P.workspaceResourceId')
+    -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @solution_name@ ('P._solutionName', 'P.solutionName')
+    -> TF.Attr s P.Text -- ^ @workspace_name@ ('P._workspaceName', 'P.workspaceName')
+    -> TF.Attr s (PlanSetting s) -- ^ @plan@ ('P._plan', 'P.plan')
+    -> P.Resource (LogAnalyticsSolutionResource s)
+logAnalyticsSolutionResource _workspaceResourceId _location _resourceGroupName _solutionName _workspaceName _plan =
+    TF.unsafeResource "azurerm_log_analytics_solution" TF.validator $
+        LogAnalyticsSolutionResource'
+            { _location = _location
+            , _plan = _plan
+            , _resourceGroupName = _resourceGroupName
+            , _solutionName = _solutionName
+            , _workspaceName = _workspaceName
+            , _workspaceResourceId = _workspaceResourceId
+            }
+
+instance TF.IsObject (LogAnalyticsSolutionResource s) where
+    toObject LogAnalyticsSolutionResource'{..} = P.catMaybes
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "plan" <$> TF.attribute _plan
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "solution_name" <$> TF.attribute _solutionName
+        , TF.assign "workspace_name" <$> TF.attribute _workspaceName
+        , TF.assign "workspace_resource_id" <$> TF.attribute _workspaceResourceId
+        ]
+
+instance TF.IsValid (LogAnalyticsSolutionResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_plan"
+                  (_plan
+                      :: LogAnalyticsSolutionResource s -> TF.Attr s (PlanSetting s))
+                  TF.validator
+
+instance P.HasLocation (LogAnalyticsSolutionResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: LogAnalyticsSolutionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: LogAnalyticsSolutionResource s)
+
+instance P.HasPlan (LogAnalyticsSolutionResource s) (TF.Attr s (PlanSetting s)) where
+    plan =
+        P.lens (_plan :: LogAnalyticsSolutionResource s -> TF.Attr s (PlanSetting s))
+               (\s a -> s { _plan = a } :: LogAnalyticsSolutionResource s)
+
+instance P.HasResourceGroupName (LogAnalyticsSolutionResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: LogAnalyticsSolutionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: LogAnalyticsSolutionResource s)
+
+instance P.HasSolutionName (LogAnalyticsSolutionResource s) (TF.Attr s P.Text) where
+    solutionName =
+        P.lens (_solutionName :: LogAnalyticsSolutionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _solutionName = a } :: LogAnalyticsSolutionResource s)
+
+instance P.HasWorkspaceName (LogAnalyticsSolutionResource s) (TF.Attr s P.Text) where
+    workspaceName =
+        P.lens (_workspaceName :: LogAnalyticsSolutionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _workspaceName = a } :: LogAnalyticsSolutionResource s)
+
+instance P.HasWorkspaceResourceId (LogAnalyticsSolutionResource s) (TF.Attr s P.Text) where
+    workspaceResourceId =
+        P.lens (_workspaceResourceId :: LogAnalyticsSolutionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _workspaceResourceId = a } :: LogAnalyticsSolutionResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogAnalyticsSolutionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_log_analytics_workspace@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/log_analytics_workspace.html terraform documentation>
+-- for more information.
+data LogAnalyticsWorkspaceResource s = LogAnalyticsWorkspaceResource'
+    { _location          :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _retentionInDays   :: TF.Attr s P.Int
+    -- ^ @retention_in_days@ - (Optional)
+    --
+    , _sku               :: TF.Attr s P.Text
+    -- ^ @sku@ - (Required, Forces New)
+    --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_log_analytics_workspace@ resource value.
+logAnalyticsWorkspaceResource
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @sku@ ('P._sku', 'P.sku')
+    -> P.Resource (LogAnalyticsWorkspaceResource s)
+logAnalyticsWorkspaceResource _location _name _resourceGroupName _sku =
+    TF.unsafeResource "azurerm_log_analytics_workspace" TF.validator $
+        LogAnalyticsWorkspaceResource'
+            { _location = _location
+            , _name = _name
+            , _resourceGroupName = _resourceGroupName
+            , _retentionInDays = TF.Nil
+            , _sku = _sku
+            , _tags = TF.Nil
+            }
+
+instance TF.IsObject (LogAnalyticsWorkspaceResource s) where
+    toObject LogAnalyticsWorkspaceResource'{..} = P.catMaybes
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "retention_in_days" <$> TF.attribute _retentionInDays
+        , TF.assign "sku" <$> TF.attribute _sku
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance TF.IsValid (LogAnalyticsWorkspaceResource s) where
+    validator = P.mempty
+
+instance P.HasLocation (LogAnalyticsWorkspaceResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: LogAnalyticsWorkspaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: LogAnalyticsWorkspaceResource s)
+
+instance P.HasName (LogAnalyticsWorkspaceResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LogAnalyticsWorkspaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LogAnalyticsWorkspaceResource s)
+
+instance P.HasResourceGroupName (LogAnalyticsWorkspaceResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: LogAnalyticsWorkspaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: LogAnalyticsWorkspaceResource s)
+
+instance P.HasRetentionInDays (LogAnalyticsWorkspaceResource s) (TF.Attr s P.Int) where
+    retentionInDays =
+        P.lens (_retentionInDays :: LogAnalyticsWorkspaceResource s -> TF.Attr s P.Int)
+               (\s a -> s { _retentionInDays = a } :: LogAnalyticsWorkspaceResource s)
+
+instance P.HasSku (LogAnalyticsWorkspaceResource s) (TF.Attr s P.Text) where
+    sku =
+        P.lens (_sku :: LogAnalyticsWorkspaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sku = a } :: LogAnalyticsWorkspaceResource s)
+
+instance P.HasTags (LogAnalyticsWorkspaceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: LogAnalyticsWorkspaceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: LogAnalyticsWorkspaceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogAnalyticsWorkspaceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedPortalUrl (TF.Ref s' (LogAnalyticsWorkspaceResource s)) (TF.Attr s P.Text) where
+    computedPortalUrl x = TF.compute (TF.refKey x) "portal_url"
+
+instance s ~ s' => P.HasComputedPrimarySharedKey (TF.Ref s' (LogAnalyticsWorkspaceResource s)) (TF.Attr s P.Text) where
+    computedPrimarySharedKey x = TF.compute (TF.refKey x) "primary_shared_key"
+
+instance s ~ s' => P.HasComputedRetentionInDays (TF.Ref s' (LogAnalyticsWorkspaceResource s)) (TF.Attr s P.Int) where
+    computedRetentionInDays x = TF.compute (TF.refKey x) "retention_in_days"
+
+instance s ~ s' => P.HasComputedSecondarySharedKey (TF.Ref s' (LogAnalyticsWorkspaceResource s)) (TF.Attr s P.Text) where
+    computedSecondarySharedKey x = TF.compute (TF.refKey x) "secondary_shared_key"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (LogAnalyticsWorkspaceResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+instance s ~ s' => P.HasComputedWorkspaceId (TF.Ref s' (LogAnalyticsWorkspaceResource s)) (TF.Attr s P.Text) where
+    computedWorkspaceId x = TF.compute (TF.refKey x) "workspace_id"
+
+-- | @azurerm_logic_app_action_custom@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/logic_app_action_custom.html terraform documentation>
+-- for more information.
+data LogicAppActionCustomResource s = LogicAppActionCustomResource'
+    { _body       :: TF.Attr s P.Text
+    -- ^ @body@ - (Required)
+    --
+    , _logicAppId :: TF.Attr s P.Text
+    -- ^ @logic_app_id@ - (Required, Forces New)
+    --
+    , _name       :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_logic_app_action_custom@ resource value.
+logicAppActionCustomResource
+    :: TF.Attr s P.Text -- ^ @body@ ('P._body', 'P.body')
+    -> TF.Attr s P.Text -- ^ @logic_app_id@ ('P._logicAppId', 'P.logicAppId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (LogicAppActionCustomResource s)
+logicAppActionCustomResource _body _logicAppId _name =
+    TF.unsafeResource "azurerm_logic_app_action_custom" TF.validator $
+        LogicAppActionCustomResource'
+            { _body = _body
+            , _logicAppId = _logicAppId
+            , _name = _name
+            }
+
+instance TF.IsObject (LogicAppActionCustomResource s) where
+    toObject LogicAppActionCustomResource'{..} = P.catMaybes
+        [ TF.assign "body" <$> TF.attribute _body
+        , TF.assign "logic_app_id" <$> TF.attribute _logicAppId
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (LogicAppActionCustomResource s) where
+    validator = P.mempty
+
+instance P.HasBody (LogicAppActionCustomResource s) (TF.Attr s P.Text) where
+    body =
+        P.lens (_body :: LogicAppActionCustomResource s -> TF.Attr s P.Text)
+               (\s a -> s { _body = a } :: LogicAppActionCustomResource s)
+
+instance P.HasLogicAppId (LogicAppActionCustomResource s) (TF.Attr s P.Text) where
+    logicAppId =
+        P.lens (_logicAppId :: LogicAppActionCustomResource s -> TF.Attr s P.Text)
+               (\s a -> s { _logicAppId = a } :: LogicAppActionCustomResource s)
+
+instance P.HasName (LogicAppActionCustomResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LogicAppActionCustomResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LogicAppActionCustomResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogicAppActionCustomResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_logic_app_action_http@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/logic_app_action_http.html terraform documentation>
+-- for more information.
+data LogicAppActionHttpResource s = LogicAppActionHttpResource'
+    { _body       :: TF.Attr s P.Text
+    -- ^ @body@ - (Optional)
+    --
+    , _headers    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @headers@ - (Optional)
+    --
+    , _logicAppId :: TF.Attr s P.Text
+    -- ^ @logic_app_id@ - (Required, Forces New)
+    --
+    , _method     :: TF.Attr s P.Text
+    -- ^ @method@ - (Required)
+    --
+    , _name       :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _uri        :: TF.Attr s P.Text
+    -- ^ @uri@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_logic_app_action_http@ resource value.
+logicAppActionHttpResource
+    :: TF.Attr s P.Text -- ^ @logic_app_id@ ('P._logicAppId', 'P.logicAppId')
+    -> TF.Attr s P.Text -- ^ @method@ ('P._method', 'P.method')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @uri@ ('P._uri', 'P.uri')
+    -> P.Resource (LogicAppActionHttpResource s)
+logicAppActionHttpResource _logicAppId _method _name _uri =
+    TF.unsafeResource "azurerm_logic_app_action_http" TF.validator $
+        LogicAppActionHttpResource'
+            { _body = TF.Nil
+            , _headers = TF.Nil
+            , _logicAppId = _logicAppId
+            , _method = _method
+            , _name = _name
+            , _uri = _uri
+            }
+
+instance TF.IsObject (LogicAppActionHttpResource s) where
+    toObject LogicAppActionHttpResource'{..} = P.catMaybes
+        [ TF.assign "body" <$> TF.attribute _body
+        , TF.assign "headers" <$> TF.attribute _headers
+        , TF.assign "logic_app_id" <$> TF.attribute _logicAppId
+        , TF.assign "method" <$> TF.attribute _method
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "uri" <$> TF.attribute _uri
+        ]
+
+instance TF.IsValid (LogicAppActionHttpResource s) where
+    validator = P.mempty
+
+instance P.HasBody (LogicAppActionHttpResource s) (TF.Attr s P.Text) where
+    body =
+        P.lens (_body :: LogicAppActionHttpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _body = a } :: LogicAppActionHttpResource s)
+
+instance P.HasHeaders (LogicAppActionHttpResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    headers =
+        P.lens (_headers :: LogicAppActionHttpResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _headers = a } :: LogicAppActionHttpResource s)
+
+instance P.HasLogicAppId (LogicAppActionHttpResource s) (TF.Attr s P.Text) where
+    logicAppId =
+        P.lens (_logicAppId :: LogicAppActionHttpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _logicAppId = a } :: LogicAppActionHttpResource s)
+
+instance P.HasMethod (LogicAppActionHttpResource s) (TF.Attr s P.Text) where
+    method =
+        P.lens (_method :: LogicAppActionHttpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _method = a } :: LogicAppActionHttpResource s)
+
+instance P.HasName (LogicAppActionHttpResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LogicAppActionHttpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LogicAppActionHttpResource s)
+
+instance P.HasUri (LogicAppActionHttpResource s) (TF.Attr s P.Text) where
+    uri =
+        P.lens (_uri :: LogicAppActionHttpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _uri = a } :: LogicAppActionHttpResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogicAppActionHttpResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_logic_app_trigger_custom@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/logic_app_trigger_custom.html terraform documentation>
+-- for more information.
+data LogicAppTriggerCustomResource s = LogicAppTriggerCustomResource'
+    { _body       :: TF.Attr s P.Text
+    -- ^ @body@ - (Required)
+    --
+    , _logicAppId :: TF.Attr s P.Text
+    -- ^ @logic_app_id@ - (Required, Forces New)
+    --
+    , _name       :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_logic_app_trigger_custom@ resource value.
+logicAppTriggerCustomResource
+    :: TF.Attr s P.Text -- ^ @body@ ('P._body', 'P.body')
+    -> TF.Attr s P.Text -- ^ @logic_app_id@ ('P._logicAppId', 'P.logicAppId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (LogicAppTriggerCustomResource s)
+logicAppTriggerCustomResource _body _logicAppId _name =
+    TF.unsafeResource "azurerm_logic_app_trigger_custom" TF.validator $
+        LogicAppTriggerCustomResource'
+            { _body = _body
+            , _logicAppId = _logicAppId
+            , _name = _name
+            }
+
+instance TF.IsObject (LogicAppTriggerCustomResource s) where
+    toObject LogicAppTriggerCustomResource'{..} = P.catMaybes
+        [ TF.assign "body" <$> TF.attribute _body
+        , TF.assign "logic_app_id" <$> TF.attribute _logicAppId
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (LogicAppTriggerCustomResource s) where
+    validator = P.mempty
+
+instance P.HasBody (LogicAppTriggerCustomResource s) (TF.Attr s P.Text) where
+    body =
+        P.lens (_body :: LogicAppTriggerCustomResource s -> TF.Attr s P.Text)
+               (\s a -> s { _body = a } :: LogicAppTriggerCustomResource s)
+
+instance P.HasLogicAppId (LogicAppTriggerCustomResource s) (TF.Attr s P.Text) where
+    logicAppId =
+        P.lens (_logicAppId :: LogicAppTriggerCustomResource s -> TF.Attr s P.Text)
+               (\s a -> s { _logicAppId = a } :: LogicAppTriggerCustomResource s)
+
+instance P.HasName (LogicAppTriggerCustomResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LogicAppTriggerCustomResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LogicAppTriggerCustomResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogicAppTriggerCustomResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_logic_app_trigger_http_request@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/logic_app_trigger_http_request.html terraform documentation>
+-- for more information.
+data LogicAppTriggerHttpRequestResource s = LogicAppTriggerHttpRequestResource'
+    { _logicAppId   :: TF.Attr s P.Text
+    -- ^ @logic_app_id@ - (Required, Forces New)
+    --
+    , _method       :: TF.Attr s P.Text
+    -- ^ @method@ - (Optional)
+    --
+    , _name         :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _relativePath :: TF.Attr s P.Text
+    -- ^ @relative_path@ - (Optional)
+    --
+    , _schema       :: TF.Attr s P.Text
+    -- ^ @schema@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_logic_app_trigger_http_request@ resource value.
+logicAppTriggerHttpRequestResource
+    :: TF.Attr s P.Text -- ^ @logic_app_id@ ('P._logicAppId', 'P.logicAppId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @schema@ ('P._schema', 'P.schema')
+    -> P.Resource (LogicAppTriggerHttpRequestResource s)
+logicAppTriggerHttpRequestResource _logicAppId _name _schema =
+    TF.unsafeResource "azurerm_logic_app_trigger_http_request" TF.validator $
+        LogicAppTriggerHttpRequestResource'
+            { _logicAppId = _logicAppId
+            , _method = TF.Nil
+            , _name = _name
+            , _relativePath = TF.Nil
+            , _schema = _schema
+            }
+
+instance TF.IsObject (LogicAppTriggerHttpRequestResource s) where
+    toObject LogicAppTriggerHttpRequestResource'{..} = P.catMaybes
+        [ TF.assign "logic_app_id" <$> TF.attribute _logicAppId
+        , TF.assign "method" <$> TF.attribute _method
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "relative_path" <$> TF.attribute _relativePath
+        , TF.assign "schema" <$> TF.attribute _schema
+        ]
+
+instance TF.IsValid (LogicAppTriggerHttpRequestResource s) where
+    validator = P.mempty
+
+instance P.HasLogicAppId (LogicAppTriggerHttpRequestResource s) (TF.Attr s P.Text) where
+    logicAppId =
+        P.lens (_logicAppId :: LogicAppTriggerHttpRequestResource s -> TF.Attr s P.Text)
+               (\s a -> s { _logicAppId = a } :: LogicAppTriggerHttpRequestResource s)
+
+instance P.HasMethod (LogicAppTriggerHttpRequestResource s) (TF.Attr s P.Text) where
+    method =
+        P.lens (_method :: LogicAppTriggerHttpRequestResource s -> TF.Attr s P.Text)
+               (\s a -> s { _method = a } :: LogicAppTriggerHttpRequestResource s)
+
+instance P.HasName (LogicAppTriggerHttpRequestResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LogicAppTriggerHttpRequestResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LogicAppTriggerHttpRequestResource s)
+
+instance P.HasRelativePath (LogicAppTriggerHttpRequestResource s) (TF.Attr s P.Text) where
+    relativePath =
+        P.lens (_relativePath :: LogicAppTriggerHttpRequestResource s -> TF.Attr s P.Text)
+               (\s a -> s { _relativePath = a } :: LogicAppTriggerHttpRequestResource s)
+
+instance P.HasSchema (LogicAppTriggerHttpRequestResource s) (TF.Attr s P.Text) where
+    schema =
+        P.lens (_schema :: LogicAppTriggerHttpRequestResource s -> TF.Attr s P.Text)
+               (\s a -> s { _schema = a } :: LogicAppTriggerHttpRequestResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogicAppTriggerHttpRequestResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_logic_app_trigger_recurrence@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/logic_app_trigger_recurrence.html terraform documentation>
+-- for more information.
+data LogicAppTriggerRecurrenceResource s = LogicAppTriggerRecurrenceResource'
+    { _frequency  :: TF.Attr s P.Text
+    -- ^ @frequency@ - (Required)
+    --
+    , _interval   :: TF.Attr s P.Int
+    -- ^ @interval@ - (Required)
+    --
+    , _logicAppId :: TF.Attr s P.Text
+    -- ^ @logic_app_id@ - (Required, Forces New)
+    --
+    , _name       :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_logic_app_trigger_recurrence@ resource value.
+logicAppTriggerRecurrenceResource
+    :: TF.Attr s P.Text -- ^ @frequency@ ('P._frequency', 'P.frequency')
+    -> TF.Attr s P.Text -- ^ @logic_app_id@ ('P._logicAppId', 'P.logicAppId')
+    -> TF.Attr s P.Int -- ^ @interval@ ('P._interval', 'P.interval')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (LogicAppTriggerRecurrenceResource s)
+logicAppTriggerRecurrenceResource _frequency _logicAppId _interval _name =
+    TF.unsafeResource "azurerm_logic_app_trigger_recurrence" TF.validator $
+        LogicAppTriggerRecurrenceResource'
+            { _frequency = _frequency
+            , _interval = _interval
+            , _logicAppId = _logicAppId
+            , _name = _name
+            }
+
+instance TF.IsObject (LogicAppTriggerRecurrenceResource s) where
+    toObject LogicAppTriggerRecurrenceResource'{..} = P.catMaybes
+        [ TF.assign "frequency" <$> TF.attribute _frequency
+        , TF.assign "interval" <$> TF.attribute _interval
+        , TF.assign "logic_app_id" <$> TF.attribute _logicAppId
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (LogicAppTriggerRecurrenceResource s) where
+    validator = P.mempty
+
+instance P.HasFrequency (LogicAppTriggerRecurrenceResource s) (TF.Attr s P.Text) where
+    frequency =
+        P.lens (_frequency :: LogicAppTriggerRecurrenceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _frequency = a } :: LogicAppTriggerRecurrenceResource s)
+
+instance P.HasInterval (LogicAppTriggerRecurrenceResource s) (TF.Attr s P.Int) where
+    interval =
+        P.lens (_interval :: LogicAppTriggerRecurrenceResource s -> TF.Attr s P.Int)
+               (\s a -> s { _interval = a } :: LogicAppTriggerRecurrenceResource s)
+
+instance P.HasLogicAppId (LogicAppTriggerRecurrenceResource s) (TF.Attr s P.Text) where
+    logicAppId =
+        P.lens (_logicAppId :: LogicAppTriggerRecurrenceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _logicAppId = a } :: LogicAppTriggerRecurrenceResource s)
+
+instance P.HasName (LogicAppTriggerRecurrenceResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LogicAppTriggerRecurrenceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LogicAppTriggerRecurrenceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogicAppTriggerRecurrenceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_logic_app_workflow@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/logic_app_workflow.html terraform documentation>
+-- for more information.
+data LogicAppWorkflowResource s = LogicAppWorkflowResource'
+    { _location          :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _parameters        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @parameters@ - (Optional)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _workflowSchema    :: TF.Attr s P.Text
+    -- ^ @workflow_schema@ - (Optional, Forces New)
+    --
+    , _workflowVersion   :: TF.Attr s P.Text
+    -- ^ @workflow_version@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_logic_app_workflow@ resource value.
+logicAppWorkflowResource
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> P.Resource (LogicAppWorkflowResource s)
+logicAppWorkflowResource _location _name _resourceGroupName =
+    TF.unsafeResource "azurerm_logic_app_workflow" TF.validator $
+        LogicAppWorkflowResource'
+            { _location = _location
+            , _name = _name
+            , _parameters = TF.Nil
+            , _resourceGroupName = _resourceGroupName
+            , _tags = TF.Nil
+            , _workflowSchema = TF.value "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#"
+            , _workflowVersion = TF.value "1.0.0.0"
+            }
+
+instance TF.IsObject (LogicAppWorkflowResource s) where
+    toObject LogicAppWorkflowResource'{..} = P.catMaybes
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parameters" <$> TF.attribute _parameters
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "workflow_schema" <$> TF.attribute _workflowSchema
+        , TF.assign "workflow_version" <$> TF.attribute _workflowVersion
+        ]
+
+instance TF.IsValid (LogicAppWorkflowResource s) where
+    validator = P.mempty
+
+instance P.HasLocation (LogicAppWorkflowResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: LogicAppWorkflowResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: LogicAppWorkflowResource s)
+
+instance P.HasName (LogicAppWorkflowResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LogicAppWorkflowResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LogicAppWorkflowResource s)
+
+instance P.HasParameters (LogicAppWorkflowResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    parameters =
+        P.lens (_parameters :: LogicAppWorkflowResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _parameters = a } :: LogicAppWorkflowResource s)
+
+instance P.HasResourceGroupName (LogicAppWorkflowResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: LogicAppWorkflowResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: LogicAppWorkflowResource s)
+
+instance P.HasTags (LogicAppWorkflowResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: LogicAppWorkflowResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: LogicAppWorkflowResource s)
+
+instance P.HasWorkflowSchema (LogicAppWorkflowResource s) (TF.Attr s P.Text) where
+    workflowSchema =
+        P.lens (_workflowSchema :: LogicAppWorkflowResource s -> TF.Attr s P.Text)
+               (\s a -> s { _workflowSchema = a } :: LogicAppWorkflowResource s)
+
+instance P.HasWorkflowVersion (LogicAppWorkflowResource s) (TF.Attr s P.Text) where
+    workflowVersion =
+        P.lens (_workflowVersion :: LogicAppWorkflowResource s -> TF.Attr s P.Text)
+               (\s a -> s { _workflowVersion = a } :: LogicAppWorkflowResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogicAppWorkflowResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedAccessEndpoint (TF.Ref s' (LogicAppWorkflowResource s)) (TF.Attr s P.Text) where
+    computedAccessEndpoint x = TF.compute (TF.refKey x) "access_endpoint"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (LogicAppWorkflowResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+-- | @azurerm_managed_disk@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/managed_disk.html terraform documentation>
+-- for more information.
+data ManagedDiskResource s = ManagedDiskResource'
+    { _createOption       :: TF.Attr s P.Text
+    -- ^ @create_option@ - (Required, Forces New)
+    --
+    , _diskSizeGb         :: TF.Attr s P.Int
+    -- ^ @disk_size_gb@ - (Optional)
+    --
+    , _encryptionSettings :: TF.Attr s (EncryptionSettings s)
+    -- ^ @encryption_settings@ - (Optional)
+    --
+    , _imageReferenceId   :: TF.Attr s P.Text
+    -- ^ @image_reference_id@ - (Optional, Forces New)
+    --
+    , _location           :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name               :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _osType             :: TF.Attr s P.Text
+    -- ^ @os_type@ - (Optional)
+    --
+    , _resourceGroupName  :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _sourceResourceId   :: TF.Attr s P.Text
+    -- ^ @source_resource_id@ - (Optional, Forces New)
+    --
+    , _sourceUri          :: TF.Attr s P.Text
+    -- ^ @source_uri@ - (Optional, Forces New)
+    --
+    , _storageAccountType :: TF.Attr s P.Text
+    -- ^ @storage_account_type@ - (Required)
+    --
+    , _tags               :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _zones              :: TF.Attr s P.Text
+    -- ^ @zones@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_managed_disk@ resource value.
+managedDiskResource
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @create_option@ ('P._createOption', 'P.createOption')
+    -> TF.Attr s P.Text -- ^ @storage_account_type@ ('P._storageAccountType', 'P.storageAccountType')
+    -> P.Resource (ManagedDiskResource s)
+managedDiskResource _location _name _resourceGroupName _createOption _storageAccountType =
+    TF.unsafeResource "azurerm_managed_disk" TF.validator $
+        ManagedDiskResource'
+            { _createOption = _createOption
+            , _diskSizeGb = TF.Nil
+            , _encryptionSettings = TF.Nil
+            , _imageReferenceId = TF.Nil
+            , _location = _location
+            , _name = _name
+            , _osType = TF.Nil
+            , _resourceGroupName = _resourceGroupName
+            , _sourceResourceId = TF.Nil
+            , _sourceUri = TF.Nil
+            , _storageAccountType = _storageAccountType
+            , _tags = TF.Nil
+            , _zones = TF.Nil
+            }
+
+instance TF.IsObject (ManagedDiskResource s) where
+    toObject ManagedDiskResource'{..} = P.catMaybes
+        [ TF.assign "create_option" <$> TF.attribute _createOption
+        , TF.assign "disk_size_gb" <$> TF.attribute _diskSizeGb
+        , TF.assign "encryption_settings" <$> TF.attribute _encryptionSettings
+        , TF.assign "image_reference_id" <$> TF.attribute _imageReferenceId
+        , TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "os_type" <$> TF.attribute _osType
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "source_resource_id" <$> TF.attribute _sourceResourceId
+        , TF.assign "source_uri" <$> TF.attribute _sourceUri
+        , TF.assign "storage_account_type" <$> TF.attribute _storageAccountType
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "zones" <$> TF.attribute _zones
+        ]
+
+instance TF.IsValid (ManagedDiskResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_encryptionSettings"
+                  (_encryptionSettings
+                      :: ManagedDiskResource s -> TF.Attr s (EncryptionSettings s))
+                  TF.validator
+
+instance P.HasCreateOption (ManagedDiskResource s) (TF.Attr s P.Text) where
+    createOption =
+        P.lens (_createOption :: ManagedDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _createOption = a } :: ManagedDiskResource s)
+
+instance P.HasDiskSizeGb (ManagedDiskResource s) (TF.Attr s P.Int) where
+    diskSizeGb =
+        P.lens (_diskSizeGb :: ManagedDiskResource s -> TF.Attr s P.Int)
+               (\s a -> s { _diskSizeGb = a } :: ManagedDiskResource s)
+
+instance P.HasEncryptionSettings (ManagedDiskResource s) (TF.Attr s (EncryptionSettings s)) where
+    encryptionSettings =
+        P.lens (_encryptionSettings :: ManagedDiskResource s -> TF.Attr s (EncryptionSettings s))
+               (\s a -> s { _encryptionSettings = a } :: ManagedDiskResource s)
+
+instance P.HasImageReferenceId (ManagedDiskResource s) (TF.Attr s P.Text) where
+    imageReferenceId =
+        P.lens (_imageReferenceId :: ManagedDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _imageReferenceId = a } :: ManagedDiskResource s)
+
+instance P.HasLocation (ManagedDiskResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: ManagedDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: ManagedDiskResource s)
+
+instance P.HasName (ManagedDiskResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ManagedDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ManagedDiskResource s)
+
+instance P.HasOsType (ManagedDiskResource s) (TF.Attr s P.Text) where
+    osType =
+        P.lens (_osType :: ManagedDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _osType = a } :: ManagedDiskResource s)
+
+instance P.HasResourceGroupName (ManagedDiskResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: ManagedDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: ManagedDiskResource s)
+
+instance P.HasSourceResourceId (ManagedDiskResource s) (TF.Attr s P.Text) where
+    sourceResourceId =
+        P.lens (_sourceResourceId :: ManagedDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceResourceId = a } :: ManagedDiskResource s)
+
+instance P.HasSourceUri (ManagedDiskResource s) (TF.Attr s P.Text) where
+    sourceUri =
+        P.lens (_sourceUri :: ManagedDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceUri = a } :: ManagedDiskResource s)
+
+instance P.HasStorageAccountType (ManagedDiskResource s) (TF.Attr s P.Text) where
+    storageAccountType =
+        P.lens (_storageAccountType :: ManagedDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _storageAccountType = a } :: ManagedDiskResource s)
+
+instance P.HasTags (ManagedDiskResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: ManagedDiskResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: ManagedDiskResource s)
+
+instance P.HasZones (ManagedDiskResource s) (TF.Attr s P.Text) where
+    zones =
+        P.lens (_zones :: ManagedDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zones = a } :: ManagedDiskResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ManagedDiskResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedDiskSizeGb (TF.Ref s' (ManagedDiskResource s)) (TF.Attr s P.Int) where
+    computedDiskSizeGb x = TF.compute (TF.refKey x) "disk_size_gb"
+
+instance s ~ s' => P.HasComputedSourceUri (TF.Ref s' (ManagedDiskResource s)) (TF.Attr s P.Text) where
+    computedSourceUri x = TF.compute (TF.refKey x) "source_uri"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ManagedDiskResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+-- | @azurerm_management_lock@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/management_lock.html terraform documentation>
+-- for more information.
+data ManagementLockResource s = ManagementLockResource'
+    { _lockLevel :: TF.Attr s P.Text
+    -- ^ @lock_level@ - (Required, Forces New)
+    --
+    , _name      :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _notes     :: TF.Attr s P.Text
+    -- ^ @notes@ - (Optional, Forces New)
+    --
+    , _scope     :: TF.Attr s P.Text
+    -- ^ @scope@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_management_lock@ resource value.
+managementLockResource
+    :: TF.Attr s P.Text -- ^ @lock_level@ ('P._lockLevel', 'P.lockLevel')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @scope@ ('P._scope', 'P.scope')
+    -> P.Resource (ManagementLockResource s)
+managementLockResource _lockLevel _name _scope =
+    TF.unsafeResource "azurerm_management_lock" TF.validator $
+        ManagementLockResource'
+            { _lockLevel = _lockLevel
+            , _name = _name
+            , _notes = TF.Nil
+            , _scope = _scope
+            }
+
+instance TF.IsObject (ManagementLockResource s) where
+    toObject ManagementLockResource'{..} = P.catMaybes
+        [ TF.assign "lock_level" <$> TF.attribute _lockLevel
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "notes" <$> TF.attribute _notes
+        , TF.assign "scope" <$> TF.attribute _scope
+        ]
+
+instance TF.IsValid (ManagementLockResource s) where
+    validator = P.mempty
+
+instance P.HasLockLevel (ManagementLockResource s) (TF.Attr s P.Text) where
+    lockLevel =
+        P.lens (_lockLevel :: ManagementLockResource s -> TF.Attr s P.Text)
+               (\s a -> s { _lockLevel = a } :: ManagementLockResource s)
+
+instance P.HasName (ManagementLockResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ManagementLockResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ManagementLockResource s)
+
+instance P.HasNotes (ManagementLockResource s) (TF.Attr s P.Text) where
+    notes =
+        P.lens (_notes :: ManagementLockResource s -> TF.Attr s P.Text)
+               (\s a -> s { _notes = a } :: ManagementLockResource s)
+
+instance P.HasScope (ManagementLockResource s) (TF.Attr s P.Text) where
+    scope =
+        P.lens (_scope :: ManagementLockResource s -> TF.Attr s P.Text)
+               (\s a -> s { _scope = a } :: ManagementLockResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ManagementLockResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_metric_alertrule@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/metric_alertrule.html terraform documentation>
+-- for more information.
+data MetricAlertruleResource s = MetricAlertruleResource'
+    { _aggregation       :: TF.Attr s P.Text
+    -- ^ @aggregation@ - (Required)
+    --
+    , _description       :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _emailAction       :: TF.Attr s (EmailActionSetting s)
+    -- ^ @email_action@ - (Optional)
+    --
+    , _enabled           :: TF.Attr s P.Bool
+    -- ^ @enabled@ - (Optional)
+    --
+    , _location          :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _metricName        :: TF.Attr s P.Text
+    -- ^ @metric_name@ - (Required)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _operator          :: TF.Attr s P.Text
+    -- ^ @operator@ - (Required)
+    --
+    , _period            :: TF.Attr s P.Text
+    -- ^ @period@ - (Required)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _resourceId        :: TF.Attr s P.Text
+    -- ^ @resource_id@ - (Required)
+    --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _threshold         :: TF.Attr s P.Double
+    -- ^ @threshold@ - (Required)
+    --
+    , _webhookAction     :: TF.Attr s (WebhookActionSetting s)
+    -- ^ @webhook_action@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_metric_alertrule@ resource value.
+metricAlertruleResource
+    :: TF.Attr s P.Text -- ^ @aggregation@ ('P._aggregation', 'P.aggregation')
+    -> TF.Attr s P.Text -- ^ @resource_id@ ('P._resourceId', 'P.resourceId')
+    -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @metric_name@ ('P._metricName', 'P.metricName')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @operator@ ('P._operator', 'P.operator')
+    -> TF.Attr s P.Text -- ^ @period@ ('P._period', 'P.period')
+    -> TF.Attr s P.Double -- ^ @threshold@ ('P._threshold', 'P.threshold')
+    -> P.Resource (MetricAlertruleResource s)
+metricAlertruleResource _aggregation _resourceId _location _metricName _name _resourceGroupName _operator _period _threshold =
+    TF.unsafeResource "azurerm_metric_alertrule" TF.validator $
+        MetricAlertruleResource'
+            { _aggregation = _aggregation
+            , _description = TF.Nil
+            , _emailAction = TF.Nil
+            , _enabled = TF.value P.True
+            , _location = _location
+            , _metricName = _metricName
+            , _name = _name
+            , _operator = _operator
+            , _period = _period
+            , _resourceGroupName = _resourceGroupName
+            , _resourceId = _resourceId
+            , _tags = TF.Nil
+            , _threshold = _threshold
+            , _webhookAction = TF.Nil
+            }
+
+instance TF.IsObject (MetricAlertruleResource s) where
+    toObject MetricAlertruleResource'{..} = P.catMaybes
+        [ TF.assign "aggregation" <$> TF.attribute _aggregation
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "email_action" <$> TF.attribute _emailAction
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "location" <$> TF.attribute _location
+        , TF.assign "metric_name" <$> TF.attribute _metricName
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "operator" <$> TF.attribute _operator
+        , TF.assign "period" <$> TF.attribute _period
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "resource_id" <$> TF.attribute _resourceId
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "threshold" <$> TF.attribute _threshold
+        , TF.assign "webhook_action" <$> TF.attribute _webhookAction
+        ]
+
+instance TF.IsValid (MetricAlertruleResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_emailAction"
+                  (_emailAction
+                      :: MetricAlertruleResource s -> TF.Attr s (EmailActionSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_webhookAction"
+                  (_webhookAction
+                      :: MetricAlertruleResource s -> TF.Attr s (WebhookActionSetting s))
+                  TF.validator
+
+instance P.HasAggregation (MetricAlertruleResource s) (TF.Attr s P.Text) where
+    aggregation =
+        P.lens (_aggregation :: MetricAlertruleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _aggregation = a } :: MetricAlertruleResource s)
+
+instance P.HasDescription (MetricAlertruleResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: MetricAlertruleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: MetricAlertruleResource s)
+
+instance P.HasEmailAction (MetricAlertruleResource s) (TF.Attr s (EmailActionSetting s)) where
+    emailAction =
+        P.lens (_emailAction :: MetricAlertruleResource s -> TF.Attr s (EmailActionSetting s))
+               (\s a -> s { _emailAction = a } :: MetricAlertruleResource s)
+
+instance P.HasEnabled (MetricAlertruleResource s) (TF.Attr s P.Bool) where
+    enabled =
+        P.lens (_enabled :: MetricAlertruleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enabled = a } :: MetricAlertruleResource s)
+
+instance P.HasLocation (MetricAlertruleResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: MetricAlertruleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: MetricAlertruleResource s)
+
+instance P.HasMetricName (MetricAlertruleResource s) (TF.Attr s P.Text) where
+    metricName =
+        P.lens (_metricName :: MetricAlertruleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _metricName = a } :: MetricAlertruleResource s)
+
+instance P.HasName (MetricAlertruleResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: MetricAlertruleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: MetricAlertruleResource s)
+
+instance P.HasOperator (MetricAlertruleResource s) (TF.Attr s P.Text) where
+    operator =
+        P.lens (_operator :: MetricAlertruleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _operator = a } :: MetricAlertruleResource s)
+
+instance P.HasPeriod (MetricAlertruleResource s) (TF.Attr s P.Text) where
+    period =
+        P.lens (_period :: MetricAlertruleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _period = a } :: MetricAlertruleResource s)
+
+instance P.HasResourceGroupName (MetricAlertruleResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: MetricAlertruleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: MetricAlertruleResource s)
+
+instance P.HasResourceId (MetricAlertruleResource s) (TF.Attr s P.Text) where
+    resourceId =
+        P.lens (_resourceId :: MetricAlertruleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceId = a } :: MetricAlertruleResource s)
+
+instance P.HasTags (MetricAlertruleResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: MetricAlertruleResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: MetricAlertruleResource s)
+
+instance P.HasThreshold (MetricAlertruleResource s) (TF.Attr s P.Double) where
+    threshold =
+        P.lens (_threshold :: MetricAlertruleResource s -> TF.Attr s P.Double)
+               (\s a -> s { _threshold = a } :: MetricAlertruleResource s)
+
+instance P.HasWebhookAction (MetricAlertruleResource s) (TF.Attr s (WebhookActionSetting s)) where
+    webhookAction =
+        P.lens (_webhookAction :: MetricAlertruleResource s -> TF.Attr s (WebhookActionSetting s))
+               (\s a -> s { _webhookAction = a } :: MetricAlertruleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MetricAlertruleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (MetricAlertruleResource s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedEmailAction (TF.Ref s' (MetricAlertruleResource s)) (TF.Attr s (EmailActionSetting s)) where
+    computedEmailAction x = TF.compute (TF.refKey x) "email_action"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (MetricAlertruleResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+instance s ~ s' => P.HasComputedWebhookAction (TF.Ref s' (MetricAlertruleResource s)) (TF.Attr s (WebhookActionSetting s)) where
+    computedWebhookAction x = TF.compute (TF.refKey x) "webhook_action"
+
+-- | @azurerm_monitor_action_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/monitor_action_group.html terraform documentation>
+-- for more information.
+data MonitorActionGroupResource s = MonitorActionGroupResource'
+    { _emailReceiver     :: TF.Attr s [TF.Attr s (EmailReceiverSetting s)]
+    -- ^ @email_receiver@ - (Optional)
+    --
+    , _enabled           :: TF.Attr s P.Bool
+    -- ^ @enabled@ - (Optional)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _shortName         :: TF.Attr s P.Text
+    -- ^ @short_name@ - (Required)
+    --
+    , _smsReceiver       :: TF.Attr s [TF.Attr s (SmsReceiverSetting s)]
+    -- ^ @sms_receiver@ - (Optional)
+    --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _webhookReceiver   :: TF.Attr s [TF.Attr s (WebhookReceiverSetting s)]
+    -- ^ @webhook_receiver@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_monitor_action_group@ resource value.
+monitorActionGroupResource
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @short_name@ ('P._shortName', 'P.shortName')
+    -> P.Resource (MonitorActionGroupResource s)
+monitorActionGroupResource _name _resourceGroupName _shortName =
+    TF.unsafeResource "azurerm_monitor_action_group" TF.validator $
+        MonitorActionGroupResource'
+            { _emailReceiver = TF.Nil
+            , _enabled = TF.value P.True
+            , _name = _name
+            , _resourceGroupName = _resourceGroupName
+            , _shortName = _shortName
+            , _smsReceiver = TF.Nil
+            , _tags = TF.Nil
+            , _webhookReceiver = TF.Nil
+            }
+
+instance TF.IsObject (MonitorActionGroupResource s) where
+    toObject MonitorActionGroupResource'{..} = P.catMaybes
+        [ TF.assign "email_receiver" <$> TF.attribute _emailReceiver
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "short_name" <$> TF.attribute _shortName
+        , TF.assign "sms_receiver" <$> TF.attribute _smsReceiver
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "webhook_receiver" <$> TF.attribute _webhookReceiver
+        ]
+
+instance TF.IsValid (MonitorActionGroupResource s) where
+    validator = P.mempty
+
+instance P.HasEmailReceiver (MonitorActionGroupResource s) (TF.Attr s [TF.Attr s (EmailReceiverSetting s)]) where
+    emailReceiver =
+        P.lens (_emailReceiver :: MonitorActionGroupResource s -> TF.Attr s [TF.Attr s (EmailReceiverSetting s)])
+               (\s a -> s { _emailReceiver = a } :: MonitorActionGroupResource s)
+
+instance P.HasEnabled (MonitorActionGroupResource s) (TF.Attr s P.Bool) where
+    enabled =
+        P.lens (_enabled :: MonitorActionGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enabled = a } :: MonitorActionGroupResource s)
+
+instance P.HasName (MonitorActionGroupResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: MonitorActionGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: MonitorActionGroupResource s)
+
+instance P.HasResourceGroupName (MonitorActionGroupResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: MonitorActionGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: MonitorActionGroupResource s)
+
+instance P.HasShortName (MonitorActionGroupResource s) (TF.Attr s P.Text) where
+    shortName =
+        P.lens (_shortName :: MonitorActionGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _shortName = a } :: MonitorActionGroupResource s)
+
+instance P.HasSmsReceiver (MonitorActionGroupResource s) (TF.Attr s [TF.Attr s (SmsReceiverSetting s)]) where
+    smsReceiver =
+        P.lens (_smsReceiver :: MonitorActionGroupResource s -> TF.Attr s [TF.Attr s (SmsReceiverSetting s)])
+               (\s a -> s { _smsReceiver = a } :: MonitorActionGroupResource s)
+
+instance P.HasTags (MonitorActionGroupResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: MonitorActionGroupResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: MonitorActionGroupResource s)
+
+instance P.HasWebhookReceiver (MonitorActionGroupResource s) (TF.Attr s [TF.Attr s (WebhookReceiverSetting s)]) where
+    webhookReceiver =
+        P.lens (_webhookReceiver :: MonitorActionGroupResource s -> TF.Attr s [TF.Attr s (WebhookReceiverSetting s)])
+               (\s a -> s { _webhookReceiver = a } :: MonitorActionGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MonitorActionGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (MonitorActionGroupResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+-- | @azurerm_mysql_configuration@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/mysql_configuration.html terraform documentation>
+-- for more information.
+data MysqlConfigurationResource s = MysqlConfigurationResource'
+    { _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _serverName        :: TF.Attr s P.Text
+    -- ^ @server_name@ - (Required, Forces New)
+    --
+    , _value             :: TF.Attr s P.Text
+    -- ^ @value@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_mysql_configuration@ resource value.
+mysqlConfigurationResource
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @server_name@ ('P._serverName', 'P.serverName')
+    -> TF.Attr s P.Text -- ^ @value@ ('P._value', 'P.value')
+    -> P.Resource (MysqlConfigurationResource s)
+mysqlConfigurationResource _name _resourceGroupName _serverName _value =
+    TF.unsafeResource "azurerm_mysql_configuration" TF.validator $
+        MysqlConfigurationResource'
+            { _name = _name
+            , _resourceGroupName = _resourceGroupName
+            , _serverName = _serverName
+            , _value = _value
+            }
+
+instance TF.IsObject (MysqlConfigurationResource s) where
+    toObject MysqlConfigurationResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "server_name" <$> TF.attribute _serverName
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (MysqlConfigurationResource s) where
+    validator = P.mempty
+
+instance P.HasName (MysqlConfigurationResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: MysqlConfigurationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: MysqlConfigurationResource s)
+
+instance P.HasResourceGroupName (MysqlConfigurationResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: MysqlConfigurationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: MysqlConfigurationResource s)
+
+instance P.HasServerName (MysqlConfigurationResource s) (TF.Attr s P.Text) where
+    serverName =
+        P.lens (_serverName :: MysqlConfigurationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _serverName = a } :: MysqlConfigurationResource s)
+
+instance P.HasValue (MysqlConfigurationResource s) (TF.Attr s P.Text) where
+    value =
+        P.lens (_value :: MysqlConfigurationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: MysqlConfigurationResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MysqlConfigurationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_mysql_database@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/mysql_database.html terraform documentation>
+-- for more information.
+data MysqlDatabaseResource s = MysqlDatabaseResource'
+    { _charset           :: TF.Attr s P.Text
+    -- ^ @charset@ - (Required, Forces New)
+    --
+    , _collation         :: TF.Attr s P.Text
+    -- ^ @collation@ - (Required, Forces New)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _serverName        :: TF.Attr s P.Text
+    -- ^ @server_name@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_mysql_database@ resource value.
+mysqlDatabaseResource
+    :: TF.Attr s P.Text -- ^ @charset@ ('P._charset', 'P.charset')
+    -> TF.Attr s P.Text -- ^ @collation@ ('P._collation', 'P.collation')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @server_name@ ('P._serverName', 'P.serverName')
+    -> P.Resource (MysqlDatabaseResource s)
+mysqlDatabaseResource _charset _collation _name _resourceGroupName _serverName =
+    TF.unsafeResource "azurerm_mysql_database" TF.validator $
+        MysqlDatabaseResource'
+            { _charset = _charset
+            , _collation = _collation
+            , _name = _name
+            , _resourceGroupName = _resourceGroupName
+            , _serverName = _serverName
+            }
+
+instance TF.IsObject (MysqlDatabaseResource s) where
+    toObject MysqlDatabaseResource'{..} = P.catMaybes
+        [ TF.assign "charset" <$> TF.attribute _charset
+        , TF.assign "collation" <$> TF.attribute _collation
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "server_name" <$> TF.attribute _serverName
+        ]
+
+instance TF.IsValid (MysqlDatabaseResource s) where
+    validator = P.mempty
+
+instance P.HasCharset (MysqlDatabaseResource s) (TF.Attr s P.Text) where
+    charset =
+        P.lens (_charset :: MysqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _charset = a } :: MysqlDatabaseResource s)
+
+instance P.HasCollation (MysqlDatabaseResource s) (TF.Attr s P.Text) where
+    collation =
+        P.lens (_collation :: MysqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _collation = a } :: MysqlDatabaseResource s)
+
+instance P.HasName (MysqlDatabaseResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: MysqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: MysqlDatabaseResource s)
+
+instance P.HasResourceGroupName (MysqlDatabaseResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: MysqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: MysqlDatabaseResource s)
+
+instance P.HasServerName (MysqlDatabaseResource s) (TF.Attr s P.Text) where
+    serverName =
+        P.lens (_serverName :: MysqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _serverName = a } :: MysqlDatabaseResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MysqlDatabaseResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_mysql_firewall_rule@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/mysql_firewall_rule.html terraform documentation>
+-- for more information.
+data MysqlFirewallRuleResource s = MysqlFirewallRuleResource'
+    { _endIpAddress      :: TF.Attr s P.Text
+    -- ^ @end_ip_address@ - (Required)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _serverName        :: TF.Attr s P.Text
+    -- ^ @server_name@ - (Required, Forces New)
+    --
+    , _startIpAddress    :: TF.Attr s P.Text
+    -- ^ @start_ip_address@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_mysql_firewall_rule@ resource value.
+mysqlFirewallRuleResource
+    :: TF.Attr s P.Text -- ^ @end_ip_address@ ('P._endIpAddress', 'P.endIpAddress')
+    -> TF.Attr s P.Text -- ^ @start_ip_address@ ('P._startIpAddress', 'P.startIpAddress')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @server_name@ ('P._serverName', 'P.serverName')
+    -> P.Resource (MysqlFirewallRuleResource s)
+mysqlFirewallRuleResource _endIpAddress _startIpAddress _name _resourceGroupName _serverName =
+    TF.unsafeResource "azurerm_mysql_firewall_rule" TF.validator $
+        MysqlFirewallRuleResource'
+            { _endIpAddress = _endIpAddress
+            , _name = _name
+            , _resourceGroupName = _resourceGroupName
+            , _serverName = _serverName
+            , _startIpAddress = _startIpAddress
+            }
+
+instance TF.IsObject (MysqlFirewallRuleResource s) where
+    toObject MysqlFirewallRuleResource'{..} = P.catMaybes
+        [ TF.assign "end_ip_address" <$> TF.attribute _endIpAddress
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "server_name" <$> TF.attribute _serverName
+        , TF.assign "start_ip_address" <$> TF.attribute _startIpAddress
+        ]
+
+instance TF.IsValid (MysqlFirewallRuleResource s) where
+    validator = P.mempty
+
+instance P.HasEndIpAddress (MysqlFirewallRuleResource s) (TF.Attr s P.Text) where
+    endIpAddress =
+        P.lens (_endIpAddress :: MysqlFirewallRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _endIpAddress = a } :: MysqlFirewallRuleResource s)
+
+instance P.HasName (MysqlFirewallRuleResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: MysqlFirewallRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: MysqlFirewallRuleResource s)
+
+instance P.HasResourceGroupName (MysqlFirewallRuleResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: MysqlFirewallRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: MysqlFirewallRuleResource s)
+
+instance P.HasServerName (MysqlFirewallRuleResource s) (TF.Attr s P.Text) where
+    serverName =
+        P.lens (_serverName :: MysqlFirewallRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _serverName = a } :: MysqlFirewallRuleResource s)
+
+instance P.HasStartIpAddress (MysqlFirewallRuleResource s) (TF.Attr s P.Text) where
+    startIpAddress =
+        P.lens (_startIpAddress :: MysqlFirewallRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _startIpAddress = a } :: MysqlFirewallRuleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MysqlFirewallRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_mysql_server@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/mysql_server.html terraform documentation>
+-- for more information.
+data MysqlServerResource s = MysqlServerResource'
+    { _administratorLogin         :: TF.Attr s P.Text
+    -- ^ @administrator_login@ - (Required, Forces New)
+    --
+    , _administratorLoginPassword :: TF.Attr s P.Text
+    -- ^ @administrator_login_password@ - (Required)
+    --
+    , _location                   :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name                       :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _resourceGroupName          :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _sku                        :: TF.Attr s (SkuSetting s)
+    -- ^ @sku@ - (Required)
+    --
+    , _sslEnforcement             :: TF.Attr s P.Text
+    -- ^ @ssl_enforcement@ - (Required)
+    --
+    , _storageProfile             :: TF.Attr s (StorageProfileSetting s)
+    -- ^ @storage_profile@ - (Required)
+    --
+    , _tags                       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _version                    :: TF.Attr s P.Text
+    -- ^ @version@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_mysql_server@ resource value.
+mysqlServerResource
+    :: TF.Attr s P.Text -- ^ @ssl_enforcement@ ('P._sslEnforcement', 'P.sslEnforcement')
+    -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @administrator_login@ ('P._administratorLogin', 'P.administratorLogin')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @administrator_login_password@ ('P._administratorLoginPassword', 'P.administratorLoginPassword')
+    -> TF.Attr s (StorageProfileSetting s) -- ^ @storage_profile@ ('P._storageProfile', 'P.storageProfile')
+    -> TF.Attr s (SkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
+    -> TF.Attr s P.Text -- ^ @version@ ('P._version', 'P.version')
+    -> P.Resource (MysqlServerResource s)
+mysqlServerResource _sslEnforcement _location _administratorLogin _name _resourceGroupName _administratorLoginPassword _storageProfile _sku _version =
+    TF.unsafeResource "azurerm_mysql_server" TF.validator $
+        MysqlServerResource'
+            { _administratorLogin = _administratorLogin
+            , _administratorLoginPassword = _administratorLoginPassword
+            , _location = _location
+            , _name = _name
+            , _resourceGroupName = _resourceGroupName
+            , _sku = _sku
+            , _sslEnforcement = _sslEnforcement
+            , _storageProfile = _storageProfile
+            , _tags = TF.Nil
+            , _version = _version
+            }
+
+instance TF.IsObject (MysqlServerResource s) where
+    toObject MysqlServerResource'{..} = P.catMaybes
+        [ TF.assign "administrator_login" <$> TF.attribute _administratorLogin
+        , TF.assign "administrator_login_password" <$> TF.attribute _administratorLoginPassword
+        , TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "sku" <$> TF.attribute _sku
+        , TF.assign "ssl_enforcement" <$> TF.attribute _sslEnforcement
+        , TF.assign "storage_profile" <$> TF.attribute _storageProfile
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "version" <$> TF.attribute _version
+        ]
+
+instance TF.IsValid (MysqlServerResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_sku"
+                  (_sku
+                      :: MysqlServerResource s -> TF.Attr s (SkuSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_storageProfile"
+                  (_storageProfile
+                      :: MysqlServerResource s -> TF.Attr s (StorageProfileSetting s))
+                  TF.validator
+
+instance P.HasAdministratorLogin (MysqlServerResource s) (TF.Attr s P.Text) where
+    administratorLogin =
+        P.lens (_administratorLogin :: MysqlServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _administratorLogin = a } :: MysqlServerResource s)
+
+instance P.HasAdministratorLoginPassword (MysqlServerResource s) (TF.Attr s P.Text) where
+    administratorLoginPassword =
+        P.lens (_administratorLoginPassword :: MysqlServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _administratorLoginPassword = a } :: MysqlServerResource s)
+
+instance P.HasLocation (MysqlServerResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: MysqlServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: MysqlServerResource s)
+
+instance P.HasName (MysqlServerResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: MysqlServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: MysqlServerResource s)
+
+instance P.HasResourceGroupName (MysqlServerResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: MysqlServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: MysqlServerResource s)
+
+instance P.HasSku (MysqlServerResource s) (TF.Attr s (SkuSetting s)) where
+    sku =
+        P.lens (_sku :: MysqlServerResource s -> TF.Attr s (SkuSetting s))
+               (\s a -> s { _sku = a } :: MysqlServerResource s)
+
+instance P.HasSslEnforcement (MysqlServerResource s) (TF.Attr s P.Text) where
+    sslEnforcement =
+        P.lens (_sslEnforcement :: MysqlServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sslEnforcement = a } :: MysqlServerResource s)
+
+instance P.HasStorageProfile (MysqlServerResource s) (TF.Attr s (StorageProfileSetting s)) where
+    storageProfile =
+        P.lens (_storageProfile :: MysqlServerResource s -> TF.Attr s (StorageProfileSetting s))
+               (\s a -> s { _storageProfile = a } :: MysqlServerResource s)
+
+instance P.HasTags (MysqlServerResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: MysqlServerResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: MysqlServerResource s)
+
+instance P.HasVersion (MysqlServerResource s) (TF.Attr s P.Text) where
+    version =
+        P.lens (_version :: MysqlServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _version = a } :: MysqlServerResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MysqlServerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (MysqlServerResource s)) (TF.Attr s P.Text) where
+    computedFqdn x = TF.compute (TF.refKey x) "fqdn"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (MysqlServerResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+-- | @azurerm_network_interface@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/network_interface.html terraform documentation>
+-- for more information.
+data NetworkInterfaceResource s = NetworkInterfaceResource'
+    { _appliedDnsServers :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @applied_dns_servers@ - (Optional)
+    --
+    , _dnsServers :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @dns_servers@ - (Optional)
+    --
+    , _enableAcceleratedNetworking :: TF.Attr s P.Bool
+    -- ^ @enable_accelerated_networking@ - (Optional)
+    --
+    , _enableIpForwarding :: TF.Attr s P.Bool
+    -- ^ @enable_ip_forwarding@ - (Optional)
+    --
+    , _internalDnsNameLabel :: TF.Attr s P.Text
+    -- ^ @internal_dns_name_label@ - (Optional)
+    --
+    , _internalFqdn :: TF.Attr s P.Text
+    -- ^ @internal_fqdn@ - (Optional)
+    --
+    , _ipConfiguration :: TF.Attr s [TF.Attr s (IpConfigurationSetting s)]
+    -- ^ @ip_configuration@ - (Required)
+    --
+    , _location :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _macAddress :: TF.Attr s P.Text
+    -- ^ @mac_address@ - (Optional)
+    --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _networkSecurityGroupId :: TF.Attr s P.Text
+    -- ^ @network_security_group_id@ - (Optional)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _virtualMachineId :: TF.Attr s P.Text
+    -- ^ @virtual_machine_id@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_network_interface@ resource value.
+networkInterfaceResource
+    :: TF.Attr s [TF.Attr s (IpConfigurationSetting s)] -- ^ @ip_configuration@ ('P._ipConfiguration', 'P.ipConfiguration')
+    -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> P.Resource (NetworkInterfaceResource s)
+networkInterfaceResource _ipConfiguration _location _name _resourceGroupName =
+    TF.unsafeResource "azurerm_network_interface" TF.validator $
+        NetworkInterfaceResource'
+            { _appliedDnsServers = TF.Nil
+            , _dnsServers = TF.Nil
+            , _enableAcceleratedNetworking = TF.value P.False
+            , _enableIpForwarding = TF.value P.False
+            , _internalDnsNameLabel = TF.Nil
+            , _internalFqdn = TF.Nil
+            , _ipConfiguration = _ipConfiguration
+            , _location = _location
+            , _macAddress = TF.Nil
+            , _name = _name
+            , _networkSecurityGroupId = TF.Nil
+            , _resourceGroupName = _resourceGroupName
+            , _tags = TF.Nil
+            , _virtualMachineId = TF.Nil
+            }
+
+instance TF.IsObject (NetworkInterfaceResource s) where
+    toObject NetworkInterfaceResource'{..} = P.catMaybes
+        [ TF.assign "applied_dns_servers" <$> TF.attribute _appliedDnsServers
+        , TF.assign "dns_servers" <$> TF.attribute _dnsServers
+        , TF.assign "enable_accelerated_networking" <$> TF.attribute _enableAcceleratedNetworking
+        , TF.assign "enable_ip_forwarding" <$> TF.attribute _enableIpForwarding
+        , TF.assign "internal_dns_name_label" <$> TF.attribute _internalDnsNameLabel
+        , TF.assign "internal_fqdn" <$> TF.attribute _internalFqdn
+        , TF.assign "ip_configuration" <$> TF.attribute _ipConfiguration
+        , TF.assign "location" <$> TF.attribute _location
+        , TF.assign "mac_address" <$> TF.attribute _macAddress
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_security_group_id" <$> TF.attribute _networkSecurityGroupId
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "virtual_machine_id" <$> TF.attribute _virtualMachineId
+        ]
+
+instance TF.IsValid (NetworkInterfaceResource s) where
+    validator = P.mempty
+
+instance P.HasAppliedDnsServers (NetworkInterfaceResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    appliedDnsServers =
+        P.lens (_appliedDnsServers :: NetworkInterfaceResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _appliedDnsServers = a } :: NetworkInterfaceResource s)
+
+instance P.HasDnsServers (NetworkInterfaceResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    dnsServers =
+        P.lens (_dnsServers :: NetworkInterfaceResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _dnsServers = a } :: NetworkInterfaceResource s)
+
+instance P.HasEnableAcceleratedNetworking (NetworkInterfaceResource s) (TF.Attr s P.Bool) where
+    enableAcceleratedNetworking =
+        P.lens (_enableAcceleratedNetworking :: NetworkInterfaceResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enableAcceleratedNetworking = a } :: NetworkInterfaceResource s)
+
+instance P.HasEnableIpForwarding (NetworkInterfaceResource s) (TF.Attr s P.Bool) where
+    enableIpForwarding =
+        P.lens (_enableIpForwarding :: NetworkInterfaceResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enableIpForwarding = a } :: NetworkInterfaceResource s)
+
+instance P.HasInternalDnsNameLabel (NetworkInterfaceResource s) (TF.Attr s P.Text) where
+    internalDnsNameLabel =
+        P.lens (_internalDnsNameLabel :: NetworkInterfaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _internalDnsNameLabel = a } :: NetworkInterfaceResource s)
+
+instance P.HasInternalFqdn (NetworkInterfaceResource s) (TF.Attr s P.Text) where
+    internalFqdn =
+        P.lens (_internalFqdn :: NetworkInterfaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _internalFqdn = a } :: NetworkInterfaceResource s)
+
+instance P.HasIpConfiguration (NetworkInterfaceResource s) (TF.Attr s [TF.Attr s (IpConfigurationSetting s)]) where
+    ipConfiguration =
+        P.lens (_ipConfiguration :: NetworkInterfaceResource s -> TF.Attr s [TF.Attr s (IpConfigurationSetting s)])
+               (\s a -> s { _ipConfiguration = a } :: NetworkInterfaceResource s)
+
+instance P.HasLocation (NetworkInterfaceResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: NetworkInterfaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: NetworkInterfaceResource s)
+
+instance P.HasMacAddress (NetworkInterfaceResource s) (TF.Attr s P.Text) where
+    macAddress =
+        P.lens (_macAddress :: NetworkInterfaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _macAddress = a } :: NetworkInterfaceResource s)
+
+instance P.HasName (NetworkInterfaceResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: NetworkInterfaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: NetworkInterfaceResource s)
+
+instance P.HasNetworkSecurityGroupId (NetworkInterfaceResource s) (TF.Attr s P.Text) where
+    networkSecurityGroupId =
+        P.lens (_networkSecurityGroupId :: NetworkInterfaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _networkSecurityGroupId = a } :: NetworkInterfaceResource s)
+
+instance P.HasResourceGroupName (NetworkInterfaceResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: NetworkInterfaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: NetworkInterfaceResource s)
+
+instance P.HasTags (NetworkInterfaceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: NetworkInterfaceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: NetworkInterfaceResource s)
+
+instance P.HasVirtualMachineId (NetworkInterfaceResource s) (TF.Attr s P.Text) where
+    virtualMachineId =
+        P.lens (_virtualMachineId :: NetworkInterfaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _virtualMachineId = a } :: NetworkInterfaceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedAppliedDnsServers (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedAppliedDnsServers x = TF.compute (TF.refKey x) "applied_dns_servers"
+
+instance s ~ s' => P.HasComputedDnsServers (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedDnsServers x = TF.compute (TF.refKey x) "dns_servers"
+
+instance s ~ s' => P.HasComputedInternalDnsNameLabel (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s P.Text) where
+    computedInternalDnsNameLabel x = TF.compute (TF.refKey x) "internal_dns_name_label"
+
+instance s ~ s' => P.HasComputedInternalFqdn (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s P.Text) where
+    computedInternalFqdn x = TF.compute (TF.refKey x) "internal_fqdn"
+
+instance s ~ s' => P.HasComputedMacAddress (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s P.Text) where
+    computedMacAddress x = TF.compute (TF.refKey x) "mac_address"
+
+instance s ~ s' => P.HasComputedPrivateIpAddress (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s P.Text) where
+    computedPrivateIpAddress x = TF.compute (TF.refKey x) "private_ip_address"
+
+instance s ~ s' => P.HasComputedPrivateIpAddresses (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedPrivateIpAddresses x = TF.compute (TF.refKey x) "private_ip_addresses"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+instance s ~ s' => P.HasComputedVirtualMachineId (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s P.Text) where
+    computedVirtualMachineId x = TF.compute (TF.refKey x) "virtual_machine_id"
+
+-- | @azurerm_network_security_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/network_security_group.html terraform documentation>
+-- for more information.
+data NetworkSecurityGroupResource s = NetworkSecurityGroupResource'
+    { _location          :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _securityRule      :: TF.Attr s [TF.Attr s (SecurityRuleSetting s)]
+    -- ^ @security_rule@ - (Optional)
+    --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_network_security_group@ resource value.
+networkSecurityGroupResource
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> P.Resource (NetworkSecurityGroupResource s)
+networkSecurityGroupResource _location _name _resourceGroupName =
+    TF.unsafeResource "azurerm_network_security_group" TF.validator $
+        NetworkSecurityGroupResource'
+            { _location = _location
+            , _name = _name
+            , _resourceGroupName = _resourceGroupName
+            , _securityRule = TF.Nil
+            , _tags = TF.Nil
+            }
+
+instance TF.IsObject (NetworkSecurityGroupResource s) where
+    toObject NetworkSecurityGroupResource'{..} = P.catMaybes
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "security_rule" <$> TF.attribute _securityRule
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance TF.IsValid (NetworkSecurityGroupResource s) where
+    validator = P.mempty
+
+instance P.HasLocation (NetworkSecurityGroupResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: NetworkSecurityGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: NetworkSecurityGroupResource s)
+
+instance P.HasName (NetworkSecurityGroupResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: NetworkSecurityGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: NetworkSecurityGroupResource s)
+
+instance P.HasResourceGroupName (NetworkSecurityGroupResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: NetworkSecurityGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: NetworkSecurityGroupResource s)
+
+instance P.HasSecurityRule (NetworkSecurityGroupResource s) (TF.Attr s [TF.Attr s (SecurityRuleSetting s)]) where
+    securityRule =
+        P.lens (_securityRule :: NetworkSecurityGroupResource s -> TF.Attr s [TF.Attr s (SecurityRuleSetting s)])
+               (\s a -> s { _securityRule = a } :: NetworkSecurityGroupResource s)
+
+instance P.HasTags (NetworkSecurityGroupResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: NetworkSecurityGroupResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: NetworkSecurityGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkSecurityGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedSecurityRule (TF.Ref s' (NetworkSecurityGroupResource s)) (TF.Attr s [TF.Attr s (SecurityRuleSetting s)]) where
+    computedSecurityRule x = TF.compute (TF.refKey x) "security_rule"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkSecurityGroupResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+-- | @azurerm_network_security_rule@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/network_security_rule.html terraform documentation>
+-- for more information.
+data NetworkSecurityRuleResource s = NetworkSecurityRuleResource'
+    { _access                                 :: TF.Attr s P.Text
+    -- ^ @access@ - (Required)
+    --
+    , _description                            :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _destinationAddressPrefix               :: TF.Attr s P.Text
+    -- ^ @destination_address_prefix@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'destinationAddressPrefixes'
+    , _destinationAddressPrefixes             :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @destination_address_prefixes@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'destinationAddressPrefix'
+    , _destinationApplicationSecurityGroupIds :: TF.Attr s P.Text
+    -- ^ @destination_application_security_group_ids@ - (Optional)
+    --
+    , _destinationPortRange                   :: TF.Attr s P.Text
+    -- ^ @destination_port_range@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'destinationPortRanges'
+    , _destinationPortRanges                  :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @destination_port_ranges@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'destinationPortRange'
+    , _direction                              :: TF.Attr s P.Text
+    -- ^ @direction@ - (Required)
+    --
+    , _name                                   :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _networkSecurityGroupName               :: TF.Attr s P.Text
+    -- ^ @network_security_group_name@ - (Required, Forces New)
+    --
+    , _priority                               :: TF.Attr s P.Int
+    -- ^ @priority@ - (Required)
+    --
+    , _protocol                               :: TF.Attr s P.Text
+    -- ^ @protocol@ - (Required)
+    --
+    , _resourceGroupName                      :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _sourceAddressPrefix                    :: TF.Attr s P.Text
+    -- ^ @source_address_prefix@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'sourceAddressPrefixes'
+    , _sourceAddressPrefixes                  :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @source_address_prefixes@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'sourceAddressPrefix'
+    , _sourceApplicationSecurityGroupIds      :: TF.Attr s P.Text
+    -- ^ @source_application_security_group_ids@ - (Optional)
+    --
+    , _sourcePortRange                        :: TF.Attr s P.Text
+    -- ^ @source_port_range@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'sourcePortRanges'
+    , _sourcePortRanges                       :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @source_port_ranges@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'sourcePortRange'
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_network_security_rule@ resource value.
+networkSecurityRuleResource
+    :: TF.Attr s P.Text -- ^ @access@ ('P._access', 'P.access')
+    -> TF.Attr s P.Text -- ^ @direction@ ('P._direction', 'P.direction')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @network_security_group_name@ ('P._networkSecurityGroupName', 'P.networkSecurityGroupName')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Int -- ^ @priority@ ('P._priority', 'P.priority')
+    -> TF.Attr s P.Text -- ^ @protocol@ ('P._protocol', 'P.protocol')
+    -> P.Resource (NetworkSecurityRuleResource s)
+networkSecurityRuleResource _access _direction _name _networkSecurityGroupName _resourceGroupName _priority _protocol =
+    TF.unsafeResource "azurerm_network_security_rule" TF.validator $
+        NetworkSecurityRuleResource'
+            { _access = _access
+            , _description = TF.Nil
+            , _destinationAddressPrefix = TF.Nil
+            , _destinationAddressPrefixes = TF.Nil
+            , _destinationApplicationSecurityGroupIds = TF.Nil
+            , _destinationPortRange = TF.Nil
+            , _destinationPortRanges = TF.Nil
+            , _direction = _direction
+            , _name = _name
+            , _networkSecurityGroupName = _networkSecurityGroupName
+            , _priority = _priority
+            , _protocol = _protocol
+            , _resourceGroupName = _resourceGroupName
+            , _sourceAddressPrefix = TF.Nil
+            , _sourceAddressPrefixes = TF.Nil
+            , _sourceApplicationSecurityGroupIds = TF.Nil
+            , _sourcePortRange = TF.Nil
+            , _sourcePortRanges = TF.Nil
+            }
+
+instance TF.IsObject (NetworkSecurityRuleResource s) where
+    toObject NetworkSecurityRuleResource'{..} = P.catMaybes
+        [ TF.assign "access" <$> TF.attribute _access
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "destination_address_prefix" <$> TF.attribute _destinationAddressPrefix
+        , TF.assign "destination_address_prefixes" <$> TF.attribute _destinationAddressPrefixes
+        , TF.assign "destination_application_security_group_ids" <$> TF.attribute _destinationApplicationSecurityGroupIds
+        , TF.assign "destination_port_range" <$> TF.attribute _destinationPortRange
+        , TF.assign "destination_port_ranges" <$> TF.attribute _destinationPortRanges
+        , TF.assign "direction" <$> TF.attribute _direction
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_security_group_name" <$> TF.attribute _networkSecurityGroupName
+        , TF.assign "priority" <$> TF.attribute _priority
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "source_address_prefix" <$> TF.attribute _sourceAddressPrefix
+        , TF.assign "source_address_prefixes" <$> TF.attribute _sourceAddressPrefixes
+        , TF.assign "source_application_security_group_ids" <$> TF.attribute _sourceApplicationSecurityGroupIds
+        , TF.assign "source_port_range" <$> TF.attribute _sourcePortRange
+        , TF.assign "source_port_ranges" <$> TF.attribute _sourcePortRanges
+        ]
+
+instance TF.IsValid (NetworkSecurityRuleResource s) where
+    validator = TF.fieldsValidator (\NetworkSecurityRuleResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_destinationAddressPrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_destinationAddressPrefix",
+                            [ "_destinationAddressPrefixes"
+                            ])
+        , if (_destinationAddressPrefixes P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_destinationAddressPrefixes",
+                            [ "_destinationAddressPrefix"
+                            ])
+        , if (_destinationPortRange P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_destinationPortRange",
+                            [ "_destinationPortRanges"
+                            ])
+        , if (_destinationPortRanges P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_destinationPortRanges",
+                            [ "_destinationPortRange"
+                            ])
+        , if (_sourceAddressPrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_sourceAddressPrefix",
+                            [ "_sourceAddressPrefixes"
+                            ])
+        , if (_sourceAddressPrefixes P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_sourceAddressPrefixes",
+                            [ "_sourceAddressPrefix"
+                            ])
+        , if (_sourcePortRange P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_sourcePortRange",
+                            [ "_sourcePortRanges"
+                            ])
+        , if (_sourcePortRanges P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_sourcePortRanges",
+                            [ "_sourcePortRange"
+                            ])
+        ])
+
+instance P.HasAccess (NetworkSecurityRuleResource s) (TF.Attr s P.Text) where
+    access =
+        P.lens (_access :: NetworkSecurityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _access = a } :: NetworkSecurityRuleResource s)
+
+instance P.HasDescription (NetworkSecurityRuleResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: NetworkSecurityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: NetworkSecurityRuleResource s)
+
+instance P.HasDestinationAddressPrefix (NetworkSecurityRuleResource s) (TF.Attr s P.Text) where
+    destinationAddressPrefix =
+        P.lens (_destinationAddressPrefix :: NetworkSecurityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _destinationAddressPrefix = a } :: NetworkSecurityRuleResource s)
+
+instance P.HasDestinationAddressPrefixes (NetworkSecurityRuleResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    destinationAddressPrefixes =
+        P.lens (_destinationAddressPrefixes :: NetworkSecurityRuleResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _destinationAddressPrefixes = a } :: NetworkSecurityRuleResource s)
+
+instance P.HasDestinationApplicationSecurityGroupIds (NetworkSecurityRuleResource s) (TF.Attr s P.Text) where
+    destinationApplicationSecurityGroupIds =
+        P.lens (_destinationApplicationSecurityGroupIds :: NetworkSecurityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _destinationApplicationSecurityGroupIds = a } :: NetworkSecurityRuleResource s)
+
+instance P.HasDestinationPortRange (NetworkSecurityRuleResource s) (TF.Attr s P.Text) where
+    destinationPortRange =
+        P.lens (_destinationPortRange :: NetworkSecurityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _destinationPortRange = a } :: NetworkSecurityRuleResource s)
+
+instance P.HasDestinationPortRanges (NetworkSecurityRuleResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    destinationPortRanges =
+        P.lens (_destinationPortRanges :: NetworkSecurityRuleResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _destinationPortRanges = a } :: NetworkSecurityRuleResource s)
+
+instance P.HasDirection (NetworkSecurityRuleResource s) (TF.Attr s P.Text) where
+    direction =
+        P.lens (_direction :: NetworkSecurityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _direction = a } :: NetworkSecurityRuleResource s)
+
+instance P.HasName (NetworkSecurityRuleResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: NetworkSecurityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: NetworkSecurityRuleResource s)
+
+instance P.HasNetworkSecurityGroupName (NetworkSecurityRuleResource s) (TF.Attr s P.Text) where
+    networkSecurityGroupName =
+        P.lens (_networkSecurityGroupName :: NetworkSecurityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _networkSecurityGroupName = a } :: NetworkSecurityRuleResource s)
+
+instance P.HasPriority (NetworkSecurityRuleResource s) (TF.Attr s P.Int) where
+    priority =
+        P.lens (_priority :: NetworkSecurityRuleResource s -> TF.Attr s P.Int)
+               (\s a -> s { _priority = a } :: NetworkSecurityRuleResource s)
+
+instance P.HasProtocol (NetworkSecurityRuleResource s) (TF.Attr s P.Text) where
+    protocol =
+        P.lens (_protocol :: NetworkSecurityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: NetworkSecurityRuleResource s)
+
+instance P.HasResourceGroupName (NetworkSecurityRuleResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: NetworkSecurityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: NetworkSecurityRuleResource s)
+
+instance P.HasSourceAddressPrefix (NetworkSecurityRuleResource s) (TF.Attr s P.Text) where
+    sourceAddressPrefix =
+        P.lens (_sourceAddressPrefix :: NetworkSecurityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceAddressPrefix = a } :: NetworkSecurityRuleResource s)
+
+instance P.HasSourceAddressPrefixes (NetworkSecurityRuleResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    sourceAddressPrefixes =
+        P.lens (_sourceAddressPrefixes :: NetworkSecurityRuleResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _sourceAddressPrefixes = a } :: NetworkSecurityRuleResource s)
+
+instance P.HasSourceApplicationSecurityGroupIds (NetworkSecurityRuleResource s) (TF.Attr s P.Text) where
+    sourceApplicationSecurityGroupIds =
+        P.lens (_sourceApplicationSecurityGroupIds :: NetworkSecurityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceApplicationSecurityGroupIds = a } :: NetworkSecurityRuleResource s)
+
+instance P.HasSourcePortRange (NetworkSecurityRuleResource s) (TF.Attr s P.Text) where
+    sourcePortRange =
+        P.lens (_sourcePortRange :: NetworkSecurityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sourcePortRange = a } :: NetworkSecurityRuleResource s)
+
+instance P.HasSourcePortRanges (NetworkSecurityRuleResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    sourcePortRanges =
+        P.lens (_sourcePortRanges :: NetworkSecurityRuleResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _sourcePortRanges = a } :: NetworkSecurityRuleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkSecurityRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_network_watcher@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/network_watcher.html terraform documentation>
+-- for more information.
+data NetworkWatcherResource s = NetworkWatcherResource'
+    { _location          :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_network_watcher@ resource value.
+networkWatcherResource
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> P.Resource (NetworkWatcherResource s)
+networkWatcherResource _location _name _resourceGroupName =
+    TF.unsafeResource "azurerm_network_watcher" TF.validator $
+        NetworkWatcherResource'
+            { _location = _location
+            , _name = _name
+            , _resourceGroupName = _resourceGroupName
+            , _tags = TF.Nil
+            }
+
+instance TF.IsObject (NetworkWatcherResource s) where
+    toObject NetworkWatcherResource'{..} = P.catMaybes
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance TF.IsValid (NetworkWatcherResource s) where
+    validator = P.mempty
+
+instance P.HasLocation (NetworkWatcherResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: NetworkWatcherResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: NetworkWatcherResource s)
+
+instance P.HasName (NetworkWatcherResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: NetworkWatcherResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: NetworkWatcherResource s)
+
+instance P.HasResourceGroupName (NetworkWatcherResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: NetworkWatcherResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: NetworkWatcherResource s)
+
+instance P.HasTags (NetworkWatcherResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: NetworkWatcherResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: NetworkWatcherResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkWatcherResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkWatcherResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+-- | @azurerm_notification_hub_authorization_rule@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/notification_hub_authorization_rule.html terraform documentation>
+-- for more information.
+data NotificationHubAuthorizationRuleResource s = NotificationHubAuthorizationRuleResource'
+    { _listen              :: TF.Attr s P.Bool
+    -- ^ @listen@ - (Optional)
+    --
+    , _manage              :: TF.Attr s P.Bool
+    -- ^ @manage@ - (Optional)
+    --
+    , _name                :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _namespaceName       :: TF.Attr s P.Text
+    -- ^ @namespace_name@ - (Required, Forces New)
+    --
+    , _notificationHubName :: TF.Attr s P.Text
+    -- ^ @notification_hub_name@ - (Required, Forces New)
+    --
+    , _resourceGroupName   :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _send                :: TF.Attr s P.Bool
+    -- ^ @send@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_notification_hub_authorization_rule@ resource value.
+notificationHubAuthorizationRuleResource
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @namespace_name@ ('P._namespaceName', 'P.namespaceName')
+    -> TF.Attr s P.Text -- ^ @notification_hub_name@ ('P._notificationHubName', 'P.notificationHubName')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> P.Resource (NotificationHubAuthorizationRuleResource s)
+notificationHubAuthorizationRuleResource _name _namespaceName _notificationHubName _resourceGroupName =
+    TF.unsafeResource "azurerm_notification_hub_authorization_rule" TF.validator $
+        NotificationHubAuthorizationRuleResource'
+            { _listen = TF.value P.False
+            , _manage = TF.value P.False
+            , _name = _name
+            , _namespaceName = _namespaceName
+            , _notificationHubName = _notificationHubName
+            , _resourceGroupName = _resourceGroupName
+            , _send = TF.value P.False
+            }
+
+instance TF.IsObject (NotificationHubAuthorizationRuleResource s) where
+    toObject NotificationHubAuthorizationRuleResource'{..} = P.catMaybes
+        [ TF.assign "listen" <$> TF.attribute _listen
+        , TF.assign "manage" <$> TF.attribute _manage
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "namespace_name" <$> TF.attribute _namespaceName
+        , TF.assign "notification_hub_name" <$> TF.attribute _notificationHubName
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "send" <$> TF.attribute _send
+        ]
+
+instance TF.IsValid (NotificationHubAuthorizationRuleResource s) where
+    validator = P.mempty
+
+instance P.HasListen (NotificationHubAuthorizationRuleResource s) (TF.Attr s P.Bool) where
+    listen =
+        P.lens (_listen :: NotificationHubAuthorizationRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _listen = a } :: NotificationHubAuthorizationRuleResource s)
+
+instance P.HasManage (NotificationHubAuthorizationRuleResource s) (TF.Attr s P.Bool) where
+    manage =
+        P.lens (_manage :: NotificationHubAuthorizationRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _manage = a } :: NotificationHubAuthorizationRuleResource s)
+
+instance P.HasName (NotificationHubAuthorizationRuleResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: NotificationHubAuthorizationRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: NotificationHubAuthorizationRuleResource s)
+
+instance P.HasNamespaceName (NotificationHubAuthorizationRuleResource s) (TF.Attr s P.Text) where
+    namespaceName =
+        P.lens (_namespaceName :: NotificationHubAuthorizationRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _namespaceName = a } :: NotificationHubAuthorizationRuleResource s)
+
+instance P.HasNotificationHubName (NotificationHubAuthorizationRuleResource s) (TF.Attr s P.Text) where
+    notificationHubName =
+        P.lens (_notificationHubName :: NotificationHubAuthorizationRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _notificationHubName = a } :: NotificationHubAuthorizationRuleResource s)
+
+instance P.HasResourceGroupName (NotificationHubAuthorizationRuleResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: NotificationHubAuthorizationRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: NotificationHubAuthorizationRuleResource s)
+
+instance P.HasSend (NotificationHubAuthorizationRuleResource s) (TF.Attr s P.Bool) where
+    send =
+        P.lens (_send :: NotificationHubAuthorizationRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _send = a } :: NotificationHubAuthorizationRuleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NotificationHubAuthorizationRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedPrimaryAccessKey (TF.Ref s' (NotificationHubAuthorizationRuleResource s)) (TF.Attr s P.Text) where
+    computedPrimaryAccessKey x = TF.compute (TF.refKey x) "primary_access_key"
+
+instance s ~ s' => P.HasComputedSecondaryAccessKey (TF.Ref s' (NotificationHubAuthorizationRuleResource s)) (TF.Attr s P.Text) where
+    computedSecondaryAccessKey x = TF.compute (TF.refKey x) "secondary_access_key"
+
+-- | @azurerm_notification_hub_namespace@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/notification_hub_namespace.html terraform documentation>
+-- for more information.
+data NotificationHubNamespaceResource s = NotificationHubNamespaceResource'
+    { _enabled           :: TF.Attr s P.Bool
+    -- ^ @enabled@ - (Optional)
+    --
+    , _location          :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _namespaceType     :: TF.Attr s P.Text
+    -- ^ @namespace_type@ - (Required)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _sku               :: TF.Attr s (SkuSetting s)
+    -- ^ @sku@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_notification_hub_namespace@ resource value.
+notificationHubNamespaceResource
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s (SkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
+    -> TF.Attr s P.Text -- ^ @namespace_type@ ('P._namespaceType', 'P.namespaceType')
+    -> P.Resource (NotificationHubNamespaceResource s)
+notificationHubNamespaceResource _location _name _resourceGroupName _sku _namespaceType =
+    TF.unsafeResource "azurerm_notification_hub_namespace" TF.validator $
+        NotificationHubNamespaceResource'
+            { _enabled = TF.value P.True
+            , _location = _location
+            , _name = _name
+            , _namespaceType = _namespaceType
+            , _resourceGroupName = _resourceGroupName
+            , _sku = _sku
+            }
+
+instance TF.IsObject (NotificationHubNamespaceResource s) where
+    toObject NotificationHubNamespaceResource'{..} = P.catMaybes
+        [ TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "namespace_type" <$> TF.attribute _namespaceType
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "sku" <$> TF.attribute _sku
+        ]
+
+instance TF.IsValid (NotificationHubNamespaceResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_sku"
+                  (_sku
+                      :: NotificationHubNamespaceResource s -> TF.Attr s (SkuSetting s))
+                  TF.validator
+
+instance P.HasEnabled (NotificationHubNamespaceResource s) (TF.Attr s P.Bool) where
+    enabled =
+        P.lens (_enabled :: NotificationHubNamespaceResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enabled = a } :: NotificationHubNamespaceResource s)
+
+instance P.HasLocation (NotificationHubNamespaceResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: NotificationHubNamespaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: NotificationHubNamespaceResource s)
+
+instance P.HasName (NotificationHubNamespaceResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: NotificationHubNamespaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: NotificationHubNamespaceResource s)
+
+instance P.HasNamespaceType (NotificationHubNamespaceResource s) (TF.Attr s P.Text) where
+    namespaceType =
+        P.lens (_namespaceType :: NotificationHubNamespaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _namespaceType = a } :: NotificationHubNamespaceResource s)
+
+instance P.HasResourceGroupName (NotificationHubNamespaceResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: NotificationHubNamespaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: NotificationHubNamespaceResource s)
+
+instance P.HasSku (NotificationHubNamespaceResource s) (TF.Attr s (SkuSetting s)) where
+    sku =
+        P.lens (_sku :: NotificationHubNamespaceResource s -> TF.Attr s (SkuSetting s))
+               (\s a -> s { _sku = a } :: NotificationHubNamespaceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NotificationHubNamespaceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedServicebusEndpoint (TF.Ref s' (NotificationHubNamespaceResource s)) (TF.Attr s P.Text) where
+    computedServicebusEndpoint x = TF.compute (TF.refKey x) "servicebus_endpoint"
+
+-- | @azurerm_notification_hub@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/notification_hub.html terraform documentation>
+-- for more information.
+data NotificationHubResource s = NotificationHubResource'
+    { _apnsCredential    :: TF.Attr s (ApnsCredentialSetting s)
+    -- ^ @apns_credential@ - (Optional)
+    --
+    , _gcmCredential     :: TF.Attr s (GcmCredentialSetting s)
+    -- ^ @gcm_credential@ - (Optional)
+    --
+    , _location          :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _namespaceName     :: TF.Attr s P.Text
+    -- ^ @namespace_name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_notification_hub@ resource value.
+notificationHubResource
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @namespace_name@ ('P._namespaceName', 'P.namespaceName')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> P.Resource (NotificationHubResource s)
+notificationHubResource _location _name _namespaceName _resourceGroupName =
+    TF.unsafeResource "azurerm_notification_hub" TF.validator $
+        NotificationHubResource'
+            { _apnsCredential = TF.Nil
+            , _gcmCredential = TF.Nil
+            , _location = _location
+            , _name = _name
+            , _namespaceName = _namespaceName
+            , _resourceGroupName = _resourceGroupName
+            }
+
+instance TF.IsObject (NotificationHubResource s) where
+    toObject NotificationHubResource'{..} = P.catMaybes
+        [ TF.assign "apns_credential" <$> TF.attribute _apnsCredential
+        , TF.assign "gcm_credential" <$> TF.attribute _gcmCredential
+        , TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "namespace_name" <$> TF.attribute _namespaceName
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        ]
+
+instance TF.IsValid (NotificationHubResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_apnsCredential"
+                  (_apnsCredential
+                      :: NotificationHubResource s -> TF.Attr s (ApnsCredentialSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_gcmCredential"
+                  (_gcmCredential
+                      :: NotificationHubResource s -> TF.Attr s (GcmCredentialSetting s))
+                  TF.validator
+
+instance P.HasApnsCredential (NotificationHubResource s) (TF.Attr s (ApnsCredentialSetting s)) where
+    apnsCredential =
+        P.lens (_apnsCredential :: NotificationHubResource s -> TF.Attr s (ApnsCredentialSetting s))
+               (\s a -> s { _apnsCredential = a } :: NotificationHubResource s)
+
+instance P.HasGcmCredential (NotificationHubResource s) (TF.Attr s (GcmCredentialSetting s)) where
+    gcmCredential =
+        P.lens (_gcmCredential :: NotificationHubResource s -> TF.Attr s (GcmCredentialSetting s))
+               (\s a -> s { _gcmCredential = a } :: NotificationHubResource s)
+
+instance P.HasLocation (NotificationHubResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: NotificationHubResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: NotificationHubResource s)
+
+instance P.HasName (NotificationHubResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: NotificationHubResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: NotificationHubResource s)
+
+instance P.HasNamespaceName (NotificationHubResource s) (TF.Attr s P.Text) where
+    namespaceName =
+        P.lens (_namespaceName :: NotificationHubResource s -> TF.Attr s P.Text)
+               (\s a -> s { _namespaceName = a } :: NotificationHubResource s)
+
+instance P.HasResourceGroupName (NotificationHubResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: NotificationHubResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: NotificationHubResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NotificationHubResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_packet_capture@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/packet_capture.html terraform documentation>
+-- for more information.
+data PacketCaptureResource s = PacketCaptureResource'
+    { _filter                 :: TF.Attr s [TF.Attr s (FilterSetting s)]
+    -- ^ @filter@ - (Optional, Forces New)
+    --
+    , _maximumBytesPerPacket  :: TF.Attr s P.Int
+    -- ^ @maximum_bytes_per_packet@ - (Optional, Forces New)
+    --
+    , _maximumBytesPerSession :: TF.Attr s P.Int
+    -- ^ @maximum_bytes_per_session@ - (Optional, Forces New)
+    --
+    , _maximumCaptureDuration :: TF.Attr s P.Int
+    -- ^ @maximum_capture_duration@ - (Optional, Forces New)
+    --
+    , _name                   :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _networkWatcherName     :: TF.Attr s P.Text
+    -- ^ @network_watcher_name@ - (Required, Forces New)
+    --
+    , _resourceGroupName      :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _storageLocation        :: TF.Attr s (StorageLocationSetting s)
+    -- ^ @storage_location@ - (Required, Forces New)
+    --
+    , _targetResourceId       :: TF.Attr s P.Text
+    -- ^ @target_resource_id@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_packet_capture@ resource value.
+packetCaptureResource
+    :: TF.Attr s P.Text -- ^ @target_resource_id@ ('P._targetResourceId', 'P.targetResourceId')
+    -> TF.Attr s (StorageLocationSetting s) -- ^ @storage_location@ ('P._storageLocation', 'P.storageLocation')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @network_watcher_name@ ('P._networkWatcherName', 'P.networkWatcherName')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> P.Resource (PacketCaptureResource s)
+packetCaptureResource _targetResourceId _storageLocation _name _networkWatcherName _resourceGroupName =
+    TF.unsafeResource "azurerm_packet_capture" TF.validator $
+        PacketCaptureResource'
+            { _filter = TF.Nil
+            , _maximumBytesPerPacket = TF.value 0
+            , _maximumBytesPerSession = TF.value 1073741824
+            , _maximumCaptureDuration = TF.value 18000
+            , _name = _name
+            , _networkWatcherName = _networkWatcherName
+            , _resourceGroupName = _resourceGroupName
+            , _storageLocation = _storageLocation
+            , _targetResourceId = _targetResourceId
+            }
+
+instance TF.IsObject (PacketCaptureResource s) where
+    toObject PacketCaptureResource'{..} = P.catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "maximum_bytes_per_packet" <$> TF.attribute _maximumBytesPerPacket
+        , TF.assign "maximum_bytes_per_session" <$> TF.attribute _maximumBytesPerSession
+        , TF.assign "maximum_capture_duration" <$> TF.attribute _maximumCaptureDuration
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_watcher_name" <$> TF.attribute _networkWatcherName
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "storage_location" <$> TF.attribute _storageLocation
+        , TF.assign "target_resource_id" <$> TF.attribute _targetResourceId
+        ]
+
+instance TF.IsValid (PacketCaptureResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_storageLocation"
+                  (_storageLocation
+                      :: PacketCaptureResource s -> TF.Attr s (StorageLocationSetting s))
+                  TF.validator
+
+instance P.HasFilter (PacketCaptureResource s) (TF.Attr s [TF.Attr s (FilterSetting s)]) where
+    filter =
+        P.lens (_filter :: PacketCaptureResource s -> TF.Attr s [TF.Attr s (FilterSetting s)])
+               (\s a -> s { _filter = a } :: PacketCaptureResource s)
+
+instance P.HasMaximumBytesPerPacket (PacketCaptureResource s) (TF.Attr s P.Int) where
+    maximumBytesPerPacket =
+        P.lens (_maximumBytesPerPacket :: PacketCaptureResource s -> TF.Attr s P.Int)
+               (\s a -> s { _maximumBytesPerPacket = a } :: PacketCaptureResource s)
+
+instance P.HasMaximumBytesPerSession (PacketCaptureResource s) (TF.Attr s P.Int) where
+    maximumBytesPerSession =
+        P.lens (_maximumBytesPerSession :: PacketCaptureResource s -> TF.Attr s P.Int)
+               (\s a -> s { _maximumBytesPerSession = a } :: PacketCaptureResource s)
+
+instance P.HasMaximumCaptureDuration (PacketCaptureResource s) (TF.Attr s P.Int) where
+    maximumCaptureDuration =
+        P.lens (_maximumCaptureDuration :: PacketCaptureResource s -> TF.Attr s P.Int)
+               (\s a -> s { _maximumCaptureDuration = a } :: PacketCaptureResource s)
+
+instance P.HasName (PacketCaptureResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: PacketCaptureResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: PacketCaptureResource s)
+
+instance P.HasNetworkWatcherName (PacketCaptureResource s) (TF.Attr s P.Text) where
+    networkWatcherName =
+        P.lens (_networkWatcherName :: PacketCaptureResource s -> TF.Attr s P.Text)
+               (\s a -> s { _networkWatcherName = a } :: PacketCaptureResource s)
+
+instance P.HasResourceGroupName (PacketCaptureResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: PacketCaptureResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: PacketCaptureResource s)
+
+instance P.HasStorageLocation (PacketCaptureResource s) (TF.Attr s (StorageLocationSetting s)) where
+    storageLocation =
+        P.lens (_storageLocation :: PacketCaptureResource s -> TF.Attr s (StorageLocationSetting s))
+               (\s a -> s { _storageLocation = a } :: PacketCaptureResource s)
+
+instance P.HasTargetResourceId (PacketCaptureResource s) (TF.Attr s P.Text) where
+    targetResourceId =
+        P.lens (_targetResourceId :: PacketCaptureResource s -> TF.Attr s P.Text)
+               (\s a -> s { _targetResourceId = a } :: PacketCaptureResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PacketCaptureResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_policy_assignment@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/policy_assignment.html terraform documentation>
+-- for more information.
+data PolicyAssignmentResource s = PolicyAssignmentResource'
+    { _description        :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional, Forces New)
+    --
+    , _displayName        :: TF.Attr s P.Text
+    -- ^ @display_name@ - (Optional, Forces New)
+    --
+    , _name               :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _parameters         :: TF.Attr s P.Text
+    -- ^ @parameters@ - (Optional, Forces New)
+    --
+    , _policyDefinitionId :: TF.Attr s P.Text
+    -- ^ @policy_definition_id@ - (Required, Forces New)
+    --
+    , _scope              :: TF.Attr s P.Text
+    -- ^ @scope@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_policy_assignment@ resource value.
+policyAssignmentResource
+    :: TF.Attr s P.Text -- ^ @policy_definition_id@ ('P._policyDefinitionId', 'P.policyDefinitionId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @scope@ ('P._scope', 'P.scope')
+    -> P.Resource (PolicyAssignmentResource s)
+policyAssignmentResource _policyDefinitionId _name _scope =
+    TF.unsafeResource "azurerm_policy_assignment" TF.validator $
+        PolicyAssignmentResource'
+            { _description = TF.Nil
+            , _displayName = TF.Nil
+            , _name = _name
+            , _parameters = TF.Nil
+            , _policyDefinitionId = _policyDefinitionId
+            , _scope = _scope
+            }
+
+instance TF.IsObject (PolicyAssignmentResource s) where
+    toObject PolicyAssignmentResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "display_name" <$> TF.attribute _displayName
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parameters" <$> TF.attribute _parameters
+        , TF.assign "policy_definition_id" <$> TF.attribute _policyDefinitionId
+        , TF.assign "scope" <$> TF.attribute _scope
+        ]
+
+instance TF.IsValid (PolicyAssignmentResource s) where
+    validator = P.mempty
+
+instance P.HasDescription (PolicyAssignmentResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: PolicyAssignmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: PolicyAssignmentResource s)
+
+instance P.HasDisplayName (PolicyAssignmentResource s) (TF.Attr s P.Text) where
+    displayName =
+        P.lens (_displayName :: PolicyAssignmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _displayName = a } :: PolicyAssignmentResource s)
+
+instance P.HasName (PolicyAssignmentResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: PolicyAssignmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: PolicyAssignmentResource s)
+
+instance P.HasParameters (PolicyAssignmentResource s) (TF.Attr s P.Text) where
+    parameters =
+        P.lens (_parameters :: PolicyAssignmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _parameters = a } :: PolicyAssignmentResource s)
+
+instance P.HasPolicyDefinitionId (PolicyAssignmentResource s) (TF.Attr s P.Text) where
+    policyDefinitionId =
+        P.lens (_policyDefinitionId :: PolicyAssignmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _policyDefinitionId = a } :: PolicyAssignmentResource s)
+
+instance P.HasScope (PolicyAssignmentResource s) (TF.Attr s P.Text) where
+    scope =
+        P.lens (_scope :: PolicyAssignmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _scope = a } :: PolicyAssignmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PolicyAssignmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_policy_definition@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/policy_definition.html terraform documentation>
+-- for more information.
+data PolicyDefinitionResource s = PolicyDefinitionResource'
+    { _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _displayName :: TF.Attr s P.Text
+    -- ^ @display_name@ - (Required)
+    --
+    , _metadata    :: TF.Attr s P.Text
+    -- ^ @metadata@ - (Optional)
+    --
+    , _mode        :: TF.Attr s P.Text
+    -- ^ @mode@ - (Required, Forces New)
+    --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _parameters  :: TF.Attr s P.Text
+    -- ^ @parameters@ - (Optional)
+    --
+    , _policyRule  :: TF.Attr s P.Text
+    -- ^ @policy_rule@ - (Optional)
+    --
+    , _policyType  :: TF.Attr s P.Text
+    -- ^ @policy_type@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_policy_definition@ resource value.
+policyDefinitionResource
+    :: TF.Attr s P.Text -- ^ @mode@ ('P._mode', 'P.mode')
+    -> TF.Attr s P.Text -- ^ @display_name@ ('P._displayName', 'P.displayName')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @policy_type@ ('P._policyType', 'P.policyType')
+    -> P.Resource (PolicyDefinitionResource s)
+policyDefinitionResource _mode _displayName _name _policyType =
+    TF.unsafeResource "azurerm_policy_definition" TF.validator $
+        PolicyDefinitionResource'
+            { _description = TF.Nil
+            , _displayName = _displayName
+            , _metadata = TF.Nil
+            , _mode = _mode
+            , _name = _name
+            , _parameters = TF.Nil
+            , _policyRule = TF.Nil
+            , _policyType = _policyType
+            }
+
+instance TF.IsObject (PolicyDefinitionResource s) where
+    toObject PolicyDefinitionResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "display_name" <$> TF.attribute _displayName
+        , TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "mode" <$> TF.attribute _mode
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parameters" <$> TF.attribute _parameters
+        , TF.assign "policy_rule" <$> TF.attribute _policyRule
+        , TF.assign "policy_type" <$> TF.attribute _policyType
+        ]
+
+instance TF.IsValid (PolicyDefinitionResource s) where
+    validator = P.mempty
+
+instance P.HasDescription (PolicyDefinitionResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: PolicyDefinitionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: PolicyDefinitionResource s)
+
+instance P.HasDisplayName (PolicyDefinitionResource s) (TF.Attr s P.Text) where
+    displayName =
+        P.lens (_displayName :: PolicyDefinitionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _displayName = a } :: PolicyDefinitionResource s)
+
+instance P.HasMetadata (PolicyDefinitionResource s) (TF.Attr s P.Text) where
+    metadata =
+        P.lens (_metadata :: PolicyDefinitionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _metadata = a } :: PolicyDefinitionResource s)
+
+instance P.HasMode (PolicyDefinitionResource s) (TF.Attr s P.Text) where
+    mode =
+        P.lens (_mode :: PolicyDefinitionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _mode = a } :: PolicyDefinitionResource s)
+
+instance P.HasName (PolicyDefinitionResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: PolicyDefinitionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: PolicyDefinitionResource s)
+
+instance P.HasParameters (PolicyDefinitionResource s) (TF.Attr s P.Text) where
+    parameters =
+        P.lens (_parameters :: PolicyDefinitionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _parameters = a } :: PolicyDefinitionResource s)
+
+instance P.HasPolicyRule (PolicyDefinitionResource s) (TF.Attr s P.Text) where
+    policyRule =
+        P.lens (_policyRule :: PolicyDefinitionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _policyRule = a } :: PolicyDefinitionResource s)
+
+instance P.HasPolicyType (PolicyDefinitionResource s) (TF.Attr s P.Text) where
+    policyType =
+        P.lens (_policyType :: PolicyDefinitionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _policyType = a } :: PolicyDefinitionResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PolicyDefinitionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_postgresql_configuration@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/postgresql_configuration.html terraform documentation>
+-- for more information.
+data PostgresqlConfigurationResource s = PostgresqlConfigurationResource'
+    { _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _serverName        :: TF.Attr s P.Text
+    -- ^ @server_name@ - (Required, Forces New)
+    --
+    , _value             :: TF.Attr s P.Text
+    -- ^ @value@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_postgresql_configuration@ resource value.
+postgresqlConfigurationResource
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @server_name@ ('P._serverName', 'P.serverName')
+    -> TF.Attr s P.Text -- ^ @value@ ('P._value', 'P.value')
+    -> P.Resource (PostgresqlConfigurationResource s)
+postgresqlConfigurationResource _name _resourceGroupName _serverName _value =
+    TF.unsafeResource "azurerm_postgresql_configuration" TF.validator $
+        PostgresqlConfigurationResource'
+            { _name = _name
+            , _resourceGroupName = _resourceGroupName
+            , _serverName = _serverName
+            , _value = _value
+            }
+
+instance TF.IsObject (PostgresqlConfigurationResource s) where
+    toObject PostgresqlConfigurationResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "server_name" <$> TF.attribute _serverName
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (PostgresqlConfigurationResource s) where
+    validator = P.mempty
+
+instance P.HasName (PostgresqlConfigurationResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: PostgresqlConfigurationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: PostgresqlConfigurationResource s)
+
+instance P.HasResourceGroupName (PostgresqlConfigurationResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: PostgresqlConfigurationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: PostgresqlConfigurationResource s)
+
+instance P.HasServerName (PostgresqlConfigurationResource s) (TF.Attr s P.Text) where
+    serverName =
+        P.lens (_serverName :: PostgresqlConfigurationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _serverName = a } :: PostgresqlConfigurationResource s)
+
+instance P.HasValue (PostgresqlConfigurationResource s) (TF.Attr s P.Text) where
+    value =
+        P.lens (_value :: PostgresqlConfigurationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: PostgresqlConfigurationResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PostgresqlConfigurationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_postgresql_database@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/postgresql_database.html terraform documentation>
+-- for more information.
+data PostgresqlDatabaseResource s = PostgresqlDatabaseResource'
+    { _charset           :: TF.Attr s P.Text
+    -- ^ @charset@ - (Required, Forces New)
+    --
+    , _collation         :: TF.Attr s P.Text
+    -- ^ @collation@ - (Required, Forces New)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _serverName        :: TF.Attr s P.Text
+    -- ^ @server_name@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_postgresql_database@ resource value.
+postgresqlDatabaseResource
+    :: TF.Attr s P.Text -- ^ @charset@ ('P._charset', 'P.charset')
+    -> TF.Attr s P.Text -- ^ @collation@ ('P._collation', 'P.collation')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @server_name@ ('P._serverName', 'P.serverName')
+    -> P.Resource (PostgresqlDatabaseResource s)
+postgresqlDatabaseResource _charset _collation _name _resourceGroupName _serverName =
+    TF.unsafeResource "azurerm_postgresql_database" TF.validator $
+        PostgresqlDatabaseResource'
+            { _charset = _charset
+            , _collation = _collation
+            , _name = _name
+            , _resourceGroupName = _resourceGroupName
+            , _serverName = _serverName
+            }
+
+instance TF.IsObject (PostgresqlDatabaseResource s) where
+    toObject PostgresqlDatabaseResource'{..} = P.catMaybes
+        [ TF.assign "charset" <$> TF.attribute _charset
+        , TF.assign "collation" <$> TF.attribute _collation
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "server_name" <$> TF.attribute _serverName
+        ]
+
+instance TF.IsValid (PostgresqlDatabaseResource s) where
+    validator = P.mempty
+
+instance P.HasCharset (PostgresqlDatabaseResource s) (TF.Attr s P.Text) where
+    charset =
+        P.lens (_charset :: PostgresqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _charset = a } :: PostgresqlDatabaseResource s)
+
+instance P.HasCollation (PostgresqlDatabaseResource s) (TF.Attr s P.Text) where
+    collation =
+        P.lens (_collation :: PostgresqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _collation = a } :: PostgresqlDatabaseResource s)
+
+instance P.HasName (PostgresqlDatabaseResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: PostgresqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: PostgresqlDatabaseResource s)
+
+instance P.HasResourceGroupName (PostgresqlDatabaseResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: PostgresqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: PostgresqlDatabaseResource s)
+
+instance P.HasServerName (PostgresqlDatabaseResource s) (TF.Attr s P.Text) where
+    serverName =
+        P.lens (_serverName :: PostgresqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _serverName = a } :: PostgresqlDatabaseResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PostgresqlDatabaseResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_postgresql_firewall_rule@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/postgresql_firewall_rule.html terraform documentation>
+-- for more information.
+data PostgresqlFirewallRuleResource s = PostgresqlFirewallRuleResource'
+    { _endIpAddress      :: TF.Attr s P.Text
+    -- ^ @end_ip_address@ - (Required, Forces New)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _serverName        :: TF.Attr s P.Text
+    -- ^ @server_name@ - (Required, Forces New)
+    --
+    , _startIpAddress    :: TF.Attr s P.Text
+    -- ^ @start_ip_address@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_postgresql_firewall_rule@ resource value.
+postgresqlFirewallRuleResource
+    :: TF.Attr s P.Text -- ^ @end_ip_address@ ('P._endIpAddress', 'P.endIpAddress')
+    -> TF.Attr s P.Text -- ^ @start_ip_address@ ('P._startIpAddress', 'P.startIpAddress')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @server_name@ ('P._serverName', 'P.serverName')
+    -> P.Resource (PostgresqlFirewallRuleResource s)
+postgresqlFirewallRuleResource _endIpAddress _startIpAddress _name _resourceGroupName _serverName =
+    TF.unsafeResource "azurerm_postgresql_firewall_rule" TF.validator $
+        PostgresqlFirewallRuleResource'
+            { _endIpAddress = _endIpAddress
+            , _name = _name
+            , _resourceGroupName = _resourceGroupName
+            , _serverName = _serverName
+            , _startIpAddress = _startIpAddress
+            }
+
+instance TF.IsObject (PostgresqlFirewallRuleResource s) where
+    toObject PostgresqlFirewallRuleResource'{..} = P.catMaybes
+        [ TF.assign "end_ip_address" <$> TF.attribute _endIpAddress
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "server_name" <$> TF.attribute _serverName
+        , TF.assign "start_ip_address" <$> TF.attribute _startIpAddress
+        ]
+
+instance TF.IsValid (PostgresqlFirewallRuleResource s) where
+    validator = P.mempty
+
+instance P.HasEndIpAddress (PostgresqlFirewallRuleResource s) (TF.Attr s P.Text) where
+    endIpAddress =
+        P.lens (_endIpAddress :: PostgresqlFirewallRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _endIpAddress = a } :: PostgresqlFirewallRuleResource s)
+
+instance P.HasName (PostgresqlFirewallRuleResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: PostgresqlFirewallRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: PostgresqlFirewallRuleResource s)
+
+instance P.HasResourceGroupName (PostgresqlFirewallRuleResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: PostgresqlFirewallRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: PostgresqlFirewallRuleResource s)
+
+instance P.HasServerName (PostgresqlFirewallRuleResource s) (TF.Attr s P.Text) where
+    serverName =
+        P.lens (_serverName :: PostgresqlFirewallRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _serverName = a } :: PostgresqlFirewallRuleResource s)
+
+instance P.HasStartIpAddress (PostgresqlFirewallRuleResource s) (TF.Attr s P.Text) where
+    startIpAddress =
+        P.lens (_startIpAddress :: PostgresqlFirewallRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _startIpAddress = a } :: PostgresqlFirewallRuleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PostgresqlFirewallRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_postgresql_server@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/postgresql_server.html terraform documentation>
+-- for more information.
+data PostgresqlServerResource s = PostgresqlServerResource'
+    { _administratorLogin         :: TF.Attr s P.Text
+    -- ^ @administrator_login@ - (Required, Forces New)
+    --
+    , _administratorLoginPassword :: TF.Attr s P.Text
+    -- ^ @administrator_login_password@ - (Required)
+    --
+    , _location                   :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name                       :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _resourceGroupName          :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _sku                        :: TF.Attr s (SkuSetting s)
+    -- ^ @sku@ - (Required)
+    --
+    , _sslEnforcement             :: TF.Attr s P.Text
+    -- ^ @ssl_enforcement@ - (Required)
+    --
+    , _storageProfile             :: TF.Attr s (StorageProfileSetting s)
+    -- ^ @storage_profile@ - (Required)
+    --
+    , _tags                       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _version                    :: TF.Attr s P.Text
+    -- ^ @version@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_postgresql_server@ resource value.
+postgresqlServerResource
+    :: TF.Attr s P.Text -- ^ @ssl_enforcement@ ('P._sslEnforcement', 'P.sslEnforcement')
+    -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @administrator_login@ ('P._administratorLogin', 'P.administratorLogin')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @administrator_login_password@ ('P._administratorLoginPassword', 'P.administratorLoginPassword')
+    -> TF.Attr s (StorageProfileSetting s) -- ^ @storage_profile@ ('P._storageProfile', 'P.storageProfile')
+    -> TF.Attr s (SkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
+    -> TF.Attr s P.Text -- ^ @version@ ('P._version', 'P.version')
+    -> P.Resource (PostgresqlServerResource s)
+postgresqlServerResource _sslEnforcement _location _administratorLogin _name _resourceGroupName _administratorLoginPassword _storageProfile _sku _version =
+    TF.unsafeResource "azurerm_postgresql_server" TF.validator $
+        PostgresqlServerResource'
+            { _administratorLogin = _administratorLogin
+            , _administratorLoginPassword = _administratorLoginPassword
+            , _location = _location
+            , _name = _name
+            , _resourceGroupName = _resourceGroupName
+            , _sku = _sku
+            , _sslEnforcement = _sslEnforcement
+            , _storageProfile = _storageProfile
+            , _tags = TF.Nil
+            , _version = _version
+            }
+
+instance TF.IsObject (PostgresqlServerResource s) where
+    toObject PostgresqlServerResource'{..} = P.catMaybes
+        [ TF.assign "administrator_login" <$> TF.attribute _administratorLogin
+        , TF.assign "administrator_login_password" <$> TF.attribute _administratorLoginPassword
+        , TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "sku" <$> TF.attribute _sku
+        , TF.assign "ssl_enforcement" <$> TF.attribute _sslEnforcement
+        , TF.assign "storage_profile" <$> TF.attribute _storageProfile
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "version" <$> TF.attribute _version
+        ]
+
+instance TF.IsValid (PostgresqlServerResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_sku"
+                  (_sku
+                      :: PostgresqlServerResource s -> TF.Attr s (SkuSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_storageProfile"
+                  (_storageProfile
+                      :: PostgresqlServerResource s -> TF.Attr s (StorageProfileSetting s))
+                  TF.validator
+
+instance P.HasAdministratorLogin (PostgresqlServerResource s) (TF.Attr s P.Text) where
+    administratorLogin =
+        P.lens (_administratorLogin :: PostgresqlServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _administratorLogin = a } :: PostgresqlServerResource s)
+
+instance P.HasAdministratorLoginPassword (PostgresqlServerResource s) (TF.Attr s P.Text) where
+    administratorLoginPassword =
+        P.lens (_administratorLoginPassword :: PostgresqlServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _administratorLoginPassword = a } :: PostgresqlServerResource s)
+
+instance P.HasLocation (PostgresqlServerResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: PostgresqlServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: PostgresqlServerResource s)
+
+instance P.HasName (PostgresqlServerResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: PostgresqlServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: PostgresqlServerResource s)
+
+instance P.HasResourceGroupName (PostgresqlServerResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: PostgresqlServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: PostgresqlServerResource s)
+
+instance P.HasSku (PostgresqlServerResource s) (TF.Attr s (SkuSetting s)) where
+    sku =
+        P.lens (_sku :: PostgresqlServerResource s -> TF.Attr s (SkuSetting s))
+               (\s a -> s { _sku = a } :: PostgresqlServerResource s)
+
+instance P.HasSslEnforcement (PostgresqlServerResource s) (TF.Attr s P.Text) where
+    sslEnforcement =
+        P.lens (_sslEnforcement :: PostgresqlServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sslEnforcement = a } :: PostgresqlServerResource s)
+
+instance P.HasStorageProfile (PostgresqlServerResource s) (TF.Attr s (StorageProfileSetting s)) where
+    storageProfile =
+        P.lens (_storageProfile :: PostgresqlServerResource s -> TF.Attr s (StorageProfileSetting s))
+               (\s a -> s { _storageProfile = a } :: PostgresqlServerResource s)
+
+instance P.HasTags (PostgresqlServerResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: PostgresqlServerResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: PostgresqlServerResource s)
+
+instance P.HasVersion (PostgresqlServerResource s) (TF.Attr s P.Text) where
+    version =
+        P.lens (_version :: PostgresqlServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _version = a } :: PostgresqlServerResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PostgresqlServerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (PostgresqlServerResource s)) (TF.Attr s P.Text) where
+    computedFqdn x = TF.compute (TF.refKey x) "fqdn"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (PostgresqlServerResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+-- | @azurerm_public_ip@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/public_ip.html terraform documentation>
+-- for more information.
+data PublicIpResource s = PublicIpResource'
+    { _domainNameLabel           :: TF.Attr s P.Text
+    -- ^ @domain_name_label@ - (Optional)
+    --
+    , _idleTimeoutInMinutes      :: TF.Attr s P.Int
+    -- ^ @idle_timeout_in_minutes@ - (Optional)
+    --
+    , _location                  :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name                      :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _publicIpAddressAllocation :: TF.Attr s P.Text
+    -- ^ @public_ip_address_allocation@ - (Required)
+    --
+    , _resourceGroupName         :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _reverseFqdn               :: TF.Attr s P.Text
+    -- ^ @reverse_fqdn@ - (Optional)
+    --
+    , _sku                       :: TF.Attr s P.Text
+    -- ^ @sku@ - (Optional, Forces New)
+    --
+    , _tags                      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _zones                     :: TF.Attr s P.Text
+    -- ^ @zones@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_public_ip@ resource value.
+publicIpResource
+    :: TF.Attr s P.Text -- ^ @public_ip_address_allocation@ ('P._publicIpAddressAllocation', 'P.publicIpAddressAllocation')
+    -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> P.Resource (PublicIpResource s)
+publicIpResource _publicIpAddressAllocation _location _name _resourceGroupName =
+    TF.unsafeResource "azurerm_public_ip" TF.validator $
+        PublicIpResource'
+            { _domainNameLabel = TF.Nil
+            , _idleTimeoutInMinutes = TF.Nil
+            , _location = _location
+            , _name = _name
+            , _publicIpAddressAllocation = _publicIpAddressAllocation
+            , _resourceGroupName = _resourceGroupName
+            , _reverseFqdn = TF.Nil
+            , _sku = TF.value "Basic"
+            , _tags = TF.Nil
+            , _zones = TF.Nil
+            }
+
+instance TF.IsObject (PublicIpResource s) where
+    toObject PublicIpResource'{..} = P.catMaybes
+        [ TF.assign "domain_name_label" <$> TF.attribute _domainNameLabel
+        , TF.assign "idle_timeout_in_minutes" <$> TF.attribute _idleTimeoutInMinutes
+        , TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "public_ip_address_allocation" <$> TF.attribute _publicIpAddressAllocation
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "reverse_fqdn" <$> TF.attribute _reverseFqdn
+        , TF.assign "sku" <$> TF.attribute _sku
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "zones" <$> TF.attribute _zones
+        ]
+
+instance TF.IsValid (PublicIpResource s) where
+    validator = P.mempty
+
+instance P.HasDomainNameLabel (PublicIpResource s) (TF.Attr s P.Text) where
+    domainNameLabel =
+        P.lens (_domainNameLabel :: PublicIpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _domainNameLabel = a } :: PublicIpResource s)
+
+instance P.HasIdleTimeoutInMinutes (PublicIpResource s) (TF.Attr s P.Int) where
+    idleTimeoutInMinutes =
+        P.lens (_idleTimeoutInMinutes :: PublicIpResource s -> TF.Attr s P.Int)
+               (\s a -> s { _idleTimeoutInMinutes = a } :: PublicIpResource s)
+
+instance P.HasLocation (PublicIpResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: PublicIpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: PublicIpResource s)
+
+instance P.HasName (PublicIpResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: PublicIpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: PublicIpResource s)
+
+instance P.HasPublicIpAddressAllocation (PublicIpResource s) (TF.Attr s P.Text) where
+    publicIpAddressAllocation =
+        P.lens (_publicIpAddressAllocation :: PublicIpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _publicIpAddressAllocation = a } :: PublicIpResource s)
+
+instance P.HasResourceGroupName (PublicIpResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: PublicIpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: PublicIpResource s)
+
+instance P.HasReverseFqdn (PublicIpResource s) (TF.Attr s P.Text) where
+    reverseFqdn =
+        P.lens (_reverseFqdn :: PublicIpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _reverseFqdn = a } :: PublicIpResource s)
+
+instance P.HasSku (PublicIpResource s) (TF.Attr s P.Text) where
+    sku =
+        P.lens (_sku :: PublicIpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sku = a } :: PublicIpResource s)
+
+instance P.HasTags (PublicIpResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: PublicIpResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: PublicIpResource s)
+
+instance P.HasZones (PublicIpResource s) (TF.Attr s P.Text) where
+    zones =
+        P.lens (_zones :: PublicIpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zones = a } :: PublicIpResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
+    computedFqdn x = TF.compute (TF.refKey x) "fqdn"
+
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (PublicIpResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+-- | @azurerm_recovery_services_vault@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/recovery_services_vault.html terraform documentation>
+-- for more information.
+data RecoveryServicesVaultResource s = RecoveryServicesVaultResource'
+    { _location          :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _sku               :: TF.Attr s P.Text
+    -- ^ @sku@ - (Required)
+    --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_recovery_services_vault@ resource value.
+recoveryServicesVaultResource
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @sku@ ('P._sku', 'P.sku')
+    -> P.Resource (RecoveryServicesVaultResource s)
+recoveryServicesVaultResource _location _name _resourceGroupName _sku =
+    TF.unsafeResource "azurerm_recovery_services_vault" TF.validator $
+        RecoveryServicesVaultResource'
+            { _location = _location
+            , _name = _name
+            , _resourceGroupName = _resourceGroupName
+            , _sku = _sku
+            , _tags = TF.Nil
+            }
+
+instance TF.IsObject (RecoveryServicesVaultResource s) where
+    toObject RecoveryServicesVaultResource'{..} = P.catMaybes
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "sku" <$> TF.attribute _sku
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance TF.IsValid (RecoveryServicesVaultResource s) where
+    validator = P.mempty
+
+instance P.HasLocation (RecoveryServicesVaultResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: RecoveryServicesVaultResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: RecoveryServicesVaultResource s)
+
+instance P.HasName (RecoveryServicesVaultResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: RecoveryServicesVaultResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: RecoveryServicesVaultResource s)
+
+instance P.HasResourceGroupName (RecoveryServicesVaultResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: RecoveryServicesVaultResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: RecoveryServicesVaultResource s)
+
+instance P.HasSku (RecoveryServicesVaultResource s) (TF.Attr s P.Text) where
+    sku =
+        P.lens (_sku :: RecoveryServicesVaultResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sku = a } :: RecoveryServicesVaultResource s)
+
+instance P.HasTags (RecoveryServicesVaultResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: RecoveryServicesVaultResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: RecoveryServicesVaultResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RecoveryServicesVaultResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (RecoveryServicesVaultResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+-- | @azurerm_redis_cache@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/redis_cache.html terraform documentation>
+-- for more information.
+data RedisCacheResource s = RedisCacheResource'
+    { _capacity               :: TF.Attr s P.Int
+    -- ^ @capacity@ - (Required)
+    --
+    , _enableNonSslPort       :: TF.Attr s P.Bool
+    -- ^ @enable_non_ssl_port@ - (Optional)
+    --
+    , _family'                :: TF.Attr s P.Text
+    -- ^ @family@ - (Required)
+    --
+    , _location               :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name                   :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _patchSchedule          :: TF.Attr s [TF.Attr s (PatchScheduleSetting s)]
+    -- ^ @patch_schedule@ - (Optional)
+    --
+    , _privateStaticIpAddress :: TF.Attr s P.Text
+    -- ^ @private_static_ip_address@ - (Optional, Forces New)
+    --
+    , _redisConfiguration     :: TF.Attr s (RedisConfigurationSetting s)
+    -- ^ @redis_configuration@ - (Required)
+    --
+    , _resourceGroupName      :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _shardCount             :: TF.Attr s P.Int
+    -- ^ @shard_count@ - (Optional)
+    --
+    , _skuName                :: TF.Attr s P.Text
+    -- ^ @sku_name@ - (Required)
+    --
+    , _subnetId               :: TF.Attr s P.Text
+    -- ^ @subnet_id@ - (Optional, Forces New)
+    --
+    , _tags                   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_redis_cache@ resource value.
+redisCacheResource
+    :: TF.Attr s P.Int -- ^ @capacity@ ('P._capacity', 'P.capacity')
+    -> TF.Attr s (RedisConfigurationSetting s) -- ^ @redis_configuration@ ('P._redisConfiguration', 'P.redisConfiguration')
+    -> TF.Attr s P.Text -- ^ @family@ ('P._family'', 'P.family'')
+    -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @sku_name@ ('P._skuName', 'P.skuName')
+    -> P.Resource (RedisCacheResource s)
+redisCacheResource _capacity _redisConfiguration _family' _location _name _resourceGroupName _skuName =
+    TF.unsafeResource "azurerm_redis_cache" TF.validator $
+        RedisCacheResource'
+            { _capacity = _capacity
+            , _enableNonSslPort = TF.value P.False
+            , _family' = _family'
+            , _location = _location
+            , _name = _name
+            , _patchSchedule = TF.Nil
+            , _privateStaticIpAddress = TF.Nil
+            , _redisConfiguration = _redisConfiguration
+            , _resourceGroupName = _resourceGroupName
+            , _shardCount = TF.Nil
+            , _skuName = _skuName
+            , _subnetId = TF.Nil
+            , _tags = TF.Nil
+            }
+
+instance TF.IsObject (RedisCacheResource s) where
+    toObject RedisCacheResource'{..} = P.catMaybes
+        [ TF.assign "capacity" <$> TF.attribute _capacity
+        , TF.assign "enable_non_ssl_port" <$> TF.attribute _enableNonSslPort
+        , TF.assign "family" <$> TF.attribute _family'
+        , TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "patch_schedule" <$> TF.attribute _patchSchedule
+        , TF.assign "private_static_ip_address" <$> TF.attribute _privateStaticIpAddress
+        , TF.assign "redis_configuration" <$> TF.attribute _redisConfiguration
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "shard_count" <$> TF.attribute _shardCount
+        , TF.assign "sku_name" <$> TF.attribute _skuName
+        , TF.assign "subnet_id" <$> TF.attribute _subnetId
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance TF.IsValid (RedisCacheResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_redisConfiguration"
+                  (_redisConfiguration
+                      :: RedisCacheResource s -> TF.Attr s (RedisConfigurationSetting s))
+                  TF.validator
+
+instance P.HasCapacity (RedisCacheResource s) (TF.Attr s P.Int) where
+    capacity =
+        P.lens (_capacity :: RedisCacheResource s -> TF.Attr s P.Int)
+               (\s a -> s { _capacity = a } :: RedisCacheResource s)
+
+instance P.HasEnableNonSslPort (RedisCacheResource s) (TF.Attr s P.Bool) where
+    enableNonSslPort =
+        P.lens (_enableNonSslPort :: RedisCacheResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enableNonSslPort = a } :: RedisCacheResource s)
+
+instance P.HasFamily' (RedisCacheResource s) (TF.Attr s P.Text) where
+    family' =
+        P.lens (_family' :: RedisCacheResource s -> TF.Attr s P.Text)
+               (\s a -> s { _family' = a } :: RedisCacheResource s)
+
+instance P.HasLocation (RedisCacheResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: RedisCacheResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: RedisCacheResource s)
+
+instance P.HasName (RedisCacheResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: RedisCacheResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: RedisCacheResource s)
+
+instance P.HasPatchSchedule (RedisCacheResource s) (TF.Attr s [TF.Attr s (PatchScheduleSetting s)]) where
+    patchSchedule =
+        P.lens (_patchSchedule :: RedisCacheResource s -> TF.Attr s [TF.Attr s (PatchScheduleSetting s)])
+               (\s a -> s { _patchSchedule = a } :: RedisCacheResource s)
+
+instance P.HasPrivateStaticIpAddress (RedisCacheResource s) (TF.Attr s P.Text) where
+    privateStaticIpAddress =
+        P.lens (_privateStaticIpAddress :: RedisCacheResource s -> TF.Attr s P.Text)
+               (\s a -> s { _privateStaticIpAddress = a } :: RedisCacheResource s)
+
+instance P.HasRedisConfiguration (RedisCacheResource s) (TF.Attr s (RedisConfigurationSetting s)) where
+    redisConfiguration =
+        P.lens (_redisConfiguration :: RedisCacheResource s -> TF.Attr s (RedisConfigurationSetting s))
+               (\s a -> s { _redisConfiguration = a } :: RedisCacheResource s)
+
+instance P.HasResourceGroupName (RedisCacheResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: RedisCacheResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: RedisCacheResource s)
+
+instance P.HasShardCount (RedisCacheResource s) (TF.Attr s P.Int) where
+    shardCount =
+        P.lens (_shardCount :: RedisCacheResource s -> TF.Attr s P.Int)
+               (\s a -> s { _shardCount = a } :: RedisCacheResource s)
+
+instance P.HasSkuName (RedisCacheResource s) (TF.Attr s P.Text) where
+    skuName =
+        P.lens (_skuName :: RedisCacheResource s -> TF.Attr s P.Text)
+               (\s a -> s { _skuName = a } :: RedisCacheResource s)
+
+instance P.HasSubnetId (RedisCacheResource s) (TF.Attr s P.Text) where
+    subnetId =
+        P.lens (_subnetId :: RedisCacheResource s -> TF.Attr s P.Text)
+               (\s a -> s { _subnetId = a } :: RedisCacheResource s)
+
+instance P.HasTags (RedisCacheResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: RedisCacheResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: RedisCacheResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RedisCacheResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (RedisCacheResource s)) (TF.Attr s P.Text) where
+    computedHostname x = TF.compute (TF.refKey x) "hostname"
+
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (RedisCacheResource s)) (TF.Attr s P.Int) where
+    computedPort x = TF.compute (TF.refKey x) "port"
+
+instance s ~ s' => P.HasComputedPrimaryAccessKey (TF.Ref s' (RedisCacheResource s)) (TF.Attr s P.Text) where
+    computedPrimaryAccessKey x = TF.compute (TF.refKey x) "primary_access_key"
+
+instance s ~ s' => P.HasComputedPrivateStaticIpAddress (TF.Ref s' (RedisCacheResource s)) (TF.Attr s P.Text) where
+    computedPrivateStaticIpAddress x = TF.compute (TF.refKey x) "private_static_ip_address"
+
+instance s ~ s' => P.HasComputedSecondaryAccessKey (TF.Ref s' (RedisCacheResource s)) (TF.Attr s P.Text) where
+    computedSecondaryAccessKey x = TF.compute (TF.refKey x) "secondary_access_key"
+
+instance s ~ s' => P.HasComputedSslPort (TF.Ref s' (RedisCacheResource s)) (TF.Attr s P.Int) where
+    computedSslPort x = TF.compute (TF.refKey x) "ssl_port"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (RedisCacheResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+-- | @azurerm_redis_firewall_rule@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/redis_firewall_rule.html terraform documentation>
+-- for more information.
+data RedisFirewallRuleResource s = RedisFirewallRuleResource'
+    { _endIp             :: TF.Attr s P.Text
+    -- ^ @end_ip@ - (Required)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _redisCacheName    :: TF.Attr s P.Text
+    -- ^ @redis_cache_name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _startIp           :: TF.Attr s P.Text
+    -- ^ @start_ip@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_redis_firewall_rule@ resource value.
+redisFirewallRuleResource
+    :: TF.Attr s P.Text -- ^ @end_ip@ ('P._endIp', 'P.endIp')
+    -> TF.Attr s P.Text -- ^ @start_ip@ ('P._startIp', 'P.startIp')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @redis_cache_name@ ('P._redisCacheName', 'P.redisCacheName')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> P.Resource (RedisFirewallRuleResource s)
+redisFirewallRuleResource _endIp _startIp _name _redisCacheName _resourceGroupName =
+    TF.unsafeResource "azurerm_redis_firewall_rule" TF.validator $
+        RedisFirewallRuleResource'
+            { _endIp = _endIp
+            , _name = _name
+            , _redisCacheName = _redisCacheName
+            , _resourceGroupName = _resourceGroupName
+            , _startIp = _startIp
+            }
+
+instance TF.IsObject (RedisFirewallRuleResource s) where
+    toObject RedisFirewallRuleResource'{..} = P.catMaybes
+        [ TF.assign "end_ip" <$> TF.attribute _endIp
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "redis_cache_name" <$> TF.attribute _redisCacheName
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "start_ip" <$> TF.attribute _startIp
+        ]
+
+instance TF.IsValid (RedisFirewallRuleResource s) where
+    validator = P.mempty
+
+instance P.HasEndIp (RedisFirewallRuleResource s) (TF.Attr s P.Text) where
+    endIp =
+        P.lens (_endIp :: RedisFirewallRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _endIp = a } :: RedisFirewallRuleResource s)
+
+instance P.HasName (RedisFirewallRuleResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: RedisFirewallRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: RedisFirewallRuleResource s)
+
+instance P.HasRedisCacheName (RedisFirewallRuleResource s) (TF.Attr s P.Text) where
+    redisCacheName =
+        P.lens (_redisCacheName :: RedisFirewallRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _redisCacheName = a } :: RedisFirewallRuleResource s)
+
+instance P.HasResourceGroupName (RedisFirewallRuleResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: RedisFirewallRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: RedisFirewallRuleResource s)
+
+instance P.HasStartIp (RedisFirewallRuleResource s) (TF.Attr s P.Text) where
+    startIp =
+        P.lens (_startIp :: RedisFirewallRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _startIp = a } :: RedisFirewallRuleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RedisFirewallRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_relay_namespace@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/relay_namespace.html terraform documentation>
+-- for more information.
+data RelayNamespaceResource s = RelayNamespaceResource'
+    { _location          :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _sku               :: TF.Attr s (SkuSetting s)
+    -- ^ @sku@ - (Required)
+    --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_relay_namespace@ resource value.
+relayNamespaceResource
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s (SkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
+    -> P.Resource (RelayNamespaceResource s)
+relayNamespaceResource _location _name _resourceGroupName _sku =
+    TF.unsafeResource "azurerm_relay_namespace" TF.validator $
+        RelayNamespaceResource'
+            { _location = _location
+            , _name = _name
+            , _resourceGroupName = _resourceGroupName
+            , _sku = _sku
+            , _tags = TF.Nil
+            }
+
+instance TF.IsObject (RelayNamespaceResource s) where
+    toObject RelayNamespaceResource'{..} = P.catMaybes
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "sku" <$> TF.attribute _sku
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance TF.IsValid (RelayNamespaceResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_sku"
+                  (_sku
+                      :: RelayNamespaceResource s -> TF.Attr s (SkuSetting s))
+                  TF.validator
+
+instance P.HasLocation (RelayNamespaceResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: RelayNamespaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: RelayNamespaceResource s)
+
+instance P.HasName (RelayNamespaceResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: RelayNamespaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: RelayNamespaceResource s)
+
+instance P.HasResourceGroupName (RelayNamespaceResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: RelayNamespaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: RelayNamespaceResource s)
+
+instance P.HasSku (RelayNamespaceResource s) (TF.Attr s (SkuSetting s)) where
+    sku =
+        P.lens (_sku :: RelayNamespaceResource s -> TF.Attr s (SkuSetting s))
+               (\s a -> s { _sku = a } :: RelayNamespaceResource s)
+
+instance P.HasTags (RelayNamespaceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: RelayNamespaceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: RelayNamespaceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RelayNamespaceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedMetricId (TF.Ref s' (RelayNamespaceResource s)) (TF.Attr s P.Text) where
+    computedMetricId x = TF.compute (TF.refKey x) "metric_id"
+
+instance s ~ s' => P.HasComputedPrimaryConnectionString (TF.Ref s' (RelayNamespaceResource s)) (TF.Attr s P.Text) where
+    computedPrimaryConnectionString x = TF.compute (TF.refKey x) "primary_connection_string"
+
+instance s ~ s' => P.HasComputedPrimaryKey (TF.Ref s' (RelayNamespaceResource s)) (TF.Attr s P.Text) where
+    computedPrimaryKey x = TF.compute (TF.refKey x) "primary_key"
+
+instance s ~ s' => P.HasComputedSecondaryConnectionString (TF.Ref s' (RelayNamespaceResource s)) (TF.Attr s P.Text) where
+    computedSecondaryConnectionString x = TF.compute (TF.refKey x) "secondary_connection_string"
+
+instance s ~ s' => P.HasComputedSecondaryKey (TF.Ref s' (RelayNamespaceResource s)) (TF.Attr s P.Text) where
+    computedSecondaryKey x = TF.compute (TF.refKey x) "secondary_key"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (RelayNamespaceResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+-- | @azurerm_resource_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/resource_group.html terraform documentation>
+-- for more information.
+data ResourceGroupResource s = ResourceGroupResource'
+    { _location :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name     :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _tags     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_resource_group@ resource value.
+resourceGroupResource
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (ResourceGroupResource s)
+resourceGroupResource _location _name =
+    TF.unsafeResource "azurerm_resource_group" TF.validator $
+        ResourceGroupResource'
+            { _location = _location
+            , _name = _name
+            , _tags = TF.Nil
+            }
+
+instance TF.IsObject (ResourceGroupResource s) where
+    toObject ResourceGroupResource'{..} = P.catMaybes
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance TF.IsValid (ResourceGroupResource s) where
+    validator = P.mempty
+
+instance P.HasLocation (ResourceGroupResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: ResourceGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: ResourceGroupResource s)
+
+instance P.HasName (ResourceGroupResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ResourceGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ResourceGroupResource s)
+
+instance P.HasTags (ResourceGroupResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: ResourceGroupResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: ResourceGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceGroupResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+-- | @azurerm_role_assignment@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/role_assignment.html terraform documentation>
+-- for more information.
+data RoleAssignmentResource s = RoleAssignmentResource'
+    { _name               :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    , _principalId        :: TF.Attr s P.Text
+    -- ^ @principal_id@ - (Required, Forces New)
+    --
+    , _roleDefinitionId   :: TF.Attr s P.Text
+    -- ^ @role_definition_id@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'roleDefinitionName'
+    , _roleDefinitionName :: TF.Attr s P.Text
+    -- ^ @role_definition_name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'roleDefinitionId'
+    , _scope              :: TF.Attr s P.Text
+    -- ^ @scope@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_role_assignment@ resource value.
+roleAssignmentResource
+    :: TF.Attr s P.Text -- ^ @principal_id@ ('P._principalId', 'P.principalId')
+    -> TF.Attr s P.Text -- ^ @scope@ ('P._scope', 'P.scope')
+    -> P.Resource (RoleAssignmentResource s)
+roleAssignmentResource _principalId _scope =
+    TF.unsafeResource "azurerm_role_assignment" TF.validator $
+        RoleAssignmentResource'
+            { _name = TF.Nil
+            , _principalId = _principalId
+            , _roleDefinitionId = TF.Nil
+            , _roleDefinitionName = TF.Nil
+            , _scope = _scope
+            }
+
+instance TF.IsObject (RoleAssignmentResource s) where
+    toObject RoleAssignmentResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "principal_id" <$> TF.attribute _principalId
+        , TF.assign "role_definition_id" <$> TF.attribute _roleDefinitionId
+        , TF.assign "role_definition_name" <$> TF.attribute _roleDefinitionName
+        , TF.assign "scope" <$> TF.attribute _scope
+        ]
+
+instance TF.IsValid (RoleAssignmentResource s) where
+    validator = TF.fieldsValidator (\RoleAssignmentResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_roleDefinitionId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_roleDefinitionId",
+                            [ "_roleDefinitionName"
+                            ])
+        , if (_roleDefinitionName P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_roleDefinitionName",
+                            [ "_roleDefinitionId"
+                            ])
+        ])
+
+instance P.HasName (RoleAssignmentResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: RoleAssignmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: RoleAssignmentResource s)
+
+instance P.HasPrincipalId (RoleAssignmentResource s) (TF.Attr s P.Text) where
+    principalId =
+        P.lens (_principalId :: RoleAssignmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _principalId = a } :: RoleAssignmentResource s)
+
+instance P.HasRoleDefinitionId (RoleAssignmentResource s) (TF.Attr s P.Text) where
+    roleDefinitionId =
+        P.lens (_roleDefinitionId :: RoleAssignmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _roleDefinitionId = a } :: RoleAssignmentResource s)
+
+instance P.HasRoleDefinitionName (RoleAssignmentResource s) (TF.Attr s P.Text) where
+    roleDefinitionName =
+        P.lens (_roleDefinitionName :: RoleAssignmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _roleDefinitionName = a } :: RoleAssignmentResource s)
+
+instance P.HasScope (RoleAssignmentResource s) (TF.Attr s P.Text) where
+    scope =
+        P.lens (_scope :: RoleAssignmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _scope = a } :: RoleAssignmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RoleAssignmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RoleAssignmentResource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedRoleDefinitionId (TF.Ref s' (RoleAssignmentResource s)) (TF.Attr s P.Text) where
+    computedRoleDefinitionId x = TF.compute (TF.refKey x) "role_definition_id"
 
 -- | @azurerm_role_definition@ Resource.
 --
@@ -489,6 +4873,112 @@ instance s ~ s' => P.HasComputedSubnets (TF.Ref s' (RouteTableResource s)) (TF.A
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (RouteTableResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
+-- | @azurerm_scheduler_job_collection@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/scheduler_job_collection.html terraform documentation>
+-- for more information.
+data SchedulerJobCollectionResource s = SchedulerJobCollectionResource'
+    { _location          :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _quota             :: TF.Attr s (QuotaSetting s)
+    -- ^ @quota@ - (Optional)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _sku               :: TF.Attr s P.Text
+    -- ^ @sku@ - (Required)
+    --
+    , _state             :: TF.Attr s P.Text
+    -- ^ @state@ - (Optional)
+    --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_scheduler_job_collection@ resource value.
+schedulerJobCollectionResource
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @sku@ ('P._sku', 'P.sku')
+    -> P.Resource (SchedulerJobCollectionResource s)
+schedulerJobCollectionResource _location _name _resourceGroupName _sku =
+    TF.unsafeResource "azurerm_scheduler_job_collection" TF.validator $
+        SchedulerJobCollectionResource'
+            { _location = _location
+            , _name = _name
+            , _quota = TF.Nil
+            , _resourceGroupName = _resourceGroupName
+            , _sku = _sku
+            , _state = TF.value "Enabled"
+            , _tags = TF.Nil
+            }
+
+instance TF.IsObject (SchedulerJobCollectionResource s) where
+    toObject SchedulerJobCollectionResource'{..} = P.catMaybes
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "quota" <$> TF.attribute _quota
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "sku" <$> TF.attribute _sku
+        , TF.assign "state" <$> TF.attribute _state
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance TF.IsValid (SchedulerJobCollectionResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_quota"
+                  (_quota
+                      :: SchedulerJobCollectionResource s -> TF.Attr s (QuotaSetting s))
+                  TF.validator
+
+instance P.HasLocation (SchedulerJobCollectionResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: SchedulerJobCollectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: SchedulerJobCollectionResource s)
+
+instance P.HasName (SchedulerJobCollectionResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: SchedulerJobCollectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SchedulerJobCollectionResource s)
+
+instance P.HasQuota (SchedulerJobCollectionResource s) (TF.Attr s (QuotaSetting s)) where
+    quota =
+        P.lens (_quota :: SchedulerJobCollectionResource s -> TF.Attr s (QuotaSetting s))
+               (\s a -> s { _quota = a } :: SchedulerJobCollectionResource s)
+
+instance P.HasResourceGroupName (SchedulerJobCollectionResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: SchedulerJobCollectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: SchedulerJobCollectionResource s)
+
+instance P.HasSku (SchedulerJobCollectionResource s) (TF.Attr s P.Text) where
+    sku =
+        P.lens (_sku :: SchedulerJobCollectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sku = a } :: SchedulerJobCollectionResource s)
+
+instance P.HasState (SchedulerJobCollectionResource s) (TF.Attr s P.Text) where
+    state =
+        P.lens (_state :: SchedulerJobCollectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _state = a } :: SchedulerJobCollectionResource s)
+
+instance P.HasTags (SchedulerJobCollectionResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: SchedulerJobCollectionResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: SchedulerJobCollectionResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SchedulerJobCollectionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (SchedulerJobCollectionResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
 -- | @azurerm_scheduler_job@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/scheduler_job.html terraform documentation>
@@ -689,112 +5179,6 @@ instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (SchedulerJobResource s)) (
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (SchedulerJobResource s)) (TF.Attr s P.Text) where
     computedState x = TF.compute (TF.refKey x) "state"
-
--- | @azurerm_scheduler_job_collection@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/azurerm/r/scheduler_job_collection.html terraform documentation>
--- for more information.
-data SchedulerJobCollectionResource s = SchedulerJobCollectionResource'
-    { _location          :: TF.Attr s P.Text
-    -- ^ @location@ - (Required, Forces New)
-    --
-    , _name              :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    , _quota             :: TF.Attr s (QuotaSetting s)
-    -- ^ @quota@ - (Optional)
-    --
-    , _resourceGroupName :: TF.Attr s P.Text
-    -- ^ @resource_group_name@ - (Required, Forces New)
-    --
-    , _sku               :: TF.Attr s P.Text
-    -- ^ @sku@ - (Required)
-    --
-    , _state             :: TF.Attr s P.Text
-    -- ^ @state@ - (Optional)
-    --
-    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @tags@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @azurerm_scheduler_job_collection@ resource value.
-schedulerJobCollectionResource
-    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> TF.Attr s P.Text -- ^ @sku@ ('P._sku', 'P.sku')
-    -> P.Resource (SchedulerJobCollectionResource s)
-schedulerJobCollectionResource _location _name _resourceGroupName _sku =
-    TF.unsafeResource "azurerm_scheduler_job_collection" TF.validator $
-        SchedulerJobCollectionResource'
-            { _location = _location
-            , _name = _name
-            , _quota = TF.Nil
-            , _resourceGroupName = _resourceGroupName
-            , _sku = _sku
-            , _state = TF.value "Enabled"
-            , _tags = TF.Nil
-            }
-
-instance TF.IsObject (SchedulerJobCollectionResource s) where
-    toObject SchedulerJobCollectionResource'{..} = P.catMaybes
-        [ TF.assign "location" <$> TF.attribute _location
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "quota" <$> TF.attribute _quota
-        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
-        , TF.assign "sku" <$> TF.attribute _sku
-        , TF.assign "state" <$> TF.attribute _state
-        , TF.assign "tags" <$> TF.attribute _tags
-        ]
-
-instance TF.IsValid (SchedulerJobCollectionResource s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_quota"
-                  (_quota
-                      :: SchedulerJobCollectionResource s -> TF.Attr s (QuotaSetting s))
-                  TF.validator
-
-instance P.HasLocation (SchedulerJobCollectionResource s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: SchedulerJobCollectionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: SchedulerJobCollectionResource s)
-
-instance P.HasName (SchedulerJobCollectionResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: SchedulerJobCollectionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SchedulerJobCollectionResource s)
-
-instance P.HasQuota (SchedulerJobCollectionResource s) (TF.Attr s (QuotaSetting s)) where
-    quota =
-        P.lens (_quota :: SchedulerJobCollectionResource s -> TF.Attr s (QuotaSetting s))
-               (\s a -> s { _quota = a } :: SchedulerJobCollectionResource s)
-
-instance P.HasResourceGroupName (SchedulerJobCollectionResource s) (TF.Attr s P.Text) where
-    resourceGroupName =
-        P.lens (_resourceGroupName :: SchedulerJobCollectionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _resourceGroupName = a } :: SchedulerJobCollectionResource s)
-
-instance P.HasSku (SchedulerJobCollectionResource s) (TF.Attr s P.Text) where
-    sku =
-        P.lens (_sku :: SchedulerJobCollectionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _sku = a } :: SchedulerJobCollectionResource s)
-
-instance P.HasState (SchedulerJobCollectionResource s) (TF.Attr s P.Text) where
-    state =
-        P.lens (_state :: SchedulerJobCollectionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _state = a } :: SchedulerJobCollectionResource s)
-
-instance P.HasTags (SchedulerJobCollectionResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    tags =
-        P.lens (_tags :: SchedulerJobCollectionResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: SchedulerJobCollectionResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (SchedulerJobCollectionResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (SchedulerJobCollectionResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @azurerm_search_service@ Resource.
 --
@@ -1095,6 +5479,106 @@ instance s ~ s' => P.HasComputedClusterEndpoint (TF.Ref s' (ServiceFabricCluster
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (ServiceFabricClusterResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
+-- | @azurerm_servicebus_namespace_authorization_rule@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/servicebus_namespace_authorization_rule.html terraform documentation>
+-- for more information.
+data ServicebusNamespaceAuthorizationRuleResource s = ServicebusNamespaceAuthorizationRuleResource'
+    { _listen            :: TF.Attr s P.Bool
+    -- ^ @listen@ - (Optional)
+    --
+    , _manage            :: TF.Attr s P.Bool
+    -- ^ @manage@ - (Optional)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _namespaceName     :: TF.Attr s P.Text
+    -- ^ @namespace_name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _send              :: TF.Attr s P.Bool
+    -- ^ @send@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_servicebus_namespace_authorization_rule@ resource value.
+servicebusNamespaceAuthorizationRuleResource
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @namespace_name@ ('P._namespaceName', 'P.namespaceName')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> P.Resource (ServicebusNamespaceAuthorizationRuleResource s)
+servicebusNamespaceAuthorizationRuleResource _name _namespaceName _resourceGroupName =
+    TF.unsafeResource "azurerm_servicebus_namespace_authorization_rule" TF.validator $
+        ServicebusNamespaceAuthorizationRuleResource'
+            { _listen = TF.value P.False
+            , _manage = TF.value P.False
+            , _name = _name
+            , _namespaceName = _namespaceName
+            , _resourceGroupName = _resourceGroupName
+            , _send = TF.value P.False
+            }
+
+instance TF.IsObject (ServicebusNamespaceAuthorizationRuleResource s) where
+    toObject ServicebusNamespaceAuthorizationRuleResource'{..} = P.catMaybes
+        [ TF.assign "listen" <$> TF.attribute _listen
+        , TF.assign "manage" <$> TF.attribute _manage
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "namespace_name" <$> TF.attribute _namespaceName
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "send" <$> TF.attribute _send
+        ]
+
+instance TF.IsValid (ServicebusNamespaceAuthorizationRuleResource s) where
+    validator = P.mempty
+
+instance P.HasListen (ServicebusNamespaceAuthorizationRuleResource s) (TF.Attr s P.Bool) where
+    listen =
+        P.lens (_listen :: ServicebusNamespaceAuthorizationRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _listen = a } :: ServicebusNamespaceAuthorizationRuleResource s)
+
+instance P.HasManage (ServicebusNamespaceAuthorizationRuleResource s) (TF.Attr s P.Bool) where
+    manage =
+        P.lens (_manage :: ServicebusNamespaceAuthorizationRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _manage = a } :: ServicebusNamespaceAuthorizationRuleResource s)
+
+instance P.HasName (ServicebusNamespaceAuthorizationRuleResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ServicebusNamespaceAuthorizationRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServicebusNamespaceAuthorizationRuleResource s)
+
+instance P.HasNamespaceName (ServicebusNamespaceAuthorizationRuleResource s) (TF.Attr s P.Text) where
+    namespaceName =
+        P.lens (_namespaceName :: ServicebusNamespaceAuthorizationRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _namespaceName = a } :: ServicebusNamespaceAuthorizationRuleResource s)
+
+instance P.HasResourceGroupName (ServicebusNamespaceAuthorizationRuleResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: ServicebusNamespaceAuthorizationRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: ServicebusNamespaceAuthorizationRuleResource s)
+
+instance P.HasSend (ServicebusNamespaceAuthorizationRuleResource s) (TF.Attr s P.Bool) where
+    send =
+        P.lens (_send :: ServicebusNamespaceAuthorizationRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _send = a } :: ServicebusNamespaceAuthorizationRuleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServicebusNamespaceAuthorizationRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedPrimaryConnectionString (TF.Ref s' (ServicebusNamespaceAuthorizationRuleResource s)) (TF.Attr s P.Text) where
+    computedPrimaryConnectionString x = TF.compute (TF.refKey x) "primary_connection_string"
+
+instance s ~ s' => P.HasComputedPrimaryKey (TF.Ref s' (ServicebusNamespaceAuthorizationRuleResource s)) (TF.Attr s P.Text) where
+    computedPrimaryKey x = TF.compute (TF.refKey x) "primary_key"
+
+instance s ~ s' => P.HasComputedSecondaryConnectionString (TF.Ref s' (ServicebusNamespaceAuthorizationRuleResource s)) (TF.Attr s P.Text) where
+    computedSecondaryConnectionString x = TF.compute (TF.refKey x) "secondary_connection_string"
+
+instance s ~ s' => P.HasComputedSecondaryKey (TF.Ref s' (ServicebusNamespaceAuthorizationRuleResource s)) (TF.Attr s P.Text) where
+    computedSecondaryKey x = TF.compute (TF.refKey x) "secondary_key"
+
 -- | @azurerm_servicebus_namespace@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/servicebus_namespace.html terraform documentation>
@@ -1199,11 +5683,11 @@ instance s ~ s' => P.HasComputedDefaultSecondaryKey (TF.Ref s' (ServicebusNamesp
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (ServicebusNamespaceResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
--- | @azurerm_servicebus_namespace_authorization_rule@ Resource.
+-- | @azurerm_servicebus_queue_authorization_rule@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/azurerm/r/servicebus_namespace_authorization_rule.html terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/servicebus_queue_authorization_rule.html terraform documentation>
 -- for more information.
-data ServicebusNamespaceAuthorizationRuleResource s = ServicebusNamespaceAuthorizationRuleResource'
+data ServicebusQueueAuthorizationRuleResource s = ServicebusQueueAuthorizationRuleResource'
     { _listen            :: TF.Attr s P.Bool
     -- ^ @listen@ - (Optional)
     --
@@ -1216,6 +5700,9 @@ data ServicebusNamespaceAuthorizationRuleResource s = ServicebusNamespaceAuthori
     , _namespaceName     :: TF.Attr s P.Text
     -- ^ @namespace_name@ - (Required, Forces New)
     --
+    , _queueName         :: TF.Attr s P.Text
+    -- ^ @queue_name@ - (Required, Forces New)
+    --
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
@@ -1224,79 +5711,87 @@ data ServicebusNamespaceAuthorizationRuleResource s = ServicebusNamespaceAuthori
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
--- | Define a new @azurerm_servicebus_namespace_authorization_rule@ resource value.
-servicebusNamespaceAuthorizationRuleResource
+-- | Define a new @azurerm_servicebus_queue_authorization_rule@ resource value.
+servicebusQueueAuthorizationRuleResource
     :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @namespace_name@ ('P._namespaceName', 'P.namespaceName')
+    -> TF.Attr s P.Text -- ^ @queue_name@ ('P._queueName', 'P.queueName')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> P.Resource (ServicebusNamespaceAuthorizationRuleResource s)
-servicebusNamespaceAuthorizationRuleResource _name _namespaceName _resourceGroupName =
-    TF.unsafeResource "azurerm_servicebus_namespace_authorization_rule" TF.validator $
-        ServicebusNamespaceAuthorizationRuleResource'
+    -> P.Resource (ServicebusQueueAuthorizationRuleResource s)
+servicebusQueueAuthorizationRuleResource _name _namespaceName _queueName _resourceGroupName =
+    TF.unsafeResource "azurerm_servicebus_queue_authorization_rule" TF.validator $
+        ServicebusQueueAuthorizationRuleResource'
             { _listen = TF.value P.False
             , _manage = TF.value P.False
             , _name = _name
             , _namespaceName = _namespaceName
+            , _queueName = _queueName
             , _resourceGroupName = _resourceGroupName
             , _send = TF.value P.False
             }
 
-instance TF.IsObject (ServicebusNamespaceAuthorizationRuleResource s) where
-    toObject ServicebusNamespaceAuthorizationRuleResource'{..} = P.catMaybes
+instance TF.IsObject (ServicebusQueueAuthorizationRuleResource s) where
+    toObject ServicebusQueueAuthorizationRuleResource'{..} = P.catMaybes
         [ TF.assign "listen" <$> TF.attribute _listen
         , TF.assign "manage" <$> TF.attribute _manage
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "namespace_name" <$> TF.attribute _namespaceName
+        , TF.assign "queue_name" <$> TF.attribute _queueName
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
         , TF.assign "send" <$> TF.attribute _send
         ]
 
-instance TF.IsValid (ServicebusNamespaceAuthorizationRuleResource s) where
+instance TF.IsValid (ServicebusQueueAuthorizationRuleResource s) where
     validator = P.mempty
 
-instance P.HasListen (ServicebusNamespaceAuthorizationRuleResource s) (TF.Attr s P.Bool) where
+instance P.HasListen (ServicebusQueueAuthorizationRuleResource s) (TF.Attr s P.Bool) where
     listen =
-        P.lens (_listen :: ServicebusNamespaceAuthorizationRuleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _listen = a } :: ServicebusNamespaceAuthorizationRuleResource s)
+        P.lens (_listen :: ServicebusQueueAuthorizationRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _listen = a } :: ServicebusQueueAuthorizationRuleResource s)
 
-instance P.HasManage (ServicebusNamespaceAuthorizationRuleResource s) (TF.Attr s P.Bool) where
+instance P.HasManage (ServicebusQueueAuthorizationRuleResource s) (TF.Attr s P.Bool) where
     manage =
-        P.lens (_manage :: ServicebusNamespaceAuthorizationRuleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _manage = a } :: ServicebusNamespaceAuthorizationRuleResource s)
+        P.lens (_manage :: ServicebusQueueAuthorizationRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _manage = a } :: ServicebusQueueAuthorizationRuleResource s)
 
-instance P.HasName (ServicebusNamespaceAuthorizationRuleResource s) (TF.Attr s P.Text) where
+instance P.HasName (ServicebusQueueAuthorizationRuleResource s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: ServicebusNamespaceAuthorizationRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ServicebusNamespaceAuthorizationRuleResource s)
+        P.lens (_name :: ServicebusQueueAuthorizationRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServicebusQueueAuthorizationRuleResource s)
 
-instance P.HasNamespaceName (ServicebusNamespaceAuthorizationRuleResource s) (TF.Attr s P.Text) where
+instance P.HasNamespaceName (ServicebusQueueAuthorizationRuleResource s) (TF.Attr s P.Text) where
     namespaceName =
-        P.lens (_namespaceName :: ServicebusNamespaceAuthorizationRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _namespaceName = a } :: ServicebusNamespaceAuthorizationRuleResource s)
+        P.lens (_namespaceName :: ServicebusQueueAuthorizationRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _namespaceName = a } :: ServicebusQueueAuthorizationRuleResource s)
 
-instance P.HasResourceGroupName (ServicebusNamespaceAuthorizationRuleResource s) (TF.Attr s P.Text) where
+instance P.HasQueueName (ServicebusQueueAuthorizationRuleResource s) (TF.Attr s P.Text) where
+    queueName =
+        P.lens (_queueName :: ServicebusQueueAuthorizationRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _queueName = a } :: ServicebusQueueAuthorizationRuleResource s)
+
+instance P.HasResourceGroupName (ServicebusQueueAuthorizationRuleResource s) (TF.Attr s P.Text) where
     resourceGroupName =
-        P.lens (_resourceGroupName :: ServicebusNamespaceAuthorizationRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _resourceGroupName = a } :: ServicebusNamespaceAuthorizationRuleResource s)
+        P.lens (_resourceGroupName :: ServicebusQueueAuthorizationRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: ServicebusQueueAuthorizationRuleResource s)
 
-instance P.HasSend (ServicebusNamespaceAuthorizationRuleResource s) (TF.Attr s P.Bool) where
+instance P.HasSend (ServicebusQueueAuthorizationRuleResource s) (TF.Attr s P.Bool) where
     send =
-        P.lens (_send :: ServicebusNamespaceAuthorizationRuleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _send = a } :: ServicebusNamespaceAuthorizationRuleResource s)
+        P.lens (_send :: ServicebusQueueAuthorizationRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _send = a } :: ServicebusQueueAuthorizationRuleResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ServicebusNamespaceAuthorizationRuleResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServicebusQueueAuthorizationRuleResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedPrimaryConnectionString (TF.Ref s' (ServicebusNamespaceAuthorizationRuleResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrimaryConnectionString (TF.Ref s' (ServicebusQueueAuthorizationRuleResource s)) (TF.Attr s P.Text) where
     computedPrimaryConnectionString x = TF.compute (TF.refKey x) "primary_connection_string"
 
-instance s ~ s' => P.HasComputedPrimaryKey (TF.Ref s' (ServicebusNamespaceAuthorizationRuleResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrimaryKey (TF.Ref s' (ServicebusQueueAuthorizationRuleResource s)) (TF.Attr s P.Text) where
     computedPrimaryKey x = TF.compute (TF.refKey x) "primary_key"
 
-instance s ~ s' => P.HasComputedSecondaryConnectionString (TF.Ref s' (ServicebusNamespaceAuthorizationRuleResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecondaryConnectionString (TF.Ref s' (ServicebusQueueAuthorizationRuleResource s)) (TF.Attr s P.Text) where
     computedSecondaryConnectionString x = TF.compute (TF.refKey x) "secondary_connection_string"
 
-instance s ~ s' => P.HasComputedSecondaryKey (TF.Ref s' (ServicebusNamespaceAuthorizationRuleResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecondaryKey (TF.Ref s' (ServicebusQueueAuthorizationRuleResource s)) (TF.Attr s P.Text) where
     computedSecondaryKey x = TF.compute (TF.refKey x) "secondary_key"
 
 -- | @azurerm_servicebus_queue@ Resource.
@@ -1471,117 +5966,6 @@ instance s ~ s' => P.HasComputedLockDuration (TF.Ref s' (ServicebusQueueResource
 
 instance s ~ s' => P.HasComputedMaxSizeInMegabytes (TF.Ref s' (ServicebusQueueResource s)) (TF.Attr s P.Int) where
     computedMaxSizeInMegabytes x = TF.compute (TF.refKey x) "max_size_in_megabytes"
-
--- | @azurerm_servicebus_queue_authorization_rule@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/azurerm/r/servicebus_queue_authorization_rule.html terraform documentation>
--- for more information.
-data ServicebusQueueAuthorizationRuleResource s = ServicebusQueueAuthorizationRuleResource'
-    { _listen            :: TF.Attr s P.Bool
-    -- ^ @listen@ - (Optional)
-    --
-    , _manage            :: TF.Attr s P.Bool
-    -- ^ @manage@ - (Optional)
-    --
-    , _name              :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    , _namespaceName     :: TF.Attr s P.Text
-    -- ^ @namespace_name@ - (Required, Forces New)
-    --
-    , _queueName         :: TF.Attr s P.Text
-    -- ^ @queue_name@ - (Required, Forces New)
-    --
-    , _resourceGroupName :: TF.Attr s P.Text
-    -- ^ @resource_group_name@ - (Required, Forces New)
-    --
-    , _send              :: TF.Attr s P.Bool
-    -- ^ @send@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @azurerm_servicebus_queue_authorization_rule@ resource value.
-servicebusQueueAuthorizationRuleResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s P.Text -- ^ @namespace_name@ ('P._namespaceName', 'P.namespaceName')
-    -> TF.Attr s P.Text -- ^ @queue_name@ ('P._queueName', 'P.queueName')
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> P.Resource (ServicebusQueueAuthorizationRuleResource s)
-servicebusQueueAuthorizationRuleResource _name _namespaceName _queueName _resourceGroupName =
-    TF.unsafeResource "azurerm_servicebus_queue_authorization_rule" TF.validator $
-        ServicebusQueueAuthorizationRuleResource'
-            { _listen = TF.value P.False
-            , _manage = TF.value P.False
-            , _name = _name
-            , _namespaceName = _namespaceName
-            , _queueName = _queueName
-            , _resourceGroupName = _resourceGroupName
-            , _send = TF.value P.False
-            }
-
-instance TF.IsObject (ServicebusQueueAuthorizationRuleResource s) where
-    toObject ServicebusQueueAuthorizationRuleResource'{..} = P.catMaybes
-        [ TF.assign "listen" <$> TF.attribute _listen
-        , TF.assign "manage" <$> TF.attribute _manage
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "namespace_name" <$> TF.attribute _namespaceName
-        , TF.assign "queue_name" <$> TF.attribute _queueName
-        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
-        , TF.assign "send" <$> TF.attribute _send
-        ]
-
-instance TF.IsValid (ServicebusQueueAuthorizationRuleResource s) where
-    validator = P.mempty
-
-instance P.HasListen (ServicebusQueueAuthorizationRuleResource s) (TF.Attr s P.Bool) where
-    listen =
-        P.lens (_listen :: ServicebusQueueAuthorizationRuleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _listen = a } :: ServicebusQueueAuthorizationRuleResource s)
-
-instance P.HasManage (ServicebusQueueAuthorizationRuleResource s) (TF.Attr s P.Bool) where
-    manage =
-        P.lens (_manage :: ServicebusQueueAuthorizationRuleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _manage = a } :: ServicebusQueueAuthorizationRuleResource s)
-
-instance P.HasName (ServicebusQueueAuthorizationRuleResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: ServicebusQueueAuthorizationRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ServicebusQueueAuthorizationRuleResource s)
-
-instance P.HasNamespaceName (ServicebusQueueAuthorizationRuleResource s) (TF.Attr s P.Text) where
-    namespaceName =
-        P.lens (_namespaceName :: ServicebusQueueAuthorizationRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _namespaceName = a } :: ServicebusQueueAuthorizationRuleResource s)
-
-instance P.HasQueueName (ServicebusQueueAuthorizationRuleResource s) (TF.Attr s P.Text) where
-    queueName =
-        P.lens (_queueName :: ServicebusQueueAuthorizationRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _queueName = a } :: ServicebusQueueAuthorizationRuleResource s)
-
-instance P.HasResourceGroupName (ServicebusQueueAuthorizationRuleResource s) (TF.Attr s P.Text) where
-    resourceGroupName =
-        P.lens (_resourceGroupName :: ServicebusQueueAuthorizationRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _resourceGroupName = a } :: ServicebusQueueAuthorizationRuleResource s)
-
-instance P.HasSend (ServicebusQueueAuthorizationRuleResource s) (TF.Attr s P.Bool) where
-    send =
-        P.lens (_send :: ServicebusQueueAuthorizationRuleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _send = a } :: ServicebusQueueAuthorizationRuleResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ServicebusQueueAuthorizationRuleResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedPrimaryConnectionString (TF.Ref s' (ServicebusQueueAuthorizationRuleResource s)) (TF.Attr s P.Text) where
-    computedPrimaryConnectionString x = TF.compute (TF.refKey x) "primary_connection_string"
-
-instance s ~ s' => P.HasComputedPrimaryKey (TF.Ref s' (ServicebusQueueAuthorizationRuleResource s)) (TF.Attr s P.Text) where
-    computedPrimaryKey x = TF.compute (TF.refKey x) "primary_key"
-
-instance s ~ s' => P.HasComputedSecondaryConnectionString (TF.Ref s' (ServicebusQueueAuthorizationRuleResource s)) (TF.Attr s P.Text) where
-    computedSecondaryConnectionString x = TF.compute (TF.refKey x) "secondary_connection_string"
-
-instance s ~ s' => P.HasComputedSecondaryKey (TF.Ref s' (ServicebusQueueAuthorizationRuleResource s)) (TF.Attr s P.Text) where
-    computedSecondaryKey x = TF.compute (TF.refKey x) "secondary_key"
 
 -- | @azurerm_servicebus_subscription@ Resource.
 --
@@ -1884,6 +6268,117 @@ instance P.HasTopicName (ServicebusSubscriptionRuleResource s) (TF.Attr s P.Text
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ServicebusSubscriptionRuleResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
+-- | @azurerm_servicebus_topic_authorization_rule@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/servicebus_topic_authorization_rule.html terraform documentation>
+-- for more information.
+data ServicebusTopicAuthorizationRuleResource s = ServicebusTopicAuthorizationRuleResource'
+    { _listen            :: TF.Attr s P.Bool
+    -- ^ @listen@ - (Optional)
+    --
+    , _manage            :: TF.Attr s P.Bool
+    -- ^ @manage@ - (Optional)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _namespaceName     :: TF.Attr s P.Text
+    -- ^ @namespace_name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _send              :: TF.Attr s P.Bool
+    -- ^ @send@ - (Optional)
+    --
+    , _topicName         :: TF.Attr s P.Text
+    -- ^ @topic_name@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_servicebus_topic_authorization_rule@ resource value.
+servicebusTopicAuthorizationRuleResource
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @namespace_name@ ('P._namespaceName', 'P.namespaceName')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @topic_name@ ('P._topicName', 'P.topicName')
+    -> P.Resource (ServicebusTopicAuthorizationRuleResource s)
+servicebusTopicAuthorizationRuleResource _name _namespaceName _resourceGroupName _topicName =
+    TF.unsafeResource "azurerm_servicebus_topic_authorization_rule" TF.validator $
+        ServicebusTopicAuthorizationRuleResource'
+            { _listen = TF.value P.False
+            , _manage = TF.value P.False
+            , _name = _name
+            , _namespaceName = _namespaceName
+            , _resourceGroupName = _resourceGroupName
+            , _send = TF.value P.False
+            , _topicName = _topicName
+            }
+
+instance TF.IsObject (ServicebusTopicAuthorizationRuleResource s) where
+    toObject ServicebusTopicAuthorizationRuleResource'{..} = P.catMaybes
+        [ TF.assign "listen" <$> TF.attribute _listen
+        , TF.assign "manage" <$> TF.attribute _manage
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "namespace_name" <$> TF.attribute _namespaceName
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "send" <$> TF.attribute _send
+        , TF.assign "topic_name" <$> TF.attribute _topicName
+        ]
+
+instance TF.IsValid (ServicebusTopicAuthorizationRuleResource s) where
+    validator = P.mempty
+
+instance P.HasListen (ServicebusTopicAuthorizationRuleResource s) (TF.Attr s P.Bool) where
+    listen =
+        P.lens (_listen :: ServicebusTopicAuthorizationRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _listen = a } :: ServicebusTopicAuthorizationRuleResource s)
+
+instance P.HasManage (ServicebusTopicAuthorizationRuleResource s) (TF.Attr s P.Bool) where
+    manage =
+        P.lens (_manage :: ServicebusTopicAuthorizationRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _manage = a } :: ServicebusTopicAuthorizationRuleResource s)
+
+instance P.HasName (ServicebusTopicAuthorizationRuleResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ServicebusTopicAuthorizationRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServicebusTopicAuthorizationRuleResource s)
+
+instance P.HasNamespaceName (ServicebusTopicAuthorizationRuleResource s) (TF.Attr s P.Text) where
+    namespaceName =
+        P.lens (_namespaceName :: ServicebusTopicAuthorizationRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _namespaceName = a } :: ServicebusTopicAuthorizationRuleResource s)
+
+instance P.HasResourceGroupName (ServicebusTopicAuthorizationRuleResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: ServicebusTopicAuthorizationRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: ServicebusTopicAuthorizationRuleResource s)
+
+instance P.HasSend (ServicebusTopicAuthorizationRuleResource s) (TF.Attr s P.Bool) where
+    send =
+        P.lens (_send :: ServicebusTopicAuthorizationRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _send = a } :: ServicebusTopicAuthorizationRuleResource s)
+
+instance P.HasTopicName (ServicebusTopicAuthorizationRuleResource s) (TF.Attr s P.Text) where
+    topicName =
+        P.lens (_topicName :: ServicebusTopicAuthorizationRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _topicName = a } :: ServicebusTopicAuthorizationRuleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServicebusTopicAuthorizationRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedPrimaryConnectionString (TF.Ref s' (ServicebusTopicAuthorizationRuleResource s)) (TF.Attr s P.Text) where
+    computedPrimaryConnectionString x = TF.compute (TF.refKey x) "primary_connection_string"
+
+instance s ~ s' => P.HasComputedPrimaryKey (TF.Ref s' (ServicebusTopicAuthorizationRuleResource s)) (TF.Attr s P.Text) where
+    computedPrimaryKey x = TF.compute (TF.refKey x) "primary_key"
+
+instance s ~ s' => P.HasComputedSecondaryConnectionString (TF.Ref s' (ServicebusTopicAuthorizationRuleResource s)) (TF.Attr s P.Text) where
+    computedSecondaryConnectionString x = TF.compute (TF.refKey x) "secondary_connection_string"
+
+instance s ~ s' => P.HasComputedSecondaryKey (TF.Ref s' (ServicebusTopicAuthorizationRuleResource s)) (TF.Attr s P.Text) where
+    computedSecondaryKey x = TF.compute (TF.refKey x) "secondary_key"
+
 -- | @azurerm_servicebus_topic@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/servicebus_topic.html terraform documentation>
@@ -2053,117 +6548,6 @@ instance s ~ s' => P.HasComputedDuplicateDetectionHistoryTimeWindow (TF.Ref s' (
 
 instance s ~ s' => P.HasComputedMaxSizeInMegabytes (TF.Ref s' (ServicebusTopicResource s)) (TF.Attr s P.Int) where
     computedMaxSizeInMegabytes x = TF.compute (TF.refKey x) "max_size_in_megabytes"
-
--- | @azurerm_servicebus_topic_authorization_rule@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/azurerm/r/servicebus_topic_authorization_rule.html terraform documentation>
--- for more information.
-data ServicebusTopicAuthorizationRuleResource s = ServicebusTopicAuthorizationRuleResource'
-    { _listen            :: TF.Attr s P.Bool
-    -- ^ @listen@ - (Optional)
-    --
-    , _manage            :: TF.Attr s P.Bool
-    -- ^ @manage@ - (Optional)
-    --
-    , _name              :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    , _namespaceName     :: TF.Attr s P.Text
-    -- ^ @namespace_name@ - (Required, Forces New)
-    --
-    , _resourceGroupName :: TF.Attr s P.Text
-    -- ^ @resource_group_name@ - (Required, Forces New)
-    --
-    , _send              :: TF.Attr s P.Bool
-    -- ^ @send@ - (Optional)
-    --
-    , _topicName         :: TF.Attr s P.Text
-    -- ^ @topic_name@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @azurerm_servicebus_topic_authorization_rule@ resource value.
-servicebusTopicAuthorizationRuleResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s P.Text -- ^ @namespace_name@ ('P._namespaceName', 'P.namespaceName')
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> TF.Attr s P.Text -- ^ @topic_name@ ('P._topicName', 'P.topicName')
-    -> P.Resource (ServicebusTopicAuthorizationRuleResource s)
-servicebusTopicAuthorizationRuleResource _name _namespaceName _resourceGroupName _topicName =
-    TF.unsafeResource "azurerm_servicebus_topic_authorization_rule" TF.validator $
-        ServicebusTopicAuthorizationRuleResource'
-            { _listen = TF.value P.False
-            , _manage = TF.value P.False
-            , _name = _name
-            , _namespaceName = _namespaceName
-            , _resourceGroupName = _resourceGroupName
-            , _send = TF.value P.False
-            , _topicName = _topicName
-            }
-
-instance TF.IsObject (ServicebusTopicAuthorizationRuleResource s) where
-    toObject ServicebusTopicAuthorizationRuleResource'{..} = P.catMaybes
-        [ TF.assign "listen" <$> TF.attribute _listen
-        , TF.assign "manage" <$> TF.attribute _manage
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "namespace_name" <$> TF.attribute _namespaceName
-        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
-        , TF.assign "send" <$> TF.attribute _send
-        , TF.assign "topic_name" <$> TF.attribute _topicName
-        ]
-
-instance TF.IsValid (ServicebusTopicAuthorizationRuleResource s) where
-    validator = P.mempty
-
-instance P.HasListen (ServicebusTopicAuthorizationRuleResource s) (TF.Attr s P.Bool) where
-    listen =
-        P.lens (_listen :: ServicebusTopicAuthorizationRuleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _listen = a } :: ServicebusTopicAuthorizationRuleResource s)
-
-instance P.HasManage (ServicebusTopicAuthorizationRuleResource s) (TF.Attr s P.Bool) where
-    manage =
-        P.lens (_manage :: ServicebusTopicAuthorizationRuleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _manage = a } :: ServicebusTopicAuthorizationRuleResource s)
-
-instance P.HasName (ServicebusTopicAuthorizationRuleResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: ServicebusTopicAuthorizationRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ServicebusTopicAuthorizationRuleResource s)
-
-instance P.HasNamespaceName (ServicebusTopicAuthorizationRuleResource s) (TF.Attr s P.Text) where
-    namespaceName =
-        P.lens (_namespaceName :: ServicebusTopicAuthorizationRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _namespaceName = a } :: ServicebusTopicAuthorizationRuleResource s)
-
-instance P.HasResourceGroupName (ServicebusTopicAuthorizationRuleResource s) (TF.Attr s P.Text) where
-    resourceGroupName =
-        P.lens (_resourceGroupName :: ServicebusTopicAuthorizationRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _resourceGroupName = a } :: ServicebusTopicAuthorizationRuleResource s)
-
-instance P.HasSend (ServicebusTopicAuthorizationRuleResource s) (TF.Attr s P.Bool) where
-    send =
-        P.lens (_send :: ServicebusTopicAuthorizationRuleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _send = a } :: ServicebusTopicAuthorizationRuleResource s)
-
-instance P.HasTopicName (ServicebusTopicAuthorizationRuleResource s) (TF.Attr s P.Text) where
-    topicName =
-        P.lens (_topicName :: ServicebusTopicAuthorizationRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _topicName = a } :: ServicebusTopicAuthorizationRuleResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ServicebusTopicAuthorizationRuleResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedPrimaryConnectionString (TF.Ref s' (ServicebusTopicAuthorizationRuleResource s)) (TF.Attr s P.Text) where
-    computedPrimaryConnectionString x = TF.compute (TF.refKey x) "primary_connection_string"
-
-instance s ~ s' => P.HasComputedPrimaryKey (TF.Ref s' (ServicebusTopicAuthorizationRuleResource s)) (TF.Attr s P.Text) where
-    computedPrimaryKey x = TF.compute (TF.refKey x) "primary_key"
-
-instance s ~ s' => P.HasComputedSecondaryConnectionString (TF.Ref s' (ServicebusTopicAuthorizationRuleResource s)) (TF.Attr s P.Text) where
-    computedSecondaryConnectionString x = TF.compute (TF.refKey x) "secondary_connection_string"
-
-instance s ~ s' => P.HasComputedSecondaryKey (TF.Ref s' (ServicebusTopicAuthorizationRuleResource s)) (TF.Attr s P.Text) where
-    computedSecondaryKey x = TF.compute (TF.refKey x) "secondary_key"
 
 -- | @azurerm_snapshot@ Resource.
 --
@@ -4273,6 +8657,240 @@ instance s ~ s' => P.HasComputedPrincipalId (TF.Ref s' (UserAssignedIdentityReso
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (UserAssignedIdentityResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
+-- | @azurerm_virtual_machine_data_disk_attachment@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/virtual_machine_data_disk_attachment.html terraform documentation>
+-- for more information.
+data VirtualMachineDataDiskAttachmentResource s = VirtualMachineDataDiskAttachmentResource'
+    { _caching                 :: TF.Attr s P.Text
+    -- ^ @caching@ - (Required)
+    --
+    , _createOption            :: TF.Attr s P.Text
+    -- ^ @create_option@ - (Optional, Forces New)
+    --
+    , _lun                     :: TF.Attr s P.Int
+    -- ^ @lun@ - (Required, Forces New)
+    --
+    , _managedDiskId           :: TF.Attr s P.Text
+    -- ^ @managed_disk_id@ - (Required, Forces New)
+    --
+    , _virtualMachineId        :: TF.Attr s P.Text
+    -- ^ @virtual_machine_id@ - (Required, Forces New)
+    --
+    , _writeAcceleratorEnabled :: TF.Attr s P.Bool
+    -- ^ @write_accelerator_enabled@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_virtual_machine_data_disk_attachment@ resource value.
+virtualMachineDataDiskAttachmentResource
+    :: TF.Attr s P.Text -- ^ @caching@ ('P._caching', 'P.caching')
+    -> TF.Attr s P.Text -- ^ @managed_disk_id@ ('P._managedDiskId', 'P.managedDiskId')
+    -> TF.Attr s P.Text -- ^ @virtual_machine_id@ ('P._virtualMachineId', 'P.virtualMachineId')
+    -> TF.Attr s P.Int -- ^ @lun@ ('P._lun', 'P.lun')
+    -> P.Resource (VirtualMachineDataDiskAttachmentResource s)
+virtualMachineDataDiskAttachmentResource _caching _managedDiskId _virtualMachineId _lun =
+    TF.unsafeResource "azurerm_virtual_machine_data_disk_attachment" TF.validator $
+        VirtualMachineDataDiskAttachmentResource'
+            { _caching = _caching
+            , _createOption = TF.value "Attach"
+            , _lun = _lun
+            , _managedDiskId = _managedDiskId
+            , _virtualMachineId = _virtualMachineId
+            , _writeAcceleratorEnabled = TF.value P.False
+            }
+
+instance TF.IsObject (VirtualMachineDataDiskAttachmentResource s) where
+    toObject VirtualMachineDataDiskAttachmentResource'{..} = P.catMaybes
+        [ TF.assign "caching" <$> TF.attribute _caching
+        , TF.assign "create_option" <$> TF.attribute _createOption
+        , TF.assign "lun" <$> TF.attribute _lun
+        , TF.assign "managed_disk_id" <$> TF.attribute _managedDiskId
+        , TF.assign "virtual_machine_id" <$> TF.attribute _virtualMachineId
+        , TF.assign "write_accelerator_enabled" <$> TF.attribute _writeAcceleratorEnabled
+        ]
+
+instance TF.IsValid (VirtualMachineDataDiskAttachmentResource s) where
+    validator = P.mempty
+
+instance P.HasCaching (VirtualMachineDataDiskAttachmentResource s) (TF.Attr s P.Text) where
+    caching =
+        P.lens (_caching :: VirtualMachineDataDiskAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _caching = a } :: VirtualMachineDataDiskAttachmentResource s)
+
+instance P.HasCreateOption (VirtualMachineDataDiskAttachmentResource s) (TF.Attr s P.Text) where
+    createOption =
+        P.lens (_createOption :: VirtualMachineDataDiskAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _createOption = a } :: VirtualMachineDataDiskAttachmentResource s)
+
+instance P.HasLun (VirtualMachineDataDiskAttachmentResource s) (TF.Attr s P.Int) where
+    lun =
+        P.lens (_lun :: VirtualMachineDataDiskAttachmentResource s -> TF.Attr s P.Int)
+               (\s a -> s { _lun = a } :: VirtualMachineDataDiskAttachmentResource s)
+
+instance P.HasManagedDiskId (VirtualMachineDataDiskAttachmentResource s) (TF.Attr s P.Text) where
+    managedDiskId =
+        P.lens (_managedDiskId :: VirtualMachineDataDiskAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _managedDiskId = a } :: VirtualMachineDataDiskAttachmentResource s)
+
+instance P.HasVirtualMachineId (VirtualMachineDataDiskAttachmentResource s) (TF.Attr s P.Text) where
+    virtualMachineId =
+        P.lens (_virtualMachineId :: VirtualMachineDataDiskAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _virtualMachineId = a } :: VirtualMachineDataDiskAttachmentResource s)
+
+instance P.HasWriteAcceleratorEnabled (VirtualMachineDataDiskAttachmentResource s) (TF.Attr s P.Bool) where
+    writeAcceleratorEnabled =
+        P.lens (_writeAcceleratorEnabled :: VirtualMachineDataDiskAttachmentResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _writeAcceleratorEnabled = a } :: VirtualMachineDataDiskAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualMachineDataDiskAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @azurerm_virtual_machine_extension@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/virtual_machine_extension.html terraform documentation>
+-- for more information.
+data VirtualMachineExtensionResource s = VirtualMachineExtensionResource'
+    { _autoUpgradeMinorVersion :: TF.Attr s P.Bool
+    -- ^ @auto_upgrade_minor_version@ - (Optional)
+    --
+    , _location                :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name                    :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _protectedSettings       :: TF.Attr s P.Text
+    -- ^ @protected_settings@ - (Optional)
+    --
+    , _publisher               :: TF.Attr s P.Text
+    -- ^ @publisher@ - (Required)
+    --
+    , _resourceGroupName       :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _settings                :: TF.Attr s P.Text
+    -- ^ @settings@ - (Optional)
+    --
+    , _tags                    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _type'                   :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    --
+    , _typeHandlerVersion      :: TF.Attr s P.Text
+    -- ^ @type_handler_version@ - (Required)
+    --
+    , _virtualMachineName      :: TF.Attr s P.Text
+    -- ^ @virtual_machine_name@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_virtual_machine_extension@ resource value.
+virtualMachineExtensionResource
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @virtual_machine_name@ ('P._virtualMachineName', 'P.virtualMachineName')
+    -> TF.Attr s P.Text -- ^ @publisher@ ('P._publisher', 'P.publisher')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    -> TF.Attr s P.Text -- ^ @type_handler_version@ ('P._typeHandlerVersion', 'P.typeHandlerVersion')
+    -> P.Resource (VirtualMachineExtensionResource s)
+virtualMachineExtensionResource _location _name _resourceGroupName _virtualMachineName _publisher _type' _typeHandlerVersion =
+    TF.unsafeResource "azurerm_virtual_machine_extension" TF.validator $
+        VirtualMachineExtensionResource'
+            { _autoUpgradeMinorVersion = TF.Nil
+            , _location = _location
+            , _name = _name
+            , _protectedSettings = TF.Nil
+            , _publisher = _publisher
+            , _resourceGroupName = _resourceGroupName
+            , _settings = TF.Nil
+            , _tags = TF.Nil
+            , _type' = _type'
+            , _typeHandlerVersion = _typeHandlerVersion
+            , _virtualMachineName = _virtualMachineName
+            }
+
+instance TF.IsObject (VirtualMachineExtensionResource s) where
+    toObject VirtualMachineExtensionResource'{..} = P.catMaybes
+        [ TF.assign "auto_upgrade_minor_version" <$> TF.attribute _autoUpgradeMinorVersion
+        , TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "protected_settings" <$> TF.attribute _protectedSettings
+        , TF.assign "publisher" <$> TF.attribute _publisher
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "settings" <$> TF.attribute _settings
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "type_handler_version" <$> TF.attribute _typeHandlerVersion
+        , TF.assign "virtual_machine_name" <$> TF.attribute _virtualMachineName
+        ]
+
+instance TF.IsValid (VirtualMachineExtensionResource s) where
+    validator = P.mempty
+
+instance P.HasAutoUpgradeMinorVersion (VirtualMachineExtensionResource s) (TF.Attr s P.Bool) where
+    autoUpgradeMinorVersion =
+        P.lens (_autoUpgradeMinorVersion :: VirtualMachineExtensionResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _autoUpgradeMinorVersion = a } :: VirtualMachineExtensionResource s)
+
+instance P.HasLocation (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: VirtualMachineExtensionResource s)
+
+instance P.HasName (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: VirtualMachineExtensionResource s)
+
+instance P.HasProtectedSettings (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
+    protectedSettings =
+        P.lens (_protectedSettings :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _protectedSettings = a } :: VirtualMachineExtensionResource s)
+
+instance P.HasPublisher (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
+    publisher =
+        P.lens (_publisher :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _publisher = a } :: VirtualMachineExtensionResource s)
+
+instance P.HasResourceGroupName (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: VirtualMachineExtensionResource s)
+
+instance P.HasSettings (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
+    settings =
+        P.lens (_settings :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _settings = a } :: VirtualMachineExtensionResource s)
+
+instance P.HasTags (VirtualMachineExtensionResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: VirtualMachineExtensionResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: VirtualMachineExtensionResource s)
+
+instance P.HasType' (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: VirtualMachineExtensionResource s)
+
+instance P.HasTypeHandlerVersion (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
+    typeHandlerVersion =
+        P.lens (_typeHandlerVersion :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _typeHandlerVersion = a } :: VirtualMachineExtensionResource s)
+
+instance P.HasVirtualMachineName (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
+    virtualMachineName =
+        P.lens (_virtualMachineName :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _virtualMachineName = a } :: VirtualMachineExtensionResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualMachineExtensionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (VirtualMachineExtensionResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
 -- | @azurerm_virtual_machine@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/virtual_machine.html terraform documentation>
@@ -4591,240 +9209,6 @@ instance s ~ s' => P.HasComputedStorageImageReference (TF.Ref s' (VirtualMachine
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
--- | @azurerm_virtual_machine_data_disk_attachment@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/azurerm/r/virtual_machine_data_disk_attachment.html terraform documentation>
--- for more information.
-data VirtualMachineDataDiskAttachmentResource s = VirtualMachineDataDiskAttachmentResource'
-    { _caching                 :: TF.Attr s P.Text
-    -- ^ @caching@ - (Required)
-    --
-    , _createOption            :: TF.Attr s P.Text
-    -- ^ @create_option@ - (Optional, Forces New)
-    --
-    , _lun                     :: TF.Attr s P.Int
-    -- ^ @lun@ - (Required, Forces New)
-    --
-    , _managedDiskId           :: TF.Attr s P.Text
-    -- ^ @managed_disk_id@ - (Required, Forces New)
-    --
-    , _virtualMachineId        :: TF.Attr s P.Text
-    -- ^ @virtual_machine_id@ - (Required, Forces New)
-    --
-    , _writeAcceleratorEnabled :: TF.Attr s P.Bool
-    -- ^ @write_accelerator_enabled@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @azurerm_virtual_machine_data_disk_attachment@ resource value.
-virtualMachineDataDiskAttachmentResource
-    :: TF.Attr s P.Text -- ^ @caching@ ('P._caching', 'P.caching')
-    -> TF.Attr s P.Text -- ^ @managed_disk_id@ ('P._managedDiskId', 'P.managedDiskId')
-    -> TF.Attr s P.Text -- ^ @virtual_machine_id@ ('P._virtualMachineId', 'P.virtualMachineId')
-    -> TF.Attr s P.Int -- ^ @lun@ ('P._lun', 'P.lun')
-    -> P.Resource (VirtualMachineDataDiskAttachmentResource s)
-virtualMachineDataDiskAttachmentResource _caching _managedDiskId _virtualMachineId _lun =
-    TF.unsafeResource "azurerm_virtual_machine_data_disk_attachment" TF.validator $
-        VirtualMachineDataDiskAttachmentResource'
-            { _caching = _caching
-            , _createOption = TF.value "Attach"
-            , _lun = _lun
-            , _managedDiskId = _managedDiskId
-            , _virtualMachineId = _virtualMachineId
-            , _writeAcceleratorEnabled = TF.value P.False
-            }
-
-instance TF.IsObject (VirtualMachineDataDiskAttachmentResource s) where
-    toObject VirtualMachineDataDiskAttachmentResource'{..} = P.catMaybes
-        [ TF.assign "caching" <$> TF.attribute _caching
-        , TF.assign "create_option" <$> TF.attribute _createOption
-        , TF.assign "lun" <$> TF.attribute _lun
-        , TF.assign "managed_disk_id" <$> TF.attribute _managedDiskId
-        , TF.assign "virtual_machine_id" <$> TF.attribute _virtualMachineId
-        , TF.assign "write_accelerator_enabled" <$> TF.attribute _writeAcceleratorEnabled
-        ]
-
-instance TF.IsValid (VirtualMachineDataDiskAttachmentResource s) where
-    validator = P.mempty
-
-instance P.HasCaching (VirtualMachineDataDiskAttachmentResource s) (TF.Attr s P.Text) where
-    caching =
-        P.lens (_caching :: VirtualMachineDataDiskAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _caching = a } :: VirtualMachineDataDiskAttachmentResource s)
-
-instance P.HasCreateOption (VirtualMachineDataDiskAttachmentResource s) (TF.Attr s P.Text) where
-    createOption =
-        P.lens (_createOption :: VirtualMachineDataDiskAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _createOption = a } :: VirtualMachineDataDiskAttachmentResource s)
-
-instance P.HasLun (VirtualMachineDataDiskAttachmentResource s) (TF.Attr s P.Int) where
-    lun =
-        P.lens (_lun :: VirtualMachineDataDiskAttachmentResource s -> TF.Attr s P.Int)
-               (\s a -> s { _lun = a } :: VirtualMachineDataDiskAttachmentResource s)
-
-instance P.HasManagedDiskId (VirtualMachineDataDiskAttachmentResource s) (TF.Attr s P.Text) where
-    managedDiskId =
-        P.lens (_managedDiskId :: VirtualMachineDataDiskAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _managedDiskId = a } :: VirtualMachineDataDiskAttachmentResource s)
-
-instance P.HasVirtualMachineId (VirtualMachineDataDiskAttachmentResource s) (TF.Attr s P.Text) where
-    virtualMachineId =
-        P.lens (_virtualMachineId :: VirtualMachineDataDiskAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _virtualMachineId = a } :: VirtualMachineDataDiskAttachmentResource s)
-
-instance P.HasWriteAcceleratorEnabled (VirtualMachineDataDiskAttachmentResource s) (TF.Attr s P.Bool) where
-    writeAcceleratorEnabled =
-        P.lens (_writeAcceleratorEnabled :: VirtualMachineDataDiskAttachmentResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _writeAcceleratorEnabled = a } :: VirtualMachineDataDiskAttachmentResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualMachineDataDiskAttachmentResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
--- | @azurerm_virtual_machine_extension@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/azurerm/r/virtual_machine_extension.html terraform documentation>
--- for more information.
-data VirtualMachineExtensionResource s = VirtualMachineExtensionResource'
-    { _autoUpgradeMinorVersion :: TF.Attr s P.Bool
-    -- ^ @auto_upgrade_minor_version@ - (Optional)
-    --
-    , _location                :: TF.Attr s P.Text
-    -- ^ @location@ - (Required, Forces New)
-    --
-    , _name                    :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    , _protectedSettings       :: TF.Attr s P.Text
-    -- ^ @protected_settings@ - (Optional)
-    --
-    , _publisher               :: TF.Attr s P.Text
-    -- ^ @publisher@ - (Required)
-    --
-    , _resourceGroupName       :: TF.Attr s P.Text
-    -- ^ @resource_group_name@ - (Required, Forces New)
-    --
-    , _settings                :: TF.Attr s P.Text
-    -- ^ @settings@ - (Optional)
-    --
-    , _tags                    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @tags@ - (Optional)
-    --
-    , _type'                   :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
-    --
-    , _typeHandlerVersion      :: TF.Attr s P.Text
-    -- ^ @type_handler_version@ - (Required)
-    --
-    , _virtualMachineName      :: TF.Attr s P.Text
-    -- ^ @virtual_machine_name@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @azurerm_virtual_machine_extension@ resource value.
-virtualMachineExtensionResource
-    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> TF.Attr s P.Text -- ^ @virtual_machine_name@ ('P._virtualMachineName', 'P.virtualMachineName')
-    -> TF.Attr s P.Text -- ^ @publisher@ ('P._publisher', 'P.publisher')
-    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
-    -> TF.Attr s P.Text -- ^ @type_handler_version@ ('P._typeHandlerVersion', 'P.typeHandlerVersion')
-    -> P.Resource (VirtualMachineExtensionResource s)
-virtualMachineExtensionResource _location _name _resourceGroupName _virtualMachineName _publisher _type' _typeHandlerVersion =
-    TF.unsafeResource "azurerm_virtual_machine_extension" TF.validator $
-        VirtualMachineExtensionResource'
-            { _autoUpgradeMinorVersion = TF.Nil
-            , _location = _location
-            , _name = _name
-            , _protectedSettings = TF.Nil
-            , _publisher = _publisher
-            , _resourceGroupName = _resourceGroupName
-            , _settings = TF.Nil
-            , _tags = TF.Nil
-            , _type' = _type'
-            , _typeHandlerVersion = _typeHandlerVersion
-            , _virtualMachineName = _virtualMachineName
-            }
-
-instance TF.IsObject (VirtualMachineExtensionResource s) where
-    toObject VirtualMachineExtensionResource'{..} = P.catMaybes
-        [ TF.assign "auto_upgrade_minor_version" <$> TF.attribute _autoUpgradeMinorVersion
-        , TF.assign "location" <$> TF.attribute _location
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "protected_settings" <$> TF.attribute _protectedSettings
-        , TF.assign "publisher" <$> TF.attribute _publisher
-        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
-        , TF.assign "settings" <$> TF.attribute _settings
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "type_handler_version" <$> TF.attribute _typeHandlerVersion
-        , TF.assign "virtual_machine_name" <$> TF.attribute _virtualMachineName
-        ]
-
-instance TF.IsValid (VirtualMachineExtensionResource s) where
-    validator = P.mempty
-
-instance P.HasAutoUpgradeMinorVersion (VirtualMachineExtensionResource s) (TF.Attr s P.Bool) where
-    autoUpgradeMinorVersion =
-        P.lens (_autoUpgradeMinorVersion :: VirtualMachineExtensionResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoUpgradeMinorVersion = a } :: VirtualMachineExtensionResource s)
-
-instance P.HasLocation (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: VirtualMachineExtensionResource s)
-
-instance P.HasName (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: VirtualMachineExtensionResource s)
-
-instance P.HasProtectedSettings (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
-    protectedSettings =
-        P.lens (_protectedSettings :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _protectedSettings = a } :: VirtualMachineExtensionResource s)
-
-instance P.HasPublisher (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
-    publisher =
-        P.lens (_publisher :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _publisher = a } :: VirtualMachineExtensionResource s)
-
-instance P.HasResourceGroupName (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
-    resourceGroupName =
-        P.lens (_resourceGroupName :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _resourceGroupName = a } :: VirtualMachineExtensionResource s)
-
-instance P.HasSettings (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
-    settings =
-        P.lens (_settings :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _settings = a } :: VirtualMachineExtensionResource s)
-
-instance P.HasTags (VirtualMachineExtensionResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    tags =
-        P.lens (_tags :: VirtualMachineExtensionResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: VirtualMachineExtensionResource s)
-
-instance P.HasType' (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: VirtualMachineExtensionResource s)
-
-instance P.HasTypeHandlerVersion (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
-    typeHandlerVersion =
-        P.lens (_typeHandlerVersion :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _typeHandlerVersion = a } :: VirtualMachineExtensionResource s)
-
-instance P.HasVirtualMachineName (VirtualMachineExtensionResource s) (TF.Attr s P.Text) where
-    virtualMachineName =
-        P.lens (_virtualMachineName :: VirtualMachineExtensionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _virtualMachineName = a } :: VirtualMachineExtensionResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualMachineExtensionResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (VirtualMachineExtensionResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
-
 -- | @azurerm_virtual_machine_scale_set@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/virtual_machine_scale_set.html terraform documentation>
@@ -5139,292 +9523,6 @@ instance s ~ s' => P.HasComputedStorageProfileImageReference (TF.Ref s' (Virtual
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (VirtualMachineScaleSetResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
--- | @azurerm_virtual_network@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/azurerm/r/virtual_network.html terraform documentation>
--- for more information.
-data VirtualNetworkResource s = VirtualNetworkResource'
-    { _addressSpace      :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @address_space@ - (Required)
-    --
-    , _dnsServers        :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @dns_servers@ - (Optional)
-    --
-    , _location          :: TF.Attr s P.Text
-    -- ^ @location@ - (Required, Forces New)
-    --
-    , _name              :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    , _resourceGroupName :: TF.Attr s P.Text
-    -- ^ @resource_group_name@ - (Required, Forces New)
-    --
-    , _subnet            :: TF.Attr s [TF.Attr s (SubnetSetting s)]
-    -- ^ @subnet@ - (Optional)
-    --
-    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @tags@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @azurerm_virtual_network@ resource value.
-virtualNetworkResource
-    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @address_space@ ('P._addressSpace', 'P.addressSpace')
-    -> P.Resource (VirtualNetworkResource s)
-virtualNetworkResource _location _name _resourceGroupName _addressSpace =
-    TF.unsafeResource "azurerm_virtual_network" TF.validator $
-        VirtualNetworkResource'
-            { _addressSpace = _addressSpace
-            , _dnsServers = TF.Nil
-            , _location = _location
-            , _name = _name
-            , _resourceGroupName = _resourceGroupName
-            , _subnet = TF.Nil
-            , _tags = TF.Nil
-            }
-
-instance TF.IsObject (VirtualNetworkResource s) where
-    toObject VirtualNetworkResource'{..} = P.catMaybes
-        [ TF.assign "address_space" <$> TF.attribute _addressSpace
-        , TF.assign "dns_servers" <$> TF.attribute _dnsServers
-        , TF.assign "location" <$> TF.attribute _location
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
-        , TF.assign "subnet" <$> TF.attribute _subnet
-        , TF.assign "tags" <$> TF.attribute _tags
-        ]
-
-instance TF.IsValid (VirtualNetworkResource s) where
-    validator = P.mempty
-
-instance P.HasAddressSpace (VirtualNetworkResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    addressSpace =
-        P.lens (_addressSpace :: VirtualNetworkResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _addressSpace = a } :: VirtualNetworkResource s)
-
-instance P.HasDnsServers (VirtualNetworkResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    dnsServers =
-        P.lens (_dnsServers :: VirtualNetworkResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _dnsServers = a } :: VirtualNetworkResource s)
-
-instance P.HasLocation (VirtualNetworkResource s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: VirtualNetworkResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: VirtualNetworkResource s)
-
-instance P.HasName (VirtualNetworkResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: VirtualNetworkResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: VirtualNetworkResource s)
-
-instance P.HasResourceGroupName (VirtualNetworkResource s) (TF.Attr s P.Text) where
-    resourceGroupName =
-        P.lens (_resourceGroupName :: VirtualNetworkResource s -> TF.Attr s P.Text)
-               (\s a -> s { _resourceGroupName = a } :: VirtualNetworkResource s)
-
-instance P.HasSubnet (VirtualNetworkResource s) (TF.Attr s [TF.Attr s (SubnetSetting s)]) where
-    subnet =
-        P.lens (_subnet :: VirtualNetworkResource s -> TF.Attr s [TF.Attr s (SubnetSetting s)])
-               (\s a -> s { _subnet = a } :: VirtualNetworkResource s)
-
-instance P.HasTags (VirtualNetworkResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    tags =
-        P.lens (_tags :: VirtualNetworkResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: VirtualNetworkResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualNetworkResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedSubnet (TF.Ref s' (VirtualNetworkResource s)) (TF.Attr s [TF.Attr s (SubnetSetting s)]) where
-    computedSubnet x = TF.compute (TF.refKey x) "subnet"
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (VirtualNetworkResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
-
--- | @azurerm_virtual_network_gateway@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/azurerm/r/virtual_network_gateway.html terraform documentation>
--- for more information.
-data VirtualNetworkGatewayResource s = VirtualNetworkGatewayResource'
-    { _activeActive :: TF.Attr s P.Bool
-    -- ^ @active_active@ - (Optional)
-    --
-    , _bgpSettings :: TF.Attr s (BgpSettings s)
-    -- ^ @bgp_settings@ - (Optional)
-    --
-    , _defaultLocalNetworkGatewayId :: TF.Attr s P.Text
-    -- ^ @default_local_network_gateway_id@ - (Optional)
-    --
-    , _enableBgp :: TF.Attr s P.Bool
-    -- ^ @enable_bgp@ - (Optional)
-    --
-    , _ipConfiguration :: TF.Attr s [TF.Attr s (IpConfigurationSetting s)]
-    -- ^ @ip_configuration@ - (Required)
-    --
-    , _location :: TF.Attr s P.Text
-    -- ^ @location@ - (Required, Forces New)
-    --
-    , _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    , _resourceGroupName :: TF.Attr s P.Text
-    -- ^ @resource_group_name@ - (Required, Forces New)
-    --
-    , _sku :: TF.Attr s P.Text
-    -- ^ @sku@ - (Required)
-    --
-    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @tags@ - (Optional)
-    --
-    , _type' :: TF.Attr s P.Text
-    -- ^ @type@ - (Required, Forces New)
-    --
-    , _vpnClientConfiguration :: TF.Attr s (VpnClientConfigurationSetting s)
-    -- ^ @vpn_client_configuration@ - (Optional)
-    --
-    , _vpnType :: TF.Attr s P.Text
-    -- ^ @vpn_type@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @azurerm_virtual_network_gateway@ resource value.
-virtualNetworkGatewayResource
-    :: TF.Attr s [TF.Attr s (IpConfigurationSetting s)] -- ^ @ip_configuration@ ('P._ipConfiguration', 'P.ipConfiguration')
-    -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> TF.Attr s P.Text -- ^ @sku@ ('P._sku', 'P.sku')
-    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
-    -> P.Resource (VirtualNetworkGatewayResource s)
-virtualNetworkGatewayResource _ipConfiguration _location _name _resourceGroupName _sku _type' =
-    TF.unsafeResource "azurerm_virtual_network_gateway" TF.validator $
-        VirtualNetworkGatewayResource'
-            { _activeActive = TF.Nil
-            , _bgpSettings = TF.Nil
-            , _defaultLocalNetworkGatewayId = TF.Nil
-            , _enableBgp = TF.Nil
-            , _ipConfiguration = _ipConfiguration
-            , _location = _location
-            , _name = _name
-            , _resourceGroupName = _resourceGroupName
-            , _sku = _sku
-            , _tags = TF.Nil
-            , _type' = _type'
-            , _vpnClientConfiguration = TF.Nil
-            , _vpnType = TF.value "RouteBased"
-            }
-
-instance TF.IsObject (VirtualNetworkGatewayResource s) where
-    toObject VirtualNetworkGatewayResource'{..} = P.catMaybes
-        [ TF.assign "active_active" <$> TF.attribute _activeActive
-        , TF.assign "bgp_settings" <$> TF.attribute _bgpSettings
-        , TF.assign "default_local_network_gateway_id" <$> TF.attribute _defaultLocalNetworkGatewayId
-        , TF.assign "enable_bgp" <$> TF.attribute _enableBgp
-        , TF.assign "ip_configuration" <$> TF.attribute _ipConfiguration
-        , TF.assign "location" <$> TF.attribute _location
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
-        , TF.assign "sku" <$> TF.attribute _sku
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "vpn_client_configuration" <$> TF.attribute _vpnClientConfiguration
-        , TF.assign "vpn_type" <$> TF.attribute _vpnType
-        ]
-
-instance TF.IsValid (VirtualNetworkGatewayResource s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_bgpSettings"
-                  (_bgpSettings
-                      :: VirtualNetworkGatewayResource s -> TF.Attr s (BgpSettings s))
-                  TF.validator
-           P.<> TF.settingsValidator "_vpnClientConfiguration"
-                  (_vpnClientConfiguration
-                      :: VirtualNetworkGatewayResource s -> TF.Attr s (VpnClientConfigurationSetting s))
-                  TF.validator
-
-instance P.HasActiveActive (VirtualNetworkGatewayResource s) (TF.Attr s P.Bool) where
-    activeActive =
-        P.lens (_activeActive :: VirtualNetworkGatewayResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _activeActive = a } :: VirtualNetworkGatewayResource s)
-
-instance P.HasBgpSettings (VirtualNetworkGatewayResource s) (TF.Attr s (BgpSettings s)) where
-    bgpSettings =
-        P.lens (_bgpSettings :: VirtualNetworkGatewayResource s -> TF.Attr s (BgpSettings s))
-               (\s a -> s { _bgpSettings = a } :: VirtualNetworkGatewayResource s)
-
-instance P.HasDefaultLocalNetworkGatewayId (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
-    defaultLocalNetworkGatewayId =
-        P.lens (_defaultLocalNetworkGatewayId :: VirtualNetworkGatewayResource s -> TF.Attr s P.Text)
-               (\s a -> s { _defaultLocalNetworkGatewayId = a } :: VirtualNetworkGatewayResource s)
-
-instance P.HasEnableBgp (VirtualNetworkGatewayResource s) (TF.Attr s P.Bool) where
-    enableBgp =
-        P.lens (_enableBgp :: VirtualNetworkGatewayResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _enableBgp = a } :: VirtualNetworkGatewayResource s)
-
-instance P.HasIpConfiguration (VirtualNetworkGatewayResource s) (TF.Attr s [TF.Attr s (IpConfigurationSetting s)]) where
-    ipConfiguration =
-        P.lens (_ipConfiguration :: VirtualNetworkGatewayResource s -> TF.Attr s [TF.Attr s (IpConfigurationSetting s)])
-               (\s a -> s { _ipConfiguration = a } :: VirtualNetworkGatewayResource s)
-
-instance P.HasLocation (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: VirtualNetworkGatewayResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: VirtualNetworkGatewayResource s)
-
-instance P.HasName (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: VirtualNetworkGatewayResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: VirtualNetworkGatewayResource s)
-
-instance P.HasResourceGroupName (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
-    resourceGroupName =
-        P.lens (_resourceGroupName :: VirtualNetworkGatewayResource s -> TF.Attr s P.Text)
-               (\s a -> s { _resourceGroupName = a } :: VirtualNetworkGatewayResource s)
-
-instance P.HasSku (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
-    sku =
-        P.lens (_sku :: VirtualNetworkGatewayResource s -> TF.Attr s P.Text)
-               (\s a -> s { _sku = a } :: VirtualNetworkGatewayResource s)
-
-instance P.HasTags (VirtualNetworkGatewayResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    tags =
-        P.lens (_tags :: VirtualNetworkGatewayResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: VirtualNetworkGatewayResource s)
-
-instance P.HasType' (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: VirtualNetworkGatewayResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: VirtualNetworkGatewayResource s)
-
-instance P.HasVpnClientConfiguration (VirtualNetworkGatewayResource s) (TF.Attr s (VpnClientConfigurationSetting s)) where
-    vpnClientConfiguration =
-        P.lens (_vpnClientConfiguration :: VirtualNetworkGatewayResource s -> TF.Attr s (VpnClientConfigurationSetting s))
-               (\s a -> s { _vpnClientConfiguration = a } :: VirtualNetworkGatewayResource s)
-
-instance P.HasVpnType (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
-    vpnType =
-        P.lens (_vpnType :: VirtualNetworkGatewayResource s -> TF.Attr s P.Text)
-               (\s a -> s { _vpnType = a } :: VirtualNetworkGatewayResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualNetworkGatewayResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedActiveActive (TF.Ref s' (VirtualNetworkGatewayResource s)) (TF.Attr s P.Bool) where
-    computedActiveActive x = TF.compute (TF.refKey x) "active_active"
-
-instance s ~ s' => P.HasComputedBgpSettings (TF.Ref s' (VirtualNetworkGatewayResource s)) (TF.Attr s (BgpSettings s)) where
-    computedBgpSettings x = TF.compute (TF.refKey x) "bgp_settings"
-
-instance s ~ s' => P.HasComputedEnableBgp (TF.Ref s' (VirtualNetworkGatewayResource s)) (TF.Attr s P.Bool) where
-    computedEnableBgp x = TF.compute (TF.refKey x) "enable_bgp"
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (VirtualNetworkGatewayResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
-
 -- | @azurerm_virtual_network_gateway_connection@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/virtual_network_gateway_connection.html terraform documentation>
@@ -5621,6 +9719,187 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (VirtualNetworkGatewayConnection
 instance s ~ s' => P.HasComputedUsePolicyBasedTrafficSelectors (TF.Ref s' (VirtualNetworkGatewayConnectionResource s)) (TF.Attr s P.Bool) where
     computedUsePolicyBasedTrafficSelectors x = TF.compute (TF.refKey x) "use_policy_based_traffic_selectors"
 
+-- | @azurerm_virtual_network_gateway@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/virtual_network_gateway.html terraform documentation>
+-- for more information.
+data VirtualNetworkGatewayResource s = VirtualNetworkGatewayResource'
+    { _activeActive :: TF.Attr s P.Bool
+    -- ^ @active_active@ - (Optional)
+    --
+    , _bgpSettings :: TF.Attr s (BgpSettings s)
+    -- ^ @bgp_settings@ - (Optional)
+    --
+    , _defaultLocalNetworkGatewayId :: TF.Attr s P.Text
+    -- ^ @default_local_network_gateway_id@ - (Optional)
+    --
+    , _enableBgp :: TF.Attr s P.Bool
+    -- ^ @enable_bgp@ - (Optional)
+    --
+    , _ipConfiguration :: TF.Attr s [TF.Attr s (IpConfigurationSetting s)]
+    -- ^ @ip_configuration@ - (Required)
+    --
+    , _location :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _sku :: TF.Attr s P.Text
+    -- ^ @sku@ - (Required)
+    --
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _type' :: TF.Attr s P.Text
+    -- ^ @type@ - (Required, Forces New)
+    --
+    , _vpnClientConfiguration :: TF.Attr s (VpnClientConfigurationSetting s)
+    -- ^ @vpn_client_configuration@ - (Optional)
+    --
+    , _vpnType :: TF.Attr s P.Text
+    -- ^ @vpn_type@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_virtual_network_gateway@ resource value.
+virtualNetworkGatewayResource
+    :: TF.Attr s [TF.Attr s (IpConfigurationSetting s)] -- ^ @ip_configuration@ ('P._ipConfiguration', 'P.ipConfiguration')
+    -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s P.Text -- ^ @sku@ ('P._sku', 'P.sku')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    -> P.Resource (VirtualNetworkGatewayResource s)
+virtualNetworkGatewayResource _ipConfiguration _location _name _resourceGroupName _sku _type' =
+    TF.unsafeResource "azurerm_virtual_network_gateway" TF.validator $
+        VirtualNetworkGatewayResource'
+            { _activeActive = TF.Nil
+            , _bgpSettings = TF.Nil
+            , _defaultLocalNetworkGatewayId = TF.Nil
+            , _enableBgp = TF.Nil
+            , _ipConfiguration = _ipConfiguration
+            , _location = _location
+            , _name = _name
+            , _resourceGroupName = _resourceGroupName
+            , _sku = _sku
+            , _tags = TF.Nil
+            , _type' = _type'
+            , _vpnClientConfiguration = TF.Nil
+            , _vpnType = TF.value "RouteBased"
+            }
+
+instance TF.IsObject (VirtualNetworkGatewayResource s) where
+    toObject VirtualNetworkGatewayResource'{..} = P.catMaybes
+        [ TF.assign "active_active" <$> TF.attribute _activeActive
+        , TF.assign "bgp_settings" <$> TF.attribute _bgpSettings
+        , TF.assign "default_local_network_gateway_id" <$> TF.attribute _defaultLocalNetworkGatewayId
+        , TF.assign "enable_bgp" <$> TF.attribute _enableBgp
+        , TF.assign "ip_configuration" <$> TF.attribute _ipConfiguration
+        , TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "sku" <$> TF.attribute _sku
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "vpn_client_configuration" <$> TF.attribute _vpnClientConfiguration
+        , TF.assign "vpn_type" <$> TF.attribute _vpnType
+        ]
+
+instance TF.IsValid (VirtualNetworkGatewayResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_bgpSettings"
+                  (_bgpSettings
+                      :: VirtualNetworkGatewayResource s -> TF.Attr s (BgpSettings s))
+                  TF.validator
+           P.<> TF.settingsValidator "_vpnClientConfiguration"
+                  (_vpnClientConfiguration
+                      :: VirtualNetworkGatewayResource s -> TF.Attr s (VpnClientConfigurationSetting s))
+                  TF.validator
+
+instance P.HasActiveActive (VirtualNetworkGatewayResource s) (TF.Attr s P.Bool) where
+    activeActive =
+        P.lens (_activeActive :: VirtualNetworkGatewayResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _activeActive = a } :: VirtualNetworkGatewayResource s)
+
+instance P.HasBgpSettings (VirtualNetworkGatewayResource s) (TF.Attr s (BgpSettings s)) where
+    bgpSettings =
+        P.lens (_bgpSettings :: VirtualNetworkGatewayResource s -> TF.Attr s (BgpSettings s))
+               (\s a -> s { _bgpSettings = a } :: VirtualNetworkGatewayResource s)
+
+instance P.HasDefaultLocalNetworkGatewayId (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
+    defaultLocalNetworkGatewayId =
+        P.lens (_defaultLocalNetworkGatewayId :: VirtualNetworkGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _defaultLocalNetworkGatewayId = a } :: VirtualNetworkGatewayResource s)
+
+instance P.HasEnableBgp (VirtualNetworkGatewayResource s) (TF.Attr s P.Bool) where
+    enableBgp =
+        P.lens (_enableBgp :: VirtualNetworkGatewayResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enableBgp = a } :: VirtualNetworkGatewayResource s)
+
+instance P.HasIpConfiguration (VirtualNetworkGatewayResource s) (TF.Attr s [TF.Attr s (IpConfigurationSetting s)]) where
+    ipConfiguration =
+        P.lens (_ipConfiguration :: VirtualNetworkGatewayResource s -> TF.Attr s [TF.Attr s (IpConfigurationSetting s)])
+               (\s a -> s { _ipConfiguration = a } :: VirtualNetworkGatewayResource s)
+
+instance P.HasLocation (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: VirtualNetworkGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: VirtualNetworkGatewayResource s)
+
+instance P.HasName (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: VirtualNetworkGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: VirtualNetworkGatewayResource s)
+
+instance P.HasResourceGroupName (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: VirtualNetworkGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: VirtualNetworkGatewayResource s)
+
+instance P.HasSku (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
+    sku =
+        P.lens (_sku :: VirtualNetworkGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sku = a } :: VirtualNetworkGatewayResource s)
+
+instance P.HasTags (VirtualNetworkGatewayResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: VirtualNetworkGatewayResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: VirtualNetworkGatewayResource s)
+
+instance P.HasType' (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: VirtualNetworkGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: VirtualNetworkGatewayResource s)
+
+instance P.HasVpnClientConfiguration (VirtualNetworkGatewayResource s) (TF.Attr s (VpnClientConfigurationSetting s)) where
+    vpnClientConfiguration =
+        P.lens (_vpnClientConfiguration :: VirtualNetworkGatewayResource s -> TF.Attr s (VpnClientConfigurationSetting s))
+               (\s a -> s { _vpnClientConfiguration = a } :: VirtualNetworkGatewayResource s)
+
+instance P.HasVpnType (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
+    vpnType =
+        P.lens (_vpnType :: VirtualNetworkGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vpnType = a } :: VirtualNetworkGatewayResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualNetworkGatewayResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedActiveActive (TF.Ref s' (VirtualNetworkGatewayResource s)) (TF.Attr s P.Bool) where
+    computedActiveActive x = TF.compute (TF.refKey x) "active_active"
+
+instance s ~ s' => P.HasComputedBgpSettings (TF.Ref s' (VirtualNetworkGatewayResource s)) (TF.Attr s (BgpSettings s)) where
+    computedBgpSettings x = TF.compute (TF.refKey x) "bgp_settings"
+
+instance s ~ s' => P.HasComputedEnableBgp (TF.Ref s' (VirtualNetworkGatewayResource s)) (TF.Attr s P.Bool) where
+    computedEnableBgp x = TF.compute (TF.refKey x) "enable_bgp"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (VirtualNetworkGatewayResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
 -- | @azurerm_virtual_network_peering@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html terraform documentation>
@@ -5741,3 +10020,108 @@ instance s ~ s' => P.HasComputedAllowVirtualNetworkAccess (TF.Ref s' (VirtualNet
 
 instance s ~ s' => P.HasComputedUseRemoteGateways (TF.Ref s' (VirtualNetworkPeeringResource s)) (TF.Attr s P.Bool) where
     computedUseRemoteGateways x = TF.compute (TF.refKey x) "use_remote_gateways"
+
+-- | @azurerm_virtual_network@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/azurerm/r/virtual_network.html terraform documentation>
+-- for more information.
+data VirtualNetworkResource s = VirtualNetworkResource'
+    { _addressSpace      :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @address_space@ - (Required)
+    --
+    , _dnsServers        :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @dns_servers@ - (Optional)
+    --
+    , _location          :: TF.Attr s P.Text
+    -- ^ @location@ - (Required, Forces New)
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _resourceGroupName :: TF.Attr s P.Text
+    -- ^ @resource_group_name@ - (Required, Forces New)
+    --
+    , _subnet            :: TF.Attr s [TF.Attr s (SubnetSetting s)]
+    -- ^ @subnet@ - (Optional)
+    --
+    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @azurerm_virtual_network@ resource value.
+virtualNetworkResource
+    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @address_space@ ('P._addressSpace', 'P.addressSpace')
+    -> P.Resource (VirtualNetworkResource s)
+virtualNetworkResource _location _name _resourceGroupName _addressSpace =
+    TF.unsafeResource "azurerm_virtual_network" TF.validator $
+        VirtualNetworkResource'
+            { _addressSpace = _addressSpace
+            , _dnsServers = TF.Nil
+            , _location = _location
+            , _name = _name
+            , _resourceGroupName = _resourceGroupName
+            , _subnet = TF.Nil
+            , _tags = TF.Nil
+            }
+
+instance TF.IsObject (VirtualNetworkResource s) where
+    toObject VirtualNetworkResource'{..} = P.catMaybes
+        [ TF.assign "address_space" <$> TF.attribute _addressSpace
+        , TF.assign "dns_servers" <$> TF.attribute _dnsServers
+        , TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
+        , TF.assign "subnet" <$> TF.attribute _subnet
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance TF.IsValid (VirtualNetworkResource s) where
+    validator = P.mempty
+
+instance P.HasAddressSpace (VirtualNetworkResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    addressSpace =
+        P.lens (_addressSpace :: VirtualNetworkResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _addressSpace = a } :: VirtualNetworkResource s)
+
+instance P.HasDnsServers (VirtualNetworkResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    dnsServers =
+        P.lens (_dnsServers :: VirtualNetworkResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _dnsServers = a } :: VirtualNetworkResource s)
+
+instance P.HasLocation (VirtualNetworkResource s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: VirtualNetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: VirtualNetworkResource s)
+
+instance P.HasName (VirtualNetworkResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: VirtualNetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: VirtualNetworkResource s)
+
+instance P.HasResourceGroupName (VirtualNetworkResource s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        P.lens (_resourceGroupName :: VirtualNetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceGroupName = a } :: VirtualNetworkResource s)
+
+instance P.HasSubnet (VirtualNetworkResource s) (TF.Attr s [TF.Attr s (SubnetSetting s)]) where
+    subnet =
+        P.lens (_subnet :: VirtualNetworkResource s -> TF.Attr s [TF.Attr s (SubnetSetting s)])
+               (\s a -> s { _subnet = a } :: VirtualNetworkResource s)
+
+instance P.HasTags (VirtualNetworkResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: VirtualNetworkResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: VirtualNetworkResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualNetworkResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedSubnet (TF.Ref s' (VirtualNetworkResource s)) (TF.Attr s [TF.Attr s (SubnetSetting s)]) where
+    computedSubnet x = TF.compute (TF.refKey x) "subnet"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (VirtualNetworkResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedTags x = TF.compute (TF.refKey x) "tags"

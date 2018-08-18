@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.AzureRM
+    - Terrafomo.AzureRM.DataSources
+    - Terrafomo.AzureRM.Lens
+    - Terrafomo.AzureRM.Provider
+    - Terrafomo.AzureRM.Resources
+    - Terrafomo.AzureRM.Settings
+    - Terrafomo.AzureRM.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,
