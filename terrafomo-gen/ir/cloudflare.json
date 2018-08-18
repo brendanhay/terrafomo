@@ -58,6 +58,9 @@
                     "original": "timeout"
                 }
             ],
+            "dependencies": [
+                "ResponseSetting"
+            ],
             "key": "cloudflare_rate_limit.action",
             "name": "ActionSetting",
             "threaded": true,
@@ -687,6 +690,9 @@
                     "original": "waf"
                 }
             ],
+            "dependencies": [
+                "ForwardingUrlSetting"
+            ],
             "key": "cloudflare_page_rule.actions",
             "name": "ActionsSetting",
             "threaded": true,
@@ -720,6 +726,7 @@
                     "original": "by"
                 }
             ],
+            "dependencies": [],
             "key": "cloudflare_rate_limit.correlate",
             "name": "CorrelateSetting",
             "threaded": true,
@@ -1365,6 +1372,7 @@
                     "original": "weight"
                 }
             ],
+            "dependencies": [],
             "key": "cloudflare_record.data",
             "name": "Data'Setting",
             "threaded": true,
@@ -1415,6 +1423,7 @@
                     "original": "url"
                 }
             ],
+            "dependencies": [],
             "key": "cloudflare_page_rule.actions.forwarding_url",
             "name": "ForwardingUrlSetting",
             "threaded": true,
@@ -1500,6 +1509,7 @@
                     "original": "values"
                 }
             ],
+            "dependencies": [],
             "key": "cloudflare_load_balancer_monitor.header",
             "name": "HeaderSetting",
             "threaded": true,
@@ -2281,6 +2291,14 @@
                     "optional": true,
                     "original": "websockets"
                 }
+            ],
+            "dependencies": [
+                "MinifySetting",
+                "MobileRedirectSetting",
+                "SecurityHeaderSetting",
+                "MinifySetting",
+                "MobileRedirectSetting",
+                "SecurityHeaderSetting"
             ],
             "key": "cloudflare_zone_settings_override.initial_settings",
             "name": "InitialSettings",
@@ -3064,6 +3082,12 @@
                     "original": "response"
                 }
             ],
+            "dependencies": [
+                "RequestSetting",
+                "ResponseSetting",
+                "RequestSetting",
+                "ResponseSetting"
+            ],
             "key": "cloudflare_rate_limit.match",
             "name": "MatchSetting",
             "threaded": true,
@@ -3166,6 +3190,7 @@
                     "original": "js"
                 }
             ],
+            "dependencies": [],
             "key": "cloudflare_zone_settings_override.settings.minify",
             "name": "MinifySetting",
             "threaded": true,
@@ -3285,6 +3310,7 @@
                     "original": "strip_uri"
                 }
             ],
+            "dependencies": [],
             "key": "cloudflare_zone_settings_override.settings.mobile_redirect",
             "name": "MobileRedirectSetting",
             "threaded": true,
@@ -3404,6 +3430,7 @@
                     "original": "name"
                 }
             ],
+            "dependencies": [],
             "key": "cloudflare_load_balancer_pool.origins",
             "name": "OriginsSetting",
             "threaded": true,
@@ -3489,6 +3516,7 @@
                     "original": "pop"
                 }
             ],
+            "dependencies": [],
             "key": "cloudflare_load_balancer.pop_pools",
             "name": "PopPoolsSetting",
             "threaded": true,
@@ -3574,6 +3602,7 @@
                     "original": "region"
                 }
             ],
+            "dependencies": [],
             "key": "cloudflare_load_balancer.region_pools",
             "name": "RegionPoolsSetting",
             "threaded": true,
@@ -3676,6 +3705,7 @@
                     "original": "url_pattern"
                 }
             ],
+            "dependencies": [],
             "key": "cloudflare_rate_limit.match.request",
             "name": "RequestSetting",
             "threaded": true,
@@ -3812,6 +3842,7 @@
                     "original": "statuses"
                 }
             ],
+            "dependencies": [],
             "key": "cloudflare_rate_limit.action.response",
             "name": "ResponseSetting",
             "threaded": true,
@@ -3983,6 +4014,7 @@
                     "original": "preload"
                 }
             ],
+            "dependencies": [],
             "key": "cloudflare_zone_settings_override.settings.security_header",
             "name": "SecurityHeaderSetting",
             "threaded": true,
@@ -4816,6 +4848,14 @@
                     "original": "websockets"
                 }
             ],
+            "dependencies": [
+                "MinifySetting",
+                "MobileRedirectSetting",
+                "SecurityHeaderSetting",
+                "MinifySetting",
+                "MobileRedirectSetting",
+                "SecurityHeaderSetting"
+            ],
             "key": "cloudflare_zone_settings_override.settings",
             "name": "Settings",
             "threaded": true,
@@ -5567,6 +5607,7 @@
             },
             "arguments": [],
             "url": "https://www.terraform.io/docs/providers/cloudflare/d/ip_ranges.html",
+            "dependencies": [],
             "key": "cloudflare_ip_ranges",
             "name": "IpRangesData",
             "threaded": true,
@@ -5820,6 +5861,12 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudflare/r/load_balancer.html",
+            "dependencies": [
+                "PopPoolsSetting",
+                "RegionPoolsSetting",
+                "PopPoolsSetting",
+                "RegionPoolsSetting"
+            ],
             "key": "cloudflare_load_balancer",
             "name": "LoadBalancerResource",
             "threaded": true,
@@ -6245,6 +6292,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudflare/r/load_balancer_monitor.html",
+            "dependencies": [
+                "HeaderSetting"
+            ],
             "key": "cloudflare_load_balancer_monitor",
             "name": "LoadBalancerMonitorResource",
             "threaded": true,
@@ -6485,6 +6535,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudflare/r/load_balancer_pool.html",
+            "dependencies": [
+                "OriginsSetting"
+            ],
             "key": "cloudflare_load_balancer_pool",
             "name": "LoadBalancerPoolResource",
             "threaded": true,
@@ -6691,6 +6744,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudflare/r/page_rule.html",
+            "dependencies": [
+                "ActionsSetting"
+            ],
             "key": "cloudflare_page_rule",
             "name": "PageRuleResource",
             "threaded": true,
@@ -6948,6 +7004,12 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudflare/r/rate_limit.html",
+            "dependencies": [
+                "ActionSetting",
+                "CorrelateSetting",
+                "MatchSetting",
+                "MatchSetting"
+            ],
             "key": "cloudflare_rate_limit",
             "name": "RateLimitResource",
             "threaded": true,
@@ -7234,6 +7296,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudflare/r/record.html",
+            "dependencies": [
+                "Data'Setting"
+            ],
             "key": "cloudflare_record",
             "name": "RecordResource",
             "threaded": true,
@@ -7557,6 +7622,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudflare/r/waf_rule.html",
+            "dependencies": [],
             "key": "cloudflare_waf_rule",
             "name": "WafRuleResource",
             "threaded": true,
@@ -7712,6 +7778,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudflare/r/zone_settings_override.html",
+            "dependencies": [
+                "Settings",
+                "InitialSettings",
+                "Settings"
+            ],
             "key": "cloudflare_zone_settings_override",
             "name": "ZoneSettingsOverrideResource",
             "threaded": true,
@@ -8041,6 +8112,7 @@
                 "original": "use_org_from_zone"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
