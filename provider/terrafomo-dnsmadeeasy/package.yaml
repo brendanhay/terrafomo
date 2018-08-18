@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.DNSMadeEasy
+    - Terrafomo.DNSMadeEasy.DataSources
+    - Terrafomo.DNSMadeEasy.Lens
+    - Terrafomo.DNSMadeEasy.Provider
+    - Terrafomo.DNSMadeEasy.Resources
+    - Terrafomo.DNSMadeEasy.Settings
+    - Terrafomo.DNSMadeEasy.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

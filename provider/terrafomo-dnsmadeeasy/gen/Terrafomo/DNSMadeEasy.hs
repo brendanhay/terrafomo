@@ -13,16 +13,17 @@
 --
 module Terrafomo.DNSMadeEasy
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.DNSMadeEasy.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.DNSMadeEasy.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.DNSMadeEasy.Resource
+    , module Terrafomo.DNSMadeEasy.Resources
+
+    -- * DataSources
+    , module Terrafomo.DNSMadeEasy.DataSources
 
     -- * Settings
     , module Terrafomo.DNSMadeEasy.Settings
@@ -31,8 +32,9 @@ module Terrafomo.DNSMadeEasy
     , module Terrafomo.DNSMadeEasy.Lens
     ) where
 
+import Terrafomo.DNSMadeEasy.DataSources
 import Terrafomo.DNSMadeEasy.Lens
 import Terrafomo.DNSMadeEasy.Provider
-import Terrafomo.DNSMadeEasy.Resource
+import Terrafomo.DNSMadeEasy.Resources
 import Terrafomo.DNSMadeEasy.Settings
 import Terrafomo.DNSMadeEasy.Types

@@ -1,19 +1,15 @@
 -- This module is auto-generated.
 
 -- |
--- Module      : Terrafomo.DNSMadeEasy.Lens
+-- Module      : Terrafomo.DNSMadeEasy.DataSources
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.DNSMadeEasy.Lens
+module Terrafomo.DNSMadeEasy.DataSources
     (
-    -- * Lenses
-      module Terrafomo.DNSMadeEasy.Arguments01
-    , module Terrafomo.DNSMadeEasy.Attributes01
+    -- * DataSources
     ) where
 
-import Terrafomo.DNSMadeEasy.Arguments01
-import Terrafomo.DNSMadeEasy.Attributes01

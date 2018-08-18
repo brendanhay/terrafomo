@@ -1,19 +1,21 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE UndecidableInstances #-}
+
 -- |
--- Module      : Terrafomo.DNSMadeEasy.Lens
+-- Module      : Terrafomo.DNSMadeEasy.Attributes01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.DNSMadeEasy.Lens
+module Terrafomo.DNSMadeEasy.Attributes01
     (
-    -- * Lenses
-      module Terrafomo.DNSMadeEasy.Arguments01
-    , module Terrafomo.DNSMadeEasy.Attributes01
+    -- ** Attributes
+      HasComputedId (..)
     ) where
 
-import Terrafomo.DNSMadeEasy.Arguments01
-import Terrafomo.DNSMadeEasy.Attributes01
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
