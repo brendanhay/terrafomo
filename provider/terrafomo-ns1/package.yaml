@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.NS1
+    - Terrafomo.NS1.DataSources
+    - Terrafomo.NS1.Lens
+    - Terrafomo.NS1.Provider
+    - Terrafomo.NS1.Resources
+    - Terrafomo.NS1.Settings
+    - Terrafomo.NS1.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

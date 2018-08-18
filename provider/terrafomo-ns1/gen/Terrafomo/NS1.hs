@@ -13,16 +13,17 @@
 --
 module Terrafomo.NS1
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.NS1.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.NS1.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.NS1.Resource
+    , module Terrafomo.NS1.Resources
+
+    -- * DataSources
+    , module Terrafomo.NS1.DataSources
 
     -- * Settings
     , module Terrafomo.NS1.Settings
@@ -31,8 +32,9 @@ module Terrafomo.NS1
     , module Terrafomo.NS1.Lens
     ) where
 
+import Terrafomo.NS1.DataSources
 import Terrafomo.NS1.Lens
 import Terrafomo.NS1.Provider
-import Terrafomo.NS1.Resource
+import Terrafomo.NS1.Resources
 import Terrafomo.NS1.Settings
 import Terrafomo.NS1.Types
