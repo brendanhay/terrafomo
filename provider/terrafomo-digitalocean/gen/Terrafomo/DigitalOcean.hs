@@ -13,17 +13,17 @@
 --
 module Terrafomo.DigitalOcean
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.DigitalOcean.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.DigitalOcean.Types
 
-    -- * DataSources
-    , module Terrafomo.DigitalOcean.DataSource
-
     -- * Resources
-    , module Terrafomo.DigitalOcean.Resource
+    , module Terrafomo.DigitalOcean.Resources
+
+    -- * DataSources
+    , module Terrafomo.DigitalOcean.DataSources
 
     -- * Settings
     , module Terrafomo.DigitalOcean.Settings
@@ -32,9 +32,9 @@ module Terrafomo.DigitalOcean
     , module Terrafomo.DigitalOcean.Lens
     ) where
 
-import Terrafomo.DigitalOcean.DataSource
+import Terrafomo.DigitalOcean.DataSources
 import Terrafomo.DigitalOcean.Lens
 import Terrafomo.DigitalOcean.Provider
-import Terrafomo.DigitalOcean.Resource
+import Terrafomo.DigitalOcean.Resources
 import Terrafomo.DigitalOcean.Settings
 import Terrafomo.DigitalOcean.Types

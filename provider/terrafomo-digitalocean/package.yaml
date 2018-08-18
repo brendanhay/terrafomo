@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.DigitalOcean
+    - Terrafomo.DigitalOcean.DataSources
+    - Terrafomo.DigitalOcean.Lens
+    - Terrafomo.DigitalOcean.Provider
+    - Terrafomo.DigitalOcean.Resources
+    - Terrafomo.DigitalOcean.Settings
+    - Terrafomo.DigitalOcean.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,
