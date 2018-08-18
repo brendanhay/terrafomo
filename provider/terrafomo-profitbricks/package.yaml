@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.ProfitBricks
+    - Terrafomo.ProfitBricks.DataSources
+    - Terrafomo.ProfitBricks.Lens
+    - Terrafomo.ProfitBricks.Provider
+    - Terrafomo.ProfitBricks.Resources
+    - Terrafomo.ProfitBricks.Settings
+    - Terrafomo.ProfitBricks.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

@@ -13,17 +13,17 @@
 --
 module Terrafomo.ProfitBricks
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.ProfitBricks.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.ProfitBricks.Types
 
-    -- * DataSources
-    , module Terrafomo.ProfitBricks.DataSource
-
     -- * Resources
-    , module Terrafomo.ProfitBricks.Resource
+    , module Terrafomo.ProfitBricks.Resources
+
+    -- * DataSources
+    , module Terrafomo.ProfitBricks.DataSources
 
     -- * Settings
     , module Terrafomo.ProfitBricks.Settings
@@ -32,9 +32,9 @@ module Terrafomo.ProfitBricks
     , module Terrafomo.ProfitBricks.Lens
     ) where
 
-import Terrafomo.ProfitBricks.DataSource
+import Terrafomo.ProfitBricks.DataSources
 import Terrafomo.ProfitBricks.Lens
 import Terrafomo.ProfitBricks.Provider
-import Terrafomo.ProfitBricks.Resource
+import Terrafomo.ProfitBricks.Resources
 import Terrafomo.ProfitBricks.Settings
 import Terrafomo.ProfitBricks.Types
