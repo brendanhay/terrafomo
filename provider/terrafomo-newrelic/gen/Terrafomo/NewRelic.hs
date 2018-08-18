@@ -13,17 +13,17 @@
 --
 module Terrafomo.NewRelic
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.NewRelic.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.NewRelic.Types
 
-    -- * DataSources
-    , module Terrafomo.NewRelic.DataSource
-
     -- * Resources
-    , module Terrafomo.NewRelic.Resource
+    , module Terrafomo.NewRelic.Resources
+
+    -- * DataSources
+    , module Terrafomo.NewRelic.DataSources
 
     -- * Settings
     , module Terrafomo.NewRelic.Settings
@@ -32,9 +32,9 @@ module Terrafomo.NewRelic
     , module Terrafomo.NewRelic.Lens
     ) where
 
-import Terrafomo.NewRelic.DataSource
+import Terrafomo.NewRelic.DataSources
 import Terrafomo.NewRelic.Lens
 import Terrafomo.NewRelic.Provider
-import Terrafomo.NewRelic.Resource
+import Terrafomo.NewRelic.Resources
 import Terrafomo.NewRelic.Settings
 import Terrafomo.NewRelic.Types

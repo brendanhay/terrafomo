@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.NewRelic
+    - Terrafomo.NewRelic.DataSources
+    - Terrafomo.NewRelic.Lens
+    - Terrafomo.NewRelic.Provider
+    - Terrafomo.NewRelic.Resources
+    - Terrafomo.NewRelic.Settings
+    - Terrafomo.NewRelic.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

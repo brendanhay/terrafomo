@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.NewRelic.Resource
+-- Module      : Terrafomo.NewRelic.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.NewRelic.Resource
+module Terrafomo.NewRelic.Resource01
     (
     -- ** newrelic_alert_channel
       AlertChannelResource (..)
@@ -25,13 +25,13 @@ module Terrafomo.NewRelic.Resource
     , AlertConditionResource (..)
     , alertConditionResource
 
-    -- ** newrelic_alert_policy
-    , AlertPolicyResource (..)
-    , alertPolicyResource
-
     -- ** newrelic_alert_policy_channel
     , AlertPolicyChannelResource (..)
     , alertPolicyChannelResource
+
+    -- ** newrelic_alert_policy
+    , AlertPolicyResource (..)
+    , alertPolicyResource
 
     -- ** newrelic_dashboard
     , DashboardResource (..)
@@ -280,6 +280,53 @@ instance P.HasViolationCloseTimer (AlertConditionResource s) (TF.Attr s P.Int) w
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertConditionResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
+-- | @newrelic_alert_policy_channel@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/newrelic/r/alert_policy_channel.html terraform documentation>
+-- for more information.
+data AlertPolicyChannelResource s = AlertPolicyChannelResource'
+    { _channelId :: TF.Attr s P.Int
+    -- ^ @channel_id@ - (Required, Forces New)
+    --
+    , _policyId  :: TF.Attr s P.Int
+    -- ^ @policy_id@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @newrelic_alert_policy_channel@ resource value.
+alertPolicyChannelResource
+    :: TF.Attr s P.Int -- ^ @channel_id@ ('P._channelId', 'P.channelId')
+    -> TF.Attr s P.Int -- ^ @policy_id@ ('P._policyId', 'P.policyId')
+    -> P.Resource (AlertPolicyChannelResource s)
+alertPolicyChannelResource _channelId _policyId =
+    TF.unsafeResource "newrelic_alert_policy_channel" TF.validator $
+        AlertPolicyChannelResource'
+            { _channelId = _channelId
+            , _policyId = _policyId
+            }
+
+instance TF.IsObject (AlertPolicyChannelResource s) where
+    toObject AlertPolicyChannelResource'{..} = P.catMaybes
+        [ TF.assign "channel_id" <$> TF.attribute _channelId
+        , TF.assign "policy_id" <$> TF.attribute _policyId
+        ]
+
+instance TF.IsValid (AlertPolicyChannelResource s) where
+    validator = P.mempty
+
+instance P.HasChannelId (AlertPolicyChannelResource s) (TF.Attr s P.Int) where
+    channelId =
+        P.lens (_channelId :: AlertPolicyChannelResource s -> TF.Attr s P.Int)
+               (\s a -> s { _channelId = a } :: AlertPolicyChannelResource s)
+
+instance P.HasPolicyId (AlertPolicyChannelResource s) (TF.Attr s P.Int) where
+    policyId =
+        P.lens (_policyId :: AlertPolicyChannelResource s -> TF.Attr s P.Int)
+               (\s a -> s { _policyId = a } :: AlertPolicyChannelResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertPolicyChannelResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @newrelic_alert_policy@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/newrelic/r/alert_policy.html terraform documentation>
@@ -331,53 +378,6 @@ instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (AlertPolicyResource s)) (T
 
 instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (AlertPolicyResource s)) (TF.Attr s P.Int) where
     computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
-
--- | @newrelic_alert_policy_channel@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/newrelic/r/alert_policy_channel.html terraform documentation>
--- for more information.
-data AlertPolicyChannelResource s = AlertPolicyChannelResource'
-    { _channelId :: TF.Attr s P.Int
-    -- ^ @channel_id@ - (Required, Forces New)
-    --
-    , _policyId  :: TF.Attr s P.Int
-    -- ^ @policy_id@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @newrelic_alert_policy_channel@ resource value.
-alertPolicyChannelResource
-    :: TF.Attr s P.Int -- ^ @channel_id@ ('P._channelId', 'P.channelId')
-    -> TF.Attr s P.Int -- ^ @policy_id@ ('P._policyId', 'P.policyId')
-    -> P.Resource (AlertPolicyChannelResource s)
-alertPolicyChannelResource _channelId _policyId =
-    TF.unsafeResource "newrelic_alert_policy_channel" TF.validator $
-        AlertPolicyChannelResource'
-            { _channelId = _channelId
-            , _policyId = _policyId
-            }
-
-instance TF.IsObject (AlertPolicyChannelResource s) where
-    toObject AlertPolicyChannelResource'{..} = P.catMaybes
-        [ TF.assign "channel_id" <$> TF.attribute _channelId
-        , TF.assign "policy_id" <$> TF.attribute _policyId
-        ]
-
-instance TF.IsValid (AlertPolicyChannelResource s) where
-    validator = P.mempty
-
-instance P.HasChannelId (AlertPolicyChannelResource s) (TF.Attr s P.Int) where
-    channelId =
-        P.lens (_channelId :: AlertPolicyChannelResource s -> TF.Attr s P.Int)
-               (\s a -> s { _channelId = a } :: AlertPolicyChannelResource s)
-
-instance P.HasPolicyId (AlertPolicyChannelResource s) (TF.Attr s P.Int) where
-    policyId =
-        P.lens (_policyId :: AlertPolicyChannelResource s -> TF.Attr s P.Int)
-               (\s a -> s { _policyId = a } :: AlertPolicyChannelResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertPolicyChannelResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @newrelic_dashboard@ Resource.
 --
