@@ -58,6 +58,7 @@
                     "original": "write"
                 }
             ],
+            "dependencies": [],
             "key": "rabbitmq_permissions.permissions",
             "name": "PermissionsSetting",
             "threaded": true,
@@ -194,6 +195,7 @@
                     "original": "priority"
                 }
             ],
+            "dependencies": [],
             "key": "rabbitmq_policy.policy",
             "name": "PolicySetting",
             "threaded": true,
@@ -370,6 +372,7 @@
                     "original": "arguments_json"
                 }
             ],
+            "dependencies": [],
             "key": "rabbitmq_exchange.settings",
             "name": "Settings",
             "threaded": true,
@@ -535,6 +538,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rabbitmq/r/binding.html",
+            "dependencies": [],
             "key": "rabbitmq_binding",
             "name": "BindingResource",
             "threaded": true,
@@ -707,6 +711,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rabbitmq/r/exchange.html",
+            "dependencies": [
+                "Settings"
+            ],
             "key": "rabbitmq_exchange",
             "name": "ExchangeResource",
             "threaded": true,
@@ -828,6 +835,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rabbitmq/r/permissions.html",
+            "dependencies": [
+                "PermissionsSetting"
+            ],
             "key": "rabbitmq_permissions",
             "name": "PermissionsResource",
             "threaded": true,
@@ -949,6 +959,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rabbitmq/r/policy.html",
+            "dependencies": [
+                "PolicySetting"
+            ],
             "key": "rabbitmq_policy",
             "name": "PolicyResource",
             "threaded": true,
@@ -1087,6 +1100,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rabbitmq/r/queue.html",
+            "dependencies": [
+                "Settings"
+            ],
             "key": "rabbitmq_queue",
             "name": "QueueResource",
             "threaded": true,
@@ -1208,6 +1224,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rabbitmq/r/user.html",
+            "dependencies": [],
             "key": "rabbitmq_user",
             "name": "UserResource",
             "threaded": true,
@@ -1295,6 +1312,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rabbitmq/r/vhost.html",
+            "dependencies": [],
             "key": "rabbitmq_vhost",
             "name": "VhostResource",
             "threaded": true,
@@ -1433,6 +1451,7 @@
                 "original": "username"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
