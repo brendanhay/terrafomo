@@ -58,6 +58,7 @@
                     "original": "role"
                 }
             ],
+            "dependencies": [],
             "key": "rancher_environment.member",
             "name": "MemberSetting",
             "threaded": true,
@@ -216,6 +217,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/d/certificate.html",
+            "dependencies": [],
             "key": "rancher_certificate",
             "name": "CertificateData",
             "threaded": true,
@@ -490,6 +492,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/d/environment.html",
+            "dependencies": [
+                "MemberSetting"
+            ],
             "key": "rancher_environment",
             "name": "EnvironmentData",
             "threaded": true,
@@ -628,6 +633,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/d/setting.html",
+            "dependencies": [],
             "key": "rancher_setting",
             "name": "SettingData",
             "threaded": true,
@@ -802,6 +808,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/certificate.html",
+            "dependencies": [],
             "key": "rancher_certificate",
             "name": "CertificateResource",
             "threaded": true,
@@ -1173,6 +1180,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/environment.html",
+            "dependencies": [
+                "MemberSetting",
+                "MemberSetting"
+            ],
             "key": "rancher_environment",
             "name": "EnvironmentResource",
             "threaded": true,
@@ -1413,6 +1424,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/host.html",
+            "dependencies": [],
             "key": "rancher_host",
             "name": "HostResource",
             "threaded": true,
@@ -1585,6 +1597,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/registration_token.html",
+            "dependencies": [],
             "key": "rancher_registration_token",
             "name": "RegistrationTokenResource",
             "threaded": true,
@@ -1791,6 +1804,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/registry.html",
+            "dependencies": [],
             "key": "rancher_registry",
             "name": "RegistryResource",
             "threaded": true,
@@ -1963,6 +1977,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/registry_credential.html",
+            "dependencies": [],
             "key": "rancher_registry_credential",
             "name": "RegistryCredentialResource",
             "threaded": true,
@@ -2135,6 +2150,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/secret.html",
+            "dependencies": [],
             "key": "rancher_secret",
             "name": "SecretResource",
             "threaded": true,
@@ -2392,6 +2408,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/stack.html",
+            "dependencies": [],
             "key": "rancher_stack",
             "name": "StackResource",
             "threaded": true,
@@ -2581,6 +2598,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/volume.html",
+            "dependencies": [],
             "key": "rancher_volume",
             "name": "VolumeResource",
             "threaded": true,
@@ -2744,6 +2762,7 @@
                 "original": "secret_key"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
