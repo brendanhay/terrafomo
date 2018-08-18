@@ -13,16 +13,17 @@
 --
 module Terrafomo.DNSimple
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.DNSimple.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.DNSimple.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.DNSimple.Resource
+    , module Terrafomo.DNSimple.Resources
+
+    -- * DataSources
+    , module Terrafomo.DNSimple.DataSources
 
     -- * Settings
     , module Terrafomo.DNSimple.Settings
@@ -31,8 +32,9 @@ module Terrafomo.DNSimple
     , module Terrafomo.DNSimple.Lens
     ) where
 
+import Terrafomo.DNSimple.DataSources
 import Terrafomo.DNSimple.Lens
 import Terrafomo.DNSimple.Provider
-import Terrafomo.DNSimple.Resource
+import Terrafomo.DNSimple.Resources
 import Terrafomo.DNSimple.Settings
 import Terrafomo.DNSimple.Types
