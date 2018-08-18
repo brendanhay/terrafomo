@@ -1,19 +1,15 @@
 -- This module is auto-generated.
 
 -- |
--- Module      : Terrafomo.Bitbucket.Lens
+-- Module      : Terrafomo.Bitbucket.DataSources
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Bitbucket.Lens
+module Terrafomo.Bitbucket.DataSources
     (
-    -- * Lenses
-      module Terrafomo.Bitbucket.Arguments01
-    , module Terrafomo.Bitbucket.Attributes01
+    -- * DataSources
     ) where
 
-import Terrafomo.Bitbucket.Arguments01
-import Terrafomo.Bitbucket.Attributes01

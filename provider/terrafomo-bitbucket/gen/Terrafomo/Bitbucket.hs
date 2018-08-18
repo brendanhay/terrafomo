@@ -13,16 +13,17 @@
 --
 module Terrafomo.Bitbucket
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Bitbucket.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Bitbucket.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.Bitbucket.Resource
+    , module Terrafomo.Bitbucket.Resources
+
+    -- * DataSources
+    , module Terrafomo.Bitbucket.DataSources
 
     -- * Settings
     , module Terrafomo.Bitbucket.Settings
@@ -31,8 +32,9 @@ module Terrafomo.Bitbucket
     , module Terrafomo.Bitbucket.Lens
     ) where
 
+import Terrafomo.Bitbucket.DataSources
 import Terrafomo.Bitbucket.Lens
 import Terrafomo.Bitbucket.Provider
-import Terrafomo.Bitbucket.Resource
+import Terrafomo.Bitbucket.Resources
 import Terrafomo.Bitbucket.Settings
 import Terrafomo.Bitbucket.Types

@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Bitbucket
+    - Terrafomo.Bitbucket.DataSources
+    - Terrafomo.Bitbucket.Lens
+    - Terrafomo.Bitbucket.Provider
+    - Terrafomo.Bitbucket.Resources
+    - Terrafomo.Bitbucket.Settings
+    - Terrafomo.Bitbucket.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,
