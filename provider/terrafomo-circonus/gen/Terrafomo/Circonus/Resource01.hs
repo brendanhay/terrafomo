@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Circonus.Resource
+-- Module      : Terrafomo.Circonus.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Circonus.Resource
+module Terrafomo.Circonus.Resource01
     (
     -- ** circonus_check
       CheckResource (..)
@@ -29,13 +29,13 @@ module Terrafomo.Circonus.Resource
     , GraphResource (..)
     , graphResource
 
-    -- ** circonus_metric
-    , MetricResource (..)
-    , metricResource
-
     -- ** circonus_metric_cluster
     , MetricClusterResource (..)
     , metricClusterResource
+
+    -- ** circonus_metric
+    , MetricResource (..)
+    , metricResource
 
     -- ** circonus_rule_set
     , RuleSetResource (..)
@@ -756,6 +756,79 @@ instance P.HasTags (GraphResource s) (TF.Attr s [TF.Attr s P.Text]) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (GraphResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
+-- | @circonus_metric_cluster@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/circonus/r/metric_cluster.html terraform documentation>
+-- for more information.
+data MetricClusterResource s = MetricClusterResource'
+    { _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    -- A description of the metric cluster
+    --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The name of the metric cluster
+    --
+    , _query       :: TF.Attr s (P.NonEmpty (TF.Attr s (QuerySetting s)))
+    -- ^ @query@ - (Optional)
+    -- A metric cluster query definition
+    --
+    , _tags        :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @tags@ - (Optional)
+    -- A list of tags assigned to the metric cluster
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @circonus_metric_cluster@ resource value.
+metricClusterResource
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (MetricClusterResource s)
+metricClusterResource _name =
+    TF.unsafeResource "circonus_metric_cluster" TF.validator $
+        MetricClusterResource'
+            { _description = TF.Nil
+            , _name = _name
+            , _query = TF.Nil
+            , _tags = TF.Nil
+            }
+
+instance TF.IsObject (MetricClusterResource s) where
+    toObject MetricClusterResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "query" <$> TF.attribute _query
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance TF.IsValid (MetricClusterResource s) where
+    validator = P.mempty
+
+instance P.HasDescription (MetricClusterResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: MetricClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: MetricClusterResource s)
+
+instance P.HasName (MetricClusterResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: MetricClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: MetricClusterResource s)
+
+instance P.HasQuery (MetricClusterResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (QuerySetting s)))) where
+    query =
+        P.lens (_query :: MetricClusterResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (QuerySetting s))))
+               (\s a -> s { _query = a } :: MetricClusterResource s)
+
+instance P.HasTags (MetricClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    tags =
+        P.lens (_tags :: MetricClusterResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _tags = a } :: MetricClusterResource s)
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (MetricClusterResource s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MetricClusterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @circonus_metric@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/circonus/r/metric.html terraform documentation>
@@ -836,79 +909,6 @@ instance P.HasUnit (MetricResource s) (TF.Attr s P.Text) where
                (\s a -> s { _unit = a } :: MetricResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (MetricResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
--- | @circonus_metric_cluster@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/circonus/r/metric_cluster.html terraform documentation>
--- for more information.
-data MetricClusterResource s = MetricClusterResource'
-    { _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
-    -- A description of the metric cluster
-    --
-    , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    -- The name of the metric cluster
-    --
-    , _query       :: TF.Attr s (P.NonEmpty (TF.Attr s (QuerySetting s)))
-    -- ^ @query@ - (Optional)
-    -- A metric cluster query definition
-    --
-    , _tags        :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @tags@ - (Optional)
-    -- A list of tags assigned to the metric cluster
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @circonus_metric_cluster@ resource value.
-metricClusterResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> P.Resource (MetricClusterResource s)
-metricClusterResource _name =
-    TF.unsafeResource "circonus_metric_cluster" TF.validator $
-        MetricClusterResource'
-            { _description = TF.Nil
-            , _name = _name
-            , _query = TF.Nil
-            , _tags = TF.Nil
-            }
-
-instance TF.IsObject (MetricClusterResource s) where
-    toObject MetricClusterResource'{..} = P.catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "query" <$> TF.attribute _query
-        , TF.assign "tags" <$> TF.attribute _tags
-        ]
-
-instance TF.IsValid (MetricClusterResource s) where
-    validator = P.mempty
-
-instance P.HasDescription (MetricClusterResource s) (TF.Attr s P.Text) where
-    description =
-        P.lens (_description :: MetricClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: MetricClusterResource s)
-
-instance P.HasName (MetricClusterResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: MetricClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: MetricClusterResource s)
-
-instance P.HasQuery (MetricClusterResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (QuerySetting s)))) where
-    query =
-        P.lens (_query :: MetricClusterResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (QuerySetting s))))
-               (\s a -> s { _query = a } :: MetricClusterResource s)
-
-instance P.HasTags (MetricClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    tags =
-        P.lens (_tags :: MetricClusterResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _tags = a } :: MetricClusterResource s)
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (MetricClusterResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (MetricClusterResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @circonus_rule_set@ Resource.

@@ -13,17 +13,17 @@
 --
 module Terrafomo.Circonus
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Circonus.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Circonus.Types
 
-    -- * DataSources
-    , module Terrafomo.Circonus.DataSource
-
     -- * Resources
-    , module Terrafomo.Circonus.Resource
+    , module Terrafomo.Circonus.Resources
+
+    -- * DataSources
+    , module Terrafomo.Circonus.DataSources
 
     -- * Settings
     , module Terrafomo.Circonus.Settings
@@ -32,9 +32,9 @@ module Terrafomo.Circonus
     , module Terrafomo.Circonus.Lens
     ) where
 
-import Terrafomo.Circonus.DataSource
+import Terrafomo.Circonus.DataSources
 import Terrafomo.Circonus.Lens
 import Terrafomo.Circonus.Provider
-import Terrafomo.Circonus.Resource
+import Terrafomo.Circonus.Resources
 import Terrafomo.Circonus.Settings
 import Terrafomo.Circonus.Types
