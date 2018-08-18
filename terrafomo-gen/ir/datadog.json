@@ -102,6 +102,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "datadog_timeboard.graph.request.conditional_format",
             "name": "ConditionalFormatSetting",
             "threaded": true,
@@ -413,6 +414,10 @@
                     "original": "yaxis"
                 }
             ],
+            "dependencies": [
+                "MarkerSetting",
+                "RequestSetting"
+            ],
             "key": "datadog_timeboard.graph",
             "name": "GraphSetting",
             "threaded": true,
@@ -534,6 +539,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "datadog_timeboard.graph.marker",
             "name": "MarkerSetting",
             "threaded": true,
@@ -682,6 +688,7 @@
                     "original": "week_days"
                 }
             ],
+            "dependencies": [],
             "key": "datadog_downtime.recurrence",
             "name": "RecurrenceSetting",
             "threaded": true,
@@ -998,6 +1005,9 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [
+                "ConditionalFormatSetting"
+            ],
             "key": "datadog_timeboard.graph.request",
             "name": "RequestSetting",
             "threaded": true,
@@ -1090,6 +1100,7 @@
                     "original": "prefix"
                 }
             ],
+            "dependencies": [],
             "key": "datadog_timeboard.template_variable",
             "name": "TemplateVariableSetting",
             "threaded": true,
@@ -1228,6 +1239,7 @@
                     "original": "warning_recovery"
                 }
             ],
+            "dependencies": [],
             "key": "datadog_monitor.thresholds",
             "name": "ThresholdsSetting",
             "threaded": true,
@@ -1385,6 +1397,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/datadog/r/downtime.html",
+            "dependencies": [
+                "RecurrenceSetting"
+            ],
             "key": "datadog_downtime",
             "name": "DowntimeResource",
             "threaded": true,
@@ -1557,6 +1572,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/datadog/r/metric_metadata.html",
+            "dependencies": [],
             "key": "datadog_metric_metadata",
             "name": "MetricMetadataResource",
             "threaded": true,
@@ -1916,6 +1932,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/datadog/r/monitor.html",
+            "dependencies": [
+                "ThresholdsSetting"
+            ],
             "key": "datadog_monitor",
             "name": "MonitorResource",
             "threaded": true,
@@ -2147,6 +2166,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/datadog/r/timeboard.html",
+            "dependencies": [
+                "GraphSetting",
+                "TemplateVariableSetting"
+            ],
             "key": "datadog_timeboard",
             "name": "TimeboardResource",
             "threaded": true,
@@ -2325,6 +2348,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/datadog/r/user.html",
+            "dependencies": [],
             "key": "datadog_user",
             "name": "UserResource",
             "threaded": true,
@@ -2463,6 +2487,7 @@
                 "original": "app_key"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
