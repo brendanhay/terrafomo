@@ -13,17 +13,17 @@
 --
 module Terrafomo.Template
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Template.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Template.Types
 
-    -- * DataSources
-    , module Terrafomo.Template.DataSource
-
     -- * Resources
-    , module Terrafomo.Template.Resource
+    , module Terrafomo.Template.Resources
+
+    -- * DataSources
+    , module Terrafomo.Template.DataSources
 
     -- * Settings
     , module Terrafomo.Template.Settings
@@ -32,9 +32,9 @@ module Terrafomo.Template
     , module Terrafomo.Template.Lens
     ) where
 
-import Terrafomo.Template.DataSource
+import Terrafomo.Template.DataSources
 import Terrafomo.Template.Lens
 import Terrafomo.Template.Provider
-import Terrafomo.Template.Resource
+import Terrafomo.Template.Resources
 import Terrafomo.Template.Settings
 import Terrafomo.Template.Types

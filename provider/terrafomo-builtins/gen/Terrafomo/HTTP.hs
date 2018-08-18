@@ -13,16 +13,17 @@
 --
 module Terrafomo.HTTP
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.HTTP.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.HTTP.Types
 
-    -- * DataSources
-    , module Terrafomo.HTTP.DataSource
-
     -- * Resources
+    , module Terrafomo.HTTP.Resources
+
+    -- * DataSources
+    , module Terrafomo.HTTP.DataSources
 
     -- * Settings
     , module Terrafomo.HTTP.Settings
@@ -31,8 +32,9 @@ module Terrafomo.HTTP
     , module Terrafomo.HTTP.Lens
     ) where
 
-import Terrafomo.HTTP.DataSource
+import Terrafomo.HTTP.DataSources
 import Terrafomo.HTTP.Lens
 import Terrafomo.HTTP.Provider
+import Terrafomo.HTTP.Resources
 import Terrafomo.HTTP.Settings
 import Terrafomo.HTTP.Types

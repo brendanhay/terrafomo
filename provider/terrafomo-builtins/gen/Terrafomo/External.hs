@@ -13,16 +13,17 @@
 --
 module Terrafomo.External
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.External.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.External.Types
 
-    -- * DataSources
-    , module Terrafomo.External.DataSource
-
     -- * Resources
+    , module Terrafomo.External.Resources
+
+    -- * DataSources
+    , module Terrafomo.External.DataSources
 
     -- * Settings
     , module Terrafomo.External.Settings
@@ -31,8 +32,9 @@ module Terrafomo.External
     , module Terrafomo.External.Lens
     ) where
 
-import Terrafomo.External.DataSource
+import Terrafomo.External.DataSources
 import Terrafomo.External.Lens
 import Terrafomo.External.Provider
+import Terrafomo.External.Resources
 import Terrafomo.External.Settings
 import Terrafomo.External.Types

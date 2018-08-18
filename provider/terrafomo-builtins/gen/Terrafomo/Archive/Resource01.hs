@@ -8,18 +8,18 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Archive.DataSource
+-- Module      : Terrafomo.Archive.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Archive.DataSource
+module Terrafomo.Archive.Resource01
     (
     -- ** archive_file
-      FileData (..)
-    , fileData
+      FileResource (..)
+    , fileResource
 
     ) where
 
@@ -47,11 +47,11 @@ import qualified Terrafomo.Name             as TF
 import qualified Terrafomo.Schema           as TF
 import qualified Terrafomo.Validator        as TF
 
--- | @archive_file@ DataSource.
+-- | @archive_file@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/archive/d/file.html terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/archive/r/file.html terraform documentation>
 -- for more information.
-data FileData s = FileData'
+data FileResource s = FileResource'
     { _excludes              :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @excludes@ - (Optional, Forces New)
     --
@@ -61,10 +61,10 @@ data FileData s = FileData'
     -- * 'sourceContentFilename'
     -- * 'sourceFile'
     , _outputPath            :: TF.Attr s P.Text
-    -- ^ @output_path@ - (Required)
+    -- ^ @output_path@ - (Required, Forces New)
     --
     , _source                :: TF.Attr s [TF.Attr s (SourceSetting s)]
-    -- ^ @source@ - (Optional)
+    -- ^ @source@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -114,14 +114,14 @@ data FileData s = FileData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
--- | Define a new @archive_file@ datasource value.
-fileData
+-- | Define a new @archive_file@ resource value.
+fileResource
     :: TF.Attr s P.Text -- ^ @output_path@ ('P._outputPath', 'P.outputPath')
     -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
-    -> P.DataSource (FileData s)
-fileData _outputPath _type' =
-    TF.unsafeDataSource "archive_file" TF.validator $
-        FileData'
+    -> P.Resource (FileResource s)
+fileResource _outputPath _type' =
+    TF.unsafeResource "archive_file" TF.validator $
+        FileResource'
             { _excludes = TF.Nil
             , _outputPath = _outputPath
             , _source = TF.Nil
@@ -132,8 +132,8 @@ fileData _outputPath _type' =
             , _type' = _type'
             }
 
-instance TF.IsObject (FileData s) where
-    toObject FileData'{..} = P.catMaybes
+instance TF.IsObject (FileResource s) where
+    toObject FileResource'{..} = P.catMaybes
         [ TF.assign "excludes" <$> TF.attribute _excludes
         , TF.assign "output_path" <$> TF.attribute _outputPath
         , TF.assign "source" <$> TF.attribute _source
@@ -144,8 +144,8 @@ instance TF.IsObject (FileData s) where
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance TF.IsValid (FileData s) where
-    validator = TF.fieldsValidator (\FileData'{..} -> Map.fromList $ P.catMaybes
+instance TF.IsValid (FileResource s) where
+    validator = TF.fieldsValidator (\FileResource'{..} -> Map.fromList $ P.catMaybes
         [ if (_excludes P.== TF.Nil)
               then P.Nothing
               else P.Just ("_excludes",
@@ -178,60 +178,60 @@ instance TF.IsValid (FileData s) where
                             ])
         ])
 
-instance P.HasExcludes (FileData s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasExcludes (FileResource s) (TF.Attr s [TF.Attr s P.Text]) where
     excludes =
-        P.lens (_excludes :: FileData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _excludes = a } :: FileData s)
+        P.lens (_excludes :: FileResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _excludes = a } :: FileResource s)
 
-instance P.HasOutputPath (FileData s) (TF.Attr s P.Text) where
+instance P.HasOutputPath (FileResource s) (TF.Attr s P.Text) where
     outputPath =
-        P.lens (_outputPath :: FileData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputPath = a } :: FileData s)
+        P.lens (_outputPath :: FileResource s -> TF.Attr s P.Text)
+               (\s a -> s { _outputPath = a } :: FileResource s)
 
-instance P.HasSource (FileData s) (TF.Attr s [TF.Attr s (SourceSetting s)]) where
+instance P.HasSource (FileResource s) (TF.Attr s [TF.Attr s (SourceSetting s)]) where
     source =
-        P.lens (_source :: FileData s -> TF.Attr s [TF.Attr s (SourceSetting s)])
-               (\s a -> s { _source = a } :: FileData s)
+        P.lens (_source :: FileResource s -> TF.Attr s [TF.Attr s (SourceSetting s)])
+               (\s a -> s { _source = a } :: FileResource s)
 
-instance P.HasSourceContent (FileData s) (TF.Attr s P.Text) where
+instance P.HasSourceContent (FileResource s) (TF.Attr s P.Text) where
     sourceContent =
-        P.lens (_sourceContent :: FileData s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceContent = a } :: FileData s)
+        P.lens (_sourceContent :: FileResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceContent = a } :: FileResource s)
 
-instance P.HasSourceContentFilename (FileData s) (TF.Attr s P.Text) where
+instance P.HasSourceContentFilename (FileResource s) (TF.Attr s P.Text) where
     sourceContentFilename =
-        P.lens (_sourceContentFilename :: FileData s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceContentFilename = a } :: FileData s)
+        P.lens (_sourceContentFilename :: FileResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceContentFilename = a } :: FileResource s)
 
-instance P.HasSourceDir (FileData s) (TF.Attr s P.Text) where
+instance P.HasSourceDir (FileResource s) (TF.Attr s P.Text) where
     sourceDir =
-        P.lens (_sourceDir :: FileData s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceDir = a } :: FileData s)
+        P.lens (_sourceDir :: FileResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceDir = a } :: FileResource s)
 
-instance P.HasSourceFile (FileData s) (TF.Attr s P.Text) where
+instance P.HasSourceFile (FileResource s) (TF.Attr s P.Text) where
     sourceFile =
-        P.lens (_sourceFile :: FileData s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceFile = a } :: FileData s)
+        P.lens (_sourceFile :: FileResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceFile = a } :: FileResource s)
 
-instance P.HasType' (FileData s) (TF.Attr s P.Text) where
+instance P.HasType' (FileResource s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: FileData s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: FileData s)
+        P.lens (_type' :: FileResource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: FileResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedOutputBase64sha256 (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOutputBase64sha256 (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
     computedOutputBase64sha256 x = TF.compute (TF.refKey x) "output_base64sha256"
 
-instance s ~ s' => P.HasComputedOutputMd5 (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOutputMd5 (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
     computedOutputMd5 x = TF.compute (TF.refKey x) "output_md5"
 
-instance s ~ s' => P.HasComputedOutputSha (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOutputSha (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
     computedOutputSha x = TF.compute (TF.refKey x) "output_sha"
 
-instance s ~ s' => P.HasComputedOutputSize (TF.Ref s' (FileData s)) (TF.Attr s P.Int) where
+instance s ~ s' => P.HasComputedOutputSize (TF.Ref s' (FileResource s)) (TF.Attr s P.Int) where
     computedOutputSize x = TF.compute (TF.refKey x) "output_size"
 
-instance s ~ s' => P.HasComputedSource (TF.Ref s' (FileData s)) (TF.Attr s [TF.Attr s (SourceSetting s)]) where
+instance s ~ s' => P.HasComputedSource (TF.Ref s' (FileResource s)) (TF.Attr s [TF.Attr s (SourceSetting s)]) where
     computedSource x = TF.compute (TF.refKey x) "source"

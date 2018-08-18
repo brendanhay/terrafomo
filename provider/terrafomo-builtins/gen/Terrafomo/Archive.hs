@@ -13,17 +13,17 @@
 --
 module Terrafomo.Archive
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Archive.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Archive.Types
 
-    -- * DataSources
-    , module Terrafomo.Archive.DataSource
-
     -- * Resources
-    , module Terrafomo.Archive.Resource
+    , module Terrafomo.Archive.Resources
+
+    -- * DataSources
+    , module Terrafomo.Archive.DataSources
 
     -- * Settings
     , module Terrafomo.Archive.Settings
@@ -32,9 +32,9 @@ module Terrafomo.Archive
     , module Terrafomo.Archive.Lens
     ) where
 
-import Terrafomo.Archive.DataSource
+import Terrafomo.Archive.DataSources
 import Terrafomo.Archive.Lens
 import Terrafomo.Archive.Provider
-import Terrafomo.Archive.Resource
+import Terrafomo.Archive.Resources
 import Terrafomo.Archive.Settings
 import Terrafomo.Archive.Types

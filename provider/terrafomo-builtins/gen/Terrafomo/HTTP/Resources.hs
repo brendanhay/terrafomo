@@ -1,19 +1,15 @@
 -- This module is auto-generated.
 
 -- |
--- Module      : Terrafomo.External.Lens
+-- Module      : Terrafomo.HTTP.Resources
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.External.Lens
+module Terrafomo.HTTP.Resources
     (
-    -- * Lenses
-      module Terrafomo.External.Arguments01
-    , module Terrafomo.External.Attributes01
+    -- * Resources
     ) where
 
-import Terrafomo.External.Arguments01
-import Terrafomo.External.Attributes01

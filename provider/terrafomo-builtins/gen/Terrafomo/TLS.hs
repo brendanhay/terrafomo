@@ -13,17 +13,17 @@
 --
 module Terrafomo.TLS
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.TLS.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.TLS.Types
 
-    -- * DataSources
-    , module Terrafomo.TLS.DataSource
-
     -- * Resources
-    , module Terrafomo.TLS.Resource
+    , module Terrafomo.TLS.Resources
+
+    -- * DataSources
+    , module Terrafomo.TLS.DataSources
 
     -- * Settings
     , module Terrafomo.TLS.Settings
@@ -32,9 +32,9 @@ module Terrafomo.TLS
     , module Terrafomo.TLS.Lens
     ) where
 
-import Terrafomo.TLS.DataSource
+import Terrafomo.TLS.DataSources
 import Terrafomo.TLS.Lens
 import Terrafomo.TLS.Provider
-import Terrafomo.TLS.Resource
+import Terrafomo.TLS.Resources
 import Terrafomo.TLS.Settings
 import Terrafomo.TLS.Types

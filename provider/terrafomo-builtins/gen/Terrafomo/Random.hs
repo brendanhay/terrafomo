@@ -13,16 +13,17 @@
 --
 module Terrafomo.Random
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Random.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Random.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.Random.Resource
+    , module Terrafomo.Random.Resources
+
+    -- * DataSources
+    , module Terrafomo.Random.DataSources
 
     -- * Settings
     , module Terrafomo.Random.Settings
@@ -31,8 +32,9 @@ module Terrafomo.Random
     , module Terrafomo.Random.Lens
     ) where
 
+import Terrafomo.Random.DataSources
 import Terrafomo.Random.Lens
 import Terrafomo.Random.Provider
-import Terrafomo.Random.Resource
+import Terrafomo.Random.Resources
 import Terrafomo.Random.Settings
 import Terrafomo.Random.Types

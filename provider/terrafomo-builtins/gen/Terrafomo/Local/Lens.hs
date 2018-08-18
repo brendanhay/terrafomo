@@ -1,8 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE UndecidableInstances #-}
-
 -- |
 -- Module      : Terrafomo.Local.Lens
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -13,42 +10,10 @@
 --
 module Terrafomo.Local.Lens
     (
-    -- * Overloaded Fields
-    -- ** Arguments
-      HasContent (..)
-    , HasFilename (..)
-    , HasSensitiveContent (..)
-
-    -- ** Computed Attributes
-    , HasComputedContent (..)
-    , HasComputedId (..)
+    -- * Lenses
+      module Terrafomo.Local.Arguments01
+    , module Terrafomo.Local.Attributes01
     ) where
 
-import GHC.Base ((.))
-
-import qualified Lens.Micro       as P
-import qualified Terrafomo.Schema as TF
-
-class HasContent a b | a -> b where
-    content :: P.Lens' a b
-
-instance HasContent a b => HasContent (TF.Schema l p a) b where
-    content = TF.configuration . content
-
-class HasFilename a b | a -> b where
-    filename :: P.Lens' a b
-
-instance HasFilename a b => HasFilename (TF.Schema l p a) b where
-    filename = TF.configuration . filename
-
-class HasSensitiveContent a b | a -> b where
-    sensitiveContent :: P.Lens' a b
-
-instance HasSensitiveContent a b => HasSensitiveContent (TF.Schema l p a) b where
-    sensitiveContent = TF.configuration . sensitiveContent
-
-class HasComputedContent a b | a -> b where
-    computedContent :: a -> b
-
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+import Terrafomo.Local.Arguments01
+import Terrafomo.Local.Attributes01
