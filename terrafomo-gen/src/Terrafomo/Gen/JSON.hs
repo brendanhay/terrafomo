@@ -5,7 +5,7 @@ module Terrafomo.Gen.JSON
    , options
    ) where
 
-import Data.Aeson
+import Data.Aeson               hiding (encodeFile)
 import Data.Aeson.Encode.Pretty (encodePretty)
 import Data.Aeson.Types
 import Data.Maybe               (fromMaybe)

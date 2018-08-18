@@ -24,7 +24,7 @@ executables:
       - src
 
     dependencies:
-      - aeson
+      - aeson >= 1.3
       - aeson-pretty
       - base >= 4.9 && < 5
       - bytestring
