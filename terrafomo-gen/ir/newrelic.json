@@ -58,6 +58,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "newrelic_infra_alert_condition.critical",
             "name": "CriticalSetting",
             "threaded": true,
@@ -126,6 +127,7 @@
                     "original": "since_value"
                 }
             ],
+            "dependencies": [],
             "key": "newrelic_nrql_alert_condition.nrql",
             "name": "NrqlSetting",
             "threaded": true,
@@ -262,6 +264,7 @@
                     "original": "time_function"
                 }
             ],
+            "dependencies": [],
             "key": "newrelic_alert_condition.term",
             "name": "TermSetting",
             "threaded": true,
@@ -381,6 +384,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "newrelic_infra_alert_condition.warning",
             "name": "WarningSetting",
             "threaded": true,
@@ -551,6 +555,7 @@
                     "original": "width"
                 }
             ],
+            "dependencies": [],
             "key": "newrelic_dashboard.widget",
             "name": "WidgetSetting",
             "threaded": true,
@@ -657,6 +662,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/newrelic/d/application.html",
+            "dependencies": [],
             "key": "newrelic_application",
             "name": "ApplicationData",
             "threaded": true,
@@ -761,6 +767,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/newrelic/d/key_transaction.html",
+            "dependencies": [],
             "key": "newrelic_key_transaction",
             "name": "KeyTransactionData",
             "threaded": true,
@@ -867,6 +874,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/newrelic/r/alert_channel.html",
+            "dependencies": [],
             "key": "newrelic_alert_channel",
             "name": "AlertChannelResource",
             "threaded": true,
@@ -1158,6 +1166,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/newrelic/r/alert_condition.html",
+            "dependencies": [
+                "TermSetting"
+            ],
             "key": "newrelic_alert_condition",
             "name": "AlertConditionResource",
             "threaded": true,
@@ -1330,6 +1341,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/newrelic/r/alert_policy.html",
+            "dependencies": [],
             "key": "newrelic_alert_policy",
             "name": "AlertPolicyResource",
             "threaded": true,
@@ -1451,6 +1463,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/newrelic/r/alert_policy_channel.html",
+            "dependencies": [],
             "key": "newrelic_alert_policy_channel",
             "name": "AlertPolicyChannelResource",
             "threaded": true,
@@ -1606,6 +1619,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/newrelic/r/dashboard.html",
+            "dependencies": [
+                "WidgetSetting"
+            ],
             "key": "newrelic_dashboard",
             "name": "DashboardResource",
             "threaded": true,
@@ -1863,6 +1879,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/newrelic/r/infra_alert_condition.html",
+            "dependencies": [
+                "CriticalSetting",
+                "WarningSetting"
+            ],
             "key": "newrelic_infra_alert_condition",
             "name": "InfraAlertConditionResource",
             "threaded": true,
@@ -2103,6 +2123,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/newrelic/r/nrql_alert_condition.html",
+            "dependencies": [
+                "NrqlSetting",
+                "TermSetting"
+            ],
             "key": "newrelic_nrql_alert_condition",
             "name": "NrqlAlertConditionResource",
             "threaded": true,
@@ -2258,6 +2282,7 @@
                 "original": "infra_api_url"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
