@@ -13,16 +13,17 @@
 --
 module Terrafomo.CenturyLinkCloud
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.CenturyLinkCloud.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.CenturyLinkCloud.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.CenturyLinkCloud.Resource
+    , module Terrafomo.CenturyLinkCloud.Resources
+
+    -- * DataSources
+    , module Terrafomo.CenturyLinkCloud.DataSources
 
     -- * Settings
     , module Terrafomo.CenturyLinkCloud.Settings
@@ -31,8 +32,9 @@ module Terrafomo.CenturyLinkCloud
     , module Terrafomo.CenturyLinkCloud.Lens
     ) where
 
+import Terrafomo.CenturyLinkCloud.DataSources
 import Terrafomo.CenturyLinkCloud.Lens
 import Terrafomo.CenturyLinkCloud.Provider
-import Terrafomo.CenturyLinkCloud.Resource
+import Terrafomo.CenturyLinkCloud.Resources
 import Terrafomo.CenturyLinkCloud.Settings
 import Terrafomo.CenturyLinkCloud.Types

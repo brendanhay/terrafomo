@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.CenturyLinkCloud
+    - Terrafomo.CenturyLinkCloud.DataSources
+    - Terrafomo.CenturyLinkCloud.Lens
+    - Terrafomo.CenturyLinkCloud.Provider
+    - Terrafomo.CenturyLinkCloud.Resources
+    - Terrafomo.CenturyLinkCloud.Settings
+    - Terrafomo.CenturyLinkCloud.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

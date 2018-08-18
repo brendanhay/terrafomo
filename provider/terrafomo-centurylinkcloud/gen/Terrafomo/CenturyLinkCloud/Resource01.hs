@@ -8,26 +8,26 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.CenturyLinkCloud.Resource
+-- Module      : Terrafomo.CenturyLinkCloud.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.CenturyLinkCloud.Resource
+module Terrafomo.CenturyLinkCloud.Resource01
     (
     -- ** clc_group
       GroupResource (..)
     , groupResource
 
-    -- ** clc_load_balancer
-    , LoadBalancerResource (..)
-    , loadBalancerResource
-
     -- ** clc_load_balancer_pool
     , LoadBalancerPoolResource (..)
     , loadBalancerPoolResource
+
+    -- ** clc_load_balancer
+    , LoadBalancerResource (..)
+    , loadBalancerResource
 
     -- ** clc_public_ip
     , PublicIpResource (..)
@@ -144,77 +144,6 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (GroupResource s)) (TF.Attr s P.Te
 instance s ~ s' => P.HasComputedParentGroupId (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
     computedParentGroupId x = TF.compute (TF.refKey x) "parent_group_id"
 
--- | @clc_load_balancer@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/clc/r/load_balancer.html terraform documentation>
--- for more information.
-data LoadBalancerResource s = LoadBalancerResource'
-    { _dataCenter  :: TF.Attr s P.Text
-    -- ^ @data_center@ - (Required)
-    --
-    , _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Required)
-    --
-    , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _status      :: TF.Attr s P.Text
-    -- ^ @status@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @clc_load_balancer@ resource value.
-loadBalancerResource
-    :: TF.Attr s P.Text -- ^ @data_center@ ('P._dataCenter', 'P.dataCenter')
-    -> TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> P.Resource (LoadBalancerResource s)
-loadBalancerResource _dataCenter _description _name =
-    TF.unsafeResource "clc_load_balancer" TF.validator $
-        LoadBalancerResource'
-            { _dataCenter = _dataCenter
-            , _description = _description
-            , _name = _name
-            , _status = TF.value "enabled"
-            }
-
-instance TF.IsObject (LoadBalancerResource s) where
-    toObject LoadBalancerResource'{..} = P.catMaybes
-        [ TF.assign "data_center" <$> TF.attribute _dataCenter
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "status" <$> TF.attribute _status
-        ]
-
-instance TF.IsValid (LoadBalancerResource s) where
-    validator = P.mempty
-
-instance P.HasDataCenter (LoadBalancerResource s) (TF.Attr s P.Text) where
-    dataCenter =
-        P.lens (_dataCenter :: LoadBalancerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _dataCenter = a } :: LoadBalancerResource s)
-
-instance P.HasDescription (LoadBalancerResource s) (TF.Attr s P.Text) where
-    description =
-        P.lens (_description :: LoadBalancerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: LoadBalancerResource s)
-
-instance P.HasName (LoadBalancerResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: LoadBalancerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: LoadBalancerResource s)
-
-instance P.HasStatus (LoadBalancerResource s) (TF.Attr s P.Text) where
-    status =
-        P.lens (_status :: LoadBalancerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _status = a } :: LoadBalancerResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
-
 -- | @clc_load_balancer_pool@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/clc/r/load_balancer_pool.html terraform documentation>
@@ -303,6 +232,77 @@ instance P.HasPort (LoadBalancerPoolResource s) (TF.Attr s P.Int) where
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @clc_load_balancer@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/clc/r/load_balancer.html terraform documentation>
+-- for more information.
+data LoadBalancerResource s = LoadBalancerResource'
+    { _dataCenter  :: TF.Attr s P.Text
+    -- ^ @data_center@ - (Required)
+    --
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Required)
+    --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _status      :: TF.Attr s P.Text
+    -- ^ @status@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @clc_load_balancer@ resource value.
+loadBalancerResource
+    :: TF.Attr s P.Text -- ^ @data_center@ ('P._dataCenter', 'P.dataCenter')
+    -> TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (LoadBalancerResource s)
+loadBalancerResource _dataCenter _description _name =
+    TF.unsafeResource "clc_load_balancer" TF.validator $
+        LoadBalancerResource'
+            { _dataCenter = _dataCenter
+            , _description = _description
+            , _name = _name
+            , _status = TF.value "enabled"
+            }
+
+instance TF.IsObject (LoadBalancerResource s) where
+    toObject LoadBalancerResource'{..} = P.catMaybes
+        [ TF.assign "data_center" <$> TF.attribute _dataCenter
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "status" <$> TF.attribute _status
+        ]
+
+instance TF.IsValid (LoadBalancerResource s) where
+    validator = P.mempty
+
+instance P.HasDataCenter (LoadBalancerResource s) (TF.Attr s P.Text) where
+    dataCenter =
+        P.lens (_dataCenter :: LoadBalancerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _dataCenter = a } :: LoadBalancerResource s)
+
+instance P.HasDescription (LoadBalancerResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: LoadBalancerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: LoadBalancerResource s)
+
+instance P.HasName (LoadBalancerResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LoadBalancerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LoadBalancerResource s)
+
+instance P.HasStatus (LoadBalancerResource s) (TF.Attr s P.Text) where
+    status =
+        P.lens (_status :: LoadBalancerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _status = a } :: LoadBalancerResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
 -- | @clc_public_ip@ Resource.
 --
