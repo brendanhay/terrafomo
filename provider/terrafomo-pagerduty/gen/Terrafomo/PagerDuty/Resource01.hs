@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.PagerDuty.Resource
+-- Module      : Terrafomo.PagerDuty.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.PagerDuty.Resource
+module Terrafomo.PagerDuty.Resource01
     (
     -- ** pagerduty_addon
       AddonResource (..)
@@ -37,29 +37,29 @@ module Terrafomo.PagerDuty.Resource
     , ScheduleResource (..)
     , scheduleResource
 
-    -- ** pagerduty_service
-    , ServiceResource (..)
-    , serviceResource
-
     -- ** pagerduty_service_integration
     , ServiceIntegrationResource (..)
     , serviceIntegrationResource
 
-    -- ** pagerduty_team
-    , TeamResource (..)
-    , teamResource
+    -- ** pagerduty_service
+    , ServiceResource (..)
+    , serviceResource
 
     -- ** pagerduty_team_membership
     , TeamMembershipResource (..)
     , teamMembershipResource
 
-    -- ** pagerduty_user
-    , UserResource (..)
-    , userResource
+    -- ** pagerduty_team
+    , TeamResource (..)
+    , teamResource
 
     -- ** pagerduty_user_contact_method
     , UserContactMethodResource (..)
     , userContactMethodResource
+
+    -- ** pagerduty_user
+    , UserResource (..)
+    , userResource
 
     ) where
 
@@ -439,6 +439,124 @@ instance P.HasTimeZone (ScheduleResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ScheduleResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
+-- | @pagerduty_service_integration@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/pagerduty/r/service_integration.html terraform documentation>
+-- for more information.
+data ServiceIntegrationResource s = ServiceIntegrationResource'
+    { _integrationEmail :: TF.Attr s P.Text
+    -- ^ @integration_email@ - (Optional)
+    --
+    , _integrationKey   :: TF.Attr s P.Text
+    -- ^ @integration_key@ - (Optional)
+    --
+    , _name             :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _service          :: TF.Attr s P.Text
+    -- ^ @service@ - (Required)
+    --
+    , _type'            :: TF.Attr s P.Text
+    -- ^ @type@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'vendor'
+    , _vendor           :: TF.Attr s P.Text
+    -- ^ @vendor@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'type''
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @pagerduty_service_integration@ resource value.
+serviceIntegrationResource
+    :: TF.Attr s P.Text -- ^ @service@ ('P._service', 'P.service')
+    -> P.Resource (ServiceIntegrationResource s)
+serviceIntegrationResource _service =
+    TF.unsafeResource "pagerduty_service_integration" TF.validator $
+        ServiceIntegrationResource'
+            { _integrationEmail = TF.Nil
+            , _integrationKey = TF.Nil
+            , _name = TF.Nil
+            , _service = _service
+            , _type' = TF.Nil
+            , _vendor = TF.Nil
+            }
+
+instance TF.IsObject (ServiceIntegrationResource s) where
+    toObject ServiceIntegrationResource'{..} = P.catMaybes
+        [ TF.assign "integration_email" <$> TF.attribute _integrationEmail
+        , TF.assign "integration_key" <$> TF.attribute _integrationKey
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "service" <$> TF.attribute _service
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "vendor" <$> TF.attribute _vendor
+        ]
+
+instance TF.IsValid (ServiceIntegrationResource s) where
+    validator = TF.fieldsValidator (\ServiceIntegrationResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_type' P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_type'",
+                            [ "_vendor"
+                            ])
+        , if (_vendor P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_vendor",
+                            [ "_type'"
+                            ])
+        ])
+
+instance P.HasIntegrationEmail (ServiceIntegrationResource s) (TF.Attr s P.Text) where
+    integrationEmail =
+        P.lens (_integrationEmail :: ServiceIntegrationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _integrationEmail = a } :: ServiceIntegrationResource s)
+
+instance P.HasIntegrationKey (ServiceIntegrationResource s) (TF.Attr s P.Text) where
+    integrationKey =
+        P.lens (_integrationKey :: ServiceIntegrationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _integrationKey = a } :: ServiceIntegrationResource s)
+
+instance P.HasName (ServiceIntegrationResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ServiceIntegrationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceIntegrationResource s)
+
+instance P.HasService (ServiceIntegrationResource s) (TF.Attr s P.Text) where
+    service =
+        P.lens (_service :: ServiceIntegrationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _service = a } :: ServiceIntegrationResource s)
+
+instance P.HasType' (ServiceIntegrationResource s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: ServiceIntegrationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: ServiceIntegrationResource s)
+
+instance P.HasVendor (ServiceIntegrationResource s) (TF.Attr s P.Text) where
+    vendor =
+        P.lens (_vendor :: ServiceIntegrationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vendor = a } :: ServiceIntegrationResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedHtmlUrl (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
+    computedHtmlUrl x = TF.compute (TF.refKey x) "html_url"
+
+instance s ~ s' => P.HasComputedIntegrationEmail (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
+    computedIntegrationEmail x = TF.compute (TF.refKey x) "integration_email"
+
+instance s ~ s' => P.HasComputedIntegrationKey (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
+    computedIntegrationKey x = TF.compute (TF.refKey x) "integration_key"
+
+instance s ~ s' => P.HasComputedType (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "type"
+
+instance s ~ s' => P.HasComputedVendor (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
+    computedVendor x = TF.compute (TF.refKey x) "vendor"
+
 -- | @pagerduty_service@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/pagerduty/r/service.html terraform documentation>
@@ -575,123 +693,52 @@ instance s ~ s' => P.HasComputedLastIncidentTimestamp (TF.Ref s' (ServiceResourc
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
--- | @pagerduty_service_integration@ Resource.
+-- | @pagerduty_team_membership@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/pagerduty/r/service_integration.html terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/r/team_membership.html terraform documentation>
 -- for more information.
-data ServiceIntegrationResource s = ServiceIntegrationResource'
-    { _integrationEmail :: TF.Attr s P.Text
-    -- ^ @integration_email@ - (Optional)
+data TeamMembershipResource s = TeamMembershipResource'
+    { _teamId :: TF.Attr s P.Text
+    -- ^ @team_id@ - (Required, Forces New)
     --
-    , _integrationKey   :: TF.Attr s P.Text
-    -- ^ @integration_key@ - (Optional)
+    , _userId :: TF.Attr s P.Text
+    -- ^ @user_id@ - (Required, Forces New)
     --
-    , _name             :: TF.Attr s P.Text
-    -- ^ @name@ - (Optional)
-    --
-    , _service          :: TF.Attr s P.Text
-    -- ^ @service@ - (Required)
-    --
-    , _type'            :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional, Forces New)
-    --
-    -- Conflicts with:
-    --
-    -- * 'vendor'
-    , _vendor           :: TF.Attr s P.Text
-    -- ^ @vendor@ - (Optional, Forces New)
-    --
-    -- Conflicts with:
-    --
-    -- * 'type''
     } deriving (P.Show, P.Eq, P.Ord)
 
--- | Define a new @pagerduty_service_integration@ resource value.
-serviceIntegrationResource
-    :: TF.Attr s P.Text -- ^ @service@ ('P._service', 'P.service')
-    -> P.Resource (ServiceIntegrationResource s)
-serviceIntegrationResource _service =
-    TF.unsafeResource "pagerduty_service_integration" TF.validator $
-        ServiceIntegrationResource'
-            { _integrationEmail = TF.Nil
-            , _integrationKey = TF.Nil
-            , _name = TF.Nil
-            , _service = _service
-            , _type' = TF.Nil
-            , _vendor = TF.Nil
+-- | Define a new @pagerduty_team_membership@ resource value.
+teamMembershipResource
+    :: TF.Attr s P.Text -- ^ @team_id@ ('P._teamId', 'P.teamId')
+    -> TF.Attr s P.Text -- ^ @user_id@ ('P._userId', 'P.userId')
+    -> P.Resource (TeamMembershipResource s)
+teamMembershipResource _teamId _userId =
+    TF.unsafeResource "pagerduty_team_membership" TF.validator $
+        TeamMembershipResource'
+            { _teamId = _teamId
+            , _userId = _userId
             }
 
-instance TF.IsObject (ServiceIntegrationResource s) where
-    toObject ServiceIntegrationResource'{..} = P.catMaybes
-        [ TF.assign "integration_email" <$> TF.attribute _integrationEmail
-        , TF.assign "integration_key" <$> TF.attribute _integrationKey
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "service" <$> TF.attribute _service
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "vendor" <$> TF.attribute _vendor
+instance TF.IsObject (TeamMembershipResource s) where
+    toObject TeamMembershipResource'{..} = P.catMaybes
+        [ TF.assign "team_id" <$> TF.attribute _teamId
+        , TF.assign "user_id" <$> TF.attribute _userId
         ]
 
-instance TF.IsValid (ServiceIntegrationResource s) where
-    validator = TF.fieldsValidator (\ServiceIntegrationResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_type' P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_type'",
-                            [ "_vendor"
-                            ])
-        , if (_vendor P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_vendor",
-                            [ "_type'"
-                            ])
-        ])
+instance TF.IsValid (TeamMembershipResource s) where
+    validator = P.mempty
 
-instance P.HasIntegrationEmail (ServiceIntegrationResource s) (TF.Attr s P.Text) where
-    integrationEmail =
-        P.lens (_integrationEmail :: ServiceIntegrationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _integrationEmail = a } :: ServiceIntegrationResource s)
+instance P.HasTeamId (TeamMembershipResource s) (TF.Attr s P.Text) where
+    teamId =
+        P.lens (_teamId :: TeamMembershipResource s -> TF.Attr s P.Text)
+               (\s a -> s { _teamId = a } :: TeamMembershipResource s)
 
-instance P.HasIntegrationKey (ServiceIntegrationResource s) (TF.Attr s P.Text) where
-    integrationKey =
-        P.lens (_integrationKey :: ServiceIntegrationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _integrationKey = a } :: ServiceIntegrationResource s)
+instance P.HasUserId (TeamMembershipResource s) (TF.Attr s P.Text) where
+    userId =
+        P.lens (_userId :: TeamMembershipResource s -> TF.Attr s P.Text)
+               (\s a -> s { _userId = a } :: TeamMembershipResource s)
 
-instance P.HasName (ServiceIntegrationResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: ServiceIntegrationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ServiceIntegrationResource s)
-
-instance P.HasService (ServiceIntegrationResource s) (TF.Attr s P.Text) where
-    service =
-        P.lens (_service :: ServiceIntegrationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _service = a } :: ServiceIntegrationResource s)
-
-instance P.HasType' (ServiceIntegrationResource s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: ServiceIntegrationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: ServiceIntegrationResource s)
-
-instance P.HasVendor (ServiceIntegrationResource s) (TF.Attr s P.Text) where
-    vendor =
-        P.lens (_vendor :: ServiceIntegrationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _vendor = a } :: ServiceIntegrationResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamMembershipResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedHtmlUrl (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
-    computedHtmlUrl x = TF.compute (TF.refKey x) "html_url"
-
-instance s ~ s' => P.HasComputedIntegrationEmail (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
-    computedIntegrationEmail x = TF.compute (TF.refKey x) "integration_email"
-
-instance s ~ s' => P.HasComputedIntegrationKey (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
-    computedIntegrationKey x = TF.compute (TF.refKey x) "integration_key"
-
-instance s ~ s' => P.HasComputedType (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "type"
-
-instance s ~ s' => P.HasComputedVendor (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
-    computedVendor x = TF.compute (TF.refKey x) "vendor"
 
 -- | @pagerduty_team@ Resource.
 --
@@ -739,52 +786,100 @@ instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
--- | @pagerduty_team_membership@ Resource.
+-- | @pagerduty_user_contact_method@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/pagerduty/r/team_membership.html terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/r/user_contact_method.html terraform documentation>
 -- for more information.
-data TeamMembershipResource s = TeamMembershipResource'
-    { _teamId :: TF.Attr s P.Text
-    -- ^ @team_id@ - (Required, Forces New)
+data UserContactMethodResource s = UserContactMethodResource'
+    { _address        :: TF.Attr s P.Text
+    -- ^ @address@ - (Required)
     --
-    , _userId :: TF.Attr s P.Text
-    -- ^ @user_id@ - (Required, Forces New)
+    , _countryCode    :: TF.Attr s P.Int
+    -- ^ @country_code@ - (Optional)
+    --
+    , _label          :: TF.Attr s P.Text
+    -- ^ @label@ - (Required)
+    --
+    , _sendShortEmail :: TF.Attr s P.Bool
+    -- ^ @send_short_email@ - (Optional)
+    --
+    , _type'          :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    --
+    , _userId         :: TF.Attr s P.Text
+    -- ^ @user_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
--- | Define a new @pagerduty_team_membership@ resource value.
-teamMembershipResource
-    :: TF.Attr s P.Text -- ^ @team_id@ ('P._teamId', 'P.teamId')
+-- | Define a new @pagerduty_user_contact_method@ resource value.
+userContactMethodResource
+    :: TF.Attr s P.Text -- ^ @address@ ('P._address', 'P.address')
     -> TF.Attr s P.Text -- ^ @user_id@ ('P._userId', 'P.userId')
-    -> P.Resource (TeamMembershipResource s)
-teamMembershipResource _teamId _userId =
-    TF.unsafeResource "pagerduty_team_membership" TF.validator $
-        TeamMembershipResource'
-            { _teamId = _teamId
+    -> TF.Attr s P.Text -- ^ @label@ ('P._label', 'P.label')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    -> P.Resource (UserContactMethodResource s)
+userContactMethodResource _address _userId _label _type' =
+    TF.unsafeResource "pagerduty_user_contact_method" TF.validator $
+        UserContactMethodResource'
+            { _address = _address
+            , _countryCode = TF.Nil
+            , _label = _label
+            , _sendShortEmail = TF.value P.False
+            , _type' = _type'
             , _userId = _userId
             }
 
-instance TF.IsObject (TeamMembershipResource s) where
-    toObject TeamMembershipResource'{..} = P.catMaybes
-        [ TF.assign "team_id" <$> TF.attribute _teamId
+instance TF.IsObject (UserContactMethodResource s) where
+    toObject UserContactMethodResource'{..} = P.catMaybes
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "country_code" <$> TF.attribute _countryCode
+        , TF.assign "label" <$> TF.attribute _label
+        , TF.assign "send_short_email" <$> TF.attribute _sendShortEmail
+        , TF.assign "type" <$> TF.attribute _type'
         , TF.assign "user_id" <$> TF.attribute _userId
         ]
 
-instance TF.IsValid (TeamMembershipResource s) where
+instance TF.IsValid (UserContactMethodResource s) where
     validator = P.mempty
 
-instance P.HasTeamId (TeamMembershipResource s) (TF.Attr s P.Text) where
-    teamId =
-        P.lens (_teamId :: TeamMembershipResource s -> TF.Attr s P.Text)
-               (\s a -> s { _teamId = a } :: TeamMembershipResource s)
+instance P.HasAddress (UserContactMethodResource s) (TF.Attr s P.Text) where
+    address =
+        P.lens (_address :: UserContactMethodResource s -> TF.Attr s P.Text)
+               (\s a -> s { _address = a } :: UserContactMethodResource s)
 
-instance P.HasUserId (TeamMembershipResource s) (TF.Attr s P.Text) where
+instance P.HasCountryCode (UserContactMethodResource s) (TF.Attr s P.Int) where
+    countryCode =
+        P.lens (_countryCode :: UserContactMethodResource s -> TF.Attr s P.Int)
+               (\s a -> s { _countryCode = a } :: UserContactMethodResource s)
+
+instance P.HasLabel (UserContactMethodResource s) (TF.Attr s P.Text) where
+    label =
+        P.lens (_label :: UserContactMethodResource s -> TF.Attr s P.Text)
+               (\s a -> s { _label = a } :: UserContactMethodResource s)
+
+instance P.HasSendShortEmail (UserContactMethodResource s) (TF.Attr s P.Bool) where
+    sendShortEmail =
+        P.lens (_sendShortEmail :: UserContactMethodResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _sendShortEmail = a } :: UserContactMethodResource s)
+
+instance P.HasType' (UserContactMethodResource s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: UserContactMethodResource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: UserContactMethodResource s)
+
+instance P.HasUserId (UserContactMethodResource s) (TF.Attr s P.Text) where
     userId =
-        P.lens (_userId :: TeamMembershipResource s -> TF.Attr s P.Text)
-               (\s a -> s { _userId = a } :: TeamMembershipResource s)
+        P.lens (_userId :: UserContactMethodResource s -> TF.Attr s P.Text)
+               (\s a -> s { _userId = a } :: UserContactMethodResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamMembershipResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserContactMethodResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedBlacklisted (TF.Ref s' (UserContactMethodResource s)) (TF.Attr s P.Bool) where
+    computedBlacklisted x = TF.compute (TF.refKey x) "blacklisted"
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (UserContactMethodResource s)) (TF.Attr s P.Bool) where
+    computedEnabled x = TF.compute (TF.refKey x) "enabled"
 
 -- | @pagerduty_user@ Resource.
 --
@@ -907,98 +1002,3 @@ instance s ~ s' => P.HasComputedInvitationSent (TF.Ref s' (UserResource s)) (TF.
 
 instance s ~ s' => P.HasComputedTimeZone (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedTimeZone x = TF.compute (TF.refKey x) "time_zone"
-
--- | @pagerduty_user_contact_method@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/pagerduty/r/user_contact_method.html terraform documentation>
--- for more information.
-data UserContactMethodResource s = UserContactMethodResource'
-    { _address        :: TF.Attr s P.Text
-    -- ^ @address@ - (Required)
-    --
-    , _countryCode    :: TF.Attr s P.Int
-    -- ^ @country_code@ - (Optional)
-    --
-    , _label          :: TF.Attr s P.Text
-    -- ^ @label@ - (Required)
-    --
-    , _sendShortEmail :: TF.Attr s P.Bool
-    -- ^ @send_short_email@ - (Optional)
-    --
-    , _type'          :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
-    --
-    , _userId         :: TF.Attr s P.Text
-    -- ^ @user_id@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @pagerduty_user_contact_method@ resource value.
-userContactMethodResource
-    :: TF.Attr s P.Text -- ^ @address@ ('P._address', 'P.address')
-    -> TF.Attr s P.Text -- ^ @user_id@ ('P._userId', 'P.userId')
-    -> TF.Attr s P.Text -- ^ @label@ ('P._label', 'P.label')
-    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
-    -> P.Resource (UserContactMethodResource s)
-userContactMethodResource _address _userId _label _type' =
-    TF.unsafeResource "pagerduty_user_contact_method" TF.validator $
-        UserContactMethodResource'
-            { _address = _address
-            , _countryCode = TF.Nil
-            , _label = _label
-            , _sendShortEmail = TF.value P.False
-            , _type' = _type'
-            , _userId = _userId
-            }
-
-instance TF.IsObject (UserContactMethodResource s) where
-    toObject UserContactMethodResource'{..} = P.catMaybes
-        [ TF.assign "address" <$> TF.attribute _address
-        , TF.assign "country_code" <$> TF.attribute _countryCode
-        , TF.assign "label" <$> TF.attribute _label
-        , TF.assign "send_short_email" <$> TF.attribute _sendShortEmail
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "user_id" <$> TF.attribute _userId
-        ]
-
-instance TF.IsValid (UserContactMethodResource s) where
-    validator = P.mempty
-
-instance P.HasAddress (UserContactMethodResource s) (TF.Attr s P.Text) where
-    address =
-        P.lens (_address :: UserContactMethodResource s -> TF.Attr s P.Text)
-               (\s a -> s { _address = a } :: UserContactMethodResource s)
-
-instance P.HasCountryCode (UserContactMethodResource s) (TF.Attr s P.Int) where
-    countryCode =
-        P.lens (_countryCode :: UserContactMethodResource s -> TF.Attr s P.Int)
-               (\s a -> s { _countryCode = a } :: UserContactMethodResource s)
-
-instance P.HasLabel (UserContactMethodResource s) (TF.Attr s P.Text) where
-    label =
-        P.lens (_label :: UserContactMethodResource s -> TF.Attr s P.Text)
-               (\s a -> s { _label = a } :: UserContactMethodResource s)
-
-instance P.HasSendShortEmail (UserContactMethodResource s) (TF.Attr s P.Bool) where
-    sendShortEmail =
-        P.lens (_sendShortEmail :: UserContactMethodResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _sendShortEmail = a } :: UserContactMethodResource s)
-
-instance P.HasType' (UserContactMethodResource s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: UserContactMethodResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: UserContactMethodResource s)
-
-instance P.HasUserId (UserContactMethodResource s) (TF.Attr s P.Text) where
-    userId =
-        P.lens (_userId :: UserContactMethodResource s -> TF.Attr s P.Text)
-               (\s a -> s { _userId = a } :: UserContactMethodResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (UserContactMethodResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedBlacklisted (TF.Ref s' (UserContactMethodResource s)) (TF.Attr s P.Bool) where
-    computedBlacklisted x = TF.compute (TF.refKey x) "blacklisted"
-
-instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (UserContactMethodResource s)) (TF.Attr s P.Bool) where
-    computedEnabled x = TF.compute (TF.refKey x) "enabled"

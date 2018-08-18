@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.PagerDuty
+    - Terrafomo.PagerDuty.DataSources
+    - Terrafomo.PagerDuty.Lens
+    - Terrafomo.PagerDuty.Provider
+    - Terrafomo.PagerDuty.Resources
+    - Terrafomo.PagerDuty.Settings
+    - Terrafomo.PagerDuty.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,
