@@ -96,6 +96,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/powerdns/r/record.html",
+            "dependencies": [],
             "key": "powerdns_record",
             "name": "RecordResource",
             "threaded": true,
@@ -255,6 +256,7 @@
                 "original": "server_url"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
