@@ -41,6 +41,7 @@
                     "original": "username"
                 }
             ],
+            "dependencies": [],
             "key": "opsgenie_team.member",
             "name": "MemberSetting",
             "threaded": true,
@@ -96,6 +97,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opsgenie/d/user.html",
+            "dependencies": [],
             "key": "opsgenie_user",
             "name": "UserData",
             "threaded": true,
@@ -236,6 +238,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opsgenie/r/team.html",
+            "dependencies": [
+                "MemberSetting"
+            ],
             "key": "opsgenie_team",
             "name": "TeamResource",
             "threaded": true,
@@ -374,6 +379,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opsgenie/r/user.html",
+            "dependencies": [],
             "key": "opsgenie_user",
             "name": "UserResource",
             "threaded": true,
@@ -478,6 +484,7 @@
                 "original": "api_key"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
