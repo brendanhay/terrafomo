@@ -75,6 +75,7 @@
                     "original": "severity"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_contact_group.alert_option",
             "name": "AlertOptionSetting",
             "threaded": true,
@@ -128,6 +129,7 @@
                     "original": "query"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_check.caql",
             "name": "CaqlSetting",
             "threaded": true,
@@ -299,6 +301,7 @@
                     "original": "version"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_check.cloudwatch",
             "name": "CloudwatchSetting",
             "threaded": true,
@@ -451,6 +454,7 @@
                     "original": "id"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_check.collector",
             "name": "CollectorSetting",
             "threaded": true,
@@ -808,6 +812,7 @@
                     "original": "state"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_check.consul",
             "name": "ConsulSetting",
             "threaded": true,
@@ -914,6 +919,7 @@
                 "name": "DetailsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "circonus_collector.details",
             "name": "DetailsSetting",
             "threaded": true,
@@ -1147,6 +1153,7 @@
                     "original": "user"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_contact_group.email",
             "name": "EmailSetting",
             "threaded": true,
@@ -1556,6 +1563,7 @@
                     "original": "format"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_check.http",
             "name": "HttpSetting",
             "threaded": true,
@@ -1646,6 +1654,7 @@
                     "original": "secret"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_check.httptrap",
             "name": "HttptrapSetting",
             "threaded": true,
@@ -1720,6 +1729,7 @@
                     "original": "interval"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_check.icmp_ping",
             "name": "IcmpPingSetting",
             "threaded": true,
@@ -1774,6 +1784,10 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [
+                "Then'Setting",
+                "ValueSetting"
+            ],
             "key": "circonus_rule_set.if",
             "name": "If'Setting",
             "threaded": true,
@@ -1789,6 +1803,7 @@
                 "name": "InvitesSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "circonus_account.invites",
             "name": "InvitesSetting",
             "threaded": true,
@@ -1857,6 +1872,7 @@
                     "original": "user"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_contact_group.irc",
             "name": "IrcSetting",
             "threaded": true,
@@ -2160,6 +2176,7 @@
                     "original": "version"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_check.json",
             "name": "JsonSetting",
             "threaded": true,
@@ -2501,6 +2518,7 @@
                     "original": "stack"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_check.metric",
             "name": "MetricSetting",
             "threaded": true,
@@ -2768,6 +2786,7 @@
                     "original": "query"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_graph.metric_cluster",
             "name": "MetricClusterSetting",
             "threaded": true,
@@ -2840,6 +2859,7 @@
                     "original": "query"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_check.mysql",
             "name": "MysqlSetting",
             "threaded": true,
@@ -2933,6 +2953,7 @@
                     "original": "using"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_rule_set.if.value.over",
             "name": "OverSetting",
             "threaded": true,
@@ -3000,6 +3021,7 @@
                     "original": "webhook_url"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_contact_group.pager_duty",
             "name": "PagerDutySetting",
             "threaded": true,
@@ -3089,6 +3111,7 @@
                     "original": "query"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_check.postgresql",
             "name": "PostgresqlSetting",
             "threaded": true,
@@ -3182,6 +3205,7 @@
                     "original": "type"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_metric_cluster.query",
             "name": "QuerySetting",
             "threaded": true,
@@ -3324,6 +3348,7 @@
                     "original": "username"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_contact_group.slack",
             "name": "SlackSetting",
             "threaded": true,
@@ -3421,6 +3446,7 @@
                     "original": "user"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_contact_group.sms",
             "name": "SmsSetting",
             "threaded": true,
@@ -3503,6 +3529,7 @@
                     "original": "source_ip"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_check.statsd",
             "name": "StatsdSetting",
             "threaded": true,
@@ -3695,6 +3722,7 @@
                     "original": "tls"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_check.tcp",
             "name": "TcpSetting",
             "threaded": true,
@@ -3809,6 +3837,7 @@
                     "original": "severity"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_rule_set.if.then",
             "name": "Then'Setting",
             "threaded": true,
@@ -3824,6 +3853,7 @@
                 "name": "UsageSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "circonus_account.usage",
             "name": "UsageSetting",
             "threaded": true,
@@ -3891,6 +3921,7 @@
                 "name": "UsersSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "circonus_account.users",
             "name": "UsersSetting",
             "threaded": true,
@@ -4462,6 +4493,9 @@
                     "optional": true,
                     "original": "over"
                 }
+            ],
+            "dependencies": [
+                "OverSetting"
             ],
             "key": "circonus_rule_set.if.value",
             "name": "ValueSetting",
@@ -5103,6 +5137,7 @@
                     "original": "warning"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_contact_group.victorops",
             "name": "VictoropsSetting",
             "threaded": true,
@@ -5251,6 +5286,7 @@
                     "original": "user"
                 }
             ],
+            "dependencies": [],
             "key": "circonus_contact_group.xmpp",
             "name": "XmppSetting",
             "threaded": true,
@@ -5364,6 +5400,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/circonus/d/account.html",
+            "dependencies": [
+                "InvitesSetting",
+                "UsageSetting",
+                "UsersSetting"
+            ],
             "key": "circonus_account",
             "name": "AccountData",
             "threaded": true,
@@ -5764,6 +5805,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/circonus/d/collector.html",
+            "dependencies": [
+                "DetailsSetting"
+            ],
             "key": "circonus_collector",
             "name": "CollectorData",
             "threaded": true,
@@ -6309,6 +6353,21 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/circonus/r/check.html",
+            "dependencies": [
+                "CaqlSetting",
+                "CloudwatchSetting",
+                "CollectorSetting",
+                "ConsulSetting",
+                "HttpSetting",
+                "HttptrapSetting",
+                "IcmpPingSetting",
+                "JsonSetting",
+                "MetricSetting",
+                "MysqlSetting",
+                "PostgresqlSetting",
+                "StatsdSetting",
+                "TcpSetting"
+            ],
             "key": "circonus_check",
             "name": "CheckResource",
             "threaded": true,
@@ -6905,6 +6964,17 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/circonus/r/contact_group.html",
+            "dependencies": [
+                "AlertOptionSetting",
+                "EmailSetting",
+                "HttpSetting",
+                "IrcSetting",
+                "PagerDutySetting",
+                "SlackSetting",
+                "SmsSetting",
+                "VictoropsSetting",
+                "XmppSetting"
+            ],
             "key": "circonus_contact_group",
             "name": "ContactGroupResource",
             "threaded": true,
@@ -7165,6 +7235,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/circonus/r/graph.html",
+            "dependencies": [
+                "MetricSetting",
+                "MetricClusterSetting"
+            ],
             "key": "circonus_graph",
             "name": "GraphResource",
             "threaded": true,
@@ -7313,6 +7387,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/circonus/r/metric.html",
+            "dependencies": [],
             "key": "circonus_metric",
             "name": "MetricResource",
             "threaded": true,
@@ -7463,6 +7538,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/circonus/r/metric_cluster.html",
+            "dependencies": [
+                "QuerySetting"
+            ],
             "key": "circonus_metric_cluster",
             "name": "MetricClusterResource",
             "threaded": true,
@@ -7691,6 +7769,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/circonus/r/rule_set.html",
+            "dependencies": [
+                "If'Setting"
+            ],
             "key": "circonus_rule_set",
             "name": "RuleSetResource",
             "threaded": true,
@@ -7899,6 +7980,7 @@
                 "original": "key"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
