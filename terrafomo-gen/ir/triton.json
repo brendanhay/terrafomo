@@ -45,6 +45,7 @@
                     "original": "services"
                 }
             ],
+            "dependencies": [],
             "key": "triton_machine.cns",
             "name": "CnsSetting",
             "threaded": true,
@@ -197,6 +198,7 @@
                     "original": "version"
                 }
             ],
+            "dependencies": [],
             "key": "triton_package.filter",
             "name": "FilterSetting",
             "threaded": true,
@@ -232,6 +234,7 @@
                     "original": "network"
                 }
             ],
+            "dependencies": [],
             "key": "triton_machine.nic",
             "name": "NicSetting",
             "threaded": true,
@@ -386,6 +389,7 @@
             },
             "arguments": [],
             "url": "https://www.terraform.io/docs/providers/triton/d/account.html",
+            "dependencies": [],
             "key": "triton_account",
             "name": "AccountData",
             "threaded": true,
@@ -471,6 +475,7 @@
             },
             "arguments": [],
             "url": "https://www.terraform.io/docs/providers/triton/d/datacenter.html",
+            "dependencies": [],
             "key": "triton_datacenter",
             "name": "DatacenterData",
             "threaded": true,
@@ -574,6 +579,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/triton/d/fabric_network.html",
+            "dependencies": [],
             "key": "triton_fabric_network",
             "name": "FabricNetworkData",
             "threaded": true,
@@ -865,6 +871,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/triton/d/fabric_vlan.html",
+            "dependencies": [],
             "key": "triton_fabric_vlan",
             "name": "FabricVlanData",
             "threaded": true,
@@ -1036,6 +1043,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/triton/d/image.html",
+            "dependencies": [],
             "key": "triton_image",
             "name": "ImageData",
             "threaded": true,
@@ -1088,6 +1096,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/triton/d/network.html",
+            "dependencies": [],
             "key": "triton_network",
             "name": "NetworkData",
             "threaded": true,
@@ -1192,6 +1201,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/triton/d/package.html",
+            "dependencies": [
+                "FilterSetting"
+            ],
             "key": "triton_package",
             "name": "PackageData",
             "threaded": true,
@@ -1573,6 +1585,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/triton/r/fabric.html",
+            "dependencies": [],
             "key": "triton_fabric",
             "name": "FabricResource",
             "threaded": true,
@@ -1837,6 +1850,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/triton/r/firewall_rule.html",
+            "dependencies": [],
             "key": "triton_firewall_rule",
             "name": "FirewallRuleResource",
             "threaded": true,
@@ -2063,6 +2077,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/triton/r/instance_template.html",
+            "dependencies": [],
             "key": "triton_instance_template",
             "name": "InstanceTemplateResource",
             "threaded": true,
@@ -2270,6 +2285,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/triton/r/key.html",
+            "dependencies": [],
             "key": "triton_key",
             "name": "KeyResource",
             "threaded": true,
@@ -2648,6 +2664,11 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/triton/r/machine.html",
+            "dependencies": [
+                "CnsSetting",
+                "NicSetting",
+                "NicSetting"
+            ],
             "key": "triton_machine",
             "name": "MachineResource",
             "threaded": true,
@@ -3026,6 +3047,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/triton/r/service_group.html",
+            "dependencies": [],
             "key": "triton_service_group",
             "name": "ServiceGroupResource",
             "threaded": true,
@@ -3153,6 +3175,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/triton/r/snapshot.html",
+            "dependencies": [],
             "key": "triton_snapshot",
             "name": "SnapshotResource",
             "threaded": true,
@@ -3297,6 +3320,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/triton/r/vlan.html",
+            "dependencies": [],
             "key": "triton_vlan",
             "name": "VlanResource",
             "threaded": true,
@@ -3473,6 +3497,7 @@
                 "original": "user"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
