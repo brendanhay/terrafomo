@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Heroku
+    - Terrafomo.Heroku.DataSources
+    - Terrafomo.Heroku.Lens
+    - Terrafomo.Heroku.Provider
+    - Terrafomo.Heroku.Resources
+    - Terrafomo.Heroku.Settings
+    - Terrafomo.Heroku.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

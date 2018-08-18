@@ -13,17 +13,17 @@
 --
 module Terrafomo.Heroku
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Heroku.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Heroku.Types
 
-    -- * DataSources
-    , module Terrafomo.Heroku.DataSource
-
     -- * Resources
-    , module Terrafomo.Heroku.Resource
+    , module Terrafomo.Heroku.Resources
+
+    -- * DataSources
+    , module Terrafomo.Heroku.DataSources
 
     -- * Settings
     , module Terrafomo.Heroku.Settings
@@ -32,9 +32,9 @@ module Terrafomo.Heroku
     , module Terrafomo.Heroku.Lens
     ) where
 
-import Terrafomo.Heroku.DataSource
+import Terrafomo.Heroku.DataSources
 import Terrafomo.Heroku.Lens
 import Terrafomo.Heroku.Provider
-import Terrafomo.Heroku.Resource
+import Terrafomo.Heroku.Resources
 import Terrafomo.Heroku.Settings
 import Terrafomo.Heroku.Types
