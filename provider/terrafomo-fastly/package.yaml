@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Fastly
+    - Terrafomo.Fastly.DataSources
+    - Terrafomo.Fastly.Lens
+    - Terrafomo.Fastly.Provider
+    - Terrafomo.Fastly.Resources
+    - Terrafomo.Fastly.Settings
+    - Terrafomo.Fastly.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

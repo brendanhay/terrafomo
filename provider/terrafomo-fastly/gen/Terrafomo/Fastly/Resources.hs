@@ -1,17 +1,17 @@
 -- This module is auto-generated.
 
 -- |
--- Module      : Terrafomo.Fastly.Settings
+-- Module      : Terrafomo.Fastly.Resources
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Fastly.Settings
+module Terrafomo.Fastly.Resources
     (
-    -- * Settings
-      module Terrafomo.Fastly.Settings01
+    -- * Resources
+      module Terrafomo.Fastly.Resource01
     ) where
 
-import Terrafomo.Fastly.Settings01
+import Terrafomo.Fastly.Resource01

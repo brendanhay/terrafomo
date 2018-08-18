@@ -13,17 +13,17 @@
 --
 module Terrafomo.Fastly
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Fastly.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Fastly.Types
 
-    -- * DataSources
-    , module Terrafomo.Fastly.DataSource
-
     -- * Resources
-    , module Terrafomo.Fastly.Resource
+    , module Terrafomo.Fastly.Resources
+
+    -- * DataSources
+    , module Terrafomo.Fastly.DataSources
 
     -- * Settings
     , module Terrafomo.Fastly.Settings
@@ -32,9 +32,9 @@ module Terrafomo.Fastly
     , module Terrafomo.Fastly.Lens
     ) where
 
-import Terrafomo.Fastly.DataSource
+import Terrafomo.Fastly.DataSources
 import Terrafomo.Fastly.Lens
 import Terrafomo.Fastly.Provider
-import Terrafomo.Fastly.Resource
+import Terrafomo.Fastly.Resources
 import Terrafomo.Fastly.Settings
 import Terrafomo.Fastly.Types

@@ -1,17 +1,17 @@
 -- This module is auto-generated.
 
 -- |
--- Module      : Terrafomo.Fastly.Settings
+-- Module      : Terrafomo.Fastly.DataSources
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Fastly.Settings
+module Terrafomo.Fastly.DataSources
     (
-    -- * Settings
-      module Terrafomo.Fastly.Settings01
+    -- * DataSources
+      module Terrafomo.Fastly.DataSource01
     ) where
 
-import Terrafomo.Fastly.Settings01
+import Terrafomo.Fastly.DataSource01
