@@ -13,17 +13,17 @@
 --
 module Terrafomo.OVH
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.OVH.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.OVH.Types
 
-    -- * DataSources
-    , module Terrafomo.OVH.DataSource
-
     -- * Resources
-    , module Terrafomo.OVH.Resource
+    , module Terrafomo.OVH.Resources
+
+    -- * DataSources
+    , module Terrafomo.OVH.DataSources
 
     -- * Settings
     , module Terrafomo.OVH.Settings
@@ -32,9 +32,9 @@ module Terrafomo.OVH
     , module Terrafomo.OVH.Lens
     ) where
 
-import Terrafomo.OVH.DataSource
+import Terrafomo.OVH.DataSources
 import Terrafomo.OVH.Lens
 import Terrafomo.OVH.Provider
-import Terrafomo.OVH.Resource
+import Terrafomo.OVH.Resources
 import Terrafomo.OVH.Settings
 import Terrafomo.OVH.Types
