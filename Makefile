@@ -8,12 +8,13 @@ GO_TEMPLATE := terrafomo-go/main.go
 GO_VENDOR   := $(GOPATH)/src/github.com/terraform-providers/terraform-provider
 STYLISH     := ./bin/stylish-haskell
 GENERATE    := ./bin/terrafomo-gen
-CONFIGS     := .stack.yaml .travis.yml
+CONFIGS     := stack.yaml .travis.yml
 PROVIDERS    = $(basename $(notdir $(wildcard terrafomo-gen/config/*.yaml)))
 
-default: format
+default: build
 
 build: format
+	@$(MAKE) $(CONFIGS)
 	stack build --fast
 
 haddock: format
@@ -35,6 +36,12 @@ commit:
 	@script/commit-packages $(PROVIDERS)
 
 .PHONY: $(GENERATE)
+
+stack.yaml:
+	script/generate-stack
+
+.travis.yml:
+	script/generate-stack
 
 $(GENERATE):
 	stack build terrafomo-gen
