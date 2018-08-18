@@ -41,6 +41,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.integration_ecs.autoscale_attributes",
             "name": "AutoscaleAttributesSetting",
             "threaded": true,
@@ -126,6 +127,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.integration_nomad.autoscale_constraints",
             "name": "AutoscaleConstraintsSetting",
             "threaded": true,
@@ -194,6 +196,7 @@
                     "original": "evaluation_periods"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.integration_ecs.autoscale_down",
             "name": "AutoscaleDownSetting",
             "threaded": true,
@@ -261,6 +264,7 @@
                     "original": "num_of_units"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.integration_ecs.autoscale_headroom",
             "name": "AutoscaleHeadroomSetting",
             "threaded": true,
@@ -311,6 +315,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.integration_kubernetes.autoscale_labels",
             "name": "AutoscaleLabelsSetting",
             "threaded": true,
@@ -396,6 +401,7 @@
                     "original": "deployment_group_name"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.integration_codedeploy.deployment_groups",
             "name": "DeploymentGroupsSetting",
             "threaded": true,
@@ -583,6 +589,7 @@
                     "original": "volume_type"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.ebs_block_device",
             "name": "EbsBlockDeviceSetting",
             "threaded": true,
@@ -703,6 +710,7 @@
                     "original": "virtual_name"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.ephemeral_block_device",
             "name": "EphemeralBlockDeviceSetting",
             "threaded": true,
@@ -788,6 +796,7 @@
                     "original": "weight"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.instance_types_weights",
             "name": "InstanceTypesWeightsSetting",
             "threaded": true,
@@ -889,6 +898,9 @@
                     "optional": false,
                     "original": "terminate_instance_on_failure"
                 }
+            ],
+            "dependencies": [
+                "DeploymentGroupsSetting"
             ],
             "key": "spotinst_elastigroup_aws.integration_codedeploy",
             "name": "IntegrationCodedeploySetting",
@@ -1077,6 +1089,11 @@
                     "original": "cluster_name"
                 }
             ],
+            "dependencies": [
+                "AutoscaleAttributesSetting",
+                "AutoscaleDownSetting",
+                "AutoscaleHeadroomSetting"
+            ],
             "key": "spotinst_elastigroup_aws.integration_ecs",
             "name": "IntegrationEcsSetting",
             "threaded": true,
@@ -1127,6 +1144,9 @@
                     "optional": true,
                     "original": "runner"
                 }
+            ],
+            "dependencies": [
+                "RunnerSetting"
             ],
             "key": "spotinst_elastigroup_aws.integration_gitlab",
             "name": "IntegrationGitlabSetting",
@@ -1314,6 +1334,11 @@
                     "original": "token"
                 }
             ],
+            "dependencies": [
+                "AutoscaleDownSetting",
+                "AutoscaleHeadroomSetting",
+                "AutoscaleLabelsSetting"
+            ],
             "key": "spotinst_elastigroup_aws.integration_kubernetes",
             "name": "IntegrationKubernetesSetting",
             "threaded": true,
@@ -1347,6 +1372,7 @@
                     "original": "api_server"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.integration_mesosphere",
             "name": "IntegrationMesosphereSetting",
             "threaded": true,
@@ -1398,6 +1424,7 @@
                     "original": "deployment_id"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.integration_multai_runtime",
             "name": "IntegrationMultaiRuntimeSetting",
             "threaded": true,
@@ -1568,6 +1595,11 @@
                     "original": "master_port"
                 }
             ],
+            "dependencies": [
+                "AutoscaleConstraintsSetting",
+                "AutoscaleDownSetting",
+                "AutoscaleHeadroomSetting"
+            ],
             "key": "spotinst_elastigroup_aws.integration_nomad",
             "name": "IntegrationNomadSetting",
             "threaded": true,
@@ -1670,6 +1702,7 @@
                     "original": "secret_key"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.integration_rancher",
             "name": "IntegrationRancherSetting",
             "threaded": true,
@@ -1772,6 +1805,7 @@
                     "original": "target_set_id"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.multai_target_sets",
             "name": "MultaiTargetSetsSetting",
             "threaded": true,
@@ -1942,6 +1976,7 @@
                     "original": "secondary_private_ip_address_count"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.network_interface",
             "name": "NetworkInterfaceSetting",
             "threaded": true,
@@ -2045,6 +2080,7 @@
                     "original": "time_windows"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.revert_to_spot",
             "name": "RevertToSpotSetting",
             "threaded": true,
@@ -2130,6 +2166,7 @@
                     "original": "health_check_type"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.update_policy.roll_config",
             "name": "RollConfigSetting",
             "threaded": true,
@@ -2181,6 +2218,7 @@
                     "original": "is_enabled"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.integration_gitlab.runner",
             "name": "RunnerSetting",
             "threaded": true,
@@ -2520,6 +2558,7 @@
                     "original": "unit"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.scaling_down_policy",
             "name": "ScalingDownPolicySetting",
             "threaded": true,
@@ -2878,6 +2917,7 @@
                     "original": "unit"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.scaling_target_policy",
             "name": "ScalingTargetPolicySetting",
             "threaded": true,
@@ -3355,6 +3395,7 @@
                     "original": "unit"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.scaling_up_policy",
             "name": "ScalingUpPolicySetting",
             "threaded": true,
@@ -3781,6 +3822,7 @@
                     "original": "task_type"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.scheduled_task",
             "name": "ScheduledTaskSetting",
             "threaded": true,
@@ -3849,6 +3891,7 @@
                     "original": "timeout"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.signal",
             "name": "SignalSetting",
             "threaded": true,
@@ -3951,6 +3994,7 @@
                     "original": "should_delete_volumes"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.stateful_deallocation",
             "name": "StatefulDeallocationSetting",
             "threaded": true,
@@ -4001,6 +4045,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "spotinst_elastigroup_aws.tags",
             "name": "TagsSetting",
             "threaded": true,
@@ -4102,6 +4147,9 @@
                     "optional": false,
                     "original": "should_roll"
                 }
+            ],
+            "dependencies": [
+                "RollConfigSetting"
             ],
             "key": "spotinst_elastigroup_aws.update_policy",
             "name": "UpdatePolicySetting",
@@ -5220,6 +5268,30 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/spotinst/r/elastigroup_aws.html",
+            "dependencies": [
+                "EbsBlockDeviceSetting",
+                "EphemeralBlockDeviceSetting",
+                "InstanceTypesWeightsSetting",
+                "IntegrationCodedeploySetting",
+                "IntegrationEcsSetting",
+                "IntegrationGitlabSetting",
+                "IntegrationKubernetesSetting",
+                "IntegrationMesosphereSetting",
+                "IntegrationMultaiRuntimeSetting",
+                "IntegrationNomadSetting",
+                "IntegrationRancherSetting",
+                "MultaiTargetSetsSetting",
+                "NetworkInterfaceSetting",
+                "RevertToSpotSetting",
+                "ScalingDownPolicySetting",
+                "ScalingTargetPolicySetting",
+                "ScalingUpPolicySetting",
+                "ScheduledTaskSetting",
+                "SignalSetting",
+                "StatefulDeallocationSetting",
+                "TagsSetting",
+                "UpdatePolicySetting"
+            ],
             "key": "spotinst_elastigroup_aws",
             "name": "ElastigroupAwsResource",
             "threaded": true,
@@ -5638,6 +5710,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/spotinst/r/subscription.html",
+            "dependencies": [],
             "key": "spotinst_subscription",
             "name": "SubscriptionResource",
             "threaded": true,
@@ -5780,6 +5853,7 @@
                 "original": "token"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
