@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.VSphere.DataSource
+-- Module      : Terrafomo.VSphere.DataSource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.VSphere.DataSource
+module Terrafomo.VSphere.DataSource01
     (
     -- ** vsphere_compute_cluster
       ComputeClusterData (..)
@@ -29,13 +29,13 @@ module Terrafomo.VSphere.DataSource
     , DatacenterData (..)
     , datacenterData
 
-    -- ** vsphere_datastore
-    , DatastoreData (..)
-    , datastoreData
-
     -- ** vsphere_datastore_cluster
     , DatastoreClusterData (..)
     , datastoreClusterData
+
+    -- ** vsphere_datastore
+    , DatastoreData (..)
+    , datastoreData
 
     -- ** vsphere_distributed_virtual_switch
     , DistributedVirtualSwitchData (..)
@@ -53,13 +53,13 @@ module Terrafomo.VSphere.DataSource
     , ResourcePoolData (..)
     , resourcePoolData
 
-    -- ** vsphere_tag
-    , TagData (..)
-    , tagData
-
     -- ** vsphere_tag_category
     , TagCategoryData (..)
     , tagCategoryData
+
+    -- ** vsphere_tag
+    , TagData (..)
+    , tagData
 
     -- ** vsphere_virtual_machine
     , VirtualMachineData (..)
@@ -224,6 +224,55 @@ instance P.HasName (DatacenterData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DatacenterData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
+-- | @vsphere_datastore_cluster@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/vsphere/d/datastore_cluster.html terraform documentation>
+-- for more information.
+data DatastoreClusterData s = DatastoreClusterData'
+    { _datacenterId :: TF.Attr s P.Text
+    -- ^ @datacenter_id@ - (Optional)
+    -- The managed object ID of the datacenter the cluster is located in. Not
+    -- required if using an absolute path.
+    --
+    , _name         :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The name or absolute path to the datastore cluster.
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @vsphere_datastore_cluster@ datasource value.
+datastoreClusterData
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.DataSource (DatastoreClusterData s)
+datastoreClusterData _name =
+    TF.unsafeDataSource "vsphere_datastore_cluster" TF.validator $
+        DatastoreClusterData'
+            { _datacenterId = TF.Nil
+            , _name = _name
+            }
+
+instance TF.IsObject (DatastoreClusterData s) where
+    toObject DatastoreClusterData'{..} = P.catMaybes
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (DatastoreClusterData s) where
+    validator = P.mempty
+
+instance P.HasDatacenterId (DatastoreClusterData s) (TF.Attr s P.Text) where
+    datacenterId =
+        P.lens (_datacenterId :: DatastoreClusterData s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenterId = a } :: DatastoreClusterData s)
+
+instance P.HasName (DatastoreClusterData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: DatastoreClusterData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DatastoreClusterData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DatastoreClusterData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @vsphere_datastore@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/vsphere/d/datastore.html terraform documentation>
@@ -272,55 +321,6 @@ instance P.HasName (DatastoreData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: DatastoreData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DatastoreData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
--- | @vsphere_datastore_cluster@ DataSource.
---
--- See the <https://www.terraform.io/docs/providers/vsphere/d/datastore_cluster.html terraform documentation>
--- for more information.
-data DatastoreClusterData s = DatastoreClusterData'
-    { _datacenterId :: TF.Attr s P.Text
-    -- ^ @datacenter_id@ - (Optional)
-    -- The managed object ID of the datacenter the cluster is located in. Not
-    -- required if using an absolute path.
-    --
-    , _name         :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    -- The name or absolute path to the datastore cluster.
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @vsphere_datastore_cluster@ datasource value.
-datastoreClusterData
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> P.DataSource (DatastoreClusterData s)
-datastoreClusterData _name =
-    TF.unsafeDataSource "vsphere_datastore_cluster" TF.validator $
-        DatastoreClusterData'
-            { _datacenterId = TF.Nil
-            , _name = _name
-            }
-
-instance TF.IsObject (DatastoreClusterData s) where
-    toObject DatastoreClusterData'{..} = P.catMaybes
-        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance TF.IsValid (DatastoreClusterData s) where
-    validator = P.mempty
-
-instance P.HasDatacenterId (DatastoreClusterData s) (TF.Attr s P.Text) where
-    datacenterId =
-        P.lens (_datacenterId :: DatastoreClusterData s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenterId = a } :: DatastoreClusterData s)
-
-instance P.HasName (DatastoreClusterData s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: DatastoreClusterData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: DatastoreClusterData s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DatastoreClusterData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vsphere_distributed_virtual_switch@ DataSource.
@@ -530,6 +530,52 @@ instance P.HasName (ResourcePoolData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourcePoolData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
+-- | @vsphere_tag_category@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/vsphere/d/tag_category.html terraform documentation>
+-- for more information.
+data TagCategoryData s = TagCategoryData'
+    { _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The display name of the category.
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @vsphere_tag_category@ datasource value.
+tagCategoryData
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.DataSource (TagCategoryData s)
+tagCategoryData _name =
+    TF.unsafeDataSource "vsphere_tag_category" TF.validator $
+        TagCategoryData'
+            { _name = _name
+            }
+
+instance TF.IsObject (TagCategoryData s) where
+    toObject TagCategoryData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (TagCategoryData s) where
+    validator = P.mempty
+
+instance P.HasName (TagCategoryData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: TagCategoryData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: TagCategoryData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TagCategoryData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedAssociableTypes (TF.Ref s' (TagCategoryData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedAssociableTypes x = TF.compute (TF.refKey x) "associable_types"
+
+instance s ~ s' => P.HasComputedCardinality (TF.Ref s' (TagCategoryData s)) (TF.Attr s P.Text) where
+    computedCardinality x = TF.compute (TF.refKey x) "cardinality"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TagCategoryData s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
 -- | @vsphere_tag@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/vsphere/d/tag.html terraform documentation>
@@ -580,52 +626,6 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (TagData s)) (TF.Attr s P.Text) wh
     computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TagData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
-
--- | @vsphere_tag_category@ DataSource.
---
--- See the <https://www.terraform.io/docs/providers/vsphere/d/tag_category.html terraform documentation>
--- for more information.
-data TagCategoryData s = TagCategoryData'
-    { _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    -- The display name of the category.
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @vsphere_tag_category@ datasource value.
-tagCategoryData
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> P.DataSource (TagCategoryData s)
-tagCategoryData _name =
-    TF.unsafeDataSource "vsphere_tag_category" TF.validator $
-        TagCategoryData'
-            { _name = _name
-            }
-
-instance TF.IsObject (TagCategoryData s) where
-    toObject TagCategoryData'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance TF.IsValid (TagCategoryData s) where
-    validator = P.mempty
-
-instance P.HasName (TagCategoryData s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: TagCategoryData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: TagCategoryData s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (TagCategoryData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedAssociableTypes (TF.Ref s' (TagCategoryData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedAssociableTypes x = TF.compute (TF.refKey x) "associable_types"
-
-instance s ~ s' => P.HasComputedCardinality (TF.Ref s' (TagCategoryData s)) (TF.Attr s P.Text) where
-    computedCardinality x = TF.compute (TF.refKey x) "cardinality"
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TagCategoryData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
 -- | @vsphere_virtual_machine@ DataSource.

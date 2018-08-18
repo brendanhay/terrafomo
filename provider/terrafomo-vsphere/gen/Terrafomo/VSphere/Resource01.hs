@@ -8,22 +8,22 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.VSphere.Resource
+-- Module      : Terrafomo.VSphere.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.VSphere.Resource
+module Terrafomo.VSphere.Resource01
     (
-    -- ** vsphere_compute_cluster
-      ComputeClusterResource (..)
-    , computeClusterResource
-
     -- ** vsphere_compute_cluster_host_group
-    , ComputeClusterHostGroupResource (..)
+      ComputeClusterHostGroupResource (..)
     , computeClusterHostGroupResource
+
+    -- ** vsphere_compute_cluster
+    , ComputeClusterResource (..)
+    , computeClusterResource
 
     -- ** vsphere_compute_cluster_vm_affinity_rule
     , ComputeClusterVmAffinityRuleResource (..)
@@ -113,13 +113,13 @@ module Terrafomo.VSphere.Resource
     , StorageDrsVmOverrideResource (..)
     , storageDrsVmOverrideResource
 
-    -- ** vsphere_tag
-    , TagResource (..)
-    , tagResource
-
     -- ** vsphere_tag_category
     , TagCategoryResource (..)
     , tagCategoryResource
+
+    -- ** vsphere_tag
+    , TagResource (..)
+    , tagResource
 
     -- ** vsphere_vapp_container
     , VappContainerResource (..)
@@ -166,6 +166,66 @@ import qualified Terrafomo.Validator        as TF
 import qualified Terrafomo.VSphere.Lens     as P
 import qualified Terrafomo.VSphere.Provider as P
 import qualified Terrafomo.VSphere.Types    as P
+
+-- | @vsphere_compute_cluster_host_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_host_group.html terraform documentation>
+-- for more information.
+data ComputeClusterHostGroupResource s = ComputeClusterHostGroupResource'
+    { _computeClusterId :: TF.Attr s P.Text
+    -- ^ @compute_cluster_id@ - (Required, Forces New)
+    -- The managed object ID of the cluster.
+    --
+    , _hostSystemIds    :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @host_system_ids@ - (Optional)
+    -- The managed object IDs of the hosts.
+    --
+    , _name             :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    -- The unique name of the virtual machine group in the cluster.
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @vsphere_compute_cluster_host_group@ resource value.
+computeClusterHostGroupResource
+    :: TF.Attr s P.Text -- ^ @compute_cluster_id@ ('P._computeClusterId', 'P.computeClusterId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (ComputeClusterHostGroupResource s)
+computeClusterHostGroupResource _computeClusterId _name =
+    TF.unsafeResource "vsphere_compute_cluster_host_group" TF.validator $
+        ComputeClusterHostGroupResource'
+            { _computeClusterId = _computeClusterId
+            , _hostSystemIds = TF.Nil
+            , _name = _name
+            }
+
+instance TF.IsObject (ComputeClusterHostGroupResource s) where
+    toObject ComputeClusterHostGroupResource'{..} = P.catMaybes
+        [ TF.assign "compute_cluster_id" <$> TF.attribute _computeClusterId
+        , TF.assign "host_system_ids" <$> TF.attribute _hostSystemIds
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ComputeClusterHostGroupResource s) where
+    validator = P.mempty
+
+instance P.HasComputeClusterId (ComputeClusterHostGroupResource s) (TF.Attr s P.Text) where
+    computeClusterId =
+        P.lens (_computeClusterId :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _computeClusterId = a } :: ComputeClusterHostGroupResource s)
+
+instance P.HasHostSystemIds (ComputeClusterHostGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    hostSystemIds =
+        P.lens (_hostSystemIds :: ComputeClusterHostGroupResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _hostSystemIds = a } :: ComputeClusterHostGroupResource s)
+
+instance P.HasName (ComputeClusterHostGroupResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeClusterHostGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeClusterHostGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vsphere_compute_cluster@ Resource.
 --
@@ -845,66 +905,6 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeClusterResource s)) (TF.At
 
 instance s ~ s' => P.HasComputedResourcePoolId (TF.Ref s' (ComputeClusterResource s)) (TF.Attr s P.Text) where
     computedResourcePoolId x = TF.compute (TF.refKey x) "resource_pool_id"
-
--- | @vsphere_compute_cluster_host_group@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_host_group.html terraform documentation>
--- for more information.
-data ComputeClusterHostGroupResource s = ComputeClusterHostGroupResource'
-    { _computeClusterId :: TF.Attr s P.Text
-    -- ^ @compute_cluster_id@ - (Required, Forces New)
-    -- The managed object ID of the cluster.
-    --
-    , _hostSystemIds    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @host_system_ids@ - (Optional)
-    -- The managed object IDs of the hosts.
-    --
-    , _name             :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    -- The unique name of the virtual machine group in the cluster.
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @vsphere_compute_cluster_host_group@ resource value.
-computeClusterHostGroupResource
-    :: TF.Attr s P.Text -- ^ @compute_cluster_id@ ('P._computeClusterId', 'P.computeClusterId')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> P.Resource (ComputeClusterHostGroupResource s)
-computeClusterHostGroupResource _computeClusterId _name =
-    TF.unsafeResource "vsphere_compute_cluster_host_group" TF.validator $
-        ComputeClusterHostGroupResource'
-            { _computeClusterId = _computeClusterId
-            , _hostSystemIds = TF.Nil
-            , _name = _name
-            }
-
-instance TF.IsObject (ComputeClusterHostGroupResource s) where
-    toObject ComputeClusterHostGroupResource'{..} = P.catMaybes
-        [ TF.assign "compute_cluster_id" <$> TF.attribute _computeClusterId
-        , TF.assign "host_system_ids" <$> TF.attribute _hostSystemIds
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance TF.IsValid (ComputeClusterHostGroupResource s) where
-    validator = P.mempty
-
-instance P.HasComputeClusterId (ComputeClusterHostGroupResource s) (TF.Attr s P.Text) where
-    computeClusterId =
-        P.lens (_computeClusterId :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _computeClusterId = a } :: ComputeClusterHostGroupResource s)
-
-instance P.HasHostSystemIds (ComputeClusterHostGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    hostSystemIds =
-        P.lens (_hostSystemIds :: ComputeClusterHostGroupResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _hostSystemIds = a } :: ComputeClusterHostGroupResource s)
-
-instance P.HasName (ComputeClusterHostGroupResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ComputeClusterHostGroupResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeClusterHostGroupResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vsphere_compute_cluster_vm_affinity_rule@ Resource.
 --
@@ -5422,67 +5422,6 @@ instance P.HasVirtualMachineId (StorageDrsVmOverrideResource s) (TF.Attr s P.Tex
 instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageDrsVmOverrideResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
--- | @vsphere_tag@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/vsphere/r/tag.html terraform documentation>
--- for more information.
-data TagResource s = TagResource'
-    { _categoryId  :: TF.Attr s P.Text
-    -- ^ @category_id@ - (Required, Forces New)
-    -- The unique identifier of the parent category in which this tag will be
-    -- created.
-    --
-    , _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
-    -- The description of the tag.
-    --
-    , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    -- The display name of the tag. The name must be unique within its category.
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @vsphere_tag@ resource value.
-tagResource
-    :: TF.Attr s P.Text -- ^ @category_id@ ('P._categoryId', 'P.categoryId')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> P.Resource (TagResource s)
-tagResource _categoryId _name =
-    TF.unsafeResource "vsphere_tag" TF.validator $
-        TagResource'
-            { _categoryId = _categoryId
-            , _description = TF.Nil
-            , _name = _name
-            }
-
-instance TF.IsObject (TagResource s) where
-    toObject TagResource'{..} = P.catMaybes
-        [ TF.assign "category_id" <$> TF.attribute _categoryId
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance TF.IsValid (TagResource s) where
-    validator = P.mempty
-
-instance P.HasCategoryId (TagResource s) (TF.Attr s P.Text) where
-    categoryId =
-        P.lens (_categoryId :: TagResource s -> TF.Attr s P.Text)
-               (\s a -> s { _categoryId = a } :: TagResource s)
-
-instance P.HasDescription (TagResource s) (TF.Attr s P.Text) where
-    description =
-        P.lens (_description :: TagResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: TagResource s)
-
-instance P.HasName (TagResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: TagResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: TagResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (TagResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
 -- | @vsphere_tag_category@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/vsphere/r/tag_category.html terraform documentation>
@@ -5555,6 +5494,67 @@ instance P.HasName (TagCategoryResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: TagCategoryResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (TagCategoryResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @vsphere_tag@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/tag.html terraform documentation>
+-- for more information.
+data TagResource s = TagResource'
+    { _categoryId  :: TF.Attr s P.Text
+    -- ^ @category_id@ - (Required, Forces New)
+    -- The unique identifier of the parent category in which this tag will be
+    -- created.
+    --
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    -- The description of the tag.
+    --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The display name of the tag. The name must be unique within its category.
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @vsphere_tag@ resource value.
+tagResource
+    :: TF.Attr s P.Text -- ^ @category_id@ ('P._categoryId', 'P.categoryId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (TagResource s)
+tagResource _categoryId _name =
+    TF.unsafeResource "vsphere_tag" TF.validator $
+        TagResource'
+            { _categoryId = _categoryId
+            , _description = TF.Nil
+            , _name = _name
+            }
+
+instance TF.IsObject (TagResource s) where
+    toObject TagResource'{..} = P.catMaybes
+        [ TF.assign "category_id" <$> TF.attribute _categoryId
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (TagResource s) where
+    validator = P.mempty
+
+instance P.HasCategoryId (TagResource s) (TF.Attr s P.Text) where
+    categoryId =
+        P.lens (_categoryId :: TagResource s -> TF.Attr s P.Text)
+               (\s a -> s { _categoryId = a } :: TagResource s)
+
+instance P.HasDescription (TagResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: TagResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: TagResource s)
+
+instance P.HasName (TagResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: TagResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: TagResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TagResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @vsphere_vapp_container@ Resource.

@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.VSphere
+    - Terrafomo.VSphere.DataSources
+    - Terrafomo.VSphere.Lens
+    - Terrafomo.VSphere.Provider
+    - Terrafomo.VSphere.Resources
+    - Terrafomo.VSphere.Settings
+    - Terrafomo.VSphere.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

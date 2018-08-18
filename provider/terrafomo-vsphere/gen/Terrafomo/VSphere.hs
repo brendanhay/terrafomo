@@ -13,17 +13,17 @@
 --
 module Terrafomo.VSphere
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.VSphere.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.VSphere.Types
 
-    -- * DataSources
-    , module Terrafomo.VSphere.DataSource
-
     -- * Resources
-    , module Terrafomo.VSphere.Resource
+    , module Terrafomo.VSphere.Resources
+
+    -- * DataSources
+    , module Terrafomo.VSphere.DataSources
 
     -- * Settings
     , module Terrafomo.VSphere.Settings
@@ -32,9 +32,9 @@ module Terrafomo.VSphere
     , module Terrafomo.VSphere.Lens
     ) where
 
-import Terrafomo.VSphere.DataSource
+import Terrafomo.VSphere.DataSources
 import Terrafomo.VSphere.Lens
 import Terrafomo.VSphere.Provider
-import Terrafomo.VSphere.Resource
+import Terrafomo.VSphere.Resources
 import Terrafomo.VSphere.Settings
 import Terrafomo.VSphere.Types
