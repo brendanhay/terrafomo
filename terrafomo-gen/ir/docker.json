@@ -58,6 +58,7 @@
                     "original": "username"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.auth",
             "name": "AuthSetting",
             "threaded": true,
@@ -111,6 +112,7 @@
                     "original": "propagation"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.task_spec.container_spec.mounts.bind_options",
             "name": "BindOptionsSetting",
             "threaded": true,
@@ -161,6 +163,7 @@
                     "original": "drop"
                 }
             ],
+            "dependencies": [],
             "key": "docker_container.capabilities",
             "name": "CapabilitiesSetting",
             "threaded": true,
@@ -236,6 +239,7 @@
                     "original": "file_name"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.task_spec.container_spec.configs",
             "name": "ConfigsSetting",
             "threaded": true,
@@ -674,6 +678,17 @@
                     "original": "user"
                 }
             ],
+            "dependencies": [
+                "ConfigsSetting",
+                "DnsConfigSetting",
+                "HealthcheckSetting",
+                "HostsSetting",
+                "MountsSetting",
+                "PrivilegesSetting",
+                "SecretsSetting",
+                "DnsConfigSetting",
+                "HealthcheckSetting"
+            ],
             "key": "docker_service.task_spec.container_spec",
             "name": "ContainerSpecSetting",
             "threaded": true,
@@ -808,6 +823,7 @@
                     "original": "timeout"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.converge_config",
             "name": "ConvergeConfigSetting",
             "threaded": true,
@@ -862,6 +878,7 @@
                     "original": "registry"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.task_spec.container_spec.privileges.credential_spec",
             "name": "CredentialSpecSetting",
             "threaded": true,
@@ -929,6 +946,7 @@
                     "original": "permissions"
                 }
             ],
+            "dependencies": [],
             "key": "docker_container.devices",
             "name": "DevicesSetting",
             "threaded": true,
@@ -1021,6 +1039,7 @@
                     "original": "search"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.task_spec.container_spec.dns_config",
             "name": "DnsConfigSetting",
             "threaded": true,
@@ -1096,6 +1115,9 @@
                     "original": "ports"
                 }
             ],
+            "dependencies": [
+                "PortsSetting"
+            ],
             "key": "docker_service.endpoint_spec",
             "name": "EndpointSpecSetting",
             "threaded": true,
@@ -1170,6 +1192,7 @@
                     "original": "named_resources_spec"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.task_spec.resources.limits.generic_resources",
             "name": "GenericResourcesSetting",
             "threaded": true,
@@ -1282,6 +1305,7 @@
                     "original": "timeout"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.task_spec.container_spec.healthcheck",
             "name": "HealthcheckSetting",
             "threaded": true,
@@ -1352,6 +1376,7 @@
                     "original": "ip"
                 }
             ],
+            "dependencies": [],
             "key": "docker_container.host",
             "name": "HostSetting",
             "threaded": true,
@@ -1437,6 +1462,7 @@
                     "original": "ip"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.task_spec.container_spec.hosts",
             "name": "HostsSetting",
             "threaded": true,
@@ -1556,6 +1582,7 @@
                     "original": "subnet"
                 }
             ],
+            "dependencies": [],
             "key": "docker_network.ipam_config",
             "name": "IpamConfigSetting",
             "threaded": true,
@@ -1631,6 +1658,9 @@
                     "original": "nano_cpus"
                 }
             ],
+            "dependencies": [
+                "GenericResourcesSetting"
+            ],
             "key": "docker_service.task_spec.resources.limits",
             "name": "LimitsSetting",
             "threaded": true,
@@ -1686,6 +1716,7 @@
                     "original": "options"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.task_spec.log_driver",
             "name": "LogDriverSetting",
             "threaded": true,
@@ -1772,6 +1803,10 @@
                     "optional": true,
                     "original": "replicated"
                 }
+            ],
+            "dependencies": [
+                "ReplicatedSetting",
+                "ReplicatedSetting"
             ],
             "key": "docker_service.mode",
             "name": "ModeSetting",
@@ -1995,6 +2030,11 @@
                     "original": "volume_options"
                 }
             ],
+            "dependencies": [
+                "BindOptionsSetting",
+                "TmpfsOptionsSetting",
+                "VolumeOptionsSetting"
+            ],
             "key": "docker_service.task_spec.container_spec.mounts",
             "name": "MountsSetting",
             "threaded": true,
@@ -2128,6 +2168,9 @@
                     "original": "prefs"
                 }
             ],
+            "dependencies": [
+                "PlatformsSetting"
+            ],
             "key": "docker_service.task_spec.placement",
             "name": "PlacementSetting",
             "threaded": true,
@@ -2182,6 +2225,7 @@
                     "original": "os"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.task_spec.placement.platforms",
             "name": "PlatformsSetting",
             "threaded": true,
@@ -2382,6 +2426,7 @@
                     "original": "target_port"
                 }
             ],
+            "dependencies": [],
             "key": "docker_container.ports",
             "name": "PortsSetting",
             "threaded": true,
@@ -2472,6 +2517,10 @@
                     "optional": true,
                     "original": "se_linux_context"
                 }
+            ],
+            "dependencies": [
+                "CredentialSpecSetting",
+                "SeLinuxContextSetting"
             ],
             "key": "docker_service.task_spec.container_spec.privileges",
             "name": "PrivilegesSetting",
@@ -2588,6 +2637,7 @@
                     "original": "username"
                 }
             ],
+            "dependencies": [],
             "key": "provider.registry_auth",
             "name": "RegistryAuthSetting",
             "threaded": false,
@@ -2724,6 +2774,7 @@
                     "original": "replicas"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.mode.replicated",
             "name": "ReplicatedSetting",
             "threaded": true,
@@ -2799,6 +2850,9 @@
                     "original": "nano_cpus"
                 }
             ],
+            "dependencies": [
+                "GenericResourcesSetting"
+            ],
             "key": "docker_service.task_spec.resources.reservation",
             "name": "ReservationSetting",
             "threaded": true,
@@ -2854,6 +2908,10 @@
                     "optional": true,
                     "original": "reservation"
                 }
+            ],
+            "dependencies": [
+                "LimitsSetting",
+                "ReservationSetting"
             ],
             "key": "docker_service.task_spec.resources",
             "name": "ResourcesSetting",
@@ -2949,6 +3007,7 @@
                     "original": "window"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.task_spec.restart_policy",
             "name": "RestartPolicySetting",
             "threaded": true,
@@ -3079,6 +3138,7 @@
                     "original": "parallelism"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.rollback_config",
             "name": "RollbackConfigSetting",
             "threaded": true,
@@ -3190,6 +3250,7 @@
                     "original": "user"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.task_spec.container_spec.privileges.se_linux_context",
             "name": "SeLinuxContextSetting",
             "threaded": true,
@@ -3265,6 +3326,7 @@
                     "original": "secret_name"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.task_spec.container_spec.secrets",
             "name": "SecretsSetting",
             "threaded": true,
@@ -3479,6 +3541,16 @@
                     "original": "runtime"
                 }
             ],
+            "dependencies": [
+                "ContainerSpecSetting",
+                "LogDriverSetting",
+                "PlacementSetting",
+                "ResourcesSetting",
+                "RestartPolicySetting",
+                "PlacementSetting",
+                "ResourcesSetting",
+                "RestartPolicySetting"
+            ],
             "key": "docker_service.task_spec",
             "name": "TaskSpecSetting",
             "threaded": true,
@@ -3654,6 +3726,7 @@
                     "original": "size_bytes"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.task_spec.container_spec.mounts.tmpfs_options",
             "name": "TmpfsOptionsSetting",
             "threaded": true,
@@ -3721,6 +3794,7 @@
                     "original": "soft"
                 }
             ],
+            "dependencies": [],
             "key": "docker_container.ulimit",
             "name": "UlimitSetting",
             "threaded": true,
@@ -3903,6 +3977,7 @@
                     "original": "parallelism"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.update_config",
             "name": "UpdateConfigSetting",
             "threaded": true,
@@ -3970,6 +4045,7 @@
                     "original": "file"
                 }
             ],
+            "dependencies": [],
             "key": "docker_container.upload",
             "name": "UploadSetting",
             "threaded": true,
@@ -4097,6 +4173,7 @@
                     "original": "no_copy"
                 }
             ],
+            "dependencies": [],
             "key": "docker_service.task_spec.container_spec.mounts.volume_options",
             "name": "VolumeOptionsSetting",
             "threaded": true,
@@ -4198,6 +4275,7 @@
                     "original": "volume_name"
                 }
             ],
+            "dependencies": [],
             "key": "docker_container.volumes",
             "name": "VolumesSetting",
             "threaded": true,
@@ -4235,6 +4313,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/docker/d/registry_image.html",
+            "dependencies": [],
             "key": "docker_registry_image",
             "name": "RegistryImageData",
             "threaded": true,
@@ -4327,6 +4406,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/docker/r/config.html",
+            "dependencies": [],
             "key": "docker_config",
             "name": "ConfigResource",
             "threaded": true,
@@ -4962,6 +5042,15 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/docker/r/container.html",
+            "dependencies": [
+                "CapabilitiesSetting",
+                "DevicesSetting",
+                "HostSetting",
+                "PortsSetting",
+                "UlimitSetting",
+                "UploadSetting",
+                "VolumesSetting"
+            ],
             "key": "docker_container",
             "name": "ContainerResource",
             "threaded": true,
@@ -5151,6 +5240,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/docker/r/image.html",
+            "dependencies": [],
             "key": "docker_image",
             "name": "ImageResource",
             "threaded": true,
@@ -5340,6 +5430,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/docker/r/network.html",
+            "dependencies": [
+                "IpamConfigSetting"
+            ],
             "key": "docker_network",
             "name": "NetworkResource",
             "threaded": true,
@@ -5499,6 +5592,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/docker/r/secret.html",
+            "dependencies": [],
             "key": "docker_secret",
             "name": "SecretResource",
             "threaded": true,
@@ -5743,6 +5837,17 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/docker/r/service.html",
+            "dependencies": [
+                "AuthSetting",
+                "ConvergeConfigSetting",
+                "EndpointSpecSetting",
+                "ModeSetting",
+                "RollbackConfigSetting",
+                "TaskSpecSetting",
+                "UpdateConfigSetting",
+                "EndpointSpecSetting",
+                "ModeSetting"
+            ],
             "key": "docker_service",
             "name": "ServiceResource",
             "threaded": true,
@@ -5925,6 +6030,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/docker/r/volume.html",
+            "dependencies": [],
             "key": "docker_volume",
             "name": "VolumeResource",
             "threaded": true,
@@ -6122,6 +6228,9 @@
                 "optional": true,
                 "original": "registry_auth"
             }
+        ],
+        "dependencies": [
+            "RegistryAuthSetting"
         ],
         "key": "provider",
         "name": "Provider",
