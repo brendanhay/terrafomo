@@ -6,6 +6,7 @@
                 "name": "ReceivingRecordsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "mailgun_domain.receiving_records",
             "name": "ReceivingRecordsSetting",
             "threaded": true,
@@ -90,6 +91,7 @@
                 "name": "SendingRecordsSetting'"
             },
             "arguments": [],
+            "dependencies": [],
             "key": "mailgun_domain.sending_records",
             "name": "SendingRecordsSetting",
             "threaded": true,
@@ -265,6 +267,10 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/mailgun/r/domain.html",
+            "dependencies": [
+                "ReceivingRecordsSetting",
+                "SendingRecordsSetting"
+            ],
             "key": "mailgun_domain",
             "name": "DomainResource",
             "threaded": true,
@@ -437,6 +443,7 @@
                 "original": "api_key"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
