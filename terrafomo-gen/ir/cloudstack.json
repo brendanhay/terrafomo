@@ -41,6 +41,7 @@
                     "original": "value"
                 }
             ],
+            "dependencies": [],
             "key": "cloudstack_template.filter",
             "name": "FilterSetting",
             "threaded": true,
@@ -177,6 +178,7 @@
                     "original": "vm_guest_ip"
                 }
             ],
+            "dependencies": [],
             "key": "cloudstack_port_forward.forward",
             "name": "ForwardSetting",
             "threaded": true,
@@ -416,6 +418,7 @@
                     "original": "user_security_group_list"
                 }
             ],
+            "dependencies": [],
             "key": "cloudstack_egress_firewall.rule",
             "name": "RuleSetting",
             "threaded": true,
@@ -574,6 +577,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/d/template.html",
+            "dependencies": [
+                "FilterSetting"
+            ],
             "key": "cloudstack_template",
             "name": "TemplateData",
             "threaded": true,
@@ -867,6 +873,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/affinity_group.html",
+            "dependencies": [],
             "key": "cloudstack_affinity_group",
             "name": "AffinityGroupResource",
             "threaded": true,
@@ -1124,6 +1131,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/disk.html",
+            "dependencies": [],
             "key": "cloudstack_disk",
             "name": "DiskResource",
             "threaded": true,
@@ -1330,6 +1338,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/egress_firewall.html",
+            "dependencies": [
+                "RuleSetting"
+            ],
             "key": "cloudstack_egress_firewall",
             "name": "EgressFirewallResource",
             "threaded": true,
@@ -1451,6 +1462,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/firewall.html",
+            "dependencies": [
+                "RuleSetting"
+            ],
             "key": "cloudstack_firewall",
             "name": "FirewallResource",
             "threaded": true,
@@ -1834,6 +1848,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/instance.html",
+            "dependencies": [],
             "key": "cloudstack_instance",
             "name": "InstanceResource",
             "threaded": true,
@@ -2252,6 +2267,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/ipaddress.html",
+            "dependencies": [],
             "key": "cloudstack_ipaddress",
             "name": "IpaddressResource",
             "threaded": true,
@@ -2508,6 +2524,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/loadbalancer_rule.html",
+            "dependencies": [],
             "key": "cloudstack_loadbalancer_rule",
             "name": "LoadbalancerRuleResource",
             "threaded": true,
@@ -2935,6 +2952,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/network.html",
+            "dependencies": [],
             "key": "cloudstack_network",
             "name": "NetworkResource",
             "threaded": true,
@@ -3226,6 +3244,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/network_acl.html",
+            "dependencies": [],
             "key": "cloudstack_network_acl",
             "name": "NetworkAclResource",
             "threaded": true,
@@ -3398,6 +3417,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/network_acl_rule.html",
+            "dependencies": [
+                "RuleSetting"
+            ],
             "key": "cloudstack_network_acl_rule",
             "name": "NetworkAclRuleResource",
             "threaded": true,
@@ -3502,6 +3524,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/nic.html",
+            "dependencies": [],
             "key": "cloudstack_nic",
             "name": "NicResource",
             "threaded": true,
@@ -3657,6 +3680,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/port_forward.html",
+            "dependencies": [
+                "ForwardSetting"
+            ],
             "key": "cloudstack_port_forward",
             "name": "PortForwardResource",
             "threaded": true,
@@ -3863,6 +3889,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/private_gateway.html",
+            "dependencies": [],
             "key": "cloudstack_private_gateway",
             "name": "PrivateGatewayResource",
             "threaded": true,
@@ -4052,6 +4079,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/secondary_ipaddress.html",
+            "dependencies": [],
             "key": "cloudstack_secondary_ipaddress",
             "name": "SecondaryIpaddressResource",
             "threaded": true,
@@ -4190,6 +4218,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/security_group.html",
+            "dependencies": [],
             "key": "cloudstack_security_group",
             "name": "SecurityGroupResource",
             "threaded": true,
@@ -4345,6 +4374,9 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/security_group_rule.html",
+            "dependencies": [
+                "RuleSetting"
+            ],
             "key": "cloudstack_security_group_rule",
             "name": "SecurityGroupRuleResource",
             "threaded": true,
@@ -4466,6 +4498,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/ssh_keypair.html",
+            "dependencies": [],
             "key": "cloudstack_ssh_keypair",
             "name": "SshKeypairResource",
             "threaded": true,
@@ -4621,6 +4654,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/static_nat.html",
+            "dependencies": [],
             "key": "cloudstack_static_nat",
             "name": "StaticNatResource",
             "threaded": true,
@@ -4759,6 +4793,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/static_route.html",
+            "dependencies": [],
             "key": "cloudstack_static_route",
             "name": "StaticRouteResource",
             "threaded": true,
@@ -5084,6 +5119,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/template.html",
+            "dependencies": [],
             "key": "cloudstack_template",
             "name": "TemplateResource",
             "threaded": true,
@@ -5511,6 +5547,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/vpc.html",
+            "dependencies": [],
             "key": "cloudstack_vpc",
             "name": "VpcResource",
             "threaded": true,
@@ -5734,6 +5771,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/vpn_connection.html",
+            "dependencies": [],
             "key": "cloudstack_vpn_connection",
             "name": "VpnConnectionResource",
             "threaded": true,
@@ -5974,6 +6012,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/vpn_customer_gateway.html",
+            "dependencies": [],
             "key": "cloudstack_vpn_customer_gateway",
             "name": "VpnCustomerGatewayResource",
             "threaded": true,
@@ -6197,6 +6236,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/cloudstack/r/vpn_gateway.html",
+            "dependencies": [],
             "key": "cloudstack_vpn_gateway",
             "name": "VpnGatewayResource",
             "threaded": true,
@@ -6451,6 +6491,7 @@
                 "original": "timeout"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
