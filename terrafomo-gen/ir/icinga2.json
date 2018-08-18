@@ -81,6 +81,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/icinga2/r/checkcommand.html",
+            "dependencies": [],
             "key": "icinga2_checkcommand",
             "name": "CheckcommandResource",
             "threaded": true,
@@ -274,6 +275,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/icinga2/r/host.html",
+            "dependencies": [],
             "key": "icinga2_host",
             "name": "HostResource",
             "threaded": true,
@@ -401,6 +403,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/icinga2/r/hostgroup.html",
+            "dependencies": [],
             "key": "icinga2_hostgroup",
             "name": "HostgroupResource",
             "threaded": true,
@@ -594,6 +597,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/icinga2/r/notification.html",
+            "dependencies": [],
             "key": "icinga2_notification",
             "name": "NotificationResource",
             "threaded": true,
@@ -721,6 +725,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/icinga2/r/service.html",
+            "dependencies": [],
             "key": "icinga2_service",
             "name": "ServiceResource",
             "threaded": true,
@@ -850,6 +855,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/icinga2/r/user.html",
+            "dependencies": [],
             "key": "icinga2_user",
             "name": "UserResource",
             "threaded": true,
@@ -981,6 +987,7 @@
                 "original": "insecure_skip_tls_verify"
             }
         ],
+        "dependencies": [],
         "key": "provider",
         "name": "Provider",
         "threaded": false,
