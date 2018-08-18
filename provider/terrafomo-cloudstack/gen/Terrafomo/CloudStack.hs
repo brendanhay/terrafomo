@@ -13,17 +13,17 @@
 --
 module Terrafomo.CloudStack
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.CloudStack.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.CloudStack.Types
 
-    -- * DataSources
-    , module Terrafomo.CloudStack.DataSource
-
     -- * Resources
-    , module Terrafomo.CloudStack.Resource
+    , module Terrafomo.CloudStack.Resources
+
+    -- * DataSources
+    , module Terrafomo.CloudStack.DataSources
 
     -- * Settings
     , module Terrafomo.CloudStack.Settings
@@ -32,9 +32,9 @@ module Terrafomo.CloudStack
     , module Terrafomo.CloudStack.Lens
     ) where
 
-import Terrafomo.CloudStack.DataSource
+import Terrafomo.CloudStack.DataSources
 import Terrafomo.CloudStack.Lens
 import Terrafomo.CloudStack.Provider
-import Terrafomo.CloudStack.Resource
+import Terrafomo.CloudStack.Resources
 import Terrafomo.CloudStack.Settings
 import Terrafomo.CloudStack.Types

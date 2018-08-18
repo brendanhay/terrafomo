@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.CloudStack.Resource
+-- Module      : Terrafomo.CloudStack.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.CloudStack.Resource
+module Terrafomo.CloudStack.Resource01
     (
     -- ** cloudstack_affinity_group
       AffinityGroupResource (..)
@@ -45,10 +45,6 @@ module Terrafomo.CloudStack.Resource
     , LoadbalancerRuleResource (..)
     , loadbalancerRuleResource
 
-    -- ** cloudstack_network
-    , NetworkResource (..)
-    , networkResource
-
     -- ** cloudstack_network_acl
     , NetworkAclResource (..)
     , networkAclResource
@@ -56,6 +52,10 @@ module Terrafomo.CloudStack.Resource
     -- ** cloudstack_network_acl_rule
     , NetworkAclRuleResource (..)
     , networkAclRuleResource
+
+    -- ** cloudstack_network
+    , NetworkResource (..)
+    , networkResource
 
     -- ** cloudstack_nic
     , NicResource (..)
@@ -979,6 +979,152 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (LoadbalancerRuleResource s))
 instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (LoadbalancerRuleResource s)) (TF.Attr s P.Text) where
     computedProtocol x = TF.compute (TF.refKey x) "protocol"
 
+-- | @cloudstack_network_acl@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/cloudstack/r/network_acl.html terraform documentation>
+-- for more information.
+data NetworkAclResource s = NetworkAclResource'
+    { _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional, Forces New)
+    --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _vpcId       :: TF.Attr s P.Text
+    -- ^ @vpc_id@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @cloudstack_network_acl@ resource value.
+networkAclResource
+    :: TF.Attr s P.Text -- ^ @vpc_id@ ('P._vpcId', 'P.vpcId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (NetworkAclResource s)
+networkAclResource _vpcId _name =
+    TF.unsafeResource "cloudstack_network_acl" TF.validator $
+        NetworkAclResource'
+            { _description = TF.Nil
+            , _name = _name
+            , _project = TF.Nil
+            , _vpcId = _vpcId
+            }
+
+instance TF.IsObject (NetworkAclResource s) where
+    toObject NetworkAclResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "vpc_id" <$> TF.attribute _vpcId
+        ]
+
+instance TF.IsValid (NetworkAclResource s) where
+    validator = P.mempty
+
+instance P.HasDescription (NetworkAclResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: NetworkAclResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: NetworkAclResource s)
+
+instance P.HasName (NetworkAclResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: NetworkAclResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: NetworkAclResource s)
+
+instance P.HasProject (NetworkAclResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: NetworkAclResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: NetworkAclResource s)
+
+instance P.HasVpcId (NetworkAclResource s) (TF.Attr s P.Text) where
+    vpcId =
+        P.lens (_vpcId :: NetworkAclResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vpcId = a } :: NetworkAclResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkAclResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (NetworkAclResource s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+-- | @cloudstack_network_acl_rule@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/cloudstack/r/network_acl_rule.html terraform documentation>
+-- for more information.
+data NetworkAclRuleResource s = NetworkAclRuleResource'
+    { _aclId       :: TF.Attr s P.Text
+    -- ^ @acl_id@ - (Required, Forces New)
+    --
+    , _managed     :: TF.Attr s P.Bool
+    -- ^ @managed@ - (Optional)
+    --
+    , _parallelism :: TF.Attr s P.Int
+    -- ^ @parallelism@ - (Optional)
+    --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _rule        :: TF.Attr s [TF.Attr s (RuleSetting s)]
+    -- ^ @rule@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @cloudstack_network_acl_rule@ resource value.
+networkAclRuleResource
+    :: TF.Attr s P.Text -- ^ @acl_id@ ('P._aclId', 'P.aclId')
+    -> P.Resource (NetworkAclRuleResource s)
+networkAclRuleResource _aclId =
+    TF.unsafeResource "cloudstack_network_acl_rule" TF.validator $
+        NetworkAclRuleResource'
+            { _aclId = _aclId
+            , _managed = TF.value P.False
+            , _parallelism = TF.value 2
+            , _project = TF.Nil
+            , _rule = TF.Nil
+            }
+
+instance TF.IsObject (NetworkAclRuleResource s) where
+    toObject NetworkAclRuleResource'{..} = P.catMaybes
+        [ TF.assign "acl_id" <$> TF.attribute _aclId
+        , TF.assign "managed" <$> TF.attribute _managed
+        , TF.assign "parallelism" <$> TF.attribute _parallelism
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "rule" <$> TF.attribute _rule
+        ]
+
+instance TF.IsValid (NetworkAclRuleResource s) where
+    validator = P.mempty
+
+instance P.HasAclId (NetworkAclRuleResource s) (TF.Attr s P.Text) where
+    aclId =
+        P.lens (_aclId :: NetworkAclRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _aclId = a } :: NetworkAclRuleResource s)
+
+instance P.HasManaged (NetworkAclRuleResource s) (TF.Attr s P.Bool) where
+    managed =
+        P.lens (_managed :: NetworkAclRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _managed = a } :: NetworkAclRuleResource s)
+
+instance P.HasParallelism (NetworkAclRuleResource s) (TF.Attr s P.Int) where
+    parallelism =
+        P.lens (_parallelism :: NetworkAclRuleResource s -> TF.Attr s P.Int)
+               (\s a -> s { _parallelism = a } :: NetworkAclRuleResource s)
+
+instance P.HasProject (NetworkAclRuleResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: NetworkAclRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: NetworkAclRuleResource s)
+
+instance P.HasRule (NetworkAclRuleResource s) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
+    rule =
+        P.lens (_rule :: NetworkAclRuleResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
+               (\s a -> s { _rule = a } :: NetworkAclRuleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkAclRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @cloudstack_network@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/cloudstack/r/network.html terraform documentation>
@@ -1168,152 +1314,6 @@ instance s ~ s' => P.HasComputedStartip (TF.Ref s' (NetworkResource s)) (TF.Attr
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "tags"
-
--- | @cloudstack_network_acl@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/cloudstack/r/network_acl.html terraform documentation>
--- for more information.
-data NetworkAclResource s = NetworkAclResource'
-    { _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional, Forces New)
-    --
-    , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    , _project     :: TF.Attr s P.Text
-    -- ^ @project@ - (Optional, Forces New)
-    --
-    , _vpcId       :: TF.Attr s P.Text
-    -- ^ @vpc_id@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @cloudstack_network_acl@ resource value.
-networkAclResource
-    :: TF.Attr s P.Text -- ^ @vpc_id@ ('P._vpcId', 'P.vpcId')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> P.Resource (NetworkAclResource s)
-networkAclResource _vpcId _name =
-    TF.unsafeResource "cloudstack_network_acl" TF.validator $
-        NetworkAclResource'
-            { _description = TF.Nil
-            , _name = _name
-            , _project = TF.Nil
-            , _vpcId = _vpcId
-            }
-
-instance TF.IsObject (NetworkAclResource s) where
-    toObject NetworkAclResource'{..} = P.catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "vpc_id" <$> TF.attribute _vpcId
-        ]
-
-instance TF.IsValid (NetworkAclResource s) where
-    validator = P.mempty
-
-instance P.HasDescription (NetworkAclResource s) (TF.Attr s P.Text) where
-    description =
-        P.lens (_description :: NetworkAclResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: NetworkAclResource s)
-
-instance P.HasName (NetworkAclResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: NetworkAclResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: NetworkAclResource s)
-
-instance P.HasProject (NetworkAclResource s) (TF.Attr s P.Text) where
-    project =
-        P.lens (_project :: NetworkAclResource s -> TF.Attr s P.Text)
-               (\s a -> s { _project = a } :: NetworkAclResource s)
-
-instance P.HasVpcId (NetworkAclResource s) (TF.Attr s P.Text) where
-    vpcId =
-        P.lens (_vpcId :: NetworkAclResource s -> TF.Attr s P.Text)
-               (\s a -> s { _vpcId = a } :: NetworkAclResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkAclResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (NetworkAclResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
-
--- | @cloudstack_network_acl_rule@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/cloudstack/r/network_acl_rule.html terraform documentation>
--- for more information.
-data NetworkAclRuleResource s = NetworkAclRuleResource'
-    { _aclId       :: TF.Attr s P.Text
-    -- ^ @acl_id@ - (Required, Forces New)
-    --
-    , _managed     :: TF.Attr s P.Bool
-    -- ^ @managed@ - (Optional)
-    --
-    , _parallelism :: TF.Attr s P.Int
-    -- ^ @parallelism@ - (Optional)
-    --
-    , _project     :: TF.Attr s P.Text
-    -- ^ @project@ - (Optional, Forces New)
-    --
-    , _rule        :: TF.Attr s [TF.Attr s (RuleSetting s)]
-    -- ^ @rule@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @cloudstack_network_acl_rule@ resource value.
-networkAclRuleResource
-    :: TF.Attr s P.Text -- ^ @acl_id@ ('P._aclId', 'P.aclId')
-    -> P.Resource (NetworkAclRuleResource s)
-networkAclRuleResource _aclId =
-    TF.unsafeResource "cloudstack_network_acl_rule" TF.validator $
-        NetworkAclRuleResource'
-            { _aclId = _aclId
-            , _managed = TF.value P.False
-            , _parallelism = TF.value 2
-            , _project = TF.Nil
-            , _rule = TF.Nil
-            }
-
-instance TF.IsObject (NetworkAclRuleResource s) where
-    toObject NetworkAclRuleResource'{..} = P.catMaybes
-        [ TF.assign "acl_id" <$> TF.attribute _aclId
-        , TF.assign "managed" <$> TF.attribute _managed
-        , TF.assign "parallelism" <$> TF.attribute _parallelism
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "rule" <$> TF.attribute _rule
-        ]
-
-instance TF.IsValid (NetworkAclRuleResource s) where
-    validator = P.mempty
-
-instance P.HasAclId (NetworkAclRuleResource s) (TF.Attr s P.Text) where
-    aclId =
-        P.lens (_aclId :: NetworkAclRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _aclId = a } :: NetworkAclRuleResource s)
-
-instance P.HasManaged (NetworkAclRuleResource s) (TF.Attr s P.Bool) where
-    managed =
-        P.lens (_managed :: NetworkAclRuleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _managed = a } :: NetworkAclRuleResource s)
-
-instance P.HasParallelism (NetworkAclRuleResource s) (TF.Attr s P.Int) where
-    parallelism =
-        P.lens (_parallelism :: NetworkAclRuleResource s -> TF.Attr s P.Int)
-               (\s a -> s { _parallelism = a } :: NetworkAclRuleResource s)
-
-instance P.HasProject (NetworkAclRuleResource s) (TF.Attr s P.Text) where
-    project =
-        P.lens (_project :: NetworkAclRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _project = a } :: NetworkAclRuleResource s)
-
-instance P.HasRule (NetworkAclRuleResource s) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
-    rule =
-        P.lens (_rule :: NetworkAclRuleResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
-               (\s a -> s { _rule = a } :: NetworkAclRuleResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkAclRuleResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @cloudstack_nic@ Resource.
 --
