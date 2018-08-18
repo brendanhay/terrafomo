@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Datadog
+    - Terrafomo.Datadog.DataSources
+    - Terrafomo.Datadog.Lens
+    - Terrafomo.Datadog.Provider
+    - Terrafomo.Datadog.Resources
+    - Terrafomo.Datadog.Settings
+    - Terrafomo.Datadog.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

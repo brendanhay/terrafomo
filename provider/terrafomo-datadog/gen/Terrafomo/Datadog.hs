@@ -13,16 +13,17 @@
 --
 module Terrafomo.Datadog
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.Datadog.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.Datadog.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.Datadog.Resource
+    , module Terrafomo.Datadog.Resources
+
+    -- * DataSources
+    , module Terrafomo.Datadog.DataSources
 
     -- * Settings
     , module Terrafomo.Datadog.Settings
@@ -31,8 +32,9 @@ module Terrafomo.Datadog
     , module Terrafomo.Datadog.Lens
     ) where
 
+import Terrafomo.Datadog.DataSources
 import Terrafomo.Datadog.Lens
 import Terrafomo.Datadog.Provider
-import Terrafomo.Datadog.Resource
+import Terrafomo.Datadog.Resources
 import Terrafomo.Datadog.Settings
 import Terrafomo.Datadog.Types
