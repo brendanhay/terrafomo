@@ -1,19 +1,21 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE UndecidableInstances #-}
+
 -- |
--- Module      : Terrafomo.MySQL.Lens
+-- Module      : Terrafomo.MySQL.Attributes01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.MySQL.Lens
+module Terrafomo.MySQL.Attributes01
     (
-    -- * Lenses
-      module Terrafomo.MySQL.Arguments01
-    , module Terrafomo.MySQL.Attributes01
+    -- ** Attributes
+      HasComputedId (..)
     ) where
 
-import Terrafomo.MySQL.Arguments01
-import Terrafomo.MySQL.Attributes01
+class HasComputedId a b | a -> b where
+    computedId :: a -> b

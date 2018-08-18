@@ -8,14 +8,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.MySQL.Resource
+-- Module      : Terrafomo.MySQL.Resource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.MySQL.Resource
+module Terrafomo.MySQL.Resource01
     (
     -- ** mysql_database
       DatabaseResource (..)

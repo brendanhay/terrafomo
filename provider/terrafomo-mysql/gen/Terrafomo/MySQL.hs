@@ -13,16 +13,17 @@
 --
 module Terrafomo.MySQL
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.MySQL.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.MySQL.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.MySQL.Resource
+    , module Terrafomo.MySQL.Resources
+
+    -- * DataSources
+    , module Terrafomo.MySQL.DataSources
 
     -- * Settings
     , module Terrafomo.MySQL.Settings
@@ -31,8 +32,9 @@ module Terrafomo.MySQL
     , module Terrafomo.MySQL.Lens
     ) where
 
+import Terrafomo.MySQL.DataSources
 import Terrafomo.MySQL.Lens
 import Terrafomo.MySQL.Provider
-import Terrafomo.MySQL.Resource
+import Terrafomo.MySQL.Resources
 import Terrafomo.MySQL.Settings
 import Terrafomo.MySQL.Types

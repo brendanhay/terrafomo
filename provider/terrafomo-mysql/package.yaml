@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.MySQL
+    - Terrafomo.MySQL.DataSources
+    - Terrafomo.MySQL.Lens
+    - Terrafomo.MySQL.Provider
+    - Terrafomo.MySQL.Resources
+    - Terrafomo.MySQL.Settings
+    - Terrafomo.MySQL.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,
