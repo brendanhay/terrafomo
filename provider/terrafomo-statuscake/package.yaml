@@ -22,6 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.StatusCake
+    - Terrafomo.StatusCake.DataSources
+    - Terrafomo.StatusCake.Lens
+    - Terrafomo.StatusCake.Provider
+    - Terrafomo.StatusCake.Resources
+    - Terrafomo.StatusCake.Settings
+    - Terrafomo.StatusCake.Types
 
   reexported-modules: >
     terrafomo:Terrafomo,

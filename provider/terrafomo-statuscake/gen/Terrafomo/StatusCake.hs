@@ -13,16 +13,17 @@
 --
 module Terrafomo.StatusCake
     (
-    -- * Provider Datatype
+    -- * Provider
       module Terrafomo.StatusCake.Provider
 
-    -- * Custom Types
+    -- * Types
     , module Terrafomo.StatusCake.Types
 
-    -- * DataSources
-
     -- * Resources
-    , module Terrafomo.StatusCake.Resource
+    , module Terrafomo.StatusCake.Resources
+
+    -- * DataSources
+    , module Terrafomo.StatusCake.DataSources
 
     -- * Settings
     , module Terrafomo.StatusCake.Settings
@@ -31,8 +32,9 @@ module Terrafomo.StatusCake
     , module Terrafomo.StatusCake.Lens
     ) where
 
+import Terrafomo.StatusCake.DataSources
 import Terrafomo.StatusCake.Lens
 import Terrafomo.StatusCake.Provider
-import Terrafomo.StatusCake.Resource
+import Terrafomo.StatusCake.Resources
 import Terrafomo.StatusCake.Settings
 import Terrafomo.StatusCake.Types
