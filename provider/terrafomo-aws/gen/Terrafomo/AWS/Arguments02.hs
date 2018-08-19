@@ -14,11 +14,7 @@
 module Terrafomo.AWS.Arguments02
     (
     -- ** Arguments
-      HasContentDisposition (..)
-    , HasContentEncoding (..)
-    , HasContentHandling (..)
-    , HasContentLanguage (..)
-    , HasContentType (..)
+      HasContentType (..)
     , HasContext (..)
     , HasContinent (..)
     , HasContinuous (..)
@@ -300,6 +296,7 @@ module Terrafomo.AWS.Arguments02
     , HasEndpointType (..)
     , HasEndpoints (..)
     , HasEngine (..)
+    , HasEngineMode (..)
     , HasEngineName (..)
     , HasEngineType (..)
     , HasEngineVersion (..)
@@ -814,35 +811,14 @@ module Terrafomo.AWS.Arguments02
     , HasNumberAttributeConstraints (..)
     , HasNumberCacheClusters (..)
     , HasNumberOfBuckets (..)
+    , HasNumberOfDisks (..)
+    , HasNumberOfNodes (..)
+    , HasObjectAcl (..)
     ) where
 import GHC.Base ((.))
 
 import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
-
-class HasContentDisposition a b | a -> b where
-    contentDisposition :: P.Lens' a b
-
-instance HasContentDisposition a b => HasContentDisposition (TF.Schema l p a) b where
-    contentDisposition = TF.configuration . contentDisposition
-
-class HasContentEncoding a b | a -> b where
-    contentEncoding :: P.Lens' a b
-
-instance HasContentEncoding a b => HasContentEncoding (TF.Schema l p a) b where
-    contentEncoding = TF.configuration . contentEncoding
-
-class HasContentHandling a b | a -> b where
-    contentHandling :: P.Lens' a b
-
-instance HasContentHandling a b => HasContentHandling (TF.Schema l p a) b where
-    contentHandling = TF.configuration . contentHandling
-
-class HasContentLanguage a b | a -> b where
-    contentLanguage :: P.Lens' a b
-
-instance HasContentLanguage a b => HasContentLanguage (TF.Schema l p a) b where
-    contentLanguage = TF.configuration . contentLanguage
 
 class HasContentType a b | a -> b where
     contentType :: P.Lens' a b
@@ -2535,6 +2511,12 @@ class HasEngine a b | a -> b where
 
 instance HasEngine a b => HasEngine (TF.Schema l p a) b where
     engine = TF.configuration . engine
+
+class HasEngineMode a b | a -> b where
+    engineMode :: P.Lens' a b
+
+instance HasEngineMode a b => HasEngineMode (TF.Schema l p a) b where
+    engineMode = TF.configuration . engineMode
 
 class HasEngineName a b | a -> b where
     engineName :: P.Lens' a b
@@ -5619,3 +5601,21 @@ class HasNumberOfBuckets a b | a -> b where
 
 instance HasNumberOfBuckets a b => HasNumberOfBuckets (TF.Schema l p a) b where
     numberOfBuckets = TF.configuration . numberOfBuckets
+
+class HasNumberOfDisks a b | a -> b where
+    numberOfDisks :: P.Lens' a b
+
+instance HasNumberOfDisks a b => HasNumberOfDisks (TF.Schema l p a) b where
+    numberOfDisks = TF.configuration . numberOfDisks
+
+class HasNumberOfNodes a b | a -> b where
+    numberOfNodes :: P.Lens' a b
+
+instance HasNumberOfNodes a b => HasNumberOfNodes (TF.Schema l p a) b where
+    numberOfNodes = TF.configuration . numberOfNodes
+
+class HasObjectAcl a b | a -> b where
+    objectAcl :: P.Lens' a b
+
+instance HasObjectAcl a b => HasObjectAcl (TF.Schema l p a) b where
+    objectAcl = TF.configuration . objectAcl

@@ -152,7 +152,6 @@ instance IsValue TableAttributeType where
         TypeNumber -> "N"
         TypeBinary -> "B"
 
-
 -- 'aws_lb_ssl_negotiation_policy' Specific
 
 data LbSslNegotiationPolicyAttributeSetting s = LbSslNegotiationPolicyAttributeSetting'

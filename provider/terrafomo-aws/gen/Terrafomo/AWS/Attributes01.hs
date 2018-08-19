@@ -103,6 +103,7 @@ module Terrafomo.AWS.Attributes01
     , HasComputedCertificateChain (..)
     , HasComputedCertificateSigningRequest (..)
     , HasComputedCertificateUploadDate (..)
+    , HasComputedChapEnabled (..)
     , HasComputedCharacterSetName (..)
     , HasComputedCidrBlock (..)
     , HasComputedCidrBlockAssociations (..)
@@ -423,6 +424,7 @@ module Terrafomo.AWS.Attributes01
     , HasComputedLocalSecondaryIndex (..)
     , HasComputedLocation (..)
     , HasComputedLogPaths (..)
+    , HasComputedLunNumber (..)
     , HasComputedMacAddress (..)
     , HasComputedMain (..)
     , HasComputedMainRouteTableId (..)
@@ -464,6 +466,7 @@ module Terrafomo.AWS.Attributes01
     , HasComputedNetworkInterface (..)
     , HasComputedNetworkInterfaceId (..)
     , HasComputedNetworkInterfaceIds (..)
+    , HasComputedNetworkInterfacePort (..)
     , HasComputedNetworkMode (..)
     , HasComputedNoDevice (..)
     , HasComputedNodeType (..)
@@ -782,6 +785,7 @@ module Terrafomo.AWS.Attributes01
     , HasComputedVgwTelemetry (..)
     , HasComputedVirtualName (..)
     , HasComputedVirtualizationType (..)
+    , HasComputedVolumeArn (..)
     , HasComputedVolumeId (..)
     , HasComputedVolumeSize (..)
     , HasComputedVolumeTags (..)
@@ -1073,6 +1077,9 @@ class HasComputedCertificateSigningRequest a b | a -> b where
 
 class HasComputedCertificateUploadDate a b | a -> b where
     computedCertificateUploadDate :: a -> b
+
+class HasComputedChapEnabled a b | a -> b where
+    computedChapEnabled :: a -> b
 
 class HasComputedCharacterSetName a b | a -> b where
     computedCharacterSetName :: a -> b
@@ -2034,6 +2041,9 @@ class HasComputedLocation a b | a -> b where
 class HasComputedLogPaths a b | a -> b where
     computedLogPaths :: a -> b
 
+class HasComputedLunNumber a b | a -> b where
+    computedLunNumber :: a -> b
+
 class HasComputedMacAddress a b | a -> b where
     computedMacAddress :: a -> b
 
@@ -2156,6 +2166,9 @@ class HasComputedNetworkInterfaceId a b | a -> b where
 
 class HasComputedNetworkInterfaceIds a b | a -> b where
     computedNetworkInterfaceIds :: a -> b
+
+class HasComputedNetworkInterfacePort a b | a -> b where
+    computedNetworkInterfacePort :: a -> b
 
 class HasComputedNetworkMode a b | a -> b where
     computedNetworkMode :: a -> b
@@ -3110,6 +3123,9 @@ class HasComputedVirtualName a b | a -> b where
 
 class HasComputedVirtualizationType a b | a -> b where
     computedVirtualizationType :: a -> b
+
+class HasComputedVolumeArn a b | a -> b where
+    computedVolumeArn :: a -> b
 
 class HasComputedVolumeId a b | a -> b where
     computedVolumeId :: a -> b
