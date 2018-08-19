@@ -59,7 +59,7 @@ instance HasLifecycle (Schema (Lifecycle a) p a) a where
 
 instance ( HCL.IsObject l
          , HCL.IsObject a
-         ) => HCL.IsSection (Schema l Name a) where
+         ) => HCL.IsSection (Schema l Key a) where
     toSection Schema{..} =
         let k :| ks = _schemaKeywords
             common  = catMaybes
