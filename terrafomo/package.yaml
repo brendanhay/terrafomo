@@ -57,5 +57,7 @@ tests:
     dependencies:
       - hspec
       - hspec-discover
+      - prettyprinter
       - terrafomo
       - text
+      - QuickCheck
