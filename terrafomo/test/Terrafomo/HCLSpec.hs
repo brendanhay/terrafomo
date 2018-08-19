@@ -1,6 +1,6 @@
-module HCLSpec (spec) where
+module Terrafomo.HCLSpec (spec) where
 
-import HCL
+import Terrafomo.HCL
 
 import Test.Hspec
 import Test.QuickCheck (property, (===))

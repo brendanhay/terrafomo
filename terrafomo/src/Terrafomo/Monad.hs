@@ -305,7 +305,7 @@ define name x@Schema{_schemaProvider, _schemaConfig, _schemaValidator} =
         alias <- insertProvider _schemaProvider
 
         let value = HCL.toSection $
-                        x { _schemaProvider = keyName <$> alias
+                        x { _schemaProvider = alias
                           , _schemaKeywords =
                               _schemaKeywords x
                                   <> pure (HCL.type_ typ)
