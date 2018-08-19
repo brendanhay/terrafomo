@@ -50,6 +50,14 @@ field-overrides:
     destinationCidrBlock: 'TF.Attr s P.IPRange'
     destinationIpv6CidrBlock: 'TF.Attr s P.IPRange'
 
+
+  DynamodbTableResource:
+    attribute: 'TF.Attr s [TF.Attr s (P.DynamodbAttributeSetting s)]'
+
+  LbSslNegotiationPolicyResource:
+    attribute: 'TF.Attr s [TF.Attr s (P.LbSslNegotiationPolicyAttributeSetting s)]'
+
+
   # Settings
 
   AttributeSetting:

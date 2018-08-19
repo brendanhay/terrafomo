@@ -1,3 +1,5 @@
+{-# LANGUAGE RecordWildCards   #-}
+
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 -- |
@@ -27,10 +29,18 @@ module Terrafomo.AWS.Types
     , IAM.Policy
 
     -- ** DynamoDB
+    , DynamodbAttributeSetting (..)
+    , newDynamodbAttributeSetting
     , TableAttributeType (..)
+
+    -- **
+    , LbSslNegotiationPolicyAttributeSetting (..)
+    , newLbSslNegotiationPolicyAttributeSetting
     ) where
 
 import Data.IP (IPRange)
+import Data.Maybe (catMaybes)
+import Data.Text (Text)
 
 import Formatting (Format, (%))
 
@@ -103,6 +113,32 @@ instance IsValue NetworkProtocol where
 
 -- DynamoDB Specific
 
+data DynamodbAttributeSetting s = DynamodbAttributeSetting'
+    { _name  :: Attr s Text
+    -- ^ @name@ - (Required)
+    --
+    , _type' :: Attr s TableAttributeType
+    -- ^ @type@ - (Required)
+    --
+    } deriving (Show, Eq, Ord)
+
+newDynamodbAttributeSetting
+    :: Attr s Text -- ^ '_name': @name@
+    -> Attr s TableAttributeType -- ^ '_type'': @type@
+    -> DynamodbAttributeSetting s
+newDynamodbAttributeSetting _name _type' =
+    DynamodbAttributeSetting'
+        { _name = _name
+        , _type' = _type'
+        }
+
+instance IsValue  (DynamodbAttributeSetting s)
+instance IsObject (DynamodbAttributeSetting s) where
+    toObject DynamodbAttributeSetting'{..} = catMaybes
+        [ HCL.assign "name" <$> HCL.attribute _name
+        , HCL.assign "type" <$> HCL.attribute _type'
+        ]
+
 -- | One of: S, N, or B for (S)tring, (N)umber or (B)inary data.
 data TableAttributeType
     = TypeString
@@ -115,3 +151,32 @@ instance IsValue TableAttributeType where
         TypeString -> "S"
         TypeNumber -> "N"
         TypeBinary -> "B"
+
+
+-- 'aws_lb_ssl_negotiation_policy' Specific
+
+data LbSslNegotiationPolicyAttributeSetting s = LbSslNegotiationPolicyAttributeSetting'
+    { _name  :: Attr s Text
+    -- ^ @name@ - (Required)
+    --
+    , _value :: Attr s Text
+    -- ^ @value@ - (Required)
+    --
+    } deriving (Show, Eq, Ord)
+
+newLbSslNegotiationPolicyAttributeSetting
+    :: Attr s Text -- ^ '_name': @name@
+    -> Attr s Text -- ^ '_type'': @value@
+    -> LbSslNegotiationPolicyAttributeSetting s
+newLbSslNegotiationPolicyAttributeSetting _name _value =
+    LbSslNegotiationPolicyAttributeSetting'
+        { _name = _name
+        , _value = _value
+        }
+
+instance IsValue  (LbSslNegotiationPolicyAttributeSetting s)
+instance IsObject (LbSslNegotiationPolicyAttributeSetting s) where
+    toObject LbSslNegotiationPolicyAttributeSetting'{..} = catMaybes
+        [ HCL.assign "name" <$> HCL.attribute _name
+        , HCL.assign "value" <$> HCL.attribute _value
+        ]
