@@ -157,8 +157,8 @@ data Value
     -- ^ Lists of primitive types can be made with square brackets ([]). Example:
     -- ["foo", "bar", "baz"].
     | Map     !(Map Text Value)
-    -- ^ Maps can be made with braces ({}) and colons (:): { "foo": "bar",
-    -- "bar": "baz" }. Quotes may be omitted on keys, unless the key starts
+    -- ^ Maps can be made with braces ({}) and equals (=): { "foo"= "bar",
+    -- "bar"= "baz" }. Quotes may be omitted on keys, unless the key starts
     -- with a number, in which case quotes are required. Commas are required
     -- between key/value pairs for single line maps. A newline between
     -- key/value pairs is sufficient in multi-line maps.
@@ -180,7 +180,7 @@ instance Pretty Value where
         Bool    False           -> "false"
         List    xs              -> PP.nest 2 (PP.list (map pretty xs))
         Map     m               ->
-            let go (k, v) = PP.dquotes (pretty k) <> ": " <> pretty v
+            let go (k, v) = PP.dquotes (pretty k) <> "= " <> pretty v
              in prettyMap . PP.punctuate "," . map go $ Map.toList m
         Block   xs              -> prettyMap (map pretty xs)
 
