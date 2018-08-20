@@ -45,7 +45,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/logentries/d/logset.html",
             "dependencies": [],
-            "key": "logentries_logset",
+            "key": "logset",
             "name": "LogsetData",
             "threaded": true,
             "attributes": [
@@ -203,7 +203,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/logentries/r/log.html",
             "dependencies": [],
-            "key": "logentries_log",
+            "key": "log",
             "name": "LogResource",
             "threaded": true,
             "attributes": [
@@ -325,7 +325,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/logentries/r/logset.html",
             "dependencies": [],
-            "key": "logentries_logset",
+            "key": "logset",
             "name": "LogsetResource",
             "threaded": true,
             "attributes": [
@@ -398,7 +398,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

@@ -82,7 +82,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/icinga2/r/checkcommand.html",
             "dependencies": [],
-            "key": "icinga2_checkcommand",
+            "key": "checkcommand",
             "name": "CheckcommandResource",
             "threaded": true,
             "attributes": [
@@ -276,7 +276,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/icinga2/r/host.html",
             "dependencies": [],
-            "key": "icinga2_host",
+            "key": "host",
             "name": "HostResource",
             "threaded": true,
             "attributes": [
@@ -404,7 +404,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/icinga2/r/hostgroup.html",
             "dependencies": [],
-            "key": "icinga2_hostgroup",
+            "key": "hostgroup",
             "name": "HostgroupResource",
             "threaded": true,
             "attributes": [
@@ -598,7 +598,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/icinga2/r/notification.html",
             "dependencies": [],
-            "key": "icinga2_notification",
+            "key": "notification",
             "name": "NotificationResource",
             "threaded": true,
             "attributes": [
@@ -726,7 +726,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/icinga2/r/service.html",
             "dependencies": [],
-            "key": "icinga2_service",
+            "key": "service",
             "name": "ServiceResource",
             "threaded": true,
             "attributes": [
@@ -856,7 +856,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/icinga2/r/user.html",
             "dependencies": [],
-            "key": "icinga2_user",
+            "key": "user",
             "name": "UserResource",
             "threaded": true,
             "attributes": [
@@ -988,7 +988,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

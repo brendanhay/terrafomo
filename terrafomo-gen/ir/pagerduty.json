@@ -2,152 +2,139 @@
     "settings": [
         {
             "con": {
-                "smart": "newAtSetting",
-                "name": "AtSetting'"
+                "smart": "newEscalationPolicyRuleSetting",
+                "name": "EscalationPolicyRuleSetting'"
             },
             "arguments": [
                 {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": true,
-                    "original": "name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": true,
-                    "original": "type"
-                }
-            ],
-            "dependencies": [],
-            "key": "pagerduty_service.scheduled_actions.at",
-            "name": "AtSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "AtSetting s",
-            "original": "at"
-        },
-        {
-            "con": {
-                "smart": "newDuringSupportHoursSetting",
-                "name": "DuringSupportHoursSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": true,
-                    "original": "type"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"urgency\" <$> TF.attribute",
-                    "name": "_urgency",
-                    "method": "urgency",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasUrgency",
-                    "validate": false,
-                    "optional": true,
-                    "original": "urgency"
-                }
-            ],
-            "dependencies": [],
-            "key": "pagerduty_service.incident_urgency_rule.during_support_hours",
-            "name": "DuringSupportHoursSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "DuringSupportHoursSetting s",
-            "original": "during_support_hours"
-        },
-        {
-            "con": {
-                "smart": "newIncidentUrgencyRuleSetting",
-                "name": "IncidentUrgencyRuleSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"during_support_hours\" <$> TF.attribute",
-                    "name": "_duringSupportHours",
-                    "method": "duringSupportHours",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (DuringSupportHoursSetting s)",
-                    "class": "HasDuringSupportHours",
-                    "validate": true,
-                    "optional": true,
-                    "original": "during_support_hours"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"outside_support_hours\" <$> TF.attribute",
-                    "name": "_outsideSupportHours",
-                    "method": "outsideSupportHours",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (OutsideSupportHoursSetting s)",
-                    "class": "HasOutsideSupportHours",
-                    "validate": true,
-                    "optional": true,
-                    "original": "outside_support_hours"
-                },
-                {
-                    "default": "_type'",
+                    "default": "_escalationDelayInMinutes",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"escalation_delay_in_minutes\" <$> TF.attribute",
+                    "name": "_escalationDelayInMinutes",
+                    "method": "escalationDelayInMinutes",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasEscalationDelayInMinutes",
+                    "validate": false,
+                    "optional": false,
+                    "original": "escalation_delay_in_minutes"
+                },
+                {
+                    "default": "_target",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"target\" <$> TF.attribute",
+                    "name": "_target",
+                    "method": "target",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (EscalationPolicyRuleTargetSetting s)]",
+                    "class": "HasTarget",
+                    "validate": false,
+                    "optional": false,
+                    "original": "target"
+                }
+            ],
+            "dependencies": [
+                "EscalationPolicyRuleTargetSetting"
+            ],
+            "key": "escalation_policy.rule",
+            "name": "EscalationPolicyRuleSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_escalationDelayInMinutes",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"escalation_delay_in_minutes\" <$> TF.attribute",
+                    "name": "_escalationDelayInMinutes",
+                    "method": "escalationDelayInMinutes",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasEscalationDelayInMinutes",
+                    "validate": false,
+                    "optional": false,
+                    "original": "escalation_delay_in_minutes"
+                },
+                {
+                    "default": "_target",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"target\" <$> TF.attribute",
+                    "name": "_target",
+                    "method": "target",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (EscalationPolicyRuleTargetSetting s)]",
+                    "class": "HasTarget",
+                    "validate": false,
+                    "optional": false,
+                    "original": "target"
+                }
+            ],
+            "conflicts": [],
+            "type": "EscalationPolicyRuleSetting s",
+            "original": "rule"
+        },
+        {
+            "con": {
+                "smart": "newEscalationPolicyRuleTargetSetting",
+                "name": "EscalationPolicyRuleTargetSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_id",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_id",
+                    "method": "id",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
+                {
+                    "default": "TF.value \"user_reference\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
                     "name": "_type'",
                     "method": "type'",
@@ -156,37 +143,154 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
                     "validate": false,
-                    "optional": false,
-                    "original": "type"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"urgency\" <$> TF.attribute",
-                    "name": "_urgency",
-                    "method": "urgency",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasUrgency",
-                    "validate": false,
                     "optional": true,
-                    "original": "urgency"
+                    "original": "type"
                 }
             ],
-            "dependencies": [
-                "DuringSupportHoursSetting",
-                "OutsideSupportHoursSetting"
-            ],
-            "key": "pagerduty_service.incident_urgency_rule",
-            "name": "IncidentUrgencyRuleSetting",
+            "dependencies": [],
+            "key": "escalation_policy.rule.target",
+            "name": "EscalationPolicyRuleTargetSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
                 {
+                    "default": "_id",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_id",
+                    "method": "id",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
+            "conflicts": [],
+            "type": "EscalationPolicyRuleTargetSetting s",
+            "original": "target"
+        },
+        {
+            "con": {
+                "smart": "newScheduleLayerRestrictionSetting",
+                "name": "ScheduleLayerRestrictionSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_durationSeconds",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"duration_seconds\" <$> TF.attribute",
+                    "name": "_durationSeconds",
+                    "method": "durationSeconds",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasDurationSeconds",
+                    "validate": false,
+                    "optional": false,
+                    "original": "duration_seconds"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"start_day_of_week\" <$> TF.attribute",
+                    "name": "_startDayOfWeek",
+                    "method": "startDayOfWeek",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasStartDayOfWeek",
+                    "validate": false,
+                    "optional": true,
+                    "original": "start_day_of_week"
+                },
+                {
+                    "default": "_startTimeOfDay",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"start_time_of_day\" <$> TF.attribute",
+                    "name": "_startTimeOfDay",
+                    "method": "startTimeOfDay",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasStartTimeOfDay",
+                    "validate": false,
+                    "optional": false,
+                    "original": "start_time_of_day"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "dependencies": [],
+            "key": "schedule.layer.restriction",
+            "name": "ScheduleLayerRestrictionSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_startTimeOfDay",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"start_time_of_day\" <$> TF.attribute",
+                    "name": "_startTimeOfDay",
+                    "method": "startTimeOfDay",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasStartTimeOfDay",
+                    "validate": false,
+                    "optional": false,
+                    "original": "start_time_of_day"
+                },
+                {
+                    "default": "_durationSeconds",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"duration_seconds\" <$> TF.attribute",
+                    "name": "_durationSeconds",
+                    "method": "durationSeconds",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasDurationSeconds",
+                    "validate": false,
+                    "optional": false,
+                    "original": "duration_seconds"
+                },
+                {
                     "default": "_type'",
                     "computed": false,
                     "required": true,
@@ -205,13 +309,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "IncidentUrgencyRuleSetting s",
-            "original": "incident_urgency_rule"
+            "type": "ScheduleLayerRestrictionSetting s",
+            "original": "restriction"
         },
         {
             "con": {
-                "smart": "newLayerSetting",
-                "name": "LayerSetting'"
+                "smart": "newScheduleLayerSetting",
+                "name": "ScheduleLayerSetting'"
             },
             "arguments": [
                 {
@@ -259,7 +363,7 @@
                     "method": "restriction",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RestrictionSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ScheduleLayerRestrictionSetting s)]",
                     "class": "HasRestriction",
                     "validate": false,
                     "optional": true,
@@ -335,10 +439,10 @@
                 }
             ],
             "dependencies": [
-                "RestrictionSetting"
+                "ScheduleLayerRestrictionSetting"
             ],
-            "key": "pagerduty_schedule.layer",
-            "name": "LayerSetting",
+            "key": "schedule.layer",
+            "name": "ScheduleLayerSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -447,13 +551,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "LayerSetting s",
+            "type": "ScheduleLayerSetting s",
             "original": "layer"
         },
         {
             "con": {
-                "smart": "newOutsideSupportHoursSetting",
-                "name": "OutsideSupportHoursSetting'"
+                "smart": "newServiceIncidentUrgencyRuleDuringSupportHoursSetting",
+                "name": "ServiceIncidentUrgencyRuleDuringSupportHoursSetting'"
             },
             "arguments": [
                 {
@@ -492,37 +596,88 @@
                 }
             ],
             "dependencies": [],
-            "key": "pagerduty_service.incident_urgency_rule.outside_support_hours",
-            "name": "OutsideSupportHoursSetting",
+            "key": "service.incident_urgency_rule.during_support_hours",
+            "name": "ServiceIncidentUrgencyRuleDuringSupportHoursSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "OutsideSupportHoursSetting s",
+            "type": "ServiceIncidentUrgencyRuleDuringSupportHoursSetting s",
+            "original": "during_support_hours"
+        },
+        {
+            "con": {
+                "smart": "newServiceIncidentUrgencyRuleOutsideSupportHoursSetting",
+                "name": "ServiceIncidentUrgencyRuleOutsideSupportHoursSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": true,
+                    "original": "type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"urgency\" <$> TF.attribute",
+                    "name": "_urgency",
+                    "method": "urgency",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUrgency",
+                    "validate": false,
+                    "optional": true,
+                    "original": "urgency"
+                }
+            ],
+            "dependencies": [],
+            "key": "service.incident_urgency_rule.outside_support_hours",
+            "name": "ServiceIncidentUrgencyRuleOutsideSupportHoursSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "ServiceIncidentUrgencyRuleOutsideSupportHoursSetting s",
             "original": "outside_support_hours"
         },
         {
             "con": {
-                "smart": "newRestrictionSetting",
-                "name": "RestrictionSetting'"
+                "smart": "newServiceIncidentUrgencyRuleSetting",
+                "name": "ServiceIncidentUrgencyRuleSetting'"
             },
             "arguments": [
                 {
-                    "default": "_durationSeconds",
+                    "default": "TF.Nil",
                     "computed": false,
-                    "required": true,
+                    "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"duration_seconds\" <$> TF.attribute",
-                    "name": "_durationSeconds",
-                    "method": "durationSeconds",
+                    "encoder": "TF.assign \"during_support_hours\" <$> TF.attribute",
+                    "name": "_duringSupportHours",
+                    "method": "duringSupportHours",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasDurationSeconds",
-                    "validate": false,
-                    "optional": false,
-                    "original": "duration_seconds"
+                    "type": "TF.Attr s (ServiceIncidentUrgencyRuleDuringSupportHoursSetting s)",
+                    "class": "HasDuringSupportHours",
+                    "validate": true,
+                    "optional": true,
+                    "original": "during_support_hours"
                 },
                 {
                     "default": "TF.Nil",
@@ -530,33 +685,16 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"start_day_of_week\" <$> TF.attribute",
-                    "name": "_startDayOfWeek",
-                    "method": "startDayOfWeek",
+                    "encoder": "TF.assign \"outside_support_hours\" <$> TF.attribute",
+                    "name": "_outsideSupportHours",
+                    "method": "outsideSupportHours",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasStartDayOfWeek",
-                    "validate": false,
+                    "type": "TF.Attr s (ServiceIncidentUrgencyRuleOutsideSupportHoursSetting s)",
+                    "class": "HasOutsideSupportHours",
+                    "validate": true,
                     "optional": true,
-                    "original": "start_day_of_week"
-                },
-                {
-                    "default": "_startTimeOfDay",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"start_time_of_day\" <$> TF.attribute",
-                    "name": "_startTimeOfDay",
-                    "method": "startTimeOfDay",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasStartTimeOfDay",
-                    "validate": false,
-                    "optional": false,
-                    "original": "start_time_of_day"
+                    "original": "outside_support_hours"
                 },
                 {
                     "default": "_type'",
@@ -574,49 +712,35 @@
                     "validate": false,
                     "optional": false,
                     "original": "type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"urgency\" <$> TF.attribute",
+                    "name": "_urgency",
+                    "method": "urgency",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUrgency",
+                    "validate": false,
+                    "optional": true,
+                    "original": "urgency"
                 }
             ],
-            "dependencies": [],
-            "key": "pagerduty_schedule.layer.restriction",
-            "name": "RestrictionSetting",
+            "dependencies": [
+                "ServiceIncidentUrgencyRuleDuringSupportHoursSetting",
+                "ServiceIncidentUrgencyRuleOutsideSupportHoursSetting"
+            ],
+            "key": "service.incident_urgency_rule",
+            "name": "ServiceIncidentUrgencyRuleSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_startTimeOfDay",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"start_time_of_day\" <$> TF.attribute",
-                    "name": "_startTimeOfDay",
-                    "method": "startTimeOfDay",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasStartTimeOfDay",
-                    "validate": false,
-                    "optional": false,
-                    "original": "start_time_of_day"
-                },
-                {
-                    "default": "_durationSeconds",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"duration_seconds\" <$> TF.attribute",
-                    "name": "_durationSeconds",
-                    "method": "durationSeconds",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasDurationSeconds",
-                    "validate": false,
-                    "optional": false,
-                    "original": "duration_seconds"
-                },
-                {
                     "default": "_type'",
                     "computed": false,
                     "required": true,
@@ -635,119 +759,64 @@
                 }
             ],
             "conflicts": [],
-            "type": "RestrictionSetting s",
-            "original": "restriction"
+            "type": "ServiceIncidentUrgencyRuleSetting s",
+            "original": "incident_urgency_rule"
         },
         {
             "con": {
-                "smart": "newRuleSetting",
-                "name": "RuleSetting'"
+                "smart": "newServiceScheduledActionsAtSetting",
+                "name": "ServiceScheduledActionsAtSetting'"
             },
             "arguments": [
                 {
-                    "default": "_escalationDelayInMinutes",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"escalation_delay_in_minutes\" <$> TF.attribute",
-                    "name": "_escalationDelayInMinutes",
-                    "method": "escalationDelayInMinutes",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasEscalationDelayInMinutes",
-                    "validate": false,
-                    "optional": false,
-                    "original": "escalation_delay_in_minutes"
-                },
-                {
-                    "default": "_target",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"target\" <$> TF.attribute",
-                    "name": "_target",
-                    "method": "target",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TargetSetting s)]",
-                    "class": "HasTarget",
-                    "validate": false,
-                    "optional": false,
-                    "original": "target"
-                }
-            ],
-            "dependencies": [
-                "TargetSetting"
-            ],
-            "key": "pagerduty_escalation_policy.rule",
-            "name": "RuleSetting",
-            "threaded": true,
-            "attributes": [
-                {
                     "default": "TF.Nil",
-                    "computed": true,
+                    "computed": false,
                     "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "_computedId",
-                    "method": "computedId",
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasComputedId",
+                    "class": "HasName",
                     "validate": false,
-                    "optional": false,
-                    "original": "id"
-                }
-            ],
-            "parameters": [
-                {
-                    "default": "_escalationDelayInMinutes",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"escalation_delay_in_minutes\" <$> TF.attribute",
-                    "name": "_escalationDelayInMinutes",
-                    "method": "escalationDelayInMinutes",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasEscalationDelayInMinutes",
-                    "validate": false,
-                    "optional": false,
-                    "original": "escalation_delay_in_minutes"
+                    "optional": true,
+                    "original": "name"
                 },
                 {
-                    "default": "_target",
+                    "default": "TF.Nil",
                     "computed": false,
-                    "required": true,
+                    "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"target\" <$> TF.attribute",
-                    "name": "_target",
-                    "method": "target",
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TargetSetting s)]",
-                    "class": "HasTarget",
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
                     "validate": false,
-                    "optional": false,
-                    "original": "target"
+                    "optional": true,
+                    "original": "type"
                 }
             ],
+            "dependencies": [],
+            "key": "service.scheduled_actions.at",
+            "name": "ServiceScheduledActionsAtSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
             "conflicts": [],
-            "type": "RuleSetting s",
-            "original": "rule"
+            "type": "ServiceScheduledActionsAtSetting s",
+            "original": "at"
         },
         {
             "con": {
-                "smart": "newScheduledActionsSetting",
-                "name": "ScheduledActionsSetting'"
+                "smart": "newServiceScheduledActionsSetting",
+                "name": "ServiceScheduledActionsSetting'"
             },
             "arguments": [
                 {
@@ -761,7 +830,7 @@
                     "method": "at",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (AtSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceScheduledActionsAtSetting s)]",
                     "class": "HasAt",
                     "validate": false,
                     "optional": true,
@@ -803,21 +872,21 @@
                 }
             ],
             "dependencies": [
-                "AtSetting"
+                "ServiceScheduledActionsAtSetting"
             ],
-            "key": "pagerduty_service.scheduled_actions",
-            "name": "ScheduledActionsSetting",
+            "key": "service.scheduled_actions",
+            "name": "ServiceScheduledActionsSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "ScheduledActionsSetting s",
+            "type": "ServiceScheduledActionsSetting s",
             "original": "scheduled_actions"
         },
         {
             "con": {
-                "smart": "newSupportHoursSetting",
-                "name": "SupportHoursSetting'"
+                "smart": "newServiceSupportHoursSetting",
+                "name": "ServiceSupportHoursSetting'"
             },
             "arguments": [
                 {
@@ -907,83 +976,14 @@
                 }
             ],
             "dependencies": [],
-            "key": "pagerduty_service.support_hours",
-            "name": "SupportHoursSetting",
+            "key": "service.support_hours",
+            "name": "ServiceSupportHoursSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "SupportHoursSetting s",
+            "type": "ServiceSupportHoursSetting s",
             "original": "support_hours"
-        },
-        {
-            "con": {
-                "smart": "newTargetSetting",
-                "name": "TargetSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_id",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "_id",
-                    "method": "id",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "id"
-                },
-                {
-                    "default": "TF.value \"user_reference\"",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": true,
-                    "original": "type"
-                }
-            ],
-            "dependencies": [],
-            "key": "pagerduty_escalation_policy.rule.target",
-            "name": "TargetSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_id",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "_id",
-                    "method": "id",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "id"
-                }
-            ],
-            "conflicts": [],
-            "type": "TargetSetting s",
-            "original": "target"
         }
     ],
     "url": "https://www.terraform.io/docs/providers/pagerduty/index.html",
@@ -1014,7 +1014,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/d/escalation_policy.html",
             "dependencies": [],
-            "key": "pagerduty_escalation_policy",
+            "key": "escalation_policy",
             "name": "EscalationPolicyData",
             "threaded": true,
             "attributes": [
@@ -1085,7 +1085,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/d/extension_schema.html",
             "dependencies": [],
-            "key": "pagerduty_extension_schema",
+            "key": "extension_schema",
             "name": "ExtensionSchemaData",
             "threaded": true,
             "attributes": [
@@ -1173,7 +1173,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/d/schedule.html",
             "dependencies": [],
-            "key": "pagerduty_schedule",
+            "key": "schedule",
             "name": "ScheduleData",
             "threaded": true,
             "attributes": [
@@ -1246,7 +1246,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/d/team.html",
             "dependencies": [],
-            "key": "pagerduty_team",
+            "key": "team",
             "name": "TeamData",
             "threaded": true,
             "attributes": [
@@ -1336,7 +1336,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/d/user.html",
             "dependencies": [],
-            "key": "pagerduty_user",
+            "key": "user",
             "name": "UserData",
             "threaded": true,
             "attributes": [
@@ -1441,7 +1441,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/d/vendor.html",
             "dependencies": [],
-            "key": "pagerduty_vendor",
+            "key": "vendor",
             "name": "VendorData",
             "threaded": true,
             "attributes": [
@@ -1548,7 +1548,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/addon.html",
             "dependencies": [],
-            "key": "pagerduty_addon",
+            "key": "addon",
             "name": "AddonResource",
             "threaded": true,
             "attributes": [
@@ -1678,7 +1678,7 @@
                     "method": "rule",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RuleSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (EscalationPolicyRuleSetting s)]",
                     "class": "HasRule",
                     "validate": false,
                     "optional": false,
@@ -1704,9 +1704,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/escalation_policy.html",
             "dependencies": [
-                "RuleSetting"
+                "EscalationPolicyRuleSetting"
             ],
-            "key": "pagerduty_escalation_policy",
+            "key": "escalation_policy",
             "name": "EscalationPolicyResource",
             "threaded": true,
             "attributes": [
@@ -1757,7 +1757,7 @@
                     "method": "rule",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RuleSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (EscalationPolicyRuleSetting s)]",
                     "class": "HasRule",
                     "validate": false,
                     "optional": false,
@@ -1862,7 +1862,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/extension.html",
             "dependencies": [],
-            "key": "pagerduty_extension",
+            "key": "extension",
             "name": "ExtensionResource",
             "threaded": true,
             "attributes": [
@@ -2035,7 +2035,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/maintenance_window.html",
             "dependencies": [],
-            "key": "pagerduty_maintenance_window",
+            "key": "maintenance_window",
             "name": "MaintenanceWindowResource",
             "threaded": true,
             "attributes": [
@@ -2148,7 +2148,7 @@
                     "method": "layer",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (LayerSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ScheduleLayerSetting s)]",
                     "class": "HasLayer",
                     "validate": false,
                     "optional": false,
@@ -2208,9 +2208,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/schedule.html",
             "dependencies": [
-                "LayerSetting"
+                "ScheduleLayerSetting"
             ],
-            "key": "pagerduty_schedule",
+            "key": "schedule",
             "name": "ScheduleResource",
             "threaded": true,
             "attributes": [
@@ -2244,7 +2244,7 @@
                     "method": "layer",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (LayerSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ScheduleLayerSetting s)]",
                     "class": "HasLayer",
                     "validate": false,
                     "optional": false,
@@ -2374,7 +2374,7 @@
                     "method": "incidentUrgencyRule",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (IncidentUrgencyRuleSetting s)",
+                    "type": "TF.Attr s (ServiceIncidentUrgencyRuleSetting s)",
                     "class": "HasIncidentUrgencyRule",
                     "validate": true,
                     "optional": true,
@@ -2408,7 +2408,7 @@
                     "method": "scheduledActions",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ScheduledActionsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceScheduledActionsSetting s)]",
                     "class": "HasScheduledActions",
                     "validate": false,
                     "optional": true,
@@ -2425,7 +2425,7 @@
                     "method": "supportHours",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (SupportHoursSetting s)",
+                    "type": "TF.Attr s (ServiceSupportHoursSetting s)",
                     "class": "HasSupportHours",
                     "validate": true,
                     "optional": true,
@@ -2434,12 +2434,12 @@
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/service.html",
             "dependencies": [
-                "IncidentUrgencyRuleSetting",
-                "ScheduledActionsSetting",
-                "SupportHoursSetting",
-                "IncidentUrgencyRuleSetting"
+                "ServiceIncidentUrgencyRuleSetting",
+                "ServiceScheduledActionsSetting",
+                "ServiceSupportHoursSetting",
+                "ServiceIncidentUrgencyRuleSetting"
             ],
-            "key": "pagerduty_service",
+            "key": "service",
             "name": "ServiceResource",
             "threaded": true,
             "attributes": [
@@ -2488,7 +2488,7 @@
                     "method": "computedIncidentUrgencyRule",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (IncidentUrgencyRuleSetting s)",
+                    "type": "TF.Attr s (ServiceIncidentUrgencyRuleSetting s)",
                     "class": "HasComputedIncidentUrgencyRule",
                     "validate": true,
                     "optional": false,
@@ -2675,7 +2675,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/service_integration.html",
             "dependencies": [],
-            "key": "pagerduty_service_integration",
+            "key": "service_integration",
             "name": "ServiceIntegrationResource",
             "threaded": true,
             "attributes": [
@@ -2899,7 +2899,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/team.html",
             "dependencies": [],
-            "key": "pagerduty_team",
+            "key": "team",
             "name": "TeamResource",
             "threaded": true,
             "attributes": [
@@ -2987,7 +2987,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/team_membership.html",
             "dependencies": [],
-            "key": "pagerduty_team_membership",
+            "key": "team_membership",
             "name": "TeamMembershipResource",
             "threaded": true,
             "attributes": [
@@ -3194,7 +3194,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/user.html",
             "dependencies": [],
-            "key": "pagerduty_user",
+            "key": "user",
             "name": "UserResource",
             "threaded": true,
             "attributes": [
@@ -3452,7 +3452,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/user_contact_method.html",
             "dependencies": [],
-            "key": "pagerduty_user_contact_method",
+            "key": "user_contact_method",
             "name": "UserContactMethodResource",
             "threaded": true,
             "attributes": [
@@ -3625,7 +3625,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

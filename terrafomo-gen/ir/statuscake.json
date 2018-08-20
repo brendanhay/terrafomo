@@ -522,7 +522,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/statuscake/r/test.html",
             "dependencies": [],
-            "key": "statuscake_test",
+            "key": "test",
             "name": "TestResource",
             "threaded": true,
             "attributes": [
@@ -699,7 +699,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

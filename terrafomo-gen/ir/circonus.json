@@ -2,111 +2,178 @@
     "settings": [
         {
             "con": {
-                "smart": "newAlertOptionSetting",
-                "name": "AlertOptionSetting'"
+                "smart": "newAccountInvitesSetting",
+                "name": "AccountInvitesSetting'"
             },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"escalate_after\" <$> TF.attribute",
-                    "name": "_escalateAfter",
-                    "method": "escalateAfter",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasEscalateAfter",
-                    "validate": false,
-                    "optional": true,
-                    "original": "escalate_after"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"escalate_to\" <$> TF.attribute",
-                    "name": "_escalateTo",
-                    "method": "escalateTo",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasEscalateTo",
-                    "validate": false,
-                    "optional": true,
-                    "original": "escalate_to"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"reminder\" <$> TF.attribute",
-                    "name": "_reminder",
-                    "method": "reminder",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasReminder",
-                    "validate": false,
-                    "optional": true,
-                    "original": "reminder"
-                },
-                {
-                    "default": "_severity",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"severity\" <$> TF.attribute",
-                    "name": "_severity",
-                    "method": "severity",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasSeverity",
-                    "validate": false,
-                    "optional": false,
-                    "original": "severity"
-                }
-            ],
+            "arguments": [],
             "dependencies": [],
-            "key": "circonus_contact_group.alert_option",
-            "name": "AlertOptionSetting",
+            "key": "account.invites",
+            "name": "AccountInvitesSetting",
             "threaded": true,
-            "attributes": [],
-            "parameters": [
+            "attributes": [
                 {
-                    "default": "_severity",
-                    "computed": false,
-                    "required": true,
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"severity\" <$> TF.attribute",
-                    "name": "_severity",
-                    "method": "severity",
+                    "encoder": "TF.assign \"email\" <$> TF.attribute",
+                    "name": "_computedEmail",
+                    "method": "computedEmail",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasSeverity",
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedEmail",
                     "validate": false,
                     "optional": false,
-                    "original": "severity"
+                    "original": "email"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"role\" <$> TF.attribute",
+                    "name": "_computedRole",
+                    "method": "computedRole",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedRole",
+                    "validate": false,
+                    "optional": false,
+                    "original": "role"
                 }
             ],
+            "parameters": [],
             "conflicts": [],
-            "type": "AlertOptionSetting s",
-            "original": "alert_option"
+            "type": "AccountInvitesSetting s",
+            "original": "invites"
         },
         {
             "con": {
-                "smart": "newCaqlSetting",
-                "name": "CaqlSetting'"
+                "smart": "newAccountUsageSetting",
+                "name": "AccountUsageSetting'"
+            },
+            "arguments": [],
+            "dependencies": [],
+            "key": "account.usage",
+            "name": "AccountUsageSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"limit\" <$> TF.attribute",
+                    "name": "_computedLimit",
+                    "method": "computedLimit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasComputedLimit",
+                    "validate": false,
+                    "optional": false,
+                    "original": "limit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_computedType",
+                    "method": "computedType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedType",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"used\" <$> TF.attribute",
+                    "name": "_computedUsed",
+                    "method": "computedUsed",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasComputedUsed",
+                    "validate": false,
+                    "optional": false,
+                    "original": "used"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "AccountUsageSetting s",
+            "original": "usage"
+        },
+        {
+            "con": {
+                "smart": "newAccountUsersSetting",
+                "name": "AccountUsersSetting'"
+            },
+            "arguments": [],
+            "dependencies": [],
+            "key": "account.users",
+            "name": "AccountUsersSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"role\" <$> TF.attribute",
+                    "name": "_computedRole",
+                    "method": "computedRole",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedRole",
+                    "validate": false,
+                    "optional": false,
+                    "original": "role"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "AccountUsersSetting s",
+            "original": "users"
+        },
+        {
+            "con": {
+                "smart": "newCheckCaqlSetting",
+                "name": "CheckCaqlSetting'"
             },
             "arguments": [
                 {
@@ -130,8 +197,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "circonus_check.caql",
-            "name": "CaqlSetting",
+            "key": "check.caql",
+            "name": "CheckCaqlSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -156,13 +223,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "CaqlSetting s",
+            "type": "CheckCaqlSetting s",
             "original": "caql"
         },
         {
             "con": {
-                "smart": "newCloudwatchSetting",
-                "name": "CloudwatchSetting'"
+                "smart": "newCheckCloudwatchSetting",
+                "name": "CheckCloudwatchSetting'"
             },
             "arguments": [
                 {
@@ -302,8 +369,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "circonus_check.cloudwatch",
-            "name": "CloudwatchSetting",
+            "key": "check.cloudwatch",
+            "name": "CheckCloudwatchSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -425,13 +492,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "CloudwatchSetting s",
+            "type": "CheckCloudwatchSetting s",
             "original": "cloudwatch"
         },
         {
             "con": {
-                "smart": "newCollectorSetting",
-                "name": "CollectorSetting'"
+                "smart": "newCheckCollectorSetting",
+                "name": "CheckCollectorSetting'"
             },
             "arguments": [
                 {
@@ -455,8 +522,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "circonus_check.collector",
-            "name": "CollectorSetting",
+            "key": "check.collector",
+            "name": "CheckCollectorSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -481,13 +548,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "CollectorSetting s",
+            "type": "CheckCollectorSetting s",
             "original": "collector"
         },
         {
             "con": {
-                "smart": "newConsulSetting",
-                "name": "ConsulSetting'"
+                "smart": "newCheckConsulSetting",
+                "name": "CheckConsulSetting'"
             },
             "arguments": [
                 {
@@ -813,8 +880,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "circonus_check.consul",
-            "name": "ConsulSetting",
+            "key": "check.consul",
+            "name": "CheckConsulSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
@@ -910,310 +977,13 @@
                     "original": "state"
                 }
             ],
-            "type": "ConsulSetting s",
+            "type": "CheckConsulSetting s",
             "original": "consul"
         },
         {
             "con": {
-                "smart": "newDetailsSetting",
-                "name": "DetailsSetting'"
-            },
-            "arguments": [],
-            "dependencies": [],
-            "key": "circonus_collector.details",
-            "name": "DetailsSetting",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"cn\" <$> TF.attribute",
-                    "name": "_computedCn",
-                    "method": "computedCn",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedCn",
-                    "validate": false,
-                    "optional": false,
-                    "original": "cn"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"external_host\" <$> TF.attribute",
-                    "name": "_computedExternalHost",
-                    "method": "computedExternalHost",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedExternalHost",
-                    "validate": false,
-                    "optional": false,
-                    "original": "external_host"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"external_port\" <$> TF.attribute",
-                    "name": "_computedExternalPort",
-                    "method": "computedExternalPort",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasComputedExternalPort",
-                    "validate": false,
-                    "optional": false,
-                    "original": "external_port"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ip\" <$> TF.attribute",
-                    "name": "_computedIp",
-                    "method": "computedIp",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedIp",
-                    "validate": false,
-                    "optional": false,
-                    "original": "ip"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"min_version\" <$> TF.attribute",
-                    "name": "_computedMinVersion",
-                    "method": "computedMinVersion",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasComputedMinVersion",
-                    "validate": false,
-                    "optional": false,
-                    "original": "min_version"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"modules\" <$> TF.attribute",
-                    "name": "_computedModules",
-                    "method": "computedModules",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasComputedModules",
-                    "validate": false,
-                    "optional": false,
-                    "original": "modules"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"port\" <$> TF.attribute",
-                    "name": "_computedPort",
-                    "method": "computedPort",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasComputedPort",
-                    "validate": false,
-                    "optional": false,
-                    "original": "port"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"skew\" <$> TF.attribute",
-                    "name": "_computedSkew",
-                    "method": "computedSkew",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedSkew",
-                    "validate": false,
-                    "optional": false,
-                    "original": "skew"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"status\" <$> TF.attribute",
-                    "name": "_computedStatus",
-                    "method": "computedStatus",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedStatus",
-                    "validate": false,
-                    "optional": false,
-                    "original": "status"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"version\" <$> TF.attribute",
-                    "name": "_computedVersion",
-                    "method": "computedVersion",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasComputedVersion",
-                    "validate": false,
-                    "optional": false,
-                    "original": "version"
-                }
-            ],
-            "parameters": [],
-            "conflicts": [],
-            "type": "DetailsSetting s",
-            "original": "details"
-        },
-        {
-            "con": {
-                "smart": "newEmailSetting",
-                "name": "EmailSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"address\" <$> TF.attribute",
-                    "name": "_address",
-                    "method": "address",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_user",
-                            "method": "user"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAddress",
-                    "validate": false,
-                    "optional": true,
-                    "original": "address"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"user\" <$> TF.attribute",
-                    "name": "_user",
-                    "method": "user",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_address",
-                            "method": "address"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasUser",
-                    "validate": false,
-                    "optional": true,
-                    "original": "user"
-                }
-            ],
-            "dependencies": [],
-            "key": "circonus_contact_group.email",
-            "name": "EmailSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"address\" <$> TF.attribute",
-                    "name": "_address",
-                    "method": "address",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_user",
-                            "method": "user"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAddress",
-                    "validate": false,
-                    "optional": true,
-                    "original": "address"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"user\" <$> TF.attribute",
-                    "name": "_user",
-                    "method": "user",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_address",
-                            "method": "address"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasUser",
-                    "validate": false,
-                    "optional": true,
-                    "original": "user"
-                }
-            ],
-            "type": "EmailSetting s",
-            "original": "email"
-        },
-        {
-            "con": {
-                "smart": "newHttpSetting",
-                "name": "HttpSetting'"
+                "smart": "newCheckHttpSetting",
+                "name": "CheckHttpSetting'"
             },
             "arguments": [
                 {
@@ -1527,65 +1297,14 @@
                     "validate": false,
                     "optional": true,
                     "original": "version"
-                },
-                {
-                    "default": "_address",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"address\" <$> TF.attribute",
-                    "name": "_address",
-                    "method": "address",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAddress",
-                    "validate": false,
-                    "optional": false,
-                    "original": "address"
-                },
-                {
-                    "default": "TF.value \"json\"",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"format\" <$> TF.attribute",
-                    "name": "_format",
-                    "method": "format",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasFormat",
-                    "validate": false,
-                    "optional": true,
-                    "original": "format"
                 }
             ],
             "dependencies": [],
-            "key": "circonus_check.http",
-            "name": "HttpSetting",
+            "key": "check.http",
+            "name": "CheckHttpSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
-                {
-                    "default": "_address",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"address\" <$> TF.attribute",
-                    "name": "_address",
-                    "method": "address",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAddress",
-                    "validate": false,
-                    "optional": false,
-                    "original": "address"
-                },
                 {
                     "default": "_url",
                     "computed": false,
@@ -1607,13 +1326,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "HttpSetting s",
+            "type": "CheckHttpSetting s",
             "original": "http"
         },
         {
             "con": {
-                "smart": "newHttptrapSetting",
-                "name": "HttptrapSetting'"
+                "smart": "newCheckHttptrapSetting",
+                "name": "CheckHttptrapSetting'"
             },
             "arguments": [
                 {
@@ -1655,19 +1374,19 @@
                 }
             ],
             "dependencies": [],
-            "key": "circonus_check.httptrap",
-            "name": "HttptrapSetting",
+            "key": "check.httptrap",
+            "name": "CheckHttptrapSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "HttptrapSetting s",
+            "type": "CheckHttptrapSetting s",
             "original": "httptrap"
         },
         {
             "con": {
-                "smart": "newIcmpPingSetting",
-                "name": "IcmpPingSetting'"
+                "smart": "newCheckIcmpPingSetting",
+                "name": "CheckIcmpPingSetting'"
             },
             "arguments": [
                 {
@@ -1730,180 +1449,19 @@
                 }
             ],
             "dependencies": [],
-            "key": "circonus_check.icmp_ping",
-            "name": "IcmpPingSetting",
+            "key": "check.icmp_ping",
+            "name": "CheckIcmpPingSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "IcmpPingSetting s",
+            "type": "CheckIcmpPingSetting s",
             "original": "icmp_ping"
         },
         {
             "con": {
-                "smart": "newIf'Setting",
-                "name": "If'Setting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Description of the action(s) to take when this rule set is active"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"then\" <$> TF.attribute",
-                    "name": "_then'",
-                    "method": "then'",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (Then'Setting s)",
-                    "class": "HasThen'",
-                    "validate": true,
-                    "optional": true,
-                    "original": "then"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Predicate that the rule set uses to evaluate a stream of metrics"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (ValueSetting s)",
-                    "class": "HasValue",
-                    "validate": true,
-                    "optional": true,
-                    "original": "value"
-                }
-            ],
-            "dependencies": [
-                "Then'Setting",
-                "ValueSetting"
-            ],
-            "key": "circonus_rule_set.if",
-            "name": "If'Setting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "If'Setting s",
-            "original": "if"
-        },
-        {
-            "con": {
-                "smart": "newInvitesSetting",
-                "name": "InvitesSetting'"
-            },
-            "arguments": [],
-            "dependencies": [],
-            "key": "circonus_account.invites",
-            "name": "InvitesSetting",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"email\" <$> TF.attribute",
-                    "name": "_computedEmail",
-                    "method": "computedEmail",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedEmail",
-                    "validate": false,
-                    "optional": false,
-                    "original": "email"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"role\" <$> TF.attribute",
-                    "name": "_computedRole",
-                    "method": "computedRole",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedRole",
-                    "validate": false,
-                    "optional": false,
-                    "original": "role"
-                }
-            ],
-            "parameters": [],
-            "conflicts": [],
-            "type": "InvitesSetting s",
-            "original": "invites"
-        },
-        {
-            "con": {
-                "smart": "newIrcSetting",
-                "name": "IrcSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_user",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"user\" <$> TF.attribute",
-                    "name": "_user",
-                    "method": "user",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasUser",
-                    "validate": false,
-                    "optional": false,
-                    "original": "user"
-                }
-            ],
-            "dependencies": [],
-            "key": "circonus_contact_group.irc",
-            "name": "IrcSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_user",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"user\" <$> TF.attribute",
-                    "name": "_user",
-                    "method": "user",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasUser",
-                    "validate": false,
-                    "optional": false,
-                    "original": "user"
-                }
-            ],
-            "conflicts": [],
-            "type": "IrcSetting s",
-            "original": "irc"
-        },
-        {
-            "con": {
-                "smart": "newJsonSetting",
-                "name": "JsonSetting'"
+                "smart": "newCheckJsonSetting",
+                "name": "CheckJsonSetting'"
             },
             "arguments": [
                 {
@@ -2177,8 +1735,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "circonus_check.json",
-            "name": "JsonSetting",
+            "key": "check.json",
+            "name": "CheckJsonSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -2203,13 +1761,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "JsonSetting s",
+            "type": "CheckJsonSetting s",
             "original": "json"
         },
         {
             "con": {
-                "smart": "newMetricSetting",
-                "name": "MetricSetting'"
+                "smart": "newCheckMetricSetting",
+                "name": "CheckMetricSetting'"
             },
             "arguments": [
                 {
@@ -2306,6 +1864,1877 @@
                     "validate": false,
                     "optional": true,
                     "original": "unit"
+                }
+            ],
+            "dependencies": [],
+            "key": "check.metric",
+            "name": "CheckMetricSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name of the metric"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Type of metric (e.g. numeric, histogram, text)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "conflicts": [],
+            "type": "CheckMetricSetting s",
+            "original": "metric"
+        },
+        {
+            "con": {
+                "smart": "newCheckMysqlSetting",
+                "name": "CheckMysqlSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_dsn",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The connect DSN for the MySQL instance"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"dsn\" <$> TF.attribute",
+                    "name": "_dsn",
+                    "method": "dsn",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDsn",
+                    "validate": false,
+                    "optional": false,
+                    "original": "dsn"
+                },
+                {
+                    "default": "_query",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The SQL to use as the query"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"query\" <$> TF.attribute",
+                    "name": "_query",
+                    "method": "query",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasQuery",
+                    "validate": false,
+                    "optional": false,
+                    "original": "query"
+                }
+            ],
+            "dependencies": [],
+            "key": "check.mysql",
+            "name": "CheckMysqlSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_dsn",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The connect DSN for the MySQL instance"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"dsn\" <$> TF.attribute",
+                    "name": "_dsn",
+                    "method": "dsn",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDsn",
+                    "validate": false,
+                    "optional": false,
+                    "original": "dsn"
+                },
+                {
+                    "default": "_query",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The SQL to use as the query"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"query\" <$> TF.attribute",
+                    "name": "_query",
+                    "method": "query",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasQuery",
+                    "validate": false,
+                    "optional": false,
+                    "original": "query"
+                }
+            ],
+            "conflicts": [],
+            "type": "CheckMysqlSetting s",
+            "original": "mysql"
+        },
+        {
+            "con": {
+                "smart": "newCheckPostgresqlSetting",
+                "name": "CheckPostgresqlSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_dsn",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The connect DSN for the PostgreSQL instance"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"dsn\" <$> TF.attribute",
+                    "name": "_dsn",
+                    "method": "dsn",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDsn",
+                    "validate": false,
+                    "optional": false,
+                    "original": "dsn"
+                },
+                {
+                    "default": "_query",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The SQL to use as the query"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"query\" <$> TF.attribute",
+                    "name": "_query",
+                    "method": "query",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasQuery",
+                    "validate": false,
+                    "optional": false,
+                    "original": "query"
+                }
+            ],
+            "dependencies": [],
+            "key": "check.postgresql",
+            "name": "CheckPostgresqlSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_dsn",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The connect DSN for the PostgreSQL instance"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"dsn\" <$> TF.attribute",
+                    "name": "_dsn",
+                    "method": "dsn",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDsn",
+                    "validate": false,
+                    "optional": false,
+                    "original": "dsn"
+                },
+                {
+                    "default": "_query",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The SQL to use as the query"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"query\" <$> TF.attribute",
+                    "name": "_query",
+                    "method": "query",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasQuery",
+                    "validate": false,
+                    "optional": false,
+                    "original": "query"
+                }
+            ],
+            "conflicts": [],
+            "type": "CheckPostgresqlSetting s",
+            "original": "postgresql"
+        },
+        {
+            "con": {
+                "smart": "newCheckStatsdSetting",
+                "name": "CheckStatsdSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_sourceIp",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The source IP of the statsd metrics stream"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"source_ip\" <$> TF.attribute",
+                    "name": "_sourceIp",
+                    "method": "sourceIp",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSourceIp",
+                    "validate": false,
+                    "optional": false,
+                    "original": "source_ip"
+                }
+            ],
+            "dependencies": [],
+            "key": "check.statsd",
+            "name": "CheckStatsdSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_sourceIp",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The source IP of the statsd metrics stream"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"source_ip\" <$> TF.attribute",
+                    "name": "_sourceIp",
+                    "method": "sourceIp",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSourceIp",
+                    "validate": false,
+                    "optional": false,
+                    "original": "source_ip"
+                }
+            ],
+            "conflicts": [],
+            "type": "CheckStatsdSetting s",
+            "original": "statsd"
+        },
+        {
+            "con": {
+                "smart": "newCheckTcpSetting",
+                "name": "CheckTcpSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "This regular expression is matched against the response banner. If a match",
+                        "is not found, the check will be marked as bad."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"banner_regexp\" <$> TF.attribute",
+                    "name": "_bannerRegexp",
+                    "method": "bannerRegexp",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasBannerRegexp",
+                    "validate": false,
+                    "optional": true,
+                    "original": "banner_regexp"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "A path to a file containing all the certificate authorities that should be",
+                        "loaded to validate the remote certificate (for TLS checks)."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ca_chain\" <$> TF.attribute",
+                    "name": "_caChain",
+                    "method": "caChain",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCaChain",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ca_chain"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "A path to a file containing the client certificate that will be presented to",
+                        "the remote server (for TLS checks)."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"certificate_file\" <$> TF.attribute",
+                    "name": "_certificateFile",
+                    "method": "certificateFile",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCertificateFile",
+                    "validate": false,
+                    "optional": true,
+                    "original": "certificate_file"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "A list of ciphers to be used when establishing a TLS connection"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ciphers\" <$> TF.attribute",
+                    "name": "_ciphers",
+                    "method": "ciphers",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCiphers",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ciphers"
+                },
+                {
+                    "default": "_host",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Specifies the host name or IP address to connect to for this TCP check"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"host\" <$> TF.attribute",
+                    "name": "_host",
+                    "method": "host",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHost",
+                    "validate": false,
+                    "optional": false,
+                    "original": "host"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "A path to a file containing key to be used in conjunction with the cilent",
+                        "certificate (for TLS checks)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"key_file\" <$> TF.attribute",
+                    "name": "_keyFile",
+                    "method": "keyFile",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKeyFile",
+                    "validate": false,
+                    "optional": true,
+                    "original": "key_file"
+                },
+                {
+                    "default": "_port",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Specifies the port on which the management interface can be reached."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"port\" <$> TF.attribute",
+                    "name": "_port",
+                    "method": "port",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasPort",
+                    "validate": false,
+                    "optional": false,
+                    "original": "port"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Upgrade TCP connection to use TLS."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"tls\" <$> TF.attribute",
+                    "name": "_tls",
+                    "method": "tls",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasTls",
+                    "validate": false,
+                    "optional": true,
+                    "original": "tls"
+                }
+            ],
+            "dependencies": [],
+            "key": "check.tcp",
+            "name": "CheckTcpSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_host",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Specifies the host name or IP address to connect to for this TCP check"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"host\" <$> TF.attribute",
+                    "name": "_host",
+                    "method": "host",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHost",
+                    "validate": false,
+                    "optional": false,
+                    "original": "host"
+                },
+                {
+                    "default": "_port",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Specifies the port on which the management interface can be reached."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"port\" <$> TF.attribute",
+                    "name": "_port",
+                    "method": "port",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasPort",
+                    "validate": false,
+                    "optional": false,
+                    "original": "port"
+                }
+            ],
+            "conflicts": [],
+            "type": "CheckTcpSetting s",
+            "original": "tcp"
+        },
+        {
+            "con": {
+                "smart": "newCollectorDetailsSetting",
+                "name": "CollectorDetailsSetting'"
+            },
+            "arguments": [],
+            "dependencies": [],
+            "key": "collector.details",
+            "name": "CollectorDetailsSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cn\" <$> TF.attribute",
+                    "name": "_computedCn",
+                    "method": "computedCn",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedCn",
+                    "validate": false,
+                    "optional": false,
+                    "original": "cn"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"external_host\" <$> TF.attribute",
+                    "name": "_computedExternalHost",
+                    "method": "computedExternalHost",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedExternalHost",
+                    "validate": false,
+                    "optional": false,
+                    "original": "external_host"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"external_port\" <$> TF.attribute",
+                    "name": "_computedExternalPort",
+                    "method": "computedExternalPort",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasComputedExternalPort",
+                    "validate": false,
+                    "optional": false,
+                    "original": "external_port"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip\" <$> TF.attribute",
+                    "name": "_computedIp",
+                    "method": "computedIp",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedIp",
+                    "validate": false,
+                    "optional": false,
+                    "original": "ip"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"min_version\" <$> TF.attribute",
+                    "name": "_computedMinVersion",
+                    "method": "computedMinVersion",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasComputedMinVersion",
+                    "validate": false,
+                    "optional": false,
+                    "original": "min_version"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"modules\" <$> TF.attribute",
+                    "name": "_computedModules",
+                    "method": "computedModules",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasComputedModules",
+                    "validate": false,
+                    "optional": false,
+                    "original": "modules"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"port\" <$> TF.attribute",
+                    "name": "_computedPort",
+                    "method": "computedPort",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasComputedPort",
+                    "validate": false,
+                    "optional": false,
+                    "original": "port"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"skew\" <$> TF.attribute",
+                    "name": "_computedSkew",
+                    "method": "computedSkew",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedSkew",
+                    "validate": false,
+                    "optional": false,
+                    "original": "skew"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"status\" <$> TF.attribute",
+                    "name": "_computedStatus",
+                    "method": "computedStatus",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedStatus",
+                    "validate": false,
+                    "optional": false,
+                    "original": "status"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"version\" <$> TF.attribute",
+                    "name": "_computedVersion",
+                    "method": "computedVersion",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasComputedVersion",
+                    "validate": false,
+                    "optional": false,
+                    "original": "version"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "CollectorDetailsSetting s",
+            "original": "details"
+        },
+        {
+            "con": {
+                "smart": "newContactGroupAlertOptionSetting",
+                "name": "ContactGroupAlertOptionSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"escalate_after\" <$> TF.attribute",
+                    "name": "_escalateAfter",
+                    "method": "escalateAfter",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEscalateAfter",
+                    "validate": false,
+                    "optional": true,
+                    "original": "escalate_after"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"escalate_to\" <$> TF.attribute",
+                    "name": "_escalateTo",
+                    "method": "escalateTo",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEscalateTo",
+                    "validate": false,
+                    "optional": true,
+                    "original": "escalate_to"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"reminder\" <$> TF.attribute",
+                    "name": "_reminder",
+                    "method": "reminder",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasReminder",
+                    "validate": false,
+                    "optional": true,
+                    "original": "reminder"
+                },
+                {
+                    "default": "_severity",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"severity\" <$> TF.attribute",
+                    "name": "_severity",
+                    "method": "severity",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasSeverity",
+                    "validate": false,
+                    "optional": false,
+                    "original": "severity"
+                }
+            ],
+            "dependencies": [],
+            "key": "contact_group.alert_option",
+            "name": "ContactGroupAlertOptionSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_severity",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"severity\" <$> TF.attribute",
+                    "name": "_severity",
+                    "method": "severity",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasSeverity",
+                    "validate": false,
+                    "optional": false,
+                    "original": "severity"
+                }
+            ],
+            "conflicts": [],
+            "type": "ContactGroupAlertOptionSetting s",
+            "original": "alert_option"
+        },
+        {
+            "con": {
+                "smart": "newContactGroupEmailSetting",
+                "name": "ContactGroupEmailSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"address\" <$> TF.attribute",
+                    "name": "_address",
+                    "method": "address",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_user",
+                            "method": "user"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"user\" <$> TF.attribute",
+                    "name": "_user",
+                    "method": "user",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_address",
+                            "method": "address"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUser",
+                    "validate": false,
+                    "optional": true,
+                    "original": "user"
+                }
+            ],
+            "dependencies": [],
+            "key": "contact_group.email",
+            "name": "ContactGroupEmailSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"address\" <$> TF.attribute",
+                    "name": "_address",
+                    "method": "address",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_user",
+                            "method": "user"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"user\" <$> TF.attribute",
+                    "name": "_user",
+                    "method": "user",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_address",
+                            "method": "address"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUser",
+                    "validate": false,
+                    "optional": true,
+                    "original": "user"
+                }
+            ],
+            "type": "ContactGroupEmailSetting s",
+            "original": "email"
+        },
+        {
+            "con": {
+                "smart": "newContactGroupHttpSetting",
+                "name": "ContactGroupHttpSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_address",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"address\" <$> TF.attribute",
+                    "name": "_address",
+                    "method": "address",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAddress",
+                    "validate": false,
+                    "optional": false,
+                    "original": "address"
+                },
+                {
+                    "default": "TF.value \"json\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"format\" <$> TF.attribute",
+                    "name": "_format",
+                    "method": "format",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFormat",
+                    "validate": false,
+                    "optional": true,
+                    "original": "format"
+                },
+                {
+                    "default": "TF.value \"POST\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"method\" <$> TF.attribute",
+                    "name": "_method",
+                    "method": "method",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMethod",
+                    "validate": false,
+                    "optional": true,
+                    "original": "method"
+                }
+            ],
+            "dependencies": [],
+            "key": "contact_group.http",
+            "name": "ContactGroupHttpSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_address",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"address\" <$> TF.attribute",
+                    "name": "_address",
+                    "method": "address",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAddress",
+                    "validate": false,
+                    "optional": false,
+                    "original": "address"
+                }
+            ],
+            "conflicts": [],
+            "type": "ContactGroupHttpSetting s",
+            "original": "http"
+        },
+        {
+            "con": {
+                "smart": "newContactGroupIrcSetting",
+                "name": "ContactGroupIrcSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_user",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"user\" <$> TF.attribute",
+                    "name": "_user",
+                    "method": "user",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUser",
+                    "validate": false,
+                    "optional": false,
+                    "original": "user"
+                }
+            ],
+            "dependencies": [],
+            "key": "contact_group.irc",
+            "name": "ContactGroupIrcSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_user",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"user\" <$> TF.attribute",
+                    "name": "_user",
+                    "method": "user",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUser",
+                    "validate": false,
+                    "optional": false,
+                    "original": "user"
+                }
+            ],
+            "conflicts": [],
+            "type": "ContactGroupIrcSetting s",
+            "original": "irc"
+        },
+        {
+            "con": {
+                "smart": "newContactGroupPagerDutySetting",
+                "name": "ContactGroupPagerDutySetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"contact_group_fallback\" <$> TF.attribute",
+                    "name": "_contactGroupFallback",
+                    "method": "contactGroupFallback",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasContactGroupFallback",
+                    "validate": false,
+                    "optional": true,
+                    "original": "contact_group_fallback"
+                },
+                {
+                    "default": "_serviceKey",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"service_key\" <$> TF.attribute",
+                    "name": "_serviceKey",
+                    "method": "serviceKey",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasServiceKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "service_key"
+                },
+                {
+                    "default": "_webhookUrl",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"webhook_url\" <$> TF.attribute",
+                    "name": "_webhookUrl",
+                    "method": "webhookUrl",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasWebhookUrl",
+                    "validate": false,
+                    "optional": false,
+                    "original": "webhook_url"
+                }
+            ],
+            "dependencies": [],
+            "key": "contact_group.pager_duty",
+            "name": "ContactGroupPagerDutySetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_serviceKey",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"service_key\" <$> TF.attribute",
+                    "name": "_serviceKey",
+                    "method": "serviceKey",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasServiceKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "service_key"
+                },
+                {
+                    "default": "_webhookUrl",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"webhook_url\" <$> TF.attribute",
+                    "name": "_webhookUrl",
+                    "method": "webhookUrl",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasWebhookUrl",
+                    "validate": false,
+                    "optional": false,
+                    "original": "webhook_url"
+                }
+            ],
+            "conflicts": [],
+            "type": "ContactGroupPagerDutySetting s",
+            "original": "pager_duty"
+        },
+        {
+            "con": {
+                "smart": "newContactGroupSlackSetting",
+                "name": "ContactGroupSlackSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.value P.True",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"buttons\" <$> TF.attribute",
+                    "name": "_buttons",
+                    "method": "buttons",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasButtons",
+                    "validate": false,
+                    "optional": true,
+                    "original": "buttons"
+                },
+                {
+                    "default": "_channel",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"channel\" <$> TF.attribute",
+                    "name": "_channel",
+                    "method": "channel",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasChannel",
+                    "validate": false,
+                    "optional": false,
+                    "original": "channel"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"contact_group_fallback\" <$> TF.attribute",
+                    "name": "_contactGroupFallback",
+                    "method": "contactGroupFallback",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasContactGroupFallback",
+                    "validate": false,
+                    "optional": true,
+                    "original": "contact_group_fallback"
+                },
+                {
+                    "default": "_team",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"team\" <$> TF.attribute",
+                    "name": "_team",
+                    "method": "team",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTeam",
+                    "validate": false,
+                    "optional": false,
+                    "original": "team"
+                },
+                {
+                    "default": "TF.value \"Circonus\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Username Slackbot uses in Slack to deliver a notification"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"username\" <$> TF.attribute",
+                    "name": "_username",
+                    "method": "username",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUsername",
+                    "validate": false,
+                    "optional": true,
+                    "original": "username"
+                }
+            ],
+            "dependencies": [],
+            "key": "contact_group.slack",
+            "name": "ContactGroupSlackSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_channel",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"channel\" <$> TF.attribute",
+                    "name": "_channel",
+                    "method": "channel",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasChannel",
+                    "validate": false,
+                    "optional": false,
+                    "original": "channel"
+                },
+                {
+                    "default": "_team",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"team\" <$> TF.attribute",
+                    "name": "_team",
+                    "method": "team",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTeam",
+                    "validate": false,
+                    "optional": false,
+                    "original": "team"
+                }
+            ],
+            "conflicts": [],
+            "type": "ContactGroupSlackSetting s",
+            "original": "slack"
+        },
+        {
+            "con": {
+                "smart": "newContactGroupSmsSetting",
+                "name": "ContactGroupSmsSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"address\" <$> TF.attribute",
+                    "name": "_address",
+                    "method": "address",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_user",
+                            "method": "user"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"user\" <$> TF.attribute",
+                    "name": "_user",
+                    "method": "user",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_address",
+                            "method": "address"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUser",
+                    "validate": false,
+                    "optional": true,
+                    "original": "user"
+                }
+            ],
+            "dependencies": [],
+            "key": "contact_group.sms",
+            "name": "ContactGroupSmsSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"address\" <$> TF.attribute",
+                    "name": "_address",
+                    "method": "address",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_user",
+                            "method": "user"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"user\" <$> TF.attribute",
+                    "name": "_user",
+                    "method": "user",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_address",
+                            "method": "address"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUser",
+                    "validate": false,
+                    "optional": true,
+                    "original": "user"
+                }
+            ],
+            "type": "ContactGroupSmsSetting s",
+            "original": "sms"
+        },
+        {
+            "con": {
+                "smart": "newContactGroupVictoropsSetting",
+                "name": "ContactGroupVictoropsSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_apiKey",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"api_key\" <$> TF.attribute",
+                    "name": "_apiKey",
+                    "method": "apiKey",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasApiKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "api_key"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"contact_group_fallback\" <$> TF.attribute",
+                    "name": "_contactGroupFallback",
+                    "method": "contactGroupFallback",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasContactGroupFallback",
+                    "validate": false,
+                    "optional": true,
+                    "original": "contact_group_fallback"
+                },
+                {
+                    "default": "_critical",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
+                    "name": "_critical",
+                    "method": "critical",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasCritical",
+                    "validate": false,
+                    "optional": false,
+                    "original": "critical"
+                },
+                {
+                    "default": "_info",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"info\" <$> TF.attribute",
+                    "name": "_info",
+                    "method": "info",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasInfo",
+                    "validate": false,
+                    "optional": false,
+                    "original": "info"
+                },
+                {
+                    "default": "_team",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"team\" <$> TF.attribute",
+                    "name": "_team",
+                    "method": "team",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTeam",
+                    "validate": false,
+                    "optional": false,
+                    "original": "team"
+                },
+                {
+                    "default": "_warning",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
+                    "name": "_warning",
+                    "method": "warning",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasWarning",
+                    "validate": false,
+                    "optional": false,
+                    "original": "warning"
+                }
+            ],
+            "dependencies": [],
+            "key": "contact_group.victorops",
+            "name": "ContactGroupVictoropsSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_critical",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
+                    "name": "_critical",
+                    "method": "critical",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasCritical",
+                    "validate": false,
+                    "optional": false,
+                    "original": "critical"
+                },
+                {
+                    "default": "_info",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"info\" <$> TF.attribute",
+                    "name": "_info",
+                    "method": "info",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasInfo",
+                    "validate": false,
+                    "optional": false,
+                    "original": "info"
+                },
+                {
+                    "default": "_apiKey",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"api_key\" <$> TF.attribute",
+                    "name": "_apiKey",
+                    "method": "apiKey",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasApiKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "api_key"
+                },
+                {
+                    "default": "_team",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"team\" <$> TF.attribute",
+                    "name": "_team",
+                    "method": "team",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTeam",
+                    "validate": false,
+                    "optional": false,
+                    "original": "team"
+                },
+                {
+                    "default": "_warning",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
+                    "name": "_warning",
+                    "method": "warning",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasWarning",
+                    "validate": false,
+                    "optional": false,
+                    "original": "warning"
+                }
+            ],
+            "conflicts": [],
+            "type": "ContactGroupVictoropsSetting s",
+            "original": "victorops"
+        },
+        {
+            "con": {
+                "smart": "newContactGroupXmppSetting",
+                "name": "ContactGroupXmppSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"address\" <$> TF.attribute",
+                    "name": "_address",
+                    "method": "address",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_user",
+                            "method": "user"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"user\" <$> TF.attribute",
+                    "name": "_user",
+                    "method": "user",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_address",
+                            "method": "address"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUser",
+                    "validate": false,
+                    "optional": true,
+                    "original": "user"
+                }
+            ],
+            "dependencies": [],
+            "key": "contact_group.xmpp",
+            "name": "ContactGroupXmppSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"address\" <$> TF.attribute",
+                    "name": "_address",
+                    "method": "address",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_user",
+                            "method": "user"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"user\" <$> TF.attribute",
+                    "name": "_user",
+                    "method": "user",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_address",
+                            "method": "address"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUser",
+                    "validate": false,
+                    "optional": true,
+                    "original": "user"
+                }
+            ],
+            "type": "ContactGroupXmppSetting s",
+            "original": "xmpp"
+        },
+        {
+            "con": {
+                "smart": "newGraphMetricClusterSetting",
+                "name": "GraphMetricClusterSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.value P.True",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"active\" <$> TF.attribute",
+                    "name": "_active",
+                    "method": "active",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasActive",
+                    "validate": false,
+                    "optional": true,
+                    "original": "active"
+                },
+                {
+                    "default": "TF.value \"none\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"aggregate\" <$> TF.attribute",
+                    "name": "_aggregate",
+                    "method": "aggregate",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAggregate",
+                    "validate": false,
+                    "optional": true,
+                    "original": "aggregate"
+                },
+                {
+                    "default": "TF.value \"left\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"axis\" <$> TF.attribute",
+                    "name": "_axis",
+                    "method": "axis",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAxis",
+                    "validate": false,
+                    "optional": true,
+                    "original": "axis"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"color\" <$> TF.attribute",
+                    "name": "_color",
+                    "method": "color",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasColor",
+                    "validate": false,
+                    "optional": true,
+                    "original": "color"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"query\" <$> TF.attribute",
+                    "name": "_query",
+                    "method": "query",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasQuery",
+                    "validate": false,
+                    "optional": true,
+                    "original": "query"
+                }
+            ],
+            "dependencies": [],
+            "key": "graph.metric_cluster",
+            "name": "GraphMetricClusterSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                }
+            ],
+            "conflicts": [],
+            "type": "GraphMetricClusterSetting s",
+            "original": "metric_cluster"
+        },
+        {
+            "con": {
+                "smart": "newGraphMetricSetting",
+                "name": "GraphMetricSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.value P.True",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"active\" <$> TF.attribute",
+                    "name": "_active",
+                    "method": "active",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasActive",
+                    "validate": false,
+                    "optional": true,
+                    "original": "active"
                 },
                 {
                     "default": "TF.Nil",
@@ -2506,6 +3935,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"stack\" <$> TF.attribute",
                     "name": "_stack",
                     "method": "stack",
@@ -2519,8 +3965,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "circonus_check.metric",
-            "name": "MetricSetting",
+            "key": "graph.metric",
+            "name": "GraphMetricSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -2543,25 +3989,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Name of the metric"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_metricType",
                     "computed": false,
                     "required": true,
@@ -2577,25 +4004,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "metric_type"
-                },
-                {
-                    "default": "_type'",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Type of metric (e.g. numeric, histogram, text)"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": false,
-                    "original": "type"
                 }
             ],
             "conflicts": [
@@ -2674,496 +4082,13 @@
                     "original": "metric_name"
                 }
             ],
-            "type": "MetricSetting s",
+            "type": "GraphMetricSetting s",
             "original": "metric"
         },
         {
             "con": {
-                "smart": "newMetricClusterSetting",
-                "name": "MetricClusterSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.value P.True",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"active\" <$> TF.attribute",
-                    "name": "_active",
-                    "method": "active",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasActive",
-                    "validate": false,
-                    "optional": true,
-                    "original": "active"
-                },
-                {
-                    "default": "TF.value \"none\"",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"aggregate\" <$> TF.attribute",
-                    "name": "_aggregate",
-                    "method": "aggregate",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAggregate",
-                    "validate": false,
-                    "optional": true,
-                    "original": "aggregate"
-                },
-                {
-                    "default": "TF.value \"left\"",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"axis\" <$> TF.attribute",
-                    "name": "_axis",
-                    "method": "axis",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAxis",
-                    "validate": false,
-                    "optional": true,
-                    "original": "axis"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"color\" <$> TF.attribute",
-                    "name": "_color",
-                    "method": "color",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasColor",
-                    "validate": false,
-                    "optional": true,
-                    "original": "color"
-                },
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"query\" <$> TF.attribute",
-                    "name": "_query",
-                    "method": "query",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasQuery",
-                    "validate": false,
-                    "optional": true,
-                    "original": "query"
-                }
-            ],
-            "dependencies": [],
-            "key": "circonus_graph.metric_cluster",
-            "name": "MetricClusterSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                }
-            ],
-            "conflicts": [],
-            "type": "MetricClusterSetting s",
-            "original": "metric_cluster"
-        },
-        {
-            "con": {
-                "smart": "newMysqlSetting",
-                "name": "MysqlSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_dsn",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The connect DSN for the MySQL instance"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"dsn\" <$> TF.attribute",
-                    "name": "_dsn",
-                    "method": "dsn",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDsn",
-                    "validate": false,
-                    "optional": false,
-                    "original": "dsn"
-                },
-                {
-                    "default": "_query",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The SQL to use as the query"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"query\" <$> TF.attribute",
-                    "name": "_query",
-                    "method": "query",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasQuery",
-                    "validate": false,
-                    "optional": false,
-                    "original": "query"
-                }
-            ],
-            "dependencies": [],
-            "key": "circonus_check.mysql",
-            "name": "MysqlSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_dsn",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The connect DSN for the MySQL instance"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"dsn\" <$> TF.attribute",
-                    "name": "_dsn",
-                    "method": "dsn",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDsn",
-                    "validate": false,
-                    "optional": false,
-                    "original": "dsn"
-                },
-                {
-                    "default": "_query",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The SQL to use as the query"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"query\" <$> TF.attribute",
-                    "name": "_query",
-                    "method": "query",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasQuery",
-                    "validate": false,
-                    "optional": false,
-                    "original": "query"
-                }
-            ],
-            "conflicts": [],
-            "type": "MysqlSetting s",
-            "original": "mysql"
-        },
-        {
-            "con": {
-                "smart": "newOverSetting",
-                "name": "OverSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.value \"300s\"",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Duration over which data from the last interval is examined"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"last\" <$> TF.attribute",
-                    "name": "_last",
-                    "method": "last",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLast",
-                    "validate": false,
-                    "optional": true,
-                    "original": "last"
-                },
-                {
-                    "default": "TF.value \"average\"",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Define the window funciton to use over the last duration"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"using\" <$> TF.attribute",
-                    "name": "_using",
-                    "method": "using",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasUsing",
-                    "validate": false,
-                    "optional": true,
-                    "original": "using"
-                }
-            ],
-            "dependencies": [],
-            "key": "circonus_rule_set.if.value.over",
-            "name": "OverSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "OverSetting s",
-            "original": "over"
-        },
-        {
-            "con": {
-                "smart": "newPagerDutySetting",
-                "name": "PagerDutySetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"contact_group_fallback\" <$> TF.attribute",
-                    "name": "_contactGroupFallback",
-                    "method": "contactGroupFallback",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasContactGroupFallback",
-                    "validate": false,
-                    "optional": true,
-                    "original": "contact_group_fallback"
-                },
-                {
-                    "default": "_serviceKey",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"service_key\" <$> TF.attribute",
-                    "name": "_serviceKey",
-                    "method": "serviceKey",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasServiceKey",
-                    "validate": false,
-                    "optional": false,
-                    "original": "service_key"
-                },
-                {
-                    "default": "_webhookUrl",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"webhook_url\" <$> TF.attribute",
-                    "name": "_webhookUrl",
-                    "method": "webhookUrl",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasWebhookUrl",
-                    "validate": false,
-                    "optional": false,
-                    "original": "webhook_url"
-                }
-            ],
-            "dependencies": [],
-            "key": "circonus_contact_group.pager_duty",
-            "name": "PagerDutySetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_serviceKey",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"service_key\" <$> TF.attribute",
-                    "name": "_serviceKey",
-                    "method": "serviceKey",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasServiceKey",
-                    "validate": false,
-                    "optional": false,
-                    "original": "service_key"
-                },
-                {
-                    "default": "_webhookUrl",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"webhook_url\" <$> TF.attribute",
-                    "name": "_webhookUrl",
-                    "method": "webhookUrl",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasWebhookUrl",
-                    "validate": false,
-                    "optional": false,
-                    "original": "webhook_url"
-                }
-            ],
-            "conflicts": [],
-            "type": "PagerDutySetting s",
-            "original": "pager_duty"
-        },
-        {
-            "con": {
-                "smart": "newPostgresqlSetting",
-                "name": "PostgresqlSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_dsn",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The connect DSN for the PostgreSQL instance"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"dsn\" <$> TF.attribute",
-                    "name": "_dsn",
-                    "method": "dsn",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDsn",
-                    "validate": false,
-                    "optional": false,
-                    "original": "dsn"
-                },
-                {
-                    "default": "_query",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The SQL to use as the query"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"query\" <$> TF.attribute",
-                    "name": "_query",
-                    "method": "query",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasQuery",
-                    "validate": false,
-                    "optional": false,
-                    "original": "query"
-                }
-            ],
-            "dependencies": [],
-            "key": "circonus_check.postgresql",
-            "name": "PostgresqlSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_dsn",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The connect DSN for the PostgreSQL instance"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"dsn\" <$> TF.attribute",
-                    "name": "_dsn",
-                    "method": "dsn",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDsn",
-                    "validate": false,
-                    "optional": false,
-                    "original": "dsn"
-                },
-                {
-                    "default": "_query",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The SQL to use as the query"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"query\" <$> TF.attribute",
-                    "name": "_query",
-                    "method": "query",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasQuery",
-                    "validate": false,
-                    "optional": false,
-                    "original": "query"
-                }
-            ],
-            "conflicts": [],
-            "type": "PostgresqlSetting s",
-            "original": "postgresql"
-        },
-        {
-            "con": {
-                "smart": "newQuerySetting",
-                "name": "QuerySetting'"
+                "smart": "newMetricClusterQuerySetting",
+                "name": "MetricClusterQuerySetting'"
             },
             "arguments": [
                 {
@@ -3206,8 +4131,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "circonus_metric_cluster.query",
-            "name": "QuerySetting",
+            "key": "metric_cluster.query",
+            "name": "MetricClusterQuerySetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -3251,530 +4176,71 @@
                 }
             ],
             "conflicts": [],
-            "type": "QuerySetting s",
+            "type": "MetricClusterQuerySetting s",
             "original": "query"
         },
         {
             "con": {
-                "smart": "newSlackSetting",
-                "name": "SlackSetting'"
+                "smart": "newRuleSetIfSetting",
+                "name": "RuleSetIfSetting'"
             },
             "arguments": [
                 {
-                    "default": "TF.value P.True",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"buttons\" <$> TF.attribute",
-                    "name": "_buttons",
-                    "method": "buttons",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasButtons",
-                    "validate": false,
-                    "optional": true,
-                    "original": "buttons"
-                },
-                {
-                    "default": "_channel",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"channel\" <$> TF.attribute",
-                    "name": "_channel",
-                    "method": "channel",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasChannel",
-                    "validate": false,
-                    "optional": false,
-                    "original": "channel"
-                },
-                {
                     "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"contact_group_fallback\" <$> TF.attribute",
-                    "name": "_contactGroupFallback",
-                    "method": "contactGroupFallback",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasContactGroupFallback",
-                    "validate": false,
-                    "optional": true,
-                    "original": "contact_group_fallback"
-                },
-                {
-                    "default": "_team",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"team\" <$> TF.attribute",
-                    "name": "_team",
-                    "method": "team",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasTeam",
-                    "validate": false,
-                    "optional": false,
-                    "original": "team"
-                },
-                {
-                    "default": "TF.value \"Circonus\"",
                     "computed": false,
                     "required": false,
                     "help": [
-                        "Username Slackbot uses in Slack to deliver a notification"
+                        "Description of the action(s) to take when this rule set is active"
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"username\" <$> TF.attribute",
-                    "name": "_username",
-                    "method": "username",
+                    "encoder": "TF.assign \"then\" <$> TF.attribute",
+                    "name": "_then'",
+                    "method": "then'",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasUsername",
-                    "validate": false,
+                    "type": "TF.Attr s (RuleSetIfThenSetting s)",
+                    "class": "HasThen'",
+                    "validate": true,
                     "optional": true,
-                    "original": "username"
-                }
-            ],
-            "dependencies": [],
-            "key": "circonus_contact_group.slack",
-            "name": "SlackSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_channel",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"channel\" <$> TF.attribute",
-                    "name": "_channel",
-                    "method": "channel",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasChannel",
-                    "validate": false,
-                    "optional": false,
-                    "original": "channel"
-                },
-                {
-                    "default": "_team",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"team\" <$> TF.attribute",
-                    "name": "_team",
-                    "method": "team",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasTeam",
-                    "validate": false,
-                    "optional": false,
-                    "original": "team"
-                }
-            ],
-            "conflicts": [],
-            "type": "SlackSetting s",
-            "original": "slack"
-        },
-        {
-            "con": {
-                "smart": "newSmsSetting",
-                "name": "SmsSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"address\" <$> TF.attribute",
-                    "name": "_address",
-                    "method": "address",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_user",
-                            "method": "user"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAddress",
-                    "validate": false,
-                    "optional": true,
-                    "original": "address"
+                    "original": "then"
                 },
                 {
                     "default": "TF.Nil",
                     "computed": false,
                     "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"user\" <$> TF.attribute",
-                    "name": "_user",
-                    "method": "user",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_address",
-                            "method": "address"
-                        }
+                    "help": [
+                        "Predicate that the rule set uses to evaluate a stream of metrics"
                     ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasUser",
-                    "validate": false,
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (RuleSetIfValueSetting s)",
+                    "class": "HasValue",
+                    "validate": true,
                     "optional": true,
-                    "original": "user"
+                    "original": "value"
                 }
             ],
-            "dependencies": [],
-            "key": "circonus_contact_group.sms",
-            "name": "SmsSetting",
+            "dependencies": [
+                "RuleSetIfThenSetting",
+                "RuleSetIfValueSetting"
+            ],
+            "key": "rule_set.if",
+            "name": "RuleSetIfSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
-            "conflicts": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"address\" <$> TF.attribute",
-                    "name": "_address",
-                    "method": "address",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_user",
-                            "method": "user"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAddress",
-                    "validate": false,
-                    "optional": true,
-                    "original": "address"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"user\" <$> TF.attribute",
-                    "name": "_user",
-                    "method": "user",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_address",
-                            "method": "address"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasUser",
-                    "validate": false,
-                    "optional": true,
-                    "original": "user"
-                }
-            ],
-            "type": "SmsSetting s",
-            "original": "sms"
-        },
-        {
-            "con": {
-                "smart": "newStatsdSetting",
-                "name": "StatsdSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_sourceIp",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The source IP of the statsd metrics stream"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"source_ip\" <$> TF.attribute",
-                    "name": "_sourceIp",
-                    "method": "sourceIp",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasSourceIp",
-                    "validate": false,
-                    "optional": false,
-                    "original": "source_ip"
-                }
-            ],
-            "dependencies": [],
-            "key": "circonus_check.statsd",
-            "name": "StatsdSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_sourceIp",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The source IP of the statsd metrics stream"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"source_ip\" <$> TF.attribute",
-                    "name": "_sourceIp",
-                    "method": "sourceIp",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasSourceIp",
-                    "validate": false,
-                    "optional": false,
-                    "original": "source_ip"
-                }
-            ],
             "conflicts": [],
-            "type": "StatsdSetting s",
-            "original": "statsd"
+            "type": "RuleSetIfSetting s",
+            "original": "if"
         },
         {
             "con": {
-                "smart": "newTcpSetting",
-                "name": "TcpSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "This regular expression is matched against the response banner. If a match",
-                        "is not found, the check will be marked as bad."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"banner_regexp\" <$> TF.attribute",
-                    "name": "_bannerRegexp",
-                    "method": "bannerRegexp",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasBannerRegexp",
-                    "validate": false,
-                    "optional": true,
-                    "original": "banner_regexp"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "A path to a file containing all the certificate authorities that should be",
-                        "loaded to validate the remote certificate (for TLS checks)."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ca_chain\" <$> TF.attribute",
-                    "name": "_caChain",
-                    "method": "caChain",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCaChain",
-                    "validate": false,
-                    "optional": true,
-                    "original": "ca_chain"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "A path to a file containing the client certificate that will be presented to",
-                        "the remote server (for TLS checks)."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"certificate_file\" <$> TF.attribute",
-                    "name": "_certificateFile",
-                    "method": "certificateFile",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCertificateFile",
-                    "validate": false,
-                    "optional": true,
-                    "original": "certificate_file"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "A list of ciphers to be used when establishing a TLS connection"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ciphers\" <$> TF.attribute",
-                    "name": "_ciphers",
-                    "method": "ciphers",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCiphers",
-                    "validate": false,
-                    "optional": true,
-                    "original": "ciphers"
-                },
-                {
-                    "default": "_host",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Specifies the host name or IP address to connect to for this TCP check"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"host\" <$> TF.attribute",
-                    "name": "_host",
-                    "method": "host",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasHost",
-                    "validate": false,
-                    "optional": false,
-                    "original": "host"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "A path to a file containing key to be used in conjunction with the cilent",
-                        "certificate (for TLS checks)"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"key_file\" <$> TF.attribute",
-                    "name": "_keyFile",
-                    "method": "keyFile",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasKeyFile",
-                    "validate": false,
-                    "optional": true,
-                    "original": "key_file"
-                },
-                {
-                    "default": "_port",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Specifies the port on which the management interface can be reached."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"port\" <$> TF.attribute",
-                    "name": "_port",
-                    "method": "port",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasPort",
-                    "validate": false,
-                    "optional": false,
-                    "original": "port"
-                },
-                {
-                    "default": "TF.value P.False",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Upgrade TCP connection to use TLS."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"tls\" <$> TF.attribute",
-                    "name": "_tls",
-                    "method": "tls",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasTls",
-                    "validate": false,
-                    "optional": true,
-                    "original": "tls"
-                }
-            ],
-            "dependencies": [],
-            "key": "circonus_check.tcp",
-            "name": "TcpSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_host",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Specifies the host name or IP address to connect to for this TCP check"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"host\" <$> TF.attribute",
-                    "name": "_host",
-                    "method": "host",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasHost",
-                    "validate": false,
-                    "optional": false,
-                    "original": "host"
-                },
-                {
-                    "default": "_port",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Specifies the port on which the management interface can be reached."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"port\" <$> TF.attribute",
-                    "name": "_port",
-                    "method": "port",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasPort",
-                    "validate": false,
-                    "optional": false,
-                    "original": "port"
-                }
-            ],
-            "conflicts": [],
-            "type": "TcpSetting s",
-            "original": "tcp"
-        },
-        {
-            "con": {
-                "smart": "newThen'Setting",
-                "name": "Then'Setting'"
+                "smart": "newRuleSetIfThenSetting",
+                "name": "RuleSetIfThenSetting'"
             },
             "arguments": [
                 {
@@ -3838,138 +4304,74 @@
                 }
             ],
             "dependencies": [],
-            "key": "circonus_rule_set.if.then",
-            "name": "Then'Setting",
+            "key": "rule_set.if.then",
+            "name": "RuleSetIfThenSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "Then'Setting s",
+            "type": "RuleSetIfThenSetting s",
             "original": "then"
         },
         {
             "con": {
-                "smart": "newUsageSetting",
-                "name": "UsageSetting'"
+                "smart": "newRuleSetIfValueOverSetting",
+                "name": "RuleSetIfValueOverSetting'"
             },
-            "arguments": [],
-            "dependencies": [],
-            "key": "circonus_account.usage",
-            "name": "UsageSetting",
-            "threaded": true,
-            "attributes": [
+            "arguments": [
                 {
-                    "default": "TF.Nil",
-                    "computed": true,
+                    "default": "TF.value \"300s\"",
+                    "computed": false,
                     "required": false,
-                    "help": [],
+                    "help": [
+                        "Duration over which data from the last interval is examined"
+                    ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"limit\" <$> TF.attribute",
-                    "name": "_computedLimit",
-                    "method": "computedLimit",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasComputedLimit",
-                    "validate": false,
-                    "optional": false,
-                    "original": "limit"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_computedType",
-                    "method": "computedType",
+                    "encoder": "TF.assign \"last\" <$> TF.attribute",
+                    "name": "_last",
+                    "method": "last",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasComputedType",
+                    "class": "HasLast",
                     "validate": false,
-                    "optional": false,
-                    "original": "type"
+                    "optional": true,
+                    "original": "last"
                 },
                 {
-                    "default": "TF.Nil",
-                    "computed": true,
+                    "default": "TF.value \"average\"",
+                    "computed": false,
                     "required": false,
-                    "help": [],
+                    "help": [
+                        "Define the window funciton to use over the last duration"
+                    ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"used\" <$> TF.attribute",
-                    "name": "_computedUsed",
-                    "method": "computedUsed",
+                    "encoder": "TF.assign \"using\" <$> TF.attribute",
+                    "name": "_using",
+                    "method": "using",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasComputedUsed",
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUsing",
                     "validate": false,
-                    "optional": false,
-                    "original": "used"
+                    "optional": true,
+                    "original": "using"
                 }
             ],
+            "dependencies": [],
+            "key": "rule_set.if.value.over",
+            "name": "RuleSetIfValueOverSetting",
+            "threaded": true,
+            "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "UsageSetting s",
-            "original": "usage"
+            "type": "RuleSetIfValueOverSetting s",
+            "original": "over"
         },
         {
             "con": {
-                "smart": "newUsersSetting",
-                "name": "UsersSetting'"
-            },
-            "arguments": [],
-            "dependencies": [],
-            "key": "circonus_account.users",
-            "name": "UsersSetting",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "_computedId",
-                    "method": "computedId",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "id"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"role\" <$> TF.attribute",
-                    "name": "_computedRole",
-                    "method": "computedRole",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedRole",
-                    "validate": false,
-                    "optional": false,
-                    "original": "role"
-                }
-            ],
-            "parameters": [],
-            "conflicts": [],
-            "type": "UsersSetting s",
-            "original": "users"
-        },
-        {
-            "con": {
-                "smart": "newValueSetting",
-                "name": "ValueSetting'"
+                "smart": "newRuleSetIfValueSetting",
+                "name": "RuleSetIfValueSetting'"
             },
             "arguments": [
                 {
@@ -4487,7 +4889,7 @@
                             "method": "notMatch"
                         }
                     ],
-                    "type": "TF.Attr s (OverSetting s)",
+                    "type": "TF.Attr s (RuleSetIfValueOverSetting s)",
                     "class": "HasOver",
                     "validate": true,
                     "optional": true,
@@ -4495,10 +4897,10 @@
                 }
             ],
             "dependencies": [
-                "OverSetting"
+                "RuleSetIfValueOverSetting"
             ],
-            "key": "circonus_rule_set.if.value",
-            "name": "ValueSetting",
+            "key": "rule_set.if.value",
+            "name": "RuleSetIfValueSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
@@ -5018,330 +5420,15 @@
                             "method": "notMatch"
                         }
                     ],
-                    "type": "TF.Attr s (OverSetting s)",
+                    "type": "TF.Attr s (RuleSetIfValueOverSetting s)",
                     "class": "HasOver",
                     "validate": true,
                     "optional": true,
                     "original": "over"
                 }
             ],
-            "type": "ValueSetting s",
+            "type": "RuleSetIfValueSetting s",
             "original": "value"
-        },
-        {
-            "con": {
-                "smart": "newVictoropsSetting",
-                "name": "VictoropsSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_apiKey",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"api_key\" <$> TF.attribute",
-                    "name": "_apiKey",
-                    "method": "apiKey",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasApiKey",
-                    "validate": false,
-                    "optional": false,
-                    "original": "api_key"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"contact_group_fallback\" <$> TF.attribute",
-                    "name": "_contactGroupFallback",
-                    "method": "contactGroupFallback",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasContactGroupFallback",
-                    "validate": false,
-                    "optional": true,
-                    "original": "contact_group_fallback"
-                },
-                {
-                    "default": "_critical",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
-                    "name": "_critical",
-                    "method": "critical",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasCritical",
-                    "validate": false,
-                    "optional": false,
-                    "original": "critical"
-                },
-                {
-                    "default": "_info",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"info\" <$> TF.attribute",
-                    "name": "_info",
-                    "method": "info",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasInfo",
-                    "validate": false,
-                    "optional": false,
-                    "original": "info"
-                },
-                {
-                    "default": "_team",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"team\" <$> TF.attribute",
-                    "name": "_team",
-                    "method": "team",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasTeam",
-                    "validate": false,
-                    "optional": false,
-                    "original": "team"
-                },
-                {
-                    "default": "_warning",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
-                    "name": "_warning",
-                    "method": "warning",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasWarning",
-                    "validate": false,
-                    "optional": false,
-                    "original": "warning"
-                }
-            ],
-            "dependencies": [],
-            "key": "circonus_contact_group.victorops",
-            "name": "VictoropsSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_critical",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
-                    "name": "_critical",
-                    "method": "critical",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasCritical",
-                    "validate": false,
-                    "optional": false,
-                    "original": "critical"
-                },
-                {
-                    "default": "_info",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"info\" <$> TF.attribute",
-                    "name": "_info",
-                    "method": "info",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasInfo",
-                    "validate": false,
-                    "optional": false,
-                    "original": "info"
-                },
-                {
-                    "default": "_apiKey",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"api_key\" <$> TF.attribute",
-                    "name": "_apiKey",
-                    "method": "apiKey",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasApiKey",
-                    "validate": false,
-                    "optional": false,
-                    "original": "api_key"
-                },
-                {
-                    "default": "_team",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"team\" <$> TF.attribute",
-                    "name": "_team",
-                    "method": "team",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasTeam",
-                    "validate": false,
-                    "optional": false,
-                    "original": "team"
-                },
-                {
-                    "default": "_warning",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
-                    "name": "_warning",
-                    "method": "warning",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasWarning",
-                    "validate": false,
-                    "optional": false,
-                    "original": "warning"
-                }
-            ],
-            "conflicts": [],
-            "type": "VictoropsSetting s",
-            "original": "victorops"
-        },
-        {
-            "con": {
-                "smart": "newXmppSetting",
-                "name": "XmppSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"address\" <$> TF.attribute",
-                    "name": "_address",
-                    "method": "address",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_user",
-                            "method": "user"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAddress",
-                    "validate": false,
-                    "optional": true,
-                    "original": "address"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"user\" <$> TF.attribute",
-                    "name": "_user",
-                    "method": "user",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_address",
-                            "method": "address"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasUser",
-                    "validate": false,
-                    "optional": true,
-                    "original": "user"
-                }
-            ],
-            "dependencies": [],
-            "key": "circonus_contact_group.xmpp",
-            "name": "XmppSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"address\" <$> TF.attribute",
-                    "name": "_address",
-                    "method": "address",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_user",
-                            "method": "user"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAddress",
-                    "validate": false,
-                    "optional": true,
-                    "original": "address"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"user\" <$> TF.attribute",
-                    "name": "_user",
-                    "method": "user",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_address",
-                            "method": "address"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasUser",
-                    "validate": false,
-                    "optional": true,
-                    "original": "user"
-                }
-            ],
-            "type": "XmppSetting s",
-            "original": "xmpp"
         }
     ],
     "url": "https://www.terraform.io/docs/providers/circonus/index.html",
@@ -5401,11 +5488,11 @@
             ],
             "url": "https://www.terraform.io/docs/providers/circonus/d/account.html",
             "dependencies": [
-                "InvitesSetting",
-                "UsageSetting",
-                "UsersSetting"
+                "AccountInvitesSetting",
+                "AccountUsageSetting",
+                "AccountUsersSetting"
             ],
-            "key": "circonus_account",
+            "key": "account",
             "name": "AccountData",
             "threaded": true,
             "attributes": [
@@ -5581,7 +5668,7 @@
                     "method": "computedInvites",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (InvitesSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (AccountInvitesSetting s)]",
                     "class": "HasComputedInvites",
                     "validate": false,
                     "optional": false,
@@ -5685,7 +5772,7 @@
                     "method": "computedUsage",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (UsageSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (AccountUsageSetting s)]",
                     "class": "HasComputedUsage",
                     "validate": false,
                     "optional": false,
@@ -5704,7 +5791,7 @@
                     "method": "computedUsers",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (UsersSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (AccountUsersSetting s)]",
                     "class": "HasComputedUsers",
                     "validate": false,
                     "optional": false,
@@ -5806,9 +5893,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/circonus/d/collector.html",
             "dependencies": [
-                "DetailsSetting"
+                "CollectorDetailsSetting"
             ],
-            "key": "circonus_collector",
+            "key": "collector",
             "name": "CollectorData",
             "threaded": true,
             "attributes": [
@@ -5825,7 +5912,7 @@
                     "method": "computedDetails",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (DetailsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (CollectorDetailsSetting s)]",
                     "class": "HasComputedDetails",
                     "validate": false,
                     "optional": false,
@@ -5962,7 +6049,7 @@
                     "method": "caql",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (CaqlSetting s)",
+                    "type": "TF.Attr s (CheckCaqlSetting s)",
                     "class": "HasCaql",
                     "validate": true,
                     "optional": true,
@@ -5981,7 +6068,7 @@
                     "method": "cloudwatch",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (CloudwatchSetting s)",
+                    "type": "TF.Attr s (CheckCloudwatchSetting s)",
                     "class": "HasCloudwatch",
                     "validate": true,
                     "optional": true,
@@ -6000,7 +6087,7 @@
                     "method": "collector",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (CollectorSetting s)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (CheckCollectorSetting s)))",
                     "class": "HasCollector",
                     "validate": false,
                     "optional": true,
@@ -6019,7 +6106,7 @@
                     "method": "consul",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (ConsulSetting s)",
+                    "type": "TF.Attr s (CheckConsulSetting s)",
                     "class": "HasConsul",
                     "validate": true,
                     "optional": true,
@@ -6038,7 +6125,7 @@
                     "method": "http",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (HttpSetting s)",
+                    "type": "TF.Attr s (CheckHttpSetting s)",
                     "class": "HasHttp",
                     "validate": true,
                     "optional": true,
@@ -6057,7 +6144,7 @@
                     "method": "httptrap",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (HttptrapSetting s)",
+                    "type": "TF.Attr s (CheckHttptrapSetting s)",
                     "class": "HasHttptrap",
                     "validate": true,
                     "optional": true,
@@ -6076,7 +6163,7 @@
                     "method": "icmpPing",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (IcmpPingSetting s)",
+                    "type": "TF.Attr s (CheckIcmpPingSetting s)",
                     "class": "HasIcmpPing",
                     "validate": true,
                     "optional": true,
@@ -6095,7 +6182,7 @@
                     "method": "json",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (JsonSetting s)",
+                    "type": "TF.Attr s (CheckJsonSetting s)",
                     "class": "HasJson",
                     "validate": true,
                     "optional": true,
@@ -6114,7 +6201,7 @@
                     "method": "metric",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (MetricSetting s)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (CheckMetricSetting s)))",
                     "class": "HasMetric",
                     "validate": false,
                     "optional": true,
@@ -6154,7 +6241,7 @@
                     "method": "mysql",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (MysqlSetting s)",
+                    "type": "TF.Attr s (CheckMysqlSetting s)",
                     "class": "HasMysql",
                     "validate": true,
                     "optional": true,
@@ -6230,7 +6317,7 @@
                     "method": "postgresql",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (PostgresqlSetting s)",
+                    "type": "TF.Attr s (CheckPostgresqlSetting s)",
                     "class": "HasPostgresql",
                     "validate": true,
                     "optional": true,
@@ -6249,7 +6336,7 @@
                     "method": "statsd",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (StatsdSetting s)",
+                    "type": "TF.Attr s (CheckStatsdSetting s)",
                     "class": "HasStatsd",
                     "validate": true,
                     "optional": true,
@@ -6306,7 +6393,7 @@
                     "method": "tcp",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (TcpSetting s)",
+                    "type": "TF.Attr s (CheckTcpSetting s)",
                     "class": "HasTcp",
                     "validate": true,
                     "optional": true,
@@ -6354,21 +6441,21 @@
             ],
             "url": "https://www.terraform.io/docs/providers/circonus/r/check.html",
             "dependencies": [
-                "CaqlSetting",
-                "CloudwatchSetting",
-                "CollectorSetting",
-                "ConsulSetting",
-                "HttpSetting",
-                "HttptrapSetting",
-                "IcmpPingSetting",
-                "JsonSetting",
-                "MetricSetting",
-                "MysqlSetting",
-                "PostgresqlSetting",
-                "StatsdSetting",
-                "TcpSetting"
+                "CheckCaqlSetting",
+                "CheckCloudwatchSetting",
+                "CheckCollectorSetting",
+                "CheckConsulSetting",
+                "CheckHttpSetting",
+                "CheckHttptrapSetting",
+                "CheckIcmpPingSetting",
+                "CheckJsonSetting",
+                "CheckMetricSetting",
+                "CheckMysqlSetting",
+                "CheckPostgresqlSetting",
+                "CheckStatsdSetting",
+                "CheckTcpSetting"
             ],
-            "key": "circonus_check",
+            "key": "check",
             "name": "CheckResource",
             "threaded": true,
             "attributes": [
@@ -6701,7 +6788,7 @@
                     "method": "alertOption",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (AlertOptionSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ContactGroupAlertOptionSetting s)]",
                     "class": "HasAlertOption",
                     "validate": false,
                     "optional": true,
@@ -6718,7 +6805,7 @@
                     "method": "email",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (EmailSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ContactGroupEmailSetting s)]",
                     "class": "HasEmail",
                     "validate": false,
                     "optional": true,
@@ -6735,7 +6822,7 @@
                     "method": "http",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (HttpSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ContactGroupHttpSetting s)]",
                     "class": "HasHttp",
                     "validate": false,
                     "optional": true,
@@ -6752,7 +6839,7 @@
                     "method": "irc",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (IrcSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ContactGroupIrcSetting s)]",
                     "class": "HasIrc",
                     "validate": false,
                     "optional": true,
@@ -6837,7 +6924,7 @@
                     "method": "pagerDuty",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (PagerDutySetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ContactGroupPagerDutySetting s)]",
                     "class": "HasPagerDuty",
                     "validate": false,
                     "optional": true,
@@ -6888,7 +6975,7 @@
                     "method": "slack",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (SlackSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ContactGroupSlackSetting s)]",
                     "class": "HasSlack",
                     "validate": false,
                     "optional": true,
@@ -6905,7 +6992,7 @@
                     "method": "sms",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (SmsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ContactGroupSmsSetting s)]",
                     "class": "HasSms",
                     "validate": false,
                     "optional": true,
@@ -6939,7 +7026,7 @@
                     "method": "victorops",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (VictoropsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ContactGroupVictoropsSetting s)]",
                     "class": "HasVictorops",
                     "validate": false,
                     "optional": true,
@@ -6956,7 +7043,7 @@
                     "method": "xmpp",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (XmppSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ContactGroupXmppSetting s)]",
                     "class": "HasXmpp",
                     "validate": false,
                     "optional": true,
@@ -6965,17 +7052,17 @@
             ],
             "url": "https://www.terraform.io/docs/providers/circonus/r/contact_group.html",
             "dependencies": [
-                "AlertOptionSetting",
-                "EmailSetting",
-                "HttpSetting",
-                "IrcSetting",
-                "PagerDutySetting",
-                "SlackSetting",
-                "SmsSetting",
-                "VictoropsSetting",
-                "XmppSetting"
+                "ContactGroupAlertOptionSetting",
+                "ContactGroupEmailSetting",
+                "ContactGroupHttpSetting",
+                "ContactGroupIrcSetting",
+                "ContactGroupPagerDutySetting",
+                "ContactGroupSlackSetting",
+                "ContactGroupSmsSetting",
+                "ContactGroupVictoropsSetting",
+                "ContactGroupXmppSetting"
             ],
-            "key": "circonus_contact_group",
+            "key": "contact_group",
             "name": "ContactGroupResource",
             "threaded": true,
             "attributes": [
@@ -7142,7 +7229,7 @@
                     "method": "metric",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (MetricSetting s)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (GraphMetricSetting s)))",
                     "class": "HasMetric",
                     "validate": false,
                     "optional": true,
@@ -7159,7 +7246,7 @@
                     "method": "metricCluster",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (MetricClusterSetting s)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (GraphMetricClusterSetting s)))",
                     "class": "HasMetricCluster",
                     "validate": false,
                     "optional": true,
@@ -7236,10 +7323,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/circonus/r/graph.html",
             "dependencies": [
-                "MetricSetting",
-                "MetricClusterSetting"
+                "GraphMetricSetting",
+                "GraphMetricClusterSetting"
             ],
-            "key": "circonus_graph",
+            "key": "graph",
             "name": "GraphResource",
             "threaded": true,
             "attributes": [
@@ -7388,7 +7475,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/circonus/r/metric.html",
             "dependencies": [],
-            "key": "circonus_metric",
+            "key": "metric",
             "name": "MetricResource",
             "threaded": true,
             "attributes": [
@@ -7511,7 +7598,7 @@
                     "method": "query",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (QuerySetting s)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (MetricClusterQuerySetting s)))",
                     "class": "HasQuery",
                     "validate": false,
                     "optional": true,
@@ -7539,9 +7626,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/circonus/r/metric_cluster.html",
             "dependencies": [
-                "QuerySetting"
+                "MetricClusterQuerySetting"
             ],
-            "key": "circonus_metric_cluster",
+            "key": "metric_cluster",
             "name": "MetricClusterResource",
             "threaded": true,
             "attributes": [
@@ -7647,7 +7734,7 @@
                     "method": "if'",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (If'Setting s)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (RuleSetIfSetting s)))",
                     "class": "HasIf'",
                     "validate": false,
                     "optional": false,
@@ -7770,9 +7857,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/circonus/r/rule_set.html",
             "dependencies": [
-                "If'Setting"
+                "RuleSetIfSetting"
             ],
-            "key": "circonus_rule_set",
+            "key": "rule_set",
             "name": "RuleSetResource",
             "threaded": true,
             "attributes": [
@@ -7884,7 +7971,7 @@
                     "method": "if'",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (If'Setting s)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (RuleSetIfSetting s)))",
                     "class": "HasIf'",
                     "validate": false,
                     "optional": false,
@@ -7981,7 +8068,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

@@ -63,7 +63,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/softlayer/r/ssh_key.html",
             "dependencies": [],
-            "key": "softlayer_ssh_key",
+            "key": "ssh_key",
             "name": "SshKeyResource",
             "threaded": true,
             "attributes": [
@@ -457,7 +457,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/softlayer/r/virtual_guest.html",
             "dependencies": [],
-            "key": "softlayer_virtual_guest",
+            "key": "virtual_guest",
             "name": "VirtualGuestResource",
             "threaded": true,
             "attributes": [
@@ -685,7 +685,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

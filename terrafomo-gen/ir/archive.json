@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newSourceSetting",
-                "name": "SourceSetting'"
+                "smart": "newFileSourceSetting",
+                "name": "FileSourceSetting'"
             },
             "arguments": [
                 {
@@ -42,8 +42,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "archive_file.source",
-            "name": "SourceSetting",
+            "key": "file.source",
+            "name": "FileSourceSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -83,7 +83,7 @@
                 }
             ],
             "conflicts": [],
-            "type": "SourceSetting s",
+            "type": "FileSourceSetting s",
             "original": "source"
         }
     ],
@@ -177,7 +177,7 @@
                             "method": "sourceFile"
                         }
                     ],
-                    "type": "TF.Attr s [TF.Attr s (SourceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (FileSourceSetting s)]",
                     "class": "HasSource",
                     "validate": false,
                     "optional": true,
@@ -360,10 +360,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/archive/d/file.html",
             "dependencies": [
-                "SourceSetting",
-                "SourceSetting"
+                "FileSourceSetting",
+                "FileSourceSetting"
             ],
-            "key": "archive_file",
+            "key": "file",
             "name": "FileData",
             "threaded": true,
             "attributes": [
@@ -474,7 +474,7 @@
                         "_sourceDir",
                         "_sourceFile"
                     ],
-                    "type": "TF.Attr s [TF.Attr s (SourceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (FileSourceSetting s)]",
                     "class": "HasComputedSource",
                     "validate": false,
                     "optional": false,
@@ -583,7 +583,7 @@
                             "method": "sourceFile"
                         }
                     ],
-                    "type": "TF.Attr s [TF.Attr s (SourceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (FileSourceSetting s)]",
                     "class": "HasSource",
                     "validate": false,
                     "optional": true,
@@ -840,7 +840,7 @@
                             "method": "sourceFile"
                         }
                     ],
-                    "type": "TF.Attr s [TF.Attr s (SourceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (FileSourceSetting s)]",
                     "class": "HasSource",
                     "validate": false,
                     "optional": true,
@@ -1023,10 +1023,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/archive/r/file.html",
             "dependencies": [
-                "SourceSetting",
-                "SourceSetting"
+                "FileSourceSetting",
+                "FileSourceSetting"
             ],
-            "key": "archive_file",
+            "key": "file",
             "name": "FileResource",
             "threaded": true,
             "attributes": [
@@ -1137,7 +1137,7 @@
                         "_sourceDir",
                         "_sourceFile"
                     ],
-                    "type": "TF.Attr s [TF.Attr s (SourceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (FileSourceSetting s)]",
                     "class": "HasComputedSource",
                     "validate": false,
                     "optional": false,
@@ -1246,7 +1246,7 @@
                             "method": "sourceFile"
                         }
                     ],
-                    "type": "TF.Attr s [TF.Attr s (SourceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (FileSourceSetting s)]",
                     "class": "HasSource",
                     "validate": false,
                     "optional": true,
@@ -1421,7 +1421,7 @@
         },
         "arguments": [],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

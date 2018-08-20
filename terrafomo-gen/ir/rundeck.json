@@ -2,165 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newCommandSetting",
-                "name": "CommandSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "_description",
-                    "method": "description",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDescription",
-                    "validate": false,
-                    "optional": true,
-                    "original": "description"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"inline_script\" <$> TF.attribute",
-                    "name": "_inlineScript",
-                    "method": "inlineScript",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasInlineScript",
-                    "validate": false,
-                    "optional": true,
-                    "original": "inline_script"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"job\" <$> TF.attribute",
-                    "name": "_job",
-                    "method": "job",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (JobSetting s)]",
-                    "class": "HasJob",
-                    "validate": false,
-                    "optional": true,
-                    "original": "job"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"node_step_plugin\" <$> TF.attribute",
-                    "name": "_nodeStepPlugin",
-                    "method": "nodeStepPlugin",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NodeStepPluginSetting s)]",
-                    "class": "HasNodeStepPlugin",
-                    "validate": false,
-                    "optional": true,
-                    "original": "node_step_plugin"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"script_file\" <$> TF.attribute",
-                    "name": "_scriptFile",
-                    "method": "scriptFile",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasScriptFile",
-                    "validate": false,
-                    "optional": true,
-                    "original": "script_file"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"script_file_args\" <$> TF.attribute",
-                    "name": "_scriptFileArgs",
-                    "method": "scriptFileArgs",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasScriptFileArgs",
-                    "validate": false,
-                    "optional": true,
-                    "original": "script_file_args"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"shell_command\" <$> TF.attribute",
-                    "name": "_shellCommand",
-                    "method": "shellCommand",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasShellCommand",
-                    "validate": false,
-                    "optional": true,
-                    "original": "shell_command"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"step_plugin\" <$> TF.attribute",
-                    "name": "_stepPlugin",
-                    "method": "stepPlugin",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (StepPluginSetting s)]",
-                    "class": "HasStepPlugin",
-                    "validate": false,
-                    "optional": true,
-                    "original": "step_plugin"
-                }
-            ],
-            "dependencies": [
-                "JobSetting",
-                "NodeStepPluginSetting",
-                "StepPluginSetting"
-            ],
-            "key": "rundeck_job.command",
-            "name": "CommandSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "CommandSetting s",
-            "original": "command"
-        },
-        {
-            "con": {
-                "smart": "newJobSetting",
-                "name": "JobSetting'"
+                "smart": "newJobCommandJobSetting",
+                "name": "JobCommandJobSetting'"
             },
             "arguments": [
                 {
@@ -233,8 +76,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "rundeck_job.command.job",
-            "name": "JobSetting",
+            "key": "job.command.job",
+            "name": "JobCommandJobSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -257,13 +100,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "JobSetting s",
+            "type": "JobCommandJobSetting s",
             "original": "job"
         },
         {
             "con": {
-                "smart": "newNodeStepPluginSetting",
-                "name": "NodeStepPluginSetting'"
+                "smart": "newJobCommandNodeStepPluginSetting",
+                "name": "JobCommandNodeStepPluginSetting'"
             },
             "arguments": [
                 {
@@ -302,8 +145,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "rundeck_job.command.node_step_plugin",
-            "name": "NodeStepPluginSetting",
+            "key": "job.command.node_step_plugin",
+            "name": "JobCommandNodeStepPluginSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -326,13 +169,239 @@
                 }
             ],
             "conflicts": [],
-            "type": "NodeStepPluginSetting s",
+            "type": "JobCommandNodeStepPluginSetting s",
             "original": "node_step_plugin"
         },
         {
             "con": {
-                "smart": "newOptionSetting",
-                "name": "OptionSetting'"
+                "smart": "newJobCommandSetting",
+                "name": "JobCommandSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "_description",
+                    "method": "description",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "validate": false,
+                    "optional": true,
+                    "original": "description"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"inline_script\" <$> TF.attribute",
+                    "name": "_inlineScript",
+                    "method": "inlineScript",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasInlineScript",
+                    "validate": false,
+                    "optional": true,
+                    "original": "inline_script"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"job\" <$> TF.attribute",
+                    "name": "_job",
+                    "method": "job",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (JobCommandJobSetting s)]",
+                    "class": "HasJob",
+                    "validate": false,
+                    "optional": true,
+                    "original": "job"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"node_step_plugin\" <$> TF.attribute",
+                    "name": "_nodeStepPlugin",
+                    "method": "nodeStepPlugin",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (JobCommandNodeStepPluginSetting s)]",
+                    "class": "HasNodeStepPlugin",
+                    "validate": false,
+                    "optional": true,
+                    "original": "node_step_plugin"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"script_file\" <$> TF.attribute",
+                    "name": "_scriptFile",
+                    "method": "scriptFile",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasScriptFile",
+                    "validate": false,
+                    "optional": true,
+                    "original": "script_file"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"script_file_args\" <$> TF.attribute",
+                    "name": "_scriptFileArgs",
+                    "method": "scriptFileArgs",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasScriptFileArgs",
+                    "validate": false,
+                    "optional": true,
+                    "original": "script_file_args"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"shell_command\" <$> TF.attribute",
+                    "name": "_shellCommand",
+                    "method": "shellCommand",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasShellCommand",
+                    "validate": false,
+                    "optional": true,
+                    "original": "shell_command"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"step_plugin\" <$> TF.attribute",
+                    "name": "_stepPlugin",
+                    "method": "stepPlugin",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (JobCommandStepPluginSetting s)]",
+                    "class": "HasStepPlugin",
+                    "validate": false,
+                    "optional": true,
+                    "original": "step_plugin"
+                }
+            ],
+            "dependencies": [
+                "JobCommandJobSetting",
+                "JobCommandNodeStepPluginSetting",
+                "JobCommandStepPluginSetting"
+            ],
+            "key": "job.command",
+            "name": "JobCommandSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "JobCommandSetting s",
+            "original": "command"
+        },
+        {
+            "con": {
+                "smart": "newJobCommandStepPluginSetting",
+                "name": "JobCommandStepPluginSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"config\" <$> TF.attribute",
+                    "name": "_config",
+                    "method": "config",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
+                    "class": "HasConfig",
+                    "validate": false,
+                    "optional": true,
+                    "original": "config"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "dependencies": [],
+            "key": "job.command.step_plugin",
+            "name": "JobCommandStepPluginSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "conflicts": [],
+            "type": "JobCommandStepPluginSetting s",
+            "original": "step_plugin"
+        },
+        {
+            "con": {
+                "smart": "newJobOptionSetting",
+                "name": "JobOptionSetting'"
             },
             "arguments": [
                 {
@@ -541,8 +610,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "rundeck_job.option",
-            "name": "OptionSetting",
+            "key": "job.option",
+            "name": "JobOptionSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -565,13 +634,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "OptionSetting s",
+            "type": "JobOptionSetting s",
             "original": "option"
         },
         {
             "con": {
-                "smart": "newResourceModelSourceSetting",
-                "name": "ResourceModelSourceSetting'"
+                "smart": "newProjectResourceModelSourceSetting",
+                "name": "ProjectResourceModelSourceSetting'"
             },
             "arguments": [
                 {
@@ -614,8 +683,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "rundeck_project.resource_model_source",
-            "name": "ResourceModelSourceSetting",
+            "key": "project.resource_model_source",
+            "name": "ProjectResourceModelSourceSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -659,77 +728,8 @@
                 }
             ],
             "conflicts": [],
-            "type": "ResourceModelSourceSetting s",
+            "type": "ProjectResourceModelSourceSetting s",
             "original": "resource_model_source"
-        },
-        {
-            "con": {
-                "smart": "newStepPluginSetting",
-                "name": "StepPluginSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"config\" <$> TF.attribute",
-                    "name": "_config",
-                    "method": "config",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
-                    "class": "HasConfig",
-                    "validate": false,
-                    "optional": true,
-                    "original": "config"
-                },
-                {
-                    "default": "_type'",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": false,
-                    "original": "type"
-                }
-            ],
-            "dependencies": [],
-            "key": "rundeck_job.command.step_plugin",
-            "name": "StepPluginSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_type'",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": false,
-                    "original": "type"
-                }
-            ],
-            "conflicts": [],
-            "type": "StepPluginSetting s",
-            "original": "step_plugin"
         }
     ],
     "url": "https://www.terraform.io/docs/providers/rundeck/index.html",
@@ -769,7 +769,7 @@
                     "method": "command",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (CommandSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (JobCommandSetting s)]",
                     "class": "HasCommand",
                     "validate": false,
                     "optional": false,
@@ -939,7 +939,7 @@
                     "method": "option",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (OptionSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (JobOptionSetting s)]",
                     "class": "HasOption",
                     "validate": false,
                     "optional": true,
@@ -1033,10 +1033,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/rundeck/r/job.html",
             "dependencies": [
-                "CommandSetting",
-                "OptionSetting"
+                "JobCommandSetting",
+                "JobOptionSetting"
             ],
-            "key": "rundeck_job",
+            "key": "job",
             "name": "JobResource",
             "threaded": true,
             "attributes": [
@@ -1087,7 +1087,7 @@
                     "method": "command",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (CommandSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (JobCommandSetting s)]",
                     "class": "HasCommand",
                     "validate": false,
                     "optional": false,
@@ -1196,7 +1196,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/rundeck/r/private_key.html",
             "dependencies": [],
-            "key": "rundeck_private_key",
+            "key": "private_key",
             "name": "PrivateKeyResource",
             "threaded": true,
             "attributes": [
@@ -1372,7 +1372,7 @@
                     "method": "resourceModelSource",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ResourceModelSourceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ProjectResourceModelSourceSetting s)]",
                     "class": "HasResourceModelSource",
                     "validate": false,
                     "optional": false,
@@ -1432,9 +1432,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/rundeck/r/project.html",
             "dependencies": [
-                "ResourceModelSourceSetting"
+                "ProjectResourceModelSourceSetting"
             ],
-            "key": "rundeck_project",
+            "key": "project",
             "name": "ProjectResource",
             "threaded": true,
             "attributes": [
@@ -1504,7 +1504,7 @@
                     "method": "resourceModelSource",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ResourceModelSourceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ProjectResourceModelSourceSetting s)]",
                     "class": "HasResourceModelSource",
                     "validate": false,
                     "optional": false,
@@ -1562,7 +1562,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/rundeck/r/public_key.html",
             "dependencies": [],
-            "key": "rundeck_public_key",
+            "key": "public_key",
             "name": "PublicKeyResource",
             "threaded": true,
             "attributes": [
@@ -1733,7 +1733,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

@@ -97,7 +97,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/dyn/r/record.html",
             "dependencies": [],
-            "key": "dyn_record",
+            "key": "record",
             "name": "RecordResource",
             "threaded": true,
             "attributes": [
@@ -276,7 +276,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

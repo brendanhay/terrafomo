@@ -2,454 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newAutoscaleAttributesSetting",
-                "name": "AutoscaleAttributesSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_key",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"key\" <$> TF.attribute",
-                    "name": "_key",
-                    "method": "key",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasKey",
-                    "validate": false,
-                    "optional": false,
-                    "original": "key"
-                },
-                {
-                    "default": "_value",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "value"
-                }
-            ],
-            "dependencies": [],
-            "key": "spotinst_elastigroup_aws.integration_ecs.autoscale_attributes",
-            "name": "AutoscaleAttributesSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_key",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"key\" <$> TF.attribute",
-                    "name": "_key",
-                    "method": "key",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasKey",
-                    "validate": false,
-                    "optional": false,
-                    "original": "key"
-                },
-                {
-                    "default": "_value",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "value"
-                }
-            ],
-            "conflicts": [],
-            "type": "AutoscaleAttributesSetting s",
-            "original": "autoscale_attributes"
-        },
-        {
-            "con": {
-                "smart": "newAutoscaleConstraintsSetting",
-                "name": "AutoscaleConstraintsSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_key",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"key\" <$> TF.attribute",
-                    "name": "_key",
-                    "method": "key",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasKey",
-                    "validate": false,
-                    "optional": false,
-                    "original": "key"
-                },
-                {
-                    "default": "_value",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "value"
-                }
-            ],
-            "dependencies": [],
-            "key": "spotinst_elastigroup_aws.integration_nomad.autoscale_constraints",
-            "name": "AutoscaleConstraintsSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_key",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"key\" <$> TF.attribute",
-                    "name": "_key",
-                    "method": "key",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasKey",
-                    "validate": false,
-                    "optional": false,
-                    "original": "key"
-                },
-                {
-                    "default": "_value",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "value"
-                }
-            ],
-            "conflicts": [],
-            "type": "AutoscaleConstraintsSetting s",
-            "original": "autoscale_constraints"
-        },
-        {
-            "con": {
-                "smart": "newAutoscaleDownSetting",
-                "name": "AutoscaleDownSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"evaluation_periods\" <$> TF.attribute",
-                    "name": "_evaluationPeriods",
-                    "method": "evaluationPeriods",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasEvaluationPeriods",
-                    "validate": false,
-                    "optional": true,
-                    "original": "evaluation_periods"
-                }
-            ],
-            "dependencies": [],
-            "key": "spotinst_elastigroup_aws.integration_ecs.autoscale_down",
-            "name": "AutoscaleDownSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "AutoscaleDownSetting s",
-            "original": "autoscale_down"
-        },
-        {
-            "con": {
-                "smart": "newAutoscaleHeadroomSetting",
-                "name": "AutoscaleHeadroomSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"cpu_per_unit\" <$> TF.attribute",
-                    "name": "_cpuPerUnit",
-                    "method": "cpuPerUnit",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasCpuPerUnit",
-                    "validate": false,
-                    "optional": true,
-                    "original": "cpu_per_unit"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"memory_per_unit\" <$> TF.attribute",
-                    "name": "_memoryPerUnit",
-                    "method": "memoryPerUnit",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasMemoryPerUnit",
-                    "validate": false,
-                    "optional": true,
-                    "original": "memory_per_unit"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"num_of_units\" <$> TF.attribute",
-                    "name": "_numOfUnits",
-                    "method": "numOfUnits",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasNumOfUnits",
-                    "validate": false,
-                    "optional": true,
-                    "original": "num_of_units"
-                }
-            ],
-            "dependencies": [],
-            "key": "spotinst_elastigroup_aws.integration_ecs.autoscale_headroom",
-            "name": "AutoscaleHeadroomSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "AutoscaleHeadroomSetting s",
-            "original": "autoscale_headroom"
-        },
-        {
-            "con": {
-                "smart": "newAutoscaleLabelsSetting",
-                "name": "AutoscaleLabelsSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_key",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"key\" <$> TF.attribute",
-                    "name": "_key",
-                    "method": "key",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasKey",
-                    "validate": false,
-                    "optional": false,
-                    "original": "key"
-                },
-                {
-                    "default": "_value",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "value"
-                }
-            ],
-            "dependencies": [],
-            "key": "spotinst_elastigroup_aws.integration_kubernetes.autoscale_labels",
-            "name": "AutoscaleLabelsSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_key",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"key\" <$> TF.attribute",
-                    "name": "_key",
-                    "method": "key",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasKey",
-                    "validate": false,
-                    "optional": false,
-                    "original": "key"
-                },
-                {
-                    "default": "_value",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "value"
-                }
-            ],
-            "conflicts": [],
-            "type": "AutoscaleLabelsSetting s",
-            "original": "autoscale_labels"
-        },
-        {
-            "con": {
-                "smart": "newDeploymentGroupsSetting",
-                "name": "DeploymentGroupsSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_applicationName",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"application_name\" <$> TF.attribute",
-                    "name": "_applicationName",
-                    "method": "applicationName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasApplicationName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "application_name"
-                },
-                {
-                    "default": "_deploymentGroupName",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"deployment_group_name\" <$> TF.attribute",
-                    "name": "_deploymentGroupName",
-                    "method": "deploymentGroupName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDeploymentGroupName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "deployment_group_name"
-                }
-            ],
-            "dependencies": [],
-            "key": "spotinst_elastigroup_aws.integration_codedeploy.deployment_groups",
-            "name": "DeploymentGroupsSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_applicationName",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"application_name\" <$> TF.attribute",
-                    "name": "_applicationName",
-                    "method": "applicationName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasApplicationName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "application_name"
-                },
-                {
-                    "default": "_deploymentGroupName",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"deployment_group_name\" <$> TF.attribute",
-                    "name": "_deploymentGroupName",
-                    "method": "deploymentGroupName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDeploymentGroupName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "deployment_group_name"
-                }
-            ],
-            "conflicts": [],
-            "type": "DeploymentGroupsSetting s",
-            "original": "deployment_groups"
-        },
-        {
-            "con": {
-                "smart": "newEbsBlockDeviceSetting",
-                "name": "EbsBlockDeviceSetting'"
+                "smart": "newElastigroupAwsEbsBlockDeviceSetting",
+                "name": "ElastigroupAwsEbsBlockDeviceSetting'"
             },
             "arguments": [
                 {
@@ -590,8 +144,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "spotinst_elastigroup_aws.ebs_block_device",
-            "name": "EbsBlockDeviceSetting",
+            "key": "elastigroup_aws.ebs_block_device",
+            "name": "ElastigroupAwsEbsBlockDeviceSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -666,13 +220,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "EbsBlockDeviceSetting s",
+            "type": "ElastigroupAwsEbsBlockDeviceSetting s",
             "original": "ebs_block_device"
         },
         {
             "con": {
-                "smart": "newEphemeralBlockDeviceSetting",
-                "name": "EphemeralBlockDeviceSetting'"
+                "smart": "newElastigroupAwsEphemeralBlockDeviceSetting",
+                "name": "ElastigroupAwsEphemeralBlockDeviceSetting'"
             },
             "arguments": [
                 {
@@ -711,8 +265,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "spotinst_elastigroup_aws.ephemeral_block_device",
-            "name": "EphemeralBlockDeviceSetting",
+            "key": "elastigroup_aws.ephemeral_block_device",
+            "name": "ElastigroupAwsEphemeralBlockDeviceSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -752,13 +306,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "EphemeralBlockDeviceSetting s",
+            "type": "ElastigroupAwsEphemeralBlockDeviceSetting s",
             "original": "ephemeral_block_device"
         },
         {
             "con": {
-                "smart": "newInstanceTypesWeightsSetting",
-                "name": "InstanceTypesWeightsSetting'"
+                "smart": "newElastigroupAwsInstanceTypesWeightsSetting",
+                "name": "ElastigroupAwsInstanceTypesWeightsSetting'"
             },
             "arguments": [
                 {
@@ -797,8 +351,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "spotinst_elastigroup_aws.instance_types_weights",
-            "name": "InstanceTypesWeightsSetting",
+            "key": "elastigroup_aws.instance_types_weights",
+            "name": "ElastigroupAwsInstanceTypesWeightsSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -838,13 +392,99 @@
                 }
             ],
             "conflicts": [],
-            "type": "InstanceTypesWeightsSetting s",
+            "type": "ElastigroupAwsInstanceTypesWeightsSetting s",
             "original": "instance_types_weights"
         },
         {
             "con": {
-                "smart": "newIntegrationCodedeploySetting",
-                "name": "IntegrationCodedeploySetting'"
+                "smart": "newElastigroupAwsIntegrationCodedeployDeploymentGroupsSetting",
+                "name": "ElastigroupAwsIntegrationCodedeployDeploymentGroupsSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_applicationName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"application_name\" <$> TF.attribute",
+                    "name": "_applicationName",
+                    "method": "applicationName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasApplicationName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "application_name"
+                },
+                {
+                    "default": "_deploymentGroupName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"deployment_group_name\" <$> TF.attribute",
+                    "name": "_deploymentGroupName",
+                    "method": "deploymentGroupName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDeploymentGroupName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "deployment_group_name"
+                }
+            ],
+            "dependencies": [],
+            "key": "elastigroup_aws.integration_codedeploy.deployment_groups",
+            "name": "ElastigroupAwsIntegrationCodedeployDeploymentGroupsSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_applicationName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"application_name\" <$> TF.attribute",
+                    "name": "_applicationName",
+                    "method": "applicationName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasApplicationName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "application_name"
+                },
+                {
+                    "default": "_deploymentGroupName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"deployment_group_name\" <$> TF.attribute",
+                    "name": "_deploymentGroupName",
+                    "method": "deploymentGroupName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDeploymentGroupName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "deployment_group_name"
+                }
+            ],
+            "conflicts": [],
+            "type": "ElastigroupAwsIntegrationCodedeployDeploymentGroupsSetting s",
+            "original": "deployment_groups"
+        },
+        {
+            "con": {
+                "smart": "newElastigroupAwsIntegrationCodedeploySetting",
+                "name": "ElastigroupAwsIntegrationCodedeploySetting'"
             },
             "arguments": [
                 {
@@ -875,7 +515,7 @@
                     "method": "deploymentGroups",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (DeploymentGroupsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ElastigroupAwsIntegrationCodedeployDeploymentGroupsSetting s)]",
                     "class": "HasDeploymentGroups",
                     "validate": false,
                     "optional": false,
@@ -900,10 +540,10 @@
                 }
             ],
             "dependencies": [
-                "DeploymentGroupsSetting"
+                "ElastigroupAwsIntegrationCodedeployDeploymentGroupsSetting"
             ],
-            "key": "spotinst_elastigroup_aws.integration_codedeploy",
-            "name": "IntegrationCodedeploySetting",
+            "key": "elastigroup_aws.integration_codedeploy",
+            "name": "ElastigroupAwsIntegrationCodedeploySetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -952,7 +592,7 @@
                     "method": "deploymentGroups",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (DeploymentGroupsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ElastigroupAwsIntegrationCodedeployDeploymentGroupsSetting s)]",
                     "class": "HasDeploymentGroups",
                     "validate": false,
                     "optional": false,
@@ -960,13 +600,201 @@
                 }
             ],
             "conflicts": [],
-            "type": "IntegrationCodedeploySetting s",
+            "type": "ElastigroupAwsIntegrationCodedeploySetting s",
             "original": "integration_codedeploy"
         },
         {
             "con": {
-                "smart": "newIntegrationEcsSetting",
-                "name": "IntegrationEcsSetting'"
+                "smart": "newElastigroupAwsIntegrationEcsAutoscaleAttributesSetting",
+                "name": "ElastigroupAwsIntegrationEcsAutoscaleAttributesSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_key",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"key\" <$> TF.attribute",
+                    "name": "_key",
+                    "method": "key",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "key"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "dependencies": [],
+            "key": "elastigroup_aws.integration_ecs.autoscale_attributes",
+            "name": "ElastigroupAwsIntegrationEcsAutoscaleAttributesSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_key",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"key\" <$> TF.attribute",
+                    "name": "_key",
+                    "method": "key",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "key"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "conflicts": [],
+            "type": "ElastigroupAwsIntegrationEcsAutoscaleAttributesSetting s",
+            "original": "autoscale_attributes"
+        },
+        {
+            "con": {
+                "smart": "newElastigroupAwsIntegrationEcsAutoscaleDownSetting",
+                "name": "ElastigroupAwsIntegrationEcsAutoscaleDownSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"evaluation_periods\" <$> TF.attribute",
+                    "name": "_evaluationPeriods",
+                    "method": "evaluationPeriods",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasEvaluationPeriods",
+                    "validate": false,
+                    "optional": true,
+                    "original": "evaluation_periods"
+                }
+            ],
+            "dependencies": [],
+            "key": "elastigroup_aws.integration_ecs.autoscale_down",
+            "name": "ElastigroupAwsIntegrationEcsAutoscaleDownSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "ElastigroupAwsIntegrationEcsAutoscaleDownSetting s",
+            "original": "autoscale_down"
+        },
+        {
+            "con": {
+                "smart": "newElastigroupAwsIntegrationEcsAutoscaleHeadroomSetting",
+                "name": "ElastigroupAwsIntegrationEcsAutoscaleHeadroomSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cpu_per_unit\" <$> TF.attribute",
+                    "name": "_cpuPerUnit",
+                    "method": "cpuPerUnit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasCpuPerUnit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cpu_per_unit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"memory_per_unit\" <$> TF.attribute",
+                    "name": "_memoryPerUnit",
+                    "method": "memoryPerUnit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMemoryPerUnit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "memory_per_unit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"num_of_units\" <$> TF.attribute",
+                    "name": "_numOfUnits",
+                    "method": "numOfUnits",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasNumOfUnits",
+                    "validate": false,
+                    "optional": true,
+                    "original": "num_of_units"
+                }
+            ],
+            "dependencies": [],
+            "key": "elastigroup_aws.integration_ecs.autoscale_headroom",
+            "name": "ElastigroupAwsIntegrationEcsAutoscaleHeadroomSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "ElastigroupAwsIntegrationEcsAutoscaleHeadroomSetting s",
+            "original": "autoscale_headroom"
+        },
+        {
+            "con": {
+                "smart": "newElastigroupAwsIntegrationEcsSetting",
+                "name": "ElastigroupAwsIntegrationEcsSetting'"
             },
             "arguments": [
                 {
@@ -980,7 +808,7 @@
                     "method": "autoscaleAttributes",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (AutoscaleAttributesSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ElastigroupAwsIntegrationEcsAutoscaleAttributesSetting s)]",
                     "class": "HasAutoscaleAttributes",
                     "validate": false,
                     "optional": true,
@@ -1014,7 +842,7 @@
                     "method": "autoscaleDown",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (AutoscaleDownSetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsIntegrationEcsAutoscaleDownSetting s)",
                     "class": "HasAutoscaleDown",
                     "validate": true,
                     "optional": true,
@@ -1031,7 +859,7 @@
                     "method": "autoscaleHeadroom",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (AutoscaleHeadroomSetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsIntegrationEcsAutoscaleHeadroomSetting s)",
                     "class": "HasAutoscaleHeadroom",
                     "validate": true,
                     "optional": true,
@@ -1090,12 +918,12 @@
                 }
             ],
             "dependencies": [
-                "AutoscaleAttributesSetting",
-                "AutoscaleDownSetting",
-                "AutoscaleHeadroomSetting"
+                "ElastigroupAwsIntegrationEcsAutoscaleAttributesSetting",
+                "ElastigroupAwsIntegrationEcsAutoscaleDownSetting",
+                "ElastigroupAwsIntegrationEcsAutoscaleHeadroomSetting"
             ],
-            "key": "spotinst_elastigroup_aws.integration_ecs",
-            "name": "IntegrationEcsSetting",
+            "key": "elastigroup_aws.integration_ecs",
+            "name": "ElastigroupAwsIntegrationEcsSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1118,13 +946,47 @@
                 }
             ],
             "conflicts": [],
-            "type": "IntegrationEcsSetting s",
+            "type": "ElastigroupAwsIntegrationEcsSetting s",
             "original": "integration_ecs"
         },
         {
             "con": {
-                "smart": "newIntegrationGitlabSetting",
-                "name": "IntegrationGitlabSetting'"
+                "smart": "newElastigroupAwsIntegrationGitlabRunnerSetting",
+                "name": "ElastigroupAwsIntegrationGitlabRunnerSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"is_enabled\" <$> TF.attribute",
+                    "name": "_isEnabled",
+                    "method": "isEnabled",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasIsEnabled",
+                    "validate": false,
+                    "optional": true,
+                    "original": "is_enabled"
+                }
+            ],
+            "dependencies": [],
+            "key": "elastigroup_aws.integration_gitlab.runner",
+            "name": "ElastigroupAwsIntegrationGitlabRunnerSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "ElastigroupAwsIntegrationGitlabRunnerSetting s",
+            "original": "runner"
+        },
+        {
+            "con": {
+                "smart": "newElastigroupAwsIntegrationGitlabSetting",
+                "name": "ElastigroupAwsIntegrationGitlabSetting'"
             },
             "arguments": [
                 {
@@ -1138,7 +1000,7 @@
                     "method": "runner",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (RunnerSetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsIntegrationGitlabRunnerSetting s)",
                     "class": "HasRunner",
                     "validate": true,
                     "optional": true,
@@ -1146,21 +1008,209 @@
                 }
             ],
             "dependencies": [
-                "RunnerSetting"
+                "ElastigroupAwsIntegrationGitlabRunnerSetting"
             ],
-            "key": "spotinst_elastigroup_aws.integration_gitlab",
-            "name": "IntegrationGitlabSetting",
+            "key": "elastigroup_aws.integration_gitlab",
+            "name": "ElastigroupAwsIntegrationGitlabSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "IntegrationGitlabSetting s",
+            "type": "ElastigroupAwsIntegrationGitlabSetting s",
             "original": "integration_gitlab"
         },
         {
             "con": {
-                "smart": "newIntegrationKubernetesSetting",
-                "name": "IntegrationKubernetesSetting'"
+                "smart": "newElastigroupAwsIntegrationKubernetesAutoscaleDownSetting",
+                "name": "ElastigroupAwsIntegrationKubernetesAutoscaleDownSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"evaluation_periods\" <$> TF.attribute",
+                    "name": "_evaluationPeriods",
+                    "method": "evaluationPeriods",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasEvaluationPeriods",
+                    "validate": false,
+                    "optional": true,
+                    "original": "evaluation_periods"
+                }
+            ],
+            "dependencies": [],
+            "key": "elastigroup_aws.integration_kubernetes.autoscale_down",
+            "name": "ElastigroupAwsIntegrationKubernetesAutoscaleDownSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "ElastigroupAwsIntegrationKubernetesAutoscaleDownSetting s",
+            "original": "autoscale_down"
+        },
+        {
+            "con": {
+                "smart": "newElastigroupAwsIntegrationKubernetesAutoscaleHeadroomSetting",
+                "name": "ElastigroupAwsIntegrationKubernetesAutoscaleHeadroomSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cpu_per_unit\" <$> TF.attribute",
+                    "name": "_cpuPerUnit",
+                    "method": "cpuPerUnit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasCpuPerUnit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cpu_per_unit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"memory_per_unit\" <$> TF.attribute",
+                    "name": "_memoryPerUnit",
+                    "method": "memoryPerUnit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMemoryPerUnit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "memory_per_unit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"num_of_units\" <$> TF.attribute",
+                    "name": "_numOfUnits",
+                    "method": "numOfUnits",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasNumOfUnits",
+                    "validate": false,
+                    "optional": true,
+                    "original": "num_of_units"
+                }
+            ],
+            "dependencies": [],
+            "key": "elastigroup_aws.integration_kubernetes.autoscale_headroom",
+            "name": "ElastigroupAwsIntegrationKubernetesAutoscaleHeadroomSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "ElastigroupAwsIntegrationKubernetesAutoscaleHeadroomSetting s",
+            "original": "autoscale_headroom"
+        },
+        {
+            "con": {
+                "smart": "newElastigroupAwsIntegrationKubernetesAutoscaleLabelsSetting",
+                "name": "ElastigroupAwsIntegrationKubernetesAutoscaleLabelsSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_key",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"key\" <$> TF.attribute",
+                    "name": "_key",
+                    "method": "key",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "key"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "dependencies": [],
+            "key": "elastigroup_aws.integration_kubernetes.autoscale_labels",
+            "name": "ElastigroupAwsIntegrationKubernetesAutoscaleLabelsSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_key",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"key\" <$> TF.attribute",
+                    "name": "_key",
+                    "method": "key",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "key"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "conflicts": [],
+            "type": "ElastigroupAwsIntegrationKubernetesAutoscaleLabelsSetting s",
+            "original": "autoscale_labels"
+        },
+        {
+            "con": {
+                "smart": "newElastigroupAwsIntegrationKubernetesSetting",
+                "name": "ElastigroupAwsIntegrationKubernetesSetting'"
             },
             "arguments": [
                 {
@@ -1208,7 +1258,7 @@
                     "method": "autoscaleDown",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (AutoscaleDownSetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsIntegrationKubernetesAutoscaleDownSetting s)",
                     "class": "HasAutoscaleDown",
                     "validate": true,
                     "optional": true,
@@ -1225,7 +1275,7 @@
                     "method": "autoscaleHeadroom",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (AutoscaleHeadroomSetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsIntegrationKubernetesAutoscaleHeadroomSetting s)",
                     "class": "HasAutoscaleHeadroom",
                     "validate": true,
                     "optional": true,
@@ -1276,7 +1326,7 @@
                     "method": "autoscaleLabels",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (AutoscaleLabelsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ElastigroupAwsIntegrationKubernetesAutoscaleLabelsSetting s)]",
                     "class": "HasAutoscaleLabels",
                     "validate": false,
                     "optional": true,
@@ -1335,23 +1385,23 @@
                 }
             ],
             "dependencies": [
-                "AutoscaleDownSetting",
-                "AutoscaleHeadroomSetting",
-                "AutoscaleLabelsSetting"
+                "ElastigroupAwsIntegrationKubernetesAutoscaleDownSetting",
+                "ElastigroupAwsIntegrationKubernetesAutoscaleHeadroomSetting",
+                "ElastigroupAwsIntegrationKubernetesAutoscaleLabelsSetting"
             ],
-            "key": "spotinst_elastigroup_aws.integration_kubernetes",
-            "name": "IntegrationKubernetesSetting",
+            "key": "elastigroup_aws.integration_kubernetes",
+            "name": "ElastigroupAwsIntegrationKubernetesSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "IntegrationKubernetesSetting s",
+            "type": "ElastigroupAwsIntegrationKubernetesSetting s",
             "original": "integration_kubernetes"
         },
         {
             "con": {
-                "smart": "newIntegrationMesosphereSetting",
-                "name": "IntegrationMesosphereSetting'"
+                "smart": "newElastigroupAwsIntegrationMesosphereSetting",
+                "name": "ElastigroupAwsIntegrationMesosphereSetting'"
             },
             "arguments": [
                 {
@@ -1373,8 +1423,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "spotinst_elastigroup_aws.integration_mesosphere",
-            "name": "IntegrationMesosphereSetting",
+            "key": "elastigroup_aws.integration_mesosphere",
+            "name": "ElastigroupAwsIntegrationMesosphereSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1397,13 +1447,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "IntegrationMesosphereSetting s",
+            "type": "ElastigroupAwsIntegrationMesosphereSetting s",
             "original": "integration_mesosphere"
         },
         {
             "con": {
-                "smart": "newIntegrationMultaiRuntimeSetting",
-                "name": "IntegrationMultaiRuntimeSetting'"
+                "smart": "newElastigroupAwsIntegrationMultaiRuntimeSetting",
+                "name": "ElastigroupAwsIntegrationMultaiRuntimeSetting'"
             },
             "arguments": [
                 {
@@ -1425,8 +1475,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "spotinst_elastigroup_aws.integration_multai_runtime",
-            "name": "IntegrationMultaiRuntimeSetting",
+            "key": "elastigroup_aws.integration_multai_runtime",
+            "name": "ElastigroupAwsIntegrationMultaiRuntimeSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1449,13 +1499,201 @@
                 }
             ],
             "conflicts": [],
-            "type": "IntegrationMultaiRuntimeSetting s",
+            "type": "ElastigroupAwsIntegrationMultaiRuntimeSetting s",
             "original": "integration_multai_runtime"
         },
         {
             "con": {
-                "smart": "newIntegrationNomadSetting",
-                "name": "IntegrationNomadSetting'"
+                "smart": "newElastigroupAwsIntegrationNomadAutoscaleConstraintsSetting",
+                "name": "ElastigroupAwsIntegrationNomadAutoscaleConstraintsSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_key",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"key\" <$> TF.attribute",
+                    "name": "_key",
+                    "method": "key",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "key"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "dependencies": [],
+            "key": "elastigroup_aws.integration_nomad.autoscale_constraints",
+            "name": "ElastigroupAwsIntegrationNomadAutoscaleConstraintsSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_key",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"key\" <$> TF.attribute",
+                    "name": "_key",
+                    "method": "key",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "key"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "conflicts": [],
+            "type": "ElastigroupAwsIntegrationNomadAutoscaleConstraintsSetting s",
+            "original": "autoscale_constraints"
+        },
+        {
+            "con": {
+                "smart": "newElastigroupAwsIntegrationNomadAutoscaleDownSetting",
+                "name": "ElastigroupAwsIntegrationNomadAutoscaleDownSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"evaluation_periods\" <$> TF.attribute",
+                    "name": "_evaluationPeriods",
+                    "method": "evaluationPeriods",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasEvaluationPeriods",
+                    "validate": false,
+                    "optional": true,
+                    "original": "evaluation_periods"
+                }
+            ],
+            "dependencies": [],
+            "key": "elastigroup_aws.integration_nomad.autoscale_down",
+            "name": "ElastigroupAwsIntegrationNomadAutoscaleDownSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "ElastigroupAwsIntegrationNomadAutoscaleDownSetting s",
+            "original": "autoscale_down"
+        },
+        {
+            "con": {
+                "smart": "newElastigroupAwsIntegrationNomadAutoscaleHeadroomSetting",
+                "name": "ElastigroupAwsIntegrationNomadAutoscaleHeadroomSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cpu_per_unit\" <$> TF.attribute",
+                    "name": "_cpuPerUnit",
+                    "method": "cpuPerUnit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasCpuPerUnit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cpu_per_unit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"memory_per_unit\" <$> TF.attribute",
+                    "name": "_memoryPerUnit",
+                    "method": "memoryPerUnit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMemoryPerUnit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "memory_per_unit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"num_of_units\" <$> TF.attribute",
+                    "name": "_numOfUnits",
+                    "method": "numOfUnits",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasNumOfUnits",
+                    "validate": false,
+                    "optional": true,
+                    "original": "num_of_units"
+                }
+            ],
+            "dependencies": [],
+            "key": "elastigroup_aws.integration_nomad.autoscale_headroom",
+            "name": "ElastigroupAwsIntegrationNomadAutoscaleHeadroomSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "ElastigroupAwsIntegrationNomadAutoscaleHeadroomSetting s",
+            "original": "autoscale_headroom"
+        },
+        {
+            "con": {
+                "smart": "newElastigroupAwsIntegrationNomadSetting",
+                "name": "ElastigroupAwsIntegrationNomadSetting'"
             },
             "arguments": [
                 {
@@ -1486,7 +1724,7 @@
                     "method": "autoscaleConstraints",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (AutoscaleConstraintsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ElastigroupAwsIntegrationNomadAutoscaleConstraintsSetting s)]",
                     "class": "HasAutoscaleConstraints",
                     "validate": false,
                     "optional": true,
@@ -1520,7 +1758,7 @@
                     "method": "autoscaleDown",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (AutoscaleDownSetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsIntegrationNomadAutoscaleDownSetting s)",
                     "class": "HasAutoscaleDown",
                     "validate": true,
                     "optional": true,
@@ -1537,7 +1775,7 @@
                     "method": "autoscaleHeadroom",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (AutoscaleHeadroomSetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsIntegrationNomadAutoscaleHeadroomSetting s)",
                     "class": "HasAutoscaleHeadroom",
                     "validate": true,
                     "optional": true,
@@ -1596,12 +1834,12 @@
                 }
             ],
             "dependencies": [
-                "AutoscaleConstraintsSetting",
-                "AutoscaleDownSetting",
-                "AutoscaleHeadroomSetting"
+                "ElastigroupAwsIntegrationNomadAutoscaleConstraintsSetting",
+                "ElastigroupAwsIntegrationNomadAutoscaleDownSetting",
+                "ElastigroupAwsIntegrationNomadAutoscaleHeadroomSetting"
             ],
-            "key": "spotinst_elastigroup_aws.integration_nomad",
-            "name": "IntegrationNomadSetting",
+            "key": "elastigroup_aws.integration_nomad",
+            "name": "ElastigroupAwsIntegrationNomadSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1641,13 +1879,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "IntegrationNomadSetting s",
+            "type": "ElastigroupAwsIntegrationNomadSetting s",
             "original": "integration_nomad"
         },
         {
             "con": {
-                "smart": "newIntegrationRancherSetting",
-                "name": "IntegrationRancherSetting'"
+                "smart": "newElastigroupAwsIntegrationRancherSetting",
+                "name": "ElastigroupAwsIntegrationRancherSetting'"
             },
             "arguments": [
                 {
@@ -1703,8 +1941,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "spotinst_elastigroup_aws.integration_rancher",
-            "name": "IntegrationRancherSetting",
+            "key": "elastigroup_aws.integration_rancher",
+            "name": "ElastigroupAwsIntegrationRancherSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1761,13 +1999,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "IntegrationRancherSetting s",
+            "type": "ElastigroupAwsIntegrationRancherSetting s",
             "original": "integration_rancher"
         },
         {
             "con": {
-                "smart": "newMultaiTargetSetsSetting",
-                "name": "MultaiTargetSetsSetting'"
+                "smart": "newElastigroupAwsMultaiTargetSetsSetting",
+                "name": "ElastigroupAwsMultaiTargetSetsSetting'"
             },
             "arguments": [
                 {
@@ -1806,8 +2044,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "spotinst_elastigroup_aws.multai_target_sets",
-            "name": "MultaiTargetSetsSetting",
+            "key": "elastigroup_aws.multai_target_sets",
+            "name": "ElastigroupAwsMultaiTargetSetsSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1847,13 +2085,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "MultaiTargetSetsSetting s",
+            "type": "ElastigroupAwsMultaiTargetSetsSetting s",
             "original": "multai_target_sets"
         },
         {
             "con": {
-                "smart": "newNetworkInterfaceSetting",
-                "name": "NetworkInterfaceSetting'"
+                "smart": "newElastigroupAwsNetworkInterfaceSetting",
+                "name": "ElastigroupAwsNetworkInterfaceSetting'"
             },
             "arguments": [
                 {
@@ -1977,8 +2215,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "spotinst_elastigroup_aws.network_interface",
-            "name": "NetworkInterfaceSetting",
+            "key": "elastigroup_aws.network_interface",
+            "name": "ElastigroupAwsNetworkInterfaceSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -2036,13 +2274,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "NetworkInterfaceSetting s",
+            "type": "ElastigroupAwsNetworkInterfaceSetting s",
             "original": "network_interface"
         },
         {
             "con": {
-                "smart": "newRevertToSpotSetting",
-                "name": "RevertToSpotSetting'"
+                "smart": "newElastigroupAwsRevertToSpotSetting",
+                "name": "ElastigroupAwsRevertToSpotSetting'"
             },
             "arguments": [
                 {
@@ -2081,8 +2319,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "spotinst_elastigroup_aws.revert_to_spot",
-            "name": "RevertToSpotSetting",
+            "key": "elastigroup_aws.revert_to_spot",
+            "name": "ElastigroupAwsRevertToSpotSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -2105,133 +2343,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "RevertToSpotSetting s",
+            "type": "ElastigroupAwsRevertToSpotSetting s",
             "original": "revert_to_spot"
         },
         {
             "con": {
-                "smart": "newRollConfigSetting",
-                "name": "RollConfigSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_batchSizePercentage",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"batch_size_percentage\" <$> TF.attribute",
-                    "name": "_batchSizePercentage",
-                    "method": "batchSizePercentage",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasBatchSizePercentage",
-                    "validate": false,
-                    "optional": false,
-                    "original": "batch_size_percentage"
-                },
-                {
-                    "default": "TF.value (-1)",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"grace_period\" <$> TF.attribute",
-                    "name": "_gracePeriod",
-                    "method": "gracePeriod",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasGracePeriod",
-                    "validate": false,
-                    "optional": true,
-                    "original": "grace_period"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"health_check_type\" <$> TF.attribute",
-                    "name": "_healthCheckType",
-                    "method": "healthCheckType",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasHealthCheckType",
-                    "validate": false,
-                    "optional": true,
-                    "original": "health_check_type"
-                }
-            ],
-            "dependencies": [],
-            "key": "spotinst_elastigroup_aws.update_policy.roll_config",
-            "name": "RollConfigSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_batchSizePercentage",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"batch_size_percentage\" <$> TF.attribute",
-                    "name": "_batchSizePercentage",
-                    "method": "batchSizePercentage",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasBatchSizePercentage",
-                    "validate": false,
-                    "optional": false,
-                    "original": "batch_size_percentage"
-                }
-            ],
-            "conflicts": [],
-            "type": "RollConfigSetting s",
-            "original": "roll_config"
-        },
-        {
-            "con": {
-                "smart": "newRunnerSetting",
-                "name": "RunnerSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"is_enabled\" <$> TF.attribute",
-                    "name": "_isEnabled",
-                    "method": "isEnabled",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasIsEnabled",
-                    "validate": false,
-                    "optional": true,
-                    "original": "is_enabled"
-                }
-            ],
-            "dependencies": [],
-            "key": "spotinst_elastigroup_aws.integration_gitlab.runner",
-            "name": "RunnerSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "RunnerSetting s",
-            "original": "runner"
-        },
-        {
-            "con": {
-                "smart": "newScalingDownPolicySetting",
-                "name": "ScalingDownPolicySetting'"
+                "smart": "newElastigroupAwsScalingDownPolicySetting",
+                "name": "ElastigroupAwsScalingDownPolicySetting'"
             },
             "arguments": [
                 {
@@ -2559,8 +2677,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "spotinst_elastigroup_aws.scaling_down_policy",
-            "name": "ScalingDownPolicySetting",
+            "key": "elastigroup_aws.scaling_down_policy",
+            "name": "ElastigroupAwsScalingDownPolicySetting",
             "threaded": true,
             "attributes": [
                 {
@@ -2754,13 +2872,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "ScalingDownPolicySetting s",
+            "type": "ElastigroupAwsScalingDownPolicySetting s",
             "original": "scaling_down_policy"
         },
         {
             "con": {
-                "smart": "newScalingTargetPolicySetting",
-                "name": "ScalingTargetPolicySetting'"
+                "smart": "newElastigroupAwsScalingTargetPolicySetting",
+                "name": "ElastigroupAwsScalingTargetPolicySetting'"
             },
             "arguments": [
                 {
@@ -2918,8 +3036,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "spotinst_elastigroup_aws.scaling_target_policy",
-            "name": "ScalingTargetPolicySetting",
+            "key": "elastigroup_aws.scaling_target_policy",
+            "name": "ElastigroupAwsScalingTargetPolicySetting",
             "threaded": true,
             "attributes": [
                 {
@@ -3062,13 +3180,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "ScalingTargetPolicySetting s",
+            "type": "ElastigroupAwsScalingTargetPolicySetting s",
             "original": "scaling_target_policy"
         },
         {
             "con": {
-                "smart": "newScalingUpPolicySetting",
-                "name": "ScalingUpPolicySetting'"
+                "smart": "newElastigroupAwsScalingUpPolicySetting",
+                "name": "ElastigroupAwsScalingUpPolicySetting'"
             },
             "arguments": [
                 {
@@ -3396,8 +3514,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "spotinst_elastigroup_aws.scaling_up_policy",
-            "name": "ScalingUpPolicySetting",
+            "key": "elastigroup_aws.scaling_up_policy",
+            "name": "ElastigroupAwsScalingUpPolicySetting",
             "threaded": true,
             "attributes": [
                 {
@@ -3591,13 +3709,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "ScalingUpPolicySetting s",
+            "type": "ElastigroupAwsScalingUpPolicySetting s",
             "original": "scaling_up_policy"
         },
         {
             "con": {
-                "smart": "newScheduledTaskSetting",
-                "name": "ScheduledTaskSetting'"
+                "smart": "newElastigroupAwsScheduledTaskSetting",
+                "name": "ElastigroupAwsScheduledTaskSetting'"
             },
             "arguments": [
                 {
@@ -3823,8 +3941,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "spotinst_elastigroup_aws.scheduled_task",
-            "name": "ScheduledTaskSetting",
+            "key": "elastigroup_aws.scheduled_task",
+            "name": "ElastigroupAwsScheduledTaskSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -3847,13 +3965,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "ScheduledTaskSetting s",
+            "type": "ElastigroupAwsScheduledTaskSetting s",
             "original": "scheduled_task"
         },
         {
             "con": {
-                "smart": "newSignalSetting",
-                "name": "SignalSetting'"
+                "smart": "newElastigroupAwsSignalSetting",
+                "name": "ElastigroupAwsSignalSetting'"
             },
             "arguments": [
                 {
@@ -3892,8 +4010,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "spotinst_elastigroup_aws.signal",
-            "name": "SignalSetting",
+            "key": "elastigroup_aws.signal",
+            "name": "ElastigroupAwsSignalSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -3916,13 +4034,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "SignalSetting s",
+            "type": "ElastigroupAwsSignalSetting s",
             "original": "signal"
         },
         {
             "con": {
-                "smart": "newStatefulDeallocationSetting",
-                "name": "StatefulDeallocationSetting'"
+                "smart": "newElastigroupAwsStatefulDeallocationSetting",
+                "name": "ElastigroupAwsStatefulDeallocationSetting'"
             },
             "arguments": [
                 {
@@ -3995,19 +4113,19 @@
                 }
             ],
             "dependencies": [],
-            "key": "spotinst_elastigroup_aws.stateful_deallocation",
-            "name": "StatefulDeallocationSetting",
+            "key": "elastigroup_aws.stateful_deallocation",
+            "name": "ElastigroupAwsStatefulDeallocationSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "StatefulDeallocationSetting s",
+            "type": "ElastigroupAwsStatefulDeallocationSetting s",
             "original": "stateful_deallocation"
         },
         {
             "con": {
-                "smart": "newTagsSetting",
-                "name": "TagsSetting'"
+                "smart": "newElastigroupAwsTagsSetting",
+                "name": "ElastigroupAwsTagsSetting'"
             },
             "arguments": [
                 {
@@ -4046,8 +4164,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "spotinst_elastigroup_aws.tags",
-            "name": "TagsSetting",
+            "key": "elastigroup_aws.tags",
+            "name": "ElastigroupAwsTagsSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -4087,13 +4205,99 @@
                 }
             ],
             "conflicts": [],
-            "type": "TagsSetting s",
+            "type": "ElastigroupAwsTagsSetting s",
             "original": "tags"
         },
         {
             "con": {
-                "smart": "newUpdatePolicySetting",
-                "name": "UpdatePolicySetting'"
+                "smart": "newElastigroupAwsUpdatePolicyRollConfigSetting",
+                "name": "ElastigroupAwsUpdatePolicyRollConfigSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_batchSizePercentage",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"batch_size_percentage\" <$> TF.attribute",
+                    "name": "_batchSizePercentage",
+                    "method": "batchSizePercentage",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasBatchSizePercentage",
+                    "validate": false,
+                    "optional": false,
+                    "original": "batch_size_percentage"
+                },
+                {
+                    "default": "TF.value (-1)",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"grace_period\" <$> TF.attribute",
+                    "name": "_gracePeriod",
+                    "method": "gracePeriod",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasGracePeriod",
+                    "validate": false,
+                    "optional": true,
+                    "original": "grace_period"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"health_check_type\" <$> TF.attribute",
+                    "name": "_healthCheckType",
+                    "method": "healthCheckType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHealthCheckType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "health_check_type"
+                }
+            ],
+            "dependencies": [],
+            "key": "elastigroup_aws.update_policy.roll_config",
+            "name": "ElastigroupAwsUpdatePolicyRollConfigSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_batchSizePercentage",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"batch_size_percentage\" <$> TF.attribute",
+                    "name": "_batchSizePercentage",
+                    "method": "batchSizePercentage",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasBatchSizePercentage",
+                    "validate": false,
+                    "optional": false,
+                    "original": "batch_size_percentage"
+                }
+            ],
+            "conflicts": [],
+            "type": "ElastigroupAwsUpdatePolicyRollConfigSetting s",
+            "original": "roll_config"
+        },
+        {
+            "con": {
+                "smart": "newElastigroupAwsUpdatePolicySetting",
+                "name": "ElastigroupAwsUpdatePolicySetting'"
             },
             "arguments": [
                 {
@@ -4107,7 +4311,7 @@
                     "method": "rollConfig",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (RollConfigSetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsUpdatePolicyRollConfigSetting s)",
                     "class": "HasRollConfig",
                     "validate": true,
                     "optional": true,
@@ -4149,10 +4353,10 @@
                 }
             ],
             "dependencies": [
-                "RollConfigSetting"
+                "ElastigroupAwsUpdatePolicyRollConfigSetting"
             ],
-            "key": "spotinst_elastigroup_aws.update_policy",
-            "name": "UpdatePolicySetting",
+            "key": "elastigroup_aws.update_policy",
+            "name": "ElastigroupAwsUpdatePolicySetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -4192,7 +4396,7 @@
                 }
             ],
             "conflicts": [],
-            "type": "UpdatePolicySetting s",
+            "type": "ElastigroupAwsUpdatePolicySetting s",
             "original": "update_policy"
         }
     ],
@@ -4324,7 +4528,7 @@
                     "method": "ebsBlockDevice",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ElastigroupAwsEbsBlockDeviceSetting s)]",
                     "class": "HasEbsBlockDevice",
                     "validate": false,
                     "optional": true,
@@ -4409,7 +4613,7 @@
                     "method": "ephemeralBlockDevice",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ElastigroupAwsEphemeralBlockDeviceSetting s)]",
                     "class": "HasEphemeralBlockDevice",
                     "validate": false,
                     "optional": true,
@@ -4562,7 +4766,7 @@
                     "method": "instanceTypesWeights",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (InstanceTypesWeightsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ElastigroupAwsInstanceTypesWeightsSetting s)]",
                     "class": "HasInstanceTypesWeights",
                     "validate": false,
                     "optional": true,
@@ -4579,7 +4783,7 @@
                     "method": "integrationCodedeploy",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (IntegrationCodedeploySetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsIntegrationCodedeploySetting s)",
                     "class": "HasIntegrationCodedeploy",
                     "validate": true,
                     "optional": true,
@@ -4596,7 +4800,7 @@
                     "method": "integrationEcs",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (IntegrationEcsSetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsIntegrationEcsSetting s)",
                     "class": "HasIntegrationEcs",
                     "validate": true,
                     "optional": true,
@@ -4613,7 +4817,7 @@
                     "method": "integrationGitlab",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (IntegrationGitlabSetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsIntegrationGitlabSetting s)",
                     "class": "HasIntegrationGitlab",
                     "validate": true,
                     "optional": true,
@@ -4630,7 +4834,7 @@
                     "method": "integrationKubernetes",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (IntegrationKubernetesSetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsIntegrationKubernetesSetting s)",
                     "class": "HasIntegrationKubernetes",
                     "validate": true,
                     "optional": true,
@@ -4647,7 +4851,7 @@
                     "method": "integrationMesosphere",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (IntegrationMesosphereSetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsIntegrationMesosphereSetting s)",
                     "class": "HasIntegrationMesosphere",
                     "validate": true,
                     "optional": true,
@@ -4664,7 +4868,7 @@
                     "method": "integrationMultaiRuntime",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (IntegrationMultaiRuntimeSetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsIntegrationMultaiRuntimeSetting s)",
                     "class": "HasIntegrationMultaiRuntime",
                     "validate": true,
                     "optional": true,
@@ -4681,7 +4885,7 @@
                     "method": "integrationNomad",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (IntegrationNomadSetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsIntegrationNomadSetting s)",
                     "class": "HasIntegrationNomad",
                     "validate": true,
                     "optional": true,
@@ -4698,7 +4902,7 @@
                     "method": "integrationRancher",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (IntegrationRancherSetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsIntegrationRancherSetting s)",
                     "class": "HasIntegrationRancher",
                     "validate": true,
                     "optional": true,
@@ -4783,7 +4987,7 @@
                     "method": "multaiTargetSets",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (MultaiTargetSetsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ElastigroupAwsMultaiTargetSetsSetting s)]",
                     "class": "HasMultaiTargetSets",
                     "validate": false,
                     "optional": true,
@@ -4817,7 +5021,7 @@
                     "method": "networkInterface",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ElastigroupAwsNetworkInterfaceSetting s)]",
                     "class": "HasNetworkInterface",
                     "validate": false,
                     "optional": true,
@@ -5010,7 +5214,7 @@
                     "method": "revertToSpot",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (RevertToSpotSetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsRevertToSpotSetting s)",
                     "class": "HasRevertToSpot",
                     "validate": true,
                     "optional": true,
@@ -5027,7 +5231,7 @@
                     "method": "scalingDownPolicy",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ScalingDownPolicySetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ElastigroupAwsScalingDownPolicySetting s)]",
                     "class": "HasScalingDownPolicy",
                     "validate": false,
                     "optional": true,
@@ -5044,7 +5248,7 @@
                     "method": "scalingTargetPolicy",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ScalingTargetPolicySetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ElastigroupAwsScalingTargetPolicySetting s)]",
                     "class": "HasScalingTargetPolicy",
                     "validate": false,
                     "optional": true,
@@ -5061,7 +5265,7 @@
                     "method": "scalingUpPolicy",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ScalingUpPolicySetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ElastigroupAwsScalingUpPolicySetting s)]",
                     "class": "HasScalingUpPolicy",
                     "validate": false,
                     "optional": true,
@@ -5078,7 +5282,7 @@
                     "method": "scheduledTask",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ScheduledTaskSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ElastigroupAwsScheduledTaskSetting s)]",
                     "class": "HasScheduledTask",
                     "validate": false,
                     "optional": true,
@@ -5112,7 +5316,7 @@
                     "method": "signal",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (SignalSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ElastigroupAwsSignalSetting s)]",
                     "class": "HasSignal",
                     "validate": false,
                     "optional": true,
@@ -5152,7 +5356,7 @@
                     "method": "statefulDeallocation",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (StatefulDeallocationSetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsStatefulDeallocationSetting s)",
                     "class": "HasStatefulDeallocation",
                     "validate": true,
                     "optional": true,
@@ -5192,7 +5396,7 @@
                     "method": "tags",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TagsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ElastigroupAwsTagsSetting s)]",
                     "class": "HasTags",
                     "validate": false,
                     "optional": true,
@@ -5226,7 +5430,7 @@
                     "method": "updatePolicy",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (UpdatePolicySetting s)",
+                    "type": "TF.Attr s (ElastigroupAwsUpdatePolicySetting s)",
                     "class": "HasUpdatePolicy",
                     "validate": true,
                     "optional": true,
@@ -5269,30 +5473,30 @@
             ],
             "url": "https://www.terraform.io/docs/providers/spotinst/r/elastigroup_aws.html",
             "dependencies": [
-                "EbsBlockDeviceSetting",
-                "EphemeralBlockDeviceSetting",
-                "InstanceTypesWeightsSetting",
-                "IntegrationCodedeploySetting",
-                "IntegrationEcsSetting",
-                "IntegrationGitlabSetting",
-                "IntegrationKubernetesSetting",
-                "IntegrationMesosphereSetting",
-                "IntegrationMultaiRuntimeSetting",
-                "IntegrationNomadSetting",
-                "IntegrationRancherSetting",
-                "MultaiTargetSetsSetting",
-                "NetworkInterfaceSetting",
-                "RevertToSpotSetting",
-                "ScalingDownPolicySetting",
-                "ScalingTargetPolicySetting",
-                "ScalingUpPolicySetting",
-                "ScheduledTaskSetting",
-                "SignalSetting",
-                "StatefulDeallocationSetting",
-                "TagsSetting",
-                "UpdatePolicySetting"
+                "ElastigroupAwsEbsBlockDeviceSetting",
+                "ElastigroupAwsEphemeralBlockDeviceSetting",
+                "ElastigroupAwsInstanceTypesWeightsSetting",
+                "ElastigroupAwsIntegrationCodedeploySetting",
+                "ElastigroupAwsIntegrationEcsSetting",
+                "ElastigroupAwsIntegrationGitlabSetting",
+                "ElastigroupAwsIntegrationKubernetesSetting",
+                "ElastigroupAwsIntegrationMesosphereSetting",
+                "ElastigroupAwsIntegrationMultaiRuntimeSetting",
+                "ElastigroupAwsIntegrationNomadSetting",
+                "ElastigroupAwsIntegrationRancherSetting",
+                "ElastigroupAwsMultaiTargetSetsSetting",
+                "ElastigroupAwsNetworkInterfaceSetting",
+                "ElastigroupAwsRevertToSpotSetting",
+                "ElastigroupAwsScalingDownPolicySetting",
+                "ElastigroupAwsScalingTargetPolicySetting",
+                "ElastigroupAwsScalingUpPolicySetting",
+                "ElastigroupAwsScheduledTaskSetting",
+                "ElastigroupAwsSignalSetting",
+                "ElastigroupAwsStatefulDeallocationSetting",
+                "ElastigroupAwsTagsSetting",
+                "ElastigroupAwsUpdatePolicySetting"
             ],
-            "key": "spotinst_elastigroup_aws",
+            "key": "elastigroup_aws",
             "name": "ElastigroupAwsResource",
             "threaded": true,
             "attributes": [
@@ -5711,7 +5915,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/spotinst/r/subscription.html",
             "dependencies": [],
-            "key": "spotinst_subscription",
+            "key": "subscription",
             "name": "SubscriptionResource",
             "threaded": true,
             "attributes": [
@@ -5854,7 +6058,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

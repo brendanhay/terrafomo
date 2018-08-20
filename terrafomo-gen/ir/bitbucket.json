@@ -63,7 +63,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/bitbucket/r/default_reviewers.html",
             "dependencies": [],
-            "key": "bitbucket_default_reviewers",
+            "key": "default_reviewers",
             "name": "DefaultReviewersResource",
             "threaded": true,
             "attributes": [
@@ -270,7 +270,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/bitbucket/r/hook.html",
             "dependencies": [],
-            "key": "bitbucket_hook",
+            "key": "hook",
             "name": "HookResource",
             "threaded": true,
             "attributes": [
@@ -613,7 +613,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/bitbucket/r/repository.html",
             "dependencies": [],
-            "key": "bitbucket_repository",
+            "key": "repository",
             "name": "RepositoryResource",
             "threaded": true,
             "attributes": [
@@ -769,7 +769,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

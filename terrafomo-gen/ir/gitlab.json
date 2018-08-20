@@ -28,7 +28,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/gitlab/d/project.html",
             "dependencies": [],
-            "key": "gitlab_project",
+            "key": "project",
             "name": "ProjectData",
             "threaded": true,
             "attributes": [
@@ -99,7 +99,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/gitlab/d/user.html",
             "dependencies": [],
-            "key": "gitlab_user",
+            "key": "user",
             "name": "UserData",
             "threaded": true,
             "attributes": [
@@ -223,7 +223,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/gitlab/r/deploy_key.html",
             "dependencies": [],
-            "key": "gitlab_deploy_key",
+            "key": "deploy_key",
             "name": "DeployKeyResource",
             "threaded": true,
             "attributes": [
@@ -430,7 +430,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/gitlab/r/group.html",
             "dependencies": [],
-            "key": "gitlab_group",
+            "key": "group",
             "name": "GroupResource",
             "threaded": true,
             "attributes": [
@@ -586,7 +586,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/gitlab/r/label.html",
             "dependencies": [],
-            "key": "gitlab_label",
+            "key": "label",
             "name": "LabelResource",
             "threaded": true,
             "attributes": [
@@ -844,7 +844,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/gitlab/r/project.html",
             "dependencies": [],
-            "key": "gitlab_project",
+            "key": "project",
             "name": "ProjectResource",
             "threaded": true,
             "attributes": [
@@ -1170,7 +1170,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/gitlab/r/project_hook.html",
             "dependencies": [],
-            "key": "gitlab_project_hook",
+            "key": "project_hook",
             "name": "ProjectHookResource",
             "threaded": true,
             "attributes": [
@@ -1292,7 +1292,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/gitlab/r/project_membership.html",
             "dependencies": [],
-            "key": "gitlab_project_membership",
+            "key": "project_membership",
             "name": "ProjectMembershipResource",
             "threaded": true,
             "attributes": [
@@ -1533,7 +1533,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/gitlab/r/user.html",
             "dependencies": [],
-            "key": "gitlab_user",
+            "key": "user",
             "name": "UserResource",
             "threaded": true,
             "attributes": [
@@ -1715,7 +1715,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

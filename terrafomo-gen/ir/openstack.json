@@ -2,203 +2,13 @@
     "settings": [
         {
             "con": {
-                "smart": "newAllocationPoolsSetting",
-                "name": "AllocationPoolsSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_end",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"end\" <$> TF.attribute",
-                    "name": "_end",
-                    "method": "end",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasEnd",
-                    "validate": false,
-                    "optional": false,
-                    "original": "end"
-                },
-                {
-                    "default": "_start",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"start\" <$> TF.attribute",
-                    "name": "_start",
-                    "method": "start",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasStart",
-                    "validate": false,
-                    "optional": false,
-                    "original": "start"
-                }
-            ],
-            "dependencies": [],
-            "key": "openstack_networking_subnet_v2.allocation_pools",
-            "name": "AllocationPoolsSetting",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"end\" <$> TF.attribute",
-                    "name": "_computedEnd",
-                    "method": "computedEnd",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedEnd",
-                    "validate": false,
-                    "optional": false,
-                    "original": "end"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"start\" <$> TF.attribute",
-                    "name": "_computedStart",
-                    "method": "computedStart",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedStart",
-                    "validate": false,
-                    "optional": false,
-                    "original": "start"
-                }
-            ],
-            "parameters": [
-                {
-                    "default": "_end",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"end\" <$> TF.attribute",
-                    "name": "_end",
-                    "method": "end",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasEnd",
-                    "validate": false,
-                    "optional": false,
-                    "original": "end"
-                },
-                {
-                    "default": "_start",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"start\" <$> TF.attribute",
-                    "name": "_start",
-                    "method": "start",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasStart",
-                    "validate": false,
-                    "optional": false,
-                    "original": "start"
-                }
-            ],
-            "conflicts": [],
-            "type": "AllocationPoolsSetting s",
-            "original": "allocation_pools"
-        },
-        {
-            "con": {
-                "smart": "newAllowedAddressPairsSetting",
-                "name": "AllowedAddressPairsSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_ipAddress",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ip_address\" <$> TF.attribute",
-                    "name": "_ipAddress",
-                    "method": "ipAddress",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasIpAddress",
-                    "validate": false,
-                    "optional": false,
-                    "original": "ip_address"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"mac_address\" <$> TF.attribute",
-                    "name": "_macAddress",
-                    "method": "macAddress",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasMacAddress",
-                    "validate": false,
-                    "optional": true,
-                    "original": "mac_address"
-                }
-            ],
-            "dependencies": [],
-            "key": "openstack_networking_port_v2.allowed_address_pairs",
-            "name": "AllowedAddressPairsSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_ipAddress",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ip_address\" <$> TF.attribute",
-                    "name": "_ipAddress",
-                    "method": "ipAddress",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasIpAddress",
-                    "validate": false,
-                    "optional": false,
-                    "original": "ip_address"
-                }
-            ],
-            "conflicts": [],
-            "type": "AllowedAddressPairsSetting s",
-            "original": "allowed_address_pairs"
-        },
-        {
-            "con": {
-                "smart": "newAttachmentSetting",
-                "name": "AttachmentSetting'"
+                "smart": "newBlockstorageVolumeV1AttachmentSetting",
+                "name": "BlockstorageVolumeV1AttachmentSetting'"
             },
             "arguments": [],
             "dependencies": [],
-            "key": "openstack_blockstorage_volume_v1.attachment",
-            "name": "AttachmentSetting",
+            "key": "blockstorage_volume_v1.attachment",
+            "name": "BlockstorageVolumeV1AttachmentSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -255,13 +65,149 @@
             ],
             "parameters": [],
             "conflicts": [],
-            "type": "AttachmentSetting s",
+            "type": "BlockstorageVolumeV1AttachmentSetting s",
             "original": "attachment"
         },
         {
             "con": {
-                "smart": "newBlockDeviceSetting",
-                "name": "BlockDeviceSetting'"
+                "smart": "newBlockstorageVolumeV2AttachmentSetting",
+                "name": "BlockstorageVolumeV2AttachmentSetting'"
+            },
+            "arguments": [],
+            "dependencies": [],
+            "key": "blockstorage_volume_v2.attachment",
+            "name": "BlockstorageVolumeV2AttachmentSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"device\" <$> TF.attribute",
+                    "name": "_computedDevice",
+                    "method": "computedDevice",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedDevice",
+                    "validate": false,
+                    "optional": false,
+                    "original": "device"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"instance_id\" <$> TF.attribute",
+                    "name": "_computedInstanceId",
+                    "method": "computedInstanceId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedInstanceId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "instance_id"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "BlockstorageVolumeV2AttachmentSetting s",
+            "original": "attachment"
+        },
+        {
+            "con": {
+                "smart": "newBlockstorageVolumeV3AttachmentSetting",
+                "name": "BlockstorageVolumeV3AttachmentSetting'"
+            },
+            "arguments": [],
+            "dependencies": [],
+            "key": "blockstorage_volume_v3.attachment",
+            "name": "BlockstorageVolumeV3AttachmentSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"device\" <$> TF.attribute",
+                    "name": "_computedDevice",
+                    "method": "computedDevice",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedDevice",
+                    "validate": false,
+                    "optional": false,
+                    "original": "device"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"instance_id\" <$> TF.attribute",
+                    "name": "_computedInstanceId",
+                    "method": "computedInstanceId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedInstanceId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "instance_id"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "BlockstorageVolumeV3AttachmentSetting s",
+            "original": "attachment"
+        },
+        {
+            "con": {
+                "smart": "newComputeInstanceV2BlockDeviceSetting",
+                "name": "ComputeInstanceV2BlockDeviceSetting'"
             },
             "arguments": [
                 {
@@ -385,8 +331,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "openstack_compute_instance_v2.block_device",
-            "name": "BlockDeviceSetting",
+            "key": "compute_instance_v2.block_device",
+            "name": "ComputeInstanceV2BlockDeviceSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -409,770 +355,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "BlockDeviceSetting s",
+            "type": "ComputeInstanceV2BlockDeviceSetting s",
             "original": "block_device"
         },
         {
             "con": {
-                "smart": "newConfigurationSetting",
-                "name": "ConfigurationSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
-                    "default": "_value",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "value"
-                }
-            ],
-            "dependencies": [],
-            "key": "openstack_db_configuration_v1.configuration",
-            "name": "ConfigurationSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
-                    "default": "_value",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "value"
-                }
-            ],
-            "conflicts": [],
-            "type": "ConfigurationSetting s",
-            "original": "configuration"
-        },
-        {
-            "con": {
-                "smart": "newDatabaseSetting",
-                "name": "DatabaseSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"charset\" <$> TF.attribute",
-                    "name": "_charset",
-                    "method": "charset",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCharset",
-                    "validate": false,
-                    "optional": true,
-                    "original": "charset"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"collate\" <$> TF.attribute",
-                    "name": "_collate",
-                    "method": "collate",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCollate",
-                    "validate": false,
-                    "optional": true,
-                    "original": "collate"
-                },
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                }
-            ],
-            "dependencies": [],
-            "key": "openstack_db_instance_v1.database",
-            "name": "DatabaseSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                }
-            ],
-            "conflicts": [],
-            "type": "DatabaseSetting s",
-            "original": "database"
-        },
-        {
-            "con": {
-                "smart": "newDatastoreSetting",
-                "name": "DatastoreSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_type'",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": false,
-                    "original": "type"
-                },
-                {
-                    "default": "_version",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"version\" <$> TF.attribute",
-                    "name": "_version",
-                    "method": "version",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasVersion",
-                    "validate": false,
-                    "optional": false,
-                    "original": "version"
-                }
-            ],
-            "dependencies": [],
-            "key": "openstack_db_configuration_v1.datastore",
-            "name": "DatastoreSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_type'",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": false,
-                    "original": "type"
-                },
-                {
-                    "default": "_version",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"version\" <$> TF.attribute",
-                    "name": "_version",
-                    "method": "version",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasVersion",
-                    "validate": false,
-                    "optional": false,
-                    "original": "version"
-                }
-            ],
-            "conflicts": [],
-            "type": "DatastoreSetting s",
-            "original": "datastore"
-        },
-        {
-            "con": {
-                "smart": "newDpdSetting",
-                "name": "DpdSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"action\" <$> TF.attribute",
-                    "name": "_action",
-                    "method": "action",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAction",
-                    "validate": false,
-                    "optional": true,
-                    "original": "action"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"interval\" <$> TF.attribute",
-                    "name": "_interval",
-                    "method": "interval",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasInterval",
-                    "validate": false,
-                    "optional": true,
-                    "original": "interval"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"timeout\" <$> TF.attribute",
-                    "name": "_timeout",
-                    "method": "timeout",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasTimeout",
-                    "validate": false,
-                    "optional": true,
-                    "original": "timeout"
-                }
-            ],
-            "dependencies": [],
-            "key": "openstack_vpnaas_site_connection_v2.dpd",
-            "name": "DpdSetting",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"action\" <$> TF.attribute",
-                    "name": "_computedAction",
-                    "method": "computedAction",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedAction",
-                    "validate": false,
-                    "optional": false,
-                    "original": "action"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"interval\" <$> TF.attribute",
-                    "name": "_computedInterval",
-                    "method": "computedInterval",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasComputedInterval",
-                    "validate": false,
-                    "optional": false,
-                    "original": "interval"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"timeout\" <$> TF.attribute",
-                    "name": "_computedTimeout",
-                    "method": "computedTimeout",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasComputedTimeout",
-                    "validate": false,
-                    "optional": false,
-                    "original": "timeout"
-                }
-            ],
-            "parameters": [],
-            "conflicts": [],
-            "type": "DpdSetting s",
-            "original": "dpd"
-        },
-        {
-            "con": {
-                "smart": "newExternalFixedIpSetting",
-                "name": "ExternalFixedIpSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ip_address\" <$> TF.attribute",
-                    "name": "_ipAddress",
-                    "method": "ipAddress",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasIpAddress",
-                    "validate": false,
-                    "optional": true,
-                    "original": "ip_address"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"subnet_id\" <$> TF.attribute",
-                    "name": "_subnetId",
-                    "method": "subnetId",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasSubnetId",
-                    "validate": false,
-                    "optional": true,
-                    "original": "subnet_id"
-                }
-            ],
-            "dependencies": [],
-            "key": "openstack_networking_router_v2.external_fixed_ip",
-            "name": "ExternalFixedIpSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "ExternalFixedIpSetting s",
-            "original": "external_fixed_ip"
-        },
-        {
-            "con": {
-                "smart": "newFixedIpSetting",
-                "name": "FixedIpSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ip_address\" <$> TF.attribute",
-                    "name": "_ipAddress",
-                    "method": "ipAddress",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasIpAddress",
-                    "validate": false,
-                    "optional": true,
-                    "original": "ip_address"
-                },
-                {
-                    "default": "_subnetId",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"subnet_id\" <$> TF.attribute",
-                    "name": "_subnetId",
-                    "method": "subnetId",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasSubnetId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "subnet_id"
-                }
-            ],
-            "dependencies": [],
-            "key": "openstack_networking_port_v2.fixed_ip",
-            "name": "FixedIpSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_subnetId",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"subnet_id\" <$> TF.attribute",
-                    "name": "_subnetId",
-                    "method": "subnetId",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasSubnetId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "subnet_id"
-                }
-            ],
-            "conflicts": [],
-            "type": "FixedIpSetting s",
-            "original": "fixed_ip"
-        },
-        {
-            "con": {
-                "smart": "newHostRoutesSetting",
-                "name": "HostRoutesSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_destinationCidr",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"destination_cidr\" <$> TF.attribute",
-                    "name": "_destinationCidr",
-                    "method": "destinationCidr",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDestinationCidr",
-                    "validate": false,
-                    "optional": false,
-                    "original": "destination_cidr"
-                },
-                {
-                    "default": "_nextHop",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"next_hop\" <$> TF.attribute",
-                    "name": "_nextHop",
-                    "method": "nextHop",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasNextHop",
-                    "validate": false,
-                    "optional": false,
-                    "original": "next_hop"
-                }
-            ],
-            "dependencies": [],
-            "key": "openstack_networking_subnet_v2.host_routes",
-            "name": "HostRoutesSetting",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"destination_cidr\" <$> TF.attribute",
-                    "name": "_computedDestinationCidr",
-                    "method": "computedDestinationCidr",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedDestinationCidr",
-                    "validate": false,
-                    "optional": false,
-                    "original": "destination_cidr"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"next_hop\" <$> TF.attribute",
-                    "name": "_computedNextHop",
-                    "method": "computedNextHop",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedNextHop",
-                    "validate": false,
-                    "optional": false,
-                    "original": "next_hop"
-                }
-            ],
-            "parameters": [
-                {
-                    "default": "_destinationCidr",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"destination_cidr\" <$> TF.attribute",
-                    "name": "_destinationCidr",
-                    "method": "destinationCidr",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDestinationCidr",
-                    "validate": false,
-                    "optional": false,
-                    "original": "destination_cidr"
-                },
-                {
-                    "default": "_nextHop",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"next_hop\" <$> TF.attribute",
-                    "name": "_nextHop",
-                    "method": "nextHop",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasNextHop",
-                    "validate": false,
-                    "optional": false,
-                    "original": "next_hop"
-                }
-            ],
-            "conflicts": [],
-            "type": "HostRoutesSetting s",
-            "original": "host_routes"
-        },
-        {
-            "con": {
-                "smart": "newLifetimeSetting",
-                "name": "LifetimeSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"units\" <$> TF.attribute",
-                    "name": "_units",
-                    "method": "units",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasUnits",
-                    "validate": false,
-                    "optional": true,
-                    "original": "units"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasValue",
-                    "validate": false,
-                    "optional": true,
-                    "original": "value"
-                }
-            ],
-            "dependencies": [],
-            "key": "openstack_vpnaas_ike_policy_v2.lifetime",
-            "name": "LifetimeSetting",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"units\" <$> TF.attribute",
-                    "name": "_computedUnits",
-                    "method": "computedUnits",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedUnits",
-                    "validate": false,
-                    "optional": false,
-                    "original": "units"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_computedValue",
-                    "method": "computedValue",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasComputedValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "value"
-                }
-            ],
-            "parameters": [],
-            "conflicts": [],
-            "type": "LifetimeSetting s",
-            "original": "lifetime"
-        },
-        {
-            "con": {
-                "smart": "newMultiFactorAuthRuleSetting",
-                "name": "MultiFactorAuthRuleSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_rule",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"rule\" <$> TF.attribute",
-                    "name": "_rule",
-                    "method": "rule",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s P.Text))",
-                    "class": "HasRule",
-                    "validate": false,
-                    "optional": false,
-                    "original": "rule"
-                }
-            ],
-            "dependencies": [],
-            "key": "openstack_identity_user_v3.multi_factor_auth_rule",
-            "name": "MultiFactorAuthRuleSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_rule",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"rule\" <$> TF.attribute",
-                    "name": "_rule",
-                    "method": "rule",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s P.Text))",
-                    "class": "HasRule",
-                    "validate": false,
-                    "optional": false,
-                    "original": "rule"
-                }
-            ],
-            "conflicts": [],
-            "type": "MultiFactorAuthRuleSetting s",
-            "original": "multi_factor_auth_rule"
-        },
-        {
-            "con": {
-                "smart": "newNetworkSetting",
-                "name": "NetworkSetting'"
+                "smart": "newComputeInstanceV2NetworkSetting",
+                "name": "ComputeInstanceV2NetworkSetting'"
             },
             "arguments": [
                 {
@@ -1296,8 +485,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "openstack_compute_instance_v2.network",
-            "name": "NetworkSetting",
+            "key": "compute_instance_v2.network",
+            "name": "ComputeInstanceV2NetworkSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -1422,82 +611,13 @@
             ],
             "parameters": [],
             "conflicts": [],
-            "type": "NetworkSetting s",
+            "type": "ComputeInstanceV2NetworkSetting s",
             "original": "network"
         },
         {
             "con": {
-                "smart": "newPersistenceSetting",
-                "name": "PersistenceSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"cookie_name\" <$> TF.attribute",
-                    "name": "_cookieName",
-                    "method": "cookieName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCookieName",
-                    "validate": false,
-                    "optional": true,
-                    "original": "cookie_name"
-                },
-                {
-                    "default": "_type'",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": false,
-                    "original": "type"
-                }
-            ],
-            "dependencies": [],
-            "key": "openstack_lb_pool_v2.persistence",
-            "name": "PersistenceSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_type'",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": false,
-                    "original": "type"
-                }
-            ],
-            "conflicts": [],
-            "type": "PersistenceSetting s",
-            "original": "persistence"
-        },
-        {
-            "con": {
-                "smart": "newPersonalitySetting",
-                "name": "PersonalitySetting'"
+                "smart": "newComputeInstanceV2PersonalitySetting",
+                "name": "ComputeInstanceV2PersonalitySetting'"
             },
             "arguments": [
                 {
@@ -1536,8 +656,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "openstack_compute_instance_v2.personality",
-            "name": "PersonalitySetting",
+            "key": "compute_instance_v2.personality",
+            "name": "ComputeInstanceV2PersonalitySetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1577,253 +697,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "PersonalitySetting s",
+            "type": "ComputeInstanceV2PersonalitySetting s",
             "original": "personality"
         },
         {
             "con": {
-                "smart": "newRolesSetting",
-                "name": "RolesSetting'"
-            },
-            "arguments": [],
-            "dependencies": [],
-            "key": "openstack_identity_auth_scope_v3.roles",
-            "name": "RolesSetting",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"role_id\" <$> TF.attribute",
-                    "name": "_computedRoleId",
-                    "method": "computedRoleId",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedRoleId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "role_id"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"role_name\" <$> TF.attribute",
-                    "name": "_computedRoleName",
-                    "method": "computedRoleName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedRoleName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "role_name"
-                }
-            ],
-            "parameters": [],
-            "conflicts": [],
-            "type": "RolesSetting s",
-            "original": "roles"
-        },
-        {
-            "con": {
-                "smart": "newRuleSetting",
-                "name": "RuleSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"cidr\" <$> TF.attribute",
-                    "name": "_cidr",
-                    "method": "cidr",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCidr",
-                    "validate": false,
-                    "optional": true,
-                    "original": "cidr"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"from_group_id\" <$> TF.attribute",
-                    "name": "_fromGroupId",
-                    "method": "fromGroupId",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasFromGroupId",
-                    "validate": false,
-                    "optional": true,
-                    "original": "from_group_id"
-                },
-                {
-                    "default": "_fromPort",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"from_port\" <$> TF.attribute",
-                    "name": "_fromPort",
-                    "method": "fromPort",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasFromPort",
-                    "validate": false,
-                    "optional": false,
-                    "original": "from_port"
-                },
-                {
-                    "default": "_ipProtocol",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ip_protocol\" <$> TF.attribute",
-                    "name": "_ipProtocol",
-                    "method": "ipProtocol",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasIpProtocol",
-                    "validate": false,
-                    "optional": false,
-                    "original": "ip_protocol"
-                },
-                {
-                    "default": "TF.value P.False",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"self\" <$> TF.attribute",
-                    "name": "_self",
-                    "method": "self",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasSelf",
-                    "validate": false,
-                    "optional": true,
-                    "original": "self"
-                },
-                {
-                    "default": "_toPort",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"to_port\" <$> TF.attribute",
-                    "name": "_toPort",
-                    "method": "toPort",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasToPort",
-                    "validate": false,
-                    "optional": false,
-                    "original": "to_port"
-                }
-            ],
-            "dependencies": [],
-            "key": "openstack_compute_secgroup_v2.rule",
-            "name": "RuleSetting",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "_computedId",
-                    "method": "computedId",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "id"
-                }
-            ],
-            "parameters": [
-                {
-                    "default": "_fromPort",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"from_port\" <$> TF.attribute",
-                    "name": "_fromPort",
-                    "method": "fromPort",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasFromPort",
-                    "validate": false,
-                    "optional": false,
-                    "original": "from_port"
-                },
-                {
-                    "default": "_toPort",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"to_port\" <$> TF.attribute",
-                    "name": "_toPort",
-                    "method": "toPort",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasToPort",
-                    "validate": false,
-                    "optional": false,
-                    "original": "to_port"
-                },
-                {
-                    "default": "_ipProtocol",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ip_protocol\" <$> TF.attribute",
-                    "name": "_ipProtocol",
-                    "method": "ipProtocol",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasIpProtocol",
-                    "validate": false,
-                    "optional": false,
-                    "original": "ip_protocol"
-                }
-            ],
-            "conflicts": [],
-            "type": "RuleSetting s",
-            "original": "rule"
-        },
-        {
-            "con": {
-                "smart": "newSchedulerHintsSetting",
-                "name": "SchedulerHintsSetting'"
+                "smart": "newComputeInstanceV2SchedulerHintsSetting",
+                "name": "ComputeInstanceV2SchedulerHintsSetting'"
             },
             "arguments": [
                 {
@@ -1947,19 +827,501 @@
                 }
             ],
             "dependencies": [],
-            "key": "openstack_compute_instance_v2.scheduler_hints",
-            "name": "SchedulerHintsSetting",
+            "key": "compute_instance_v2.scheduler_hints",
+            "name": "ComputeInstanceV2SchedulerHintsSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "SchedulerHintsSetting s",
+            "type": "ComputeInstanceV2SchedulerHintsSetting s",
             "original": "scheduler_hints"
         },
         {
             "con": {
-                "smart": "newSegmentsSetting",
-                "name": "SegmentsSetting'"
+                "smart": "newComputeInstanceV2VolumeSetting",
+                "name": "ComputeInstanceV2VolumeSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"device\" <$> TF.attribute",
+                    "name": "_device",
+                    "method": "device",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDevice",
+                    "validate": false,
+                    "optional": true,
+                    "original": "device"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_id",
+                    "method": "id",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "id"
+                },
+                {
+                    "default": "_volumeId",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"volume_id\" <$> TF.attribute",
+                    "name": "_volumeId",
+                    "method": "volumeId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVolumeId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "volume_id"
+                }
+            ],
+            "dependencies": [],
+            "key": "compute_instance_v2.volume",
+            "name": "ComputeInstanceV2VolumeSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"device\" <$> TF.attribute",
+                    "name": "_computedDevice",
+                    "method": "computedDevice",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedDevice",
+                    "validate": false,
+                    "optional": false,
+                    "original": "device"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_volumeId",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"volume_id\" <$> TF.attribute",
+                    "name": "_volumeId",
+                    "method": "volumeId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVolumeId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "volume_id"
+                }
+            ],
+            "conflicts": [],
+            "type": "ComputeInstanceV2VolumeSetting s",
+            "original": "volume"
+        },
+        {
+            "con": {
+                "smart": "newComputeSecgroupV2RuleSetting",
+                "name": "ComputeSecgroupV2RuleSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cidr\" <$> TF.attribute",
+                    "name": "_cidr",
+                    "method": "cidr",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCidr",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cidr"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"from_group_id\" <$> TF.attribute",
+                    "name": "_fromGroupId",
+                    "method": "fromGroupId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFromGroupId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "from_group_id"
+                },
+                {
+                    "default": "_fromPort",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"from_port\" <$> TF.attribute",
+                    "name": "_fromPort",
+                    "method": "fromPort",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasFromPort",
+                    "validate": false,
+                    "optional": false,
+                    "original": "from_port"
+                },
+                {
+                    "default": "_ipProtocol",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip_protocol\" <$> TF.attribute",
+                    "name": "_ipProtocol",
+                    "method": "ipProtocol",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpProtocol",
+                    "validate": false,
+                    "optional": false,
+                    "original": "ip_protocol"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"self\" <$> TF.attribute",
+                    "name": "_self",
+                    "method": "self",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasSelf",
+                    "validate": false,
+                    "optional": true,
+                    "original": "self"
+                },
+                {
+                    "default": "_toPort",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"to_port\" <$> TF.attribute",
+                    "name": "_toPort",
+                    "method": "toPort",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasToPort",
+                    "validate": false,
+                    "optional": false,
+                    "original": "to_port"
+                }
+            ],
+            "dependencies": [],
+            "key": "compute_secgroup_v2.rule",
+            "name": "ComputeSecgroupV2RuleSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_fromPort",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"from_port\" <$> TF.attribute",
+                    "name": "_fromPort",
+                    "method": "fromPort",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasFromPort",
+                    "validate": false,
+                    "optional": false,
+                    "original": "from_port"
+                },
+                {
+                    "default": "_toPort",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"to_port\" <$> TF.attribute",
+                    "name": "_toPort",
+                    "method": "toPort",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasToPort",
+                    "validate": false,
+                    "optional": false,
+                    "original": "to_port"
+                },
+                {
+                    "default": "_ipProtocol",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip_protocol\" <$> TF.attribute",
+                    "name": "_ipProtocol",
+                    "method": "ipProtocol",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpProtocol",
+                    "validate": false,
+                    "optional": false,
+                    "original": "ip_protocol"
+                }
+            ],
+            "conflicts": [],
+            "type": "ComputeSecgroupV2RuleSetting s",
+            "original": "rule"
+        },
+        {
+            "con": {
+                "smart": "newDbConfigurationV1ConfigurationSetting",
+                "name": "DbConfigurationV1ConfigurationSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "dependencies": [],
+            "key": "db_configuration_v1.configuration",
+            "name": "DbConfigurationV1ConfigurationSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "conflicts": [],
+            "type": "DbConfigurationV1ConfigurationSetting s",
+            "original": "configuration"
+        },
+        {
+            "con": {
+                "smart": "newDbConfigurationV1DatastoreSetting",
+                "name": "DbConfigurationV1DatastoreSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                },
+                {
+                    "default": "_version",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"version\" <$> TF.attribute",
+                    "name": "_version",
+                    "method": "version",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVersion",
+                    "validate": false,
+                    "optional": false,
+                    "original": "version"
+                }
+            ],
+            "dependencies": [],
+            "key": "db_configuration_v1.datastore",
+            "name": "DbConfigurationV1DatastoreSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                },
+                {
+                    "default": "_version",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"version\" <$> TF.attribute",
+                    "name": "_version",
+                    "method": "version",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVersion",
+                    "validate": false,
+                    "optional": false,
+                    "original": "version"
+                }
+            ],
+            "conflicts": [],
+            "type": "DbConfigurationV1DatastoreSetting s",
+            "original": "datastore"
+        },
+        {
+            "con": {
+                "smart": "newDbInstanceV1DatabaseSetting",
+                "name": "DbInstanceV1DatabaseSetting'"
             },
             "arguments": [
                 {
@@ -1968,16 +1330,16 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
-                    "encoder": "TF.assign \"network_type\" <$> TF.attribute",
-                    "name": "_networkType",
-                    "method": "networkType",
+                    "encoder": "TF.assign \"charset\" <$> TF.attribute",
+                    "name": "_charset",
+                    "method": "charset",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasNetworkType",
+                    "class": "HasCharset",
                     "validate": false,
                     "optional": true,
-                    "original": "network_type"
+                    "original": "charset"
                 },
                 {
                     "default": "TF.Nil",
@@ -1985,49 +1347,238 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
-                    "encoder": "TF.assign \"physical_network\" <$> TF.attribute",
-                    "name": "_physicalNetwork",
-                    "method": "physicalNetwork",
+                    "encoder": "TF.assign \"collate\" <$> TF.attribute",
+                    "name": "_collate",
+                    "method": "collate",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasPhysicalNetwork",
+                    "class": "HasCollate",
                     "validate": false,
                     "optional": true,
-                    "original": "physical_network"
+                    "original": "collate"
                 },
                 {
-                    "default": "TF.Nil",
+                    "default": "_name",
                     "computed": false,
-                    "required": false,
+                    "required": true,
                     "help": [],
                     "forceNew": true,
-                    "encoder": "TF.assign \"segmentation_id\" <$> TF.attribute",
-                    "name": "_segmentationId",
-                    "method": "segmentationId",
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasSegmentationId",
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
                     "validate": false,
-                    "optional": true,
-                    "original": "segmentation_id"
+                    "optional": false,
+                    "original": "name"
                 }
             ],
             "dependencies": [],
-            "key": "openstack_networking_network_v2.segments",
-            "name": "SegmentsSetting",
+            "key": "db_instance_v1.database",
+            "name": "DbInstanceV1DatabaseSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                }
+            ],
+            "conflicts": [],
+            "type": "DbInstanceV1DatabaseSetting s",
+            "original": "database"
+        },
+        {
+            "con": {
+                "smart": "newDbInstanceV1DatastoreSetting",
+                "name": "DbInstanceV1DatastoreSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                },
+                {
+                    "default": "_version",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"version\" <$> TF.attribute",
+                    "name": "_version",
+                    "method": "version",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVersion",
+                    "validate": false,
+                    "optional": false,
+                    "original": "version"
+                }
+            ],
+            "dependencies": [],
+            "key": "db_instance_v1.datastore",
+            "name": "DbInstanceV1DatastoreSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                },
+                {
+                    "default": "_version",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"version\" <$> TF.attribute",
+                    "name": "_version",
+                    "method": "version",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVersion",
+                    "validate": false,
+                    "optional": false,
+                    "original": "version"
+                }
+            ],
+            "conflicts": [],
+            "type": "DbInstanceV1DatastoreSetting s",
+            "original": "datastore"
+        },
+        {
+            "con": {
+                "smart": "newDbInstanceV1NetworkSetting",
+                "name": "DbInstanceV1NetworkSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"fixed_ip_v4\" <$> TF.attribute",
+                    "name": "_fixedIpV4",
+                    "method": "fixedIpV4",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFixedIpV4",
+                    "validate": false,
+                    "optional": true,
+                    "original": "fixed_ip_v4"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"fixed_ip_v6\" <$> TF.attribute",
+                    "name": "_fixedIpV6",
+                    "method": "fixedIpV6",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFixedIpV6",
+                    "validate": false,
+                    "optional": true,
+                    "original": "fixed_ip_v6"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"port\" <$> TF.attribute",
+                    "name": "_port",
+                    "method": "port",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPort",
+                    "validate": false,
+                    "optional": true,
+                    "original": "port"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"uuid\" <$> TF.attribute",
+                    "name": "_uuid",
+                    "method": "uuid",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUuid",
+                    "validate": false,
+                    "optional": true,
+                    "original": "uuid"
+                }
+            ],
+            "dependencies": [],
+            "key": "db_instance_v1.network",
+            "name": "DbInstanceV1NetworkSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "SegmentsSetting s",
-            "original": "segments"
+            "type": "DbInstanceV1NetworkSetting s",
+            "original": "network"
         },
         {
             "con": {
-                "smart": "newUserSetting",
-                "name": "UserSetting'"
+                "smart": "newDbInstanceV1UserSetting",
+                "name": "DbInstanceV1UserSetting'"
             },
             "arguments": [
                 {
@@ -2100,8 +1651,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "openstack_db_instance_v1.user",
-            "name": "UserSetting",
+            "key": "db_instance_v1.user",
+            "name": "DbInstanceV1UserSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -2124,13 +1675,442 @@
                 }
             ],
             "conflicts": [],
-            "type": "UserSetting s",
+            "type": "DbInstanceV1UserSetting s",
             "original": "user"
         },
         {
             "con": {
-                "smart": "newVendorOptionsSetting",
-                "name": "VendorOptionsSetting'"
+                "smart": "newIdentityAuthScopeV3RolesSetting",
+                "name": "IdentityAuthScopeV3RolesSetting'"
+            },
+            "arguments": [],
+            "dependencies": [],
+            "key": "identity_auth_scope_v3.roles",
+            "name": "IdentityAuthScopeV3RolesSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"role_id\" <$> TF.attribute",
+                    "name": "_computedRoleId",
+                    "method": "computedRoleId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedRoleId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "role_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"role_name\" <$> TF.attribute",
+                    "name": "_computedRoleName",
+                    "method": "computedRoleName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedRoleName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "role_name"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "IdentityAuthScopeV3RolesSetting s",
+            "original": "roles"
+        },
+        {
+            "con": {
+                "smart": "newIdentityUserV3MultiFactorAuthRuleSetting",
+                "name": "IdentityUserV3MultiFactorAuthRuleSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_rule",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"rule\" <$> TF.attribute",
+                    "name": "_rule",
+                    "method": "rule",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s P.Text))",
+                    "class": "HasRule",
+                    "validate": false,
+                    "optional": false,
+                    "original": "rule"
+                }
+            ],
+            "dependencies": [],
+            "key": "identity_user_v3.multi_factor_auth_rule",
+            "name": "IdentityUserV3MultiFactorAuthRuleSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_rule",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"rule\" <$> TF.attribute",
+                    "name": "_rule",
+                    "method": "rule",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s P.Text))",
+                    "class": "HasRule",
+                    "validate": false,
+                    "optional": false,
+                    "original": "rule"
+                }
+            ],
+            "conflicts": [],
+            "type": "IdentityUserV3MultiFactorAuthRuleSetting s",
+            "original": "multi_factor_auth_rule"
+        },
+        {
+            "con": {
+                "smart": "newLbPoolV2PersistenceSetting",
+                "name": "LbPoolV2PersistenceSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"cookie_name\" <$> TF.attribute",
+                    "name": "_cookieName",
+                    "method": "cookieName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCookieName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cookie_name"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "dependencies": [],
+            "key": "lb_pool_v2.persistence",
+            "name": "LbPoolV2PersistenceSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "conflicts": [],
+            "type": "LbPoolV2PersistenceSetting s",
+            "original": "persistence"
+        },
+        {
+            "con": {
+                "smart": "newNetworkingNetworkV2SegmentsSetting",
+                "name": "NetworkingNetworkV2SegmentsSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"network_type\" <$> TF.attribute",
+                    "name": "_networkType",
+                    "method": "networkType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNetworkType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "network_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"physical_network\" <$> TF.attribute",
+                    "name": "_physicalNetwork",
+                    "method": "physicalNetwork",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPhysicalNetwork",
+                    "validate": false,
+                    "optional": true,
+                    "original": "physical_network"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"segmentation_id\" <$> TF.attribute",
+                    "name": "_segmentationId",
+                    "method": "segmentationId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasSegmentationId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "segmentation_id"
+                }
+            ],
+            "dependencies": [],
+            "key": "networking_network_v2.segments",
+            "name": "NetworkingNetworkV2SegmentsSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "NetworkingNetworkV2SegmentsSetting s",
+            "original": "segments"
+        },
+        {
+            "con": {
+                "smart": "newNetworkingPortV2AllowedAddressPairsSetting",
+                "name": "NetworkingPortV2AllowedAddressPairsSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_ipAddress",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip_address\" <$> TF.attribute",
+                    "name": "_ipAddress",
+                    "method": "ipAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpAddress",
+                    "validate": false,
+                    "optional": false,
+                    "original": "ip_address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"mac_address\" <$> TF.attribute",
+                    "name": "_macAddress",
+                    "method": "macAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMacAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "mac_address"
+                }
+            ],
+            "dependencies": [],
+            "key": "networking_port_v2.allowed_address_pairs",
+            "name": "NetworkingPortV2AllowedAddressPairsSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_ipAddress",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip_address\" <$> TF.attribute",
+                    "name": "_ipAddress",
+                    "method": "ipAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpAddress",
+                    "validate": false,
+                    "optional": false,
+                    "original": "ip_address"
+                }
+            ],
+            "conflicts": [],
+            "type": "NetworkingPortV2AllowedAddressPairsSetting s",
+            "original": "allowed_address_pairs"
+        },
+        {
+            "con": {
+                "smart": "newNetworkingPortV2FixedIpSetting",
+                "name": "NetworkingPortV2FixedIpSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip_address\" <$> TF.attribute",
+                    "name": "_ipAddress",
+                    "method": "ipAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ip_address"
+                },
+                {
+                    "default": "_subnetId",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"subnet_id\" <$> TF.attribute",
+                    "name": "_subnetId",
+                    "method": "subnetId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSubnetId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "subnet_id"
+                }
+            ],
+            "dependencies": [],
+            "key": "networking_port_v2.fixed_ip",
+            "name": "NetworkingPortV2FixedIpSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_subnetId",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"subnet_id\" <$> TF.attribute",
+                    "name": "_subnetId",
+                    "method": "subnetId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSubnetId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "subnet_id"
+                }
+            ],
+            "conflicts": [],
+            "type": "NetworkingPortV2FixedIpSetting s",
+            "original": "fixed_ip"
+        },
+        {
+            "con": {
+                "smart": "newNetworkingRouterV2ExternalFixedIpSetting",
+                "name": "NetworkingRouterV2ExternalFixedIpSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip_address\" <$> TF.attribute",
+                    "name": "_ipAddress",
+                    "method": "ipAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ip_address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"subnet_id\" <$> TF.attribute",
+                    "name": "_subnetId",
+                    "method": "subnetId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSubnetId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "subnet_id"
+                }
+            ],
+            "dependencies": [],
+            "key": "networking_router_v2.external_fixed_ip",
+            "name": "NetworkingRouterV2ExternalFixedIpSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "NetworkingRouterV2ExternalFixedIpSetting s",
+            "original": "external_fixed_ip"
+        },
+        {
+            "con": {
+                "smart": "newNetworkingRouterV2VendorOptionsSetting",
+                "name": "NetworkingRouterV2VendorOptionsSetting'"
             },
             "arguments": [
                 {
@@ -2152,76 +2132,59 @@
                 }
             ],
             "dependencies": [],
-            "key": "openstack_networking_router_v2.vendor_options",
-            "name": "VendorOptionsSetting",
+            "key": "networking_router_v2.vendor_options",
+            "name": "NetworkingRouterV2VendorOptionsSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "VendorOptionsSetting s",
+            "type": "NetworkingRouterV2VendorOptionsSetting s",
             "original": "vendor_options"
         },
         {
             "con": {
-                "smart": "newVolumeSetting",
-                "name": "VolumeSetting'"
+                "smart": "newNetworkingSubnetV2AllocationPoolsSetting",
+                "name": "NetworkingSubnetV2AllocationPoolsSetting'"
             },
             "arguments": [
                 {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"device\" <$> TF.attribute",
-                    "name": "_device",
-                    "method": "device",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDevice",
-                    "validate": false,
-                    "optional": true,
-                    "original": "device"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "_id",
-                    "method": "id",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasId",
-                    "validate": false,
-                    "optional": true,
-                    "original": "id"
-                },
-                {
-                    "default": "_volumeId",
+                    "default": "_end",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"volume_id\" <$> TF.attribute",
-                    "name": "_volumeId",
-                    "method": "volumeId",
+                    "encoder": "TF.assign \"end\" <$> TF.attribute",
+                    "name": "_end",
+                    "method": "end",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasVolumeId",
+                    "class": "HasEnd",
                     "validate": false,
                     "optional": false,
-                    "original": "volume_id"
+                    "original": "end"
+                },
+                {
+                    "default": "_start",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"start\" <$> TF.attribute",
+                    "name": "_start",
+                    "method": "start",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasStart",
+                    "validate": false,
+                    "optional": false,
+                    "original": "start"
                 }
             ],
             "dependencies": [],
-            "key": "openstack_compute_instance_v2.volume",
-            "name": "VolumeSetting",
+            "key": "networking_subnet_v2.allocation_pools",
+            "name": "NetworkingSubnetV2AllocationPoolsSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -2230,16 +2193,16 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"device\" <$> TF.attribute",
-                    "name": "_computedDevice",
-                    "method": "computedDevice",
+                    "encoder": "TF.assign \"end\" <$> TF.attribute",
+                    "name": "_computedEnd",
+                    "method": "computedEnd",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasComputedDevice",
+                    "class": "HasComputedEnd",
                     "validate": false,
                     "optional": false,
-                    "original": "device"
+                    "original": "end"
                 },
                 {
                     "default": "TF.Nil",
@@ -2247,40 +2210,470 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "_computedId",
-                    "method": "computedId",
+                    "encoder": "TF.assign \"start\" <$> TF.attribute",
+                    "name": "_computedStart",
+                    "method": "computedStart",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasComputedId",
+                    "class": "HasComputedStart",
                     "validate": false,
                     "optional": false,
-                    "original": "id"
+                    "original": "start"
                 }
             ],
             "parameters": [
                 {
-                    "default": "_volumeId",
+                    "default": "_end",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"volume_id\" <$> TF.attribute",
-                    "name": "_volumeId",
-                    "method": "volumeId",
+                    "encoder": "TF.assign \"end\" <$> TF.attribute",
+                    "name": "_end",
+                    "method": "end",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasVolumeId",
+                    "class": "HasEnd",
                     "validate": false,
                     "optional": false,
-                    "original": "volume_id"
+                    "original": "end"
+                },
+                {
+                    "default": "_start",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"start\" <$> TF.attribute",
+                    "name": "_start",
+                    "method": "start",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasStart",
+                    "validate": false,
+                    "optional": false,
+                    "original": "start"
                 }
             ],
             "conflicts": [],
-            "type": "VolumeSetting s",
-            "original": "volume"
+            "type": "NetworkingSubnetV2AllocationPoolsSetting s",
+            "original": "allocation_pools"
+        },
+        {
+            "con": {
+                "smart": "newNetworkingSubnetV2HostRoutesSetting",
+                "name": "NetworkingSubnetV2HostRoutesSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_destinationCidr",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"destination_cidr\" <$> TF.attribute",
+                    "name": "_destinationCidr",
+                    "method": "destinationCidr",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDestinationCidr",
+                    "validate": false,
+                    "optional": false,
+                    "original": "destination_cidr"
+                },
+                {
+                    "default": "_nextHop",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"next_hop\" <$> TF.attribute",
+                    "name": "_nextHop",
+                    "method": "nextHop",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNextHop",
+                    "validate": false,
+                    "optional": false,
+                    "original": "next_hop"
+                }
+            ],
+            "dependencies": [],
+            "key": "networking_subnet_v2.host_routes",
+            "name": "NetworkingSubnetV2HostRoutesSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"destination_cidr\" <$> TF.attribute",
+                    "name": "_computedDestinationCidr",
+                    "method": "computedDestinationCidr",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedDestinationCidr",
+                    "validate": false,
+                    "optional": false,
+                    "original": "destination_cidr"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"next_hop\" <$> TF.attribute",
+                    "name": "_computedNextHop",
+                    "method": "computedNextHop",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedNextHop",
+                    "validate": false,
+                    "optional": false,
+                    "original": "next_hop"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_destinationCidr",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"destination_cidr\" <$> TF.attribute",
+                    "name": "_destinationCidr",
+                    "method": "destinationCidr",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDestinationCidr",
+                    "validate": false,
+                    "optional": false,
+                    "original": "destination_cidr"
+                },
+                {
+                    "default": "_nextHop",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"next_hop\" <$> TF.attribute",
+                    "name": "_nextHop",
+                    "method": "nextHop",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNextHop",
+                    "validate": false,
+                    "optional": false,
+                    "original": "next_hop"
+                }
+            ],
+            "conflicts": [],
+            "type": "NetworkingSubnetV2HostRoutesSetting s",
+            "original": "host_routes"
+        },
+        {
+            "con": {
+                "smart": "newVpnaasIkePolicyV2LifetimeSetting",
+                "name": "VpnaasIkePolicyV2LifetimeSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"units\" <$> TF.attribute",
+                    "name": "_units",
+                    "method": "units",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUnits",
+                    "validate": false,
+                    "optional": true,
+                    "original": "units"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": true,
+                    "original": "value"
+                }
+            ],
+            "dependencies": [],
+            "key": "vpnaas_ike_policy_v2.lifetime",
+            "name": "VpnaasIkePolicyV2LifetimeSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"units\" <$> TF.attribute",
+                    "name": "_computedUnits",
+                    "method": "computedUnits",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedUnits",
+                    "validate": false,
+                    "optional": false,
+                    "original": "units"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_computedValue",
+                    "method": "computedValue",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasComputedValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "VpnaasIkePolicyV2LifetimeSetting s",
+            "original": "lifetime"
+        },
+        {
+            "con": {
+                "smart": "newVpnaasIpsecPolicyV2LifetimeSetting",
+                "name": "VpnaasIpsecPolicyV2LifetimeSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"units\" <$> TF.attribute",
+                    "name": "_units",
+                    "method": "units",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUnits",
+                    "validate": false,
+                    "optional": true,
+                    "original": "units"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": true,
+                    "original": "value"
+                }
+            ],
+            "dependencies": [],
+            "key": "vpnaas_ipsec_policy_v2.lifetime",
+            "name": "VpnaasIpsecPolicyV2LifetimeSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"units\" <$> TF.attribute",
+                    "name": "_computedUnits",
+                    "method": "computedUnits",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedUnits",
+                    "validate": false,
+                    "optional": false,
+                    "original": "units"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_computedValue",
+                    "method": "computedValue",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasComputedValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "VpnaasIpsecPolicyV2LifetimeSetting s",
+            "original": "lifetime"
+        },
+        {
+            "con": {
+                "smart": "newVpnaasSiteConnectionV2DpdSetting",
+                "name": "VpnaasSiteConnectionV2DpdSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"action\" <$> TF.attribute",
+                    "name": "_action",
+                    "method": "action",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAction",
+                    "validate": false,
+                    "optional": true,
+                    "original": "action"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"interval\" <$> TF.attribute",
+                    "name": "_interval",
+                    "method": "interval",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasInterval",
+                    "validate": false,
+                    "optional": true,
+                    "original": "interval"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"timeout\" <$> TF.attribute",
+                    "name": "_timeout",
+                    "method": "timeout",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasTimeout",
+                    "validate": false,
+                    "optional": true,
+                    "original": "timeout"
+                }
+            ],
+            "dependencies": [],
+            "key": "vpnaas_site_connection_v2.dpd",
+            "name": "VpnaasSiteConnectionV2DpdSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"action\" <$> TF.attribute",
+                    "name": "_computedAction",
+                    "method": "computedAction",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedAction",
+                    "validate": false,
+                    "optional": false,
+                    "original": "action"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"interval\" <$> TF.attribute",
+                    "name": "_computedInterval",
+                    "method": "computedInterval",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasComputedInterval",
+                    "validate": false,
+                    "optional": false,
+                    "original": "interval"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"timeout\" <$> TF.attribute",
+                    "name": "_computedTimeout",
+                    "method": "computedTimeout",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasComputedTimeout",
+                    "validate": false,
+                    "optional": false,
+                    "original": "timeout"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "VpnaasSiteConnectionV2DpdSetting s",
+            "original": "dpd"
         }
     ],
     "url": "https://www.terraform.io/docs/providers/openstack/index.html",
@@ -2447,7 +2840,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/compute_flavor_v2.html",
             "dependencies": [],
-            "key": "openstack_compute_flavor_v2",
+            "key": "compute_flavor_v2",
             "name": "ComputeFlavorV2Data",
             "threaded": true,
             "attributes": [
@@ -2551,7 +2944,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/compute_keypair_v2.html",
             "dependencies": [],
-            "key": "openstack_compute_keypair_v2",
+            "key": "compute_keypair_v2",
             "name": "ComputeKeypairV2Data",
             "threaded": true,
             "attributes": [
@@ -2911,7 +3304,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/dns_zone_v2.html",
             "dependencies": [],
-            "key": "openstack_dns_zone_v2",
+            "key": "dns_zone_v2",
             "name": "DnsZoneV2Data",
             "threaded": true,
             "attributes": [
@@ -3185,7 +3578,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/fw_policy_v1.html",
             "dependencies": [],
-            "key": "openstack_fw_policy_v1",
+            "key": "fw_policy_v1",
             "name": "FwPolicyV1Data",
             "threaded": true,
             "attributes": [
@@ -3357,9 +3750,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/identity_auth_scope_v3.html",
             "dependencies": [
-                "RolesSetting"
+                "IdentityAuthScopeV3RolesSetting"
             ],
-            "key": "openstack_identity_auth_scope_v3",
+            "key": "identity_auth_scope_v3",
             "name": "IdentityAuthScopeV3Data",
             "threaded": true,
             "attributes": [
@@ -3476,7 +3869,7 @@
                     "method": "computedRoles",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RolesSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (IdentityAuthScopeV3RolesSetting s)]",
                     "class": "HasComputedRoles",
                     "validate": false,
                     "optional": false,
@@ -3651,7 +4044,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/identity_endpoint_v3.html",
             "dependencies": [],
-            "key": "openstack_identity_endpoint_v3",
+            "key": "identity_endpoint_v3",
             "name": "IdentityEndpointV3Data",
             "threaded": true,
             "attributes": [
@@ -3772,7 +4165,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/identity_group_v3.html",
             "dependencies": [],
-            "key": "openstack_identity_group_v3",
+            "key": "identity_group_v3",
             "name": "IdentityGroupV3Data",
             "threaded": true,
             "attributes": [
@@ -3962,7 +4355,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/identity_project_v3.html",
             "dependencies": [],
-            "key": "openstack_identity_project_v3",
+            "key": "identity_project_v3",
             "name": "IdentityProjectV3Data",
             "threaded": true,
             "attributes": [
@@ -4100,7 +4493,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/identity_role_v3.html",
             "dependencies": [],
-            "key": "openstack_identity_role_v3",
+            "key": "identity_role_v3",
             "name": "IdentityRoleV3Data",
             "threaded": true,
             "attributes": [
@@ -4324,7 +4717,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/identity_user_v3.html",
             "dependencies": [],
-            "key": "openstack_identity_user_v3",
+            "key": "identity_user_v3",
             "name": "IdentityUserV3Data",
             "threaded": true,
             "attributes": [
@@ -4615,7 +5008,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/images_image_v2.html",
             "dependencies": [],
-            "key": "openstack_images_image_v2",
+            "key": "images_image_v2",
             "name": "ImagesImageV2Data",
             "threaded": true,
             "attributes": [
@@ -4974,7 +5367,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/networking_floatingip_v2.html",
             "dependencies": [],
-            "key": "openstack_networking_floatingip_v2",
+            "key": "networking_floatingip_v2",
             "name": "NetworkingFloatingipV2Data",
             "threaded": true,
             "attributes": [
@@ -5131,7 +5524,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/networking_network_v2.html",
             "dependencies": [],
-            "key": "openstack_networking_network_v2",
+            "key": "networking_network_v2",
             "name": "NetworkingNetworkV2Data",
             "threaded": true,
             "attributes": [
@@ -5303,7 +5696,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/networking_secgroup_v2.html",
             "dependencies": [],
-            "key": "openstack_networking_secgroup_v2",
+            "key": "networking_secgroup_v2",
             "name": "NetworkingSecgroupV2Data",
             "threaded": true,
             "attributes": [
@@ -5608,10 +6001,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/networking_subnet_v2.html",
             "dependencies": [
-                "AllocationPoolsSetting",
-                "HostRoutesSetting"
+                "NetworkingSubnetV2AllocationPoolsSetting",
+                "NetworkingSubnetV2HostRoutesSetting"
             ],
-            "key": "openstack_networking_subnet_v2",
+            "key": "networking_subnet_v2",
             "name": "NetworkingSubnetV2Data",
             "threaded": true,
             "attributes": [
@@ -5643,7 +6036,7 @@
                     "method": "computedAllocationPools",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (AllocationPoolsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (NetworkingSubnetV2AllocationPoolsSetting s)]",
                     "class": "HasComputedAllocationPools",
                     "validate": false,
                     "optional": false,
@@ -5728,7 +6121,7 @@
                     "method": "computedHostRoutes",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (HostRoutesSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (NetworkingSubnetV2HostRoutesSetting s)]",
                     "class": "HasComputedHostRoutes",
                     "validate": false,
                     "optional": false,
@@ -6155,7 +6548,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/d/networking_subnetpool_v2.html",
             "dependencies": [],
-            "key": "openstack_networking_subnetpool_v2",
+            "key": "networking_subnetpool_v2",
             "name": "NetworkingSubnetpoolV2Data",
             "threaded": true,
             "attributes": [
@@ -6686,7 +7079,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/blockstorage_volume_attach_v2.html",
             "dependencies": [],
-            "key": "openstack_blockstorage_volume_attach_v2",
+            "key": "blockstorage_volume_attach_v2",
             "name": "BlockstorageVolumeAttachV2Resource",
             "threaded": true,
             "attributes": [
@@ -7029,7 +7422,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/blockstorage_volume_attach_v3.html",
             "dependencies": [],
-            "key": "openstack_blockstorage_volume_attach_v3",
+            "key": "blockstorage_volume_attach_v3",
             "name": "BlockstorageVolumeAttachV3Resource",
             "threaded": true,
             "attributes": [
@@ -7338,9 +7731,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/blockstorage_volume_v1.html",
             "dependencies": [
-                "AttachmentSetting"
+                "BlockstorageVolumeV1AttachmentSetting"
             ],
-            "key": "openstack_blockstorage_volume_v1",
+            "key": "blockstorage_volume_v1",
             "name": "BlockstorageVolumeV1Resource",
             "threaded": true,
             "attributes": [
@@ -7372,7 +7765,7 @@
                     "method": "computedAttachment",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (AttachmentSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (BlockstorageVolumeV1AttachmentSetting s)]",
                     "class": "HasComputedAttachment",
                     "validate": false,
                     "optional": false,
@@ -7683,9 +8076,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/blockstorage_volume_v2.html",
             "dependencies": [
-                "AttachmentSetting"
+                "BlockstorageVolumeV2AttachmentSetting"
             ],
-            "key": "openstack_blockstorage_volume_v2",
+            "key": "blockstorage_volume_v2",
             "name": "BlockstorageVolumeV2Resource",
             "threaded": true,
             "attributes": [
@@ -7717,7 +8110,7 @@
                     "method": "computedAttachment",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (AttachmentSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (BlockstorageVolumeV2AttachmentSetting s)]",
                     "class": "HasComputedAttachment",
                     "validate": false,
                     "optional": false,
@@ -8045,9 +8438,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/blockstorage_volume_v3.html",
             "dependencies": [
-                "AttachmentSetting"
+                "BlockstorageVolumeV3AttachmentSetting"
             ],
-            "key": "openstack_blockstorage_volume_v3",
+            "key": "blockstorage_volume_v3",
             "name": "BlockstorageVolumeV3Resource",
             "threaded": true,
             "attributes": [
@@ -8079,7 +8472,7 @@
                     "method": "computedAttachment",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (AttachmentSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (BlockstorageVolumeV3AttachmentSetting s)]",
                     "class": "HasComputedAttachment",
                     "validate": false,
                     "optional": false,
@@ -8356,7 +8749,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/compute_flavor_v2.html",
             "dependencies": [],
-            "key": "openstack_compute_flavor_v2",
+            "key": "compute_flavor_v2",
             "name": "ComputeFlavorV2Resource",
             "threaded": true,
             "attributes": [
@@ -8580,7 +8973,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/compute_floatingip_associate_v2.html",
             "dependencies": [],
-            "key": "openstack_compute_floatingip_associate_v2",
+            "key": "compute_floatingip_associate_v2",
             "name": "ComputeFloatingipAssociateV2Resource",
             "threaded": true,
             "attributes": [
@@ -8702,7 +9095,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/compute_floatingip_v2.html",
             "dependencies": [],
-            "key": "openstack_compute_floatingip_v2",
+            "key": "compute_floatingip_v2",
             "name": "ComputeFloatingipV2Resource",
             "threaded": true,
             "attributes": [
@@ -8900,7 +9293,7 @@
                     "method": "blockDevice",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (BlockDeviceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ComputeInstanceV2BlockDeviceSetting s)]",
                     "class": "HasBlockDevice",
                     "validate": false,
                     "optional": true,
@@ -9087,7 +9480,7 @@
                     "method": "network",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NetworkSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ComputeInstanceV2NetworkSetting s)]",
                     "class": "HasNetwork",
                     "validate": false,
                     "optional": true,
@@ -9104,7 +9497,7 @@
                     "method": "personality",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (PersonalitySetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ComputeInstanceV2PersonalitySetting s)]",
                     "class": "HasPersonality",
                     "validate": false,
                     "optional": true,
@@ -9155,7 +9548,7 @@
                     "method": "schedulerHints",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (SchedulerHintsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ComputeInstanceV2SchedulerHintsSetting s)]",
                     "class": "HasSchedulerHints",
                     "validate": false,
                     "optional": true,
@@ -9223,7 +9616,7 @@
                     "method": "volume",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (VolumeSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ComputeInstanceV2VolumeSetting s)]",
                     "class": "HasVolume",
                     "validate": false,
                     "optional": true,
@@ -9232,14 +9625,14 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/compute_instance_v2.html",
             "dependencies": [
-                "BlockDeviceSetting",
-                "NetworkSetting",
-                "PersonalitySetting",
-                "SchedulerHintsSetting",
-                "VolumeSetting",
-                "NetworkSetting"
+                "ComputeInstanceV2BlockDeviceSetting",
+                "ComputeInstanceV2NetworkSetting",
+                "ComputeInstanceV2PersonalitySetting",
+                "ComputeInstanceV2SchedulerHintsSetting",
+                "ComputeInstanceV2VolumeSetting",
+                "ComputeInstanceV2NetworkSetting"
             ],
-            "key": "openstack_compute_instance_v2",
+            "key": "compute_instance_v2",
             "name": "ComputeInstanceV2Resource",
             "threaded": true,
             "attributes": [
@@ -9407,7 +9800,7 @@
                     "method": "computedNetwork",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NetworkSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ComputeInstanceV2NetworkSetting s)]",
                     "class": "HasComputedNetwork",
                     "validate": false,
                     "optional": false,
@@ -9548,7 +9941,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/compute_keypair_v2.html",
             "dependencies": [],
-            "key": "openstack_compute_keypair_v2",
+            "key": "compute_keypair_v2",
             "name": "ComputeKeypairV2Resource",
             "threaded": true,
             "attributes": [
@@ -9729,7 +10122,7 @@
                     "method": "rule",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RuleSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ComputeSecgroupV2RuleSetting s)]",
                     "class": "HasRule",
                     "validate": false,
                     "optional": true,
@@ -9738,10 +10131,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/compute_secgroup_v2.html",
             "dependencies": [
-                "RuleSetting",
-                "RuleSetting"
+                "ComputeSecgroupV2RuleSetting",
+                "ComputeSecgroupV2RuleSetting"
             ],
-            "key": "openstack_compute_secgroup_v2",
+            "key": "compute_secgroup_v2",
             "name": "ComputeSecgroupV2Resource",
             "threaded": true,
             "attributes": [
@@ -9790,7 +10183,7 @@
                     "method": "computedRule",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RuleSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ComputeSecgroupV2RuleSetting s)]",
                     "class": "HasComputedRule",
                     "validate": false,
                     "optional": false,
@@ -9914,7 +10307,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/compute_servergroup_v2.html",
             "dependencies": [],
-            "key": "openstack_compute_servergroup_v2",
+            "key": "compute_servergroup_v2",
             "name": "ComputeServergroupV2Resource",
             "threaded": true,
             "attributes": [
@@ -10070,7 +10463,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/compute_volume_attach_v2.html",
             "dependencies": [],
-            "key": "openstack_compute_volume_attach_v2",
+            "key": "compute_volume_attach_v2",
             "name": "ComputeVolumeAttachV2Resource",
             "threaded": true,
             "attributes": [
@@ -10183,7 +10576,7 @@
                     "method": "configuration",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ConfigurationSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DbConfigurationV1ConfigurationSetting s)]",
                     "class": "HasConfiguration",
                     "validate": false,
                     "optional": true,
@@ -10200,7 +10593,7 @@
                     "method": "datastore",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (DatastoreSetting s)",
+                    "type": "TF.Attr s (DbConfigurationV1DatastoreSetting s)",
                     "class": "HasDatastore",
                     "validate": true,
                     "optional": false,
@@ -10260,10 +10653,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/db_configuration_v1.html",
             "dependencies": [
-                "ConfigurationSetting",
-                "DatastoreSetting"
+                "DbConfigurationV1ConfigurationSetting",
+                "DbConfigurationV1DatastoreSetting"
             ],
-            "key": "openstack_db_configuration_v1",
+            "key": "db_configuration_v1",
             "name": "DbConfigurationV1Resource",
             "threaded": true,
             "attributes": [
@@ -10297,7 +10690,7 @@
                     "method": "datastore",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (DatastoreSetting s)",
+                    "type": "TF.Attr s (DbConfigurationV1DatastoreSetting s)",
                     "class": "HasDatastore",
                     "validate": true,
                     "optional": false,
@@ -10419,7 +10812,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/db_database_v1.html",
             "dependencies": [],
-            "key": "openstack_db_database_v1",
+            "key": "db_database_v1",
             "name": "DbDatabaseV1Resource",
             "threaded": true,
             "attributes": [
@@ -10515,7 +10908,7 @@
                     "method": "database",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (DatabaseSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DbInstanceV1DatabaseSetting s)]",
                     "class": "HasDatabase",
                     "validate": false,
                     "optional": true,
@@ -10532,7 +10925,7 @@
                     "method": "datastore",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (DatastoreSetting s)",
+                    "type": "TF.Attr s (DbInstanceV1DatastoreSetting s)",
                     "class": "HasDatastore",
                     "validate": true,
                     "optional": false,
@@ -10583,7 +10976,7 @@
                     "method": "network",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NetworkSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DbInstanceV1NetworkSetting s)]",
                     "class": "HasNetwork",
                     "validate": false,
                     "optional": true,
@@ -10634,7 +11027,7 @@
                     "method": "user",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (UserSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DbInstanceV1UserSetting s)]",
                     "class": "HasUser",
                     "validate": false,
                     "optional": true,
@@ -10643,12 +11036,12 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/db_instance_v1.html",
             "dependencies": [
-                "DatabaseSetting",
-                "DatastoreSetting",
-                "NetworkSetting",
-                "UserSetting"
+                "DbInstanceV1DatabaseSetting",
+                "DbInstanceV1DatastoreSetting",
+                "DbInstanceV1NetworkSetting",
+                "DbInstanceV1UserSetting"
             ],
-            "key": "openstack_db_instance_v1",
+            "key": "db_instance_v1",
             "name": "DbInstanceV1Resource",
             "threaded": true,
             "attributes": [
@@ -10699,7 +11092,7 @@
                     "method": "datastore",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (DatastoreSetting s)",
+                    "type": "TF.Attr s (DbInstanceV1DatastoreSetting s)",
                     "class": "HasDatastore",
                     "validate": true,
                     "optional": false,
@@ -10872,7 +11265,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/db_user_v1.html",
             "dependencies": [],
-            "key": "openstack_db_user_v1",
+            "key": "db_user_v1",
             "name": "DbUserV1Resource",
             "threaded": true,
             "attributes": [
@@ -11130,7 +11523,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/dns_recordset_v2.html",
             "dependencies": [],
-            "key": "openstack_dns_recordset_v2",
+            "key": "dns_recordset_v2",
             "name": "DnsRecordsetV2Resource",
             "threaded": true,
             "attributes": [
@@ -11405,7 +11798,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/dns_zone_v2.html",
             "dependencies": [],
-            "key": "openstack_dns_zone_v2",
+            "key": "dns_zone_v2",
             "name": "DnsZoneV2Resource",
             "threaded": true,
             "attributes": [
@@ -11675,7 +12068,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/fw_firewall_v1.html",
             "dependencies": [],
-            "key": "openstack_fw_firewall_v1",
+            "key": "fw_firewall_v1",
             "name": "FwFirewallV1Resource",
             "threaded": true,
             "attributes": [
@@ -11965,7 +12358,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/fw_policy_v1.html",
             "dependencies": [],
-            "key": "openstack_fw_policy_v1",
+            "key": "fw_policy_v1",
             "name": "FwPolicyV1Resource",
             "threaded": true,
             "attributes": [
@@ -12256,7 +12649,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/fw_rule_v1.html",
             "dependencies": [],
-            "key": "openstack_fw_rule_v1",
+            "key": "fw_rule_v1",
             "name": "FwRuleV1Resource",
             "threaded": true,
             "attributes": [
@@ -12463,7 +12856,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/identity_project_v3.html",
             "dependencies": [],
-            "key": "openstack_identity_project_v3",
+            "key": "identity_project_v3",
             "name": "IdentityProjectV3Resource",
             "threaded": true,
             "attributes": [
@@ -12659,7 +13052,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/identity_role_assignment_v3.html",
             "dependencies": [],
-            "key": "openstack_identity_role_assignment_v3",
+            "key": "identity_role_assignment_v3",
             "name": "IdentityRoleAssignmentV3Resource",
             "threaded": true,
             "attributes": [
@@ -12857,7 +13250,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/identity_role_v3.html",
             "dependencies": [],
-            "key": "openstack_identity_role_v3",
+            "key": "identity_role_v3",
             "name": "IdentityRoleV3Resource",
             "threaded": true,
             "attributes": [
@@ -13106,7 +13499,7 @@
                     "method": "multiFactorAuthRule",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (MultiFactorAuthRuleSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (IdentityUserV3MultiFactorAuthRuleSetting s)]",
                     "class": "HasMultiFactorAuthRule",
                     "validate": false,
                     "optional": true,
@@ -13166,9 +13559,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/identity_user_v3.html",
             "dependencies": [
-                "MultiFactorAuthRuleSetting"
+                "IdentityUserV3MultiFactorAuthRuleSetting"
             ],
-            "key": "openstack_identity_user_v3",
+            "key": "identity_user_v3",
             "name": "IdentityUserV3Resource",
             "threaded": true,
             "attributes": [
@@ -13505,7 +13898,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/images_image_v2.html",
             "dependencies": [],
-            "key": "openstack_images_image_v2",
+            "key": "images_image_v2",
             "name": "ImagesImageV2Resource",
             "threaded": true,
             "attributes": [
@@ -14031,7 +14424,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/lb_listener_v2.html",
             "dependencies": [],
-            "key": "openstack_lb_listener_v2",
+            "key": "lb_listener_v2",
             "name": "LbListenerV2Resource",
             "threaded": true,
             "attributes": [
@@ -14374,7 +14767,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/lb_loadbalancer_v2.html",
             "dependencies": [],
-            "key": "openstack_lb_loadbalancer_v2",
+            "key": "lb_loadbalancer_v2",
             "name": "LbLoadbalancerV2Resource",
             "threaded": true,
             "attributes": [
@@ -14649,7 +15042,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/lb_member_v1.html",
             "dependencies": [],
-            "key": "openstack_lb_member_v1",
+            "key": "lb_member_v1",
             "name": "LbMemberV1Resource",
             "threaded": true,
             "attributes": [
@@ -14941,7 +15334,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/lb_member_v2.html",
             "dependencies": [],
-            "key": "openstack_lb_member_v2",
+            "key": "lb_member_v2",
             "name": "LbMemberV2Resource",
             "threaded": true,
             "attributes": [
@@ -15250,7 +15643,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/lb_monitor_v1.html",
             "dependencies": [],
-            "key": "openstack_lb_monitor_v1",
+            "key": "lb_monitor_v1",
             "name": "LbMonitorV1Resource",
             "threaded": true,
             "attributes": [
@@ -15610,7 +16003,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/lb_monitor_v2.html",
             "dependencies": [],
-            "key": "openstack_lb_monitor_v2",
+            "key": "lb_monitor_v2",
             "name": "LbMonitorV2Resource",
             "threaded": true,
             "attributes": [
@@ -15970,7 +16363,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/lb_pool_v1.html",
             "dependencies": [],
-            "key": "openstack_lb_pool_v1",
+            "key": "lb_pool_v1",
             "name": "LbPoolV1Resource",
             "threaded": true,
             "attributes": [
@@ -16236,7 +16629,7 @@
                     "method": "persistence",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (PersistenceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (LbPoolV2PersistenceSetting s)]",
                     "class": "HasPersistence",
                     "validate": false,
                     "optional": true,
@@ -16296,9 +16689,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/lb_pool_v2.html",
             "dependencies": [
-                "PersistenceSetting"
+                "LbPoolV2PersistenceSetting"
             ],
-            "key": "openstack_lb_pool_v2",
+            "key": "lb_pool_v2",
             "name": "LbPoolV2Resource",
             "threaded": true,
             "attributes": [
@@ -16624,7 +17017,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/lb_vip_v1.html",
             "dependencies": [],
-            "key": "openstack_lb_vip_v1",
+            "key": "lb_vip_v1",
             "name": "LbVipV1Resource",
             "threaded": true,
             "attributes": [
@@ -16916,7 +17309,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_floatingip_associate_v2.html",
             "dependencies": [],
-            "key": "openstack_networking_floatingip_associate_v2",
+            "key": "networking_floatingip_associate_v2",
             "name": "NetworkingFloatingipAssociateV2Resource",
             "threaded": true,
             "attributes": [
@@ -17140,7 +17533,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_floatingip_v2.html",
             "dependencies": [],
-            "key": "openstack_networking_floatingip_v2",
+            "key": "networking_floatingip_v2",
             "name": "NetworkingFloatingipV2Resource",
             "threaded": true,
             "attributes": [
@@ -17372,7 +17765,7 @@
                     "method": "segments",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (SegmentsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (NetworkingNetworkV2SegmentsSetting s)]",
                     "class": "HasSegments",
                     "validate": false,
                     "optional": true,
@@ -17432,9 +17825,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_network_v2.html",
             "dependencies": [
-                "SegmentsSetting"
+                "NetworkingNetworkV2SegmentsSetting"
             ],
-            "key": "openstack_networking_network_v2",
+            "key": "networking_network_v2",
             "name": "NetworkingNetworkV2Resource",
             "threaded": true,
             "attributes": [
@@ -17597,7 +17990,7 @@
                     "method": "allowedAddressPairs",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (AllowedAddressPairsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (NetworkingPortV2AllowedAddressPairsSetting s)]",
                     "class": "HasAllowedAddressPairs",
                     "validate": false,
                     "optional": true,
@@ -17648,7 +18041,7 @@
                     "method": "fixedIp",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (FixedIpSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (NetworkingPortV2FixedIpSetting s)]",
                     "class": "HasFixedIp",
                     "validate": false,
                     "optional": true,
@@ -17793,10 +18186,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_port_v2.html",
             "dependencies": [
-                "AllowedAddressPairsSetting",
-                "FixedIpSetting"
+                "NetworkingPortV2AllowedAddressPairsSetting",
+                "NetworkingPortV2FixedIpSetting"
             ],
-            "key": "openstack_networking_port_v2",
+            "key": "networking_port_v2",
             "name": "NetworkingPortV2Resource",
             "threaded": true,
             "attributes": [
@@ -18054,7 +18447,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_router_interface_v2.html",
             "dependencies": [],
-            "key": "openstack_networking_router_interface_v2",
+            "key": "networking_router_interface_v2",
             "name": "NetworkingRouterInterfaceV2Resource",
             "threaded": true,
             "attributes": [
@@ -18227,7 +18620,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_router_route_v2.html",
             "dependencies": [],
-            "key": "openstack_networking_router_route_v2",
+            "key": "networking_router_route_v2",
             "name": "NetworkingRouterRouteV2Resource",
             "threaded": true,
             "attributes": [
@@ -18408,7 +18801,7 @@
                     "method": "externalFixedIp",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ExternalFixedIpSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (NetworkingRouterV2ExternalFixedIpSetting s)]",
                     "class": "HasExternalFixedIp",
                     "validate": false,
                     "optional": true,
@@ -18510,7 +18903,7 @@
                     "method": "vendorOptions",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (VendorOptionsSetting s)",
+                    "type": "TF.Attr s (NetworkingRouterV2VendorOptionsSetting s)",
                     "class": "HasVendorOptions",
                     "validate": true,
                     "optional": true,
@@ -18519,11 +18912,11 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_router_v2.html",
             "dependencies": [
-                "ExternalFixedIpSetting",
-                "VendorOptionsSetting",
-                "ExternalFixedIpSetting"
+                "NetworkingRouterV2ExternalFixedIpSetting",
+                "NetworkingRouterV2VendorOptionsSetting",
+                "NetworkingRouterV2ExternalFixedIpSetting"
             ],
-            "key": "openstack_networking_router_v2",
+            "key": "networking_router_v2",
             "name": "NetworkingRouterV2Resource",
             "threaded": true,
             "attributes": [
@@ -18623,7 +19016,7 @@
                     "method": "computedExternalFixedIp",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ExternalFixedIpSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (NetworkingRouterV2ExternalFixedIpSetting s)]",
                     "class": "HasComputedExternalFixedIp",
                     "validate": false,
                     "optional": false,
@@ -18867,7 +19260,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_secgroup_rule_v2.html",
             "dependencies": [],
-            "key": "openstack_networking_secgroup_rule_v2",
+            "key": "networking_secgroup_rule_v2",
             "name": "NetworkingSecgroupRuleV2Resource",
             "threaded": true,
             "attributes": [
@@ -19159,7 +19552,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_secgroup_v2.html",
             "dependencies": [],
-            "key": "openstack_networking_secgroup_v2",
+            "key": "networking_secgroup_v2",
             "name": "NetworkingSecgroupV2Resource",
             "threaded": true,
             "attributes": [
@@ -19332,7 +19725,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_subnet_route_v2.html",
             "dependencies": [],
-            "key": "openstack_networking_subnet_route_v2",
+            "key": "networking_subnet_route_v2",
             "name": "NetworkingSubnetRouteV2Resource",
             "threaded": true,
             "attributes": [
@@ -19445,7 +19838,7 @@
                     "method": "allocationPools",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (AllocationPoolsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (NetworkingSubnetV2AllocationPoolsSetting s)]",
                     "class": "HasAllocationPools",
                     "validate": false,
                     "optional": true,
@@ -19536,7 +19929,7 @@
                     "method": "hostRoutes",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (HostRoutesSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (NetworkingSubnetV2HostRoutesSetting s)]",
                     "class": "HasHostRoutes",
                     "validate": false,
                     "optional": true,
@@ -19721,11 +20114,11 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_subnet_v2.html",
             "dependencies": [
-                "AllocationPoolsSetting",
-                "HostRoutesSetting",
-                "AllocationPoolsSetting"
+                "NetworkingSubnetV2AllocationPoolsSetting",
+                "NetworkingSubnetV2HostRoutesSetting",
+                "NetworkingSubnetV2AllocationPoolsSetting"
             ],
-            "key": "openstack_networking_subnet_v2",
+            "key": "networking_subnet_v2",
             "name": "NetworkingSubnetV2Resource",
             "threaded": true,
             "attributes": [
@@ -19757,7 +20150,7 @@
                     "method": "computedAllocationPools",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (AllocationPoolsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (NetworkingSubnetV2AllocationPoolsSetting s)]",
                     "class": "HasComputedAllocationPools",
                     "validate": false,
                     "optional": false,
@@ -20185,7 +20578,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/networking_subnetpool_v2.html",
             "dependencies": [],
-            "key": "openstack_networking_subnetpool_v2",
+            "key": "networking_subnetpool_v2",
             "name": "NetworkingSubnetpoolV2Resource",
             "threaded": true,
             "attributes": [
@@ -20562,7 +20955,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/objectstorage_container_v1.html",
             "dependencies": [],
-            "key": "openstack_objectstorage_container_v1",
+            "key": "objectstorage_container_v1",
             "name": "ObjectstorageContainerV1Resource",
             "threaded": true,
             "attributes": [
@@ -20985,7 +21378,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/objectstorage_object_v1.html",
             "dependencies": [],
-            "key": "openstack_objectstorage_object_v1",
+            "key": "objectstorage_object_v1",
             "name": "ObjectstorageObjectV1Resource",
             "threaded": true,
             "attributes": [
@@ -21589,7 +21982,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/vpnaas_endpoint_group_v2.html",
             "dependencies": [],
-            "key": "openstack_vpnaas_endpoint_group_v2",
+            "key": "vpnaas_endpoint_group_v2",
             "name": "VpnaasEndpointGroupV2Resource",
             "threaded": true,
             "attributes": [
@@ -21752,7 +22145,7 @@
                     "method": "lifetime",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (LifetimeSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (VpnaasIkePolicyV2LifetimeSetting s)]",
                     "class": "HasLifetime",
                     "validate": false,
                     "optional": true,
@@ -21863,10 +22256,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/vpnaas_ike_policy_v2.html",
             "dependencies": [
-                "LifetimeSetting",
-                "LifetimeSetting"
+                "VpnaasIkePolicyV2LifetimeSetting",
+                "VpnaasIkePolicyV2LifetimeSetting"
             ],
-            "key": "openstack_vpnaas_ike_policy_v2",
+            "key": "vpnaas_ike_policy_v2",
             "name": "VpnaasIkePolicyV2Resource",
             "threaded": true,
             "attributes": [
@@ -21898,7 +22291,7 @@
                     "method": "computedLifetime",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (LifetimeSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (VpnaasIkePolicyV2LifetimeSetting s)]",
                     "class": "HasComputedLifetime",
                     "validate": false,
                     "optional": false,
@@ -22029,7 +22422,7 @@
                     "method": "lifetime",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (LifetimeSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (VpnaasIpsecPolicyV2LifetimeSetting s)]",
                     "class": "HasLifetime",
                     "validate": false,
                     "optional": true,
@@ -22140,10 +22533,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/vpnaas_ipsec_policy_v2.html",
             "dependencies": [
-                "LifetimeSetting",
-                "LifetimeSetting"
+                "VpnaasIpsecPolicyV2LifetimeSetting",
+                "VpnaasIpsecPolicyV2LifetimeSetting"
             ],
-            "key": "openstack_vpnaas_ipsec_policy_v2",
+            "key": "vpnaas_ipsec_policy_v2",
             "name": "VpnaasIpsecPolicyV2Resource",
             "threaded": true,
             "attributes": [
@@ -22226,7 +22619,7 @@
                     "method": "computedLifetime",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (LifetimeSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (VpnaasIpsecPolicyV2LifetimeSetting s)]",
                     "class": "HasComputedLifetime",
                     "validate": false,
                     "optional": false,
@@ -22451,7 +22844,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/vpnaas_service_v2.html",
             "dependencies": [],
-            "key": "openstack_vpnaas_service_v2",
+            "key": "vpnaas_service_v2",
             "name": "VpnaasServiceV2Resource",
             "threaded": true,
             "attributes": [
@@ -22632,7 +23025,7 @@
                     "method": "dpd",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (DpdSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (VpnaasSiteConnectionV2DpdSetting s)]",
                     "class": "HasDpd",
                     "validate": false,
                     "optional": true,
@@ -22913,10 +23306,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/openstack/r/vpnaas_site_connection_v2.html",
             "dependencies": [
-                "DpdSetting",
-                "DpdSetting"
+                "VpnaasSiteConnectionV2DpdSetting",
+                "VpnaasSiteConnectionV2DpdSetting"
             ],
-            "key": "openstack_vpnaas_site_connection_v2",
+            "key": "vpnaas_site_connection_v2",
             "name": "VpnaasSiteConnectionV2Resource",
             "threaded": true,
             "attributes": [
@@ -22948,7 +23341,7 @@
                     "method": "computedDpd",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (DpdSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (VpnaasSiteConnectionV2DpdSetting s)]",
                     "class": "HasComputedDpd",
                     "validate": false,
                     "optional": false,
@@ -23578,7 +23971,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

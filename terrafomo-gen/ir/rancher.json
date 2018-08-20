@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newMemberSetting",
-                "name": "MemberSetting'"
+                "smart": "newEnvironmentMemberSetting",
+                "name": "EnvironmentMemberSetting'"
             },
             "arguments": [
                 {
@@ -59,8 +59,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "rancher_environment.member",
-            "name": "MemberSetting",
+            "key": "environment.member",
+            "name": "EnvironmentMemberSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -169,7 +169,7 @@
                 }
             ],
             "conflicts": [],
-            "type": "MemberSetting s",
+            "type": "EnvironmentMemberSetting s",
             "original": "member"
         }
     ],
@@ -218,7 +218,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/d/certificate.html",
             "dependencies": [],
-            "key": "rancher_certificate",
+            "key": "certificate",
             "name": "CertificateData",
             "threaded": true,
             "attributes": [
@@ -493,9 +493,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/d/environment.html",
             "dependencies": [
-                "MemberSetting"
+                "EnvironmentMemberSetting"
             ],
-            "key": "rancher_environment",
+            "key": "environment",
             "name": "EnvironmentData",
             "threaded": true,
             "attributes": [
@@ -544,7 +544,7 @@
                     "method": "computedMember",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (MemberSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (EnvironmentMemberSetting s)]",
                     "class": "HasComputedMember",
                     "validate": false,
                     "optional": false,
@@ -634,7 +634,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/d/setting.html",
             "dependencies": [],
-            "key": "rancher_setting",
+            "key": "setting",
             "name": "SettingData",
             "threaded": true,
             "attributes": [
@@ -809,7 +809,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/certificate.html",
             "dependencies": [],
-            "key": "rancher_certificate",
+            "key": "certificate",
             "name": "CertificateResource",
             "threaded": true,
             "attributes": [
@@ -1109,7 +1109,7 @@
                     "method": "member",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (MemberSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (EnvironmentMemberSetting s)]",
                     "class": "HasMember",
                     "validate": false,
                     "optional": true,
@@ -1181,10 +1181,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/environment.html",
             "dependencies": [
-                "MemberSetting",
-                "MemberSetting"
+                "EnvironmentMemberSetting",
+                "EnvironmentMemberSetting"
             ],
-            "key": "rancher_environment",
+            "key": "environment",
             "name": "EnvironmentResource",
             "threaded": true,
             "attributes": [
@@ -1216,7 +1216,7 @@
                     "method": "computedMember",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (MemberSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (EnvironmentMemberSetting s)]",
                     "class": "HasComputedMember",
                     "validate": false,
                     "optional": false,
@@ -1425,7 +1425,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/host.html",
             "dependencies": [],
-            "key": "rancher_host",
+            "key": "host",
             "name": "HostResource",
             "threaded": true,
             "attributes": [
@@ -1598,7 +1598,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/registration_token.html",
             "dependencies": [],
-            "key": "rancher_registration_token",
+            "key": "registration_token",
             "name": "RegistrationTokenResource",
             "threaded": true,
             "attributes": [
@@ -1805,7 +1805,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/registry.html",
             "dependencies": [],
-            "key": "rancher_registry",
+            "key": "registry",
             "name": "RegistryResource",
             "threaded": true,
             "attributes": [
@@ -1978,7 +1978,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/registry_credential.html",
             "dependencies": [],
-            "key": "rancher_registry_credential",
+            "key": "registry_credential",
             "name": "RegistryCredentialResource",
             "threaded": true,
             "attributes": [
@@ -2151,7 +2151,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/secret.html",
             "dependencies": [],
-            "key": "rancher_secret",
+            "key": "secret",
             "name": "SecretResource",
             "threaded": true,
             "attributes": [
@@ -2409,7 +2409,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/stack.html",
             "dependencies": [],
-            "key": "rancher_stack",
+            "key": "stack",
             "name": "StackResource",
             "threaded": true,
             "attributes": [
@@ -2599,7 +2599,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/rancher/r/volume.html",
             "dependencies": [],
-            "key": "rancher_volume",
+            "key": "volume",
             "name": "VolumeResource",
             "threaded": true,
             "attributes": [
@@ -2763,7 +2763,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

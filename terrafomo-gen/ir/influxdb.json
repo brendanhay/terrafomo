@@ -2,94 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newGrantSetting",
-                "name": "GrantSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_database",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"database\" <$> TF.attribute",
-                    "name": "_database",
-                    "method": "database",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDatabase",
-                    "validate": false,
-                    "optional": false,
-                    "original": "database"
-                },
-                {
-                    "default": "_privilege",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"privilege\" <$> TF.attribute",
-                    "name": "_privilege",
-                    "method": "privilege",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPrivilege",
-                    "validate": false,
-                    "optional": false,
-                    "original": "privilege"
-                }
-            ],
-            "dependencies": [],
-            "key": "influxdb_user.grant",
-            "name": "GrantSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_database",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"database\" <$> TF.attribute",
-                    "name": "_database",
-                    "method": "database",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDatabase",
-                    "validate": false,
-                    "optional": false,
-                    "original": "database"
-                },
-                {
-                    "default": "_privilege",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"privilege\" <$> TF.attribute",
-                    "name": "_privilege",
-                    "method": "privilege",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPrivilege",
-                    "validate": false,
-                    "optional": false,
-                    "original": "privilege"
-                }
-            ],
-            "conflicts": [],
-            "type": "GrantSetting s",
-            "original": "grant"
-        },
-        {
-            "con": {
-                "smart": "newRetentionPoliciesSetting",
-                "name": "RetentionPoliciesSetting'"
+                "smart": "newDatabaseRetentionPoliciesSetting",
+                "name": "DatabaseRetentionPoliciesSetting'"
             },
             "arguments": [
                 {
@@ -162,8 +76,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "influxdb_database.retention_policies",
-            "name": "RetentionPoliciesSetting",
+            "key": "database.retention_policies",
+            "name": "DatabaseRetentionPoliciesSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -203,8 +117,94 @@
                 }
             ],
             "conflicts": [],
-            "type": "RetentionPoliciesSetting s",
+            "type": "DatabaseRetentionPoliciesSetting s",
             "original": "retention_policies"
+        },
+        {
+            "con": {
+                "smart": "newUserGrantSetting",
+                "name": "UserGrantSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_database",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"database\" <$> TF.attribute",
+                    "name": "_database",
+                    "method": "database",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatabase",
+                    "validate": false,
+                    "optional": false,
+                    "original": "database"
+                },
+                {
+                    "default": "_privilege",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"privilege\" <$> TF.attribute",
+                    "name": "_privilege",
+                    "method": "privilege",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrivilege",
+                    "validate": false,
+                    "optional": false,
+                    "original": "privilege"
+                }
+            ],
+            "dependencies": [],
+            "key": "user.grant",
+            "name": "UserGrantSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_database",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"database\" <$> TF.attribute",
+                    "name": "_database",
+                    "method": "database",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatabase",
+                    "validate": false,
+                    "optional": false,
+                    "original": "database"
+                },
+                {
+                    "default": "_privilege",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"privilege\" <$> TF.attribute",
+                    "name": "_privilege",
+                    "method": "privilege",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrivilege",
+                    "validate": false,
+                    "optional": false,
+                    "original": "privilege"
+                }
+            ],
+            "conflicts": [],
+            "type": "UserGrantSetting s",
+            "original": "grant"
         }
     ],
     "url": "https://www.terraform.io/docs/providers/influxdb/index.html",
@@ -270,7 +270,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/influxdb/r/continuous_query.html",
             "dependencies": [],
-            "key": "influxdb_continuous_query",
+            "key": "continuous_query",
             "name": "ContinuousQueryResource",
             "threaded": true,
             "attributes": [
@@ -383,7 +383,7 @@
                     "method": "retentionPolicies",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RetentionPoliciesSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DatabaseRetentionPoliciesSetting s)]",
                     "class": "HasRetentionPolicies",
                     "validate": false,
                     "optional": true,
@@ -392,9 +392,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/influxdb/r/database.html",
             "dependencies": [
-                "RetentionPoliciesSetting"
+                "DatabaseRetentionPoliciesSetting"
             ],
-            "key": "influxdb_database",
+            "key": "database",
             "name": "DatabaseResource",
             "threaded": true,
             "attributes": [
@@ -473,7 +473,7 @@
                     "method": "grant",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (GrantSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (UserGrantSetting s)]",
                     "class": "HasGrant",
                     "validate": false,
                     "optional": true,
@@ -516,9 +516,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/influxdb/r/user.html",
             "dependencies": [
-                "GrantSetting"
+                "UserGrantSetting"
             ],
-            "key": "influxdb_user",
+            "key": "user",
             "name": "UserResource",
             "threaded": true,
             "attributes": [
@@ -657,7 +657,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

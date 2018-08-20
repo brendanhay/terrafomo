@@ -2,104 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newLimitsSetting",
-                "name": "LimitsSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_region",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Region in which this limit has affect."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"region\" <$> TF.attribute",
-                    "name": "_region",
-                    "method": "region",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasRegion",
-                    "validate": false,
-                    "optional": false,
-                    "original": "region"
-                },
-                {
-                    "default": "_regionLimit",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The limit applied to this region."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"region_limit\" <$> TF.attribute",
-                    "name": "_regionLimit",
-                    "method": "regionLimit",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (RegionLimitSetting s)",
-                    "class": "HasRegionLimit",
-                    "validate": true,
-                    "optional": false,
-                    "original": "region_limit"
-                }
-            ],
-            "dependencies": [
-                "RegionLimitSetting"
-            ],
-            "key": "nomad_quota_specification.limits",
-            "name": "LimitsSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_regionLimit",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The limit applied to this region."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"region_limit\" <$> TF.attribute",
-                    "name": "_regionLimit",
-                    "method": "regionLimit",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (RegionLimitSetting s)",
-                    "class": "HasRegionLimit",
-                    "validate": true,
-                    "optional": false,
-                    "original": "region_limit"
-                },
-                {
-                    "default": "_region",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Region in which this limit has affect."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"region\" <$> TF.attribute",
-                    "name": "_region",
-                    "method": "region",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasRegion",
-                    "validate": false,
-                    "optional": false,
-                    "original": "region"
-                }
-            ],
-            "conflicts": [],
-            "type": "LimitsSetting s",
-            "original": "limits"
-        },
-        {
-            "con": {
-                "smart": "newRegionLimitSetting",
-                "name": "RegionLimitSetting'"
+                "smart": "newQuotaSpecificationLimitsRegionLimitSetting",
+                "name": "QuotaSpecificationLimitsRegionLimitSetting'"
             },
             "arguments": [
                 {
@@ -138,14 +42,110 @@
                 }
             ],
             "dependencies": [],
-            "key": "nomad_quota_specification.limits.region_limit",
-            "name": "RegionLimitSetting",
+            "key": "quota_specification.limits.region_limit",
+            "name": "QuotaSpecificationLimitsRegionLimitSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "RegionLimitSetting s",
+            "type": "QuotaSpecificationLimitsRegionLimitSetting s",
             "original": "region_limit"
+        },
+        {
+            "con": {
+                "smart": "newQuotaSpecificationLimitsSetting",
+                "name": "QuotaSpecificationLimitsSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_region",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Region in which this limit has affect."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"region\" <$> TF.attribute",
+                    "name": "_region",
+                    "method": "region",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRegion",
+                    "validate": false,
+                    "optional": false,
+                    "original": "region"
+                },
+                {
+                    "default": "_regionLimit",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The limit applied to this region."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"region_limit\" <$> TF.attribute",
+                    "name": "_regionLimit",
+                    "method": "regionLimit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (QuotaSpecificationLimitsRegionLimitSetting s)",
+                    "class": "HasRegionLimit",
+                    "validate": true,
+                    "optional": false,
+                    "original": "region_limit"
+                }
+            ],
+            "dependencies": [
+                "QuotaSpecificationLimitsRegionLimitSetting"
+            ],
+            "key": "quota_specification.limits",
+            "name": "QuotaSpecificationLimitsSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_regionLimit",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The limit applied to this region."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"region_limit\" <$> TF.attribute",
+                    "name": "_regionLimit",
+                    "method": "regionLimit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (QuotaSpecificationLimitsRegionLimitSetting s)",
+                    "class": "HasRegionLimit",
+                    "validate": true,
+                    "optional": false,
+                    "original": "region_limit"
+                },
+                {
+                    "default": "_region",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Region in which this limit has affect."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"region\" <$> TF.attribute",
+                    "name": "_region",
+                    "method": "region",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRegion",
+                    "validate": false,
+                    "optional": false,
+                    "original": "region"
+                }
+            ],
+            "conflicts": [],
+            "type": "QuotaSpecificationLimitsSetting s",
+            "original": "limits"
         }
     ],
     "url": "https://www.terraform.io/docs/providers/nomad/index.html",
@@ -158,7 +158,7 @@
             "arguments": [],
             "url": "https://www.terraform.io/docs/providers/nomad/d/regions.html",
             "dependencies": [],
-            "key": "nomad_regions",
+            "key": "regions",
             "name": "RegionsData",
             "threaded": true,
             "attributes": [
@@ -271,7 +271,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/nomad/r/acl_policy.html",
             "dependencies": [],
-            "key": "nomad_acl_policy",
+            "key": "acl_policy",
             "name": "AclPolicyResource",
             "threaded": true,
             "attributes": [
@@ -423,7 +423,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/nomad/r/acl_token.html",
             "dependencies": [],
-            "key": "nomad_acl_token",
+            "key": "acl_token",
             "name": "AclTokenResource",
             "threaded": true,
             "attributes": [
@@ -593,7 +593,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/nomad/r/job.html",
             "dependencies": [],
-            "key": "nomad_job",
+            "key": "job",
             "name": "JobResource",
             "threaded": true,
             "attributes": [
@@ -706,7 +706,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/nomad/r/namespace.html",
             "dependencies": [],
-            "key": "nomad_namespace",
+            "key": "namespace",
             "name": "NamespaceResource",
             "threaded": true,
             "attributes": [
@@ -791,7 +791,7 @@
                     "method": "limits",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (LimitsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (QuotaSpecificationLimitsSetting s)]",
                     "class": "HasLimits",
                     "validate": false,
                     "optional": false,
@@ -819,9 +819,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/nomad/r/quota_specification.html",
             "dependencies": [
-                "LimitsSetting"
+                "QuotaSpecificationLimitsSetting"
             ],
-            "key": "nomad_quota_specification",
+            "key": "quota_specification",
             "name": "QuotaSpecificationResource",
             "threaded": true,
             "attributes": [
@@ -857,7 +857,7 @@
                     "method": "limits",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (LimitsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (QuotaSpecificationLimitsSetting s)]",
                     "class": "HasLimits",
                     "validate": false,
                     "optional": false,
@@ -992,7 +992,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/nomad/r/sentinel_policy.html",
             "dependencies": [],
-            "key": "nomad_sentinel_policy",
+            "key": "sentinel_policy",
             "name": "SentinelPolicyResource",
             "threaded": true,
             "attributes": [
@@ -1241,7 +1241,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

@@ -2,60 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newApplicationCookieStickinessPolicySetting",
-                "name": "ApplicationCookieStickinessPolicySetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_cookieName",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"cookie_name\" <$> TF.attribute",
-                    "name": "_cookieName",
-                    "method": "cookieName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCookieName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "cookie_name"
-                }
-            ],
-            "dependencies": [],
-            "key": "opc_lbaas_policy.application_cookie_stickiness_policy",
-            "name": "ApplicationCookieStickinessPolicySetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_cookieName",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"cookie_name\" <$> TF.attribute",
-                    "name": "_cookieName",
-                    "method": "cookieName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCookieName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "cookie_name"
-                }
-            ],
-            "conflicts": [],
-            "type": "ApplicationCookieStickinessPolicySetting s",
-            "original": "application_cookie_stickiness_policy"
-        },
-        {
-            "con": {
-                "smart": "newCloudgatePolicySetting",
-                "name": "CloudgatePolicySetting'"
+                "smart": "newComputeInstanceNetworkingInfoSetting",
+                "name": "ComputeInstanceNetworkingInfoSetting'"
             },
             "arguments": [
                 {
@@ -64,243 +12,346 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
-                    "encoder": "TF.assign \"cloudgate_application\" <$> TF.attribute",
-                    "name": "_cloudgateApplication",
-                    "method": "cloudgateApplication",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCloudgateApplication",
-                    "validate": false,
-                    "optional": true,
-                    "original": "cloudgate_application"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"cloudgate_policy_name\" <$> TF.attribute",
-                    "name": "_cloudgatePolicyName",
-                    "method": "cloudgatePolicyName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCloudgatePolicyName",
-                    "validate": false,
-                    "optional": true,
-                    "original": "cloudgate_policy_name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"identity_service_instance_guid\" <$> TF.attribute",
-                    "name": "_identityServiceInstanceGuid",
-                    "method": "identityServiceInstanceGuid",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasIdentityServiceInstanceGuid",
-                    "validate": false,
-                    "optional": true,
-                    "original": "identity_service_instance_guid"
-                },
-                {
-                    "default": "_virtualHostnameForPolicyAttribution",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"virtual_hostname_for_policy_attribution\" <$> TF.attribute",
-                    "name": "_virtualHostnameForPolicyAttribution",
-                    "method": "virtualHostnameForPolicyAttribution",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasVirtualHostnameForPolicyAttribution",
-                    "validate": false,
-                    "optional": false,
-                    "original": "virtual_hostname_for_policy_attribution"
-                }
-            ],
-            "dependencies": [],
-            "key": "opc_lbaas_policy.cloudgate_policy",
-            "name": "CloudgatePolicySetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_virtualHostnameForPolicyAttribution",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"virtual_hostname_for_policy_attribution\" <$> TF.attribute",
-                    "name": "_virtualHostnameForPolicyAttribution",
-                    "method": "virtualHostnameForPolicyAttribution",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasVirtualHostnameForPolicyAttribution",
-                    "validate": false,
-                    "optional": false,
-                    "original": "virtual_hostname_for_policy_attribution"
-                }
-            ],
-            "conflicts": [],
-            "type": "CloudgatePolicySetting s",
-            "original": "cloudgate_policy"
-        },
-        {
-            "con": {
-                "smart": "newHealthCheckSetting",
-                "name": "HealthCheckSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"accepted_return_codes\" <$> TF.attribute",
-                    "name": "_acceptedReturnCodes",
-                    "method": "acceptedReturnCodes",
+                    "encoder": "TF.assign \"dns\" <$> TF.attribute",
+                    "name": "_dns",
+                    "method": "dns",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasAcceptedReturnCodes",
+                    "class": "HasDns",
                     "validate": false,
                     "optional": true,
-                    "original": "accepted_return_codes"
+                    "original": "dns"
                 },
                 {
-                    "default": "TF.value P.True",
+                    "default": "_index",
                     "computed": false,
-                    "required": false,
+                    "required": true,
                     "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"enabled\" <$> TF.attribute",
-                    "name": "_enabled",
-                    "method": "enabled",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasEnabled",
-                    "validate": false,
-                    "optional": true,
-                    "original": "enabled"
-                },
-                {
-                    "default": "TF.value 5",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"healthy_threshold\" <$> TF.attribute",
-                    "name": "_healthyThreshold",
-                    "method": "healthyThreshold",
+                    "forceNew": true,
+                    "encoder": "TF.assign \"index\" <$> TF.attribute",
+                    "name": "_index",
+                    "method": "index",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Int",
-                    "class": "HasHealthyThreshold",
+                    "class": "HasIndex",
                     "validate": false,
-                    "optional": true,
-                    "original": "healthy_threshold"
-                },
-                {
-                    "default": "TF.value 30",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"interval\" <$> TF.attribute",
-                    "name": "_interval",
-                    "method": "interval",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasInterval",
-                    "validate": false,
-                    "optional": true,
-                    "original": "interval"
+                    "optional": false,
+                    "original": "index"
                 },
                 {
                     "default": "TF.Nil",
                     "computed": false,
                     "required": false,
                     "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "_path",
-                    "method": "path",
+                    "forceNew": true,
+                    "encoder": "TF.assign \"ip_address\" <$> TF.attribute",
+                    "name": "_ipAddress",
+                    "method": "ipAddress",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasPath",
+                    "class": "HasIpAddress",
                     "validate": false,
                     "optional": true,
-                    "original": "path"
+                    "original": "ip_address"
                 },
                 {
-                    "default": "TF.value 20",
+                    "default": "TF.Nil",
                     "computed": false,
                     "required": false,
                     "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"timeout\" <$> TF.attribute",
-                    "name": "_timeout",
-                    "method": "timeout",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasTimeout",
-                    "validate": false,
-                    "optional": true,
-                    "original": "timeout"
-                },
-                {
-                    "default": "TF.value \"http\"",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
+                    "forceNew": true,
+                    "encoder": "TF.assign \"ip_network\" <$> TF.attribute",
+                    "name": "_ipNetwork",
+                    "method": "ipNetwork",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
+                    "class": "HasIpNetwork",
                     "validate": false,
                     "optional": true,
-                    "original": "type"
+                    "original": "ip_network"
                 },
                 {
-                    "default": "TF.value 7",
+                    "default": "TF.Nil",
                     "computed": false,
                     "required": false,
                     "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"unhealthy_threshold\" <$> TF.attribute",
-                    "name": "_unhealthyThreshold",
-                    "method": "unhealthyThreshold",
+                    "forceNew": true,
+                    "encoder": "TF.assign \"is_default_gateway\" <$> TF.attribute",
+                    "name": "_isDefaultGateway",
+                    "method": "isDefaultGateway",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasUnhealthyThreshold",
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasIsDefaultGateway",
                     "validate": false,
                     "optional": true,
-                    "original": "unhealthy_threshold"
+                    "original": "is_default_gateway"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"mac_address\" <$> TF.attribute",
+                    "name": "_macAddress",
+                    "method": "macAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMacAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "mac_address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name_servers\" <$> TF.attribute",
+                    "name": "_nameServers",
+                    "method": "nameServers",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasNameServers",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name_servers"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"nat\" <$> TF.attribute",
+                    "name": "_nat",
+                    "method": "nat",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasNat",
+                    "validate": false,
+                    "optional": true,
+                    "original": "nat"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"search_domains\" <$> TF.attribute",
+                    "name": "_searchDomains",
+                    "method": "searchDomains",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasSearchDomains",
+                    "validate": false,
+                    "optional": true,
+                    "original": "search_domains"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"sec_lists\" <$> TF.attribute",
+                    "name": "_secLists",
+                    "method": "secLists",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasSecLists",
+                    "validate": false,
+                    "optional": true,
+                    "original": "sec_lists"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"shared_network\" <$> TF.attribute",
+                    "name": "_sharedNetwork",
+                    "method": "sharedNetwork",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasSharedNetwork",
+                    "validate": false,
+                    "optional": true,
+                    "original": "shared_network"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"vnic\" <$> TF.attribute",
+                    "name": "_vnic",
+                    "method": "vnic",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVnic",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vnic"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"vnic_sets\" <$> TF.attribute",
+                    "name": "_vnicSets",
+                    "method": "vnicSets",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasVnicSets",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vnic_sets"
                 }
             ],
             "dependencies": [],
-            "key": "opc_lbaas_server_pool.health_check",
-            "name": "HealthCheckSetting",
+            "key": "compute_instance.networking_info",
+            "name": "ComputeInstanceNetworkingInfoSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"dns\" <$> TF.attribute",
+                    "name": "_computedDns",
+                    "method": "computedDns",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasComputedDns",
+                    "validate": false,
+                    "optional": false,
+                    "original": "dns"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"mac_address\" <$> TF.attribute",
+                    "name": "_computedMacAddress",
+                    "method": "computedMacAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedMacAddress",
+                    "validate": false,
+                    "optional": false,
+                    "original": "mac_address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"sec_lists\" <$> TF.attribute",
+                    "name": "_computedSecLists",
+                    "method": "computedSecLists",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasComputedSecLists",
+                    "validate": false,
+                    "optional": false,
+                    "original": "sec_lists"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_index",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"index\" <$> TF.attribute",
+                    "name": "_index",
+                    "method": "index",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasIndex",
+                    "validate": false,
+                    "optional": false,
+                    "original": "index"
+                }
+            ],
+            "conflicts": [],
+            "type": "ComputeInstanceNetworkingInfoSetting s",
+            "original": "networking_info"
+        },
+        {
+            "con": {
+                "smart": "newComputeInstanceStorageSetting",
+                "name": "ComputeInstanceStorageSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_index",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"index\" <$> TF.attribute",
+                    "name": "_index",
+                    "method": "index",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasIndex",
+                    "validate": false,
+                    "optional": false,
+                    "original": "index"
+                },
+                {
+                    "default": "_volume",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"volume\" <$> TF.attribute",
+                    "name": "_volume",
+                    "method": "volume",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVolume",
+                    "validate": false,
+                    "optional": false,
+                    "original": "volume"
+                }
+            ],
+            "dependencies": [],
+            "key": "compute_instance.storage",
+            "name": "ComputeInstanceStorageSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -309,27 +360,370 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"accepted_return_codes\" <$> TF.attribute",
-                    "name": "_computedAcceptedReturnCodes",
-                    "method": "computedAcceptedReturnCodes",
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_computedName",
+                    "method": "computedName",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasComputedAcceptedReturnCodes",
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedName",
                     "validate": false,
                     "optional": false,
-                    "original": "accepted_return_codes"
+                    "original": "name"
                 }
             ],
-            "parameters": [],
+            "parameters": [
+                {
+                    "default": "_index",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"index\" <$> TF.attribute",
+                    "name": "_index",
+                    "method": "index",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasIndex",
+                    "validate": false,
+                    "optional": false,
+                    "original": "index"
+                },
+                {
+                    "default": "_volume",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"volume\" <$> TF.attribute",
+                    "name": "_volume",
+                    "method": "volume",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVolume",
+                    "validate": false,
+                    "optional": false,
+                    "original": "volume"
+                }
+            ],
             "conflicts": [],
-            "type": "HealthCheckSetting s",
-            "original": "health_check"
+            "type": "ComputeInstanceStorageSetting s",
+            "original": "storage"
         },
         {
             "con": {
-                "smart": "newInstance'Setting",
-                "name": "Instance'Setting'"
+                "smart": "newComputeOrchestratedInstanceInstanceNetworkingInfoSetting",
+                "name": "ComputeOrchestratedInstanceInstanceNetworkingInfoSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"dns\" <$> TF.attribute",
+                    "name": "_dns",
+                    "method": "dns",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasDns",
+                    "validate": false,
+                    "optional": true,
+                    "original": "dns"
+                },
+                {
+                    "default": "_index",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"index\" <$> TF.attribute",
+                    "name": "_index",
+                    "method": "index",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasIndex",
+                    "validate": false,
+                    "optional": false,
+                    "original": "index"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"ip_address\" <$> TF.attribute",
+                    "name": "_ipAddress",
+                    "method": "ipAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ip_address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"ip_network\" <$> TF.attribute",
+                    "name": "_ipNetwork",
+                    "method": "ipNetwork",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpNetwork",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ip_network"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"is_default_gateway\" <$> TF.attribute",
+                    "name": "_isDefaultGateway",
+                    "method": "isDefaultGateway",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasIsDefaultGateway",
+                    "validate": false,
+                    "optional": true,
+                    "original": "is_default_gateway"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"mac_address\" <$> TF.attribute",
+                    "name": "_macAddress",
+                    "method": "macAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMacAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "mac_address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name_servers\" <$> TF.attribute",
+                    "name": "_nameServers",
+                    "method": "nameServers",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasNameServers",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name_servers"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"nat\" <$> TF.attribute",
+                    "name": "_nat",
+                    "method": "nat",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasNat",
+                    "validate": false,
+                    "optional": true,
+                    "original": "nat"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"search_domains\" <$> TF.attribute",
+                    "name": "_searchDomains",
+                    "method": "searchDomains",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasSearchDomains",
+                    "validate": false,
+                    "optional": true,
+                    "original": "search_domains"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"sec_lists\" <$> TF.attribute",
+                    "name": "_secLists",
+                    "method": "secLists",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasSecLists",
+                    "validate": false,
+                    "optional": true,
+                    "original": "sec_lists"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"shared_network\" <$> TF.attribute",
+                    "name": "_sharedNetwork",
+                    "method": "sharedNetwork",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasSharedNetwork",
+                    "validate": false,
+                    "optional": true,
+                    "original": "shared_network"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"vnic\" <$> TF.attribute",
+                    "name": "_vnic",
+                    "method": "vnic",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVnic",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vnic"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"vnic_sets\" <$> TF.attribute",
+                    "name": "_vnicSets",
+                    "method": "vnicSets",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasVnicSets",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vnic_sets"
+                }
+            ],
+            "dependencies": [],
+            "key": "compute_orchestrated_instance.instance.networking_info",
+            "name": "ComputeOrchestratedInstanceInstanceNetworkingInfoSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"dns\" <$> TF.attribute",
+                    "name": "_computedDns",
+                    "method": "computedDns",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasComputedDns",
+                    "validate": false,
+                    "optional": false,
+                    "original": "dns"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"mac_address\" <$> TF.attribute",
+                    "name": "_computedMacAddress",
+                    "method": "computedMacAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedMacAddress",
+                    "validate": false,
+                    "optional": false,
+                    "original": "mac_address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"sec_lists\" <$> TF.attribute",
+                    "name": "_computedSecLists",
+                    "method": "computedSecLists",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasComputedSecLists",
+                    "validate": false,
+                    "optional": false,
+                    "original": "sec_lists"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_index",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"index\" <$> TF.attribute",
+                    "name": "_index",
+                    "method": "index",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasIndex",
+                    "validate": false,
+                    "optional": false,
+                    "original": "index"
+                }
+            ],
+            "conflicts": [],
+            "type": "ComputeOrchestratedInstanceInstanceNetworkingInfoSetting s",
+            "original": "networking_info"
+        },
+        {
+            "con": {
+                "smart": "newComputeOrchestratedInstanceInstanceSetting",
+                "name": "ComputeOrchestratedInstanceInstanceSetting'"
             },
             "arguments": [
                 {
@@ -428,7 +822,7 @@
                     "method": "networkingInfo",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ComputeOrchestratedInstanceInstanceNetworkingInfoSetting s)]",
                     "class": "HasNetworkingInfo",
                     "validate": false,
                     "optional": true,
@@ -513,7 +907,7 @@
                     "method": "storage",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (StorageSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ComputeOrchestratedInstanceInstanceStorageSetting s)]",
                     "class": "HasStorage",
                     "validate": false,
                     "optional": true,
@@ -538,12 +932,12 @@
                 }
             ],
             "dependencies": [
-                "NetworkingInfoSetting",
-                "StorageSetting",
-                "NetworkingInfoSetting"
+                "ComputeOrchestratedInstanceInstanceNetworkingInfoSetting",
+                "ComputeOrchestratedInstanceInstanceStorageSetting",
+                "ComputeOrchestratedInstanceInstanceNetworkingInfoSetting"
             ],
-            "key": "opc_compute_orchestrated_instance.instance",
-            "name": "Instance'Setting",
+            "key": "compute_orchestrated_instance.instance",
+            "name": "ComputeOrchestratedInstanceInstanceSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -761,7 +1155,7 @@
                     "method": "computedNetworkingInfo",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ComputeOrchestratedInstanceInstanceNetworkingInfoSetting s)]",
                     "class": "HasComputedNetworkingInfo",
                     "validate": false,
                     "optional": false,
@@ -1009,136 +1403,15 @@
                 }
             ],
             "conflicts": [],
-            "type": "Instance'Setting s",
+            "type": "ComputeOrchestratedInstanceInstanceSetting s",
             "original": "instance"
         },
         {
             "con": {
-                "smart": "newLoadBalancerCookieStickinessPolicySetting",
-                "name": "LoadBalancerCookieStickinessPolicySetting'"
+                "smart": "newComputeOrchestratedInstanceInstanceStorageSetting",
+                "name": "ComputeOrchestratedInstanceInstanceStorageSetting'"
             },
             "arguments": [
-                {
-                    "default": "_cookieExpirationPeriod",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"cookie_expiration_period\" <$> TF.attribute",
-                    "name": "_cookieExpirationPeriod",
-                    "method": "cookieExpirationPeriod",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasCookieExpirationPeriod",
-                    "validate": false,
-                    "optional": false,
-                    "original": "cookie_expiration_period"
-                }
-            ],
-            "dependencies": [],
-            "key": "opc_lbaas_policy.load_balancer_cookie_stickiness_policy",
-            "name": "LoadBalancerCookieStickinessPolicySetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_cookieExpirationPeriod",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"cookie_expiration_period\" <$> TF.attribute",
-                    "name": "_cookieExpirationPeriod",
-                    "method": "cookieExpirationPeriod",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasCookieExpirationPeriod",
-                    "validate": false,
-                    "optional": false,
-                    "original": "cookie_expiration_period"
-                }
-            ],
-            "conflicts": [],
-            "type": "LoadBalancerCookieStickinessPolicySetting s",
-            "original": "load_balancer_cookie_stickiness_policy"
-        },
-        {
-            "con": {
-                "smart": "newLoadBalancingMechanismPolicySetting",
-                "name": "LoadBalancingMechanismPolicySetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_loadBalancingMechanism",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"load_balancing_mechanism\" <$> TF.attribute",
-                    "name": "_loadBalancingMechanism",
-                    "method": "loadBalancingMechanism",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLoadBalancingMechanism",
-                    "validate": false,
-                    "optional": false,
-                    "original": "load_balancing_mechanism"
-                }
-            ],
-            "dependencies": [],
-            "key": "opc_lbaas_policy.load_balancing_mechanism_policy",
-            "name": "LoadBalancingMechanismPolicySetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_loadBalancingMechanism",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"load_balancing_mechanism\" <$> TF.attribute",
-                    "name": "_loadBalancingMechanism",
-                    "method": "loadBalancingMechanism",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLoadBalancingMechanism",
-                    "validate": false,
-                    "optional": false,
-                    "original": "load_balancing_mechanism"
-                }
-            ],
-            "conflicts": [],
-            "type": "LoadBalancingMechanismPolicySetting s",
-            "original": "load_balancing_mechanism_policy"
-        },
-        {
-            "con": {
-                "smart": "newNetworkingInfoSetting",
-                "name": "NetworkingInfoSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"dns\" <$> TF.attribute",
-                    "name": "_dns",
-                    "method": "dns",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasDns",
-                    "validate": false,
-                    "optional": true,
-                    "original": "dns"
-                },
                 {
                     "default": "_index",
                     "computed": false,
@@ -1157,196 +1430,26 @@
                     "original": "index"
                 },
                 {
-                    "default": "TF.Nil",
+                    "default": "_volume",
                     "computed": false,
-                    "required": false,
+                    "required": true,
                     "help": [],
                     "forceNew": true,
-                    "encoder": "TF.assign \"ip_address\" <$> TF.attribute",
-                    "name": "_ipAddress",
-                    "method": "ipAddress",
+                    "encoder": "TF.assign \"volume\" <$> TF.attribute",
+                    "name": "_volume",
+                    "method": "volume",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasIpAddress",
+                    "class": "HasVolume",
                     "validate": false,
-                    "optional": true,
-                    "original": "ip_address"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"ip_network\" <$> TF.attribute",
-                    "name": "_ipNetwork",
-                    "method": "ipNetwork",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasIpNetwork",
-                    "validate": false,
-                    "optional": true,
-                    "original": "ip_network"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"is_default_gateway\" <$> TF.attribute",
-                    "name": "_isDefaultGateway",
-                    "method": "isDefaultGateway",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasIsDefaultGateway",
-                    "validate": false,
-                    "optional": true,
-                    "original": "is_default_gateway"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"mac_address\" <$> TF.attribute",
-                    "name": "_macAddress",
-                    "method": "macAddress",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasMacAddress",
-                    "validate": false,
-                    "optional": true,
-                    "original": "mac_address"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"name_servers\" <$> TF.attribute",
-                    "name": "_nameServers",
-                    "method": "nameServers",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasNameServers",
-                    "validate": false,
-                    "optional": true,
-                    "original": "name_servers"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"nat\" <$> TF.attribute",
-                    "name": "_nat",
-                    "method": "nat",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasNat",
-                    "validate": false,
-                    "optional": true,
-                    "original": "nat"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"search_domains\" <$> TF.attribute",
-                    "name": "_searchDomains",
-                    "method": "searchDomains",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasSearchDomains",
-                    "validate": false,
-                    "optional": true,
-                    "original": "search_domains"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"sec_lists\" <$> TF.attribute",
-                    "name": "_secLists",
-                    "method": "secLists",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasSecLists",
-                    "validate": false,
-                    "optional": true,
-                    "original": "sec_lists"
-                },
-                {
-                    "default": "TF.value P.False",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"shared_network\" <$> TF.attribute",
-                    "name": "_sharedNetwork",
-                    "method": "sharedNetwork",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasSharedNetwork",
-                    "validate": false,
-                    "optional": true,
-                    "original": "shared_network"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"vnic\" <$> TF.attribute",
-                    "name": "_vnic",
-                    "method": "vnic",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasVnic",
-                    "validate": false,
-                    "optional": true,
-                    "original": "vnic"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"vnic_sets\" <$> TF.attribute",
-                    "name": "_vnicSets",
-                    "method": "vnicSets",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasVnicSets",
-                    "validate": false,
-                    "optional": true,
-                    "original": "vnic_sets"
+                    "optional": false,
+                    "original": "volume"
                 }
             ],
             "dependencies": [],
-            "key": "opc_compute_instance.networking_info",
-            "name": "NetworkingInfoSetting",
+            "key": "compute_orchestrated_instance.instance.storage",
+            "name": "ComputeOrchestratedInstanceInstanceStorageSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -1354,51 +1457,17 @@
                     "computed": true,
                     "required": false,
                     "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"dns\" <$> TF.attribute",
-                    "name": "_computedDns",
-                    "method": "computedDns",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasComputedDns",
-                    "validate": false,
-                    "optional": false,
-                    "original": "dns"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"mac_address\" <$> TF.attribute",
-                    "name": "_computedMacAddress",
-                    "method": "computedMacAddress",
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_computedName",
+                    "method": "computedName",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasComputedMacAddress",
+                    "class": "HasComputedName",
                     "validate": false,
                     "optional": false,
-                    "original": "mac_address"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"sec_lists\" <$> TF.attribute",
-                    "name": "_computedSecLists",
-                    "method": "computedSecLists",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasComputedSecLists",
-                    "validate": false,
-                    "optional": false,
-                    "original": "sec_lists"
+                    "original": "name"
                 }
             ],
             "parameters": [
@@ -1418,16 +1487,292 @@
                     "validate": false,
                     "optional": false,
                     "original": "index"
+                },
+                {
+                    "default": "_volume",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"volume\" <$> TF.attribute",
+                    "name": "_volume",
+                    "method": "volume",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVolume",
+                    "validate": false,
+                    "optional": false,
+                    "original": "volume"
                 }
             ],
             "conflicts": [],
-            "type": "NetworkingInfoSetting s",
-            "original": "networking_info"
+            "type": "ComputeOrchestratedInstanceInstanceStorageSetting s",
+            "original": "storage"
         },
         {
             "con": {
-                "smart": "newRateLimitingRequestPolicySetting",
-                "name": "RateLimitingRequestPolicySetting'"
+                "smart": "newLbaasPolicyApplicationCookieStickinessPolicySetting",
+                "name": "LbaasPolicyApplicationCookieStickinessPolicySetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_cookieName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cookie_name\" <$> TF.attribute",
+                    "name": "_cookieName",
+                    "method": "cookieName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCookieName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "cookie_name"
+                }
+            ],
+            "dependencies": [],
+            "key": "lbaas_policy.application_cookie_stickiness_policy",
+            "name": "LbaasPolicyApplicationCookieStickinessPolicySetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_cookieName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cookie_name\" <$> TF.attribute",
+                    "name": "_cookieName",
+                    "method": "cookieName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCookieName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "cookie_name"
+                }
+            ],
+            "conflicts": [],
+            "type": "LbaasPolicyApplicationCookieStickinessPolicySetting s",
+            "original": "application_cookie_stickiness_policy"
+        },
+        {
+            "con": {
+                "smart": "newLbaasPolicyCloudgatePolicySetting",
+                "name": "LbaasPolicyCloudgatePolicySetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"cloudgate_application\" <$> TF.attribute",
+                    "name": "_cloudgateApplication",
+                    "method": "cloudgateApplication",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCloudgateApplication",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cloudgate_application"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"cloudgate_policy_name\" <$> TF.attribute",
+                    "name": "_cloudgatePolicyName",
+                    "method": "cloudgatePolicyName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCloudgatePolicyName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cloudgate_policy_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"identity_service_instance_guid\" <$> TF.attribute",
+                    "name": "_identityServiceInstanceGuid",
+                    "method": "identityServiceInstanceGuid",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIdentityServiceInstanceGuid",
+                    "validate": false,
+                    "optional": true,
+                    "original": "identity_service_instance_guid"
+                },
+                {
+                    "default": "_virtualHostnameForPolicyAttribution",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"virtual_hostname_for_policy_attribution\" <$> TF.attribute",
+                    "name": "_virtualHostnameForPolicyAttribution",
+                    "method": "virtualHostnameForPolicyAttribution",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtualHostnameForPolicyAttribution",
+                    "validate": false,
+                    "optional": false,
+                    "original": "virtual_hostname_for_policy_attribution"
+                }
+            ],
+            "dependencies": [],
+            "key": "lbaas_policy.cloudgate_policy",
+            "name": "LbaasPolicyCloudgatePolicySetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_virtualHostnameForPolicyAttribution",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"virtual_hostname_for_policy_attribution\" <$> TF.attribute",
+                    "name": "_virtualHostnameForPolicyAttribution",
+                    "method": "virtualHostnameForPolicyAttribution",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVirtualHostnameForPolicyAttribution",
+                    "validate": false,
+                    "optional": false,
+                    "original": "virtual_hostname_for_policy_attribution"
+                }
+            ],
+            "conflicts": [],
+            "type": "LbaasPolicyCloudgatePolicySetting s",
+            "original": "cloudgate_policy"
+        },
+        {
+            "con": {
+                "smart": "newLbaasPolicyLoadBalancerCookieStickinessPolicySetting",
+                "name": "LbaasPolicyLoadBalancerCookieStickinessPolicySetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_cookieExpirationPeriod",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cookie_expiration_period\" <$> TF.attribute",
+                    "name": "_cookieExpirationPeriod",
+                    "method": "cookieExpirationPeriod",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasCookieExpirationPeriod",
+                    "validate": false,
+                    "optional": false,
+                    "original": "cookie_expiration_period"
+                }
+            ],
+            "dependencies": [],
+            "key": "lbaas_policy.load_balancer_cookie_stickiness_policy",
+            "name": "LbaasPolicyLoadBalancerCookieStickinessPolicySetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_cookieExpirationPeriod",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cookie_expiration_period\" <$> TF.attribute",
+                    "name": "_cookieExpirationPeriod",
+                    "method": "cookieExpirationPeriod",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasCookieExpirationPeriod",
+                    "validate": false,
+                    "optional": false,
+                    "original": "cookie_expiration_period"
+                }
+            ],
+            "conflicts": [],
+            "type": "LbaasPolicyLoadBalancerCookieStickinessPolicySetting s",
+            "original": "load_balancer_cookie_stickiness_policy"
+        },
+        {
+            "con": {
+                "smart": "newLbaasPolicyLoadBalancingMechanismPolicySetting",
+                "name": "LbaasPolicyLoadBalancingMechanismPolicySetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_loadBalancingMechanism",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"load_balancing_mechanism\" <$> TF.attribute",
+                    "name": "_loadBalancingMechanism",
+                    "method": "loadBalancingMechanism",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLoadBalancingMechanism",
+                    "validate": false,
+                    "optional": false,
+                    "original": "load_balancing_mechanism"
+                }
+            ],
+            "dependencies": [],
+            "key": "lbaas_policy.load_balancing_mechanism_policy",
+            "name": "LbaasPolicyLoadBalancingMechanismPolicySetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_loadBalancingMechanism",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"load_balancing_mechanism\" <$> TF.attribute",
+                    "name": "_loadBalancingMechanism",
+                    "method": "loadBalancingMechanism",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLoadBalancingMechanism",
+                    "validate": false,
+                    "optional": false,
+                    "original": "load_balancing_mechanism"
+                }
+            ],
+            "conflicts": [],
+            "type": "LbaasPolicyLoadBalancingMechanismPolicySetting s",
+            "original": "load_balancing_mechanism_policy"
+        },
+        {
+            "con": {
+                "smart": "newLbaasPolicyRateLimitingRequestPolicySetting",
+                "name": "LbaasPolicyRateLimitingRequestPolicySetting'"
             },
             "arguments": [
                 {
@@ -1568,8 +1913,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "opc_lbaas_policy.rate_limiting_request_policy",
-            "name": "RateLimitingRequestPolicySetting",
+            "key": "lbaas_policy.rate_limiting_request_policy",
+            "name": "LbaasPolicyRateLimitingRequestPolicySetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1643,13 +1988,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "RateLimitingRequestPolicySetting s",
+            "type": "LbaasPolicyRateLimitingRequestPolicySetting s",
             "original": "rate_limiting_request_policy"
         },
         {
             "con": {
-                "smart": "newRedirectPolicySetting",
-                "name": "RedirectPolicySetting'"
+                "smart": "newLbaasPolicyRedirectPolicySetting",
+                "name": "LbaasPolicyRedirectPolicySetting'"
             },
             "arguments": [
                 {
@@ -1688,8 +2033,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "opc_lbaas_policy.redirect_policy",
-            "name": "RedirectPolicySetting",
+            "key": "lbaas_policy.redirect_policy",
+            "name": "LbaasPolicyRedirectPolicySetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1729,13 +2074,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "RedirectPolicySetting s",
+            "type": "LbaasPolicyRedirectPolicySetting s",
             "original": "redirect_policy"
         },
         {
             "con": {
-                "smart": "newResourceAccessControlPolicySetting",
-                "name": "ResourceAccessControlPolicySetting'"
+                "smart": "newLbaasPolicyResourceAccessControlPolicySetting",
+                "name": "LbaasPolicyResourceAccessControlPolicySetting'"
             },
             "arguments": [
                 {
@@ -1791,8 +2136,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "opc_lbaas_policy.resource_access_control_policy",
-            "name": "ResourceAccessControlPolicySetting",
+            "key": "lbaas_policy.resource_access_control_policy",
+            "name": "LbaasPolicyResourceAccessControlPolicySetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1815,13 +2160,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "ResourceAccessControlPolicySetting s",
+            "type": "LbaasPolicyResourceAccessControlPolicySetting s",
             "original": "resource_access_control_policy"
         },
         {
             "con": {
-                "smart": "newSetRequestHeaderPolicySetting",
-                "name": "SetRequestHeaderPolicySetting'"
+                "smart": "newLbaasPolicySetRequestHeaderPolicySetting",
+                "name": "LbaasPolicySetRequestHeaderPolicySetting'"
             },
             "arguments": [
                 {
@@ -1911,8 +2256,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "opc_lbaas_policy.set_request_header_policy",
-            "name": "SetRequestHeaderPolicySetting",
+            "key": "lbaas_policy.set_request_header_policy",
+            "name": "LbaasPolicySetRequestHeaderPolicySetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1935,13 +2280,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "SetRequestHeaderPolicySetting s",
+            "type": "LbaasPolicySetRequestHeaderPolicySetting s",
             "original": "set_request_header_policy"
         },
         {
             "con": {
-                "smart": "newSslNegotiationPolicySetting",
-                "name": "SslNegotiationPolicySetting'"
+                "smart": "newLbaasPolicySslNegotiationPolicySetting",
+                "name": "LbaasPolicySslNegotiationPolicySetting'"
             },
             "arguments": [
                 {
@@ -2014,8 +2359,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "opc_lbaas_policy.ssl_negotiation_policy",
-            "name": "SslNegotiationPolicySetting",
+            "key": "lbaas_policy.ssl_negotiation_policy",
+            "name": "LbaasPolicySslNegotiationPolicySetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -2055,117 +2400,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "SslNegotiationPolicySetting s",
+            "type": "LbaasPolicySslNegotiationPolicySetting s",
             "original": "ssl_negotiation_policy"
         },
         {
             "con": {
-                "smart": "newStorageSetting",
-                "name": "StorageSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_index",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"index\" <$> TF.attribute",
-                    "name": "_index",
-                    "method": "index",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasIndex",
-                    "validate": false,
-                    "optional": false,
-                    "original": "index"
-                },
-                {
-                    "default": "_volume",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"volume\" <$> TF.attribute",
-                    "name": "_volume",
-                    "method": "volume",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasVolume",
-                    "validate": false,
-                    "optional": false,
-                    "original": "volume"
-                }
-            ],
-            "dependencies": [],
-            "key": "opc_compute_instance.storage",
-            "name": "StorageSetting",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_computedName",
-                    "method": "computedName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                }
-            ],
-            "parameters": [
-                {
-                    "default": "_index",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"index\" <$> TF.attribute",
-                    "name": "_index",
-                    "method": "index",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasIndex",
-                    "validate": false,
-                    "optional": false,
-                    "original": "index"
-                },
-                {
-                    "default": "_volume",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"volume\" <$> TF.attribute",
-                    "name": "_volume",
-                    "method": "volume",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasVolume",
-                    "validate": false,
-                    "optional": false,
-                    "original": "volume"
-                }
-            ],
-            "conflicts": [],
-            "type": "StorageSetting s",
-            "original": "storage"
-        },
-        {
-            "con": {
-                "smart": "newTrustedCertificatePolicySetting",
-                "name": "TrustedCertificatePolicySetting'"
+                "smart": "newLbaasPolicyTrustedCertificatePolicySetting",
+                "name": "LbaasPolicyTrustedCertificatePolicySetting'"
             },
             "arguments": [
                 {
@@ -2187,8 +2428,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "opc_lbaas_policy.trusted_certificate_policy",
-            "name": "TrustedCertificatePolicySetting",
+            "key": "lbaas_policy.trusted_certificate_policy",
+            "name": "LbaasPolicyTrustedCertificatePolicySetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -2211,8 +2452,179 @@
                 }
             ],
             "conflicts": [],
-            "type": "TrustedCertificatePolicySetting s",
+            "type": "LbaasPolicyTrustedCertificatePolicySetting s",
             "original": "trusted_certificate_policy"
+        },
+        {
+            "con": {
+                "smart": "newLbaasServerPoolHealthCheckSetting",
+                "name": "LbaasServerPoolHealthCheckSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"accepted_return_codes\" <$> TF.attribute",
+                    "name": "_acceptedReturnCodes",
+                    "method": "acceptedReturnCodes",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasAcceptedReturnCodes",
+                    "validate": false,
+                    "optional": true,
+                    "original": "accepted_return_codes"
+                },
+                {
+                    "default": "TF.value P.True",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"enabled\" <$> TF.attribute",
+                    "name": "_enabled",
+                    "method": "enabled",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasEnabled",
+                    "validate": false,
+                    "optional": true,
+                    "original": "enabled"
+                },
+                {
+                    "default": "TF.value 5",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"healthy_threshold\" <$> TF.attribute",
+                    "name": "_healthyThreshold",
+                    "method": "healthyThreshold",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasHealthyThreshold",
+                    "validate": false,
+                    "optional": true,
+                    "original": "healthy_threshold"
+                },
+                {
+                    "default": "TF.value 30",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"interval\" <$> TF.attribute",
+                    "name": "_interval",
+                    "method": "interval",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasInterval",
+                    "validate": false,
+                    "optional": true,
+                    "original": "interval"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"path\" <$> TF.attribute",
+                    "name": "_path",
+                    "method": "path",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPath",
+                    "validate": false,
+                    "optional": true,
+                    "original": "path"
+                },
+                {
+                    "default": "TF.value 20",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"timeout\" <$> TF.attribute",
+                    "name": "_timeout",
+                    "method": "timeout",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasTimeout",
+                    "validate": false,
+                    "optional": true,
+                    "original": "timeout"
+                },
+                {
+                    "default": "TF.value \"http\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": true,
+                    "original": "type"
+                },
+                {
+                    "default": "TF.value 7",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"unhealthy_threshold\" <$> TF.attribute",
+                    "name": "_unhealthyThreshold",
+                    "method": "unhealthyThreshold",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasUnhealthyThreshold",
+                    "validate": false,
+                    "optional": true,
+                    "original": "unhealthy_threshold"
+                }
+            ],
+            "dependencies": [],
+            "key": "lbaas_server_pool.health_check",
+            "name": "LbaasServerPoolHealthCheckSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"accepted_return_codes\" <$> TF.attribute",
+                    "name": "_computedAcceptedReturnCodes",
+                    "method": "computedAcceptedReturnCodes",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasComputedAcceptedReturnCodes",
+                    "validate": false,
+                    "optional": false,
+                    "original": "accepted_return_codes"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "LbaasServerPoolHealthCheckSetting s",
+            "original": "health_check"
         }
     ],
     "url": "https://www.terraform.io/docs/providers/opc/index.html",
@@ -2277,7 +2689,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/d/compute_image_list_entry.html",
             "dependencies": [],
-            "key": "opc_compute_image_list_entry",
+            "key": "compute_image_list_entry",
             "name": "ComputeImageListEntryData",
             "threaded": true,
             "attributes": [
@@ -2416,7 +2828,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/d/compute_ip_address_reservation.html",
             "dependencies": [],
-            "key": "opc_compute_ip_address_reservation",
+            "key": "compute_ip_address_reservation",
             "name": "ComputeIpAddressReservationData",
             "threaded": true,
             "attributes": [
@@ -2572,7 +2984,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/d/compute_ip_reservation.html",
             "dependencies": [],
-            "key": "opc_compute_ip_reservation",
+            "key": "compute_ip_reservation",
             "name": "ComputeIpReservationData",
             "threaded": true,
             "attributes": [
@@ -2745,7 +3157,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/d/compute_machine_image.html",
             "dependencies": [],
-            "key": "opc_compute_machine_image",
+            "key": "compute_machine_image",
             "name": "ComputeMachineImageData",
             "threaded": true,
             "attributes": [
@@ -3054,7 +3466,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/d/compute_network_interface.html",
             "dependencies": [],
-            "key": "opc_compute_network_interface",
+            "key": "compute_network_interface",
             "name": "ComputeNetworkInterfaceData",
             "threaded": true,
             "attributes": [
@@ -3380,7 +3792,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/d/compute_ssh_key.html",
             "dependencies": [],
-            "key": "opc_compute_ssh_key",
+            "key": "compute_ssh_key",
             "name": "ComputeSshKeyData",
             "threaded": true,
             "attributes": [
@@ -3485,7 +3897,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/d/compute_storage_volume_snapshot.html",
             "dependencies": [],
-            "key": "opc_compute_storage_volume_snapshot",
+            "key": "compute_storage_volume_snapshot",
             "name": "ComputeStorageVolumeSnapshotData",
             "threaded": true,
             "attributes": [
@@ -3845,7 +4257,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/d/compute_vnic.html",
             "dependencies": [],
-            "key": "opc_compute_vnic",
+            "key": "compute_vnic",
             "name": "ComputeVnicData",
             "threaded": true,
             "attributes": [
@@ -4054,7 +4466,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_acl.html",
             "dependencies": [],
-            "key": "opc_compute_acl",
+            "key": "compute_acl",
             "name": "ComputeAclResource",
             "threaded": true,
             "attributes": [
@@ -4176,7 +4588,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_image_list.html",
             "dependencies": [],
-            "key": "opc_compute_image_list",
+            "key": "compute_image_list",
             "name": "ComputeImageListResource",
             "threaded": true,
             "attributes": [
@@ -4315,7 +4727,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_image_list_entry.html",
             "dependencies": [],
-            "key": "opc_compute_image_list_entry",
+            "key": "compute_image_list_entry",
             "name": "ComputeImageListEntryResource",
             "threaded": true,
             "attributes": [
@@ -4547,7 +4959,7 @@
                     "method": "networkingInfo",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ComputeInstanceNetworkingInfoSetting s)]",
                     "class": "HasNetworkingInfo",
                     "validate": false,
                     "optional": true,
@@ -4615,7 +5027,7 @@
                     "method": "storage",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (StorageSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ComputeInstanceStorageSetting s)]",
                     "class": "HasStorage",
                     "validate": false,
                     "optional": true,
@@ -4641,11 +5053,11 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_instance.html",
             "dependencies": [
-                "NetworkingInfoSetting",
-                "StorageSetting",
-                "NetworkingInfoSetting"
+                "ComputeInstanceNetworkingInfoSetting",
+                "ComputeInstanceStorageSetting",
+                "ComputeInstanceNetworkingInfoSetting"
             ],
-            "key": "opc_compute_instance",
+            "key": "compute_instance",
             "name": "ComputeInstanceResource",
             "threaded": true,
             "attributes": [
@@ -4847,7 +5259,7 @@
                     "method": "computedNetworkingInfo",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ComputeInstanceNetworkingInfoSetting s)]",
                     "class": "HasComputedNetworkingInfo",
                     "validate": false,
                     "optional": false,
@@ -5192,7 +5604,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_ip_address_association.html",
             "dependencies": [],
-            "key": "opc_compute_ip_address_association",
+            "key": "compute_ip_address_association",
             "name": "ComputeIpAddressAssociationResource",
             "threaded": true,
             "attributes": [
@@ -5331,7 +5743,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_ip_address_prefix_set.html",
             "dependencies": [],
-            "key": "opc_compute_ip_address_prefix_set",
+            "key": "compute_ip_address_prefix_set",
             "name": "ComputeIpAddressPrefixSetResource",
             "threaded": true,
             "attributes": [
@@ -5470,7 +5882,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_ip_address_reservation.html",
             "dependencies": [],
-            "key": "opc_compute_ip_address_reservation",
+            "key": "compute_ip_address_reservation",
             "name": "ComputeIpAddressReservationResource",
             "threaded": true,
             "attributes": [
@@ -5626,7 +6038,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_ip_association.html",
             "dependencies": [],
-            "key": "opc_compute_ip_association",
+            "key": "compute_ip_association",
             "name": "ComputeIpAssociationResource",
             "threaded": true,
             "attributes": [
@@ -5816,7 +6228,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_ip_network.html",
             "dependencies": [],
-            "key": "opc_compute_ip_network",
+            "key": "compute_ip_network",
             "name": "ComputeIpNetworkResource",
             "threaded": true,
             "attributes": [
@@ -5955,7 +6367,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_ip_network_exchange.html",
             "dependencies": [],
-            "key": "opc_compute_ip_network_exchange",
+            "key": "compute_ip_network_exchange",
             "name": "ComputeIpNetworkExchangeResource",
             "threaded": true,
             "attributes": [
@@ -6094,7 +6506,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_ip_reservation.html",
             "dependencies": [],
-            "key": "opc_compute_ip_reservation",
+            "key": "compute_ip_reservation",
             "name": "ComputeIpReservationResource",
             "threaded": true,
             "attributes": [
@@ -6284,7 +6696,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_machine_image.html",
             "dependencies": [],
-            "key": "opc_compute_machine_image",
+            "key": "compute_machine_image",
             "name": "ComputeMachineImageResource",
             "threaded": true,
             "attributes": [
@@ -6533,7 +6945,7 @@
                     "method": "instance'",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Instance'Setting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ComputeOrchestratedInstanceInstanceSetting s)]",
                     "class": "HasInstance'",
                     "validate": false,
                     "optional": false,
@@ -6576,9 +6988,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_orchestrated_instance.html",
             "dependencies": [
-                "Instance'Setting"
+                "ComputeOrchestratedInstanceInstanceSetting"
             ],
-            "key": "opc_compute_orchestrated_instance",
+            "key": "compute_orchestrated_instance",
             "name": "ComputeOrchestratedInstanceResource",
             "threaded": true,
             "attributes": [
@@ -6629,7 +7041,7 @@
                     "method": "instance'",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Instance'Setting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ComputeOrchestratedInstanceInstanceSetting s)]",
                     "class": "HasInstance'",
                     "validate": false,
                     "optional": false,
@@ -6785,7 +7197,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_route.html",
             "dependencies": [],
-            "key": "opc_compute_route",
+            "key": "compute_route",
             "name": "ComputeRouteResource",
             "threaded": true,
             "attributes": [
@@ -6992,7 +7404,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_sec_rule.html",
             "dependencies": [],
-            "key": "opc_compute_sec_rule",
+            "key": "compute_sec_rule",
             "name": "ComputeSecRuleResource",
             "threaded": true,
             "attributes": [
@@ -7216,7 +7628,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_security_application.html",
             "dependencies": [],
-            "key": "opc_compute_security_application",
+            "key": "compute_security_application",
             "name": "ComputeSecurityApplicationResource",
             "threaded": true,
             "attributes": [
@@ -7338,7 +7750,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_security_association.html",
             "dependencies": [],
-            "key": "opc_compute_security_association",
+            "key": "compute_security_association",
             "name": "ComputeSecurityAssociationResource",
             "threaded": true,
             "attributes": [
@@ -7477,7 +7889,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_security_ip_list.html",
             "dependencies": [],
-            "key": "opc_compute_security_ip_list",
+            "key": "compute_security_ip_list",
             "name": "ComputeSecurityIpListResource",
             "threaded": true,
             "attributes": [
@@ -7616,7 +8028,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_security_list.html",
             "dependencies": [],
-            "key": "opc_compute_security_list",
+            "key": "compute_security_list",
             "name": "ComputeSecurityListResource",
             "threaded": true,
             "attributes": [
@@ -7772,7 +8184,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_security_protocol.html",
             "dependencies": [],
-            "key": "opc_compute_security_protocol",
+            "key": "compute_security_protocol",
             "name": "ComputeSecurityProtocolResource",
             "threaded": true,
             "attributes": [
@@ -8030,7 +8442,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_security_rule.html",
             "dependencies": [],
-            "key": "opc_compute_security_rule",
+            "key": "compute_security_rule",
             "name": "ComputeSecurityRuleResource",
             "threaded": true,
             "attributes": [
@@ -8169,7 +8581,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_snapshot.html",
             "dependencies": [],
-            "key": "opc_compute_snapshot",
+            "key": "compute_snapshot",
             "name": "ComputeSnapshotResource",
             "threaded": true,
             "attributes": [
@@ -8342,7 +8754,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_ssh_key.html",
             "dependencies": [],
-            "key": "opc_compute_ssh_key",
+            "key": "compute_ssh_key",
             "name": "ComputeSshKeyResource",
             "threaded": true,
             "attributes": [
@@ -8464,7 +8876,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_storage_attachment.html",
             "dependencies": [],
-            "key": "opc_compute_storage_attachment",
+            "key": "compute_storage_attachment",
             "name": "ComputeStorageAttachmentResource",
             "threaded": true,
             "attributes": [
@@ -8875,7 +9287,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_storage_volume.html",
             "dependencies": [],
-            "key": "opc_compute_storage_volume",
+            "key": "compute_storage_volume",
             "name": "ComputeStorageVolumeResource",
             "threaded": true,
             "attributes": [
@@ -9235,7 +9647,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_storage_volume_snapshot.html",
             "dependencies": [],
-            "key": "opc_compute_storage_volume_snapshot",
+            "key": "compute_storage_volume_snapshot",
             "name": "ComputeStorageVolumeSnapshotResource",
             "threaded": true,
             "attributes": [
@@ -9595,7 +10007,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/compute_vnic_set.html",
             "dependencies": [],
-            "key": "opc_compute_vnic_set",
+            "key": "compute_vnic_set",
             "name": "ComputeVnicSetResource",
             "threaded": true,
             "attributes": [
@@ -9751,7 +10163,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/lbaas_certificate.html",
             "dependencies": [],
-            "key": "opc_lbaas_certificate",
+            "key": "lbaas_certificate",
             "name": "LbaasCertificateResource",
             "threaded": true,
             "attributes": [
@@ -10077,7 +10489,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/lbaas_listener.html",
             "dependencies": [],
-            "key": "opc_lbaas_listener",
+            "key": "lbaas_listener",
             "name": "LbaasListenerResource",
             "threaded": true,
             "attributes": [
@@ -10471,7 +10883,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/lbaas_load_balancer.html",
             "dependencies": [],
-            "key": "opc_lbaas_load_balancer",
+            "key": "lbaas_load_balancer",
             "name": "LbaasLoadBalancerResource",
             "threaded": true,
             "attributes": [
@@ -10698,7 +11110,7 @@
                             "method": "trustedCertificatePolicy"
                         }
                     ],
-                    "type": "TF.Attr s (ApplicationCookieStickinessPolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicyApplicationCookieStickinessPolicySetting s)",
                     "class": "HasApplicationCookieStickinessPolicy",
                     "validate": true,
                     "optional": true,
@@ -10761,7 +11173,7 @@
                             "method": "trustedCertificatePolicy"
                         }
                     ],
-                    "type": "TF.Attr s (CloudgatePolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicyCloudgatePolicySetting s)",
                     "class": "HasCloudgatePolicy",
                     "validate": true,
                     "optional": true,
@@ -10841,7 +11253,7 @@
                             "method": "trustedCertificatePolicy"
                         }
                     ],
-                    "type": "TF.Attr s (LoadBalancerCookieStickinessPolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicyLoadBalancerCookieStickinessPolicySetting s)",
                     "class": "HasLoadBalancerCookieStickinessPolicy",
                     "validate": true,
                     "optional": true,
@@ -10904,7 +11316,7 @@
                             "method": "trustedCertificatePolicy"
                         }
                     ],
-                    "type": "TF.Attr s (LoadBalancingMechanismPolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicyLoadBalancingMechanismPolicySetting s)",
                     "class": "HasLoadBalancingMechanismPolicy",
                     "validate": true,
                     "optional": true,
@@ -10984,7 +11396,7 @@
                             "method": "trustedCertificatePolicy"
                         }
                     ],
-                    "type": "TF.Attr s (RateLimitingRequestPolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicyRateLimitingRequestPolicySetting s)",
                     "class": "HasRateLimitingRequestPolicy",
                     "validate": true,
                     "optional": true,
@@ -11047,7 +11459,7 @@
                             "method": "trustedCertificatePolicy"
                         }
                     ],
-                    "type": "TF.Attr s (RedirectPolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicyRedirectPolicySetting s)",
                     "class": "HasRedirectPolicy",
                     "validate": true,
                     "optional": true,
@@ -11110,7 +11522,7 @@
                             "method": "trustedCertificatePolicy"
                         }
                     ],
-                    "type": "TF.Attr s (ResourceAccessControlPolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicyResourceAccessControlPolicySetting s)",
                     "class": "HasResourceAccessControlPolicy",
                     "validate": true,
                     "optional": true,
@@ -11173,7 +11585,7 @@
                             "method": "trustedCertificatePolicy"
                         }
                     ],
-                    "type": "TF.Attr s (SetRequestHeaderPolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicySetRequestHeaderPolicySetting s)",
                     "class": "HasSetRequestHeaderPolicy",
                     "validate": true,
                     "optional": true,
@@ -11236,7 +11648,7 @@
                             "method": "trustedCertificatePolicy"
                         }
                     ],
-                    "type": "TF.Attr s (SslNegotiationPolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicySslNegotiationPolicySetting s)",
                     "class": "HasSslNegotiationPolicy",
                     "validate": true,
                     "optional": true,
@@ -11299,7 +11711,7 @@
                             "method": "sslNegotiationPolicy"
                         }
                     ],
-                    "type": "TF.Attr s (TrustedCertificatePolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicyTrustedCertificatePolicySetting s)",
                     "class": "HasTrustedCertificatePolicy",
                     "validate": true,
                     "optional": true,
@@ -11308,18 +11720,18 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/lbaas_policy.html",
             "dependencies": [
-                "ApplicationCookieStickinessPolicySetting",
-                "CloudgatePolicySetting",
-                "LoadBalancerCookieStickinessPolicySetting",
-                "LoadBalancingMechanismPolicySetting",
-                "RateLimitingRequestPolicySetting",
-                "RedirectPolicySetting",
-                "ResourceAccessControlPolicySetting",
-                "SetRequestHeaderPolicySetting",
-                "SslNegotiationPolicySetting",
-                "TrustedCertificatePolicySetting"
+                "LbaasPolicyApplicationCookieStickinessPolicySetting",
+                "LbaasPolicyCloudgatePolicySetting",
+                "LbaasPolicyLoadBalancerCookieStickinessPolicySetting",
+                "LbaasPolicyLoadBalancingMechanismPolicySetting",
+                "LbaasPolicyRateLimitingRequestPolicySetting",
+                "LbaasPolicyRedirectPolicySetting",
+                "LbaasPolicyResourceAccessControlPolicySetting",
+                "LbaasPolicySetRequestHeaderPolicySetting",
+                "LbaasPolicySslNegotiationPolicySetting",
+                "LbaasPolicyTrustedCertificatePolicySetting"
             ],
-            "key": "opc_lbaas_policy",
+            "key": "lbaas_policy",
             "name": "LbaasPolicyResource",
             "threaded": true,
             "attributes": [
@@ -11486,7 +11898,7 @@
                             "method": "trustedCertificatePolicy"
                         }
                     ],
-                    "type": "TF.Attr s (ApplicationCookieStickinessPolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicyApplicationCookieStickinessPolicySetting s)",
                     "class": "HasApplicationCookieStickinessPolicy",
                     "validate": true,
                     "optional": true,
@@ -11549,7 +11961,7 @@
                             "method": "trustedCertificatePolicy"
                         }
                     ],
-                    "type": "TF.Attr s (CloudgatePolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicyCloudgatePolicySetting s)",
                     "class": "HasCloudgatePolicy",
                     "validate": true,
                     "optional": true,
@@ -11612,7 +12024,7 @@
                             "method": "trustedCertificatePolicy"
                         }
                     ],
-                    "type": "TF.Attr s (LoadBalancerCookieStickinessPolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicyLoadBalancerCookieStickinessPolicySetting s)",
                     "class": "HasLoadBalancerCookieStickinessPolicy",
                     "validate": true,
                     "optional": true,
@@ -11675,7 +12087,7 @@
                             "method": "trustedCertificatePolicy"
                         }
                     ],
-                    "type": "TF.Attr s (LoadBalancingMechanismPolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicyLoadBalancingMechanismPolicySetting s)",
                     "class": "HasLoadBalancingMechanismPolicy",
                     "validate": true,
                     "optional": true,
@@ -11738,7 +12150,7 @@
                             "method": "trustedCertificatePolicy"
                         }
                     ],
-                    "type": "TF.Attr s (RateLimitingRequestPolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicyRateLimitingRequestPolicySetting s)",
                     "class": "HasRateLimitingRequestPolicy",
                     "validate": true,
                     "optional": true,
@@ -11801,7 +12213,7 @@
                             "method": "trustedCertificatePolicy"
                         }
                     ],
-                    "type": "TF.Attr s (RedirectPolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicyRedirectPolicySetting s)",
                     "class": "HasRedirectPolicy",
                     "validate": true,
                     "optional": true,
@@ -11864,7 +12276,7 @@
                             "method": "trustedCertificatePolicy"
                         }
                     ],
-                    "type": "TF.Attr s (ResourceAccessControlPolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicyResourceAccessControlPolicySetting s)",
                     "class": "HasResourceAccessControlPolicy",
                     "validate": true,
                     "optional": true,
@@ -11927,7 +12339,7 @@
                             "method": "trustedCertificatePolicy"
                         }
                     ],
-                    "type": "TF.Attr s (SetRequestHeaderPolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicySetRequestHeaderPolicySetting s)",
                     "class": "HasSetRequestHeaderPolicy",
                     "validate": true,
                     "optional": true,
@@ -11990,7 +12402,7 @@
                             "method": "trustedCertificatePolicy"
                         }
                     ],
-                    "type": "TF.Attr s (SslNegotiationPolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicySslNegotiationPolicySetting s)",
                     "class": "HasSslNegotiationPolicy",
                     "validate": true,
                     "optional": true,
@@ -12053,7 +12465,7 @@
                             "method": "sslNegotiationPolicy"
                         }
                     ],
-                    "type": "TF.Attr s (TrustedCertificatePolicySetting s)",
+                    "type": "TF.Attr s (LbaasPolicyTrustedCertificatePolicySetting s)",
                     "class": "HasTrustedCertificatePolicy",
                     "validate": true,
                     "optional": true,
@@ -12097,7 +12509,7 @@
                     "method": "healthCheck",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (HealthCheckSetting s)",
+                    "type": "TF.Attr s (LbaasServerPoolHealthCheckSetting s)",
                     "class": "HasHealthCheck",
                     "validate": true,
                     "optional": true,
@@ -12191,9 +12603,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/lbaas_server_pool.html",
             "dependencies": [
-                "HealthCheckSetting"
+                "LbaasServerPoolHealthCheckSetting"
             ],
-            "key": "opc_lbaas_server_pool",
+            "key": "lbaas_server_pool",
             "name": "LbaasServerPoolResource",
             "threaded": true,
             "attributes": [
@@ -12553,7 +12965,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/storage_container.html",
             "dependencies": [],
-            "key": "opc_storage_container",
+            "key": "storage_container",
             "name": "StorageContainerResource",
             "threaded": true,
             "attributes": [
@@ -12936,7 +13348,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opc/r/storage_object.html",
             "dependencies": [],
-            "key": "opc_storage_object",
+            "key": "storage_object",
             "name": "StorageObjectResource",
             "threaded": true,
             "attributes": [
@@ -13465,7 +13877,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

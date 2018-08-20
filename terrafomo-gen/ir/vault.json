@@ -2,8 +2,104 @@
     "settings": [
         {
             "con": {
-                "smart": "newCassandraSetting",
-                "name": "CassandraSetting'"
+                "smart": "newClientAuthSetting",
+                "name": "ClientAuthSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_certFile",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to a file containing the client certificate."
+                    ],
+                    "forceNew": false,
+                    "encoder": "P.Just $ TF.assign \"cert_file\"",
+                    "name": "_certFile",
+                    "method": "certFile",
+                    "threaded": false,
+                    "conflicts": [],
+                    "type": "P.Text",
+                    "class": "HasCertFile",
+                    "validate": false,
+                    "optional": false,
+                    "original": "cert_file"
+                },
+                {
+                    "default": "_keyFile",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to a file containing the private key that the certificate was issued",
+                        "for."
+                    ],
+                    "forceNew": false,
+                    "encoder": "P.Just $ TF.assign \"key_file\"",
+                    "name": "_keyFile",
+                    "method": "keyFile",
+                    "threaded": false,
+                    "conflicts": [],
+                    "type": "P.Text",
+                    "class": "HasKeyFile",
+                    "validate": false,
+                    "optional": false,
+                    "original": "key_file"
+                }
+            ],
+            "dependencies": [],
+            "key": "client_auth",
+            "name": "ClientAuthSetting",
+            "threaded": false,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_certFile",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to a file containing the client certificate."
+                    ],
+                    "forceNew": false,
+                    "encoder": "P.Just $ TF.assign \"cert_file\"",
+                    "name": "_certFile",
+                    "method": "certFile",
+                    "threaded": false,
+                    "conflicts": [],
+                    "type": "P.Text",
+                    "class": "HasCertFile",
+                    "validate": false,
+                    "optional": false,
+                    "original": "cert_file"
+                },
+                {
+                    "default": "_keyFile",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to a file containing the private key that the certificate was issued",
+                        "for."
+                    ],
+                    "forceNew": false,
+                    "encoder": "P.Just $ TF.assign \"key_file\"",
+                    "name": "_keyFile",
+                    "method": "keyFile",
+                    "threaded": false,
+                    "conflicts": [],
+                    "type": "P.Text",
+                    "class": "HasKeyFile",
+                    "validate": false,
+                    "optional": false,
+                    "original": "key_file"
+                }
+            ],
+            "conflicts": [],
+            "type": "ClientAuthSetting",
+            "original": "client_auth"
+        },
+        {
+            "con": {
+                "smart": "newDatabaseSecretBackendConnectionCassandraSetting",
+                "name": "DatabaseSecretBackendConnectionCassandraSetting'"
             },
             "arguments": [
                 {
@@ -201,209 +297,19 @@
                 }
             ],
             "dependencies": [],
-            "key": "vault_database_secret_backend_connection.cassandra",
-            "name": "CassandraSetting",
+            "key": "database_secret_backend_connection.cassandra",
+            "name": "DatabaseSecretBackendConnectionCassandraSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "CassandraSetting s",
+            "type": "DatabaseSecretBackendConnectionCassandraSetting s",
             "original": "cassandra"
         },
         {
             "con": {
-                "smart": "newClientAuthSetting",
-                "name": "ClientAuthSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_certFile",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Path to a file containing the client certificate."
-                    ],
-                    "forceNew": false,
-                    "encoder": "P.Just $ TF.assign \"cert_file\"",
-                    "name": "_certFile",
-                    "method": "certFile",
-                    "threaded": false,
-                    "conflicts": [],
-                    "type": "P.Text",
-                    "class": "HasCertFile",
-                    "validate": false,
-                    "optional": false,
-                    "original": "cert_file"
-                },
-                {
-                    "default": "_keyFile",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Path to a file containing the private key that the certificate was issued",
-                        "for."
-                    ],
-                    "forceNew": false,
-                    "encoder": "P.Just $ TF.assign \"key_file\"",
-                    "name": "_keyFile",
-                    "method": "keyFile",
-                    "threaded": false,
-                    "conflicts": [],
-                    "type": "P.Text",
-                    "class": "HasKeyFile",
-                    "validate": false,
-                    "optional": false,
-                    "original": "key_file"
-                }
-            ],
-            "dependencies": [],
-            "key": "provider.client_auth",
-            "name": "ClientAuthSetting",
-            "threaded": false,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_certFile",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Path to a file containing the client certificate."
-                    ],
-                    "forceNew": false,
-                    "encoder": "P.Just $ TF.assign \"cert_file\"",
-                    "name": "_certFile",
-                    "method": "certFile",
-                    "threaded": false,
-                    "conflicts": [],
-                    "type": "P.Text",
-                    "class": "HasCertFile",
-                    "validate": false,
-                    "optional": false,
-                    "original": "cert_file"
-                },
-                {
-                    "default": "_keyFile",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Path to a file containing the private key that the certificate was issued",
-                        "for."
-                    ],
-                    "forceNew": false,
-                    "encoder": "P.Just $ TF.assign \"key_file\"",
-                    "name": "_keyFile",
-                    "method": "keyFile",
-                    "threaded": false,
-                    "conflicts": [],
-                    "type": "P.Text",
-                    "class": "HasKeyFile",
-                    "validate": false,
-                    "optional": false,
-                    "original": "key_file"
-                }
-            ],
-            "conflicts": [],
-            "type": "ClientAuthSetting",
-            "original": "client_auth"
-        },
-        {
-            "con": {
-                "smart": "newGroupSetting",
-                "name": "GroupSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_groupName",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Name of the Okta group"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"group_name\" <$> TF.attribute",
-                    "name": "_groupName",
-                    "method": "groupName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasGroupName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "group_name"
-                },
-                {
-                    "default": "_policies",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Policies to associate with this group"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"policies\" <$> TF.attribute",
-                    "name": "_policies",
-                    "method": "policies",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasPolicies",
-                    "validate": false,
-                    "optional": false,
-                    "original": "policies"
-                }
-            ],
-            "dependencies": [],
-            "key": "vault_okta_auth_backend.group",
-            "name": "GroupSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_groupName",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Name of the Okta group"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"group_name\" <$> TF.attribute",
-                    "name": "_groupName",
-                    "method": "groupName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasGroupName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "group_name"
-                },
-                {
-                    "default": "_policies",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Policies to associate with this group"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"policies\" <$> TF.attribute",
-                    "name": "_policies",
-                    "method": "policies",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasPolicies",
-                    "validate": false,
-                    "optional": false,
-                    "original": "policies"
-                }
-            ],
-            "conflicts": [],
-            "type": "GroupSetting s",
-            "original": "group"
-        },
-        {
-            "con": {
-                "smart": "newHanaSetting",
-                "name": "HanaSetting'"
+                "smart": "newDatabaseSecretBackendConnectionHanaSetting",
+                "name": "DatabaseSecretBackendConnectionHanaSetting'"
             },
             "arguments": [
                 {
@@ -484,19 +390,19 @@
                 }
             ],
             "dependencies": [],
-            "key": "vault_database_secret_backend_connection.hana",
-            "name": "HanaSetting",
+            "key": "database_secret_backend_connection.hana",
+            "name": "DatabaseSecretBackendConnectionHanaSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "HanaSetting s",
+            "type": "DatabaseSecretBackendConnectionHanaSetting s",
             "original": "hana"
         },
         {
             "con": {
-                "smart": "newMongodbSetting",
-                "name": "MongodbSetting'"
+                "smart": "newDatabaseSecretBackendConnectionMongodbSetting",
+                "name": "DatabaseSecretBackendConnectionMongodbSetting'"
             },
             "arguments": [
                 {
@@ -520,19 +426,19 @@
                 }
             ],
             "dependencies": [],
-            "key": "vault_database_secret_backend_connection.mongodb",
-            "name": "MongodbSetting",
+            "key": "database_secret_backend_connection.mongodb",
+            "name": "DatabaseSecretBackendConnectionMongodbSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "MongodbSetting s",
+            "type": "DatabaseSecretBackendConnectionMongodbSetting s",
             "original": "mongodb"
         },
         {
             "con": {
-                "smart": "newMssqlSetting",
-                "name": "MssqlSetting'"
+                "smart": "newDatabaseSecretBackendConnectionMssqlSetting",
+                "name": "DatabaseSecretBackendConnectionMssqlSetting'"
             },
             "arguments": [
                 {
@@ -613,19 +519,19 @@
                 }
             ],
             "dependencies": [],
-            "key": "vault_database_secret_backend_connection.mssql",
-            "name": "MssqlSetting",
+            "key": "database_secret_backend_connection.mssql",
+            "name": "DatabaseSecretBackendConnectionMssqlSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "MssqlSetting s",
+            "type": "DatabaseSecretBackendConnectionMssqlSetting s",
             "original": "mssql"
         },
         {
             "con": {
-                "smart": "newMysqlSetting",
-                "name": "MysqlSetting'"
+                "smart": "newDatabaseSecretBackendConnectionMysqlSetting",
+                "name": "DatabaseSecretBackendConnectionMysqlSetting'"
             },
             "arguments": [
                 {
@@ -706,19 +612,19 @@
                 }
             ],
             "dependencies": [],
-            "key": "vault_database_secret_backend_connection.mysql",
-            "name": "MysqlSetting",
+            "key": "database_secret_backend_connection.mysql",
+            "name": "DatabaseSecretBackendConnectionMysqlSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "MysqlSetting s",
+            "type": "DatabaseSecretBackendConnectionMysqlSetting s",
             "original": "mysql"
         },
         {
             "con": {
-                "smart": "newOracleSetting",
-                "name": "OracleSetting'"
+                "smart": "newDatabaseSecretBackendConnectionOracleSetting",
+                "name": "DatabaseSecretBackendConnectionOracleSetting'"
             },
             "arguments": [
                 {
@@ -799,19 +705,19 @@
                 }
             ],
             "dependencies": [],
-            "key": "vault_database_secret_backend_connection.oracle",
-            "name": "OracleSetting",
+            "key": "database_secret_backend_connection.oracle",
+            "name": "DatabaseSecretBackendConnectionOracleSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "OracleSetting s",
+            "type": "DatabaseSecretBackendConnectionOracleSetting s",
             "original": "oracle"
         },
         {
             "con": {
-                "smart": "newPostgresqlSetting",
-                "name": "PostgresqlSetting'"
+                "smart": "newDatabaseSecretBackendConnectionPostgresqlSetting",
+                "name": "DatabaseSecretBackendConnectionPostgresqlSetting'"
             },
             "arguments": [
                 {
@@ -892,19 +798,113 @@
                 }
             ],
             "dependencies": [],
-            "key": "vault_database_secret_backend_connection.postgresql",
-            "name": "PostgresqlSetting",
+            "key": "database_secret_backend_connection.postgresql",
+            "name": "DatabaseSecretBackendConnectionPostgresqlSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "PostgresqlSetting s",
+            "type": "DatabaseSecretBackendConnectionPostgresqlSetting s",
             "original": "postgresql"
         },
         {
             "con": {
-                "smart": "newUserSetting",
-                "name": "UserSetting'"
+                "smart": "newOktaAuthBackendGroupSetting",
+                "name": "OktaAuthBackendGroupSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_groupName",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name of the Okta group"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"group_name\" <$> TF.attribute",
+                    "name": "_groupName",
+                    "method": "groupName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasGroupName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "group_name"
+                },
+                {
+                    "default": "_policies",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Policies to associate with this group"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"policies\" <$> TF.attribute",
+                    "name": "_policies",
+                    "method": "policies",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasPolicies",
+                    "validate": false,
+                    "optional": false,
+                    "original": "policies"
+                }
+            ],
+            "dependencies": [],
+            "key": "okta_auth_backend.group",
+            "name": "OktaAuthBackendGroupSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_groupName",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name of the Okta group"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"group_name\" <$> TF.attribute",
+                    "name": "_groupName",
+                    "method": "groupName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasGroupName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "group_name"
+                },
+                {
+                    "default": "_policies",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Policies to associate with this group"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"policies\" <$> TF.attribute",
+                    "name": "_policies",
+                    "method": "policies",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasPolicies",
+                    "validate": false,
+                    "optional": false,
+                    "original": "policies"
+                }
+            ],
+            "conflicts": [],
+            "type": "OktaAuthBackendGroupSetting s",
+            "original": "group"
+        },
+        {
+            "con": {
+                "smart": "newOktaAuthBackendUserSetting",
+                "name": "OktaAuthBackendUserSetting'"
             },
             "arguments": [
                 {
@@ -966,8 +966,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "vault_okta_auth_backend.user",
-            "name": "UserSetting",
+            "key": "okta_auth_backend.user",
+            "name": "OktaAuthBackendUserSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1011,7 +1011,7 @@
                 }
             ],
             "conflicts": [],
-            "type": "UserSetting s",
+            "type": "OktaAuthBackendUserSetting s",
             "original": "user"
         }
     ],
@@ -1064,7 +1064,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/d/approle_auth_backend_role_id.html",
             "dependencies": [],
-            "key": "vault_approle_auth_backend_role_id",
+            "key": "approle_auth_backend_role_id",
             "name": "ApproleAuthBackendRoleIdData",
             "threaded": true,
             "attributes": [
@@ -1197,7 +1197,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/d/aws_access_credentials.html",
             "dependencies": [],
-            "key": "vault_aws_access_credentials",
+            "key": "aws_access_credentials",
             "name": "AwsAccessCredentialsData",
             "threaded": true,
             "attributes": [
@@ -1425,7 +1425,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/d/generic_secret.html",
             "dependencies": [],
-            "key": "vault_generic_secret",
+            "key": "generic_secret",
             "name": "GenericSecretData",
             "threaded": true,
             "attributes": [
@@ -1655,7 +1655,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/approle_auth_backend_login.html",
             "dependencies": [],
-            "key": "vault_approle_auth_backend_login",
+            "key": "approle_auth_backend_login",
             "name": "ApproleAuthBackendLoginResource",
             "threaded": true,
             "attributes": [
@@ -2080,7 +2080,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/approle_auth_backend_role.html",
             "dependencies": [],
-            "key": "vault_approle_auth_backend_role",
+            "key": "approle_auth_backend_role",
             "name": "ApproleAuthBackendRoleResource",
             "threaded": true,
             "attributes": [
@@ -2250,7 +2250,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/approle_auth_backend_role_secret_id.html",
             "dependencies": [],
-            "key": "vault_approle_auth_backend_role_secret_id",
+            "key": "approle_auth_backend_role_secret_id",
             "name": "ApproleAuthBackendRoleSecretIdResource",
             "threaded": true,
             "attributes": [
@@ -2401,7 +2401,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/auth_backend.html",
             "dependencies": [],
-            "key": "vault_auth_backend",
+            "key": "auth_backend",
             "name": "AuthBackendResource",
             "threaded": true,
             "attributes": [
@@ -2554,7 +2554,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_cert.html",
             "dependencies": [],
-            "key": "vault_aws_auth_backend_cert",
+            "key": "aws_auth_backend_cert",
             "name": "AwsAuthBackendCertResource",
             "threaded": true,
             "attributes": [
@@ -2764,7 +2764,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_client.html",
             "dependencies": [],
-            "key": "vault_aws_auth_backend_client",
+            "key": "aws_auth_backend_client",
             "name": "AwsAuthBackendClientResource",
             "threaded": true,
             "attributes": [
@@ -2858,7 +2858,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_identity_whitelist.html",
             "dependencies": [],
-            "key": "vault_aws_auth_backend_identity_whitelist",
+            "key": "aws_auth_backend_identity_whitelist",
             "name": "AwsAuthBackendIdentityWhitelistResource",
             "threaded": true,
             "attributes": [
@@ -3087,7 +3087,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_login.html",
             "dependencies": [],
-            "key": "vault_aws_auth_backend_login",
+            "key": "aws_auth_backend_login",
             "name": "AwsAuthBackendLoginResource",
             "threaded": true,
             "attributes": [
@@ -3722,7 +3722,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_role.html",
             "dependencies": [],
-            "key": "vault_aws_auth_backend_role",
+            "key": "aws_auth_backend_role",
             "name": "AwsAuthBackendRoleResource",
             "threaded": true,
             "attributes": [
@@ -3954,7 +3954,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_role_tag.html",
             "dependencies": [],
-            "key": "vault_aws_auth_backend_role_tag",
+            "key": "aws_auth_backend_role_tag",
             "name": "AwsAuthBackendRoleTagResource",
             "threaded": true,
             "attributes": [
@@ -4102,7 +4102,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_sts_role.html",
             "dependencies": [],
-            "key": "vault_aws_auth_backend_sts_role",
+            "key": "aws_auth_backend_sts_role",
             "name": "AwsAuthBackendStsRoleResource",
             "threaded": true,
             "attributes": [
@@ -4311,7 +4311,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/aws_secret_backend.html",
             "dependencies": [],
-            "key": "vault_aws_secret_backend",
+            "key": "aws_secret_backend",
             "name": "AwsSecretBackendResource",
             "threaded": true,
             "attributes": [
@@ -4531,7 +4531,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/aws_secret_backend_role.html",
             "dependencies": [],
-            "key": "vault_aws_secret_backend_role",
+            "key": "aws_secret_backend_role",
             "name": "AwsSecretBackendRoleResource",
             "threaded": true,
             "attributes": [
@@ -4736,7 +4736,7 @@
                             "method": "postgresql"
                         }
                     ],
-                    "type": "TF.Attr s (CassandraSetting s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionCassandraSetting s)",
                     "class": "HasCassandra",
                     "validate": true,
                     "optional": true,
@@ -4786,7 +4786,7 @@
                             "method": "postgresql"
                         }
                     ],
-                    "type": "TF.Attr s (HanaSetting s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionHanaSetting s)",
                     "class": "HasHana",
                     "validate": true,
                     "optional": true,
@@ -4836,7 +4836,7 @@
                             "method": "postgresql"
                         }
                     ],
-                    "type": "TF.Attr s (MongodbSetting s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionMongodbSetting s)",
                     "class": "HasMongodb",
                     "validate": true,
                     "optional": true,
@@ -4886,7 +4886,7 @@
                             "method": "postgresql"
                         }
                     ],
-                    "type": "TF.Attr s (MssqlSetting s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionMssqlSetting s)",
                     "class": "HasMssql",
                     "validate": true,
                     "optional": true,
@@ -4936,7 +4936,7 @@
                             "method": "postgresql"
                         }
                     ],
-                    "type": "TF.Attr s (MysqlSetting s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionMysqlSetting s)",
                     "class": "HasMysql",
                     "validate": true,
                     "optional": true,
@@ -5005,7 +5005,7 @@
                             "method": "postgresql"
                         }
                     ],
-                    "type": "TF.Attr s (OracleSetting s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionOracleSetting s)",
                     "class": "HasOracle",
                     "validate": true,
                     "optional": true,
@@ -5055,7 +5055,7 @@
                             "method": "oracle"
                         }
                     ],
-                    "type": "TF.Attr s (PostgresqlSetting s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionPostgresqlSetting s)",
                     "class": "HasPostgresql",
                     "validate": true,
                     "optional": true,
@@ -5083,15 +5083,15 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/database_secret_backend_connection.html",
             "dependencies": [
-                "CassandraSetting",
-                "HanaSetting",
-                "MongodbSetting",
-                "MssqlSetting",
-                "MysqlSetting",
-                "OracleSetting",
-                "PostgresqlSetting"
+                "DatabaseSecretBackendConnectionCassandraSetting",
+                "DatabaseSecretBackendConnectionHanaSetting",
+                "DatabaseSecretBackendConnectionMongodbSetting",
+                "DatabaseSecretBackendConnectionMssqlSetting",
+                "DatabaseSecretBackendConnectionMysqlSetting",
+                "DatabaseSecretBackendConnectionOracleSetting",
+                "DatabaseSecretBackendConnectionPostgresqlSetting"
             ],
-            "key": "vault_database_secret_backend_connection",
+            "key": "database_secret_backend_connection",
             "name": "DatabaseSecretBackendConnectionResource",
             "threaded": true,
             "attributes": [
@@ -5198,7 +5198,7 @@
                             "method": "postgresql"
                         }
                     ],
-                    "type": "TF.Attr s (CassandraSetting s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionCassandraSetting s)",
                     "class": "HasCassandra",
                     "validate": true,
                     "optional": true,
@@ -5248,7 +5248,7 @@
                             "method": "postgresql"
                         }
                     ],
-                    "type": "TF.Attr s (HanaSetting s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionHanaSetting s)",
                     "class": "HasHana",
                     "validate": true,
                     "optional": true,
@@ -5298,7 +5298,7 @@
                             "method": "postgresql"
                         }
                     ],
-                    "type": "TF.Attr s (MongodbSetting s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionMongodbSetting s)",
                     "class": "HasMongodb",
                     "validate": true,
                     "optional": true,
@@ -5348,7 +5348,7 @@
                             "method": "postgresql"
                         }
                     ],
-                    "type": "TF.Attr s (MssqlSetting s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionMssqlSetting s)",
                     "class": "HasMssql",
                     "validate": true,
                     "optional": true,
@@ -5398,7 +5398,7 @@
                             "method": "postgresql"
                         }
                     ],
-                    "type": "TF.Attr s (MysqlSetting s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionMysqlSetting s)",
                     "class": "HasMysql",
                     "validate": true,
                     "optional": true,
@@ -5448,7 +5448,7 @@
                             "method": "postgresql"
                         }
                     ],
-                    "type": "TF.Attr s (OracleSetting s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionOracleSetting s)",
                     "class": "HasOracle",
                     "validate": true,
                     "optional": true,
@@ -5498,7 +5498,7 @@
                             "method": "oracle"
                         }
                     ],
-                    "type": "TF.Attr s (PostgresqlSetting s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionPostgresqlSetting s)",
                     "class": "HasPostgresql",
                     "validate": true,
                     "optional": true,
@@ -5689,7 +5689,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/database_secret_backend_role.html",
             "dependencies": [],
-            "key": "vault_database_secret_backend_role",
+            "key": "database_secret_backend_role",
             "name": "DatabaseSecretBackendRoleResource",
             "threaded": true,
             "attributes": [
@@ -5859,7 +5859,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/generic_secret.html",
             "dependencies": [],
-            "key": "vault_generic_secret",
+            "key": "generic_secret",
             "name": "GenericSecretResource",
             "threaded": true,
             "attributes": [
@@ -6029,7 +6029,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/mount.html",
             "dependencies": [],
-            "key": "vault_mount",
+            "key": "mount",
             "name": "MountResource",
             "threaded": true,
             "attributes": [
@@ -6188,7 +6188,7 @@
                     "method": "group",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (GroupSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (OktaAuthBackendGroupSetting s)]",
                     "class": "HasGroup",
                     "validate": false,
                     "optional": true,
@@ -6303,7 +6303,7 @@
                     "method": "user",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (UserSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (OktaAuthBackendUserSetting s)]",
                     "class": "HasUser",
                     "validate": false,
                     "optional": true,
@@ -6312,12 +6312,12 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/okta_auth_backend.html",
             "dependencies": [
-                "GroupSetting",
-                "UserSetting",
-                "GroupSetting",
-                "UserSetting"
+                "OktaAuthBackendGroupSetting",
+                "OktaAuthBackendUserSetting",
+                "OktaAuthBackendGroupSetting",
+                "OktaAuthBackendUserSetting"
             ],
-            "key": "vault_okta_auth_backend",
+            "key": "okta_auth_backend",
             "name": "OktaAuthBackendResource",
             "threaded": true,
             "attributes": [
@@ -6349,7 +6349,7 @@
                     "method": "computedGroup",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (GroupSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (OktaAuthBackendGroupSetting s)]",
                     "class": "HasComputedGroup",
                     "validate": false,
                     "optional": false,
@@ -6366,7 +6366,7 @@
                     "method": "computedUser",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (UserSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (OktaAuthBackendUserSetting s)]",
                     "class": "HasComputedUser",
                     "validate": false,
                     "optional": false,
@@ -6465,7 +6465,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/okta_auth_backend_group.html",
             "dependencies": [],
-            "key": "vault_okta_auth_backend_group",
+            "key": "okta_auth_backend_group",
             "name": "OktaAuthBackendGroupResource",
             "threaded": true,
             "attributes": [
@@ -6616,7 +6616,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/okta_auth_backend_user.html",
             "dependencies": [],
-            "key": "vault_okta_auth_backend_user",
+            "key": "okta_auth_backend_user",
             "name": "OktaAuthBackendUserResource",
             "threaded": true,
             "attributes": [
@@ -6729,7 +6729,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vault/r/policy.html",
             "dependencies": [],
-            "key": "vault_policy",
+            "key": "policy",
             "name": "PolicyResource",
             "threaded": true,
             "attributes": [
@@ -6941,7 +6941,7 @@
         "dependencies": [
             "ClientAuthSetting"
         ],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

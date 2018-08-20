@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newPolicySetting",
-                "name": "PolicySetting'"
+                "smart": "newSchemaPolicySetting",
+                "name": "SchemaPolicySetting'"
             },
             "arguments": [
                 {
@@ -130,8 +130,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "postgresql_schema.policy",
-            "name": "PolicySetting",
+            "key": "schema.policy",
+            "name": "SchemaPolicySetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
@@ -240,7 +240,7 @@
                     "original": "usage_with_grant"
                 }
             ],
-            "type": "PolicySetting s",
+            "type": "SchemaPolicySetting s",
             "original": "policy"
         }
     ],
@@ -447,7 +447,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/postgresql/r/database.html",
             "dependencies": [],
-            "key": "postgresql_database",
+            "key": "database",
             "name": "DatabaseResource",
             "threaded": true,
             "attributes": [
@@ -692,7 +692,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/postgresql/r/extension.html",
             "dependencies": [],
-            "key": "postgresql_extension",
+            "key": "extension",
             "name": "ExtensionResource",
             "threaded": true,
             "attributes": [
@@ -1054,7 +1054,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/postgresql/r/role.html",
             "dependencies": [],
-            "key": "postgresql_role",
+            "key": "role",
             "name": "RoleResource",
             "threaded": true,
             "attributes": [
@@ -1194,7 +1194,7 @@
                     "method": "policy",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (PolicySetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (SchemaPolicySetting s)]",
                     "class": "HasPolicy",
                     "validate": false,
                     "optional": true,
@@ -1203,10 +1203,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/postgresql/r/schema.html",
             "dependencies": [
-                "PolicySetting",
-                "PolicySetting"
+                "SchemaPolicySetting",
+                "SchemaPolicySetting"
             ],
-            "key": "postgresql_schema",
+            "key": "schema",
             "name": "SchemaResource",
             "threaded": true,
             "attributes": [
@@ -1257,7 +1257,7 @@
                     "method": "computedPolicy",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (PolicySetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (SchemaPolicySetting s)]",
                     "class": "HasComputedPolicy",
                     "validate": false,
                     "optional": false,
@@ -1474,7 +1474,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

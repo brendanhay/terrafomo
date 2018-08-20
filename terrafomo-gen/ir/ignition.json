@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newAppendSetting",
-                "name": "AppendSetting'"
+                "smart": "newConfigAppendSetting",
+                "name": "ConfigAppendSetting'"
             },
             "arguments": [
                 {
@@ -42,8 +42,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "ignition_config.append",
-            "name": "AppendSetting",
+            "key": "config.append",
+            "name": "ConfigAppendSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -66,13 +66,184 @@
                 }
             ],
             "conflicts": [],
-            "type": "AppendSetting s",
+            "type": "ConfigAppendSetting s",
             "original": "append"
         },
         {
             "con": {
-                "smart": "newContentSetting",
-                "name": "ContentSetting'"
+                "smart": "newConfigReplaceSetting",
+                "name": "ConfigReplaceSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_source",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"source\" <$> TF.attribute",
+                    "name": "_source",
+                    "method": "source",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSource",
+                    "validate": false,
+                    "optional": false,
+                    "original": "source"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"verification\" <$> TF.attribute",
+                    "name": "_verification",
+                    "method": "verification",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVerification",
+                    "validate": false,
+                    "optional": true,
+                    "original": "verification"
+                }
+            ],
+            "dependencies": [],
+            "key": "config.replace",
+            "name": "ConfigReplaceSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_source",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"source\" <$> TF.attribute",
+                    "name": "_source",
+                    "method": "source",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSource",
+                    "validate": false,
+                    "optional": false,
+                    "original": "source"
+                }
+            ],
+            "conflicts": [],
+            "type": "ConfigReplaceSetting s",
+            "original": "replace"
+        },
+        {
+            "con": {
+                "smart": "newDiskPartitionSetting",
+                "name": "DiskPartitionSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"label\" <$> TF.attribute",
+                    "name": "_label",
+                    "method": "label",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLabel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "label"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"number\" <$> TF.attribute",
+                    "name": "_number",
+                    "method": "number",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasNumber",
+                    "validate": false,
+                    "optional": true,
+                    "original": "number"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"size\" <$> TF.attribute",
+                    "name": "_size",
+                    "method": "size",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasSize",
+                    "validate": false,
+                    "optional": true,
+                    "original": "size"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"start\" <$> TF.attribute",
+                    "name": "_start",
+                    "method": "start",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasStart",
+                    "validate": false,
+                    "optional": true,
+                    "original": "start"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"type_guid\" <$> TF.attribute",
+                    "name": "_typeGuid",
+                    "method": "typeGuid",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTypeGuid",
+                    "validate": false,
+                    "optional": true,
+                    "original": "type_guid"
+                }
+            ],
+            "dependencies": [],
+            "key": "disk.partition",
+            "name": "DiskPartitionSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "DiskPartitionSetting s",
+            "original": "partition"
+        },
+        {
+            "con": {
+                "smart": "newFileContentSetting",
+                "name": "FileContentSetting'"
             },
             "arguments": [
                 {
@@ -111,8 +282,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "ignition_file.content",
-            "name": "ContentSetting",
+            "key": "file.content",
+            "name": "FileContentSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -135,13 +306,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "ContentSetting s",
+            "type": "FileContentSetting s",
             "original": "content"
         },
         {
             "con": {
-                "smart": "newDropinSetting",
-                "name": "DropinSetting'"
+                "smart": "newFileSourceSetting",
+                "name": "FileSourceSetting'"
             },
             "arguments": [
                 {
@@ -150,67 +321,66 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
-                    "encoder": "TF.assign \"content\" <$> TF.attribute",
-                    "name": "_content",
-                    "method": "content",
+                    "encoder": "TF.assign \"compression\" <$> TF.attribute",
+                    "name": "_compression",
+                    "method": "compression",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasContent",
+                    "class": "HasCompression",
                     "validate": false,
                     "optional": true,
-                    "original": "content"
+                    "original": "compression"
                 },
                 {
-                    "default": "_name",
+                    "default": "TF.Nil",
                     "computed": false,
-                    "required": true,
+                    "required": false,
                     "help": [],
                     "forceNew": true,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
+                    "encoder": "TF.assign \"source\" <$> TF.attribute",
+                    "name": "_source",
+                    "method": "source",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasName",
+                    "class": "HasSource",
                     "validate": false,
-                    "optional": false,
-                    "original": "name"
+                    "optional": true,
+                    "original": "source"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"verification\" <$> TF.attribute",
+                    "name": "_verification",
+                    "method": "verification",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVerification",
+                    "validate": false,
+                    "optional": true,
+                    "original": "verification"
                 }
             ],
             "dependencies": [],
-            "key": "ignition_systemd_unit.dropin",
-            "name": "DropinSetting",
+            "key": "file.source",
+            "name": "FileSourceSetting",
             "threaded": true,
             "attributes": [],
-            "parameters": [
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                }
-            ],
+            "parameters": [],
             "conflicts": [],
-            "type": "DropinSetting s",
-            "original": "dropin"
+            "type": "FileSourceSetting s",
+            "original": "source"
         },
         {
             "con": {
-                "smart": "newMountSetting",
-                "name": "MountSetting'"
+                "smart": "newFilesystemMountSetting",
+                "name": "FilesystemMountSetting'"
             },
             "arguments": [
                 {
@@ -317,8 +487,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "ignition_filesystem.mount",
-            "name": "MountSetting",
+            "key": "filesystem.mount",
+            "name": "FilesystemMountSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -358,13 +528,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "MountSetting s",
+            "type": "FilesystemMountSetting s",
             "original": "mount"
         },
         {
             "con": {
-                "smart": "newPartitionSetting",
-                "name": "PartitionSetting'"
+                "smart": "newSystemdUnitDropinSetting",
+                "name": "SystemdUnitDropinSetting'"
             },
             "arguments": [
                 {
@@ -373,232 +543,62 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
-                    "encoder": "TF.assign \"label\" <$> TF.attribute",
-                    "name": "_label",
-                    "method": "label",
+                    "encoder": "TF.assign \"content\" <$> TF.attribute",
+                    "name": "_content",
+                    "method": "content",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasLabel",
+                    "class": "HasContent",
                     "validate": false,
                     "optional": true,
-                    "original": "label"
+                    "original": "content"
                 },
                 {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"number\" <$> TF.attribute",
-                    "name": "_number",
-                    "method": "number",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasNumber",
-                    "validate": false,
-                    "optional": true,
-                    "original": "number"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"size\" <$> TF.attribute",
-                    "name": "_size",
-                    "method": "size",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasSize",
-                    "validate": false,
-                    "optional": true,
-                    "original": "size"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"start\" <$> TF.attribute",
-                    "name": "_start",
-                    "method": "start",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasStart",
-                    "validate": false,
-                    "optional": true,
-                    "original": "start"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"type_guid\" <$> TF.attribute",
-                    "name": "_typeGuid",
-                    "method": "typeGuid",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasTypeGuid",
-                    "validate": false,
-                    "optional": true,
-                    "original": "type_guid"
-                }
-            ],
-            "dependencies": [],
-            "key": "ignition_disk.partition",
-            "name": "PartitionSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "PartitionSetting s",
-            "original": "partition"
-        },
-        {
-            "con": {
-                "smart": "newReplaceSetting",
-                "name": "ReplaceSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_source",
+                    "default": "_name",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": true,
-                    "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "_source",
-                    "method": "source",
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasSource",
+                    "class": "HasName",
                     "validate": false,
                     "optional": false,
-                    "original": "source"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"verification\" <$> TF.attribute",
-                    "name": "_verification",
-                    "method": "verification",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasVerification",
-                    "validate": false,
-                    "optional": true,
-                    "original": "verification"
+                    "original": "name"
                 }
             ],
             "dependencies": [],
-            "key": "ignition_config.replace",
-            "name": "ReplaceSetting",
+            "key": "systemd_unit.dropin",
+            "name": "SystemdUnitDropinSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_source",
+                    "default": "_name",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": true,
-                    "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "_source",
-                    "method": "source",
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasSource",
+                    "class": "HasName",
                     "validate": false,
                     "optional": false,
-                    "original": "source"
+                    "original": "name"
                 }
             ],
             "conflicts": [],
-            "type": "ReplaceSetting s",
-            "original": "replace"
-        },
-        {
-            "con": {
-                "smart": "newSourceSetting",
-                "name": "SourceSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"compression\" <$> TF.attribute",
-                    "name": "_compression",
-                    "method": "compression",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCompression",
-                    "validate": false,
-                    "optional": true,
-                    "original": "compression"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "_source",
-                    "method": "source",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasSource",
-                    "validate": false,
-                    "optional": true,
-                    "original": "source"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"verification\" <$> TF.attribute",
-                    "name": "_verification",
-                    "method": "verification",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasVerification",
-                    "validate": false,
-                    "optional": true,
-                    "original": "verification"
-                }
-            ],
-            "dependencies": [],
-            "key": "ignition_file.source",
-            "name": "SourceSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "SourceSetting s",
-            "original": "source"
+            "type": "SystemdUnitDropinSetting s",
+            "original": "dropin"
         }
     ],
     "url": "https://www.terraform.io/docs/providers/ignition/index.html",
@@ -620,7 +620,7 @@
                     "method": "append",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (AppendSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ConfigAppendSetting s)]",
                     "class": "HasAppend",
                     "validate": false,
                     "optional": true,
@@ -773,7 +773,7 @@
                     "method": "replace",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (ReplaceSetting s)",
+                    "type": "TF.Attr s (ConfigReplaceSetting s)",
                     "class": "HasReplace",
                     "validate": true,
                     "optional": true,
@@ -816,10 +816,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/config.html",
             "dependencies": [
-                "AppendSetting",
-                "ReplaceSetting"
+                "ConfigAppendSetting",
+                "ConfigReplaceSetting"
             ],
-            "key": "ignition_config",
+            "key": "config",
             "name": "ConfigData",
             "threaded": true,
             "attributes": [
@@ -957,7 +957,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/directory.html",
             "dependencies": [],
-            "key": "ignition_directory",
+            "key": "directory",
             "name": "DirectoryData",
             "threaded": true,
             "attributes": [
@@ -1053,7 +1053,7 @@
                     "method": "partition",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (PartitionSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DiskPartitionSetting s)]",
                     "class": "HasPartition",
                     "validate": false,
                     "optional": true,
@@ -1079,9 +1079,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/disk.html",
             "dependencies": [
-                "PartitionSetting"
+                "DiskPartitionSetting"
             ],
-            "key": "ignition_disk",
+            "key": "disk",
             "name": "DiskData",
             "threaded": true,
             "attributes": [
@@ -1143,7 +1143,7 @@
                     "method": "content",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (ContentSetting s)",
+                    "type": "TF.Attr s (FileContentSetting s)",
                     "class": "HasContent",
                     "validate": true,
                     "optional": true,
@@ -1228,7 +1228,7 @@
                     "method": "source",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (SourceSetting s)",
+                    "type": "TF.Attr s (FileSourceSetting s)",
                     "class": "HasSource",
                     "validate": true,
                     "optional": true,
@@ -1254,10 +1254,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/file.html",
             "dependencies": [
-                "ContentSetting",
-                "SourceSetting"
+                "FileContentSetting",
+                "FileSourceSetting"
             ],
-            "key": "ignition_file",
+            "key": "file",
             "name": "FileData",
             "threaded": true,
             "attributes": [
@@ -1336,7 +1336,7 @@
                     "method": "mount",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (MountSetting s)",
+                    "type": "TF.Attr s (FilesystemMountSetting s)",
                     "class": "HasMount",
                     "validate": true,
                     "optional": true,
@@ -1379,9 +1379,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/filesystem.html",
             "dependencies": [
-                "MountSetting"
+                "FilesystemMountSetting"
             ],
-            "key": "ignition_filesystem",
+            "key": "filesystem",
             "name": "FilesystemData",
             "threaded": true,
             "attributes": [
@@ -1468,7 +1468,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/group.html",
             "dependencies": [],
-            "key": "ignition_group",
+            "key": "group",
             "name": "GroupData",
             "threaded": true,
             "attributes": [
@@ -1624,7 +1624,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/link.html",
             "dependencies": [],
-            "key": "ignition_link",
+            "key": "link",
             "name": "LinkData",
             "threaded": true,
             "attributes": [
@@ -1746,7 +1746,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/networkd_unit.html",
             "dependencies": [],
-            "key": "ignition_networkd_unit",
+            "key": "networkd_unit",
             "name": "NetworkdUnitData",
             "threaded": true,
             "attributes": [
@@ -1868,7 +1868,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/raid.html",
             "dependencies": [],
-            "key": "ignition_raid",
+            "key": "raid",
             "name": "RaidData",
             "threaded": true,
             "attributes": [
@@ -1964,7 +1964,7 @@
                     "method": "dropin",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (DropinSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (SystemdUnitDropinSetting s)]",
                     "class": "HasDropin",
                     "validate": false,
                     "optional": true,
@@ -2024,9 +2024,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/systemd_unit.html",
             "dependencies": [
-                "DropinSetting"
+                "SystemdUnitDropinSetting"
             ],
-            "key": "ignition_systemd_unit",
+            "key": "systemd_unit",
             "name": "SystemdUnitData",
             "threaded": true,
             "attributes": [
@@ -2301,7 +2301,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ignition/d/user.html",
             "dependencies": [],
-            "key": "ignition_user",
+            "key": "user",
             "name": "UserData",
             "threaded": true,
             "attributes": [
@@ -2355,7 +2355,7 @@
         },
         "arguments": [],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

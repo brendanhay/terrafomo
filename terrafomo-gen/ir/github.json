@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newRequiredPullRequestReviewsSetting",
-                "name": "RequiredPullRequestReviewsSetting'"
+                "smart": "newBranchProtectionRequiredPullRequestReviewsSetting",
+                "name": "BranchProtectionRequiredPullRequestReviewsSetting'"
             },
             "arguments": [
                 {
@@ -76,19 +76,19 @@
                 }
             ],
             "dependencies": [],
-            "key": "github_branch_protection.required_pull_request_reviews",
-            "name": "RequiredPullRequestReviewsSetting",
+            "key": "branch_protection.required_pull_request_reviews",
+            "name": "BranchProtectionRequiredPullRequestReviewsSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "RequiredPullRequestReviewsSetting s",
+            "type": "BranchProtectionRequiredPullRequestReviewsSetting s",
             "original": "required_pull_request_reviews"
         },
         {
             "con": {
-                "smart": "newRequiredStatusChecksSetting",
-                "name": "RequiredStatusChecksSetting'"
+                "smart": "newBranchProtectionRequiredStatusChecksSetting",
+                "name": "BranchProtectionRequiredStatusChecksSetting'"
             },
             "arguments": [
                 {
@@ -127,19 +127,19 @@
                 }
             ],
             "dependencies": [],
-            "key": "github_branch_protection.required_status_checks",
-            "name": "RequiredStatusChecksSetting",
+            "key": "branch_protection.required_status_checks",
+            "name": "BranchProtectionRequiredStatusChecksSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "RequiredStatusChecksSetting s",
+            "type": "BranchProtectionRequiredStatusChecksSetting s",
             "original": "required_status_checks"
         },
         {
             "con": {
-                "smart": "newRestrictionsSetting",
-                "name": "RestrictionsSetting'"
+                "smart": "newBranchProtectionRestrictionsSetting",
+                "name": "BranchProtectionRestrictionsSetting'"
             },
             "arguments": [
                 {
@@ -178,13 +178,13 @@
                 }
             ],
             "dependencies": [],
-            "key": "github_branch_protection.restrictions",
-            "name": "RestrictionsSetting",
+            "key": "branch_protection.restrictions",
+            "name": "BranchProtectionRestrictionsSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "RestrictionsSetting s",
+            "type": "BranchProtectionRestrictionsSetting s",
             "original": "restrictions"
         }
     ],
@@ -198,7 +198,7 @@
             "arguments": [],
             "url": "https://www.terraform.io/docs/providers/github/d/ip_ranges.html",
             "dependencies": [],
-            "key": "github_ip_ranges",
+            "key": "ip_ranges",
             "name": "IpRangesData",
             "threaded": true,
             "attributes": [
@@ -348,7 +348,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/github/d/repository.html",
             "dependencies": [],
-            "key": "github_repository",
+            "key": "repository",
             "name": "RepositoryData",
             "threaded": true,
             "attributes": [
@@ -754,7 +754,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/github/d/team.html",
             "dependencies": [],
-            "key": "github_team",
+            "key": "team",
             "name": "TeamData",
             "threaded": true,
             "attributes": [
@@ -910,7 +910,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/github/d/user.html",
             "dependencies": [],
-            "key": "github_user",
+            "key": "user",
             "name": "UserData",
             "threaded": true,
             "attributes": [
@@ -1331,7 +1331,7 @@
                     "method": "requiredPullRequestReviews",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (RequiredPullRequestReviewsSetting s)",
+                    "type": "TF.Attr s (BranchProtectionRequiredPullRequestReviewsSetting s)",
                     "class": "HasRequiredPullRequestReviews",
                     "validate": true,
                     "optional": true,
@@ -1348,7 +1348,7 @@
                     "method": "requiredStatusChecks",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (RequiredStatusChecksSetting s)",
+                    "type": "TF.Attr s (BranchProtectionRequiredStatusChecksSetting s)",
                     "class": "HasRequiredStatusChecks",
                     "validate": true,
                     "optional": true,
@@ -1365,7 +1365,7 @@
                     "method": "restrictions",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (RestrictionsSetting s)",
+                    "type": "TF.Attr s (BranchProtectionRestrictionsSetting s)",
                     "class": "HasRestrictions",
                     "validate": true,
                     "optional": true,
@@ -1374,11 +1374,11 @@
             ],
             "url": "https://www.terraform.io/docs/providers/github/r/branch_protection.html",
             "dependencies": [
-                "RequiredPullRequestReviewsSetting",
-                "RequiredStatusChecksSetting",
-                "RestrictionsSetting"
+                "BranchProtectionRequiredPullRequestReviewsSetting",
+                "BranchProtectionRequiredStatusChecksSetting",
+                "BranchProtectionRestrictionsSetting"
             ],
-            "key": "github_branch_protection",
+            "key": "branch_protection",
             "name": "BranchProtectionResource",
             "threaded": true,
             "attributes": [
@@ -1517,7 +1517,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/github/r/issue_label.html",
             "dependencies": [],
-            "key": "github_issue_label",
+            "key": "issue_label",
             "name": "IssueLabelResource",
             "threaded": true,
             "attributes": [
@@ -1656,7 +1656,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/github/r/membership.html",
             "dependencies": [],
-            "key": "github_membership",
+            "key": "membership",
             "name": "MembershipResource",
             "threaded": true,
             "attributes": [
@@ -1744,7 +1744,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/github/r/organization_project.html",
             "dependencies": [],
-            "key": "github_organization_project",
+            "key": "organization_project",
             "name": "OrganizationProjectResource",
             "threaded": true,
             "attributes": [
@@ -1883,7 +1883,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/github/r/organization_webhook.html",
             "dependencies": [],
-            "key": "github_organization_webhook",
+            "key": "organization_webhook",
             "name": "OrganizationWebhookResource",
             "threaded": true,
             "attributes": [
@@ -2263,7 +2263,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/github/r/repository.html",
             "dependencies": [],
-            "key": "github_repository",
+            "key": "repository",
             "name": "RepositoryResource",
             "threaded": true,
             "attributes": [
@@ -2490,7 +2490,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/github/r/repository_collaborator.html",
             "dependencies": [],
-            "key": "github_repository_collaborator",
+            "key": "repository_collaborator",
             "name": "RepositoryCollaboratorResource",
             "threaded": true,
             "attributes": [
@@ -2629,7 +2629,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/github/r/repository_deploy_key.html",
             "dependencies": [],
-            "key": "github_repository_deploy_key",
+            "key": "repository_deploy_key",
             "name": "RepositoryDeployKeyResource",
             "threaded": true,
             "attributes": [
@@ -2768,7 +2768,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/github/r/repository_project.html",
             "dependencies": [],
-            "key": "github_repository_project",
+            "key": "repository_project",
             "name": "RepositoryProjectResource",
             "threaded": true,
             "attributes": [
@@ -2941,7 +2941,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/github/r/repository_webhook.html",
             "dependencies": [],
-            "key": "github_repository_webhook",
+            "key": "repository_webhook",
             "name": "RepositoryWebhookResource",
             "threaded": true,
             "attributes": [
@@ -3131,7 +3131,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/github/r/team.html",
             "dependencies": [],
-            "key": "github_team",
+            "key": "team",
             "name": "TeamResource",
             "threaded": true,
             "attributes": [
@@ -3236,7 +3236,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/github/r/team_membership.html",
             "dependencies": [],
-            "key": "github_team_membership",
+            "key": "team_membership",
             "name": "TeamMembershipResource",
             "threaded": true,
             "attributes": [
@@ -3358,7 +3358,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/github/r/team_repository.html",
             "dependencies": [],
-            "key": "github_team_repository",
+            "key": "team_repository",
             "name": "TeamRepositoryResource",
             "threaded": true,
             "attributes": [
@@ -3446,7 +3446,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/github/r/user_gpg_key.html",
             "dependencies": [],
-            "key": "github_user_gpg_key",
+            "key": "user_gpg_key",
             "name": "UserGpgKeyResource",
             "threaded": true,
             "attributes": [
@@ -3551,7 +3551,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/github/r/user_ssh_key.html",
             "dependencies": [],
-            "key": "github_user_ssh_key",
+            "key": "user_ssh_key",
             "name": "UserSshKeyResource",
             "threaded": true,
             "attributes": [
@@ -3715,7 +3715,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

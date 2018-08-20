@@ -2,14 +2,14 @@
     "settings": [
         {
             "con": {
-                "smart": "newActionSetting",
-                "name": "ActionSetting'"
+                "smart": "newCloudNetworkPrivateRegionsStatusSetting",
+                "name": "CloudNetworkPrivateRegionsStatusSetting'"
             },
             "arguments": [
                 {
-                    "default": "TF.Nil",
+                    "default": "_status",
                     "computed": false,
-                    "required": false,
+                    "required": true,
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"status\" <$> TF.attribute",
@@ -17,84 +17,68 @@
                     "method": "status",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s P.Int",
+                    "type": "TF.Attr s P.Text",
                     "class": "HasStatus",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "status"
-                },
+                }
+            ],
+            "dependencies": [],
+            "key": "cloud_network_private.regions_status",
+            "name": "CloudNetworkPrivateRegionsStatusSetting",
+            "threaded": true,
+            "attributes": [
                 {
                     "default": "TF.Nil",
-                    "computed": false,
+                    "computed": true,
                     "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"target\" <$> TF.attribute",
-                    "name": "_target",
-                    "method": "target",
+                    "encoder": "TF.assign \"region\" <$> TF.attribute",
+                    "name": "_computedRegion",
+                    "method": "computedRegion",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasTarget",
-                    "validate": false,
-                    "optional": true,
-                    "original": "target"
-                },
-                {
-                    "default": "_type'",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
+                    "class": "HasComputedRegion",
                     "validate": false,
                     "optional": false,
-                    "original": "type"
+                    "original": "region"
                 }
             ],
-            "dependencies": [],
-            "key": "ovh_iploadbalancing_http_route.action",
-            "name": "ActionSetting",
-            "threaded": true,
-            "attributes": [],
             "parameters": [
                 {
-                    "default": "_type'",
+                    "default": "_status",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
+                    "encoder": "TF.assign \"status\" <$> TF.attribute",
+                    "name": "_status",
+                    "method": "status",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
+                    "class": "HasStatus",
                     "validate": false,
                     "optional": false,
-                    "original": "type"
+                    "original": "status"
                 }
             ],
             "conflicts": [],
-            "type": "ActionSetting s",
-            "original": "action"
+            "type": "CloudNetworkPrivateRegionsStatusSetting s",
+            "original": "regions_status"
         },
         {
             "con": {
-                "smart": "newIpPoolsSetting",
-                "name": "IpPoolsSetting'"
+                "smart": "newCloudNetworkPrivateSubnetIpPoolsSetting",
+                "name": "CloudNetworkPrivateSubnetIpPoolsSetting'"
             },
             "arguments": [],
             "dependencies": [],
-            "key": "ovh_cloud_network_private_subnet.ip_pools",
-            "name": "IpPoolsSetting",
+            "key": "cloud_network_private_subnet.ip_pools",
+            "name": "CloudNetworkPrivateSubnetIpPoolsSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -185,18 +169,155 @@
             ],
             "parameters": [],
             "conflicts": [],
-            "type": "IpPoolsSetting s",
+            "type": "CloudNetworkPrivateSubnetIpPoolsSetting s",
             "original": "ip_pools"
         },
         {
             "con": {
-                "smart": "newOrderableZoneSetting",
-                "name": "OrderableZoneSetting'"
+                "smart": "newCloudRegionServicesSetting",
+                "name": "CloudRegionServicesSetting'"
             },
             "arguments": [],
             "dependencies": [],
-            "key": "ovh_iploadbalancing.orderable_zone",
-            "name": "OrderableZoneSetting",
+            "key": "cloud_region.services",
+            "name": "CloudRegionServicesSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_computedName",
+                    "method": "computedName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"status\" <$> TF.attribute",
+                    "name": "_computedStatus",
+                    "method": "computedStatus",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedStatus",
+                    "validate": false,
+                    "optional": false,
+                    "original": "status"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "CloudRegionServicesSetting s",
+            "original": "services"
+        },
+        {
+            "con": {
+                "smart": "newIploadbalancingHttpRouteActionSetting",
+                "name": "IploadbalancingHttpRouteActionSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"status\" <$> TF.attribute",
+                    "name": "_status",
+                    "method": "status",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasStatus",
+                    "validate": false,
+                    "optional": true,
+                    "original": "status"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"target\" <$> TF.attribute",
+                    "name": "_target",
+                    "method": "target",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTarget",
+                    "validate": false,
+                    "optional": true,
+                    "original": "target"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "dependencies": [],
+            "key": "iploadbalancing_http_route.action",
+            "name": "IploadbalancingHttpRouteActionSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "conflicts": [],
+            "type": "IploadbalancingHttpRouteActionSetting s",
+            "original": "action"
+        },
+        {
+            "con": {
+                "smart": "newIploadbalancingOrderableZoneSetting",
+                "name": "IploadbalancingOrderableZoneSetting'"
+            },
+            "arguments": [],
+            "dependencies": [],
+            "key": "iploadbalancing.orderable_zone",
+            "name": "IploadbalancingOrderableZoneSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -236,13 +357,13 @@
             ],
             "parameters": [],
             "conflicts": [],
-            "type": "OrderableZoneSetting s",
+            "type": "IploadbalancingOrderableZoneSetting s",
             "original": "orderable_zone"
         },
         {
             "con": {
-                "smart": "newProbeSetting",
-                "name": "ProbeSetting'"
+                "smart": "newIploadbalancingTcpFarmProbeSetting",
+                "name": "IploadbalancingTcpFarmProbeSetting'"
             },
             "arguments": [
                 {
@@ -400,8 +521,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "ovh_iploadbalancing_tcp_farm.probe",
-            "name": "ProbeSetting",
+            "key": "iploadbalancing_tcp_farm.probe",
+            "name": "IploadbalancingTcpFarmProbeSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -424,13 +545,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "ProbeSetting s",
+            "type": "IploadbalancingTcpFarmProbeSetting s",
             "original": "probe"
         },
         {
             "con": {
-                "smart": "newRegionsStatusSetting",
-                "name": "RegionsStatusSetting'"
+                "smart": "newPubliccloudPrivateNetworkRegionsStatusSetting",
+                "name": "PubliccloudPrivateNetworkRegionsStatusSetting'"
             },
             "arguments": [
                 {
@@ -452,8 +573,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "ovh_cloud_network_private.regions_status",
-            "name": "RegionsStatusSetting",
+            "key": "publiccloud_private_network.regions_status",
+            "name": "PubliccloudPrivateNetworkRegionsStatusSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -494,18 +615,120 @@
                 }
             ],
             "conflicts": [],
-            "type": "RegionsStatusSetting s",
+            "type": "PubliccloudPrivateNetworkRegionsStatusSetting s",
             "original": "regions_status"
         },
         {
             "con": {
-                "smart": "newServicesSetting",
-                "name": "ServicesSetting'"
+                "smart": "newPubliccloudPrivateNetworkSubnetIpPoolsSetting",
+                "name": "PubliccloudPrivateNetworkSubnetIpPoolsSetting'"
             },
             "arguments": [],
             "dependencies": [],
-            "key": "ovh_cloud_region.services",
-            "name": "ServicesSetting",
+            "key": "publiccloud_private_network_subnet.ip_pools",
+            "name": "PubliccloudPrivateNetworkSubnetIpPoolsSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"dhcp\" <$> TF.attribute",
+                    "name": "_computedDhcp",
+                    "method": "computedDhcp",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedDhcp",
+                    "validate": false,
+                    "optional": false,
+                    "original": "dhcp"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"end\" <$> TF.attribute",
+                    "name": "_computedEnd",
+                    "method": "computedEnd",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedEnd",
+                    "validate": false,
+                    "optional": false,
+                    "original": "end"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"network\" <$> TF.attribute",
+                    "name": "_computedNetwork",
+                    "method": "computedNetwork",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedNetwork",
+                    "validate": false,
+                    "optional": false,
+                    "original": "network"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"region\" <$> TF.attribute",
+                    "name": "_computedRegion",
+                    "method": "computedRegion",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedRegion",
+                    "validate": false,
+                    "optional": false,
+                    "original": "region"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"start\" <$> TF.attribute",
+                    "name": "_computedStart",
+                    "method": "computedStart",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedStart",
+                    "validate": false,
+                    "optional": false,
+                    "original": "start"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "PubliccloudPrivateNetworkSubnetIpPoolsSetting s",
+            "original": "ip_pools"
+        },
+        {
+            "con": {
+                "smart": "newPubliccloudRegionServicesSetting",
+                "name": "PubliccloudRegionServicesSetting'"
+            },
+            "arguments": [],
+            "dependencies": [],
+            "key": "publiccloud_region.services",
+            "name": "PubliccloudRegionServicesSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -545,7 +768,7 @@
             ],
             "parameters": [],
             "conflicts": [],
-            "type": "ServicesSetting s",
+            "type": "PubliccloudRegionServicesSetting s",
             "original": "services"
         }
     ],
@@ -594,9 +817,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/d/cloud_region.html",
             "dependencies": [
-                "ServicesSetting"
+                "CloudRegionServicesSetting"
             ],
-            "key": "ovh_cloud_region",
+            "key": "cloud_region",
             "name": "CloudRegionData",
             "threaded": true,
             "attributes": [
@@ -662,7 +885,7 @@
                     "method": "computedServices",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ServicesSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (CloudRegionServicesSetting s)]",
                     "class": "HasComputedServices",
                     "validate": false,
                     "optional": false,
@@ -735,7 +958,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/d/cloud_regions.html",
             "dependencies": [],
-            "key": "ovh_cloud_regions",
+            "key": "cloud_regions",
             "name": "CloudRegionsData",
             "threaded": true,
             "attributes": [
@@ -823,7 +1046,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/d/domain_zone.html",
             "dependencies": [],
-            "key": "ovh_domain_zone",
+            "key": "domain_zone",
             "name": "DomainZoneData",
             "threaded": true,
             "attributes": [
@@ -1132,9 +1355,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/d/iploadbalancing.html",
             "dependencies": [
-                "OrderableZoneSetting"
+                "IploadbalancingOrderableZoneSetting"
             ],
-            "key": "ovh_iploadbalancing",
+            "key": "iploadbalancing",
             "name": "IploadbalancingData",
             "threaded": true,
             "attributes": [
@@ -1268,7 +1491,7 @@
                     "method": "computedOrderableZone",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (OrderableZoneSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (IploadbalancingOrderableZoneSetting s)]",
                     "class": "HasComputedOrderableZone",
                     "validate": false,
                     "optional": false,
@@ -1459,7 +1682,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/d/me_paymentmean_bankaccount.html",
             "dependencies": [],
-            "key": "ovh_me_paymentmean_bankaccount",
+            "key": "me_paymentmean_bankaccount",
             "name": "MePaymentmeanBankaccountData",
             "threaded": true,
             "attributes": [
@@ -1614,7 +1837,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/d/me_paymentmean_creditcard.html",
             "dependencies": [],
-            "key": "ovh_me_paymentmean_creditcard",
+            "key": "me_paymentmean_creditcard",
             "name": "MePaymentmeanCreditcardData",
             "threaded": true,
             "attributes": [
@@ -1735,9 +1958,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/d/publiccloud_region.html",
             "dependencies": [
-                "ServicesSetting"
+                "PubliccloudRegionServicesSetting"
             ],
-            "key": "ovh_publiccloud_region",
+            "key": "publiccloud_region",
             "name": "PubliccloudRegionData",
             "threaded": true,
             "attributes": [
@@ -1803,7 +2026,7 @@
                     "method": "computedServices",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ServicesSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (PubliccloudRegionServicesSetting s)]",
                     "class": "HasComputedServices",
                     "validate": false,
                     "optional": false,
@@ -1876,7 +2099,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/d/publiccloud_regions.html",
             "dependencies": [],
-            "key": "ovh_publiccloud_regions",
+            "key": "publiccloud_regions",
             "name": "PubliccloudRegionsData",
             "threaded": true,
             "attributes": [
@@ -2017,9 +2240,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/cloud_network_private.html",
             "dependencies": [
-                "RegionsStatusSetting"
+                "CloudNetworkPrivateRegionsStatusSetting"
             ],
-            "key": "ovh_cloud_network_private",
+            "key": "cloud_network_private",
             "name": "CloudNetworkPrivateResource",
             "threaded": true,
             "attributes": [
@@ -2068,7 +2291,7 @@
                     "method": "computedRegionsStatus",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RegionsStatusSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (CloudNetworkPrivateRegionsStatusSetting s)]",
                     "class": "HasComputedRegionsStatus",
                     "validate": false,
                     "optional": false,
@@ -2294,9 +2517,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/cloud_network_private_subnet.html",
             "dependencies": [
-                "IpPoolsSetting"
+                "CloudNetworkPrivateSubnetIpPoolsSetting"
             ],
-            "key": "ovh_cloud_network_private_subnet",
+            "key": "cloud_network_private_subnet",
             "name": "CloudNetworkPrivateSubnetResource",
             "threaded": true,
             "attributes": [
@@ -2362,7 +2585,7 @@
                     "method": "computedIpPools",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (IpPoolsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (CloudNetworkPrivateSubnetIpPoolsSetting s)]",
                     "class": "HasComputedIpPools",
                     "validate": false,
                     "optional": false,
@@ -2537,7 +2760,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/cloud_user.html",
             "dependencies": [],
-            "key": "ovh_cloud_user",
+            "key": "cloud_user",
             "name": "CloudUserResource",
             "threaded": true,
             "attributes": [
@@ -2761,7 +2984,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/domain_zone_record.html",
             "dependencies": [],
-            "key": "ovh_domain_zone_record",
+            "key": "domain_zone_record",
             "name": "DomainZoneRecordResource",
             "threaded": true,
             "attributes": [
@@ -2968,7 +3191,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/domain_zone_redirection.html",
             "dependencies": [],
-            "key": "ovh_domain_zone_redirection",
+            "key": "domain_zone_redirection",
             "name": "DomainZoneRedirectionResource",
             "threaded": true,
             "attributes": [
@@ -3064,7 +3287,7 @@
                     "method": "action",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ActionSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (IploadbalancingHttpRouteActionSetting s)]",
                     "class": "HasAction",
                     "validate": false,
                     "optional": false,
@@ -3141,9 +3364,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/iploadbalancing_http_route.html",
             "dependencies": [
-                "ActionSetting"
+                "IploadbalancingHttpRouteActionSetting"
             ],
-            "key": "ovh_iploadbalancing_http_route",
+            "key": "iploadbalancing_http_route",
             "name": "IploadbalancingHttpRouteResource",
             "threaded": true,
             "attributes": [
@@ -3194,7 +3417,7 @@
                     "method": "action",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ActionSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (IploadbalancingHttpRouteActionSetting s)]",
                     "class": "HasAction",
                     "validate": false,
                     "optional": false,
@@ -3367,7 +3590,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/iploadbalancing_http_route_rule.html",
             "dependencies": [],
-            "key": "ovh_iploadbalancing_http_route_rule",
+            "key": "iploadbalancing_http_route_rule",
             "name": "IploadbalancingHttpRouteRuleResource",
             "threaded": true,
             "attributes": [
@@ -3531,7 +3754,7 @@
                     "method": "probe",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ProbeSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (IploadbalancingTcpFarmProbeSetting s)]",
                     "class": "HasProbe",
                     "validate": false,
                     "optional": true,
@@ -3608,9 +3831,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/iploadbalancing_tcp_farm.html",
             "dependencies": [
-                "ProbeSetting"
+                "IploadbalancingTcpFarmProbeSetting"
             ],
-            "key": "ovh_iploadbalancing_tcp_farm",
+            "key": "iploadbalancing_tcp_farm",
             "name": "IploadbalancingTcpFarmResource",
             "threaded": true,
             "attributes": [
@@ -3885,7 +4108,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/iploadbalancing_tcp_farm_server.html",
             "dependencies": [],
-            "key": "ovh_iploadbalancing_tcp_farm_server",
+            "key": "iploadbalancing_tcp_farm_server",
             "name": "IploadbalancingTcpFarmServerResource",
             "threaded": true,
             "attributes": [
@@ -4075,9 +4298,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/publiccloud_private_network.html",
             "dependencies": [
-                "RegionsStatusSetting"
+                "PubliccloudPrivateNetworkRegionsStatusSetting"
             ],
-            "key": "ovh_publiccloud_private_network",
+            "key": "publiccloud_private_network",
             "name": "PubliccloudPrivateNetworkResource",
             "threaded": true,
             "attributes": [
@@ -4126,7 +4349,7 @@
                     "method": "computedRegionsStatus",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RegionsStatusSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (PubliccloudPrivateNetworkRegionsStatusSetting s)]",
                     "class": "HasComputedRegionsStatus",
                     "validate": false,
                     "optional": false,
@@ -4352,9 +4575,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/publiccloud_private_network_subnet.html",
             "dependencies": [
-                "IpPoolsSetting"
+                "PubliccloudPrivateNetworkSubnetIpPoolsSetting"
             ],
-            "key": "ovh_publiccloud_private_network_subnet",
+            "key": "publiccloud_private_network_subnet",
             "name": "PubliccloudPrivateNetworkSubnetResource",
             "threaded": true,
             "attributes": [
@@ -4420,7 +4643,7 @@
                     "method": "computedIpPools",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (IpPoolsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (PubliccloudPrivateNetworkSubnetIpPoolsSetting s)]",
                     "class": "HasComputedIpPools",
                     "validate": false,
                     "optional": false,
@@ -4595,7 +4818,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/publiccloud_user.html",
             "dependencies": [],
-            "key": "ovh_publiccloud_user",
+            "key": "publiccloud_user",
             "name": "PubliccloudUserResource",
             "threaded": true,
             "attributes": [
@@ -4768,7 +4991,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/vrack_cloudproject.html",
             "dependencies": [],
-            "key": "ovh_vrack_cloudproject",
+            "key": "vrack_cloudproject",
             "name": "VrackCloudprojectResource",
             "threaded": true,
             "attributes": [
@@ -4873,7 +5096,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ovh/r/vrack_publiccloud_attachment.html",
             "dependencies": [],
-            "key": "ovh_vrack_publiccloud_attachment",
+            "key": "vrack_publiccloud_attachment",
             "name": "VrackPubliccloudAttachmentResource",
             "threaded": true,
             "attributes": [
@@ -5020,7 +5243,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

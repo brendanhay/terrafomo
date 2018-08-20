@@ -2,128 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newDhcpPoolSetting",
-                "name": "DhcpPoolSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.value 3600",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"default_lease_time\" <$> TF.attribute",
-                    "name": "_defaultLeaseTime",
-                    "method": "defaultLeaseTime",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasDefaultLeaseTime",
-                    "validate": false,
-                    "optional": true,
-                    "original": "default_lease_time"
-                },
-                {
-                    "default": "_endAddress",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"end_address\" <$> TF.attribute",
-                    "name": "_endAddress",
-                    "method": "endAddress",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasEndAddress",
-                    "validate": false,
-                    "optional": false,
-                    "original": "end_address"
-                },
-                {
-                    "default": "TF.value 7200",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"max_lease_time\" <$> TF.attribute",
-                    "name": "_maxLeaseTime",
-                    "method": "maxLeaseTime",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasMaxLeaseTime",
-                    "validate": false,
-                    "optional": true,
-                    "original": "max_lease_time"
-                },
-                {
-                    "default": "_startAddress",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"start_address\" <$> TF.attribute",
-                    "name": "_startAddress",
-                    "method": "startAddress",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasStartAddress",
-                    "validate": false,
-                    "optional": false,
-                    "original": "start_address"
-                }
-            ],
-            "dependencies": [],
-            "key": "vcd_network.dhcp_pool",
-            "name": "DhcpPoolSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_endAddress",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"end_address\" <$> TF.attribute",
-                    "name": "_endAddress",
-                    "method": "endAddress",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasEndAddress",
-                    "validate": false,
-                    "optional": false,
-                    "original": "end_address"
-                },
-                {
-                    "default": "_startAddress",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"start_address\" <$> TF.attribute",
-                    "name": "_startAddress",
-                    "method": "startAddress",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasStartAddress",
-                    "validate": false,
-                    "optional": false,
-                    "original": "start_address"
-                }
-            ],
-            "conflicts": [],
-            "type": "DhcpPoolSetting s",
-            "original": "dhcp_pool"
-        },
-        {
-            "con": {
-                "smart": "newLocalSubnetsSetting",
-                "name": "LocalSubnetsSetting'"
+                "smart": "newEdgegatewayVpnLocalSubnetsSetting",
+                "name": "EdgegatewayVpnLocalSubnetsSetting'"
             },
             "arguments": [
                 {
@@ -179,8 +59,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "vcd_edgegateway_vpn.local_subnets",
-            "name": "LocalSubnetsSetting",
+            "key": "edgegateway_vpn.local_subnets",
+            "name": "EdgegatewayVpnLocalSubnetsSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -237,13 +117,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "LocalSubnetsSetting s",
+            "type": "EdgegatewayVpnLocalSubnetsSetting s",
             "original": "local_subnets"
         },
         {
             "con": {
-                "smart": "newPeerSubnetsSetting",
-                "name": "PeerSubnetsSetting'"
+                "smart": "newEdgegatewayVpnPeerSubnetsSetting",
+                "name": "EdgegatewayVpnPeerSubnetsSetting'"
             },
             "arguments": [
                 {
@@ -299,8 +179,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "vcd_edgegateway_vpn.peer_subnets",
-            "name": "PeerSubnetsSetting",
+            "key": "edgegateway_vpn.peer_subnets",
+            "name": "EdgegatewayVpnPeerSubnetsSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -357,13 +237,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "PeerSubnetsSetting s",
+            "type": "EdgegatewayVpnPeerSubnetsSetting s",
             "original": "peer_subnets"
         },
         {
             "con": {
-                "smart": "newRuleSetting",
-                "name": "RuleSetting'"
+                "smart": "newFirewallRulesRuleSetting",
+                "name": "FirewallRulesRuleSetting'"
             },
             "arguments": [
                 {
@@ -504,8 +384,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "vcd_firewall_rules.rule",
-            "name": "RuleSetting",
+            "key": "firewall_rules.rule",
+            "name": "FirewallRulesRuleSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -648,15 +528,32 @@
                 }
             ],
             "conflicts": [],
-            "type": "RuleSetting s",
+            "type": "FirewallRulesRuleSetting s",
             "original": "rule"
         },
         {
             "con": {
-                "smart": "newStaticIpPoolSetting",
-                "name": "StaticIpPoolSetting'"
+                "smart": "newNetworkDhcpPoolSetting",
+                "name": "NetworkDhcpPoolSetting'"
             },
             "arguments": [
+                {
+                    "default": "TF.value 3600",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"default_lease_time\" <$> TF.attribute",
+                    "name": "_defaultLeaseTime",
+                    "method": "defaultLeaseTime",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasDefaultLeaseTime",
+                    "validate": false,
+                    "optional": true,
+                    "original": "default_lease_time"
+                },
                 {
                     "default": "_endAddress",
                     "computed": false,
@@ -673,6 +570,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "end_address"
+                },
+                {
+                    "default": "TF.value 7200",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_lease_time\" <$> TF.attribute",
+                    "name": "_maxLeaseTime",
+                    "method": "maxLeaseTime",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMaxLeaseTime",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_lease_time"
                 },
                 {
                     "default": "_startAddress",
@@ -693,8 +607,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "vcd_network.static_ip_pool",
-            "name": "StaticIpPoolSetting",
+            "key": "network.dhcp_pool",
+            "name": "NetworkDhcpPoolSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -734,7 +648,93 @@
                 }
             ],
             "conflicts": [],
-            "type": "StaticIpPoolSetting s",
+            "type": "NetworkDhcpPoolSetting s",
+            "original": "dhcp_pool"
+        },
+        {
+            "con": {
+                "smart": "newNetworkStaticIpPoolSetting",
+                "name": "NetworkStaticIpPoolSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_endAddress",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"end_address\" <$> TF.attribute",
+                    "name": "_endAddress",
+                    "method": "endAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEndAddress",
+                    "validate": false,
+                    "optional": false,
+                    "original": "end_address"
+                },
+                {
+                    "default": "_startAddress",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"start_address\" <$> TF.attribute",
+                    "name": "_startAddress",
+                    "method": "startAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasStartAddress",
+                    "validate": false,
+                    "optional": false,
+                    "original": "start_address"
+                }
+            ],
+            "dependencies": [],
+            "key": "network.static_ip_pool",
+            "name": "NetworkStaticIpPoolSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_endAddress",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"end_address\" <$> TF.attribute",
+                    "name": "_endAddress",
+                    "method": "endAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEndAddress",
+                    "validate": false,
+                    "optional": false,
+                    "original": "end_address"
+                },
+                {
+                    "default": "_startAddress",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"start_address\" <$> TF.attribute",
+                    "name": "_startAddress",
+                    "method": "startAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasStartAddress",
+                    "validate": false,
+                    "optional": false,
+                    "original": "start_address"
+                }
+            ],
+            "conflicts": [],
+            "type": "NetworkStaticIpPoolSetting s",
             "original": "static_ip_pool"
         }
     ],
@@ -835,7 +835,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vcd/r/dnat.html",
             "dependencies": [],
-            "key": "vcd_dnat",
+            "key": "dnat",
             "name": "DnatResource",
             "threaded": true,
             "attributes": [
@@ -1033,7 +1033,7 @@
                     "method": "localSubnets",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (LocalSubnetsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (EdgegatewayVpnLocalSubnetsSetting s)]",
                     "class": "HasLocalSubnets",
                     "validate": false,
                     "optional": true,
@@ -1118,7 +1118,7 @@
                     "method": "peerSubnets",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (PeerSubnetsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (EdgegatewayVpnPeerSubnetsSetting s)]",
                     "class": "HasPeerSubnets",
                     "validate": false,
                     "optional": true,
@@ -1144,10 +1144,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vcd/r/edgegateway_vpn.html",
             "dependencies": [
-                "LocalSubnetsSetting",
-                "PeerSubnetsSetting"
+                "EdgegatewayVpnLocalSubnetsSetting",
+                "EdgegatewayVpnPeerSubnetsSetting"
             ],
-            "key": "vcd_edgegateway_vpn",
+            "key": "edgegateway_vpn",
             "name": "EdgegatewayVpnResource",
             "threaded": true,
             "attributes": [
@@ -1379,7 +1379,7 @@
                     "method": "rule",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RuleSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (FirewallRulesRuleSetting s)]",
                     "class": "HasRule",
                     "validate": false,
                     "optional": true,
@@ -1388,9 +1388,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vcd/r/firewall_rules.html",
             "dependencies": [
-                "RuleSetting"
+                "FirewallRulesRuleSetting"
             ],
-            "key": "vcd_firewall_rules",
+            "key": "firewall_rules",
             "name": "FirewallRulesResource",
             "threaded": true,
             "attributes": [
@@ -1469,7 +1469,7 @@
                     "method": "dhcpPool",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (DhcpPoolSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (NetworkDhcpPoolSetting s)]",
                     "class": "HasDhcpPool",
                     "validate": false,
                     "optional": true,
@@ -1656,7 +1656,7 @@
                     "method": "staticIpPool",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (StaticIpPoolSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (NetworkStaticIpPoolSetting s)]",
                     "class": "HasStaticIpPool",
                     "validate": false,
                     "optional": true,
@@ -1665,10 +1665,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vcd/r/network.html",
             "dependencies": [
-                "DhcpPoolSetting",
-                "StaticIpPoolSetting"
+                "NetworkDhcpPoolSetting",
+                "NetworkStaticIpPoolSetting"
             ],
-            "key": "vcd_network",
+            "key": "network",
             "name": "NetworkResource",
             "threaded": true,
             "attributes": [
@@ -1824,7 +1824,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vcd/r/snat.html",
             "dependencies": [],
-            "key": "vcd_snat",
+            "key": "snat",
             "name": "SnatResource",
             "threaded": true,
             "attributes": [
@@ -2150,7 +2150,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vcd/r/vapp.html",
             "dependencies": [],
-            "key": "vcd_vapp",
+            "key": "vapp",
             "name": "VappResource",
             "threaded": true,
             "attributes": [
@@ -2442,7 +2442,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vcd/r/vapp_vm.html",
             "dependencies": [],
-            "key": "vcd_vapp_vm",
+            "key": "vapp_vm",
             "name": "VappVmResource",
             "threaded": true,
             "attributes": [
@@ -2715,7 +2715,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

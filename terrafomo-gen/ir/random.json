@@ -63,7 +63,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/random/r/id.html",
             "dependencies": [],
-            "key": "random_id",
+            "key": "id",
             "name": "IdResource",
             "threaded": true,
             "attributes": [
@@ -253,7 +253,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/random/r/integer.html",
             "dependencies": [],
-            "key": "random_integer",
+            "key": "integer",
             "name": "IntegerResource",
             "threaded": true,
             "attributes": [
@@ -409,7 +409,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/random/r/pet.html",
             "dependencies": [],
-            "key": "random_pet",
+            "key": "pet",
             "name": "PetResource",
             "threaded": true,
             "attributes": [
@@ -513,7 +513,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/random/r/shuffle.html",
             "dependencies": [],
-            "key": "random_shuffle",
+            "key": "shuffle",
             "name": "ShuffleResource",
             "threaded": true,
             "attributes": [
@@ -771,7 +771,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/random/r/string.html",
             "dependencies": [],
-            "key": "random_string",
+            "key": "string",
             "name": "StringResource",
             "threaded": true,
             "attributes": [
@@ -859,7 +859,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/random/r/uuid.html",
             "dependencies": [],
-            "key": "random_uuid",
+            "key": "uuid",
             "name": "UuidResource",
             "threaded": true,
             "attributes": [
@@ -911,7 +911,7 @@
         },
         "arguments": [],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

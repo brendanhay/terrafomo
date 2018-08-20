@@ -30,7 +30,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/local/d/file.html",
             "dependencies": [],
-            "key": "local_file",
+            "key": "file",
             "name": "FileData",
             "threaded": true,
             "attributes": [
@@ -170,7 +170,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/local/r/file.html",
             "dependencies": [],
-            "key": "local_file",
+            "key": "file",
             "name": "FileResource",
             "threaded": true,
             "attributes": [
@@ -272,7 +272,7 @@
         },
         "arguments": [],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

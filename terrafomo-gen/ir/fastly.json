@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newBackendSetting",
-                "name": "BackendSetting'"
+                "smart": "newServiceV1BackendSetting",
+                "name": "ServiceV1BackendSetting'"
             },
             "arguments": [
                 {
@@ -447,8 +447,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "fastly_service_v1.backend",
-            "name": "BackendSetting",
+            "key": "service_v1.backend",
+            "name": "ServiceV1BackendSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -492,13 +492,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "BackendSetting s",
+            "type": "ServiceV1BackendSetting s",
             "original": "backend"
         },
         {
             "con": {
-                "smart": "newBigqueryloggingSetting",
-                "name": "BigqueryloggingSetting'"
+                "smart": "newServiceV1BigqueryloggingSetting",
+                "name": "ServiceV1BigqueryloggingSetting'"
             },
             "arguments": [
                 {
@@ -656,8 +656,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "fastly_service_v1.bigquerylogging",
-            "name": "BigqueryloggingSetting",
+            "key": "service_v1.bigquerylogging",
+            "name": "ServiceV1BigqueryloggingSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -739,13 +739,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "BigqueryloggingSetting s",
+            "type": "ServiceV1BigqueryloggingSetting s",
             "original": "bigquerylogging"
         },
         {
             "con": {
-                "smart": "newCacheSetting",
-                "name": "CacheSetting'"
+                "smart": "newServiceV1CacheSettingSetting",
+                "name": "ServiceV1CacheSettingSetting'"
             },
             "arguments": [
                 {
@@ -845,8 +845,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "fastly_service_v1.cache_setting",
-            "name": "CacheSetting",
+            "key": "service_v1.cache_setting",
+            "name": "ServiceV1CacheSettingSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -871,13 +871,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "CacheSetting s",
+            "type": "ServiceV1CacheSettingSetting s",
             "original": "cache_setting"
         },
         {
             "con": {
-                "smart": "newConditionSetting",
-                "name": "ConditionSetting'"
+                "smart": "newServiceV1ConditionSetting",
+                "name": "ServiceV1ConditionSetting'"
             },
             "arguments": [
                 {
@@ -957,8 +957,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "fastly_service_v1.condition",
-            "name": "ConditionSetting",
+            "key": "service_v1.condition",
+            "name": "ServiceV1ConditionSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1019,13 +1019,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "ConditionSetting s",
+            "type": "ServiceV1ConditionSetting s",
             "original": "condition"
         },
         {
             "con": {
-                "smart": "newDomainSetting",
-                "name": "DomainSetting'"
+                "smart": "newServiceV1DomainSetting",
+                "name": "ServiceV1DomainSetting'"
             },
             "arguments": [
                 {
@@ -1066,8 +1066,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "fastly_service_v1.domain",
-            "name": "DomainSetting",
+            "key": "service_v1.domain",
+            "name": "ServiceV1DomainSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1092,13 +1092,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "DomainSetting s",
+            "type": "ServiceV1DomainSetting s",
             "original": "domain"
         },
         {
             "con": {
-                "smart": "newGcsloggingSetting",
-                "name": "GcsloggingSetting'"
+                "smart": "newServiceV1GcsloggingSetting",
+                "name": "ServiceV1GcsloggingSetting'"
             },
             "arguments": [
                 {
@@ -1313,8 +1313,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "fastly_service_v1.gcslogging",
-            "name": "GcsloggingSetting",
+            "key": "service_v1.gcslogging",
+            "name": "ServiceV1GcsloggingSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1358,13 +1358,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "GcsloggingSetting s",
+            "type": "ServiceV1GcsloggingSetting s",
             "original": "gcslogging"
         },
         {
             "con": {
-                "smart": "newGzipSetting",
-                "name": "GzipSetting'"
+                "smart": "newServiceV1GzipSetting",
+                "name": "ServiceV1GzipSetting'"
             },
             "arguments": [
                 {
@@ -1445,8 +1445,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "fastly_service_v1.gzip",
-            "name": "GzipSetting",
+            "key": "service_v1.gzip",
+            "name": "ServiceV1GzipSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1471,13 +1471,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "GzipSetting s",
+            "type": "ServiceV1GzipSetting s",
             "original": "gzip"
         },
         {
             "con": {
-                "smart": "newHeaderSetting",
-                "name": "HeaderSetting'"
+                "smart": "newServiceV1HeaderSetting",
+                "name": "ServiceV1HeaderSetting'"
             },
             "arguments": [
                 {
@@ -1714,8 +1714,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "fastly_service_v1.header",
-            "name": "HeaderSetting",
+            "key": "service_v1.header",
+            "name": "ServiceV1HeaderSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -1858,13 +1858,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "HeaderSetting s",
+            "type": "ServiceV1HeaderSetting s",
             "original": "header"
         },
         {
             "con": {
-                "smart": "newHealthcheckSetting",
-                "name": "HealthcheckSetting'"
+                "smart": "newServiceV1HealthcheckSetting",
+                "name": "ServiceV1HealthcheckSetting'"
             },
             "arguments": [
                 {
@@ -2078,8 +2078,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "fastly_service_v1.healthcheck",
-            "name": "HealthcheckSetting",
+            "key": "service_v1.healthcheck",
+            "name": "ServiceV1HealthcheckSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -2142,13 +2142,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "HealthcheckSetting s",
+            "type": "ServiceV1HealthcheckSetting s",
             "original": "healthcheck"
         },
         {
             "con": {
-                "smart": "newLogentriesSetting",
-                "name": "LogentriesSetting'"
+                "smart": "newServiceV1LogentriesSetting",
+                "name": "ServiceV1LogentriesSetting'"
             },
             "arguments": [
                 {
@@ -2287,8 +2287,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "fastly_service_v1.logentries",
-            "name": "LogentriesSetting",
+            "key": "service_v1.logentries",
+            "name": "ServiceV1LogentriesSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -2332,13 +2332,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "LogentriesSetting s",
+            "type": "ServiceV1LogentriesSetting s",
             "original": "logentries"
         },
         {
             "con": {
-                "smart": "newPapertrailSetting",
-                "name": "PapertrailSetting'"
+                "smart": "newServiceV1PapertrailSetting",
+                "name": "ServiceV1PapertrailSetting'"
             },
             "arguments": [
                 {
@@ -2438,8 +2438,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "fastly_service_v1.papertrail",
-            "name": "PapertrailSetting",
+            "key": "service_v1.papertrail",
+            "name": "ServiceV1PapertrailSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -2502,13 +2502,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "PapertrailSetting s",
+            "type": "ServiceV1PapertrailSetting s",
             "original": "papertrail"
         },
         {
             "con": {
-                "smart": "newRequestSetting",
-                "name": "RequestSetting'"
+                "smart": "newServiceV1RequestSettingSetting",
+                "name": "ServiceV1RequestSettingSetting'"
             },
             "arguments": [
                 {
@@ -2743,8 +2743,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "fastly_service_v1.request_setting",
-            "name": "RequestSetting",
+            "key": "service_v1.request_setting",
+            "name": "ServiceV1RequestSettingSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -2769,13 +2769,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "RequestSetting s",
+            "type": "ServiceV1RequestSettingSetting s",
             "original": "request_setting"
         },
         {
             "con": {
-                "smart": "newResponseObjectSetting",
-                "name": "ResponseObjectSetting'"
+                "smart": "newServiceV1ResponseObjectSetting",
+                "name": "ServiceV1ResponseObjectSetting'"
             },
             "arguments": [
                 {
@@ -2915,8 +2915,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "fastly_service_v1.response_object",
-            "name": "ResponseObjectSetting",
+            "key": "service_v1.response_object",
+            "name": "ServiceV1ResponseObjectSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -2941,13 +2941,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "ResponseObjectSetting s",
+            "type": "ServiceV1ResponseObjectSetting s",
             "original": "response_object"
         },
         {
             "con": {
-                "smart": "newS3loggingSetting",
-                "name": "S3loggingSetting'"
+                "smart": "newServiceV1S3loggingSetting",
+                "name": "ServiceV1S3loggingSetting'"
             },
             "arguments": [
                 {
@@ -3219,8 +3219,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "fastly_service_v1.s3logging",
-            "name": "S3loggingSetting",
+            "key": "service_v1.s3logging",
+            "name": "ServiceV1S3loggingSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -3264,13 +3264,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "S3loggingSetting s",
+            "type": "ServiceV1S3loggingSetting s",
             "original": "s3logging"
         },
         {
             "con": {
-                "smart": "newSumologicSetting",
-                "name": "SumologicSetting'"
+                "smart": "newServiceV1SumologicSetting",
+                "name": "ServiceV1SumologicSetting'"
             },
             "arguments": [
                 {
@@ -3390,8 +3390,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "fastly_service_v1.sumologic",
-            "name": "SumologicSetting",
+            "key": "service_v1.sumologic",
+            "name": "ServiceV1SumologicSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -3435,13 +3435,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "SumologicSetting s",
+            "type": "ServiceV1SumologicSetting s",
             "original": "sumologic"
         },
         {
             "con": {
-                "smart": "newSyslogSetting",
-                "name": "SyslogSetting'"
+                "smart": "newServiceV1SyslogSetting",
+                "name": "ServiceV1SyslogSetting'"
             },
             "arguments": [
                 {
@@ -3655,8 +3655,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "fastly_service_v1.syslog",
-            "name": "SyslogSetting",
+            "key": "service_v1.syslog",
+            "name": "ServiceV1SyslogSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -3700,13 +3700,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "SyslogSetting s",
+            "type": "ServiceV1SyslogSetting s",
             "original": "syslog"
         },
         {
             "con": {
-                "smart": "newVclSetting",
-                "name": "VclSetting'"
+                "smart": "newServiceV1VclSetting",
+                "name": "ServiceV1VclSetting'"
             },
             "arguments": [
                 {
@@ -3768,8 +3768,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "fastly_service_v1.vcl",
-            "name": "VclSetting",
+            "key": "service_v1.vcl",
+            "name": "ServiceV1VclSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -3813,7 +3813,7 @@
                 }
             ],
             "conflicts": [],
-            "type": "VclSetting s",
+            "type": "ServiceV1VclSetting s",
             "original": "vcl"
         }
     ],
@@ -3827,7 +3827,7 @@
             "arguments": [],
             "url": "https://www.terraform.io/docs/providers/fastly/d/ip_ranges.html",
             "dependencies": [],
-            "key": "fastly_ip_ranges",
+            "key": "ip_ranges",
             "name": "IpRangesData",
             "threaded": true,
             "attributes": [
@@ -3890,7 +3890,7 @@
                     "method": "backend",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (BackendSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1BackendSetting s)]",
                     "class": "HasBackend",
                     "validate": false,
                     "optional": true,
@@ -3907,7 +3907,7 @@
                     "method": "bigquerylogging",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (BigqueryloggingSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1BigqueryloggingSetting s)]",
                     "class": "HasBigquerylogging",
                     "validate": false,
                     "optional": true,
@@ -3924,7 +3924,7 @@
                     "method": "cacheSetting",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (CacheSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1CacheSettingSetting s)]",
                     "class": "HasCacheSetting",
                     "validate": false,
                     "optional": true,
@@ -3941,7 +3941,7 @@
                     "method": "condition",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ConditionSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1ConditionSetting s)]",
                     "class": "HasCondition",
                     "validate": false,
                     "optional": true,
@@ -3996,7 +3996,7 @@
                     "method": "domain",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (DomainSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1DomainSetting s)]",
                     "class": "HasDomain",
                     "validate": false,
                     "optional": false,
@@ -4030,7 +4030,7 @@
                     "method": "gcslogging",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (GcsloggingSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1GcsloggingSetting s)]",
                     "class": "HasGcslogging",
                     "validate": false,
                     "optional": true,
@@ -4047,7 +4047,7 @@
                     "method": "gzip",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (GzipSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1GzipSetting s)]",
                     "class": "HasGzip",
                     "validate": false,
                     "optional": true,
@@ -4064,7 +4064,7 @@
                     "method": "header",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (HeaderSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1HeaderSetting s)]",
                     "class": "HasHeader",
                     "validate": false,
                     "optional": true,
@@ -4081,7 +4081,7 @@
                     "method": "healthcheck",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (HealthcheckSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1HealthcheckSetting s)]",
                     "class": "HasHealthcheck",
                     "validate": false,
                     "optional": true,
@@ -4098,7 +4098,7 @@
                     "method": "logentries",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (LogentriesSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1LogentriesSetting s)]",
                     "class": "HasLogentries",
                     "validate": false,
                     "optional": true,
@@ -4134,7 +4134,7 @@
                     "method": "papertrail",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (PapertrailSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1PapertrailSetting s)]",
                     "class": "HasPapertrail",
                     "validate": false,
                     "optional": true,
@@ -4151,7 +4151,7 @@
                     "method": "requestSetting",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RequestSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1RequestSettingSetting s)]",
                     "class": "HasRequestSetting",
                     "validate": false,
                     "optional": true,
@@ -4168,7 +4168,7 @@
                     "method": "responseObject",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ResponseObjectSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1ResponseObjectSetting s)]",
                     "class": "HasResponseObject",
                     "validate": false,
                     "optional": true,
@@ -4185,7 +4185,7 @@
                     "method": "s3logging",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (S3loggingSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1S3loggingSetting s)]",
                     "class": "HasS3logging",
                     "validate": false,
                     "optional": true,
@@ -4202,7 +4202,7 @@
                     "method": "sumologic",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (SumologicSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1SumologicSetting s)]",
                     "class": "HasSumologic",
                     "validate": false,
                     "optional": true,
@@ -4219,7 +4219,7 @@
                     "method": "syslog",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (SyslogSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1SyslogSetting s)]",
                     "class": "HasSyslog",
                     "validate": false,
                     "optional": true,
@@ -4236,7 +4236,7 @@
                     "method": "vcl",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (VclSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1VclSetting s)]",
                     "class": "HasVcl",
                     "validate": false,
                     "optional": true,
@@ -4245,25 +4245,25 @@
             ],
             "url": "https://www.terraform.io/docs/providers/fastly/r/service_v1.html",
             "dependencies": [
-                "BackendSetting",
-                "BigqueryloggingSetting",
-                "CacheSetting",
-                "ConditionSetting",
-                "DomainSetting",
-                "GcsloggingSetting",
-                "GzipSetting",
-                "HeaderSetting",
-                "HealthcheckSetting",
-                "LogentriesSetting",
-                "PapertrailSetting",
-                "RequestSetting",
-                "ResponseObjectSetting",
-                "S3loggingSetting",
-                "SumologicSetting",
-                "SyslogSetting",
-                "VclSetting"
+                "ServiceV1BackendSetting",
+                "ServiceV1BigqueryloggingSetting",
+                "ServiceV1CacheSettingSetting",
+                "ServiceV1ConditionSetting",
+                "ServiceV1DomainSetting",
+                "ServiceV1GcsloggingSetting",
+                "ServiceV1GzipSetting",
+                "ServiceV1HeaderSetting",
+                "ServiceV1HealthcheckSetting",
+                "ServiceV1LogentriesSetting",
+                "ServiceV1PapertrailSetting",
+                "ServiceV1RequestSettingSetting",
+                "ServiceV1ResponseObjectSetting",
+                "ServiceV1S3loggingSetting",
+                "ServiceV1SumologicSetting",
+                "ServiceV1SyslogSetting",
+                "ServiceV1VclSetting"
             ],
-            "key": "fastly_service_v1",
+            "key": "service_v1",
             "name": "ServiceV1Resource",
             "threaded": true,
             "attributes": [
@@ -4333,7 +4333,7 @@
                     "method": "domain",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (DomainSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1DomainSetting s)]",
                     "class": "HasDomain",
                     "validate": false,
                     "optional": false,
@@ -4410,7 +4410,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

@@ -45,7 +45,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/http/d/.html",
             "dependencies": [],
-            "key": "http",
+            "key": "",
             "name": "Data",
             "threaded": true,
             "attributes": [
@@ -116,7 +116,7 @@
         },
         "arguments": [],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

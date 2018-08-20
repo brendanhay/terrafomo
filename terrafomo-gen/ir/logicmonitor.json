@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newFiltersSetting",
-                "name": "FiltersSetting'"
+                "smart": "newCollectorsFiltersSetting",
+                "name": "CollectorsFiltersSetting'"
             },
             "arguments": [
                 {
@@ -56,7 +56,24 @@
                     "validate": false,
                     "optional": true,
                     "original": "value"
-                },
+                }
+            ],
+            "dependencies": [],
+            "key": "collectors.filters",
+            "name": "CollectorsFiltersSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "CollectorsFiltersSetting s",
+            "original": "filters"
+        },
+        {
+            "con": {
+                "smart": "newDeviceGroupFiltersSetting",
+                "name": "DeviceGroupFiltersSetting'"
+            },
+            "arguments": [
                 {
                     "default": "TF.Nil",
                     "computed": false,
@@ -90,16 +107,67 @@
                     "validate": false,
                     "optional": true,
                     "original": "custom_property_value"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"operator\" <$> TF.attribute",
+                    "name": "_operator",
+                    "method": "operator",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOperator",
+                    "validate": false,
+                    "optional": true,
+                    "original": "operator"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"property\" <$> TF.attribute",
+                    "name": "_property",
+                    "method": "property",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProperty",
+                    "validate": false,
+                    "optional": true,
+                    "original": "property"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": true,
+                    "original": "value"
                 }
             ],
             "dependencies": [],
-            "key": "logicmonitor_collectors.filters",
-            "name": "FiltersSetting",
+            "key": "device_group.filters",
+            "name": "DeviceGroupFiltersSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "FiltersSetting s",
+            "type": "DeviceGroupFiltersSetting s",
             "original": "filters"
         }
     ],
@@ -122,7 +190,7 @@
                     "method": "filters",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (FiltersSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (CollectorsFiltersSetting s)]",
                     "class": "HasFilters",
                     "validate": false,
                     "optional": true,
@@ -182,9 +250,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/logicmonitor/d/collectors.html",
             "dependencies": [
-                "FiltersSetting"
+                "CollectorsFiltersSetting"
             ],
-            "key": "logicmonitor_collectors",
+            "key": "collectors",
             "name": "CollectorsData",
             "threaded": true,
             "attributes": [
@@ -228,7 +296,7 @@
                     "method": "filters",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (FiltersSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DeviceGroupFiltersSetting s)]",
                     "class": "HasFilters",
                     "validate": false,
                     "optional": true,
@@ -271,9 +339,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/logicmonitor/d/device_group.html",
             "dependencies": [
-                "FiltersSetting"
+                "DeviceGroupFiltersSetting"
             ],
-            "key": "logicmonitor_device_group",
+            "key": "device_group",
             "name": "DeviceGroupData",
             "threaded": true,
             "attributes": [
@@ -447,7 +515,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/logicmonitor/r/collector.html",
             "dependencies": [],
-            "key": "logicmonitor_collector",
+            "key": "collector",
             "name": "CollectorResource",
             "threaded": true,
             "attributes": [
@@ -517,7 +585,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/logicmonitor/r/collector_group.html",
             "dependencies": [],
-            "key": "logicmonitor_collector_group",
+            "key": "collector_group",
             "name": "CollectorGroupResource",
             "threaded": true,
             "attributes": [
@@ -672,7 +740,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/logicmonitor/r/device.html",
             "dependencies": [],
-            "key": "logicmonitor_device",
+            "key": "device",
             "name": "DeviceResource",
             "threaded": true,
             "attributes": [
@@ -845,7 +913,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/logicmonitor/r/device_group.html",
             "dependencies": [],
-            "key": "logicmonitor_device_group",
+            "key": "device_group",
             "name": "DeviceGroupResource",
             "threaded": true,
             "attributes": [
@@ -950,7 +1018,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

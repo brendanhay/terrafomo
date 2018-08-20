@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newCnsSetting",
-                "name": "CnsSetting'"
+                "smart": "newMachineCnsSetting",
+                "name": "MachineCnsSetting'"
             },
             "arguments": [
                 {
@@ -46,19 +46,190 @@
                 }
             ],
             "dependencies": [],
-            "key": "triton_machine.cns",
-            "name": "CnsSetting",
+            "key": "machine.cns",
+            "name": "MachineCnsSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "CnsSetting s",
+            "type": "MachineCnsSetting s",
             "original": "cns"
         },
         {
             "con": {
-                "smart": "newFilterSetting",
-                "name": "FilterSetting'"
+                "smart": "newMachineNicSetting",
+                "name": "MachineNicSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_network",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "ID of the network to which the NIC is attached"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"network\" <$> TF.attribute",
+                    "name": "_network",
+                    "method": "network",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNetwork",
+                    "validate": false,
+                    "optional": false,
+                    "original": "network"
+                }
+            ],
+            "dependencies": [],
+            "key": "machine.nic",
+            "name": "MachineNicSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "IPv4 gateway"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"gateway\" <$> TF.attribute",
+                    "name": "_computedGateway",
+                    "method": "computedGateway",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedGateway",
+                    "validate": false,
+                    "optional": false,
+                    "original": "gateway"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "NIC's IPv4 address"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip\" <$> TF.attribute",
+                    "name": "_computedIp",
+                    "method": "computedIp",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedIp",
+                    "validate": false,
+                    "optional": false,
+                    "original": "ip"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "NIC's MAC address"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"mac\" <$> TF.attribute",
+                    "name": "_computedMac",
+                    "method": "computedMac",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedMac",
+                    "validate": false,
+                    "optional": false,
+                    "original": "mac"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "IPv4 netmask"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"netmask\" <$> TF.attribute",
+                    "name": "_computedNetmask",
+                    "method": "computedNetmask",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedNetmask",
+                    "validate": false,
+                    "optional": false,
+                    "original": "netmask"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Whether this is the machine's primary NIC"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"primary\" <$> TF.attribute",
+                    "name": "_computedPrimary",
+                    "method": "computedPrimary",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedPrimary",
+                    "validate": false,
+                    "optional": false,
+                    "original": "primary"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Provisioning state of the NIC"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"state\" <$> TF.attribute",
+                    "name": "_computedState",
+                    "method": "computedState",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedState",
+                    "validate": false,
+                    "optional": false,
+                    "original": "state"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_network",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "ID of the network to which the NIC is attached"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"network\" <$> TF.attribute",
+                    "name": "_network",
+                    "method": "network",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNetwork",
+                    "validate": false,
+                    "optional": false,
+                    "original": "network"
+                }
+            ],
+            "conflicts": [],
+            "type": "MachineNicSetting s",
+            "original": "nic"
+        },
+        {
+            "con": {
+                "smart": "newPackageFilterSetting",
+                "name": "PackageFilterSetting'"
             },
             "arguments": [
                 {
@@ -199,185 +370,14 @@
                 }
             ],
             "dependencies": [],
-            "key": "triton_package.filter",
-            "name": "FilterSetting",
+            "key": "package.filter",
+            "name": "PackageFilterSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "FilterSetting s",
+            "type": "PackageFilterSetting s",
             "original": "filter"
-        },
-        {
-            "con": {
-                "smart": "newNicSetting",
-                "name": "NicSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_network",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "ID of the network to which the NIC is attached"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"network\" <$> TF.attribute",
-                    "name": "_network",
-                    "method": "network",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasNetwork",
-                    "validate": false,
-                    "optional": false,
-                    "original": "network"
-                }
-            ],
-            "dependencies": [],
-            "key": "triton_machine.nic",
-            "name": "NicSetting",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "IPv4 gateway"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"gateway\" <$> TF.attribute",
-                    "name": "_computedGateway",
-                    "method": "computedGateway",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedGateway",
-                    "validate": false,
-                    "optional": false,
-                    "original": "gateway"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "NIC's IPv4 address"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ip\" <$> TF.attribute",
-                    "name": "_computedIp",
-                    "method": "computedIp",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedIp",
-                    "validate": false,
-                    "optional": false,
-                    "original": "ip"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "NIC's MAC address"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"mac\" <$> TF.attribute",
-                    "name": "_computedMac",
-                    "method": "computedMac",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedMac",
-                    "validate": false,
-                    "optional": false,
-                    "original": "mac"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "IPv4 netmask"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"netmask\" <$> TF.attribute",
-                    "name": "_computedNetmask",
-                    "method": "computedNetmask",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedNetmask",
-                    "validate": false,
-                    "optional": false,
-                    "original": "netmask"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "Whether this is the machine's primary NIC"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"primary\" <$> TF.attribute",
-                    "name": "_computedPrimary",
-                    "method": "computedPrimary",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasComputedPrimary",
-                    "validate": false,
-                    "optional": false,
-                    "original": "primary"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "Provisioning state of the NIC"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"state\" <$> TF.attribute",
-                    "name": "_computedState",
-                    "method": "computedState",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedState",
-                    "validate": false,
-                    "optional": false,
-                    "original": "state"
-                }
-            ],
-            "parameters": [
-                {
-                    "default": "_network",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "ID of the network to which the NIC is attached"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"network\" <$> TF.attribute",
-                    "name": "_network",
-                    "method": "network",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasNetwork",
-                    "validate": false,
-                    "optional": false,
-                    "original": "network"
-                }
-            ],
-            "conflicts": [],
-            "type": "NicSetting s",
-            "original": "nic"
         }
     ],
     "url": "https://www.terraform.io/docs/providers/triton/index.html",
@@ -390,7 +390,7 @@
             "arguments": [],
             "url": "https://www.terraform.io/docs/providers/triton/d/account.html",
             "dependencies": [],
-            "key": "triton_account",
+            "key": "account",
             "name": "AccountData",
             "threaded": true,
             "attributes": [
@@ -476,7 +476,7 @@
             "arguments": [],
             "url": "https://www.terraform.io/docs/providers/triton/d/datacenter.html",
             "dependencies": [],
-            "key": "triton_datacenter",
+            "key": "datacenter",
             "name": "DatacenterData",
             "threaded": true,
             "attributes": [
@@ -580,7 +580,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/triton/d/fabric_network.html",
             "dependencies": [],
-            "key": "triton_fabric_network",
+            "key": "fabric_network",
             "name": "FabricNetworkData",
             "threaded": true,
             "attributes": [
@@ -872,7 +872,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/triton/d/fabric_vlan.html",
             "dependencies": [],
-            "key": "triton_fabric_vlan",
+            "key": "fabric_vlan",
             "name": "FabricVlanData",
             "threaded": true,
             "attributes": [
@@ -1044,7 +1044,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/triton/d/image.html",
             "dependencies": [],
-            "key": "triton_image",
+            "key": "image",
             "name": "ImageData",
             "threaded": true,
             "attributes": [
@@ -1097,7 +1097,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/triton/d/network.html",
             "dependencies": [],
-            "key": "triton_network",
+            "key": "network",
             "name": "NetworkData",
             "threaded": true,
             "attributes": [
@@ -1193,7 +1193,7 @@
                     "method": "filter",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (FilterSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (PackageFilterSetting s)]",
                     "class": "HasFilter",
                     "validate": false,
                     "optional": false,
@@ -1202,9 +1202,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/triton/d/package.html",
             "dependencies": [
-                "FilterSetting"
+                "PackageFilterSetting"
             ],
-            "key": "triton_package",
+            "key": "package",
             "name": "PackageData",
             "threaded": true,
             "attributes": [
@@ -1374,7 +1374,7 @@
                     "method": "filter",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (FilterSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (PackageFilterSetting s)]",
                     "class": "HasFilter",
                     "validate": false,
                     "optional": false,
@@ -1586,7 +1586,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/triton/r/fabric.html",
             "dependencies": [],
-            "key": "triton_fabric",
+            "key": "fabric",
             "name": "FabricResource",
             "threaded": true,
             "attributes": [
@@ -1851,7 +1851,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/triton/r/firewall_rule.html",
             "dependencies": [],
-            "key": "triton_firewall_rule",
+            "key": "firewall_rule",
             "name": "FirewallRuleResource",
             "threaded": true,
             "attributes": [
@@ -2078,7 +2078,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/triton/r/instance_template.html",
             "dependencies": [],
-            "key": "triton_instance_template",
+            "key": "instance_template",
             "name": "InstanceTemplateResource",
             "threaded": true,
             "attributes": [
@@ -2286,7 +2286,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/triton/r/key.html",
             "dependencies": [],
-            "key": "triton_key",
+            "key": "key",
             "name": "KeyResource",
             "threaded": true,
             "attributes": [
@@ -2428,7 +2428,7 @@
                     "method": "cns",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (CnsSetting s)",
+                    "type": "TF.Attr s (MachineCnsSetting s)",
                     "class": "HasCns",
                     "validate": true,
                     "optional": true,
@@ -2561,7 +2561,7 @@
                     "method": "nic",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NicSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (MachineNicSetting s)]",
                     "class": "HasNic",
                     "validate": false,
                     "optional": true,
@@ -2665,11 +2665,11 @@
             ],
             "url": "https://www.terraform.io/docs/providers/triton/r/machine.html",
             "dependencies": [
-                "CnsSetting",
-                "NicSetting",
-                "NicSetting"
+                "MachineCnsSetting",
+                "MachineNicSetting",
+                "MachineNicSetting"
             ],
-            "key": "triton_machine",
+            "key": "machine",
             "name": "MachineResource",
             "threaded": true,
             "attributes": [
@@ -2855,7 +2855,7 @@
                     "method": "computedNic",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NicSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (MachineNicSetting s)]",
                     "class": "HasComputedNic",
                     "validate": false,
                     "optional": false,
@@ -3048,7 +3048,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/triton/r/service_group.html",
             "dependencies": [],
-            "key": "triton_service_group",
+            "key": "service_group",
             "name": "ServiceGroupResource",
             "threaded": true,
             "attributes": [
@@ -3176,7 +3176,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/triton/r/snapshot.html",
             "dependencies": [],
-            "key": "triton_snapshot",
+            "key": "snapshot",
             "name": "SnapshotResource",
             "threaded": true,
             "attributes": [
@@ -3321,7 +3321,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/triton/r/vlan.html",
             "dependencies": [],
-            "key": "triton_vlan",
+            "key": "vlan",
             "name": "VlanResource",
             "threaded": true,
             "attributes": [
@@ -3498,7 +3498,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newVolumeSetting",
-                "name": "VolumeSetting'"
+                "smart": "newServerVolumeSetting",
+                "name": "ServerVolumeSetting'"
             },
             "arguments": [
                 {
@@ -42,8 +42,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "scaleway_server.volume",
-            "name": "VolumeSetting",
+            "key": "server.volume",
+            "name": "ServerVolumeSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -101,7 +101,7 @@
                 }
             ],
             "conflicts": [],
-            "type": "VolumeSetting s",
+            "type": "ServerVolumeSetting s",
             "original": "volume"
         }
     ],
@@ -173,7 +173,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/scaleway/d/bootscript.html",
             "dependencies": [],
-            "key": "scaleway_bootscript",
+            "key": "bootscript",
             "name": "BootscriptData",
             "threaded": true,
             "attributes": [
@@ -430,7 +430,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/scaleway/d/image.html",
             "dependencies": [],
-            "key": "scaleway_image",
+            "key": "image",
             "name": "ImageData",
             "threaded": true,
             "attributes": [
@@ -632,7 +632,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/scaleway/d/security_group.html",
             "dependencies": [],
-            "key": "scaleway_security_group",
+            "key": "security_group",
             "name": "SecurityGroupData",
             "threaded": true,
             "attributes": [
@@ -741,7 +741,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/scaleway/d/volume.html",
             "dependencies": [],
-            "key": "scaleway_volume",
+            "key": "volume",
             "name": "VolumeData",
             "threaded": true,
             "attributes": [
@@ -892,7 +892,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/scaleway/r/ip.html",
             "dependencies": [],
-            "key": "scaleway_ip",
+            "key": "ip",
             "name": "IpResource",
             "threaded": true,
             "attributes": [
@@ -1023,7 +1023,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/scaleway/r/security_group.html",
             "dependencies": [],
-            "key": "scaleway_security_group",
+            "key": "security_group",
             "name": "SecurityGroupResource",
             "threaded": true,
             "attributes": [
@@ -1213,7 +1213,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/scaleway/r/security_group_rule.html",
             "dependencies": [],
-            "key": "scaleway_security_group_rule",
+            "key": "security_group_rule",
             "name": "SecurityGroupRuleResource",
             "threaded": true,
             "attributes": [
@@ -1565,7 +1565,7 @@
                     "method": "volume",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (VolumeSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServerVolumeSetting s)]",
                     "class": "HasVolume",
                     "validate": false,
                     "optional": true,
@@ -1574,9 +1574,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/scaleway/r/server.html",
             "dependencies": [
-                "VolumeSetting"
+                "ServerVolumeSetting"
             ],
-            "key": "scaleway_server",
+            "key": "server",
             "name": "ServerResource",
             "threaded": true,
             "attributes": [
@@ -1803,7 +1803,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/scaleway/r/ssh_key.html",
             "dependencies": [],
-            "key": "scaleway_ssh_key",
+            "key": "ssh_key",
             "name": "SshKeyResource",
             "threaded": true,
             "attributes": [
@@ -1935,7 +1935,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/scaleway/r/token.html",
             "dependencies": [],
-            "key": "scaleway_token",
+            "key": "token",
             "name": "TokenResource",
             "threaded": true,
             "attributes": [
@@ -2142,7 +2142,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/scaleway/r/user_data.html",
             "dependencies": [],
-            "key": "scaleway_user_data",
+            "key": "user_data",
             "name": "UserDataResource",
             "threaded": true,
             "attributes": [
@@ -2293,7 +2293,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/scaleway/r/volume.html",
             "dependencies": [],
-            "key": "scaleway_volume",
+            "key": "volume",
             "name": "VolumeResource",
             "threaded": true,
             "attributes": [
@@ -2444,7 +2444,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/scaleway/r/volume_attachment.html",
             "dependencies": [],
-            "key": "scaleway_volume_attachment",
+            "key": "volume_attachment",
             "name": "VolumeAttachmentResource",
             "threaded": true,
             "attributes": [
@@ -2576,7 +2576,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

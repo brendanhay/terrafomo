@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newInterfaceSetting",
-                "name": "InterfaceSetting'"
+                "smart": "newSystemInterfaceSetting",
+                "name": "SystemInterfaceSetting'"
             },
             "arguments": [
                 {
@@ -365,8 +365,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "cobbler_system.interface",
-            "name": "InterfaceSetting",
+            "key": "system.interface",
+            "name": "SystemInterfaceSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -730,7 +730,7 @@
                 }
             ],
             "conflicts": [],
-            "type": "InterfaceSetting s",
+            "type": "SystemInterfaceSetting s",
             "original": "interface"
         }
     ],
@@ -1018,7 +1018,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/cobbler/r/distro.html",
             "dependencies": [],
-            "key": "cobbler_distro",
+            "key": "distro",
             "name": "DistroResource",
             "threaded": true,
             "attributes": [
@@ -1361,7 +1361,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/cobbler/r/kickstart_file.html",
             "dependencies": [],
-            "key": "cobbler_kickstart_file",
+            "key": "kickstart_file",
             "name": "KickstartFileResource",
             "threaded": true,
             "attributes": [
@@ -1976,7 +1976,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/cobbler/r/profile.html",
             "dependencies": [],
-            "key": "cobbler_profile",
+            "key": "profile",
             "name": "ProfileResource",
             "threaded": true,
             "attributes": [
@@ -2795,7 +2795,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/cobbler/r/repo.html",
             "dependencies": [],
-            "key": "cobbler_repo",
+            "key": "repo",
             "name": "RepoResource",
             "threaded": true,
             "attributes": [
@@ -3104,7 +3104,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/cobbler/r/snippet.html",
             "dependencies": [],
-            "key": "cobbler_snippet",
+            "key": "snippet",
             "name": "SnippetResource",
             "threaded": true,
             "attributes": [
@@ -3302,7 +3302,7 @@
                     "method": "interface",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (InterfaceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (SystemInterfaceSetting s)]",
                     "class": "HasInterface",
                     "validate": false,
                     "optional": true,
@@ -3906,10 +3906,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/cobbler/r/system.html",
             "dependencies": [
-                "InterfaceSetting",
-                "InterfaceSetting"
+                "SystemInterfaceSetting",
+                "SystemInterfaceSetting"
             ],
-            "key": "cobbler_system",
+            "key": "system",
             "name": "SystemResource",
             "threaded": true,
             "attributes": [
@@ -4060,7 +4060,7 @@
                     "method": "computedInterface",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (InterfaceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (SystemInterfaceSetting s)]",
                     "class": "HasComputedInterface",
                     "validate": false,
                     "optional": false,
@@ -4772,7 +4772,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

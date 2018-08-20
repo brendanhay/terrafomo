@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newJsonDataSetting",
-                "name": "JsonDataSetting'"
+                "smart": "newDataSourceJsonDataSetting",
+                "name": "DataSourceJsonDataSetting'"
             },
             "arguments": [
                 {
@@ -76,8 +76,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "grafana_data_source.json_data",
-            "name": "JsonDataSetting",
+            "key": "data_source.json_data",
+            "name": "DataSourceJsonDataSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -117,13 +117,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "JsonDataSetting s",
+            "type": "DataSourceJsonDataSetting s",
             "original": "json_data"
         },
         {
             "con": {
-                "smart": "newSecureJsonDataSetting",
-                "name": "SecureJsonDataSetting'"
+                "smart": "newDataSourceSecureJsonDataSetting",
+                "name": "DataSourceSecureJsonDataSetting'"
             },
             "arguments": [
                 {
@@ -162,8 +162,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "grafana_data_source.secure_json_data",
-            "name": "SecureJsonDataSetting",
+            "key": "data_source.secure_json_data",
+            "name": "DataSourceSecureJsonDataSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -203,7 +203,7 @@
                 }
             ],
             "conflicts": [],
-            "type": "SecureJsonDataSetting s",
+            "type": "DataSourceSecureJsonDataSetting s",
             "original": "secure_json_data"
         }
     ],
@@ -287,7 +287,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/grafana/r/alert_notification.html",
             "dependencies": [],
-            "key": "grafana_alert_notification",
+            "key": "alert_notification",
             "name": "AlertNotificationResource",
             "threaded": true,
             "attributes": [
@@ -375,7 +375,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/grafana/r/dashboard.html",
             "dependencies": [],
-            "key": "grafana_dashboard",
+            "key": "dashboard",
             "name": "DashboardResource",
             "threaded": true,
             "attributes": [
@@ -556,7 +556,7 @@
                     "method": "jsonData",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (JsonDataSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DataSourceJsonDataSetting s)]",
                     "class": "HasJsonData",
                     "validate": false,
                     "optional": true,
@@ -607,7 +607,7 @@
                     "method": "secureJsonData",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (SecureJsonDataSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DataSourceSecureJsonDataSetting s)]",
                     "class": "HasSecureJsonData",
                     "validate": false,
                     "optional": true,
@@ -667,10 +667,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/grafana/r/data_source.html",
             "dependencies": [
-                "JsonDataSetting",
-                "SecureJsonDataSetting"
+                "DataSourceJsonDataSetting",
+                "DataSourceSecureJsonDataSetting"
             ],
-            "key": "grafana_data_source",
+            "key": "data_source",
             "name": "DataSourceResource",
             "threaded": true,
             "attributes": [
@@ -843,7 +843,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/grafana/r/organization.html",
             "dependencies": [],
-            "key": "grafana_organization",
+            "key": "organization",
             "name": "OrganizationResource",
             "threaded": true,
             "attributes": [
@@ -952,7 +952,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

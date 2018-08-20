@@ -97,7 +97,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/clc/r/group.html",
             "dependencies": [],
-            "key": "clc_group",
+            "key": "group",
             "name": "GroupResource",
             "threaded": true,
             "attributes": [
@@ -270,7 +270,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/clc/r/load_balancer.html",
             "dependencies": [],
-            "key": "clc_load_balancer",
+            "key": "load_balancer",
             "name": "LoadBalancerResource",
             "threaded": true,
             "attributes": [
@@ -477,7 +477,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/clc/r/load_balancer_pool.html",
             "dependencies": [],
-            "key": "clc_load_balancer_pool",
+            "key": "load_balancer_pool",
             "name": "LoadBalancerPoolResource",
             "threaded": true,
             "attributes": [
@@ -650,7 +650,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/clc/r/public_ip.html",
             "dependencies": [],
-            "key": "clc_public_ip",
+            "key": "public_ip",
             "name": "PublicIpResource",
             "threaded": true,
             "attributes": [
@@ -1061,7 +1061,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/clc/r/server.html",
             "dependencies": [],
-            "key": "clc_server",
+            "key": "server",
             "name": "ServerResource",
             "threaded": true,
             "attributes": [
@@ -1359,7 +1359,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

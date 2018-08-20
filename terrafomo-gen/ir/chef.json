@@ -29,7 +29,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/chef/r/data_bag.html",
             "dependencies": [],
-            "key": "chef_data_bag",
+            "key": "data_bag",
             "name": "DataBagResource",
             "threaded": true,
             "attributes": [
@@ -134,7 +134,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/chef/r/data_bag_item.html",
             "dependencies": [],
-            "key": "chef_data_bag_item",
+            "key": "data_bag_item",
             "name": "DataBagItemResource",
             "threaded": true,
             "attributes": [
@@ -290,7 +290,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/chef/r/environment.html",
             "dependencies": [],
-            "key": "chef_environment",
+            "key": "environment",
             "name": "EnvironmentResource",
             "threaded": true,
             "attributes": [
@@ -463,7 +463,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/chef/r/node.html",
             "dependencies": [],
-            "key": "chef_node",
+            "key": "node",
             "name": "NodeResource",
             "threaded": true,
             "attributes": [
@@ -602,7 +602,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/chef/r/role.html",
             "dependencies": [],
-            "key": "chef_role",
+            "key": "role",
             "name": "RoleResource",
             "threaded": true,
             "attributes": [
@@ -730,7 +730,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

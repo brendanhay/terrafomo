@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newMemberSetting",
-                "name": "MemberSetting'"
+                "smart": "newTeamMemberSetting",
+                "name": "TeamMemberSetting'"
             },
             "arguments": [
                 {
@@ -42,8 +42,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "opsgenie_team.member",
-            "name": "MemberSetting",
+            "key": "team.member",
+            "name": "TeamMemberSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -66,7 +66,7 @@
                 }
             ],
             "conflicts": [],
-            "type": "MemberSetting s",
+            "type": "TeamMemberSetting s",
             "original": "member"
         }
     ],
@@ -98,7 +98,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opsgenie/d/user.html",
             "dependencies": [],
-            "key": "opsgenie_user",
+            "key": "user",
             "name": "UserData",
             "threaded": true,
             "attributes": [
@@ -213,7 +213,7 @@
                     "method": "member",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (MemberSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (TeamMemberSetting s)]",
                     "class": "HasMember",
                     "validate": false,
                     "optional": true,
@@ -239,9 +239,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opsgenie/r/team.html",
             "dependencies": [
-                "MemberSetting"
+                "TeamMemberSetting"
             ],
-            "key": "opsgenie_team",
+            "key": "team",
             "name": "TeamResource",
             "threaded": true,
             "attributes": [
@@ -380,7 +380,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/opsgenie/r/user.html",
             "dependencies": [],
-            "key": "opsgenie_user",
+            "key": "user",
             "name": "UserResource",
             "threaded": true,
             "attributes": [
@@ -485,7 +485,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

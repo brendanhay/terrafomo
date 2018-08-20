@@ -2,47 +2,13 @@
     "settings": [
         {
             "con": {
-                "smart": "newAttachmentsSetting",
-                "name": "AttachmentsSetting'"
+                "smart": "newDeviceNetworkSetting",
+                "name": "DeviceNetworkSetting'"
             },
             "arguments": [],
             "dependencies": [],
-            "key": "packet_volume.attachments",
-            "name": "AttachmentsSetting",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"href\" <$> TF.attribute",
-                    "name": "_computedHref",
-                    "method": "computedHref",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedHref",
-                    "validate": false,
-                    "optional": false,
-                    "original": "href"
-                }
-            ],
-            "parameters": [],
-            "conflicts": [],
-            "type": "AttachmentsSetting s",
-            "original": "attachments"
-        },
-        {
-            "con": {
-                "smart": "newNetworkSetting",
-                "name": "NetworkSetting'"
-            },
-            "arguments": [],
-            "dependencies": [],
-            "key": "packet_device.network",
-            "name": "NetworkSetting",
+            "key": "device.network",
+            "name": "DeviceNetworkSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -133,13 +99,47 @@
             ],
             "parameters": [],
             "conflicts": [],
-            "type": "NetworkSetting s",
+            "type": "DeviceNetworkSetting s",
             "original": "network"
         },
         {
             "con": {
-                "smart": "newSnapshotPoliciesSetting",
-                "name": "SnapshotPoliciesSetting'"
+                "smart": "newVolumeAttachmentsSetting",
+                "name": "VolumeAttachmentsSetting'"
+            },
+            "arguments": [],
+            "dependencies": [],
+            "key": "volume.attachments",
+            "name": "VolumeAttachmentsSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"href\" <$> TF.attribute",
+                    "name": "_computedHref",
+                    "method": "computedHref",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedHref",
+                    "validate": false,
+                    "optional": false,
+                    "original": "href"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "VolumeAttachmentsSetting s",
+            "original": "attachments"
+        },
+        {
+            "con": {
+                "smart": "newVolumeSnapshotPoliciesSetting",
+                "name": "VolumeSnapshotPoliciesSetting'"
             },
             "arguments": [
                 {
@@ -178,8 +178,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "packet_volume.snapshot_policies",
-            "name": "SnapshotPoliciesSetting",
+            "key": "volume.snapshot_policies",
+            "name": "VolumeSnapshotPoliciesSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -219,7 +219,7 @@
                 }
             ],
             "conflicts": [],
-            "type": "SnapshotPoliciesSetting s",
+            "type": "VolumeSnapshotPoliciesSetting s",
             "original": "snapshot_policies"
         }
     ],
@@ -302,7 +302,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/packet/d/precreated_ip_block.html",
             "dependencies": [],
-            "key": "packet_precreated_ip_block",
+            "key": "precreated_ip_block",
             "name": "PrecreatedIpBlockData",
             "threaded": true,
             "attributes": [
@@ -800,9 +800,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/packet/r/device.html",
             "dependencies": [
-                "NetworkSetting"
+                "DeviceNetworkSetting"
             ],
-            "key": "packet_device",
+            "key": "device",
             "name": "DeviceResource",
             "threaded": true,
             "attributes": [
@@ -936,7 +936,7 @@
                     "method": "computedNetwork",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NetworkSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DeviceNetworkSetting s)]",
                     "class": "HasComputedNetwork",
                     "validate": false,
                     "optional": false,
@@ -1162,7 +1162,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/packet/r/ip_attachment.html",
             "dependencies": [],
-            "key": "packet_ip_attachment",
+            "key": "ip_attachment",
             "name": "IpAttachmentResource",
             "threaded": true,
             "attributes": [
@@ -1471,7 +1471,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/packet/r/organization.html",
             "dependencies": [],
-            "key": "packet_organization",
+            "key": "organization",
             "name": "OrganizationResource",
             "threaded": true,
             "attributes": [
@@ -1610,7 +1610,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/packet/r/project.html",
             "dependencies": [],
-            "key": "packet_project",
+            "key": "project",
             "name": "ProjectResource",
             "threaded": true,
             "attributes": [
@@ -1783,7 +1783,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/packet/r/reserved_ip_block.html",
             "dependencies": [],
-            "key": "packet_reserved_ip_block",
+            "key": "reserved_ip_block",
             "name": "ReservedIpBlockResource",
             "threaded": true,
             "attributes": [
@@ -2075,7 +2075,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/packet/r/ssh_key.html",
             "dependencies": [],
-            "key": "packet_ssh_key",
+            "key": "ssh_key",
             "name": "SshKeyResource",
             "threaded": true,
             "attributes": [
@@ -2324,7 +2324,7 @@
                     "method": "snapshotPolicies",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (SnapshotPoliciesSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (VolumeSnapshotPoliciesSetting s)]",
                     "class": "HasSnapshotPolicies",
                     "validate": false,
                     "optional": true,
@@ -2333,10 +2333,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/packet/r/volume.html",
             "dependencies": [
-                "SnapshotPoliciesSetting",
-                "AttachmentsSetting"
+                "VolumeSnapshotPoliciesSetting",
+                "VolumeAttachmentsSetting"
             ],
-            "key": "packet_volume",
+            "key": "volume",
             "name": "VolumeResource",
             "threaded": true,
             "attributes": [
@@ -2368,7 +2368,7 @@
                     "method": "computedAttachments",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (AttachmentsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (VolumeAttachmentsSetting s)]",
                     "class": "HasComputedAttachments",
                     "validate": false,
                     "optional": false,
@@ -2577,7 +2577,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/packet/r/volume_attachment.html",
             "dependencies": [],
-            "key": "packet_volume_attachment",
+            "key": "volume_attachment",
             "name": "VolumeAttachmentResource",
             "threaded": true,
             "attributes": [
@@ -2667,7 +2667,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

@@ -2,592 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newConditionalFormatSetting",
-                "name": "ConditionalFormatSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_comparator",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Comparator (<, >, etc)"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"comparator\" <$> TF.attribute",
-                    "name": "_comparator",
-                    "method": "comparator",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComparator",
-                    "validate": false,
-                    "optional": false,
-                    "original": "comparator"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Custom background color (e.g., #205081)"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"custom_bg_color\" <$> TF.attribute",
-                    "name": "_customBgColor",
-                    "method": "customBgColor",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCustomBgColor",
-                    "validate": false,
-                    "optional": true,
-                    "original": "custom_bg_color"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Custom foreground color (e.g., #59afe1)"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"custom_fg_color\" <$> TF.attribute",
-                    "name": "_customFgColor",
-                    "method": "customFgColor",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCustomFgColor",
-                    "validate": false,
-                    "optional": true,
-                    "original": "custom_fg_color"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The palette to use if this condition is met."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"palette\" <$> TF.attribute",
-                    "name": "_palette",
-                    "method": "palette",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPalette",
-                    "validate": false,
-                    "optional": true,
-                    "original": "palette"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Value that is threshold for conditional format"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasValue",
-                    "validate": false,
-                    "optional": true,
-                    "original": "value"
-                }
-            ],
-            "dependencies": [],
-            "key": "datadog_timeboard.graph.request.conditional_format",
-            "name": "ConditionalFormatSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_comparator",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Comparator (<, >, etc)"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"comparator\" <$> TF.attribute",
-                    "name": "_comparator",
-                    "method": "comparator",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComparator",
-                    "validate": false,
-                    "optional": false,
-                    "original": "comparator"
-                }
-            ],
-            "conflicts": [],
-            "type": "ConditionalFormatSetting s",
-            "original": "conditional_format"
-        },
-        {
-            "con": {
-                "smart": "newGraphSetting",
-                "name": "GraphSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Automatically scale graphs"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"autoscale\" <$> TF.attribute",
-                    "name": "_autoscale",
-                    "method": "autoscale",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasAutoscale",
-                    "validate": false,
-                    "optional": true,
-                    "original": "autoscale"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Use a custom unit (like 'users')"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"custom_unit\" <$> TF.attribute",
-                    "name": "_customUnit",
-                    "method": "customUnit",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCustomUnit",
-                    "validate": false,
-                    "optional": true,
-                    "original": "custom_unit"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Filter for events to be overlayed on the graph."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"events\" <$> TF.attribute",
-                    "name": "_events",
-                    "method": "events",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasEvents",
-                    "validate": false,
-                    "optional": true,
-                    "original": "events"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "A list of groupings for hostmap type graphs."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"group\" <$> TF.attribute",
-                    "name": "_group",
-                    "method": "group",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasGroup",
-                    "validate": false,
-                    "optional": true,
-                    "original": "group"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Include hosts without metrics in hostmap graphs"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"include_no_metric_hosts\" <$> TF.attribute",
-                    "name": "_includeNoMetricHosts",
-                    "method": "includeNoMetricHosts",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasIncludeNoMetricHosts",
-                    "validate": false,
-                    "optional": true,
-                    "original": "include_no_metric_hosts"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Include ungrouped hosts in hostmap graphs"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"include_ungrouped_hosts\" <$> TF.attribute",
-                    "name": "_includeUngroupedHosts",
-                    "method": "includeUngroupedHosts",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasIncludeUngroupedHosts",
-                    "validate": false,
-                    "optional": true,
-                    "original": "include_ungrouped_hosts"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"marker\" <$> TF.attribute",
-                    "name": "_marker",
-                    "method": "marker",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (MarkerSetting s)]",
-                    "class": "HasMarker",
-                    "validate": false,
-                    "optional": true,
-                    "original": "marker"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "How many digits to show"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"precision\" <$> TF.attribute",
-                    "name": "_precision",
-                    "method": "precision",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPrecision",
-                    "validate": false,
-                    "optional": true,
-                    "original": "precision"
-                },
-                {
-                    "default": "_request",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"request\" <$> TF.attribute",
-                    "name": "_request",
-                    "method": "request",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RequestSetting s)]",
-                    "class": "HasRequest",
-                    "validate": false,
-                    "optional": false,
-                    "original": "request"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "A list of scope filters for hostmap type graphs."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"scope\" <$> TF.attribute",
-                    "name": "_scope",
-                    "method": "scope",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasScope",
-                    "validate": false,
-                    "optional": true,
-                    "original": "scope"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"style\" <$> TF.attribute",
-                    "name": "_style",
-                    "method": "style",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
-                    "class": "HasStyle",
-                    "validate": false,
-                    "optional": true,
-                    "original": "style"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "How to align text"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"text_align\" <$> TF.attribute",
-                    "name": "_textAlign",
-                    "method": "textAlign",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasTextAlign",
-                    "validate": false,
-                    "optional": true,
-                    "original": "text_align"
-                },
-                {
-                    "default": "_title",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The name of the graph."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"title\" <$> TF.attribute",
-                    "name": "_title",
-                    "method": "title",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasTitle",
-                    "validate": false,
-                    "optional": false,
-                    "original": "title"
-                },
-                {
-                    "default": "_viz",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"viz\" <$> TF.attribute",
-                    "name": "_viz",
-                    "method": "viz",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasViz",
-                    "validate": false,
-                    "optional": false,
-                    "original": "viz"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"yaxis\" <$> TF.attribute",
-                    "name": "_yaxis",
-                    "method": "yaxis",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
-                    "class": "HasYaxis",
-                    "validate": false,
-                    "optional": true,
-                    "original": "yaxis"
-                }
-            ],
-            "dependencies": [
-                "MarkerSetting",
-                "RequestSetting"
-            ],
-            "key": "datadog_timeboard.graph",
-            "name": "GraphSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_request",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"request\" <$> TF.attribute",
-                    "name": "_request",
-                    "method": "request",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RequestSetting s)]",
-                    "class": "HasRequest",
-                    "validate": false,
-                    "optional": false,
-                    "original": "request"
-                },
-                {
-                    "default": "_title",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The name of the graph."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"title\" <$> TF.attribute",
-                    "name": "_title",
-                    "method": "title",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasTitle",
-                    "validate": false,
-                    "optional": false,
-                    "original": "title"
-                },
-                {
-                    "default": "_viz",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"viz\" <$> TF.attribute",
-                    "name": "_viz",
-                    "method": "viz",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasViz",
-                    "validate": false,
-                    "optional": false,
-                    "original": "viz"
-                }
-            ],
-            "conflicts": [],
-            "type": "GraphSetting s",
-            "original": "graph"
-        },
-        {
-            "con": {
-                "smart": "newMarkerSetting",
-                "name": "MarkerSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"label\" <$> TF.attribute",
-                    "name": "_label",
-                    "method": "label",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLabel",
-                    "validate": false,
-                    "optional": true,
-                    "original": "label"
-                },
-                {
-                    "default": "_type'",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": false,
-                    "original": "type"
-                },
-                {
-                    "default": "_value",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "value"
-                }
-            ],
-            "dependencies": [],
-            "key": "datadog_timeboard.graph.marker",
-            "name": "MarkerSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_type'",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": false,
-                    "original": "type"
-                },
-                {
-                    "default": "_value",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "value"
-                }
-            ],
-            "conflicts": [],
-            "type": "MarkerSetting s",
-            "original": "marker"
-        },
-        {
-            "con": {
-                "smart": "newRecurrenceSetting",
-                "name": "RecurrenceSetting'"
+                "smart": "newDowntimeRecurrenceSetting",
+                "name": "DowntimeRecurrenceSetting'"
             },
             "arguments": [
                 {
@@ -689,8 +105,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "datadog_downtime.recurrence",
-            "name": "RecurrenceSetting",
+            "key": "downtime.recurrence",
+            "name": "DowntimeRecurrenceSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -777,13 +193,367 @@
                     "original": "until_occurrences"
                 }
             ],
-            "type": "RecurrenceSetting s",
+            "type": "DowntimeRecurrenceSetting s",
             "original": "recurrence"
         },
         {
             "con": {
-                "smart": "newRequestSetting",
-                "name": "RequestSetting'"
+                "smart": "newMonitorThresholdsSetting",
+                "name": "MonitorThresholdsSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
+                    "name": "_critical",
+                    "method": "critical",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Double",
+                    "class": "HasCritical",
+                    "validate": false,
+                    "optional": true,
+                    "original": "critical"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"critical_recovery\" <$> TF.attribute",
+                    "name": "_criticalRecovery",
+                    "method": "criticalRecovery",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Double",
+                    "class": "HasCriticalRecovery",
+                    "validate": false,
+                    "optional": true,
+                    "original": "critical_recovery"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ok\" <$> TF.attribute",
+                    "name": "_ok",
+                    "method": "ok",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Double",
+                    "class": "HasOk",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ok"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"unknown\" <$> TF.attribute",
+                    "name": "_unknown",
+                    "method": "unknown",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Double",
+                    "class": "HasUnknown",
+                    "validate": false,
+                    "optional": true,
+                    "original": "unknown"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
+                    "name": "_warning",
+                    "method": "warning",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Double",
+                    "class": "HasWarning",
+                    "validate": false,
+                    "optional": true,
+                    "original": "warning"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"warning_recovery\" <$> TF.attribute",
+                    "name": "_warningRecovery",
+                    "method": "warningRecovery",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Double",
+                    "class": "HasWarningRecovery",
+                    "validate": false,
+                    "optional": true,
+                    "original": "warning_recovery"
+                }
+            ],
+            "dependencies": [],
+            "key": "monitor.thresholds",
+            "name": "MonitorThresholdsSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "MonitorThresholdsSetting s",
+            "original": "thresholds"
+        },
+        {
+            "con": {
+                "smart": "newTimeboardGraphMarkerSetting",
+                "name": "TimeboardGraphMarkerSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"label\" <$> TF.attribute",
+                    "name": "_label",
+                    "method": "label",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLabel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "label"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "dependencies": [],
+            "key": "timeboard.graph.marker",
+            "name": "TimeboardGraphMarkerSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "conflicts": [],
+            "type": "TimeboardGraphMarkerSetting s",
+            "original": "marker"
+        },
+        {
+            "con": {
+                "smart": "newTimeboardGraphRequestConditionalFormatSetting",
+                "name": "TimeboardGraphRequestConditionalFormatSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_comparator",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Comparator (<, >, etc)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"comparator\" <$> TF.attribute",
+                    "name": "_comparator",
+                    "method": "comparator",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComparator",
+                    "validate": false,
+                    "optional": false,
+                    "original": "comparator"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Custom background color (e.g., #205081)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"custom_bg_color\" <$> TF.attribute",
+                    "name": "_customBgColor",
+                    "method": "customBgColor",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCustomBgColor",
+                    "validate": false,
+                    "optional": true,
+                    "original": "custom_bg_color"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Custom foreground color (e.g., #59afe1)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"custom_fg_color\" <$> TF.attribute",
+                    "name": "_customFgColor",
+                    "method": "customFgColor",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCustomFgColor",
+                    "validate": false,
+                    "optional": true,
+                    "original": "custom_fg_color"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The palette to use if this condition is met."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"palette\" <$> TF.attribute",
+                    "name": "_palette",
+                    "method": "palette",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPalette",
+                    "validate": false,
+                    "optional": true,
+                    "original": "palette"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Value that is threshold for conditional format"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": true,
+                    "original": "value"
+                }
+            ],
+            "dependencies": [],
+            "key": "timeboard.graph.request.conditional_format",
+            "name": "TimeboardGraphRequestConditionalFormatSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_comparator",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Comparator (<, >, etc)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"comparator\" <$> TF.attribute",
+                    "name": "_comparator",
+                    "method": "comparator",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComparator",
+                    "validate": false,
+                    "optional": false,
+                    "original": "comparator"
+                }
+            ],
+            "conflicts": [],
+            "type": "TimeboardGraphRequestConditionalFormatSetting s",
+            "original": "conditional_format"
+        },
+        {
+            "con": {
+                "smart": "newTimeboardGraphRequestSetting",
+                "name": "TimeboardGraphRequestSetting'"
             },
             "arguments": [
                 {
@@ -854,7 +624,7 @@
                     "method": "conditionalFormat",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ConditionalFormatSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (TimeboardGraphRequestConditionalFormatSetting s)]",
                     "class": "HasConditionalFormat",
                     "validate": false,
                     "optional": true,
@@ -1006,10 +776,10 @@
                 }
             ],
             "dependencies": [
-                "ConditionalFormatSetting"
+                "TimeboardGraphRequestConditionalFormatSetting"
             ],
-            "key": "datadog_timeboard.graph.request",
-            "name": "RequestSetting",
+            "key": "timeboard.graph.request",
+            "name": "TimeboardGraphRequestSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1032,13 +802,362 @@
                 }
             ],
             "conflicts": [],
-            "type": "RequestSetting s",
+            "type": "TimeboardGraphRequestSetting s",
             "original": "request"
         },
         {
             "con": {
-                "smart": "newTemplateVariableSetting",
-                "name": "TemplateVariableSetting'"
+                "smart": "newTimeboardGraphSetting",
+                "name": "TimeboardGraphSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Automatically scale graphs"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"autoscale\" <$> TF.attribute",
+                    "name": "_autoscale",
+                    "method": "autoscale",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAutoscale",
+                    "validate": false,
+                    "optional": true,
+                    "original": "autoscale"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Use a custom unit (like 'users')"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"custom_unit\" <$> TF.attribute",
+                    "name": "_customUnit",
+                    "method": "customUnit",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCustomUnit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "custom_unit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Filter for events to be overlayed on the graph."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"events\" <$> TF.attribute",
+                    "name": "_events",
+                    "method": "events",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasEvents",
+                    "validate": false,
+                    "optional": true,
+                    "original": "events"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "A list of groupings for hostmap type graphs."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"group\" <$> TF.attribute",
+                    "name": "_group",
+                    "method": "group",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasGroup",
+                    "validate": false,
+                    "optional": true,
+                    "original": "group"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Include hosts without metrics in hostmap graphs"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"include_no_metric_hosts\" <$> TF.attribute",
+                    "name": "_includeNoMetricHosts",
+                    "method": "includeNoMetricHosts",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasIncludeNoMetricHosts",
+                    "validate": false,
+                    "optional": true,
+                    "original": "include_no_metric_hosts"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Include ungrouped hosts in hostmap graphs"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"include_ungrouped_hosts\" <$> TF.attribute",
+                    "name": "_includeUngroupedHosts",
+                    "method": "includeUngroupedHosts",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasIncludeUngroupedHosts",
+                    "validate": false,
+                    "optional": true,
+                    "original": "include_ungrouped_hosts"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"marker\" <$> TF.attribute",
+                    "name": "_marker",
+                    "method": "marker",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (TimeboardGraphMarkerSetting s)]",
+                    "class": "HasMarker",
+                    "validate": false,
+                    "optional": true,
+                    "original": "marker"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "How many digits to show"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"precision\" <$> TF.attribute",
+                    "name": "_precision",
+                    "method": "precision",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrecision",
+                    "validate": false,
+                    "optional": true,
+                    "original": "precision"
+                },
+                {
+                    "default": "_request",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"request\" <$> TF.attribute",
+                    "name": "_request",
+                    "method": "request",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (TimeboardGraphRequestSetting s)]",
+                    "class": "HasRequest",
+                    "validate": false,
+                    "optional": false,
+                    "original": "request"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "A list of scope filters for hostmap type graphs."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"scope\" <$> TF.attribute",
+                    "name": "_scope",
+                    "method": "scope",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasScope",
+                    "validate": false,
+                    "optional": true,
+                    "original": "scope"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"style\" <$> TF.attribute",
+                    "name": "_style",
+                    "method": "style",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
+                    "class": "HasStyle",
+                    "validate": false,
+                    "optional": true,
+                    "original": "style"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "How to align text"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"text_align\" <$> TF.attribute",
+                    "name": "_textAlign",
+                    "method": "textAlign",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTextAlign",
+                    "validate": false,
+                    "optional": true,
+                    "original": "text_align"
+                },
+                {
+                    "default": "_title",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The name of the graph."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"title\" <$> TF.attribute",
+                    "name": "_title",
+                    "method": "title",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTitle",
+                    "validate": false,
+                    "optional": false,
+                    "original": "title"
+                },
+                {
+                    "default": "_viz",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"viz\" <$> TF.attribute",
+                    "name": "_viz",
+                    "method": "viz",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasViz",
+                    "validate": false,
+                    "optional": false,
+                    "original": "viz"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"yaxis\" <$> TF.attribute",
+                    "name": "_yaxis",
+                    "method": "yaxis",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
+                    "class": "HasYaxis",
+                    "validate": false,
+                    "optional": true,
+                    "original": "yaxis"
+                }
+            ],
+            "dependencies": [
+                "TimeboardGraphMarkerSetting",
+                "TimeboardGraphRequestSetting"
+            ],
+            "key": "timeboard.graph",
+            "name": "TimeboardGraphSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_request",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"request\" <$> TF.attribute",
+                    "name": "_request",
+                    "method": "request",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (TimeboardGraphRequestSetting s)]",
+                    "class": "HasRequest",
+                    "validate": false,
+                    "optional": false,
+                    "original": "request"
+                },
+                {
+                    "default": "_title",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The name of the graph."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"title\" <$> TF.attribute",
+                    "name": "_title",
+                    "method": "title",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTitle",
+                    "validate": false,
+                    "optional": false,
+                    "original": "title"
+                },
+                {
+                    "default": "_viz",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"viz\" <$> TF.attribute",
+                    "name": "_viz",
+                    "method": "viz",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasViz",
+                    "validate": false,
+                    "optional": false,
+                    "original": "viz"
+                }
+            ],
+            "conflicts": [],
+            "type": "TimeboardGraphSetting s",
+            "original": "graph"
+        },
+        {
+            "con": {
+                "smart": "newTimeboardTemplateVariableSetting",
+                "name": "TimeboardTemplateVariableSetting'"
             },
             "arguments": [
                 {
@@ -1101,8 +1220,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "datadog_timeboard.template_variable",
-            "name": "TemplateVariableSetting",
+            "key": "timeboard.template_variable",
+            "name": "TimeboardTemplateVariableSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1127,127 +1246,8 @@
                 }
             ],
             "conflicts": [],
-            "type": "TemplateVariableSetting s",
+            "type": "TimeboardTemplateVariableSetting s",
             "original": "template_variable"
-        },
-        {
-            "con": {
-                "smart": "newThresholdsSetting",
-                "name": "ThresholdsSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
-                    "name": "_critical",
-                    "method": "critical",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Double",
-                    "class": "HasCritical",
-                    "validate": false,
-                    "optional": true,
-                    "original": "critical"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"critical_recovery\" <$> TF.attribute",
-                    "name": "_criticalRecovery",
-                    "method": "criticalRecovery",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Double",
-                    "class": "HasCriticalRecovery",
-                    "validate": false,
-                    "optional": true,
-                    "original": "critical_recovery"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ok\" <$> TF.attribute",
-                    "name": "_ok",
-                    "method": "ok",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Double",
-                    "class": "HasOk",
-                    "validate": false,
-                    "optional": true,
-                    "original": "ok"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"unknown\" <$> TF.attribute",
-                    "name": "_unknown",
-                    "method": "unknown",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Double",
-                    "class": "HasUnknown",
-                    "validate": false,
-                    "optional": true,
-                    "original": "unknown"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
-                    "name": "_warning",
-                    "method": "warning",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Double",
-                    "class": "HasWarning",
-                    "validate": false,
-                    "optional": true,
-                    "original": "warning"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"warning_recovery\" <$> TF.attribute",
-                    "name": "_warningRecovery",
-                    "method": "warningRecovery",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Double",
-                    "class": "HasWarningRecovery",
-                    "validate": false,
-                    "optional": true,
-                    "original": "warning_recovery"
-                }
-            ],
-            "dependencies": [],
-            "key": "datadog_monitor.thresholds",
-            "name": "ThresholdsSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "ThresholdsSetting s",
-            "original": "thresholds"
         }
     ],
     "url": "https://www.terraform.io/docs/providers/datadog/index.html",
@@ -1355,7 +1355,7 @@
                     "method": "recurrence",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (RecurrenceSetting s)",
+                    "type": "TF.Attr s (DowntimeRecurrenceSetting s)",
                     "class": "HasRecurrence",
                     "validate": true,
                     "optional": true,
@@ -1398,9 +1398,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/datadog/r/downtime.html",
             "dependencies": [
-                "RecurrenceSetting"
+                "DowntimeRecurrenceSetting"
             ],
-            "key": "datadog_downtime",
+            "key": "downtime",
             "name": "DowntimeResource",
             "threaded": true,
             "attributes": [
@@ -1573,7 +1573,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/datadog/r/metric_metadata.html",
             "dependencies": [],
-            "key": "datadog_metric_metadata",
+            "key": "metric_metadata",
             "name": "MetricMetadataResource",
             "threaded": true,
             "attributes": [
@@ -1890,7 +1890,7 @@
                     "method": "thresholds",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s (ThresholdsSetting s)))",
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s (MonitorThresholdsSetting s)))",
                     "class": "HasThresholds",
                     "validate": false,
                     "optional": true,
@@ -1933,9 +1933,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/datadog/r/monitor.html",
             "dependencies": [
-                "ThresholdsSetting"
+                "MonitorThresholdsSetting"
             ],
-            "key": "datadog_monitor",
+            "key": "monitor",
             "name": "MonitorResource",
             "threaded": true,
             "attributes": [
@@ -2103,7 +2103,7 @@
                     "method": "graph",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (GraphSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (TimeboardGraphSetting s)]",
                     "class": "HasGraph",
                     "validate": false,
                     "optional": false,
@@ -2139,7 +2139,7 @@
                     "method": "templateVariable",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TemplateVariableSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (TimeboardTemplateVariableSetting s)]",
                     "class": "HasTemplateVariable",
                     "validate": false,
                     "optional": true,
@@ -2167,10 +2167,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/datadog/r/timeboard.html",
             "dependencies": [
-                "GraphSetting",
-                "TemplateVariableSetting"
+                "TimeboardGraphSetting",
+                "TimeboardTemplateVariableSetting"
             ],
-            "key": "datadog_timeboard",
+            "key": "timeboard",
             "name": "TimeboardResource",
             "threaded": true,
             "attributes": [
@@ -2225,7 +2225,7 @@
                     "method": "graph",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (GraphSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (TimeboardGraphSetting s)]",
                     "class": "HasGraph",
                     "validate": false,
                     "optional": false,
@@ -2349,7 +2349,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/datadog/r/user.html",
             "dependencies": [],
-            "key": "datadog_user",
+            "key": "user",
             "name": "UserResource",
             "threaded": true,
             "attributes": [
@@ -2488,7 +2488,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

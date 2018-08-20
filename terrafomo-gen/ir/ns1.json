@@ -2,8 +2,214 @@
     "settings": [
         {
             "con": {
-                "smart": "newAnswersSetting",
-                "name": "AnswersSetting'"
+                "smart": "newMonitoringjobRulesSetting",
+                "name": "MonitoringjobRulesSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_comparison",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"comparison\" <$> TF.attribute",
+                    "name": "_comparison",
+                    "method": "comparison",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComparison",
+                    "validate": false,
+                    "optional": false,
+                    "original": "comparison"
+                },
+                {
+                    "default": "_key",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"key\" <$> TF.attribute",
+                    "name": "_key",
+                    "method": "key",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "key"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "dependencies": [],
+            "key": "monitoringjob.rules",
+            "name": "MonitoringjobRulesSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_comparison",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"comparison\" <$> TF.attribute",
+                    "name": "_comparison",
+                    "method": "comparison",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComparison",
+                    "validate": false,
+                    "optional": false,
+                    "original": "comparison"
+                },
+                {
+                    "default": "_key",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"key\" <$> TF.attribute",
+                    "name": "_key",
+                    "method": "key",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "key"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "conflicts": [],
+            "type": "MonitoringjobRulesSetting s",
+            "original": "rules"
+        },
+        {
+            "con": {
+                "smart": "newNotifylistNotificationsSetting",
+                "name": "NotifylistNotificationsSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_config",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"config\" <$> TF.attribute",
+                    "name": "_config",
+                    "method": "config",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
+                    "class": "HasConfig",
+                    "validate": false,
+                    "optional": false,
+                    "original": "config"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "dependencies": [],
+            "key": "notifylist.notifications",
+            "name": "NotifylistNotificationsSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_config",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"config\" <$> TF.attribute",
+                    "name": "_config",
+                    "method": "config",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
+                    "class": "HasConfig",
+                    "validate": false,
+                    "optional": false,
+                    "original": "config"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "conflicts": [],
+            "type": "NotifylistNotificationsSetting s",
+            "original": "notifications"
+        },
+        {
+            "con": {
+                "smart": "newRecordAnswersSetting",
+                "name": "RecordAnswersSetting'"
             },
             "arguments": [
                 {
@@ -59,19 +265,19 @@
                 }
             ],
             "dependencies": [],
-            "key": "ns1_record.answers",
-            "name": "AnswersSetting",
+            "key": "record.answers",
+            "name": "RecordAnswersSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "AnswersSetting s",
+            "type": "RecordAnswersSetting s",
             "original": "answers"
         },
         {
             "con": {
-                "smart": "newFiltersSetting",
-                "name": "FiltersSetting'"
+                "smart": "newRecordFiltersSetting",
+                "name": "RecordFiltersSetting'"
             },
             "arguments": [
                 {
@@ -127,8 +333,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "ns1_record.filters",
-            "name": "FiltersSetting",
+            "key": "record.filters",
+            "name": "RecordFiltersSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -151,99 +357,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "FiltersSetting s",
+            "type": "RecordFiltersSetting s",
             "original": "filters"
         },
         {
             "con": {
-                "smart": "newNotificationsSetting",
-                "name": "NotificationsSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_config",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"config\" <$> TF.attribute",
-                    "name": "_config",
-                    "method": "config",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
-                    "class": "HasConfig",
-                    "validate": false,
-                    "optional": false,
-                    "original": "config"
-                },
-                {
-                    "default": "_type'",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": false,
-                    "original": "type"
-                }
-            ],
-            "dependencies": [],
-            "key": "ns1_notifylist.notifications",
-            "name": "NotificationsSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_config",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"config\" <$> TF.attribute",
-                    "name": "_config",
-                    "method": "config",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
-                    "class": "HasConfig",
-                    "validate": false,
-                    "optional": false,
-                    "original": "config"
-                },
-                {
-                    "default": "_type'",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": false,
-                    "original": "type"
-                }
-            ],
-            "conflicts": [],
-            "type": "NotificationsSetting s",
-            "original": "notifications"
-        },
-        {
-            "con": {
-                "smart": "newRegionsSetting",
-                "name": "RegionsSetting'"
+                "smart": "newRecordRegionsSetting",
+                "name": "RecordRegionsSetting'"
             },
             "arguments": [
                 {
@@ -282,8 +402,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "ns1_record.regions",
-            "name": "RegionsSetting",
+            "key": "record.regions",
+            "name": "RecordRegionsSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -306,128 +426,8 @@
                 }
             ],
             "conflicts": [],
-            "type": "RegionsSetting s",
+            "type": "RecordRegionsSetting s",
             "original": "regions"
-        },
-        {
-            "con": {
-                "smart": "newRulesSetting",
-                "name": "RulesSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_comparison",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"comparison\" <$> TF.attribute",
-                    "name": "_comparison",
-                    "method": "comparison",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComparison",
-                    "validate": false,
-                    "optional": false,
-                    "original": "comparison"
-                },
-                {
-                    "default": "_key",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"key\" <$> TF.attribute",
-                    "name": "_key",
-                    "method": "key",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasKey",
-                    "validate": false,
-                    "optional": false,
-                    "original": "key"
-                },
-                {
-                    "default": "_value",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "value"
-                }
-            ],
-            "dependencies": [],
-            "key": "ns1_monitoringjob.rules",
-            "name": "RulesSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_comparison",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"comparison\" <$> TF.attribute",
-                    "name": "_comparison",
-                    "method": "comparison",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComparison",
-                    "validate": false,
-                    "optional": false,
-                    "original": "comparison"
-                },
-                {
-                    "default": "_key",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"key\" <$> TF.attribute",
-                    "name": "_key",
-                    "method": "key",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasKey",
-                    "validate": false,
-                    "optional": false,
-                    "original": "key"
-                },
-                {
-                    "default": "_value",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "value"
-                }
-            ],
-            "conflicts": [],
-            "type": "RulesSetting s",
-            "original": "rules"
         }
     ],
     "url": "https://www.terraform.io/docs/providers/ns1/index.html",
@@ -799,7 +799,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ns1/r/apikey.html",
             "dependencies": [],
-            "key": "ns1_apikey",
+            "key": "apikey",
             "name": "ApikeyResource",
             "threaded": true,
             "attributes": [
@@ -921,7 +921,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ns1/r/datafeed.html",
             "dependencies": [],
-            "key": "ns1_datafeed",
+            "key": "datafeed",
             "name": "DatafeedResource",
             "threaded": true,
             "attributes": [
@@ -1043,7 +1043,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ns1/r/datasource.html",
             "dependencies": [],
-            "key": "ns1_datasource",
+            "key": "datasource",
             "name": "DatasourceResource",
             "threaded": true,
             "attributes": [
@@ -1360,7 +1360,7 @@
                     "method": "rules",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RulesSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (MonitoringjobRulesSetting s)]",
                     "class": "HasRules",
                     "validate": false,
                     "optional": true,
@@ -1369,9 +1369,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ns1/r/monitoringjob.html",
             "dependencies": [
-                "RulesSetting"
+                "MonitoringjobRulesSetting"
             ],
-            "key": "ns1_monitoringjob",
+            "key": "monitoringjob",
             "name": "MonitoringjobResource",
             "threaded": true,
             "attributes": [
@@ -1518,7 +1518,7 @@
                     "method": "notifications",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NotificationsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (NotifylistNotificationsSetting s)]",
                     "class": "HasNotifications",
                     "validate": false,
                     "optional": true,
@@ -1527,9 +1527,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ns1/r/notifylist.html",
             "dependencies": [
-                "NotificationsSetting"
+                "NotifylistNotificationsSetting"
             ],
-            "key": "ns1_notifylist",
+            "key": "notifylist",
             "name": "NotifylistResource",
             "threaded": true,
             "attributes": [
@@ -1591,7 +1591,7 @@
                     "method": "answers",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (AnswersSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (RecordAnswersSetting s)]",
                     "class": "HasAnswers",
                     "validate": false,
                     "optional": true,
@@ -1625,7 +1625,7 @@
                     "method": "filters",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (FiltersSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (RecordFiltersSetting s)]",
                     "class": "HasFilters",
                     "validate": false,
                     "optional": true,
@@ -1676,7 +1676,7 @@
                     "method": "regions",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RegionsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (RecordRegionsSetting s)]",
                     "class": "HasRegions",
                     "validate": false,
                     "optional": true,
@@ -1753,11 +1753,11 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ns1/r/record.html",
             "dependencies": [
-                "AnswersSetting",
-                "FiltersSetting",
-                "RegionsSetting"
+                "RecordAnswersSetting",
+                "RecordFiltersSetting",
+                "RecordRegionsSetting"
             ],
-            "key": "ns1_record",
+            "key": "record",
             "name": "RecordResource",
             "threaded": true,
             "attributes": [
@@ -2202,7 +2202,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ns1/r/team.html",
             "dependencies": [],
-            "key": "ns1_team",
+            "key": "team",
             "name": "TeamResource",
             "threaded": true,
             "attributes": [
@@ -2664,7 +2664,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ns1/r/user.html",
             "dependencies": [],
-            "key": "ns1_user",
+            "key": "user",
             "name": "UserResource",
             "threaded": true,
             "attributes": [
@@ -2905,7 +2905,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/ns1/r/zone.html",
             "dependencies": [],
-            "key": "ns1_zone",
+            "key": "zone",
             "name": "ZoneResource",
             "threaded": true,
             "attributes": [
@@ -3131,7 +3131,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

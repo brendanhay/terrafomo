@@ -2,13 +2,13 @@
     "settings": [
         {
             "con": {
-                "smart": "newReceivingRecordsSetting",
-                "name": "ReceivingRecordsSetting'"
+                "smart": "newDomainReceivingRecordsSetting",
+                "name": "DomainReceivingRecordsSetting'"
             },
             "arguments": [],
             "dependencies": [],
-            "key": "mailgun_domain.receiving_records",
-            "name": "ReceivingRecordsSetting",
+            "key": "domain.receiving_records",
+            "name": "DomainReceivingRecordsSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -82,18 +82,18 @@
             ],
             "parameters": [],
             "conflicts": [],
-            "type": "ReceivingRecordsSetting s",
+            "type": "DomainReceivingRecordsSetting s",
             "original": "receiving_records"
         },
         {
             "con": {
-                "smart": "newSendingRecordsSetting",
-                "name": "SendingRecordsSetting'"
+                "smart": "newDomainSendingRecordsSetting",
+                "name": "DomainSendingRecordsSetting'"
             },
             "arguments": [],
             "dependencies": [],
-            "key": "mailgun_domain.sending_records",
-            "name": "SendingRecordsSetting",
+            "key": "domain.sending_records",
+            "name": "DomainSendingRecordsSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -167,7 +167,7 @@
             ],
             "parameters": [],
             "conflicts": [],
-            "type": "SendingRecordsSetting s",
+            "type": "DomainSendingRecordsSetting s",
             "original": "sending_records"
         }
     ],
@@ -268,10 +268,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/mailgun/r/domain.html",
             "dependencies": [
-                "ReceivingRecordsSetting",
-                "SendingRecordsSetting"
+                "DomainReceivingRecordsSetting",
+                "DomainSendingRecordsSetting"
             ],
-            "key": "mailgun_domain",
+            "key": "domain",
             "name": "DomainResource",
             "threaded": true,
             "attributes": [
@@ -303,7 +303,7 @@
                     "method": "computedReceivingRecords",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ReceivingRecordsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DomainReceivingRecordsSetting s)]",
                     "class": "HasComputedReceivingRecords",
                     "validate": false,
                     "optional": false,
@@ -320,7 +320,7 @@
                     "method": "computedSendingRecords",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (SendingRecordsSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DomainSendingRecordsSetting s)]",
                     "class": "HasComputedSendingRecords",
                     "validate": false,
                     "optional": false,
@@ -444,7 +444,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

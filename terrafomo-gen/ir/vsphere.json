@@ -2,8 +2,366 @@
     "settings": [
         {
             "con": {
-                "smart": "newCdromSetting",
-                "name": "CdromSetting'"
+                "smart": "newDistributedPortGroupVlanRangeSetting",
+                "name": "DistributedPortGroupVlanRangeSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_maxVlan",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The minimum VLAN to use in the range."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_vlan\" <$> TF.attribute",
+                    "name": "_maxVlan",
+                    "method": "maxVlan",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMaxVlan",
+                    "validate": false,
+                    "optional": false,
+                    "original": "max_vlan"
+                },
+                {
+                    "default": "_minVlan",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The minimum VLAN to use in the range."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"min_vlan\" <$> TF.attribute",
+                    "name": "_minVlan",
+                    "method": "minVlan",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMinVlan",
+                    "validate": false,
+                    "optional": false,
+                    "original": "min_vlan"
+                }
+            ],
+            "dependencies": [],
+            "key": "distributed_port_group.vlan_range",
+            "name": "DistributedPortGroupVlanRangeSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_maxVlan",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The minimum VLAN to use in the range."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_vlan\" <$> TF.attribute",
+                    "name": "_maxVlan",
+                    "method": "maxVlan",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMaxVlan",
+                    "validate": false,
+                    "optional": false,
+                    "original": "max_vlan"
+                },
+                {
+                    "default": "_minVlan",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The minimum VLAN to use in the range."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"min_vlan\" <$> TF.attribute",
+                    "name": "_minVlan",
+                    "method": "minVlan",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMinVlan",
+                    "validate": false,
+                    "optional": false,
+                    "original": "min_vlan"
+                }
+            ],
+            "conflicts": [],
+            "type": "DistributedPortGroupVlanRangeSetting s",
+            "original": "vlan_range"
+        },
+        {
+            "con": {
+                "smart": "newDistributedVirtualSwitchHostSetting",
+                "name": "DistributedVirtualSwitchHostSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_devices",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name of the physical NIC to be added to the proxy switch."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"devices\" <$> TF.attribute",
+                    "name": "_devices",
+                    "method": "devices",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s P.Text))",
+                    "class": "HasDevices",
+                    "validate": false,
+                    "optional": false,
+                    "original": "devices"
+                },
+                {
+                    "default": "_hostSystemId",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The managed object ID of the host this specification applies to."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"host_system_id\" <$> TF.attribute",
+                    "name": "_hostSystemId",
+                    "method": "hostSystemId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHostSystemId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "host_system_id"
+                }
+            ],
+            "dependencies": [],
+            "key": "distributed_virtual_switch.host",
+            "name": "DistributedVirtualSwitchHostSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_devices",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name of the physical NIC to be added to the proxy switch."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"devices\" <$> TF.attribute",
+                    "name": "_devices",
+                    "method": "devices",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s P.Text))",
+                    "class": "HasDevices",
+                    "validate": false,
+                    "optional": false,
+                    "original": "devices"
+                },
+                {
+                    "default": "_hostSystemId",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The managed object ID of the host this specification applies to."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"host_system_id\" <$> TF.attribute",
+                    "name": "_hostSystemId",
+                    "method": "hostSystemId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHostSystemId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "host_system_id"
+                }
+            ],
+            "conflicts": [],
+            "type": "DistributedVirtualSwitchHostSetting s",
+            "original": "host"
+        },
+        {
+            "con": {
+                "smart": "newDistributedVirtualSwitchVlanRangeSetting",
+                "name": "DistributedVirtualSwitchVlanRangeSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_maxVlan",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The minimum VLAN to use in the range."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_vlan\" <$> TF.attribute",
+                    "name": "_maxVlan",
+                    "method": "maxVlan",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMaxVlan",
+                    "validate": false,
+                    "optional": false,
+                    "original": "max_vlan"
+                },
+                {
+                    "default": "_minVlan",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The minimum VLAN to use in the range."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"min_vlan\" <$> TF.attribute",
+                    "name": "_minVlan",
+                    "method": "minVlan",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMinVlan",
+                    "validate": false,
+                    "optional": false,
+                    "original": "min_vlan"
+                }
+            ],
+            "dependencies": [],
+            "key": "distributed_virtual_switch.vlan_range",
+            "name": "DistributedVirtualSwitchVlanRangeSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_maxVlan",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The minimum VLAN to use in the range."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_vlan\" <$> TF.attribute",
+                    "name": "_maxVlan",
+                    "method": "maxVlan",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMaxVlan",
+                    "validate": false,
+                    "optional": false,
+                    "original": "max_vlan"
+                },
+                {
+                    "default": "_minVlan",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The minimum VLAN to use in the range."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"min_vlan\" <$> TF.attribute",
+                    "name": "_minVlan",
+                    "method": "minVlan",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasMinVlan",
+                    "validate": false,
+                    "optional": false,
+                    "original": "min_vlan"
+                }
+            ],
+            "conflicts": [],
+            "type": "DistributedVirtualSwitchVlanRangeSetting s",
+            "original": "vlan_range"
+        },
+        {
+            "con": {
+                "smart": "newHostPortGroupPortsSetting",
+                "name": "HostPortGroupPortsSetting'"
+            },
+            "arguments": [],
+            "dependencies": [],
+            "key": "host_port_group.ports",
+            "name": "HostPortGroupPortsSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The linkable identifier for this port entry."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"key\" <$> TF.attribute",
+                    "name": "_computedKey",
+                    "method": "computedKey",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "key"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The MAC addresses of the network service of the virtual machine connected on",
+                        "this port."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"mac_addresses\" <$> TF.attribute",
+                    "name": "_computedMacAddresses",
+                    "method": "computedMacAddresses",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasComputedMacAddresses",
+                    "validate": false,
+                    "optional": false,
+                    "original": "mac_addresses"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Type type of the entity connected on this port. Possible values are host",
+                        "(VMKkernel), systemManagement (service console), virtualMachine, or unknown."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_computedType",
+                    "method": "computedType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedType",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "HostPortGroupPortsSetting s",
+            "original": "ports"
+        },
+        {
+            "con": {
+                "smart": "newVirtualMachineCdromSetting",
+                "name": "VirtualMachineCdromSetting'"
             },
             "arguments": [
                 {
@@ -65,8 +423,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "vsphere_virtual_machine.cdrom",
-            "name": "CdromSetting",
+            "key": "virtual_machine.cdrom",
+            "name": "VirtualMachineCdromSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -111,13 +469,146 @@
             ],
             "parameters": [],
             "conflicts": [],
-            "type": "CdromSetting s",
+            "type": "VirtualMachineCdromSetting s",
             "original": "cdrom"
         },
         {
             "con": {
-                "smart": "newCloneSetting",
-                "name": "CloneSetting'"
+                "smart": "newVirtualMachineCloneCustomizeLinuxOptionsSetting",
+                "name": "VirtualMachineCloneCustomizeLinuxOptionsSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "_domain",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The FQDN for this virtual machine."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"domain\" <$> TF.attribute",
+                    "name": "_domain",
+                    "method": "domain",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDomain",
+                    "validate": false,
+                    "optional": false,
+                    "original": "domain"
+                },
+                {
+                    "default": "_hostName",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The host name for this virtual machine."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"host_name\" <$> TF.attribute",
+                    "name": "_hostName",
+                    "method": "hostName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHostName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "host_name"
+                },
+                {
+                    "default": "TF.value P.True",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Specifies whether or not the hardware clock should be in UTC or not."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"hw_clock_utc\" <$> TF.attribute",
+                    "name": "_hwClockUtc",
+                    "method": "hwClockUtc",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasHwClockUtc",
+                    "validate": false,
+                    "optional": true,
+                    "original": "hw_clock_utc"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Customize the time zone on the VM. This should be a time zone-style entry,",
+                        "like America/Los_Angeles."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"time_zone\" <$> TF.attribute",
+                    "name": "_timeZone",
+                    "method": "timeZone",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTimeZone",
+                    "validate": false,
+                    "optional": true,
+                    "original": "time_zone"
+                }
+            ],
+            "dependencies": [],
+            "key": "virtual_machine.clone.customize.linux_options",
+            "name": "VirtualMachineCloneCustomizeLinuxOptionsSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_domain",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The FQDN for this virtual machine."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"domain\" <$> TF.attribute",
+                    "name": "_domain",
+                    "method": "domain",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDomain",
+                    "validate": false,
+                    "optional": false,
+                    "original": "domain"
+                },
+                {
+                    "default": "_hostName",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The host name for this virtual machine."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"host_name\" <$> TF.attribute",
+                    "name": "_hostName",
+                    "method": "hostName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHostName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "host_name"
+                }
+            ],
+            "conflicts": [],
+            "type": "VirtualMachineCloneCustomizeLinuxOptionsSetting s",
+            "original": "linux_options"
+        },
+        {
+            "con": {
+                "smart": "newVirtualMachineCloneCustomizeNetworkInterfaceSetting",
+                "name": "VirtualMachineCloneCustomizeNetworkInterfaceSetting'"
             },
             "arguments": [
                 {
@@ -125,116 +616,135 @@
                     "computed": false,
                     "required": false,
                     "help": [
-                        "The customization spec for this clone. This allows the user to configure the",
-                        "virtual machine post-clone."
+                        "A DNS search domain to add to the DNS configuration on the virtual machine."
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"customize\" <$> TF.attribute",
-                    "name": "_customize",
-                    "method": "customize",
+                    "encoder": "TF.assign \"dns_domain\" <$> TF.attribute",
+                    "name": "_dnsDomain",
+                    "method": "dnsDomain",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (CustomizeSetting s)",
-                    "class": "HasCustomize",
-                    "validate": true,
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDnsDomain",
+                    "validate": false,
                     "optional": true,
-                    "original": "customize"
+                    "original": "dns_domain"
                 },
                 {
                     "default": "TF.Nil",
                     "computed": false,
                     "required": false,
                     "help": [
-                        "Whether or not to create a linked clone when cloning. When this option is",
-                        "used, the source VM must have a single snapshot associated with it."
+                        "Network-interface specific DNS settings for Windows operating systems.",
+                        "Ignored on Linux."
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"linked_clone\" <$> TF.attribute",
-                    "name": "_linkedClone",
-                    "method": "linkedClone",
+                    "encoder": "TF.assign \"dns_server_list\" <$> TF.attribute",
+                    "name": "_dnsServerList",
+                    "method": "dnsServerList",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasLinkedClone",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasDnsServerList",
                     "validate": false,
                     "optional": true,
-                    "original": "linked_clone"
+                    "original": "dns_server_list"
                 },
                 {
-                    "default": "_templateUuid",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The UUID of the source virtual machine or template."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"template_uuid\" <$> TF.attribute",
-                    "name": "_templateUuid",
-                    "method": "templateUuid",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasTemplateUuid",
-                    "validate": false,
-                    "optional": false,
-                    "original": "template_uuid"
-                },
-                {
-                    "default": "TF.value 30",
+                    "default": "TF.Nil",
                     "computed": false,
                     "required": false,
                     "help": [
-                        "The timeout, in minutes, to wait for the virtual machine clone to complete."
+                        "The IPv4 address assigned to this network adapter. If left blank, DHCP is",
+                        "used."
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"timeout\" <$> TF.attribute",
-                    "name": "_timeout",
-                    "method": "timeout",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasTimeout",
-                    "validate": false,
-                    "optional": true,
-                    "original": "timeout"
-                }
-            ],
-            "dependencies": [
-                "CustomizeSetting"
-            ],
-            "key": "vsphere_virtual_machine.clone",
-            "name": "CloneSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_templateUuid",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The UUID of the source virtual machine or template."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"template_uuid\" <$> TF.attribute",
-                    "name": "_templateUuid",
-                    "method": "templateUuid",
+                    "encoder": "TF.assign \"ipv4_address\" <$> TF.attribute",
+                    "name": "_ipv4Address",
+                    "method": "ipv4Address",
                     "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasTemplateUuid",
+                    "class": "HasIpv4Address",
                     "validate": false,
-                    "optional": false,
-                    "original": "template_uuid"
+                    "optional": true,
+                    "original": "ipv4_address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The IPv4 CIDR netmask for the supplied IP address. Ignored if DHCP is",
+                        "selected."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ipv4_netmask\" <$> TF.attribute",
+                    "name": "_ipv4Netmask",
+                    "method": "ipv4Netmask",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasIpv4Netmask",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ipv4_netmask"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The IPv6 address assigned to this network adapter. If left blank, default",
+                        "auto-configuration is used."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ipv6_address\" <$> TF.attribute",
+                    "name": "_ipv6Address",
+                    "method": "ipv6Address",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpv6Address",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ipv6_address"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The IPv6 CIDR netmask for the supplied IP address. Ignored if",
+                        "auto-configuration is selected."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ipv6_netmask\" <$> TF.attribute",
+                    "name": "_ipv6Netmask",
+                    "method": "ipv6Netmask",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasIpv6Netmask",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ipv6_netmask"
                 }
             ],
+            "dependencies": [],
+            "key": "virtual_machine.clone.customize.network_interface",
+            "name": "VirtualMachineCloneCustomizeNetworkInterfaceSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
             "conflicts": [],
-            "type": "CloneSetting s",
-            "original": "clone"
+            "type": "VirtualMachineCloneCustomizeNetworkInterfaceSetting s",
+            "original": "network_interface"
         },
         {
             "con": {
-                "smart": "newCustomizeSetting",
-                "name": "CustomizeSetting'"
+                "smart": "newVirtualMachineCloneCustomizeSetting",
+                "name": "VirtualMachineCloneCustomizeSetting'"
             },
             "arguments": [
                 {
@@ -343,7 +853,7 @@
                             "method": "windowsSysprepText"
                         }
                     ],
-                    "type": "TF.Attr s (LinuxOptionsSetting s)",
+                    "type": "TF.Attr s (VirtualMachineCloneCustomizeLinuxOptionsSetting s)",
                     "class": "HasLinuxOptions",
                     "validate": true,
                     "optional": true,
@@ -362,7 +872,7 @@
                     "method": "networkInterface",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (VirtualMachineCloneCustomizeNetworkInterfaceSetting s)]",
                     "class": "HasNetworkInterface",
                     "validate": false,
                     "optional": true,
@@ -413,7 +923,7 @@
                             "method": "windowsSysprepText"
                         }
                     ],
-                    "type": "TF.Attr s (WindowsOptionsSetting s)",
+                    "type": "TF.Attr s (VirtualMachineCloneCustomizeWindowsOptionsSetting s)",
                     "class": "HasWindowsOptions",
                     "validate": true,
                     "optional": true,
@@ -451,12 +961,12 @@
                 }
             ],
             "dependencies": [
-                "LinuxOptionsSetting",
-                "NetworkInterfaceSetting",
-                "WindowsOptionsSetting"
+                "VirtualMachineCloneCustomizeLinuxOptionsSetting",
+                "VirtualMachineCloneCustomizeNetworkInterfaceSetting",
+                "VirtualMachineCloneCustomizeWindowsOptionsSetting"
             ],
-            "key": "vsphere_virtual_machine.clone.customize",
-            "name": "CustomizeSetting",
+            "key": "virtual_machine.clone.customize",
+            "name": "VirtualMachineCloneCustomizeSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
@@ -485,7 +995,7 @@
                             "method": "windowsSysprepText"
                         }
                     ],
-                    "type": "TF.Attr s (LinuxOptionsSetting s)",
+                    "type": "TF.Attr s (VirtualMachineCloneCustomizeLinuxOptionsSetting s)",
                     "class": "HasLinuxOptions",
                     "validate": true,
                     "optional": true,
@@ -515,7 +1025,7 @@
                             "method": "windowsSysprepText"
                         }
                     ],
-                    "type": "TF.Attr s (WindowsOptionsSetting s)",
+                    "type": "TF.Attr s (VirtualMachineCloneCustomizeWindowsOptionsSetting s)",
                     "class": "HasWindowsOptions",
                     "validate": true,
                     "optional": true,
@@ -552,13 +1062,565 @@
                     "original": "windows_sysprep_text"
                 }
             ],
-            "type": "CustomizeSetting s",
+            "type": "VirtualMachineCloneCustomizeSetting s",
             "original": "customize"
         },
         {
             "con": {
-                "smart": "newDiskSetting",
-                "name": "DiskSetting'"
+                "smart": "newVirtualMachineCloneCustomizeWindowsOptionsSetting",
+                "name": "VirtualMachineCloneCustomizeWindowsOptionsSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The new administrator password for this virtual machine."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"admin_password\" <$> TF.attribute",
+                    "name": "_adminPassword",
+                    "method": "adminPassword",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAdminPassword",
+                    "validate": false,
+                    "optional": true,
+                    "original": "admin_password"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Specifies whether or not the VM automatically logs on as Administrator."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"auto_logon\" <$> TF.attribute",
+                    "name": "_autoLogon",
+                    "method": "autoLogon",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAutoLogon",
+                    "validate": false,
+                    "optional": true,
+                    "original": "auto_logon"
+                },
+                {
+                    "default": "TF.value 1",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Specifies how many times the VM should auto-logon the Administrator account",
+                        "when auto_logon is true."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"auto_logon_count\" <$> TF.attribute",
+                    "name": "_autoLogonCount",
+                    "method": "autoLogonCount",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasAutoLogonCount",
+                    "validate": false,
+                    "optional": true,
+                    "original": "auto_logon_count"
+                },
+                {
+                    "default": "_computerName",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The host name for this virtual machine."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"computer_name\" <$> TF.attribute",
+                    "name": "_computerName",
+                    "method": "computerName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputerName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "computer_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The password of the domain administrator used to join this virtual machine",
+                        "to the domain."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"domain_admin_password\" <$> TF.attribute",
+                    "name": "_domainAdminPassword",
+                    "method": "domainAdminPassword",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_workgroup",
+                            "method": "workgroup"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDomainAdminPassword",
+                    "validate": false,
+                    "optional": true,
+                    "original": "domain_admin_password"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The user account of the domain administrator used to join this virtual",
+                        "machine to the domain."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"domain_admin_user\" <$> TF.attribute",
+                    "name": "_domainAdminUser",
+                    "method": "domainAdminUser",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_workgroup",
+                            "method": "workgroup"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDomainAdminUser",
+                    "validate": false,
+                    "optional": true,
+                    "original": "domain_admin_user"
+                },
+                {
+                    "default": "TF.value \"Administrator\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The full name of the user of this virtual machine."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"full_name\" <$> TF.attribute",
+                    "name": "_fullName",
+                    "method": "fullName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFullName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "full_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The domain that the virtual machine should join."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"join_domain\" <$> TF.attribute",
+                    "name": "_joinDomain",
+                    "method": "joinDomain",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_workgroup",
+                            "method": "workgroup"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasJoinDomain",
+                    "validate": false,
+                    "optional": true,
+                    "original": "join_domain"
+                },
+                {
+                    "default": "TF.value \"Managed by Terraform\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The organization name this virtual machine is being installed for."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"organization_name\" <$> TF.attribute",
+                    "name": "_organizationName",
+                    "method": "organizationName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOrganizationName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "organization_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The product key for this virtual machine."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"product_key\" <$> TF.attribute",
+                    "name": "_productKey",
+                    "method": "productKey",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProductKey",
+                    "validate": false,
+                    "optional": true,
+                    "original": "product_key"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "A list of commands to run at first user logon, after guest customization."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"run_once_command_list\" <$> TF.attribute",
+                    "name": "_runOnceCommandList",
+                    "method": "runOnceCommandList",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasRunOnceCommandList",
+                    "validate": false,
+                    "optional": true,
+                    "original": "run_once_command_list"
+                },
+                {
+                    "default": "TF.value 85",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The new time zone for the virtual machine. This is a sysprep-dictated",
+                        "timezone code."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"time_zone\" <$> TF.attribute",
+                    "name": "_timeZone",
+                    "method": "timeZone",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasTimeZone",
+                    "validate": false,
+                    "optional": true,
+                    "original": "time_zone"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The workgroup for this virtual machine if not joining a domain."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"workgroup\" <$> TF.attribute",
+                    "name": "_workgroup",
+                    "method": "workgroup",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_domainAdminPassword",
+                            "method": "domainAdminPassword"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_domainAdminUser",
+                            "method": "domainAdminUser"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_joinDomain",
+                            "method": "joinDomain"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasWorkgroup",
+                    "validate": false,
+                    "optional": true,
+                    "original": "workgroup"
+                }
+            ],
+            "dependencies": [],
+            "key": "virtual_machine.clone.customize.windows_options",
+            "name": "VirtualMachineCloneCustomizeWindowsOptionsSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_computerName",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The host name for this virtual machine."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"computer_name\" <$> TF.attribute",
+                    "name": "_computerName",
+                    "method": "computerName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputerName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "computer_name"
+                }
+            ],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The password of the domain administrator used to join this virtual machine",
+                        "to the domain."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"domain_admin_password\" <$> TF.attribute",
+                    "name": "_domainAdminPassword",
+                    "method": "domainAdminPassword",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_workgroup",
+                            "method": "workgroup"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDomainAdminPassword",
+                    "validate": false,
+                    "optional": true,
+                    "original": "domain_admin_password"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The user account of the domain administrator used to join this virtual",
+                        "machine to the domain."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"domain_admin_user\" <$> TF.attribute",
+                    "name": "_domainAdminUser",
+                    "method": "domainAdminUser",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_workgroup",
+                            "method": "workgroup"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDomainAdminUser",
+                    "validate": false,
+                    "optional": true,
+                    "original": "domain_admin_user"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The domain that the virtual machine should join."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"join_domain\" <$> TF.attribute",
+                    "name": "_joinDomain",
+                    "method": "joinDomain",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_workgroup",
+                            "method": "workgroup"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasJoinDomain",
+                    "validate": false,
+                    "optional": true,
+                    "original": "join_domain"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The workgroup for this virtual machine if not joining a domain."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"workgroup\" <$> TF.attribute",
+                    "name": "_workgroup",
+                    "method": "workgroup",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_domainAdminPassword",
+                            "method": "domainAdminPassword"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_domainAdminUser",
+                            "method": "domainAdminUser"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_joinDomain",
+                            "method": "joinDomain"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasWorkgroup",
+                    "validate": false,
+                    "optional": true,
+                    "original": "workgroup"
+                }
+            ],
+            "type": "VirtualMachineCloneCustomizeWindowsOptionsSetting s",
+            "original": "windows_options"
+        },
+        {
+            "con": {
+                "smart": "newVirtualMachineCloneSetting",
+                "name": "VirtualMachineCloneSetting'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The customization spec for this clone. This allows the user to configure the",
+                        "virtual machine post-clone."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"customize\" <$> TF.attribute",
+                    "name": "_customize",
+                    "method": "customize",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (VirtualMachineCloneCustomizeSetting s)",
+                    "class": "HasCustomize",
+                    "validate": true,
+                    "optional": true,
+                    "original": "customize"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Whether or not to create a linked clone when cloning. When this option is",
+                        "used, the source VM must have a single snapshot associated with it."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"linked_clone\" <$> TF.attribute",
+                    "name": "_linkedClone",
+                    "method": "linkedClone",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasLinkedClone",
+                    "validate": false,
+                    "optional": true,
+                    "original": "linked_clone"
+                },
+                {
+                    "default": "_templateUuid",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The UUID of the source virtual machine or template."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"template_uuid\" <$> TF.attribute",
+                    "name": "_templateUuid",
+                    "method": "templateUuid",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTemplateUuid",
+                    "validate": false,
+                    "optional": false,
+                    "original": "template_uuid"
+                },
+                {
+                    "default": "TF.value 30",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The timeout, in minutes, to wait for the virtual machine clone to complete."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"timeout\" <$> TF.attribute",
+                    "name": "_timeout",
+                    "method": "timeout",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasTimeout",
+                    "validate": false,
+                    "optional": true,
+                    "original": "timeout"
+                }
+            ],
+            "dependencies": [
+                "VirtualMachineCloneCustomizeSetting"
+            ],
+            "key": "virtual_machine.clone",
+            "name": "VirtualMachineCloneSetting",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_templateUuid",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The UUID of the source virtual machine or template."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"template_uuid\" <$> TF.attribute",
+                    "name": "_templateUuid",
+                    "method": "templateUuid",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTemplateUuid",
+                    "validate": false,
+                    "optional": false,
+                    "original": "template_uuid"
+                }
+            ],
+            "conflicts": [],
+            "type": "VirtualMachineCloneSetting s",
+            "original": "clone"
+        },
+        {
+            "con": {
+                "smart": "newVirtualMachineDiskSetting",
+                "name": "VirtualMachineDiskSetting'"
             },
             "arguments": [
                 {
@@ -880,8 +1942,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "vsphere_virtual_machine.disk",
-            "name": "DiskSetting",
+            "key": "virtual_machine.disk",
+            "name": "VirtualMachineDiskSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -967,18 +2029,18 @@
             ],
             "parameters": [],
             "conflicts": [],
-            "type": "DiskSetting s",
+            "type": "VirtualMachineDiskSetting s",
             "original": "disk"
         },
         {
             "con": {
-                "smart": "newDisksSetting",
-                "name": "DisksSetting'"
+                "smart": "newVirtualMachineDisksSetting",
+                "name": "VirtualMachineDisksSetting'"
             },
             "arguments": [],
             "dependencies": [],
-            "key": "vsphere_virtual_machine.disks",
-            "name": "DisksSetting",
+            "key": "virtual_machine.disks",
+            "name": "VirtualMachineDisksSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -1035,361 +2097,15 @@
             ],
             "parameters": [],
             "conflicts": [],
-            "type": "DisksSetting s",
+            "type": "VirtualMachineDisksSetting s",
             "original": "disks"
         },
         {
             "con": {
-                "smart": "newHostSetting",
-                "name": "HostSetting'"
+                "smart": "newVirtualMachineNetworkInterfaceSetting",
+                "name": "VirtualMachineNetworkInterfaceSetting'"
             },
             "arguments": [
-                {
-                    "default": "_devices",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Name of the physical NIC to be added to the proxy switch."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"devices\" <$> TF.attribute",
-                    "name": "_devices",
-                    "method": "devices",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s P.Text))",
-                    "class": "HasDevices",
-                    "validate": false,
-                    "optional": false,
-                    "original": "devices"
-                },
-                {
-                    "default": "_hostSystemId",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The managed object ID of the host this specification applies to."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"host_system_id\" <$> TF.attribute",
-                    "name": "_hostSystemId",
-                    "method": "hostSystemId",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasHostSystemId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "host_system_id"
-                }
-            ],
-            "dependencies": [],
-            "key": "vsphere_distributed_virtual_switch.host",
-            "name": "HostSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_devices",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Name of the physical NIC to be added to the proxy switch."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"devices\" <$> TF.attribute",
-                    "name": "_devices",
-                    "method": "devices",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s P.Text))",
-                    "class": "HasDevices",
-                    "validate": false,
-                    "optional": false,
-                    "original": "devices"
-                },
-                {
-                    "default": "_hostSystemId",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The managed object ID of the host this specification applies to."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"host_system_id\" <$> TF.attribute",
-                    "name": "_hostSystemId",
-                    "method": "hostSystemId",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasHostSystemId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "host_system_id"
-                }
-            ],
-            "conflicts": [],
-            "type": "HostSetting s",
-            "original": "host"
-        },
-        {
-            "con": {
-                "smart": "newLinuxOptionsSetting",
-                "name": "LinuxOptionsSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_domain",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The FQDN for this virtual machine."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"domain\" <$> TF.attribute",
-                    "name": "_domain",
-                    "method": "domain",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDomain",
-                    "validate": false,
-                    "optional": false,
-                    "original": "domain"
-                },
-                {
-                    "default": "_hostName",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The host name for this virtual machine."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"host_name\" <$> TF.attribute",
-                    "name": "_hostName",
-                    "method": "hostName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasHostName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "host_name"
-                },
-                {
-                    "default": "TF.value P.True",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Specifies whether or not the hardware clock should be in UTC or not."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"hw_clock_utc\" <$> TF.attribute",
-                    "name": "_hwClockUtc",
-                    "method": "hwClockUtc",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasHwClockUtc",
-                    "validate": false,
-                    "optional": true,
-                    "original": "hw_clock_utc"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Customize the time zone on the VM. This should be a time zone-style entry,",
-                        "like America/Los_Angeles."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"time_zone\" <$> TF.attribute",
-                    "name": "_timeZone",
-                    "method": "timeZone",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasTimeZone",
-                    "validate": false,
-                    "optional": true,
-                    "original": "time_zone"
-                }
-            ],
-            "dependencies": [],
-            "key": "vsphere_virtual_machine.clone.customize.linux_options",
-            "name": "LinuxOptionsSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_domain",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The FQDN for this virtual machine."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"domain\" <$> TF.attribute",
-                    "name": "_domain",
-                    "method": "domain",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDomain",
-                    "validate": false,
-                    "optional": false,
-                    "original": "domain"
-                },
-                {
-                    "default": "_hostName",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The host name for this virtual machine."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"host_name\" <$> TF.attribute",
-                    "name": "_hostName",
-                    "method": "hostName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasHostName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "host_name"
-                }
-            ],
-            "conflicts": [],
-            "type": "LinuxOptionsSetting s",
-            "original": "linux_options"
-        },
-        {
-            "con": {
-                "smart": "newNetworkInterfaceSetting",
-                "name": "NetworkInterfaceSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "A DNS search domain to add to the DNS configuration on the virtual machine."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"dns_domain\" <$> TF.attribute",
-                    "name": "_dnsDomain",
-                    "method": "dnsDomain",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDnsDomain",
-                    "validate": false,
-                    "optional": true,
-                    "original": "dns_domain"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Network-interface specific DNS settings for Windows operating systems.",
-                        "Ignored on Linux."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"dns_server_list\" <$> TF.attribute",
-                    "name": "_dnsServerList",
-                    "method": "dnsServerList",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasDnsServerList",
-                    "validate": false,
-                    "optional": true,
-                    "original": "dns_server_list"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The IPv4 address assigned to this network adapter. If left blank, DHCP is",
-                        "used."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ipv4_address\" <$> TF.attribute",
-                    "name": "_ipv4Address",
-                    "method": "ipv4Address",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasIpv4Address",
-                    "validate": false,
-                    "optional": true,
-                    "original": "ipv4_address"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The IPv4 CIDR netmask for the supplied IP address. Ignored if DHCP is",
-                        "selected."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ipv4_netmask\" <$> TF.attribute",
-                    "name": "_ipv4Netmask",
-                    "method": "ipv4Netmask",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasIpv4Netmask",
-                    "validate": false,
-                    "optional": true,
-                    "original": "ipv4_netmask"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The IPv6 address assigned to this network adapter. If left blank, default",
-                        "auto-configuration is used."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ipv6_address\" <$> TF.attribute",
-                    "name": "_ipv6Address",
-                    "method": "ipv6Address",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasIpv6Address",
-                    "validate": false,
-                    "optional": true,
-                    "original": "ipv6_address"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The IPv6 CIDR netmask for the supplied IP address. Ignored if",
-                        "auto-configuration is selected."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ipv6_netmask\" <$> TF.attribute",
-                    "name": "_ipv6Netmask",
-                    "method": "ipv6Netmask",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasIpv6Netmask",
-                    "validate": false,
-                    "optional": true,
-                    "original": "ipv6_netmask"
-                },
                 {
                     "default": "TF.value \"vmxnet3\"",
                     "computed": false,
@@ -1547,8 +2263,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "vsphere_virtual_machine.clone.customize.network_interface",
-            "name": "NetworkInterfaceSetting",
+            "key": "virtual_machine.network_interface",
+            "name": "VirtualMachineNetworkInterfaceSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -1652,89 +2368,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "NetworkInterfaceSetting s",
+            "type": "VirtualMachineNetworkInterfaceSetting s",
             "original": "network_interface"
         },
         {
             "con": {
-                "smart": "newPortsSetting",
-                "name": "PortsSetting'"
-            },
-            "arguments": [],
-            "dependencies": [],
-            "key": "vsphere_host_port_group.ports",
-            "name": "PortsSetting",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "The linkable identifier for this port entry."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"key\" <$> TF.attribute",
-                    "name": "_computedKey",
-                    "method": "computedKey",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedKey",
-                    "validate": false,
-                    "optional": false,
-                    "original": "key"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "The MAC addresses of the network service of the virtual machine connected on",
-                        "this port."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"mac_addresses\" <$> TF.attribute",
-                    "name": "_computedMacAddresses",
-                    "method": "computedMacAddresses",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasComputedMacAddresses",
-                    "validate": false,
-                    "optional": false,
-                    "original": "mac_addresses"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "Type type of the entity connected on this port. Possible values are host",
-                        "(VMKkernel), systemManagement (service console), virtualMachine, or unknown."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_computedType",
-                    "method": "computedType",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedType",
-                    "validate": false,
-                    "optional": false,
-                    "original": "type"
-                }
-            ],
-            "parameters": [],
-            "conflicts": [],
-            "type": "PortsSetting s",
-            "original": "ports"
-        },
-        {
-            "con": {
-                "smart": "newVappSetting",
-                "name": "VappSetting'"
+                "smart": "newVirtualMachineVappSetting",
+                "name": "VirtualMachineVappSetting'"
             },
             "arguments": [
                 {
@@ -1759,543 +2399,14 @@
                 }
             ],
             "dependencies": [],
-            "key": "vsphere_virtual_machine.vapp",
-            "name": "VappSetting",
+            "key": "virtual_machine.vapp",
+            "name": "VirtualMachineVappSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "VappSetting s",
+            "type": "VirtualMachineVappSetting s",
             "original": "vapp"
-        },
-        {
-            "con": {
-                "smart": "newVlanRangeSetting",
-                "name": "VlanRangeSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "_maxVlan",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The minimum VLAN to use in the range."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"max_vlan\" <$> TF.attribute",
-                    "name": "_maxVlan",
-                    "method": "maxVlan",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasMaxVlan",
-                    "validate": false,
-                    "optional": false,
-                    "original": "max_vlan"
-                },
-                {
-                    "default": "_minVlan",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The minimum VLAN to use in the range."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"min_vlan\" <$> TF.attribute",
-                    "name": "_minVlan",
-                    "method": "minVlan",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasMinVlan",
-                    "validate": false,
-                    "optional": false,
-                    "original": "min_vlan"
-                }
-            ],
-            "dependencies": [],
-            "key": "vsphere_distributed_port_group.vlan_range",
-            "name": "VlanRangeSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_maxVlan",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The minimum VLAN to use in the range."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"max_vlan\" <$> TF.attribute",
-                    "name": "_maxVlan",
-                    "method": "maxVlan",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasMaxVlan",
-                    "validate": false,
-                    "optional": false,
-                    "original": "max_vlan"
-                },
-                {
-                    "default": "_minVlan",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The minimum VLAN to use in the range."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"min_vlan\" <$> TF.attribute",
-                    "name": "_minVlan",
-                    "method": "minVlan",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasMinVlan",
-                    "validate": false,
-                    "optional": false,
-                    "original": "min_vlan"
-                }
-            ],
-            "conflicts": [],
-            "type": "VlanRangeSetting s",
-            "original": "vlan_range"
-        },
-        {
-            "con": {
-                "smart": "newWindowsOptionsSetting",
-                "name": "WindowsOptionsSetting'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The new administrator password for this virtual machine."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"admin_password\" <$> TF.attribute",
-                    "name": "_adminPassword",
-                    "method": "adminPassword",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAdminPassword",
-                    "validate": false,
-                    "optional": true,
-                    "original": "admin_password"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Specifies whether or not the VM automatically logs on as Administrator."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"auto_logon\" <$> TF.attribute",
-                    "name": "_autoLogon",
-                    "method": "autoLogon",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasAutoLogon",
-                    "validate": false,
-                    "optional": true,
-                    "original": "auto_logon"
-                },
-                {
-                    "default": "TF.value 1",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Specifies how many times the VM should auto-logon the Administrator account",
-                        "when auto_logon is true."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"auto_logon_count\" <$> TF.attribute",
-                    "name": "_autoLogonCount",
-                    "method": "autoLogonCount",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasAutoLogonCount",
-                    "validate": false,
-                    "optional": true,
-                    "original": "auto_logon_count"
-                },
-                {
-                    "default": "_computerName",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The host name for this virtual machine."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"computer_name\" <$> TF.attribute",
-                    "name": "_computerName",
-                    "method": "computerName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputerName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "computer_name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The password of the domain administrator used to join this virtual machine",
-                        "to the domain."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"domain_admin_password\" <$> TF.attribute",
-                    "name": "_domainAdminPassword",
-                    "method": "domainAdminPassword",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_workgroup",
-                            "method": "workgroup"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDomainAdminPassword",
-                    "validate": false,
-                    "optional": true,
-                    "original": "domain_admin_password"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The user account of the domain administrator used to join this virtual",
-                        "machine to the domain."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"domain_admin_user\" <$> TF.attribute",
-                    "name": "_domainAdminUser",
-                    "method": "domainAdminUser",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_workgroup",
-                            "method": "workgroup"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDomainAdminUser",
-                    "validate": false,
-                    "optional": true,
-                    "original": "domain_admin_user"
-                },
-                {
-                    "default": "TF.value \"Administrator\"",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The full name of the user of this virtual machine."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"full_name\" <$> TF.attribute",
-                    "name": "_fullName",
-                    "method": "fullName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasFullName",
-                    "validate": false,
-                    "optional": true,
-                    "original": "full_name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The domain that the virtual machine should join."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"join_domain\" <$> TF.attribute",
-                    "name": "_joinDomain",
-                    "method": "joinDomain",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_workgroup",
-                            "method": "workgroup"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasJoinDomain",
-                    "validate": false,
-                    "optional": true,
-                    "original": "join_domain"
-                },
-                {
-                    "default": "TF.value \"Managed by Terraform\"",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The organization name this virtual machine is being installed for."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"organization_name\" <$> TF.attribute",
-                    "name": "_organizationName",
-                    "method": "organizationName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasOrganizationName",
-                    "validate": false,
-                    "optional": true,
-                    "original": "organization_name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The product key for this virtual machine."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"product_key\" <$> TF.attribute",
-                    "name": "_productKey",
-                    "method": "productKey",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasProductKey",
-                    "validate": false,
-                    "optional": true,
-                    "original": "product_key"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "A list of commands to run at first user logon, after guest customization."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"run_once_command_list\" <$> TF.attribute",
-                    "name": "_runOnceCommandList",
-                    "method": "runOnceCommandList",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasRunOnceCommandList",
-                    "validate": false,
-                    "optional": true,
-                    "original": "run_once_command_list"
-                },
-                {
-                    "default": "TF.value 85",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The new time zone for the virtual machine. This is a sysprep-dictated",
-                        "timezone code."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"time_zone\" <$> TF.attribute",
-                    "name": "_timeZone",
-                    "method": "timeZone",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Int",
-                    "class": "HasTimeZone",
-                    "validate": false,
-                    "optional": true,
-                    "original": "time_zone"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The workgroup for this virtual machine if not joining a domain."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"workgroup\" <$> TF.attribute",
-                    "name": "_workgroup",
-                    "method": "workgroup",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_domainAdminPassword",
-                            "method": "domainAdminPassword"
-                        },
-                        {
-                            "default": "TF.Nil",
-                            "name": "_domainAdminUser",
-                            "method": "domainAdminUser"
-                        },
-                        {
-                            "default": "TF.Nil",
-                            "name": "_joinDomain",
-                            "method": "joinDomain"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasWorkgroup",
-                    "validate": false,
-                    "optional": true,
-                    "original": "workgroup"
-                }
-            ],
-            "dependencies": [],
-            "key": "vsphere_virtual_machine.clone.customize.windows_options",
-            "name": "WindowsOptionsSetting",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_computerName",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The host name for this virtual machine."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"computer_name\" <$> TF.attribute",
-                    "name": "_computerName",
-                    "method": "computerName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputerName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "computer_name"
-                }
-            ],
-            "conflicts": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The password of the domain administrator used to join this virtual machine",
-                        "to the domain."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"domain_admin_password\" <$> TF.attribute",
-                    "name": "_domainAdminPassword",
-                    "method": "domainAdminPassword",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_workgroup",
-                            "method": "workgroup"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDomainAdminPassword",
-                    "validate": false,
-                    "optional": true,
-                    "original": "domain_admin_password"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The user account of the domain administrator used to join this virtual",
-                        "machine to the domain."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"domain_admin_user\" <$> TF.attribute",
-                    "name": "_domainAdminUser",
-                    "method": "domainAdminUser",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_workgroup",
-                            "method": "workgroup"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDomainAdminUser",
-                    "validate": false,
-                    "optional": true,
-                    "original": "domain_admin_user"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The domain that the virtual machine should join."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"join_domain\" <$> TF.attribute",
-                    "name": "_joinDomain",
-                    "method": "joinDomain",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_workgroup",
-                            "method": "workgroup"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasJoinDomain",
-                    "validate": false,
-                    "optional": true,
-                    "original": "join_domain"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The workgroup for this virtual machine if not joining a domain."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"workgroup\" <$> TF.attribute",
-                    "name": "_workgroup",
-                    "method": "workgroup",
-                    "threaded": true,
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_domainAdminPassword",
-                            "method": "domainAdminPassword"
-                        },
-                        {
-                            "default": "TF.Nil",
-                            "name": "_domainAdminUser",
-                            "method": "domainAdminUser"
-                        },
-                        {
-                            "default": "TF.Nil",
-                            "name": "_joinDomain",
-                            "method": "joinDomain"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasWorkgroup",
-                    "validate": false,
-                    "optional": true,
-                    "original": "workgroup"
-                }
-            ],
-            "type": "WindowsOptionsSetting s",
-            "original": "windows_options"
         }
     ],
     "url": "https://www.terraform.io/docs/providers/vsphere/index.html",
@@ -2348,7 +2459,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/compute_cluster.html",
             "dependencies": [],
-            "key": "vsphere_compute_cluster",
+            "key": "compute_cluster",
             "name": "ComputeClusterData",
             "threaded": true,
             "attributes": [
@@ -2442,7 +2553,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/custom_attribute.html",
             "dependencies": [],
-            "key": "vsphere_custom_attribute",
+            "key": "custom_attribute",
             "name": "CustomAttributeData",
             "threaded": true,
             "attributes": [
@@ -2538,7 +2649,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/datacenter.html",
             "dependencies": [],
-            "key": "vsphere_datacenter",
+            "key": "datacenter",
             "name": "DatacenterData",
             "threaded": true,
             "attributes": [
@@ -2614,7 +2725,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/datastore.html",
             "dependencies": [],
-            "key": "vsphere_datastore",
+            "key": "datastore",
             "name": "DatastoreData",
             "threaded": true,
             "attributes": [
@@ -2709,7 +2820,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/datastore_cluster.html",
             "dependencies": [],
-            "key": "vsphere_datastore_cluster",
+            "key": "datastore_cluster",
             "name": "DatastoreClusterData",
             "threaded": true,
             "attributes": [
@@ -2805,7 +2916,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/distributed_virtual_switch.html",
             "dependencies": [],
-            "key": "vsphere_distributed_virtual_switch",
+            "key": "distributed_virtual_switch",
             "name": "DistributedVirtualSwitchData",
             "threaded": true,
             "attributes": [
@@ -2919,7 +3030,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/host.html",
             "dependencies": [],
-            "key": "vsphere_host",
+            "key": "host",
             "name": "HostData",
             "threaded": true,
             "attributes": [
@@ -3034,7 +3145,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/network.html",
             "dependencies": [],
-            "key": "vsphere_network",
+            "key": "network",
             "name": "NetworkData",
             "threaded": true,
             "attributes": [
@@ -3149,7 +3260,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/resource_pool.html",
             "dependencies": [],
-            "key": "vsphere_resource_pool",
+            "key": "resource_pool",
             "name": "ResourcePoolData",
             "threaded": true,
             "attributes": [
@@ -3223,7 +3334,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/tag.html",
             "dependencies": [],
-            "key": "vsphere_tag",
+            "key": "tag",
             "name": "TagData",
             "threaded": true,
             "attributes": [
@@ -3336,7 +3447,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/tag_category.html",
             "dependencies": [],
-            "key": "vsphere_tag_category",
+            "key": "tag_category",
             "name": "TagCategoryData",
             "threaded": true,
             "attributes": [
@@ -3511,9 +3622,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/virtual_machine.html",
             "dependencies": [
-                "DisksSetting"
+                "VirtualMachineDisksSetting"
             ],
-            "key": "vsphere_virtual_machine",
+            "key": "virtual_machine",
             "name": "VirtualMachineData",
             "threaded": true,
             "attributes": [
@@ -3568,7 +3679,7 @@
                     "method": "computedDisks",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (DisksSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (VirtualMachineDisksSetting s)]",
                     "class": "HasComputedDisks",
                     "validate": false,
                     "optional": false,
@@ -3764,7 +3875,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/d/vmfs_disks.html",
             "dependencies": [],
-            "key": "vsphere_vmfs_disks",
+            "key": "vmfs_disks",
             "name": "VmfsDisksData",
             "threaded": true,
             "attributes": [
@@ -4906,7 +5017,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/compute_cluster.html",
             "dependencies": [],
-            "key": "vsphere_compute_cluster",
+            "key": "compute_cluster",
             "name": "ComputeClusterResource",
             "threaded": true,
             "attributes": [
@@ -5057,7 +5168,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_host_group.html",
             "dependencies": [],
-            "key": "vsphere_compute_cluster_host_group",
+            "key": "compute_cluster_host_group",
             "name": "ComputeClusterHostGroupResource",
             "threaded": true,
             "attributes": [
@@ -5228,7 +5339,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_vm_affinity_rule.html",
             "dependencies": [],
-            "key": "vsphere_compute_cluster_vm_affinity_rule",
+            "key": "compute_cluster_vm_affinity_rule",
             "name": "ComputeClusterVmAffinityRuleResource",
             "threaded": true,
             "attributes": [
@@ -5418,7 +5529,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_vm_anti_affinity_rule.html",
             "dependencies": [],
-            "key": "vsphere_compute_cluster_vm_anti_affinity_rule",
+            "key": "compute_cluster_vm_anti_affinity_rule",
             "name": "ComputeClusterVmAntiAffinityRuleResource",
             "threaded": true,
             "attributes": [
@@ -5631,7 +5742,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_vm_dependency_rule.html",
             "dependencies": [],
-            "key": "vsphere_compute_cluster_vm_dependency_rule",
+            "key": "compute_cluster_vm_dependency_rule",
             "name": "ComputeClusterVmDependencyRuleResource",
             "threaded": true,
             "attributes": [
@@ -5805,7 +5916,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_vm_group.html",
             "dependencies": [],
-            "key": "vsphere_compute_cluster_vm_group",
+            "key": "compute_cluster_vm_group",
             "name": "ComputeClusterVmGroupResource",
             "threaded": true,
             "attributes": [
@@ -6028,7 +6139,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_vm_host_rule.html",
             "dependencies": [],
-            "key": "vsphere_compute_cluster_vm_host_rule",
+            "key": "compute_cluster_vm_host_rule",
             "name": "ComputeClusterVmHostRuleResource",
             "threaded": true,
             "attributes": [
@@ -6214,7 +6325,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/custom_attribute.html",
             "dependencies": [],
-            "key": "vsphere_custom_attribute",
+            "key": "custom_attribute",
             "name": "CustomAttributeResource",
             "threaded": true,
             "attributes": [
@@ -6342,7 +6453,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/datacenter.html",
             "dependencies": [],
-            "key": "vsphere_datacenter",
+            "key": "datacenter",
             "name": "DatacenterResource",
             "threaded": true,
             "attributes": [
@@ -6908,7 +7019,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/datastore_cluster.html",
             "dependencies": [],
-            "key": "vsphere_datastore_cluster",
+            "key": "datastore_cluster",
             "name": "DatastoreClusterResource",
             "threaded": true,
             "attributes": [
@@ -7080,7 +7191,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/datastore_cluster_vm_anti_affinity_rule.html",
             "dependencies": [],
-            "key": "vsphere_datastore_cluster_vm_anti_affinity_rule",
+            "key": "datastore_cluster_vm_anti_affinity_rule",
             "name": "DatastoreClusterVmAntiAffinityRuleResource",
             "threaded": true,
             "attributes": [
@@ -8098,7 +8209,7 @@
                             "method": "vlanId"
                         }
                     ],
-                    "type": "TF.Attr s [TF.Attr s (VlanRangeSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DistributedPortGroupVlanRangeSetting s)]",
                     "class": "HasVlanRange",
                     "validate": false,
                     "optional": true,
@@ -8107,10 +8218,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/distributed_port_group.html",
             "dependencies": [
-                "VlanRangeSetting",
-                "VlanRangeSetting"
+                "DistributedPortGroupVlanRangeSetting",
+                "DistributedPortGroupVlanRangeSetting"
             ],
-            "key": "vsphere_distributed_port_group",
+            "key": "distributed_port_group",
             "name": "DistributedPortGroupResource",
             "threaded": true,
             "attributes": [
@@ -8702,7 +8813,7 @@
                         "_portPrivateSecondaryVlanId",
                         "_vlanId"
                     ],
-                    "type": "TF.Attr s [TF.Attr s (VlanRangeSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DistributedPortGroupVlanRangeSetting s)]",
                     "class": "HasComputedVlanRange",
                     "validate": false,
                     "optional": false,
@@ -8834,7 +8945,7 @@
                             "method": "vlanId"
                         }
                     ],
-                    "type": "TF.Attr s [TF.Attr s (VlanRangeSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DistributedPortGroupVlanRangeSetting s)]",
                     "class": "HasVlanRange",
                     "validate": false,
                     "optional": true,
@@ -9371,7 +9482,7 @@
                     "method": "host",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (HostSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DistributedVirtualSwitchHostSetting s)]",
                     "class": "HasHost",
                     "validate": false,
                     "optional": true,
@@ -10446,7 +10557,7 @@
                             "method": "vlanId"
                         }
                     ],
-                    "type": "TF.Attr s [TF.Attr s (VlanRangeSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DistributedVirtualSwitchVlanRangeSetting s)]",
                     "class": "HasVlanRange",
                     "validate": false,
                     "optional": true,
@@ -10612,11 +10723,11 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/distributed_virtual_switch.html",
             "dependencies": [
-                "HostSetting",
-                "VlanRangeSetting",
-                "VlanRangeSetting"
+                "DistributedVirtualSwitchHostSetting",
+                "DistributedVirtualSwitchVlanRangeSetting",
+                "DistributedVirtualSwitchVlanRangeSetting"
             ],
-            "key": "vsphere_distributed_virtual_switch",
+            "key": "distributed_virtual_switch",
             "name": "DistributedVirtualSwitchResource",
             "threaded": true,
             "attributes": [
@@ -11839,7 +11950,7 @@
                         "_portPrivateSecondaryVlanId",
                         "_vlanId"
                     ],
-                    "type": "TF.Attr s [TF.Attr s (VlanRangeSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DistributedVirtualSwitchVlanRangeSetting s)]",
                     "class": "HasComputedVlanRange",
                     "validate": false,
                     "optional": false,
@@ -12129,7 +12240,7 @@
                             "method": "vlanId"
                         }
                     ],
-                    "type": "TF.Attr s [TF.Attr s (VlanRangeSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (DistributedVirtualSwitchVlanRangeSetting s)]",
                     "class": "HasVlanRange",
                     "validate": false,
                     "optional": true,
@@ -12225,7 +12336,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/dpm_host_override.html",
             "dependencies": [],
-            "key": "vsphere_dpm_host_override",
+            "key": "dpm_host_override",
             "name": "DpmHostOverrideResource",
             "threaded": true,
             "attributes": [
@@ -12377,7 +12488,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/drs_vm_override.html",
             "dependencies": [],
-            "key": "vsphere_drs_vm_override",
+            "key": "drs_vm_override",
             "name": "DrsVmOverrideResource",
             "threaded": true,
             "attributes": [
@@ -12571,7 +12682,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/file.html",
             "dependencies": [],
-            "key": "vsphere_file",
+            "key": "file",
             "name": "FileResource",
             "threaded": true,
             "attributes": [
@@ -12756,7 +12867,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/folder.html",
             "dependencies": [],
-            "key": "vsphere_folder",
+            "key": "folder",
             "name": "FolderResource",
             "threaded": true,
             "attributes": [
@@ -13142,7 +13253,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/ha_vm_override.html",
             "dependencies": [],
-            "key": "vsphere_ha_vm_override",
+            "key": "ha_vm_override",
             "name": "HaVmOverrideResource",
             "threaded": true,
             "attributes": [
@@ -13550,9 +13661,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/host_port_group.html",
             "dependencies": [
-                "PortsSetting"
+                "HostPortGroupPortsSetting"
             ],
-            "key": "vsphere_host_port_group",
+            "key": "host_port_group",
             "name": "HostPortGroupResource",
             "threaded": true,
             "attributes": [
@@ -13626,7 +13737,7 @@
                     "method": "computedPorts",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (PortsSetting s)",
+                    "type": "TF.Attr s (HostPortGroupPortsSetting s)",
                     "class": "HasComputedPorts",
                     "validate": true,
                     "optional": false,
@@ -14114,7 +14225,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/host_virtual_switch.html",
             "dependencies": [],
-            "key": "vsphere_host_virtual_switch",
+            "key": "host_virtual_switch",
             "name": "HostVirtualSwitchResource",
             "threaded": true,
             "attributes": [
@@ -14280,7 +14391,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/license.html",
             "dependencies": [],
-            "key": "vsphere_license",
+            "key": "license",
             "name": "LicenseResource",
             "threaded": true,
             "attributes": [
@@ -14626,7 +14737,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/nas_datastore.html",
             "dependencies": [],
-            "key": "vsphere_nas_datastore",
+            "key": "nas_datastore",
             "name": "NasDatastoreResource",
             "threaded": true,
             "attributes": [
@@ -15226,7 +15337,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/resource_pool.html",
             "dependencies": [],
-            "key": "vsphere_resource_pool",
+            "key": "resource_pool",
             "name": "ResourcePoolResource",
             "threaded": true,
             "attributes": [
@@ -15438,7 +15549,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/storage_drs_vm_override.html",
             "dependencies": [],
-            "key": "vsphere_storage_drs_vm_override",
+            "key": "storage_drs_vm_override",
             "name": "StorageDrsVmOverrideResource",
             "threaded": true,
             "attributes": [
@@ -15571,7 +15682,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/tag.html",
             "dependencies": [],
-            "key": "vsphere_tag",
+            "key": "tag",
             "name": "TagResource",
             "threaded": true,
             "attributes": [
@@ -15725,7 +15836,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/tag_category.html",
             "dependencies": [],
-            "key": "vsphere_tag_category",
+            "key": "tag_category",
             "name": "TagCategoryResource",
             "threaded": true,
             "attributes": [
@@ -16118,7 +16229,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/vapp_container.html",
             "dependencies": [],
-            "key": "vsphere_vapp_container",
+            "key": "vapp_container",
             "name": "VappContainerResource",
             "threaded": true,
             "attributes": [
@@ -16337,7 +16448,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/virtual_disk.html",
             "dependencies": [],
-            "key": "vsphere_virtual_disk",
+            "key": "virtual_disk",
             "name": "VirtualDiskResource",
             "threaded": true,
             "attributes": [
@@ -16532,7 +16643,7 @@
                     "method": "cdrom",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (CdromSetting s)",
+                    "type": "TF.Attr s (VirtualMachineCdromSetting s)",
                     "class": "HasCdrom",
                     "validate": true,
                     "optional": true,
@@ -16551,7 +16662,7 @@
                     "method": "clone",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (CloneSetting s)",
+                    "type": "TF.Attr s (VirtualMachineCloneSetting s)",
                     "class": "HasClone",
                     "validate": true,
                     "optional": true,
@@ -16777,7 +16888,7 @@
                     "method": "disk",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (DiskSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (VirtualMachineDiskSetting s)]",
                     "class": "HasDisk",
                     "validate": false,
                     "optional": true,
@@ -17212,7 +17323,7 @@
                     "method": "networkInterface",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (VirtualMachineNetworkInterfaceSetting s)]",
                     "class": "HasNetworkInterface",
                     "validate": false,
                     "optional": false,
@@ -17528,7 +17639,7 @@
                     "method": "vapp",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (VappSetting s)",
+                    "type": "TF.Attr s (VirtualMachineVappSetting s)",
                     "class": "HasVapp",
                     "validate": true,
                     "optional": true,
@@ -17579,14 +17690,14 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/virtual_machine.html",
             "dependencies": [
-                "CdromSetting",
-                "CloneSetting",
-                "DiskSetting",
-                "NetworkInterfaceSetting",
-                "VappSetting",
-                "DiskSetting"
+                "VirtualMachineCdromSetting",
+                "VirtualMachineCloneSetting",
+                "VirtualMachineDiskSetting",
+                "VirtualMachineNetworkInterfaceSetting",
+                "VirtualMachineVappSetting",
+                "VirtualMachineDiskSetting"
             ],
-            "key": "vsphere_virtual_machine",
+            "key": "virtual_machine",
             "name": "VirtualMachineResource",
             "threaded": true,
             "attributes": [
@@ -17701,7 +17812,7 @@
                     "method": "computedDisk",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (DiskSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (VirtualMachineDiskSetting s)]",
                     "class": "HasComputedDisk",
                     "validate": false,
                     "optional": false,
@@ -17935,7 +18046,7 @@
                     "method": "networkInterface",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (VirtualMachineNetworkInterfaceSetting s)]",
                     "class": "HasNetworkInterface",
                     "validate": false,
                     "optional": false,
@@ -18146,7 +18257,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/virtual_machine_snapshot.html",
             "dependencies": [],
-            "key": "vsphere_virtual_machine_snapshot",
+            "key": "virtual_machine_snapshot",
             "name": "VirtualMachineSnapshotResource",
             "threaded": true,
             "attributes": [
@@ -18413,7 +18524,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/vsphere/r/vmfs_datastore.html",
             "dependencies": [],
-            "key": "vsphere_vmfs_datastore",
+            "key": "vmfs_datastore",
             "name": "VmfsDatastoreResource",
             "threaded": true,
             "attributes": [
@@ -18884,7 +18995,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newPartSetting",
-                "name": "PartSetting'"
+                "smart": "newCloudinitConfigPartSetting",
+                "name": "CloudinitConfigPartSetting'"
             },
             "arguments": [
                 {
@@ -11,7 +11,7 @@
                     "computed": false,
                     "required": true,
                     "help": [],
-                    "forceNew": true,
+                    "forceNew": false,
                     "encoder": "TF.assign \"content\" <$> TF.attribute",
                     "name": "_content",
                     "method": "content",
@@ -28,7 +28,7 @@
                     "computed": false,
                     "required": false,
                     "help": [],
-                    "forceNew": true,
+                    "forceNew": false,
                     "encoder": "TF.assign \"content_type\" <$> TF.attribute",
                     "name": "_contentType",
                     "method": "contentType",
@@ -45,7 +45,7 @@
                     "computed": false,
                     "required": false,
                     "help": [],
-                    "forceNew": true,
+                    "forceNew": false,
                     "encoder": "TF.assign \"filename\" <$> TF.attribute",
                     "name": "_filename",
                     "method": "filename",
@@ -62,7 +62,7 @@
                     "computed": false,
                     "required": false,
                     "help": [],
-                    "forceNew": true,
+                    "forceNew": false,
                     "encoder": "TF.assign \"merge_type\" <$> TF.attribute",
                     "name": "_mergeType",
                     "method": "mergeType",
@@ -76,8 +76,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "template_cloudinit_config.part",
-            "name": "PartSetting",
+            "key": "cloudinit_config.part",
+            "name": "CloudinitConfigPartSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -86,7 +86,7 @@
                     "computed": false,
                     "required": true,
                     "help": [],
-                    "forceNew": true,
+                    "forceNew": false,
                     "encoder": "TF.assign \"content\" <$> TF.attribute",
                     "name": "_content",
                     "method": "content",
@@ -100,7 +100,7 @@
                 }
             ],
             "conflicts": [],
-            "type": "PartSetting s",
+            "type": "CloudinitConfigPartSetting s",
             "original": "part"
         }
     ],
@@ -157,7 +157,7 @@
                     "method": "part",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (PartSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (CloudinitConfigPartSetting s)]",
                     "class": "HasPart",
                     "validate": false,
                     "optional": false,
@@ -166,9 +166,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/template/d/cloudinit_config.html",
             "dependencies": [
-                "PartSetting"
+                "CloudinitConfigPartSetting"
             ],
-            "key": "template_cloudinit_config",
+            "key": "cloudinit_config",
             "name": "CloudinitConfigData",
             "threaded": true,
             "attributes": [
@@ -221,7 +221,7 @@
                     "method": "part",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (PartSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (CloudinitConfigPartSetting s)]",
                     "class": "HasPart",
                     "validate": false,
                     "optional": false,
@@ -279,7 +279,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/template/d/file.html",
             "dependencies": [],
-            "key": "template_file",
+            "key": "file",
             "name": "FileData",
             "threaded": true,
             "attributes": [
@@ -378,7 +378,7 @@
                     "method": "part",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (PartSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (CloudinitConfigPartSetting s)]",
                     "class": "HasPart",
                     "validate": false,
                     "optional": false,
@@ -387,9 +387,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/template/r/cloudinit_config.html",
             "dependencies": [
-                "PartSetting"
+                "CloudinitConfigPartSetting"
             ],
-            "key": "template_cloudinit_config",
+            "key": "cloudinit_config",
             "name": "CloudinitConfigResource",
             "threaded": true,
             "attributes": [
@@ -442,7 +442,7 @@
                     "method": "part",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (PartSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (CloudinitConfigPartSetting s)]",
                     "class": "HasPart",
                     "validate": false,
                     "optional": false,
@@ -519,7 +519,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/template/r/dir.html",
             "dependencies": [],
-            "key": "template_dir",
+            "key": "dir",
             "name": "DirResource",
             "threaded": true,
             "attributes": [
@@ -632,7 +632,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/template/r/file.html",
             "dependencies": [],
-            "key": "template_file",
+            "key": "file",
             "name": "FileResource",
             "threaded": true,
             "attributes": [
@@ -686,7 +686,7 @@
         },
         "arguments": [],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],

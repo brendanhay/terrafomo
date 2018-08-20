@@ -2,8 +2,127 @@
     "settings": [
         {
             "con": {
-                "smart": "newFirewallSetting",
-                "name": "FirewallSetting'"
+                "smart": "newGroupUsersSetting",
+                "name": "GroupUsersSetting'"
+            },
+            "arguments": [],
+            "dependencies": [],
+            "key": "group.users",
+            "name": "GroupUsersSetting",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"administrator\" <$> TF.attribute",
+                    "name": "_computedAdministrator",
+                    "method": "computedAdministrator",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedAdministrator",
+                    "validate": false,
+                    "optional": false,
+                    "original": "administrator"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"email\" <$> TF.attribute",
+                    "name": "_computedEmail",
+                    "method": "computedEmail",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedEmail",
+                    "validate": false,
+                    "optional": false,
+                    "original": "email"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"first_name\" <$> TF.attribute",
+                    "name": "_computedFirstName",
+                    "method": "computedFirstName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedFirstName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "first_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"force_sec_auth\" <$> TF.attribute",
+                    "name": "_computedForceSecAuth",
+                    "method": "computedForceSecAuth",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedForceSecAuth",
+                    "validate": false,
+                    "optional": false,
+                    "original": "force_sec_auth"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"last_name\" <$> TF.attribute",
+                    "name": "_computedLastName",
+                    "method": "computedLastName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedLastName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "last_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"password\" <$> TF.attribute",
+                    "name": "_computedPassword",
+                    "method": "computedPassword",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedPassword",
+                    "validate": false,
+                    "optional": false,
+                    "original": "password"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "GroupUsersSetting s",
+            "original": "users"
+        },
+        {
+            "con": {
+                "smart": "newServerNicFirewallSetting",
+                "name": "ServerNicFirewallSetting'"
             },
             "arguments": [
                 {
@@ -195,8 +314,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "profitbricks_server.nic.firewall",
-            "name": "FirewallSetting",
+            "key": "server.nic.firewall",
+            "name": "ServerNicFirewallSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -219,13 +338,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "FirewallSetting s",
+            "type": "ServerNicFirewallSetting s",
             "original": "firewall"
         },
         {
             "con": {
-                "smart": "newNicSetting",
-                "name": "NicSetting'"
+                "smart": "newServerNicSetting",
+                "name": "ServerNicSetting'"
             },
             "arguments": [
                 {
@@ -256,7 +375,7 @@
                     "method": "firewall",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (FirewallSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServerNicFirewallSetting s)]",
                     "class": "HasFirewall",
                     "validate": false,
                     "optional": true,
@@ -349,10 +468,10 @@
                 }
             ],
             "dependencies": [
-                "FirewallSetting"
+                "ServerNicFirewallSetting"
             ],
-            "key": "profitbricks_server.nic",
-            "name": "NicSetting",
+            "key": "server.nic",
+            "name": "ServerNicSetting",
             "threaded": true,
             "attributes": [
                 {
@@ -393,132 +512,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "NicSetting s",
+            "type": "ServerNicSetting s",
             "original": "nic"
         },
         {
             "con": {
-                "smart": "newUsersSetting",
-                "name": "UsersSetting'"
-            },
-            "arguments": [],
-            "dependencies": [],
-            "key": "profitbricks_group.users",
-            "name": "UsersSetting",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"administrator\" <$> TF.attribute",
-                    "name": "_computedAdministrator",
-                    "method": "computedAdministrator",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasComputedAdministrator",
-                    "validate": false,
-                    "optional": false,
-                    "original": "administrator"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"email\" <$> TF.attribute",
-                    "name": "_computedEmail",
-                    "method": "computedEmail",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedEmail",
-                    "validate": false,
-                    "optional": false,
-                    "original": "email"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"first_name\" <$> TF.attribute",
-                    "name": "_computedFirstName",
-                    "method": "computedFirstName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedFirstName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "first_name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"force_sec_auth\" <$> TF.attribute",
-                    "name": "_computedForceSecAuth",
-                    "method": "computedForceSecAuth",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasComputedForceSecAuth",
-                    "validate": false,
-                    "optional": false,
-                    "original": "force_sec_auth"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"last_name\" <$> TF.attribute",
-                    "name": "_computedLastName",
-                    "method": "computedLastName",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedLastName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "last_name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"password\" <$> TF.attribute",
-                    "name": "_computedPassword",
-                    "method": "computedPassword",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedPassword",
-                    "validate": false,
-                    "optional": false,
-                    "original": "password"
-                }
-            ],
-            "parameters": [],
-            "conflicts": [],
-            "type": "UsersSetting s",
-            "original": "users"
-        },
-        {
-            "con": {
-                "smart": "newVolumeSetting",
-                "name": "VolumeSetting'"
+                "smart": "newServerVolumeSetting",
+                "name": "ServerVolumeSetting'"
             },
             "arguments": [
                 {
@@ -676,8 +676,8 @@
                 }
             ],
             "dependencies": [],
-            "key": "profitbricks_server.volume",
-            "name": "VolumeSetting",
+            "key": "server.volume",
+            "name": "ServerVolumeSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -734,7 +734,7 @@
                 }
             ],
             "conflicts": [],
-            "type": "VolumeSetting s",
+            "type": "ServerVolumeSetting s",
             "original": "volume"
         }
     ],
@@ -783,7 +783,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/d/datacenter.html",
             "dependencies": [],
-            "key": "profitbricks_datacenter",
+            "key": "datacenter",
             "name": "DatacenterData",
             "threaded": true,
             "attributes": [
@@ -905,7 +905,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/d/image.html",
             "dependencies": [],
-            "key": "profitbricks_image",
+            "key": "image",
             "name": "ImageData",
             "threaded": true,
             "attributes": [
@@ -975,7 +975,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/d/location.html",
             "dependencies": [],
-            "key": "profitbricks_location",
+            "key": "location",
             "name": "LocationData",
             "threaded": true,
             "attributes": [
@@ -1045,7 +1045,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/d/resource.html",
             "dependencies": [],
-            "key": "profitbricks_resource",
+            "key": "resource",
             "name": "ResourceData",
             "threaded": true,
             "attributes": [
@@ -1132,7 +1132,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/d/snapshot.html",
             "dependencies": [],
-            "key": "profitbricks_snapshot",
+            "key": "snapshot",
             "name": "SnapshotData",
             "threaded": true,
             "attributes": [
@@ -1239,7 +1239,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/datacenter.html",
             "dependencies": [],
-            "key": "profitbricks_datacenter",
+            "key": "datacenter",
             "name": "DatacenterResource",
             "threaded": true,
             "attributes": [
@@ -1531,7 +1531,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/firewall.html",
             "dependencies": [],
-            "key": "profitbricks_firewall",
+            "key": "firewall",
             "name": "FirewallResource",
             "threaded": true,
             "attributes": [
@@ -1738,9 +1738,9 @@
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/group.html",
             "dependencies": [
-                "UsersSetting"
+                "GroupUsersSetting"
             ],
-            "key": "profitbricks_group",
+            "key": "group",
             "name": "GroupResource",
             "threaded": true,
             "attributes": [
@@ -1772,7 +1772,7 @@
                     "method": "computedUsers",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (UsersSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (GroupUsersSetting s)]",
                     "class": "HasComputedUsers",
                     "validate": false,
                     "optional": false,
@@ -1862,7 +1862,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/ipblock.html",
             "dependencies": [],
-            "key": "profitbricks_ipblock",
+            "key": "ipblock",
             "name": "IpblockResource",
             "threaded": true,
             "attributes": [
@@ -2018,7 +2018,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/ipfailover.html",
             "dependencies": [],
-            "key": "profitbricks_ipfailover",
+            "key": "ipfailover",
             "name": "IpfailoverResource",
             "threaded": true,
             "attributes": [
@@ -2174,7 +2174,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/lan.html",
             "dependencies": [],
-            "key": "profitbricks_lan",
+            "key": "lan",
             "name": "LanResource",
             "threaded": true,
             "attributes": [
@@ -2330,7 +2330,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/loadbalancer.html",
             "dependencies": [],
-            "key": "profitbricks_loadbalancer",
+            "key": "loadbalancer",
             "name": "LoadbalancerResource",
             "threaded": true,
             "attributes": [
@@ -2554,7 +2554,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/nic.html",
             "dependencies": [],
-            "key": "profitbricks_nic",
+            "key": "nic",
             "name": "NicResource",
             "threaded": true,
             "attributes": [
@@ -2769,7 +2769,7 @@
                     "method": "nic",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NicSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServerNicSetting s)]",
                     "class": "HasNic",
                     "validate": false,
                     "optional": false,
@@ -2803,7 +2803,7 @@
                     "method": "volume",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (VolumeSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServerVolumeSetting s)]",
                     "class": "HasVolume",
                     "validate": false,
                     "optional": false,
@@ -2812,10 +2812,10 @@
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/server.html",
             "dependencies": [
-                "NicSetting",
-                "VolumeSetting"
+                "ServerNicSetting",
+                "ServerVolumeSetting"
             ],
-            "key": "profitbricks_server",
+            "key": "server",
             "name": "ServerResource",
             "threaded": true,
             "attributes": [
@@ -2985,7 +2985,7 @@
                     "method": "nic",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NicSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServerNicSetting s)]",
                     "class": "HasNic",
                     "validate": false,
                     "optional": false,
@@ -3019,7 +3019,7 @@
                     "method": "volume",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (VolumeSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServerVolumeSetting s)]",
                     "class": "HasVolume",
                     "validate": false,
                     "optional": false,
@@ -3107,7 +3107,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/share.html",
             "dependencies": [],
-            "key": "profitbricks_share",
+            "key": "share",
             "name": "ShareResource",
             "threaded": true,
             "attributes": [
@@ -3263,7 +3263,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/snapshot.html",
             "dependencies": [],
-            "key": "profitbricks_snapshot",
+            "key": "snapshot",
             "name": "SnapshotResource",
             "threaded": true,
             "attributes": [
@@ -3453,7 +3453,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/user.html",
             "dependencies": [],
-            "key": "profitbricks_user",
+            "key": "user",
             "name": "UserResource",
             "threaded": true,
             "attributes": [
@@ -3779,7 +3779,7 @@
             ],
             "url": "https://www.terraform.io/docs/providers/profitbricks/r/volume.html",
             "dependencies": [],
-            "key": "profitbricks_volume",
+            "key": "volume",
             "name": "VolumeResource",
             "threaded": true,
             "attributes": [
@@ -3958,7 +3958,7 @@
             }
         ],
         "dependencies": [],
-        "key": "provider",
+        "key": "",
         "name": "Provider",
         "threaded": false,
         "attributes": [],
